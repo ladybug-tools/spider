@@ -9,6 +9,6 @@
 
 	defaults.user = 'ladybug-tools';
 
-	defaults.folder = 'ladybug-tools.github.io/spider/blob/master/';
+	defaults.folder = 'spider/blob/master/analemma3d/';
 
-//	defaults.url = 'README.md';
+	defaults.url = 'r20/analemma3d.html';

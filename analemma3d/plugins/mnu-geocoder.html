@@ -7,7 +7,7 @@
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; }
 
-	input { width: 100%; }
+	input { box-sizing: border-box; width: 100%; }
 
 </style>
 
@@ -31,6 +31,8 @@
 
 	let geocoder;
 
+	const source = 'r20/analemma3d.html';
+
 	initGeocoder();
 
 
@@ -52,9 +54,10 @@
 
 		if ( parent.divContentsContainer && !parent.ifrContents ) {
 
-			parent.divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src="analemma4-3d.html" ></iframe>';
+			parent.divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src=' + source + ' ></iframe>';
 
-//			parent.ifrGeocoder.style.height = document.body.scrollHeight + 'px';
+			parent.ifrGeocoder.style.height = document.body.scrollHeight + 'px';
+
 		}
 
 	}
@@ -101,10 +104,10 @@
 
 		hash = 
 
-			'^latitude^:^' + place.geometry.location.lat() + '^,' +
-			'^longitude^:^' + place.geometry.location.lng() + '^,' +
-			'^zoom^:^' + '16' + '^,' +
-			'^offsetUTC^:^' + place.utc_offset + '^';
+			'latitude:' + place.geometry.location.lat() + ',' +
+			'longitude:' + place.geometry.location.lng() + ',' +
+			'zoom:' + '16' + ',' +
+			'offsetUTC:' + place.utc_offset + '';
 
 		if ( !place.geometry ) {
 
@@ -125,7 +128,7 @@
 
 //			parent.mainIframe.contentWindow.location.hash = hash;
 
-			parent.location.hash = 'analemma4-3d.html#' + hash;
+			parent.location.hash = source + '#' + hash;
 
 			parent.info.innerHTML = txt;
 
