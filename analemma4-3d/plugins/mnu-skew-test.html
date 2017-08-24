@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = description content = "Basic HTML template" >
+<meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = date content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+		<p><a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js" >Show fps statistics</a></p>
+		<p>X <input type = "range" id = "inpX" min = "-1" max = "1" step = "0.0001" onclick = "updateMeshSkewBottom();" ></p>
+		<p>Y <input type = "range" id = "inpY" min = "-1" max = "1" step = "0.0001" onclick = "updateMeshSkewBottom();" ></p>
+		<p>Z <input type = "range" id = "inpZ" min = "-1" max = "1" step = "0.0001" onclick = "updateMeshSkewBottom();" ></p>
+		<p><button onclick=toggleSkewing(); >toggle skewing</button></p>
+
+	</div>
+
+<script>
+
+	let skewing = false;
+	let pic;
+
+	let X = 0;
+	let Y = 0;
+	let Z = 0;
+
+	let target;
+
+	let renderer, camera, controls, scene;
+	let geometryCube, geometryShape, material, mesh;
+
+
+	init();
+
+
+	function init() {
+
+		if ( !parent.ifrContents ) {
+
+			parent.divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src="analemma3-3d.html" ></iframe>';
+
+		}
+
+		parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
+
+	}
+
+
+
+	function initSkewing() {
+
+		pic = parent.ifrContents.contentWindow;
+//console.log( 'pic', pic );
+		material = new pic.THREE.MeshNormalMaterial();
+
+		geometryCube = createCube( 5 );
+		target = new pic.THREE.Mesh( geometryCube.clone(), material );
+		target.position.y = 20;
+		pic.scene.add( target );
+
+		animateSkewTest();
+
+	}
+
+
+	function toggleSkewing() {
+
+		if ( !pic ) { initSkewing(); }
+
+		skewing = !skewing;
+
+	}
+
+
+	function createCube( size = 2 ) {
+
+		let geometry;
+
+		geometry = new pic.THREE.BoxGeometry( size, size, size );
+
+		return geometry;
+
+	}
+
+
+
+
+	function updateMeshSkewBottom() {
+
+		if ( !pic ) { initSkewing(); }
+
+		let geom, mat, matrix;
+		let x, y, z;
+
+		x = parseFloat( inpX.value );
+		y = 0; //parseFloat( inpY.value );
+		z = parseFloat( inpZ.value );
+
+		let Syx = 0,
+			Szx = 0,
+			Sxy = 0,
+			Szy = 0,
+			Sxz = 0,
+			Syz = 0;
+
+
+		Syx = x;
+		Syz = z;
+
+		matrix = new pic.THREE.Matrix4();
+
+		matrix.set(	  1,   Syx,  Szx,  0,
+					Sxy,     1,  Szy,  0,
+					Sxz,   Syz,   1,   0,
+					  0,     0,   0,   1 );
+
+//console.log( '', matrix.elements );
+
+		let structures = pic.scene.getObjectByName( 'structures');
+		let structuresOriginal = pic.parameters.structuresArray.slice();
+
+//console.log( 'pic', structures );
+
+		for ( let i = 0; i < structures.children.length; i++ ) {
+
+			let structure = structures.children[ 0 ];
+			let original = structuresOriginal[ i ];
+
+			geom = original.geometry.clone();
+			geom.applyMatrix( matrix );
+			mat = original.material.clone();
+
+			structures.remove( structure );
+			structure.geometry.dispose();
+			structure.material.dispose();
+			structure = new pic.THREE.Mesh( geom, mat );
+			structure.position.y = original.position.y;
+			structure.castShadow = true;
+			structure.receiveShadow = true;
+			structures.add( structure );
+
+		}
+
+	}
+
+
+
+	function animateSkewTest() {
+
+		requestAnimationFrame( animateSkewTest );
+
+		if ( !skewing ) { return; }
+
+		X += 0.01;
+		Z += 0.01;
+
+		target.position.x = 50 * Math.cos( X );
+		target.position.z = 50 * Math.sin( Z );
+
+		inpX.value = Math.cos( X );
+//		inpY.value = Math.sin( Y );
+		inpZ.value = Math.sin( Z );
+
+		updateMeshSkewBottom();
+//		updateMeshSkewCenter();
+
+//contents.innerHTML = cube.position.x
+
+	}
+
+
+</script>
+</body>
+</html>

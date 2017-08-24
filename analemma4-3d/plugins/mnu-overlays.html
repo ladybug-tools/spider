@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0; } 
+
+</style>
+</head>
+<body>
+
+Map Overlay<br>
+
+<select id=selMap size=10 onchange=setMapOverlay(); ></select>
+
+<script>
+
+
+	var mapTypes = [
+
+		['Google Maps','https://mt1.google.com/vt/x='],
+		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
+		['Google Maps Satellite','https://mt1.google.com/vt/lyrs=s&x='],
+		['Google Maps Hybrid','https://mt1.google.com/vt/lyrs=y&x='],
+		['Open Street Map','http://tile.openstreetmap.org/'],
+		['Open Cycle Map', 'http://tile.opencyclemap.org/cycle/'],
+//		['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'],
+//		['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'],
+		['Stamen terrain background','http://tile.stamen.com/terrain-background/'],
+		['Esri Satellite', 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/']
+
+	];
+
+
+
+	init()
+
+
+	function init() {
+
+
+		for ( var i = 0; i < mapTypes.length; i++ ) {
+
+			selMap.appendChild( document.createElement( 'option' ) );
+			selMap.children[ i ].text = mapTypes[ i ][ 0 ];
+
+		}
+
+		parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
+
+	}
+
+
+
+
+	function setMapOverlay() {
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		parent.ifrContents.contentWindow.mapType = mapTypes[ selMap.selectedIndex ];
+		parent.ifrContents.contentWindow.selectedIndex = selMap.selectedIndex;
+		parent.ifrContents.contentWindow.drawMapOverlay();
+
+	}
+
+
+
+
+
+</script>
+</body>
+</html>

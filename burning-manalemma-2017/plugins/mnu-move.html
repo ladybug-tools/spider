@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0; padding: 0 10px 0 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+
+		Go <button onclick=tileWest(); title="Go west"  >&#8678;</button>
+		<button onclick=tileEast(); title="Go east"  >&#8680;</button>
+
+		<button onclick=tileNorth(); title="Go north" >&#8679;</button>
+		<button onclick=tileSouth(); title="Go south" >&#8681;</button>
+
+
+	<p>Zoom <br>
+		<span id=zooms ></span>
+	</p>
+
+	Height Scale
+	<input type="range" id="inpHeightScale" min=0 max=20 step=0.1 value=1 onchange="setHeightScale(this);" >
+
+<script>
+
+	init();
+
+	function init() {
+
+		for ( let i = 1; i < 20; i++ ) {
+
+			if ( i === 16 ) {
+
+				zooms.innerHTML += '<button id="zoomPrevious" onclick="setZoom(this);" style="background-color:pink;"  >' + i + '</button> ';
+
+			} else {
+
+				zooms.innerHTML += '<button onclick="setZoom(this);" >' + i + '</button> ';
+
+			}
+
+		}
+
+//parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
+
+	}
+
+
+	function setHeightScale( that ) {
+
+		let pp;
+		let heightScale = parseFloat( that.value );
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return }
+
+		pp = parent.ifrContents.contentWindow.parameters;
+
+		pp.heightScale = heightScale;
+
+		parent.ifrContents.contentWindow.drawTerrain();
+
+	}
+
+
+	function setZoom( that ) {
+
+		let pp, hash;
+
+		let zoom = parseInt( that.innerText, 10 );
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		pp = parent.ifrContents.contentWindow.parameters;
+
+		hash = 'latitude:' + pp.latitude + ',longitude:' + pp.longitude + ',zoom:' + zoom + '';
+		parent.ifrContents.contentWindow.location.hash = hash;
+
+		parent.info.innerHTML += 'zoom: ' + zoom + '<br>';
+
+		inpHeightScale.value = pp.heightScale;
+
+		zoomPrevious.id = zoomPrevious.style.backgroundColor = '';
+		that.style.backgroundColor = 'pink';
+		that.id = 'zoomPrevious';
+
+	}
+
+
+
+	function tileEast() {
+
+		let pp, newLon, hash;
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		pp = parent.ifrContents.contentWindow.parameters;
+		newLon = pp.longitude + pp.lonDelta;
+
+		if ( newLon < 180 ) {
+
+			hash = 'latitude:' + pp.latitude + ',longitude:' + newLon + ',zoom:' + pp.zoom + '';
+			parent.ifrContents.contentWindow.location.hash = hash;
+
+			parent.info.innerHTML += 'longitude: ' + newLon.toFixed( 4 ) + '<br>';
+
+			inpHeightScale.value = pp.heightScale;
+//console.log( 'pp', pp );
+		}
+
+	}
+
+
+	function tileWest() {
+
+		let pp, newLon, hash;
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		pp = parent.ifrContents.contentWindow.parameters;
+		newLon = pp.longitude - pp.lonDelta;
+
+		if ( newLon > -180 ) {
+
+			hash = 'latitude:' + pp.latitude + ',longitude:' + newLon + ',' +
+				'zoom:' + pp.zoom + ',offsetUTC:' + pp.offsetUTC + '';
+
+			parent.ifrContents.contentWindow.location.hash = hash;
+
+			parent.info.innerHTML += 'longitude: ' + newLon.toFixed( 4 ) + '<br>';
+
+			inpHeightScale.value = pp.heightScale;
+
+		}
+
+	}
+
+
+	function tileNorth() {
+
+		let pp, newLat, hash;
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		pp = parent.ifrContents.contentWindow.parameters;
+		newLat = pp.latitude + pp.latDelta;
+
+
+		if ( newLat < 90 ) {
+
+			hash = 'latitude:' + newLat + ',longitude:' + pp.longitude + ',zoom:' + pp.zoom + '';
+			parent.ifrContents.contentWindow.location.hash = hash;
+
+			parent.info.innerHTML += 'latitude: ' + newLat.toFixed( 4 ) + '<br>';
+
+			inpHeightScale.value = pp.heightScale;
+
+		}
+
+	}
+
+
+	function tileSouth() {
+
+		let pp, newLat, hash;
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		pp = parent.ifrContents.contentWindow.parameters;
+		newLat = pp.latitude - pp.latDelta;
+
+		if ( newLat > -90 ) {
+
+			hash = 'latitude:' + newLat + ',longitude:' + pp.longitude + ',zoom:' + pp.zoom + '';
+			parent.ifrContents.contentWindow.location.hash = hash;
+
+			parent.info.innerHTML += 'latitude: ' + newLat.toFixed( 4 ) + '<br>';
+
+			inpHeightScale.value = pp.heightScale;
+
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

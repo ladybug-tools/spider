@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = description content = "Basic EPW JSON template. Select location, request file, gather data." >
+<meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = date content = "2017-08-15" >
+<title>EPW JSON Basic</title>
+<style>
+
+/* width items appear here to help control appearance when this menu is running as its own parent - for testing etc */
+
+	body { font: 12pt monospace; margin: 0 auto; padding: 0 10px 0 0; max-width: 300px; }
+	a { color: crimson; text-decoration: none; }
+	h1 { margin: 10px 0 0 0; }
+	p { margin: 10px 0 0 0; }
+	select { width: 100%; }
+
+	#divData { height:500px; overflow:scroll; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+
+		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+
+		<div id = "info" > &nbsp; </div>
+
+		<p>
+			Country:<br>
+			<select id="selCountry" size=10 ></select>
+		</p>
+
+		<p>
+			City: <br>
+			<select id="selCity" size=5 ></select>
+		</p>
+
+		<details id=detDataFields open >
+
+			<summary>Fields and Data</summary> 
+
+			<p>
+				<div id=divDataFields >Data fields:</div>
+				<select id="selField" size=10 ></select>
+			</p>
+
+			<p>
+				<div id=divCalculations ></div>
+			</p>
+
+			<p>
+				Data:
+				<div id=divData ></div>
+			</p>
+
+		</details>
+
+	</div>
+
+
+<script>
+
+
+	const urlEPW = 'http://www.eco-envolventes.net/data/json/allEPW/';
+	const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+	let countryData;; // will hold data from countrydata.json
+
+	let epwJson; // will hold data from EPW JSON file
+
+	let hourlyDataFields;
+
+
+	init();
+
+
+	function init() {
+
+		requestFileCountryData();
+
+		selCountry.onchange = getCities;
+
+		selCity.onchange = requestFileEPW;
+
+		selField.onchange = getFieldData;
+
+		if ( parent.ifrMenu ) {
+
+			parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
+			document.body.style.overflow = 'hidden';
+			header.style.display = 'none';
+
+		} else {
+
+			title.innerHTML = document.title;
+
+		}
+
+	}
+
+
+
+	function requestFileCountryData() {
+
+		let url;
+		url = urlCORS + urlEPW + 'countrydata.json' ;
+
+		requestFile ( url, callbackCountryData );
+
+	}
+
+
+
+	function callbackCountryData( xhr ) {
+
+		countries = JSON.parse( xhr.target.response ).countries;
+
+//console.log( 'countries', countries );
+
+		getCountries();
+
+	}
+
+
+
+	function getCountries() {
+
+		for ( let i = 0; i < countries.length; i++ ) {
+
+			if ( countries[ i ] ) {
+
+				selCountry.innerHTML += '<option>' + countries[ i ].country + '</option>';
+
+			}
+
+		}
+
+//		selCountry.selectedIndex = 0;
+		selCountry.selectedIndex = Math.floor( Math.random() * selCountry.length );
+
+		getCities();
+
+	}
+
+
+
+	function getCities() {
+
+		let coutntry, cities;
+
+// for loop better? / more understandable?
+
+		country = countries.find( function( item ) { return item.country === selCountry.value } );
+
+//console.log( 'country', country );
+
+		cities = country.cities ;
+
+//console.log( 'cities', cities );
+
+		selCity.innerHTML = '';  // the insides of a select element is a select tag is HTML
+
+		for ( var i = 0; i < cities.length; i++ ) {
+
+			selCity.innerHTML += '<option>' + cities[ i ] + '</option>';
+
+		}
+
+		selCity.selectedIndex = Math.floor( Math.random() * selCity.length );
+
+		requestFileEPW();
+
+	}
+
+
+
+	function requestFileEPW() {
+
+		let country, city, fileName, url;
+
+		country = selCountry.value;
+
+		city = selCity.value;
+
+		fileName = encodeURI( country + '/' + country + '_' + city + '.json' );
+
+//console.log( 'fileName', fileName );
+
+		url = urlCORS + urlEPW + fileName;
+
+		requestFile( url, callbackEPW );
+
+	}
+
+
+
+	function callbackEPW( xhr ) {
+
+		let field;
+
+		epwJson = JSON.parse( xhr.target.response );
+
+//console.log( 'epwJson', epwJson );
+
+		selField.innerHTML = '';
+		hourlyDataFields = [];
+
+		for ( let i = 0; i < epwJson.hourlyDataFields.length; i++ ) {
+
+			field = epwJson.hourlyDataFields[ i ];
+
+			if ( field.name === 'Zenith Luminance' ) { continue; } // field appears to have no data
+
+			selField.innerHTML += '<option>' + field.name + '</option>';
+			hourlyDataFields.push( field );
+
+		}
+
+		divDataFields.innerHTML = 'Hourly Data Fields ' + epwJson.hourlyDataFields.length + ':';
+
+		selField.selectedIndex = 0;
+		selField.selectedIndex = Math.floor( Math.random() * selField.length );
+
+		getFieldData();
+
+	}
+
+
+
+	function getFieldData() {
+
+		let data = [];
+
+		for ( let i = 0, hour; i < epwJson.hourlyData.length; i++ ) {
+
+			hour = epwJson.hourlyData[ i ];
+			data.push( hour[ selField.selectedIndex ] );
+
+		}
+
+		divData.innerHTML = data.join( ', ' );
+
+		getCalculations( data );
+
+	}
+
+
+
+	function getCalculations( arr ) {
+
+		const b = '<br>';
+
+// ugh Spread Parameters equals a symbol no normal persons understands
+
+		let min = Math.min( ... arr );
+		let max = Math.max( ... arr );
+
+// http://www.jstips.co/en/javascript/array-average-and-median/
+
+		let sum = arr.slice().reduce( ( previous, current ) => current += previous );
+		let avg = sum / arr.length;
+
+		let values = arr.slice().sort( (a, b ) => a - b );
+
+		let lowMiddle = Math.floor( ( values.length - 1 ) / 2 );
+		let highMiddle = Math.ceil( ( values.length - 1 ) / 2 );
+		let median = ( values[ lowMiddle ] + values[ highMiddle ] ) / 2;
+
+		divCalculations.innerHTML =
+
+			selCity.value + b +
+			selField.value + b +
+			'Units: ' + hourlyDataFields[ selField.selectedIndex ].units + b +
+			'Min: ' + min + b +
+			'Max: ' + max + b +
+			'Average: ' + avg.toFixed( 2 ) + b +
+			'Median: ' + median.toFixed( 2 ) + b +
+			'<hr>' +
+			'Latitude: ' + epwJson.location.latitude + b +
+			'Longitude: ' + epwJson.location.longitude + b +
+			'Altitude: ' + epwJson.alt + b +
+		'';
+
+// adapt to circumstance or delete
+
+//		if ( parent.ifrMain ) {
+
+			epwJson.parameters = {
+
+				average: avg,
+				median: median,
+				max: max,
+				min: min,
+				field: hourlyDataFields[ selField.selectedIndex ]
+
+			}
+
+			latitude = epwJson.location.latitude;
+			longitude = epwJson.location.longitude;
+
+			parent.epwJson = epwJson;
+			parent.heights = arr;
+			parent.location.hash = 'analemma3-3d.html#latitude:' + latitude + ',longitude:' + longitude + ',zoom:15,offsetUTC:0';
+
+//		}
+
+// console.log( 'arr', arr );
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { info.innerHTML = 'Error: ' + xhr };
+		xhr.onprogress = function( xhr ) { info.innerHTML = 'Bytes loaded: ' + xhr.loaded };
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

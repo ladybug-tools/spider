@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; }
+
+	input { width: 100%; }
+
+</style>
+
+</head>
+<body>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC08xQ2xRy3k5IHkEuuSWasdViOkk489Y0" ></script>
+
+	<p>Enter a location<br>
+		<input id = "inpAddress" placeholder="San Francisco CA" onchange = "geocoderAddress( geocoder );"
+			onclick="onclickInput();" title="Thank you Google Maps API!" >
+		<br>
+		<small>geocoder courtesy of Google</small>
+	</p>
+
+	<div id="menuGeocoderMessage" ></div>
+
+<script>
+
+// https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
+
+	let geocoder;
+
+	initGeocoder();
+
+
+	function initGeocoder() {
+
+		divMap = document.createElement( 'div' );
+		map = new google.maps.Map( divMap );
+
+		geocoder = new google.maps.Geocoder();
+		origin_autocomplete = new google.maps.places.Autocomplete( inpAddress );
+
+		origin_autocomplete.addListener(
+
+			'place_changed',
+
+			function() { setGeocoderMessage( origin_autocomplete.getPlace() ); }
+
+		);
+
+		if ( parent.divContentsContainer && !parent.ifrContents ) {
+
+			parent.divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src="analemma4-3d.html" ></iframe>';
+
+		}
+
+	}
+
+
+	function onclickInput() {
+
+		inpAddress.select();
+
+		parent.ifrGeocoder.height = '280';
+
+	}
+
+	function geocoderAddress( geocoder ) {
+
+		geocoder.geocode( {
+
+			'address': inpAddress.value },
+
+			function( results, status ) {
+
+				if ( status === google.maps.GeocoderStatus.OK ) {
+
+				} else {
+
+					parent.calculations.innerHTML = 'Geocode was not successful for the following reason: ' + status;
+
+				}
+
+			}
+
+		);
+
+		parent.ifrGeocoder.height = '120';
+
+	}
+
+
+
+	function setGeocoderMessage( place ) {
+
+		let txt;
+		let hash;
+
+		hash = 
+
+			'latitude:' + place.geometry.location.lat() + ',' +
+			'longitude:' + place.geometry.location.lng() + ',' +
+			'zoom:' + '16' + ',' +
+			'offsetUTC:' + place.utc_offset + '';
+
+		if ( !place.geometry ) {
+
+			txt = 'Autocomplete\'s returned place contains no data';
+
+		} else {
+
+			txt =
+
+				'Latitude: ' + place.geometry.location.lat().toFixed( 4 ) + '<br>' +
+				'Longitude: ' + place.geometry.location.lng().toFixed( 4 ) + '<br>' +
+				'UTC Offset: ' + place.utc_offset + '<br>' +
+
+				'<p>Address:<br>' + place.adr_address + '</p>' +
+				( place.vicinity ? '<p>Vicinity:<br>' + place.vicinity + '</p>' : '' ) +
+				'<p>hash<br>' + hash + '</p>' +
+			'';
+
+//			parent.mainIframe.contentWindow.location.hash = hash;
+
+			parent.location.hash = 'analemma4-3d.html#' + hash;
+
+			parent.info.innerHTML = txt;
+
+			parent.place = place;
+			parent.offsetUTC = place.utc_offset
+
+//console.log( 'place ', place );
+
+		}
+
+	}
+
+</script>
+</body>
+</html>

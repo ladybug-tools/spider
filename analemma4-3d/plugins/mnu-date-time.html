@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0; padding: 0 10px 0 0; } 
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+
+Month
+<input type="range" id="inpMonth" min=0 max=11 onmousemove=setMonth(); >
+
+Date
+<input type="range" id="inpDate" min=0 max=31 onmousemove=setDate(); >
+
+Hour
+<input type="range" id="inpHours" min=0 max=24 onmousemove=setHours(); >
+
+
+<p><input type="checkbox" onclick="toggleMesh('analemma');" checked > Display Analemma<br>
+
+<input type="checkbox" onclick="toggleMesh('axisHelper');" checked > Display Axis<br>
+
+<input type="checkbox" onclick="toggleMesh('shadowBox');" checked > Display Shadow Box<br>
+
+</p>
+
+Map Overlay
+<select id=selMap size=5 onchange=setMapOverlay(); ></select>
+
+<script>
+
+
+	var mapTypes = [
+
+		['Google Maps','https://mt1.google.com/vt/x='],
+		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
+		['Google Maps Satellite','https://mt1.google.com/vt/lyrs=s&x='],
+		['Google Maps Hybrid','https://mt1.google.com/vt/lyrs=y&x='],
+		['Open Street Map','http://tile.openstreetmap.org/'],
+		['Open Cycle Map', 'http://tile.opencyclemap.org/cycle/'],
+//		['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'],
+//		['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'],
+		['Stamen terrain background','http://tile.stamen.com/terrain-background/']
+
+	];
+
+
+
+	init()
+
+
+	function init() {
+
+
+		for ( var i = 0; i < mapTypes.length; i++ ) {
+
+			selMap.appendChild( document.createElement( 'option' ) );
+			selMap.children[ i ].text = mapTypes[ i ][ 0 ];
+
+		}
+
+	}
+
+
+
+
+	function setMapOverlay() {
+
+console.log( '', 23 );
+
+		parent.mainIframe.contentWindow.mapType = mapTypes[ selMap.selectedIndex ];
+		parent.mainIframe.contentWindow.selectedIndex = selMap.selectedIndex;
+		parent.mainIframe.contentWindow.drawMapOverlay();
+	}
+
+
+
+	function toggleMesh( mesh ) {
+
+		let pmc = parent.mainIframe.contentWindow;
+
+		pmc[ mesh ].visible = !pmc[ mesh ].visible;
+
+	}
+
+
+
+
+	function setMonth() {
+
+		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return; }
+
+		let pmc = parent.mainIframe.contentWindow;
+
+		pmc.parameters.month = parseInt( inpMonth.value, 10 );
+
+		pmc.setSunPosition();
+
+// console.log( '', parent.mainIframe.contentWindow.parameters.month );
+
+	}
+
+
+
+	function setDate() {
+
+		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+
+		let pmc = parent.mainIframe.contentWindow;
+
+		pmc.parameters.month = parseInt( inpDate.value, 10 );
+
+		pmc.setSunPosition();
+
+// console.log( '', parent.mainIframe.contentWindow.parameters.date );
+
+	}
+
+
+
+	function setHours() {
+
+		if ( !parent.mainIframe ) { alert( 'please enter a location' ); return }
+
+		let pmc = parent.mainIframe.contentWindow;
+
+		pmc.parameters.hours = parseInt( inpHours.value, 10 );
+
+		pmc.setSunPosition();
+
+// console.log( '', parent.mainIframe.contentWindow.parameters.hours );
+
+	}
+
+
+
+
+
+</script>
+</body>
+</html>

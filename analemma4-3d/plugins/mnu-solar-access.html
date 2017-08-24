@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0; padding: 0 10px 0 0; }
+
+	button { background-color: #ccc; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+<script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
+
+
+<p>
+<button onclick="initSolarAccess();" >Draw Analemma</button>
+</p>
+
+Month <output id=outMonth for="inpMonth" >12</output>
+<input type="range" id="inpMonth" min=0 max=11  >
+
+Date <output id=outDate  for="inpDate" >21</output>
+<input type="range" id="inpDate" min=0 max=31 >
+
+<p>
+<button onclick="drawSunRange();" >Draw Solar Range</button>
+</p>
+
+<p>
+<button onclick="updateGround();" >Get Solar Access</button>
+</p>
+
+<p>
+Click the buttons in analemma, range, access order. There is an error in the logic. More buildings means longer processing,
+</p>
+
+<a href="./index.html#readme-solar-access.md" target=_top >Solar Access Read Me</a>
+
+<script>
+
+	var pmc;
+	var THREE;
+	var scene;
+	var camera;
+	var controls;
+	var lights;
+	var lightAmbient;
+	var lightPointCamera;
+	var lightDirectional;
+	var cameraHelper;
+	var parameters;
+	var object3D;
+	var structures;
+	var item;
+
+	var par;
+
+	var sun;
+	var analemma;
+	var analemmaRadius = 80;
+
+	var suns;
+	var sunHelpers = [];
+	var sunRangeLightIntensity = 0.6;
+	var lightAmbientIntensity = 100;
+
+	var targets, intersectsArray;
+
+	init();
+
+	function init() {
+
+		if ( !parent.ifrContents ) {
+
+			parent.divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src="analemma3-3d.html" ></iframe>';
+
+		}
+
+		parent.ifrMenu.style.height = document.body.scrollHeight + 'px';
+
+		inpMonth.onchange = setMonth;
+		inpDate.onchange = setDate;
+
+	}
+
+
+
+	function initSolarAccess() {
+
+		if ( !parent.ifrContents ) {
+
+			parent.divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src="analemma3-3d.html" ></iframe>';
+
+		}
+
+		pmc = parent.ifrContents.contentWindow;
+		THREE = pmc.THREE;
+		scene = pmc.scene
+		camera = pmc.camera;
+		controls = pmc.controls;
+		ground = pmc.ground;
+		lights = pmc.lights
+		lightDirectional = pmc.lightDirectional;
+		lightAmbient = pmc.lightAmbient;
+		lightPointCamera = pmc.lightPointCamera;
+		cameraHelper = pmc.cameraHelper;
+		parameters = pmc.parameters;
+		object3D = pmc.object3D;
+		structures = pmc.structures;
+
+		parameters.offsetUTC = -420;
+		parameters.date = 21;
+		parameters.month = 11;
+		parameters.hours = 12 - parameters.offsetUTC / 60;
+		parameters.minutes = 0;
+
+//console.log( '', parameters );
+
+		inpMonth.value = parameters.month;
+		outMonth.value = parameters.month + 1;
+
+		outDate.value = inpDate.value = parameters.date;
+
+		drawAnalemma();
+
+		inpMonth.onchange = setMonth;
+		inpDate.onchange = setDate;
+
+	}
+
+
+
+	function drawAnalemma() {
+
+		let year, month, date, hours, hour, i;
+		let geometry, vertices, material, line;
+		let analemmaDateUTC, analemmaSunPosition, analemmaColor, placard;
+		let dateUTC;
+		let colors;
+
+		colors = [ 'bisque', 'deeppink', 'sienna', 'darkorange', 'indigo', 'lime',
+		'purple', 'honeydew', 'coral', 'gold', 'gray', 'maroon' ];
+
+		let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+		analemma = new THREE.Object3D();
+
+		year = ( new Date() ).getUTCFullYear();
+
+		for ( hours = 0; hours < 24; hours++ ) {
+
+			geometry = new THREE.Geometry();
+			vertices = geometry.vertices;
+			hour = hours - parameters.offsetUTC / 60;
+			i = 0;
+
+			for ( month = 0; month < 12; month++ ) {
+
+				for ( date = 1; date < daysOfMonth[ month ]; date++ ) {
+
+					analemmaDateUTC = new Date( Date.UTC( year, month, date, hour, 0, 0 ) );
+
+					analemma.sunPosition = getSunPositionXYZ( analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
+
+					vertices.push( analemma.sunPosition.xyz );
+
+					geometry.colors[ i++ ] = new THREE.Color(  colors[ month ] );
+
+				}
+
+			}
+
+			analemmaColor = hours === 0 ? 200 : 120;
+			analemmaColor = hours === 12 ? 60 : analemmaColor;
+
+			material = new THREE.LineBasicMaterial( {
+
+				linewidth: 2,
+//				color: 0xffffff,
+				vertexColors: THREE.VertexColors
+
+			} );
+
+			line = new THREE.Line( geometry, material );
+			analemma.add( line );
+
+			placard = drawPlacard( '' + hours, 0.05, analemmaColor, vertices[ 0 ].x, vertices[ 0 ].y, vertices[ 0 ].z );
+			analemma.add( placard );
+
+		}
+
+		material = new THREE.LineBasicMaterial( { color: 0xbbbbbb } );
+
+		for ( month = 5; month < 12; month++ ) {
+
+			geometry = new THREE.Geometry();
+			vertices = geometry.vertices;
+
+			for ( hours = 0; hours < 24; hours++ ) {
+
+				analemmaDateUTC = new Date( Date.UTC( year, month, 21, hours, 0, 0 ) );
+				analemmaSunPosition = getSunPositionXYZ( analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
+
+				vertices.push( analemmaSunPosition.xyz );
+
+			}
+
+			vertices.push( vertices[ 0 ] );
+
+			line = new THREE.Line( geometry, material );
+			analemma.add( line );
+
+		}
+
+
+	}
+
+
+
+	function drawSunRange() {
+
+		var sun, sunHelper, dateThere, d;
+		let geometry, material, mesh;
+
+		pmc.scene.remove( pmc.lightDirectional, pmc.lightAmbient );
+		pmc.scene.remove( pmc.lights );
+
+		pmc.object3D.remove( pmc.lights );
+		pmc.camera.remove( pmc.lightPointCamera );
+
+		pmc.lights = new THREE.Object3D();
+
+
+		if ( suns ) {
+
+			for ( var i = 0; i < suns.children.length; i++ ) {
+
+				suns.remove( suns.children[ i ] );
+
+			}
+
+		}
+
+		par = {};
+
+		par.sunRangeCount = 7;
+		par.sunRangeHelpers = 0;
+		par.sunRangeIntensity = sunRangeLightIntensity;
+		par.lightAmbientColor = 100;
+		par.sunRangeMinutes = 60;
+		par.sunRangePlacards = 0;
+		par.sunRangeRadius = 100;
+		par.sunRangeStart = 8;
+		par.offsetThere =  parameters.offsetUTC / 60;;
+		par.sunRangeCount = 11;
+
+
+		lightAmbient = new THREE.AmbientLight();
+		c = par.lightAmbientColor
+		lightAmbient.color = new THREE.Color( 'rgb( ' + c + ',' + c + ',' + c + ' )' );
+
+
+		scene.add( lightAmbient );
+
+		suns = new THREE.Object3D();
+
+		for ( var i = 0; i < par.sunRangeCount; i++ ) {
+
+			sun = new THREE.DirectionalLight( 0xffffff, par.sunRangeIntensity );
+
+			d = 100;
+			sun.shadow.camera.left = -d;
+			sun.shadow.camera.right = d;
+			sun.shadow.camera.top = d;
+			sun.shadow.camera.bottom = -d;
+
+			sun.shadow.camera.near = 0;
+			sun.shadow.camera.far = 3 * d;
+
+			sun.shadow.mapSize.width = 2048;  // default 512
+			sun.shadow.mapSize.height = 2048;
+
+			sun.castShadow = true;
+
+//			sun.target = ground;
+
+//			scene.add( new THREE.CameraHelper( sun.shadow.camera ) );
+
+			geometry = new THREE.SphereBufferGeometry( 5, 20, 10 );
+			material = new THREE.MeshBasicMaterial( { color: 0xffee00 } );
+			mesh = new THREE.Mesh( geometry, material );
+			sun.add( mesh );
+
+			suns.add( sun );
+/*
+			if ( par.sunRangeHelpers === 1 ) {
+
+				sunHelper = new THREE.CameraHelper( sun.shadow.camera );
+				suns.add( sunHelper );
+
+			}
+
+*/
+
+			par.year = 2017
+			par.month = 11;
+			par.date = 21;
+			par.minutes = 0;
+
+			dateThere = new Date( Date.UTC( par.year, par.month, par.date, par.sunRangeStart - par.offsetThere, par.minutes + i * par.sunRangeMinutes ) );
+
+			sun.userData.position = getSunPositionXYZ( analemmaRadius, dateThere, parameters.latitude, parameters.longitude );
+//console.log( 'sun.userData.position', sun.userData.position);
+
+			sun.position.copy( pmc.ground.position.clone().add( sun.userData.position.xyz )  );
+
+			if ( par.sunRangePlacards === 1 ) {
+
+				txt = ( '0' + ( par.sunRangeStart + Math.floor( i * par.sunRangeMinutes / 60 ) ) ).slice( - 2 ) +
+				':' + ( '0' + ( i * par.sunRangeMinutes % 60 ) ).slice( -2 );
+				placard = drawPlacard( txt, 0.05, 120, 0, 10, 0 );
+				sun.add( placard );
+
+			}
+
+		}
+
+		object3D.remove( suns );
+		object3D.add( suns );
+
+	}
+
+
+
+
+	function updateGround() {
+
+		let material, geometry, target;
+
+		scene.remove( ground );
+
+		material = new THREE.MeshBasicMaterial( { color: 0xaaaaaa, vertexColors: THREE.FaceColors, side: 2, wireframe: false } ); // 2 sides for intersects to work!
+		geometry = new THREE.Geometry().fromBufferGeometry( ground.geometry );
+		ground = new THREE.Mesh( geometry, material );
+		ground.name = 'new ground';
+
+		scene.add( ground );
+
+//console.log( 'ground', ground );
+
+		targets = [];
+
+		for ( let i = 0; i < suns.children.length; i++ ) {
+
+			target = suns.children[ i ].getWorldPosition();
+/*
+			var geometry = new THREE.BoxBufferGeometry( 1, 20, 1 );
+			material = new THREE.MeshNormalMaterial();
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.copy( target );
+			scene.add( mesh );
+*/
+
+			targets.push( target )
+
+		}
+
+//console.log( 'targets', targets );
+
+		getCentroids();
+
+	}
+
+
+
+	function getCentroids( ) {
+
+		let helper, vertices, centroids;
+		let geometry, material, mesh;
+
+		helper = new THREE.FaceNormalsHelper( ground, 2, 0x00ff00, 1 );
+//		scene.add( helper );
+
+		vertices = helper.geometry.attributes.position.array;
+
+		centroids = ground.userData.centroids = [];
+
+		for ( let i = 0; i < vertices.length; ) {
+
+			vertex = new THREE.Vector3( vertices[ i++ ], vertices[ i++ ], vertices[ i++ ] );
+			i += 3;
+			centroids.push( vertex );
+
+/*
+			geometry = new THREE.BoxBufferGeometry( 1, 1, 3 );
+			material = new THREE.MeshNormalMaterial();
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.copy( vertex );
+			scene.add( mesh;
+*/
+
+		}
+
+		centroidsArray = centroids.slice();
+
+// console.log( 'centroidsArray', centroidsArray.length );
+
+//		findIntersects();
+
+		item = 0;
+
+		calculate();
+
+	}
+
+
+
+
+	function findIntersects() {
+
+		let count, centroid, target;
+		let raycaster, intersects;
+
+		let colors = [ 'rgb( 49, 54, 149 )', 'rgb( 69, 117, 180 )', 'rgb( 116, 173, 209 )', 'rgb( 171, 217, 233 )', 'rgb(224, 243, 248)', 'rgb(255, 255, 191)',
+				'rgb(254, 224, 144)', 'rgb(253, 174, 97)', 'rgb(244, 109, 67)', 'rgb(215, 48, 39)', 'rgb(165, 0, 38)' ];
+
+		materialLine = new THREE.LineBasicMaterial( { color: 0xff0000 } );
+
+		for ( let i = 0; i < 256; i++ ) {
+
+			centroid = centroidsArray.shift();
+
+			if ( !centroidsArray.length ) { break; }
+
+			count = 0;
+
+			for ( let j = 0; j < targets.length; j++ ) {
+
+				target = targets[ j ];
+
+/*
+				var geo = new THREE.Geometry();
+				geo.vertices = [ centroid, target ];
+				var line = new THREE.Line( geo, materialLine );
+				scene.add( line );
+*/
+
+				raycaster = new THREE.Raycaster();
+
+				raycaster.set( centroid, target.clone().normalize() );
+				raycaster.near = 1;
+
+				intersects = raycaster.intersectObjects( structures.children );
+
+				if ( intersects.length > 0 ) { count++; }
+
+			}
+
+			face = ground.geometry.faces[ item++ ];
+			color = colors[ 11 - count ];
+			face.color.setStyle( color );
+
+// console.log( 'count', count );
+
+		}
+
+		if ( centroidsArray.length > 0 ) {
+
+			ground.geometry.colorsNeedUpdate = true;
+
+//console.log( 'len', centroidsArray.length, item );
+			pmc.logIntersect.innerHTML = 'completed: ' + item + ' - remaining : ' + centroidsArray.length;
+
+		} else {
+
+		ground.position.y = -20;
+		centroidsArray.length = 0;
+
+//console.log( 'item', ground, item );
+
+		}
+
+	}
+
+
+
+	function setMonth() {
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		parameters.month = parseInt( inpMonth.value, 10 );
+
+		outMonth.value = parameters.month + 1;
+
+		drawSunRange();
+
+// console.log( '', parent.ifrContents.contentWindow.parameters.month );
+
+	}
+
+
+
+	function setDate() {
+
+		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return }
+
+		outDate.value = parameters.date = parseInt( inpDate.value, 10 );
+
+		drawSunRange();
+
+// console.log( '', parent.ifrContents.contentWindow.parameters.date );
+
+	}
+
+
+
+	function drawPlacard( text, scale, color, x, y, z ) {
+
+// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/functions/placards
+
+		let placard = new THREE.Object3D();
+		var texture = canvasMultilineText( text, { backgroundColor: color }   );
+		let spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		let sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x * 1.1, y * 1.1, z * 1.1 ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+/*
+		let geometry = new THREE.Geometry();
+		geometry.vertices = [ v( 0, 0, 0 ),  v( x, y, z ) ];
+		let material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		let line = new THREE.Line( geometry, material );
+*/
+		placard.add( sprite /*,  line */ );
+
+		return placard;
+
+		function canvasMultilineText( textArray, parameters ) {
+
+			parameters = parameters || {} ;
+
+			let canvas = document.createElement( 'canvas' );
+			let context = canvas.getContext( '2d' );
+			let width = parameters.width ? parameters.width : 0;
+			let font = parameters.font ? parameters.font : '48px monospace';
+			let color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+			if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+			context.font = font;
+
+			for ( let i = 0; i < textArray.length; i++) {
+
+				width = context.measureText( textArray[ i ] ).width > width ? context.measureText( textArray[ i ] ).width : width;
+
+			}
+
+			canvas.width = width + 20;
+			canvas.height =  parameters.height ? parameters.height : textArray.length * 60;
+
+			context.fillStyle = 'hsl( ' + color + ', 80%, 50% )' ;
+			context.fillRect( 0, 0, canvas.width, canvas.height);
+
+			context.lineWidth = 1 ;
+			context.strokeStyle = '#000';
+			context.strokeRect( 0, 0, canvas.width, canvas.height );
+
+			context.fillStyle = '#000' ;
+			context.font = font;
+
+			for ( i = 0; i < textArray.length; i++) {
+
+				context.fillText( textArray[ i ], 10, 48  + i * 60 );
+
+			}
+
+			let texture = new THREE.Texture( canvas );
+			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			texture.needsUpdate = true;
+
+			return texture;
+
+		}
+
+	}
+
+
+
+	function getSunPositionXYZ( radius, timeThere, latitude, longitude ) {
+
+		var sunPosition, x, y, z;
+
+		sunPosition = getSunPosition( timeThere, latitude - 90, longitude ); // from solar-calculator ... .js
+
+		x = radius * Math.cos( sunPosition.altitude * d2r ) * Math.sin( sunPosition.azimuth * d2r );
+		y = radius * Math.cos( sunPosition.altitude * d2r ) * Math.cos( sunPosition.azimuth * d2r );
+		z = radius * Math.sin( sunPosition.altitude * d2r );
+
+		return { xyz: new THREE.Vector3( x, y, z ), azimuth: sunPosition.azimuth, altitude: ( sunPosition.altitude > 0 ? 90 - sunPosition.altitude: sunPosition.altitude ) };
+
+	}
+
+
+
+	function lon2tile( longitude, zoom ) {
+
+		return Math.floor( ( longitude + 180 ) / 360 * Math.pow( 2, zoom ) );
+
+	}
+
+	function lat2tile( latitude, zoom ) {
+
+		return Math.floor( ( 1 - Math.log( Math.tan( latitude * pi / 180 ) + 1 / Math.cos( latitude * pi / 180) ) / pi ) / 2 * Math.pow( 2, zoom ) );
+
+	}
+/*
+	function tile2lon( x, zoom ) {
+
+		return ( x / Math.pow( 2, zoom ) * 360 - 180 );
+
+	}
+
+	function tile2lat( y, zoom ) {
+
+		var pi = Math.PI
+		var n = pi - 2 * pi * y / Math.pow( 2, zoom );
+		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
+
+	}
+*/
+
+
+	function calculate() {
+
+		requestAnimationFrame( calculate );
+
+		if ( centroidsArray.length ) {
+
+			findIntersects();
+
+		}
+
+
+	}
+
+</script>
+</body>
+</html>

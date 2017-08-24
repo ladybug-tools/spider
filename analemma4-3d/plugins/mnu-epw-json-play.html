@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = description content = "Basic HTML template" >
+<meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = date content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+	button { background-color: #ccc; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div><button onclick=initPlayWeather(); >Play Weather and Sun</button></div>
+		<div id = "contents" >Data will appear here</div>
+	</div>
+
+<script>
+
+
+// ESP Cueta /Tenerife
+
+	let epwJson;
+	let pointer;
+
+	let pim;
+	let pic;
+
+	let indexEPW;
+	let windDir = 0;
+	let windSpeed = 0;
+	let dirNorRad = 0;
+
+
+	init();
+
+
+	function init() {
+
+		if ( !parent.epwJson ) {
+
+			alert( 'Please first open any EPW file with "EPW JSON" meni. Then click the EPW Play Weather button.');
+
+			parent.location.hash = '#menu-epw-json.md';
+
+			return;
+
+		}
+
+		pim = parent.ifrMenu.contentWindow;
+		pic = parent.ifrContents.contentWindow;
+
+		parent.ifrMenuPlay.style.height = document.body.scrollHeight + 'px';
+
+		drawPointer3D();
+
+		let offset = 0;
+
+		epwJson = parent.epwJson;
+
+		for ( var i = 0; i < epwJson.hourlyDataFields.length; i++ ) {
+
+			field = epwJson.hourlyDataFields[ i ];
+			offset =  field.name === 'Zenith Luminance' ? -1 : offset;
+			dirNorRad = field.name === 'Direct Normal Radiation' ? i : dirNorRad;
+			windDir = field.name === 'Wind Direction' ? i + offset: windDir;
+			windSpeed = field.name === 'Wind Speed' ? i + offset : windSpeed;
+
+		}
+
+	}
+
+
+
+	function initPlayWeather() {
+
+		pim.setSunPosition = setSunPosition;
+
+		pim.togglePlayTheYear();
+
+	}
+
+
+
+	function drawPointer3D() {
+
+		let geometry, material, mesh;
+
+		geometry = new pic.THREE.CylinderGeometry( 10, 5, 80, 3 );
+		geometry.applyMatrix( new pic.THREE.Matrix4().makeTranslation( 0, 50, 0 ) );
+		geometry.merge( new pic.THREE.CylinderGeometry( 12, 0, 20, 3 ) );
+		geometry.applyMatrix( new pic.THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+//		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( - pi ) );
+		geometry.applyMatrix( new pic.THREE.Matrix4().makeTranslation( 0, 0, -30 ) );
+		material = new pic.THREE.MeshNormalMaterial( { opacity: 0.5, transparent: true } );
+		pointer = new pic.THREE.Mesh( geometry, material );
+		pointer.scale.multiplyScalar( 0.25 );
+
+		pic.scene.add( pointer );
+
+
+	}
+
+
+	function setSunPosition() {
+
+		let d, year, dateThere;
+
+		d = new Date();
+		year = d.getUTCFullYear();
+
+		dateThere = new Date( Date.UTC( year, pim.parameters.month, pim.parameters.date, pim.parameters.hour, pim.parameters.minutes, 0 ) );
+		pim.sun.userData.position = pim.getSunPositionXYZ( pim.analemmaRadius, dateThere, pim.parameters.latitude, pim.parameters.longitude );
+
+		pim.lightDirectional.position.copy( pic.controls.target.clone().add( pim.sun.userData.position.xyz ) );
+
+		getEPW();
+
+//console.log( 'lightDirectional.position', lightDirectional.position );
+//console.log( 'sun.position', sun.position );
+
+	}
+
+
+
+	function getEPW() {
+
+		let hours, data;
+		let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+		const b = '<br>';
+
+		let p = pim.parameters;
+//console.log( 'p', p );
+
+		let dayCount = 0;
+
+		for ( let i = 0; i <  p.month; i++ ) {
+
+			dayCount += daysOfMonth[ i ];
+
+		}
+
+		hours = p.hour + 24 * ( p.date + dayCount );
+
+		data = epwJson.hourlyData[ hours ];
+
+		if ( !data ) { return; }
+
+		contents.innerHTML =
+
+			'<h3>Hour #: ' + hours + '</h3>' +
+			'Date: ' + p.date + '/' + p.month + b +
+			'Time: ' + p.hour + b +
+			'Dry Bulb Temperature {C}: ' + data[ 0 ] + b +
+			'Dew Point Temperature {C}: ' + data[ 1 ] + b +
+			'Relative Humidity {%}: ' + data[ 2 ] + b +
+			'Direct Normal Radiation {Wh/m2}: ' + b + data[ dirNorRad ] + b +
+			'Wind Direction {deg}: ' + b + data[ windDir ] + b +
+			'Wind Speed {m/s}: ' + data[ windSpeed ] + b +
+
+		'';
+
+		updateScene( data );
+
+	}
+
+
+	function updateScene( data ) {
+
+		let geom, mat, matrix;
+		let x, y, z;
+
+		dir = - data[ windDir ] * Math.PI / 180;
+		speed = data[ windSpeed ] / 10;
+		pic.debug.innerHTML = 'dir ' + data[ windDir ] ;
+
+		x = Math.cos( dir );
+		y = 0; //parseFloat( inpY.value );
+		z = Math.sin( dir );
+
+		let Syx = 0,
+			Szx = 0,
+			Sxy = 0,
+			Szy = 0,
+			Sxz = 0,
+			Syz = 0;
+
+
+		Syx = x;
+		Syz = z;
+
+		matrix = new pic.THREE.Matrix4();
+
+		matrix.set(	  1,   Syx,  Szx,  0,
+					Sxy,     1,  Szy,  0,
+					Sxz,   Syz,   1,   0,
+					  0,     0,   0,   1 );
+
+//console.log( '', matrix.elements );
+
+		let structures = pic.scene.getObjectByName( 'structures');
+		let structuresOriginal = pic.parameters.structuresArray.slice();
+
+//console.log( 'pic', structures );
+
+		for ( let i = 0; i < structures.children.length; i++ ) {
+
+			let structure = structures.children[ 0 ];
+			let original = structuresOriginal[ i ];
+
+			geom = original.geometry.clone();
+			geom.applyMatrix( matrix );
+			mat = original.material.clone();
+
+			structures.remove( structure );
+			structure.geometry.dispose();
+			structure.material.dispose();
+			structure = new pic.THREE.Mesh( geom, mat );
+			structure.position.y = original.position.y;
+			structure.castShadow = true;
+			structure.receiveShadow = true;
+			structures.add( structure );
+
+		}
+
+		pointer.rotation.y = dir;
+
+	}
+
+
+/*
+	function updateSceneXX( data ){
+
+		let pic = parent.ifrMain.contentWindow;
+		let geometry, material, userData, p;
+		let matrix;
+
+//		lightDirectional.intensity  = data[ 5 ] / 300;
+
+//console.log( 'intensity', lightDirectional.intensity );
+
+		dir = - data[ windDir ] * Math.PI / 180;
+		pic.debug.innerHTML = 'dir ' + data[ windDir ] ;
+
+		x = 0.5;
+		y = 0.5;
+		z = 0;
+
+		x = Math.cos( dir );
+		y = Math.sin( dir );
+		matrix = new pic.THREE.Matrix4();
+		matrix.makeShear( x, y, z );
+
+		let structures = pic.scene.getObjectByName( 'structures');
+
+		for ( var i = 0; i < structures.children.length; i++ ) {
+
+			var structure = structures.children[ 0 ];
+
+//console.log( 'structure', structure );
+
+			userData = structure.userData;
+			p = userData.position;
+			geometry = structure.userData.geometryOriginal.clone();
+			geometry.center();
+//			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( windDir ) );
+
+			matrix = new pic.THREE.Matrix4();
+			matrix.makeShear( x, y, z );
+
+			geometry.applyMatrix( matrix );
+			geometry.applyMatrix( new pic.THREE.Matrix4().makeTranslation( p.x, p.y, p.z ) );
+
+			material =  structure.material.clone();
+
+			structures.remove( structure );
+			structure = new pic.THREE.Mesh( geometry, material );
+			structure.castShadow = true;
+			structure.receiveShadow = true;
+			structure.userData = userData;
+			structures.add( structure );
+
+		}
+
+
+//		structures.scale.y = 0.01 + data[ 2 ] / 10;
+
+		pic.scene.fog.far = 150 + parseInt( data[ 2 ], 10 );
+
+// console.log( '', scene.fog.far, data[ 4 ] );
+
+		c = parseInt( data[ 1 ], 10 ) / 220;
+		pic.ground.material.emissive = new pic.THREE.Color( c, c, c );
+
+		pointer.rotation.y = dir;
+//		pointer.scale.z = 0.0001 + 0.05 * data[ windSpeed ];
+//		pointer.geometry = pointer.geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 1, 1 + 0.03 * data[ 7 ] ) );
+
+	}
+*/
+
+
+</script>
+</body>
+</html>
