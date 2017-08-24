@@ -107,7 +107,7 @@
 //		parent.projectName = 'Ladybug Web';
 //		parent.document.title = 'Analemma 3D';
 
-		title.innerHTML = '<h1><a href="" >' + document.title +'</a> &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
+		title.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>'; // &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -140,7 +140,12 @@
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
-		parent.ifrMenu.src = "plugins/mnu-analemma3-3d.html";
+		if ( parent.ifrMenu ) {
+
+			parent.requestFile( 'r1/menu-burning-manalemma-2017-r1.md', parent.divSubMenu )
+			parent.ifrMenu.src = "plugins/mnu-analemma3-3d.html";
+
+		}
 
 	}
 

@@ -10,9 +10,9 @@
 
 <!-- ### [README / home page]( #README.md ) -->
 
-### &raquo; [Analemma4 3D ]( analemma4-3d/index.html )
+### [Analemma3D]( #analemma3d/README.md ) &raquo; [&#x1F5D7;]( analemma3d/index.html )
 
-### &raquo; [Burning Manalemma 2017]( burning-manalemma-2017/index.html )
+### [Burning mAnalemma 2017]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html )
 
 ***
 
@@ -22,10 +22,12 @@
 <iframe id=ifrMenu class=xxxiframeMenu width=100% height=0 frameBorder=0 ></iframe>
 
 
+space fillers
+
 ### [markdown help]( #./pages/markdown-help.md )
 
 
-### [threejs basic]( #./plugins/threejs-basic.html ) [&#x1F5D7;]( ./plugin/threejs-basic.html )
+### [threejs basic]( #./plugins/threejs-basic.html ) [&#x1F5D7;]( ./plugins/threejs-basic.html )
 
 
 ***

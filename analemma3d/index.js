@@ -7,8 +7,8 @@
 
 	defaults.menuWidth = 250;
 
-	defaults.user = 'ibpsa2017';
+	defaults.user = 'ladybug-tools';
 
-	defaults.folder = 'ibpsa2017.github.io/blob/master/';
+	defaults.folder = 'ladybug-tools.github.io/spider/blob/master/';
 
 //	defaults.url = 'README.md';

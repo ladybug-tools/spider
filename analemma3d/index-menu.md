@@ -8,9 +8,9 @@
 </style>
 
 [ladbug tools]( https://ladybug-tools.github.io/ ) &raquo;
-[spider-tools]( ../index.html ) &raquo;
+[spider]( ../index.html ) &raquo;
 
-## [Burning mAnalemma 2017]( index.html )
+## [Analemma3D]( index.html )
 
 <a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js / frames per second" >Show fps statistics</a>
 
@@ -54,9 +54,9 @@ Selected destinations
 
 ***
 
-[license         ]( #../foot-license.md )
-[code of conduct ]( #../foot-code-of-conduct.md )
-[contributing    ]( #../foot-contributing.md )
-[settings        ]( #menus/menu-settings.md )
+[license         ]( #../pages/license.md )
+[code of conduct ]( #../pages/code-of-conduct.md )
+[contributing    ]( #../pages/contributing.md )
+<!-- [settings        ]( #menus/menu-settings.md ) -->
 
 <h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/images/graph/ladybug.png width=36 ></h1>

@@ -7,10 +7,10 @@
 
 </style>
 
-[unofficial ibpsa2017]( https://ibpsa2017.github.io ) &raquo;
+[ladbug tools]( https://ladybug-tools.github.io/ ) &raquo;
+[spider]( ../index.html ) &raquo;
 
-## [Burning mAnalemma 2017]( index.html )
-
+## [Analemma3D]( index.html )
 <a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js / frames per second" >Show fps statistics</a>
 
 
