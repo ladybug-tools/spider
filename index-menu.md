@@ -4,15 +4,15 @@
 
 </style>
 
-[ladybug tools / spider]( https://rawgit.com/ladybug-tools/spider/master/ ) &raquo;
+[ladybug tools]( http://www.ladybug.tools ) &raquo;
 
 ## [Spider]( index.html )
 
-<!-- ### [README / home page]( #README.md ) -->
+### [Read me]( #README.md )
 
-### [Analemma3D]( #analemma3d/README.md ) &raquo; [&#x1F5D7;]( analemma3d/index.html )
+### [Analemma3D]( #analemma3d/README.md ) &raquo; [&#x1F5D7;]( analemma3d/index.html "Run full screen" )
 
-### [Burning mAnalemma 2017]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html )
+### [Burning mAnalemma 2017]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html "Run full screen" )
 
 ***
 
@@ -27,7 +27,7 @@ space fillers
 ### [markdown help]( #./pages/markdown-help.md )
 
 
-### [threejs basic]( #./plugins/threejs-basic.html ) [&#x1F5D7;]( ./plugins/threejs-basic.html )
+### [threejs basic]( #./plugins/threejs-basic.html ) [&#x1F5D7;]( ./plugins/threejs-basic.html "Run full screen" )
 
 
 ***

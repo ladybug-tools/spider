@@ -7,8 +7,10 @@
 
 	defaults.menuWidth = 250;
 
-	defaults.user = 'pushme-pullyou';
+	defaults.user = 'ladybug-tools';
 
-	defaults.folder = 'pushme-pullyou2';
+	defaults.repository = 'spider';
 
-//	defaults.url = 'README.md';
+	defaults.folder = 'ladybug-tools';
+
+	defaults.url = 'plugins/view-github-issues.html';

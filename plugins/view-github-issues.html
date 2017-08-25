@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = description content = "GitHub issues to blog posts" >
+<meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = date content = "2017-08-21" >
+<title>View GitHub Issues</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	hr { margin-bottom: 80px; }
+	img { border: 2px red solid; max-width: 800px; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+<script src = "../index.js" ></script>
+
+	<div id = "menu" >
+
+		<div>
+			<h1><a id = "title" href = "" ></a></h1>
+		</div>
+
+		<div id = "header" ></div>
+
+		<hr>
+
+		<div id = "contents" ></div>
+
+	</div>
+
+<script>
+// Add blog posts to your site
+
+	var defaults = defaults || {};
+
+	const userGitHub = defaults.user ? defaults.user : '';
+	const repository = defaults.repository ? defaults.repository : '';
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		showdown.setFlavor( 'github' );
+
+		let urlIssues;
+
+		urlIssues = 'https://api.github.com/repos/' + userGitHub + '/' + repository + '/issues';
+
+		requestFile( '../pages/github-issues-header.md' , callbackHeader );
+
+		requestFile( urlIssues, callbackPost );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+	}
+
+
+
+	function callbackHeader( xhr ) {
+
+		let converter, response, html;
+
+		converter = new showdown.Converter();
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		html = converter.makeHtml( response );
+
+		html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
+
+		header.innerHTML = converter.makeHtml( html );
+
+	}
+
+
+
+	function callbackPost( xhr ) {
+
+		let converter;
+
+		converter = new showdown.Converter();
+
+		let response, json, lines;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		json = JSON.parse( response );
+// console.log( '', json );
+
+		for ( var i = 0; i < json.length; i++ ) {
+
+			issue = json[ i ];
+
+			html = converter.makeHtml( issue.body );
+			html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
+//console.log( '', html );
+
+			contents.innerHTML += 
+
+//				'<h1>blog post: ' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
+				'<h1>blog post: <a href="' + issue.html_url + '" target=_top >' + issue.title + '</a></h1>' + 
+
+				'<div><i>written on: ' + issue.created_at + 
+				' by <a target+=top href="' + issue.user.html_url + '" >' + issue.user.login +  '</a></i></div>' +
+				html +
+
+			'<hr>';
+
+		}
+
+	}
+
+
+	function callbackPost( xhr ) {
+
+		let converter;
+
+		converter = new showdown.Converter();
+
+		let response, json, lines;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		json = JSON.parse( response );
+// console.log( '', json );
+
+
+		for ( var i = 0; i < json.length; i++ ) {
+
+			issue = json[ i ];
+
+			html = converter.makeHtml( issue.body );
+			html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
+//console.log( '', html );
+			contents.innerHTML += 
+
+//					'<h1>blog post: ' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
+				'<h1>blog post: <a href="' + issue.html_url + '" target=_top >' + issue.title + '</a></h1>' + 
+
+				'<div><i>written on: ' + issue.created_at + 
+				' by <a target+=top href="' + issue.user.html_url + '" >' + issue.user.login +  '</a></i></div>' +
+				html +
+
+			'<hr>';
+
+		}
+
+	}
+
+
+	function onWindowResize(){
+
+		if ( window.innerWidth < 1000 ) {
+
+			ifrReadMe.style.display = 'none';
+
+		} else {
+
+			ifrReadMe.style.display = '';
+
+		}
+
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>
