@@ -3,7 +3,7 @@
 # Burning mAnalemma 2017 Read Me
 
 
-<iframe class=iframeReadMe src="http://www.ladybug.tools/spider/burning-manalemma-2017/r1/burning-manalemma-2017-r1.html" width="800" height="500" >
+<iframe class=iframeReadMe src="https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html" width="800" height="500" >
 
 
 <img src="../images/ladybug-logo.png" >
