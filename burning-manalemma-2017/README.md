@@ -1,55 +1,39 @@
-<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://ibpsa2017.github.io/analemma3-3d/index.html 'View file as a web page.' ) </span>
+<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html 'View file as a web page.' ) </span>
 
 # Burning mAnalemma 2017 Read Me
 
 
-<iframe class=iframeReadMe src="https://ladybug-tools.github.io/spider/analemma3d-4/index.html#menus/menu-move.md" width="800" height="500" >
+<iframe class=iframeReadMe src="https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/r1/burning-manalemma-2017-r1.html" width="800" height="500" >
 <img src="../images/ladybug-logo.png" >
 </iframe>
-_Analema3 3D showing downtown San Francisco with Hyatt Embarcadero at center_
+_Cam you ba at Burning Man without going there? Of course not. So let's bring Burning Man over to your place._
+
 <span style="display: none" >Not visible in GitHub source code view or small screens</span>
 
-## Full Screen: [Analemma 3D ]( https://ibpsa2017.github.io/analemma3-3d/index.html )
-
-Click the 'San Francisco' link for a quick demo of what this script can do. Click the title in the menu to return to this home page / read me file.
-
-
-Analemma 3D has several menus:
-
-The **Selected Destinations** menu takes you to pre-selected areas. The tooltip for each item show you the number of structures to be loaded. The greater the number of structures, the longer the file takes to load.
-
-The **Moving / Travelling** menu allows to to enter an address or location anywhere in the world. You can use the on-screen cursor keys to go to the next tiles.
-
-The **Map Overlays** allows you to select the type of map images you want displayed over the 3d terrain.
-
-The **Analamma** menu allow displays the hourly analemmas for the given location and time. Analemmas are the traditional figure eight ( or infinity symbol on its side) representation of Sun positions. In 3D with geolocation and maps.
-
-The **Sun Range** menu creates eleven suns casting shadows
-
-The **Solar Access** menu gives you visual details of the exposure of buildings' elevations and public spaces to the sun during a desired period of the year.
-
-Wait for the model starts rotating before proceeding further. Click in the window or press the space bar to stop the rotating.
-
-The 3D views below enable you to rotate and pan using one three fingers or left button, scroll wheel and right button on a mouse.
-
-
+## Full Screen: [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html )
 
 
 ## Concept
 
-There are numerous outstanding mapping applications available these days. Many have sophisticated APIs. 
-The range of features is phenomenal. The level of the quality and complexity of the code is extremely high 
+Burning Man
 
-One result of all this success is that entry level barriers are quite high. You have to accept what is available with the API or set of a sophisticated development environment in order to customize a complex system.
+> A city in the desert. A culture of possibility. A network of dreamers and doers.
 
-But what happens if you just want to tinker around. What if you wanted to display molecules in virtual reality? What happens if you want to put monsters on your maps and blow up buildings?
+* https://burningman.org/
+* https://en.wikipedia.org/wiki/Burning_Man
+* https://twitter.com/burningman?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor
+* https://www.facebook.com/burningman/
+* https://www.reddit.com/r/BurningMan/
+* https://www.instagram.com/burningman/?hl=en
 
-What happens if you you need a mapping tool for some kind of scientific research and that code is the important part and the mapping code should be real simple and keep out of the way.
+Temple 2017
 
-Well, then, you have arrived at a good location.
+> The Temple is a place of refuge, mourning, and healing. The Temple Burn is a solemn ritual; a cleansing, a rite of passage, a pyre. We are honored to create and share this project with the Burning Man community and invite all to contribute.
 
-We are here to provide you with mapping code you can tinker with and learn to hack in a day or so.
-
+* http://www.temple2017.org/
+* https://www.facebook.com/brctemple2017/
+* https://www.instagram.com/temple_2017/
+* https://twitter.com/temple_2017
 
 ### Mission
 
@@ -77,8 +61,6 @@ We are here to provide you with mapping code you can tinker with and learn to ha
 
 
 
-
-
 ### Vision
 
 * Taking maps to new places
@@ -98,10 +80,6 @@ We are here to provide you with mapping code you can tinker with and learn to ha
 
 ## Issues
 
-* Not all tiles have 3D building data
-* Many tiles have building footprint data only - no height data is provided
-
-
 
 ## To-Do
 
@@ -109,12 +87,6 @@ We are here to provide you with mapping code you can tinker with and learn to ha
 * 2017-07-31 ~ Improve geoJSON reading capabilities
 * 2017-07-25 ~ Select quality of raster tile display
 
-
-### Source code
-
-* <https://glitch.com/edit/#!/jaanga-terrain4>
-* <http://jaanga.github.io/terrain4/terrain-tiles-structures/>
-* <https://github.com/jaanga/jaanga.github.io/tree/master/terrain4/terrain-tiles-structures>
 
 
 ## Ladybug Web Solar Calculator 
@@ -125,32 +97,6 @@ We are here to provide you with mapping code you can tinker with and learn to ha
 
 ## Change Log
 
-### 2017-07-31 ~ Theo
+### 2017-08-24 ~ Theo
 
-
-* 2017-07-25 ~ Solar access
-
-
-### 2017-07-28 ~ Theo
-
-Dealt with
-
-* 2017-07-24 ~ Most [geoJson features]( https://en.wikipedia.org/wiki/GeoJSON ) are not yet implemented
-* 2017-07-25 ~ Sunlight by date, time and location
-* 2017-07-25 ~ Support all zoom levels
-* 2017-07-25 ~ Select source of raster tiles
-* 2017-07-25 ~ Sun ranges
-
-### 2017-07-27 ~ Theo
-
-Dealt with
-
-* 2017-07-26 ~ Not removing geometry and lights properly
-* 2017-07-26 ~ some raster tiles incorrectly offset 
-* 2017-07-24 ~ heights of buildings are frequently incorrectly calculated
-
-
-### 2017-07-26 ~ Theo
-
-* 2017-07-25 ~ Use request animation frame to control the intersection gathering to stop the app from not responding
-	* Works nicely
+* First commit on spider repo
