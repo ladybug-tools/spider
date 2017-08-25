@@ -1,7 +1,7 @@
-Analemma Read Me
+Analemma3D Read Me
 ====
 
-_This is the read me for Analemma 3D R1. Needs much updating._
+_This is the read me for Analemma3D R18 & below._
 
 ## Concept
 
@@ -185,7 +185,7 @@ The geolocation functions are likely to be extracted and converted into standalo
 * [Figure-Eight in the Sky]( http://www.astronomycorner.net/games/analemma.html ) - inclueds C Sun position code
 * [The Analemma Dilemma]( http://www.math.nus.edu.sg/aslaksen/projects/Hannalemma.pdf )
 * [Analemmas on the gnomon and on the dial plate]( http://www.illustratingshadows.com/analemma.pdf )
-* [analemma.space]( http://analemma.space/ ]
+* [analemma.space]( http://analemma.space/ )
 
 ### Sun-related
 
