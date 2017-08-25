@@ -3,12 +3,19 @@
 # Burning mAnalemma 2017 Read Me
 
 
-<iframe class=iframeReadMe src="https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/r1/burning-manalemma-2017-r1.html" width="800" height="500" >
+<iframe class=iframeReadMe src="http://www.ladybug.tools/spider/burning-manalemma-2017/r1/burning-manalemma-2017-r1.html" width="800" height="500" >
+
+
 <img src="../images/ladybug-logo.png" >
 </iframe>
 _Can you be at Burning Man without going there? Of course not. So let's bring Burning Man over to your place._
 
+
 <span style="display: none" >Not visible in GitHub source code view or small screens</span>
+
+<!--
+<iframe class=iframeReadMe src="r1/burning-manalemma-2017-r1.html" width="800" height="500" ></iframe>
+-->
 
 ## Full Screen: [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html )
 
