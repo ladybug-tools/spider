@@ -6,7 +6,7 @@
 <iframe class=iframeReadMe src="https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/r1/burning-manalemma-2017-r1.html" width="800" height="500" >
 <img src="../images/ladybug-logo.png" >
 </iframe>
-_Cam you ba at Burning Man without going there? Of course not. So let's bring Burning Man over to your place._
+_Can you be at Burning Man without going there? Of course not. So let's bring Burning Man over to your place._
 
 <span style="display: none" >Not visible in GitHub source code view or small screens</span>
 
@@ -15,7 +15,32 @@ _Cam you ba at Burning Man without going there? Of course not. So let's bring Bu
 
 ## Concept
 
-Burning Man
+
+If you are not going to Burning Man, but you still need to be there then you need the terrain, the map, the Temple Burn - and he Sun.
+
+Actually, Burning Man is more convenient as a phone app. Let's do it.
+
+What do we eed?
+
+### Analemmas
+
+> Analemmas are the traditional figure eight ( or infinity symbol on its side) representation of Sun positions.
+
+* https://en.wikipedia.org/wiki/Analemma
+* [Motions of the Sun Simulator]( http://astro.unl.edu/naap/motion3/animations/sunmotions.html )
+* [Imgur: How the sun looks when you take a pictures at the same place and time every week for a year]( http://imgur.com/61YTxQ2 )
+	* See also more links in the comments
+* [StackEchange: How does the appearance of the analemma vary with latitude?]( http://astronomy.stackexchange.com/questions/12590/how-does-the-appearance-of-the-analemma-vary-with-latitude )
+* [Science Blog: Why Our Analemma Looks like a Figure 8]( http://scienceblogs.com/startswithabang/2009/08/26/why-our-analemma-looks-like-a/ )
+* [Stanford Solar Center: Viewing and Understanding the Analemma]( http://solar-center.stanford.edu/art/analemma.html )
+* [analemma.com]( http://www.analemma.com/pages/framespage.html ) << mostly broken
+* [Figure-Eight in the Sky]( http://www.astronomycorner.net/games/analemma.html ) - inclueds C Sun position code
+* [The Analemma Dilemma]( http://www.math.nus.edu.sg/aslaksen/projects/Hannalemma.pdf )
+* [Analemmas on the gnomon and on the dial plate]( http://www.illustratingshadows.com/analemma.pdf )
+* [analemma.space]( http://analemma.space/ )
+
+
+### Burning Man
 
 > A city in the desert. A culture of possibility. A network of dreamers and doers.
 
@@ -26,14 +51,18 @@ Burning Man
 * https://www.reddit.com/r/BurningMan/
 * https://www.instagram.com/burningman/?hl=en
 
-Temple 2017
+### Temple 2017
 
-> The Temple is a place of refuge, mourning, and healing. The Temple Burn is a solemn ritual; a cleansing, a rite of passage, a pyre. We are honored to create and share this project with the Burning Man community and invite all to contribute.
+> The Temple is a place of refuge, mourning, and healing. The **Temple Burn** is a solemn ritual; a cleansing, a rite of passage, a pyre. We are honored to create and share this project with the Burning Man community and invite all to contribute.
 
 * http://www.temple2017.org/
 * https://www.facebook.com/brctemple2017/
 * https://www.instagram.com/temple_2017/
 * https://twitter.com/temple_2017
+
+
+More in the next few days. In the mean time here's some background:
+
 
 ### Mission
 
