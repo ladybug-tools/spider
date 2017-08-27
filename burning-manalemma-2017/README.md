@@ -5,7 +5,6 @@
 
 <iframe class=iframeReadMe src="https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html" width="800" height="500" >
 
-
 <img src="../images/ladybug-logo.png" >
 </iframe>
 _Can you be at Burning Man without going there? Of course not. So let's bring Burning Man over to your place._
