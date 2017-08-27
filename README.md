@@ -4,6 +4,15 @@
 [Spider Read Me]( #README.md )
 ====
 
+
+_This file is a place holder unti after the Burning Man gig is over._
+
+_See also the files at the links below for an idea what will be showing up here._
+
+* https://ibpsa2017.github.io/
+* http://www.ladybug.tools/ladybug-web/
+
+
 <iframe class=iframeReadMe src=./plugins/threejs-basic.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 ## Full Screen: [Three.js Basic]( ./plugins/threejs-basic.html )

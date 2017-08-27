@@ -26,9 +26,9 @@ If you are not going to Burning Man, but you still need to be there then you nee
 
 Actually, Burning Man is more convenient as a phone app. Let's do it.
 
-What do we eed?
+What do we need?
 
-### Analemmas
+### Heat from Analemmas
 
 > Analemmas are the traditional figure eight ( or infinity symbol on its side) representation of Sun positions.
 
@@ -46,7 +46,7 @@ What do we eed?
 * [analemma.space]( http://analemma.space/ )
 
 
-### Burning Man
+### Doh > Burning Man
 
 > A city in the desert. A culture of possibility. A network of dreamers and doers.
 
@@ -57,7 +57,7 @@ What do we eed?
 * https://www.reddit.com/r/BurningMan/
 * https://www.instagram.com/burningman/?hl=en
 
-### Temple 2017
+### What burns > Temple 2017
 
 > The Temple is a place of refuge, mourning, and healing. The **Temple Burn** is a solemn ritual; a cleansing, a rite of passage, a pyre. We are honored to create and share this project with the Burning Man community and invite all to contribute.
 
@@ -131,6 +131,32 @@ More in the next few days. In the mean time here's some background:
 
 
 ## Change Log
+
+### 2017-08-26 ~ Theo
+
+After a slow start yesterday, more slow progress. At least screen capture was added. We now have something to show that we now have something.
+
+A lot more good stuff coming up. I hope to have updates / new releases every day of Burning Man.
+
+What slowed things down today was the back end - but good progress was made.
+
+The mission is something like this:
+
+* Single index.html
+*	 Handles opening and displaying any and all files in sub-folders and whereever
+* Single main menu
+	* Written in Markdown
+* Multiple sub folders
+	* All files accessible from main menu
+* Multiple scripts
+	* Content may be Markdown of HTML in an iframe
+*	 Menus can be markdown or HTML in an iframe
+	* Allows menus to behave like dialog boxes
+* Multiple sub menus
+* Scripts loaded at run time
+* Multiple Read Mes
+	* Every folder can have its own read me
+* All hosted as static files on GitHub/Bl.ocks.org/Glitch or wherever
 
 ### 2017-08-24 ~ Theo
 
