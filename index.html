@@ -25,7 +25,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 .contentsContainer { height: 100%; width: 100%; }
 
-.iframeMenu, .iframeContents { border-width: 0; height: 100%; margin: 0; width: 100%; }
+.iframeMenu { border-width: 0; height: 100%; margin: 0; width: 100%; }
+.iframeContents { border-width: 0; height: 100%; margin: 0; width: 100%; }
 
 .menuContainer { padding: 0 10px 0 15px; }
 .menuContainer a { text-decoration: none; }
@@ -138,12 +139,18 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 		}
 
 		let url = location.hash.slice( 1 );
+		let app = location.hash.split( '#' )[ 1 ];
+//console.log( 'url', url );
+
+
+//		if ( window.ifrMenu ) { ifrMenu.src = ''; }
+//		if ( window.divSubMenu ) { divSubMenu.innerHTML = ''; }
 
 		if ( url.startsWith( menuPrefix ) || url.startsWith ( menuFile ) ) {
 
 			requestFile( url, divMenuContents );
 
-		} else if ( url.endsWith( '.md' ) ) {
+		} else if ( app.endsWith( '.md' ) ) {
 
 			divContentsContainer.innerHTML = '<div id = "divContents" class = "contents" src=' + url + ' ></div>';
 
@@ -151,7 +158,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			divContentsContainer.style.overflow = 'auto';
 
-		} else if ( url.includes( '.htm' ) ) {
+		} else if ( app.includes( '.htm' ) ) {
 
 			divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src=' + url + ' ></iframe>';
 
@@ -160,8 +167,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 		} else {
 
 			ifrMenu.contentWindow.location.hash = url;
-			ifrMain.contentWindow.location.hash = url;
-
+			if ( parent.divContents ) { divContents.contentWindow.location.hash = url; }
+			ifrContents.contentWindow.location.hash = url;
 		}
 
 	}

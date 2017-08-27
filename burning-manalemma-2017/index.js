@@ -7,8 +7,10 @@
 
 	defaults.menuWidth = 250;
 
-	defaults.user = 'ibpsa2017';
+	defaults.user = 'ladybug-tools';
 
-	defaults.folder = 'pushme-pullyou.github.io/blob/master/';
+	defaults.repo = 'spider';
 
-	defaults.url = 'r1/burning-manalemma-2017-r1.html';
+	defaults.folder = 'spider/blob/master/burning-manalemma-2017/';
+
+	defaults.url = 'r2/burning-manalemma-2017-r2.html';

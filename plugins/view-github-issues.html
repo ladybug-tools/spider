@@ -49,6 +49,13 @@
 
 		showdown.setFlavor( 'github' );
 
+		if ( window.top !== window.self ) { 
+
+			parent.divSubMenu.innerHTML = '';
+			parent.ifrMenu.src = '';
+
+		}
+
 		let urlIssues;
 
 		urlIssues = 'https://api.github.com/repos/' + userGitHub + '/' + repository + '/issues';
@@ -142,13 +149,16 @@
 			html = converter.makeHtml( issue.body );
 			html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
 //console.log( '', html );
+
 			contents.innerHTML += 
 
-//					'<h1>blog post: ' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
 				'<h1>blog post: <a href="' + issue.html_url + '" target=_top >' + issue.title + '</a></h1>' + 
 
-				'<div><i>written on: ' + issue.created_at + 
-				' by <a target+=top href="' + issue.user.html_url + '" >' + issue.user.login +  '</a></i></div>' +
+				'<div>' +
+					'<i>written on: ' + issue.created_at + 
+					' by <a target+=top href="' + issue.user.html_url + '" >' + issue.user.login +  '</a></i>' +
+				'</div>' +
+
 				html +
 
 			'<hr>';

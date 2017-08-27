@@ -21,7 +21,11 @@
 ***
 
 
-### [Burning mAnalemma 2017 R1]( #r1/burning-manalemma-2017-r1.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
+### [Burning mAnalemma 2017 R2]( #r2/burning-manalemma-2017-r2.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-26' )
+
+
+#### [Burning mAnalemma 2017 R1]( #r1/burning-manalemma-2017-r1.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-24' )
+
 
 
 ***
@@ -38,6 +42,6 @@
 [license         ]( #../pages/license.md )
 [code of conduct ]( #../pages/code-of-conduct.md )
 [contributing    ]( #../pages/contributing.md )
-[settings        ]( #menus/menu-settings.md )
+<!-- [settings        ]( #menus/menu-settings.md ) -->
 
 <h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/images/graph/ladybug.png width=36 ></h1>

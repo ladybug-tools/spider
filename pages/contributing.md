@@ -34,14 +34,14 @@ You will see the 'Watch' and 'Star' buttons
 ![github-top-right-screen-capture.png]( https://cdn.glitch.com/8f4ee7c6-c279-4f9f-8598-a145f33d2ea6%2Fgithub-top-right-screen-capture.png?1499556746028 =600x100 ) 
 _note the [freeCodeCamp]( https://freecodecamp.com/ ) 'Watch' and 'Star' buttons at top right_
 
-Please click both of these buttons for [XXXXX on GitHub]( https://github.com/xxxxx/xxxxx.github.io ). 
+Please click both of these buttons for [Ladybug Tools on GitHub]( https://github.com/ladybug-tools/ladybug-tools.github.io ). 
 
 Clicking 'Star' makes you feel good - and it lets the world know there is interest in our project. Clicking 'Watch' means you receive an email when there is an issue. Any time you start getting too many messages, you may click this button again to update your preferences.
 
 
 ## Joining the Team
 
-The next thing you can do is to request becoming a member of the organization. If you personally know a member then you might send them a request for an invitation. Anther way is to create an [issue on XXXXX]( https://github.com/xxxxx/xxxxx.github.io/issues ).
+The next thing you can do is to request becoming a member of the organization. If you personally know a member then you might send them a request for an invitation. Anther way is to create an [issue on Ladybug Tools]( https://github.com/ladybug-tools/ladybug-tools.github.io/issues ).
 
 For further details see GitHub's [Managing membership in your organization]( https://help.github.com/articles/managing-membership-in-your-organization/ )
 
@@ -51,7 +51,7 @@ For further details see GitHub's [Managing membership in your organization]( htt
 
 Another very nice thing you may do is set your membership to 'public'.
 
-Got to [XXXXX People]( https://github.com/orgs/xxxxx/people )
+Got to [Ladybug Tools People]( https://github.com/orgs/ladybug-tools/people )
 
 ![github-people-screen-capture.png]( https://cdn.glitch.com/8f4ee7c6-c279-4f9f-8598-a145f33d2ea6%2Fgithub-people-screen-capture.png?1499556745948 =600x100 ) 
 _Member options for GitHub organizations_
