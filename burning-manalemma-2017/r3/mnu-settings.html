@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+</style>
+</head>
+<body>
+
+	<p><button onclick=toggleBackgroundGradient(); > Toggle background</button></p>
+
+	<p><button onclick=pp.controls.autoRotate=!pp.controls.autoRotate; > Toggle terrain rotation</button></p>
+
+	<p><button onclick=pp.bmRotateSpeed=pp.bmRotateSpeed===0.005?0:0.005; > Toggle temple rotation</button></p>
+
+
+
+<script>
+
+	var pp;
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		if ( parent.parent.THREE ) {
+
+			pp = parent.parent;
+
+		} else {
+
+			pp = parent.parent.ifrContents.contentWindow;
+
+		}
+
+	}
+
+
+	function toggleBackgroundGradient() {
+
+		pp.toggleBackgroundGradient();
+
+	}
+
+</script>
+</body>
+</html>

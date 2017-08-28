@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; }
+
+	button { background-color: #ccc; margin: 5px 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; width: 100%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+
+	Go <button onclick=setNextTile(this); title="Go west"  >&#8678;</button>
+	<button onclick=setNextTile(this); title="Go east"  >&#8680;</button>
+
+	<button onclick=setNextTile(this); title="Go north" >&#8679;</button>
+	<button onclick=setNextTile(this); title="Go south" >&#8681;</button>
+
+
+	<p>Zoom <br>
+		<span id=zooms ></span>
+	</p>
+
+	Height Scale
+	<input type="range" id="inpHeightScale" min=0 max=20 step=0.1 value=1 onchange=setNextTile(this); title="Vertical scale" >
+
+
+<script>
+
+	init();
+
+	function init() {
+
+		for ( let i = 1; i < 20; i++ ) {
+
+			if ( i === 16 ) {
+
+				zooms.innerHTML += '<button id="zoomPrevious" onclick="setNextTile(this);" style="background-color:pink;"  >' + i + '</button> ';
+
+			} else {
+
+				zooms.innerHTML += '<button onclick="setNextTile(this);" title="Zoom level" >' + i + '</button> ';
+
+			}
+
+		}
+
+
+	}
+
+
+	function setNextTile( that ){
+
+		if ( parent.parent.THREE ) {
+
+			pp = parent.parent;
+
+		} else {
+
+			pp = parent.parent.ifrContents.contentWindow;
+
+		}
+
+		latitudeDirection = that.title === 'Go north' ? 1 : 0;
+		latitudeDirection = that.title === 'Go south' ? -1 : latitudeDirection;
+		longitudeDirection = that.title === 'Go east' ? 1 : 0;
+		longitudeDirection = that.title === 'Go west' ? -1 : longitudeDirection;
+
+		let heightScale = parseFloat( inpHeightScale.value );
+		let zoom = that.title === "Zoom level" ? parseInt( that.innerText, 10 ) : pp.parameters.zoom;
+
+
+		newLat = pp.parameters.latitude + latitudeDirection * pp.parameters.latDelta;
+
+		newLon = pp.parameters.longitude + longitudeDirection * pp.parameters.lonDelta;
+
+		if ( Math.abs( newLat < 90 )  || Math.abs( newLon < 180 ) ) {
+
+			hash = 'latitude:' + newLat + ',longitude:' + newLon + ',zoom:' + zoom + ',heightScale:' + heightScale;
+			pp.location.hash = hash;
+
+//console.log( '', hash );
+
+			pp.info.innerHTML = 'latitude: ' + newLat.toFixed( 4 ) + ' longitude: ' + newLon.toFixed( 4 ) +
+				' zoom: ' + zoom + ' heightScale: ' + heightScale;
+
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

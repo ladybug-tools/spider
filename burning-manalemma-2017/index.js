@@ -5,7 +5,7 @@
 
 //	defaults.menuPrefix = 'menu';
 
-	defaults.menuWidth = 250;
+	defaults.menuWidth = 275;
 
 	defaults.user = 'ladybug-tools';
 
@@ -13,4 +13,5 @@
 
 	defaults.folder = 'spider/blob/master/burning-manalemma-2017/';
 
-	defaults.url = 'r2/burning-manalemma-2017-r2.html';
+	defaults.url = 'r3/burning-manalemma-2017.html';
+

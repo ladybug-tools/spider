@@ -7,7 +7,9 @@
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; }
 
-	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
+	button { background-color: #ccc; margin: 5px 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; width: 100%;}
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
@@ -76,9 +78,20 @@
 
 		let zoom = parseInt( that.innerText, 10 );
 
-		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+//		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
 
-		pp = parent.ifrContents.contentWindow.parameters;
+
+		if ( parent.parent.THREE ) {
+
+			pp = parent.parent.parameters;
+
+		} else {
+
+			pp = parent.ifrContents.contentWindow.parameters;
+
+		}
+
+		
 
 		hash = 'latitude:' + pp.latitude + ',longitude:' + pp.longitude + ',zoom:' + zoom + '';
 		parent.ifrContents.contentWindow.location.hash = hash;
@@ -99,9 +112,11 @@
 
 		let pp, newLon, hash;
 
-		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+//		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
 
 		pp = parent.ifrContents.contentWindow.parameters;
+
+
 		newLon = pp.longitude + pp.lonDelta;
 
 		if ( newLon < 180 ) {
@@ -147,20 +162,27 @@
 
 		let pp, newLat, hash;
 
-		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+		if ( parent.parent.THREE ) {
 
-		pp = parent.ifrContents.contentWindow.parameters;
-		newLat = pp.latitude + pp.latDelta;
+			pp = parent.parent;
+
+		} else {
+
+			pp = parent.ifrContents.contentWindow;
+
+		}
+
+		newLat = pp.parameters.latitude + pp.parameters.latDelta;
 
 
 		if ( newLat < 90 ) {
 
-			hash = 'latitude:' + newLat + ',longitude:' + pp.longitude + ',zoom:' + pp.zoom + '';
-			parent.ifrContents.contentWindow.location.hash = hash;
+			hash = 'latitude:' + newLat + ',longitude:' + pp.parameters.longitude + ',zoom:' + pp.parameters.zoom + '';
+			pp.location.hash = hash;
 
 			parent.info.innerHTML += 'latitude: ' + newLat.toFixed( 4 ) + '<br>';
 
-			inpHeightScale.value = pp.heightScale;
+			inpHeightScale.value = pp.parameters.heightScale;
 
 		}
 
@@ -181,7 +203,7 @@
 			hash = 'latitude:' + newLat + ',longitude:' + pp.longitude + ',zoom:' + pp.zoom + '';
 			parent.ifrContents.contentWindow.location.hash = hash;
 
-			parent.info.innerHTML += 'latitude: ' + newLat.toFixed( 4 ) + '<br>';
+			parent.debug.innerHTML += 'latitude: ' + newLat.toFixed( 4 ) + '<br>';
 
 			inpHeightScale.value = pp.heightScale;
 

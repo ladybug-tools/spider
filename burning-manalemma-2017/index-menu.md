@@ -1,9 +1,10 @@
-
 <style>
 
-.menuContainer h2 { margin: 10px 0; }
-.menuContainer h3 { margin: 0 }
-.menuContainer p { margin: 0 }
+#divMenu h2 { margin: 10px 0; }
+#divMenu h3 { margin: 10px 0; }
+#divMenu h4 { margin: 0; }
+
+.iframeMenu { border: 0px solid red; box-sizing: border-box; height: 600px; width: 100%; }
 
 </style>
 
@@ -20,8 +21,10 @@
 
 ***
 
+### [Burning mAnalemma 2017 R3]( #r3/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-27' )
 
-### [Burning mAnalemma 2017 R2]( #r2/burning-manalemma-2017-r2.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-26' )
+
+#### [Burning mAnalemma 2017 R2]( #r2/burning-manalemma-2017-r2.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-26' )
 
 
 #### [Burning mAnalemma 2017 R1]( #r1/burning-manalemma-2017-r1.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-24' )

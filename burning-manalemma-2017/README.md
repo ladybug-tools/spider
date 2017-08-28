@@ -115,6 +115,7 @@ More in the next few days. In the mean time here's some background:
 
 ## Issues
 
+* 2017-08-27 ~ incorrect tab title
 
 ## To-Do
 
@@ -131,6 +132,22 @@ More in the next few days. In the mean time here's some background:
 
 
 ## Change Log
+
+
+### 2017-08-27 ~ Theo
+
+* R3
+* Add Geocoder
+* Add Overlays 
+* Many CSS fixes
+* A zoom and pan terrain
+* Add background gradient toggle
+* Add settings menu
+
+* All script must be able to run standalone and within an iframe
+	* Menus must be able to appear in both states
+* Menus on te right
+	* So as not to interfre with TooToo menus
 
 ### 2017-08-26 ~ Theo
 
