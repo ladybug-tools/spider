@@ -140,14 +140,18 @@ More in the next few days. In the mean time here's some background:
 * Add Geocoder
 * Add Overlays 
 * Many CSS fixes
-* A zoom and pan terrain
+* Add zoom and pan terrain
 * Add background gradient toggle
 * Add settings menu
 
-* All script must be able to run standalone and within an iframe
+* All scripts must be able to run standalone and within an iframe
 	* Menus must be able to appear in both states
-* Menus on te right
-	* So as not to interfre with TooToo menus
+* Menus on the right
+	* So as not to interfere with TooToo menus
+
+
+Many new features. Code getting a bit messy
+
 
 ### 2017-08-26 ~ Theo
 
