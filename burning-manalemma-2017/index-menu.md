@@ -26,7 +26,10 @@
 
 ***
 
-### [Burning mAnalemma 2017 R4]( #r4/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-28' )
+### [Burning mAnalemma 2017 R5]( #r5/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-28' )
+
+
+#### [Burning mAnalemma 2017 R4]( #r4/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-28' )
 
 
 #### [Burning mAnalemma 2017 R3]( #r3/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-27' )

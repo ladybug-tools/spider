@@ -93,11 +93,12 @@ More in the next few days. In the mean time here's some background:
 * Go to any location on Earth by entering a place name or address ~ 20 levels of zoom
 * Accurate solar calculator ~ select date and time of Sun position ~ replay the year ~ accurate shadows
 * Display a variety of Solar parameters including analemmas, solar range and solar access
+* Add any geometry or animations ~ include and update parametric components
+* Disassemble and reassemble models
+* Realtime pan, zoom & rotate
 * Access on tablets and mobile devices
-* Add any geometry or animations ! include and update parametric components
-* realtime pan, zoom & rotate
 * JSON-like permalink support
-* save to animated gif files
+* Save to animated GIF files
 * Free and open source
 * Easy-peasy entry level plain-vanilla JavaScript cookbook code
 * All the things we forgot to mention.
@@ -129,6 +130,7 @@ More in the next few days. In the mean time here's some background:
 
 ## To-Do
 
+* 2017-08-29 ~ Add exploed view and sectioning
 * 2017-08-29 ~ Include map type in location hash
 * 2017-08-29 ~ Enable multiple tile terrains
 * 2017-08-29 ~ Add aircraft flying about - with onboard camera
@@ -148,6 +150,11 @@ More in the next few days. In the mean time here's some background:
 
 ## Change Log
 
+
+### 2017-08-29 ~ Theo
+
+* Dis-assemble and re-assemble
+	* Piece of cake
 
 ### 2017-08-28 ~ Theo
 

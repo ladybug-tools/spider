@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 15px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; width: 98% }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "burning-man-temple-2017.js" ></script>
+
+	Temple width <output id=outTempleWidth ></output>
+	<input type="range" id="inpTempleWidth" min=50 max=100 step=1 onclick=rebirthTemple();  >
+
+	Temple depth <output id=outTempleDepth ></output>
+	<input type="range" id="inpTempleDepth" min=50 max=100 step=1 onclick=rebirthTemple();  >
+
+	Timber width <output id=outTimberWidth for="inpTimberWidth" ></output>
+	<input type="range" id="inpTimberWidth" min=0.2 max=2 step=0.2 onclick=rebirthTemple();  >
+
+	Timber height <output id=outTimberHeight  for="inpTimberHeight" ></output>
+	<input type="range" id="inpTimberHeight" min=0.2 max=2 step=0.2 onclick=rebirthTemple() >
+
+
+<script>
+
+
+	init();
+
+	function init() {
+
+		parent.ifrMenuSub.style.height = '200px';
+
+	}
+
+
+	function rebirthTemple() {
+
+		let pic = parent.ifrContents.contentWindow;
+
+		outTimberWidth.value = pic.defaultTimberWidth = parseFloat( inpTimberWidth.value );
+		outTimberHeight.value = pic.defaultTimberHeight = parseFloat( inpTimberHeight.value );
+
+		outTempleWidth.value = pic.defaultTempleWidth = parseFloat( inpTempleWidth.value );
+		outTempleDepth.value = pic.defaultTempleDepth = parseFloat( inpTempleDepth.value );
+
+		pic.drawTemple();
+
+	}
+
+</script>
+</body>
+</html>
