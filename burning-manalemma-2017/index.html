@@ -20,6 +20,12 @@ a { color: crimson; }
 
 blockquote, pre { background-color: #eee; padding: 10px; }
 
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
 .contents { border: 0px solid red; left: 0; margin: 0 auto; max-width: 800px; position: absolute; right: 0; }
 
@@ -142,7 +148,6 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 		let app = location.hash.split( '#' )[ 1 ];
 //console.log( 'url', url );
 
-
 //		if ( window.ifrMenu ) { ifrMenu.src = ''; }
 //		if ( window.divSubMenu ) { divSubMenu.innerHTML = ''; }
 
@@ -158,6 +163,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			divContentsContainer.style.overflow = 'auto';
 
+
 		} else if ( app.includes( '.htm' ) ) {
 
 			divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src=' + url + ' ></iframe>';
@@ -166,9 +172,10 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 		} else {
 
-			ifrMenu.contentWindow.location.hash = url;
+			ifrMenuSub.contentWindow.location.hash = url;
 			if ( parent.divContents ) { divContents.contentWindow.location.hash = url; }
 			ifrContents.contentWindow.location.hash = url;
+
 		}
 
 	}

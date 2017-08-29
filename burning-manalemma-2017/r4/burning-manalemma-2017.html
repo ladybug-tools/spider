@@ -9,19 +9,22 @@
 <!-- Mr.doob
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 -->
-<title>Burning mAnalemma 2017 R3</title>
+<title>Burning mAnalemma 2017 R4</title>
 <meta name=description content="Bringing Burning Man to your phone" >
 <meta name=keywords content="MapBox,Google,Three.js,WebGL,JavaScript,HTML,CSS,GitHub,FOSS" >
-<meta name=date content="2017-08-27" >
+<meta name=date content="2017-08-28" >
 <style id = "foo" >
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
 	a { text-decoration: none; }
 	details { margin: 10px; }
 	h2 { margin: 0; text-align: center; }
-	.subMenu { padding: 10px; background-color: white; }
+
+	.divMenuSub, .iframeMenuSub { padding: 10px; background-color: white; }
 	#header { left: 0; margin: 0 auto; max-width: 600px; position: absolute; right: 0; text-align: center;}
 	#menu { right: 0; margin: 20px; position: absolute; top: 60px; z-index: 10; }
+/*	#ifrMenuSub { height: 500px; } */
+
 </style>
 </head>
 <body>
@@ -40,10 +43,10 @@
 
 	<div id = "menu" >
 
-		<details open >
+		<details>
 			<summary>Menu</summary>
-			<div id=divSubMenu class=subMenu ></div>
-			<iframe id=ifrMenu class=subMenu ></iframe>
+			<div id=divMenuSub class=divMenuSub ></div>
+			<iframe id=ifrMenuSub class=iframeMenuSub ></iframe>
 		</details>
 		<details>
 			<summary>Calculations</summary>
@@ -60,7 +63,43 @@
 
 <script>
 
-//	var defaultMenu = 'r3/menu-burning-manalemma-2017.md';
+
+	var menuSub =
+`
+		<h3><a href=JavaScript:setContents("mnu-analemma3d.html"); >Draw Sun & analemmas</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-geocoder.html"); >Enter place / address</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-move.html"); >Zoom / pan terrain</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-destinations.html"); >Destinations</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-overlays.html"); >Map overlay</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-temple-parameters.html"); >Adjust temple parameters</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-settings.html"); >Settings</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-screen-capture.html"); >Create animated GIF</a></h3>
+
+		<hr>
+
+		<div id = "contents" ></div>
+
+`;
+
+
+	function setContents( file ) {
+
+//console.log( 'ifr', parent );
+
+		if ( !parent.ifrContents ) { location.reload(); }
+
+		folder = parent.THREE ? '' : 'r4/';
+
+		parent.ifrMenuSub.src = folder + file;
+
+	}
+
+
+	parent.setContents = setContents;
+
+
+
+	var revisionNumber = 4;
 
 //Sydney, Australia
 	var defaultLatitude = -33.8675;
@@ -114,14 +153,13 @@
 
 	function init() {
 
-		let folder = window.top === window.self ? '' : 'r3/';
-		ifrMenu.style.display = window.top === window.self ? '' : 'none';
+		let folder = window.top === window.self ? '' : 'r' + revisionNumber + '/';
+		ifrMenuSub.style.display = window.top === window.self ? '' : 'none';
 
-// put in a JavaScript file
-		parent.divMenuSub.innerHTML = 'See <a href="#r3/readme-burning-manalemma-2017.md" >R3 read me</a> for details.';
-		parent.ifrMenuSub.src = folder + "mnu-burning-manalemma-2017.html";
+		txt = 'See <a href="#r' + revisionNumber + '/readme-burning-manalemma-2017.md" >R' + revisionNumber + ' read me</a> for details.';
+		parent.divMenuSub.innerHTML = txt + menuSub;
 
-parent.ifrMenuSub.style.height = '550px';
+//		parent.ifrMenuSub.src = folder + "mnu-burning-manalemma-2017.html";
 
 		title.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>'; // &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
 
@@ -173,6 +211,8 @@ parent.ifrMenuSub.style.height = '550px';
 
 		}
 
+		ifrMenuSub.src = '';
+
 		scene.remove( object3D, ground, structures );
 		object3D = new THREE.Object3D();
 		object3D.name = 'object3D';
@@ -188,27 +228,14 @@ parent.ifrMenuSub.style.height = '550px';
 		scene.remove( lights );
 		camera.remove( lightPointCamera );
 
-		lights = addLights();
-		scene.add( lights );
-
 		drawHelpers();
 
 		drawTerrain();
 
+		lights = addLights();
+		scene.add( lights );
 
-		if ( parent.bm ) {
-
-			scene.remove( bm );
-			bm.geometry.remove();
-			bm.material.remove();
-			bm.texture.remove();
-
-		}
-		bm = drawManalemma();
-		bm.scale.set( 0.3, 0.3, 0.3 );
-		bm.position.set( 50, 24, 50 );
-		bm.name = 'bm';
-		scene.add( bm );
+		drawTemple();
 
 	}
 
@@ -947,7 +974,7 @@ console.log( 'error', e, shape );
 		renderer.render( scene, camera );
 		controls.update();
 
-		bm.rotation.y += bmRotateSpeed;
+		temple.rotation.y += bmRotateSpeed;
 
 		if ( structuresArray.length && parameters.structuresArray.length ) { findIntersects(); }
 

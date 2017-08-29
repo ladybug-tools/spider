@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	h3 { margin: 0; }
+
+	button { background-color: #fcc; }
+
+	#ifr { box-sizing: border-box; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+
+		
+		<h3><a href=JavaScript:setContents("mnu-analemma3d.html"); >Draw Sun & analemmas</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-geocoder.html"); >Enter place / address</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-move.html"); >Zoom / pan terrain</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-destinations.html"); >Destinations</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-overlays.html"); >Map overlay</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-settings.html"); >Settings</a></h3>
+		<h3><a href=JavaScript:setContents("mnu-screen-capture.html"); >Create animated GIF</a></h3>
+
+		<hr>
+
+		<div id = "contents" ></div>
+
+	</div>
+
+<script>
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+	}
+
+	function setContents( url ) {
+
+		contents.innerHTML = '<iframe id=ifr src =' + url +' frameBorder=0 ></iframe>';
+
+		height = document.body.scrollHeight;
+
+		ifr.style.height = ( height + 40 )  + 'px';
+//		parent.ifrMenu.style.height = '450px'; ( 130 + height )  + 'px';
+
+	}
+
+</script>
+</body>
+</html>

@@ -4,7 +4,11 @@
 #divMenu h3 { margin: 10px 0; }
 #divMenu h4 { margin: 0; }
 
-.iframeMenu { border: 0px solid red; box-sizing: border-box; height: 600px; width: 100%; }
+#divMenuSub h3 { margin: 0; }
+
+/*
+.iframeMenu { border: 0px solid red; box-sizing: border-box; width: 100%; }
+*/
 
 </style>
 
@@ -19,9 +23,13 @@
 
 ### [Read Me]( #README.md )
 
+
 ***
 
-### [Burning mAnalemma 2017 R3]( #r3/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-27' )
+### [Burning mAnalemma 2017 R4]( #r4/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-28' )
+
+
+#### [Burning mAnalemma 2017 R3]( #r3/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-27' )
 
 
 #### [Burning mAnalemma 2017 R2]( #r2/burning-manalemma-2017-r2.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-26' )
@@ -34,9 +42,9 @@
 ***
 
 
-<div id = "divSubMenu" ></div>
+<div id = "divMenuSub" ></div>
 
-<iframe id = "ifrMenu" class = "iframeMenu" ></iframe>
+<iframe id = "ifrMenuSub" class = "iframeMenu" ></iframe>
 
 
 
@@ -45,6 +53,5 @@
 [license         ]( #../pages/license.md )
 [code of conduct ]( #../pages/code-of-conduct.md )
 [contributing    ]( #../pages/contributing.md )
-<!-- [settings        ]( #menus/menu-settings.md ) -->
 
 <h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/images/graph/ladybug.png width=36 ></h1>

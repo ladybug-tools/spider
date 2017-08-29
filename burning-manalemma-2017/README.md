@@ -134,6 +134,11 @@ More in the next few days. In the mean time here's some background:
 ## Change Log
 
 
+### 2017-08-28 ~ Theo
+
+* Menu structure simplified. Still needs work though
+
+
 ### 2017-08-27 ~ Theo
 
 * R3
