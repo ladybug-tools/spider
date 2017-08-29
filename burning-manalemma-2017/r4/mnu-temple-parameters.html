@@ -41,10 +41,6 @@
 
 <script>
 
-	let defaultTimberWidth = 0.5;
-	let defaultTimberHeight = 1.0;
-
-	let pic = parent.ifrContents.contentWindow;
 
 	init();
 
@@ -56,6 +52,8 @@
 
 
 	function rebirthTemple() {
+
+		let pic = parent.ifrContents.contentWindow;
 
 		outTimberWidth.value = pic.defaultTimberWidth = parseFloat( inpTimberWidth.value );
 		outTimberHeight.value = pic.defaultTimberHeight = parseFloat( inpTimberHeight.value );

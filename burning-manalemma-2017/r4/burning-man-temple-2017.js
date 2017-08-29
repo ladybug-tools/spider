@@ -2,15 +2,12 @@
 
 	let temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
 
-
 	let material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
 
-	let tParams = {};
-
-	defaultTimberWidth = 0.5;
-	defaultTimberHeight = 1;
-	defaultTempleWidth = 64;
-	defaultTempleDepth = 64;
+	let defaultTimberWidth = 0.5;
+	let defaultTimberHeight = 1;
+	let defaultTempleWidth = 64;
+	let defaultTempleDepth = 64;
 
 	const rowsTop = 20;
 	const rowsWall = 12;
@@ -44,11 +41,6 @@
 			}
 
 		}
-
-
-//console.log( 'defaultTimberHeight', defaultTimberHeight );
-
-//console.log( 'parent.divMenuSub', parent.ifrMenuSub.contentWindow.inpTimberWidth.value );
 
 		temple = new THREE.Object3D();
 
