@@ -225,9 +225,9 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 	function onclickEditButton(){
 
-		const file = location.hash.slice( 1 ) ? location.hash.slice( 1 ) : 'README.md';
+		const file = location.hash.slice( 1 ) ? location.hash.slice( 1 ) : defaults.url; // 'README.md';
 
- 		window.open( 'https://github.com/' + userGitHub + '/' + folderGitHub + file );
+ 		window.open( 'https://github.com/' + userGitHub + '/' + folderGitHub + 'blob/master/' + file );
 
 	}
 

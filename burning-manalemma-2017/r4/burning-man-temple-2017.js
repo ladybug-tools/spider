@@ -234,7 +234,7 @@
 
 		for ( var i = 0; i < rowsWall; i++ ) {
 
-			b = beam.clone()
+			b = beam.clone();
 			b.scale.set( lenX + i * deltaX, timberHeight, lenZ + i * deltaZ );
 			b.position.set( i * offsetX, i * 2 * timberHeight, i * offsetZ );
 			beamGroup.add( b );
@@ -275,7 +275,7 @@
 		temple.add( col );
 
 
-		col = col.clone();;
+		col = col.clone();
 		col.position.set( 8, 0, templeDepth - deltaZ );
 		temple.add( col );
 
@@ -383,7 +383,7 @@
 
 		for ( i = 0; i < 5; i++ ) {
 
-			beamRow = new THREE.Object3D();
+			var beamRow = new THREE.Object3D();
 			drawBeamRow( 4, 0, delta, wallLength - delta + i * 3, timberHeight, timberWidth, beamRow );
 			beamRow.position.set( 2.5 * delta, wallTop + i * 2 * timberHeight, 8 );
 			beamGroup.add( beamRow );

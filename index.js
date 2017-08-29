@@ -11,6 +11,6 @@
 
 	defaults.repository = 'spider';
 
-	defaults.folder = 'ladybug-tools';
+	defaults.folder = 'spider/';
 
 	defaults.url = 'plugins/view-github-issues.html';

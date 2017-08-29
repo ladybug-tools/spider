@@ -125,7 +125,6 @@
 		}
 
 
-
 console.log( 'capturer', capturer );
 
 	}
@@ -135,9 +134,7 @@ console.log( 'capturer', capturer );
 
 
 
-		bm = icw.scene.getObjectByName( 'bm' );
-
-console.log( 'bm', bm );
+		temple = icw.scene.getObjectByName( 'temple' );
 
 parent.parent.icw = icw;
 
@@ -177,7 +174,7 @@ parent.parent.icw = icw;
 		icw.controls.update();
 		icw.renderer.render( icw.scene, icw.camera );
 
-		bm.rotation.y += 0.03;
+		temple.rotation.y += 0.03;
 
 		if ( step >= 0 ) {
 

@@ -88,13 +88,23 @@ More in the next few days. In the mean time here's some background:
 
 * 3D terrain for the entire Globe
 * Support for 19 levels of zoom
-* 3D buildings at zoom levels 15 and 16
+* 3D buildings available at zoom levels 15 and 16
 * Many raster map overlays from Mapbox, Google, OSM etc
-* Go to any location on Earth by entering a place name or address
-* Display a variety of Solar parameters analemmas, solar range and solar access
+* Go to any location on Earth by entering a place name or address ~ 20 levels of zoom
+* Accurate solar calculator ~ select date and time of Sun position ~ replay the year ~ accurate shadows
+* Display a variety of Solar parameters including analemmas, solar range and solar access
 * Access on tablets and mobile devices
+* Add any geometry or animations ! include and update parametric components
+* realtime pan, zoom & rotate
+* JSON-like permalink support
+* save to animated gif files
+* Free and open source
+* Easy-peasy entry level plain-vanilla JavaScript cookbook code
+* All the things we forgot to mention.
 
 
+
+3D terrain + 3D buildings (where available) + 2D map overlays + accurate solar calculator + Sun positioning + accurate shadows + any latitude and longitude + any zoom level + any date and time + add any geometry or animations + include and update parametric components + realtime pan, zoom & rotate + permalink support + save to animated gif files + free and open source + easy-peasy entry level plain-vanilla JavaScript cookbook code + all the things we forgot to mention.
 
 ### Vision
 
@@ -119,6 +129,11 @@ More in the next few days. In the mean time here's some background:
 
 ## To-Do
 
+* 2017-08-29 ~ Include map type in location hash
+* 2017-08-29 ~ Enable multiple tile terrains
+* 2017-08-29 ~ Add aircraft flying about - with onboard camera
+* 2017-08-29 ~ Add people dancing in the street
+* 2017-08-29 ~ Add step-by-step assembly process
 * 2017-07-31 ~ Add credits to Mapbox, Google, Mr.doob, GitHub and many others
 * 2017-07-31 ~ Improve geoJSON reading capabilities
 * 2017-07-25 ~ Select quality of raster tile display
@@ -136,7 +151,10 @@ More in the next few days. In the mean time here's some background:
 
 ### 2017-08-28 ~ Theo
 
-* Menu structure simplified. Still needs work though
+* Menu structure simplified. Still needs more work though
+* Adds the Temple as a parametric component
+	* Adjust overall Temple width and depth, individual timbers width and depth
+* Add more destinations
 
 
 ### 2017-08-27 ~ Theo
