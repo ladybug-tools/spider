@@ -20,6 +20,12 @@ a { color: crimson; }
 
 blockquote, pre { background-color: #eee; padding: 10px; }
 
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 5px 28px; }
+	button:hover {background: #ccc; color: #fff; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
 .contents { border: 0px solid red; left: 0; margin: 0 auto; max-width: 800px; position: absolute; right: 0; }
 

@@ -86,19 +86,19 @@ More in the next few days. In the mean time here's some background:
 
 ### Features
 
-* 3D terrain for the entire Globe
+* 3D terrain in very high resolution for the entire Globe
 * Support for 19 levels of zoom
-* 3D buildings available at zoom levels 15 and 16
+* 3D building data available at zoom levels 15 and 16 ~ building placed at their correct elevation
 * Many raster map overlays from Mapbox, Google, OSM etc
-* Go to any location on Earth by entering a place name or address ~ 20 levels of zoom
+* Go to any location on Earth by entering a place name or address
 * Accurate solar calculator ~ select date and time of Sun position ~ replay the year ~ accurate shadows
 * Display a variety of Solar parameters including analemmas, solar range and solar access
 * Add any geometry or animations ~ include and update parametric components
 * Disassemble and reassemble models
-* Realtime pan, zoom & rotate
+* Real-time pan, zoom & rotate
 * Access on tablets and mobile devices
 * JSON-like permalink support
-* Save to animated GIF files
+* Save to animated GIF files ~ with custom camera paths and event handling
 * Free and open source
 * Easy-peasy entry level plain-vanilla JavaScript cookbook code
 * All the things we forgot to mention.
@@ -112,6 +112,7 @@ More in the next few days. In the mean time here's some background:
 * Taking maps to new places
 
 ## Things you can do using the script
+
 
 * Use one/two/three fingers to rotate/zoom/pan the display in 3D
 	* Or left/scroll/right with your pointing device
@@ -128,14 +129,15 @@ More in the next few days. In the mean time here's some background:
 
 * 2017-08-27 ~ incorrect tab title
 
+
 ## To-Do
 
-* 2017-08-29 ~ Add exploed view and sectioning
+* 2017-08-29 ~ Add mouseover highlights
+* 2017-08-29 ~ Add exploded view and sectioning
 * 2017-08-29 ~ Include map type in location hash
 * 2017-08-29 ~ Enable multiple tile terrains
 * 2017-08-29 ~ Add aircraft flying about - with onboard camera
 * 2017-08-29 ~ Add people dancing in the street
-* 2017-08-29 ~ Add step-by-step assembly process
 * 2017-07-31 ~ Add credits to Mapbox, Google, Mr.doob, GitHub and many others
 * 2017-07-31 ~ Improve geoJSON reading capabilities
 * 2017-07-25 ~ Select quality of raster tile display
@@ -155,6 +157,9 @@ More in the next few days. In the mean time here's some background:
 
 * Dis-assemble and re-assemble
 	* Piece of cake
+	* 2017-08-29 ~ Add step-by-step assembly process
+* Custom animated GIF creator
+	* Took longer to build
 
 ### 2017-08-28 ~ Theo
 
