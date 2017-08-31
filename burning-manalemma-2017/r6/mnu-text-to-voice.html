@@ -28,8 +28,11 @@
 		<p><button onclick='sayThis("“Do you want cream or sugar?”")'; "What the Java Cow asks" >Say test test</button></p>
 		<p><button onclick='sayTextFromPlaya()'; >Say text from the Playa</button></p>
 		<p>from: <a href="http://sound-fix.com/2015920ill-be-right-back-other-hilarious-things-overheard-at-burning-man/" target="_blank">“I’ll be right back” & Other Hilarious Things Overheard at Burning Man</a></p>
-		<p><button onclick=synth.pause();count=-1; >Shut Up!</button></p>
-		<p><button onclick='onExplainMapOverlay()'; >About Map Overlay</button></p>
+		<p><button onclick=synth.cancel();count=-1; >Shut Up!</button></p>
+
+		<hr>
+
+		<p>'Theo in a bottle'<br><button onclick='count=0;onExplainMapOverlay()'; >About Map Overlay</button></p>
 		<div id = "contents" ></div>
 		<p>
 	</div>
@@ -77,6 +80,16 @@
 
 	];
 
+	let textOverlay = [
+
+		'The map overlays are like carpet underlays but placed on the top side',
+		'- just like the wet tee-shirt adorns the human body.',
+		'Click on any of the map sources - and',
+		'Bingo!',
+		'Images from that very nice source become the new overlay.',
+		'Thanks to Google, MapBox, Open Street Map and ESRI',
+		'Now let\'s get back to the Playa!'
+	];
 
 	let count = -1;
 	const b = '<br>';
@@ -93,7 +106,7 @@
 
 		} else {
 
-			parent.ifrMenuSub.style.height = '250px';
+			parent.ifrMenuSub.style.height = '350px';
 
 		}
 
@@ -112,7 +125,7 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 		synth.onvoiceschanged = function() {
 
 			voices = window.speechSynthesis.getVoices();
-			sayThis( 'Hello, world!' );
+//			sayThis( 'Hello, world!' );
 
 		}
 
@@ -121,6 +134,8 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 //		sayThis( 'e' );
 
 // console.log( 'synth', synth );
+
+		window.addEventListener( 'unload', function() { synth.cancel(); }, false );
 
 	}
 
@@ -169,7 +184,7 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 
 		synth.cancel();
 
-		count = ++count < textPlaya.length ? count : 0;
+//		count = ++count < textPlaya.length ? count : 0;
  
 		utterThis = new SpeechSynthesisUtterance( textPlaya[ Math.floor( Math.random() * textPlaya.length ) ] );
 
@@ -186,8 +201,9 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 
 		}
 
-		utterThis.rate = 0.7;
-		utterThis.pitch = 1.1;
+		utterThis.rate = 0.6;
+		utterThis.pitch = 0.8;
+		utterThis.volume = 0.5;
 
 		utterThis.onend = function(){ if ( count ) { sayTextFromPlaya(); } }
 
@@ -200,17 +216,24 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 
 //console.log( '', 23 );
 
-		parent.ifrContents.src = 'r6/mnu-overlays.html';
+		parent.ifrContents.src = 'r6/mnu-overlays.html#go';
+
+console.log( 'nn', parent.mnuOverlays );
+
+		parent.mnuOverlays.focus();
 
 		text = "oo"; // 
 
-		text = "Map overlays are just like carpet underlys but placed on the other side - just like the wet tee-shirt adorns the human body."
+
 
 		var utterThis;
 
 		synth.cancel();
 
-		utterThis = new SpeechSynthesisUtterance( text );
+		utterThis = new SpeechSynthesisUtterance( textOverlay[ count ] );
+
+		count = count++ < textOverlay.length ? count : -1;
+
 
 		for ( i = 0; i < voices.length ; i++ ) {
 
@@ -227,9 +250,9 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 
 		utterThis.rate = 0.6;
 		utterThis.pitch = 0.8;
-		utterThis.volume = 0.8;
+		utterThis.volume = 0.5;
 
-		utterThis.onend = function(){ console.log( 'end', 23 ); }
+		utterThis.onend = function(){ if ( count ) { onExplainMapOverlay(); } }
 
 		synth.speak( utterThis );
 
