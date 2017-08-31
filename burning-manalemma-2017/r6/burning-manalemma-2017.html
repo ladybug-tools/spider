@@ -21,6 +21,8 @@
 	h2 { margin: 0; text-align: center; }
 
 	.divMenuSub, .iframeMenuSub { padding: 10px; background-color: white; }
+
+
 	#header { left: 0; margin: 0 auto; max-width: 600px; position: absolute; right: 0; text-align: center;}
 	#menu { right: 0; margin: 20px; position: absolute; top: 60px; z-index: 10; }
 /*	#ifrMenuSub { height: 500px; } */
@@ -73,10 +75,10 @@
 		'<h3><a href=JavaScript:setContents("mnu-destinations.html"); >Destinations</a></h3>' +
 		'<h3><a id=mnuOverlays href=JavaScript:setContents("mnu-overlays.html"); >Map overlay</a></h3>' +
 		'<h3><a href=JavaScript:setContents("mnu-temple-parameters.html"); >Adjust temple parameters</a></h3>' +
-		'<h3><a href=JavaScript:setContents("mnu-disassemble-assemble.html"); >Disassemble & Reassemble</a></h3>' +
+		'<h3><a href=JavaScript:setContents("mnu-disassemble-assemble.html" title="new 2017-08-29" ); >Disassemble & Reassemble</a></h3>' +
 		'<h3><a href=JavaScript:setContents("mnu-settings.html"); >Settings</a></h3>' +
 		'<h3><a href=JavaScript:setContents("mnu-screen-capture.html"); >Create animated GIF</a></h3>' +
-		'<h3><a href=JavaScript:setContents("mnu-text-to-voice.html"); >Overheard on the Playa</a></h3>' +
+		'<h3 class=highlight ><a href=JavaScript:setContents("mnu-text-to-voice.html"); title="Click to listen" >Overheard on the Playa</a></h3>' +
 		'<hr>' +
 
 		'<div id = "contents" ></div>' +
@@ -586,6 +588,7 @@ console.log( 'folder', folder );
 
 					loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
 //console.log( '', selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+
 				}
 
 			}
