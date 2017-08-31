@@ -5,7 +5,7 @@
 
 //	defaults.menuPrefix = 'menu';
 
-	defaults.menuWidth = 275;
+	defaults.menuWidth = 300;
 
 	defaults.user = 'ladybug-tools';
 

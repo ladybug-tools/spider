@@ -23,12 +23,13 @@
 </head>
 <body>
 
-	<div id = "menubbb" >
+	<div id = "menu" >
 		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
 		<p><button onclick='sayThis("“Do you want cream or sugar?”")'; "What the Java Cow asks" >Say test test</button></p>
 		<p><button onclick='sayTextFromPlaya()'; >Say text from the Playa</button></p>
 		<p>from: <a href="http://sound-fix.com/2015920ill-be-right-back-other-hilarious-things-overheard-at-burning-man/" target="_blank">“I’ll be right back” & Other Hilarious Things Overheard at Burning Man</a></p>
 		<p><button onclick=synth.pause();count=-1; >Shut Up!</button></p>
+		<p><button onclick='onExplainMapOverlay()'; >About Map Overlay</button></p>
 		<div id = "contents" ></div>
 		<p>
 	</div>
@@ -90,13 +91,15 @@
 
 			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
 
-		}
+		} else {
 
-		parent.ifrMenuSub.style.height = '250px';
+			parent.ifrMenuSub.style.height = '250px';
+
+		}
 
 		if ( 'speechSynthesis' in window ) {
 
-console.log( 'You\'re good to go!' )
+//console.log( 'You\'re good to go!' )
 
 		} else {
 
@@ -107,8 +110,6 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 		synth = window.speechSynthesis;
 
 		synth.onvoiceschanged = function() {
-
-console.log( 'cc', 23);
 
 			voices = window.speechSynthesis.getVoices();
 			sayThis( 'Hello, world!' );
@@ -155,7 +156,7 @@ console.log( 'cc', 23);
 //		utterThis.rate = 0.5;
 
 //		utterThis.onstart = function(){ console.log( 'start', 11 ); }
-		utterThis.onend = function(){ console.log( 'end', 88 ); }
+//		utterThis.onend = function(){ console.log( 'end', 88 ); }
 
 		synth.speak( utterThis );
 
@@ -188,11 +189,52 @@ console.log( 'cc', 23);
 		utterThis.rate = 0.7;
 		utterThis.pitch = 1.1;
 
-		utterThis.onend = function(){ if( count ) { sayTextFromPlaya(); } }
+		utterThis.onend = function(){ if ( count ) { sayTextFromPlaya(); } }
 
 		synth.speak( utterThis );
 
 	}
+
+
+	function onExplainMapOverlay() {
+
+//console.log( '', 23 );
+
+		parent.ifrContents.src = 'r6/mnu-overlays.html';
+
+		text = "oo"; // 
+
+		text = "Map overlays are just like carpet underlys but placed on the other side - just like the wet tee-shirt adorns the human body."
+
+		var utterThis;
+
+		synth.cancel();
+
+		utterThis = new SpeechSynthesisUtterance( text );
+
+		for ( i = 0; i < voices.length ; i++ ) {
+
+			if ( voices[ i ].voiceURI.toLowerCase().includes( 'female' ) ) {
+// console.log( '', voices[ i ].voiceURI.toLowerCase() );
+
+				utterThis.voice = voices[ i ];
+
+				break;
+
+			}
+
+		}
+
+		utterThis.rate = 0.6;
+		utterThis.pitch = 0.8;
+		utterThis.volume = 0.8;
+
+		utterThis.onend = function(){ console.log( 'end', 23 ); }
+
+		synth.speak( utterThis );
+
+	}
+
 
 </script>
 </body>

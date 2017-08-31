@@ -12,9 +12,12 @@
 </head>
 <body>
 
-Map Overlay<br>
 
-<select id=selMap size=10 onchange=setMapOverlay(); ></select>
+Map Overlay
+
+<p> <select id=selMap size=10 onchange=setMapOverlay(); ></select></p>
+
+<p><img id=imgOverlay ></p>
 
 <script>
 
@@ -41,7 +44,6 @@ Map Overlay<br>
 
 	function init() {
 
-
 		for ( var i = 0; i < mapTypes.length; i++ ) {
 
 			selMap.appendChild( document.createElement( 'option' ) );
@@ -49,7 +51,15 @@ Map Overlay<br>
 
 		}
 
-		parent.ifrMenuSub.style.height = '250px';
+		if ( window.top === window.self ) {
+
+//			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '250px';
+
+		}
 
 	}
 
@@ -60,7 +70,26 @@ Map Overlay<br>
 
 //		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
 
-		if ( parent.parent.THREE ) {
+		if ( window.top === window.self ) {
+
+			zoom = 11;
+			x = 345;
+			y = 769;
+
+			mapType = mapTypes[ selMap.selectedIndex ];
+
+			var urlBase = mapType[ 1 ];
+
+			if ( selMap.selectedIndex < 4 ) {
+
+				imgOverlay.src = urlBase + x + '&y=' + y + '&z=' + zoom
+
+			} else {
+
+				imgOverlay.src = urlBase + zoom + '/' + x + '/' + y + '.png';
+
+			}
+		} else if ( parent.parent.THREE ) {
 
 			parent.parent.mapType = mapTypes[ selMap.selectedIndex ];
 			parent.parent.selectedIndex = selMap.selectedIndex;

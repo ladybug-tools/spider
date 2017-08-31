@@ -86,13 +86,27 @@
 
 	function setContents( file ) {
 
-//console.log( 'ifr', parent );
+		if ( parent && !parent.ifrContents ) { location.reload(); }
 
-		if ( !parent.ifrContents ) { location.reload(); }
+//		if ( parent.ifrContents.src.includes( 'burning-manalemma-2017.html' ) === false ) { location.reload(); }
 
-		folder = parent.THREE ? '' : 'r' + revisionNumber + '/';
+pp = parent;
+console.log( 'ifr', parent, pp );
 
-		parent.ifrMenuSub.src = folder + file;
+//		if ( parent.ifrContents ) { console.log( 'gg', parent.ifrContents.src );location.reload(); }
+
+
+		folder = ( parent && parent.THREE ) ? '' : 'r' + revisionNumber + '/';
+console.log( 'folder', folder );
+		if ( parent ) { 
+
+			parent.ifrMenuSub.src = folder + file; 
+
+		} else {
+
+			window.location.href = "index.html";
+
+		}
 
 	}
 
