@@ -26,7 +26,25 @@
 
 ***
 
-### [Burning mAnalemma 2017 R5]( #r5/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-28' )
+### [Burning mAnalemma 2017 R6 dev]( #r6/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-28' )
+
+
+
+
+***
+
+
+<div id = "divMenuSub" ></div>
+
+<iframe id = "ifrMenuSub" class = "iframeMenu" ></iframe>
+
+
+
+***
+
+<small title="Watch the progress unfold" >All of these should work too</small>
+
+#### [Burning mAnalemma 2017 R5]( #r5/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-29' )
 
 
 #### [Burning mAnalemma 2017 R4]( #r4/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-28' )
@@ -39,16 +57,6 @@
 
 
 #### [Burning mAnalemma 2017 R1]( #r1/burning-manalemma-2017-r1.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-24' )
-
-
-
-***
-
-
-<div id = "divMenuSub" ></div>
-
-<iframe id = "ifrMenuSub" class = "iframeMenu" ></iframe>
-
 
 
 ***
