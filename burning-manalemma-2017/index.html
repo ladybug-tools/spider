@@ -6,7 +6,7 @@
 <meta name = description content = "File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name = keywords content = "ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
 <meta name = date content = "2017-08-16" >
-<title></title>
+<title>Index 8</title>
 <style id = "foo" >
 
 /* items in mostly in order of: tag/class/id then alphabetical */
@@ -32,6 +32,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 .contentsContainer { height: 100%; width: 100%; }
 
 	.highlight { background-color: yellow; }
+	.updates { background-color: lightgreen; }
 
 .iframeMenu { border-width: 0; height: 100%; margin: 0; width: 100%; }
 .iframeContents { border-width: 0; height: 100%; margin: 0; width: 100%; }
@@ -103,6 +104,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 
 <script>
+
+	var aaa = 123;
 
 	var defaults = defaults || {};
 
@@ -251,9 +254,19 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			target.innerHTML = converter.makeHtml( xhr.responseText );
 
-			title = url.split( '/' ).pop().replace( /-|.md|.html/g, ' ' );
+			if ( url === 'index-menu.md' ) {
 
-			document.title = title + ' - ' + userGitHub;
+				document.title = 'Home Page - Burning mAnalemma';
+
+			} else {
+
+				title = url.split( '/' ).pop().replace( /-|.md|.html/g, ' ' );
+
+//				document.title = title + ' - ' + userGitHub;
+				document.title = title + ' - Burning mAnalemma';
+
+
+			}
 
 			window.scrollTo( 0, 0 );
 

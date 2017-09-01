@@ -132,6 +132,10 @@ More in the next few days. In the mean time here's some background:
 
 ## To-Do
 
+* 2017-08-31 ~ update copyable permalink update with any moves/zooms
+* 2017-08-31 ~ Get Temple to touch the ground. Add physics
+* 2017-08-31 ~ Add Select skybox
+* 2017-08-31 ~ Separate terrain code from basic Three.js loader
 * 2017-08-29 ~ Add mouseover highlights
 * 2017-08-29 ~ Add exploded view and sectioning
 * 2017-08-29 ~ Include map type in location hash
@@ -152,6 +156,28 @@ More in the next few days. In the mean time here's some background:
 
 ## Change Log
 
+* R7
+* Add start of credits page
+* Add more tooltips
+* Fixes to temple params, disassemble etc
+* Make several plugins more standalone
+* Add wireframe to Settings
+* Add move temple vertical position
+
+### 2017-08-30 ~ Theo
+
+* R6
+* Overheard on the Playa
+	* Text to voice menu
+	* Test button
+	* Speak over twenty 'Overheard on the Playa' phrases
+* About Map Overlay
+	* Extra button on 'Overheard on the Playa'
+	* Calls special helper script
+	* Provides animated/visual/aural overview of the Map overlay functionality
+	* Almost as good as Windows Paperclip
+
+* https://github.com/ladybug-tools/spider/issues/6
 
 ### 2017-08-29 ~ Theo
 

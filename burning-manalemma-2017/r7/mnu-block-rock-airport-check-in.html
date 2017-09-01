@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	select { width: 100%; }
+
+	#menu { margin: 0; position: absolute; max-width: 300px; right: 20px; }
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+		<div><select id=selAircraft size=20 ></select>
+		<div id = "contents" ></div>
+	</div>
+
+<script>
+
+	let tree, aircraft;
+	let pcc;
+	let THREE;
+	let scene;
+
+	const b = '<br>';
+
+	var axisHelper;
+	var renderer, camera, controls;
+
+	init();
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+			loadThreejs();
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '350px';
+
+			pcc = parent.ifrContents.contentWindow;
+			THREE = pcc.THREE;
+			scene = pcc.scene;
+
+		}
+
+		selAircraft.onchange=getFgxAircraft;
+
+		getFgxFleet();
+
+	}
+
+
+
+	function getFgxFleet() {
+
+		let urlCORS, url;
+
+		urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		url = 'https://api.github.com/repos/fgx/fgx-aircraft/git/trees/gh-pages?recursive=1';
+
+		requestFile( url, callbackFleet );
+
+	}
+
+
+
+	function callbackFleet( xhr ) {
+
+		let response, json, lines;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		json = JSON.parse( response );
+//console.log( '', json );
+
+		tree = json.tree;
+
+		for ( var i = 0; i < tree.length; i++ ) {
+
+			item = tree[ i ];
+
+			if ( item.path.endsWith( 'js') ) {
+
+				craft = item.path.split( '/' ).pop();
+
+				selAircraft.innerHTML += '<option value=' + i + '>' + craft + ' - ' + item.size.toLocaleString() + ' bytes</option>';
+
+			}
+
+		}
+
+		selAircraft.selectedIndex = 4;
+
+	}
+
+
+
+
+	function getFgxAircraft() {
+
+		let url = tree[ selAircraft.value ].path;
+//console.log( '', url );
+
+		loader = new THREE.JSONLoader();
+
+		loader.load( 'https://fgx.github.io/fgx-aircraft/' + url, function( geometry ) { addAircraft( geometry ); } );
+
+	}
+
+
+
+	function addAircraft( geometry ) {
+//console.log( 'geometry', geometry );
+
+		let scale = 10 / geometry.boundingSphere.radius;
+
+		geometry.applyMatrix( new THREE.Matrix4().makeScale( scale, scale, scale ) );
+//console.log( 'rad', scale );
+
+		let material = new THREE.MeshNormalMaterial( { side: 2 } );
+
+		scene.remove( aircraft );
+
+		aircraft = new THREE.Mesh( geometry, material );
+
+		aircraft.position.set( 50, 50, 50 );
+
+		scene.add( aircraft );
+
+	}
+
+
+
+	function loadThreejs() {
+
+		var s1 = document.body.appendChild( document.createElement('script') );
+		s1.onload = loadOrbit;
+		s1.src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js";
+
+	}
+
+
+	function loadOrbit() {
+
+		var s2 = document.body.appendChild( document.createElement('script') );
+		s2.onload = initThreejs;
+		s2.src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js";
+
+	}
+
+
+	function initThreejs() {
+
+		if ( !THREE || !THREE.OrbitControls ) { return;}
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 100, 100, 100 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		axisHelper = new THREE.AxisHelper( 100 );
+		axisHelper.name = 'axisHelper';
+		scene.add( axisHelper );
+
+		animate();
+
+	}
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+//		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

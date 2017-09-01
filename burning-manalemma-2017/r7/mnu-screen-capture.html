@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; max-width: 300px; }
+
+	button { background-color: #bbb; border: none; padding: 5px 10px;}
+	button:hover { color: #fff; cursor: pointer; opacity: 1; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+<script src=https://rawgit.com/spite/ccapture.js/dev/build/CCapture.all.min.js ></script>
+
+<script src=https://rawgit.com/spite/ccapture.js/master/src/Whammy.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/tar.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/download.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/gif.js ></script>
+
+
+	Screen Capture
+
+	<p><button onclick=setIframe(); >Set Iframe</button></p>
+
+	<p><button onclick=updateScene(); >update scene</button></p>
+
+	<p><button onclick=capturer.start(); >capture start</button></p>
+
+	<p><button onclick="capturer.stop();step=-1;" >capture stop</button></p>
+
+	<p><button onclick=capturer.save(); >capture save</button></p>
+
+
+	Camera Radius <output id=outCameraRadius for="inpCameraRadius" ></output>
+	<input type="range" id="inpCameraRadius" onchange=outCameraRadius.value=cameraRadius=this.value; min=1 max=100 value=50 >
+
+	Camera Height <output id=outCameraHeight for="inpCameraHeight" ></output>
+	<input type="range" id="inpCameraHeight" onchange=cameraHeight=this.value; min=1 max=100 value=50 >
+
+
+	<p><button id=toggleVisible >Toggle Helpers</button></p>
+
+
+<script>
+
+
+// https://github.com/spite/ccapture.js/
+
+	let cameraRadius = 50;
+	let cameraHeight = 50;
+
+//	var capturer = new CCapture( { format: 'webm' } );
+
+// Create a capturer that exports an animated GIF
+// Notices you have to specify the path to the gif.worker.js
+
+//	var capturer = new CCapture( { format: 'gif' } );
+
+//	var capturer = new CCapture( { format: 'gif', workersPath: 'js/' } );
+// Create a capturer that exports PNG images in a TAR file
+//	var capturer = new CCapture( { format: 'png' } );
+
+// Create a capturer that exports JPEG images in a TAR file
+//	var capturer = new CCapture( { format: 'jpg' } );
+
+	var step = 0;
+	var icw;
+	var radius;
+
+	capturer = new CCapture( {
+
+		verbose: true,
+		display: true,
+		name: 'demo',
+		framerate: 30, //framerate
+//			motionBlurFrames: ( 960 / framerate ) * ( document.querySelector('input[name="motion-blur"]').checked ? 1 : 0 ),
+		quality: 50,
+		format: 'gif', //document.querySelector('input[name="encoder"]:checked').value,
+		workersPath: './js/',
+//			timeLimit: 2,  // number of seconds to capture
+//		frameLimit: 240,
+		autoSaveTime: 0,
+		timeLimit: 8,
+//			onProgress: function( p ) { progress.style.width = ( p * 100 ) + '%' }
+
+	} );
+
+	init();
+
+
+	function init() {
+
+		parent.ifrMenuSub.style.height = '400px';
+
+	}
+
+
+
+	function setIframe() {
+
+		const style = '"height:360px; margin: 100px 0 0 200px; width: 480px; position: absolute;"';
+
+//		const url = !parent.ifrContents ? 'analemma3-3d.html' : parent.ifrContents.src;
+
+//		parent.main.innerHTML = '<iframe id=ifrContents src=' + url + ' style= ' + style + ' ></iframe>';
+
+		if ( parent.parent.THREE ) {
+
+			icw = parent.parent;
+			parent.parent.renderer.domElement.style.cssText = 'border: 1px solid crimson; left: 0; margin: 0 auto; width: 360px; height: 320px; position: absolute; right: 0; top: 100px;';
+
+
+		} else {
+
+			icw = parent.parent.ifrContents.contentWindow;
+			parent.parent.ifrContents.style.cssText = 'border: 1px solid crimson; left: 0; margin: 0 auto; width: 360px; height: 300px; position: absolute; right: 0; top: 100px;';
+
+		}
+
+
+console.log( 'capturer', capturer );
+
+	}
+
+
+	function updateScene() {
+
+
+		temple = icw.scene.getObjectByName( 'temple' );
+
+parent.parent.icw = icw;
+
+		icw.controls.autoRotate = false;
+		icw.renderer.setClearColor( 0xc0c0f8 );
+
+//		radius = icw.camera.position.distanceTo( new icw.THREE.Vector3( 0, icw.camera.position.y, 0 ) );
+
+		cameraRadius = 0.5 * icw.camera.position.distanceTo( icw.controls.target );
+
+		step = 0;
+		icw.animate = animateCapture;
+
+		toggleVisible.onclick = function() {
+
+			icw.menu.style.display = icw.menu.style.display === 'none' ? '' : 'none';
+			icw.header.style.display = icw.header.style.display === 'none' ? '' : 'none';
+			if ( icw.cameraHelper ) { icw.cameraHelper.visible = icw.axisHelper.visible=!icw.axisHelper.visible; }
+
+		};
+
+	}
+
+
+
+	function endTheAction() {
+
+		step = -1;
+
+	}
+
+
+
+	var animateCapture = function () {
+
+		icw.requestAnimationFrame( animateCapture );
+		icw.controls.update();
+		icw.renderer.render( icw.scene, icw.camera );
+
+		temple.rotation.y += 0.03;
+
+		if ( step >= 0 ) {
+
+			step += Math.PI / 160;
+
+			icw.camera.position.x = 50 + cameraRadius * Math.sin( step );
+			icw.camera.position.y = cameraHeight;
+			icw.camera.position.z = 50 + cameraRadius * Math.cos( step );
+
+			capturer.capture( icw.renderer.domElement );
+
+		}
+
+	}
+
+</script>
+</body>
+</html>

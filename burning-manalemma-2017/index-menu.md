@@ -12,35 +12,37 @@
 
 </style>
 
-[ladbug tools]( https://ladybug-tools.github.io/ ) &raquo;
+[ladybug tools]( https://ladybug-tools.github.io/ "Open source, performance-based solutions for the built environment" ) &raquo;
 
-[Spider]( ../index.html ) &raquo;
+[Spider]( ../index.html "Spin your web in 3D" ) &raquo;
 
-## [Burning mAnalemma 2017]( index.html )
+## [Burning mAnalemma 2017]( index.html "Feel the heat of the Playa" )
 
 <a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js / frames per second" >Show fps statistics</a>
 
 
-### [Read Me]( #README.md )
+### [Read Me]( #README.md "The big picture" )
 
 
 ***
 
-### [Burning mAnalemma 2017 R6]( #r6/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-30' )
+### [Burning mAnalemma 2017 R7]( #r7/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-31' )
 
 
 ***
 
-
-<div id = "divMenuSub" ></div>
+<div id = "divMenuSub" >
+</div>
 
 <iframe id = "ifrMenuSub" class = "iframeMenu" ></iframe>
-
 
 
 ***
 
 <small title="Watch the progress unfold" >All of these should work too</small>
+
+#### [Burning mAnalemma 2017 R6]( #r6/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-30' )
+
 
 #### [Burning mAnalemma 2017 R5]( #r5/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-29' )
 
@@ -59,8 +61,9 @@
 
 ***
 
-[license         ]( #../pages/license.md )
-[code of conduct ]( #../pages/code-of-conduct.md )
-[contributing    ]( #../pages/contributing.md )
+[credits         ]( #../pages/credits.md "Nice peeps!" )
+[license         ]( #../pages/license.md "Do as you please" )
+[code of conduct ]( #../pages/code-of-conduct.md "Play hard and play fair" )
+[contributing    ]( #../pages/contributing.md "How to get started" )
 
-<h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/images/graph/ladybug.png width=36 ></h1>
+<h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/images/graph/ladybug.png width=36 title="Hi there!" ></h1>

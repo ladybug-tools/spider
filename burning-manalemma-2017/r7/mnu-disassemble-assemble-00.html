@@ -30,8 +30,6 @@
 <script src=https://rawgit.com/spite/ccapture.js/master/src/gif.js ></script>
 
 
-	<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
-
 	<p><button onclick=onDisassemble(); >Disassemble</button></p>
 
 	<p><button onclick=onReassemble(); >Reassemble</button></p>
@@ -40,22 +38,21 @@
 
 	<p><button onclick=onMakeAnimation(); >Make Animated GIF</button></p>
 
-	<p><button onclick=onAnimationSave(); >capture save</button></p>
 
-	<p id=contents ></p>
+	<p><button onclick=capturer.save(); >capture save</button></p>
 
 <script>
 
 //	const b = '<br>';
 
-	let pcc;
-	let THREE;
-	let renderer;
-	let scene;
-	let camera;
-	let controls;
+	const pcc = parent.ifrContents.contentWindow;
+	let THREE = pcc.THREE;
+	let renderer = pcc.renderer;
+	let scene = pcc.scene;
+	let camera = pcc.camera;
+	let controls = pcc.controls;
 
-	let temple;
+	let temple = scene.getObjectByName( 'temple' );
 	let itemsAss, itemsDis;
 	let count = 0;
 	let frame = 0;
@@ -68,32 +65,13 @@
 
 	function init() {
 
-		if ( window.top === window.self ) {
-
-			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
-
-		} else {
-
-			pcc = parent.ifrContents.contentWindow;
-			THREE = pcc.THREE;
-			renderer = pcc.renderer;
-			scene = pcc.scene;
-			camera = pcc.camera;
-			controls = pcc.controls;
-
-			temple = scene.getObjectByName( 'temple' );
-			itemsAss, itemsDis;
-
-			parent.ifrMenuSub.style.height = '250px';
-
-		}
+		parent.ifrMenuSub.style.height = '250px';
 
 	}
 
 
 	function onDisassemble() {
 
-		if ( !pcc ) { contents.innerHTML = "onDisassemble"; return; }
 
 		let material = new THREE.MeshNormalMaterial();
 		temple.updateMatrixWorld();
@@ -124,16 +102,10 @@
 			}
 
 		} );
-
 console.log( '', itemsDis.length );
-
 	}
 
-
-
 	function onReassemble() {
-
-		if ( !pcc ) { contents.innerHTML = "onReassemble"; return; }
 
 		count = 0;
 		doTween();
@@ -157,8 +129,6 @@ console.log( '', itemsDis.length );
 
 
 	function onInitAnimation() {
-
-		if ( !pcc ) { contents.innerHTML = "onInitAnimation"; return; }
 
 		var step = 0;
 		var icw;
@@ -204,8 +174,6 @@ console.log( '', itemsDis.length );
 
 
 	function onMakeAnimation() {
-
-		if ( !pcc ) { contents.innerHTML = "onMakeAnimation"; return; }
 
 		step = 0;
 
@@ -261,15 +229,6 @@ console.log( '', itemsDis.length );
 
 	}
 
-
-	function onAnimationSave() {
-
-		if ( !pcc ) { contents.innerHTML = "onAnimationSave"; return; }
-
-		capturer.save();
-
-
-	}
 
 </script>
 </body>
