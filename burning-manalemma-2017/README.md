@@ -163,6 +163,7 @@ More in the next few days. In the mean time here's some background:
 * Make several plugins more standalone
 * Add wireframe to Settings
 * Add move temple vertical position
+* Add BlackRock Airport Chick-en
 
 ### 2017-08-30 ~ Theo
 

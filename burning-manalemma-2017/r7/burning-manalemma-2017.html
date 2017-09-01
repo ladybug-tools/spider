@@ -80,7 +80,7 @@
 		'<h3><a href=JavaScript:setContents("mnu-settings.html"); >Settings</a></h3>' +
 		'<h3><a href=JavaScript:setContents("mnu-screen-capture.html"); >Create animated GIF</a></h3>' +
 		'<h3><a href=JavaScript:setContents("mnu-text-to-voice.html"); title="Click to listen" >Overheard on the Playa</a></h3>' +
-		'<h3><a href=JavaScript:setContents("mnu-block-rock-airport-check-in.html"); title="Click to listen" >BlackRock Airport Check-in</a></h3>' +
+		'<h3><a class=highlight href=JavaScript:setContents("mnu-block-rock-airport-check-in.html"); title="Hold on to your seatbelts!" >BlackRock Airport Chick-en</a></h3>' +
 		'<hr>' +
 
 		'<div id = "contents" ></div>' +
@@ -91,17 +91,14 @@
 
 	function setContents( file ) {
 
-// What is going on here??
+// What is going on here?? Where are we?
 
 		if ( parent && !parent.ifrContents ) { location.reload(); }
-
 //		if ( parent.ifrContents.src.includes( 'burning-manalemma-2017.html' ) === false ) { location.reload(); }
+//		if ( parent.ifrContents ) { console.log( 'gg', parent.ifrContents.src );location.reload(); }
 
 //pp = parent;
 //console.log( 'ifr', parent, pp );
-
-//		if ( parent.ifrContents ) { console.log( 'gg', parent.ifrContents.src );location.reload(); }
-
 
 		folder = ( parent && parent.THREE ) ? '' : 'r' + revisionNumber + '/';
 //console.log( 'folder', folder );
@@ -118,10 +115,10 @@
 
 	}
 
-
+// this is probably the issue
 	parent.setContents = setContents;
 
-
+	divMenuSub.innerHTML = 'bbbbbbbb';
 
 //Sydney, Australia
 	var defaultLatitude = -33.8675;
@@ -181,7 +178,7 @@
 		parent.divMenuSub.innerHTML = menuSub;
 
 
-//		parent.ifrMenuSub.src = folder + "mnu-burning-manalemma-2017.html";
+		parent.ifrMenuSub.src = folder + "mnu-default.html";
 
 		title.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>'; // &nbsp; <a href="index.html" target="_blank">&#x1F517;</a></h1>';
 

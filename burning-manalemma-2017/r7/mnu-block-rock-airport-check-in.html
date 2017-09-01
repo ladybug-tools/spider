@@ -13,14 +13,25 @@
 	a { color: crimson; text-decoration: none; }
 	select { width: 100%; }
 
-	#menu { margin: 0; position: absolute; max-width: 300px; right: 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
 </style>
 </head>
 <body>
+<!--
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+-->
 
 	<div id = "menu" >
 		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
-		<div><select id=selAircraft size=20 ></select>
+		<div>Select your flying machine<select id=selAircraft size=20 ></select></div>
+		<p><button>toggle flight</button></p>
 		<div id = "contents" ></div>
 	</div>
 
@@ -28,8 +39,16 @@
 
 	let tree, aircraft;
 	let pcc;
-	let THREE;
-	let scene;
+	var THREE = THREE || {};
+	var scene;
+
+	var cameraPoints = 2000;
+	var index = 0;
+
+	var actor;
+	var curve;
+	var target;
+	var motion = false;
 
 	const b = '<br>';
 
@@ -45,20 +64,27 @@
 			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
 
 			loadThreejs();
+//			initThreejs();
 
 		} else {
 
-			parent.ifrMenuSub.style.height = '350px';
+			parent.ifrMenuSub.style.height = '450px';
 
 			pcc = parent.ifrContents.contentWindow;
 			THREE = pcc.THREE;
 			scene = pcc.scene;
+			camera = pcc.camera;
+			renderer = pcc.renderer;
+			controls = pcc.controls;
+
+			drawNicePath();
+
 
 		}
 
-		selAircraft.onchange=getFgxAircraft;
-
 		getFgxFleet();
+
+		selAircraft.onchange = getFgxAircraft;
 
 	}
 
@@ -137,10 +163,17 @@
 		scene.remove( aircraft );
 
 		aircraft = new THREE.Mesh( geometry, material );
-
+		aircraft.castShadow = true;
 		aircraft.position.set( 50, 50, 50 );
 
 		scene.add( aircraft );
+
+		actor = aircraft;
+
+		motion = true;
+
+		animatePlus();
+
 
 	}
 
@@ -150,7 +183,7 @@
 
 		var s1 = document.body.appendChild( document.createElement('script') );
 		s1.onload = loadOrbit;
-		s1.src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js";
+		s1.src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js";
 
 	}
 
@@ -159,14 +192,13 @@
 
 		var s2 = document.body.appendChild( document.createElement('script') );
 		s2.onload = initThreejs;
-		s2.src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js";
+		s2.src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js";
 
 	}
 
 
-	function initThreejs() {
 
-		if ( !THREE || !THREE.OrbitControls ) { return;}
+	function initThreejs() {
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -183,16 +215,69 @@
 		axisHelper.name = 'axisHelper';
 		scene.add( axisHelper );
 
-		animate();
+		animatePlus();
+
+		drawNicePath();
+
+	}
+
+	function drawNicePath() {
+
+//		var segments;
+
+		segments = 20;
+		var sizeX = 20;
+		var sizeY = 17;
+		var sizeZ = 20;
+
+		var geometry, vertices, material, line;
+		var v = function ( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+		var map2fixed = function( vect ) { return vect.toArray().map( function( num ){ return num.toFixed( 3 ); } ) };
+
+		geometry = new THREE.Geometry();
+		vertices = geometry.vertices;
+
+		for ( var i = 0; i < segments * 2 * Math.PI + 1; i++ ) {
+
+			vertex = v(
+
+				Math.sin( i * 7 / segments ) * sizeX, 
+				Math.cos( i * 3 / segments ) * sizeY, 
+				Math.sin( i * 2 / segments ) * sizeZ
+
+			);
+
+			vertices.push( vertex );
+
+//console.log( '', map2fixed( vertex ) );
+
+		}
+
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 50, 40, 50 ) );
+		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+		line = new THREE.Line( geometry, material );
+
+		scene.add( line );
+		curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
+
+//		return line;
 
 	}
 
 
-	function animate() {
+	function animatePlus() {
 
-		requestAnimationFrame( animate );
-		renderer.render( scene, camera );
-		controls.update();
+		requestAnimationFrame( animatePlus );
+
+		if ( !motion ) { return; }
+
+		index += 1 / cameraPoints;
+
+		point = Math.abs( Math.sin( index ) );
+
+		actor.position.copy( curve.getPoint( point ) );
+		actor.rotation.setFromVector3( curve.getTangent( point ) );
 
 	}
 
