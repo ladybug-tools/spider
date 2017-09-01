@@ -23,7 +23,7 @@
 
 <p>2017-08-31 ~ High there. Welcome to Burning mAnalemma - your escape to an alternate reality.</p>
 
-<button>Today's News</button>
+<button onclick=count=0;onReadNews(); >Today's News</button>
 
 <script>
 
@@ -32,9 +32,22 @@
 	let voiceCurrent;
 	let count = -1;
 
-	news = [
+	let news = [
 
-
+		"Are you sure you belong around here? To me, you look awfully normal.",
+		"Anyway, lots of things happened on the virtual playa today.",
+		"The menu now displays colors even if you are not stoned.",
+		"Greenies tell you it's been updated or is less broken that before.",
+		"Yellowies indicate there's something here today that probably was not here yesterday.",
+		"The big news is the arrival of the departure lounge.",
+		"Black Rock City Airport landed here all by itself. See. It's on the map!",
+		"Click on any of the aircraft in the menu for a test flight.",
+		"The Santa Claus aircraft is imaginary even though it cast a shadow.",
+		"The test flight pattern is a superb example of the way aircraft fly when they leave the Playa.",
+		"And, remember, you can check-in but you may never land."
+		"Of course, there were many other things that happened on this day."
+		"But if we keep talking about it all, then today's hacking becomes tomorrow's hacking."
+		"And then we would have nothing to say about yesterday."
 
 	];
 
@@ -57,7 +70,6 @@
 		synth.onvoiceschanged = function() {
 
 			voices = window.speechSynthesis.getVoices();
-//			sayThis( 'Hello, world!' );
 
 		}
 
@@ -66,20 +78,17 @@
 	}
 
 
-	function onReadNews( news) {
+	function onReadNews() {
 
 //console.log( '', 23 );
 
 		synth.cancel();
 
-		text = "oo"; // 
-
 		var utterThis;
 
 		utterThis = new SpeechSynthesisUtterance( news[ count ] );
 
-		count = count++ < textOverlay.length ? count : -1;
-
+		count = count++ < news.length ? count : -1;
 
 		if ( !voiceCurrent ) {
 
@@ -98,13 +107,14 @@
 
 		}
 
-		utterThis.voice = 
+		utterThis.voice = voiceCurrent ? voiceCurrent : '';
+
 
 		utterThis.rate = 0.6;
 		utterThis.pitch = 0.8;
 		utterThis.volume = 0.5;
 
-		utterThis.onend = function(){ if ( count ) { onExplainMapOverlay(); } }
+		utterThis.onend = function(){ if ( count ) { onReadNews(); } }
 
 		synth.speak( utterThis );
 

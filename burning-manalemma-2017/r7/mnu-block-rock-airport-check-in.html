@@ -31,7 +31,7 @@
 	<div id = "menu" >
 		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
 		<div>Select your flying machine<select id=selAircraft size=20 ></select></div>
-		<p><button>toggle flight</button></p>
+		<p><button onclick=motion=!motion; >toggle flight</button></p>
 		<div id = "contents" ></div>
 	</div>
 
@@ -120,7 +120,7 @@
 
 			item = tree[ i ];
 
-			if ( item.path.endsWith( 'js') ) {
+			if ( item.path.endsWith( 'js') && item.size > 100000 ) {
 
 				craft = item.path.split( '/' ).pop();
 
