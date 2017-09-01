@@ -27,6 +27,18 @@
 
 <script>
 
+	let synth;
+	let voices;
+	let voiceCurrent;
+	let count = -1;
+
+	news = [
+
+
+
+	];
+
+
 	const b = '<br>';
 
 	init();
@@ -39,6 +51,62 @@
 
 		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 //		contents.innerHTML = txt;
+
+		synth = window.speechSynthesis;
+
+		synth.onvoiceschanged = function() {
+
+			voices = window.speechSynthesis.getVoices();
+//			sayThis( 'Hello, world!' );
+
+		}
+
+		window.addEventListener( 'unload', function() { synth.cancel(); }, false );
+
+	}
+
+
+	function onReadNews( news) {
+
+//console.log( '', 23 );
+
+		synth.cancel();
+
+		text = "oo"; // 
+
+		var utterThis;
+
+		utterThis = new SpeechSynthesisUtterance( news[ count ] );
+
+		count = count++ < textOverlay.length ? count : -1;
+
+
+		if ( !voiceCurrent ) {
+
+			for ( i = 0; i < voices.length ; i++ ) {
+
+				if ( voices[ i ].voiceURI.toLowerCase().includes( 'female' ) ) {
+		// console.log( '', voices[ i ].voiceURI.toLowerCase() );
+
+					voiceCurrent = voices[ i ];
+
+					break;
+
+				}
+
+			}
+
+		}
+
+		utterThis.voice = 
+
+		utterThis.rate = 0.6;
+		utterThis.pitch = 0.8;
+		utterThis.volume = 0.5;
+
+		utterThis.onend = function(){ if ( count ) { onExplainMapOverlay(); } }
+
+		synth.speak( utterThis );
 
 	}
 
