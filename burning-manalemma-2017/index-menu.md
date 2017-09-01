@@ -26,7 +26,7 @@
 
 ***
 
-### [Burning mAnalemma 2017 R7]( #r7/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-31' )
+### [Burning mAnalemma 2017 R8]( #r8/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-09-01' )
 
 
 ***
@@ -40,6 +40,10 @@
 ***
 
 <small title="Watch the progress unfold" >All of these should work too</small>
+
+
+### [Burning mAnalemma 2017 R7]( #r7/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-31' )
+
 
 #### [Burning mAnalemma 2017 R6]( #r6/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 '2017-08-30' )
 

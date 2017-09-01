@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background: #ccc; color: #fff }
+
+/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+
+</style>
+</head>
+<body>
+
+<p>2017-08-31 ~ High there! Welcome to Burning mAnalemma - your escape to an alternate reality.</p>
+
+<button onclick=count=0;onReadNews(); "Does your browser speak to you? If so, have a listen!" >&#x1f508; Listen to Today's News</button>
+
+<script>
+
+	let synth;
+	let voices;
+	let voiceCurrent;
+	let count = -1;
+
+	let news = [
+
+		"Are you sure you belong around here? To me, you look awfully normal.",
+		"Anyway, lots of things happened on the virtual playa today.",
+		"The menu now displays colors even if you are not stoned.",
+		"Greenies tell you it's been updated or is less broken that before.",
+		"Yellowies indicate there's something here today that probably was not here yesterday.",
+		"The big news is the arrival of the departure lounge.",
+		"Black Rock City Airport landed here all by itself. See. It's on the map!",
+		"Click on any of the aircraft in the menu for a test flight.",
+		"The Santa Claus aircraft is imaginary even though it cast a shadow.",
+		"The test flight pattern is a superb example of the way aircraft fly when they leave the Playa.",
+		"And, remember, you can check-in but you may never land.",
+		"Of course, there were many other things that happened on this day.",
+		"But if we keep talking about it all, then today\'s hacking becomes tomorrow\'s hacking.",
+		"And then we would have nothing to say about yesterday."
+
+	];
+
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+//		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		contents.innerHTML = txt;
+
+		if ( 'speechSynthesis' in window ) {
+
+//console.log( 'You\'re good to go!' )
+
+		} else {
+
+			alert( 'Sorry, speech synthesis isn\'t supported by your browser.' );
+
+			document.write( news );
+
+			return;
+
+		}
+
+		synth = window.speechSynthesis;
+
+		synth.onvoiceschanged = function() {
+
+			voices = window.speechSynthesis.getVoices();
+
+		}
+
+		window.addEventListener( 'unload', function() { synth.cancel(); }, false );
+
+	}
+
+
+	function onReadNews() {
+
+//console.log( '', 23 );
+
+		synth.cancel();
+
+//		var utterThis;
+
+		utterThis = new SpeechSynthesisUtterance( news[ count ] );
+
+		count = count++ < news.length ? count : -1;
+
+		if ( !voiceCurrent ) {
+
+			for ( i = 0; i < voices.length ; i++ ) {
+
+				if ( voices[ i ].voiceURI.toLowerCase().includes( 'female' ) ) {
+		// console.log( '', voices[ i ].voiceURI.toLowerCase() );
+
+					voiceCurrent = voices[ i ];
+
+					break;
+
+				}
+
+			}
+
+		}
+
+		utterThis.voice = voiceCurrent ? voiceCurrent : null;
+
+
+		utterThis.rate = 0.6;
+		utterThis.pitch = 0.8;
+		utterThis.volume = 0.5;
+
+		utterThis.onend = function(){ if ( count ) { onReadNews(); } }
+
+		synth.speak( utterThis );
+
+	}
+
+</script>
+</body>
+</html>
+
+
+
