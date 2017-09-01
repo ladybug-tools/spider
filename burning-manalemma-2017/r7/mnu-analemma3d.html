@@ -264,6 +264,8 @@ Click to start & stop: <br>
 		material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 		sun = new THREE.Mesh( geometry, material );
 
+		sun.name = 'sun';
+
 		lightDirectional.add( sun );
 
 		scene.add( lights );

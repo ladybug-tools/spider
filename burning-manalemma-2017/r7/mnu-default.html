@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<p>2017-08-31 ~ High there. Welcome to Burning mAnalemma - your escape to an alternate reality.</p>
+<p>2017-08-31 ~ High there! Welcome to Burning mAnalemma - your escape to an alternate reality.</p>
 
 <button onclick=count=0;onReadNews(); >&#x1f508; Listen to Today's News</button>
 
@@ -64,6 +64,20 @@
 
 		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 //		contents.innerHTML = txt;
+
+		if ( 'speechSynthesis' in window ) {
+
+//console.log( 'You\'re good to go!' )
+
+		} else {
+
+			alert( 'Sorry, speech synthesis isn\'t supported by your browser.' );
+
+			document.write( news );
+
+			return;
+
+		}
 
 		synth = window.speechSynthesis;
 

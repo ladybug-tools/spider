@@ -259,8 +259,10 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 50, 40, 50 ) );
 		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 		line = new THREE.Line( geometry, material );
+		line.name = 'flightpath';
 
 		scene.add( line );
+
 		curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
 
 //		return line;
@@ -270,9 +272,9 @@
 
 	function animatePlus() {
 
-		requestAnimationFrame( animatePlus );
+		var point;
 
-		if ( !motion ) { return; }
+		requestAnimationFrame( animatePlus );
 
 		index += 1 / cameraPoints;
 

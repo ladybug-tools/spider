@@ -51,24 +51,14 @@
 <script>
 
 
+	var cameraPoints = 2000;
+	var index = 0;
+
+
 // https://github.com/spite/ccapture.js/
 
 	let cameraRadius = 50;
 	let cameraHeight = 50;
-
-//	var capturer = new CCapture( { format: 'webm' } );
-
-// Create a capturer that exports an animated GIF
-// Notices you have to specify the path to the gif.worker.js
-
-//	var capturer = new CCapture( { format: 'gif' } );
-
-//	var capturer = new CCapture( { format: 'gif', workersPath: 'js/' } );
-// Create a capturer that exports PNG images in a TAR file
-//	var capturer = new CCapture( { format: 'png' } );
-
-// Create a capturer that exports JPEG images in a TAR file
-//	var capturer = new CCapture( { format: 'jpg' } );
 
 	var step = 0;
 	var icw;
@@ -97,9 +87,14 @@
 
 	function init() {
 
-		parent.ifrMenuSub.style.height = '400px';
+		if ( window.top === window.self ) {
 
 
+		} else {
+
+			parent.ifrMenuSub.style.height = '400px';
+
+		}
 
 	}
 
@@ -108,10 +103,6 @@
 	function setIframe() {
 
 		const style = '"height:360px; margin: 100px 0 0 200px; width: 480px; position: absolute;"';
-
-//		const url = !parent.ifrContents ? 'analemma3-3d.html' : parent.ifrContents.src;
-
-//		parent.main.innerHTML = '<iframe id=ifrContents src=' + url + ' style= ' + style + ' ></iframe>';
 
 		if ( parent.parent.THREE ) {
 
@@ -126,10 +117,10 @@
 
 		}
 
-
 console.log( 'capturer', capturer );
 
 	}
+
 
 
 	function updateScene() {
@@ -137,8 +128,22 @@ console.log( 'capturer', capturer );
 
 		temple = icw.scene.getObjectByName( 'temple' );
 
+		aircraft = icw.scene.getObjectByName( 'aircraft' );
+
+		if ( aircraft ) { 
+
+			flightpath = icw.scene.getObjectByName( 'flightpath' );
+
+			curve = new icw.THREE.CatmullRomCurve3( flightpath.geometry.vertices ); 
+
+animatePlus();
+
+		}
+
+
 parent.parent.icw = icw;
 
+console.log( 'aircraft', aircraft );
 		icw.controls.autoRotate = false;
 		icw.renderer.setClearColor( 0xc0c0f8 );
 
@@ -149,7 +154,12 @@ parent.parent.icw = icw;
 		step = 0;
 		icw.animate = animateCapture;
 
+
+	}
+
 		toggleVisible.onclick = function() {
+
+			if ( aircraft ) { flightpath.visible = false; }
 
 			icw.menu.style.display = icw.menu.style.display === 'none' ? '' : 'none';
 			icw.header.style.display = icw.header.style.display === 'none' ? '' : 'none';
@@ -157,8 +167,21 @@ parent.parent.icw = icw;
 
 		};
 
-	}
 
+	function animatePlus() {
+
+		var point;
+
+		requestAnimationFrame( animatePlus );
+
+		index += 1 / cameraPoints;
+
+		point = Math.abs( Math.sin( index ) );
+
+		aircraft.position.copy( curve.getPoint( point ) );
+		aircraft.rotation.setFromVector3( curve.getTangent( point ) );
+
+	}
 
 
 	function endTheAction() {
