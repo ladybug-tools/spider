@@ -127,22 +127,26 @@ More in the next few days. In the mean time here's some background:
 
 ## Issues
 
-* 2017-08-27 ~ incorrect tab title
+
 
 
 ## To-Do
 
+* 2017-08-31 ~ Add sounds and music
+* 2017-08-31 ~ Add speak the BM glossary
+* 2017-08-31 ~ Add to Glitch 
+* 2017-08-31 ~ Add to bl.ocks.org
 * 2017-08-31 ~ update copyable permalink update with any moves/zooms
 * 2017-08-31 ~ Get Temple to touch the ground. Add physics
-* 2017-08-31 ~ Add Select skybox
+* 2017-08-31 ~ Add select skybox
 * 2017-08-31 ~ Separate terrain code from basic Three.js loader
 * 2017-08-29 ~ Add mouseover highlights
 * 2017-08-29 ~ Add exploded view and sectioning
 * 2017-08-29 ~ Include map type in location hash
 * 2017-08-29 ~ Enable multiple tile terrains
-* 2017-08-29 ~ Add aircraft flying about - with onboard camera
+* 2017-08-29 ~ Add aircraft flying about - with onboard camera < started
 * 2017-08-29 ~ Add people dancing in the street
-* 2017-07-31 ~ Add credits to Mapbox, Google, Mr.doob, GitHub and many others
+* 2017-07-31 ~ Add credits to Mapbox, Google, Mr.doob, GitHub and many others  < started
 * 2017-07-31 ~ Improve geoJSON reading capabilities
 * 2017-07-25 ~ Select quality of raster tile display
 
@@ -164,6 +168,9 @@ More in the next few days. In the mean time here's some background:
 * Add wireframe to Settings
 * Add move temple vertical position
 * Add BlackRock Airport Chick-en
+* Create animated GIF - supports aircraft
+* Default text with Daily news voice synth < part of the 'Theo in a bottle' effort
+* 2017-08-27 ~ incorrect tab title < fixed?
 
 ### 2017-08-30 ~ Theo
 
