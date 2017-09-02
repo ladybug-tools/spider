@@ -47,7 +47,7 @@
 	var scene;
 
 	var cameraPoints = 2000;
-	var index = 1;
+	var index = -1;
 	let point = 0;
 
 	var curve;
@@ -150,7 +150,7 @@
 
 		selAircraft.selectedIndex = Math.floor( Math.random() * selAircraft.length);
 
-//		selAircraft.selectedIndex = 424;
+		selAircraft.selectedIndex = 424;
 
 		if ( loader ){ getFgxAircraft(); }
 
@@ -244,7 +244,7 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 1000 );
 		camera.position.set( 100, 100, 100 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -269,11 +269,11 @@
 
 	function drawNicePath() {
 
-//		var segments;
+		var segments;
 
 		segments = 20;
 		var sizeX = 20;
-		var sizeY = 17;
+		var sizeY = 10;
 		var sizeZ = 20;
 
 		var geometry, vertices, material, line;
@@ -299,7 +299,7 @@
 
 		}
 
-		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 50, 40, 50 ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 50, 35, 50 ) );
 		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 		line = new THREE.Line( geometry, material );
 		line.name = 'flightpath';
@@ -407,7 +407,7 @@
 
 	function requestFile( url, callback ) {
 
-//		let xhr;
+		let xhr;
 
 		xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';

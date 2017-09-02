@@ -160,11 +160,10 @@ console.log( 'aircraft', aircraft );
 			motion = true;
 
 
-
 			if ( !cockpitCamera ) {
 
-				cockpitCamera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 1000 );
-				cockpitCamera.position.set( 0,5,0 );
+				cockpitCamera = new THREE.PerspectiveCamera( 200, window.innerWidth / window.innerHeight, 1, 1000 );
+				cockpitCamera.position.set( 0, 1.5, -1.5 );
 				cockpitCamera.rotation.set( 0,3,0 );
 				aircraft.add( cockpitCamera );
 
