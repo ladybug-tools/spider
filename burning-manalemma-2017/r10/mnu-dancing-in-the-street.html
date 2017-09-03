@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Dancing in the streets" >
+<meta name = "keywords" content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-01" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	#menu { position: absolute; text-align: center; width: 100%; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+	</div>
+
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/loaders/BVHLoader.js" ></script>
+<script>
+
+	let files = [];
+	let bvh;
+	let count = 0;
+	let frame = 0;
+	let framesLength;
+
+	let renderer, camera, controls, scene;
+	let geometry, material, mesh;
+
+	init();
+	animate();
+
+
+	var loader = new THREE.BVHLoader();
+
+//	loader.load( "pirouette.bvh", callbackLoader );
+
+	loader.load( "../../data/aachan.bvh", callbackLoader );
+	loader.load( "../../data/kashiyuka.bvh",callbackLoader );
+	loader.load( "../../data/nocchi.bvh", callbackLoader );
+
+
+	function callbackLoader( result ) {
+
+//console.log( 'result', result  );
+
+		bvh = result;
+		bvh.character = parseData( bvh );
+		scene.add ( bvh.character );
+		files.push( bvh );
+
+	}
+
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '350px';
+
+		}
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.set( 100, 200, 500 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		let gridHelper = new THREE.GridHelper( 500, 20 );
+		scene.add( gridHelper );
+
+		let axisHelper = new THREE.AxisHelper( 500 );
+		scene.add( axisHelper );
+
+	}
+
+
+
+	function parseData ( bvh ) {
+
+		const character = new THREE.Object3D();
+		const bones = bvh.skeleton.bones;
+		const origin = new THREE.Vector3( 0, 0, 0 );
+		const geometrySphere  = new THREE.SphereGeometry( 6 );
+		const material = new THREE.MeshNormalMaterial();
+		const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
+		let geometry, line, midpoint, length, mesh;
+
+		for ( let bone of bones ) {
+
+			bone.mesh = new THREE.Mesh( geometrySphere, material );
+			bone.mesh.position.copy( bone.position );
+
+			if ( bone.parent ) {
+
+				bone.parent.mesh.add( bone.mesh );
+
+				geometry = new THREE.Geometry();
+				geometry.vertices = [ origin, bone.position ];
+				line = new THREE.Line( geometry, materialLine );
+				bone.parent.mesh.add( line );
+
+				line.geometry.computeBoundingSphere();
+				midpoint = line.geometry.boundingSphere.center;
+				length = 2 * line.geometry.boundingSphere.radius
+
+				geometry = new THREE.CylinderGeometry(6, 6, length );
+				geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+
+				mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( midpoint );
+				mesh.lookAt( origin );
+				bone.parent.mesh.add( mesh );
+
+			} else {
+
+				character.add( bone.mesh );
+
+			}
+
+		}
+
+		return character;
+
+	}
+
+
+
+	function setFrameBVH( bvh, frame ){
+
+		let track, bone, index;
+		const tracks = bvh.clip.tracks;
+		const bones = bvh.skeleton.bones;
+
+		bvh.framesLength = tracks[ 0 ].times.length;
+
+
+		for ( let i = 0; i < tracks.length; i++ ) {
+
+			track = tracks[ i ];
+
+			bone = bones.find( function( bone ) { return bone.name === track.name.slice( 7 ).replace( /].(.*?)ion/, '' ); } );
+
+			if ( track.name.endsWith( 'quaternion' ) ) {
+
+				index = 4 * frame;
+				quaternion = new THREE.Quaternion( track.values[ index++ ], track.values[ index++ ], track.values[ index++ ], track.values[ index ] );
+				bone.mesh.setRotationFromQuaternion( quaternion );
+
+			} else if ( i === 0 ) {
+
+				index = 3 * frame;
+				bone.mesh.position.set( track.values[ index++ ], track.values[ index++ ], track.values[ index ] );
+
+			}
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+		count++;
+
+		if ( files.length && count % 3 === 0 ) {
+
+			for ( let bvh of files ) {
+
+				setFrameBVH( bvh, frame );
+				frame++;
+				frame = frame < bvh.framesLength ? frame : 0;
+
+			}
+
+		}
+
+	}
+
+
+
+</script>
+</body>
+</html>

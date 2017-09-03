@@ -132,6 +132,7 @@ More in the next few days. In the mean time here's some background:
 
 ## To-Do
 
+* 2017-09-03 ~ Add more flight paths from math / build your own
 * 2017-08-31 ~ Add sounds and music
 * 2017-08-31 ~ Add speak the BM glossary
 * 2017-08-31 ~ Add to Glitch 
@@ -158,7 +159,23 @@ More in the next few days. In the mean time here's some background:
 
 
 
+
+
 ## Change Log
+
+R6
+* Dancin in the Street - in your menu
+
+
+## 2017-09-03 ~ Theo
+
+* R8
+* Planes fkying much better
+* Cockpit camera
+* Aircraft changes type every fize seconds
+* Can create animate GIFs with flying aircraft
+
+## 2017-00-31 ~ Theo
 
 * R7
 * Add start of credits page
@@ -233,7 +250,7 @@ What slowed things down today was the back end - but good progress was made.
 The mission is something like this:
 
 * Single index.html
-*	 Handles opening and displaying any and all files in sub-folders and whereever
+*	 Handles opening and displaying any and all files in sub-folders and wherever
 * Single main menu
 	* Written in Markdown
 * Multiple sub folders
