@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; } 
+	select { box-sizing: border-box; width: 100%; }
+
+</style>
+</head>
+<body>
+
+
+Map Overlay
+
+<p> <select id=selMap size=10 onchange=setMapOverlay(); ></select></p>
+
+<p><img id=imgOverlay ></p>
+
+<p id=contents ></p>
+
+<script>
+
+
+	var mapTypes = [
+
+		['Google Maps','https://mt1.google.com/vt/x='],
+		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
+		['Google Maps Satellite','https://mt1.google.com/vt/lyrs=s&x='],
+		['Google Maps Hybrid','https://mt1.google.com/vt/lyrs=y&x='],
+		['Open Street Map','http://tile.openstreetmap.org/'],
+		['Open Street Map topo','http://tile.opentopomap.org/'],
+		['Open Cycle Map', 'http://tile.opencyclemap.org/cycle/'],
+//		['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'],
+//		['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'],
+		['Stamen terrain background','http://tile.stamen.com/terrain-background/'],
+		['Esri Satellite', 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/']
+
+	];
+
+	count = 0;
+
+	init()
+
+
+	function init() {
+
+		for ( var i = 0; i < mapTypes.length; i++ ) {
+
+			selMap.appendChild( document.createElement( 'option' ) );
+			selMap.children[ i ].text = mapTypes[ i ][ 0 ];
+
+		}
+
+		selMap.selectedIndex = 0;
+
+
+		if ( window.top === window.self ) {
+
+			setMapOverlay();
+
+			playImages();
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '350px';
+
+		}
+
+		if ( location.hash ) { 
+
+			playImages();
+
+			contents.innerHTML = '<a href=../index.html target=_top >Return to Burning mAnalemma Playa</a>'; 
+
+		}
+
+	}
+
+
+
+	function playImages() {
+
+		requestAnimationFrame( playImages )
+
+		if ( count++ % 120 === 0 ) {
+
+			selMap.selectedIndex = ++selMap.selectedIndex < selMap.length ? selMap.selectedIndex : 0;
+
+			setMapOverlay();
+
+		}
+
+
+
+	}
+
+	function setMapOverlay() {
+
+//		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		if ( window.top === window.self || location.hash ) {
+
+			zoom = 11;
+			x = 345;
+			y = 769;
+
+			mapType = mapTypes[ selMap.selectedIndex ];
+
+			var urlBase = mapType[ 1 ];
+
+			if ( selMap.selectedIndex < 4 ) {
+
+				imgOverlay.src = urlBase + x + '&y=' + y + '&z=' + zoom
+
+			} else {
+
+				imgOverlay.src = urlBase + zoom + '/' + x + '/' + y + '.png';
+
+			}
+		} else if ( parent.parent.THREE ) {
+
+			parent.parent.mapType = mapTypes[ selMap.selectedIndex ];
+			parent.parent.selectedIndex = selMap.selectedIndex;
+			parent.parent.drawMapOverlay();
+
+		} else {
+
+			parent.parent.ifrContents.contentWindow.mapType = mapTypes[ selMap.selectedIndex ];
+			parent.parent.ifrContents.contentWindow.selectedIndex = selMap.selectedIndex;
+			parent.parent.ifrContents.contentWindow.drawMapOverlay();
+
+		}
+
+	}
+
+
+
+
+
+</script>
+</body>
+</html>

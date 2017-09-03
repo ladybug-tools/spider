@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	h3 { margin: 0; }
+
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+<div id=contents ></div>
+
+<script>
+
+
+	var subMenu =
+
+`
+
+### [Notre Damalemma]( file#latitude:48.8527,longitude:2.3506,zoom:16,heightScale:1 )
+
+### [Mountalemma Everest]( file#latitude:27.98785,longitude:86.92502609999997,zoom:11,offsetUTC:345,heightScale:1 )
+
+### [Moorealemma, Windward Islands]( file#latitude:-17.5388435,longitude:-149.82952339999997,zoom:12,offsetUTC:-600 )
+
+### [Hongalemma Kongalemma]( file#latitude:22.2745,longitude:114.1754,zoom:15,offsetUTC:480,heightScale:1 'I lived near the middle of the map' )
+***
+
+### [Downtown San Francisco / Hyatt Embarcadero]( file#latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420 "86 structures" )
+
+### [GG Bridge @ Marin]( file#latitude:37.826068,longitude:-122.479592,zoom:15,offsetUTC:-420 "10 structures" )
+
+### [Alcatraz]( file#latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420 "12 structures" )
+
+### [Fort Mason]( file#latitude:37.807835,longitude:-122.427333,zoom:15,offsetUTC:-420 "107 structures")
+
+### [Coit Tower 16 Zoom]( file#latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420 "553 structures" )
+
+### [Coit Tower 15 Zoom]( file#latitude:37.8024,longitude:-122.4058,zoom:15,offsetUTC:-420 "1395 structures" )
+
+### [Lombard Street]( file#latitude:37.8025097,longitude:-122.419788,zoom:16,offsetUTC:-420 "1395 structures" )
+
+***
+
+### [NYC]( file#latitude:40.7128,longitude:-74.0059,zoom:16,offsetUTC:-240 "284 structures" )
+
+### [Mount Washington NH]( file#latitude:44.27058539999999,longitude:-71.3032723,zoom:15,offsetUTC:-240 "4 structures" )
+
+### [Christ Redeemer, Rio di Janeiro]( file#latitude:-22.951916,longitude:-43.21048719999999,zoom:15,offsetUTC:-180 "7 structures" )
+
+### [Tenzing-Hillary Airport, Nepal]( file#latitude:27.68777799999999,longitude:86.73138360000007,zoom:15,offsetUTC:345 "77 structures" )
+ 
+
+`;
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		showdown.setFlavor( 'github' );
+
+		const converter = new showdown.Converter();
+
+		file = parent.THREE ? 'burning-manalemma-2017.html#' : '../index.html#';
+
+		html = converter.makeHtml( subMenu );
+		html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
+		html = html.replace( /file#/gi, file );
+		contents.innerHTML = converter.makeHtml( html );
+
+		parent.ifrMenuSub.style.height = '400px';
+
+	}
+
+</script>
+</body>
+</html>
