@@ -101,6 +101,7 @@ More in the next few days. In the mean time here's some background:
 * Save to animated GIF files ~ with custom camera paths and event handling
 * Free and open source
 * Easy-peasy entry level plain-vanilla JavaScript cookbook code
+* Text to voice, sounds, character animation, objects follow path
 * All the things we forgot to mention.
 
 

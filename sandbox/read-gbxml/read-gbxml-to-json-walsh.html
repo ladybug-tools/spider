@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+		<div id = "contents" ></div>
+	</div>
+
+<script>
+
+// https://davidwalsh.name/convert-xml-json
+
+	let gbxml;
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+//		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		contents.innerHTML = txt;
+//		let urlCORS, url;
+
+		urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
+
+		requestFile( url );
+
+	}
+
+	function requestFile( url ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+	function callback( xhr ) {
+
+		let response, parser;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		parser = new DOMParser();
+		doc = parser.parseFromString( response, "text/xml");
+console.log( 'doc', doc );
+
+		obj = xmlToJson( doc );
+console.log( 'obj', obj );
+
+		gbxml = obj.gbXML;
+
+console.log( 'gbxml', gbxml );
+
+		parseGbxml( gbxml );
+
+	}
+
+
+	function parseGbxml( gbxml ) {
+
+		let txt = '<h2>gbXML</h2>';
+
+		txt += 'Latitude: ' + gbxml.Campus.Location.Latitude.text + b +
+		'Longitude: ' + gbxml.Campus.Location.Longitude.text + b +
+		'';
+
+		surfaces = gbxml.Campus.Surface;
+
+		for ( var i = 0; i < surfaces.length; i++ ) {
+
+			surface = surfaces[ i ];
+
+			if ( surface.attributes.surfaceType === "ExteriorWall" ) {
+
+//console.log( 'surface', surface );
+				txt += surface.CADObjectId.text + b;
+
+			}
+		}
+
+		contents.innerHTML = txt;
+
+	}
+
+
+	function xmlToJson(xml) {
+
+// Create the return object
+		var obj = {};
+
+		if ( xml.nodeType == 1 ) { // element
+
+// do attributes
+			if ( xml.attributes.length > 0 ) {
+
+			obj[ "attributes" ] = {};
+
+				for ( var j = 0; j < xml.attributes.length; j++ ) {
+
+					var attribute = xml.attributes.item( j );
+
+					obj[ "attributes" ][ attribute.nodeName ] = attribute.nodeValue;
+
+				}
+
+			}
+
+		} else if ( xml.nodeType == 3 ) { // text
+
+			if ( xml.textContent.trim().length > 1 ) {
+
+// console.log( 'text node: ', xml );
+ddd = xml.textContent;
+				obj = xml.textContent;
+
+			} else {
+
+				obj = xml.nodeValue;
+
+			}
+
+		}
+
+// do children
+		if (xml.hasChildNodes() ) {
+
+			for ( var i = 0; i < xml.childNodes.length; i++) {
+				var item = xml.childNodes.item(i);
+				var nodeName = item.nodeName.replace( /\#/, '' );
+
+				if ( typeof(obj[nodeName]) == "undefined" ) {
+
+					obj[nodeName] = xmlToJson(item);
+
+				} else {
+
+					if ( typeof(obj[nodeName].push) == "undefined") {
+
+						var old = obj[nodeName];
+						obj[nodeName] = [];
+						obj[nodeName].push(old);
+
+					}
+
+					obj[ nodeName ].push(xmlToJson( item));
+
+				}
+
+			}
+		}
+
+		return obj;
+
+	}
+
+</script>
+</body>
+</html>

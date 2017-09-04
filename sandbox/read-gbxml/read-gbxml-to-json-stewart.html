@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+		<div id = "contents" ></div>
+	</div>
+
+<script src=https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js ></script>
+<script>
+
+
+// https://andrew.stwrt.ca/posts/js-xml-parsing/
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+		contents.innerHTML = txt;
+
+//		let urlCORS, url;
+
+		urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
+
+		requestFile( url );
+
+	}
+
+	function requestFile( url ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+
+
+	}
+
+
+	function callback( xhr ) {
+
+		let response, parser;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		parser = new DOMParser();
+		doc = parser.parseFromString( response, "text/xml");
+console.log( 'doc', doc );
+
+		obj = parse( doc );
+
+console.log( 'obj', obj );
+
+console.log( 'obj', obj );
+
+console.log( 'Latitude', obj.Campus.Location.Latitude );
+
+	}
+
+
+
+// flattens an object (recursively!), similarly to Array#flatten
+// e.g. flatten({ a: { b: { c: "hello!" } } }); // => "hello!"
+	function flatten(object) {
+		var check = _.isPlainObject(object) && _.size(object) === 1;
+		return check ? flatten(_.values(object)[0]) : object;
+	}
+
+	function parse( xml ) {
+
+	var data = {};
+
+		var isText = xml.nodeType === 3,
+			isElement = xml.nodeType === 1,
+			body = xml.textContent && xml.textContent.trim(),
+			hasChildren = xml.children && xml.children.length,
+			hasAttributes = xml.attributes && xml.attributes.length;
+
+		// if it's text just return it
+		if (isText) { return xml.nodeValue.trim(); }
+
+		// if it doesn't have any children or attributes, just return the contents
+		if (!hasChildren && !hasAttributes) { return body; }
+
+		// if it doesn't have children but _does_ have body content, we'll use that
+		if (!hasChildren && body.length) { data.text = body; }
+
+		// if it's an element with attributes, add them to data.attributes
+		if (isElement && hasAttributes) {
+		data.attributes = _.reduce(xml.attributes, function(obj, name, id) {
+			var attr = xml.attributes.item(id);
+			obj[attr.name] = attr.value;
+			return obj;
+		}, {});
+		}
+
+		// recursively call #parse over children, adding results to data
+
+		_.each(xml.children, function(child) {
+		var name = child.nodeName;
+
+		// if we've not come across a child with this nodeType, add it as an object
+		// and return here
+		if (!_.has(data, name)) {
+			data[name] = parse(child);
+			return;
+		}
+
+		// if we've encountered a second instance of the same nodeType, make our
+		// representation of it an array
+		if (!_.isArray(data[name])) { data[name] = [data[name]]; }
+
+		// and finally, append the new child
+		data[name].push(parse(child));
+		});
+
+// if we can, let's fold some attributes into the body
+		_.each(data.attributes, function(value, key) {
+		if (data[key] != null) { return; }
+		data[key] = value;
+		delete data.attributes[key];
+		});
+
+		// if data.attributes is now empty, get rid of it
+		if (_.isEmpty(data.attributes)) { delete data.attributes; }
+
+		// simplify to reduce number of final leaf nodes and return
+		return flatten(data);
+	}
+
+</script>
+</body>
+</html>
