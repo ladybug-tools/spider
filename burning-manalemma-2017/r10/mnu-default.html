@@ -9,10 +9,10 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	body { background-color: azure; font: 12pt monospace; margin: 0 auto; max-width: 400px; padding: 0 3px; }
 	a { color: crimson; text-decoration: none; }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; margin: 3px; padding: 3px; }
 	button:hover { background: #ccc; color: #fff }
 
 /*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
@@ -21,18 +21,80 @@
 </head>
 <body>
 
-<p>2017-08-31 ~ High there! Welcome to Burning mAnalemma - your escape to an alternate reality.</p>
+<p>2017-09-03 ~ High there! Welcome to Burning mAnalemma - your escape from altered reality.</p>
 
-<button onclick=count=0;onReadNews(); "Does your browser speak to you? If so, have a listen!" >&#x1f508; Listen to Today's News</button>
+<button onclick=count=0;onReadNews0903(); title="Times-a-wasting. Click me in the butt." >&#x1f508; September 3</button>
+
+<button onclick=count=0;onReadNews0902(); title="Martha and the Vendellas or DavidB and MickJ?" >&#x1f508; September 2</button>
+
+<button onclick=count=0;onReadNews0901(); title="Times-a-wasting. Click me in the butt." >&#x1f508; September 1</button>
+
+<button onclick=count=0;onReadNews0831(); title="Does your browser speak to you? If so, have a listen!" >&#x1f508; August 31</button>
+
+<p>Use one/two/three fingers to rotate/zoom/pan display in 3D</p>
 
 <script>
+// https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
 
 	let synth;
 	let voices;
 	let voiceCurrent;
 	let count = -1;
 
-	let news = [
+	let news0903 = [
+
+		"One of the special things about the Playa is the quiet or stillness.",
+		"Even at 6am you can hear the gentle sound of all the men who are farting in their tents.",
+		"By tea-time, the playa reminds one of a cacophonic brouhaha. Whatever that means",
+		"Anyway, we have had a singular dilemma here inside Burning mAnalemma.",
+		"How do you take all the perfectly good music played on the Playa,",
+		"And turn it into a palatable gumbo of street noises?",
+		"Well, today, the manna from heaven arrived. Or maybe it was just the heat.",
+		"Burning mAnalemma has reinvented the so-called 'radio buttons' just for you.",
+		"The Playa is alive with the sound of sex, drugs and Rock and Roll.",
+		"Um, my humble apologies, I meant to say sound of music.",
+		"And so now you can be a Playa DJ too!",
+		"Just click the radio buttons in 'Playa alive w/sound o\"music.",
+		"Please, however, do ignore the apostrophes that are spooning."
+
+	]
+
+
+	let news0902 = [
+
+		"Calling out around the world. Are you ready for a brand new beat?",
+		"Summer's here and the time is right, For dancing in the streets.",
+		"They're dancing in Chicago. Down in New Orleans. In New York City.",
+		"All we need is music, sweet music. There'll be music everywhere. They'll be swinging, swaying, records playing.",
+		"Dancing in the street, oh",
+		"Don't mind me. Actually, I'm on my break, And you can go jump in a lake for all I care.",
+		"Having said that, I should point out that all lakes around here are quit dry.",
+		"So it's better to do your lake jumping with a Pogo stick.",
+		"Anyway check out the new 'Dancing in the Street' menu item.",
+		"I bet this is the first time you have will have seen a siderbar menu in your browser Twerkin' like Miley."
+
+	]
+
+
+	let news0901 = [
+
+		"Oh, it is you. Doo come in. We are here to help needy people, such as your self.",
+		"Did you ever dream of leaving on a jet plane? And arriving in a biplane?",
+		"Have you had nightmares of departing in a seven four seven and disembarking from a B-52?",
+		"In actuality, we have not had any of those dreams either.",
+		"The things is that here on the Playa, your dreams actually come true, before you have had your dreams.",
+		"It's the Playa's gentle way of informing you that your past will never be the same.",
+		"So check out the Black Rock City check in. Fly the Playa in any one of 436 aircraft.",
+		"Click 'toggle camera cockpit' and cross your fingers.",
+		"Preferably clutching a barf bag.",
+		"The other cool thing is that I - the person speaking to you right now - am two days old.",
+		"I am learning to be acerbic, snarky and ironic. I am already an expert in malapropisms.",
+		"And mostly I'm just plain-old snotty. So it goes. Bye for now."
+
+	]
+
+
+	let news0831 = [
 
 		"Are you sure you belong around here? To me, you look awfully normal.",
 		"Anyway, lots of things happened on the virtual playa today.",
@@ -52,18 +114,26 @@
 	];
 
 
+
+
 	const b = '<br>';
 
 	init();
 
+
 	function init() {
 
-		let txt;
 
-//		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		if ( window.top === window.self ) {
 
-		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
-//		contents.innerHTML = txt;
+			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '300px';
+
+		}
+
 
 		if ( 'speechSynthesis' in window ) {
 
@@ -92,24 +162,56 @@
 	}
 
 
-	function onReadNews() {
+
+	function onReadNews0903() {
+
+		onReadNews( news0903, onReadNews0903 );
+
+	}
+
+
+	function onReadNews0902() {
+
+		onReadNews( news0902, onReadNews0902 );
+
+	}
+
+
+	function onReadNews0901() {
+
+		onReadNews( news0901, onReadNews0901 );
+
+	}
+
+
+
+	function onReadNews0831() {
+
+		onReadNews( news0831, onReadNews0831 );
+
+	}
+
+
+
+	function onReadNews( issue, callback ) {
 
 //console.log( '', 23 );
+		
 
 		synth.cancel();
 
 //		var utterThis;
 
-		utterThis = new SpeechSynthesisUtterance( news[ count ] );
+		utterThis = new SpeechSynthesisUtterance( issue[ count ] );
 
-		count = count++ < news.length ? count : -1;
+		count = count++ < issue.length ? count : -1;
 
 		if ( !voiceCurrent ) {
 
 			for ( i = 0; i < voices.length ; i++ ) {
 
 				if ( voices[ i ].voiceURI.toLowerCase().includes( 'female' ) ) {
-		// console.log( '', voices[ i ].voiceURI.toLowerCase() );
+// console.log( '', voices[ i ].voiceURI.toLowerCase() );
 
 					voiceCurrent = voices[ i ];
 
@@ -122,13 +224,10 @@
 		}
 
 		utterThis.voice = voiceCurrent ? voiceCurrent : null;
-
-
 		utterThis.rate = 0.6;
 		utterThis.pitch = 0.8;
 		utterThis.volume = 0.5;
-
-		utterThis.onend = function(){ if ( count ) { onReadNews(); } }
+		utterThis.onend = function(){ if ( count ) { callback(); } }
 
 		synth.speak( utterThis );
 

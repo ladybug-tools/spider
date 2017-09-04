@@ -132,10 +132,10 @@ More in the next few days. In the mean time here's some background:
 
 ## To-Do
 
+* 2017-09-03 ~ Need much better interaction between the different menus/plugins
 * 2017-09-03 ~ Add more flight paths from math / build your own
-* 2017-08-31 ~ Add sounds and music
 * 2017-08-31 ~ Add speak the BM glossary
-* 2017-08-31 ~ Add to Glitch 
+* 2017-08-31 ~ Add to Glitch /CodeOpen / jsFiddle
 * 2017-08-31 ~ Add to bl.ocks.org
 * 2017-08-31 ~ update copyable permalink update with any moves/zooms
 * 2017-08-31 ~ Get Temple to touch the ground. Add physics
@@ -145,9 +145,6 @@ More in the next few days. In the mean time here's some background:
 * 2017-08-29 ~ Add exploded view and sectioning
 * 2017-08-29 ~ Include map type in location hash
 * 2017-08-29 ~ Enable multiple tile terrains
-* 2017-08-29 ~ Add aircraft flying about - with onboard camera < started
-* 2017-08-29 ~ Add people dancing in the street
-* 2017-07-31 ~ Add credits to Mapbox, Google, Mr.doob, GitHub and many others  < started
 * 2017-07-31 ~ Improve geoJSON reading capabilities
 * 2017-07-25 ~ Select quality of raster tile display
 
@@ -160,14 +157,29 @@ More in the next few days. In the mean time here's some background:
 
 
 
-
 ## Change Log
-
-R6
-* Dancin in the Street - in your menu
 
 
 ## 2017-09-03 ~ Theo
+
+* R10
+* Playa alive w/sound o"musex 
+* Howler.js + soma.fm
+* News items for 31st, 1st, 2nd and 3rd
+
+* 2017-07-31 ~ Add credits to Mapbox, Google, Mr.doob, GitHub and many others  < started
+* 2017-08-29 ~ Add aircraft flying about - with onboard camera < started
+* 2017-08-31 ~ Add sounds and music
+
+## 2017-09-02 ~ Theo
+
+* R9
+* Dancing in the Street - in your menu
+	* 2017-08-29 ~ Add people dancing in the street
+
+
+
+## 2017-09-01 ~ Theo
 
 * R8
 * Planes fkying much better
