@@ -26,6 +26,8 @@
 <script>
 
 // https://davidwalsh.name/convert-xml-json
+// https://gist.github.com/chinchang/8106a82c56ad007e27b1
+
 
 	let gbxml;
 
@@ -74,21 +76,19 @@
 //console.log( 'response', response );
 
 		parser = new DOMParser();
-		doc = parser.parseFromString( response, "text/xml");
-console.log( 'doc', doc );
+		xmldoc = parser.parseFromString( response, "text/xml");
+//console.log( 'xmldoc', xmldoc );
 
-		obj = xmlToJson( doc );
-console.log( 'obj', obj );
+		obj = xmlToJson( xmldoc );
+//console.log( 'obj', obj );
 
 		gbxml = obj.gbXML;
-
 console.log( 'gbxml', gbxml );
 
 		parseGbxml( gbxml );
 
-
-		jsonText = JSON.stringify( gbxml );
-console.log( '', jsonText );
+//		jsonText = JSON.stringify( gbxml );
+//console.log( '', jsonText );
 
 	}
 
@@ -97,8 +97,8 @@ console.log( '', jsonText );
 
 		let txt = '<h2>gbXML</h2>';
 
-		txt += 'Latitude: ' + gbxml.Campus.Location.Latitude.text + b +
-		'Longitude: ' + gbxml.Campus.Location.Longitude.text + b +
+		txt += 'Latitude: ' + gbxml.Campus.Location.Latitude + b +
+		'Longitude: ' + gbxml.Campus.Location.Longitude + b +
 		'';
 
 		surfaces = gbxml.Campus.Surface;
@@ -106,13 +106,14 @@ console.log( '', jsonText );
 		for ( var i = 0; i < surfaces.length; i++ ) {
 
 			surface = surfaces[ i ];
+//console.log( 'surface', surface );
 
 			if ( surface.attributes.surfaceType === "ExteriorWall" ) {
 
-//console.log( 'surface', surface );
-				txt += surface.CADObjectId.text + b;
+				txt += surface.CADObjectId + b;
 
 			}
+
 		}
 
 		contents.innerHTML = txt;
@@ -120,69 +121,64 @@ console.log( '', jsonText );
 	}
 
 
+// Changes XML to JSON
+// Modified version from here: http://davidwalsh.name/convert-xml-json
+
 	function xmlToJson(xml) {
 
 // Create the return object
 		var obj = {};
 
-		if ( xml.nodeType == 1 ) { // element
+		if ( xml.nodeType === 1 ) { // element
 
 // do attributes
 			if ( xml.attributes.length > 0 ) {
 
-			obj[ "attributes" ] = {};
+				obj["attributes"] = {};
 
 				for ( var j = 0; j < xml.attributes.length; j++ ) {
 
 					var attribute = xml.attributes.item( j );
-
 					obj[ "attributes" ][ attribute.nodeName ] = attribute.nodeValue;
 
 				}
 
 			}
 
-		} else if ( xml.nodeType == 3 ) { // text
+		} else if ( xml.nodeType === 3 ) { // text
 
-			if ( xml.textContent.trim().length > 1 ) {
-
-// console.log( 'text node: ', xml );
-ddd = xml.textContent;
-				obj = xml.textContent;
-
-			} else {
-
-				obj = xml.nodeValue;
-
-			}
+			obj = xml.nodeValue;
 
 		}
 
 // do children
-		if (xml.hasChildNodes() ) {
+// If just one text node inside
+		if ( xml.hasChildNodes() && xml.childNodes.length === 1 && xml.childNodes[0].nodeType === 3 ) {
 
-			for ( var i = 0; i < xml.childNodes.length; i++) {
+			obj = xml.childNodes[0].nodeValue;
+
+		}
+
+		else if (xml.hasChildNodes()) {
+
+			for (var i = 0; i < xml.childNodes.length; i++) {
 				var item = xml.childNodes.item(i);
-				var nodeName = item.nodeName.replace( /\#/, '' );
+				var nodeName = item.nodeName;
 
-				if ( typeof(obj[nodeName]) == "undefined" ) {
+				if (typeof(obj[nodeName]) == "undefined") {
 
 					obj[nodeName] = xmlToJson(item);
 
 				} else {
 
-					if ( typeof(obj[nodeName].push) == "undefined") {
+					if ( typeof( obj[ nodeName ].push) == "undefined" ) {
 
 						var old = obj[nodeName];
 						obj[nodeName] = [];
 						obj[nodeName].push(old);
-
 					}
-
-					obj[ nodeName ].push(xmlToJson( item));
-
+					obj[nodeName].push(xmlToJson(item));
 				}
-
 			}
 		}
 

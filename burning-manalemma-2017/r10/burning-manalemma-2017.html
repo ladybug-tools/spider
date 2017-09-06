@@ -40,7 +40,6 @@
 		<div id="logIntersect" >Click 'Draw Analemma  & Sun' </div>
 		<div id="debug" ></div>
 		<div id="info" ></div>
-
 	</div>
 
 	<div id = "menu" >
@@ -174,11 +173,12 @@
 	function init() {
 
 		let folder = window.top === window.self ? '' : 'r' + revisionNumber + '/';
+
 		ifrMenuSub.style.display = window.top === window.self ? '' : 'none';
 
 		txt = 'See <a href="#r' + revisionNumber + '/readme-burning-manalemma-2017.md" >R' + revisionNumber + ' read me</a> for details.';
-		parent.divMenuSub.innerHTML = menuSub;
 
+		parent.divMenuSub.innerHTML = menuSub;
 
 		parent.ifrMenuSub.src = folder + "mnu-default.html";
 

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { background-color: lightpink; ; font: 12pt monospace; margin: 0 auto; max-width: 300px; padding: 0 3px; }
+	a { color: crimson; text-decoration: none; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+
+	<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+
+	<p><button onclick=toggleBackgroundGradient(); > Toggle background</button></p>
+
+	<p><button onclick=toggleSceneAutoRotate() > Toggle scene rotation</button></p>
+
+	<p><button onclick=toggleObject3DRotate() > Toggle object rotation</button></p>
+
+	<p><button onclick=toggleWireframe(); > Toggle wireframe</button></p>
+
+	<p id=mnuSettingsDebug ></p>
+
+<script>
+
+
+// add try catch so can run standalone?
+
+	let abc = 'mnu-setings';
+
+	var pcc;
+	let pccRot;
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		if ( window.self === window.top  ) {
+
+			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '200px';
+
+		}
+
+		if ( parent.THREE ) {
+
+			pcc = parent;
+
+		} else if ( parent.ifrContents ) {
+
+			pcc = parent.ifrContents.contentWindow;
+
+		}
+
+
+	}
+
+
+	function toggleBackgroundGradient() {
+
+		if ( window.self === window.top ) { mnuSettingsDebug.innerHTML = 'toggleBackgroundGradient'; return; }
+
+//		pcc.toggleBackgroundGradient();
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		parent.document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+				pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
+
+	function toggleSceneAutoRotate() {
+
+		if ( window.self === window.top ) { mnuSettingsDebug.innerHTML = 'toggleSceneAutoRotate'; return; }
+
+		pcc.controls.autoRotate = !pcc.controls.autoRotate;
+
+	}
+
+
+
+	function toggleObject3DRotate() {
+
+		if ( window.self === window.top ) { mnuSettingsDebug.innerHTML = 'toggleObject3DRotate'; return; }
+
+//		if ( pccRot ) { cancelAnimationFrame( pccRot ); pccRot = undefined; } else { animateObject3D(); }
+
+//		pcc.pccRot = pccRot;
+
+		pccRot = pccRot ? pcc.cancelAnimationFrame( pccRot ) : pcc.animateObject3D();
+
+	}
+
+
+	pcc.animateObject3D = function() {
+
+			pccRot = pcc.requestAnimationFrame( pcc.animateObject3D )
+
+			pcc.mesh.rotation.x += 0.005;
+
+	}
+
+
+	function toggleWireframe() {
+
+		if ( window.self === window.top ) { mnuSettingsDebug.innerHTML = 'toggleWireframe'; return; }
+
+		pcc.scene.traverse( function ( child ) {
+
+			if ( child instanceof pcc.THREE.Mesh ) {
+
+				child.material.wireframe = !child.material.wireframe;
+
+			}
+
+		} );
+
+	}
+
+</script>
+</body>
+</html>

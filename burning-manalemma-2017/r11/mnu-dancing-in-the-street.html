@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Dancing in the streets" >
+<meta name = "keywords" content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-01" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	#menu { position: absolute; text-align: center; width: 100%; }
+	#controls { position: absolute; text-align: center; bottom: 0px; width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color:: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+
+
+	</div>
+
+
+		<p id=controls >
+			<button onclick=stopRadio() >Stop</button><br>
+			&#x1f508; <output id=outVolume ></output>  <input type=range id=rngVolume onclick=updateVolume(); value=10 min=0 max=100 step=1 >
+		</p>
+
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/loaders/BVHLoader.js" ></script>
+<script src = "https://rawgit.com/goldfire/howler.js/master/src/howler.core.js"></script>
+<script>
+
+	let sound, sounds = [];
+
+	let station =
+		{
+			freq: 'PopTron',
+			title: "Electropop and indie dance rock with sparkle and pop.",
+			src: ['http://ice1.somafm.com/poptron-128-mp3', 'http://ice2.somafm.com/poptron-64-aac' ],
+			howl: null
+		};
+
+	let files = [];
+	let bvh;
+	let count = 0;
+	let frame = 0;
+	let framesLength;
+
+	let renderer, camera, controls, scene;
+	let geometry, material, mesh;
+
+	init();
+	animate();
+
+
+	var loader = new THREE.BVHLoader();
+
+//	loader.load( "pirouette.bvh", callbackLoader );
+
+	loader.load( "../../data/aachan.bvh", callbackLoader );
+	loader.load( "../../data/kashiyuka.bvh",callbackLoader );
+	loader.load( "../../data/nocchi.bvh", callbackLoader );
+
+
+	function callbackLoader( result ) {
+
+//console.log( 'result', result  );
+
+		bvh = result;
+		bvh.character = parseData( bvh );
+		scene.add ( bvh.character );
+		files.push( bvh );
+
+	}
+
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '350px';
+
+		}
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+				pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.set( 100, 200, 500 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		let gridHelper = new THREE.GridHelper( 500, 20 );
+		scene.add( gridHelper );
+
+		let axisHelper = new THREE.AxisHelper( 500 );
+		scene.add( axisHelper );
+
+		updateVolume();
+
+		playRadio();
+
+	}
+
+
+
+	function playRadio( index ) {
+
+
+		var data = station;
+
+		if ( data.howl ) {
+
+			sound = data.howl;
+
+		} else {
+
+			sound = data.howl = new Howl({
+
+				src: data.src,
+				html5: true, // A live stream can only be played through HTML5 Audio.
+				format: ['mp3', 'aac'],
+				volume: parseFloat( rngVolume.value ) / 100
+
+			});
+
+			sounds.push( sound );
+
+		}
+
+		sound.play();
+
+	}
+
+
+
+	function stopRadio() {
+
+		if ( sounds.length ) {
+
+			for ( let sound of sounds ) {
+
+			 sound.unload();
+
+			}
+
+		}
+
+	}
+
+
+	function updateVolume() {
+
+		outVolume.value = rngVolume.value;
+		volume = parseFloat( rngVolume.value ) / 100;
+
+		if ( sounds.length ) {
+
+			for ( let sound of sounds ) {
+
+			 sound.volume( volume );
+
+			}
+
+		}
+
+	}
+
+
+
+	function parseData ( bvh ) {
+
+		const character = new THREE.Object3D();
+		const bones = bvh.skeleton.bones;
+		const origin = new THREE.Vector3( 0, 0, 0 );
+		const geometrySphere  = new THREE.SphereGeometry( 6 );
+		const material = new THREE.MeshNormalMaterial();
+		const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
+		let geometry, line, midpoint, length, mesh;
+
+		for ( let bone of bones ) {
+
+			bone.mesh = new THREE.Mesh( geometrySphere, material );
+			bone.mesh.position.copy( bone.position );
+
+			if ( bone.parent ) {
+
+				bone.parent.mesh.add( bone.mesh );
+
+				geometry = new THREE.Geometry();
+				geometry.vertices = [ origin, bone.position ];
+				line = new THREE.Line( geometry, materialLine );
+				bone.parent.mesh.add( line );
+
+				line.geometry.computeBoundingSphere();
+				midpoint = line.geometry.boundingSphere.center;
+				length = 2 * line.geometry.boundingSphere.radius
+
+				geometry = new THREE.CylinderGeometry(6, 6, length );
+				geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+
+				mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( midpoint );
+				mesh.lookAt( origin );
+				bone.parent.mesh.add( mesh );
+
+			} else {
+
+				character.add( bone.mesh );
+
+			}
+
+		}
+
+		return character;
+
+	}
+
+
+
+	function setFrameBVH( bvh, frame ){
+
+		let track, bone, index;
+		const tracks = bvh.clip.tracks;
+		const bones = bvh.skeleton.bones;
+
+		bvh.framesLength = tracks[ 0 ].times.length;
+
+
+		for ( let i = 0; i < tracks.length; i++ ) {
+
+			track = tracks[ i ];
+
+			bone = bones.find( function( bone ) { return bone.name === track.name.slice( 7 ).replace( /].(.*?)ion/, '' ); } );
+
+			if ( track.name.endsWith( 'quaternion' ) ) {
+
+				index = 4 * frame;
+				quaternion = new THREE.Quaternion( track.values[ index++ ], track.values[ index++ ], track.values[ index++ ], track.values[ index ] );
+				bone.mesh.setRotationFromQuaternion( quaternion );
+
+			} else if ( i === 0 ) {
+
+				index = 3 * frame;
+				bone.mesh.position.set( track.values[ index++ ], track.values[ index++ ], track.values[ index ] );
+
+			}
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+		count++;
+
+		if ( files.length && count % 3 === 0 ) {
+
+			for ( let bvh of files ) {
+
+				setFrameBVH( bvh, frame );
+				frame++;
+				frame = frame < bvh.framesLength ? frame : 0;
+
+			}
+
+		}
+
+	}
+
+
+
+</script>
+</body>
+</html>

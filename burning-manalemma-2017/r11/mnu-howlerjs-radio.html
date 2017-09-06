@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+
+	body { background-color: FloralWhite; font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: green; text-decoration: none; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color:: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+
+/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+
+</style>
+</head>
+<body>
+
+
+	<div id = "menu" >
+		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+		<p>
+			The following 'radio buttons' conform to Burner standards
+		</p>
+		<div id=radioButtons ></div>
+		<p id=controls >
+			<button onclick=stopRadio() >Stop</button><br>
+			Volume <output id=outVolume ></output>  <input type=range id=rngVolume onclick=updateVolume(); value=25 min=0 max=100 step=1 >
+		</p>
+		<p id = "contents" >
+			Code from <a href="https://github.com/goldfire/howler.js" target="_blank">howler.js</a><br>
+
+			Sounds from <a href="soma.fm" target="_blank">soma fm</a>
+		</p>
+	</div>
+
+<script src="https://rawgit.com/goldfire/howler.js/master/src/howler.core.js"></script>
+<script>
+
+	let sound, sounds = [];
+
+	let stations = [
+		{
+			freq: '102.3',
+			title: "Black Rock FM",
+			src: ['http://ice1.somafm.com/brfm-128-mp3', 'http://ice2.somafm.com/brfm-64-aac' ],
+			howl: null
+		},
+		{
+			freq: '81.4',
+			title: "Groove Salad",
+			src: ['http://ice1.somafm.com/groovesalad-128-mp3', 'http://ice1.somafm.com/groovesalad-128-aac'],
+			howl: null
+		},
+		{
+			freq: '89.9',
+			title: "Secret Agent",
+			src: ['http://ice1.somafm.com/secretagent-128-mp3', 'http://ice1.somafm.com/secretagent-128-aac'],
+			howl: null
+		},
+		{
+			freq: '98.9',
+			title: "Indie Pop",
+			src: ['http://ice1.somafm.com/indiepop-128-mp3', 'http://ice1.somafm.com/indiepop-128-aac'],
+			howl: null
+		},
+		{
+			freq: '103.3',
+			title: "Police Radio",
+			src: ['http://ice1.somafm.com/sf1033-128-mp3', 'http://ice2.somafm.com/sf1033-64-aac'],
+			howl: null
+		},
+		{
+			freq: '107.7',
+			title: "The Trip",
+			src: ['http://ice1.somafm.com/thetrip-128-mp3', 'http://ice2.somafm.com/thetrip-64-aac'],
+			howl: null
+		}
+	];
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '450px';
+
+		}
+
+		updateVolume();
+
+		setButtons();
+
+	}
+
+
+
+	function setButtons() {
+
+		let txt = ''
+
+		for ( var i = 0; i < stations.length; i++ ) {
+
+			station = stations[ i ];
+			txt += '<p><button onclick=playRadio(' + i + '); title=' + station.freq + ' >' + station.title + '</button></p>'
+
+		}
+
+		radioButtons.innerHTML = txt;
+
+	}
+
+
+
+	function playRadio( index ) {
+
+
+		var data = stations[ index ];
+
+		if ( data.howl ) {
+
+			sound = data.howl;
+
+		} else {
+
+			sound = data.howl = new Howl({
+
+				src: data.src,
+				html5: true, // A live stream can only be played through HTML5 Audio.
+				format: ['mp3', 'aac'],
+				volume: parseFloat( rngVolume.value ) / 100
+			});
+
+			sounds.push( sound );
+
+		}
+
+		sound.play();
+
+	}
+
+
+	function stopRadio() {
+
+		if ( sounds.length ) {
+
+			for ( let sound of sounds ) {
+
+			 sound.unload();
+
+			}
+
+		}
+
+	}
+
+
+	function updateVolume() {
+
+		outVolume.value = rngVolume.value;
+		volume = parseFloat( rngVolume.value ) / 100;
+
+		if ( sounds.length ) {
+
+			for ( let sound of sounds ) {
+
+			 sound.volume( volume );
+
+			}
+
+		}
+
+	}
+
+
+</script>
+</body>
+</html>
