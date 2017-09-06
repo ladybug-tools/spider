@@ -63,22 +63,20 @@
 		} else if ( parent && parent.THREE ) {
 
 			pcc = parent.parent;
-			THREE = pcc.THREE;
-			scene = pcc.scene;
-			camera = pcc.camera;
-			controls = pcc.controls;
 
 		} else if ( parent && parent.parent.ifrContents ) {
 
 			pcc = parent.parent.ifrContents.contentWindow;
-			THREE = pcc.THREE;
-			scene = pcc.scene;
-			camera = pcc.camera;
-			controls = pcc.controls;
 
 		}
 
-		if ( !scene ) { contents.innerHTML = 'work in progress'; return }
+
+		if ( !pcc.scene ) { contents.innerHTML = 'work in progress'; return }
+
+		THREE = pcc.THREE;
+		scene = pcc.scene;
+		camera = pcc.camera;
+		controls = pcc.controls;
 
 		scene.remove( pcc.mesh );
 

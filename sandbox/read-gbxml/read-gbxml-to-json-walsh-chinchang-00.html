@@ -103,7 +103,7 @@ console.log( 'gbxml', gbxml );
 
 		surfaces = gbxml.Campus.Surface;
 
-		for ( let i = 0; i < surfaces.length; i++ ) {
+		for ( var i = 0; i < surfaces.length; i++ ) {
 
 			surface = surfaces[ i ];
 //console.log( 'surface', surface );
@@ -127,7 +127,7 @@ console.log( 'gbxml', gbxml );
 	function xmlToJson(xml) {
 
 // Create the return object
-		let obj = {};
+		var obj = {};
 
 		if ( xml.nodeType === 1 ) { // element
 
@@ -136,9 +136,9 @@ console.log( 'gbxml', gbxml );
 
 				obj["attributes"] = {};
 
-				for ( let j = 0; j < xml.attributes.length; j++ ) {
+				for ( var j = 0; j < xml.attributes.length; j++ ) {
 
-					let attribute = xml.attributes.item( j );
+					var attribute = xml.attributes.item( j );
 					obj[ "attributes" ][ attribute.nodeName ] = attribute.nodeValue;
 
 				}
@@ -162,20 +162,20 @@ console.log( 'gbxml', gbxml );
 		else if ( xml.hasChildNodes()) {
 
 			for ( let i = 0; i < xml.childNodes.length; i++ ) {
-				let item = xml.childNodes.item( i );
-				let nodeName = item.nodeName;
+				var item = xml.childNodes.item(i);
+				var nodeName = item.nodeName;
 
-				if ( typeof( obj[ nodeName ] ) === "undefined" ) {
+				if (typeof(obj[nodeName]) == "undefined") {
 
-					obj[ nodeName ] = xmlToJson( item );
+					obj[nodeName] = xmlToJson(item);
 
 				} else {
 
-					if ( typeof( obj[ nodeName ].push ) == "undefined" ) {
+					if ( typeof( obj[ nodeName ].push) == "undefined" ) {
 
-						let old = obj[ nodeName ];
-						obj[ nodeName ] = [];
-						obj[ nodeName ].push( old );
+						var old = obj[nodeName];
+						obj[nodeName] = [];
+						obj[nodeName].push(old);
 					}
 
 					obj[nodeName].push(xmlToJson(item));
