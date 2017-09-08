@@ -12,7 +12,7 @@
 	body { font: 12pt monospace; margin: 0; overflow: hidden; }
 	a { color: crimson; text-decoration: none; }
 
-	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+	#menu { margin: 0 20px; max-width: 500px; position: absolute; right: 20px; top: 50px; } */
 
 </style>
 </head>
@@ -24,6 +24,7 @@
 		<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
 		<div id = "contents" ></div>
 		<div id = "log" ></div>
+		<div id = "log2" ></div>
 	</div>
 
 <script>
@@ -274,7 +275,10 @@ break;
 
 				}
 
+				
 			}
+
+			log2.innerHTML = ( k + 1 ) + ' of ' + gbxml.Campus.Building.Space.length;
 
 		}
 
