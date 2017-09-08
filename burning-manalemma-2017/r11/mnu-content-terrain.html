@@ -11,6 +11,7 @@
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
+	iframe { height: 500px; width: 100% }
 
 /*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
 
@@ -20,6 +21,7 @@
 
 	<div id = "menu" >
 		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+
 		<div id = "contents" ></div>
 	</div>
 
@@ -65,6 +67,10 @@
 
 			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
 
+			contents.innerHTML = '<iframe id=ifrContents src=threejs-basic.html ></iframe>';
+
+			pcc = ifrContents.contentWindow;
+
 		} else if ( parent && parent.THREE ) {
 
 			pcc = parent.parent;
@@ -75,13 +81,15 @@
 
 		}
 
-
-		if ( !pcc.scene ) { contents.innerHTML = 'work in progress'; return }
+//console.log( '', pcc );
 
 		THREE = pcc.THREE;
 		scene = pcc.scene;
 		camera = pcc.camera;
 		controls = pcc.controls;
+
+//		if ( !pcc.scene ) { contents.innerHTML = 'work in progress'; return }
+
 
 		scene.remove( pcc.mesh );
 

@@ -104,7 +104,7 @@
 		var image = document.body.style.backgroundImage;
 
 		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
-				pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );

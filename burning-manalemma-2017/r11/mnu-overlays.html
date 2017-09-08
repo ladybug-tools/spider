@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; } 
+	select { box-sizing: border-box; width: 100%; }
+	iframe { height: 500px; width: 100% }
+
+</style>
+</head>
+<body>
+
+
+	<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+
+	<p> <select id=selMap size=10 onchange=setMapOverlay(); ></select></p>
+
+	<p><img id=imgOverlay ></p>
+
+	<p id=contents ></p>
+
+<script>
+
+	let pcc;
+	let THREE;
+	let scene;
+	let ground;
+
+	const defaultLatitude = 37.796;
+	const defaultLongitude = -122.398;
+
+//	const defaultLatitude = 40.786944;
+//	const defaultLongitude = -119.204444;
+	const defaultOffsetUTC = -420;
+
+	let parameters = {};
+	parameters.zoom = 16;
+	parameters.latitude = defaultLatitude;
+	parameters.longitude = defaultLongitude;
+	parameters.heightScale = 3;
+	parameters.side = 2;
+	parameters.groundSize = 100;
+	parameters.mPixel = [ 156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298 ]
+	parameters.pixelsPerTile = 256;
+	parameters.tilesPerSide = 4; // odd number please
+
+	parameters.zoom = zoom = 11;
+	parameters.x = 345;
+	parameters.y = 769;
+	parameters.titleOffsetX = 2;
+	parameters.titleOffsetY = 2;
+
+	parameters.mapTypes = [
+
+		['Google Maps','https://mt1.google.com/vt/x='],
+		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
+		['Google Maps Satellite','https://mt1.google.com/vt/lyrs=s&x='],
+		['Google Maps Hybrid','https://mt1.google.com/vt/lyrs=y&x='],
+		['Open Street Map','http://tile.openstreetmap.org/'],
+		['Open Street Map topo','http://tile.opentopomap.org/'],
+		['Open Cycle Map', 'http://tile.opencyclemap.org/cycle/'],
+//		['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'],
+//		['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'],
+		['Stamen terrain background','http://tile.stamen.com/terrain-background/'],
+		['Esri Satellite', 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/']
+
+	];
+
+	count = 0;
+
+	init()
+
+
+	function init() {
+
+		for ( var i = 0; i < parameters.mapTypes.length; i++ ) {
+
+			selMap.appendChild( document.createElement( 'option' ) );
+			selMap.children[ i ].text = parameters.mapTypes[ i ][ 0 ];
+
+		}
+
+		selMap.selectedIndex = 0;
+
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+//			playImages();
+
+			contents.innerHTML = '<iframe id=ifrContents src=threejs-basic.html ></iframe>';
+
+			pcc = ifrContents.contentWindow;
+
+			ifrContents.onload = initVariables;
+
+		} else {
+
+			parent.ifrMenuSub.style.height = '350px';
+
+			pcc = parent;
+			initVariables()
+
+		}
+
+
+		if ( location.hash ) { 
+
+			playImages();
+
+			contents.innerHTML = '<a href=../index.html target=_top >Return to Burning mAnalemma Playa</a>'; 
+
+		}
+
+	}
+
+
+	function initVariables() {
+
+		THREE = pcc.THREE;
+		scene = pcc.scene;
+		camera = pcc.camera;
+		controls = pcc.controls;
+		lightDirectional = pcc.lightDirectional;
+		cameraHelper = pcc.cameraHelper;
+		
+
+		setMapOverlay();
+
+	}
+
+
+
+	function playImages() {
+
+		requestAnimationFrame( playImages )
+
+		if ( count++ % 120 === 0 ) {
+
+			selMap.selectedIndex = ++selMap.selectedIndex < selMap.length ? selMap.selectedIndex : 0;
+
+			setMapOverlay();
+
+		}
+
+	}
+
+
+	function setMapOverlay() {
+
+//		if ( !parent.ifrContents ) { alert( 'please enter a location' ); return; }
+
+		if ( window.top === window.self || location.hash ) {
+
+			parameters.zoom = zoom = 11;
+			parameters.x = x = 345;
+			parameters.y = y = 769;
+			ground = pcc.mesh;
+
+			mapType = parameters.mapTypes[ selMap.selectedIndex ];
+
+			var urlBase = mapType[ 1 ];
+
+			if ( selMap.selectedIndex < 4 ) {
+
+				imgOverlay.src = urlBase + x + '&y=' + y + '&z=' + zoom
+
+			} else {
+
+				imgOverlay.src = urlBase + zoom + '/' + x + '/' + y + '.png';
+
+			}
+
+			drawMapOverlay();
+
+		} else if ( parent.THREE ) {
+
+console.log( '23', pcc, pcc.ground );
+//			parent.mapType = mapTypes[ selMap.selectedIndex ];
+//			parent.selectedIndex = selMap.selectedIndex;
+			
+			ground = pcc.ground;
+			drawMapOverlay();
+
+		} else {
+
+//			parent.parenmapType = mapTypes[ selMap.selectedIndex ];
+//			parent.parent.ifrContents.contentWindow.selectedIndex = selMap.selectedIndex;
+//			parent.parent.ifrContents.contentWindow.
+
+			drawMapOverlay();
+
+		}
+
+	}
+
+
+	function drawMapOverlay() {
+
+		let baseURL, tileX, tileY, tileOffset, count;
+		const opacity = 1;
+		const zoom =  parameters.zoom + 2;
+
+		let tilesPerSide = parameters.tilesPerSide;
+		let img, texture;
+
+		rasterCanvas = document.createElement( 'canvas' );
+		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
+//		document.body.appendChild( rasterCanvas );
+//		rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
+		rasterContext = rasterCanvas.getContext( '2d' );
+
+		if ( !parameters.mapType ) {
+
+			parameters.mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
+			selectedIndex = 0;
+
+		}
+
+//		tileOffset = Math.floor( 0.5 * tilesPerSide );
+//		tileX = lon2tile( parameters.longitude, zoom ) - parameters.titleOffsetX;
+//		tileY = lat2tile( parameters.latitude, zoom ) - parameters.titleOffsetY;
+
+		tileX = parameters.x - parameters.titleOffsetX;
+		tileY = parameters.y - parameters.titleOffsetY;
+
+		count = 0;
+		baseURL = parameters.mapType[ 1 ];
+
+		for ( var x = 0; x < tilesPerSide; x++ ) {
+
+			for ( var y = 0; y < tilesPerSide; y++ ) {
+
+				if ( selectedIndex < 4 ) {
+
+					loadImage( baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+console.log( 'goog', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+				} else if ( selectedIndex === 7 ) {
+
+					loadImage( baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg', x , y );
+//console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
+
+				} else {
+
+					loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
+console.log( '', selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+
+				}
+
+			}
+
+		}
+
+
+		function loadImage( url, x, y ) {
+
+			let img = document.createElement( 'img' );
+			img.crossOrigin = 'anonymous';
+			img.src = url;
+
+			rasterCanvas = document.createElement( 'canvas' );
+			rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
+			document.body.appendChild( rasterCanvas );
+			rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
+			rasterContext = rasterCanvas.getContext( '2d' );
+
+			let texture = new THREE.Texture( rasterCanvas );
+			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			texture.needsUpdate = true;
+			const pixelsPerTile = parameters.pixelsPerTile;
+			const tilesPerSideSquared = tilesPerSide * tilesPerSide;
+
+			img.onload = function(){
+
+				rasterContext.drawImage( img, 0, 0, 256, 256, x * pixelsPerTile, y * pixelsPerTile, pixelsPerTile, pixelsPerTile );
+
+				count++;
+
+				if ( count === tilesPerSideSquared - 1 ) {
+
+					pcc.ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+					pcc.ground.material.needsUpdate = true;
+
+//					ground.material = new THREE.MeshBasicMaterial( { color: 0xfff77f, side: 2, opacity: opacity , transparent: true } );
+//					ground.material.needsUpdate = true;
+
+
+//					scene.add( ground );
+
+				}
+
+			}
+
+		}
+
+	}
+
+
+	function lon2tile( longitude, zoom ) {
+
+		return Math.floor( ( longitude + 180 ) / 360 * Math.pow( 2, zoom ) );
+
+	}
+
+	function lat2tile( latitude, zoom ) {
+
+		const pi = Math.PI;
+		return Math.floor( ( 1 - Math.log( Math.tan( latitude * pi / 180 ) + 1 / Math.cos( latitude * pi / 180) ) / pi ) / 2 * Math.pow( 2, zoom ) );
+
+	}
+
+</script>
+</body>
+</html>
