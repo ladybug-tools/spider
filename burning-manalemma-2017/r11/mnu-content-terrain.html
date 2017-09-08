@@ -29,12 +29,17 @@
 	let THREE;
 	let scene;
 
-	const defaultLatitude = 40.786944;
-	const defaultLongitude = -119.204444;
+	const defaultLatitude = 37.796;
+	const defaultLongitude = -122.398;
+
+//	const defaultLatitude = 40.786944;
+//	const defaultLongitude = -119.204444;
 	const defaultOffsetUTC = -420;
 
+
+
 	let parameters = {};
-	parameters.zoom = 12;
+	parameters.zoom = 16;
 	parameters.latitude = defaultLatitude;
 	parameters.longitude = defaultLongitude;
 	parameters.heightScale = 3;
@@ -168,6 +173,8 @@
 			'<p>lat Min: ' + latMin.toFixed( 4 ) + ' - latMax: ' + latMax.toFixed( 4 ) + '</p>' +
 			'<p>lon Min: ' + lonMin.toFixed( 4 ) + ' - lonMax: ' + lonMax.toFixed( 4 ) + '</p>' +
 			'<p> latDelta: ' + latDelta.toFixed( 6 ) + ' lonDelta: ' + lonDelta.toFixed( 6 ) + '</p>' +
+			'<p>scaleX: ' + parameters.scaleX + '</p>' +
+			'<p>scaleZ: ' + parameters.scaleZ + '</p>' +
 			'<p> latDegreesPerPixel: ' + latDegreesPerPixel.toFixed( 6 ) + ' lonDegreesPerPixel: ' + lonDegreesPerPixel.toFixed( 6 ) + '</p>' +
 			'<p> latPixelsPerDegree: ' + latPixelsPerDegree.toFixed( 1 ) + ' lonPixelsPerDegree: ' + lonPixelsPerDegree.toFixed( 1 ) + '</p>' +
 			'<p>metersPerPixel: ' + parameters.metersPerPixel.toFixed( 4 ) + '</p>' +

@@ -8,7 +8,7 @@
 	body { font: 12pt monospace; margin: 0 auto; padding: 0 10px 0 0; max-width: 300px; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
-	button:hover { background-color: #ccc; color: #fff }
+	button:hover { background: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
@@ -19,7 +19,7 @@
 <body>
 <script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
 
-<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
 
 	<p>
 		<button onclick="initSunPath();" >Draw Sun & Analemma</button>
@@ -48,13 +48,37 @@
 <script>
 
 
-	var pmc;
+	const defaultLatitude = 37.796;
+	const defaultLongitude = -122.398;
+
+//	const defaultLatitude = 40.786944;
+//	const defaultLongitude = -119.204444;
+	const defaultOffsetUTC = -420;
+
+
+
+	let parameters = {};
+	parameters.zoom = 16;
+	parameters.latitude = defaultLatitude;
+	parameters.longitude = defaultLongitude;
+	parameters.groundSize = 100;
+	analemmaRadius = 0.8 * parameters.groundSize;
+
+	parameters.offsetUTC = -420;
+
+	parameters.date = 21;
+	parameters.month = 2;
+	parameters.hour = 12 - parameters.offsetUTC / 60;
+	parameters.minutes = 0;
+
+
+	var pcc;
 	var THREE;
 	var scene;
 	var controls;
 	var lightDirectional;
 	var cameraHelper;
-	var parameters;
+
 	var object3D;
 	var structures;
 	var ground;
@@ -112,32 +136,25 @@
 
 		} else if ( parent.THREE ) {
 
-			pmc = parent;
+			pcc = parent;
 
 		} else {
 
-			pmc = parent.ifrContents.contentWindow;
+			pcc = parent.ifrContents.contentWindow;
 
 		}
 
-		THREE = pmc.THREE;
-		scene = pmc.scene
-		controls = pmc.controls;
-		lightDirectional = pmc.lightDirectional;
-		cameraHelper = pmc.cameraHelper;
-		structures = pmc.structures;
-		parameters = pmc.parameters;
-		object3D = pmc.object3D;
-		lights = pmc.lights;
-		ground = pmc.ground;
+		THREE = pcc.THREE;
+		scene = pcc.scene
+		controls = pcc.controls;
+		lightDirectional = pcc.lightDirectional;
+		cameraHelper = pcc.cameraHelper;
+		structures = pcc.structures;
+//		parameters = pcc.parameters;
+		object3D = new THREE.Object3D();;
+		lights = pcc.lights;
+//		ground = pcc.ground;
 
-		analemmaRadius = 0.8 * pmc.groundSize;z
-		parameters.offsetUTC = -420;
-
-		parameters.date = 21;
-		parameters.month = 2;
-		parameters.hour = 12 - parameters.offsetUTC / 60;
-		parameters.minutes = 0;
 
 //console.log( '', parameters );
 
@@ -153,7 +170,7 @@
 
 			drawAnalemma();
 
-			initSunAndLight();
+//			initSunAndLight();
 
 		}
 
@@ -161,9 +178,9 @@
 		inpDate.onclick = setDate;
 		inpHour.onclick = setHour;
 
-		playTheYear = true;
+//		playTheYear = true;
 
-		if ( playTheYear ) { play(); }
+//		if ( playTheYear ) { play(); }
 
 	}
 
@@ -249,9 +266,11 @@
 
 		}
 
-		object3D.remove( analemma );
-		object3D.add( analemma );
+//		object3D.remove( analemma );
+//		object3D.add( analemma );
+		scene.add( analemma );
 
+console.log( 'analemma', analemma );
 	}
 
 
@@ -265,10 +284,10 @@
 		sun = new THREE.Mesh( geometry, material );
 
 		sun.name = 'sun';
-
+console.log( 'pcc', pcc, lightDirectional );
 		lightDirectional.add( sun );
 
-		scene.add( lights );
+//		scene.add( lights );
 
 		setSunPosition();
 
@@ -297,7 +316,7 @@
 
 	function goToNextHour() {
 
-		if ( !pmc ) { initSunPath(); }
+		if ( !pcc ) { initSunPath(); }
 
 		thisHour = parseInt( inpHour.value, 10 );
 		thisDate = parseInt( inpDate.value, 10 );
@@ -343,7 +362,7 @@
 
 	function setMonth() {
 
-		if ( !pmc ) { initSunPath(); }
+		if ( !pcc ) { initSunPath(); }
 
 		parameters.month = parseInt( inpMonth.value, 10 );
 
@@ -359,7 +378,7 @@
 
 	function setDate() {
 
-		if ( !pmc ) { initSunPath(); }
+		if ( !pcc ) { initSunPath(); }
 
 		outDate.value = parameters.date = parseInt( inpDate.value, 10 );
 
@@ -374,7 +393,7 @@
 	function setHour() {
 
 
-		if ( !pmc ) { initSunPath(); }
+		if ( !pcc ) { initSunPath(); }
 
 		parameters.hour = parseInt( inpHour.value - parameters.offsetUTC / 60, 10 );
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;

@@ -109,18 +109,19 @@
 
 //		pcc.pccRot = pccRot;
 
+
+		pcc.animateObject3D = function() {
+
+				pccRot = pcc.requestAnimationFrame( pcc.animateObject3D )
+
+				pcc.mesh.rotation.x += 0.005;
+
+		}
+
 		pccRot = pccRot ? pcc.cancelAnimationFrame( pccRot ) : pcc.animateObject3D();
 
 	}
 
-
-	pcc.animateObject3D = function() {
-
-			pccRot = pcc.requestAnimationFrame( pcc.animateObject3D )
-
-			pcc.mesh.rotation.x += 0.005;
-
-	}
 
 
 	function toggleWireframe() {

@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><h2><a id = "title" href = "" ></a></h2></div>
+		<div id = "contents" ></div>
+		<div id = "logIntersect" ></div>
+		<div id = "logHeights" ></div>
+	</div>
+
+<script>
+
+	let pcc = {};
+
+	let THREE;
+	let scene;
+
+	const defaultLatitude = 40.786944;
+	const defaultLongitude = -119.204444;
+	const defaultOffsetUTC = -420;
+
+	let parameters = {};
+	parameters.zoom = 16;
+	parameters.x = 10486;
+	parameters.y = 25326;
+	parameters.scaleX = 18204.444444444445;
+	parameters.scaleZ = 23037.393569245927;
+
+	parameters.heightScale = 3;
+	parameters.side = 2;
+	parameters.groundSize = 100;
+	parameters.mPixel = [ 156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298 ]
+	parameters.pixelsPerTile = 256;
+	parameters.tilesPerSide = 4; // odd number please
+	parameters.structuresArray = [];
+
+	let structures;
+	let structuresArray = [];
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		if ( window.self === window.top  ) {
+
+			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+
+		} else if ( parent && parent.THREE ) {
+
+			pcc = parent.parent;
+
+		} else if ( parent && parent.parent.ifrContents ) {
+
+			pcc = parent.parent.ifrContents.contentWindow;
+
+		}
+
+		if ( !pcc.scene ) { contents.innerHTML = 'work in progress'; return }
+
+		THREE = pcc.THREE;
+		scene = pcc.scene;
+		camera = pcc.camera;
+		controls = pcc.controls;
+
+		scene.remove( pcc.mesh );
+
+		scene.remove( structures );
+
+		structures = new THREE.Object3D();
+		structures.name = 'structures';
+
+		getStructures();
+
+		scene.add( structures );
+
+	}
+
+
+
+
+
+	function getStructures() {
+
+		logIntersect.innerHTML = '';
+
+		if ( parameters.zoom < 15 || parameters.zoom > 16 ) {
+
+			logIntersect.innerHTML = 'No structures at this zoom level - yet'
+
+			return;
+
+		}
+
+		urlJSON = 'https://b.data.osmbuildings.org/0.2/anonymous/tile/' + parameters.zoom  + '/' + parameters.x + '/' + parameters.y + '.json';
+
+//console.log( '', urlJSON );  // click to view 3D building data
+
+		try {
+
+			requestFile( urlJSON, callbackGeoJSON );
+
+		}
+
+		catch( error ) {
+
+console.log( 'getStructures error', error );
+
+		}
+
+	}
+
+
+
+	function callbackGeoJSON( xhr ) {
+
+		let response, json ;
+		let vertices, polys, poly, height, coordinates, structure;
+
+		response = xhr.target.response;
+
+		try {
+
+			if ( response ) {
+
+				json = JSON.parse( response );
+				parseGeoJSON( json );
+
+				logIntersect.innerHTML = 'Building data is being loaded';
+
+			} else {
+
+				logIntersect.innerHTML = 'No building data here';
+
+console.log( 'callbackGeoJSON response', response );
+
+			}
+
+		}
+
+		catch ( e ) {
+
+console.log( 'callbackGeoJSON error', e );
+//console.log( 'callbackGeoJSON response', response );
+
+			setCamera();
+
+			return;
+
+		}
+
+//console.time( 'timer 1' );
+
+			setCamera();
+	}
+
+
+
+	function parseGeoJSON( json ) {
+
+// much work needed here in order to capture all the available types of features in the data
+
+//console.log( 'json', json );
+
+		let hasHeights = false;
+
+		for ( feature of json.features ) {
+
+			if ( feature.properties.height ) {
+
+				hasHeights = true;
+
+				break;
+
+			}
+
+		}
+
+		logHeights.innerHTML = hasHeights ? 'Data has building heights' : 'Data for this area has no building heights<br>';
+
+		for ( i = 0; i < json.features.length; i++ ) {
+
+			polys = json.features[ i ].geometry.coordinates;
+			height = json.features[ i ].properties.height;
+
+//console.log( 'json', i, json.features[ i ].properties );
+
+// everything must have a hight otherwise we can't see it
+			height = height ? height : 5;
+
+/*
+			roof = json.features[ i ].properties.roofShape;
+
+			if ( roof ) {
+
+console.log( 'json', i, json.features[ i ].properties.roofShape );
+console.log( 'json', i, json.features[ i ] );
+
+			}
+*/
+
+			for ( let j = 0; j < polys.length; j++ ) {
+
+				vertices = [];
+				poly = polys[ j ];
+
+				for ( let k = 0; k < poly.length; k++ ) {
+
+					coordinates = poly[ k ];
+
+					vertices.push( new THREE.Vector2( coordinates[ 0 ], coordinates[ 1 ] ) );
+
+				}
+
+// need to figure out the right scale here - or make adjustable
+
+				height = hasHeights ? height / 5 : 5;
+
+				structure = drawShape( vertices, height );
+
+				if ( structure ) {
+
+					structure.name = i;
+					structure.userData.geometryOriginal = structure.geometry.clone();
+					structures.add( structure );
+					parameters.structuresArray.push( structure );
+					
+				}
+
+			}
+
+			structuresArray = parameters.structuresArray.slice();
+
+
+		}
+
+	}
+
+
+
+	function drawShape( vertices, height ) {
+
+		let geometry, shape, material, mesh;
+
+//console.log( 'shape height', height );
+
+		shape = new THREE.Shape( vertices );
+
+		try {
+
+			geometry = new THREE.ExtrudeBufferGeometry( shape, { steps: 1, amount: height, bevelEnabled: false } );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+
+
+			deltaX = tile2lon( parameters.x, parameters.zoom ) * -1;
+//console.log( 'deltaX', deltaX );
+
+			deltaY = tile2lat( parameters.y, parameters.zoom ) * 1;
+//console.log( 'deltaY', deltaY );
+
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( deltaX, 0, deltaY ) );
+
+			geometry.applyMatrix( new THREE.Matrix4().makeScale( parameters.scaleX, 1, parameters.scaleZ ) );
+
+// helps when things go of into the distance
+//	geometry.center();
+
+//			material = new THREE.MeshPhongMaterial( { color: Math.random() * 0xffffff, side: 2 } );
+			material = new THREE.MeshNormalMaterial( {  side: 2 } );
+			mesh = new THREE.Mesh( geometry, material );
+
+
+			mesh.updateMatrixWorld();
+			mesh.geometry.computeBoundingBox();
+			mesh.geometry.computeBoundingSphere();
+			mesh.userData.position = mesh.geometry.boundingSphere.center;
+			mesh.castShadow = true
+			mesh.receiveShadow = true;
+			return mesh;
+
+		}
+
+		catch (e) {
+
+console.log( 'error', e, shape );
+
+		}
+
+	}
+
+
+
+	function findIntersects() {
+
+		let count, vectorFarDown, vectorLookUp;
+		let arr, position, raycaster, interesects;
+
+		vectorFarDown = new THREE.Vector3( 0, -100, 0 );
+		vectorLookUp = new THREE.Vector3( 0, 1, 0 );
+
+		var structure = structuresArray.pop();
+
+		arr = structure.geometry.attributes.position.array;
+		position = new THREE.Vector3( arr[ 0 ], -100, arr[ 2 ] );
+
+		raycaster = new THREE.Raycaster();
+
+		raycaster.set( position, vectorLookUp );
+
+		intersects = raycaster.intersectObject( ground );
+
+		if ( intersects.length ) {
+
+			let y = intersects[ 0 ].point.y;
+			structure.position.y = y;
+			parameters.structuresArray[ parseInt( structure.name, 10 ) ].position.y = y;
+//console.log( 'nn', parameters.structuresArray[ parseInt( structure.name, 10 ) ] );
+/*
+				structure.updateMatrixWorld();
+				structure.geometry.computeBoundingSphere();
+				center = structure.geometry.boundingSphere.center;
+				placard = drawPlacard( '#' + structure.name, 0.05, 120, center.x, center.y * 2.1 , center.z )
+				structure.add( placard );
+*/
+
+		} else if ( !structuresArray.length ) {
+
+//console.timeEnd( 'timer 1' );
+
+			controls.autoRotate = true;
+
+		}
+
+		logIntersect.innerHTML = structuresArray.length + ' of ' + structures.children.length + ' structures remaining';
+
+	}
+
+
+	function setCamera() {
+
+//		if ( !ground.geometry ) { return; }
+
+//		ground.geometry.computeBoundingSphere();
+		center = new THREE.Vector3( 50, 0, 50 ); //ground.geometry.boundingSphere.center;
+		controls.target.copy( center );
+		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 0, parameters.groundSize, parameters.groundSize ) ) );
+
+//		lightDirectional.position.copy( controls.target.clone().add( new THREE.Vector3( -groundSize, groundSize, groundSize ) ) );
+//		lightDirectional.target = axisHelper;
+
+//		object3D.position.copy( center );
+
+//console.log( 'center', center );
+
+	}
+
+
+
+	function lon2tile( longitude, zoom ) {
+
+		return Math.floor( ( longitude + 180 ) / 360 * Math.pow( 2, zoom ) );
+
+	}
+
+	function lat2tile( latitude, zoom ) {
+
+		const pi = Math.PI;
+		return Math.floor( ( 1 - Math.log( Math.tan( latitude * pi / 180 ) + 1 / Math.cos( latitude * pi / 180) ) / pi ) / 2 * Math.pow( 2, zoom ) );
+
+	}
+
+
+	function tile2lon( x, zoom ) {
+
+		return ( x / Math.pow( 2, zoom ) * 360 - 180 );
+
+	}
+
+	function tile2lat( y, zoom ) {
+
+		var pi = Math.PI
+		var n = pi - 2 * pi * y / Math.pow( 2, zoom );
+		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
+
+	}
+
+
+
+
+	function requestFile( fileName, callback ) {
+
+		let xhr, response, data ;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', fileName, true );
+		xhr.onerror = function( xhr ) { console.log( 'error', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'xhr progress/ bytes loaded', xhr.loaded, xhr  ); }; /// or something
+		xhr.onload = callback ? callback : function( xhr ) { console.log( 'load complete', xhr  ); };
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>

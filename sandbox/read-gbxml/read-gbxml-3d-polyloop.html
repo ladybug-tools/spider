@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+
+	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "menu" >
+		<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
+		<div id = "contents" ></div>
+		<div id = "log" ></div>
+	</div>
+
+<script>
+
+// https://davidwalsh.name/convert-xml-json
+// https://gist.github.com/chinchang/8106a82c56ad007e27b1
+
+//	let url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
+	let url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
+//	let url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
+
+	let gbxml;
+	let model;
+
+	const b = '<br>';
+
+	init();
+	animate();
+
+
+	function init() {
+
+		let txt;
+
+		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		url = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
+
+		requestFile( url, callbackGitHub );
+
+		title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.set( 100, 100, 100 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		let axisHelper = new THREE.AxisHelper( 500 );
+		scene.add( axisHelper );
+
+		geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+
+//		scene.add( mesh );
+
+//		requestFile( 'rectangular-20x50x4.xml', callbackGbXML );
+		requestFile( 'rectangular-30x50x4.xml', callbackGbXML );
+//		requestFile( 'generated2.xml', callbackGbXML );
+
+	}
+
+
+
+	function callbackGitHub( xhr ) {
+
+		let response, files, txt;
+
+		response = xhr.target.response;
+
+		files = JSON.parse( response );
+// console.log( 'files', files );
+
+		txt = '<option>Select a file</option>';
+
+		for ( let i = 0; i < files.length; i++ ) {
+
+			file = files[ i ];
+			if ( file.name === 'README.md' ) { continue; }
+			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
+
+		}
+
+		contents.innerHTML = 'gbXML sample files<br><select id=selGbXml >' + txt + '<select>';
+
+		selGbXml.onchange = function() { requestFile( selGbXml.value, callbackGbXML ); }
+
+	}
+
+
+
+	function callbackGbXML( xhr ) {
+
+		let response, parser, xmldoc, obj;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		parser = new DOMParser();
+		xmldoc = parser.parseFromString( response, "text/xml");
+//console.log( 'xmldoc', xmldoc );
+
+		obj = xmlToJson( xmldoc );
+//console.log( 'obj', obj );
+
+		gbxml = obj.gbXML;
+//console.log( 'gbxml', gbxml );
+console.log( 'gbxml', gbxml );
+
+		parseGbxml( gbxml );
+
+//		jsonText = JSON.stringify( gbxml );
+//console.log( '', jsonText );
+
+	}
+
+
+
+	function parseGbxml( gbxml ) {
+
+		let txt = '<h2>gbXML</h2>';
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI;  // degrees / radians
+		const pi05 = 0.5 * Math.PI;
+		let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+		let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+		let mesh;
+		txt += 
+
+		'Location: ' + gbxml.Campus.Location.Name + b +
+		'Latitude: ' + gbxml.Campus.Location.Latitude + b +
+		'Longitude: ' + gbxml.Campus.Location.Longitude + b +
+		'';
+
+		scene.remove( model );
+		model = new THREE.Object3D();
+		scene.add( model );
+
+		if ( !gbxml.Campus.Building.Space[ 0 ] ) { alert( 'No PolyLoops in this file. Try another file.' ); return; }
+
+// console.log( 'PolyLoop', gbxml.Campus.Building.Space[ 0 ].ShellGeometry.ClosedShell.PolyLoop  );
+
+		for ( var k = 0; k < gbxml.Campus.Building.Space.length; k++ ) {
+
+			space = gbxml.Campus.Building.Space[ k ];
+
+			polyloops = space.ShellGeometry.ClosedShell.PolyLoop;
+
+			log.innerHTML = txt + 
+				polyloops.length.toLocaleString() + ' PolyLoops ' + b;
+
+			for ( let i = 0; i < polyloops.length; i++ ) {
+	//		for ( let i = 0; i < 1; i++ ) {
+
+				points = polyloops[ i ].CartesianPoint;
+//console.log( 'pppp points', points );
+
+				plane = getPlane ( points );
+//console.log( 'plane', plane );
+
+				if ( plane === undefined ) {
+
+					geometry = new THREE.Geometry();
+					vertices = geometry.vertices;
+
+					for ( let j = 0; j < points.length; j++ ) {
+
+						point = points[ j ].Coordinate;
+						vertices.push( v( parseFloat( point[ 0 ] ), parseFloat( point[ 2 ] ), parseFloat( point[ 1 ] ) ) );
+
+					}
+
+					point = points[ 0 ].Coordinate;
+					vertices.push( v( parseFloat( point[ 0 ] ), parseFloat( point[ 2 ] ), parseFloat( point[ 1 ] ) ) );
+//console.log( 'v', vertices );
+					material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+					line = new THREE.Line( geometry, material );
+
+					model.add( line );
+
+				} else {
+
+					geometry = new THREE.Geometry();
+					var vertices = geometry.vertices;
+
+					for ( let j = 0; j < points.length; j++ ) {
+
+						point = points[ j ].Coordinate;
+
+						if ( plane === 0 ) {
+
+							vertices.push( v2( parseFloat( point[ 1 ] ), parseFloat( point[ 2 ] ) ) );
+
+						} else if ( plane === 1 ) {
+
+							vertices.push( v2( parseFloat( point[ 0 ] ), parseFloat( point[ 2 ] ) ) );
+
+						} else {
+
+							vertices.push( v2( parseFloat( point[ 0 ] ), parseFloat( point[ 1 ] ) ) );
+
+						}
+
+					}
+
+//console.log( 'v2', vertices );
+
+					try {
+
+					if ( vertices ) { shape = new THREE.Shape( vertices ); }
+
+					} catch( e ) {
+
+console.log( 'err', e );
+break;
+					}
+
+					try {
+
+					geometry = new THREE.ShapeGeometry( shape );
+
+					} catch( ee ) {
+
+console.log( 'err', ee );
+break;
+					}
+
+					if ( plane === 0 ) {
+
+						geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -0.5 * Math.PI ) );
+						geometry.applyMatrix( new THREE.Matrix4().makeTranslation( parseFloat( points[ 0 ].Coordinate[ 0 ] ), 0, 0 ) );
+
+					} else if ( plane === 1 ) {
+
+//						geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+						geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, parseFloat( points[ 0 ].Coordinate[ 1 ] ) ) );
+
+					} else {
+
+						geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+//						geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -0.5 * Math.PI ) );
+						geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, parseFloat( points[ 0 ].Coordinate[ 2 ] ), 0 ) );
+
+					}
+
+					material = new THREE.MeshNormalMaterial( { side: 2 } );
+					mesh = new THREE.Mesh( geometry, material );
+					model.add( mesh );
+
+				}
+
+			}
+
+		}
+
+		setCamera();
+
+	}
+
+	function getPlane( points ) {
+
+		for ( var i = 0; i < 3; i++ ) {
+
+			let plane = getCoplanar( points, i );
+
+			if ( plane === true ) { return i; }
+
+		}
+
+	}
+
+
+	function getCoplanar( points, index ) {
+
+		let avg = ( 
+			parseFloat( points[ 0 ].Coordinate[ index ] ) + 
+			parseFloat( points[ 1 ].Coordinate[ index ] ) + 
+			parseFloat(  points[ 2 ].Coordinate[ index ] ) ) / 3;
+
+		return avg === parseFloat( points[ 0 ].Coordinate[ index ] );
+
+	}
+
+// Changes XML to JSON
+// Modified version from here: http://davidwalsh.name/convert-xml-json
+
+	function xmlToJson(xml) {
+
+// Create the return object
+		let obj = {};
+
+		if ( xml.nodeType === 1 ) { // element
+
+// do attributes
+			if ( xml.attributes.length > 0 ) {
+
+				obj[ "attributes" ] = {};
+
+				for ( let j = 0; j < xml.attributes.length; j++ ) {
+
+					let attribute = xml.attributes.item( j );
+					obj[ "attributes" ][ attribute.nodeName ] = attribute.nodeValue;
+
+				}
+
+			}
+
+		} else if ( xml.nodeType === 3 ) { // text
+
+			obj = xml.nodeValue;
+
+		}
+
+// do children
+// If just one text node inside
+		if ( xml.hasChildNodes() && xml.childNodes.length === 1 && xml.childNodes[ 0 ].nodeType === 3 ) {
+
+			obj = xml.childNodes[ 0 ].nodeValue;
+
+		}
+
+		else if ( xml.hasChildNodes()) {
+
+			for ( let i = 0; i < xml.childNodes.length; i++ ) {
+				let item = xml.childNodes.item( i );
+				let nodeName = item.nodeName;
+
+				if ( typeof( obj[ nodeName ] ) === "undefined" ) {
+
+					obj[ nodeName ] = xmlToJson( item );
+
+				} else {
+
+					if ( typeof( obj[ nodeName ].push ) == "undefined" ) {
+
+						let old = obj[ nodeName ];
+						obj[ nodeName ] = [];
+						obj[ nodeName ].push( old );
+					}
+
+					obj[nodeName].push(xmlToJson(item));
+				}
+			}
+		}
+
+		return obj;
+
+	}
+
+
+	function setCamera() {
+
+		var bbox = new THREE.Box3().setFromObject( model );
+
+		sphere = bbox.getBoundingSphere();
+		center = sphere.center;
+		radius = sphere.radius;
+//console.log( '', center, radius );
+
+		controls.target.copy( center );
+		camera.position.copy( controls.target.clone().add( new THREE.Vector3( radius, radius, radius ) ) );
+
+//console.log( 'center', center );
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+
+	}
+
+</script>
+</body>
+</html>

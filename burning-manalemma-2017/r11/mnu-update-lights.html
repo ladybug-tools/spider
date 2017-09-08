@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	iframe { height: 500px; width: 100% }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color:: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><div id = "title" href = "" ></div></div>
+		<p><button onclick=initDrawCubes(); >Draw Cubes</button></p>
+		<p><button onclick=addLights(); >Add lights</button></p>
+	</div>
+
+		<div id = "contents" ></div>
+<script>
+
+	var pcc;
+	var THREE;
+	var scene;
+	var controls;
+	let mesh;
+	var lightDirectional;
+	var cameraHelper;
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		if ( window.self === window.top  ) {
+
+			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+
+			contents.innerHTML = '<iframe id=ifrContents src=threejs-basic.html ></iframe>';
+
+			pcc = ifrContents.contentWindow;
+
+		} else if ( parent && parent.THREE ) {
+
+			pcc = parent;
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+			pcc = parent.ifrContents.contentWindow;
+console.log( 'pcc', pcc );
+			parent.ifrContents.onload = initVariables; 
+
+		}
+
+	}
+
+
+	function initVariables() {
+
+			THREE = pcc.THREE;
+			scene = pcc.scene;
+			camera = pcc.camera;
+			controls = pcc.controls;
+			lightDirectional = pcc.lightDirectional;
+			cameraHelper = pcc.cameraHelper;
+			mesh = pcc.mesh;
+
+
+	}
+
+	function addLights( size ) {
+
+// 2017-04-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r2.html
+
+		size = size ? size : 100;
+
+		var lights = new THREE.Object3D();
+		lights.name = 'lights';
+
+//		if ( !lightAmbient ) { 
+
+			lightAmbient = new THREE.AmbientLight( 0x888888 );
+			lights.add( lightAmbient );
+
+//		}
+
+//		if ( !lightPointCamera ) { 
+
+			lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
+			camera.add( lightPointCamera );
+
+			lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
+
+//		}
+
+//		if ( !lightDirectional ) { 
+
+			lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
+			lightDirectional.position.set( -size, size, size );
+			lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+
+			lightDirectional.shadow.mapSize.width = 2048;  // default 512
+			lightDirectional.shadow.mapSize.height = 2048;
+
+			lightDirectional.castShadow = true;
+
+			lights.add( lightDirectional );
+
+			cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+			lights.add( cameraHelper );
+
+//		}
+		scene.add( lights );
+		pcc.lightDirectional = lightDirectional
+		return lights;
+	
+
+	}
+
+
+	function initDrawCubes() {
+
+		scene.remove( mesh );
+
+		mesh = drawCubes();
+
+		scene.add( mesh );
+
+	}
+
+
+	function drawCubes() {
+
+		const cubes = new THREE.Object3D();
+//		let geometry, material, mesh;
+
+		geometry = new THREE.BoxGeometry( 10, 10, 10 );
+
+		for ( var i = 0; i < 50; i++ ) {
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff * Math.random(),
+				emissive: 0xffffff * Math.random(),
+				opacity: Math.random(),
+				specular: 0xffffff * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+				transparent: true
+			} );
+
+			material = new THREE.MeshPhongMaterial( { color: Math.random() * 0xffffff } );
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( 100 * Math.random() - 50, 100 * Math.random(), 100 * Math.random() - 50 );
+			mesh.rotation.set( 6.3 * Math.random(), 1.57 * Math.random(), 3.14 * Math.random() );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			cubes.add( mesh );
+
+//			helper = new THREE.EdgesHelper( mesh );
+//			helper.material.color.setRGB( 1, 0, 0 );
+//			scene.add( helper );
+
+			var geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			var material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			var edges = new THREE.LineSegments( geometryEdge, material );
+			mesh.add( edges ); // add wireframe as a child of the parent mesh
+
+		}
+
+		return cubes;
+
+	}
+</script>
+</body>
+</html>
