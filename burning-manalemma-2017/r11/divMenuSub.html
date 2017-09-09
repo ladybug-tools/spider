@@ -20,7 +20,9 @@
 
 	<div id = "menuSub" >
 
-		<div id = "headerSub" ><h3><a id = "title" href = "" ></a></h3></div>
+		<div id = "headerSub" >
+			<h3><a id = "title" href = "" ></a></h3>
+		</div>
 
 		<div id=menuSubSub >
 			<div><a href=JavaScript:setIfrMenuSub("mnu-text-to-voice.html"); >Text to voice</a></p>
@@ -30,6 +32,7 @@
 
 			<p><a href=JavaScript:setIfrMenuSub("mnu-update-lights.html"); >Update lights</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-content-terrain.html"); >Terrain3D</a></p>
+			<p><a href=JavaScript:setIfrMenuSub("mnu-move.html"); >Map move</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-content-analemma3d.html"); >Analemma3D</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-content-structures.html"); >Structures</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-overlays.html"); >Map overlays</a></p>
@@ -63,13 +66,13 @@
 
 		} else if ( parent && parent.THREE ) {
 
-//console.log( 'parent', parent );
+console.log( 'parent', parent );
 
 			folder = '';
 
 		} else if ( parent && parent.parent ) {
 
-//console.log( 'window', parent.parent.folder );
+console.log( 'window', parent.parent.folder );
 
 			folder = parent.parent.folder;
 //			parent.divMenuSub.style.height = '600px';

@@ -7,14 +7,16 @@
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; } 
 	select { box-sizing: border-box; width: 100%; }
-	iframe { height: 500px; width: 100% }
+	iframe { height: 500px; width: 800px; }
 
 </style>
 </head>
 <body>
 
 
-	<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+	<div id = "header" >
+		<h1><a id = "title" href = "" ></a></h1>
+	</div>
 
 	<p> <select id=selMap size=10 onchange=setMapOverlay(); ></select></p>
 
@@ -29,6 +31,12 @@
 	let scene;
 	let ground;
 
+	let parameters = {};
+
+	const defaultLatitude = 37.796;
+	const defaultLongitude = -122.398;
+
+/*
 	const defaultLatitude = 37.796;
 	const defaultLongitude = -122.398;
 
@@ -36,7 +44,6 @@
 //	const defaultLongitude = -119.204444;
 	const defaultOffsetUTC = -420;
 
-	let parameters = {};
 	parameters.zoom = 16;
 	parameters.latitude = defaultLatitude;
 	parameters.longitude = defaultLongitude;
@@ -52,8 +59,9 @@
 	parameters.y = 769;
 	parameters.titleOffsetX = 2;
 	parameters.titleOffsetY = 2;
+*/
 
-	parameters.mapTypes = [
+	let mapTypes = [
 
 		['Google Maps','https://mt1.google.com/vt/x='],
 		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
@@ -76,10 +84,10 @@
 
 	function init() {
 
-		for ( var i = 0; i < parameters.mapTypes.length; i++ ) {
+		for ( var i = 0; i < mapTypes.length; i++ ) {
 
 			selMap.appendChild( document.createElement( 'option' ) );
-			selMap.children[ i ].text = parameters.mapTypes[ i ][ 0 ];
+			selMap.children[ i ].text = mapTypes[ i ][ 0 ];
 
 		}
 
@@ -92,18 +100,29 @@
 
 //			playImages();
 
-			contents.innerHTML = '<iframe id=ifrContents src=threejs-basic.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
 
 			pcc = ifrContents.contentWindow;
 
 			ifrContents.onload = initVariables;
 
-		} else {
+		} else if ( parent && parent.THREE ) {
 
 			parent.ifrMenuSub.style.height = '350px';
 
 			pcc = parent;
+
 			initVariables()
+
+		} else if ( parent && parent.ifrContents ) {
+
+console.log( 'my parent has ifrContents.contentWindow', 44 );
+
+			parent.ifrMenuSub.style.height = '350px';
+
+			pcc = parent.ifrContents.contentWindow;
+
+			initVariables();
 
 		}
 
@@ -126,8 +145,29 @@
 		camera = pcc.camera;
 		controls = pcc.controls;
 		lightDirectional = pcc.lightDirectional;
-		cameraHelper = pcc.cameraHelper;
-		
+
+		if ( pcc.parameters ) {
+
+			cameraHelper = pcc.cameraHelper;
+			parameters = pcc.parameters;
+			parameters.mapTypes = mapTypes;
+			ground = pcc.ground;
+
+		} else {
+
+			parameters.mapTypes = mapTypes;
+			parameters.zoom = 16;
+			parameters.latitude = defaultLatitude;
+			parameters.longitude = defaultLongitude;
+			parameters.latDelta = 0.004341;
+			parameters.lonDelta = 0.005493;
+			parameters.titleOffsetX = 0;
+			parameters.titleOffsetY = 0;
+			parameters.pixelsPerTile = 256;
+			parameters.tilesPerSide = 4;
+			ground = pcc.mesh;
+
+		}
 
 		setMapOverlay();
 
@@ -156,12 +196,11 @@
 
 		if ( window.top === window.self || location.hash ) {
 
-			parameters.zoom = zoom = 11;
-			parameters.x = x = 345;
-			parameters.y = y = 769;
-			ground = pcc.mesh;
+			mapType = mapTypes[ selMap.selectedIndex ];
 
-			mapType = parameters.mapTypes[ selMap.selectedIndex ];
+			zoom = parameters.zoom;
+			parameters.x = x = lon2tile( parameters.longitude, zoom )
+			parameters.y = y = lat2tile( parameters.latitude, zoom );
 
 			var urlBase = mapType[ 1 ];
 
@@ -179,7 +218,8 @@
 
 		} else if ( parent.THREE ) {
 
-console.log( '23', pcc, pcc.ground );
+//console.log( '23', pcc, pcc.ground );
+
 //			parent.mapType = mapTypes[ selMap.selectedIndex ];
 //			parent.selectedIndex = selMap.selectedIndex;
 			
@@ -204,42 +244,45 @@ console.log( '23', pcc, pcc.ground );
 		let baseURL, tileX, tileY, tileOffset, count;
 		const opacity = 1;
 		const zoom =  parameters.zoom + 2;
+//		const zoom =  parameters.zoom;
 
 		let tilesPerSide = parameters.tilesPerSide;
 		let img, texture;
 
-		rasterCanvas = document.createElement( 'canvas' );
-		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
+//		rasterCanvas = document.createElement( 'canvas' );
+//		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
 //		document.body.appendChild( rasterCanvas );
 //		rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
-		rasterContext = rasterCanvas.getContext( '2d' );
+//		rasterContext = rasterCanvas.getContext( '2d' );
 
-		if ( !parameters.mapType ) {
+		if ( !parameters.mapTypes ) {
 
-			parameters.mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
-			selectedIndex = 0;
+			mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
+			selMap.selectedIndex = 0;
+
+		} else {
+
+			mapType = parameters.mapTypes[ selMap.selectedIndex ];
 
 		}
 
 //		tileOffset = Math.floor( 0.5 * tilesPerSide );
-//		tileX = lon2tile( parameters.longitude, zoom ) - parameters.titleOffsetX;
-//		tileY = lat2tile( parameters.latitude, zoom ) - parameters.titleOffsetY;
-
-		tileX = parameters.x - parameters.titleOffsetX;
-		tileY = parameters.y - parameters.titleOffsetY;
+		tileX = lon2tile( parameters.longitude, zoom ) - parameters.titleOffsetX;
+		tileY = lat2tile( parameters.latitude, zoom ) - parameters.titleOffsetY;
 
 		count = 0;
-		baseURL = parameters.mapType[ 1 ];
+		baseURL = mapType[ 1 ];
 
 		for ( var x = 0; x < tilesPerSide; x++ ) {
 
 			for ( var y = 0; y < tilesPerSide; y++ ) {
 
-				if ( selectedIndex < 4 ) {
+				if ( selMap.selectedIndex < 4 ) {
 
 					loadImage( baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
-console.log( 'goog', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
-				} else if ( selectedIndex === 7 ) {
+//console.log( 'goog', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+
+				} else if ( selMap.selectedIndex === 7 ) {
 
 					loadImage( baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg', x , y );
 //console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
@@ -247,7 +290,7 @@ console.log( 'goog', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + z
 				} else {
 
 					loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
-console.log( '', selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+//console.log( '', selMap.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
 
 				}
 
@@ -264,8 +307,8 @@ console.log( '', selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y
 
 			rasterCanvas = document.createElement( 'canvas' );
 			rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
-			document.body.appendChild( rasterCanvas );
-			rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
+//			document.body.appendChild( rasterCanvas );
+//			rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
 			rasterContext = rasterCanvas.getContext( '2d' );
 
 			let texture = new THREE.Texture( rasterCanvas );
@@ -280,13 +323,12 @@ console.log( '', selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y
 
 				count++;
 
-				if ( count === tilesPerSideSquared - 1 ) {
+				if ( count >= tilesPerSideSquared - 1 ) {
 
-					pcc.ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
-					pcc.ground.material.needsUpdate = true;
+//					ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
 
-//					ground.material = new THREE.MeshBasicMaterial( { color: 0xfff77f, side: 2, opacity: opacity , transparent: true } );
-//					ground.material.needsUpdate = true;
+					ground.material = new THREE.MeshBasicMaterial( { color: 0xfff77f, side: 2, opacity: opacity , transparent: true } );
+					ground.material.needsUpdate = true;
 
 
 //					scene.add( ground );
@@ -305,6 +347,7 @@ console.log( '', selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y
 		return Math.floor( ( longitude + 180 ) / 360 * Math.pow( 2, zoom ) );
 
 	}
+
 
 	function lat2tile( latitude, zoom ) {
 

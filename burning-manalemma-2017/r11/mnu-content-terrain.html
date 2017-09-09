@@ -19,13 +19,16 @@
 </head>
 <body>
 
-	<div id = "menu" >
-		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+	<div id = "header" >
 
+		<div id = "title" ></div>
 		<div id = "contents" ></div>
+
 	</div>
 
 <script>
+
+	let aaaa = 23
 
 	let pcc;
 	let THREE;
@@ -38,9 +41,8 @@
 //	const defaultLongitude = -119.204444;
 	const defaultOffsetUTC = -420;
 
-
-
 	let parameters = {};
+
 	parameters.zoom = 16;
 	parameters.latitude = defaultLatitude;
 	parameters.longitude = defaultLongitude;
@@ -65,37 +67,82 @@
 
 		if ( window.self === window.top  ) {
 
-			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
 
-			contents.innerHTML = '<iframe id=ifrContents src=threejs-basic.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
 
 			pcc = ifrContents.contentWindow;
 
+			ifrContents.onload = initVariables;
+
 		} else if ( parent && parent.THREE ) {
 
-			pcc = parent.parent;
+//console.log( 'may parent has Three', 33 );
 
-		} else if ( parent && parent.parent.ifrContents ) {
+			pcc = parent;
 
-			pcc = parent.parent.ifrContents.contentWindow;
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+console.log( 'mnu-content-terrain.html: my parent has ifrContents.contentWindow', 44 );
+
+
+//			parent.contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
+
+			pcc = parent.ifrContents.contentWindow;
+
+			initVariables();
 
 		}
 
-//console.log( '', pcc );
+
+//		onHashChange();
+
+//		parent.addEventListener( 'hashchange', onHashChange, false );
+
+
+	}
+
+
+	function onHashChange() {
+console.log( 'location.hash', location.hash );
+		if ( !location.hash ) {
+
+//			location.hash = blackRock;
+
+			return;
+
+		}
+
+	}
+
+
+	function initVariables() {
 
 		THREE = pcc.THREE;
 		scene = pcc.scene;
 		camera = pcc.camera;
 		controls = pcc.controls;
+		lightDirectional = pcc.lightDirectional;
+		cameraHelper = pcc.cameraHelper;
 
-//		if ( !pcc.scene ) { contents.innerHTML = 'work in progress'; return }
+//		if ( pcc.parameters ) {
 
+			pcc.parameters = parameters;
+			pcc.drawMapOverlay = drawMapOverlay;
+			pcc.getCalcs = getCalcs;
+			pcc.drawTerrain = drawTerrain;
 
-		scene.remove( pcc.mesh );
+			ground = pcc.ground;
 
-		getCalcs();
+			scene.remove( pcc.mesh );
 
-		drawTerrain();
+			getCalcs();
+
+			drawTerrain();
+
+//		}
 
 	}
 
@@ -190,6 +237,7 @@
 
 		'';
 
+		pcc.parameters = parameters;
 
 	}
 
@@ -264,8 +312,7 @@
 		geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
 //		geometry.center();
-		material = new THREE.MeshNormalMaterial();
-
+		material = new THREE.MeshNormalMaterial( { opacity: 0.75 } );
 
 		scene.remove( ground );
 		ground = new THREE.Mesh( geometry, material );
@@ -273,7 +320,7 @@
 		ground.castShadow = true;
 		ground.receiveShadow = true;
 
-//		scene.add( ground );
+		scene.add( ground );
 
 		drawMapOverlay();
 
@@ -361,7 +408,8 @@
 					ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
 					ground.material.needsUpdate = true;
 
-					scene.add( ground );
+//					scene.add( ground );
+					pcc.ground = ground;
 
 				}
 

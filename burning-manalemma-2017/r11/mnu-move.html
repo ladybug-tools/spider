@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	iframe { height: 500px; width: 800px; }
+
+	button { background-color: #ccc; margin: 5px 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; width: 98%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+</style>
+</head>
+<body>
+
+	<div id = "header" >
+
+		<div id = "title" ></div>
+		<div id = "info" >.</div>
+		<div id = "raster2" ></div>
+		<div id = "contents" ></div>
+
+	</div>
+
+	Go <button onclick=setNextTile(this); title="Go west"  >&#8678;</button>
+	<button onclick=setNextTile(this); title="Go east"  >&#8680;</button>
+
+	<button onclick=setNextTile(this); title="Go north" >&#8679;</button>
+	<button onclick=setNextTile(this); title="Go south" >&#8681;</button>
+
+
+	<p>Zoom <br>
+		<span id=zooms ></span>
+	</p>
+
+	Height Scale
+	<input type="range" id="inpHeightScale" min=0 max=20 step=0.1 value=1 onchange=setNextTile(this); title="Vertical scale" >
+
+
+<script>
+
+	let pcc;
+	let THREE;
+	let scene;
+	let ground;
+
+	let parameters = {};
+
+	const defaultLatitude = 37.796;
+	const defaultLongitude = -122.398;
+
+	init();
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+
+//			contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
+
+//			pcc = ifrContents.contentWindow;
+
+			pcc = parent;
+
+			initVariables();
+
+//			ifrContents.onload = initVariables;
+
+		} else if ( parent && parent.THREE ) {
+
+			parent.ifrMenuSub.style.height = '350px';
+
+			pcc = parent;
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+console.log( 'my parent has ifrContents.contentWindow' );
+
+			parent.ifrMenuSub.style.height = '350px';
+
+			pcc = parent.ifrContents.contentWindow;
+
+			initVariables();
+
+		}
+
+
+		for ( let i = 1; i < 20; i++ ) {
+
+			if ( i === 16 ) {
+
+				zooms.innerHTML += '<button id="zoomPrevious" onclick="setNextTile(this);" style="background-color:pink;"  >' + i + '</button> ';
+
+			} else {
+
+				zooms.innerHTML += '<button onclick="setNextTile(this);" title="Zoom level" >' + i + '</button> ';
+
+			}
+
+		}
+
+//		onHashChange();
+
+		addEventListener( 'hashchange', onHashChange, false );
+
+	}
+
+
+	function onHashChange() {
+
+//console.log( 'location.hash', location.hash );
+
+		getParametersFromHash();
+
+		zoom = parameters.zoom;
+		parameters.x = x = lon2tile( parameters.longitude, zoom )
+		parameters.y = y = lat2tile( parameters.latitude, zoom );
+
+		str = 'https://tile.openstreetmap.org/' + zoom + '/' + x + '/' + y + '.png';
+
+console.log( '', str );
+
+		raster2.innerHTML = '<p><img src="' + str + '" ></p>';
+
+		pcc.getCalcs();
+
+		pcc.drawTerrain();
+
+		pcc.drawMapOverlay();
+
+	}
+
+	function initVariables() {
+
+		THREE = pcc.THREE;
+		scene = pcc.scene;
+
+		if ( pcc.parameters ) {
+
+			parameters = pcc.parameters;
+
+		} else {
+
+			parameters.zoom = 16;
+			parameters.latitude = defaultLatitude;
+			parameters.longitude = defaultLongitude;
+			parameters.latDelta = 0.004341;
+			parameters.lonDelta = 0.005493;
+			parameters.titleOffsetX = 0;
+			parameters.titleOffsetY = 0;
+			parameters.pixelsPerTile = 256;
+			parameters.tilesPerSide = 4;
+			ground = pcc.mesh;
+
+		}
+
+	}
+
+
+
+	function setNextTile( that ){
+
+console.log( '', that );
+		latitudeDirection = that.title === 'Go north' ? 1 : 0;
+		latitudeDirection = that.title === 'Go south' ? -1 : latitudeDirection;
+		longitudeDirection = that.title === 'Go east' ? 1 : 0;
+		longitudeDirection = that.title === 'Go west' ? -1 : longitudeDirection;
+
+		let heightScale = parseFloat( inpHeightScale.value );
+		let zoom = that.title === "Zoom level" ? parseInt( that.innerText, 10 ) : parameters.zoom;
+
+		newLat = parameters.latitude + latitudeDirection * parameters.latDelta;
+
+		newLon = parameters.longitude + longitudeDirection * parameters.lonDelta;
+
+		if ( Math.abs( newLat < 90 )  || Math.abs( newLon < 180 ) ) {
+
+			hash = 'latitude:' + newLat + ',longitude:' + newLon + ',zoom:' + zoom + ',heightScale:' + heightScale;
+
+			location.hash = hash;
+
+console.log( '', hash );
+
+onHashChange();
+
+			pcc.info.innerHTML = 'latitude: ' + newLat.toFixed( 4 ) + ' longitude: ' + newLon.toFixed( 4 ) +
+				' zoom: ' + zoom + ' heightScale: ' + heightScale;
+
+			parameters.latitude = newLat;
+			parameters.longitude = newLon;
+
+		}
+
+	}
+
+
+
+	function getParametersFromHash() {
+
+		let hashes, regex, str, params;
+
+		hash = location.hash.slice( 1 );
+
+		str = '{"' + hash.replace( /:/g, '":"' ).replace( /,/g, '", "' ) + '"}';
+console.log( 'ccccccccc', str );
+		params = JSON.parse( str );
+
+		parameters.latitude = params.latitude ? parseFloat( params.latitude ) : defaultLatitude;
+		parameters.longitude = params.longitude ? parseFloat( params.longitude ) : defaultLongitude;
+		parameters.zoom = params.zoom ? parseInt( params.zoom, 10 ) : defaultZoom;
+
+	}
+
+
+	function lon2tile( longitude, zoom ) {
+
+		return Math.floor( ( longitude + 180 ) / 360 * Math.pow( 2, zoom ) );
+
+	}
+
+
+	function lat2tile( latitude, zoom ) {
+
+		const pi = Math.PI;
+		return Math.floor( ( 1 - Math.log( Math.tan( latitude * pi / 180 ) + 1 / Math.cos( latitude * pi / 180) ) / pi ) / 2 * Math.pow( 2, zoom ) );
+
+	}
+
+</script>
+</body>
+</html>

@@ -161,6 +161,17 @@ More in the next few days. In the mean time here's some background:
 ## Change Log
 
 
+
+## 2017-09-08 ~ Theo
+
+* R11
+* Moving along really well - albeit slowly
+* Much more consistency between plugins
+* All plugins work standalone, inside an app and inside an app container 
+* Today on mnu-move.html plus continuous clean-up on prior plugins
+
+
+
 ## 2017-09-03 ~ Theo
 
 * R10

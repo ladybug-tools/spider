@@ -65,9 +65,9 @@
 	let aaa = 'this is app index.html';
 
 	const revisionNumber = 11;
-	const folder = ( parent && parent.THREE ) ? '' : 'r' + revisionNumber + '/';
+	const folder = ( parent && ( parent.THREE || parent.parameters ) ) ? '' : 'r' + revisionNumber + '/';
 
-console.log( 'folder', folder );
+//console.log( 'folder', folder );
 
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
@@ -80,21 +80,42 @@ console.log( 'folder', folder );
 
 		if ( window.self === window.top  ) {
 
+//console.log( 'window.self:', aaa );
+
 			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
 
 			mmuDebug.setAttribute( 'open', 'open' );
+			divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
 
-		} else {
+			ifrMenuSub.src = folder + "mnu-default.html";
+
+
+		} else if ( parent && parent.THREE ) {
+
+//console.log( 'index.html: i am child  / have Three', 34 );
+
+			pcc = parent;
+			pcc.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
+
+			pcc.ifrMenuSub.src = folder + "mnu-default.html";
 
 			parent.folder = folder;
 //			parent.divMenuSub.style.height = '300px';
 //			parent.ifrMenuSub.style.height = '100px';
 
+		} else if ( parent && parent.ifrContents ) {
+
+
+			pcc = parent;
+			pcc.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
+
+			pcc.ifrMenuSub.src = folder + "mnu-default.html";
+
+			parent.folder = folder;
+
 		}
 
-		parent.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
 
-		parent.ifrMenuSub.src = folder + "mnu-default.html";
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -117,6 +138,8 @@ console.log( 'folder', folder );
 		geometry = new THREE.BoxGeometry( 50, 50, 50 );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
+
+		mesh.name = 'mesh-default';
 
 		scene.add( mesh );
 
