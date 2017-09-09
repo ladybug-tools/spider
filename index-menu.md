@@ -14,9 +14,13 @@
 
 ### [Burning mAnalemma 2017]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html "Run full screen" )
 
-### [gbXML PolyLoop Reader]( #read-gbxml/polyloop/r1/read-gbxml-polyloop.html )
+***
 
-### [gbXML RectGeom Reader]( #sandbox/read-gbxml/read-gbxml-3d-polyloop.html )
+### [gbXML Read Me]( #read-gbxml/README.md )
+
+### &#x1F5D7; [gbXML PolyLoop Reader]( #read-gbxml/polyloop/r1/read-gbxml-polyloop.html )
+
+### &#x1F5D7; [gbXML RectGeom Reader]( #read-gbxml/rectangular-geometry/r1/read-gbxml-rectangular-geometry.html )
 
 ***
 
@@ -26,16 +30,16 @@
 <iframe id=ifrMenu class=xxxiframeMenu width=100% height=0 frameBorder=0 ></iframe>
 
 
-space fillers
+See also
 
-### [markdown help]( #./pages/markdown-help.md )
+### [ibpsa2017.github.io]( https://ibpsa2017.github.io/ )
 
 
-### [threejs basic]( #./plugins/threejs-basic.html ) [&#x1F5D7;]( ./plugins/threejs-basic.html "Run full screen" )
 
 
 ***
 
+[credits         ]( #./pages/credits.md )
 [license         ]( #./pages/license.md )
 [code of conduct ]( #./pages/code-of-conduct.md )
 [contributing    ]( #./pages/contributing.md )

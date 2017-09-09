@@ -9,10 +9,17 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0;  }
+	body { font: 12pt monospace; margin: 0; overflow: hidden; }
 	a { color: crimson; text-decoration: none; }
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
 
-	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#header { left: 0; margin: 0 auto; max-width: 700px; position: absolute; right: 0; }
+	#menu { margin: 0 20px; max-width: 500px; position: absolute; top: 200px; }
 
 </style>
 </head>
@@ -20,10 +27,31 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
 
-	<div id = "menu" >
-		<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
-		<div id = "contents" ></div>
+	<div id = "header" >
+		<div id = "title" ></div>
+	</div>
+
+	<div id="menu" >
+		<div id = "githubGbxmlSamples" ></div>
 		<div id = "log" ></div>
+		<div id = "fileReader" >
+			<p><input type=file id=inpFile onchange=openFile(this); ></p>
+		</div>
+		<div id = "stats" ></div>
+		<div id = "stats2" ></div>
+		<h4>settings</h4>
+		<p><button onclick=controls.autoRotate=!controls.autoRotate; >toggle rotation</button></p>
+		<p><button onclick=toggleWireframe(); >toggle wireframe</button></p>
+		<p>
+			opacity <output id=outOpacity >85</output> %<br>
+			<input type=range id=inpOpacity min=0 max=100 step=1 value=85 onclick=updateOpacity();outOpacity.value=value; />
+		</p>
+<!--
+		<p>
+			explode <output id=outExplode >100</output> %<br>
+			<input type=range id=inpExplode min=100 max=200 step=1 value=0 onclick=updateExplode();outExplode.value=value; />
+		</p>
+-->
 	</div>
 
 <script>
@@ -31,9 +59,11 @@
 // https://davidwalsh.name/convert-xml-json
 // https://gist.github.com/chinchang/8106a82c56ad007e27b1
 
-//	let url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
-	let url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
-//	let url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
+	let url;
+//	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
+	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
+//	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
+	url = '../../data-files/rectangular-30x50x4.xml';
 
 	let gbxml;
 	let model;
@@ -50,9 +80,9 @@
 
 		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
 
-		url = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
+		urlGitHub = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
 
-		requestFile( url, callbackGitHub );
+		requestFile( urlGitHub, callbackGitHub );
 
 		title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
 
@@ -64,6 +94,7 @@
 		camera.position.set( 100, 100, 100 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -73,15 +104,15 @@
 		let axisHelper = new THREE.AxisHelper( 500 );
 		scene.add( axisHelper );
 
-		geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
-		material = new THREE.MeshNormalMaterial();
-		mesh = new THREE.Mesh( geometry, material );
-
+//		geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
+//		material = new THREE.MeshNormalMaterial();
+//		mesh = new THREE.Mesh( geometry, material );
 //		scene.add( mesh );
 
-//		requestFile( 'rectangular-20x50x4.xml', callbackGbXML );
-		requestFile( 'rectangular-30x50x4.xml', callbackGbXML );
-//		requestFile( 'generated2.xml', callbackGbXML );
+		requestFile( url, callbackGbXML );
+
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 	}
 
@@ -105,11 +136,12 @@
 
 		}
 
-		contents.innerHTML = 'gbXML sample files<br><select id=selGbXml >' + txt + '<select>';
-
+		githubGbxmlSamples.innerHTML = '<a href="https://github.com/GreenBuildingXML/Sample-gbXML-Files" target="_blank">gbXML sample files on GitHub</a>' + b +
+			'<select id=selGbXml >' + txt + '<select>';
 		selGbXml.onchange = function() { requestFile( selGbXml.value, callbackGbXML ); }
 
 	}
+
 
 
 	function callbackGbXML( xhr ) {
@@ -157,6 +189,10 @@ console.log( 'gbxml', gbxml.Campus.Surface );
 		model = new THREE.Object3D();
 		scene.add( model );
 
+		const opacity = parseFloat( inpOpacity.value ) / 100;
+
+		let material = new THREE.MeshNormalMaterial( { side: 2, opacity: opacity, transparent: true } );
+
 		surfaces = gbxml.Campus.Surface;
 		log.innerHTML = txt + 
 			surfaces.length.toLocaleString() + ' items ' + b;
@@ -174,10 +210,10 @@ console.log( 'gbxml', gbxml.Campus.Surface );
 			) {
 
 
-			if( i >= 0 && i < 26 ) { 
-console.log( 'surface', surface );
+//			if( i >= 0 && i < 26 ) { 
+//console.log( 'surface', surface );
 
-console.log( 'type', surface.attributes.surfaceType );
+//console.log( 'type', surface.attributes.surfaceType );
 
 				height = parseFloat( surface.RectangularGeometry.Height ); 
 //console.log( 'height', height );
@@ -195,10 +231,10 @@ console.log( 'type', surface.attributes.surfaceType );
 
 
 
-console.log( 'width', width, 'height', height.toFixed( 2 ), 'tilt', tilt, 'azimuth', azimuth );
+//console.log( 'width', width, 'height', height.toFixed( 2 ), 'tilt', tilt, 'azimuth', azimuth );
 
 			coordinates = surface.RectangularGeometry.CartesianPoint.Coordinate;
-console.log( 'coordinates', coordinates );
+//console.log( 'coordinates', coordinates );
 
 				if ( tilt === 0 ) { 
 
@@ -208,7 +244,7 @@ console.log( 'coordinates', coordinates );
 					geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -0.5 * width, 0, 0.5 * height ) );
 //		geometry.applyMatrix( new THREE.Matrix4().makeScale( -1, -1, -1 ) );
 
-					material = new THREE.MeshNormalMaterial( { wireframe: true } );
+
 					mesh = new THREE.Mesh( geometry, material );
 					mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
 					model.add( mesh );
@@ -217,9 +253,7 @@ console.log( 'coordinates', coordinates );
 
 			}
 
-			}
-
-
+//			}
 
 
 			if ( surface.attributes.surfaceType.toLowerCase().includes( 'wall' ) ) {
@@ -251,61 +285,56 @@ console.log( 'coordinates', coordinates );
 //console.log( 'width', width, 'height', height, 'tilt', tilt, 'azimuth', azimuth );
 //console.log( 'coordinates', coordinates );
 
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
-					geometry.applyMatrix( new THREE.Matrix4().makeTranslation(  0 , 0.5 * height, -0.5 * width ) );
+					geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
+						geometry.applyMatrix( new THREE.Matrix4().makeTranslation(  0 , 0.5 * height, -0.5 * width ) );
 
-				material = new THREE.MeshNormalMaterial( { wireframe: true } );
-				mesh = new THREE.Mesh( geometry, material );
-				mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
-				model.add( mesh );
+					mesh = new THREE.Mesh( geometry, material );
+					mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
+					model.add( mesh );
 
 				} else if ( azimuth > 90 && azimuth <= 180 ) {
 //console.log( 'width', width, 'height', height, 'tilt', tilt, 'azimuth', azimuth );
 //console.log( 'coordinates', coordinates );
 
 
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
+					geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
  					geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 , 0.5 * height,  0.5 * width ) );
-				material = new THREE.MeshNormalMaterial( { wireframe: true } );
-				mesh = new THREE.Mesh( geometry, material );
-				mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
-				model.add( mesh );
+					mesh = new THREE.Mesh( geometry, material );
+					mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
+					model.add( mesh );
 
 				} else  if ( azimuth > 180 && azimuth <= 270 ) {
 
 //console.log( 'width', width, 'height', height, 'tilt', tilt, 'azimuth', azimuth );
 //console.log( 'coordinates', coordinates );
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
+					geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
+
 					geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -0.5 * width, 0.5 * height, 0 ) );
 
-				material = new THREE.MeshNormalMaterial( { wireframe: true } );
-				mesh = new THREE.Mesh( geometry, material );
-				mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
-				model.add( mesh );
+					mesh = new THREE.Mesh( geometry, material );
+					mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
+					model.add( mesh );
 
 				} else {
 
 //console.log( 'width', width, 'height', height, 'tilt', tilt, 'azimuth', azimuth );
 //console.log( 'coordinates', coordinates );
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
+
+					geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI + azimuth * d2r ) );
 
 					geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0.5 * width, 0.5 * height, 0 ) );
 
-				material = new THREE.MeshNormalMaterial( { wireframe: true } );
-				mesh = new THREE.Mesh( geometry, material );
-				mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
-				model.add( mesh );
+					mesh = new THREE.Mesh( geometry, material );
+					mesh.position.set( parseFloat( coordinates[ 1 ] ), parseFloat( coordinates[ 2 ] ), parseFloat( coordinates[ 0 ] ) );
+					model.add( mesh );
 
 				}
 
-
 			}
 
-
-
-
-
 		}
+
+		setCamera();
 
 	}
 
@@ -377,21 +406,127 @@ console.log( 'coordinates', coordinates );
 	}
 
 
+
 	function setCamera() {
 
 		var bbox = new THREE.Box3().setFromObject( model );
 
 		sphere = bbox.getBoundingSphere();
-		center = sphere.center;
-		radius = sphere.radius;
+		model.center = center = sphere.center;
+		model.radius = radius = sphere.radius;
 //console.log( '', center, radius );
 
 		controls.target.copy( center );
-		camera.position.copy( controls.target.clone().add( new THREE.Vector3( radius, radius, radius ) ) );
-
-//console.log( 'center', center );
+		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
 
 	}
+
+
+
+	function toggleWireframe() {
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.wireframe = !child.material.wireframe;
+
+			}
+
+		} );
+
+	}
+
+
+	function updateOpacity() {
+
+		const opacity = parseFloat( inpOpacity.value ) / 100;
+
+		model.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.opacity = opacity;
+
+			}
+
+		} );
+
+	}
+
+
+	function updateExplode() {
+
+		model.position.set( - model.center.x, - model.center.y, - model.center.z );
+		model.updateMatrixWorld();
+
+		const scale = parseFloat( inpExplode.value ) / 10;
+
+		model.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				if ( !child.positionStart ) {
+
+					child.positionStart = child.position.clone();
+
+				}
+
+//				p = child.positionStart;
+//				child.position.set( p.x * scale, p.y * scale, p.z * scale )
+				child.position.copy( child.positionStart.setScalar( scale ) );
+
+			}
+
+		} );
+
+	}
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+	function openFile( files ) {
+
+		var fileData, reader, result, parser, xmldoc, json;
+
+		reader = new FileReader();
+		reader.onload = function( event ) {
+
+//			textArea.innerHTML = reader.result;
+
+			result = reader.result;
+//console.log( 'response', response );
+
+			parser = new DOMParser();
+			xmldoc = parser.parseFromString( result, "text/xml");
+//console.log( 'xmldoc', xmldoc );
+
+			json = xmlToJson( xmldoc );
+//console.log( 'json', json );
+
+			gbxml = json.gbXML;
+console.log( 'gbxml', gbxml );
+
+			parseGbxml( gbxml );
+
+		}
+
+		reader.readAsText( files.files[0] );
+
+	}
+
 
 
 	function requestFile( url, callback ) {
@@ -424,6 +559,7 @@ console.log( 'coordinates', coordinates );
 
 		requestAnimationFrame( animate );
 		renderer.render( scene, camera );
+		controls.update();
 
 	}
 
