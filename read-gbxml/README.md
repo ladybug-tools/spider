@@ -42,9 +42,23 @@ The Ladybug Tools Spider gbXML Reader scripts are first steps toward making gbXM
 
 * Helping students, clients and non-AEC peeps gain access BIM data easily, quickly and freely
 
+## To Do
+
+Coming soon
+
+* Openings
+* Lights and shadows
+* Interactive text data display
+* Section views
+
+## Issues
+
+### read gbxml rectangular geometry
+
+* 2017-09-08 ~ floor slabs position incorrectly
+
 
 ## Links of Interest
-
 
 See also:
 
