@@ -14,7 +14,9 @@
 
 ### [Burning mAnalemma 2017]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html "Run full screen" )
 
-### [gbXML PolyLoop Reader]( #sandbox/read-gbxml/read-gbxml-3d-polyloop.html )
+### [gbXML PolyLoop Reader]( #read-gbxml/polyloop/r1/read-gbxml-polyloop.html )
+
+### [gbXML RectGeom Reader]( #sandbox/read-gbxml/read-gbxml-3d-polyloop.html )
 
 ***
 
