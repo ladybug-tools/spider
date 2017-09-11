@@ -73,11 +73,25 @@ See also:
 * https://github.com/GreenBuildingXML
 > Repositories for all things gbXML including validator source code, test cases, and more...
 
+* https://en.wikipedia.org/wiki/Green_Building_XML
+> The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools. gbXML is being integrated into a range of software CAD and engineering tools and supported by leading 3D BIM vendors. gbXML is streamlined to transfer building properties to and from engineering analysis tools to reduce the interoperability issues and eliminate plan take-off time.
+
+
 * https://twitter.com/gbXML
 > The gbXML open schema helps facilitate the transfer of building properties stored in 3D building information models (BIM) to engineering analysis tools.
 
+* https://github.com/chiensiTB/gbXMLValidator/wiki/What-is-gbXML
+> What is gbXML?
+
+
 * https://greenspacelive.com/site/building-generator/
 > Use the building generator for rapid production of building geometry models.
+
+
+* http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml
+
+* https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere
+
 
 ## Change Log
 
