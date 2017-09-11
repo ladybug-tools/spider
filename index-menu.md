@@ -18,7 +18,7 @@
 
 ### [gbXML Read Me]( #read-gbxml/README.md )
 
-### &#x1F5D7; [gbXML PolyLoop Reader]( #read-gbxml/polyloop/r1/read-gbxml-polyloop.html )
+### &#x1F5D7; [gbXML PolyLoop Reader]( #read-gbxml/polyloop/r2/read-gbxml-polyloop.html )
 
 ### &#x1F5D7; [gbXML RectGeom Reader]( #read-gbxml/rectangular-geometry/r1/read-gbxml-rectangular-geometry.html )
 
