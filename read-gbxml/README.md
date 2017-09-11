@@ -88,6 +88,8 @@ See also:
 > Use the building generator for rapid production of building geometry models.
 
 
+* https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts
+
 * http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml
 
 * https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere
