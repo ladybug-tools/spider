@@ -9,10 +9,13 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; }
+	body { border: 1px solid magenta; font: 12pt monospace; margin: 5px auto; max-width: 300px; }
 	a { color: crimson; text-decoration: none; }
 	p { margin: 0 0 5px 0; }
-	#menuSub { border: 1px solid pink; height: 100%; }
+
+	#menuSub { background-color: white;border: 1px solid pink;  }
+
+	#ifrMenuSub {  box-sizing: border-box; border: 5px solid orange; width: 100%; }
 
 </style>
 </head>
@@ -31,6 +34,7 @@
 			<p><a href=JavaScript:setIfrMenuSub("mnu-settings.html"); >Settings</a></p>
 
 			<p><a href=JavaScript:setIfrMenuSub("mnu-update-lights.html"); >Update lights</a></p>
+			<p><a href=JavaScript:setIfrMenuSub("mnu-destinations.html"); >Destinations</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-content-terrain.html"); >Terrain3D</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-move.html"); >Map move</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-content-analemma3d.html"); >Analemma3D</a></p>
@@ -41,11 +45,8 @@
 		<div id = "contents" ></div>
 	</div>
 
-	
 
 <script>
-
-	const b = '<br>';
 
 	let folder;
 
@@ -66,18 +67,20 @@
 
 		} else if ( parent && parent.THREE ) {
 
-console.log( 'parent', parent );
+console.log( 'div menu parent', parent );
 
 			folder = '';
 
-		} else if ( parent && parent.parent ) {
+			parent.ifrDivMenuSub.height = ( menuSub.scrollHeight + 20 ) + 'px';
 
-console.log( 'window', parent.parent.folder );
+		} else if ( parent && parent.folder ) {
+
+console.log( 'div menu window', parent.parent.folder );
 
 			folder = parent.parent.folder;
-//			parent.divMenuSub.style.height = '600px';
-			parent.ifrDivMenuSub.style.height = '500px';
 
+			parent.ifrDivMenuSub.style.height = ( menuSub.scrollHeight + 20 ) + 'px';
+			parent.ifrDivMenuSub.style.cssText += 'border: 0px solid teal; width: 100%';
 		}
 
 	}
@@ -88,7 +91,6 @@ console.log( 'window', parent.parent.folder );
 		parent.ifrMenuSub.src = folder + uri;
 
 	}
-
 
 
 </script>

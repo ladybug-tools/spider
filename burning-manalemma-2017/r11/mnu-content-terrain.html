@@ -9,20 +9,30 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	body { font: 12pt monospace; margin: 0; }
 	a { color: crimson; text-decoration: none; }
-	iframe { height: 500px; width: 100% }
 
-/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+	#header { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	#menu { margin: 0 20px; max-width: 300px; position: absolute; top: 0;}
+	#ifrContents { height: 500px; width: 100%; }
 
 </style>
 </head>
 <body>
 
 	<div id = "header" >
-
 		<div id = "title" ></div>
+		<p>
+			<a href="#latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600" >Sydney</a>
+			<a href="#latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420" >Coit</a>
+		</p>
 		<div id = "contents" ></div>
+	</div>
+
+	<div id = "menu" >
+
+		<div id=divMenuSub class=divMenuSub ></div>
+		<div id=calculations ></div>
 
 	</div>
 
@@ -30,15 +40,22 @@
 
 	let aaaa = 23
 
+	let sydney = 'latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600';
+	let sfHyatt = 'latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420';
+	let alcatraz = 'latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420';
+	let coit = 'latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420';
+	let santaBarbara = 'latitude:34.4208305,longitude:-119.69819,zoom:16,offsetUTC:-420';
+	let blackRock = 'latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420';
+
 	let pcc;
 	let THREE;
 	let scene;
 
-	const defaultLatitude = 37.796;
-	const defaultLongitude = -122.398;
+//	const defaultLatitude = 37.796;
+//	const defaultLongitude = -122.398;
 
-//	const defaultLatitude = 40.786944;
-//	const defaultLongitude = -119.204444;
+	const defaultLatitude = 40.786944;
+	const defaultLongitude = -119.204444;
 	const defaultOffsetUTC = -420;
 
 	let parameters = {};
@@ -54,6 +71,10 @@
 	parameters.tilesPerSide = 4; // odd number please
 
 	let ground; 
+
+	let terrain = {};
+
+
 	let count;
 
 	const mbptoken='pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
@@ -69,7 +90,7 @@
 
 			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
 
-			contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
 
 			pcc = ifrContents.contentWindow;
 
@@ -77,45 +98,26 @@
 
 		} else if ( parent && parent.THREE ) {
 
-//console.log( 'may parent has Three', 33 );
-
 			pcc = parent;
 
 			initVariables();
 
+			parent.ifrMenuSub.style.height = '200px';
+
+console.log( 'mnu-content-terrain: parent has Three' );
+
 		} else if ( parent && parent.ifrContents ) {
-
-console.log( 'mnu-content-terrain.html: my parent has ifrContents.contentWindow', 44 );
-
-
-//			parent.contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
 
 			pcc = parent.ifrContents.contentWindow;
 
 			initVariables();
 
-		}
-
-
-//		onHashChange();
-
-//		parent.addEventListener( 'hashchange', onHashChange, false );
-
-
-	}
-
-
-	function onHashChange() {
-console.log( 'location.hash', location.hash );
-		if ( !location.hash ) {
-
-//			location.hash = blackRock;
-
-			return;
+pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 
 		}
 
 	}
+
 
 
 	function initVariables() {
@@ -127,24 +129,74 @@ console.log( 'location.hash', location.hash );
 		lightDirectional = pcc.lightDirectional;
 		cameraHelper = pcc.cameraHelper;
 
-//		if ( pcc.parameters ) {
+//		pcc.initVariables = initVariables;
+		pcc.parameters = parameters;
+//		pcc.getParametersFromHash = getParametersFromHash
+//		pcc.drawMapOverlay = drawMapOverlay;
+		pcc.getCalcs = getCalcs;
+		pcc.drawTerrain = drawTerrain;
+		pcc.updateTerrain = updateTerrain;
+//		pcc.getHeightMapData = getHeightMapData;
 
-			pcc.parameters = parameters;
-			pcc.drawMapOverlay = drawMapOverlay;
-			pcc.getCalcs = getCalcs;
-			pcc.drawTerrain = drawTerrain;
+		scene.remove( pcc.mesh );
 
-			ground = pcc.ground;
+		addEventListener( 'hashchange', onHashChange, false );
 
-			scene.remove( pcc.mesh );
-
-			getCalcs();
-
-			drawTerrain();
-
-//		}
+		onHashChange();
 
 	}
+
+
+
+	function onHashChange() {
+
+//console.log( 'mnu-content hash', location.hash );
+
+//		getParametersFromHash();
+
+//	}
+
+
+//	function getParametersFromHash() {
+
+		let hash, str, params;
+
+		if ( !location.hash ) { 
+
+//console.log( 'mnu-contents: no hash' ); 
+			location.hash = blackRock;
+
+			return; 
+
+		}
+
+		hash = location.hash.slice( 1 );
+
+		str = '{"' + hash.replace( /:/g, '":"' ).replace( /,/g, '", "' ) + '"}';
+//console.log( 'getParametersFromHash', str );
+
+		params = JSON.parse( str );
+
+		parameters.latitude = params.latitude ? parseFloat( params.latitude ) : defaultLatitude;
+		parameters.longitude = params.longitude ? parseFloat( params.longitude ) : defaultLongitude;
+		parameters.zoom = params.zoom ? parseInt( params.zoom, 10 ) : defaultZoom;
+//console.log( 'getParametersFromHash', parameters );
+
+//		updateTerrain();
+
+		getCalcs();
+
+	};
+
+
+	function updateTerrain() {
+
+//pcc.console.log( 'mnu-content-terrain updateTerrain' );
+
+		getCalcs();
+
+	}
+
 
 
 	function getCalcs( ) {
@@ -237,9 +289,10 @@ console.log( 'location.hash', location.hash );
 
 		'';
 
-		pcc.parameters = parameters;
+		drawTerrain();
 
 	}
+
 
 
 	function drawTerrain() {
@@ -259,9 +312,8 @@ console.log( 'location.hash', location.hash );
 		imageLoader.load( urlGED , getHeightMapData );
 
 		str = 'https://tile.openstreetmap.org/' + zoom + '/' + x + '/' + y + '.png';
-//console.log( '', str );
+//pcc.console.log( '', str );
 
-		pcc.raster.innerHTML = '<p><img src="' + str + '" ></p>';
 
 	}
 
@@ -270,6 +322,8 @@ console.log( 'location.hash', location.hash );
 	function getHeightMapData( map ) {
 
 //	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox 
+
+//pcc.console.log( 'hm', map );
 
 		let geometry, material;
 		let heightmapCanvas, heightmapContext;
@@ -280,9 +334,6 @@ console.log( 'location.hash', location.hash );
 		scaleTerrain = parameters.heightScale * 100 / ( 256 * parameters.metersPerPixel );
 
 		heightmapCanvas = document.createElement( 'canvas' );
-
-		pcc.heightmap.innerHTML = '<div id=hm ></div>';
-		pcc.heightmap.appendChild( heightmapCanvas );
 
 		heightmapCanvas.style.cssText = ' ';
 		heightmapCanvas.width = 256;
@@ -321,16 +372,20 @@ console.log( 'location.hash', location.hash );
 		ground.receiveShadow = true;
 
 		scene.add( ground );
+		pcc.ground = ground;
 
 		drawMapOverlay();
 
-		setCamera();
+		pcc.heightmap.innerHTML = '<div id=hm ></div>';
+		pcc.heightmap.appendChild( heightmapCanvas );
 
 	}
 
 
 
+
 	function drawMapOverlay() {
+//pcc.console.log( 'drawMapOverlay', 23 );
 
 		let baseURL, tileX, tileY, tileOffset, count;
 		const opacity = 1;
@@ -340,16 +395,16 @@ console.log( 'location.hash', location.hash );
 		let tilesPerSide = parameters.tilesPerSide;
 		let img, texture;
 
-		rasterCanvas = document.createElement( 'canvas' );
+		let rasterCanvas = document.createElement( 'canvas' );
 		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
-//		document.body.appendChild( rasterCanvas );
+//		pcc.document.body.appendChild( rasterCanvas );
 //		rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
-		rasterContext = rasterCanvas.getContext( '2d' );
+		let rasterContext = rasterCanvas.getContext( '2d' );
 
 		if ( !parameters.mapType ) {
 
 			parameters.mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
-			selectedIndex = 0;
+			parameters.selectedIndex = 0;
 
 		}
 
@@ -364,19 +419,20 @@ console.log( 'location.hash', location.hash );
 
 			for ( var y = 0; y < tilesPerSide; y++ ) {
 
-				if ( selectedIndex < 4 ) {
+				if ( parameters.selectedIndex < 4 ) {
 
 					loadImage( baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+//pcc.console.log( 'google', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
 
-				} else if ( selectedIndex === 7 ) {
+				} else if ( parameters.selectedIndex === 7 ) {
 
 					loadImage( baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg', x , y );
-//console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
+//pcc.console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
 
 				} else {
 
 					loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
-//console.log( '', selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+//pcc.console.log( '', parameters.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
 
 				}
 
@@ -386,8 +442,10 @@ console.log( 'location.hash', location.hash );
 
 
 		function loadImage( url, x, y ) {
+//console.log( 'load image', x, y );
+//pcc.info.innerHTML += 'url ' + url + ' x' + x + ' y' + y + b;
 
-			let img = document.createElement( 'img' );
+			let img = pcc.document.createElement( 'img' );
 			img.crossOrigin = 'anonymous';
 			img.src = url;
 
@@ -399,17 +457,18 @@ console.log( 'location.hash', location.hash );
 
 			img.onload = function(){
 
+//pcc.info.innerHTML += + count + ' ';
 				rasterContext.drawImage( img, 0, 0, 256, 256, x * pixelsPerTile, y * pixelsPerTile, pixelsPerTile, pixelsPerTile );
 
 				count++;
 
-				if ( count === tilesPerSideSquared - 1 ) {
+				if ( count === tilesPerSideSquared ) {
 
+//pcc.info.innerHTML += 'ground.material.map' + texture.uuid;
 					ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
 					ground.material.needsUpdate = true;
 
-//					scene.add( ground );
-					pcc.ground = ground;
+					setCamera();
 
 				}
 
@@ -436,7 +495,7 @@ console.log( 'location.hash', location.hash );
 
 //		object3D.position.copy( center );
 
-//console.log( 'center', center );
+//console.log( 'center', center, camera.position );
 
 	}
 

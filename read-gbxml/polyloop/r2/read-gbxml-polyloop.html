@@ -6,7 +6,7 @@
 <meta name = "description" content = "Basic HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-08-04" >
-<title></title>
+<title>read gbxml polyloop r2</title>
 <style>
 
 	body { font: 12pt monospace; margin: 0; overflow: hidden; }
@@ -86,13 +86,11 @@
 
 		let txt;
 
-		title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
-
 		urlGitHub = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
 
 		requestFile( urlGitHub, callbackGitHub );
 
-		title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+		title.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -102,7 +100,7 @@
 		camera.position.set( 100, 100, 100 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.autoRotate = true;
+//		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -171,15 +169,15 @@
 //console.log( 'json', json );
 
 		gbJSON = json.gbXML;
-console.log( 'gbxml', gbxml );
+console.log( 'gbJSON', gbJSON );
 
-		parseGbxml( gbJSON );
+		parseGbJson( gbJSON );
 
 	}
 
 
 
-	function parseGbxml( gbxml ) {
+	function parseGbJson( gbjson ) {
 
 		const d2r = Math.PI / 180, r2d = 180 / Math.PI;  // degrees / radians
 		const pi05 = 0.5 * Math.PI;
@@ -192,24 +190,30 @@ console.log( 'gbxml', gbxml );
 		let txt = '<h4>location</h4>';
 		txt += 
 
-		'Location: ' + gbxml.Campus.Location.Name + b +
-		'Latitude: ' + gbxml.Campus.Location.Latitude + b +
-		'Longitude: ' + gbxml.Campus.Location.Longitude + b +
-		'Zipcode or Postal Code: ' + gbxml.Campus.Location.ZipcodeOrPostalCode + b +
+		'Location: ' + gbjson.Campus.Location.Name + b +
+		'Latitude: ' + gbjson.Campus.Location.Latitude + b +
+		'Longitude: ' + gbjson.Campus.Location.Longitude + b +
+		'Zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b +
 		'';
 		stats.innerHTML = txt;
+
+		nonOrtho = 0;
+		ortho = 0;
+		verts = 0;
+		horiz = 0;
+		lines = 0;
 
 		scene.remove( model );
 		model = new THREE.Object3D();
 		scene.add( model );
 
-		if ( !gbxml.Campus.Building.Space[ 0 ] ) { alert( 'No PolyLoops in this file. Try another file.' ); return; }
+		if ( !gbjson.Campus.Building.Space[ 0 ] ) { alert( 'No PolyLoops in this file. Try another file.' ); return; }
 
-// console.log( 'PolyLoop', gbxml.Campus.Building.Space[ 0 ].ShellGeometry.ClosedShell.PolyLoop  );
+// console.log( 'PolyLoop', gbjson.Campus.Building.Space[ 0 ].ShellGeometry.ClosedShell.PolyLoop  );
 
-		for ( var k = 0; k < gbxml.Campus.Building.Space.length; k++ ) {
+		for ( var k = 0; k < gbjson.Campus.Building.Space.length; k++ ) {
 
-			space = gbxml.Campus.Building.Space[ k ];
+			space = gbjson.Campus.Building.Space[ k ];
 
 			polyloops = space.ShellGeometry.ClosedShell.PolyLoop;
 
@@ -222,13 +226,119 @@ console.log( 'gbxml', gbxml );
 				points = polyloops[ i ].CartesianPoint;
 //console.log( 'points', points );
 
+
 				plane = getPlane ( points );
 //console.log( 'plane', plane );
 
 				if ( plane === undefined ) {
 
-					geometry = new THREE.Geometry();
-					vertices = geometry.vertices;
+					nonOrtho++;
+
+					if ( points[ 0 ].Coordinate[ 2 ] === points[ 1 ].Coordinate[ 2 ] && points.length === 4 ) {
+
+horiz++;
+//console.log( 'got horiz', );
+//console.log( '', points );
+
+						geometry = new THREE.Geometry();
+						var vertices = geometry.vertices;
+
+						pt0 = points[ 0 ].Coordinate;
+						pt1 = points[ 1 ].Coordinate;
+						pt2 = points[ 2 ].Coordinate;
+						pt3 = points[ 3 ].Coordinate;
+
+						vrt1 = v( parseFloat( pt0[ 0 ] ), parseFloat( pt0[ 2 ] ), parseFloat( pt0[ 1 ] ) );
+						vrt2 = v( parseFloat( pt1[ 0 ] ), parseFloat( pt1[ 2 ] ), parseFloat( pt1[ 1 ] ) );
+						vrt3 = v( parseFloat( pt2[ 0 ] ), parseFloat( pt2[ 2 ] ), parseFloat( pt2[ 1 ] ) );
+
+						plane = new THREE.Plane().setFromCoplanarPoints ( vrt1, vrt2, vrt3 );
+
+//console.log( '', plane );
+
+						vertices = [
+							v2( 0, 0 ),
+							v2( vrt1.distanceTo( vrt2 ), 0, 0 ),
+							v2( vrt1.distanceTo( vrt2 ), vrt2.distanceTo( vrt3 ) ),
+							v2( 0, vrt2.distanceTo( vrt3 ) ),
+							v2( 0, 0 )
+						];
+//console.log( '', vertices );
+
+
+						shape = new THREE.Shape( vertices );
+						geometryShape = new THREE.ShapeGeometry( shape );
+						geometryShape.lookAt( plane.normal );
+						geometryShape.translate( vrt1.x, vrt1.y, vrt1.z );
+						const opacity = parseFloat( inpOpacity.value ) / 100;
+
+						material = new THREE.MeshNormalMaterial( { side: 2, opacity: opacity, transparent: true } );
+						mesh = new THREE.Mesh( geometryShape, material );
+						model.add( mesh );
+
+
+					} else if ( 
+
+						( points[ 0 ].Coordinate[ 0 ] === points[ 1 ].Coordinate[ 0 ] 
+//						|| 
+//						points[ 0 ].Coordinate[ 1 ] === points[ 1 ].Coordinate[ 1 ] 
+						) 
+						&& points.length === 4
+
+					) {
+
+						geometry = new THREE.Geometry();
+						var vertices = geometry.vertices;
+
+						pt0 = points[ 0 ].Coordinate;
+						pt1 = points[ 1 ].Coordinate;
+						pt2 = points[ 2 ].Coordinate;
+						pt3 = points[ 3 ].Coordinate;
+
+						vrt1 = v( parseFloat( pt0[ 0 ] ), parseFloat( pt0[ 2 ] ), parseFloat( pt0[ 1 ] ) );
+						vrt2 = v( parseFloat( pt1[ 0 ] ), parseFloat( pt1[ 2 ] ), parseFloat( pt1[ 1 ] ) );
+						vrt3 = v( parseFloat( pt2[ 0 ] ), parseFloat( pt2[ 2 ] ), parseFloat( pt2[ 1 ] ) );
+
+						plane = new THREE.Plane().setFromCoplanarPoints ( vrt1, vrt2, vrt3 );
+
+//console.log( '', plane );
+
+						vertices = [
+							v2( 0, vrt1.distanceTo( vrt2 ) ),
+							v2( 0, 0 ),
+							v2( - vrt2.distanceTo( vrt3 ), 0 ),
+							v2( - vrt2.distanceTo( vrt3 ), vrt1.distanceTo( vrt2 ) ),
+							v2( 0, vrt1.distanceTo( vrt2 ) )
+						];
+//console.log( '', vertices );
+
+
+						shape = new THREE.Shape( vertices );
+						geometryShape = new THREE.ShapeGeometry( shape );
+						geometryShape.lookAt( plane.normal );
+						geometryShape.translate( vrt1.x, vrt1.y, vrt1.z );
+						const opacity = parseFloat( inpOpacity.value ) / 100;
+
+						material = new THREE.MeshNormalMaterial( { side: 2, opacity: opacity, transparent: true } );
+						mesh = new THREE.Mesh( geometryShape, material );
+						model.add( mesh );
+
+
+verts++;
+//console.log( 'got verts', );
+//console.log( '', points );
+
+
+					} else {
+
+//console.log( '', points );
+lines++
+
+					}
+
+
+					let geometryLine = new THREE.Geometry();
+					var vertices = geometryLine.vertices;
 
 					for ( let j = 0; j < points.length; j++ ) {
 
@@ -242,11 +352,13 @@ console.log( 'gbxml', gbxml );
 //console.log( 'v', vertices );
 
 					material = new THREE.LineBasicMaterial( { color: 0x000000 } );
-					line = new THREE.Line( geometry, material );
+					line = new THREE.Line( geometryLine, material );
 
 					model.add( line );
 
 				} else {
+					ortho++;
+
 
 					geometry = new THREE.Geometry();
 					var vertices = geometry.vertices;
@@ -319,11 +431,20 @@ break;
 					mesh = new THREE.Mesh( geometry, material );
 					model.add( mesh );
 
+
 				}
+
 
 			}
 
-//			stats.innerHTML = ( k + 1 ) + ' of ' + gbxml.Campus.Building.Space.length;
+//			stats.innerHTML = ( k + 1 ) + ' of ' + gbjson.Campus.Building.Space.length;
+			stats2.innerHTML += 
+				'non-orthogonal count: ' + nonOrtho + b +
+				'orthogonal count: ' + ortho + b +
+				'horizontal count: ' + horiz + b +
+				'verticals count: ' + verts + b +
+				'lines only count: ' + lines + b +
+			'';
 
 		}
 
@@ -502,6 +623,7 @@ break;
 
 	}
 
+
 	function requestFile( url, callback ) {
 
 		let xhr;
@@ -536,10 +658,10 @@ break;
 			json = xmlToJson( xmldoc );
 //console.log( 'json', json );
 
-			gbxml = json.gbXML;
+			gbJSON = json.gbXML;
 console.log( 'gbxml', gbxml );
 
-			parseGbxml( gbxml );
+			parseGbJson( gbJSON );
 
 		}
 

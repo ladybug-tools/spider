@@ -19,7 +19,7 @@
 <body>
 <script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
 
-<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
+	<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
 
 	<p>
 		<button onclick="initSunPath();" >Draw Sun & Analemma</button>
@@ -98,12 +98,6 @@
 	function init() {
 
 
-		inpMonth.onclick = initSunPath;
-		inpDate.onclick = initSunPath;
-		inpHour.onclick = initSunPath;
-
-		window.addEventListener( 'unload', function() { playTheYear = false; }, false );
-
 		if ( window.top === window.self ) {
 
 			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
@@ -113,6 +107,12 @@
 			parent.ifrMenuSub.style.height = '350px';
 
 		}
+
+		inpMonth.onclick = initSunPath;
+		inpDate.onclick = initSunPath;
+		inpHour.onclick = initSunPath;
+
+		window.addEventListener( 'unload', function() { playTheYear = false; }, false );
 
 	}
 
@@ -270,7 +270,8 @@
 //		object3D.add( analemma );
 		scene.add( analemma );
 
-console.log( 'analemma', analemma );
+//console.log( 'analemma', analemma );
+
 	}
 
 
@@ -284,7 +285,7 @@ console.log( 'analemma', analemma );
 		sun = new THREE.Mesh( geometry, material );
 
 		sun.name = 'sun';
-console.log( 'pcc', pcc, lightDirectional );
+//console.log( 'pcc', pcc, lightDirectional );
 		lightDirectional.add( sun );
 
 //		scene.add( lights );

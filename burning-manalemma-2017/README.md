@@ -160,7 +160,10 @@ More in the next few days. In the mean time here's some background:
 
 ## Change Log
 
+## 2017-09-10 ~ Theo
 
+* Progess is being made on the simplification - just very very slowly
+* Trick learned today: console log may parent / content window dependent
 
 ## 2017-09-08 ~ Theo
 

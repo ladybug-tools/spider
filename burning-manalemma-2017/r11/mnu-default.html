@@ -141,7 +141,7 @@
 
 		} else {
 
-			parent.ifrMenuSub.style.height = '350px';
+			parent.ifrMenuSub.style.cssText += 'border: 2px solid orange; height: 300px';
 
 		}
 
@@ -212,11 +212,10 @@
 	function onReadNews( issue, callback ) {
 
 //console.log( '', 23 );
-		
 
 		synth.cancel();
 
-//		var utterThis;
+		var utterThis;
 
 		utterThis = new SpeechSynthesisUtterance( issue[ count ] );
 

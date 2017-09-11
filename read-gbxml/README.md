@@ -4,9 +4,9 @@
 [Ladybug Tools > Spider gbXML Reader Read Me]( #README.md )
 ====
 
-<iframe class=iframeReadMe src=./read-gbxml/polyloop/r1/read-gbxml-polyloop.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe class=iframeReadMe src=./read-gbxml/polyloop/r2/read-gbxml-polyloop.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [read gbxml polyloop]( ./read-gbxml/polyloop/r1/read-gbxml-polyloop.html )
+## Full Screen: [read gbxml polyloop]( ./read-gbxml/polyloop/r2/read-gbxml-polyloop.html )
 
 ## Full Screen: [read gbxml rectangular geometry]( rectangular-geometry/r1/read-gbxml-rectangular-geometry.html )
 
@@ -53,6 +53,11 @@ Coming soon
 
 ## Issues
 
+
+### read gbxml polyloop
+
+* 2017-09-11 ~ Occasional mis-rotation of polyloops
+
 ### read gbxml rectangular geometry
 
 * 2017-09-08 ~ floor slabs position incorrectly
@@ -77,9 +82,19 @@ See also:
 ## Change Log
 
 
-### 2017-08-21 ~ Theo
+### 2017-09-10 ~ Theo
 
-* Add readme
+* R2
+* Handles non-orthogonal polyloops fairly well
+* Reports various stats
+* Reports the number of polyloops drawn as lines only
+	* Mostly because number of vertices does equal 4
+
+Code can use a lot of clean up. 
+
+### 2017-09-09 ~ Theo
+
+* Add read me
 * Update folder structure
 * Add menu items
 * Add file reader
