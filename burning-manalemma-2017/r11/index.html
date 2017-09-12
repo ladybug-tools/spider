@@ -76,6 +76,7 @@
 
 //console.log( 'folder', folder );
 
+	let lights;
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
 
@@ -172,10 +173,55 @@ console.log( 'index', location.hash );
 			parameters.latitude = params.latitude ? parseFloat( params.latitude ) : defaultLatitude;
 			parameters.longitude = params.longitude ? parseFloat( params.longitude ) : defaultLongitude;
 			parameters.zoom = params.zoom ? parseInt( params.zoom, 10 ) : defaultZoom;
+			parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
+			parameters.heightScale = params.heightScale ? params.heightScale : defaultHeightScale;
 
 			updateTerrain();
 
 		}
+
+	}
+
+
+
+	function addLights( size ) {
+
+// 2017-04-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r2.html
+
+		size = size ? size : 100;
+
+		scene.remove( lights );
+
+		lights = new THREE.Object3D();
+		lights.name = 'lights';
+
+		lightAmbient = new THREE.AmbientLight( 0x888888 );
+		lights.add( lightAmbient );
+
+
+		lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
+		camera.add( lightPointCamera );
+
+		lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
+
+
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
+
+		lightDirectional.castShadow = true;
+
+		lights.add( lightDirectional );
+
+		lightHelper = new THREE.DirectionalLightHelper( lightDirectional, 6, 0x0000 );
+		scene.add( lightHelper );
+
+		scene.add( lights );
+
+		return lights;
 
 	}
 

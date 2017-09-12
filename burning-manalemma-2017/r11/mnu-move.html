@@ -39,7 +39,7 @@
 			<span id=zooms ></span>
 		</p>
 
-		Height Scale
+		Height Scale <output id=outHeightScale >3</output>
 		<input type="range" id="inpHeightScale" min=0 max=20 step=0.1 value=1 onchange=setNextTile(this); title="Vertical scale" >
 
 		<div id = "raster" ></div>
@@ -51,7 +51,7 @@
 
 	let pcc;
 	let THREE;
-	let scene;
+	var scene;
 	let ground;
 
 	let parameters = {};
@@ -71,9 +71,11 @@
 
 			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
 
-			pcc = parent;
+			contents.innerHTML = '<iframe id=ifrContents src=mnu-content-terrain.html ></iframe>';
 
-			initVars();
+			pcc = ifrContents.contentWindow;
+
+			ifrContents.onload = initVars;
 
 			location.hash = string;
 
@@ -136,7 +138,7 @@ console.log( 'my parent has ifrContents.contentWindow' );
 
 	function onHashChange() {
 
-console.log( 'mnu-move hash', location.hash );
+//console.log( 'mnu-move hash', location.hash );
 
 //		getParametersFromHash();
 
@@ -160,8 +162,8 @@ console.log( 'mnu-move hash', location.hash );
 //console.log( 'getParametersFromHash', parameters );
 
 // needed??
-//		updateTerrain();
-		getCalcs();
+//		ifrContents.contenWindow.updateTerrain();
+		pcc.getCalcs();
 	}
 
 /*
@@ -190,6 +192,7 @@ console.log( 'mnu-move update terrain',  );
 		const zoom = that && that.title === "Zoom level" ? parseInt( that.innerText, 10 ) : parameters.zoom
 
 		const heightScale = parseFloat( inpHeightScale.value );
+		outHeightScale.value = heightScale;
 
 		const newLat = parameters.latitude + latitudeDirection * parameters.latDelta;
 
@@ -201,7 +204,7 @@ console.log( 'mnu-move update terrain',  );
 			const hash = 'latitude:' + newLat + ',longitude:' + newLon + ',zoom:' + zoom + ',heightScale:' + heightScale;
 
 			location.hash = hash;
-//console.log( 'hash', hash );
+console.log( 'hash', hash );
 
 			info.innerHTML = 'latitude: ' + newLat.toFixed( 4 ) + ' longitude: ' + newLon.toFixed( 4 ) +
 				' zoom: ' + zoom + ' heightScale: ' + heightScale;
@@ -209,6 +212,7 @@ console.log( 'mnu-move update terrain',  );
 			parameters.latitude = newLat;
 			parameters.longitude = newLon;
 			parameters.zoom = zoom;
+			parameters.heightScale = heightScale;
 
 		}
 

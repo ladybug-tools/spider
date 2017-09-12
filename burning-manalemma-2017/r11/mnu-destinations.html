@@ -9,13 +9,12 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
-	#menu { max-width: 300px; }
+	body { background-color: HoneyDew; font: 12pt monospace; margin: 0 auto; padding: 0 5px; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
+	h3 { margin: 0; }
 	iframe { height: 400px; margin: 0 auto; width: 800px; }
 
-	h3 { margin: 0; }
-
+	#menu { max-width: 300px; }
 
 </style>
 </head>
@@ -34,39 +33,39 @@
 `
 ## [Destinations]( mnu-destinations.html )
 
-### [Notre Damalemma]( file#latitude:48.8527,longitude:2.3506,zoom:16,heightScale:1 )
+### [Notre Damalemma]( file#latitude:48.8527,longitude:2.3506,zoom:16,heightScale:1,suffix )
 
-### [Mountalemma Everest]( file#latitude:27.98785,longitude:86.92502609999997,zoom:11,offsetUTC:345,heightScale:1 )
+### [Mountalemma Everest]( file#latitude:27.98785,longitude:86.92502609999997,zoom:11,offsetUTC:345,heightScale:1,suffix )
 
-### [Moorealemma, Windward Islands]( file#latitude:-17.5388435,longitude:-149.82952339999997,zoom:12,offsetUTC:-600 )
+### [Moorealemma, Windward Islands]( file#latitude:-17.5388435,longitude:-149.82952339999997,zoom:12,offsetUTC:-600,suffix )
 
-### [Hongalemma Kongalemma]( file#latitude:22.2745,longitude:114.1754,zoom:15,offsetUTC:480,heightScale:1 'I lived near the middle of the map' )
-
-***
-
-### [Downtown San Francisco / Hyatt Embarcadero]( file#latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420 "86 structures" )
-
-### [GG Bridge @ Marin]( file#latitude:37.826068,longitude:-122.479592,zoom:15,offsetUTC:-420 "10 structures" )
-
-### [Alcatraz]( file#latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420 "12 structures" )
-
-### [Fort Mason]( file#latitude:37.807835,longitude:-122.427333,zoom:15,offsetUTC:-420 "107 structures")
-
-### [Coit Tower 16 Zoom]( file#latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420 "553 structures" )
-
-### [Coit Tower 15 Zoom]( file#latitude:37.8024,longitude:-122.4058,zoom:15,offsetUTC:-420 "1395 structures" )
-
-### [Lombard Street]( file#latitude:37.8025097,longitude:-122.419788,zoom:16,offsetUTC:-420 "1395 structures" )
+### [Hongalemma Kongalemma]( file#latitude:22.2745,longitude:114.1754,zoom:15,offsetUTC:480,heightScale:1,suffix 'I lived near the middle of the map' )
 
 ***
 
-### [NYC]( file#latitude:40.7128,longitude:-74.0059,zoom:16,offsetUTC:-240 "284 structures" )
+### [Downtown San Francisco / Hyatt Embarcadero]( file#latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420,suffix "86 structures" )
 
-### [Mount Washington NH]( file#latitude:44.27058539999999,longitude:-71.3032723,zoom:15,offsetUTC:-240 "4 structures" )
+### [GG Bridge @ Marin]( file#latitude:37.826068,longitude:-122.479592,zoom:15,offsetUTC:-420,suffix "10 structures" )
 
-### [Christ Redeemer, Rio di Janeiro]( file#latitude:-22.951916,longitude:-43.21048719999999,zoom:15,offsetUTC:-180 "7 structures" )
+### [Alcatraz]( file#latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420,suffix "12 structures" )
 
-### [Tenzing-Hillary Airport, Nepal]( file#latitude:27.68777799999999,longitude:86.73138360000007,zoom:15,offsetUTC:345 "77 structures" )
+### [Fort Mason]( file#latitude:37.807835,longitude:-122.427333,zoom:15,offsetUTC:-420,suffix "107 structures")
+
+### [Coit Tower 16 Zoom]( file#latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420,suffix "553 structures" )
+
+### [Coit Tower 15 Zoom]( file#latitude:37.8024,longitude:-122.4058,zoom:15,offsetUTC:-420,suffix "1395 structures" )
+
+### [Lombard Street]( file#latitude:37.8025097,longitude:-122.419788,zoom:16,offsetUTC:-420,suffix "1395 structures" )
+
+***
+
+### [NYC]( file#latitude:40.7128,longitude:-74.0059,zoom:16,offsetUTC:-240,suffix "284 structures" )
+
+### [Mount Washington NH]( file#latitude:44.27058539999999,longitude:-71.3032723,zoom:15,offsetUTC:-240,suffix "4 structures" )
+
+### [Christ Redeemer, Rio di Janeiro]( file#latitude:-22.951916,longitude:-43.21048719999999,zoom:15,offsetUTC:-180,suffix  "7 structures" )
+
+### [Tenzing-Hillary Airport, Nepal]( file#latitude:27.68777799999999,longitude:86.73138360000007,zoom:15,offsetUTC:345,suffix  "77 structures" )
  
 
 `;
@@ -77,24 +76,51 @@
 
 	function init() {
 
+
 		showdown.setFlavor( 'github' );
 
 		const converter = new showdown.Converter();
 
 		file = parent.THREE ? 'index.html#' : '../index.html#';
-		html = converter.makeHtml( subMenu );
-		html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
-		html = html.replace( /file#/gi, file );
-		menu.innerHTML = converter.makeHtml( html );
+		file = 'JavaScript:setIfrMenuSub(\"';
+		txtHtml = converter.makeHtml( subMenu );
+//		txtHtml = txtHtml.replace( /\<a href\=/gi, '<a target=_top href=' );
+		txtHtml = txtHtml.replace( /\,suffix/gi, '"); ' ).replace( /\"file#/gi, file );
+		menu.innerHTML = txtHtml;
 
-		if ( window.top === window.self ) {
+//console.log( 'txtHtml', txtHtml );
 
-			contents.innerHTML = '<iframe id = "mmm" src=mnu-content-terrain.html ></iframe>';
+// placed after getting data that sets height of menu
+		if ( window.self === window.top  ) {
 
-		} else {
+			contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
+
+			pcc = ifrContents.contentWindow;
+
+//			ifrContents.onload = initVariables;
+
+		} else if ( parent && parent.THREE ) {
+
+			pcc = parent;
 
 			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) + 'px';
+
+
+		} else if ( parent && parent.ifrContents ) {
+
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) + 'px';
+
 		}
+
+	}
+
+
+
+	function setIfrMenuSub( hash ) {
+
+//console.log( 'hash', hash );
+
+		pcc.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
 
 	}
 

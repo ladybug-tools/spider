@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title></title>
+<style>
+
+	body { background-color: cornsilk; font: 12pt monospace; margin: 0 auto; padding: 0 5px; max-width: 300px; }
+
+	input { box-sizing: border-box; width: 100%; }
+
+
+</style>
+
+</head>
+<body>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC08xQ2xRy3k5IHkEuuSWasdViOkk489Y0" ></script>
+
+	<div id = "header" >
+
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+
+	</div>
+
+	<div id = "menu" >
+
+		<p>Enter an address or location<br>
+			<input id = "inpAddress" placeholder="Where do you want to burn?" onchange = "geocoderAddress( geocoder );"
+				onclick="onclickInput();" title="Thank you Google Maps API!" >
+			<br>
+			<small>geocoder courtesy of Google</small>
+		</p>
+
+	</div>
+
+	<div id="menuGeocoderMessage" ></div>
+
+<script>
+
+// https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
+
+	let geocoder;
+
+	init();
+
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+
+			pcc = parent;
+
+		} else if ( parent && parent.THREE ) {
+
+			parent.ifrMenuSub.style.height = '400px';
+
+			pcc = parent;
+
+		} else if ( parent && parent.ifrContents ) {
+
+			parent.ifrMenuSub.style.height = '400px';
+
+			pcc = parent.ifrContents.contentWindow;
+
+		}
+
+
+		divMap = document.createElement( 'div' );
+//		pcc.document.body.appendChild( divMap );
+//		divMap.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
+		map = new google.maps.Map( divMap );
+
+		geocoder = new google.maps.Geocoder();
+		origin_autocomplete = new google.maps.places.Autocomplete( inpAddress );
+
+		origin_autocomplete.addListener(
+
+			'place_changed',
+
+			function() { setGeocoderMessage( origin_autocomplete.getPlace() ); }
+
+		);
+
+	}
+
+
+
+	function onclickInput() {
+
+		inpAddress.select();
+
+	}
+
+
+
+	function geocoderAddress( geocoder ) {
+
+		geocoder.geocode( {
+
+			'address': inpAddress.value },
+
+			function( results, status ) {
+
+				if ( status === google.maps.GeocoderStatus.OK ) {
+
+				} else {
+
+					parent.calculations.innerHTML = 'Geocode was not successful for the following reason: ' + status;
+
+				}
+
+			}
+
+		);
+
+	}
+
+
+		let hash;
+
+	function setGeocoderMessage( place ) {
+
+		let txt;
+
+//console.log( '', place );
+
+		if( !place || !place.place_id ) { menuGeocoderMessage.innerHTML = 'Click a location in the drop down list'; return; }
+
+		hash = 
+
+			'latitude:' + place.geometry.location.lat() + ',' +
+			'longitude:' + place.geometry.location.lng() + ',' +
+			'zoom:' + '16' + ',' +
+			'offsetUTC:' + place.utc_offset + '';
+
+		if ( !place.geometry ) {
+
+			txt = 'Autocomplete\'s returned place contains no data';
+
+		} else {
+
+			txt =
+
+				'Latitude: ' + place.geometry.location.lat().toFixed( 4 ) + '<br>' +
+				'Longitude: ' + place.geometry.location.lng().toFixed( 4 ) + '<br>' +
+				'UTC Offset: ' + place.utc_offset + '<br>' +
+
+				'<p>Address:<br>' + place.adr_address + '</p>' +
+				( place.vicinity ? '<p>Vicinity:<br>' + place.vicinity + '</p>' : '' ) +
+
+				'<p>' +
+					'<span style=color:red; >Go there:</span><br>' +
+					'<a href=JavaScript:setIfrMenuSub(); >' + hash + '</a>' +
+
+				'</p>' +
+			'';
+
+//console.log( '', parent.parent );
+
+			parent.parent.location.hash = hash;
+
+//			parent.location.hash = 'analemma3d.html#' + hash;
+
+			menuGeocoderMessage.innerHTML = txt;
+
+			parent.place = place;
+			parent.offsetUTC = place.utc_offset
+
+//console.log( 'place ', place );
+
+		}
+
+	}
+
+
+	function setIfrMenuSub() {
+
+		pcc.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
+
+	}
+
+
+</script>
+</body>
+</html>

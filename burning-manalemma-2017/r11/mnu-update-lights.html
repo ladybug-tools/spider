@@ -9,7 +9,7 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
 	a { color: crimson; text-decoration: none; }
 	iframe { height: 500px; width: 100% }
 
@@ -62,15 +62,20 @@
 
 		} else if ( parent && parent.THREE ) {
 
+			parent.ifrMenuSub.style.height = '200px';
+
 			pcc = parent;
 
 			initVariables();
 
 		} else if ( parent && parent.ifrContents ) {
 
+			parent.ifrMenuSub.style.height = '200px';
+
 			pcc = parent.ifrContents.contentWindow;
 console.log( 'pcc', pcc );
-			parent.ifrContents.onload = initVariables; 
+
+			parent.ifrContents.onload = initVariables;
 
 		}
 
@@ -90,6 +95,8 @@ console.log( 'pcc', pcc );
 
 	}
 
+
+
 	function addLights( size ) {
 
 // 2017-04-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r2.html
@@ -99,14 +106,14 @@ console.log( 'pcc', pcc );
 		var lights = new THREE.Object3D();
 		lights.name = 'lights';
 
-//		if ( !lightAmbient ) { 
+//		if ( !lightAmbient ) {
 
 			lightAmbient = new THREE.AmbientLight( 0x888888 );
 			lights.add( lightAmbient );
 
 //		}
 
-//		if ( !lightPointCamera ) { 
+//		if ( !lightPointCamera ) {
 
 			lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
 			camera.add( lightPointCamera );
@@ -115,7 +122,7 @@ console.log( 'pcc', pcc );
 
 //		}
 
-//		if ( !lightDirectional ) { 
+//		if ( !lightDirectional ) {
 
 			lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
 			lightDirectional.position.set( -size, size, size );
@@ -135,7 +142,7 @@ console.log( 'pcc', pcc );
 		scene.add( lights );
 		pcc.lightDirectional = lightDirectional
 		return lights;
-	
+
 
 	}
 

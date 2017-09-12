@@ -51,6 +51,7 @@ What do we need?
 > A city in the desert. A culture of possibility. A network of dreamers and doers.
 
 * https://burningman.org/
+* https://burningman.org/culture/philosophical-center/10-principles/
 * https://en.wikipedia.org/wiki/Burning_Man
 * https://twitter.com/burningman?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor
 * https://www.facebook.com/burningman/
@@ -128,20 +129,19 @@ More in the next few days. In the mean time here's some background:
 
 ## Issues
 
-
+* 2017-09-11 ~ destinations not deleting previous terrain
 
 
 ## To-Do
 
 * 2017-09-03 ~ Need much better interaction between the different menus/plugins
 * 2017-09-03 ~ Add more flight paths from math / build your own
-* 2017-08-31 ~ Add speak the BM glossary
+* 2017-08-31 ~ Add speak the Burning Man glossary / 
 * 2017-08-31 ~ Add to Glitch /CodeOpen / jsFiddle
 * 2017-08-31 ~ Add to bl.ocks.org
 * 2017-08-31 ~ update copyable permalink update with any moves/zooms
 * 2017-08-31 ~ Get Temple to touch the ground. Add physics
 * 2017-08-31 ~ Add select skybox
-* 2017-08-31 ~ Separate terrain code from basic Three.js loader
 * 2017-08-29 ~ Add mouseover highlights
 * 2017-08-29 ~ Add exploded view and sectioning
 * 2017-08-29 ~ Include map type in location hash
@@ -157,12 +157,30 @@ More in the next few days. In the mean time here's some background:
 
 
 
-
 ## Change Log
+
+
+## 2017-09-11 ~ Theo
+
+* More R11
+* Geocoding
+* Lights and shadows
+* Height scale
+* More auto-loading terrain
+
+There are three levels of existence for each script
+* Standalone - for testing
+* Three.js plugin - for general usage
+* Child - part of some larger, undetermined kit of tools
+
+Understand how these work is not easy, but as understanding arises it tends to simplify things
+
 
 ## 2017-09-10 ~ Theo
 
-* Progess is being made on the simplification - just very very slowly
+* Terrain and destinations and move working OK
+	* 2017-08-31 ~ Separate terrain code from basic Three.js loader
+* Progress is being made on the simplification - just very very slowly
 * Trick learned today: console log may parent / content window dependent
 
 ## 2017-09-08 ~ Theo

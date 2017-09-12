@@ -61,6 +61,7 @@
 
 <script>
 
+	var lights;
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
 
@@ -89,14 +90,59 @@
 		let axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
 
+		addLights();
+
 		geometry = new THREE.BoxGeometry( 50, 50, 50 );
 		material = new THREE.MeshNormalMaterial();
+		material = new THREE.MeshPhongMaterial();
 		mesh = new THREE.Mesh( geometry, material );
 
 		scene.add( mesh );
 
 	}
 
+
+
+	function addLights( size = 100 ) {
+
+// 2017-04-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r2.html
+
+//		size = size ? size : 100;
+
+		scene.remove( lights );
+
+		lights = new THREE.Object3D();
+		lights.name = 'lights';
+
+		lightAmbient = new THREE.AmbientLight( 0x888888 );
+		lights.add( lightAmbient );
+
+		lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
+		camera.add( lightPointCamera );
+
+		lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
+
+
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
+		lightDirectional.position.set( -size, size, size );
+//		lightDirectional.position.set( -100, 100, 100 );
+//		lightDirectional.shadow.camera.scale.set( 130, 150, 0.5 );
+
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
+
+		lightDirectional.castShadow = true;
+
+		lights.add( lightDirectional );
+
+		lightHelper = new THREE.DirectionalLightHelper( lightDirectional, 6, 0x0000 );
+		scene.add( lightHelper );
+
+		scene.add( lights );
+
+		return lights;
+
+	}
 
 
 	function onWindowResize() {

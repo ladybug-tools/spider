@@ -49,14 +49,17 @@
 
 	let pcc;
 	let THREE;
-	let scene;
+	var scene;
+	let lights;
 
 //	const defaultLatitude = 37.796;
 //	const defaultLongitude = -122.398;
+//	const defaultOffsetUTC = -420;
 
 	const defaultLatitude = 40.786944;
 	const defaultLongitude = -119.204444;
 	const defaultOffsetUTC = -420;
+	const defaultHeightScale = 3;
 
 	let parameters = {};
 
@@ -104,7 +107,7 @@
 
 			parent.ifrMenuSub.style.height = '200px';
 
-console.log( 'mnu-content-terrain: parent has Three' );
+//console.log( 'mnu-content-terrain: parent has Three' );
 
 		} else if ( parent && parent.ifrContents ) {
 
@@ -112,7 +115,7 @@ console.log( 'mnu-content-terrain: parent has Three' );
 
 			initVariables();
 
-pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
+//pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 
 		}
 
@@ -125,9 +128,10 @@ pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 		THREE = pcc.THREE;
 		scene = pcc.scene;
 		camera = pcc.camera;
-		controls = pcc.controls;
-		lightDirectional = pcc.lightDirectional;
 		cameraHelper = pcc.cameraHelper;
+		controls = pcc.controls;
+		addLights = pcc.addLights;
+		lightDirectional = pcc.lightDirectional;
 
 //		pcc.initVariables = initVariables;
 		pcc.parameters = parameters;
@@ -138,7 +142,9 @@ pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 		pcc.updateTerrain = updateTerrain;
 //		pcc.getHeightMapData = getHeightMapData;
 
-		scene.remove( pcc.mesh );
+		scene.remove( pcc.mesh, ground );
+
+		if ( !lights ) { addLights(); };
 
 		addEventListener( 'hashchange', onHashChange, false );
 
@@ -164,6 +170,7 @@ pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 		if ( !location.hash ) { 
 
 //console.log( 'mnu-contents: no hash' ); 
+
 			location.hash = blackRock;
 
 			return; 
@@ -173,20 +180,23 @@ pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 		hash = location.hash.slice( 1 );
 
 		str = '{"' + hash.replace( /:/g, '":"' ).replace( /,/g, '", "' ) + '"}';
-//console.log( 'getParametersFromHash', str );
+//pcc.console.log( 'getParametersFromHash', str );
 
 		params = JSON.parse( str );
 
 		parameters.latitude = params.latitude ? parseFloat( params.latitude ) : defaultLatitude;
 		parameters.longitude = params.longitude ? parseFloat( params.longitude ) : defaultLongitude;
 		parameters.zoom = params.zoom ? parseInt( params.zoom, 10 ) : defaultZoom;
-//console.log( 'getParametersFromHash', parameters );
+		parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
+		parameters.heightScale = params.heightScale ? params.heightScale : defaultHeightScale;
 
-//		updateTerrain();
+//pcc.console.log( 'getParametersFromHash', parameters );
+
 
 		getCalcs();
 
 	};
+
 
 
 	function updateTerrain() {
@@ -327,7 +337,7 @@ pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 
 		let geometry, material;
 		let heightmapCanvas, heightmapContext;
-		let scaleTerrain, data, vertices, r, g, b;  // b is a const elsewhere
+		let scaleTerrain, data, vertices, r, g, b;  // Note: b is a const elsewhere
 
 		parameters.metersPerPixel = parameters.mPixel[ parameters.zoom ];
 
@@ -465,7 +475,9 @@ pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 				if ( count === tilesPerSideSquared ) {
 
 //pcc.info.innerHTML += 'ground.material.map' + texture.uuid;
-					ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+					ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+//					ground.geometry.computeFaceNormals();
+//					ground.geometry.computeVertexNormals();
 					ground.material.needsUpdate = true;
 
 					setCamera();

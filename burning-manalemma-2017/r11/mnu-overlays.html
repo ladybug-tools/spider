@@ -36,31 +36,6 @@
 	const defaultLatitude = 37.796;
 	const defaultLongitude = -122.398;
 
-/*
-	const defaultLatitude = 37.796;
-	const defaultLongitude = -122.398;
-
-//	const defaultLatitude = 40.786944;
-//	const defaultLongitude = -119.204444;
-	const defaultOffsetUTC = -420;
-
-	parameters.zoom = 16;
-	parameters.latitude = defaultLatitude;
-	parameters.longitude = defaultLongitude;
-	parameters.heightScale = 3;
-	parameters.side = 2;
-	parameters.groundSize = 100;
-	parameters.mPixel = [ 156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298 ]
-	parameters.pixelsPerTile = 256;
-	parameters.tilesPerSide = 4; // odd number please
-
-	parameters.zoom = zoom = 11;
-	parameters.x = 345;
-	parameters.y = 769;
-	parameters.titleOffsetX = 2;
-	parameters.titleOffsetY = 2;
-*/
-
 	let mapTypes = [
 
 		['Google Maps','https://mt1.google.com/vt/x='],
@@ -100,7 +75,7 @@
 
 //			playImages();
 
-			contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
 
 			pcc = ifrContents.contentWindow;
 
@@ -116,7 +91,7 @@
 
 		} else if ( parent && parent.ifrContents ) {
 
-console.log( 'my parent has ifrContents.contentWindow', 44 );
+console.log( 'parent has ifrContents.contentWindow', 44 );
 
 			parent.ifrMenuSub.style.height = '350px';
 
@@ -156,7 +131,7 @@ console.log( 'my parent has ifrContents.contentWindow', 44 );
 		} else {
 
 			parameters.mapTypes = mapTypes;
-			parameters.zoom = 16;
+			parameters.zoom = 14;
 			parameters.latitude = defaultLatitude;
 			parameters.longitude = defaultLongitude;
 			parameters.latDelta = 0.004341;
@@ -305,7 +280,7 @@ console.log( 'my parent has ifrContents.contentWindow', 44 );
 			img.crossOrigin = 'anonymous';
 			img.src = url;
 
-			rasterCanvas = document.createElement( 'canvas' );
+			rasterCanvas = pcc.document.createElement( 'canvas' );
 			rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
 //			document.body.appendChild( rasterCanvas );
 //			rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
@@ -325,9 +300,9 @@ console.log( 'my parent has ifrContents.contentWindow', 44 );
 
 				if ( count >= tilesPerSideSquared - 1 ) {
 
-//					ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+					ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
 
-					ground.material = new THREE.MeshBasicMaterial( { color: 0xfff77f, side: 2, opacity: opacity , transparent: true } );
+//					ground.material = new THREE.MeshBasicMaterial( { color: 0xfff77f, side: 2, opacity: opacity , transparent: true } );
 					ground.material.needsUpdate = true;
 
 
