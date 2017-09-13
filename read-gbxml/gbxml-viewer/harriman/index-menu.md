@@ -4,12 +4,12 @@
 
 h3 { margin: 0 0 20px 0 ; }
 
-#ifrMenuSub { height: 20px; }
+#ifrMenuSub { height: 50px; }
 
 </style>
 
 
-[ladybug.tools]( https://ladybug.tools ) &raquo; [Spider]( http://ladybug.tools/spider ) &raquo;
+[ladybug.tools]( https://ladybug.tools ) &raquo; [spider]( http://ladybug.tools/spider ) &raquo;
 
 ## [gbXML Viewer]( index.html )
 <!--
@@ -17,7 +17,7 @@ h3 { margin: 0 0 20px 0 ; }
 -->
 
 where the action is:
-### [gbXML Viewer harriman]( #select-xml/display-gbjson.html )
+### [gbXML viewer harriman]( #select-xml/display-gbjson.html )
 
 outdated and broken:
 ### [rectangular-geometry ]( #../../rectangular-geometry/r1/read-gbxml-rectangular-geometry.html )
@@ -31,7 +31,7 @@ way too slow:
 
 <div id = "divMenuSub" ></div>
 
-<iframe id = "ifrMenuSub" class = "iframeMenu"  ></iframe>
+<iframe id = "ifrMenuSub" class = "iframeMenu" src=mnu-default.html  ></iframe>
 
 
 <!--

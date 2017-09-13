@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title>2017-09-12</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menu" >
+		<div id = "header" ><h2><a id = "title" href = "" ></a></h2></div>
+		<div id = "contents" >
+			<p>Lot's happened today!</p>
+
+* gbXML Viewer harriman<br>
+* Add menuing system<br>
+&nbsp; * Separate UI & Three.js<br>
+* Add heads-up data readout<br>
+&nbsp; * Mouse over any geometry<br>
+&nbsp; * Display BIM data near cursor<br>
+* Continued text file viewer fail<br>
+&nbsp; * read xml data/display as text<br>
+
+			<p>Coming up next: cleaning up the code that turns gbJSON into Three.meshes. 
+				When that's done, we can start adding features.</p>
+		</div>
+	</div>
+
+<script>
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+
+		let txt;
+
+		title.innerHTML = document.title;
+
+
+
+		if ( window.top === window.self ) {
+
+		} else {
+
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) + 'px';
+
+
+		}
+
+
+	}
+
+</script>
+</body>
+</html>

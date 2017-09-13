@@ -78,11 +78,15 @@
 		camera.position.set( 100, 100, 100 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		window.addEventListener( 'keyup', onKeyUp, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 		let axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
@@ -545,6 +549,19 @@ break;
 
 	}
 
+
+	function onKeyUp ( event ) { //console.log( 'key', event.keyCode );
+
+		controls.enableKeys = false;
+		event.preventDefault();
+
+		switch( event.keyCode ) {
+
+			case 32: controls.autoRotate = !controls.autoRotate; break; // space bar
+
+		}
+
+	}
 
 
 	function onWindowResize() {

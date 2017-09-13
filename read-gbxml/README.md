@@ -1,14 +1,12 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ladybug.tools/spider/#read-gbxml/README.md "View file as a web page." ) </span>
 
 
-[Ladybug Tools > Spider gbXML Reader Read Me]( #README.md )
+[Ladybug Tools > Spider > gbXML Viewer Read Me]( #README.md )
 ====
 
-<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html#select-xml/display-gbjson.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [gbXML Viewer harriman]( ./select-xml/display-gbjson.html )
-
-## Full Screen: [read gbxml rectangular geometry]( rectangular-geometry/r1/read-gbxml-rectangular-geometry.html )
+## Full Screen: [gbXML Viewer harriman]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html )
 
 
 
@@ -48,7 +46,7 @@ Coming soon
 
 * Openings
 * Lights and shadows
-* Interactive text data display
+
 * Section views
 
 ## Issues
@@ -102,9 +100,10 @@ See also:
 
 * gbXML Viewer harriman
 * Add menuing system
-* Separate UI from Three.js
+	* Separate UI from Three.js
 * Add heads-up data readout
-* Continued the fail on reading the data as text
+	* Interactive text data display
+* Continued the fail on reading the data and displaying as text
 
 
 ### 2017-09-10 ~ Theo
