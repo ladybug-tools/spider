@@ -6,7 +6,7 @@
 
 <iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html#select-xml/display-gbjson.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [gbXML Viewer harriman]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html )
+## Full Screen: [gbXML Viewer harriman]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html#select-xml/display-gbjson.html )
 
 
 
@@ -46,7 +46,6 @@ Coming soon
 
 * Openings
 * Lights and shadows
-
 * Section views
 
 ## Issues
