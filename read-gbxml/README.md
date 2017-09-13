@@ -4,7 +4,7 @@
 [Ladybug Tools > Spider gbXML Reader Read Me]( #README.md )
 ====
 
-<iframe class=iframeReadMe src=./select-xml/display-gbjson.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 ## Full Screen: [gbXML Viewer harriman]( ./select-xml/display-gbjson.html )
 

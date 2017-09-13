@@ -10,17 +10,15 @@
 
 ### [Read me]( #README.md )
 
+
+### [gbXML Viewer]( #read-gbxml/README.md ) &raquo; [&#x1F5D7;]( read-gbxml/gbxml-viewer/harriman/index.html )
+
+
+### [Burning mAnalemma]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html "Run full screen" )
+
+
 ### [Analemma3D]( #analemma3d/README.md ) &raquo; [&#x1F5D7;]( analemma3d/index.html "Run full screen" )
 
-### [Burning mAnalemma 2017]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html "Run full screen" )
-
-***
-
-### [gbXML Read Me]( #read-gbxml/README.md )
-
-### &#x1F5D7; [gbXML PolyLoop Reader]( #read-gbxml/polyloop/r2/read-gbxml-polyloop.html )
-
-### &#x1F5D7; [gbXML RectGeom Reader]( #read-gbxml/rectangular-geometry/r1/read-gbxml-rectangular-geometry.html )
 
 ***
 
