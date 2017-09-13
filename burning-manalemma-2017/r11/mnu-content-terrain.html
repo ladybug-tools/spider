@@ -101,20 +101,25 @@
 
 		} else if ( parent && parent.THREE ) {
 
+//			parent.ifrMenuSub.style.display = 'none';
+
 			pcc = parent;
 
 			initVariables();
 
-			parent.ifrMenuSub.style.height = '200px';
+			parent.ifrMenuSub.style.height = '0px';
 
 //console.log( 'mnu-content-terrain: parent has Three' );
 
 		} else if ( parent && parent.ifrContents ) {
 
+//			ifrMenuSub.style.display = 'none';
+
 			pcc = parent.ifrContents.contentWindow;
 
 			initVariables();
 
+			parent.ifrMenuSub.style.height = '0px';
 //pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 
 		}

@@ -20,7 +20,7 @@
 	#header { left: 0; margin: 0 auto; max-width: 700px; position: absolute; right: 0; text-align: center; }
 	#menu { border: 0px solid cyan; height: calc( 100% - 100px ); right: 0; margin: 20px; position: absolute; overflow: auto; top: 60px; z-index: 10; }
 
- 	#ifrDivMenuSub { box-sizing: border-box; border: 1px solid green; padding: 0 5px; width: 100%; }
+ 	#ifrDivMenuSub { box-sizing: border-box; border: 0px solid green; padding: 0; width: 100%; }
 
 
 </style>
@@ -49,7 +49,7 @@
 
 		<details >
 			<summary>calculations</summary>
-			<div id="calculations"  class=divMenuSub ></div>
+			<div id="calculations" class=divMenuSub ></div>
 		</details>
 
 		<details>
@@ -104,6 +104,8 @@
 
 //console.log( 'index.html: i am child  / have Three', 34 );
 
+//			ifrMenuSub.style.display = 'none';
+
 			pcc = parent;
 			pcc.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
 
@@ -113,6 +115,7 @@
 
 		} else if ( parent && parent.ifrContents ) {
 
+//			ifrMenuSub.style.display = 'none';
 
 			pcc = parent;
 			pcc.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';

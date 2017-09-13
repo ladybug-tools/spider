@@ -178,8 +178,15 @@
 
 	function setIfrMenuSub() {
 
-		pcc.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
+		if ( window.top === window.self ) {
 
+			contents.innerHTML = '<p>Hash: ' + hash + '</p>';
+
+		} else {
+
+			pcc.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
+
+		}
 	}
 
 

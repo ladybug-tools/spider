@@ -148,8 +148,11 @@ console.log( 'gbJSON', gbJSON );
 
 		contents.innerHTML = '';
 
+		string = JSON.stringify( gbJSON, null, 4 );
+		contents.innerHTML = '<textarea cols=80 rows=60 >' + string + '</textarea>';
+
 //		traverse( gbJSON, '' );
-		parseGbJson( gbJSON );
+//		parseGbJson( gbJSON );
 
 	}
 

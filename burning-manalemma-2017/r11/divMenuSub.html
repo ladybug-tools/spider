@@ -13,8 +13,7 @@
 	a { color: crimson; text-decoration: none; }
 	p { margin: 0 0 5px 0; }
 
-	#menuSub { background-color: white;border: 1px solid pink;  }
-
+	#menuSub { background-color: white; border: 1px solid pink; padding: 0 5px; }
 	#ifrMenuSub {  box-sizing: border-box; border: 5px solid orange; width: 100%; }
 
 </style>
@@ -32,7 +31,7 @@
 			<p><a href=JavaScript:setIfrMenuSub("mnu-howlerjs-radio.html"); >Soma fm</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-dancing-in-the-street.html"); >Dancing in the street</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-settings.html"); >Settings</a></p>
-			<p><a href=JavaScript:setIfrMenuSub("mnu-update-lights.html"); >Update lights</a></p>
+			<p><a href=JavaScript:addLights(); >Add lights</a></p>
 			<hr>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-destinations.html"); >Destinations</a></p>
 			<p><a href=JavaScript:setIfrMenuSub("mnu-geocoder.html"); >Geocoder</a></p>
@@ -74,14 +73,18 @@
 
 			parent.ifrDivMenuSub.height = ( menuSub.scrollHeight + 20 ) + 'px';
 
+			pcc = parent;
 		} else if ( parent && parent.folder ) {
 
 //console.log( 'div menu window', parent.parent.folder );
 
-			folder = parent.parent.folder;
+			folder = parent.folder;
 
 			parent.ifrDivMenuSub.style.height = ( menuSub.scrollHeight + 20 ) + 'px';
 			parent.ifrDivMenuSub.style.cssText += 'border: 0px solid teal; width: 100%';
+
+			pcc = parent.ifrContents.contentWindow;
+
 		}
 
 	}
@@ -93,6 +96,12 @@
 
 	}
 
+
+	function addLights() {
+
+		pcc.addLights();
+
+	}
 
 </script>
 </body>

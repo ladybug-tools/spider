@@ -25,10 +25,11 @@
 
 <div id = 'contents' ></div>
 
+
 <script>
 
 
-	var subMenu =
+	var menuItems =
 
 `
 ## [Destinations]( mnu-destinations.html )
@@ -76,14 +77,13 @@
 
 	function init() {
 
-
 		showdown.setFlavor( 'github' );
 
 		const converter = new showdown.Converter();
 
 		file = parent.THREE ? 'index.html#' : '../index.html#';
 		file = 'JavaScript:setIfrMenuSub(\"';
-		txtHtml = converter.makeHtml( subMenu );
+		txtHtml = converter.makeHtml( menuItems );
 //		txtHtml = txtHtml.replace( /\<a href\=/gi, '<a target=_top href=' );
 		txtHtml = txtHtml.replace( /\,suffix/gi, '"); ' ).replace( /\"file#/gi, file );
 		menu.innerHTML = txtHtml;
@@ -93,11 +93,6 @@
 // placed after getting data that sets height of menu
 		if ( window.self === window.top  ) {
 
-			contents.innerHTML = '<iframe id=ifrContents src=index.html ></iframe>';
-
-			pcc = ifrContents.contentWindow;
-
-//			ifrContents.onload = initVariables;
 
 		} else if ( parent && parent.THREE ) {
 
@@ -118,9 +113,16 @@
 
 	function setIfrMenuSub( hash ) {
 
-//console.log( 'hash', hash );
 
-		pcc.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
+		if ( window.top === window.self ) {
+
+			contents.innerHTML = '<p>Hash: ' + hash + '</p>';
+
+		} else {
+
+			pcc.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
+
+		}
 
 	}
 
