@@ -7,10 +7,10 @@
 
 	defaults.menuWidth = 325;
 
-	defaults.user = 'pushme-pullyou';
+	defaults.user = 'ladybug-tools';
 
-	defaults.repository = "pushme-pullyou2";
+	defaults.repository = "spider";
 
-	defaults.folder = 'pushme-pullyou2/blob/master/tootoo8-core';
+	defaults.folder = 'spider/blob/master/read-gbxml/gbxml-viewer/harriman/';
 
 	defaults.file = '../../README.md';
