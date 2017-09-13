@@ -74,21 +74,20 @@
 //console.log( 'response', response );
 
 		parser = new DOMParser();
-		doc = parser.parseFromString( response, "text/xml");
+
+		doc = parser.parseFromString( response, "text/xml" );
 console.log( 'doc', doc );
 
 		obj = xmlToJson( doc );
 console.log( 'obj', obj );
 
 		gbxml = obj.gbXML;
-
 console.log( 'gbxml', gbxml );
 
 		parseGbxml( gbxml );
 
-
-		jsonText = JSON.stringify( gbxml );
-console.log( '', jsonText );
+//		jsonText = JSON.stringify( gbxml );
+//console.log( '', jsonText );
 
 	}
 
@@ -179,11 +178,12 @@ ddd = xml.textContent;
 
 					}
 
-					obj[ nodeName ].push(xmlToJson( item));
+					obj[ nodeName ].push( xmlToJson( item ) );
 
 				}
 
 			}
+
 		}
 
 		return obj;

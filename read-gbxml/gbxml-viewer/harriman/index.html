@@ -6,7 +6,7 @@
 <meta name = description content = "File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name = keywords content = "ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
 <meta name = date content = "2017-08-16" >
-<title>Index 8</title>
+<title></title>
 <style id = "foo" >
 
 /* items in mostly in order of: tag/class/id then alphabetical */
@@ -21,7 +21,7 @@ a { color: crimson; }
 blockquote, pre { background-color: #eee; padding: 10px; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
-	button:hover { background: #ccc; color: #fff }
+	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
@@ -31,11 +31,7 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 .contentsContainer { height: 100%; width: 100%; }
 
-	.highlight { background-color: yellow; }
-	.updates { background-color: lightgreen; }
-
 .iframeMenu { border-width: 0; height: 100%; margin: 0; width: 100%; }
-
 .iframeContents { border-width: 0; height: 100%; margin: 0; width: 100%; }
 
 .menuContainer { padding: 0 10px 0 15px; }
@@ -51,7 +47,9 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 	background-color: #555; color: #fff; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: 20px;
 	vertical-align: middle; z-index: 1;
 }
+
 #divEditFile:hover { cursor: pointer; opacity: 1; }
+
 #divEditFile img { vertical-align: middle; width: 24px; }
 
 #divHamburger {
@@ -65,14 +63,8 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 	background-color: var( --mnu-back-col ); box-sizing: border-box; height: 100%; left: 0; overflow: auto;
 	position: fixed; top: 0; transition: 0.5s; width: var( --menu-width ); z-index: 1;
 }
+
 #divMenu p { margin: 0 }
-
-/*
-	#divMenuSub { border: 0px solid green; box-sizing: border-box; height:400px; padding: 0;  width: 100%; }
-	#ifrDivMenuSub { border: 0px solid cyan; box-sizing: border-box; height:200px; padding: 0 5px; width: 100%; }
-	#ifrMenuSub { border: 0px solid blue; box-sizing: border-box; height:200px; padding: 0 5px; width: 100%; }
-*/
-
 
 @media screen and ( max-height: 450px ) {
 	.menu {padding-top: 15px;}
@@ -109,8 +101,6 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 
 <script>
-
-	var aaa = 'this is parent index.html';
 
 	var defaults = defaults || {};
 
@@ -158,9 +148,6 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 		let url = location.hash.slice( 1 );
 		let app = location.hash.split( '#' )[ 1 ];
 //console.log( 'url', url );
-
-//		if ( window.ifrMenu ) { ifrMenu.src = ''; }
-//		if ( window.divSubMenu ) { divSubMenu.innerHTML = ''; }
 
 		if ( url.startsWith( menuPrefix ) || url.startsWith ( menuFile ) ) {
 
@@ -262,19 +249,9 @@ blockquote, pre { background-color: #eee; padding: 10px; }
 
 			target.innerHTML = converter.makeHtml( xhr.responseText );
 
-			if ( url === 'index-menu.md' ) {
+			title = url.split( '/' ).pop().replace( /-|.md|.html/g, ' ' );
 
-				document.title = 'Home Page - Burning mAnalemma';
-
-			} else {
-
-				title = url.split( '/' ).pop().replace( /-|.md|.html/g, ' ' );
-
-//				document.title = title + ' - ' + userGitHub;
-				document.title = title + ' - Burning mAnalemma';
-
-
-			}
+			document.title = title + ' - ' + userGitHub;
 
 			window.scrollTo( 0, 0 );
 

@@ -4,9 +4,9 @@
 [Ladybug Tools > Spider gbXML Reader Read Me]( #README.md )
 ====
 
-<iframe class=iframeReadMe src=./read-gbxml/polyloop/r2/read-gbxml-polyloop.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe class=iframeReadMe src=./select-xml/display-gbjson.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [read gbxml polyloop]( ./read-gbxml/polyloop/r2/read-gbxml-polyloop.html )
+## Full Screen: [gbXML Viewer harriman]( ./select-xml/display-gbjson.html )
 
 ## Full Screen: [read gbxml rectangular geometry]( rectangular-geometry/r1/read-gbxml-rectangular-geometry.html )
 
@@ -96,6 +96,15 @@ See also:
 
 
 ## Change Log
+
+
+### 2017-09-12 ~ Theo
+
+* gbXML Viewer harriman
+* Add menuing system
+* Separate UI from Three.js
+* Add heads-up data readout
+* Continued the fail on reading the data as text
 
 
 ### 2017-09-10 ~ Theo
