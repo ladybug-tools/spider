@@ -11,6 +11,6 @@
 
 	defaults.repository = "spider";
 
-	defaults.folder = 'spider/blob/master/read-gbxml/gbxml-viewer/harriman/';
+	defaults.folder = 'spider/blob/master/read-gbxml/gbxml-viewer/harriman';
 
 	defaults.file = '../../README.md';
