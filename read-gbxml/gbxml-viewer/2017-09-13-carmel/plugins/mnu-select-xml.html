@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "gbxml reader" >
-<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-12" >
-<title>select xml harriman</title>
+<meta name = "description" content = "select gbXML and parse to gbJSON data and display as text" >
+<meta name = "keywords" content =" gbXML,three.js,webGL,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name = "date" content = "2017-09-13" >
+<title>select gbxml carmel</title>
 <style>
 
 	body { background-color: cornsilk; font: 12pt monospace; margin: 0 auto; padding: 5px; max-width: 800px; }
@@ -15,37 +15,37 @@
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
-	h4{ margin: 0; }
+	h3, h4 { margin: 0; }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
-
 
 </style>
 </head>
 <body>
 
 	<div id = "header" >
-		<div id = "titlejj" ></div>
+		<div id = "titlecc" ></div>
 		<div id = "contents" ></div>
 	</div>
 
 	<div id="menu" >
-		<div id = "title" >bbbb</div>
+		<div id = "title" ></div>
 		<div id = "githubGbxmlSamples" >
 			 <a href="https://github.com/GreenBuildingXML/Sample-gbXML-Files" target="_blank">gbXML sample files on GitHub</a><br>
 			<select id=selGbXml size=15 ><select>
 		</div>
-		<div id = "GreenspaceLiveSamples" ></div>
+		<p id = "GreenspaceLiveSamples" ></p>
+		<h4>open local file</h4>
 		<div id = "fileReader" >
-
 			<p><input type=file id=inpFile onchange=openFile(this); ></p>
 		</div>
 
 		<h4>settings</h4>
 		<p><button onclick=toggleRotation(); >toggle rotation</button></p>
 		<p><button onclick=toggleWireframe(); >toggle wireframe</button></p>
+		<p><button onclick=drawEdges(); >draw edges</button></p>
 		<p>
 			opacity <output id=outOpacity >85</output>%<br>
 			<input type=range id=inpOpacity min=0 max=100 step=1 value=85 onclick=updateOpacity(); />
@@ -59,6 +59,7 @@
 			<input type=range id=inpExplode min=100 max=200 step=1 value=0 onclick=updateExplode();outExplode.value=value; />
 		</p>
 -->
+		<p id=gbxmlUrl ></p>
 		<p id=info ></p>
 
 	</div>
@@ -74,6 +75,7 @@
 
 	let scope;
 	var gbJSON;
+	var wireframe = true;
 
 	const b = '<br>';
 
@@ -89,12 +91,15 @@
 
 			scope = parent;
 
+			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px';
+
 //console.log( 'parent has three', scope.THREE );
 
 		} else {
 
 			scope = parent.ifrContents.contentWindow;
 
+			parent.ifrMenuSub.style.height = '950px';
 //console.log( 'parent has ifrContents', scope );
 
 
@@ -118,22 +123,28 @@
 		files = JSON.parse( response );
 // console.log( 'files', files );
 
-		txt = '<option>Select a file</option>';
+		txt = '';
 
 		for ( let i = 0; i < files.length; i++ ) {
 
 			file = files[ i ];
+//console.log( 'file', file );
 
 			if ( file.name === 'README.md' ) { continue; }
 
-			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
+//			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
+			txt += '<option value = ' + file.download_url + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</option>';
 
 		}
 
 		selGbXml.innerHTML = txt;
 
-		selGbXml.onchange = function() { requestFile( selGbXml.value, callbackGbXML ); }
+		selGbXml.onchange = function() { 
 
+			requestFile( selGbXml.value, callbackGbXML ); 
+			gbxmlUrl.innerHTML = 'file download: ' + selGbXml.value.link( selGbXml.value );
+
+		}
 
 		requestFile( url, callbackGbXML );
 
@@ -160,6 +171,12 @@ console.log( 'gbJSON', gbJSON );
 
 		initParseGbJson();
 
+		if ( window.top !== window.self ) {
+
+			parent.ifrMenuSub.style.height = ( 50 + menu.scrollHeight ) + 'px';
+
+		}
+
 	}
 
 
@@ -167,7 +184,7 @@ console.log( 'gbJSON', gbJSON );
 
 		if ( window.top === window.self ) {
 
-			info.innerHTML = JSON.stringify( gbJSON );
+			info.innerHTML = '<h3>gbJSON</h3>' + JSON.stringify( gbJSON );
 
 		} else {
 
@@ -253,7 +270,7 @@ console.log( 'gbJSON', gbJSON );
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { stats2.innerHTML = 'bytes loaded:' + xhr.loaded; }; /// or something
+		xhr.onprogress = function( xhr ) { stats2.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
@@ -316,19 +333,45 @@ console.log( 'gbJSON', gbJSON );
 
 			scope.scene.traverse( function ( child ) {
 
-			if ( child instanceof scope.THREE.Mesh ) {
+			if ( child.type === "Mesh" ) {
 
-				child.material.wireframe = !child.material.wireframe;
+				child.material.wireframe = wireframe;
 
 			}
 
 		} );
 
+			wireframe = !wireframe;
 		}
 
 	}
 
 
+	function drawEdges() {
+
+		let THREE = scope.THREE;
+		let edges, line;
+		if ( window.top === window.self ) {
+
+			info.innerHTML = 'toggleWireframe'
+
+		} else {
+
+			scope.scene.traverse( function ( child ) {
+
+				if ( child.type === "Mesh" ) {
+
+					edges = new THREE.EdgesGeometry( child.geometry );
+					line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xff0000 } ) );
+					scope.model.add( line );
+
+				}
+
+			} );
+
+		}
+
+	}
 
 	function updateOpacity() {
 

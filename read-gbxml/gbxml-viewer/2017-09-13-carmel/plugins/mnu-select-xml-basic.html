@@ -3,66 +3,53 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "gbxml reader" >
+<meta name = "description" content = "Basic HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-12" >
-<title>select xml harriman</title>
+<meta name = "date" content = "2017-08-04" >
+<title></title>
 <style>
 
-	body { background-color: cornsilk; font: 12pt monospace; margin: 0 auto; padding: 5px; max-width: 800px; }
+	body { font: 12pt monospace; margin: 0 auto; padding: 0 5px; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
-	h4{ margin: 0; }
+	h3, h4 { margin: 0; }
 
-	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
-	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
-	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
-
+/*	#menu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
 
 </style>
 </head>
 <body>
 
 	<div id = "header" >
-		<div id = "titlejj" ></div>
+		<div id = "title" ></div>
 		<div id = "contents" ></div>
 	</div>
 
-	<div id="menu" >
-		<div id = "title" >bbbb</div>
+	<div id = "menu" >
+
+		<div id = "title" ></div>
 		<div id = "githubGbxmlSamples" >
 			 <a href="https://github.com/GreenBuildingXML/Sample-gbXML-Files" target="_blank">gbXML sample files on GitHub</a><br>
 			<select id=selGbXml size=15 ><select>
 		</div>
-		<div id = "GreenspaceLiveSamples" ></div>
+		<p id = "GreenspaceLiveSamples" ></p>
+		<h4>open local file</h4>
 		<div id = "fileReader" >
-
 			<p><input type=file id=inpFile onchange=openFile(this); ></p>
 		</div>
-
-		<h4>settings</h4>
-		<p><button onclick=toggleRotation(); >toggle rotation</button></p>
-		<p><button onclick=toggleWireframe(); >toggle wireframe</button></p>
-		<p>
-			opacity <output id=outOpacity >85</output>%<br>
-			<input type=range id=inpOpacity min=0 max=100 step=1 value=85 onclick=updateOpacity(); />
-		</p>
-
+		<h4>File type</h4>
+		<p><button onclick=requestPlainGbXML(); >view as xml</button></p>
+		<h4>stats</h4>
 		<div id = "stats" ></div>
 		<div id = "stats2" ></div>
-<!--
-		<p>
-			explode <output id=outExplode >100</output> %<br>
-			<input type=range id=inpExplode min=100 max=200 step=1 value=0 onclick=updateExplode();outExplode.value=value; />
-		</p>
--->
+		<p id=gbxmlUrl ></p>
 		<p id=info ></p>
 
-	</div>
 
+	</div>
 
 <script>
 
@@ -89,11 +76,15 @@
 
 			scope = parent;
 
+			scope.ifrMenuSub.style.height = '600px'; // menu.scrollHeight + 'px';
+
 //console.log( 'parent has three', scope.THREE );
 
 		} else {
 
-			scope = parent.ifrContents.contentWindow;
+//			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = '550px';
 
 //console.log( 'parent has ifrContents', scope );
 
@@ -109,6 +100,7 @@
 	}
 
 
+
 	function callbackGitHub( xhr ) {
 
 		let response, files, txt;
@@ -118,24 +110,77 @@
 		files = JSON.parse( response );
 // console.log( 'files', files );
 
-		txt = '<option>Select a file</option>';
+		txt = '';
 
 		for ( let i = 0; i < files.length; i++ ) {
 
 			file = files[ i ];
+//console.log( 'file', file );
 
 			if ( file.name === 'README.md' ) { continue; }
 
-			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
+//			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
+			txt += '<option value = ' + file.download_url + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</option>';
 
 		}
 
 		selGbXml.innerHTML = txt;
 
-		selGbXml.onchange = function() { requestFile( selGbXml.value, callbackGbXML ); }
+		selGbXml.onchange = function() { 
 
+			requestFile( selGbXml.value, callbackGbXML ); 
+			gbxmlUrl.innerHTML = 'file download: ' + selGbXml.value.link( selGbXml.value );
+
+		}
 
 		requestFile( url, callbackGbXML );
+
+	}
+
+
+	function requestPlainGbXML() {
+
+		if ( selGbXml.selectedIndex > -1 ) {
+
+			requestFile( selGbXml.value, callbackPlainGbXML ); 
+
+		} else {
+
+			alert( 'please first select a file.' );
+
+		}
+	}
+
+	function callbackPlainGbXML( xhr ) {
+
+		let response, parser, xmldoc, json;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		parser = new DOMParser();
+		xmldoc = parser.parseFromString( response, "text/xml");
+
+		if ( window.top === window.self ) {
+
+			info.innerHTML = 
+				'<h3>gbXML</h3>' + 
+				'<textarea cols=120 rows=50 >' + response + '</textarea>';
+
+		} else if ( parent && parent.contents ) {
+
+			parent.contents.innerHTML = 
+				'<h3>gbXML</h3>' + 
+				'<textarea cols=120 rows=50 >' + response + '</textarea>';
+
+		} else {
+
+			parent.ifrContents.contentWindow.contents.innerHTML = 
+				'<h3>gbXML</h3>' +
+				'<textarea cols=120 rows=50 >' + response + '</textarea>';
+
+		}
+
 
 	}
 
@@ -160,18 +205,36 @@ console.log( 'gbJSON', gbJSON );
 
 		initParseGbJson();
 
+		if ( window.top !== window.self ) {
+
+//			parent.ifrMenuSub.style.height = ( 50 + menu.scrollHeight ) + 'px';
+
+		}
+
 	}
 
 
 	function initParseGbJson() {
 
+		str = JSON.stringify( gbJSON, null, 4 )
+
 		if ( window.top === window.self ) {
 
-			info.innerHTML = JSON.stringify( gbJSON );
+			info.innerHTML = 
+				'<h3>gbJSON</h3>' + 
+				'<textarea cols=100 rows=50 >' + str + '</textarea>';
+
+		} else if ( parent && parent.contents ) {
+
+			parent.contents.innerHTML = 
+				'<h3>gbJSON</h3>' + 
+				'<textarea cols=100 rows=50 >' + str + '</textarea>';
 
 		} else {
 
-			scope.parseGbJson( gbJSON );
+			parent.ifrContents.contentWindow.contents.innerHTML = 
+				'<h3>gbJSON</h3>' + 
+				'<textarea cols=100 rows=50 >' + str + '</textarea>';
 
 		}
 
@@ -253,7 +316,7 @@ console.log( 'gbJSON', gbJSON );
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { stats2.innerHTML = 'bytes loaded:' + xhr.loaded; }; /// or something
+		xhr.onprogress = function( xhr ) { stats2.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
@@ -289,65 +352,6 @@ console.log( 'gbJSON', gbJSON );
 		reader.readAsText( files.files[0] );
 
 	}
-
-
-	function toggleRotation() {
-
-		if ( window.top === window.self ) {
-
-			info.innerHTML = 'toggleRotation'
-
-		} else {
-
-			scope.controls.autoRotate = !scope.controls.autoRotate;
-
-		}
-
-	}
-
-
-	function toggleWireframe() {
-
-		if ( window.top === window.self ) {
-
-			info.innerHTML = 'toggleWireframe'
-
-		} else {
-
-			scope.scene.traverse( function ( child ) {
-
-			if ( child instanceof scope.THREE.Mesh ) {
-
-				child.material.wireframe = !child.material.wireframe;
-
-			}
-
-		} );
-
-		}
-
-	}
-
-
-
-	function updateOpacity() {
-
-		outOpacity.value = inpOpacity.value;
-
-
-		if ( window.top === window.self ) {
-
-			info.innerHTML = 'updateOpacity: ' + parseFloat( inpOpacity.value ) / 100;
-
-		} else {
-
-			scope.parameters.opacity = parseFloat( inpOpacity.value ) / 100;
-			scope.parseGbJson( gbJSON );
-
-		}
-
-	}
-
 
 </script>
 </body>
