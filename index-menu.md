@@ -11,7 +11,7 @@
 ### [Read me]( #README.md )
 
 
-### [gbXML Viewer]( #read-gbxml/README.md ) &raquo; [&#x1F5D7;]( read-gbxml/gbxml-viewer/harriman/index.html )
+### [gbXML Viewer]( #read-gbxml/README.md ) &raquo; [&#x1F5D7;]( read-gbxml/gbxml-viewer/index.html )
 
 
 ### [Burning mAnalemma]( #burning-manalemma-2017/README.md ) &raquo; [&#x1F5D7;]( burning-manalemma-2017/index.html "Run full screen" )
@@ -25,7 +25,7 @@
 
 <div id=divSubMenu ></div>
 
-<iframe id=ifrMenu class=xxxiframeMenu width=100% height=0 frameBorder=0 ></iframe>
+<iframe id=ifrMenu class=bbbiframeMenu width=100% height=0 frameBorder=0 ></iframe>
 
 
 See also
