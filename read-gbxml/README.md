@@ -9,7 +9,7 @@
 
 -->
 
-<iframe class=iframeReadMe src=index.html#plugins/display-gbjson.html width=100% height=600px ></iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/index.html#plugins/display-gbjson.html width=100% height=600px ></iframe>
 
 ## Full Screen: [gbXML Viewer carmel]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/index.html#plugins/display-gbjson.html )
 
