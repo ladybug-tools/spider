@@ -9,12 +9,12 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
+	body { background-color: #efc;font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
 	a { color: crimson; text-decoration: none; }
 	iframe { height: 500px; width: 100% }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
-	button:hover { background-color:: #ccc; color: #fff }
+	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
@@ -26,21 +26,27 @@
 </head>
 <body>
 
-	<div id = "menu" >
-		<div id = "header" ><div id = "title" href = "" ></div></div>
-		<p><button onclick=initDrawCubes(); >Draw Cubes</button></p>
-		<p><button onclick=addLights(); >Add lights</button></p>
-	</div>
+
+		<div id = "header" >
+			<div id = "title" href = "" ></div>
+		</div>
+
+		<div id = "menu" >
+			<p><button onclick=initDrawCubes(); >Draw Cubes</button></p>
+			<p><button onclick=addLights(); >Add lights</button></p>
+		</div>
 
 		<div id = "contents" ></div>
 
 <script>
 
-	var pcc;
+	var lights;
+
+	var scope;
 	var THREE;
 	var scene;
 	var controls;
-	let mesh;
+	var mesh;
 	var lightDirectional;
 	var cameraHelper;
 
@@ -50,21 +56,21 @@
 
 	function init() {
 
-		let txt;
+		title.innerHTML = '<h3><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h3>';
 
 		if ( window.self === window.top  ) {
 
-			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
 
-			contents.innerHTML = '<iframe id=ifrContents src=threejs-basic.html ></iframe>';
+			scope = ifrContents.contentWindow;
 
-			pcc = ifrContents.contentWindow;
+			ifrContents.onload = initVariables;
 
 		} else if ( parent && parent.THREE ) {
 
 			parent.ifrMenuSub.style.height = '200px';
 
-			pcc = parent;
+			scope = parent;
 
 			initVariables();
 
@@ -72,10 +78,10 @@
 
 			parent.ifrMenuSub.style.height = '200px';
 
-			pcc = parent.ifrContents.contentWindow;
-console.log( 'pcc', pcc );
+			scope = parent.ifrContents.contentWindow;
+console.log( 'scope ifrContents', scope );
 
-			parent.ifrContents.onload = initVariables;
+			initVariables();
 
 		}
 
@@ -84,65 +90,55 @@ console.log( 'pcc', pcc );
 
 	function initVariables() {
 
-			THREE = pcc.THREE;
-			scene = pcc.scene;
-			camera = pcc.camera;
-			controls = pcc.controls;
-			lightDirectional = pcc.lightDirectional;
-			cameraHelper = pcc.cameraHelper;
-			mesh = pcc.mesh;
+			THREE = scope.THREE;
+			scene = scope.scene;
+			camera = scope.camera;
+			controls = scope.controls;
+			lights = scope.lights;
+			lightDirectional = scope.lightDirectional;
+			cameraHelper = scope.cameraHelper;
+			mesh = scope.mesh;
 
+//console.log( 'scene', scene );
 
 	}
 
 
 
-	function addLights( size ) {
+	function addLights( size = 100 ) {
 
 // 2017-04-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r2.html
 
-		size = size ? size : 100;
+		scene.remove( lights );
 
-		var lights = new THREE.Object3D();
+		lights = new THREE.Object3D();
 		lights.name = 'lights';
 
-//		if ( !lightAmbient ) {
+		lightAmbient = new THREE.AmbientLight( 0x888888 );
+		lights.add( lightAmbient );
 
-			lightAmbient = new THREE.AmbientLight( 0x888888 );
-			lights.add( lightAmbient );
+		lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
+		camera.add( lightPointCamera );
 
-//		}
+		lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
 
-//		if ( !lightPointCamera ) {
 
-			lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
-			camera.add( lightPointCamera );
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
+		lightDirectional.position.set( -size, size, size );
 
-			lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
 
-//		}
+		lightDirectional.castShadow = true;
 
-//		if ( !lightDirectional ) {
+		lights.add( lightDirectional );
 
-			lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
-			lightDirectional.position.set( -size, size, size );
-			lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+		lightHelper = new THREE.DirectionalLightHelper( lightDirectional, 6, 0x000000 );
+		scene.add( lightHelper );
 
-			lightDirectional.shadow.mapSize.width = 2048;  // default 512
-			lightDirectional.shadow.mapSize.height = 2048;
-
-			lightDirectional.castShadow = true;
-
-			lights.add( lightDirectional );
-
-			cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-			lights.add( cameraHelper );
-
-//		}
 		scene.add( lights );
-		pcc.lightDirectional = lightDirectional
-		return lights;
 
+		return lights;
 
 	}
 

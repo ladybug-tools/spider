@@ -10,17 +10,7 @@
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
-	a { text-decoration: none; }
-	details { margin: 10px; }
-	h2 { margin: 0; text-align: center; }
-
-	.divMenuSub, { padding: 10px; background-color: beige; }
-
-	#header { left: 0; margin: 0 auto; max-width: 600px; position: absolute; right: 0; text-align: center;}
-	#menu { right: 0; margin: 20px; position: absolute; top: 60px; z-index: 10; }
-
-	#ifrDivMenuSub { border: 1px solid green; height:400px; padding: 0 5px; }
-	#ifrMenuSub { border: 1px solid blue; height:200px; margin: 0; }
+	#menu { position: absolute; text-align: center; width: 100%; }
 
 </style>
 </head>
@@ -28,40 +18,13 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
 
-	<div id="header" >
-
-		<div id="title" ></div>
-		<div id="info" ></div>
-		<div id="log" ></div>
-		<div id="debug" ></div>
-
-	</div>
-
-
 	<div id = "menu" >
-
-		<details id=mmuDebug>
-			<summary>debug</summary>
-			<div id=divMenuSub class=divMenuSub ></div>
-			<iframe id=ifrMenuSub class=iframeMenuSubTop ></iframe>
-		</details>
-
-		<details >
-			<summary>calculations</summary>
-			<div id="calculations"  class=divMenuSub ></div>
-		</details>
-
-		<details>
-			<summary>map images</summary>
-			<div id="heightmap" ></div>
-			<div id="raster" ></div>
-		</details>
-
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
 	</div>
 
 <script>
 
-	var lights;
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
 
@@ -117,7 +80,6 @@
 
 		requestAnimationFrame( animate );
 		renderer.render( scene, camera );
-		controls.update();
 
 	}
 

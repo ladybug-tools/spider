@@ -19,7 +19,10 @@
 <body>
 <script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
 
-	<div id = "header" ><h3><a id = "title" href = "" ></a></h3></div>
+	<div id = "header" >
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+	</div>
 
 	<p>
 		<button onclick="initSunPath();" >Draw Sun & Analemma</button>
@@ -100,7 +103,7 @@
 
 		if ( window.top === window.self ) {
 
-			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+			title.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
 
 		} else {
 

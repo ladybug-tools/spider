@@ -32,13 +32,14 @@ The Ladybug Tools Spider gbXML Reader scripts are first steps toward making gbXM
 
 ### Mission
 
-* View gbXML files in 3D in your browser
+* View gbXML files in 3D or as text in your browser
+	* Create gbJSON files for easier processing
 * Full zoom, pan and rotate
 * Run on computer, tablet and phone
 * Adjust a wide variety of viewing parameters
 * View the full gamut of data typically available in a gbXML file
 * Open files via URL or open file dialog
-* All free and open source hosted on GitHub
+* All free and open source and hosted on GitHub
 
 
 ### Vision
@@ -99,6 +100,16 @@ See also:
 
 ## Change Log
 
+
+### 2017-09-13 ~ Theo
+
+* gbXML viewer carmel
+* App titling automation
+* Default menu box has random background gradient
+* Select xml cleaned up
+* Display gbjson cleaned up
+* Add draw edges
+* Getting better: text file viewer
 
 ### 2017-09-12 ~ Theo
 
