@@ -40,27 +40,16 @@ The general idea is to adapt the practices developed in Christopher Alexander's 
 ## Links of Interest
 
 
-See also:
+* https://energyplus.net/weather
 
-* https://readmetips.github.io/
-* https://opensource.guide/
-* https://www.w3schools.com/howto/
-* https://glitch.com/
-* https://bl.ocks.org/
-* https://threejs.org/
-* https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+
 
 
 ## Change Log
 
 
-### 2017-08-21 ~ Theo
+### 2017-09-15 ~ Theo
 
-* Add even more links and text
-
-### 2017-08-20 ~ Theo
-
-* Add links and more text
-
+* First commit
 
 

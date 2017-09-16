@@ -72,6 +72,8 @@ This is a preliminary example just to get going. It would be great to have some 
 
 ### 2017-09-16 ~ Theo
 
+GitHub issue: https://github.com/ladybug-tools/spider/issues/10
+
 * Update Read Me
 * Added menu
 * Added control points plus toggle
