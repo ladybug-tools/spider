@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+
+/*	#menu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "header" >
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+	</div>
+
+	<div id = "menu" ></div>
+
+<script>
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		scope = parent.ifrTarget.contentWindow;
+
+		THREE = scope.THREE;
+
+		scene = scope.scene;
+
+		geometry = new THREE.SphereGeometry( 20 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.set( -60, 30, 50 );
+		mesh.name = 'mesh-2';
+
+		scene.add( mesh );
+
+		parent.ifrSource.src = 'task3.html';
+
+	}
+
+
+
+</script>
+</body>
+</html>

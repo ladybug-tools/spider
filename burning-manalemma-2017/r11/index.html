@@ -166,9 +166,11 @@ console.log( 'lights', lights );
 
 		scene.add( mesh );
 
+		location.hash = sfHyatt;
 		window.addEventListener( 'hashchange', onHashChange, false );
 
-		scope.parameters = parameters;
+//		scope.parameters = parameters;
+
 
 	}
 
@@ -178,7 +180,7 @@ console.log( 'lights', lights );
 
 		if ( location.hash && parent.parameters ) {
 
-console.log( 'index', location.hash );
+//console.log( 'index', location.hash );
 
 			let hash, str, params;
 
@@ -196,7 +198,7 @@ console.log( 'index', location.hash );
 
 			scope.parameters = parameters;
 
-			updateTerrain();
+//			updateTerrain();
 
 		}
 
