@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+
+	body { background-color: #efd; font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px;}
+	a { color: crimson; text-decoration: none; }
+	iframe { height: 500px; width: 100%; }
+	select { width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#menu { max-width: 300px; }
+
+</style>
+</head>
+<body>
+<!--
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+-->
+
+		<div id = "header" >
+			<div id = "title" ></div>
+		</div>
+
+		<div id = "menu" >
+
+			<div>Select your flying machine<select id=selAircraft size=20 ></select></div>
+
+			<p><button onclick=motion=!motion; >toggle flight</button></p>
+
+			<p><button onclick=toggleCameraCockpit(); >toggle camera cockpit </button></p>
+
+			<p><button onclick=indexSwitch=-indexSwitch; >toggle midflight change planes</button></p>
+
+		</div>
+
+		<div id = "contents" ></div>
+
+<script>
+
+	let fleet, aircraft = { cockpitView: false };
+	let scope;
+
+	var THREE = THREE || {};
+	var scene;
+
+	var cameraPoints = 2000;
+	var indexSwitch = 1;
+	let point = 0;
+
+	var curve;
+	var target;
+	var motion = false;
+	let reqestAnimationreference;
+	let loader;
+	let cockpitCamera;
+	let cockpitView = false;
+
+	const b = '<br>';
+
+	var axisHelper;
+	var renderer, camera, controls;
+
+	init();
+
+	function init() {
+
+		title.innerHTML = '<h3><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h3>';
+
+
+		if ( window.self === window.top  ) {
+
+			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			ifrContents.onload = initVariables;
+
+		} else if ( parent && parent.THREE ) {
+
+			parent.ifrMenuSub.style.height = ( header.scrollHeight + menu.scrollHeight + 100 ) +  'px'; '400px';
+
+			scope = parent;
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+			parent.ifrMenuSub.style.height = ( header.scrollHeight + menu.scrollHeight + 100 ) +  'px'; '400px';
+
+			scope = parent.ifrContents.contentWindow;
+console.log( 'scope ifrContents', scope );
+
+			initVariables();
+
+		}
+
+
+		getFgxFleet();
+
+		selAircraft.onchange = getFgxAircraft;
+
+
+
+	}
+
+
+	function initVariables() {
+
+			THREE = scope.THREE;
+			renderer = scope.renderer;
+			scene = scope.scene;
+			camera = scope.camera;
+			controls = scope.controls;
+			lights = scope.lights;
+			lightDirectional = scope.lightDirectional;
+			cameraHelper = scope.cameraHelper;
+			mesh = scope.mesh;
+
+//console.log( 'scene', scene );
+			temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
+
+			if ( lights ) {
+
+			material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
+
+			} else {
+
+				material = new THREE.MeshNormalMaterial( {} );
+
+			}
+
+			scene.remove( mesh );
+
+			drawNicePath();
+
+			loader = new THREE.JSONLoader();
+
+	}
+
+
+
+	function getFgxFleet() {
+
+		let urlCORS, url;
+
+		urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		url = 'https://api.github.com/repos/fgx/fgx-aircraft/git/trees/gh-pages?recursive=1';
+
+		requestFile( url, callbackFleet );
+
+	}
+
+
+
+	function callbackFleet( xhr ) {
+
+		let response, json;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+		json = JSON.parse( response );
+//console.log( '', json );
+
+		fleet = json.tree;
+
+		for ( var i = 0; i < fleet.length; i++ ) {
+
+			item = fleet[ i ];
+
+			if ( item.path.endsWith( 'js') && item.size > 100000 ) {
+
+				craft = item.path.split( '/' ).pop();
+
+				selAircraft.innerHTML += '<option value=' + i + '>' + craft + ' - ' + item.size.toLocaleString() + ' bytes</option>';
+
+			}
+
+		}
+
+		selAircraft.selectedIndex = Math.floor( Math.random() * selAircraft.length);
+
+//		selAircraft.selectedIndex = 424;  // Wright Flier
+
+		if ( loader ){ getFgxAircraft(); }
+
+	}
+
+
+
+	function getFgxAircraft() {
+
+		let url = fleet[ selAircraft.value ].path;
+// console.log( '', url );
+
+		loader.load( 'https://fgx.github.io/fgx-aircraft/' + url, function( geometry ) { addAircraft( geometry ); } );
+
+	}
+
+
+
+	function addAircraft( geometry ) {
+//console.log( 'geometry', geometry );
+
+		geometry.center();
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI ) );
+
+// Make every aircraft the same size
+		let scale = 10 / geometry.boundingSphere.radius;
+
+		geometry.applyMatrix( new THREE.Matrix4().makeScale( scale, scale, scale ) );
+//console.log( 'rad', scale );
+
+		let material = new THREE.MeshNormalMaterial( { side: 1 } );
+
+		if ( aircraft && aircraft.geometry ) {
+
+			cockpitView = aircraft.cockpitView;
+			scene.remove( aircraft );
+			aircraft.geometry.dispose();
+			aircraft.material.dispose();
+
+		}
+
+		aircraft = new THREE.Mesh( geometry, material );
+		aircraft.castShadow = true;
+		aircraft.position.set( 50, 50, 50 );
+
+		aircraft.name = 'aircraft';
+
+		if ( !cockpitCamera ) {
+
+			cockpitCamera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 1000 );
+			cockpitCamera.position.set( 0, 1.5, -1.5 );
+			cockpitCamera.rotation.set( 0, 3, 0 );
+
+		}
+
+		aircraft.cockpitView = cockpitView;
+		aircraft.add( cockpitCamera );
+
+		scene.add( aircraft );
+
+		motion = true;
+
+		if ( !reqestAnimationreference ) { animateAircraft(); }
+
+
+	}
+
+
+
+	function drawNicePath() {
+
+		var segments;
+
+		segments = 20;
+		var sizeX = 20;
+		var sizeY = 10;
+		var sizeZ = 20;
+
+		var geometry, vertices, material, line;
+		var v = function ( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+		var map2fixed = function( vect ) { return vect.toArray().map( function( num ){ return num.toFixed( 3 ); } ) };
+
+		geometry = new THREE.Geometry();
+		vertices = geometry.vertices;
+
+		for ( var i = 0; i < segments * 2 * Math.PI + 1; i++ ) {
+
+			vertex = v(
+
+				Math.sin( i * 7 / segments ) * sizeX, 
+				Math.cos( i * 3 / segments ) * sizeY, 
+				Math.sin( i * 2 / segments ) * sizeZ
+
+			);
+
+			vertices.push( vertex );
+//console.log( '', map2fixed( vertex ) );
+
+		}
+
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 50, 35, 50 ) );
+		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+		line = new THREE.Line( geometry, material );
+		line.name = 'flightpath';
+
+		scene.add( line );
+
+		curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
+
+	}
+
+
+
+	function toggleCameraCockpit() {
+
+		if ( !cockpitCamera ) {
+
+			cockpitCamera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 1000 );
+			cockpitCamera.position.set( 0, 1.5, -1.5 );
+//			cockpitCamera.rotation.set( 0, 3, 0 );
+			aircraft.add( cockpitCamera );
+
+		}
+
+		aircraft.cockpitView = !aircraft.cockpitView;
+
+
+		scope.animate = function animate() {
+
+			requestAnimationFrame( animate );
+
+			renderer.render( scene, aircraft.cockpitView === true ? cockpitCamera : camera );
+
+			controls.update();
+
+		}
+
+	}
+
+
+
+	function aircraftSwitch() {
+ 
+		selAircraft.selectedIndex = Math.floor( Math.random() * selAircraft.length );
+
+		getFgxAircraft();
+
+	}
+
+
+
+	function animateAircraft() {
+
+		reqestAnimationreference = requestAnimationFrame( animateAircraft );
+
+		if ( !motion ) { return; }
+
+		indexSwitch = indexSwitch < 0 ? indexSwitch : ++indexSwitch;
+
+		if ( indexSwitch > 500 ) { indexSwitch = 1; aircraftSwitch(); }
+
+		point += 0.0005;
+		point = point < 1 ? point : 0;
+
+		pointLookAt = point + 0.001;
+		pointLookAt = pointLookAt < 1 ? pointLookAt : 0.001;
+
+		aircraft.position.copy( curve.getPoint( point ) );
+		aircraft.lookAt( curve.getPoint( pointLookAt ) );
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

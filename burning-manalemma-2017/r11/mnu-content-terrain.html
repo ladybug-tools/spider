@@ -47,31 +47,31 @@
 	let santaBarbara = 'latitude:34.4208305,longitude:-119.69819,zoom:16,offsetUTC:-420';
 	let blackRock = 'latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420';
 
-	let pcc;
-	let THREE;
+	let scope;
+
+	var THREE;
 	var scene;
-	let lights;
+	var lights;
 
 //	const defaultLatitude = 37.796;
 //	const defaultLongitude = -122.398;
 //	const defaultOffsetUTC = -420;
 
+	const defaultZoom = 16;
 	const defaultLatitude = 40.786944;
 	const defaultLongitude = -119.204444;
-	const defaultOffsetUTC = -420;
 	const defaultHeightScale = 3;
-
+	const defaultOffsetUTC = -420;
+/*
 	let parameters = {};
 
-	parameters.zoom = 16;
+	parameters.zoom = defaultZoom;
 	parameters.latitude = defaultLatitude;
 	parameters.longitude = defaultLongitude;
-	parameters.heightScale = 3;
-	parameters.side = 2;
-	parameters.groundSize = 100;
-	parameters.mPixel = [ 156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298 ]
-	parameters.pixelsPerTile = 256;
-	parameters.tilesPerSide = 4; // odd number please
+	parameters.heightScale = defaultHeightScale;
+	parameters.OffsetUTC = defaultOffsetUTC;
+*/
+
 
 	let ground; 
 
@@ -95,7 +95,7 @@
 
 			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
 
-			pcc = ifrContents.contentWindow;
+			scope = ifrContents.contentWindow;
 
 			ifrContents.onload = initVariables;
 
@@ -103,7 +103,7 @@
 
 //			parent.ifrMenuSub.style.display = 'none';
 
-			pcc = parent;
+			scope = parent;
 
 			initVariables();
 
@@ -115,12 +115,12 @@
 
 //			ifrMenuSub.style.display = 'none';
 
-			pcc = parent.ifrContents.contentWindow;
+			scope = parent.ifrContents.contentWindow;
 
 			initVariables();
 
 			parent.ifrMenuSub.style.height = '0px';
-//pcc.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
+//scope.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
 
 		}
 
@@ -130,26 +130,38 @@
 
 	function initVariables() {
 
-		THREE = pcc.THREE;
-		scene = pcc.scene;
-		camera = pcc.camera;
-		cameraHelper = pcc.cameraHelper;
-		controls = pcc.controls;
-		addLights = pcc.addLights;
-		lightDirectional = pcc.lightDirectional;
+		THREE = scope.THREE;
+		scene = scope.scene;
+		camera = scope.camera;
+		cameraHelper = scope.cameraHelper;
+		controls = scope.controls;
+		parameters = scope.parameters;
+		lights = scope.lights;
+		lightDirectional = scope.lightDirectional;
+		ground = scope.ground;
 
-//		pcc.initVariables = initVariables;
-		pcc.parameters = parameters;
-//		pcc.getParametersFromHash = getParametersFromHash
-//		pcc.drawMapOverlay = drawMapOverlay;
-		pcc.getCalcs = getCalcs;
-		pcc.drawTerrain = drawTerrain;
-		pcc.updateTerrain = updateTerrain;
-//		pcc.getHeightMapData = getHeightMapData;
+		scope.updateTerrain = updateTerrain;
+		scope.drawMapOverlay = drawMapOverlay;
 
-		scene.remove( pcc.mesh, ground );
+/*
+//		scope.initVariables = initVariables;
+		scope.parameters = parameters;
+//		scope.getParametersFromHash = getParametersFromHash
+		scope.getCalcs = getCalcs;
+		scope.drawTerrain = drawTerrain;
+//		scope.getHeightMapData = getHeightMapData;
+*/
 
-		if ( !lights ) { addLights(); };
+
+		parameters.side = 2;
+		parameters.groundSize = 100;
+		parameters.mPixel = [ 156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298 ]
+		parameters.pixelsPerTile = 256;
+		parameters.tilesPerSide = 4; // odd number please
+
+		scene.remove( scope.mesh, ground );
+
+//		if ( !lights ) { addLights(); };
 
 		addEventListener( 'hashchange', onHashChange, false );
 
@@ -185,7 +197,7 @@
 		hash = location.hash.slice( 1 );
 
 		str = '{"' + hash.replace( /:/g, '":"' ).replace( /,/g, '", "' ) + '"}';
-//pcc.console.log( 'getParametersFromHash', str );
+//scope.console.log( 'getParametersFromHash', str );
 
 		params = JSON.parse( str );
 
@@ -195,8 +207,11 @@
 		parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
 		parameters.heightScale = params.heightScale ? params.heightScale : defaultHeightScale;
 
-//pcc.console.log( 'getParametersFromHash', parameters );
+//scope.console.log( 'getParametersFromHash', parameters );
 
+		
+
+		scope.parameters = parameters;
 
 		getCalcs();
 
@@ -206,9 +221,10 @@
 
 	function updateTerrain() {
 
-//pcc.console.log( 'mnu-content-terrain updateTerrain' );
+//scope.console.log( 'mnu-content-terrain updateTerrain' );
 
 		getCalcs();
+		lights = scope.lights;
 
 	}
 
@@ -286,7 +302,7 @@
 		parameters.minutes = d.getUTCMinutes();
 */
 
-		pcc.calculations.innerHTML =
+		scope.calculations.innerHTML =
 
 			'<p>Latitude: ' + latitude.toFixed( 4 ) + '</p>' +
 			'<p>Longitude: ' + longitude.toFixed( 4 ) + '</p>' +
@@ -327,7 +343,7 @@
 		imageLoader.load( urlGED , getHeightMapData );
 
 		str = 'https://tile.openstreetmap.org/' + zoom + '/' + x + '/' + y + '.png';
-//pcc.console.log( '', str );
+//scope.console.log( '', str );
 
 
 	}
@@ -338,7 +354,7 @@
 
 //	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox 
 
-//pcc.console.log( 'hm', map );
+//scope.console.log( 'hm', map );
 
 		let geometry, material;
 		let heightmapCanvas, heightmapContext;
@@ -387,12 +403,12 @@
 		ground.receiveShadow = true;
 
 		scene.add( ground );
-		pcc.ground = ground;
+		scope.ground = ground;
 
 		drawMapOverlay();
 
-		pcc.heightmap.innerHTML = '<div id=hm ></div>';
-		pcc.heightmap.appendChild( heightmapCanvas );
+		scope.heightmap.innerHTML = '<div id=hm ></div>';
+		scope.heightmap.appendChild( heightmapCanvas );
 
 	}
 
@@ -400,7 +416,7 @@
 
 
 	function drawMapOverlay() {
-//pcc.console.log( 'drawMapOverlay', 23 );
+//scope.console.log( 'drawMapOverlay', 23 );
 
 		let baseURL, tileX, tileY, tileOffset, count;
 		const opacity = 1;
@@ -412,7 +428,7 @@
 
 		let rasterCanvas = document.createElement( 'canvas' );
 		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
-//		pcc.document.body.appendChild( rasterCanvas );
+//		scope.document.body.appendChild( rasterCanvas );
 //		rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
 		let rasterContext = rasterCanvas.getContext( '2d' );
 
@@ -437,17 +453,17 @@
 				if ( parameters.selectedIndex < 4 ) {
 
 					loadImage( baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
-//pcc.console.log( 'google', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+//scope.console.log( 'google', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
 
 				} else if ( parameters.selectedIndex === 7 ) {
 
 					loadImage( baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg', x , y );
-//pcc.console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
+//scope.console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
 
 				} else {
 
 					loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
-//pcc.console.log( '', parameters.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+//scope.console.log( '', parameters.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
 
 				}
 
@@ -458,9 +474,9 @@
 
 		function loadImage( url, x, y ) {
 //console.log( 'load image', x, y );
-//pcc.info.innerHTML += 'url ' + url + ' x' + x + ' y' + y + b;
+//scope.info.innerHTML += 'url ' + url + ' x' + x + ' y' + y + b;
 
-			let img = pcc.document.createElement( 'img' );
+			let img = scope.document.createElement( 'img' );
 			img.crossOrigin = 'anonymous';
 			img.src = url;
 
@@ -472,15 +488,28 @@
 
 			img.onload = function(){
 
-//pcc.info.innerHTML += + count + ' ';
+//scope.info.innerHTML += + count + ' ';
 				rasterContext.drawImage( img, 0, 0, 256, 256, x * pixelsPerTile, y * pixelsPerTile, pixelsPerTile, pixelsPerTile );
 
 				count++;
 
 				if ( count === tilesPerSideSquared ) {
 
-//pcc.info.innerHTML += 'ground.material.map' + texture.uuid;
-					ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+//scope.info.innerHTML += 'ground.material.map' + texture.uuid;
+
+					if ( lights ) {
+//scope.console.log( 'lights true', lights );
+
+						ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+
+					} else {
+//scope.console.log( 'lights false', lights );
+
+						ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+
+					}
+
+//					ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
 //					ground.geometry.computeFaceNormals();
 //					ground.geometry.computeVertexNormals();
 					ground.material.needsUpdate = true;

@@ -9,32 +9,63 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	body { background-color: #fed; font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
 	a { color: crimson; text-decoration: none; }
+	iframe { height: 500px; width: 800px; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#menu { max-width: 300px; }
 
 </style>
 </head>
 <body>
 
-	<div id = "menu" >
-		<div id = "header" ><h2><a id = "title" href = "" ></a></h2></div>
+		<div id = "header" >
+			<div id = "title" ></div>
+		</div>
+
+		<div id = "menu" >
+
+			<p><button onclick=getStructures(); >Get Structures</button></p>
+
+			<div id = "logIntersect" ></div>
+			<div id = "logHeights" ></div>
+		</div>
+
 		<div id = "contents" ></div>
-		<div id = "logIntersect" ></div>
-		<div id = "logHeights" ></div>
-	</div>
 
 <script>
 
-	let pcc = {};
+	var scope;
 
-	let THREE;
-	let scene;
+	var THREE;
+	var scene;
+
+
+	let sydney = 'latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600';
+	let sfHyatt = 'latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420';
+	let alcatraz = 'latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420';
+	let coit = 'latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420';
+	let santaBarbara = 'latitude:34.4208305,longitude:-119.69819,zoom:16,offsetUTC:-420';
+	let blackRock = 'latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420';
+
 
 	const defaultLatitude = 40.786944;
 	const defaultLongitude = -119.204444;
 	const defaultOffsetUTC = -420;
+	const defaultHeightScale = 3;
 
+
+
+/*
 	let parameters = {};
+
 	parameters.zoom = 16;
 	parameters.x = 10486;
 	parameters.y = 25326;
@@ -42,15 +73,18 @@
 	parameters.scaleZ = 23037.393569245927;
 
 	parameters.heightScale = 3;
+
+
 	parameters.side = 2;
 	parameters.groundSize = 100;
 	parameters.mPixel = [ 156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298 ]
 	parameters.pixelsPerTile = 256;
 	parameters.tilesPerSide = 4; // odd number please
-	parameters.structuresArray = [];
 
-	let structures;
-	let structuresArray = [];
+*/
+
+	var structures;
+	var structuresArray = [];
 
 	const b = '<br>';
 
@@ -58,6 +92,7 @@
 
 	function init() {
 
+/*
 		let txt;
 
 		if ( window.self === window.top  ) {
@@ -91,14 +126,106 @@
 		getStructures();
 
 		scene.add( structures );
+*/
+
+		title.innerHTML = '<h3><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h3>';
+
+		if ( window.self === window.top  ) {
+
+			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			ifrContents.onload = initVariables;
+
+		} else if ( parent && parent.THREE ) {
+
+			parent.ifrMenuSub.style.height = ( header.scrollHeight + menu.scrollHeight + 30 ) +  'px'; '400px';
+
+			scope = parent;
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+			parent.ifrMenuSub.style.height = '400px';
+
+			scope = parent.ifrContents.contentWindow;
+console.log( 'scope ifrContents', scope );
+
+			initVariables();
+
+		}
 
 	}
 
 
 
 
+	function initVariables() {
+
+		THREE = scope.THREE;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+		parameters = scope.parameters
+
+		lights = scope.lights;
+		lightDirectional = scope.lightDirectional;
+		cameraHelper = scope.cameraHelper;
+		mesh = scope.mesh;
+
+		scene.remove( mesh );
+		structures = new THREE.Object3D();
+		structures.name = 'structures';
+		scene.add( structures );
+
+//console.log( 'scene', scene );
+//		temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
+
+		if ( lights ) {
+
+			material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
+
+		} else {
+
+			material = new THREE.MeshNormalMaterial( {} );
+
+		}
+
+		getParameters( sfHyatt );
+
+	}
+
+
+
+	function getParameters( hash ) {
+
+		str = '{"' + hash.replace( /:/g, '":"' ).replace( /,/g, '", "' ) + '"}';
+
+		params = JSON.parse( str );
+
+
+		parameters.latitude = params.latitude ? parseFloat( params.latitude ) : defaultLatitude;
+		parameters.longitude = params.longitude ? parseFloat( params.longitude ) : defaultLongitude;
+		parameters.zoom = params.zoom ? parseInt( params.zoom, 10 ) : defaultZoom;
+		parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
+		parameters.heightScale = params.heightScale ? params.heightScale : defaultHeightScale;
+
+		parameters.x = lon2tile( parameters.longitude, parameters.zoom );
+		parameters.y = lat2tile( parameters.latitude, parameters.zoom );
+
+		parameters.structuresArray = [];
+		parameters.scaleX = 18204.444444444445;
+		parameters.scaleZ = 23037.393569245927;
+
+console.log( 'parameters', parameters );
+
+	}
+
 
 	function getStructures() {
+
 
 		logIntersect.innerHTML = '';
 
@@ -112,7 +239,7 @@
 
 		urlJSON = 'https://b.data.osmbuildings.org/0.2/anonymous/tile/' + parameters.zoom  + '/' + parameters.x + '/' + parameters.y + '.json';
 
-//console.log( '', urlJSON );  // click to view 3D building data
+console.log( 'urlJSON', urlJSON );  // click to view 3D building data
 
 		try {
 
@@ -131,6 +258,7 @@ console.log( 'getStructures error', error );
 
 
 	function callbackGeoJSON( xhr ) {
+
 
 		let response, json ;
 		let vertices, polys, poly, height, coordinates, structure;
@@ -167,9 +295,11 @@ console.log( 'callbackGeoJSON error', e );
 
 		}
 
+
 //console.time( 'timer 1' );
 
-			setCamera();
+//			setCamera();
+
 	}
 
 
@@ -198,33 +328,35 @@ console.log( 'callbackGeoJSON error', e );
 
 		for ( i = 0; i < json.features.length; i++ ) {
 
-			polys = json.features[ i ].geometry.coordinates;
-			height = json.features[ i ].properties.height;
+			var polys = json.features[ i ].geometry.coordinates;
+			var height = json.features[ i ].properties.height;
 
 //console.log( 'json', i, json.features[ i ].properties );
 
 // everything must have a hight otherwise we can't see it
 			height = height ? height : 5;
 
-/*
-			roof = json.features[ i ].properties.roofShape;
 
-			if ( roof ) {
 
-console.log( 'json', i, json.features[ i ].properties.roofShape );
-console.log( 'json', i, json.features[ i ] );
+//			roof = json.features[ i ].properties.roofShape;
 
-			}
-*/
+//			if ( roof ) {
+
+//console.log( 'json', i, json.features[ i ].properties.roofShape );
+//console.log( 'json', i, json.features[ i ] );
+
+//			}
+
+
 
 			for ( let j = 0; j < polys.length; j++ ) {
 
-				vertices = [];
-				poly = polys[ j ];
+				let vertices = [];
+				let poly = polys[ j ];
 
 				for ( let k = 0; k < poly.length; k++ ) {
 
-					coordinates = poly[ k ];
+					let coordinates = poly[ k ];
 
 					vertices.push( new THREE.Vector2( coordinates[ 0 ], coordinates[ 1 ] ) );
 
@@ -242,15 +374,15 @@ console.log( 'json', i, json.features[ i ] );
 					structure.userData.geometryOriginal = structure.geometry.clone();
 					structures.add( structure );
 					parameters.structuresArray.push( structure );
-					
+
 				}
 
 			}
 
 			structuresArray = parameters.structuresArray.slice();
 
-
 		}
+
 
 	}
 
@@ -274,11 +406,12 @@ console.log( 'json', i, json.features[ i ] );
 //console.log( 'deltaX', deltaX );
 
 			deltaY = tile2lat( parameters.y, parameters.zoom ) * 1;
-//console.log( 'deltaY', deltaY );
+console.log( 'deltaY', deltaY );
 
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( deltaX, 0, deltaY ) );
 
 			geometry.applyMatrix( new THREE.Matrix4().makeScale( parameters.scaleX, 1, parameters.scaleZ ) );
+
 
 // helps when things go of into the distance
 //	geometry.center();
@@ -294,15 +427,20 @@ console.log( 'json', i, json.features[ i ] );
 			mesh.userData.position = mesh.geometry.boundingSphere.center;
 			mesh.castShadow = true
 			mesh.receiveShadow = true;
+
+			
 			return mesh;
 
-		}
 
-		catch (e) {
-
-console.log( 'error', e, shape );
 
 		}
+
+		catch ( error ) {
+
+console.log( 'error', error, shape );
+
+		}
+
 
 	}
 

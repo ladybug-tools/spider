@@ -9,9 +9,9 @@
 <title></title>
 <style>
 
-	body { background-color: #def;font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
+	body { background-color: #fed; font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
 	a { color: crimson; text-decoration: none; }
-	iframe { height: 500px; width: 100% }
+	iframe { height: 500px; width: 800px; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
@@ -20,17 +20,18 @@
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
-/*	#menu { margin: 0 20px; max-width: 500px; position: absolute; } */
+	#menu { max-width: 300px; }
 
 </style>
 </head>
 <body>
 
 		<div id = "header" >
-			<div id = "title" href = "" ></div>
+			<div id = "title" ></div>
 		</div>
 
 		<div id = "menu" >
+
 			<p><button onclick=initDrawTemple(); >Draw temple</button></p>
 
 			Temple width <output id=outTempleWidth ></output>
@@ -53,7 +54,6 @@
 		</div>
 
 		<div id = "contents" ></div>
-
 
 <script>
 
@@ -115,29 +115,30 @@ console.log( 'scope ifrContents', scope );
 
 	function initVariables() {
 
-			THREE = scope.THREE;
-			scene = scope.scene;
-			camera = scope.camera;
-			controls = scope.controls;
-			lights = scope.lights;
-			lightDirectional = scope.lightDirectional;
-			cameraHelper = scope.cameraHelper;
-			mesh = scope.mesh;
+		THREE = scope.THREE;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+		lights = scope.lights;
+		lightDirectional = scope.lightDirectional;
+		cameraHelper = scope.cameraHelper;
+		mesh = scope.mesh;
 
 //console.log( 'scene', scene );
-			temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
+		temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
 
-			if ( lights ) {
+		if ( lights ) {
 
-			material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
+		material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
 
-			} else {
+		} else {
 
-				material = new THREE.MeshNormalMaterial( {} );
+			material = new THREE.MeshNormalMaterial( {} );
 
-			}
+		}
 
 	}
+
 
 
 	function initDrawTemple() {
@@ -193,6 +194,7 @@ console.log( 'scope ifrContents', scope );
 		temple.name = 'temple';
 
 		scene.add( temple );
+		scope.temple = temple;
 
 		return temple;
 

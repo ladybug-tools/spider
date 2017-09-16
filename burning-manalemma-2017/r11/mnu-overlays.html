@@ -26,10 +26,11 @@
 
 <script>
 
-	let pcc;
+	let scope;
 	let THREE;
-	let scene;
-	let ground;
+	var scene;
+	var ground;
+	var lights;
 
 	let parameters = {};
 
@@ -77,7 +78,7 @@
 
 			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
 
-			pcc = ifrContents.contentWindow;
+			scope = ifrContents.contentWindow;
 
 			ifrContents.onload = initVariables;
 
@@ -85,7 +86,7 @@
 
 			parent.ifrMenuSub.style.height = '350px';
 
-			pcc = parent;
+			scope = parent;
 
 			initVariables()
 
@@ -95,7 +96,7 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 
 			parent.ifrMenuSub.style.height = '350px';
 
-			pcc = parent.ifrContents.contentWindow;
+			scope = parent.ifrContents.contentWindow;
 
 			initVariables();
 
@@ -115,18 +116,19 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 
 	function initVariables() {
 
-		THREE = pcc.THREE;
-		scene = pcc.scene;
-		camera = pcc.camera;
-		controls = pcc.controls;
-		lightDirectional = pcc.lightDirectional;
+		THREE = scope.THREE;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+//		lightDirectional = scope.lightDirectional;
+//		drawMapOverlay = scope.drawMapOverlay;
 
-		if ( pcc.parameters ) {
+		if ( scope.parameters ) {
 
-			cameraHelper = pcc.cameraHelper;
-			parameters = pcc.parameters;
+			cameraHelper = scope.cameraHelper;
+			parameters = scope.parameters;
 			parameters.mapTypes = mapTypes;
-			ground = pcc.ground;
+			ground = scope.ground;
 
 		} else {
 
@@ -140,7 +142,7 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 			parameters.titleOffsetY = 0;
 			parameters.pixelsPerTile = 256;
 			parameters.tilesPerSide = 4;
-			ground = pcc.mesh;
+			ground = scope.mesh;
 
 		}
 
@@ -171,13 +173,14 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 
 		if ( window.top === window.self || location.hash ) {
 
-			mapType = mapTypes[ selMap.selectedIndex ];
+			parameters.mapType = mapTypes[ selMap.selectedIndex ];
+			parameters.selectedIndex = selMap.selectedIndex;
 
 			zoom = parameters.zoom;
 			parameters.x = x = lon2tile( parameters.longitude, zoom )
 			parameters.y = y = lat2tile( parameters.latitude, zoom );
 
-			var urlBase = mapType[ 1 ];
+			var urlBase = parameters.mapType[ 1 ];
 
 			if ( selMap.selectedIndex < 4 ) {
 
@@ -193,19 +196,20 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 
 		} else if ( parent.THREE ) {
 
-//console.log( '23', pcc, pcc.ground );
+//console.log( '23', scope, scope.ground );
 
-//			parent.mapType = mapTypes[ selMap.selectedIndex ];
-//			parent.selectedIndex = selMap.selectedIndex;
+			parameters.mapType = mapTypes[ selMap.selectedIndex ];
+			parameters.selectedIndex = selMap.selectedIndex;
 			
-			ground = pcc.ground;
+			ground = scope.ground;
 			drawMapOverlay();
 
 		} else {
 
-//			parent.parenmapType = mapTypes[ selMap.selectedIndex ];
-//			parent.parent.ifrContents.contentWindow.selectedIndex = selMap.selectedIndex;
-//			parent.parent.ifrContents.contentWindow.
+			parameters.mapType = mapTypes[ selMap.selectedIndex ];
+			parameters.selectedIndex = selMap.selectedIndex;
+			
+			ground = scope.ground;
 
 			drawMapOverlay();
 
@@ -215,57 +219,54 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 
 
 	function drawMapOverlay() {
+scope.console.log( 'drawMapOverlay', parameters.mapType );
 
 		let baseURL, tileX, tileY, tileOffset, count;
 		const opacity = 1;
 		const zoom =  parameters.zoom + 2;
-//		const zoom =  parameters.zoom;
+
 
 		let tilesPerSide = parameters.tilesPerSide;
 		let img, texture;
 
-//		rasterCanvas = document.createElement( 'canvas' );
-//		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
-//		document.body.appendChild( rasterCanvas );
+		let rasterCanvas = document.createElement( 'canvas' );
+		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
+//		scope.document.body.appendChild( rasterCanvas );
 //		rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
-//		rasterContext = rasterCanvas.getContext( '2d' );
+		let rasterContext = rasterCanvas.getContext( '2d' );
 
-		if ( !parameters.mapTypes ) {
+		if ( !parameters.mapType ) {
 
-			mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
-			selMap.selectedIndex = 0;
-
-		} else {
-
-			mapType = parameters.mapTypes[ selMap.selectedIndex ];
+			parameters.mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
+			parameters.selectedIndex = 0;
 
 		}
 
-//		tileOffset = Math.floor( 0.5 * tilesPerSide );
+		tileOffset = Math.floor( 0.5 * tilesPerSide );
 		tileX = lon2tile( parameters.longitude, zoom ) - parameters.titleOffsetX;
 		tileY = lat2tile( parameters.latitude, zoom ) - parameters.titleOffsetY;
 
 		count = 0;
-		baseURL = mapType[ 1 ];
+		baseURL = parameters.mapType[ 1 ];
 
 		for ( var x = 0; x < tilesPerSide; x++ ) {
 
 			for ( var y = 0; y < tilesPerSide; y++ ) {
 
-				if ( selMap.selectedIndex < 4 ) {
+				if ( parameters.selectedIndex < 4 ) {
 
 					loadImage( baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
-//console.log( 'goog', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+//scope.console.log( 'google', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
 
-				} else if ( selMap.selectedIndex === 7 ) {
+				} else if ( parameters.selectedIndex === 7 ) {
 
 					loadImage( baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg', x , y );
-//console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
+//scope.console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
 
 				} else {
 
 					loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
-//console.log( '', selMap.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+//scope.console.log( '', parameters.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
 
 				}
 
@@ -275,16 +276,12 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 
 
 		function loadImage( url, x, y ) {
+//console.log( 'load image', x, y );
+//scope.info.innerHTML += 'url ' + url + ' x' + x + ' y' + y + b;
 
-			let img = document.createElement( 'img' );
+			let img = scope.document.createElement( 'img' );
 			img.crossOrigin = 'anonymous';
 			img.src = url;
-
-			rasterCanvas = pcc.document.createElement( 'canvas' );
-			rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
-//			document.body.appendChild( rasterCanvas );
-//			rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
-			rasterContext = rasterCanvas.getContext( '2d' );
 
 			let texture = new THREE.Texture( rasterCanvas );
 			texture.minFilter = texture.magFilter = THREE.NearestFilter;
@@ -294,19 +291,33 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 
 			img.onload = function(){
 
+//scope.info.innerHTML += + count + ' ';
 				rasterContext.drawImage( img, 0, 0, 256, 256, x * pixelsPerTile, y * pixelsPerTile, pixelsPerTile, pixelsPerTile );
 
 				count++;
 
-				if ( count >= tilesPerSideSquared - 1 ) {
+				if ( count === tilesPerSideSquared ) {
 
-					ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+//scope.info.innerHTML += 'ground.material.map' + texture.uuid;
 
-//					ground.material = new THREE.MeshBasicMaterial( { color: 0xfff77f, side: 2, opacity: opacity , transparent: true } );
+					if ( lights ) {
+//scope.console.log( 'lights true', lights );
+
+						ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+
+					} else {
+//scope.console.log( 'lights false', lights );
+
+						ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+
+					}
+
+//					ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+//					ground.geometry.computeFaceNormals();
+//					ground.geometry.computeVertexNormals();
 					ground.material.needsUpdate = true;
 
-
-//					scene.add( ground );
+//					setCamera();
 
 				}
 
@@ -315,6 +326,8 @@ console.log( 'parent has ifrContents.contentWindow', 44 );
 		}
 
 	}
+
+
 
 
 	function lon2tile( longitude, zoom ) {

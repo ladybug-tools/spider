@@ -49,7 +49,7 @@
 
 <script>
 
-	let pcc;
+	let scope;
 	let THREE;
 	var scene;
 	let ground;
@@ -73,7 +73,7 @@
 
 			contents.innerHTML = '<iframe id=ifrContents src=mnu-content-terrain.html ></iframe>';
 
-			pcc = ifrContents.contentWindow;
+			scope = ifrContents.contentWindow;
 
 			ifrContents.onload = initVars;
 
@@ -83,7 +83,7 @@
 
 			parent.ifrMenuSub.style.height = '300px';
 
-			pcc = parent;
+			scope = parent;
 
 			initVars();
 
@@ -95,7 +95,7 @@ console.log( 'my parent has ifrContents.contentWindow' );
 
 			parent.ifrMenuSub.style.height = '300px';
 
-			pcc = parent.ifrContents.contentWindow;
+			scope = parent.ifrContents.contentWindow;
 
 			initVars();
 
@@ -108,18 +108,18 @@ console.log( 'my parent has ifrContents.contentWindow' );
 
 	function initVars() {
 
-		THREE = pcc.THREE;
-		scene = pcc.scene;
+		THREE = scope.THREE;
+		scene = scope.scene;
 
-		if ( pcc.parameters ) {
+		if ( scope.parameters ) {
 
-			parameters = pcc.parameters;
-//			getParametersFromHash = pcc.getParametersFromHash;
-//			updateTerrain = pcc.updateTerrain;
-			getCalcs = pcc.getCalcs;
-			drawTerrain = pcc.drawTerrain;
-			getHeightMapData = pcc.getHeightMapData;
-			drawMapOverlay = pcc.drawMapOverlay;
+			parameters = scope.parameters;
+//			getParametersFromHash = scope.getParametersFromHash;
+			updateTerrain = scope.updateTerrain;
+			getCalcs = scope.getCalcs;
+			drawTerrain = scope.drawTerrain;
+			getHeightMapData = scope.getHeightMapData;
+			drawMapOverlay = scope.drawMapOverlay;
 
 		} else {
 
@@ -163,7 +163,8 @@ console.log( 'my parent has ifrContents.contentWindow' );
 
 // needed??
 //		ifrContents.contenWindow.updateTerrain();
-		pcc.getCalcs();
+		updateTerrain();
+
 	}
 
 /*

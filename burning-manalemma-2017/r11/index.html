@@ -64,6 +64,15 @@
 
 	let aaa = 'this is app index.html';
 
+	var scope;
+	var parameters = {};
+
+	const defaultZoom = 16;
+	const defaultLatitude = 40.786944;
+	const defaultLongitude = -119.204444;
+	const defaultHeightScale = 3;
+	const defaultOffsetUTC = -420;
+
 	let sydney = 'latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600';
 	let sfHyatt = 'latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420';
 	let alcatraz = 'latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420';
@@ -76,9 +85,11 @@
 
 //console.log( 'folder', folder );
 
-	let lights;
+	var lights;
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
+
+console.log( 'lights', lights );
 
 	init();
 	animate();
@@ -98,6 +109,8 @@
 
 			ifrMenuSub.src = folder + "mnu-default.html";
 
+			scope = window;
+
 			onHashChange();
 
 		} else if ( parent && parent.THREE ) {
@@ -106,10 +119,10 @@
 
 //			ifrMenuSub.style.display = 'none';
 
-			pcc = parent;
-			pcc.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
+			scope = parent;
+			scope.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
 
-			pcc.ifrMenuSub.src = folder + "mnu-default.html";
+			scope.ifrMenuSub.src = folder + "mnu-default.html";
 
 			parent.folder = folder;
 
@@ -117,10 +130,10 @@
 
 //			ifrMenuSub.style.display = 'none';
 
-			pcc = parent;
-			pcc.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
+			scope = parent;
+			scope.divMenuSub.innerHTML = '<iframe src=' + folder + 'divMenuSub.html id=ifrDivMenuSub ></iframe>';
 
-			pcc.ifrMenuSub.src = folder + "mnu-default.html";
+			scope.ifrMenuSub.src = folder + "mnu-default.html";
 
 			parent.folder = folder;
 
@@ -155,6 +168,8 @@
 
 		window.addEventListener( 'hashchange', onHashChange, false );
 
+		scope.parameters = parameters;
+
 	}
 
 
@@ -173,58 +188,17 @@ console.log( 'index', location.hash );
 
 			params = JSON.parse( str );
 
+			parameters.zoom = params.zoom ? parseInt( params.zoom, 10 ) : defaultZoom;
 			parameters.latitude = params.latitude ? parseFloat( params.latitude ) : defaultLatitude;
 			parameters.longitude = params.longitude ? parseFloat( params.longitude ) : defaultLongitude;
-			parameters.zoom = params.zoom ? parseInt( params.zoom, 10 ) : defaultZoom;
-			parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
 			parameters.heightScale = params.heightScale ? params.heightScale : defaultHeightScale;
+			parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
+
+			scope.parameters = parameters;
 
 			updateTerrain();
 
 		}
-
-	}
-
-
-
-	function addLights( size ) {
-
-// 2017-04-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r2.html
-
-		size = size ? size : 100;
-
-		scene.remove( lights );
-
-		lights = new THREE.Object3D();
-		lights.name = 'lights';
-
-		lightAmbient = new THREE.AmbientLight( 0x888888 );
-		lights.add( lightAmbient );
-
-
-		lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
-		camera.add( lightPointCamera );
-
-		lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
-
-
-		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
-		lightDirectional.position.set( -size, size, size );
-		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
-
-		lightDirectional.shadow.mapSize.width = 2048;  // default 512
-		lightDirectional.shadow.mapSize.height = 2048;
-
-		lightDirectional.castShadow = true;
-
-		lights.add( lightDirectional );
-
-		lightHelper = new THREE.DirectionalLightHelper( lightDirectional, 6, 0x0000 );
-		scene.add( lightHelper );
-
-		scene.add( lights );
-
-		return lights;
 
 	}
 

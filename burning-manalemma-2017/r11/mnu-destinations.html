@@ -21,9 +21,10 @@
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
 
-<div id=menu ></div>
 
-<div id = 'contents' ></div>
+		<div id=menu ></div>
+
+		<div id = 'contents' ></div>
 
 
 <script>
@@ -96,12 +97,14 @@
 
 		} else if ( parent && parent.THREE ) {
 
-			pcc = parent;
+			scope = parent;
 
 			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) + 'px';
 
 
 		} else if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
 
 			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) + 'px';
 
@@ -120,7 +123,7 @@
 
 		} else {
 
-			pcc.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
+			scope.ifrMenuSub.src = 'mnu-content-terrain.html#' + hash;
 
 		}
 
