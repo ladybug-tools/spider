@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D in your browser" >
+<meta name = "keywords" content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-01" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	#header { position: absolute; text-align: center; width: 100%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSCurve.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSSurface.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSUtils.js" ></script>
+
+	<div id = "header" >
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+	</div>
+
+<script>
+
+	let renderer, camera, controls, scene;
+	let geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
+		camera.position.set( 500, 500, 500 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		let axisHelper = new THREE.AxisHelper( 300 );
+		scene.add( axisHelper );
+
+		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+
+		scene.add( mesh );
+
+		gridHelper1 = new THREE.GridHelper( 600, 20 );
+		gridHelper1.position.y = -300;
+		scene.add( gridHelper1 );
+
+		gridHelper2 = new THREE.GridHelper( 600, 20 );
+		gridHelper2.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		scene.add( gridHelper2 );
+		gridHelper2.position.z = -300;
+
+
+		mesh = addRandomNURBS();
+
+		scene.add( mesh );
+
+		controls.autoRotate = true;
+
+	}
+
+
+
+	function addRandomNURBS() {
+
+		var r = function( a, b ) { return a * Math.random() - b; };
+
+		var nsControlPoints = [
+			[
+				new THREE.Vector4 ( -200, 0, -200, 1 ),  // last number is the weighting
+				new THREE.Vector4 ( -200, r(600, 300), -100, 1 ),
+				new THREE.Vector4 ( -200, r(600, 300), 100, 1 ),
+				new THREE.Vector4 ( -200, r(600, 300), 200, 1 ),
+				new THREE.Vector4 ( -200, 0, 300, 1 )
+			],
+			[
+				new THREE.Vector4 ( -100, r(600, 300), -200, 1 ),
+				new THREE.Vector4 ( -100, r( 2000, 1000 ), -100, 1 ),
+				new THREE.Vector4 ( -100, r( 2000, 1000 ), 100, 1 ),
+				new THREE.Vector4 ( -100, r( 2000, 1000 ), 200, 1 ),
+				new THREE.Vector4 ( -100, r(600, 300), 300, 1 )
+			],
+			[
+				new THREE.Vector4 ( 100, r(600, 300), -200, 1 ),
+				new THREE.Vector4 ( 100, r( 2000, 1000 ), -100, 1 ),
+				new THREE.Vector4 ( 100, r( 2000, 1000 ), 100, 1 ),
+				new THREE.Vector4 ( 100, r( 2000, 1000 ), 200, 1 ),
+				new THREE.Vector4 ( 100, r(600, 300), 300, 1 )
+			],
+			[
+				new THREE.Vector4 ( 200, 0, -200, 1 ),
+				new THREE.Vector4 ( 200, r(600, 300), -100, 1 ),
+				new THREE.Vector4 ( 200, r(600, 300), 100, 1 ),
+				new THREE.Vector4 ( 200, r(600, 300), 200, 1 ),
+				new THREE.Vector4 ( 200, 0, 300, 1 )
+			]
+		];
+		
+		var degree1 = 3; // # of spaces between x control points
+		var degree2 = 4; // # spaces between y control points
+		var knots1 = [ 0, 0, 0, 0, 1, 1, 1, 1 ]; // A 0 and a 1 for each x control point
+		var knots2 = [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]; // ditto for y. keep values between 0 and 1.
+		var nurbsSurface = new THREE.NURBSSurface( degree1, degree2, knots1, knots2, nsControlPoints );
+		getSurfacePoint = function( u, v ) { return nurbsSurface.getPoint( u, v ); };
+
+		var geometry = new THREE.ParametricGeometry( getSurfacePoint, 20, 20 );
+
+		var material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: THREE.DoubleSide, transparent: true } );
+		var mesh = new THREE.Mesh( geometry, material );
+
+
+		var edges = new THREE.EdgesGeometry( geometry );
+		var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+		scene.add( line );
+
+		return mesh;
+
+	}
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

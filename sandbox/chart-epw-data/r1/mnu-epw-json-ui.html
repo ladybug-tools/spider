@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = description content = "Basic EPW JSON template. Select location, request file, gather data." >
+<meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = date content = "2017-08-15" >
+<title>EPW JSON Basic</title>
+<style>
+
+/* width items appear here to help control appearance when this menu is running as its own parent - for testing etc */
+
+	body { background-color: #fed; font: 12pt monospace; margin: 0 auto; max-width: 300px; padding: 0 5px; }
+	a { color: crimson; text-decoration: none; }
+	p { margin: 10px 0 0 0; }
+	select { width: 100%; }
+
+	button { background-color: #ccc; margin: 5px 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; width: 98%;}
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+
+</style>
+</head>
+<body>
+
+	<div id = "header" >
+
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+
+	</div>
+
+	<div id = "menu" >
+
+		<p>
+			Country:<br>
+			<select id="selCountry" size=10 ></select>
+		</p>
+
+		<p>
+			City: <br>
+			<select id="selCity" size=5 ></select>
+		</p>
+
+		<details id=detDataFields open >
+
+			<summary>Fields and Data</summary> 
+
+			<p>
+				<div id=divDataFields >Data fields:</div>
+				<select id="selField" size=10 ></select>
+			</p>
+
+			<p>
+				<div id=divCalculations ></div>
+			</p>
+
+			<p>
+				Data:
+				<div id=divData ></div>
+			</p>
+
+		</details>
+
+	</div>
+
+
+<script>
+
+	let dataPoints;
+
+	const urlEPW = 'http://www.eco-envolventes.net/data/json/allEPW/';
+	const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+	let countryData;; // will hold data from countrydata.json
+
+	let epwJson; // will hold data from EPW JSON file
+
+	let hourlyDataFields;
+	let countries;
+
+
+	init();
+
+
+	function init() {
+
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+
+			ifrContents.onload = initVars;
+
+		} else if ( parent && parent.THREE ) {
+
+			parent.ifrMenuSub.style.height = '1000px';
+
+			scope = parent;
+
+			initVars();
+
+		} else if ( parent && parent.ifrContents ) {
+
+console.log( 'my parent has ifrContents.contentWindow' );
+
+			parent.ifrMenuSub.style.height = '1000px';
+
+			scope = parent.ifrContents.contentWindow;
+
+			initVars();
+
+		}
+
+
+		requestFileCountryData();
+
+		selCountry.onchange = getCities;
+
+		selCity.onchange = requestFileEPW;
+
+		selField.onchange = getFieldData;
+
+
+	}
+
+
+	function initVars() {
+
+		THREE = scope.THREE;
+		scene = scope.scene;
+		mesh = scope.mesh;
+
+		scene.remove( mesh );
+
+	}
+
+	function requestFileCountryData() {
+
+		const url = urlCORS + urlEPW + 'countrydata.json' ;
+
+		requestFile ( url, callbackCountryData );
+
+	}
+
+
+
+	function callbackCountryData( xhr ) {
+
+		countries = JSON.parse( xhr.target.response ).countries;
+
+//console.log( 'countries', countries );
+
+		getCountries();
+
+	}
+
+
+	function getCountries() {
+
+		for ( let i = 0; i < countries.length; i++ ) {
+
+			if ( countries[ i ] ) {
+
+				selCountry.innerHTML += '<option>' + countries[ i ].country + '</option>';
+
+			}
+
+		}
+
+//		selCountry.selectedIndex = 0;
+		selCountry.selectedIndex = Math.floor( Math.random() * selCountry.length );
+
+		getCities();
+
+	}
+
+
+
+	function getCities() {
+
+		let country, cities;
+
+// for loop better? / more understandable?
+
+		country = countries.find( function( item ) { return item.country === selCountry.value } );
+
+//console.log( 'country', country );
+
+		cities = country.cities ;
+
+//console.log( 'cities', cities );
+
+		selCity.innerHTML = '';  // the insides of a select element is a select tag is HTML
+
+		for ( var i = 0; i < cities.length; i++ ) {
+
+			selCity.innerHTML += '<option>' + cities[ i ] + '</option>';
+
+		}
+
+		selCity.selectedIndex = Math.floor( Math.random() * selCity.length );
+
+		requestFileEPW();
+
+	}
+
+
+
+	function requestFileEPW() {
+
+		let country, city, fileName, url;
+
+		country = selCountry.value;
+
+		city = selCity.value;
+
+		fileName = encodeURI( country + '/' + country + '_' + city + '.json' );
+
+//console.log( 'fileName', fileName );
+
+		url = urlCORS + urlEPW + fileName;
+
+		requestFile( url, callbackEPW );
+
+	}
+
+
+
+	function callbackEPW( xhr ) {
+
+		let field;
+
+		epwJson = JSON.parse( xhr.target.response );
+
+//console.log( 'epwJson', epwJson );
+
+		selField.innerHTML = '';
+		hourlyDataFields = [];
+
+		for ( let i = 0; i < epwJson.hourlyDataFields.length; i++ ) {
+
+			field = epwJson.hourlyDataFields[ i ];
+
+			if ( field.name === 'Zenith Luminance' ) { continue; } // field appears to have no data
+
+			selField.innerHTML += '<option>' + field.name + '</option>';
+			hourlyDataFields.push( field );
+
+		}
+
+		divDataFields.innerHTML = 'Hourly Data Fields ' + epwJson.hourlyDataFields.length + ':';
+
+		selField.selectedIndex = 0;
+//		selField.selectedIndex = Math.floor( Math.random() * selField.length );
+
+		getFieldData();
+
+	}
+
+
+
+	function getFieldData() {
+
+		let dryBulbTemperature = [];
+		let dewPointTemperature = [];
+		let relativeHumidity = [];
+
+		scene.remove( dataPoints );
+		dataPoints = new THREE.Object3D();
+		scene.add( dataPoints );
+
+		material = new THREE.MeshNormalMaterial();
+
+		for ( let i = 0, hour; i < epwJson.hourlyData.length; i++ ) {
+
+			hour = epwJson.hourlyData[ i ];
+//			dryBulbTemperature.push( hour[ 0 ] );
+//			dewPointTemperature.push( hour[ 1 ] );
+//			relativeHumidity.push( hour[ 2 ] );
+
+			geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( 2 * hour[ 1 ], hour[ 2 ], 2 * hour[ 0 ] )
+			dataPoints.add( mesh );
+		}
+
+console.log( '', 23 );
+
+//		divData.innerHTML = data.join( ', ' );
+
+//		getCalculations( data );
+
+	}
+
+
+
+	function getCalculations( arr ) {
+
+		const b = '<br>';
+
+// ugh Spread Parameters equals a symbol no normal persons understands
+
+		let min = Math.min( ... arr );
+		let max = Math.max( ... arr );
+
+// http://www.jstips.co/en/javascript/array-average-and-median/
+
+		let sum = arr.slice().reduce( ( previous, current ) => current += previous );
+		let avg = sum / arr.length;
+
+		let values = arr.slice().sort( (a, b ) => a - b );
+
+		let lowMiddle = Math.floor( ( values.length - 1 ) / 2 );
+		let highMiddle = Math.ceil( ( values.length - 1 ) / 2 );
+		let median = ( values[ lowMiddle ] + values[ highMiddle ] ) / 2;
+
+		divCalculations.innerHTML =
+
+			selCity.value + b +
+			selField.value + b +
+			'Units: ' + hourlyDataFields[ selField.selectedIndex ].units + b +
+			'Min: ' + min + b +
+			'Max: ' + max + b +
+			'Average: ' + avg.toFixed( 2 ) + b +
+			'Median: ' + median.toFixed( 2 ) + b +
+			'<hr>' +
+			'Latitude: ' + epwJson.location.latitude + b +
+			'Longitude: ' + epwJson.location.longitude + b +
+			'Altitude: ' + epwJson.alt + b +
+		'';
+
+// adapt to circumstance or delete
+
+		if ( parent.ifrContents ) {
+
+			epwJson.parameters = {
+
+				average: avg,
+				median: median,
+				max: max,
+				min: min,
+				field: hourlyDataFields[ selField.selectedIndex ]
+
+			}
+
+			parent.ifrContents.contentWindow.updateScene( epwJson, arr );
+
+		}
+
+// console.log( 'arr', arr );
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { info.innerHTML = 'Error: ' + xhr };
+//		xhr.onprogress = function( xhr ) { info.innerHTML = 'Bytes loaded: ' + xhr.loaded };
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

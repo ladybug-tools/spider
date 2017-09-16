@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-04" >
+<title></title>
+<style>
+
+	body { border: 1px solid magenta; font: 12pt monospace; margin: 5px auto; max-width: 300px; }
+	a { color: crimson; text-decoration: none; }
+	p { margin: 0 0 5px 0; }
+
+	#menuSub { background-color: white; border: 1px solid pink; padding: 0 5px; }
+	#ifrMenuSub {  box-sizing: border-box; border: 5px solid orange; width: 100%; }
+
+</style>
+</head>
+<body>
+
+	<div id = "menuSub" >
+
+<!--
+		<div id = "headerSub" >
+			<h3><a id = "title" href = "" ></a></h3>
+		</div>
+		<div id=menuSubSub >
+			<div><a href=JavaScript:setIfrMenuSub("mnu-epw-json-ui.html"); >EPW Data</a></p>
+		</div>
+-->
+		<div id = "contents" ></div>
+
+	</div>
+
+
+<script>
+
+	let scope;
+
+	let folder;
+
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		if ( window.self === window.top  ) {
+
+			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+
+			contents.innerHTML = '<iframe id = "ifrMenuSub" ></iframe>';
+
+			folder = '';
+
+		} else if ( parent && parent.THREE ) {
+
+//console.log( 'div menu parent', parent );
+
+			folder = '';
+
+			parent.ifrDivMenuSub.height = ( menuSub.scrollHeight + 20 ) + 'px';
+
+			scope = parent;
+
+		} else if ( parent && parent.folder ) {
+
+//console.log( 'div menu window', parent.parent.folder );
+
+			folder = parent.folder;
+
+			parent.ifrDivMenuSub.style.height = ( menuSub.scrollHeight + 20 ) + 'px';
+			parent.ifrDivMenuSub.style.cssText += 'border: 0px solid teal; width: 100%';
+
+			scope = parent.ifrContents.contentWindow;
+
+		}
+
+
+		setIfrMenuSub("mnu-epw-json-ui.html");
+
+	}
+
+
+	function setIfrMenuSub( uri ) {
+
+		parent.ifrMenuSub.src = folder + uri;
+
+	}
+
+
+</script>
+</body>
+</html>
