@@ -21,7 +21,8 @@ Generating smooth meshes from a limited number of controls points is tricky.
 
 Three.js has a [NURBS plugin]( https://github.com/mrdoob/three.js/tree/dev/examples/js/curves )
 
-This is a preliminary example just to get going. It would be great to have some sample data to graph
+This is a preliminary example just to get going. It would be great to have some sample data to graph.
+
 
 ### Mission
 
