@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D NURBS in your browser" >
+<meta name = "keywords" content="NURBS,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-16" >
+<title>NURBS Chart Random Numbers R2</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	iframe { height: 500px; width: 100% }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#menu { margin: 20px; max-width: 300px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSCurve.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSSurface.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSUtils.js" ></script>
+
+
+		<div id = "menu" >
+
+			<div id = "title" href = "" ></div>
+			<p><button onclick=toggleEdges(); >Toggle Edges</button></p>
+			<p><button onclick=toggleControlPoints(); >Toggle Control Points</button></p>
+			<p><button onclick=toggleRotation(); >Toggle Rotation</button></p>
+		</div>
+
+		<div id = "contents" ></div>
+
+<script>
+
+		let chart, chartEdges, chartControlPoints;
+
+		const v4 = function( x, y, z, w ) { return new THREE.Vector4( x, y, z, w ); }
+
+		const r = function( a, b ) { return a * Math.random() - b; };
+
+		const nurbsControlPoints = [
+			[
+				v4( -200, 0, -200, 1 ),  // last number is the weighting
+				v4( -200, r(600, 300), -100, 1 ),
+				v4( -200, r(600, 300), 100, 1 ),
+				v4( -200, r(600, 300), 200, 1 ),
+				v4( -200, 0, 300, 1 )
+			],
+			[
+				v4( -100, r(600, 300), -200, 1 ),
+				v4( -100, r( 2000, 1000 ), -100, 1 ),
+				v4( -100, r( 2000, 1000 ), 100, 1 ),
+				v4( -100, r( 2000, 1000 ), 200, 1 ),
+				v4( -100, r(600, 300), 300, 1 )
+			],
+			[
+				v4( 100, r(600, 300), -200, 1 ),
+				v4( 100, r( 2000, 1000 ), -100, 1 ),
+				v4( 100, r( 2000, 1000 ), 100, 1 ),
+				v4( 100, r( 2000, 1000 ), 200, 1 ),
+				v4( 100, r(600, 300), 300, 1 )
+			],
+			[
+				v4( 200, 0, -200, 1 ),
+				v4( 200, r(600, 300), -100, 1 ),
+				v4( 200, r(600, 300), 100, 1 ),
+				v4( 200, r(600, 300), 200, 1 ),
+				v4( 200, 0, 300, 1 )
+			]
+	];
+
+	let renderer, camera, controls, scene;
+	let geometry, material, mesh, axisHelper, gridHelper1, gridHelper2;
+
+	init();
+	animate();
+
+	function init() {
+
+		title.innerHTML = '<h2><a href="" >' + document.title +'</a></h2>';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
+		camera.position.set( 500, 500, 500 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axisHelper = new THREE.AxisHelper( 300 );
+		scene.add( axisHelper );
+
+// something to focus on
+		geometry = new THREE.BoxGeometry( 20, 20, 20 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+
+		scene.add( mesh );
+
+		gridHelper1 = new THREE.GridHelper( 600, 20 );
+		gridHelper1.position.y = -300;
+		scene.add( gridHelper1 );
+
+		gridHelper2 = new THREE.GridHelper( 600, 20 );
+		gridHelper2.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		scene.add( gridHelper2 );
+		gridHelper2.position.z = -300;
+
+		var light = new THREE.HemisphereLight( 0xeeeeee, 0x888888, 1 );
+		light.position.set( 0, 400, 0 );
+		scene.add( light );
+
+
+
+		chart = addNURBS();
+
+		scene.add( chart );
+
+
+		toggleEdges();
+
+		toggleControlPoints();
+
+
+
+		controls.autoRotate = true;
+
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+	}
+
+
+
+	function addNURBS() {
+
+		const degree1 = nurbsControlPoints.length - 1; // # of spaces between x control points
+		const degree2 = nurbsControlPoints[ 0 ].length - 1; // # spaces between y control points
+
+// create knots by algorithm soon please
+		const knots1 = [ 0, 0, 0, 0, 1, 1, 1, 1 ]; // A 0 and a 1 for each x control point
+		const knots2 = [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]; // ditto for y. keep values between 0 and 1.
+
+		const nurbsSurface = new THREE.NURBSSurface( degree1, degree2, knots1, knots2, nurbsControlPoints );
+
+		const getSurfacePoint = function( u, v ) { return nurbsSurface.getPoint( u, v ); };
+
+		const geometry = new THREE.ParametricBufferGeometry( getSurfacePoint, 20, 20 );
+
+/*
+		material = new THREE.MeshPhongMaterial( {
+			color: 0xffffff * Math.random(), 
+			polygonOffset: true,
+			polygonOffsetFactor: 1, // positive value pushes polygon further away
+			polygonOffsetUnits: 1,
+			side: 2
+		} );
+*/
+
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: THREE.DoubleSide, transparent: true } );
+
+		const mesh = new THREE.Mesh( geometry, material );
+
+		return mesh;
+
+	}
+
+
+
+	function toggleEdges() {
+
+		if ( !chartEdges ) {
+
+			const edgesGeometry = new THREE.WireframeGeometry( chart.geometry );
+			const material = new THREE.LineBasicMaterial( { opacity: 0.85, transparent: true } );
+			chartEdges = new THREE.LineSegments( edgesGeometry );
+			scene.add( chartEdges );
+
+			chartEdges.visible = false;
+
+		}
+
+		chartEdges.visible = !chartEdges.visible;
+
+	}
+
+
+
+	function toggleControlPoints() {
+
+		if ( !chartControlPoints ) {
+
+				chartControlPoints = new THREE.Object3D();
+
+				const material = new THREE.MeshNormalMaterial();
+				const geometry = new THREE.BoxBufferGeometry( 10, 10, 10 );
+
+				for ( var x = 0; x < nurbsControlPoints.length; x++ ) {
+
+					for ( var y = 0; y < nurbsControlPoints[ 0 ].length; y++ ) {
+
+						point = nurbsControlPoints[ x ][ y ]
+
+						mesh = new THREE.Mesh( geometry, material );
+						mesh.position.copy( point );
+						chartControlPoints.add( mesh );
+
+				}
+			}
+
+			scene.add( chartControlPoints );
+
+			for ( var y = 0; y < nurbsControlPoints[ 0 ].length; y++ ) {
+
+				geometryLine = new THREE.Geometry();
+				materialLine = new THREE.LineBasicMaterial( { color: 0xff5555 } );
+
+				for ( var x = 0; x < nurbsControlPoints.length; x++ ) {
+
+					point = nurbsControlPoints[ x ][ y ]
+					geometryLine.vertices.push( point );
+
+				}
+
+				line = new THREE.Line( geometryLine, materialLine );
+
+				chartControlPoints.add( line );
+
+			}
+
+			chartControlPoints.visible = false;
+
+		}
+
+		chartControlPoints.visible = !chartControlPoints.visible;
+
+	}
+
+
+	function toggleRotation() {
+
+		controls.autoRotate = !controls.autoRotate;
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+	}
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+
+</script>
+</body>
+</html>
