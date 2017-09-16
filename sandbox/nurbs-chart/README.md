@@ -1,7 +1,7 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://theo-armour.github.io/snippets/tootoo8-core/#README.md "View file as a web page." ) </span>
 
 
-[NURBS Chart Read Me Template]( #README.md )
+[NURBS Chart Read Me]( #README.md )
 ====
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/sandbox/nurbs-chart/r1/nurbs-chart-random-numbers.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
@@ -44,6 +44,7 @@ See also:
 
 ## To DO
 
+* Use look-up table: https://threejs.org/examples/#webgl_geometry_colors_lookuptable
 * Add vertex color according to rules
 * Display location of control points
 * User control over opacity and other material characteristics

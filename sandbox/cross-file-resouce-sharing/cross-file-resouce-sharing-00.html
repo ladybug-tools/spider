@@ -26,8 +26,7 @@
 	</div>
 
 	<div id = "menu" >
-
-	<iframe id=ifrSource ></iframe>
+		<iframe id=ifrSource src=http://threejs.org/examples/webgl_animation_cloth ></iframe>
 
 	</div>
 
@@ -60,7 +59,7 @@
 
 		urlCORS = 'https://cors-anywhere.herokuapp.com/';
 
-		requestFile( 'https://threejs.org/examples/webgl_geometry_colors_lookuptable.html' );
+		requestFile( 'https://threejs.org/examples/webgl_animation_cloth.html' );
 
 	}
 
@@ -68,7 +67,7 @@
 
 	function requestFile( url ) {
 
-		let xhr;
+//		let xhr;
 
 		xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
@@ -80,33 +79,18 @@
 
 		function callback( xhr ) {
 
-//			response, json, lines;
+			let response, json, lines;
 
 			response = xhr.target.response;
 
-			var parser = new DOMParser();
-			doc = parser.parseFromString( response, "text/html");
-
+//			var parser = new DOMParser();
+//			doc = parser.parseFromString( response, "text/html");
 			response = response.replace( /<body>/, '<body><base href="https://threejs.org/examples/" >' );
-			response = response.replace( /<\/body>/, '<script>mesh.scale.x = 6; <\/script>' );
-
-			ifrSource.srcdoc = response;
-
-			scopeSource = ifrSource.contentWindow;
-console.log( 'scopeSource', scopeSource );
-
-			scopeSource.
+			ifrTarget.srcdoc = response;
 
 console.log( 'ifrTarget', ifrTarget );
 
-
-			scopeTarget = ifrTarget.contentWindow;
-console.log( 'scopeTarget', scopeTarget );
-
-
-			
-//			scopeTarget.loadModel( 'rainbow', 512, 'vertical' );
-
+//console.log( 'response', response );
 //			contents.innerHTML = response;
 
 //			json = JSON.parse( response );
