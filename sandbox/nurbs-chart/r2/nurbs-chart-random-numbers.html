@@ -32,17 +32,34 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSUtils.js" ></script>
 
 
-		<div id = "menu" >
+		<details id = "menu" open >
 
+			<summary>hide menu</summary>
 			<div id = "title" href = "" ></div>
 			<p><button onclick=toggleEdges(); >Toggle Edges</button></p>
 			<p><button onclick=toggleControlPoints(); >Toggle Control Points</button></p>
 			<p><button onclick=toggleRotation(); >Toggle Rotation</button></p>
-		</div>
+
+			<details open >
+			<summary> hide text</summary>
+			<p>Click the title to refresh the page with freh random data.</p>
+			<p>
+				Use one/two/three fingers to rotate/zoom/pan the display in 3D<br>
+				Or left/scroll/right with your pointing device
+			</p>
+			<p>Press Control-U/Command-Option-U to view the source code</p>
+			<p>Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors</p>
+			</details>
+
+		</details>
 
 		<div id = "contents" ></div>
 
 <script>
+/*
+			<p>Click the three bars( 'hamburger menu icon' ) to slide the menu in and out</p>
+			<p>Click 'Show fps statistics' to see how many frames per second your computer is giving you</p>
+*/
 
 		let chart, chartEdges, chartControlPoints;
 
@@ -89,7 +106,10 @@
 
 	function init() {
 
-		title.innerHTML = '<h2><a href="" >' + document.title +'</a></h2>';
+		title.innerHTML = 
+			'<h2><a href="" >' + document.title +'</a> &nbsp; ' + 
+				('&#x24D8').link( 'https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart' ) +
+			'</h2>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
