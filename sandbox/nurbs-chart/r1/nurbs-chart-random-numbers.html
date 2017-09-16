@@ -23,7 +23,7 @@
 
 	<div id = "header" >
 		<div id = "title" ></div>
-		<div id = "contents" ></div>
+		<div id = "contents" >Click the title to randomize the control points</div>
 	</div>
 
 <script>
@@ -76,6 +76,9 @@
 		scene.add( mesh );
 
 		controls.autoRotate = true;
+
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 	}
 

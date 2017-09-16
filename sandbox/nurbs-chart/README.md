@@ -16,15 +16,21 @@
 
 Generating smooth meshes from a limited number of controls points is tricky.
 
+[NURBS]( https://en.wikipedia.org/wiki/Non-uniform_rational_B-spline ) offer a good solution
+
+Three.js has a NURBS plugin
+
+This is a preliminary example just to get going. It would be great to have some sample data to graph
 
 ### Mission
 
-* Statement of goals, objectives or strategies, applicable now as well as in the future
-
+* Simple ways of generating complex curves
+* Useful for charts
+* Useful for 3D modeling
 
 ### Vision
 
-* Descriptive picture of a desired future state
+* One day: create a routine that creates a smooth transition between two NURBS surfaces 
 
 
 ## Links of Interest
@@ -32,14 +38,18 @@ Generating smooth meshes from a limited number of controls points is tricky.
 
 See also:
 
-* https://readmetips.github.io/
-* https://opensource.guide/
-* https://www.w3schools.com/howto/
-* https://glitch.com/
-* https://bl.ocks.org/
-* https://threejs.org/
-* https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+* https://threejs.org/examples/#canvas_geometry_nurbs
+* http://www.pilot3d.com/NurbSecrets.htm
 
+
+## To DO
+
+* Add vertex color according to rules
+* Display location of control points
+* User control over opacity and other material characteristics
+* Multiple layer charts
+* Display vertex and face normals
+* Heads up display with details regarding current location
 
 ## Change Log
 
