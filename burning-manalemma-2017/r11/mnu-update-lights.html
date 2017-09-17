@@ -114,16 +114,14 @@ console.log( 'scope ifrContents', scope );
 		lights = new THREE.Object3D();
 		lights.name = 'lights';
 
-		lightAmbient = new THREE.AmbientLight( 0x888888 );
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
 		lights.add( lightAmbient );
 
-		lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
+		lightPointCamera = new THREE.PointLight( 0xffffff, 0.25 );
+		lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
 		camera.add( lightPointCamera );
 
-		lightPointCamera.position = new THREE.Vector3( 0, 0, 1 );
-
-
-		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.9 );
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
 		lightDirectional.position.set( -size, size, size );
 
 		lightDirectional.shadow.mapSize.width = 2048;  // default 512
@@ -136,7 +134,7 @@ console.log( 'scope ifrContents', scope );
 		lightHelper = new THREE.DirectionalLightHelper( lightDirectional, 6, 0x000000 );
 		scene.add( lightHelper );
 
-		scene.add( lights );
+		scene.add( lights, camera );
 		scope.lights = lights;
 
 		return lights;

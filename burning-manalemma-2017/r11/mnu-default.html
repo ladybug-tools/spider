@@ -43,8 +43,18 @@
 
 	<p>Use one/two/three fingers to rotate/zoom/pan display in 3D</p>
 
+	
 <script>
+
 // https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+
+	let sydney = 'latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600';
+	let sfHyatt = 'latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420';
+	let alcatraz = 'latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420';
+	let coit = 'latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420';
+	let santaBarbara = 'latitude:34.4208305,longitude:-119.69819,zoom:16,offsetUTC:-420';
+	let blackRock = 'latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420';
+
 
 	let synth;
 	let voices;
@@ -138,11 +148,30 @@
 
 			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
 
+			scope = parent.ifrDefault;
+
 		} else {
 
 			parent.ifrMenuSub.style.cssText += 'border: 2px solid orange; height: 300px';
 
+			scope = parent.ifrContents.contentWindow;
+
 		}
+
+		scope.ifrDefault.onload = function() {
+
+			scope.ifrDefault.contentWindow.addLights();
+
+			scope.ifrDefault.onload = undefined;
+
+			scope.ifrDefault.src = 'mnu-content-terrain.html#' + alcatraz;
+
+		
+		}
+
+		scope.ifrDefault.src = 'mnu-update-lights.html';
+
+
 
 
 		if ( 'speechSynthesis' in window ) {
@@ -247,6 +276,7 @@
 		synth.speak( utterThis );
 
 	}
+
 
 </script>
 </body>
