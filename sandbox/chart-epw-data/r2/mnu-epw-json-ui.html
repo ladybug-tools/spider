@@ -98,7 +98,11 @@
 
 		if ( window.top === window.self ) {
 
-			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+			title.innerHTML = 
+			'<h2>' +
+				'<a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) + '</a> &nbsp; ' +
+				('&#x24D8').link( 'https://github.com/ladybug-tools/spider/tree/master/sandbox/chart-epw-data' ) +
+			'</h2>';
 
 			contents.innerHTML = '<iframe id=ifrContents src=plugins/threejs-basic.html ></iframe>';
 
