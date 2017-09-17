@@ -4,13 +4,7 @@
 # [EPW Read Me]( #readme-epw.md )
 
 
-<!--
-<iframe src=xxxxx.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
-_txt_
-<span style="display: none" >Iframes are not viewable in GitHub source code view</span>
-
-## Full Screen: []( .html )
--->
+_2017-09-16 ~ Forked from [ibpsa2-17.github.io]( https://ibpsa2017.github.io/#./pages/readme-epw.md ). Will start updating eventually for this site._
 
 
 ## Concept / The problem we are trying to solve
@@ -58,7 +52,7 @@ You need to think like a cartoonist and let all manner of exaggeration happen.
 And most of all you have to leave the simple world of paper where you can only view two or three variables at a time. You have to move into 3D viz - and let a [hundred variables bloom]( https://en.wikipedia.org/wiki/Hundred_Flowers_Campaign ).
 
 
-### Current Outpy
+### Current Output
 
 #### [EPW JSON Basic]( #epw-json-basic/epw-json-basic-cors-anywhere.html )
 

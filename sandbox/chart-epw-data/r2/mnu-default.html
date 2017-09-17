@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML default menu" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-15" >
+<title></title>
+<style>
+
+	body { background-color: azure; font: 12pt monospace; margin: 0 auto; max-width: 400px; padding: 0 3px; }
+	a { color: crimson; text-decoration: none; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; margin: 3px; padding: 3px; }
+	button:hover { background: #ccc; color: #fff }
+
+
+</style>
+</head>
+<body>
+
+	<div id = "header" >
+		<h1><a id = "title" href = "" ></a></h1>
+	</div>
+
+	<p>Hello, World!
+	</p>
+
+
+	<p>Use one/two/three fingers to rotate/zoom/pan display in 3D</p>
+
+<script>
+// https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+
+
+	const b = '<br>';
+
+	init();
+
+
+	function init() {
+
+
+		if ( window.top === window.self ) {
+
+			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+		} else {
+
+			parent.ifrMenuSub.style.cssText += 'border: 2px solid orange; height: 300px';
+
+		}
+
+
+		window.addEventListener( 'unload', function() { 
+
+			parent.ifrMenuSub.style.height = '50px';
+
+			false 
+
+		} );
+
+	}
+
+
+</script>
+</body>
+</html>
+
+
+

@@ -1,8 +1,10 @@
 <style>
 
-#menu p { margin: 0 }
+#menu p { margin: 0; }
 
+h4 { margin: 0; }
 </style>
+
 
 [ladybug tools]( http://www.ladybug.tools ) &raquo;
 
@@ -24,10 +26,12 @@
 
 Sandbox
 
-#### [nurbs chart random numbers]( #sandbox/nurbs-chart/README.md) &raquo; [&#x1F5D7;]( http://www.ladybug.tools/spider/sandbox/nurbs-chart/ "Run full screen" )
+#### [nurbs chart random data]( #sandbox/nurbs-chart/README.md) &raquo; [&#x1F5D7;]( http://www.ladybug.tools/spider/sandbox/nurbs-chart/ "Run full screen" )
 
 
 #### [epw data]( sandbox/chart-epw-data/r1/index.html )
+
+#### [epw read me]( #pages/readme-epw.md )
 
 ***
 
