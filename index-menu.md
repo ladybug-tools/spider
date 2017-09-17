@@ -29,9 +29,9 @@ Sandbox
 #### [nurbs chart random data]( #sandbox/nurbs-chart/README.md) &raquo; [&#x1F5D7;]( http://www.ladybug.tools/spider/sandbox/nurbs-chart/ "Run full screen" )
 
 
-#### [epw data]( #sandbox/chart-epw-data/README.md ) &raquo; [&#x1F5D7;]( sandbox/chart-epw-data/index.html )
+#### [epw chart data]( #sandbox/chart-epw-data/README.md ) &raquo; [&#x1F5D7;]( sandbox/chart-epw-data/index.html )
 
-#### [epw read me]( #pages/readme-epw.md )
+#### [epw overview read me]( #pages/readme-epw.md )
 
 ***
 
