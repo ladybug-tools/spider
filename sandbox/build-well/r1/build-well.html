@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-01" >
+<title>build well r1</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus{ color: #f1f1f1; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	h1 { margin: 0; }
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; margin: 0 0 5px 0; width: 100% }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 18pt }
+
+	.floatRight { float: right; width: 70px;}
+	#menu { box-sizing: border-box; height: 100%; padding: 0 10px 0 0 ; position: absolute; margin: 0px 15px; overflow-x: hidden; overflow-y: auto; width: 280px; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "menu" >
+
+		<div id = "title" ></div>
+
+		<details open >
+
+			<summary>Buildings</summary>
+
+			<p>
+				<button onclick = saveFile(); >save file</button> <button onclick = deleteMesh(); >delete model</button>
+			</p>
+
+			<input type=file id=inpFile onchange=openFile(this); >
+
+			<div id=info ></div>
+
+			<p title = 'Select a building to edit' >Building: 
+				<select id=selBuilding onchange = getBuilding(); size= 3 >
+					<option>Building Anton</option>
+					<option>Building Benjamin</option>
+					<option>Building Chien Si</option>
+				</select>
+
+		</details>
+
+		<details open >
+
+			<summary>Site Context</summary>
+
+			<p title = 'horizontal distance from origin in feet' >offset x: 
+				<input id=inpOffsetX onchange = buildWell(); class = floatRight ></p>
+			<p title = 'vertical distance from origin in feet'>offset y: 
+				<input id=inpOffsetY onchange = buildWell(); class = floatRight ></p>
+
+			<p title= 'x distance in feet' >length: 
+				<input id=inpLength onchange = buildWell(); class = floatRight ></p>
+			<p title= 'Y distance in feet' >width: 
+				<input id=inpWidth onchange = buildWell(); class = floatRight ></p>
+
+			<p title= 'Z distance in feet' >height: 
+				<input id=inpHeight onchange = buildWell(); class = floatRight ></p>
+
+			<p title= 'Site orientation in degrees' >angle  <output id=outRange ></output>
+				<input type=range id=inpAngle min=0 max=360 step=1 value=0 onclick=buildWell();outRange.value=value; />
+			</p>
+
+		</details>
+
+		<details open >
+
+			<summary>Geometry</summary>
+
+			<p><button onclick=getGeometry(); >Update Geometry</button></p>
+
+			<p title = '' >Building Area: 
+				<input id=inpBuildingArea class = floatRight ></p>
+
+			<p title = ''>Number of Floors: 
+				<input id=inpNumberOfFloors onchange = getGeometry(); class = floatRight ></p>
+
+			<p title= '' >Floor Area: 
+				<input id=inpFloorArea onchange = getGeometry(); class = floatRight ></p>
+
+			<p title= '' >Floor Height: 
+				<select id=selFloorHeight onchange = getGeometry(); size= 1 >
+					<option>8</option>
+					<option>10</option>
+					<option selected >12</option>
+				</select>
+
+			<p title= '' >Perimeter Depth: 
+				<select id=selPerimterDepth onchange = getGeometry(); size= 1 >
+					<option>8</option>
+					<option selected >10</option>
+					<option>12</option>
+				</select>
+
+			<p title= '' >Footprint Shape: 
+				<select id=selFootprintShape onchange = setEllShape(); size= 1 >
+					<option>Rectangular</option>
+					<option>L Shape</option>
+					<option>T Shape</option>
+				</select>
+
+			<p title= '' >Footprint Relationship: 
+				<select id=selFootprintRelationship onchange = getGeometry(); size= 1 >
+					<option>Rectangular</option>
+					<option>L Shape 1</option>
+					<option>T Shape</option>
+				</select>
+
+			<p title= '' >Window Wall Ratio: <output id=outWWR></output>
+				<input type=range id=inpWindowWallRatio min=0 max=100 step=1 value=50 onclick=getGeometry();outWWR.value=value; />
+			</p>
+
+
+			<p title= '' >Overhang Depth: 
+				<input id=inpOverhangDepth onchange = getGeometry(); ></p>
+
+			<p title= '' >Orientation: 
+				<input id=inpOrientation onchange = getGeometry(); ></p>
+
+		</details>
+
+		</div>
+
+		<div id = "contents" ></div>
+
+	</div>
+
+<script>
+
+	var model = new THREE.Object3D();
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		title.innerHTML = '<h1><a href="" >' + document.title + '</a> ' + '<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/README.md" target="_blank">&#x24D8</a></h1>';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -200, 200, 200 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		const gridHelper = new THREE.GridHelper( 200, 20 );
+		scene.add( gridHelper );
+
+		const axisHelper = new THREE.AxisHelper( 110 );
+		scene.add( axisHelper );
+
+
+		geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.scale.set(  30, 90, 50 );
+		mesh.position.set( 50, 45, -50 );
+		mesh.rotation.set( 0, Math.PI / 4, 0 );
+		mesh.name = 'Building Anton';
+		model.add( mesh );
+
+
+		geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.scale.set( 50, 50, 50);
+		mesh.position.set( 50, 25, 50 );
+		mesh.name = 'Building Benjamin';
+		model.add( mesh );
+
+
+		geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.scale.set( 30, 20, 100 );
+		mesh.position.set( -50, 10, -30 );
+		mesh.rotation.set( 0, 0, 0 );
+		mesh.name = 'Building Chien Si';
+		model.add( mesh );
+
+		scene.add( model );
+		selBuilding.selectedIndex = 0;
+
+		inpBuildingArea.disabled = true;
+		inpNumberOfFloors.disabled = true;
+		inpFloorArea.disabled = true;
+		selFootprintRelationship.disabled = true;
+
+		getBuilding();
+
+	}
+
+
+
+
+	function getBuilding() {
+
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+
+		building = model.getObjectByName( selBuilding.value );
+
+		parent.inpOffsetX.value = building.position.x;
+		parent.inpOffsetY.value = building.position.z;
+
+		parent.inpLength.value = building.scale.x;
+		parent.inpWidth.value = building.scale.z;
+
+		parent.inpHeight.value = building.scale.y;
+		parent.inpAngle.value = r2d * building.rotation.y;
+
+		model.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === building.name ? 1 : 0.5;
+
+			}
+
+		} );
+
+		building.material.opacity = 1;
+
+		getGeometry();
+
+	}
+
+
+	function buildWell() {
+
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+
+		let building = model.getObjectByName( selBuilding.value );
+
+		const meshX = parseFloat( parent.inpLength.value );
+		const meshY = parseFloat( parent.inpHeight.value );
+		const meshZ = parseFloat( parent.inpWidth.value );
+
+		const meshAngle = parent.inpAngle === undefined  ? 0 : parseFloat( parent.inpAngle.value ) * d2r;
+
+		const meshPositionX = parseFloat( parent.inpOffsetX.value );
+		const meshPositionZ = parent.inpOffsetY === undefined  ? 100 : parseFloat( parent.inpOffsetY.value );
+
+		name = building.name;
+
+		model.remove( building );
+
+		geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		building = new THREE.Mesh( geometry, material );
+		building.scale.set( meshX, meshY, meshZ );
+		building.position.set( meshPositionX, 0.5 * meshY, meshPositionZ );
+		building.rotation.set( 0, meshAngle, 0 );
+		building.name = name;
+		model.add( building );
+
+		getGeometry();
+
+	}
+
+
+	function getGeometry() {
+
+		const building = model.getObjectByName( selBuilding.value );
+
+//console.log( '', building );
+
+		inpBuildingArea.value = ( building.scale.x * building.scale.y * building.scale.z ).toLocaleString(); 
+
+		floors = Math.floor( building.scale.y / parseFloat( selFloorHeight.value ) );
+		inpNumberOfFloors.value = floors;
+
+		inpFloorArea.value = ( floors * building.scale.x * building.scale.z ).toLocaleString();
+
+
+	}
+
+
+	function setShape() {
+
+		footprintShape = selFootprintShape.selectedIndex
+
+		if ( footprintShape === 0 ) {
+
+			buildWell();
+
+		} else {
+
+			setEllShape();
+
+		}
+
+	}
+
+	function setEllShape() {
+
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+		let shape, hole;
+		let geometry, material, mesh;
+		let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+		let building = model.getObjectByName( selBuilding.value );
+
+		const meshX = parseFloat( parent.inpLength.value );
+		const meshY = parseFloat( parent.inpHeight.value );
+		const meshZ = parseFloat( parent.inpWidth.value );
+
+		const meshAngle = parseFloat( parent.inpAngle.value ) * d2r;
+
+		const meshPositionX = parseFloat( parent.inpOffsetX.value );
+		const meshPositionZ = parseFloat( parent.inpOffsetY.value );
+
+		name = building.name;
+
+		model.remove( building );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+/*
+		geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( meshAngle ) );
+		building = new THREE.Mesh( geometry, material );
+		building.scale.set( meshX, meshY, meshZ );
+*/
+
+		shape = new THREE.Shape( [ 
+			v2( 0, 0 ), 
+			v2( meshX, 0 ), 
+			v2( meshX, 0.5 * meshZ ), 
+			v2( 0.5 * meshX, 0.5 * meshZ ) ,
+			v2( 0.5 * meshX, meshZ ), 
+			v2( 0, meshZ ), 
+			v2( 0, 0 ), 
+
+		] );
+		geometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: meshY } );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+		building = new THREE.Mesh( geometry, material );
+		building.position.set( meshPositionX, 0, meshPositionZ );
+		building.rotation.set( 0, d2r * meshAngle, 0 );
+
+		building.name = name;
+		model.add( building );
+
+//		getGeometry();
+
+	}
+
+
+	function deleteMesh() {
+
+		scene.remove( model );
+
+	}
+
+	function saveFile() {
+
+		var output = model.toJSON();
+
+		try {
+
+			output = JSON.stringify( output, parseNumber, '\t' );
+			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+
+		} catch ( e ) {
+
+			output = JSON.stringify( output );
+
+		}
+
+		var blob = new Blob( [ output ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'mesh.json';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+
+
+	function openFile( file ) {
+
+		var reader = new FileReader();
+		reader.onload = function( event ) {
+
+			data =  JSON.parse( reader.result );
+
+//			textArea.innerHTML = data;
+
+			info.innerHTML = 'name: ' + file.files[0].name + '<br>size: ' + file.files[0].size +
+				'<br>type: ' + file.files[0].type + '<br>modified: ' + file.files[0].lastModifiedDate;
+
+				var loader = new THREE.ObjectLoader();
+
+				scene.remove( model )
+
+// assuming we loaded a JSON structure from elsewhere
+				var model = loader.parse( data );
+
+				scene.add( model );
+
+//console.log( '', file );
+
+		}
+
+		reader.readAsText( file.files[ 0 ] );
+
+	}
+
+
+
+
+	function drawCubes() {
+
+		const cubes = new THREE.Object3D();
+//		var geometry, material, mesh;
+
+		geometry = new THREE.BoxGeometry( 10, 10, 10 );
+
+		for ( let i = 0; i < 50; i++ ) {
+
+			material = new THREE.MeshNormalMaterial();
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( 100 * Math.random() - 50, 100 * Math.random(), 100 * Math.random() - 50 );
+			mesh.rotation.set( 6.3 * Math.random(), 1.57 * Math.random(), 3.14 * Math.random() );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			cubes.add( mesh );
+
+
+		}
+
+		return cubes;
+
+	}
+
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+
+	}
+
+</script>
+</body>
+</html>

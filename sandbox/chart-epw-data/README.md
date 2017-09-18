@@ -72,7 +72,7 @@ As you move your cursor over any symbol its full details appear in the pop-up di
 
 * Enhance menu
 * Add read me
-* Add select vaiable for XYZ axis
+* Add select variable for XYZ axis
 
 
 ### 2017-09-15 ~ Theo
