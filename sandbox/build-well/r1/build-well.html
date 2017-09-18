@@ -58,7 +58,7 @@
 
 		</details>
 
-		<details open >
+		<details>
 
 			<summary>Site Context</summary>
 
@@ -81,7 +81,7 @@
 
 		</details>
 
-		<details open >
+		<details>
 
 			<summary>Geometry</summary>
 
@@ -191,7 +191,6 @@
 
 		geometry = new THREE.BoxGeometry( 1, 1, 1 );
 		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.scale.set( 50, 50, 50);
 		mesh.position.set( 50, 25, 50 );
@@ -201,7 +200,6 @@
 
 		geometry = new THREE.BoxGeometry( 1, 1, 1 );
 		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.scale.set( 30, 20, 100 );
 		mesh.position.set( -50, 10, -30 );
@@ -223,12 +221,11 @@
 
 
 
-
 	function getBuilding() {
 
 		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
 
-		building = model.getObjectByName( selBuilding.value );
+		const building = model.getObjectByName( selBuilding.value );
 
 		parent.inpOffsetX.value = building.position.x;
 		parent.inpOffsetY.value = building.position.z;
@@ -292,7 +289,6 @@
 	function getGeometry() {
 
 		const building = model.getObjectByName( selBuilding.value );
-
 //console.log( '', building );
 
 		inpBuildingArea.value = ( building.scale.x * building.scale.y * building.scale.z ).toLocaleString(); 
@@ -304,6 +300,7 @@
 
 
 	}
+
 
 
 	function setShape() {
@@ -321,6 +318,8 @@
 		}
 
 	}
+
+
 
 	function setEllShape() {
 
@@ -344,13 +343,6 @@
 
 		model.remove( building );
 		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-
-/*
-		geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( meshAngle ) );
-		building = new THREE.Mesh( geometry, material );
-		building.scale.set( meshX, meshY, meshZ );
-*/
 
 		shape = new THREE.Shape( [ 
 			v2( 0, 0 ), 
@@ -376,11 +368,14 @@
 	}
 
 
+
 	function deleteMesh() {
 
 		scene.remove( model );
 
 	}
+
+
 
 	function saveFile() {
 
@@ -416,8 +411,6 @@
 
 			data =  JSON.parse( reader.result );
 
-//			textArea.innerHTML = data;
-
 			info.innerHTML = 'name: ' + file.files[0].name + '<br>size: ' + file.files[0].size +
 				'<br>type: ' + file.files[0].type + '<br>modified: ' + file.files[0].lastModifiedDate;
 
@@ -425,47 +418,15 @@
 
 				scene.remove( model )
 
-// assuming we loaded a JSON structure from elsewhere
 				var model = loader.parse( data );
 
 				scene.add( model );
-
-//console.log( '', file );
 
 		}
 
 		reader.readAsText( file.files[ 0 ] );
 
 	}
-
-
-
-
-	function drawCubes() {
-
-		const cubes = new THREE.Object3D();
-//		var geometry, material, mesh;
-
-		geometry = new THREE.BoxGeometry( 10, 10, 10 );
-
-		for ( let i = 0; i < 50; i++ ) {
-
-			material = new THREE.MeshNormalMaterial();
-
-			mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( 100 * Math.random() - 50, 100 * Math.random(), 100 * Math.random() - 50 );
-			mesh.rotation.set( 6.3 * Math.random(), 1.57 * Math.random(), 3.14 * Math.random() );
-			mesh.castShadow = true;
-			mesh.receiveShadow = true;
-			cubes.add( mesh );
-
-
-		}
-
-		return cubes;
-
-	}
-
 
 
 

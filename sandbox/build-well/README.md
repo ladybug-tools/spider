@@ -3,16 +3,41 @@
 
 [Build Well Read Me]( #README.md )
 ====
+_A well for building well._
 
 <iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/sandbox/build-well/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 ## Full Screen: [Build Well]( http://ladybug-tools.github.io/spider/sandbox/build-well/index.html )
 
 
+### Buildings Menu
 
-## Concept
+* Three buildings created by default
+	* Add and delete buildings: future release
+* Save file
+	* Saves buildings as a single 3D object
+	* All data stored jn the 3D models
+	* File format is standard Three.js JSON
+	* Seems to be working just fine
+	* Many more options will become available
+* Open file
+	* Works barely OK
+	* Building data fields are updated but edits do yet update geometry
+	* L Shape models not being loaded. Try using JSON loader instad of Object loader
 
-### Issue / The problem to be solved
+### Site Context Menu
+
+* When played with after a fresh reload, mostly works just fine
+* Needs error-checking and more user entry safeguards
+* As mentioned above, editing is broken when opening a file
+
+
+### Geometry Menu
+
+* Mostly unfinished, only a few items work
+	* Changing floor height updates some of the other fields
+	* Footprint shape draws a partially parameterized L Shape - very badly
+* A work in progress
 
 
 ## Change Log
