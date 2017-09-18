@@ -10,20 +10,22 @@ _A well for building well._
 ## Full Screen: [Build Well]( http://ladybug-tools.github.io/spider/sandbox/build-well/index.html )
 
 
+2017-09-18 Current status
+
 ### Buildings Menu
 
 * Three buildings created by default
 	* Add and delete buildings: future release
 * Save file
 	* Saves buildings as a single 3D object
-	* All data stored jn the 3D models
+	* All data stored in the 3D models
 	* File format is standard Three.js JSON
 	* Seems to be working just fine
 	* Many more options will become available
 * Open file
 	* Works barely OK
 	* Building data fields are updated but edits do yet update geometry
-	* L Shape models not being loaded. Try using JSON loader instad of Object loader
+	* L Shape models not being loaded. Try using JSON loader instead of Object loader
 
 ### Site Context Menu
 
