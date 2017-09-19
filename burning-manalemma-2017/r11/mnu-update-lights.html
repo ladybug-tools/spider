@@ -91,6 +91,7 @@ console.log( 'scope ifrContents', scope );
 	function initVariables() {
 
 			THREE = scope.THREE;
+			renderer = scope.renderer;
 			scene = scope.scene;
 			camera = scope.camera;
 			controls = scope.controls;
@@ -99,6 +100,7 @@ console.log( 'scope ifrContents', scope );
 			cameraHelper = scope.cameraHelper;
 			mesh = scope.mesh;
 
+			renderer.shadowMap.enabled = true;
 //console.log( 'scene', scene );
 
 	}
@@ -137,7 +139,33 @@ console.log( 'scope ifrContents', scope );
 		scene.add( lights, camera );
 		scope.lights = lights;
 
+		scope.addLights = addLights;
+
+addShadows();
+
 		return lights;
+
+	}
+
+
+	function addShadows() {
+
+// 2017-01-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r3.html
+
+		renderer.shadowMap.enabled = true;
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.castShadow = true
+				child.receiveShadow = true;
+
+			}
+
+		} );
+
+		scope.addShadows = addShadows;
 
 	}
 

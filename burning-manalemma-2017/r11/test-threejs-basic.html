@@ -62,6 +62,8 @@
 <script>
 
 	var lights;
+	var lightAmbient, lightPoint, lightDirectional, cameraHelper;
+	var axisHelper;
 	var parameters = {};
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
@@ -75,6 +77,8 @@
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.shadowMap.enabled = true;
+
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -88,17 +92,97 @@
 
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		let axisHelper = new THREE.AxisHelper( 50 );
+		axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
 
-		geometry = new THREE.BoxGeometry( 50, 50, 50 );
-		material = new THREE.MeshNormalMaterial();
+//		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+//		material = new THREE.MeshNormalMaterial();
+//		mesh = new THREE.Mesh( geometry, material );
+//		scene.add( mesh );
+
+		addMeshes();
+		addLights();
+
+	}
+
+
+
+	function addMeshes() {
+
+		geometry = new THREE.SphereBufferGeometry( 25, 50, 50 );
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff * Math.random(),
+				emissive: 0xffffff * Math.random(),
+				opacity: 0.5 + 0.5 * Math.random(),
+				specular: 0xffffff * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+				transparent: true
+			} );
+
+//		material = new THREE.MeshPhongMaterial();
 		mesh = new THREE.Mesh( geometry, material );
+		mesh.castShadow = true;
+		mesh.receiveShadow = true;
+		scene.add( mesh );
+
+
+		geometry = new THREE.BoxGeometry( 100, 2, 100 );
+		material = new THREE.MeshPhongMaterial();
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff * Math.random(),
+				emissive: 0x333333 * Math.random(),
+				opacity: 0.75 + 0.25 * Math.random(),
+				specular: 0x333333 * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+				transparent: true
+			} );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.y = -30;;
+		mesh.castShadow = true;
+		mesh.receiveShadow = true;
 
 		scene.add( mesh );
 
 	}
 
+
+
+
+	function addLights( size ) {
+
+// 2017-04-02 ~ http://jaanga.github.io/cookbook-threejs/templates/add-lights/template-threejs-lights-r2.html
+
+//		lightAmbient, lightDirectional, lightPoint;
+		size = size ? size : 100;
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+		camera.add( lightPoint );
+		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+		scene.add( camera );
+
+
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
+
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+
+		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera )
+		scene.add( cameraHelper );
+
+	}
 
 
 	function onWindowResize() {

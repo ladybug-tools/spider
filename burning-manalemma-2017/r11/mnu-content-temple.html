@@ -51,6 +51,8 @@
 			Temple vertical position <output id=outTempleY  for="inpTempleY" ></output>
 			<input type="range" id="inpTempleY" min=0 max=100 step=1 value=24 onclick=moveTemple(); title="How high can you get?" >
 
+			<div id = "info" ></div>
+
 		</div>
 
 		<div id = "contents" ></div>
@@ -82,6 +84,8 @@
 
 		title.innerHTML = '<h3><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h3>';
 
+		info.innerHTML = "The scale of the units - just like so many things here - depends upon your imagination."
+
 		if ( window.self === window.top  ) {
 
 			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
@@ -103,7 +107,7 @@
 			parent.ifrMenuSub.style.height = '400px';
 
 			scope = parent.ifrContents.contentWindow;
-console.log( 'scope ifrContents', scope );
+scope.console.log( 'scope ifrContents', scope );
 
 			initVariables();
 
@@ -119,17 +123,18 @@ console.log( 'scope ifrContents', scope );
 		scene = scope.scene;
 		camera = scope.camera;
 		controls = scope.controls;
-		lights = scope.lights;
+//		lights = scope.lights;
 		lightDirectional = scope.lightDirectional;
 		cameraHelper = scope.cameraHelper;
 		mesh = scope.mesh;
+		axisHelper = scope.axisHelper;
 
 //console.log( 'scene', scene );
 		temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
 
-		if ( lights ) {
+		if ( lightDirectional ) {
 
-		material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
+			material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
 
 		} else {
 
@@ -193,6 +198,20 @@ console.log( 'scope ifrContents', scope );
 		temple.position.set( 50, 24, 50 );
 		temple.name = 'temple';
 
+		temple.receiveShadow = temple.castShadow = true;
+
+		
+
+		temple.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+//				child.material = new THREE.MeshPhongMaterial();
+				child.receiveShadow = child.castShadow = true;
+				child.material.needsUpdate = true;
+			}
+		} );
+
 		scene.add( temple );
 		scope.temple = temple;
 
@@ -216,6 +235,8 @@ console.log( 'scope ifrContents', scope );
 
 	}
 
+
+
 	function moveTemple() {
 
 		scene.remove( mesh );
@@ -225,6 +246,7 @@ console.log( 'scope ifrContents', scope );
 		outTempleY.value = temple.position.y = parseFloat( inpTempleY.value );
 
 	}
+
 
 
 	function drawTop() {

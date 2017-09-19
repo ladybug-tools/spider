@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<title>Screen Capture</title>
+<style>
+
+
+	body { background-color: #ffe; font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
+	a { color: crimson; text-decoration: none; }
+	iframe { height: 500px; width: 800px; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: green; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#menu { height: 100px; max-width: 300px; }
+
+</style>
+</head>
+<body>
+<script src=https://rawgit.com/spite/ccapture.js/dev/build/CCapture.all.min.js ></script>
+
+<script src=https://rawgit.com/spite/ccapture.js/master/src/Whammy.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/tar.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/download.js ></script>
+<script src=https://rawgit.com/spite/ccapture.js/master/src/gif.js ></script>
+
+
+		<div id = "menu" >
+
+			<div id = "title" ></div>
+
+			<p><button onclick=setIframe(); >Set Iframe</button></p>
+
+			<p><button onclick=updateScene(); >update scene</button></p>
+
+			<p><button onclick=capturer.start(); >capture start</button></p>
+
+			<p><button onclick="capturer.stop();step=-1;" >capture stop</button></p>
+
+			<p><button onclick=capturer.save(); >capture save</button></p>
+
+
+			Camera Radius <output id=outCameraRadius for="inpCameraRadius" ></output>
+			<input type="range" id="inpCameraRadius" onchange=outCameraRadius.value=cameraRadius=parseFloat(this.value); min=1 max=100 value=50 >
+
+			Camera Delta <output id=outCameraDelta for="inpCameraDelta" ></output>
+			<input type="range" id="inpCameraDelta" onchange=outCameraDelta.value=cameraDelta=parseFloat(this.value); min=10 max=100 value=50 >
+
+			Camera Height <output id=outCameraHeight for="inpCameraHeight" ></output>
+			<input type="range" id="inpCameraHeight" onchange=cameraHeight=this.value; min=1 max=100 value=50 >
+
+
+			<p><button id=toggleVisible onclick = toggleHelpers(); >Toggle Helpers</button></p>
+
+		</div>
+
+		<div id = "contents" ></div>
+
+<script>
+
+	let scope;
+	var cameraPoints = 2000;
+	var index = 0;
+	let point = 0;
+
+	let temple;
+	let aircraft;
+	var motion = false;
+	let curve;
+
+	let cockpitCamera;
+	let cockpitView = false;
+
+// https://github.com/spite/ccapture.js/
+
+	let cameraRadius = 50;
+	let cameraDelta = 50;
+	let cameraHeight = 50;
+
+	var step = 0;
+	var icw;
+	var radius;
+
+	var capturer = new CCapture( {
+
+		verbose: true,
+		display: true,
+		name: 'demo',
+		framerate: 30, //framerate
+//			motionBlurFrames: ( 960 / framerate ) * ( document.querySelector('input[name="motion-blur"]').checked ? 1 : 0 ),
+		quality: 50,
+		format: 'gif', //document.querySelector('input[name="encoder"]:checked').value,
+		workersPath: './js/',
+//			timeLimit: 2,  // number of seconds to capture
+//		frameLimit: 240,
+		autoSaveTime: 0,
+		timeLimit: 8,
+//			onProgress: function( p ) { progress.style.width = ( p * 100 ) + '%' }
+
+	} );
+
+	init();
+
+
+	function init() {
+
+		title.innerHTML = '<h3><a href="" >' + document.title +'</a></h3>';
+
+		if ( window.self === window.top  ) {
+
+			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			menu.style.height = ( menu.scrollHeight + 40 ) +  'px'; // '400px';
+
+			ifrContents.onload = initVariables;
+
+
+		} else if ( parent && parent.THREE ) {
+
+			scope = parent;
+
+			scope.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) +  'px'; // '400px';
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+			parent.ifrMenuSub.style.height = '400px';
+
+			scope = parent.ifrContents.contentWindow;
+scope.console.log( 'scope ifrContents', scope );
+
+			initVariables();
+
+		}
+
+	}
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+		lightDirectional = scope.lightDirectional;
+		cameraHelper = scope.cameraHelper;
+		mesh = scope.mesh;
+		axisHelper = scope.axisHelper;
+
+//console.log( 'scene', scene );
+
+
+	}
+
+
+
+
+	function setIframe() {
+
+		renderer.domElement.style.cssText = 'border: 1px solid crimson; left: 0; margin: 0 auto; width: 360px; height: 320px; position: absolute; right: 0; top: 100px;';
+
+	}
+
+
+
+	function updateScene() {
+
+		temple = scene.getObjectByName( 'temple' );
+
+		aircraft = scene.getObjectByName( 'aircraft' );
+
+		if ( scope.aircraft ) { 
+
+console.log( 'aircraft', aircraft );
+
+			flightpath = scene.getObjectByName( 'flightpath' );
+
+			curve = new THREE.CatmullRomCurve3( flightpath.geometry.vertices ); 
+
+			motion = true;
+
+
+			if ( !cockpitCamera ) {
+
+				cockpitCamera = new THREE.PerspectiveCamera( 200, window.innerWidth / window.innerHeight, 1, 1000 );
+				cockpitCamera.position.set( 0, 1.5, -1.5 );
+				cockpitCamera.rotation.set( 0,3,0 );
+				aircraft.add( cockpitCamera );
+
+			}
+
+			animateAircraft();
+
+		}
+
+
+		controls.autoRotate = false;
+
+		renderer.setClearColor( 0xc0c0f8 );
+
+		cameraDelta = 0.5 * camera.position.distanceTo( controls.target );
+
+		step = 0;
+
+		animate = animateCapture;
+
+		animate();
+
+
+	}
+
+
+	function toggleHelpers() {
+
+		if ( aircraft ) { flightpath.visible = false; }
+
+//		scope.menu.style.display = scope.menu.style.display === 'none' ? '' : 'none';
+//		scope.header.style.display = scope.header.style.display === 'none' ? '' : 'none';
+
+		if ( cameraHelper ) { cameraHelper.visible = axisHelper.visible = !axisHelper.visible; }
+
+	};
+
+
+	function animateAircraft() {
+
+		reqestAnimationreference = requestAnimationFrame( animateAircraft );
+
+		if ( !motion ) { return; }
+
+		index += 1 / cameraPoints;
+
+		point += 0.0005;
+		point = point < 1 ? point : 0;
+
+		pointLookAt = point + 0.001;
+		pointLookAt = pointLookAt < 1 ? pointLookAt : 0.001;
+
+		aircraft.position.copy( curve.getPoint( point ) );
+		aircraft.lookAt( curve.getPoint( pointLookAt ) );
+
+	}
+
+
+	function endTheAction() {
+
+		step = -1;
+
+	}
+
+
+
+	var animateCapture = function () {
+
+		requestAnimationFrame( animateCapture );
+		controls.update();
+		renderer.render( scene, aircraft && aircraft.cockpitView === true ? cockpitCamera : camera );
+
+		if ( temple ) { temple.rotation.y += 0.03; }
+
+		if ( step >= 0 ) {
+//console.log( 'step', step );
+
+			step += Math.PI / 160;
+
+			camera.position.x = cameraRadius + cameraDelta * Math.sin( step );
+			camera.position.y = cameraHeight;
+			camera.position.z = cameraRadius + cameraDelta * Math.cos( step );
+
+			capturer.capture( renderer.domElement );
+
+		}
+
+		
+
+	}
+
+
+
+</script>
+</body>
+</html>

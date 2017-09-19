@@ -74,10 +74,7 @@
 
 
 	let ground; 
-
 	let terrain = {};
-
-
 	let count;
 
 	const mbptoken='pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
@@ -136,9 +133,10 @@
 		cameraHelper = scope.cameraHelper;
 		controls = scope.controls;
 		parameters = scope.parameters;
-		lights = scope.lights;
+//		lights = scope.lights;
 		lightDirectional = scope.lightDirectional;
 		ground = scope.ground;
+		axisHelper = scope.axisHelper;
 
 		scope.updateTerrain = updateTerrain;
 		scope.drawMapOverlay = drawMapOverlay;
@@ -159,7 +157,7 @@
 		parameters.pixelsPerTile = 256;
 		parameters.tilesPerSide = 4; // odd number please
 
-		scene.remove( scope.mesh, ground );
+		scene.remove( ground );
 
 //		if ( !lights ) { addLights(); };
 
@@ -224,13 +222,15 @@
 //scope.console.log( 'mnu-content-terrain updateTerrain' );
 
 		getCalcs();
-		lights = scope.lights;
+//		lights = scope.lights;
 
 	}
 
 
 
 	function getCalcs( ) {
+
+//console.log( 'parameters', parameters );
 
 		let tileX, tileY;
 		let latMin, latMax, lonMin, lonMax;
@@ -493,14 +493,15 @@
 
 				count++;
 
-				if ( count === tilesPerSideSquared ) {
+				if ( count > tilesPerSideSquared  - 1 ) {
 
 //scope.info.innerHTML += 'ground.material.map' + texture.uuid;
 
-					if ( lights ) {
-//scope.console.log( 'lights true', lights );
+					if ( lightDirectional ) {
+//scope.console.log( 'lights true', lightDirectional );
 
 						ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+
 
 					} else {
 //scope.console.log( 'lights false', lights );
@@ -531,17 +532,18 @@
 
 		if ( !ground.geometry ) { return; }
 
+		const size = parameters.groundSize;
 		ground.geometry.computeBoundingSphere();
 		center = ground.geometry.boundingSphere.center;
 		controls.target.copy( center );
-		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 0, parameters.groundSize, parameters.groundSize ) ) );
+		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 0, size, size ) ) );
 
-//		lightDirectional.position.copy( controls.target.clone().add( new THREE.Vector3( -groundSize, groundSize, groundSize ) ) );
-//		lightDirectional.target = axisHelper;
+		lightDirectional.position.copy( controls.target.clone().add( new THREE.Vector3( -size, size, size ) ) );
+		lightDirectional.target = ground;
 
 //		object3D.position.copy( center );
 
-//console.log( 'center', center, camera.position );
+console.log( 'center', center, camera.position );
 
 	}
 

@@ -143,14 +143,20 @@
 
 	function init() {
 
-
 		if ( window.top === window.self ) {
 
 			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
 
 			scope = parent.ifrDefault;
 
-		} else {
+		} else if ( parent && parent.THREE ) {
+
+//			parent.ifrMenuSub.style.height = ( header.scrollHeight + menu.scrollHeight + 30 ) +  'px'; '400px';
+			parent.ifrMenuSub.style.cssText += 'border: 2px solid orange; height: 300px';
+
+			scope = parent;
+
+		} else if ( parent && parent.ifrContents ) {
 
 			parent.ifrMenuSub.style.cssText += 'border: 2px solid orange; height: 300px';
 
@@ -158,20 +164,10 @@
 
 		}
 
-		scope.ifrDefault.onload = function() {
 
-			scope.ifrDefault.contentWindow.addLights();
+//		initAddLights( 'mnu-content-terrain.html' + location.hash, initDrawTemple );
 
-			scope.ifrDefault.onload = undefined;
-
-			scope.ifrDefault.src = 'mnu-content-terrain.html#' + alcatraz;
-
-		
-		}
-
-		scope.ifrDefault.src = 'mnu-update-lights.html';
-
-
+		initAddTerrain();
 
 
 		if ( 'speechSynthesis' in window ) {
@@ -203,6 +199,57 @@
 			false 
 
 		} );
+
+	}
+
+
+	function initAddLights( source, onload ) {
+
+		scope.ifrDefault.onload = function() {
+
+//			scope.ifrDefault.contentWindow.addLights();
+
+			scope.ifrDefault.onload = onload;
+
+			scope.ifrDefault.src = source;
+
+		}
+
+		scope.ifrDefault.src = 'mnu-update-lights.html';
+
+	}
+
+
+
+	function initAddTerrain() {
+
+		scope.ifrDefault.onload = function() {
+
+//			scope.ifrDefault.contentWindow.addLights();
+
+			scope.ifrDefault.onload = initDrawTemple;
+
+			scope.ifrDefault.src = 'mnu-content-temple.html';
+
+		}
+
+		scope.ifrDefault.src = 'mnu-content-terrain.html' + location.hash;
+
+	}
+
+
+
+	function initDrawTemple() {
+
+		scope.ifrDefault.onload = function() {
+
+			scope.ifrDefault.contentWindow.initDrawTemple();
+
+			scope.ifrDefault.onload = null;
+
+		}
+
+		scope.ifrDefault.src = 'mnu-content-temple.html';
 
 	}
 
