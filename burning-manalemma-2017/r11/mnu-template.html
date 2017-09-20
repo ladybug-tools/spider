@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic Burning mAnalemma template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-19" >
+<title>Menu Template</title>
+<style>
+
+	body { background-color: #fed; font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus{ color: #f1f1f1; }
+	iframe { height: 500px; width: 800px; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#menu { height: 100px; max-width: 300px; }
+
+</style>
+</head>
+<body>
+
+		<div id = "menu" >
+
+			<div id = "title" ></div>
+
+			<p><button onclick=initDrawTemple(); >Do something</button></p>
+
+			<p id = "info" ></p>
+
+		</div>
+
+		<div id = "contents" ></div>
+
+<script>
+
+	let scope;
+	var parameters = parameters || {};
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
+	let geometry, material, mesh;
+
+	var temple;
+	let ground; 
+	let terrain;
+
+	init();
+
+	function init() {
+
+		title.innerHTML = '<h3><a href="" >' + document.title +'</a></h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		info.innerHTML = txt;
+
+		if ( window.self === window.top  ) {
+
+
+			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			menu.style.height = ( menu.scrollHeight + 40 ) +  'px';
+
+			ifrContents.onload = initVariables;
+
+		} else if ( parent && parent.THREE ) {
+
+			scope = parent;
+
+			scope.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) +  'px'; // '400px';
+
+			initVariables();
+
+		} else if ( parent /* && parent.ifrContents */ ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) +  'px';
+
+			initVariables();
+
+		}
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+		parameters = scope.parameters;
+
+		lightDirectional = scope.lightDirectional;
+		mesh = scope.mesh;
+		ground = scope.ground;
+		temple = scope.temple;
+		structures = scope.structures;
+		axisHelper = scope.axisHelper;
+		cameraHelper = scope.cameraHelper;
+
+//console.log( 'scene', scene );
+
+	}
+
+
+
+
+
+</script>
+</body>
+</html>

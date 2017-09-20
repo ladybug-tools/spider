@@ -165,25 +165,38 @@ console.log( 'scope ifrContents', scope );
 	function initVariables() {
 
 		THREE = scope.THREE;
+		renderer = scope.renderer;
 		scene = scope.scene;
 		camera = scope.camera;
 		controls = scope.controls;
-		parameters = scope.parameters
+		parameters = scope.parameters;
 
-		lights = scope.lights;
 		lightDirectional = scope.lightDirectional;
-		cameraHelper = scope.cameraHelper;
 		mesh = scope.mesh;
+		ground = scope.ground;
+		temple = scope.temple;
+		structures = scope.structures;
+		axisHelper = scope.axisHelper;
+		cameraHelper = scope.cameraHelper;
+
+
+console.log( 'parameters', lightDirectional );
 
 		scene.remove( mesh );
+
+		scene.remove( structures );
 		structures = new THREE.Object3D();
 		structures.name = 'structures';
 		scene.add( structures );
+		scope.structures = structures;
+
+		parameters.structuresArray = [];
+
 
 //console.log( 'scene', scene );
 //		temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
 
-		if ( lights ) {
+		if ( lightDirectional ) {
 
 			material = new THREE.MeshPhongMaterial( { color: 0xff4444 } );
 
@@ -193,7 +206,6 @@ console.log( 'scope ifrContents', scope );
 
 		}
 
-		getParameters( sfHyatt );
 
 	}
 
@@ -381,8 +393,11 @@ console.log( 'callbackGeoJSON error', e );
 
 			structuresArray = parameters.structuresArray.slice();
 
+
+
 		}
 
+			findIntersects();
 
 	}
 
@@ -390,7 +405,7 @@ console.log( 'callbackGeoJSON error', e );
 
 	function drawShape( vertices, height ) {
 
-		let geometry, shape, material, mesh;
+		let geometry, shape, mesh;
 
 //console.log( 'shape height', height );
 
@@ -417,7 +432,18 @@ console.log( 'deltaY', deltaY );
 //	geometry.center();
 
 //			material = new THREE.MeshPhongMaterial( { color: Math.random() * 0xffffff, side: 2 } );
-			material = new THREE.MeshNormalMaterial( {  side: 2 } );
+//			material = new THREE.MeshNormalMaterial( {  side: 2 } );
+
+			if ( lightDirectional ) {
+
+				material = new THREE.MeshPhongMaterial( { color: Math.random() * 0xffffff, side: 2 } );
+
+			} else {
+
+				material = new THREE.MeshNormalMaterial( { side: 2 } );
+
+			}
+
 			mesh = new THREE.Mesh( geometry, material );
 
 
@@ -428,10 +454,7 @@ console.log( 'deltaY', deltaY );
 			mesh.castShadow = true
 			mesh.receiveShadow = true;
 
-			
 			return mesh;
-
-
 
 		}
 
@@ -455,8 +478,11 @@ console.log( 'error', error, shape );
 		vectorLookUp = new THREE.Vector3( 0, 1, 0 );
 
 		var structure = structuresArray.pop();
-
+		if ( structuresArray.length && parameters.structuresArray.length ) { requestAnimationFrame( findIntersects ); }
+if ( !structure ) { return; }
 		arr = structure.geometry.attributes.position.array;
+
+
 		position = new THREE.Vector3( arr[ 0 ], -100, arr[ 2 ] );
 
 		raycaster = new THREE.Raycaster();
@@ -488,6 +514,7 @@ console.log( 'error', error, shape );
 		}
 
 		logIntersect.innerHTML = structuresArray.length + ' of ' + structures.children.length + ' structures remaining';
+
 
 	}
 
@@ -539,7 +566,6 @@ console.log( 'error', error, shape );
 		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
 
 	}
-
 
 
 

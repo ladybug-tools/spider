@@ -63,6 +63,7 @@
 
 <script>
 
+
 	let scope;
 	var cameraPoints = 2000;
 	var index = 0;
@@ -83,15 +84,16 @@
 	let cameraHeight = 50;
 
 	var step = 0;
-	var icw;
-	var radius;
+	var framerate = 30;
+	var timeLimit = 8;
+
 
 	var capturer = new CCapture( {
 
 		verbose: true,
 		display: true,
 		name: 'demo',
-		framerate: 30, //framerate
+		framerate: framerate, //framerate
 //			motionBlurFrames: ( 960 / framerate ) * ( document.querySelector('input[name="motion-blur"]').checked ? 1 : 0 ),
 		quality: 50,
 		format: 'gif', //document.querySelector('input[name="encoder"]:checked').value,
@@ -99,10 +101,12 @@
 //			timeLimit: 2,  // number of seconds to capture
 //		frameLimit: 240,
 		autoSaveTime: 0,
-		timeLimit: 8,
+		timeLimit: timeLimit,
 //			onProgress: function( p ) { progress.style.width = ( p * 100 ) + '%' }
 
 	} );
+
+
 
 	init();
 
@@ -117,7 +121,7 @@
 
 			scope = ifrContents.contentWindow;
 
-			menu.style.height = ( menu.scrollHeight + 40 ) +  'px'; // '400px';
+			menu.style.height = ( menu.scrollHeight + 40 ) +  'px';
 
 			ifrContents.onload = initVariables;
 
@@ -130,11 +134,14 @@
 
 			initVariables();
 
-		} else if ( parent && parent.ifrContents ) {
-
-			parent.ifrMenuSub.style.height = '400px';
+		} else if ( parent /* && parent.ifrContents */  ) {
 
 			scope = parent.ifrContents.contentWindow;
+
+//			scope.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) +  'px'; 
+ 
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 40 ) +  'px';
+
 scope.console.log( 'scope ifrContents', scope );
 
 			initVariables();
@@ -142,6 +149,8 @@ scope.console.log( 'scope ifrContents', scope );
 		}
 
 	}
+
+
 
 	function initVariables() {
 
@@ -151,12 +160,12 @@ scope.console.log( 'scope ifrContents', scope );
 		camera = scope.camera;
 		controls = scope.controls;
 		lightDirectional = scope.lightDirectional;
-		cameraHelper = scope.cameraHelper;
+
 		mesh = scope.mesh;
 		axisHelper = scope.axisHelper;
+		cameraHelper = scope.cameraHelper;
 
 //console.log( 'scene', scene );
-
 
 	}
 
@@ -166,6 +175,10 @@ scope.console.log( 'scope ifrContents', scope );
 	function setIframe() {
 
 		renderer.domElement.style.cssText = 'border: 1px solid crimson; left: 0; margin: 0 auto; width: 360px; height: 320px; position: absolute; right: 0; top: 100px;';
+
+		camera.aspect = 360 / 240;
+		camera.updateProjectionMatrix();
+
 
 	}
 
@@ -179,7 +192,7 @@ scope.console.log( 'scope ifrContents', scope );
 
 		if ( scope.aircraft ) { 
 
-console.log( 'aircraft', aircraft );
+//console.log( 'aircraft', aircraft );
 
 			flightpath = scene.getObjectByName( 'flightpath' );
 
@@ -250,6 +263,7 @@ console.log( 'aircraft', aircraft );
 	}
 
 
+
 	function endTheAction() {
 
 		step = -1;
@@ -269,7 +283,7 @@ console.log( 'aircraft', aircraft );
 		if ( step >= 0 ) {
 //console.log( 'step', step );
 
-			step += Math.PI / 160;
+			step += 2 * Math.PI / (framerate * timeLimit );
 
 			camera.position.x = cameraRadius + cameraDelta * Math.sin( step );
 			camera.position.y = cameraHeight;
@@ -278,8 +292,6 @@ console.log( 'aircraft', aircraft );
 			capturer.capture( renderer.domElement );
 
 		}
-
-		
 
 	}
 

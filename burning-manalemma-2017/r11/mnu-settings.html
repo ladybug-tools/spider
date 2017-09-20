@@ -23,7 +23,9 @@
 </head>
 <body>
 
-	<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+	<div id = "header" ><h1>
+		<a id = "title" href = "" ></a></h1>
+	</div>
 
 	<p><button onclick=toggleBackgroundGradient(); > Toggle background</button></p>
 
@@ -33,6 +35,8 @@
 
 	<p><button onclick=toggleWireframe(); > Toggle wireframe</button></p>
 
+	<p><button id=toggleVisible onclick = toggleHelpers(); >Toggle Helpers</button></p>
+
 	<p id=mnuSettingsDebug ></p>
 
 <script>
@@ -41,6 +45,7 @@
 // add try catch so can run standalone?
 
 	let abc = 'mnu-setings';
+	var aircraft;
 
 	var pcc;
 	let pccRot;
@@ -114,13 +119,15 @@
 
 				pccRot = pcc.requestAnimationFrame( pcc.animateObject3D )
 
-				pcc.mesh.rotation.x += 0.005;
+				pcc.temple.rotation.y += 0.005;
 
 		}
 
 		pccRot = pccRot ? pcc.cancelAnimationFrame( pccRot ) : pcc.animateObject3D();
 
 	}
+
+
 
 
 
@@ -139,6 +146,16 @@
 		} );
 
 	}
+
+
+	function toggleHelpers() {
+
+		if ( aircraft ) { flightpath.visible = false; }
+
+		if ( pcc.cameraHelper ) { pcc.cameraHelper.visible = pcc.axisHelper.visible = !pcc.axisHelper.visible; }
+
+	}
+
 
 </script>
 </body>

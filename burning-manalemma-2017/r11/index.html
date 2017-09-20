@@ -19,7 +19,7 @@
 
 	#header { left: 0; margin: 0 auto; max-width: 700px; position: absolute; right: 0; text-align: center; }
 	#menu { border: 0px solid cyan; height: calc( 100% - 100px ); right: 0; margin: 20px; position: absolute; overflow: auto; top: 60px; z-index: 10; }
-
+	#menu a:hover, #menu a:focus{ color: #f1f1f1; }
  	#ifrDivMenuSub { box-sizing: border-box; border: 0px solid green; padding: 0; width: 100%; }
 
 
@@ -58,7 +58,7 @@
 			<div id="raster" ></div>
 		</details>
 
-		<iframe id=ifrDefault ></iframe>
+		<iframe id=ifrStaging ></iframe>
 
 	</div>
 
@@ -67,6 +67,7 @@
 	let aaa = 'this is app index.html';
 
 	var scope;
+
 	var parameters = {};
 
 	const defaultZoom = 16;
@@ -87,7 +88,9 @@
 
 //console.log( 'folder', folder );
 
-	var lights;
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
 
@@ -111,7 +114,7 @@
 
 			scope = window;
 
-			onHashChange();
+//			onHashChange();
 
 		} else if ( parent && parent.THREE ) {
 
@@ -157,17 +160,15 @@ renderer.shadowMap.enabled = true;
 
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		let axisHelper = new THREE.AxisHelper( 50 );
+		axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
 
 /*
 		geometry = new THREE.BoxGeometry( 50, 50, 50 );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
-
 		mesh.name = 'mesh-default';
-
-//		scene.add( mesh );
+		scene.add( mesh );
 */
 
 //		location.hash = sfHyatt;
@@ -175,7 +176,8 @@ renderer.shadowMap.enabled = true;
 
 //		scope.parameters = parameters;
 
-		addMeshes();
+		mesh = addMeshes();
+		scene.add( mesh );
 
 		addLights();
 
@@ -183,6 +185,8 @@ renderer.shadowMap.enabled = true;
 
 
 	function addMeshes() {
+
+		let obj = new THREE.Object3D();
 
 		geometry = new THREE.SphereBufferGeometry( 25, 50, 50 );
 
@@ -200,7 +204,7 @@ renderer.shadowMap.enabled = true;
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.castShadow = true;
 		mesh.receiveShadow = true;
-		scene.add( mesh );
+		obj.add( mesh );
 
 
 		geometry = new THREE.BoxGeometry( 100, 2, 100 );
@@ -221,7 +225,9 @@ renderer.shadowMap.enabled = true;
 		mesh.castShadow = true;
 		mesh.receiveShadow = true;
 
-		scene.add( mesh );
+		obj.add( mesh );
+
+		return obj;
 
 	}
 
@@ -253,7 +259,8 @@ renderer.shadowMap.enabled = true;
 		lightDirectional.castShadow = true;
 		scene.add( lightDirectional );
 
-		scene.add( new THREE.CameraHelper( lightDirectional.shadow.camera ) );
+		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		scene.add( cameraHelper );
 
 	}
 
@@ -261,7 +268,6 @@ renderer.shadowMap.enabled = true;
 	function onHashChange() {
 
 		if ( location.hash && parent.parameters ) {
-
 //console.log( 'index', location.hash );
 
 			let hash, str, params;
@@ -279,8 +285,6 @@ renderer.shadowMap.enabled = true;
 			parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
 
 			scope.parameters = parameters;
-
-//			updateTerrain();
 
 		}
 

@@ -160,6 +160,16 @@ More in the next few days. In the mean time here's some background:
 ## Change Log
 
 
+## 2017-09-19 ~ Theo
+
+* More R11
+* Structures are working again
+* Screen capture
+* Added mnu-template.html
+* And many small fixes
+
+Looks like I'm getting to the end. Making things simpler was not as simple as it seemed.
+
 ## 2017-09-11 ~ Theo
 
 * More R11
@@ -170,7 +180,7 @@ More in the next few days. In the mean time here's some background:
 
 There are three levels of existence for each script
 * Standalone - for testing
-* Three.js plugin - for general usage
+* Three.js plugin as parent - for general usage
 * Child - part of some larger, undetermined kit of tools
 
 Understand how these work is not easy, but as understanding arises it tends to simplify things

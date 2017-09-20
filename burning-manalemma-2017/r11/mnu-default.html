@@ -43,7 +43,8 @@
 
 	<p>Use one/two/three fingers to rotate/zoom/pan display in 3D</p>
 
-	
+	<iframe id=ifrStaging ></iframe>
+
 <script>
 
 // https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
@@ -147,7 +148,8 @@
 
 			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
 
-			scope = parent.ifrDefault;
+//			divStaging.innerHTML = '<iframe id=ifrStaging ></iframe>';
+			scope = parent.ifrStaging;
 
 		} else if ( parent && parent.THREE ) {
 
@@ -163,9 +165,6 @@
 			scope = parent.ifrContents.contentWindow;
 
 		}
-
-
-//		initAddLights( 'mnu-content-terrain.html' + location.hash, initDrawTemple );
 
 		initAddTerrain();
 
@@ -203,37 +202,18 @@
 	}
 
 
-	function initAddLights( source, onload ) {
-
-		scope.ifrDefault.onload = function() {
-
-//			scope.ifrDefault.contentWindow.addLights();
-
-			scope.ifrDefault.onload = onload;
-
-			scope.ifrDefault.src = source;
-
-		}
-
-		scope.ifrDefault.src = 'mnu-update-lights.html';
-
-	}
-
-
 
 	function initAddTerrain() {
 
-		scope.ifrDefault.onload = function() {
+		scope.ifrStaging.onload = function() {
 
-//			scope.ifrDefault.contentWindow.addLights();
+			scope.ifrStaging.onload = initDrawTemple;
 
-			scope.ifrDefault.onload = initDrawTemple;
-
-			scope.ifrDefault.src = 'mnu-content-temple.html';
+			scope.ifrStaging.src = 'mnu-content-temple.html';
 
 		}
 
-		scope.ifrDefault.src = 'mnu-content-terrain.html' + location.hash;
+		scope.ifrStaging.src = 'mnu-content-terrain.html' + location.hash;
 
 	}
 
@@ -241,15 +221,15 @@
 
 	function initDrawTemple() {
 
-		scope.ifrDefault.onload = function() {
+		scope.ifrStaging.onload = function() {
 
-			scope.ifrDefault.contentWindow.initDrawTemple();
+			scope.ifrStaging.contentWindow.initDrawTemple();
 
-			scope.ifrDefault.onload = null;
+//			scope.ifrStaging.src = '';
 
 		}
 
-		scope.ifrDefault.src = 'mnu-content-temple.html';
+		scope.ifrStaging.src = 'mnu-content-temple.html';
 
 	}
 

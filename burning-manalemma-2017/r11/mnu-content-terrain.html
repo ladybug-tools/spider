@@ -62,9 +62,9 @@
 	const defaultLongitude = -119.204444;
 	const defaultHeightScale = 3;
 	const defaultOffsetUTC = -420;
-/*
-	let parameters = {};
 
+	let parameters = {};
+/*
 	parameters.zoom = defaultZoom;
 	parameters.latitude = defaultLatitude;
 	parameters.longitude = defaultLongitude;
@@ -128,15 +128,20 @@
 	function initVariables() {
 
 		THREE = scope.THREE;
+		renderer = scope.renderer;
 		scene = scope.scene;
 		camera = scope.camera;
-		cameraHelper = scope.cameraHelper;
 		controls = scope.controls;
 		parameters = scope.parameters;
-//		lights = scope.lights;
+
 		lightDirectional = scope.lightDirectional;
+		mesh = scope.mesh;
 		ground = scope.ground;
+		temple = scope.temple;
+		structures = scope.structures;
 		axisHelper = scope.axisHelper;
+		cameraHelper = scope.cameraHelper;
+
 
 		scope.updateTerrain = updateTerrain;
 		scope.drawMapOverlay = drawMapOverlay;
@@ -157,7 +162,8 @@
 		parameters.pixelsPerTile = 256;
 		parameters.tilesPerSide = 4; // odd number please
 
-		scene.remove( ground );
+console.log( 'structures', structures );
+		scene.remove( ground, structures );
 
 //		if ( !lights ) { addLights(); };
 
@@ -186,7 +192,7 @@
 
 //console.log( 'mnu-contents: no hash' ); 
 
-			location.hash = blackRock;
+			location.hash = sfHyatt; //blackRock;
 
 			return; 
 
@@ -207,9 +213,10 @@
 
 //scope.console.log( 'getParametersFromHash', parameters );
 
-		
-
 		scope.parameters = parameters;
+
+console.log( 'structures', structures );
+		scene.remove( ground, structures );
 
 		getCalcs();
 
@@ -396,7 +403,7 @@
 //		geometry.center();
 		material = new THREE.MeshNormalMaterial( { opacity: 0.75 } );
 
-		scene.remove( ground );
+		scene.remove( ground, structures );
 		ground = new THREE.Mesh( geometry, material );
 		ground.name = 'ground';
 		ground.castShadow = true;
@@ -536,14 +543,19 @@
 		ground.geometry.computeBoundingSphere();
 		center = ground.geometry.boundingSphere.center;
 		controls.target.copy( center );
+
+		axisHelper.position.copy( center );
+
+//scope.console.log( 'center', center, camera.position );
+
 		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 0, size, size ) ) );
 
 		lightDirectional.position.copy( controls.target.clone().add( new THREE.Vector3( -size, size, size ) ) );
-		lightDirectional.target = ground;
+
+		lightDirectional.target = axisHelper;
 
 //		object3D.position.copy( center );
 
-console.log( 'center', center, camera.position );
 
 	}
 

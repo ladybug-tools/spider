@@ -61,12 +61,13 @@
 
 <script>
 
-	var lights;
-	var lightAmbient, lightPoint, lightDirectional, cameraHelper;
-	var axisHelper;
 	var parameters = {};
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
 	var renderer, camera, controls, scene;
-	var geometry, material, mesh;
+	let geometry, material, mesh;
 
 	init();
 	animate();

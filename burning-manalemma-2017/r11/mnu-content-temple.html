@@ -6,7 +6,7 @@
 <meta name = "description" content = "Basic HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-08-04" >
-<title></title>
+<title>Construct Temple</title>
 <style>
 
 	body { background-color: #fed; font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
@@ -26,11 +26,9 @@
 </head>
 <body>
 
-		<div id = "header" >
-			<div id = "title" ></div>
-		</div>
-
 		<div id = "menu" >
+
+			<div id = "title" ></div>
 
 			<p><button onclick=initDrawTemple(); >Draw temple</button></p>
 
@@ -82,7 +80,7 @@
 
 	function init() {
 
-		title.innerHTML = '<h3><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h3>';
+		title.innerHTML = '<h3><a href="" >' + document.title +'</a></h3>';
 
 		info.innerHTML = "The scale of the units - just like so many things here - depends upon your imagination."
 
@@ -96,7 +94,7 @@
 
 		} else if ( parent && parent.THREE ) {
 
-			parent.ifrMenuSub.style.height = ( header.scrollHeight + menu.scrollHeight + 30 ) +  'px'; '400px';
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 30 ) +  'px';
 
 			scope = parent;
 
@@ -104,7 +102,7 @@
 
 		} else if ( parent && parent.ifrContents ) {
 
-			parent.ifrMenuSub.style.height = '400px';
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 30 ) +  'px';
 
 			scope = parent.ifrContents.contentWindow;
 scope.console.log( 'scope ifrContents', scope );
@@ -123,13 +121,15 @@ scope.console.log( 'scope ifrContents', scope );
 		scene = scope.scene;
 		camera = scope.camera;
 		controls = scope.controls;
-//		lights = scope.lights;
+
 		lightDirectional = scope.lightDirectional;
 		cameraHelper = scope.cameraHelper;
 		mesh = scope.mesh;
 		axisHelper = scope.axisHelper;
 
 //console.log( 'scene', scene );
+
+
 		temple = new THREE.Object3D(); // so animate has something to rotate from the get-go
 
 		if ( lightDirectional ) {
@@ -199,8 +199,6 @@ scope.console.log( 'scope ifrContents', scope );
 		temple.name = 'temple';
 
 		temple.receiveShadow = temple.castShadow = true;
-
-		
 
 		temple.traverse( function ( child ) {
 
