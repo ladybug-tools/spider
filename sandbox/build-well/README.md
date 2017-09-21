@@ -18,6 +18,12 @@ _A well for building well._
 ## Change Log
 
 
+### 2017-09-21 ~ Theo
+
+* 11:30 ~ start r3. working on ui/css
+* 12:33 ~ UI cleaned up. No more details/summary. all html files controlled from container file
+	* start fixing bugs in adjacent-buildings.html
+
 ### 2017-09-20 ~ Theo
 
 * 14:56 ~  Start R2
