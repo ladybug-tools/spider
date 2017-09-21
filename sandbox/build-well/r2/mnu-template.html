@@ -8,7 +8,6 @@
 <meta name = "date" content = "2017-09-19" >
 <title>Menu Template</title>
 <style>
-/* https://www.w3schools.com/colors/colors_names.asp */
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
 	a { color: crimson; text-decoration: none; }
@@ -18,7 +17,7 @@
 	select { width: 100%; }
 	summary { outline: none; font-size: 18pt }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer; padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -33,12 +32,13 @@
 </head>
 <body>
 
-
 		<div id = "menu" >
 
 			<div id = "title" ></div>
 
-			<p><button onclick=initDrawTemple(); >Do something</button></p>
+			<p title = 'Select a building to edit' >Building: 
+				<select id = selBuilding onchange = getBuilding(); size = 5 ></select>
+			</p>
 
 			<p id = "info" ></p>
 
@@ -49,7 +49,6 @@
 <script>
 
 	let scope;
-	var parameters = parameters || {};
 
 	var THREE;
 	var renderer;
@@ -57,15 +56,11 @@
 	var controls;
 	var scene;
 
-
 	var lightAmbient, lightPoint, lightDirectional;
 	var axisHelper, cameraHelper;
 
 	let geometry, material, mesh;
 
-	var temple;
-	let ground; 
-	let terrain;
 
 	init();
 
@@ -89,18 +84,17 @@
 
 			scope = parent.ifrContents.contentWindow;
 
-			parent.ifrMenuSub.style.height = menu.scrollHeight +  'px';
+			parent.ifrMenuSub.style.height = menu.scrollHeight + 'px';
 
 			initVariables();
 
 		} else {
 
-
-			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=build-well-test.html ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
-			menu.style.height = menu.scrollHeight +  'px';
+			menu.style.height = menu.scrollHeight + 'px';
 
 			ifrContents.onload = initVariables;
 
@@ -123,15 +117,50 @@
 		cameraHelper = scope.cameraHelper;
 
 		parameters = scope.parameters;
-		mesh = scope.mesh;
-		ground = scope.ground;
-		temple = scope.temple;
+		buildings = scope.meshes;
+		terrain = scope.terrain;
 		structures = scope.structures;
 
-//console.log( 'scene', scene );
+		updateSelectBuilding();
 
 	}
 
+
+
+	function updateSelectBuilding() {
+
+		selBuilding.innerHTML = '';
+
+		for ( let building of buildings.children ) {
+
+			selBuilding.innerHTML += '<option>' + building.name + '</option>'; 
+
+		}
+
+		selBuilding.selectedIndex = 1;
+
+	}
+
+
+
+	function getBuilding() {
+
+//		const building = buildings.children[ selBuilding.selectedIndex ];
+		const building = buildings.getObjectByName( selBuilding.value );
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === building.name ? 1 : 0.5;
+
+			}
+
+		} );
+
+		building.material.opacity = 1;
+
+	}
 
 
 </script>

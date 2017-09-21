@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic Burning mAnalemma template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-19" >
+<title>Geometry</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 5px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus{ color: #f1f1f1; }
+	h3 { margin: 0; }
+	iframe { height: 500px; width: 800px; }
+	select { width: 100%; }
+	summary { outline: none; font-size: 18pt }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: magenta; cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#menu { background-color: #fed; border: 1px solid pink; height: 100px; max-width: 300px; padding: 5px; position: absolute; right: 20px; }
+
+</style>
+</head>
+<body>
+
+		<div id = "menu" >
+
+			<div id = "title" ></div>
+
+		<div id = "" ><a href="site-context.html" >Site Context</a></div>
+		<div id = "" ><a href="adjacent-buildings.html" >Adjacent Buildings</a></div>
+<!--		<div id = "" ><a href="geometry.html" >Geometry</a></div> -->
+
+<!--			<p title = 'Select a building to edit' >Building: 
+				<select id = selBuilding onchange = getBuilding(); size = 5 ></select>
+			</p> -->
+
+			<p id = "info" ></p>
+
+			<details open >
+
+				<summary>Geometry</summary>
+
+				<p><button onclick=getGeometry(); >Update Geometry</button></p>
+
+				<p title = 'Measured in square feet' >Building Area: 
+					<input id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 81000 class = floatRight ></p>
+
+				<p title = 'How many storeys?'>Number of Floors: 
+					<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = getGeometry(); class = floatRight >
+				</p>
+
+				<p title= 'Measured in square feet' >Floor Area: 
+<!--					<input id=inpFloorArea onchange = getGeometry(); class = floatRight > -->
+						<span id=inpFloorArea class = floatRight ></span>
+				</p>
+				<p title= 'Measured in feet' >Floor Height: 
+<!--					<select id=selFloorHeight onchange = getGeometry(); size= 1 >
+						<option>8</option>
+						<option>10</option>
+						<option selected >12</option>
+					</select> -->
+					<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = getGeometry(); class = floatRight >
+				</p>
+
+				<p title= 'measured in feet' >Perimeter Depth: 
+<!--					<select id=selPerimterDepth onchange = getGeometry(); size= 1 >
+						<option>8</option>
+						<option selected >10</option>
+						<option>12</option>
+					</select> -->
+					<input id=selPerimterDepth type = number min = 10 max = 20 value = 15 onchange = getGeometry(); class = floatRight >
+				</p
+				<p title= '' >Footprint Shape: 
+					<select id=selFootprintShape onchange = updateShape(); size= 5 >
+						<option>L Shape 1</option>
+						<option>L Shape 2</option>
+						<option>U Shape 1</option>
+						<option>U Shape 2</option>
+						<option value= 'createBoxShape' >Box Shape</option>
+					</select>
+
+<!--
+				<p title= '' >Footprint Relationship: 
+					<select id=selFootprintRelationship onchange = getGeometry(); size= 1 >
+						<option>Rectangular</option>
+						<option>L Shape 1</option>
+						<option>T Shape</option>
+					</select>
+-->
+				<p title= 'measured in percent' >Window Wall Ratio: <output id=outWWR ></output>
+					<input type=number id=inpWindowWallRatio min=0 max=100 step=5 value=40 onclick=updateShape();outWWR.value=value; class = floatRight />
+				</p>
+
+				<p title= '' >Overhang Depth: 
+					<input id=inpOverhangDepth min = 0 max = 2, step = 0.5 value = 0 onchange = updateShape(); class = floatRight ></p>
+
+				<p title= 'angle in degrees' >Orientation: 
+					<input type=number id=inpOrientation min = 0 max = 180, step = 5 value = 0 onchange = updateShape(); class = floatRight ></p>
+
+				<p title= '' >Length 1: 
+					<input type=number id=inpLength1 min = 0 max = 100, step = 1 value = 80 onchange = updateShape(); class = floatRight ></p>
+
+				<p title= '' >Width 1: 
+					<input type=number id=inpWidth1 min = 0 max = 100, step = 1 value = 50 onchange = updateShape(); class = floatRight ></p>
+
+			</details>
+
+		</div>
+
+		<div id = "contents" ></div>
+
+<script>
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
+	let geometry, material, mesh;
+
+const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+
+	init();
+
+	function init() {
+
+		title.innerHTML = '<h3><a href="" >' + document.title +'</a></h3>';
+
+		if ( parent && parent.THREE ) {
+
+			scope = parent;
+
+			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px'; // '400px';
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = menu.scrollHeight + 'px';
+
+			initVariables();
+
+		} else {
+
+
+			contents.innerHTML = '<iframe id=ifrContents src=build-well-test.html ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			menu.style.height = menu.scrollHeight + 'px';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		cameraHelper = scope.cameraHelper;
+
+		parameters = scope.parameters;
+		buildings = scope.meshes;
+		theBuilding = scope.theMesh;
+		terrain = scope.terrain;
+		structures = scope.structures;
+
+		getBuilding();
+
+		createBoxShape();
+		selFootprintShape.selectedIndex = 4;
+
+	}
+
+
+
+
+	function getBuilding() {
+
+		const building = buildings.getObjectByName( 'The Building' );
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === building.name ? 1 : 0.5;
+
+			}
+
+		} );
+
+		building.material.opacity = 1;
+
+		getGeometry();
+
+	}
+
+
+
+	function getGeometry() {
+
+		const area = parseFloat( inpBuildingArea.value );
+
+		const floors = parseInt( inpNumberOfFloors.value, 10 );
+
+		inpFloorArea.innerHTML = ( area / floors ).toLocaleString();
+
+		createBoxShape();
+	}
+
+
+	function updateShape() {
+
+		if ( !window[ selFootprintShape.value ] ) { alert( 'sorry! Only Box Shape works. \n Come back in a day or two. \n ;-)' ); return; }
+
+		window[ selFootprintShape.value ](); // neat trick if I say so myself
+
+	}
+
+
+
+	function createBoxShape() {
+
+		let building = buildings.getObjectByName( 'The Building' );
+
+
+		const len = parseFloat( inpLength1.value );
+		const wid = parseFloat( inpWidth1.value );
+		const hgt = parseFloat( inpFloorHeight.value );
+		const floors = parseFloat( inpNumberOfFloors.value );
+
+
+		buildings.remove( building );
+
+		building = new THREE.Object3D();
+
+		for ( var i = 0; i < floors; i++ ) {
+
+			wall = createWall( len, hgt );
+			wall.position.set( 0, i * hgt, 0 );
+			building.add( wall );
+
+			wall = createWall( len, hgt );
+	//		wall.rotation.y = - Math.PI / 2;
+			wall.position.set( 0, i * hgt, - wid );
+			building.add( wall );
+
+			wall = createWall( wid, hgt );
+			wall.rotation.y = Math.PI / 2;
+			wall.position.set( 0, i * hgt, 0 );
+			building.add( wall );
+
+			wall = createWall( wid, hgt );
+			wall.rotation.y = Math.PI / 2;
+			wall.position.x = len;
+			wall.position.set( len, i * hgt, 0 );
+			building.add( wall );
+
+
+		}
+
+		building.rotation.y = d2r * parseFloat( inpOrientation.value );
+		building.position.set( - 0.5 * len, 0, 0.5 * wid );
+
+		building.name = 'The Building';
+		buildings.add( building )
+
+	}
+
+
+	function createWall( length, height ) {
+
+		let shape, hole;
+				var geometry, material, mesh;
+		let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+		shape = new THREE.Shape( [ 
+			v2( 0, 0 ), 
+			v2( length, 0 ), 
+			v2( length, height ), 
+			v2( 0, height ),
+			v2( 0, 0 )
+		] );
+
+		hole = new THREE.Path();
+		hole.fromPoints( [ 
+			v2( 0.25 * length, 0.25 * height ), 
+			v2( 0.75 * length, 0.25 * height ), 
+			v2( 0.75 * length, 0.75 * height ), 
+			v2( 0.25 * length,  0.75 * height ),
+			v2( 0.25 * length, 0.25 * height ) 
+		] );
+//		hole.absarc( 0.5 * len, 0.5 * hgt, 0.3 * hgt, 0, -2 * Math.PI );
+
+		shape.holes.push( hole );
+
+		geometry = new THREE.ShapeGeometry( shape );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+		mesh = new THREE.Mesh( geometry, material );
+
+		return mesh;
+
+	}
+
+
+</script>
+</body>
+</html>
