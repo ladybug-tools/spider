@@ -199,7 +199,7 @@
 
 		} );
 
-		building.material.opacity = 1;
+		if ( building.material ) { building.material.opacity = 1; }
 
 	}
 
@@ -270,7 +270,6 @@
 // front length
 			wall = createExternalWall( len, hgt );
 			wall.position.set( 0, i * hgt, 0 );
-
 			wall.name = 
 				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
 				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 

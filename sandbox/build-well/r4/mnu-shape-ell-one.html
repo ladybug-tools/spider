@@ -10,7 +10,7 @@
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --menu-color: tomato; --menu-width: 300px; }
+	html { --menu-color: tomato; --menu-width: 350px; }
 
 	body { font: 12pt monospace; margin: 0 auto; padding: 0; max-width: 800px; }
 	a { color: var( --menu-color ); text-decoration: none; }
@@ -19,6 +19,7 @@
 	iframe { height: 500px; width: 800px; }
 	select { width: 100%; }
 	summary { outline: none; font-size: 18pt }
+	textarea { box-sizing: border-box; height: 200px; width: 100%; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --menu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
@@ -49,44 +50,47 @@
 			</p>
 -->
 
-				<p title = 'How many storeys?'>Number of Floors: 
-					<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
-				</p>
+			<p title = 'How many storeys?'>Number of Floors: 
+				<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
+			</p>
 
-				<p title= 'Measured in feet' >Floor Height: 
-					<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
-				</p>
+			<p title= 'Measured in feet' >Floor Height: 
+				<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
+			</p>
 
-				<p title= 'measured in feet' >Perimeter Depth: 
-					<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = updateShape(); class = floatRight >
-				</p>
+			<p title= 'measured in feet' >Perimeter Depth: 
+				<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = updateShape(); class = floatRight >
+			</p>
 
-				<p title= 'angle in degrees' >Orientation: 
-					<input type=number id=inpOrientation min = 0 max = 180, step = 5 value = 0 onchange = updateShape(); class = floatRight >
-				</p>
+			<p title= 'angle in degrees' >Orientation: 
+				<input type=number id=inpOrientation min = 0 max = 180, step = 5 value = 0 onchange = updateShape(); class = floatRight >
+			</p>
 
-				<p title= '' >Footprint Shape: 
-					<select id=selFootprintShape onchange = updateShape(); size= 5 >
-						<option value = 'createEllShapeOne' >L Shape 1</option>
-						<option>L Shape 2</option>
-						<option>U Shape 1</option>
-						<option>U Shape 2</option>
-						<option value= 'createBoxShape' >Box Shape</option>
-					</select>
+			<p title= '' >Footprint Shape: 
+				<select id=selFootprintShape onchange = updateShape(); size= 5 >
+					<option value = 'createEllShapeOne' >L Shape 1</option>
+					<option>L Shape 2</option>
+					<option>U Shape 1</option>
+					<option>U Shape 2</option>
+					<option value= 'createBoxShape' >Box Shape</option>
+				</select>
 
 
-				<p title= '' >Length 1: 
-					<input type=number id=inpLength1 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
+			<p title= '' >Length 1: 
+				<input type=number id=inpLength1 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
 
-				<p title= '' >Length 2: 
-					<input type=number id=inpLength2 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
+			<p title= '' >Length 2: 
+				<input type=number id=inpLength2 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
 
-				<p title= '' >Width 1: 
-					<input type=number id=inpWidth1 min = 0 max = 100, step = 1 value = 80 onchange = updateShape(); class = floatRight ></p>
+			<p title= '' >Width 1: 
+				<input type=number id=inpWidth1 min = 0 max = 100, step = 1 value = 80 onchange = updateShape(); class = floatRight ></p>
 
-				<p title= '' >Width 2: 
-					<input type=number id=inpWidth2 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
+			<p title= '' >Width 2: 
+				<input type=number id=inpWidth2 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
 
+			<p>Building Data:
+				<textarea id=buildingData ></textarea>
+			</p>
 
 		</div>
 
@@ -146,7 +150,7 @@
 
 			scope = ifrContents.contentWindow;
 
-			menu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+			menu.style.cssText += 'margin: 20px; position: absolute; right: 0; width: 350px; ';
 
 			ifrContents.onload = initVariables;
 
@@ -281,6 +285,12 @@
 // bottom horizontal
 			wall = createExternalWall( len1 + len2, hgt );
 			wall.position.set( 0, i * hgt, 0 );
+			wall.name = 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + ( len1 + len2 ) + ',0,0\n' + 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',3,' + ( len1 + len2 ) + ',0,' + hgt + '\n' + 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',4,0,0,' + hgt + '\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			wall = createPerimeterDepthWall( len1 + len2 - 2 * perDep, hgt );
@@ -290,6 +300,12 @@
 // top left horiz
 			wall = createExternalWall( len1, hgt );
 			wall.position.set( 0, i * hgt, - wid1 );
+			wall.name = 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,' + wid1 + ',0\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + len1 + ',' + wid1 + '\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',3,' + len1 + ',' + wid1 + ',' + hgt + '\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',4,0,' + wid1 + ',' + hgt + '\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			wall = createPerimeterDepthWall( len2 - 2 * perDep, hgt );
@@ -300,6 +316,12 @@
 			wall = createExternalWall( wid1, hgt );
 			wall.rotation.y = Math.PI / 2;
 			wall.position.set( 0, i * hgt, 0 );
+			wall.name = 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',2,0,' + wid1 + ',0\n' + 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',3,0,' + wid1 + ',' + hgt + '\n' + 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',4,0,0,' + hgt + '\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			wall = createPerimeterDepthWall( wid1 - 2 * perDep, hgt );
