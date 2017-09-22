@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-17" >
+<title>Build Well R5</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: fuchsia; --mnu-width: 350px; --mnu-back-color: bisque; }
+
+
+	html { height: 100%; }
+	body { font: 12pt monospace; height: 100%; margin: 0 0 0 var( --mnu-width ); overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ color: #aaaaaa; }
+	h2 { margin: 0; }
+
+	.highlight { background-color: lightgreen; }
+
+	#ifrContents { border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+	#ifrMenuSub { box-sizing: border-box; border: 1px solid var( --mnu-color ); overflow: hidden; width: 100%; }
+
+	#menu { background-color: var( --mnu-back-color ); border: 1px solid pink; box-sizing: border-box; max-width: 320px; margin: 20px; padding: 5px; position: absolute; left: 0; }
+
+</style>
+</head>
+<body>
+
+
+	<div id = "menu" >
+
+		<div id = "title" ></div>
+
+		<p>
+			<a href=JavaScript:loadMenu("mnu-site-context.html"); title='Save your files & adjust parameters' >Site Context</a> 
+			&raquo; <a href="mnu-site-context.html " target="_blank" title = 'standalone test script'  >&#x1F5D7;</a>
+		</p>
+		<p>
+			<a href=JavaScript:loadMenu("mnu-adjacent-buildings.html"); title ='Put your right building in and shake it all about.' >Adjacent Buildings</a>
+			&raquo; <a href="mnu-adjacent-buildings.html " target="_blank" title = 'standalone test script' >&#x1F5D7;</a>
+		</p>
+
+<!--		<p><a href=JavaScript:loadMenu("mnu-geometry.html"); >Geometry</a></p> -->
+
+		<p>
+			<a href=JavaScript:loadMenu("mnu-shape-box.html"); title = 'Cookie cutter architecture?' >Box Shape</a>
+			&raquo; <a href="mnu-shape-box.html " target="_blank" title = 'standalone test script' >&#x1F5D7;</a>
+		</p>
+
+
+<!--		<p><a href=JavaScript:loadMenu("mnu-shape-ell-one.html"); >L Shape</a></p> -->
+
+		<div id = "divMenuSub" ></div>
+
+	</div>
+
+	<iframe id=ifrContents src=build-well-threejs-test.html ></iframe>
+
+
+<script>
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		title.innerHTML = '<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+				('&#x24D8').link( 'https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/' ) + '</h2>';
+
+		txt = 
+			'<hr>' +
+			'<p>Welcome!</p>' +
+			'<p>Let us build a wellspring for living in. Buildings that spring from our well will help keep us well.</p>' +
+			'<p>Thank you Ben and Anton for guiding this effort - and to Mostapha for guidance in even bigger efforts.</p>' +
+			'<p class = highlight >Down to single shape menu. Let\'s get it working OK and the other shapes can follow suit./p>' +
+			'<p class = highlight >2017-09-22</p><hr>' +
+			'<p>RGB = XYZ</p>' +
+			'<p>Use one/two/three fingers to rotate/zoom/pan display in 3D<br>' +
+				'Or left/scroll/right with your pointing device</p>' +
+			'<p>Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors</p>' +
+		'';
+
+		divMenuSub.innerHTML = txt;
+
+	}
+
+/*
+
+			'<p>Shape menus not yet integrated with other menus.</p>' +
+			'<p>2017-09-21</p><hr>' +
+
+
+*/
+
+
+	function loadMenu( file ) {
+
+		divMenuSub.innerHTML = '<iframe id=ifrMenuSub src=' + file + '></iframe>'
+
+	}
+
+</script>
+</body>
+</html>

@@ -7,7 +7,12 @@ _A well for building well._
 
 <iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/sandbox/build-well/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-## Full Screen: [Build Well]( http://ladybug-tools.github.io/spider/sandbox/build-well/index.html )
+## Full Screen latest release: [Build Well]( http://ladybug-tools.github.io/spider/sandbox/build-well/index.html )
+
+#### 2017-09-21 [Build Well R4]( http://ladybug-tools.github.io/spider/sandbox/build-well/r4/build-well.html )
+#### 2017-09-21 [Build Well R3]( http://ladybug-tools.github.io/spider/sandbox/build-well/r3/build-well.html )
+#### 2017-09-20 [Build Well R2]( http://ladybug-tools.github.io/spider/sandbox/build-well/r2/build-well.html )
+#### 2017-09-17 [Build Well R1]( http://ladybug-tools.github.io/spider/sandbox/build-well/r1/build-well.html )
 
 ## Features
 
@@ -18,24 +23,77 @@ _A well for building well._
 
 ## To Do
 
-* 2017-09-21 ~ Color, shade and shadow
+
+### build-well.html
 * 2017-09-21 ~ Export data to CSV file
 * 2017-09-21 ~ Export to Open Studio JSON schema
-* 2017-09-21 ~ Floor area to update according to shape parameters
-* 2017-09-20 ~ User can update size of grid
+
+### build-well-threejs.html
+
+* 2017-09-22 ~ Add XYZ placards once we start having sufficent other inworld text needs
+	* Inworld text is a whole thing in itself. Add iy only when very necessary
+* 2017-09-21 ~ Color, shade and shadow
+
+
+### mnu-site-context.html
+
+* 2017-09-22 ~ Consider more suitable name for this menu item
+* 2017-09-22 ~ Add background color and toggle
+* 2017-09-22 ~ Add ground that can receive shadow
+* 2017-09-22 ~ Toggle rotation
+* 2017-09-22 ~ Add lat & Lon or geocoder input
+* 2017-09-22 ~ Add shade/shadow toggle
+* 2017-09-22 ~ Add solar calculator
+
+### mnu-adjacent-buildingshtml
+
+### mnu-box-shape.html
+
 
 
 ## Issues
 
+* 2017-09-22 ~ Validate all numeric entries before updating geometries
 * 2017-09-21 ~ Open file often fails
 * 2017-09-21 ~ Finish add data reporting parameters, eg openings, adjacent buildings
 * 2017-09-21 ~ Match building shapes to Ben's spec
 * 2017-09-21 ~ See if perimeter depth diagonals actually add any pertinent information
+	* Rule of thumb: Show what you will export and no more.
+	* Currently the external wall and perimeter depth walls provide sufficient data for downstream apps. No?
 * 2017-09-21 ~ Figure out overhangs
 * 2017-09-21 ~ All parameters need double checking to fix broken ones
 
+
+
 ## Change Log
 
+
+### 2017-09-22 ~ Theo
+
+
+* 10:47 ~ Start R5
+* build-well.html
+	* Iframe is more full screen
+	* Cut out geometry and L Shape for time being: let's get Box Shape right first
+* mnu-site-context.html
+	* Orientation is now input type number instead of type range
+	* Added updateGridSize
+	[x] 2017-09-20 ~ User can update size of grid
+* 13:48 ~ mnu-box-shape.html
+	* All aspects of the relevant geometry may be set from this menu
+	* All menu parameters interact
+		[x] 2017-09-21 ~ Floor area to update according to shape parameters
+	* Wall Window Ratio now operates as desired, updates model in real-time
+	* Save building data to csv files using Ben's format
+
+Questions 14:23
+
+* Would you define or explain overhang as used in this context? Link to authoritative illustrated reference would be cool.
+* Should 'The Building' offset and orientation be set in it's shape menus or in the Adjacent Buildings menu?
+* Should 'The Building' have an offset? Or should it always have its lower left corder at 0,0?
+* Should orientation of 'The Building' occur at its center point or it's lower left corner?
+* Currently Building Area and Floor Area are read only and are updated whenever length, width or number of foors are updated. if this satisfactory?
+ 
 
 ### 2017-09-21 ~ Theo
 
