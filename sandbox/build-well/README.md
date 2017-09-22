@@ -13,6 +13,8 @@ _A well for building well._
 
 * Create simple 3D building models by adjusting a variety of numerical parameters
 * Create site context by adding simple forms to represent adjacent structures
+* Create text reports for the geometry
+
 
 ## To Do
 
