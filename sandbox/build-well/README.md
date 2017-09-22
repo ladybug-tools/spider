@@ -12,7 +12,7 @@ _A well for building well._
 ## Features
 
 * Create simple 3D building models by adjusting a variety of numerical parameters
-
+* Create site context by adding simple forms to represent adjacent structures
 
 ## To Do
 
@@ -30,6 +30,7 @@ _A well for building well._
 * 2017-09-21 ~ Match building shapes to Ben's spec
 * 2017-09-21 ~ See if perimeter depth diagonals actually add any pertinent information
 * 2017-09-21 ~ Figure out overhangs
+* 2017-09-21 ~ All parameters need double checking to fix broken ones
 
 ## Change Log
 
