@@ -6,18 +6,21 @@
 <meta name = "description" content = "Basic Burning mAnalemma template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-09-19" >
-<title>Adjacent Buildings</title>
+<title>Menu Template</title>
 <style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --menu-color: fuchsia; --menu-width: 300px; }
 
 	body { font: 12pt monospace; margin: 0 auto; padding: 0; max-width: 800px; }
-	a { color: blue; text-decoration: none; }
+	a { color: var( --menu-color ); text-decoration: none; }
 	a:hover, a:focus{ color: #f1f1f1; }
 	h3 { margin: 0; }
 	iframe { height: 500px; width: 800px; }
 	select { width: 100%; }
 	summary { outline: none; font-size: 18pt }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: blue; cursor: pointer;padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --menu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -26,7 +29,7 @@
 
 	.floatRight { float: right; width: 70px;}
 
-	#menu { background-color: lavender; border: 1px solid blue; max-width: 300px; padding: 5px;  }
+	#menu { background-color: #efd; border: 1px solid var( --menu-color ); max-width: var( --menu-width ); padding: 5px;  }
 
 </style>
 </head>
@@ -36,42 +39,19 @@
 
 			<div id = "title" ></div>
 
-
 			<p title = 'Select a building to edit' >Building: 
 				<select id = selBuilding onchange = getBuilding(); size = 5 ></select>
 			</p>
 
 			<p id = "info" ></p>
 
-
-			<p title = 'Title of the model' >Name: 
-				<input id=inpName onchange = buildWell(); class = floatRight style=width:150px;  ></p>
-
-			<p title = 'horizontal distance from origin in feet' >offset x: 
-				<input type=number id=inpOffsetX onchange = buildWell(); class = floatRight ></p>
-
-			<p title = 'vertical distance from origin in feet'>offset y: 
-				<input type=number id=inpOffsetY onchange = buildWell(); class = floatRight ></p>
-
-			<p title = 'x distance in feet' >length: 
-				<input type=number id=inpLength onchange = buildWell(); class = floatRight ></p>
-
-			<p title = 'Y distance in feet' >width: 
-				<input type=number id=inpWidth onchange = buildWell(); class = floatRight ></p>
-
-			<p title = 'Z distance in feet' >height: 
-				<input type=number id=inpHeight onchange = buildWell(); class = floatRight ></p>
-
-			<p title = 'Site orientation in degrees' >angle: <output id=outRange ></output>
-				<input type=number type=number id=inpAngle min=0 max=180 step=5 value=0 onclick=buildWell(); class = floatRight />
-				
-			</p>
-
 		</div>
 
 		<div id = "contents" ></div>
 
 <script>
+
+	const ifrSource = 'build-well-threejs-test.html';
 
 	let scope;
 
@@ -95,7 +75,7 @@
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
-//		info.innerHTML = txt;
+		info.innerHTML = txt;
 
 		if ( parent && parent.THREE ) {
 
@@ -115,8 +95,7 @@
 
 		} else {
 
-
-			contents.innerHTML = '<iframe id=ifrContents src=build-well-test.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
@@ -149,7 +128,6 @@
 
 		updateSelectBuilding();
 
-
 	}
 
 
@@ -166,8 +144,6 @@
 
 		selBuilding.selectedIndex = 1;
 
-		getBuilding();
-
 	}
 
 
@@ -176,20 +152,6 @@
 
 //		const building = buildings.children[ selBuilding.selectedIndex ];
 		const building = buildings.getObjectByName( selBuilding.value );
-		const r2d = 180 / Math.PI;
-
-		if ( !building.material ) { alert( 'Kindly use the Geometry menu to update this masterpiece.' ); return; }
-
-		inpName.value = building.name;
-
-		inpOffsetX.value = building.position.x;
-		inpOffsetY.value = building.position.z;
-
-		inpLength.value = building.scale.x;
-		inpWidth.value = building.scale.z;
-
-		inpHeight.value = building.scale.y;
-		inpAngle.value = r2d * building.rotation.y;
 
 		buildings.traverse( function ( child ) {
 
@@ -202,43 +164,6 @@
 		} );
 
 		building.material.opacity = 1;
-
-
-
-	}
-
-
-
-	function buildWell() {
-
-		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
-
-		let building = buildings.getObjectByName( selBuilding.value );
-
-		const meshX = parseFloat( inpLength.value );
-		const meshY = parseFloat( inpHeight.value );
-		const meshZ = parseFloat( inpWidth.value );
-
-		const meshAngle = inpAngle === undefined  ? 0 : parseFloat( inpAngle.value ) * d2r;
-
-		const meshPositionX = parseFloat( inpOffsetX.value );
-		const meshPositionZ = inpOffsetY === undefined  ? 100 : parseFloat( inpOffsetY.value );
-
-//		name = building.name;
-		selBuilding.options[ selBuilding.selectedIndex ].innerHTML = name = inpName.value;
-
-		buildings.remove( building );
-
-		geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-		building = new THREE.Mesh( geometry, material );
-		building.scale.set( meshX, meshY, meshZ );
-		building.position.set( meshPositionX, 0.5 * meshY, meshPositionZ );
-		building.rotation.set( 0, meshAngle, 0 );
-		building.name = name;
-		buildings.add( building );
-
-//		getGeometry();
 
 	}
 

@@ -111,6 +111,8 @@
 
 <script>
 
+	const ifrSource = 'build-well-threejs-test.html';
+
 	let scope;
 
 	var THREE;
@@ -136,7 +138,7 @@
 
 			scope = parent;
 
-			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px'; // '400px';
+			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px';
 
 			initVariables();
 
@@ -150,13 +152,11 @@
 
 		} else {
 
-
-			contents.innerHTML = '<iframe id=ifrContents src=build-well-test.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
 			menu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
-
 
 			ifrContents.onload = initVariables;
 

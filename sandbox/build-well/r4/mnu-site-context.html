@@ -63,6 +63,8 @@
 
 <script>
 
+	const ifrSource = 'build-well-threejs-test.html';
+
 	let scope;
 
 	var THREE;
@@ -105,7 +107,7 @@
 
 		} else {
 
-			contents.innerHTML = '<iframe id=ifrContents src=build-well-test.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 

@@ -6,19 +6,21 @@
 <meta name = "description" content = "Basic Burning mAnalemma template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-09-19" >
-<title>Geometry</title>
+<title>L Shape</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
+	html { --menu-color: tomato; --menu-width: 300px; }
+
 	body { font: 12pt monospace; margin: 0 auto; padding: 0; max-width: 800px; }
-	a { color: blue; text-decoration: none; }
+	a { color: var( --menu-color ); text-decoration: none; }
 	a:hover, a:focus{ color: #f1f1f1; }
 	h3 { margin: 0; }
 	iframe { height: 500px; width: 800px; }
 	select { width: 100%; }
 	summary { outline: none; font-size: 18pt }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: blue; cursor: pointer;padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --menu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -27,7 +29,9 @@
 
 	.floatRight { float: right; width: 70px;}
 
-	#menu { background-color: lavender; border: 1px solid blue; max-width: 300px; padding: 5px;  }
+	#menu { background-color: #efd; border: 1px solid var( --menu-color ); max-width: var( --menu-width ); padding: 5px;  }
+
+	#divMenuShape { margin: 20px; position: absolute; right: 0; top: 300px; }
 
 </style>
 </head>
@@ -37,47 +41,24 @@
 
 			<div id = "title" ></div>
 
-			<p id = "info" ></p>
+<i>Click on 'L Shape 1' to start</i>
 
-<!--				<p><button onclick=getGeometry(); >Update Geometry</button></p> -->
-
-				<p title = 'Measured in square feet' >Building Area: 
-					<input id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 81000 class = floatRight >
-				</p>
+<!--
+			<p title = 'Select a building to edit' >Building: 
+				<select id = selBuilding onchange = getBuilding(); size = 5 ></select>
+			</p>
+-->
 
 				<p title = 'How many storeys?'>Number of Floors: 
-					<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = getGeometry(); class = floatRight >
-				</p>
-
-				<p title= 'Measured in square feet' >Floor Area: 
-<!--					<input id=inpFloorArea onchange = getGeometry(); class = floatRight > -->
-						<span id=inpFloorArea class = floatRight ></span>
+					<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
 				</p>
 
 				<p title= 'Measured in feet' >Floor Height: 
-<!--					<select id=selFloorHeight onchange = getGeometry(); size= 1 >
-						<option>8</option>
-						<option>10</option>
-						<option selected >12</option>
-					</select> -->
-					<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = getGeometry(); class = floatRight >
+					<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
 				</p>
 
 				<p title= 'measured in feet' >Perimeter Depth: 
-<!--					<select id=selPerimterDepth onchange = getGeometry(); size= 1 >
-						<option>8</option>
-						<option selected >10</option>
-						<option>12</option>
-					</select> -->
-					<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = getGeometry(); class = floatRight >
-				</p>
-
-				<p title= 'measured in percent' >Window Wall Ratio: <output id=outWWR ></output>
-					<input type=number id=inpWindowWallRatio min=0 max=100 step=5 value=40 onclick=updateShape();outWWR.value=value; class = floatRight />
-				</p>
-
-				<p title= '' >Overhang Depth: 
-					<input id=inpOverhangDepth min = 0 max = 2, step = 0.5 value = 0 onchange = updateShape(); class = floatRight >
+					<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = updateShape(); class = floatRight >
 				</p>
 
 				<p title= 'angle in degrees' >Orientation: 
@@ -86,30 +67,37 @@
 
 				<p title= '' >Footprint Shape: 
 					<select id=selFootprintShape onchange = updateShape(); size= 5 >
-						<option>L Shape 1</option>
+						<option value = 'createEllShapeOne' >L Shape 1</option>
 						<option>L Shape 2</option>
 						<option>U Shape 1</option>
 						<option>U Shape 2</option>
 						<option value= 'createBoxShape' >Box Shape</option>
 					</select>
 
-<!--
-				<p title= '' >Footprint Relationship: 
-					<select id=selFootprintRelationship onchange = getGeometry(); size= 1 >
-						<option>Rectangular</option>
-						<option>L Shape 1</option>
-						<option>T Shape</option>
-					</select>
--->
 
-				<div id=divMenuShape ></div>
+				<p title= '' >Length 1: 
+					<input type=number id=inpLength1 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
+
+				<p title= '' >Length 2: 
+					<input type=number id=inpLength2 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
+
+				<p title= '' >Width 1: 
+					<input type=number id=inpWidth1 min = 0 max = 100, step = 1 value = 80 onchange = updateShape(); class = floatRight ></p>
+
+				<p title= '' >Width 2: 
+					<input type=number id=inpWidth2 min = 0 max = 100, step = 1 value = 40 onchange = updateShape(); class = floatRight ></p>
 
 
 		</div>
 
+
+
+
 		<div id = "contents" ></div>
 
 <script>
+
+	const ifrSource = 'build-well-threejs-test.html';
 
 	let scope;
 
@@ -132,11 +120,15 @@
 
 		title.innerHTML = '<h3><a href="" >' + document.title +'</a></h3>';
 
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+//		info.innerHTML = txt;
+
 		if ( parent && parent.THREE ) {
 
 			scope = parent;
 
-			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px'; // '400px';
+			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px';
 
 			initVariables();
 
@@ -150,13 +142,11 @@
 
 		} else {
 
-
-			contents.innerHTML = '<iframe id=ifrContents src=build-well-test.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
 			menu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
-
 
 			ifrContents.onload = initVariables;
 
@@ -180,12 +170,28 @@
 
 		parameters = scope.parameters;
 		buildings = scope.meshes;
-		theBuilding = scope.theMesh;
 		terrain = scope.terrain;
 		structures = scope.structures;
 
-		createBoxShapeMenu()
+//		updateSelectBuilding();
 
+//		createBoxShapeMenu();
+
+	}
+
+
+
+	function updateSelectBuilding() {
+
+		selBuilding.innerHTML = '';
+
+		for ( let building of buildings.children ) {
+
+			selBuilding.innerHTML += '<option>' + building.name + '</option>'; 
+
+		}
+
+		selBuilding.selectedIndex = 1;
 
 	}
 
@@ -193,6 +199,7 @@
 
 	function getBuilding() {
 
+//		const building = buildings.children[ selBuilding.selectedIndex ];
 		const building = buildings.getObjectByName( 'The Building' );
 
 		buildings.traverse( function ( child ) {
@@ -205,23 +212,7 @@
 
 		} );
 
-		if ( building.material ) { building.material.opacity = 1; }
-
-		getGeometry();
-
-	}
-
-
-
-	function getGeometry() {
-
-		const area = parseFloat( inpBuildingArea.value );
-
-		const floors = parseInt( inpNumberOfFloors.value, 10 );
-
-		inpFloorArea.innerHTML = ( area / floors ).toLocaleString();
-
-		updateShape();
+		building.material.opacity = 1;
 
 	}
 
@@ -231,29 +222,6 @@
 		if ( !window[ selFootprintShape.value ] ) { alert( 'sorry! Only Box Shape works. \n Come back in a day or two. \n ;-)' ); return; }
 
 		window[ selFootprintShape.value ](); // neat trick if I say so myself
-
-	}
-
-
-
-
-	function createBoxShape() {
-
-		let building = buildings.getObjectByName( 'The Building' );
-		const len = parseFloat( inpLength1.value );
-		const wid = parseFloat( inpWidth1.value );
-
-		buildings.remove( building );
-
-		building = new THREE.Object3D();
-
-		createFloors( building );
-
-		building.rotation.y = d2r * parseFloat( inpOrientation.value );
-//		building.position.set( - 0.5 * len, 0, 0.5 * wid );
-
-		building.name = 'The Building';
-		buildings.add( building )
 
 	}
 
@@ -269,71 +237,133 @@
 					'<input type=number id=inpWidth1 min = 0 max = 100, step = 1 value = 50 onchange=updateShape(); class = floatRight ></p>' +
 		'';
 
-		selFootprintShape.selectedIndex = 4;
+//		selFootprintShape.selectedIndex = 4;
 
 		getBuilding();
 
 	}
 
 
+	function createEllShapeOne() {
+
+		let building = buildings.getObjectByName( 'The Building' );
+		const len1 = parseFloat( inpLength1.value );
+		const wid1 = parseFloat( inpWidth1.value );
+
+		buildings.remove( building );
+
+		building = new THREE.Object3D();
+
+		createFloors( building );
+
+		building.rotation.y = d2r * parseFloat( inpOrientation.value );
+
+		building.name = 'The Building';
+		buildings.add( building )
+
+	}
+
+
+
+
 	function createFloors( building ) {
 
-		const len = parseFloat( inpLength1.value );
-		const wid = parseFloat( inpWidth1.value );
+		const len1 = parseFloat( inpLength1.value );
+		const len2 = parseFloat( inpLength2.value );
+		const wid1 = parseFloat( inpWidth1.value );
+		const wid2 = parseFloat( inpWidth2.value );
 		const hgt = parseFloat( inpFloorHeight.value );
 		const floors = parseFloat( inpNumberOfFloors.value );
 		const perDep = parseFloat( inpPerimterDepth.value );
 
 		for ( var i = 0; i < floors; i++ ) {
 
-			wall = createExternalWall( len, hgt );
+// bottom horizontal
+			wall = createExternalWall( len1 + len2, hgt );
 			wall.position.set( 0, i * hgt, 0 );
 			building.add( wall );
 
-			wall = createPerimeterDepthWall( len - 2 * perDep, hgt );
+			wall = createPerimeterDepthWall( len1 + len2 - 2 * perDep, hgt );
 			wall.position.set( perDep, i * hgt, - perDep );
 			building.add( wall );
 
-			wall = createExternalWall( len, hgt );
-			wall.position.set( 0, i * hgt, - wid );
+// top left horiz
+			wall = createExternalWall( len1, hgt );
+			wall.position.set( 0, i * hgt, - wid1 );
 			building.add( wall );
 
-			wall = createPerimeterDepthWall( len - 2 * perDep, hgt );
-			wall.position.set( perDep, i * hgt, - wid + perDep );
+			wall = createPerimeterDepthWall( len2 - 2 * perDep, hgt );
+			wall.position.set( perDep, i * hgt, - wid1 + perDep );
 			building.add( wall );
 
-			wall = createExternalWall( wid, hgt );
+// left vertical
+			wall = createExternalWall( wid1, hgt );
 			wall.rotation.y = Math.PI / 2;
 			wall.position.set( 0, i * hgt, 0 );
 			building.add( wall );
 
-			wall = createPerimeterDepthWall( wid - 2 * perDep, hgt );
+			wall = createPerimeterDepthWall( wid1 - 2 * perDep, hgt );
 			wall.rotation.y = Math.PI / 2;
 			wall.position.set( perDep, i * hgt, -perDep );
 			building.add( wall );
 
-			wall = createExternalWall( wid, hgt );
+// right vertical
+			wall = createExternalWall( wid2, hgt );
 			wall.rotation.y = Math.PI / 2;
-			wall.position.set( len, i * hgt, 0 );
+			wall.position.set( len1 + len2, i * hgt, 0 );
 			building.add( wall );
 
-			wall = createPerimeterDepthWall( wid - 2 * perDep, hgt );
+			wall = createPerimeterDepthWall( wid2 - 2 * perDep, hgt );
 			wall.rotation.y = Math.PI / 2;
-			wall.position.set( len - perDep, i * hgt, -perDep );
+			wall.position.set( len1 + len2 - perDep, i * hgt, -perDep );
 			building.add( wall );
 
-			floor = createFloor( len, wid );
+// mid vertical
+			wall = createExternalWall( wid1 - wid2, hgt );
+			wall.rotation.y = Math.PI / 2;
+			wall.position.set( len1, i * hgt, -wid2 );
+			building.add( wall );
+
+			wall = createPerimeterDepthWall( wid1 - wid2 - 0 * perDep, hgt );
+			wall.rotation.y = Math.PI / 2;
+			wall.position.set( len1 - perDep, i * hgt, - wid2 + perDep );
+			building.add( wall );
+
+
+// mid horizontal
+			wall = createExternalWall( len2, hgt );
+			wall.position.set( len1, i * hgt, - wid2 );
+			building.add( wall );
+
+
+			wall = createPerimeterDepthWall( len2, hgt );
+			wall.position.set( len1 - perDep, i * hgt, - wid2 + perDep );
+			building.add( wall );
+
+
+// floor
+			floor = createFloor( len1, wid1 );
 			floor.rotation.x = - Math.PI / 2;
 			floor.position.set( 0, i * hgt, 0 );
+			building.add( floor );
+
+			floor = createFloor( len2, wid2 );
+			floor.rotation.x = - Math.PI / 2;
+			floor.position.set( len1, i * hgt, 0 );
 			building.add( floor );
 
 		}
 
 // floors can be roofs?? ;-)
 
-		floor = createFloor( len, wid );
+		floor = createFloor( len2, wid1 );
 		floor.rotation.x = - Math.PI / 2;
 		floor.position.set( 0, i * hgt, 0 );
+		building.add( floor );
+
+		floor = createFloor( len2, wid2 );
+		floor.rotation.x = - Math.PI / 2;
+		floor.position.set( len1, i * hgt, 0 );
 		building.add( floor );
 
 	}
@@ -384,7 +414,7 @@
 			v2( 0.25 * length, 0.25 * height ) 
 		] );
 
-//		hole.absarc( 0.5 * len, 0.5 * hgt, 0.3 * hgt, 0, -2 * Math.PI );
+//		hole.absarc( 0.5 * len2, 0.5 * hgt, 0.3 * hgt, 0, -2 * Math.PI );
 
 		shape.holes.push( hole );
 
@@ -418,6 +448,7 @@
 		return mesh;
 
 	}
+
 
 </script>
 </body>

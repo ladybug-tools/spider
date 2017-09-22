@@ -20,9 +20,17 @@ _A well for building well._
 
 ### 2017-09-21 ~ Theo
 
+
 * 11:30 ~ start r3. working on ui/css
 * 12:33 ~ UI cleaned up. No more details/summary. all html files controlled from container file
 	* start fixing bugs in adjacent-buildings.html
+* 13:26 ~ most everything good in AB and G. Added floors, roof and internal walls to box shape. Now star L Shape
+
+* 15:15 ~  R4 started. Box shape in its own file. Will try to replicate with L Shape
+* 2017-09-21 ~ BS * LS both operating quite well
+
+abbreviations relate to names of HTML files; ab = adjacent-buildings.html
+
 
 ### 2017-09-20 ~ Theo
 
@@ -35,7 +43,7 @@ _A well for building well._
 	* Makes testing and coding and understanding what's going on a bit easier
 	* Currently the data is not shared between the scripts. The liaison should happen in the next release
 * Also coming soon will the internal walls, adjusting window sizes and the different shapes
- 
+
 ### 2017-09-18 
 
 ### Buildings Menu

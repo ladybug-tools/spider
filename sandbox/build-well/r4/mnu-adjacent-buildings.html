@@ -36,13 +36,11 @@
 
 			<div id = "title" ></div>
 
-
 			<p title = 'Select a building to edit' >Building: 
 				<select id = selBuilding onchange = getBuilding(); size = 5 ></select>
 			</p>
 
 			<p id = "info" ></p>
-
 
 			<p title = 'Title of the model' >Name: 
 				<input id=inpName onchange = buildWell(); class = floatRight style=width:150px;  ></p>
@@ -72,6 +70,8 @@
 		<div id = "contents" ></div>
 
 <script>
+
+	const ifrSource = 'build-well-threejs-test.html';
 
 	let scope;
 
@@ -115,8 +115,7 @@
 
 		} else {
 
-
-			contents.innerHTML = '<iframe id=ifrContents src=build-well-test.html ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
