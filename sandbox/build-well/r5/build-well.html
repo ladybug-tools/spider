@@ -10,8 +10,7 @@
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: fuchsia; --mnu-width: 350px; --mnu-back-color: bisque; }
-
+	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 350px; height: 100%; }
 
 	html { height: 100%; }
 	body { font: 12pt monospace; height: 100%; margin: 0 0 0 var( --mnu-width ); overflow: hidden; }
@@ -72,7 +71,7 @@
 		let txt;
 
 		title.innerHTML = '<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
-				('&#x24D8').link( 'https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/' ) + '</h2>';
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a></h2>';
 
 		txt = 
 			'<hr>' +

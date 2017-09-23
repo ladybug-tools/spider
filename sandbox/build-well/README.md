@@ -17,8 +17,10 @@ _A well for building well._
 ## Features
 
 * Create simple 3D building models by adjusting a variety of numerical parameters
-* Create site context by adding simple forms to represent adjacent structures
+* Create site context by adding, editing, saving or deleting simple forms to represent adjacent structures
+* Update building models by selecting parameters from menus
 * Create text reports for the geometry
+* Every menu item is built on its own standalone, easy-peasy test case 
 
 
 ## To Do
@@ -45,7 +47,9 @@ _A well for building well._
 * 2017-09-22 ~ Add shade/shadow toggle
 * 2017-09-22 ~ Add solar calculator
 
-### mnu-adjacent-buildingshtml
+### mnu-adjacent-buildings.html
+
+* 2017-09-22 ~ Allow any and all buildings to have shape parameters?
 
 ### mnu-box-shape.html
 
@@ -91,8 +95,8 @@ Questions 14:23
 * Would you define or explain overhang as used in this context? Link to authoritative illustrated reference would be cool.
 * Should 'The Building' offset and orientation be set in it's shape menus or in the Adjacent Buildings menu?
 * Should 'The Building' have an offset? Or should it always have its lower left corder at 0,0?
-* Should orientation of 'The Building' occur at its center point or it's lower left corner?
-* Currently Building Area and Floor Area are read only and are updated whenever length, width or number of foors are updated. if this satisfactory?
+* Should orientation of 'The Building' occur at its center point or its lower left corner?
+* Currently Building Area and Floor Area are read only and are updated whenever length, width or number of f,oors are updated. Is this satisfactory?
  
 
 ### 2017-09-21 ~ Theo
