@@ -32,7 +32,7 @@ _A well for building well._
 
 ### build-well-threejs.html
 
-* 2017-09-22 ~ Add XYZ placards once we start having sufficent other inworld text needs
+* 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
 	* Inworld text is a whole thing in itself. Add iy only when very necessary
 * 2017-09-21 ~ Color, shade and shadow
 
@@ -40,9 +40,7 @@ _A well for building well._
 ### mnu-site-context.html
 
 * 2017-09-22 ~ Consider more suitable name for this menu item
-* 2017-09-22 ~ Add background color and toggle
 * 2017-09-22 ~ Add ground that can receive shadow
-* 2017-09-22 ~ Toggle rotation
 * 2017-09-22 ~ Add lat & Lon or geocoder input
 * 2017-09-22 ~ Add shade/shadow toggle
 * 2017-09-22 ~ Add solar calculator
@@ -57,6 +55,7 @@ _A well for building well._
 
 ## Issues
 
+* 2017-09-23 ~ Better handling of data when switching tabs after a shape has been created
 * 2017-09-22 ~ Validate all numeric entries before updating geometries
 * 2017-09-21 ~ Open file often fails
 * 2017-09-21 ~ Finish add data reporting parameters, eg openings, adjacent buildings
@@ -83,6 +82,8 @@ _A well for building well._
 * 16:34 ~ ell is swell. Biting the bullet. Setting Z axis as up. 
 * 17:30 ~ mnu-adjacent-buildings.html is now OK with Z up
 * 19:38 ~ L shape is mostly back. Both Box and L OK with Z being up
+[x] 2017-09-22 ~ Toggle rotation
+[x] 2017-09-22 ~ Add background color and toggle
 
 ### 2017-09-22 ~ Theo
 
