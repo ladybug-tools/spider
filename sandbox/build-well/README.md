@@ -81,7 +81,8 @@ _A well for building well._
 15:18 ~ 
 * start mnu-shape-ell-one.html r2
 * 16:34 ~ ell is swell. Biting the bullet. Setting Z axis as up. 
-17:30 ~ mnu-adjacent-buildings.html is now OK with Z up
+* 17:30 ~ mnu-adjacent-buildings.html is now OK with Z up
+* 19:38 ~ L shape is mostly back. Both Box and L OK with Z being up
 
 ### 2017-09-22 ~ Theo
 
