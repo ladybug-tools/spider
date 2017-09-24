@@ -18,7 +18,7 @@
 	h3 { margin: 0; }
 	iframe { height: 500px; width: 800px; }
 	select { width: 100%; }
-	summary { outline: none; font-size: 18pt; }
+	summary { outline: none; font-size: 14pt; }
 	textarea { box-sizing: border-box; height: 200px; width: 100%; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
@@ -62,19 +62,36 @@
 			<input type=number id=inpSiteOrientation min=-180 max=180 step=1 value=0 onclick=updateSiteOrientation(); class = floatRight />
 		</p>
 
-		<p title = 'Size in feet. Lines every 20 feet.' >Grid Size:
-			<input type=number id=inpGridSize min=10 max=1000 step=10 value=200 list = "defaultNumbers" required onchange=updateGridSize(); class = floatRight />
+		<details open >
 
-			<span class="validity"></span>
+			<summary> Display settings </summary>
 
-			<datalist id="defaultNumbers">
-			  <option value="100">
-			  <option value="200">
-			  <option value="500">
-			  <option value="1000">
-			  <option value="2000">
-			</datalist>
-		</p>
+			<p title = 'Size in feet. Lines every 20 feet.' >Grid Size:
+				<input type=number id=inpGridSize min=10 max=1000 step=10 value=200 list = "defaultNumbers" required onchange=updateGridSize(); class = floatRight />
+
+				<datalist id="defaultNumbers">
+					<option value="100">
+					<option value="200">
+					<option value="500">
+					<option value="1000">
+					<option value="2000">
+				</datalist>
+
+			</p>
+
+			<p><button onclick=toggleSceneAutoRotate() title= 'Stop the sinning!' > Toggle scene rotation </button></p>
+
+			<p><button onclick=toggleHelpers(); title = 'Make axis and grid invisible' > Toggle helpers </button></p>
+
+			<p><button onclick=toggleGround(); '> Toggle ground </button></p>
+
+			<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>
+
+			<p><button onclick=toggleEdges(); >Toggle edges </button></p>
+
+			<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
+
+		</details>
 
 	</div>
 
@@ -83,6 +100,8 @@
 <script>
 
 	const ifrSource = 'build-well-threejs-test.html';
+
+	var meshEdges;
 
 	let scope;
 
@@ -109,7 +128,6 @@
 //		info.innerHTML = txt;
 
 		if ( parent && parent.THREE ) {
-
 
 			scope = parent;
 
@@ -150,6 +168,8 @@
 
 		lightDirectional = scope.lightDirectional;
 		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
 		parameters = scope.parameters;
@@ -200,8 +220,8 @@
 	function addBuilding() {
 
 		let building = scope.createMesh();
-		building.scale.set ( 20, 50, 20 )
-		building.position.set( 0, 0.5 * building.scale.y, 0 );
+		building.scale.set ( 20, 20, 50 );
+		building.position.set( 0, 0, 0.5 * building.scale.z );
 		buildings.add( building );
 
 		updateSelectBuilding()
@@ -234,12 +254,13 @@
 
 		const d2r = Math.PI / 180;
 
-		outSiteOrientation.value = inpSiteOrientation.value;
-
-		buildings.rotation.y = d2r * parseFloat( inpSiteOrientation.value );
+		buildings.rotation.z = d2r * parseFloat( inpSiteOrientation.value );
 
 	}
 
+
+
+// Display Settings
 
 
 	function updateGridSize() {
@@ -247,6 +268,101 @@
 		scope.addHelpers( parseInt( inpGridSize.value, 10 ) );
 
 	}
+
+
+
+	function toggleHelpers() {
+
+		gridHelper.visible = !gridHelper.visible;
+		axisHelper.visible = !axisHelper.visible;
+
+	}
+
+
+
+	function toggleGround() {
+
+		groundHelper.visible = !groundHelper.visible;
+
+	}
+
+
+
+	function toggleSceneAutoRotate() {
+
+		controls.autoRotate = !controls.autoRotate;
+
+	}
+
+
+
+	function toggleWireframe() {
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.wireframe = !child.material.wireframe;
+
+			}
+
+		} );
+
+	}
+
+
+
+	function toggleEdges() {
+console.log( '', buildings  );
+
+		if ( !meshEdges ) {
+
+//			meshesEdges = new THREE.Object3D();
+			buildings.traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh ) {
+
+					const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
+					let meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+					meshEdges.visible = false;
+
+					child.add( meshEdges );
+
+				}
+
+			} );
+
+//			scene.add( meshesEdges );
+
+		}
+
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.LineSegments ) {
+
+				child.visible = child.visible === true ? false : true;
+
+			}
+
+		} );
+
+	}
+
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = scope.document.body.style.backgroundImage;
+
+		scope.document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
 
 
 	function saveFile() {

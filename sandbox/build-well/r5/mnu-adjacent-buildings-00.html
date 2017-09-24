@@ -10,17 +10,18 @@
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 300px;  height: 100%; }
+	html { --mnu-color: blue; --mnu-back-color: lavender }
 
-	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	body { font: 12pt monospace; margin: 0 auto; padding: 0; max-width: 800px; }
 	a { color: var( --mnu-color ); text-decoration: none; }
-	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	a:hover, a:focus{ color: #f1f1f1; }
 	h3 { margin: 0; }
-
+	iframe { height: 500px; width: 800px; }
 	select { width: 100%; }
-	summary { outline: none; font-size: 14pt }
+	summary { outline: none; font-size: 18pt; }
+	textarea { box-sizing: border-box; height: 200px; width: 100%; }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -29,16 +30,13 @@
 
 	.floatRight { float: right; width: 70px;}
 
-	#divContents { height: 100%; width: 100%; }
-	#ifrContents { box-sizing: border-box; border: 5px solid var( --mnu-color ); height: 100%; width: 100%; }
-
-	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+	#menu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px; }
 
 </style>
 </head>
 <body>
 
-		<div id = "divMenu" >
+		<div id = "menu" >
 
 			<div id = "title" ></div>
 
@@ -51,29 +49,29 @@
 			<p title = 'Title of the model' >Name: 
 				<input id=inpName onchange = buildWell(); class = floatRight style=width:150px;  ></p>
 
-			<p title = 'left and right from origin in feet' >offset x: 
+			<p title = 'horizontal distance from origin in feet' >offset x: 
 				<input type=number id=inpOffsetX onchange = buildWell(); class = floatRight ></p>
 
-			<p title = 'front and back distance from origin in feet'>offset y: 
+			<p title = 'vertical distance from origin in feet'>offset y: 
 				<input type=number id=inpOffsetY onchange = buildWell(); class = floatRight ></p>
 
 			<p title = 'x distance in feet' >length: 
-				<input type=number id=inpLength min = 1 onchange = buildWell(); class = floatRight ></p>
+				<input type=number id=inpLength onchange = buildWell(); class = floatRight ></p>
 
 			<p title = 'Y distance in feet' >width: 
-				<input type=number id=inpWidth min = 1 onchange = buildWell(); class = floatRight ></p>
+				<input type=number id=inpWidth onchange = buildWell(); class = floatRight ></p>
 
 			<p title = 'Z distance in feet' >height: 
-				<input type=number id=inpHeight min = 1 max = 1000 step = 1onchange = buildWell(); class = floatRight ></p>
+				<input type=number id=inpHeight onchange = buildWell(); class = floatRight ></p>
 
-			<p title = 'Site orientation in degrees' >angle:
-				<input type=number type=number id=inpAngle min=-180 max=180 step=5 value=0 onchange=buildWell(); class = floatRight />
+			<p title = 'Site orientation in degrees' >angle: <output id=outRange ></output>
+				<input type=number type=number id=inpAngle min=0 max=180 step=5 value=0 onclick=buildWell(); class = floatRight />
 				
 			</p>
 
 		</div>
 
-		<div id = "divContents" ></div>
+		<div id = "contents" ></div>
 
 <script>
 
@@ -104,21 +102,29 @@
 
 //		info.innerHTML = txt;
 
-		if ( parent && parent.ifrContents ) {
+		if ( parent && parent.THREE ) {
+
+			scope = parent;
+
+			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px';
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
 
 			scope = parent.ifrContents.contentWindow;
 
-			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 10 ) + 'px';
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 10 ) + 'px';
 
 			initVariables();
 
 		} else {
 
-			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+			contents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
-			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+			menu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
 
 			ifrContents.onload = initVariables;
 
@@ -138,8 +144,6 @@
 
 		lightDirectional = scope.lightDirectional;
 		axisHelper = scope.axisHelper;
-		gridHelper = scope.gridHelper;
-		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
 		parameters = scope.parameters;
@@ -182,13 +186,13 @@
 		inpName.value = building.name;
 
 		inpOffsetX.value = building.position.x;
-		inpOffsetY.value = building.position.y;
+		inpOffsetY.value = building.position.z;
 
 		inpLength.value = building.scale.x;
-		inpWidth.value = building.scale.y;
+		inpWidth.value = building.scale.z;
 
-		inpHeight.value = building.scale.z;
-		inpAngle.value = r2d * building.rotation.z;
+		inpHeight.value = building.scale.y;
+		inpAngle.value = r2d * building.rotation.y;
 
 		buildings.traverse( function ( child ) {
 
@@ -215,13 +219,13 @@
 		let building = buildings.getObjectByName( selBuilding.value );
 
 		const meshX = parseFloat( inpLength.value );
-		const meshY = parseFloat( inpWidth.value );
-		const meshZ = parseFloat( inpHeight.value );
+		const meshY = parseFloat( inpHeight.value );
+		const meshZ = parseFloat( inpWidth.value );
 
-		const meshAngle = parseFloat( inpAngle.value ) * d2r;
+		const meshAngle = inpAngle === undefined  ? 0 : parseFloat( inpAngle.value ) * d2r;
 
 		const meshPositionX = parseFloat( inpOffsetX.value );
-		const meshPositionY = parseFloat( inpOffsetY.value );
+		const meshPositionZ = inpOffsetY === undefined  ? 100 : parseFloat( inpOffsetY.value );
 
 //		name = building.name;
 		selBuilding.options[ selBuilding.selectedIndex ].innerHTML = name = inpName.value;
@@ -232,8 +236,8 @@
 		material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 		building = new THREE.Mesh( geometry, material );
 		building.scale.set( meshX, meshY, meshZ );
-		building.position.set( meshPositionX, meshPositionY, 0.5 * meshZ );
-		building.rotation.set( 0, 0, meshAngle );
+		building.position.set( meshPositionX, 0.5 * meshY, meshPositionZ );
+		building.rotation.set( 0, meshAngle, 0 );
 		building.name = name;
 		buildings.add( building );
 

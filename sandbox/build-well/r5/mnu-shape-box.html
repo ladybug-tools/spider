@@ -3,25 +3,25 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic Burning mAnalemma template" >
+<meta name = "description" content = "parametric shape creator" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-19" >
-<title>Box Shape</title>
+<meta name = "date" content = "2017-09-23" >
+<title>Box Shape R2</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: tomato; --mnu-back-color: cornsilk; }
+	html { --mnu-color: tomato; --mnu-back-color: cornsilk; --mnu-width: 350px; height: 100%; }
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
-	a:hover, a:focus{ color: #f1f1f1; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
 	h3 { margin: 0; }
-	iframe { height: 500px; width: 800px; }
+
 	select { width: 100%; }
-	summary { outline: none; font-size: 18pt; }
+	summary { outline: none; font-size: 14pt }
 	textarea { box-sizing: border-box; height: 200px; width: 100%; }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -30,28 +30,31 @@
 
 	.floatRight { float: right; width: 70px;}
 
-	#menu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px; }
+	#divContents { height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
 
 
 </style>
 </head>
 <body>
 
-		<div id = "menu" >
+		<div id = "divMenu" >
 
 			<div id = "title" ></div>
 
+			<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
 			<p title = 'Measured in square feet' >Building Area: 
 				<span id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 81000 class = floatRight ></span>
 			</p>
 
 			<p title = 'How many storeys?'>Number of Floors: 
-				<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
+				<input selected id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
 			</p>
 
 			<p title= 'Measured in square feet' >Floor Area: 
-<!--					<input id=inpFloorArea onchange = getGeometry(); class = floatRight > -->
-					<span id=inpFloorArea class = floatRight >0</span>
+				<span id=inpFloorArea class = floatRight >0</span>
 			</p>
 
 			<p title= 'Measured in feet' >Floor Height: 
@@ -62,8 +65,8 @@
 				<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = updateShape(); class = floatRight >
 			</p>
 
-			<p title= 'measured in percent' >Window Wall Ratio: <output id=outWWR ></output>
-				<input type=number id=inpWindowWallRatio min=1 max=99 step=5 value=40 onclick=updateShape();outWWR.value=value; class = floatRight />
+			<p title= 'measured in percent' >Window Wall Ratio:
+				<input type=number id=inpWindowWallRatio min=1 max=99 step=5 value=40 onclick=updateShape(); class = floatRight />
 			</p>
 
 			<p title= '' >Overhang Depth: 
@@ -74,25 +77,25 @@
 				<input type=number id=inpOrientation min = -180 max = 180, step = 5 value = 0 onchange = updateShape(); class = floatRight >
 			</p>
 
-			<p title= "" >Length 1:
+			<p title= "" >Building Length:
 				<input type=number id=inpLength1 min = 0 max = 100, step = 1 value = 80 onchange=updateShape(); class = floatRight >
 			</p>
 
-			<p title= "" >Width 1:
+			<p title= "" >Building Width:
 				<input type=number id=inpWidth1 min = 0 max = 100, step = 1 value = 50 onchange=updateShape(); class = floatRight >
 			</p>
 
-			<p>Building Data:
+			<p>Building Data (currently faulty):
 				<textarea id=buildingData ></textarea>
 			</p>
 
 			<p>
-				<button onclick = saveFile(); >save buildong data to file</button> 
+				<button onclick = saveFile(); >save building data to file</button> 
 			</p>
 
 		</div>
 
-		<div id = "contents" ></div>
+		<div id = "divContents" ></div>
 
 <script>
 
@@ -120,37 +123,31 @@
 		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
 			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a></h3>';
 
-		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
 //		info.innerHTML = txt;
 
-		if ( parent && parent.THREE ) {
-
-			scope = parent;
-
-			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px';
-
-			initVariables();
-
-		} else if ( parent && parent.ifrContents ) {
+		if ( parent && parent.ifrContents ) {
 
 			scope = parent.ifrContents.contentWindow;
 
-			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 100 ) + 'px';
+			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 100 ) + 'px';
 
 			initVariables();
 
 		} else {
 
-			contents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
-			menu.style.cssText += 'margin: 20px; position: absolute; right: 0; ';
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0; ';
 
 			ifrContents.onload = initVariables;
 
 		}
+
+		inpNumberOfFloors.focus();
 
 	}
 
@@ -166,6 +163,8 @@
 
 		lightDirectional = scope.lightDirectional;
 		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
 		parameters = scope.parameters;
@@ -195,8 +194,8 @@
 		} );
 
 		inpLength1.value = building.scale.x;
-		inpWidth1.value = building.scale.z;
-		inpBuildingArea.innerHTML = building.scale.x * building.scale.z;
+		inpWidth1.value = building.scale.y;
+		inpBuildingArea.innerHTML = building.scale.x * building.scale.y;
 
 		updateShape();
 
@@ -218,8 +217,7 @@
 
 		createFloors( building );
 
-		building.rotation.y = d2r * parseFloat( inpOrientation.value );
-//		building.position.set( - 0.5 * len, 0, 0.5 * wid );
+		building.rotation.z = d2r * parseFloat( inpOrientation.value );
 
 		building.name = 'The Building';
 		buildings.add( building )
@@ -257,17 +255,20 @@ Sometimes derp is good. Sometimes not.
 Remember: It’s much easier to recover from no abstraction than the wrong abstraction
 
 */
+
 		const len = parseFloat( inpLength1.value );
 		const wid = parseFloat( inpWidth1.value );
 		const hgt = parseFloat( inpFloorHeight.value );
 		const floors = parseFloat( inpNumberOfFloors.value );
 		const perDep = parseFloat( inpPerimterDepth.value );
+		const len05 = len * 0.5;
+		const wid05 = wid * 0.5;
 
 		for ( var i = 0; i < floors; i++ ) {
 
-// front length
+// length front
 			wall = createExternalWall( len, hgt );
-			wall.position.set( 0, i * hgt, 0 );
+			wall.position.set( -len05, -wid05, i * hgt, );
 			wall.name = 
 				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
 				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
@@ -278,12 +279,13 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 
 
 			wall = createPerimeterDepthWall( len - 2 * perDep, hgt );
-			wall.position.set( perDep, i * hgt, - perDep );
+			wall.position.set( -len05 + perDep, -wid05 + perDep, i * hgt );
 			building.add( wall );
 
-// back length
+
+// length back
 			wall = createExternalWall( len, hgt );
-			wall.position.set( 0, i * hgt, - wid );
+			wall.position.set( -len05, wid05, i * hgt );
 			wall.name = 
 				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
 				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + len + ',0,' + wid + '\n' + 
@@ -293,13 +295,13 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 			building.add( wall );
 
 			wall = createPerimeterDepthWall( len - 2 * perDep, hgt );
-			wall.position.set( perDep, i * hgt, - wid + perDep );
+			wall.position.set( -len05 + perDep, wid05 - perDep, i * hgt );
 			building.add( wall );
 
-// left width
+// width left
 			wall = createExternalWall( wid, hgt );
-			wall.rotation.y = Math.PI / 2;
-			wall.position.set( 0, i * hgt, 0 );
+			wall.rotation.z = Math.PI * 0.5;
+			wall.position.set( -len05, -wid05, i * hgt );
 			wall.name = 
 				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
 				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',2,0,' + wid + ',0\n' + 
@@ -309,15 +311,15 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 			building.add( wall );
 
 			wall = createPerimeterDepthWall( wid - 2 * perDep, hgt );
-			wall.rotation.y = Math.PI / 2;
-			wall.position.set( perDep, i * hgt, -perDep );
+			wall.rotation.z = Math.PI * 0.5;
+			wall.position.set( -len05 + perDep, -wid05 + perDep, i * hgt );
 			building.add( wall );
 
 
-// right width
+// width right 
 			wall = createExternalWall( wid, hgt );
-			wall.rotation.y = Math.PI / 2;
-			wall.position.set( len, i * hgt, 0 );
+			wall.rotation.z = -Math.PI / 2;
+			wall.position.set( len05, wid05, i * hgt );
 			wall.name = 
 				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',1,' + len + ',0,0\n' + 
 				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + len + ',' + wid + ',0\n' + 
@@ -327,15 +329,15 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 			building.add( wall );
 
 			wall = createPerimeterDepthWall( wid - 2 * perDep, hgt );
-			wall.rotation.y = Math.PI / 2;
-			wall.position.set( len - perDep, i * hgt, -perDep );
+			wall.rotation.z = -Math.PI / 2;
+			wall.position.set( len05 - perDep, wid05 - perDep , i * hgt );
 			building.add( wall );
 
 
 // slabs
 			slab = createSlab( len, wid );
-			slab.rotation.x = - Math.PI / 2;
-			slab.position.set( 0, i * hgt, 0 );
+
+			slab.position.set( -len05, -wid05, i * hgt );
 			slab.name = 
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
@@ -344,13 +346,11 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 			buildingData.value += slab.name;
 			building.add( slab );
 
+
 		}
 
-// floors can be roofs?? ;-)
-
 		roof = createSlab( len, wid );
-		roof.rotation.x = - Math.PI / 2;
-		roof.position.set( 0, i * hgt, 0 );
+		roof.position.set( -len05, -wid05, i * hgt );
 		roof.name = 
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
@@ -365,11 +365,9 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 
 	function createSlab( length, width ) {
 
-		let shape, hole;
-		var geometry, material, mesh;
-		let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		shape = new THREE.Shape( [ 
+		const shape = new THREE.Shape( [ 
 			v2( 0, 0 ), 
 			v2( length, 0 ), 
 			v2( length, width ), 
@@ -377,9 +375,9 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 			v2( 0, 0 )
 		] );
 
-		geometry = new THREE.ShapeGeometry( shape );
-		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		mesh = new THREE.Mesh( geometry, material );
+		const geometry = new THREE.ShapeGeometry( shape );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+		const mesh = new THREE.Mesh( geometry, material );
 
 		return mesh;
 
@@ -389,12 +387,14 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 
 	function createExternalWall( length, height ) {
 
-		let shape, hole;
-		var geometry, material, mesh;
 		const wwr = parseFloat( inpWindowWallRatio.value ) / 100;
-		let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+		const length05 = length * 0.5;
+		const deltaL = wwr * length05;
+		const height05 = height * 0.5;
+		const deltaH = wwr * height05;
+		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		shape = new THREE.Shape( [ 
+		const shape = new THREE.Shape( [ 
 			v2( 0, 0 ), 
 			v2( length, 0 ), 
 			v2( length, height ), 
@@ -402,20 +402,21 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 			v2( 0, 0 )
 		] );
 
-		hole = new THREE.Path();
+		const hole = new THREE.Path()
 		hole.fromPoints( [ 
-			v2( ( 1 - wwr ) * 0.5 * length, ( 1 - wwr ) * 0.5 * height ), 
-			v2( length - ( ( 1 - wwr ) * 0.5 * length ), ( 1 - wwr ) * 0.5 * height ), 
-			v2( length - ( ( 1 - wwr ) * 0.5 * length ), height - ( ( 1 - wwr ) * 0.5 * height ) ), 
-			v2( ( 1 - wwr ) * 0.5 * length,  height - ( ( 1 - wwr ) * 0.5 * height ) ),
-			v2( ( 1 - wwr ) * 0.5 * length, ( 1 - wwr ) * 0.5 * height ) 
+			v2( length05 - deltaL, height05 - deltaH ), 
+			v2( length05 + deltaL, height05 - deltaH ), 
+			v2( length05 + deltaL, height05 + deltaH ), 
+			v2( length05 - deltaL, height05 + deltaH),
+			v2( length05 - deltaL, height05 - deltaH )
 		] );
 
 		shape.holes.push( hole );
 
-		geometry = new THREE.ShapeGeometry( shape );
-		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		mesh = new THREE.Mesh( geometry, material );
+		const geometry = new THREE.ShapeGeometry( shape );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+		const mesh = new THREE.Mesh( geometry, material );
 
 		return mesh;
 
@@ -424,11 +425,9 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 
 	function createPerimeterDepthWall( length, height ) {
 
-		let shape;
-		var geometry, material, mesh;
-		let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		shape = new THREE.Shape( [ 
+		const shape = new THREE.Shape( [ 
 			v2( 0, 0 ), 
 			v2( length, 0 ), 
 			v2( length, height ), 
@@ -436,9 +435,10 @@ Remember: It’s much easier to recover from no abstraction than the wrong abstr
 			v2( 0, 0 )
 		] );
 
-		geometry = new THREE.ShapeGeometry( shape );
-		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		mesh = new THREE.Mesh( geometry, material );
+		const geometry = new THREE.ShapeGeometry( shape );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+		const mesh = new THREE.Mesh( geometry, material );
 
 		return mesh;
 

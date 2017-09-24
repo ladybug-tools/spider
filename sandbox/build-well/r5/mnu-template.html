@@ -3,22 +3,23 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic Burning mAnalemma template" >
+<meta name = "description" content = "Basic Building Well menu template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-19" >
-<title>Menu Template</title>
+<meta name = "date" content = "2017-09-23" >
+<title>Building Well Menu Template</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
 	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 300px;  height: 100%; }
 
-	body { font: 12pt monospace;  height: 100%; margin: 0 auto; max-width: 800px; overflow: hidden; }
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
-	a:hover, a:focus{ color: #f1f1f1; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
 	h3 { margin: 0; }
 
 	select { width: 100%; }
-	summary { outline: none; font-size: 18pt }
+	summary { outline: none; font-size: 14pt }
+	textarea { box-sizing: border-box; height: 200px; width: 100%; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
@@ -30,7 +31,8 @@
 	.floatRight { float: right; width: 70px;}
 
 	#divContents { height: 100%; width: 100%; }
-	#ifrContents { border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 5px solid var( --mnu-color ); height: 100%; width: 100%; }
+
 	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
 
 </style>
@@ -64,30 +66,21 @@
 	var scene;
 
 	var lightAmbient, lightPoint, lightDirectional;
-	var axisHelper, cameraHelper;
-
-	let geometry, material, mesh;
+	var axisHelper, gridHelper, groundHelper, cameraHelper;
 
 
 	init();
 
 	function init() {
 
-		divTitle.innerHTML = '<h3><a href="" >' + document.title +'</a></h3>';
+		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a></h3>';
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
 		divInfo.innerHTML = txt;
 
-		if ( parent && parent.THREE ) {
-
-			scope = parent;
-
-			scope.ifrMenuSub.style.height = menu.scrollHeight + 'px';
-
-			initVariables();
-
-		} else if ( parent && parent.ifrContents ) {
+		if ( parent && parent.ifrContents ) {
 
 			scope = parent.ifrContents.contentWindow;
 
@@ -121,6 +114,8 @@
 
 		lightDirectional = scope.lightDirectional;
 		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
 		parameters = scope.parameters;

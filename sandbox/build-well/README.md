@@ -72,6 +72,17 @@ _A well for building well._
 ## Change Log
 
 
+
+### 2017-09-23 ~ Theo
+
+12:31
+* Add lots of prettifying mnu-site-context.html
+
+15:18 ~ 
+* start mnu-shape-ell-one.html r2
+* 16:34 ~ ell is swell. Biting the bullet. Setting Z axis as up. 
+17:30 ~ mnu-adjacent-buildings.html is now OK with Z up
+
 ### 2017-09-22 ~ Theo
 
 
