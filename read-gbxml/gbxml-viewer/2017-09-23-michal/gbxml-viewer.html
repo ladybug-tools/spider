@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic Building Well menu template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-23" >
+<title>gbXML Viewer 'Michal'</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: auto; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	h3, h4 { margin: 0; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 14pt }
+	textarea { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 500px; margin: 0; width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+</style>
+</head>
+<body>
+
+		<div id = "divMenu" >
+
+			<div id = "divTitle" ></div>
+
+			<p id = "divInfo" ></p>
+			<p id = "divStats1" ></p>
+			<p id = "divStats2" ></p>
+<!--			<textarea id = "txtContents" ></textarea> -->
+
+		</div>
+
+		<div id = "divContents" ></div>
+
+<script>
+
+//	let url;
+//	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
+//	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
+//	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
+//	const url = '../../data-files/rectangular-30x50x4.xml';
+	const url = '../../data-files/SAM_Live.xml';
+
+	const ifrSource = 'threejs-basic.html';
+
+	var model;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, gridHelper, groundHelper, cameraHelper;
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/read-gbxml/gbxml-viewer" target="top" >&#x24D8</a></h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+//		divInfo.innerHTML = txt;
+
+		if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 10 ) + 'px';
+
+			initVariables();
+
+		} else {
+
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+			requestFile( url, callbackGbXML );
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		parameters = scope.parameters;
+		model = scope.model;
+		terrain = scope.terrain;
+		structures = scope.structures;
+
+	}
+
+
+	function callbackGbXML( xhr ) {
+
+		let response, json;
+
+		response = xhr.target.responseXML.documentElement;
+//console.log( 'response, response);
+
+		gbjson = XML2jsobj( response );
+//console.log( 'gbjson', gbjson );
+
+//		txtContents.value = JSON.stringify( gbjson, null, 4 );
+
+		parseGbJson( gbjson )
+
+	}
+
+
+
+	function parseGbJson( gbjson ) {
+
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI;  // degrees / radians
+		const pi05 = 0.5 * Math.PI;
+
+		const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+		scene.remove( model );
+		model = new THREE.Object3D();
+		scene.add( model );
+
+		let txt = '<h4>location</h4>';
+		txt += 
+
+			'Location: ' + gbjson.Campus.Location.Name + b +
+			'Latitude: ' + gbjson.Campus.Location.Latitude + b +
+			'Longitude: ' + gbjson.Campus.Location.Longitude + b +
+			'Zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b +
+
+		'';
+
+		divStats1.innerHTML = txt;
+
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+
+		for ( let i = 0; i < gbjson.Campus.Building.Space.length; i++ ) {
+
+			space = gbjson.Campus.Building.Space[ i ];
+//console.log( 'space', space );
+
+			polyloops = space.ShellGeometry.ClosedShell.PolyLoop;
+			divStats2.innerHTML = '<h4>stats</h4>' + 
+				polyloops.length.toLocaleString() + ' PolyLoops ' + b;
+
+			for ( let j = 0; j < polyloops.length; j++ ) {
+
+				points = polyloops[ j ].CartesianPoint;
+//console.log( 'polyloops[ i ].CartesianPoint', polyloops[ j ].CartesianPoint );
+
+				if ( points.length > 4 ) { 
+//console.log( 'points', points );
+					continue;
+				}
+
+				geometry = new THREE.Geometry();
+
+				for ( let k = 0; k < 4; k++ ) {
+
+					point = points[ k ].Coordinate;
+//console.log( 'point', point );
+
+					geometry.vertices.push( v( parseFloat( point[ 0 ] ), parseFloat( point[ 1 ] ), parseFloat( point[ 2 ] ) ) );
+
+				}
+
+				 geometry.faces.push(
+
+					new THREE.Face3( 2,1,0 ),//use vertices of rank 2,1,0
+					new THREE.Face3( 3,2, 0 )//vertices[3],1,2...
+
+				);
+//console.log( 'geometry', geometry );
+
+				geometry.computeFaceNormals();
+				geometry.computeVertexNormals();
+
+				mesh = new THREE.Mesh( geometry, material );
+				model.add( mesh );
+
+			}
+
+		}
+
+		setCamera();
+
+	}
+
+
+	function setCamera() {
+
+		var bbox = new THREE.Box3().setFromObject( model );
+
+		sphere = bbox.getBoundingSphere();
+		model.center = center = sphere.center;
+		model.radius = radius = sphere.radius;
+//console.log( '', center, radius );
+
+		controls.target.copy( center );
+		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+
+	}
+
+	function XML2jsobj( node ) {
+
+		let	data = {};
+
+// append a value
+		function Add( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		};
+
+// element attributes
+		let child, childNode;
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			Add( childNode.name, childNode.value );
+
+		}
+
+// child elements
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) {
+
+// text value
+					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else {
+// sub-object
+					Add( childNode.nodeName, XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { divInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>

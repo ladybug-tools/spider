@@ -101,6 +101,14 @@ See also:
 ## Change Log
 
 
+### 2017-09-24 ~ Theo
+
+
+* gbXML viewer michal started
+* Complete rebuild: smaller, faster smarter
+* Z is up
+
+
 ### 2017-09-13 ~ Theo
 
 * gbXML viewer carmel
