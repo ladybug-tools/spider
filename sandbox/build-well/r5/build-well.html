@@ -6,7 +6,7 @@
 <meta name = "description" content = "Basic HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-09-17" >
-<title>Build Well R5.2</title>
+<title>Build Well R5.3</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -58,6 +58,28 @@
 
 		<div id = "divMenuSub" >
 
+		</div>
+
+
+
+
+		<div>
+
+			<details>
+
+			<summary>About</summary>
+
+			<p>
+				Copyright &copy; <script> document.write( ( new Date() ).getFullYear() ); </script> Ladybug Tools authors.
+				<a href=http://github.com/ladybug-tools/spider/ >MIT license</a>.
+			</p>
+
+			<p>
+				Click the 'i in a circle' info icon for more <a href=#README.md title="Click here for help and information" >help</a>.
+			</p>
+
+
+			</details>
 
 		</div>
 
@@ -76,17 +98,20 @@
 
 		let txt;
 
-		title.innerHTML = '<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
-			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a></h2>';
+		title.innerHTML = 
+			'<h2>' + 
+			'<a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a>' +
+		'</h2>';
 
 		txt = 
 			'<hr>' +
 			'<p>Welcome!</p>' +
 			'<p>Let us build a wellspring for living in. Buildings that spring from our well will help keep us well.</p>' +
 			'<p>Thank you Ben and Anton for guiding this effort - and to Mostapha for guidance in even bigger efforts.</p>' +
-			'<p class = highlight >Box & L Shapes looking OK. More error checking taking place</p>' +
-			'<p class = highlight >Overhangs added</p>' +
-			'<p class = highlight >2017-09-24</p>' +
+			'<p class = highlight >Working on building data output - see Box Shape</p>' +
+			'<p class = highlight >Add About with copyright and license</p>' +
+			'<p class = highlight >2017-09-25</p>' +
 			'<hr>' +
 			'<p>Axis RGB = XYZ directions</p>' +
 			'<p>Spacebar|click to stop spinning</p>' +
@@ -100,6 +125,11 @@
 	}
 
 /*
+
+
+			'<p class = highlight >Box & L Shapes looking OK. More error checking taking place</p>' +
+			'<p class = highlight >Overhangs added</p>' +
+			'<p class = highlight >2017-09-24</p>' +
 
 			'<p class = highlight >Add some prettifying to mnu-site-context.html. If a project starts pretty, will this help make the outcome more beautiful?</p>' +
 			'<p class = highlight >CAD wins over computer science: Z is the new up. X & Y now on the ground.</p>' +

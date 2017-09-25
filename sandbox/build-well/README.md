@@ -57,7 +57,6 @@ _A well for building well._
 ## Issues
 
 * 2017-09-23 ~ Better handling of data when switching tabs after a shape has been created
-* 2017-09-21 ~ Open file often fails
 * 2017-09-21 ~ **Finish add data reporting parameters, eg openings, adjacent buildings**
 * 2017-09-21 ~ Match building shapes to Ben's spec
 * 2017-09-21 ~ See if perimeter depth diagonals actually add any pertinent information
@@ -67,6 +66,14 @@ _A well for building well._
 
 
 ## Change Log
+
+
+### 2017-09-25 ~ Theo
+
+14:27
+* R5.3
+* Working on building data output - see Box Shape
+* Add About with copyright and license
 
 
 
@@ -87,7 +94,7 @@ _A well for building well._
 [x] 2017-09-21 ~ Figure out overhangs
 19:18
 * We can export the Build Well models as JSON files, but - it appears - the Three.js ObjectLoader cannot - yet - import them back in as 3D models. We may have to do something about this! But it may be possible to import shapes as buffer geometry. More exploration to be done.
-
+[x] 2017-09-21 ~ Open file often fails < better to export as gbXML...
 
 
 ### 2017-09-23 ~ Theo
