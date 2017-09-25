@@ -27,6 +27,7 @@ _A well for building well._
 
 
 ### build-well.html
+
 * 2017-09-21 ~ Export data to CSV file
 * 2017-09-21 ~ Export to Open Studio JSON schema
 
@@ -56,15 +57,12 @@ _A well for building well._
 ## Issues
 
 * 2017-09-23 ~ Better handling of data when switching tabs after a shape has been created
-* 2017-09-22 ~ Validate all numeric entries before updating geometries
 * 2017-09-21 ~ Open file often fails
-* 2017-09-21 ~ Finish add data reporting parameters, eg openings, adjacent buildings
+* 2017-09-21 ~ **Finish add data reporting parameters, eg openings, adjacent buildings**
 * 2017-09-21 ~ Match building shapes to Ben's spec
 * 2017-09-21 ~ See if perimeter depth diagonals actually add any pertinent information
 	* Rule of thumb: Show what you will export and no more.
 	* Currently the external wall and perimeter depth walls provide sufficient data for downstream apps. No?
-* 2017-09-21 ~ Figure out overhangs
-* 2017-09-21 ~ All parameters need double checking to fix broken ones
 
 
 
@@ -72,9 +70,30 @@ _A well for building well._
 
 
 
+### 2017-09-24 ~ Theo
+
+12:22
+* R5.2
+12:36
+* L Shape calculations displaying numbers as expected
+13:45
+* L Shape walls all display as expected
+* Started adding if statements to draw permimeter depth walls when logical
+[x] 2017-09-22 ~ Validate all numeric entries before updating geometries < started
+[x] 2017-09-21 ~ All parameters need double checking to fix broken ones < well underway
+
+14:28
+* L Shapes have overhangs - depicted in an exaggerated fashion
+[x] 2017-09-21 ~ Figure out overhangs
+19:18
+* We can export the Build Well models as JSON files, but - it appears - the Three.js ObjectLoader cannot - yet - import them back in as 3D models. We may have to do something about this! But it may be possible to import shapes as buffer geometry. More exploration to be done.
+
+
+
 ### 2017-09-23 ~ Theo
 
 12:31
+* R5.1
 * Add lots of prettifying mnu-site-context.html
 
 15:18 ~ 
@@ -85,8 +104,8 @@ _A well for building well._
 [x] 2017-09-22 ~ Toggle rotation
 [x] 2017-09-22 ~ Add background color and toggle
 
-### 2017-09-22 ~ Theo
 
+### 2017-09-22 ~ Theo
 
 * 10:47 ~ Start R5
 * build-well.html

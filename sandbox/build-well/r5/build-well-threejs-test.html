@@ -81,7 +81,7 @@
 		gridHelper.rotation.x = Math.PI * 0.5;
 		axisHelper = new THREE.AxisHelper( size * 0.55 );
 
-		const geometry = new THREE.BoxGeometry( size, size, size  );
+		const geometry = new THREE.BoxBufferGeometry( size, size, size  );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 		groundHelper = new THREE.Mesh( geometry, material );
 		groundHelper.name = 'groundHelper';
@@ -95,7 +95,7 @@
 
 	function createMesh() {
 
-		const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 		const mesh = new THREE.Mesh( geometry, material );
 		mesh.name = 'Building With No Name';
