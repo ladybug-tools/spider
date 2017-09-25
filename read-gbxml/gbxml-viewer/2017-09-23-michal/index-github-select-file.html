@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-17" >
+<title>gbXML Viewer 'Michal'</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: blue; --mnu-back-color: bisque; --mnu-width: 350px; height: 100%; }
+
+	body { font: 12pt monospace; height: 100%; margin: 0 0 0 var( --mnu-width ); overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaaaaa; }
+	h2, h4 { margin: 0; }
+	select { width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	.highlight { background-color: lightgreen; }
+
+	#divContents { box-sizing: border-box; height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+	#ifrMenuSub { box-sizing: border-box; border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 0px solid pink; box-sizing: border-box; height: 100%; left: 0; max-width: 320px; 
+		margin: 20px; padding: 5px; position: fixed; top: 0; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<div id = "title" ></div>
+
+		<div id = "githubGbxmlSamples" >
+
+			 <a href="https://github.com/GreenBuildingXML/Sample-gbXML-Files" target="_blank">gbXML sample files on GitHub</a><br>
+			<select id=selGbXml size=15 ><select>
+
+		</div>
+
+		<p><a href=JavaScript:loadXML("../../data-files/SAM_Live.xml")>SAM Live</a></p>
+		<p><a href=JavaScript:loadXML("../../data-files/generated.xml")>generated</a></p>
+		<p><a href=JavaScript:loadXML("../../data-files/generated2.xml")>generated2</a></p>
+		<p id = "GreenspaceLiveSamples" ></p>
+<!--
+		<h4>open local file</h4>
+
+		<div id = "fileReader" >
+			<p><input type=file id=inpFile onchange=openFile(this); ></p>
+		</div>
+
+		<h4>File type</h4>
+
+		<p><button onclick=requestPlainGbXML(); >view as xml</button></p>
+-->
+		<h4>stats</h4>
+
+		<div id = "stats" ></div>
+		<div id = "stats2" ></div>
+
+		<p id=gbxmlUrl ></p>
+		<p id=info ></p>
+
+
+		<div id = "divMenuSub" ></div>
+
+	</div>
+
+	<div id=divContents ><iframe id=ifrContents src=threejs-basic.html ></iframe></div>
+
+
+<script>
+
+	const url = '../../data-files/SAM_Live.xml';
+
+	let scope;
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		title.innerHTML = '<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a></h2>';
+
+		txt = 
+			'<hr>' +
+			'<p>Welcome!</p>' +
+			'<p>It get\'s confusing in here some times.</p>' +
+		'';
+
+		divMenuSub.innerHTML = txt;
+
+//		ifrContents.onload = initVariables;
+
+		loadMenu( 'gbxml-viewer.html' );
+
+		urlGitHub = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
+
+		requestFile( urlGitHub, callbackGitHub );
+
+
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		parameters = scope.parameters;
+		model = scope.model;
+		terrain = scope.terrain;
+		structures = scope.structures;
+
+//		requestFile( url, callbackGbXML );
+		requestFile( url, ifrMenuSub.contentWindow.callbackGbXML );
+
+	}
+
+	function callbackGitHub( xhr ) {
+
+		let response, files, txt;
+
+		response = xhr.target.response;
+
+		files = JSON.parse( response );
+// console.log( 'files', files );
+
+		txt = '';
+
+		for ( let i = 0; i < files.length; i++ ) {
+
+			file = files[ i ];
+//console.log( 'file', file );
+
+			if ( file.name === 'README.md' ) { continue; }
+
+//			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
+			txt += '<option value = ' + file.download_url + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</option>';
+
+		}
+
+		selGbXml.innerHTML = txt;
+
+		selGbXml.onchange = function() { 
+
+console.log( '', ifrMenuSub.contentWindow);
+			const url = selGbXml.value.replace( /raw\.githubusercontent/, 'rawgit' );
+
+			requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); 
+//			gbxmlUrl.innerHTML = 'file download: ' + selGbXml.value.link( selGbXml.value );
+
+		}
+
+	}
+
+
+	function loadMenu( file ) {
+
+//		document.body.style.overflow = 'auto';
+//		divMenu.style.overflow = 'scroll';
+		divMenuSub.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' ></iframe>'
+
+	}
+
+
+	function loadXML( url ) {
+
+		requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); 
+
+	}
+
+
+	function loadHTML( url ) {
+
+		document.body.style.overflow = 'hidden';
+//		divMenu.style.overflow = 'scroll';
+		divContents.innerHTML = '<iframe id=ifrContents src=' + url + ' ></iframe>';
+
+	}
+
+
+	function getContents( path, repo, user ) {
+
+		user = user ? user : 'parallel-constitution';
+		repo = 'parallel-constitution.github.io';
+		path = path ? path : '/pages/links.md';
+
+		url  = 'https://rawgit.com/' + user + '/' + repo + '/master/' + path;
+
+		requestFile( url, callbackContents );
+
+	}
+
+
+
+	function callbackContents( xhr ){
+
+		let response, html, headers;
+		let page = '';
+		const converter = new showdown.Converter();
+
+		document.body.style.overflow = 'auto';
+		divMenuSub.innerHTML = ''
+
+		response = xhr.target.response;
+//console.log( '', response );
+
+		html = converter.makeHtml( xhr.target.responseText );
+
+		divContents.innerHTML = html;
+
+		headers = document.querySelectorAll( 'h2' ) 
+//console.log( '', headers );
+
+		if ( headers.length <= 2 ) { return; }
+
+		menuLinks = '<h3>Sections</h3>';
+
+		for ( var i = 1; i < headers.length; i++ ) {
+
+			header = headers[ i ]
+			menuLinks += header.textContent.link( '#' + header.id ) + b;
+
+		}
+
+		divMenuSub.innerHTML = menuLinks;
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'get', url, true );
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>

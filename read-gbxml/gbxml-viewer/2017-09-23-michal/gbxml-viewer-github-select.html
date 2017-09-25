@@ -10,7 +10,7 @@
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: green; --mnu-back-color: bisque; --mnu-width: 300px;  height: 100%; }
+	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 300px;  height: 100%; }
 
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
@@ -43,6 +43,13 @@
 
 			<div id = "divTitle" ></div>
 
+			<div id = "githubGbxmlSamples" >
+
+				 <a href="https://github.com/GreenBuildingXML/Sample-gbXML-Files" target="_blank">gbXML sample files on GitHub</a><br>
+				<select id=selGbXml size=15 ><select>
+
+			</div>
+
 			<p id = "divInfo" ></p>
 			<p id = "divStats1" ></p>
 			<p id = "divStats2" ></p>
@@ -50,16 +57,16 @@
 
 		</div>
 
-		<div id = "divContents" ></div>
+		<div id = "divContents" ></iframe></div>
 
 <script>
 
 //	let url;
-//	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
+	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
 //	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
 //	const url = '../../data-files/rectangular-30x50x4.xml';
-	const url = '../../data-files/SAM_Live.xml';
+//	const url = '../../data-files/SAM_Live.xml';
 
 	const ifrSource = 'threejs-basic.html';
 
@@ -93,10 +100,9 @@
 
 			scope = parent.ifrContents.contentWindow;
 
-			parent.ifrMenuSub.style.height = '400px'; //( divMenu.scrollHeight + 10 ) + 'px';
+			parent.ifrMenuSub.style.height = '800px'; //( divMenu.scrollHeight + 10 ) + 'px';
 
-			parent.ifrContents.onload = initVariables;
-
+			initVariables();
 
 		} else {
 
@@ -108,10 +114,48 @@
 
 			ifrContents.onload = initVariables;
 
+		urlGitHub = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
+
+		requestFile( urlGitHub, callbackGitHub );
+
+
 		}
 
 	}
 
+	function callbackGitHub( xhr ) {
+
+		let response, files, txt;
+
+		response = xhr.target.response;
+
+		files = JSON.parse( response );
+// console.log( 'files', files );
+
+		txt = '';
+
+		for ( let i = 0; i < files.length; i++ ) {
+
+			file = files[ i ];
+//console.log( 'file', file );
+
+			if ( file.name === 'README.md' ) { continue; }
+
+//			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
+			txt += '<option value = ' + file.download_url + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</option>';
+
+		}
+
+		selGbXml.innerHTML = txt;
+
+		selGbXml.onchange = function() { 
+			url = selGbXml.value.replace( /raw\.githubusercontent/, 'rawgit' );
+			requestFile( url, callbackGbXML ); 
+//			gbxmlUrl.innerHTML = 'file download: ' + selGbXml.value.link( selGbXml.value );
+
+		}
+
+	}
 
 
 	function initVariables() {
@@ -143,12 +187,12 @@
 
 		let response, json;
 
-//console.log( 'response', xhr );
+console.log( 'response', xhr );
 
 		response = xhr.target.responseXML.documentElement;
 
 		gbjson = XML2jsobj( response );
-//console.log( 'gbjson', gbjson );
+console.log( 'gbjson', gbjson );
 
 //		txtContents.value = JSON.stringify( gbjson, null, 4 );
 
@@ -183,8 +227,6 @@
 		divStats1.innerHTML = txt;
 
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
-
 		let issues = 0;
 
 		for ( let i = 0; i < gbjson.Campus.Building.Space.length; i++ ) {
@@ -291,28 +333,8 @@
 
 				} else {
 
-console.log( 'vertices', issues++, vertices,  );
-
-
-						let geometryLine = new THREE.Geometry();
-
-
-						geometryLine.vertices = vertices;
-/*
-						for ( let j = 0; j < points.length; j++ ) {
-
-							point = points[ j ].Coordinate;
-							vertices.push( v( parseFloat( point[ 0 ] ), parseFloat( point[ 2 ] ), parseFloat( point[ 1 ] ) ) );
-
-						}
-
-						vertices.push( vertices[ 0 ] );
-
-//console.log( 'v', vertices );
-*/
-
-						line = new THREE.Line( geometryLine, materialLine );
-						model.add( line );
+issues++
+console.log( 'vertices', vertices, issues );
 
 				}
 

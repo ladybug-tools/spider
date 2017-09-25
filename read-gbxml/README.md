@@ -101,8 +101,16 @@ See also:
 ## Change Log
 
 
-### 2017-09-24 ~ Theo
+### 2017-09-25 ~ Theo
 
+* gbXML viewer Michal: mostly working
+	* Simpler, more organized algorithms - probably faster
+	* Drawing a higher percentage of elements as Three.js
+		* Some elements still flying off into space
+		* Lines are drawn when shape has not been generated
+	
+
+### 2017-09-24 ~ Theo
 
 * gbXML viewer michal started
 * Complete rebuild: smaller, faster smarter
