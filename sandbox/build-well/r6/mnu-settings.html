@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic Burning mAnalemma template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-19" >
+<title>Settings</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	h3 { margin: 0; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 14pt }
+	textarea { box-sizing: border-box; height: 200px; width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "title" ></div>
+
+		<p>
+			<button onclick = saveFile(); >save file to json</button> 
+		</p>
+
+		<div id=info ></div>
+
+		<p title = 'Select a building to edit' >Building: 
+			<select id = selBuilding onchange = getBuilding(); size = 5 ></select>
+		</p>
+
+		<p>
+			<button onclick = deleteBuilding(); >delete building</button>
+			<button onclick = addBuilding(); >add building</button>
+		</p>
+
+
+		<details open >
+
+			<summary> Display settings </summary>
+
+			<p title = 'Size in feet. Lines every 20 feet.' >Grid Size:
+				<input type=number id=inpGridSize min=10 max=1000 step=10 value=200 list = "defaultNumbers" required onchange=updateGridSize(); class = floatRight />
+
+				<datalist id="defaultNumbers">
+					<option value="100">
+					<option value="200">
+					<option value="500">
+					<option value="1000">
+					<option value="2000">
+				</datalist>
+
+			</p>
+
+			<p><button onclick=toggleSceneAutoRotate() title= 'Stop the sinning!' > Toggle scene rotation </button></p>
+
+			<p><button onclick=toggleHelpers(); title = 'Make axis and grid invisible' > Toggle helpers </button></p>
+
+			<p><button onclick=toggleGround(); '> Toggle ground </button></p>
+
+			<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>
+
+			<p><button onclick=toggleEdges(); >Toggle edges </button></p>
+
+			<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
+
+		</details>
+
+	</div>
+
+	<div id = "divContents" ></div>
+
+<script>
+
+	const ifrSource = 'build-well-threejs.html';
+
+	var meshEdges;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
+	let geometry, material, mesh;
+
+	init();
+
+	function init() {
+
+		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +  
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a></h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+//		info.innerHTML = txt;
+
+		if ( parent && parent.THREE ) {
+
+			scope = parent;
+
+			scope.ifrMenuSub.style.height = divMenu.scrollHeight + 'px';
+
+			initVariables();
+
+		} else if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 10 ) + 'px';
+
+			initVariables();
+
+		} else {
+
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		parameters = scope.parameters;
+		buildings = scope.meshes;
+		terrain = scope.terrain;
+		structures = scope.structures;
+
+//console.log( 'scene', scene );
+
+		updateSelectBuilding();
+
+	}
+
+
+
+	function updateSelectBuilding() {
+
+		selBuilding.innerHTML = '';
+
+		for ( let i = 0; i < buildings.children.length; i++ ) {
+
+			let building = buildings.children[ i ];
+			selBuilding.innerHTML += '<option>' + building.name + '</option>'; 
+
+		}
+
+		selBuilding.selectedIndex = 1;
+
+		getBuilding();
+
+	}
+
+
+
+	function deleteBuilding() {
+
+		let building = buildings.children[ selBuilding.selectedIndex ];
+		buildings.remove( building );
+		building.geometry.dispose();
+		building.material.dispose();
+
+		updateSelectBuilding();
+
+	}
+
+
+
+	function addBuilding() {
+
+		let building = scope.createMesh();
+		building.scale.set ( 20, 20, 50 );
+		building.position.set( 0, 0, 0.5 * building.scale.z );
+		buildings.add( building );
+
+		updateSelectBuilding()
+
+	}
+
+
+
+	function getBuilding() {
+
+		const building = buildings.getObjectByName( selBuilding.value );
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === building.name ? 1 : 0.5;
+
+			}
+
+		} );
+
+		if ( building.material ) { building.material.opacity = 1; }
+
+	}
+
+
+
+	function updateSiteOrientation() {
+
+		const d2r = Math.PI / 180;
+
+		buildings.rotation.z = d2r * parseFloat( inpSiteOrientation.value );
+
+	}
+
+
+
+// Display Settings
+
+
+	function updateGridSize() {
+
+		scope.addHelpers( parseInt( inpGridSize.value, 10 ) );
+
+	}
+
+
+
+	function toggleHelpers() {
+
+		gridHelper.visible = !gridHelper.visible;
+		axisHelper.visible = !axisHelper.visible;
+
+	}
+
+
+
+	function toggleGround() {
+
+		groundHelper.visible = !groundHelper.visible;
+
+	}
+
+
+
+	function toggleSceneAutoRotate() {
+
+		controls.autoRotate = !controls.autoRotate;
+
+	}
+
+
+
+	function toggleWireframe() {
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.wireframe = !child.material.wireframe;
+
+			}
+
+		} );
+
+	}
+
+
+
+	function toggleEdges() {
+console.log( '', buildings  );
+
+		if ( !meshEdges ) {
+
+//			meshesEdges = new THREE.Object3D();
+			buildings.traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh ) {
+
+					const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
+					let meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+					meshEdges.visible = false;
+
+					child.add( meshEdges );
+
+				}
+
+			} );
+
+//			scene.add( meshesEdges );
+
+		}
+
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.LineSegments ) {
+
+				child.visible = child.visible === true ? false : true;
+
+			}
+
+		} );
+
+	}
+
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = scope.document.body.style.backgroundImage;
+
+		scope.document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
+
+
+	function saveFile() {
+
+		var output = buildings.toJSON();
+
+		try {
+
+			output = JSON.stringify( output, parseNumber, '\t' );
+			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+
+		} catch ( e ) {
+
+			output = JSON.stringify( output );
+
+		}
+
+		var blob = new Blob( [ output ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'buildings.json';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+
+
+	function openFile( file ) {
+
+		var reader = new FileReader();
+		reader.onload = function( event ) {
+
+			data =  JSON.parse( reader.result );
+
+			info.innerHTML = 'name: ' + file.files[0].name + '<br>size: ' + file.files[0].size +
+				'<br>type: ' + file.files[0].type + '<br>modified: ' + file.files[0].lastModifiedDate;
+
+				var loader = new THREE.ObjectLoader();
+
+				scene.remove( model )
+
+				var model = loader.parse( data );
+
+				scene.add( model );
+
+		}
+
+		reader.readAsText( file.files[ 0 ] );
+
+	}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "parametric box shape creator" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-26" >
+<title>Box Shape R3</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: tomato; --mnu-back-color: cornsilk; --mnu-width: 350px; height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	h3 { margin: 0; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 14pt }
+	textarea { box-sizing: border-box; height: 500px; width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+
+</style>
+</head>
+<body>
+
+		<div id = "divMenu" >
+
+			<div id = "title" ></div>
+
+			<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
+
+
+			<p title = 'Measured in square feet' >Building Area: 
+				<input id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 81000 class = floatRight >
+			</p>
+
+			<p title= "" >Building Length:
+				<input type=number id=inpLength1 min = 0 max = 100 step = 1 value = 80 onchange=updateShape(); class = floatRight >
+			</p>
+
+			<p title = 'How many storeys?'>Number of Floors: 
+				<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
+			</p>
+
+
+			<p title= 'Measured in square feet' >Floor Area: 
+				<span id=inpFloorArea class = floatRight >0</span>
+			</p>
+			<p title= "" >Building Width:
+				<span type=number id=inpWidth1 min = 0 max = 100 step = 1 value = 50 onchange=updateShape(); class = floatRight ></span>
+			</p>
+
+
+			<p title= 'Measured in feet' >Floor Height: 
+				<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
+			</p>
+
+			<p title= 'measured in feet' >Perimeter Depth: 
+				<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = updateShape(); class = floatRight >
+			</p>
+
+			<p title= 'measured in percent' >Window Wall Ratio:
+				<input type=number id=inpWindowWallRatio min=1 max=99 step=5 value=40 onclick=updateShape(); class = floatRight />
+			</p>
+
+			<p title= 'Depicted with a highly exaggerated depth' >Overhang Depth: 
+				<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 onchange=updateShape(); class=floatRight >
+			</p>
+
+			<p title= 'building angle in degrees' >Orientation: 
+				<input type=number id=inpOrientation min = -180 max = 180 step = 5 value = 0 onchange = updateShape(); class = floatRight >
+
+			</p>
+
+			<p>Building Data (currently faulty):
+				<textarea id=buildingData ></textarea>
+			</p>
+
+			<p>
+				<button onclick = saveFile(); >save building data to file</button> 
+			</p>
+
+		</div>
+
+		<div id = "divContents" ></div>
+
+<script>
+
+	const ifrSource = 'build-well-threejs.html';
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
+	let geometry, material, mesh;
+
+	const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+
+	init();
+
+	function init() {
+
+		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/" target="top" >&#x24D8</a></h3>';
+
+//		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		info.innerHTML = txt;
+
+		if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 100 ) + 'px';
+
+			initVariables();
+
+		} else {
+
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0; ';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+		inpNumberOfFloors.focus();
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		parameters = scope.parameters;
+		buildings = scope.meshes;
+		terrain = scope.terrain;
+		structures = scope.structures;
+
+		getBuilding();
+
+	}
+
+
+
+	function getBuilding() {
+
+		const building = buildings.getObjectByName( 'The Building' );
+//console.log( 'building', building );
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === building.name ? 1 : 0.5;
+
+			}
+
+		} );
+
+		inpLength1.value = building.scale.x;
+		inpBuildingArea.value = building.scale.x * building.scale.y;
+		inpWidth1.innerHTML = building.scale.y;
+
+		updateShape();
+
+	}
+
+
+
+	function updateShape() {
+
+		let building = buildings.getObjectByName( 'The Building' );
+
+		updateMenu();
+
+		buildings.remove( building );
+
+		buildingData.value = '';
+
+		building = new THREE.Object3D();
+
+		createFloors( building );
+
+		building.rotation.z = - d2r * parseFloat( inpOrientation.value );
+
+		building.name = 'The Building';
+		buildings.add( building )
+
+	}
+
+
+
+	function updateMenu() {
+
+		const area = parseFloat( inpBuildingArea.value );
+		const length = parseFloat( inpLength1.value );
+		const floors = parseInt( inpNumberOfFloors.value, 10 );
+
+		inpWidth1.innerHTML = ( area / length / floors ) > 1 ?( area / length / floors ).toLocaleString() : 1 ;
+		inpFloorArea.innerHTML = ( area / floors ).toLocaleString();
+
+	}
+
+
+
+	function createFloors( building ) {
+
+		const len = parseFloat( inpLength1.value );
+		const wid = parseFloat( inpWidth1.innerHTML );
+		const hgt = parseFloat( inpFloorHeight.value );
+		const floors = parseFloat( inpNumberOfFloors.value );
+		const perDep = parseFloat( inpPerimterDepth.value );
+
+		const len05 = len * 0.5;
+		const wid05 = wid * 0.5;
+
+		let intWallCount = 5;
+
+		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
+
+// length front
+			wall = createExternalWall( len, hgt, i, 1 );
+			wall.position.set( len05, -wid05, i * hgt, );
+			wall.rotation.z = Math.PI;
+			building.add( wall );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( len - 2 * perDep, hgt, i, intWallCount );
+				wall.position.set( len05 - perDep, -wid05 + perDep, i * hgt );
+				wall.rotation.z = Math.PI;
+				building.add( wall );
+				intWallCount++;
+
+			}
+
+// length back
+			wall = createExternalWall( len, hgt, i, 2 );
+			wall.position.set( -len05, wid05, i * hgt );
+			building.add( wall );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( len - 2 * perDep, hgt, i, intWallCount );
+				wall.position.set( -len05 + perDep, wid05 - perDep, i * hgt );
+				building.add( wall );
+				intWallCount++;
+
+			}
+
+// width left
+			wall = createExternalWall( wid, hgt, i, 3 );
+			wall.rotation.z = Math.PI * 0.5;
+			wall.position.set( -len05, -wid05, i * hgt );
+			building.add( wall );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( wid - 2 * perDep, hgt, i, intWallCount  );
+				wall.rotation.z = Math.PI * 0.5;
+				wall.position.set( -len05 + perDep, -wid05 + perDep, i * hgt );
+				building.add( wall );
+				intWallCount++;
+
+			}
+
+// width right 
+			wall = createExternalWall( wid, hgt, i, 4 );
+			wall.rotation.z = -Math.PI / 2;
+			wall.position.set( len05, wid05, i * hgt );
+			building.add( wall );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( wid - 2 * perDep, hgt, i, intWallCount );
+				wall.rotation.z = -Math.PI / 2;
+				wall.position.set( len05 - perDep, wid05 - perDep , i * hgt );
+				building.add( wall );
+				intWallCount++;
+
+
+
+			}
+
+// slabs
+			slab = createSlab( len, wid );
+
+			slab.position.set( -len05, -wid05, i * hgt );
+			slab.name = 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
+			buildingData.value += slab.name;
+			building.add( slab );
+
+		}
+
+		roof = createSlab( len, wid );
+		roof.position.set( -len05, -wid05, i * hgt );
+		roof.name = 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
+		buildingData.value += roof.name;
+		building.add( roof );
+
+	}
+
+
+
+	function createSlab( length, width ) {
+
+		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+		const shape = new THREE.Shape( [ 
+			v2( 0, 0 ), 
+			v2( length, 0 ), 
+			v2( length, width ), 
+			v2( 0, width ),
+			v2( 0, 0 )
+		] );
+
+		const geometry = new THREE.ShapeBufferGeometry( shape );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+		const mesh = new THREE.Mesh( geometry, material );
+
+		return mesh;
+
+	}
+
+
+
+	function createExternalWall( length = 20, height = 12, floor = 0, id = 1 ) {
+
+		const wwr = parseFloat( inpWindowWallRatio.value ) / 100;
+		const length05 = length * 0.5;
+		const deltaL = wwr * length05;
+		const height05 = height * 0.5;
+		const deltaH = wwr * height05;
+		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+		const shapeVertices = [ 
+			v2( 0, 0 ), 
+			v2( length, 0 ), 
+			v2( length, height ), 
+			v2( 0, height ),
+			v2( 0, 0 )
+		];
+		const shape = new THREE.Shape( shapeVertices );
+
+		const holeVertices = [ 
+			v2( length05 - deltaL, height05 - deltaH ), 
+			v2( length05 + deltaL, height05 - deltaH ), 
+			v2( length05 + deltaL, height05 + deltaH ), 
+			v2( length05 - deltaL, height05 + deltaH ),
+			v2( length05 - deltaL, height05 - deltaH )
+		];
+		const hole = new THREE.Path()
+		hole.fromPoints( holeVertices );
+
+		shape.holes.push( hole );
+
+		const geometry = new THREE.ShapeBufferGeometry( shape );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+		mesh = new THREE.Mesh( geometry, material );
+//console.log( '', mesh );
+
+		let c = mesh.geometry.attributes.position.array; // c = coordinate
+		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+
+		mesh.name = 
+			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ] + '\n' + 
+			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ] + '\n' + 
+			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ] + '\n' + 
+			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ] + '\n' +
+
+			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',1,' + c[ 12 ] + ',' + c[ 13 ] + ',' + c[ 14 ].toFixed( 3 ) + '\n' +
+			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',2,' + c[ 15 ] + ',' + c[ 16 ] + ',' + c[ 17 ].toFixed( 3 ) + '\n' +
+			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',3,' + c[ 18 ] + ',' + c[ 19 ] + ',' + c[ 20 ].toFixed( 3 ) + '\n' +
+			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',4,' + c[ 21 ] + ',' + c[ 12 ] + ',' + c[ 23 ].toFixed( 3 ) + '\n' +
+
+		'';
+
+		buildingData.value += mesh.name;
+
+		if ( inpOverhangDepth.value !== '0' ) {
+
+			const overhangDepth = parseFloat( inpOverhangDepth.value );
+			geometryPlane = new THREE.PlaneBufferGeometry( 2 * deltaL, overhangDepth );
+			geometryPlane.applyMatrix( new THREE.Matrix4().makeTranslation( length05, 0.5 * overhangDepth, height05 + deltaH ) );
+
+			const plane = new THREE.Mesh( geometryPlane, material );
+
+			c = plane.geometry.attributes.position.array; // c = coordinate
+			c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+			plane.name = 
+
+				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
+				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ].toFixed( 3 ) + '\n' +
+				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ].toFixed( 3 ) + '\n' +
+				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ].toFixed( 3 ) + '\n' +
+
+			'';
+
+			buildingData.value += plane.name;
+			mesh.add( plane );
+
+		}
+
+		return mesh;
+
+	}
+
+
+	function createPerimeterDepthWall( length, height, floor, id ) {
+
+		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+		const perDep = parseFloat( inpPerimterDepth.value );
+
+		const shape = new THREE.Shape( [ 
+			v2( 0, 0 ), 
+			v2( length, 0 ), 
+			v2( length, height ), 
+			v2( 0, height ),
+			v2( 0, 0 )
+		] );
+
+		const geometry = new THREE.ShapeBufferGeometry( shape );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+		const mesh = new THREE.Mesh( geometry, material );
+
+		const shape2 = new THREE.Shape( [ 
+			v2( 0, 0 ), 
+			v2( Math.SQRT2 * perDep, 0 ), 
+			v2( Math.SQRT2 * perDep, height ), 
+			v2( 0, height ),
+			v2( 0, 0 )
+		] );
+
+		geometry2 = new THREE.ShapeBufferGeometry( shape2 );
+		geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+		geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.75 * Math.PI ) );
+		diag = new THREE.Mesh( geometry2, material );
+		mesh.add( diag );
+
+		c = mesh.geometry.attributes.position.array; // c = coordinate
+		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+		mesh.name = 
+
+			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
+			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ].toFixed( 3 ) + '\n' +
+			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ].toFixed( 3 ) + '\n' +
+			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ].toFixed( 3 ) + '\n' +
+
+		'';
+		buildingData.value += mesh.name;
+
+		return mesh;
+
+	}
+
+
+
+	function saveFile() {
+
+		var blob = new Blob( [ buildingData.value ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'building-data.csv';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+</script>
+</body>
+</html>

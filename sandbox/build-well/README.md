@@ -68,6 +68,19 @@ _A well for building well._
 ## Change Log
 
 
+### 2017-09-26 ~ Theo
+
+11:12
+* R6 started
+* rename three.js base file
+* Site context menu now settings menu and moved to bottom / update its css
+* build-well-threejs.html: add view buttons / update css / set max zoom distance
+* mnu-adjacent-buildings.html: add self adjusting grid / rotation is clockwise / old-timey axis indicator: started
+13:18
+* mnu-shape-box.html: update calcs: area and length lead / 
+	* Overhangs depicted to scale, max distance set to 10
+	* Add diagonal perimeter depth walls
+
 ### 2017-09-25 ~ Theo
 
 14:27
