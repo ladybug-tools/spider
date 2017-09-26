@@ -6,7 +6,7 @@
 <meta name = "description" content = "Basic Building Well menu template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-09-23" >
-<title>gbXML Viewer 'Michal'</title>
+<title>gbXML Viewer 'Michal'.1</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -59,11 +59,11 @@
 //	let url;
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
-	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard%20Single%20Family%20Residential%202016.xml';
+//	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard%20Single%20Family%20Residential%202016.xml';
 //	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
 //	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
 //	const url = '../../data-files/rectangular-30x50x4.xml';
-//	const url = '../../data-files/SAM_Live.xml';
+	const url = '../../data-files/SAM_Live.xml';
 
 	const ifrSource = 'threejs-basic.html';
 
@@ -142,12 +142,12 @@
 
 	function callbackGbXML( xhr ) {
 
-console.log( 'xhr', xhr );
+//console.log( 'xhr', xhr );
 
 		const response = xhr.target.responseXML.documentElement;
 
 		gbjson = XML2jsobj( response );
-console.log( 'gbjson', gbjson );
+//console.log( 'gbjson', gbjson );
 		gbjson.url = xhr.target.responseURL;
 //		txtContents.value = JSON.stringify( gbjson, null, 4 );
 
