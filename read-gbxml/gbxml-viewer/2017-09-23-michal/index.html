@@ -102,42 +102,16 @@
 
 		divMenuSub.innerHTML = txt;
 
-//		ifrContents.onload = initVariables;
-
 		loadMenu( 'gbxml-viewer.html' );
 
 		urlGitHub = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
 
 		requestFile( urlGitHub, callbackGitHub );
 
-
-
 	}
 
 
-	function initVariables() {
 
-		THREE = scope.THREE;
-		renderer = scope.renderer;
-		scene = scope.scene;
-		camera = scope.camera;
-		controls = scope.controls;
-
-		lightDirectional = scope.lightDirectional;
-		axisHelper = scope.axisHelper;
-		gridHelper = scope.gridHelper;
-		groundHelper = scope.groundHelper;
-		cameraHelper = scope.cameraHelper;
-
-		parameters = scope.parameters;
-		model = scope.model;
-		terrain = scope.terrain;
-		structures = scope.structures;
-
-//		requestFile( url, callbackGbXML );
-		requestFile( url, ifrMenuSub.contentWindow.callbackGbXML );
-
-	}
 
 	function callbackGitHub( xhr ) {
 
@@ -157,7 +131,6 @@
 
 			if ( file.name === 'README.md' ) { continue; }
 
-//			txt += '<option value = ' + file.download_url + ' >' + file.name + ' (' + file.size.toLocaleString() + ' )</option>';
 			txt += '<option value = ' + file.download_url + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</option>';
 
 		}
@@ -166,7 +139,6 @@
 
 		selGbXml.onchange = function() { 
 
-console.log( '', ifrMenuSub.contentWindow);
 			const url = selGbXml.value.replace( /raw\.githubusercontent/, 'rawgit' );
 
 			requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); 
@@ -177,12 +149,13 @@ console.log( '', ifrMenuSub.contentWindow);
 	}
 
 
+
 	function loadMenu( file ) {
 
 //		document.body.style.overflow = 'auto';
 //		divMenu.style.overflow = 'scroll';
 		divMenuSub.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' ></iframe>'
-
+//		ifrMenuSub.onload = function(){ requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); };
 	}
 
 
@@ -249,6 +222,7 @@ console.log( '', ifrMenuSub.contentWindow);
 		divMenuSub.innerHTML = menuLinks;
 
 	}
+
 
 
 	function requestFile( url, callback ) {

@@ -10,7 +10,7 @@
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: green; --mnu-back-color: bisque; --mnu-width: 300px;  height: 100%; }
+	html { --mnu-color: green; --mnu-back-color: bisque; --mnu-width: 300px; height: 100%; }
 
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
@@ -33,7 +33,8 @@
 	#divContents { height: 100%; width: 100%; }
 	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
-	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); height: 100%; max-width: var( --mnu-width ); 
+		overflow: auto; padding: 5px;  }
 
 </style>
 </head>
@@ -43,9 +44,10 @@
 
 			<div id = "divTitle" ></div>
 
-			<p id = "divInfo" ></p>
+			<p id = "divFileInfo" ></p>
 			<p id = "divStats1" ></p>
 			<p id = "divStats2" ></p>
+			<p id = "divStats3" ></p>
 <!--			<textarea id = "txtContents" ></textarea> -->
 
 		</div>
@@ -57,14 +59,16 @@
 //	let url;
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
+	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard%20Single%20Family%20Residential%202016.xml';
+//	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
 //	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
 //	const url = '../../data-files/rectangular-30x50x4.xml';
-	const url = '../../data-files/SAM_Live.xml';
+//	const url = '../../data-files/SAM_Live.xml';
 
 	const ifrSource = 'threejs-basic.html';
 
 	var model;
-
+	var gbson;
 	var scope;
 
 	var THREE;
@@ -95,8 +99,7 @@
 
 			parent.ifrMenuSub.style.height = '400px'; //( divMenu.scrollHeight + 10 ) + 'px';
 
-			parent.ifrContents.onload = initVariables;
-
+			initVariables();
 
 		} else {
 
@@ -130,8 +133,6 @@
 
 		parameters = scope.parameters;
 		model = scope.model;
-		terrain = scope.terrain;
-		structures = scope.structures;
 
 		requestFile( url, callbackGbXML );
 
@@ -141,15 +142,13 @@
 
 	function callbackGbXML( xhr ) {
 
-		let response, json;
+console.log( 'xhr', xhr );
 
-//console.log( 'response', xhr );
-
-		response = xhr.target.responseXML.documentElement;
+		const response = xhr.target.responseXML.documentElement;
 
 		gbjson = XML2jsobj( response );
-//console.log( 'gbjson', gbjson );
-
+console.log( 'gbjson', gbjson );
+		gbjson.url = xhr.target.responseURL;
 //		txtContents.value = JSON.stringify( gbjson, null, 4 );
 
 		parseGbJson( gbjson )
@@ -172,12 +171,13 @@
 
 		let txt = '<h4>location</h4>';
 		txt += 
-
-			'Location: ' + gbjson.Campus.Location.Name + b +
-			'Latitude: ' + gbjson.Campus.Location.Latitude + b +
-			'Longitude: ' + gbjson.Campus.Location.Longitude + b +
-			'Zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b +
-
+			'length unit: ' + gbjson.lengthUnit + b +
+			'location: ' + gbjson.Campus.Location.Name + b +
+			'latitude: ' + gbjson.Campus.Location.Latitude + b +
+			'longitude: ' + gbjson.Campus.Location.Longitude + b +
+			'zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b +
+			'url: ' + gbjson.url.split( '/' ).pop().link( gbjson.url ) + b +
+			( gbjson.Campus.Location.Latitude ? 'map: <a href="http://www.google.com/maps/place/' + gbjson.Campus.Location.Latitude + ',' + gbjson.Campus.Location.Longitude + '" target="_blank" >google maps</a>' : '' ) + b +
 		'';
 
 		divStats1.innerHTML = txt;
@@ -187,20 +187,23 @@
 
 		let issues = 0;
 
+			divStats2.innerHTML = '<h4>stats</h4>' + 
+				'spaces: ' + gbjson.Campus.Building.Space.length + b;
+
 		for ( let i = 0; i < gbjson.Campus.Building.Space.length; i++ ) {
 
 			space = gbjson.Campus.Building.Space[ i ];
 //console.log( 'space', space );
 
 			polyloops = space.ShellGeometry.ClosedShell.PolyLoop;
-			divStats2.innerHTML = '<h4>stats</h4>' + 
-				polyloops.length.toLocaleString() + ' PolyLoops ' + b;
+
+			divStats2.innerHTML += 
+				'' + space.Name + ' polyLoops ' + polyloops.length.toLocaleString() + b;
 
 			for ( let j = 0; j < polyloops.length; j++ ) {
 
 				points = polyloops[ j ].CartesianPoint;
 //console.log( 'polyloops[ i ].CartesianPoint', polyloops[ j ].CartesianPoint );
-
 
 				geometry = new THREE.Geometry();
 				vertices = geometry.vertices;
@@ -251,7 +254,7 @@
 					mesh.userData.space = space;
 					model.add( mesh );
 
-				} else if ( vertices[ 0 ].x === vertices[ 1 ].x && vertices[ 1 ].x === vertices[ 2 ].x ) {
+				} else if ( vertices[ 0 ].x === vertices[ 1 ].x && vertices[ 1 ].x === vertices[ 2 ].x && vertices[ 3 ].x === vertices[ 4 ].x ) {
 
 //console.log( 'equal x', vertices );
 
@@ -264,8 +267,8 @@
 					shape = new THREE.Shape( verts );
 					geometryShape = new THREE.ShapeGeometry( shape );
 					geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
-					geometryShape.applyMatrix( new THREE.Matrix4().makeRotationZ( Math.PI ) );
-//					geometryShape.translate( vertices[ 0 ].x, 0, 0 );
+					geometryShape.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.5 * Math.PI ) );
+					geometryShape.translate( vertices[ 0 ].x, 0, 0 );
 					mesh = new THREE.Mesh( geometryShape, material );
 					mesh.name = 'horizontal shape ' + j;
 					mesh.userData.space = space;
@@ -283,7 +286,7 @@
 					geometryShape = new THREE.ShapeGeometry( shape );
 					geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 //					geometryShape.applyMatrix( new THREE.Matrix4().makeRotationZ( Math.PI ) );
-//					geometryShape.translate( vertices[ 0 ].x, 0, 0 );
+					geometryShape.translate( 0, vertices[ 0 ].y, 0 );
 					mesh = new THREE.Mesh( geometryShape, material );
 					mesh.name = 'horizontal shape ' + j;
 					mesh.userData.space = space;
@@ -291,28 +294,32 @@
 
 				} else {
 
-console.log( 'vertices', issues++, vertices,  );
 
+//	if ( i > 0 || j > 1 ) { break; } 
 
-						let geometryLine = new THREE.Geometry();
-
-
-						geometryLine.vertices = vertices;
+//console.log( 'vertices', issues++, vertices,  );
 /*
-						for ( let j = 0; j < points.length; j++ ) {
+					let plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
 
-							point = points[ j ].Coordinate;
-							vertices.push( v( parseFloat( point[ 0 ] ), parseFloat( point[ 2 ] ), parseFloat( point[ 1 ] ) ) );
+					for ( let i = 0; i < vertices.length; i++ ) {
+
+						vertex = vertices[ i ];
+
+						if ( Math.abs( plane.distanceToPoint( vertex ) ) > 0.001 ) {
+
+console.log( 'vertex', vertex );
 
 						}
 
-						vertices.push( vertices[ 0 ] );
+					}
 
-//console.log( 'v', vertices );
+//console.log( 'plane', plane );
 */
 
-						line = new THREE.Line( geometryLine, materialLine );
-						model.add( line );
+					let geometryLine = new THREE.Geometry();
+					geometryLine.vertices = vertices;
+					line = new THREE.Line( geometryLine, materialLine );
+					model.add( line );
 
 				}
 
@@ -340,11 +347,21 @@ console.log( 'vertices', issues++, vertices,  );
 			const sphere = bbox.getBoundingSphere();
 			center = sphere.center;
 			radius = sphere.radius;
-
 		}
 
+		divStats3.innerHTML = 
+			'center: x' + center.x.toLocaleString() + ' y' + center.y.toLocaleString() + ' z' + center.z.toLocaleString() + b +
+			'radius: ' + radius.toLocaleString() +
+		'';
+
+
 		controls.target.copy( center );
-		camera.position.copy( center.add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		axisHelper.position.copy( center );
+
+		camera.far = 2 * camera.position.length();
+		camera.updateProjectionMatrix();
+//console.log( 'camera.far', camera.far );
 
 	}
 
@@ -418,7 +435,7 @@ console.log( 'vertices', issues++, vertices,  );
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { divInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
