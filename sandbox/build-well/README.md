@@ -68,6 +68,25 @@ _A well for building well._
 ## Change Log
 
 
+### 2017-09-27 ~ Theo
+
+11:22
+* R6.2
+* build-well.html
+	* Add link to read me on menu / looked into how best to add license
+	* Add three.js stats indicator
+* mnu-adjacent-buildings.html: grid resize should work with negative offsets / tests ok in FF win
+	* add building: the new building becomes selected automatically
+* build-well-threejs.html
+	* delete large center axis indicator
+17:01
+* mnu-shape-ell-one.html
+	* geometry looking good / updates well / lacks area update calculations
+
+
+Need
+online gbXML validator
+
 ### 2017-09-26 ~ Theo
 
 11:12
@@ -80,6 +99,7 @@ _A well for building well._
 * mnu-shape-box.html: update calcs: area and length lead / 
 	* Overhangs depicted to scale, max distance set to 10
 	* Add diagonal perimeter depth walls
+
 
 ### 2017-09-25 ~ Theo
 

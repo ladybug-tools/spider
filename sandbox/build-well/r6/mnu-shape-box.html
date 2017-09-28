@@ -48,7 +48,7 @@
 
 
 			<p title = 'Measured in square feet' >Building Area: 
-				<input id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 81000 class = floatRight >
+				<input id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 10000 class = floatRight >
 			</p>
 
 			<p title= "" >Building Length:
@@ -89,7 +89,7 @@
 
 			</p>
 
-			<p>Building Data (currently faulty):
+			<p>Building Data (soon to be gbXML):
 				<textarea id=buildingData ></textarea>
 			</p>
 
@@ -122,6 +122,7 @@
 
 	init();
 
+
 	function init() {
 
 		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
@@ -150,7 +151,7 @@
 
 		}
 
-		inpNumberOfFloors.focus();
+		inpBuildingArea.focus();
 
 	}
 

@@ -10,7 +10,7 @@
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 250px;  height: 100%; }
+	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 300px;  height: 100%; }
 
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
@@ -71,7 +71,7 @@
 			<p title = 'Z distance in feet' >height: 
 				<input type=number id=inpHeight min = 1 max = 1000 step = 1onchange = buildWell(); class = floatRight ></p>
 
-			<p title = 'building orientation in degrees' >angle:
+			<p title = 'building angle in degrees' >orientation on site:
 				<input type=number type=number id=inpAngle min=-180 max=180 step=5 value=0 onchange=buildWell(); class = floatRight />
 			</p>
 
@@ -168,7 +168,7 @@
 
 		}
 
-		selBuilding.selectedIndex = 1;
+		selBuilding.selectedIndex = selBuilding.children.length - 1;
 
 		getBuilding();
 
@@ -244,7 +244,7 @@
 		scope.gridHelper.geometry.computeBoundingBox();
 		bbox = scope.gridHelper.geometry.boundingBox.max;
 
-		if ( meshPositionX + 0.5 * meshX > bbox.x || meshPositionY + 0.5 * meshY > bbox.z ) {
+		if ( Math.abs( meshPositionX ) + 0.5 * meshX > bbox.x || Math.abs( meshPositionY ) + 0.5 * meshY > bbox.z ) {
 
 			const size = bbox.x + bbox.z + 40;
 
@@ -252,8 +252,8 @@
 
 		}
 
-
 	}
+
 
 
 	function deleteBuilding() {
@@ -276,7 +276,9 @@
 		building.position.set( 0, 0, 0.5 * building.scale.z );
 		buildings.add( building );
 
-		updateSelectBuilding()
+		updateSelectBuilding();
+
+//		selBuilding.selectedIndex = selBuilding.children.length - 1;
 
 	}
 

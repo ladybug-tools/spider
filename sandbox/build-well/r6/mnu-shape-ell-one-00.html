@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "parametric shape creator" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-27" >
-<title>L Shape R4</title>
+<meta name = "date" content = "2017-09-23" >
+<title>L Shape R3</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -19,7 +19,7 @@
 
 	select { width: 100%; }
 	summary { outline: none; font-size: 14pt }
-	textarea { box-sizing: border-box; height: 500px; width: 100%; }
+	textarea { box-sizing: border-box; height: 200px; width: 100%; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
@@ -33,7 +33,7 @@
 	#divContents { height: 100%; width: 100%; }
 	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
-	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
 
 
 </style>
@@ -45,19 +45,9 @@
 			<div id = "title" ></div>
 
 			<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
-
 			<p title = 'Measured in square feet' >Building Area: 
-				<input id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 10000 class = floatRight ></span>
+				<span id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 81000 class = floatRight ></span>
 			</p>
-
-			<p title= '' >Length 1 / left:
-				<input type=number id=inpLength1 min = 1 max = 100 step = 1 value = 50 onchange=updateShape(); class = floatRight >
-			</p>
-
-			<p title= "" >Length 2 / right:
-				<input type=number id=inpLength2 min=1 max=100 step=1 value=40 onchange=updateShape(); class=floatRight >
-			</p>
-
 
 			<p title = 'How many storeys?'>Number of Floors: 
 				<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
@@ -66,19 +56,6 @@
 			<p title= 'Measured in square feet' >Floor Area: 
 				<span id=inpFloorArea class = floatRight >0</span>
 			</p>
-
-			<p title= 'Measured in square feet' >check area: 
-				<span id=inpCheckArea class = floatRight >0</span>
-			</p>
-
-			<p title= "" >Width 1 / front:
-				<span type=number id=inpWidth1 min=1 max=100 step=1 value=50 onchange=updateShape(); class=floatRight >
-			</p>
-
-			<p title= "" >Width 2 / back:
-				<span type=number id=inpWidth2 min=1 max=100 step=1 value=40 onchange=updateShape(); class=floatRight >
-			</p>
-
 
 			<p title= 'Measured in feet' >Floor Height: 
 				<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
@@ -93,16 +70,31 @@
 			</p>
 
 			<p title= 'Depicted with a highly exaggerated depth' >Overhang Depth: 
-				<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 onchange=updateShape(); class=floatRight >
+				<input type=number id=inpOverhangDepth min=0 max=2 step=0.5 value=0 onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title= 'building angle in degrees' >On site orientation: 
+			<p title= 'building angle in degrees' >Orientation: 
 				<input type=number id=inpOrientation min = -180 max = 180 step = 5 value = 0 onchange = updateShape(); class = floatRight >
+
 			</p>
 
+			<p title= '' >Length 1 / left:
+				<input type=number id=inpLength1 min = 1 max = 100 step = 1 value = 50 onchange=updateShape(); class = floatRight >
+			</p>
 
+			<p title= "" >Length 2 / right:
+				<input type=number id=inpLength2 min=1 max=100 step=1 value=40 onchange=updateShape(); class=floatRight >
+			</p>
 
-			<p>Building Data (soon to be gbXML):
+			<p title= "" >Width 1 / front:
+				<input type=number id=inpWidth1 min=1 max=100 step=1 value=50 onchange=updateShape(); class=floatRight >
+			</p>
+
+			<p title= "" >Width 2 / back:
+				<input type=number id=inpWidth2 min=1 max=100 step=1 value=40 onchange=updateShape(); class=floatRight >
+			</p>
+
+			<p>Building Data (currently faulty):
 				<textarea id=buildingData ></textarea>
 			</p>
 
@@ -138,9 +130,10 @@
 	function init() {
 
 		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
-			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/" target="top" >&#x24D8</a></h3>';
+			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox//build-well/" target="top" >&#x24D8</a></h3>';
 
 //		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
 //		info.innerHTML = txt;
 
 		if ( parent && parent.ifrContents ) {
@@ -163,7 +156,7 @@
 
 		}
 
-		inpBuildingArea.focus();
+		inpNumberOfFloors.focus();
 
 	}
 
@@ -209,11 +202,9 @@
 
 		} );
 
-		inpLength1.value = 0.5 * building.scale.x;
-		inpLength2.value = 0.5 * building.scale.x;
-		inpWidth1.innerHTML = 0.5 * building.scale.x;
-		inpWidth2.innerHTML = 0.5 * building.scale.x;
-		inpBuildingArea.value = 1 * building.scale.x * 0.5 * building.scale.x + 0.5 * building.scale.x * 0.5 * building.scale.x;
+		inpLength1.value = building.scale.x;
+		inpWidth1.value = building.scale.y;
+		inpBuildingArea.innerHTML = building.scale.x * building.scale.y;
 
 		updateShape();
 
@@ -225,8 +216,6 @@
 
 		let building = buildings.getObjectByName( 'The Building' );
 
-		updateMenu();
-
 		buildings.remove( building );
 
 		buildingData.value = '';
@@ -235,10 +224,12 @@
 
 		createFloors( building );
 
-		building.rotation.z = - d2r * parseFloat( inpOrientation.value );
+		building.rotation.z = d2r * parseFloat( inpOrientation.value );
 
 		building.name = 'The Building';
 		buildings.add( building )
+
+		updateMenu();
 
 	}
 
@@ -248,12 +239,12 @@
 
 		const len1 = parseFloat( inpLength1.value );
 		const len2 = parseFloat( inpLength2.value );
-		const wid1 = parseFloat( inpWidth1.innerHTML );
-		const wid2 = parseFloat( inpWidth2.innerHTML );
+		const wid1 = parseFloat( inpWidth1.value );
+		const wid2 = parseFloat( inpWidth2.value );
 		const floors = parseInt( inpNumberOfFloors.value, 10 );
 		const area = ( len1 * wid1 + len2 * wid2 ) * floors; // parseFloat( inpBuildingArea.value );
 
-//		inpBuildingArea.innerHTML = area.toLocaleString();
+		inpBuildingArea.innerHTML = area.toLocaleString();
 		inpFloorArea.innerHTML = ( area / floors ).toLocaleString();
 
 	}
@@ -264,11 +255,10 @@
 
 		const len1 = parseFloat( inpLength1.value );
 		const len2 = parseFloat( inpLength2.value );
-		const wid1 = parseFloat( inpWidth1.innerHTML );
-		const wid2 = parseFloat( inpWidth2.innerHTML );
-		const floors = parseFloat( inpNumberOfFloors.value );
-
+		const wid1 = parseFloat( inpWidth1.value );
+		const wid2 = parseFloat( inpWidth2.value );
 		const hgt = parseFloat( inpFloorHeight.value );
+		const floors = parseFloat( inpNumberOfFloors.value );
 		const perDep = parseFloat( inpPerimterDepth.value );
 
 		const len105 = len1 * 0.5;
@@ -276,155 +266,176 @@
 		const len205 = len2 * 0.5;
 		const wid205 = wid2 * 0.5;
 
-		let intWallCount = 7;
-
 		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
 
 // length front
-			wall = createExternalWall( len1 + len2, hgt, i, 1 );
-			wall.rotation.z = Math.PI;
-			wall.position.set( len105 + len205, -wid105  - wid205, i * hgt, );
+			wall = createExternalWall( len1 + len2, hgt );
+			wall.position.set( -len105 - len205, -wid105  - wid205, i * hgt, );
+			wall.name = 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + ( len1 + len2 ) + ',0,0\n' + 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',3,' + ( len1 + len2 ) + ',0,' + hgt + '\n' + 
+				'Wall.1,ExteriorWall,Level.' + ( i + 1 ) + ',4,0,0,' + hgt + '\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 
 			if ( len1 + len2 > 2 * perDep && wid1 > 2 * perDep ) {
 
-				wall = createPerimeterDepthWall( len1 + len2 - 2 * perDep, hgt, i, intWallCount );
-				wall.rotation.z = Math.PI;
-				wall.position.set( len105 + len205 - perDep, -wid105  - wid205 + perDep, i * hgt );
+				wall = createPerimeterDepthWall( len1 + len2 - 2 * perDep, hgt );
+				wall.position.set( -len105 - len205 + perDep, -wid105  - wid205 + perDep, i * hgt );
 				building.add( wall );
-				intWallCount++;
 
 			}
 
 
 // length back left
-			wall = createExternalWall( len1, hgt, i, 2 );
+			wall = createExternalWall( len1, hgt );
 			wall.position.set( -len105 - len205, wid105 + wid205, i * hgt );
+			wall.name = 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + ( len1 + len2 ) + ',0,' + wid1 + '\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',3,' + ( len1 + len2 ) + ',' + wid1 + ',' + hgt + '\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',4,0,' + hgt + ',0\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			if ( len1 > 2 * perDep ) {
 
-				wall = createPerimeterDepthWall( len1 - 2 * perDep, hgt, i, intWallCount );
+				wall = createPerimeterDepthWall( len1 - 2 * perDep, hgt );
 				wall.position.set( -len105 - len205 + perDep, wid105 + wid205 - perDep, i * hgt );
 				building.add( wall );
-				intWallCount++;
 
 			}
 
 
 // length back right
-			wall = createExternalWall( len2, hgt, i, 3 );
+			wall = createExternalWall( len2, hgt );
 			wall.position.set( len1 - len105 - len205, wid1 - wid105 - wid205, i * hgt );
+			wall.name = 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + ( len1 + len2 ) + ',0,' + wid1 + '\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',3,' + ( len1 + len2 ) + ',' + wid1 + ',' + hgt + '\n' + 
+				'Wall.2,ExteriorWall,Level.' + ( i + 1 ) + ',4,0,' + hgt + ',0\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			if ( len1 > 2 * perDep  && wid1 > 2 * perDep ) {
 
-				wall = createPerimeterDepthWall( len2, hgt, i, intWallCount );
+				wall = createPerimeterDepthWall( len2, hgt );
 				wall.position.set( len1 - len105 - len205 - perDep, wid1 - wid105 - wid205 - perDep, i * hgt );
 				building.add( wall );
-				intWallCount++;
 
 			}
 
 
 // width left full
-			wall = createExternalWall( wid1 + wid2, hgt, i, 4 );
+			wall = createExternalWall( wid1 + wid2, hgt );
 			wall.rotation.z = Math.PI * 0.5;
 			wall.position.set( -len105 - len205, -wid105 - wid205, i * hgt );
+			wall.name = 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',2,0,' + ( wid1 + wid2 ) + ',0\n' + 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',3,0,' + ( wid1 + wid2 ) + ',' + hgt + '\n' + 
+				'Wall.3,ExteriorWall,Level.' + ( i + 1 ) + ',4,0,0,' + hgt + '\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			if ( wid1 + wid2 > 2 * perDep ) {
 
-				wall = createPerimeterDepthWall( wid1 + wid2 - 2 * perDep, hgt, i, intWallCount );
+				wall = createPerimeterDepthWall( wid1 + wid2 - 2 * perDep, hgt );
 				wall.rotation.z = Math.PI * 0.5;
 				wall.position.set( -len105 -len205 + perDep, -wid105 - wid205 + perDep, i * hgt );
 				building.add( wall );
-				intWallCount++;
 
 			}
 
-
-
 // width right front
-			wall = createExternalWall( wid1, hgt, i, 5 );
-			wall.rotation.z = -Math.PI / 2;
-			wall.position.set( len105 + len205, 0, i * hgt );
+			wall = createExternalWall( wid1, hgt );
+			wall.rotation.z = Math.PI / 2;
+			wall.position.set( len105 + len205, - wid105 - wid205, i * hgt );
+			wall.name = 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',1,' + ( len1 + len2 ) + ',0,0\n' + 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + ( len1 + len2 ) + ',' + wid1 + ',0\n' + 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',3,' + ( len1 + len2 ) + ',' + wid1 + ',' + hgt + '\n' + 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',4,' + ( len1 + len2 ) + ',0,' + hgt + '\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			if ( wid1 > 2 * perDep ) {
 
-				wall = createPerimeterDepthWall( wid1 - 2 * perDep, hgt, i, intWallCount );
-				wall.rotation.z = -Math.PI / 2;
-				wall.position.set( len105 + len205 - perDep,  - perDep , i * hgt );
+				wall = createPerimeterDepthWall( wid1 - 2 * perDep, hgt );
+				wall.rotation.z = Math.PI / 2;
+				wall.position.set( len105 + len205 - perDep, - wid105 - wid205 + perDep , i * hgt );
 				building.add( wall );
-				intWallCount++;
 
 			}
 
 
-
 // width right back
-			wall = createExternalWall( wid2, hgt, i, 6 );
-			wall.rotation.z = -Math.PI / 2;
-			wall.position.set( len1 - len105 - len205, wid1, i * hgt, i, intWallCount++ );
+			wall = createExternalWall( wid2, hgt );
+			wall.rotation.z = Math.PI / 2;
+			wall.position.set( len1 - len105 - len205, wid1 - wid105 - wid205, i * hgt );
+			wall.name = 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',1,' + ( len1 + len2 ) + ',0,0\n' + 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',2,' + ( len1 + len2 ) + ',' + wid1 + ',0\n' + 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',3,' + ( len1 + len2 ) + ',' + wid1 + ',' + hgt + '\n' + 
+				'Wall.4,ExteriorWall,Level.' + ( i + 1 ) + ',4,' + ( len1 + len2 ) + ',0,' + hgt + '\n';
+			buildingData.value += wall.name;
 			building.add( wall );
 
 			if ( wid2 > 2 * perDep ) {
 
 				wall = createPerimeterDepthWall( wid2, hgt );
-				wall.rotation.z = -Math.PI / 2;
-				wall.position.set( len1 - len105 - len205 - perDep, wid1 - perDep, i * hgt );
+				wall.rotation.z = Math.PI / 2;
+				wall.position.set( len1 - len105 - len205 - perDep, wid1 - wid105 - wid205 - perDep, i * hgt );
 				building.add( wall );
-				intWallCount++;
 
 			}
+/*
+// slabs
+			slab = createSlab( len, wid );
+
+			slab.position.set( -len05, -wid05, i * hgt );
+			slab.name = 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
+			buildingData.value += slab.name;
+			building.add( slab );
+*/
 
 
 			floor = createSlab( len1, wid1 + wid2 );
 			floor.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
-			floor.name = 
-				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
-				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len1 + ',0,0\n' + 
-				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len1 + ',' + wid1 + ',0\n' + 
-				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',4,0,' + wid1 + ',0\n';
-			buildingData.value += floor.name;
 			building.add( floor );
 
 			floor = createSlab( len2, wid1);
 			floor.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
-			floor.name = 
-				'Slab.2,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
-				'Slab.2,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len2 + ',0,0\n' + 
-				'Slab.2,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len2 + ',' + wid2 + ',0\n' + 
-				'Slab.2,BaseSlab,Level.' + ( i + 1 ) + ',4,0,' + wid2 + ',0\n';
-			buildingData.value += floor.name;
 			building.add( floor );
-
 
 		}
 
+/*
+		roof = createSlab( len, wid );
+		roof.position.set( -len05, -wid05, i * hgt );
+		roof.name = 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
+		buildingData.value += roof.name;
+//		building.add( roof );
+*/
 
 		roof = createSlab( len1, wid1 + wid2 );
 		roof.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
-		roof.name = 
-			'Slab.3,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
-			'Slab.3,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len1 + ',0,0\n' + 
-			'Slab.3,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len1 + ',' + wid1 + ',0\n' + 
-			'Slab.3,RoofSlab,Level.' + ( i + 1 ) + ',4,0,' + wid1 + ',0\n';
-		buildingData.value += roof.name;
 		building.add( roof );
 
 		roof = createSlab( len2, wid1);
 		roof.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
-		roof.name = 
-			'Slab.4,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
-			'Slab.4,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len2 + ',0,0\n' + 
-			'Slab.4,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len2 + ',' + wid2 + ',0\n' + 
-			'Slab.4,RoofSlab,Level.' + ( i + 1 ) + ',4,0,' + wid2 + ',0\n';
-		buildingData.value += roof.name;
 		building.add( roof );
-
 
 	}
 
@@ -452,7 +463,7 @@
 
 
 
-	function createExternalWall( length = 20, height = 12, floor = 0, id = 1 ) {
+	function createExternalWall( length, height ) {
 
 		const wwr = parseFloat( inpWindowWallRatio.value ) / 100;
 		const length05 = length * 0.5;
@@ -461,84 +472,46 @@
 		const deltaH = wwr * height05;
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		const shapeVertices = [ 
+		const shape = new THREE.Shape( [ 
 			v2( 0, 0 ), 
 			v2( length, 0 ), 
 			v2( length, height ), 
 			v2( 0, height ),
 			v2( 0, 0 )
-		];
-		const shape = new THREE.Shape( shapeVertices );
+		] );
 
-		const holeVertices = [ 
+		const hole = new THREE.Path()
+		hole.fromPoints( [ 
 			v2( length05 - deltaL, height05 - deltaH ), 
 			v2( length05 + deltaL, height05 - deltaH ), 
 			v2( length05 + deltaL, height05 + deltaH ), 
 			v2( length05 - deltaL, height05 + deltaH ),
 			v2( length05 - deltaL, height05 - deltaH )
-		];
-		const hole = new THREE.Path()
-		hole.fromPoints( holeVertices );
+		] );
 
 		shape.holes.push( hole );
 
 		const geometry = new THREE.ShapeBufferGeometry( shape );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		mesh = new THREE.Mesh( geometry, material );
-//console.log( '', mesh );
+		const mesh = new THREE.Mesh( geometry, material );
 
-		let c = mesh.geometry.attributes.position.array; // c = coordinate
-		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+		const overhangDepth = parseFloat( inpOverhangDepth.value );
+		geometryPlane = new THREE.PlaneBufferGeometry( 2 * deltaL, overhangDepth * 5 );
+		geometryPlane.applyMatrix( new THREE.Matrix4().makeTranslation( length05, 0, height05 + deltaH ) );
 
-		mesh.name = 
-			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ] + '\n' + 
-			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ] + '\n' + 
-			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ] + '\n' + 
-			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ] + '\n' +
+		const plane = new THREE.Mesh( geometryPlane, material );
 
-			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',1,' + c[ 12 ] + ',' + c[ 13 ] + ',' + c[ 14 ].toFixed( 3 ) + '\n' +
-			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',2,' + c[ 15 ] + ',' + c[ 16 ] + ',' + c[ 17 ].toFixed( 3 ) + '\n' +
-			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',3,' + c[ 18 ] + ',' + c[ 19 ] + ',' + c[ 20 ].toFixed( 3 ) + '\n' +
-			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',4,' + c[ 21 ] + ',' + c[ 12 ] + ',' + c[ 23 ].toFixed( 3 ) + '\n' +
-
-		'';
-
-		buildingData.value += mesh.name;
-
-		if ( inpOverhangDepth.value !== '0' ) {
-
-			const overhangDepth = parseFloat( inpOverhangDepth.value );
-			geometryPlane = new THREE.PlaneBufferGeometry( 2 * deltaL, overhangDepth );
-			geometryPlane.applyMatrix( new THREE.Matrix4().makeTranslation( length05, 0.5 * overhangDepth, height05 + deltaH ) );
-
-			const plane = new THREE.Mesh( geometryPlane, material );
-
-			c = plane.geometry.attributes.position.array; // c = coordinate
-			c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-			plane.name = 
-
-				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
-				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ].toFixed( 3 ) + '\n' +
-				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ].toFixed( 3 ) + '\n' +
-				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ].toFixed( 3 ) + '\n' +
-
-			'';
-
-			buildingData.value += plane.name;
-			mesh.add( plane );
-
-		}
+		mesh.add( plane );
 
 		return mesh;
 
 	}
 
 
-	function createPerimeterDepthWall( length, height, floor, id ) {
+	function createPerimeterDepthWall( length, height ) {
 
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
-		const perDep = parseFloat( inpPerimterDepth.value );
 
 		const shape = new THREE.Shape( [ 
 			v2( 0, 0 ), 
@@ -552,32 +525,6 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
 		const mesh = new THREE.Mesh( geometry, material );
-
-		const shape2 = new THREE.Shape( [ 
-			v2( 0, 0 ), 
-			v2( Math.SQRT2 * perDep, 0 ), 
-			v2( Math.SQRT2 * perDep, height ), 
-			v2( 0, height ),
-			v2( 0, 0 )
-		] );
-
-		geometry2 = new THREE.ShapeBufferGeometry( shape2 );
-		geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
-		geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.75 * Math.PI ) );
-		diag = new THREE.Mesh( geometry2, material );
-		mesh.add( diag );
-
-		c = mesh.geometry.attributes.position.array; // c = coordinate
-		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-		mesh.name = 
-
-			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
-			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ].toFixed( 3 ) + '\n' +
-			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ].toFixed( 3 ) + '\n' +
-			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ].toFixed( 3 ) + '\n' +
-
-		'';
-		buildingData.value += mesh.name;
 
 		return mesh;
 
