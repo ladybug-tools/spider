@@ -39,6 +39,7 @@
 <script>
 
 	var theMesh, meshes;
+	var meshEdges;
 
 	var gridHelper, axisHelper, groundHelper;
 
@@ -80,7 +81,7 @@
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 //		controls.autoRotate = true;
-
+toggleEdges();
 	}
 
 
@@ -102,9 +103,50 @@
 		groundHelper = new THREE.Mesh( geometry, material );
 		groundHelper.name = 'groundHelper';
 		groundHelper.position.set( 0, 0, -0.5 * size );
+		groundHelper.visible = false;
 
 		scene.add( gridHelper, axisHelper, groundHelper );
 
+
+	}
+
+
+
+	function toggleEdges() {
+
+//console.log( '', buildings  );
+
+		if ( !meshEdges ) {
+
+//			meshesEdges = new THREE.Object3D();
+			meshes.traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh ) {
+
+					const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
+					let meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+					meshEdges.visible = false;
+
+					child.add( meshEdges );
+
+				}
+
+			} );
+
+//			scene.add( meshesEdges );
+
+		}
+
+
+		meshes.traverse( function ( child ) {
+
+			if ( child instanceof THREE.LineSegments ) {
+
+				child.visible = child.visible === true ? false : true;
+
+			}
+
+		} );
 
 	}
 
