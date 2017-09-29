@@ -100,6 +100,14 @@ See also:
 
 ## Change Log
 
+### 2017-09-29 ~ Theo
+
+* gbXML Viewer 'Michal'.2
+* Huge update! ;-)
+* Handles all sorts of polyloop types - with good speed
+* And I learned all about conjugating quaternions in the process ;-)
+
+ 
 
 ### 2017-09-25 ~ Theo
 
