@@ -9,19 +9,47 @@ _A well for building well._
 
 ## Full Screen latest release: [Build Well]( http://ladybug-tools.github.io/spider/sandbox/build-well/index.html )
 
-#### 2017-09-21 [Build Well R4]( http://ladybug-tools.github.io/spider/sandbox/build-well/r4/build-well.html )
-#### 2017-09-21 [Build Well R3]( http://ladybug-tools.github.io/spider/sandbox/build-well/r3/build-well.html )
-#### 2017-09-20 [Build Well R2]( http://ladybug-tools.github.io/spider/sandbox/build-well/r2/build-well.html )
-#### 2017-09-17 [Build Well R1]( http://ladybug-tools.github.io/spider/sandbox/build-well/r1/build-well.html )
+_We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
+
+* 2017-09-21 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r6/build-well.html )
+* 2017-09-21 [Build Well R5]( http://ladybug-tools.github.io/spider/sandbox/build-well/r5/build-well.html )
+* 2017-09-21 [Build Well R4]( http://ladybug-tools.github.io/spider/sandbox/build-well/r4/build-well.html )
+* 2017-09-21 [Build Well R3]( http://ladybug-tools.github.io/spider/sandbox/build-well/r3/build-well.html )
+* 2017-09-20 [Build Well R2]( http://ladybug-tools.github.io/spider/sandbox/build-well/r2/build-well.html )
+* 2017-09-17 [Build Well R1]( http://ladybug-tools.github.io/spider/sandbox/build-well/r1/build-well.html )
 
 ## Features
 
 * Create simple 3D building models by adjusting a variety of numerical parameters
-* Create site context by adding, editing, saving or deleting simple forms to represent adjacent structures
+* Create a site context by adding, editing, saving or deleting simple forms to represent adjacent structures
 * Update building models by selecting parameters from menus
 * Create text reports for the geometry
-* Every menu item is built on its own standalone, easy-peasy test case 
+* Adjust a variety of display settings
+* Every menu item is built on its own standalone, easy-peasy HTML file test case 
 
+
+## Issues
+
+* 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
+
+
+## Naming Considerations
+
+* To help you build well
+* A well of data to help you build
+* Primary instigator @bwelle
+
+
+## Coding methodology
+
+* The goal is to be as simple as possible, even if that means being simplistic, to help you understand the problem being solved rather than unraveling the mysteries of the code
+* The structure is based on a single file with Three.js, multiple menu item files and a parent file handler
+* Every menu item links to a standalone HTML page. Every HTML page is just a few hundred lines long and contains all the HTML, CSS and JavaScript required to handle the task of the menu.
+	* Every menu page displays visual output that enables you to understand what is going on and to verify the code works properly
+* The menu items all call for and embed a single HTML into an iframe. This file is used is a kind of server for Three.js and the associated data  
+* There is a parent file that assembles the menu items and sets the CSS for all the other files
+ 
+_To be expanded and explained in more detail as time goes on._
 
 ## To Do
 
@@ -34,44 +62,51 @@ _A well for building well._
 ### build-well-threejs.html
 
 * 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
-	* Inworld text is a whole thing in itself. Add iy only when very necessary
+	* Inworld text is a whole thing in itself. Add in only when very necessary
 * 2017-09-21 ~ Color, shade and shadow
 
 
-### mnu-site-context.html
+### mnu-adjacent-buildings.html
 
-* 2017-09-22 ~ Consider more suitable name for this menu item
-* 2017-09-22 ~ Add ground that can receive shadow
 * 2017-09-22 ~ Add lat & Lon or geocoder input
 * 2017-09-22 ~ Add shade/shadow toggle
 * 2017-09-22 ~ Add solar calculator
-
-### mnu-adjacent-buildings.html
-
 * 2017-09-22 ~ Allow any and all buildings to have shape parameters?
 
 ### mnu-box-shape.html
 
 
+### mnu-ell-shape-one.html
 
-## Issues
-
-* 2017-09-23 ~ Better handling of data when switching tabs after a shape has been created
-* 2017-09-21 ~ **Finish add data reporting parameters, eg openings, adjacent buildings**
 * 2017-09-21 ~ Match building shapes to Ben's spec
-* 2017-09-21 ~ See if perimeter depth diagonals actually add any pertinent information
-	* Rule of thumb: Show what you will export and no more.
-	* Currently the external wall and perimeter depth walls provide sufficient data for downstream apps. No?
 
 
 
 ## Change Log
 
+### 2017-09-28 ~ Theo
+
+19:09
+
+The menuing system is more robust, enables the display of Markdown format files and enables switching menu items without losing data.
+
+It will also facilitate the development and display of the JSON and gbXML export capabilities
+
+* R7
+* Menu and file handling rebuilt
+	[x] 2017-09-23 ~ Better handling of data when switching tabs after a shape has been created
+[x] 2017-09-21 ~ See if perimeter depth diagonals actually add any pertinent information
+	* Rule of thumb: Show what you will export and no more.
+	* Currently the external wall and perimeter depth walls provide sufficient data for downstream apps. No?
+[x] 2017-09-21 ~ Finish add data reporting parameters, eg openings, adjacent buildings
+* 2017-09-22 ~ Consider more suitable name for this menu item
+* 2017-09-22 ~ Add ground that can receive shadow
+* Add quite a bit of text to read me
 
 ### 2017-09-27 ~ Theo
 
 11:22
-* R6.2
+* R6.1
 * build-well.html
 	* Add link to read me on menu / looked into how best to add license
 	* Add three.js stats indicator

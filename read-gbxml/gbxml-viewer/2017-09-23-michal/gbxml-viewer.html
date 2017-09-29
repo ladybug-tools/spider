@@ -298,7 +298,8 @@
 //	if ( i > 0 || j > 1 ) { break; } 
 
 //console.log( 'vertices', issues++, vertices,  );
-/*
+
+
 					let plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
 
 					for ( let i = 0; i < vertices.length; i++ ) {
@@ -307,14 +308,14 @@
 
 						if ( Math.abs( plane.distanceToPoint( vertex ) ) > 0.001 ) {
 
-console.log( 'vertex', vertex );
 
 						}
 
 					}
 
+//console.log( 'vertex', vertex );
 //console.log( 'plane', plane );
-*/
+
 
 					let geometryLine = new THREE.Geometry();
 					geometryLine.vertices = vertices;

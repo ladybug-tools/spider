@@ -101,7 +101,6 @@
 			</p>
 
 
-
 			<p>Building Data (soon to be gbXML):
 				<textarea id=buildingData ></textarea>
 			</p>
@@ -117,6 +116,7 @@
 <script>
 
 	const ifrSource = 'build-well-threejs.html';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
 
 	let scope;
 
@@ -138,10 +138,8 @@
 	function init() {
 
 		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
-			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/" target="top" >&#x24D8</a></h3>';
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
-//		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
-//		info.innerHTML = txt;
 
 		if ( parent && parent.ifrContents ) {
 
@@ -149,7 +147,19 @@
 
 			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 100 ) + 'px';
 
-			initVariables();
+			if ( parent.divContents.innerHTML === '' ) {
+
+console.log( 'shape ell ', parent.divContents.innerHTML );
+
+				parent.ifrContents.src = ifrSource;
+
+				parent.ifrContents.onload = initVariables;
+
+			} else {
+
+				initVariables()
+
+			}
 
 		} else {
 
@@ -197,7 +207,10 @@
 	function getBuilding() {
 
 		const building = buildings.getObjectByName( 'The Building' );
-//console.log( 'building', building );
+
+console.log( 'building.scale.x', building.scale.x );
+
+		building.scale.x = building.scale.x === 1 ? 80 : building.scale.x;
 
 		buildings.traverse( function ( child ) {
 

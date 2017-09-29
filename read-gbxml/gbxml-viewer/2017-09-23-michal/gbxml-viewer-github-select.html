@@ -62,9 +62,10 @@
 <script>
 
 //	let url;
-	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
+//	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
 //	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
+	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard%20Single%20Family%20Residential%202016.xml';
 //	const url = '../../data-files/rectangular-30x50x4.xml';
 //	const url = '../../data-files/SAM_Live.xml';
 
@@ -262,7 +263,7 @@ console.log( 'gbjson', gbjson );
 					geometry.computeFaceNormals();
 					geometry.computeVertexNormals();
 					mesh = new THREE.Mesh( geometry, material );
-					model.add( mesh );
+//					model.add( mesh );
 
 				} else if ( vertices.length < 5 ) { 
 
@@ -278,7 +279,7 @@ console.log( 'gbjson', gbjson );
 						geometry.computeFaceNormals();
 						geometry.computeVertexNormals();
 						mesh = new THREE.Mesh( geometry, material );
-						model.add( mesh );
+//						model.add( mesh );
 
 
 				} else if ( vertices[ 0 ].z === vertices[ 1 ].z && vertices[ 1 ].z === vertices[ 2 ].z ) {

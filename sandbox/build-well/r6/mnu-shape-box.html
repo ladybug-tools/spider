@@ -104,6 +104,7 @@
 <script>
 
 	const ifrSource = 'build-well-threejs.html';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/'
 
 	let scope;
 
@@ -126,7 +127,7 @@
 	function init() {
 
 		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
-			'<a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/" target="top" >&#x24D8</a></h3>';
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 //		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 //		info.innerHTML = txt;
@@ -137,7 +138,9 @@
 
 			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 100 ) + 'px';
 
-			initVariables();
+			parent.ifrContents.src = ifrSource;
+
+			parent.ifrContents.onload = initVariables;
 
 		} else {
 
@@ -176,7 +179,7 @@
 		terrain = scope.terrain;
 		structures = scope.structures;
 
-		getBuilding();
+//		getBuilding();
 
 	}
 
