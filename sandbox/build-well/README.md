@@ -88,7 +88,7 @@ _To be expanded and explained in more detail as time goes on._
 
 19:09
 
-The menuing system is more robust, enables the display of Markdown format files and enables switching menu items without losing data.
+The menu system is more robust, enables the display of Markdown format files and enables switching menu items without losing data.
 
 It will also facilitate the development and display of the JSON and gbXML export capabilities
 
@@ -102,6 +102,7 @@ It will also facilitate the development and display of the JSON and gbXML export
 * 2017-09-22 ~ Consider more suitable name for this menu item
 * 2017-09-22 ~ Add ground that can receive shadow
 * Add quite a bit of text to read me
+
 
 ### 2017-09-27 ~ Theo
 

@@ -6,7 +6,7 @@
 <meta name = "description" content = "Basic Building Well menu template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-09-23" >
-<title>gbXML Viewer 'Michal'.2</title>
+<title>gbXML Viewer 'Michal'.1</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -59,11 +59,11 @@
 //	let url;
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ConferenceCenter%20(Older).xml';
 //	url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/OfficeBuilding%20(Older).xml';
-	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard%20Single%20Family%20Residential%202016.xml';
+//	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard%20Single%20Family%20Residential%202016.xml';
 //	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
 //	const url = 'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml';
 //	const url = '../../data-files/rectangular-30x50x4.xml';
-//	const url = '../../data-files/SAM_Live.xml';
+	const url = '../../data-files/SAM_Live.xml';
 
 	const ifrSource = 'threejs-basic.html';
 
@@ -148,7 +148,6 @@
 
 		gbjson = XML2jsobj( response );
 //console.log( 'gbjson', gbjson );
-
 		gbjson.url = xhr.target.responseURL;
 //		txtContents.value = JSON.stringify( gbjson, null, 4 );
 
@@ -321,12 +320,11 @@
 //console.log( 'vertex', vertex );
 //console.log( 'plane', plane );
 
+
 					let geometryLine = new THREE.Geometry();
 					geometryLine.vertices = vertices;
 					line = new THREE.Line( geometryLine, materialLine );
 					model.add( line );
-
-					drawShapeSinglePass( line );
 
 				}
 
@@ -335,44 +333,6 @@
 		}
 
 		zoomObjectBoundingSphere( model ) 
-
-	}
-
-
-	function drawShapeSinglePass( line ) {
-
-		vertices = line.clone().geometry.vertices;
-
-		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
-
-		const obj = new THREE.Object3D();
-		obj.lookAt( plane.normal );
-
-//		const lineOriginal = line.clone();
-//		scene.add( lineOriginal );
-
-		line.quaternion.copy( obj.clone().quaternion.conjugate() );
-		line.updateMatrixWorld( true );
-
-		for ( let vertex of vertices ) {
-
-			line.localToWorld( vertex );
-
-		}
-
-		shape = new THREE.Shape( vertices );
-		const geometry = new THREE.ShapeGeometry( shape );
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
-		shape = new THREE.Mesh( geometry, material );
-
-		shape.quaternion.copy( obj.quaternion );
-		shape.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
-
-		model.add( shape );
-
-		model.remove( line );
-
-//		line = lineOriginal;
 
 	}
 
