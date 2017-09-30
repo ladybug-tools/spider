@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic pushMe-pullYou template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-29" >
+<title>gbxml-file-viewer</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+/* 2017-09-29*/
+
+	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; max-width: 900px; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ color: #f1f1f1; }
+	h3 { margin: 0; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 18pt }
+	textarea { height: 100%; width: 100% } 
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { border: 1px solid var( --mnu-color ); box-sizing: border-box; height: 100%; width: 100%; }
+	#ifrContents { border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); box-sizing: border-box;
+		max-width: 320px; margin: 20px 0 0 20px; overflow: auto; padding: 5px; position: absolute; right: 0; top: 0; }
+
+</style>
+</head>
+<body>
+
+		<div id = "divMenu" >
+
+			<div id = "divTitle" ></div>
+
+			<p id = "divFileInfo" ></p>
+			<p id = "divStats1" ></p>
+			<p id = "divStats2" ></p>
+			<p id = "divStats3" ></p>
+
+		</div>
+
+		<div id = "divContents" ></div>
+
+<script>
+
+//	const textURI = 'https://rawgit.com/GreenBuildingXML/gbXML-Schema/master/GreenBuildingXML_Ver6.01.xsd';
+	const textURI = '../../data-files/SAM_Live.xml';
+
+	const b = '<br>';
+
+	let scope;
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = '<h3><a href="" >' + document.title +'</a>' +
+			'</h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		info.innerHTML = '<p>' + txt + '</p>' + '<p>' + txt + '</p>' + '<p>' + txt + '</p>'
+
+		if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 10 ) + 'px';
+
+
+		} else {
+
+//			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+
+//			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+		}
+
+		getContents();
+
+
+	}
+
+
+	function getContents() {
+
+
+		requestFile( textURI, callbackContents );
+
+	}
+
+
+
+	function callbackContents( xhr ){
+
+		let response, source, index;
+		let page = '';
+
+		response = xhr.target.responseXML.documentElement;
+
+
+		gbjson = XML2jsobj( response );
+console.log( 'json', gbjson );
+
+//		divContents.value = JSON.stringify( json, null, 4 );
+
+		divContents.innerHTML = '<textarea>' + JSON.stringify( gbjson, null, 4 ); + '</textarea>';
+
+		gbjson.url = xhr.target.responseURL;
+
+		parseGbJson( gbjson );
+
+	}
+
+
+	function parseGbJson( gbjson ) {
+
+		const unitLength = gbjson.lengthUnit ? 'length unit: ' + gbjson.lengthUnit + b : '';
+		const name = gbjson.Campus.Location && gbjson.Campus.Location.Name ? 'location: ' + gbjson.Campus.Location.Name + b : '';
+		const latitude = gbjson.Campus.Location.Latitude ? 'latitude: ' + gbjson.Campus.Location.Latitude + b : '';
+		const longitude = gbjson.Campus.Location.Longitude ? 'longitude: ' + gbjson.Campus.Location.Longitude + b : '';
+		const postalCode = gbjson.Campus.Location.ZipcodeOrPostalCode ? 'zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b : '';
+		const url = 'url: ' + gbjson.url.split( '/' ).pop().link( gbjson.url ) + b;
+		const map = gbjson.Campus.Location.Latitude ? 'map: <a href="http://www.google.com/maps/place/' + gbjson.Campus.Location.Latitude + ',' + gbjson.Campus.Location.Longitude + '" target="_blank" >google maps</a>' + b : '';
+
+
+		let txt = 
+			'<h4>location</h4>' +
+			unitLength +
+			name +
+			latitude +
+			longitude +
+			postalCode +
+			url +
+			map +
+		'';
+
+		divStats1.innerHTML = txt;
+
+//console.log( 'surfaces', gbjson.Campus.Surface );
+
+		txt = 
+			'<h4>Surfaces</h4>' +
+		''
+
+		const surfaces = gbjson.Campus.Surface;
+
+		let items = {};
+		let openings = {};
+		polyloops = [];
+
+		for ( var i = 0; i < surfaces.length; i++ ) {
+
+			surface = surfaces[ i ];
+
+			if ( !items[ surface.surfaceType ] ) {
+
+				items[ surface.surfaceType ] = 1;
+
+			} else {
+
+				items[ surface.surfaceType ]++; 
+
+			}
+
+			if ( surface.Opening ) {
+
+//console.log( 'surface.Opening', surface.Opening );
+
+				if ( !openings[ surface.Opening.openingType ] ) {
+
+					openings[ surface.Opening.openingType ] = 1;
+
+				} else {
+
+					openings[ surface.Opening.openingType ]++; 
+
+				}
+
+			}
+
+			polyloop = surface.PlanarGeometry.PolyLoop;
+			points = [];
+
+			for ( let j = 0; j < polyloop.CartesianPoint.length; j++ ) {
+
+				point = polyloop.CartesianPoint[ j ].Coordinate;
+
+				point = point.map( function( x ) { return parseFloat( x ); } );
+
+				points.push( point );
+
+			}
+
+			polyloops.push( points );
+
+		} 
+
+console.log( 'items', items );
+
+console.log( 'openings', openings );
+
+console.log( 'polyloops', polyloops );
+
+	}
+
+
+
+	function XML2jsobj( node ) {
+
+		let	data = {};
+
+// append a value
+		function Add( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		};
+
+// element attributes
+		let child, childNode;
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			Add( childNode.name, childNode.value );
+
+		}
+
+// child elements
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) {
+
+// text value
+					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else {
+// sub-object
+					Add( childNode.nodeName, XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

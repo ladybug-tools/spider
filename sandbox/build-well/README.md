@@ -30,6 +30,7 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Issues
 
+* 2017-09-29 ~ Some is hardwired to 'The Building' string. Should be to whatever you want it to be ( & UUID ).
 * 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
 
 
@@ -54,6 +55,8 @@ _To be expanded and explained in more detail as time goes on._
 ## To Do
 
 
+
+
 ### build-well.html
 
 * 2017-09-21 ~ Export data to CSV file
@@ -75,6 +78,7 @@ _To be expanded and explained in more detail as time goes on._
 
 ### mnu-box-shape.html
 
+* 2017-09-29 ~ Add complete and current set of parameters to 'The Building' object - to enable roundtrip with adj build menu
 
 ### mnu-ell-shape-one.html
 
@@ -83,6 +87,14 @@ _To be expanded and explained in more detail as time goes on._
 
 
 ## Change Log
+
+
+### 2017-09-29 ~ Theo
+
+14:19
+* R7.2
+* Numerous minor updates following bwelle suggestions
+
 
 ### 2017-09-28 ~ Theo
 

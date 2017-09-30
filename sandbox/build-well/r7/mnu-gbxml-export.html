@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Build Well site updates" >
+<meta name = "keywords" content = "Three.js,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-29" >
+<title>gbXML Settings & Export</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	h3 { margin: 0; }
+
+	select { width: 250px; float: right }
+	summary { outline: none; font-size: 14pt }
+	textarea { height: 100%; width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+<!--
+			<details open >
+				<summary>gbXML Attributes</summary>
+				<div>
+				length Unit
+				<select>
+					<option>Meters</option>
+					<option>Feet</option>
+				</select>
+				</div>
+				<div>
+				temperature Unit
+				<select>
+					<option>C</option>
+					<option>F</option>
+				</select>
+				</p>
+			</details>
+
+-->
+			<p>
+				<button onclick = saveFile(); >save building data to file</button> 
+			</p>
+
+		<h4>gbXML settings in alphabetical order</h4>
+		<p id = "divInfo" ></p>
+
+
+	</div>
+
+	<div id = "divContents" ></div>
+
+<script>
+
+	const textURI = 'https://rawgit.com/GreenBuildingXML/gbXML-Schema/master/GreenBuildingXML_Ver6.01.xsd';
+//	const textURI = '../../data-files/SAM_Live.xml';
+
+	const ifrSource = 'build-well-threejs.html';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
+	let geometry, material, mesh;
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+
+		if ( parent && parent.ifrContents || parent.divContents.className === 'contentsScrolling' ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 500 ) + 'px';
+
+//console.log( 'parent.ifrMenuSub ', parent.ifrMenuSub.src );
+
+			if ( parent.divContents.innerHTML === '' ) {
+
+				parent.ifrContents.src = ifrSource;
+
+				parent.ifrContents.onload = initVariables;
+
+			} else {
+
+				initVariables()
+
+			}
+
+		} else {
+
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+//		selBuilding.focus();
+
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		buildings = scope.meshes;
+
+//		getBuildingData();
+
+//		setGbXML();
+
+		getContents();
+
+	}
+
+
+
+	function getContents() {
+
+		requestFile( textURI, callbackContents );
+
+	}
+
+
+
+	function callbackContents( xhr ){
+
+		let response, source, index;
+		let page = '';
+
+		response = xhr.target.response;
+
+		lines = response.split(/\r\n|\n/);
+
+		txt = '';
+
+		str = '<div><select>';
+
+		for ( var i = 375; i < lines.length; i++ ) {
+
+			line = lines[ i ].trim();
+
+			if ( line.includes( '<xsd:simpleType name=' ) ) {
+
+				str = '</select></div><div>' + ( line.match( /"(.*?)"/ ) )[ 1 ] + '<br><select>';
+
+			} else if ( line.includes( '<xsd:element name=' ) ) {
+
+				str = '</select></div><div>' + ( line.match( /"(.*?)"/ ) )[ 1 ] + '<br><select>'; //( line.match( /"(.*?)"/ ) )[ 1 ];
+
+			} else {
+
+				str = '';
+
+			}
+
+//			if ( line.includes( 'documentation' ) ) {
+			if ( line.includes( 'enumeration' ) || line.includes( 'element ref=' )) {
+
+				oo = line.match( /"(.*?)"/ );
+
+				if ( oo ) { 
+//console.log( '', oo[ 1 ] ); 
+					str += '<option>' + oo[ 1 ] + '</option>';
+				}
+			}
+
+//console.log( '', str );
+
+			if ( str ) { 
+				txt += str + '\n';
+			}
+		} 
+
+		divInfo.innerHTML = txt;
+			parent.ifrMenuSub.style.height = ( divInfo.scrollHeight + 500 ) + 'px';
+	}
+
+
+	function getBuildingData() {
+
+		const building = buildings.getObjectByName( 'The Building' );
+
+console.log( 'building', building );
+
+
+	}
+
+	function setGbXML() {
+
+		let gbxml = {
+
+			xmlns: "http://www.gbxml.org/schema",
+			useSIUnitsForResults: "true",
+			temperatureUnit: "C",
+			lengthUnit: "Meters",
+			areaUnit: "SquareMeters",
+			volumeUnit: "CubicMeters",
+			version: "0.37",
+
+			Campus: {
+				id: 'aim0002',
+				Location: {
+					StationId: "142882_2006",
+					ZipcodeOrPostalCode: "94111",
+					Longitude: "-71.25807",
+					Latitude: "42.41486",
+					Elevation: "0",
+					CADModelAzimuth: "0"
+				},
+				Building: {
+					Space: {
+						id: 'id',
+						SpaceBoundary: {
+							surfaceIdRef : 123,
+							PlanarGeometry: {
+								PolyLoop: {
+									CartesianPoint: [
+//										Coordinate[ 234 ]
+									]
+								}
+							}
+						},
+						Area: 123,
+						Volume: 123,
+						PeopleNumber: 123
+					},
+					Surface: {
+						Opening:{}
+					},
+					Construction:{},
+				},
+			},
+			Layer: {},
+			Material: {},
+			Meter: {},
+			Schedule: {},
+			Result: {},
+			DocumentHistory: {},
+			Zone: {}
+		}
+
+console.log( 'gbxml', gbxml);
+		scope.gbxmlText.innerHTML = 'gbXML data in JSON format<textarea id-buildingData >' + JSON.stringify( gbxml, null, 4 ); + '</textarea>';
+
+	}
+
+
+
+	function saveFile() {
+
+		var blob = new Blob( [ buildingData.value ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'building-data.csv';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { divInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

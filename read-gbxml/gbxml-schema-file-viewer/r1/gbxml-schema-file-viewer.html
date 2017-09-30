@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic pushMe-pullYou template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-29" >
+<title>gbxml-file-viewer</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+/* 2017-09-29*/
+
+	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; max-width: 900px; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ color: #f1f1f1; }
+	h3 { margin: 0; }
+
+	select { width: 150px; float: right; }
+	summary { outline: none; font-size: 18pt }
+	textarea { height: 100%; width: 100% } 
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { border: 1px solid var( --mnu-color ); box-sizing: border-box; height: 100%; width: 100%; }
+	#ifrContents { border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); box-sizing: border-box;
+		max-width: 320px; margin: 20px 0 0 20px; overflow: auto; padding: 5px; position: absolute; right: 0; top: 0; }
+
+</style>
+</head>
+<body>
+
+		<div id = "divMenu" >
+
+			<div id = "divTitle" ></div>
+
+			<p id = "divFileInfo" ></p>
+			<p id = "divStats1" ></p>
+			<p id = "divStats2" ></p>
+			<p id = "divStats3" ></p>
+
+		</div>
+
+		<div id = "divContents" ></div>
+
+<script>
+
+	const textURI = 'https://rawgit.com/GreenBuildingXML/gbXML-Schema/master/GreenBuildingXML_Ver6.01.xsd';
+//	const textURI = '../../data-files/SAM_Live.xml';
+
+	const b = '<br>';
+
+	let scope;
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = '<h3><a href="" >' + document.title +'</a>' +
+			'</h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		info.innerHTML = '<p>' + txt + '</p>' + '<p>' + txt + '</p>' + '<p>' + txt + '</p>'
+
+		if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 10 ) + 'px';
+
+
+		} else {
+
+//			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+
+//			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+		}
+
+		getContents();
+
+
+	}
+
+
+	function getContents() {
+
+		requestFile( textURI, callbackContents );
+
+	}
+
+
+
+	function callbackContents( xhr ){
+
+		let response, source, index;
+		let page = '';
+
+		response = xhr.target.response;
+
+		lines = response.split(/\r\n|\n/);
+
+		txt = '';
+
+		str = '<div><select>';
+
+		for ( var i = 375; i < lines.length; i++ ) {
+
+			line = lines[ i ].trim();
+
+			if ( line.includes( '<xsd:simpleType name=' ) ) {
+
+				str = '</select></div><div>' + ( line.match( /"(.*?)"/ ) )[ 1 ] + '<br><select>';
+
+			} else if ( line.includes( '<xsd:element name=' ) ) {
+
+				str = '</select></div><div>' + ( line.match( /"(.*?)"/ ) )[ 1 ] + '<br><select>'; //( line.match( /"(.*?)"/ ) )[ 1 ];
+
+			} else {
+
+				str = '';
+
+			}
+
+//			if ( line.includes( 'documentation' ) ) {
+			if ( line.includes( 'enumeration' ) || line.includes( 'element ref=' )) {
+
+				oo = line.match( /"(.*?)"/ );
+
+				if ( oo ) { 
+//console.log( '', oo[ 1 ] ); 
+					str += '<option>' + oo[ 1 ] + '</option>';
+				}
+			}
+
+//console.log( '', str );
+
+			if ( str ) { 
+				txt += str + '\n';
+			}
+		} 
+
+		divStats1.innerHTML = txt;
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

@@ -3,11 +3,13 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "parametric box shape creator" >
+<meta name = "description" content = "Build Well parametric box shape creator" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-26" >
-<title>Box Shape R3</title>
+<meta name = "date" content = "2017-09-29" >
+<title>Box Shape R4</title>
 <style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
 /* https://www.w3schools.com/colors/colors_names.asp */
 
 	html { --mnu-color: tomato; --mnu-back-color: cornsilk; --mnu-width: 350px; height: 100%; }
@@ -48,7 +50,7 @@
 
 
 			<p title = 'Measured in square feet' >Building Area: 
-				<input id=inpBuildingArea type = number min = 1000 max = 1000000 step = 100 value = 10000 class = floatRight >
+				<input id=inpBuildingArea type = number min=1000 max=1000000 step=100 value=10000 onchange=updateShape() class=floatRight >
 			</p>
 
 			<p title= "" >Building Length:
@@ -63,10 +65,10 @@
 			<p title= 'Measured in square feet' >Floor Area: 
 				<span id=inpFloorArea class = floatRight >0</span>
 			</p>
+
 			<p title= "" >Building Width:
 				<span type=number id=inpWidth1 min = 0 max = 100 step = 1 value = 50 onchange=updateShape(); class = floatRight ></span>
 			</p>
-
 
 			<p title= 'Measured in feet' >Floor Height: 
 				<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
@@ -88,7 +90,7 @@
 				<input type=number id=inpOrientation min = -180 max = 180 step = 5 value = 0 onchange = updateShape(); class = floatRight >
 
 			</p>
-
+<!--
 			<p>Building Data (soon to be gbXML):
 				<textarea id=buildingData ></textarea>
 			</p>
@@ -96,12 +98,14 @@
 			<p>
 				<button onclick = saveFile(); >save building data to file</button> 
 			</p>
+-->
 
 		</div>
 
 		<div id = "divContents" ></div>
 
 <script>
+
 
 	const ifrSource = 'build-well-threejs.html';
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/'
@@ -129,17 +133,16 @@
 		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
-//		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
-//		info.innerHTML = txt;
 
 		if ( parent && parent.ifrContents ) {
 
 			scope = parent.ifrContents.contentWindow;
 
-			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 100 ) + 'px';
+			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 0 ) + 'px';
 
 			if ( parent.divContents.innerHTML === '' ) {
-console.log( '23 box shape ', divContents.innerHTML );
+// console.log( 'box shape ', divContents.innerHTML );
+
 				parent.ifrContents.src = ifrSource;
 
 				parent.ifrContents.onload = initVariables;
@@ -182,10 +185,11 @@ console.log( '23 box shape ', divContents.innerHTML );
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
-		parameters = scope.parameters;
+//		parameters = scope.parameters;
 		buildings = scope.meshes;
-		terrain = scope.terrain;
-		structures = scope.structures;
+//		terrain = scope.terrain;
+//		structures = scope.structures;
+
 
 		getBuilding();
 
@@ -229,7 +233,7 @@ console.log( '23 box shape ', divContents.innerHTML );
 
 		buildings.remove( building );
 
-		buildingData.value = '';
+//		buildingData.value = '';
 
 		building = new THREE.Object3D();
 
@@ -243,8 +247,32 @@ console.log( '23 box shape ', divContents.innerHTML );
 	}
 
 
-
 	function updateMenu() {
+
+		let building = buildings.getObjectByName( 'The Building' );
+
+		const length = parseFloat( inpLength1.value );
+		const width = parseFloat( inpWidth1.innerHTML );
+		const floors = parseInt( inpNumberOfFloors.value, 10 );
+		const areaCurrent = length * width * floors; // building.userData.areaCurrent; 
+
+
+		const areaNew = parseFloat( inpBuildingArea.value );
+		const ratio = Math.sqrt( areaNew / areaCurrent );
+//console.log( '', areaCurrent, areaNew, ratio );
+
+		const lengthNew = ratio * parseFloat( inpLength1.value );
+		const widthNew =  ratio * parseFloat( inpWidth1.innerHTML );
+
+		inpLength1.value = lengthNew.toFixed(); 
+		inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
+		inpFloorArea.innerHTML = ( widthNew * lengthNew / floors ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+
+	}
+
+
+
+	function updateMenuZZZZ() {
 
 		const area = parseFloat( inpBuildingArea.value );
 		const length = parseFloat( inpLength1.value );
@@ -332,8 +360,6 @@ console.log( '23 box shape ', divContents.innerHTML );
 				building.add( wall );
 				intWallCount++;
 
-
-
 			}
 
 // slabs
@@ -345,7 +371,7 @@ console.log( '23 box shape ', divContents.innerHTML );
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
-			buildingData.value += slab.name;
+//			buildingData.value += slab.name;
 			building.add( slab );
 
 		}
@@ -357,8 +383,9 @@ console.log( '23 box shape ', divContents.innerHTML );
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
-		buildingData.value += roof.name;
+//		buildingData.value += roof.name;
 		building.add( roof );
+
 
 	}
 
@@ -438,7 +465,7 @@ console.log( '23 box shape ', divContents.innerHTML );
 
 		'';
 
-		buildingData.value += mesh.name;
+//		buildingData.value += mesh.name;
 
 		if ( inpOverhangDepth.value !== '0' ) {
 
@@ -459,7 +486,7 @@ console.log( '23 box shape ', divContents.innerHTML );
 
 			'';
 
-			buildingData.value += plane.name;
+//			buildingData.value += plane.name;
 			mesh.add( plane );
 
 		}
@@ -511,7 +538,7 @@ console.log( '23 box shape ', divContents.innerHTML );
 			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ].toFixed( 3 ) + '\n' +
 
 		'';
-		buildingData.value += mesh.name;
+//		buildingData.value += mesh.name;
 
 		return mesh;
 

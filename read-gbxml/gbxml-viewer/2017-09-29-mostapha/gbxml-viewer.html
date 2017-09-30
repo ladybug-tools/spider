@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic pushMe-pullYou template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-29" >
+<title>gbXML Viewer 'Mostapha'</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+/* 2017-09-29*/
+
+	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 300px; height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ color: #f1f1f1; }
+	h3 { margin: 0; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 18pt }
+	textarea { height: 100%; width: 100% } 
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { border: 0px solid var( --mnu-color ); box-sizing: border-box; height: 100%; width: 100%; }
+	#ifrContents { border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); box-sizing: border-box;
+		max-width: 320px; margin: 20px 0 0 20px; overflow: auto; padding: 5px; position: absolute; right: 0; top: 0; }
+
+</style>
+</head>
+<body>
+
+		<div id = "divMenu" >
+
+			<div id = "divTitle" ></div>
+
+			<p id = "divFileInfo" ></p>
+			<p id = "divStats1" ></p>
+			<p id = "divStats2" ></p>
+			<p id = "divStats3" ></p>
+
+		</div>
+
+		<div id = "divContents" ></div>
+
+<script>
+
+	let campusSurfaces, campusOpenings;
+
+	const ifrSourceURI = 'threejs-basic.html';
+	const infoURI = 'https://github.com/ladybug-tools.github.io/read-gbxml/';
+	const textURI = '../../data-files/SAM_Live.xml';
+
+	const b = '<br>';
+
+	let scope;
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = '<h3><a href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		info.innerHTML = '<p>' + txt + '</p>' + '<p>' + txt + '</p>' + '<p>' + txt + '</p>'
+
+		if ( parent && parent.ifrContents ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 10 ) + 'px';
+
+			parent.ifrContents.src = 'plugins/template-threejs-shade.html';
+
+			parent.ifrContents.onload = initVariables;
+
+		} else {
+
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSourceURI + ' ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		requestFile( textURI, callbackContents );
+
+	}
+
+
+
+	function callbackContents( xhr ){
+
+		let response, source, index;
+		let page = '';
+
+		response = xhr.target.responseXML.documentElement;
+
+
+		gbjson = XML2jsobj( response );
+console.log( 'json', gbjson );
+
+//		divContents.value = JSON.stringify( json, null, 4 );
+//		divContents.innerHTML = '<textarea>' + JSON.stringify( gbjson, null, 4 ); + '</textarea>';
+
+		gbjson.url = xhr.target.responseURL;
+
+		parseGbJson( gbjson );
+
+	}
+
+
+	function parseGbJson( gbjson ) {
+
+		const unitLength = gbjson.lengthUnit ? 'length unit: ' + gbjson.lengthUnit + b : '';
+		const name = gbjson.Campus.Location && gbjson.Campus.Location.Name ? 'location: ' + gbjson.Campus.Location.Name + b : '';
+		const latitude = gbjson.Campus.Location.Latitude ? 'latitude: ' + gbjson.Campus.Location.Latitude + b : '';
+		const longitude = gbjson.Campus.Location.Longitude ? 'longitude: ' + gbjson.Campus.Location.Longitude + b : '';
+		const postalCode = gbjson.Campus.Location.ZipcodeOrPostalCode ? 'zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b : '';
+		const url = 'url: ' + gbjson.url.split( '/' ).pop().link( gbjson.url ) + b;
+		const map = gbjson.Campus.Location.Latitude ? 'map: <a href="http://www.google.com/maps/place/' + gbjson.Campus.Location.Latitude + ',' + gbjson.Campus.Location.Longitude + '" target="_blank" >google maps</a>' + b : '';
+
+
+		let txt = 
+			'<h4>location</h4>' +
+			unitLength +
+			name +
+			latitude +
+			longitude +
+			postalCode +
+			url +
+			map +
+		'';
+
+		divStats1.innerHTML = txt;
+
+//console.log( 'surfaces', gbjson.Campus.Surface );
+
+		const surfaces = gbjson.Campus.Surface;
+
+		let items = {};
+		let openingsMeta = {};
+		polyloops = [];
+		openings = [];
+
+		for ( var i = 0; i < surfaces.length; i++ ) {
+
+			surface = surfaces[ i ];
+
+			if ( !items[ surface.surfaceType ] ) {
+
+				items[ surface.surfaceType ] = 1;
+
+			} else {
+
+				items[ surface.surfaceType ]++; 
+
+			}
+
+			if ( surface.Opening ) {
+
+				if ( !openingsMeta[ surface.Opening.openingType ] ) {
+
+					openingsMeta[ surface.Opening.openingType ] = 1;
+
+				} else {
+
+					openingsMeta[ surface.Opening.openingType ]++; 
+
+				}
+
+				if ( surface.Opening.PlanarGeometry ) {
+
+					polyloop = surface.Opening.PlanarGeometry.PolyLoop;
+					points = getPoints( polyloop );
+					openings.push( points );
+
+				} else {
+
+//console.log( 'surface.Opening', surface.Opening.length );
+					for ( var j = 0; j < surface.Opening.length; j++ ) {
+
+						polyloop = surface.Opening[ j ].PlanarGeometry.PolyLoop;
+						points = getPoints( polyloop );
+						openings.push( points );
+
+					}
+
+				}
+
+			}
+
+
+			polyloop = surface.PlanarGeometry.PolyLoop;
+
+			points = getPoints( polyloop );
+
+			polyloops.push( points );
+
+		} 
+
+
+		txt = 
+			'<h4>Surfaces</h4>' +
+		'';
+
+console.log( 'items', items );
+
+console.log( 'openingsMeta', openingsMeta );
+
+console.log( 'openings', openings );
+
+console.log( 'polyloops', polyloops );
+
+
+		scene.remove( campusSurfaces, campusOpenings );
+
+		campusSurfaces = new THREE.Object3D();
+		let material = new THREE.MeshNormalMaterial( { side: 2, opacity: 0.5, transparent: true } );
+
+		for ( let i = 0; i < polyloops.length; i++ ) {
+
+			shape = drawShapeSinglePassObjects( polyloops[ i ], material );
+			campusSurfaces.add( shape );
+
+		}
+
+		campusOpenings = new THREE.Object3D();
+		material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+
+		for ( i = 0; i < openings.length; i++ ) {
+
+			shape = drawShapeSinglePassObjects( openings[ i ], material );
+			campusOpenings.add( shape );
+
+		}
+
+		scene.add( campusSurfaces, campusOpenings );
+		zoomObjectBoundingSphere( campusSurfaces )
+
+	}
+
+
+
+	function getPoints( polyloop ) {
+
+		const points = [];
+
+		for ( let j = 0; j < polyloop.CartesianPoint.length; j++ ) {
+
+			const p = polyloop.CartesianPoint[ j ].Coordinate;
+
+			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
+
+			points.push( point );
+
+		}
+
+		return points;
+
+	}
+
+
+
+	function drawShapeSinglePassObjects( vertices, material ) {
+
+		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
+
+		const obj = new THREE.Object3D();
+		obj.lookAt( plane.normal );
+
+		const obj2 = new THREE.Object3D();
+		obj2.quaternion.copy( obj.clone().quaternion.conjugate() );
+		obj2.updateMatrixWorld( true );
+
+		for ( let vertex of vertices ) {
+
+			obj2.localToWorld( vertex );
+
+		}
+
+		shape = new THREE.Shape( vertices );
+
+		const geometry = new THREE.ShapeGeometry( shape );
+
+		shape = new THREE.Mesh( geometry, material );
+		shape.quaternion.copy( obj.quaternion );
+		shape.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
+
+		return shape;
+
+	}
+
+
+
+	function zoomObjectBoundingSphere( obj ) {
+
+		if ( obj.geometry ) {
+
+			obj.geometry.computeBoundingSphere();
+			const center = obj.geometry.boundingSphere.center;
+			const radius = obj.geometry.boundingSphere.radius;
+
+		} else {
+
+			const bbox = new THREE.Box3().setFromObject( campusSurfaces );
+			const sphere = bbox.getBoundingSphere();
+			center = sphere.center;
+			radius = sphere.radius;
+
+		}
+
+		divStats3.innerHTML = 
+			'center: x' + center.x.toLocaleString() + ' y' + center.y.toLocaleString() + ' z' + center.z.toLocaleString() + b +
+			'radius: ' + radius.toLocaleString() +
+		'';
+
+
+		controls.target.copy( center );
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		axisHelper.position.copy( center );
+
+		camera.far = 2 * camera.position.length();
+		camera.updateProjectionMatrix();
+
+
+	}
+
+
+
+	function XML2jsobj( node ) {
+
+		let	data = {};
+
+		function Add( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		};
+
+		let child, childNode;
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			Add( childNode.name, childNode.value );
+
+		}
+
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
+
+					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else { // sub-object
+
+					Add( childNode.nodeName, XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>

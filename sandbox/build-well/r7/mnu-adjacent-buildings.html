@@ -8,6 +8,8 @@
 <meta name = "date" content = "2017-09-29" >
 <title>Adjacent Buildings</title>
 <style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
 /* https://www.w3schools.com/colors/colors_names.asp */
 
 	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 300px;  height: 100%; }
@@ -189,7 +191,6 @@
 
 	function getBuilding() {
 
-//		const building = buildings.children[ selBuilding.selectedIndex ];
 		const building = buildings.getObjectByName( selBuilding.value );
 		const r2d = 180 / Math.PI;
 //console.log( 'building', building );
@@ -292,8 +293,6 @@
 		buildings.add( building );
 
 		updateSelectBuilding();
-
-//		selBuilding.selectedIndex = selBuilding.children.length - 1;
 
 	}
 

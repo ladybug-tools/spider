@@ -9,9 +9,9 @@
 
 -->
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/index.html#plugins/display-gbjson.html width=100% height=600px ></iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/index.html width=100% height=600px ></iframe>
 
-## Full Screen: [gbXML Viewer carmel]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/index.html#plugins/display-gbjson.html )
+## Full Screen: [gbXML Viewer carmel]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/index.html )
 
 
 
@@ -100,7 +100,19 @@ See also:
 
 ## Change Log
 
+
 ### 2017-09-29 ~ Theo
+
+Preliminary release. Only handles a single model.
+
+Next release should have usual features plus: actual holes in the surfaces and not just black blobs. After that will come colors and shading
+
+* gbXML Viewer 'Mostapha'
+* Another big jump: now depicting Surfaces and Openings
+* Code quite a bit smaller and tighter
+
+
+### 2017-09-28 ~ Theo
 
 * gbXML Viewer 'Michal'.2
 * Huge update! ;-)

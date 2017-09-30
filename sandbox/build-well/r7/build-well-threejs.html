@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="3D in your browser" >
+<meta name=description content="Build Well Three.js 'server' - designed to be accessed inside and iframe" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-08-01" >
+<meta name = "date" content = "2017-09-29" >
 <title>Build Well Three.js</title>
 <style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
 	a { color: crimson; text-decoration: none; }
@@ -15,6 +16,7 @@
 	h1 { margin: 0 }
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
+	textarea { background: none; height: 800px; width: 100%; }
 
 	#menu { position: absolute; left: 0; margin: 0 auto; right: 0; max-width: 50%; text-align: center; }
 
@@ -34,6 +36,8 @@
 			<button onclick=camera.position.set(300,0,0); >east elevation</button> 
 			<button onclick=camera.position.set(-300,0,0); >west elevation</button> 
 		</div>
+		<br>
+		<div id=gbxmlText ></div>
 	</div>
 
 <script>

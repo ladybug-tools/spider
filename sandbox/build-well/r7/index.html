@@ -8,6 +8,8 @@
 <meta name = "date" content = "2017-09-29" >
 <title>Build Well R7.1</title>
 <style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
 	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 350px; height: 100%; }
@@ -82,6 +84,11 @@
 		<p>
 			<a href=JavaScript:getMenuHTMLContentHTML("mnu-settings.html"); title='Save your files & adjust parameters' >Settings</a> 
 			&raquo; <a href="mnu-settings.html" target="_blank" title = 'standalone test script'  >&#x1F5D7;</a>
+		</p>
+
+		<p>
+			<a href=JavaScript:getMenuHTMLContentHTML("mnu-gbxml-export.html"); title='Save your files & adjust parameters' >gbXML Export</a> 
+			&raquo; <a href="mnu-gbxml-export.html" target="_blank" title = 'standalone test script'  >&#x1F5D7;</a>
 		</p>
 
 		<div id = "divMenuSub" ></div>
@@ -173,14 +180,14 @@
 
 		ifrMenuSub.onload = function() {
 
-		if ( parent.divContents.innerHTML === '' || parent.divContents.className === 'contentsScrolling' ) {
+			if ( parent.divContents.innerHTML === '' || parent.divContents.className === 'contentsScrolling' ) {
 
-			parent.divContents.innerHTML = '<iframe id=ifrContents ></iframe>';
+				parent.divContents.innerHTML = '<iframe id=ifrContents ></iframe>';
 
 //		divContents.className = 'contentsScrolling';
 //		divContents.style.cssText = 'border: 1px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
 
-		}
+			}
 
 		}
 
