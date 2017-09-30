@@ -30,6 +30,8 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Issues
 
+* 2017-09-30 ~ Funny behaviors if you play with the grid a lot
+* 2017-09-30 ~ Floor area not being updated correctly
 * 2017-09-29 ~ Some is hardwired to 'The Building' string. Should be to whatever you want it to be ( & UUID ).
 * 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
 
@@ -92,9 +94,9 @@ _To be expanded and explained in more detail as time goes on._
 ### 2017-09-29 ~ Theo
 
 14:19
-* R7.2
+* R7.1
 * Numerous minor updates following bwelle suggestions
-
+* Adds gbXML Export preliminaries
 
 ### 2017-09-28 ~ Theo
 
