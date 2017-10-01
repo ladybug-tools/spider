@@ -28,14 +28,14 @@
 
 	<div id = "menu" >
 		<div id = "title" ></div>
-		<div id = "contents" >
+		<p id = "contents" >
 			<button onclick=controls.reset(); >reset view</button>
 			<button onclick=camera.position.set(0,0,300); >plan view</button>
 			<button onclick=camera.position.set(0,-300,0); >south elevation</button> 
 			<button onclick=camera.position.set(0,300,0); >north elevation</button> 
 			<button onclick=camera.position.set(300,0,0); >east elevation</button> 
 			<button onclick=camera.position.set(-300,0,0); >west elevation</button> 
-		</div>
+		</p>
 		<br>
 		<div id=gbxmlText ></div>
 	</div>
@@ -55,7 +55,11 @@
 
 	function init() {
 
-		title.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>';
+		if ( window.top === window.self ) {
+
+			title.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>';
+
+		}
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.shadowMap.enabled = true;
@@ -95,7 +99,7 @@ toggleEdges();
 		scene.remove( gridHelper, axisHelper, groundHelper );
 
 		gridHelper = new THREE.GridHelper( size, 20 );
-		gridHelper.rotation.x = Math.PI * 0.5;
+		gridHelper.rotation.x = 0.5 * Math.PI;
 
 //		axisHelper = new THREE.AxisHelper( size * 0.55 );
 		axisHelper = new THREE.AxisHelper( size * 0.05 );
@@ -182,7 +186,7 @@ toggleEdges();
 		object.add( mesh );
 
 		mesh = createMesh();
-		mesh.scale.set( 80, 50, 15 );
+		mesh.scale.set( 80, 100, 15 );
 		mesh.position.set( 0, 0, 0.5 * mesh.scale.z );
 		mesh.name = 'The Building';
 		object.add( mesh );

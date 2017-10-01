@@ -30,8 +30,8 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Issues
 
-* 2017-09-30 ~ Funny behaviors if you play with the grid a lot
-* 2017-09-30 ~ Floor area not being updated correctly
+
+
 * 2017-09-29 ~ Some is hardwired to 'The Building' string. Should be to whatever you want it to be ( & UUID ).
 * 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
 
@@ -56,13 +56,12 @@ _To be expanded and explained in more detail as time goes on._
 
 ## To Do
 
+* 2017-09-30 ~ Add selecting and moving buildings via pointing device
 
 
+### index.html / Build Well parent file
 
-### build-well.html
 
-* 2017-09-21 ~ Export data to CSV file
-* 2017-09-21 ~ Export to Open Studio JSON schema
 
 ### build-well-threejs.html
 
@@ -80,16 +79,35 @@ _To be expanded and explained in more detail as time goes on._
 
 ### mnu-box-shape.html
 
+* 2017-09-30 ~ Floor area not being updated correctly
 * 2017-09-29 ~ Add complete and current set of parameters to 'The Building' object - to enable roundtrip with adj build menu
 
 ### mnu-ell-shape-one.html
 
 * 2017-09-21 ~ Match building shapes to Ben's spec
 
+### mnu-gbxml-export.html
+
+
 
 
 ## Change Log
 
+
+
+### 2017-09-30 ~ Theo
+
+13:23
+
+* mnu-adjacent-buildings.html
+	* Add oninput="validity.valid||(value='');" to length, width & height to prevent negative values
+[x] 2017-09-30 ~ Funny behaviors if you play with the grid a lot << not so funny once you understand the logic that there is always a minimum based om the axis you are NOT moving along
+No long relevant
+* 2017-09-21 ~ Export data to CSV file
+* 2017-09-21 ~ Export to Open Studio JSON schema
+* ### mnu-box-shape.html
+	* Add check validity for area, length, number of floors, height, depth, wwr, over hang > no negative numbers or text entries, only numbers within permitted range. see tooltips for acceptable values
+	* Add checking for null values
 
 ### 2017-09-29 ~ Theo
 
