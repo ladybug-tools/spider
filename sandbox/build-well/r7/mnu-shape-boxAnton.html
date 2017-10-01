@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Build Well parametric box shape creator" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-30" >
-<title>Box Shape R5</title>
+<meta name = "date" content = "2017-09-29" >
+<title>Box Shape R4</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -42,35 +42,21 @@
 </head>
 <body>
 
-		<div id="divMenu" >
+		<div id = "divMenu" >
 
-			<div id="title" ></div>
+			<div id = "title" ></div>
 
 			<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
 
-<<<<<<< HEAD
-			<p title='Area from 100 to 1000000' >Building Area: 
-				<input id=inpBuildingArea type = number min=1 max=1000000 step=1 value=10000 oninput="validity.valid||(value='');" onchange=updateShape() class=floatRight >
-=======
 
 			<p title = 'Measured in square feet' >Building Area:
 				<input id=inpBuildingArea type = number min=1000 max=1000000 step=100 value=10000 onchange=updateShape() class=floatRight >
->>>>>>> origin/master
 			</p>
 
-			<p title='x distance 1 to 200' >Building Length:
-				<input type=number id=inpLength1 min=1 max=200 step=1 value=80 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
+			<p title= "" >Building Length:
+				<input type=number id=inpLength1 min = 0 max = 100 step = 1 value = 80 onchange=updateShape(); class = floatRight >
 			</p>
 
-<<<<<<< HEAD
-			<p title='How many storeys? 1 to 161'>Number of Floors: 
-				<input id=inpNumberOfFloors type=number min=1 max=161 value=1 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
-			</p>
-
-
-			<p title= 'Measured in square feet' >Floor Area: 
-				<span id=inpFloorArea class=floatRight >0</span>
-=======
 			<p title = 'How many storeys?'>Number of Floors:
 				<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
 			</p>
@@ -78,49 +64,46 @@
 
 			<p title= 'Measured in square feet' >Floor Area:
 				<span id=inpFloorArea class = floatRight >0</span>
->>>>>>> origin/master
 			</p>
 
 			<p title= "" >Building Width:
-				<span type=number id=inpWidth1 min=0 max=100 step=1 value=50 onchange=updateShape(); class=floatRight ></span>
+				<span type=number id=inpWidth1 min = 0 max = 100 step = 1 value = 50 onchange=updateShape(); class = floatRight ></span>
 			</p>
 
-<<<<<<< HEAD
-			<p title= 'Measured from 8 to 15' >Floor Height: 
-				<input id=inpFloorHeight type=number min=8 max=15 value=12 onchange=updateShape(); class=floatRight >
-			</p>
-
-			<p title= 'measured from 10 to 20' >Perimeter Depth: 
-				<input id=inpPerimterDepth type=number min=10 max=20 value=15 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
-=======
 			<p title= 'Measured in feet' >Floor Height:
 				<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
 			</p>
 
 			<p title= 'measured in feet' >Perimeter Depth:
 				<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = updateShape(); class = floatRight >
->>>>>>> origin/master
 			</p>
 
-			<p title= 'measured in percent: 1 to 99' >Window Wall Ratio:
-				<input type=number id=inpWindowWallRatio min=1 max=99 step=1 value=40 onchange=updateShape(); class=floatRight />
+			<p title= 'measured in percent' >Window Wall Ratio Facade A:
+				<input type=number id=inpWindowWallRatioA min=1 max=99 step=5 value=40 onclick=updateShape(); class = floatRight />
 			</p>
 
-<<<<<<< HEAD
-			<p title= 'Depicted only when > 0 and < 10' >Overhang Depth: 
-				<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
+			<p title= 'measured in percent' >Window Wall Ratio Facade B:
+				<input type=number id=inpWindowWallRatioB min=1 max=99 step=5 value=40 onclick=updateShape(); class = floatRight />
 			</p>
 
-			<p title= 'building angle in degrees -180 to 180' >Orientation: 
-				<input type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight >
-=======
+			<p title= 'measured in percent' >Window Wall Ratio Facade C:
+				<input type=number id=inpWindowWallRatioC min=1 max=99 step=5 value=40 onclick=updateShape(); class = floatRight />
+			</p>
+
+			<p title= 'measured in percent' >Window Wall Ratio Facade D:
+				<input type=number id=inpWindowWallRatioD min=1 max=99 step=5 value=40 onclick=updateShape(); class = floatRight />
+			</p>
+
 			<p title= 'Depicted with a highly exaggerated depth' >Overhang Depth:
 				<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 onchange=updateShape(); class=floatRight >
 			</p>
 
+			<p title= 'Depicted with a highly exaggerated depth' >Fin Depth:
+				<input type=number id=inpFinDepth min=0 max=10 step=0.5 value=0 onchange=updateShape(); class=floatRight >
+			</p>
+
 			<p title= 'building angle in degrees' >Orientation:
 				<input type=number id=inpOrientation min = -180 max = 180 step = 5 value = 0 onchange = updateShape(); class = floatRight >
->>>>>>> origin/master
 
 			</p>
 <!--
@@ -129,23 +112,19 @@
 			</p>
 
 			<p>
-<<<<<<< HEAD
-				<button onclick=saveFile(); >save building data to file</button> 
-=======
 				<button onclick = saveFile(); >save building data to file</button>
->>>>>>> origin/master
 			</p>
 -->
 
 		</div>
 
-		<div id="divContents" ></div>
+		<div id = "divContents" ></div>
 
 <script>
 
 
-	const ifrSource='build-well-threejs.html';
-	const infoURI='https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/'
+	const ifrSource = 'build-well-threejs.html';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/'
 
 	let scope;
 
@@ -163,7 +142,6 @@
 	const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 
 	init();
-
 
 	function init() {
 
@@ -206,8 +184,6 @@
 
 	}
 
-
-
 	function initVariables() {
 
 		THREE = scope.THREE;
@@ -222,7 +198,11 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
+//		parameters = scope.parameters;
 		buildings = scope.meshes;
+//		terrain = scope.terrain;
+//		structures = scope.structures;
+
 
 		getBuilding();
 
@@ -256,95 +236,81 @@
 
 	}
 
-
-
 	function updateShape() {
 
 		let building = buildings.getObjectByName( 'The Building' );
 
-		updateMenuArea();
+		updateMenu();
 
 		buildings.remove( building );
+
+//		buildingData.value = '';
 
 		building = new THREE.Object3D();
 
 		createFloors( building );
 
-		building.rotation.z = inpOrientation.value ? - d2r * parseFloat( inpOrientation.value ) : 0;
+		building.rotation.z = - d2r * parseFloat( inpOrientation.value );
 
-		inpOrientation.value = r2d * building.rotation.z;
 		building.name = 'The Building';
 		buildings.add( building )
 
 	}
 
 
-	function updateMenuArea() {
+	function updateMenu() {
 
 		let building = buildings.getObjectByName( 'The Building' );
 
 		const length = parseFloat( inpLength1.value );
 		const width = parseFloat( inpWidth1.innerHTML );
-<<<<<<< HEAD
-		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
-		const areaCurrent = length * width * floors; // building.userData.areaCurrent; 
-=======
 		const floors = parseInt( inpNumberOfFloors.value, 10 );
 		const areaCurrent = length * width * floors; // building.userData.areaCurrent;
->>>>>>> origin/master
 
 
-		const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
+		const areaNew = parseFloat( inpBuildingArea.value );
 		const ratio = Math.sqrt( areaNew / areaCurrent );
 //console.log( '', areaCurrent, areaNew, ratio );
 
 		const lengthNew = ratio * parseFloat( inpLength1.value );
 		const widthNew =  ratio * parseFloat( inpWidth1.innerHTML );
 
-<<<<<<< HEAD
-		inpBuildingArea.value = areaNew;
-		inpNumberOfFloors.value = floors;
-		inpLength1.value = lengthNew.toFixed(); 
-=======
 		inpLength1.value = lengthNew.toFixed();
->>>>>>> origin/master
 		inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
+		inpFloorArea.innerHTML = ( widthNew * lengthNew / floors ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
 
-		inpFloorArea.innerHTML = ( widthNew * lengthNew ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+	}
+
+	function updateMenuZZZZ() {
+
+		const area = parseFloat( inpBuildingArea.value );
+		const length = parseFloat( inpLength1.value );
+		const floors = parseInt( inpNumberOfFloors.value, 10 );
+
+		inpWidth1.innerHTML = ( area / length / floors ) > 1 ?( area / length / floors ).toLocaleString() : 1 ;
+		inpFloorArea.innerHTML = ( area / floors ).toLocaleString();
 
 	}
 
 
 
-
-
-
 	function createFloors( building ) {
 
-//console.log( 'inpFloorHeight.value', inpFloorHeight.value );
 		const len = parseFloat( inpLength1.value );
 		const wid = parseFloat( inpWidth1.innerHTML );
-		const hgt = inpFloorHeight.value ? Math.abs( parseFloat( inpFloorHeight.value ) ): parseFloat( inpFloorHeight.min );
-		const floors = inpNumberOfFloors.value ? parseFloat( inpNumberOfFloors.value ) : parseFloat( inpNumberOfFloors.min );
-		const perDep = inpPerimterDepth.value ? parseFloat( inpPerimterDepth.value ) : parseFloat( inpPerimterDepth.min );
+		const hgt = parseFloat( inpFloorHeight.value );
+		const floors = parseFloat( inpNumberOfFloors.value );
+		const perDep = parseFloat( inpPerimterDepth.value );
 
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
 
 		let intWallCount = 5;
 
-<<<<<<< HEAD
-		inpFloorHeight.value = hgt;
-		inpNumberOfFloors.value = floors;
-		inpPerimterDepth.value = perDep;
-
-		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
-=======
 		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab
->>>>>>> origin/master
 
 // length front
-			wall = createExternalWall( len, hgt, i, 1 );
+			wall = createExternalWall( len, hgt, i, 1, inpWindowWallRatioA);
 			wall.position.set( len05, -wid05, i * hgt, );
 			wall.rotation.z = Math.PI;
 			building.add( wall );
@@ -360,7 +326,7 @@
 			}
 
 // length back
-			wall = createExternalWall( len, hgt, i, 2 );
+			wall = createExternalWall( len, hgt, i, 2,inpWindowWallRatioB );
 			wall.position.set( -len05, wid05, i * hgt );
 			building.add( wall );
 
@@ -374,7 +340,7 @@
 			}
 
 // width left
-			wall = createExternalWall( wid, hgt, i, 3 );
+			wall = createExternalWall( wid, hgt, i, 3 ,inpWindowWallRatioC);
 			wall.rotation.z = Math.PI * 0.5;
 			wall.position.set( -len05, -wid05, i * hgt );
 			building.add( wall );
@@ -390,7 +356,7 @@
 			}
 
 // width right
-			wall = createExternalWall( wid, hgt, i, 4 );
+			wall = createExternalWall( wid, hgt, i, 4,inpWindowWallRatioD );
 			wall.rotation.z = -Math.PI / 2;
 			wall.position.set( len05, wid05, i * hgt );
 			building.add( wall );
@@ -407,36 +373,30 @@
 
 // slabs
 			slab = createSlab( len, wid );
+
 			slab.position.set( -len05, -wid05, i * hgt );
-<<<<<<< HEAD
-=======
 			slab.name =
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' +
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' +
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' +
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
 //			buildingData.value += slab.name;
->>>>>>> origin/master
 			building.add( slab );
 
 		}
 
 		roof = createSlab( len, wid );
 		roof.position.set( -len05, -wid05, i * hgt );
-<<<<<<< HEAD
-=======
 		roof.name =
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' +
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' +
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' +
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
 //		buildingData.value += roof.name;
->>>>>>> origin/master
 		building.add( roof );
 
+
 	}
-
-
 
 	function createSlab( length, width ) {
 
@@ -458,12 +418,10 @@
 
 	}
 
+	function createExternalWall( length = 20, height = 12, floor = 0, id = 1 ,facade) {
 
+		const wwr = parseFloat(facade.value) / 100;
 
-	function createExternalWall( length = 20, height = 12, floor = 0, id = 1 ) {
-
-		const wwr = inpWindowWallRatio.value ? Math.abs( parseFloat( inpWindowWallRatio.value ) / 100 ) : 40 / 100 ;
-		inpWindowWallRatio.value = ( 100 * wwr ).toFixed();
 		const length05 = length * 0.5;
 		const deltaL = wwr * length05;
 		const height05 = height * 0.5;
@@ -500,9 +458,6 @@
 		let c = mesh.geometry.attributes.position.array; // c = coordinate
 		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 
-<<<<<<< HEAD
-		if ( inpOverhangDepth.value && inpOverhangDepth.value !== '0' ) {
-=======
 		mesh.name =
 			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ] + '\n' +
 			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ] + '\n' +
@@ -519,7 +474,6 @@
 //		buildingData.value += mesh.name;
 
 		if ( inpOverhangDepth.value !== '0' ) {
->>>>>>> origin/master
 
 			const overhangDepth = parseFloat( inpOverhangDepth.value );
 			geometryPlane = new THREE.PlaneBufferGeometry( 2 * deltaL, overhangDepth );
@@ -529,8 +483,6 @@
 
 			c = plane.geometry.attributes.position.array; // c = coordinate
 			c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-<<<<<<< HEAD
-=======
 			plane.name =
 
 				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
@@ -541,9 +493,44 @@
 			'';
 
 //			buildingData.value += plane.name;
->>>>>>> origin/master
 			mesh.add( plane );
 
+		}
+
+		if ( inpFinDepth.value !== '0' ) {
+
+			const finDepth = parseFloat( inpFinDepth.value );
+
+			geometryPlaneFin = new THREE.PlaneBufferGeometry(2*deltaH, finDepth );
+
+			geometryPlaneFin.applyMatrix( new THREE.Matrix4().makeRotationY( 0.5 * Math.PI ) );
+
+			geometryPlaneFin.applyMatrix( new THREE.Matrix4().makeTranslation( length05+deltaL, 0.5*finDepth, height05) );
+
+			// Copy to the otherside of the Window
+			geometryPlaneFin2 = geometryPlaneFin.clone();
+
+			geometryPlaneFin2.applyMatrix( new THREE.Matrix4().makeTranslation( -deltaL*2, 0, 0) );
+
+			const planeFin = new THREE.Mesh( geometryPlaneFin, material );
+
+			const PlaneFin2 = new THREE.Mesh( geometryPlaneFin2, material );
+
+			c = planeFin.geometry.attributes.position.array; // c = coordinate
+
+			c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+			planeFin.name =
+
+				'Fin.' + id + ',ExteriorFin,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
+				'Fin.' + id + ',ExteriorFin,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ].toFixed( 3 ) + '\n' +
+				'Fin.' + id + ',ExteriorFin,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ].toFixed( 3 ) + '\n' +
+				'Fin.' + id + ',ExteriorFin,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ].toFixed( 3 ) + '\n' +
+
+			'';
+			//console.log(plane.name)
+//			buildingData.value += plane.name;
+			mesh.add(planeFin);
+			mesh.add(PlaneFin2);
 		}
 
 		return mesh;
@@ -585,8 +572,6 @@
 
 		c = mesh.geometry.attributes.position.array; // c = coordinate
 		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-<<<<<<< HEAD
-=======
 		mesh.name =
 
 			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
@@ -596,12 +581,24 @@
 
 		'';
 //		buildingData.value += mesh.name;
->>>>>>> origin/master
 
 		return mesh;
 
 	}
 
+
+
+	function saveFile() {
+
+		var blob = new Blob( [ buildingData.value ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'building-data.csv';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
 
 </script>
 </body>
