@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-17" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; left: 0; margin: 0 auto; right: 0; width: 98%; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus{ color: #f1f1f1; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	textarea { height: 800px; width: 49%; }
+
+/*	#menu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "header" >
+		<div id = "title" ></div>
+		<p id = "contents" >
+			<button onclick=initConvertToXML() >convertToXML</button> 
+
+			<button onclick=initJson2Xml() >initJson2Xml</button>
+		</p>
+
+		<textarea id=txtGbJSON ></textarea>
+		<textarea id=txtGbXML ></textarea >
+
+	</div>
+
+	<div id = "menu" ></div>
+
+<script>
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		title.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
+
+		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+//		contents.innerHTML = txt;
+
+		setGbJSON();
+
+	}
+
+
+	function initConvertToXML() {
+
+		xml = objectToXml( gbjson );
+
+		txtGbXML.value = xml;
+
+console.log( '', xml );
+
+	}
+
+	function objectToXml( obj) {
+
+		var xml = '';
+ 
+			for ( var prop in obj ) {
+
+				if ( !obj.hasOwnProperty( prop ) ) { continue; }
+
+				if (obj[prop] == undefined) { continue; }
+
+				xml += "<" + prop + ">";
+
+				if (typeof obj[prop] == "object") {
+
+					xml += '\n' + objectToXml(new Object(obj[prop]));
+
+				} else {
+
+					xml += '' + obj[prop];
+
+				}
+
+				xml += "</" + prop + ">\n";
+
+			}
+
+			return xml;
+
+	}
+
+
+	function initJson2Xml() {
+
+		xml = json2XML( gbjson );
+
+		txtGbXML.value = xml;
+
+console.log( '', xml );
+
+	}
+
+function json2XML(o) {
+
+	if (typeof o == 'object' && o.constructor == Object && len(o) == 1 ) {
+		for (var a in o) {
+			return toXML(a, o[a]);
+		}
+	} else {
+ console.log( '', typeof o, o.constructor, len( o ) );
+	}
+	function len(o) {
+		var n = 0;
+		for (var a in o) {
+			n++;
+		}
+		return n;
+	}
+
+	function toXML(tag, o) {
+		var doc = '<' + tag;
+		if (typeof o === 'undefined' || o === null) {
+			doc += '/>';
+			return doc;
+		}
+		if (typeof o !== 'object') {
+			doc += '>' + safeXMLValue(o) + '</' + tag + '>';
+			return doc;
+		}
+		if (o.constructor == Object) {
+			for (var a in o) {
+				if (a.charAt(0) == '@') {
+					if (typeof o[a] !== 'object') {
+						doc += ' ' + a.substring(1) + '="' + o[a] + '"';
+						delete o[a];
+					} else {
+						throw new Error((typeof o[a])
+								+ ' being attribute is not supported.');
+					}
+				}
+			}
+			if (len(o) === 0) {
+				doc += '/>';
+				return doc;
+			} else {
+				doc += '>';
+			}
+			if (typeof o['#text'] !== 'undefined') {
+				if (typeof o['#text'] !== 'object') {
+					doc += o['#text'] + '</' + tag + '>';
+					return doc;
+				} else {
+					throw new Error((typeof o['#text'])
+							+ ' being #text is not supported.');
+				}
+			} else {
+				for (var b in o) {
+					if (o[b].constructor == Array) {
+						for (var i = 0; i < o[b].length; i++) {
+							if (typeof o[b][i] !== 'object'
+									|| o[b][i].constructor == Object) {
+								doc += toXML(b, o[b][i]);
+							} else {
+								throw new Error((typeof o[b][i])
+										+ ' is not supported.');
+							}
+						}
+					} else if (o[b].constructor == Object
+							|| typeof o[b] !== 'object') {
+						doc += toXML(b, o[b]);
+					} else {
+						throw new Error((typeof o[b]) + ' is not supported.');
+					}
+				}
+			}
+			doc += '</' + tag + '>'
+
+			return doc;
+		}
+	}
+
+	function safeXMLValue(value) {
+		var s = value.toString();
+		s = s.replace('/\&/g', '&amp;');
+		s = s.replace('/\"/g', '&quot;');
+		s = s.replace('/</g', '&lt;');
+		s = s.replace('/>/g', '&gt;');
+		return s;
+	}
+
+};
+
+
+
+
+
+	function setGbJSON() {
+
+		gbjson = {
+
+			xmlns: "http://www.gbxml.org/schema",
+			useSIUnitsForResults: "true",
+			temperatureUnit: "C",
+			lengthUnit: "Meters",
+			areaUnit: "SquareMeters",
+			volumeUnit: "CubicMeters",
+			version: "0.37",
+
+			Campus: {
+				id: 'aim0002',
+				Location: {
+					StationId: "142882_2006",
+					ZipcodeOrPostalCode: "94111",
+					Longitude: "-71.25807",
+					Latitude: "42.41486",
+					Elevation: "0",
+					CADModelAzimuth: "0"
+				},
+				Building: {
+					Space: {
+						id: 'id',
+						SpaceBoundary: {
+							surfaceIdRef : 123,
+							PlanarGeometry: {
+								PolyLoop: {
+									CartesianPoint: [
+										{ Coordinate: [ "123", "456", "789" ] },
+										{ Coordinate: [ "127", "459", "781" ] }
+									]
+								}
+							}
+						},
+						Area: 123,
+						Volume: 123,
+						PeopleNumber: 123
+					},
+					Surface: [ 
+						{ 
+							surfaceType: "InteriorWall",
+							PlanarGeometry: {
+								PolyLoop: {
+									CartesianPoint: [
+										{
+											"Coordinate": [
+												"496.7257",
+												"1030.681",
+												"19.25"
+											]
+										},
+										{
+											"Coordinate": [
+												"496.7257",
+												"1030.681",
+												"23.15"
+											]
+										},
+										{
+											"Coordinate": [
+												"496.8195",
+												"1032.244",
+												"23.15"
+											]
+										},
+										{
+											"Coordinate": [
+												"496.8195",
+												"1032.244",
+												"19.25"
+											]
+										}
+									]
+								}
+							},
+							Opening:{
+								"openingType": "NonSlidingDoor",
+								"id": "aim5409",
+								"PlanarGeometry":  {
+									"PolyLoop": {
+										"CartesianPoint": [
+											{
+												"Coordinate": [
+													"496.738",
+													"1030.886",
+													"19.25"
+												]
+											},
+											{
+												"Coordinate": [
+													"496.738",
+													"1030.886",
+													"21.36"
+												]
+											},
+											{
+												"Coordinate": [
+													"496.7985",
+													"1031.894",
+													"21.36"
+												]
+											},
+											{
+												"Coordinate": [
+													"496.7985",
+													"1031.894",
+													"19.25"
+												]
+											}
+										]
+									}
+								}
+							}
+						}
+					],
+					Construction:{},
+				},
+			},
+			Layer: {},
+			Material: {},
+			Meter: {},
+			Schedule: {},
+			Result: {},
+			DocumentHistory: {},
+			Zone: {}
+		}
+
+console.log( 'gbjson', gbjson, gbjson.Campus.Building.Space.SpaceBoundary.PlanarGeometry.PolyLoop );
+
+		txtGbJSON.value = 'gbXML data in JSON format' + JSON.stringify( gbjson, null, 4 );
+
+	}
+
+
+
+</script>
+</body>
+</html>

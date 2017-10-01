@@ -162,7 +162,7 @@
 
 //		getBuildingData();
 
-//		setGbXML();
+		setGbXML();
 
 		getContents();
 
@@ -228,7 +228,11 @@
 		} 
 
 		divInfo.innerHTML = txt;
+
+		if ( parent && parent.ifrMenuSub ) {
 			parent.ifrMenuSub.style.height = ( divInfo.scrollHeight + 500 ) + 'px';
+
+		}
 	}
 
 
@@ -243,7 +247,7 @@ console.log( 'building', building );
 
 	function setGbXML() {
 
-		let gbxml = {
+		gbxml = {
 
 			xmlns: "http://www.gbxml.org/schema",
 			useSIUnitsForResults: "true",
@@ -271,7 +275,8 @@ console.log( 'building', building );
 							PlanarGeometry: {
 								PolyLoop: {
 									CartesianPoint: [
-//										Coordinate[ 234 ]
+										{ Coordinate: [ "123", "456", "789" ] },
+										{ Coordinate: [ "127", "459", "781" ] }
 									]
 								}
 							}
@@ -280,9 +285,83 @@ console.log( 'building', building );
 						Volume: 123,
 						PeopleNumber: 123
 					},
-					Surface: {
-						Opening:{}
-					},
+					Surface: [ 
+						{ 
+							surfaceType: "InteriorWall",
+							PlanarGeometry: {
+								PolyLoop: {
+									CartesianPoint: [
+										{
+											"Coordinate": [
+												"496.7257",
+												"1030.681",
+												"19.25"
+											]
+										},
+										{
+											"Coordinate": [
+												"496.7257",
+												"1030.681",
+												"23.15"
+											]
+										},
+										{
+											"Coordinate": [
+												"496.8195",
+												"1032.244",
+												"23.15"
+											]
+										},
+										{
+											"Coordinate": [
+												"496.8195",
+												"1032.244",
+												"19.25"
+											]
+										}
+									]
+								}
+							},
+							Opening:{
+								"openingType": "NonSlidingDoor",
+								"id": "aim5409",
+								"PlanarGeometry":  {
+									"PolyLoop": {
+										"CartesianPoint": [
+											{
+												"Coordinate": [
+													"496.738",
+													"1030.886",
+													"19.25"
+												]
+											},
+											{
+												"Coordinate": [
+													"496.738",
+													"1030.886",
+													"21.36"
+												]
+											},
+											{
+												"Coordinate": [
+													"496.7985",
+													"1031.894",
+													"21.36"
+												]
+											},
+											{
+												"Coordinate": [
+													"496.7985",
+													"1031.894",
+													"19.25"
+												]
+											}
+										]
+									}
+								}
+							}
+						}
+					],
 					Construction:{},
 				},
 			},
@@ -295,8 +374,9 @@ console.log( 'building', building );
 			Zone: {}
 		}
 
-console.log( 'gbxml', gbxml);
-		scope.gbxmlText.innerHTML = 'gbXML data in JSON format<textarea id-buildingData >' + JSON.stringify( gbxml, null, 4 ); + '</textarea>';
+console.log( 'gbxml', gbxml, gbxml.Campus.Building.Space.SpaceBoundary.PlanarGeometry.PolyLoop );
+
+		scope.gbxmlText.innerHTML = 'gbXML data in JSON format<textarea id=buildingData >' + JSON.stringify( gbxml, null, 4 ); + '</textarea>';
 
 	}
 
@@ -304,10 +384,10 @@ console.log( 'gbxml', gbxml);
 
 	function saveFile() {
 
-		var blob = new Blob( [ buildingData.value ] );
+		var blob = new Blob( [ scope.buildingData.value ] );
 		var a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
-		a.download = 'building-data.csv';
+		a.download = 'building-data.json';
 		a.click();
 //		delete a;
 		a = null;

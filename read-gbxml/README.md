@@ -3,15 +3,11 @@
 
 [Ladybug Tools > Spider > gbXML Viewer Read Me]( #README.md )
 ====
-<!--
-<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/harriman/index.html#select-xml/display-gbjson.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
-<iframe class=iframeReadMe src=http://rawgit.com/ladybug-tools/spider/master/read-gbxml/gbxml-viewer/harriman/index.html#select-xml/display-gbjson.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
--->
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/index.html width=100% height=600px ></iframe>
 
-## Full Screen: [gbXML Viewer carmel]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/index.html )
+## Full Screen: [gbXML Viewer]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/index.html )
 
 
 

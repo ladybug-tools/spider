@@ -1,0 +1,47 @@
+{
+    "xmlns": "http://www.gbxml.org/schema",
+    "useSIUnitsForResults": "true",
+    "temperatureUnit": "C",
+    "lengthUnit": "Meters",
+    "areaUnit": "SquareMeters",
+    "volumeUnit": "CubicMeters",
+    "version": "0.37",
+    "Campus": {
+        "id": "aim0002",
+        "Location": {
+            "StationId": "142882_2006",
+            "ZipcodeOrPostalCode": "94111",
+            "Longitude": "-71.25807",
+            "Latitude": "42.41486",
+            "Elevation": "0",
+            "CADModelAzimuth": "0"
+        },
+        "Building": {
+            "Space": {
+                "id": "id",
+                "SpaceBoundary": {
+                    "surfaceIdRef": 123,
+                    "PlanarGeometry": {
+                        "PolyLoop": {
+                            "CartesianPoint": []
+                        }
+                    }
+                },
+                "Area": 123,
+                "Volume": 123,
+                "PeopleNumber": 123
+            },
+            "Surface": {
+                "Opening": {}
+            },
+            "Construction": {}
+        }
+    },
+    "Layer": {},
+    "Material": {},
+    "Meter": {},
+    "Schedule": {},
+    "Result": {},
+    "DocumentHistory": {},
+    "Zone": {}
+}
