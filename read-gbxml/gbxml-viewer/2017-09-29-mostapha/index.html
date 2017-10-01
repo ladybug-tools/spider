@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-09-17" >
+<title>gbXML Viewer 'Mostapha'</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: blue; --mnu-back-color: bisque; --mnu-width: 350px; height: 100%; }
+
+	body { font: 12pt monospace; height: 100%; margin: 0 0 0 var( --mnu-width ); overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaaaaa; }
+	h2, h4 { margin: 0; }
+	select { width: 100%; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	.highlight { background-color: lightgreen; }
+
+	#divContents { box-sizing: border-box; height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+	#ifrMenuSub { box-sizing: border-box; border: 1px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 0px solid pink; box-sizing: border-box; height: 100%; left: 0; max-width: 320px; 
+		margin: 20px; overflow: auto; padding: 5px; position: fixed; top: 0; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<div id = "title" ></div>
+
+		<div id = "githubGbxmlSamples" >
+
+			 <a href="https://github.com/GreenBuildingXML/Sample-gbXML-Files" target="_blank" >gbXML sample files on GitHub in Sample-gbXML-Files</a><br>
+			<select id=selGbXml size=15 ><select>
+
+		</div>
+		<details>
+			<summary>Other files on GreenBuildingXML</summary>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/GenericgbXMLValidator_601/master/TestgbXMLValidator/Data/TestgbXML.xml")>TestgbXML.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_1/test_case_1.xml")>test_case_1</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_12/test_case_12.xml")>test_case_12.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_2/test_case_2.xml")>test_case_.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_3/test_case_3.xml")>test_case_.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_5/test_case_5.xml")>test_case_.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_6/test_case_6.xml")>test_case_.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_7/test_case_7.xml")>test_case_.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_8/test_case_8.xml")>test_case_.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_wbt1/test_case_wbt1.xml")>test_case_wbt1.xml</a></div>
+
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%201%20-%20Standard%20File.xml")>Test Case 1 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%202%20-%20Standard%20File.xml")>Test Case 2 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%2025%20-%20Standard%20File.xml")>Test Case 25 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%2028%20-%20Standard%20File.xml")>Test Case 28 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%203%20-%20Standard%20File.xml")>Test Case 3 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%204%20-%20Standard%20File.xml")>Test Case 4 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%205%20-%20Standard%20File.xml")>Test Case 5 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%207%20-%20Standard%20File.xml")>Test Case 6 - Standard File.xml</a></div>
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/ValidatorPhase2/master/XMLValidatorWeb/SupportFiles/TestFiles/Test%20Case%208%20-%20Standard%20File.xml")>Test Case 8 - Standard File.xml</a></div>
+
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/gbXML-to-IDF-Test-Cases/master/Krishnans%20Load%20Calculation%202016%20Revit%20gbXML%20Test%20Results/gbXML%20File/gbXMLStandard%20Test%20Model%202016.xml")>Krishnans Load Calculation 2016 Revit gbXML Test Results</a></div>
+
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/gbXML-to-IDF-Test-Cases/master/Small%20Residential%202016%20Revit%20gbXML%20Test%20Results/gbXML%20File/gbXMLStandard%20Single%20Family%20Residential%202016.xml")>Small Residential 2016 Revit gbXML Test Results</a></div>
+
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/gbXML-to-IDF-Test-Cases/master/Wagonner%202016%20Revit%20gbXML%20Test%20Results/gbXML%20File/gbXMLStandard.xml")>Wagonner 2016 Revit gbXML Test Results</a></div>
+<!--
+
+		<div><a href=JavaScript:loadXML("https://rawgit.com/GreenBuildingXML/")></a></div>
+
+-->
+		</details>
+		<div>Other gbXML Files</div>
+		<div><a href=JavaScript:loadXML("../../data-files/SAM_Live.xml")>SAM Live</a></div>
+		<div><a href=JavaScript:loadXML("../../data-files/generated.xml")>generated</a></div>
+		<div><a href=JavaScript:loadXML("../../data-files/generated2.xml")>generated2</a></div>
+		<div id = "GreenspaceLiveSamples" ></div>
+<!--
+		<h4>open local file</h4>
+
+		<div id = "fileReader" >
+			<p><input type=file id=inpFile onchange=openFile(this); ></p>
+		</div>
+
+		<h4>File type</h4>
+
+		<p><button onclick=requestPlainGbXML(); >view as xml</button></p>
+-->
+		<h4>stats</h4>
+
+		<div id = "stats" ></div>
+		<div id = "stats2" ></div>
+
+		<p id=gbxmlUrl ></p>
+		<p id=info ></p>
+
+
+		<div id = "divMenuSub" ></div>
+
+	</div>
+
+	<div id=divContents ><iframe id=ifrContents src=threejs-basic.html ></iframe></div>
+
+
+<script>
+
+	const url = '../../data-files/SAM_Live.xml';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/read-gbxml/';
+
+	let scope;
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		title.innerHTML = '<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href="' + infoURI + '" target="top" >&#x24D8</a></h2>';
+
+		txt = 
+			'<hr>' +
+			'<p>Welcome!</p>' +
+			'<p>It get\'s confusing in here some times.</p>' +
+		'';
+
+		divMenuSub.innerHTML = txt;
+
+		loadMenu( 'gbxml-viewer.html' );
+
+		urlGitHub = 'https://api.github.com/repos/GreenBuildingXML/Sample-gbXML-Files/contents/';
+
+		requestFile( urlGitHub, callbackGitHub );
+
+	}
+
+
+
+
+	function callbackGitHub( xhr ) {
+
+		let response, files, txt;
+
+		response = xhr.target.response;
+
+		files = JSON.parse( response );
+// console.log( 'files', files );
+
+		txt = '';
+
+		for ( let i = 0; i < files.length; i++ ) {
+
+			file = files[ i ];
+//console.log( 'file', file );
+
+			if ( file.name === 'README.md' ) { continue; }
+
+			txt += '<option value = ' + file.download_url + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</option>';
+
+		}
+
+		selGbXml.innerHTML = txt;
+
+		selGbXml.onchange = function() { 
+
+			const url = selGbXml.value.replace( /raw\.githubusercontent/, 'rawgit' );
+
+			requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); 
+//			gbxmlUrl.innerHTML = 'file download: ' + selGbXml.value.link( selGbXml.value );
+
+		}
+
+	}
+
+
+
+	function loadMenu( file ) {
+
+//		document.body.style.overflow = 'auto';
+//		divMenu.style.overflow = 'scroll';
+		divMenuSub.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' ></iframe>'
+//		ifrMenuSub.onload = function(){ requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); };
+	}
+
+
+	function loadXML( url ) {
+
+		requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); 
+
+	}
+
+
+	function loadHTML( url ) {
+
+		document.body.style.overflow = 'hidden';
+//		divMenu.style.overflow = 'scroll';
+		divContents.innerHTML = '<iframe id=ifrContents src=' + url + ' ></iframe>';
+
+	}
+
+
+	function getContents( path, repo, user ) {
+
+		user = user ? user : 'parallel-constitution';
+		repo = 'parallel-constitution.github.io';
+		path = path ? path : '/pages/links.md';
+
+		url  = 'https://rawgit.com/' + user + '/' + repo + '/master/' + path;
+
+		requestFile( url, callbackContents );
+
+	}
+
+
+
+	function callbackContents( xhr ){
+
+		let response, html, headers;
+		let page = '';
+		const converter = new showdown.Converter();
+
+		document.body.style.overflow = 'auto';
+		divMenuSub.innerHTML = ''
+
+		response = xhr.target.response;
+//console.log( '', response );
+
+		html = converter.makeHtml( xhr.target.responseText );
+
+		divContents.innerHTML = html;
+
+		headers = document.querySelectorAll( 'h2' ) 
+//console.log( '', headers );
+
+		if ( headers.length <= 2 ) { return; }
+
+		menuLinks = '<h3>Sections</h3>';
+
+		for ( var i = 1; i < headers.length; i++ ) {
+
+			header = headers[ i ]
+			menuLinks += header.textContent.link( '#' + header.id ) + b;
+
+		}
+
+		divMenuSub.innerHTML = menuLinks;
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'get', url, true );
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>

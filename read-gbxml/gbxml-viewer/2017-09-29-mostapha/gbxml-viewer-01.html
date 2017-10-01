@@ -5,11 +5,11 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Basic pushMe-pullYou template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-30" >
+<meta name = "date" content = "2017-09-29" >
 <title>gbXML Viewer 'Mostapha'</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
-/* 2017-09-30*/
+/* 2017-09-29*/
 
 	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 300px; height: 100%; }
 
@@ -35,7 +35,7 @@
 	#ifrContents { border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
 	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); box-sizing: border-box;
-		max-width: var( --mnu-width ); margin: 0; overflow: auto; padding: 5px; position: absolute; top: 0; }
+		max-width: 320px; margin: 20px 0 0 20px; overflow: auto; padding: 5px; position: absolute; right: 0; top: 0; }
 
 </style>
 </head>
@@ -56,29 +56,15 @@
 
 <script>
 
-	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
-	var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
-
 	let campusSurfaces, campusOpenings;
 
 	const ifrSourceURI = 'threejs-basic.html';
 	const infoURI = 'https://github.com/ladybug-tools.github.io/read-gbxml/';
-	const gbxmlURI = '../../data-files/SAM_Live.xml';
-
-	var model;
-	var gbjson;
-	var scope;
-
-	var THREE;
-	var renderer;
-	var camera;
-	var controls;
-	var scene;
-
-	var lightAmbient, lightPoint, lightDirectional;
-	var axisHelper, gridHelper, groundHelper, cameraHelper;
+	const textURI = '../../data-files/SAM_Live.xml';
 
 	const b = '<br>';
+
+	let scope;
 
 
 	init();
@@ -95,9 +81,9 @@
 
 			scope = parent.ifrContents.contentWindow;
 
-			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 300 ) + 'px';
+			parent.ifrMenuSub.style.height = ( menu.scrollHeight + 10 ) + 'px';
 
-			parent.ifrContents.src = ifrSourceURI ; //'plugins/template-threejs-shade.html';
+			parent.ifrContents.src = 'plugins/template-threejs-shade.html';
 
 			parent.ifrContents.onload = initVariables;
 
@@ -131,20 +117,22 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
-		requestFile( gbxmlURI, callbackGbXML );
+		requestFile( textURI, callbackContents );
 
 	}
 
 
 
-	function callbackGbXML( xhr ){
+	function callbackContents( xhr ){
 
-		let response;
+		let response, source, index;
+		let page = '';
 
 		response = xhr.target.responseXML.documentElement;
 
+
 		gbjson = XML2jsobj( response );
-//console.log( 'json', gbjson );
+console.log( 'json', gbjson );
 
 //		divContents.value = JSON.stringify( json, null, 4 );
 //		divContents.innerHTML = '<textarea>' + JSON.stringify( gbjson, null, 4 ); + '</textarea>';
@@ -165,6 +153,7 @@
 		const postalCode = gbjson.Campus.Location.ZipcodeOrPostalCode ? 'zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b : '';
 		const url = 'url: ' + gbjson.url.split( '/' ).pop().link( gbjson.url ) + b;
 		const map = gbjson.Campus.Location.Latitude ? 'map: <a href="http://www.google.com/maps/place/' + gbjson.Campus.Location.Latitude + ',' + gbjson.Campus.Location.Longitude + '" target="_blank" >google maps</a>' + b : '';
+
 
 		let txt = 
 			'<h4>location</h4>' +
@@ -218,29 +207,23 @@
 
 					polyloop = surface.Opening.PlanarGeometry.PolyLoop;
 					points = getPoints( polyloop );
-					openings.push( [ points ] );
+					openings.push( points );
 
 				} else {
 
-					let arr = [];
-
-					for ( let j = 0; j < surface.Opening.length; j++ ) {
+//console.log( 'surface.Opening', surface.Opening.length );
+					for ( var j = 0; j < surface.Opening.length; j++ ) {
 
 						polyloop = surface.Opening[ j ].PlanarGeometry.PolyLoop;
 						points = getPoints( polyloop );
-						arr.push( points );
+						openings.push( points );
 
 					}
 
-					openings.push( arr );
-
 				}
 
-			} else {
-
-				openings.push( [] );
-
 			}
+
 
 			polyloop = surface.PlanarGeometry.PolyLoop;
 
@@ -251,17 +234,17 @@
 		} 
 
 
-//		txt = 
-//			'<h4>Surfaces</h4>' +
-//		'';
+		txt = 
+			'<h4>Surfaces</h4>' +
+		'';
 
 console.log( 'items', items );
 
-//console.log( 'openingsMeta', openingsMeta );
+console.log( 'openingsMeta', openingsMeta );
 
-//console.log( 'openings', openings );
+console.log( 'openings', openings );
 
-//console.log( 'polyloops', polyloops );
+console.log( 'polyloops', polyloops );
 
 
 		scene.remove( campusSurfaces, campusOpenings );
@@ -271,31 +254,23 @@ console.log( 'items', items );
 
 		for ( let i = 0; i < polyloops.length; i++ ) {
 
-			shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
+			shape = drawShapeSinglePassObjects( polyloops[ i ], material );
 			campusSurfaces.add( shape );
 
 		}
 
-/*
 		campusOpenings = new THREE.Object3D();
 		material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
 
 		for ( i = 0; i < openings.length; i++ ) {
 
-//			shape = drawShapeSinglePassObjects( openings[ i ], material,  );
-//			campusOpenings.add( shape );
+			shape = drawShapeSinglePassObjects( openings[ i ], material );
+			campusOpenings.add( shape );
 
 		}
-*/
 
-		scene.add( campusSurfaces );
+		scene.add( campusSurfaces, campusOpenings );
 		zoomObjectBoundingSphere( campusSurfaces )
-
-		if ( parent && parent.ifrMenuSub ) {
-
-			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 40 ) + 'px';
-
-		}
 
 	}
 
@@ -321,7 +296,7 @@ console.log( 'items', items );
 
 
 
-	function drawShapeSinglePassObjects( vertices, material, holes ) {
+	function drawShapeSinglePassObjects( vertices, material ) {
 
 		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
 
@@ -337,27 +312,12 @@ console.log( 'items', items );
 			obj2.localToWorld( vertex );
 
 		}
-	
-		let shape1 = new THREE.Shape( vertices );
-		for ( let vertices of holes ) {
 
-			for ( let vertex of vertices ) {
+		shape = new THREE.Shape( vertices );
 
-				obj2.localToWorld( vertex );
+		const geometry = new THREE.ShapeGeometry( shape );
 
-			}
-
-			let hole = new THREE.Path();
-
-			hole.fromPoints( vertices );
-
-			shape1.holes.push( hole );
-
-		}
-
-		const geometry = new THREE.ShapeGeometry( shape1 );
-		
-		let shape = new THREE.Mesh( geometry, material );
+		shape = new THREE.Mesh( geometry, material );
 		shape.quaternion.copy( obj.quaternion );
 		shape.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
 
@@ -385,7 +345,7 @@ console.log( 'items', items );
 		}
 
 		divStats3.innerHTML = 
-			'center:<br>x' + center.x.toLocaleString() + ' y' + center.y.toLocaleString() + ' z' + center.z.toLocaleString() + b +
+			'center: x' + center.x.toLocaleString() + ' y' + center.y.toLocaleString() + ' z' + center.z.toLocaleString() + b +
 			'radius: ' + radius.toLocaleString() +
 		'';
 
@@ -396,6 +356,7 @@ console.log( 'items', items );
 
 		camera.far = 2 * camera.position.length();
 		camera.updateProjectionMatrix();
+
 
 	}
 
