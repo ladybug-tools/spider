@@ -97,6 +97,11 @@ See also:
 ## Change Log
 
 
+### 2017-10-01 ~ Theo
+
+* gbXML Viewer 'Mostapha'.2
+* Opens and displays local files using your file dialog box
+
 ### 2017-09-30 ~ Theo
 
 We have holes!

@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Basic pushMe-pullYou template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-01" >
-<title>gbXML Viewer 'Mostapha'.2</title>
+<meta name = "date" content = "2017-09-30" >
+<title>gbXML Viewer 'Mostapha'</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 /* 2017-09-30*/
@@ -20,7 +20,7 @@
 
 	select { width: 100%; }
 	summary { outline: none; font-size: 18pt }
-	textarea { height: 100%; width: 100% }
+	textarea { height: 100%; width: 100% } 
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
@@ -63,8 +63,7 @@
 
 	const ifrSourceURI = 'threejs-basic.html';
 	const infoURI = 'https://github.com/ladybug-tools.github.io/read-gbxml/';
-//	const gbxmlURI = '../../data-files/SAM_Live.xml';
-	const gbxmlURI = '../../data-files/building-data.xml';
+	const gbxmlURI = '../../data-files/SAM_Live.xml';
 
 	var model;
 	var gbjson;
@@ -86,7 +85,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = '<h3><a href = "" >' + document.title + '</a> &nbsp; ' +
+		divTitle.innerHTML = '<h3><a href = "" >' + document.title + '</a> &nbsp; ' + 
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
@@ -144,21 +143,13 @@
 
 		response = xhr.target.responseXML.documentElement;
 
-//		gbjson.url = xhr.target.responseURL;
-
-		parseFileXML( response );
-
-	}
-
-
-	function parseFileXML( xmlNode ) {
-
-		gbjson = XML2jsobj( xmlNode );
+		gbjson = XML2jsobj( response );
 //console.log( 'json', gbjson );
 
 //		divContents.value = JSON.stringify( json, null, 4 );
 //		divContents.innerHTML = '<textarea>' + JSON.stringify( gbjson, null, 4 ); + '</textarea>';
 
+		gbjson.url = xhr.target.responseURL;
 
 		parseGbJson( gbjson );
 
@@ -169,20 +160,20 @@
 
 		const unitLength = gbjson.lengthUnit ? 'length unit: ' + gbjson.lengthUnit + b : '';
 		const name = gbjson.Campus.Location && gbjson.Campus.Location.Name ? 'location: ' + gbjson.Campus.Location.Name + b : '';
-		const latitude = gbjson.Campus.Location && gbjson.Campus.Location.Latitude ? 'latitude: ' + gbjson.Campus.Location.Latitude + b : '';
-		const longitude = gbjson.Campus.Location && gbjson.Campus.Location.Longitude ? 'longitude: ' + gbjson.Campus.Location.Longitude + b : '';
-		const postalCode = gbjson.Campus.Location && gbjson.Campus.Location.ZipcodeOrPostalCode ? 'zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b : '';
-//		const url = gbjson.url ? 'url: ' + gbjson.url.split( '/' ).pop().link( gbjson.url ) + b : '';
-		const map = gbjson.Campus.Location && gbjson.Campus.Location.Latitude ? 'map: <a href="http://www.google.com/maps/place/' + gbjson.Campus.Location.Latitude + ',' + gbjson.Campus.Location.Longitude + '" target="_blank" >google maps</a>' + b : '';
+		const latitude = gbjson.Campus.Location.Latitude ? 'latitude: ' + gbjson.Campus.Location.Latitude + b : '';
+		const longitude = gbjson.Campus.Location.Longitude ? 'longitude: ' + gbjson.Campus.Location.Longitude + b : '';
+		const postalCode = gbjson.Campus.Location.ZipcodeOrPostalCode ? 'zipcode or Postal Code: ' + gbjson.Campus.Location.ZipcodeOrPostalCode + b : '';
+		const url = 'url: ' + gbjson.url.split( '/' ).pop().link( gbjson.url ) + b;
+		const map = gbjson.Campus.Location.Latitude ? 'map: <a href="http://www.google.com/maps/place/' + gbjson.Campus.Location.Latitude + ',' + gbjson.Campus.Location.Longitude + '" target="_blank" >google maps</a>' + b : '';
 
-		let txt =
+		let txt = 
 			'<h4>location</h4>' +
 			unitLength +
 			name +
 			latitude +
 			longitude +
 			postalCode +
-//			url +
+			url +
 			map +
 		'';
 
@@ -191,7 +182,6 @@
 //console.log( 'surfaces', gbjson.Campus.Surface );
 
 		const surfaces = gbjson.Campus.Surface;
-//console.log( '', surfaces );
 
 		let items = {};
 		let openingsMeta = {};
@@ -208,7 +198,7 @@
 
 			} else {
 
-				items[ surface.surfaceType ]++;
+				items[ surface.surfaceType ]++; 
 
 			}
 
@@ -220,7 +210,7 @@
 
 				} else {
 
-					openingsMeta[ surface.Opening.openingType ]++;
+					openingsMeta[ surface.Opening.openingType ]++; 
 
 				}
 
@@ -258,14 +248,14 @@
 
 			polyloops.push( points );
 
-		}
+		} 
 
 
-//		txt =
+//		txt = 
 //			'<h4>Surfaces</h4>' +
 //		'';
 
-//console.log( 'items', items );
+console.log( 'items', items );
 
 //console.log( 'openingsMeta', openingsMeta );
 
@@ -325,7 +315,6 @@
 
 		}
 
-//		points.push( points[ 0 ] );
 		return points;
 
 	}
@@ -343,19 +332,16 @@
 		obj2.quaternion.copy( obj.clone().quaternion.conjugate() );
 		obj2.updateMatrixWorld( true );
 
-
 		for ( let vertex of vertices ) {
 
 			obj2.localToWorld( vertex );
 
 		}
+	
+		let shape1 = new THREE.Shape( vertices );
+		for ( let vertices of holes ) {
 
-		shape1 = new THREE.Shape( vertices );
-		shape1.autoClose = true;
-
-		for ( let verticesHoles of holes ) {
-
-			for ( let vertex of verticesHoles ) {
+			for ( let vertex of vertices ) {
 
 				obj2.localToWorld( vertex );
 
@@ -363,14 +349,14 @@
 
 			let hole = new THREE.Path();
 
-			hole.fromPoints( verticesHoles );
+			hole.fromPoints( vertices );
 
 			shape1.holes.push( hole );
 
 		}
 
 		const geometry = new THREE.ShapeGeometry( shape1 );
-
+		
 		let shape = new THREE.Mesh( geometry, material );
 		shape.quaternion.copy( obj.quaternion );
 		shape.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
@@ -398,7 +384,7 @@
 
 		}
 
-		divStats3.innerHTML =
+		divStats3.innerHTML = 
 			'center:<br>x' + center.x.toLocaleString() + ' y' + center.y.toLocaleString() + ' z' + center.z.toLocaleString() + b +
 			'radius: ' + radius.toLocaleString() +
 		'';
@@ -416,8 +402,6 @@
 
 
 	function XML2jsobj( node ) {
-
-//console.log( 'node', node );
 
 		let	data = {};
 
