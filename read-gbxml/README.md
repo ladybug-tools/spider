@@ -102,6 +102,9 @@ See also:
 * gbXML Viewer 'Mostapha'.2
 * Opens and displays local files using your file dialog box
 
+* gbXML Viewer 'Mostapha'.3
+* This is the first pass at adding colors(random), lights, shade and shadow. 
+
 ### 2017-09-30 ~ Theo
 
 We have holes!

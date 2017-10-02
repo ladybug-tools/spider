@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-01" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	img { opacity: 1; }
+	#menu { position: absolute; text-align: center; width: 100%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "menu" >
+
+		<div id = "title" ></div>
+<p id=log >
+		<div id = "contents" ></div>
+
+	</div>
+
+<script>
+
+	var cubes = [];
+
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		const ambient = new THREE.AmbientLight( 0x444444 );
+		scene.add( ambient );
+
+		const directionalLight = new THREE.DirectionalLight( 0xffeedd );
+		directionalLight.position.set( 0, 0, 100 ); //.normalize();
+		scene.add( directionalLight );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		const axisHelper = new THREE.AxisHelper( 50 );
+		scene.add( axisHelper );
+
+//		obj = drawCubes();
+//		scene.add( obj );
+
+		drawSpline();
+
+		drawGrid()
+
+		initHeadsUp();
+
+
+
+		placard = drawPlacard( 'X-axis', 0.1, 1, 70, 0, 0 );
+		scene.add( placard );
+
+		placard = drawPlacard( 'Y-axis', 0.1, 120, 0, 70, 0 );
+		scene.add( placard );
+
+		placard = drawPlacard( 'Z-axis', 0.1, 240, 0, 0, 60 );
+		scene.add( placard );
+	}
+
+
+
+	function drawSpline() {
+
+		let geometry, material, mesh, edges;
+
+		function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
+
+		vertices = [];
+		for ( var i = 0; i < 10; i++ ) {
+
+			vertices.push( v( 80 * Math.random() -40, 80 * Math.random() - 40, 80 * Math.random() - 40 ) );
+
+		}
+
+		var spline = new THREE.CatmullRomCurve3 ( vertices );
+
+//		var path = new THREE.Path( curve.getPoints( 150 ) );
+//		geometry = path.createPointsGeometry( 150 );
+
+		splinePoints = spline.getPoints( 150 );
+		geometry = new THREE.Geometry();
+
+		for ( var i = 0; i < splinePoints.length; i++) {
+
+			geometry.vertices.push(splinePoints[i] );
+
+		}
+
+		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
+		var line = new THREE.Line( geometry, material );
+//		scene.add( line );
+
+
+		splinePoints = spline.getPoints( 2000 );
+
+
+		const obj = new THREE.Object3D();
+
+		for ( let i = 0; i < splinePoints.length; i++ ) {
+
+			pt = splinePoints[i] 
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff,
+				emissive: 0x333333,
+//				opacity: Math.random(),
+//				specular: 0xffffff * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+//				transparent: true
+			} );
+			material.color.setHSL( ( pt.x + 50 ) / 100, 0.8, 0.5 );
+//			material = new THREE.MeshNormalMaterial();
+
+
+			geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( pt.x + 20 * Math.random() - 10, pt.y + 20 * Math.random() - 10, pt.z + 20 * Math.random() - 10 );
+			mesh.rotation.set( mesh.position.x, 1, mesh.position.x );
+			mesh.scale.set( 1 + 0.3 * mesh.position.z * Math.random(), Math.random(), 1 );
+			obj.add( mesh );
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			edges = new THREE.LineSegments( geometryEdge, material );
+			mesh.add( edges ); // add wireframe as a child of the parent mesh
+
+			cubes.push( mesh );
+
+		}
+
+		scene.add( obj );
+
+	}
+
+
+
+
+	function drawGrid( size = 100 ) {
+
+		gridHelper = new THREE.GridHelper( size, 20 );
+		gridHelper.rotation.x = 0.5 * Math.PI;
+		gridHelper.position.z = -50;
+		scene.add( gridHelper );
+
+		gridHelper = new THREE.GridHelper( size, 20 );
+//		gridHelper.rotation.x = 0.5 * Math.PI;
+		gridHelper.position.y = 50;
+		scene.add( gridHelper );
+
+
+		gridHelper = new THREE.GridHelper( size, 20 );
+		gridHelper.rotation.z = 0.5 * Math.PI;
+		gridHelper.position.x = 50;
+		scene.add( gridHelper );
+
+	}
+
+
+
+	function drawCubes() {
+
+		const obj = new THREE.Object3D();
+//		let geometry, material, mesh, edges;
+
+
+		for ( let i = 0; i < 2000; i++ ) {
+
+			x = 100 * Math.random() - 50;
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff,
+				emissive: 0x333333 * Math.random(),
+//				opacity: Math.random(),
+//				specular: 0xffffff * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+//				transparent: true
+			} );
+			material.color.setHSL( ( x + 50 ) / 100, 0.8, 0.5 );
+//			material = new THREE.MeshNormalMaterial();
+
+
+			geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( x, 100 * Math.random() - 50, 100 * Math.random() - 50 );
+			mesh.rotation.set( 6.3 * Math.random(), 1.57 * Math.random(), 3.14 * Math.random() );
+			obj.add( mesh );
+
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			edges = new THREE.LineSegments( geometryEdge, material );
+			mesh.add( edges ); // add wireframe as a child of the parent mesh
+
+			cubes.push( mesh );
+
+		}
+
+
+		return obj;
+
+	}
+
+
+
+	function initHeadsUp() {
+
+		window.objects = [];
+		window.mouse = new THREE.Vector2();
+		window.intersected;
+
+		headsUp = document.body.appendChild( document.createElement( 'div' ) );
+		headsUp.style.cssText = 'background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.95; ' +
+			'position: absolute; ';
+
+		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+/*
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && child.name ) {
+
+				objects.push( child );
+
+			}
+
+		} );
+*/
+	}
+
+
+	function onDocumentMouseMove( event ) {
+
+		var raycaster, intersects;
+
+		event.preventDefault();
+
+		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+		raycaster = new THREE.Raycaster();
+		raycaster.setFromCamera( mouse, camera );
+
+		intersects = raycaster.intersectObjects( cubes );
+
+		if ( intersects.length > 0 ) {
+
+			intersected = intersects[ 0 ].object
+			intersected.rotation.y += 0.1;
+			intersected.material.emissive.setHex( 0xff0000 );
+			log.innerHTML = 'Selected cube ID: ' + intersected.name ;
+
+		} else {
+
+			intersected = undefined;
+
+			log.innerHTML = 'No cube selected';
+
+		}
+
+		setHeadsUp( event );
+
+	}
+
+
+
+	function setHeadsUp( event ) {
+
+		let txt;
+		const b = '<br>'
+
+		if ( intersected === undefined ){
+
+			if ( event.type === 'touchstart' ) {
+
+				headsUp.style.display = 'none';
+
+			}
+
+			document.body.style.cursor = 'auto';
+			return;
+
+		}
+
+		headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
+		headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
+		headsUp.style.display = '';
+
+		txt =
+			intersected.name + b +
+			mouse.x + b +
+			mouse.y + b +
+			'<img src=https://lorempixel.com/150/100 >' +
+		'';
+
+		headsUp.innerHTML = txt;
+		document.body.style.cursor = 'pointer';
+
+	}
+
+
+
+	function onDocumentMouseDown( event ) {
+
+		headsUp.style.display = 'none';
+
+	}
+
+
+	function onDocumentTouchStart( event ) {
+
+	//	event.preventDefault();
+
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+
+		onDocumentMouseMove( event );
+
+	}
+
+
+/////////////////
+
+
+
+
+
+
+	function drawPlacard( text, scale, color, x, y, z ) {
+
+// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
+
+		var placard = new THREE.Object3D();
+		var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+		var texture = canvasMultilineText( text, { backgroundColor: color }   );
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+
+		var geometry = new THREE.Geometry();
+		geometry.vertices = [ v( x, y, 0 ),  v( x, y, z ) ];
+		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		var line = new THREE.Line( geometry, material );
+
+		placard.add( sprite, line );
+
+		return placard;
+
+
+		function canvasMultilineText( textArray, parameters ) {
+
+			var parameters = parameters || {} ;
+
+			var canvas = document.createElement( 'canvas' );
+			var context = canvas.getContext( '2d' );
+			var width = parameters.width ? parameters.width : 0;
+			var font = parameters.font ? parameters.font : '48px monospace';
+			var color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+			if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+			context.font = font;
+
+			for ( var i = 0; i < textArray.length; i++) {
+
+				width = context.measureText( textArray[ i ] ).width > width ? context.measureText( textArray[ i ] ).width : width;
+
+			}
+
+			canvas.width = width + 20;
+			canvas.height =  parameters.height ? parameters.height : textArray.length * 60;
+
+			context.fillStyle = 'hsl( ' + color + ', 80%, 50% )' ;
+			context.fillRect( 0, 0, canvas.width, canvas.height);
+
+			context.lineWidth = 1 ;
+			context.strokeStyle = '#000';
+			context.strokeRect( 0, 0, canvas.width, canvas.height );
+
+			context.fillStyle = '#000' ;
+			context.font = font;
+
+			for ( i = 0; i < textArray.length; i++) {
+
+				context.fillText( textArray[ i ], 10, 48  + i * 60 );
+
+			}
+
+			var texture = new THREE.Texture( canvas );
+			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			texture.needsUpdate = true;
+
+			return texture;
+
+		}
+
+	}
+
+
+
+//////////////////
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>
