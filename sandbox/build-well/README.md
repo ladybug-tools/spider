@@ -11,6 +11,7 @@ _A well for building well._
 
 _We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
 
+* 2017-09-21 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r7/build-well.html )
 * 2017-09-21 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r6/build-well.html )
 * 2017-09-21 [Build Well R5]( http://ladybug-tools.github.io/spider/sandbox/build-well/r5/build-well.html )
 * 2017-09-21 [Build Well R4]( http://ladybug-tools.github.io/spider/sandbox/build-well/r4/build-well.html )
@@ -115,6 +116,9 @@ _To be expanded and explained in more detail as time goes on._
 * mnu-shape-ell-one.html
 	* Add updateMenuExtras function
 	* Simplified and added more defensive code
+* mnu-settings-building.html
+	* Not yet wired up
+* mnu-settings-site.html
 
 ### 2017-09-30 ~ Theo
 

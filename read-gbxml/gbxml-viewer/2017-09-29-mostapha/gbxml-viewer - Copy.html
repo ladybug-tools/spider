@@ -61,9 +61,7 @@
 
 	let campusSurfaces, campusOpenings;
 
-//	const ifrSourceURI = 'threejs-basic.html';
-	const ifrSourceURI = 'template-threejs-shade.html';
-
+	const ifrSourceURI = 'threejs-basic.html';
 	const infoURI = 'https://github.com/ladybug-tools.github.io/read-gbxml/';
 
 	const gbxmlURI = '../../data-files/SAM_Live.xml';
@@ -131,7 +129,7 @@
 
 		lightDirectional = scope.lightDirectional;
 		axisHelper = scope.axisHelper;
-//		gridHelper = scope.gridHelper;
+		gridHelper = scope.gridHelper;
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
@@ -280,14 +278,11 @@
 		scene.remove( campusSurfaces, campusOpenings );
 
 		campusSurfaces = new THREE.Object3D();
-//		let material = new THREE.MeshNormalMaterial( { side: 2, opacity: 0.5, transparent: true } );
+		let material = new THREE.MeshNormalMaterial( { side: 2, opacity: 0.5, transparent: true } );
 
 		for ( let i = 0; i < polyloops.length; i++ ) {
 
-		let material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2, opacity: 1 } );
-
 			shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
-			shape.castShadow = shape.receiveShadow = true
 			campusSurfaces.add( shape );
 
 		}
@@ -416,10 +411,6 @@
 
 		camera.far = 2 * camera.position.length();
 		camera.updateProjectionMatrix();
-
-		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-
-		lightDirectional.target = axisHelper;
 
 	}
 
