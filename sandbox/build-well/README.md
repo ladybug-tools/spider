@@ -5,7 +5,7 @@
 ====
 _A well for building well._
 
-<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/sandbox/build-well/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/sandbox/build-well/index.html width=100% height=600px ></iframe>
 
 ## Full Screen latest release: [Build Well]( http://ladybug-tools.github.io/spider/sandbox/build-well/index.html )
 
@@ -51,8 +51,16 @@ _We often think of software of software just appearing as if by magic. The reali
 	* Every menu page displays visual output that enables you to understand what is going on and to verify the code works properly
 * The menu items all call for and embed a single HTML into an iframe. This file is used is a kind of server for Three.js and the associated data  
 * There is a parent file that assembles the menu items and sets the CSS for all the other files
- 
+
+### Temporary coding
+
+Currently many values are stored directly in UI elements such as input boxes. Eventually, as the dust settles, some sort of global object will be devised that can be a more durable, safer location for this data. Do remember: it's easier to get out of no abstraction than to leave the wrong abstraction.
+
+Functions are designed as much as possible to be cut and pasted wherever with the fewest dependencies possible. As the dust settles, and a global object takes shape, the code will contain many fewer duplications.  
+
+
 _To be expanded and explained in more detail as time goes on._
+
 
 ## To Do
 
@@ -88,12 +96,25 @@ _To be expanded and explained in more detail as time goes on._
 
 ### mnu-gbxml-export.html
 
+* 2017-10-01 ~ Export all building geometries
 
 
 
 ## Change Log
 
 
+### 2017-10-01 ~ Theo
+
+19:20
+
+* R8
+
+* mnu-gbxml-export.html
+	* Working gbXML export - simple models only
+* mnu-box-shape.html
+* mnu-shape-ell-one.html
+	* Add updateMenuExtras function
+	* Simplified and added more defensive code
 
 ### 2017-09-30 ~ Theo
 
@@ -105,7 +126,7 @@ _To be expanded and explained in more detail as time goes on._
 No long relevant
 * 2017-09-21 ~ Export data to CSV file
 * 2017-09-21 ~ Export to Open Studio JSON schema
-* ### mnu-box-shape.html
+* mnu-box-shape.html
 	* Add check validity for area, length, number of floors, height, depth, wwr, over hang > no negative numbers or text entries, only numbers within permitted range. see tooltips for acceptable values
 	* Add checking for null values
 

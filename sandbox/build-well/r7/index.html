@@ -94,8 +94,6 @@
 
 		<div id = "divMenuSub" ></div>
 
-		<div id="divInfo" ></div>
-
 		<hr>
 
 		<div><a href=JavaScript:getContentMarkdown("../../../pages/code-of-conduct.md"); >Code of Conduct</a></div>
@@ -165,8 +163,6 @@
 		divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
 
 	}
-
-
 
 	function getMenuHTMLContentHTML( file ) {
 
@@ -279,10 +275,7 @@
 		let xhr;
 
 		xhr = new XMLHttpRequest();
-		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', url, true );
-		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { divInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.open( 'get', url, true );
 		xhr.onload = callback;
 		xhr.send( null );
 

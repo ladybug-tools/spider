@@ -63,32 +63,36 @@
 
 		<p><a href=JavaScript:getContentMarkdown(); >read me</a></p>
 
-		<p>
-			<a href=JavaScript:getMenuHTMLContentHTML("mnu-adjacent-buildings.html"); title ='Put your right building in and shake it all about.' >Adjacent Buildings</a>
+		<p title ='Put your right building in and shake it all about.'>
+			<a href=JavaScript:getMenuHTMLContentHTML("mnu-adjacent-buildings.html"); >Adjacent Buildings</a>
 			&raquo; <a href="mnu-adjacent-buildings.html " target="_blank" title = 'standalone test script' >&#x1F5D7;</a>
 		</p>
 
 <!--		<p><a href=JavaScript:loadMenu("mnu-geometry.html"); >Geometry</a></p> -->
 
-		<p>
-			<a href=JavaScript:getMenuHTMLContentHTML("mnu-shape-box.html"); title = 'Cookie cutter architecture?' >Box Shape</a>
+		<p title = 'Cookie cutter architecture?'>
+			<a href=JavaScript:getMenuHTMLContentHTML("mnu-shape-box.html"); >Box Shape</a>
 			&raquo; <a href="mnu-shape-box.html" target="_blank" title = 'standalone test script' >&#x1F5D7;</a>
 		</p>
 
 
-		<p>
-			<a href=JavaScript:getMenuHTMLContentHTML("mnu-shape-ell-one.html"); title = '"L"-evate your design' > L Shape </a>
+		<p title = '"L"-evate your design'>
+			<a href=JavaScript:getMenuHTMLContentHTML("mnu-shape-ell-one.html"); > L Shape </a>
 			&raquo; <a href="mnu-shape-ell-one.html" target="_blank" title = 'standalone test script' >&#x1F5D7;</a>
 		</p>
 
-
-		<p>
-			<a href=JavaScript:getMenuHTMLContentHTML("mnu-settings.html"); title='Save your files & adjust parameters' >Settings</a> 
-			&raquo; <a href="mnu-settings.html" target="_blank" title = 'standalone test script'  >&#x1F5D7;</a>
+		<p title='menu by Anton' >
+			<a href=JavaScript:getMenuHTMLContentHTML("mnu-settings-building.html"); >Building Settings</a> 
+			&raquo; <a href="mnu-settings-building.html" target="_blank" title = 'standalone test script'  >&#x1F5D7;</a>
 		</p>
 
-		<p>
-			<a href=JavaScript:getMenuHTMLContentHTML("mnu-gbxml-export.html"); title='Save your files & adjust parameters' >gbXML Export</a> 
+		<p title='Adjust parameters for entire site'>
+			<a href=JavaScript:getMenuHTMLContentHTML("mnu-settings-site.html"); >Site Settings</a> 
+			&raquo; <a href="mnu-settings-site.html" target="_blank" title = 'standalone test script'  >&#x1F5D7;</a>
+		</p>
+
+		<p title='Save your data to a file'>
+			<a href=JavaScript:getMenuHTMLContentHTML("mnu-gbxml-export.html"); >gbXML Export</a> 
 			&raquo; <a href="mnu-gbxml-export.html" target="_blank" title = 'standalone test script'  >&#x1F5D7;</a>
 		</p>
 
@@ -180,7 +184,7 @@
 
 			if ( parent.divContents.innerHTML === '' || parent.divContents.className === 'contentsScrolling' ) {
 
-				parent.divContents.innerHTML = '<iframe id=ifrContents ></iframe>';
+				parent.divContents.innerHTML = '<iframe id=ifrContents src=build-well-threejs.html ></iframe>';
 
 //		divContents.className = 'contentsScrolling';
 //		divContents.style.cssText = 'border: 1px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
@@ -232,7 +236,7 @@
 
 		divContents.innerHTML = '';
 		divContents.className = 'contentsScrolling';
-		divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+		divContents.style.cssText = 'border: 10px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
 
 		requestFile( path, callbackMarkdown );
 
