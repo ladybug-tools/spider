@@ -9,7 +9,9 @@
 
 ## Full Screen: [gbXML Viewer]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/index.html )
 
-
+See also
+* [gbXML/gbJSON File Viewer]( http://ladybug-tools.github.io/spider/read-gbxml/file-viewer/ )
+* [gbXML Schema File Viewer]( http://ladybug-tools.github.io/spider/read-gbxml/gbxml-schema-file-viewer/ )
 
 ## Concept
 
