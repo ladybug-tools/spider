@@ -76,7 +76,6 @@ _To be expanded and explained in more detail as time goes on._
 ### build-well-threejs.html
 
 * 2017-09-30 ~ Add selecting and moving buildings via pointing device
-
 * 2017-10-02 ~ Add ortho camera
 * 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
 	* Inworld text is a whole thing in itself. Add in only when very necessary
