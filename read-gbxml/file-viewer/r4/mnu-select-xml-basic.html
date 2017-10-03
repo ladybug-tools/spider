@@ -37,6 +37,7 @@
 		</div>
 		<p id = "GreenspaceLiveSamples" ></p>
 
+		<p>gbxml viewer has a later, better version of the xml to json converter</p>
 		<h4>open local file</h4>
 		<div id = "fileReader" >
 			<p><input type=file id=inpFile onchange=openFile(this); ></p>
@@ -195,10 +196,12 @@
 //console.log( 'response', response );
 
 		parser = new DOMParser();
-		xmldoc = parser.parseFromString( response, "text/xml");
-//console.log( 'xmldoc', xmldoc );
+		xmldoc = parser.parseFromString( response, "text/xml" );
+
+console.log( 'xmldoc', xmldoc );
 
 		json = xmlToJson( xmldoc );
+//		json = XML2jsobj( xmldoc );
 //console.log( 'json', json );
 
 		gbJSON = json.gbXML;
@@ -238,6 +241,63 @@ console.log( 'gbJSON', gbJSON );
 				'<textarea cols=100 rows=50 >' + str + '</textarea>';
 
 		}
+
+	}
+
+
+	function XML2jsobj( node ) {
+
+//console.log( 'node', node );
+
+		let	data = {};
+
+		function Add( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		};
+
+		let child, childNode;
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			Add( childNode.name, childNode.value );
+
+		}
+
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
+
+					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else { // sub-object
+
+					Add( childNode.nodeName, XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
 
 	}
 

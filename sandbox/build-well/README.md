@@ -11,9 +11,9 @@ _A well for building well._
 
 _We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
 
-* 2017-09-21 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r7/build-well.html )
-* 2017-09-21 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r6/build-well.html )
-* 2017-09-21 [Build Well R5]( http://ladybug-tools.github.io/spider/sandbox/build-well/r5/build-well.html )
+* 2017-09-29 [Build Well R7]( http://ladybug-tools.github.io/spider/sandbox/build-well/r7/build-well.html )
+* 2017-09-26 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r6/build-well.html )
+* 2017-09-24 [Build Well R5]( http://ladybug-tools.github.io/spider/sandbox/build-well/r5/build-well.html )
 * 2017-09-21 [Build Well R4]( http://ladybug-tools.github.io/spider/sandbox/build-well/r4/build-well.html )
 * 2017-09-21 [Build Well R3]( http://ladybug-tools.github.io/spider/sandbox/build-well/r3/build-well.html )
 * 2017-09-20 [Build Well R2]( http://ladybug-tools.github.io/spider/sandbox/build-well/r2/build-well.html )
@@ -119,7 +119,6 @@ _To be expanded and explained in more detail as time goes on._
 19:20
 
 * R8
-
 * mnu-gbxml-export.html
 	* Working gbXML export - simple models only
 * mnu-box-shape.html
