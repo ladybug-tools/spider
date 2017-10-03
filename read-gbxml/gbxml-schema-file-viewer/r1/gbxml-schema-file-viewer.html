@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Basic pushMe-pullYou template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-29" >
-<title>gbxml-file-viewer</title>
+<meta name = "date" content = "2017-10-02" >
+<title>gbxml schema file viewer r1</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 /* 2017-09-29*/
@@ -18,7 +18,7 @@
 	a:hover, a:focus{ color: #f1f1f1; }
 	h3 { margin: 0; }
 
-	select { width: 150px; float: right; }
+	select { width: 100%; }
 	summary { outline: none; font-size: 18pt }
 	textarea { height: 100%; width: 100% } 
 
@@ -46,6 +46,7 @@
 			<div id = "divTitle" ></div>
 
 			<p id = "divFileInfo" ></p>
+			<p>This is the first pass at building an online gbXML dictionary and guide.</p>
 			<p id = "divStats1" ></p>
 			<p id = "divStats2" ></p>
 			<p id = "divStats3" ></p>
@@ -57,7 +58,8 @@
 <script>
 
 	const textURI = 'https://rawgit.com/GreenBuildingXML/gbXML-Schema/master/GreenBuildingXML_Ver6.01.xsd';
-//	const textURI = '../../data-files/SAM_Live.xml';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/read-gbxml/';
+
 
 	const b = '<br>';
 
@@ -68,11 +70,9 @@
 
 	function init() {
 
-		divTitle.innerHTML = '<h3><a href="" >' + document.title +'</a>' +
-			'</h3>';
-
-		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
-//		info.innerHTML = '<p>' + txt + '</p>' + '<p>' + txt + '</p>' + '<p>' + txt + '</p>'
+		divTitle.innerHTML = 
+			'<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		if ( parent && parent.ifrContents ) {
 
@@ -139,11 +139,11 @@
 //			if ( line.includes( 'documentation' ) ) {
 			if ( line.includes( 'enumeration' ) || line.includes( 'element ref=' )) {
 
-				oo = line.match( /"(.*?)"/ );
+				option = line.match( /"(.*?)"/ );
 
-				if ( oo ) { 
+				if ( option ) { 
 //console.log( '', oo[ 1 ] ); 
-					str += '<option>' + oo[ 1 ] + '</option>';
+					str += '<option>' + option[ 1 ] + '</option>';
 				}
 			}
 
@@ -155,6 +155,8 @@
 		} 
 
 		divStats1.innerHTML = txt;
+
+		divContents.innerHTML = '<textarea>' + response + '</textarea>';
 
 	}
 

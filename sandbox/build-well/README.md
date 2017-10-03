@@ -65,15 +65,19 @@ _To be expanded and explained in more detail as time goes on._
 
 ## To Do
 
-* 2017-09-30 ~ Add selecting and moving buildings via pointing device
 
 
 ### index.html / Build Well parent file
 
-
+* 2017-10-02 ~ Add multi-line select for shape selection
+* Add links to cedits page
+* Enanable viewing html * markpwn without killing Three,js data
 
 ### build-well-threejs.html
 
+* 2017-09-30 ~ Add selecting and moving buildings via pointing device
+
+* 2017-10-02 ~ Add ortho camera
 * 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
 	* Inworld text is a whole thing in itself. Add in only when very necessary
 * 2017-09-21 ~ Color, shade and shadow
@@ -94,6 +98,13 @@ _To be expanded and explained in more detail as time goes on._
 ### mnu-ell-shape-one.html
 
 * 2017-09-21 ~ Match building shapes to Ben's spec
+
+### mn-settings-site.html
+
+* 2017-10-02 ~ fix toggle edges
+* 2017-10-02 ~ Ground & Helpers don't toggle after change in gridsize
+* 2017-10-02 ~ Add options to grid size / prevent spurious values
+
 
 ### mnu-gbxml-export.html
 
