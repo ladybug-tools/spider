@@ -279,6 +279,8 @@ gridHelper.material.color.setHSL( 0.5, 1, 1 )
 
 		event.preventDefault();
 
+		if ( event.buttons > 0 ) { return; }
+
 		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
 
