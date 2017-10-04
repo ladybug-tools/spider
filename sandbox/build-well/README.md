@@ -66,6 +66,8 @@ _To be expanded and explained in more detail as time goes on._
 ## To Do
 
 
+* 2017-10-03 ~ L Shape 1: how to recalculate length (X1) after you update the area?
+	* Spreadsheet with all the calculations would be helpful
 
 ### index.html / Build Well parent file
 
@@ -113,6 +115,18 @@ _To be expanded and explained in more detail as time goes on._
 
 ## Change Log
 
+
+### 2017-10-03 ~ Theo
+
+11:42
+
+* mnu-gbxml-export.html
+	* starting to have data from Surfaces with openings
+* L Shape - meshes starting to have names
+
+### 2017-10-03 ~ Theo
+
+* bits and pieces here and there
 
 ### 2017-10-01 ~ Theo
 

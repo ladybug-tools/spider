@@ -12,10 +12,6 @@
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
-
-	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
-	button:hover { background-color: #ccc; color: #fff }
-
 	h3 { margin: 0; }
 	img { opacity: 1; }
 	#menu { position: absolute; text-align: center; width: 100%; }
@@ -29,19 +25,14 @@
 	<div id = "menu" >
 
 		<div id = "divTitle" ></div>
-		<p id=log >
-		<div id = "contents" >
-			<button onclick=drawSpheres() >draw spheres</button> 
-			<button onclick=drawBoxes() >draw boxes</button> 
- 			<button onclick=drawCylinders() >draw Cylinders</button>
-		</div>
+<p id=log >
+		<div id = "contents" ></div>
 
 	</div>
 
 <script>
 
-	var datapoints = [];
-	var meshes;
+	var cubes = [];
 
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/scatter-well/';
 
@@ -54,8 +45,8 @@
 	function init() {
 
 		divTitle.innerHTML = 
-			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
-			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
+			'<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -90,7 +81,7 @@
 //		obj = drawCubes();
 //		scene.add( obj );
 
-		drawSpheres();
+		drawSpline();
 
 		drawGrid()
 
@@ -110,14 +101,13 @@
 
 
 
-	function drawSpheres() {
+	function drawSpline() {
 
 		let geometry, material, mesh, edges;
 
 		function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
 
 		vertices = [];
-		scene.remove( meshes );
 
 		for ( var i = 0; i < 10; i++ ) {
 
@@ -145,85 +135,7 @@
 
 		splinePoints = spline.getPoints( 2000 );
 
-		meshes = new THREE.Object3D();
-
-		for ( let i = 0; i < splinePoints.length; i++ ) {
-
-			pt = splinePoints[i] 
-
-			material = new THREE.MeshPhongMaterial( {
-				color: 0xffffff,
-				emissive: 0x333333,
-//				opacity: Math.random(),
-//				specular: 0xffffff * Math.random(),
-//				shading: THREE.FlatShading,
-//				shininess: 10,
-//				transparent: true
-			} );
-			material.color.setHSL( ( pt.x + 50 ) / 100, 0.8, 0.5 );
-//			material = new THREE.MeshNormalMaterial();
-
-
-			geometry = new THREE.SphereBufferGeometry( 1  );
-			mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( pt.x + 20 * Math.random() - 10, pt.y + 20 * Math.random() - 10, pt.z + 20 * Math.random() - 10 );
-			mesh.rotation.set( 1, 1, mesh.position.x );
-			scale = 1 + 0.1 * mesh.position.z * Math.random();
-			mesh.scale.set( scale, scale, scale);
-			meshes.add( mesh );
-
-			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
-			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
-			edges = new THREE.LineSegments( geometryEdge, material );
-			mesh.add( edges ); // add wireframe as a child of the parent mesh
-
-			datapoints.push( mesh );
-			meshes.add( mesh );
-
-		}
-
-		scene.add( meshes );
-
-	}
-
-
-
-	function drawBoxes() {
-
-		let geometry, material, mesh, edges;
-
-		function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
-
-		vertices = [];
-		scene.remove( meshes );
-
-		for ( var i = 0; i < 10; i++ ) {
-
-			vertices.push( v( 80 * Math.random() -40, 80 * Math.random() - 40, 80 * Math.random() - 40 ) );
-
-		}
-
-		var spline = new THREE.CatmullRomCurve3 ( vertices );
-
-//		var path = new THREE.Path( curve.getPoints( 150 ) );
-//		geometry = path.createPointsGeometry( 150 );
-
-		splinePoints = spline.getPoints( 150 );
-		geometry = new THREE.Geometry();
-
-		for ( var i = 0; i < splinePoints.length; i++) {
-
-			geometry.vertices.push(splinePoints[i] );
-
-		}
-
-		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
-		var line = new THREE.Line( geometry, material );
-//		scene.add( line );
-
-		splinePoints = spline.getPoints( 2000 );
-
-		meshes = new THREE.Object3D();
+		const obj = new THREE.Object3D();
 
 		for ( let i = 0; i < splinePoints.length; i++ ) {
 
@@ -247,98 +159,21 @@
 			mesh.position.set( pt.x + 20 * Math.random() - 10, pt.y + 20 * Math.random() - 10, pt.z + 20 * Math.random() - 10 );
 			mesh.rotation.set( 1, 1, mesh.position.x );
 			mesh.scale.set( 1 + 0.3 * mesh.position.z * Math.random(), Math.random(), 1 );
-			meshes.add( mesh );
+			obj.add( mesh );
 
 			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
 			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
 			edges = new THREE.LineSegments( geometryEdge, material );
 			mesh.add( edges ); // add wireframe as a child of the parent mesh
 
-			datapoints.push( mesh );
-			meshes.add( mesh );
+			cubes.push( mesh );
 
 		}
 
-		scene.add( meshes );
+		scene.add( obj );
 
 	}
 
-
-
-	function drawCylinders() {
-
-		let geometry, material, mesh, edges;
-
-		function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
-
-		vertices = [];
-		scene.remove( meshes );
-
-		for ( var i = 0; i < 10; i++ ) {
-
-			vertices.push( v( 80 * Math.random() -40, 80 * Math.random() - 40, 80 * Math.random() - 40 ) );
-
-		}
-
-		var spline = new THREE.CatmullRomCurve3 ( vertices );
-
-//		var path = new THREE.Path( curve.getPoints( 150 ) );
-//		geometry = path.createPointsGeometry( 150 );
-
-		splinePoints = spline.getPoints( 150 );
-		geometry = new THREE.Geometry();
-
-		for ( var i = 0; i < splinePoints.length; i++) {
-
-			geometry.vertices.push(splinePoints[i] );
-
-		}
-
-		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
-		var line = new THREE.Line( geometry, material );
-//		scene.add( line );
-
-		splinePoints = spline.getPoints( 2000 );
-
-		meshes = new THREE.Object3D();
-
-		for ( let i = 0; i < splinePoints.length; i++ ) {
-
-			pt = splinePoints[i] 
-
-			material = new THREE.MeshPhongMaterial( {
-				color: 0xffffff,
-				emissive: 0x333333,
-//				opacity: Math.random(),
-//				specular: 0xffffff * Math.random(),
-//				shading: THREE.FlatShading,
-//				shininess: 10,
-//				transparent: true
-			} );
-			material.color.setHSL( ( pt.x + 50 ) / 100, 0.8, 0.5 );
-//			material = new THREE.MeshNormalMaterial();
-
-
-			geometry = new THREE.CylinderBufferGeometry();
-			mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( pt.x + 20 * Math.random() - 10, pt.y + 20 * Math.random() - 10, pt.z + 20 * Math.random() - 10 );
-			mesh.rotation.set( 0, 0, mesh.position.x );
-			mesh.scale.set( 0.01 + 0.01 * mesh.position.z * Math.random(), 0.01 * Math.random(), 0.05 );
-			meshes.add( mesh );
-
-			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
-			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
-			edges = new THREE.LineSegments( geometryEdge, material );
-			mesh.add( edges ); // add wireframe as a child of the parent mesh
-
-			datapoints.push( mesh );
-			meshes.add( mesh );
-
-		}
-
-		scene.add( meshes );
-
-	}
 
 
 
@@ -452,7 +287,7 @@ gridHelper.material.color.setHSL( 0.5, 1, 1 )
 		raycaster = new THREE.Raycaster();
 		raycaster.setFromCamera( mouse, camera );
 
-		intersects = raycaster.intersectObjects( datapoints );
+		intersects = raycaster.intersectObjects( cubes );
 
 		if ( intersects.length > 0 ) {
 
@@ -501,7 +336,7 @@ gridHelper.material.color.setHSL( 0.5, 1, 1 )
 			intersected.name + b +
 			mouse.x + b +
 			mouse.y + b +
-			'<a href=http://lorempixel.com/640/480/ ><img src=http://lorempixel.com/150/100 ></a>' +
+			'<img src=http://lorempixel.com/150/100 >' +
 		'';
 
 		headsUp.innerHTML = txt;

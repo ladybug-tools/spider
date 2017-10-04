@@ -6,7 +6,7 @@
 <meta name = "description" content = "Buid Well parametric L shape creator" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-09-30" >
-<title>L Shape R5</title>
+<title>L Shape R6</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -314,6 +314,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( len1 + len2, hgt, i, 1 );
 			wall.rotation.z = Math.PI;
 			wall.position.set( len105 + len205, -wid105  - wid205, i * hgt, );
+			wall.name = 'External Wall length front';
 			building.add( wall );
 
 
@@ -331,6 +332,7 @@ console.log( 'building.scale.x', building.scale.x );
 // length back left
 			wall = createExternalWall( len1, hgt, i, 2 );
 			wall.position.set( -len105 - len205, wid105 + wid205, i * hgt );
+			wall.name = 'External Wall length back left';
 			building.add( wall );
 
 			if ( len1 > 2 * perDep ) {
@@ -346,6 +348,7 @@ console.log( 'building.scale.x', building.scale.x );
 // length back right
 			wall = createExternalWall( len2, hgt, i, 3 );
 			wall.position.set( len1 - len105 - len205, wid1 - wid105 - wid205, i * hgt );
+			wall.name = 'External Wall length back right';
 			building.add( wall );
 
 			if ( len1 > 2 * perDep  && wid1 > 2 * perDep ) {
@@ -363,6 +366,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( wid1 + wid2, hgt, i, 4 );
 			wall.rotation.z = Math.PI * 0.5;
 			wall.position.set( -len105 - len205, -wid105 - wid205, i * hgt );
+			wall.name = 'External Wall width left full';
 			building.add( wall );
 
 			if ( wid1 + wid2 > 2 * perDep ) {
@@ -379,6 +383,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( wid1, hgt, i, 5 );
 			wall.rotation.z = -Math.PI / 2;
 			wall.position.set( len105 + len205, 0, i * hgt );
+			wall.name = 'External Wall';
 			building.add( wall );
 
 			if ( wid1 > 2 * perDep ) {
@@ -395,6 +400,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( wid2, hgt, i, 6 );
 			wall.rotation.z = -Math.PI / 2;
 			wall.position.set( len1 - len105 - len205, wid1, i * hgt, i, intWallCount++ );
+			wall.name = 'External Wall';
 			building.add( wall );
 
 			if ( wid2 > 2 * perDep ) {
@@ -409,10 +415,12 @@ console.log( 'building.scale.x', building.scale.x );
 
 			floor = createSlab( len1, wid1 + wid2 );
 			floor.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
+			floor.name = 'floor left';
 			building.add( floor );
 
 			floor = createSlab( len2, wid1);
 			floor.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
+			floor.name = 'floor right';
 			building.add( floor );
 
 		}
@@ -420,10 +428,12 @@ console.log( 'building.scale.x', building.scale.x );
 
 		roof = createSlab( len1, wid1 + wid2 );
 		roof.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
+		roof.name = 'roof';
 		building.add( roof );
 
 		roof = createSlab( len2, wid1);
 		roof.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
+		roof.name = 'roof';
 		building.add( roof );
 
 	}

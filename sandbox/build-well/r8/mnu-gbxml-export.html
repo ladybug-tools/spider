@@ -154,15 +154,15 @@
 
 	function getBuildingData() {
 
-console.log( '', buildings );
+//console.log( 'buildings', buildings );
 
 		txt = '';
 
 		txt += 
 			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
-			'<Campus id="aim0002">\n' +
-//				'\t<Building buildingType="Office" id="' + building.name + '" >\n' +
+			'<Campus>\n' +
+//				'\t<Building id="' + building.name + '" >\n' +
 //				'\t\t<BuildingStorey id="bldg-story-1" >\n' +
 		'';
 
@@ -170,12 +170,12 @@ console.log( '', buildings );
 
 			building = buildings.children[ i ];
 
-console.log( 'geo', building.geometry.clone() ); 
+			if ( building.geometry ) { 
 
-	if ( !building.geometry ) { break; }
+//console.log( 'geo', building.geometry.clone() ); 
+
 
 			geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
-
 
 			vertexCount = 0;
 
@@ -189,63 +189,122 @@ console.log( 'geo', building.geometry.clone() );
 
 //console.log( 'v1', v1 );
 
-			const geometry = new THREE.BoxBufferGeometry( 5, 5, 5 );
-			const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.copy( v1 )
-			scene.add( mesh );
+				const geometry = new THREE.BoxBufferGeometry( 5, 5, 5 );
+				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( v1 )
+				scene.add( mesh );
 
-				txt += 
-				'\t<Surface>\n' +
-					'\t\t<PlanarGeometry>\n' +
-					'\t\t\t<PolyLoop>\n' +
+					txt += 
+					'\t<Surface>\n' +
+						'\t\t<PlanarGeometry>\n' +
+						'\t\t\t<PolyLoop>\n' +
 
-					'\t\t\t\t<CartesianPoint>\n' +
+						'\t\t\t\t<CartesianPoint>\n' +
 
-					'\t\t\t\t\t<Coordinate>' + v1.x + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v1.y + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v1.z + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v1.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v1.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v1.z + '</Coordinate>\n' +
 
-					'\t\t\t\t</CartesianPoint>\n' +
+						'\t\t\t\t</CartesianPoint>\n' +
 
-					'\t\t\t\t<CartesianPoint>\n' +
+						'\t\t\t\t<CartesianPoint>\n' +
 
-					'\t\t\t\t\t<Coordinate>' + v2.x + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v2.y + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v2.z + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v2.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v2.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v2.z + '</Coordinate>\n' +
 
-					'\t\t\t\t</CartesianPoint>\n' +
+						'\t\t\t\t</CartesianPoint>\n' +
 
-					'\t\t\t\t<CartesianPoint>\n' +
+						'\t\t\t\t<CartesianPoint>\n' +
 
-					'\t\t\t\t\t<Coordinate>' + v4.x + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v4.y + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v4.z + '</Coordinate>\n' +
-
-
-					'\t\t\t\t</CartesianPoint>\n' +
-
-					'\t\t\t\t<CartesianPoint>\n' +
-
-					'\t\t\t\t\t<Coordinate>' + v3.x + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v3.y + '</Coordinate>\n' +
-					'\t\t\t\t\t<Coordinate>' + v3.z + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v4.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v4.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v4.z + '</Coordinate>\n' +
 
 
-					'\t\t\t\t</CartesianPoint>\n' +
+						'\t\t\t\t</CartesianPoint>\n' +
+
+						'\t\t\t\t<CartesianPoint>\n' +
+
+						'\t\t\t\t\t<Coordinate>' + v3.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v3.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v3.z + '</Coordinate>\n' +
 
 
-					'\t\t\t</PolyLoop>\n' +
+						'\t\t\t\t</CartesianPoint>\n' +
 
-					'\t\t</PlanarGeometry>\n' +
-				'\t</Surface>\n' +
-				'';
+
+						'\t\t\t</PolyLoop>\n' +
+
+						'\t\t</PlanarGeometry>\n' +
+					'\t</Surface>\n' +
+					'';
+
+				}
+
+			} else {
+
+
+console.log( 'building', building );
+console.log( 'scene.position', scene.position );
+
+
+				geo = new THREE.BoxBufferGeometry( 5, 5, 5 );
+				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+				for ( var j = 0; j < building.children.length; j++ ) {
+
+					var surface = building.children[ j ].clone();
+					var geometry = new THREE.Geometry().fromBufferGeometry( surface.geometry );
+
+console.log( 'surface', geometry );
+
+					var angle = building.rotation._z;
+
+					var pt = surface.position;
+//					geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
+					geometry.applyMatrix( new THREE.Matrix4().makeTranslation( surface.position.x, surface.position.y, surface.position.z ) );
+					var v0 = geometry.vertices[ 0 ];
+
+// console.log( 'xxx', v0, angle);
+
+					var v1 = geometry.vertices[ 1 ];
+					var v2 = geometry.vertices[ 2 ];
+					var v3 = geometry.vertices[ 3 ];
+
+
+					var mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v0);
+					scene.add( mesh );
+
+					mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v1);
+					scene.add( mesh );
+
+					mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v2);
+					scene.add( mesh );
+
+					mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v3);
+					scene.add( mesh );
+
+					if ( surface.children.length ) {
+
+
+
+
+
+					}
+
+				}
+
+		parent.ii = parent.ifrContents.contentWindow;
+		parent.ss = surface;
+		parent.bb = building
 
 			}
-
-
-
-		}
 
 
 			txt +=
@@ -257,7 +316,10 @@ console.log( 'geo', building.geometry.clone() );
 				'</gbXML>\n' +
 			'';
 
-		scope.divScreenText.innerHTML = '<textarea id=buildingData >' + txt + '</textarea>';
+			scope.divScreenText.innerHTML = '<textarea id=buildingData >' + txt + '</textarea>';
+
+	
+		}
 
 
 	}
