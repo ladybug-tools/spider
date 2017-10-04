@@ -1,0 +1,201 @@
+
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-02" >
+<title>multiple 3d views</title>
+<style>
+
+	body { font: 11pt monospace; left: 0; margin: 0 auto; max-width: 800px; right: 0; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#canvas1, #canvas2, #canvas3, #canvas4 {
+		position: relative;
+		margin 10px;
+		border: 1px solid red;
+
+	}
+
+	#menu { position: absolute; text-align: center; width: 100%; }
+	#title {}
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "title" ></div>
+	<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+
+	<h2>Orthographic View</h2>
+
+
+		<div style=position:relative; >
+
+		<canvas id="canvas2"></canvas>
+
+		<div style=position:absolute;text-align:center;top:5px;width:100%; >
+			<button onclick=camera2.position.set(0,0,500); >plan view</button>
+			<button onclick=camera2.position.set(0,-300,0); >south elevation</button> 
+			<button onclick=camera2.position.set(0,300,0); >north elevation</button> 
+			<button onclick=camera2.position.set(0,100,0); >east elevation</button> 
+			<button onclick=camera2.position.set(-300,0,0); >west elevation</button> 
+		</div>
+
+
+	</div>
+
+	<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+
+	<h2>Perspective View</h2>
+
+	<div style=position:relative;>
+		<canvas id="canvas1"></canvas>
+		<div style=position:absolute;text-align:center;top:5px;width:100%;>
+			<button onclick=controls.reset(); >reset view</button>
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+		</div>
+
+	</div>
+
+	<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+
+<script>
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/scatter-well/';
+
+	const width = 800;
+	const height = 400;
+	var renderer, camera, controls, scene;
+
+	var lightAmbient, lightDirectional, cameraHelper, axisHelper;
+
+	init();
+	animate();
+
+	function init() {
+
+		title.innerHTML = 
+			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
+
+		canvas1.width = canvas2.width = width;
+		canvas1.height = canvas2.height = height;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setClearColor( 0xffffff, 1 );
+		renderer.setSize( width, height );
+		renderer.shadowMap.enabled = true;
+
+		context1 = canvas1.getContext( '2d' );
+		context2 = canvas2.getContext( '2d' );
+
+		camera = new THREE.PerspectiveCamera( 40, width / height, 1, 1000 );
+		camera.position.set( 100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, canvas1 );
+		controls.maxDistance = 600;
+
+
+//		camera2 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera2 = new THREE.OrthographicCamera( width / -6, width / 6, height / 6, height / - 6, 1, 1000 );
+		camera2.position.set( 0, 0, 200 );
+		camera2.up.set( 0, 0, 1 );
+
+		controls2 = new THREE.OrbitControls( camera2, canvas2 );
+//		controls2.maxDistance = 600;
+
+
+		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		const size = 100
+		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
+//		lightDirectional.position.set( 1, -1, 1 ).normalize();
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+
+		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera ) 
+		scene.add( cameraHelper );
+
+		axisHelper = new THREE.AxisHelper( 50 );
+		scene.add( axisHelper );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+		addAssets();
+
+	}
+
+
+	function addAssets() {
+
+		var geometry, material, mesh;
+
+		geometry = new THREE.SphereBufferGeometry( 25, 50, 50 );
+		material = new THREE.MeshPhongMaterial( { color: 0xff0000 });
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.castShadow = mesh.receiveShadow = true;
+
+		scene.add( mesh );
+
+		geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
+		material = new THREE.MeshPhongMaterial( { color: 0xfffff * Math.random() });
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.z = -50;
+		mesh.castShadow = mesh.receiveShadow = true;
+
+		scene.add( mesh );
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+
+		renderer.autoClear = true;
+		controls.update();
+		renderer.render( scene, camera );
+		context1.drawImage( renderer.domElement, 0, 0 );
+
+		controls2.update();
+		renderer.render( scene, camera2 );
+		context2.drawImage( renderer.domElement, 0, 0 );
+
+	}
+
+</script>
+</body>
+</html>
