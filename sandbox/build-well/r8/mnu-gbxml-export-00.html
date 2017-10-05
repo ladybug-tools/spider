@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Build Well site updates" >
+<meta name = "keywords" content = "Three.js,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-01" >
+<title>Menu gbXML Export</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	h3 { margin: 0; }
+
+	select { width: 100%; }
+	summary { outline: none; font-size: 14pt }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divContents { height: 100%; width: 100%; }
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p id = "divInfo" ></p>
+
+		<p>
+			<button onclick=getBuildingData(); >getBuildingData</button>
+
+		</p>
+
+		<p>
+			<button onclick = saveFile(); >save building data to file</button> 
+		</p>
+
+		<p>2017-10-01: Currently only saves the simple box buildings</p>
+		<p>Creates boxes at vertices to help verify valid data collection</p>
+		<p>View gbXML using <a href="http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/" target="_blank">Spider gbXML Viewer</a></p>
+	</div>
+
+	<div id = "divContents" >
+
+	</div>
+
+<script>
+
+	let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+	const ifrSource = 'build-well-threejs.html';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
+
+	let txt;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
+	let geometry, material, mesh;
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+
+		if ( parent && parent.ifrContents || parent.divContents.className === 'contentsScrolling' ) {
+
+			scope = parent.ifrContents.contentWindow;
+
+			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 10 ) + 'px';
+
+//console.log( 'parent.ifrMenuSub ', parent.ifrMenuSub.src );
+
+			if ( parent.divContents.innerHTML === '' ) {
+
+				parent.ifrContents.src = ifrSource;
+
+				parent.ifrContents.onload = initVariables;
+
+			} else {
+
+				initVariables()
+
+			}
+
+		} else {
+
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+//		selBuilding.focus();
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axisHelper = scope.axisHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		buildings = scope.meshes;
+
+	}
+
+
+
+	function getBuildingData() {
+
+//console.log( 'buildings', buildings );
+
+		txt = '';
+
+		txt += 
+			'<?xml version="1.0" encoding="UTF-16"?>\n' +
+			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
+			'<Campus>\n' +
+//				'\t<Building id="' + building.name + '" >\n' +
+//				'\t\t<BuildingStorey id="bldg-story-1" >\n' +
+		'';
+
+		for ( var i = 0; i < buildings.children.length; i++ ) {
+
+			building = buildings.children[ i ];
+
+			if ( building.geometry ) { 
+
+//console.log( 'geo', building.geometry.clone() ); 
+
+
+			geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
+
+			vertexCount = 0;
+
+			for ( var j = 0; j < 6; j++ ) {
+
+				v1 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+				v2 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+				v3 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+				v4 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+
+
+//console.log( 'v1', v1 );
+
+				const geometry = new THREE.BoxBufferGeometry( 5, 5, 5 );
+				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( v1 )
+				scene.add( mesh );
+
+					txt += 
+					'\t<Surface>\n' +
+						'\t\t<PlanarGeometry>\n' +
+						'\t\t\t<PolyLoop>\n' +
+
+						'\t\t\t\t<CartesianPoint>\n' +
+
+						'\t\t\t\t\t<Coordinate>' + v1.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v1.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v1.z + '</Coordinate>\n' +
+
+						'\t\t\t\t</CartesianPoint>\n' +
+
+						'\t\t\t\t<CartesianPoint>\n' +
+
+						'\t\t\t\t\t<Coordinate>' + v2.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v2.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v2.z + '</Coordinate>\n' +
+
+						'\t\t\t\t</CartesianPoint>\n' +
+
+						'\t\t\t\t<CartesianPoint>\n' +
+
+						'\t\t\t\t\t<Coordinate>' + v4.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v4.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v4.z + '</Coordinate>\n' +
+
+
+						'\t\t\t\t</CartesianPoint>\n' +
+
+						'\t\t\t\t<CartesianPoint>\n' +
+
+						'\t\t\t\t\t<Coordinate>' + v3.x + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v3.y + '</Coordinate>\n' +
+						'\t\t\t\t\t<Coordinate>' + v3.z + '</Coordinate>\n' +
+
+
+						'\t\t\t\t</CartesianPoint>\n' +
+
+
+						'\t\t\t</PolyLoop>\n' +
+
+						'\t\t</PlanarGeometry>\n' +
+					'\t</Surface>\n' +
+					'';
+
+				}
+
+			} else {
+
+
+console.log( 'building', building );
+console.log( 'scene.position', scene.position );
+
+
+				geo = new THREE.BoxBufferGeometry( 5, 5, 5 );
+				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+				for ( var j = 0; j < building.children.length; j++ ) {
+
+					var surface = building.children[ j ].clone();
+					var geometry = new THREE.Geometry().fromBufferGeometry( surface.geometry );
+
+console.log( 'surface', geometry );
+
+					var angle = building.rotation._z;
+
+					var pt = surface.position;
+//					geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
+					geometry.applyMatrix( new THREE.Matrix4().makeTranslation( surface.position.x, surface.position.y, surface.position.z ) );
+					var v0 = geometry.vertices[ 0 ];
+
+// console.log( 'xxx', v0, angle);
+
+					var v1 = geometry.vertices[ 1 ];
+					var v2 = geometry.vertices[ 2 ];
+					var v3 = geometry.vertices[ 3 ];
+
+
+					var mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v0);
+					scene.add( mesh );
+
+					mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v1);
+					scene.add( mesh );
+
+					mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v2);
+					scene.add( mesh );
+
+					mesh = new THREE.Mesh( geo, material );
+					mesh.position.copy( v3);
+					scene.add( mesh );
+
+					if ( surface.children.length ) {
+
+
+
+
+
+					}
+
+				}
+
+		parent.ii = parent.ifrContents.contentWindow;
+		parent.ss = surface;
+		parent.bb = building
+
+			}
+
+
+			txt +=
+
+//				'\t\t\t</PlanarGeometry>\n' +
+//				'\t\t</BuildingStorey>\n' +
+//				'\t</Building>\n' +
+				'</Campus>\n' +
+				'</gbXML>\n' +
+			'';
+
+			scope.divScreenText.innerHTML = '<textarea id=buildingData >' + txt + '</textarea>';
+
+	
+		}
+
+
+	}
+
+
+	function saveFile() {
+
+		var blob = new Blob( [ scope.buildingData.value ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'building-data.xml';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+</script>
+</body>
+</html>

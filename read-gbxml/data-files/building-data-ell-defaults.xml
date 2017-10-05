@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-16"?>
 <gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">
+<Campus>
 <Location>
 <ZipcodeOrPostalCode>94111</ZipcodeOrPostalCode>
 <Longitude>-122.398</Longitude>
@@ -8,7 +9,6 @@
 <CADModelAzimuth>0</CADModelAzimuth>
 <Name>San Francisco CA United States</Name>
 </Location>
-<Campus>
 	<Building id="The Building" buildingType="Office" >
 	<StreetAddress>440 Davis Court</StreetAddress>
 	<Area>6000</Area>

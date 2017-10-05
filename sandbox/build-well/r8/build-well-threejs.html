@@ -16,7 +16,7 @@
 	h1 { margin: 0 }
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
-	textarea { background: none; height: 800px; width: 100%; }
+	textarea { background: none; height: 300px; width: 100%; tab-size: 4;}
 
 	#menu { position: absolute; left: 0; margin: 0 auto; right: 0; max-width: 80%; text-align: center; }
 
@@ -36,7 +36,6 @@
 			<button onclick=camera.position.set(300,0,0); >east elevation</button> 
 			<button onclick=camera.position.set(-300,0,0); >west elevation</button> 
 		</p>
-		<br>
 		<div id=divScreenText ></div>
 	</div>
 
@@ -68,7 +67,7 @@
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
 		camera.up.set( 0, 0, 1 );
-		camera.position.set( -100, -200, 80 );
+		camera.position.set( -100, -2000, 80 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 
@@ -190,6 +189,8 @@
 		mesh.scale.set( 80, 100, 15 );
 		mesh.position.set( 0, 0, 0.5 * mesh.scale.z );
 		mesh.name = 'The Building';
+		mesh.userData.area = '8000';
+		mesh.userData.volume = '120000';
 		object.add( mesh );
 
 		return object;

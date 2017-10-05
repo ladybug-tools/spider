@@ -42,7 +42,7 @@
 
 		<p><input type=file id=inpFile onchange=openFile(this); ></p>
 
-		<p>This is the first pass at adding colors(random), lights, shade and shadow. </p>
+<!--		<p>This is the first pass at adding colors(random), lights, shade and shadow. </p> -->
 		<div id = "githubGbxmlSamples" >
 
 			<a href="https://github.com/GreenBuildingXML/Sample-gbXML-Files" target="_blank" >gbXML sample files on GitHub in Sample-gbXML-Files</a><br>
@@ -83,10 +83,13 @@
 
 -->
 		</details>
-		<div>Other gbXML Files</div>
+		<details open >
+		<summary>gbXML Files on Spider</summary>
 		<div><a href=JavaScript:loadXML("../../data-files/SAM_Live.xml")>SAM Live</a></div>
 		<div><a href=JavaScript:loadXML("../../data-files/generated.xml")>generated</a></div>
 		<div><a href=JavaScript:loadXML("../../data-files/generated2.xml")>generated2</a></div>
+		<div><a href=JavaScript:loadXML("../../data-files/building-data-ell-defaults.xml")>building-data-ell-defaults</a></div>
+		</details>
 		<div id = "GreenspaceLiveSamples" ></div>
 <!--
 		<h4>open local file</h4>
@@ -116,6 +119,7 @@
 
 
 <script>
+
 
 	const url = '../../data-files/SAM_Live.xml';
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/read-gbxml/';

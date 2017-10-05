@@ -28,9 +28,9 @@
 	<div id = "menu" >
 
 		<div id = "title" ></div>
-		<div id = "contents" >
+		<p id = "contents" >
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
-		</div>
+		</p>
 
 	</div>
 
@@ -45,7 +45,11 @@
 
 	function init() {
 
-		title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+		if ( window.top === window.self ) {
+
+			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+
+		}
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );

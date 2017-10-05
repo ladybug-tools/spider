@@ -227,16 +227,19 @@ console.log( 'building.scale.x', building.scale.x );
 		let building = buildings.getObjectByName( 'The Building' );
 
 		updateMenuArea();
+		updateMenuExtras();
+		userData = building.userData;
 
 		buildings.remove( building );
 
 		building = new THREE.Object3D();
+		building.userData = userData;
 
 		createFloors( building );
 
 		building.rotation.z = inpOrientation.value ? - d2r * parseFloat( inpOrientation.value ) : 0;
 
-		inpOrientation.value = r2d * building.rotation.z;
+		building.userData.orientation = inpOrientation.value = r2d * building.rotation.z;
 		building.name = 'The Building';
 		buildings.add( building )
 
@@ -270,7 +273,15 @@ console.log( 'building.scale.x', building.scale.x );
 		inpWidth2.innerHTML = width2New.toLocaleString( undefined, { maximumFractionDigits: 1 } );
 
 		inpBuildingArea.value = areaNew;
-		inpFloorArea.innerHTML = ( length1New * width1New + length2New * width2New ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+		inpNumberOfFloors.value = floors;
+
+		const areaFloor = length1New * width1New + length2New * width2New
+		inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+
+		building.userData.area = areaNew;
+		building.userData.areaFloor = areaFloor;
+		building.userData.floors = floors;
+
 
 	}
 
@@ -278,13 +289,21 @@ console.log( 'building.scale.x', building.scale.x );
 // same for each shape
 	function updateMenuExtras() {
 
-		inpNumberOfFloors.value = parseFloat( inpNumberOfFloors.value );
+		let building = buildings.getObjectByName( 'The Building' );
 
-		const hgt = inpFloorHeight.value ? Math.abs( parseFloat( inpFloorHeight.value ) ): parseFloat( inpFloorHeight.min ); 
+		inpNumberOfFloors.value = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ) : 1;
+
+		const height = inpFloorHeight.value ? Math.abs( parseFloat( inpFloorHeight.value ) ): parseFloat( inpFloorHeight.min ); 
 		const perDep = inpPerimterDepth.value ? parseFloat( inpPerimterDepth.value ) : parseFloat( inpPerimterDepth.min );
 
-		inpFloorHeight.value = hgt;
+		inpFloorHeight.value = height;
 		inpPerimterDepth.value = perDep;
+
+		building.userData.floorHeight = height;
+		building.userData.perimterDepth = perDep;
+		building.userData.volume = building.userData.areaFloor * building.userData.floors * height;
+
+console.log( 'building.userData.volume', building.userData.volume );
 
 	}
 
@@ -314,7 +333,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( len1 + len2, hgt, i, 1 );
 			wall.rotation.z = Math.PI;
 			wall.position.set( len105 + len205, -wid105  - wid205, i * hgt, );
-			wall.name = 'External Wall length front';
+			wall.name = 'ExteriorWall';
 			building.add( wall );
 
 
@@ -323,6 +342,7 @@ console.log( 'building.scale.x', building.scale.x );
 				wall = createPerimeterDepthWall( len1 + len2 - 2 * perDep, hgt, i, intWallCount );
 				wall.rotation.z = Math.PI;
 				wall.position.set( len105 + len205 - perDep, -wid105  - wid205 + perDep, i * hgt );
+				wall.name = 'InteriorWall';
 				building.add( wall );
 				intWallCount++;
 
@@ -332,13 +352,14 @@ console.log( 'building.scale.x', building.scale.x );
 // length back left
 			wall = createExternalWall( len1, hgt, i, 2 );
 			wall.position.set( -len105 - len205, wid105 + wid205, i * hgt );
-			wall.name = 'External Wall length back left';
+			wall.name = 'ExteriorWall';
 			building.add( wall );
 
 			if ( len1 > 2 * perDep ) {
 
 				wall = createPerimeterDepthWall( len1 - 2 * perDep, hgt, i, intWallCount );
 				wall.position.set( -len105 - len205 + perDep, wid105 + wid205 - perDep, i * hgt );
+				wall.name = 'InteriorWall';
 				building.add( wall );
 				intWallCount++;
 
@@ -348,7 +369,7 @@ console.log( 'building.scale.x', building.scale.x );
 // length back right
 			wall = createExternalWall( len2, hgt, i, 3 );
 			wall.position.set( len1 - len105 - len205, wid1 - wid105 - wid205, i * hgt );
-			wall.name = 'External Wall length back right';
+			wall.name = 'ExteriorWall';
 			building.add( wall );
 
 			if ( len1 > 2 * perDep  && wid1 > 2 * perDep ) {
@@ -356,6 +377,7 @@ console.log( 'building.scale.x', building.scale.x );
 				wall = createPerimeterDepthWall( len2, hgt, i, intWallCount );
 				wall.position.set( len1 - len105 - len205 - perDep, wid1 - wid105 - wid205 - perDep, i * hgt );
 				wall.children[ 0 ].rotation.z = -0.5 * Math.PI;
+				wall.name = 'InteriorWall';
 				building.add( wall );
 				intWallCount++;
 
@@ -366,7 +388,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( wid1 + wid2, hgt, i, 4 );
 			wall.rotation.z = Math.PI * 0.5;
 			wall.position.set( -len105 - len205, -wid105 - wid205, i * hgt );
-			wall.name = 'External Wall width left full';
+			wall.name = 'ExteriorWall';
 			building.add( wall );
 
 			if ( wid1 + wid2 > 2 * perDep ) {
@@ -374,6 +396,7 @@ console.log( 'building.scale.x', building.scale.x );
 				wall = createPerimeterDepthWall( wid1 + wid2 - 2 * perDep, hgt, i, intWallCount );
 				wall.rotation.z = Math.PI * 0.5;
 				wall.position.set( -len105 -len205 + perDep, -wid105 - wid205 + perDep, i * hgt );
+				wall.name = 'InteriorWall';
 				building.add( wall );
 				intWallCount++;
 
@@ -383,7 +406,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( wid1, hgt, i, 5 );
 			wall.rotation.z = -Math.PI / 2;
 			wall.position.set( len105 + len205, 0, i * hgt );
-			wall.name = 'External Wall';
+			wall.name = 'ExteriorWall';
 			building.add( wall );
 
 			if ( wid1 > 2 * perDep ) {
@@ -391,6 +414,7 @@ console.log( 'building.scale.x', building.scale.x );
 				wall = createPerimeterDepthWall( wid1 - 2 * perDep, hgt, i, intWallCount );
 				wall.rotation.z = -Math.PI / 2;
 				wall.position.set( len105 + len205 - perDep,  - perDep , i * hgt );
+				wall.name = 'InteriorWall';
 				building.add( wall );
 				intWallCount++;
 
@@ -400,7 +424,7 @@ console.log( 'building.scale.x', building.scale.x );
 			wall = createExternalWall( wid2, hgt, i, 6 );
 			wall.rotation.z = -Math.PI / 2;
 			wall.position.set( len1 - len105 - len205, wid1, i * hgt, i, intWallCount++ );
-			wall.name = 'External Wall';
+			wall.name = 'ExteriorWall';
 			building.add( wall );
 
 			if ( wid2 > 2 * perDep ) {
@@ -408,19 +432,22 @@ console.log( 'building.scale.x', building.scale.x );
 				wall = createPerimeterDepthWall( wid2, hgt );
 				wall.rotation.z = -Math.PI / 2;
 				wall.position.set( len1 - len105 - len205 - perDep, wid1 - perDep, i * hgt );
+				wall.name = 'InteriorWall';
 				building.add( wall );
 				intWallCount++;
 
 			}
 
+			const name = i === 0 ? 'SlabOnGrade' : 'InteriorFloor';
+
 			floor = createSlab( len1, wid1 + wid2 );
 			floor.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
-			floor.name = 'floor left';
+			floor.name = name
 			building.add( floor );
 
 			floor = createSlab( len2, wid1);
 			floor.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
-			floor.name = 'floor right';
+			floor.name = name;
 			building.add( floor );
 
 		}
@@ -428,12 +455,12 @@ console.log( 'building.scale.x', building.scale.x );
 
 		roof = createSlab( len1, wid1 + wid2 );
 		roof.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
-		roof.name = 'roof';
+		roof.name = 'Roof';
 		building.add( roof );
 
 		roof = createSlab( len2, wid1);
 		roof.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
-		roof.name = 'roof';
+		roof.name = 'Roof';
 		building.add( roof );
 
 	}
@@ -495,7 +522,9 @@ console.log( 'building.scale.x', building.scale.x );
 		const geometry = new THREE.ShapeBufferGeometry( shape );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
+
 		mesh = new THREE.Mesh( geometry, material );
+		mesh.name = 'OperableWindow';
 //console.log( '', mesh );
 
 		let c = mesh.geometry.attributes.position.array; // c = coordinate
@@ -549,8 +578,8 @@ console.log( 'building.scale.x', building.scale.x );
 		geometry2 = new THREE.ShapeBufferGeometry( shape2 );
 		geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 		geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.75 * Math.PI ) );
-		diag = new THREE.Mesh( geometry2, material );
-		mesh.add( diag );
+		diagonal = new THREE.Mesh( geometry2, material );
+		mesh.add( diagonal );
 
 		c = mesh.geometry.attributes.position.array; // c = coordinate
 		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );

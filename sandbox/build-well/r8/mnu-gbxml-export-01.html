@@ -155,32 +155,15 @@
 	function getBuildingData() {
 
 //console.log( 'buildings', buildings );
-		const theBuilding = buildings.getObjectByName( 'The Building' );
 
 		txt = '';
 
 		txt += 
 			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
-
 			'<Campus>\n' +
-			'<Location>\n' +
-//			'<StationId IDType="WMO">7202_2004</StationId>\n' +
-
-			'<ZipcodeOrPostalCode>94111</ZipcodeOrPostalCode>\n' +
-			'<Longitude>-122.398</Longitude>\n' +
-			'<Latitude>37.796</Latitude>\n' +
-			'<Elevation>10</Elevation>\n' +
-			'<CADModelAzimuth>0</CADModelAzimuth>\n' +
-			'<Name>San Francisco CA United States</Name>\n' +
-			'</Location>\n' +
-			'\t<Building id="' + theBuilding.name + '" buildingType="Office" >\n' +
-			'\t<StreetAddress>440 Davis Court</StreetAddress>\n' +
-			'\t<Area>' + theBuilding.userData.area + '</Area>\n' +
-			'\t<Volume>' + theBuilding.userData.volume + '</Volume>\n' +
-			'\t</Building>\n' +
+//				'\t<Building id="' + building.name + '" >\n' +
 //				'\t\t<BuildingStorey id="bldg-story-1" >\n' +
-
 		'';
 
 		idCount = 1;
@@ -203,22 +186,13 @@
 
 					txt += 
 						'\t<Surface surfaceType="Shade" id="bw' + ( idCount++ ) + '" >\n' +
-						'\t\t<Name>' + building.name +'</Name>\n' +
 						'\t\t<PlanarGeometry>\n' +
 						'\t\t\t<PolyLoop>\n' +
 					'';
 
-					v1 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-					v2 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-					v3 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-					v4 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-
-					const vertices = [ v1, v2, v4, v3 ];
-
 					for ( let k = 0; k < 4; k++ ) {
 
-//						vertex = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-						vertex = vertices[ k ];
+						vertex = building.localToWorld ( geo.vertices[ vertexCount++ ] );
 						txt += getCartesianPointText( vertex );
 
 						let mesh = new THREE.Mesh( geometry, material );
@@ -353,19 +327,14 @@ console.log( 'geommm ', geometry );
 
 //				'\t\t\t</PlanarGeometry>\n' +
 //				'\t\t</BuildingStorey>\n' +
-			'';
-
-
-
-		}
-
-		txt +=
+//				'\t</Building>\n' +
 				'</Campus>\n' +
 				'</gbXML>\n' +
 			'';
 
 			scope.divScreenText.innerHTML = 'gbXML data<textarea id=buildingData >' + txt + '</textarea>';
 
+		}
 
 	}
 
