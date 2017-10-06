@@ -99,6 +99,13 @@ See also:
 ## Change Log
 
 
+### 2017-10-05 ~ Theo
+
+* gbXML Viewer 'Mostapha'.4
+* Very messy, broken release with one nice new feature
+* Adds: heads-up display(HUD) that shows details/data of the surace currently under the corsor
+* Displays more (not all) meta data in side menu
+
 ### 2017-10-01 ~ Theo
 
 * gbXML Viewer 'Mostapha'.2
