@@ -59,7 +59,6 @@ Currently many values are stored directly in UI elements such as input boxes. Ev
 
 Functions are designed as much as possible to be cut and pasted wherever with the fewest dependencies possible. As the dust settles, and a global object takes shape, the code will contain many fewer duplications.  
 
-
 _To be expanded and explained in more detail as time goes on._
 
 
@@ -72,8 +71,8 @@ _To be expanded and explained in more detail as time goes on._
 ### index.html / Build Well parent file
 
 * 2017-10-02 ~ Add multi-line select for shape selection
-* Add links to cedits page
-* Enanable viewing html * markpwn without killing Three,js data
+* Add links to credits page
+* Enable viewing html & markdown without killing Three.js data
 
 ### build-well-threejs.html
 
@@ -93,7 +92,7 @@ _To be expanded and explained in more detail as time goes on._
 
 ### mnu-box-shape.html
 
-* 2017-09-30 ~ Floor area not being updated correctly
+
 * 2017-09-29 ~ Add complete and current set of parameters to 'The Building' object - to enable roundtrip with adj build menu
 
 ### mnu-ell-shape-one.html
@@ -109,17 +108,23 @@ _To be expanded and explained in more detail as time goes on._
 
 ### mnu-gbxml-export.html
 
-* 2017-10-01 ~ Export all building geometries
-
+* 2017-10-05 ~ Export overhang and fin data
+* 2017-10-05 ~ Enable changing building orientation
 
 
 ## Change Log
 
 
+### 2017-10-05 ~ Theo
+17:19
+* mnu-gbxml-export.html
+	* Begining to export quite a bit of gbXML data
+	[x] 2017-10-01 ~ Export all building geometries
+[x] 2017-09-30 ~ Floor area not being updated correctly
+
 ### 2017-10-03 ~ Theo
 
 11:42
-
 * mnu-gbxml-export.html
 	* starting to have data from Surfaces with openings
 * L Shape - meshes starting to have names
