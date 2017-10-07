@@ -44,7 +44,7 @@
 	var theMesh, meshes;
 	var meshEdges;
 
-	var gridHelper, axisHelper, groundHelper;
+	var gridHelper, axesHelper, groundHelper;
 
 	var renderer, camera, controls, scene;
 
@@ -96,15 +96,14 @@
 
 	function addHelpers( size = 200 ) {
 
-		scene.remove( gridHelper, axisHelper, groundHelper );
+		scene.remove( gridHelper, axesHelper, groundHelper );
 
 		gridHelper = new THREE.GridHelper( size, 20 );
 		gridHelper.rotation.x = 0.5 * Math.PI;
 
 //		axisHelper = new THREE.AxisHelper( size * 0.55 );
-		axisHelper = new THREE.AxisHelper( size * 0.05 );
-		axisHelper.position.set( -0.5 * size, -0.5 * size, 15 )
-
+		axesHelper = new THREE.AxesHelper( size * 0.05 );
+		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 )
 
 		const geometry = new THREE.BoxBufferGeometry( size, size, size  );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
@@ -113,8 +112,7 @@
 		groundHelper.position.set( 0, 0, -0.5 * size );
 		groundHelper.visible = false;
 
-		scene.add( gridHelper, axisHelper, groundHelper );
-
+		scene.add( gridHelper, axesHelper, groundHelper );
 
 	}
 

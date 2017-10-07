@@ -71,7 +71,6 @@
 	const ifrSource = 'build-well-threejs.html';
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
 
-	let bwId = 0;
 	let txt;
 
 	let scope;
@@ -156,10 +155,9 @@
 	function getBuildingData() {
 
 //console.log( 'buildings', buildings );
-
 		const theBuilding = buildings.getObjectByName( 'The Building' );
 
-		let txt = '';
+		txt = '';
 
 		txt += 
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
@@ -186,87 +184,61 @@
 
 		'';
 
-		txt += getBuildingStoreys( theBuilding );
-		txt += getSpaces( theBuilding );
-		txt += getSurfaces( theBuilding );
-		txt +=
-				'</Campus>\n' +
-				'</gbXML>\n' +
-			'';
-
-		scope.divScreenText.innerHTML = 
-
-			'gbXML data<textarea id=buildingData >' + 
-			txt + '</textarea>'
-
-		'';
-
-	}
-
-
-
-	function getBuildingStoreys( building ) {
-//console.log( 'building', building );
-
-		let textBuildingStoreys = '';
-		for ( var i = 0; i < building.userData.floors; i++ ) {
-
-			bwId++;
-
-			textBuildingStoreys += 
-				'\t<BuildingStorey id="bw' + bwId + '" >\n' +
-				'\t\t<Name>"bw-storey-' + bwId + '"</Name>\n' +
-				'\t\t<Level>' + ( i * building.userData.floorHeight ) + '</Level>\n' +
-				'\t</BuildingStorey>\n' +
-			'';
-
-		}
-
-		return textBuildingStoreys;
-
-	}
-
-
-
-	function getSpaces( building ) {
-
-		let textSpace = '';
-		const zones = building.userData.zones;
-
-		for ( var i = 0; i < zones.length; i++ ) {
-
-			bwId++;
-			const zone = zones[ i ];
-			textSpace += 
-				'\t<Space zoneIdRef="' + zone.name + '" conditionType="HeatedAndCooled" id="bw' + bwId + '" >\n' +
-				'\t\t<Area>' + zone.area + '</Area>\n' +
-				'\t\t<Volume>' + zone.volume + '</Volume>\n' +
-				'\t</Space>\n' +
-			'';
-
-		}
-
-		return textSpace;
-
-	}
-
-
-
-	function getSurfaces( theBuilding ) {
-
-		let txt = '';
+		idCount = 1;
 
 		for ( let i = 0; i < buildings.children.length; i++ ) {
 
 			building = buildings.children[ i ];
 
-			if ( building.geometry ) {
+			if ( building.geometry ) { 
 
-				txt += getSurfacesAdjantBuildings( building );
+//console.log( 'geo', building.geometry.clone() ); 
+
+				geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
+
+				const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+				vertexCount = 0
+
+				for ( let j = 0; j < 6; j++ ) {
+
+					txt += 
+						'\t<Surface surfaceType="Shade" id="bw' + ( idCount++ ) + '" >\n' +
+						'\t\t<Name>' + building.name +'</Name>\n' +
+						'\t\t<PlanarGeometry>\n' +
+						'\t\t\t<PolyLoop>\n' +
+					'';
+
+					v1 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+					v2 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+					v3 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+					v4 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+
+					const vertices = [ v1, v2, v4, v3 ];
+
+					for ( let k = 0; k < 4; k++ ) {
+
+//						vertex = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+						vertex = vertices[ k ];
+						txt += getCartesianPointText( vertex );
+
+						let mesh = new THREE.Mesh( geometry, material );
+						mesh.position.copy( vertex );
+						scene.add( mesh );
+
+					}
+
+					txt +=
+						'\t\t\t</PolyLoop>\n' +
+						'\t\t</PlanarGeometry>\n' +
+						'\t</Surface>\n' +
+					'';
+
+				}
 
 			} else {
 
-//console.log( 'building', building );
+console.log( 'building', building );
 
 				const geo = new THREE.BoxBufferGeometry( 3, 1, 1 );
 				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
@@ -275,31 +247,31 @@
 //				for ( let j = 0; j < 8; j++ ) {
 
 					const surface = building.children[ j ].clone();
-//console.log( 'surface', surface );
+console.log( 'surface', surface );
 
 					let geometry = new THREE.Geometry().fromBufferGeometry( surface.geometry );
 					const angle = surface.rotation._z;
 					geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
 
-					bwId++;
+					idCount++;
 					let adjacency;
 					if ( surface.name === 'ExteriorWall' ) {
 
 						adjacency = 
-							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
+							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( idCount + 2 ) + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'InteriorWall' ) {
 
 						adjacency = 
-							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId - 2 ) + '" />\n' +
-							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
+							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( idCount - 2 ) + '" />\n' +
+							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( idCount + 2 ) + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'SlabOnGrade' || surface.name === 'InteriorFloor' ||surface.name === 'Roof' ) {
 
 						adjacency = 
-							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
+							'\t\t<AdjacentSpaceId spaceIdRef="bw' + ( idCount + 2 ) + '" />\n' +
 						'';
 
 					} else {
@@ -309,7 +281,7 @@
 					}
 
 					txt += 
-						'\t<Surface surfaceType="' + surface.name + '" id="bw' + ( bwId ) + '" >\n' +
+						'\t<Surface surfaceType="' + surface.name + '" id="bw' + ( idCount ) + '" >\n' +
 						adjacency +
 						'\t\t<PlanarGeometry>\n' +
 						'\t\t\t<PolyLoop>\n' +
@@ -333,11 +305,11 @@
 						txt += 
 							'\t\t\t</PolyLoop>\n' +
 							'\t\t</PlanarGeometry>\n' +
-							'\t\t<Opening surfaceType="OperableWindow" id="bw' + ( bwId ) + '" >\n' +
+							'\t\t<Opening surfaceType="OperableWindow" id="bw' + ( idCount ) + '" >\n' +
 							'\t\t\t<PlanarGeometry>\n' +
 							'\t\t\t\t<PolyLoop>\n' +
 						'';
-//console.log( 'geommm ', geometry );
+console.log( 'geommm ', geometry );
 						for ( let k = 4; k < geometry.vertices.length; k++ ) {
 
 							const vertex = geometry.vertices[ k ];
@@ -360,6 +332,7 @@
 
 					} else {
 
+
 						txt +=
 							'\t\t\t</PolyLoop>\n' +
 							'\t\t</PlanarGeometry>\n' +
@@ -376,63 +349,27 @@
 
 			}
 
-		}
-
-		return txt;
-	}
-
-
-
-	function getSurfacesAdjantBuildings( building ) { 
-
-//console.log( 'geo', building.geometry.clone() ); 
-
-		let txt = '';
-		geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
-
-		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-		vertexCount = 0;
-
-		for ( let j = 0; j < 6; j++ ) {
-
-			txt += 
-				'\t<Surface surfaceType="Shade" id="bw' + ( bwId++ ) + '" >\n' +
-				'\t\t<Name>' + building.name +'</Name>\n' +
-				'\t\t<PlanarGeometry>\n' +
-				'\t\t\t<PolyLoop>\n' +
-			'';
-
-			v1 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-			v2 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-			v3 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-			v4 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-
-			const vertices = [ v1, v2, v4, v3 ];
-
-			for ( let k = 0; k < 4; k++ ) {
-
-//						vertex = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-				vertex = vertices[ k ];
-				txt += getCartesianPointText( vertex );
-
-				let mesh = new THREE.Mesh( geometry, material );
-				mesh.position.copy( vertex );
-				scene.add( mesh );
-
-			}
 
 			txt +=
-				'\t\t\t</PolyLoop>\n' +
-				'\t\t</PlanarGeometry>\n' +
-				'\t</Surface>\n' +
+
+//				'\t\t\t</PlanarGeometry>\n' +
+//				'\t\t</BuildingStorey>\n' +
 			'';
+
+
 
 		}
 
-		return txt;
+		txt +=
+				'</Campus>\n' +
+				'</gbXML>\n' +
+			'';
+
+			scope.divScreenText.innerHTML = 'gbXML data<textarea id=buildingData >' + txt + '</textarea>';
+
 
 	}
+
 
 
 	function getCartesianPointText( vertex ) {

@@ -118,7 +118,7 @@ _To be expanded and explained in more detail as time goes on._
 ### 2017-10-05 ~ Theo
 17:19
 * mnu-gbxml-export.html
-	* Begining to export quite a bit of gbXML data
+	* Beginning to export quite a bit of gbXML data
 	[x] 2017-10-01 ~ Export all building geometries
 [x] 2017-09-30 ~ Floor area not being updated correctly
 

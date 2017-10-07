@@ -19,10 +19,10 @@
 	h3 { margin: 0; }
 
 	select { width: 100%; }
-	summary { outline: none; font-size: 14pt }
+	summary { outline: none; font-size: 18pt }
 	textarea { height: 100%; width: 100% }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -35,7 +35,7 @@
 	#ifrContents { border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
 	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); box-sizing: border-box;
-	/*	max-width: var( --mnu-width ); */ height: 100%; margin: 0; overflow: auto; padding: 5px; position: absolute; top: 0; width: 350px; }
+		max-width: var( --mnu-width ); margin: 0; overflow: auto; padding: 5px; position: absolute; top: 0; }
 
 </style>
 </head>
@@ -69,9 +69,9 @@
 
 	const infoURI = 'https://github.com/ladybug-tools.github.io/read-gbxml/';
 
-	const gbxmlURI = '../../data-files/SAM_Live.xml';
+//	const gbxmlURI = '../../data-files/SAM_Live.xml';
 //	const gbxmlURI = '../../data-files/building-data.xml';
-//	const gbxmlURI = '../../data-files/building-data-ell-defaults.xml';
+	const gbxmlURI = '../../data-files/building-data-ell-defaults.xml';
 
 	var model;
 	var gbjson;
@@ -162,7 +162,7 @@
 	function parseFileXML( xmlNode ) {
 
 		gbjson = XML2jsobj( xmlNode );
-console.log( 'json', gbjson );
+//console.log( 'json', gbjson );
 
 //		divContents.value = JSON.stringify( json, null, 4 );
 //		divContents.innerHTML = '<textarea>' + JSON.stringify( gbjson, null, 4 ); + '</textarea>';
@@ -193,38 +193,24 @@ console.log( 'json', gbjson );
 		const volume = gbjson.Campus.Building && gbjson.Campus.Building.Volume ? 'volume: ' + parseFloat( gbjson.Campus.Building.Volume).toLocaleString() + b : '';
 
 		let txt =
+			'<h4>location</h4>' +
+			useSIUnitsForResults +
+			unitLength +
+			areaUnit +
+			volumeUnit +
+			temperatureUnit +
+			version +
 
-			'<details>' +
-				'<summary>units</summary>' +
-				useSIUnitsForResults +
-				unitLength +
-				areaUnit +
-				volumeUnit +
-				temperatureUnit +
-				version +
-			'</details>' +
-			'<details open >' +
-				'<summary>location</summary>' +
-				name +
-				latitude +
-				longitude +
-				elevation +
-				postalCode +
+			'<h4>location</h4>' +
+			name +
+			latitude +
+			longitude +
+			elevation +
+			postalCode +
 //			url +
-			'</details>' +
-			'<details open >' +
-				'<summary>building stories</summary>' +
-				area +
-				volume +
-				getBuildingStories() +
-			'</details>' +
-
-			'<details open >' +
-				'<summary>space</summary>' +
-
-				getSpace() +
-			'</details>' +
-
+			'<h4>building</h4>' +
+			area +
+			volume +
 			'<h4>more</h4>' +
 			map +
 		'';
@@ -234,7 +220,7 @@ console.log( 'json', gbjson );
 //console.log( 'surfaces', gbjson.Campus.Surface );
 
 		const surfaces = gbjson.Campus.Surface;
-//console.log( '', surfaces );
+console.log( '', surfaces );
 
 		let items = {};
 		let openingsMeta = {};
@@ -360,51 +346,6 @@ console.log( 'json', gbjson );
 
 	}
 
-
-	function getBuildingStories() {
-
-//console.log( 'gbjson.Campus.Building.BuildingStorey', gbjson.Campus.Building.BuildingStorey );
-
-		let textBuildingStories = '';
-
-		storeys = gbjson.Campus.Building.BuildingStorey;
-//console.log( 'storeys', storeys );
-
-		for ( var i = 0; i < storeys.length; i++ ) {
-
-			storey = storeys[ i ];
-
-			textBuildingStories += storey.Name + ': level: ' + storey.Level + ' id: ' + storey.id + b;
-
-		}
-
-		return textBuildingStories;
-
-	}
-
-
-	function getSpace() {
-
-//console.log( 'gbjson.Campus.Building.Space', gbjson.Campus.Building.Space );
-
-		let textSpaces = '';
-
-		spaces = gbjson.Campus.Building.Space;
-//console.log( 'storeys', storeys );
-
-		for ( var i = 0; i < spaces.length; i++ ) {
-
-			space = spaces[ i ];
-
-			textSpaces += ( i + 1 ) + '. ' + space.Name + b + 'area: ' + parseInt( space.Area, 10 ).toLocaleString() + ' volume: ' + parseInt( space.Volume, 10 ).toLocaleString() + ' CAD id: ' + space.CADObjectId + b;
-
-		}
-
-		return textSpaces;
-
-
-
-	}
 
 
 	function getPoints( polyloop ) {
@@ -686,34 +627,16 @@ console.log( 'json', gbjson );
 		headsUp.style.display = '';
 //console.log( '', headsUp.style.left, headsUp.style.top );
 		data = intersected.userData.data;
-		adjacenciesTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '';
+		adjacencies = data.AdjacentSpaceId ? data.AdjacentSpaceId : '';
 
-		if ( adjacenciesTxt ) {
+		if ( adjacencies ) {
 
-			if ( data.AdjacentSpaceId.length ) {
+			if ( adjacencies.length ) {
 
-				space1 = getSpaceId( data.AdjacentSpaceId[ 0 ].spaceIdRef );
-				space2 = getSpaceId( data.AdjacentSpaceId[ 1 ].spaceIdRef );
-
-				adjacenciesTxt = 
-					'adjacency: ' + data.AdjacentSpaceId[ 0 ].spaceIdRef + b +
-					'name: ' + space1.Name + b +
-					'CADObjectId: ' + space1.CADObjectId + b +
-					'<hr>' + 
-					data.AdjacentSpaceId[ 1 ].spaceIdRef +  b +
-					'name: ' + space2.Name + b +
-					'CADObjectId: ' + space2.CADObjectId + b +
-				'';
-
+				adjacencies = 'adjacencies: ' + adjacencies[ 0 ].spaceIdRef + ' - ' + adjacencies[ 1 ].spaceIdRef + b;
 			} else {
 
-				space = getSpaceId( data.AdjacentSpaceId.spaceIdRef );
-
-				adjacenciesTxt = 'adjacency: ' + data.AdjacentSpaceId.spaceIdRef + b +
-				'name: ' + space.Name + b +
-				'CADObjectId: ' + space.CADObjectId + b +
-				b;
-
+				adjacencies = 'adjacencies: ' + adjacencies.spaceIdRef + b;
 
 			}
 
@@ -724,8 +647,7 @@ console.log( 'json', gbjson );
 		txt =
 			'id: ' + data.id + b +
 			'surface: ' + data.surfaceType + b +
-			'<hr>' +
-			adjacenciesTxt + 
+			adjacencies + 
 //			mouse.y + b +
 //			'<a href=http://lorempixel.com/640/480/ ><img src=http://lorempixel.com/150/100 ></a>' +
 		'';
@@ -736,12 +658,6 @@ console.log( 'json', gbjson );
 	}
 
 
-	function getSpaceId( spaceIdRef ) {
-
-		const space = gbjson.Campus.Building.Space.find( function( space ) { return space.id === spaceIdRef; } );
-		return space;
-
-	}
 
 	function onDocumentMouseDown( event ) {
 

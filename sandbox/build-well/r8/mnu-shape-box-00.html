@@ -5,14 +5,14 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Build Well parametric box shape creator" >
 <meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-06" >
-<title>Box Shape R7</title>
+<meta name = "date" content = "2017-10-01" >
+<title>Box Shape R6</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: limegreen; --mnu-back-color: azure; --mnu-width: 350px; height: 100%; }
+	html { --mnu-color: tomato; --mnu-back-color: cornsilk; --mnu-width: 350px; height: 100%; }
 
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
@@ -99,7 +99,6 @@
 
 <script>
 
-	let bwId = 0;
 
 	const ifrSource='build-well-threejs.html';
 	const infoURI='https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/'
@@ -124,12 +123,11 @@
 
 	function init() {
 
-		title.innerHTML = 
-			'<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
+		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 
-		if ( parent && parent.ifrContents ) {
+		if ( parent && parent.divContents ) {
 
 			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 0 ) + 'px';
 
@@ -154,8 +152,7 @@
 
 		} else {
 
-//console.log( 'box shape ', divContents.innerHTML );
-
+console.log( 'box shape ', divContents.innerHTML );
 			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
@@ -235,18 +232,13 @@
 		building = new THREE.Object3D();
 		building.userData = userData;
 
-		building.userData.zones = [];
-		zoneCount = 0;
-
 		createFloors( building );
-
-//console.log( 'building.userData.zones', building.userData.zones);
 
 		building.rotation.z = inpOrientation.value ? - d2r * parseFloat( inpOrientation.value ) : 0;
 
 		building.userData.orientation = inpOrientation.value = r2d * building.rotation.z;
 		building.name = 'The Building';
-		buildings.add( building );
+		buildings.add( building )
 
 	}
 
@@ -301,7 +293,7 @@
 		building.userData.perimterDepth = perDep;
 		building.userData.volume = building.userData.areaFloor * building.userData.floors * height;
 
-//console.log( 'building.userData.volume', building.userData.volume );
+console.log( 'building.userData.volume', building.userData.volume );
 
 	}
 
@@ -319,25 +311,16 @@
 
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
-		const zones = building.userData.zones;
 
 		let intWallCount = 5;
 
 		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
 
 // length front
-			area = ( len - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			zoneId = ++bwId;
-			zones.push( { name: ( 'zone' + ++zoneCount ), id: zoneId, area: area, volume: volume } );
-
 			wall = createExternalWall( len, hgt, i, 1 );
 			wall.position.set( len05, -wid05, i * hgt, );
 			wall.rotation.z = Math.PI;
 			wall.name = 'ExteriorWall';
-			wall.userData.id = ++bwId;
-			wall.userData.spaceIdRef = zoneId;
-
 			building.add( wall );
 
 			if ( len > 2 * perDep && wid > 2 * perDep ) {
@@ -346,24 +329,15 @@
 				wall.position.set( len05 - perDep, -wid05 + perDep, i * hgt );
 				wall.rotation.z = Math.PI;
 				wall.name = 'InteriorWall';
-				wall.userData.id = ++bwId;
-				wall.userData.spaceIdRef = zoneId;
 				building.add( wall );
 				intWallCount++;
 
 			}
 
 // length back
-			area = ( len - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			zoneId = ++bwId;
-			zones.push( { name: ( 'zone' + ++zoneCount ), id: zoneId, area: area, volume: volume } );
-
 			wall = createExternalWall( len, hgt, i, 2 );
 			wall.position.set( -len05, wid05, i * hgt );
 			wall.name = 'ExteriorWall';
-			wall.userData.id = ++bwId;
-			wall.userData.spaceIdRef = zoneId;
 			building.add( wall );
 
 			if ( len > 2 * perDep && wid > 2 * perDep ) {
@@ -371,27 +345,16 @@
 				wall = createPerimeterDepthWall( len - 2 * perDep, hgt, i, intWallCount );
 				wall.position.set( -len05 + perDep, wid05 - perDep, i * hgt );
 				wall.name = 'InteriorWall';
-				wall.userData.id = ++bwId;
-				wall.userData.spaceIdRef = zoneId;
 				building.add( wall );
 				intWallCount++;
 
 			}
 
-
-
 // width left
-			area = ( wid - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			zoneId = ++bwId;
-			zones.push( { name: ( 'zone' + ++zoneCount ), id: zoneId, area: area, volume: volume } );
-
 			wall = createExternalWall( wid, hgt, i, 3 );
 			wall.rotation.z = Math.PI * 0.5;
 			wall.position.set( -len05, -wid05, i * hgt );
 			wall.name = 'ExteriorWall';
-			wall.userData.id = ++bwId;
-			wall.userData.spaceIdRef = zoneId;
 			building.add( wall );
 
 			if ( len > 2 * perDep && wid > 2 * perDep ) {
@@ -400,26 +363,16 @@
 				wall.rotation.z = Math.PI * 0.5;
 				wall.position.set( -len05 + perDep, -wid05 + perDep, i * hgt );
 				wall.name = 'InteriorWall';
-				wall.userData.id = ++bwId;
-				wall.userData.spaceIdRef = zoneId;
 				building.add( wall );
 				intWallCount++;
 
 			}
 
-
 // width right
-			area = ( wid - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			zoneId = ++bwId;
-			zones.push( { name: ( 'zone' + ++zoneCount ), id: zoneId, area: area, volume: volume } );
-
 			wall = createExternalWall( wid, hgt, i, 4 );
 			wall.rotation.z = -Math.PI / 2;
 			wall.position.set( len05, wid05, i * hgt );
 			wall.name = 'ExteriorWall';
-			wall.userData.id = ++bwId;
-			wall.userData.spaceIdRef = zoneId;
 			building.add( wall );
 
 			if ( len > 2 * perDep && wid > 2 * perDep ) {
@@ -428,36 +381,25 @@
 				wall.rotation.z = -Math.PI / 2;
 				wall.position.set( len05 - perDep, wid05 - perDep , i * hgt );
 				wall.name = 'InteriorWall';
-				wall.userData.id = ++bwId;
-				wall.userData.spaceIdRef = zoneId;
 				building.add( wall );
 				intWallCount++;
 
 			}
 
-
 // slabs
 
 			const name = i === 0 ? 'SlabOnGrade' : 'InteriorFloor';
 
-			area = ( len - 2 * perDep ) * ( wid - 2 * perDep );
-			volume = area * building.userData.floorHeight;
-			zoneId = ++bwId;
-			zones.push( { name: ( 'zone' + ++zoneCount ), id: zoneId, area: area, volume: volume } );
-
 			floor = createSlab( len, wid );
 			floor.position.set( -len05, -wid05, i * hgt );
 			floor.name = name;
-			floor.userData.id = ++bwId;
 			building.add( floor );
-
 
 		}
 
 		roof = createSlab( len, wid );
 		roof.position.set( -len05, -wid05, i * hgt );
 		roof.name = 'Roof';
-		roof.userData.id = ++bwId;
 		building.add( roof );
 
 	}

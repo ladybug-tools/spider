@@ -1,0 +1,22 @@
+<gbXML xmlns="http://www.gbxml.org/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" useSIUnitsForResults="true" xmlns:xhtml="http://www.w3.org/1999/xhtml" temperatureUnit="C" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SurfaceReferenceLocation="Centerline" areaUnit="SquareMeters" lengthUnit="Meters" version="6.01" volumeUnit="CubicMeters">
+  <Campus id="Facility">
+    <Name>Facility</Name>
+    <Building buildingType="Unknown" id="">
+      <Name></Name>
+      <Area>0.000000</Area>
+    </Building>
+  </Campus>
+  <DocumentHistory>
+    <CreatedBy personId="unknown" date="2017-10-05T17:59:58-07:00" programId="openstudio"/>
+    <ProgramInfo id="openstudio">
+      <ProductName>OpenStudio</ProductName>
+      <Version>2.3.0</Version>
+      <Platform>Windows</Platform>
+      <ProjectEntity/>
+    </ProgramInfo>
+    <PersonInfo id="unknown">
+      <FirstName>Unknown</FirstName>
+      <LastName>Unknown</LastName>
+    </PersonInfo>
+  </DocumentHistory>
+</gbXML>

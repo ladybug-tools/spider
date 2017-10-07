@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Buid Well parametric L shape creator" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-30" >
-<title>L Shape R6</title>
+<meta name = "date" content = "2017-10-06" >
+<title>L Shape R7</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -138,7 +138,7 @@
 
 			if ( parent.divContents.innerHTML === '' ) {
 
-console.log( 'shape ell ', parent.divContents.innerHTML );
+//console.log( 'shape ell ', parent.divContents.innerHTML );
 
 				parent.ifrContents.src = ifrSource;
 
@@ -235,7 +235,12 @@ console.log( 'building.scale.x', building.scale.x );
 		building = new THREE.Object3D();
 		building.userData = userData;
 
+		building.userData.zones = [];
+		zoneId = 0;
+
 		createFloors( building );
+
+console.log( 'building.userData.zones', building.userData.zones);
 
 		building.rotation.z = inpOrientation.value ? - d2r * parseFloat( inpOrientation.value ) : 0;
 
@@ -324,6 +329,7 @@ console.log( 'building.userData.volume', building.userData.volume );
 		const wid105 = wid1 * 0.5;
 		const len205 = len2 * 0.5;
 		const wid205 = wid2 * 0.5;
+		const zones = building.userData.zones;
 
 		let intWallCount = 7;
 
@@ -348,6 +354,10 @@ console.log( 'building.userData.volume', building.userData.volume );
 
 			}
 
+			area = ( len1 + len2 - perDep ) * perDep;
+			volume = area * building.userData.floorHeight;
+			zones.push( { name: ( 'zone' + ++zoneId ), area: area, volume: volume } )
+
 
 // length back left
 			wall = createExternalWall( len1, hgt, i, 2 );
@@ -365,6 +375,9 @@ console.log( 'building.userData.volume', building.userData.volume );
 
 			}
 
+			area = ( len1 - perDep ) * perDep;
+			volume = area * building.userData.floorHeight;
+			zones.push( { name: ( 'zone' + ++zoneId ), area: area, volume: volume } )
 
 // length back right
 			wall = createExternalWall( len2, hgt, i, 3 );
@@ -382,6 +395,10 @@ console.log( 'building.userData.volume', building.userData.volume );
 				intWallCount++;
 
 			}
+
+			area = ( len2 - perDep ) * perDep;
+			volume = area * building.userData.floorHeight;
+			zones.push( { name: ( 'zone' + ++zoneId ), area: area, volume: volume } )
 
 
 // width left full
@@ -402,6 +419,11 @@ console.log( 'building.userData.volume', building.userData.volume );
 
 			}
 
+			area = ( wid1 + wid2 - perDep ) * perDep;
+			volume = area * building.userData.floorHeight;
+			zones.push( { name: ( 'zone' + ++zoneId ), area: area, volume: volume } )
+
+
 // width right front
 			wall = createExternalWall( wid1, hgt, i, 5 );
 			wall.rotation.z = -Math.PI / 2;
@@ -419,6 +441,10 @@ console.log( 'building.userData.volume', building.userData.volume );
 				intWallCount++;
 
 			}
+
+			area = ( wid1 - perDep ) * perDep;
+			volume = area * building.userData.floorHeight;
+			zones.push( { name: ( 'zone' + ++zoneId ), area: area, volume: volume } )
 
 // width right back
 			wall = createExternalWall( wid2, hgt, i, 6 );
@@ -438,6 +464,11 @@ console.log( 'building.userData.volume', building.userData.volume );
 
 			}
 
+			area = ( wid2 - perDep ) * perDep;
+			volume = area * building.userData.floorHeight;
+			zones.push( { name: ( 'zone' + ++zoneId ), area: area, volume: volume } )
+
+
 			const name = i === 0 ? 'SlabOnGrade' : 'InteriorFloor';
 
 			floor = createSlab( len1, wid1 + wid2 );
@@ -450,8 +481,12 @@ console.log( 'building.userData.volume', building.userData.volume );
 			floor.name = name;
 			building.add( floor );
 
-		}
 
+			area = ( len1 - perDep ) * ( wid1 * perDep ) + ( len2 - perDep ) * ( wid2 - perDep );
+			volume = area * building.userData.floorHeight;
+			zones.push( { name: ( 'zone' + ++zoneId ), area: area, volume: volume } )
+
+		}
 
 		roof = createSlab( len1, wid1 + wid2 );
 		roof.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
