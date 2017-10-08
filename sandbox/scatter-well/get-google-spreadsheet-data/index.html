@@ -57,7 +57,7 @@
 			<summary> Display settings </summary>
 
 
-			<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>
+			<p><button onclick=toggleWireframe(); title='See number of floors' > Toggle wireframe </button></p>
 
 			<p><button onclick=toggleGrid(); >Toggle Grid</button></p>
 
@@ -228,15 +228,15 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 			if ( cell.gsx$footprintshape.$t === 'T-shape' ) {
 
-				geometry = tShape();
+				geometry = tShape( parseInt( cell.gsx$numberoffloors.$t, 10 ) );
 
 			} else if ( cell.gsx$footprintshape.$t === 'L-shape' ) {
 
-				geometry = lShape();
+				geometry = lShape( parseInt( cell.gsx$numberoffloors.$t, 10 ) );
 
 			} else {
 
-				geometry = hShape();
+				geometry = hShape( parseInt( cell.gsx$numberoffloors.$t, 10 ) );
 
 			}
 
@@ -281,7 +281,7 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 
 
-	function hShape() {
+	function hShape( floors ) {
 		var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
 		let pts = [ 
@@ -301,12 +301,12 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 		scene.remove( mesh );
 		var shape = new THREE.Shape( pts );
-		hGeometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: 1 } );
+		hGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
 		return hGeometry;
 	}
 
 
-	function lShape() {
+	function lShape( floors ) {
 
 		var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
@@ -322,14 +322,14 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 		scene.remove( mesh );
 		var shape = new THREE.Shape( pts );
 //		geometry = new THREE.ShapeGeometry( shape );
-		lGeometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: 1 } );
+		lGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
 		return lGeometry;
 
 	}
 
 
 
-	function tShape() {
+	function tShape( floors ) {
 
 		var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
@@ -346,7 +346,7 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 		scene.remove( mesh );
 		var shape = new THREE.Shape( pts );
-		tGeometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: 1 } );
+		tGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors } );
 		return tGeometry;
 	}
 
