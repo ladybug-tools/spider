@@ -3,7 +3,7 @@
 ## [Scatter Well R1]( http://ladybug-tools.github.io/spider/sandbox/scatter-well/ )
 
 
-## [Scatter Well ~ Google Spreadsheet Data R1]( ladybug-tools.github.io/spider/sandbox/scatter-well/get-google-spreadsheet-data/index.html )
+## [Scatter Well ~ Google Spreadsheet Data R1]( https://ladybug-tools.github.io/spider/sandbox/scatter-well/get-google-spreadsheet-data/index.html )
 
 
 
