@@ -60,7 +60,6 @@
 	let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
 	let intersected;
-	let materialSurfaces;
 
 	let campusSurfaces, campusOpenings;
 	let campusSurfacesArray = [];
@@ -135,17 +134,14 @@
 		controls = scope.controls;
 
 		lightDirectional = scope.lightDirectional;
-		axesHelper = scope.axesHelper;
+		axisHelper = scope.axisHelper;
 //		gridHelper = scope.gridHelper;
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
-		headsUp = scope.headsUp;
 
-		materialSurfaces=materialPhongBySurface;
 		requestFile( gbxmlURI, callbackGbXML );
 
 		initHeadsUp();
-
 	}
 
 
@@ -163,7 +159,6 @@
 	}
 
 
-
 	function parseFileXML( xmlNode ) {
 
 		gbjson = XML2jsobj( xmlNode );
@@ -176,7 +171,6 @@ console.log( 'json', gbjson );
 		parseGbJson( gbjson );
 
 	}
-
 
 
 	function parseGbJson( gbjson ) {
@@ -200,13 +194,6 @@ console.log( 'json', gbjson );
 
 		let txt =
 
-			'<details open>' +
-				'<summary>materials</summary>' +
-				'<input type="radio" onchange="materialSurfaces=materialNormal;parseGbJson(gbjson);" name="material" >Normal' + b +
-				'<input type="radio" onchange="materialSurfaces=materialPhongRandom;parseGbJson(gbjson);" name="material" >Phong Random' + b +
-				'<input type="radio" onchange="materialSurfaces=materialPhongDefault;parseGbJson(gbjson);" name="material" >Phong Defaults' + b +
-				'<input type="radio" onchange="materialSurfaces=materialPhongBySurface;parseGbJson(gbjson);" name="material">Phong Michal' + b +
-			'</details>' +
 			'<details>' +
 				'<summary>units</summary>' +
 				useSIUnitsForResults +
@@ -216,7 +203,7 @@ console.log( 'json', gbjson );
 				temperatureUnit +
 				version +
 			'</details>' +
-			'<details>' +
+			'<details open >' +
 				'<summary>location</summary>' +
 				name +
 				latitude +
@@ -225,14 +212,14 @@ console.log( 'json', gbjson );
 				postalCode +
 //			url +
 			'</details>' +
-			'<details>' +
+			'<details open >' +
 				'<summary>building stories</summary>' +
 				area +
 				volume +
 				getBuildingStories() +
 			'</details>' +
 
-			'<details>' +
+			'<details open >' +
 				'<summary>space</summary>' +
 
 				getSpace() +
@@ -322,20 +309,24 @@ console.log( 'json', gbjson );
 //		'';
 
 //console.log( 'items', items );
+
 //console.log( 'openingsMeta', openingsMeta );
+
 //console.log( 'openings', openings );
+
 //console.log( 'polyloops', polyloops );
+
 
 		scene.remove( campusSurfaces, campusOpenings );
 
 		campusSurfaces = new THREE.Object3D();
 
-//		materialSurfaces = materialPhongBySurface;
+//		let material = THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2, opacity: 1 } );
 
 		for ( let i = 0; i < polyloops.length; i++ ) {
 
-			let material = materialSurfaces( surfaces[ i ] );
-//			let polyloop = polyloops[ i ];
+//			let material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2, opacity: 1 } );
+			let material = new THREE.MeshNormalMaterial( { side: 2, opacity: 0.5, transparent: true } );
 
 			shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
 			shape.castShadow = shape.receiveShadow = true;
@@ -344,6 +335,19 @@ console.log( 'json', gbjson );
 			campusSurfacesArray.push( shape );
 
 		}
+
+/*
+		campusOpenings = new THREE.Object3D();
+		material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+
+		for ( i = 0; i < openings.length; i++ ) {
+
+//			shape = drawShapeSinglePassObjects( openings[ i ], material,  );
+//			campusOpenings.add( shape );
+
+		}
+*/
+
 
 		scene.add( campusSurfaces );
 		zoomObjectBoundingSphere( campusSurfaces )
@@ -357,70 +361,13 @@ console.log( 'json', gbjson );
 	}
 
 
-	function materialNormal() {
-
-		return new THREE.MeshNormalMaterial( { side: 2, opacity: 0.5, transparent: true } );
-
-	}
-
-
-
-	function materialPhongRandom() {
-
-		return new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2, opacity: 1 } );
-
-	}
-
-
-
-	function materialPhongDefault() {
-
-		return new THREE.MeshPhongMaterial( { side: 2, opacity: 1 } );
-
-	}
-
-
-	function materialPhongBySurface( surface ) {
-
-//console.log( '', surface );
-
-		switch( surface.surfaceType ) {
-
-			case 'Roof':
-				color = 0x800000;
-				break;
-			case 'InteriorFloor':
-			case 'SlabOnGrade':
-				color = 0x80ffff;
-				break;
-			case 'ExteriorWall':
-				color = 0xffb400;
-				break;
-			case 'InteriorWall':
-				color = 0x008000;
-				break;
-			case 'Shade':
-				color = 0x808080;
-				break;
-			default:
-				color = 0xee00ee;
-
-		}
-
-		return new THREE.MeshPhongMaterial( { color: color, side: 2, opacity: 1 } );
-
-	}
-
-
-
 	function getBuildingStories() {
 
 //console.log( 'gbjson.Campus.Building.BuildingStorey', gbjson.Campus.Building.BuildingStorey );
 
 		let textBuildingStories = '';
 
-		storeys = gbjson.Campus.Building.BuildingStorey ? gbjson.Campus.Building.BuildingStorey : [];
-
+		storeys = gbjson.Campus.Building.BuildingStorey;
 //console.log( 'storeys', storeys );
 
 		for ( var i = 0; i < storeys.length; i++ ) {
@@ -436,14 +383,13 @@ console.log( 'json', gbjson );
 	}
 
 
-
 	function getSpace() {
 
 //console.log( 'gbjson.Campus.Building.Space', gbjson.Campus.Building.Space );
 
 		let textSpaces = '';
 
-		spaces = gbjson.Campus.Building.Space ? gbjson.Campus.Building.Space : [];
+		spaces = gbjson.Campus.Building.Space;
 //console.log( 'storeys', storeys );
 
 		for ( var i = 0; i < spaces.length; i++ ) {
@@ -459,7 +405,6 @@ console.log( 'json', gbjson );
 
 
 	}
-
 
 
 	function getPoints( polyloop ) {
@@ -493,6 +438,7 @@ console.log( 'json', gbjson );
 		const obj2 = new THREE.Object3D();
 		obj2.quaternion.copy( obj.clone().quaternion.conjugate() );
 		obj2.updateMatrixWorld( true );
+
 
 		for ( let vertex of vertices ) {
 
@@ -556,14 +502,14 @@ console.log( 'json', gbjson );
 
 		controls.target.copy( center );
 		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-		axesHelper.position.copy( center );
+		axisHelper.position.copy( center );
 
 		camera.far = 2 * camera.position.length();
 		camera.updateProjectionMatrix();
 
 		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
 
-		lightDirectional.target = axesHelper;
+		lightDirectional.target = axisHelper;
 
 	}
 
@@ -642,7 +588,6 @@ console.log( 'json', gbjson );
 	}
 
 
-
 ////////////////////////
 
 
@@ -653,7 +598,7 @@ console.log( 'json', gbjson );
 		window.mouse = new THREE.Vector2();
 		window.intersected;
 
-//		headsUp = ifrContents.contentDocument.appendChild( document.createElement( 'div' ) );
+		headsUp = parent.parent.document.body.appendChild( document.createElement( 'div' ) );
 		headsUp.style.cssText = 'background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.95; ' +
 			'position: absolute; ';
 
@@ -674,7 +619,6 @@ console.log( 'json', gbjson );
 	}
 
 
-
 	function onDocumentMouseMove( event ) {
 
 		var raycaster, intersects;
@@ -685,6 +629,9 @@ console.log( 'json', gbjson );
 
 		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+//		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+//		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
 		raycaster = new THREE.Raycaster();
 		raycaster.setFromCamera( mouse, camera );
@@ -734,11 +681,10 @@ console.log( 'json', gbjson );
 		}
 
 
-		headsUp.style.left = 50 + 0.5 * scope.window.innerWidth + mouse.x * 0.5 * scope.innerWidth + 'px';
-		headsUp.style.top = -50 + 0.5 * scope.window.innerHeight - mouse.y * 0.5 * scope.window.innerHeight + 'px';
+		headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
+		headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 		headsUp.style.display = '';
 //console.log( '', headsUp.style.left, headsUp.style.top );
-
 		data = intersected.userData.data;
 		adjacenciesTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '';
 
@@ -749,33 +695,25 @@ console.log( 'json', gbjson );
 				space1 = getSpaceId( data.AdjacentSpaceId[ 0 ].spaceIdRef );
 				space2 = getSpaceId( data.AdjacentSpaceId[ 1 ].spaceIdRef );
 
-				if ( space1 && space2 ) { 
 				adjacenciesTxt = 
 					'adjacency: ' + data.AdjacentSpaceId[ 0 ].spaceIdRef + b +
-					( space1.Name ? 'name: ' + space1.Name + b : '' ) +
-					( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
+					'name: ' + space1.Name + b +
+					'CADObjectId: ' + space1.CADObjectId + b +
 					'<hr>' + 
-
-					'adjacency: ' + data.AdjacentSpaceId[ 1 ].spaceIdRef +  b +
-					( space2.Name ? 'name: ' + space2.Name + b : '' ) +
-					( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
+					data.AdjacentSpaceId[ 1 ].spaceIdRef +  b +
+					'name: ' + space2.Name + b +
+					'CADObjectId: ' + space2.CADObjectId + b +
 				'';
 
-				} else {
-
-					adjacenciesTxt = 'adjacencies: ' + data.AdjacentSpaceId[ 0 ] + ' ' + data.AdjacentSpaceId[ 1 ];
-
-				}
 			} else {
 
 				space = getSpaceId( data.AdjacentSpaceId.spaceIdRef );
 
-				if ( !space ) { return; }
-
 				adjacenciesTxt = 'adjacency: ' + data.AdjacentSpaceId.spaceIdRef + b +
-				( space.Name ? 'name: ' + space.Name + b : '' )  +
-				( space.CADObjectId ? 'CADObjectId: ' + space.CADObjectId + b : '' ) +
+				'name: ' + space.Name + b +
+				'CADObjectId: ' + space.CADObjectId + b +
 				b;
+
 
 			}
 
@@ -798,25 +736,18 @@ console.log( 'json', gbjson );
 	}
 
 
-
 	function getSpaceId( spaceIdRef ) {
 
-		if ( !gbjson.Campus.Building.Space || !gbjson.Campus.Building.Space.length ) { return; }
-
 		const space = gbjson.Campus.Building.Space.find( function( space ) { return space.id === spaceIdRef; } );
-
 		return space;
 
 	}
-
-
 
 	function onDocumentMouseDown( event ) {
 
 		headsUp.style.display = 'none';
 
 	}
-
 
 
 	function onDocumentTouchStart( event ) {

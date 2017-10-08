@@ -33,7 +33,7 @@
 		</p>
 
 	</div>
-
+		<div id= "headsUp" ></div>
 <script>
 
 	var renderer, camera, controls, scene;
@@ -83,8 +83,8 @@
 		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera ) 
 		scene.add( cameraHelper );
 
-		axisHelper = new THREE.AxisHelper( 50 );
-		scene.add( axisHelper );
+		axesHelper = new THREE.AxesHelper( 50 );
+		scene.add( axesHelper );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'orientationchange', onWindowResize, false );

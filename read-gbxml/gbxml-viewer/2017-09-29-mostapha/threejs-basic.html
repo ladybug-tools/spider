@@ -27,6 +27,8 @@
 		<div id = "contents" ></div>
 		<div id=divScreenText ></div>
 
+		<div id= "headsUp" ></div>
+
 	</div>
 
 <script>
@@ -70,8 +72,8 @@
 
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		axisHelper = new THREE.AxisHelper( 50 );
-		scene.add( axisHelper );
+		axesHelper = new THREE.AxesHelper( 50 );
+		scene.add( axesHelper );
 
 		geometry = new THREE.BoxGeometry( 1, 1, 1 );
 		material = new THREE.MeshNormalMaterial();
