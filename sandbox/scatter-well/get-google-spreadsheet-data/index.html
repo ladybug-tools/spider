@@ -259,7 +259,7 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( x, y, z );
-			mesh.scale.set( 0.001 * parseFloat( cell.gsx$widthy1m.$t ), 0.001 * parseFloat( cell.gsx$lengthx1m.$t ), parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
+			mesh.scale.set( 0.0001 * parseFloat( cell.gsx$widthy1m.$t ), 0.0001 * parseFloat( cell.gsx$lengthx1m.$t ), 0.1 * parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
 			mesh.rotation.z = d2r * parseFloat( cell.gsx$orientationdegrees.$t );
 			meshes.add( mesh );
 
