@@ -240,9 +240,10 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 			}
 
-			x = parseFloat( cell.gsx$annualcoolingloadkwh.$t ) * 0.0005 - 40;
-			y = parseFloat( cell.gsx$annualheatingloadkwh.$t ) * 0.0002 - 60;
-			z = parseFloat( cell.gsx$totalsolarloadkwh.$t ) * 0.00008 -10;
+if ( cell.gsx$annualcoolingloadkwh.$t === '' ) { console.log( 'i', i ); }
+			const x = parseFloat( cell.gsx$annualcoolingloadkwh.$t ) * 0.0005 - 40;
+			const y = parseFloat( cell.gsx$annualheatingloadkwh.$t ) * 0.0002 - 60;
+			const z = parseFloat( cell.gsx$totalsolarloadkwh.$t ) * 0.00008 -10;
 //			z = parseFloat( cell.gsx$euikwhm2.$t ) * 0.6 - 60;
 
 			material = new THREE.MeshPhongMaterial( {
@@ -259,7 +260,7 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( x, y, z );
-			mesh.scale.set( 0.0001 * parseFloat( cell.gsx$widthy1m.$t ), 0.0001 * parseFloat( cell.gsx$lengthx1m.$t ), 0.1 * parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
+			mesh.scale.set( 0.00005 * parseFloat( cell.gsx$widthy1m.$t ), 0.00005 * parseFloat( cell.gsx$lengthx1m.$t ), 0.05 * parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
 			mesh.rotation.z = d2r * parseFloat( cell.gsx$orientationdegrees.$t );
 			meshes.add( mesh );
 
@@ -453,7 +454,8 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 //console.log( 'intersected', intersected );
 		txt =
 			intersected.userData.gsx$modelname.$t + b +
-			intersected.userData.content.$t.replace( /,/gi, b ).replace( 'windowconstruction:','windowconstruction:' + b ) +
+			intersected.userData.content.$t.replace( /,/gi, b ).replace( 'windowconstruction:','windowconstruction:' + b ) + b+
+			'<img src=https://ladybug-tools.github.io/spider/SVG/' + intersected.userData.gsx$modelname.$t + '_Perspective.svg onerrer=console("no file"); >' +
 		'';
 
 		headsUp.innerHTML = txt;
