@@ -228,21 +228,21 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 			if ( cell.gsx$footprintshape.$t === 'T-shape' ) {
 
-				geometry = tShape( parseInt( cell.gsx$numberoffloors.$t, 10 ) );
+				geometry = tShape( parseInt( cell.gsx$numoffloors.$t, 10 ) );
 
 			} else if ( cell.gsx$footprintshape.$t === 'L-shape' ) {
 
-				geometry = lShape( parseInt( cell.gsx$numberoffloors.$t, 10 ) );
+				geometry = lShape( parseInt( cell.gsx$numoffloors.$t, 10 ) );
 
 			} else {
 
-				geometry = hShape( parseInt( cell.gsx$numberoffloors.$t, 10 ) );
+				geometry = hShape( parseInt( cell.gsx$numoffloors.$t, 10 ) );
 
 			}
 
 			x = parseFloat( cell.gsx$annualcoolingloadkwh.$t ) * 0.0005 - 40;
 			y = parseFloat( cell.gsx$annualheatingloadkwh.$t ) * 0.0002 - 60;
-			z = parseFloat( cell.gsx$totaltransmittedsolarkwh.$t ) * 0.00008 -10;
+			z = parseFloat( cell.gsx$totalsolarloadkwh.$t ) * 0.00008 -10;
 //			z = parseFloat( cell.gsx$euikwhm2.$t ) * 0.6 - 60;
 
 			material = new THREE.MeshPhongMaterial( {
@@ -259,7 +259,7 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( x, y, z );
-			mesh.scale.set( 0.001 * parseFloat( cell.gsx$widthy1m.$t ), 0.001 * parseFloat( cell.gsx$lengthx1m.$t ), parseFloat( cell.gsx$numberoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
+			mesh.scale.set( 0.001 * parseFloat( cell.gsx$widthy1m.$t ), 0.001 * parseFloat( cell.gsx$lengthx1m.$t ), parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
 			mesh.rotation.z = d2r * parseFloat( cell.gsx$orientationdegrees.$t );
 			meshes.add( mesh );
 
