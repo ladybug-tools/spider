@@ -55,8 +55,6 @@
 			<button onclick = saveFile(); >save building data to file</button> 
 		</p>
 
-		<p>2017-10-01: Currently only saves the simple box buildings</p>
-		<p>Creates boxes at vertices to help verify valid data collection</p>
 		<p>View gbXML using <a href="http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/" target="_blank">Spider gbXML Viewer</a></p>
 	</div>
 
@@ -66,15 +64,17 @@
 
 <script>
 
-	let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
-
-	const ifrSource = 'build-well-threejs.html';
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
-
 	let bwId = 0;
+	let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	let txt;
 
 	let scope;
+	let zones = [];
+	let storeys = [];
+	let spaces = [];
+
+	const ifrSource = 'build-well-threejs.html';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
 
 	var THREE;
 	var renderer;
@@ -159,8 +159,8 @@
 
 		const theBuilding = buildings.getObjectByName( 'The Building' );
 
-		let txt = '';
 		bwId ++;
+		let txt = '';
 		txt += 
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
@@ -182,7 +182,7 @@
 			'\t\t\t<CADModelAzimuth>0</CADModelAzimuth>\n' +
 			'\t\t\t<Name>San Francisco CA United States</Name>\n' +
 			'\t\t</Location>\n' +
-			'\t\t<Building id="' + bwId + '" buildingType="Office" >\n' +
+			'\t\t<Building id="bw' + bwId + '" buildingType="Office" >\n' +
 			'\t\t\t<Area>' + theBuilding.userData.area + '</Area>\n' +
 			'\t\t\t<Name>' + theBuilding.name + '</Name>\n' +
 			'\t\t\t<Description>' + theBuilding.userData.description + '</Description>\n' +
@@ -190,15 +190,21 @@
 			'\t\t\t<Volume>' + theBuilding.userData.volume + '</Volume>\n' +
 		'';
 
+
+		zonesText = getZones( theBuilding );
+
 		txt += getBuildingStoreys( theBuilding );
+
 		txt += getSpaces( theBuilding );
+console.log( 'zonesText', txt );
+
 		txt += getSurfaces( theBuilding );
+
 		txt +=
 			'\t</Campus>\n' +
+			zonesText +
 			'\t<DocumentHistory>\n' +
 			'\t</DocumentHistory>\n' +
-			'\t<Zone>\n' +
-			'\t</Zone>\n' +
 			'</gbXML>\n' +
 		'';
 
@@ -212,11 +218,40 @@
 	}
 
 
+	function getZones( building ) {
+
+
+		let textZones = '';
+
+		if ( !building.userData.zones ) { return ''; }
+
+		for ( let i = 0; i < building.userData.zones.length; i++ ) {
+
+			bwId ++;
+
+			zone = building.userData.zones[ i ];
+			textZones += 
+				'\t<Zone id="bw' + bwId + '" >\n' +
+				'\t\t<Name>' + zone.name + '</Name>\n' +
+				'\t\t<Description>' + zone.description + '</Description>\n' +
+				'\t</Zone>\n' +
+			'';
+
+			zones.push( bwId );
+
+		}
+console.log( 'textZones', textZones );
+		return textZones;
+
+	}
+
+
 
 	function getBuildingStoreys( building ) {
 //console.log( 'building', building );
 
 		let textBuildingStoreys = '';
+
 		for ( var i = 0; i < building.userData.floors; i++ ) {
 
 			bwId ++;
@@ -228,8 +263,11 @@
 				'\t\t\t</BuildingStorey>\n' +
 			'';
 
+			storeys.push( bwId );
+
 		}
 
+console.log( 'storeys', storeys );
 		return textBuildingStoreys;
 
 	}
@@ -237,24 +275,39 @@
 
 
 	function getSpaces( building ) {
-
+//console.log( 'building', building );
 		let textSpace = '';
-		const zones = building.userData.zones ? building.userData.zones : [];
 
-		for ( var i = 0; i < zones.length; i++ ) {
+		if ( !building.userData.spaces ) { return ''; }
+
+		const spaces = building.userData.spaces;
+
+		idSpacesStart = bwId; 
+		for ( var i = 0; i < spaces.length; i++ ) {
 
 			bwId ++;
 
-			const zone = zones[ i ];
-			textSpace += 
-				'\t\t\t<Space zoneIdRef="' + zone.spaceId + '" conditionType="HeatedAndCooled" id="bw' + bwId + '" >\n' +
-				'\t\t\t\t<Name>' + zone.name + '</Name>\n' +
-				'\t\t\t\t<Description>' + zone.description + '</Description>\n' +
-				'\t\t\t\t<Area>' + zone.area + '</Area>\n' +
-				'\t\t\t\t<Volume>' + zone.volume + '</Volume>\n' +
-				'\t\t\t</Space>\n' +
+			const space = spaces[ i ];
 
-			'';
+			if ( space ) {
+
+				textSpace += 
+					'\t\t\t<Space zoneIdRef="bw' + zones[ space.zone ] + '" ' +
+						'id="bw' + bwId + '" ' +
+						'buildingStoreyIdRef="bw' + storeys[ space.storey ] + '" ' +
+						'conditionType="HeatedAndCooled" >\n' +
+					'\t\t\t\t<Name>' + space.name + '</Name>\n' +
+					'\t\t\t\t<Description>' + space.description + '</Description>\n' +
+					'\t\t\t\t<Area>' + space.area + '</Area>\n' +
+					'\t\t\t\t<Volume>' + space.volume + '</Volume>\n' +
+					'\t\t\t</Space>\n' +
+
+				'';
+			} else {
+
+//console.log( 'space', walls[ i ] );
+
+			}
 
 		}
 
@@ -276,7 +329,7 @@
 
 			if ( building.geometry ) {
 
-				txt += getSurfacesAdjantBuildings( building );
+				txt += getSurfacesAdjacentBuildings( building );
 
 			} else {
 
@@ -284,42 +337,61 @@
 
 				const geo = new THREE.BoxBufferGeometry( 3, 1, 1 );
 				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+				const spaces = building.userData.spaces;
+console.log( 'spaces', spaces );
 
 				for ( let j = 0; j < building.children.length; j++ ) {
 //				for ( let j = 0; j < 8; j++ ) {
 
 					const surface = building.children[ j ].clone();
-//console.log( 'surface', surface );
 
 					let geometry = new THREE.Geometry().fromBufferGeometry( surface.geometry );
 					const angle = surface.rotation._z;
 					geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
 
-					bwId++;
+					bwId ++;
+
 					let adjacency;
 
 					if ( surface.name === 'ExteriorWall' ) {
 
 						adjacency = 
-							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace - 1 ].id + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'InteriorWall' ) {
+//console.log( 'surface', spaces[ surface.userData.idSpace ] );
 
 						adjacency = 
-							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId - 2 ) + '" />\n' +
-							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace[ 0 ] - 1 ].id  + '" />\n' +
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace[ 1 ] - 1 ].id + '" />\n' +
 						'';
 
-					} else if ( surface.name === 'SlabOnGrade' || surface.name === 'InteriorFloor' ||surface.name === 'Roof' ) {
+					} else if ( surface.name === 'SlabOnGrade' ) {
+
+//console.log( 'spaces[ surface.userData.idSpace ]', surface.userData.idSpace );
+						adjacency = 
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace - 1 ].id  + '" />\n' +
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace - 1 ].id  + '" />\n' +
+						'';
+
+					} else if ( surface.name === 'InteriorFloor' ) {
 
 						adjacency = 
-							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace - 1 ].id  + '" />\n' +
+						'';
+
+					} else if ( surface.name === 'Roof' ) {
+
+						adjacency = 
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace - 1 ].id  + '" />\n' +
 						'';
 
 					} else {
 
-						adjacency = '';
+						adjacency = 
+							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace  ].id  + '" />\n' +
+						'';
 
 					}
 
@@ -400,7 +472,7 @@
 
 
 
-	function getSurfacesAdjantBuildings( building ) { 
+	function getSurfacesAdjacentBuildings( building ) { 
 
 //console.log( 'geo', building.geometry.clone() ); 
 

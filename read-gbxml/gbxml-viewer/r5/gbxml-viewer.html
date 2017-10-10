@@ -62,20 +62,20 @@
 	let intersected;
 	let materialSurfaces;
 
-	let campusSurfaces, campusOpenings;
-	let campusSurfacesArray = [];
+	let campusSurfaces;
+	let campusSurfacesArray;
 
 //	const ifrSourceURI = 'threejs-basic.html';
 	const ifrSourceURI = 'template-threejs-shade.html';
 
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/read-gbxml/';
 
-//	const gbxmlURI = '../../data-files/SAM_Live.xml';
+	const gbxmlURI = '../../data-files/SAM_Live.xml';
 //	const gbxmlURI = '../../data-files/gbXMLStandard Single Family Residential 2016.xml';
 //	const gbxmlURI = '../../data-files/building-data.xml';
 //	const gbxmlURI = '../../data-files/building-data-ell-defaults.xml';
 //	const gbxmlURI = '../../data-files/building-data-ell2.xml';
-	const gbxmlURI = '../../data-files/test.xml';
+//	const gbxmlURI = '../../data-files/test.xml';
 
 	var model;
 	var gbjson;
@@ -183,7 +183,6 @@ console.log( 'json', gbjson );
 
 	function getMenu( gbjson ) {
 
-
 		const useSIUnitsForResults = gbjson.useSIUnitsForResults ? 'useSIUnitsForResults: ' + gbjson.useSIUnitsForResults + b : '';
 		const unitLength = gbjson.lengthUnit ? 'length unit: ' + gbjson.lengthUnit + b : '';
 		const areaUnit = gbjson.areaUnit ? 'area unit: ' + gbjson.areaUnit + b : '';
@@ -265,9 +264,37 @@ console.log( 'json', gbjson );
 
 		divStats1.innerHTML = txt;
 
+		if ( parent && parent.ifrMenuSub ) {
+
+			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 40 ) + 'px';
+
+		}
 
 	}
 
+
+
+	function getBuildingStories() {
+
+//console.log( 'gbjson.Campus.Building.BuildingStorey', gbjson.Campus.Building.BuildingStorey );
+
+		let textBuildingStories = '';
+
+		storeys = gbjson.Campus.Building.BuildingStorey ? gbjson.Campus.Building.BuildingStorey : [];
+
+//console.log( 'storeys', storeys );
+
+		for ( var i = 0; i < storeys.length; i++ ) {
+
+			storey = storeys[ i ];
+
+			textBuildingStories += storey.Name + ': level: ' + storey.Level + ' id: ' + storey.id + b;
+
+		}
+
+		return textBuildingStories;
+
+	}
 
 
 
@@ -301,22 +328,24 @@ console.log( 'json', gbjson );
 	}
 
 
+
 	function parseGbJson( gbjson ) {
 
 //console.log( 'surfaces', gbjson.Campus.Surface );
 
-		surfaces = gbjson.Campus.Surface;
+		let surfaces = gbjson.Campus.Surface;
 //console.log( '', surfaces );
 
 		let items = {};
 		let openingsMeta = {};
-		polyloops = [];
-		openings = [];
+		let polyloops = [];
+		let openings = [];
+		let surface, points;
 
-		for ( var i = 0; i < surfaces.length; i++ ) {
+		for ( let i = 0; i < surfaces.length; i++ ) {
 
 			surface = surfaces[ i ];
-
+/*
 			if ( !items[ surface.surfaceType ] ) {
 
 				items[ surface.surfaceType ] = 1;
@@ -326,8 +355,10 @@ console.log( 'json', gbjson );
 				items[ surface.surfaceType ]++;
 
 			}
+*/
 
 			if ( surface.Opening ) {
+/*
 
 				if ( !openingsMeta[ surface.Opening.openingType ] ) {
 
@@ -338,6 +369,7 @@ console.log( 'json', gbjson );
 					openingsMeta[ surface.Opening.openingType ]++;
 
 				}
+*/
 
 				if ( surface.Opening.PlanarGeometry ) {
 
@@ -375,21 +407,14 @@ console.log( 'json', gbjson );
 
 		}
 
-
-//		txt =
-//			'<h4>Surfaces</h4>' +
-//		'';
-
 //console.log( 'items', items );
 //console.log( 'openingsMeta', openingsMeta );
 //console.log( 'openings', openings );
 //console.log( 'polyloops', polyloops );
 
-		scene.remove( campusSurfaces, campusOpenings );
-
+		scene.remove( campusSurfaces );
 		campusSurfaces = new THREE.Object3D();
-
-//		materialSurfaces = materialPhongBySurface;
+		campusSurfacesArray = [];
 
 		for ( let i = 0; i < polyloops.length; i++ ) {
 
@@ -405,13 +430,7 @@ console.log( 'json', gbjson );
 		}
 
 		scene.add( campusSurfaces );
-		zoomObjectBoundingSphere( campusSurfaces )
-
-		if ( parent && parent.ifrMenuSub ) {
-
-			parent.ifrMenuSub.style.height = ( divMenu.scrollHeight + 40 ) + 'px';
-
-		}
+		zoomObjectBoundingSphere( campusSurfaces );
 
 	}
 
@@ -426,7 +445,7 @@ console.log( 'json', gbjson );
 
 	function materialPhongRandom() {
 
-		return new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2, opacity: 1 } );
+		return new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2, opacity: 0.85, transparent: true } );
 
 	}
 
@@ -434,14 +453,12 @@ console.log( 'json', gbjson );
 
 	function materialPhongDefault() {
 
-		return new THREE.MeshPhongMaterial( { side: 2, opacity: 1 } );
+		return new THREE.MeshPhongMaterial( { side: 2, opacity: 0.85, transparent: true } );
 
 	}
 
 
 	function materialPhongBySurface( surface ) {
-
-//console.log( '', surface );
 
 		switch( surface.surfaceType ) {
 
@@ -466,37 +483,9 @@ console.log( 'json', gbjson );
 
 		}
 
-		return new THREE.MeshPhongMaterial( { color: color, side: 2, opacity: 1 } );
+		return new THREE.MeshPhongMaterial( { color: color, side: 2, opacity: 0.85, transparent: true } );
 
 	}
-
-
-
-	function getBuildingStories() {
-
-//console.log( 'gbjson.Campus.Building.BuildingStorey', gbjson.Campus.Building.BuildingStorey );
-
-		let textBuildingStories = '';
-
-		storeys = gbjson.Campus.Building.BuildingStorey ? gbjson.Campus.Building.BuildingStorey : [];
-
-//console.log( 'storeys', storeys );
-
-		for ( var i = 0; i < storeys.length; i++ ) {
-
-			storey = storeys[ i ];
-
-			textBuildingStories += storey.Name + ': level: ' + storey.Level + ' id: ' + storey.id + b;
-
-		}
-
-		return textBuildingStories;
-
-	}
-
-
-
-
 
 
 
@@ -514,7 +503,6 @@ console.log( 'json', gbjson );
 
 		}
 
-//		points.push( points[ 0 ] );
 		return points;
 
 	}
@@ -538,7 +526,12 @@ console.log( 'json', gbjson );
 
 		}
 
-		shape1 = new THREE.Shape( vertices );
+		let geo = new THREE.Geometry();
+		geo.vertices = vertices;
+		geo.mergeVertices();
+
+		shape1 = new THREE.Shape( geo.vertices );
+		
 		shape1.autoClose = true;
 
 		for ( let verticesHoles of holes ) {
@@ -549,9 +542,12 @@ console.log( 'json', gbjson );
 
 			}
 
+			geo.vertices = verticesHoles;
+			geo.mergeVertices();
+
 			let hole = new THREE.Path();
 
-			hole.fromPoints( verticesHoles );
+			hole.fromPoints( geo.vertices );
 
 			shape1.holes.push( hole );
 
@@ -587,21 +583,26 @@ console.log( 'json', gbjson );
 		}
 
 		divStats3.innerHTML =
-			'center:<br>x' + center.x.toLocaleString() + ' y' + center.y.toLocaleString() + ' z' + center.z.toLocaleString() + b +
-			'radius: ' + radius.toLocaleString() +
+			'building center:<br>x:' + center.x.toLocaleString() + ' y:' + center.y.toLocaleString() + ' z:' + center.z.toLocaleString() + b +
+			'extents radius: ' + radius.toLocaleString() +
 		'';
 
-
 		controls.target.copy( center );
+		controls.maxDistance = 5 * radius;
+
 		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
 		axesHelper.position.copy( center );
 
-		camera.far = 2 * camera.position.length();
+		camera.far = 10 * radius; //2 * camera.position.length();
 		camera.updateProjectionMatrix();
 
 		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-
+		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
 		lightDirectional.target = axesHelper;
+
+		scene.remove( cameraHelper );
+		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		scene.add( cameraHelper );
 
 	}
 
@@ -684,14 +685,13 @@ console.log( 'json', gbjson );
 ////////////////////////
 
 
-
 	function initHeadsUp() {
 
 		window.objects = [];
 		window.mouse = new THREE.Vector2();
 		window.intersected;
 
-//		headsUp = ifrContents.contentDocument.appendChild( document.createElement( 'div' ) );
+//		headsUp = ifrContents.contentDocument.appendChild( document.createElement( 'div' ) ); // in three.js file
 		headsUp.style.cssText = 'background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.95; ' +
 			'position: absolute; ';
 
@@ -721,13 +721,30 @@ console.log( 'json', gbjson );
 
 		if ( intersects.length > 0 ) {
 
-			intersected = intersects[ 0 ].object;
-			intersected.material.opacity = 1;
-//			intersected.material.emissive.setHex( 0xff0000 );
+			if ( intersected != intersects[ 0 ].object ) {
+
+				if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
+				intersected = intersects[ 0 ].object;
+
+				if ( intersected.material.emissive ) {
+
+					intersected.currentHex = intersected.material.emissive.getHex();
+					intersected.material.emissive.setHex( 0xff0000 );
+
+				}
+
+				intersected.currentOpacity = intersected.material.opacity;
+				intersected.material.opacity = 1;
+
+			}
 
 		} else {
 
-			if ( intersected ) { intersected.material.opacity = 0.5; }
+			if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+			if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
 			intersected = undefined;
 
 		}
@@ -765,26 +782,35 @@ console.log( 'json', gbjson );
 		data = intersected.userData.data;
 //console.log( 'data', data );
 
-		adjacenciesTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '';
+		adjacenciesTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : 'no adjacency';
 
-
-		if ( adjacenciesTxt ) {
+		if ( adjacenciesTxt !== 'no adjacency' ) {
 
 			if ( data.AdjacentSpaceId.length ) {
 
-				space1 = getSpaceId( data.AdjacentSpaceId[ 0 ].spaceIdRef );
-				space2 = getSpaceId( data.AdjacentSpaceId[ 1 ].spaceIdRef );
+//console.log( 'adjacenciesTxt', adjacenciesTxt );
+
+				space1 = getSpaceId( adjacenciesTxt[ 0 ].spaceIdRef );
+				space2 = getSpaceId( adjacenciesTxt[ 1 ].spaceIdRef );
 
 				if ( space1 && space2 ) { 
 
 					adjacenciesTxt = 
+
+						'<hr>' + 
 						'adjacency: ' + data.AdjacentSpaceId[ 0 ].spaceIdRef + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
+						( space.Description ? 'description: ' + space.Description + b : '' )  +
+						( space.Area ? 'area: ' + space.Area + b : '' )  +
+						( space.Name ? 'name: ' + space.Name + b : '' )  +
+						( space.conditionType ? 'conditionType: ' + space.conditionType + b : '' )  +
+						( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
 						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
-						'<hr>' + 
 
+						'<hr>' + 
 						'adjacency: ' + data.AdjacentSpaceId[ 1 ].spaceIdRef +  b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
+						( space.Description ? 'description: ' + space.Description + b : '' )  +
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
 					'';
 
@@ -796,16 +822,22 @@ console.log( 'json', gbjson );
 
 			} else {
 
-console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef );
+//console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef );
 //console.log( 'adjacenciesTxt', adjacenciesTxt );
-				space = getSpaceId( data.AdjacentSpaceId.spaceIdRef );
 
+				space = getSpaceId( data.AdjacentSpaceId.spaceIdRef, 'single' );
 
 				if ( !space ) { return; }
+
 				adjacenciesTxt = 
 					'<hr>' +
 					'adjacency: ' + data.AdjacentSpaceId.spaceIdRef + b +
 					( space.Name ? 'name: ' + space.Name + b : '' )  +
+					( space.Description ? 'description: ' + space.Description + b : '' )  +
+					( space.Area ? 'area: ' + space.Area + b : '' )  +
+					( space.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space.buildingStoreyIdRef + b : '' )  +
+					( space.conditionType ? 'conditionType: ' + space.conditionType + b : '' )  +
+					( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
 					( space.CADObjectId ? 'CADObjectId: ' + space.CADObjectId + b : '' ) +
 				b;
 
@@ -819,6 +851,7 @@ console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef 
 			( data.Name ? 'name: ' + data.Name + b : '' )  +
 			'id: ' + data.id + b +
 			'surface: ' + data.surfaceType + b +
+			( data.CADObjectId ? 'CADObjectId: ' + data.CADObjectId + b : '' ) +
 			adjacenciesTxt + 
 		'';
 
@@ -829,12 +862,19 @@ console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef 
 
 
 
-	function getSpaceId( spaceIdRef ) {
+	function getSpaceId( spaceIdRef, txtz ) {
+
 		if ( !gbjson.Campus.Building.Space || !gbjson.Campus.Building.Space.length ) { return; }
 
+		const space = gbjson.Campus.Building.Space.find( function( item ) { return item.id === spaceIdRef; } );
+
+		if ( !space ) {
+
 console.log( 'spaceIdRef', spaceIdRef );
-		const space = gbjson.Campus.Building.Space.find( function( space ) { return space.id === spaceIdRef; } );
-console.log( 'space', space );
+console.log( 'space', gbjson.Campus.Building.Space );
+//console.log( 'txt', txtz );
+
+		}
 
 		return space;
 
@@ -852,7 +892,7 @@ console.log( 'space', space );
 
 	function onDocumentTouchStart( event ) {
 
-	//	event.preventDefault();
+		event.preventDefault();
 
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;

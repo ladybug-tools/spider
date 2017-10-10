@@ -90,14 +90,24 @@ See also:
 
 
 * https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts
-
 * http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml
-
 * https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere
+
+## Notes
 
 
 ## Change Log
 
+
+### 2017-10-09 ~ Theo
+
+*gbXML R5 ~ back to a regular numbering system
+* Improve object higlighting
+* Improve lighting and shading
+* Improve camera & controls distance control
+* Add opacity to buildings
+* Add select materials
+* And quite a few other fixes
 
 ### 2017-10-05 ~ Theo
 
