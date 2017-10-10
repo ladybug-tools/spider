@@ -103,9 +103,10 @@ See also:
 * Needs single adjacency
 	* Is it OK if a single surface is used for the entire roof or must the roof be divided into multiple surfaces with individual surfaces for each space below the roof?
 
-### Shade
+#### Shade
 
-* Needs no 
+* Needs no adjacency
+* CAD id is nice
 
 
 
