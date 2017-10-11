@@ -32,16 +32,16 @@ _We often think of software of software just appearing as if by magic. The reali
 ## Issues
 
 
-
-* 2017-09-29 ~ Some is hardwired to 'The Building' string. Should be to whatever you want it to be ( & UUID ).
+* 2017-10-10 ~ Menu interaction that does not revert scene and buildings to defaults. Selecting various, Adjacent Buildings menu and Shapes menus, etc should maintain current set of building data
+* 2017-09-29 ~ Some variables are hardwired to 'The Building' string. Should be to whatever you want it to be ( & UUID ).
 * 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
 
 
 ## Naming Considerations
 
-* To help you build well
-* A well of data to help you build
-* Primary instigator @bwelle
+* To help you _build well_
+* A _well_ of data to help you _build_
+* Primary instigator _@bwelle_
 
 
 ## Coding methodology
@@ -63,7 +63,6 @@ _To be expanded and explained in more detail as time goes on._
 
 
 ## To Do
-
 
 * 2017-10-03 ~ L Shape 1: how to recalculate length (X1) after you update the area?
 	* Spreadsheet with all the calculations would be helpful
@@ -92,14 +91,13 @@ _To be expanded and explained in more detail as time goes on._
 
 ### mnu-box-shape.html
 
-
 * 2017-09-29 ~ Add complete and current set of parameters to 'The Building' object - to enable roundtrip with adj build menu
 
 ### mnu-ell-shape-one.html
 
 * 2017-09-21 ~ Match building shapes to Ben's spec
 
-### mn-settings-site.html
+### mnu-settings-site.html
 
 * 2017-10-02 ~ fix toggle edges
 * 2017-10-02 ~ Ground & Helpers don't toggle after change in gridsize
@@ -113,6 +111,15 @@ _To be expanded and explained in more detail as time goes on._
 
 
 ## Change Log
+
+
+### 2017-10-10 ~ Theo
+
+15:56
+* Build Well R9
+* Box Shape now equal of L Shape
+* Orientation fixed
+* Code clean-up
 
 
 ### 2017-10-05 ~ Theo

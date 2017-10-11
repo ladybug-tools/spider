@@ -48,12 +48,12 @@ The Ladybug Tools Spider gbXML Reader scripts are first steps toward making gbXM
 
 Coming soon
 
-* Openings
 * Lights and shadows
 * Section views
 
 ## Issues
 
+* Although basically unitless, the Build Well menus set minimum and maximum defaults based in feet
 
 ### read gbxml polyloop
 

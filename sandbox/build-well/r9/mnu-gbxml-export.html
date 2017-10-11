@@ -65,6 +65,8 @@
 <script>
 
 	let bwId = 0;
+	let idSpacesStart;
+
 	let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	let txt;
 
@@ -159,6 +161,8 @@
 
 		const theBuilding = buildings.getObjectByName( 'The Building' );
 
+console.log( '', theBuilding );
+
 		bwId ++;
 		let txt = '';
 		txt += 
@@ -182,7 +186,7 @@
 			'\t\t\t<CADModelAzimuth>0</CADModelAzimuth>\n' +
 			'\t\t\t<Name>San Francisco CA United States</Name>\n' +
 			'\t\t</Location>\n' +
-			'\t\t<Building id="bw' + bwId + '" buildingType="Office" >\n' +
+			'\t\t<Building id="bw' + bwId++ + '" buildingType="Office" >\n' +
 			'\t\t\t<Area>' + theBuilding.userData.area + '</Area>\n' +
 			'\t\t\t<Name>' + theBuilding.name + '</Name>\n' +
 			'\t\t\t<Description>' + theBuilding.userData.description + '</Description>\n' +
@@ -190,30 +194,20 @@
 			'\t\t\t<Volume>' + theBuilding.userData.volume + '</Volume>\n' +
 		'';
 
-
+		if ( !theBuilding.userData.length ) { txt += '\t\t</Building>\n'; }
+/*
 		zonesText = getZones( theBuilding );
 
 		txt += getBuildingStoreys( theBuilding );
 
 		txt += getSpaces( theBuilding );
-console.log( 'zonesText', txt );
 
 		txt += getSurfaces( theBuilding );
+*/
 
-		txt +=
-			'\t</Campus>\n' +
-			zonesText +
-			'\t<DocumentHistory>\n' +
-			'\t</DocumentHistory>\n' +
-			'</gbXML>\n' +
-		'';
+		getZones( theBuilding );
 
-		scope.divScreenText.innerHTML = 
 
-			'gbXML data<textarea id=buildingData >' + 
-			txt + '</textarea>'
-
-		'';
 
 	}
 
@@ -221,7 +215,7 @@ console.log( 'zonesText', txt );
 	function getZones( building ) {
 
 
-		let textZones = '';
+		textZones = '';
 
 		if ( !building.userData.zones ) { return ''; }
 
@@ -240,15 +234,19 @@ console.log( 'zonesText', txt );
 			zones.push( bwId );
 
 		}
-console.log( 'textZones', textZones );
-		return textZones;
+
+console.log( 'zones', zones );
+
+//		return textZones;
+
+		txt += textZones;
+		getBuildingStoreys( building )
 
 	}
 
 
 
 	function getBuildingStoreys( building ) {
-//console.log( 'building', building );
 
 		let textBuildingStoreys = '';
 
@@ -268,14 +266,19 @@ console.log( 'textZones', textZones );
 		}
 
 console.log( 'storeys', storeys );
-		return textBuildingStoreys;
+
+//		return textBuildingStoreys;
+
+		txt += textBuildingStoreys;
+
+		getSpaces( building );
 
 	}
 
 
 
 	function getSpaces( building ) {
-//console.log( 'building', building );
+
 		let textSpace = '';
 
 		if ( !building.userData.spaces ) { return ''; }
@@ -283,8 +286,9 @@ console.log( 'storeys', storeys );
 		const spaces = building.userData.spaces;
 
 		idSpacesStart = bwId; 
-		for ( var i = 0; i < spaces.length; i++ ) {
 
+		for ( var i = 0; i < spaces.length; i++ ) {
+console.log( 'bwId', bwId );
 			bwId ++;
 
 			const space = spaces[ i ];
@@ -305,15 +309,19 @@ console.log( 'storeys', storeys );
 				'';
 			} else {
 
-//console.log( 'space', walls[ i ] );
+console.log( 'spaces', spaces[ i ] );
 
 			}
 
 		}
 
+console.log( 'spaces', spaces );
 		textSpace += '\t\t</Building>\n';
 
-		return textSpace;
+//		return textSpace;
+		txt += textSpace;
+
+		getSurfaces( building );
 
 	}
 
@@ -321,7 +329,7 @@ console.log( 'storeys', storeys );
 
 	function getSurfaces( theBuilding ) {
 
-		let txt = '';
+//		let txt = '';
 
 		for ( let i = 0; i < buildings.children.length; i++ ) {
 
@@ -338,7 +346,7 @@ console.log( 'storeys', storeys );
 				const geo = new THREE.BoxBufferGeometry( 3, 1, 1 );
 				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 				const spaces = building.userData.spaces;
-console.log( 'spaces', spaces );
+//console.log( 'spaces', spaces );
 
 				for ( let j = 0; j < building.children.length; j++ ) {
 //				for ( let j = 0; j < 8; j++ ) {
@@ -349,7 +357,7 @@ console.log( 'spaces', spaces );
 					const angle = surface.rotation._z;
 					geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
 
-					bwId ++;
+					bwId++;
 
 					let adjacency;
 
@@ -360,7 +368,7 @@ console.log( 'spaces', spaces );
 						'';
 
 					} else if ( surface.name === 'InteriorWall' ) {
-//console.log( 'surface', spaces[ surface.userData.idSpace ] );
+//console.log( 'surface', surface.userData.idSpace  );
 
 						adjacency = 
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace[ 0 ] - 1 ].id  + '" />\n' +
@@ -369,7 +377,7 @@ console.log( 'spaces', spaces );
 
 					} else if ( surface.name === 'SlabOnGrade' ) {
 
-//console.log( 'spaces[ surface.userData.idSpace ]', surface.userData.idSpace );
+console.log( 'surface.userData.idSpace', surface.userData.idSpace );
 						adjacency = 
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace - 1 ].id  + '" />\n' +
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + spaces[ surface.userData.idSpace - 1 ].id  + '" />\n' +
@@ -467,7 +475,22 @@ console.log( 'spaces', spaces );
 
 		}
 
-		return txt;
+//		return txt;
+
+		txt +=
+			'\t</Campus>\n' +
+			textZones +
+			'\t<DocumentHistory>\n' +
+			'\t</DocumentHistory>\n' +
+			'</gbXML>\n' +
+		'';
+
+		scope.divScreenText.innerHTML = 
+
+			'gbXML data<textarea id=buildingData >' + 
+			txt + '</textarea>'
+
+		'';
 	}
 
 

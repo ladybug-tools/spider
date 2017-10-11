@@ -259,8 +259,8 @@
 		const length = parseFloat( inpLength1.value );
 		const width = parseFloat( inpWidth1.innerHTML );
 		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
-		const areaCurrent = length * width * floors; // building.userData.areaCurrent; 
 
+		const areaCurrent = length * width * floors; // building.userData.areaCurrent; 
 		const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
 		const ratio = Math.sqrt( areaNew / areaCurrent );
 //console.log( '', areaCurrent, areaNew, ratio );
