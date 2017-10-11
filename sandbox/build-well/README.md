@@ -11,6 +11,7 @@ _A well for building well._
 
 _We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
 
+* 2017-10-10 [Build Well R7]( http://ladybug-tools.github.io/spider/sandbox/build-well/r8/build-well.html )
 * 2017-09-29 [Build Well R7]( http://ladybug-tools.github.io/spider/sandbox/build-well/r7/build-well.html )
 * 2017-09-26 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r6/build-well.html )
 * 2017-09-24 [Build Well R5]( http://ladybug-tools.github.io/spider/sandbox/build-well/r5/build-well.html )
