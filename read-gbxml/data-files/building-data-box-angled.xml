@@ -1,1935 +1,962 @@
-<?xml version="1.0" encoding="UTF-16"?>
-<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">
-<Campus>
-<Location>
-<ZipcodeOrPostalCode>94111</ZipcodeOrPostalCode>
-<Longitude>-122.398</Longitude>
-<Latitude>37.796</Latitude>
-<Elevation>10</Elevation>
-<CADModelAzimuth>0</CADModelAzimuth>
-<Name>San Francisco CA United States</Name>
-</Location>
-	<Building id="The Building" buildingType="Office" >
-	<StreetAddress>440 Davis Court</StreetAddress>
-	<Area>17000</Area>
-	<Volume>204000</Volume>
-	</Building>
-	<Surface surfaceType="Shade" id="bw1" >
-		<Name>Building Anton</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>77.07107</Coordinate>
-					<Coordinate>-41.71573</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>77.07107</Coordinate>
-					<Coordinate>-41.71573</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>98.28427</Coordinate>
-					<Coordinate>-62.92893</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>98.28427</Coordinate>
-					<Coordinate>-62.92893</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw2" >
-		<Name>Building Anton</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>41.71573</Coordinate>
-					<Coordinate>-77.07107</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>41.71573</Coordinate>
-					<Coordinate>-77.07107</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>62.92893</Coordinate>
-					<Coordinate>-98.28427</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>62.92893</Coordinate>
-					<Coordinate>-98.28427</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw3" >
-		<Name>Building Anton</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>41.71573</Coordinate>
-					<Coordinate>-77.07107</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>77.07107</Coordinate>
-					<Coordinate>-41.71573</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>77.07107</Coordinate>
-					<Coordinate>-41.71573</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>41.71573</Coordinate>
-					<Coordinate>-77.07107</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw4" >
-		<Name>Building Anton</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>62.92893</Coordinate>
-					<Coordinate>-98.28427</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>98.28427</Coordinate>
-					<Coordinate>-62.92893</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>98.28427</Coordinate>
-					<Coordinate>-62.92893</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>62.92893</Coordinate>
-					<Coordinate>-98.28427</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw5" >
-		<Name>Building Anton</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>41.71573</Coordinate>
-					<Coordinate>-77.07107</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>77.07107</Coordinate>
-					<Coordinate>-41.71573</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>98.28427</Coordinate>
-					<Coordinate>-62.92893</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>62.92893</Coordinate>
-					<Coordinate>-98.28427</Coordinate>
-					<Coordinate>70</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw6" >
-		<Name>Building Anton</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>77.07107</Coordinate>
-					<Coordinate>-41.71573</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>41.71573</Coordinate>
-					<Coordinate>-77.07107</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>62.92893</Coordinate>
-					<Coordinate>-98.28427</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>98.28427</Coordinate>
-					<Coordinate>-62.92893</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw7" >
-		<Name>Building Benjamin</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw8" >
-		<Name>Building Benjamin</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw9" >
-		<Name>Building Benjamin</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw10" >
-		<Name>Building Benjamin</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw11" >
-		<Name>Building Benjamin</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>30</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw12" >
-		<Name>Building Benjamin</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>85</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>45</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>75</Coordinate>
-					<Coordinate>55</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw13" >
-		<Name>Building Chien Si</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw14" >
-		<Name>Building Chien Si</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw15" >
-		<Name>Building Chien Si</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw16" >
-		<Name>Building Chien Si</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw17" >
-		<Name>Building Chien Si</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>20</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Shade" id="bw18" >
-		<Name>Building Chien Si</Name>
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>10</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-95</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-65</Coordinate>
-					<Coordinate>-90</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw20" >
-		<AdjacentSpaceId spaceIdRef="bw22" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw20" >
+<?xml version="1.0" encoding="UTF-8"?>
+<gbXML xmlns="http://www.gbxml.org/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" useSIUnitsForResults="true" xmlns:xhtml="http://www.w3.org/1999/xhtml" temperatureUnit="C" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SurfaceReferenceLocation="Centerline" areaUnit="SquareMeters" lengthUnit="Meters" version="6.01" volumeUnit="CubicMeters">
+	<Campus id="Facility" >
+		<DaylightSavings>true</DaylightSavings>
+		<Name>Created by LadybugTools/Spider/Build Well</Name>
+		<Location>
+			<ZipcodeOrPostalCode>94111</ZipcodeOrPostalCode>
+			<Longitude>-122.398</Longitude>
+			<Latitude>37.796</Latitude>
+			<Elevation>10</Elevation>
+			<CADModelAzimuth>0</CADModelAzimuth>
+			<Name>San Francisco CA United States</Name>
+		</Location>
+		<Building id="bw-building-1" buildingType="Office" >
+			<Area>8000</Area>
+			<Name>The Building</Name>
+			<Description>Generated by Ladybug-Tools/Spider/Build Well</Description>
+			<StreetAddress>440 Davis Court</StreetAddress>
+			<Volume>96000</Volume>
+			<BuildingStorey id="bw-storey-1" >
+				<Name>"storey-1"</Name>
+				<Level>0</Level>
+			</BuildingStorey>
+			<Space zoneIdRef="bw-zone-0" id="bw-space-1" buildingStoreyIdRef="bw-story-1" conditionType="HeatedAndCooled" >
+				<Name>space 1</Name>
+				<Description>length front</Description>
+				<Area>975</Area>
+				<Volume>11700</Volume>
+			</Space>
+			<Space zoneIdRef="bw-zone-1" id="bw-space-2" buildingStoreyIdRef="bw-story-1" conditionType="HeatedAndCooled" >
+				<Name>space 2</Name>
+				<Description>length back</Description>
+				<Area>975</Area>
+				<Volume>11700</Volume>
+			</Space>
+			<Space zoneIdRef="bw-zone-2" id="bw-space-3" buildingStoreyIdRef="bw-story-1" conditionType="HeatedAndCooled" >
+				<Name>space 3</Name>
+				<Description>width left</Description>
+				<Area>1275</Area>
+				<Volume>15300</Volume>
+			</Space>
+			<Space zoneIdRef="bw-zone-3" id="bw-space-4" buildingStoreyIdRef="bw-story-1" conditionType="HeatedAndCooled" >
+				<Name>space 4</Name>
+				<Description>width right</Description>
+				<Area>1275</Area>
+				<Volume>15300</Volume>
+			</Space>
+			<Space zoneIdRef="bw-zone-4" id="bw-space-5" buildingStoreyIdRef="bw-story-1" conditionType="HeatedAndCooled" >
+				<Name>space 5</Name>
+				<Description>interior area</Description>
+				<Area>3500</Area>
+				<Volume>42000</Volume>
+			</Space>
+		</Building>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Anton</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>77.07107</Coordinate>
+							<Coordinate>-41.71573</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>77.07107</Coordinate>
+							<Coordinate>-41.71573</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>98.28427</Coordinate>
+							<Coordinate>-62.92893</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>98.28427</Coordinate>
+							<Coordinate>-62.92893</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw21" >
-		<AdjacentSpaceId spaceIdRef="bw19" />
-		<AdjacentSpaceId spaceIdRef="bw23" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw22" >
-		<AdjacentSpaceId spaceIdRef="bw24" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw22" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Anton</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>41.71573</Coordinate>
+							<Coordinate>-77.07107</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>41.71573</Coordinate>
+							<Coordinate>-77.07107</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>62.92893</Coordinate>
+							<Coordinate>-98.28427</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>62.92893</Coordinate>
+							<Coordinate>-98.28427</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw23" >
-		<AdjacentSpaceId spaceIdRef="bw21" />
-		<AdjacentSpaceId spaceIdRef="bw25" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw24" >
-		<AdjacentSpaceId spaceIdRef="bw26" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw24" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Anton</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>77.07107</Coordinate>
+							<Coordinate>-41.71573</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>41.71573</Coordinate>
+							<Coordinate>-77.07107</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>41.71573</Coordinate>
+							<Coordinate>-77.07107</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>77.07107</Coordinate>
+							<Coordinate>-41.71573</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw25" >
-		<AdjacentSpaceId spaceIdRef="bw23" />
-		<AdjacentSpaceId spaceIdRef="bw27" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw26" >
-		<AdjacentSpaceId spaceIdRef="bw28" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw26" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Anton</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>1.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>10.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>98.28427</Coordinate>
+							<Coordinate>-62.92893</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>62.92893</Coordinate>
+							<Coordinate>-98.28427</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>62.92893</Coordinate>
+							<Coordinate>-98.28427</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>98.28427</Coordinate>
+							<Coordinate>-62.92893</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw27" >
-		<AdjacentSpaceId spaceIdRef="bw25" />
-		<AdjacentSpaceId spaceIdRef="bw29" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="SlabOnGrade" id="bw28" >
-		<AdjacentSpaceId spaceIdRef="bw30" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>0</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw29" >
-		<AdjacentSpaceId spaceIdRef="bw31" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw29" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Anton</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>77.07107</Coordinate>
+							<Coordinate>-41.71573</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>41.71573</Coordinate>
+							<Coordinate>-77.07107</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>62.92893</Coordinate>
+							<Coordinate>-98.28427</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>98.28427</Coordinate>
+							<Coordinate>-62.92893</Coordinate>
+							<Coordinate>70</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw30" >
-		<AdjacentSpaceId spaceIdRef="bw28" />
-		<AdjacentSpaceId spaceIdRef="bw32" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw31" >
-		<AdjacentSpaceId spaceIdRef="bw33" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw31" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Anton</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>41.71573</Coordinate>
+							<Coordinate>-77.07107</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>77.07107</Coordinate>
+							<Coordinate>-41.71573</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>98.28427</Coordinate>
+							<Coordinate>-62.92893</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>62.92893</Coordinate>
+							<Coordinate>-98.28427</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw32" >
-		<AdjacentSpaceId spaceIdRef="bw30" />
-		<AdjacentSpaceId spaceIdRef="bw34" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw33" >
-		<AdjacentSpaceId spaceIdRef="bw35" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw33" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Benjamin</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw34" >
-		<AdjacentSpaceId spaceIdRef="bw32" />
-		<AdjacentSpaceId spaceIdRef="bw36" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw35" >
-		<AdjacentSpaceId spaceIdRef="bw37" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw35" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Benjamin</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>13.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>22.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw36" >
-		<AdjacentSpaceId spaceIdRef="bw34" />
-		<AdjacentSpaceId spaceIdRef="bw38" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="InteriorFloor" id="bw37" >
-		<AdjacentSpaceId spaceIdRef="bw39" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>12</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw38" >
-		<AdjacentSpaceId spaceIdRef="bw40" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw38" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Benjamin</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw39" >
-		<AdjacentSpaceId spaceIdRef="bw37" />
-		<AdjacentSpaceId spaceIdRef="bw41" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw40" >
-		<AdjacentSpaceId spaceIdRef="bw42" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw40" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Benjamin</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw41" >
-		<AdjacentSpaceId spaceIdRef="bw39" />
-		<AdjacentSpaceId spaceIdRef="bw43" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw42" >
-		<AdjacentSpaceId spaceIdRef="bw44" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw42" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Benjamin</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>30</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw43" >
-		<AdjacentSpaceId spaceIdRef="bw41" />
-		<AdjacentSpaceId spaceIdRef="bw45" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw44" >
-		<AdjacentSpaceId spaceIdRef="bw46" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw44" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Benjamin</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>25.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>34.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>85</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>75</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>45</Coordinate>
+							<Coordinate>55</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw45" >
-		<AdjacentSpaceId spaceIdRef="bw43" />
-		<AdjacentSpaceId spaceIdRef="bw47" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="InteriorFloor" id="bw46" >
-		<AdjacentSpaceId spaceIdRef="bw48" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>24</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw47" >
-		<AdjacentSpaceId spaceIdRef="bw49" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw47" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Chien Si</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw48" >
-		<AdjacentSpaceId spaceIdRef="bw46" />
-		<AdjacentSpaceId spaceIdRef="bw50" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw49" >
-		<AdjacentSpaceId spaceIdRef="bw51" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw49" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Chien Si</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-27.01000</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw50" >
-		<AdjacentSpaceId spaceIdRef="bw48" />
-		<AdjacentSpaceId spaceIdRef="bw52" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw51" >
-		<AdjacentSpaceId spaceIdRef="bw53" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw51" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Chien Si</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw52" >
-		<AdjacentSpaceId spaceIdRef="bw50" />
-		<AdjacentSpaceId spaceIdRef="bw54" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="ExteriorWall" id="bw53" >
-		<AdjacentSpaceId spaceIdRef="bw55" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-		<Opening surfaceType="OperableWindow" id="bw53" >
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Chien Si</Name>
 			<PlanarGeometry>
 				<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>37.62000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-20.95100</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>20.95100</Coordinate>
-					<Coordinate>46.38000</Coordinate>
-				</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
-		</Opening>
-	</Surface>
-	<Surface surfaceType="InteriorWall" id="bw54" >
-		<AdjacentSpaceId spaceIdRef="bw52" />
-		<AdjacentSpaceId spaceIdRef="bw56" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>22</Coordinate>
-					<Coordinate>-13.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="InteriorFloor" id="bw55" >
-		<AdjacentSpaceId spaceIdRef="bw57" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>36</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-	<Surface surfaceType="Roof" id="bw56" >
-		<AdjacentSpaceId spaceIdRef="bw58" />
-		<PlanarGeometry>
-			<PolyLoop>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>-37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-				<CartesianPoint>
-					<Coordinate>37</Coordinate>
-					<Coordinate>-28.70000</Coordinate>
-					<Coordinate>48</Coordinate>
-				</CartesianPoint>
-			</PolyLoop>
-		</PlanarGeometry>
-	</Surface>
-</Campus>
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Chien Si</Name>
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>20</Coordinate>
+						</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="Shade" id="bwNaN" >
+			<Name>Building Chien Si</Name>
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>10</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-65</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-95</Coordinate>
+							<Coordinate>-90</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="ExteriorWall" id="bw-surface-1" >
+			<Name>ExteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+			<Opening openingType="OperableWindow" id="bw-opening-1" >
+				<PlanarGeometry>
+					<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-16</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-16</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>16</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>16</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+				</PlanarGeometry>
+			</Opening>
+		</Surface>
+		<Surface surfaceType="InteriorWall" id="bw-surface-2" >
+			<Name>InteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
+			<AdjacentSpaceId spaceIdRef="bw-space-5" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="ExteriorWall" id="bw-surface-3" >
+			<Name>ExteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-2" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+			<Opening openingType="OperableWindow" id="bw-opening-3" >
+				<PlanarGeometry>
+					<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>16</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>16</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-16</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-16</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+				</PlanarGeometry>
+			</Opening>
+		</Surface>
+		<Surface surfaceType="InteriorWall" id="bw-surface-4" >
+			<Name>InteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-2" />
+			<AdjacentSpaceId spaceIdRef="bw-space-5" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="ExteriorWall" id="bw-surface-5" >
+			<Name>ExteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-3" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+			<Opening openingType="OperableWindow" id="bw-opening-5" >
+				<PlanarGeometry>
+					<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>20</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>20</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-20</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-20</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+				</PlanarGeometry>
+			</Opening>
+		</Surface>
+		<Surface surfaceType="InteriorWall" id="bw-surface-6" >
+			<Name>InteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-3" />
+			<AdjacentSpaceId spaceIdRef="bw-space-5" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="ExteriorWall" id="bw-surface-7" >
+			<Name>ExteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-4" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+			<Opening openingType="OperableWindow" id="bw-opening-7" >
+				<PlanarGeometry>
+					<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-20</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-20</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>20</Coordinate>
+							<Coordinate>8.40000</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>20</Coordinate>
+							<Coordinate>3.60000</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+				</PlanarGeometry>
+			</Opening>
+		</Surface>
+		<Surface surfaceType="InteriorWall" id="bw-surface-8" >
+			<Name>InteriorWall</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-4" />
+			<AdjacentSpaceId spaceIdRef="bw-space-5" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>25</Coordinate>
+							<Coordinate>-35</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="SlabOnGrade" id="bw-surface-9" >
+			<Name>SlabOnGrade</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-5" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>0</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="Roof" id="bw-surface-10" >
+			<Name>Roof</Name>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="bw-space-4" />
+			<PlanarGeometry>
+				<PolyLoop>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>-40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+						<CartesianPoint>
+							<Coordinate>40</Coordinate>
+							<Coordinate>-50</Coordinate>
+							<Coordinate>12</Coordinate>
+						</CartesianPoint>
+					</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+	</Campus>
+	<Zone id="bw-zone-1" >
+		<Name>zone 1</Name>
+		<Description>length front</Description>
+	</Zone>
+	<Zone id="bw-zone-2" >
+		<Name>zone 2</Name>
+		<Description>length back </Description>
+	</Zone>
+	<Zone id="bw-zone-3" >
+		<Name>zone 3</Name>
+		<Description>width left</Description>
+	</Zone>
+	<Zone id="bw-zone-4" >
+		<Name>zone 4</Name>
+		<Description>width right</Description>
+	</Zone>
+	<Zone id="bw-zone-5" >
+		<Name>zone 5</Name>
+		<Description>interior area</Description>
+	</Zone>
+	<DocumentHistory>
+	</DocumentHistory>
 </gbXML>

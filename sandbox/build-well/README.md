@@ -101,17 +101,25 @@ _To be expanded and explained in more detail as time goes on._
 ### mnu-settings-site.html
 
 * 2017-10-02 ~ fix toggle edges
-* 2017-10-02 ~ Ground & Helpers don't toggle after change in gridsize
+* 2017-10-02 ~ Ground & Helpers don't toggle after change in grid size
 * 2017-10-02 ~ Add options to grid size / prevent spurious values
 
 
 ### mnu-gbxml-export.html
 
+* 2017-10-11 ~ Export diagonal walls?
 * 2017-10-05 ~ Export overhang and fin data
 * 2017-10-05 ~ Enable changing building orientation
 
 
 ## Change Log
+
+
+### 2017-10-11 ~ Theo
+
+22:01
+* Build Well R9.1
+* Exports gbXML files with exterior wall surfaces with openings that render properly in Open Studio
 
 
 ### 2017-10-10 ~ Theo

@@ -26,10 +26,6 @@
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
-	select { width: 100%; }
-	summary { outline: none; font-size: 14pt }
-	textarea { box-sizing: border-box; height: 500px; width: 100%; }
-
 	.floatRight { float: right; width: 70px;}
 
 	#divContents { height: 100%; width: 100%; }
@@ -76,8 +72,8 @@
 				<input id=inpPerimeterDepth type=number min=10 max=20 value=15 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title='measured in percent: 1 to 99' >Window Wall Ratio:
-				<input type=number id=inpWindowWallRatio min=1 max=99 step=1 value=40 onchange=updateShape(); class=floatRight />
+			<p title= 'measured in percent: 1 to 99' >Window Wall Ratio:
+				<input type=number id=inpWindowWallRatio min=1 max=99 step=1 value=40 oninput="validity.valid||(value='');" onclick=updateShape(); class=floatRight />
 			</p>
 
 			<p title='Depicted only when > 0 and < 10' >Overhang Depth: 
@@ -93,8 +89,6 @@
 		<div id="divContents" ></div>
 
 <script>
-
-	var spaceId;
 
 	const ifrSource='build-well-threejs.html';
 	const infoURI='https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/'
@@ -150,9 +144,7 @@
 
 		} else {
 
-//console.log( 'box shape ', divContents.innerHTML );
-
-			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSource + ' ></iframe>';
+			divContents.innerHTML = '<iframe id=ifrContents src=' + ifrSourceURI + ' ></iframe>';
 
 			scope = ifrContents.contentWindow;
 
@@ -222,7 +214,9 @@
 
 		spaceId = 0;
 
-		let building = buildings.getObjectByName( 'The Building' );
+		name = 'The Building';
+
+		let building = buildings.getObjectByName( name );
 
 		updateMenuArea();
 		updateMenuExtras();
@@ -237,7 +231,8 @@
 		bud.zones = [];
 		bud.spaces = [];
 
-		building.name = 'The Building';
+		building.name = name;
+		bud.buildingId = 1;
 		bud.orientation = inpOrientation.value ? parseFloat( inpOrientation.value ) : 0;
 		building.rotation.z = - d2r * bud.orientation;
 		buildings.add( building );
@@ -294,7 +289,7 @@
 		const building = buildings.getObjectByName( 'The Building' );
 		const bud = building.userData;
 
-		inpNumberOfFloors.value = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ) : 1;
+//		inpNumberOfFloors.value = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ) : 1;
 
 		const height = inpFloorHeight.value ? Math.abs( parseFloat( inpFloorHeight.value ) ): parseFloat( inpFloorHeight.min );
 		const perDep = inpPerimeterDepth.value ? parseFloat( inpPerimeterDepth.value ) : parseFloat( inpPerimeterDepth.min );
@@ -332,16 +327,17 @@
 		const spaces = bud.spaces;
 
 		let area, volume, wallExt, wall, floor, roof;
+		let spaceId = 0;
 
+		for ( var i = 0; i < floors; i++ ) { // 'var' !important > lets 'i' be floor # of roof slab
 
-		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
-
+			const storey = i + 1;
 // length front
 			spaceId ++;
 			spaceIdInside = spaceId + 4;
 			area = ( len - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length front', area: area, storey: i, volume: volume, zone: 0 } );
+			volume = area * bud.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length front', area: area, storey: storey, volume: volume, zone: 1 } );
 
 			if ( i === 0 ) { zones.push( { name: 'zone 1', description: 'length front' } ); }
 
@@ -362,8 +358,8 @@
 // length back
 			spaceId ++;
 			area = ( len - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length back', area: area, storey: i, volume: volume, zone: 1 } );
+			volume = area * bud.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length back', area: area, storey: storey, volume: volume, zone: 2 } );
 
 			if ( i === 0 ) { zones.push( { name: 'zone 2', description: 'length back ', area: area, volume: volume } ); }
 
@@ -384,10 +380,10 @@
 // width left
 			spaceId ++;
 			area = ( wid - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'width left', area: area, storey: i, volume: volume, zone: 2 } );
+			volume = area * bud.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'width left', area: area, storey: storey, volume: volume, zone: 3 } );
 
-			if ( i === 0 ) { zones.push( { name: 'zone 4', description: 'width left', area: area, volume: volume } ); }
+			if ( i === 0 ) { zones.push( { name: 'zone 3', description: 'width left', area: area, volume: volume } ); }
 
 			wallExt = createExternalWall( wid, hgt, i, spaceId );
 			wallExt.rotation.z = Math.PI * 0.5;
@@ -407,10 +403,10 @@
 // width right
 			spaceId ++;
 			area = ( wid - perDep ) * perDep;
-			volume = area * building.userData.floorHeight;
-			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'width right', area: area, storey: i, volume: volume, zone: 3 } );
+			volume = area * bud.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'width right', area: area, storey: storey, volume: volume, zone: 4 } );
 
-			if ( i === 0 ) { zones.push( { name: 'zone 5', description: 'width right', area: area, volume: volume } ); }
+			if ( i === 0 ) { zones.push( { name: 'zone 4', description: 'width right', area: area, volume: volume } ); }
 
 			wallExt = createExternalWall( wid, hgt, i, spaceId );
 			wallExt.rotation.z = -Math.PI / 2;
@@ -430,8 +426,8 @@
 // slabs
 			spaceId ++;
 			area = ( len - 2 * perDep ) * ( wid - 2 * perDep );
-			volume = area * building.userData.floorHeight;
-			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'floors', area: area, storey: i, volume: volume, zone: 4 } );
+			volume = area * bud.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'interior area', area: area, storey: storey, volume: volume, zone: 5 } );
 
 			if ( i === 0 ) { zones.push( { name: 'zone 5', description: 'interior area', area: area, volume: volume } ); }
 
@@ -486,19 +482,17 @@
 			v2( 0, 0 ),
 			v2( length, 0 ),
 			v2( length, height ),
-			v2( 0, height ),
-			v2( 0, 0 )
+			v2( 0, height )
 		];
 		const shape = new THREE.Shape( shapeVertices );
 
 		const holeVertices = [
-			v2( length05 - deltaL, height05 - deltaH ),
-			v2( length05 + deltaL, height05 - deltaH ),
-			v2( length05 + deltaL, height05 + deltaH ),
 			v2( length05 - deltaL, height05 + deltaH ),
+			v2( length05 + deltaL, height05 + deltaH ),
+			v2( length05 + deltaL, height05 - deltaH ),
 			v2( length05 - deltaL, height05 - deltaH )
 		];
-		const hole = new THREE.Path()
+		const hole = new THREE.Path();
 		hole.fromPoints( holeVertices );
 
 		shape.holes.push( hole );
@@ -575,7 +569,6 @@
 		return mesh;
 
 	}
-
 
 </script>
 </body>

@@ -98,6 +98,20 @@ See also:
 
 ### Surface Types
 
+For Open Studio import
+
+#### ExteriorWall
+
+* Needs single adjacency
+
+#### InteriorFloor
+
+* Needs single adjacency
+
+#### InteriorWall
+
+* Needs double adjacency
+ 
 #### Roof
 
 * Needs single adjacency
@@ -108,6 +122,9 @@ See also:
 * Needs no adjacency
 * CAD id is nice
 
+#### SlabOnGrade
+
+* Single adjacency ( not two )
 
 
 ## Change Log
