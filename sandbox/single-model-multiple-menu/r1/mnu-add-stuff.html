@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic menu template" >
+<meta name = "description" content = "Add meshes to an existing model" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-12" >
 <title>Add Stuff</title>
@@ -17,10 +17,6 @@
 	a:hover, a:focus{ background-color: yellow; color: #aaa; }
 	h3 { margin: 0; }
 
-	select { width: 100%; }
-	summary { outline: none; font-size: 12pt }
-	textarea { box-sizing: border-box; height: 200px; width: 100%; }
-
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
@@ -28,13 +24,13 @@
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
-	.floatRight { float: right; width: 70px;}
+	select { width: 100%; }
 
-	#divContents { height: 100%; width: 100%; }
-	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+	.floatRight { float: right; width: 70px;}
 
 	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
 
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
 </style>
 </head>
@@ -73,7 +69,7 @@
 
 	const ifrSource = 'template-threejs-shade.html';
 
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/';
+	const infoURI = 'https://github.com/ladybug-tools/spider/blob/master/sandbox/single-model-multiple-menu/r1/mnu-add-stuff.html';
 
 	var object3D;
 
