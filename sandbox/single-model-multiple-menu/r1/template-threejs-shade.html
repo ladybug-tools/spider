@@ -6,8 +6,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-09-25" >
-<title></title>
+<meta name = "date" content = "2017-10-02" >
+<title>Template Three.js Shade</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -28,45 +28,45 @@
 	<div id = "menu" >
 
 		<div id = "title" ></div>
-		<p id = "contents" >
+		<div id = "contents" >
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
-		</p>
-
+		</div>
+			<div id=log ></div>
 	</div>
 
 	<div id= "headsUp" ></div>
 
 <script>
 
+	
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/scatter-well/';
+
 	var renderer, camera, controls, scene;
 
-	var lightAmbient, lightDirectional, cameraHelper, axisHelper;
+	var lightAmbient, lightDirectional;
+	var ground, cameraHelper, axesHelper;
 
 	init();
 	animate();
 
 	function init() {
 
-		if ( window.top === window.self ) {
-
-			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
-
-		}
+		title.innerHTML = 
+			'<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMap.enabled = true;
-		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-		renderer.shadowMap.renderReverseSided = false;
-		renderer.shadowMap.renderSingleSided = false;
+
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
 		camera.position.set( 100, -100, 100 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 2000;
+		controls.maxDistance = 600;
 		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
@@ -75,19 +75,12 @@
 		scene.add( lightAmbient );
 
 		const size = 100
-		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
+//		lightDirectional.position.set( 1, -1, 1 ).normalize();
 		lightDirectional.position.set( -size, size, size );
-		lightDirectional.shadow.camera.scale.set( 10, 10, 3 );
-		lightDirectional.shadow.mapSize.width = 2048;  // default 512
-		lightDirectional.shadow.mapSize.height = 2048;
+		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
 		lightDirectional.castShadow = true;
-
 		scene.add( lightDirectional );
-
-		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
-		camera.add( lightPoint );
-		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
-		scene.add( camera );
 
 		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera ) 
 		scene.add( cameraHelper );
@@ -100,8 +93,7 @@
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-//		addAssets();
-
+		addAssets();
 
 	}
 
@@ -110,23 +102,31 @@
 
 		var geometry, material, mesh;
 
-		geometry = new THREE.SphereBufferGeometry( 25, 50, 50 );
+		object3D = new THREE.Object3D();
+		object3D.name = 'object3D';
+
+		geometry = new THREE.SphereBufferGeometry( 1, 50, 50 );
 		material = new THREE.MeshPhongMaterial( { color: 0xff0000 });
 		mesh = new THREE.Mesh( geometry, material );
+		mesh.scale.set( 25, 25, 25 );
+
 		mesh.castShadow = mesh.receiveShadow = true;
+		mesh.name = 'sphere 1';
 
-		scene.add( mesh );
+		object3D.add( mesh )
+		scene.add( object3D );
 
-		geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
+		geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 		material = new THREE.MeshPhongMaterial( { color: 0xfffff * Math.random() });
-		mesh = new THREE.Mesh( geometry, material );
-		mesh.position.z = -50;
-		mesh.castShadow = mesh.receiveShadow = true;
+		ground = new THREE.Mesh( geometry, material );
+		ground.position.z = -50;
+		ground.scale.set( 50, 50, 50 );
+		ground.name = 'ground';
+		ground.castShadow = ground.receiveShadow = true;
 
-		scene.add( mesh );
+		scene.add( ground );
 
 	}
-
 
 
 
