@@ -93,41 +93,177 @@ See also:
 * http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml
 * https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere
 
-## Notes
 
+
+## gbXML Notes
 
 ### Surface Types
 
-For Open Studio import
+The following is taken from the GreenBuilding gbXML-Schema on 2017-10-14:
 
-#### ExteriorWall
+https://github.com/GreenBuildingXML/gbXML-Schema/blob/master/GreenBuildingXML_Ver6.01.xsd#L2071-L2149
 
-* Needs single adjacency
+The documentation lines are taken from the gbXML-Schema.
 
-#### InteriorFloor
+Surface types marked with an asterisk are currently recognized by gbXML Reader. Eventually all types will be handled. Please do recommend any type that should be looked after sooner rather than later.
 
-* Needs single adjacency
 
-#### InteriorWall
+### InteriorWall *
+
+Documentation: The portion of the building envelope, including opaque area and fenestration, that is adjacent to two conditioned or unconditioned spaces and that is vertical or tilted at an angle of 60° from horizontal or greater.
 
 * Needs double adjacency
- 
-#### Roof
+
+### ExteriorWall *
+
+Documentation: The portion of the building envelope, including opaque area and fenestration, that is adjacent to one conditioned or unconditioned space and that is vertical or tilted at an angle of 60° from horizontal or greater.
 
 * Needs single adjacency
-	* Is it OK if a single surface is used for the entire roof or must the roof be divided into multiple surfaces with individual surfaces for each space below the roof?
 
-#### Shade
+### Roof *
+
+Documentation: The upper portion of the building envelope, including opaque areas and fenestration, that is adjacent to one conditioned or unconditioned space and that is horizontal or tilted at an angle of less than 60° from horizontal.
+
+* Needs single adjacency
+
+* Q: Is it OK if a single surface is used for the entire roof or must the roof be divided into multiple surfaces with individual surfaces for each space below the roof?
+* A: All vertexes demarking a change of plane should be contiguous,
+
+Open Studio accepts gbXML files with roofs that cover multiple spaces, but thi may cause issues with down stream analysis.
+
+### InteriorFloor *
+
+Documentation: The lower portion of the building envelope, including opaque area and fenestration, that has conditioned or semiheated space above and is horizontal or tilted at an angle of less than 60 degrees from horizontal but excluding slab-on-grade floors.
+
+* Needs single adjacency
+
+See notes on roof - which also apply to floor
+
+### ExposedFloor
+
+Documentation: The floor area exposed to non-conditioned space or outside.
+
+### Shade *
+
+Documentation: Documentation: Surface not adjacent to any spaces with tilt between 0° and 180°.
 
 * Needs no adjacency
-* CAD id is nice
+* RectangularGeometry is not essential
+* CADObjectId is nice to have
+* Shade surfaces indicating adjacent buildings have so need to be manifold. Thus floors may be omitted. {Theoretically, roofs and back faces could be omitted as well. )
 
-#### SlabOnGrade
+Is the following a well-formed Shade entry? Should anything be added?
 
-* Single adjacency ( not two )
+```
+    <Surface surfaceType="Shade" constructionIdRef="construction-31" exposedToSun="true" id="aim0186">
+      <Name>aim0186_N_Shade_sp-None</Name>
+      <RectangularGeometry>
+        <Azimuth>0</Azimuth>
+        <Tilt>90</Tilt>
+        <Height>1.23596</Height>
+        <Width>22.72451</Width>
+        <CartesianPoint>
+          <Coordinate>-104.77550000</Coordinate>
+          <Coordinate>93.755210006562</Coordinate>
+          <Coordinate>23.76405000</Coordinate>
+        </CartesianPoint>
+        <PolyLoop>
+          <CartesianPoint>
+            <Coordinate>22.72450000</Coordinate>
+            <Coordinate>0.00000000</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>22.72450000</Coordinate>
+            <Coordinate>1.23595000</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>0.00000000</Coordinate>
+            <Coordinate>1.23595000</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>0.00000000</Coordinate>
+            <Coordinate>0.00000000</Coordinate>
+          </CartesianPoint>
+        </PolyLoop>
+      </RectangularGeometry>
+      <PlanarGeometry>
+        <PolyLoop>
+          <CartesianPoint>
+            <Coordinate>-127.50000000</Coordinate>
+            <Coordinate>93.75521000</Coordinate>
+            <Coordinate>23.76405000</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-127.50000000</Coordinate>
+            <Coordinate>93.75521000</Coordinate>
+            <Coordinate>25.00000000</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-104.77550000</Coordinate>
+            <Coordinate>93.75521000</Coordinate>
+            <Coordinate>25.00000000</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-104.77550000</Coordinate>
+            <Coordinate>93.75521000</Coordinate>
+            <Coordinate>23.76405000</Coordinate>
+          </CartesianPoint>
+        </PolyLoop>
+      </PlanarGeometry>
+      <CADObjectId>5</CADObjectId>
+    </Surface>
+```
+
+### UndergroundWall
+
+Documentation: The portion of the building envelope, including opaque area and fenestration, that is adjacent to one conditioned or unconditioned space and earth (soil) and that is vertical or tilted at an angle of 60° from horizontal or greater.
+
+### UndergroundSlab
+
+Documentation: Surface adjacent to one conditioned or unconditioned space and earth (soil) below grade with a tilt between 150° and 180°.
+
+### Ceiling
+
+Documentation: The upper portion of the building envelope that is adjacent to two conditioned or unconditioned spaces and that is horizontal or tilted at an angle of less than 60° from horizontal.
+
+### Air
+
+Documentation: Air membrane between two conditioned or unconditioned spaces with a tilt between 0° and 180°. 
+
+### UndergroundCeiling
+
+Documentation: The portion of the building envelope, including opaque area and fenestration, that is adjacent to one conditioned or unconditioned space and earth (soil) and that is horizontal or tilted at an angle of less than 60° from horizontal.
+
+### RaisedFloor
+
+Documentation: The lower portion of the building envelope, including opaque area and fenestration, that is adjacent to one conditioned or unconditioned space and the outside and is horizontal or tilted at an angle between 150° and 180°.
+
+### SlabOnGrade *
+
+Documentation: The lower portion of the building envelope, including opaque area and fenestration, that is adjacent to one conditioned or unconditioned space and earth (soil) at grade with a tilt between 150° and 180°.
+
+* Schema: two adjacencies - both linking to same space
+* Open Studio: single adjacency
+
+### FreestandingColumn
+
+Documentation: Freestanding column in space specified by its top surface having the same ifcGUID.
+
+### EmbeddedColumn
+
+Documentation: Embedded column in wall specified by a surface which is coplanar with (one of) the embedding wall(s).
+
+
+
+
 
 
 ## Change Log
+
+
+### 2017-10-14 ~ Theo
+
+* Add more text to surface type notes
 
 
 ### 2017-10-09 ~ Theo

@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Difficult things done easily" >
 <meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-12" >
-<title>Single Model Multiple Menus R1</title>
+<meta name = "date" content = "2017-10-13" >
+<title>Build Well R10</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -50,24 +50,29 @@
 
 				<div><a href=JavaScript:getContentMarkdown("../README.md"); >Read me / welcome</a></div>
 
-				<div><a href=JavaScript:getMenuHTML("mnu-template.html"); >Menu Template</a>
-					&raquo; <a href="mnu-template.html " target="_blank" title = 'standalone template test script' >&#x1F5D7;</a>
+				<div><a href=JavaScript:getMenuHTML("mnu-adjacent-buildings.html"); >Adjacent Buildings</a>
+					&raquo; <a href="mnu-adjacent-buildings.html " target="_blank" title = 'standalone adjacent-buildings test script' >&#x1F5D7;</a>
 				</div>
 
-				<div><a href=JavaScript:getMenuHTML("mnu-add-stuff.html"); >Add Stuff</a>
-					&raquo; <a href="mnu-add-stuff.html " target="_blank" title = 'standalone add test script' >&#x1F5D7;</a>
+				<div><a href=JavaScript:getMenuHTML("mnu-shape-box.html"); >Box Shape</a>
+					&raquo; <a href="mnu-shape-box.html " target="_blank" title = 'standalone box shape test script' >&#x1F5D7;</a>
 				</div>
 
-				<div><a href=JavaScript:getMenuHTML("mnu-edit.html"); >Edit things</a>
-					&raquo; <a href="mnu-edit.html " target="_blank" title = 'standalone edit test script' >&#x1F5D7;</a>
+				<div><a href=JavaScript:getMenuHTML("mnu-shape-ell-one.html"); >L Shape</a>
+					&raquo; <a href="mnu-ell-one.html " target="_blank" title = 'standalone L shape test script' >&#x1F5D7;</a>
 				</div>
 
-				<div><a href=JavaScript:getMenuHTML("mnu-settings.html"); >Set Settings</a>
+
+				<div><a href=JavaScript:getMenuHTML("mnu-settings.html"); >Site Settings</a>
 					&raquo; <a href="mnu-settings.html " target="_blank" title = 'standalone settings test script' >&#x1F5D7;</a>
 				</div>
 
-				<div><a href=JavaScript:getMenuHTML("mnu-hud.html"); >Inspect them</a>
+				<div><a href=JavaScript:getMenuHTML("mnu-hud.html"); >Heads-Up Display</a>
 					&raquo; <a href="mnu-hud.html " target="_blank" title = 'standalone hud test script' >&#x1F5D7;</a>
+				</div>
+
+				<div><a href=JavaScript:getMenuHTML("mnu-gbxml-export.html"); >gbXML Export</a>
+					&raquo; <a href="mnu-gbxml-export.html " target="_blank" title = 'standalone gbxml-export test script' >&#x1F5D7;</a>
 				</div>
 
 				<br>
@@ -90,18 +95,18 @@
 
 	</div>
 
-	<iframe id=ifrThree src=template-threejs-shade.html ></iframe>
+	<iframe id=ifrThree src=build-well-threejs.html ></iframe>
 
 	<div id =divContents ></div>
 
 <script>
 
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
 
 	const b = '<br>';
 	const txt = 
 	'<hr><p>' +
-		'Welcome to some fresh ways and simple methods for handling complex 3D environments' +
+		'Welcome to Build Well r10' +
 	'</p>';
 
 

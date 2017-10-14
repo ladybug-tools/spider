@@ -5,9 +5,11 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Basic menu template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-12" >
+<meta name = "date" content = "2017-10-13" >
 <title>Settings</title>
 <style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
 /* https://www.w3schools.com/colors/colors_names.asp */
 
 	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
@@ -43,15 +45,17 @@
 
 		<div id=info ></div>
 
+<!--
 		<p title = 'Size in black onions.' >Ground Size:
 			<input type=number id=inpGroundSize min=30 max=1000 step=10 value=50 required onchange=updateGroundSize(); class = floatRight />
 		</p>
+-->
 
 		<p><button onclick=toggleSceneAutoRotate() title= 'Stop the sinning!' > Toggle scene rotation </button></p>
 
 		<p><button onclick=toggleHelpers(); title = 'Make axis and grid invisible' > Toggle helpers </button></p>
 
-		<p><button onclick=toggleGround(); > Toggle ground </button></p>
+		<p><button onclick=toggleGround(); > Toggle grid </button></p>
 
 		<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>
 
@@ -69,7 +73,7 @@
 
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/';
 
-	let meshEdges;
+	let objects;
 
 	let scope;
 
@@ -128,7 +132,7 @@
 		gridHelper = scope.gridHelper;
 		ground = scope.ground;
 
-		objects = scene.getObjectByName( 'object3d' );
+		buildings = scope.meshes;
 		ground = scope.ground;
 
 console.log( 'objects', objects )
@@ -153,6 +157,7 @@ console.log( 'objects', objects )
 	function toggleHelpers() {
 
 		cameraHelper.visible = !cameraHelper.visible;
+
 		axesHelper.visible = !axesHelper.visible;
 
 	}
@@ -161,7 +166,7 @@ console.log( 'objects', objects )
 
 	function toggleGround() {
 
-		ground.visible = !ground.visible;
+		gridHelper.visible = !gridHelper.visible;
 
 	}
 
@@ -191,10 +196,10 @@ console.log( 'objects', objects )
 
 
 
-	function toggleEdges(objects) {
+	function toggleEdges() {
 
 
-		objects.traverse( function ( child ) {
+		scene.traverse( function ( child ) {
 
 			if ( child instanceof THREE.LineSegments ) {
 
@@ -220,113 +225,6 @@ console.log( 'objects', objects )
 			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
 
 	}
-
-
-
-
-
-/////////////////////
-
-
-	function updateSelectObjects() {
-
-		selObjects.innerHTML = '';
-
-		for ( let i = 0; i < object3D.children.length; i++ ) {
-
-			let obj = object3D.children[ i ];
-			selObjects.innerHTML += '<option>' + obj.name + '</option>'; 
-
-		}
-
-		selObjects.selectedIndex = 0;
-
-		getObject();
-
-	}
-
-
-
-	function deleteObject() {
-
-		let obj = object3D.children[ selObjects.selectedIndex ];
-
-		if ( ! obj ){ alert( 'Try adding a new object and selecting it before doing a delete' ); return;  }
-		object3D.remove( obj );
-		obj.geometry.dispose();
-		obj.material.dispose();
-
-		updateSelectObjects();
-
-	}
-
-
-
-	function addObject() {
-
-		let geometry, material, mesh
-
-		geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-		material = new THREE.MeshPhongMaterial( { color: 0xfffff * Math.random(), transparent: true });
-		mesh = new THREE.Mesh( geometry, material );
-		mesh.scale.set ( 20, 20, 50 );
-		mesh.position.set( 0, 0, 0.5 * mesh.scale.z );
-		mesh.name = 'mesh ' + object3D.children.length;
-		object3D.add( mesh );
-
-		updateSelectObjects()
-
-	}
-
-
-
-	function getObject() {
-//
-		const obj = scene.getObjectByName( selObjects.value );
-
-		object3D.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-					child.material.opacity = child.name === obj.name ? 1 : 0.5;
-
-			}
-
-		} );
-
-		if ( obj.material ) { obj.material.opacity = 1; }
-
-	}
-
-
-
-	function saveFile() {
-
-		var output = object3D.toJSON();
-
-		try {
-
-			output = JSON.stringify( output, parseNumber, '\t' );
-			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
-
-		} catch ( e ) {
-
-			output = JSON.stringify( output );
-
-		}
-
-		var blob = new Blob( [ output ] );
-		var a = document.body.appendChild( document.createElement( 'a' ) );
-
-		a.href = window.URL.createObjectURL( blob );
-		a.download = 'object3d.json';
-		a.click();
-//		delete a;
-		a = null;
-
-	}
-
-
 
 
 </script>

@@ -3,7 +3,7 @@
 
 [Build Well Read Me]( #README.md )
 ====
-_A well for building well._
+_A well for object well._
 
 <iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/sandbox/build-well/index.html width=100% height=600px ></iframe>
 
@@ -22,9 +22,9 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Features
 
-* Create simple 3D building models by adjusting a variety of numerical parameters
+* Create simple 3D object models by adjusting a variety of numerical parameters
 * Create a site context by adding, editing, saving or deleting simple forms to represent adjacent structures
-* Update building models by selecting parameters from menus
+* Update object models by selecting parameters from menus
 * Create text reports for the geometry
 * Adjust a variety of display settings
 * Every menu item is built on its own standalone, easy-peasy HTML file test case 
@@ -33,8 +33,8 @@ _We often think of software of software just appearing as if by magic. The reali
 ## Issues
 
 
-* 2017-10-10 ~ Menu interaction that does not revert scene and buildings to defaults. Selecting various, Adjacent Buildings menu and Shapes menus, etc should maintain current set of building data
-* 2017-09-29 ~ Some variables are hardwired to 'The Building' string. Should be to whatever you want it to be ( & UUID ).
+* 2017-10-10 ~ Menu interaction that does not revert scene and objects to defaults. Selecting various, Adjacent objects menu and Shapes menus, etc should maintain current set of object data
+* 2017-09-29 ~ Some variables are hardwired to 'The object' string. Should be to whatever you want it to be ( & UUID ).
 * 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
 
 
@@ -76,27 +76,27 @@ _To be expanded and explained in more detail as time goes on._
 
 ### build-well-threejs.html
 
-* 2017-09-30 ~ Add selecting and moving buildings via pointing device
+* 2017-09-30 ~ Add selecting and moving objects via pointing device
 * 2017-10-02 ~ Add ortho camera
 * 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
 	* Inworld text is a whole thing in itself. Add in only when very necessary
 * 2017-09-21 ~ Color, shade and shadow
 
 
-### mnu-adjacent-buildings.html
+### mnu-adjacent-objects.html
 
 * 2017-09-22 ~ Add lat & Lon or geocoder input
 * 2017-09-22 ~ Add shade/shadow toggle
 * 2017-09-22 ~ Add solar calculator
-* 2017-09-22 ~ Allow any and all buildings to have shape parameters?
+* 2017-09-22 ~ Allow any and all objects to have shape parameters?
 
 ### mnu-box-shape.html
 
-* 2017-09-29 ~ Add complete and current set of parameters to 'The Building' object - to enable roundtrip with adj build menu
+* 2017-09-29 ~ Add complete and current set of parameters to 'The object' object - to enable roundtrip with adj build menu
 
 ### mnu-ell-shape-one.html
 
-* 2017-09-21 ~ Match building shapes to Ben's spec
+* 2017-09-21 ~ Match object shapes to Ben's spec
 
 ### mnu-settings-site.html
 
@@ -109,10 +109,19 @@ _To be expanded and explained in more detail as time goes on._
 
 * 2017-10-11 ~ Export diagonal walls?
 * 2017-10-05 ~ Export overhang and fin data
-* 2017-10-05 ~ Enable changing building orientation
+* 2017-10-05 ~ Enable changing object orientation
+
+
 
 
 ## Change Log
+
+### 2017-10-13 ~ Theo
+
+11:56
+* Build Well R10
+* now based on single-model-multiple-menu
+
 
 
 ### 2017-10-11 ~ Theo
@@ -135,7 +144,7 @@ _To be expanded and explained in more detail as time goes on._
 17:19
 * mnu-gbxml-export.html
 	* Beginning to export quite a bit of gbXML data
-	[x] 2017-10-01 ~ Export all building geometries
+	[x] 2017-10-01 ~ Export all object geometries
 [x] 2017-09-30 ~ Floor area not being updated correctly
 
 ### 2017-10-03 ~ Theo
@@ -160,7 +169,7 @@ _To be expanded and explained in more detail as time goes on._
 * mnu-shape-ell-one.html
 	* Add updateMenuExtras function
 	* Simplified and added more defensive code
-* mnu-settings-building.html
+* mnu-settings-object.html
 	* Not yet wired up
 * mnu-settings-site.html
 
@@ -168,7 +177,7 @@ _To be expanded and explained in more detail as time goes on._
 
 13:23
 
-* mnu-adjacent-buildings.html
+* mnu-adjacent-objects.html
 	* Add oninput="validity.valid||(value='');" to length, width & height to prevent negative values
 [x] 2017-09-30 ~ Funny behaviors if you play with the grid a lot << not so funny once you understand the logic that there is always a minimum based om the axis you are NOT moving along
 No long relevant
@@ -199,7 +208,7 @@ It will also facilitate the development and display of the JSON and gbXML export
 [x] 2017-09-21 ~ See if perimeter depth diagonals actually add any pertinent information
 	* Rule of thumb: Show what you will export and no more.
 	* Currently the external wall and perimeter depth walls provide sufficient data for downstream apps. No?
-[x] 2017-09-21 ~ Finish add data reporting parameters, eg openings, adjacent buildings
+[x] 2017-09-21 ~ Finish add data reporting parameters, eg openings, adjacent objects
 * 2017-09-22 ~ Consider more suitable name for this menu item
 * 2017-09-22 ~ Add ground that can receive shadow
 * Add quite a bit of text to read me
@@ -212,8 +221,8 @@ It will also facilitate the development and display of the JSON and gbXML export
 * build-well.html
 	* Add link to read me on menu / looked into how best to add license
 	* Add three.js stats indicator
-* mnu-adjacent-buildings.html: grid resize should work with negative offsets / tests ok in FF win
-	* add building: the new building becomes selected automatically
+* mnu-adjacent-objects.html: grid resize should work with negative offsets / tests ok in FF win
+	* add object: the new object becomes selected automatically
 * build-well-threejs.html
 	* delete large center axis indicator
 17:01
@@ -231,7 +240,7 @@ online gbXML validator
 * rename three.js base file
 * Site context menu now settings menu and moved to bottom / update its css
 * build-well-threejs.html: add view buttons / update css / set max zoom distance
-* mnu-adjacent-buildings.html: add self adjusting grid / rotation is clockwise / old-timey axis indicator: started
+* mnu-adjacent-objects.html: add self adjusting grid / rotation is clockwise / old-timey axis indicator: started
 13:18
 * mnu-shape-box.html: update calcs: area and length lead / 
 	* Overhangs depicted to scale, max distance set to 10
@@ -242,7 +251,7 @@ online gbXML validator
 
 14:27
 * R5.3
-* Working on building data output - see Box Shape
+* Working on object data output - see Box Shape
 * Add About with copyright and license
 
 
@@ -276,7 +285,7 @@ online gbXML validator
 15:18 ~ 
 * start mnu-shape-ell-one.html r2
 * 16:34 ~ ell is swell. Biting the bullet. Setting Z axis as up. 
-* 17:30 ~ mnu-adjacent-buildings.html is now OK with Z up
+* 17:30 ~ mnu-adjacent-objects.html is now OK with Z up
 * 19:38 ~ L shape is mostly back. Both Box and L OK with Z being up
 [x] 2017-09-22 ~ Toggle rotation
 [x] 2017-09-22 ~ Add background color and toggle
@@ -297,15 +306,15 @@ online gbXML validator
 	* All menu parameters interact
 		[x] 2017-09-21 ~ Floor area to update according to shape parameters
 	* Wall Window Ratio now operates as desired, updates model in real-time
-	* Save building data to csv files using Ben's format
+	* Save object data to csv files using Ben's format
 
 Questions 14:23
 
 * Would you define or explain overhang as used in this context? Link to authoritative illustrated reference would be cool.
-* Should 'The Building' offset and orientation be set in it's shape menus or in the Adjacent Buildings menu?
-* Should 'The Building' have an offset? Or should it always have its lower left corder at 0,0?
-* Should orientation of 'The Building' occur at its center point or its lower left corner?
-* Currently Building Area and Floor Area are read only and are updated whenever length, width or number of f,oors are updated. Is this satisfactory?
+* Should 'The object' offset and orientation be set in it's shape menus or in the Adjacent objects menu?
+* Should 'The object' have an offset? Or should it always have its lower left corder at 0,0?
+* Should orientation of 'The object' occur at its center point or its lower left corner?
+* Currently object Area and Floor Area are read only and are updated whenever length, width or number of f,oors are updated. Is this satisfactory?
  
 
 ### 2017-09-21 ~ Theo
@@ -313,21 +322,21 @@ Questions 14:23
 
 * 11:30 ~ start r3. working on ui/css
 * 12:33 ~ UI cleaned up. No more details/summary. all html files controlled from container file
-	* start fixing bugs in adjacent-buildings.html
+	* start fixing bugs in adjacent-objects.html
 * 13:26 ~ most everything good in AB and G. Added floors, roof and internal walls to box shape. Now star L Shape
 
 * 15:15 ~  R4 started. Box shape in its own file. Will try to replicate with L Shape
 * 18:57 ~ BS * LS both operating quite well
 
-abbreviations relate to names of HTML files; ab = adjacent-buildings.html
+abbreviations relate to names of HTML files; ab = adjacent-objects.html
 
 
 ### 2017-09-20 ~ Theo
 
 * 14:56 ~  Start R2
-* Rebuilding in 'everything is a recipe' style. Using mnu-template & test-threejs basic
+* Reobject in 'everything is a recipe' style. Using mnu-template & test-threejs basic
 * 16:15 ~ 'Site Context' looking good
-* 17:47 ~ adjacent buildings.html looking good
+* 17:47 ~ adjacent objects.html looking good
 * 22:23 ~ Geometry.html is working
 * 22:56 ~ Currently three separate standalone scripts
 	* Makes testing and coding and understanding what's going on a bit easier
@@ -336,19 +345,19 @@ abbreviations relate to names of HTML files; ab = adjacent-buildings.html
 
 ### 2017-09-18 
 
-### Buildings Menu
+### objects Menu
 
-* Three buildings created by default
-	* Add and delete buildings: future release
+* Three objects created by default
+	* Add and delete objects: future release
 * Save file
-	* Saves buildings as a single 3D object
+	* Saves objects as a single 3D object
 	* All data stored in the 3D models
 	* File format is standard Three.js JSON
 	* Seems to be working just fine
 	* Many more options will become available
 * Open file
 	* Works barely OK
-	* Building data fields are updated but edits do yet update geometry
+	* object data fields are updated but edits do yet update geometry
 	* L Shape models not being loaded. Try using JSON loader instead of Object loader
 
 ### Site Context Menu

@@ -42,24 +42,23 @@
 
 		<div id=info ></div>
 
-		<p title = 'Select an object to edit' >New Meshes: 
-			<select id = selObjects onchange = getObject(); size = 5 ></select>
+		<p title = 'Select an object to edit' >Objects: 
+			<select id = selObject onchange = getObject(objects); size = 5 ></select>
 		</p>
 
-		<p>When there is more than one object, click an object title to highlight the 3D object</p>
 		<p>
-			<button onclick = deleteObject(); >delete</button>
-			<button onclick = addObject(); >add </button>
-			<button onclick = saveFile(); >save json file</button> 
+			<button onclick = deleteObject(objects); >delete</button>
+			<button onclick = addObject(objects); >add </button>
+			<button onclick = saveFile(objects); >save json file</button> 
 		</p>
 
 		<p>Click the buttons below to add things to the model</p>
 
-		<p><button onclick=drawCubes(); >draw cubes</button></p>
+		<p><button onclick=drawCubes(objects); >draw cubes</button></p>
 
-		<p><button onclick=drawGnomen(); >draw gnomen</button></p>
+		<p><button onclick=drawGnomen(objects); >draw gnomen</button></p>
 
-		<p><button onclick=drawStonehenge(); >draw stonehenge</button></p>
+		<p><button onclick=drawStonehenge(objects); >draw stonehenge</button></p>
 
 	</div>
 
@@ -71,7 +70,7 @@
 
 	const infoURI = 'https://github.com/ladybug-tools/spider/blob/master/sandbox/single-model-multiple-menu/r1/mnu-add-stuff.html';
 
-	var object3D;
+	var object3d;
 
 	let scope;
 
@@ -130,22 +129,24 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
-		object3D = scene.getObjectByName( 'object3D' );
+		objects = scene.getObjectByName( 'object3d' );
+		ground = scope.ground;
 
-console.log( 'scene', object3D );
+console.log( 'objects', objects );
 
-		updateSelectObjects();
+		updateSelectObjects( objects );
 
 	}
 
 
 
 
-	function drawCubes() {
+//////////////////
 
-		scene.remove( object3D );
 
-		object3D = new THREE.Object3D();
+	function drawCubes( objects, size = 100 ) {
+
+//		object3d = new THREE.Object3D();
 
 		let geometry, material, mesh, edges;
 
@@ -166,12 +167,12 @@ console.log( 'scene', object3D );
 			material = new THREE.MeshNormalMaterial( { transparent: true });
 
 			mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( 100 * Math.random() - 50, 100 * Math.random() - 50, 100 * Math.random() - 50 );
+			mesh.position.set( size * Math.random() - 0.5 * size, size * Math.random() - 0.5 * size, size * Math.random() - 0.5 * size );
 			mesh.rotation.set( 6.3 * Math.random(), 1.57 * Math.random(), 3.14 * Math.random() );
 			mesh.castShadow = true;
 			mesh.receiveShadow = true;
 			mesh.name = 'cube ' + i;
-			object3D.add( mesh );
+			objects.add( mesh );
 
 			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
 			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
@@ -180,21 +181,92 @@ console.log( 'scene', object3D );
 
 		}
 
-		object3D.name = 'object3D';
+//		object3d.name = 'cubes';
 
-		scene.add( object3D );
+//		objects.add( object3d );
 
-		updateSelectObjects();
+		updateSelectObjects( objects );
 
 	}
 
 
 
+	function drawStonehenge( objects ) {
+
+//		object3D = new THREE.Object3D();
+
+		number = 20;
+		angle = 6.283 / number;
+		radius = 120;
+		scale = 0.5;
+		for ( var i = 0; i < number; i++ ) {
+			var geometry = new THREE.BoxGeometry( 15, 100, 30 );
+			var color = 0xffffff * Math.random();
+			var material = new THREE.MeshPhongMaterial( { color: color, side: 2, transparent: true });
+			var mesh = new THREE.Mesh( geometry, material );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			mesh.rotation.y = - angle * i;
+			mesh.position.set( radius * Math.cos( angle * i ) , 25, radius * Math.sin( angle * i )  );
+//			mesh.rotation.x = Math.PI / 2;
+			mesh.name = 'stone ' + i;
+			mesh.scale.set( scale, scale, scale );
+			objects.add( mesh );
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			edges = new THREE.LineSegments( geometryEdge, material );
+//			edges.rotation.y = - angle * i;
+//			edges.position.set( radius * Math.cos( angle * i ) , 50, radius * Math.sin( angle * i )  );
+
+			mesh.add( edges );
+
+		}
+
+		number = 11;
+		angle = 6.283 / number;
+
+		for ( var i = 0; i < number; i++ ) {
+
+			var geometry = new THREE.BoxGeometry( 15, 20, 100 );
+			var color = 0xffffff * Math.random();
+			var material = new THREE.MeshPhongMaterial( { color: color, side: 2 });
+			var mesh = new THREE.Mesh( geometry, material );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+
+			mesh.rotation.y = -angle * i;
+			delta = 0.01 *  Math.random();
+			mesh.position.set( radius * Math.cos( ( delta + angle ) * i ) , 55, radius * Math.sin( ( delta + angle ) * i )  );
+//			mesh.rotation.x = Math.PI / 2;
+			mesh.name = 'lintel ' + i;
+			mesh.scale.set( scale, scale, scale );
+			objects.add( mesh );
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			var edges = new THREE.LineSegments( geometryEdge, material );
+
+			mesh.add( edges );
+
+		}
+
+//		object3D.rotation.x = Math.PI / 2;
+//		object3D.position.set( 0, 0, 0 );
+//		object3D.name = 'stonehenge';
+
+//		objects.add( object3D );
+
+		updateSelectObjects( objects );
+
+	}
+
+
 	function drawGnomen() {
 
-		scene.remove( object3D );
+		scene.remove( object3d );
 
-		object3D = new THREE.Object3D();
+		object3d = new THREE.object3d();
 
 		let geometry, material, mesh;
 
@@ -214,162 +286,150 @@ console.log( 'scene', object3D );
 
 		mesh.name = 'gnomen';
 
-		object3D.add( mesh );
+		object3d.add( mesh );
 
-		scene.add( object3D );
-
-		updateSelectObjects();
-
-	}
-
-
-
-	function drawStonehenge() {
-
-		scene.remove( object3D );
-
-		object3D = new THREE.Object3D();
-
-		number = 20;
-		angle = 6.283 / number;
-		radius = 20;
-		for ( var i = 0; i < number; i++ ) {
-			var geometry = new THREE.BoxGeometry( 15, 100, 30 );
-			var color = 0xffffff * Math.random();
-			var material = new THREE.MeshPhongMaterial( { color: color, side: 2, transparent: true });
-			var mesh = new THREE.Mesh( geometry, material );
-			mesh.castShadow = true;
-			mesh.receiveShadow = true;
-			mesh.rotation.y = - angle * i;
-			mesh.position.set( radius * Math.cos( angle * i ) , 5, radius * Math.sin( angle * i )  );
-			mesh.name = 'stone ' + i;
-			mesh.scale.set( 0.1, 0.1, 0.1 );
-			object3D.add( mesh );
-
-			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
-			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
-			edges = new THREE.LineSegments( geometryEdge, material );
-//			edges.rotation.y = - angle * i;
-//			edges.position.set( radius * Math.cos( angle * i ) , 50, radius * Math.sin( angle * i )  );
-
-			mesh.add( edges );
-
-		}
-
-		number = 9;
-		angle = 6.283 / number;
-
-		for ( var i = 0; i < number; i++ ) {
-
-			var geometry = new THREE.BoxGeometry( 15, 20, 100 );
-			var color = 0xffffff * Math.random();
-			var material = new THREE.MeshPhongMaterial( { color: color, side: 2 });
-			var mesh = new THREE.Mesh( geometry, material );
-			mesh.castShadow = true;
-			mesh.receiveShadow = true;
-
-			mesh.rotation.y = -angle * i;
-			delta = 0.01 *  Math.random();
-			mesh.position.set( radius * Math.cos( ( delta + angle ) * i ) , 11, radius * Math.sin( ( delta + angle ) * i )  );
-			mesh.name = 'lintel ' + i;
-			mesh.scale.set( 0.1, 0.1, 0.1 );
-			object3D.add( mesh );
-
-			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
-			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
-			var edges = new THREE.LineSegments( geometryEdge, material );
-
-			mesh.add( edges );
-
-		}
-
-		object3D.rotation.x = Math.PI / 2;
-		object3D.position.set( 0, 0, -25 );
-		object3D.name = 'object3D';
-
-		scene.add( object3D );
+		scene.add( object3d );
 
 		updateSelectObjects();
 
 	}
 
-///////////////////
+
+//////////////
 
 
-	function updateSelectObjects() {
 
-		selObjects.innerHTML = '';
+	function updateSelectObjects( objects ) {
 
-		for ( let i = 0; i < object3D.children.length; i++ ) {
+		selObject.innerHTML = '';
 
-			let obj = object3D.children[ i ];
-			selObjects.innerHTML += '<option>' + obj.name + '</option>'; 
+		for ( let i = 0; i < objects.children.length; i++ ) {
+
+			let obj = objects.children[ i ];
+			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
 
 		}
 
-		selObjects.selectedIndex = 0;
+		selObject.selectedIndex = 0;
 
-		getObject();
+		getObject( objects );
 
 	}
 
 
 
-	function deleteObject() {
+	function deleteObject( objects ) {
 
-		let obj = object3D.children[ selObjects.selectedIndex ];
+		let obj = objects.children[ selObject.selectedIndex ];
 
 		if ( ! obj ){ alert( 'Try adding a new object and selecting it before doing a delete' ); return;  }
-		object3D.remove( obj );
+		objects.remove( obj );
 		obj.geometry.dispose();
 		obj.material.dispose();
 
-		updateSelectObjects();
+		updateSelectObjects( objects );
 
 	}
 
 
 
-	function addObject() {
+	function addObject( objects ) {
 
 		let geometry, material, mesh
+
 		geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 		material = new THREE.MeshPhongMaterial( { color: 0xfffff * Math.random(), transparent: true });
 		mesh = new THREE.Mesh( geometry, material );
-		mesh.scale.set ( 10, 10, 50 );
+		mesh.scale.set ( 20, 20, 50 );
 		mesh.position.set( 0, 0, 0.5 * mesh.scale.z );
-		mesh.name = 'mesh ' + object3D.children.length;
-		object3D.add( mesh );
+		mesh.name = 'object ' + objects.children.length;
+		objects.add( mesh );
 
-		updateSelectObjects()
+		updateSelectObjects( objects )
 
 	}
 
 
 
-	function getObject() {
+	function getObject( objects ) {
 //
-		const obj = scene.getObjectByName( selObjects.value );
+		const object = objects.getObjectByName( selObject.value );
 
-		object3D.traverse( function ( child ) {
+		const r2d = 180 / Math.PI;
+//console.log( 'object', object );
+/*
+		inpName.value = object.name;
+
+		inpOffsetX.value = object.position.x;
+		inpOffsetY.value = object.position.y;
+
+		inpLength.value = object.scale.x;
+		inpWidth.value = object.scale.y;
+
+		inpHeight.value = object.scale.z;
+		inpAngle.value = r2d * object.rotation.z;
+*/
+
+		objects.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
-					child.material.opacity = child.name === obj.name ? 1 : 0.5;
+					child.material.opacity = child.name === object.name ? 1 : 0.5;
 
 			}
 
 		} );
 
-		if ( obj.material ) { obj.material.opacity = 1; }
+		if ( object.material ) { object.material.opacity = 1; }
 
 	}
 
 
 
-	function saveFile() {
+	function updateObject( objects ) {
 
-		var output = object3D.toJSON();
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+console.log( 'objects', objects );
+
+		const object = objects.getObjectByName( selObject.value );
+
+		const meshX = parseFloat( inpLength.value );
+		const meshY = parseFloat( inpWidth.value );
+		const meshZ = parseFloat( inpHeight.value );
+
+		const meshAngle = parseFloat( inpAngle.value ) * d2r;
+
+		const meshPositionX = parseFloat( inpOffsetX.value );
+		const meshPositionY = parseFloat( inpOffsetY.value );
+
+		const name = inpName.value;
+		selObject.options[ selObject.selectedIndex ].innerHTML = inpName.value;
+
+		object.scale.set( meshX, meshY, meshZ );
+		object.position.set( meshPositionX, meshPositionY, meshZ );
+		object.rotation.set( 0, 0, -meshAngle );
+		object.name = name;
+
+		gridHelper.geometry.computeBoundingBox();
+		bbox = gridHelper.geometry.boundingBox.max;
+
+		if ( Math.abs( meshPositionX ) + 0.5 * meshX > bbox.x || Math.abs( meshPositionY ) + 0.5 * meshY > bbox.z ) {  // bbox: y is up
+
+			const size = 2 * ( Math.abs( meshPositionX ) + meshX + Math.abs( meshPositionY ) + meshY );
+
+			scope.addHelpers( size );
+			ground.scale.set( size, size, ground.scale.z );
+
+		}
+
+
+	}
+
+
+
+	function saveFile( objects ) {
+
+		var output = objects.toJSON();
 
 		try {
 
@@ -386,13 +446,12 @@ console.log( 'scene', object3D );
 		var a = document.body.appendChild( document.createElement( 'a' ) );
 
 		a.href = window.URL.createObjectURL( blob );
-		a.download = 'object3d.json';
+		a.download = 'objects.json';
 		a.click();
 //		delete a;
 		a = null;
 
 	}
-
 
 </script>
 </body>
