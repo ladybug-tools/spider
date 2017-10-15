@@ -44,10 +44,14 @@ The Ladybug Tools Spider gbXML Reader scripts are first steps toward making gbXM
 
 * Helping students, clients and non-AEC peeps gain access BIM data easily, quickly and freely
 
-## To Do
+## To Do / Wishlist
 
 Coming soon
 
+* @mdengusiak: show issues by highlighting
+	* This can be taken to mean two things (and both should be done):
+	* Show problems with the gbXML by highlighting the elements
+	* Show construction project management issues or change orders in 3D
 * Lights and shadows
 * Section views
 
@@ -96,6 +100,11 @@ See also:
 
 
 ## gbXML Notes
+
+<!--
+types = [ 'InteriorWall', 'ExteriorWall', 'Roof', 'InteriorFloor', 'ExposedFloor', 'Shade', 'UndergroundWall', 'UndergroundSlab', 'Ceiling', 'Air', 'UndergroundCeiling', 'RaisedFloor', 'SlabOnGrade', 'FreestandingColumn', 'EmbeddedColumn' ];
+
+-->
 
 ### Surface Types
 
