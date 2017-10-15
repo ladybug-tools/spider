@@ -1,16 +1,17 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ladybug-tools.github.io/spider/#sandbox/build-well/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ladybug-tools.github.io/spider/#build-well/README.md "View file as a web page." ) </span>
 
 
 [Build Well Read Me]( #README.md )
 ====
 _A well for object well._
 
-<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/sandbox/build-well/index.html width=100% height=600px ></iframe>
+<iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/build-well/index.html width=100% height=600px ></iframe>
 
-## Full Screen latest release: [Build Well]( http://ladybug-tools.github.io/spider/sandbox/build-well/index.html )
+## Full Screen latest release: [Build Well]( http://ladybug-tools.github.io/spider/build-well/index.html )
 
 _We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
 
+* 2017-10-14 [Build Well R9]( http://ladybug-tools.github.io/spider/sandbox/build-well/r9/build-well.html )
 * 2017-10-10 [Build Well R8]( http://ladybug-tools.github.io/spider/sandbox/build-well/r8/build-well.html )
 * 2017-09-29 [Build Well R7]( http://ladybug-tools.github.io/spider/sandbox/build-well/r7/build-well.html )
 * 2017-09-26 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r6/build-well.html )
@@ -32,10 +33,9 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Issues
 
-
-* 2017-10-10 ~ Menu interaction that does not revert scene and objects to defaults. Selecting various, Adjacent objects menu and Shapes menus, etc should maintain current set of object data
-* 2017-09-29 ~ Some variables are hardwired to 'The object' string. Should be to whatever you want it to be ( & UUID ).
-* 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
+* 2017-10-14 ~ HUD not displaying when cursor over The Building 
+* 2017-10-14 ~ After selecting different menus, some number settings no longer appear in the left menu. When this happens, any further edits cause the model to disappear
+ 
 
 
 ## Naming Considerations
@@ -63,65 +63,121 @@ Functions are designed as much as possible to be cut and pasted wherever with th
 _To be expanded and explained in more detail as time goes on._
 
 
-## To Do
+## To Do Generally
 
+* 2017-10-14 ~ How about a logo?
+* 2017-10-14 ~ Add permalinks/ RESTful interaction
+* 2017-10-14 ~ Decide what to do when distance between external walls is less than twice the minimum perimeter depth
+* 2017-10-14 ~ Organize nice sets of color schemes for the various surface types
+* 2017-10-14 ~ Seamless transitions between shapes: all shapes have three lengths and widths
 * 2017-10-03 ~ L Shape 1: how to recalculate length (X1) after you update the area?
 	* Spreadsheet with all the calculations would be helpful
 
 ### index.html / Build Well parent file
 
+* 2017-10-14 ~ Improve small screen operation
 * 2017-10-02 ~ Add multi-line select for shape selection
-* Add links to credits page
-* Enable viewing html & markdown without killing Three.js data
+
 
 ### build-well-threejs.html
 
-* 2017-09-30 ~ Add selecting and moving objects via pointing device
-* 2017-10-02 ~ Add ortho camera
-* 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
-	* Inworld text is a whole thing in itself. Add in only when very necessary
-* 2017-09-21 ~ Color, shade and shadow
+* 2017-10-14 ~ Open with Box Shape already in place
+* 2017-10-02 ~ Add ortho camera?
 
+### mnu-adjacent-buildings.html
 
-### mnu-adjacent-objects.html
-
-* 2017-09-22 ~ Add lat & Lon or geocoder input
-* 2017-09-22 ~ Add shade/shadow toggle
-* 2017-09-22 ~ Add solar calculator
+* 2017-10-14 ~ Highlight The Building when selected
 * 2017-09-22 ~ Allow any and all objects to have shape parameters?
 
 ### mnu-box-shape.html
 
-* 2017-09-29 ~ Add complete and current set of parameters to 'The object' object - to enable roundtrip with adj build menu
+* 2017-10-14 ~ add individuated floors and ceilings
+* 2017-10-14 ~ Revisit space id naming
 
 ### mnu-ell-shape-one.html
 
-* 2017-09-21 ~ Match object shapes to Ben's spec
+* 2017-10-14 ~ add individuated floors and ceilings
+* 2017-10-14 ~ Revisit space id naming
 
 ### mnu-settings-site.html
 
+* 2017-09-22 ~ Add lat & Lon or geocoder input
+* 2017-09-22 ~ Add shade/shadow toggle
+* 2017-09-22 ~ Add solar calculator
+* 2017-09-21 ~ Color, shade and shadow
+
+### mnu-settings-building.html
+
+* 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
+	* Inworld text is a whole thing in itself. Add in only when very necessary
+* 2017-10-14 ~ Toggle visibility of interior walls
+* 2017-10-14 ~ Opacity Slider
+* 2017-10-14 ~ Overhangs color different than color of walls etc
+* 2017-10-14 ~ Show Perimeter Depth arrows
+
+### mnu-hud.html
+
+* 2017-09-30 ~ Add selecting, moving and editing objects via pointing device
+
+### mnu-settings-spaces.html
+
+* 2017-10-14 ~ Round the number
+* 2017-10-14 ~ Update building data when you select a space type
+* 2017-10-14 ~ Highlight the space in 3D when you select a space in the menu 
+
+### mnu-gbxml-export.html
+
+* 2017-10-11 ~ Export diagonal walls - yes
+* 2017-10-14 ~ Export individuated, manifold spaces
+* 2017-10-05 ~ Export overhang and fin data
+* 2017-10-05 ~ Enable changing object orientation
+
+### mnu-real-time-report.html
+
+* 2017-10-14 ~ Grab the data in real-time from the 3d model currently in play
+
+### mnu-settings-zone.html
+
+* in the pipeline
+
+### mnu-settings-building.html
+
+* for opacities, materials: in th pipeline
+
+
+## Change Log
+
+
+### 2017-10-14 ~ Theo
+
+11:58
+* Add mnu-template as file and to menu
+* Add groundHelper and toggle
+* Added credits page - with first set of credits
+	* Credits in menu moved to credits page
+* Add the start of a 'real time report' page: menu + markdown + html
+* Add start of a Settings Spaces menu - with spaces types etc
+* Folder moved from sandbox folder to main Spider folder
+Mostly dealt with
+* 2017-10-10 ~ Menu interaction that does not revert scene and objects to defaults. Selecting various, Adjacent objects menu and Shapes menus, etc should maintain current set of object data
+* 2017-09-29 ~ Some variables are hardwired to 'The object' string. Should be to whatever you want it to be ( & UUID ).
+* 2017-09-28 ~ After going to 'read me' page, next page does not display properly - Click on title to reload the script
+
+* 2017-09-29 ~ Add complete and current set of parameters to 'The object' object - to enable round trip with adj build menu
 * 2017-10-02 ~ fix toggle edges
 * 2017-10-02 ~ Ground & Helpers don't toggle after change in grid size
 * 2017-10-02 ~ Add options to grid size / prevent spurious values
 
+* Add links to credits page
+* Enable viewing html & markdown without killing Three.js data
 
-### mnu-gbxml-export.html
-
-* 2017-10-11 ~ Export diagonal walls?
-* 2017-10-05 ~ Export overhang and fin data
-* 2017-10-05 ~ Enable changing object orientation
-
-
-
-
-## Change Log
 
 ### 2017-10-13 ~ Theo
 
 11:56
 * Build Well R10
 * now based on single-model-multiple-menu
-
+* mostly all working
 
 
 ### 2017-10-11 ~ Theo

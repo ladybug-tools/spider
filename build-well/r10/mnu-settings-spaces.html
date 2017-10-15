@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic menu template" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-12" >
+<title>Settings Spaces</title>
+<style>
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	h3 { margin: 0; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id=info ></div>
+
+		<p title = 'Select a space to edit' >Spaces: 
+			<select id = selSpace onchange = getSpace(buildings); size = 10 ></select>
+		</p>
+
+
+		<p title = 'Select a type for the space' >Space Type: 
+			<select id = selSpaceType onchange = setSpaceType(buildings); size = 10 ></select>
+		</p>
+
+
+		<p id=infoSpace ></p>
+
+	</div>
+
+	<iframe id=ifrContents ></iframe>
+
+<script>
+
+	const ifrSource = 'build-well-threejs.html';
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
+
+	const spaceTypes = [ "ActiveStorage", "ActiveStorageHospitalOrHealthcare", "AirOrTrainOrBusBaggageArea", "AirportConcourse", "AtriumEachAdditionalFloor", "AtriumFirstThreeFloors", "AudienceOrSeatingAreaPenitentiary", "AudienceOrSeatingAreaExerciseCenter", "AudienceOrSeatingAreaGymnasium", "AudienceOrSeatingAreaSportsArena", "AudienceOrSeatingAreaConventionCenter", "AudienceOrSeatingAreaMotionPictureTheatre", "AudienceOrSeatingAreaPerformingArtsTheatre", "AudienceOrSeatingAreaReligious", "AudienceOrSeatingAreaPoliceOrFireStations", "AudienceOrSeatingAreaCourtHouse", "AudienceOrSeatingAreaAuditorium", "BankCustomerArea", "BankingActivityAreaOffice", "BarberAndBeautyParlor", "CardFileAndCataloguingLibrary", "ClassroomOrLectureOrTrainingPenitentiary", "ClassroomOrLectureOrTraining", "ConfinementCellsPenitentiary", "ConfinementCellsCourtHouse", "ConferenceMeetingOrMultipurpose", "CorridorOrTransition", "CorridorOrTransitionManufacturingFacility", "CorridorsWithPatientWaitingExamHospitalOrHealthcare", "CourtSportsAreaSportsArena", "CourtroomCourtHouse", "DepartmentStoreSalesAreaRetail", "DetailedManufacturingFacility", "DiningArea", "DiningAreaHotel", "DiningAreaFamilyDining", "DiningAreaLoungeOrLeisureDining", "DiningAreaMotel", "DiningAreaTransportation", "DiningAreaPenitentiary", "DiningAreaCivilServices", "DormitoryBedroom", "DormitoryStudyHall", "DressingOrLockerOrFittingRoomGymnasium", "DressingOrLockerOrFittingRoomCourtHouse", "DressingOrLockerOrFittingRoomPerformingArtsTheatre", "DressingOrLockerOrFittingRoomAuditorium", "DressingOrLockerOrFittingRoomExerciseCenter", "ElectricalOrMechanical", "ElevatorLobbies", "EmergencyHospitalOrHealthcare", "EquipmentRoomManufacturingFacility", "ExamOrTreatmentHospitalOrHealthcare", "ExcerciseAreaExerciseCenter", "ExcerciseAreaGymnasium", "ExhibitSpaceConventionCenter", "FellowshipHallReligiousBuildings", "FineMaterialWarehouse", "FineMerchandiseSalesAreaRetail", "FireStationEngineRoomPoliceOrFireStation", "FoodPreparation", "GarageServiceOrRepairAutomotiveFacility", "GeneralHighBayManufacturingFacility", "GeneralLowBayManufacturingFacility", "GeneralExhibitionMuseum", "HospitalNurseryHospitalOrHealthcare", "HospitalOrMedicalSuppliesHospitalOrHealthcare", "HospitalOrRadiologyHospitalOrHealthcare", "HotelOrConferenceCenterConferenceOrMeeting", "InactiveStorage", "JudgesChambersCourtHouse", "LaboratoryOffice", "LaundryIroningAndSorting", "LaundryWashingHospitalOrHealthcare", "LibraryAudioVisualLibraryAudioVisual", "LivingQuartersDormitory", "LivingQuartersMotel", "LivingQuartersHotel", "Lobby", "LobbyReligiousBuildings", "LobbyMotionPictureTheatre", "LobbyAuditorium", "LobbyPerformingArtsTheatre", "LobbyPostOffice", "LobbyHotel", "LoungeOrRecreation", "MallConcourseSalesAreaRetail", "MassMerchandisingSalesAreaRetail", "MediumOrBulkyMaterialWarehouse", "MerchandisingSalesAreaRetail", "MuseumAndGalleryStorage", "NurseStationHospitalOrHealthcare", "OfficeEnclosed", "OfficeOpenPlan", "OfficeCommonActivityAreasInactiveStorage", "OperatingRoomHospitalOrHealthcare", "OtherTelevisedPlayingAreaSportsArena", "ParkingAreaAttendantOnlyParkingGarage", "ParkingAreaPedestrianParkingGarage", "PatientRoomHospitalOrHealthcare", "PersonalServicesSalesAreaRetail", "PharmacyHospitalOrHealthcare", "PhysicalTherapyHospitalOrHealthcare", "PlayingAreaGymnasium", "Plenum", "PoliceStationLaboratoryPoliceOrFireStations", "PublicAndStaffLoungeHospitalOrHealthcare", "ReadingAreaLibrary", "ReceptionOrWaitingTransportation", "ReceptionOrWaitingMotel", "ReceptionOrWaitingHotel", "RecoveryHospitalOrHealthcare", "RestorationMuseum", "Restrooms", "RingSportsAreaSportsArena", "ServerRoom", "SleepingQuartersPoliceOrFireStation", "SortingAreaPostOffice", "SpecialtyStoreSalesAreaRetail", "StacksLibrary", "StairsInactive", "Stairway", "SupermarketSalesAreaRetail", "TerminalTicketCounterTransportation", "WorkshopWorkshop", "WorshipPulpitChoirReligious" ];
+
+	var buildings;
+	var theBuilding;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var scene;
+	var camera;
+	var controls;
+
+	var lightDirectional;
+	var gridHelper, axesHelper, cameraHelper, groundHelper;
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3><a href = "" >' + document.title + '</a> &nbsp; ' +  
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables()
+
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		buildings = scope.meshes;
+
+console.log( 'buildings', buildings );
+
+		updateSelectSpaces( buildings );
+
+	}
+
+
+
+/////////////////////
+
+
+	function updateSelectSpaces( objects ) {
+
+		building = buildings.getObjectByName( 'The Building' );
+		bud = building.userData;
+parent.bud = bud;
+
+		if ( ! bud.shape ) {
+
+			alert( 'please select a shape first' );
+			return;
+
+		}
+
+		building.traverse( function ( child ) {
+//console.log( '', child );
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material = new THREE.MeshPhongMaterial( { opacity: 0.85, side: 2, transparent: true } );
+
+			}
+
+		} );
+
+		for ( let i = 0; i < bud.spaces.length; i++ ) {
+
+			let obj = bud.spaces[ i ];
+			selSpace.innerHTML += '<option>' + obj.name + '</option>'; 
+
+		}
+
+		selSpace.selectedIndex = 0;
+
+		for ( i = 0; i < spaceTypes.length; i++ ) {
+
+			let type = spaceTypes[ i ];
+			selSpaceType.innerHTML += '<option>' + type + '</option>'; 
+
+		}
+
+		selSpaceType.selectedIndex = 93;
+
+		getSpace( objects );
+
+	}
+
+
+	function getSpace( objects ) {
+//
+		const spaceId  = selSpace.selectedIndex;
+
+		building = buildings.getObjectByName( 'The Building' );
+		bud = building.userData;
+//parent.bud = bud;
+///console.log( 'bud.spa', bud.spaces );
+		space = bud.spaces[ spaceId ]
+
+		infoSpace.innerHTML =
+
+			'<p>Name: ' + space.name + '</p>' +
+			'<p>Description: ' + space.description + '</p>' +
+			'<p>Storey: ' + space.storey + '</p>' +
+			'<p>Area: ' + space.area.toLocaleString() + '</p>' +
+			'<p>Volume: ' + space.volume.toLocaleString() + '</p>' +
+			'<p>Zone: ' + space.zone + '</p>' +
+		'';
+
+
+		building.traverse( function ( child ) {
+//console.log( '', child );
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === space.name ? 1 : 0.5;
+
+			}
+
+		} );
+
+//		if ( space.material ) { spa.material.opacity = 1; }
+
+	}
+
+
+
+	function setSpaceType(buildings) {
+
+console.log( '', selSpaceType.selectedIndex );
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+/////////////////
+	function deleteObject( objects ) {
+
+		let obj = objects.children[ selObject.selectedIndex ];
+
+		if ( ! obj ){ alert( 'Try adding a new object and selecting it before doing a delete' ); return;  }
+		objects.remove( obj );
+		obj.geometry.dispose();
+		obj.material.dispose();
+
+		updateSelectObjects( objects );
+
+	}
+
+
+
+	function addObject( objects ) {
+
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+		const material = new THREE.MeshPhongMaterial( { color: 0xfffff * Math.random(), transparent: true });
+		const mesh = new THREE.Mesh( geometry, material );
+		mesh.scale.set ( 20, 20, 50 );
+		mesh.position.set( 0, 0, 0.5 * mesh.scale.z );
+		mesh.name = 'object ' + objects.children.length;
+		objects.add( mesh );
+
+		updateSelectObjects( objects )
+
+	}
+
+
+
+
+
+
+
+	function updateObject( objects ) {
+
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+console.log( 'objects', objects );
+
+		const object = objects.getObjectByName( selObject.value );
+
+		const meshX = parseFloat( inpLength.value );
+		const meshY = parseFloat( inpWidth.value );
+		const meshZ = parseFloat( inpHeight.value );
+
+		const meshAngle = parseFloat( inpAngle.value ) * d2r;
+
+		const meshPositionX = parseFloat( inpOffsetX.value );
+		const meshPositionY = parseFloat( inpOffsetY.value );
+
+		const name = inpName.value;
+		selObject.options[ selObject.selectedIndex ].innerHTML = inpName.value;
+
+		object.scale.set( meshX, meshY, meshZ );
+		object.position.set( meshPositionX, meshPositionY, meshZ );
+		object.rotation.set( 0, 0, -meshAngle );
+		object.name = name;
+
+		gridHelper.geometry.computeBoundingBox();
+		bbox = gridHelper.geometry.boundingBox.max;
+
+		if ( Math.abs( meshPositionX ) + 0.5 * meshX > bbox.x || Math.abs( meshPositionY ) + 0.5 * meshY > bbox.z ) {  // bbox: y is up
+
+			const size = 2 * ( Math.abs( meshPositionX ) + meshX + Math.abs( meshPositionY ) + meshY );
+
+			scope.addHelpers( size );
+			ground.scale.set( size, size, ground.scale.z );
+
+		}
+
+
+	}
+
+
+
+	function saveFile( objects ) {
+
+		const output = objects.toJSON();
+
+		try {
+
+			output = JSON.stringify( output, parseNumber, '\t' );
+			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+
+		} catch ( e ) {
+
+			output = JSON.stringify( output );
+
+		}
+
+		const blob = new Blob( [ output ] );
+		const a = document.body.appendChild( document.createElement( 'a' ) );
+
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'objects.json';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+
+
+</script>
+</body>
+</html>

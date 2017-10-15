@@ -125,7 +125,12 @@
 		axesHelper = new THREE.AxesHelper( size * 0.05 );
 		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 )
 
-		scene.add( cameraHelper, gridHelper, axesHelper );
+		groundHelper = createMesh();
+		groundHelper.scale.set( size, size, size );
+		groundHelper.position.set( 0, 0, -0.5 * size );
+		groundHelper.name = 'groundHelper';
+		groundHelper.visible = false;
+		scene.add( cameraHelper, gridHelper, axesHelper, groundHelper );
 
 	}
 
@@ -186,38 +191,6 @@
 		return mesh;
 
 	}
-
-
-	function addAssetsxxx() {
-
-		var geometry, material, mesh;
-
-		object3D = new THREE.Object3D();
-		object3D.name = 'object3D';
-
-		geometry = new THREE.SphereBufferGeometry( 1, 50, 50 );
-		material = new THREE.MeshPhongMaterial( { color: 0xff0000 });
-		mesh = new THREE.Mesh( geometry, material );
-		mesh.scale.set( 25, 25, 25 );
-
-		mesh.castShadow = mesh.receiveShadow = true;
-		mesh.name = 'sphere 1';
-
-		object3D.add( mesh )
-		scene.add( object3D );
-
-		geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-		material = new THREE.MeshPhongMaterial( { color: 0xfffff * Math.random() });
-		ground = new THREE.Mesh( geometry, material );
-		ground.position.z = -50;
-		ground.scale.set( 50, 50, 50 );
-		ground.name = 'ground';
-		ground.castShadow = ground.receiveShadow = true;
-
-		scene.add( ground );
-
-	}
-
 
 
 	function onWindowResize() {

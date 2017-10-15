@@ -3,13 +3,11 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic menu template" >
-<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-13" >
-<title>Settings</title>
+<meta name = "description" content = "Show the action" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-14" >
+<title>Real-Time Report</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
-
 /* https://www.w3schools.com/colors/colors_names.asp */
 
 	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
@@ -31,9 +29,9 @@
 	.floatRight { float: right; width: 70px;}
 
 	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
-
+/*
 	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
-
+*/
 
 </style>
 </head>
@@ -43,48 +41,68 @@
 
 		<div id = "divTitle" ></div>
 
-		<div id=info ></div>
+		<p >OMG, the bosses hve just walked in the door along with one of our best clients.</p>
+
+		<p>They want to understand what's going on with the project RIGHT NOW!</p>
 
 <!--
-		<p title = 'Size in black onions.' >Ground Size:
-			<input type=number id=inpGroundSize min=30 max=1000 step=10 value=50 required onchange=updateGroundSize(); class = floatRight />
+		<p title = 'Select a building to edit' >Buildings: 
+			<select id = selObject onchange = getObject(buildings); size = 5 ></select>
+		</p>
+
+		<p>
+			<button onclick = deleteObject(buildings); >delete</button>
+			<button onclick = addObject(buildings); >add </button>
+			<button onclick = saveFile(buildings); >save json file</button> 
+		</p>
+
+
+		<p title = 'Title of the model' >Name: 
+			<input id=inpName onchange = updateObject(buildings); class = floatRight style=width:150px;  ></p>
+
+		<p title = 'left and right from origin in feet' >offset x: 
+			<input type=number id=inpOffsetX onchange = updateObject(buildings);; class = floatRight ></p>
+
+		<p title = 'front and back distance from origin in feet'>offset y: 
+			<input type=number id=inpOffsetY onchange = updateObject(buildings);; class = floatRight ></p>
+
+		<p title = 'x distance in feet' >length: 
+			<input type=number id=inpLength min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight ></p>
+
+		<p title = 'Y distance in feet' >width: 
+			<input type=number id=inpWidth min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'Z distance in feet: 1 to 1000' >height:
+			<input type=number id=inpHeight min=1 max=1000 step=1 oninput="validity.valid||(value='');" onchange=updateObject(buildings);; class = floatRight ></p>
+ 
+		<p title = 'building angle in degrees: -180 to 180' >orientation on site:
+			<input type=number type=number id=inpAngle min=-180 max=180 step=1 value=0 onchange=updateObject(buildings);; class=floatRight />
 		</p>
 -->
 
-		<p><button onclick=toggleSceneAutoRotate() title= 'Stop the sinning!' > Toggle scene rotation </button></p>
-
-		<p><button onclick=toggleHelpers(); title = 'Make axis and grid invisible' > Toggle helpers </button></p>
-
-		<p><button onclick=toggleGround(); > Toggle grid </button></p>
-
-		<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>
-
-		<p><button onclick=toggleEdges(objects); >Toggle edges </button></p>
-
-		<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
-
 	</div>
 
-	<iframe id=ifrContents ></iframe>'
+	<iframe id=ifrContents ></iframe>
 
 <script>
 
-	const ifrSource = 'template-threejs-shade.html';
+	const ifrSource = 'build-well-threejs.html';
 
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
 
-	let objects;
+	var buildings;
 
 	let scope;
 
 	var THREE;
 	var renderer;
+	var scene;
 	var camera;
 	var controls;
-	var scene;
 
-	var lightAmbient, lightPoint, lightDirectional;
-	var axisHelper, cameraHelper;
+	var lightDirectional;
+	var gridHelper, axesHelper, cameraHelper, groundHelper;
 
 	init();
 
@@ -128,102 +146,26 @@
 
 		lightDirectional = scope.lightDirectional;
 		axesHelper = scope.axesHelper;
-		cameraHelper = scope.cameraHelper;
 		gridHelper = scope.gridHelper;
-		ground = scope.ground;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
 
 		buildings = scope.meshes;
-		ground = scope.ground;
 
-console.log( 'objects', objects )
+console.log( 'buildings', buildings );
 
-
-	}
-
-
-
-// Display Settings
-
-
-	function updateGroundSize() {
-
-		size = parseInt( inpGroundSize.value, 10 )
-		ground.scale.set( size, size, 50 );
+		createReport( buildings );
 
 	}
 
 
+	function createReport( objects ) {
 
-	function toggleHelpers() {
+		parent.viewContents();
 
-		cameraHelper.visible = !cameraHelper.visible;
+//		parent.ifrThree.style.cssText = ' height: 480px; left: 500px; position: absolute; top:200px; width: 640px; ';
 
-		axesHelper.visible = !axesHelper.visible;
-
-	}
-
-
-
-	function toggleGround() {
-
-		gridHelper.visible = !gridHelper.visible;
-
-	}
-
-
-
-	function toggleSceneAutoRotate() {
-
-		controls.autoRotate = !controls.autoRotate;
-
-	}
-
-
-
-	function toggleWireframe() {
-
-		scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.material.wireframe = !child.material.wireframe;
-
-			}
-
-		} );
-
-	}
-
-
-
-	function toggleEdges() {
-
-
-		scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.LineSegments ) {
-
-				child.visible = child.visible === true ? false : true;
-
-			}
-
-		} );
-
-	}
-
-
-
-	function toggleBackgroundGradient() {
-
-// 2016-07-18
-
-		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
-		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
-		var image = scope.document.body.style.backgroundImage;
-
-		scope.document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
-			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
-
+console.log( 'parent.ifrThree', parent.ifrThree );
 	}
 
 
