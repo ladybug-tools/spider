@@ -104,6 +104,19 @@ See also:
 <!--
 types = [ 'InteriorWall', 'ExteriorWall', 'Roof', 'InteriorFloor', 'ExposedFloor', 'Shade', 'UndergroundWall', 'UndergroundSlab', 'Ceiling', 'Air', 'UndergroundCeiling', 'RaisedFloor', 'SlabOnGrade', 'FreestandingColumn', 'EmbeddedColumn' ];
 
+
+* InteriorWall
+* ExteriorWall
+* Roof
+* InteriorFloor
+* ExposedFloor
+* Shade
+* UndergroundWall* UndergroundSlab* Ceiling* Air* UndergroundCeiling
+* RaisedFloor
+* SlabOnGrade
+* FreestandingColumn
+* EmbeddedColumn
+
 -->
 
 ### Surface Types
