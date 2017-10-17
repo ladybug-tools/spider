@@ -76,6 +76,10 @@ See also:
 
 ## Change Log
 
+### 2017-10-17 ~ Theo
+
+* R1.1 ~ links to source added to menu
+* R1.2 ~ with permalinks <
 ### 2017-10-16 ~ Theo
 
 * First commit
