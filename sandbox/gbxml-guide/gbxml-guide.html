@@ -6,7 +6,7 @@
 <meta name = "description" content = "Difficult things done easily" >
 <meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-12" >
-<title>SgbXML Guide</title>
+<title>gbXML Guide</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -14,7 +14,7 @@
 
 	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 350px; height: 100%; }
 
-	body, html { font: 12pt monospace; height:100%; margin: 0; overflow: hidden; }
+	body { font: 12pt monospace; height:100%; margin: 0 0 0 350px; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 	blockquote, pre { background-color: #eee; padding: 10px; }
@@ -28,7 +28,6 @@
 
 	#detMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
 
-	#ifrThree { height: 100%; width: 100%; }
 
 </style>
 </head>
@@ -42,15 +41,36 @@
 
 			<summary >toggle menu</summary>
 
-			<p id = "divBreadcrumbs" ><a href="../../../../index.html" target="_blank">Ladybug Tools</a> &raquo; <a href="../../../index.html" target="_Top" >Spider</a> &raquo; </p>
+			<p id = "divBreadcrumbs" ><a href="../../../index.html" target="_blank">Ladybug Tools</a> &raquo; <a href="../../index.html" target="_Top" >Spider</a> &raquo; </p>
 
 			<div id = "divTitle" ></div>
 
 			<div id = "divItems" >
 
-				<div><a href=JavaScript:getContentMarkdown("README.md"); >Read me / welcome</a></div>
+				<p><a href=JavaScript:getContentMarkdown("space.md"); >Space</a></p>
 
-				<div><a href=JavaScript:getContentMarkdown("exterion-wall.md"); >exterior wall</a></div>
+				<p><a href=JavaScript:getContentMarkdown("zone.md"); >Zone</a></p>
+
+				<p><a href=JavaScript:getContentMarkdown("surface.md"); >Surface</a></p>
+
+				<h4>Surface Types</h4>
+
+
+				<div><a href=JavaScript:getContentMarkdown("interior-wall.md"); >InteriorWall</a></div>
+				<div><a href=JavaScript:getContentMarkdown("exterior-wall.md"); >Exteriorwall</a></div>
+				<div><a href=JavaScript:getContentMarkdown("roof.md"); >Roof</a></div>
+				<div><a href=JavaScript:getContentMarkdown("Interior-floor.md"); >InteriorFloor</a></div>
+				<div><a href=JavaScript:getContentMarkdown("exposed-floor.md"); >ExposedFloor</a></div>
+				<div><a href=JavaScript:getContentMarkdown("shade.md"); >Shade</a></div>
+				<div><a href=JavaScript:getContentMarkdown("underground-wall.md"); >UndergroundWall</a></div>
+				<div><a href=JavaScript:getContentMarkdown("underground-slab.md"); >UndergroundSlab</a></div>
+				<div><a href=JavaScript:getContentMarkdown("ceiling.md"); >Ceiling</a></div>
+				<div><a href=JavaScript:getContentMarkdown("air.md"); >Air</a></div>
+				<div><a href=JavaScript:getContentMarkdown("underground-ceiling.md"); >UndergroundCeiling</a></div>
+				<div><a href=JavaScript:getContentMarkdown("raised-floor.md"); >RaisedFloor</a></div>
+				<div><a href=JavaScript:getContentMarkdown("slab-on-grade.md"); >SlabOnGrade</a></div>
+				<div><a href=JavaScript:getContentMarkdown("free-standing-column.md"); >FreestandingColumn</a></div>
+				<div><a href=JavaScript:getContentMarkdown("embedded-column.md"); >EmbeddedColumn</a></div>
 
 				<br>
 
@@ -73,8 +93,6 @@
 
 	</div>
 
-	<iframe id=ifrThree src=template-threejs-shade.html ></iframe>
-
 	<div id =divContents ></div>
 
 <script>
@@ -83,9 +101,13 @@
 
 	const b = '<br>';
 	const txt = 
-	'<hr><p>' +
-		'Welcome to some fresh ways and simple methods for handling complex 3D environments' +
-	'</p>';
+		'<hr><p>' +
+			'Welcome to a place where you can find useful stuff regarding <a href="http://www.gbxml.org/" target="_blank">gbXML</a>.' +
+		'</p>' +
+
+		'<p>The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools.</p>' +
+
+		'';
 
 
 	init();
@@ -98,7 +120,7 @@
 				'<a href=' + infoURI + ' target="top" >&#x24D8</a>'
 			'</h3>';
 
-		getMenuHTML();
+			getContentMarkdown();
 
 	}
 
@@ -111,15 +133,16 @@
 			divSubMenu.style.height = '';
 			divSubMenu.innerHTML = txt;
 
+
 		} else {
 
-			divSubMenu.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' height=100% width=100% frameBorder=0 ></iframe>';
+//			divSubMenu.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' height=100% width=100% frameBorder=0 ></iframe>';
 
 			ifrMenuSub.onload = function() {
 
 				divSubMenu.style.height = ( ifrMenuSub.contentWindow.divMenu.scrollHeight + 10 ) + 'px';
 
-				viewModel();
+				getContentMarkdown()
 
 			}
 
@@ -129,29 +152,11 @@
 
 
 
-	function viewModel() {
-
-		document.body.style.overflow = 'hidden';
-
-		divContents.style.display = 'none';
-
-		divToggleView.style.display = 'none';
-
-		ifrThree.style.cssText = 'height: 100%; width: 100%;'
-
-	}
-
-
-
 	function viewContents() {
 
 		document.body.style.overflow = 'auto';
 
-		ifrThree.style.display = 'none';
-
 		divToggleView.style.display = '';
-
-		ifrThree.style.cssText = ' bottom: 0; position: absolute; height: 100px; right: 0; width: 10%; '; 
 
 	}
 
@@ -161,7 +166,7 @@
 
 		if ( ! url ) {
 
-			url = '../README.md';
+			url = 'README.md';
 
 		}
 
