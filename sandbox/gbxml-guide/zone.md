@@ -6,6 +6,15 @@
 
 > The gbXML “Zone” element describes an HVAC zone that encompasses one or more building spaces and includes all necessary child elements to describe a typical HVAC zone. These child elements include information about air flow rates, cooling and heating design set points, ventilation air rates, air flow schedules, hydronic and air loop information, and mo
 
+
+### Thermal Zones
+
+c
+
+* Thermal zone = area controlled by a single thermostat
+ * Typical: one zone for each space
+
+
 ### Schema GreenBuildingXML_Ver6.01.xsd 
 
 * <http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link1D3>

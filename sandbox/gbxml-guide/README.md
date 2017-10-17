@@ -1,7 +1,7 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://github.com/ladybug-tools/spider/#sandbox/gbxml-guide/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/sandbox/gbxml-guide/ "View file as a web page." ) </span>
 
 
-# [gbXML GuideRead Me]( #README.md )
+# [gbXML Guide Read Me]( #README.md )
 
 
 
@@ -35,13 +35,13 @@ See also:
 * <https://twitter.com/gbXML>
 > The gbXML open schema helps facilitate the transfer of building properties stored in 3D building information models (BIM) to engineering analysis tools.
 
-* https://github.com/chiensiTB/gbXMLValidator/wiki/What-is-gbXML
+* <https://github.com/chiensiTB/gbXMLValidator/wiki/What-is-gbXML>
 > What is gbXML?
 
-* https://github.com/GreenBuildingXML/Sample-gbXML-Files
+* <https://github.com/GreenBuildingXML/Sample-gbXML-Files>
 
 
-* https://greenspacelive.com/site/building-generator/
+* <https://greenspacelive.com/site/building-generator/>
 > Use the building generator for rapid production of building geometry models.
 
 
@@ -52,7 +52,7 @@ See also:
 * http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html
 
 
-http://nrel.github.io/OpenStudio-user-documentation/getting_started/features/#import-and-export-options
+* <http://nrel.github.io/OpenStudio-user-documentation/getting_started/features/#import-and-export-options>
 
 > Import and Export Options
 * IDF import (geometry, constructions, loads, thermal zones, and schedules only)
@@ -63,14 +63,13 @@ http://nrel.github.io/OpenStudio-user-documentation/getting_started/features/#im
 * SDD export (input format - geometry, constructions, and thermal zones only)
 * IFC import (geometry only)
 
-https://www.tn.gov/assets/entities/osa/attachments/BIM_RevitTogbXML.pdf
+<https://www.tn.gov/assets/entities/osa/attachments/BIM_RevitTogbXML.pdf>
 
 > Creating Revit Models to be exported via gbXML for Energy Analysis
 
 
-
-
-
+* <http://slideplayer.com/slide/5155040/>
+> http://slideplayer.com/slide/5155040/
 
 
 ## Change Log
