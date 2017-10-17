@@ -9,10 +9,9 @@
 
 ### Thermal Zones
 
-c
-
+* http://slideplayer.com/slide/5155040/
 * Thermal zone = area controlled by a single thermostat
- * Typical: one zone for each space
+* Typical: one zone for each space
 
 
 ### Schema GreenBuildingXML_Ver6.01.xsd 

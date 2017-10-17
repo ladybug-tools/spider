@@ -7,7 +7,9 @@
 
 ## Concept
 
+A growing list of what there is to be known regarding exporting and importing gbXML files
 
+All data in Markdown files editable on GitHub
 
 ## Links of Interest
 
@@ -45,11 +47,11 @@ See also:
 > Use the building generator for rapid production of building geometry models.
 
 
-* https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts
-* http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml
-* https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere
-* https://knowledge.autodesk.com/support/revit-products/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F-htm.html
-* http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html
+* <https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts>
+* <http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml>
+* <https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere>
+* <https://knowledge.autodesk.com/support/revit-products/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F-htm.html>
+* <http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html>
 
 
 * <http://nrel.github.io/OpenStudio-user-documentation/getting_started/features/#import-and-export-options>
