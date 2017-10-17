@@ -49,7 +49,7 @@
 		</p>
 
 		<p title='x distance 1 to 200' >Building Length:
-			<input type=number id=inpLength1 min=1 max=200 step=1 value=100 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
+			<input type=number id=inpLength1 min=1 max=200 step=1 value=80 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
 		<p title='How many storeys? 1 to 161'>Number of Floors: 
@@ -172,10 +172,6 @@
 
 //console.log( 'buildings', buildings );
 
-		inpBuildingArea.value = building.area;
-		inpLength1.value = building.length1;
-		inpNumberOfFloors.value = building.floors;
-
 		updateShape();
 
 	}
@@ -207,60 +203,69 @@
 // changes for each shape
 	function updateMenuArea() {
 
-		let area, length, width, areaFloor, floors;
+		const area = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
+		const length = building.length1;
+		const width = building.area / ( building.length1 * building.floors );
+		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
 
-		if ( parseInt( inpBuildingArea.value, 10 ) !== building.area || inpNumberOfFloors.value != building.floors ) {
+		const areaCurrent = length * width * floors; 
+		const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
+		const ratio = Math.sqrt( areaNew / areaCurrent );
 
+		const lengthNew = ratio * length; // parseFloat( inpLength1.value );
+		const widthNew =  ratio * width; // parseFloat( inpWidth1.innerHTML );
+		const areaFloor = widthNew * lengthNew;
 
-console.log( '', 23 );
+		inpLength1.value = lengthNew.toFixed(); 
+		inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
 
-			areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
-//			area = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
-			floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
-
-			length = building.length1;
-			width = building.area / ( building.length1 * building.floors );
-
-			const areaCurrent = length * width * floors; 
-			const ratio = Math.sqrt( areaNew / areaCurrent );
-
-			const lengthNew = ratio * length; // parseFloat( inpLength1.value );
-			const widthNew =  ratio * width; // parseFloat( inpWidth1.innerHTML );
-			areaFloor = widthNew * lengthNew;
-
-			inpLength1.value = lengthNew.toFixed(); 
-			inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
-
-//			inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
-
-			area = areaNew;
-			building.area = area;
-			building.length1 = lengthNew;
-			building.width1 = widthNew;
-
-console.log( 'floors', floors );
-
-		} else {
-
-			area = building.area;
-			width = building.area / ( building.length1 * building.floors );
-			areaFloor = width * building.length1;
-			floors = building.floors;
-
-		}
-
-		inpBuildingArea.value = area;
-		inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+		inpBuildingArea.value = areaNew;
 		inpNumberOfFloors.value = floors;
-		inpWidth1.innerHTML = width;
 
-		building.area = area;
+		inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+		building.area = areaNew;
 		building.areaFloor = areaFloor;
 		building.floors = floors;
-		building.width1 = width;
+
+		building.length1 = lengthNew;
+		building.width1 = widthNew;
 
 	}
 
+// changes for each shape
+	function updateMenuAreaxxxx() {
+
+		let building = buildings.getObjectByName( 'The Building' );
+		const building = building.userData;
+
+		const length = parseFloat( inpLength1.value );
+		const width = parseFloat( inpWidth1.innerHTML );
+		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
+
+		const areaCurrent = length * width * floors; 
+		const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
+		const ratio = Math.sqrt( areaNew / areaCurrent );
+
+		const lengthNew = ratio * length; // parseFloat( inpLength1.value );
+		const widthNew =  ratio * width; // parseFloat( inpWidth1.innerHTML );
+		const areaFloor = widthNew * lengthNew;
+
+		inpLength1.value = lengthNew.toFixed(); 
+		inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
+
+		inpBuildingArea.value = areaNew;
+		inpNumberOfFloors.value = floors;
+
+		inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+
+		building.area = areaNew;
+		building.areaFloor = areaFloor;
+		building.floors = floors;
+
+		building.length1 = lengthNew;
+		building.width1 = widthNew;
+
+	}
 
 
 // same for each shape

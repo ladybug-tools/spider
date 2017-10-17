@@ -11,6 +11,7 @@ _A well for object well._
 
 _We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
 
+* 2017-10-16 [Build Well R10]( http://ladybug-tools.github.io/spider/sandbox/build-well/r10/build-well.html )
 * 2017-10-14 [Build Well R9]( http://ladybug-tools.github.io/spider/sandbox/build-well/r9/build-well.html )
 * 2017-10-10 [Build Well R8]( http://ladybug-tools.github.io/spider/sandbox/build-well/r8/build-well.html )
 * 2017-09-29 [Build Well R7]( http://ladybug-tools.github.io/spider/sandbox/build-well/r7/build-well.html )
@@ -66,7 +67,7 @@ _To be expanded and explained in more detail as time goes on._
 ## To Do Generally
 
 * 2017-10-14 ~ How about a logo?
-* 2017-10-14 ~ Add permalinks/ RESTful interaction
+* 2017-10-14 ~ Add permalinks / RESTful interaction
 * 2017-10-14 ~ Decide what to do when distance between external walls is less than twice the minimum perimeter depth
 * 2017-10-14 ~ Organize nice sets of color schemes for the various surface types
 * 2017-10-14 ~ Seamless transitions between shapes: all shapes have three lengths and widths
@@ -76,18 +77,17 @@ _To be expanded and explained in more detail as time goes on._
 ### index.html / Build Well parent file
 
 * 2017-10-14 ~ Improve small screen operation
-* 2017-10-02 ~ Add multi-line select for shape selection
 
 
 ### build-well-threejs.html
 
-* 2017-10-14 ~ Open with Box Shape already in place
 * 2017-10-02 ~ Add ortho camera?
 
 ### mnu-adjacent-buildings.html
 
 * 2017-10-14 ~ Highlight The Building when selected
 * 2017-09-22 ~ Allow any and all objects to have shape parameters?
+* 2017-10-02 ~ Add multi-line select for shape selection?
 
 ### mnu-box-shape.html
 
@@ -101,7 +101,7 @@ _To be expanded and explained in more detail as time goes on._
 
 ### mnu-settings-site.html
 
-* 2017-09-22 ~ Add lat & Lon or geocoder input
+* 2017-09-22 ~ geocoder input
 * 2017-09-22 ~ Add shade/shadow toggle
 * 2017-09-22 ~ Add solar calculator
 * 2017-09-21 ~ Color, shade and shadow
@@ -148,6 +148,31 @@ _To be expanded and explained in more detail as time goes on._
 ## Change Log
 
 
+
+### 2017-10-16 ~ Theo
+
+17:13
+* R11
+* New geometry handling process
+* 'The Building' is always in shape 
+* Kicks off as a Box Shape from get go
+	* Created as a JavaScript object that exists throughout session
+	* Geometry can come and go, but defaults and most variables persist
+	* Should make it easy to switch between shapes
+* Site Settings
+	* Now includes Location and Units details
+	* Units not yet wired up to other menu
+
+Mostly dealt with
+* 2017-10-14 ~ Open with Box Shape already in place
+* 2017-09-22 ~ Add lat & Lon
+
+### 2017-10-15 ~ Theo
+
+11:38
+* R10.1 to GitHub ~ Fix gbXML export issue
+
+
 ### 2017-10-14 ~ Theo
 
 11:58
@@ -158,6 +183,7 @@ _To be expanded and explained in more detail as time goes on._
 * Add the start of a 'real time report' page: menu + markdown + html
 * Add start of a Settings Spaces menu - with spaces types etc
 * Folder moved from sandbox folder to main Spider folder
+
 Mostly dealt with
 * 2017-10-10 ~ Menu interaction that does not revert scene and objects to defaults. Selecting various, Adjacent objects menu and Shapes menus, etc should maintain current set of object data
 * 2017-09-29 ~ Some variables are hardwired to 'The object' string. Should be to whatever you want it to be ( & UUID ).

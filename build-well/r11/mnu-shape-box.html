@@ -12,7 +12,7 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
-	html { --mnu-color: limegreen; --mnu-back-color: azure; --mnu-width: 350px; height: 100%; }
+	html { --mnu-color: Salmon; --mnu-back-color: SeaShell; --mnu-width: 350px; height: 100%; }
 
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
@@ -30,7 +30,7 @@
 
 	.floatRight { float: right; width: 70px;}
 
-	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
 
 	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
@@ -56,15 +56,16 @@
 			<input id=inpNumberOfFloors type=number min=1 max=161 value=1 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='Measured in square feet' >Floor Area: 
-			<span id=inpFloorArea class=floatRight >0</span>
-		</p>
-
-		<p title='' >Building Width in feet:
+		<p title='' >Width in feet:
 			<span type=number id=inpWidth1 class=floatRight ></span>
 		</p>
 
-		<p title='' >Building Volume cubic feet:
+		<p title='Measured in square feet' >Floor Area in sf: 
+			<span id=inpFloorArea class=floatRight >0</span>
+		</p>
+
+
+		<p title='' >Volume in cubic feet:
 			<span type=number id=spnVolume class=floatRight ></span>
 		</p>
 
@@ -72,19 +73,19 @@
 			<input id=inpFloorHeight type=number min=8 max=15 value=12 onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='measured from 10 to 20' >Perimeter Depth: 
+		<p title='measured from 10 to 20' >Perimeter Depth feet: 
 			<input id=inpPerimeterDepth type=number min=10 max=20 value=15 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title= 'measured in percent: 1 to 99' >Window Wall Ratio:
+		<p title= 'measured in percent: 1 to 99' >Window Wall Ratio %:
 			<input type=number id=inpWindowWallRatio min=1 max=99 step=1 value=40 oninput="validity.valid||(value='');" onclick=updateShape(); class=floatRight />
 		</p>
 
-		<p title='Depicted only when > 0 and < 10' >Overhang Depth: 
+		<p title='Depicted only when > 0 and < 10' >Overhang Depth in feet: 
 			<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='building angle in degrees -180 to 180' >Orientation: 
+		<p title='building angle in degrees -180 to 180' >Orientation degrees: 
 			<input type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight >
 		</p>
 
@@ -170,10 +171,14 @@
 		buildings = scope.meshes;
 		building = scope.building;
 
+		createSlab = scope.createSlab;
+		createExternalWall = scope.createExternalWall;
+		createPerimeterDepthWall = scope.createPerimeterDepthWall;
+
 //console.log( 'buildings', buildings );
 
 		inpBuildingArea.value = building.area;
-		inpLength1.value = building.length1;
+		inpLength1.value = building.box.length1;
 		inpNumberOfFloors.value = building.floors;
 
 		updateShape();
@@ -207,57 +212,62 @@
 // changes for each shape
 	function updateMenuArea() {
 
-		let area, length, width, areaFloor, floors;
+		let length, lengthNew, width, widthNew, floors, floorsNew, area, areaFloor;
 
-		if ( parseInt( inpBuildingArea.value, 10 ) !== building.area || inpNumberOfFloors.value != building.floors ) {
+		area = building.area;
+		floors = building.floors;
+		length = building.box.length1;
+		width = area / ( length * floors );
+		areaFloor = area / floors;
 
+		if ( parseInt( inpBuildingArea.value, 10 ) !== building.area || parseInt( inpNumberOfFloors.value, 10 ) !== building.floors ) {
 
-console.log( '', 23 );
+console.log( 'floor/area diff', area );
 
-			areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
-//			area = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
-			floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
+			const floorsNew = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ) : 1;
+			const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
 
-			length = building.length1;
-			width = building.area / ( building.length1 * building.floors );
+			const areaTemp = length * width * floorsNew; // building.userData.areaCurrent; 
+console.log( 'areaTemp', areaTemp );
 
-			const areaCurrent = length * width * floors; 
-			const ratio = Math.sqrt( areaNew / areaCurrent );
+			const ratio = Math.sqrt( areaNew / areaTemp );
+console.log( 'ratio', ratio );
 
-			const lengthNew = ratio * length; // parseFloat( inpLength1.value );
-			const widthNew =  ratio * width; // parseFloat( inpWidth1.innerHTML );
-			areaFloor = widthNew * lengthNew;
+			areaFloorNew = areaNew / floorsNew;
+			lengthNew = ratio * length; // parseFloat( inpLength1.value );
+			widthNew =  ratio * width; // parseFloat( inpWidth1.innerHTML );
+console.log( 'widthNew', widthNew );
 
 			inpLength1.value = lengthNew.toFixed(); 
 			inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
+			inpFloorArea.innerHTML = ( areaFloorNew ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
 
-//			inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+			building.area = areaNew;
+			building.floors = floorsNew;
 
-			area = areaNew;
-			building.area = area;
-			building.length1 = lengthNew;
-			building.width1 = widthNew;
+			building.areaFloor = areaFloorNew;
+			building.box.length1 = lengthNew;
+			building.box.width1 = widthNew;
 
-console.log( 'floors', floors );
+		} else if ( parseInt( inpLength1.value, 10 ) !== building.box.length1 ) {
+
+console.log( 'length diff', area );
+
+			lengthNew = inpLength1.value ? parseFloat( inpLength1.value ): parseFloat( inpLength1.min );
+			widthNew = area / ( lengthNew * floors );
+
+			building.box.length1 = lengthNew;
+			building.box.width1 = widthNew;
 
 		} else {
 
-			area = building.area;
-			width = building.area / ( building.length1 * building.floors );
-			areaFloor = width * building.length1;
-			floors = building.floors;
+			inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+			inpWidth1.innerHTML = width;
+
+			building.areaFloor = areaFloor;
+			building.box.width1 = width;
 
 		}
-
-		inpBuildingArea.value = area;
-		inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
-		inpNumberOfFloors.value = floors;
-		inpWidth1.innerHTML = width;
-
-		building.area = area;
-		building.areaFloor = areaFloor;
-		building.floors = floors;
-		building.width1 = width;
 
 	}
 
@@ -296,8 +306,8 @@ console.log( 'floors', floors );
 
 		const bud = building.userData;
 
-		const len = building.length1;
-		const wid = building.width1;
+		const len = building.box.length1;
+		const wid = building.box.width1;
 
 		const angle = - d2r * building.orientation;
 		const floors = building.floors;
@@ -433,128 +443,6 @@ console.log( 'floors', floors );
 
 	}
 
-
-
-	function createSlab( length, width, id ) {
-
-		const shape = new THREE.Shape( [
-			v2( 0, 0 ),
-			v2( length, 0 ),
-			v2( length, width ),
-			v2( 0, width ),
-			v2( 0, 0 )
-		] );
-
-		const geometry = new THREE.ShapeBufferGeometry( shape );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		const mesh = new THREE.Mesh( geometry, material );
-		mesh.userData.idSpace = id;
-
-		return mesh;
-
-	}
-
-
-
-	function createExternalWall( length = 20, height = 12, floor = 0, id = 1 ) {
-
-		const wwr = building.wwr / 100;
-		const length05 = length * 0.5;
-		const deltaL = wwr * length05;
-		const height05 = height * 0.5;
-		const deltaH = wwr * height05;
-
-		const shapeVertices = [
-			v2( 0, 0 ),
-			v2( length, 0 ),
-			v2( length, height ),
-			v2( 0, height )
-		];
-		const shape = new THREE.Shape( shapeVertices );
-
-		const holeVertices = [
-			v2( length05 - deltaL, height05 + deltaH ),
-			v2( length05 + deltaL, height05 + deltaH ),
-			v2( length05 + deltaL, height05 - deltaH ),
-			v2( length05 - deltaL, height05 - deltaH )
-		];
-		const hole = new THREE.Path();
-		hole.fromPoints( holeVertices );
-
-		shape.holes.push( hole );
-
-		const geometry = new THREE.ShapeBufferGeometry( shape );
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-
-		const mesh = new THREE.Mesh( geometry, material );
-		mesh.name = 'ExteriorWall';
-		mesh.userData.idSpace = id;
-
-		let coordinate = mesh.geometry.attributes.position.array;
-		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-
-		if ( inpOverhangDepth.value !== '0' ) {
-
-			const overhangDepth = parseFloat( inpOverhangDepth.value );
-			const geometryPlane = new THREE.PlaneBufferGeometry( 2 * deltaL, overhangDepth );
-			geometryPlane.applyMatrix( new THREE.Matrix4().makeTranslation( length05, 0.5 * overhangDepth, height05 + deltaH ) );
-
-			const plane = new THREE.Mesh( geometryPlane, material );
-
-			coordinate = plane.geometry.attributes.position.array;
-			coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-			mesh.add( plane );
-
-		}
-
-		return mesh;
-
-	}
-
-
-
-	function createPerimeterDepthWall( length, height, floor, id ) {
-
-		const perDep = parseFloat( inpPerimeterDepth.value );
-
-		const shape = new THREE.Shape( [
-			v2( 0, 0 ),
-			v2( length, 0 ),
-			v2( length, height ),
-			v2( 0, height ),
-			v2( 0, 0 )
-		] );
-
-		const geometry = new THREE.ShapeBufferGeometry( shape );
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		const mesh = new THREE.Mesh( geometry, material );
-		mesh.name = 'InteriorWall';
-		mesh.userData.idSpace = id;
-
-		const shape2 = new THREE.Shape( [
-			v2( 0, 0 ),
-			v2( Math.SQRT2 * perDep, 0 ),
-			v2( Math.SQRT2 * perDep, height ),
-			v2( 0, height ),
-			v2( 0, 0 )
-		] );
-
-		const geometry2 = new THREE.ShapeBufferGeometry( shape2 );
-		geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
-		geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.75 * Math.PI ) );
-		const diagonal = new THREE.Mesh( geometry2, material );
-		diagonal.userData.idSpace = id;
-		diagonal.name = 'InteriorWall';
-		mesh.add( diagonal );
-
-		let coordinate = mesh.geometry.attributes.position.array;
-		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-
-		return mesh;
-
-	}
 
 </script>
 </body>
