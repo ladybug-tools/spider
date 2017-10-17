@@ -11,16 +11,16 @@ _A well for object well._
 
 _We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
 
-* 2017-10-16 [Build Well R10]( http://ladybug-tools.github.io/spider/sandbox/build-well/r10/build-well.html )
-* 2017-10-14 [Build Well R9]( http://ladybug-tools.github.io/spider/sandbox/build-well/r9/build-well.html )
-* 2017-10-10 [Build Well R8]( http://ladybug-tools.github.io/spider/sandbox/build-well/r8/build-well.html )
-* 2017-09-29 [Build Well R7]( http://ladybug-tools.github.io/spider/sandbox/build-well/r7/build-well.html )
-* 2017-09-26 [Build Well R6]( http://ladybug-tools.github.io/spider/sandbox/build-well/r6/build-well.html )
-* 2017-09-24 [Build Well R5]( http://ladybug-tools.github.io/spider/sandbox/build-well/r5/build-well.html )
-* 2017-09-21 [Build Well R4]( http://ladybug-tools.github.io/spider/sandbox/build-well/r4/build-well.html )
-* 2017-09-21 [Build Well R3]( http://ladybug-tools.github.io/spider/sandbox/build-well/r3/build-well.html )
-* 2017-09-20 [Build Well R2]( http://ladybug-tools.github.io/spider/sandbox/build-well/r2/build-well.html )
-* 2017-09-17 [Build Well R1]( http://ladybug-tools.github.io/spider/sandbox/build-well/r1/build-well.html )
+* 2017-10-16 [Build Well R10]( http://ladybug-tools.github.io/spider/build-well/r10/build-well.html )
+* 2017-10-14 [Build Well R9]( http://ladybug-tools.github.io/spider/build-well/r9/build-well.html )
+* 2017-10-10 [Build Well R8]( http://ladybug-tools.github.io/spider/build-well/r8/build-well.html )
+* 2017-09-29 [Build Well R7]( http://ladybug-tools.github.io/spider/build-well/r7/build-well.html )
+* 2017-09-26 [Build Well R6]( http://ladybug-tools.github.io/spider/build-well/r6/build-well.html )
+* 2017-09-24 [Build Well R5]( http://ladybug-tools.github.io/spider/build-well/r5/build-well.html )
+* 2017-09-21 [Build Well R4]( http://ladybug-tools.github.io/spider/build-well/r4/build-well.html )
+* 2017-09-21 [Build Well R3]( http://ladybug-tools.github.io/spider/build-well/r3/build-well.html )
+* 2017-09-20 [Build Well R2]( http://ladybug-tools.github.io/spider/build-well/r2/build-well.html )
+* 2017-09-17 [Build Well R1]( http://ladybug-tools.github.io/spider/build-well/r1/build-well.html )
 
 ## Features
 
