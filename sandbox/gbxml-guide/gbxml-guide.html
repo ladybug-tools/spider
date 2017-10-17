@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Difficult things done easily" >
+<meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-12" >
+<title>SgbXML Guide</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: fuchsia; --mnu-back-color: bisque; --mnu-width: 350px; height: 100%; }
+
+	body, html { font: 12pt monospace; height:100%; margin: 0; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+	blockquote, pre { background-color: #eee; padding: 10px; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+	summary { outline: none; font-size: 14pt }
+
+	#divMenu { left: 0; margin: 20px; position: absolute; top: 0; }
+	#divMenu { height: 100%; max-width: 300px; overflow: auto;}
+
+	#detMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
+
+	#ifrThree { height: 100%; width: 100%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<details id=detMenu open >
+
+			<summary >toggle menu</summary>
+
+			<p id = "divBreadcrumbs" ><a href="../../../../index.html" target="_blank">Ladybug Tools</a> &raquo; <a href="../../../index.html" target="_Top" >Spider</a> &raquo; </p>
+
+			<div id = "divTitle" ></div>
+
+			<div id = "divItems" >
+
+				<div><a href=JavaScript:getContentMarkdown("README.md"); >Read me / welcome</a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("exterion-wall.md"); >exterior wall</a></div>
+
+				<br>
+
+			</div>
+
+			<div id = "divSubMenu" ></div>
+
+			<div id=divFooter >
+				<hr>
+				<div><a href=JavaScript:getContentMarkdown("../../../pages/code-of-conduct.md"); >Code of Conduct</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../../pages/contributing.md"); >Contributing</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../../pages/license.md"); >License</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../../pages/markdown-help.md"); >Markdown Help</a></div>
+				<div id=divToggleView style=display:none; ><a href=JavaScript:viewModel(); >Return to model view</a><div>
+
+			</div>
+
+
+		</details>
+
+	</div>
+
+	<iframe id=ifrThree src=template-threejs-shade.html ></iframe>
+
+	<div id =divContents ></div>
+
+<script>
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/';
+
+	const b = '<br>';
+	const txt = 
+	'<hr><p>' +
+		'Welcome to some fresh ways and simple methods for handling complex 3D environments' +
+	'</p>';
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3>' +
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +  
+				'<a href=' + infoURI + ' target="top" >&#x24D8</a>'
+			'</h3>';
+
+		getMenuHTML();
+
+	}
+
+
+	function getMenuHTML( file ) {
+
+
+		if ( ! file ) {
+
+			divSubMenu.style.height = '';
+			divSubMenu.innerHTML = txt;
+
+		} else {
+
+			divSubMenu.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' height=100% width=100% frameBorder=0 ></iframe>';
+
+			ifrMenuSub.onload = function() {
+
+				divSubMenu.style.height = ( ifrMenuSub.contentWindow.divMenu.scrollHeight + 10 ) + 'px';
+
+				viewModel();
+
+			}
+
+		}
+
+	}
+
+
+
+	function viewModel() {
+
+		document.body.style.overflow = 'hidden';
+
+		divContents.style.display = 'none';
+
+		divToggleView.style.display = 'none';
+
+		ifrThree.style.cssText = 'height: 100%; width: 100%;'
+
+	}
+
+
+
+	function viewContents() {
+
+		document.body.style.overflow = 'auto';
+
+		ifrThree.style.display = 'none';
+
+		divToggleView.style.display = '';
+
+		ifrThree.style.cssText = ' bottom: 0; position: absolute; height: 100px; right: 0; width: 10%; '; 
+
+	}
+
+
+
+	function getContentMarkdown( url ) {
+
+		if ( ! url ) {
+
+			url = '../README.md';
+
+		}
+
+		divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+
+		requestFile( url, callbackMarkdown );
+
+		getMenuHTML();
+
+	}
+
+
+
+	function callbackMarkdown( xhr ){
+
+		const converter = new showdown.Converter();
+
+		const response = xhr.target.response;
+
+		const html = converter.makeHtml( xhr.target.responseText );
+
+		viewContents();
+
+		divContents.innerHTML = html;
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>

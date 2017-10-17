@@ -151,6 +151,19 @@ _To be expanded and explained in more detail as time goes on._
 
 ### 2017-10-16 ~ Theo
 
+Another big update. Last time it was the menus, this time it was the geometry handling.
+
+The whole package now has quite a few loose ends. The next few pint releases should begin to clean things up a bit
+
+Coming up next is
+
+* Bring the L Shape up to the level of the Box Shape
+* Work on Zones and Spaces menus
+* Work on Anton's WWR menu
+* Separate ft/in and metric menus. Also multiple languages maybe
+* gbXML export needs rotation and overhangs 
+
+
 17:13
 * R11
 * New geometry handling process
