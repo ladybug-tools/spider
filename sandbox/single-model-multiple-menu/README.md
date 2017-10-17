@@ -25,6 +25,19 @@ _txt_
 * Feel assured that no data is lost when looking at text content web pages
 
 
+
+## Coding methodology
+
+* The goal is to be as simple as possible, even if that means being simplistic, to help you understand the problem being solved rather than unraveling the mysteries of the code
+* The structure is based on a single file with Three.js, multiple menu item files and a parent file handler
+* Every menu item links to a standalone HTML page. Every HTML page is just a few hundred lines long and contains all the HTML, CSS and JavaScript required to handle the task of the menu.
+	* Every menu page displays visual output that enables you to understand what is going on and to verify the code works properly
+* The menu items all call for and embed a single HTML into an iframe. This file is used is a kind of server for Three.js and the associated data  
+* There is a parent file that assembles the menu items and sets the CSS for all the other files
+
+
+
+
 ### Code
 
 This demo makes extensive use of the [HTML ```<iframe>``` element]( https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe )
@@ -62,6 +75,14 @@ These little files do all the heavy lifting - but not by deep coding but by stre
 The Three.js iframe holds of the data accumulated during a session. There you can navigates around the menus as you please.
 
 
+### Temporary coding
+
+During the early stages of a file's life.  many values are stored directly in UI elements such as input boxes. Eventually, as the dust settles, some sort of global object will be devised that can be a more durable, safer location for this data. Do remember: it's easier to get out of no abstraction than to leave the wrong abstraction.
+
+Functions are designed as much as possible to be cut and pasted wherever with the fewest dependencies possible. As the dust settles, and a global object takes shape, the code will contain many fewer duplications.  
+
+
+
 ## Links of Interest
 
 
@@ -73,6 +94,11 @@ The Three.js iframe holds of the data accumulated during a session. There you ca
 
 ## Change Log
 
+
+### 2017-10-17 ~ Theo
+
+* text relating to coding in Build Well move here
+ 
 ### 2017-10-12 ~ Theo
 
 * First commit

@@ -17,11 +17,11 @@
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus{ background-color: yellow; color: #aaa; }
-	h3 { margin: 0; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
+	h3 { margin: 0; }
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
@@ -29,6 +29,7 @@
 	select { width: 100%; }
 
 	.floatRight { float: right; width: 70px;}
+	.highlight { background-color: yellow; }
 
 	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
 
@@ -96,7 +97,7 @@
 <script>
 
 	const ifrSource = 'build-well-threejs.html';
-	const infoURI='https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/'
+	const infoURI='https://github.com/ladybug-tools/spider/tree/master/build-well/'
 
 	var building;
 	var buildings;
@@ -175,11 +176,27 @@
 		createExternalWall = scope.createExternalWall;
 		createPerimeterDepthWall = scope.createPerimeterDepthWall;
 
-//console.log( 'buildings', buildings );
+// values here override build-well-threejs.html values which override menu values
+//		building.area = 20000;
+//		building.box = {};
+//		building.box.length1 = 100;
+
+//		building.floors = 3;
+//		building.orientation = 20;
+//		building.wwr = 80;
+//		building.overhangDepth = 30;
+//		building.perimeterDepth = 10;
 
 		inpBuildingArea.value = building.area;
 		inpLength1.value = building.box.length1;
-		inpNumberOfFloors.value = building.floors;
+
+//		inpNumberOfFloors.value = building.floors;
+//		inpOrientation.value = building.orientation;
+//		inpWindowWallRatio.value = building.wwr;
+//		inpOverhangDepth.value = building.overhangDepth;
+//		inpPerimeterDepth.value = building.perimeterDepth;
+
+//console.log( 'building', building );
 
 		updateShape();
 
@@ -220,7 +237,7 @@
 		width = area / ( length * floors );
 		areaFloor = area / floors;
 
-		if ( parseInt( inpBuildingArea.value, 10 ) !== building.area || parseInt( inpNumberOfFloors.value, 10 ) !== building.floors ) {
+		if ( parseInt( inpBuildingArea.value, 10 ) !== area || parseInt( inpNumberOfFloors.value, 10 ) !== floors ) {
 
 console.log( 'floor/area diff', area );
 
@@ -249,7 +266,7 @@ console.log( 'widthNew', widthNew );
 			building.box.length1 = lengthNew;
 			building.box.width1 = widthNew;
 
-		} else if ( parseInt( inpLength1.value, 10 ) !== building.box.length1 ) {
+		} else if ( parseInt( inpLength1.value, 10 ) !== length ) {
 
 console.log( 'length diff', area );
 
@@ -303,8 +320,6 @@ console.log( 'length diff', area );
 
 // changes for each shape
 	function createFloors( building ) {
-
-		const bud = building.userData;
 
 		const len = building.box.length1;
 		const wid = building.box.width1;
