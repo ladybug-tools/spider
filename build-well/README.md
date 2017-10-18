@@ -10,6 +10,10 @@ _A well for building well._
 ## Full Screen latest release: [Build Well]( http://ladybug-tools.github.io/spider/build-well/index.html )
 
 
+## Concept
+
+Create 3D building data in a variety of shapes parametrically and export in gbXML format
+
 ## Features
 
 This project contains a number of demo examples in the form of a programmer's 'cookbook'. The hope is that this code enables you to:
@@ -139,6 +143,15 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 ## Change Log
 
 
+
+### 2017-10-18 ~ Theo
+
+11:00
+* build-well-threejs.html
+14:12
+* * mnu-gbxml-export.html
+	* Overhangs appear to be exporting OK
+
 ### 2017-10-17 ~ Theo
 
 
@@ -154,9 +167,12 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 	* Variables now connected to mnu-settings-site.html
 * mnu-gbxml-export.html
 	* Many fixes, works with new geometry format
+	* One zone for every space
 	* 2017-10-17 ~ Don't export ground face of adjacent buildings
 	* Started process to export overhangs. 
 	* @@Note gbXML files not loading into viewer because of as yet incomplete data
+* build-well-threejs.html
+	* Start process of exporting shade surfaces
 
 
 ### 2017-10-16 ~ Theo

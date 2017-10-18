@@ -3,9 +3,9 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Build Well site updates" >
-<meta name = "keywords" content = "Three.js,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-01" >
+<meta name = "description" content = "Save Build Well as a gbXML file" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-18" >
 <title>Menu gbXML Export</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -22,6 +22,7 @@
 	button:hover { background-color: #ccc; color: #fff }
 
 	h3 { margin: 0; }
+
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
@@ -44,17 +45,18 @@
 
 		<p id = "divInfo" ></p>
 
-		<p>
-			1. <button onclick=getBuildingData(); >getBuildingData</button>
-		</p>
+		<p> 1. <button onclick=getBuildingData(); >Get building data</button></p>
 
-		<p>
-			2. <button onclick = saveFile(); >save building data to file</button> 
-		</p>
+		<p> 2. <button onclick = saveFile(); >Save building data to file</button> </p>
 
-		<p>First the the building data. It will display on-screen. Then you can save it to a file.</p>
+		<p> 1. First the click the 'get building data' button. The data will display on-screen so you can check if it is OK.</p>
 
-		<p>View gbXML using <a href="http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/" target="_blank">Spider gbXML Viewer</a></p>
+		<p> 2. If the data is acceptable, you may save the data to a file.</p>
+
+		<p> Along with the data, little boxes appear at vertices. These are to help you identify that the script is identifying coordinates correctly.</p>
+
+		<p> View the <a href="https://en.wikipedia.org/wiki/Green_Building_XML" target="_blank">gbXML</a> file
+			using <a href="http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/" target="_blank">Spider gbXML Viewer</a></p>
 
 	</div>
 
@@ -364,13 +366,13 @@ console.log( 'building', building );
 
 				const angleBuilding = d2r * building.orientation
 
-				for ( let j = 0; j < building.group.children.length; j++ ) {
+				for ( let j = 1; j < building.group.children.length; j++ ) {
 //				for ( let j = 3; j < 4; j++ ) {
 
 					building.group.children[ j ].updateMatrix();
 
 					const surface = building.group.children[ j ].clone();
-//console.log( 'surface', surface );
+
 
 					let geometry = new THREE.Geometry().fromBufferGeometry( surface.geometry );
 					const angle = surface.rotation._z;
@@ -378,7 +380,7 @@ console.log( 'building', building );
 
 					let adjacency;
 
-//console.log( 'surface.userData.idSpace', surface.userData.idSpace );
+//console.log( 'surface.userData.idSpace',surface.name, surface.userData.idSpace );
 
 					if ( surface.name === 'ExteriorWall' ) {
 
@@ -447,7 +449,7 @@ console.log( 'building', building );
 						const mesh = new THREE.Mesh( geo, material );
 						mesh.position.copy( vertex );
 						mesh.rotation.z = angle;
-						scene.add( mesh );
+//						scene.add( mesh );
 
 					}
 
@@ -478,7 +480,7 @@ console.log( 'building', building );
 							const mesh = new THREE.Mesh( geo, material );
 							mesh.position.copy( vertex );
 							mesh.rotation.z = angle;
-							scene.add( mesh );
+//							scene.add( mesh );
 
 						}
 
@@ -513,13 +515,16 @@ console.log( 'building', building );
 	}
 
 
+
 	function getSurfacesOverhangs( building ) {
 
 		let textOver = '';
+		const geometry = new THREE.BoxBufferGeometry( 3, 1, 1 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		for ( var i = 0; i < building.overhangs.length; i++ ) {
 
-			over = building.overhangs[ i ];
+			const overhang = building.overhangs[ i ];
 
 			textOver += 
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( i + 1 ) + '" >\n' +
@@ -528,16 +533,31 @@ console.log( 'building', building );
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
 
+//console.log( 'geo', overhang.geometry.attributes.position.array );
+
+			const coordinates = overhang.geometry.attributes.position.array;
+
+			const vertices = [
+
+				v( coordinates[ 6 ], coordinates[ 7 ], coordinates[ 8 ] ),
+				v( coordinates[ 9 ], coordinates[ 10 ], coordinates[ 11 ] ),
+				v( coordinates[ 3 ], coordinates[ 4 ], coordinates[ 5 ] ),
+				v( coordinates[ 0 ], coordinates[ 1 ], coordinates[ 2 ] ),
+
+			];
 
 			for ( let j = 0; j < 4; j++ ) {
 
-//				const vertex = vertices[ j ];
-				vertex = v( 0, 0, 0 );
+				vertex = vertices[ j ];
+				vertex.applyMatrix4( overhang.matrixWorld );
 				textOver += getCartesianPointText( vertex );
 
-				const mesh = new THREE.Mesh( geometry, material );
+
+				mesh = new THREE.Mesh( geometry, material );
 				mesh.position.copy( vertex );
+				mesh.name = 'shade';
 				scene.add( mesh );
+//console.log( 'vertex', mesh.position );
 
 			}
 
@@ -548,7 +568,7 @@ console.log( 'building', building );
 			'';
 		}
 
-console.log( 'textOver', textOver );
+//console.log( 'textOver', textOver );
 
 		return textOver;
 
@@ -611,9 +631,9 @@ console.log( 'textOver', textOver );
 
 			'\t\t\t\t\t<CartesianPoint>\n' +
 
-				'\t\t\t\t\t\t<Coordinate>' + vertex.x.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
-				'\t\t\t\t\t\t<Coordinate>' + vertex.y.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
-				'\t\t\t\t\t\t<Coordinate>' + vertex.z.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + Number( vertex.x.toFixed(4) ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + Number( vertex.y.toFixed(4) ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + Number( vertex.z.toFixed(4) ) + '</Coordinate>\n' +
 
 			'\t\t\t\t\t</CartesianPoint>\n' +
 
@@ -627,7 +647,16 @@ console.log( 'textOver', textOver );
 
 	function saveFile() {
 
-		var blob = new Blob( [ parent.buildingData.value ] );
+		if ( parent && parent.ifrThree ) {
+
+			const blob = new Blob( [ parent.buildingData.value ] );
+
+		} else {
+
+			blob = new Blob( [ scope.buildingData.value ] );
+
+		}
+
 		var a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
 		a.download = 'building-data.xml';

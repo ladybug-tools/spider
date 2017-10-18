@@ -113,7 +113,8 @@
 
 		scene.add( meshes );
 
-console.log( 'bbb', building.shades );
+//console.log( 'building.overhangs', building.overhangs );
+
 	}
 
 
@@ -444,6 +445,8 @@ console.log( 'bbb', building.shades );
 		mesh.name = 'ExteriorWall';
 		mesh.userData.idSpace = id;
 
+console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
+//??
 		let coordinate = mesh.geometry.attributes.position.array;
 		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 
