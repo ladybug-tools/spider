@@ -171,6 +171,7 @@
 		buildings = scope.meshes;
 		building = scope.building;
 
+		createMesh = scope.createMesh;
 		createSlab = scope.createSlab;
 		createExternalWall = scope.createExternalWall;
 		createPerimeterDepthWall = scope.createPerimeterDepthWall;
@@ -202,6 +203,7 @@
 	}
 
 
+
 	function updateShape() {
 
 		updateMenuArea();
@@ -212,12 +214,22 @@
 
 		buildings.remove( building.group );
 		scene.remove( building.group );
-		building.group = new THREE.Group();
-		scene.add( building.group );
+
+//		building.group = new THREE.Group();
+//		scene.add( building.group );
 
 		building.zones = [];
 		building.spaces = [];
+		building.overhangs = [];
 
+
+		building.group = new THREE.Group();
+		building.group = createMesh();
+//		building.group.scale.set( 80, 100, 12 );
+//		building.group.position.set( 0, 0, 0.5 * building.group.scale.z );
+		building.group.name = 'The Building';
+
+		buildings.add( building.group );
 		createFloors( building );
 
 //console.log( 'building', building );

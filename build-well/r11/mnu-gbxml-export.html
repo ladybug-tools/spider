@@ -423,7 +423,7 @@ console.log( 'building', building );
 					}
 
 					textSurfaces += 
-						'\t\t<Surface surfaceType="' + surface.name + '" id="bw-surface-' + ( j + 1 ) + '" >\n' +
+						'\t\t<Surface surfaceType="' + surface.name + '" id="bw-surface-' + ( j ) + '" >\n' +
 						'\t\t\t<Name>' + surface.name + '</Name>\n' +
 						'\t\t\t<CADOjectId>none</CADOjectId>\n' +
 						adjacency +
@@ -449,7 +449,7 @@ console.log( 'building', building );
 						const mesh = new THREE.Mesh( geo, material );
 						mesh.position.copy( vertex );
 						mesh.rotation.z = angle;
-//						scene.add( mesh );
+						scene.add( mesh );
 
 					}
 
@@ -480,7 +480,7 @@ console.log( 'building', building );
 							const mesh = new THREE.Mesh( geo, material );
 							mesh.position.copy( vertex );
 							mesh.rotation.z = angle;
-//							scene.add( mesh );
+							scene.add( mesh );
 
 						}
 
@@ -553,7 +553,7 @@ console.log( 'building', building );
 				textOver += getCartesianPointText( vertex );
 
 
-				mesh = new THREE.Mesh( geometry, material );
+				const mesh = new THREE.Mesh( geometry, material );
 				mesh.position.copy( vertex );
 				mesh.name = 'shade';
 				scene.add( mesh );
@@ -647,9 +647,10 @@ console.log( 'building', building );
 
 	function saveFile() {
 
+		let blob;
 		if ( parent && parent.ifrThree ) {
-
-			const blob = new Blob( [ parent.buildingData.value ] );
+			blob = new Blob( [ parent.buildingData.value ] );
+console.log( 'parent.buildingData', parent.buildingData.value );
 
 		} else {
 
