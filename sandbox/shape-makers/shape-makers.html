@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-07" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input { width: 50px; float: right; }
+
+	.floatRight {  float: right; }
+
+	#menu { background-color: azure; left: 0; margin: 20px; max-width: 300px; padding: 5px; position: absolute; top: 0; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "menu" >
+
+		<div id = "title" ></div>
+		<div id = "contents" >
+
+			<p><select id=selShape size=9 style=width:100%; ></select></p>
+
+			<p>area <input id=inpArea type=number value=12000 onchange=updateShape(); ></p>
+			<br>
+			<p>length 1 <input id=inpLength1 type=number value=120 onchange=updateShape(); ></p>
+			<p>length 2 <input id=inpLength2 type=number value=40 onchange=updateShape(); ></p>
+
+			<p>width 1 <input id=inpWidth1 type=number value=100 onchange=updateShape(); ></p>
+			<p>width 2 <input id=inpWidth2 type=number value=40 onchange=updateShape(); ></p>
+
+			<br>
+			<p>storeys <input type=number id=inpStoreys value=3 onchange=updateShape(); ></p>
+
+			<p>check area <span id=spnCheckArea class=floatRight ></p>
+		</div>
+
+	</div>
+
+<script>
+
+	const shapes = [ 'box shape', 'l shape', 'u shape', 't shape', 'h shape', 'triangle shape', 'trapezoid shape', 'cross shape', 'square shape' ];
+
+	let shape;
+	let parameters = {};
+
+	let makers = {};
+
+
+	let v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +'</a></h1>';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.target.set( 30, 30, 10 );
+		scene = new THREE.Scene();
+
+		const ambient = new THREE.AmbientLight( 0x444444 );
+		scene.add( ambient );
+
+		const directionalLight = new THREE.DirectionalLight( 0xffeedd );
+		directionalLight.position.set( 0, 0, 1 ).normalize();
+		scene.add( directionalLight );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		const axesHelper = new THREE.AxesHelper( 150 );
+		scene.add( axesHelper );
+
+		for ( var shape of shapes ) {
+
+			selShape.innerHTML += '<option>' + shape + '</option>';
+
+		}
+
+		selShape.selectedIndex = 0;
+
+		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+
+//		scene.add( mesh );
+
+		parameters.steps = parseInt( inpStoreys.value );
+//		area = parseInt( inpArea.value, 10 );
+		parameters.length1 = parseInt( inpLength1.value, 10 );
+		parameters.length2 = parseInt( inpLength2.value, 10 );
+
+		parameters.width1 = parseInt( inpWidth1.value, 10 );
+		parameters.width2 = parseInt( inpWidth2.value, 10 );
+
+		parameters.area = 3 * ( parameters.length1 * parameters.width1 - parameters.length2 * 
+			parameters.width2 );
+		inpArea.value = parameters.area;
+
+		updateShape();
+
+	}
+
+
+	function updateShape() {
+
+		scene.remove( shape );
+
+		threeShape = lShape( );
+
+		geometry = new THREE.ExtrudeGeometry( threeShape, { bevelEnabled: false, amount: 30, steps: parameters.steps } );
+
+		material = new THREE.MeshNormalMaterial( { wireframe: true } );
+		shape = new THREE.Mesh( geometry, material );
+		scene.add( shape );
+
+	}
+
+
+	function boxShape( length, width ) {
+
+		return new THREE.Shape( [ v2( 0, 0 ), v2( length, 0 ), v2( length, width, ), v2( 0, width ) ] );
+
+	}
+
+
+
+	function lShape() {
+
+		p = parameters;
+
+		spnCheckArea.innerHTML = ( p.length1 * p.width1 * p.steps - p.length2 * p.width2 * p.steps ).toLocaleString(); 
+
+		length1New = parseInt( inpLength1.value, 10 );
+		length2New = parseInt( inpLength2.value, 10 );
+		width1New = parseInt( inpWidth1.value, 10 );
+		width2New = parseInt( inpWidth2.value, 10 );
+
+
+console.log( '', length1New, p.length1 );
+
+		if ( length1New !== p.length1 ) {
+
+			width1New = ( p.area +  p.length2 * p.width2 * p.steps ) / ( length1New * p.steps );
+
+			inpWidth1.value = width1New;
+
+			p.length1 = length1New;
+			p.width1 = width1New;
+
+		} else if ( length2New !== p.length2 ) {
+
+console.log( '', length2New, p.length2 );
+
+			area = p.length2 * p.width2;
+			width2New = area / length2New;
+
+			inpWidth2.value = width2New;
+
+			p.length2 = length2New;
+			p.width2 = width2New;
+
+		} else if ( width1New != p.width1 ) {
+
+			length1New = ( p.area +  p.length2 * p.width2 * p.steps ) / ( width1New * p.steps );
+
+			inpLength1.value = length1New;
+
+			p.length1 = length1New;
+			p.width1 = width1New;
+
+		} else if ( width2New != p.width2 ) {
+
+			width1New = ( p.area +  p.length2 * width2New * p.steps ) / ( p.length1 * p.steps );
+
+			inpWidth1.value = width1New;
+
+			p.width1 = width1New;
+			p.width2 = width2New;
+
+
+		}
+
+
+		return new THREE.Shape( [ v2( 0, 0 ), v2( p.length1, 0 ), v2( p.length1, p.width1 - p.width2, ), 
+			v2( p.length1 - p.length2, p.width1 - p.width2 ), v2( p.length1 - p.length2, p.width1 ), v2( 0, p.width1 ) ] );
+
+	}
+
+
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

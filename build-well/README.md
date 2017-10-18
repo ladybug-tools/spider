@@ -118,7 +118,6 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ### mnu-gbxml-export.html
 
-
 * 2017-10-11 ~ Export diagonal walls - yes
 * 2017-10-14 ~ Export individuated, manifold spaces
 * 2017-10-05 ~ Export overhang and fin data
@@ -145,7 +144,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 10:42
 * many read me updates
-	* fix 'building' rplaced by object booboo
+	* fix 'building' replaced by object booboo
 13:58
 * mnu-shape-ell-one.html
 	* Working somewhat
@@ -158,6 +157,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 	* 2017-10-17 ~ Don't export ground face of adjacent buildings
 	* Started process to export overhangs. 
 	* @@Note gbXML files not loading into viewer because of as yet incomplete data
+
 
 ### 2017-10-16 ~ Theo
 
