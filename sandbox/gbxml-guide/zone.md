@@ -2,6 +2,22 @@
 ## Zone
 
 
+### Build Well Usage
+
+Export gbXML zone creation includes the following:
+
+* A zone for every space
+* Numeric portions of zone and space IDs identical
+	* Example: zone36 and space36 refer to the same geometry
+* Every zone to have
+	* ID
+	* Name
+	* Description
+
+_Any other attributes needed? Wanted?_
+_Should anything identify floor or compass bearing?_
+
+
 ### http://community.gbxml.org/Knowledgebase/explain-the-zone-element/
 
 > The gbXML “Zone” element describes an HVAC zone that encompasses one or more building spaces and includes all necessary child elements to describe a typical HVAC zone. These child elements include information about air flow rates, cooling and heating design set points, ventilation air rates, air flow schedules, hydronic and air loop information, and mo
@@ -10,6 +26,8 @@
 ### Thermal Zones
 
 * http://slideplayer.com/slide/5155040/
+
+See slide 12
 * Thermal zone = area controlled by a single thermostat
 * Typical: one zone for each space
 
@@ -22,7 +40,6 @@
 ### Choices
 
 From Schema
-
 
 				<xsd:element ref="Name" minOccurs="0"/>
 				<xsd:element ref="Description" minOccurs="0"/>

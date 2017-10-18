@@ -71,7 +71,7 @@
 		<h4>Location</h4>
 
 		<p title='' >Name:<br>
-			<input id=inpName type= onchange=updateBuilding() class=fullWidth >
+			<input id=inpName onchange=updateBuilding(); class=fullWidth >
 		</p>
 
 		<p title='' >Description:<br>
@@ -99,7 +99,7 @@
 		</p>
 
 		<p title='' >Elevation:
-			<input id=inpElevation type=text onchange=updateBuilding(); class=floatRight >
+			<input id=inpElevation type=number onchange=updateBuilding(); class=floatRight >
 		</p>
 
 
@@ -198,7 +198,7 @@
 
 		buildings = scope.meshes;
 		building = scope.building;
-console.log( 'building', building )
+//console.log( 'building', building )
 
 
 		inpElevation.value = building.Elevation;
@@ -217,7 +217,7 @@ console.log( 'building', building )
 
 		inpStreetAddress.value = building.streetAddress;
 
-updateBuilding()
+		updateBuilding();
 
 	}
 
@@ -326,7 +326,7 @@ updateBuilding()
 
 		building.description = inpDescription.value;
 
-		building.name = inpName.value;
+		building.group.name = inpName.value;
 
 		building.ZipcodeOrPostalCode = inpZipcodeOrPostalCode.value;
 
@@ -344,8 +344,16 @@ updateBuilding()
 				'volume unit: Cubic Meters' + b +
 				'temperature unit: C' + b +
 				'gbXML version: 6.01' + b +
-
 			b;
+
+			building.useSIUnitsForResults = true; 
+			building.temperatureUnit = 'C';
+			building.SurfaceReferenceLocation = 'Centerline' ;
+			building.areaUnit = 'SquareMeters';
+			building.lengthUnit = 'Meters';
+			building.version = '6.01';
+			building.volumeUnit = 'CubicMeters';
+
 
 		} else {
 
@@ -357,10 +365,18 @@ updateBuilding()
 				'volume unit: Cubic Feet' + b +
 				'temperature unit: F' + b +
 				'gbXML version: 6.01' + b +
-
 			b;
 
+			building.useSIUnitsForResults = false; 
+			building.temperatureUnit = 'C';
+			building.SurfaceReferenceLocation = 'Centerline' ;
+			building.areaUnit = 'SquareFeet';
+			building.lengthUnit = 'Feet';
+			building.version = '6.01';
+			building.volumeUnit = 'CubicFeet';
+
 		}
+//console.log( 'site settings building', building );
 
 	}
 

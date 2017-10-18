@@ -17,11 +17,11 @@
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus{ background-color: yellow; color: #aaa; }
-	h3 { margin: 0; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
+	h3 { margin: 0; }
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
@@ -68,16 +68,18 @@
 	let textMenu;
 	let textZones;
 
+	let building;
 	let buildings;
 	let zones;
 	let storeys;
 	let spaces;
 
 	const ifrSource = 'build-well-threejs.html';
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well/';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/';
 
 	let scope;
 	let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+	const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 
 	var THREE;
 	var renderer;
@@ -106,7 +108,7 @@
 
 			scope = parent.ifrThree.contentWindow;
 
-			initVariables()
+			initVariables();
 
 
 		} else {
@@ -139,9 +141,10 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
+		building = scope.building;
 		buildings = scope.meshes;
 
-//console.log( 'buildings', buildings );
+//console.log( 'building', building );
 
 	}
 
@@ -150,11 +153,7 @@
 	function getBuildingData() {
 
 //console.log( 'buildings', buildings );
-
-		const theBuilding = buildings.getObjectByName( 'The Building' );
-		const bud = theBuilding.userData;
-
-console.log( 'theBuilding', theBuilding );
+console.log( 'building', building );
 
 		textMenu = '';
 
@@ -164,45 +163,73 @@ console.log( 'theBuilding', theBuilding );
 //			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
 			'<gbXML xmlns="http://www.gbxml.org/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
 				'xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" ' +
-				'useSIUnitsForResults="true" xmlns:xhtml="http://www.w3.org/1999/xhtml" temperatureUnit="C" ' +
-				'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SurfaceReferenceLocation="Centerline" ' +
-				'areaUnit="SquareMeters" lengthUnit="Meters" version="6.01" volumeUnit="CubicMeters">\n' +
+				'xmlns:xhtml="http://www.w3.org/1999/xhtml" ' +
+				'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
+				'useSIUnitsForResults="' + building.useSIUnitsForResults + '" ' +
+				'SurfaceReferenceLocation="' + building.SurfaceReferenceLocation + '" ' +
+				'temperatureUnit="' + building.temperatureUnit + '" ' +
+				'lengthUnit="' + building.lengthUnit + '" ' +
+				'areaUnit="' + building.areaUnit + '" ' +
+				'volumeUnit="' + building.volumeUnit + '" ' +
+				'version="' + building.version + '" >\n' +
 
-			'\t<Campus id="Facility" >\n' +
-			'\t\t<DaylightSavings>true</DaylightSavings>\n' +
-			'\t\t<Name>Created by LadybugTools/Spider/Build Well</Name>\n' +
+			'\t<Campus id="' + building.campusId + '" >\n' +
+
+			'\t\t<DaylightSavings>"' + building.DaylightSavings + '"</DaylightSavings>\n' +
+			'\t\t<Name>"' + building.group.name + '"</Name>\n' +
 			'\t\t<Location>\n' +
-			'\t\t\t<ZipcodeOrPostalCode>94111</ZipcodeOrPostalCode>\n' +
-			'\t\t\t<Longitude>-122.398</Longitude>\n' +
-			'\t\t\t<Latitude>37.796</Latitude>\n' +
-			'\t\t\t<Elevation>10</Elevation>\n' +
-			'\t\t\t<CADModelAzimuth>0</CADModelAzimuth>\n' +
-			'\t\t\t<Name>San Francisco CA United States</Name>\n' +
+			'\t\t\t<ZipcodeOrPostalCode>"' + building.ZipcodeOrPostalCode + '"</ZipcodeOrPostalCode>\n' +
+			'\t\t\t<Longitude>"' + building.Longitude + '"</Longitude>\n' +
+			'\t\t\t<Latitude>"' + building.Latitude + '"</Latitude>\n' +
+			'\t\t\t<Elevation>"' + building.Elevation + '"</Elevation>\n' +
+			'\t\t\t<CADModelAzimuth>"' + building.CADModelAzimuth + '"</CADModelAzimuth>\n' +
+			'\t\t\t<Name>"' + building.group.name + '"</Name>\n' +
 			'\t\t</Location>\n' +
-			'\t\t<Building id="bw-building-' + bud.buildingId + '" buildingType="Office" >\n' +
-			'\t\t\t<Area>' + bud.area + '</Area>\n' +
-			'\t\t\t<Name>' + theBuilding.name + '</Name>\n' +
-			'\t\t\t<Description>' + bud.description + '</Description>\n' +
-			'\t\t\t<StreetAddress>' + bud.streetAddress + '</StreetAddress>\n' +
-			'\t\t\t<Volume>' + bud.volume + '</Volume>\n' +
+			'\t\t<Building id="bw-building-' + building.buildingId + '" buildingType="Office" >\n' +
+			'\t\t\t<Area>' + building.area + '</Area>\n' +
+			'\t\t\t<Name>"' + building.group.name + '"</Name>\n' +
+			'\t\t\t<Description>' + building.description + '</Description>\n' +
+			'\t\t\t<StreetAddress>"' + building.streetAddress + '"</StreetAddress>\n' +
+			'\t\t\t<Volume>' + building.volume + '</Volume>\n' +
 		'';
 
-		zonesText = getZones( theBuilding );
 
-		textMenu += getBuildingStoreys( theBuilding );
+		textMenu += getBuildingStoreys( building );
 
-		textMenu += getSpaces( theBuilding );
+		textMenu += getSpaces( building );
 
-		textMenu += getSurfaces( theBuilding );
+		textMenu += '\t\t</Building>\n';
+
+		textMenu += getSurfaces( buildings );
+
+		zonesText = getZones( building );
 
 		textMenu +=
 
 			'\t</Campus>\n' +
-			textZones +
+			zonesText +
 			'\t<DocumentHistory>\n' +
 			'\t</DocumentHistory>\n' +
 			'</gbXML>\n' +
 		'';
+
+
+
+
+		if ( parent && parent.ifrThree ) {
+
+			parent.divContents.innerHTML =
+
+				'gbXML data<textarea id=buildingData >' + 
+				textMenu + '</textarea>'
+
+			'';
+
+			parent.divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+			parent.divContents.style.display = '';
+			parent.viewContents();
+
+		} else {
 
 		scope.divScreenText.innerHTML = 
 
@@ -211,39 +238,36 @@ console.log( 'theBuilding', theBuilding );
 
 		'';
 
+		}
 
 	}
 
 
 	function getZones( building ) {
 
-		textZones = '';
+		let textZones = '';
 
-		zones = [];
-
-		if ( !building.userData.zones ) {
+		if ( !building.zones ) {
 
 //console.log( 'no zones' );
 
 		} else {
 
-			for ( let i = 0; i < building.userData.zones.length; i++ ) {
+			for ( let i = 0; i < building.zones.length; i++ ) {
 
-				zone = building.userData.zones[ i ];
+				const zone = building.zones[ i ];
 				textZones += 
 					'\t<Zone id="bw-zone-' + ( i + 1 ) + '" >\n' +
-					'\t\t<Name>' + zone.name + '</Name>\n' +
-					'\t\t<Description>' + zone.description + '</Description>\n' +
+					'\t\t<Name>"' + zone.name + '"</Name>\n' +
+					'\t\t<Description>"' + zone.description + '"</Description>\n' +
 					'\t</Zone>\n' +
 				'';
-
-				zones.push( bwId );
 
 			}
 
 		}
 
-//console.log( 'zones', zones );
+//console.log( 'textZones', textZones );
 
 		return textZones;
 
@@ -255,12 +279,12 @@ console.log( 'theBuilding', theBuilding );
 
 		let textBuildingStoreys = '';
 
-		for ( var i = 0; i < building.userData.floors; i++ ) {
+		for ( var i = 0; i < building.floors; i++ ) {
 
 			textBuildingStoreys += 
 				'\t\t\t<BuildingStorey id="bw-storey-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t\t<Name>"storey-' + ( i + 1 ) + '"</Name>\n' +
-				'\t\t\t\t<Level>' + ( i * building.userData.floorHeight ) + '</Level>\n' +
+				'\t\t\t\t<Level>' + ( i * building.floorHeight + 1 ) + '</Level>\n' +
 				'\t\t\t</BuildingStorey>\n' +
 			'';
 
@@ -279,13 +303,13 @@ console.log( 'theBuilding', theBuilding );
 		let textSpace = '';
 		let spaces;
 
-		if ( !building.userData.spaces ) { 
+		if ( !building.spaces ) { 
 
 console.log( 'no spaces' );
 
 		} else {
 
-			spaces = building.userData.spaces;
+			spaces = building.spaces;
 
 			for ( var i = 0; i < spaces.length; i++ ) {
 
@@ -294,14 +318,13 @@ console.log( 'no spaces' );
 				textSpace += 
 					'\t\t\t<Space zoneIdRef="bw-zone-' + space.zone + '" ' +
 						'id="bw-space-' + ( i + 1 ) + '" ' +
-						'buildingStoreyIdRef="bw-story-' + space.storey + '" ' +
+						'buildingStoreyIdRef="bw-storey-' + space.storey + '" ' +
 						'conditionType="HeatedAndCooled" >\n' +
-					'\t\t\t\t<Name>' + space.name + '</Name>\n' +
-					'\t\t\t\t<Description>' + space.description + '</Description>\n' +
+					'\t\t\t\t<Name>"' + space.name + '"</Name>\n' +
+					'\t\t\t\t<Description>"' + space.description + '"</Description>\n' +
 					'\t\t\t\t<Area>' + space.area + '</Area>\n' +
 					'\t\t\t\t<Volume>' + space.volume + '</Volume>\n' +
 					'\t\t\t</Space>\n' +
-
 
 				'';
 
@@ -311,43 +334,42 @@ console.log( 'no spaces' );
 
 //console.log( 'spaces', spaces );
 
-		textSpace += '\t\t</Building>\n';
-
 		return textSpace;
 
 	}
 
 
 
-	function getSurfaces( theBuilding ) {
+	function getSurfaces( buildings ) {
 
 		let textSurfaces = '';
 
 		for ( let i = 0; i < buildings.children.length; i++ ) {
 
-			building = buildings.children[ i ];
+			aBuilding = buildings.children[ i ];
 
-			if ( building.geometry ) {
-
-				textSurfaces += getSurfacesAdjacentBuildings( building );
+			if ( aBuilding.children.length < 3 ) {
+//console.log( '', aBuilding);
+				textSurfaces += getSurfacesAdjacentBuildings( aBuilding );
 
 			} else {
 
-//console.log( 'building', building );
+console.log( 'building', building );
 
 				const geo = new THREE.BoxBufferGeometry( 3, 1, 1 );
 				const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-				const spaces = building.userData.spaces;
+				const spaces = building.group.spaces;
 //console.log( 'spaces', spaces );
-				const angleBuilding = building.rotation.z;
 
-				for ( let j = 0; j < building.children.length; j++ ) {
+				const angleBuilding = d2r * building.orientation
+
+				for ( let j = 0; j < building.group.children.length; j++ ) {
 //				for ( let j = 3; j < 4; j++ ) {
 
-					building.children[ j ].updateMatrix();
+					building.group.children[ j ].updateMatrix();
 
-					const surface = building.children[ j ].clone();
+					const surface = building.group.children[ j ].clone();
 //console.log( 'surface', surface );
 
 					let geometry = new THREE.Geometry().fromBufferGeometry( surface.geometry );
@@ -461,7 +483,7 @@ console.log( 'no spaces' );
 						}
 
 						textSurfaces +=
-							'\t\t\t\t\t</PolyLoop>\n' +
+							'\t\t\t\t</PolyLoop>\n' +
 							'\t\t\t\t</PlanarGeometry>\n' +
 							'\t\t\t</Opening>\n' +
 							'\t\t</Surface>\n' +
@@ -471,7 +493,7 @@ console.log( 'no spaces' );
 
 
 						textSurfaces +=
-							'\t\t\t\t\t</PolyLoop>\n' +
+							'\t\t\t\t</PolyLoop>\n' +
 							'\t\t\t</PlanarGeometry>\n' +
 							'\t\t</Surface>\n' +
 						'';
@@ -480,34 +502,69 @@ console.log( 'no spaces' );
 
 				}
 
-//		parent.ii = parent.ifrContents.contentWindow;
-//		parent.ss = surface;
-//		parent.bb = building
-
 			}
 
 		}
 
-		return textSurfaces;
+		textSurfaces += getSurfacesOverhangs( building );
 
+		return textSurfaces;
 
 	}
 
 
+	function getSurfacesOverhangs( building ) {
+
+		let textOver = '';
+
+		for ( var i = 0; i < building.overhangs.length; i++ ) {
+
+			over = building.overhangs[ i ];
+
+			textOver += 
+				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( i + 1 ) + '" >\n' +
+				'\t\t\t<Name>' + building.group.name +'</Name>\n' +
+				'\t\t\t<PlanarGeometry>\n' +
+				'\t\t\t\t<PolyLoop>\n' +
+			'';
+
+
+			for ( let j = 0; j < 4; j++ ) {
+
+//				const vertex = vertices[ j ];
+				vertex = v( 0, 0, 0 );
+				textOver += getCartesianPointText( vertex );
+
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( vertex );
+				scene.add( mesh );
+
+			}
+
+			textOver +=
+				'\t\t\t\t</PolyLoop>\n' +
+				'\t\t\t</PlanarGeometry>\n' +
+				'\t\t</Surface>\n' +
+			'';
+		}
+
+console.log( 'textOver', textOver );
+
+		return textOver;
+
+	}
 
 	function getSurfacesAdjacentBuildings( building ) { 
 
-//console.log( 'geo', building.geometry.clone() ); 
-
 		let textMenu = '';
 
-		geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
+		const geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
 
 		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 		vertexCount = 0;
 
-		for ( let j = 0; j < 6; j++ ) {
+		for ( let j = 0; j < 5; j++ ) {
 
 			textMenu += 
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( j + 1 ) + '" >\n' +
@@ -516,19 +573,19 @@ console.log( 'no spaces' );
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
 
-			v1 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-			v2 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-			v3 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
-			v4 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+			const v1 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+			const v2 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+			const v3 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+			const v4 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
 
 			const vertices = [ v2, v1, v3, v4 ];
 
 			for ( let k = 0; k < 4; k++ ) {
 
-				vertex = vertices[ k ];
+				const vertex = vertices[ k ];
 				textMenu += getCartesianPointText( vertex );
 
-				let mesh = new THREE.Mesh( geometry, material );
+				const mesh = new THREE.Mesh( geometry, material );
 				mesh.position.copy( vertex );
 				scene.add( mesh );
 
@@ -547,17 +604,18 @@ console.log( 'no spaces' );
 	}
 
 
+
 	function getCartesianPointText( vertex ) {
 
 		const textMenu =
 
-			'\t\t\t\t\t\t<CartesianPoint>\n' +
+			'\t\t\t\t\t<CartesianPoint>\n' +
 
-				'\t\t\t\t\t\t\t<Coordinate>' + vertex.x.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
-				'\t\t\t\t\t\t\t<Coordinate>' + vertex.y.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
-				'\t\t\t\t\t\t\t<Coordinate>' + vertex.z.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + vertex.x.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + vertex.y.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + vertex.z.toFixed( 5 ).replace( /\.00000/,'' ) + '</Coordinate>\n' +
 
-			'\t\t\t\t\t\t</CartesianPoint>\n' +
+			'\t\t\t\t\t</CartesianPoint>\n' +
 
 		'';
 
@@ -569,7 +627,7 @@ console.log( 'no spaces' );
 
 	function saveFile() {
 
-		var blob = new Blob( [ scope.buildingData.value ] );
+		var blob = new Blob( [ parent.buildingData.value ] );
 		var a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
 		a.download = 'building-data.xml';

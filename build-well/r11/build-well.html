@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Difficult things done easily" >
 <meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-13" >
-<title>Build Well R11.1</title>
+<meta name = "date" content = "2017-10-17" >
+<title>Build Well R11.2</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -17,11 +17,13 @@
 	body, html { font: 12pt monospace; height:100%; margin: 0; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
-	blockquote, pre { background-color: #eee; padding: 10px; }
 
+	blockquote, pre { background-color: #eee; padding: 10px; }
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
+
 	summary { outline: none; font-size: 14pt }
+	textarea { background: none; height: 700px; width: 100%; tab-size: 4;}
 
 	.highlight { background-color: yellow; }
 
@@ -190,9 +192,10 @@
 	function viewContents() {
 
 console.log( '', 23 );
+
 		document.body.style.overflow = 'auto';
 
-		ifrThree.style.display = 'none';
+//		ifrThree.style.display = 'none';
 
 		divToggleView.style.display = '';
 

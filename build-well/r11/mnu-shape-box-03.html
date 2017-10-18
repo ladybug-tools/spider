@@ -136,6 +136,7 @@
 
 			initVariables()
 
+
 		} else {
 
 			ifrContents.src = ifrSource;
@@ -237,6 +238,7 @@
 		areaFloor = area / floors;
 
 		if ( parseInt( inpBuildingArea.value, 10 ) !== area || parseInt( inpNumberOfFloors.value, 10 ) !== floors ) {
+
 console.log( 'floor/area diff', area );
 
 			const floorsNew = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ) : 1;

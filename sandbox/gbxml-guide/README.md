@@ -65,13 +65,14 @@ See also:
 * SDD export (input format - geometry, constructions, and thermal zones only)
 * IFC import (geometry only)
 
-<https://www.tn.gov/assets/entities/osa/attachments/BIM_RevitTogbXML.pdf>
+* <https://www.tn.gov/assets/entities/osa/attachments/BIM_RevitTogbXML.pdf>
 
 > Creating Revit Models to be exported via gbXML for Energy Analysis
 
 
 * <http://slideplayer.com/slide/5155040/>
-> http://slideplayer.com/slide/5155040/
+
+
 
 
 ## Change Log
