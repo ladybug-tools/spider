@@ -124,7 +124,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 * 2017-10-11 ~ Export diagonal walls - yes
 * 2017-10-14 ~ Export individuated, manifold spaces
-* 2017-10-05 ~ Export overhang and fin data
+* 2017-10-05 ~ Export fin data
 * 2017-10-05 ~ Enable changing building orientation
 
 ### mnu-real-time-report.html
@@ -151,6 +151,16 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 14:12
 * * mnu-gbxml-export.html
 	* Overhangs appear to be exporting OK
+	* New method of going from local coordinates to world coordinates is great
+
+    vertex.applyMatrix4( overhang.matrixWorld );
+
+* build-well-threejs.html
+	* started add individuated floor & ceiling surfaces
+
+Done more or less
+
+* 2017-10-05 ~ Export overhang data
 
 ### 2017-10-17 ~ Theo
 

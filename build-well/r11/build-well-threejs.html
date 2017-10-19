@@ -57,6 +57,7 @@
 
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/single-model-multiple-menu';
 
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 	const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 
@@ -187,7 +188,7 @@
 		building.campusId = 'Facility';
 
 		building.buildingId = 1;
-		building.useSIUnitsForResults = true; 
+		building.useSIUnitsForResults = true;
 		building.temperatureUnit = 'C';
 		building.SurfaceReferenceLocation = 'Centerline' ;
 		building.areaUnit = 'SquareMeters';
@@ -257,7 +258,7 @@
 		const floors = building.floors;
 		const hgt = building.floorHeight;
 		const perDep = building.perimeterDepth;
-		
+
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
 
@@ -417,6 +418,8 @@
 		const deltaL = wwr * length05;
 		const height05 = height * 0.5;
 		const deltaH = wwr * height05;
+		const perDep = building.perimeterDepth;
+		const hgt = building.floorHeight;
 
 		const shapeVertices = [
 			v2( 0, 0 ),
@@ -445,10 +448,20 @@
 		mesh.name = 'ExteriorWall';
 		mesh.userData.idSpace = id;
 
-console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
+//console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
 //??
-		let coordinate = mesh.geometry.attributes.position.array;
-		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+//		let coordinate = mesh.geometry.attributes.position.array;
+//		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+
+
+		floor = [
+			v( length05 - deltaL, 0, 0 ),
+			v( length05 + deltaL, 0, 0 ),
+			v( length05 + deltaL - perDep, perDep, 0 ),
+			v( length05 - deltaL + perDep, perDep, 0 ),
+		];
+
+		mesh.userData.floor = floor;
 
 		if ( building.overhangDepth !== 0 ) {
 
@@ -458,8 +471,8 @@ console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
 
 			const plane = new THREE.Mesh( geometryPlane, material );
 
-			coordinate = plane.geometry.attributes.position.array;
-			coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+//			coordinate = plane.geometry.attributes.position.array;
+//			coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 			plane.name = 'Shade';
 			mesh.add( plane );
 			building.overhangs.push( plane );
@@ -507,8 +520,8 @@ console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
 		diagonal.name = 'InteriorWall';
 		mesh.add( diagonal );
 
-		let coordinate = mesh.geometry.attributes.position.array;
-		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
+//		let coordinate = mesh.geometry.attributes.position.array;
+//		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 
 		return mesh;
 

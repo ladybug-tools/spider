@@ -172,7 +172,7 @@ console.log( 'buildings', buildings );
 
 		scene.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh && child.name ) {
+			if ( child instanceof THREE.Mesh ) {
 
 				objects.push( child );
 
@@ -197,7 +197,7 @@ console.log( 'buildings', buildings );
 		raycaster = new THREE.Raycaster();
 		raycaster.setFromCamera( mouse, camera );
 
-		intersects = raycaster.intersectObjects( buildings.children );
+		intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
 
