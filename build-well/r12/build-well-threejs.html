@@ -170,14 +170,14 @@
 
 
 //		building = mesh.userData;
-		building.area = 8000;
+		building.area = 10000;
 
 		building.box = {};
 		building.box.length1 = 80;
 		building.box.width1 = 100;
 
 		building.orientation = 0;
-		building.floors = 1;
+		building.floors = 2;
 		building.floorHeight = 12;
 
 		building.perimeterDepth = 15;
@@ -209,6 +209,7 @@
 
 		building.zones = [];
 		building.spaces = [];
+		building.slabs = [];
 		building.overhangs = [];
 
 		building.group = new THREE.Group();
@@ -232,10 +233,10 @@
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 		const mesh = new THREE.Mesh( geometry, material );
 		mesh.name = 'object With No Name';
+		mesh.userData.idSpace = 'none';
 
 		const edgesGeometry = new THREE.EdgesGeometry( geometry );
 		const meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
-
 		mesh.add( meshEdges );
 
 		return mesh;
@@ -374,38 +375,40 @@
 
 			const name = i === 0 ? 'SlabOnGrade' : 'InteriorFloor';
 
-			floor = createSlab( len, wid, spaceId );
-			floor.position.set( -len05, -wid05, i * hgt );
-			floor.name = name;
-			building.group.add( floor );
+			floor = createSlab( building.group, name, len - 2 * perDep, wid - 2 * perDep, 0, 0, 0, i * hgt, spaceId );
+
+
 
 		}
+//		roof = createSlab( len, wid, spaceId - 1 );
 
-		roof = createSlab( len, wid, spaceId - 1 );
-		roof.position.set( -len05, -wid05, i * hgt );
-		roof.name = 'Roof';
-		building.group.add( roof );
+		roof = createSlab( building.group, 'roof', len - 2 * perDep, wid - 2 * perDep, 0, 0, 0, i * hgt, spaceId );
 
 	}
 
 ////////////
 
-	function createSlab( length, width, id ) {
+	function createSlab( mesh, name, length, width, delta, transX, transY, hgt, id ) {
 
-		const shape = new THREE.Shape( [
-			v2( 0, 0 ),
-			v2( length, 0 ),
-			v2( length, width ),
-			v2( 0, width ),
-			v2( 0, 0 )
-		] );
-
-		const geometry = new THREE.ShapeBufferGeometry( shape );
+		const length05 = length * 0.5;
+		const geometrySlab = new THREE.PlaneBufferGeometry( length, width );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
-		const mesh = new THREE.Mesh( geometry, material );
-		mesh.userData.idSpace = id;
 
-		return mesh;
+		vertices = geometrySlab.attributes.position.array;
+		vertices[ 6 ] = - length05 + delta;
+		vertices[ 9 ] = length05 - delta;
+
+//		geometrySlab.computeFaceNormals();
+//		geometrySlab.computeVertexNormals();
+		geometrySlab.applyMatrix( new THREE.Matrix4().makeTranslation( transX,transY, hgt ) );
+//console.log( 'mesh', mesh );
+		const slab = new THREE.Mesh( geometrySlab, material );
+		slab.name = name
+		slab.userData.idSpace = id;
+		mesh.add( slab );
+		building.slabs.push( slab );
+
+		return slab;
 
 	}
 
@@ -444,31 +447,15 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
 
-		const mesh = new THREE.Mesh( geometry, material );
+		var mesh = new THREE.Mesh( geometry, material );
 		mesh.name = 'ExteriorWall';
 		mesh.userData.idSpace = id;
 
 //console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
-//??
-//		let coordinate = mesh.geometry.attributes.position.array;
-//		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 
+		createSlab( mesh, 'Ceiling', length, perDep, perDep, length05, -0.5 * perDep, hgt, id );
 
-		floor = [
-			v( length05 - deltaL, 0, 0 ),
-			v( length05 + deltaL, 0, 0 ),
-			v( length05 + deltaL - perDep, perDep, 0 ),
-			v( length05 - deltaL + perDep, perDep, 0 ),
-		];
-
-		mesh.userData.floor = floor;
-
-		const geometrySlab = new THREE.PlaneBufferGeometry( length, perDep );
-		geometrySlab.applyMatrix( new THREE.Matrix4().makeTranslation(  length05, - 0.5 * perDep, 0 ) );
-
-		const slab = new THREE.Mesh( geometrySlab, material );
-//		mesh.add( slab );
-
+		if ( floor === 0 ) { createSlab( mesh, 'SlabOnGrade', length, perDep, perDep, length05, -0.5 * perDep, 0, id ); }
 
 		if ( building.overhangDepth !== 0 ) {
 
@@ -478,9 +465,8 @@
 
 			const plane = new THREE.Mesh( geometryPlane, material );
 
-//			coordinate = plane.geometry.attributes.position.array;
-//			coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 			plane.name = 'Shade';
+			plane.userData.idSpace = id;
 			mesh.add( plane );
 			building.overhangs.push( plane );
 
@@ -522,13 +508,11 @@
 		const geometry2 = new THREE.ShapeBufferGeometry( shape2 );
 		geometry2.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 		geometry2.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.75 * Math.PI ) );
+
 		const diagonal = new THREE.Mesh( geometry2, material );
 		diagonal.userData.idSpace = id;
 		diagonal.name = 'InteriorWall';
 		mesh.add( diagonal );
-
-//		let coordinate = mesh.geometry.attributes.position.array;
-//		coordinate = coordinate.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 
 		return mesh;
 

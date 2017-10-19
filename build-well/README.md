@@ -144,6 +144,14 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 
 
+### 2017-10-19 ~ Theo
+
+11:14
+* Continue undividuated floor and ceiling
+12:00
+* R12 started
+
+
 ### 2017-10-18 ~ Theo
 
 11:00
