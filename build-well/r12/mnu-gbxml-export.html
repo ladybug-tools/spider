@@ -77,7 +77,11 @@
 	let spaces;
 
 	const ifrSource = 'build-well-threejs.html';
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/';
+
+
+	const release = location.pathname.split( '/' )[ 8 ];
+	const fileName = location.pathname.split( '/' ).pop();
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
 
 	let scope;
 	let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -515,6 +519,11 @@ console.log( 'building', building );
 	}
 
 
+	function getSurfacesSlabs( building ) {
+
+
+
+	}
 
 	function getSurfacesOverhangs( building ) {
 
@@ -573,6 +582,10 @@ console.log( 'building', building );
 		return textOver;
 
 	}
+
+
+
+
 
 	function getSurfacesAdjacentBuildings( building ) { 
 
