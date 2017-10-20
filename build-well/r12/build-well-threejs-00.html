@@ -57,6 +57,7 @@
 
 	const release = location.pathname.split( '/' )[ 8 ];
 	const fileName = location.pathname.split( '/' ).pop();
+
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
 
 	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -76,7 +77,7 @@
 
 			divTitle.innerHTML =
 				'<h2>' +
-				'<a  href = "./build-well.html" >bw</a> &nbsp; ' +
+				'<a  href = "../index.html" >bw</a> &nbsp; ' +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="top" >&#x24D8</a>'
 				'</h2>';
@@ -305,6 +306,26 @@
 
 			}
 
+// length back
+			spaceId ++;
+			area = ( len - perDep ) * perDep;
+			volume = area * building.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length back', area: area, storey: storey, volume: volume, zone: spaceId } );
+
+			zones.push( { name: 'zone ' + spaceId, description: 'length back ', area: area, volume: volume } );
+
+			wallExt = createExternalWall( len, hgt, i, spaceId );
+			wallExt.position.set( -len05, wid05, i * hgt );
+			building.group.add( wallExt );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( len - 2 * perDep, hgt, i, [ spaceId, spaceIdInside ] );
+				wall.position.set( -len05 + perDep, wid05 - perDep, i * hgt );
+				building.group.add( wall );
+
+			}
+
 
 
 // width left
@@ -328,29 +349,6 @@
 				building.group.add( wall );
 
 			}
-
-
-// length back
-			spaceId ++;
-			area = ( len - perDep ) * perDep;
-			volume = area * building.floorHeight;
-			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length back', area: area, storey: storey, volume: volume, zone: spaceId } );
-
-			zones.push( { name: 'zone ' + spaceId, description: 'length back ', area: area, volume: volume } );
-
-			wallExt = createExternalWall( len, hgt, i, spaceId );
-			wallExt.position.set( -len05, wid05, i * hgt );
-			building.group.add( wallExt );
-
-			if ( len > 2 * perDep && wid > 2 * perDep ) {
-
-				wall = createPerimeterDepthWall( len - 2 * perDep, hgt, i, [ spaceId, spaceIdInside ] );
-				wall.position.set( -len05 + perDep, wid05 - perDep, i * hgt );
-				building.group.add( wall );
-
-			}
-
-
 
 
 // width right
@@ -395,11 +393,9 @@
 
 	}
 
-
-
 ////////////
 
-	function createSlab( mesh, name, length, width, transX, transY, delta, hgt, id ) {
+	function createSlab( mesh, name, length, width, delta, transX, transY, hgt, id ) {
 
 		const length05 = length * 0.5;
 		const geometrySlab = new THREE.PlaneBufferGeometry( length, width );
@@ -463,11 +459,11 @@
 
 //console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
 
-//		function createSlab( mesh, name, length, width, transX, transY, delta1, hgt, id ) {
+//	function createSlab( mesh, name, length, width, delta, transX, transY, hgt, id ) {
 
-		createSlab( mesh, 'Ceiling', length, perDep, length05, -0.5 * perDep, perDep, hgt, id );
+		createSlab( mesh, 'Ceiling', length, perDep, perDep, length05, -0.5 * perDep, hgt, id );
 
-		if ( floor === 0 ) { createSlab( mesh, 'SlabOnGrade', length, perDep, length05, -0.5 * perDep, perDep, 0, id ); }
+		if ( floor === 0 ) { createSlab( mesh, 'SlabOnGrade', length, perDep, perDep, length05, -0.5 * perDep, 0, id ); }
 
 		if ( building.overhangDepth !== 0 ) {
 

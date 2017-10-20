@@ -69,7 +69,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 * 2017-10-03 ~ L Shape 1: how to recalculate length (X1) after you update the area?
 	* Spreadsheet with all the calculations would be helpful
 
-### index.html / Build Well parent file
+### build-well.html / Build Well parent file
 
 * 2017-10-14 ~ Improve small screen operation
 
@@ -86,13 +86,10 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ### mnu-box-shape.html
 
-* 2017-10-14 ~ add individuated floors and ceilings
-* 2017-10-14 ~ Revisit space id naming
+
 
 ### mnu-ell-shape-one.html
 
-* 2017-10-14 ~ add individuated floors and ceilings
-* 2017-10-14 ~ Revisit space id naming
 
 ### mnu-settings-site.html
 
@@ -131,6 +128,9 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 * 2017-10-14 ~ Grab the data in real-time from the 3d model currently in play
 
+### mnu-template.html
+
+
 ### mnu-settings-zone.html
 
 * in the pipeline
@@ -142,6 +142,25 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ## Change Log
 
+
+
+### 2017-10-20 ~ Theo
+
+
+12:29
+
+* mnu-template.html
+	* Clicking on info icon takes you to source code
+* build-well.html 
+	* Clicking on info icon takes you to source code
+* mnu-box-shape.html
+	* looking good: 2017-10-14 ~ add individuated floors and ceilings
+	* id/zones numbers start from south side, run clockwise: 2017-10-14 ~ Revisit space id naming
+* mnu-ell-shape-one.html
+	* Clicking on info icon takes you to source code
+	* correct issues with wall placements
+	* looking good:  2017-10-14 ~ add individuated floors and ceilings
+	* id/zones numbers start from south side, run clockwise:  2017-10-14 ~ Revisit space id naming
 
 
 ### 2017-10-19 ~ Theo

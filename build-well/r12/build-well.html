@@ -63,7 +63,7 @@
 				</div>
 
 				<div><a href=JavaScript:getMenuHTML("mnu-shape-ell-one.html"); >L Shape</a>
-					&raquo; <a href="mnu-ell-one.html " target="_blank" title = 'standalone L shape test script' >&#x1F5D7;</a>
+					&raquo; <a href="mnu-shape-ell-one.html " target="_blank" title = 'standalone L shape test script' >&#x1F5D7;</a>
 				</div>
 
 				<div><a href=JavaScript:getMenuHTML("mnu-settings-spaces.html"); >Spaces</a>
@@ -113,7 +113,9 @@
 <script>
 
 
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/';
+	const release = location.pathname.split( '/' )[ 8 ];
+	const fileName = location.pathname.split( '/' ).pop();
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
 
 	const b = '<br>';
 	const txt = 
