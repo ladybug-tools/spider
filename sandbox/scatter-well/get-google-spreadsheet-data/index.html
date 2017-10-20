@@ -146,7 +146,7 @@
 		placard = drawPlacard( ['Y-axis', 'annual heating load', 'kwh' ], 0.05, 120, 0, 110, 0 );
 		scene.add( placard );
 
-		placard = drawPlacard( ['Z-axis', 'total transmit tedsolar', 'kwh' ], 0.05, 240, 0, 0, 110 );
+		placard = drawPlacard( ['Z-axis', 'total transmitted solar', 'kwh' ], 0.05, 240, 0, 0, 110 );
 		scene.add( placard );
 
 		hShape();
@@ -241,6 +241,7 @@ console.log( 'c0', spreadsheetCells[ 0 ].content.$t );
 			}
 
 if ( cell.gsx$annualcoolingloadkwh.$t === '' ) { console.log( 'i', i ); }
+
 			const x = parseFloat( cell.gsx$annualcoolingloadkwh.$t ) * 0.0005 - 40;
 			const y = parseFloat( cell.gsx$annualheatingloadkwh.$t ) * 0.0002 - 60;
 			const z = parseFloat( cell.gsx$totalsolarloadkwh.$t ) * 0.00008 -10;

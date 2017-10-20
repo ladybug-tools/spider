@@ -43,7 +43,7 @@
 			<p id=pLength2 >length 2 <input id=inpLength2 type=number value=40 onchange=updateShape(); ></p>
 			<p id=pLength3 >length 3 <input id=inpLength3 type=number value=40 onchange=updateShape(); ></p>
 
-			<p>width 1 <input id=inpWidth1 type=number value=100 onchange=updateShape(); ></p>
+			<p>width 1 <input id=inpWidth1 type=number value=120 onchange=updateShape(); ></p>
 			<p id=pWidth2 >width 2 <input id=inpWidth2 type=number value=40 onchange=updateShape(); ></p>
 			<p id=pWidth3 >width 3 <input id=inpWidth3 type=number value=40 onchange=updateShape(); ></p>
 
@@ -74,7 +74,7 @@
 
 	function init() {
 
-		title.innerHTML = '<h1>&#x1F3EC;  <a href="" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +'</a> 🏡 </h1>';
+		title.innerHTML = '<h1>&#x1F3EC;  <a href="" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +'</a></h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -110,7 +110,7 @@
 
 		}
 
-		selShape.selectedIndex = 0;
+		selShape.selectedIndex = 4;
 
 /*
 		geometry = new THREE.BoxGeometry( 50, 50, 50 );
@@ -120,38 +120,61 @@
 //		scene.add( mesh );
 */
 
-		parameters.steps = parseInt( inpStoreys.value );
-		parameters.length1 = parseInt( inpLength1.value, 10 );
-		parameters.length2 = parseInt( inpLength2.value, 10 );
 
-		parameters.width1 = parseInt( inpWidth1.value, 10 );
-		parameters.width2 = parseInt( inpWidth2.value, 10 );
+		parameters.steps = 3;
+		parameters.length1 = 60;
+		parameters.length2 = 20;
 
-		parameters.area = parameters.length1 * parameters.width1 * parameters.steps;
+		parameters.width1 = 100;
+		parameters.width2 = 50;
 
+//		parameters.area = parameters.length1 * parameters.width1 * parameters.steps;
 
+		inpStoreys.value = parameters.steps;
+		inpLength1.value = parameters.length1;
+		inpLength2.value = parameters.length2;
+
+		inpWidth1.value = parameters.width1;
+		inpWidth2.value = parameters.width2;
+
+		parameters.area = 12000;
 		inpArea.value = parameters.area;
 
-
-		setMenuBoxShape();
+		setMenuHShape();
 
 	}
 
 
 	function selectShape() {
 
-			switch ( selShape.value ) {
+		switch ( selShape.value ) {
 			case '⬜ shape':
 				setMenuBoxShape(); 
 				break;
-
 			case 'L shape':
 				setMenuLShape();
 				break;
-			case 'n':
-			case 'm':
+			case 'U shape':
+				setMenuUShape();
 				break;
-
+			case 'T Shape':
+				setMenuTShape();
+				break;
+			case 'H Shape':
+				setMenuTShape();
+				break;
+			case 'T Shape':
+				setMenuTShape();
+				break;
+			case 'T Shape':
+				setMenuTShape();
+				break;
+			case 'T Shape':
+				setMenuTShape();
+				break;
+			case 'T Shape':
+				setMenuTShape();
+				break;
 			default:
 	console.log( 'selShape', selShape.value );
 			
@@ -227,62 +250,266 @@
 		p = parameters;
 		p.steps = parseInt( inpStoreys.value, 10 );
 
-
+		areaNew = parseInt( inpArea.value, 10 );
 		length1New = parseInt( inpLength1.value, 10 );
 		length2New = parseInt( inpLength2.value, 10 );
+
 		width1New = parseInt( inpWidth1.value, 10 );
 		width2New = parseInt( inpWidth2.value, 10 );
+		width3New = p.width1 - width2New;
 
+		p.length3 = p.length1 - p.length2;
+		p.width3 = p.width1 - p.width2;
 
 console.log( '', length1New, p.length1 );
 
 		if ( length1New !== p.length1 ) {
 
-			width1New = ( p.area +  p.length2 * p.width2 * p.steps ) / ( length1New * p.steps );
+			width1New = ( p.area + p.length3 * p.width3 * p.steps ) / ( length1New * p.steps );
 
-			inpWidth1.value = width1New;
+			inpWidth1.value = width1New.toFixed();
 
 			p.length1 = length1New;
 			p.width1 = width1New;
 
 		} else if ( length2New !== p.length2 ) {
 
-console.log( '', length2New, p.length2 );
+console.log( 'length2New', length2New, p.length2 );
 
-			area = p.length2 * p.width2;
-			width2New = area / length2New;
+			length3New = p.length1 - length2New;
 
-			inpWidth2.value = width2New;
+			areaVoid = p.length3 * p.width3;
+			width3New = areaVoid / length3New;
+			width2New = p.width1 - width3New;
+
+			inpWidth2.value = width2New.toFixed();
+			inpWidth3.value = width3New.toFixed();
 
 			p.length2 = length2New;
 			p.width2 = width2New;
 
-		} else if ( width1New != p.width1 ) {
+		} else if ( width1New !== p.width1 ) {
 
-			length1New = ( p.area +  p.length2 * p.width2 * p.steps ) / ( width1New * p.steps );
+			length1New = ( p.area + p.length3 * p.width3 * p.steps ) / ( width1New * p.steps );
 
-			inpLength1.value = length1New;
+			inpLength1.value = length1New.toFixed();
 
 			p.length1 = length1New;
 			p.width1 = width1New;
 
-		} else if ( width2New != p.width2 ) {
+		} else if ( width2New !== p.width2 ) {
 
-			width1New = ( p.area +  p.length2 * width2New * p.steps ) / ( p.length1 * p.steps );
+//			width1New = ( p.area + p.length2 * width2New * p.steps ) / ( p.length1 * p.steps );
 
-			inpWidth1.value = width1New;
+			width3New = p.width1 - width2New;
 
-			p.width1 = width1New;
+			areaVoid = p.length3 * p.width3;
+			length3New = areaVoid / width3New;
+			length2New = p.length1 - length3New;
+
+			inpLength2.value = length2New.toFixed();
+			inpLength3.value = length3New.toFixed();
+
+			p.length2 = length2New;
 			p.width2 = width2New;
-
+			p.width3 = width3New;
 
 		}
 
-		spnCheckArea.innerHTML = ( p.length1 * p.width1 * p.steps - p.length2 * p.width2 * p.steps ).toLocaleString(); 
+		inpLength3.value = p.length3.toFixed();
+		inpWidth3.value = p.width3.toFixed();
+
+console.log( 'big area', parameters.length1 * parameters.width1 * parameters.steps );
+console.log( 'little area', parameters.length3 * parameters.width3 * parameters.steps );
+
+		spnCheckArea.innerHTML = ( p.length1 * p.width1 * p.steps - p.length3 * p.width3 * p.steps ).toLocaleString(); 
 
 
-		p.shape = new THREE.Shape( [ v2( 0, 0 ), v2( p.length1, 0 ), v2( p.length1, p.width1 - p.width2, ), 
-			v2( p.length1 - p.length2, p.width1 - p.width2 ), v2( p.length1 - p.length2, p.width1 ), v2( 0, p.width1 ) ] );
+		p.shape = new THREE.Shape( [ v2( 0, 0 ), v2( p.length1, 0 ), v2( p.length1, p.width1 - p.width3, ), 
+			v2( p.length1 - p.length3, p.width1 - p.width3 ), v2( p.length1 - p.length3, p.width1 ), v2( 0, p.width1 ) ] );
+
+		drawShape( p );
+
+	}
+
+
+
+	function setMenuUShape() {
+
+		pLength2.style.display = '';
+		pLength3.style.display = '';
+		pWidth2.style.display = '';
+		pWidth3.style.display = '';
+
+		inpLength2.disabled = '';
+		inpLength3.disabled = true;
+
+		inpWidth1.disabled = '';
+		inpWidth2.disabled = '';
+		inpWidth3.disabled = true;
+
+		updateShape = updateUShape;
+
+		updateShape();
+
+		spnCheckArea.innerHTML = ( p.length1 * p.width1 * p.steps - ( p.length1 - 2 * p.length2 ) * ( p.width1 - p.width2 ) * p.steps ).toLocaleString(); 
+
+
+	}
+
+
+
+	function updateUShape() {
+
+		p = parameters;
+
+		p.steps = 3;
+		p.length1 = 60;
+		p.length2 = 20;
+
+		p.width1 = 80;
+		p.width2 = 40;
+
+		p.shape = new THREE.Shape( [ v2( 0, 0 ), v2( p.length1, 0 ), v2( p.length1, p.width1 ), 
+
+			v2( p.length1 - p.length2, p.width1 ), 
+
+			v2( p.length1 - p.length2, p.width2 ), 
+
+			v2( p.length2, p.width2 ),
+			v2( p.length2, p.width1 ),
+			v2( 0, p.width1 ),
+
+		] );
+
+		drawShape( p );
+
+	}
+
+
+
+
+	function setMenuTShape() {
+
+		pLength2.style.display = '';
+		pLength3.style.display = '';
+		pWidth2.style.display = '';
+		pWidth3.style.display = '';
+
+		inpLength2.disabled = '';
+		inpLength3.disabled = true;
+
+		inpWidth1.disabled = '';
+		inpWidth2.disabled = '';
+		inpWidth3.disabled = true;
+
+		updateShape = updateTShape;
+
+		updateShape();
+
+		spnCheckArea.innerHTML = ( p.length1 * p.width1 * p.steps - ( p.length1 - 2 * p.length2 ) * ( p.width1 - p.width2 ) * p.steps ).toLocaleString(); 
+
+
+	}
+
+
+
+
+	function updateTShape() {
+
+		p = parameters;
+
+		p.steps = 3;
+		p.length1 = 20;
+		p.length2 = 40;
+		p.length3 = 60;
+
+		p.width1 = 60;
+		p.width2 = 80;
+
+
+		p.shape = new THREE.Shape( [ 
+
+			v2( p.length1, 0 ), 
+			v2( p.length2, 0 ), 
+			v2( p.length2, p.width1 ), 
+
+			v2( p.length3, p.width1 ), 
+
+			v2( p.length3, p.width2 ), 
+
+			v2( 0, p.width2 ),
+			v2( 0, p.width1 ),
+			v2( p.length1, p.width1 ),
+
+		] );
+
+		drawShape( p );
+
+	}
+
+
+
+
+	function setMenuHShape() {
+
+		pLength2.style.display = '';
+		pLength3.style.display = '';
+		pWidth2.style.display = '';
+		pWidth3.style.display = '';
+
+		inpLength2.disabled = '';
+		inpLength3.disabled = true;
+
+		inpWidth1.disabled = '';
+		inpWidth2.disabled = '';
+		inpWidth3.disabled = true;
+
+		updateShape = updateHShape;
+
+		updateShape();
+
+		spnCheckArea.innerHTML = ( p.length1 * p.width1 * p.steps - ( p.length1 - 2 * p.length2 ) * ( p.width1 - p.width2 ) * p.steps ).toLocaleString(); 
+
+
+	}
+
+
+
+
+	function updateHShape() {
+
+		p = parameters;
+
+		p.steps = 3;
+		p.length1 = 20;
+		p.length2 = 40;
+		p.length3 = 60;
+
+		p.width1 = 30;
+		p.width2 = 50;
+		p.width3 = 80;
+
+
+		p.shape = new THREE.Shape( [ 
+
+			v2( 0, 0 ), 
+			v2( p.length1, 0 ), 
+			v2( p.length1, p.width1 ), 
+
+			v2( p.length2, p.width1 ), 
+
+			v2( p.length2, 0 ), 
+
+			v2( p.length3, 0 ),
+			v2( p.length3, p.width3 ),
+			v2( p.length2, p.width3 ),
+			v2( p.length2, p.width2 ), 
+			v2( p.length1, p.width2 ),
+			v2( p.length1, p.width3 ),
+			v2( 0, p.width3 )
+
+		] );
 
 		drawShape( p );
 
