@@ -105,8 +105,11 @@
 	function init() {
 
 		divTitle.innerHTML = 
-			'<h3><a href = "" >' + document.title + '</a> &nbsp; ' +  
-			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+			'<h3>' +
+				( window.self === window.top ? '<a href="../index.html" target="_top">bwell</a><br>' : '' ) +
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +  
+				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
+			'</h3>';
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
@@ -218,7 +221,6 @@ console.log( 'building', building );
 			'\t</DocumentHistory>\n' +
 			'</gbXML>\n' +
 		'';
-
 
 
 
@@ -443,6 +445,7 @@ console.log( 'building', building );
 					v4 = geometry.vertices[ 3 ];
 
 					const vertices = [ v4, v3, v2, v1 ];
+//					const vertices = [ v1, v2, v3, v4 ];
 
 					for ( let k = 0; k < 4; k++ ) {
 
@@ -497,7 +500,6 @@ console.log( 'building', building );
 
 					} else {
 
-
 						textSurfaces +=
 							'\t\t\t\t</PolyLoop>\n' +
 							'\t\t\t</PlanarGeometry>\n' +
@@ -512,6 +514,7 @@ console.log( 'building', building );
 
 		}
 
+		textSurfaces += getSurfacesSlabs( building );
 		textSurfaces += getSurfacesOverhangs( building );
 
 		return textSurfaces;
@@ -521,9 +524,62 @@ console.log( 'building', building );
 
 	function getSurfacesSlabs( building ) {
 
+		let textSlabs = '';
 
+		const geometry = new THREE.BoxBufferGeometry( 3, 1, 1 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		for ( var i = 0; i < building.slabs.length; i++ ) {
+
+			const slab = building.slabs[ i ];
+
+			textSlabs += 
+				'\t\t<Surface surfaceType="' + slab.name + '" id="bw-' + slab.name + '-building-' + ( i + 1 ) + '" >\n' +
+				'\t\t\t<Name>' + building.group.name +'</Name>\n' +
+				'\t\t\t<PlanarGeometry>\n' +
+				'\t\t\t\t<PolyLoop>\n' +
+			'';
+
+			const coordinates = slab.geometry.attributes.position.array;
+
+			const vertices = [
+
+				v( coordinates[ 6 ], coordinates[ 7 ], coordinates[ 8 ] ),
+				v( coordinates[ 9 ], coordinates[ 10 ], coordinates[ 11 ] ),
+				v( coordinates[ 3 ], coordinates[ 4 ], coordinates[ 5 ] ),
+				v( coordinates[ 0 ], coordinates[ 1 ], coordinates[ 2 ] ),
+
+			];
+
+			for ( let j = 0; j < 4; j++ ) {
+
+				vertex = vertices[ j ];
+				vertex.applyMatrix4( slab.matrixWorld );
+				textSlabs += getCartesianPointText( vertex );
+
+
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( vertex );
+				mesh.name = 'shade';
+				scene.add( mesh );
+//console.log( 'vertex', mesh.position );
+
+			}
+
+			textSlabs +=
+				'\t\t\t\t</PolyLoop>\n' +
+				'\t\t\t</PlanarGeometry>\n' +
+				'\t\t</Surface>\n' +
+			'';
+		}
+
+//console.log( 'textSlabs', textSlabs );
+
+		return textSlabs;
 
 	}
+
+
 
 	function getSurfacesOverhangs( building ) {
 

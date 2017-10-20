@@ -147,10 +147,15 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 ### 2017-10-19 ~ Theo
 
 11:14
-* Continue undividuated floor and ceiling
+* Continue individuated floor and ceiling
 12:00
+* mnu-hud.html
+	* Mostly working as intended
 * R12 started
-
+* mnu-box-shape.html
+	* In progress  2017-10-14 ~ add individuated floors and ceilings
+* mnu-ell-shape-one.html
+	* In progress 2017-10-14 ~ add individuated floors and ceilings
 
 ### 2017-10-18 ~ Theo
 

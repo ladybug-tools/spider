@@ -55,7 +55,10 @@
 	var meshes;
 	const size = 200;
 
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/single-model-multiple-menu';
+	const release = location.pathname.split( '/' )[ 8 ];
+	const fileName = location.pathname.split( '/' ).pop();
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
 
 	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
@@ -72,9 +75,12 @@
 
 		if ( window.top === window.self ) {
 
-		divTitle.innerHTML =
-			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' +
-			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
+			divTitle.innerHTML =
+				'<h2>' +
+				'<a  href = "../index.html" >bw</a> &nbsp; ' +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="top" >&#x24D8</a>'
+				'</h2>';
 		}
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
@@ -150,39 +156,42 @@
 		const object = new THREE.Object3D();
 
 		mesh = createMesh();
-		mesh.scale.set( 50, 30, 70 );
-		mesh.position.set( 70, -70, 0.5 * mesh.scale.z );
-		mesh.rotation.set( 0, 0, Math.PI / 4 );
+		let height = 50 + 50 * Math.random();
+		mesh.scale.set( 50, 30, height );
+		mesh.position.set( 70, -70, 0.5 * height );
+		mesh.rotation.set( 0, 0, 1 + 1 * Math.random() );
 		mesh.name = 'building Anton';
 		object.add( mesh );
 
 		mesh = createMesh();
-		mesh.scale.set( 30, 30, 30 );
-		mesh.position.set( 60, 70, 0.5 * mesh.scale.z );
+		height = 30 + 50 * Math.random();
+		mesh.scale.set( 30 + 50 * Math.random(), 30, height );
+		mesh.position.set( 60, 70, 0.5 * height );
 		mesh.name = 'building Benjamin';
 		object.add( mesh );
 
 		mesh = createMesh();
-		mesh.scale.set( 30, 100, 20 );
-		mesh.position.set( -80, -40, 0.5 * mesh.scale.z );
+		height = 10 + 20 * Math.random();
+		mesh.scale.set( 30, 30 + 100 * Math.random(), height );
+		mesh.position.set( -80, -40, 0.5 * height );
 		mesh.name = 'building Chien Si';
 		object.add( mesh );
 
 
 //		building = mesh.userData;
-		building.area = 10000;
+		building.area = 8000;
 
 		building.box = {};
 		building.box.length1 = 80;
 		building.box.width1 = 100;
 
 		building.orientation = 0;
-		building.floors = 2;
+		building.floors = 1; // + Math.floor( 4 * Math.random() );
 		building.floorHeight = 12;
 
 		building.perimeterDepth = 15;
-		building.wwr = 40;
-		building.overhangDepth = 10;
+		building.wwr = 40 + Math.floor( 40 * Math.random() );
+		building.overhangDepth = 1 + Math.floor( 10 * Math.random() );
 		building.volume = '120000';
 
 		building.campusId = 'Facility';
@@ -218,7 +227,7 @@
 //		building.group.position.set( 0, 0, 0.5 * building.group.scale.z );
 		building.group.name = 'The Building';
 
-		createFloors( building );
+		createBoxFloors( building );
 
 		object.add( building.group );
 
@@ -248,7 +257,7 @@
 
 // changes for each shape
 
-	function createFloors( building ) {
+	function createBoxFloors( building ) {
 
 		const bud = building.userData;
 
@@ -377,8 +386,6 @@
 
 			floor = createSlab( building.group, name, len - 2 * perDep, wid - 2 * perDep, 0, 0, 0, i * hgt, spaceId );
 
-
-
 		}
 //		roof = createSlab( len, wid, spaceId - 1 );
 
@@ -400,7 +407,8 @@
 
 //		geometrySlab.computeFaceNormals();
 //		geometrySlab.computeVertexNormals();
-		geometrySlab.applyMatrix( new THREE.Matrix4().makeTranslation( transX,transY, hgt ) );
+		geometrySlab.applyMatrix( new THREE.Matrix4().makeTranslation( transX, transY, hgt ) );
+
 //console.log( 'mesh', mesh );
 		const slab = new THREE.Mesh( geometrySlab, material );
 		slab.name = name

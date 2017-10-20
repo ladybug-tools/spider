@@ -171,9 +171,7 @@
 		buildings = scope.meshes;
 		building = scope.building;
 
-//		createMesh = scope.createMesh;
-		createBoxFloors = scope.createBoxFloors;
-
+		createMesh = scope.createMesh;
 		createSlab = scope.createSlab;
 		createExternalWall = scope.createExternalWall;
 		createPerimeterDepthWall = scope.createPerimeterDepthWall;
@@ -192,11 +190,11 @@
 		inpBuildingArea.value = building.area;
 		inpLength1.value = building.box.length1;
 
-		inpNumberOfFloors.value = building.floors;
-		inpOrientation.value = building.orientation;
-		inpWindowWallRatio.value = building.wwr;
-		inpOverhangDepth.value = building.overhangDepth;
-		inpPerimeterDepth.value = building.perimeterDepth;
+//		inpNumberOfFloors.value = building.floors;
+//		inpOrientation.value = building.orientation;
+//		inpWindowWallRatio.value = building.wwr;
+//		inpOverhangDepth.value = building.overhangDepth;
+//		inpPerimeterDepth.value = building.perimeterDepth;
 
 //console.log( 'building', building );
 
@@ -212,20 +210,27 @@
 
 		updateMenuExtras();
 
-		buildings.remove( building.group );
-		scene.remove( building.group );
+		userData = building.userData;
 
 		buildings.remove( building.group );
 		scene.remove( building.group );
-		building.group = new THREE.Group();
-		scene.add( building.group );
+
+//		building.group = new THREE.Group();
+//		scene.add( building.group );
 
 		building.zones = [];
 		building.spaces = [];
-		building.slabs = [];
 		building.overhangs = [];
 
-		createBoxFloors( building );
+
+		building.group = new THREE.Group();
+//		building.group = createMesh();
+//		building.group.scale.set( 80, 100, 12 );
+//		building.group.position.set( 0, 0, 0.5 * building.group.scale.z );
+		building.group.name = 'The Building';
+
+		buildings.add( building.group );
+		createFloors( building );
 
 //console.log( 'building', building );
 
@@ -318,6 +323,148 @@ console.log( 'length diff', area );
 		building.perimeterDepth = perDep;
 		building.volume = building.areaFloor * building.floors * height;
 		building.wwr = wwr;
+
+	}
+
+
+
+// changes for each shape
+	function createFloors( building ) {
+
+		const len = building.box.length1;
+		const wid = building.box.width1;
+
+		const angle = - d2r * building.orientation;
+		const floors = building.floors;
+		const hgt = building.floorHeight;
+		const perDep = building.perimeterDepth;
+		
+		const len05 = len * 0.5;
+		const wid05 = wid * 0.5;
+
+		const zones = building.zones;
+		const spaces = building.spaces;
+
+		let area, volume, wallExt, wall, floor, roof;
+		let spaceId = 0;
+
+		building.group.rotation.z = angle;
+
+		for ( var i = 0; i < floors; i++ ) { // 'var' !important > lets 'i' be floor # of roof slab
+
+			const storey = i + 1;
+// length front
+			spaceId ++;
+			spaceIdInside = spaceId + 4;
+			area = ( len - perDep ) * perDep;
+			volume = area * building.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length front', area: area, storey: storey, volume: volume, zone: 1 } );
+
+			if ( i === 0 ) { zones.push( { name: 'zone 1', description: 'length front' } ); }
+
+			wallExt = createExternalWall( len, hgt, i, spaceId );
+			wallExt.position.set( len05, -wid05, i * hgt, );
+			wallExt.rotation.z = Math.PI;
+			building.group.add( wallExt );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( len - 2 * perDep, hgt, i, [ spaceId, spaceIdInside ] );
+				wall.position.set( len05 - perDep, -wid05 + perDep, i * hgt );
+				wall.rotation.z = Math.PI;
+				building.group.add( wall );
+
+			}
+
+// length back
+			spaceId ++;
+			area = ( len - perDep ) * perDep;
+			volume = area * building.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'length back', area: area, storey: storey, volume: volume, zone: 2 } );
+
+			if ( i === 0 ) { zones.push( { name: 'zone 2', description: 'length back ', area: area, volume: volume } ); }
+
+			wallExt = createExternalWall( len, hgt, i, spaceId );
+			wallExt.position.set( -len05, wid05, i * hgt );
+			building.group.add( wallExt );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( len - 2 * perDep, hgt, i, [ spaceId, spaceIdInside ] );
+				wall.position.set( -len05 + perDep, wid05 - perDep, i * hgt );
+				building.group.add( wall );
+
+			}
+
+
+
+// width left
+			spaceId ++;
+			area = ( wid - perDep ) * perDep;
+			volume = area * building.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'width left', area: area, storey: storey, volume: volume, zone: 3 } );
+
+			if ( i === 0 ) { zones.push( { name: 'zone 3', description: 'width left', area: area, volume: volume } ); }
+
+			wallExt = createExternalWall( wid, hgt, i, spaceId );
+			wallExt.rotation.z = Math.PI * 0.5;
+			wallExt.position.set( -len05, -wid05, i * hgt );
+			building.group.add( wallExt );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( wid - 2 * perDep, hgt, i, [ spaceId, spaceIdInside ]  );
+				wall.rotation.z = Math.PI * 0.5;
+				wall.position.set( -len05 + perDep, -wid05 + perDep, i * hgt );
+				building.group.add( wall );
+
+			}
+
+
+// width right
+			spaceId ++;
+			area = ( wid - perDep ) * perDep;
+			volume = area * building.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'width right', area: area, storey: storey, volume: volume, zone: 4 } );
+
+			if ( i === 0 ) { zones.push( { name: 'zone 4', description: 'width right', area: area, volume: volume } ); }
+
+			wallExt = createExternalWall( wid, hgt, i, spaceId );
+			wallExt.rotation.z = -Math.PI / 2;
+			wallExt.position.set( len05, wid05, i * hgt );
+			building.group.add( wallExt );
+
+			if ( len > 2 * perDep && wid > 2 * perDep ) {
+
+				wall = createPerimeterDepthWall( wid - 2 * perDep, hgt, i, [ spaceId, spaceIdInside ] );
+				wall.rotation.z = -Math.PI / 2;
+				wall.position.set( len05 - perDep, wid05 - perDep , i * hgt );
+				building.group.add( wall );
+
+			}
+
+
+// slabs
+			spaceId ++;
+			area = ( len - 2 * perDep ) * ( wid - 2 * perDep );
+			volume = area * building.floorHeight;
+			spaces.push( { name: 'space ' + spaceId, id: spaceId, description: 'interior area', area: area, storey: storey, volume: volume, zone: 5 } );
+
+			if ( i === 0 ) { zones.push( { name: 'zone 5', description: 'interior area', area: area, volume: volume } ); }
+
+			const name = i === 0 ? 'SlabOnGrade' : 'InteriorFloor';
+
+			floor = createSlab( len, wid, spaceId );
+			floor.position.set( -len05, -wid05, i * hgt );
+			floor.name = name;
+			building.group.add( floor );
+
+		}
+
+		roof = createSlab( len, wid, spaceId - 1 );
+		roof.position.set( -len05, -wid05, i * hgt );
+		roof.name = 'Roof';
+		building.group.add( roof );
 
 	}
 

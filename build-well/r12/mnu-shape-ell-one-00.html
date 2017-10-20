@@ -188,10 +188,10 @@
 //		building.box.length1 = 100;
 
 //		building.floors = 3;
-//		building.orientation = 20;
-//		building.wwr = 80;
-//		building.overhangDepth = 10;
-//		building.perimeterDepth = 10;
+		building.orientation = 20;
+		building.wwr = 80;
+		building.overhangDepth = 10;
+		building.perimeterDepth = 10;
 
 		building.ell0 = {};
 		building.ell0.length1 = 80;
@@ -230,10 +230,8 @@ console.log( 'building', building );
 
 		building.zones = [];
 		building.spaces = [];
-		building.slabs = [];
-		building.overhangs = [];
 
-		createEllOneFloors( building );
+		createFloors( building );
 
 //console.log( 'building', building );
 
@@ -314,6 +312,45 @@ console.log( 'length diff', length1, length2 );
 
 		}
 
+/*
+
+
+//		const length1 = parseFloat( inpLength1.value );
+//		const length2 = parseFloat( inpLength2.value );
+//		const width1 = parseFloat( inpWidth1.innerHTML );
+//		const width2 = parseFloat( inpWidth2.innerHTML );
+//		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
+
+		const areaCurrent = ( length1 * width1 + length2 * width2 ) * floors; // parseFloat( inpBuildingArea.value );
+		const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ) : parseFloat( inpBuildingArea.min );
+		const ratio = Math.sqrt( areaNew / areaCurrent );
+
+		const length1New = ratio * parseFloat( inpLength1.value );
+		const length2New = ratio * parseFloat( inpLength2.value );
+		const width1New =  ratio * parseFloat( inpWidth1.innerHTML );
+		const width2New =  ratio * parseFloat( inpWidth1.innerHTML );
+		areaFloor = length1New * width1New + length2New * width2New
+
+		inpLength1.value = length1New.toFixed();
+		inpLength2.value = length2New.toFixed();
+		inpWidth1.innerHTML = width1New.toLocaleString( undefined, { maximumFractionDigits: 1 } );
+		inpWidth2.innerHTML = width2New.toLocaleString( undefined, { maximumFractionDigits: 1 } );
+
+		inpBuildingArea.value = areaNew;
+		inpNumberOfFloors.value = floors;
+
+		inpFloorArea.innerHTML = ( areaFloor ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
+
+		building.area = areaNew;
+		building.areaFloor = areaFloor;
+		building.floors = floors;
+
+		building.ell0.length1 = length1New;
+		building.ell0.length2 = length2New;
+		building.ell0.width1 = width1New;
+		building.ell0.width2 = width2New;
+*/
+
 
 	}
 
@@ -346,7 +383,7 @@ console.log( 'length diff', length1, length2 );
 
 
 // changes for each shape
-	function createEllOneFloors( building ) {
+	function createFloors( building ) {
 
 		const len1 = building.ell0.length1;
 		const len2 = building.ell0.length2;
@@ -520,12 +557,6 @@ console.log( 'length diff', length1, length2 );
 
 			const name = i === 0 ? 'SlabOnGrade' : 'InteriorFloor';
 
-// 	function createSlab( mesh, name, length, width, delta, transX, transY, hgt, id ) {
-
-			floor = createSlab( building.group, name, len1 - 2 * perDep, wid1 + wid2 - 2 * perDep, 0, - 0.5 * len1 + 1.5 * perDep, 0, i * hgt, spaceId );
-			floor = createSlab( building.group, name, len2, wid1 -  2 * perDep, 0, len205, -perDep, i * hgt, spaceId );
-
-/*
 			floor = createSlab( len1, wid1 + wid2, spaceId );
 			floor.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
 			floor.name = name;
@@ -535,13 +566,9 @@ console.log( 'length diff', length1, length2 );
 			floor.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
 			floor.name = name;
 			building.group.add( floor );
-*/
+
 		}
 
-		floor = createSlab( building.group, 'roof', len1 - 2 * perDep, wid1 + wid2 - 2 * perDep, 0, - 0.5 * len1 + 1.5 * perDep, 0, i * hgt, spaceId );
-		floor = createSlab( building.group, 'roof', len2, wid1 -  2 * perDep, 0, len205, -perDep, i * hgt, spaceId );
-
-/*
 		roof = createSlab( len1, wid1 + wid2, spaceId - 1 );
 		roof.position.set( - len105 - len205, -wid105 - wid205, i * hgt );
 		roof.name = 'Roof';
@@ -551,7 +578,6 @@ console.log( 'length diff', length1, length2 );
 		roof.position.set( - len105 - len205 + len1, -wid105 - wid205, i * hgt );
 		roof.name = 'Roof';
 		building.group.add( roof );
-*/
 
 	}
 
