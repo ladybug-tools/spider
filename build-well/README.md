@@ -186,6 +186,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 11:00
 * build-well-threejs.html
+	* Adjacent buildings have random parameters
 14:12
 * * mnu-gbxml-export.html
 	* Overhangs appear to be exporting OK
