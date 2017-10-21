@@ -86,12 +86,11 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ### mnu-adjacent-buildings.html
 
-* 2017-10-14 ~ Highlight The Building when selected
+
 * 2017-09-22 ~ Allow any and all buildings to have shape parameters?
 * 2017-10-02 ~ Add multi-line select for shape selection?
 
 ### mnu-box-shape.html
-
 
 
 ### mnu-ell-shape-one.html
@@ -119,7 +118,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ### mnu-settings-spaces.html
 
-* 2017-10-14 ~ Round the number
+* 2017-10-14 ~ Round the numbers
 * 2017-10-14 ~ Update building data when you select a space type
 * 2017-10-14 ~ Highlight the space in 3D when you select a space in the menu 
 
@@ -176,6 +175,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 12:00
 * mnu-hud.html
 	* Mostly working as intended
+	* working: 2017-10-14 ~ Highlight The Building when selected
 * R12 started
 * mnu-box-shape.html
 	* In progress  2017-10-14 ~ add individuated floors and ceilings
