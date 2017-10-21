@@ -11,6 +11,10 @@ _A well for building well._
 
 ## Full Screen dev release: [Build Well R12]( http://ladybug-tools.github.io/spider/build-well/dev/index.html )
 
+Save these links
+
+* Build: <http://www.ladybug.tools/spider/build-well>
+* Dev: <http://www.ladybug.tools/spider/build-well/dev >
 
 ## Concept
 
