@@ -1,10 +1,23 @@
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ladybug-tools.github.io/spider/#sandbox/scatter-well/README.md "View file as a web page." ) </span>
+
+
+[Scatter Well Read Me]( #README.md )
+====
+
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/sandbox/scatter-well/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; >It would be nice if this text were not visible here.</iframe>
 
 
 ## [Scatter Well R1]( http://ladybug-tools.github.io/spider/sandbox/scatter-well/ )
 
 
-## [Scatter Well ~ Google Spreadsheet Data R1]( https://ladybug-tools.github.io/spider/sandbox/scatter-well/get-google-spreadsheet-data/index.html )
+## [Scatter Well ~ Google Spreadsheet Data R2]( https://ladybug-tools.github.io/spider/sandbox/scatter-well/get-google-spreadsheet-data/get-google-spreadsheet-data-r2.html )
 
+
+
+## Issues
+
+* Would be nice if one of the columns included the name of the run
+	* Currently parsing the image link and extracting characters up to the underline 
 
 
 ## Nice plots
@@ -26,6 +39,10 @@
 
 
 ## Change Log
+
+### 2017-10-20 ~ Theo
+
+* Add 'Scatter Well ~ Google Spreadsheet Data R2'
 
 ### 2017-10-07 ~ Theo
 

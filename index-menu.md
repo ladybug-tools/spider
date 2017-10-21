@@ -10,13 +10,13 @@ h4 { margin: 0; }
 
 
 
-## [Spider]( index.html ) &raquo; [&#x1f577;]( https://github.com/ladybug-tools/spider )
+## [Spider]( index.html ) &raquo; [&#x1f578;]( https://github.com/ladybug-tools/spider )
 
 
 ### [Read me]( #README.md )
 
 
-### [gbXML Viewer]( #read-gbxml/README.md ) &raquo; [&#x29c9;]( read-gbxml/gbxml-viewer/index.html )
+### [gbXML Viewer]( #read-gbxml/README.md ) &raquo; [&#x2750;]( read-gbxml/gbxml-viewer/index.html "Open full screen" )
 
 
 ### [Build Well]( #build-well/README.md ) &raquo; [&#x2750;]( build-well/index.html "Open full screen" )
