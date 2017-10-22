@@ -13,6 +13,24 @@ _txt_
 
 ## Concept
 
+An alternative to: http://rawgit.com/ladybug-tools/spider/master/build-well/r11/build-well.html
+
+
+The code here is based on the idea of extruding a shape and making that shape follow a given path.
+
+The code handles any shapes squares,, rectangles, stars, irregular polygons and so on. Whatever comes out of a pasta machineetc.
+
+The path of extrusion - currently 2D only - can be made up of straights and curves. Pretty much whatever you cane create as a line in SVG can be used here.
+
+
+
+## Naming considerations
+
+AutoCAD has a marvelous 2D drawing command titled 'polyline' - often called 'pline'
+
+If one were to invent a new drawing command - designed to be what comes after the pline, then maybe it could be called a 'qline'. As in what comes after the letter P? ;-)
+
+
 
 ## Links of Interest
 
