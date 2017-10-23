@@ -7,7 +7,7 @@
 <meta name=description content="Build Well Three.js 'server' - designed to be accessed inside and iframe" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-09-29" >
-<title>Build Well Three.js</title>
+<title>Build Well qLine</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -50,36 +50,23 @@
 
 <script>
 
-	var pointCount = 5;
-	var width = 5;
-	var height = 8;
+	let shapeBox, shapeL, shapeT, shapeH, shapeU, shapeTrapezoid, shapeTriangle, shapePlus, shapeO;
 
-	var pi = Math.PI;
-	var pi05 = 0.5 * pi;
-	var pi2 = 2 * pi;
 
 	var building = {};
-
-	var meshes;
+	var buildings;
 
 	const size = 800;
 	const sizeDelta = 0.3 * size;
 
-	const release = location.pathname.split( '/' )[ 8 ];
+	const release = location.pathname.split( '/' )[ 9 ]; // double check
 	const fileName = location.pathname.split( '/' ).pop();
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
 
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
-	const d2r = Math.PI / 180, r2d = 180 / Math.PI;
-
-
-	var section = [
-
-		v2( width, height ), v2( width, -height ), v2( -width, -height ), v2( -width, height ), v2( width, height )
-
-	];
-
+	var pi = Math.PI;
+	const d2r = pi / 180, r2d = 180 /pi;
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional;
@@ -176,20 +163,17 @@
 		building.slabs = [];
 		building.overhangs = [];
 
-		building.group = new THREE.Group();
+		building.opacity = 90;
+//		building.group = new THREE.Group();
 //		building.group = createMesh();
 //		building.group.scale.set( 80, 100, 12 );
 //		building.group.position.set( 0, 0, 0.5 * building.group.scale.z );
-		building.group.name = 'The Building';
+//		building.group.name = 'The Building';
 
 
 		toggleBackgroundGradient();
 
-		if ( window.top === window.self ) {
-
-			updateMeshes();
-
-		}
+		updateMeshes();
 
 	}
 
@@ -202,68 +186,67 @@
 
 		updatePaths();
 
-		let shapeBox, shapeL, shapeT, shapeH, shapeU, shapeTrapezoid, shapeTriangle, shapePlus, shapeO;
 
 		const rotation = - d2r * building.orientation;
 		const floors = building.floors;
 		const height = building.floorHeight;
 
-		scene.remove( meshes );
+		scene.remove( buildings );
 
-		meshes = new THREE.Object3D();
+		buildings = new THREE.Object3D();
 
 		for ( var i = 0; i < floors; i++ ) {
 
 			const vertical = i * 3 * height;
 
-			shapeBox = createQlineMesh( section, pathBox );
+			shapeBox = createQlineMesh( section, pathBox, 'Box shape' );
 			shapeBox.position.set( -sizeDelta, sizeDelta, vertical );
 			shapeBox.rotation.z = rotation;
-			meshes.add( shapeBox );
+			buildings.add( shapeBox );
 
-			shapeL = createQlineMesh( section, pathL );
+			shapeL = createQlineMesh( section, pathL, 'L shape' );
 			shapeL.position.set( 0, sizeDelta, vertical );
 			shapeL.rotation.z = rotation;
-			meshes.add( shapeL );
+			buildings.add( shapeL );
 
-			shapeT = createQlineMesh( section, pathT );
+			shapeT = createQlineMesh( section, pathT, 'T shape' );
 			shapeT.position.set( sizeDelta, sizeDelta, vertical );
 			shapeT.rotation.z = rotation;
-			meshes.add( shapeT );
+			buildings.add( shapeT );
 
-			shapeH = createQlineMesh( section, pathH );
+			shapeH = createQlineMesh( section, pathH, 'H shape' );
 			shapeH.position.set( -sizeDelta, 0, vertical );
 			shapeH.rotation.z = rotation;
-			meshes.add( shapeH );
+			buildings.add( shapeH );
 
-			shapeU = createQlineMesh( section, pathU );
+			shapeU = createQlineMesh( section, pathU, 'U shape' );
 			shapeU.position.set( 0, 0, vertical );
 			shapeU.rotation.z = rotation;
-			meshes.add( shapeU );
+			buildings.add( shapeU );
 
-			shapeTrapezoid = createQlineMesh( section, pathTrapezoid );
+			shapeTrapezoid = createQlineMesh( section, pathTrapezoid, 'Trapezoid shape' );
 			shapeTrapezoid.position.set( sizeDelta, 0, vertical );
 			shapeTrapezoid.rotation.z = rotation;
-			meshes.add( shapeTrapezoid );
+			buildings.add( shapeTrapezoid );
 
-			shapeTriangle = createQlineMesh( section, pathTriangle );
+			shapeTriangle = createQlineMesh( section, pathTriangle, 'Triangle shape' );
 			shapeTriangle.position.set( -sizeDelta, -sizeDelta, vertical );
 			shapeTriangle.rotation.z = rotation;
-			meshes.add( shapeTriangle );
+			buildings.add( shapeTriangle );
 
-			shapePlus = createQlineMesh( section, pathPlus );
+			shapePlus = createQlineMesh( section, pathPlus, 'Plus shape' );
 			shapePlus.position.set( 0, -sizeDelta, vertical );
 			shapePlus.rotation.z = rotation;
-			meshes.add( shapePlus );
+			buildings.add( shapePlus );
 
-			shapeO = createQlineMesh( section, pathO );
+			shapeO = createQlineMesh( section, pathO, 'O shape' );
 			shapeO.position.set( sizeDelta, -sizeDelta, vertical );
 			shapeO.rotation.z = rotation;
-			meshes.add( shapeO );
+			buildings.add( shapeO );
 
 		} 
 
-		scene.add( meshes );
+		scene.add( buildings );
 
 	}
 
@@ -402,18 +385,19 @@
 
 	}
 
-	function createQlineMesh( section, path ) {
+	function createQlineMesh( section, path, name ) {
 
 // 2016-02-10
 
-		let vertices, geometry, material, mesh;
+		let vertices, geometry, material, mesh, shapePoints;
 
 		vertices = [];
+		shapePoints = [];
 		geometry = new THREE.PlaneGeometry( 10, 10, section.length - 1, path.length - 1 );
-		materialNormal = new THREE.MeshNormalMaterial( { side: 2, wireframe: false } );
-		material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2, wireframe: false } );
+		materialNormal = new THREE.MeshNormalMaterial( { opacity: ( building.opacity / 100 ), transparent: true, wireframe: false, } );
+		material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), opacity: ( building.opacity / 100 ), side: 2, transparent: true, wireframe: false } );
 		mesh = new THREE.Mesh( geometry, material );
-		mesh.name = 'qmesh';
+		mesh.name = name;
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -len05, -wid05, 0 ) );
 
 		for ( var i = 0; i < section.length; i++ ) {
@@ -447,12 +431,26 @@
 				mm.position.copy( pt1.clone().lerp( vertices[ 1 ][ i + 1 ], 0.5 ) );
 
 				mesh.add( mm );
+
+				shapePoints.push( pt2 );
+
 			}
 
 		}
 
+//console.log( '', path );
+
+		shape = new THREE.Shape( path );
+		geometryShape = new THREE.ShapeGeometry( shape );
+
+		materialShape = new THREE.MeshNormalMaterial();
+		shapeMesh = new THREE.Mesh( geometryShape, material );
+		shapeMesh.name = 'InteriorFloor';
+		mesh.add( shapeMesh );
+
 		geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
+
 
 		return mesh;
 
@@ -468,7 +466,8 @@
 		var geometry, material, mesh;
 		var pt1, pt2, offsetPt1, offsetPt2, vector, angle;
 		var line, lines, vertices;
-
+		var pi05 = 0.5 * pi;
+		var pi2 = 2 * pi;
 		lines = [];
 
 		for ( var i = 0; i < points.length - 1; i++ ) {

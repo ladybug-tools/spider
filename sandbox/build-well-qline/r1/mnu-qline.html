@@ -106,9 +106,11 @@
 
 <script>
 
-	const ifrSource = 'build-well-threejs.html';
+	const ifrSource = 'build-well-threejs-qline.html';
 
-	const infoURI='https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/'
+	const release = location.pathname.split( '/' )[ 9 ];
+	const fileName = location.pathname.split( '/' ).pop();
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
 
 	var building;
 	var buildings;
@@ -117,12 +119,12 @@
 
 	var THREE;
 	var renderer;
+	var scene;
 	var camera;
 	var controls;
-	var scene;
 
 	var lightAmbient, lightPoint, lightDirectional;
-	var gridHelper, axesHelper, cameraHelper;
+	var gridHelper, axesHelper, cameraHelper, groundHelper;
 
 	let geometry, material, mesh;
 
@@ -132,8 +134,12 @@
 	function init() {
 
 		divTitle.innerHTML = 
-			'<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
-			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+			'<h3>' +
+				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +  
+				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
+			'</h3>' +
+		'';
 
 		if ( parent && parent.ifrThree ) {
 
