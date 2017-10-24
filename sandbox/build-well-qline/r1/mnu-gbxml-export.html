@@ -480,19 +480,23 @@ storey = 1;
 				quad = [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ];
 				textSurfacesBits += getSingleSurface( meshFloor, quad, 'ExteriorWall' , j );
 
+				quad = [ vertices[ pt1 + 1 ], vertices[ pt1 ], vertices[ pt1 + 3 ], vertices[ pt1 + 2 ] ];
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall' , j );
+
 				path.push( vertices[ pt1 + 2 ] );
 
 			}
 
 			textSurfacesBits += getSurfacesOverhangs( meshFloor, path, ( i + 1 ) );
 
-			textSurfacesBits += getSurfacesSlabs( meshFloor, path, ( i + 1 )  );
+			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', ( i + 1 )  );
 
 			if ( i + 1 === floors ) {
 
 				meshRoof = meshFloor.clone();
-				meshRoof.position.z += building.floorHeight;
-				textSurfacesBits += getSurfacesSlabs( meshRoof, path, ( i + 1 )  );
+//console.log( 'building.floorHeight', building.floorHeight );
+//				meshRoof.position.z += building.floorHeight;
+				textSurfacesBits += getSurfacesSlabs( meshRoof, path, 'Roof', ( i + 1 ), floors * building.floorHeight  );
 
 			}
 
@@ -600,7 +604,7 @@ storey = 1;
 
 
 
-	function getSurfacesSlabs( floor, path, id ) {
+	function getSurfacesSlabs( floor, path, type, id, height = 0 ) {
 
 console.log( 'path', path );
 
@@ -608,9 +612,10 @@ console.log( 'path', path );
 
 		shape = new THREE.Shape( path );
 		geometry = new THREE.ShapeGeometry( shape );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
 
-		textInterior += getSingleSurface( floor, geometry.vertices, 'InteriorFloor', id )
-
+		textInterior += getSingleSurface( floor, geometry.vertices, type, id )
+console.log( 'textInterior', textInterior );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.position.copy( floor.position );

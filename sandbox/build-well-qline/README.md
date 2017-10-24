@@ -52,6 +52,13 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 ### 2017-10-24 ~ Theo
 
+15:03
+* gbXML exporting openings, roof
+
+
+
+### 2017-10-23 ~ Theo
+
 Most of the day on gbXML
 * Exporting floor, angle, overhangs and more
 * Just got stuck on exporting openings
