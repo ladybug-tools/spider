@@ -5,7 +5,7 @@
 Documentation: Documentation: Surface not adjacent to any spaces with tilt between 0° and 180°.
 
 * Needs no adjacency
-* RectangularGeometry is not essential
+* RectangularGeometry is not essential, but required if the user of the gbXML file requires the orientation of the surface.
 * CADObjectId is nice to have
 * Shade surfaces indicating adjacent buildings have so need to be manifold. Thus floors may be omitted. {Theoretically, roofs and back faces could be omitted as well. )
 
@@ -87,9 +87,10 @@ So the only difference here is that we need to add the Rectangular Geometry port
 
 Is the following a well-formed Shade entry? Should anything be added?
 
+BW-Shading devices on the building such as overhangs and fins should not have an adjacent space ID. Nor should it have an assigned construction. They are handled the same way as the shading surfaces for adjacent building. I have modified the XML below to reflect this. Nor does it need a <Name>. 
+
 ```
-    <Surface surfaceType="Shade" constructionIdRef="construction-31" exposedToSun="true" id="aim0186">
-      <Name>aim0186_N_Shade_sp-None</Name>
+    <Surface surfaceType="Shade" id="bw-shade-5">
       <RectangularGeometry>
         <Azimuth>0</Azimuth>
         <Tilt>90</Tilt>
@@ -100,25 +101,7 @@ Is the following a well-formed Shade entry? Should anything be added?
           <Coordinate>93.755210006562</Coordinate>
           <Coordinate>23.76405000</Coordinate>
         </CartesianPoint>
-        <PolyLoop>
-          <CartesianPoint>
-            <Coordinate>22.72450000</Coordinate>
-            <Coordinate>0.00000000</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>22.72450000</Coordinate>
-            <Coordinate>1.23595000</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>0.00000000</Coordinate>
-            <Coordinate>1.23595000</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>0.00000000</Coordinate>
-            <Coordinate>0.00000000</Coordinate>
-          </CartesianPoint>
-        </PolyLoop>
-      </RectangularGeometry>
+      </RectangularGeometry>           Note: Rectangular Geometry close here
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -143,6 +126,5 @@ Is the following a well-formed Shade entry? Should anything be added?
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <CADObjectId>5</CADObjectId>
     </Surface>
 ```
