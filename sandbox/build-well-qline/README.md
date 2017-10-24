@@ -50,6 +50,13 @@ If one were to invent a new drawing command - designed to be what comes after th
 ## Change Log
 
 
+### 2017-10-24 ~ Theo
+
+Most of the day on gbXML
+* Exporting floor, angle, overhangs and more
+* Just got stuck on exporting openings
+* A fresh morning brain should be able to fix this
+
 ### 2017-10-22 ~ Theo
 
 Having all the shapes visible simultaneously is making debugging a lot easier. Ditto leaving a visible gap between the floors. Production versions will have these features turned off as the default.

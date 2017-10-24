@@ -5,9 +5,11 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Basic menu template" >
 <meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-22" >
+<meta name = "date" content = "2017-10-23" >
 <title>Menu Template</title>
 <style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
 /* https://www.w3schools.com/colors/colors_names.asp */
 
 	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
@@ -28,8 +30,9 @@
 	select { width: 100%; }
 
 	.floatRight { float: right; width: 70px;}
+	.highlight { background-color: lightgreen; }
 
-	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
 
 	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
@@ -40,43 +43,41 @@
 
 	<div id = "divMenu" >
 
-		<div id = "divTitle" ></div>
+		<div id = "divTitle" title='What are you con templating?' ></div>
 
-		<div id=info >This is the template for building new menus</div>
+		<div id=info >This is a template file for building new menus</div>
 
-		<p title = 'Select a building to edit' >Buildings: 
-			<select id = selObject onchange = getObject(buildings); size = 5 ></select>
+		<p title ="Select a building to edit" >Buildings:
+			<select id = selObject onchange= getObject(buildings); size = 5 ></select>
 		</p>
 
 		<p>
 			<button onclick = deleteObject(buildings); >delete</button>
 			<button onclick = addObject(buildings); >add </button>
-			<button onclick = saveFile(buildings); >save json file</button> 
+			<button onclick = saveFile(buildings); >save json file</button>
 		</p>
 
+		<p title = 'Title of the model' >Name:
+			<input id=inpName onchange = updateObject(buildings); class = floatRight style=width:150px; ></p>
 
-		<p title = 'Title of the model' >Name: 
-			<input id=inpName onchange = updateObject(buildings); class = floatRight style=width:150px;  ></p>
-
-		<p title = 'left and right from origin in feet' >offset x: 
+		<p title = 'left and right from origin in feet' >offset x:
 			<input type=number id=inpOffsetX onchange = updateObject(buildings);; class = floatRight ></p>
 
-		<p title = 'front and back distance from origin in feet'>offset y: 
+		<p title = 'front and back distance from origin in feet'>offset y:
 			<input type=number id=inpOffsetY onchange = updateObject(buildings);; class = floatRight ></p>
 
-		<p title = 'x distance in feet' >length: 
+		<p title = 'x distance in feet' >length:
 			<input type=number id=inpLength min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight ></p>
 
-		<p title = 'Y distance in feet' >width: 
+		<p title = 'Y distance in feet' >width:
 			<input type=number id=inpWidth min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight >
 		</p>
 
 		<p title = 'Z distance in feet: 1 to 1000' >height:
-<!--			<input type=number id=inpHeight min=1 max=1000 step=1 onchange=updateObject(buildings);; class = floatRight ></p> -->
 			<input type=number id=inpHeight min=1 max=1000 step=1 oninput="validity.valid||(value='');" onchange=updateObject(buildings);; class = floatRight ></p>
- 
+
 		<p title = 'building angle in degrees: -180 to 180' >orientation on site:
-			<input type=number type=number id=inpAngle min=-180 max=180 step=1 value=0 onchange=updateObject(buildings);; class=floatRight />
+			<input type=number id=inpAngle min=-180 max=180 step=1 value=0 onchange=updateObject(buildings);; class=floatRight />
 		</p>
 
 	</div>
@@ -87,8 +88,9 @@
 
 	const ifrSource = 'build-well-threejs-qline.html';
 
-	const release = location.pathname.split( '/' )[ 9 ];
-	const fileName = location.pathname.split( '/' ).pop();
+	const pathArry  = location.pathname.split( '/' ).slice( -2);
+	const release = pathArry[ 0 ]
+	const fileName = pathArry[ 1 ];
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
 
 	var building;
@@ -113,12 +115,14 @@
 		divTitle.innerHTML = 
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
-				'<a href = "" >' + document.title + ' ' + release.toUpperCase() + '</a> &nbsp; ' +  
-				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
+				'<a  href = "" >' + document.title + ' ' + release.toUpperCase() + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" > <img src="https://status.github.com/images/invertocat.png" height=18 > </a>' +
 			'</h3>' +
 		'';
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divMenu.innerHTML += txt + txt;
 
 		if ( parent && parent.ifrThree ) {
 
@@ -126,14 +130,13 @@
 
 			initVariables()
 
-
 		} else {
 
 			ifrContents.src = ifrSource;
 
 			scope = ifrContents.contentWindow;
 
-			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+			divMenu.style.cssText += ' margin: 20px; max-height: calc( 100% - 50px);  max-width: 300px; ; overflow: auto; position: absolute; right: 0;' ;
 
 			ifrContents.onload = initVariables;
 
@@ -158,6 +161,7 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
+		building = scope.building;
 		buildings = scope.buildings;
 
 //console.log( 'buildings', buildings );
@@ -178,7 +182,7 @@
 		for ( let i = 0; i < objects.children.length; i++ ) {
 
 			let obj = objects.children[ i ];
-			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
 
 		}
 
@@ -257,7 +261,7 @@
 
 	function updateObject( objects ) {
 
-		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 console.log( 'objects', objects );
 
 		const object = objects.getObjectByName( selObject.value );

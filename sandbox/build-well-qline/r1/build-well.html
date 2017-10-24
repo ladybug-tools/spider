@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Create 3D building data in a variety of shapes parametrically and export in gbXML format" >
 <meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-22" >
+<meta name = "date" content = "2017-10-23" >
 <title>Build Well qLine</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -25,10 +25,11 @@
 	summary { outline: none; font-size: 14pt }
 	textarea { background: none; height: 700px; width: 100%; tab-size: 4;}
 
-	.highlight { background-color: yellow; }
+	.floatRight { float: right; }
+	.highlight { background-color: lightgreen; }
 
 	#divMenu { left: 0; margin: 20px; position: absolute; top: 0; }
-	#divMenu { height: 100%; max-width: var( --mnu-width ); overflow: auto;}
+	#divMenu { height: calc( 100% - 50px); max-width: var( --mnu-width ); overflow: auto;}
 
 	#detMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
 
@@ -46,28 +47,23 @@
 
 			<summary >toggle menu</summary>
 
-			<p id = "divBreadcrumbs" ><a href="../../../index.html" target="_blank">Ladybug Tools</a> &raquo; <a href="../../index.html" target="_Top" >Spider</a> &raquo; </p>
+			<p id = "divBreadcrumbs" ><a href="../../../../index.html" target="_blank">Ladybug Tools</a> &raquo; <a href="../../../index.html" target="_Top" >&#x1f578;</a> &raquo; </p>
 
-			<div id = "divTitle" ></div>
+<!--			<div class=floatRight >&#x24D8;</div> -->
+
+			<div id = "divTitle" title='Well, well, well, here you are at last' ></div>
 
 			<div id = "divItems" >
 
-				<div><a href=JavaScript:getContentMarkdown("../README.md"); >Read me / welcome</a></div>
+				<div title='howdy' ><a href=JavaScript:getContentMarkdown("../README.md"); >Read me / welcome</a></div>
 
-				<div><a href=JavaScript:getMenuHTML("mnu-qline.html"); >Shapes Editor</a>
-					&raquo; <a href="mnu-qline.html " target="_blank" title = 'standalone mnu-qline test script' >&#x1F5D7;</a>
+				<div><a href=JavaScript:getMenuHTML("mnu-shape-editor.html"); >Shape Editor</a>
+					&raquo; <a href="mnu-shape-editor.html " target="_top" title = 'standalone shape editor test script' >&#x1F5D7;</a>
 				</div>
+
 <!--
 				<div><a href=JavaScript:getMenuHTML("mnu-adjacent-buildings.html"); >Adjacent Buildings</a>
 					&raquo; <a href="mnu-adjacent-buildings.html " target="_blank" title = 'standalone adjacent-buildings test script' >&#x1F5D7;</a>
-				</div>
-
-				<div><a href=JavaScript:getMenuHTML("mnu-shape-box.html"); >Box Shape</a>
-					&raquo; <a href="mnu-shape-box.html " target="_blank" title = 'standalone box shape test script' >&#x1F5D7;</a>
-				</div>
-
-				<div><a href=JavaScript:getMenuHTML("mnu-shape-ell-one.html"); >L Shape</a>
-					&raquo; <a href="mnu-shape-ell-one.html " target="_blank" title = 'standalone L shape test script' >&#x1F5D7;</a>
 				</div>
 
 				<div><a href=JavaScript:getMenuHTML("mnu-settings-spaces.html"); >Spaces</a>
@@ -76,15 +72,15 @@
 -->	
 
 				<div><a href=JavaScript:getMenuHTML("mnu-hud.html"); >Heads-Up Display</a>
-					&raquo; <a href="mnu-hud.html " target="_blank" title = 'standalone hud test script' >&#x1F5D7;</a>
+					&raquo; <a href="mnu-hud.html " target="_top" title = 'standalone hud test script' >&#x1F5D7;</a>
 				</div>
 
 				<div><a href=JavaScript:getMenuHTML("mnu-settings-site.html"); >Site Settings</a>
-					&raquo; <a href="mnu-settings-site.html " target="_blank" title = 'standalone settings-site test script' >&#x1F5D7;</a>
+					&raquo; <a href="mnu-settings-site.html " target="_top" title = 'standalone settings-site test script' >&#x1F5D7;</a>
 				</div>
 
 				<div><a href=JavaScript:getMenuHTML("mnu-gbxml-export.html"); >gbXML Export</a>
-					&raquo; <a href="mnu-gbxml-export.html " target="_blank" title = 'standalone gbxml-export test script' >&#x1F5D7;</a>
+					&raquo; <a href="mnu-gbxml-export.html " target="_top" title = 'standalone gbxml-export test script' >&#x1F5D7;</a>
 				</div>
 
 				<br>
@@ -95,14 +91,14 @@
 
 			<div id=divFooter >
 				<hr>
-				<div><a href=JavaScript:getContentMarkdown("../../../pages/credits.md"); >Credits</a></div>
+				<div title='many thanks!' ><a href=JavaScript:getContentMarkdown("../../../pages/credits.md"); >Credits</a></div>
 				<div><a href=JavaScript:getContentMarkdown("../../../pages/code-of-conduct.md"); >Code of Conduct</a></div>
 				<div><a href=JavaScript:getContentMarkdown("../../../pages/contributing.md"); >Contributing</a></div>
 				<div><a href=JavaScript:getContentMarkdown("../../../pages/license.md"); >License</a></div>
 				<div><a href=JavaScript:getContentMarkdown("../../../pages/markdown-help.md"); >Markdown Help</a></div>
 				<div><a href=JavaScript:getMenuHTML("mnu-template.html"); >Menu Template</a></div>
-				<div id=divToggleView style=display:none; ><a href=JavaScript:viewModel(); >Return to model view</a><div>
-
+				<div id=divToggleView style=display:none; ><a href=JavaScript:viewModel(); >Return to model view</a></div>
+				<p style=text-align:center; title='my web is better than your web' >&#x1f578;</p>
 			</div>
 
 
@@ -116,12 +112,13 @@
 
 <script>
 
-
-	const release = location.pathname.split( '/' )[ 9 ];
-	const fileName = location.pathname.split( '/' ).pop();
+	const pathArry  = location.pathname.split( '/' ).slice( -2);
+	const release = pathArry[ 0 ]
+	const fileName = pathArry[ 1 ];
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
 
 	const b = '<br>';
+
 	const txt = 
 	'<hr>' +
 		'<p>Welcome to Build Well Qline </p>' +
@@ -152,9 +149,10 @@
 
 		divTitle.innerHTML = 
 			'<h3>' +
-				'<a href = "" >' + document.title + '</a> &nbsp; ' +
-				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
-			'</h3>';
+					'<a  href = "" >' + document.title + ' ' + release.toUpperCase() + '.3</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" > <img src="https://status.github.com/images/invertocat.png" height=18 > </a>' +
+			'</h3>' +
+		'';
 
 		getMenuHTML();
 
@@ -191,10 +189,10 @@
 		document.body.style.overflow = 'hidden';
 
 		divContents.style.display = 'none';
-
 		divToggleView.style.display = 'none';
 
 		ifrThree.style.cssText = 'height: 100%; width: 100%;'
+		ifrThree.contentWindow.divContents.style.display = '';
 
 	}
 
@@ -204,11 +202,10 @@
 
 		document.body.style.overflow = 'auto';
 
-//		ifrThree.style.display = 'none';
-
 		divToggleView.style.display = '';
 
-		ifrThree.style.cssText = ' bottom: 0; position: absolute; height: 100px; right: 0; width: 10%; '; 
+		ifrThree.style.cssText = ' bottom: 0; position: absolute; height: 100px; right: 0; max-width: 200px; '; 
+		ifrThree.contentWindow.divContents.style.display = 'none';
 
 	}
 
@@ -216,11 +213,7 @@
 
 	function getContentMarkdown( url ) {
 
-		if ( ! url ) {
-
-			url = '../README.md';
-
-		}
+		url = url ? url : '../README.md';
 
 		divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
 
@@ -243,6 +236,11 @@
 		viewContents();
 
 		divContents.innerHTML = html;
+
+// neither is working
+		divContents.scrollTop = 0;
+
+		window.scrollTo( 0, 0 );
 
 	}
 

@@ -17,10 +17,11 @@
 	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
 	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus{ background-color: yellow; color: #aaa; }
-	h3, h4 { margin: 0; }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
+
+	h3, h4 { margin: 0; }
 
 	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
@@ -31,9 +32,7 @@
 	.floatRight { float: right; width: 70px;}
 	.fullWidth { box-sizing: border-box; width: 100%; }
 
-	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); height: calc( 100% - 50px);
-		max-width: var( --mnu-width ); 
-		overflow: auto; padding: 5px;  }
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
 
 	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
@@ -139,12 +138,13 @@
 
 	const ifrSource = 'build-well-threejs-qline.html';
 
-	const release = location.pathname.split( '/' )[ 9 ];
-	const fileName = location.pathname.split( '/' ).pop();
+	const pathArry  = location.pathname.split( '/' ).slice( -2);
+	const release = pathArry[ 0 ]
+	const fileName = pathArry[ 1 ];
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
 
-	let buildings;
 	let building;
+	let buildings;
 
 	let scope;
 
@@ -186,7 +186,7 @@
 
 			scope = ifrContents.contentWindow;
 
-			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+			divMenu.style.cssText += ' margin: 20px; max-height: calc( 100% - 50px);  max-width: 300px; ; overflow: auto; position: absolute; right: 0;' ;
 
 			ifrContents.onload = initVariables;
 
