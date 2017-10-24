@@ -302,7 +302,7 @@ console.log( 'objects', objects );
 
 	function saveFile( objects ) {
 
-		const output = objects.toJSON();
+		let output = objects.toJSON();
 
 		try {
 
@@ -316,7 +316,7 @@ console.log( 'objects', objects );
 		}
 
 		const blob = new Blob( [ output ] );
-		const a = document.body.appendChild( document.createElement( 'a' ) );
+		let a = document.body.appendChild( document.createElement( 'a' ) );
 
 		a.href = window.URL.createObjectURL( blob );
 		a.download = 'objects.json';

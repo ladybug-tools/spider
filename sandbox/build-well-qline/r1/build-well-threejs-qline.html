@@ -6,7 +6,7 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Build Well Three.js qLine 'server' - designed to be accessed inside an iframe" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-23" >
+<meta name="date" content="2017-10-23" >
 <title>Build Well Three.js</title>
 <style>
 
@@ -31,19 +31,17 @@
 	<div id = "divMenu" >
 
 		<div id = "divTitle" ></div>
+
 		<p id = "divContents" >
+
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 			<button onclick=controls.reset(); >reset view</button>
-			<button onclick=camera.position.set(0,0,300); >plan view</button>
-			<button onclick=camera.position.set(0,-300,0); >south elevation</button>
-			<button onclick=camera.position.set(0,300,0); >north elevation</button>
-			<button onclick=camera.position.set(300,0,0); >east elevation</button>
-			<button onclick=camera.position.set(-300,0,0); >west elevation</button>
+
 		</p>
 		<div id=divScreenText ></div>
 
+<!--		<div id=divLog ></div> -->
 
-		<div id=log ></div>
 	</div>
 
 	<div id= "headsUp" ></div>
@@ -629,18 +627,17 @@
 
 		gridHelper = new THREE.GridHelper( size, size / 10 );
 		gridHelper.rotation.x = 0.5 * Math.PI;
-//		gridHelper.position.set( 0, 0, - 0 );
 
-//		axesHelper = new THREE.AxesHelper( 50 );
 		axesHelper = new THREE.AxesHelper( size * 0.05 );
 		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
+		axesHelper2 = new THREE.AxesHelper( size );
 
 		groundHelper = createMesh();
 		groundHelper.scale.set( size, size, size );
 		groundHelper.position.set( 0, 0, -0.5 * size );
 		groundHelper.name = 'groundHelper';
 		groundHelper.visible = false;
-		scene.add( cameraHelper, gridHelper, axesHelper, groundHelper );
+		scene.add( cameraHelper, gridHelper, axesHelper, axesHelper2, groundHelper );
 
 	}
 
