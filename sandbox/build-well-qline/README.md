@@ -42,6 +42,7 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 
 * 2017-10-25 ~ Switch all defaults to SI units
+* 2017-10-25 ~ change 'floor'-like variable to 'storey' through out
 * 2017-10-25 ~ Add separate US menu demo
 * 2017-10-25 ~ rename 'buildings var to 'campus'
 * Start adding more shapes

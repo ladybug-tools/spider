@@ -203,7 +203,7 @@
 		} );
 
 		building.mesh = object;
-		building.type = selObject.value.toLowerCase().replace( / /g, '-' );
+
 	}
 
 
@@ -462,101 +462,42 @@
 
 		let textSurfacesBits = '';
 
-		let storeys = theBuilding.children.length;
+		let floors = theBuilding.children.length;
 		let surfaceId = 1;
 		let spaceId = 1;
 		let quad;
 
-		for ( let i = 0; i < storeys; i++ ) {
+		for ( let i = 0; i < floors; i++ ) {
 
 			const meshFloor = theBuilding.children[ i ];
 			const vertices = meshFloor.geometry.vertices;
-			const spacesPerStorey = vertices.length / 5 - 1;
+			const surfacesCount = vertices.length / 5 - 1;
 			const path = [];
 
-			for ( let j = 0; j < spacesPerStorey; j++ ) {
+			for ( var j = 0; j < surfacesCount; j++ ) {
 
 				const pt1 = j * 5 ;
-				const pt2 = pt1 + 5;
-				const interiorSpaceId = storeys * spacesPerStorey + 5;
+				pt2 = pt1 + 5;
 
-				quad = {
-					description: 'floor: ' + ( i + 1 ),
-					mesh: meshFloor,
-					name: 'floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
-					type: 'InteriorFloor',
-					spaceId1: spaceId,
-					spaceId2: undefined,
-					surfaceId: surfaceId, 
-					vertices: [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ]
-				};
+				quad = [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ];
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorFloor', surfaceId++ , spaceId );
 
-				surfaceId ++;
+				quad = [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ];
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall', surfaceId ++, spaceId );
 
-				textSurfacesBits += getSingleSurface( quad );
+				if ( i + 1 === floors ) {
 
-				quad = {
-					description: 'interior wall: ' + ( i + 1 ),
-					mesh: meshFloor,
-					name: 'interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
-					type: 'InteriorWall',
-					spaceId1: spaceId,
-					spaceId2: interiorSpaceId,
-					surfaceId: surfaceId, 
-					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
-				};
-
-				surfaceId ++;
-
-				textSurfacesBits += getSingleSurface( quad );
-
-				if ( i + 1 === storeys ) {
-
-					quad = {
-						description: 'roof: ' + ( i + 1 ),
-						mesh: meshFloor,
-						name: 'roof-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
-						type: 'Roof',
-						spaceId1: spaceId,
-						spaceId2: undefined,
-						surfaceId: surfaceId, 
-						vertices: [ vertices[ pt1 + 2 ], vertices[ pt1 + 3 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
-					};
-
-					surfaceId ++;
-
-					textSurfacesBits += getSingleSurface( quad );
+					quad = [ vertices[ pt1 + 2 ], vertices[ pt1 + 3 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ];
+					textSurfacesBits += getSingleSurface( meshFloor, quad, 'Roof', surfaceId ++, spaceId );
 
 				}
 
-				quad = {
-					description: 'wall: ' + ( i + 1 ),
-					mesh: meshFloor,
-					name: 'exterior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
-					type: 'ExteriorWall',
-					spaceId1: spaceId,
-					spaceId2: undefined,
-					surfaceId: surfaceId, 
-					vertices: [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ]
-				};
-				surfaceId ++;
 
-				textSurfacesBits += getSingleSurface( quad );
+				quad = [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ];
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'ExteriorWall', surfaceId ++, spaceId );
 
-				quad = {
-					description: 'diagonal-wall: ' + ( i + 1 ),
-					mesh: meshFloor,
-					name: 'diagonal-interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
-					type: 'InteriorWall',
-					spaceId1: spaceId,
-					spaceId2: ( spaceId < spacesPerStorey ? spaceId + 1 : 1 ),
-					surfaceId: surfaceId, 
-					vertices: [ vertices[ pt2 + 1 ], vertices[ pt2 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
-				};
-
-				surfaceId ++;
-
-				textSurfacesBits += getSingleSurface( quad );
+				quad = [ vertices[ pt1 + 1 ], vertices[ pt1 ], vertices[ pt1 + 3 ], vertices[ pt1 + 2 ] ];
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall', surfaceId ++, spaceId );
 
 				path.push( vertices[ pt1 + 2 ] );
 
@@ -568,11 +509,14 @@
 
 			textSurfacesBits += getSurfacesOverhangs( meshFloor, path, surfaceId ++ );
 
-			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', surfaceId ++, spaceId  );
+			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', surfaceId ++, spaceId++  );
 
-			if ( i + 1 === storeys ) {
+			if ( i + 1 === floors ) {
 
-				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, building.floorHeight );
+//				meshRoof = meshFloor.clone();
+//console.log( 'building.floorHeight', building.floorHeight );
+//				meshRoof.position.z += building.floorHeight;
+				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, building.floorHeight  );
 
 			}
 
@@ -586,41 +530,39 @@
 
 
 
-	function getSingleSurface( quad ) {
+	function getSingleSurface( floor, vertices, type, surfaceId, spaceId1, spaceId2 ) {
 
-//console.log( 'quad', quad );
-
-//		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
-//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		let textSingleSurfaces =  
 
-			'\t\t<Surface surfaceType="' + quad.type + '" id="bw-surface-' + quad.surfaceId + '" >\n' +
-				'\t\t\t<Name>' + quad.name + '</Name>\n' +
+			'\t\t<Surface surfaceType="' + type + '" id="bw-surface-' + surfaceId + '" >\n' +
+//				'\t\t\t<Name>' + surface.name + '</Name>\n' +
 			'\t\t\t<CADOjectId>none</CADOjectId>\n' +
-			'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + quad.spaceId1  + '" />\n' +
-			( quad.spaceId2 ? '\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + quad.spaceId2  + '" />\n' : '' ) +
+			'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + spaceId1  + '" />\n' +
+			( spaceId2 ? '\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + spaceId2  + '" />\n' : '' ) +
 			'\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t<PolyLoop>\n' +
 		'';
 
 		let verticesClone = [];
 
-		for ( let i = 0; i < quad.vertices.length; i++ ) {
+		for ( let i = 0; i < vertices.length; i++ ) {
 
-			vertex = quad.vertices[ i ].clone();
-			vertex.applyMatrix4( quad.mesh.matrixWorld );
+			vertex = vertices[ i ].clone();
+			vertex.applyMatrix4( floor.matrixWorld );
 
 			textSingleSurfaces += getCartesianPointText( vertex );
 			verticesClone.push( vertex );
 
-//			mesh = new THREE.Mesh( geo, material );
-//			mesh.position.add( vertex );
+			mesh = new THREE.Mesh( geo, material );
+			mesh.position.add( vertex );
 //			scene.add( mesh );
 
 		}
 
-		textOpen = quad.type === 'ExteriorWall' ? getOpening( quad ) : '';
+		textOpen = type === 'ExteriorWall' ? getOpening( floor, verticesClone, surfaceId, spaceId1 ) : '';
 
 		textSingleSurfaces +=  
 			'\t\t\t\t</PolyLoop>\n' +
@@ -635,16 +577,15 @@
 
 
 
-	function getOpening( quad ) {
+	function getOpening( floor, vertices, surfaceId, spaceId1 ) {
 
 		let textOpening = '';
 
-//		const geometry = new THREE.BoxBufferGeometry( 5, 8, 5 );
-//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-//		let mesh;
+		const geometry = new THREE.BoxBufferGeometry( 5, 8, 3 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		textOpening += 
-			'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + quad.surfaceId + '" >\n' +
+			'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + surfaceId + '" >\n' +
 			'\t\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t\t<PolyLoop>\n' +
 		'';
@@ -653,22 +594,22 @@
 
 		verts = [
 
-			quad.vertices[ 0 ].clone().lerp( quad.vertices[ 2 ].clone(), 0.5 - wwr05 ),
-			quad.vertices[ 1 ].clone().lerp( quad.vertices[ 3 ].clone(), 0.5 - wwr05 ),
-			quad.vertices[ 0 ].clone().lerp( quad.vertices[ 2 ].clone(), 0.5 + wwr05 ),
-			quad.vertices[ 1 ].clone().lerp( quad.vertices[ 3 ].clone(), 0.5 + wwr05 )
+			vertices[ 0 ].clone().lerp( vertices[ 2 ].clone(), 0.5 - wwr05 ),
+			vertices[ 1 ].clone().lerp( vertices[ 3 ].clone(), 0.5 - wwr05 ),
+			vertices[ 0 ].clone().lerp( vertices[ 2 ].clone(), 0.5 + wwr05 ),
+			vertices[ 1 ].clone().lerp( vertices[ 3 ].clone(), 0.5 + wwr05 )
 
 		]
 
 		for ( let i = 0; i < verts.length; i++ ) {
 
 			vertex = verts[ i ];
-			vertex.applyMatrix4( quad.mesh.matrixWorld );
+
 			textOpening += getCartesianPointText( vertex );
 
-//			mesh = new THREE.Mesh( geometry, material );
-//			mesh.position.add( vertex );
-//			scene.add( mesh );
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.add( vertex );
+			scene.add( mesh );
 
 		}
 
@@ -685,7 +626,7 @@
 
 
 
-	function getSurfacesSlabs( slab, path, type, surfaceId, spaceId, height = 0 ) {
+	function getSurfacesSlabs( floor, path, type, surfaceId, spaceId, height = 0 ) {
 
 //console.log( 'path', path );
 
@@ -695,25 +636,12 @@
 		geometry = new THREE.ShapeGeometry( shape );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
 
+		textInterior += getSingleSurface( floor, geometry.vertices, type, surfaceId )
 
-		quad = {
-			description: type + ': ',
-			mesh: slab,
-			name: 'slab-floor-' + slab.userData.floor,
-			type: type,
-			spaceId1: spaceId,
-			spaceId2: undefined,
-			surfaceId: surfaceId, 
-			vertices: geometry.vertices
-		};
-
-		textInterior += getSingleSurface( quad )
-
-//		textInterior += getSingleSurface( floor, geometry.vertices, type, surfaceId )
-
-//		material = new THREE.MeshNormalMaterial();
-//		mesh = new THREE.Mesh( geometry, material );
-//		slab.add( mesh );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+//		mesh.position.copy( floor.position );
+		floor.add( mesh );
 
 		return textInterior;
 
@@ -721,15 +649,15 @@
 
 
 
-	function getSurfacesOverhangs( floor, path, surfaceId, spaceId1 ) {
-//console.log( 'floor', floor );
+	function getSurfacesOverhangs( floor, path, surfaceId ) {
+console.log( 'floor', floor );
 
 		let textOver = '';
-//		const geometry = new THREE.BoxBufferGeometry( 3, 2, 1 );
-//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		const geometry = new THREE.BoxBufferGeometry( 3, 2, 1 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		let overhangId = ( floor.userData.floor - 1 ) * path.length + 1;
-		let id = 1;
+
 		for ( let i = 0; i < floor.children.length; i++ ) {
 
 			const overhang = floor.children[ i ];
@@ -737,7 +665,7 @@
 
 			textOver += 
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( overhangId ++ ) + '" >\n' +
-				'\t\t\t<Name>overhang-floor-' + floor.userData.floor +'-space-' + ( id++ )+ '</Name>\n' +
+				'\t\t\t<Name>' + building.mesh.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
@@ -761,12 +689,11 @@
 				vertex = vertices[ j ];
 				vertex.applyMatrix4( overhang.matrixWorld );
 				textOver += getCartesianPointText( vertex );
-/*
+
 				const mesh = new THREE.Mesh( geometry, material );
 				mesh.position.copy( vertex );
 				mesh.name = 'shade';
-				scene.add( mesh );
-*/
+//				scene.add( mesh );
 //console.log( 'vertex', mesh.position );
 
 			}
@@ -880,7 +807,7 @@
 		if ( parent && parent.ifrThree ) {
 
 			blob = new Blob( [ parent.buildingData.value ] );
-//console.log( 'parent.buildingData', parent.buildingData.value );
+console.log( 'parent.buildingData', parent.buildingData.value );
 
 		} else {
 
@@ -890,9 +817,7 @@
 
 		let a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
-		const fileName = building.type + '-' + building.area + 'area-' + building.floors + 'flr-' + building.orientation + 'deg' + '.xml';
-		a.download = fileName;
-
+		a.download = 'building-data.xml';
 		a.click();
 //		delete a;
 		a = null;

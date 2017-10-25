@@ -462,23 +462,22 @@
 
 		let textSurfacesBits = '';
 
-		let storeys = theBuilding.children.length;
+		let floors = theBuilding.children.length;
 		let surfaceId = 1;
 		let spaceId = 1;
 		let quad;
 
-		for ( let i = 0; i < storeys; i++ ) {
+		for ( let i = 0; i < floors; i++ ) {
 
 			const meshFloor = theBuilding.children[ i ];
 			const vertices = meshFloor.geometry.vertices;
 			const spacesPerStorey = vertices.length / 5 - 1;
 			const path = [];
 
-			for ( let j = 0; j < spacesPerStorey; j++ ) {
+			for ( var j = 0; j < spacesPerStorey; j++ ) {
 
 				const pt1 = j * 5 ;
-				const pt2 = pt1 + 5;
-				const interiorSpaceId = storeys * spacesPerStorey + 5;
+				pt2 = pt1 + 5;
 
 				quad = {
 					description: 'floor: ' + ( i + 1 ),
@@ -501,7 +500,7 @@
 					name: 'interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
 					type: 'InteriorWall',
 					spaceId1: spaceId,
-					spaceId2: interiorSpaceId,
+					spaceId2: undefined,
 					surfaceId: surfaceId, 
 					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
 				};
@@ -510,7 +509,10 @@
 
 				textSurfacesBits += getSingleSurface( quad );
 
-				if ( i + 1 === storeys ) {
+//				quad = [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ];
+//				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall', surfaceId ++, spaceId );
+
+				if ( i + 1 === floors ) {
 
 					quad = {
 						description: 'roof: ' + ( i + 1 ),
@@ -526,6 +528,9 @@
 					surfaceId ++;
 
 					textSurfacesBits += getSingleSurface( quad );
+
+//					quad = [ vertices[ pt1 + 2 ], vertices[ pt1 + 3 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ];
+//					textSurfacesBits += getSingleSurface( meshFloor, quad, 'Roof', surfaceId ++, spaceId );
 
 				}
 
@@ -543,20 +548,26 @@
 
 				textSurfacesBits += getSingleSurface( quad );
 
+//				quad = [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ];
+//				textSurfacesBits += getSingleSurface( meshFloor, quad, 'ExteriorWall', surfaceId ++, spaceId );
+
 				quad = {
 					description: 'diagonal-wall: ' + ( i + 1 ),
 					mesh: meshFloor,
 					name: 'diagonal-interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
 					type: 'InteriorWall',
 					spaceId1: spaceId,
-					spaceId2: ( spaceId < spacesPerStorey ? spaceId + 1 : 1 ),
+					spaceId2: spaceId + 1,
 					surfaceId: surfaceId, 
-					vertices: [ vertices[ pt2 + 1 ], vertices[ pt2 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
+					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 ], vertices[ pt1 + 3 ], vertices[ pt1 + 2 ] ]
 				};
 
 				surfaceId ++;
 
 				textSurfacesBits += getSingleSurface( quad );
+
+//				quad = [ vertices[ pt1 + 1 ], vertices[ pt1 ], vertices[ pt1 + 3 ], vertices[ pt1 + 2 ] ];
+//				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall', surfaceId ++, spaceId );
 
 				path.push( vertices[ pt1 + 2 ] );
 
@@ -570,7 +581,7 @@
 
 			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', surfaceId ++, spaceId  );
 
-			if ( i + 1 === storeys ) {
+			if ( i + 1 === floors ) {
 
 				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, building.floorHeight );
 
@@ -692,8 +703,8 @@
 		textInterior = '';
 
 		shape = new THREE.Shape( path );
-		geometry = new THREE.ShapeGeometry( shape );
-		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
+//		geometry = new THREE.ShapeGeometry( shape );
+//		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
 
 
 		quad = {

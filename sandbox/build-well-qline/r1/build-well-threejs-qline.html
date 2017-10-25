@@ -168,8 +168,8 @@
 // Three.js values
 		building.zones = [];
 		building.spaces = [];
-		building.slabs = [];
-		building.overhangs = [];
+//		building.slabs = [];
+//		building.overhangs = [];
 
 		building.opacity = 90;
 		building.vertical = 20;
@@ -473,7 +473,6 @@
 				over.rotation.z = angle
 				over.translateY( -0.5 * building.overhangDepth );
 				over.translateZ( 0.5 * hgt * building.wwr / 100 );
-
 				over.name = 'overhang';
 				mesh.add( over );
 
@@ -484,7 +483,6 @@
 				open.position.copy( vertices[ 3 ][ i ].clone().lerp( vertices[ 4 ][ i + 1 ].clone(), 0.5 ) );
 				open.rotation.z = angle;
 				open.translateY( -0.1 );
-//				open.rotation.y = Math.PI * 0.25;
 				open.name = 'opening';
 				mesh.add( open );
 
