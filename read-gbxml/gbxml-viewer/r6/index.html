@@ -6,7 +6,7 @@
 <meta name = "description" content = "gbXML file wrangler" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-05" >
-<title>gbXML Viewer R5</title>
+<title>gbXML Viewer R6</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -92,19 +92,7 @@
 		<div><a href=JavaScript:loadXML("../../data-files/building-data-ell2.xml")>building-data-ell2</a></div>
 		</details>
 		<div id = "GreenspaceLiveSamples" ></div>
-<!--
-		<h4>open local file</h4>
 
-		<div id = "fileReader" >
-			<p><input type=file id=inpFile onchange=openFile(this); ></p>
-		</div>
-
-		<h4>File type</h4>
-
-		<p><button onclick=requestPlainGbXML(); >view as xml</button></p>
-
-		<h4>stats</h4>
--->
 		<div id = "stats" ></div>
 		<div id = "stats2" ></div>
 
@@ -142,6 +130,7 @@
 			'<p>Welcome!</p>' +
 			'<p>It get\'s confusing in here some times.</p>' +
 		'';
+
 
 		divMenuSub.innerHTML = txt;
 
@@ -200,8 +189,6 @@
 		divMenuSub.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' ></iframe>'
 //		ifrMenuSub.onload = function(){ requestFile( url, ifrMenuSub.contentWindow.callbackGbXML ); };
 	}
-
-
 
 
 	function loadXML( url ) {

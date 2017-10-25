@@ -6,7 +6,7 @@
 <meta name = "description" content = "gbXML file viewer" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-10" >
-<title>gbXML Data</title>
+<title>gbXML Viewer Three.js</title>
 <style>
 /* https://www.w3schools.com/colors/colors_names.asp */
 /* 2017-09-30*/
@@ -45,6 +45,7 @@
 
 			<div id = "divTitle" ></div>
 
+			<p><a href=#../../data-files/test.xml >test.xml</a></p>
 			<p id = "divFileInfo" ></p>
 			<p id = "divStats1" ></p>
 			<p id = "divStats2" ></p>
@@ -125,6 +126,7 @@
 
 		}
 
+		window.addEventListener ( 'hashchange', onHashChange, false );
 
 	}
 
@@ -146,18 +148,28 @@
 
 		materialSurfaces=materialPhongBySurface;
 
-		requestFile( gbxmlURI, callbackGbXML );
+//		requestFile( gbxmlURI, callbackGbXML );
+
+		onHashChange();
 
 		initHeadsUp();
 
 	}
 
 
+	function onHashChange() {
+
+		const url = !location.hash ? gbxmlURI : location.hash.slice( 1 );
+
+		requestFile( url, callbackGbXML );
+
+	}
+
 
 	function callbackGbXML( xhr ){
 
 		let response;
-
+console.log( '', xhr );
 		response = xhr.target.responseXML.documentElement;
 
 //		gbjson.url = xhr.target.responseURL;
