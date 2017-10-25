@@ -40,14 +40,31 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 ## Issues / To Do
 
-* Floor/Space/Zone IDs currently higgledy piggledy
-* gbXML openings, floors an overhangs
-* Fix section parameters so origin is at lower left
-* Add IDs to HUD readout
-* Fix site settings issues 
+
+* 2017-10-25 ~ Switch all defaults to SI units
+* 2017-10-25 ~ Add separate US menu demo
+* 2017-10-25 ~ rename 'buildings var to 'campus'
 * Start adding more shapes
 
 ## Change Log
+
+
+### 2017-10-25 ~ Theo
+
+BW qline R1.5
+* Update template with point release, and github icon variable
+* build well: add go to top to menu bottom
+* Settings/qline : fix building name issues
+	* Add 'vertical separation' slider
+
+Mostly done or in progress
+
+* 2017-10-25 ~ Fix Moire issues with openings
+* Floor/Space/Zone IDs currently higgledy piggledy
+* gbXML openings, floors and overhangs
+* Fix section parameters so origin is at lower left
+* Add IDs to HUD readout
+* Fix site settings issues 
 
 
 ### 2017-10-24 ~ Theo
@@ -59,6 +76,7 @@ If one were to invent a new drawing command - designed to be what comes after th
 	* And it's appearing in gbXML Reader and Opon Stdio
 * IDs are progressing
 * Adjacency elements are just place holders for the moment
+
 
 ### 2017-10-23 ~ Theo
 

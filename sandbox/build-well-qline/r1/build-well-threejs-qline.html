@@ -145,6 +145,8 @@
 		building.Latitude = 37.796;
 		building.locationName = 'San Francisco CA United States';
 
+		building.name = 'The Building';
+
 		building.orientation = 0;
 		building.overhangDepth = 1 + Math.floor( 10 * Math.random() );
 
@@ -170,11 +172,12 @@
 		building.overhangs = [];
 
 		building.opacity = 90;
+		building.vertical = 20;
+
 //		building.group = new THREE.Group();
 //		building.group = createMesh();
 //		building.group.scale.set( 80, 100, 12 );
 //		building.group.position.set( 0, 0, 0.5 * building.group.scale.z );
-//		building.group.name = 'The Building';
 
 		toggleBackgroundGradient();
 
@@ -223,7 +226,7 @@
 
 		for ( var i = 0; i < floors; i++ ) {
 
-			const vertical = i * 2 * height;
+			const vertical = i * ( building.vertical + height );
 			const floor = i + 1;
 
 			mesh = createQlineMesh( section, pathBox, 'Box shape', floor );
@@ -480,6 +483,7 @@
 				geo.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI * 0.5 ) );
 				open.position.copy( vertices[ 3 ][ i ].clone().lerp( vertices[ 4 ][ i + 1 ].clone(), 0.5 ) );
 				open.rotation.z = angle;
+				open.translateY( -0.1 );
 //				open.rotation.y = Math.PI * 0.25;
 				open.name = 'opening';
 				mesh.add( open );
