@@ -1,11 +1,22 @@
 
 ## Campus
 
-documentation: The Campus element should be used as the base for all physical objects. On a campus, place one or more buildings
+## documentation: 
+
+The Campus element should be used as the base for all physical objects. On a campus, place one or more buildings
+
+## Generally
+
+Name and description and  other fields may be included but are not required.
+
+_Would be nice to include some examples of nicely dome names, descriptions etc??_
+
+
+## From Schema
 
 attribute name="id" type="xsd:ID" use="required"
 
-	<xsd:complexType>
+    <xsd:complexType>
     <xsd:choice minOccurs="0" maxOccurs="unbounded">
       <xsd:element ref="Name" minOccurs="0"/>
       <xsd:element ref="Description" minOccurs="0"/>

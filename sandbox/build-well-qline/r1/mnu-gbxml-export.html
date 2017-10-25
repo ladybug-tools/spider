@@ -219,10 +219,11 @@
 		textMenu += 
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
-//			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
-			'<gbXML xmlns="http://www.gbxml.org/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
+			'<gbXML xmlns="http://www.gbxml.org/schema" ' +
+				'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
 				'xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" ' +
 				'xmlns:xhtml="http://www.w3.org/1999/xhtml" ' +
+
 				'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
 				'useSIUnitsForResults="' + building.useSIUnitsForResults + '" ' +
 				'SurfaceReferenceLocation="' + building.SurfaceReferenceLocation + '" ' +
@@ -230,32 +231,37 @@
 				'lengthUnit="' + building.lengthUnit + '" ' +
 				'areaUnit="' + building.areaUnit + '" ' +
 				'volumeUnit="' + building.volumeUnit + '" ' +
-				'version="' + building.version + '" >\n' +
+				'version="' + building.version + '"' +
+
+			' >\n' +
 
 			'\t<Campus id="' + building.campusId + '" >\n' +
 
-			'\t\t<DaylightSavings>"' + building.DaylightSavings + '"</DaylightSavings>\n' +
-			'\t\t<Name>"' + building.mesh.name + '"</Name>\n' +
+				'\t\t<DaylightSavings>' + building.DaylightSavings + '</DaylightSavings>\n' +
+				'\t\t<Name>' + building.mesh.name + '</Name>\n' +
+
 			'\t\t<Location>\n' +
-			'\t\t\t<ZipcodeOrPostalCode>"' + building.ZipcodeOrPostalCode + '"</ZipcodeOrPostalCode>\n' +
-			'\t\t\t<Longitude>"' + building.Longitude + '"</Longitude>\n' +
-			'\t\t\t<Latitude>"' + building.Latitude + '"</Latitude>\n' +
-			'\t\t\t<Elevation>"' + building.Elevation + '"</Elevation>\n' +
-			'\t\t\t<CADModelAzimuth>"' + building.CADModelAzimuth + '"</CADModelAzimuth>\n' +
-			'\t\t\t<Name>"' + building.mesh.name + '"</Name>\n' +
+				'\t\t\t<ZipcodeOrPostalCode>' + building.ZipcodeOrPostalCode + '</ZipcodeOrPostalCode>\n' +
+				'\t\t\t<Longitude>' + building.Longitude + '</Longitude>\n' +
+				'\t\t\t<Latitude>' + building.Latitude + '</Latitude>\n' +
+				'\t\t\t<Elevation>' + building.Elevation + '"</Elevation>\n' +
+				'\t\t\t<CADModelAzimuth>"' + building.CADModelAzimuth + '</CADModelAzimuth>\n' +
+				'\t\t\t<Name>' + building.mesh.name + '</Name>\n' +
 			'\t\t</Location>\n' +
+
 			'\t\t<Building id="bw-building-' + building.buildingId + '" buildingType="Office" >\n' +
-			'\t\t\t<Area>' + building.area + '</Area>\n' +
-			'\t\t\t<Name>"' + building.mesh.name + '"</Name>\n' +
-			'\t\t\t<Description>' + building.description + '</Description>\n' +
-			'\t\t\t<StreetAddress>"' + building.streetAddress + '"</StreetAddress>\n' +
+
+				'\t\t\t<Area>' + building.area + '</Area>\n' +
+				'\t\t\t<Name>' + building.mesh.name + '</Name>\n' +
+				'\t\t\t<Description>' + building.description + '</Description>\n' +
+				'\t\t\t<StreetAddress>' + building.streetAddress + '</StreetAddress>\n' +
 			'\t\t\t<Volume>' + building.volume + '</Volume>\n' +
 		'';
 
 
 		textMenu += getBuildingStoreys( building );
 
-		textMenu += getSpaces( building );
+		textMenu += getSpacesAndZones( building );
 
 		textMenu += '\t\t</Building>\n';
 
@@ -271,8 +277,6 @@
 			'\t</DocumentHistory>\n' +
 			'</gbXML>\n' +
 		'';
-
-
 
 		if ( parent && parent.ifrThree ) {
 
@@ -302,17 +306,18 @@
 
 
 
-
 	function getBuildingStoreys( building ) {
 
 		let textBuildingStoreys = '';
 
 		for ( var i = 0; i < building.floors; i++ ) {
 
+			const storey = i + 1;
+
 			textBuildingStoreys += 
-				'\t\t\t<BuildingStorey id="bw-storey-' + ( i + 1 ) + '" >\n' +
-				'\t\t\t\t<Name>"storey-' + ( i + 1 ) + '"</Name>\n' +
-				'\t\t\t\t<Level>' + ( i * building.floorHeight + 1 ) + '</Level>\n' +
+				'\t\t\t<BuildingStorey id="bw-storey-' + storey + '" >\n' +
+				'\t\t\t\t<Name>"storey-' + storey + '"</Name>\n' +
+				'\t\t\t\t<Level>' + ( i * building.floorHeight ) + '</Level>\n' +
 				'\t\t\t</BuildingStorey>\n' +
 			'';
 
@@ -326,36 +331,49 @@
 
 
 
-	function getSpaces( building ) {
+	function getSpacesAndZones( building ) {
 //console.log( '', building );
+
 		let textSpace = '';
-
-		const vertices = building.mesh.children[ 0 ].geometry.vertices;
-		const spacesCount = vertices.length / 5 - 1;
 		const spaces = building.spaces;
+		const zones = building.zones;
 
-storey = 1;
+		for ( var i = 0; i < building.mesh.children.length; i++ ) {
 
-		for ( var i = 0; i < spacesCount; i++ ) {
+			const vertices = building.mesh.children[ i ].geometry.vertices;
+			const spacesCount = vertices.length / 5 - 1;
 
-// needs checking
-			const vertex1 = vertices[ i * 5 ];
-			const vertex2 = vertices[ ( i + 1 ) * 5 ];
-			const area = vertex1.distanceTo( vertex2 ) * building.perimeterDepth;
-			const volume = area * building.floorHeight;
+			let storey = i + 1;
 
-			spaces.push( { name: 'space ' + ( i + 1 ), id: ( i + 1 ), description: 'a space', 
-				area: area, storey: storey, volume: volume, zone: ( i + 1 ) } );
+			for ( var j = 0; j < spacesCount; j++ ) {
+
+// needs checking / uses incorrect vertices
+				const vertex1 = vertices[ j * 5 ];
+				const vertex2 = vertices[ ( j + 1 ) * 5 ];
+				const area = vertex1.distanceTo( vertex2 ) * building.perimeterDepth;
+				const volume = area * building.floorHeight;
+
+				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + ( j + 1 ), id: ( j + 1 ), description: 'a space', 
+					area: area, storey: storey, volume: volume, zone: ( j + 1 ) } );
+
+				building.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + ( j + 1 ), description: 'a zone' } );
+
+			}
+
+				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + ( j + 1 ), id: ( j + 1 ), description: 'a space', 
+					area: 23, storey: storey, volume: 23, zone: ( j + 1 ) } );
+
+				building.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + ( j + 1 ), description: 'a zone' } );
 
 		}
 
-		for ( var i = 0; i < spaces.length; i++ ) {
+		for ( var j = 0; j < spaces.length; j++ ) {
 
-			const space = spaces[ i ];
+			const space = spaces[ j ];
 
 			textSpace += 
 				'\t\t\t<Space zoneIdRef="bw-zone-' + space.zone + '" ' +
-					'id="bw-space-' + ( i + 1 ) + '" ' +
+					'id="bw-space-' + ( j + 1 ) + '" ' +
 					'buildingStoreyIdRef="bw-storey-' + space.storey + '" ' +
 					'conditionType="HeatedAndCooled" >\n' +
 				'\t\t\t\t<Name>' + space.name + '</Name>\n' +
@@ -375,25 +393,15 @@ storey = 1;
 	}
 
 
+
 	function getZones( building ) {
 
 		let textZones = '';
 
-
-		const vertices = building.mesh.children[ 0 ].geometry.vertices;
-		const zonesCount = vertices.length / 5 - 1;
-		const zones = building.zones;
-
-		for ( var i = 0; i < zonesCount; i++ ) {
-
-				building.zones.push( { name: 'zone ' + ( i + 1 ), description: 'a zone' } );
-
-		}
-
-
 		for ( let i = 0; i < building.zones.length; i++ ) {
 
 			const zone = building.zones[ i ];
+
 			textZones += 
 				'\t<Zone id="bw-zone-' + ( i + 1 ) + '" >\n' +
 				'\t\t<Name>' + zone.name + '</Name>\n' +
@@ -402,7 +410,6 @@ storey = 1;
 			'';
 
 		}
-
 
 //console.log( 'textZones', textZones );
 
@@ -443,14 +450,16 @@ storey = 1;
 
 
 	function getSurfacesTheBuilding( theBuilding ) {
-
 //console.log( 'theBuilding', theBuilding.children[ 0 ] );
+
 		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		let textSurfacesBits = '';
 
-		const floors = theBuilding.children.length;
+		let floors = theBuilding.children.length;
+		let surfaceId = 1;
+		let spaceId = 1;
 
 		for ( let i = 0; i < floors; i++ ) {
 
@@ -465,40 +474,47 @@ storey = 1;
 				pt2 = pt1 + 5;
 
 				let quad = [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ];
-				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorFloor' , j );
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorFloor', surfaceId++ , spaceId );
 
 				quad = [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ];
-				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall' , j );
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall', surfaceId ++, spaceId );
 
 				if ( i + 1 === floors ) {
 
 					quad = [ vertices[ pt1 + 2 ], vertices[ pt1 + 3 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ];
-					textSurfacesBits += getSingleSurface( meshFloor, quad, 'Roof' , j );
+					textSurfacesBits += getSingleSurface( meshFloor, quad, 'Roof', surfaceId ++, spaceId );
 
 				}
 
+
 				quad = [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ];
-				textSurfacesBits += getSingleSurface( meshFloor, quad, 'ExteriorWall' , j );
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'ExteriorWall', surfaceId ++, spaceId );
 
 				quad = [ vertices[ pt1 + 1 ], vertices[ pt1 ], vertices[ pt1 + 3 ], vertices[ pt1 + 2 ] ];
-				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall' , j );
+				textSurfacesBits += getSingleSurface( meshFloor, quad, 'InteriorWall', surfaceId ++, spaceId );
 
 				path.push( vertices[ pt1 + 2 ] );
 
+//console.log( 'spaceId', spaceId );
+
+				spaceId ++;
+
 			}
 
-			textSurfacesBits += getSurfacesOverhangs( meshFloor, path, ( i + 1 ) );
+			textSurfacesBits += getSurfacesOverhangs( meshFloor, path, surfaceId ++ );
 
-			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', ( i + 1 )  );
+			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', surfaceId ++, spaceId++  );
 
 			if ( i + 1 === floors ) {
 
-				meshRoof = meshFloor.clone();
+//				meshRoof = meshFloor.clone();
 //console.log( 'building.floorHeight', building.floorHeight );
 //				meshRoof.position.z += building.floorHeight;
-				textSurfacesBits += getSurfacesSlabs( meshRoof, path, 'Roof', ( i + 1 ), floors * building.floorHeight  );
+				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, building.floorHeight  );
 
 			}
+
+			spaceId ++;
 
 		}
 
@@ -508,17 +524,18 @@ storey = 1;
 
 
 
-	function getSingleSurface( floor, vertices, type, id ) {
+	function getSingleSurface( floor, vertices, type, surfaceId, spaceId1, spaceId2 ) {
 
 		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		let textSingleSurfaces =  
 
-			'\t\t<Surface surfaceType="' + type + '" id="bw-surface-' + id + '" >\n' +
+			'\t\t<Surface surfaceType="' + type + '" id="bw-surface-' + surfaceId + '" >\n' +
 //				'\t\t\t<Name>' + surface.name + '</Name>\n' +
 			'\t\t\t<CADOjectId>none</CADOjectId>\n' +
-			'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + id  + '" />\n' +
+			'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + spaceId1  + '" />\n' +
+			( spaceId2 ? '\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + spaceId2  + '" />\n' : '' ) +
 			'\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t<PolyLoop>\n' +
 		'';
@@ -539,7 +556,7 @@ storey = 1;
 
 		}
 
-		textOpen = type === 'ExteriorWall' ? getOpening( floor, verticesClone, id ) : '';
+		textOpen = type === 'ExteriorWall' ? getOpening( floor, verticesClone, surfaceId, spaceId1 ) : '';
 
 		textSingleSurfaces +=  
 			'\t\t\t\t</PolyLoop>\n' +
@@ -554,8 +571,7 @@ storey = 1;
 
 
 
-
-	function getOpening( floor, vertices, id ) {
+	function getOpening( floor, vertices, surfaceId, spaceId1 ) {
 
 		let textOpening = '';
 
@@ -563,7 +579,7 @@ storey = 1;
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		textOpening += 
-			'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + id + '" >\n' +
+			'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + surfaceId + '" >\n' +
 			'\t\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t\t<PolyLoop>\n' +
 		'';
@@ -604,9 +620,9 @@ storey = 1;
 
 
 
-	function getSurfacesSlabs( floor, path, type, id, height = 0 ) {
+	function getSurfacesSlabs( floor, path, type, surfaceId, spaceId, height = 0 ) {
 
-console.log( 'path', path );
+//console.log( 'path', path );
 
 		textInterior = '';
 
@@ -614,12 +630,12 @@ console.log( 'path', path );
 		geometry = new THREE.ShapeGeometry( shape );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
 
-		textInterior += getSingleSurface( floor, geometry.vertices, type, id )
-console.log( 'textInterior', textInterior );
+		textInterior += getSingleSurface( floor, geometry.vertices, type, surfaceId )
+
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
-		mesh.position.copy( floor.position );
-		scene.add( mesh );
+//		mesh.position.copy( floor.position );
+		floor.add( mesh );
 
 		return textInterior;
 
@@ -627,11 +643,14 @@ console.log( 'textInterior', textInterior );
 
 
 
-	function getSurfacesOverhangs( floor, path, id ) {
+	function getSurfacesOverhangs( floor, path, surfaceId ) {
+console.log( 'floor', floor );
 
 		let textOver = '';
 		const geometry = new THREE.BoxBufferGeometry( 3, 2, 1 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		let overhangId = ( floor.userData.floor - 1 ) * path.length + 1;
 
 		for ( let i = 0; i < floor.children.length; i++ ) {
 
@@ -639,14 +658,14 @@ console.log( 'textInterior', textInterior );
 			if ( overhang.name !== 'overhang' ) { continue; }
 
 			textOver += 
-				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( i + 1 ) + '" >\n' +
+				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( overhangId ++ ) + '" >\n' +
 				'\t\t\t<Name>' + building.mesh.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
 
 //console.log( 'overhang', overhang );
-//console.log( 'geo', overhang.geometry.attributes.position.array );
+//console.log( 'geometry', overhang.geometry.attributes.position.array );
 
 			const coordinates = overhang.geometry.attributes.position.array;
 
@@ -696,16 +715,12 @@ console.log( 'textInterior', textInterior );
 
 //console.log( '', building );
 
-//		const geo = building.geometry;
-//		geo.computeBoundingBox();
 		const bb = new THREE.Box3().setFromObject( building );
-
-//		const bb  = geo.boundingBox;
 		const mi = bb.min;
 		const mx = bb.max;
 
-		const geometry = new THREE.BoxBufferGeometry( 1, 1, 100 );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+//		const geometry = new THREE.BoxBufferGeometry( 1, 1, 100 );
+//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		const faces =  [ 
 			[v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
@@ -737,8 +752,8 @@ console.log( 'textInterior', textInterior );
 				const vertex = vertices[ k ];
 				textMenu += getCartesianPointText( vertex );
 
-				const mesh = new THREE.Mesh( geometry, material );
-				mesh.position.copy( vertex );
+//				const mesh = new THREE.Mesh( geometry, material );
+//				mesh.position.copy( vertex );
 //				scene.add( mesh );
 
 			}

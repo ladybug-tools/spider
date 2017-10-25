@@ -54,8 +54,11 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 15:03
 * gbXML exporting openings, roof
-
-
+22:27
+* gbXML exporting most all geometry
+	* And it's appearing in gbXML Reader and Opon Stdio
+* IDs are progressing
+* Adjacency elements are just place holders for now
 
 ### 2017-10-23 ~ Theo
 

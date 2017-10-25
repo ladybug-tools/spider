@@ -230,7 +230,7 @@ console.log( 'buildings', buildings );
 
 //				intersected.rotation.y += 0.1;
 
-				log.innerHTML = 'Selected object ID: ' + intersected.name ;
+				scope.divLog.innerHTML = 'Selected object ID: ' + intersected.name ;
 
 			}
 
@@ -241,7 +241,7 @@ console.log( 'buildings', buildings );
 
 			intersected = undefined;
 
-			log.innerHTML = 'No object selected';
+			scope.divLog.innerHTML = 'No object selected';
 
 		}
 
@@ -273,10 +273,9 @@ console.log( 'buildings', buildings );
 		headsUp.style.top = -50 + 0.5 * scope.window.innerHeight - mouse.y * 0.5 * scope.window.innerHeight + 'px';
 		headsUp.style.display = '';
 
-//console.log( 'intersected', intersected );
 		txt =
 			'Type: ' + intersected.name + b +
-			'Space/Zone ID: ' + intersected.userData.idSpace + b +
+			( intersected.userData.floor ? 'Floor ID: ' + intersected.userData.floor + b : '' ) +
 
 //			mouse.x + b +
 //			mouse.y +

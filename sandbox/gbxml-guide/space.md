@@ -1,9 +1,29 @@
 
 ## Space
 
+
+## Space Element
+
 ### Schema GreenBuildingXML_Ver6.01.xsd 
 
 From: <http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link34B>
+
+### Usage
+
+Documentation: A space represents a volume enclosed by surfaces
+
+Area and Volume should occur according to the Schema but are not required by Open Studio in order to import without warning.
+
+Shell Geometry elements and Space Boundary elements and their data frequently appear in Space elements but are not required
+
+
+### Space attributes:
+
+Name Description Lighting LightingControl InfiltrationFlow PeopleNumber PeopleHeatGain LightPowerPerArea
+EquipPowerPerArea AirChangesPerHour Area Temperature Volume PlanarGeometry ShellGeometry AirLoopId HydronicLoopId
+MeterId IntEquipId AirLoopEquipmentId HydronicLoopEquipmentId CADObjectId TypeCode SpaceBoundary
+
+
 
 > spaceType represents how a space is used.
 > an IESNA and ASHRAE project for determining lighting power density for individual spaces.
