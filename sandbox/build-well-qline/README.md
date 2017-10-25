@@ -58,7 +58,7 @@ If one were to invent a new drawing command - designed to be what comes after th
 * gbXML exporting most all geometry
 	* And it's appearing in gbXML Reader and Opon Stdio
 * IDs are progressing
-* Adjacency elements are just place holders for now
+* Adjacency elements are just place holders for the moment
 
 ### 2017-10-23 ~ Theo
 

@@ -5,7 +5,7 @@
 
 ### Schema GreenBuildingXML_Ver6.01.xsd 
 
-* http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link1A8
+* <http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link1A8>
 
 
 
@@ -17,7 +17,7 @@ The Surface elements geometry descriptions are next checked after the Space geom
 
 * are all required fields in place?
 * are all Surface id attributes unique? This is a requirement for gbXML
-* does reported children Tiltand Azimuth InnerText match the Surface polygon's normal vector representation?
+* does reported children Tilt and Azimuth InnerText match the Surface polygon's normal vector representation?
 * this should also work if the user puts in a CADModelAzimuth value (this code has not been started)
 * Surface polygon coordinates planarity tests
 * Surface counter-clockwise winding order tests (this code is currently being debated and subject for review)
