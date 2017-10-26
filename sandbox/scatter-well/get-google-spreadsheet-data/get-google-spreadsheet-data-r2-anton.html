@@ -1,4 +1,5 @@
-<!doctype html>
+
+                                                                                                                                                                          <!doctype html>
 <html lang="en" >
 <head>
 <meta charset="utf-8" >
@@ -107,8 +108,8 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
-			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		divTitle.innerHTML =
+			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
@@ -143,7 +144,7 @@
 
 		axesHelper = new THREE.AxesHelper( 100 );
 
-		initHeadsUp();
+//		initHeadsUp();
 
 		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, 110, 0, 0 );
 		scene.add( placard );
@@ -164,8 +165,6 @@
 
 	}
 
-
-
 	function requestFile( url ) {
 
 //		let xhr;
@@ -176,10 +175,10 @@
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
 //		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
 		xhr.onload = callback;
+
 		xhr.send( null );
 
 	}
-
 
 
 	function callback( xhr ) {
@@ -187,70 +186,222 @@
 		let response, json;
 
 		response = xhr.target.response;
-//console.log( 'response', response );
 
-//			contents.innerHTML = response;
-
+    //			contents.innerHTML = response;
 		json = JSON.parse( response );
-//console.log( 'json', json );
 
 		spreadsheetCells = json.feed.entry; // from spreadsheet
-
-console.log( 'spreadsheetCells', spreadsheetCells );
 
 		drawGraph();
 
 	}
 
 
-
-
 	function drawGraph() {
 
 		meshes = new THREE.Object3D();
 
-		let geometry, material, mesh, edges;
+    var hashTable = {};
 
+    let mesh,material,edges,geometry
+
+    const coreVariableNames = ['geometry','heatingLoad','coolingLoad','eui','generatedpv','numFloors','floorHeight','wwrEast','wwrWest','wwrSouth','wwrNorth','building_wwr','length1','length2','length3','width1','width2','width3','imageReference','orientation']
+
+    // Declare all core variables in the hashTable
+    coreVariableNames.forEach(function(variableName){
+      hashTable[variableName] = null
+    });
+
+    var alertString = ""
 
 		for ( let i = 0; i < spreadsheetCells.length; i++ ) {
 
 			cell = spreadsheetCells[ i ];
+      //console.log(cell)
+      Object.keys(cell).forEach(function(key){
 
-			if ( cell.gsx$footprintshape.$t === 'T-shape' ) {
+        /// Get outputs
+        if (key.toLowerCase().includes("heating")){
 
-				geometry = tShape( parseInt( cell.gsx$numoffloors.$t, 10 ) );
+          hashTable['heatingLoad'] = parseFloat( cell[key].$t )
+        }
+        else if (key.toLowerCase().includes("cooling")){
 
-			} else if ( cell.gsx$footprintshape.$t === 'L-shape' ) {
+          hashTable['coolingLoad'] = parseFloat( cell[key].$t )
+        }
+        else if (key.toLowerCase().includes("eui")){
 
-				geometry = lShape( parseInt( cell.gsx$numoffloors.$t, 10 ) );
+          hashTable['eui'] = parseFloat( cell[key].$t )
+        }
+        else if (key.toLowerCase().includes("pv"))
+        {
 
-			} else {
+          hashTable['generatedpv'] = parseFloat( cell[key].$t )
+        }
+        // get image
+        else if (key.toLowerCase().includes("image"))
+        {  // This particular key is an image
+          hashTable['imageReference'] = String(cell[key].$t)
+        }
+        // Get the number of floors
+        else if (key.toLowerCase().includes("num") && key.toLowerCase().includes("floors"))
+        {
+          hashTable['numFloors'] = parseFloat( cell[key].$t )
+        }
+        else if (key.toLowerCase().includes("floor") && key.toLowerCase().includes("height"))
+        {
+          hashTable['floorHeight'] = cell[key].$t
+        }
+        /// Get building footprint
+        else if (key.toLowerCase().includes("footprint"))
+        {
+          if (cell[key].$t.toLowerCase().includes("t")) {
 
-				geometry = hShape( parseInt( cell.gsx$numoffloors.$t, 10 ) );
+            hashTable['geometry'] = tShape(parseInt( cell[key].$t, 10 ) );
+          }
+          else if  (cell[key].$t.toLowerCase().includes("l")) {
 
-			}
+            hashTable['geometry'] = lShape(parseInt( cell[key].$t, 10 ) );
+          }
+          else if  (cell[key].$t.toLowerCase().includes("h"))
+          {
+            hashTable['geometry'] = hShape( parseInt( cell[key].$t, 10 ) );
+          }
+        }
+        else if (key.toLowerCase().includes("orientation"))
+        {
+          hashTable['orientation'] = cell[key].$t
+        }
+        /// GET WWR Ratios
+        else if (key.toLowerCase().includes("wwr"))
+        {
+          newSubstring = key.split("$")[1]
+          newSubstring = newSubstring.replace("wwr","")
 
-			const x = parseFloat( cell.gsx$euikwhm2.$t ) * 0.17;
-			const y = parseFloat( cell.gsx$annualcoolingloadkwh.$t ) * 0.00008 - 20;
-			const z = parseFloat( cell.gsx$numoffloors.$t ) * 30;
-//			z = parseFloat( cell.gsx$euikwhm2.$t ) * 0.6 - 60;
+          if (newSubstring.toLowerCase().includes("e"))
+          {
+            // WWR East
+            hashTable['wwrEast'] = cell[key].$t
+          }
+          else if (newSubstring.toLowerCase().includes("w"))
+          {
+            if (newSubstring.includes("w"))
+            { // WWR West
+              hashTable['wwrWest'] = cell[key].$t
+            }
+            else
+            {
+              // Building level WWR
+              hashTable['building_wwr'] = cell[key].$t
+            }
+          }
+          else if (newSubstring.toLowerCase().includes("n"))
+          {
+            // WWR North
+            hashTable['wwrNorth'] = cell[key].$t
+          }
+          else if (newSubstring.toLowerCase().includes("s"))
+          {
+            /// WWR South
+            hashTable['wwrSouth'] = cell[key].$t
+          }
+          else
+          {  // Building level WWR
+              hashTable['building_wwr'] = cell[key].$t
+          }
+        }
+        // Get Lengths
+        else if (key.toLowerCase().includes("length"))
+        {
+          if (key.toLowerCase().includes("1"))
+          { // Length 1
+
+            hashTable['length1'] = cell[key].$t
+
+          }
+          else if (key.toLowerCase().includes("2"))
+          { // Length 2
+            hashTable['length2'] = cell[key].$t
+
+          }
+          else if (key.toLowerCase().includes("3"))
+          { // Length 3
+            hashTable['length3'] = cell[key].$t
+
+          }
+        }
+        // Get Widths
+        else if (key.toLowerCase().includes("width"))
+        {
+          if (key.toLowerCase().includes("1"))
+          { // Width 1
+            hashTable['width1'] = cell[key].$t
+          }
+          else if (key.toLowerCase().includes("2"))
+          { // Width 2
+            hashTable['width2'] = cell[key].$t
+          }
+          else if (key.toLowerCase().includes("3"))
+          { // Width 3
+            hashTable['width3'] = cell[key].$t
+          }
+        }
+        else
+        { // Add to the alert string
+
+          alertString.concat("No key was found for the core value ", key ,"you must declare a column in the excel spreadsheet with the name", key ," for this code to be able to parse values");
+        }
+
+      })
+
+      if (alertString) {alert(alertString)}
+
+      Object.keys(hashTable).forEach(function(key){
+          // If false
+          //console.log(key)
+          //console.log(hashTable[key])
+          //if (!hashTable[key]) console.log("**** "+key + " has no value ****")
+
+      });
+
+      // Add ability to set axis and color scale based on what user selects
+
+      y = parseFloat(hashTable['numFloors']) * 30;
+      x = parseFloat(hashTable['eui']) * 0.17;
+      z = parseFloat(hashTable['coolingLoad']) * 0.00008 - 20;
+      colorScale = parseFloat(hashTable['heatingLoad'])
+
+      function determineWWR()
+      {
+        if (hashTable['wwrSouth'] != null &&  hashTable['wwrWest'] != null && hashTable['wwrNorth'] != null && hashTable['wwrEast'] != null && hashTable['building_wwr'] == null)
+        {
+          // Take an average
+          return (hashTable['wwrSouth']+hashTable['wwrWest']+hashTable['wwrNorth']+hashTable['wwrEast'])/4
+        }
+        else
+        {
+            return hashTable['building_wwr']
+        }
+      }
 
 			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
 				emissive: 0x333333,
-				opacity: 0.6 * parseFloat( cell.gsx$wwr.$t ),
+				opacity: 0.6 * parseFloat(determineWWR()),
 //				specular: 0xffffff * Math.random(),
 //				shading: THREE.FlatShading,
 //				shininess: 10,
 				transparent: true
 			} );
-			material.color.setHSL( ( parseFloat( cell.gsx$annualheatingloadkwh.$t ) - 40000 ) / 60000, 0.8, 0.5 );
+
+			material.color.setHSL( colorScale - 40000 / 60000, 0.8, 0.5 )
 //			material = new THREE.MeshNormalMaterial( { opacity: 0.5 * parseFloat( cell.gsx$wwrs.$t ), transparent: true } );
 
-			mesh = new THREE.Mesh( geometry, material );
+			mesh = new THREE.Mesh( hashTable['geometry'], material );
+
 			mesh.position.set( x, y, z );
-			mesh.scale.set( 0.001 * ( parseFloat( cell.gsx$widthy1m.$t ) + parseFloat( cell.gsx$widthy2m.$t ) + parseFloat( cell.gsx$widthy3m.$t ) ), 0.001 * ( parseFloat( cell.gsx$lengthx1m.$t ) + parseFloat( cell.gsx$lengthx2m.$t ) + parseFloat( cell.gsx$lengthx3m.$t ) ), 0.3 * parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
-			mesh.rotation.z = d2r * parseFloat( cell.gsx$orientationdegrees.$t );
+			mesh.scale.set( 0.001 * ( parseFloat( hashTable['width1'] ) + parseFloat( hashTable['width2'] ) + parseFloat( hashTable['width3'] ) ), 0.001 * ( parseFloat( hashTable['length1']  ) + parseFloat( hashTable['length2'] ) + parseFloat( hashTable['length3'] ) ), 0.3 * parseFloat( hashTable['numFloors'] ) * parseFloat( hashTable['floorHeight'] ) );
+			mesh.rotation.z = d2r * parseFloat(hashTable['orientation'] );
 			meshes.add( mesh );
 
 			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
@@ -259,33 +410,35 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 			mesh.add( edges ); // add wireframe as a child of the parent mesh
 
 			datapoints.push( mesh );
-			mesh.name = cell.gsx$imagereference.$t.slice( 0, cell.gsx$imagereference.$t.indexOf( '_' ) );
+			mesh.name = hashTable['imageReference'];
+
 			mesh.userData = cell;
 			mesh.userData.id = i + 1;
+      //mesh.geometry.computeBoundingSphere();
+console.log( '', mesh.geometry.attributes.position.array );
 			meshes.add( mesh );
+
 
 		}
 
-		scene.add( meshes );
+//		scene.add( meshes );
 
 	}
 
-
-
 	function hShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 0 ), 
-			v2( 10, 0 ), 
-			v2( 10, 10 ), 
-			v2( 20, 10 ), 
-			v2( 20, 0 ), 
-			v2( 30, 0 ), 
-			v2( 30, 30 ), 
-			v2( 20, 30 ), 
-			v2( 20, 20 ), 
-			v2( 10, 20 ), 
-			v2( 10, 30 ), 
+		const pts = [
+			v2( 0, 0 ),
+			v2( 10, 0 ),
+			v2( 10, 10 ),
+			v2( 20, 10 ),
+			v2( 20, 0 ),
+			v2( 30, 0 ),
+			v2( 30, 30 ),
+			v2( 20, 30 ),
+			v2( 20, 20 ),
+			v2( 10, 20 ),
+			v2( 10, 30 ),
 			v2( 0, 30 )
 		]
 
@@ -298,12 +451,12 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 	function lShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 0 ), 
-			v2( 20, 0 ), 
-			v2( 20, 10 ), 
-			v2( 10, 10 ), 
-			v2( 10, 25 ), 
+		const pts = [
+			v2( 0, 0 ),
+			v2( 20, 0 ),
+			v2( 20, 10 ),
+			v2( 10, 10 ),
+			v2( 10, 25 ),
 			v2( 0, 25 )
 		]
 
@@ -314,15 +467,13 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 	}
 
-
-
 	function tShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 10 ), 
-			v2( 10, 10 ), 
-			v2( 10, 00 ), 
-			v2( 20, 0 ), 
+		const pts = [
+			v2( 0, 10 ),
+			v2( 10, 10 ),
+			v2( 10, 00 ),
+			v2( 20, 0 ),
 			v2( 20, 10 ),
 			v2( 30, 10 ),
 			v2( 30, 20 ),
@@ -334,11 +485,6 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 		const tGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors } );
 		return tGeometry;
 	}
-
-
-
-
-
 
 ///////////////////////
 
@@ -356,17 +502,7 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
-/*
-		scene.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh && child.name ) {
-
-				objects.push( child );
-
-			}
-
-		} );
-*/
 	}
 
 
@@ -411,7 +547,7 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 		}
 
-		setHeadsUp( event );
+//		setHeadsUp( event );
 
 	}
 
@@ -439,7 +575,7 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 		headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 		headsUp.style.display = '';
 
-//console.log( 'intersected', intersected );
+    //console.log(intersected.userData.content.$t);
 
 		txt =
 			'all the variables for ' + intersected.name + b +
