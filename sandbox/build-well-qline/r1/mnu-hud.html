@@ -77,10 +77,11 @@
 
 	const ifrSource = 'build-well-threejs-qline.html';
 
-	const pathArry  = location.pathname.split( '/' ).slice( -2);
-	const release = pathArry[ 0 ]
-	const fileName = pathArry[ 1 ];
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
 
 	let intersected;
 	var object3D;
@@ -100,11 +101,11 @@
 
 	function init() {
 
-		divTitle.innerHTML =
+		divTitle.innerHTML = 
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
-				'<a href = "" >' + document.title + ' ' + release.toUpperCase() + '</a> &nbsp; ' +
-				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
 			'</h3>' +
 		'';
 

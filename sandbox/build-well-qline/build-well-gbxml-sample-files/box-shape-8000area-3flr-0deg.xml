@@ -211,24 +211,24 @@
 				<PlanarGeometry>
 					<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -356,23 +356,23 @@
 					<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -499,24 +499,24 @@
 				<PlanarGeometry>
 					<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -644,23 +644,23 @@
 					<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>1.44</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>3.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -670,7 +670,7 @@
 			<Name>diagonal-interior-wall-floor-1-space-4</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-4" />
-			<AdjacentSpaceId spaceIdRef="bw-space-5" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -701,24 +701,24 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>215</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>215</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -729,23 +729,23 @@
 				<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-135</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-135</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -755,24 +755,24 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>365</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>365</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -783,23 +783,23 @@
 				<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-265</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-265</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>10.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>8.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -924,24 +924,24 @@
 				<PlanarGeometry>
 					<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -951,7 +951,7 @@
 			<Name>diagonal-interior-wall-floor-2-space-1</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-6" />
-			<AdjacentSpaceId spaceIdRef="bw-space-7" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -1069,23 +1069,23 @@
 					<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -1095,7 +1095,7 @@
 			<Name>diagonal-interior-wall-floor-2-space-2</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-7" />
-			<AdjacentSpaceId spaceIdRef="bw-space-8" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -1212,24 +1212,24 @@
 				<PlanarGeometry>
 					<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -1239,7 +1239,7 @@
 			<Name>diagonal-interior-wall-floor-2-space-3</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-8" />
-			<AdjacentSpaceId spaceIdRef="bw-space-9" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -1357,23 +1357,23 @@
 					<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>33.44</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>35.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -1383,7 +1383,7 @@
 			<Name>diagonal-interior-wall-floor-2-space-4</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-9" />
-			<AdjacentSpaceId spaceIdRef="bw-space-10" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -1414,24 +1414,24 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>215</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>215</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -1442,23 +1442,23 @@
 				<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-135</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-135</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -1468,24 +1468,24 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>365</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>365</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -1496,23 +1496,23 @@
 				<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-265</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-265</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>42.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>40.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -1666,24 +1666,24 @@
 				<PlanarGeometry>
 					<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -1693,7 +1693,7 @@
 			<Name>diagonal-interior-wall-floor-3-space-1</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-11" />
-			<AdjacentSpaceId spaceIdRef="bw-space-12" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -1840,23 +1840,23 @@
 					<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -1866,7 +1866,7 @@
 			<Name>diagonal-interior-wall-floor-3-space-2</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-12" />
-			<AdjacentSpaceId spaceIdRef="bw-space-13" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -2012,24 +2012,24 @@
 				<PlanarGeometry>
 					<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -2039,7 +2039,7 @@
 			<Name>diagonal-interior-wall-floor-3-space-3</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-13" />
-			<AdjacentSpaceId spaceIdRef="bw-space-14" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -2186,23 +2186,23 @@
 					<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>65.44</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>67.54</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					</PolyLoop>
 				</PlanarGeometry>
@@ -2212,7 +2212,7 @@
 			<Name>diagonal-interior-wall-floor-3-space-4</Name>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="bw-space-14" />
-			<AdjacentSpaceId spaceIdRef="bw-space-15" />
+			<AdjacentSpaceId spaceIdRef="bw-space-1" />
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
@@ -2243,24 +2243,24 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>215</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>215</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>225</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -2271,23 +2271,23 @@
 				<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-135</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-135</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-145</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -2297,24 +2297,24 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>365</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>365</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-241.8</Coordinate>
+						<Coordinate>-222.55</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-158.2</Coordinate>
+						<Coordinate>-177.45</Coordinate>
 						<Coordinate>355</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -2325,23 +2325,23 @@
 				<PolyLoop>
 					<CartesianPoint>
 						<Coordinate>-265</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-265</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>240.6</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>263.35</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
 						<Coordinate>-255</Coordinate>
-						<Coordinate>339.4</Coordinate>
-						<Coordinate>74.56</Coordinate>
+						<Coordinate>316.65</Coordinate>
+						<Coordinate>72.46</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
@@ -2949,22 +2949,22 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -2976,22 +2976,22 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3003,22 +3003,22 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3030,22 +3030,22 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3057,22 +3057,22 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>-25</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>345.0265</Coordinate>
+						<Coordinate>339.5242</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>214.9735</Coordinate>
+						<Coordinate>220.4758</Coordinate>
 						<Coordinate>125</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3084,7 +3084,7 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-265</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
@@ -3099,7 +3099,7 @@
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-265</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3111,7 +3111,7 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-99.3448</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
@@ -3126,7 +3126,7 @@
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-99.3448</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3138,22 +3138,22 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-265</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-99.3448</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-99.3448</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-265</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3192,7 +3192,7 @@
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-265</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
@@ -3207,7 +3207,7 @@
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>-264.2056</Coordinate>
+						<Coordinate>-259.5242</Coordinate>
 						<Coordinate>-99.3448</Coordinate>
 						<Coordinate>76</Coordinate>
 					</CartesianPoint>
