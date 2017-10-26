@@ -10,6 +10,9 @@ _Build Well qLine_
 
 ## Full Screen: [Build Well qLine]( http://ladybug-tools.github.io/spider/sandbox/build-well-qline/index.html )
 
+
+## Full Screen: [gbXML Sample File Viewer]( http://ladybug-tools.github.io/spider/sandbox/build-well-qline/build-well-gbxml-sample-files//index.html )
+
 _The code will likely become Build Well R13_
 
 
@@ -52,11 +55,16 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 ### 2017-10-25 ~ Theo
 
+
 BW qline R1.5
 * Update template with point release, and github icon variable
 * build well: add go to top to menu bottom
 * Settings/qline : fix building name issues
 	* Add 'vertical separation' slider
+* Make good progress on IDs and Adjacencies
+* Create 9 sample gbXML files - one for each shape = with varying, floors, angles, spacing etc
+* Create separate viewing applet - based on pre-release gbXML viewer R6
+
 
 Mostly done or in progress
 

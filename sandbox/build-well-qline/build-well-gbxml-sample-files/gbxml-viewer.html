@@ -63,7 +63,6 @@
 			</details>
 
 
-
 			<hr>
 
 			<iframe id=ifrMenuSub src=gbxml-viewer-threejs.html ></iframe>
@@ -171,7 +170,7 @@
 			file = files[ i ];
 //console.log( 'file', file );
 
-//			if ( file.name === 'README.md' || !file.name.endsWith( '.md' ) ) { continue; }
+			if ( file.name === 'README.md' || !file.name.endsWith( '.xml' ) ) { continue; }
 
 			txt += '<div style=margin-bottom:3px;  >' +
 				'<a href=JavaScript:JavaScript:loadXML("' + file.download_url + '"); ' + 
@@ -188,39 +187,6 @@
 	}
 
 
-
-
-	function callbackGitHubMenuLadybug( xhr ) {
-
-		let response, files, txt;
-
-		response = xhr.target.response;
-
-		files = JSON.parse( response );
-//console.log( 'files', files );
-
-		txt = '';
-
-		for ( let i = 0; i < files.length; i++ ) {
-
-			file = files[ i ];
-//console.log( 'file', file );
-
-//			if ( file.name === 'README.md' || !file.name.endsWith( '.xml' ) ) { continue; }
-
-			txt += '<div style=margin-bottom:3px;  >' +
-				'<a href=JavaScript:JavaScript:loadXML("' + file.download_url + '"); ' + 
-				' title="' + file.size.toLocaleString() + ' bytes"  >' + 
-				file.name + '</a> ' +
-				'<a href=https://github.com/ladybug-tools/spider/tree/master/read-gbxml/data-files/' + file.name + 
-				' title="Edit me" > &#x1f589;</a>' +
-			'</div>';
-
-		}
-
-		divLadybug.innerHTML = txt;
-
-	}
 
 	function callbackGitHubFooter( xhr ) {
 
