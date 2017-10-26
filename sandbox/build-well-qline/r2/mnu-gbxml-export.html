@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Save Build Well as a gbXML file" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-25" >
+<title>gbXML Export</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	h3 { margin: 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 70px;}
+	.highlight { background-color: lightgreen; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p id = "divInfo" ></p>
+
+		<p title = 'Select a building to edit' >Buildings: 
+			<select id = selObject onchange = getObject(buildings); size = 9 ></select>
+		</p>
+
+		<p> 1. <button onclick=getBuildingData(); >Get building data</button></p>
+
+		<p> 2. <button onclick = saveFile(); >Save building data to file</button> </p>
+
+		<p> 1. First the click the 'get building data' button. The data will display on-screen so you can check if it is OK.</p>
+
+		<p> 2. If the data is acceptable, you may save the data to a file.</p>
+
+		<p> Along with the data, little boxes appear at vertices. These are to help you identify that the script is identifying coordinates correctly.</p>
+
+		<p> View the <a href="https://en.wikipedia.org/wiki/Green_Building_XML" target="_blank">gbXML</a> file
+			using <a href="http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/" target="_blank">Spider gbXML Viewer</a></p>
+
+	</div>
+
+	<iframe id=ifrContents ></iframe>
+
+<script>
+
+
+	let textMenu;
+	let textZones;
+
+	let buildings;
+	let building;
+
+
+	let zones;
+	let storeys;
+	let spaces;
+
+	const ifrSource = 'build-well-threejs-qline.html';
+
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+	let scope;
+
+	let v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axisHelper, cameraHelper;
+
+	let geometry, material, mesh;
+
+
+	init();
+
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3>' +
+				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
+			'</h3>' +
+		'';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables();
+
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += ' margin: 20px;max-height: calc( 100% - 50px);  max-width: 300px; ; overflow: auto; position: absolute; right: 0;' ;
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		building = scope.building;
+		buildings = scope.buildings;
+
+//console.log( 'building', buildings );
+
+		updateSelectObjects( buildings );
+
+	}
+
+
+
+	function updateSelectObjects( objects ) {
+
+		selObject.innerHTML = '';
+
+		for ( let i = 0; i < objects.children.length; i++ ) {
+
+			let obj = objects.children[ i ];
+			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+
+		}
+
+		selObject.selectedIndex = 0;
+
+		getObject( objects );
+
+	}
+
+
+
+	function getObject( objects ) {
+//
+		const object = objects.getObjectByName( selObject.value );
+
+//console.log( 'object', object );
+
+		objects.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === object.name ? 1 : 0.25;
+
+			}
+
+		} );
+
+		building.mesh = object;
+		building.type = selObject.value.toLowerCase().replace( / /g, '-' );
+	}
+
+
+
+	function getBuildingData() {
+
+//console.log( 'buildings', buildings );
+//console.log( 'building', building );
+
+		textMenu = '';
+
+		textMenu += 
+//			'<?xml version="1.0" encoding="UTF-16"?>\n' +
+			'<?xml version="1.0" encoding="UTF-8"?>\n' +
+			'<gbXML xmlns="http://www.gbxml.org/schema" ' +
+				'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
+				'xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" ' +
+				'xmlns:xhtml="http://www.w3.org/1999/xhtml" ' +
+
+				'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
+				'useSIUnitsForResults="' + building.useSIUnitsForResults + '" ' +
+				'SurfaceReferenceLocation="' + building.SurfaceReferenceLocation + '" ' +
+				'temperatureUnit="' + building.temperatureUnit + '" ' +
+				'lengthUnit="' + building.lengthUnit + '" ' +
+				'areaUnit="' + building.areaUnit + '" ' +
+				'volumeUnit="' + building.volumeUnit + '" ' +
+				'version="' + building.version + '"' +
+
+			' >\n' +
+
+			'\t<Campus id="' + building.campusId + '" >\n' +
+
+				'\t\t<DaylightSavings>' + building.DaylightSavings + '</DaylightSavings>\n' +
+				'\t\t<Name>' + building.mesh.name + '</Name>\n' +
+
+			'\t\t<Location>\n' +
+				'\t\t\t<ZipcodeOrPostalCode>' + building.ZipcodeOrPostalCode + '</ZipcodeOrPostalCode>\n' +
+				'\t\t\t<Longitude>' + building.Longitude + '</Longitude>\n' +
+				'\t\t\t<Latitude>' + building.Latitude + '</Latitude>\n' +
+				'\t\t\t<Elevation>' + building.Elevation + '"</Elevation>\n' +
+				'\t\t\t<CADModelAzimuth>"' + building.CADModelAzimuth + '</CADModelAzimuth>\n' +
+				'\t\t\t<Name>' + building.mesh.name + '</Name>\n' +
+			'\t\t</Location>\n' +
+
+			'\t\t<Building id="bw-building-' + building.buildingId + '" buildingType="Office" >\n' +
+
+				'\t\t\t<Area>' + building.area + '</Area>\n' +
+				'\t\t\t<Name>' + building.mesh.name + '</Name>\n' +
+				'\t\t\t<Description>' + building.description + '</Description>\n' +
+				'\t\t\t<StreetAddress>' + building.streetAddress + '</StreetAddress>\n' +
+			'\t\t\t<Volume>' + building.volume + '</Volume>\n' +
+		'';
+
+
+		textMenu += getBuildingStoreys( building );
+
+		textMenu += getSpacesAndZones( building );
+
+		textMenu += '\t\t</Building>\n';
+
+		textMenu += getSurfaces( buildings );
+
+		zonesText = getZones( building );
+
+		textMenu +=
+
+			'\t</Campus>\n' +
+			zonesText +
+			'\t<DocumentHistory>\n' +
+			'\t</DocumentHistory>\n' +
+			'</gbXML>\n' +
+		'';
+
+		if ( parent && parent.ifrThree ) {
+
+			parent.divContents.innerHTML =
+
+				'gbXML data<textarea id=buildingData >' + 
+				textMenu + '</textarea>'
+
+			'';
+
+			parent.divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+			parent.divContents.style.display = '';
+			parent.viewContents();
+
+		} else {
+
+		scope.divScreenText.innerHTML = 
+
+			'gbXML data<textarea id=buildingData >' + 
+			textMenu + '</textarea>'
+
+		'';
+
+		}
+
+	}
+
+
+
+	function getBuildingStoreys( building ) {
+
+		let textBuildingStoreys = '';
+
+		for ( var i = 0; i < building.floors; i++ ) {
+
+			const storey = i + 1;
+
+			textBuildingStoreys += 
+				'\t\t\t<BuildingStorey id="bw-storey-' + storey + '" >\n' +
+				'\t\t\t\t<Name>"storey-' + storey + '"</Name>\n' +
+				'\t\t\t\t<Level>' + ( i * building.floorHeight ) + '</Level>\n' +
+				'\t\t\t</BuildingStorey>\n' +
+			'';
+
+		}
+
+//console.log( 'textBuildingStoreys', textBuildingStoreys );
+
+		return textBuildingStoreys;
+
+	}
+
+
+
+	function getSpacesAndZones( building ) {
+//console.log( '', building );
+
+		let textSpace = '';
+		const spaces = building.spaces;
+		const zones = building.zones;
+		let spaceId = 1;
+
+		for ( var i = 0; i < building.mesh.children.length; i++ ) {
+
+			const vertices = building.mesh.children[ i ].geometry.vertices;
+			const spacesPerStorey = vertices.length / 5 - 1;
+			let storey = i + 1;
+
+			for ( var j = 0; j < spacesPerStorey; j++ ) {
+
+// needs checking / uses incorrect vertices
+				const vertex1 = vertices[ j * 5 ];
+				const vertex2 = vertices[ ( j + 1 ) * 5 ];
+				const area = vertex1.distanceTo( vertex2 ) * building.perimeterDepth;
+				const volume = area * building.floorHeight;
+
+				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space', 
+					area: area, storey: storey, volume: volume, zone: spaceId } );
+
+				building.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
+
+				spaceId ++;
+			}
+// interior area
+
+
+			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space', 
+				area: 23, storey: storey, volume: 23, zone: spaceId } );
+
+			building.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
+
+			spaceId ++;
+
+		}
+
+		for ( var j = 0; j < spaces.length; j++ ) {
+
+			const space = spaces[ j ];
+
+			textSpace += 
+				'\t\t\t<Space ' +
+					'id="bw-space-' + space.id + '" ' +
+					'buildingStoreyIdRef="bw-storey-' + space.storey + '" ' +
+					'zoneIdRef="bw-zone-' + space.id + '" ' +
+					'conditionType="HeatedAndCooled" >\n' +
+				'\t\t\t\t<Name>' + space.name + '</Name>\n' +
+				'\t\t\t\t<Description>' + space.description + '</Description>\n' +
+				'\t\t\t\t<Area>' + space.area + '</Area>\n' +
+				'\t\t\t\t<Volume>' + space.volume + '</Volume>\n' +
+				'\t\t\t</Space>\n' +
+
+			'';
+
+		}
+
+//console.log( 'spaces', spaces );
+
+		return textSpace;
+
+	}
+
+
+
+	function getZones( building ) {
+
+		let textZones = '';
+
+		for ( let i = 0; i < building.zones.length; i++ ) {
+
+			const zone = building.zones[ i ];
+
+			textZones += 
+				'\t<Zone id="bw-zone-' + ( i + 1 ) + '" >\n' +
+				'\t\t<Name>' + zone.name + '</Name>\n' +
+				'\t\t<Description>' + zone.description + '</Description>\n' +
+				'\t</Zone>\n' +
+			'';
+
+		}
+
+//console.log( 'textZones', textZones );
+
+		return textZones;
+
+	}
+
+
+
+	function getSurfaces( buildings ) {
+
+		let textSurfaces = '';
+
+		for ( let i = 0; i < buildings.children.length; i++ ) {
+
+			aBuilding = buildings.children[ i ];
+
+			if ( aBuilding.name !== selObject.value ) {
+//console.log( '', aBuilding );
+
+				textSurfaces += getSurfacesAdjacentBuildings( aBuilding );
+
+			} else {
+//console.log( 'building', building );
+
+				textSurfaces += getSurfacesTheBuilding( aBuilding );
+
+			}
+
+		}
+
+//		textSurfaces += getSurfacesOverhangs( building );
+
+		return textSurfaces;
+
+	}
+
+
+
+	function getSurfacesTheBuilding( theBuilding ) {
+//console.log( 'theBuilding', theBuilding.children[ 0 ] );
+
+		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		let textSurfacesBits = '';
+
+		let storeys = theBuilding.children.length;
+		let surfaceId = 1;
+		let spaceId = 1;
+		let quad;
+
+		for ( let i = 0; i < storeys; i++ ) {
+
+			const meshFloor = theBuilding.children[ i ];
+			const vertices = meshFloor.geometry.vertices;
+			const spacesPerStorey = vertices.length / 5 - 1;
+			const path = [];
+
+			for ( let j = 0; j < spacesPerStorey; j++ ) {
+
+				const pt1 = j * 5 ;
+				const pt2 = pt1 + 5;
+				const interiorSpaceId = storeys * spacesPerStorey + 5;
+
+				quad = {
+					description: 'floor: ' + ( i + 1 ),
+					mesh: meshFloor,
+					name: 'floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+					type: 'InteriorFloor',
+					spaceId1: spaceId,
+					spaceId2: undefined,
+					surfaceId: surfaceId, 
+					vertices: [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ]
+				};
+
+				surfaceId ++;
+
+				textSurfacesBits += getSingleSurface( quad );
+
+				quad = {
+					description: 'interior wall: ' + ( i + 1 ),
+					mesh: meshFloor,
+					name: 'interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+					type: 'InteriorWall',
+					spaceId1: spaceId,
+					spaceId2: interiorSpaceId,
+					surfaceId: surfaceId, 
+					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
+				};
+
+				surfaceId ++;
+
+				textSurfacesBits += getSingleSurface( quad );
+
+				if ( i + 1 === storeys ) {
+
+					quad = {
+						description: 'roof: ' + ( i + 1 ),
+						mesh: meshFloor,
+						name: 'roof-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+						type: 'Roof',
+						spaceId1: spaceId,
+						spaceId2: undefined,
+						surfaceId: surfaceId, 
+						vertices: [ vertices[ pt1 + 2 ], vertices[ pt1 + 3 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
+					};
+
+					surfaceId ++;
+
+					textSurfacesBits += getSingleSurface( quad );
+
+				}
+
+				quad = {
+					description: 'wall: ' + ( i + 1 ),
+					mesh: meshFloor,
+					name: 'exterior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+					type: 'ExteriorWall',
+					spaceId1: spaceId,
+					spaceId2: undefined,
+					surfaceId: surfaceId, 
+					vertices: [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ]
+				};
+				surfaceId ++;
+
+				textSurfacesBits += getSingleSurface( quad );
+
+				quad = {
+					description: 'diagonal-wall: ' + ( i + 1 ),
+					mesh: meshFloor,
+					name: 'diagonal-interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+					type: 'InteriorWall',
+					spaceId1: spaceId,
+					spaceId2: ( spaceId < spacesPerStorey ? spaceId + 1 : 1 ),
+					surfaceId: surfaceId, 
+					vertices: [ vertices[ pt2 + 1 ], vertices[ pt2 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
+				};
+
+				surfaceId ++;
+
+				textSurfacesBits += getSingleSurface( quad );
+
+				path.push( vertices[ pt1 + 2 ] );
+
+//console.log( 'spaceId', spaceId );
+
+				spaceId ++;
+
+			}
+
+			textSurfacesBits += getSurfacesOverhangs( meshFloor, path, surfaceId ++ );
+
+			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', surfaceId ++, spaceId  );
+
+			if ( i + 1 === storeys ) {
+
+				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, building.floorHeight );
+
+			}
+
+			spaceId ++;
+
+		}
+
+		return textSurfacesBits;
+
+	}
+
+
+
+	function getSingleSurface( quad ) {
+
+//console.log( 'quad', quad );
+
+//		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
+//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		let textSingleSurfaces =  
+
+			'\t\t<Surface surfaceType="' + quad.type + '" id="bw-surface-' + quad.surfaceId + '" >\n' +
+				'\t\t\t<Name>' + quad.name + '</Name>\n' +
+			'\t\t\t<CADOjectId>none</CADOjectId>\n' +
+			'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + quad.spaceId1  + '" />\n' +
+			( quad.spaceId2 ? '\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + quad.spaceId2  + '" />\n' : '' ) +
+			'\t\t\t<PlanarGeometry>\n' +
+			'\t\t\t\t<PolyLoop>\n' +
+		'';
+
+		let verticesClone = [];
+
+		for ( let i = 0; i < quad.vertices.length; i++ ) {
+
+			vertex = quad.vertices[ i ].clone();
+			vertex.applyMatrix4( quad.mesh.matrixWorld );
+
+			textSingleSurfaces += getCartesianPointText( vertex );
+			verticesClone.push( vertex );
+
+//			mesh = new THREE.Mesh( geo, material );
+//			mesh.position.add( vertex );
+//			scene.add( mesh );
+
+		}
+
+		textOpen = quad.type === 'ExteriorWall' ? getOpening( quad ) : '';
+
+		textSingleSurfaces +=  
+			'\t\t\t\t</PolyLoop>\n' +
+			'\t\t\t</PlanarGeometry>\n' +
+				textOpen +
+			'\t\t</Surface>\n' +
+		'';
+
+		return textSingleSurfaces
+
+	}
+
+
+
+	function getOpening( quad ) {
+
+		let textOpening = '';
+
+//		const geometry = new THREE.BoxBufferGeometry( 5, 8, 5 );
+//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+//		let mesh;
+
+		textOpening += 
+			'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + quad.surfaceId + '" >\n' +
+			'\t\t\t\t<PlanarGeometry>\n' +
+			'\t\t\t\t\t<PolyLoop>\n' +
+		'';
+
+		wwr05 = 0.5 * building.wwr / 100;
+
+		verts = [
+
+			quad.vertices[ 0 ].clone().lerp( quad.vertices[ 2 ].clone(), 0.5 - wwr05 ),
+			quad.vertices[ 1 ].clone().lerp( quad.vertices[ 3 ].clone(), 0.5 - wwr05 ),
+			quad.vertices[ 0 ].clone().lerp( quad.vertices[ 2 ].clone(), 0.5 + wwr05 ),
+			quad.vertices[ 1 ].clone().lerp( quad.vertices[ 3 ].clone(), 0.5 + wwr05 )
+
+		]
+
+		for ( let i = 0; i < verts.length; i++ ) {
+
+			vertex = verts[ i ];
+			vertex.applyMatrix4( quad.mesh.matrixWorld );
+			textOpening += getCartesianPointText( vertex );
+
+//			mesh = new THREE.Mesh( geometry, material );
+//			mesh.position.add( vertex );
+//			scene.add( mesh );
+
+		}
+
+
+		textOpening +=
+			'\t\t\t\t\t</PolyLoop>\n' +
+			'\t\t\t\t</PlanarGeometry>\n' +
+			'\t\t\t</Opening>\n' +
+		'';
+
+		return textOpening;
+
+	}
+
+
+
+	function getSurfacesSlabs( slab, path, type, surfaceId, spaceId, height = 0 ) {
+
+//console.log( 'path', path );
+
+		textInterior = '';
+
+		shape = new THREE.Shape( path );
+		geometry = new THREE.ShapeGeometry( shape );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
+
+
+		quad = {
+			description: type + ': ',
+			mesh: slab,
+			name: 'slab-floor-' + slab.userData.floor,
+			type: type,
+			spaceId1: spaceId,
+			spaceId2: undefined,
+			surfaceId: surfaceId, 
+			vertices: geometry.vertices
+		};
+
+		textInterior += getSingleSurface( quad )
+
+//		textInterior += getSingleSurface( floor, geometry.vertices, type, surfaceId )
+
+//		material = new THREE.MeshNormalMaterial();
+//		mesh = new THREE.Mesh( geometry, material );
+//		slab.add( mesh );
+
+		return textInterior;
+
+	}
+
+
+
+	function getSurfacesOverhangs( floor, path, surfaceId, spaceId1 ) {
+//console.log( 'floor', floor );
+
+		let textOver = '';
+//		const geometry = new THREE.BoxBufferGeometry( 3, 2, 1 );
+//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		let overhangId = ( floor.userData.floor - 1 ) * path.length + 1;
+		let id = 1;
+		for ( let i = 0; i < floor.children.length; i++ ) {
+
+			const overhang = floor.children[ i ];
+			if ( overhang.name !== 'overhang' ) { continue; }
+
+			textOver += 
+				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( overhangId ++ ) + '" >\n' +
+				'\t\t\t<Name>overhang-floor-' + floor.userData.floor +'-space-' + ( id++ )+ '</Name>\n' +
+				'\t\t\t<PlanarGeometry>\n' +
+				'\t\t\t\t<PolyLoop>\n' +
+			'';
+
+//console.log( 'overhang', overhang );
+//console.log( 'geometry', overhang.geometry.attributes.position.array );
+
+			const coordinates = overhang.geometry.attributes.position.array;
+
+			const vertices = [
+
+				v( coordinates[ 6 ], coordinates[ 7 ], coordinates[ 8 ] ),
+				v( coordinates[ 9 ], coordinates[ 10 ], coordinates[ 11 ] ),
+				v( coordinates[ 3 ], coordinates[ 4 ], coordinates[ 5 ] ),
+				v( coordinates[ 0 ], coordinates[ 1 ], coordinates[ 2 ] ),
+
+			];
+
+			for ( let j = 0; j < 4; j++ ) {
+
+				vertex = vertices[ j ];
+				vertex.applyMatrix4( overhang.matrixWorld );
+				textOver += getCartesianPointText( vertex );
+/*
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( vertex );
+				mesh.name = 'shade';
+				scene.add( mesh );
+*/
+//console.log( 'vertex', mesh.position );
+
+			}
+
+			textOver +=
+				'\t\t\t\t</PolyLoop>\n' +
+				'\t\t\t</PlanarGeometry>\n' +
+				'\t\t</Surface>\n' +
+			'';
+		}
+
+//console.log( 'textOver', textOver );
+
+		return textOver;
+
+	}
+
+
+
+
+
+	function getSurfacesAdjacentBuildings( building ) { 
+
+		let textMenu = '';
+
+//console.log( '', building );
+
+		const bb = new THREE.Box3().setFromObject( building );
+		const mi = bb.min;
+		const mx = bb.max;
+
+//		const geometry = new THREE.BoxBufferGeometry( 1, 1, 100 );
+//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+
+		const faces =  [ 
+			[v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
+			[v( mi.x, mx.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ],
+			[v( mi.x, mi.y, mi.z ), v( mi.x, mx.y, mi.z ), v( mi.x, mx.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
+			[v( mx.x, mi.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mx.x, mi.y, mx.z ) ],
+			[v( mi.x, mi.y, mx.z ), v( mx.x, mi.y, mx.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ]
+		]
+
+		for ( let i = 0; i < faces.length; i++ ) {
+
+			textMenu += 
+				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( i + 1 ) + '" >\n' +
+				'\t\t\t<Name>' + building.name +'</Name>\n' +
+				'\t\t\t<PlanarGeometry>\n' +
+				'\t\t\t\t<PolyLoop>\n' +
+			'';
+
+			face = faces[ i ];
+			const v1 = building.localToWorld ( face[ 0 ] );
+			const v2 = building.localToWorld ( face[ 1 ] );
+			const v3 = building.localToWorld ( face[ 2 ] );
+			const v4 = building.localToWorld ( face[ 3 ] );
+
+//			const vertices = [ v2, v1, v3, v4 ];
+			const vertices = [ v1, v2, v3, v4 ];
+			for ( let k = 0; k < 4; k++ ) {
+
+				const vertex = vertices[ k ];
+				textMenu += getCartesianPointText( vertex );
+
+//				const mesh = new THREE.Mesh( geometry, material );
+//				mesh.position.copy( vertex );
+//				scene.add( mesh );
+
+			}
+
+			textMenu +=
+				'\t\t\t\t</PolyLoop>\n' +
+				'\t\t\t</PlanarGeometry>\n' +
+				'\t\t</Surface>\n' +
+			'';
+
+		}
+
+		return textMenu;
+
+	}
+
+
+
+	function getCartesianPointText( vertex ) {
+
+		const textMenu =
+
+			'\t\t\t\t\t<CartesianPoint>\n' +
+
+				'\t\t\t\t\t\t<Coordinate>' + Number( vertex.x.toFixed(4) ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + Number( vertex.y.toFixed(4) ) + '</Coordinate>\n' +
+				'\t\t\t\t\t\t<Coordinate>' + Number( vertex.z.toFixed(4) ) + '</Coordinate>\n' +
+
+			'\t\t\t\t\t</CartesianPoint>\n' +
+
+		'';
+
+		return textMenu;
+
+	}
+
+
+/////////////////////
+
+
+	function saveFile() {
+
+		let blob;
+
+		if ( parent && parent.ifrThree ) {
+
+			blob = new Blob( [ parent.buildingData.value ] );
+//console.log( 'parent.buildingData', parent.buildingData.value );
+
+		} else {
+
+			blob = new Blob( [ scope.buildingData.value ] );
+
+		}
+
+		let a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		const fileName = building.type + '-' + building.area + 'area-' + building.floors + 'flr-' + building.orientation + 'deg' + '.xml';
+		a.download = fileName;
+
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+</script>
+</body>
+</html>
