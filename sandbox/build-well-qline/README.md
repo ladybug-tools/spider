@@ -57,8 +57,10 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 ### 2017-10-27 ~ Theo
 
+BW qLine 2.1
 * Interior spaces was always on top floor. Now changes with each floor
-* 
+BW qLin2.2
+* Switching between Shape Editor and Shape Editor USA mostly good
 
 ### 2017-10-26 ~ Theo
 
