@@ -44,10 +44,8 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 ## Issues / To Do
 
-
-* 2017-10-25 ~ Switch all defaults to SI units
+* 2017-10-27 ~ Interior walls display incirrctly in gbxml vuewer
 * 2017-10-25 ~ change 'floor'-like variable to 'storey' through out
-* 2017-10-25 ~ Add separate US menu demo
 * 2017-10-25 ~ rename 'buildings var to 'campus'
 * Start adding more shapes
 
@@ -61,6 +59,12 @@ BW qLine 2.1
 * Interior spaces was always on top floor. Now changes with each floor
 BW qLin2.2
 * Switching between Shape Editor and Shape Editor USA mostly good
+
+
+Done
+* 2017-10-25 ~ Switch all defaults to SI units
+* 2017-10-25 ~ Add separate US menu demo
+
 
 ### 2017-10-26 ~ Theo
 

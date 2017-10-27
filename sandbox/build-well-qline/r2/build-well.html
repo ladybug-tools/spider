@@ -102,7 +102,11 @@
 				<div><a href=JavaScript:getContentMarkdown("../../../pages/markdown-help.md"); >Markdown Help</a></div>
 				<div><a href=JavaScript:getMenuHTML("mnu-template.html"); >Menu Template</a></div>
 				<div id=divToggleView style=display:none; ><a href=JavaScript:viewModel(); >Return to model view</a></div>
+<a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js" >Show fps statistics</a>
+
 				<p onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and btw my web is better than your web' >&#x1f578;</p>
+
+
 			</div>
 
 
@@ -116,7 +120,7 @@
 
 <script>
 
-	const pointRelease = '.2';
+	const pointRelease = '.3D';
 	const pathArry  = location.pathname.split( '/' ).slice( -2);
 	const release = pathArry[ 0 ]
 	const fileName = pathArry[ 1 ];

@@ -66,18 +66,6 @@
 			<input type="range" id="rngNumberOfFloors" min=1 max=10 step=1 value=1 onchange=updateShape(); >
 		</p>
 
-<!--
-
-		<p title='Measured in square feet' >Floor Area in sf: 
-			<span id=inpFloorArea class=floatRight >0</span>
-		</p>
-
-
-		<p title='' >Volume in cubic feet:
-			<span type=number id=spnVolume class=floatRight ></span>
-		</p>
--->
-
 		<p title='Measured from 8 to 15' >Floor Height: 
 			<input id=inpFloorHeight type=number min=2 max=15 value=2.1 onchange=updateShape(); class=floatRight >
 		</p>
@@ -287,7 +275,8 @@
 		rngWidth1.value = widNew
 		outBuildingWidth.value = widNew.toFixed();
 
-		pChecksum.innerHTML = 'cecksum: ' + lenNew * widNew * storeysNew;
+//		pChecksum.innerHTML = 'cecksum: ' + lenNew * widNew * storeysNew;
+
 		updateMenuExtras();
 
 		updateMeshes();
