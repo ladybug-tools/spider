@@ -264,7 +264,8 @@
 				|| variable.toLowerCase().includes("wwr") || variable.toLowerCase().includes("windowconstruction") || variable.toLowerCase().includes("overhang") || variable.toLowerCase().includes("R-value") || variable.toLowerCase().includes("cooling")
 				 || variable.toLowerCase().includes("heating") || variable.toLowerCase().includes("pv") || variable.toLowerCase().includes("eui"))
 				{
-					hudContent += variable;
+					// "<br>" renders a new line in html
+					hudContent += variable.concat("<br>");
 				}
 			})
 
@@ -320,8 +321,6 @@
 		return lGeometry;
 
 	}
-
-
 
 	function tShape( floors ) {
 
@@ -461,8 +460,6 @@
 
 	}
 
-
-
 	function onDocumentTouchStart( event ) {
 
 	//	event.preventDefault();
@@ -473,7 +470,6 @@
 		onDocumentMouseMove( event );
 
 	}
-
 
 /////////////////
 
