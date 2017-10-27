@@ -182,8 +182,8 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
-//		v = scope.v;
-//		v2 = scope.v2;
+		updateCampusSize = scope.updateCampusSize;
+
 		buildings = scope.meshes;
 		building = scope.building;
 
@@ -201,6 +201,15 @@
 //		building.wwr = 80;
 //		building.overhangDepth = 30;
 //		building.perimeterDepth = 10;
+
+		building.area = 800
+		building.box.length1 = 40;
+		building.box.width1 = 20;
+//		building.floors = 3;
+//		building.orientation = 20;
+//		building.wwr = 80;
+		building.overhangDepth = 0.5;
+		building.perimeterDepth = 3;
 
 		inpBuildingArea.value = building.area;
 
@@ -221,6 +230,8 @@
 		inpPerimeterDepth.value = building.perimeterDepth;
 
 //console.log( 'building', building );
+
+		updateCampusSize( 200 );
 
 		updateShape();
 

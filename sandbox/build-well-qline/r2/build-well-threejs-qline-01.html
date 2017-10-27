@@ -140,8 +140,8 @@
 		building.areaUnit = 'SquareMeters';
 
 		building.box = {};
-		building.box.length1 = 40;
-		building.box.width1 = 20;
+		building.box.length1 = 25;
+		building.box.width1 = 30;
 		building.buildingId = 1;
 
 		building.CADModelAzimuth = 0;
@@ -207,10 +207,7 @@
 
 		size = sizeNew;
 		camera.position.set( -0.25 * size, -0.5 * size, 0.25 * size );
-		camera.far = 5 * size
 		controls.maxDistance = 3 * size;
-		camera.updateProjectionMatrix();
-
 		sizeDelta = 0.3 * size;
 
 		lightDirectional.position.set( -size, size, size );
@@ -471,11 +468,7 @@
 		geometry.vertices.push( geometry.vertices[ 0 ] );
 		path = geometry.vertices.reverse();
 
-		if ( window.self === window.top ) {
-
-			getMeshArea( path, log, text );
-
-		}
+		getMeshArea( path, log, text );
 
 		return path;
 
@@ -729,7 +722,6 @@
 		groundHelper.position.set( 0, 0, -0.5 * size );
 		groundHelper.name = 'groundHelper';
 		groundHelper.visible = false;
-
 		scene.add( cameraHelper, gridHelper, axesHelper, axesHelper2, groundHelper );
 
 	}

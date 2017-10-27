@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Build Well parametric box shape creator" >
 <meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-23" >
-<title>Shape Editor</title>
+<meta name = "date" content = "2017-10-27" >
+<title>Shape Editor USA</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -47,7 +47,7 @@
 		<p><small>Parametric 3D building schematics created and updated in a game-like fashion</small></p>
 
 		<p title='Area from 1 to 1000000' >Building Area: 
-			<input disabled=true id=inpBuildingArea type = number min=1 max=1000000 step=1 value=8000 oninput="validity.valid||(value='');" onchange=updateShape() class=floatRight >
+			<input disabled=true id=inpBuildingArea type = number min=1 max=1000000 step=1 value=5000 oninput="validity.valid||(value='');" onchange=updateShape() class=floatRight >
 		</p>
 
 		<p title='x distance 1 to 200' >Building Length:
@@ -181,6 +181,8 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
+		updateCampusSize = scope.updateCampusSize;
+
 //		v = scope.v;
 //		v2 = scope.v2;
 		buildings = scope.meshes;
@@ -193,13 +195,14 @@
 
 // values here override build-well-threejs.html values which override menu values
 
-		building.box.length1 = 80;
-		building.box.width1 = 100;
+		building.area = 5000
+		building.box.length1 = 100;
+		building.box.width1 = 50;
 //		building.floors = 3;
 //		building.orientation = 20;
 //		building.wwr = 80;
-//		building.overhangDepth = 30;
-//		building.perimeterDepth = 10;
+		building.overhangDepth = 1;
+		building.perimeterDepth = 15;
 
 		inpBuildingArea.value = building.area;
 
@@ -220,9 +223,12 @@
 
 //console.log( 'building', building );
 
+		updateCampusSize( 800 );
+
 		updateShape();
 
 	}
+
 
 
 	function updateShape() {
