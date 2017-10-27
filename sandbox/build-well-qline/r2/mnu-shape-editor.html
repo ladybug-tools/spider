@@ -57,11 +57,11 @@
 
 		<p title='x distance 1 to 200' >Building Width:
 			<output id=outBuildingWidth class=floatRight ></output>
-			<input disabled=true type="range" id="rngWidth1" min=3 max=200 step=1 value=100 oninput=updateShape(); >
+			<input style=display:none; type="range" id="rngWidth1" min=3 max=200 step=1 value=100 oninput=updateShape(); >
 		</p>
 
 
-		<p title='How many storeys? 1 to 161'>Number of Floors: 
+		<p title='How many storeys? 1 to 161'>Number of Floors (not fully functional): 
 			<output id=outNumberOfFloors class=floatRight ></output>
 			<input type="range" id="rngNumberOfFloors" min=1 max=10 step=1 value=1 onchange=updateShape(); >
 		</p>

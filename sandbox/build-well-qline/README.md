@@ -54,6 +54,20 @@ If one were to invent a new drawing command - designed to be what comes after th
 ## Change Log
 
 
+
+### 2017-10-26 ~ Theo
+
+* Chatting with Anton re: Scatter Well
+BW qline 2.0
+* Geometry parameterization looking quite good
+	* Change area / Length is static / width updates
+	* Change length / area static / width updates
+	* Two sliders only
+	* 8 out of 9 shapes covered / O shape has issues caused its concavity
+	* All shapes visible and updated in real time
+* Shape Editor now in SI units
+	* US units menu soon
+
 ### 2017-10-25 ~ Theo
 
 

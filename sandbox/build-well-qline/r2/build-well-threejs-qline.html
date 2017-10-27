@@ -446,7 +446,7 @@
 		const ratio = building.area / areaNow;
 		geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, ratio, 1 ) );
 		geometry.vertices.push( geometry.vertices[ 0 ] );
-		path = geometry.vertices;
+		path = geometry.vertices.reverse();
 
 		getMeshArea( path, log, text );
 
@@ -462,7 +462,7 @@
 		for ( var i = 0; i < vertices.length; i++ ) {
 
 			vert = vertices[ i ].clone();
-			verts.unshift( vert );
+			verts.push( vert );
 
 		}
 
