@@ -107,8 +107,8 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
-			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		divTitle.innerHTML =
+			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
@@ -164,8 +164,6 @@
 
 	}
 
-
-
 	function requestFile( url ) {
 
 //		let xhr;
@@ -180,30 +178,22 @@
 
 	}
 
-
-
 	function callback( xhr ) {
 
 		let response, json;
 
 		response = xhr.target.response;
-//console.log( 'response', response );
-
-//			contents.innerHTML = response;
 
 		json = JSON.parse( response );
 //console.log( 'json', json );
 
 		spreadsheetCells = json.feed.entry; // from spreadsheet
 
-console.log( 'spreadsheetCells', spreadsheetCells );
+		console.log( 'spreadsheetCells', spreadsheetCells );
 
 		drawGraph();
 
 	}
-
-
-
 
 	function drawGraph() {
 
@@ -249,6 +239,7 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( x, y, z );
+			// Using Spreadsheet https://docs.google.com/spreadsheets/d/1CC31wOdnhe6DLUyKYWrdMgMhd6QH97NjjdPmVSdqjZ4/edit#gid=886761168 works with sheet 1
 			mesh.scale.set( 0.001 * ( parseFloat( cell.gsx$widthy1m.$t ) + parseFloat( cell.gsx$widthy2m.$t ) + parseFloat( cell.gsx$widthy3m.$t ) ), 0.001 * ( parseFloat( cell.gsx$lengthx1m.$t ) + parseFloat( cell.gsx$lengthx2m.$t ) + parseFloat( cell.gsx$lengthx3m.$t ) ), 0.3 * parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
 			mesh.rotation.z = d2r * parseFloat( cell.gsx$orientationdegrees.$t );
 			meshes.add( mesh );
@@ -260,32 +251,48 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 			datapoints.push( mesh );
 			mesh.name = cell.gsx$imagereference.$t.slice( 0, cell.gsx$imagereference.$t.indexOf( '_' ) );
-			mesh.userData = cell;
+
+			let content = ""
+
+			/// For now only include variables
+			/// See https://github.com/ladybug-tools/spider/issues/51 on which variables to include
+			hudContent = ""
+
+			cell.content.$t.split(',').forEach(function(variable){
+
+				if (variable.toLowerCase().includes("footprint") || variable.toLowerCase().includes("area") || variable.toLowerCase().includes("floor") || variable.toLowerCase().includes("floorheight") || variable.toLowerCase().includes("orientation")
+				|| variable.toLowerCase().includes("wwr") || variable.toLowerCase().includes("windowconstruction") || variable.toLowerCase().includes("overhang") || variable.toLowerCase().includes("R-value") || variable.toLowerCase().includes("cooling")
+				 || variable.toLowerCase().includes("heating") || variable.toLowerCase().includes("pv") || variable.toLowerCase().includes("eui"))
+				{
+					hudContent += variable;
+				}
+			})
+
+			//console.log(hudContent)
+			// Filter out the user content of the mesh to only get the values that we want
+			mesh.userData.content = hudContent;
+			mesh.userData.imageReference = cell.gsx$imagereference.$t
 			mesh.userData.id = i + 1;
 			meshes.add( mesh );
-
 		}
 
-		scene.add( meshes );
-
+		scene.add(meshes);
 	}
-
-
 
 	function hShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 0 ), 
-			v2( 10, 0 ), 
-			v2( 10, 10 ), 
-			v2( 20, 10 ), 
-			v2( 20, 0 ), 
-			v2( 30, 0 ), 
-			v2( 30, 30 ), 
-			v2( 20, 30 ), 
-			v2( 20, 20 ), 
-			v2( 10, 20 ), 
-			v2( 10, 30 ), 
+		const pts = [
+			v2( 0, 0 ),
+			v2( 10, 0 ),
+			v2( 10, 10 ),
+			v2( 20, 10 ),
+			v2( 20, 0 ),
+			v2( 30, 0 ),
+			v2( 30, 30 ),
+			v2( 20, 30 ),
+			v2( 20, 20 ),
+			v2( 10, 20 ),
+			v2( 10, 30 ),
 			v2( 0, 30 )
 		]
 
@@ -298,12 +305,12 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 	function lShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 0 ), 
-			v2( 20, 0 ), 
-			v2( 20, 10 ), 
-			v2( 10, 10 ), 
-			v2( 10, 25 ), 
+		const pts = [
+			v2( 0, 0 ),
+			v2( 20, 0 ),
+			v2( 20, 10 ),
+			v2( 10, 10 ),
+			v2( 10, 25 ),
 			v2( 0, 25 )
 		]
 
@@ -318,11 +325,11 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 	function tShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 10 ), 
-			v2( 10, 10 ), 
-			v2( 10, 00 ), 
-			v2( 20, 0 ), 
+		const pts = [
+			v2( 0, 10 ),
+			v2( 10, 10 ),
+			v2( 10, 00 ),
+			v2( 20, 0 ),
 			v2( 20, 10 ),
 			v2( 30, 10 ),
 			v2( 30, 20 ),
@@ -335,13 +342,7 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 		return tGeometry;
 	}
 
-
-
-
-
-
 ///////////////////////
-
 
 	function initHeadsUp() {
 
@@ -435,24 +436,24 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 		}
 
+		//console.log(intersected)
+
 		headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
 		headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 		headsUp.style.display = '';
 
-//console.log( 'intersected', intersected );
+		console.log(intersected.userData.content)
 
 		txt =
 			'all the variables for ' + intersected.name + b +
-			intersected.userData.content.$t.replace( /,/gi, b ).replace( 'windowtype:','windowtype:' + b ) + b+
-			'<img src=https://ladybug-tools.github.io/spider/SVG/' + intersected.userData.gsx$imagereference.$t + ' >' + b +
+			intersected.userData.content.replace( /,/gi, b ).replace( 'windowtype:','windowtype:' + b ) + b+
+			'<img src=https://ladybug-tools.github.io/spider/SVG/' + intersected.userData.imageReference + ' >' + b +
 		'';
 
 		headsUp.innerHTML = txt;
 		document.body.style.cursor = 'pointer';
 
 	}
-
-
 
 	function onDocumentMouseDown( event ) {
 
@@ -509,7 +510,7 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 			var width = parameters.width ? parameters.width : 0;
 			var font = parameters.font ? parameters.font : '48px monospace';
 			var color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
-
+			//console.log(textArray)
 			if ( typeof textArray === 'string' ) textArray = [ textArray ];
 
 			context.font = font;
