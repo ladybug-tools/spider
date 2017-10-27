@@ -55,6 +55,11 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 
 
+### 2017-10-27 ~ Theo
+
+* Interior spaces was always on top floor. Now changes with each floor
+* 
+
 ### 2017-10-26 ~ Theo
 
 * Chatting with Anton re: Scatter Well
