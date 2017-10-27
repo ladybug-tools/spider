@@ -29,6 +29,7 @@
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js" ></script>
+<script src="https://d3js.org/d3.v4.js"></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "menu" >
@@ -102,6 +103,8 @@
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
 
+	var valuesXaxis,valuesYaxis,valuesZaxis,valuesColorAxis;
+
 	init();
 	animate();
 
@@ -121,7 +124,7 @@
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 600;
+		//controls.maxDistance = 600;
 		controls.target.set( 50, 50, 50 );
 		controls.autoRotate = true;
 
@@ -139,40 +142,31 @@
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-		toggleGrid();
+		//toggleGrid();
 
-//		axesHelper = new THREE.AxesHelper( 100 );
+		//		axesHelper = new THREE.AxesHelper( 100 );
 
 		initHeadsUp();
-
-		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, 110, 0, 0 );
-		scene.add( placard );
-
-		placard = drawPlacard( ['Y-axis', 'annual cooling load', 'kwh' ], 0.05, 120, 0, 110, 0 );
-		scene.add( placard );
-
-		placard = drawPlacard( ['Z-axis', 'Nunber of Floors' ], 0.05, 240, 0, 0, 110 );
-		scene.add( placard );
-
-		hShape();
-		lShape();
-		tShape();
 
 		toggleBackgroundGradient();
 
 		requestFile( url );
 
+		hShape();
+		lShape();
+		tShape();
+
 	}
 
 	function requestFile( url ) {
 
-//		let xhr;
+		//		let xhr;
 
 		xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
@@ -185,22 +179,60 @@
 		response = xhr.target.response;
 
 		json = JSON.parse( response );
-//console.log( 'json', json );
+		//console.log( 'json', json );
 
 		spreadsheetCells = json.feed.entry; // from spreadsheet
 
-		console.log( 'spreadsheetCells', spreadsheetCells );
+		//console.log( 'spreadsheetCells', spreadsheetCells );
 
 		drawGraph();
-
 	}
 
 	function drawGraph() {
 
+		valuesXaxis = spreadsheetCells.map(function valuesXaxis(cell){ return cell.gsx$euikwhm2.$t})
+		valuesYaxis = spreadsheetCells.map(function valuesYaxis(cell){ return cell.gsx$annualcoolingloadkwh.$t})
+		valuesZaxis = spreadsheetCells.map(function valuesZaxis(cell){ return cell.gsx$numoffloors.$t })
+		valuesColorAxis = spreadsheetCells.map(function valuesColoraxis(cell){ return cell.gsx$annualheatingloadkwh.$t})
+
+		// Get the max and min of each axis of data to use for scal
+		var dataScaleX = d3.scaleLinear().domain([Math.min(...valuesXaxis),Math.max(...valuesXaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
+		var dataScaleY = d3.scaleLinear().domain([Math.min(...valuesYaxis),Math.max(...valuesYaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
+		var dataScaleZ = d3.scaleLinear().domain([Math.min(...valuesZaxis),Math.max(...valuesZaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
+		var dataScaleColorAxis  = d3.scaleLinear().domain([Math.min(...valuesColorAxis),Math.max(...valuesColorAxis)])
+
+		arrayOfMaximums = [dataScaleX(Math.max(...valuesXaxis)),dataScaleY(Math.max(...valuesYaxis)),dataScaleZ(Math.max(...valuesZaxis))]
+
+		function median(values) {
+
+			    values.sort( function(a,b) {return a - b;} );
+
+			    var half = Math.floor(values.length/2);
+
+			    if(values.length % 2)
+			        return values[half];
+			    else
+			        return (values[half-1] + values[half]) / 2.0;
+			}
+
+		toggleGrid(Math.max(...arrayOfMaximums));
+
+		// reset camera position
+		//camera.position.set(dataScaleX(median(valuesXaxis)), dataScaleY(median(valuesYaxis)), dataScaleZ(median(valuesZaxis)));
+		// reset controls position
+		//controls.target.set(dataScaleX(median(valuesXaxis)), dataScaleY(median(valuesYaxis)), dataScaleZ(median(valuesZaxis)) );
+
+		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, Math.max(...valuesXaxis), 0, 0 );
+		scene.add(placard );
+
+		placard = drawPlacard( ['Y-axis', 'annual cooling load', 'kwh' ], 0.05, 120, 0, Math.max(...valuesYaxis), 0 );
+		scene.add(placard );
+
+		placard = drawPlacard( ['Z-axis', 'Nunber of Floors' ], 0.05, 240, 0, 0, Math.max(...valuesZaxis) );
+
 		meshes = new THREE.Object3D();
 
 		let geometry, material, mesh, edges;
-
 
 		for ( let i = 0; i < spreadsheetCells.length; i++ ) {
 
@@ -220,22 +252,21 @@
 
 			}
 
-			const x = parseFloat( cell.gsx$euikwhm2.$t ) * 0.17;
-			const y = parseFloat( cell.gsx$annualcoolingloadkwh.$t ) * 0.00008 - 20;
-			const z = parseFloat( cell.gsx$numoffloors.$t ) * 30;
-//			z = parseFloat( cell.gsx$euikwhm2.$t ) * 0.6 - 60;
+			const x = dataScaleX(parseFloat( cell.gsx$euikwhm2.$t));
+			const y = dataScaleY(parseFloat( cell.gsx$annualcoolingloadkwh.$t));
+			const z = dataScaleZ(parseFloat( cell.gsx$numoffloors.$t ));
 
 			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
 				emissive: 0x333333,
 				opacity: 0.6 * parseFloat( cell.gsx$wwr.$t ),
-//				specular: 0xffffff * Math.random(),
-//				shading: THREE.FlatShading,
-//				shininess: 10,
+			//				specular: 0xffffff * Math.random(),
+			//				shading: THREE.FlatShading,
+				//				shininess: 10,
 				transparent: true
 			} );
 			material.color.setHSL( ( parseFloat( cell.gsx$annualheatingloadkwh.$t ) - 40000 ) / 60000, 0.8, 0.5 );
-//			material = new THREE.MeshNormalMaterial( { opacity: 0.5 * parseFloat( cell.gsx$wwrs.$t ), transparent: true } );
+			//			material = new THREE.MeshNormalMaterial( { opacity: 0.5 * parseFloat( cell.gsx$wwrs.$t ), transparent: true } );
 
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( x, y, z );
@@ -278,6 +309,58 @@
 		}
 
 		scene.add(meshes);
+
+		listOfXValues = meshes.children.map(function extractXYZ(child){ return child.position.x})
+		listOfYValues = meshes.children.map(function extractXYZ(child){ return child.position.y})
+		listOfZValues = meshes.children.map(function extractXYZ(child){ return child.position.z})
+
+		xMax = Math.max(...listOfXValues)
+		xMin = Math.min(...listOfXValues)
+
+		yMax = Math.max(...listOfYValues)
+		yMin = Math.min(...listOfYValues)
+
+		zMax = Math.max(...listOfZValues)
+		zMin = Math.min(...listOfZValues)
+
+		var material2 = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+
+		bbox = new THREE.BoxGeometry(xMax-xMin, yMax-yMin, zMax- zMin);
+
+		// console.log((xMax-xMin)/2+xMin)
+		// console.log((yMax-yMin)/2+yMin)
+		// console.log((zMax- zMin)/2+zMin)
+
+		var bboxmesh = new THREE.Mesh(bbox, material2);
+
+		bboxmesh.applyMatrix(new THREE.Matrix4().makeTranslation((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin));
+
+
+		function pointCameraTo(bbox,camera) {
+			// Get bounding box furtherest point to furtherest point using Pythagoreans theorem for the Y Z axis, - the width of the building ensure that it is visible
+			point1 = Math.sqrt(Math.pow((bbox.max.z-bbox.min.z),2)+Math.pow((bbox.max.x-bbox.min.x),2))
+			furthestDistanceBetweenPointsInbbox = Math.sqrt(Math.pow(point1,2)+Math.pow((bbox.max.y-bbox.min.y),2))
+
+			dist = furthestDistanceBetweenPointsInbbox/(Math.tan(camera.fov))
+
+			//dist = (furthestDistanceBetweenPointsInbbox/2)/Math.tan(Math.PI*50/360)
+			angle = 90-camera.fov
+
+			camera.position.y = -Math.sin(angle)*dist;
+			camera.position.z = Math.cos(angle)*dist;
+		}
+
+		console.log(bboxmesh.geometry.boundingBox)
+
+		//ointCameraTo(bboxmesh.geometry.boundingBox,camera)
+
+		controls.target.set((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin );
+
+		//pointCameraTo(bboxmesh,camera,controls)
+
+		//controls.target.set((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin);
+
+		scene.add(bboxmesh);
 	}
 
 	function hShape( floors ) {
@@ -297,7 +380,7 @@
 			v2( 0, 30 )
 		]
 
-//		scene.remove( mesh );
+		//		scene.remove( mesh );
 		const shape = new THREE.Shape( pts );
 		const hGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
 		return hGeometry;
@@ -315,7 +398,7 @@
 			v2( 0, 25 )
 		]
 
-//		scene.remove( mesh );
+		//		scene.remove( mesh );
 		const shape = new THREE.Shape( pts );
 		const lGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
 		return lGeometry;
@@ -335,7 +418,7 @@
 			v2( 0, 20 )
 		]
 
-//		scene.remove( mesh );
+		//		scene.remove( mesh );
 		const shape = new THREE.Shape( pts );
 		const tGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors } );
 		return tGeometry;
@@ -432,16 +515,11 @@
 
 			document.body.style.cursor = 'auto';
 			return;
-
 		}
-
-		//console.log(intersected)
 
 		headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
 		headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 		headsUp.style.display = '';
-
-		console.log(intersected.userData.content)
 
 		txt =
 			'all the variables for ' + intersected.name + b +
@@ -546,15 +624,13 @@
 
 	}
 
-
-
 /////////////////
-
 
 	function toggleGrid( size = 100 ) {
 
 		if ( !gridHelper ) {
-
+			//console.log("Grid size here")
+			//console.log(size)
 			gridHelper = new THREE.Object3D();
 
 			obj = new THREE.GridHelper( size, 20, 'blue', 'lightblue' );
@@ -594,7 +670,6 @@
 				child.material.wireframe = !child.material.wireframe;
 
 			}
-
 		} );
 
 	}
@@ -640,13 +715,7 @@
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
-//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
-
 	}
-
-
-
-
 
 	function animate() {
 
