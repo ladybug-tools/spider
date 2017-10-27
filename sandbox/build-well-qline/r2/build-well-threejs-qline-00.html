@@ -20,7 +20,7 @@
 
 	textarea { background: none; height: 600px; width: 100%; tab-size: 4;}
 
-	#divMenu { position: absolute; margin: 0 20px; max-width: 350px; right: 0; }
+	#divMenu { position: absolute; left: 0; margin: 0 auto; right: 0; max-width: 50%; text-align: center; }
 
 </style>
 </head>
@@ -42,15 +42,6 @@
 
 		<div id=divLog ></div> <!-- used for testing by HUD -->
 
-		<p id=pLogBox ></p>
-		<p id=pLogL ></p>
-		<p id=pLogT ></p>
-		<p id=pLogH ></p>
-		<p id=pLogU ></p>
-		<p id=pLogTrapezoid ></p>
-		<p id=pLogTriangle ></p>
-		<p id=pLogPlus ></p>
-		<p id=pLogO ></p>
 
 	</div>
 
@@ -204,7 +195,7 @@
 		let mesh;
 		const section = updateSection();
 
-		updatePaths( 30 );
+		updatePaths();
 
 		const rotation = - d2r * building.orientation;
 		const floors = building.floors;
@@ -313,9 +304,7 @@
 	}
 
 
-	function updatePaths( length ) {
-
-		const shapeArea = building.area;
+	function updatePaths() {
 
 		const len = building.box.length1;
 		const len13 = len / 3;
@@ -324,23 +313,18 @@
 		const wid = building.box.width1;
 		const wid13 = wid / 3;
 		const wid23 = 2 * wid / 3;
-		let shape;
-		let geometry;
-		let areaNow, ratio;
 
 		pathBox = [ v2( 0, 0 ), v2( len, 0 ), v2( len, wid ), v2( 0, wid ), v2( 0, 0 ) ];
-		pathBox = scaleMesh( pathBox, pLogBox, 'Box shape' );
 
 		pathL = [
 			v2( 0, 0 ),
-			v2( len, 0 ),
-			v2( len, wid13 ),
+			v2( len23, 0 ),
+			v2( len23, wid13 ),
 			v2( len13, wid13 ),
 			v2( len13, wid ),
 			v2( 0, wid ),
 			v2( 0, 0 )
 		];
-		pathL = scaleMesh( pathL, pLogL, 'L shape' );
 
 		pathT = [
 			v2( 0, wid23 ),
@@ -352,8 +336,8 @@
 			v2( len, wid ),
 			v2( 0, wid ),
 			v2( 0, wid23 )
+
 		];
-		pathT = scaleMesh( pathT, pLogT, 'T shape' );
 
 		pathH = [
 			v2( 0, 0 ),
@@ -370,7 +354,7 @@
 			v2( 0, wid ),
 			v2( 0, 0 )
 		];
-		pathH = scaleMesh( pathH, pLogH, 'H shape' );
+
 
 		pathU = [
 			v2( 0, 0 ),
@@ -383,7 +367,7 @@
 			v2( 0, wid ),
 			v2( 0, 0 )
 		];
-		pathU = scaleMesh( pathU, pLogU, 'U shape' );
+
 
 		pathTrapezoid = [
 			v2( 0, 0 ),
@@ -392,7 +376,6 @@
 			v2( len13, wid ),
 			v2( 0, 0 )
 		];
-		pathTrapezoid = scaleMesh( pathTrapezoid, pLogTrapezoid, 'Trapezoid shape' );
 
 		pathTriangle = [
 			v2( 0, 0 ),
@@ -400,7 +383,7 @@
 			v2( len13, wid ),
 			v2( 0, 0 )
 		];
-		pathTriangle = scaleMesh( pathTriangle, pLogTriangle, 'Triangle shape' );
+
 
 		pathPlus = [
 			v2( len13, 0 ),
@@ -417,7 +400,6 @@
 			v2( len13, wid13 ),
 			v2( len13, 0 )
 		];
-		pathPlus = scaleMesh( pathPlus, pLogPlus, 'Plus shape' );
 
 		pathO = [
 			v2( 0, 0 ),
@@ -432,43 +414,9 @@
 			v2( 0, wid13 ),
 			v2( 0, 0 )
 		];
-		pathO = scaleMesh( pathO, pLogO, 'O shape' );
 
 	}
 
-
-
-	function scaleMesh( path, log, text ) {
-
-		const shape = new THREE.Shape( path );
-		const geometry = new THREE.ShapeGeometry( shape );
-		const areaNow = THREE.ShapeUtils.area( path );
-		const ratio = building.area / areaNow;
-		geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, ratio, 1 ) );
-		geometry.vertices.push( geometry.vertices[ 0 ] );
-		path = geometry.vertices;
-
-		getMeshArea( path, log, text );
-
-		return path;
-
-	}
-
-
-	function getMeshArea( vertices, target, text = '' ) {
-
-		let verts = [];
-
-		for ( var i = 0; i < vertices.length; i++ ) {
-
-			vert = vertices[ i ].clone();
-			verts.unshift( vert );
-
-		}
-
-		target.innerHTML = text + ' scaled area: ' + THREE.ShapeUtils.area( verts ); //.toLocaleString();
-
-	}
 
 
 	function createQlineMesh( section, path, name, floor ) {
