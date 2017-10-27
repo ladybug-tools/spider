@@ -97,7 +97,7 @@
 		<p title='building angle in degrees -180 to 180' >Orientation degrees: 
 			<span type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight ></span>
 			<output id=outTempleWidth ></output>
-			<input type="range" id="rngOrientation" min=-180 max=180 step=1 value=0 onchange=updateShape(); >
+			<input type="range" id="rngOrientation" min=-180 max=180 step=1 value=0 oninput=updateShape(); >
 		</p>
 
 		<p id=pChecksum ></p>
