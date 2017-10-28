@@ -285,7 +285,7 @@
 				}
 			})
 
-			//console.log(hudContent)
+
 			// Filter out the user content of the mesh to only get the values that we want
 			mesh.userData.content = hudContent;
 			mesh.userData.imageReference = cell.gsx$imagereference.$t
@@ -315,20 +315,6 @@
 		var designSpaceExtentsMesh = new THREE.Mesh(designSpaceExtents, material2);
 
 		designSpaceExtentsMesh.applyMatrix(new THREE.Matrix4().makeTranslation((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin));
-
-		function pointCameraTo(bbox,camera) {
-			// Get bounding box furtherest point to furtherest point using Pythagoreans theorem for the Y Z axis, - the width of the building ensure that it is visible
-			point1 = Math.sqrt(Math.pow((bbox.max.z-bbox.min.z),2)+Math.pow((bbox.max.x-bbox.min.x),2))
-			furthestDistanceBetweenPointsInbbox = Math.sqrt(Math.pow(point1,2)+Math.pow((bbox.max.y-bbox.min.y),2))
-
-			dist = furthestDistanceBetweenPointsInbbox/(Math.tan(camera.fov))
-
-			//dist = (furthestDistanceBetweenPointsInbbox/2)/Math.tan(Math.PI*50/360)
-			angle = 90-camera.fov
-
-			camera.position.y = -Math.sin(angle)*dist;
-			camera.position.z = Math.cos(angle)*dist;
-		}
 
 		controls.target.set((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin );
 		camera.position.set( xMax*1.75, yMax*1.75, zMax*1.75 );
