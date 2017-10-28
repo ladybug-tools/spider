@@ -54,13 +54,15 @@
 			<p>Building orientation = Z rotation</p>
 			<p>Win/Wall Ratio = symbol opacity</p>
 
+			<p title='preference shading eui'>eui:
+				<input type="range" id="inpeui" min=-180 max=180 step=1 value=0 onchange=preferenceShadingeui(); >
+			</p>
+
 		</div>
 
 		<details>
 
 			<summary> Display settings </summary>
-
-
 			<p><button onclick=toggleWireframe(); title='See number of floors' > Toggle wireframe </button></p>
 
 			<p><button onclick=toggleGrid(); >Toggle Grid</button></p>
@@ -189,11 +191,11 @@
 	function drawGraph() {
 
 		valuesXaxis = spreadsheetCells.map(function valuesXaxis(cell){ return cell.gsx$euikwhm2.$t})
-		valuesYaxis = spreadsheetCells.map(function valuesYaxis(cell){ return cell.gsx$annualcoolingloadkwh.$t})
-		valuesZaxis = spreadsheetCells.map(function valuesZaxis(cell){ return cell.gsx$numoffloors.$t })
+		valuesYaxis = spreadsheetCells.map(function valuesYaxis(cell){ return cell.gsx$numoffloors.$t})
+		valuesZaxis = spreadsheetCells.map(function valuesZaxis(cell){ return cell.gsx$annualcoolingloadkwh.$t })
 		valuesColorAxis = spreadsheetCells.map(function valuesColoraxis(cell){ return cell.gsx$annualheatingloadkwh.$t})
 
-		// Get the max and min of each axis of data to use for scal
+		// Get the max and min of each axis of data to use for scale
 		var dataScaleX = d3.scaleLinear().domain([Math.min(...valuesXaxis),Math.max(...valuesXaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
 		var dataScaleY = d3.scaleLinear().domain([Math.min(...valuesYaxis),Math.max(...valuesYaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
 		var dataScaleZ = d3.scaleLinear().domain([Math.min(...valuesZaxis),Math.max(...valuesZaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
@@ -201,12 +203,16 @@
 
 		arrayOfMaximums = [dataScaleX(Math.max(...valuesXaxis)),dataScaleY(Math.max(...valuesYaxis)),dataScaleZ(Math.max(...valuesZaxis))]
 
-		console.log(Math.max(...arrayOfMaximums))
+		// Set EUI slider values
+		inpeui.min = Math.min(...valuesXaxis)
+		// Divide steps up into a 100 pieces
+		inpeui.step = (Math.max(...valuesXaxis)-Math.min(...valuesXaxis))/100
+		inpeui.max = Math.max(...valuesXaxis)
 
 		toggleGrid(Math.max(...arrayOfMaximums));
 
 		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, Math.max(...valuesXaxis), 0, 0 );
-		console.log(placard)
+
 		scene.add(placard );
 
 		placard = drawPlacard( ['Y-axis', 'annual cooling load', 'kwh' ], 0.05, 120, 0, Math.max(...valuesYaxis), 0 );
@@ -238,8 +244,8 @@
 			}
 
 			const x = dataScaleX(parseFloat( cell.gsx$euikwhm2.$t));
-			const y = dataScaleY(parseFloat( cell.gsx$annualcoolingloadkwh.$t));
-			const z = dataScaleZ(parseFloat( cell.gsx$numoffloors.$t ));
+			const y = dataScaleY(parseFloat(cell.gsx$numoffloors.$t));
+			const z = dataScaleZ(parseFloat(cell.gsx$annualcoolingloadkwh.$t));
 
 			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
@@ -250,6 +256,7 @@
 				//				shininess: 10,
 				transparent: true
 			} );
+
 			material.color.setHSL( ( parseFloat( cell.gsx$annualheatingloadkwh.$t ) - 40000 ) / 60000, 0.8, 0.5 );
 			//			material = new THREE.MeshNormalMaterial( { opacity: 0.5 * parseFloat( cell.gsx$wwrs.$t ), transparent: true } );
 
@@ -284,14 +291,19 @@
 					hudContent += variable.concat("<br>");
 				}
 			})
+			// Add the real x,y,z (not scaled) values of the mesh in the design space
+			mesh.userData.xAxis = parseFloat( cell.gsx$euikwhm2.$t)
+			mesh.userData.zAxis= parseFloat(cell.gsx$annualcoolingloadkwh.$t)
 
+			mesh.userData.disabled = false
 
-			// Filter out the user content of the mesh to only get the values that we want
 			mesh.userData.content = hudContent;
 			mesh.userData.imageReference = cell.gsx$imagereference.$t
 			mesh.userData.id = i + 1;
 			meshes.add( mesh );
 		}
+
+		// Add all the meshes to the scene
 
 		scene.add(meshes);
 
@@ -425,6 +437,7 @@
 				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
 
 				intersected = intersects[ 0 ].object;
+
 				intersected.currentHex = intersected.material.emissive.getHex();
 				intersected.material.emissive.setHex( 0xff0000 );
 
@@ -442,11 +455,13 @@
 
 		}
 
-		setHeadsUp( event );
+		if (intersected && intersected.userData.disabled == false )
+		{
+			setHeadsUp( event );
+		}
+
 
 	}
-
-
 
 	function setHeadsUp( event ) {
 
@@ -488,13 +503,36 @@
 
 	function onDocumentTouchStart( event ) {
 
-	//	event.preventDefault();
+		//	event.preventDefault();
 
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;
 
 		onDocumentMouseMove( event );
 
+	}
+
+	function preferenceShadingeui() {
+
+		// Tranverse all the meshes in the scene - https://stackoverflow.com/questions/27284623/three-js-for-loop-for-every-mesh-in-scene
+		scene.traverse( function( node ) {
+
+		if (node instanceof THREE.Mesh) {
+
+				if (node.userData.xAxis > inpeui.value)
+				{
+					// Re-color the building Grey and don't allow the pop up to appear
+					greyedOutMaterial = new THREE.MeshPhongMaterial( {
+						color: 0x828282,
+						emissive: 0x333333,
+						opacity: 1,
+						transparent: true })
+
+						node.material = greyedOutMaterial
+						node.userData.disabled = true
+					}
+				}
+			})
 	}
 
 /////////////////
@@ -607,22 +645,13 @@
 
 	}
 
-
-
 	function toggleWireframe() {
-
 		scene.traverse( function ( child ) {
-
 			if ( child instanceof THREE.Mesh ) {
-
 				child.material.wireframe = !child.material.wireframe;
-
 			}
 		} );
-
 	}
-
-
 
 	function toggleAxesHelper() {
 
@@ -651,8 +680,6 @@
 			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
 
 	}
-
-
 
 //////////////////
 
