@@ -206,6 +206,7 @@
 		toggleGrid(Math.max(...arrayOfMaximums));
 
 		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, Math.max(...valuesXaxis), 0, 0 );
+		console.log(placard)
 		scene.add(placard );
 
 		placard = drawPlacard( ['Y-axis', 'annual cooling load', 'kwh' ], 0.05, 120, 0, Math.max(...valuesYaxis), 0 );
@@ -515,7 +516,7 @@
 
 	function drawPlacard( text, scale, color, x, y, z ) {
 
-// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
+		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
 
 		var placard = new THREE.Object3D();
 		var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -594,20 +595,20 @@
 			//console.log(size)
 			gridHelper = new THREE.Object3D();
 
-			obj = new THREE.GridHelper( size*2, 20, 'blue', 'lightblue' );
+			obj = new THREE.GridHelper( size*2, size*0.05, 'blue', 'blue' );
 			obj.rotation.x = 0.5 * Math.PI;
-			obj.position.set( 0, 50, 0 );
+			obj.position.set( 0, 0, 0 );
 			gridHelper.add( obj );
 
-			obj = new THREE.GridHelper( size*2, 20, 'red', 'pink' );
+			obj = new THREE.GridHelper( size*2, size*0.05, 'red', 'red' );
 	//		obj.rotation.x = 0.5 * Math.PI;
-			obj.position.set( 50, 0, 50 );
+			obj.position.set( 0, 0, 0 );
 			gridHelper.add( obj );
 
 
-			obj = new THREE.GridHelper( size*2, 20, 'green', 'lightgreen' );
+			obj = new THREE.GridHelper( size*2, size*0.05, 'green', 'green' );
 			obj.rotation.z = 0.5 * Math.PI;
-			obj.position.set( 0, 50, 50 );
+			obj.position.set( 0, 0, 0 );
 			gridHelper.add( obj );
 
 			scene.add( gridHelper );
