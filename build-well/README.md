@@ -7,9 +7,9 @@ _A well for building well._
 
 <iframe class=iframeReadMe src=http://ladybug-tools.github.io/spider/build-well/dev/index.html width=100% height=600px ></iframe>
 
-## Full Screen build release: [Build Well R11]( http://ladybug-tools.github.io/spider/build-well/index.html )
+## Full Screen build release: [Build Well R12]( http://ladybug-tools.github.io/spider/build-well/index.html )
 
-## Full Screen dev release: [Build Well R12]( http://ladybug-tools.github.io/spider/build-well/dev/index.html )
+## Full Screen dev release: [Build Well R13]( http://ladybug-tools.github.io/spider/build-well/dev/index.html )
 
 Save these links
 
@@ -36,6 +36,8 @@ This project contains a number of demo examples in the form of a programmer's 'c
 
 _We often think of software of software just appearing as if by magic. The reality is that software takes ongoing human effort. Click the links below and watch the progression._
 
+* 2017-10-16 [Build Well R12]( http://ladybug-tools.github.io/spider/build-well/r12/build-well.html )
+* 2017-10-16 [Build Well R11]( http://ladybug-tools.github.io/spider/build-well/r11/build-well.html )
 * 2017-10-16 [Build Well R10]( http://ladybug-tools.github.io/spider/build-well/r10/build-well.html )
 * 2017-10-14 [Build Well R9]( http://ladybug-tools.github.io/spider/build-well/r9/build-well.html )
 * 2017-10-10 [Build Well R8]( http://ladybug-tools.github.io/spider/build-well/r8/build-well.html )
@@ -50,9 +52,7 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Current Issues
 
-* 2017-10-14 ~ HUD not displaying when cursor over The Building 
-* 2017-10-14 ~ After selecting different menus, some number settings no longer appear in the left menu. When this happens, any further edits cause the model to disappear
- 
+* 2017-10-28 ~ Need better area calculator to fix O shape ( and other similar shapes ) issues
 
 
 ## Naming Considerations
@@ -61,9 +61,11 @@ _We often think of software of software just appearing as if by magic. The reali
 * A _well_ of data to help you _build_
 * Primary instigator _@bwelle_
 
+
 ## Coding Methodology
 
 See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandbox/single-model-multiple-menu/README.md ) for demos and discussion on how this cookbook is being develpoed.
+
 
 ## To Do Generally
 
@@ -71,21 +73,18 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 * 2017-10-14 ~ Add permalinks / RESTful interaction
 * 2017-10-14 ~ Decide what to do when distance between external walls is less than twice the minimum perimeter depth
 * 2017-10-14 ~ Organize nice sets of color schemes for the various surface types
-* 2017-10-14 ~ Seamless transitions between shapes: all shapes have three lengths and widths
-* 2017-10-03 ~ L Shape 1: how to recalculate length (X1) after you update the area?
-	* Spreadsheet with all the calculations would be helpful
+
+## To Do per modules
 
 ### build-well.html / Build Well parent file
 
 * 2017-10-14 ~ Improve small screen operation
 
 
-### build-well-threejs.html
+### build-well-threejs-qline.html
 
-* 2017-10-02 ~ Add ortho camera?
 
 ### mnu-adjacent-buildings.html
-
 
 * 2017-09-22 ~ Allow any and all buildings to have shape parameters?
 * 2017-10-02 ~ Add multi-line select for shape selection?
@@ -108,8 +107,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 * 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
 	* Inworld text is a whole thing in itself. Add in only when very necessary
 * 2017-10-14 ~ Toggle visibility of interior walls
-* 2017-10-14 ~ Opacity Slider
-* 2017-10-14 ~ Overhangs color different than color of walls etc
+
 * 2017-10-14 ~ Show Perimeter Depth arrows
 
 ### mnu-hud.html
@@ -124,14 +122,8 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ### mnu-gbxml-export.html
 
-* 2017-10-11 ~ Export diagonal walls - yes
-* 2017-10-14 ~ Export individuated, manifold spaces
 * 2017-10-05 ~ Export fin data
-* 2017-10-05 ~ Enable changing building orientation
 
-### mnu-real-time-report.html
-
-* 2017-10-14 ~ Grab the data in real-time from the 3d model currently in play
 
 ### mnu-template.html
 
@@ -146,6 +138,87 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 
 ## Change Log
+
+
+### 2017-10-28 ~ Theo
+
+12:20
+* Update BW read me
+
+* build-well.html
+	* Add gh / link update text
+* build-well-threejs-qline.html
+	* 2017-10-28 ~ H & I shapes: internal space too narrow < fixed
+	* T shape turned upside down
+
+
+
+#### Code from Build Well qLine R2.3D forked here
+
+
+All previous BW currently outstanding issues copied to here:
+
+
+* build-well.html / Build Well parent file
+	* 2017-10-14 ~ Improve small screen operation
+
+
+* build-well-threejs.html
+	* 2017-10-02 ~ Add ortho camera?
+
+* mnu-adjacent-buildings.html
+	* 2017-09-22 ~ Allow any and all buildings to have shape parameters?
+	* 2017-10-02 ~ Add multi-line select for shape selection?
+
+* mnu-box-shape.html
+
+* mnu-ell-shape-one.html
+
+
+* mnu-settings-site.html
+	* 2017-09-22 ~ geocoder input
+	* 2017-09-22 ~ Add shade/shadow toggle
+	* 2017-09-22 ~ Add solar calculator
+	* 2017-09-21 ~ Color, shade and shadow
+
+* mnu-settings-building.html
+	* 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
+		* Inworld text is a whole thing in itself. Add in only when very necessary
+	* 2017-10-14 ~ Toggle visibility of interior walls
+	* 2017-10-14 ~ Opacity Slider
+	* 2017-10-14 ~ Overhangs color different than color of walls etc
+	* 2017-10-14 ~ Show Perimeter Depth arrows
+
+* mnu-hud.html
+	* 2017-09-30 ~ Add selecting, moving and editing buildings via pointing device
+
+* mnu-settings-spaces.html
+	* 2017-10-14 ~ Round the numbers
+	* 2017-10-14 ~ Update building data when you select a space type
+	* 2017-10-14 ~ Highlight the space in 3D when you select a space in the menu 
+
+* mnu-gbxml-export.html
+	* 2017-10-11 ~ Export diagonal walls - yes
+	* 2017-10-14 ~ Export individuated, manifold spaces
+	* 2017-10-05 ~ Export fin data
+	* 2017-10-05 ~ Enable changing building orientation
+
+* mnu-real-time-report.html
+	* 2017-10-14 ~ Grab the data in real-time from the 3d model currently in play
+
+* mnu-template.html
+
+
+* mnu-settings-zone.html
+	* in the pipeline
+
+* mnu-settings-building.html
+
+	* for opacities, materials: in the pipeline
+
+
+
+
 
 
 

@@ -1,0 +1,937 @@
+﻿
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Build Well Three.js qLine 'server' - designed to be accessed inside an iframe" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name="date" content="2017-10-25" >
+<title>Build Well Three.js</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+	h2 { margin: 0 }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	textarea { background: none; height: 600px; width: 100%; tab-size: 4;}
+
+	#divMenu { position: absolute; left: 0; margin: 0 auto; max-width: 800px; right: 0; text-align: center; }
+
+	#divControls { position: absolute; bottom: 20px; margin: auto; text-align: center; width: 100%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p id = "divContents" >
+
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+			<button onclick=controls.reset(); >reset view</button>
+
+		</p>
+		<div id=divScreenText ></div>
+
+		<div id=divLog ></div> <!-- used for testing by HUD -->
+
+		<div id=pLogBox ></div>
+		<div id=pLogL ></div>
+		<div id=pLogT ></div>
+		<div id=pLogH ></div>
+		<div id=pLogU ></div>
+		<div id=pLogTrapezoid ></div>
+		<div id=pLogTriangle ></div>
+		<div id=pLogPlus ></div>
+		<div id=pLogO ></div>
+
+	</div>
+
+
+	<div id=divControls >
+
+
+		<div>
+			<button onclick=turnLeft(); title='A or left cursor key' >&#9664;</button> &nbsp;
+			<button onmousedown=goForward(); title='W or up cursor key' >&#9650;</button> &nbsp;
+			<button onclick=goBack(); title='' >&#9660;</button> &nbsp;
+			<button onclick=turnRight(); >&#9654;</button>
+		</div>
+		<div>
+		<div>
+			<button onclick=turnUp(); title='R or page up key' >&#9651;</button> &nbsp;
+			<button onclick=turnDown(); title='F or page down key' >&#9661;</button>
+			<button onclick=goUp(); title='Plus key' >+</button> &nbsp;
+			<button onclick=goDown(); title='Minus key' >-</button> &nbsp;
+		</div>
+
+	</div>
+
+	<div id= "headsUp" ></div>
+
+<script>
+
+	let relativeCameraOffset = new THREE.Vector3( 0, 200, 50 );
+
+	let shapeBox, shapeL, shapeT, shapeH, shapeU, shapeTrapezoid, shapeTriangle, shapePlus, shapeO;
+
+	var building = {};
+	var buildings;
+
+	let size = 200;
+	let sizeDelta = 0.3 * size;
+
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+
+	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+	var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+	var pi = Math.PI;
+	const d2r = pi / 180, r2d = 180 /pi;
+
+	var renderer, camera, controls, scene;
+	var lightAmbient, lightDirectional;
+	var cameraHelper, axesHelper, gridHelper, ground, cube;
+
+	init();
+	animate();
+
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			divTitle.innerHTML =
+				'<h2>' +
+					'<a  href = "./build-well.html" >bw</a> &nbsp; ' +
+					'<a  href = "" >' + document.title + ' ' + release.toUpperCase() + '</a> &nbsp; ' +
+					'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
+				'</h2>'
+			'';
+		}
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.shadowMap.enabled = true;
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5 * size );
+		camera.up.set( 0, 0, 1 );
+		camera.position.set( -0.25 * size, -0.5 * size, 0.25 * size );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 3 * size;
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
+//		lightDirectional.position.set( 1, -1, 1 ).normalize();
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( size / 10, size / 10, size / 200 );
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		window.addEventListener( 'keydown', onKeyDown, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+//		addHelpers( size );
+
+// gbXML values in alphabetical order
+		building.area = 800;
+		building.areaUnit = 'SquareMeters';
+
+		building.box = {};
+		building.box.length1 = 40;
+		building.box.width1 = 20;
+		building.buildingId = 1;
+
+		building.CADModelAzimuth = 0;
+		building.campusId = 'Facility';
+
+		building.DaylightSavings = true;
+		building.description = 'Generated by Ladybug-Tools/Spider/Build Well';
+
+		building.Elevation = 10;
+		building.floors = 3; // + Math.floor( 4 * Math.random() );
+		building.floorHeight = 2.1;
+
+		building.lengthUnit = 'Meters';
+		building.Longitude = -122.398;
+		building.Latitude = 37.796;
+		building.locationName = 'San Francisco CA United States';
+
+		building.name = 'The Building';
+
+		building.orientation = 0;
+		building.overhangDepth = 1 + Math.floor( 1 * Math.random() );
+
+		building.perimeterDepth = 3.6;
+
+		building.streetAddress = '440 Davis Court';
+		building.SurfaceReferenceLocation = 'Centerline' ;
+
+		building.useSIUnitsForResults = true;
+		building.temperatureUnit = 'C';
+		building.version = '6.01';
+		building.volume = '120000';
+		building.volumeUnit = 'CubicMeters';
+
+		building.wwr = 40 + Math.floor( 40 * Math.random() );
+		building.ZipcodeOrPostalCode = '94111';
+
+
+// Three.js values
+		building.zones = [];
+		building.spaces = [];
+//		building.slabs = [];
+//		building.overhangs = [];
+
+		building.opacity = 90;
+		building.vertical = 3;
+
+//		building.group = new THREE.Group();
+//		building.group = createMesh();
+//		building.group.scale.set( 80, 100, 12 );
+//		building.group.position.set( 0, 0, 0.5 * building.group.scale.z );
+
+		toggleBackgroundGradient();
+
+		updateCampusSize();
+
+		updateMeshes();
+
+		cube.add( camera );
+
+	}
+
+
+
+	function updateCampusSize( sizeNew = 200 ) {
+
+		size = sizeNew;
+		camera.position.set( -0.25 * size, -0.5 * size, 0.25 * size );
+		camera.far = 5 * size
+		controls.maxDistance = 3 * size;
+		camera.updateProjectionMatrix();
+
+		sizeDelta = 0.3 * size;
+
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( size / 10, size / 10, size / 200 );
+
+		addHelpers( size );
+
+	}
+
+
+
+	function updateMeshes() {
+
+		let mesh;
+		const section = updateSection();
+
+		updatePaths( 30 );
+
+		const rotation = - d2r * building.orientation;
+		const floors = building.floors;
+		const height = building.floorHeight;
+
+		scene.remove( buildings );
+
+		buildings = new THREE.Group();
+
+		shapeBox = new THREE.Object3D();
+		shapeL = new THREE.Object3D();
+		shapeT = new THREE.Object3D();
+		shapeH = new THREE.Object3D();
+		shapeU = new THREE.Object3D();
+		shapeTrapezoid = new THREE.Object3D();
+		shapeTriangle = new THREE.Object3D();
+		shapePlus = new THREE.Object3D();
+		shapeO = new THREE.Object3D();
+
+		shapeBox.name = 'Box shape';
+		shapeL.name = 'L shape';
+		shapeT.name = 'T shape';
+		shapeH.name = 'H shape';
+		shapeU.name = 'U shape';
+		shapeTrapezoid.name = 'Trapezoid shape';
+		shapeTriangle.name = 'Triangle shape';
+		shapePlus.name = 'Plus shape';
+		shapeO.name = 'O shape';
+
+		buildings.add( shapeBox, shapeL, shapeT, shapeH, shapeU, shapeTrapezoid, shapeTriangle, shapePlus, shapeO );
+
+		for ( var i = 0; i < floors; i++ ) {
+
+			const vertical = i * ( building.vertical + height );
+			const floor = i + 1;
+
+			mesh = createQlineMesh( section, pathBox, 'Box shape', floor );
+			mesh.position.set( -sizeDelta, sizeDelta, vertical );
+			mesh.rotation.z = rotation;
+			shapeBox.add( mesh );
+
+			mesh = createQlineMesh( section, pathL, 'L shape', floor );
+			mesh.position.set( 0, sizeDelta, vertical );
+			mesh.rotation.z = rotation;
+			shapeL.add( mesh );
+
+			mesh = createQlineMesh( section, pathT, 'T shape', floor );
+			mesh.position.set( sizeDelta, sizeDelta, vertical );
+			mesh.rotation.z = rotation;
+			shapeT.add( mesh );
+
+			mesh = createQlineMesh( section, pathH, 'H shape', floor );
+			mesh.position.set( -sizeDelta, 0, vertical );
+			mesh.rotation.z = rotation;
+			shapeH.add( mesh);
+
+			mesh = createQlineMesh( section, pathU, 'U shape', floor );
+			mesh.position.set( 0, 0, vertical );
+			mesh.rotation.z = rotation;
+			shapeU.add( mesh  );
+
+			mesh = createQlineMesh( section, pathTrapezoid, 'Trapezoid shape', floor );
+			mesh.position.set( sizeDelta, 0, vertical );
+			mesh.rotation.z = rotation;
+			shapeTrapezoid.add( mesh  );
+
+			mesh = createQlineMesh( section, pathTriangle, 'Triangle shape', floor );
+			mesh.position.set( -sizeDelta, -sizeDelta, vertical );
+			mesh.rotation.z = rotation;
+			shapeTriangle.add( mesh  );
+
+			mesh = createQlineMesh( section, pathPlus, 'Plus shape', floor );
+			mesh.position.set( 0, -sizeDelta, vertical );
+			mesh.rotation.z = rotation;
+			shapePlus.add( mesh  );
+
+			mesh = createQlineMesh( section, pathO, 'O shape', floor );
+			mesh.position.set( sizeDelta, -sizeDelta, vertical );
+			mesh.rotation.z = rotation;
+			shapeO.add( mesh  );
+
+		}
+
+		scene.add( buildings );
+
+	}
+
+
+
+	function updateSection() {
+
+		const width = building.perimeterDepth;
+		const height = building.floorHeight;
+
+		const section = [
+
+//			v2( width, height ), v2( width, -height ), v2( -width, -height ), v2( -width, height ), v2( width, height )
+//			v2( 0, 0 ), v2( width, 0 ), v2( width, height ), v2( 0, height ), v2( 0, 0 )
+
+			v2( -width, 0 ), v2( 0, 0 ), v2( 0, height ), v2( -width, height ), v2( -width, 0 )
+
+		];
+
+		return section;
+
+	}
+
+
+	function updatePaths( length ) {
+
+		const shapeArea = building.area;
+
+		const len = building.box.length1;
+		const len13 = len / 3;
+		const len23 = 2 * len / 3;
+		const len14 = len / 4;
+		const len34 = 3 * len / 4;
+
+		const wid = building.box.width1;
+		const wid13 = wid / 3;
+		const wid23 = 2 * wid / 3;
+		let shape;
+		let geometry;
+		let areaNow, ratio;
+
+		pathBox = [ v2( 0, 0 ), v2( len, 0 ), v2( len, wid ), v2( 0, wid ), v2( 0, 0 ) ];
+		pathBox = scaleMesh( pathBox, pLogBox, 'Box shape' );
+
+		pathL = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len, wid13 ),
+			v2( len13, wid13 ),
+			v2( len13, wid ),
+			v2( 0, wid ),
+			v2( 0, 0 )
+		];
+		pathL = scaleMesh( pathL, pLogL, 'L shape' );
+
+/*		pathT = [
+			v2( 0, wid23 ),
+			v2( len13, wid23 ),
+			v2( len13, 0 ),
+			v2( len23, 0 ),
+			v2( len23, wid23 ),
+			v2( len, wid23 ),
+			v2( len, wid ),
+			v2( 0, wid ),
+			v2( 0, wid23 )
+		]; */
+
+		pathT = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len, wid13 ),
+			v2( len23, wid13 ),
+			v2( len23, wid ),
+			v2( len13, wid ),
+			v2( len13, wid13 ),
+			v2( 0, wid13 ),
+			v2( 0, 0 ),
+
+		];
+		pathT = scaleMesh( pathT, pLogT, 'T shape' );
+
+		pathH = [
+			v2( 0, 0 ),
+			v2( len14, 0 ),
+			v2( len14, wid13 ),
+			v2( len34, wid13 ),
+			v2( len34, 0 ),
+			v2( len, 0 ),
+			v2( len, wid ),
+			v2( len34, wid ),
+			v2( len34, wid23 ),
+			v2( len14, wid23 ),
+			v2( len14, wid ),
+			v2( 0, wid ),
+			v2( 0, 0 )
+		];
+		pathH = scaleMesh( pathH, pLogH, 'H shape' );
+
+		pathU = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len, wid ),
+			v2( len34, wid ),
+			v2( len34, wid13 ),
+			v2( len14, wid13 ),
+			v2( len14, wid ),
+			v2( 0, wid ),
+			v2( 0, 0 )
+		];
+		pathU = scaleMesh( pathU, pLogU, 'U shape' );
+
+		pathTrapezoid = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len23, wid ),
+			v2( len13, wid ),
+			v2( 0, 0 )
+		];
+		pathTrapezoid = scaleMesh( pathTrapezoid, pLogTrapezoid, 'Trapezoid shape' );
+
+		pathTriangle = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len13, wid ),
+			v2( 0, 0 )
+		];
+		pathTriangle = scaleMesh( pathTriangle, pLogTriangle, 'Triangle shape' );
+
+		pathPlus = [
+			v2( len13, 0 ),
+			v2( len23, 0 ),
+			v2( len23, wid13 ),
+			v2( len, wid13 ),
+			v2( len, wid23 ),
+			v2( len23, wid23 ),
+			v2( len23, wid ),
+			v2( len13, wid ),
+			v2( len13, wid23 ),
+			v2( 0, wid23 ),
+			v2( 0, wid13 ),
+			v2( len13, wid13 ),
+			v2( len13, 0 )
+		];
+		pathPlus = scaleMesh( pathPlus, pLogPlus, 'Plus shape' );
+
+		pathO = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len, wid ),
+			v2( 0, wid ),
+			v2( 0, wid13 ),
+			v2( len23, wid13 ),
+			v2( len23, wid23 ),
+			v2( len13, wid23 ),
+			v2( len13, wid13 ),
+			v2( 0, wid13 ),
+			v2( 0, 0 )
+		];
+		pathO = scaleMesh( pathO, pLogO, 'O shape' );
+
+	}
+
+
+
+	function scaleMesh( path, log, text ) {
+
+		const shape = new THREE.Shape( path );
+		const geometry = new THREE.ShapeGeometry( shape );
+		const areaNow = THREE.ShapeUtils.area( path );
+		const ratio = building.area / areaNow;
+		geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, ratio, 1 ) );
+		geometry.vertices.push( geometry.vertices[ 0 ] );
+		path = geometry.vertices.reverse();
+
+		if ( window.self === window.top ) {
+
+			getMeshArea( path, log, text );
+
+		}
+
+		return path;
+
+	}
+
+
+	function getMeshArea( vertices, target, text = '' ) {
+
+		let verts = [];
+
+		for ( var i = 0; i < vertices.length; i++ ) {
+
+			vert = vertices[ i ].clone();
+			verts.push( vert );
+
+		}
+
+		target.innerHTML = text + ' scaled area: ' + THREE.ShapeUtils.area( verts ); //.toLocaleString();
+
+	}
+
+
+	function createQlineMesh( section, path, name, floor ) {
+
+		const len = building.box.length1;
+		const wid = building.box.width1;
+
+		const len05 = len * 0.5;
+		const wid05 = wid * 0.5;
+
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), opacity: ( building.opacity / 100 ), side: 2, transparent: true, wireframe: false } );
+		const materialNormal = new THREE.MeshNormalMaterial( { opacity: ( building.opacity / 100 ), transparent: true, wireframe: false, } );
+		const materialShape = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), opacity: ( building.opacity / 100 ), side: 2, transparent: true, wireframe: false } );
+
+		const vertices = [];
+		const shapePoints = [];
+
+		const geometry = new THREE.PlaneGeometry( 10, 10, section.length - 1, path.length - 1 );
+//		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -len05, -wid05, 0 ) );
+
+		const mesh = new THREE.Mesh( geometry, material );
+		mesh.name = name;
+		mesh.userData.floor = floor;
+
+		for ( let i = 0; i < section.length; i++ ) {
+
+			vertices.push( offset ( mesh, path, section[ i ].x, section[ i ].y ) );
+
+		};
+
+		for ( let i = 0, j = 0; i < path.length; i++ ) {
+
+			for ( let k = 0; k < section.length; k++ ) {
+
+				mesh.geometry.vertices[ j++ ] = vertices[ k ][ i ];
+
+			}
+
+			if ( i < path.length - 1 ) {
+
+				const pt1 = vertices[ 0 ][ i ];
+				const pt2 = vertices[ 0 ][ i + 1 ];
+//				const pt3 = vertices[ 1 ][ i ];
+				const len = pt1.distanceTo( pt2 );
+				const hgt = building.floorHeight; //pt1.distanceTo( pt3 );
+//				const geo = new THREE.PlaneBufferGeometry( len * building.wwr / 100, building.overhangDepth );
+				let geo = new THREE.PlaneBufferGeometry( 1, 1 );
+
+				const vectorDelta = pt2.clone().sub( pt1 );
+				const angle = Math.atan2( vectorDelta.y, vectorDelta.x );
+//				geo.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
+
+				const over = new THREE.Mesh( geo, materialNormal );
+//				over.position.copy( vertices[ 3 ][ i ] );
+				over.scale.set( len * building.wwr / 100, building.overhangDepth, building.overhangDepth)
+				over.position.copy( vertices[ 3 ][ i ].clone().lerp( vertices[ 4 ][ i + 1 ].clone(), 0.5 ) );
+				over.rotation.z = angle
+				over.translateY( -0.5 * building.overhangDepth );
+				over.translateZ( 0.5 * hgt * building.wwr / 100 );
+				over.name = 'overhang';
+				mesh.add( over );
+
+				geo = new THREE.PlaneBufferGeometry( len * building.wwr / 100, hgt * building.wwr / 100 );
+
+				const open = new THREE.Mesh( geo, materialNormal );
+				geo.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI * 0.5 ) );
+				open.position.copy( vertices[ 3 ][ i ].clone().lerp( vertices[ 4 ][ i + 1 ].clone(), 0.5 ) );
+				open.rotation.z = angle;
+				open.translateY( -0.1 );
+				open.name = 'opening';
+				mesh.add( open );
+
+				shapePoints.push( pt2 );
+
+			}
+
+		}
+
+		const shape = new THREE.Shape( path );
+		const geometryShape = new THREE.ShapeGeometry( shape );
+
+		const shapeMesh = new THREE.Mesh( geometryShape, materialShape );
+		shapeMesh.name = 'InteriorFloor';
+		mesh.add( shapeMesh );
+
+		geometry.computeFaceNormals();
+		geometry.computeVertexNormals();
+
+		return mesh;
+
+	}
+
+
+
+	function offset( obj, points, offsetX, offsetY ) {
+
+// 2016-02-10
+		offsetX = -offsetX;
+		var offsetY = offsetY ? offsetY : 0;
+		var geometry, material, mesh;
+		var pt1, pt2, offsetPt1, offsetPt2, vector, angle;
+		var line, lines, vertices;
+		var pi05 = 0.5 * pi;
+		var pi2 = 2 * pi;
+		lines = [];
+
+		for ( var i = 0; i < points.length - 1; i++ ) {
+
+			pt1 = points[ i ];
+			pt2 = points[ i + 1 ];
+
+			vector = pt2.clone().sub( pt1 );
+			angle = Math.atan2( vector.y, vector.x );
+
+			offsetPt1 = v( pt1.x + offsetX * Math.cos( angle - pi05 ), pt1.y - offsetX * Math.sin( angle + pi05 ), 0 );
+			offsetPt2 = v( pt2.x + offsetX * Math.cos( angle - pi05 ), pt2.y - offsetX * Math.sin( angle + pi05 ), 0 );
+
+			line = new THREE.Line3( offsetPt1, offsetPt2 );
+			lines.push( line );
+
+/* debug
+			geometry = new THREE.Geometry();
+			geometry.vertices = [ offsetPt1, offsetPt2 ];
+			material = new THREE.LineBasicMaterial( { color: 'magenta' } );
+			var line = new THREE.Line( geometry, material );
+			line.position.y = -5;
+			obj.add( line );
+*/
+
+		}
+
+
+		if ( points[ 0 ].distanceTo( points[ points.length - 1 ] ) < 0.01 ) {
+
+			pt1 = intersectionTwoLines2( lines[ 0 ], lines [ lines.length - 1 ] );
+			pt2 = pt1;
+
+		} else {
+
+			pt1 = lines[ 0 ].start;
+			pt2 = lines[ lines.length - 1 ].end;
+
+		}
+
+		vertices = [ v( pt1.x, pt1.y, offsetY ) ];
+
+		for ( var i = 0; i < lines.length; i++ ) {
+
+			if ( i < lines.length - 1 ) {
+
+				var pt = intersectionTwoLines2( lines[ i ], lines [ i + 1 ] );
+
+			} else {
+
+				pt = pt2;
+
+			}
+
+			vertices.push( v( pt.x, pt.y, offsetY ) );
+
+		}
+
+// debug
+		geometry = new THREE.Geometry();
+		geometry.vertices = vertices;
+		material = new THREE.LineBasicMaterial( { color: 'yellow' } );
+		line = new THREE.Line( geometry, material );
+		obj.add( line );
+//
+
+		return vertices;
+
+	}
+
+	function intersectionTwoLines2( line1, line2 ) {
+
+// 2016-02-10
+// Thanks to http://jsfiddle.net/justin_c_rounds/Gd2S2/ && http://jsfiddle.net/user/justin_c_rounds/fiddles/
+
+		const ptA = line1.start;
+		const ptB = line1.end;
+		const ptC = line2.start;
+		const ptD = line2.end;
+
+		const denominator = ( ptD.y - ptC.y ) * ( ptB.x - ptA.x ) - ( ptD.x - ptC.x ) * ( ptB.y - ptA.y );
+
+		if ( denominator == 0 ) { return; }
+
+		const a = ( ( ptD.x - ptC.x ) * ( ptA.y - ptC.y ) - ( ptD.y - ptC.y ) * ( ptA.x - ptC.x ) ) / denominator;
+		const x = ptA.x + ( a * ( ptB.x - ptA.x ) );
+		const y = ptA.y + ( a * ( ptB.y - ptA.y ) );
+
+		return v( x, y, 0 );
+
+	}
+
+
+
+///////////////////////////
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
+
+
+	function addHelpers( size = 100 ) {
+
+		scene.remove( cameraHelper, gridHelper, axesHelper, cube );
+
+		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera )
+
+		gridHelper = new THREE.GridHelper( size, size / 10 );
+		gridHelper.rotation.x = 0.5 * Math.PI;
+
+		axesHelper = new THREE.AxesHelper( size * 0.05 );
+		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
+		axesHelper.material.linewidth = 5
+		axesHelper2 = new THREE.AxesHelper( size );
+
+		groundHelper = createMesh();
+		groundHelper.scale.set( size, size, size );
+		groundHelper.position.set( 0, 0, -0.5 * size );
+		groundHelper.name = 'groundHelper';
+		groundHelper.visible = false;
+
+		scene.add( cameraHelper, gridHelper, axesHelper, axesHelper2, groundHelper );
+
+
+		const geometry = new THREE.IcosahedronBufferGeometry( 0.02 * size, );
+		geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 1 ) );
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
+		cube = new THREE.Mesh( geometry, material );
+		cube.position.z = 25;
+		cube.castShadow = cube.receiveShadow = true;
+
+		cube.visible = false;
+
+		scene.add( cube );
+
+	}
+
+
+
+	function createMesh() {
+
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		const mesh = new THREE.Mesh( geometry, material );
+		mesh.name = 'object With No Name';
+		mesh.userData.idSpace = 'none';
+
+		const edgesGeometry = new THREE.EdgesGeometry( geometry );
+		const meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+		mesh.add( meshEdges );
+
+		return mesh;
+
+	}
+
+
+////////////////
+
+
+
+	function onKeyDown ( event ) {
+
+//console.log( 'key', event.keyCode );
+
+		controls.enableKeys = false;
+//		event.preventDefault();
+
+		switch( event.keyCode ) {
+
+			case 82: /* R  */
+			case 33: /* Page Up      */ turnUp();   break;
+			case 70: /* F */
+			case 34: /* Page Dn      */ turnDown(); break;
+			case 65: /* A */
+			case 37: /* cursor left  */ turnLeft();  break;
+			case 87: /* W */
+			case 38: /* cursor up    */ goForward(); break;
+			case 68: /* D */
+			case 39: /* cursor right */ turnRight();  break;
+			case 83: /* S */
+			case 40: /* cursor down  */ goBack(); break;
+			case 187:
+			case 107: /* plus */        goUp(); break;
+			case 189:
+			case 109: /* minus */       goDown(); break;
+
+		}
+
+	}
+
+
+	function goForward() {
+
+		cube.translateY( 10 );
+		updateCamera();
+
+	}
+
+	function goBack() {
+
+		cube.translateY( -10 );
+		updateCamera();
+
+	}
+
+	function goUp() {
+
+		cube.translateZ( 3 );
+		updateCamera();
+
+	}
+
+	function goDown() {
+
+		cube.translateZ( -3 );
+		updateCamera();
+
+	}
+
+	function turnRight() {
+
+		cube.rotation.z -= 0.1;
+		updateCamera();
+
+	}
+
+	function turnLeft() {
+
+		cube.rotation.z += 0.1;
+		updateCamera();
+
+	}
+
+
+	function turnUp() {
+
+		cube.rotation.x += 0.1;
+		updateCamera();
+
+	}
+
+
+	function turnDown() {
+
+		cube.rotation.x -= 0.1;
+		updateCamera();
+
+	}
+
+
+	function updateCamera() {
+
+		let cameraOffset = relativeCameraOffset.applyMatrix4( cube.matrixWorld );
+		cube.visible = true;
+
+	}
+
+
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>
