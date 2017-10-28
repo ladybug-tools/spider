@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic build well menu template" >
+<meta name = "description" content = "Build Well: add, edit or delete adjacent structures that create shade " >
 <meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-28" >
-<title>Menu Template</title>
+<title>Adjacent Buildings</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -18,7 +18,7 @@
 	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus{ background-color: yellow; color: #aaa; }
 
-	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	h3 { margin: 0; }
@@ -32,7 +32,7 @@
 	.floatRight { float: right; width: 70px;}
 	.highlight { background-color: lightgreen; }
 
-	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px; }
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
 
 	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
@@ -47,14 +47,14 @@
 
 		<div id=info >This is a template file for building new menus</div>
 
-		<p title="Select a building to edit" >Buildings:
-			<select id=selObject onchange=getObject(buildings); ></select>
+		<p title ="Select a building to edit" >Buildings:
+			<select id = selObject onchange= getObject(buildings); size = 5 ></select>
 		</p>
 
 		<p>
-			<button onclick=deleteObject(buildings); >delete</button>
-			<button onclick=addObject(buildings); >add </button>
-			<button onclick=saveFile(buildings); >save json file</button>
+			<button onclick = deleteObject(buildings); >delete</button>
+			<button onclick = addObject(buildings); >add </button>
+			<button onclick = saveFile(buildings); >save json file</button>
 		</p>
 
 		<p title = 'Title of the model' >Name:
@@ -66,7 +66,7 @@
 		</p>
 
 		<p title = 'front and back distance from origin in feet'>offset y:
-			<input type=number id=inpOffsetY onchange = updateObject(buildings); class = floatRight >
+			<input type=number id=inpOffsetY onchange = updateObject(buildings);; class = floatRight >
 		</p>
 
 		<p title = 'x distance in feet' >length:
@@ -126,11 +126,11 @@
 			'</h3>' +
 		'';
 
-		let txt =
+		let txt = '<p>2017-10-28 ~ issue: we don\'t fit in very well here yet ;-(</p>' +
 			'<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>' +
 		'&#x1f578;';
 
-		divMenu.innerHTML += txt + txt;
+//		divMenu.innerHTML += txt;
 
 		if ( parent && parent.ifrThree ) {
 
@@ -144,13 +144,11 @@
 
 			scope = ifrContents.contentWindow;
 
-			divMenu.style.cssText += 'margin: 20px; max-height: calc( 100% - 50px ); max-width: 300px; overflow: auto; position: absolute; right: 0;' ;
+			divMenu.style.cssText += 'margin: 20px; max-height: calc( 100% - 50px); max-width: 300px; overflow: auto; position: absolute; right: 0;' ;
 
 			ifrContents.onload = initVariables;
 
 		}
-
-//		selObject.focus(); mucks up menu siizes
 
 	}
 
@@ -195,7 +193,7 @@
 		}
 
 		selObject.selectedIndex = 0;
-		selObject.size = objects.children.length;
+
 		getObject( objects );
 
 	}
@@ -262,7 +260,6 @@
 		} );
 
 		if ( object.material ) { object.material.opacity = 1; }
-
 
 	}
 

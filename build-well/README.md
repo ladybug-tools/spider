@@ -69,12 +69,14 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ## To Do Generally
 
+* 2017-10-28 ~ Each standalone file: add link to https://validator.w3.org/?? Other vailidators??
 * 2017-10-14 ~ How about a logo?
 * 2017-10-14 ~ Add permalinks / RESTful interaction
 * 2017-10-14 ~ Decide what to do when distance between external walls is less than twice the minimum perimeter depth
 * 2017-10-14 ~ Organize nice sets of color schemes for the various surface types
 
-## To Do per modules
+
+## To Dos per module
 
 ### build-well.html / Build Well parent file
 
@@ -150,7 +152,8 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 * build-well-threejs-qline.html
 	* 2017-10-28 ~ H & I shapes: internal space too narrow < fixed
 	* T shape turned upside down
-
+* mnu-template.html
+	* fix select box sizing issue
 
 
 #### Code from Build Well qLine R2.3D forked here

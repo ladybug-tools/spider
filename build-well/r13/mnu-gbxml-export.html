@@ -120,6 +120,8 @@
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
+//		divMenu.innerHTML += txt;
+
 		if ( parent && parent.ifrThree ) {
 
 			scope = parent.ifrThree.contentWindow;
@@ -133,7 +135,7 @@
 
 			scope = ifrContents.contentWindow;
 
-			divMenu.style.cssText += ' margin: 20px;max-height: calc( 100% - 50px);  max-width: 300px; ; overflow: auto; position: absolute; right: 0;' ;
+			divMenu.style.cssText += ' margin: 20px; max-height: calc( 100% - 50px); max-width: 300px; overflow: auto; position: absolute; right: 0;' ;
 
 			ifrContents.onload = initVariables;
 

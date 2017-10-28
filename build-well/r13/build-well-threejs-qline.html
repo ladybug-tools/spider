@@ -222,7 +222,7 @@
 
 		updateMeshes();
 
-		cube.add( camera );
+
 
 	}
 
@@ -231,17 +231,21 @@
 	function updateCampusSize( sizeNew = 200 ) {
 
 		size = sizeNew;
+
 		camera.position.set( -0.25 * size, -0.5 * size, 0.25 * size );
 		camera.far = 5 * size
-		controls.maxDistance = 3 * size;
 		camera.updateProjectionMatrix();
 
-		sizeDelta = 0.3 * size;
+		controls.maxDistance = 3 * size;
 
 		lightDirectional.position.set( -size, size, size );
 		lightDirectional.shadow.camera.scale.set( size / 10, size / 10, size / 200 );
 
+		sizeDelta = 0.3 * size;
+
 		addHelpers( size );
+
+		cube.add( camera );
 
 	}
 
@@ -359,6 +363,7 @@
 		return section;
 
 	}
+
 
 
 	function updatePaths( length ) {
@@ -522,6 +527,7 @@
 	}
 
 
+
 	function getMeshArea( vertices, target, text = '' ) {
 
 		let verts = [];
@@ -536,6 +542,7 @@
 		target.innerHTML = text + ' scaled area: ' + THREE.ShapeUtils.area( verts ); //.toLocaleString();
 
 	}
+
 
 
 	function createQlineMesh( section, path, name, floor ) {
@@ -762,8 +769,9 @@
 
 		axesHelper = new THREE.AxesHelper( size * 0.05 );
 		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
-		axesHelper.material.linewidth = 5
+		axesHelper.material.linewidth = 10;
 		axesHelper2 = new THREE.AxesHelper( size );
+		axesHelper.material.linewidth = 2;
 
 		groundHelper = createMesh();
 		groundHelper.scale.set( size, size, size );
@@ -774,11 +782,17 @@
 		scene.add( cameraHelper, gridHelper, axesHelper, axesHelper2, groundHelper );
 
 
-		const geometry = new THREE.IcosahedronBufferGeometry( 0.02 * size, );
-		geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 1 ) );
+		const geometry = new THREE.IcosahedronBufferGeometry( 0.01 * size, );
+		geo1 = geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
 		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
-		cube = new THREE.Mesh( geometry, material );
-		cube.position.z = 25;
+		cube = new THREE.Mesh( geo1, material );
+
+		obj2 = new THREE.Mesh( geometry, material );
+		obj2.position.y = 30;
+		cube.add( obj2 );
+
+		cube.position.x = -0.1 * size;
+		cube.position.z = 0.02 * size;
 		cube.castShadow = cube.receiveShadow = true;
 
 		cube.visible = false;
