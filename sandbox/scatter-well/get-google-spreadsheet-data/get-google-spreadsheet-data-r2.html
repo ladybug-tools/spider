@@ -142,8 +142,6 @@
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-		//toggleGrid();
-
 		//		axesHelper = new THREE.AxesHelper( 100 );
 
 		initHeadsUp();
@@ -203,24 +201,9 @@
 
 		arrayOfMaximums = [dataScaleX(Math.max(...valuesXaxis)),dataScaleY(Math.max(...valuesYaxis)),dataScaleZ(Math.max(...valuesZaxis))]
 
-		function median(values) {
-
-			    values.sort( function(a,b) {return a - b;} );
-
-			    var half = Math.floor(values.length/2);
-
-			    if(values.length % 2)
-			        return values[half];
-			    else
-			        return (values[half-1] + values[half]) / 2.0;
-			}
+		console.log(Math.max(...arrayOfMaximums))
 
 		toggleGrid(Math.max(...arrayOfMaximums));
-
-		// reset camera position
-		//camera.position.set(dataScaleX(median(valuesXaxis)), dataScaleY(median(valuesYaxis)), dataScaleZ(median(valuesZaxis)));
-		// reset controls position
-		//controls.target.set(dataScaleX(median(valuesXaxis)), dataScaleY(median(valuesYaxis)), dataScaleZ(median(valuesZaxis)) );
 
 		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, Math.max(...valuesXaxis), 0, 0 );
 		scene.add(placard );
@@ -229,6 +212,7 @@
 		scene.add(placard );
 
 		placard = drawPlacard( ['Z-axis', 'Nunber of Floors' ], 0.05, 240, 0, 0, Math.max(...valuesZaxis) );
+		scene.add(placard );
 
 		meshes = new THREE.Object3D();
 
@@ -325,16 +309,11 @@
 
 		var material2 = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
 
-		bbox = new THREE.BoxGeometry(xMax-xMin, yMax-yMin, zMax- zMin);
+		designSpaceExtents = new THREE.BoxGeometry(xMax-xMin, yMax-yMin, zMax- zMin);
 
-		// console.log((xMax-xMin)/2+xMin)
-		// console.log((yMax-yMin)/2+yMin)
-		// console.log((zMax- zMin)/2+zMin)
+		var designSpaceExtentsMesh = new THREE.Mesh(designSpaceExtents, material2);
 
-		var bboxmesh = new THREE.Mesh(bbox, material2);
-
-		bboxmesh.applyMatrix(new THREE.Matrix4().makeTranslation((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin));
-
+		designSpaceExtentsMesh.applyMatrix(new THREE.Matrix4().makeTranslation((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin));
 
 		function pointCameraTo(bbox,camera) {
 			// Get bounding box furtherest point to furtherest point using Pythagoreans theorem for the Y Z axis, - the width of the building ensure that it is visible
@@ -350,17 +329,10 @@
 			camera.position.z = Math.cos(angle)*dist;
 		}
 
-		console.log(bboxmesh.geometry.boundingBox)
-
-		//ointCameraTo(bboxmesh.geometry.boundingBox,camera)
-
 		controls.target.set((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin );
+		camera.position.set( xMax*1.75, yMax*1.75, zMax*1.75 );
 
-		//pointCameraTo(bboxmesh,camera,controls)
-
-		//controls.target.set((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin);
-
-		scene.add(bboxmesh);
+		scene.add(designSpaceExtentsMesh);
 	}
 
 	function hShape( floors ) {
@@ -424,7 +396,6 @@
 		return tGeometry;
 	}
 
-///////////////////////
 
 	function initHeadsUp() {
 
@@ -439,17 +410,7 @@
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
-/*
-		scene.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh && child.name ) {
-
-				objects.push( child );
-
-			}
-
-		} );
-*/
 	}
 
 
@@ -633,18 +594,18 @@
 			//console.log(size)
 			gridHelper = new THREE.Object3D();
 
-			obj = new THREE.GridHelper( size, 20, 'blue', 'lightblue' );
+			obj = new THREE.GridHelper( size*2, 20, 'blue', 'lightblue' );
 			obj.rotation.x = 0.5 * Math.PI;
-			obj.position.set( 50, 50, 0 );
+			obj.position.set( 0, 50, 0 );
 			gridHelper.add( obj );
 
-			obj = new THREE.GridHelper( size, 20, 'red', 'pink' );
+			obj = new THREE.GridHelper( size*2, 20, 'red', 'pink' );
 	//		obj.rotation.x = 0.5 * Math.PI;
 			obj.position.set( 50, 0, 50 );
 			gridHelper.add( obj );
 
 
-			obj = new THREE.GridHelper( size, 20, 'green', 'lightgreen' );
+			obj = new THREE.GridHelper( size*2, 20, 'green', 'lightgreen' );
 			obj.rotation.z = 0.5 * Math.PI;
 			obj.position.set( 0, 50, 50 );
 			gridHelper.add( obj );
