@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Create 3D building data in a variety of shapes parametrically and export in gbXML format" >
 <meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-23" >
-<title>Build Well qLine</title>
+<meta name = "date" content = "2017-10-28" >
+<title>Build Well</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -70,20 +70,19 @@
 
 
 				<div><a href=JavaScript:getMenuHTML("mnu-adjacent-buildings.html"); >Adjacent Buildings</a>
-					&raquo; <a href="mnu-adjacent-buildings.html " target="_blank" title = 'standalone adjacent-buildings test script' >&#x1F5D7;</a>
+					&raquo; <a href="mnu-adjacent-buildings.html " target="_top" title = 'standalone adjacent-buildings test script' >&#x1F5D7;</a>
 				</div>
-<!--
-				<div><a href=JavaScript:getMenuHTML("mnu-settings-spaces.html"); >Spaces</a>
-					&raquo; <a href="mnu-settings-spaces.html " target="_blank" title = 'standalone settings spaces test script' >&#x1F5D7;</a>
+
+				<div><a href=JavaScript:getMenuHTML("mnu-settings-zones.html"); >Zones</a>
+					&raquo; <a href="mnu-settings-zones.html " target="_top" title = 'standalone settings zones test script' >&#x1F5D7;</a>
 				</div>
--->	
+
+				<div><a href=JavaScript:getMenuHTML("mnu-settings-site.html"); >Campus Settings</a>
+					&raquo; <a href="mnu-settings-site.html " target="_top" title = 'standalone settings-site test script' >&#x1F5D7;</a>
+				</div>
 
 				<div><a href=JavaScript:getMenuHTML("mnu-hud.html"); >Heads-Up Display</a>
 					&raquo; <a href="mnu-hud.html " target="_top" title = 'standalone hud test script' >&#x1F5D7;</a>
-				</div>
-
-				<div><a href=JavaScript:getMenuHTML("mnu-settings-site.html"); >Site Settings</a>
-					&raquo; <a href="mnu-settings-site.html " target="_top" title = 'standalone settings-site test script' >&#x1F5D7;</a>
 				</div>
 
 				<div><a href=JavaScript:getMenuHTML("mnu-gbxml-export.html"); >gbXML Export</a>
@@ -123,7 +122,7 @@
 
 <script>
 
-	const pointRelease = '.3D';
+	const pointRelease = '.4';
 	const pathArry  = location.pathname.split( '/' ).slice( -2);
 	const release = pathArry[ 0 ]
 	const fileName = pathArry[ 1 ];
@@ -136,8 +135,7 @@
 	'<hr>' +
 		'<p>Welcome to Build Well Qline </p>' +
 
-		'<p class=highlight >2017-10-25: We have excellent geometry parameters for 8 of 9 shapes</p>' +
-		'<p class=highlight >2017-10-25: We are metric</p>' +
+		'<p class=highlight >2017-10-28: Build Well with the new qLine geometry maker and 3D cursor movement</p>' +
 
 		'<hr>' +
 		'<p>Axis RGB = XYZ directions</p>' +
@@ -148,6 +146,9 @@
 	'';
 
 /*
+
+		'<p class=highlight >2017-10-25: We have excellent geometry parameters for 8 of 9 shapes</p>' +
+		'<p class=highlight >2017-10-25: We are metric</p>' +
 
 		'<p class=highlight >gbXML export not yet fully updated to latest geometry</p>' +
 		'<p>You may use this set of scripts as templates for designing your own set of parameterized 3D models that can be exported to gbXML.</p>' +

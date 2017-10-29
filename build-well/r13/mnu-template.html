@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic build well menu template" >
+<meta name = "description" content = "Basic Build Well template file for building new menus" >
 <meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-28" >
 <title>Menu Template</title>
@@ -45,7 +45,7 @@
 
 		<div id = "divTitle" title='What are you con templating?' ></div>
 
-		<div id=info >This is a template file for building new menus</div>
+		<div id=divInfo ></div>
 
 		<p title="Select a building to edit" >Buildings:
 			<select id=selObject onchange=getObject(buildings); ></select>
@@ -61,23 +61,23 @@
 			<input id=inpName onchange = updateObject(buildings); class = floatRight style=width:150px; >
 		</p>
 
-		<p title = 'left and right from origin in feet' >offset x:
+		<p title = 'left and right from origin' >offset x:
 			<input type=number id=inpOffsetX onchange = updateObject(buildings);; class = floatRight >
 		</p>
 
-		<p title = 'front and back distance from origin in feet'>offset y:
+		<p title = 'front and back distance from origin'>offset y:
 			<input type=number id=inpOffsetY onchange = updateObject(buildings); class = floatRight >
 		</p>
 
-		<p title = 'x distance in feet' >length:
+		<p title = 'x distance' >length:
 			<input type=number id=inpLength min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight >
 		</p>
 
-		<p title = 'Y distance in feet' >width:
+		<p title = 'Y distance' >width:
 			<input type=number id=inpWidth min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight >
 		</p>
 
-		<p title = 'Z distance in feet: 1 to 1000' >height:
+		<p title = 'Z distance: 1 to 1000' >height:
 			<input type=number id=inpHeight min=1 max=1000 step=1 oninput="validity.valid||(value='');" onchange=updateObject(buildings);; class = floatRight >
 		</p>
 
@@ -126,6 +126,8 @@
 			'</h3>' +
 		'';
 
+		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
+
 		let txt =
 			'<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>' +
 		'&#x1f578;';
@@ -150,7 +152,7 @@
 
 		}
 
-//		selObject.focus(); mucks up menu siizes
+//		selObject.focus(); mucks up menu sizes
 
 	}
 

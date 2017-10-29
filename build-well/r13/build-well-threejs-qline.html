@@ -62,7 +62,7 @@
 
 		<div>
 			<button onclick=turnLeft(); title='A or left cursor key' >&#9664;</button> &nbsp;
-			<button onmousedown=goForward(); title='W or up cursor key' >&#9650;</button> &nbsp;
+			<button onclick=goForward(); title='W or up cursor key' >&#9650;</button> &nbsp;
 			<button onclick=goBack(); title='' >&#9660;</button> &nbsp;
 			<button onclick=turnRight(); >&#9654;</button>
 		</div>
@@ -87,8 +87,8 @@
 	var building = {};
 	var buildings;
 
-	let size = 200;
-	let sizeDelta = 0.3 * size;
+	let size;
+	let sizeDelt;
 
 	const pathArray  = location.pathname.split( '/' ).slice( -2 );
 	const release = pathArray[ 0 ];
@@ -97,7 +97,6 @@
 	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/build-well-qline/' + release + '/' + fileName;
 	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
 
-
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 	var pi = Math.PI;
@@ -105,7 +104,7 @@
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional;
-	var cameraHelper, axesHelper, gridHelper, ground, cube;
+	var cameraHelper, axesHelper, gridHelper, ground, avatar;
 
 	init();
 	animate();
@@ -228,7 +227,7 @@
 
 
 
-	function updateCampusSize( sizeNew = 200 ) {
+	function updateCampusSize( sizeNew = 250 ) {
 
 		size = sizeNew;
 
@@ -245,7 +244,7 @@
 
 		addHelpers( size );
 
-		cube.add( camera );
+		avatar.add( camera );
 
 	}
 
@@ -267,14 +266,31 @@
 		buildings = new THREE.Group();
 
 		shapeBox = new THREE.Object3D();
+		shapeBox.position.set( -sizeDelta, sizeDelta, 0 );
+
 		shapeL = new THREE.Object3D();
+		shapeL.position.set( 0, sizeDelta, 0 );
+
 		shapeT = new THREE.Object3D();
+		shapeT.position.set( sizeDelta, sizeDelta, 0 );
+
 		shapeH = new THREE.Object3D();
+		shapeH.position.set( -sizeDelta, 0, 0 );
+
 		shapeU = new THREE.Object3D();
+		shapeU.position.set( 0, 0, 0 );
+
 		shapeTrapezoid = new THREE.Object3D();
+		shapeTrapezoid.position.set( sizeDelta, 0, 0 );
+
 		shapeTriangle = new THREE.Object3D();
+		shapeTriangle.position.set( -sizeDelta, -sizeDelta, 0 );
+
 		shapePlus = new THREE.Object3D();
+		shapePlus.position.set( 0, -sizeDelta, 0 );
+
 		shapeO = new THREE.Object3D();
+		shapeO.position.set( sizeDelta, sizeDelta, 0 );
 
 		shapeBox.name = 'Box shape';
 		shapeL.name = 'L shape';
@@ -291,50 +307,51 @@
 		for ( var i = 0; i < floors; i++ ) {
 
 			const vertical = i * ( building.vertical + height );
+
 			const floor = i + 1;
 
 			mesh = createQlineMesh( section, pathBox, 'Box shape', floor );
-			mesh.position.set( -sizeDelta, sizeDelta, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeBox.add( mesh );
 
 			mesh = createQlineMesh( section, pathL, 'L shape', floor );
-			mesh.position.set( 0, sizeDelta, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeL.add( mesh );
 
 			mesh = createQlineMesh( section, pathT, 'T shape', floor );
-			mesh.position.set( sizeDelta, sizeDelta, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeT.add( mesh );
 
 			mesh = createQlineMesh( section, pathH, 'H shape', floor );
-			mesh.position.set( -sizeDelta, 0, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeH.add( mesh);
 
 			mesh = createQlineMesh( section, pathU, 'U shape', floor );
-			mesh.position.set( 0, 0, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeU.add( mesh  );
 
 			mesh = createQlineMesh( section, pathTrapezoid, 'Trapezoid shape', floor );
-			mesh.position.set( sizeDelta, 0, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeTrapezoid.add( mesh  );
 
 			mesh = createQlineMesh( section, pathTriangle, 'Triangle shape', floor );
-			mesh.position.set( -sizeDelta, -sizeDelta, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeTriangle.add( mesh  );
 
 			mesh = createQlineMesh( section, pathPlus, 'Plus shape', floor );
-			mesh.position.set( 0, -sizeDelta, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapePlus.add( mesh  );
 
 			mesh = createQlineMesh( section, pathO, 'O shape', floor );
-			mesh.position.set( sizeDelta, -sizeDelta, vertical );
+			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			shapeO.add( mesh  );
 
@@ -760,7 +777,7 @@
 
 	function addHelpers( size = 100 ) {
 
-		scene.remove( cameraHelper, gridHelper, axesHelper, cube );
+		scene.remove( cameraHelper, gridHelper, axesHelper, avatar );
 
 		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera )
 
@@ -771,7 +788,7 @@
 		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
 		axesHelper.material.linewidth = 10;
 		axesHelper2 = new THREE.AxesHelper( size );
-		axesHelper.material.linewidth = 2;
+		axesHelper2.material.linewidth = 2;
 
 		groundHelper = createMesh();
 		groundHelper.scale.set( size, size, size );
@@ -783,21 +800,21 @@
 
 
 		const geometry = new THREE.IcosahedronBufferGeometry( 0.01 * size, );
-		geo1 = geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
 		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
-		cube = new THREE.Mesh( geo1, material );
+		const geo1 = geometry.clone();
+		geo1.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.5 * Math.PI ) );
+		const geo2 = geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
+		geo2.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -4.6, 1 ) );
 
-		obj2 = new THREE.Mesh( geometry, material );
-		obj2.position.y = 30;
-		cube.add( obj2 );
+		avatar = new THREE.Mesh( geo1, material );
 
-		cube.position.x = -0.1 * size;
-		cube.position.z = 0.02 * size;
-		cube.castShadow = cube.receiveShadow = true;
+		avatar.add( new THREE.Mesh( geo2, material ) );
+		avatar.position.x = -0.075 * size;
+		avatar.position.z = 0.02 * size;
+		avatar.castShadow = avatar.receiveShadow = true;
+		avatar.visible = false;
 
-		cube.visible = false;
-
-		scene.add( cube );
+		scene.add( avatar );
 
 	}
 
@@ -857,42 +874,42 @@
 
 	function goForward() {
 
-		cube.translateY( 10 );
+		avatar.translateY( 10 );
 		updateCamera();
 
 	}
 
 	function goBack() {
 
-		cube.translateY( -10 );
+		avatar.translateY( -10 );
 		updateCamera();
 
 	}
 
 	function goUp() {
 
-		cube.translateZ( 3 );
+		avatar.translateZ( 3 );
 		updateCamera();
 
 	}
 
 	function goDown() {
 
-		cube.translateZ( -3 );
+		avatar.translateZ( -3 );
 		updateCamera();
 
 	}
 
 	function turnRight() {
 
-		cube.rotation.z -= 0.1;
+		avatar.rotation.z -= 0.1;
 		updateCamera();
 
 	}
 
 	function turnLeft() {
 
-		cube.rotation.z += 0.1;
+		avatar.rotation.z += 0.1;
 		updateCamera();
 
 	}
@@ -900,7 +917,7 @@
 
 	function turnUp() {
 
-		cube.rotation.x += 0.1;
+		avatar.rotation.x += 0.1;
 		updateCamera();
 
 	}
@@ -908,7 +925,7 @@
 
 	function turnDown() {
 
-		cube.rotation.x -= 0.1;
+		avatar.rotation.x -= 0.1;
 		updateCamera();
 
 	}
@@ -916,8 +933,8 @@
 
 	function updateCamera() {
 
-		let cameraOffset = relativeCameraOffset.applyMatrix4( cube.matrixWorld );
-		cube.visible = true;
+		let cameraOffset = relativeCameraOffset.applyMatrix4( avatar.matrixWorld );
+		avatar.visible = true;
 
 	}
 
