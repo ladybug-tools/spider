@@ -32,7 +32,7 @@ h4 { margin: 0; }
 
 Sandbox
 
-#### [gbXML Guide]( #sandbox/gbxml-guide/README.md ) &raquo; [&#x1F5D7;]( sandbox/gbxml-guide/index.html )
+#### [gbXML User Guide]( #sandbox/gbxml-user-guide/README.md ) &raquo; [&#x1F5D7;]( sandbox/gbxml-guide/index.html )
 
 #### [build well qline]( #sandbox/build-well-qline/README.md) &raquo; [&#x1F5D7;]( http://www.ladybug.tools/spider/sandbox/build-well-qline/ "Run full screen" )
 

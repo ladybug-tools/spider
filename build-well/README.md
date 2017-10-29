@@ -11,10 +11,12 @@ _A well for building well._
 
 ## Full Screen dev release: [Build Well R13]( http://ladybug-tools.github.io/spider/build-well/dev/index.html )
 
+## Full Screen: [gbXML Sample File Viewer]( http://ladybug-tools.github.io/spider/sandbox/build-well-qline/build-well-gbxml-sample-files//index.html )
+
 Save these links
 
 * Build: <http://www.ladybug.tools/spider/build-well>
-* Dev: <http://www.ladybug.tools/spider/build-well/dev >
+* Dev: <http://www.ladybug.tools/spider/build-well/dev>
 
 ## Concept
 
