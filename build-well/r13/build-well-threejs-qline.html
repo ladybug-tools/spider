@@ -786,7 +786,7 @@
 
 		axesHelper = new THREE.AxesHelper( size * 0.05 );
 		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
-		axesHelper.material.linewidth = 10;
+		axesHelper.material.linewidth = 20;
 		axesHelper2 = new THREE.AxesHelper( size );
 		axesHelper2.material.linewidth = 2;
 
@@ -797,7 +797,6 @@
 		groundHelper.visible = false;
 
 		scene.add( cameraHelper, gridHelper, axesHelper, axesHelper2, groundHelper );
-
 
 		const geometry = new THREE.IcosahedronBufferGeometry( 0.01 * size, );
 		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
@@ -815,6 +814,7 @@
 		avatar.visible = false;
 
 		scene.add( avatar );
+
 
 	}
 

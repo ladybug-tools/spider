@@ -55,7 +55,6 @@
 			<select id = selZone onchange = getZoneData(buildings); size = 10 ></select>
 		</p>
 
-
 		<p title = 'Select a type for the zone/space' >Space Type: 
 			<select id = selSpaceType onchange = setSpaceType(buildings); size = 10 ></select>
 		</p>
@@ -106,10 +105,14 @@
 		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
 
 		let txt =
-			'<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>' +
+			'<p>To be done: Click on a zone to highlight the selected zone in the 3D model. Also cause any pre-designated space type to be selected.</p>' +
+			'<p>To be done: NES&W compass bearings will be added to the 3D model via this menu.</p>' +
+			'<p>To be done: Shapes to be centered. Any adjacent structures to show up here as well.</p>' +
+			'<p>Click any geometry in 3D model to highlight zone and space type in menu.</p>' +
 		'&#x1f578;';
 
-		divMenu.innerHTML += txt + txt;
+
+		divMenu.innerHTML += txt;
 
 		if ( parent && parent.ifrThree ) {
 
@@ -228,10 +231,11 @@ console.log( 'object', object );
 
 	function getZones( object, objects ) {
 
-console.log( 'object', object.children[ 0 ].geometry , building );
+//console.log( 'object', object.children[ 0 ].geometry , building );
 
 		const zonesPerStorey = object.children[ 0 ].geometry.vertices.length / 5;
-console.log( 'zonesPerStorey', zonesPerStorey );
+//console.log( 'zonesPerStorey', zonesPerStorey );
+
 		let zoneId = 1;
 
 		for ( let i = 0; i < building.floors; i++ ) {
