@@ -133,6 +133,10 @@
 			'</h3>' +
 		'';
 
+		divMenu.innerHTML += '<hr><p>To be split into menu for SI units and menu for USA </p>' +
+
+		'&#x1f578;';
+
 		if ( parent && parent.ifrThree ) {
 
 			scope = parent.ifrThree.contentWindow;
@@ -269,18 +273,20 @@
 		outNumberOfFloors.value = storeysNew;
 
 		building.box.length1 = lenNew;
-		rngLength1.value = lenNew;
-		outBuildingLength.value = lenNew.toFixed();
 
 		building.box.width1 = widNew;
-		rngWidth1.value = widNew
-		outBuildingWidth.value = widNew.toFixed();
 
 //		pChecksum.innerHTML = 'cecksum: ' + lenNew * widNew * storeysNew;
 
 		updateMenuExtras();
 
 		updateMeshes();
+
+		rngLength1.value = lenNew;
+		outBuildingLength.value = lenNew.toFixed();
+
+		rngWidth1.value = widNew
+		outBuildingWidth.value = widNew.toFixed();
 
 	}
 

@@ -52,12 +52,12 @@
 
 		<p title='x distance 1 to 200' >Building Length:
 			<output id=outBuildingLength class=floatRight ></output>
-			<input type="range" id="rngLength1" min=50 max=200 step=1 value=100 onchange=updateShape(); >
+			<input type="range" id="rngLength1" min=50 max=200 step=1 value=100 oninput=updateShape(); >
 		</p>
 
 		<p title='x distance 1 to 200' >Building Width:
 			<output id=outBuildingWidth class=floatRight ></output>
-			<input type="range" id="rngWidth1" min=50 max=200 step=1 value=100 onchange=updateShape(); >
+			<input style=display:none; type="range" id="rngWidth1" min=50 max=200 step=1 value=100 onchange=updateShape(); >
 		</p>
 
 
@@ -142,6 +142,10 @@
 				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
 			'</h3>' +
 		'';
+
+		divMenu.innerHTML += '<hr><p>Not yet at level of SI menu </p>' +
+
+		'&#x1f578;';
 
 		if ( parent && parent.ifrThree ) {
 

@@ -139,6 +139,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 * for opacities, materials: in the pipeline
 
 
+
 ## Change Log
 
 
@@ -146,7 +147,6 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 12:20
 * Update BW read me
-
 * build-well.html
 	* Add gh / link update text
 * build-well-threejs-qline.html
@@ -154,6 +154,8 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 	* T shape turned upside down
 * mnu-template.html
 	* fix select box sizing issue
+* mnu-zones added
+* mnu adjacent buildings added
 
 
 #### Code from Build Well qLine R2.3D forked here
@@ -164,26 +166,18 @@ All previous BW currently outstanding issues copied to here:
 
 * build-well.html / Build Well parent file
 	* 2017-10-14 ~ Improve small screen operation
-
-
 * build-well-threejs.html
 	* 2017-10-02 ~ Add ortho camera?
-
 * mnu-adjacent-buildings.html
 	* 2017-09-22 ~ Allow any and all buildings to have shape parameters?
 	* 2017-10-02 ~ Add multi-line select for shape selection?
-
 * mnu-box-shape.html
-
 * mnu-ell-shape-one.html
-
-
 * mnu-settings-site.html
 	* 2017-09-22 ~ geocoder input
 	* 2017-09-22 ~ Add shade/shadow toggle
 	* 2017-09-22 ~ Add solar calculator
 	* 2017-09-21 ~ Color, shade and shadow
-
 * mnu-settings-building.html
 	* 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
 		* Inworld text is a whole thing in itself. Add in only when very necessary
@@ -191,35 +185,24 @@ All previous BW currently outstanding issues copied to here:
 	* 2017-10-14 ~ Opacity Slider
 	* 2017-10-14 ~ Overhangs color different than color of walls etc
 	* 2017-10-14 ~ Show Perimeter Depth arrows
-
 * mnu-hud.html
 	* 2017-09-30 ~ Add selecting, moving and editing buildings via pointing device
-
 * mnu-settings-spaces.html
 	* 2017-10-14 ~ Round the numbers
 	* 2017-10-14 ~ Update building data when you select a space type
 	* 2017-10-14 ~ Highlight the space in 3D when you select a space in the menu 
-
 * mnu-gbxml-export.html
 	* 2017-10-11 ~ Export diagonal walls - yes
 	* 2017-10-14 ~ Export individuated, manifold spaces
 	* 2017-10-05 ~ Export fin data
 	* 2017-10-05 ~ Enable changing building orientation
-
 * mnu-real-time-report.html
 	* 2017-10-14 ~ Grab the data in real-time from the 3d model currently in play
-
 * mnu-template.html
-
-
 * mnu-settings-zone.html
 	* in the pipeline
-
 * mnu-settings-building.html
-
 	* for opacities, materials: in the pipeline
-
-
 
 
 
