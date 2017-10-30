@@ -1,0 +1,915 @@
+{
+   "completed_at" : "20171030T223213Z",
+   "completed_status" : "Success",
+   "created_at" : "20171030T223028Z",
+   "current_step" : 1,
+   "eplusout_err" : "Program Version,EnergyPlus, Version 8.8.0-7c3bbe4830, YMD=2017.10.30 15:32,IDD_Version 8.8.0\n   ** Warning ** CheckEnvironmentSpecifications: SimulationControl specified doing design day simulations, but no design environments specified.\n   **   ~~~   ** ...No design environment results produced. For these results, add appropriate SizingPeriod:* objects for your simulation.\n   ** Warning ** Output:Meter: invalid Key Name=\"ELECTRICITY:FACILITY\" - not found.\n   ** Warning ** Output:Meter: invalid Key Name=\"GAS:FACILITY\" - not found.\n   ** Warning ** Output:Meter: invalid Key Name=\"DISTRICTCOOLING:FACILITY\" - not found.\n   ** Warning ** Output:Meter: invalid Key Name=\"DISTRICTHEATING:FACILITY\" - not found.\n   ** Warning ** Output:Meter:MeterFileOnly: invalid Key Name=\"GAS:FACILITY\" - not found.\n   ** Warning ** Output:Meter:MeterFileOnly: invalid Key Name=\"ELECTRICITY:FACILITY\" - not found.\n   ** Warning ** Output:Meter:MeterFileOnly: invalid Key Name=\"ELECTRICITY:FACILITY\" - not found.\n   ************* Testing Individual Branch Integrity\n   ************* All Branches passed integrity testing\n   ************* Testing Individual Supply Air Path Integrity\n   ************* All Supply Air Paths passed integrity testing\n   ************* Testing Individual Return Air Path Integrity\n   ************* All Return Air Paths passed integrity testing\n   ************* No node connection errors were found.\n   ************* Beginning Simulation\n   ** Warning ** Processing Monthly Tabular Reports: Variable names not valid for this simulation\n   **   ~~~   ** ...use Output:Diagnostics,DisplayExtraWarnings; to show more details on individual variables.\n   ** Warning ** The resource referenced by LifeCycleCost:UsePriceEscalation= \"U.S. AVG  COMMERCIAL-ELECTRICITY\" has no energy cost. \n   **   ~~~   ** ... It is likely that the wrong resource is used. The resource should match the meter used in Utility:Tariff.\n   ** Warning ** The resource referenced by LifeCycleCost:UsePriceEscalation= \"U.S. AVG  COMMERCIAL-DISTILLATE OIL\" has no energy cost. \n   **   ~~~   ** ... It is likely that the wrong resource is used. The resource should match the meter used in Utility:Tariff.\n   ** Warning ** The resource referenced by LifeCycleCost:UsePriceEscalation= \"U.S. AVG  COMMERCIAL-RESIDUAL OIL\" has no energy cost. \n   **   ~~~   ** ... It is likely that the wrong resource is used. The resource should match the meter used in Utility:Tariff.\n   ** Warning ** The resource referenced by LifeCycleCost:UsePriceEscalation= \"U.S. AVG  COMMERCIAL-NATURAL GAS\" has no energy cost. \n   **   ~~~   ** ... It is likely that the wrong resource is used. The resource should match the meter used in Utility:Tariff.\n   ** Warning ** The resource referenced by LifeCycleCost:UsePriceEscalation= \"U.S. AVG  COMMERCIAL-COAL\" has no energy cost. \n   **   ~~~   ** ... It is likely that the wrong resource is used. The resource should match the meter used in Utility:Tariff.\n   ************* Simulation Error Summary *************\n   ** Warning ** The following Report Variables were requested but not generated -- check.rdd file\n   **   ~~~   ** Either the IDF did not contain these elements, the variable name is misspelled,\n   **   ~~~   ** or the requested variable is an advanced output which requires Output : Diagnostics, DisplayAdvancedReportVariables;\n   ************* Key=*, VarName=ZONE AIR TEMPERATURE, Frequency=Hourly\n   ************* Key=*, VarName=ZONE AIR RELATIVE HUMIDITY, Frequency=Hourly\n   ************* Key=*, VarName=ZONE AIR RELATIVE HUMIDITY, Frequency=Daily\n   ************* There are 3 unused schedules in input.\n   ************* There are 3 unused week schedules in input.\n   ************* There are 3 unused day schedules in input.\n   ************* Use Output:Diagnostics,DisplayUnusedSchedules; to see them.\n   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.\n   ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.\n   ************* EnergyPlus Completed Successfully-- 15 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.33sec\n",
+   "hash" : "1C46FC39",
+   "seed_file" : "../test.osm",
+   "started_at" : "20171030T223151Z",
+   "steps" : [
+      {
+         "arguments" : {},
+         "description" : "This measure creates high level tables and charts pulling both from model inputs and EnergyPlus results. It has building level information as well as detail on space types, thermal zones, HVAC systems, envelope characteristics, and economics. Click the heading above a chart to view a table of the chart data.",
+         "measure_dir_name" : "OpenStudioResults",
+         "modeler_description" : "For the most part consumption data comes from the tabular EnergyPlus results, however there are a few requests added for time series results. Space type and loop details come from the OpenStudio model. The code for this is modular, making it easy to use as a template for your own custom reports. The structure of the report uses bootstrap, and the graphs use dimple js.",
+         "name" : "OpenStudio Results",
+         "result" : {
+            "completed_at" : "20171030T223211Z",
+            "measure_class_name" : "OpenStudioResults",
+            "measure_display_name" : "OpenStudio Results",
+            "measure_name" : "openstudio_results",
+            "measure_taxonomy" : "Reporting.QAQC",
+            "measure_type" : "ReportingMeasure",
+            "measure_uid" : "a25386cd-60e4-46bc-8b11-c755f379d916",
+            "measure_version_id" : "861c42ba-2105-49e6-b727-9fc3567f4834",
+            "measure_version_modified" : "20170323T160651Z",
+            "measure_xml_checksum" : "557BF06F",
+            "started_at" : "20171030T223209Z",
+            "stderr" : "",
+            "stdout" : "",
+            "step_errors" : [],
+            "step_files" : [
+               "C:/Users/tarmo/AppData/Local/Temp/OpenStudioApp.k11880/resources/run/000_OpenStudioResults/report.html"
+            ],
+            "step_final_condition" : "Generated report with 21 sections to ./report.html.",
+            "step_info" : [],
+            "step_initial_condition" : "Gathering data from EnergyPlus SQL file and OSM model.",
+            "step_result" : "Success",
+            "step_values" : [
+               {
+                  "name" : "building_summary_section",
+                  "value" : true
+               },
+               {
+                  "name" : "annual_overview_section",
+                  "value" : true
+               },
+               {
+                  "name" : "monthly_overview_section",
+                  "value" : true
+               },
+               {
+                  "name" : "utility_bills_rates_section",
+                  "value" : true
+               },
+               {
+                  "name" : "envelope_section_section",
+                  "value" : true
+               },
+               {
+                  "name" : "space_type_breakdown_section",
+                  "value" : true
+               },
+               {
+                  "name" : "space_type_details_section",
+                  "value" : true
+               },
+               {
+                  "name" : "interior_lighting_section",
+                  "value" : true
+               },
+               {
+                  "name" : "plug_loads_section",
+                  "value" : true
+               },
+               {
+                  "name" : "exterior_light_section",
+                  "value" : true
+               },
+               {
+                  "name" : "water_use_section",
+                  "value" : true
+               },
+               {
+                  "name" : "hvac_load_profile",
+                  "value" : true
+               },
+               {
+                  "name" : "zone_condition_section",
+                  "value" : true
+               },
+               {
+                  "name" : "zone_summary_section",
+                  "value" : true
+               },
+               {
+                  "name" : "zone_equipment_detail_section",
+                  "value" : true
+               },
+               {
+                  "name" : "air_loops_detail_section",
+                  "value" : true
+               },
+               {
+                  "name" : "plant_loops_detail_section",
+                  "value" : true
+               },
+               {
+                  "name" : "outdoor_air_section",
+                  "value" : true
+               },
+               {
+                  "name" : "cost_summary_section",
+                  "value" : true
+               },
+               {
+                  "name" : "source_energy_section",
+                  "value" : true
+               },
+               {
+                  "name" : "schedules_overview_section",
+                  "value" : true
+               },
+               {
+                  "display_name" : "Building 1",
+                  "name" : "building_name",
+                  "value" : "building_name"
+               },
+               {
+                  "name" : "net_site_energy",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "total_building_area",
+                  "units" : "ft^2",
+                  "value" : 0
+               },
+               {
+                  "name" : "unmet_hours_during_heating",
+                  "units" : "hr",
+                  "value" : 0
+               },
+               {
+                  "name" : "unmet_hours_during_cooling",
+                  "units" : "hr",
+                  "value" : 0
+               },
+               {
+                  "name" : "unmet_hours_during_occupied_heating",
+                  "units" : "hr",
+                  "value" : 0
+               },
+               {
+                  "name" : "unmet_hours_during_occupied_cooling",
+                  "units" : "hr",
+                  "value" : 0
+               },
+               {
+                  "name" : "unmet_hours_tolerance_heating",
+                  "units" : "F",
+                  "value" : 0.35999999999999999
+               },
+               {
+                  "name" : "unmet_hours_tolerance_cooling",
+                  "units" : "F",
+                  "value" : 0.35999999999999999
+               },
+               {
+                  "name" : "end_use_heating",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_cooling",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_interior_lighting",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_exterior_lighting",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_interior_equipment",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_exterior_equipment",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_fans",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_pumps",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_heat_rejection",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_humidification",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_heat_recovery",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_water_systems",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_refrigeration",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_generators",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "fuel_electricity",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "fuel_natural_gas",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "fuel_additional_fuel",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "fuel_district_cooling",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "fuel_district_heating",
+                  "units" : "kBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_heating",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_cooling",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_interior_lighting",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_exterior_lighting",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_interior_equipment",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_exterior_equipment",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_fans",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_pumps",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_heat_rejection",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_humidification",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_heat_recovery",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_water_systems",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_refrigeration",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_electricity_generators",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_heating",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_cooling",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_interior_lighting",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_exterior_lighting",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_interior_equipment",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_exterior_equipment",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_fans",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_pumps",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_heat_rejection",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_humidification",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_heat_recovery",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_water_systems",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_refrigeration",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "end_use_natural_gas_generators",
+                  "units" : "therms",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_heating_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_cooling_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_interior_lighting_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_exterior_lighting_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_interior_equipment_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_exterior_equipment_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_fans_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_pumps_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_heat_rejection_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_humidification_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_heat_recovery_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_water_systems_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_refrigeration_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_generators_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "electricity_ip",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_heating_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_cooling_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_interior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_exterior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_interior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_exterior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_fans_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_pumps_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_heat_rejection_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_humidification_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_heat_recovery_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_water_systems_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_refrigeration_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_generators_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "natural_gas_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_heating_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_cooling_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_interior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_exterior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_interior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_exterior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_fans_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_pumps_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_heat_rejection_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_humidification_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_heat_recovery_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_water_systems_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_refrigeration_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_generators_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "additional_fuel_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_heating_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_cooling_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_interior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_exterior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_interior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_exterior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_fans_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_pumps_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_heat_rejection_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_humidification_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_heat_recovery_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_water_systems_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_refrigeration_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_generators_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_cooling_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_heating_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_cooling_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_interior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_exterior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_interior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_exterior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_fans_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_pumps_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_heat_rejection_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_humidification_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_heat_recovery_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_water_systems_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_refrigeration_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_generators_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "district_heating_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_heating_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_cooling_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_interior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_exterior_lighting_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_interior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_exterior_equipment_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_fans_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_pumps_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_heat_rejection_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_humidification_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_heat_recovery_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_water_systems_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_refrigeration_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_generators_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "water_ip",
+                  "units" : "MBtu",
+                  "value" : 0
+               },
+               {
+                  "name" : "gross_window_wall_ratio",
+                  "units" : "%",
+                  "value" : 0
+               },
+               {
+                  "name" : "gross_window_wall_ratio_conditioned",
+                  "units" : "%",
+                  "value" : 0
+               },
+               {
+                  "name" : "skylight_roof_ratio",
+                  "units" : "%",
+                  "value" : 0
+               },
+               {
+                  "name" : "exterior_lighting_total_power",
+                  "units" : "W",
+                  "value" : 0
+               },
+               {
+                  "name" : "exterior_lighting_total_consumption",
+                  "units" : "kWh",
+                  "value" : 0
+               },
+               {
+                  "name" : "inflation_approach",
+                  "value" : "Constant Dollar"
+               },
+               {
+                  "name" : "analysis_length",
+                  "units" : "yrs",
+                  "value" : 25
+               },
+               {
+                  "name" : "annual_peak_electric_demand",
+                  "units" : "kW",
+                  "value" : 0
+               },
+               {
+                  "name" : "first_year_capital_cost",
+                  "units" : "$",
+                  "value" : 0
+               },
+               {
+                  "name" : "annual_utility_cost",
+                  "units" : "$",
+                  "value" : 0
+               },
+               {
+                  "name" : "total_lifecycle_cost",
+                  "units" : "$",
+                  "value" : 0
+               }
+            ],
+            "step_warnings" : []
+         }
+      }
+   ],
+   "updated_at" : "20171030T223213Z",
+   "weather_file" : "USA_CA_San.Francisco.724940_TMY2.epw"
+}

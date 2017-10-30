@@ -1,0 +1,3937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenStudio Results</title>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
+  <script type="text/javascript" src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
+  <style>
+      body {
+          position: relative;
+          height: 100%;
+      }
+
+      div.col-md-3 {
+          padding-left: 0;
+      }
+
+      #tocItems {
+          margin-top: 40px;
+          z-index: 1;
+      }
+
+      #tocItems > .nav > li > a {
+          padding-top: 4px;
+          padding-bottom: 4px;
+      }
+
+      .btn {
+          margin: 0 3px;
+      }
+
+      .bs-docs-sidebar.affix {
+          margin-left: 15px;
+          position: static;
+      }
+
+      .bs-docs-sidebar.well {
+          padding: 0;
+      }
+
+      /* sidebar */
+      .bs-docs-sidebar {
+          padding-left: 20px;
+          padding-bottom: 20px;
+      }
+
+      /* Show and affix the side nav when space allows it */
+      @media (min-width: 992px) {
+          .bs-docs-sidebar .nav > .active > ul {
+              display: block;
+          }
+
+          /* Widen the fixed sidebar */
+          .bs-docs-sidebar.affix,
+          .bs-docs-sidebar.affix-bottom {
+              width: 213px;
+          }
+
+          .bs-docs-sidebar.affix {
+              position: fixed; /* Undo the static from mobile first approach */
+          }
+
+          .bs-docs-sidebar.affix-bottom {
+              position: absolute; /* Undo the static from mobile first approach */
+          }
+      }
+
+      @media (min-width: 1200px) {
+          /* Widen the fixed sidebar again */
+          .bs-docs-sidebar.affix-bottom,
+          .bs-docs-sidebar.affix {
+              width: 263px;
+          }
+      }
+
+      /* make sidebar scrollable */
+      .bs-docs-sidebar > ul {
+          overflow-y: auto;
+          height: 85vh;
+          padding: 10px;
+      }
+
+      @media (max-width: 991px) {
+          #tocItems {
+              margin-top: 10px;
+          }
+
+          .bs-docs-sidebar > ul {
+              max-height: 300px;
+          }
+      }
+  </style>
+  <script type="text/javascript">
+      // This variable will be an array of graph data
+      var nine = null;
+  </script>
+</head>
+<body data-spy="scroll" data-target="#tocItems">
+<div id="content" class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div id="tocItems" class="bs-docs-sidebar hidden-print well affix" role="complementary">
+        <ul class="nav nav-pills nav-stacked" role="navigation">
+          
+              
+              <li><a href="#Model_Summary">Model Summary</a></li>
+          
+              
+              <li><a href="#Annual_Overview">Annual Overview</a></li>
+          
+              
+              <li><a href="#Monthly_Overview">Monthly Overview</a></li>
+          
+              
+              <li><a href="#Utility_Bills_Rates">Utility Bills/Rates</a></li>
+          
+              
+              <li><a href="#Envelope">Envelope</a></li>
+          
+              
+              <li><a href="#Space_Type_Breakdown">Space Type Breakdown</a></li>
+          
+              
+              <li><a href="#Space_Type_Summary">Space Type Summary</a></li>
+          
+              
+              <li><a href="#Interior_Lighting_Summary">Interior Lighting Summary</a></li>
+          
+              
+              <li><a href="#Plug_Loads_Summary">Plug Loads Summary</a></li>
+          
+              
+              <li><a href="#Exterior_Lighting">Exterior Lighting</a></li>
+          
+              
+              <li><a href="#Water_Use_Equipment">Water Use Equipment</a></li>
+          
+              
+              <li><a href="#HVAC_Load_Profiles">HVAC Load Profiles</a></li>
+          
+              
+              <li><a href="#Zone_Conditions">Zone Conditions</a></li>
+          
+              
+              <li><a href="#Zone_Overview">Zone Overview</a></li>
+          
+              
+              <li><a href="#Zone_Equipment_Detail">Zone Equipment Detail</a></li>
+          
+              
+              <li><a href="#Air_Loops_Detail">Air Loops Detail</a></li>
+          
+              
+              <li><a href="#Plant_Loops_Detail">Plant Loops Detail</a></li>
+          
+              
+              <li><a href="#Outdoor_Air">Outdoor Air</a></li>
+          
+              
+              <li><a href="#Cash_Flow">Cash Flow</a></li>
+          
+              
+              <li><a href="#Site_and_Source_Summary">Site and Source Summary</a></li>
+          
+              
+              <li><a href="#Schedule_Overview">Schedule Overview</a></li>
+          
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <h1>OpenStudio Results</h1>
+      
+      
+
+          
+          <h2 id="Model_Summary">Model Summary</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_0 aria-expanded="false" aria-controls=table_0>
+                
+                
+                    Building Summary
+                    
+                
+              </button>
+              <div class="in" id=table_0>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Information</th>
+                        
+                    
+                        
+                            <th>Value</th>
+                        
+                    
+                        
+                            <th>Units</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Building Name</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>Building 1</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>building_name</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Net Site Energy</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>kBtu</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Total Building Area</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>ft^2</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>EUI (Based on Net Site Energy and Total Building Area)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>can't calculate EUI.</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>kBtu/ft^2</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>OpenStudio Standards Building Type</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_1 aria-expanded="false" aria-controls=table_1>
+                
+                
+                    Weather Summary
+                    
+                
+              </button>
+              <div class="in" id=table_1>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Value</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Weather File</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>SAN_FRANCISCO CA USA TMY2-23234 WMO#=724940</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Latitude</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>       37.62</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Longitude</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>      -122.4</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Elevation</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>16 (ft)</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Time Zone</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>        -8.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>North Axis Angle</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>        0.00</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>ASHRAE Climate Zone</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_2 aria-expanded="false" aria-controls=table_2>
+                
+                
+                    Sizing Period Design Days
+                    
+                
+              </button>
+              <div class="in" id=table_2>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Maximum Dry Bulb (F)</th>
+                        
+                    
+                        
+                            <th>Daily Temperature Range (R)</th>
+                        
+                    
+                        
+                            <th>Humidity Value</th>
+                        
+                    
+                        
+                            <th>Humidity Type</th>
+                        
+                    
+                        
+                            <th>Wind Speed (mph)</th>
+                        
+                    
+                        
+                            <th>Wind Direction</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>None</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>32.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_3 aria-expanded="false" aria-controls=table_3>
+                
+                
+                    Unmet Hours Summary
+                    
+                
+              </button>
+              <div class="in" id=table_3>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Time Setpoint Not Met</th>
+                        
+                    
+                        
+                            <th>Time (hr)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>During Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>During Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>During Occupied Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>During Occupied Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_4 aria-expanded="false" aria-controls=table_4>
+                
+                
+                    Unmet Hours Tolerance
+                    
+                
+              </button>
+              <div class="in" id=table_4>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Tolerance for Time Setpoint Not Met</th>
+                        
+                    
+                        
+                            <th>Temperature (F)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.36</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.36</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Annual_Overview">Annual Overview</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_5 aria-expanded="false" aria-controls=table_5>
+                
+                
+                    End Use - view table
+                    
+                
+              </button>
+              <div class="collapse" id=table_5>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>End Use</th>
+                        
+                    
+                        
+                            <th>Consumption (kBtu)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Interior Lighting</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Exterior Lighting</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Interior Equipment</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Exterior Equipment</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Fans</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Pumps</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heat Rejection</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Humidification</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heat Recovery</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Water Systems</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Refrigeration</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Generators</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+                  
+                  <div id="chartContainer_1">
+                    <script type="text/javascript">
+
+                        
+                          var svg = dimple.newSvg("#chartContainer_1", 500, 240);
+                          var data = [];
+                          var myChart = new dimple.chart(svg, data);
+                          myChart.setBounds(0, 40, 200, 200);
+                          myChart.addMeasureAxis("p", "value");
+                          myChart.addSeries("label", dimple.plot.pie);
+                          myChart.addLegend(225, 50, 175, 180, "left");
+                        
+
+                        
+                        myChart.draw();
+                    </script>
+                  </div>
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_6 aria-expanded="false" aria-controls=table_6>
+                
+                
+                    Energy Use - view table
+                    
+                
+              </button>
+              <div class="collapse" id=table_6>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Fuel</th>
+                        
+                    
+                        
+                            <th>Consumption (kBtu)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Electricity</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Natural Gas</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Additional Fuel</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>District Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>District Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+                  
+                  <div id="chartContainer_2">
+                    <script type="text/javascript">
+
+                        
+                          var svg = dimple.newSvg("#chartContainer_2", 500, 240);
+                          var data = [];
+                          var myChart = new dimple.chart(svg, data);
+                          myChart.setBounds(0, 40, 200, 200);
+                          myChart.addMeasureAxis("p", "value");
+                          myChart.addSeries("label", dimple.plot.pie);
+                          myChart.addLegend(225, 50, 175, 180, "left");
+                        
+
+                        
+                        myChart.draw();
+                    </script>
+                  </div>
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_7 aria-expanded="false" aria-controls=table_7>
+                
+                
+                    EUI - Electricity - view table
+                    
+                
+              </button>
+              <div class="collapse" id=table_7>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>End Use</th>
+                        
+                    
+                        
+                            <th>Consumption (kWh)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Interior Lighting</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Exterior Lighting</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Interior Equipment</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Exterior Equipment</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Fans</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Pumps</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heat Rejection</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Humidification</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heat Recovery</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Water Systems</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Refrigeration</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Generators</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+                  
+                  <div id="chartContainer_3">
+                    <script type="text/javascript">
+
+                        
+                          var svg = dimple.newSvg("#chartContainer_3", 500, 240);
+                          var data = [];
+                          var myChart = new dimple.chart(svg, data);
+                          myChart.setBounds(0, 40, 200, 200);
+                          myChart.addMeasureAxis("p", "value");
+                          myChart.addSeries("label", dimple.plot.pie);
+                          myChart.addLegend(225, 50, 175, 180, "left");
+                        
+
+                        
+                        myChart.draw();
+                    </script>
+                  </div>
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_8 aria-expanded="false" aria-controls=table_8>
+                
+                
+                    EUI - Gas - view table
+                    
+                
+              </button>
+              <div class="collapse" id=table_8>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>End Use</th>
+                        
+                    
+                        
+                            <th>Consumption (therms)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Interior Lighting</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Exterior Lighting</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Interior Equipment</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Exterior Equipment</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Fans</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Pumps</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heat Rejection</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Humidification</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heat Recovery</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Water Systems</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Refrigeration</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Generators</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+                  
+                  <div id="chartContainer_4">
+                    <script type="text/javascript">
+
+                        
+                          var svg = dimple.newSvg("#chartContainer_4", 500, 240);
+                          var data = [];
+                          var myChart = new dimple.chart(svg, data);
+                          myChart.setBounds(0, 40, 200, 200);
+                          myChart.addMeasureAxis("p", "value");
+                          myChart.addSeries("label", dimple.plot.pie);
+                          myChart.addLegend(225, 50, 175, 180, "left");
+                        
+
+                        
+                        myChart.draw();
+                    </script>
+                  </div>
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Monthly_Overview">Monthly Overview</h2>
+
+          
+              <h5><i>No Data to Show for Monthly Overview</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Utility_Bills_Rates">Utility Bills/Rates</h2>
+
+          
+              <h5><i>No Data to Show for Utility Bills/Rates</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Envelope">Envelope</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_9 aria-expanded="false" aria-controls=table_9>
+                
+                
+                    Base Surface Constructions
+                    
+                
+              </button>
+              <div class="in" id=table_9>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Construction</th>
+                        
+                    
+                        
+                            <th>Net Area (ft^2)</th>
+                        
+                    
+                        
+                            <th>Surface Count</th>
+                        
+                    
+                        
+                            <th>R Value (ft^2*h*R/Btu)</th>
+                        
+                    
+                  </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_10 aria-expanded="false" aria-controls=table_10>
+                
+                
+                    Sub Surface Constructions
+                    
+                
+              </button>
+              <div class="in" id=table_10>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Construction</th>
+                        
+                    
+                        
+                            <th>Area (ft^2)</th>
+                        
+                    
+                        
+                            <th>Surface Count</th>
+                        
+                    
+                        
+                            <th>U-Factor (Btu/ft^2*h*R)</th>
+                        
+                    
+                  </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_11 aria-expanded="false" aria-controls=table_11>
+                
+                
+                    WWR & Skylight Ratio
+                    
+                
+              </button>
+              <div class="in" id=table_11>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Description</th>
+                        
+                    
+                        
+                            <th>Total (%)</th>
+                        
+                    
+                        
+                            <th>North (%)</th>
+                        
+                    
+                        
+                            <th>East (%)</th>
+                        
+                    
+                        
+                            <th>South (%)</th>
+                        
+                    
+                        
+                            <th>West (%)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Gross Window-Wall Ratio</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Gross Window-Wall Ratio (Conditioned)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Skylight-Roof Ratio</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Space_Type_Breakdown">Space Type Breakdown</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_12 aria-expanded="false" aria-controls=table_12>
+                
+                
+                    Space Type Breakdown - view table
+                    
+                
+              </button>
+              <div class="collapse" id=table_12>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Space Type Name</th>
+                        
+                    
+                        
+                            <th>Floor Area (ft^2)</th>
+                        
+                    
+                        
+                            <th>Standards Building Type</th>
+                        
+                    
+                        
+                            <th>Standards Space Type</th>
+                        
+                    
+                  </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+                  
+                  <div id="chartContainer_5">
+                    <script type="text/javascript">
+
+                        
+                          var svg = dimple.newSvg("#chartContainer_5", 500, 240);
+                          var data = [];
+                          var myChart = new dimple.chart(svg, data);
+                          myChart.setBounds(0, 40, 200, 200);
+                          myChart.addMeasureAxis("p", "value");
+                          myChart.addSeries("label", dimple.plot.pie);
+                          myChart.addLegend(225, 50, 175, 180, "left");
+                        
+
+                        
+                        myChart.draw();
+                    </script>
+                  </div>
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Space_Type_Summary">Space Type Summary</h2>
+
+          
+              <h5><i>No Data to Show for Space Type Summary</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Interior_Lighting_Summary">Interior Lighting Summary</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_13 aria-expanded="false" aria-controls=table_13>
+                
+                
+                    Interior Lighting Summary
+                    
+                
+              </button>
+              <div class="in" id=table_13>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Zone</th>
+                        
+                    
+                        
+                            <th>Lighting Power Density (W/ft^2)</th>
+                        
+                    
+                        
+                            <th>Total Power (W)</th>
+                        
+                    
+                        
+                            <th>Schedule Name</th>
+                        
+                    
+                        
+                            <th>Scheduled Hours/Week (hr)</th>
+                        
+                    
+                        
+                            <th>Actual Load Hours/Week (hr)</th>
+                        
+                    
+                        
+                            <th>Return Air Fraction</th>
+                        
+                    
+                        
+                            <th>Annual Consumption (kWh)</th>
+                        
+                    
+                  </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Plug_Loads_Summary">Plug Loads Summary</h2>
+
+          
+              <h5><i>No Data to Show for Plug Loads Summary</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Exterior_Lighting">Exterior Lighting</h2>
+
+          
+              <h5><i>No Data to Show for Exterior Lighting</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Water_Use_Equipment">Water Use Equipment</h2>
+
+          
+              <h5><i>No Data to Show for Water Use Equipment</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="HVAC_Load_Profiles">HVAC Load Profiles</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_14 aria-expanded="false" aria-controls=table_14>
+                
+                
+                    Monthly Load Profiles - view table
+                    
+                
+              </button>
+              <div class="collapse" id=table_14>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Jan</th>
+                        
+                    
+                        
+                            <th>Feb</th>
+                        
+                    
+                        
+                            <th>Mar</th>
+                        
+                    
+                        
+                            <th>Apr</th>
+                        
+                    
+                        
+                            <th>May</th>
+                        
+                    
+                        
+                            <th>Jun</th>
+                        
+                    
+                        
+                            <th>Jul</th>
+                        
+                    
+                        
+                            <th>Aug</th>
+                        
+                    
+                        
+                            <th>Sep</th>
+                        
+                    
+                        
+                            <th>Oct</th>
+                        
+                    
+                        
+                            <th>Nov</th>
+                        
+                    
+                        
+                            <th>Dec</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Average Outdoor Air Dry Bulb (F)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>47.6</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>52.3</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>51.4</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>54.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>56.8</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>58.5</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>60.9</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>61.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>62.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>59.1</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>54.3</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>48.5</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Cooling Load (MBtu)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Heating Load (MBtu)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+                  
+                  <div id="chartContainer_6">
+                    <script type="text/javascript">
+                        var svg = dimple.newSvg("#chartContainer_6", 1150, 400);
+                        var data = [{"label":"Outdoor Temp","label_x":"Jan","value2":47.56899193548379,"color":"green"},{"label":"Outdoor Temp","label_x":"Feb","value2":52.34042410714281,"color":"green"},{"label":"Outdoor Temp","label_x":"Mar","value2":51.432036290322486,"color":"green"},{"label":"Outdoor Temp","label_x":"Apr","value2":54.03224999999997,"color":"green"},{"label":"Outdoor Temp","label_x":"May","value2":56.8434677419354,"color":"green"},{"label":"Outdoor Temp","label_x":"Jun","value2":58.535999999999916,"color":"green"},{"label":"Outdoor Temp","label_x":"Jul","value2":60.93139112903222,"color":"green"},{"label":"Outdoor Temp","label_x":"Aug","value2":60.999899193548266,"color":"green"},{"label":"Outdoor Temp","label_x":"Sep","value2":62.00693749999995,"color":"green"},{"label":"Outdoor Temp","label_x":"Oct","value2":59.09217741935479,"color":"green"},{"label":"Outdoor Temp","label_x":"Nov","value2":54.27079166666664,"color":"green"},{"label":"Outdoor Temp","label_x":"Dec","value2":48.53945564516127,"color":"green"},{"label":"Cooling Load","label_x":"Jan","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Feb","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Mar","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Apr","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"May","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Jun","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Jul","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Aug","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Sep","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Oct","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Nov","value":0.0,"color":"#0071BD"},{"label":"Cooling Load","label_x":"Dec","value":0.0,"color":"#0071BD"},{"label":"Heating Load","label_x":"Jan","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Feb","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Mar","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Apr","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"May","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Jun","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Jul","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Aug","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Sep","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Oct","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Nov","value":0.0,"color":"#EF1C21"},{"label":"Heating Load","label_x":"Dec","value":0.0,"color":"#EF1C21"}];
+                        var myChart = new dimple.chart(svg, data);
+                        myChart.setBounds(50, 20, 800, 300);
+                        var x = myChart.addCategoryAxis("x", ["label_x", "label"]);
+                        
+                        x.addOrderRule(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
+                        
+                        var y = myChart.addMeasureAxis("y", "value");
+                        var y2 = myChart.addMeasureAxis("y", "value2");
+                        var left = myChart.addSeries("label", dimple.plot.bar, [x, y]);
+                        var right = myChart.addSeries("label", dimple.plot.line, [x, y2]);
+                        right.lineMarkers = false;
+                        right.interpolation = "linear";
+                        myChart.addLegend(950, 200, 125, 300, "left");
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Outdoor Temp', 'green', 'green', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Cooling Load', '#0071BD', '#0071BD', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        
+                        myChart.assignColor('Heating Load', '#EF1C21', '#EF1C21', 1);
+                        
+                        myChart.draw();
+                        x.titleShape.text('Month');
+                        y.titleShape.text('Cooling/Heating Load (MBtu)');
+                        y2.titleShape.text('Average Outdoor Air Dry Bulb (F)');
+                    </script>
+                  </div>
+              
+
+          
+
+      
+
+          
+          <h2 id="Zone_Conditions">Zone Conditions</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_15 aria-expanded="false" aria-controls=table_15>
+                
+                
+                    Temperature (Table values represent hours spent in each temperature range)
+                    
+                
+              </button>
+              <div class="in" id=table_15>
+                <div class="well">
+                  
+                      <table class="table table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Zone</th>
+                        
+                    
+                        
+                            <th>Unmet Htg (hr)</th>
+                        
+                    
+                        
+                            <th>Unmet Htg - Occ (hr)</th>
+                        
+                    
+                        
+                            <th>< 56 (F)</th>
+                        
+                    
+                        
+                            <th>56-61 (F)</th>
+                        
+                    
+                        
+                            <th>61-66 (F)</th>
+                        
+                    
+                        
+                            <th>66-68 (F)</th>
+                        
+                    
+                        
+                            <th>68-70 (F)</th>
+                        
+                    
+                        
+                            <th>70-72 (F)</th>
+                        
+                    
+                        
+                            <th>72-74 (F)</th>
+                        
+                    
+                        
+                            <th>74-76 (F)</th>
+                        
+                    
+                        
+                            <th>76-78 (F)</th>
+                        
+                    
+                        
+                            <th>78-83 (F)</th>
+                        
+                    
+                        
+                            <th>83-88 (F)</th>
+                        
+                    
+                        
+                            <th>>= 88 (F)</th>
+                        
+                    
+                        
+                            <th>Unmet Clg (hr)</th>
+                        
+                    
+                        
+                            <th>Unmet Clg - Occ (hr)</th>
+                        
+                    
+                        
+                            <th>Mean Temp (F)</th>
+                        
+                    
+                  </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_16 aria-expanded="false" aria-controls=table_16>
+                
+                
+                    Humidity (Table values represent hours spent in each Humidity range)
+                    
+                
+              </button>
+              <div class="in" id=table_16>
+                <div class="well">
+                  
+                      <table class="table table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Zone</th>
+                        
+                    
+                        
+                            <th>< 30 (%)</th>
+                        
+                    
+                        
+                            <th>30-35 (%)</th>
+                        
+                    
+                        
+                            <th>35-40 (%)</th>
+                        
+                    
+                        
+                            <th>40-45 (%)</th>
+                        
+                    
+                        
+                            <th>45-50 (%)</th>
+                        
+                    
+                        
+                            <th>50-55 (%)</th>
+                        
+                    
+                        
+                            <th>55-60 (%)</th>
+                        
+                    
+                        
+                            <th>60-65 (%)</th>
+                        
+                    
+                        
+                            <th>65-70 (%)</th>
+                        
+                    
+                        
+                            <th>70-75 (%)</th>
+                        
+                    
+                        
+                            <th>75-80 (%)</th>
+                        
+                    
+                        
+                            <th>>= 80 (%)</th>
+                        
+                    
+                        
+                            <th>Mean Relative Humidity (%)</th>
+                        
+                    
+                  </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Zone_Overview">Zone Overview</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_17 aria-expanded="false" aria-controls=table_17>
+                
+                
+                    Zone Summary
+                    
+                
+              </button>
+              <div class="in" id=table_17>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Area (ft^2)</th>
+                        
+                    
+                        
+                            <th>Conditioned (Y/N)</th>
+                        
+                    
+                        
+                            <th>Part of Total Floor Area (Y/N)</th>
+                        
+                    
+                        
+                            <th>Volume (ft^3)</th>
+                        
+                    
+                        
+                            <th>Multiplier</th>
+                        
+                    
+                        
+                            <th>Above Ground Gross Wall Area (ft^2)</th>
+                        
+                    
+                        
+                            <th>Underground Gross Wall Area (ft^2)</th>
+                        
+                    
+                        
+                            <th>Window Glass Area (ft^2)</th>
+                        
+                    
+                        
+                            <th>Lighting (W/ft^2)</th>
+                        
+                    
+                        
+                            <th>People (ft^2/person)</th>
+                        
+                    
+                        
+                            <th>Plug and Process (W/ft^2)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Total</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Conditioned Total</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Unconditioned Total</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Not Part of Total</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_18 aria-expanded="false" aria-controls=table_18>
+                
+                
+                    Zone Sensible Cooling and Heating Sensible Sizing
+                    
+                
+              </button>
+              <div class="in" id=table_18>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Heating/Cooling</th>
+                        
+                    
+                        
+                            <th>Calculated Design Load</th>
+                        
+                    
+                        
+                            <th>Design Load With Sizing Factor</th>
+                        
+                    
+                        
+                            <th>Calculated Design Air Flow (ft^3/min)</th>
+                        
+                    
+                        
+                            <th>Design Air Flow  With Sizing Factor (ft^3/min)</th>
+                        
+                    
+                        
+                            <th>Date/Time Of Peak</th>
+                        
+                    
+                        
+                            <th>Outdoor Temperature at Peak Load (F)</th>
+                        
+                    
+                        
+                            <th>Outdoor Humidity Ratio at Peak Load (lbWater/lbAir)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>None</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0 (ton)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0 (ton)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>32.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>None</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0 (kBtu/h)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0 (kBtu/h)</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td></td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>32.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Zone_Equipment_Detail">Zone Equipment Detail</h2>
+
+          
+              <h5><i>No Data to Show for Zone Equipment Detail</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Air_Loops_Detail">Air Loops Detail</h2>
+
+          
+              <h5><i>No Data to Show for Air Loops Detail</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Plant_Loops_Detail">Plant Loops Detail</h2>
+
+          
+              <h5><i>No Data to Show for Plant Loops Detail</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Outdoor_Air">Outdoor Air</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_19 aria-expanded="false" aria-controls=table_19>
+                
+                
+                    Average and Minimum Outdoor Air During Occupied Hours
+                    
+                
+              </button>
+              <div class="in" id=table_19>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Average Number of Occupants</th>
+                        
+                    
+                        
+                            <th>Nominal Number of Occupants</th>
+                        
+                    
+                        
+                            <th>Zone Volume (ft^3)</th>
+                        
+                    
+                        
+                            <th>Avg. Mechanical Ventilation (ach)</th>
+                        
+                    
+                        
+                            <th>Min. Mechanical Ventilation (ach)</th>
+                        
+                    
+                        
+                            <th>Avg. Infiltration (ach)</th>
+                        
+                    
+                        
+                            <th>Min. Infiltration (ach)</th>
+                        
+                    
+                        
+                            <th>Avg. Simple Ventilation (ach)</th>
+                        
+                    
+                        
+                            <th>Min. Simple Ventilation (ach)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>None</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Cash_Flow">Cash Flow</h2>
+
+          
+              <h5><i>No Data to Show for Cash Flow</i></h5>
+          
+
+          
+
+      
+
+          
+          <h2 id="Site_and_Source_Summary">Site and Source Summary</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_20 aria-expanded="false" aria-controls=table_20>
+                
+                
+                    Site and Source Energy
+                    
+                
+              </button>
+              <div class="in" id=table_20>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Total Energy (kBtu)</th>
+                        
+                    
+                        
+                            <th>Energy Per Total Building Area (kBtu/ft^2)</th>
+                        
+                    
+                        
+                            <th>Energy Per Conditioned Building Area (kBtu/ft^2)</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Total Site Energy</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Net Site Energy</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Total Source Energy</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Net Source Energy</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>0.0</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_21 aria-expanded="false" aria-controls=table_21>
+                
+                
+                    Site to Source Energy Conversion Factors
+                    
+                
+              </button>
+              <div class="in" id=table_21>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th></th>
+                        
+                    
+                        
+                            <th>Site=>Source Conversion Factor</th>
+                        
+                    
+                  </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Electricity</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>3.167</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>Natural Gas</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>1.084</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>District Cooling</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>1.056</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                      <tr>
+                        
+                            
+                                
+                                    <td>District Heating</td>
+                                
+                            
+                        
+                            
+                                
+                                    <td>3.613</td>
+                                
+                            
+                        
+                      </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+
+              
+
+          
+
+      
+
+          
+          <h2 id="Schedule_Overview">Schedule Overview</h2>
+
+          
+
+          
+              
+              <br>
+              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=#table_22 aria-expanded="false" aria-controls=table_22>
+                
+                
+                    Schedule Overview - view table
+                    
+                
+              </button>
+              <div class="collapse" id=table_22>
+                <div class="well">
+                  
+                      <table class="table table-striped table-bordered table-condensed">
+                  
+                  <tr>
+                    
+                        
+                            <th>Schedule</th>
+                        
+                    
+                        
+                            <th>Type Limits</th>
+                        
+                    
+                        
+                            <th>Rules</th>
+                        
+                    
+                        
+                            <th>Use Count</th>
+                        
+                    
+                  </tr>
+                  
+                  </table>
+                  
+                </div>
+              </div>
+              
+                  <div>
+                    
+                  </div>
+
+              
+
+          
+
+      
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

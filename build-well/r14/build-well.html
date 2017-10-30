@@ -250,6 +250,20 @@ Previous entries
 	}
 
 
+// separate function so that the mnu apps can call it as well
+
+	function viewContents() {
+
+		document.body.style.overflow = 'auto';
+
+		divToggleView.style.display = '';
+
+		ifrThree.style.cssText = ' bottom: 0; position: absolute; height: 100px; right: 0; max-width: 200px; '; 
+		ifrThree.contentWindow.divContents.style.display = 'none';
+
+	}
+
+
 
 	function requestFile( url, callback ) {
 

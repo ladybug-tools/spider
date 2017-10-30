@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Save Build Well as a gbXML file" >
+<meta name = "description" content = "Create gbXML data from Build Well 3D data and export the data to a  file" >
 <meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-25" >
 <title>gbXML Export</title>
@@ -46,14 +46,17 @@
 
 		<p id = "divInfo" ></p>
 
-		<p title = 'Select a building to edit' >Buildings: 
+		<p title = 'Select a building to view' >1. Select a building shape: 
 			<select id = selObject onchange = getObject(buildings); size = 9 ></select>
 		</p>
 
-		<p> 1. <button onclick=getBuildingData(); >Get building data</button></p>
+		<p> 2. <button onclick=getBuildingData(); >Get building data</button></p>
 
-		<p> 2. <button onclick = saveFile(); >Save building data to file</button> </p>
+		<p> 3. <button onclick = saveFile(); >Save building data to file</button> </p>
 
+		<p><button onclick = checkGbxmlData(); >Check the data</button> << new</p>
+
+<!--
 		<p> 1. First the click the 'get building data' button. The data will display on-screen so you can check if it is OK.</p>
 
 		<p> 2. If the data is acceptable, you may save the data to a file.</p>
@@ -62,13 +65,14 @@
 
 		<p> View the <a href="https://en.wikipedia.org/wiki/Green_Building_XML" target="_blank">gbXML</a> file
 			using <a href="http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/" target="_blank">Spider gbXML Viewer</a></p>
-
+-->
 	</div>
 
 	<iframe id=ifrContents ></iframe>
 
 <script>
 
+	var checkWindow;
 
 	let textMenu;
 	let textZones;
@@ -118,8 +122,9 @@
 			'</h3>' +
 		'';
 
-		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
 
+//		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 //		divMenu.innerHTML += txt;
 
 		if ( parent && parent.ifrThree ) {
@@ -140,6 +145,10 @@
 			ifrContents.onload = initVariables;
 
 		}
+
+// not working 
+
+		window.onclose = function() { console.log( 'close', 23); checkWindow.close(); }
 
 	}
 
@@ -193,7 +202,7 @@
 //
 		const object = objects.getObjectByName( selObject.value );
 
-console.log( 'object', object );
+//console.log( 'object', object );
 
 		objects.traverse( function ( child ) {
 
@@ -223,7 +232,7 @@ console.log( 'object', object );
 
 		textMenu += 
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
-//			'<?xml version="1.0" encoding="UTF-8"?>\n' +
+			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 			'<gbXML xmlns="http://www.gbxml.org/schema" ' +
 				'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
 				'xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" ' +
@@ -705,7 +714,7 @@ console.log( 'object', object );
 		quad = {
 			description: type + ': ',
 			mesh: slab,
-			name: 'slab-floor-' + slab.userData.floor,
+			name: 'slab-floor-' + slab.userData.storey,
 			type: type,
 			spaceId1: spaceId,
 			spaceId2: undefined,
@@ -727,23 +736,23 @@ console.log( 'object', object );
 
 
 
-	function getSurfacesOverhangs( floor, path, surfaceId, spaceId1 ) {
-//console.log( 'floor', floor );
+	function getSurfacesOverhangs( storey, path, surfaceId, spaceId1 ) {
+//console.log( 'storey', storey );
 
 		let textOver = '';
 //		const geometry = new THREE.BoxBufferGeometry( 3, 2, 1 );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		let overhangId = ( floor.userData.floor - 1 ) * path.length + 1;
+		let overhangId = ( storey.userData.storey - 1 ) * path.length + 1;
 		let id = 1;
-		for ( let i = 0; i < floor.children.length; i++ ) {
+		for ( let i = 0; i < storey.children.length; i++ ) {
 
-			const overhang = floor.children[ i ];
+			const overhang = storey.children[ i ];
 			if ( overhang.name !== 'overhang' ) { continue; }
 
 			textOver += 
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( overhangId ++ ) + '" >\n' +
-				'\t\t\t<Name>overhang-floor-' + floor.userData.floor +'-space-' + ( id++ )+ '</Name>\n' +
+				'\t\t\t<Name>overhang-storey-' + storey.userData.storey +'-space-' + ( id++ )+ '</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
@@ -794,13 +803,15 @@ console.log( 'object', object );
 
 
 
-	function getSurfacesAdjacentBuildings( campus ) { 
+	function getSurfacesAdjacentBuildings( object ) { 
 
-		let textMenu = '';
+		let textSurfaces = '';
 
-//console.log( '', campus );
+console.log( '', object );
 
-		const bb = new THREE.Box3().setFromObject( campus );
+		if ( object.name.includes( 'shape' ) ) { return ''; }
+
+		const bb = new THREE.Box3().setFromObject( object );
 		const mi = bb.min;
 		const mx = bb.max;
 
@@ -817,25 +828,25 @@ console.log( 'object', object );
 
 		for ( let i = 0; i < faces.length; i++ ) {
 
-			textMenu += 
+			textSurfaces += 
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( i + 1 ) + '" >\n' +
-				'\t\t\t<Name>' + campus.name +'</Name>\n' +
+				'\t\t\t<Name>' + object.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
 
 			face = faces[ i ];
-			const v1 = campus.localToWorld ( face[ 0 ] );
-			const v2 = campus.localToWorld ( face[ 1 ] );
-			const v3 = campus.localToWorld ( face[ 2 ] );
-			const v4 = campus.localToWorld ( face[ 3 ] );
+			const v1 = object.localToWorld ( face[ 0 ] );
+			const v2 = object.localToWorld ( face[ 1 ] );
+			const v3 = object.localToWorld ( face[ 2 ] );
+			const v4 = object.localToWorld ( face[ 3 ] );
 
 //			const vertices = [ v2, v1, v3, v4 ];
 			const vertices = [ v1, v2, v3, v4 ];
 			for ( let k = 0; k < 4; k++ ) {
 
 				const vertex = vertices[ k ];
-				textMenu += getCartesianPointText( vertex );
+				textSurfaces += getCartesianPointText( vertex );
 
 //				const mesh = new THREE.Mesh( geometry, material );
 //				mesh.position.copy( vertex );
@@ -843,7 +854,7 @@ console.log( 'object', object );
 
 			}
 
-			textMenu +=
+			textSurfaces +=
 				'\t\t\t\t</PolyLoop>\n' +
 				'\t\t\t</PlanarGeometry>\n' +
 				'\t\t</Surface>\n' +
@@ -851,7 +862,7 @@ console.log( 'object', object );
 
 		}
 
-		return textMenu;
+		return textSurfaces;
 
 	}
 
@@ -859,7 +870,7 @@ console.log( 'object', object );
 
 	function getCartesianPointText( vertex ) {
 
-		const textMenu =
+		const textSurfaces =
 
 			'\t\t\t\t\t<CartesianPoint>\n' +
 
@@ -871,13 +882,62 @@ console.log( 'object', object );
 
 		'';
 
-		return textMenu;
+		return textSurfaces;
 
 	}
 
 
 /////////////////////
 
+
+
+	function checkGbxmlData() {
+
+		if ( !textMenu ){ alert( 'get building data first' ); return; }
+
+		let lines = textMenu.split( '\n' );
+		const n = '\n';
+
+		let text = 
+			selObject.value + n + n +
+			'line 0: ' + lines[ 1 ] + n + n +
+		'';
+
+		errors = 0;
+
+		for ( var i = 0; i < lines.length; i++ ) {
+
+			line = lines[ i ];
+
+			if ( line.search( 'NaN' ) > 0 || line.search( 'undefine' ) > 0 ) {
+
+				text +=
+					'line' + i + ' ' + line + n +
+					'line' + ( i + 1 ) + ' ' + lines[ i + 1 ] + n +
+					'line' + ( i + 2 ) + ' ' + lines[ i + 2 ] + n +
+					'***' + n +
+				'';
+
+				errors ++
+
+			}
+
+		}
+
+		text += 'lines checked: ' + lines.length + ' - errors found:' + errors + n;
+
+		checkWindow = window.open( "", this.target, 'left=400,width=500,height=400,top=200' );
+
+		checkWindow.document.write( '<textarea style=width:100%;height:100%; >' + text + '</textarea>' );
+		checkWindow.document.title = 'gbXML error check';
+
+//console.log( '', checkWindow );
+
+	}
+
+
+
+////////////////////
 
 	function saveFile() {
 

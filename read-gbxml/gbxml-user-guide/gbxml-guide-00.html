@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Difficult things done easily" >
+<meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-12" >
+<title>gbXML Guide R1.1</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width: 350px; height: 100%; }
+
+	body { font: 12pt monospace; height:100%; margin: 0 0 0 350px; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+	blockquote, pre { background-color: #eee; padding: 10px; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+	summary { outline: none; font-size: 14pt }
+
+	#divMenu { left: 0; margin: 20px; position: absolute; top: 0; }
+	#divMenu { max-width: 300px; overflow: auto;}
+
+	#detMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
+
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<details id=detMenu open >
+
+			<summary >toggle menu</summary>
+
+			<p id = "divBreadcrumbs" ><a href="../../../index.html" title='Making environmental design knowledge and tools freely accessible to every person, project and design process' target="_blank">Ladybug Tools</a> &raquo; <a href="../../index.html" target="_Top" >Spider</a> &raquo; </p>
+
+			<div id = "divTitle" ></div>
+
+			<div id = "divItems" >
+
+				<p>Click the pencil icon to edit the file on GitHub</p>
+				<p><a href=JavaScript:getContentMarkdown("space.md"); >Space</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/space.md" target="_blank"><b>&#x1f589;</b></a></p>
+
+				<p><a href=JavaScript:getContentMarkdown("zone.md"); >Zone</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/zone.md" target="_blank"><b>&#x1f589;</b></a></p>
+
+				<p><a href=JavaScript:getContentMarkdown("surface.md"); >Surface</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/surface.md" target="_blank"><b>&#x1f589; </b></a></p>
+
+
+				<h4>Surface Types</h4>
+
+				<div><a href=JavaScript:getContentMarkdown("interior-wall.md"); >InteriorWall</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/interior-wall.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("exterior-wall.md"); >Exteriorwall</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/exterior-wall.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("roof.md"); >Roof</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/roof.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("interior-floor.md"); >InteriorFloor</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/interior-floor.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("exposed-floor.md"); >ExposedFloor</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/exposed-floor.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("shade.md"); >Shade</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/shade.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("underground-wall.md"); >UndergroundWall</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/underground-wall.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("underground-slab.md"); >UndergroundSlab</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/underground-slab.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("ceiling.md"); >Ceiling</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/ceiling.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("air.md"); >Air</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/air.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("underground-ceiling.md"); >UndergroundCeiling</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/underground-ceiling.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("raised-floor.md"); >RaisedFloor</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/raised-floor.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("slab-on-grade.md"); >SlabOnGrade</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/slab-on-grade.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("free-standing-column.md"); >FreestandingColumn</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/free-standing-column.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=JavaScript:getContentMarkdown("embedded-column.md"); >EmbeddedColumn</a> &raquo; 
+					<a href="https://github.com/ladybug-tools/spider/blob/master/sandbox/gbxml-guide/embedded-column.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<br>
+
+			</div>
+
+			<div>
+
+				<hr>
+
+				<p>
+					Welcome to a place where you can find useful stuff regarding <a href="http://www.gbxml.org/" target="_blank">gbXML</a>
+				</p>
+
+				<p>The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools.</p>
+
+			</div>
+
+			<div id = "divSubMenu" ></div>
+
+			<div id=divFooter >
+				<hr>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/credits.md"); >Credits</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/code-of-conduct.md"); >Code of Conduct</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/contributing.md"); >Contributing</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/license.md"); >License</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/markdown-help.md"); >Markdown Help</a></div>
+
+			</div>
+
+		</details>
+
+	</div>
+
+	<div id =divContents ></div>
+
+<script>
+
+	let oldHash = '';
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/gbxml-guide/';
+
+	init();
+
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3>' +
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +  
+				'<a href=' + infoURI + ' target="top" >&#x24D8</a>'
+			'</h3>' +
+		'';
+
+		getContentMarkdown();
+
+	}
+
+
+
+	function getContentMarkdown( url ) {
+
+console.log( 'url', url );
+
+		if ( ! url && ! location.hash ) {
+
+			url = 'README.md';
+
+		} else if ( location.hash && location.hash !== oldHash ) {
+
+			url = location.hash.split( '#' )[1];
+			oldHash = location.hash;
+			history.replaceState( '', document.title, window.location.pathname );
+		}
+
+console.log( 'url2', url );
+
+		divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+
+		requestFile( url, callbackMarkdown );
+
+
+	}
+
+
+
+	function callbackMarkdown( xhr ){
+
+		const converter = new showdown.Converter();
+
+		const response = xhr.target.response;
+
+		const html = converter.makeHtml( xhr.target.responseText );
+
+		divContents.innerHTML = html;
+
+		window.scrollTo( 0, 0 );
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>
