@@ -1,6 +1,0 @@
-! Program Version,EnergyPlus, Version 8.8.0-7c3bbe4830, YMD=2017.10.30 15:32,IDD_Version 8.8.0
-! Output:Meter Objects (applicable to this run)
-Output:Meter,Carbon Equivalent:Facility,hourly; !- [kg]
-Output:Meter:Cumulative,Carbon Equivalent:Facility,hourly; !- [kg]
-Output:Meter,CarbonEquivalentEmissions:Carbon Equivalent,hourly; !- [kg]
-Output:Meter:Cumulative,CarbonEquivalentEmissions:Carbon Equivalent,hourly; !- [kg]

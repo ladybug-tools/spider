@@ -1,50 +1,6 @@
 EnergyPlus Starting
-EnergyPlus, Version 8.8.0-7c3bbe4830, YMD=2017.10.30 15:32
+EnergyPlus, Version 8.8.0-7c3bbe4830, YMD=2017.10.30 15:47
 Processing Data Dictionary
 Processing Input File
-Initializing Simulation
-Reporting Surfaces
-Beginning Primary Simulation
-Initializing New Environment Parameters
-Warming up {1}
-Starting Simulation at 01/01 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=01/21
-Continuing Simulation at 01/21 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=02/10
-Continuing Simulation at 02/10 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=03/02
-Continuing Simulation at 03/02 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=03/22
-Continuing Simulation at 03/22 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=04/11
-Continuing Simulation at 04/11 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=05/01
-Continuing Simulation at 05/01 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=05/21
-Continuing Simulation at 05/21 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=06/10
-Continuing Simulation at 06/10 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=06/30
-Continuing Simulation at 06/30 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=07/20
-Continuing Simulation at 07/20 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=08/09
-Continuing Simulation at 08/09 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=08/29
-Continuing Simulation at 08/29 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=09/18
-Continuing Simulation at 09/18 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=10/08
-Continuing Simulation at 10/08 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=10/28
-Continuing Simulation at 10/28 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=11/17
-Continuing Simulation at 11/17 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=12/07
-Continuing Simulation at 12/07 for RUN PERIOD 1
-Updating Shadowing Calculations, Start Date=12/27
-Continuing Simulation at 12/27 for RUN PERIOD 1
-Writing tabular output file results using HTML format.
-Computing Life Cycle Costs and Reporting
-Writing final SQL reports
-EnergyPlus Run Time=00hr 00min  2.33sec
+**FATAL:IP: Errors occurred on processing IDF file. Preceding condition(s) cause termination.
+EnergyPlus Run Time=00hr 00min  0.49sec
