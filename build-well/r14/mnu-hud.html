@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "the little box that pops up when your cursor is over selected objects" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-23" >
+<title>Heads Up Display</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	h3 { margin: 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 70px;}
+	.highlight { background-color: lightgreen; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+	#headsUp { z-index: 10; }
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id=divInfo ></div>
+
+		<p>The <a href=" https://en.wikipedia.org/wiki/Head-up_display" target="_blank">Heads Up Display (HUD)</a> is now enabled.</p>
+
+		<p>Move your cursor over an object to inspect some of its proporties.</p>
+
+		<p>After you add or delete objects, return to this menus to automatically refresh the list of objects to be looked at.</p>
+
+		<p class=highlight >This menu is mostly for simple checking. Use gbXML Viewer for more capabilities</p>
+
+	</div>
+
+	<iframe id=ifrContents ></iframe>'
+
+<script>
+
+	const ifrSource = 'build-well-threejs-qline.html';
+
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+	let intersected;
+	var object3D;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axesHelper, cameraHelper;
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML =
+			'<h3>' +
+				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
+			'</h3>' +
+		'';
+
+		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables()
+
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += ' margin: 20px;max-height: calc( 100% - 50px);  max-width: 300px; ; overflow: auto; position: absolute; right: 0;' ;
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+		headsUp = scope.headsUp;
+		log = scope.log;
+
+		building = scope.building;
+		buildings = scope.buildings;
+
+console.log( 'buildings', buildings );
+
+		initHeadsUp();
+
+	}
+
+
+
+//////////////////////////
+
+
+
+	function initHeadsUp() {
+
+		window.objects = [];
+		window.mouse = new THREE.Vector2();
+
+//		var window.intersected;
+
+//		headsUp = document.body.appendChild( document.createElement( 'div' ) );
+		headsUp.style.cssText = 'background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.85; ' +
+			'position: absolute; ';
+
+		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				objects.push( child );
+				child.material.opacity = 0.25;
+			}
+
+		} );
+
+	}
+
+
+	function onDocumentMouseMove( event ) {
+
+		var raycaster, intersects;
+
+		event.preventDefault();
+
+		if ( event.buttons > 0 ) { return; }
+
+		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+		raycaster = new THREE.Raycaster();
+		raycaster.setFromCamera( mouse, camera );
+
+		intersects = raycaster.intersectObjects( objects );
+
+		if ( intersects.length > 0 ) {
+
+//			intersected = intersects[ 0 ].object
+
+			if ( intersected != intersects[ 0 ].object ) {
+
+				if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
+				intersected = intersects[ 0 ].object;
+
+				intersected.face = intersects[ 0 ].face
+
+
+				if ( intersected.material.emissive ) {
+
+					intersected.currentHex = intersected.material.emissive.getHex();
+					intersected.material.emissive.setHex( 0xff0000 );
+
+				}
+
+				intersected.currentOpacity = intersected.material.opacity;
+				intersected.material.opacity = 1;
+
+				scope.divLog.innerHTML = 'Selected object ID: ' + intersected.name ;
+
+			}
+
+		} else {
+
+			if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+			if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
+			intersected = undefined;
+
+			scope.divLog.innerHTML = 'No object selected';
+
+		}
+
+		setHeadsUp( event );
+
+	}
+
+
+
+	function setHeadsUp( event ) {
+
+		let txt;
+		const b = '<br>'
+
+		if ( intersected === undefined ){
+
+			if ( event.type === 'touchstart' ) {
+
+				headsUp.style.display = 'none';
+
+			}
+
+			document.body.style.cursor = 'auto';
+			return;
+
+		}
+
+		headsUp.style.left = 50 + 0.5 * scope.window.innerWidth + mouse.x * 0.5 * scope.window.innerWidth + 'px';
+		headsUp.style.top = -50 + 0.5 * scope.window.innerHeight - mouse.y * 0.5 * scope.window.innerHeight + 'px';
+		headsUp.style.display = '';
+
+		txt =
+			'Type: ' + intersected.name + b +
+			( intersected.userData.storey ? 'story: ' + intersected.userData.storey + b : '' ) +
+			( intersected.parent.path ? 'zones: ' + intersected.parent.path.length + b : '' ) +
+			( intersected.face ? 'face vertex a: ' + intersected.face.a + b : '' ) +
+
+
+//			mouse.x + b +
+//			mouse.y +
+
+		'';
+
+		headsUp.innerHTML = txt;
+		document.body.style.cursor = 'pointer';
+
+	}
+
+
+
+	function onDocumentMouseDown( event ) {
+
+		headsUp.style.display = 'none';
+
+	}
+
+
+	function onDocumentTouchStart( event ) {
+
+	//	event.preventDefault();
+
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+
+		onDocumentMouseMove( event );
+
+	}
+
+
+</script>
+</body>
+</html>

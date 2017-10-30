@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Parametric 3D building schematics created and updated in a game-like fashion" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-29" >
+<title>Shape Editor</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: Salmon; --mnu-back-color: SeaShell; --mnu-width: 300px; height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	h3 { margin: 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 50px;}
+	.highlight { background-color: yellow; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px; }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+</style>
+</head>
+<body>
+
+	<div id="divMenu" >
+
+		<div id="divTitle" ></div>
+
+		<p><small></small></p>
+
+		<div id=divInfo ></div>
+
+		<p title='Area from 100 to 10000 square meters' >
+			Building area <output id=outBuildingArea class=floatRight >800</output>
+			<input type=range id=rngBuildingArea min=100 max=10000 step=100 value=800 oninput=updateShape(); />
+		</p>
+
+		<p title='x distance 1 to 200 meters' >Building length
+			<output id=outBuildingLength class=floatRight >40</output>
+			<input type=range id=rngLength1 min=1 max=200 step=1 value=40 oninput=updateShape(); >
+		</p>
+
+		<p title='y distance 1 to 200 meters' >Building width
+			<output id=outBuildingWidth class=floatRight ></output>
+			<input type=range id=rngWidth1 min=3 max=200 step=1 value=100 oninput=updateShape(); >
+		</p>
+
+		<p title='How many storeys? 1 to 100'>Number of floors
+			<output id=outNumberOfFloors class=floatRight ></output>
+			<input type=range id=rngNumberOfFloors min=1 max=20 step=1 value=1 onchange=updateShape(); >
+		</p>
+
+		<p title='Measured from 2.1 to 4.8 meters' >Floor height
+			<output id=outStoreyHeight class=floatRight ></output>
+			<input type=range id=rngStoreyHeight min=2.1 max=4.8 value=2.1 step=0.3 oninput=updateShape(); class=floatRight >
+		</p>
+
+		<p title='measured from 3 to 8 meters' >Perimeter depth
+			<output id=outPerimeterDepth class=floatRight ></output>
+			<input type=range id=rngPerimeterDepth min=3 max=8 value=3.6 step=0.3 oninput=updateShape(); class=floatRight >
+		</p>
+
+		<p title= 'measured in percent: 1 to 99 percent' >Window wall ratio %
+			<output id=outWindowWallRatio class=floatRight ></output>
+			<input type=range id=rngWindowWallRatio min=1 max=99 step=1 value=40 oninput=updateShape(); class=floatRight />
+		</p>
+
+		<p title='Depicted only when > 0 and < 3' >Overhang depth
+			<output id=outOverhangDepth class=floatRight ></output>
+			<input type=range id=rngOverhangDepth min=0 max=3 step=0.3 value=0 oninput=updateShape(); class=floatRight >
+		</p>
+
+		<p title='building angle in degrees -180 to 180' >Orientation degrees
+			<output id=outOrientation class=floatRight ></output>
+			<input type=range id=rngOrientation min=-180 max=180 step=1 value=0 oninput=updateShape(); >
+		</p>
+
+		<p id=pChecksum ></p>
+
+	</div>
+
+	<iframe id=ifrContents ></iframe>
+
+<script>
+
+	const ifrSource = 'build-well-threejs-qline.html';
+
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+	var building;
+	var buildings;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var scene;
+	var camera;
+	var controls;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var gridHelper, axesHelper, cameraHelper, groundHelper;
+
+	let geometry, material, mesh;
+
+	init();
+
+
+	function init() {
+
+		divTitle.innerHTML =
+			'<h3>' +
+				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
+			'</h3>' +
+		'';
+
+		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
+
+//		divMenu.innerHTML += '<hr><p>To be split into menu for SI units and menu for USA </p>' +
+//		'&#x1f578;';
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables()
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; max-height: calc( 100% - 50px); max-width: 300px; overflow: auto; position: absolute; right: 0;' ;
+
+			ifrContents.onload = initVariables;
+
+		}
+
+		rngBuildingArea.focus();
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		updateCampusSize = scope.updateCampusSize;
+
+		buildings = scope.meshes;
+		campus = scope.campus;
+
+		updateMeshes = scope.updateMeshes;
+
+
+// values here override build-well-threejs.html values which override menu values
+
+//		campus.box.length1 = 80;
+//		campus.box.width1 = 100;
+		campus.storeys = 1;
+//		campus.orientation = 20;
+//		campus.wwr = 80;
+//		campus.overhangDepth = 30;
+//		campus.perimeterDepth = 10;
+
+//		campus.area = 800
+//		campus.length1 = 40;
+//		campus.width1 = 20;
+//		campus.storeys = 3;
+//		campus.orientation = 20;
+//		campus.wwr = 80;
+//		campus.overhangDepth = 0.5;
+//		campus.perimeterDepth = 3;
+
+		rngBuildingArea.value = campus.area;
+
+		rngLength1.value = campus.length1;
+		outBuildingLength.value = campus.length1 + 'units';
+
+		rngWidth1.value = campus.area / ( campus.length1 * campus.storeys );
+		outBuildingLength.value = campus.width1;
+
+		rngNumberOfFloors.value = campus.storeys;
+		outNumberOfFloors.value = campus.storeys;
+
+		rngStoreyHeight.value = campus.storeyHeight;
+		outStoreyHeight.value = campus.storeyHeight;
+
+		rngPerimeterDepth.value = campus.perimeterDepth;
+		outPerimeterDepth.value = campus.perimeterDepth;
+
+		rngWindowWallRatio.value = campus.wwr;
+		outWindowWallRatio.value = campus.wwr;
+
+		rngOverhangDepth.value = campus.overhangDepth;
+		outOverhangDepth.value = campus.overhangDepth;
+
+		rngOrientation.value = campus.orientation;
+		outOrientation.value = campus.orientation;
+
+//console.log( 'campus', campus );
+
+		updateCampusSize( 200 );
+
+		updateShape();
+
+	}
+
+
+	function updateShape() {
+
+		const areaNow = campus.area;
+		let areaNew = parseInt( rngBuildingArea.value, 10 );
+
+		const storeysNow = campus.storeys;
+		const storeysNew = parseInt( rngNumberOfFloors.value, 10 );
+
+		const lenNow = campus.length1;
+		let lenNew = parseInt( rngLength1.value, 10 );
+
+		const widNow = campus.width1;
+		let widNew = parseInt( rngWidth1.value, 10 );
+		let areaFloorNew, areaFloorNow;
+
+		if ( areaNew !== areaNow ) {
+
+			areaFloorNew = areaNew / storeysNow
+			widNew = areaFloorNew / ( lenNow * storeysNew );
+
+		} else if ( storeysNew !== storeysNow ) {
+
+			areaFloorNow = areaNow / storeysNow;
+			areaFloorNew = areaNow / storeysNew;
+
+//			const areaTemp = lenNow * widNow * storeysNew;
+			const ratio = Math.sqrt( areaFloorNew / areaFloorNow );
+console.log( 'ratio', ratio );
+//			areaFloorNew = areaNew / storeysNew;
+			lenNew = ratio * lenNow;
+console.log( 'lenNow', lenNow, 'lenNew', lenNew );
+			widNew =  areaFloorNew / lenNew;
+console.log( 'widNow', widNow, 'widNew', widNew );
+
+		} else if ( lenNew !== lenNow ) {
+
+			widNew = areaNow / ( lenNew * storeysNow );
+
+		} else if ( widNew !== widNow ) {
+
+			areaNew = widNew * storeysNow * lenNow
+
+		}
+
+		campus.area = areaNew;
+		rngBuildingArea.value = areaNew;
+		outBuildingArea.value = areaNew;
+
+		campus.storeys = storeysNew;
+		rngNumberOfFloors.value = storeysNew;
+		outNumberOfFloors.value = storeysNew;
+
+		campus.length1 = lenNew;
+		rngLength1.value = lenNew;
+		outBuildingLength.value = lenNew.toFixed();
+
+		campus.width1 = widNew;
+		rngWidth1.value = widNew
+		outBuildingWidth.value = widNew.toFixed();
+
+		campus.storeyHeight = parseFloat( rngStoreyHeight.value );
+		rngStoreyHeight.value = campus.storeyHeight;
+		outStoreyHeight.value = campus.storeyHeight;
+
+		campus.perimeterDepth = parseFloat( rngPerimeterDepth.value );
+		rngPerimeterDepth.value = campus.perimeterDepth;
+		outPerimeterDepth.value = campus.perimeterDepth;
+
+		campus.overhangDepth = parseFloat( rngOverhangDepth.value );
+		rngOverhangDepth.value = campus.overhangDepth;
+		outOverhangDepth.value = campus.overhangDepth;
+
+		campus.wwr = parseFloat( rngWindowWallRatio.value );
+		rngWindowWallRatio.value = campus.wwr;
+		outWindowWallRatio.value = campus.wwr;
+
+		campus.orientation = parseFloat( rngOrientation.value );
+		rngOrientation.value = campus.orientation;
+		outOrientation.innerHTML = campus.orientation;
+
+		pChecksum.innerHTML = 'box area: ' + campus.length1 * campus.width1 * campus.storeys
+
+		updateMeshes();
+
+	}
+
+</script>
+</body>
+</html>

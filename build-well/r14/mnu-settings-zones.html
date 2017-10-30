@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Assign attributes to shapes and zones" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-28" >
+<title>Zones</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	h3 { margin: 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 70px;}
+	.highlight { background-color: lightgreen; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px; }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" title='What are you con templating?' ></div>
+
+		<div id=divInfo ></div>
+
+		<p title="Select a building to edit" >Buildings:
+			<select id=selObject onchange=getObject(buildings); ></select>
+		</p>
+
+		<p title = 'Select a zone/space to edit' >Zones: 
+			<select id = selZone onchange = getZoneData(buildings); size = 10 ></select>
+		</p>
+
+		<p title = 'Select a type for the zone/space' >Space Type: 
+			<select id = selSpaceType onchange = setSpaceType(buildings); size = 10 ></select>
+		</p>
+
+	</div>
+
+	<iframe id=ifrContents ></iframe>
+
+<script>
+
+	const spaceTypes = [ "ActiveStorage", "ActiveStorageHospitalOrHealthcare", "AirOrTrainOrBusBaggageArea", "AirportConcourse", "AtriumEachAdditionalFloor", "AtriumFirstThreeFloors", "AudienceOrSeatingAreaPenitentiary", "AudienceOrSeatingAreaExerciseCenter", "AudienceOrSeatingAreaGymnasium", "AudienceOrSeatingAreaSportsArena", "AudienceOrSeatingAreaConventionCenter", "AudienceOrSeatingAreaMotionPictureTheatre", "AudienceOrSeatingAreaPerformingArtsTheatre", "AudienceOrSeatingAreaReligious", "AudienceOrSeatingAreaPoliceOrFireStations", "AudienceOrSeatingAreaCourtHouse", "AudienceOrSeatingAreaAuditorium", "BankCustomerArea", "BankingActivityAreaOffice", "BarberAndBeautyParlor", "CardFileAndCataloguingLibrary", "ClassroomOrLectureOrTrainingPenitentiary", "ClassroomOrLectureOrTraining", "ConfinementCellsPenitentiary", "ConfinementCellsCourtHouse", "ConferenceMeetingOrMultipurpose", "CorridorOrTransition", "CorridorOrTransitionManufacturingFacility", "CorridorsWithPatientWaitingExamHospitalOrHealthcare", "CourtSportsAreaSportsArena", "CourtroomCourtHouse", "DepartmentStoreSalesAreaRetail", "DetailedManufacturingFacility", "DiningArea", "DiningAreaHotel", "DiningAreaFamilyDining", "DiningAreaLoungeOrLeisureDining", "DiningAreaMotel", "DiningAreaTransportation", "DiningAreaPenitentiary", "DiningAreaCivilServices", "DormitoryBedroom", "DormitoryStudyHall", "DressingOrLockerOrFittingRoomGymnasium", "DressingOrLockerOrFittingRoomCourtHouse", "DressingOrLockerOrFittingRoomPerformingArtsTheatre", "DressingOrLockerOrFittingRoomAuditorium", "DressingOrLockerOrFittingRoomExerciseCenter", "ElectricalOrMechanical", "ElevatorLobbies", "EmergencyHospitalOrHealthcare", "EquipmentRoomManufacturingFacility", "ExamOrTreatmentHospitalOrHealthcare", "ExcerciseAreaExerciseCenter", "ExcerciseAreaGymnasium", "ExhibitSpaceConventionCenter", "FellowshipHallReligiousBuildings", "FineMaterialWarehouse", "FineMerchandiseSalesAreaRetail", "FireStationEngineRoomPoliceOrFireStation", "FoodPreparation", "GarageServiceOrRepairAutomotiveFacility", "GeneralHighBayManufacturingFacility", "GeneralLowBayManufacturingFacility", "GeneralExhibitionMuseum", "HospitalNurseryHospitalOrHealthcare", "HospitalOrMedicalSuppliesHospitalOrHealthcare", "HospitalOrRadiologyHospitalOrHealthcare", "HotelOrConferenceCenterConferenceOrMeeting", "InactiveStorage", "JudgesChambersCourtHouse", "LaboratoryOffice", "LaundryIroningAndSorting", "LaundryWashingHospitalOrHealthcare", "LibraryAudioVisualLibraryAudioVisual", "LivingQuartersDormitory", "LivingQuartersMotel", "LivingQuartersHotel", "Lobby", "LobbyReligiousBuildings", "LobbyMotionPictureTheatre", "LobbyAuditorium", "LobbyPerformingArtsTheatre", "LobbyPostOffice", "LobbyHotel", "LoungeOrRecreation", "MallConcourseSalesAreaRetail", "MassMerchandisingSalesAreaRetail", "MediumOrBulkyMaterialWarehouse", "MerchandisingSalesAreaRetail", "MuseumAndGalleryStorage", "NurseStationHospitalOrHealthcare", "OfficeEnclosed", "OfficeOpenPlan", "OfficeCommonActivityAreasInactiveStorage", "OperatingRoomHospitalOrHealthcare", "OtherTelevisedPlayingAreaSportsArena", "ParkingAreaAttendantOnlyParkingGarage", "ParkingAreaPedestrianParkingGarage", "PatientRoomHospitalOrHealthcare", "PersonalServicesSalesAreaRetail", "PharmacyHospitalOrHealthcare", "PhysicalTherapyHospitalOrHealthcare", "PlayingAreaGymnasium", "Plenum", "PoliceStationLaboratoryPoliceOrFireStations", "PublicAndStaffLoungeHospitalOrHealthcare", "ReadingAreaLibrary", "ReceptionOrWaitingTransportation", "ReceptionOrWaitingMotel", "ReceptionOrWaitingHotel", "RecoveryHospitalOrHealthcare", "RestorationMuseum", "Restrooms", "RingSportsAreaSportsArena", "ServerRoom", "SleepingQuartersPoliceOrFireStation", "SortingAreaPostOffice", "SpecialtyStoreSalesAreaRetail", "StacksLibrary", "StairsInactive", "Stairway", "SupermarketSalesAreaRetail", "TerminalTicketCounterTransportation", "WorkshopWorkshop", "WorshipPulpitChoirReligious" ];
+
+	const ifrSource = 'build-well-threejs-qline.html';
+
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+	var building;
+	var buildings;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var scene;
+	var camera;
+	var controls;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var gridHelper, axesHelper, cameraHelper, groundHelper;
+
+	init();
+
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3>' +
+				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
+			'</h3>' +
+		'';
+
+		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
+
+		let txt =
+			'<p>To be done: Click on a zone to highlight the selected zone in the 3D model. Also cause any pre-designated space type to be selected.</p>' +
+			'<p>To be done: NES&W compass bearings will be added to the 3D model via this menu.</p>' +
+			'<p>To be done: Shapes to be centered. Any adjacent structures to show up here as well.</p>' +
+			'<p>Click any geometry in 3D model to highlight zone and space type in menu.</p>' +
+		'&#x1f578;';
+
+
+		divMenu.innerHTML += txt;
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables()
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; max-height: calc( 100% - 50px ); max-width: 300px; overflow: auto; position: absolute; right: 0;' ;
+
+			ifrContents.onload = initVariables;
+
+		}
+
+//		selObject.focus(); mucks up menu sizes
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+
+		buildings = scope.buildings;
+		campus = scope.campus;
+//console.log( 'buildings', buildings );
+
+		for ( i = 0; i < spaceTypes.length; i++ ) {
+
+			let type = spaceTypes[ i ];
+			selSpaceType.innerHTML += '<option>' + type + '</option>'; 
+
+		}
+
+		selSpaceType.selectedIndex = 93;
+
+
+		updateSelectObjects( buildings );
+
+	}
+
+
+
+/////////////////////
+
+
+
+	function updateSelectObjects( objects ) {
+
+		selObject.innerHTML = '';
+
+		for ( let i = 0; i < objects.children.length; i++ ) {
+
+			let obj = objects.children[ i ];
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
+
+		}
+
+//		selObject.selectedIndex = 0;
+		selObject.size = objects.children.length;
+		getObject( objects );
+
+	}
+
+
+	function getObject( objects ) {
+
+		const object = scene.getObjectByName( selObject.value );
+console.log( 'object', object );
+
+		for ( child of objects.children ) {
+
+			child.visible = child.name === object.name || child.name.startsWith( 'Object' ) ? true : false;
+
+		};
+
+		object.position.set( 0, 0, 0 );
+
+		getZones( object, objects );
+
+	}
+
+
+
+	function getZones( object, objects ) {
+
+//console.log( 'object', object.children[ 0 ].geometry , campus );
+
+		const zonesPerStorey = object.children[ 0 ].geometry.vertices.length / 5;
+//console.log( 'zonesPerStorey', zonesPerStorey );
+
+		let zoneId = 1;
+
+		let storeyStart = campus.useSIUnitsForResults === true ? 0 : 1;
+
+		for ( let i = 0; i < campus.storeys; i++ ) {
+
+			for ( let j = 0; j < zonesPerStorey; j++ ) {
+
+					selZone.innerHTML += '<option value=' + i + ' >bw-storey-' + ( i + storeyStart ) + '-zone-' + ( zoneId ++ ) + '</option>';
+
+			}
+
+
+		}
+
+
+	}
+
+
+	function getZoneData(){
+
+
+//alert( selZone.value + '\n to be highlighted in 3D model' );
+
+		const building = scene.getObjectByName( selObject.value );
+
+
+console.log( 'storey', selZone.value );
+
+
+		building.traverse( function ( child ) {
+
+			if ( ( child.userData.storey !== undefined ) && ( child.userData.storey === selZone.value ) ) {
+console.log( 'child.userData', child.userData.storey, selZone.value, child.userData.storey !== undefined && child.userData.storey === selZone.value );
+
+				child.material = new THREE.MeshNormalMaterial();
+				child.material.needsUpdate = true;
+
+			} else {
+
+
+			}
+
+		} );
+	}
+
+
+	function setSpaceType(buildings) {
+
+console.log( '', selSpaceType.selectedIndex );
+
+alert( selZone.value + '\n to be zoned as \n' + selSpaceType.value );
+
+
+	}
+
+
+
+</script>
+</body>
+</html>
