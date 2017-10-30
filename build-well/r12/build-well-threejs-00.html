@@ -418,9 +418,7 @@
 
 	}
 
-
-
-	function createExternalWall( length = 20, height = 12, floor = 0, id = 1 ) {
+	function createExternalWall( length = 20, height = 12, floor = 0, id = 1,windowCount =1 ) {
 
 		const wwr = building.wwr / 100;
 		const length05 = length * 0.5;
@@ -437,7 +435,8 @@
 			v2( 0, height )
 		];
 		const shape = new THREE.Shape( shapeVertices );
-
+		console.log("This is shape")
+		console.log(shape)
 		const holeVertices = [
 			v2( length05 - deltaL, height05 + deltaH ),
 			v2( length05 + deltaL, height05 + deltaH ),
@@ -457,9 +456,9 @@
 		mesh.name = 'ExteriorWall';
 		mesh.userData.idSpace = id;
 
-//console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
+		//console.log( 'mesh.userData.idSpace', mesh.userData.idSpace );
 
-//	function createSlab( mesh, name, length, width, delta, transX, transY, hgt, id ) {
+		//	function createSlab( mesh, name, length, width, delta, transX, transY, hgt, id ) {
 
 		createSlab( mesh, 'Ceiling', length, perDep, perDep, length05, -0.5 * perDep, hgt, id );
 
