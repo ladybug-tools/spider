@@ -120,10 +120,11 @@
 		<p title='' >
 			<input id=chkDaylightSavings type=checkBox onchange=updateBuilding(); checked > Daylight Savings
 		</p>
-
+<!--
 		<p title='' >
 			<input id=chkUseSIUnitsForResults type=checkBox onchange=updateBuilding(); checked > Use SI Units For Results
 		</p>
+-->
 
 		<div id=divUnits></div>
 
@@ -374,7 +375,7 @@
 
 		campus.streetAddress = inpStreetAddress.value;
 
-		if ( chkUseSIUnitsForResults.checked ) {
+//		if ( chkUseSIUnitsForResults.checked ) {
 
 			divUnits.innerHTML =
 
@@ -394,7 +395,7 @@
 			campus.version = '6.01';
 			campus.volumeUnit = 'CubicMeters';
 
-
+/*/
 		} else {
 
 			divUnits.innerHTML =
@@ -416,6 +417,8 @@
 			campus.volumeUnit = 'CubicFeet';
 
 		}
+*/
+
 //console.log( 'site settings campus', campus );
 
 	}

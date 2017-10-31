@@ -11,7 +11,7 @@ _A well for building well._
 
 ## Full Screen dev release: [Build Well R14]( http://ladybug-tools.github.io/spider/build-well/dev/index.html )
 
-## Full Screen: [gbXML Sample File Viewer]( http://ladybug-tools.github.io/spider/sandbox/build-well-qline/build-well-gbxml-sample-files//index.html )
+## Full Screen: [gbXML Sample File Viewer]( http://ladybug-tools.github.io/spider/build-well/build-well-gbxml-sample-files//index.html )
 
 Save these links
 
@@ -56,6 +56,16 @@ _We often think of software of software just appearing as if by magic. The reali
 
 * 2017-10-28 ~ Need better area calculator to fix O shape ( and other similar shapes ) issues
 
+* 2017-10-30 ~ Export area as single space if width less than 2 x perimeter depth plus 4'/ width of corridor
+* 2017-10-30 ~ Perimeter depth should grow inward not outward
+* 2017-10-30 ~ Spaces should be numbered clockwise
+* 2017-10-30 ~ Geometry is being added to not replaced when switching menus
+* 2017-10-30 ~ GbXML User guide URL needs fixing
+* 2017-10-30 ~ Shapes need centering
+* 2017-10-30 ~ Need accurate area and volume calculations for spaces and building
+* 2017-10-30 ~ Continue fixing floor numbering issues
+* 2017-10-30 ~ No vertical spacing
+* 2017-10-30 ~ Make sure R12 reports page gets to speed folder
 
 ## Naming Considerations
 
@@ -141,9 +151,20 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 * for opacities, materials: in the pipeline
 
 
-
 ## Change Log
 
+
+### 2017-10-30 ~ Theo
+
+R14.1
+
+* mnu-gbxml-export.html
+	* 'openable' to 'fixedWindow
+	* floors have two adjacency IDs
+	* 2017-10-30 ~ Opening IDs are sequential
+	* 2017-10-30 ~ Shade IDs are sequential
+	* 2017-10-30 ~ OpenableWindow to fixedWindow in gbXML
+	* 2017-10-30 ~ Floors need two adjacencies
 
 ### 2017-10-28 ~ Theo
 

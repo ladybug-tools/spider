@@ -75,15 +75,15 @@
 	var checkWindow;
 
 	let textMenu;
-	let textZones;
 
-	let buildings;
+	let campus;
 	let building;
 
-
-	let zones;
 	let storeys;
+	let zones;
 	let spaces;
+	let overhangId = 1
+	let shadeId = 1;
 
 	const ifrSource = 'build-well-threejs-qline.html';
 
@@ -148,7 +148,7 @@
 
 // not working 
 
-		window.onclose = function() { console.log( 'close', 23); checkWindow.close(); }
+		window.onclose = function() { console.log( 'close' ); window.checkWindow.close(); }
 
 	}
 
@@ -227,6 +227,7 @@
 
 //console.log( 'buildings', buildings );
 //console.log( 'campus', campus );
+		if ( window.checkWindow ) { window.checkWindow.close(); }
 
 		textMenu = '';
 
@@ -330,7 +331,7 @@
 
 			textBuildingStoreys += 
 				'\t\t\t<BuildingStorey id="bw-storey-' + storey + '" >\n' +
-				'\t\t\t\t<Name>storey-' + storey + '</Name>\n' +
+				'\t\t\t\t<Name>storey ' + storey + '</Name>\n' +
 				'\t\t\t\t<Level>' + ( i * campus.storeyHeight ) + '</Level>\n' +
 				'\t\t\t</BuildingStorey>\n' +
 			'';
@@ -378,7 +379,7 @@
 
 
 			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space', 
-				area: 23, storey: storey, volume: 23, zone: spaceId } );
+				area: 888, storey: storey, volume: 888, zone: spaceId } );
 
 			campus.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
 
@@ -461,8 +462,6 @@
 
 		}
 
-//		textSurfaces += getSurfacesOverhangs( campus );
-
 		return textSurfaces;
 
 	}
@@ -477,10 +476,11 @@
 
 		let textSurfacesBits = '';
 
-		let storeys = theBuilding.children.length;
+		let storeys = campus.storeys;
 		let surfaceId = 1;
-		let spaceId = 1;
+		let spaceId = 1; // zoneId === spaceId
 		let quad;
+		let firstStoreyId = campus.useSIUnitsForResults ? 0 : 1;
 
 		for ( let i = 0; i < storeys; i++ ) {
 
@@ -498,12 +498,12 @@
 
 
 				quad = {
-					description: 'floor: ' + ( i + 1 ),
+					description: 'floor: ' + ( i + firstStoreyId ),
 					mesh: meshFloor,
-					name: 'floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
-					type: 'InteriorFloor',
+					name: 'floor-' + ( i + firstStoreyId ) + '-space-' + ( j + 1 ),
+					type: ( i === 0 ? 'SlabOnGrade' : 'InteriorFloor' ),
 					spaceId1: spaceId,
-					spaceId2: undefined,
+					spaceId2: ( i === 0 ? undefined : spaceId + spacesPerStorey ),
 					surfaceId: surfaceId, 
 					vertices: [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ]
 				};
@@ -661,10 +661,11 @@
 //		let mesh;
 
 		textOpening += 
-			'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + quad.surfaceId + '" >\n' +
+			'\t\t\t<Opening openingType="FixedWindow" id="bw-opening-' + openingId + '" >\n' +
 			'\t\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t\t<PolyLoop>\n' +
 		'';
+		openingId ++;
 
 		wwr05 = 0.5 * campus.wwr / 100;
 
@@ -745,7 +746,7 @@
 //		const geometry = new THREE.BoxBufferGeometry( 3, 2, 1 );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		let overhangId = ( storey.userData.storey - 1 ) * path.length + 1;
+//		let overhangId = ( storey.userData.storey - 1 ) * path.length + 1;
 		let id = 1;
 		for ( let i = 0; i < storey.children.length; i++ ) {
 
@@ -753,7 +754,7 @@
 			if ( overhang.name !== 'overhang' ) { continue; }
 
 			textOver += 
-				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( overhangId ++ ) + '" >\n' +
+				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( overhangId ++ ) + '" >\n' +
 				'\t\t\t<Name>overhang-storey-' + storey.userData.storey +'-space-' + ( id++ )+ '</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
@@ -937,7 +938,7 @@
 
 		text += 'lines checked: ' + lines.length + ' - errors found:' + errors + n;
 
-		checkWindow = window.open( "", this.target, 'left=400,width=800,height=400,top=200' );
+		checkWindow = window.open( '', '', 'left=400,width=800,height=400,top=200' );
 
 		checkWindow.document.write( '<textarea style=width:100%;height:100%; >' + text + '</textarea>' );
 		checkWindow.document.title = 'gbXML error check';
@@ -974,6 +975,7 @@
 //		delete a;
 		a = null;
 
+		window.checkWindow.close();
 	}
 
 </script>
