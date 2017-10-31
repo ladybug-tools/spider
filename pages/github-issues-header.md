@@ -8,9 +8,9 @@ Earlier versions of the scripts are at [Ladybug Web]( http://www.ladybug.tools/l
 
 2017-10-28 ~ Got sidetracked for a while:
 
-## Full Screen build release: [Build Well R12]( http://ladybug-tools.github.io/spider/build-well/index.html )
+## Full Screen build release: [Build Well]( http://ladybug-tools.github.io/spider/build-well/index.html )
 
-## Full Screen dev release: [Build Well R13]( http://ladybug-tools.github.io/spider/build-well/dev/index.html )
+## Full Screen dev release: [Build Well]( http://ladybug-tools.github.io/spider/build-well/dev/index.html )
 
 2017-08-25 ~ This site is still in its infancy. Much will be added, but for the moment our priorities are concentrated on a very hot topic:
 

@@ -3,7 +3,8 @@
 
 # [gbXML User Guide Read Me]( #README.md )
 
-# This location is deprecated. Please link to [gbXML User Guide]( http://www.ladybug.tools/spider/read-gbxml/gbxml-user-guide/index.html )
+
+# _This location is deprecated. Please link to [gbXML User Guide]( http://www.ladybug.tools/spider/read-gbxml/gbxml-user-guide/index.html )_
 
 ## Concept
 
