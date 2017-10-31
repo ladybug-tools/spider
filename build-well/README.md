@@ -55,16 +55,15 @@ _We often think of software of software just appearing as if by magic. The reali
 ## Current Issues
 
 * 2017-10-28 ~ Need better area calculator to fix O shape ( and other similar shapes ) issues
-
+* 2017-10-30 ~ Spaces should be numbered clockwise
+* 2017-10-30 ~ Need accurate area and volume calculations for spaces and building
+* 2017-10-30 ~ No vertical spacing
 * 2017-10-30 ~ Export area as single space if width less than 2 x perimeter depth plus 4'/ width of corridor
 * 2017-10-30 ~ Perimeter depth should grow inward not outward
-* 2017-10-30 ~ Spaces should be numbered clockwise
 * 2017-10-30 ~ Geometry is being added to not replaced when switching menus
-* 2017-10-30 ~ GbXML User guide URL needs fixing
 * 2017-10-30 ~ Shapes need centering
-* 2017-10-30 ~ Need accurate area and volume calculations for spaces and building
 * 2017-10-30 ~ Continue fixing floor numbering issues
-* 2017-10-30 ~ No vertical spacing
+
 * 2017-10-30 ~ Make sure R12 reports page gets to speed folder
 
 ## Naming Considerations
@@ -165,6 +164,7 @@ R14.1
 	* 2017-10-30 ~ Shade IDs are sequential
 	* 2017-10-30 ~ OpenableWindow to fixedWindow in gbXML
 	* 2017-10-30 ~ Floors need two adjacencies
+	* 2017-10-30 ~ GbXML User guide URL needs fixing
 
 ### 2017-10-28 ~ Theo
 

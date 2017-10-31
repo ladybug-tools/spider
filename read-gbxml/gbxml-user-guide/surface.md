@@ -38,6 +38,11 @@ The documentation lines are taken from the gbXML-Schema.
 Surface types marked with an asterisk are currently recognized by gbXML Reader. Eventually all types will be handled. Please do recommend any type that should be looked after sooner rather than later.
 
 
+#### Openings
+
+Openings should be Id'd sequentially as there may be different numbers of windows per wall or elevation.
+
+
 #### Text for copying to other text or apps
 
 types = [ 'InteriorWall', 'ExteriorWall', 'Roof', 'InteriorFloor', 'ExposedFloor', 'Shade', 'UndergroundWall', 'UndergroundSlab', 'Ceiling', 'Air', 'UndergroundCeiling', 'RaisedFloor', 'SlabOnGrade', 'FreestandingColumn', 'EmbeddedColumn' ];
