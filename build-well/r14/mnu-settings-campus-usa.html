@@ -228,7 +228,7 @@
 
 		campus.verticalSeparationUSA = 10;
 		rngVertical.value = campus.verticalSeparationUSA;
-		outVertical.value = campus.verticalSeparationUSA + ' ' + campus.lengthUnit.toLowerCase();
+		updateVertical();
 
 		inpElevation.value = 10; //campus.elevation;
 
@@ -271,6 +271,8 @@
 		updateMeshes();
 
 	}
+
+
 
 	function updateGroundSize() {
 

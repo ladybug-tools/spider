@@ -8,82 +8,888 @@
   Total Number of Fields=       59223
   Processing Input Data File -- Start
   Echo of input lines is off. May be activated by setting the environmental variable DISPLAYINPUTINAUDIT=YES
-   ** Severe  ** IP: IDF line~263 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1
+   ** Severe  ** IP: IDF line~767 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~279 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   ** Severe  ** IP: IDF line~783 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-12 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~295 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-1
+   ** Severe  ** IP: IDF line~799 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-1 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~311 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-4
+   ** Severe  ** IP: IDF line~815 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-10 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~327 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-1
+   ** Severe  ** IP: IDF line~831 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-11 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~343 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1
+   ** Severe  ** IP: IDF line~847 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-12 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~359 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-1
+   ** Severe  ** IP: IDF line~863 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-2 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~389 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   ** Severe  ** IP: IDF line~879 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-3 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~405 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2
+   ** Severe  ** IP: IDF line~895 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-4 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~421 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-2
+   ** Severe  ** IP: IDF line~911 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-5 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~437 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-9
+   ** Severe  ** IP: IDF line~927 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-6 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~453 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-2
+   ** Severe  ** IP: IDF line~943 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-7 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~469 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2
+   ** Severe  ** IP: IDF line~959 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-8 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~485 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-2
+   ** Severe  ** IP: IDF line~975 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-9 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~515 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   ** Severe  ** IP: IDF line~991 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-1 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~531 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3
+   ** Severe  ** IP: IDF line~1007 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-10 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~547 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-3
+   ** Severe  ** IP: IDF line~1023 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-11 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~563 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-14
+   ** Severe  ** IP: IDF line~1039 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-12 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~579 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-3
+   ** Severe  ** IP: IDF line~1055 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-2 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~595 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3
+   ** Severe  ** IP: IDF line~1071 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-3 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~611 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-3
+   ** Severe  ** IP: IDF line~1087 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-4 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~641 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   ** Severe  ** IP: IDF line~1103 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-5 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~657 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4
+   ** Severe  ** IP: IDF line~1119 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-6 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~673 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-4
+   ** Severe  ** IP: IDF line~1135 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-7 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~689 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-19
+   ** Severe  ** IP: IDF line~1151 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-8 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~705 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-4
+   ** Severe  ** IP: IDF line~1167 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-9 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~721 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4
+   ** Severe  ** IP: IDF line~1183 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-1 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~737 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-4
+   ** Severe  ** IP: IDF line~1199 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-10 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~767 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   ** Severe  ** IP: IDF line~1215 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-11 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~783 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   ** Severe  ** IP: IDF line~1231 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-12 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~799 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   ** Severe  ** IP: IDF line~1247 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-2 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~815 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   ** Severe  ** IP: IDF line~1263 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-3 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~831 Error detected in Object=BUILDINGSURFACE:DETAILED, name=SLAB-FLOOR-0
+   ** Severe  ** IP: IDF line~1279 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-4 REVERSED
    **   ~~~   ** Field [Construction Name] is required but was blank
-   ** Severe  ** IP: IDF line~847 Error detected in Object=BUILDINGSURFACE:DETAILED, name={227A60E5-BA1B-48CE-BADD-899DD210E3A8}
+   ** Severe  ** IP: IDF line~1295 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1311 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1327 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1343 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1359 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1375 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1391 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-10 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1407 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-11 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1423 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-12 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1439 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1455 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1471 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1487 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1503 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1519 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1535 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1551 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1567 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1583 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1599 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1615 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1645 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1661 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1677 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1693 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-39
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1709 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1725 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1755 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-10 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1771 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1787 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1803 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-43
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1819 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1835 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1865 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-11 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1881 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1897 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1913 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-47
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1929 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1945 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1961 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-10 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1977 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-11 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~1993 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2009 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2025 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2041 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2057 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2073 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2089 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2105 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2121 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2137 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-11 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2167 Error detected in Object=BUILDINGSURFACE:DETAILED, name=SLAB-FLOOR-0
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2205 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2221 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2237 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2253 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2269 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2285 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2315 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2331 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2347 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2363 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2379 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2395 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2425 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2441 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2457 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2473 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-15
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2489 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2505 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2535 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2551 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2567 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2583 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-19
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2599 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2615 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2645 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2661 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2677 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2693 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-23
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2709 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2725 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2755 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2771 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2787 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2803 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-27
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2819 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2835 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2865 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2881 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2897 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2913 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-31
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2929 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2945 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2975 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~2991 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3007 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3023 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-35
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3039 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3055 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3085 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3101 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3117 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-53
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3133 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3149 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3179 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3195 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3211 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-57
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3227 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3243 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3273 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3289 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3305 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-61
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3321 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3337 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3367 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3383 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3399 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-65
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3415 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3431 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3461 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3477 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3493 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-69
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3509 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3525 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3555 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3571 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3587 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-73
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3603 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3619 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3649 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3665 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3681 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-77
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3697 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3713 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3743 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3759 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3775 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-81
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3791 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3807 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3837 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3853 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3869 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-85
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3885 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3901 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3931 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3947 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3963 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-89
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3979 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~3995 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4025 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4041 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4057 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-93
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4073 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4089 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4105 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-10 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4121 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4137 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-12 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4153 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4169 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4185 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4201 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4217 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4233 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4249 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4265 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4281 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-10 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4311 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-2-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4327 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-2-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4343 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-97
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4359 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-2-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4375 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-2-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4405 Error detected in Object=BUILDINGSURFACE:DETAILED, name=SLAB-FLOOR-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4443 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4459 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4475 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-103
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4491 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4507 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4537 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4553 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4569 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-107
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4585 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4601 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4631 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4647 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4663 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-111
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4679 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4695 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4725 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4741 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4757 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-115
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4773 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4789 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4819 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4835 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4851 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-119
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4867 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4883 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4913 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4929 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4945 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-123
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4961 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~4977 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5007 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5023 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5039 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-127
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5055 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5071 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5101 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5117 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5133 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-131
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5149 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5165 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5195 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5211 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5227 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-135
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5243 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5259 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5289 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5305 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5321 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-139
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5337 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5353 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5369 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5385 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-11 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5401 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-12 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5417 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5433 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5449 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5465 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5481 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5497 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5513 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5529 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5545 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5575 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5591 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5607 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-143
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5623 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5639 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5669 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-3-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5685 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-3-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5701 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-147
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5717 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-3-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5733 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-3-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5763 Error detected in Object=BUILDINGSURFACE:DETAILED, name=SLAB-FLOOR-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5801 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5817 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5833 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-153
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5849 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5865 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5895 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5911 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5927 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-157
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5943 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5959 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~5989 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6005 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6021 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-161
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6037 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6053 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6083 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6099 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6115 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-165
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6131 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6147 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6177 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6193 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6209 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-169
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6225 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6241 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6271 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6287 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6303 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-173
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6319 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6335 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6365 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6381 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6397 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-177
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6413 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6429 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6459 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6475 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6491 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-181
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6507 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6523 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6553 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6569 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6585 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-185
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6601 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6617 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6633 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-10 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6649 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-11 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6665 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-12 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6681 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6697 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6713 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6729 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6745 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6761 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6777 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6793 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6809 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-8 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6839 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6855 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6871 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-189
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6887 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6903 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6933 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6949 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6965 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-193
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6981 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~6997 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7027 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-4-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7043 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-4-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7059 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-197
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7075 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-4-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7091 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-4-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7121 Error detected in Object=BUILDINGSURFACE:DETAILED, name=SLAB-FLOOR-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7159 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7175 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7191 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-204
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7207 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7223 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7239 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7269 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7285 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7301 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-209
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7317 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7333 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7349 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7379 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7395 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7411 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-214
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7427 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7443 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7459 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7489 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7505 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7521 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-219
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7537 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7553 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7569 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7599 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7615 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7631 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-224
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7647 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7663 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7679 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7709 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7725 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7741 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-229
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7757 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7773 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7789 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7819 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7835 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7851 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-234
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7867 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7883 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7899 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7929 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7945 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7961 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-239
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7977 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~7993 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8009 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-10 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8025 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-11 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8041 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-12 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8057 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8073 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8089 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8105 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-5 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8121 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-6 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8137 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-7 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8153 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8169 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-9 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8185 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8215 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8231 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8247 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-244
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8263 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8279 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8295 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8325 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8341 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8357 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-249
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8373 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8389 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8405 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8435 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8451 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8467 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-254
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8483 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8499 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8515 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8545 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-5-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8561 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-5-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8577 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-259
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8593 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-5-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8609 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-5-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8625 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-5-SPACE-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8655 Error detected in Object=BUILDINGSURFACE:DETAILED, name=SLAB-FLOOR-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~8679 Error detected in Object=BUILDINGSURFACE:DETAILED, name={BADB2B9F-83E1-4532-A43A-D061EF3E5E0A}
    **   ~~~   ** Field [Construction Name] is required but was blank
   Processing Input Data File -- Complete
   Maximum number of Alpha IDF Args=          29
-  Maximum number of Numeric IDF Args=          31
-  Number of IDF "Lines"=          93
-  Number of Defaulted Fields=         134
-  Number of Fields with Defaults=         266
+  Maximum number of Numeric IDF Args=          38
+  Number of IDF "Lines"=         605
+  Number of Defaulted Fields=        1588
+  Number of Fields with Defaults=        2408
   Number of Autosized Fields=           0
   Number of Autosizable Fields =           0
-  Number of Autocalculated Fields=          87
-  Number of Autocalculatable Fields =          87
+  Number of Autocalculated Fields=        1129
+  Number of Autocalculatable Fields =        1129
  Getting object=OUTPUT:SQLITE
