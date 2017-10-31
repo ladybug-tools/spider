@@ -31,7 +31,7 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "header" >
-		<h1 id = "title" ><a href="" >Site Content</a></h1>
+		<h1 id = "title" ><a href="" >Site Content 1.1</a></h1>
 		<div id = "contents" ></div>
 	</div>
 
@@ -178,7 +178,6 @@
 
 
 
-
 	function addHelpers( size = 200 ) {
 
 		scene.remove( gridHelper, axesHelper );
@@ -198,14 +197,16 @@
 
 	function addAssets() {
 
-		var geometry, material, mesh;
+		let geometry, material, mesh;
 
 		geometry = new THREE.SphereBufferGeometry( 25, 50, 50 );
 
-		for ( var i = 0; i < 4; i++ ) {
+		for ( let i = 0; i < 4; i++ ) {
 
-			mesh = createMesh();
+			const mesh = createMesh();
 			mesh.name = 'building' + ( i + 1 );
+			mesh.scale.set( 20, 20, 30 );
+			mesh.position.z = mesh.scale.z * 0.5;
 			mesh.visible = false;
 			scene.add( mesh );
 
@@ -216,10 +217,9 @@
 
 	function createMesh() {
 
-		const geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 		const material = new THREE.MeshPhongMaterial();
 		const mesh = new THREE.Mesh( geometry, material );
-
 		const edgesGeometry = new THREE.EdgesGeometry( geometry );
 		const meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
 		mesh.add( meshEdges );
@@ -227,6 +227,7 @@
 		return mesh;
 
 	}
+
 
 
 	function toggleVisibility( index ){
@@ -238,23 +239,44 @@
 	}
 
 
+
 	function updateBuilding( that ) {
 console.log( 'that', that );
 
 		const building = scene.getObjectByName( 'building' + that.id.slice( -1 ) );
-console.log( 'building', building, 'id', that.id.slice( -1 ) );
+//console.log( 'building', building, 'id', that.id );
 
 		if ( that.id.startsWith( 'inpOffsetX' ) ) {
-console.log( 'xx', that.value );
+//console.log( 'that.value', that.value );
+
 			building.position.x = parseInt( that.value, 10 );
 
 		} else if ( that.id.startsWith( 'inpOffsetY' ) ) {
 
 			building.position.y = parseInt( that.value, 10 );
 
+		} else if ( that.id.startsWith( 'inpSiteOrientation' ) ) {
+//console.log( 'inpSiteOrientation', that.value );
+
+			building.rotation.z = parseInt( that.value, 10 ) * - Math.PI / 180;
+
+		} else if ( that.id.startsWith( 'inpLength' ) ) {
+
+			building.scale.x = parseInt( that.value, 10 );
+
+		} else if ( that.id.startsWith( 'inpWidth' ) ) {
+
+			building.scale.y = parseInt( that.value, 10 );
+
+		} else if ( that.id.startsWith( 'inpHeight' ) ) {
+
+			building.scale.z = parseInt( that.value, 10 );
+			building.position.z = building.scale.z * 0.5;
+
 		}
 
 	}
+
 
 
 	function animate() {
