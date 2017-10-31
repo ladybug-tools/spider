@@ -367,8 +367,23 @@
 
 // needs checking / uses incorrect vertices
 				const vertex1 = vertices[ j * 5 ];
+
+//				let geometry = new THREE.BoxGeometry( 1, 10, 1 );
+//				let material = new THREE.MeshNormalMaterial();
+//				let mesh = new THREE.Mesh( geometry, material );
+//				mesh.position.copy( vertex1 );
+//				scene.add( mesh );
+
+
 				const vertex2 = vertices[ ( j + 1 ) * 5 ];
-				const area = vertex1.distanceTo( vertex2 ) * campus.perimeterDepth;
+
+//				geometry = new THREE.BoxGeometry( 1, 1, 10 );
+//				material = new THREE.MeshNormalMaterial();
+//				mesh = new THREE.Mesh( geometry, material );
+//				mesh.position.copy( vertex2 );
+//				scene.add( mesh );
+
+				const area = vertex1.distanceTo( vertex2 ) * campus.perimeterDepth - campus.perimeterDepth  * campus.perimeterDepth ;
 				const volume = area * campus.storeyHeight;
 
 				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space', 
@@ -377,12 +392,18 @@
 				campus.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
 
 				spaceId ++;
+
 			}
+
 // interior area
 
+console.log( 'path', campus.mesh.path );
+
+			const area = THREE.ShapeUtils.area( campus.mesh.path );
+			const volume = area * campus.storeyHeight;
 
 			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space', 
-				area: 888, storey: storey, volume: 888, zone: spaceId } );
+				area: area, storey: storey, volume: volume, zone: spaceId } );
 
 			campus.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
 
@@ -709,9 +730,12 @@
 	function getSurfacesSlabs( slab, path, type, surfaceId, spaceId, height = 0 ) {
 
 //console.log( 'path', path );
-
+		
 		textInterior = '';
 
+		const area = THREE.ShapeUtils.area( path );
+
+//console.log( 'areaNow', area );
 		shape = new THREE.Shape( path );
 		geometry = new THREE.ShapeGeometry( shape );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
@@ -719,6 +743,8 @@
 
 		quad = {
 			description: type + ': ',
+			area: area,
+			volume: area * campus.storeyHeight,
 			mesh: slab,
 			name: 'slab-floor-' + slab.userData.storey,
 			type: type,

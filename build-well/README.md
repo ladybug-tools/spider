@@ -54,13 +54,11 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Current Issues
 
-* 2017-10-28 ~ Need better area calculator to fix O shape ( and other similar shapes ) issues
-* 2017-10-30 ~ Spaces should be numbered clockwise
 * 2017-10-30 ~ Need accurate area and volume calculations for spaces and building
+* 2017-10-30 ~ Spaces should be numbered clockwise
 * 2017-10-30 ~ No vertical spacing
 * 2017-10-30 ~ Export area as single space if width less than 2 x perimeter depth plus 4'/ width of corridor
 * 2017-10-30 ~ Perimeter depth should grow inward not outward
-* 2017-10-30 ~ Geometry is being added to not replaced when switching menus
 * 2017-10-30 ~ Shapes need centering
 * 2017-10-30 ~ Continue fixing floor numbering issues
 
@@ -79,14 +77,15 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 
 ## To Do Generally
-
-* 2017-10-28 ~ Each standalone file: add link to https://validator.w3.org/?? Other vailidators??
+* 2017-10-28 ~ Need better area calculator to fix O shape ( and other similar shapes ) issues
+* 2017-10-31 ~ Checkboxes to display only selected types of surfaces. See Open Studio
+* 2017-10-28 ~ Each standalone file: add link to https://validator.w3.org/?? Other validators??
 * 2017-10-14 ~ How about a logo?
 * 2017-10-14 ~ Add permalinks / RESTful interaction
 * 2017-10-14 ~ Decide what to do when distance between external walls is less than twice the minimum perimeter depth
 * 2017-10-14 ~ Organize nice sets of color schemes for the various surface types
 
-
+ifrThree.contentWindow.renderer.info
 ## To Dos per module
 
 ### build-well.html / Build Well parent file
@@ -165,6 +164,7 @@ R14.1
 	* 2017-10-30 ~ OpenableWindow to fixedWindow in gbXML
 	* 2017-10-30 ~ Floors need two adjacencies
 	* 2017-10-30 ~ GbXML User guide URL needs fixing
+	* 2017-10-30 ~ Geometry is being added to not replaced when switching menus
 
 ### 2017-10-28 ~ Theo
 
