@@ -1,0 +1,6 @@
+EnergyPlus Starting
+EnergyPlus, Version 8.8.0-7c3bbe4830, YMD=2017.10.30 02:05
+Processing Data Dictionary
+Processing Input File
+**FATAL:IP: Errors occurred on processing IDF file. Preceding condition(s) cause termination.
+EnergyPlus Run Time=00hr 00min  0.31sec

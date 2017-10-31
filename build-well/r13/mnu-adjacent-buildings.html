@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Add, edit or delete adjacent structures that create shade " >
+<meta name = "keywords" content = "Spider,Build Well,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-28" >
+<title>Adjacent Buildings</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	h3 { margin: 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 70px;}
+	.highlight { background-color: lightgreen; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px; }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" title='What are you con templating?' ></div>
+
+		<div id=divInfo ></div>
+
+		<p title="Select a building to edit" >Buildings:
+			<select id=selObject onchange=getObject(buildings); ></select>
+		</p>
+
+		<p>
+			<button onclick=deleteObject(buildings); >delete</button>
+			<button onclick=addObject(buildings); >add </button>
+			<button onclick=saveFile(buildings); >save json file</button>
+		</p>
+
+		<p title = 'Title of the model' >Name:
+			<input id=inpName onchange = updateObject(buildings); class = floatRight style=width:150px; >
+		</p>
+
+		<p title = 'left and right from origin' >offset x:
+			<input type=number id=inpOffsetX oninput = updateObject(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'front and back distance from origin'>offset y:
+			<input type=number id=inpOffsetY onchange = updateObject(buildings); class = floatRight >
+		</p>
+
+		<p title = 'x distance' >length:
+			<input type=number id=inpLength min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'Y distance' >width:
+			<input type=number id=inpWidth min=1 oninput="validity.valid||(value='');" onchange = updateObject(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'Z distance: 1 to 1000' >height:
+			<input type=number id=inpHeight min=1 max=1000 step=1 oninput="validity.valid||(value='');" onchange=updateObject(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'building angle in degrees: -180 to 180' >orientation on site:
+			<input type=number id=inpAngle min=-180 max=180 step=1 value=0 onchange=updateObject(buildings);; class=floatRight />
+		</p>
+
+	</div>
+
+	<iframe id=ifrContents ></iframe>
+
+<script>
+
+	const ifrSource = 'build-well-threejs-qline.html';
+
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+	var building;
+	var buildings;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var scene;
+	var camera;
+	var controls;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var gridHelper, axesHelper, cameraHelper, groundHelper;
+
+	init();
+
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3>' +
+				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
+			'</h3>' +
+		'';
+
+		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
+
+		divMenu.innerHTML +=
+			'<hr>' +
+			'<p>Add adjacent buildings is a work in progress.</p>' +
+			'<p>Add sliders.</p>' +
+		'&#x1f578;';
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables()
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; max-height: calc( 100% - 50px ); max-width: 300px; overflow: auto; position: absolute; right: 0;' ;
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		building = scope.building;
+		buildings = scope.buildings;
+
+//console.log( 'buildings', buildings );
+
+		updateSelectObjects( buildings );
+
+	}
+
+
+
+/////////////////////
+
+
+	function updateSelectObjects( objects ) {
+
+		selObject.innerHTML = '';
+
+		for ( let i = 0; i < objects.children.length; i++ ) {
+
+			let obj = objects.children[ i ];
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
+
+		}
+
+//		selObject.selectedIndex = 0;
+		selObject.size = objects.children.length;
+		getObject( objects );
+
+	}
+
+
+
+	function getObject( objects ) {
+
+		const object = scene.getObjectByName( selObject.value );
+console.log( 'object', object );
+
+		const r2d = 180 / Math.PI;
+
+		inpName.value = object.name;
+
+		inpOffsetX.value = object.position.x;
+		inpOffsetY.value = object.position.y;
+
+		inpLength.value = object.scale.x;
+		inpWidth.value = object.scale.y;
+
+		inpHeight.value = object.scale.z;
+		inpAngle.value = r2d * object.rotation.z;
+
+		for ( child of objects.children ) {
+
+//					child.material.opacity = child.name === object.name ? 1 : 0.5;
+			child.visible = child.name === object.name || child.name.startsWith( 'Object' ) ? true : false;
+
+
+		};
+
+		object.position.set( 0, 0, 0 );
+
+	}
+
+
+
+	function deleteObject( objects ) {
+
+		let obj = objects.children[ selObject.selectedIndex ];
+
+		if ( ! obj ){ alert( 'Try adding a new object and selecting it before doing a delete' ); return;  }
+		objects.remove( obj );
+		obj.geometry.dispose();
+		obj.material.dispose();
+
+		updateSelectObjects( objects );
+
+	}
+
+
+
+	function addObject( objects ) {
+
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+		const material = new THREE.MeshPhongMaterial( { color: 0xfffff * Math.random(), transparent: true });
+		const mesh = new THREE.Mesh( geometry, material );
+		mesh.scale.set ( 20, 20, 50 );
+		mesh.position.set( 0, 0, 0.5 * mesh.scale.z );
+		mesh.name = 'Object ' + ( objects.children.length + 1 );
+		objects.add( mesh );
+
+		updateSelectObjects( objects )
+
+		selObject.selectedIndex = objects.children.length - 1;
+
+		updateObject( objects );
+
+	}
+
+
+
+
+
+
+	function updateObject( objects ) {
+
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI;
+console.log( 'objects', objects );
+
+		const object = objects.getObjectByName( selObject.value );
+console.log( 'object', object );
+
+		const meshX = parseFloat( inpLength.value );
+		const meshY = parseFloat( inpWidth.value );
+		const meshZ = parseFloat( inpHeight.value );
+
+		const meshAngle = parseFloat( inpAngle.value ) * d2r;
+
+		const meshPositionX = parseFloat( inpOffsetX.value );
+		const meshPositionY = parseFloat( inpOffsetY.value );
+
+//		const name = inpName.value;
+		inpName.value = selObject.value
+//		selObject.options[ selObject.selectedIndex ].innerHTML = inpName.value;
+
+		object.scale.set( meshX, meshY, meshZ );
+		object.position.set( meshPositionX, meshPositionY, meshZ );
+		object.rotation.set( 0, 0, -meshAngle );
+		object.name = name;
+
+		gridHelper.geometry.computeBoundingBox();
+		bbox = gridHelper.geometry.boundingBox.max;
+
+		if ( Math.abs( meshPositionX ) + 0.5 * meshX > bbox.x || Math.abs( meshPositionY ) + 0.5 * meshY > bbox.z ) {  // bbox: y is up
+
+			const size = 2 * ( Math.abs( meshPositionX ) + meshX + Math.abs( meshPositionY ) + meshY );
+
+			scope.addHelpers( size );
+			ground.scale.set( size, size, ground.scale.z );
+
+		}
+
+
+	}
+
+
+
+	function saveFile( objects ) {
+
+		let output = objects.toJSON();
+
+		try {
+
+			output = JSON.stringify( output, parseNumber, '\t' );
+			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+
+		} catch ( e ) {
+
+			output = JSON.stringify( output );
+
+		}
+
+		const blob = new Blob( [ output ] );
+		let a = document.body.appendChild( document.createElement( 'a' ) );
+
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'objects.json';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+
+
+</script>
+</body>
+</html>

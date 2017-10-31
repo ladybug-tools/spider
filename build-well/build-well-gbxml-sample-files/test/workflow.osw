@@ -1,0 +1,7 @@
+{
+   "created_at" : "20171031T003907Z",
+   "seed_file" : "../test.osm",
+   "steps" : [],
+   "updated_at" : "20171031T004017Z",
+   "weather_file" : "USA_CA_San.Francisco.724940_TMY2.epw"
+}

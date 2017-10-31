@@ -1,0 +1,91 @@
+  Processing Data Dictionary -- Complete
+  Maximum number of Alpha Args=        4500
+  Maximum number of Numeric Args=       21040
+  Number of Object Definitions=         789
+  Number of Section Definitions=           0
+  Total Number of Alpha Fields=       18957
+  Total Number of Numeric Fields=       40266
+  Total Number of Fields=       59223
+  Processing Input Data File -- Start
+  Echo of input lines is off. May be activated by setting the environmental variable DISPLAYINPUTINAUDIT=YES
+   ** Severe  ** IP: IDF line~227 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~243 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~259 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~275 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~291 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~307 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~323 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~353 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~369 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~385 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~401 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~417 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~433 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~449 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~479 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~495 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~511 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~527 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-14
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~543 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~559 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~575 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~605 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~621 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~637 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~653 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-19
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~669 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~685 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~701 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~731 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~747 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~763 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~779 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Warning ** IP: IDF line~837 Object=CONSTRUCTION, name=CONSTRUCTION 1, entered with less than minimum number of fields.
+   **   ~~~   ** Attempting fill to minimum.
+   ** Severe  ** IP: IDF line~837 Object=CONSTRUCTION, name=CONSTRUCTION 1, Required Field=[Outside Layer] was blank.
+   ** Warning ** IP: IDF line~855 Object=CONSTRUCTION:INTERNALSOURCE, name=CONSTRUCTION INTERNAL SOURCE 1, entered with less than minimum number of fields.
+   **   ~~~   ** Attempting fill to minimum.
+   ** Severe  ** IP: IDF line~855 Object=CONSTRUCTION:INTERNALSOURCE, name=CONSTRUCTION INTERNAL SOURCE 1, Required Field=[Outside Layer] was blank.
+  Processing Input Data File -- Complete
+  Maximum number of Alpha IDF Args=          29
+  Maximum number of Numeric IDF Args=          31
+  Number of IDF "Lines"=          82
+  Number of Defaulted Fields=         122
+  Number of Fields with Defaults=         244
+  Number of Autosized Fields=           0
+  Number of Autosizable Fields =           0
+  Number of Autocalculated Fields=          79
+  Number of Autocalculatable Fields =          79
+ Getting object=OUTPUT:SQLITE

@@ -57,26 +57,14 @@
 
 		<p title='x distance 1 to 200' >Building Width:
 			<output id=outBuildingWidth class=floatRight ></output>
-			<input type="range" id="rngWidth1" min=3 max=200 step=1 value=100 oninput=updateShape(); >
+			<input style=display:none; type="range" id="rngWidth1" min=3 max=200 step=1 value=100 oninput=updateShape(); >
 		</p>
 
 
-		<p title='How many storeys? 1 to 161'>Number of Floors: 
+		<p title='How many storeys? 1 to 161'>Number of Floors (not fully functional): 
 			<output id=outNumberOfFloors class=floatRight ></output>
 			<input type="range" id="rngNumberOfFloors" min=1 max=10 step=1 value=1 onchange=updateShape(); >
 		</p>
-
-<!--
-
-		<p title='Measured in square feet' >Floor Area in sf: 
-			<span id=inpFloorArea class=floatRight >0</span>
-		</p>
-
-
-		<p title='' >Volume in cubic feet:
-			<span type=number id=spnVolume class=floatRight ></span>
-		</p>
--->
 
 		<p title='Measured from 8 to 15' >Floor Height: 
 			<input id=inpFloorHeight type=number min=2 max=15 value=2.1 onchange=updateShape(); class=floatRight >
@@ -97,7 +85,7 @@
 		<p title='building angle in degrees -180 to 180' >Orientation degrees: 
 			<span type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight ></span>
 			<output id=outTempleWidth ></output>
-			<input type="range" id="rngOrientation" min=-180 max=180 step=1 value=0 onchange=updateShape(); >
+			<input type="range" id="rngOrientation" min=-180 max=180 step=1 value=0 oninput=updateShape(); >
 		</p>
 
 		<p id=pChecksum ></p>
@@ -182,8 +170,8 @@
 		groundHelper = scope.groundHelper;
 		cameraHelper = scope.cameraHelper;
 
-//		v = scope.v;
-//		v2 = scope.v2;
+		updateCampusSize = scope.updateCampusSize;
+
 		buildings = scope.meshes;
 		building = scope.building;
 
@@ -201,6 +189,15 @@
 //		building.wwr = 80;
 //		building.overhangDepth = 30;
 //		building.perimeterDepth = 10;
+
+		building.area = 800
+		building.box.length1 = 40;
+		building.box.width1 = 20;
+//		building.floors = 3;
+//		building.orientation = 20;
+//		building.wwr = 80;
+		building.overhangDepth = 0.5;
+		building.perimeterDepth = 3;
 
 		inpBuildingArea.value = building.area;
 
@@ -221,6 +218,8 @@
 		inpPerimeterDepth.value = building.perimeterDepth;
 
 //console.log( 'building', building );
+
+		updateCampusSize( 200 );
 
 		updateShape();
 
@@ -276,7 +275,8 @@
 		rngWidth1.value = widNew
 		outBuildingWidth.value = widNew.toFixed();
 
-		pChecksum.innerHTML = 'cecksum: ' + lenNew * widNew * storeysNew;
+//		pChecksum.innerHTML = 'cecksum: ' + lenNew * widNew * storeysNew;
+
 		updateMenuExtras();
 
 		updateMeshes();

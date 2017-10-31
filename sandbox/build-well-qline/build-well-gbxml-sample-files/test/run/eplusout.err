@@ -1,0 +1,335 @@
+Program Version,EnergyPlus, Version 8.8.0-7c3bbe4830, YMD=2017.10.30 02:16,IDD_Version 8.8.0
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    224 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-1
+   ************* Only last 3 lines before error line shown.....
+   *************    225   diagonal-interior-wall-floor-1-space-1, !- Name
+   *************    226   Wall,                                   !- Surface Type
+   *************    227   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~227 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    240 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-4 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    241   diagonal-interior-wall-floor-1-space-4 Reversed, !- Name
+   *************    242   Wall,                                   !- Surface Type
+   *************    243   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~243 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    256 BuildingSurface:Detailed,
+   ************* indicated Name=exterior-wall-floor-1-space-1
+   ************* Only last 3 lines before error line shown.....
+   *************    257   exterior-wall-floor-1-space-1,          !- Name
+   *************    258   Wall,                                   !- Surface Type
+   *************    259   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~259 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    272 FenestrationSurface:Detailed,
+   ************* indicated Name=bw-opening-4
+   ************* Only last 3 lines before error line shown.....
+   *************    273   bw-opening-4,                           !- Name
+   *************    274   Window,                                 !- Surface Type
+   *************    275   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~275 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    288 BuildingSurface:Detailed,
+   ************* indicated Name=floor-1-space-1
+   ************* Only last 3 lines before error line shown.....
+   *************    289   floor-1-space-1,                        !- Name
+   *************    290   Floor,                                  !- Surface Type
+   *************    291   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~291 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    304 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-1
+   ************* Only last 3 lines before error line shown.....
+   *************    305   interior-wall-floor-1-space-1,          !- Name
+   *************    306   Wall,                                   !- Surface Type
+   *************    307   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~307 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    320 BuildingSurface:Detailed,
+   ************* indicated Name=roof-floor-1-space-1
+   ************* Only last 3 lines before error line shown.....
+   *************    321   roof-floor-1-space-1,                   !- Name
+   *************    322   Roof,                                   !- Surface Type
+   *************    323   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~323 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    350 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-1 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    351   diagonal-interior-wall-floor-1-space-1 Reversed, !- Name
+   *************    352   Wall,                                   !- Surface Type
+   *************    353   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~353 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    366 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-2
+   ************* Only last 3 lines before error line shown.....
+   *************    367   diagonal-interior-wall-floor-1-space-2, !- Name
+   *************    368   Wall,                                   !- Surface Type
+   *************    369   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~369 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    382 BuildingSurface:Detailed,
+   ************* indicated Name=exterior-wall-floor-1-space-2
+   ************* Only last 3 lines before error line shown.....
+   *************    383   exterior-wall-floor-1-space-2,          !- Name
+   *************    384   Wall,                                   !- Surface Type
+   *************    385   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~385 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    398 FenestrationSurface:Detailed,
+   ************* indicated Name=bw-opening-9
+   ************* Only last 3 lines before error line shown.....
+   *************    399   bw-opening-9,                           !- Name
+   *************    400   Window,                                 !- Surface Type
+   *************    401   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~401 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    414 BuildingSurface:Detailed,
+   ************* indicated Name=floor-1-space-2
+   ************* Only last 3 lines before error line shown.....
+   *************    415   floor-1-space-2,                        !- Name
+   *************    416   Floor,                                  !- Surface Type
+   *************    417   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~417 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    430 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-2
+   ************* Only last 3 lines before error line shown.....
+   *************    431   interior-wall-floor-1-space-2,          !- Name
+   *************    432   Wall,                                   !- Surface Type
+   *************    433   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~433 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    446 BuildingSurface:Detailed,
+   ************* indicated Name=roof-floor-1-space-2
+   ************* Only last 3 lines before error line shown.....
+   *************    447   roof-floor-1-space-2,                   !- Name
+   *************    448   Roof,                                   !- Surface Type
+   *************    449   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~449 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    476 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-2 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    477   diagonal-interior-wall-floor-1-space-2 Reversed, !- Name
+   *************    478   Wall,                                   !- Surface Type
+   *************    479   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~479 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    492 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-3
+   ************* Only last 3 lines before error line shown.....
+   *************    493   diagonal-interior-wall-floor-1-space-3, !- Name
+   *************    494   Wall,                                   !- Surface Type
+   *************    495   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~495 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    508 BuildingSurface:Detailed,
+   ************* indicated Name=exterior-wall-floor-1-space-3
+   ************* Only last 3 lines before error line shown.....
+   *************    509   exterior-wall-floor-1-space-3,          !- Name
+   *************    510   Wall,                                   !- Surface Type
+   *************    511   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~511 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    524 FenestrationSurface:Detailed,
+   ************* indicated Name=bw-opening-14
+   ************* Only last 3 lines before error line shown.....
+   *************    525   bw-opening-14,                          !- Name
+   *************    526   Window,                                 !- Surface Type
+   *************    527   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~527 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-14
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    540 BuildingSurface:Detailed,
+   ************* indicated Name=floor-1-space-3
+   ************* Only last 3 lines before error line shown.....
+   *************    541   floor-1-space-3,                        !- Name
+   *************    542   Floor,                                  !- Surface Type
+   *************    543   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~543 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    556 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-3
+   ************* Only last 3 lines before error line shown.....
+   *************    557   interior-wall-floor-1-space-3,          !- Name
+   *************    558   Wall,                                   !- Surface Type
+   *************    559   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~559 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    572 BuildingSurface:Detailed,
+   ************* indicated Name=roof-floor-1-space-3
+   ************* Only last 3 lines before error line shown.....
+   *************    573   roof-floor-1-space-3,                   !- Name
+   *************    574   Roof,                                   !- Surface Type
+   *************    575   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~575 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    602 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-3 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    603   diagonal-interior-wall-floor-1-space-3 Reversed, !- Name
+   *************    604   Wall,                                   !- Surface Type
+   *************    605   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~605 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    618 BuildingSurface:Detailed,
+   ************* indicated Name=diagonal-interior-wall-floor-1-space-4
+   ************* Only last 3 lines before error line shown.....
+   *************    619   diagonal-interior-wall-floor-1-space-4, !- Name
+   *************    620   Wall,                                   !- Surface Type
+   *************    621   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~621 Error detected in Object=BUILDINGSURFACE:DETAILED, name=DIAGONAL-INTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    634 BuildingSurface:Detailed,
+   ************* indicated Name=exterior-wall-floor-1-space-4
+   ************* Only last 3 lines before error line shown.....
+   *************    635   exterior-wall-floor-1-space-4,          !- Name
+   *************    636   Wall,                                   !- Surface Type
+   *************    637   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~637 Error detected in Object=BUILDINGSURFACE:DETAILED, name=EXTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    650 FenestrationSurface:Detailed,
+   ************* indicated Name=bw-opening-19
+   ************* Only last 3 lines before error line shown.....
+   *************    651   bw-opening-19,                          !- Name
+   *************    652   Window,                                 !- Surface Type
+   *************    653   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~653 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=BW-OPENING-19
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    666 BuildingSurface:Detailed,
+   ************* indicated Name=floor-1-space-4
+   ************* Only last 3 lines before error line shown.....
+   *************    667   floor-1-space-4,                        !- Name
+   *************    668   Floor,                                  !- Surface Type
+   *************    669   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~669 Error detected in Object=BUILDINGSURFACE:DETAILED, name=FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    682 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-4
+   ************* Only last 3 lines before error line shown.....
+   *************    683   interior-wall-floor-1-space-4,          !- Name
+   *************    684   Wall,                                   !- Surface Type
+   *************    685   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~685 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    698 BuildingSurface:Detailed,
+   ************* indicated Name=roof-floor-1-space-4
+   ************* Only last 3 lines before error line shown.....
+   *************    699   roof-floor-1-space-4,                   !- Name
+   *************    700   Roof,                                   !- Surface Type
+   *************    701   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~701 Error detected in Object=BUILDINGSURFACE:DETAILED, name=ROOF-FLOOR-1-SPACE-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    728 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-1 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    729   interior-wall-floor-1-space-1 Reversed, !- Name
+   *************    730   Wall,                                   !- Surface Type
+   *************    731   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~731 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-1 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    744 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-2 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    745   interior-wall-floor-1-space-2 Reversed, !- Name
+   *************    746   Wall,                                   !- Surface Type
+   *************    747   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~747 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-2 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    760 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-3 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    761   interior-wall-floor-1-space-3 Reversed, !- Name
+   *************    762   Wall,                                   !- Surface Type
+   *************    763   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~763 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-3 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    776 BuildingSurface:Detailed,
+   ************* indicated Name=interior-wall-floor-1-space-4 Reversed
+   ************* Only last 3 lines before error line shown.....
+   *************    777   interior-wall-floor-1-space-4 Reversed, !- Name
+   *************    778   Wall,                                   !- Surface Type
+   *************    779   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~779 Error detected in Object=BUILDINGSURFACE:DETAILED, name=INTERIOR-WALL-FLOOR-1-SPACE-4 REVERSED
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: IDF line~837 Object=CONSTRUCTION, name=CONSTRUCTION 1, Required Field=[Outside Layer] was blank.
+   ** Severe  ** IP: IDF line~855 Object=CONSTRUCTION:INTERNALSOURCE, name=CONSTRUCTION INTERNAL SOURCE 1, Required Field=[Outside Layer] was blank.
+   ** Warning ** IP: Note -- Some missing fields have been filled with defaults. See the audit output file for details.
+   ** Severe  ** IP: Blank "required" fields found in input
+   **   ~~~   ** Possible Invalid Numerics or other problems
+   **  Fatal  ** IP: Errors occurred on processing IDF file. Preceding condition(s) cause termination.
+   ...Summary of Errors that led to program termination:
+   ..... Reference severe error count=35
+   ..... Last severe error=IP: Blank "required" fields found in input
+   ************* Warning:  Node connection errors not checked - most system input has not been read (see previous warning).
+   ************* Fatal error -- final processing.  Program exited before simulations began.  See previous error messages.
+   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
+   ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
+   ************* EnergyPlus Terminated--Fatal Error Detected. 1 Warning; 35 Severe Errors; Elapsed Time=00hr 00min  0.25sec

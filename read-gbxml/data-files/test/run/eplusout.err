@@ -1,0 +1,2652 @@
+Program Version,EnergyPlus, Version 8.8.0-7c3bbe4830, YMD=2017.10.30 02:05,IDD_Version 8.8.0
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    225 BuildingSurface:Detailed,
+   ************* indicated Name=B-00_110-E-F-58
+   ************* Only last 3 lines before error line shown.....
+   *************    226   B-00_110-E-F-58,                        !- Name
+   *************    227   Floor,                                  !- Surface Type
+   *************    228   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~228 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-00_110-E-F-58
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    241 BuildingSurface:Detailed,
+   ************* indicated Name=B-00_111-E-F-63
+   ************* Only last 3 lines before error line shown.....
+   *************    242   B-00_111-E-F-63,                        !- Name
+   *************    243   Floor,                                  !- Surface Type
+   *************    244   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~244 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-00_111-E-F-63
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    257 BuildingSurface:Detailed,
+   ************* indicated Name=B-00_112-E-F-70
+   ************* Only last 3 lines before error line shown.....
+   *************    258   B-00_112-E-F-70,                        !- Name
+   *************    259   Floor,                                  !- Surface Type
+   *************    260   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~260 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-00_112-E-F-70
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    273 BuildingSurface:Detailed,
+   ************* indicated Name=B-00_113-E-F-76
+   ************* Only last 3 lines before error line shown.....
+   *************    274   B-00_113-E-F-76,                        !- Name
+   *************    275   Floor,                                  !- Surface Type
+   *************    276   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~276 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-00_113-E-F-76
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    293 BuildingSurface:Detailed,
+   ************* indicated Name=B-00_123-E-F-163
+   ************* Only last 3 lines before error line shown.....
+   *************    294   B-00_123-E-F-163,                       !- Name
+   *************    295   Floor,                                  !- Surface Type
+   *************    296   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~296 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-00_123-E-F-163
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    309 BuildingSurface:Detailed,
+   ************* indicated Name=B-00_129-E-F-185
+   ************* Only last 3 lines before error line shown.....
+   *************    310   B-00_129-E-F-185,                       !- Name
+   *************    311   Floor,                                  !- Surface Type
+   *************    312   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~312 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-00_129-E-F-185
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    325 BuildingSurface:Detailed,
+   ************* indicated Name=B-00_130-E-F-194
+   ************* Only last 3 lines before error line shown.....
+   *************    326   B-00_130-E-F-194,                       !- Name
+   *************    327   Floor,                                  !- Surface Type
+   *************    328   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~328 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-00_130-E-F-194
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    345 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_100-E-F-425
+   ************* Only last 3 lines before error line shown.....
+   *************    346   B-B1_100-E-F-425,                       !- Name
+   *************    347   Floor,                                  !- Surface Type
+   *************    348   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~348 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_100-E-F-425
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    361 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_101-E-F-431
+   ************* Only last 3 lines before error line shown.....
+   *************    362   B-B1_101-E-F-431,                       !- Name
+   *************    363   Floor,                                  !- Surface Type
+   *************    364   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~364 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_101-E-F-431
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    377 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_102-E-F-437
+   ************* Only last 3 lines before error line shown.....
+   *************    378   B-B1_102-E-F-437,                       !- Name
+   *************    379   Floor,                                  !- Surface Type
+   *************    380   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~380 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_102-E-F-437
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    393 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_103-E-F-441
+   ************* Only last 3 lines before error line shown.....
+   *************    394   B-B1_103-E-F-441,                       !- Name
+   *************    395   Floor,                                  !- Surface Type
+   *************    396   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~396 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_103-E-F-441
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    409 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_104-E-F-446
+   ************* Only last 3 lines before error line shown.....
+   *************    410   B-B1_104-E-F-446,                       !- Name
+   *************    411   Floor,                                  !- Surface Type
+   *************    412   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~412 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_104-E-F-446
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    435 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_105-E-F-460
+   ************* Only last 3 lines before error line shown.....
+   *************    436   B-B1_105-E-F-460,                       !- Name
+   *************    437   Floor,                                  !- Surface Type
+   *************    438   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~438 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_105-E-F-460
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    453 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_106-E-F-464
+   ************* Only last 3 lines before error line shown.....
+   *************    454   B-B1_106-E-F-464,                       !- Name
+   *************    455   Floor,                                  !- Surface Type
+   *************    456   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~456 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_106-E-F-464
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    473 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_107-E-F-470
+   ************* Only last 3 lines before error line shown.....
+   *************    474   B-B1_107-E-F-470,                       !- Name
+   *************    475   Floor,                                  !- Surface Type
+   *************    476   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~476 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_107-E-F-470
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    493 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_108-E-F-474
+   ************* Only last 3 lines before error line shown.....
+   *************    494   B-B1_108-E-F-474,                       !- Name
+   *************    495   Floor,                                  !- Surface Type
+   *************    496   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~496 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_108-E-F-474
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    509 BuildingSurface:Detailed,
+   ************* indicated Name=B-B1_109-E-F-480
+   ************* Only last 3 lines before error line shown.....
+   *************    510   B-B1_109-E-F-480,                       !- Name
+   *************    511   Floor,                                  !- Surface Type
+   *************    512   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~512 Error detected in Object=BUILDINGSURFACE:DETAILED, name=B-B1_109-E-F-480
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    537 BuildingSurface:Detailed,
+   ************* indicated Name=E-00_113-E-W-75
+   ************* Only last 3 lines before error line shown.....
+   *************    538   E-00_113-E-W-75,                        !- Name
+   *************    539   Wall,                                   !- Surface Type
+   *************    540   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~540 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-00_113-E-W-75
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    553 FenestrationSurface:Detailed,
+   ************* indicated Name=E-00_113-E-W-75-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************    554   E-00_113-E-W-75-W-1,                    !- Name
+   *************    555   Window,                                 !- Surface Type
+   *************    556   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~556 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-00_113-E-W-75-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    569 FenestrationSurface:Detailed,
+   ************* indicated Name=E-00_113-E-W-75-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************    570   E-00_113-E-W-75-W-2,                    !- Name
+   *************    571   Window,                                 !- Surface Type
+   *************    572   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~572 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-00_113-E-W-75-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    585 FenestrationSurface:Detailed,
+   ************* indicated Name=E-00_113-E-W-75-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************    586   E-00_113-E-W-75-W-3,                    !- Name
+   *************    587   Window,                                 !- Surface Type
+   *************    588   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~588 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-00_113-E-W-75-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    601 BuildingSurface:Detailed,
+   ************* indicated Name=E-00_130-E-W-192
+   ************* Only last 3 lines before error line shown.....
+   *************    602   E-00_130-E-W-192,                       !- Name
+   *************    603   Wall,                                   !- Surface Type
+   *************    604   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~604 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-00_130-E-W-192
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    617 FenestrationSurface:Detailed,
+   ************* indicated Name=E-00_130-E-W-192-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************    618   E-00_130-E-W-192-W-1,                   !- Name
+   *************    619   Window,                                 !- Surface Type
+   *************    620   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~620 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-00_130-E-W-192-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    633 FenestrationSurface:Detailed,
+   ************* indicated Name=E-00_130-E-W-192-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************    634   E-00_130-E-W-192-W-2,                   !- Name
+   *************    635   Window,                                 !- Surface Type
+   *************    636   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~636 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-00_130-E-W-192-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    649 FenestrationSurface:Detailed,
+   ************* indicated Name=E-00_130-E-W-192-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************    650   E-00_130-E-W-192-W-3,                   !- Name
+   *************    651   Window,                                 !- Surface Type
+   *************    652   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~652 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-00_130-E-W-192-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    665 FenestrationSurface:Detailed,
+   ************* indicated Name=E-00_130-E-W-192-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************    666   E-00_130-E-W-192-W-4,                   !- Name
+   *************    667   Window,                                 !- Surface Type
+   *************    668   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~668 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-00_130-E-W-192-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    681 BuildingSurface:Detailed,
+   ************* indicated Name=E-01_115-E-W-277
+   ************* Only last 3 lines before error line shown.....
+   *************    682   E-01_115-E-W-277,                       !- Name
+   *************    683   Wall,                                   !- Surface Type
+   *************    684   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~684 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-01_115-E-W-277
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    697 FenestrationSurface:Detailed,
+   ************* indicated Name=E-01_115-E-W-277-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************    698   E-01_115-E-W-277-W-1,                   !- Name
+   *************    699   Window,                                 !- Surface Type
+   *************    700   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~700 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-01_115-E-W-277-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    713 BuildingSurface:Detailed,
+   ************* indicated Name=E-01_116-E-W-284
+   ************* Only last 3 lines before error line shown.....
+   *************    714   E-01_116-E-W-284,                       !- Name
+   *************    715   Wall,                                   !- Surface Type
+   *************    716   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~716 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-01_116-E-W-284
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    729 FenestrationSurface:Detailed,
+   ************* indicated Name=E-01_116-E-W-284-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************    730   E-01_116-E-W-284-W-1,                   !- Name
+   *************    731   Window,                                 !- Surface Type
+   *************    732   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~732 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-01_116-E-W-284-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    745 FenestrationSurface:Detailed,
+   ************* indicated Name=E-01_116-E-W-284-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************    746   E-01_116-E-W-284-W-2,                   !- Name
+   *************    747   Window,                                 !- Surface Type
+   *************    748   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~748 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-01_116-E-W-284-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    761 BuildingSurface:Detailed,
+   ************* indicated Name=E-01_117-E-W-288
+   ************* Only last 3 lines before error line shown.....
+   *************    762   E-01_117-E-W-288,                       !- Name
+   *************    763   Wall,                                   !- Surface Type
+   *************    764   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~764 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-01_117-E-W-288
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    777 FenestrationSurface:Detailed,
+   ************* indicated Name=E-01_117-E-W-288-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************    778   E-01_117-E-W-288-W-1,                   !- Name
+   *************    779   Window,                                 !- Surface Type
+   *************    780   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~780 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-01_117-E-W-288-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    793 FenestrationSurface:Detailed,
+   ************* indicated Name=E-01_117-E-W-288-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************    794   E-01_117-E-W-288-W-2,                   !- Name
+   *************    795   Window,                                 !- Surface Type
+   *************    796   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~796 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-01_117-E-W-288-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    809 FenestrationSurface:Detailed,
+   ************* indicated Name=E-01_117-E-W-288-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************    810   E-01_117-E-W-288-W-3,                   !- Name
+   *************    811   Window,                                 !- Surface Type
+   *************    812   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~812 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-01_117-E-W-288-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    825 FenestrationSurface:Detailed,
+   ************* indicated Name=E-01_117-E-W-288-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************    826   E-01_117-E-W-288-W-4,                   !- Name
+   *************    827   Window,                                 !- Surface Type
+   *************    828   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~828 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-01_117-E-W-288-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    841 BuildingSurface:Detailed,
+   ************* indicated Name=E-02_114-E-W-405
+   ************* Only last 3 lines before error line shown.....
+   *************    842   E-02_114-E-W-405,                       !- Name
+   *************    843   Wall,                                   !- Surface Type
+   *************    844   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~844 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-02_114-E-W-405
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    857 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_114-E-W-405-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************    858   E-02_114-E-W-405-W-1,                   !- Name
+   *************    859   Window,                                 !- Surface Type
+   *************    860   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~860 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_114-E-W-405-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    873 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_114-E-W-405-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************    874   E-02_114-E-W-405-W-2,                   !- Name
+   *************    875   Window,                                 !- Surface Type
+   *************    876   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~876 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_114-E-W-405-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    889 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_114-E-W-405-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************    890   E-02_114-E-W-405-W-3,                   !- Name
+   *************    891   Window,                                 !- Surface Type
+   *************    892   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~892 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_114-E-W-405-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    905 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_114-E-W-405-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************    906   E-02_114-E-W-405-W-4,                   !- Name
+   *************    907   Window,                                 !- Surface Type
+   *************    908   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~908 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_114-E-W-405-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    921 BuildingSurface:Detailed,
+   ************* indicated Name=E-02_115-E-W-411
+   ************* Only last 3 lines before error line shown.....
+   *************    922   E-02_115-E-W-411,                       !- Name
+   *************    923   Wall,                                   !- Surface Type
+   *************    924   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~924 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-02_115-E-W-411
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    937 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_115-E-W-411-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************    938   E-02_115-E-W-411-W-1,                   !- Name
+   *************    939   Window,                                 !- Surface Type
+   *************    940   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~940 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_115-E-W-411-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    953 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_115-E-W-411-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************    954   E-02_115-E-W-411-W-2,                   !- Name
+   *************    955   Window,                                 !- Surface Type
+   *************    956   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~956 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_115-E-W-411-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    969 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_115-E-W-411-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************    970   E-02_115-E-W-411-W-3,                   !- Name
+   *************    971   Window,                                 !- Surface Type
+   *************    972   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~972 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_115-E-W-411-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************    985 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_115-E-W-411-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************    986   E-02_115-E-W-411-W-4,                   !- Name
+   *************    987   Window,                                 !- Surface Type
+   *************    988   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~988 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_115-E-W-411-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1001 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_115-E-W-411-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   1002   E-02_115-E-W-411-W-5,                   !- Name
+   *************   1003   Window,                                 !- Surface Type
+   *************   1004   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1004 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_115-E-W-411-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1017 FenestrationSurface:Detailed,
+   ************* indicated Name=E-02_115-E-W-411-W-6
+   ************* Only last 3 lines before error line shown.....
+   *************   1018   E-02_115-E-W-411-W-6,                   !- Name
+   *************   1019   Window,                                 !- Surface Type
+   *************   1020   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1020 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=E-02_115-E-W-411-W-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1033 BuildingSurface:Detailed,
+   ************* indicated Name=E-B1_104-E-W-445
+   ************* Only last 3 lines before error line shown.....
+   *************   1034   E-B1_104-E-W-445,                       !- Name
+   *************   1035   Wall,                                   !- Surface Type
+   *************   1036   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1036 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-B1_104-E-W-445
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1049 BuildingSurface:Detailed,
+   ************* indicated Name=E-B1_105-E-W-459
+   ************* Only last 3 lines before error line shown.....
+   *************   1050   E-B1_105-E-W-459,                       !- Name
+   *************   1051   Wall,                                   !- Surface Type
+   *************   1052   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1052 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-B1_105-E-W-459
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1065 BuildingSurface:Detailed,
+   ************* indicated Name=E-B1_106-E-W-462
+   ************* Only last 3 lines before error line shown.....
+   *************   1066   E-B1_106-E-W-462,                       !- Name
+   *************   1067   Wall,                                   !- Surface Type
+   *************   1068   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1068 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-B1_106-E-W-462
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1081 BuildingSurface:Detailed,
+   ************* indicated Name=E-RF_100-E-W-482
+   ************* Only last 3 lines before error line shown.....
+   *************   1082   E-RF_100-E-W-482,                       !- Name
+   *************   1083   Wall,                                   !- Surface Type
+   *************   1084   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1084 Error detected in Object=BUILDINGSURFACE:DETAILED, name=E-RF_100-E-W-482
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1097 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_101-E-W-7
+   ************* Only last 3 lines before error line shown.....
+   *************   1098   N-00_101-E-W-7,                         !- Name
+   *************   1099   Wall,                                   !- Surface Type
+   *************   1100   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1100 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_101-E-W-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1113 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_101-E-W-7-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1114   N-00_101-E-W-7-D-1,                     !- Name
+   *************   1115   GlassDoor,                              !- Surface Type
+   *************   1116   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1116 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_101-E-W-7-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1129 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_102-E-W-16
+   ************* Only last 3 lines before error line shown.....
+   *************   1130   N-00_102-E-W-16,                        !- Name
+   *************   1131   Wall,                                   !- Surface Type
+   *************   1132   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1132 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_102-E-W-16
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1145 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_103-E-W-22
+   ************* Only last 3 lines before error line shown.....
+   *************   1146   N-00_103-E-W-22,                        !- Name
+   *************   1147   Wall,                                   !- Surface Type
+   *************   1148   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1148 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_103-E-W-22
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1161 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_103-E-W-22-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1162   N-00_103-E-W-22-D-1,                    !- Name
+   *************   1163   GlassDoor,                              !- Surface Type
+   *************   1164   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1164 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_103-E-W-22-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1177 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_103-E-W-22-D-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1178   N-00_103-E-W-22-D-2,                    !- Name
+   *************   1179   GlassDoor,                              !- Surface Type
+   *************   1180   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1180 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_103-E-W-22-D-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1193 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_106-E-W-35
+   ************* Only last 3 lines before error line shown.....
+   *************   1194   N-00_106-E-W-35,                        !- Name
+   *************   1195   Wall,                                   !- Surface Type
+   *************   1196   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1196 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_106-E-W-35
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1209 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_109-E-W-52
+   ************* Only last 3 lines before error line shown.....
+   *************   1210   N-00_109-E-W-52,                        !- Name
+   *************   1211   Wall,                                   !- Surface Type
+   *************   1212   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1212 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_109-E-W-52
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1225 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_109-E-W-52-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1226   N-00_109-E-W-52-D-1,                    !- Name
+   *************   1227   GlassDoor,                              !- Surface Type
+   *************   1228   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1228 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_109-E-W-52-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1241 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_109-E-W-52-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1242   N-00_109-E-W-52-W-2,                    !- Name
+   *************   1243   Window,                                 !- Surface Type
+   *************   1244   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1244 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_109-E-W-52-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1257 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_110-E-W-57
+   ************* Only last 3 lines before error line shown.....
+   *************   1258   N-00_110-E-W-57,                        !- Name
+   *************   1259   Wall,                                   !- Surface Type
+   *************   1260   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1260 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_110-E-W-57
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1273 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_110-E-W-57-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1274   N-00_110-E-W-57-D-1,                    !- Name
+   *************   1275   GlassDoor,                              !- Surface Type
+   *************   1276   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1276 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_110-E-W-57-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1289 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_110-E-W-57-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1290   N-00_110-E-W-57-W-2,                    !- Name
+   *************   1291   Window,                                 !- Surface Type
+   *************   1292   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1292 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_110-E-W-57-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1305 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_112-E-W-69
+   ************* Only last 3 lines before error line shown.....
+   *************   1306   N-00_112-E-W-69,                        !- Name
+   *************   1307   Wall,                                   !- Surface Type
+   *************   1308   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1308 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_112-E-W-69
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1321 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_112-E-W-69-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1322   N-00_112-E-W-69-D-1,                    !- Name
+   *************   1323   GlassDoor,                              !- Surface Type
+   *************   1324   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1324 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_112-E-W-69-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1337 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_112-E-W-69-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1338   N-00_112-E-W-69-W-2,                    !- Name
+   *************   1339   Window,                                 !- Surface Type
+   *************   1340   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1340 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_112-E-W-69-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1353 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_113-E-W-74
+   ************* Only last 3 lines before error line shown.....
+   *************   1354   N-00_113-E-W-74,                        !- Name
+   *************   1355   Wall,                                   !- Surface Type
+   *************   1356   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1356 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_113-E-W-74
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1369 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_113-E-W-74-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1370   N-00_113-E-W-74-D-1,                    !- Name
+   *************   1371   GlassDoor,                              !- Surface Type
+   *************   1372   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1372 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_113-E-W-74-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1385 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_113-E-W-74-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1386   N-00_113-E-W-74-W-2,                    !- Name
+   *************   1387   Window,                                 !- Surface Type
+   *************   1388   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1388 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_113-E-W-74-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1401 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_113-E-W-74-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   1402   N-00_113-E-W-74-W-3,                    !- Name
+   *************   1403   Window,                                 !- Surface Type
+   *************   1404   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1404 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_113-E-W-74-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1417 BuildingSurface:Detailed,
+   ************* indicated Name=N-00_128-E-W-182
+   ************* Only last 3 lines before error line shown.....
+   *************   1418   N-00_128-E-W-182,                       !- Name
+   *************   1419   Wall,                                   !- Surface Type
+   *************   1420   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1420 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-00_128-E-W-182
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1433 FenestrationSurface:Detailed,
+   ************* indicated Name=N-00_128-E-W-182-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1434   N-00_128-E-W-182-W-1,                   !- Name
+   *************   1435   Window,                                 !- Surface Type
+   *************   1436   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1436 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-00_128-E-W-182-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1449 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_110-E-W-260
+   ************* Only last 3 lines before error line shown.....
+   *************   1450   N-01_110-E-W-260,                       !- Name
+   *************   1451   Wall,                                   !- Surface Type
+   *************   1452   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1452 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_110-E-W-260
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1465 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_111-E-W-264
+   ************* Only last 3 lines before error line shown.....
+   *************   1466   N-01_111-E-W-264,                       !- Name
+   *************   1467   Wall,                                   !- Surface Type
+   *************   1468   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1468 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_111-E-W-264
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1481 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_112-E-W-267
+   ************* Only last 3 lines before error line shown.....
+   *************   1482   N-01_112-E-W-267,                       !- Name
+   *************   1483   Wall,                                   !- Surface Type
+   *************   1484   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1484 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_112-E-W-267
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1497 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_113-E-W-270
+   ************* Only last 3 lines before error line shown.....
+   *************   1498   N-01_113-E-W-270,                       !- Name
+   *************   1499   Wall,                                   !- Surface Type
+   *************   1500   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1500 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_113-E-W-270
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1513 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_114-E-W-273
+   ************* Only last 3 lines before error line shown.....
+   *************   1514   N-01_114-E-W-273,                       !- Name
+   *************   1515   Wall,                                   !- Surface Type
+   *************   1516   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1516 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_114-E-W-273
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1529 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_115-E-W-276
+   ************* Only last 3 lines before error line shown.....
+   *************   1530   N-01_115-E-W-276,                       !- Name
+   *************   1531   Wall,                                   !- Surface Type
+   *************   1532   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1532 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_115-E-W-276
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1545 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_115-E-W-276-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1546   N-01_115-E-W-276-W-1,                   !- Name
+   *************   1547   Window,                                 !- Surface Type
+   *************   1548   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1548 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_115-E-W-276-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1561 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_115-E-W-276-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1562   N-01_115-E-W-276-W-2,                   !- Name
+   *************   1563   Window,                                 !- Surface Type
+   *************   1564   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1564 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_115-E-W-276-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1577 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_115-E-W-276-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   1578   N-01_115-E-W-276-W-3,                   !- Name
+   *************   1579   Window,                                 !- Surface Type
+   *************   1580   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1580 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_115-E-W-276-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1593 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_116-E-W-283
+   ************* Only last 3 lines before error line shown.....
+   *************   1594   N-01_116-E-W-283,                       !- Name
+   *************   1595   Wall,                                   !- Surface Type
+   *************   1596   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1596 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_116-E-W-283
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1609 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_116-E-W-283-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1610   N-01_116-E-W-283-W-1,                   !- Name
+   *************   1611   Window,                                 !- Surface Type
+   *************   1612   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1612 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_116-E-W-283-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1625 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_116-E-W-283-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1626   N-01_116-E-W-283-W-2,                   !- Name
+   *************   1627   Window,                                 !- Surface Type
+   *************   1628   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1628 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_116-E-W-283-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1641 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_116-E-W-283-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   1642   N-01_116-E-W-283-W-3,                   !- Name
+   *************   1643   Window,                                 !- Surface Type
+   *************   1644   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1644 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_116-E-W-283-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1657 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_116-E-W-283-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   1658   N-01_116-E-W-283-W-4,                   !- Name
+   *************   1659   Window,                                 !- Surface Type
+   *************   1660   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1660 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_116-E-W-283-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1673 BuildingSurface:Detailed,
+   ************* indicated Name=N-01_118-E-W-297
+   ************* Only last 3 lines before error line shown.....
+   *************   1674   N-01_118-E-W-297,                       !- Name
+   *************   1675   Wall,                                   !- Surface Type
+   *************   1676   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1676 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-01_118-E-W-297
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1689 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_118-E-W-297-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1690   N-01_118-E-W-297-W-1,                   !- Name
+   *************   1691   Window,                                 !- Surface Type
+   *************   1692   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1692 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_118-E-W-297-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1705 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_118-E-W-297-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1706   N-01_118-E-W-297-W-2,                   !- Name
+   *************   1707   Window,                                 !- Surface Type
+   *************   1708   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1708 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_118-E-W-297-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1721 FenestrationSurface:Detailed,
+   ************* indicated Name=N-01_118-E-W-297-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   1722   N-01_118-E-W-297-W-3,                   !- Name
+   *************   1723   Window,                                 !- Surface Type
+   *************   1724   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1724 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-01_118-E-W-297-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1737 BuildingSurface:Detailed,
+   ************* indicated Name=N-02_103-E-W-343
+   ************* Only last 3 lines before error line shown.....
+   *************   1738   N-02_103-E-W-343,                       !- Name
+   *************   1739   Wall,                                   !- Surface Type
+   *************   1740   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1740 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-02_103-E-W-343
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1753 BuildingSurface:Detailed,
+   ************* indicated Name=N-02_106-E-W-359
+   ************* Only last 3 lines before error line shown.....
+   *************   1754   N-02_106-E-W-359,                       !- Name
+   *************   1755   Wall,                                   !- Surface Type
+   *************   1756   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1756 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-02_106-E-W-359
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1769 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_106-E-W-359-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1770   N-02_106-E-W-359-W-1,                   !- Name
+   *************   1771   Window,                                 !- Surface Type
+   *************   1772   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1772 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_106-E-W-359-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1785 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_106-E-W-359-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1786   N-02_106-E-W-359-W-2,                   !- Name
+   *************   1787   Window,                                 !- Surface Type
+   *************   1788   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1788 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_106-E-W-359-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1801 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_106-E-W-359-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   1802   N-02_106-E-W-359-W-3,                   !- Name
+   *************   1803   Window,                                 !- Surface Type
+   *************   1804   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1804 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_106-E-W-359-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1817 BuildingSurface:Detailed,
+   ************* indicated Name=N-02_107-E-W-365
+   ************* Only last 3 lines before error line shown.....
+   *************   1818   N-02_107-E-W-365,                       !- Name
+   *************   1819   Wall,                                   !- Surface Type
+   *************   1820   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1820 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-02_107-E-W-365
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1833 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_107-E-W-365-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1834   N-02_107-E-W-365-W-1,                   !- Name
+   *************   1835   Window,                                 !- Surface Type
+   *************   1836   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1836 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_107-E-W-365-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1849 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_107-E-W-365-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1850   N-02_107-E-W-365-W-2,                   !- Name
+   *************   1851   Window,                                 !- Surface Type
+   *************   1852   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1852 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_107-E-W-365-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1865 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_107-E-W-365-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   1866   N-02_107-E-W-365-W-3,                   !- Name
+   *************   1867   Window,                                 !- Surface Type
+   *************   1868   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1868 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_107-E-W-365-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1881 BuildingSurface:Detailed,
+   ************* indicated Name=N-02_110-E-W-380
+   ************* Only last 3 lines before error line shown.....
+   *************   1882   N-02_110-E-W-380,                       !- Name
+   *************   1883   Wall,                                   !- Surface Type
+   *************   1884   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1884 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-02_110-E-W-380
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1897 BuildingSurface:Detailed,
+   ************* indicated Name=N-02_111-E-W-384
+   ************* Only last 3 lines before error line shown.....
+   *************   1898   N-02_111-E-W-384,                       !- Name
+   *************   1899   Wall,                                   !- Surface Type
+   *************   1900   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1900 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-02_111-E-W-384
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1913 BuildingSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404
+   ************* Only last 3 lines before error line shown.....
+   *************   1914   N-02_114-E-W-404,                       !- Name
+   *************   1915   Wall,                                   !- Surface Type
+   *************   1916   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1916 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-02_114-E-W-404
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1929 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   1930   N-02_114-E-W-404-W-1,                   !- Name
+   *************   1931   Window,                                 !- Surface Type
+   *************   1932   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1932 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1945 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-10
+   ************* Only last 3 lines before error line shown.....
+   *************   1946   N-02_114-E-W-404-W-10,                  !- Name
+   *************   1947   Window,                                 !- Surface Type
+   *************   1948   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1948 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1961 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-11
+   ************* Only last 3 lines before error line shown.....
+   *************   1962   N-02_114-E-W-404-W-11,                  !- Name
+   *************   1963   Window,                                 !- Surface Type
+   *************   1964   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1964 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1977 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-12
+   ************* Only last 3 lines before error line shown.....
+   *************   1978   N-02_114-E-W-404-W-12,                  !- Name
+   *************   1979   Window,                                 !- Surface Type
+   *************   1980   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1980 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   1993 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   1994   N-02_114-E-W-404-W-2,                   !- Name
+   *************   1995   Window,                                 !- Surface Type
+   *************   1996   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~1996 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2009 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2010   N-02_114-E-W-404-W-3,                   !- Name
+   *************   2011   Window,                                 !- Surface Type
+   *************   2012   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2012 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2025 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   2026   N-02_114-E-W-404-W-4,                   !- Name
+   *************   2027   Window,                                 !- Surface Type
+   *************   2028   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2028 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2041 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   2042   N-02_114-E-W-404-W-5,                   !- Name
+   *************   2043   Window,                                 !- Surface Type
+   *************   2044   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2044 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2057 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-6
+   ************* Only last 3 lines before error line shown.....
+   *************   2058   N-02_114-E-W-404-W-6,                   !- Name
+   *************   2059   Window,                                 !- Surface Type
+   *************   2060   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2060 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2073 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-7
+   ************* Only last 3 lines before error line shown.....
+   *************   2074   N-02_114-E-W-404-W-7,                   !- Name
+   *************   2075   Window,                                 !- Surface Type
+   *************   2076   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2076 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2089 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-8
+   ************* Only last 3 lines before error line shown.....
+   *************   2090   N-02_114-E-W-404-W-8,                   !- Name
+   *************   2091   Window,                                 !- Surface Type
+   *************   2092   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2092 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2105 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_114-E-W-404-W-9
+   ************* Only last 3 lines before error line shown.....
+   *************   2106   N-02_114-E-W-404-W-9,                   !- Name
+   *************   2107   Window,                                 !- Surface Type
+   *************   2108   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2108 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_114-E-W-404-W-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2121 BuildingSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422
+   ************* Only last 3 lines before error line shown.....
+   *************   2122   N-02_117-E-W-422,                       !- Name
+   *************   2123   Wall,                                   !- Surface Type
+   *************   2124   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2124 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-02_117-E-W-422
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2137 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2138   N-02_117-E-W-422-W-1,                   !- Name
+   *************   2139   Window,                                 !- Surface Type
+   *************   2140   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2140 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_117-E-W-422-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2153 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2154   N-02_117-E-W-422-W-2,                   !- Name
+   *************   2155   Window,                                 !- Surface Type
+   *************   2156   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2156 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_117-E-W-422-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2169 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2170   N-02_117-E-W-422-W-3,                   !- Name
+   *************   2171   Window,                                 !- Surface Type
+   *************   2172   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2172 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_117-E-W-422-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2185 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   2186   N-02_117-E-W-422-W-4,                   !- Name
+   *************   2187   Window,                                 !- Surface Type
+   *************   2188   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2188 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_117-E-W-422-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2201 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   2202   N-02_117-E-W-422-W-5,                   !- Name
+   *************   2203   Window,                                 !- Surface Type
+   *************   2204   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2204 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_117-E-W-422-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2217 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422-W-6
+   ************* Only last 3 lines before error line shown.....
+   *************   2218   N-02_117-E-W-422-W-6,                   !- Name
+   *************   2219   Window,                                 !- Surface Type
+   *************   2220   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2220 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_117-E-W-422-W-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2233 FenestrationSurface:Detailed,
+   ************* indicated Name=N-02_117-E-W-422-W-7
+   ************* Only last 3 lines before error line shown.....
+   *************   2234   N-02_117-E-W-422-W-7,                   !- Name
+   *************   2235   Window,                                 !- Surface Type
+   *************   2236   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2236 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=N-02_117-E-W-422-W-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2249 BuildingSurface:Detailed,
+   ************* indicated Name=N-B1_102-E-W-436
+   ************* Only last 3 lines before error line shown.....
+   *************   2250   N-B1_102-E-W-436,                       !- Name
+   *************   2251   Wall,                                   !- Surface Type
+   *************   2252   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2252 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-B1_102-E-W-436
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2265 BuildingSurface:Detailed,
+   ************* indicated Name=N-B1_103-E-W-440
+   ************* Only last 3 lines before error line shown.....
+   *************   2266   N-B1_103-E-W-440,                       !- Name
+   *************   2267   Wall,                                   !- Surface Type
+   *************   2268   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2268 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-B1_103-E-W-440
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2281 BuildingSurface:Detailed,
+   ************* indicated Name=N-B1_104-E-W-444
+   ************* Only last 3 lines before error line shown.....
+   *************   2282   N-B1_104-E-W-444,                       !- Name
+   *************   2283   Wall,                                   !- Surface Type
+   *************   2284   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2284 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-B1_104-E-W-444
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2297 BuildingSurface:Detailed,
+   ************* indicated Name=N-B1_109-E-W-478
+   ************* Only last 3 lines before error line shown.....
+   *************   2298   N-B1_109-E-W-478,                       !- Name
+   *************   2299   Wall,                                   !- Surface Type
+   *************   2300   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2300 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-B1_109-E-W-478
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2313 BuildingSurface:Detailed,
+   ************* indicated Name=N-RF_100-E-W-481
+   ************* Only last 3 lines before error line shown.....
+   *************   2314   N-RF_100-E-W-481,                       !- Name
+   *************   2315   Wall,                                   !- Surface Type
+   *************   2316   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2316 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-RF_100-E-W-481
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2329 BuildingSurface:Detailed,
+   ************* indicated Name=N-RF_101-E-W-487
+   ************* Only last 3 lines before error line shown.....
+   *************   2330   N-RF_101-E-W-487,                       !- Name
+   *************   2331   Wall,                                   !- Surface Type
+   *************   2332   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2332 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-RF_101-E-W-487
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2345 BuildingSurface:Detailed,
+   ************* indicated Name=N-RF_103-E-W-496
+   ************* Only last 3 lines before error line shown.....
+   *************   2346   N-RF_103-E-W-496,                       !- Name
+   *************   2347   Wall,                                   !- Surface Type
+   *************   2348   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2348 Error detected in Object=BUILDINGSURFACE:DETAILED, name=N-RF_103-E-W-496
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2361 BuildingSurface:Detailed,
+   ************* indicated Name=S-00_118-E-W-109
+   ************* Only last 3 lines before error line shown.....
+   *************   2362   S-00_118-E-W-109,                       !- Name
+   *************   2363   Wall,                                   !- Surface Type
+   *************   2364   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2364 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-00_118-E-W-109
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2377 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_118-E-W-109-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2378   S-00_118-E-W-109-D-1,                   !- Name
+   *************   2379   GlassDoor,                              !- Surface Type
+   *************   2380   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2380 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_118-E-W-109-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2393 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_118-E-W-109-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2394   S-00_118-E-W-109-W-2,                   !- Name
+   *************   2395   Window,                                 !- Surface Type
+   *************   2396   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2396 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_118-E-W-109-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2409 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_118-E-W-109-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2410   S-00_118-E-W-109-W-3,                   !- Name
+   *************   2411   Window,                                 !- Surface Type
+   *************   2412   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2412 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_118-E-W-109-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2425 BuildingSurface:Detailed,
+   ************* indicated Name=S-00_120-E-W-143
+   ************* Only last 3 lines before error line shown.....
+   *************   2426   S-00_120-E-W-143,                       !- Name
+   *************   2427   Wall,                                   !- Surface Type
+   *************   2428   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2428 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-00_120-E-W-143
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2441 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_120-E-W-143-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2442   S-00_120-E-W-143-D-1,                   !- Name
+   *************   2443   GlassDoor,                              !- Surface Type
+   *************   2444   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2444 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_120-E-W-143-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2457 BuildingSurface:Detailed,
+   ************* indicated Name=S-00_122-E-W-157
+   ************* Only last 3 lines before error line shown.....
+   *************   2458   S-00_122-E-W-157,                       !- Name
+   *************   2459   Wall,                                   !- Surface Type
+   *************   2460   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2460 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-00_122-E-W-157
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2473 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_122-E-W-157-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2474   S-00_122-E-W-157-D-1,                   !- Name
+   *************   2475   GlassDoor,                              !- Surface Type
+   *************   2476   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2476 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_122-E-W-157-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2489 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_122-E-W-157-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2490   S-00_122-E-W-157-W-2,                   !- Name
+   *************   2491   Window,                                 !- Surface Type
+   *************   2492   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2492 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_122-E-W-157-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2505 BuildingSurface:Detailed,
+   ************* indicated Name=S-00_123-E-W-162
+   ************* Only last 3 lines before error line shown.....
+   *************   2506   S-00_123-E-W-162,                       !- Name
+   *************   2507   Wall,                                   !- Surface Type
+   *************   2508   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2508 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-00_123-E-W-162
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2521 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_123-E-W-162-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2522   S-00_123-E-W-162-D-1,                   !- Name
+   *************   2523   GlassDoor,                              !- Surface Type
+   *************   2524   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2524 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_123-E-W-162-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2537 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_123-E-W-162-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2538   S-00_123-E-W-162-W-2,                   !- Name
+   *************   2539   Window,                                 !- Surface Type
+   *************   2540   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2540 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_123-E-W-162-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2553 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_123-E-W-162-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2554   S-00_123-E-W-162-W-3,                   !- Name
+   *************   2555   Window,                                 !- Surface Type
+   *************   2556   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2556 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_123-E-W-162-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2569 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_123-E-W-162-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   2570   S-00_123-E-W-162-W-4,                   !- Name
+   *************   2571   Window,                                 !- Surface Type
+   *************   2572   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2572 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_123-E-W-162-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2585 BuildingSurface:Detailed,
+   ************* indicated Name=S-00_125-E-W-172
+   ************* Only last 3 lines before error line shown.....
+   *************   2586   S-00_125-E-W-172,                       !- Name
+   *************   2587   Wall,                                   !- Surface Type
+   *************   2588   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2588 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-00_125-E-W-172
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2601 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_125-E-W-172-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2602   S-00_125-E-W-172-W-1,                   !- Name
+   *************   2603   Window,                                 !- Surface Type
+   *************   2604   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2604 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_125-E-W-172-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2617 BuildingSurface:Detailed,
+   ************* indicated Name=S-00_130-E-W-193
+   ************* Only last 3 lines before error line shown.....
+   *************   2618   S-00_130-E-W-193,                       !- Name
+   *************   2619   Wall,                                   !- Surface Type
+   *************   2620   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2620 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-00_130-E-W-193
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2633 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_130-E-W-193-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2634   S-00_130-E-W-193-W-1,                   !- Name
+   *************   2635   Window,                                 !- Surface Type
+   *************   2636   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2636 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_130-E-W-193-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2649 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_130-E-W-193-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2650   S-00_130-E-W-193-W-2,                   !- Name
+   *************   2651   Window,                                 !- Surface Type
+   *************   2652   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2652 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_130-E-W-193-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2665 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_130-E-W-193-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2666   S-00_130-E-W-193-W-3,                   !- Name
+   *************   2667   Window,                                 !- Surface Type
+   *************   2668   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2668 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_130-E-W-193-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2681 FenestrationSurface:Detailed,
+   ************* indicated Name=S-00_130-E-W-193-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   2682   S-00_130-E-W-193-W-4,                   !- Name
+   *************   2683   Window,                                 !- Surface Type
+   *************   2684   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2684 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-00_130-E-W-193-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2697 BuildingSurface:Detailed,
+   ************* indicated Name=S-01_117-E-W-289
+   ************* Only last 3 lines before error line shown.....
+   *************   2698   S-01_117-E-W-289,                       !- Name
+   *************   2699   Wall,                                   !- Surface Type
+   *************   2700   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2700 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-01_117-E-W-289
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2713 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_117-E-W-289-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2714   S-01_117-E-W-289-W-1,                   !- Name
+   *************   2715   Window,                                 !- Surface Type
+   *************   2716   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2716 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_117-E-W-289-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2729 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_117-E-W-289-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2730   S-01_117-E-W-289-W-2,                   !- Name
+   *************   2731   Window,                                 !- Surface Type
+   *************   2732   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2732 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_117-E-W-289-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2745 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_117-E-W-289-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2746   S-01_117-E-W-289-W-3,                   !- Name
+   *************   2747   Window,                                 !- Surface Type
+   *************   2748   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2748 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_117-E-W-289-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2761 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_117-E-W-289-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   2762   S-01_117-E-W-289-W-4,                   !- Name
+   *************   2763   Window,                                 !- Surface Type
+   *************   2764   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2764 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_117-E-W-289-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2777 BuildingSurface:Detailed,
+   ************* indicated Name=S-01_118-E-W-298
+   ************* Only last 3 lines before error line shown.....
+   *************   2778   S-01_118-E-W-298,                       !- Name
+   *************   2779   Wall,                                   !- Surface Type
+   *************   2780   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2780 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-01_118-E-W-298
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2793 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_118-E-W-298-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2794   S-01_118-E-W-298-W-1,                   !- Name
+   *************   2795   Window,                                 !- Surface Type
+   *************   2796   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2796 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_118-E-W-298-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2809 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_118-E-W-298-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2810   S-01_118-E-W-298-W-2,                   !- Name
+   *************   2811   Window,                                 !- Surface Type
+   *************   2812   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2812 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_118-E-W-298-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2825 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_118-E-W-298-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2826   S-01_118-E-W-298-W-3,                   !- Name
+   *************   2827   Window,                                 !- Surface Type
+   *************   2828   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2828 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_118-E-W-298-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2841 BuildingSurface:Detailed,
+   ************* indicated Name=S-01_119-E-W-305
+   ************* Only last 3 lines before error line shown.....
+   *************   2842   S-01_119-E-W-305,                       !- Name
+   *************   2843   Wall,                                   !- Surface Type
+   *************   2844   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2844 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-01_119-E-W-305
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2857 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_119-E-W-305-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2858   S-01_119-E-W-305-W-1,                   !- Name
+   *************   2859   Window,                                 !- Surface Type
+   *************   2860   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2860 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_119-E-W-305-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2873 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_119-E-W-305-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2874   S-01_119-E-W-305-W-2,                   !- Name
+   *************   2875   Window,                                 !- Surface Type
+   *************   2876   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2876 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_119-E-W-305-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2889 BuildingSurface:Detailed,
+   ************* indicated Name=S-01_120-E-W-310
+   ************* Only last 3 lines before error line shown.....
+   *************   2890   S-01_120-E-W-310,                       !- Name
+   *************   2891   Wall,                                   !- Surface Type
+   *************   2892   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2892 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-01_120-E-W-310
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2905 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_120-E-W-310-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2906   S-01_120-E-W-310-W-1,                   !- Name
+   *************   2907   Window,                                 !- Surface Type
+   *************   2908   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2908 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_120-E-W-310-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2921 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_120-E-W-310-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2922   S-01_120-E-W-310-W-2,                   !- Name
+   *************   2923   Window,                                 !- Surface Type
+   *************   2924   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2924 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_120-E-W-310-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2937 BuildingSurface:Detailed,
+   ************* indicated Name=S-01_123-E-W-325
+   ************* Only last 3 lines before error line shown.....
+   *************   2938   S-01_123-E-W-325,                       !- Name
+   *************   2939   Wall,                                   !- Surface Type
+   *************   2940   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2940 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-01_123-E-W-325
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2953 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_123-E-W-325-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   2954   S-01_123-E-W-325-W-1,                   !- Name
+   *************   2955   Window,                                 !- Surface Type
+   *************   2956   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2956 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_123-E-W-325-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2969 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_123-E-W-325-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   2970   S-01_123-E-W-325-W-2,                   !- Name
+   *************   2971   Window,                                 !- Surface Type
+   *************   2972   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2972 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_123-E-W-325-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   2985 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_123-E-W-325-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   2986   S-01_123-E-W-325-W-3,                   !- Name
+   *************   2987   Window,                                 !- Surface Type
+   *************   2988   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~2988 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_123-E-W-325-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3001 FenestrationSurface:Detailed,
+   ************* indicated Name=S-01_123-E-W-325-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   3002   S-01_123-E-W-325-W-4,                   !- Name
+   *************   3003   Window,                                 !- Surface Type
+   *************   3004   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3004 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-01_123-E-W-325-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3017 BuildingSurface:Detailed,
+   ************* indicated Name=S-02_101-E-W-335
+   ************* Only last 3 lines before error line shown.....
+   *************   3018   S-02_101-E-W-335,                       !- Name
+   *************   3019   Wall,                                   !- Surface Type
+   *************   3020   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3020 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-02_101-E-W-335
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3033 BuildingSurface:Detailed,
+   ************* indicated Name=S-02_102-E-W-339
+   ************* Only last 3 lines before error line shown.....
+   *************   3034   S-02_102-E-W-339,                       !- Name
+   *************   3035   Wall,                                   !- Surface Type
+   *************   3036   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3036 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-02_102-E-W-339
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3049 BuildingSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396
+   ************* Only last 3 lines before error line shown.....
+   *************   3050   S-02_113-E-W-396,                       !- Name
+   *************   3051   Wall,                                   !- Surface Type
+   *************   3052   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3052 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-02_113-E-W-396
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3065 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   3066   S-02_113-E-W-396-W-1,                   !- Name
+   *************   3067   Window,                                 !- Surface Type
+   *************   3068   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3068 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_113-E-W-396-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3081 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   3082   S-02_113-E-W-396-W-2,                   !- Name
+   *************   3083   Window,                                 !- Surface Type
+   *************   3084   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3084 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_113-E-W-396-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3097 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   3098   S-02_113-E-W-396-W-3,                   !- Name
+   *************   3099   Window,                                 !- Surface Type
+   *************   3100   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3100 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_113-E-W-396-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3113 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   3114   S-02_113-E-W-396-W-4,                   !- Name
+   *************   3115   Window,                                 !- Surface Type
+   *************   3116   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3116 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_113-E-W-396-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3129 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   3130   S-02_113-E-W-396-W-5,                   !- Name
+   *************   3131   Window,                                 !- Surface Type
+   *************   3132   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3132 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_113-E-W-396-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3145 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396-W-6
+   ************* Only last 3 lines before error line shown.....
+   *************   3146   S-02_113-E-W-396-W-6,                   !- Name
+   *************   3147   Window,                                 !- Surface Type
+   *************   3148   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3148 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_113-E-W-396-W-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3161 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_113-E-W-396-W-7
+   ************* Only last 3 lines before error line shown.....
+   *************   3162   S-02_113-E-W-396-W-7,                   !- Name
+   *************   3163   Window,                                 !- Surface Type
+   *************   3164   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3164 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_113-E-W-396-W-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3177 BuildingSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412
+   ************* Only last 3 lines before error line shown.....
+   *************   3178   S-02_115-E-W-412,                       !- Name
+   *************   3179   Wall,                                   !- Surface Type
+   *************   3180   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3180 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-02_115-E-W-412
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3193 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   3194   S-02_115-E-W-412-W-1,                   !- Name
+   *************   3195   Window,                                 !- Surface Type
+   *************   3196   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3196 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3209 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-10
+   ************* Only last 3 lines before error line shown.....
+   *************   3210   S-02_115-E-W-412-W-10,                  !- Name
+   *************   3211   Window,                                 !- Surface Type
+   *************   3212   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3212 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-10
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3225 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-11
+   ************* Only last 3 lines before error line shown.....
+   *************   3226   S-02_115-E-W-412-W-11,                  !- Name
+   *************   3227   Window,                                 !- Surface Type
+   *************   3228   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3228 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-11
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3241 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-12
+   ************* Only last 3 lines before error line shown.....
+   *************   3242   S-02_115-E-W-412-W-12,                  !- Name
+   *************   3243   Window,                                 !- Surface Type
+   *************   3244   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3244 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-12
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3257 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   3258   S-02_115-E-W-412-W-2,                   !- Name
+   *************   3259   Window,                                 !- Surface Type
+   *************   3260   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3260 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3273 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   3274   S-02_115-E-W-412-W-3,                   !- Name
+   *************   3275   Window,                                 !- Surface Type
+   *************   3276   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3276 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3289 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   3290   S-02_115-E-W-412-W-4,                   !- Name
+   *************   3291   Window,                                 !- Surface Type
+   *************   3292   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3292 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3305 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   3306   S-02_115-E-W-412-W-5,                   !- Name
+   *************   3307   Window,                                 !- Surface Type
+   *************   3308   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3308 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3321 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-6
+   ************* Only last 3 lines before error line shown.....
+   *************   3322   S-02_115-E-W-412-W-6,                   !- Name
+   *************   3323   Window,                                 !- Surface Type
+   *************   3324   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3324 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3337 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-7
+   ************* Only last 3 lines before error line shown.....
+   *************   3338   S-02_115-E-W-412-W-7,                   !- Name
+   *************   3339   Window,                                 !- Surface Type
+   *************   3340   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3340 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3353 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-8
+   ************* Only last 3 lines before error line shown.....
+   *************   3354   S-02_115-E-W-412-W-8,                   !- Name
+   *************   3355   Window,                                 !- Surface Type
+   *************   3356   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3356 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-8
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3369 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_115-E-W-412-W-9
+   ************* Only last 3 lines before error line shown.....
+   *************   3370   S-02_115-E-W-412-W-9,                   !- Name
+   *************   3371   Window,                                 !- Surface Type
+   *************   3372   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3372 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_115-E-W-412-W-9
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3385 BuildingSurface:Detailed,
+   ************* indicated Name=S-02_116-E-W-417
+   ************* Only last 3 lines before error line shown.....
+   *************   3386   S-02_116-E-W-417,                       !- Name
+   *************   3387   Wall,                                   !- Surface Type
+   *************   3388   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3388 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-02_116-E-W-417
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3401 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_116-E-W-417-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   3402   S-02_116-E-W-417-W-1,                   !- Name
+   *************   3403   Window,                                 !- Surface Type
+   *************   3404   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3404 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_116-E-W-417-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3417 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_116-E-W-417-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   3418   S-02_116-E-W-417-W-2,                   !- Name
+   *************   3419   Window,                                 !- Surface Type
+   *************   3420   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3420 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_116-E-W-417-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3433 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_116-E-W-417-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   3434   S-02_116-E-W-417-W-3,                   !- Name
+   *************   3435   Window,                                 !- Surface Type
+   *************   3436   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3436 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_116-E-W-417-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3449 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_116-E-W-417-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   3450   S-02_116-E-W-417-W-4,                   !- Name
+   *************   3451   Window,                                 !- Surface Type
+   *************   3452   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3452 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_116-E-W-417-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3465 FenestrationSurface:Detailed,
+   ************* indicated Name=S-02_116-E-W-417-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   3466   S-02_116-E-W-417-W-5,                   !- Name
+   *************   3467   Window,                                 !- Surface Type
+   *************   3468   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3468 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=S-02_116-E-W-417-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3481 BuildingSurface:Detailed,
+   ************* indicated Name=S-B1_106-E-W-463
+   ************* Only last 3 lines before error line shown.....
+   *************   3482   S-B1_106-E-W-463,                       !- Name
+   *************   3483   Wall,                                   !- Surface Type
+   *************   3484   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3484 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-B1_106-E-W-463
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3497 BuildingSurface:Detailed,
+   ************* indicated Name=S-B1_107-E-W-468
+   ************* Only last 3 lines before error line shown.....
+   *************   3498   S-B1_107-E-W-468,                       !- Name
+   *************   3499   Wall,                                   !- Surface Type
+   *************   3500   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3500 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-B1_107-E-W-468
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3513 BuildingSurface:Detailed,
+   ************* indicated Name=S-RF_100-E-W-483
+   ************* Only last 3 lines before error line shown.....
+   *************   3514   S-RF_100-E-W-483,                       !- Name
+   *************   3515   Wall,                                   !- Surface Type
+   *************   3516   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3516 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-RF_100-E-W-483
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3529 BuildingSurface:Detailed,
+   ************* indicated Name=S-RF_101-E-W-488
+   ************* Only last 3 lines before error line shown.....
+   *************   3530   S-RF_101-E-W-488,                       !- Name
+   *************   3531   Wall,                                   !- Surface Type
+   *************   3532   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3532 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-RF_101-E-W-488
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3545 BuildingSurface:Detailed,
+   ************* indicated Name=S-RF_102-E-W-493
+   ************* Only last 3 lines before error line shown.....
+   *************   3546   S-RF_102-E-W-493,                       !- Name
+   *************   3547   Wall,                                   !- Surface Type
+   *************   3548   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3548 Error detected in Object=BUILDINGSURFACE:DETAILED, name=S-RF_102-E-W-493
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3561 BuildingSurface:Detailed,
+   ************* indicated Name=T-01_117-E-R-290
+   ************* Only last 3 lines before error line shown.....
+   *************   3562   T-01_117-E-R-290,                       !- Name
+   *************   3563   Roof,                                   !- Surface Type
+   *************   3564   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3564 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-01_117-E-R-290
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3577 BuildingSurface:Detailed,
+   ************* indicated Name=T-01_118-E-R-300
+   ************* Only last 3 lines before error line shown.....
+   *************   3578   T-01_118-E-R-300,                       !- Name
+   *************   3579   Roof,                                   !- Surface Type
+   *************   3580   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3580 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-01_118-E-R-300
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3593 BuildingSurface:Detailed,
+   ************* indicated Name=T-01_119-E-R-306
+   ************* Only last 3 lines before error line shown.....
+   *************   3594   T-01_119-E-R-306,                       !- Name
+   *************   3595   Roof,                                   !- Surface Type
+   *************   3596   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3596 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-01_119-E-R-306
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3609 BuildingSurface:Detailed,
+   ************* indicated Name=T-01_120-E-R-311
+   ************* Only last 3 lines before error line shown.....
+   *************   3610   T-01_120-E-R-311,                       !- Name
+   *************   3611   Roof,                                   !- Surface Type
+   *************   3612   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3612 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-01_120-E-R-311
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3627 BuildingSurface:Detailed,
+   ************* indicated Name=T-01_121-E-R-316
+   ************* Only last 3 lines before error line shown.....
+   *************   3628   T-01_121-E-R-316,                       !- Name
+   *************   3629   Roof,                                   !- Surface Type
+   *************   3630   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3630 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-01_121-E-R-316
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3643 BuildingSurface:Detailed,
+   ************* indicated Name=T-01_122-E-R-320
+   ************* Only last 3 lines before error line shown.....
+   *************   3644   T-01_122-E-R-320,                       !- Name
+   *************   3645   Roof,                                   !- Surface Type
+   *************   3646   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3646 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-01_122-E-R-320
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3659 BuildingSurface:Detailed,
+   ************* indicated Name=T-01_123-E-R-326
+   ************* Only last 3 lines before error line shown.....
+   *************   3660   T-01_123-E-R-326,                       !- Name
+   *************   3661   Roof,                                   !- Surface Type
+   *************   3662   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3662 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-01_123-E-R-326
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3677 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_100-E-R-329
+   ************* Only last 3 lines before error line shown.....
+   *************   3678   T-02_100-E-R-329,                       !- Name
+   *************   3679   Roof,                                   !- Surface Type
+   *************   3680   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3680 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_100-E-R-329
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3693 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_101-E-R-336
+   ************* Only last 3 lines before error line shown.....
+   *************   3694   T-02_101-E-R-336,                       !- Name
+   *************   3695   Roof,                                   !- Surface Type
+   *************   3696   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3696 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_101-E-R-336
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3709 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_102-E-R-340
+   ************* Only last 3 lines before error line shown.....
+   *************   3710   T-02_102-E-R-340,                       !- Name
+   *************   3711   Roof,                                   !- Surface Type
+   *************   3712   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3712 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_102-E-R-340
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3725 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_103-E-R-344
+   ************* Only last 3 lines before error line shown.....
+   *************   3726   T-02_103-E-R-344,                       !- Name
+   *************   3727   Roof,                                   !- Surface Type
+   *************   3728   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3728 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_103-E-R-344
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3741 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_106-E-R-360
+   ************* Only last 3 lines before error line shown.....
+   *************   3742   T-02_106-E-R-360,                       !- Name
+   *************   3743   Roof,                                   !- Surface Type
+   *************   3744   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3744 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_106-E-R-360
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3757 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_107-E-R-366
+   ************* Only last 3 lines before error line shown.....
+   *************   3758   T-02_107-E-R-366,                       !- Name
+   *************   3759   Roof,                                   !- Surface Type
+   *************   3760   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3760 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_107-E-R-366
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3773 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_110-E-R-381
+   ************* Only last 3 lines before error line shown.....
+   *************   3774   T-02_110-E-R-381,                       !- Name
+   *************   3775   Roof,                                   !- Surface Type
+   *************   3776   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3776 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_110-E-R-381
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3789 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_111-E-R-385
+   ************* Only last 3 lines before error line shown.....
+   *************   3790   T-02_111-E-R-385,                       !- Name
+   *************   3791   Roof,                                   !- Surface Type
+   *************   3792   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3792 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_111-E-R-385
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3805 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_113-E-R-397
+   ************* Only last 3 lines before error line shown.....
+   *************   3806   T-02_113-E-R-397,                       !- Name
+   *************   3807   Roof,                                   !- Surface Type
+   *************   3808   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3808 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_113-E-R-397
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3823 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_114-E-R-406
+   ************* Only last 3 lines before error line shown.....
+   *************   3824   T-02_114-E-R-406,                       !- Name
+   *************   3825   Roof,                                   !- Surface Type
+   *************   3826   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3826 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_114-E-R-406
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3841 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_115-E-R-413
+   ************* Only last 3 lines before error line shown.....
+   *************   3842   T-02_115-E-R-413,                       !- Name
+   *************   3843   Roof,                                   !- Surface Type
+   *************   3844   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3844 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_115-E-R-413
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3859 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_116-E-R-418
+   ************* Only last 3 lines before error line shown.....
+   *************   3860   T-02_116-E-R-418,                       !- Name
+   *************   3861   Roof,                                   !- Surface Type
+   *************   3862   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3862 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_116-E-R-418
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3879 BuildingSurface:Detailed,
+   ************* indicated Name=T-02_117-E-R-423
+   ************* Only last 3 lines before error line shown.....
+   *************   3880   T-02_117-E-R-423,                       !- Name
+   *************   3881   Roof,                                   !- Surface Type
+   *************   3882   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3882 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-02_117-E-R-423
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3897 BuildingSurface:Detailed,
+   ************* indicated Name=T-RF_100-E-R-484
+   ************* Only last 3 lines before error line shown.....
+   *************   3898   T-RF_100-E-R-484,                       !- Name
+   *************   3899   Roof,                                   !- Surface Type
+   *************   3900   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3900 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-RF_100-E-R-484
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3913 BuildingSurface:Detailed,
+   ************* indicated Name=T-RF_101-E-R-490
+   ************* Only last 3 lines before error line shown.....
+   *************   3914   T-RF_101-E-R-490,                       !- Name
+   *************   3915   Roof,                                   !- Surface Type
+   *************   3916   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3916 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-RF_101-E-R-490
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3929 BuildingSurface:Detailed,
+   ************* indicated Name=T-RF_102-E-R-494
+   ************* Only last 3 lines before error line shown.....
+   *************   3930   T-RF_102-E-R-494,                       !- Name
+   *************   3931   Roof,                                   !- Surface Type
+   *************   3932   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3932 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-RF_102-E-R-494
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3945 BuildingSurface:Detailed,
+   ************* indicated Name=T-RF_103-E-R-497
+   ************* Only last 3 lines before error line shown.....
+   *************   3946   T-RF_103-E-R-497,                       !- Name
+   *************   3947   Roof,                                   !- Surface Type
+   *************   3948   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3948 Error detected in Object=BUILDINGSURFACE:DETAILED, name=T-RF_103-E-R-497
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3961 BuildingSurface:Detailed,
+   ************* indicated Name=W-00_102-E-W-17
+   ************* Only last 3 lines before error line shown.....
+   *************   3962   W-00_102-E-W-17,                        !- Name
+   *************   3963   Wall,                                   !- Surface Type
+   *************   3964   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3964 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-00_102-E-W-17
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3977 FenestrationSurface:Detailed,
+   ************* indicated Name=W-00_102-E-W-17-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   3978   W-00_102-E-W-17-D-1,                    !- Name
+   *************   3979   GlassDoor,                              !- Surface Type
+   *************   3980   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3980 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-00_102-E-W-17-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   3993 BuildingSurface:Detailed,
+   ************* indicated Name=W-00_107-E-W-39
+   ************* Only last 3 lines before error line shown.....
+   *************   3994   W-00_107-E-W-39,                        !- Name
+   *************   3995   Wall,                                   !- Surface Type
+   *************   3996   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~3996 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-00_107-E-W-39
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4009 FenestrationSurface:Detailed,
+   ************* indicated Name=W-00_107-E-W-39-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   4010   W-00_107-E-W-39-D-1,                    !- Name
+   *************   4011   GlassDoor,                              !- Surface Type
+   *************   4012   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4012 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-00_107-E-W-39-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4025 BuildingSurface:Detailed,
+   ************* indicated Name=W-00_115-E-W-87
+   ************* Only last 3 lines before error line shown.....
+   *************   4026   W-00_115-E-W-87,                        !- Name
+   *************   4027   Wall,                                   !- Surface Type
+   *************   4028   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4028 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-00_115-E-W-87
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4041 FenestrationSurface:Detailed,
+   ************* indicated Name=W-00_115-E-W-87-D-1
+   ************* Only last 3 lines before error line shown.....
+   *************   4042   W-00_115-E-W-87-D-1,                    !- Name
+   *************   4043   GlassDoor,                              !- Surface Type
+   *************   4044   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4044 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-00_115-E-W-87-D-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4057 FenestrationSurface:Detailed,
+   ************* indicated Name=W-00_115-E-W-87-D-2
+   ************* Only last 3 lines before error line shown.....
+   *************   4058   W-00_115-E-W-87-D-2,                    !- Name
+   *************   4059   GlassDoor,                              !- Surface Type
+   *************   4060   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4060 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-00_115-E-W-87-D-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4073 BuildingSurface:Detailed,
+   ************* indicated Name=W-00_116-E-W-95
+   ************* Only last 3 lines before error line shown.....
+   *************   4074   W-00_116-E-W-95,                        !- Name
+   *************   4075   Wall,                                   !- Surface Type
+   *************   4076   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4076 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-00_116-E-W-95
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4089 BuildingSurface:Detailed,
+   ************* indicated Name=W-00_118-E-W-110
+   ************* Only last 3 lines before error line shown.....
+   *************   4090   W-00_118-E-W-110,                       !- Name
+   *************   4091   Wall,                                   !- Surface Type
+   *************   4092   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4092 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-00_118-E-W-110
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4105 FenestrationSurface:Detailed,
+   ************* indicated Name=W-00_118-E-W-110-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   4106   W-00_118-E-W-110-W-1,                   !- Name
+   *************   4107   Window,                                 !- Surface Type
+   *************   4108   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4108 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-00_118-E-W-110-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4121 FenestrationSurface:Detailed,
+   ************* indicated Name=W-00_118-E-W-110-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   4122   W-00_118-E-W-110-W-2,                   !- Name
+   *************   4123   Window,                                 !- Surface Type
+   *************   4124   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4124 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-00_118-E-W-110-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4137 BuildingSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299
+   ************* Only last 3 lines before error line shown.....
+   *************   4138   W-01_118-E-W-299,                       !- Name
+   *************   4139   Wall,                                   !- Surface Type
+   *************   4140   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4140 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-01_118-E-W-299
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4153 FenestrationSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   4154   W-01_118-E-W-299-W-1,                   !- Name
+   *************   4155   Window,                                 !- Surface Type
+   *************   4156   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4156 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-01_118-E-W-299-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4169 FenestrationSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   4170   W-01_118-E-W-299-W-2,                   !- Name
+   *************   4171   Window,                                 !- Surface Type
+   *************   4172   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4172 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-01_118-E-W-299-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4185 FenestrationSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   4186   W-01_118-E-W-299-W-3,                   !- Name
+   *************   4187   Window,                                 !- Surface Type
+   *************   4188   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4188 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-01_118-E-W-299-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4201 FenestrationSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   4202   W-01_118-E-W-299-W-4,                   !- Name
+   *************   4203   Window,                                 !- Surface Type
+   *************   4204   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4204 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-01_118-E-W-299-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4217 FenestrationSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   4218   W-01_118-E-W-299-W-5,                   !- Name
+   *************   4219   Window,                                 !- Surface Type
+   *************   4220   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4220 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-01_118-E-W-299-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4233 FenestrationSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299-W-6
+   ************* Only last 3 lines before error line shown.....
+   *************   4234   W-01_118-E-W-299-W-6,                   !- Name
+   *************   4235   Window,                                 !- Surface Type
+   *************   4236   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4236 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-01_118-E-W-299-W-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4249 FenestrationSurface:Detailed,
+   ************* indicated Name=W-01_118-E-W-299-W-7
+   ************* Only last 3 lines before error line shown.....
+   *************   4250   W-01_118-E-W-299-W-7,                   !- Name
+   *************   4251   Window,                                 !- Surface Type
+   *************   4252   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4252 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-01_118-E-W-299-W-7
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4265 BuildingSurface:Detailed,
+   ************* indicated Name=W-02_116-E-W-416
+   ************* Only last 3 lines before error line shown.....
+   *************   4266   W-02_116-E-W-416,                       !- Name
+   *************   4267   Wall,                                   !- Surface Type
+   *************   4268   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4268 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-02_116-E-W-416
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4281 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_116-E-W-416-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   4282   W-02_116-E-W-416-W-1,                   !- Name
+   *************   4283   Window,                                 !- Surface Type
+   *************   4284   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4284 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_116-E-W-416-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4297 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_116-E-W-416-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   4298   W-02_116-E-W-416-W-2,                   !- Name
+   *************   4299   Window,                                 !- Surface Type
+   *************   4300   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4300 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_116-E-W-416-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4313 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_116-E-W-416-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   4314   W-02_116-E-W-416-W-3,                   !- Name
+   *************   4315   Window,                                 !- Surface Type
+   *************   4316   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4316 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_116-E-W-416-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4329 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_116-E-W-416-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   4330   W-02_116-E-W-416-W-4,                   !- Name
+   *************   4331   Window,                                 !- Surface Type
+   *************   4332   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4332 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_116-E-W-416-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4345 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_116-E-W-416-W-5
+   ************* Only last 3 lines before error line shown.....
+   *************   4346   W-02_116-E-W-416-W-5,                   !- Name
+   *************   4347   Window,                                 !- Surface Type
+   *************   4348   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4348 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_116-E-W-416-W-5
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4361 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_116-E-W-416-W-6
+   ************* Only last 3 lines before error line shown.....
+   *************   4362   W-02_116-E-W-416-W-6,                   !- Name
+   *************   4363   Window,                                 !- Surface Type
+   *************   4364   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4364 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_116-E-W-416-W-6
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4377 BuildingSurface:Detailed,
+   ************* indicated Name=W-02_117-E-W-421
+   ************* Only last 3 lines before error line shown.....
+   *************   4378   W-02_117-E-W-421,                       !- Name
+   *************   4379   Wall,                                   !- Surface Type
+   *************   4380   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4380 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-02_117-E-W-421
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4393 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_117-E-W-421-W-1
+   ************* Only last 3 lines before error line shown.....
+   *************   4394   W-02_117-E-W-421-W-1,                   !- Name
+   *************   4395   Window,                                 !- Surface Type
+   *************   4396   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4396 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_117-E-W-421-W-1
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4409 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_117-E-W-421-W-2
+   ************* Only last 3 lines before error line shown.....
+   *************   4410   W-02_117-E-W-421-W-2,                   !- Name
+   *************   4411   Window,                                 !- Surface Type
+   *************   4412   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4412 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_117-E-W-421-W-2
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4425 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_117-E-W-421-W-3
+   ************* Only last 3 lines before error line shown.....
+   *************   4426   W-02_117-E-W-421-W-3,                   !- Name
+   *************   4427   Window,                                 !- Surface Type
+   *************   4428   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4428 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_117-E-W-421-W-3
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4441 FenestrationSurface:Detailed,
+   ************* indicated Name=W-02_117-E-W-421-W-4
+   ************* Only last 3 lines before error line shown.....
+   *************   4442   W-02_117-E-W-421-W-4,                   !- Name
+   *************   4443   Window,                                 !- Surface Type
+   *************   4444   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4444 Error detected in Object=FENESTRATIONSURFACE:DETAILED, name=W-02_117-E-W-421-W-4
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4457 BuildingSurface:Detailed,
+   ************* indicated Name=W-B1_107-E-W-469
+   ************* Only last 3 lines before error line shown.....
+   *************   4458   W-B1_107-E-W-469,                       !- Name
+   *************   4459   Wall,                                   !- Surface Type
+   *************   4460   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4460 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-B1_107-E-W-469
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4473 BuildingSurface:Detailed,
+   ************* indicated Name=W-B1_109-E-W-479
+   ************* Only last 3 lines before error line shown.....
+   *************   4474   W-B1_109-E-W-479,                       !- Name
+   *************   4475   Wall,                                   !- Surface Type
+   *************   4476   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4476 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-B1_109-E-W-479
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ************* IDF Context for following error/warning message:
+   ************* Note -- lines truncated at 300 characters, if necessary...
+   *************   4489 BuildingSurface:Detailed,
+   ************* indicated Name=W-RF_101-E-W-489
+   ************* Only last 3 lines before error line shown.....
+   *************   4490   W-RF_101-E-W-489,                       !- Name
+   *************   4491   Wall,                                   !- Surface Type
+   *************   4492   ,                                       !- Construction Name
+   ** Severe  ** IP: IDF line~4492 Error detected in Object=BUILDINGSURFACE:DETAILED, name=W-RF_101-E-W-489
+   **   ~~~   ** Field [Construction Name] is required but was blank
+   ** Severe  ** IP: Blank "required" fields found in input
+   ** Severe  ** IP: Out of "range" values and/or blank required fields found in input
+   **  Fatal  ** IP: Errors occurred on processing IDF file. Preceding condition(s) cause termination.
+   ...Summary of Errors that led to program termination:
+   ..... Reference severe error count=266
+   ..... Last severe error=IP: Out of "range" values and/or blank required fields found in input
+   ************* Warning:  Node connection errors not checked - most system input has not been read (see previous warning).
+   ************* Fatal error -- final processing.  Program exited before simulations began.  See previous error messages.
+   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
+   ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
+   ************* EnergyPlus Terminated--Fatal Error Detected. 0 Warning; 266 Severe Errors; Elapsed Time=00hr 00min  0.31sec

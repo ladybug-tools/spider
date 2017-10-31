@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Set a variety of usr experience parameters. Update the default settings for a gbXML file" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-13" >
+<title>Campus Settings USA</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: indigo; --mnu-back-color: LavenderBlush; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	h3, h4 { margin: 0; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 80px;}
+	.fullWidth { box-sizing: border-box; width: 100%; }
+
+	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = divInfo ></div>
+
+<!--
+		<p title = 'Size in units.' >Ground Size:
+			<input type=number id=inpGroundSize min=30 max=1000 step=10 value=50 required onchange=updateGroundSize(); class = floatRight />
+		</p>
+-->
+
+		<h4>Display</h4>
+
+		<p><button onclick=toggleSceneAutoRotate() title= 'Stop the spinning!' > Toggle scene rotation </button></p>
+
+		<p><button onclick=toggleHelpers(); title = 'Make axis and grid invisible' > Toggle helpers </button></p>
+
+		<p><button onclick=toggleGrid(); > Toggle grid </button></p>
+
+		<p><button onclick=toggleGround(); > Toggle ground </button></p>
+
+		<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>
+
+		<p><button onclick=toggleEdges(buildings); >Toggle edges </button></p>
+
+		<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
+
+		<p title='building opacity: 0 to 100%' >Opacity: 
+			<output id=outOpacity class=floatRight >100%</output>
+			<input type="range" id="rngOpacity" min=0 max=100 step=1 value=100 onchange=updateOpacity(); >
+		</p>
+
+		<p title='storey separation: 0 to 100 in units' >Vertical separation: 
+			<output id=outVertical class=floatRight >20</output>
+			<input type="range" id="rngVertical" min=0 max=100 step=1 value=20 onchange=updateVertical(); >
+		</p>
+
+		<h4>Location</h4>
+
+		<p title='' >Name:<br>
+			<input id=inpName onchange=updateBuilding(); class=fullWidth >
+		</p>
+
+		<p title='' >Description:<br>
+			<input id=inpDescription onchange=updateBuilding(); class=fullWidth >
+		</p>
+
+		<p title='' >Location Name:<br>
+			<input id=inpLocationName onchange=updateBuilding(); class=fullWidth >
+		</p>
+
+		<p title='' >Street Address:<br>
+			<input id=inpStreetAddress onchange=updateBuilding(); class=fullWidth >
+		</p>
+
+		<p title='' >Zipcode/Postal Code:
+			<input id=inpZipcodeOrPostalCode onchange=updateBuilding(); class=floatRight >
+		</p>
+
+		<p title='' >Latitude:
+			<input id=inpLatitude type=number min=-90 max=90 onchange=updateBuilding(); class=floatRight >
+		</p>
+
+		<p title='' >Longitude:
+			<input id=inpLongitude type=number onchange=updateBuilding(); class=floatRight >
+		</p>
+
+		<p title='' >Elevation in feet:
+			<input id=inpElevation type=number onchange=updateBuilding(); class=floatRight >
+		</p>
+
+
+		<h4>Units</h4>
+
+
+		<p title='' >
+			<input id=chkDaylightSavings type=checkBox onchange=updateBuilding(); checked > Daylight Savings
+		</p>
+
+		<p title='' >
+			<input id=chkUseSIUnitsForResults type=checkBox onchange=updateBuilding(); > Use SI Units For Results
+		</p>
+
+		<div id=divUnits></div>
+
+
+<!--
+		<p title='' >:
+			<input id=inp type= onchange=updateBuilding() class=floatRight >
+		</p>
+-->
+
+
+	</div>
+	<iframe id=ifrContents ></iframe>'
+
+<script>
+
+
+	const ifrSource = 'build-well-threejs-qline.html';
+
+	const pathArray  = location.pathname.split( '/' ).slice( -2 );
+	const release = pathArray[ 0 ];
+	const fileName = pathArray[ 1 ];
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/build-well/' + release + '/' + fileName;
+	const iconEdit = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+	let building;
+	let buildings;
+
+	let scope;
+
+	const b = '<br>';
+
+	var THREE;
+	var renderer;
+	var scene;
+	var camera;
+	var controls;
+
+	var lightDirectional;
+	var axisHelper, cameraHelper;
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3>' +
+				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +  
+				'<a href=' + infoURI + ' target="top" >' + iconEdit + '</a>' +
+			'</h3>' +
+		'';
+
+		divInfo.innerHTML += document.head.querySelector( '[name=description]' ).content;
+
+//		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables()
+
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += ' margin: 20px; max-height: calc( 100% - 50px);  max-width: 350px; ; overflow: auto; position: absolute; right: 0;' ;
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		cameraHelper = scope.cameraHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+
+		buildings = scope.buildings;
+		campus = scope.campus;
+//console.log( 'campus', campus )
+
+		updateMeshes = scope.updateMeshes;
+
+		rngOpacity.value = campus.opacity;
+		outOpacity.value = campus.opacity + '%';
+
+		campus.verticalSeparationUSA = 10;
+		rngVertical.value = campus.verticalSeparationUSA;
+		updateVertical();
+
+		inpElevation.value = 10; //campus.elevation;
+
+		inpLatitude.value = campus.latitude;
+
+		inpLongitude.value = campus.longitude;
+
+		inpDescription.value = campus.description;
+
+		inpName.value = campus.name;
+
+		inpZipcodeOrPostalCode.value = campus.zipcodeOrPostalCode;
+
+		inpLocationName.value = campus.locationName;
+
+		inpStreetAddress.value = campus.streetAddress;
+
+		updateBuilding();
+
+	}
+
+
+
+// Display Settings
+
+
+	function updateOpacity() {
+
+		campus.opacity = parseInt( rngOpacity.value, 10 );
+		outOpacity.value = campus.opacity + '%';
+		updateMeshes();
+
+	}
+
+
+	function updateVertical() {
+
+		campus.verticalSeparation = parseInt( rngVertical.value, 10 );
+		outVertical.value = campus.verticalSeparation + ' feet';
+		updateMeshes();
+
+	}
+
+
+
+	function updateGroundSize() {
+
+		size = parseInt( inpGroundSize.value, 10 )
+		ground.scale.set( size, size, 50 );
+
+	}
+
+
+
+	function toggleHelpers() {
+
+		cameraHelper.visible = !cameraHelper.visible;
+
+		axesHelper.visible = !axesHelper.visible;
+
+	}
+
+
+
+	function toggleGrid() {
+
+		gridHelper.visible = !gridHelper.visible;
+
+	}
+
+
+
+	function toggleGround() {
+
+		groundHelper.visible = !groundHelper.visible;
+
+	}
+
+
+
+	function toggleSceneAutoRotate() {
+
+		controls.autoRotate = !controls.autoRotate;
+
+	}
+
+
+
+	function toggleWireframe() {
+
+		buildings.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.wireframe = !child.material.wireframe;
+
+			}
+
+		} );
+
+	}
+
+
+
+	function toggleEdges() {
+// fix so just toggles edges of meshes
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.LineSegments ) {
+
+				child.visible = child.visible === true ? false : true;
+
+			}
+
+		} );
+
+	}
+
+
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = scope.document.body.style.backgroundImage;
+
+		scope.document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
+
+
+	function updateBuilding() {
+
+		campus.elevation = inpElevation.value;
+
+		campus.latitude = inpLatitude.value;
+
+		campus.longitude = inpLongitude.value;
+
+		campus.description = inpDescription.value;
+
+		campus.name = inpName.value;
+
+		campus.zipcodeOrPostalCode = inpZipcodeOrPostalCode.value;
+
+		campus.locationName = inpLocationName.value;
+
+		campus.streetAddress = inpStreetAddress.value;
+
+		if ( chkUseSIUnitsForResults.checked ) {
+
+			divUnits.innerHTML =
+
+				'Surface ref location: Centerline' + b +
+				'length unit: Meters' + b +
+				'area unit: Square Meters' + b +
+				'volume unit: Cubic Meters' + b +
+				'temperature unit: C' + b +
+				'gbXML version: 6.01' + b +
+			b;
+
+			campus.useSIUnitsForResults = true; 
+			campus.temperatureUnit = 'C';
+			campus.surfaceReferenceLocation = 'Centerline' ;
+			campus.areaUnit = 'SquareMeters';
+			campus.lengthUnit = 'Meters';
+			campus.version = '6.01';
+			campus.volumeUnit = 'CubicMeters';
+
+
+		} else {
+
+			divUnits.innerHTML =
+
+				'Surface ref location: Centerline' + b +
+				'length unit: Feet' + b +
+				'area unit: Square Feet' + b +
+				'volume unit: Cubic Feet' + b +
+				'temperature unit: F' + b +
+				'gbXML version: 6.01' + b +
+			b;
+
+			campus.useSIUnitsForResults = false; 
+			campus.temperatureUnit = 'C';
+			campus.surfaceReferenceLocation = 'Centerline' ;
+			campus.areaUnit = 'SquareFeet';
+			campus.lengthUnit = 'Feet';
+			campus.version = '6.01';
+			campus.volumeUnit = 'CubicFeet';
+
+		}
+
+//console.log( 'site settings campus', campus );
+
+	}
+
+</script>
+</body>
+</html>

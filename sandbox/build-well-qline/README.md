@@ -4,15 +4,19 @@
 # [Read Me]( #README.md )
 
 
-<iframe src=http://ladybug-tools.github.io/spider/sandbox/build-well-qline/ width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src=http://ladybug-tools.github.io/spider/sandbox/build-well-qline/dev/index.html width=100% height=600px ></iframe>
 _Build Well qLine_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
+
+# _This code is now deprecated. See [Build Well]( https://ladybug-tools.github.io/spider/index.html#build-well/README.md )_
+
+
+## Full Screen: [Build Well qLine  R2 Dev]( http://ladybug-tools.github.io/spider/sandbox/build-well-qline/dev/index.html )
 
 ## Full Screen: [Build Well qLine]( http://ladybug-tools.github.io/spider/sandbox/build-well-qline/index.html )
 
 ## Full Screen: [gbXML Sample File Viewer]( http://ladybug-tools.github.io/spider/sandbox/build-well-qline/build-well-gbxml-sample-files//index.html )
 
-_The code will likely become Build Well R13_
 
 
 ## Concept
@@ -42,15 +46,40 @@ If one were to invent a new drawing command - designed to be what comes after th
 
 ## Issues / To Do
 
-
-* 2017-10-25 ~ Switch all defaults to SI units
+* 2017-10-27 ~ Interior walls display incirrctly in gbxml vuewer
 * 2017-10-25 ~ change 'floor'-like variable to 'storey' through out
-* 2017-10-25 ~ Add separate US menu demo
 * 2017-10-25 ~ rename 'buildings var to 'campus'
 * Start adding more shapes
 
 ## Change Log
 
+
+
+### 2017-10-27 ~ Theo
+
+BW qLine 2.1
+* Interior spaces was always on top floor. Now changes with each floor
+BW qLin2.2
+* Switching between Shape Editor and Shape Editor USA mostly good
+
+
+Done
+* 2017-10-25 ~ Switch all defaults to SI units
+* 2017-10-25 ~ Add separate US menu demo
+
+
+### 2017-10-26 ~ Theo
+
+* Chatting with Anton re: Scatter Well
+BW qline 2.0
+* Geometry parameterization looking quite good
+	* Change area / Length is static / width updates
+	* Change length / area static / width updates
+	* Two sliders only
+	* 8 out of 9 shapes covered / O shape has issues caused its concavity
+	* All shapes visible and updated in real time
+* Shape Editor now in SI units
+	* US units menu soon
 
 ### 2017-10-25 ~ Theo
 

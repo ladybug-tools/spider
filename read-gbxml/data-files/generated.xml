@@ -1,3 +1,4 @@
+rectang
 <?xml version="1.0" encoding="UTF-8"?>
 <gbXML xmlns="http://www.gbxml.org/schema" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" useSIUnitsForResults="true" version="0.37" temperatureUnit="C">
   <Campus id="cmp_1">

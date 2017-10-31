@@ -1,0 +1,1167 @@
+
+Version,
+  8.8;                                    !- Version Identifier
+
+LifeCycleCost:Parameters,
+  {70d8a3c8-9ade-44a8-bf62-e2f83c4f1179}, !- Name
+  EndOfYear,                              !- Discounting Convention
+  ConstantDollar,                         !- Inflation Approach
+  0.03,                                   !- Real Discount Rate
+  ,                                       !- Nominal Discount Rate
+  ,                                       !- Inflation
+  ,                                       !- Base Date Month
+  2011,                                   !- Base Date Year
+  ,                                       !- Service Date Month
+  2011,                                   !- Service Date Year
+  25,                                     !- Length of Study Period in Years
+  ,                                       !- Tax rate
+  None;                                   !- Depreciation Method
+
+LifeCycleCost:UsePriceEscalation,
+  U.S. Avg  Commercial-Electricity,       !- LCC Price Escalation Name
+  Electricity,                            !- Resource
+  2011,                                   !- Escalation Start Year
+  January,                                !- Escalation Start Month
+  0.9838,                                 !- Year Escalation 1
+  0.9730,                                 !- Year Escalation 2
+  0.9632,                                 !- Year Escalation 3
+  0.9611,                                 !- Year Escalation 4
+  0.9571,                                 !- Year Escalation 5
+  0.9553,                                 !- Year Escalation 6
+  0.9539,                                 !- Year Escalation 7
+  0.9521,                                 !- Year Escalation 8
+  0.9546,                                 !- Year Escalation 9
+  0.9550,                                 !- Year Escalation 10
+  0.9553,                                 !- Year Escalation 11
+  0.9564,                                 !- Year Escalation 12
+  0.9575,                                 !- Year Escalation 13
+  0.9596,                                 !- Year Escalation 14
+  0.9618,                                 !- Year Escalation 15
+  0.9614,                                 !- Year Escalation 16
+  0.9618,                                 !- Year Escalation 17
+  0.9618,                                 !- Year Escalation 18
+  0.9593,                                 !- Year Escalation 19
+  0.9589,                                 !- Year Escalation 20
+  0.9607,                                 !- Year Escalation 21
+  0.9625,                                 !- Year Escalation 22
+  0.9650,                                 !- Year Escalation 23
+  0.9708,                                 !- Year Escalation 24
+  0.9751,                                 !- Year Escalation 25
+  0.9762,                                 !- Year Escalation 26
+  0.9766,                                 !- Year Escalation 27
+  0.9766,                                 !- Year Escalation 28
+  0.9769,                                 !- Year Escalation 29
+  0.9773;                                 !- Year Escalation 30
+
+LifeCycleCost:UsePriceEscalation,
+  U.S. Avg  Commercial-Distillate Oil,    !- LCC Price Escalation Name
+  FuelOil#1,                              !- Resource
+  2011,                                   !- Escalation Start Year
+  January,                                !- Escalation Start Month
+  0.9714,                                 !- Year Escalation 1
+  0.9730,                                 !- Year Escalation 2
+  0.9942,                                 !- Year Escalation 3
+  1.0164,                                 !- Year Escalation 4
+  1.0541,                                 !- Year Escalation 5
+  1.0928,                                 !- Year Escalation 6
+  1.1267,                                 !- Year Escalation 7
+  1.1580,                                 !- Year Escalation 8
+  1.1792,                                 !- Year Escalation 9
+  1.1967,                                 !- Year Escalation 10
+  1.2200,                                 !- Year Escalation 11
+  1.2333,                                 !- Year Escalation 12
+  1.2566,                                 !- Year Escalation 13
+  1.2709,                                 !- Year Escalation 14
+  1.2826,                                 !- Year Escalation 15
+  1.2985,                                 !- Year Escalation 16
+  1.3102,                                 !- Year Escalation 17
+  1.3250,                                 !- Year Escalation 18
+  1.3261,                                 !- Year Escalation 19
+  1.3282,                                 !- Year Escalation 20
+  1.3324,                                 !- Year Escalation 21
+  1.3356,                                 !- Year Escalation 22
+  1.3431,                                 !- Year Escalation 23
+  1.3510,                                 !- Year Escalation 24
+  1.3568,                                 !- Year Escalation 25
+  1.3606,                                 !- Year Escalation 26
+  1.3637,                                 !- Year Escalation 27
+  1.3674,                                 !- Year Escalation 28
+  1.3706,                                 !- Year Escalation 29
+  1.3743;                                 !- Year Escalation 30
+
+LifeCycleCost:UsePriceEscalation,
+  U.S. Avg  Commercial-Residual Oil,      !- LCC Price Escalation Name
+  FuelOil#2,                              !- Resource
+  2011,                                   !- Escalation Start Year
+  January,                                !- Escalation Start Month
+  0.8469,                                 !- Year Escalation 1
+  0.8257,                                 !- Year Escalation 2
+  0.8681,                                 !- Year Escalation 3
+  0.8988,                                 !- Year Escalation 4
+  0.9289,                                 !- Year Escalation 5
+  0.9604,                                 !- Year Escalation 6
+  0.9897,                                 !- Year Escalation 7
+  1.0075,                                 !- Year Escalation 8
+  1.0314,                                 !- Year Escalation 9
+  1.0554,                                 !- Year Escalation 10
+  1.0861,                                 !- Year Escalation 11
+  1.1278,                                 !- Year Escalation 12
+  1.1497,                                 !- Year Escalation 13
+  1.1620,                                 !- Year Escalation 14
+  1.1743,                                 !- Year Escalation 15
+  1.1852,                                 !- Year Escalation 16
+  1.1948,                                 !- Year Escalation 17
+  1.2037,                                 !- Year Escalation 18
+  1.2071,                                 !- Year Escalation 19
+  1.2119,                                 !- Year Escalation 20
+  1.2139,                                 !- Year Escalation 21
+  1.2194,                                 !- Year Escalation 22
+  1.2276,                                 !- Year Escalation 23
+  1.2365,                                 !- Year Escalation 24
+  1.2420,                                 !- Year Escalation 25
+  1.2461,                                 !- Year Escalation 26
+  1.2509,                                 !- Year Escalation 27
+  1.2550,                                 !- Year Escalation 28
+  1.2591,                                 !- Year Escalation 29
+  1.2638;                                 !- Year Escalation 30
+
+LifeCycleCost:UsePriceEscalation,
+  U.S. Avg  Commercial-Natural gas,       !- LCC Price Escalation Name
+  NaturalGas,                             !- Resource
+  2011,                                   !- Escalation Start Year
+  January,                                !- Escalation Start Month
+  0.9823,                                 !- Year Escalation 1
+  0.9557,                                 !- Year Escalation 2
+  0.9279,                                 !- Year Escalation 3
+  0.9257,                                 !- Year Escalation 4
+  0.9346,                                 !- Year Escalation 5
+  0.9412,                                 !- Year Escalation 6
+  0.9512,                                 !- Year Escalation 7
+  0.9645,                                 !- Year Escalation 8
+  0.9856,                                 !- Year Escalation 9
+  1.0067,                                 !- Year Escalation 10
+  1.0222,                                 !- Year Escalation 11
+  1.0410,                                 !- Year Escalation 12
+  1.0610,                                 !- Year Escalation 13
+  1.0787,                                 !- Year Escalation 14
+  1.0942,                                 !- Year Escalation 15
+  1.1098,                                 !- Year Escalation 16
+  1.1220,                                 !- Year Escalation 17
+  1.1308,                                 !- Year Escalation 18
+  1.1386,                                 !- Year Escalation 19
+  1.1486,                                 !- Year Escalation 20
+  1.1619,                                 !- Year Escalation 21
+  1.1763,                                 !- Year Escalation 22
+  1.1918,                                 !- Year Escalation 23
+  1.2118,                                 !- Year Escalation 24
+  1.2284,                                 !- Year Escalation 25
+  1.2439,                                 !- Year Escalation 26
+  1.2605,                                 !- Year Escalation 27
+  1.2772,                                 !- Year Escalation 28
+  1.2938,                                 !- Year Escalation 29
+  1.3115;                                 !- Year Escalation 30
+
+LifeCycleCost:UsePriceEscalation,
+  U.S. Avg  Commercial-Coal,              !- LCC Price Escalation Name
+  Coal,                                   !- Resource
+  2011,                                   !- Escalation Start Year
+  January,                                !- Escalation Start Month
+  0.9970,                                 !- Year Escalation 1
+  1.0089,                                 !- Year Escalation 2
+  1.0089,                                 !- Year Escalation 3
+  0.9941,                                 !- Year Escalation 4
+  0.9941,                                 !- Year Escalation 5
+  1.0000,                                 !- Year Escalation 6
+  1.0030,                                 !- Year Escalation 7
+  1.0059,                                 !- Year Escalation 8
+  1.0089,                                 !- Year Escalation 9
+  1.0119,                                 !- Year Escalation 10
+  1.0148,                                 !- Year Escalation 11
+  1.0178,                                 !- Year Escalation 12
+  1.0208,                                 !- Year Escalation 13
+  1.0267,                                 !- Year Escalation 14
+  1.0297,                                 !- Year Escalation 15
+  1.0356,                                 !- Year Escalation 16
+  1.0415,                                 !- Year Escalation 17
+  1.0534,                                 !- Year Escalation 18
+  1.0564,                                 !- Year Escalation 19
+  1.0593,                                 !- Year Escalation 20
+  1.0653,                                 !- Year Escalation 21
+  1.0712,                                 !- Year Escalation 22
+  1.0742,                                 !- Year Escalation 23
+  1.0801,                                 !- Year Escalation 24
+  1.0831,                                 !- Year Escalation 25
+  1.0831,                                 !- Year Escalation 26
+  1.0861,                                 !- Year Escalation 27
+  1.0890,                                 !- Year Escalation 28
+  1.0920,                                 !- Year Escalation 29
+  1.0950;                                 !- Year Escalation 30
+
+Building,
+  shapeBox,                               !- Name
+  ,                                       !- North Axis {deg}
+  ,                                       !- Terrain
+  ,                                       !- Loads Convergence Tolerance Value
+  ,                                       !- Temperature Convergence Tolerance Value {deltaC}
+  ,                                       !- Solar Distribution
+  ,                                       !- Maximum Number of Warmup Days
+  ;                                       !- Minimum Number of Warmup Days
+
+Zone,
+  Floor: 1 Zone: 1,                       !- Name
+  ,                                       !- Direction of Relative North {deg}
+  ,                                       !- X Origin {m}
+  ,                                       !- Y Origin {m}
+  ,                                       !- Z Origin {m}
+  ,                                       !- Type
+  ,                                       !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ;                                       !- Zone Outside Convection Algorithm
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-1, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 1,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-1 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -75, 0,                            !- X,Y,Z Vertex 1 {m}
+  -31.4, -78.6, 0,                        !- X,Y,Z Vertex 2 {m}
+  -31.4, -78.6, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -35, -75, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-4 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 1,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-4, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -75, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -78.6, -78.6, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -78.6, -78.6, 0,                        !- X,Y,Z Vertex 3 {m}
+  -75, -75, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  exterior-wall-floor-1-space-1,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 1,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -78.6, -78.6, 2.4,                      !- X,Y,Z Vertex 1 {m}
+  -78.6, -78.6, 0,                        !- X,Y,Z Vertex 2 {m}
+  -31.4, -78.6, 0,                        !- X,Y,Z Vertex 3 {m}
+  -31.4, -78.6, 2.4;                      !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  bw-opening-4,                           !- Name
+  Window,                                 !- Surface Type
+  ,                                       !- Construction Name
+  exterior-wall-floor-1-space-1,          !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Shading Control Name
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  -73.172, -78.6, 2.124,                  !- X,Y,Z Vertex 1 {m}
+  -73.172, -78.6, 0.276,                  !- X,Y,Z Vertex 2 {m}
+  -36.828, -78.6, 0.276,                  !- X,Y,Z Vertex 3 {m}
+  -36.828, -78.6, 2.124;                  !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  floor-1-space-1,                        !- Name
+  Floor,                                  !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 1,                       !- Zone Name
+  Ground,                                 !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -78.6, -78.6, 0,                        !- X,Y,Z Vertex 1 {m}
+  -75, -75, 0,                            !- X,Y,Z Vertex 2 {m}
+  -35, -75, 0,                            !- X,Y,Z Vertex 3 {m}
+  -31.4, -78.6, 0;                        !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-1,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 1,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-1 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -75, 0,                            !- X,Y,Z Vertex 1 {m}
+  -75, -75, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -35, -75, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -35, -75, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  roof-floor-1-space-1,                   !- Name
+  Roof,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 1,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -75, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -78.6, -78.6, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -31.4, -78.6, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -35, -75, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+Zone,
+  Floor: 1 Zone: 2,                       !- Name
+  ,                                       !- Direction of Relative North {deg}
+  ,                                       !- X Origin {m}
+  ,                                       !- Y Origin {m}
+  ,                                       !- Z Origin {m}
+  ,                                       !- Type
+  ,                                       !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ;                                       !- Zone Outside Convection Algorithm
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-1 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 2,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-1, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -75, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -31.4, -78.6, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -31.4, -78.6, 0,                        !- X,Y,Z Vertex 3 {m}
+  -35, -75, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-2, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 2,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-2 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -55, 0,                            !- X,Y,Z Vertex 1 {m}
+  -31.4, -51.4, 0,                        !- X,Y,Z Vertex 2 {m}
+  -31.4, -51.4, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -35, -55, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  exterior-wall-floor-1-space-2,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 2,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -31.4, -78.6, 2.4,                      !- X,Y,Z Vertex 1 {m}
+  -31.4, -78.6, 0,                        !- X,Y,Z Vertex 2 {m}
+  -31.4, -51.4, 0,                        !- X,Y,Z Vertex 3 {m}
+  -31.4, -51.4, 2.4;                      !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  bw-opening-9,                           !- Name
+  Window,                                 !- Surface Type
+  ,                                       !- Construction Name
+  exterior-wall-floor-1-space-2,          !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Shading Control Name
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  -31.4, -75.472, 2.124,                  !- X,Y,Z Vertex 1 {m}
+  -31.4, -75.472, 0.276,                  !- X,Y,Z Vertex 2 {m}
+  -31.4, -54.528, 0.276,                  !- X,Y,Z Vertex 3 {m}
+  -31.4, -54.528, 2.124;                  !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  floor-1-space-2,                        !- Name
+  Floor,                                  !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 2,                       !- Zone Name
+  Ground,                                 !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -31.4, -78.6, 0,                        !- X,Y,Z Vertex 1 {m}
+  -35, -75, 0,                            !- X,Y,Z Vertex 2 {m}
+  -35, -55, 0,                            !- X,Y,Z Vertex 3 {m}
+  -31.4, -51.4, 0;                        !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-2,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 2,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-2 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -75, 0,                            !- X,Y,Z Vertex 1 {m}
+  -35, -75, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -35, -55, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -35, -55, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  roof-floor-1-space-2,                   !- Name
+  Roof,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 2,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -75, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -31.4, -78.6, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -31.4, -51.4, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -35, -55, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+Zone,
+  Floor: 1 Zone: 3,                       !- Name
+  ,                                       !- Direction of Relative North {deg}
+  ,                                       !- X Origin {m}
+  ,                                       !- Y Origin {m}
+  ,                                       !- Z Origin {m}
+  ,                                       !- Type
+  ,                                       !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ;                                       !- Zone Outside Convection Algorithm
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-2 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 3,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-2, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -55, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -31.4, -51.4, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -31.4, -51.4, 0,                        !- X,Y,Z Vertex 3 {m}
+  -35, -55, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-3, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 3,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-3 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -55, 0,                            !- X,Y,Z Vertex 1 {m}
+  -78.6, -51.4, 0,                        !- X,Y,Z Vertex 2 {m}
+  -78.6, -51.4, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -75, -55, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  exterior-wall-floor-1-space-3,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 3,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -31.4, -51.4, 2.4,                      !- X,Y,Z Vertex 1 {m}
+  -31.4, -51.4, 0,                        !- X,Y,Z Vertex 2 {m}
+  -78.6, -51.4, 0,                        !- X,Y,Z Vertex 3 {m}
+  -78.6, -51.4, 2.4;                      !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  bw-opening-14,                          !- Name
+  Window,                                 !- Surface Type
+  ,                                       !- Construction Name
+  exterior-wall-floor-1-space-3,          !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Shading Control Name
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  -36.828, -51.4, 2.124,                  !- X,Y,Z Vertex 1 {m}
+  -36.828, -51.4, 0.276,                  !- X,Y,Z Vertex 2 {m}
+  -73.172, -51.4, 0.276,                  !- X,Y,Z Vertex 3 {m}
+  -73.172, -51.4, 2.124;                  !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  floor-1-space-3,                        !- Name
+  Floor,                                  !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 3,                       !- Zone Name
+  Ground,                                 !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -31.4, -51.4, 0,                        !- X,Y,Z Vertex 1 {m}
+  -35, -55, 0,                            !- X,Y,Z Vertex 2 {m}
+  -75, -55, 0,                            !- X,Y,Z Vertex 3 {m}
+  -78.6, -51.4, 0;                        !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-3,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 3,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-3 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -55, 0,                            !- X,Y,Z Vertex 1 {m}
+  -35, -55, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -75, -55, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -75, -55, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  roof-floor-1-space-3,                   !- Name
+  Roof,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 3,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -55, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -31.4, -51.4, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -78.6, -51.4, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -75, -55, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+Zone,
+  Floor: 1 Zone: 4,                       !- Name
+  ,                                       !- Direction of Relative North {deg}
+  ,                                       !- X Origin {m}
+  ,                                       !- Y Origin {m}
+  ,                                       !- Z Origin {m}
+  ,                                       !- Type
+  ,                                       !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ;                                       !- Zone Outside Convection Algorithm
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-3 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 4,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-3, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -55, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -78.6, -51.4, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -78.6, -51.4, 0,                        !- X,Y,Z Vertex 3 {m}
+  -75, -55, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  diagonal-interior-wall-floor-1-space-4, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 4,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  diagonal-interior-wall-floor-1-space-4 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -75, 0,                            !- X,Y,Z Vertex 1 {m}
+  -78.6, -78.6, 0,                        !- X,Y,Z Vertex 2 {m}
+  -78.6, -78.6, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -75, -75, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  exterior-wall-floor-1-space-4,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 4,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -78.6, -51.4, 2.4,                      !- X,Y,Z Vertex 1 {m}
+  -78.6, -51.4, 0,                        !- X,Y,Z Vertex 2 {m}
+  -78.6, -78.6, 0,                        !- X,Y,Z Vertex 3 {m}
+  -78.6, -78.6, 2.4;                      !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  bw-opening-19,                          !- Name
+  Window,                                 !- Surface Type
+  ,                                       !- Construction Name
+  exterior-wall-floor-1-space-4,          !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Shading Control Name
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  -78.6, -54.528, 2.124,                  !- X,Y,Z Vertex 1 {m}
+  -78.6, -54.528, 0.276,                  !- X,Y,Z Vertex 2 {m}
+  -78.6, -75.472, 0.276,                  !- X,Y,Z Vertex 3 {m}
+  -78.6, -75.472, 2.124;                  !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  floor-1-space-4,                        !- Name
+  Floor,                                  !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 4,                       !- Zone Name
+  Ground,                                 !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -78.6, -51.4, 0,                        !- X,Y,Z Vertex 1 {m}
+  -75, -55, 0,                            !- X,Y,Z Vertex 2 {m}
+  -75, -75, 0,                            !- X,Y,Z Vertex 3 {m}
+  -78.6, -78.6, 0;                        !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-4,          !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 4,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-4 Reversed, !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -55, 0,                            !- X,Y,Z Vertex 1 {m}
+  -75, -55, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -75, -75, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -75, -75, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  roof-floor-1-space-4,                   !- Name
+  Roof,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 4,                       !- Zone Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -55, 2.4,                          !- X,Y,Z Vertex 1 {m}
+  -78.6, -51.4, 2.4,                      !- X,Y,Z Vertex 2 {m}
+  -78.6, -78.6, 2.4,                      !- X,Y,Z Vertex 3 {m}
+  -75, -75, 2.4;                          !- X,Y,Z Vertex 4 {m}
+
+Zone,
+  Floor: 1 Zone: 5,                       !- Name
+  ,                                       !- Direction of Relative North {deg}
+  ,                                       !- X Origin {m}
+  ,                                       !- Y Origin {m}
+  ,                                       !- Z Origin {m}
+  ,                                       !- Type
+  ,                                       !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ;                                       !- Zone Outside Convection Algorithm
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-1 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 5,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-1,          !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -75, 0,                            !- X,Y,Z Vertex 1 {m}
+  -35, -75, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -75, -75, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -75, -75, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-2 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 5,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-2,          !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -35, -55, 0,                            !- X,Y,Z Vertex 1 {m}
+  -35, -55, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -35, -75, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -35, -75, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-3 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 5,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-3,          !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -55, 0,                            !- X,Y,Z Vertex 1 {m}
+  -75, -55, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -35, -55, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -35, -55, 0;                            !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  interior-wall-floor-1-space-4 Reversed, !- Name
+  Wall,                                   !- Surface Type
+  ,                                       !- Construction Name
+  Floor: 1 Zone: 5,                       !- Zone Name
+  Surface,                                !- Outside Boundary Condition
+  interior-wall-floor-1-space-4,          !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  -75, -75, 0,                            !- X,Y,Z Vertex 1 {m}
+  -75, -75, 2.4,                          !- X,Y,Z Vertex 2 {m}
+  -75, -55, 2.4,                          !- X,Y,Z Vertex 3 {m}
+  -75, -55, 0;                            !- X,Y,Z Vertex 4 {m}
+
+SimulationControl,
+  No,                                     !- Do Zone Sizing Calculation
+  No,                                     !- Do System Sizing Calculation
+  No,                                     !- Do Plant Sizing Calculation
+  Yes,                                    !- Run Simulation for Sizing Periods
+  Yes;                                    !- Run Simulation for Weather File Run Periods
+
+HeatBalanceAlgorithm,
+  ConductionTransferFunction,             !- Algorithm
+  200;                                    !- Surface Temperature Upper Limit {C}
+
+RunPeriod,
+  Run Period 1,                           !- Name
+  1,                                      !- Begin Month
+  1,                                      !- Begin Day of Month
+  12,                                     !- End Month
+  31,                                     !- End Day of Month
+  Saturday,                               !- Day of Week for Start Day
+  No,                                     !- Use Weather File Holidays and Special Days
+  No,                                     !- Use Weather File Daylight Saving Period
+  No,                                     !- Apply Weekend Holiday Rule
+  Yes,                                    !- Use Weather File Rain Indicators
+  Yes,                                    !- Use Weather File Snow Indicators
+  1;                                      !- Number of Times Runperiod to be Repeated
+
+ShadowCalculation,
+  AverageOverDaysInFrequency,             !- Calculation Method
+  20,                                     !- Calculation Frequency
+  15000;                                  !- Maximum Figures in Shadow Overlap Calculations
+
+Timestep,
+  6;                                      !- Number of Timesteps per Hour
+
+Sizing:Parameters,
+  1.25,                                   !- Heating Sizing Factor
+  1.15;                                   !- Cooling Sizing Factor
+
+GlobalGeometryRules,
+  UpperLeftCorner,                        !- Starting Vertex Position
+  Counterclockwise,                       !- Vertex Entry Direction
+  Relative,                               !- Coordinate System
+  Relative,                               !- Daylighting Reference Point Coordinate System
+  Relative;                               !- Rectangular Surface Coordinate System
+
+Construction,
+  Construction 1;                         !- Name
+
+Construction:CfactorUndergroundWall,
+  Construction Cfactor Underground Wall 1, !- Name
+  0.1,                                    !- C-Factor {W/m2-K}
+  0.1;                                    !- Height {m}
+
+Construction:FfactorGroundFloor,
+  Construction Ffactor Ground Floor 1,    !- Name
+  0.1,                                    !- F-Factor {W/m-K}
+  0.1,                                    !- Area {m2}
+  0.1;                                    !- PerimeterExposed {m}
+
+Construction:InternalSource,
+  Construction Internal Source 1,         !- Name
+  1,                                      !- Source Present After Layer Number
+  1,                                      !- Temperature Calculation Requested After Layer Number
+  1,                                      !- Dimensions for the CTF Calculation
+  0.154;                                  !- Tube Spacing {m}
+
+Schedule:Constant,
+  Always On Discrete,                     !- Name
+  ,                                       !- Schedule Type Limits Name
+  1;                                      !- Hourly Value
+
+Schedule:Constant,
+  Always Off Discrete,                    !- Name
+  ,                                       !- Schedule Type Limits Name
+  0;                                      !- Hourly Value
+
+Schedule:Constant,
+  Always On Continuous,                   !- Name
+  ,                                       !- Schedule Type Limits Name
+  1;                                      !- Hourly Value
+
+Site:Location,
+  SAN_FRANCISCO,                          !- Name
+  37.62,                                  !- Latitude {deg}
+  -122.38,                                !- Longitude {deg}
+  -8,                                     !- Time Zone {hr}
+  5;                                      !- Elevation {m}
+
+OutputControl:Table:Style,
+  HTML;                                   !- Column Separator
+
+Output:Table:SummaryReports,
+  AllSummary;                             !- Report Name 1
+
+Output:VariableDictionary,
+  IDF,                                    !- Key Field
+  Unsorted;                               !- Sort Option
+
+Output:SQLite,
+  SimpleAndTabular;                       !- Option Type
+
+LifeCycleCost:NonrecurringCost,
+  Default Cost,                           !- Name
+  Construction,                           !- Category
+  0,                                      !- Cost
+  ServicePeriod;                          !- Start of Costs
+
+Output:Table:Monthly,
+  Building Energy Performance - Electricity, !- Name
+  2,                                      !- Digits After Decimal
+  InteriorLights:Electricity,             !- Variable or Meter Name 1
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 1
+  ExteriorLights:Electricity,             !- Variable or Meter Name 2
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 2
+  InteriorEquipment:Electricity,          !- Variable or Meter Name 3
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 3
+  ExteriorEquipment:Electricity,          !- Variable or Meter Name 4
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 4
+  Fans:Electricity,                       !- Variable or Meter Name 5
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 5
+  Pumps:Electricity,                      !- Variable or Meter Name 6
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 6
+  Heating:Electricity,                    !- Variable or Meter Name 7
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 7
+  Cooling:Electricity,                    !- Variable or Meter Name 8
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 8
+  HeatRejection:Electricity,              !- Variable or Meter Name 9
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 9
+  Humidifier:Electricity,                 !- Variable or Meter Name 10
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 10
+  HeatRecovery:Electricity,               !- Variable or Meter Name 11
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 11
+  WaterSystems:Electricity,               !- Variable or Meter Name 12
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 12
+  Cogeneration:Electricity,               !- Variable or Meter Name 13
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 13
+  Refrigeration:Electricity,              !- Variable or Meter Name 14
+  SumOrAverage;                           !- Aggregation Type for Variable or Meter 14
+
+Output:Table:Monthly,
+  Building Energy Performance - Natural Gas, !- Name
+  2,                                      !- Digits After Decimal
+  InteriorEquipment:Gas,                  !- Variable or Meter Name 1
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 1
+  ExteriorEquipment:Gas,                  !- Variable or Meter Name 2
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 2
+  Heating:Gas,                            !- Variable or Meter Name 3
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 3
+  Cooling:Gas,                            !- Variable or Meter Name 4
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 4
+  WaterSystems:Gas,                       !- Variable or Meter Name 5
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 5
+  Cogeneration:Gas,                       !- Variable or Meter Name 6
+  SumOrAverage;                           !- Aggregation Type for Variable or Meter 6
+
+Output:Table:Monthly,
+  Building Energy Performance - District Heating, !- Name
+  2,                                      !- Digits After Decimal
+  InteriorLights:DistrictHeating,         !- Variable or Meter Name 1
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 1
+  ExteriorLights:DistrictHeating,         !- Variable or Meter Name 2
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 2
+  InteriorEquipment:DistrictHeating,      !- Variable or Meter Name 3
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 3
+  ExteriorEquipment:DistrictHeating,      !- Variable or Meter Name 4
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 4
+  Fans:DistrictHeating,                   !- Variable or Meter Name 5
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 5
+  Pumps:DistrictHeating,                  !- Variable or Meter Name 6
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 6
+  Heating:DistrictHeating,                !- Variable or Meter Name 7
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 7
+  Cooling:DistrictHeating,                !- Variable or Meter Name 8
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 8
+  HeatRejection:DistrictHeating,          !- Variable or Meter Name 9
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 9
+  Humidifier:DistrictHeating,             !- Variable or Meter Name 10
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 10
+  HeatRecovery:DistrictHeating,           !- Variable or Meter Name 11
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 11
+  WaterSystems:DistrictHeating,           !- Variable or Meter Name 12
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 12
+  Cogeneration:DistrictHeating,           !- Variable or Meter Name 13
+  SumOrAverage;                           !- Aggregation Type for Variable or Meter 13
+
+Output:Table:Monthly,
+  Building Energy Performance - District Cooling, !- Name
+  2,                                      !- Digits After Decimal
+  InteriorLights:DistrictCooling,         !- Variable or Meter Name 1
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 1
+  ExteriorLights:DistrictCooling,         !- Variable or Meter Name 2
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 2
+  InteriorEquipment:DistrictCooling,      !- Variable or Meter Name 3
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 3
+  ExteriorEquipment:DistrictCooling,      !- Variable or Meter Name 4
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 4
+  Fans:DistrictCooling,                   !- Variable or Meter Name 5
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 5
+  Pumps:DistrictCooling,                  !- Variable or Meter Name 6
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 6
+  Heating:DistrictCooling,                !- Variable or Meter Name 7
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 7
+  Cooling:DistrictCooling,                !- Variable or Meter Name 8
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 8
+  HeatRejection:DistrictCooling,          !- Variable or Meter Name 9
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 9
+  Humidifier:DistrictCooling,             !- Variable or Meter Name 10
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 10
+  HeatRecovery:DistrictCooling,           !- Variable or Meter Name 11
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 11
+  WaterSystems:DistrictCooling,           !- Variable or Meter Name 12
+  SumOrAverage,                           !- Aggregation Type for Variable or Meter 12
+  Cogeneration:DistrictCooling,           !- Variable or Meter Name 13
+  SumOrAverage;                           !- Aggregation Type for Variable or Meter 13
+
+Output:Table:Monthly,
+  Building Energy Performance - Electricity Peak Demand, !- Name
+  2,                                      !- Digits After Decimal
+  Electricity:Facility,                   !- Variable or Meter Name 1
+  Maximum,                                !- Aggregation Type for Variable or Meter 1
+  InteriorLights:Electricity,             !- Variable or Meter Name 2
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 2
+  ExteriorLights:Electricity,             !- Variable or Meter Name 3
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 3
+  InteriorEquipment:Electricity,          !- Variable or Meter Name 4
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 4
+  ExteriorEquipment:Electricity,          !- Variable or Meter Name 5
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 5
+  Fans:Electricity,                       !- Variable or Meter Name 6
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 6
+  Pumps:Electricity,                      !- Variable or Meter Name 7
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 7
+  Heating:Electricity,                    !- Variable or Meter Name 8
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 8
+  Cooling:Electricity,                    !- Variable or Meter Name 9
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 9
+  HeatRejection:Electricity,              !- Variable or Meter Name 10
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 10
+  Humidifier:Electricity,                 !- Variable or Meter Name 11
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 11
+  HeatRecovery:Electricity,               !- Variable or Meter Name 12
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 12
+  WaterSystems:Electricity,               !- Variable or Meter Name 13
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 13
+  Cogeneration:Electricity,               !- Variable or Meter Name 14
+  ValueWhenMaximumOrMinimum;              !- Aggregation Type for Variable or Meter 14
+
+Output:Table:Monthly,
+  Building Energy Performance - Natural Gas Peak Demand, !- Name
+  2,                                      !- Digits After Decimal
+  Gas:Facility,                           !- Variable or Meter Name 1
+  Maximum,                                !- Aggregation Type for Variable or Meter 1
+  InteriorEquipment:Gas,                  !- Variable or Meter Name 2
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 2
+  ExteriorEquipment:Gas,                  !- Variable or Meter Name 3
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 3
+  Heating:Gas,                            !- Variable or Meter Name 4
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 4
+  Cooling:Gas,                            !- Variable or Meter Name 5
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 5
+  WaterSystems:Gas,                       !- Variable or Meter Name 6
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 6
+  Cogeneration:Gas,                       !- Variable or Meter Name 7
+  ValueWhenMaximumOrMinimum;              !- Aggregation Type for Variable or Meter 7
+
+Output:Table:Monthly,
+  Building Energy Performance - District Heating Peak Demand, !- Name
+  2,                                      !- Digits After Decimal
+  DistrictHeating:Facility,               !- Variable or Meter Name 1
+  Maximum,                                !- Aggregation Type for Variable or Meter 1
+  InteriorLights:DistrictHeating,         !- Variable or Meter Name 2
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 2
+  ExteriorLights:DistrictHeating,         !- Variable or Meter Name 3
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 3
+  InteriorEquipment:DistrictHeating,      !- Variable or Meter Name 4
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 4
+  ExteriorEquipment:DistrictHeating,      !- Variable or Meter Name 5
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 5
+  Fans:DistrictHeating,                   !- Variable or Meter Name 6
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 6
+  Pumps:DistrictHeating,                  !- Variable or Meter Name 7
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 7
+  Heating:DistrictHeating,                !- Variable or Meter Name 8
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 8
+  Cooling:DistrictHeating,                !- Variable or Meter Name 9
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 9
+  HeatRejection:DistrictHeating,          !- Variable or Meter Name 10
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 10
+  Humidifier:DistrictHeating,             !- Variable or Meter Name 11
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 11
+  HeatRecovery:DistrictHeating,           !- Variable or Meter Name 12
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 12
+  WaterSystems:DistrictHeating,           !- Variable or Meter Name 13
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 13
+  Cogeneration:DistrictHeating,           !- Variable or Meter Name 14
+  ValueWhenMaximumOrMinimum;              !- Aggregation Type for Variable or Meter 14
+
+Output:Table:Monthly,
+  Building Energy Performance - District Cooling Peak Demand, !- Name
+  2,                                      !- Digits After Decimal
+  DistrictCooling:Facility,               !- Variable or Meter Name 1
+  Maximum,                                !- Aggregation Type for Variable or Meter 1
+  InteriorLights:DistrictCooling,         !- Variable or Meter Name 2
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 2
+  ExteriorLights:DistrictCooling,         !- Variable or Meter Name 3
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 3
+  InteriorEquipment:DistrictCooling,      !- Variable or Meter Name 4
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 4
+  ExteriorEquipment:DistrictCooling,      !- Variable or Meter Name 5
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 5
+  Fans:DistrictCooling,                   !- Variable or Meter Name 6
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 6
+  Pumps:DistrictCooling,                  !- Variable or Meter Name 7
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 7
+  Heating:DistrictCooling,                !- Variable or Meter Name 8
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 8
+  Cooling:DistrictCooling,                !- Variable or Meter Name 9
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 9
+  HeatRejection:DistrictCooling,          !- Variable or Meter Name 10
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 10
+  Humidifier:DistrictCooling,             !- Variable or Meter Name 11
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 11
+  HeatRecovery:DistrictCooling,           !- Variable or Meter Name 12
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 12
+  WaterSystems:DistrictCooling,           !- Variable or Meter Name 13
+  ValueWhenMaximumOrMinimum,              !- Aggregation Type for Variable or Meter 13
+  Cogeneration:DistrictCooling,           !- Variable or Meter Name 14
+  ValueWhenMaximumOrMinimum;              !- Aggregation Type for Variable or Meter 14
+
+Output:Meter:MeterFileOnly,
+  Gas:Facility,                           !- Key Name
+  Daily;                                  !- Reporting Frequency
+
+Output:Meter:MeterFileOnly,
+  Electricity:Facility,                   !- Key Name
+  Timestep;                               !- Reporting Frequency
+
+Output:Meter:MeterFileOnly,
+  Electricity:Facility,                   !- Key Name
+  Daily;                                  !- Reporting Frequency
+
+Output:Meter,
+  Electricity:Facility,                   !- Key Name
+  Timestep;                               !- Reporting Frequency
+
+Output:Meter,
+  Gas:Facility,                           !- Key Name
+  Timestep;                               !- Reporting Frequency
+
+Output:Meter,
+  DistrictCooling:Facility,               !- Key Name
+  Timestep;                               !- Reporting Frequency
+
+Output:Meter,
+  DistrictHeating:Facility,               !- Key Name
+  Timestep;                               !- Reporting Frequency
+
+Output:Variable,
+  *,                                      !- Key Value
+  Zone Air Temperature,                   !- Variable Name
+  Hourly;                                 !- Reporting Frequency
+
+Output:Variable,
+  *,                                      !- Key Value
+  Site Outdoor Air Wetbulb Temperature,   !- Variable Name
+  Timestep;                               !- Reporting Frequency
+
+Output:Variable,
+  *,                                      !- Key Value
+  Zone Air Relative Humidity,             !- Variable Name
+  Daily;                                  !- Reporting Frequency
+
+Output:Variable,
+  *,                                      !- Key Value
+  Site Outdoor Air Drybulb Temperature,   !- Variable Name
+  Monthly;                                !- Reporting Frequency
+
