@@ -47,23 +47,24 @@
 		<p><small>Parametric 3D building schematics created and updated in a game-like fashion</small></p>
 
 		<p title='Area from 1 to 100000' >Building Area: 
-			<input type=range id=inpBuildingArea min=1 max=1000000 step=1 value=5000 oninput=updateShape() class=floatRight >
+			<output id=outBuildingArea class=floatRight ></output>
+			<input type=range id=inpBuildingArea min=1 max=1000000 step=1 value=5000 oninput=updateShape(); class=floatRight >
 		</p>
 
 		<p title='x distance 1 to 200' >Building Length:
-			<output id=outBuildingLength class=floatRight ></output>
+			<output id=outLength1 class=floatRight ></output>
 			<input type=range id="rngLength1" min=50 max=200 step=1 value=100 oninput=updateShape(); >
 		</p>
 
 		<p title='x distance 1 to 200' >Building Width:
-			<output id=outBuildingWidth class=floatRight ></output>
-			<input type=range id="rngWidth1" min=50 max=200 step=1 value=100 onchange=updateShape(); >
+			<output id=outWidth1 class=floatRight ></output>
+			<input type=range id="rngWidth1" min=50 max=200 step=1 value=100 oninput=updateShape(); >
 		</p>
 
 
-		<p title='How many storeys? 1 to 161'>Number of Floors: 
+		<p title='How many storeys? 1 to 20'>Number of Floors: 
 			<output id=outNumberOfFloors class=floatRight ></output>
-			<input type=range id="rngNumberOfFloors" min=1 max=161 step=1 value=1 onchange=updateShape(); >
+			<input type=range id="rngNumberOfFloors" min=1 max=20 step=1 value=1 oninput=updateShape(); >
 		</p>
 
 <!--
@@ -95,8 +96,8 @@
 		</p>
 
 		<p title='building angle in degrees -180 to 180' >Orientation degrees: 
-			<output id=outOrientatio class=floatRight ></output>
-			<input type=range id=rngOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); >
+			<output id=outOrientation class=floatRight ></output>
+			<input type=range id=rngOrientation min=-180 max=180 step=1 value=0 oninput=updateShape(); >
 		</p>
 
 	</div>
@@ -189,7 +190,7 @@
 //		v = scope.v;
 //		v2 = scope.v2;
 		buildings = scope.meshes;
-		building = scope.building;
+		campus = scope.campus;
 
 //		updateQline2Square = scope.updateQline2Square;
 		updateMeshes = scope.updateMeshes;
@@ -198,33 +199,35 @@
 
 // values here override build-well-threejs.html values which override menu values
 
-		building.area = 5000
-		building.box.length1 = 100;
-		building.box.width1 = 50;
-//		building.floors = 3;
-//		building.orientation = 20;
-//		building.wwr = 80;
-		building.overhangDepth = 1;
-		building.perimeterDepth = 15;
+		campus.area = 5000;
+		campus.length1 = 100;
+		campus.width1 = 50;
+//		campus.storeys = 3;
+//		campus.orientation = 20;
+//		campus.wwr = 80;
+		campus.overhangDepth = 1;
+		campus.perimeterDepth = 15;
 
-		inpBuildingArea.value = building.area;
+		inpBuildingArea.value = campus.area;
+		outBuildingArea.value = campus.area;
 
-		rngLength1.value = building.box.length1;
-		outBuildingLength.value = building.box.length1;
+		rngLength1.value = campus.length1;
+		outLength1.value = campus.length1;
 
-		rngWidth1.value = building.box.width1;
-		outBuildingLength.value = building.box.width1;
+		rngWidth1.value = campus.width1;
+		outWidth1.value = campus.width1;
 
-		rngNumberOfFloors.value = building.floors;
-		outNumberOfFloors.value = building.floors;
+		rngNumberOfFloors.value = campus.storeys;
+		outNumberOfFloors.value = campus.storeys;
 
-		rngOrientation.value = building.orientation;
-		inpOrientation.innerHTML = building.orientation;
-		inpWindowWallRatio.value = building.wwr;
-		inpOverhangDepth.value = building.overhangDepth;
-		inpPerimeterDepth.value = building.perimeterDepth;
+		rngOrientation.value = campus.orientation;
+		outOrientation.innerHTML = campus.orientation;
 
-//console.log( 'building', building );
+		inpWindowWallRatio.value = campus.wwr;
+		inpOverhangDepth.value = campus.overhangDepth;
+		inpPerimeterDepth.value = campus.perimeterDepth;
+
+//console.log( 'campus', campus );
 
 		updateCampusSize( 800 );
 
@@ -236,11 +239,14 @@
 
 	function updateShape() {
 
-		building.box.length1 = parseInt( rngLength1.value, 10 );
-		outBuildingLength.value = rngLength1.value;
+		campus.length1 = parseInt( rngLength1.value, 10 );
+		outLength1.value = rngLength1.value;
 
-		building.box.width1 = parseInt( rngWidth1.value, 10 );
-		outBuildingWidth.value = rngWidth1.value;
+		campus.width1 = parseInt( rngWidth1.value, 10 );
+		outWidth1.value = rngWidth1.value;
+
+//		campus.storeys = parseInt( rngNumberOfFloors.value, 10 );
+//		outNumberOfFloors.value = rngNumberOfFloors.value;
 
 		updateMenuExtras();
 
@@ -253,31 +259,31 @@
 // same for each shape
 	function updateMenuExtras() {
 
-		const floors = rngNumberOfFloors.value ? parseInt( rngNumberOfFloors.value, 10 ) : 1;
+		const storeys = rngNumberOfFloors.value ? parseInt( rngNumberOfFloors.value, 10 ) : 1;
 		const height = inpFloorHeight.value ? Math.abs( parseFloat( inpFloorHeight.value ) ): parseFloat( inpFloorHeight.min );
 		const orientation = rngOrientation.value ? parseFloat( rngOrientation.value ) : 0;
 		
 		const overhangDepth = inpOverhangDepth.value ? parseFloat( inpOverhangDepth.value ) : 0;
 		const perDep = inpPerimeterDepth.value ? parseFloat( inpPerimeterDepth.value ) : parseFloat( inpPerimeterDepth.min );
-		const volume = building.areaFloor * building.floors * height;
+		const volume = campus.areaFloor * campus.storeys * height;
 		const wwr = inpWindowWallRatio.value ? parseFloat( inpWindowWallRatio.value ) : 40;
 
-		outNumberOfFloors.value = floors;
+		outNumberOfFloors.value = storeys;
 		inpFloorHeight.value = height;
 		rngOrientation.value = orientation;
-		inpOrientation.innerHTML = orientation;
+		outOrientation.innerHTML = orientation;
 		inpOverhangDepth.value = overhangDepth;
 		inpPerimeterDepth.value = perDep;
 		inpWindowWallRatio.value = wwr;
 //		spnVolume.innerHTML = volume.toLocaleString();
 
-		building.floors = floors;
-		building.floorHeight = height;
-		building.orientation = orientation;
-		building.overhangDepth = overhangDepth;
-		building.perimeterDepth = perDep;
-		building.volume = building.areaFloor * building.floors * height;
-		building.wwr = wwr;
+		campus.storeys = storeys;
+		campus.storeyHeight = height;
+		campus.orientation = orientation;
+		campus.overhangDepth = overhangDepth;
+		campus.perimeterDepth = perDep;
+		campus.volume = campus.areaFloor * campus.storeys * height;
+		campus.wwr = wwr;
 
 	}
 

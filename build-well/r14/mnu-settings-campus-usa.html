@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Set a variety of usr experience parameters. Update the default settings for a gbXML file" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-13" >
+<meta name = "date" content = "2017-10-31" >
 <title>Campus Settings USA</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -120,10 +120,11 @@
 		<p title='' >
 			<input id=chkDaylightSavings type=checkBox onchange=updateBuilding(); checked > Daylight Savings
 		</p>
-
+<!--
 		<p title='' >
 			<input id=chkUseSIUnitsForResults type=checkBox onchange=updateBuilding(); > Use SI Units For Results
 		</p>
+-->
 
 		<div id=divUnits></div>
 
@@ -383,6 +384,7 @@
 
 		campus.streetAddress = inpStreetAddress.value;
 
+/*
 		if ( chkUseSIUnitsForResults.checked ) {
 
 			divUnits.innerHTML =
@@ -405,6 +407,7 @@
 
 
 		} else {
+*/
 
 			divUnits.innerHTML =
 
@@ -424,7 +427,7 @@
 			campus.version = '6.01';
 			campus.volumeUnit = 'CubicFeet';
 
-		}
+//		}
 
 //console.log( 'site settings campus', campus );
 
