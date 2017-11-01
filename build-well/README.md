@@ -54,15 +54,14 @@ _We often think of software of software just appearing as if by magic. The reali
 
 ## Current Issues
 
+
+* 2017-11-01 ~ Internal and externals wall need to switch positions
+* 2017-11-01 ~ gbXML export needs fixes to compensate for changes to space ordering and perimeter depth
+* 2017-10-30 ~ No vertical spacing as default on gbXML export
 * 2017-10-30 ~ Need accurate area and volume calculations for spaces and building
-* 2017-10-30 ~ Spaces should be numbered clockwise
-* 2017-10-30 ~ No vertical spacing
 * 2017-10-30 ~ Export area as single space if width less than 2 x perimeter depth plus 4'/ width of corridor
-* 2017-10-30 ~ Perimeter depth should grow inward not outward
-* 2017-10-30 ~ Shapes need centering
 * 2017-10-30 ~ Continue fixing floor numbering issues
 
-* 2017-10-30 ~ Make sure R12 reports page gets to speed folder
 
 ## Naming Considerations
 
@@ -85,7 +84,8 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 * 2017-10-14 ~ Decide what to do when distance between external walls is less than twice the minimum perimeter depth
 * 2017-10-14 ~ Organize nice sets of color schemes for the various surface types
 
-ifrThree.contentWindow.renderer.info
+
+
 ## To Dos per module
 
 ### build-well.html / Build Well parent file
@@ -119,7 +119,6 @@ ifrThree.contentWindow.renderer.info
 * 2017-09-22 ~ Add XYZ placards once we start having sufficient other inworld text needs
 	* Inworld text is a whole thing in itself. Add in only when very necessary
 * 2017-10-14 ~ Toggle visibility of interior walls
-
 * 2017-10-14 ~ Show Perimeter Depth arrows
 
 ### mnu-hud.html
@@ -128,7 +127,6 @@ ifrThree.contentWindow.renderer.info
 
 ### mnu-settings-spaces.html
 
-* 2017-10-14 ~ Round the numbers
 * 2017-10-14 ~ Update building data when you select a space type
 * 2017-10-14 ~ Highlight the space in 3D when you select a space in the menu 
 
@@ -151,6 +149,14 @@ ifrThree.contentWindow.renderer.info
 
 ## Change Log
 
+### 2017-10-31 ~ Theo
+
+* 2017-10-14 ~ Round the numbers
+* 2017-10-30 ~ Spaces should be numbered clockwise
+* SI units checkbox dropped
+* 2017-10-30 ~ Perimeter depth should grow inward not outward
+* 2017-10-30 ~ Make sure R12 reports page gets to speed folder
+* 2017-10-30 ~ Shapes need centering
 
 ### 2017-10-30 ~ Theo
 
