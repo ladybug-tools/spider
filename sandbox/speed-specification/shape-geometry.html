@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "speed demo adjacent buildings" >
+<meta name = "description" content = "speed shape geometry" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-10-31" >
 <title></title>
@@ -11,17 +11,24 @@
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	canvas { border: 1px solid black; }
-	table { border-spacing: 20px; }
+	select { width: 150px; }
+	table { border-spacing: 20px; width: 100%; }
 
-	input[ type = number ] { width: 50px; }
-	td { text-align: right; }
+	input, input[ type = number ] { width: 50px; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+
+	td { text-align: center; }
 	.checkbox { text-align: right; }
 	.column { display: inline-block; line-height: 30px; width: 150px;}
 	.floatright { float: right; }
 
 	#canvasPerspective { position:absolute; right: 100px; top: 50%; }
-	#canvasOrtho { position:absolute; right: 100px; }
-	#divInput { left: 200px; position: absolute; top: 200px; }
+	#canvasOrtho { position:absolute; left: 100px; top: 50%; }
+	#divDimensions, #divDimensions div { left: 0; margin: 20px auto; right: 0; width: 250px; }
 
 
 </style>
@@ -32,29 +39,51 @@
 
 	<div id = "header" >
 		<h1 id = "title" ><a href="" >Site Content</a></h1>
-		<h2>Adjacent Buildings 1.2</h2>
+		<h2>Geometry 1.0</h2>
 	</div>
 
-	<div id = "divInput" ></div>
+	<div id = "divInput" >
+
+		<table>
+			<tr>
+				<td>Building Area</td><td># of Floors</td><td>Floor Area</td><td>Floor Height</td><td># of Footprint Shapes</td>
+			</tr>
+
+			<tr>
+				<td><input id=inpArea ></td><td><input type=number id=inpFloors ></td><td><input type=number id=inpFloorArea ></td><td><input type=number id=inpHeight ></td><td><input type=number id=inpShapeCount ></td>
+			</tr>
+
+		</table>
+
+		<table>
+			<tr>
+				<td>Footprint Shape</td><td>Massing Generator</td><td>Perimeter Depth</td><td>Orientation</td>
+			</tr>
+
+			<tr>
+				<td><select id=selShape ></select></td><td><select id=selMassing ></select></td><td><input type=number id=inpPerimeterDepth ></td><td><input type=number id=inpOrientation ></td>
+			</tr>
+
+		</table>
+
+		<div id=divDimensions >
+			<div>Footprint dimensions</div>
+			<div>Length <output id=outLength class=floatright >50</output>
+				<input type=range id=inpLength oninput=outLength.value=this.value; ></div>
+			<div>Width  <output id=outWidth class=floatright >50</output>
+				<input type=range id=inpWidth oninput=outWidth.value=this.value; ></div>
+			<div>Thickness <input type=number id=inpLength ></div>
+
+		</div>
+
+	</div>
 
 	<canvas id="canvasPerspective" height=300 width=300 ></canvas>
 
-	<canvas id="canvasOrtho" height=300 width=300 ></canvas>
+	<canvas id="canvasOrtho"  height=300 width=300 ></canvas>
 
 <script>
 
-
-	const adjacentBuildings = [
-
-		{ type: 'checkbox', name: 'Building' },
-		{ type: 'number', name: 'Offset X' },
-		{ type: 'number', name: 'Offset Y' },
-		{ type: 'number', name: 'Length' },
-		{ type: 'number', name: 'Width' },
-		{ type: 'number', name: 'Height' },
-		{ type: 'number', name: 'Site Orientation' }
-
-	];
 
 	let gridHelper, axesHelper;
 	var renderer, camera, controls, scene;
@@ -74,53 +103,41 @@
 	}
 
 
-	function getInputFields() {
+	function getInputFields(){
 
-		text = '<table>';
+		inpArea.value = 5000;
 
-		text += 
-			'<tr>' +
-				'<td></td>' + 
-				'<td>' + addCheckbox( adjacentBuildings[ 0 ], 1 ) + '</td>' +
-				'<td>' + addCheckbox( adjacentBuildings[ 0 ], 2 ) + '</td>' +
-				'<td>' + addCheckbox( adjacentBuildings[ 0 ], 3 ) + '</td>' +
-				'<td>' + addCheckbox( adjacentBuildings[ 0 ], 4 ) + '</td>' +
-			'</tr>';
+		inpFloors.min = 1;
+		inpFloors.max = 20;
+		inpFloors.value = 1;
 
-		for ( let i = 1; i < adjacentBuildings.length; i++ ) {
+		inpHeight.min = 8;
+		inpHeight.max = 20;
+		inpHeight.value = 10;
 
-			line = '<tr><td>' + adjacentBuildings[ i ].name + '</td>';
+		inpShapeCount.min = 1;
+		inpShapeCount.max = 10;
+		inpShapeCount.value = 3;
 
-			for ( let j = 0; j < 4; j++ ) {
+		selShape.innerHTML =
+			'<option>Box-Shape</option>' +
+			'<option>L-Shape</option>' +
+			'<option>T-Shape</option>' +
+		'';
 
-				line += '<td>' + addNumber( adjacentBuildings[ i ], ( j + 1 ) ) + '</td>';
+		selMassing.innerHTML =
+			'<option>Generator 1</option>' +
+			'<option>Generator 2</option>' +
+			'<option>Generator 3</option>' +
+		'';
 
-			}
+		inpPerimeterDepth.min = 10;
+		inpPerimeterDepth.max = 20;
+		inpPerimeterDepth.value = 10;
 
-			text += line + '</tr>';
-
-		} 
-
-		text += '</table>';
-
-		divInput.innerHTML = text;
-
-
-	}
-
-
-
-	function addCheckbox( item, number ){
-
-		return '<div class=checkbox ><input type="checkbox" onchange="toggleVisibility(' + number + ');" >' + item.name + number + '</div>';
-
-	}
-
-
-
-	function addNumber( item, number ){
-
-		return '<input type="number" min=-100 max=100 step=1 value=0 id=inp' + item.name.replace( ' ','') + number + ' onchange=updateBuilding(this); >';
+		inpOrientation.min = -90;
+		inpOrientation.max = 90;
+		inpOrientation.value = 0;
 
 	}
 
@@ -169,7 +186,6 @@
 		addHelpers();
 
 		addAssets();
-
 
 	}
 
@@ -224,56 +240,6 @@
 		return mesh;
 
 	}
-
-
-
-	function toggleVisibility( index ){
-
-		const building = scene.getObjectByName( 'building' + index );
-
-		building.visible = !building.visible;
-
-	}
-
-
-
-	function updateBuilding( that ) {
-console.log( 'that', that );
-
-		const building = scene.getObjectByName( 'building' + that.id.slice( -1 ) );
-//console.log( 'building', building, 'id', that.id );
-
-		if ( that.id.startsWith( 'inpOffsetX' ) ) {
-//console.log( 'that.value', that.value );
-
-			building.position.x = parseInt( that.value, 10 );
-
-		} else if ( that.id.startsWith( 'inpOffsetY' ) ) {
-
-			building.position.y = parseInt( that.value, 10 );
-
-		} else if ( that.id.startsWith( 'inpSiteOrientation' ) ) {
-//console.log( 'inpSiteOrientation', that.value );
-
-			building.rotation.z = parseInt( that.value, 10 ) * - Math.PI / 180;
-
-		} else if ( that.id.startsWith( 'inpLength' ) ) {
-
-			building.scale.x = parseInt( that.value, 10 );
-
-		} else if ( that.id.startsWith( 'inpWidth' ) ) {
-
-			building.scale.y = parseInt( that.value, 10 );
-
-		} else if ( that.id.startsWith( 'inpHeight' ) ) {
-
-			building.scale.z = parseInt( that.value, 10 );
-			building.position.z = building.scale.z * 0.5;
-
-		}
-
-	}
-
 
 
 	function animate() {
