@@ -8,6 +8,8 @@ See [README]( https://en.wikipedia.org/wiki/README ) for why its upper case
 
 ## [Adjacent Buildings]( http://www.ladybug.tools/spider/sandbox/speed-specification/adjacent-buildings.html )
 
+## [Geometry]( http://www.ladybug.tools/spider/sandbox/speed-specification/shape-geometry.html )
+
 
 ## Change Log
 

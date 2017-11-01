@@ -70,8 +70,10 @@
 			<div>Footprint dimensions</div>
 			<div>Length <output id=outLength class=floatright >50</output>
 				<input type=range id=inpLength oninput=outLength.value=this.value; ></div>
+
 			<div>Width  <output id=outWidth class=floatright >50</output>
 				<input type=range id=inpWidth oninput=outWidth.value=this.value; ></div>
+
 			<div>Thickness <input type=number id=inpLength ></div>
 
 		</div>
@@ -109,7 +111,7 @@
 
 		inpFloors.min = 1;
 		inpFloors.max = 20;
-		inpFloors.value = 1;
+		inpFloors.value = 2;
 
 		inpHeight.min = 8;
 		inpHeight.max = 20;
@@ -212,18 +214,13 @@
 
 		let geometry, material, mesh;
 
-		geometry = new THREE.SphereBufferGeometry( 25, 50, 50 );
-
-		for ( let i = 0; i < 4; i++ ) {
-
-			const mesh = createMesh();
-			mesh.name = 'building' + ( i + 1 );
-			mesh.scale.set( 20, 20, 30 );
+			mesh = createMesh();
+			mesh.name = 'building';
+			mesh.scale.set( 50, 50, 20 );
 			mesh.position.z = mesh.scale.z * 0.5;
-			mesh.visible = false;
+//			mesh.visible = false;
 			scene.add( mesh );
 
-		}
 
 	}
 
