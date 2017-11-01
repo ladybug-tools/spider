@@ -39,7 +39,7 @@
 
 	<div id = "header" >
 		<h1 id = "title" ><a href="" >Site Content</a></h1>
-		<h2>Geometry 1.0</h2>
+		<h2>Geometry 1.0 </h2>
 	</div>
 
 	<div id = "divInput" >
@@ -50,7 +50,11 @@
 			</tr>
 
 			<tr>
-				<td><input id=inpArea ></td><td><input type=number id=inpFloors ></td><td><input type=number id=inpFloorArea ></td><td><input type=number id=inpHeight ></td><td><input type=number id=inpShapeCount ></td>
+				<td><input id=inpArea ></td>
+				<td><input type=number id=inpFloors oninput=updateShape(this);></td>
+				<td><input type=number id=inpFloorArea ></td>
+				<td><input type=number id=inpHeight oninput=updateShape(this); ></td>
+				<td><input type=number id=inpShapeCount ></td>
 			</tr>
 
 		</table>
@@ -61,7 +65,7 @@
 			</tr>
 
 			<tr>
-				<td><select id=selShape ></select></td><td><select id=selMassing ></select></td><td><input type=number id=inpPerimeterDepth ></td><td><input type=number id=inpOrientation ></td>
+				<td><select id=selShape ></select></td><td><select id=selMassing ></select></td><td><input type=number id=inpPerimeterDepth ></td><td><input type=number id=inpOrientation oninput=updateShape(this); ></td>
 			</tr>
 
 		</table>
@@ -69,12 +73,12 @@
 		<div id=divDimensions >
 			<div>Footprint dimensions</div>
 			<div>Length <output id=outLength class=floatright >50</output>
-				<input type=range id=inpLength oninput=outLength.value=this.value; ></div>
+				<input type=range id=inpLength oninput=updateShape(this);outLength.value=this.value; ></div>
 
 			<div>Width  <output id=outWidth class=floatright >50</output>
-				<input type=range id=inpWidth oninput=outWidth.value=this.value; ></div>
+				<input type=range id=inpWidth oninput=updateShape(this);outWidth.value=this.value; ></div>
 
-			<div>Thickness <input type=number id=inpLength ></div>
+			<div>Thickness <input type=number id=inpThickness ></div>
 
 		</div>
 
@@ -215,7 +219,7 @@
 		let geometry, material, mesh;
 
 			mesh = createMesh();
-			mesh.name = 'building';
+			mesh.name = 'Box-Shape';
 			mesh.scale.set( 50, 50, 20 );
 			mesh.position.z = mesh.scale.z * 0.5;
 //			mesh.visible = false;
@@ -238,6 +242,33 @@
 
 	}
 
+
+	function updateShape( that ) {
+//console.log( 'that', that );
+
+		const building = scene.getObjectByName( 'Box-Shape' );
+//console.log( 'building', building, 'id', that.id );
+
+		if ( that.id.startsWith( 'inpLength' ) ) {
+
+			building.scale.x = parseInt( that.value, 10 );
+
+		} else if ( that.id.startsWith( 'inpWidth' ) ) {
+
+			building.scale.y = parseInt( that.value, 10 );
+
+		} else if ( that.id.startsWith( 'inpHeight' ) || that.id.startsWith( 'inpFloors' ) ) {
+
+			building.scale.z = parseInt( inpHeight.value, 10 ) * parseInt( inpFloors.value, 10 );
+			building.position.z = building.scale.z * 0.5;
+
+		} else if ( that.id.startsWith( 'inpOrientation' ) ) {
+//console.log( 'inpSiteOrientation', that.value );
+
+			building.rotation.z = parseInt( that.value, 10 ) * - Math.PI / 180;
+		}
+
+	}
 
 	function animate() {
 
