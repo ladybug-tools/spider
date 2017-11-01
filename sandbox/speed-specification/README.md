@@ -2,9 +2,9 @@
 
 # SPEED Read Me
 
-_need to identify what this is about_
+_We should try to identify what this folder is about_
 
-BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me filename title is upper case.
+_BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me filename title is upper case._
 
 
 ## Full screen: [Adjacent Buildings]( http://www.ladybug.tools/spider/sandbox/speed-specification/adjacent-buildings.html )
@@ -13,6 +13,22 @@ BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me file
 
 
 ## Change Log
+
+
+### 2017-11-01 ~ Theo
+
+
+* Adjacent Buildings 1.3
+	* Adds Save to JSON file button
+
+The question is: What are suitable ways for ME to maintain the data while allowing the user to change menus?
+
+There are multiple possible responses to this question. One response might be to save the data to a local file or to a server.
+
+The newly added save button is an incomplete initial example toward saving data between examples.
+
+ 
+
 
 ### 2017-10-31 ~ Theo
 
