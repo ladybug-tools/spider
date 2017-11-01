@@ -27,6 +27,8 @@
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src="./Geom.js"></script>
+<script src="./Speed.js"></script>
 
 	<div id = "divMenu" >
 
@@ -251,9 +253,6 @@
 
 	}
 
-
-
-
 // changes for each shape
 
 	function createBoxFloors( building ) {
@@ -282,7 +281,7 @@
 		for ( var i = 0; i < floors; i++ ) { // 'var' !important > lets 'i' be floor # of roof slab
 
 			const storey = i + 1;
-// length front
+			// length front
 			spaceId ++;
 			spaceIdInside = spaceId + 4;
 			area = ( len - perDep ) * perDep;
@@ -305,9 +304,7 @@
 
 			}
 
-
-
-// width left
+			// width left
 			spaceId ++;
 			area = ( wid - perDep ) * perDep;
 			volume = area * building.floorHeight;
@@ -350,10 +347,7 @@
 
 			}
 
-
-
-
-// width right
+			// width right
 			spaceId ++;
 			area = ( wid - perDep ) * perDep;
 			volume = area * building.floorHeight;
@@ -372,10 +366,7 @@
 				wall.rotation.z = -Math.PI / 2;
 				wall.position.set( len05 - perDep, wid05 - perDep , i * hgt );
 				building.group.add( wall );
-
 			}
-
-
 // slabs
 			spaceId ++;
 			area = ( len - 2 * perDep ) * ( wid - 2 * perDep );
@@ -394,8 +385,6 @@
 		roof = createSlab( building.group, 'roof', len - 2 * perDep, wid - 2 * perDep, 0, 0, 0, i * hgt, spaceId );
 
 	}
-
-
 
 ////////////
 
@@ -422,9 +411,7 @@
 
 	}
 
-
-
-	function createExternalWall( length = 20, height = 12, floor = 0, id = 1 ) {
+	function createExternalWall( length = 20, height = 12, floor = 0, id = 1,windowCount =5 ) {
 
 		const wwr = building.wwr / 100;
 		const length05 = length * 0.5;
@@ -442,18 +429,15 @@
 		];
 		const shape = new THREE.Shape( shapeVertices );
 
-		const holeVertices = [
-			v2( length05 - deltaL, height05 + deltaH ),
-			v2( length05 + deltaL, height05 + deltaH ),
-			v2( length05 + deltaL, height05 - deltaH ),
-			v2( length05 - deltaL, height05 - deltaH )
-		];
-		const hole = new THREE.Path();
-		hole.fromPoints( holeVertices );
-
-		shape.holes.push( hole );
+		Speed.windowVertices(length,height,wwr,windowCount,0.5).map( holeVertices =>{
+				let newHole = new THREE.Path();
+				newHole.fromPoints( holeVertices );
+				shape.holes.push(newHole);
+			}
+		)
 
 		const geometry = new THREE.ShapeBufferGeometry( shape );
+
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
 

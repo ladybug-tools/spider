@@ -29,6 +29,7 @@
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js" ></script>
+<script src="https://d3js.org/d3.v4.js"></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "menu" >
@@ -53,13 +54,18 @@
 			<p>Building orientation = Z rotation</p>
 			<p>Win/Wall Ratio = symbol opacity</p>
 
+			<p title='preference shading eui'>eui:
+				<input type="range" id="inpeui" min=-180 max=180 step=1 value=0 onchange=preferenceShadingeui(); >
+			</p>
+			<p title='preference shading cooling'>cooling:
+				<input type="range" id="inpcooling" min=-180 max=180 step=1 value=0 onchange=preferenceShadingcooling(); >
+			</p>
+
 		</div>
 
 		<details>
 
 			<summary> Display settings </summary>
-
-
 			<p><button onclick=toggleWireframe(); title='See number of floors' > Toggle wireframe </button></p>
 
 			<p><button onclick=toggleGrid(); >Toggle Grid</button></p>
@@ -102,13 +108,15 @@
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
 
+	var valuesXaxis,valuesYaxis,valuesZaxis,valuesColorAxis;
+
 	init();
 	animate();
 
 	function init() {
 
-		divTitle.innerHTML = 
-			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		divTitle.innerHTML =
+			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
@@ -121,7 +129,7 @@
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 600;
+		//controls.maxDistance = 600;
 		controls.target.set( 50, 50, 50 );
 		controls.autoRotate = true;
 
@@ -139,78 +147,97 @@
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-		toggleGrid();
-
-//		axesHelper = new THREE.AxesHelper( 100 );
+		//		axesHelper = new THREE.AxesHelper( 100 );
 
 		initHeadsUp();
-
-		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, 110, 0, 0 );
-		scene.add( placard );
-
-		placard = drawPlacard( ['Y-axis', 'annual cooling load', 'kwh' ], 0.05, 120, 0, 110, 0 );
-		scene.add( placard );
-
-		placard = drawPlacard( ['Z-axis', 'Nunber of Floors' ], 0.05, 240, 0, 0, 110 );
-		scene.add( placard );
-
-		hShape();
-		lShape();
-		tShape();
 
 		toggleBackgroundGradient();
 
 		requestFile( url );
 
+		hShape();
+		lShape();
+		tShape();
+
 	}
-
-
 
 	function requestFile( url ) {
 
-//		let xhr;
+		//		let xhr;
 
 		xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
 	}
-
-
 
 	function callback( xhr ) {
 
 		let response, json;
 
 		response = xhr.target.response;
-//console.log( 'response', response );
-
-//			contents.innerHTML = response;
 
 		json = JSON.parse( response );
-//console.log( 'json', json );
+		//console.log( 'json', json );
 
 		spreadsheetCells = json.feed.entry; // from spreadsheet
 
-console.log( 'spreadsheetCells', spreadsheetCells );
+		//console.log( 'spreadsheetCells', spreadsheetCells );
 
 		drawGraph();
-
 	}
 
-
-
-
 	function drawGraph() {
+
+		valuesXaxis = spreadsheetCells.map(function valuesXaxis(cell){ return cell.gsx$euikwhm2.$t})
+		valuesYaxis = spreadsheetCells.map(function valuesYaxis(cell){ return cell.gsx$numoffloors.$t})
+		valuesZaxis = spreadsheetCells.map(function valuesZaxis(cell){ return cell.gsx$annualcoolingloadkwh.$t })
+		valuesColorAxis = spreadsheetCells.map(function valuesColoraxis(cell){ return cell.gsx$annualheatingloadkwh.$t})
+
+		// Get the max and min of each axis of data to use for scale
+		var dataScaleX = d3.scaleLinear().domain([Math.min(...valuesXaxis),Math.max(...valuesXaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
+		var dataScaleY = d3.scaleLinear().domain([Math.min(...valuesYaxis),Math.max(...valuesYaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
+		var dataScaleZ = d3.scaleLinear().domain([Math.min(...valuesZaxis),Math.max(...valuesZaxis)]).range([Math.min(...valuesXaxis),Math.max(...valuesXaxis)])
+		var dataScaleColorAxis  = d3.scaleLinear().domain([Math.min(...valuesColorAxis),Math.max(...valuesColorAxis)])
+
+		arrayOfMaximums = [dataScaleX(Math.max(...valuesXaxis)),dataScaleY(Math.max(...valuesYaxis)),dataScaleZ(Math.max(...valuesZaxis))]
+
+		// Set EUI slider values
+		inpeui.min = Math.min(...valuesXaxis)
+		// Divide steps up into a 100 pieces
+		inpeui.step = (Math.max(...valuesXaxis)-Math.min(...valuesXaxis))/100
+		inpeui.max = Math.max(...valuesXaxis)
+
+		inpeui.value = inpeui.min
+
+		// Set Cooling slider values Z axis
+		inpcooling.min = Math.min(...valuesZaxis)
+		// Divide steps up into a 100 pieces
+		inpcooling.step = (Math.max(...valuesZaxis)-Math.min(...valuesZaxis))/100
+		inpcooling.max = Math.max(...valuesZaxis)
+
+		inpcooling.value = inpeui.min
+
+
+		toggleGrid(Math.max(...arrayOfMaximums));
+
+		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, Math.max(...valuesXaxis), 0, 0 );
+
+		scene.add(placard );
+
+		placard = drawPlacard( ['Y-axis', 'annual cooling load', 'kwh' ], 0.05, 120, 0, Math.max(...valuesYaxis), 0 );
+		scene.add(placard );
+
+		placard = drawPlacard( ['Z-axis', 'Nunber of Floors' ], 0.05, 240, 0, 0, Math.max(...valuesZaxis) );
+		scene.add(placard );
 
 		meshes = new THREE.Object3D();
 
 		let geometry, material, mesh, edges;
-
 
 		for ( let i = 0; i < spreadsheetCells.length; i++ ) {
 
@@ -230,66 +257,120 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 			}
 
-			const x = parseFloat( cell.gsx$euikwhm2.$t ) * 0.17;
-			const y = parseFloat( cell.gsx$annualcoolingloadkwh.$t ) * 0.00008 - 20;
-			const z = parseFloat( cell.gsx$numoffloors.$t ) * 30;
-//			z = parseFloat( cell.gsx$euikwhm2.$t ) * 0.6 - 60;
+			const x = dataScaleX(parseFloat( cell.gsx$euikwhm2.$t));
+			const y = dataScaleY(parseFloat(cell.gsx$numoffloors.$t));
+			const z = dataScaleZ(parseFloat(cell.gsx$annualcoolingloadkwh.$t));
 
 			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
 				emissive: 0x333333,
 				opacity: 0.6 * parseFloat( cell.gsx$wwr.$t ),
-//				specular: 0xffffff * Math.random(),
-//				shading: THREE.FlatShading,
-//				shininess: 10,
+			//				specular: 0xffffff * Math.random(),
+			//				shading: THREE.FlatShading,
+				//				shininess: 10,
 				transparent: true
 			} );
+
 			material.color.setHSL( ( parseFloat( cell.gsx$annualheatingloadkwh.$t ) - 40000 ) / 60000, 0.8, 0.5 );
-//			material = new THREE.MeshNormalMaterial( { opacity: 0.5 * parseFloat( cell.gsx$wwrs.$t ), transparent: true } );
+			//			material = new THREE.MeshNormalMaterial( { opacity: 0.5 * parseFloat( cell.gsx$wwrs.$t ), transparent: true } );
+
 
 			mesh = new THREE.Mesh( geometry, material );
+			/// Set the original color so can be used for greying out
+			mesh.userData.originalMaterial = material
 			mesh.position.set( x, y, z );
+			// Using Spreadsheet https://docs.google.com/spreadsheets/d/1CC31wOdnhe6DLUyKYWrdMgMhd6QH97NjjdPmVSdqjZ4/edit#gid=886761168 works with sheet 1
 			mesh.scale.set( 0.001 * ( parseFloat( cell.gsx$widthy1m.$t ) + parseFloat( cell.gsx$widthy2m.$t ) + parseFloat( cell.gsx$widthy3m.$t ) ), 0.001 * ( parseFloat( cell.gsx$lengthx1m.$t ) + parseFloat( cell.gsx$lengthx2m.$t ) + parseFloat( cell.gsx$lengthx3m.$t ) ), 0.3 * parseFloat( cell.gsx$numoffloors.$t ) * parseFloat( cell.gsx$floorheightm.$t ) );
 			mesh.rotation.z = d2r * parseFloat( cell.gsx$orientationdegrees.$t );
 			meshes.add( mesh );
 
 			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
 			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			mesh.userData.edgeMaterials = material
 			edges = new THREE.LineSegments( geometryEdge, material );
 			mesh.add( edges ); // add wireframe as a child of the parent mesh
 
 			datapoints.push( mesh );
 			mesh.name = cell.gsx$imagereference.$t.slice( 0, cell.gsx$imagereference.$t.indexOf( '_' ) );
-			mesh.userData = cell;
+
+			let content = ""
+
+			/// For now only include variables
+			/// See https://github.com/ladybug-tools/spider/issues/51 on which variables to include
+			hudContent = ""
+
+			cell.content.$t.split(',').forEach(function(variable){
+
+				if (variable.toLowerCase().includes("footprint") || variable.toLowerCase().includes("area") || variable.toLowerCase().includes("floor") || variable.toLowerCase().includes("floorheight") || variable.toLowerCase().includes("orientation")
+				|| variable.toLowerCase().includes("wwr") || variable.toLowerCase().includes("windowconstruction") || variable.toLowerCase().includes("overhang") || variable.toLowerCase().includes("R-value") || variable.toLowerCase().includes("cooling")
+				 || variable.toLowerCase().includes("heating") || variable.toLowerCase().includes("pv") || variable.toLowerCase().includes("eui"))
+				{
+					// "<br>" renders a new line in html
+					hudContent += variable.concat("<br>");
+				}
+			})
+
+			// Add the real x,y,z (not scaled) values of the mesh in the design space
+			mesh.userData.xAxis = parseFloat( cell.gsx$euikwhm2.$t)
+			mesh.userData.zAxis= parseFloat(cell.gsx$annualcoolingloadkwh.$t)
+
+			mesh.userData.disabled = false
+
+			mesh.userData.content = hudContent;
+			mesh.userData.imageReference = cell.gsx$imagereference.$t
 			mesh.userData.id = i + 1;
 			meshes.add( mesh );
-
 		}
 
-		scene.add( meshes );
+		// Add all the meshes to the scene
 
+		scene.add(meshes);
+
+		listOfXValues = meshes.children.map(function extractXYZ(child){ return child.position.x})
+		listOfYValues = meshes.children.map(function extractXYZ(child){ return child.position.y})
+		listOfZValues = meshes.children.map(function extractXYZ(child){ return child.position.z})
+
+		xMax = Math.max(...listOfXValues)
+		xMin = Math.min(...listOfXValues)
+
+		yMax = Math.max(...listOfYValues)
+		yMin = Math.min(...listOfYValues)
+
+		zMax = Math.max(...listOfZValues)
+		zMin = Math.min(...listOfZValues)
+
+		var material2 = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+
+		designSpaceExtents = new THREE.BoxGeometry(xMax-xMin, yMax-yMin, zMax- zMin);
+
+		var designSpaceExtentsMesh = new THREE.Mesh(designSpaceExtents, material2);
+
+		designSpaceExtentsMesh.applyMatrix(new THREE.Matrix4().makeTranslation((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin));
+
+		controls.target.set((xMax-xMin)/2+xMin, (yMax-yMin)/2+yMin, (zMax- zMin)/2+zMin );
+		camera.position.set( xMax*1.75, yMax*1.75, zMax*1.75 );
+
+		//scene.add(designSpaceExtentsMesh);
 	}
-
-
 
 	function hShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 0 ), 
-			v2( 10, 0 ), 
-			v2( 10, 10 ), 
-			v2( 20, 10 ), 
-			v2( 20, 0 ), 
-			v2( 30, 0 ), 
-			v2( 30, 30 ), 
-			v2( 20, 30 ), 
-			v2( 20, 20 ), 
-			v2( 10, 20 ), 
-			v2( 10, 30 ), 
+		const pts = [
+			v2( 0, 0 ),
+			v2( 10, 0 ),
+			v2( 10, 10 ),
+			v2( 20, 10 ),
+			v2( 20, 0 ),
+			v2( 30, 0 ),
+			v2( 30, 30 ),
+			v2( 20, 30 ),
+			v2( 20, 20 ),
+			v2( 10, 20 ),
+			v2( 10, 30 ),
 			v2( 0, 30 )
 		]
 
-//		scene.remove( mesh );
+		//		scene.remove( mesh );
 		const shape = new THREE.Shape( pts );
 		const hGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
 		return hGeometry;
@@ -298,49 +379,40 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 	function lShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 0 ), 
-			v2( 20, 0 ), 
-			v2( 20, 10 ), 
-			v2( 10, 10 ), 
-			v2( 10, 25 ), 
+		const pts = [
+			v2( 0, 0 ),
+			v2( 20, 0 ),
+			v2( 20, 10 ),
+			v2( 10, 10 ),
+			v2( 10, 25 ),
 			v2( 0, 25 )
 		]
 
-//		scene.remove( mesh );
+		//		scene.remove( mesh );
 		const shape = new THREE.Shape( pts );
 		const lGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
 		return lGeometry;
 
 	}
 
-
-
 	function tShape( floors ) {
 
-		const pts = [ 
-			v2( 0, 10 ), 
-			v2( 10, 10 ), 
-			v2( 10, 00 ), 
-			v2( 20, 0 ), 
+		const pts = [
+			v2( 0, 10 ),
+			v2( 10, 10 ),
+			v2( 10, 00 ),
+			v2( 20, 0 ),
 			v2( 20, 10 ),
 			v2( 30, 10 ),
 			v2( 30, 20 ),
 			v2( 0, 20 )
 		]
 
-//		scene.remove( mesh );
+		//		scene.remove( mesh );
 		const shape = new THREE.Shape( pts );
 		const tGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors } );
 		return tGeometry;
 	}
-
-
-
-
-
-
-///////////////////////
 
 
 	function initHeadsUp() {
@@ -356,19 +428,8 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
-/*
-		scene.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh && child.name ) {
-
-				objects.push( child );
-
-			}
-
-		} );
-*/
 	}
-
 
 	function onDocumentMouseMove( event ) {
 
@@ -394,6 +455,7 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
 
 				intersected = intersects[ 0 ].object;
+
 				intersected.currentHex = intersected.material.emissive.getHex();
 				intersected.material.emissive.setHex( 0xff0000 );
 
@@ -411,11 +473,13 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 		}
 
-		setHeadsUp( event );
+		if (intersected && intersected.userData.disabled == false )
+		{
+			setHeadsUp( event );
+		}
+
 
 	}
-
-
 
 	function setHeadsUp( event ) {
 
@@ -432,19 +496,16 @@ console.log( 'spreadsheetCells', spreadsheetCells );
 
 			document.body.style.cursor = 'auto';
 			return;
-
 		}
 
 		headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
 		headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 		headsUp.style.display = '';
 
-//console.log( 'intersected', intersected );
-console.log( '', intersected.userData.content.$t );
 		txt =
 			'all the variables for ' + intersected.name + b +
-			intersected.userData.content.$t.replace( /,/gi, b ).replace( 'windowtype:','windowtype:' + b ) + b+
-			'<img src=https://ladybug-tools.github.io/spider/SVG/' + intersected.userData.gsx$imagereference.$t + ' >' + b +
+			intersected.userData.content.replace( /,/gi, b ).replace( 'windowtype:','windowtype:' + b ) + b+
+			'<img src=https://ladybug-tools.github.io/spider/SVG/' + intersected.userData.imageReference + ' >' + b +
 		'';
 
 		headsUp.innerHTML = txt;
@@ -452,19 +513,15 @@ console.log( '', intersected.userData.content.$t );
 
 	}
 
-
-
 	function onDocumentMouseDown( event ) {
 
 		headsUp.style.display = 'none';
 
 	}
 
-
-
 	function onDocumentTouchStart( event ) {
 
-	//	event.preventDefault();
+		//	event.preventDefault();
 
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;
@@ -473,13 +530,73 @@ console.log( '', intersected.userData.content.$t );
 
 	}
 
+	function preferenceShadingeui() {
 
+			// Tranverse all the meshes in the scene - https://stackoverflow.com/questions/27284623/three-js-for-loop-for-every-mesh-in-scene
+			scene.traverse( function( node ) {
+
+				if (node instanceof THREE.Mesh) {
+
+						if (node.userData.xAxis > inpeui.value)
+							{
+								// Re-color the building Grey and don't allow the pop up to appear
+								greyedOutMaterial = new THREE.MeshPhongMaterial( {
+								color: 0x828282,
+								emissive: 0x333333,
+								opacity: 1,
+								transparent: true })
+
+
+								node.material = greyedOutMaterial
+								node.userData.disabled = true
+
+							}
+							else
+							{
+								node.material = node.userData.originalMaterial
+								node.userData.disabled = false
+
+							}
+						}
+					})
+				}
+
+
+	function preferenceShadingcooling()
+	{
+		// Tranverse all the meshes in the scene - https://stackoverflow.com/questions/27284623/three-js-for-loop-for-every-mesh-in-scene
+		scene.traverse( function( node ) {
+
+			if (node instanceof THREE.Mesh) {
+
+					if (node.userData.zAxis > inpcooling.value)
+						{
+							// Re-color the building Grey and don't allow the pop up to appear
+							greyedOutMaterial = new THREE.MeshPhongMaterial( {
+							color: 0x828282,
+							emissive: 0x333333,
+							opacity: 1,
+							transparent: true })
+
+
+							node.material = greyedOutMaterial
+							node.userData.disabled = true
+
+						}
+						else
+						{
+							node.material = node.userData.originalMaterial
+							node.userData.disabled = false
+
+						}
+					}
+				})
+			}
 /////////////////
-
 
 	function drawPlacard( text, scale, color, x, y, z ) {
 
-// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
+		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
 
 		var placard = new THREE.Object3D();
 		var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -509,7 +626,7 @@ console.log( '', intersected.userData.content.$t );
 			var width = parameters.width ? parameters.width : 0;
 			var font = parameters.font ? parameters.font : '48px monospace';
 			var color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
-
+			//console.log(textArray)
 			if ( typeof textArray === 'string' ) textArray = [ textArray ];
 
 			context.font = font;
@@ -549,31 +666,29 @@ console.log( '', intersected.userData.content.$t );
 
 	}
 
-
-
 /////////////////
-
 
 	function toggleGrid( size = 100 ) {
 
 		if ( !gridHelper ) {
-
+			//console.log("Grid size here")
+			//console.log(size)
 			gridHelper = new THREE.Object3D();
 
-			obj = new THREE.GridHelper( size, 20, 'blue', 'lightblue' );
+			obj = new THREE.GridHelper( size*2, size*0.05, 'blue', 'blue' );
 			obj.rotation.x = 0.5 * Math.PI;
-			obj.position.set( 50, 50, 0 );
+			obj.position.set( 0, 0, 0 );
 			gridHelper.add( obj );
 
-			obj = new THREE.GridHelper( size, 20, 'red', 'pink' );
+			obj = new THREE.GridHelper( size*2, size*0.05, 'red', 'red' );
 	//		obj.rotation.x = 0.5 * Math.PI;
-			obj.position.set( 50, 0, 50 );
+			obj.position.set( 0, 0, 0 );
 			gridHelper.add( obj );
 
 
-			obj = new THREE.GridHelper( size, 20, 'green', 'lightgreen' );
+			obj = new THREE.GridHelper( size*2, size*0.05, 'green', 'green' );
 			obj.rotation.z = 0.5 * Math.PI;
-			obj.position.set( 0, 50, 50 );
+			obj.position.set( 0, 0, 0 );
 			gridHelper.add( obj );
 
 			scene.add( gridHelper );
@@ -586,23 +701,13 @@ console.log( '', intersected.userData.content.$t );
 
 	}
 
-
-
 	function toggleWireframe() {
-
 		scene.traverse( function ( child ) {
-
 			if ( child instanceof THREE.Mesh ) {
-
 				child.material.wireframe = !child.material.wireframe;
-
 			}
-
 		} );
-
 	}
-
-
 
 	function toggleAxesHelper() {
 
@@ -632,8 +737,6 @@ console.log( '', intersected.userData.content.$t );
 
 	}
 
-
-
 //////////////////
 
 	function onWindowResize() {
@@ -643,13 +746,7 @@ console.log( '', intersected.userData.content.$t );
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
-//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
-
 	}
-
-
-
-
 
 	function animate() {
 
