@@ -9,7 +9,9 @@ _build well speed_
 
 ## [build-well-threejs-speed.html]( http://www.ladybug.tools/spider/sandbox/speed-specification/speedjs/build-well-threejs-speed.html )
 
-## [build-well-speed.html]( http://www.ladybug.tools/spider/sandbox/speed-specification/speedjs/build-well-speed.html)
+* Add API to create a number of openings on each elecation
+
+## [Build Well SPEED R1.0]( http://www.ladybug.tools/spider/sandbox/speed-specification/speedjs/build-well-speed.html)
 
 
 

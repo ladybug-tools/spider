@@ -25,8 +25,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
 <script src="./Geom.js"></script>
 <script src="./Speed.js"></script>
 
@@ -34,6 +34,7 @@
 
 		<div id = "divTitle" ></div>
 		<p id = "divContents" >
+<!--
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 			<button onclick=controls.reset(); >reset view</button>
 			<button onclick=camera.position.set(0,0,300); >plan view</button>
@@ -42,6 +43,7 @@
 			<button onclick=camera.position.set(300,0,0); >east elevation</button>
 			<button onclick=camera.position.set(-300,0,0); >west elevation</button>
 		</p>
+-->
 		<div id=divScreenText ></div>
 
 
@@ -67,7 +69,7 @@
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional;
-	var cameraHelper, axesHelper, gridHelper, ground;
+	var cameraHelper, axisHelper, gridHelper, ground;
 
 	init();
 	animate();
@@ -129,7 +131,7 @@
 
 	function addHelpers( size = 100 ) {
 
-		scene.remove( cameraHelper, gridHelper, axesHelper );
+		scene.remove( cameraHelper, gridHelper, axisHelper );
 
 		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera )
 
@@ -137,15 +139,15 @@
 		gridHelper.rotation.x = 0.5 * Math.PI;
 
 //		axesHelper = new THREE.AxesHelper( 50 );
-		axesHelper = new THREE.AxesHelper( size * 0.05 );
-		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 )
+		axisHelper = new THREE.AxisHelper( size * 0.05 );
+		axisHelper.position.set( -0.5 * size, -0.5 * size, 15 )
 
 		groundHelper = createMesh();
 		groundHelper.scale.set( size, size, size );
 		groundHelper.position.set( 0, 0, -0.5 * size );
 		groundHelper.name = 'groundHelper';
 		groundHelper.visible = false;
-		scene.add( cameraHelper, gridHelper, axesHelper, groundHelper );
+		scene.add( cameraHelper, gridHelper, axisHelper, groundHelper );
 
 	}
 

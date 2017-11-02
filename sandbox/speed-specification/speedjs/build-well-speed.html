@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Create 3D building data in a variety of shapes parametrically and export in gbXML format" >
 <meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-19" >
-<title>Build Well R12</title>
+<meta name = "date" content = "2017-11-02" >
+<title>Build Well SPEED R1.0</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -45,15 +45,16 @@
 		<details id=detMenu open >
 
 			<summary >toggle menu</summary>
-
+<!--
 			<p id = "divBreadcrumbs" ><a href="../../../index.html" target="_blank">Ladybug Tools</a> &raquo; <a href="../../index.html" target="_Top" >Spider</a> &raquo; </p>
-
+-->
 			<div id = "divTitle" ></div>
 
 			<div id = "divItems" >
 
+<!--
 				<div><a href=JavaScript:getContentMarkdown("../README.md"); >Read me / welcome</a></div>
-
+-->
 				<div><a href=JavaScript:getMenuHTML("mnu-adjacent-buildings.html"); >Adjacent Buildings</a>
 					&raquo; <a href="mnu-adjacent-buildings.html " target="_blank" title = 'standalone adjacent-buildings test script' >&#x1F5D7;</a>
 				</div>
@@ -65,7 +66,7 @@
 				<div><a href=JavaScript:getMenuHTML("mnu-shape-ell-one.html"); >L Shape</a>
 					&raquo; <a href="mnu-shape-ell-one.html " target="_blank" title = 'standalone L shape test script' >&#x1F5D7;</a>
 				</div>
-
+<!--
 				<div><a href=JavaScript:getMenuHTML("mnu-settings-spaces.html"); >Spaces</a>
 					&raquo; <a href="mnu-settings-spaces.html " target="_blank" title = 'standalone settings spaces test script' >&#x1F5D7;</a>
 				</div>
@@ -76,19 +77,20 @@
 				<div><a href=JavaScript:getMenuHTML("mnu-hud.html"); >Heads-Up Display</a>
 					&raquo; <a href="mnu-hud.html " target="_blank" title = 'standalone hud test script' >&#x1F5D7;</a>
 				</div>
-
+-->
 				<div><a href=JavaScript:getMenuHTML("mnu-gbxml-export.html"); >gbXML Export</a>
 					&raquo; <a href="mnu-gbxml-export.html " target="_blank" title = 'standalone gbxml-export test script' >&#x1F5D7;</a>
 				</div>
-
+<!--
 				<div><a href=JavaScript:getContentMarkdown("real-time-report.md"); >Real Time Report</a>
 					&raquo; <a href="mnu-real-time-report.html " target="_blank" title = 'standalone real-time-report test script' >&#x1F5D7;</a>
 				</div>
+-->
 				<br>
 			</div>
 
 			<div id = "divSubMenu" ></div>
-
+<!--
 			<div id=divFooter >
 				<hr>
 				<div><a href=JavaScript:getContentMarkdown("../../pages/credits.md"); >Credits</a></div>
@@ -100,7 +102,7 @@
 				<div id=divToggleView style=display:none; ><a href=JavaScript:viewModel(); >Return to model view</a><div>
 
 			</div>
-
+-->
 
 		</details>
 
@@ -162,7 +164,7 @@
 		if ( ! file ) {
 
 			divSubMenu.style.height = '';
-			divSubMenu.innerHTML = txt;
+//			divSubMenu.innerHTML = txt;
 
 		} else {
 
@@ -188,7 +190,7 @@
 
 		divContents.style.display = 'none';
 
-		divToggleView.style.display = 'none';
+//		divToggleView.style.display = 'none';
 
 		ifrThree.style.cssText = 'height: 100%; width: 100%;'
 
@@ -202,9 +204,9 @@ console.log( '', 23 );
 
 		document.body.style.overflow = 'auto';
 
-//		ifrThree.style.display = 'none';
+		ifrThree.style.display = 'none';
 
-		divToggleView.style.display = '';
+//		divToggleView.style.display = '';
 
 		ifrThree.style.cssText = ' bottom: 0; position: absolute; height: 100px; right: 0; width: 10%; '; 
 
