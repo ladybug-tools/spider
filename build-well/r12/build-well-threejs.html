@@ -428,8 +428,10 @@
 			v2( 0, height )
 		];
 		const shape = new THREE.Shape( shapeVertices );
+    
+    let s = new Speed();
 
-		Speed.windowVertices(length,height,wwr,windowCount,0.5).map( holeVertices =>{
+		s.windowVertices(length,height,wwr,windowCount,0.5).map( holeVertices =>{
 				let newHole = new THREE.Path();
 				newHole.fromPoints( holeVertices );
 				shape.holes.push(newHole);
