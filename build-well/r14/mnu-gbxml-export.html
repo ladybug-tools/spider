@@ -46,7 +46,7 @@
 
 		<p id = "divInfo" ></p>
 
-		<p title = 'Select a building to view' >1. Select a building shape: 
+		<p title = 'Select a building to view' >1. Select a building shape:
 			<select id = selObject onchange = getObject(buildings); size = 9 ></select>
 		</p>
 
@@ -54,7 +54,7 @@
 
 		<p> 3. <button onclick = saveFile(); >Save building data to file</button> </p>
 
-		<p><button onclick = checkGbxmlData(); >Check the data</button> << new</p>
+		<p><button onclick = checkGbxmlData(); >Check the data</button> &laquo; new</p>
 
 		<p><input type=checkbox id=inpVerticalSpacing >Include vertical spacing</p>
 
@@ -68,6 +68,7 @@
 		<p> View the <a href="https://en.wikipedia.org/wiki/Green_Building_XML" target="_blank">gbXML</a> file
 			using <a href="http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/" target="_blank">Spider gbXML Viewer</a></p>
 -->
+
 	</div>
 
 	<iframe id=ifrContents ></iframe>
@@ -117,7 +118,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
@@ -149,7 +150,7 @@
 
 		}
 
-// not working 
+// not working
 
 		window.onclose = function() { console.log( 'close' ); window.checkWindow.close(); }
 
@@ -189,7 +190,7 @@
 		for ( let i = 0; i < objects.children.length; i++ ) {
 
 			let obj = objects.children[ i ];
-			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
 
 		}
 
@@ -234,7 +235,7 @@
 
 		textMenu = '';
 
-		textMenu += 
+		textMenu +=
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 			'<gbXML xmlns="http://www.gbxml.org/schema" ' +
@@ -300,7 +301,9 @@
 
 			parent.divContents.innerHTML =
 
-				'gbXML data<textarea id=buildingData >' + 
+				'gbXML data\n' +
+				'area check: ' + campus.areaCheck + '\n' +
+				'<textarea id=buildingData >' +
 				textMenu + '</textarea>'
 
 			'';
@@ -311,9 +314,11 @@
 
 		} else {
 
-		scope.divScreenText.innerHTML = 
+		scope.divScreenText.innerHTML =
 
-			'gbXML data<textarea id=buildingData >' + 
+			'gbXML data<br>' +
+			'area check: ' + campus.areaCheck + '<br>' +
+			'<textarea id=buildingData >' +
 			textMenu + '</textarea>'
 
 		'';
@@ -332,7 +337,7 @@
 
 			const storey = i + 1;
 
-			textBuildingStoreys += 
+			textBuildingStoreys +=
 				'\t\t\t<BuildingStorey id="bw-storey-' + storey + '" >\n' +
 				'\t\t\t\t<Name>storey ' + storey + '</Name>\n' +
 				'\t\t\t\t<Level>' + ( i * campus.storeyHeight ) + '</Level>\n' +
@@ -362,18 +367,19 @@
 			const vertices = campus.mesh.children[ i ].geometry.vertices;
 			const spacesPerStorey = vertices.length / 5 - 1;
 			let storey = i + 1;
+			let pathInterior = [];
+			campus.areaCheck = 0;
 
 			for ( var j = 0; j < spacesPerStorey; j++ ) {
 
-// needs checking / uses incorrect vertices
 				const vertex1 = vertices[ j * 5 ];
+				pathInterior.push( vertex1 );
 
-//				let geometry = new THREE.BoxGeometry( 1, 10, 1 );
-//				let material = new THREE.MeshNormalMaterial();
-//				let mesh = new THREE.Mesh( geometry, material );
-//				mesh.position.copy( vertex1 );
-//				scene.add( mesh );
-
+				let geometry = new THREE.BoxGeometry( 1, 1, 10 );
+				let material = new THREE.MeshNormalMaterial();
+				let mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( vertex1 );
+				scene.add( mesh );
 
 				const vertex2 = vertices[ ( j + 1 ) * 5 ];
 
@@ -383,10 +389,11 @@
 //				mesh.position.copy( vertex2 );
 //				scene.add( mesh );
 
-				const area = vertex1.distanceTo( vertex2 ) * campus.perimeterDepth - campus.perimeterDepth  * campus.perimeterDepth ;
+				const area = vertex1.distanceTo( vertex2 ) * campus.perimeterDepth + campus.perimeterDepth  * campus.perimeterDepth ;
 				const volume = area * campus.storeyHeight;
+				campus.areaCheck += area;
 
-				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space', 
+				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space',
 					area: area, storey: storey, volume: volume, zone: spaceId } );
 
 				campus.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
@@ -397,12 +404,16 @@
 
 // interior area
 
-console.log( 'path', campus.mesh.path );
+//console.log( 'obj', campus.mesh.getObjectByName( 'InteriorFloor' ) );
 
-			const area = THREE.ShapeUtils.area( campus.mesh.path );
+//			const path = campus.mesh;
+console.log( 'path', pathInterior );
+
+			const area = Math.abs( THREE.ShapeUtils.area( pathInterior ) );
 			const volume = area * campus.storeyHeight;
+			campus.areaCheck += area;
 
-			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space', 
+			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space',
 				area: area, storey: storey, volume: volume, zone: spaceId } );
 
 			campus.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
@@ -411,11 +422,13 @@ console.log( 'path', campus.mesh.path );
 
 		}
 
+		console.log( 'areaCheck', campus.areaCheck );
+
 		for ( var j = 0; j < spaces.length; j++ ) {
 
 			const space = spaces[ j ];
 
-			textSpace += 
+			textSpace +=
 				'\t\t\t<Space ' +
 					'id="bw-space-' + space.id + '" ' +
 					'buildingStoreyIdRef="bw-storey-' + space.storey + '" ' +
@@ -447,7 +460,7 @@ console.log( 'path', campus.mesh.path );
 
 			const zone = campus.zones[ i ];
 
-			textZones += 
+			textZones +=
 				'\t<Zone id="bw-zone-' + ( i + 1 ) + '" >\n' +
 				'\t\t<Name>' + zone.name + '</Name>\n' +
 				'\t\t<Description>' + zone.description + '</Description>\n' +
@@ -528,7 +541,7 @@ console.log( 'path', campus.mesh.path );
 					type: ( i === 0 ? 'SlabOnGrade' : 'InteriorFloor' ),
 					spaceId1: spaceId,
 					spaceId2: ( i === 0 ? undefined : spaceId + spacesPerStorey ),
-					surfaceId: surfaceId, 
+					surfaceId: surfaceId,
 					vertices: [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ]
 				};
 
@@ -543,8 +556,10 @@ console.log( 'path', campus.mesh.path );
 					type: 'InteriorWall',
 					spaceId1: spaceId,
 					spaceId2: ( spaceId === interiorSpaceId ? firstSpaceId : interiorSpaceId ),
-					surfaceId: surfaceId, 
-					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
+					surfaceId: surfaceId,
+//					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
+					vertices: [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ]
+
 				};
 
 				surfaceId ++;
@@ -560,7 +575,7 @@ console.log( 'path', campus.mesh.path );
 						type: 'Roof',
 						spaceId1: spaceId,
 						spaceId2: undefined,
-						surfaceId: surfaceId, 
+						surfaceId: surfaceId,
 						vertices: [ vertices[ pt1 + 2 ], vertices[ pt1 + 3 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
 					};
 
@@ -577,8 +592,10 @@ console.log( 'path', campus.mesh.path );
 					type: 'ExteriorWall',
 					spaceId1: spaceId,
 					spaceId2: undefined,
-					surfaceId: surfaceId, 
-					vertices: [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ]
+					surfaceId: surfaceId,
+//					vertices: [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ]
+					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
+
 				};
 				surfaceId ++;
 
@@ -591,7 +608,7 @@ console.log( 'path', campus.mesh.path );
 					type: 'InteriorWall',
 					spaceId1: spaceId,
 					spaceId2: ( spaceId < spacesPerStorey ? spaceId + 1 : 1 ),
-					surfaceId: surfaceId, 
+					surfaceId: surfaceId,
 					vertices: [ vertices[ pt2 + 1 ], vertices[ pt2 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
 				};
 
@@ -599,7 +616,7 @@ console.log( 'path', campus.mesh.path );
 
 				textSurfacesBits += getSingleSurface( quad );
 
-				path.push( vertices[ pt1 + 2 ] );
+				path.push( vertices[ pt1 + 3 ] );
 
 //console.log( 'spaceId', spaceId );
 
@@ -634,7 +651,7 @@ console.log( 'path', campus.mesh.path );
 //		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		let textSingleSurfaces =  
+		let textSingleSurfaces =
 
 			'\t\t<Surface surfaceType="' + quad.type + '" id="bw-surface-' + quad.surfaceId + '" >\n' +
 				'\t\t\t<Name>' + quad.name + '</Name>\n' +
@@ -663,7 +680,7 @@ console.log( 'path', campus.mesh.path );
 
 		textOpen = quad.type === 'ExteriorWall' ? getOpening( quad ) : '';
 
-		textSingleSurfaces +=  
+		textSingleSurfaces +=
 			'\t\t\t\t</PolyLoop>\n' +
 			'\t\t\t</PlanarGeometry>\n' +
 				textOpen +
@@ -684,7 +701,7 @@ console.log( 'path', campus.mesh.path );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 //		let mesh;
 
-		textOpening += 
+		textOpening +=
 			'\t\t\t<Opening openingType="FixedWindow" id="bw-opening-' + openingId + '" >\n' +
 			'\t\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t\t<PolyLoop>\n' +
@@ -730,7 +747,7 @@ console.log( 'path', campus.mesh.path );
 	function getSurfacesSlabs( slab, path, type, surfaceId, spaceId, height = 0 ) {
 
 //console.log( 'path', path );
-		
+
 		textInterior = '';
 
 		const area = THREE.ShapeUtils.area( path );
@@ -750,7 +767,7 @@ console.log( 'path', campus.mesh.path );
 			type: type,
 			spaceId1: spaceId,
 			spaceId2: undefined,
-			surfaceId: surfaceId, 
+			surfaceId: surfaceId,
 			vertices: geometry.vertices
 		};
 
@@ -782,7 +799,7 @@ console.log( 'path', campus.mesh.path );
 			const overhang = storey.children[ i ];
 			if ( overhang.name !== 'overhang' ) { continue; }
 
-			textOver += 
+			textOver +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( overhangId ++ ) + '" >\n' +
 				'\t\t\t<Name>overhang-storey-' + storey.userData.storey +'-space-' + ( id++ )+ '</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
@@ -835,7 +852,7 @@ console.log( 'path', campus.mesh.path );
 
 
 
-	function getSurfacesAdjacentBuildings( object ) { 
+	function getSurfacesAdjacentBuildings( object ) {
 
 		let textSurfaces = '';
 
@@ -850,17 +867,17 @@ console.log( 'path', campus.mesh.path );
 //		const geometry = new THREE.BoxBufferGeometry( 1, 1, 100 );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		const faces =  [ 
-			[v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
-			[v( mi.x, mx.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ],
-			[v( mi.x, mi.y, mi.z ), v( mi.x, mx.y, mi.z ), v( mi.x, mx.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
-			[v( mx.x, mi.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mx.x, mi.y, mx.z ) ],
-			[v( mi.x, mi.y, mx.z ), v( mx.x, mi.y, mx.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ]
-		]
+		const faces =  [
+			[ v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
+			[ v( mi.x, mx.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ],
+			[ v( mi.x, mi.y, mi.z ), v( mi.x, mx.y, mi.z ), v( mi.x, mx.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
+			[ v( mx.x, mi.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mx.x, mi.y, mx.z ) ],
+			[ v( mi.x, mi.y, mx.z ), v( mx.x, mi.y, mx.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ]
+		];
 
 		for ( let i = 0; i < faces.length; i++ ) {
 
-			textSurfaces += 
+			textSurfaces +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t<Name>' + object.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
@@ -930,7 +947,7 @@ console.log( 'path', campus.mesh.path );
 		let lines = textMenu.split( '\n' );
 		const n = '\n';
 
-		let text = 
+		let text =
 			selObject.value + n + n +
 			'line 0: ' + lines[ 1 ] + n + n +
 		'';
@@ -941,9 +958,9 @@ console.log( 'path', campus.mesh.path );
 
 			line = lines[ i ];
 
-			if ( 
+			if (
 
-				line.search( 'NaN' ) > 0 || 
+				line.search( 'NaN' ) > 0 ||
 				line.search( 'undefine' ) > 0 ||
 				( line.search( 'AdjacentSpaceId ' ) > 0 && line === lines[ i + 1 ] )
 
@@ -1004,7 +1021,8 @@ console.log( 'path', campus.mesh.path );
 //		delete a;
 		a = null;
 
-		window.checkWindow.close();
+		if ( window.checkWindow !== undefined ) { window.checkWindow.close(); }
+
 	}
 
 </script>

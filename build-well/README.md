@@ -55,7 +55,7 @@ _We often think of software of software just appearing as if by magic. The reali
 ## Current Issues
 
 
-* 2017-11-01 ~ Internal and externals wall need to switch positions
+
 * 2017-11-01 ~ gbXML export needs fixes to compensate for changes to space ordering and perimeter depth
 * 2017-10-30 ~ No vertical spacing as default on gbXML export
 * 2017-10-30 ~ Need accurate area and volume calculations for spaces and building
@@ -132,6 +132,7 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 ### mnu-gbxml-export.html
 
+* 2017-11-01 ~ Add check if distance between vertices is too small for the perimeter depth
 * 2017-10-05 ~ Export fin data
 
 
@@ -148,6 +149,12 @@ See [Single Model Multiple Menus]( https://ladybug-tools.github.io/spider/#sandb
 
 
 ## Change Log
+
+
+
+### 2017-11-01 ~ Theo
+
+* 2017-11-01 ~ Internal and externals wall need to switch positions
 
 ### 2017-10-31 ~ Theo
 

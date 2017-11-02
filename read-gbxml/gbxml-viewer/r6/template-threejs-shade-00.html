@@ -6,7 +6,7 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-01" >
+<meta name = "date" content = "2017-09-25" >
 <title></title>
 <style>
 
@@ -14,10 +14,10 @@
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
-	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
 
-	#menu { position: absolute; margin: 0 20px; }
+	#menu { position: absolute; text-align: center; width: 100%; }
 
 </style>
 </head>
@@ -25,9 +25,9 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
 
-	<div id = "divMenu" >
+	<div id = "menu" >
 
-		<div id = "divTitle" ></div>
+		<div id = "title" ></div>
 		<p id = "contents" >
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 		</p>
@@ -38,9 +38,9 @@
 
 <script>
 
-	let renderer, camera, controls, scene;
+	var renderer, camera, controls, scene;
 
-	let lightAmbient, lightDirectional, cameraHelper, axisHelper;
+	var lightAmbient, lightDirectional, cameraHelper, axisHelper;
 
 	init();
 	animate();
@@ -49,7 +49,7 @@
 
 		if ( window.top === window.self ) {
 
-			divTitle.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
 
 		}
 
@@ -74,7 +74,7 @@
 		lightAmbient = new THREE.AmbientLight( 0x444444 );
 		scene.add( lightAmbient );
 
-		const size = 100;
+		const size = 100
 		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
 		lightDirectional.position.set( -size, size, size );
 		lightDirectional.shadow.camera.scale.set( 10, 10, 3 );

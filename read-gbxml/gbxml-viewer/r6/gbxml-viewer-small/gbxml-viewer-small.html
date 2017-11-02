@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-01" >
+<title>gbXML Viewer Small</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { position: absolute; margin: 0 20px; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+		<p id = "contents" >
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+		</p>
+			<p><a href=#../../../data-files/test.xml >test.xml</a></p>
+
+	</div>
+
+<script>
+
+	const gbxmlURI = '../../../data-files/SAM_Live.xml';
+
+	let campusSurfaces;
+	let campusSurfacesArray;
+
+	let renderer, camera, controls, scene;
+	let lightAmbient, lightDirectional, axisHelper;
+
+	init();
+	animate();
+
+	function init() {
+
+		if ( window.top === window.self ) {
+
+			divTitle.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>';
+
+		}
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.shadowMap.enabled = true;
+		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+		renderer.shadowMap.renderReverseSided = false;
+		renderer.shadowMap.renderSingleSided = false;
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
+		lightDirectional.castShadow = true;
+
+		scene.add( lightDirectional );
+
+		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+		camera.add( lightPoint );
+		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+		scene.add( camera );
+
+		axesHelper = new THREE.AxesHelper( 50 );
+		scene.add( axesHelper );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		onHashChange();
+
+	}
+
+
+
+	function onHashChange() {
+
+		const url = !location.hash ? gbxmlURI : location.hash.slice( 1 );
+
+		requestFile( url, callbackGbXML );
+
+	}
+
+
+
+	function callbackGbXML( xhr ){
+
+		const response = xhr.target.responseXML.documentElement;
+		const gbjson = XML2jsobj( response );
+		const surfaces = gbjson.Campus.Surface;
+		let polyloops = [];
+		let openings = [];
+		let points;
+
+		for ( let surface of surfaces ) {
+
+			if ( surface.Opening ) {
+
+				if ( surface.Opening.PlanarGeometry ) {
+
+					polyloop = surface.Opening.PlanarGeometry.PolyLoop;
+					points = getPoints( polyloop );
+					openings.push( [ points ] );
+
+				} else {
+
+					let arr = [];
+
+					for ( let opening of surface.Opening ) {
+
+						polyloop = opening.PlanarGeometry.PolyLoop;
+						points = getPoints( polyloop );
+						arr.push( points );
+
+					}
+
+					openings.push( arr );
+
+				}
+
+			} else {
+
+				openings.push( [] );
+
+			}
+
+			polyloop = surface.PlanarGeometry.PolyLoop;
+			points = getPoints( polyloop );
+			polyloops.push( points );
+
+		}
+
+		scene.remove( campusSurfaces );
+		campusSurfaces = new THREE.Object3D();
+
+		for ( let i = 0; i < polyloops.length; i++ ) {
+
+			let material = materialPhongBySurface( surfaces[ i ] );
+
+			shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
+			shape.castShadow = shape.receiveShadow = true;
+			shape.userData.data = surfaces[ i ];
+			campusSurfaces.add( shape );
+
+		}
+
+		scene.add( campusSurfaces );
+		zoomObjectBoundingSphere( campusSurfaces );
+
+	}
+
+
+
+	function materialPhongBySurface( surface ) {
+
+		switch( surface.surfaceType ) {
+
+			case 'Roof':
+				color = 0x800000;
+				break;
+			case 'InteriorFloor':
+			case 'SlabOnGrade':
+				color = 0x80ffff;
+				break;
+			case 'ExteriorWall':
+				color = 0xffb400;
+				break;
+			case 'InteriorWall':
+				color = 0x008000;
+				break;
+			case 'Shade':
+				color = 0x808080;
+				break;
+			default:
+				color = 0xee00ee;
+
+		}
+
+		return new THREE.MeshPhongMaterial( { color: color, side: 2, opacity: 0.85, transparent: true } );
+
+	}
+
+
+
+	function getPoints( polyloop ) {
+
+		const points = [];
+
+		for ( let plCP of polyloop.CartesianPoint ) {
+
+			const p = plCP.Coordinate;
+			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
+
+			points.push( point );
+
+		}
+
+		return points;
+
+	}
+
+
+
+	function drawShapeSinglePassObjects( vertices, material, holes ) {
+
+		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
+
+		const obj = new THREE.Object3D();
+		obj.lookAt( plane.normal );
+
+		const obj2 = new THREE.Object3D();
+		obj2.quaternion.copy( obj.clone().quaternion.conjugate() );
+		obj2.updateMatrixWorld( true );
+
+		for ( let vertex of vertices ) {
+
+			obj2.localToWorld( vertex );
+
+		}
+
+		let geo = new THREE.Geometry();
+		geo.vertices = vertices;
+		geo.mergeVertices();
+
+		shape1 = new THREE.Shape( geo.vertices );
+
+		shape1.autoClose = true;
+
+		for ( let verticesHoles of holes ) {
+
+			for ( let vertex of verticesHoles ) {
+
+				obj2.localToWorld( vertex );
+
+			}
+
+			geo.vertices = verticesHoles;
+			geo.mergeVertices();
+
+			let hole = new THREE.Path();
+			hole.fromPoints( geo.vertices );
+
+			shape1.holes.push( hole );
+
+		}
+
+		const geometry = new THREE.ShapeGeometry( shape1 );
+
+		let shape = new THREE.Mesh( geometry, material );
+		shape.quaternion.copy( obj.quaternion );
+		shape.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
+
+		return shape;
+
+	}
+
+
+
+	function XML2jsobj( node ) {
+
+		let	data = {};
+		let child, childNode;
+
+		function addNode( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		};
+
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			addNode( childNode.name, childNode.value );
+
+		}
+
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
+
+					addNode( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else { // sub-object
+
+					addNode( childNode.nodeName, XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		let xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+	function zoomObjectBoundingSphere( obj ) {
+
+		if ( obj.geometry ) {
+
+			obj.geometry.computeBoundingSphere();
+			const center = obj.geometry.boundingSphere.center;
+			const radius = obj.geometry.boundingSphere.radius;
+
+		} else {
+
+			const bbox = new THREE.Box3().setFromObject( campusSurfaces );
+			const sphere = bbox.getBoundingSphere();
+			center = sphere.center;
+			radius = sphere.radius;
+
+		}
+
+		controls.target.copy( center );
+		controls.maxDistance = 5 * radius;
+
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		axesHelper.position.copy( center );
+
+		camera.far = 10 * radius; //2 * camera.position.length();
+		camera.updateProjectionMatrix();
+
+		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		lightDirectional.target = axesHelper;
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

@@ -35,6 +35,7 @@
 	#ifrContents { border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
 
 	#divMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); box-sizing: border-box;
+
 	/*	max-width: var( --mnu-width ); */ height: 100%; margin: 0; overflow: auto; padding: 5px; position: absolute; top: 0; width: 350px; }
 
 </style>
@@ -169,7 +170,8 @@
 	function callbackGbXML( xhr ){
 
 		let response;
-console.log( '', xhr );
+//console.log( '', xhr );
+
 		response = xhr.target.responseXML.documentElement;
 
 //		gbjson.url = xhr.target.responseURL;
@@ -627,7 +629,7 @@ console.log( 'json', gbjson );
 
 		let	data = {};
 
-		function Add( name, value ) {
+		function addNode( name, value ) {
 
 			if ( data[ name ] ) {
 
@@ -651,7 +653,7 @@ console.log( 'json', gbjson );
 
 		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
 
-			Add( childNode.name, childNode.value );
+			addNode( childNode.name, childNode.value );
 
 		}
 
@@ -661,11 +663,11 @@ console.log( 'json', gbjson );
 
 				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
 
-					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+					addNode( childNode.nodeName, childNode.firstChild.nodeValue );
 
 				} else { // sub-object
 
-					Add( childNode.nodeName, XML2jsobj( childNode ) );
+					addNode( childNode.nodeName, XML2jsobj( childNode ) );
 
 				}
 
@@ -681,13 +683,11 @@ console.log( 'json', gbjson );
 
 	function requestFile( url, callback ) {
 
-		let xhr;
-
-		xhr = new XMLHttpRequest();
+		let xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+//		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 

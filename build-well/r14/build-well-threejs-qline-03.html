@@ -6,7 +6,7 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Build Well Three.js qLine 'server' - designed to be accessed inside an iframe" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name="date" content="2017-11-01 ~ " >
+<meta name="date" content="2017-10-25" >
 <title>Build Well Three.js</title>
 <style>
 
@@ -333,14 +333,26 @@
 		const len34 = 3 * len / 4;
 
 		const wid = campus.width1;
+//console.log( 'width1', wid );
 		const wid13 = wid / 3;
 		const wid23 = 2 * wid / 3;
 
 		var paths = {};
 
+//		const pathBox = [ v2( 0, 0 ), v2( len, 0 ), v2( len, wid ), v2( 0, wid ), v2( 0, 0 ) ];
 		const pathBox = [ v2( len, 0 ), v2( 0, 0 ), v2( 0, wid ), v2( len, wid ), v2( len, 0 ) ];
 		paths.pathBox = pathBox; // scaleMesh( pathBox, pLogBox, 'Box shape' );
 
+/*		const pathL = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len, wid13 ),
+			v2( len13, wid13 ),
+			v2( len13, wid ),
+			v2( 0, wid ),
+			v2( 0, 0 )
+		];
+*/
 		const pathL = [
 			v2( len, 0 ),
 			v2( 0, 0 ),
@@ -351,6 +363,19 @@
 			v2( len, 0 )
 		];
 		paths.pathL = pathL; //scaleMesh( pathL, pLogL, 'L shape' );
+
+/*		const pathT = [
+			v2( 0, 0 ),
+			v2( len, 0 ),
+			v2( len, wid13 ),
+			v2( len23, wid13 ),
+			v2( len23, wid ),
+			v2( len13, wid ),
+			v2( len13, wid13 ),
+			v2( 0, wid13 ),
+			v2( 0, 0 ),
+		];
+*/
 
 		const pathT = [
 			v2( len, 0 ),
@@ -364,6 +389,22 @@
 			v2( len, 0 )
 		];
 		paths.pathT = pathT; // scaleMesh( pathT, pLogT, 'T shape' );
+
+/*		const pathH = [
+			v2( 0, 0 ),
+			v2( len14, 0 ),
+			v2( len14, wid13 ),
+			v2( len34, wid13 ),
+			v2( len34, 0 ),
+			v2( len, 0 ),
+			v2( len, wid ),
+			v2( len34, wid ),
+			v2( len34, wid23 ),
+			v2( len14, wid23 ),
+			v2( len14, wid ),
+			v2( 0, wid ),
+			v2( 0, 0 )
+		]; */
 
 		const pathH = [
 			v2( len34, wid13 ),
