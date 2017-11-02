@@ -428,15 +428,17 @@
 			v2( 0, height )
 		];
 		const shape = new THREE.Shape( shapeVertices );
-    
-    let s = Speed();
 
-		s.windowVertices(length,height,wwr,windowCount,0.5).map( holeVertices =>{
+		let s = Speed();
+
+		s.windowVertices( length, height, wwr, windowCount,0.5 ).map( holeVertices => {
+
 				let newHole = new THREE.Path();
 				newHole.fromPoints( holeVertices );
 				shape.holes.push(newHole);
 			}
-		)
+
+		);
 
 		const geometry = new THREE.ShapeBufferGeometry( shape );
 
