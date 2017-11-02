@@ -11,13 +11,21 @@ _build well speed_
 
 * Add API to create a number of openings on each elecation
 
-## [Build Well SPEED R1.0]( http://www.ladybug.tools/spider/sandbox/speed-specification/speedjs/build-well-speed.html)
+## [Build Well SPEED 'Plan B' R1.0]( http://www.ladybug.tools/spider/sandbox/speed-specification/speedjs/build-well-speed.html)
 
 
 
 ## Change Log
 
-### 2017-11-02 
+### 2017-11-02 ~ Theo
+
+
+#### 16:15
+
+Just in case other paths have too many issues and with an overabundance of caution: I forked the files from BW R12 and created BW SPEED R1.0
+* Confuses me too. ;-)
+* Fingers crossed the Build Well SPEED 'Plan A' works OK.
+
 
 #### 15:27 ~  Fix
 
@@ -26,6 +34,7 @@ _build well speed_
                 let s = Speed();
  
     without the new keyword.
+
 
 #### 14:53 PDT ~ Error
 
