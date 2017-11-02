@@ -59,7 +59,7 @@
 
 	const release = location.pathname.split( '/' )[ 8 ];
 	const fileName = location.pathname.split( '/' ).pop();
-	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master//sandbox/speed-specification/speedjs/';
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/speed-specification/speedjs/';
 
 	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
@@ -78,7 +78,7 @@
 
 			divTitle.innerHTML =
 				'<h2>' +
-				'<a  href = "./build-well.html" >bw</a> &nbsp; ' +
+				'<a  href = "./build-well-speed.html" >bw</a> &nbsp; ' +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="top" >&#x24D8</a>'
 				'</h2>';
