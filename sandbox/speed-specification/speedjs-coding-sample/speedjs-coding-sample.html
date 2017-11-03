@@ -42,9 +42,6 @@
 
 		</h2>
 
-
-		<div id = "divContents" >
-
 		<p>
 			<select id=selShape size=4 oninput=updateShape(); >
 				<option>Box Shape</option>
@@ -99,28 +96,30 @@
 
 	}
 
+
+
 	function updateShape() {
 
 		const index = selShape.selectedIndex;
 
-		area = parseInt( inpArea.value, 10 );
-		outArea.value = area;
+		const area = parseInt( inpArea.value, 10 );
+		outArea.value = area.toLocaleString();
 
-		floors = parseInt( inpFloors.value, 10 );
+		const floors = parseInt( inpFloors.value, 10 );
 		outFloors.value = floors;
 
 		const shapes = [ speed.createBoxShape, speed.createLShape, speed.createHShape, speed.createTShape ];
 
-		createShape = shapes[ index ];
+		const createShape = shapes[ index ];
 
-		shape = createShape( { area: area, floors: floors } );
+		const shape = createShape( { area: area, floors: floors } );
 
 // not working, dunno why
 // console.log( Object.getOwnPropertyNames( Speed ).filter(function(p) { return typeof Speed[p] === 'function'; }))
 // so let's look manually
 
-		xRange = shape.xRange();
-		yRange = shape.yRange();
+		const xRange = shape.xRange();
+		const yRange = shape.yRange();
 
 		divLog.innerHTML = 
 			'<h3>Public functions</h3>' +
@@ -142,13 +141,13 @@
 			'?? k(): ' + shape.k() + '<br>' +
 		'';
 
-		length = shape.x();
+		const length = shape.x();
 		inpLength.value = length;
 		outLength.value = length.toFixed();
 		inpLength.min = shape.xMin();
 		inpLength.max = shape.xMax();
 
-		width = shape.y();
+		const width = shape.y();
 		inpWidth.value = width;
 		outWidth.value = width.toFixed();
 		inpWidth.min = shape.yMin();
