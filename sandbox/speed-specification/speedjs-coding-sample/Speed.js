@@ -41,13 +41,15 @@ let Speed = (()=>{
       return Math.pow( this.A() * this.yM, 0.5 )
     }
     yMin(){
-      this.A() / this.x()
+// had no return
+      return this.A() / this.x() 
     }
     yMax(){
       return this.yMaxC1 * (this.A() / this.x()) + this.yMaxC2 * this.x()
     }
     xRange(){
-      return [this.xMin,this.xMax]
+// following had no parens
+      return [this.xMin(),this.xMax() ]
     }
     yRange(){
       return [this.yMin(),this.yMax()]
@@ -111,6 +113,8 @@ let Speed = (()=>{
       return this.A() / this.x()
     }
   }
+
+// previously there was one createHShape and two createLShape. No Box or T functions
 
   this.createBoxShape = function(args)
   {

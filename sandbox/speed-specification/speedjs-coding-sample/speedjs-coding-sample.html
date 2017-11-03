@@ -6,10 +6,10 @@
 <meta name = "description" content = "Basic HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-01" >
-<title></title>
+<title>Speed.js Coding Sample R1</title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; }
+	body { font: 12pt monospace; margin: 0 auto; max-width: 350px; }
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
@@ -57,11 +57,11 @@
 		</p>
 
 		<p>
-			Length <output id=outLength class=floatRight ></output><br><input type=range id=inpLength min=1 max=150 value=50 oninput=updateShape(); >
+			Length <output id=outLength class=floatRight ></output><br><input type=range id=inpLength min=1 max=150 value=50 >
 		</p>
 
 		<p>
-			Width <output id=outWidth class=floatRight ></output><br><input type=range id=inpWidth min=1 max=150 value=100 oninput=updateShape(); >
+			Width <output id=outWidth class=floatRight ></output><br><input type=range id=inpWidth min=1 max=150 value=100 >
 		</p>
 
 		</div>
@@ -86,13 +86,15 @@
 
 		let txt;
 
-		divTitle.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
+		divTitle.innerHTML = '<h2><a  href = "" >' + document.title + '</a></h2>';
 
 		windowVertices = speed.windowVertices( 100, 10, 50, 5,0.5 );
 
 //console.log( 'windowVertices', JSON.stringify( windowVertices ) );
 
 		selShape.selectedIndex = 0;
+
+
 
 		updateShape();
 
@@ -108,24 +110,65 @@
 		floors = parseInt( inpFloors.value, 10 );
 		outFloors.value = floors;
 
-		length = parseInt( inpLength.value, 10 );
-		outLength.value = length;
-
-		width = parseInt( inpWidth.value, 10 );
-		outWidth.value = width;
-
 		const shapes = [ speed.createBoxShape, speed.createLShape, speed.createHShape, speed.createTShape ];
 
 		createShape = shapes[ index ];
 
-		shape = createShape( { area: area, floors: floors, xM: length } );
+		shape = createShape( { area: area, floors: floors } );
+
+// not working, dunno why
+// console.log( Object.getOwnPropertyNames( Speed ).filter(function(p) { return typeof Speed[p] === 'function'; }))
+// so let's look manually
+
+		xRange = shape.xRange();
+		yRange = shape.yRange();
 
 
-		var keys = Object.keys( shape );
+		divLog.innerHTML = 
+			'<h3>Public functions</h3>' +
+			'Area <br>' +
+			'A(): ' + shape.A() + '<br>' +
+			'<br>' +
+			'Length <br>' +
+			'x(): ' + shape.x() + '<br>' +
+			'xMin(): ' + shape.xMin() + '<br>' +
+			'xMax(): ' + shape.xMax() + '<br>' +
+			'xRange(): ' + xRange + '<br>' +
+			'<br>' +
+			'Width <br>' +
+			'y(): ' + shape.y() + '<br>' +
+			'yMin(): ' + shape.yMin() + '<br>' +
+			'yMax(): ' + shape.yMax() + '<br>' +
+			'yRange(): ' + yRange + '<br>' +
+			'<br>' +
+			'?? k(): ' + shape.k() + '<br>' +
 
-		divLog.innerHTML = '';
+		'';
 
-		for ( var i = 0; i < keys.length; i++ ) {
+//		area = shape.A();
+//		inpArea.value = area;
+//		outArea.value = area;
+
+		length = shape.x();
+		inpLength.value = length;
+		outLength.value = length.toFixed();
+		inpLength.min = shape.xMin();
+		inpLength.max = shape.xMax();
+
+		width = shape.y();
+		inpWidth.value = width;
+		outWidth.value = width.toFixed();
+		inpWidth.min = shape.yMin();
+		inpWidth.max = shape.yMax();
+
+
+
+
+		const keys = Object.keys( shape );
+
+		divLog.innerHTML += '<h3>Variables used internally</h3>';
+
+		for ( let i = 0; i < keys.length; i++ ) {
 
 			divLog.innerHTML += keys[ i ] + ': ' + shape[ keys[ i ] ] + '<br>';
 
