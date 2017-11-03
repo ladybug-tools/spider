@@ -1,6 +1,6 @@
 
 # Speed.js Coding Sample Read Me
 
-## <speedjs-coding-sample-r2.html>
+## [Speed.js Coding Sample R2]( speedjs-coding-sample-r2.html )
 
-## <speedjs-coding-sample-r1.html>
+## [Speed.js Coding Sample R1]( speedjs-coding-sample-r1.html )
