@@ -599,7 +599,7 @@ abbreviations relate to names of HTML files; ab = adjacent-buildings.html
 ### 2017-09-20 ~ Theo
 
 * 14:56 ~  Start R2
-* Reobject in 'everything is a recipe' style. Using mnu-template & test-threejs basic
+* Re object in 'everything is a recipe' style. Using mnu-template & test-threejs basic
 * 16:15 ~ 'Site Context' looking good
 * 17:47 ~ adjacent buildings.html looking good
 * 22:23 ~ Geometry.html is working
