@@ -1,6 +1,6 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/sandbox/speed-specification/#README.md "View file as a web page." ) </span>
 
-# SPEED Read Me
+# SPEED Spec Read Me
 
 _We should try to identify what this folder is about_
 
