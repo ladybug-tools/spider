@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Create 3D building data in a variety of shapes parametrically and export in gbXML format" >
+<meta name = "keywords" content = "Three.js,WebGLJavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-02" >
+<title>Build Well SPEED 'Plan B' R1.0</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: SlateBlue; --mnu-back-color: WhiteSmoke; --mnu-width: 350px; height: 100%; }
+
+	body, html { font: 12pt monospace; height:100%; margin: 0; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	summary { outline: none; font-size: 14pt }
+	textarea { background: none; height: 700px; width: 100%; tab-size: 4;}
+
+	.highlight { background-color: yellow; }
+
+	#divMenu { left: 0; margin: 20px; position: absolute; top: 0; }
+	#divMenu { height: 100%; max-width: var( --mnu-width ); overflow: auto;}
+
+	#detMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
+
+	#ifrThree { height: 100%; width: 100%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<details id=detMenu open >
+
+			<summary >toggle menu</summary>
+<!--
+			<p id = "divBreadcrumbs" ><a href="../../../index.html" target="_blank">Ladybug Tools</a> &raquo; <a href="../../index.html" target="_Top" >Spider</a> &raquo; </p>
+-->
+			<div id = "divTitle" ></div>
+
+			<div id = "divItems" >
+
+<!--
+				<div><a href=JavaScript:getContentMarkdown("../README.md"); >Read me / welcome</a></div>
+-->
+				<div><a href=JavaScript:getMenuHTML("mnu-adjacent-buildings.html"); >Adjacent Buildings</a>
+					&raquo; <a href="mnu-adjacent-buildings.html " target="_blank" title = 'standalone adjacent-buildings test script' >&#x1F5D7;</a>
+				</div>
+
+				<div><a href=JavaScript:getMenuHTML("mnu-shape-box.html"); >Box Shape</a>
+					&raquo; <a href="mnu-shape-box.html " target="_blank" title = 'standalone box shape test script' >&#x1F5D7;</a>
+				</div>
+
+				<div><a href=JavaScript:getMenuHTML("mnu-shape-ell-one.html"); >L Shape</a>
+					&raquo; <a href="mnu-shape-ell-one.html " target="_blank" title = 'standalone L shape test script' >&#x1F5D7;</a>
+				</div>
+<!--
+				<div><a href=JavaScript:getMenuHTML("mnu-settings-spaces.html"); >Spaces</a>
+					&raquo; <a href="mnu-settings-spaces.html " target="_blank" title = 'standalone settings spaces test script' >&#x1F5D7;</a>
+				</div>
+				<div><a href=JavaScript:getMenuHTML("mnu-settings-site.html"); >Site Settings</a>
+					&raquo; <a href="mnu-settings-site.html " target="_blank" title = 'standalone settings-site test script' >&#x1F5D7;</a>
+				</div>
+
+				<div><a href=JavaScript:getMenuHTML("mnu-hud.html"); >Heads-Up Display</a>
+					&raquo; <a href="mnu-hud.html " target="_blank" title = 'standalone hud test script' >&#x1F5D7;</a>
+				</div>
+-->
+				<div><a href=JavaScript:getMenuHTML("mnu-gbxml-export.html"); >gbXML Export</a>
+					&raquo; <a href="mnu-gbxml-export.html " target="_blank" title = 'standalone gbxml-export test script' >&#x1F5D7;</a>
+				</div>
+<!--
+				<div><a href=JavaScript:getContentMarkdown("real-time-report.md"); >Real Time Report</a>
+					&raquo; <a href="mnu-real-time-report.html " target="_blank" title = 'standalone real-time-report test script' >&#x1F5D7;</a>
+				</div>
+-->
+				<br>
+			</div>
+
+			<div id = "divSubMenu" ></div>
+<!--
+			<div id=divFooter >
+				<hr>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/credits.md"); >Credits</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/code-of-conduct.md"); >Code of Conduct</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/contributing.md"); >Contributing</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/license.md"); >License</a></div>
+				<div><a href=JavaScript:getContentMarkdown("../../pages/markdown-help.md"); >Markdown Help</a></div>
+				<div><a href=JavaScript:getMenuHTML("mnu-template.html"); >Menu Template</a></div>
+				<div id=divToggleView style=display:none; ><a href=JavaScript:viewModel(); >Return to model view</a><div>
+
+			</div>
+-->
+
+		</details>
+
+	</div>
+
+	<iframe id=ifrThree src=build-well-threejs-speed.html ></iframe>
+
+	<div id=divContents ></div>
+
+<script>
+
+
+	const release = location.pathname.split( '/' )[ 8 ];
+	const fileName = location.pathname.split( '/' ).pop();
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/speed-specification/speedjs/';
+
+	const b = '<br>';
+	const txt = 
+	'<hr>' +
+		'<p>Welcome to Build Well R10!</p>' +
+		'<p>You may use this set of scripts as templates for designing your own set of paremeterized 3D models that can be exported to gbXML.</p>' +
+		'<p class=highlight >2017-10-17: Every space has its own floor - and many other fixes</p>' +
+		'<p class=highlight >gbXML export not yet fully updated to latest geometry</p>' +
+
+		'<hr>' +
+		'<p>Axis RGB = XYZ directions</p>' +
+		'<p>Spacebar|click to stop spinning</p>' +
+		'<p>Use one|two|three fingers to rotate|zoom|pan display in 3D<br>' +
+			'Or left|scroll|right with your pointing device</p>' +
+		'<p>Press Control-Shift-J|Command-Option-J to see if the JavaScript console reports any errors</p>' +
+	'';
+
+/*
+
+		'<p class=highlight >2017-10-17: L Shape beginning to work. Final version awaiting full spec.</p>' +
+
+		'<p class=highlight >2017-10-17: new methods for handling geometry. Code needs good clean up, many small issues.</p>' +
+
+
+*/
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3>' +
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +
+				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
+			'</h3>';
+
+		getMenuHTML();
+
+	}
+
+
+	function getMenuHTML( file ) {
+
+		if ( ! file ) {
+
+			divSubMenu.style.height = '';
+//			divSubMenu.innerHTML = txt;
+
+		} else {
+
+			divSubMenu.innerHTML = '<iframe id=ifrMenuSub src=' + file + ' height=100% width=100% frameBorder=0 ></iframe>';
+
+			ifrMenuSub.onload = function() {
+
+				divSubMenu.style.height = ( ifrMenuSub.contentWindow.divMenu.scrollHeight + 10 ) + 'px';
+
+				viewModel();
+
+			}
+
+		}
+
+	}
+
+
+
+	function viewModel() {
+
+		document.body.style.overflow = 'hidden';
+
+		divContents.style.display = 'none';
+
+//		divToggleView.style.display = 'none';
+
+		ifrThree.style.cssText = 'height: 100%; width: 100%;'
+
+	}
+
+
+
+	function viewContents() {
+
+console.log( '', 23 );
+
+		document.body.style.overflow = 'auto';
+
+		ifrThree.style.display = 'none';
+
+//		divToggleView.style.display = '';
+
+		ifrThree.style.cssText = ' bottom: 0; position: absolute; height: 100px; right: 0; width: 10%; '; 
+
+	}
+
+
+
+	function getContentMarkdown( url ) {
+
+		if ( ! url ) {
+
+			url = '../README.md';
+
+		}
+
+		divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
+
+		requestFile( url, callbackMarkdown );
+
+		getMenuHTML();
+
+	}
+
+
+
+	function callbackMarkdown( xhr ){
+
+		const converter = new showdown.Converter();
+
+		const response = xhr.target.response;
+
+		const html = converter.makeHtml( xhr.target.responseText );
+
+		viewContents();
+
+		divContents.innerHTML = html;
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+</script>
+</body>
+</html>

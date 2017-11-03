@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Add meshes to an existing model" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-13" >
+<title>Adjacent Buildings</title>
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp */
+
+	html { --mnu-color: magenta; --mnu-back-color: #efd; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 12pt monospace;  height: 100%; margin: 0 auto; overflow: hidden; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus{ background-color: yellow; color: #aaa; }
+	h3 { margin: 0; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 70px;}
+
+	#divMenu { background-color: #efd; border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+	#ifrContents { box-sizing: border-box; border: 0px solid var( --mnu-color ); height: 100%; width: 100%; }
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id=info ></div>
+
+		<p title = 'Select an object to edit' >Buildings: 
+			<select id = selObject onchange = getObject(buildings); size = 5 ></select>
+		</p>
+
+		<p>click an object title to highlight the 3D object</p>
+		<p>
+			<button onclick = deleteObject(buildings); >delete</button>
+			<button onclick = addObject(buildings); >add </button>
+			<button onclick = saveFile(buildings); >save json file</button> 
+		</p>
+
+		<p title = 'Title of the model' >Name: 
+			<input id=inpName onchange = buildWell(buildings); class = floatRight style=width:150px; >
+		</p>
+
+		<p title = 'left and right from origin in feet' >offset x: 
+			<input type=number id=inpOffsetX onchange = buildWell(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'front and back distance from origin in feet'>offset y: 
+			<input type=number id=inpOffsetY onchange = buildWell(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'x distance in feet' >length: 
+			<input type=number id=inpLength min=1 oninput="validity.valid||(value='');" onchange = buildWell(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'Y distance in feet' >width: 
+			<input type=number id=inpWidth min=1 oninput="validity.valid||(value='');" onchange = buildWell(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'Z distance in feet: 1 to 1000' >height:
+			<input type=number id=inpHeight min=1 max=1000 step=1 oninput="validity.valid||(value='');" onchange=buildWell(buildings);; class = floatRight >
+		</p>
+
+		<p title = 'building angle in degrees: -180 to 180' >orientation on site:
+			<input type=number type=number id=inpAngle min=-180 max=180 step=1 value=0 onchange=buildWell(buildings);; class=floatRight />
+		</p>
+
+
+		<p>for testing</p>
+
+		<p><button onclick=drawCubes(buildings,200); >draw cubes</button></p>
+
+		<p><button onclick=drawStonehenge(buildings); >draw stonehenge</button></p>
+
+	</div>
+
+	<iframe id=ifrContents ></iframe>
+
+<script>
+
+	const ifrSource = 'build-well-threejs.html';
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/blob/master/sandbox/single-model-multiple-menu/r1/mnu-add-stuff.html';
+
+	var buildings;
+
+	let scope;
+
+	var THREE;
+	var renderer;
+	var camera;
+	var controls;
+	var scene;
+
+	var lightAmbient, lightPoint, lightDirectional;
+	var axesHelper, cameraHelper;
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h3><a href = "" >' + document.title + '</a> &nbsp; ' +  
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		if ( parent && parent.ifrThree ) {
+
+			scope = parent.ifrThree.contentWindow;
+
+			initVariables()
+
+
+		} else {
+
+			ifrContents.src = ifrSource;
+
+			scope = ifrContents.contentWindow;
+
+			divMenu.style.cssText += 'margin: 20px; position: absolute; right: 0;';
+
+			ifrContents.onload = initVariables;
+
+		}
+
+	}
+
+
+	function initVariables() {
+
+		THREE = scope.THREE;
+		renderer = scope.renderer;
+		scene = scope.scene;
+		camera = scope.camera;
+		controls = scope.controls;
+
+		lightDirectional = scope.lightDirectional;
+		axesHelper = scope.axesHelper;
+		gridHelper = scope.gridHelper;
+		groundHelper = scope.groundHelper;
+		cameraHelper = scope.cameraHelper;
+
+		buildings = scope.meshes;
+
+//console.log( 'buildings', buildings );
+
+		updateSelectObjects( buildings );
+
+	}
+
+
+
+///////////////////
+
+
+	function updateSelectObjects( objects ) {
+
+		selObject.innerHTML = '';
+
+		for ( let i = 0; i < objects.children.length; i++ ) {
+
+			let obj = objects.children[ i ];
+			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+
+		}
+
+		selObject.selectedIndex = 0;
+
+		getObject( objects );
+
+	}
+
+
+
+	function deleteObject( objects ) {
+
+		let obj = objects.children[ selObject.selectedIndex ];
+
+		if ( ! obj ){ alert( 'Try adding a new object and selecting it before doing a delete' ); return;  }
+		objects.remove( obj );
+		obj.geometry.dispose();
+		obj.material.dispose();
+
+		updateSelectObjects( objects );
+
+	}
+
+
+	function addObject( objects ) {
+
+		let obj = scope.createMesh();
+		obj.scale.set ( 20, 20, 50 );
+		obj.position.set( 0, 0, 0.5 * obj.scale.z );
+		objects.add( obj );
+
+		updateSelectObjects( objects );
+
+	}
+
+	function getObject( objects ) {
+
+		const object = scene.getObjectByName( selObject.value );
+
+		const r2d = 180 / Math.PI;
+//console.log( 'object', object );
+
+		inpName.value = object.name;
+
+		inpOffsetX.value = object.position.x;
+		inpOffsetY.value = object.position.y;
+
+		inpLength.value = object.scale.x;
+		inpWidth.value = object.scale.y;
+
+		inpHeight.value = object.scale.z;
+		inpAngle.value = r2d * object.rotation.z;
+
+		objects.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+					child.material.opacity = child.name === object.name ? 1 : 0.5;
+
+			}
+
+		} );
+
+		if ( object.material ) { object.material.opacity = 1; }
+
+	}
+
+
+	function buildWell( objects ) {
+
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+console.log( 'objects', objects );
+		const objectOld = objects.getObjectByName( selObject.value );
+
+		const meshX = parseFloat( inpLength.value );
+		const meshY = parseFloat( inpWidth.value );
+		const meshZ = parseFloat( inpHeight.value );
+
+		const meshAngle = parseFloat( inpAngle.value ) * d2r;
+
+		const meshPositionX = parseFloat( inpOffsetX.value );
+		const meshPositionY = parseFloat( inpOffsetY.value );
+
+		const name = inpName.value;
+		selObject.options[ selObject.selectedIndex ].innerHTML = inpName.value;
+
+		objects.remove( objectOld );
+
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		const object = new THREE.Mesh( geometry, material );
+		object.scale.set( meshX, meshY, meshZ );
+		object.position.set( meshPositionX, meshPositionY, 0.5 * meshZ );
+		object.rotation.set( 0, 0, -meshAngle );
+		object.name = name;
+
+		objects.add( object );
+
+		scope.gridHelper.geometry.computeBoundingBox();
+		bbox = scope.gridHelper.geometry.boundingBox.max;
+
+		if ( Math.abs( meshPositionX ) + 0.5 * meshX > bbox.x || Math.abs( meshPositionY ) + 0.5 * meshY > bbox.z ) {  // bbox: y is up
+
+			const size = Math.abs( meshPositionX ) + 0.5 * meshX + Math.abs( meshPositionY ) + 0.5 * meshY;
+
+			scope.addHelpers( size )
+
+		}
+
+	}
+
+	function saveFile( objects ) {
+
+		var output = objects.toJSON();
+
+		try {
+
+			output = JSON.stringify( output, parseNumber, '\t' );
+			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+
+		} catch ( e ) {
+
+			output = JSON.stringify( output );
+
+		}
+
+		var blob = new Blob( [ output ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+
+		a.href = window.URL.createObjectURL( blob );
+		a.download = 'objects.json';
+		a.click();
+//		delete a;
+		a = null;
+
+	}
+
+//////////////////
+
+
+	function drawCubes( objects, size = 100 ) {
+
+		object3D = new THREE.Object3D();
+
+		let geometry, material, mesh, edges;
+
+		geometry = new THREE.BoxGeometry( 10, 10, 10 );
+
+		for ( let i = 0; i < 50; i++ ) {
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff * Math.random(),
+				emissive: 0xffffff * Math.random(),
+				opacity: Math.random(),
+				specular: 0xffffff * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+				transparent: true
+			} );
+
+			material = new THREE.MeshNormalMaterial( { transparent: true });
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( size * Math.random() - 0.5 * size, size * Math.random() - 0.5 * size, size * Math.random() - 0.5 * size );
+			mesh.rotation.set( 6.3 * Math.random(), 1.57 * Math.random(), 3.14 * Math.random() );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			mesh.name = 'cube ' + i;
+			objects.add( mesh );
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			edges = new THREE.LineSegments( geometryEdge, material );
+			mesh.add( edges ); // add wireframe as a child of the parent mesh
+
+		}
+
+//		object3D.name = 'cubes';
+
+//		objects.add( object3D );
+
+		updateSelectObjects( objects );
+
+	}
+
+
+
+	function drawStonehenge( objects ) {
+
+		object3D = new THREE.Object3D();
+
+		number = 20;
+		angle = 6.283 / number;
+		radius = 120;
+		scale = 0.5;
+		for ( var i = 0; i < number; i++ ) {
+			var geometry = new THREE.BoxGeometry( 15, 100, 30 );
+			var color = 0xffffff * Math.random();
+			var material = new THREE.MeshPhongMaterial( { color: color, side: 2, transparent: true });
+			var mesh = new THREE.Mesh( geometry, material );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			mesh.rotation.y = - angle * i;
+			mesh.position.set( radius * Math.cos( angle * i ) , 25, radius * Math.sin( angle * i )  );
+			mesh.name = 'stone ' + i;
+			mesh.scale.set( scale, scale, scale );
+			object3D.add( mesh );
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			edges = new THREE.LineSegments( geometryEdge, material );
+//			edges.rotation.y = - angle * i;
+//			edges.position.set( radius * Math.cos( angle * i ) , 50, radius * Math.sin( angle * i )  );
+
+			mesh.add( edges );
+
+		}
+
+		number = 11;
+		angle = 6.283 / number;
+
+		for ( var i = 0; i < number; i++ ) {
+
+			var geometry = new THREE.BoxGeometry( 15, 20, 100 );
+			var color = 0xffffff * Math.random();
+			var material = new THREE.MeshPhongMaterial( { color: color, side: 2 });
+			var mesh = new THREE.Mesh( geometry, material );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+
+			mesh.rotation.y = -angle * i;
+			delta = 0.01 *  Math.random();
+			mesh.position.set( radius * Math.cos( ( delta + angle ) * i ) , 55, radius * Math.sin( ( delta + angle ) * i )  );
+			mesh.name = 'lintel ' + i;
+			mesh.scale.set( scale, scale, scale );
+			object3D.add( mesh );
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			var edges = new THREE.LineSegments( geometryEdge, material );
+
+			mesh.add( edges );
+
+		}
+
+		object3D.rotation.x = Math.PI / 2;
+		object3D.position.set( 0, 0, 0 );
+		object3D.name = 'stonehenge';
+
+		objects.add( object3D );
+
+		updateSelectObjects( objects );
+
+	}
+
+</script>
+</body>
+</html>
