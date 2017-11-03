@@ -13,6 +13,8 @@ _BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me fil
 
 ## Full Screen: [Envelope]( http://www.ladybug.tools/spider/sandbox/speed-specification/envelope.html )
 
+## Full Screen: [Space Layout]( http://www.ladybug.tools/spider/sandbox/speed-specification/space-layout.html )
+
 
 ## Change Log
 
@@ -22,7 +24,9 @@ _BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me fil
 * Add Anton's envelope.html
 	* Note large Axes in Ortho view in Windows Chrome/FF ;-)
 * Update index.html + read me
-
+* Add space-layout.html
+* Add Speed.js Coding Sample
+* Add Speed 'Plan B'
 
 ### 2017-11-01 ~ Theo
 

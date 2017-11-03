@@ -12,7 +12,7 @@
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	canvas { border: 1px solid black; }
 	select { width: 150px; }
-	table { border-spacing: 20px; width: 100%; }
+	table { border-spacing: 0px; width: 100%; }
 
 	input, input[ type = number ] { width: 50px; }
 
@@ -20,8 +20,7 @@
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
-
-	td { text-align: center; }
+	td { text-align: right; }
 
 	.checkbox { text-align: right; }
 	.column { display: inline-block; line-height: 30px; width: 150px;}
@@ -29,9 +28,11 @@
 
 	#canvasPerspective { position:absolute; right: 100px; top: 50%; }
 	#canvasOrtho { position:absolute; left: 100px; top: 50%; }
-	#divDimensions, #divDimensions div { left: 0; margin: 20px auto; right: 0; width: 250px; }
 
+	#divLeftColumn, #divRightColumn { border: 1px solid red; display: inline-block; vertical-align: top }
 
+	#divRightColumn { text-align: right; }
+	#divRightColumn select { width: 50px; }
 </style>
 </head>
 <body>
@@ -39,20 +40,44 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "header" >
+
 		<h1 id = "title" ><a href="" >Site Content</a></h1>
 		<h2>Space Layout 1.0 </h2>
 
 	</div>
 
-	<div id = "divLeftColumn" >
 
+	<div id = "divLeftColumn" valign=top >
 		<h3>Space Type</h3>
 
 		<div id=divZones ></div>
 
 	</div>
 
-	<div id = "divRightColumn" ></div>
+	<div id = "divRightColumn" >
+
+		<h3>Apply to floors</h3>
+
+		<div><select><option>1</option></select> to <select><option>X</option></select></div>
+
+		<img src='./images/l-shape.png' width=220 />
+
+		<h3>Area Usage</h3>
+
+		<table>
+
+			<tr><td>Office-Private Office</td><td>60%</td></tr>
+
+			<tr><td>Office-Open Office</td><td>35%</td></tr>
+
+			<tr><td>Retail-Retail</td><td>15%</td></tr>
+
+			<tr><td>Total</td><td>100%</td></tr>
+
+		</table>
+	</div>
+
+
 
 <!--
 	<canvas id="canvasPerspective" height=300 width=300 ></canvas>
@@ -83,9 +108,11 @@
 
 		zonesPerShape = [ 5, 7, 13, 9 ];
 
+		const options = addOptions();
+
 		for ( var i = 0; i < zonesPerShape[ 1 ]; i++ ) {
 
-			txt += '<p>Zone: ' + ( i + 1 ) + ' <select id=inpZone' + i + ' ></select></p>';
+			txt += '<p>Zone: ' + ( i + 1 ) + ' <select id=inpZone' + i + ' >' + options + '</select></p>';
 
 
 		} 
@@ -96,25 +123,34 @@
 
 	function addOptions() {
 
-		typeoPtions = [ 
-'Office-Open Office',
-'Office-Private Office',
-'Office-Storage',
-'Office-Conference',
-'Hospital-Lab',
-'Hospital-Private Office',
-'Hospital-Open Office',
-'Hospital-Storage',
-'Hospital-Conference',
-'Retail-Retail',
-'Retail-Storage'
-		]
+		optionTypes = [ 
+			'Office-Open Office',
+			'Office-Private Office',
+			'Office-Storage',
+			'Office-Conference',
+			'Hospital-Lab',
+			'Hospital-Private Office',
+			'Hospital-Open Office',
+			'Hospital-Storage',
+			'Hospital-Conference',
+			'Retail-Retail',
+			'Retail-Storage'
+		];
+
+		let options = '';
 
 		for( let option of optionTypes ) {
 
-		options += '<option>' + option  
+			options += '<option>' + option + '</option>';
+
+		}
+
+		return options;
+
 	}
 
+
+/*
 	function getInputFields(){
 
 		inpArea.value = 5000;
@@ -290,6 +326,7 @@
 		context2.drawImage( renderer.domElement, 0, 0 );
 
 	}
+*/
 
 </script>
 </body>
