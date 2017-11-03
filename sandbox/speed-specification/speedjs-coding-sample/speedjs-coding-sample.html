@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-01" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 300px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; margin: 0 0 5px 0; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+	select { width: 100%; }
+
+	.floatRight { float: right; width: 70px; text-align: right; }
+
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
+<script src=Geom.js ></script>
+<script src=Speed.js ></script>
+
+	<div id = "divHeader" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divContents" >
+
+		<p>
+			<select id=selShape size=4 oninput=updateShape(); >
+				<option>Box Shape</option>
+				<option>L Shape</option>
+				<option>H Shape</option>
+				<option>T Shape</option>
+			</select>
+		</p>
+
+		<p>
+			Area <output id=outArea class=floatRight ></output><br><input type=range id=inpArea min=1000 max=20000 step=100 value=5000 oninput=updateShape(); >
+		</p>
+
+		<p>
+			Floors <output id=outFloors class=floatRight ></output><br><input type=range id=inpFloors min=1 max=20 value=1 oninput=updateShape(); >
+		</p>
+
+		<p>
+			Length <output id=outLength class=floatRight ></output><br><input type=range id=inpLength min=1 max=150 value=50 oninput=updateShape(); >
+		</p>
+
+		<p>
+			Width <output id=outWidth class=floatRight ></output><br><input type=range id=inpWidth min=1 max=150 value=100 oninput=updateShape(); >
+		</p>
+
+		</div>
+
+
+	</div>
+
+	<div id = "divLog" ></div>
+
+<script>
+
+
+	let speed = Speed();
+
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+	const d2r = Math.PI / 180, r2d = 180 / Math.PI;
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		divTitle.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
+
+		windowVertices = speed.windowVertices( 100, 10, 50, 5,0.5 );
+
+//console.log( 'windowVertices', JSON.stringify( windowVertices ) );
+
+		selShape.selectedIndex = 0;
+
+		updateShape();
+
+	}
+
+	function updateShape() {
+
+		const index = selShape.selectedIndex;
+
+		area = parseInt( inpArea.value, 10 );
+		outArea.value = area;
+
+		floors = parseInt( inpFloors.value, 10 );
+		outFloors.value = floors;
+
+		length = parseInt( inpLength.value, 10 );
+		outLength.value = length;
+
+		width = parseInt( inpWidth.value, 10 );
+		outWidth.value = width;
+
+		const shapes = [ speed.createBoxShape, speed.createLShape, speed.createHShape, speed.createTShape ];
+
+		createShape = shapes[ index ];
+
+		shape = createShape( { area: area, floors: floors, xM: length } );
+
+
+		var keys = Object.keys( shape );
+
+		divLog.innerHTML = '';
+
+		for ( var i = 0; i < keys.length; i++ ) {
+
+			divLog.innerHTML += keys[ i ] + ': ' + shape[ keys[ i ] ] + '<br>';
+
+		}
+
+	}
+
+</script>
+</body>
+</html>
