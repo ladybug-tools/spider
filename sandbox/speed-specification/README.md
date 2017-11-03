@@ -13,7 +13,7 @@ _BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me fil
 
 ## Full Screen: [Envelope]( http://www.ladybug.tools/spider/sandbox/speed-specification/envelope.html )
 
-## Full Screen: [Space Layout]( http://www.ladybug.tools/spider/sandbox/speed-specification/space-layout.html )
+## Full Screen: [Space Layout]( http://www.ladybug.tools/spider/sandbox/speed-specification/space-layout.html ) &laquo; placeholder/no interaction
 
 
 ## Change Log
