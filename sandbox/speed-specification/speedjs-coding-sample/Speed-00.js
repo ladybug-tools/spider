@@ -1,62 +1,64 @@
 let Speed = (()=>{
 
   class Shape{
-    constructor( args ){
-      
+    constructor(a){
+
       // check for required arguments
-      ['area','floors'].map( key => {
-        if( !args[key] ){
+      ['area','floors'].map(k=>{
+        if(!a[k]){
           throw new Error(`missing required value for ${k}`)
         }
       })
-      
+
       // set required parameters
-      this.area   = args.area
-      this.floors = args.floors
-      
+      this.area = a.area
+      this.floors = a.floors
+
       // build params from optional args
-      this.lengthMult = args.lengthMult || 1
-      this.lengthMinM = args.lengthMinM || this.lengthMult
-      this.lengthMaxM = args.lengthMaxM || this.lengthMult
-      this.lengthMinC = args.lengthMinC || 2/3
-      this.lengthMaxC = args.lengthMaxC || 2
-      this.widthMult  = args.widthMult  || this.lengthMult
-      this.widthMaxC1 = args.widthMaxC1 || this.widthMult
-      this.widthMaxC2 = args.widthMaxC2 || this.widthMult
-      this.thickMult  = args.thickMult  || 1
+      this.xM     = a.xM     || 1
+      this.xMinM  = a.xMinM  || this.xM
+      this.xMaxM  = a.xMaxM  || this.xM
+      this.xMinC  = a.xMinC  || 2/3
+      this.xMaxC  = a.xMaxC  || 2
+      this.yM     = a.yM     || this.xM
+      this.yMaxC1 = a.yMaxC1 || this.yM
+      this.yMaxC2 = a.yMaxC2 || this.yM
+      this.kM     = a.kM     || 1
     }
-    areaTotal(){
+    A(){
       return this.area * this.floors
     }
-    length(){
-      return Math.pow( this.areaTotal() * this.lengthMult, 0.5 )
+    x(){
+      return Math.pow( this.A() * this.xM, 0.5 )
     }
-    lengthMin(){
-      return this.lengthMinC * Math.pow( this.areaTotal() * this.lengthMult, 0.5)
+    xMin(){
+      return this.xMinC * Math.pow( this.A() * this.xM, 0.5)
     }
-    lengthMax(){
-      return this.lengthMaxC * Math.pow( this.areaTotal() * this.lengthMult, 0.5)
+    xMax(){
+      return this.xMaxC * Math.pow( this.A() * this.xM, 0.5)
     }
-    width(){
-      return Math.pow( this.areaTotal() * this.widthMult, 0.5 )
+    y(){
+      return Math.pow( this.A() * this.yM, 0.5 )
     }
-    widthMin(){
-      return this.areaTotal() / this.length()
+    yMin(){
+// had no return
+      return this.A() / this.x() 
     }
-    widthMax(){
-      return this.widthMaxC1 * (this.areaTotal() / this.length()) + this.widthMaxC2 * this.length()
+    yMax(){
+      return this.yMaxC1 * (this.A() / this.x()) + this.yMaxC2 * this.x()
     }
-    lengthRange(){
-      return [this.lengthMin(),this.lengthMax()]
+    xRange(){
+// following had no parens
+      return [this.xMin(),this.xMax() ]
     }
-    widthRange(){
-      return [this.widthMin(),this.widthMax()]
+    yRange(){
+      return [this.yMin(),this.yMax()]
     }
-    thickness(args={}){
-      let x = args.length || this.length()
-      let y = args.width  || this.width()
-      let A = this.areaTotal()
-      let m = this.thickMult
+    k(){
+      let x = this.x()
+      let y = this.y()
+      let A = this.A()
+      let m = this.kM
       return (x + (m*y))/(m*2) - Math.pow(Math.pow((x + (m*y))/(m*2),2) - (A/m),0.5)
     }
   }
@@ -65,9 +67,9 @@ let Speed = (()=>{
     constructor(args){
       super({
         ...args,
-        lengthMult  : 1.8,
-        widthMaxC1  : 10,
-        lengthMaxC2 : -0.9,
+        xM     : 1.8,
+        yMaxC1 : 10,
+        xMaxC2 : -0.9,
       })
     }
   }
@@ -76,10 +78,10 @@ let Speed = (()=>{
     constructor(args){
       super({
         ...args,
-        lengthMult : 9/7,
-        widthMaxC1 : 5,
-        widthMaxC2 : -0.4,
-        thickMult  : 2,
+        xM     : 9/7,
+        yMaxC1 : 5,
+        yMaxC2 : -0.4,
+        kM     : 2,
       })
     }
   }
@@ -88,11 +90,10 @@ let Speed = (()=>{
     constructor(args){
       super({
         ...args,
-        lengthMult : 1.8,
-        widthMaxC1 : 10,
-        widthMaxC2 : -0.4,
+        xM     : 1.8,
+        yMaxC1 : 10,
+        yMaxC2 : -0.4,
       })
-      
     }
   }
 
@@ -100,32 +101,37 @@ let Speed = (()=>{
     constructor(args){
       super({
         ...args,
-        lengthMinC : 1,
-        lengthMaxC : 1,
-        lengthMult : 1,
-        lengthMinM : 1/10,
-        lengthMaxM : 10,
+        xMinC : 1,
+        xMaxC : 1,
+        xM    : 1,
+        xMinM : 1/10,
+        xMaxM : 10,
       })
-      
+
     }
-    width(){
-      return this.areaTotal() / this.length()
+    y(){
+      return this.A() / this.x()
     }
   }
 
-  this.createBoxShape = function(args){
+// previously there was one createHShape and two createLShape. No Box or T functions
+
+  this.createBoxShape = function(args)
+  {
     return new BoxShape(args)
   }
-  
-  this.createHShape = function(args){
+  this.createHShape = function(args)
+  {
     return new HShape(args)
   }
 
-  this.createLShape = function(args){
+  this.createLShape = function(args)
+  {
     return new LShape(args)
   }
 
-  this.createTShape = function(args){
+  this.createTShape = function(args)
+  {
     return new TShape(args)
   }
 
@@ -139,7 +145,6 @@ let Speed = (()=>{
       })
     })
   }
-  
   // this function creates the window geometry using the library Andrew created with no geometry dependencies
   // The library is under Geom.js
   this.facadeToWindows = function(wallWidth,floor2floor,wwr,windowCount,horizontality){
@@ -159,5 +164,5 @@ let Speed = (()=>{
       return Geom.xzRectangle(windowWidth,windowHeight,windowOrigin)
     })
   }
-  return this
+  return this;
 })
