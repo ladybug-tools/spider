@@ -13,10 +13,17 @@ _BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me fil
 
 ## Full Screen: [Envelope]( http://www.ladybug.tools/spider/sandbox/speed-specification/envelope.html )
 
-## Full Screen: [Space Layout]( http://www.ladybug.tools/spider/sandbox/speed-specification/space-layout.html ) &laquo; placeholder/no interaction
+## Full Screen: [Space Layout]( http://www.ladybug.tools/spider/sandbox/speed-specification/space-layout.html )
 
+***
 
 ## Change Log
+
+
+### 2017-11-03 ~ Theo
+
+* Add Speed.js Coding Sample R2
+* Space Layout
 
 
 ### 2017-11-02 ~ Theo
