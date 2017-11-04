@@ -10,6 +10,9 @@
 <style>
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
 	canvas { border: 1px solid black; }
 	select { width: 150px; }
 	table { border-spacing: 20px; width: 100%; }
@@ -40,7 +43,7 @@
 	<div id = "header" >
 
 		<h1 id = "title" >
-
+			<a href="./index.html" target=_top >&#x2302;</a> &raquo;
 			<a href="" >Site Content</a>
 			<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/shape-geometry.html target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
 
@@ -59,10 +62,10 @@
 			</tr>
 
 			<tr>
-				<td><input type=number id=inpArea oninput=updateShape(this); ></td>
-				<td><input type=number id=inpFloors oninput=updateShape(this);></td>
+				<td><input type=number id=inpArea oninput=updateShape(); ></td>
+				<td><input type=number id=inpFloors oninput=updateShape();></td>
 				<td><input type=number id=inpFloorArea ></td>
-				<td><input type=number id=inpHeight oninput=updateShape(this); ></td>
+				<td><input type=number id=inpHeight oninput=updateShape(); ></td>
 				<td><input type=number id=inpShapeCount ></td>
 			</tr>
 
@@ -85,12 +88,15 @@
 			<div>Footprint dimensions</div>
 
 			<div>Length <output id=outLength class=floatright >50</output>
-				<input type=range id=inpLength oninput=updateShape(this);outLength.value=this.value; ></div>
+				<input type=range id=inpLength oninput=updateShape();outLength.value=this.value; >
+			</div>
 
-			<div>Width  <output id=outWidth class=floatright >50</output>
-				<input type=range id=inpWidth oninput=updateShape(this);outWidth.value=this.value; ></div>
+			<div>Width <output id=outWidth class=floatright >100</output>
+				<input type=range id=inpWidth oninput=updateShape();outWidth.value=this.value; >
+			</div>
 
-			<div>Thickness <input type=number id=inpThickness ></div>
+			<div id=divThickess >Thickness <output id=outThickness class=floatright >20</output>
+				<input type=range id=inpThickness oninput=updateShape();outThickness.value=this.value; ></div>
 
 		</div>
 
@@ -147,9 +153,9 @@
 
 		selShape.innerHTML =
 			'<option>Box-Shape</option>' +
-			'<option>H-Shape</option>' +
 			'<option>L-Shape</option>' +
 			'<option>T-Shape</option>' +
+			'<option>H-Shape</option>' +
 		'';
 
 		selMassing.innerHTML =
@@ -165,6 +171,18 @@
 		inpOrientation.min = -90;
 		inpOrientation.max = 90;
 		inpOrientation.value = 0;
+
+		inpLength.min = 1;
+		inpLength.max = 200;
+		inpLength.value = 50;
+
+		inpWidth.min = 1;
+		inpWidth.max = 200;
+		inpWidth.value = 100;
+
+		inpThickness.min = 1;
+		inpThickness.max = 100;
+		inpThickness.value = 20;
 
 	}
 
@@ -225,7 +243,7 @@
 		gridHelper = new THREE.GridHelper( size, size / 10 );
 		gridHelper.rotation.x = 0.5 * Math.PI;
 
-		axesHelper = new THREE.AxesHelper( size * 0.05 );
+		axesHelper = new THREE.AxesHelper( size * 0.1 );
 		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
 		axesHelper.material.linewidth = 20;
 
@@ -241,7 +259,7 @@
 		theBuilding = {};
 		theBuilding.length1 = 50;
 		theBuilding.width1 = 50;
-		theBuilding.paths = updatePaths( theBuilding );
+//		theBuilding.paths = updatePaths( theBuilding );
 console.log( 'theBuilding', theBuilding );
 		updateShape();
 
@@ -249,73 +267,160 @@ console.log( 'theBuilding', theBuilding );
 
 
 
-	function updatePaths( obj ) {
+	function updateShape() {
+//console.log( 'that', that );
 
-		const len = obj.length1;
-		const len13 = len / 3;
-		const len23 = 2 * len / 3;
-		const len14 = len / 4;
-		const len34 = 3 * len / 4;
+		const pathFunctions = [ getPathBox, getPathL, getPathT , getPathH];
 
-		const wid = obj.width1;
-		const wid13 = wid / 3;
-		const wid23 = 2 * wid / 3;
+		mesh = theBuilding.mesh;
 
-		var paths = [];
+//console.log( '', theBuilding.paths[ selShape.selectedIndex ] );
+
+		scene.remove( theBuilding.mesh );
+
+		theBuilding.area = parseInt( inpArea.value, 10 );
+		theBuilding.length = parseInt( inpLength.value, 10 );
+		theBuilding.width = parseInt( inpWidth.value, 10 );
+		theBuilding.thickness = parseInt( inpThickness.value, 10 );
+
+		const pathFunction = pathFunctions[ selShape.selectedIndex ]; // theBuilding.paths[ selShape.selectedIndex ];
+		theBuilding.path = pathFunction();
+
+		theBuilding.mesh = createShape();
+		theBuilding.mesh.name = 'theBuilding';
+
+		theBuilding.mesh.position.z = theBuilding.mesh.scale.z * 0.5;
+
+		scene.add( theBuilding.mesh );
+
+		inpArea.value = theBuilding.area;
+
+	}
+
+
+
+	function getPathBox() {
+
+		const area = theBuilding.area;
+		const len = theBuilding.length;
+		let wid = theBuilding.width;
+
+		wid = area / len;
 
 		const pathBox = [ v2( len, 0 ), v2( 0, 0 ), v2( 0, wid ), v2( len, wid ), v2( len, 0 ) ];
-		paths.push( pathBox ); // scaleMesh( pathBox, pLogBox, 'Box shape' );
+
+		theBuilding.area = len * wid;
+
+		divThickess.style.display = 'none';
+
+		return pathBox;
+
+	}
+
+
+
+	function getPathL() {
+
+		const len = theBuilding.length;
+		let wid = theBuilding.width;
+		const thk = theBuilding.thickness;
+
+		const area = theBuilding.area;
+
+		wid = - ( len * thk - area ) / thk - thk;
 
 		const pathL = [
 			v2( len, 0 ),
 			v2( 0, 0 ),
 			v2( 0, wid ),
-			v2( len13, wid ),
-			v2( len13, wid13 ),
-			v2( len, wid13 ),
+			v2( thk, wid ),
+			v2( thk, thk ),
+			v2( len, thk ),
 			v2( len, 0 )
 		];
-		paths.push( pathL );
 
-		const pathH = [
-			v2( len34, wid13 ),
-			v2( len14, wid13 ),
-			v2( len14, 0 ),
-			v2( 0, 0 ),
-			v2( 0, wid ),
-			v2( len14, wid ),
-			v2( len14, wid23 ),
-			v2( len34, wid23 ),
-			v2( len34, wid ),
-			v2( len, wid ),
-			v2( len, 0 ),
-			v2( len34, 0 ),
-			v2( len34, wid13 )
-		];
-		paths.push( pathH );
+//		theBuilding.area = len * thk + ( wid - thk ) * thk;
+
+		divThickess.style.display = '';
+
+		return pathL;
+
+	}
+
+
+
+	function getPathT() {
+
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
 
 		const pathT = [
 			v2( len, 0 ),
 			v2( 0, 0 ),
-			v2( 0, wid13 ),
-			v2( len13, wid13 ),
-			v2( len13, wid ),
-			v2( len23, wid ),
-			v2( len23, wid13 ),
-			v2( len, wid13 ),
+			v2( 0, thk ),
+			v2( 0.5 * ( len - thk ), thk ),
+			v2( 0.5 * ( len - thk ), wid ),
+			v2( len - 0.5 * ( len - thk ), wid ),
+			v2( len - 0.5 * ( len - thk ), thk ),
+			v2( len, thk ),
 			v2( len, 0 )
 		];
-		paths.push( pathT );
 
-		return paths;
+		theBuilding.area = len * wid;
+
+		divThickess.style.display = '';
+
+		return pathT;
 
 	}
 
-	function createMesh() {
 
-		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+
+	function getPathH() {
+
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
+
+		const pathH = [
+			v2( len - thk, 0.5 * ( wid - thk ) ),
+			v2( thk, 0.5 * ( wid - thk ) ),
+			v2( thk, 0 ),
+			v2( 0, 0 ),
+			v2( 0, wid ),
+			v2( thk, wid ),
+			v2( thk, wid - 0.5 * ( wid - thk ) ),
+			v2( len - thk, wid - 0.5 * ( wid - thk ) ),
+			v2( len - thk, wid ),
+			v2( len, wid ),
+			v2( len, 0 ),
+			v2( len - thk, 0 ),
+			v2( len - thk, 0.5 * ( wid - thk ) )
+		];
+
+		divThickess.style.display = '';
+
+		return pathH;
+
+	}
+
+
+
+
+
+
+	function createShape() {
+
+		let shape;
+
+		shape = new THREE.Shape( theBuilding.path );
+		geometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: 10 } );
+		geometry.center();
+
 		const material = new THREE.MeshPhongMaterial();
 		const mesh = new THREE.Mesh( geometry, material );
+
 		const edgesGeometry = new THREE.EdgesGeometry( geometry );
 		const meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
 		mesh.add( meshEdges );
@@ -326,63 +431,6 @@ console.log( 'theBuilding', theBuilding );
 
 
 
-	function updateShape() {
-//console.log( 'that', that );
-
-		mesh = theBuilding.mesh;
-console.log( '', theBuilding.paths[ selShape.selectedIndex ] );
-
-		scene.remove( theBuilding.mesh );
-
-		theBuilding.path = theBuilding.paths[ selShape.selectedIndex ];
-
-		theBuilding.mesh = createShape();
-		theBuilding.mesh.name = 'theBuilding';
-
-		theBuilding.mesh.position.z = theBuilding.mesh.scale.z * 0.5;
-
-		scene.add( theBuilding.mesh );
-
-
-
-/*
-		if ( that.id.startsWith( 'inpLength' ) ) {
-
-			building.scale.x = parseInt( that.value, 10 );
-
-		} else if ( that.id.startsWith( 'inpWidth' ) ) {
-
-			building.scale.y = parseInt( that.value, 10 );
-
-		} else if ( that.id.startsWith( 'inpHeight' ) || that.id.startsWith( 'inpFloors' ) ) {
-
-			building.scale.z = parseInt( inpHeight.value, 10 ) * parseInt( inpFloors.value, 10 );
-			building.position.z = building.scale.z * 0.5;
-
-		} else if ( that.id.startsWith( 'inpOrientation' ) ) {
-//console.log( 'inpSiteOrientation', that.value );
-
-			building.rotation.z = parseInt( that.value, 10 ) * - Math.PI / 180;
-
-		}
-*/
-
-	}
-
-
-	function createShape() {
-
-		let shape;
-
-		shape = new THREE.Shape( theBuilding.path );
-		geometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: 10 } );
-
-		const material = new THREE.MeshPhongMaterial();
-		const mesh = new THREE.Mesh( geometry, material );
-
-		return mesh;
-
-	}
 
 	function animate() {
 

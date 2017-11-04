@@ -9,7 +9,14 @@ _BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me fil
 
 ## Full screen: [Adjacent Buildings]( http://www.ladybug.tools/spider/sandbox/speed-specification/adjacent-buildings.html )
 
-## Full Screen: [Shape Geometry]( http://www.ladybug.tools/spider/sandbox/speed-specification/shape-geometry.html )
+Needs
+* Tooltips
+* Invalid data entry checking
+
+Issues
+* Click building checkboxes. Note all buildings appear in identical location
+
+## Full Screen: [Shape Geometry]( http://www.ladybug.tools/spider/sandbox/speed-specification/shape-geometry-r2.html )
 
 ## Full Screen: [Envelope]( http://www.ladybug.tools/spider/sandbox/speed-specification/envelope.html )
 
@@ -19,12 +26,17 @@ _BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me fil
 
 ## Change Log
 
+* Index.html and read me updated
+* * Shape Geometry R2
+	* Shapes are centered
+	* Shapes display edges 
+
 
 ### 2017-11-03 ~ Theo
 
 * Add Speed.js Coding Sample R2
-* Space Layout
-
+* Space Layout R1.1
+* Shape Geometry R2 started
 
 ### 2017-11-02 ~ Theo
 
