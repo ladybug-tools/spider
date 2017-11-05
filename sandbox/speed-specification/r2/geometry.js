@@ -83,6 +83,7 @@
 
 		const pathFunctions = [ getPathBox, getPathL, getPathT , getPathH ];
 
+		theBuilding.storeys = parseInt( inpFloors.value, 10 );
 		theBuilding.storeyHeight = parseInt( inpHeight.value, 10 );
 		theBuilding.orientation = parseInt( inpOrientation.value, 10 );
 
@@ -119,6 +120,7 @@
 		let len = theBuilding.length;
 		let wid = theBuilding.width;
 		let flr = theBuilding.storeys ;
+		let thk = theBuilding.thickness;
 
 		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
 //console.log( 'area', area  );
@@ -163,14 +165,18 @@
 
 			inpLength.value = len;
 
-		} 
+		}
+
+
+
 
 		const pathBox = [ v2( len, 0 ), v2( 0, 0 ), v2( 0, wid ), v2( len, wid ), v2( len, 0 ) ];
 
 		divValidation.innerHTML = 
 			'<p>Validations</p>' +
 			'<p>Calculated Area: ' + flr * ( len * wid ) + '<p>' +
-			'<p>[flr * ( len * wid )]</p>' +
+			'<p>Equations used</p>' +
+			'<p>Area = flr * ( len * wid ) </p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
 		'';
 
@@ -236,6 +242,12 @@
 
 			inpLength.value = len;
 
+		} else if ( thk !== parseInt( inpThickness.value, 10 ) ) {
+
+			theBuilding.thickness = parseInt( inpThickness.value, 10 );
+
+
+
 		}
 
 		const pathL = [
@@ -252,7 +264,9 @@
 		divValidation.innerHTML = 
 			'<p>Validations</p>' +
 			'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
-			'<p>[ flr * ( thk * len + thk * ( wid - thk ) ) ]</p>' +
+			'<p>Equations used</p>' +
+			'<p>Area = numberOffloors * ( thickness * length + thickness * ( width - thickness ) )</p>' +
+			'<p>Width = ( ( area - thickness * length ) / thickness + thickness ) / numberOfFloors</p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
 		'';
 
@@ -333,7 +347,8 @@
 		divValidation.innerHTML = 
 			'<p>Validations T Shape</p>' +
 			'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
-			'<p>[ flr * ( thk * len + thk * ( wid - thk ) ) ]</p>' +
+			'<p>Equations used</p>' +
+			'<p>Area = flr * ( thk * len + thk * ( wid - thk ) ) </p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
 		'';
 
@@ -417,7 +432,8 @@
 		divValidation.innerHTML = 
 			'<p>Validations - H Shape</p>' +
 			'<p>Calculated Area: ' + ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) + '</p>' +
-			'<p>[ ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) ]</p>' +
+			'<p>Equations used</p>' +
+			'<p>Area = ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) </p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
 		'';
 
