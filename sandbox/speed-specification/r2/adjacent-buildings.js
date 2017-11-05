@@ -94,6 +94,7 @@
 	}
 
 
+
 	function toggleVisibility( index ){
 
 		const building = scene.getObjectByName( 'building' + index );

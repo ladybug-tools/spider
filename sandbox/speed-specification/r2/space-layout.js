@@ -5,7 +5,6 @@
 
 	function initSpaceLayoutInputFields() {
 
-
 		selShape.selectedIndex = 0;
 
 		inpFloorStart.min = 1;
@@ -21,6 +20,7 @@
 	}
 
 
+
 	function onShapeChangeUpdateLayout(){
 
 		imgShape.src = '../images/' + selShape.value;
@@ -33,7 +33,6 @@
 		const zonesInShape = zonesPerShapes[ selShape.selectedIndex ];
 		let txt = '';
 
-
 		for ( let i = 0; i < zonesInShape; i++ ) {
 
 			txt += '<p>Zone: ' + ( i + 1 ) + ' <select id=inpZone' + i + ' onchange=updateZones(); >' + options + '</select></p>';
@@ -42,11 +41,11 @@
 
 		divZones.innerHTML = txt;
 
-		theBuilding.floors = [];
+		theBuilding.floorZones = [];
 
 		for ( let i = 0; i < theBuilding.storeys; i++ ) {
 
-			zones = [];
+			const zones = [];
 
 			for ( let j = 0; j < zonesInShape[ selShape.selectedIndex ]; j++ ) {
 
@@ -55,7 +54,7 @@
 
 			}
 
-			theBuilding.floors.push( zones );
+			theBuilding.floorZones.push( zones );
 
 		}
 
@@ -119,7 +118,7 @@
 
 		for ( let i = inpFloorStart.value - 1; i <= inpFloorEnd.value - 1; i++ ) {
 
-			const floor = theBuilding.floors[ i ];
+			const floor = theBuilding.floorZones[ i ];
 
 			for ( let j = 0; j < zonesInShape; j++ ) {
 
@@ -130,14 +129,14 @@
 
 		}
 
-//console.log( 'theBuilding.floors', theBuilding.floors );
+//console.log( 'theBuilding.floorZones', theBuilding.floorZones );
 
 		const types = [];
 		const counts = [];
 
 		for ( let i = 0; i < theBuilding.storeys; i++ ) {
 
-			floor = theBuilding.floors[ i ];
+			floor = theBuilding.floorZones[ i ];
 
 			for ( let j = 0; j < zonesInShape; j++ ) {
 

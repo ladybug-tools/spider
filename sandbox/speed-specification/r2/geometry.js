@@ -177,9 +177,9 @@
 			'<p>Calculated Area: ' + flr * ( len * wid ) + '<p>' +
 			'<p>Equations used</p>' +
 			'<p>Area = flr * ( len * wid ) </p>' +
+			'<p>Width = area / ( length * numberOfFloors ) </p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
 		'';
-
 
 		divThickness.style.display = 'none';
 
@@ -244,9 +244,14 @@
 
 		} else if ( thk !== parseInt( inpThickness.value, 10 ) ) {
 
-			theBuilding.thickness = parseInt( inpThickness.value, 10 );
+			thk = parseInt( inpThickness.value, 10 );
+			theBuilding.thickness = thk;
 
+			wid = ( ( area - thk * len ) / thk + thk ) / flr;
 
+// locks up the sliders
+//			theBuilding.width = wid;
+//			inpWidth.value = wid;
 
 		}
 
@@ -330,6 +335,17 @@
 
 			inpLength.value = len;
 
+		} else if ( thk !== parseInt( inpThickness.value, 10 ) ) {
+
+			thk = parseInt( inpThickness.value, 10 );
+			theBuilding.thickness = thk;
+
+			wid = ( ( area - thk * len ) / thk + thk ) / flr;
+
+// locks up the sliders
+//			theBuilding.width = wid;
+//			inpWidth.value = wid;
+
 		}
 
 		const pathT = [
@@ -411,6 +427,17 @@
 
 			inpLength.value = len;
 
+		} else if ( thk !== parseInt( inpThickness.value, 10 ) ) {
+
+			thk = parseInt( inpThickness.value, 10 );
+			theBuilding.thickness = thk;
+
+			wid = ( area - thk * ( len - 2 * thk ) ) / ( 2 * thk * flr );
+
+// locks up the sliders
+//			theBuilding.width = wid;
+//			inpWidth.value = wid;
+
 		}
 
 		const pathH = [
@@ -434,6 +461,7 @@
 			'<p>Calculated Area: ' + ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) + '</p>' +
 			'<p>Equations used</p>' +
 			'<p>Area = ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) </p>' +
+			'<p>Width = ( area - thk * ( len - 2 * thk ) ) / ( 2 * thk * numberOfFloors ) </p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
 		'';
 
