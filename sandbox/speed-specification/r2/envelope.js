@@ -2,10 +2,21 @@
 
 	function initEnvelopeInputFields() {
 
-		wwr.min = 1;
-		wwr.max = 100;
-		wwr.value = 40;
+		inpWwr.min = 1;
+		inpWwr.max = 100;
+		inpWwr.value = 40;
 
+		inpOverhangDepth.min = 0;
+		inpOverhangDepth.max = 10;
+		inpOverhangDepth.value = 0;
+		inpOverhangDepth.step = 0.5;
+
+		inpFinDepth.min = 0;
+		inpFinDepth.max = 10;
+		inpFinDepth.value = 0;
+		inpFinDepth.step = 0.5;
+
+/*
 		wwrs.min = 1;
 		wwrs.max = 100;
 		wwrs.value = 40;
@@ -30,10 +41,24 @@
 		numWindows.max = 10;
 		numWindows.value = 3;
 
-		selWindow.innerHTML =
+*/
+
+		selWindowType.innerHTML =
 			'<option>Window Type 1</option>' +
 			'<option>Window Type 2</option>' +
 			'<option>Window Type 3</option>' +
 		'';
+
+	}
+
+
+	function updateOpenings() {
+
+		theBuilding.wwr = parseInt( inpWwr.value, 10 );
+		theBuilding.overhangDepth = parseFloat( inpOverhangDepth.value );
+		theBuilding.finDepth = parseFloat( inpFinDepth.value );
+		theBuilding.windowType = selWindowType.value;
+
+//console.log( 'theBuilding', theBuilding );
 
 	}

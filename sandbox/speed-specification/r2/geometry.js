@@ -44,7 +44,7 @@
 			'<option value=h-shape.png >H-Shape</option>' +
 		'';
 
-//		selShape.selectedIndex = 0;
+//		selShape.selectedIndex = -1;
 
 		selMassing.innerHTML =
 			'<option>Generator 1</option>' +

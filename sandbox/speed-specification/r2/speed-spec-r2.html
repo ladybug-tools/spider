@@ -171,20 +171,27 @@
 
 			<table>
 				<tr>
-					<td>building wwr</td><td>window preportions</td><td>wwrs</td><td>wwre</td><td>wwrw</td><td>wwrn</td><td># of Windows</td><td>Overhang Depth</td><td>Fin Depth</td>
+					<td>building wwr %</td><td>Overhang Depth</td><td>Fin Depth</td>
 				</tr>
 
 				<tr>
-					<td><input type=number id=wwr oninput=updateShape(this);></td>
+					<td><input type=number id=inpWwr onchange=updateOpenings(); ></td>
+					<td><input type=number id=inpOverhangDepth onchange=updateOpenings(); ></td>
+					<td><input type=number id=inpFinDepth onchange=updateOpenings(); ></td>
+				</tr>
+
+<!--
+
+<td>window proportions</td><td>wwrs</td><td>wwre</td><td>wwrw</td><td>wwrn</td><td># of Windows</td>
+
 					<td><input type=number id=windowPreportions oninput=updateShape(this);></td>
 					<td><input type=number id=wwrs oninput=updateShape(this);></td>
 					<td><input type=number id=wwre oninput=updateShape(this);></td>
 					<td><input type=number id=wwrw oninput=updateShape(this);></td>
 					<td><input type=number id=wwrn oninput=updateShape(this);></td>
 					<td><input type=number id=numWindows oninput=updateShape(this);></td>
-					<td><input type=number id=overhangDepth oninput=updateShape(this);></td>
-					<td><input type=number id=finDepth oninput=updateShape(this);></td>
-				</tr>
+
+-->
 
 			</table>
 
@@ -195,7 +202,7 @@
 				</tr>
 
 				<tr>
-					<td><select id=selWindow ></select></td>
+					<td><select id=selWindowType onchange=updateOpenings(); ></select></td>
 				</tr>
 
 			</table>
