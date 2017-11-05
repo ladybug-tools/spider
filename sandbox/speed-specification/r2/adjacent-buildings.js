@@ -18,9 +18,6 @@
 		text = 
 			'<h2>Adjacent Buildings</h2>' +
 			'<table>' +
-		'';
-
-		text +=
 			'<tr>' +
 				'<td></td>' +
 				'<td>' + addCheckbox( adjacentBuildings[ 0 ], 1 ) + '</td>' +
