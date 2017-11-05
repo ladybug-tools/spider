@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "speed demo adjacent buildings" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-05" >
+
+<title>SPEED Spec R2</title>
+
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+	body { font: 12pt monospace; margin: 0 auto;  }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	canvas { border: 1px solid black; }
+
+	input, input[ type = number ] { width: 50px; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	table { border-spacing: 20px; }
+
+	input[ type = number ] { width: 50px; }
+	td { text-align: right; }
+
+	.checkbox { text-align: right; }
+	.column { display: inline-block; line-height: 30px; width: 150px;}
+	.floatright { float: right; }
+
+	#canvasPerspective { position: absolute; right: 100px; top: 50%; }
+	#canvasOrtho { position:absolute; right: 100px; top: 5%;}
+
+	#detSpeedMenu { margin: 0 20px; position: absolute; }
+	#divHeader { left: 0; margin: 0 auto; position: absolute; max-width: 800px; right: 0; top: 0; }
+
+	#divDimensions, #divDimensions div { margin: 20px; width: 250px; }
+
+	#divLeftColumn, #divRightColumn { border: 0px solid red; display: inline-block; margin: 0 0px; vertical-align: top; width: 300px; }
+
+	#divRightColumn { text-align: right; }
+	#divRightColumn select { width: 50px; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
+<script src = "init-threejs.js" ></script>
+<script src = "menu-adjacent-buildings.js" ></script>
+<script src = "geometry.js" ></script>
+<script src = "envelope.js" ></script>
+<script src = "space-layout.js" ></script>
+<script src = "export-gbxml.js" ></script>
+
+
+
+	<details id = "detSpeedMenu" open >
+
+		<summary>toggle menu</summary>
+
+		<h2>
+
+			<a href="./index.html" target=_top >&#x2302;</a> &raquo;
+			SPEED Spec R2
+
+		</h2>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Adjacent Buildings</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Geometry</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Envelope</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Space Layout</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Export gbXML</button></p>
+
+	</details>
+
+
+	<div id = "divHeader" >
+
+		<h1 id = "title" >
+
+			<a href='' >Site Content</a>
+			<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/adjacent-buildings.html target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+
+		</h1>
+
+		<div id = "divWelcome" >Howdy! Welcome to SPEED Spec R2</div>
+
+
+		<div id = "divAdjacentBuildings" ></div>
+
+
+		<div id = "divGeometry" >
+
+			<h2>Geometry</h2>
+
+			<p><i>Select a shape...</i></p>
+
+			<table>
+
+				<tr>
+					<td>Building Area</td><td># of Floors</td><td>Floor Area</td><td>Floor Height</td><td># of Footprint Shapes</td>
+				</tr>
+
+				<tr>
+					<td><input type=number id=inpArea step=50 onchange=updateShape(); ></td>
+					<td><input type=number id=inpFloors onchange=updateShape();></td>
+					<td><output type=number id=outFloorArea ></output></td>
+					<td><input type=number id=inpHeight onChange=updateShape(); ></td>
+					<td><input type=number id=inpShapeCount ></td>
+				</tr>
+
+			</table>
+
+			<table>
+
+				<tr>
+					<td>Footprint Shape</td><td>Massing Generator</td><td>Perimeter Depth</td><td>Orientation</td>
+				</tr>
+
+				<tr>
+					<td><select id=selShape size=4 onchange=updateShape(); ></select></td><td><select id=selMassing ></select></td><td><input type=number id=inpPerimeterDepth ></td><td><input type=number id=inpOrientation oninput=updateShape(this); ></td>
+				</tr>
+
+			</table>
+
+			<div id=divDimensions >
+
+				<div>Footprint dimensions</div>
+
+				<div>
+					Length <output id=outLength class=floatright ></output>
+					<input type=range id=inpLength oninput=updateShape(); >
+				</div>
+
+				<div>
+					Width <output id=outWidth class=floatright ></output>
+					<input type=range id=inpWidth oninput=updateShape(); >
+				</div>
+
+				<div id=divThickness >
+					Thickness <output id=outThickness class=floatright ></output>
+					<input type=range id=inpThickness oninput=updateShape(); >
+				</div>
+
+				<div id=divValidation ></div>
+
+			</div>
+
+		</div>
+
+
+
+
+		<div id = "divEnvelope" >
+
+
+			<h2>Envelope</h2>
+
+			<table>
+				<tr>
+					<td>building wwr</td><td>window preportions</td><td>wwrs</td><td>wwre</td><td>wwrw</td><td>wwrn</td><td># of Windows</td><td>Overhang Depth</td><td>Fin Depth</td>
+				</tr>
+
+				<tr>
+					<td><input type=number id=wwr oninput=updateShape(this);></td>
+					<td><input type=number id=windowPreportions oninput=updateShape(this);></td>
+					<td><input type=number id=wwrs oninput=updateShape(this);></td>
+					<td><input type=number id=wwre oninput=updateShape(this);></td>
+					<td><input type=number id=wwrw oninput=updateShape(this);></td>
+					<td><input type=number id=wwrn oninput=updateShape(this);></td>
+					<td><input type=number id=numWindows oninput=updateShape(this);></td>
+					<td><input type=number id=overhangDepth oninput=updateShape(this);></td>
+					<td><input type=number id=finDepth oninput=updateShape(this);></td>
+				</tr>
+
+			</table>
+
+			<table>
+
+				<tr>
+					<td>Window Type</td>
+				</tr>
+
+				<tr>
+					<td><select id=selWindow ></select></td>
+				</tr>
+
+			</table>
+
+		</div>
+
+		<div id = "divSpaceLayout" >
+
+
+			<h2>Space Layout</h2>
+
+			<div id = "divLeftColumn" valign=top >
+
+				<h3>Space Type</h3>
+
+				<div id=divZones ></div>
+
+			</div>
+
+
+			<div id = "divRightColumn" >
+
+				<h3>Apply to floors</h3>
+
+				<p><input id=inpFloorStart type=number onchange=updateTypes() > to <input id=inpFloorEnd type=number onchange=updateTypes(); ></select></p>
+
+				<img id=imgShape width=100% />
+
+				<h3>Area Usage</h3>
+
+				<table id=tabUsage >
+
+				</table>
+
+			</div>
+
+		</div>
+
+
+
+		<div id = "divExportGbxml" >
+
+			<h2>Export gbXML</h2>
+
+			<p> 1. <button onclick=getBuildingData(); >Get building data</button></p>
+
+			<p> 2. <button onclick = checkGbxmlData(); >Check the data</button></p>
+
+			<p> 3. <button onclick = saveFile(); >Save building data to file</button> </p>
+
+		</div>
+
+
+	</div>
+
+
+
+	<canvas id="canvasPerspective" height=300 width=300 ></canvas>
+
+	<canvas id="canvasOrtho" height=300 width=300 ></canvas>
+
+<script>
+
+
+	init();
+
+	animateThreejs();
+
+	function init() {
+
+		initThreejs();
+
+		addThreejsHelpers();
+
+		initAdacentBuildingsInputFields();
+
+		addAjacentBuildings();
+
+		initGeometryInputFields();
+
+		initEnvelopeInputFields();
+
+		initSpaceLayoutInputFields();
+
+		onToggleSpeedMenu( divWelcome );
+
+	}
+
+
+
+	function onToggleSpeedMenu( that ) {
+
+
+		divWelcome.style.display = that.id === "divWelcome" ? '' : 'none';
+
+		divAdjacentBuildings.style.display = that.innerText === "Adjacent Buildings" ? '' : 'none';
+
+		divGeometry.style.display = that.innerText === "Geometry" ? '' : 'none';
+
+		divEnvelope.style.display = that.innerText === "Envelope" ? '' : 'none';
+
+		divSpaceLayout.style.display = that.innerText === "Space Layout" ? '' : 'none';
+
+		divExportGbxml.style.display = that.innerText === "Export gbXML" ? '' : 'none';
+
+	}
+
+
+</script>
+</body>
+</html>

@@ -1,128 +1,7 @@
-<!doctype html>
-<html lang = "en" >
-<head>
-<meta charset = "utf-8" >
-<meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "speed shape geometry" >
-<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-10-31" >
-<title>SPEED / Geometry</title>
-<style>
-
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
-	a { color: crimson; text-decoration: none; }
-	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
-
-	canvas { border: 1px solid black; }
-	select { width: 150px; }
-	table { border-spacing: 20px; width: 100%; }
-
-	input, input[ type = number ] { width: 50px; }
-
-	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
-	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
-	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
-
-
-	td { text-align: center; }
-	.checkbox { text-align: right; }
-	.column { display: inline-block; line-height: 30px; width: 150px;}
-	.floatright { float: right; }
-
-	#canvasPerspective { position:absolute; right: 100px; top: 50%; }
-	#canvasOrtho { position:absolute; left: 100px; top: 50%; }
-	#divDimensions, #divDimensions div { left: 0; margin: 20px auto; right: 0; width: 250px; }
-
-
-</style>
-</head>
-<body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
-
-	<div id = "header" >
-
-		<h1 id = "title" >
-			<a href="./index.html" target=_top >&#x2302;</a> &raquo;
-			<a href="" >Site Content</a>
-			<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/shape-geometry.html target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
-
-		</h1>
-
-		<h2>Geometry 2.1</h2>
-
-	</div>
-
-	<div id = "divInput" >
-
-		<table>
-
-			<tr>
-				<td>Building Area</td><td># of Floors</td><td>Floor Area</td><td>Floor Height</td><td># of Footprint Shapes</td>
-			</tr>
-
-			<tr>
-				<td><input type=number id=inpArea step=50 onchange=updateShape(); ></td>
-				<td><input type=number id=inpFloors onchange=updateShape();></td>
-				<td><output type=number id=outFloorArea ></output></td>
-				<td><input type=number id=inpHeight onChange=updateShape(); ></td>
-				<td><input type=number id=inpShapeCount ></td>
-			</tr>
-
-		</table>
-
-		<table>
-
-			<tr>
-				<td>Footprint Shape</td><td>Massing Generator</td><td>Perimeter Depth</td><td>Orientation</td>
-			</tr>
-
-			<tr>
-				<td><select id=selShape size=4 onchange=updateShape(); ></select></td><td><select id=selMassing ></select></td><td><input type=number id=inpPerimeterDepth ></td><td><input type=number id=inpOrientation oninput=updateShape(this); ></td>
-			</tr>
-
-		</table>
-
-		<div id=divDimensions >
-
-			<div>Footprint dimensions</div>
-
-			<div>
-				Length <output id=outLength class=floatright ></output>
-				<input type=range id=inpLength oninput=updateShape(); >
-			</div>
-
-			<div>
-				Width <output id=outWidth class=floatright ></output>
-				<input type=range id=inpWidth oninput=updateShape(); >
-			</div>
-
-			<div id=divThickness >
-				Thickness <output id=outThickness class=floatright ></output>
-				<input type=range id=inpThickness oninput=updateShape(); >
-			</div>
-
-			<div id=divValidation ></div>
-
-		</div>
-
-	</div>
-
-	<canvas id="canvasPerspective" height=300 width=300 ></canvas>
-
-	<canvas id="canvasOrtho"  height=300 width=300 ></canvas>
-
-	
-
-<script>
 
 
 	let theBuilding;
 
-	let gridHelper, axesHelper;
-	let renderer, camera, controls, scene;
-
-	let lightAmbient, lightDirectional, cameraHelper, axisHelper;
 
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
@@ -130,21 +9,7 @@
 	const d2r = pi / 180, r2d = 180 /pi;
 
 
-	init();
-
-	function init() {
-
-		initInputFields();
-
-		initThreejs();
-
-		animate();
-
-	}
-
-
-
-	function initInputFields(){
+	function initGeometryInputFields(){
 
 		theBuilding = {};
 		theBuilding.area = 5000;
@@ -173,13 +38,13 @@
 		inpShapeCount.value = 3;
 
 		selShape.innerHTML =
-			'<option>Box-Shape</option>' +
-			'<option>L-Shape</option>' +
-			'<option>T-Shape</option>' +
-			'<option>H-Shape</option>' +
+			'<option value=box-shape.png >Box-Shape</option>' +
+			'<option value=l-shape.png >L-Shape</option>' +
+			'<option value=t-shape.png >T-Shape</option>' +
+			'<option value=h-shape.png >H-Shape</option>' +
 		'';
 
-		selShape.selectedIndex = 0;
+//		selShape.selectedIndex = 0;
 
 		selMassing.innerHTML =
 			'<option>Generator 1</option>' +
@@ -213,69 +78,6 @@
 
 
 
-	function initThreejs() {
-
-		width = 300;
-		height = 300;
-
-		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
-		renderer.setClearColor( 0xffffff, 1 );
-		renderer.setSize( width, height );
-		renderer.shadowMap.enabled = true;
-
-		context1 = canvasPerspective.getContext( '2d' );
-		context2 = canvasOrtho.getContext( '2d' );
-
-		camera1 = new THREE.PerspectiveCamera( 40, width / height, 1, 1000 );
-		camera1.position.set( -80, -250, 200 );
-		camera1.up.set( 0, 0, 1 );
-
-		controls = new THREE.OrbitControls( camera1, canvasPerspective );
-		controls.maxDistance = 600;
-
-		camera2 = new THREE.OrthographicCamera( width / -3, width / 3, height / 3, height / - 3, 1, 1000 );
-		camera2.position.set( 0, 0, 100 );
-		camera2.up.set( 0, 0, 1 );
-
-		controls2 = new THREE.OrbitControls( camera2, canvasOrtho );
-
-		scene = new THREE.Scene();
-
-		lightAmbient = new THREE.AmbientLight( 0x444444 );
-		scene.add( lightAmbient );
-
-		const size = 100
-		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
-		lightDirectional.position.set( -size, size, size );
-		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
-		lightDirectional.castShadow = true;
-		scene.add( lightDirectional );
-
-
-		addHelpers();
-
-		updateShape();
-
-	}
-
-
-
-	function addHelpers( size = 200 ) {
-
-		scene.remove( gridHelper, axesHelper );
-
-		gridHelper = new THREE.GridHelper( size, size / 10 );
-		gridHelper.rotation.x = 0.5 * Math.PI;
-
-		axesHelper = new THREE.AxesHelper( size * 0.1 );
-		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
-		axesHelper.material.linewidth = 20;
-
-		scene.add( gridHelper, axesHelper );
-
-	}
-
-
 
 	function updateShape() {
 
@@ -304,6 +106,8 @@
 		outLength.value = theBuilding.length.toFixed();
 		outWidth.value = theBuilding.width.toFixed();
 		outThickness.value = theBuilding.thickness.toFixed();
+
+		onShapeChangeUpdateLayout();
 
 	}
 
@@ -611,7 +415,7 @@
 		];
 
 		divValidation.innerHTML = 
-			'<p>Valibations - H Shape</p>' +
+			'<p>Validations - H Shape</p>' +
 			'<p>Calculated Area: ' + ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) + '</p>' +
 			'<p>[ ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) ]</p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
@@ -647,24 +451,3 @@
 	}
 
 
-
-
-	function animate() {
-
-		requestAnimationFrame( animate );
-
-		renderer.autoClear = true;
-
-		controls.update();
-		renderer.render( scene, camera1 );
-		context1.drawImage( renderer.domElement, 0, 0 );
-
-		controls2.update();
-		renderer.render( scene, camera2 );
-		context2.drawImage( renderer.domElement, 0, 0 );
-
-	}
-
-</script>
-</body>
-</html>
