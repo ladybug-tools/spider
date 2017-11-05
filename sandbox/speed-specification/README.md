@@ -27,9 +27,13 @@ Issues
 ## Change Log
 
 * Index.html and read me updated
-* * Shape Geometry R2
+* Shape Geometry R2
 	* Shapes are centered
 	* Shapes display edges 
+	* Shapes area, number of floors, length, width, thickness, storeys and height mostly working for four shapes
+	* Shapes validation feedback added
+* Space Layout R1.2
+	* Most input in operation
 
 
 ### 2017-11-03 ~ Theo

@@ -10,6 +10,9 @@
 <style>
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
 	canvas { border: 1px solid black; }
 	select { width: 150px; }
 	table { border-spacing: 0px; width: 100%; }
@@ -29,7 +32,7 @@
 	#canvasPerspective { position:absolute; right: 100px; top: 50%; }
 	#canvasOrtho { position:absolute; left: 100px; top: 50%; }
 
-	#divLeftColumn, #divRightColumn { border: 0px solid red; display: inline-block; margin: 0 30px; vertical-align: top }
+	#divLeftColumn, #divRightColumn { border: 0px solid red; display: inline-block; margin: 0 0px; vertical-align: top; width: 300px; }
 
 	#divRightColumn { text-align: right; }
 	#divRightColumn select { width: 50px; }
@@ -44,12 +47,13 @@
 
 		<h1 id = "title" >
 
+			<a href="./index.html" target=_top >&#x2302;</a> &raquo;
 			<a href="" >Site Content</a>
 			<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/ target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
 
 		</h1>
 
-		<h2>Space Layout 1.1 </h2>
+		<h2>Space Layout 1.2</h2>
 
 	</div>
 
@@ -60,6 +64,23 @@
 		<h3>Space Type</h3>
 
 		<div id=divZones ></div>
+
+	</div>
+
+
+	<div id = "divRightColumn" >
+
+		<h3>Apply to floors</h3>
+
+		<p><input id=inpFloorStart type=number onchange=updateTypes() > to <input id=inpFloorEnd type=number onchange=updateTypes(); ></select></p>
+
+		<img id=imgShape width=100% />
+
+		<h3>Area Usage</h3>
+
+		<table id=tabUsage >
+
+		</table>
 
 		<hr>
 
@@ -78,31 +99,6 @@
 	</div>
 
 
-	<div id = "divRightColumn" >
-
-		<h3>Apply to floors</h3>
-
-		<p><input type=number value=1 > to <input type=number value=20 ></select></p>
-
-		<img id=imgShape width=220 />
-
-		<h3>Area Usage</h3>
-
-		<table>
-
-			<tr><td>Office-Private Office</td><td>60%</td></tr>
-
-			<tr><td>Office-Open Office</td><td>35%</td></tr>
-
-			<tr><td>Retail-Retail</td><td>15%</td></tr>
-
-			<tr><td>Total</td><td>100%</td></tr>
-
-		</table>
-
-	</div>
-
-
 
 <!--
 	<canvas id="canvasPerspective" height=300 width=300 ></canvas>
@@ -112,11 +108,13 @@
 
 <script>
 
+	let theBuilding;
+	const zonesPerShapes = [ 5, 7, 13, 9 ];
 
 	let gridHelper, axesHelper;
-	var renderer, camera, controls, scene;
+	let renderer, camera, controls, scene;
 
-	var lightAmbient, lightDirectional, cameraHelper, axisHelper;
+	let lightAmbient, lightDirectional, cameraHelper, axisHelper;
 
 
 	init();
@@ -130,6 +128,18 @@
 
 		selShape.selectedIndex = 0;
 
+		theBuilding = {};
+
+		theBuilding.storeys = 3;
+
+		inpFloorStart.min = 1;
+		inpFloorStart.max = theBuilding.storeys;
+		inpFloorStart.value = 1;
+
+		inpFloorEnd.min = 1;
+		inpFloorEnd.max = theBuilding.storeys;
+		inpFloorEnd.value = theBuilding.storeys;
+
 		onShapeChange();
 
 	}
@@ -140,19 +150,54 @@
 
 		imgShape.src = 'images/' + selShape.value;
 
-		const zonesPerShape = [ 5, 7, 13, 9 ];
-
 		const options = addSpaceTypeOptions();
-
+		const zonesInShape = zonesPerShapes[ selShape.selectedIndex ];
 		let txt = '';
 
-		for ( var i = 0; i < zonesPerShape[ selShape.selectedIndex ]; i++ ) {
 
-			txt += '<p>Zone: ' + ( i + 1 ) + ' <select id=inpZone' + i + ' >' + options + '</select></p>';
+		for ( let i = 0; i < zonesInShape; i++ ) {
 
-		} 
+			txt += '<p>Zone: ' + ( i + 1 ) + ' <select id=inpZone' + i + ' onchange=updateZones(); >' + options + '</select></p>';
+
+		}
 
 		divZones.innerHTML = txt;
+
+		theBuilding.floors = [];
+
+		for ( let i = 0; i < theBuilding.storeys; i++ ) {
+
+			zones = [];
+
+			for ( let j = 0; j < zonesInShape[ selShape.selectedIndex ]; j++ ) {
+
+				zone = document.getElementById( 'inpZone' + j );
+				zones.push( zone.value );
+
+			}
+
+			theBuilding.floors.push( zones );
+
+		}
+
+//console.log( 'theBuilding', theBuilding );
+
+		updateZones();
+
+	}
+
+
+
+	function updateTypes() {
+
+		const zonesInShape = zonesPerShapes[ selShape.selectedIndex ];
+
+		for ( var i = 0; i < zonesInShape; i++ ) {
+
+//			zone = document.getElementById( 'inpZone' + i );
+//			zone.selectedIndex = 0;
+
+		}
 
 	}
 
@@ -160,7 +205,7 @@
 
 	function addSpaceTypeOptions() {
 
-		optionTypes = [ 
+		const optionTypes = [
 			'Office-Open Office',
 			'Office-Private Office',
 			'Office-Storage',
@@ -188,6 +233,64 @@
 
 
 
+	function updateZones() {
+
+		const zonesInShape = zonesPerShapes[ selShape.selectedIndex ];
+		const zones = zonesInShape * theBuilding.storeys;
+
+		for ( let i = inpFloorStart.value - 1; i <= inpFloorEnd.value - 1; i++ ) {
+
+			const floor = theBuilding.floors[ i ];
+
+			for ( let j = 0; j < zonesInShape; j++ ) {
+
+				const zone = document.getElementById( 'inpZone' + j );
+				floor[ j ] = zone.value;
+
+			}
+
+		}
+
+//console.log( 'theBuilding.floors', theBuilding.floors );
+
+		const types = [];
+		const counts = [];
+
+		for ( let i = 0; i < theBuilding.storeys; i++ ) {
+
+			floor = theBuilding.floors[ i ];
+
+			for ( let j = 0; j < zonesInShape; j++ ) {
+
+				zone = floor[ j ];
+
+				if ( !types.includes( zone ) ) { 
+
+					types.push( zone );
+					counts.push( 0 );
+
+				};
+
+				counts[ types.indexOf( zone ) ] ++;
+
+			}
+
+		}
+
+//console.log( 'types', types );
+//console.log( 'counts', counts );
+
+		let txt = '';
+
+		for ( var i = 0; i < types.length; i++ ) {
+
+			txt += '<tr><td>' + types[ i ] + '</td><td>' + ( 100 * counts[ i ] / zones ).toFixed() + '%</td></tr>';
+
+		}
+
+		tabUsage.innerHTML = txt;
+
+	}
 
 
 
