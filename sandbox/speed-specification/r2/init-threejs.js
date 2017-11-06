@@ -14,6 +14,7 @@
 		renderer.setClearColor( 0xffffff, 1 );
 		renderer.setSize( width, height );
 		renderer.shadowMap.enabled = true;
+		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 		context1 = canvasPerspective.getContext( '2d' );
 		context2 = canvasOrtho.getContext( '2d' );
@@ -41,6 +42,8 @@
 		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
 		lightDirectional.position.set( -size, size, size );
 		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
 		lightDirectional.castShadow = true;
 		scene.add( lightDirectional );
 

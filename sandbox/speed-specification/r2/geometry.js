@@ -23,6 +23,8 @@
 		theBuilding.perimeterDepth = 15;
 
 
+		
+
 		inpArea.value = theBuilding.area;
 
 		inpFloors.min = 1;
@@ -128,8 +130,8 @@
 			const vertical = k * theBuilding.storeyHeight + 0.5 * theBuilding.storeyHeight;
 			const storey = k + 1;
 
-//			const mesh = createQlineMesh( building );
-			mesh = createShape();
+			mesh = createQlineMesh();
+//			mesh = createShape();
 			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			mesh.name = 'shape-' + selShape.value.toLowerCase() + '-story-' + ( k + 1 );
@@ -551,5 +553,211 @@
 		return mesh;
 
 	}
+
+
+
+
+	function createQlineMesh() {
+
+		const path = theBuilding.path;
+		const section = theBuilding.section;
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+
+		const len05 = len * 0.5;
+		const wid05 = wid * 0.5;
+const opacity = 90;
+		const material = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
+		const materialNormal = new THREE.MeshNormalMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false, } );
+		const materialShape = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
+
+		const vertices = [];
+		const shapePoints = [];
+
+		const geometry = new THREE.PlaneGeometry( 10, 10, section.length - 1, path.length - 1 );
+
+		const mesh = new THREE.Mesh( geometry, material );
+
+		for ( let i = 0; i < section.length; i++ ) {
+
+			vertices.push( offset ( mesh, path, section[ i ].x, section[ i ].y ) );
+
+		};
+
+
+//console.log( 'vertices', building, vertices );
+		for ( let i = 0, j = 0; i < path.length; i++ ) {
+
+			for ( let k = 0; k < section.length; k++ ) {
+
+				mesh.geometry.vertices[ j++ ] = vertices[ k ][ i ];
+
+			}
+
+			if ( i < path.length - 1 ) {
+
+// overhangs 
+				const hgt = theBuilding.storeyHeight; //pt1.distanceTo( pt3 );
+				const pt1 = vertices[ 0 ][ i ];
+				const pt2 = vertices[ 0 ][ i + 1 ];
+				const len = pt1.distanceTo( pt2 );
+				const vectorDelta = pt2.clone().sub( pt1 );
+				const angle = Math.atan2( vectorDelta.y, vectorDelta.x );
+
+				if ( theBuilding.overhangDepth > 0 ) {
+
+					const geoOver = new THREE.PlaneBufferGeometry( 1, 1 );
+					const over = new THREE.Mesh( geoOver, materialNormal );
+					over.scale.set( len * theBuilding.wwr / 100, theBuilding.overhangDepth, theBuilding.overhangDepth );
+					over.position.copy( vertices[ 1 ][ i ].clone().lerp( vertices[ 2 ][ i + 1 ].clone() , 0.5 ) );
+					over.position.x -= len05;
+					over.position.y -= wid05;
+					over.rotation.z = angle;
+					over.translateY( 0.5 * theBuilding.overhangDepth );
+					over.translateZ( 0.5 * hgt * theBuilding.wwr / 100 );
+					over.name = 'overhang';
+					mesh.add( over );
+
+				}
+
+				const geo = new THREE.PlaneBufferGeometry( len * theBuilding.wwr / 100, hgt * theBuilding.wwr / 100 );
+
+				const open = new THREE.Mesh( geo, materialNormal );
+				geo.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI * 0.5 ) );
+				open.position.copy( vertices[ 1 ][ i ].clone().lerp( vertices[ 2 ][ i + 1 ].clone(), 0.5 ) );
+				open.position.x -= len05;
+				open.position.y -= wid05;
+				open.rotation.z = angle;
+				open.translateY( 0.1 );
+				open.name = 'opening';
+				mesh.add( open );
+
+				shapePoints.push( pt2 );
+
+			}
+
+		}
+
+		const shape = new THREE.Shape( path );
+		const geometryShape = new THREE.ShapeGeometry( shape );
+		geometryShape.applyMatrix( new THREE.Matrix4().makeTranslation( -len05, -wid05, 0 ) );
+		const shapeMesh = new THREE.Mesh( geometryShape, materialShape );
+		shapeMesh.name = 'InteriorFloor';
+		mesh.add( shapeMesh );
+
+		mesh.geometry.computeFaceNormals();
+		mesh.geometry.computeVertexNormals();
+//		mesh.geometry.center();
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -len05, -wid05, 0 ) );
+
+		return mesh;
+
+	}
+
+
+
+	function offset( obj, points, offsetX, offsetY ) {
+
+// 2016-02-10
+		offsetX = -offsetX;
+		var offsetY = offsetY ? offsetY : 0;
+		var pt1, pt2, offsetPt1, offsetPt2, vector, angle;
+		var line, lines, vertices;
+		var pi05 = 0.5 * pi;
+		var pi2 = 2 * pi;
+		lines = [];
+
+		for ( var i = 0; i < points.length - 1; i++ ) {
+
+			pt1 = points[ i ];
+			pt2 = points[ i + 1 ];
+
+			vector = pt2.clone().sub( pt1 );
+			angle = Math.atan2( vector.y, vector.x );
+
+			offsetPt1 = v( pt1.x + offsetX * Math.cos( angle - pi05 ), pt1.y - offsetX * Math.sin( angle + pi05 ), 0 );
+			offsetPt2 = v( pt2.x + offsetX * Math.cos( angle - pi05 ), pt2.y - offsetX * Math.sin( angle + pi05 ), 0 );
+
+			line = new THREE.Line3( offsetPt1, offsetPt2 );
+			lines.push( line );
+
+/* debug
+			const geometry = new THREE.Geometry();
+			geometry.vertices = [ offsetPt1, offsetPt2 ];
+			const material = new THREE.LineBasicMaterial( { color: 'magenta' } );
+			const line = new THREE.Line( geometry, material );
+			line.position.y = -5;
+			obj.add( line );
+*/
+
+		}
+
+
+		if ( points[ 0 ].distanceTo( points[ points.length - 1 ] ) < 0.01 ) {
+
+			pt1 = intersectionTwoLines2( lines[ 0 ], lines [ lines.length - 1 ] );
+			pt2 = pt1;
+
+		} else {
+
+			pt1 = lines[ 0 ].start;
+			pt2 = lines[ lines.length - 1 ].end;
+
+		}
+
+		vertices = [ v( pt1.x, pt1.y, offsetY ) ];
+
+		for ( var i = 0; i < lines.length; i++ ) {
+
+			if ( i < lines.length - 1 ) {
+
+				var pt = intersectionTwoLines2( lines[ i ], lines [ i + 1 ] );
+
+			} else {
+
+				pt = pt2;
+
+			}
+
+			vertices.push( v( pt.x, pt.y, offsetY ) );
+
+		}
+
+// debug
+		const geometryLine = new THREE.Geometry();
+		geometryLine.vertices = vertices;
+		const materialLine = new THREE.LineBasicMaterial( { color: 'yellow' } );
+		const lineEdge = new THREE.Line( geometryLine, materialLine );
+		obj.add( lineEdge );
+
+
+		return vertices;
+
+	}
+
+
+
+	function intersectionTwoLines2( line1, line2 ) {
+
+// 2016-02-10
+// Thanks to http://jsfiddle.net/justin_c_rounds/Gd2S2/ && http://jsfiddle.net/user/justin_c_rounds/fiddles/
+
+		const ptA = line1.start;
+		const ptB = line1.end;
+		const ptC = line2.start;
+		const ptD = line2.end;
+
+		const denominator = ( ptD.y - ptC.y ) * ( ptB.x - ptA.x ) - ( ptD.x - ptC.x ) * ( ptB.y - ptA.y );
+
+		if ( denominator == 0 ) { return; }
+
+		const a = ( ( ptD.x - ptC.x ) * ( ptA.y - ptC.y ) - ( ptD.y - ptC.y ) * ( ptA.x - ptC.x ) ) / denominator;
+		const x = ptA.x + ( a * ( ptB.x - ptA.x ) );
+		const y = ptA.y + ( a * ( ptB.y - ptA.y ) );
+
+		return v( x, y, 0 );
+
+	}
+
 
 
