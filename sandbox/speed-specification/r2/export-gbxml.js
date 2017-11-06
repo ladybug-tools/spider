@@ -54,9 +54,31 @@
 		campus.wwr = 40 + Math.floor( 40 * Math.random() );
 		campus.zipcodeOrPostalCode = '94111';
 
+		theBuilding.spaces = [];
+		theBuilding.zones = [];
+		theBuilding.name = theBuilding.mesh.name;
+
+		buildings = getBuildings();
 
 	}
 
+	function getBuildings() {
+
+		let buildings = [];
+
+		for ( let child of scene.children ) {
+
+			if ( child.name.includes( 'uilding' ) ) {
+
+				buildings.push( child );
+
+			}
+
+		}
+
+		return buildings;
+
+	}
 
 	function getBuildingData() {
 
@@ -119,7 +141,7 @@
 
 		textMenu += '\t\t</Building>\n';
 
-		textMenu += getSurfaces( buildings );
+		textMenu += getSurfaces( theBuilding );
 
 		zonesText = getZones( campus );
 
@@ -132,33 +154,14 @@
 			'</gbXML>\n' +
 		'';
 
-		if ( parent && parent.ifrThree ) {
-
-			parent.divContents.innerHTML =
-
-				'gbXML data\n' +
-				'area check: ' + campus.areaCheck + '\n' +
-				'<textarea id=buildingData >' +
-				textMenu + '</textarea>'
-
-			'';
-
-			parent.divContents.style.cssText = 'border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0;';
-			parent.divContents.style.display = '';
-			parent.viewContents();
-
-		} else {
-
-		scope.divScreenText.innerHTML =
+		divExportContent.innerHTML =
 
 			'gbXML data<br>' +
 			'area check: ' + campus.areaCheck + '<br>' +
-			'<textarea id=buildingData >' +
+			'<textarea id=buildingData rows=50 style=height:500px;tab-size:4;width:100%; >' +
 			textMenu + '</textarea>'
 
 		'';
-
-		}
 
 	}
 
@@ -193,8 +196,8 @@
 //console.log( '', campus );
 
 		let textSpace = '';
-		const spaces = campus.spaces;
-		const zones = campus.zones;
+		const spaces = theBuilding.spaces;
+		const zones = theBuilding.zones;
 		let spaceId = 1;
 
 console.log( 'theBuilding.mesh.children', theBuilding.mesh );
@@ -205,7 +208,7 @@ console.log( 'theBuilding.mesh.children', theBuilding.mesh );
 			const spacesPerStorey = vertices.length / 5 - 1;
 			let storey = i + 1;
 			let pathInterior = [];
-			campus.areaCheck = 0;
+			theBuilding.areaCheck = 0;
 
 			for ( var j = 0; j < spacesPerStorey; j++ ) {
 
@@ -228,12 +231,12 @@ console.log( 'theBuilding.mesh.children', theBuilding.mesh );
 
 				const area = vertex1.distanceTo( vertex2 ) * campus.perimeterDepth + campus.perimeterDepth  * campus.perimeterDepth ;
 				const volume = area * campus.storeyHeight;
-				campus.areaCheck += area;
+				theBuilding.areaCheck += area;
 
 				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space',
 					area: area, storey: storey, volume: volume, zone: spaceId } );
 
-				campus.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
+				theBuilding.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
 
 				spaceId ++;
 
@@ -248,18 +251,18 @@ console.log( 'path', pathInterior );
 
 			const area = Math.abs( THREE.ShapeUtils.area( pathInterior ) );
 			const volume = area * campus.storeyHeight;
-			campus.areaCheck += area;
+			theBuilding.areaCheck += area;
 
 			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space',
 				area: area, storey: storey, volume: volume, zone: spaceId } );
 
-			campus.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
+			theBuilding.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
 
 			spaceId ++;
 
 		}
 
-		console.log( 'areaCheck', campus.areaCheck );
+		console.log( 'areaCheck', theBuilding.areaCheck );
 
 		for ( var j = 0; j < spaces.length; j++ ) {
 
@@ -289,13 +292,13 @@ console.log( 'path', pathInterior );
 
 
 
-	function getZones( campus ) {
+	function getZones() {
 
 		let textZones = '';
 
-		for ( let i = 0; i < campus.zones.length; i++ ) {
+		for ( let i = 0; i < theBuilding.zones.length; i++ ) {
 
-			const zone = campus.zones[ i ];
+			const zone = theBuilding.zones[ i ];
 
 			textZones +=
 				'\t<Zone id="addNodezone-' + ( i + 1 ) + '" >\n' +
@@ -314,16 +317,15 @@ console.log( 'path', pathInterior );
 
 
 
-	function getSurfaces( buildings ) {
+	function getSurfaces() {
 
 		let textSurfaces = '';
 
-		for ( let i = 0; i < buildings.children.length; i++ ) {
+		for ( let i = 0; i < buildings.length; i++ ) {
 
-			aBuilding = buildings.children[ i ];
-
-			if ( aBuilding.name !== selObject.value ) {
-//console.log( '', aBuilding );
+			aBuilding = buildings[ i ];
+console.log( '', aBuilding );
+			if ( aBuilding.name !== 'theBuilding' ) {
 
 				textSurfaces += getSurfacesAdjacentBuildings( aBuilding );
 
@@ -342,7 +344,7 @@ console.log( 'path', pathInterior );
 
 
 
-	function getSurfacesTheBuilding( theBuilding ) {
+	function getSurfacesTheBuilding() {
 //console.log( 'theBuilding', theBuilding.children[ 0 ] );
 
 		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
@@ -350,15 +352,15 @@ console.log( 'path', pathInterior );
 
 		let textSurfacesBits = '';
 
-		let storeys = campus.storeys;
+		let storeys = 1; //campus.storeys;
 		let surfaceId = 1;
 		let spaceId = 1; // zoneId === spaceId
 		let quad;
-		let firstStoreyId = campus.useSIUnitsForResults ? 0 : 1;
+		let firstStoreyId = 1; //campus.useSIUnitsForResults ? 0 : 1;
 
 		for ( let i = 0; i < storeys; i++ ) {
-
-			const meshFloor = theBuilding.children[ i ];
+console.log( 'iimmmmm', storeys, theBuilding.mesh  );
+			const meshFloor = theBuilding.mesh.children[ i ];
 			const vertices = meshFloor.geometry.vertices;
 			const spacesPerStorey = vertices.length / 5 - 1;
 			const path = [];
@@ -838,16 +840,7 @@ console.log( 'path', pathInterior );
 
 		let blob;
 
-		if ( parent && parent.ifrThree ) {
-
-			blob = new Blob( [ parent.buildingData.value ] );
-//console.log( 'parent.buildingData', parent.buildingData.value );
-
-		} else {
-
-			blob = new Blob( [ scope.buildingData.value ] );
-
-		}
+		blob = new Blob( [ buildingData.value ] );
 
 		let a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );

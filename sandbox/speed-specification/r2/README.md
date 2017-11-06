@@ -22,9 +22,11 @@ Clicking the title of the Speed Spec script reloads the page.
 
 As with any _beta_ script, it's good practice to reload the script frequently. The more you reload, the less you crash. The less you crash, the more you can explore. The more you explore, the more you can find things you like.
 
+
 ### Octocat (GitHub) logo is link to source code
 
 Clicking the Octocat icon should take to to the relevant source code or read me file on GitHub
+
 
 ### Five buttons on left Menu
 
@@ -32,15 +34,17 @@ Clicking any of the five buttons causes a different page of data input to displa
 
 Each of the five buttons also has a related JavaScript file. The 'Space Layout' button is connected to 'space-layout.js' and so on.
 
-There is also a sixth JavaScript file that loads and intitiates the [Three.js]( https://threejs.org ) library. This library is used to display the the 3D data inside of the two <canvas' tags on the right side of the screen.
+There is also a sixth JavaScript file that loads and intitiates the [Three.js]( https://threejs.org ) library. This library is used to display the the 3D data inside of the two ```<canvas>``` tags on the right side of the screen.
 
-Clicking any of the buttons toggles on the display of its ```<div>``` and turns off the display of the other.
+Clicking any of the five buttons toggles on the display of its ```<div>``` and turns off the display of the other. This interaction along with the various inits is handled in the primary HML file.
+
 
 ### Script data
 
 All significant session data is stored in JavaScript objects inside the Three.js session embedded in the canvas tags.
 
 Two variables: 'campus' and 'theBuilding' hold most of the relevant data.
+
 
 ### Geometry.js
 
@@ -65,6 +69,7 @@ The task of this script is to take the data from the various inputs and generate
 The intent is to be able to take the numeric data inputs and translate the directly into gbXML. Currently, however, the gbXML export code does rely on the generated 3D visualization for some aspects of its data input  
 
 
+
 ### Issue: 2D shape generation
 
 The primary real-time number crunching for shape generation arises from the intention to keet the total area of the shape in square or cubic units constant while updating the length, width, number of storeys and 'thickness' of a building or updating the area and having the other parameters update as one would anticipate - ie not too long or short. This generates 5! or 120 interactions to be considered for each of four selected shapes. There are other parameters involved - such as the angle of orientation of a shape - but none of these interact with the area as the previously mentioned variables do.
@@ -81,7 +86,6 @@ In the current code base there is much duplication of code for the generation of
 The next generation of these scripts should proably be based on the idea that the numeric data inputs are directly translated into gbXML at run time and all dta visualization is carried out by a high-speed fully-featured gbXML viewer.
 
  
-
 
 ### Coding style
 
