@@ -49,6 +49,8 @@
 			'<option>Window Type 3</option>' +
 		'';
 
+		updateOpenings();
+
 	}
 
 
@@ -61,4 +63,5 @@
 
 //console.log( 'theBuilding', theBuilding );
 
+		if ( theBuilding.shape ) { updateShape(); }
 	}

@@ -23,8 +23,6 @@
 		theBuilding.perimeterDepth = 15;
 
 
-		
-
 		inpArea.value = theBuilding.area;
 
 		inpFloors.min = 1;
@@ -130,7 +128,7 @@
 			const vertical = k * theBuilding.storeyHeight + 0.5 * theBuilding.storeyHeight;
 			const storey = k + 1;
 
-			mesh = createQlineMesh();
+			mesh = createQlineMesh( k );
 //			mesh = createShape();
 			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
@@ -141,12 +139,7 @@
 
 		}
 
-//		theBuilding.mesh = createShape();
-
 		theBuilding.mesh.name = 'theBuilding';
-//		theBuilding.mesh.position.z =  0.5 * theBuilding.storeyHeight * theBuilding.storeys;
-//		theBuilding.mesh.rotation.z = - d2r * theBuilding.orientation;
-
 		scene.add( theBuilding.mesh );
 
 		outFloorArea.value = Math.round( theBuilding.area / theBuilding.storeys ).toLocaleString();
@@ -557,7 +550,7 @@
 
 
 
-	function createQlineMesh() {
+	function createQlineMesh( storey ) {
 
 		const path = theBuilding.path;
 		const section = theBuilding.section;
@@ -566,10 +559,12 @@
 
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
+
 const opacity = 90;
-		const material = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
-		const materialNormal = new THREE.MeshNormalMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false, } );
-		const materialShape = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
+
+		const material = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, flatShading: true, transparent: true, wireframe: false } );
+		const materialNormal = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false, } );
+		const materialShape = new THREE.MeshPhongMaterial( { color: 0x000000, opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
 
 		const vertices = [];
 		const shapePoints = [];
@@ -585,7 +580,8 @@ const opacity = 90;
 		};
 
 
-//console.log( 'vertices', building, vertices );
+//console.log( 'vertices', vertices );
+
 		for ( let i = 0, j = 0; i < path.length; i++ ) {
 
 			for ( let k = 0; k < section.length; k++ ) {
@@ -598,11 +594,13 @@ const opacity = 90;
 
 // overhangs 
 				const hgt = theBuilding.storeyHeight; //pt1.distanceTo( pt3 );
-				const pt1 = vertices[ 0 ][ i ];
-				const pt2 = vertices[ 0 ][ i + 1 ];
+				const pt1 = vertices[ 1 ][ i ];
+				const pt2 = vertices[ 1 ][ i + 1 ];
 				const len = pt1.distanceTo( pt2 );
 				const vectorDelta = pt2.clone().sub( pt1 );
 				const angle = Math.atan2( vectorDelta.y, vectorDelta.x );
+
+//theBuilding.overhangDepth = 10;
 
 				if ( theBuilding.overhangDepth > 0 ) {
 
@@ -632,6 +630,15 @@ const opacity = 90;
 				open.name = 'opening';
 				mesh.add( open );
 
+
+				if ( storey === 0 ) {
+
+					placard = drawPlacard( 'angle ' + ( r2d * angle ), 0.1, 120, open.position.x, open.position.y, 40 );
+					mesh.add( placard );
+
+				}
+
+// needed for export?
 				shapePoints.push( pt2 );
 
 			}
