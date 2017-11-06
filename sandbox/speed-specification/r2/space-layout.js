@@ -5,8 +5,6 @@
 
 	function initSpaceLayoutInputFields() {
 
-//		selShape.selectedIndex = 0;
-
 		inpFloorStart.min = 1;
 		inpFloorStart.max = theBuilding.storeys;
 		inpFloorStart.value = 1;
@@ -14,8 +12,6 @@
 		inpFloorEnd.min = 1;
 		inpFloorEnd.max = theBuilding.storeys;
 		inpFloorEnd.value = theBuilding.storeys;
-
-//		onShapeChangeUpdateLayout();
 
 	}
 

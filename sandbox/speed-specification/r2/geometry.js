@@ -85,7 +85,7 @@
 
 		const pathFunctions = [ getPathBox, getPathL, getPathT , getPathH ];
 
-		theBuilding.storeys = parseInt( inpFloors.value, 10 );
+//		theBuilding.storeys = parseInt( inpFloors.value, 10 );
 		theBuilding.storeyHeight = parseInt( inpHeight.value, 10 );
 		theBuilding.orientation = parseInt( inpOrientation.value, 10 );
 
@@ -174,6 +174,8 @@
 		let wid = theBuilding.width;
 		let flr = theBuilding.storeys ;
 		let thk = theBuilding.thickness;
+
+//console.log( 'flr', flr, inpFloors.value );
 
 		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
 //console.log( 'area', area  );
