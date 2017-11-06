@@ -79,7 +79,9 @@
 
 
 
-	function updateShape() {
+	function updateShape( ok ) {
+
+		if ( ok !== 'OK' && !theBuilding.shape ) { alert( 'Please select a shape first. '); return; };
 
 		const pathFunctions = [ getPathBox, getPathL, getPathT , getPathH ];
 
@@ -87,19 +89,61 @@
 		theBuilding.storeyHeight = parseInt( inpHeight.value, 10 );
 		theBuilding.orientation = parseInt( inpOrientation.value, 10 );
 
-		let mesh = theBuilding.mesh;
+		const rotation = - d2r * theBuilding.orientation;
+		const storeys = theBuilding.storeys;
+		const height = theBuilding.storeyHeight;
+
+//		let mesh = theBuilding.mesh;
 
 		scene.remove( theBuilding.mesh );
+
+		if ( theBuilding.mesh ) {
+
+			theBuilding.mesh.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+				if ( child.texture ) { child.texture.dispose(); }
+
+			} );
+
+		}
+
+		theBuilding.section = updateSection();
 
 		const pathFunction = pathFunctions[ selShape.selectedIndex ];
 		theBuilding.path = pathFunction();
 
 		theBuilding.shape = selShape[ selShape.selectedIndex ];
-		theBuilding.mesh = createShape();
+
+		theBuilding.mesh = new THREE.Object3D();
+
+		for ( var k = 0; k < theBuilding.storeys; k++ ) {
+
+			const vertical = k * theBuilding.storeyHeight + 0.5 * theBuilding.storeyHeight;
+			const storey = k + 1;
+
+//			const mesh = createQlineMesh( building );
+			mesh = createShape();
+			mesh.position.z = vertical;
+			mesh.rotation.z = rotation;
+			mesh.name = 'shape-' + selShape.value.toLowerCase() + '-story-' + ( k + 1 );
+			mesh.userData.storey = k;
+			mesh.castShadow = mesh.receiveShadow = true;
+			theBuilding.mesh.add( mesh );
+
+		}
+
+//		theBuilding.mesh = createShape();
 
 		theBuilding.mesh.name = 'theBuilding';
-		theBuilding.mesh.position.z =  0.5 * theBuilding.storeyHeight * theBuilding.storeys;
-		theBuilding.mesh.rotation.z = - d2r * theBuilding.orientation;
+//		theBuilding.mesh.position.z =  0.5 * theBuilding.storeyHeight * theBuilding.storeys;
+//		theBuilding.mesh.rotation.z = - d2r * theBuilding.orientation;
 
 		scene.add( theBuilding.mesh );
 
@@ -113,6 +157,20 @@
 	}
 
 
+	function updateSection() {
+
+		const width = theBuilding.perimeterDepth;
+		const height = theBuilding.storeyHeight;
+
+		const section = [
+
+			v2( -width, 0 ), v2( 0, 0 ), v2( 0, height ), v2( -width, height ), v2( -width, 0 )
+
+		];
+
+		return section;
+
+	}
 
 	function getPathBox() {
 
@@ -478,7 +536,7 @@
 		let shape;
 
 		shape = new THREE.Shape( theBuilding.path );
-		const amount = theBuilding.storeyHeight * theBuilding.storeys;
+		const amount = theBuilding.storeyHeight;
 
 		geometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: amount } );
 		geometry.center();
