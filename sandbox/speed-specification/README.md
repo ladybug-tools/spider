@@ -7,20 +7,15 @@ _We should try to identify what this folder is about_
 _BTW, see [README]( https://en.wikipedia.org/wiki/README ) for why a read me filename title is upper case._
 
 
-## Full screen: [Adjacent Buildings]( http://www.ladybug.tools/spider/sandbox/speed-specification/adjacent-buildings.html )
+## Full Screen: [SPEED Spec R2]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/index.html )
 
-Needs
-* Tooltips
-* Invalid data entry checking
+### Full screen: [Adjacent Buildings]( http://www.ladybug.tools/spider/sandbox/speed-specification/adjacent-buildings.html )
 
-Issues
-* Click building checkboxes. Note all buildings appear in identical location
+### Full Screen: [Shape Geometry]( http://www.ladybug.tools/spider/sandbox/speed-specification/shape-geometry-r2.html )
 
-## Full Screen: [Shape Geometry]( http://www.ladybug.tools/spider/sandbox/speed-specification/shape-geometry-r2.html )
+### Full Screen: [Envelope]( http://www.ladybug.tools/spider/sandbox/speed-specification/envelope.html )
 
-## Full Screen: [Envelope]( http://www.ladybug.tools/spider/sandbox/speed-specification/envelope.html )
-
-## Full Screen: [Space Layout]( http://www.ladybug.tools/spider/sandbox/speed-specification/space-layout.html )
+### Full Screen: [Space Layout]( http://www.ladybug.tools/spider/sandbox/speed-specification/space-layout.html )
 
 ***
 
