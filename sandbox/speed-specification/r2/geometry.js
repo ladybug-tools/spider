@@ -1,7 +1,11 @@
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+// split into multiple files
+// needs clean up
+
 
 
 	let theBuilding;
-
 
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
@@ -119,7 +123,7 @@
 		const pathFunction = pathFunctions[ selShape.selectedIndex ];
 		theBuilding.path = pathFunction();
 
-		theBuilding.shape = selShape[ selShape.selectedIndex ];
+		theBuilding.shape = selShape[ selShape.selectedIndex ].innerText;
 
 		theBuilding.mesh = new THREE.Object3D();
 
@@ -175,9 +179,7 @@
 		let flr = theBuilding.storeys ;
 		let thk = theBuilding.thickness;
 
-//console.log( 'flr', flr, inpFloors.value );
-
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 //console.log( 'area', area  );
 
 			const areaNew = parseInt( inpArea.value, 10 )
@@ -223,11 +225,9 @@
 		}
 
 
-
-
 		const pathBox = [ v2( len, 0 ), v2( 0, 0 ), v2( 0, wid ), v2( len, wid ), v2( len, 0 ) ];
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Validations</p>' +
 			'<p>Calculated Area: ' + flr * ( len * wid ) + '<p>' +
 			'<p>Equations used</p>' +
@@ -260,7 +260,7 @@
 
 		}
 
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 
 			const areaNew = parseInt( inpArea.value, 10 )
 			const flrNew = parseInt( inpFloors.value, 10 );
@@ -321,7 +321,7 @@
 		];
 
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Validations</p>' +
 			'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
 			'<p>Equations used</p>' +
@@ -352,7 +352,7 @@
 
 		}
 
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 
 			const areaNew = parseInt( inpArea.value, 10 )
 			const flrNew = parseInt( inpFloors.value, 10 );
@@ -415,7 +415,7 @@
 			v2( len, 0 )
 		];
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Validations T Shape</p>' +
 			'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
 			'<p>Equations used</p>' +
@@ -446,7 +446,7 @@
 
 		}
 
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 
 			const areaNew = parseInt( inpArea.value, 10 );
 			const areaTemp = area * flrNew / flr;
@@ -511,7 +511,7 @@
 			v2( len - thk, 0.5 * ( wid - thk ) )
 		];
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Validations - H Shape</p>' +
 			'<p>Calculated Area: ' + ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) + '</p>' +
 			'<p>Equations used</p>' +
@@ -527,7 +527,7 @@
 	}
 
 
-
+// #1
 	function createShape() {
 
 		let shape;
@@ -550,7 +550,7 @@
 	}
 
 
-
+// or #2
 
 	function createQlineMesh( storey ) {
 
@@ -562,11 +562,11 @@
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
 
-const opacity = 90;
+		const opacity = 90;
 
 		const material = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, flatShading: true, transparent: true, wireframe: false } );
-		const materialNormal = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false, } );
-		const materialShape = new THREE.MeshPhongMaterial( { color: 0x000000, opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
+		const materialNormal = new THREE.MeshPhongMaterial( { color: 0x000000, opacity: 1, side: 2, transparent: true, wireframe: false, } );
+		const materialShape = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
 
 		const vertices = [];
 		const shapePoints = [];
@@ -594,7 +594,7 @@ const opacity = 90;
 
 			if ( i < path.length - 1 ) {
 
-// overhangs 
+// overhangs
 				const hgt = theBuilding.storeyHeight; //pt1.distanceTo( pt3 );
 				const pt1 = vertices[ 1 ][ i ];
 				const pt2 = vertices[ 1 ][ i + 1 ];
@@ -607,7 +607,7 @@ const opacity = 90;
 				if ( theBuilding.overhangDepth > 0 ) {
 
 					const geoOver = new THREE.PlaneBufferGeometry( 1, 1 );
-					const over = new THREE.Mesh( geoOver, materialNormal );
+					const over = new THREE.Mesh( geoOver, materialShape );
 					over.scale.set( len * theBuilding.wwr / 100, theBuilding.overhangDepth, theBuilding.overhangDepth );
 					over.position.copy( vertices[ 1 ][ i ].clone().lerp( vertices[ 2 ][ i + 1 ].clone() , 0.5 ) );
 					over.position.x -= len05;

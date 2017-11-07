@@ -1,3 +1,5 @@
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
 
 	const adjacentBuildings = [
 
@@ -15,7 +17,7 @@
 
 	function initAdacentBuildingsInputFields() {
 
-		text = 
+		let text =
 			'<h2>Adjacent Buildings</h2>' +
 			'<table>' +
 			'<tr>' +
@@ -70,7 +72,7 @@
 
 			const mesh = createMesh();
 			mesh.name = 'building' + ( i + 1 );
-			mesh.scale.set( 20, 20, 30 );
+			mesh.scale.set( 20, 20, 30 ); // scale is easier to deal with than geometry vertices
 			mesh.position.z = mesh.scale.z * 0.5;
 			mesh.visible = false;
 			scene.add( mesh );
@@ -82,7 +84,7 @@
 
 	function createMesh() {
 
-		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 ); // use scale to set size
 		const material = new THREE.MeshPhongMaterial();
 		const mesh = new THREE.Mesh( geometry, material );
 		const edgesGeometry = new THREE.EdgesGeometry( geometry );
@@ -108,7 +110,7 @@
 	function updateBuilding( that ) {
 //console.log( 'that', that );
 
-		const building = scene.getObjectByName( 'building' + that.id.slice( -1 ) );
+		const building = scene.getObjectByName( 'building' + that.id.slice( -1 ) ); // is slice needed? check this
 //console.log( 'building', building, 'id', that.id );
 
 		if ( that.id.startsWith( 'inpOffsetX' ) ) {

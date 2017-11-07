@@ -1,4 +1,4 @@
-
+/* Copyright 2017 Ladybug Tools authors. MIT License */
 
 	function initEnvelopeInputFields() {
 
@@ -17,6 +17,7 @@
 		inpFinDepth.step = 0.5;
 
 /*
+// Hi Anton!
 		wwrs.min = 1;
 		wwrs.max = 100;
 		wwrs.value = 40;
@@ -40,7 +41,6 @@
 		numWindows.min = 1;
 		numWindows.max = 10;
 		numWindows.value = 3;
-
 */
 
 		selWindowType.innerHTML =
@@ -64,4 +64,5 @@
 //console.log( 'theBuilding', theBuilding );
 
 		if ( theBuilding.shape ) { updateShape(); }
+
 	}

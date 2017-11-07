@@ -1,3 +1,7 @@
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+// the naming of things is very messy indeed
+
 	var checkWindow;
 
 	let textMenu;
@@ -14,9 +18,6 @@
 
 
 	function initExportGbxml() {
-
-
-// the naming of things is very messy indeed
 
 		campus = {};
 
@@ -41,8 +42,8 @@
 		campus.overhangDepth = 0; // 1 + Math.floor( 1 * Math.random() );
 		campus.perimeterDepth = 15;
 
-		campus.storeys = 1; // + Math.floor( 4 * Math.random() );
-		campus.storeyHeight = 10;
+//		campus.storeys = 1; // + Math.floor( 4 * Math.random() );
+//		campus.storeyHeight = 10;
 		campus.streetAddress = '440 Davis Court';
 		campus.surfaceReferenceLocation = 'Centerline' ;
 
@@ -50,7 +51,7 @@
 		campus.useSIUnitsForResults = true;
 		campus.version = '6.01';
 		campus.verticalSeparation = 0;
-		campus.volume = campus.area * campus.storeys * campus.storeyHeight;
+		campus.volume = campus.area * theBuilding.storeys * theBuilding.storeyHeight;
 		campus.volumeUnit = 'CubicMeters';
 
 		campus.width1 = 10;
@@ -59,7 +60,7 @@
 
 		theBuilding.spaces = [];
 		theBuilding.zones = [];
-		theBuilding.name = theBuilding.mesh.name;
+		theBuilding.name = 'theBuilding';
 
 		buildings = getBuildings();
 
@@ -91,6 +92,7 @@
 
 //console.log( 'buildings', buildings );
 //console.log( 'campus', campus );
+
 		if ( window.checkWindow ) { window.checkWindow.close(); }
 
 		textMenu = '';
@@ -160,9 +162,10 @@
 		divExportContent.innerHTML =
 
 			'gbXML data<br>' +
-			'area check: ' + campus.areaCheck + '<br>' +
+			( campus.areaCheck ? 'area check: ' + campus.areaCheck + '<br>' : '' ) +
 			'<textarea id=buildingData rows=50 style=height:500px;tab-size:4;width:100%; >' +
-			textMenu + '</textarea>'
+			textMenu + 
+			'</textarea>'
 
 		'';
 
@@ -174,7 +177,7 @@
 
 		let textBuildingStoreys = '';
 
-		for ( var i = 0; i < campus.storeys; i++ ) {
+		for ( var i = 0; i < theBuilding.storeys; i++ ) {
 
 			const storey = i + 1;
 
@@ -327,7 +330,8 @@
 		for ( let i = 0; i < buildings.length; i++ ) {
 
 			aBuilding = buildings[ i ];
-//console.log( '', aBuilding );
+//console.log( 'aBuilding', aBuilding );
+
 			if ( aBuilding.name !== 'theBuilding' ) {
 
 				textSurfaces += getSurfacesAdjacentBuildings( aBuilding );
@@ -355,7 +359,7 @@
 
 		let textSurfacesBits = '';
 
-		let storeys = 1; //campus.storeys;
+		let storeys = theBuilding.storeys; //campus.storeys;
 		let surfaceId = 1;
 		let spaceId = 1; // zoneId === spaceId
 		let quad;
@@ -703,16 +707,15 @@
 
 		let textSurfaces = '';
 
-//console.log( '', object );
-
-		if ( object.name.includes( 'shape' ) ) { return ''; }
+console.log( 'getSurfacesAdjacentBuildings', object );
 
 		const bb = new THREE.Box3().setFromObject( object );
 		const mi = bb.min;
 		const mx = bb.max;
+//console.log( 'bb mi mx', bb, mi, mx );
 
-//		const geometry = new THREE.BoxBufferGeometry( 1, 1, 100 );
-//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		const geometry = new THREE.BoxBufferGeometry( 5, 5, 5 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		const faces =  [
 			[ v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
@@ -732,21 +735,28 @@
 			'';
 
 			face = faces[ i ];
-			const v1 = object.localToWorld ( face[ 0 ] );
-			const v2 = object.localToWorld ( face[ 1 ] );
-			const v3 = object.localToWorld ( face[ 2 ] );
-			const v4 = object.localToWorld ( face[ 3 ] );
+
+//			const v1 = object.localToWorld ( face[ 0 ] );
+//			const v2 = object.localToWorld ( face[ 1 ] );
+//			const v3 = object.localToWorld ( face[ 2 ] );
+//			const v4 = object.localToWorld ( face[ 3 ] );
+
+			const v1 = face[ 0 ];
+			const v2 = face[ 1 ];
+			const v3 = face[ 2 ];
+			const v4 = face[ 3 ] ;
 
 //			const vertices = [ v2, v1, v3, v4 ];
 			const vertices = [ v1, v2, v3, v4 ];
+
 			for ( let k = 0; k < 4; k++ ) {
 
 				const vertex = vertices[ k ];
 				textSurfaces += getCartesianPointText( vertex );
 
-//				const mesh = new THREE.Mesh( geometry, material );
-//				mesh.position.copy( vertex );
-//				scene.add( mesh );
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( vertex );
+				scene.add( mesh );
 
 			}
 
@@ -852,7 +862,7 @@
 
 		let a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
-		const fileName = theBuilding.name + '-' + campus.area + 'area-' + campus.storeys + 'flr-' + campus.orientation + 'deg' + '.xml';
+		const fileName = theBuilding.shape.toLowerCase() + '-' + campus.area + 'area-' + theBuilding.storeys + 'flr-' + campus.orientation + 'deg' + '.xml';
 		a.download = fileName;
 
 		a.click();

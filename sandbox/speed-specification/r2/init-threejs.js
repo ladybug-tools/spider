@@ -1,14 +1,17 @@
+/* Copyright 2017 Ladybug Tools authors. MIT License */
 
-	var renderer, camera, controls, scene;
-	var lightAmbient, lightDirectional;
+	let context1, context2;
+
+	let renderer, camera, camera2, controls, controls2, scene;
+	let lightAmbient, lightDirectional;
 	let gridHelper, axesHelper;
 
 
 
 	function initThreejs() {
 
-		width = 300;
-		height = 300;
+		const width = 300;
+		const height = 300;
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setClearColor( 0xffffff, 1 );
@@ -35,11 +38,11 @@
 
 		scene = new THREE.Scene();
 
-		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		lightAmbient = new THREE.AmbientLight( 0x888888 );
 		scene.add( lightAmbient );
 
 		const size = 150
-		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
+		lightDirectional = new THREE.DirectionalLight( 0xaaaaaa );
 		lightDirectional.position.set( -size, size, size );
 //		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
 		lightDirectional.shadow.mapSize.width = 2048;  // default 512

@@ -1,4 +1,7 @@
+/* Copyright 2017 Ladybug Tools authors. MIT License */
 
+
+// You are probably better at doing this sort of stuff than I am. ;-)
 
 	const zonesPerShapes = [ 5, 7, 13, 9 ];
 
@@ -132,13 +135,13 @@
 
 		for ( let i = 0; i < theBuilding.storeys; i++ ) {
 
-			floor = theBuilding.floorZones[ i ];
+			const floor = theBuilding.floorZones[ i ];
 
 			for ( let j = 0; j < zonesInShape; j++ ) {
 
-				zone = floor[ j ];
+				const zone = floor[ j ];
 
-				if ( !types.includes( zone ) ) { 
+				if ( !types.includes( zone ) ) {
 
 					types.push( zone );
 					counts.push( 0 );
