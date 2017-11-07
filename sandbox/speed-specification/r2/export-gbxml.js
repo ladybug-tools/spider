@@ -16,7 +16,8 @@
 	function initExportGbxml() {
 
 
-// the naming of thin
+// the naming of things is very messy indeed
+
 		campus = {};
 
 		campus.area = 5000;
@@ -496,6 +497,11 @@
 
 			'\t\t<Surface surfaceType="' + quad.type + '" id="surface-' + quad.surfaceId + '" >\n' +
 				'\t\t\t<Name>' + quad.name + '</Name>\n' +
+
+			'\t\t\t<RectangularGeometry>\n' +
+			'\t\t\t\t<Azimuth>0</Azimuth>\n' +
+			'\t\t\t</RectangularGeometry>\n' +
+
 			'\t\t\t<CADOjectId>none</CADOjectId>\n' +
 			'\t\t\t<AdjacentSpaceId spaceIdRef="space-' + quad.spaceId1  + '" />\n' +
 			( quad.spaceId2 ? '\t\t\t<AdjacentSpaceId spaceIdRef="space-' + quad.spaceId2  + '" />\n' : '' ) +
