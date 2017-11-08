@@ -163,7 +163,7 @@
 			'gbXML data<br>' +
 			( campus.areaCheck ? 'area check: ' + campus.areaCheck + '<br>' : '' ) +
 			'<textarea id=buildingData rows=50 style=height:500px;tab-size:4;width:100%; >' +
-			textMenu + 
+			textMenu +
 			'</textarea>'
 
 		'';
@@ -380,7 +380,7 @@
 				const interiorSpaceId = i * spacesPerStorey + spacesPerStorey;
 
 				const vect = vertices[ pt2 ].clone().sub( vertices[ pt1 ].clone() ).normalize();
-				const angle = r2d * Math.atan2( vect.y, vect.x );
+				const angle = 888; // r2d * Math.atan2( vect.y, vect.x );
 
 //console.log( 'angle', angle );
 
@@ -507,8 +507,51 @@
 
 //console.log( 'quad', quad );
 
-//		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
-//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		const geometry = new THREE.BoxBufferGeometry( 8, 5, 3 );
+		const material = new THREE.MeshNormalMaterial( { side: 2 } );
+
+		let verticesClone = [];
+
+		textQuad = '';
+
+		for ( let i = 0; i < quad.vertices.length; i++ ) {
+
+			vertex = quad.vertices[ i ].clone();
+			vertex.applyMatrix4( quad.mesh.matrixWorld );
+
+			textQuad += getCartesianPointText( vertex );
+			verticesClone.push( vertex );
+
+//			const mesh = new THREE.Mesh( geometry, material );
+//			mesh.position.add( vertex );
+//			scene.add( mesh );
+
+		}
+
+	if( quad.type === 'ExteriorWall' ) {
+
+			let vertex = quad.vertices[ 0 ].clone();
+			vertex.applyMatrix4( quad.mesh.matrixWorld );
+			const pt1 = vertex;
+
+
+			vertex = quad.vertices[ 3 ].clone();
+			vertex.applyMatrix4( quad.mesh.matrixWorld );
+			const pt2 = vertex;
+
+			const vect = pt1.clone().sub( pt2.clone() ).normalize();
+			const angle = r2d * Math.atan2( vect.y, vect.x );
+
+//console.log( 'angle', angle, pt1, pt2 );
+			quad.angle = angle;
+
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.copy( pt1 );
+			scene.add( mesh );
+//console.log( 'mesh', mesh );
+
+		}
+
 
 		let textSingleSurfaces =
 
@@ -524,23 +567,11 @@
 			( quad.spaceId2 ? '\t\t\t<AdjacentSpaceId spaceIdRef="space-' + quad.spaceId2  + '" />\n' : '' ) +
 			'\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t<PolyLoop>\n' +
+
+			textQuad +
+
 		'';
 
-		let verticesClone = [];
-
-		for ( let i = 0; i < quad.vertices.length; i++ ) {
-
-			vertex = quad.vertices[ i ].clone();
-			vertex.applyMatrix4( quad.mesh.matrixWorld );
-
-			textSingleSurfaces += getCartesianPointText( vertex );
-			verticesClone.push( vertex );
-
-//			const mesh = new THREE.Mesh( geo, material );
-//			mesh.position.add( vertex );
-//			scene.add( mesh );
-
-		}
 
 		textOpen = quad.type === 'ExteriorWall' ? getOpening( quad ) : '';
 
@@ -596,21 +627,6 @@
 
 		}
 
-		pt1 = verts[ 0 ].applyMatrix4( quad.mesh.matrixWorld );
-		pt2 = verts[ 1 ].applyMatrix4( quad.mesh.matrixWorld );
-				const vect = pt1.clone().sub( pt2.clone() ).normalize();
-				const angle = r2d * Math.atan2( vect.y, vect.x );
-
-console.log( 'angle', angle );
-			quad.angle = angle;
-
-			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( verts[ 1 ] );
-			scene.add( mesh );
-
-
-
-
 		textOpening +=
 			'\t\t\t\t\t</PolyLoop>\n' +
 			'\t\t\t\t</PlanarGeometry>\n' +
@@ -635,7 +651,6 @@ console.log( 'angle', angle );
 		shape = new THREE.Shape( path );
 		geometry = new THREE.ShapeGeometry( shape );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
-
 
 		quad = {
 			description: type + ': ',
@@ -731,7 +746,6 @@ console.log( 'angle', angle );
 		return textOver;
 
 	}
-
 
 
 

@@ -117,7 +117,6 @@ A good coding practice is to follow the coding style of the primary library used
 ### 2017-11-07 ~ Theo
 
 * Add to read me
-
 * speed-spec-r2.html
 	* Add text to divZones: 'Please first select a shape;
 	* divGeo: move sel shape first text
@@ -136,4 +135,8 @@ A good coding practice is to follow the coding style of the primary library used
 * export-gbxml.js
 	* Clean up code, add license
 	* Fix up shape names and generated export file name
-	* Add azimuth to rectangular geometry - have no idea if data is valid
+	* Add azimuth to rectangular geometry - have no idea if data is valid << nope: this submit broken
+	* R2.3 Azimuth & building orientation might be working
+* Add SPEED R2 gbXML Sample Files viewer utility
+
+
