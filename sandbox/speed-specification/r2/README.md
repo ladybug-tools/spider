@@ -4,6 +4,10 @@
 
 ### Full screen: [Speed Spec R2]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/index.html )
 
+### Full screen: [SPEED R2 gbXML Sample Files]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/gbxml-viewer.html )
+
+
+
 
 ## Concept
 
@@ -116,6 +120,7 @@ A good coding practice is to follow the coding style of the primary library used
 
 * speed-spec-r2.html
 	* Add text to divZones: 'Please first select a shape;
+	* divGeo: move sel shape first text
 * adjacent-buildings.js
 	* Clean up code, add license
 * geometry.js
@@ -131,3 +136,4 @@ A good coding practice is to follow the coding style of the primary library used
 * export-gbxml.js
 	* Clean up code, add license
 	* Fix up shape names and generated export file name
+	* Add azimuth to rectangular geometry - have no idea if data is valid

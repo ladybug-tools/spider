@@ -16,7 +16,6 @@
 	let overhangId = 1
 	let shadeId = 1;
 
-
 	function initExportGbxml() {
 
 		campus = {};
@@ -184,7 +183,7 @@
 			textBuildingStoreys +=
 				'\t\t\t<BuildingStorey id="storey-' + storey + '" >\n' +
 				'\t\t\t\t<Name>storey ' + storey + '</Name>\n' +
-				'\t\t\t\t<Level>' + ( i * campus.storeyHeight ) + '</Level>\n' +
+				'\t\t\t\t<Level>' + ( i * theBuilding.storeyHeight ) + '</Level>\n' +
 				'\t\t\t</BuildingStorey>\n' +
 			'';
 
@@ -199,7 +198,7 @@
 
 
 	function getSpacesAndZones( campus ) {
-//console.log( '', campus );
+//console.log( 'campus', campus );
 
 		let textSpace = '';
 		const spaces = theBuilding.spaces;
@@ -217,15 +216,15 @@
 			theBuilding.areaCheck = 0;
 
 			for ( var j = 0; j < spacesPerStorey; j++ ) {
-
+//console.log( 'spacesPerStorey', spacesPerStorey );
 				const vertex1 = vertices[ j * 5 ];
 				pathInterior.push( vertex1 );
 
-				let geometry = new THREE.BoxGeometry( 1, 1, 10 );
-				let material = new THREE.MeshNormalMaterial();
-				let mesh = new THREE.Mesh( geometry, material );
-				mesh.position.copy( vertex1 );
-				scene.add( mesh );
+//				let geometry = new THREE.BoxGeometry( 10, 10, 10 );
+//				let material = new THREE.MeshNormalMaterial();
+//				const mesh = new THREE.Mesh( geometry, material );
+//				mesh.position.copy( vertex1 );
+//				scene.add( mesh );
 
 				const vertex2 = vertices[ ( j + 1 ) * 5 ];
 
@@ -235,8 +234,8 @@
 //				mesh.position.copy( vertex2 );
 //				scene.add( mesh );
 
-				const area = vertex1.distanceTo( vertex2 ) * campus.perimeterDepth + campus.perimeterDepth  * campus.perimeterDepth ;
-				const volume = area * campus.storeyHeight;
+				const area = vertex1.distanceTo( vertex2 ) * theBuilding.perimeterDepth + theBuilding.perimeterDepth  * theBuilding.perimeterDepth ;
+				const volume = area * theBuilding.storeyHeight;
 				theBuilding.areaCheck += area;
 
 				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space',
@@ -256,7 +255,7 @@
 //console.log( 'path', pathInterior );
 
 			const area = Math.abs( THREE.ShapeUtils.area( pathInterior ) );
-			const volume = area * campus.storeyHeight;
+			const volume = area * theBuilding.storeyHeight;
 			theBuilding.areaCheck += area;
 
 			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space',
@@ -354,7 +353,7 @@
 	function getSurfacesTheBuilding() {
 //console.log( 'theBuilding', theBuilding.children[ 0 ] );
 
-		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
+		const geo = new THREE.BoxBufferGeometry( 3, 1, 20 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		let textSurfacesBits = '';
@@ -367,6 +366,7 @@
 
 		for ( let i = 0; i < storeys; i++ ) {
 //console.log( 'storeys', storeys, theBuilding.mesh  );
+
 			const meshFloor = theBuilding.mesh.children[ i ];
 			const vertices = meshFloor.geometry.vertices;
 			const spacesPerStorey = vertices.length / 5 - 1;
@@ -379,8 +379,17 @@
 				const firstSpaceId = i * spacesPerStorey;
 				const interiorSpaceId = i * spacesPerStorey + spacesPerStorey;
 
+				const vect = vertices[ pt2 ].clone().sub( vertices[ pt1 ].clone() ).normalize();
+				const angle = r2d * Math.atan2( vect.y, vect.x );
+
+//console.log( 'angle', angle );
+
+//			const mesh = new THREE.Mesh( geo, material );
+//			mesh.position.set( vertices[ pt1 ] );
+//			scene.add( mesh );
 
 				quad = {
+					angle: angle,
 					description: 'floor: ' + ( i + firstStoreyId ),
 					mesh: meshFloor,
 					name: 'floor-' + ( i + firstStoreyId ) + '-space-' + ( j + 1 ),
@@ -396,6 +405,7 @@
 				textSurfacesBits += getSingleSurface( quad );
 
 				quad = {
+					angle: angle,
 					description: 'interior wall: ' + ( i + 1 ),
 					mesh: meshFloor,
 					name: 'interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
@@ -415,6 +425,7 @@
 				if ( i + 1 === storeys ) {
 
 					quad = {
+						angle: angle,
 						description: 'roof: ' + ( i + 1 ),
 						mesh: meshFloor,
 						name: 'roof-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
@@ -432,6 +443,7 @@
 				}
 
 				quad = {
+					angle: angle,
 					description: 'wall: ' + ( i + 1 ),
 					mesh: meshFloor,
 					name: 'exterior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
@@ -448,6 +460,7 @@
 				textSurfacesBits += getSingleSurface( quad );
 
 				quad = {
+					angle: angle,
 					description: 'diagonal-wall: ' + ( i + 1 ),
 					mesh: meshFloor,
 					name: 'diagonal-interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
@@ -476,7 +489,7 @@
 
 			if ( i + 1 === storeys ) {
 
-				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, campus.storeyHeight );
+				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, theBuilding.storeyHeight );
 
 			}
 
@@ -503,7 +516,7 @@
 				'\t\t\t<Name>' + quad.name + '</Name>\n' +
 
 			'\t\t\t<RectangularGeometry>\n' +
-			'\t\t\t\t<Azimuth>0</Azimuth>\n' +
+			'\t\t\t\t<Azimuth>' + quad.angle + '</Azimuth>\n' +
 			'\t\t\t</RectangularGeometry>\n' +
 
 			'\t\t\t<CADOjectId>none</CADOjectId>\n' +
@@ -523,7 +536,7 @@
 			textSingleSurfaces += getCartesianPointText( vertex );
 			verticesClone.push( vertex );
 
-//			mesh = new THREE.Mesh( geo, material );
+//			const mesh = new THREE.Mesh( geo, material );
 //			mesh.position.add( vertex );
 //			scene.add( mesh );
 
@@ -548,18 +561,18 @@
 
 		let textOpening = '';
 
-//		const geometry = new THREE.BoxBufferGeometry( 5, 8, 5 );
-//		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
-//		let mesh;
+		const geometry = new THREE.BoxBufferGeometry( 5, 8, 5 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		textOpening +=
 			'\t\t\t<Opening openingType="FixedWindow" id="opening-' + openingId + '" >\n' +
 			'\t\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t\t<PolyLoop>\n' +
 		'';
+
 		openingId ++;
 
-		wwr05 = 0.5 * campus.wwr / 100;
+		wwr05 = 0.5 * theBuilding.wwr / 100;
 
 		verts = [
 
@@ -570,17 +583,32 @@
 
 		]
 
+
 		for ( let i = 0; i < verts.length; i++ ) {
 
 			vertex = verts[ i ];
 			vertex.applyMatrix4( quad.mesh.matrixWorld );
 			textOpening += getCartesianPointText( vertex );
 
-//			mesh = new THREE.Mesh( geometry, material );
+//			const mesh = new THREE.Mesh( geometry, material );
 //			mesh.position.add( vertex );
 //			scene.add( mesh );
 
 		}
+
+		pt1 = verts[ 0 ].applyMatrix4( quad.mesh.matrixWorld );
+		pt2 = verts[ 1 ].applyMatrix4( quad.mesh.matrixWorld );
+				const vect = pt1.clone().sub( pt2.clone() ).normalize();
+				const angle = r2d * Math.atan2( vect.y, vect.x );
+
+console.log( 'angle', angle );
+			quad.angle = angle;
+
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( verts[ 1 ] );
+			scene.add( mesh );
+
+
 
 
 		textOpening +=
@@ -612,7 +640,7 @@
 		quad = {
 			description: type + ': ',
 			area: area,
-			volume: area * campus.storeyHeight,
+			volume: area * theBuilding.storeyHeight,
 			mesh: slab,
 			name: 'slab-floor-' + slab.userData.storey,
 			type: type,
@@ -686,6 +714,11 @@
 
 			}
 
+//			const mesh = new THREE.Mesh( geometry, material );
+//			mesh.position.set( verts[ 1 ] );
+//			scene.add( mesh );
+
+
 			textOver +=
 				'\t\t\t\t</PolyLoop>\n' +
 				'\t\t\t</PlanarGeometry>\n' +
@@ -707,7 +740,7 @@
 
 		let textSurfaces = '';
 
-console.log( 'getSurfacesAdjacentBuildings', object );
+//console.log( 'getSurfacesAdjacentBuildings', object );
 
 		const bb = new THREE.Box3().setFromObject( object );
 		const mi = bb.min;
@@ -862,7 +895,7 @@ console.log( 'getSurfacesAdjacentBuildings', object );
 
 		let a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
-		const fileName = theBuilding.shape.toLowerCase() + '-' + campus.area + 'area-' + theBuilding.storeys + 'flr-' + campus.orientation + 'deg' + '.xml';
+		const fileName = theBuilding.shape.toLowerCase() + '-' + theBuilding.area + 'area-' + theBuilding.storeys + 'flr-' + theBuilding.orientation + 'deg' + '.xml';
 		a.download = fileName;
 
 		a.click();

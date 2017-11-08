@@ -129,16 +129,18 @@
 
 		for ( var k = 0; k < theBuilding.storeys; k++ ) {
 
-			const vertical = k * theBuilding.storeyHeight + 0.5 * theBuilding.storeyHeight;
+			const vertical = k * theBuilding.storeyHeight; //+ 0.5 * theBuilding.storeyHeight;
 			const storey = k + 1;
 
-			mesh = createQlineMesh( k );
+			const mesh = createQlineMesh( k );
 //			mesh = createShape();
 			mesh.position.z = vertical;
 			mesh.rotation.z = rotation;
 			mesh.name = 'shape-' + selShape.value.toLowerCase() + '-story-' + ( k + 1 );
 			mesh.userData.storey = k;
 			mesh.castShadow = mesh.receiveShadow = true;
+			mesh.updateMatrixWorld();
+//console.log( 'mesh', mesh );
 			theBuilding.mesh.add( mesh );
 
 		}
