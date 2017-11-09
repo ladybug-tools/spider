@@ -130,7 +130,7 @@ A good coding practice is to follow the coding style of the primary library used
 Spped Spec R2.4
 * speed-spec-r2.html
 	* Add links to each JavaScript file
-
+	* Add links to read me and viewer
 * export-gbxml.js
 	* Code clean-up
 	* 'Check the' data button back in operation

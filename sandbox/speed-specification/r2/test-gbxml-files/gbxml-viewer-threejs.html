@@ -169,7 +169,7 @@
 	function callbackGbXML( xhr ){
 
 		let response;
-console.log( '', xhr );
+//console.log( '', xhr );
 		response = xhr.target.responseXML.documentElement;
 
 //		gbjson.url = xhr.target.responseURL;
@@ -183,7 +183,7 @@ console.log( '', xhr );
 	function parseFileXML( xmlNode ) {
 
 		gbjson = XML2jsobj( xmlNode );
-console.log( 'json', gbjson );
+//console.log( 'json', gbjson );
 
 //		divContents.value = JSON.stringify( json, null, 4 );
 //		divContents.innerHTML = '<textarea>' + JSON.stringify( gbjson, null, 4 ); + '</textarea>';
@@ -687,7 +687,7 @@ console.log( 'json', gbjson );
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+//		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
