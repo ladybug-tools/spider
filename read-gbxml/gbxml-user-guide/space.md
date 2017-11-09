@@ -2,15 +2,14 @@
 
 # Space Element
 
-## [Definition from Schema GreenBuildingXML_Ver6.01.xsd]( http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link34B )
-
-Documentation
+## [Space Schema Definition]( http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link19D )
 
 > A space represents a volume enclosed by surfaces
 
+
 ## Usage
 
-From various anecdotal observations
+From various anecdotal observations:
 
 * Area and Volume should occur according to the Schema but are not required by Open Studio in order to import without warning.
 * Shell Geometry elements and Space Boundary elements and their data frequently appear in Space elements but are not required.
@@ -41,10 +40,26 @@ Since the ShellGeometry element and SurfaceBoundary element are optional in the 
 
 ## Space Attributes
 
+Attributes
+
+* id
+* spaceType
+* zoneIdRef
+* scheduledRef
+* lightScheduleIdRef
+* equipmentScheduleIdRef
+* peopleScheduleIdRef
+* conditionType
+* buildingStoreyIdRef
+* ifcGUID
+
+
 ### [spaceType Schema Definition]( http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#LinkB6 )
 
 > spaceType represents how a space is used.
 > an IESNA and ASHRAE project for determining lighting power density for individual spaces.
+
+List of space types from Schema
 
 		enumeration 	ActiveStorage
 		enumeration 	ActiveStorageHospitalOrHealthcare
@@ -203,7 +218,7 @@ Since the ShellGeometry element and SurfaceBoundary element are optional in the 
 * SpaceBoundary
 
 
-## Space Samples
+## Space Text Samples
 
 ### From @bwelle
 
@@ -223,7 +238,9 @@ Source file on GitHub
 
 * <https://github.com/NREL/OpenStudio/blob/develop/openstudiocore/resources/Examples/compact_osw/files/seb.osm>
 
-Text for Space elements in exported gbXML file: 
+Items to note include no ShellGeometry, no PlanarGeometry and no SpaceBoundary.
+
+Text for Space elements in exported gbXML file:
 
       <Space id="Entry_way_1" zoneIdRef="Single_zone" buildingStoreyIdRef="Level_0">
         <Name>Entry way 1</Name>

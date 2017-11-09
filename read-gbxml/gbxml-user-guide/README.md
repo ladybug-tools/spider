@@ -122,10 +122,20 @@ and a new gbXML is exported.
 
 ## To Do
 
-* 2017-10-25 ~ Naming variables
+* 2017-11-08 ~ Update HTML page to source file names using GitHub API
+* 2017-10-25 ~ Add naming variables recommendations
+
 
 
 ## Change Log
+
+
+### 2017-11-08 ~ Theo
+
+R1.3
+* Add Rectangular Geometry page
+* Update Space page
+* Fixes to HTML file
 
 
 ### 2017-10-28 ~ Theo
