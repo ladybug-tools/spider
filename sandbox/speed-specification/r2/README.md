@@ -119,15 +119,16 @@ A good coding practice is to follow the coding style of the primary library used
 
 ## To Do
 
+* 2017-11-09 ~ Export adjacent buildings as original geometry instead of current bounding box format
 * 2017-11-09 ~ Add drawMeshAtVertex() function
-* 2017-11-09 ~ Azimuths for all surfces?
+* 2017-11-09 ~ Azimuths for all surfaces?
 
 ## Change Log
 
 
 ### 2017-11-09 ~ Theo
 
-Spped Spec R2.4
+Speed Spec R2.4
 * speed-spec-r2.html
 	* Add links to each JavaScript file
 	* Add links to read me and viewer
@@ -135,11 +136,16 @@ Spped Spec R2.4
 	* Code clean-up
 	* 'Check the' data button back in operation
 	* Shade surface ids now sequential
-	* theBuilging.areacheck functioning and reporting
+	* theBuilding.areacheck functioning and reporting
 	* Debug meshes at vertices commented out
 	* RectangularGeometry: azimuths being exported to gbXML standard - just for ExteriorWall. Maybe. We don't have a good way of checking yet
 	* More efforts at updating 'floor' variables to 'storey'
+* gbxml-viewer.html
 	* moved gbxml viewer to own folder
+	* fix links
+	* Update sample files
+
+
 
 ### 2017-11-07 ~ Theo
 
