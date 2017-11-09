@@ -92,6 +92,7 @@
 //		theBuilding.storeys = parseInt( inpFloors.value, 10 );
 		theBuilding.storeyHeight = parseInt( inpHeight.value, 10 );
 		theBuilding.orientation = parseInt( inpOrientation.value, 10 );
+		theBuilding.perimeterDepth = parseInt( inpPerimeterDepth.value, 10 );
 
 		const rotation = - d2r * theBuilding.orientation;
 		const storeys = theBuilding.storeys;
@@ -158,10 +159,12 @@
 	}
 
 
+
 	function updateSection() {
 
 		const width = theBuilding.perimeterDepth;
 		const height = theBuilding.storeyHeight;
+//console.log( 'width', width );
 
 		const section = [
 
@@ -172,6 +175,8 @@
 		return section;
 
 	}
+
+
 
 	function getPathBox() {
 
@@ -256,6 +261,7 @@
 		let wid = theBuilding.width;
 		let thk = theBuilding.thickness;
 
+// trying to set a default fail. ditto below
 		if ( theBuilding.lengthInit === 0 ) {
 
 			inpLength.value = 120;
@@ -306,10 +312,7 @@
 
 			wid = ( ( area - thk * len ) / thk + thk ) / flr;
 			theBuilding.width = wid;
-
-// locks up the sliders
-//			theBuilding.width = wid;
-//			inpWidth.value = wid;
+			inpWidth.value = wid;
 
 		}
 
@@ -401,8 +404,8 @@
 			wid = ( ( area - thk * len ) / thk + thk ) / flr;
 
 // locks up the sliders
-//			theBuilding.width = wid;
-//			inpWidth.value = wid;
+			theBuilding.width = wid;
+			inpWidth.value = wid;
 
 		}
 
@@ -493,8 +496,8 @@
 			wid = ( area - thk * ( len - 2 * thk ) ) / ( 2 * thk * flr );
 
 // locks up the sliders
-//			theBuilding.width = wid;
-//			inpWidth.value = wid;
+			theBuilding.width = wid;
+			inpWidth.value = wid;
 
 		}
 
@@ -565,7 +568,7 @@
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
 
-		const opacity = 90;
+		const opacity = 85;
 
 		const material = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, flatShading: true, transparent: true, wireframe: false } );
 		const materialNormal = new THREE.MeshPhongMaterial( { color: 0x000000, opacity: 1, side: 2, transparent: true, wireframe: false, } );
@@ -659,6 +662,19 @@
 		const shapeMesh = new THREE.Mesh( geometryShape, materialShape );
 		shapeMesh.name = 'InteriorFloor';
 		mesh.add( shapeMesh );
+
+console.log( 'theBuilding.storeys', storey, theBuilding.storeys  );
+		if ( storey === theBuilding.storeys - 1 ) {
+
+
+			const shape = new THREE.Shape( path );
+			const geometryShape = new THREE.ShapeGeometry( shape );
+			geometryShape.applyMatrix( new THREE.Matrix4().makeTranslation( -len05, -wid05, theBuilding.storeyHeight ) );
+			const shapeMesh = new THREE.Mesh( geometryShape, materialShape );
+			shapeMesh.name = 'roof';
+			mesh.add( shapeMesh );
+
+		}
 
 		mesh.geometry.computeFaceNormals();
 		mesh.geometry.computeVertexNormals();
