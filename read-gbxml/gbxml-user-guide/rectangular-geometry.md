@@ -10,7 +10,7 @@ Azimuth and Tilt should not be specified for opening. There is an optional PolyL
 
 ## Usage Notes
 
-Rectangular geometry provides a bounding orthogonal quadrilateral representation of a gbXML Surface. Very often the surface is itself a rectangle, but rectangular geometry provides an often-needed simplification in the instance of a highly complicated polygon.
+Rectangular geometry provides a bounding orthogonal quadrilateral representation of a gbXML Surface. Very often the actual surface is itself a rectangle, but rectangular geometry provides an often-needed simplification for the instances of a highly complicated polygons.
 
 
 The following notes are created from readings of the gbXML Schema and using the following Open Studio example file - seb.osm - to observe values used in actual practice.
@@ -46,9 +46,9 @@ Polygon azimuth. The direction of the outward normal for the polygon (surface or
 
 Take the CartesianPoint as being the origin, look straight down at the origin.
 
-If you see a straight line, then you are looking at a vertical exteriorWall or InteriorWall and you may measure the angle the line makes with the north pointing vector. A wall facing north has an angle of zero, facing east an angle of 90 degrees, facing sout an angle of 180 degrees and facing west an angle of 270 degrees. And so on.
+If you see a straight line, then you are looking at a vertical exteriorWall or InteriorWall and you may measure the angle the line makes with the north pointing vector. A wall facing north has an angle of zero, facing east an angle of 90 degrees, facing south an angle of 180 degrees and facing west an angle of 270 degrees. And so on.
 
-For most any ceiling, roof or floor there you will see the bounding rectangle for that geometry.  The rectangle is orthogonal with the XYZ axis and lies flat on the XY plane, therefore the azimuth will be zero for floors or 180 degrees ceilings for these elements in most normal situations. There may instances where the underlying geometry is also a simple rectangle placed at an angle and therefore rectangularGeometry may take the opportunity to record the angle of azimuth for that particular geometry that is npn-zero.
+For most any ceiling, roof or floor you will see the bounding rectangle for that geometry.  The bounding rectangle is a [minimum bounding rectangle (MBR)]( https://en.wikipedia.org/wiki/Minimum_bounding_rectangleis ). An MBR is orthogonal with the XYZ axes and lies flat on the XY plane, therefore the azimuth will be zero for floors or 180 degrees ceilings for these elements in most normal situations. Alternatively, depending on how Width and height are defined you may see azimuths of 90 degrees. There may instances where the underlying geometry is also a simple rectangle placed at an angle and therefore rectangularGeometry may take the opportunity to record the angle of azimuth for that particular geometry that is non-zero.
 
 
 ### Tilt
