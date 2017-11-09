@@ -1,33 +1,50 @@
 
-## Space
+
+# Space Element
+
+## [Definition from Schema GreenBuildingXML_Ver6.01.xsd]( http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link34B )
+
+Documentation
+
+> A space represents a volume enclosed by surfaces
+
+## Usage
+
+From various anecdotal observations
+
+* Area and Volume should occur according to the Schema but are not required by Open Studio in order to import without warning.
+* Shell Geometry elements and Space Boundary elements and their data frequently appear in Space elements but are not required.
+* There is no need for space shell geometry for Open Studio, nor for the import into FZK Viewer.
+
+### The Phase 2 Validator - Space Element Tests (stage 3)
+
+From <https://github.com/GreenBuildingXML/ValidatorPhase1/wiki>
+
+The Phase 2 validator is solely focused on validating gbXML as in the Phase 1 validator, with the additional checks of the geometry descriptions that are contained within the gbXML file format. Since all of this geometry information is contained within the Space and Surface Elements (and their children), the validator is designed to hone in on these elements and thoroughly review them.
+
+Beyond checking for valid XML and well-formedness when compared to the XSD, the validator also performs the following checks. At the Space level of the document, for each Space found in the document:
+
+* Are all required fields in place?
+* Unique Space id test (this is a duplicate of the Phase 1 test)
+	* all Space id attributes have to be unique
+* Space surfaces Planarity tests
+	* do the spaces contain ShellGeometry and SpaceBoundary elements? If so, check otherwise do nothing
+* Space surface polygons winding in counter-clockwise order (this code is currently being debated and subject for review)
+	* same applies regarding ShellGeometry and SpaceBoundary elements
+* Space surfaces are all non-intersecting polygons (this code is currently being debated and subject for review)
+	* same applies regarding ShellGeometry and SpaceBoundary elements as stated above
+* do Space surfaces form a valid enclosure, i.e. – how watertight is the enclosure definition
+	* we can only do these tests if either ShellGeometry or SurfaceBoundary elements are present
+
+Since the ShellGeometry element and SurfaceBoundary element are optional in the Space definition as of the latest XSD, we’ve had to make special accommodation to only check them if they are present. There is not a requirement currently that requires both to be present in a Space element. Either one or the other can be present exclusively.
 
 
-## Space Element
+## Space Attributes
 
-### Schema GreenBuildingXML_Ver6.01.xsd 
-
-From: <http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link34B>
-
-### Usage
-
-Documentation: A space represents a volume enclosed by surfaces
-
-Area and Volume should occur according to the Schema but are not required by Open Studio in order to import without warning.
-
-Shell Geometry elements and Space Boundary elements and their data frequently appear in Space elements but are not required
-
-
-### Space attributes:
-
-Name Description Lighting LightingControl InfiltrationFlow PeopleNumber PeopleHeatGain LightPowerPerArea
-EquipPowerPerArea AirChangesPerHour Area Temperature Volume PlanarGeometry ShellGeometry AirLoopId HydronicLoopId
-MeterId IntEquipId AirLoopEquipmentId HydronicLoopEquipmentId CADObjectId TypeCode SpaceBoundary
-
-
+### [spaceType Schema Definition]( http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#LinkB6 )
 
 > spaceType represents how a space is used.
 > an IESNA and ASHRAE project for determining lighting power density for individual spaces.
-
 
 		enumeration 	ActiveStorage
 		enumeration 	ActiveStorageHospitalOrHealthcare
@@ -158,28 +175,35 @@ MeterId IntEquipId AirLoopEquipmentId HydronicLoopEquipmentId CADObjectId TypeCo
 
 
 
-### The Phase 2 Validator - Space Element Tests (stage 3)
+## Space Children
 
-From <https://github.com/GreenBuildingXML/ValidatorPhase1/wiki>
+* Name
+* Description
+* Lighting
+* LightingControl
+* InfiltrationFlow
+* PeopleNumber
+* PeopleHeatGain
+* LightPowerPerArea
+* EquipPowerPerArea
+* AirChangesPerHour
+* Area
+* Temperature
+* Volume
+* PlanarGeometry
+* ShellGeometry
+* AirLoopId
+* HydronicLoopId
+* MeterId
+* IntEquipId
+* AirLoopEquipmentId
+* HydronicLoopEquipmentId
+* CADObjectId
+* TypeCode
+* SpaceBoundary
 
-The Phase 2 validator is solely focused on validating gbXML as in the Phase 1 validator, with the additional checks of the geometry descriptions that are contained within the gbXML file format. Since all of this geometry information is contained within the Space and Surface Elements (and their children), the validator is designed to hone in on these elements and thoroughly review them.
 
-Beyond checking for valid XML and well-formedness when compared to the XSD, the validator also performs the following checks. At the Space level of the document, for each Space found in the document:
-
-* Are all required fields in place?
-* Unique Space id test (this is a duplicate of the Phase 1 test)
-	* all Space id attributes have to be unique
-* Space surfaces Planarity tests
-	* do the spaces contain ShellGeometry and SpaceBoundary elements? If so, check otherwise do nothing
-* Space surface polygons winding in counter-clockwise order (this code is currently being debated and subject for review)
-	* same applies regarding ShellGeometry and SpaceBoundary elements
-* Space surfaces are all non-intersecting polygons (this code is currently being debated and subject for review)
-	* same applies regarding ShellGeometry and SpaceBoundary elements as stated above
-* do Space surfaces form a valid enclosure, i.e. – how watertight is the enclosure definition
-	* we can only do these tests if either ShellGeometry or SurfaceBoundary elements are present
-
-Since the ShellGeometry element and SurfaceBoundary element are optional in the Space definition as of the latest XSD, we’ve had to make special accommodation to only check them if they are present. There is not a requirement currently that requires both to be present in a Space element. Either one or the other can be present exclusively.
-
+## Space Samples
 
 ### From @bwelle
 
@@ -193,17 +217,46 @@ For Space definitions, we see this in the working file:
 
 
 
-In the Build Well export we have this:
+### Space Elements from Open Studio file seb.osm exported by Open Studio as seb.xml
 
-              <Space zoneIdRef="bw-zone-1" id="bw-space-6" buildingStoreyIdRef="bw-story-2"
-               conditionType="HeatedAndCooled" >
-				<Name>space 6</Name>
-				<Description>length front</Description>
-				<Area>623.5281374238571</Area>
-				<Volume>7482.337649086285</Volume>
-			</Space>
+Source file on GitHub
 
-The structure is the same, but in the Build Well export above at some point the zone IDs start to diverge from the space IDs. The Zone ID and the Space ID should always be the same.
+* <https://github.com/NREL/OpenStudio/blob/develop/openstudiocore/resources/Examples/compact_osw/files/seb.osm>
 
+Text for Space elements in exported gbXML file: 
 
-There is no need for space shell geometry for Open Studio, nor for the import into FZK Viewer.
+      <Space id="Entry_way_1" zoneIdRef="Single_zone" buildingStoreyIdRef="Level_0">
+        <Name>Entry way 1</Name>
+        <Area>12.451266</Area>
+        <Volume>41.746604</Volume>
+        <LightPowerPerArea unit="WattPerSquareMeter">7.992762</LightPowerPerArea>
+      </Space>
+      <Space id="Utility_1" zoneIdRef="Single_zone" buildingStoreyIdRef="Level_0">
+        <Name>Utility 1</Name>
+        <Area>16.437597</Area>
+        <Volume>55.111975</Volume>
+        <PeopleNumber unit="SquareMPerPerson">16.437597</PeopleNumber>
+        <LightPowerPerArea unit="WattPerSquareMeter">12.123427</LightPowerPerArea>
+        <EquipPowerPerArea unit="WattPerSquareMeter">5.475253</EquipPowerPerArea>
+      </Space>
+      <Space id="Open_area_1" zoneIdRef="Single_zone" buildingStoreyIdRef="Level_0">
+        <Name>Open area 1</Name>
+        <Area>35.653368</Area>
+        <Volume>119.538612</Volume>
+        <PeopleNumber unit="SquareMPerPerson">7.130674</PeopleNumber>
+        <LightPowerPerArea unit="WattPerSquareMeter">13.059075</LightPowerPerArea>
+        <EquipPowerPerArea unit="WattPerSquareMeter">57.217596</EquipPowerPerArea>
+      </Space>
+      <Space id="Small_office_1" zoneIdRef="Single_zone" buildingStoreyIdRef="Level_0">
+        <Name>Small office 1</Name>
+        <Area>17.667075</Area>
+        <Volume>59.234168</Volume>
+        <PeopleNumber unit="SquareMPerPerson">8.833537</PeopleNumber>
+        <LightPowerPerArea unit="WattPerSquareMeter">38.824764</LightPowerPerArea>
+        <EquipPowerPerArea unit="WattPerSquareMeter">20.093875</EquipPowerPerArea>
+      </Space>
+      <Space id="Level_0_Ceiling_Plenum" zoneIdRef="Level_0_Ceiling_Plenum_Zone" buildingStoreyIdRef="Level_0">
+        <Name>Level 0 Ceiling Plenum</Name>
+        <Area>0.000000</Area>
+        <Volume>0.000000</Volume>
+      </Space>

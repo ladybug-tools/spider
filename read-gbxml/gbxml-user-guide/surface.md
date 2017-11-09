@@ -40,7 +40,7 @@ Surface types marked with an asterisk are currently recognized by gbXML Reader. 
 
 #### Openings
 
-Openings should be Id'd sequentially as there may be different numbers of windows per wall or elevation.
+The id numbers for Openings should be sequential as there may be different numbers of windows per wall or elevation.
 
 
 #### Text for copying to other text or apps
