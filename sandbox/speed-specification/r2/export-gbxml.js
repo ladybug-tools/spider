@@ -4,7 +4,7 @@
 
 	var checkWindow;
 
-	let textMenu;
+	let textGbxml;
 
 	let campus;
 	let building;
@@ -12,6 +12,7 @@
 	let storeys;
 	let zones;
 	let spaces;
+
 	let openingId = 1;
 	let overhangId = 1
 	let shadeId = 1;
@@ -19,6 +20,8 @@
 	function initExportGbxml() {
 
 		campus = {};
+
+// area and volume need figuring out. Are they givens or calculated at run time?
 
 		campus.area = 5000;
 		campus.areaUnit = 'SquareFeet';
@@ -83,6 +86,8 @@
 
 	}
 
+
+
 	function getBuildingData() {
 
 		if ( !theBuilding.mesh ) { alert( 'Please create a building first. '); return; };
@@ -94,9 +99,9 @@
 
 		if ( window.checkWindow ) { window.checkWindow.close(); }
 
-		textMenu = '';
+		textGbxml = '';
 
-		textMenu +=
+		textGbxml +=
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 			'<gbXML xmlns="http://www.gbxml.org/schema" ' +
@@ -130,26 +135,26 @@
 			'\t\t</Location>\n' +
 
 			'\t\t<Building id="' + campus.buildingId + '" buildingType="Office" >\n' +
-
 				'\t\t\t<Area>' + campus.area + '</Area>\n' +
 				'\t\t\t<Name>' + theBuilding.mesh.name + '</Name>\n' +
 				'\t\t\t<Description>' + campus.description + '</Description>\n' +
 				'\t\t\t<StreetAddress>' + campus.streetAddress + '</StreetAddress>\n' +
 			'\t\t\t<Volume>' + campus.volume + '</Volume>\n' +
+
 		'';
 
 
-		textMenu += getBuildingStoreys( campus );
+		textGbxml += getBuildingStoreys( campus );
 
-		textMenu += getSpacesAndZones( campus );
+		textGbxml += getSpacesAndZones( campus );
 
-		textMenu += '\t\t</Building>\n';
+		textGbxml += '\t\t</Building>\n';
 
-		textMenu += getSurfaces( theBuilding );
+		textGbxml += getSurfaces( theBuilding );
 
 		zonesText = getZones( campus );
 
-		textMenu +=
+		textGbxml +=
 
 			'\t</Campus>\n' +
 			zonesText +
@@ -161,9 +166,10 @@
 		divExportContent.innerHTML =
 
 			'gbXML data<br>' +
-			( campus.areaCheck ? 'area check: ' + campus.areaCheck + '<br>' : '' ) +
+			'Specified area: ' + theBuilding.area.toLocaleString() + '<br>' +
+			( theBuilding.areaCheck ? 'space by space area check: ' + theBuilding.areaCheck.toLocaleString() + '<br>' : '' ) +
 			'<textarea id=buildingData rows=50 style=height:500px;tab-size:4;width:100%; >' +
-			textMenu +
+			textGbxml +
 			'</textarea>'
 
 		'';
@@ -204,6 +210,7 @@
 		const spaces = theBuilding.spaces;
 		const zones = theBuilding.zones;
 		let spaceId = 1;
+		theBuilding.areaCheck = 0;
 
 //console.log( 'theBuilding.mesh.children', theBuilding.mesh );
 
@@ -213,7 +220,7 @@
 			const spacesPerStorey = vertices.length / 5 - 1;
 			let storey = i + 1;
 			let pathInterior = [];
-			theBuilding.areaCheck = 0;
+
 
 			for ( var j = 0; j < spacesPerStorey; j++ ) {
 //console.log( 'spacesPerStorey', spacesPerStorey );
@@ -353,7 +360,7 @@
 	function getSurfacesTheBuilding() {
 //console.log( 'theBuilding', theBuilding.children[ 0 ] );
 
-		const geo = new THREE.BoxBufferGeometry( 3, 1, 20 );
+		const geometry = new THREE.BoxBufferGeometry( 3, 1, 20 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
 		let textSurfacesBits = '';
@@ -367,8 +374,8 @@
 		for ( let i = 0; i < storeys; i++ ) {
 //console.log( 'storeys', storeys, theBuilding.mesh  );
 
-			const meshFloor = theBuilding.mesh.children[ i ];
-			const vertices = meshFloor.geometry.vertices;
+			const meshStorey = theBuilding.mesh.children[ i ];
+			const vertices = meshStorey.geometry.vertices;
 			const spacesPerStorey = vertices.length / 5 - 1;
 			const path = [];
 
@@ -380,19 +387,19 @@
 				const interiorSpaceId = i * spacesPerStorey + spacesPerStorey;
 
 				const vect = vertices[ pt2 ].clone().sub( vertices[ pt1 ].clone() ).normalize();
-				const angle = 888; // r2d * Math.atan2( vect.y, vect.x );
+				const angle = 999999; // r2d * Math.atan2( vect.y, vect.x );
 
 //console.log( 'angle', angle );
 
-//			const mesh = new THREE.Mesh( geo, material );
+//			const mesh = new THREE.Mesh( geometry, material );
 //			mesh.position.set( vertices[ pt1 ] );
 //			scene.add( mesh );
 
 				quad = {
 					angle: angle,
-					description: 'floor: ' + ( i + firstStoreyId ),
-					mesh: meshFloor,
-					name: 'floor-' + ( i + firstStoreyId ) + '-space-' + ( j + 1 ),
+					description: 'storey: ' + ( i + firstStoreyId ),
+					mesh: meshStorey,
+					name: 'storey-' + ( i + firstStoreyId ) + '-space-' + ( j + 1 ),
 					type: ( i === 0 ? 'SlabOnGrade' : 'InteriorFloor' ),
 					spaceId1: spaceId,
 					spaceId2: ( i === 0 ? undefined : spaceId + spacesPerStorey ),
@@ -406,9 +413,9 @@
 
 				quad = {
 					angle: angle,
-					description: 'interior wall: ' + ( i + 1 ),
-					mesh: meshFloor,
-					name: 'interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+					description: 'interior wall: ' + spaceId,
+					mesh: meshStorey,
+					name: 'interior-wall-storey-' + ( i + 1 ) + '-space-' + ( j + 1 ),
 					type: 'InteriorWall',
 					spaceId1: spaceId,
 					spaceId2: ( spaceId === interiorSpaceId ? firstSpaceId : interiorSpaceId ),
@@ -426,9 +433,9 @@
 
 					quad = {
 						angle: angle,
-						description: 'roof: ' + ( i + 1 ),
-						mesh: meshFloor,
-						name: 'roof-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+						description: 'roof: ' + spaceId,
+						mesh: meshStorey,
+						name: 'roof-storey-' + ( i + 1 ) + '-space-' + ( j + 1 ),
 						type: 'Roof',
 						spaceId1: spaceId,
 						spaceId2: undefined,
@@ -444,9 +451,9 @@
 
 				quad = {
 					angle: angle,
-					description: 'wall: ' + ( i + 1 ),
-					mesh: meshFloor,
-					name: 'exterior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+					description: 'wall: ' + spaceId,
+					mesh: meshStorey,
+					name: 'exterior-wall-storey-' + ( i + 1 ) + '-space-' + ( j + 1 ),
 					type: 'ExteriorWall',
 					spaceId1: spaceId,
 					spaceId2: undefined,
@@ -455,6 +462,7 @@
 					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
 
 				};
+
 				surfaceId ++;
 
 				textSurfacesBits += getSingleSurface( quad );
@@ -462,8 +470,8 @@
 				quad = {
 					angle: angle,
 					description: 'diagonal-wall: ' + ( i + 1 ),
-					mesh: meshFloor,
-					name: 'diagonal-interior-wall-floor-' + ( i + 1 ) + '-space-' + ( j + 1 ),
+					mesh: meshStorey,
+					name: 'diagonal-interior-wall-storey-' + ( i + 1 ) + '-space-' + ( j + 1 ),
 					type: 'InteriorWall',
 					spaceId1: spaceId,
 					spaceId2: ( spaceId < spacesPerStorey ? spaceId + 1 : 1 ),
@@ -483,13 +491,13 @@
 
 			}
 
-			textSurfacesBits += getSurfacesOverhangs( meshFloor, path, surfaceId ++ );
+			textSurfacesBits += getSurfacesOverhangs( meshStorey, path, surfaceId ++ );
 
-			textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'InteriorFloor', surfaceId ++, spaceId  );
+			textSurfacesBits += getSurfacesSlabs( meshStorey, path, 'InteriorFloor', surfaceId ++, spaceId  );
 
 			if ( i + 1 === storeys ) {
 
-				textSurfacesBits += getSurfacesSlabs( meshFloor, path, 'Roof', surfaceId ++, spaceId++, theBuilding.storeyHeight );
+				textSurfacesBits += getSurfacesSlabs( meshStorey, path, 'Roof', surfaceId ++, spaceId++, theBuilding.storeyHeight );
 
 			}
 
@@ -528,6 +536,7 @@
 
 		}
 
+
 	if( quad.type === 'ExteriorWall' ) {
 
 			let vertex = quad.vertices[ 0 ].clone();
@@ -540,14 +549,17 @@
 			const pt2 = vertex;
 
 			const vect = pt1.clone().sub( pt2.clone() ).normalize();
-			const angle = r2d * Math.atan2( vect.y, vect.x );
+			const angleRadians = Math.atan2( vect.y, vect.x );
+//console.log( 'angle', angleRadians, pt1, pt2 );
 
-//console.log( 'angle', angle, pt1, pt2 );
+			let angle = ( - r2d * angleRadians - 90 );
+			if ( angle <= -180 ) { angle += 360; }
 			quad.angle = angle;
+//console.log( 'quad', quad );
 
-			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.copy( pt1 );
-			scene.add( mesh );
+//			const mesh = new THREE.Mesh( geometry, material );
+//			mesh.position.copy( pt1 );
+//			scene.add( mesh );
 //console.log( 'mesh', mesh );
 
 		}
@@ -653,11 +665,12 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, height ) );
 
 		quad = {
+			angle: 90,
 			description: type + ': ',
 			area: area,
 			volume: area * theBuilding.storeyHeight,
 			mesh: slab,
-			name: 'slab-floor-' + slab.userData.storey,
+			name: 'slab-storey-' + slab.userData.storey,
 			type: type,
 			spaceId1: spaceId,
 			spaceId2: undefined,
@@ -667,7 +680,7 @@
 
 		textInterior += getSingleSurface( quad )
 
-//		textInterior += getSingleSurface( floor, geometry.vertices, type, surfaceId )
+//		textInterior += getSingleSurface( storey, geometry.vertices, type, surfaceId )
 
 //		material = new THREE.MeshNormalMaterial();
 //		mesh = new THREE.Mesh( geometry, material );
@@ -686,7 +699,6 @@
 //		const geometry = new THREE.BoxBufferGeometry( 3, 2, 1 );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-//		let overhangId = ( storey.userData.storey - 1 ) * path.length + 1;
 		let id = 1;
 		for ( let i = 0; i < storey.children.length; i++ ) {
 
@@ -775,7 +787,7 @@
 		for ( let i = 0; i < faces.length; i++ ) {
 
 			textSurfaces +=
-				'\t\t<Surface surfaceType="Shade" id="shade-' + ( i + 1 ) + '" >\n' +
+				'\t\t<Surface surfaceType="Shade" id="shade-' + ( shadeId ++ ) + '" >\n' +
 				'\t\t\t<Name>' + object.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
@@ -801,9 +813,9 @@
 				const vertex = vertices[ k ];
 				textSurfaces += getCartesianPointText( vertex );
 
-				const mesh = new THREE.Mesh( geometry, material );
-				mesh.position.copy( vertex );
-				scene.add( mesh );
+//				const mesh = new THREE.Mesh( geometry, material );
+//				mesh.position.copy( vertex );
+//				scene.add( mesh );
 
 			}
 
@@ -846,14 +858,15 @@
 
 	function checkGbxmlData() {
 
-		if ( !textMenu ){ alert( 'get building data first' ); return; }
+		if ( !textGbxml ){ alert( 'get building data first' ); return; }
 
-		let lines = textMenu.split( '\n' );
+		let lines = textGbxml.split( '\n' );
 		const n = '\n';
 
 		let text =
-			selObject.value + n + n +
-			'line 0: ' + lines[ 1 ] + n + n +
+			'Campus: ' + campus.name + n + n +
+			'Building: ' + theBuilding.name + n + n +
+			'Line 0: ' + lines[ 1 ] + n + n +
 		'';
 
 		errors = 0;
@@ -866,6 +879,7 @@
 
 				line.search( 'NaN' ) > 0 ||
 				line.search( 'undefine' ) > 0 ||
+//				line.search( '888' ) > 0 ||
 				( line.search( 'AdjacentSpaceId ' ) > 0 && line === lines[ i + 1 ] )
 
 			) {

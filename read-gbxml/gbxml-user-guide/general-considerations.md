@@ -24,9 +24,8 @@ Your browser will either open the file or provide a helpful error message as to 
 * <https://www.openstudio.net/>
 	* Free and open source
 	* Download, install and update
-
-
 	* Click 'import 
+
 ### Other methods
 
 See <https://github.com/GreenBuildingXML>

@@ -637,7 +637,10 @@
 
 				if ( storey === 0 ) {
 
-					placard = drawPlacard( 'angle ' + ( r2d * angle ), 0.1, 120, open.position.x, open.position.y, 40 );
+//					placard = drawPlacard( ['space ' + ( i + 1 ), 'angle ' + ( - r2d * angle + 90 ) ], 0.1, 120, open.position.x, open.position.y, 40 );
+					placard = drawPlacard( 'angle ' + ( - r2d * angle + 90 ), 0.1, 120, open.position.x, open.position.y, 40 );
+
+
 					mesh.add( placard );
 
 				}

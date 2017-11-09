@@ -18,7 +18,7 @@
 	function initAdacentBuildingsInputFields() {
 
 		let text =
-			'<h2>Adjacent Buildings</h2>' +
+
 			'<table>' +
 			'<tr>' +
 				'<td></td>' +
@@ -44,7 +44,7 @@
 
 		text += '</table>';
 
-		divAdjacentBuildings.innerHTML = text;
+		divAdjacentBuildingsTable.innerHTML = text;
 
 	}
 

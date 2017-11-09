@@ -4,7 +4,7 @@
 
 ### Full screen: [Speed Spec R2]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/index.html )
 
-### Full screen: [SPEED R2 gbXML Sample Files]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/gbxml-viewer.html )
+### Full screen: [SPEED R2 gbXML Sample Files]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/test-gbxml-files/gbxml-viewer.html )
 
 
 
@@ -110,9 +110,36 @@ A side benefit to this process is that the JSON file might be readable by the gb
 A good coding practice is to follow the coding style of the primary library used. Since this script builds on Three.js, the coding style used here follows the specification described in [Mr.doob's Coding Style]( https://github.com/mrdoob/three.js/wiki/Mr.doob's-Code-Style%E2%84%A2 ).
 
 
+## General Issues
+
+* 2017-11-09 ~ Geometry.js ~ LTH shapes areas not being updated prperly when area of floor number changes
+* 2017-11-09 ~ Geometry.js ~ LTH shapes need suitable defaults
+
+
+
+## To Do
+
+* 2017-11-09 ~ Add drawMeshAtVertex() function
+* 2017-11-09 ~ Azimuths for all surfces?
 
 ## Change Log
 
+
+### 2017-11-09 ~ Theo
+
+Spped Spec R2.4
+* speed-spec-r2.html
+	* Add links to each JavaScript file
+
+* export-gbxml.js
+	* Code clean-up
+	* 'Check the' data button back in operation
+	* Shade surface ids now sequential
+	* theBuilging.areacheck functioning and reporting
+	* Debug meshes at vertices commented out
+	* RectangularGeometry: azimuths being exported to gbXML standard - just for ExteriorWall. Maybe. We don't have a good way of checking yet
+	* More efforts at updating 'floor' variables to 'storey'
+	* moved gbxml viewer to own folder
 
 ### 2017-11-07 ~ Theo
 
