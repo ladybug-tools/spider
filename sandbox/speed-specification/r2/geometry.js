@@ -305,6 +305,7 @@
 			theBuilding.thickness = thk;
 
 			wid = ( ( area - thk * len ) / thk + thk ) / flr;
+			theBuilding.width = wid;
 
 // locks up the sliders
 //			theBuilding.width = wid;

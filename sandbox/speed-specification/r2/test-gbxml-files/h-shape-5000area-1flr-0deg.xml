@@ -101,9 +101,9 @@
 			</Space>
 		</Building>
 		<Surface surfaceType="SlabOnGrade" id="surface-1" >
-			<Name>floor-1-space-1</Name>
+			<Name>storey-1-space-1</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-1" />
@@ -133,9 +133,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-2" >
-			<Name>interior-wall-floor-1-space-1</Name>
+			<Name>interior-wall-storey-1-space-1</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-1" />
@@ -166,9 +166,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-3" >
-			<Name>roof-floor-1-space-1</Name>
+			<Name>roof-storey-1-space-1</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-1" />
@@ -198,9 +198,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-4" >
-			<Name>exterior-wall-floor-1-space-1</Name>
+			<Name>exterior-wall-storey-1-space-1</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>-90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-1" />
@@ -256,9 +256,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-5" >
-			<Name>diagonal-interior-wall-floor-1-space-1</Name>
+			<Name>diagonal-interior-wall-storey-1-space-1</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-1" />
@@ -289,9 +289,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-6" >
-			<Name>floor-1-space-2</Name>
+			<Name>storey-1-space-2</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-2" />
@@ -321,9 +321,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-7" >
-			<Name>interior-wall-floor-1-space-2</Name>
+			<Name>interior-wall-storey-1-space-2</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-2" />
@@ -354,9 +354,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-8" >
-			<Name>roof-floor-1-space-2</Name>
+			<Name>roof-storey-1-space-2</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-2" />
@@ -386,9 +386,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-9" >
-			<Name>exterior-wall-floor-1-space-2</Name>
+			<Name>exterior-wall-storey-1-space-2</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>180</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-2" />
@@ -444,9 +444,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-10" >
-			<Name>diagonal-interior-wall-floor-1-space-2</Name>
+			<Name>diagonal-interior-wall-storey-1-space-2</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-2" />
@@ -477,9 +477,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-11" >
-			<Name>floor-1-space-3</Name>
+			<Name>storey-1-space-3</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-3" />
@@ -509,9 +509,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-12" >
-			<Name>interior-wall-floor-1-space-3</Name>
+			<Name>interior-wall-storey-1-space-3</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-3" />
@@ -542,9 +542,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-13" >
-			<Name>roof-floor-1-space-3</Name>
+			<Name>roof-storey-1-space-3</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-3" />
@@ -574,9 +574,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-14" >
-			<Name>exterior-wall-floor-1-space-3</Name>
+			<Name>exterior-wall-storey-1-space-3</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>-90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-3" />
@@ -632,9 +632,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-15" >
-			<Name>diagonal-interior-wall-floor-1-space-3</Name>
+			<Name>diagonal-interior-wall-storey-1-space-3</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-3" />
@@ -665,9 +665,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-16" >
-			<Name>floor-1-space-4</Name>
+			<Name>storey-1-space-4</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-4" />
@@ -697,9 +697,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-17" >
-			<Name>interior-wall-floor-1-space-4</Name>
+			<Name>interior-wall-storey-1-space-4</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-4" />
@@ -730,9 +730,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-18" >
-			<Name>roof-floor-1-space-4</Name>
+			<Name>roof-storey-1-space-4</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-4" />
@@ -762,9 +762,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-19" >
-			<Name>exterior-wall-floor-1-space-4</Name>
+			<Name>exterior-wall-storey-1-space-4</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>0</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-4" />
@@ -820,9 +820,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-20" >
-			<Name>diagonal-interior-wall-floor-1-space-4</Name>
+			<Name>diagonal-interior-wall-storey-1-space-4</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-4" />
@@ -853,9 +853,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-21" >
-			<Name>floor-1-space-5</Name>
+			<Name>storey-1-space-5</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-5" />
@@ -885,9 +885,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-22" >
-			<Name>interior-wall-floor-1-space-5</Name>
+			<Name>interior-wall-storey-1-space-5</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-5" />
@@ -918,9 +918,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-23" >
-			<Name>roof-floor-1-space-5</Name>
+			<Name>roof-storey-1-space-5</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-5" />
@@ -950,9 +950,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-24" >
-			<Name>exterior-wall-floor-1-space-5</Name>
+			<Name>exterior-wall-storey-1-space-5</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-5" />
@@ -1008,9 +1008,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-25" >
-			<Name>diagonal-interior-wall-floor-1-space-5</Name>
+			<Name>diagonal-interior-wall-storey-1-space-5</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-5" />
@@ -1041,9 +1041,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-26" >
-			<Name>floor-1-space-6</Name>
+			<Name>storey-1-space-6</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-6" />
@@ -1073,9 +1073,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-27" >
-			<Name>interior-wall-floor-1-space-6</Name>
+			<Name>interior-wall-storey-1-space-6</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-6" />
@@ -1106,9 +1106,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-28" >
-			<Name>roof-floor-1-space-6</Name>
+			<Name>roof-storey-1-space-6</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-6" />
@@ -1138,9 +1138,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-29" >
-			<Name>exterior-wall-floor-1-space-6</Name>
+			<Name>exterior-wall-storey-1-space-6</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>180</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-6" />
@@ -1196,9 +1196,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-30" >
-			<Name>diagonal-interior-wall-floor-1-space-6</Name>
+			<Name>diagonal-interior-wall-storey-1-space-6</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-6" />
@@ -1229,9 +1229,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-31" >
-			<Name>floor-1-space-7</Name>
+			<Name>storey-1-space-7</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-7" />
@@ -1261,9 +1261,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-32" >
-			<Name>interior-wall-floor-1-space-7</Name>
+			<Name>interior-wall-storey-1-space-7</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-7" />
@@ -1294,9 +1294,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-33" >
-			<Name>roof-floor-1-space-7</Name>
+			<Name>roof-storey-1-space-7</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-7" />
@@ -1326,9 +1326,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-34" >
-			<Name>exterior-wall-floor-1-space-7</Name>
+			<Name>exterior-wall-storey-1-space-7</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-7" />
@@ -1384,9 +1384,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-35" >
-			<Name>diagonal-interior-wall-floor-1-space-7</Name>
+			<Name>diagonal-interior-wall-storey-1-space-7</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-7" />
@@ -1417,9 +1417,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-36" >
-			<Name>floor-1-space-8</Name>
+			<Name>storey-1-space-8</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-8" />
@@ -1449,9 +1449,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-37" >
-			<Name>interior-wall-floor-1-space-8</Name>
+			<Name>interior-wall-storey-1-space-8</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-8" />
@@ -1482,9 +1482,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-38" >
-			<Name>roof-floor-1-space-8</Name>
+			<Name>roof-storey-1-space-8</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-8" />
@@ -1514,9 +1514,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-39" >
-			<Name>exterior-wall-floor-1-space-8</Name>
+			<Name>exterior-wall-storey-1-space-8</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>0</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-8" />
@@ -1572,9 +1572,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-40" >
-			<Name>diagonal-interior-wall-floor-1-space-8</Name>
+			<Name>diagonal-interior-wall-storey-1-space-8</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-8" />
@@ -1605,9 +1605,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-41" >
-			<Name>floor-1-space-9</Name>
+			<Name>storey-1-space-9</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-9" />
@@ -1637,9 +1637,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-42" >
-			<Name>interior-wall-floor-1-space-9</Name>
+			<Name>interior-wall-storey-1-space-9</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-9" />
@@ -1670,9 +1670,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-43" >
-			<Name>roof-floor-1-space-9</Name>
+			<Name>roof-storey-1-space-9</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-9" />
@@ -1702,9 +1702,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-44" >
-			<Name>exterior-wall-floor-1-space-9</Name>
+			<Name>exterior-wall-storey-1-space-9</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-9" />
@@ -1760,9 +1760,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-45" >
-			<Name>diagonal-interior-wall-floor-1-space-9</Name>
+			<Name>diagonal-interior-wall-storey-1-space-9</Name>
 			<RectangularGeometry>
-				<Azimuth>180</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-9" />
@@ -1793,9 +1793,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-46" >
-			<Name>floor-1-space-10</Name>
+			<Name>storey-1-space-10</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-10" />
@@ -1825,9 +1825,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-47" >
-			<Name>interior-wall-floor-1-space-10</Name>
+			<Name>interior-wall-storey-1-space-10</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-10" />
@@ -1858,9 +1858,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-48" >
-			<Name>roof-floor-1-space-10</Name>
+			<Name>roof-storey-1-space-10</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-10" />
@@ -1890,9 +1890,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-49" >
-			<Name>exterior-wall-floor-1-space-10</Name>
+			<Name>exterior-wall-storey-1-space-10</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>180</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-10" />
@@ -1948,9 +1948,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-50" >
-			<Name>diagonal-interior-wall-floor-1-space-10</Name>
+			<Name>diagonal-interior-wall-storey-1-space-10</Name>
 			<RectangularGeometry>
-				<Azimuth>-90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-10" />
@@ -1981,9 +1981,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-51" >
-			<Name>floor-1-space-11</Name>
+			<Name>storey-1-space-11</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-11" />
@@ -2013,9 +2013,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-52" >
-			<Name>interior-wall-floor-1-space-11</Name>
+			<Name>interior-wall-storey-1-space-11</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-11" />
@@ -2046,9 +2046,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-53" >
-			<Name>roof-floor-1-space-11</Name>
+			<Name>roof-storey-1-space-11</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-11" />
@@ -2078,9 +2078,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-54" >
-			<Name>exterior-wall-floor-1-space-11</Name>
+			<Name>exterior-wall-storey-1-space-11</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>-90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-11" />
@@ -2136,9 +2136,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-55" >
-			<Name>diagonal-interior-wall-floor-1-space-11</Name>
+			<Name>diagonal-interior-wall-storey-1-space-11</Name>
 			<RectangularGeometry>
-				<Azimuth>0</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-11" />
@@ -2169,9 +2169,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="SlabOnGrade" id="surface-56" >
-			<Name>floor-1-space-12</Name>
+			<Name>storey-1-space-12</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-12" />
@@ -2201,9 +2201,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-57" >
-			<Name>interior-wall-floor-1-space-12</Name>
+			<Name>interior-wall-storey-1-space-12</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-12" />
@@ -2233,9 +2233,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-58" >
-			<Name>roof-floor-1-space-12</Name>
+			<Name>roof-storey-1-space-12</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-12" />
@@ -2265,9 +2265,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="ExteriorWall" id="surface-59" >
-			<Name>exterior-wall-floor-1-space-12</Name>
+			<Name>exterior-wall-storey-1-space-12</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>0</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-12" />
@@ -2323,9 +2323,9 @@
 			</Opening>
 		</Surface>
 		<Surface surfaceType="InteriorWall" id="surface-60" >
-			<Name>diagonal-interior-wall-floor-1-space-12</Name>
+			<Name>diagonal-interior-wall-storey-1-space-12</Name>
 			<RectangularGeometry>
-				<Azimuth>90</Azimuth>
+				<Azimuth>999999</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-12" />
@@ -2356,9 +2356,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="InteriorFloor" id="surface-62" >
-			<Name>slab-floor-0</Name>
+			<Name>slab-storey-0</Name>
 			<RectangularGeometry>
-				<Azimuth>undefined</Azimuth>
+				<Azimuth>90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-13" />
@@ -2428,9 +2428,9 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-63" >
-			<Name>slab-floor-0</Name>
+			<Name>slab-storey-0</Name>
 			<RectangularGeometry>
-				<Azimuth>undefined</Azimuth>
+				<Azimuth>90</Azimuth>
 			</RectangularGeometry>
 			<CADOjectId>none</CADOjectId>
 			<AdjacentSpaceId spaceIdRef="space-13" />
