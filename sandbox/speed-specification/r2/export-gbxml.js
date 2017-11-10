@@ -14,7 +14,7 @@
 	let spaces;
 
 	let openingId = 1;
-	let overhangId = 1
+//	let overhangId = 1
 	let shadeId = 1;
 
 	function initExportGbxml() {
@@ -376,9 +376,10 @@
 
 			const meshStorey = theBuilding.mesh.children[ i ];
 			const vertices = meshStorey.geometry.vertices;
-			const spacesPerStorey = vertices.length / 5 - 1;
+			spacesPerStorey = vertices.length / 5 - 1;
+			theBuilding.spacesPerStorey = spacesPerStorey;
 			const path = [];
-
+console.log( 'spacesPerStorey', spacesPerStorey );
 			for ( let j = 0; j < spacesPerStorey; j++ ) {
 
 				const pt1 = j * 5 ;
@@ -395,6 +396,7 @@
 //			mesh.position.set( vertices[ pt1 ] );
 //			scene.add( mesh );
 
+
 				quad = {
 					angle: angle,
 					description: 'storey: ' + ( i + firstStoreyId ),
@@ -402,7 +404,7 @@
 					name: 'storey-' + ( i + firstStoreyId ) + '-space-' + ( j + 1 ),
 					type: ( i === 0 ? 'SlabOnGrade' : 'InteriorFloor' ),
 					spaceId1: spaceId,
-					spaceId2: ( i === 0 ? undefined : spaceId + spacesPerStorey ),
+					spaceId2: ( i === 0 ? undefined : spaceId - spacesPerStorey - 1 ),
 					surfaceId: surfaceId,
 					vertices: [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ]
 				};
@@ -493,11 +495,14 @@
 
 			textSurfacesBits += getSurfacesOverhangs( meshStorey, path, surfaceId ++ );
 
-			textSurfacesBits += getSurfacesSlabs( meshStorey, path, 'InteriorFloor', surfaceId ++, spaceId  );
+			const slabType = i === 0 ? 'SlabOnGrade' : 'InteriorFloor';
+
+			textSurfacesBits += getSurfacesSlabs( meshStorey, path, slabType, surfaceId ++, spaceId  );
 
 			if ( i + 1 === storeys ) {
 
-				textSurfacesBits += getSurfacesSlabs( meshStorey, path, 'Roof', surfaceId ++, spaceId++, theBuilding.storeyHeight );
+				pathRoof = path.reverse();
+				textSurfacesBits += getSurfacesSlabs( meshStorey, pathRoof, 'Roof', surfaceId ++, spaceId ++, theBuilding.storeyHeight );
 
 			}
 
@@ -670,10 +675,10 @@
 			area: area,
 			volume: area * theBuilding.storeyHeight,
 			mesh: slab,
-			name: 'slab-storey-' + slab.userData.storey,
+			name: 'storey-' + ( slab.userData.storey + 1 ) + '-space-' + spaceId,
 			type: type,
 			spaceId1: spaceId,
-			spaceId2: undefined,
+			spaceId2: ( slab.userData.storey === 0 ? undefined : spaceId - theBuilding.spacesPerStorey - 1 ),
 			surfaceId: surfaceId,
 			vertices: geometry.vertices
 		};
@@ -706,8 +711,8 @@
 			if ( overhang.name !== 'overhang' ) { continue; }
 
 			textOver +=
-				'\t\t<Surface surfaceType="Shade" id="shade-' + ( overhangId ++ ) + '" >\n' +
-				'\t\t\t<Name>overhang-storey-' + storey.userData.storey +'-space-' + ( id++ )+ '</Name>\n' +
+				'\t\t<Surface surfaceType="Shade" id="shade-' + ( shadeId ++ ) + '" >\n' +
+				'\t\t\t<Name>overhang-storey-' + ( storey.userData.storey + 1 ) + '-space-' + ( id++ )+ '</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
@@ -916,6 +921,8 @@
 ////////////////////
 
 	function saveFile() {
+
+		if( !buildingData.value ) { alert( 'Get some building data first.' ); return; }
 
 		let blob;
 

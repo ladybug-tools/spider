@@ -803,8 +803,8 @@
 				</PolyLoop>
 			</PlanarGeometry>
 		</Surface>
-		<Surface surfaceType="InteriorFloor" id="surface-22" >
-			<Name>slab-storey-0</Name>
+		<Surface surfaceType="SlabOnGrade" id="surface-22" >
+			<Name>storey-1-space-5</Name>
 			<RectangularGeometry>
 				<Azimuth>90</Azimuth>
 			</RectangularGeometry>
@@ -836,7 +836,7 @@
 			</PlanarGeometry>
 		</Surface>
 		<Surface surfaceType="Roof" id="surface-23" >
-			<Name>slab-storey-0</Name>
+			<Name>storey-1-space-5</Name>
 			<RectangularGeometry>
 				<Azimuth>90</Azimuth>
 			</RectangularGeometry>

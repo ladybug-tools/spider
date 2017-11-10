@@ -60,8 +60,9 @@
 		inpPerimeterDepth.max = 20;
 		inpPerimeterDepth.value = theBuilding.perimeterDepth;
 
-		inpOrientation.min = -90;
-		inpOrientation.max = 90;
+		inpOrientation.min = 0;
+		inpOrientation.max = 350;
+		inpOrientation.step = 10;
 		inpOrientation.value = theBuilding.orientation;
 
 		inpLength.min =  2 * theBuilding.perimeterDepth + 4;
@@ -570,11 +571,11 @@
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
 
-		const opacity = 75;
+		const opacity = 100;
 
 		const material = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, flatShading: true, transparent: true, wireframe: false } );
 		const materialNormal = new THREE.MeshPhongMaterial( { color: 0x000000, opacity: 1, side: 2, transparent: true, wireframe: false, } );
-		const materialShape = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, transparent: true, wireframe: false } );
+		const materialShape = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, flatShading: true, transparent: true, wireframe: false } );
 
 		const vertices = [];
 		const shapePoints = [];
@@ -646,7 +647,6 @@
 //					placard = drawPlacard( ['space ' + ( i + 1 ), 'angle ' + ( - r2d * angle + 90 ) ], 0.1, 120, open.position.x, open.position.y, 40 );
 					placard = drawPlacard( 'angle ' + ( - r2d * angle + 90 ), 0.1, 120, open.position.x, open.position.y, 40 );
 
-
 					mesh.add( placard );
 
 				}
@@ -662,7 +662,7 @@
 		const geometryShape = new THREE.ShapeGeometry( shape );
 		geometryShape.applyMatrix( new THREE.Matrix4().makeTranslation( -len05, -wid05, 0 ) );
 		const shapeMesh = new THREE.Mesh( geometryShape, materialShape );
-		shapeMesh.name = 'InteriorFloor';
+		shapeMesh.name = storey === 0 ? 'SlabOnGrade' : 'InteriorFloor';
 		mesh.add( shapeMesh );
 
 //console.log( 'theBuilding.storeys', storey, theBuilding.storeys  );
