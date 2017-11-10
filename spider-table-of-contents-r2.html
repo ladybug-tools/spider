@@ -31,7 +31,7 @@
 	#divContents { height: 100%; left: 0; position: absolute; margin: 0 auto; max-width: 800px; right: 0;}
 
 	#divMenu { background-color: ivory; box-sizing: border-box; margin: 0px 10px; }
-	#divMenu { height: 100%; left: 0; overflow: hidden; 
+	#divMenu { height: 100%; left: 0; overflow-x: hidden; 
 		position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
 	#hamburger { background-color: #edd;  box-sizing: border-box; cursor: pointer; font-size:30px; left: 300px; line-height: 30px; margin: 0; padding: 5px 15px 8px 10px;
@@ -193,7 +193,7 @@
 							'<td><a href="' + encodeURI( urlGitHubSource + item.path ) + '" target=_top >' + infoIcon + '</a></td>' +
 							'<td><a href=#' + encodeURI( item.path ) + 
 							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
-							( item.path.endsWith( 'html' ) ? '<a href=' + encodeURI( urlGitHubPage + item.path ) + ' >&#x1F5D7; ❐ &#x2750; or ⧉ &#x29c9; </a>' : '' ) +
+							( item.path.endsWith( 'html' ) ? '<a href=' + encodeURI( urlGitHubPage + item.path ) + ' >&#x2750;</a>' : '' ) +
 							'</td>' +
 
 						'</tr></table>';
