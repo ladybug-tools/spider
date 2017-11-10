@@ -171,7 +171,7 @@
 					if ( ignoreFolders.includes( item.name ) ) { continue; }
 
 					txt +=
-						'<div><a href=JavaScript:getFolderContents("' + item.path  + '");  > 🗀 ' + item.name  + '</a></div>' +
+						'<div><a href=JavaScript:getFolderContents("' + item.path  + '");  > &#x1f4c1; ' + item.name  + '</a></div>' +
 					'';
 
 				}
@@ -193,7 +193,7 @@
 							'<td><a href="' + encodeURI( urlGitHubSource + item.path ) + '" target=_top >' + infoIcon + '</a></td>' +
 							'<td><a href=#' + encodeURI( item.path ) + 
 							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
-							( item.path.endsWith( 'html' ) ? '<a href=' + encodeURI( urlGitHubPage + item.path ) + ' >&#x1F5D7;</a>' : '' ) +
+							( item.path.endsWith( 'html' ) ? '<a href=' + encodeURI( urlGitHubPage + item.path ) + ' >&#x1F5D7; ❐ &#x2750; or ⧉ &#x29c9; </a>' : '' ) +
 							'</td>' +
 
 						'</tr></table>';
