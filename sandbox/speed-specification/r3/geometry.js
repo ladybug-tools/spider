@@ -18,9 +18,9 @@
 		theBuilding = {};
 		theBuilding.area = 5000;
 		theBuilding.length = 50;
-		theBuilding.lengthInit = 0;;
+		theBuilding.lengthInit = 0;
 		theBuilding.width = 100;
-		theBuilding.thickness = 20;
+		theBuilding.thickness = 36;
 		theBuilding.storeys = 1;
 		theBuilding.storeyHeight = 10;
 		theBuilding.orientation = 0;
@@ -267,7 +267,7 @@
 // trying to set a default fail. ditto below
 		if ( theBuilding.lengthInit === 0 ) {
 
-			inpLength.value = 120;
+			inpLength.value = 100;
 
 		}
 
@@ -357,7 +357,7 @@
 
 		if ( theBuilding.lengthInit === 0 ) {
 
-			inpLength.value = 120;
+			inpLength.value = 100;
 
 		}
 
@@ -451,7 +451,7 @@
 
 		if ( theBuilding.lengthInit === 0 ) {
 
-			inpLength.value = 120;
+			inpLength.value = 100;
 
 		}
 

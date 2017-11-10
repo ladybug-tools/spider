@@ -1,10 +1,11 @@
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/sandbox/speed-specification/r3/index.html "View file as a web page." ) </span>
 
 
-# [SPEED Spec R2 Read Me]( ./readme.html#README.md )
+# [SPEED Spec Read Me]( ./readme.html#README.md )
 
-### Full screen: [Speed Spec R2]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/index.html )
+### Full screen: [Speed Spec ]( http://www.ladybug.tools/spider/sandbox/speed-specification/r3/index.html )
 
-### Full screen: [SPEED R2 gbXML Sample Files]( http://www.ladybug.tools/spider/sandbox/speed-specification/r2/test-gbxml-files/gbxml-viewer.html )
+### Full screen: [SPEED gbXML Sample Files]( http://www.ladybug.tools/spider/sandbox/speed-specification/r3/test-gbxml-files/gbxml-viewer.html )
 
 
 
@@ -126,6 +127,15 @@ A good coding practice is to follow the coding style of the primary library used
 ## Change Log
 
 
+### 2017-11-10 ~ Theo
+
+* gbxml-viewer.html
+	* Add 'drawHelpersNormalsFaces' button and code
+* export-gbxml.js
+	* Export adjacent buildings as geometry - with normals facing out
+
+
+
 ### 2017-11-09 ~ Theo
 
 Speed Spec R2.4
@@ -145,7 +155,7 @@ Speed Spec R2.4
 	* fix links
 	* Update sample files
 
-
+Plus a bunch for fixes for Ben
 
 ### 2017-11-07 ~ Theo
 

@@ -52,136 +52,136 @@
 				<Volume>14000</Volume>
 			</Space>
 		</Building>
-		<Surface surfaceType="Shade" id="shade-1" >
+		<Surface surfaceType="Shade" id="bw-shade-1" >
 			<Name>building1</Name>
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>-10</Coordinate>
+						<Coordinate>82.2893</Coordinate>
+						<Coordinate>4.8369</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>-10</Coordinate>
-						<Coordinate>0</Coordinate>
-					</CartesianPoint>
-					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>-10</Coordinate>
+						<Coordinate>82.2893</Coordinate>
+						<Coordinate>4.8369</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>-10</Coordinate>
+						<Coordinate>73.8369</Coordinate>
+						<Coordinate>-13.2893</Coordinate>
+						<Coordinate>30</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>73.8369</Coordinate>
+						<Coordinate>-13.2893</Coordinate>
+						<Coordinate>0</Coordinate>
+					</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+		<Surface surfaceType="Shade" id="bw-shade-2" >
+			<Name>building1</Name>
+			<PlanarGeometry>
+				<PolyLoop>
+					<CartesianPoint>
+						<Coordinate>64.1631</Coordinate>
+						<Coordinate>13.2893</Coordinate>
+						<Coordinate>30</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>64.1631</Coordinate>
+						<Coordinate>13.2893</Coordinate>
+						<Coordinate>0</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>55.7107</Coordinate>
+						<Coordinate>-4.8369</Coordinate>
+						<Coordinate>0</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>55.7107</Coordinate>
+						<Coordinate>-4.8369</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
 		</Surface>
-		<Surface surfaceType="Shade" id="shade-2" >
+		<Surface surfaceType="Shade" id="bw-shade-3" >
 			<Name>building1</Name>
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>10</Coordinate>
+						<Coordinate>82.2893</Coordinate>
+						<Coordinate>4.8369</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>10</Coordinate>
+						<Coordinate>64.1631</Coordinate>
+						<Coordinate>13.2893</Coordinate>
 						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>10</Coordinate>
+						<Coordinate>64.1631</Coordinate>
+						<Coordinate>13.2893</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>10</Coordinate>
+						<Coordinate>82.2893</Coordinate>
+						<Coordinate>4.8369</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
 		</Surface>
-		<Surface surfaceType="Shade" id="shade-3" >
+		<Surface surfaceType="Shade" id="bw-shade-4" >
 			<Name>building1</Name>
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>-10</Coordinate>
-						<Coordinate>0</Coordinate>
-					</CartesianPoint>
-					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>10</Coordinate>
-						<Coordinate>0</Coordinate>
-					</CartesianPoint>
-					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>10</Coordinate>
+						<Coordinate>73.8369</Coordinate>
+						<Coordinate>-13.2893</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>-10</Coordinate>
+						<Coordinate>55.7107</Coordinate>
+						<Coordinate>-4.8369</Coordinate>
 						<Coordinate>30</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>55.7107</Coordinate>
+						<Coordinate>-4.8369</Coordinate>
+						<Coordinate>0</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>73.8369</Coordinate>
+						<Coordinate>-13.2893</Coordinate>
+						<Coordinate>0</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>
 			</PlanarGeometry>
 		</Surface>
-		<Surface surfaceType="Shade" id="shade-4" >
+		<Surface surfaceType="Shade" id="bw-shade-5" >
 			<Name>building1</Name>
 			<PlanarGeometry>
 				<PolyLoop>
 					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>-10</Coordinate>
-						<Coordinate>0</Coordinate>
-					</CartesianPoint>
-					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>10</Coordinate>
-						<Coordinate>0</Coordinate>
-					</CartesianPoint>
-					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>10</Coordinate>
+						<Coordinate>82.2893</Coordinate>
+						<Coordinate>4.8369</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>-10</Coordinate>
-						<Coordinate>30</Coordinate>
-					</CartesianPoint>
-				</PolyLoop>
-			</PlanarGeometry>
-		</Surface>
-		<Surface surfaceType="Shade" id="shade-5" >
-			<Name>building1</Name>
-			<PlanarGeometry>
-				<PolyLoop>
-					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>-10</Coordinate>
+						<Coordinate>64.1631</Coordinate>
+						<Coordinate>13.2893</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>-10</Coordinate>
+						<Coordinate>55.7107</Coordinate>
+						<Coordinate>-4.8369</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 					<CartesianPoint>
-						<Coordinate>57</Coordinate>
-						<Coordinate>10</Coordinate>
-						<Coordinate>30</Coordinate>
-					</CartesianPoint>
-					<CartesianPoint>
-						<Coordinate>37</Coordinate>
-						<Coordinate>10</Coordinate>
+						<Coordinate>73.8369</Coordinate>
+						<Coordinate>-13.2893</Coordinate>
 						<Coordinate>30</Coordinate>
 					</CartesianPoint>
 				</PolyLoop>

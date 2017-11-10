@@ -20,6 +20,7 @@
 		let text =
 
 			'<table>' +
+
 			'<tr>' +
 				'<td></td>' +
 				'<td>' + addCheckbox( adjacentBuildings[ 0 ], 1 ) + '</td>' +

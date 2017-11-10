@@ -501,8 +501,11 @@ console.log( 'spacesPerStorey', spacesPerStorey );
 
 			if ( i + 1 === storeys ) {
 
-				pathRoof = path.reverse();
-				textSurfacesBits += getSurfacesSlabs( meshStorey, pathRoof, 'Roof', surfaceId ++, spaceId ++, theBuilding.storeyHeight );
+console.log( 'path', path );
+				const pathRoof = path.slice().reverse();
+console.log( 'pathRoof', pathRoof );
+
+				textSurfacesBits += getSurfacesSlabs( meshStorey, path, 'Roof', surfaceId ++, spaceId ++, theBuilding.storeyHeight );
 
 			}
 
@@ -527,6 +530,7 @@ console.log( 'spacesPerStorey', spacesPerStorey );
 
 		textQuad = '';
 
+
 		for ( let i = 0; i < quad.vertices.length; i++ ) {
 
 			vertex = quad.vertices[ i ].clone();
@@ -542,12 +546,11 @@ console.log( 'spacesPerStorey', spacesPerStorey );
 		}
 
 
-	if( quad.type === 'ExteriorWall' ) {
+		if ( quad.type === 'ExteriorWall' ) {
 
 			let vertex = quad.vertices[ 0 ].clone();
 			vertex.applyMatrix4( quad.mesh.matrixWorld );
 			const pt1 = vertex;
-
 
 			vertex = quad.vertices[ 3 ].clone();
 			vertex.applyMatrix4( quad.mesh.matrixWorld );
@@ -680,7 +683,7 @@ console.log( 'spacesPerStorey', spacesPerStorey );
 			spaceId1: spaceId,
 			spaceId2: ( slab.userData.storey === 0 ? undefined : spaceId - theBuilding.spacesPerStorey - 1 ),
 			surfaceId: surfaceId,
-			vertices: geometry.vertices
+			vertices: ( type === 'Roof' ? geometry.vertices.reverse() : geometry.vertices )
 		};
 
 		textInterior += getSingleSurface( quad )
@@ -767,60 +770,40 @@ console.log( 'spacesPerStorey', spacesPerStorey );
 
 
 
-	function getSurfacesAdjacentBuildings( object ) {
+	function getSurfacesAdjacentBuildings( building ) { 
 
 		let textSurfaces = '';
 
-//console.log( 'getSurfacesAdjacentBuildings', object );
+		const geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
 
-		const bb = new THREE.Box3().setFromObject( object );
-		const mi = bb.min;
-		const mx = bb.max;
-//console.log( 'bb mi mx', bb, mi, mx );
-
-		const geometry = new THREE.BoxBufferGeometry( 5, 5, 5 );
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
+		vertexCount = 0;
 
-		const faces =  [
-			[ v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
-			[ v( mi.x, mx.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ],
-			[ v( mi.x, mi.y, mi.z ), v( mi.x, mx.y, mi.z ), v( mi.x, mx.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
-			[ v( mx.x, mi.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mx.x, mi.y, mx.z ) ],
-			[ v( mi.x, mi.y, mx.z ), v( mx.x, mi.y, mx.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ]
-		];
+		for ( let i = 0; i < 5; i++ ) {
 
-		for ( let i = 0; i < faces.length; i++ ) {
-
-			textSurfaces +=
+			textSurfaces += 
 				'\t\t<Surface surfaceType="Shade" id="shade-' + ( shadeId ++ ) + '" >\n' +
-				'\t\t\t<Name>' + object.name +'</Name>\n' +
+				'\t\t\t<Name>' + building.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
 				'\t\t\t\t<PolyLoop>\n' +
 			'';
 
-			face = faces[ i ];
+			const v1 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+			const v2 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+			const v3 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
+			const v4 = building.localToWorld ( geo.vertices[ vertexCount++ ] );
 
-//			const v1 = object.localToWorld ( face[ 0 ] );
-//			const v2 = object.localToWorld ( face[ 1 ] );
-//			const v3 = object.localToWorld ( face[ 2 ] );
-//			const v4 = object.localToWorld ( face[ 3 ] );
+			const vertices = [ v2, v1, v3, v4 ];
 
-			const v1 = face[ 0 ];
-			const v2 = face[ 1 ];
-			const v3 = face[ 2 ];
-			const v4 = face[ 3 ] ;
+			for ( let j = 0; j < 4; j++ ) {
 
-//			const vertices = [ v2, v1, v3, v4 ];
-			const vertices = [ v1, v2, v3, v4 ];
-
-			for ( let k = 0; k < 4; k++ ) {
-
-				const vertex = vertices[ k ];
+				const vertex = vertices[ j ];
 				textSurfaces += getCartesianPointText( vertex );
 
-//				const mesh = new THREE.Mesh( geometry, material );
-//				mesh.position.copy( vertex );
-//				scene.add( mesh );
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( vertex );
+				scene.add( mesh );
 
 			}
 
@@ -835,6 +818,7 @@ console.log( 'spacesPerStorey', spacesPerStorey );
 		return textSurfaces;
 
 	}
+
 
 
 
@@ -913,6 +897,22 @@ console.log( 'spacesPerStorey', spacesPerStorey );
 		checkWindow.document.title = 'gbXML error check';
 
 //console.log( '', checkWindow );
+
+	}
+
+
+	function drawHelpersNormalsFaces() {
+
+		theBuilding.mesh.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				helperNormalsFaces = new THREE.VertexNormalsHelper( child, 10, 0xff00ff, 5 );
+				child.add( helperNormalsFaces );
+
+			}
+
+		} );
 
 	}
 
