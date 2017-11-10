@@ -15,7 +15,7 @@ h4 { margin: 0; }
 
 ### [Read me]( #README.md )
 
-### [Table of Contents]( spider-table-of-contents-r1.html )
+### [Table of Contents]( spider-table-of-contents-r2.html )
 
 
 ### [gbXML Viewer]( #read-gbxml/README.md ) &raquo; [&#x2750;]( read-gbxml/gbxml-viewer/index.html "Open full screen" )
