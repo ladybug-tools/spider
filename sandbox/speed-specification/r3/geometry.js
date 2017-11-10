@@ -94,6 +94,7 @@
 		theBuilding.storeyHeight = parseInt( inpHeight.value, 10 );
 		theBuilding.orientation = parseInt( inpOrientation.value, 10 );
 		theBuilding.perimeterDepth = parseInt( inpPerimeterDepth.value, 10 );
+		theBuilding.thickness = parseInt( inpThickness.value, 10 );
 		inpLength.min = 2 * theBuilding.perimeterDepth + 4;
 		inpWidth.min = 2 * theBuilding.perimeterDepth + 4;
 
@@ -444,7 +445,7 @@
 
 		let area = theBuilding.area;
 		let flr = theBuilding.storeys;
-		const flrNew = parseInt( inpFloors.value, 10 );
+//		const flrNew = parseInt( inpFloors.value, 10 );
 		let len = theBuilding.length;
 		let wid = theBuilding.width;
 		let thk = theBuilding.thickness;
@@ -458,14 +459,16 @@
 		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 
 			const areaNew = parseInt( inpArea.value, 10 );
+			const flrNew = parseInt( inpFloors.value, 10 );
 			const areaTemp = area * flrNew / flr;
 			const ratio = Math.sqrt( area / areaTemp );
 
+			flr = flrNew;
 			len = Math.round( ratio * len );
 			wid =  ( area - thk * ( len - 2 * thk ) ) / ( 2 * thk * flrNew );
 
 			theBuilding.area = areaNew;
-			theBuilding.storeys = flr = flrNew;
+			theBuilding.storeys = flr;
 			theBuilding.lengthInit = theBuilding.length = len;
 			theBuilding.width = wid;
 

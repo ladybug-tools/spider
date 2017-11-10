@@ -107,7 +107,7 @@
 
 				<div id = "divWelcome" >
 
-						<p>Howdy! Welcome to SPEED Spec R3. Should work better on a phone.</p>
+						<p>Howdy! Welcome to SPEED Spec R3. Should work better on a phone (Safari on iPhone excepted).</p>
 
 						<p>See also the GitHub <a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/speed-specification/r2">Read Me file</a> </p>
 
@@ -184,7 +184,7 @@
 
 						<div id=divThickness >
 							Thickness <output id=outThickness class=floatright ></output>
-							<input type=range id=inpThickness onchange=updateShape(); >
+							<input type=range id=inpThickness oninput=updateShape(); >
 						</div>
 
 						<div id=divValidation ><p style=color:red; ><i>Select a shape...</i></p></div>
@@ -215,6 +215,7 @@
 						</tr>
 
 <!--
+
 // Hi Anton!
 <td>window proportions</td><td>wwrs</td><td>wwre</td><td>wwrw</td><td>wwrn</td><td># of Windows</td>
 
