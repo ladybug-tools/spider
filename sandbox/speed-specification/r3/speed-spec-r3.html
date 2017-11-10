@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "speed demo - create sample gbXML files quickly and easily" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-09" >
+
+<title>SPEED Spec R3.0</title>
+
+<style>
+/* Copyright 2017 Ladybug Tools authors. MIT License */
+
+/*
+	body { font: 12pt monospace; margin: 0 auto;  }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	canvas { border: 1px solid black; }
+
+	input, input[ type = number ] { width: 50px; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	table { border-spacing: 10px; }
+
+	input[ type = number ] { width: 50px; }
+	td { text-align: right; }
+
+	.checkbox { text-align: right; }
+	.column { display: inline-block; line-height: 30px; width: 150px;}
+	.floatright { float: right; }
+
+	#canvasPerspective { position: absolute; right: 100px; top: 50%; }
+	#canvasOrtho { position:absolute; right: 100px; top: 5%;}
+
+	#detSpeedMenu { border: 1px solid crimson; background-color: white; margin: 20px; padding: 8px; position: absolute; z-index: 10; }
+	#divHeader { left: 0; margin: 0 auto; position: absolute; max-width: 800px; right: 0; top: 0; }
+
+	#divDimensions, #divDimensions div { margin: 20px; width: 250px; }
+
+	#divLeftColumn, #divRightColumn { border: 0px solid red; display: inline-block; margin: 0 0px; vertical-align: top; width: 300px; }
+
+	#divRightColumn { text-align: right; }
+	#divRightColumn select { width: 50px; }
+*/
+
+
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width: 250px; height: 100%; }
+
+	body, html { font: 12pt monospace; height: 100%; margin: 0; }
+
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus{ color: #8888; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	canvas { border: 1px solid black; margin: 50px 0; }
+
+	input, input[ type = number ] { width: 50px; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	table { border-spacing: 10px; }
+
+	td { vertical-align: top; }
+
+	.checkbox { text-align: right; }
+	.column { display: inline-block; line-height: 30px; width: 150px;}
+	.floatright { float: right; }
+
+	#divContainer { box-sizing: border-box; height: 100%; margin-left: 300px; transition: margin-left .5s; padding: 16px; position: relative; }
+	#divContents { box-sizing: border-box; height: 98%; left: 0; position: absolute; margin: 0 auto; max-width: 800px; right: 0;}
+
+	#divMenu { background-color: lightgray; box-sizing: border-box; padding: 30px 10px 0 10px; }
+	#divMenu { height: 100%; overflow-x: hidden; position: fixed; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+
+	#divLeftColumn, #divRightColumn { border: 0px solid red; display: inline-block; margin: 0 0px; vertical-align: top; width: 300px; }
+
+	#divRightColumn { text-align: right; }
+	#divRightColumn select { width: 50px; }
+
+	#hamburger { background-color: #edd; box-sizing: border-box; cursor: pointer; font-size:30px; left: 150px; line-height: 30px; margin: 0; padding: 5px 15px 8px 10px;
+		position: fixed; top: 0px; transition: left .5s; z-index: 10; }
+
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
+<script src = "init-threejs.js" ></script>
+<script src = "adjacent-buildings.js" ></script>
+<script src = "geometry.js" ></script>
+<script src = "envelope.js" ></script>
+<script src = "space-layout.js" ></script>
+<script src = "export-gbxml.js" ></script>
+
+	<div id = "divMenu" open >
+
+		<h2>
+
+			<a href="../index.html" target=_top >&#x2302;</a> &raquo;
+			<a href="" ><script> document.write( document.title )</script></a>
+
+		</h2>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Adjacent Buildings</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Geometry</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Envelope</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Space Layout</button></p>
+
+		<p><button onclick=onToggleSpeedMenu(this); >Export gbXML</button></p>
+
+	</div>
+
+
+
+	<div id = "divContainer" >
+
+		<div id=divContents >
+
+			<div id = "divHeader" >
+
+				<h1 id = "title" >
+
+					Site Content
+
+				</h1>
+
+				<div id = "divWelcome" >
+
+						<p>Howdy! Welcome to SPEED Spec R3</p>
+
+						<p>See also the GitHub <a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/speed-specification/r2">Read Me file</a> </p>
+
+						<p>See also the <a href="test-gbxml-files/gbxml-viewer.html" >SPEED R2 gbXML Sample Files</a> to view sample files generated by this script</p>
+
+				</div>
+
+
+
+				<div id = "divAdjacentBuildings" >
+
+					<h2>
+						Adjacent Buildings
+						<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/r2/adjacent-buildings.js target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+					</h2>
+
+					<div id = "divAdjacentBuildingsTable" ></div>
+
+				</div>
+
+
+
+				<div id = "divGeometry" >
+
+					<h2>
+						Geometry
+						<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/r2/geometry.js target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+					</h2>
+
+					<table>
+
+						<tr>
+							<td>Building Area</td><td># of Floors</td><td>Floor Area</td><td>Floor Height</td><td># of Footprint Shapes</td>
+						</tr>
+
+						<tr>
+							<td><input type=number id=inpArea step=50 onchange=updateShape(); ></td>
+							<td><input type=number id=inpFloors onchange=updateShape();onShapeChangeUpdateLayout(); ></td>
+							<td><output type=number id=outFloorArea ></output></td>
+							<td><input type=number id=inpHeight onChange=updateShape(); ></td>
+							<td><input type=number id=inpShapeCount ></td>
+						</tr>
+
+					</table>
+
+					<table>
+
+						<tr>
+							<td>Footprint Shape</td><td>Massing Generator</td><td>Perimeter Depth</td><td>Orientation</td>
+						</tr>
+
+						<tr>
+							<td><select id=selShape size=4 onchange=updateShape('OK'); ></select></td>
+							<td><select id=selMassing ></select></td>
+							<td><input type=number id=inpPerimeterDepth oninput=updateShape(this); ></td>
+							<td><input type=number id=inpOrientation oninput=updateShape(this); ></td>
+						</tr>
+
+					</table>
+
+					<div id=divDimensions style=max-width:300px; >
+
+						<p>Footprint dimensions</p>
+
+						<div>
+							Length <output id=outLength class=floatright ></output>
+							<input type=range id=inpLength oninput=updateShape(); >
+						</div>
+
+						<div>
+							Width <output id=outWidth class=floatright ></output>
+							<input type=range id=inpWidth oninput=updateShape(); >
+						</div>
+
+						<div id=divThickness >
+							Thickness <output id=outThickness class=floatright ></output>
+							<input type=range id=inpThickness onchange=updateShape(); >
+						</div>
+
+						<div id=divValidation ><p style=color:red; ><i>Select a shape...</i></p></div>
+
+					</div>
+
+				</div>
+
+
+
+
+				<div id = "divEnvelope" >
+
+					<h2>
+						Envelope
+						<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/r2/envelope.js target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+					</h2>
+
+					<table>
+						<tr>
+							<td>building wwr %</td><td>Overhang Depth</td><td>Fin Depth</td>
+						</tr>
+
+						<tr>
+							<td><input type=number id=inpWwr onchange=updateOpenings(); ></td>
+							<td><input type=number id=inpOverhangDepth onchange=updateOpenings(); ></td>
+							<td><input type=number id=inpFinDepth onchange=updateOpenings(); ></td>
+						</tr>
+
+<!--
+// Hi Anton!
+<td>window proportions</td><td>wwrs</td><td>wwre</td><td>wwrw</td><td>wwrn</td><td># of Windows</td>
+
+					<td><input type=number id=windowPreportions oninput=updateShape(this);></td>
+					<td><input type=number id=wwrs oninput=updateShape(this);></td>
+					<td><input type=number id=wwre oninput=updateShape(this);></td>
+					<td><input type=number id=wwrw oninput=updateShape(this);></td>
+					<td><input type=number id=wwrn oninput=updateShape(this);></td>
+					<td><input type=number id=numWindows oninput=updateShape(this);></td>
+-->
+
+					</table>
+
+					<table>
+
+						<tr>
+							<td>Window Type</td>
+						</tr>
+
+						<tr>
+							<td><select id=selWindowType onchange=updateOpenings(); ></select></td>
+						</tr>
+
+					</table>
+
+				</div>
+
+
+
+				<div id = "divSpaceLayout" >
+
+					<h2>
+						Space Layout
+						<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/r2/space-loayout.js target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+					</h2>
+
+					<div id = "divLeftColumn" valign=top >
+
+						<h3>Space Type</h3>
+
+						<div id=divZones >Please first select a shape</div>
+
+					</div>
+
+
+					<div id = "divRightColumn" style=max-width:300px; >
+
+						<h3>Apply to floors</h3>
+
+						<p><input id=inpFloorStart type=number onchange=updateTypes() > to <input id=inpFloorEnd type=number onchange=updateTypes(); ></select></p>
+
+						<img id=imgShape width=100% />
+
+						<h3>Area Usage</h3>
+
+						<table id=tabUsage >
+
+						</table>
+
+					</div>
+
+				</div>
+
+
+
+				<div id = "divExportGbxml" >
+
+					<h2>
+						Export gbXML
+						<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/r2/export-gbxml.js target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+					</h2>
+
+					<p> 1. <button onclick=getBuildingData(); >Get building data</button></p>
+
+					<p> 2. <button onclick = checkGbxmlData(); >Check the data</button></p>
+
+					<p> 2. <button onclick = saveFile(); >Save building data to file</button> </p>
+
+					<div id = divExportContent ></div>
+
+				</div>
+
+
+
+			</div>
+
+
+			<canvas id="canvasOrtho" height=300 width=300 ></canvas>
+
+			<canvas id="canvasPerspective" height=300 width=300 style=float:right; ></canvas>
+
+		</div>
+
+	</div>
+
+
+	<div id="hamburger" onclick=toggleNav(); >
+
+		slide &#9776; 
+
+	</div>
+
+<script>
+
+
+	init();
+
+	animateThreejs();
+
+	function init() {
+
+		initThreejs();
+
+		addThreejsHelpers();
+
+		initAdacentBuildingsInputFields();
+
+		addAjacentBuildings();
+
+		initGeometryInputFields();
+
+		initEnvelopeInputFields();
+
+		initSpaceLayoutInputFields();
+
+		onToggleSpeedMenu( divWelcome );
+
+	}
+
+
+
+
+	function onToggleSpeedMenu( that ) {
+
+
+		divWelcome.style.display = that.id === "divWelcome" ? '' : 'none';
+
+		divAdjacentBuildings.style.display = that.innerText === "Adjacent Buildings" ? '' : 'none';
+
+		divGeometry.style.display = that.innerText === "Geometry" ? '' : 'none';
+
+		divEnvelope.style.display = that.innerText === "Envelope" ? '' : 'none';
+
+		divSpaceLayout.style.display = that.innerText === "Space Layout" ? '' : 'none';
+
+		divExportGbxml.style.display = that.innerText === "Export gbXML" ? '' : 'none';
+
+	}
+
+
+
+
+	function toggleNav() {
+
+		if ( !divMenu.style.width || divMenu.style.width === '250px' ) {
+
+			divMenu.style.width = '0';
+			divMenu.style.padding = '0';
+			hamburger.style.left = '-100px';
+			divContainer.style.marginLeft = '0';
+
+		} else {
+
+			divMenu.style.width = '250px';
+			divMenu.style.padding = '30px 10px 0 10px';
+			hamburger.style.left = '150px';
+			divContainer.style.marginLeft = '250px';
+
+		}
+
+	}
+
+</script>
+</body>
+</html>

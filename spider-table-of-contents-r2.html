@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "View info regarding gbXML files" >
+<meta name = "description" content = "View all the Spider files" >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-09" >
 <title>Spider Table of Contents</title>
@@ -13,7 +13,7 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width: 300px; height: 100%; }
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width: 250px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
@@ -26,18 +26,17 @@
 
 	td { vertical-align: top; }
 
-
 	#divContainer { height: 100%; margin-left: 300px; transition: margin-left .5s; padding: 16px; position: relative; }
 	#divContents { height: 100%; left: 0; position: absolute; margin: 0 auto; max-width: 800px; right: 0;}
 
-	#divMenu { background-color: ivory; box-sizing: border-box; margin: 0px 10px; }
-	#divMenu { height: 100%; left: 0; overflow-x: hidden; 
-		position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+	#divMenu { background-color: ivory; box-sizing: border-box; margin: 0;  padding: 30px 10px 0 10px; }
+	#divMenu { height: 100%; overflow-x: hidden; position: fixed; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
 	#hamburger { background-color: #edd;  box-sizing: border-box; cursor: pointer; font-size:30px; left: 300px; line-height: 30px; margin: 0; padding: 5px 15px 8px 10px;
 		position: absolute; top: 20px; transition: left .5s; z-index: 10; }
 
-	@media screen and ( max-height: 450px) { .sidenav {padding-top: 15px;} .sidenav a {font-size: 18px;} }
+	#hamburger { background-color: #edd; box-sizing: border-box; cursor: pointer; font-size:30px; left: 150px; line-height: 30px; margin: 0; padding: 5px 15px 8px 10px;
+		position: fixed; top: 0px; transition: left .5s; z-index: 10; }
 
 </style>
 </head>
@@ -83,7 +82,7 @@
 
 	<div id="hamburger" onclick=toggleNav(); >
 
-		&#9776; slide
+		slide &#9776; 
 
 	</div>
 
@@ -110,6 +109,7 @@
 				'<a href=' + infoURI + ' target="_top" >' + infoIcon + '</a>' +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'</h3>' +
+			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
@@ -128,11 +128,11 @@
 
 		if ( url.toLowerCase().endsWith( 'md' ) ) {
 
-			requestFile( urlGitHubPage + url, callbackMarkdown );
+			requestFile( url, callbackMarkdown );
 
 		} else if ( url.toLowerCase().endsWith( '.html' ) ) {
 
-			divContents.innerHTML = '<iframe src=' + urlGitHubPage + url + ' height=100% width=100% ></iframe>';
+			divContents.innerHTML = '<iframe src=' + url + ' height=100% width=100% ></iframe>';
 
 		} else if ( url.toLowerCase().endsWith( '.gif' ) || url.toLowerCase().endsWith( '.png' ) ||  url.toLowerCase().endsWith( '.svg' )) {
 
@@ -162,7 +162,7 @@
 			const items = JSON.parse( response );
 
 			let txt = '';
-			const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data', 'plugins' ];
+			const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins' 
 
 			for ( let item of items ) {
 
@@ -270,17 +270,19 @@
 
 	function toggleNav() {
 
-		if ( !divMenu.style.width || divMenu.style.width === '300px' ) {
+		if ( !divMenu.style.width || divMenu.style.width === '250px' ) {
 
 			divMenu.style.width = '0';
-			hamburger.style.left = '0';
+			divMenu.style.padding = '0';
+			hamburger.style.left = '-100px';
 			divContainer.style.marginLeft = '0';
 
 		} else {
 
-			divMenu.style.width = '300px';
-			hamburger.style.left = '300px';
-			divContainer.style.marginLeft = '300px';
+			divMenu.style.width = '250px';
+			divMenu.style.padding = '30px 10px 0 10px';
+			hamburger.style.left = '150px';
+			divContainer.style.marginLeft = '250px';
 
 		}
 

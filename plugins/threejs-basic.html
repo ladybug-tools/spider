@@ -50,8 +50,8 @@
 
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		let axisHelper = new THREE.AxisHelper( 50 );
-		scene.add( axisHelper );
+		let axesHelper = new THREE.AxesHelper( 50 );
+		scene.add( axesHelper );
 
 		geometry = new THREE.BoxGeometry( 50, 50, 50 );
 		material = new THREE.MeshNormalMaterial();

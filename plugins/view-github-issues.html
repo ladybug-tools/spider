@@ -17,7 +17,6 @@
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
-<script src = "../index.js" ></script>
 
 	<div id = "menu" >
 
@@ -36,10 +35,9 @@
 <script>
 // Add blog posts to your site
 
-	var defaults = defaults || {};
+	const user = 'ladybug-tools';
+	const repo = '/spider';
 
-	const userGitHub = defaults.user ? defaults.user : '';
-	const repository = defaults.repository ? defaults.repository : '';
 
 	const b = '<br>';
 
@@ -51,14 +49,14 @@
 
 		if ( window.top !== window.self ) { 
 
-			parent.divSubMenu.innerHTML = '';
-			parent.ifrMenu.src = '';
+//			parent.divSubMenu.innerHTML = '';
+//			parent.ifrMenu.src = '';
 
 		}
 
 		let urlIssues;
 
-		urlIssues = 'https://api.github.com/repos/' + userGitHub + '/' + repository + '/issues';
+		urlIssues = 'https://api.github.com/repos/' + user + repo + '/issues';
 
 		requestFile( '../pages/github-issues-header.md' , callbackHeader );
 
