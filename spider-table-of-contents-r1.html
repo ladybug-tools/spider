@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "View info regarding gbXML files" >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-07" >
+<meta name = "date" content = "2017-11-09" >
 <title>Spider Table of Contents</title>
 
 <style>
@@ -13,29 +13,29 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width: 250px; height: 100%; }
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width: 300px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
 	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus{ color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
 	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
-	.sidenav { background-color: ivory; box-sizing: border-box; height: 100%; left: 0; overflow: hidden; 
-		position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+	td { vertical-align: top; }
 
-	.sidenav a:hover, .sidenav  a:focus{ color: #f1f1f1; }
-
-
-	#hamburger { background-color: #edd;  box-sizing: border-box; cursor: pointer; font-size:30px; left: 250px; line-height: 30px; margin: 0; padding: 5px 15px 8px 10px;
-		position: absolute; top: 20px; transition: left .5s; z-index: 1; }
 
 	#divContainer { height: 100%; margin-left: 300px; transition: margin-left .5s; padding: 16px; position: relative; }
 	#divContents { height: 100%; left: 0; position: absolute; margin: 0 auto; max-width: 800px; right: 0;}
 
-	#divMenu { background-color: ivory; box-sizing: border-box; margin: 10px; }
+	#divMenu { background-color: ivory; box-sizing: border-box; margin: 0px 10px; }
+	#divMenu { height: 100%; left: 0; overflow: hidden; 
+		position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+
+	#hamburger { background-color: #edd;  box-sizing: border-box; cursor: pointer; font-size:30px; left: 300px; line-height: 30px; margin: 0; padding: 5px 15px 8px 10px;
+		position: absolute; top: 20px; transition: left .5s; z-index: 1; }
 
 	@media screen and ( max-height: 450px) { .sidenav {padding-top: 15px;} .sidenav a {font-size: 18px;} }
 
@@ -73,13 +73,16 @@
 
 <script>
 
-	const urlGitHub = 'https://rawgit.com/ladybug-tools/spider/master/';
-	const urlGitHubSource = 'https://github.com/ladybug-tools/spider/blob/master/';
+	const user = 'ladybug-tools'
+	const repo = '/spider';
 
-	const urlGitHubApi = 'https://api.github.com/repos/ladybug-tools/spider/contents/';
-
-	const infoURI = 'https://github.com/ladybug-tools/spider';
+	const infoURI = 'https://github.com/' + user + repo;
 	const infoIcon = '<img src="https://status.github.com/images/invertocat.png" height=18 > </a>';
+
+	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/';
+
+	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
+	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/';
 
 
 	init();
@@ -88,8 +91,8 @@
 
 		divTitle.innerHTML =
 			'<h3>' +
-				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="_top" >' + infoIcon + '</a>' +
+				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'</h3>' +
 		'';
 
@@ -107,13 +110,21 @@
 
 		const url = !location.hash ? './README.md' : location.hash.slice( 1 );
 
-		if ( url.endsWith( 'md' ) ) {
+		if ( url.toLowerCase().endsWith( 'md' ) ) {
 
-			requestFile( urlGitHub + url, callbackMarkdown );
+			requestFile( urlGitHubPage + url, callbackMarkdown );
+
+		} else if ( url.toLowerCase().endsWith( '.html' ) ) {
+
+			divContents.innerHTML = '<iframe src=' + urlGitHubPage + url + ' height=100% width=100% ></iframe>';
+
+		} else if ( url.toLowerCase().endsWith( '.gif' ) || url.toLowerCase().endsWith( '.png' ) ||  url.toLowerCase().endsWith( '.svg' )) {
+
+			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
 
 		} else {
 
-			divContents.innerHTML = '<iframe src=' + urlGitHub + url + ' height=100% width=100% ></iframe>';
+			requestFile( urlGitHubPage + url, callbackToTextarea );
 
 		}
 
@@ -123,7 +134,7 @@
 
 	function getFolderContents( path = '' ) {
 
-		const url = urlGitHubApi + path;
+		const url = urlGitHubApiContents + path;
 
 		setBreadcrumbs( path );
 
@@ -134,13 +145,12 @@
 			const response = xhr.target.response;
 			const items = JSON.parse( response );
 
-			divMenuItems.innerHTML = '';
+			let txt = '';
 
 			for ( let item of items ) {
 
 				if ( item.type === 'dir' ) {
-
-					divMenuItems.innerHTML +=
+					txt +=
 						'<div><a href=JavaScript:getFolderContents("' + item.path  + '");  > 🗀 ' + item.name  + '</a></div>' +
 					'';
 
@@ -152,16 +162,22 @@
 
 				if ( item.type === 'file' ) {
 
-					divMenuItems.innerHTML +=
-					'<div>' +
-						'<a href=#' + encodeURI( item.path ) + '  > ' + item.name + '</a> ' +
-						'<a href="' + encodeURI( urlGitHubSource + item.path ) + '" target=_blank >' + infoIcon + '</a>' +
-					'</div>';
+					txt +=
+						'<table><tr>' +
 
+							'<td><a href="' + encodeURI( urlGitHubSource + item.path ) + '" target=_top >' + infoIcon + '</a></td>' +
+							'<td><a href=#' + encodeURI( item.path ) + 
+							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
+							( item.path.endsWith( 'html' ) ? '<a href=' + encodeURI( urlGitHubPage + item.path ) + ' >&#x1F5D7;</a>' : '' ) +
+							'</td>' +
+
+						'</tr></table>';
+//console.log( 'item', item );
 				}
 
 			}
 
+			divMenuItems.innerHTML = txt;
 		}
 
 	}
@@ -169,17 +185,11 @@
 
 	function setBreadcrumbs( path ) {
 
-		let name, txt, folders, str;
+		let txt = '<b><a href=JavaScript:getFolderContents(); >' + repo + '</a> &raquo; </b>';
 
-//		name = user.repo;
+		let folders = path ? path.split( '/' ) : [] ;
 
-//		name = user.path ? user.path : user.repo;
-
-		txt = ''; //<h3><a href=JavaScript:getFolderContents(); >' + urlGitHub + '</a> &raquo; </h3>';
-
-		folders = path ? path.split( '/' ) : [] ;
-
-		str = '';
+		let str = '';
 
 		for ( let folder of folders ) {
 
@@ -206,6 +216,17 @@
 	}
 
 
+
+	function callbackToTextarea( xhr ){
+
+		const response = xhr.target.response;
+
+		divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
+
+	}
+
+
+
 	function requestFile( url, callback ) {
 
 		const xhr = new XMLHttpRequest();
@@ -222,7 +243,7 @@
 
 	function toggleNav() {
 
-		if ( !divMenu.style.width || divMenu.style.width === '250px' ) {
+		if ( !divMenu.style.width || divMenu.style.width === '300' ) {
 
 			divMenu.style.width = '0';
 			hamburger.style.left = '0';
@@ -230,9 +251,9 @@
 
 		} else {
 
-			divMenu.style.width = '250px';
-			hamburger.style.left = '250px';
-			divContainer.style.marginLeft = '250px';
+			divMenu.style.width = '300px';
+			hamburger.style.left = '300px';
+			divContainer.style.marginLeft = '300px';
 
 		}
 
