@@ -64,11 +64,11 @@
 		inpOrientation.max = 90;
 		inpOrientation.value = theBuilding.orientation;
 
-		inpLength.min = 1;
+		inpLength.min =  2 * theBuilding.perimeterDepth + 4;
 		inpLength.max = 200;
 		inpLength.value = theBuilding.length;
 
-		inpWidth.min = 1;
+		inpWidth.min = 2 * theBuilding.perimeterDepth + 4;
 		inpWidth.max = 300;
 		inpWidth.value = theBuilding.width;
 
@@ -93,6 +93,8 @@
 		theBuilding.storeyHeight = parseInt( inpHeight.value, 10 );
 		theBuilding.orientation = parseInt( inpOrientation.value, 10 );
 		theBuilding.perimeterDepth = parseInt( inpPerimeterDepth.value, 10 );
+		inpLength.min = 2 * theBuilding.perimeterDepth + 4;
+		inpWidth.min = 2 * theBuilding.perimeterDepth + 4;
 
 		const rotation = - d2r * theBuilding.orientation;
 		const storeys = theBuilding.storeys;
@@ -568,7 +570,7 @@
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
 
-		const opacity = 85;
+		const opacity = 75;
 
 		const material = new THREE.MeshPhongMaterial( { opacity: ( opacity / 100 ), side: 2, flatShading: true, transparent: true, wireframe: false } );
 		const materialNormal = new THREE.MeshPhongMaterial( { color: 0x000000, opacity: 1, side: 2, transparent: true, wireframe: false, } );
@@ -663,9 +665,9 @@
 		shapeMesh.name = 'InteriorFloor';
 		mesh.add( shapeMesh );
 
-console.log( 'theBuilding.storeys', storey, theBuilding.storeys  );
-		if ( storey === theBuilding.storeys - 1 ) {
+//console.log( 'theBuilding.storeys', storey, theBuilding.storeys  );
 
+		if ( storey === theBuilding.storeys - 1 ) {
 
 			const shape = new THREE.Shape( path );
 			const geometryShape = new THREE.ShapeGeometry( shape );
