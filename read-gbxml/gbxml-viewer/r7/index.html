@@ -13,7 +13,7 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:250px; height: 100%; }
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:300px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
@@ -211,7 +211,11 @@
 				if ( ignoreFolders.includes( item.name ) ) { continue; }
 
 				txt +=
-					'<div><a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '");  ><span style=color:#000; > &#x1f4c1; </span>' + item.name  + '</a></div>' +
+					'<div style=margin-bottom:8px; >' +
+						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' + 
+							item.name  + 
+						'</a>' +
+					'</div>' +
 				'';
 
 			}
