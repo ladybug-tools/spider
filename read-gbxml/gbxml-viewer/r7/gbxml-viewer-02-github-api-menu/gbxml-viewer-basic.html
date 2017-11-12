@@ -28,6 +28,7 @@
 	<div id = "menu" >
 
 		<div id = "title" ></div>
+
 		<p id = "contents" >
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 		</p>
@@ -98,12 +99,11 @@
 		lightDirectional.shadow.mapSize.width = 2048;  // default 512
 		lightDirectional.shadow.mapSize.height = 2048;
 		lightDirectional.castShadow = true;
-
 		scene.add( lightDirectional );
 
 		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
-		camera.add( lightPoint );
 		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+		camera.add( lightPoint );
 		scene.add( camera );
 
 		axesHelper = new THREE.AxesHelper( 50 );
@@ -112,9 +112,8 @@
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
-		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
-
 		window.addEventListener ( 'hashchange', onHashChange, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 		onHashChange();
 
@@ -135,16 +134,10 @@
 	function callbackGbXML( xhr ){
 
 		const response = xhr.target.responseXML.documentElement;
-
-		gbjson = XML2jsobj( response );
-//console.log( 'json', gbjson );
-
-		let surfaces = gbjson.Campus.Surface;
-//console.log( '', surfaces );
-
+		const gbjson = XML2jsobj( response );
+		const surfaces = gbjson.Campus.Surface;
 		let polyloops = [];
 		let openings = [];
-		let surface, points;
 
 		for ( let surface of surfaces ) {
 
@@ -152,8 +145,8 @@
 
 				if ( surface.Opening.PlanarGeometry ) {
 
-					polyloop = surface.Opening.PlanarGeometry.PolyLoop;
-					points = getPoints( polyloop );
+					const polyloop = surface.Opening.PlanarGeometry.PolyLoop;
+					const points = getPoints( polyloop );
 					openings.push( [ points ] );
 
 				} else {
@@ -195,7 +188,6 @@
 
 			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
 			shape.castShadow = shape.receiveShadow = true;
-//			shape.userData.data = surfaces[ i ];
 			campusSurfaces.add( shape );
 
 		}
@@ -243,13 +235,10 @@
 
 		}
 
-		let geo = new THREE.Geometry();
-//		geo.vertices = vertices;
-//		geo.mergeVertices();
 
-		shape1 = new THREE.Shape( vertices );
+		const shape = new THREE.Shape( vertices );
 
-		shape1.autoClose = true;
+		shape.autoClose = true;
 
 		for ( let verticesHoles of holes ) {
 
@@ -259,24 +248,21 @@
 
 			}
 
-			geo.vertices = verticesHoles;
-			geo.mergeVertices();
-
 			let hole = new THREE.Path();
 
-			hole.setFromPoints( geo.vertices );
+			hole.setFromPoints( verticesHoles );
 
-			shape1.holes.push( hole );
+			shape.holes.push( hole );
 
 		}
 
-		const geometry = new THREE.ShapeGeometry( shape1 );
+		const geometryShape = new THREE.ShapeGeometry( shape );
 
-		let shape = new THREE.Mesh( geometry, material );
-		shape.quaternion.copy( obj.quaternion );
-		shape.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
+		let shapeMesh = new THREE.Mesh( geometryShape, material );
+		shapeMesh.quaternion.copy( obj.quaternion );
+		shapeMesh.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
 
-		return shape;
+		return shapeMesh;
 
 	}
 
@@ -321,8 +307,6 @@
 
 
 	function XML2jsobj( node ) {
-
-//console.log( 'node', node );
 
 		let	data = {};
 

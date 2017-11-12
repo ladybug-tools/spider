@@ -3,17 +3,17 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "List, open and view all the gbXML sample files on GitHub" >
+<meta name = "description" content = "ist, open and view all the Spider gbXML sample files on GitHub." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-10" >
-<title>gbXML sample files</title>
+<meta name = "date" content = "2017-11-11" >
+<title>Spider sample files</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:250px; height: 100%; }
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:350px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
@@ -45,14 +45,15 @@
 
 	<div id = "divMenu" >
 
-		<p >
-			<a href="http://www.ladybug.tools/" target="_blank">Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_Top" >&#x1f578;</a> &raquo; 
-			<a href="../../index.html" target=_top style=font-size:24px; >&#x2302;</a> &raquo; 
+		<p>
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
 		</p>
 
+
 		<h2>
-			<a id=infoURI target="_blank"><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+			<a id = "urlInfo" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
 			<a href="" ><script> document.write( document.title )</script></a>
 		</h2>
 
@@ -63,7 +64,7 @@
 
 		<div id = "divMenuItems" ></div>
 
-		<p>Tooltips provide file size. Clock pencil icon to view source code on GitHub.</p>
+		<p>Tooltips provide file size. Click 'Octocat' icon to view source code on GitHub. Click &#x2750; icon to obtain a link to the individual file.</p>
 
 	</div>
 
@@ -74,7 +75,7 @@
 	</div>
 
 
-	<div id="hamburger" onclick=toggleNav(); >
+	<div id = "hamburger" onclick=toggleNav(); >
 
 		slide &#9776; 
 
@@ -82,23 +83,25 @@
 
 <script>
 
-	const user = 'GreenBuildingXML'
-	const repo = '/Sample-gbXML-Files';
-	const path = '';
+	const user = 'ladybug-tools';
+	const repo = '/spider';
+	const pathRepo = 'read-gbxml/data-files/';
 
+	const uriDefaultFile = 'README.md';
 
-	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/';
+	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 > </a>';
 
-	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
-	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + path;
-	const urlRawgitSource = 'https://rawgit.com/' + user + repo + '/master/' + path;
+	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
+
+	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/' + pathRepo;
+	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
+
 
 	init();
 
-
 	function init() {
 
-		infoURI.href = 'https://github.com/' + user + repo;
+		urlInfo.href = 'https://github.com/' + user + repo;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -112,7 +115,7 @@
 
 	function onHashChange() {
 
-		const url = !location.hash ? './README.md' : location.hash.slice( 1 );
+		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
 
 		if ( ulc.endsWith( '.md' ) ) {
@@ -127,28 +130,26 @@
 
 			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
 
-		} else if ( url.toLowerCase().endsWith( '.xml' ) ) {
+		} else if ( ulc.endsWith( '.xml' ) ) {
 
-console.log( 'url', url );
+//console.log( 'url', url );
 
 			divContents.style.maxWidth = '100%';
 			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=gbxml-viewer-basic.html#' + urlRawgitSource + url + ' ></iframe>';
+			divContents.innerHTML = '<iframe src=gbxml-viewer-basic.html#' + urlGitHubPage + url + ' ></iframe>';
 
 		}
 
 	}
 
 
+
 	function callbackGitHubMenu( xhr ) {
 
-		let response, files, txt;
+		const response = xhr.target.response;
+		const files = JSON.parse( response );
 
-		response = xhr.target.response;
-
-		files = JSON.parse( response );
-
-		txt = '';
+		let txt = '';
 
 		for ( let i = 0; i < files.length; i++ ) {
 
@@ -156,20 +157,26 @@ console.log( 'url', url );
 
 			if ( file.name === 'README.md' || !file.name.endsWith( '.xml' ) ) { continue; }
 
-			txt += '<div style=margin-bottom:3px;  >' +
-				'<a href=#' + encodeURI( file.name ) + ' ' + 
-				' title="' + file.size.toLocaleString() + ' bytes"  >' + 
-				file.name + '</a> ' +
-				'<a href=' + urlGitHubSource + encodeURI( file.name ) + 
-				' title="Edit me" > &#x1f589;</a>' +
+			const fileName = encodeURI( file.name );
+
+			txt += 
+
+			'<div style=margin-bottom:8px;  >' +
+
+				'<a href=' + urlGitHubSource + fileName + ' title="Edit me" >' + iconInfo + '</a>' +
+
+				'<a href=#' + fileName + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</a> ' +
+
+				'<a href=gbxml-viewer-basic.html#' + urlGitHubPage + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
+
 			'</div>';
 
 		}
 
 		divMenuItems.innerHTML = txt;
 
-
 	}
+
 
 
 	function callbackMarkdown( xhr ){
@@ -185,6 +192,8 @@ console.log( 'url', url );
 		window.scrollTo( 0, 0 );
 
 	}
+
+
 
 	function requestFile( url, callback ) {
 
