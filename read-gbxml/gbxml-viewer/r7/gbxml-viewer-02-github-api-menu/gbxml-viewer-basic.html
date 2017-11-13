@@ -35,6 +35,7 @@
 
 	</div>
 
+
 <script>
 
 	const gbxmlURI = '../../../data-files/SAM_Live.xml';
@@ -193,6 +194,7 @@
 		}
 
 		scene.add( campusSurfaces );
+
 		zoomObjectBoundingSphere( campusSurfaces );
 
 	}
@@ -285,10 +287,13 @@
 
 		}
 
+		obj.userData.center = center;
+		obj.userData.radius = radius;
+
 		controls.target.copy( center );
 		controls.maxDistance = 5 * radius;
 
-		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 		axesHelper.position.copy( center );
 
 		camera.far = 10 * radius; //2 * camera.position.length();

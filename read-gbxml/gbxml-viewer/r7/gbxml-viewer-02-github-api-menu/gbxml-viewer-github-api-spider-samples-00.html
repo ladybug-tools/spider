@@ -84,6 +84,9 @@
 
 <script>
 
+
+	const threeDefaultFile = 'gbxml-viewer-basic.html';
+
 	const user = 'ladybug-tools';
 	const repo = '/spider';
 	const path = 'read-gbxml/data-files/';
@@ -135,7 +138,7 @@ console.log( 'url', url );
 
 			divContents.style.maxWidth = '100%';
 			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=gbxml-viewer-basic.html#' + urlGitHubPage + url + ' ></iframe>';
+			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' ></iframe>';
 
 		}
 

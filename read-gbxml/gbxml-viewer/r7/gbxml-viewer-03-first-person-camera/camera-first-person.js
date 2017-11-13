@@ -12,44 +12,53 @@
 		</div>
 		<div>
 			<button onclick=turnUp(); title='R or page up key' >&#9651;</button> &nbsp;
-			<button onclick=turnDown(); title='F or page down key' >&#9661;</button> &nbsp; 
+			<button onclick=turnDown(); title='F or page down key' >&#9661;</button> &nbsp;
 			<button onclick=goUp(); title='Plus key' >+</button> &nbsp;
-			<button onclick=goDown(); title='Minus key' >-</button> &nbsp;
+			<button onclick=goDown(); title='Minus key' >-</button>
 		</div>
 
 	</div>
 `
 
 
-	ui = document.body.appendChild( document.createElement( 'div' ) );
-	ui.innerHTML += firstPersonUI;
+	const ui = document.body.appendChild( document.createElement( 'div' ) );
+	ui.innerHTML = firstPersonUI;
+	ui.style.cssText = 'left: 0; position: absolute; bottom: 20px; margin: 0 auto; text-align: center; right: 0; width: 100%; ';
 
-	ui.style.cssText = ' position: absolute; bottom: 20px; margin: auto; text-align: center; width: 100%; ';
-
-	let relativeCameraOffset = new THREE.Vector3( 0, 200, 50 );
-
+	let relativeCameraOffset; // = new THREE.Vector3( 100, 100, 50 );
 	let avatar;
 
 	window.addEventListener( 'keydown', onKeyDown, false );
 
-	addAvatar();
 
-	function addAvatar( size = 100 ) {
+	function addAvatar( size = campusSurfaces.userData.radius ) {
 
-		const geometry = new THREE.IcosahedronBufferGeometry( 0.01 * size, );
+//console.log( 'campusSurfaces.userData', size );
+//		scene.remove( avatar );
+
+		const geometryIcosahedron = new THREE.IcosahedronBufferGeometry( 0.01 * size, );
 		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
-		const geo1 = geometry.clone();
-		geo1.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.5 * Math.PI ) );
-		const geo2 = geometry.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
-		geo2.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -4.6, 1 ) );
+		const geoHead = geometryIcosahedron.clone();
+		geoHead.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.5 * Math.PI ) );
+		const geoTail = geometryIcosahedron.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
+		geoTail.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -0.45, 0.1 ) );
 
-		avatar = new THREE.Mesh( geo1, material );
-
-		avatar.add( new THREE.Mesh( geo2, material ) );
-		avatar.position.x = -0.075 * size;
-		avatar.position.z = 0.02 * size;
+		avatar = new THREE.Mesh( geoHead, material );
+		avatar.add( new THREE.Mesh( geoTail, material ) );
+		avatar.position.copy( axesHelper.position );
 		avatar.castShadow = avatar.receiveShadow = true;
-		avatar.visible = false;
+//		avatar.visible = false;
+
+		scene.add( avatar );
+		avatar.add( camera );
+
+		controls.reset();
+		controls.maxDistance = 10 * size;;
+
+		camera.far = 15 * size;
+
+		camera.position.set( 1.5 * size, - 1.5 * size, 1.5 * size );
+		camera.updateProjectionMatrix();
 
 	}
 
@@ -88,34 +97,39 @@ console.log( 'key', event.keyCode );
 
 	function goForward() {
 
-		avatar.translateY( 10 );
+		if ( !avatar ) { addAvatar(); }
+		avatar.translateY( 1 );
 		updateCamera();
 
 	}
 
 	function goBack() {
 
-		avatar.translateY( -10 );
+		if ( !avatar ) { addAvatar(); }
+		avatar.translateY( -1 );
 		updateCamera();
 
 	}
 
 	function goUp() {
 
-		avatar.translateZ( 3 );
+		if ( !avatar ) { addAvatar(); }
+		avatar.translateZ( 0.5 );
 		updateCamera();
 
 	}
 
 	function goDown() {
 
-		avatar.translateZ( -3 );
+		if ( !avatar ) { addAvatar(); }
+		avatar.translateZ( -0.5 );
 		updateCamera();
 
 	}
 
 	function turnRight() {
 
+		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.z -= 0.1;
 		updateCamera();
 
@@ -123,6 +137,7 @@ console.log( 'key', event.keyCode );
 
 	function turnLeft() {
 
+		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.z += 0.1;
 		updateCamera();
 
@@ -131,6 +146,7 @@ console.log( 'key', event.keyCode );
 
 	function turnUp() {
 
+		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.x += 0.1;
 		updateCamera();
 
@@ -139,19 +155,23 @@ console.log( 'key', event.keyCode );
 
 	function turnDown() {
 
+		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.x -= 0.1;
-		updateCamera();
+//		updateCamera();
 
 	}
 
 
 	function updateCamera() {
 
-		scene.add( avatar );
-		camera.updateProjectionMatrix();
-		let cameraOffset = relativeCameraOffset.applyMatrix4( avatar.matrixWorld );
-console.log( '', cameraOffset );
-		avatar.visible = true;
+//		camera.updateProjectionMatrix();
+
+//		let cameraOffset = relativeCameraOffset.applyMatrix4( avatar.matrixWorld );
+
+//console.log( 'cp', camera.position );
+//console.log( 'dis', camera.position.distanceTo( controls.target ) );
+
+//		avatar.visible = true;
 
 	}
 

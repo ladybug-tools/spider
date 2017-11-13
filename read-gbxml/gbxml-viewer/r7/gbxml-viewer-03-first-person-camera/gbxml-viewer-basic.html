@@ -87,7 +87,7 @@
 		renderer.shadowMap.renderSingleSided = false;
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -293,12 +293,12 @@
 		obj.userData.radius = radius;
 
 		controls.target.copy( center );
-		controls.maxDistance = 10 * radius;
+		controls.maxDistance = 5 * radius;
 
 		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 		axesHelper.position.copy( center );
 
-		camera.far = 15 * radius; //2 * camera.position.length();
+		camera.far = 10 * radius; //2 * camera.position.length();
 		camera.updateProjectionMatrix();
 
 		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
