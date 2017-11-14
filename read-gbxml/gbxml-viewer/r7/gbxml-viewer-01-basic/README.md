@@ -1,3 +1,6 @@
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/index.html#gbxml-viewer-01-basic/README.md "View file as a web page." ) </span>
+
+
 
 # gbXML Viewer Basic Rad Me
 

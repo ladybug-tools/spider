@@ -118,7 +118,7 @@
 
 	function init() {
 
-		urlInfo.href = 'https://github.com/' + user + repo;
+		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -223,10 +223,9 @@
 
 		}
 
-		const ignoreFiles = [ 'index.html' ];
+		const ignoreFiles = [ 'indexxxx.html' ];
 
 		for ( let item of items ) {
-
 
 
 			if ( item.type === 'file' ) {

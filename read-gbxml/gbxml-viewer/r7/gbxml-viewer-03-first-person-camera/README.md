@@ -1,7 +1,9 @@
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/index.html#gbxml-viewer-03-first-person-camera/README.md "View file as a web page." ) </span>
 
 # First Person Read Me
 
-## [gbXML Viewer Basic]( 
+## Full screen: [gbXML Viewer Basic First Person ]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer-03-first-person-camera/gbxml-viewer-github-api-gbxml-samples.html )
+
 Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen
 
 This is a new and experimental feature.
