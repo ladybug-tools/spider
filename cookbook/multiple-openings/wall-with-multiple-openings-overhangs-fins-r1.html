@@ -67,7 +67,9 @@
 				Fin depth <output id=outFin class=floatRight >2</output>
 				<input type=range id=inpFin min=0 max=10 step=0.5 value=2 oninput=drawWallInRandomPlace();outFin.value=value; />
 			</p>
+
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+
 		</div>
 
 	</div>
@@ -87,7 +89,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h1>' +
 				'<a href=' + infoURI + ' target="_top" >' + infoIcon + '</a>' +
 				'<a href="" >' + document.title +'</a>' +
@@ -168,15 +170,16 @@
 		for ( let i = 0; i < wall.items; i++ ) {
 
 			const geometryBoundary = new THREE.Geometry();
-			geometryBoundary.vertices = [ 
-				v( len05, hgt05, 0 ),  
-				v( -len05, hgt05, 0 ), 
+			geometryBoundary.vertices = [
+				v( len05, hgt05, 0 ),
+				v( -len05, hgt05, 0 ),
 				v( -len05, -hgt05, 0 ),
 				v( len05, -hgt05, 0 ),
 				v( len05, hgt05, 0 )
 			];
 
-			const geometryLine = geometryBoundary.clone().translate( i * lengthDelta - wall.length * 0.5 +len05, 0, 5 );
+			const geometryLine = geometryBoundary.clone()
+			geometryLine.translate( i * lengthDelta - wall.length * 0.5 + len05, 0, 5 );
 			const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
 			const line = new THREE.Line( geometryLine, materialLine );
 
@@ -194,7 +197,7 @@
 			const geometryShape = new THREE.ShapeGeometry( shape );
 			const materialShape = new THREE.MeshNormalMaterial( { side: 2 } );
 			const meshOpening = new THREE.Mesh( geometryShape, materialShape );
-			meshOpening.position.set( i * lengthDelta - wall.length * 0.5 +len05, 0, 10 );
+			meshOpening.position.set( i * lengthDelta - wall.length * 0.5 + len05, 0, 10 );
 
 			wall.mesh.add( meshOpening );
 
@@ -215,12 +218,13 @@
 		if ( wall.overhang < 0.5 ) { return; }
 
 		const wwr = wall.wwr / 100;
+		const material = new THREE.MeshNormalMaterial( { side: 2 } );
 
 		for ( let opening of wall.mesh.userData.openings ) {
 
 			const geometry = new THREE.PlaneGeometry( wall.lengthDelta * wwr, wall.overhang );
 			geometry.rotateX( Math.PI / 2 );
-			const material = new THREE.MeshNormalMaterial( { side: 2 } );
+
 			const mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( 0, wall.height * wwr / 2, wall.overhang * 0.5 );
 			opening.add( mesh );
@@ -238,12 +242,12 @@
 		if ( wall.fin < 0.5 ) { return; }
 
 		const wwr = wall.wwr / 100;
+		const material = new THREE.MeshNormalMaterial( { side: 2 } );
 
 		for ( let opening of wall.mesh.userData.openings ) {
 
 			const geometry = new THREE.PlaneGeometry( wall.fin, wall.height * wwr );
 			geometry.rotateY( Math.PI / 2 );
-			const material = new THREE.MeshNormalMaterial( { side: 2 } );
 
 			const mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( wall.lengthDelta * 0.5 * wwr, 0, wall.fin * 0.5 );
