@@ -4,10 +4,10 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="3D in your browser" >
+<meta name=description content="View gbXML files in 3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-10" >
-<title></title>
+<meta name = "date" content = "2017-11-13" >
+<title>gbXML Viewer Basic</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -17,7 +17,7 @@
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
 
-	#menu { position: absolute; text-align: center; width: 100%; }
+	#divMenu { position: absolute; text-align: center; width: 100%; }
 
 </style>
 </head>
@@ -26,11 +26,11 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
 <script src = "camera-first-person.js" ></script>
 
-	<div id = "menu" >
+	<div id = "divMenu" >
 
-		<div id = "title" ></div>
+		<div id = "divTitle" ></div>
 
-		<p id = "contents" >
+		<p id = "divContents" >
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 		</p>
 
@@ -39,9 +39,11 @@
 
 <script>
 
-	const gbxmlURI = '../../../data-files/SAM_Live.xml';
+	const uriGbxmlDefault = '../../../data-files/SAM_Live.xml';
 
 	let campusSurfaces;
+
+	let event = new Event( "bingo", {"bubbles": true, "cancelable": false, detail: true } );
 
 	const colors = {
 
@@ -65,8 +67,7 @@
 
 	let renderer, camera, controls, scene;
 	let lightAmbient, lightDirectional, lightPoint;
-	let cameraHelper, axisHelper;
-
+	let cameraHelper, axesHelper;
 
 	init();
 	animate();
@@ -75,7 +76,7 @@
 
 		if ( window.top === window.self ) {
 
-			title.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h1>';
+			divTitle.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>';
 
 		}
 
@@ -87,11 +88,11 @@
 		renderer.shadowMap.renderSingleSided = false;
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 0.1, 10000 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-//		controls.autoRotate = true;
+		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -126,7 +127,7 @@
 
 	function onHashChange() {
 
-		const url = !location.hash ? gbxmlURI : location.hash.slice( 1 );
+		const url = !location.hash ? uriGbxmlDefault : location.hash.slice( 1 );
 
 		requestFile( url, callbackGbXML );
 
@@ -139,6 +140,7 @@
 		const response = xhr.target.responseXML.documentElement;
 		const gbjson = XML2jsobj( response );
 		const surfaces = gbjson.Campus.Surface;
+
 		let polyloops = [];
 		let openings = [];
 
@@ -199,6 +201,8 @@
 
 		zoomObjectBoundingSphere( campusSurfaces );
 
+		window.dispatchEvent( event );
+
 	}
 
 
@@ -224,6 +228,8 @@
 
 	function drawShapeSinglePassObjects( vertices, material, holes ) {
 
+// there are going to be simpler ways of doing this
+
 		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
 
 		const obj = new THREE.Object3D();
@@ -232,6 +238,7 @@
 		const obj2 = new THREE.Object3D();
 		obj2.quaternion.copy( obj.clone().quaternion.conjugate() );
 		obj2.updateMatrixWorld( true );
+
 
 		for ( let vertex of vertices ) {
 
@@ -275,6 +282,7 @@
 	function zoomObjectBoundingSphere( obj ) {
 
 		if ( obj.geometry ) {
+// might not be necessary
 
 			obj.geometry.computeBoundingSphere();
 			const center = obj.geometry.boundingSphere.center;
@@ -293,12 +301,12 @@
 		obj.userData.radius = radius;
 
 		controls.target.copy( center );
-		controls.maxDistance = 10 * radius;
+		controls.maxDistance = 5 * radius;
 
 		camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 		axesHelper.position.copy( center );
 
-		camera.far = 15 * radius; //2 * camera.position.length();
+		camera.far = 10 * radius; //2 * camera.position.length();
 		camera.updateProjectionMatrix();
 
 		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
@@ -308,6 +316,8 @@
 //		scene.remove( cameraHelper );
 //		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
 //		scene.add( cameraHelper );
+
+
 
 	}
 

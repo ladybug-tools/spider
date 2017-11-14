@@ -25,16 +25,29 @@
 	ui.innerHTML = firstPersonUI;
 	ui.style.cssText = 'left: 0; position: absolute; bottom: 20px; margin: 0 auto; text-align: center; right: 0; width: 100%; ';
 
-	let relativeCameraOffset; // = new THREE.Vector3( 100, 100, 50 );
 	let avatar;
 
 	window.addEventListener( 'keydown', onKeyDown, false );
 
+//	window.addEventListener( "bingo", addAvatar );
+	window.addEventListener( "bingo", addControls, false );
+
+
+	function addControls() {
+
+	divContents.innerHTML +=
+		'<button onclick=zoomObjectBoundingSphere(campusSurfaces); >reset view</button> ' +
+		'<button onclick=zoomOverTheShoulder(); >over the shoulder</button>' +
+	'';
+
+	}
+
 
 	function addAvatar( size = campusSurfaces.userData.radius ) {
 
-//console.log( 'campusSurfaces.userData', size );
-//		scene.remove( avatar );
+console.log( 'campusSurfaces.userData', size );
+
+		scene.remove( avatar );
 
 		const geometryIcosahedron = new THREE.IcosahedronBufferGeometry( 0.01 * size, );
 		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
@@ -63,10 +76,14 @@
 	}
 
 
+	function zoomOverTheShoulder() {
+
+		camera.position.set( 0.2, -2, 0.8 );
+	}
 
 	function onKeyDown ( event ) {
 
-console.log( 'key', event.keyCode );
+//console.log( 'key', event.keyCode );
 
 		controls.enableKeys = false;
 		event.preventDefault();
@@ -85,10 +102,10 @@ console.log( 'key', event.keyCode );
 			case 39: /* cursor right */ turnRight();  break;
 			case 83: /* S */
 			case 40: /* cursor down  */ goBack(); break;
-			case 187:
-			case 107: /* plus */        goUp(); break;
-			case 189:
-			case 109: /* minus */       goDown(); break;
+			case 187:/* plus */
+			case 107:/* plus numeric*/  goUp(); break;
+			case 189:/* minus */
+			case 109:/* minus numeric*/ goDown(); break;
 
 		}
 
@@ -99,7 +116,6 @@ console.log( 'key', event.keyCode );
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.translateY( 1 );
-		updateCamera();
 
 	}
 
@@ -107,7 +123,6 @@ console.log( 'key', event.keyCode );
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.translateY( -1 );
-		updateCamera();
 
 	}
 
@@ -115,7 +130,6 @@ console.log( 'key', event.keyCode );
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.translateZ( 0.5 );
-		updateCamera();
 
 	}
 
@@ -123,7 +137,6 @@ console.log( 'key', event.keyCode );
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.translateZ( -0.5 );
-		updateCamera();
 
 	}
 
@@ -131,7 +144,6 @@ console.log( 'key', event.keyCode );
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.z -= 0.1;
-		updateCamera();
 
 	}
 
@@ -139,39 +151,21 @@ console.log( 'key', event.keyCode );
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.z += 0.1;
-		updateCamera();
 
 	}
-
 
 	function turnUp() {
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.x += 0.1;
-		updateCamera();
 
 	}
-
 
 	function turnDown() {
 
 		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.x -= 0.1;
-//		updateCamera();
 
 	}
 
-
-	function updateCamera() {
-
-//		camera.updateProjectionMatrix();
-
-//		let cameraOffset = relativeCameraOffset.applyMatrix4( avatar.matrixWorld );
-
-//console.log( 'cp', camera.position );
-//console.log( 'dis', camera.position.distanceTo( controls.target ) );
-
-//		avatar.visible = true;
-
-	}
 
