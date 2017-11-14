@@ -3,17 +3,17 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "ist, open and view all the Spider gbXML sample files on GitHub." >
+<meta name = "description" content = "List and view all the files in all the folders" >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-11" >
-<title>Spider sample files</title>
+<title>Index Table of Contents</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:350px; height: 100%; }
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:250px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
@@ -48,7 +48,9 @@
 		<p>
 			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
 			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
+<!--
 			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+-->
 		</p>
 
 
@@ -59,14 +61,29 @@
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
-
 		<div id = "divBreadcrumbs"></div>
 
 		<div id = "divMenuItems" ></div>
 
 		<p>Tooltips provide file size. Click 'Octocat' icon to view source code on GitHub. Click &#x2750; icon to obtain a link to the individual file.</p>
 
+		<div id= "divFooter" >
+
+			<hr>
+
+			<div title='many thanks!' ><a href=#../../pages/credits.md >Credits</a></div>
+			<div><a href=#../../pages/code-of-conduct.md >Code of Conduct</a></div>
+			<div><a href=#../../pages/contributing.md >Contributing</a></div>
+			<div><a href=#../../pages/license.md >License</a></div>
+			<div><a href=#../../pages/markdown-help.md >Markdown Help</a></div>
+			<div><a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+
+			<p onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >&#x1f578;</p>
+
+		</div>
+
 	</div>
+
 
 	<div id = "divContainer" >
 
@@ -83,19 +100,17 @@
 
 <script>
 
-	const threeDefaultFile = 'gbxml-viewer-basic-fp.html';
-
-	const user = 'ladybug-tools';
+	const user = 'ladybug-tools'
 	const repo = '/spider';
-	const pathRepo = 'read-gbxml/data-files/';
+	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader';
 
-	const uriDefaultFile = 'README.md';
+	const uriDefaultFile = './README.md';
 
 	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 > </a>';
 
 	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 
-	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/' + pathRepo;
+	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
 	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
 
@@ -103,11 +118,13 @@
 
 	function init() {
 
-		urlInfo.href = 'https://github.com/' + user + repo;
+		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
 		requestFile( urlGitHubApiContents, callbackGitHubMenu );
+
+//		getFolderContents();
 
 		onHashChange();
 
@@ -126,19 +143,15 @@
 
 		} else if ( ulc.endsWith( '.html' ) ) {
 
-			divContents.innerHTML = '<iframe src=' + url + ' ></iframe>';
+			divContents.innerHTML = '<iframe src=' + url + ' height=100% width=100% ></iframe>';
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
 			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
 
-		} else if ( ulc.endsWith( '.xml' ) ) {
+		} else {
 
-//console.log( 'url', url );
-
-			divContents.style.maxWidth = '100%';
-			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' ></iframe>';
+			requestFile( urlGitHubPage + url, callbackToTextarea );
 
 		}
 
@@ -146,38 +159,101 @@
 
 
 
+	function getFolderContents( path = '' ) {
+
+		const url = urlGitHubApiContents + path;
+
+		requestFile( url, callbackGitHubMenu );
+
+		setBreadcrumbs( path );
+
+	}
+
+
+
+	function setBreadcrumbs( path ) {
+
+		let txt = 
+			'<b>' +
+				'<a href=JavaScript:getFolderContents(); >' + pathRepo + '</a> &raquo; ' +
+			'</b>';
+
+		let folders = path ? path.split( '/' ) : [] ;
+
+		let str = '';
+
+		for ( let folder of folders ) {
+
+			str += folder + '/';
+
+			txt += '<b><a href=JavaScript:getFolderContents("' + str.slice( 0, -1 ) + '"); >' + folder + '</a> &raquo; </b>';
+
+		}
+
+		divBreadcrumbs.innerHTML = txt;
+
+	}
+
+
 	function callbackGitHubMenu( xhr ) {
 
 		const response = xhr.target.response;
-		const files = JSON.parse( response );
+		const items = JSON.parse( response );
+		const len = pathRepo.length;
 
 		let txt = '';
 
-		for ( let i = 0; i < files.length; i++ ) {
+		const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins' 
 
-			file = files[ i ];
+		for ( let item of items ) {
 
-			if ( file.name === 'README.md' || !file.name.endsWith( '.xml' ) ) { continue; }
+			if ( item.type === 'dir' ) {
 
-			const fileName = encodeURI( file.name );
+				if ( ignoreFolders.includes( item.name ) ) { continue; }
 
-			txt += 
+				txt +=
+					'<div style=margin-bottom:8px; >' +
+						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' + 
+							item.name  + 
+						'</a>' +
+					'</div>' +
+				'';
 
-			'<div style=margin-bottom:8px;  >' +
+			}
 
-				'<a href=' + urlGitHubSource + fileName + ' title="Edit me" >' + iconInfo + '</a>' +
+		}
 
-				'<a href=#' + fileName + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</a> ' +
+		const ignoreFiles = [ 'indexxxx.html' ];
 
-				'<a href=gbxml-viewer-basic.html#' + urlGitHubPage + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
+		for ( let item of items ) {
 
-			'</div>';
+
+			if ( item.type === 'file' ) {
+
+				if ( ignoreFiles.includes( item.name ) ) { continue; }
+
+				itemPath = encodeURI( item.path.slice( len ) );
+
+				txt +=
+					'<table><tr>' +
+
+						'<td><a href="' + urlGitHubSource + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
+						'<td><a href=#' + itemPath + 
+						' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
+						( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
+						'</td>' +
+
+					'</tr></table>';
+//console.log( 'item', item );
+
+			}
 
 		}
 
 		divMenuItems.innerHTML = txt;
 
 	}
+
 
 
 
@@ -190,8 +266,17 @@
 		divContents.style.maxWidth = '800px';
 		document.body.overflow = '';
 		divContents.innerHTML = html;
-
 		window.scrollTo( 0, 0 );
+
+	}
+
+
+
+	function callbackToTextarea( xhr ){
+
+		const response = xhr.target.response;
+
+		divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
 
 	}
 
@@ -213,7 +298,7 @@
 
 	function toggleNav() {
 
-		const width = getComputedStyle( document.documentElement ).getPropertyValue( '--mnu-width' );
+		const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' );
 
 		if ( !divMenu.style.width || divMenu.style.width === width ) {
 
