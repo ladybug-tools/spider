@@ -2,7 +2,9 @@ Ahhhh, and so take another stand against the gbXML challenge! I believe we close
 
 Gents,
 
-I did what I should have done a while ago to nail down minimum critical path objects and formatting for gbXML to Open Studio API conversions. First, I used Grasshopper to create a simple box building, 2 floors, perimeter core zoning, one single window on each floor south and west, overhangs on the windows and a rectangular fin on each windows, as well as a simple box for an adjacent building. These elements comprise of everything we need to support for our tool. See images here and here.
+I did what I should have done a while ago to nail down minimum critical path objects and formatting for gbXML to Open Studio API conversions. First, I used Grasshopper to create a simple box building, 2 floors, perimeter core zoning, one single window on each floor south and west, overhangs on the windows and a rectangular fin on each windows, as well as a simple box for an adjacent building. These elements comprise of everything we need to support for our tool. See images here and here: 
+
+https://perkinswill.app.box.com/s/1e3k7vo3n8x69euxy84wde7h61ii8j8s
 
 I used the OS component in Grasshopper to create on OSM file directly. I imported it into OS desktop, and confirmed the simulation ran correctly. Then I EXPORTED a gbXML file to know exactly what OS would need if I imported it. I then took that file, and started deleting some content that the OS studio app created (like loads, constructions, etc.) Then I imported it back into OS desktop to confirm it stilI worked smoothly and the simulation run (and it did). Therefore, I now have created a gbXML file that works specifically for Open Studio here. This is what we should target to mimic for the Build Well export as we are certain now it's simulation error free. It imports perfectly into the gbXML viewer v5 and it also imports correctly into FZK viewer without error.
 
