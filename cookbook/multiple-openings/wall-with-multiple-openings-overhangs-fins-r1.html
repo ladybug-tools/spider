@@ -6,7 +6,7 @@
 <meta name=description content="Real-time 3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-13" >
-<title></title>
+<title>Wall with Multiple Openings Overhangs Fine R1.1</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -90,7 +90,7 @@
 		divTitle.innerHTML = 
 			'<h1>' +
 				'<a href=' + infoURI + ' target="_top" >' + infoIcon + '</a>' +
-				'<a href="" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +'</a>' +
+				'<a href="" >' + document.title +'</a>' +
 			'</h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
@@ -214,12 +214,10 @@
 
 		if ( wall.overhang < 0.5 ) { return; }
 
-		const openings = wall.mesh.userData.openings;
 		const wwr = wall.wwr / 100;
 
-		for ( let i = 0; i < openings.length; i++ ) {
+		for ( let opening of wall.mesh.userData.openings ) {
 
-			const opening = openings[ i ];
 			const geometry = new THREE.PlaneGeometry( wall.lengthDelta * wwr, wall.overhang );
 			geometry.rotateX( Math.PI / 2 );
 			const material = new THREE.MeshNormalMaterial( { side: 2 } );
@@ -239,12 +237,10 @@
 
 		if ( wall.fin < 0.5 ) { return; }
 
-		const openings = wall.mesh.userData.openings;
 		const wwr = wall.wwr / 100;
 
-		for ( let i = 0; i < openings.length; i++ ) {
+		for ( let opening of wall.mesh.userData.openings ) {
 
-			const opening = openings[ i ];
 			const geometry = new THREE.PlaneGeometry( wall.fin, wall.height * wwr );
 			geometry.rotateY( Math.PI / 2 );
 			const material = new THREE.MeshNormalMaterial( { side: 2 } );
