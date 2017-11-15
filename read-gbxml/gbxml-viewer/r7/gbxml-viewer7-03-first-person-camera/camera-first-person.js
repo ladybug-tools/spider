@@ -20,6 +20,10 @@
 	</div>
 `
 
+	divContents.innerHTML +=
+		'<button onclick=zoomObjectBoundingSphere(campusSurfaces); >reset view</button> ' +
+		'<button onclick=zoomOverTheShoulder(); >over the shoulder</button>' +
+	'';
 
 	const ui = document.body.appendChild( document.createElement( 'div' ) );
 	ui.innerHTML = firstPersonUI;
@@ -30,17 +34,14 @@
 	window.addEventListener( 'keydown', onKeyDown, false );
 
 //	window.addEventListener( "bingo", addAvatar );
-	window.addEventListener( "bingo", addControls, false );
+
+//	window.addEventListener( "bingo", addControls, false );
 
 
-	function addControls() {
+//	function addControls() {
 
-	divContents.innerHTML +=
-		'<button onclick=zoomObjectBoundingSphere(campusSurfaces); >reset view</button> ' +
-		'<button onclick=zoomOverTheShoulder(); >over the shoulder</button>' +
-	'';
 
-	}
+//	}
 
 
 	function addAvatar( size = campusSurfaces.userData.radius ) {

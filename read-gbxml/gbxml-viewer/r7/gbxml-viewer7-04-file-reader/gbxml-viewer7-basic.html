@@ -6,8 +6,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="View gbXML files in 3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-13" >
-<title>gbXML Viewer Basic</title>
+<meta name = "date" content = "2017-11-14" >
+<title>gbXML Viewer7 Basic</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -38,9 +38,14 @@
 
 <script>
 
-	const uriGbxmlDefault = '../../../data-files/SAM_Live.xml';
 
+//	const uriGbxmlDefault = '../../../data-files/SAM_Live.xml';
+	const uriGbxmlDefault = 'CDR-BHE-ZZ-M3-MX-0001-SAM_detached_mdengusiak-with-errors.xml'
+
+	let gbjson;
 	let campusSurfaces;
+
+	let onloadGbjson = new CustomEvent( "bingo", { "bubbles": true, "cancelable": false, "gbjson": gbjson } );
 
 	const colors = {
 
@@ -131,11 +136,44 @@
 	}
 
 
-
 	function callbackGbXML( xhr ){
 
 		const response = xhr.target.responseXML.documentElement;
-		const gbjson = XML2jsobj( response );
+
+		parseFileXML( response );
+
+	}
+
+
+
+// loads any text file - from file reader or location hash or wherever
+
+	function parseFileXML( xmlNode ) {
+
+		gbjson = XML2jsobj( xmlNode );
+
+console.log( 'json', gbjson );
+
+		parseGbJson( gbjson );
+
+		if ( parent && parent.examineGbjson ) {
+
+			parent.examineGbjson( gbjson );
+
+		}
+
+		window.dispatchEvent( onloadGbjson );
+
+		return gbjson;
+
+	}
+
+
+
+	function parseGbJson( gbjson ) {
+
+//console.log( 'surfaces', gbjson.Campus.Surface );
+
 		const surfaces = gbjson.Campus.Surface;
 
 		let polyloops = [];
@@ -406,6 +444,7 @@
 		controls.update();
 
 	}
+
 
 </script>
 </body>

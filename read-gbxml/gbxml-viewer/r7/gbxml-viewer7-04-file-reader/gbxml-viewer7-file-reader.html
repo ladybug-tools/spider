@@ -13,7 +13,7 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:250px; height: 100%; }
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:300px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
@@ -48,9 +48,7 @@
 		<p>
 			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
 			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-<!--
 			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
--->
 		</p>
 
 
@@ -61,26 +59,16 @@
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
+		<p>
+			<input type=file id=inpFile onchange=openFile(this); >
+		<p>
+
+
 		<div id = "divBreadcrumbs"></div>
 
 		<div id = "divMenuItems" ></div>
 
-		<p>Tooltips provide file size. Click 'Octocat' icon to view source code on GitHub. Click &#x2750; icon to obtain a link to the individual file.</p>
-
-		<div id= "divFooter" >
-
-			<hr>
-
-			<div title='many thanks!' ><a href=#../../pages/credits.md >Credits</a></div>
-			<div><a href=#../../pages/code-of-conduct.md >Code of Conduct</a></div>
-			<div><a href=#../../pages/contributing.md >Contributing</a></div>
-			<div><a href=#../../pages/license.md >License</a></div>
-			<div><a href=#../../pages/markdown-help.md >Markdown Help</a></div>
-			<div><a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
-
-			<p onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >&#x1f578;</p>
-
-		</div>
+		<hr>
 
 	</div>
 
@@ -100,11 +88,14 @@
 
 <script>
 
+	let gbjson;
+
 	const user = 'ladybug-tools'
 	const repo = '/spider';
-	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader';
+	const pathRepo = 'read-gbxml/gbxml-viewer/';
 
-	const uriDefaultFile = './README.md';
+	const uriDefaultFile = 'gbxml-viewer7-basic.html';
+	const threeDefaultFile = 'gbxml-viewer7-basic.html';
 
 	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 > </a>';
 
@@ -122,11 +113,159 @@
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
-		requestFile( urlGitHubApiContents, callbackGitHubMenu );
-
-//		getFolderContents();
+//		requestFile( urlGitHubApiContents, callbackGitHubMenu );
 
 		onHashChange();
+
+	}
+
+
+	function openFile( files ) {
+
+		var fileData, reader, data;
+
+		reader = new FileReader();
+		reader.onload = function( event ) {
+
+			parser = new DOMParser();
+			xmlDoc = parser.parseFromString( reader.result,"text/xml");
+
+			gbjson = ifrThree.contentWindow.parseFileXML( xmlDoc.children[ 0 ] );
+
+			examineGbjson( gbjson );
+
+		}
+
+		reader.readAsText( files.files[0] );
+
+	}
+
+
+
+	function examineGbjson( gbjson ) {
+
+		surfaces = [];
+
+		b = '<br>';
+
+		txt = 
+			'Number of surfaces: ' + gbjson.Campus.Surface.length +
+			'<h3>Duplicate Surfaces</h3>';
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
+
+			if ( !surfaces.includes( points ) ) { 
+
+				surfaces.push( points ); 
+
+			} else {
+
+console.log( 'duplicate surface', surface );
+
+				txt += 
+					'<p>' +
+						'id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+					'</p>';
+
+			}
+
+		}
+
+
+		txt += '<h3>Duplicate Adjacencies</h3>';
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			adjacencies = surface.AdjacentSpaceId;
+
+			if ( Array.isArray( adjacencies )  && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+
+//console.log( 'surface', surface );
+console.log( 'duplicate adjacencies', adjacencies );
+
+				txt += 
+					'<p>' +
+						'id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+						'Adjacencies : ' + adjacencies[ 0 ].spaceIdRef + b +
+					'</p>';
+
+
+			}
+
+		}
+
+		txt += '<h3>Duplicate Coordinates</h3>';
+
+		items = 0;
+		verticesModelDuplicates = 0
+		verticesModel = [];
+
+
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			points = surface.PlanarGeometry.PolyLoop.CartesianPoint;
+
+			verticesSurface = [];
+
+			for ( point of points ) {
+
+				vertex = JSON.stringify( point );
+
+				if ( !verticesSurface.includes( vertex ) ) { 
+
+					verticesSurface.push( vertex ); 
+
+				} else {
+
+console.log( 'dup', vertex );
+
+				txt += 
+					'<p>' +
+						'id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+//						'Adjacencies : ' + adjacencies[ 0 ].spaceIdRef + b +
+					'</p>';
+
+
+				}
+
+
+				if ( !verticesModel.includes( vertex ) ) { 
+
+					verticesModel.push( vertex ); 
+
+				} else {
+
+//console.log( 'dup in model', vertex );
+
+					verticesModelDuplicates++;
+
+				}
+
+				items++;
+
+			}
+
+//console.log( '', vertices );
+
+		}
+
+		txt += 'Vertices checked: ' + items + b +
+			'Unique vertices in model: ' + verticesModel.length + b +
+			'Duplicate vertices in model: ' + verticesModelDuplicates;
+
+		divMenuItems.innerHTML = txt;
 
 	}
 
@@ -143,7 +282,12 @@
 
 		} else if ( ulc.endsWith( '.html' ) ) {
 
-			divContents.innerHTML = '<iframe src=' + url + ' height=100% width=100% ></iframe>';
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+
+			divContents.innerHTML = '<iframe id=ifrThree src=' + url + '  ></iframe>';
+
+//			ifrThree.contentWindow.addEventListener( 'bingo', getGbjson, false );
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
@@ -158,6 +302,13 @@
 	}
 
 
+	function getGbjson( e ) {
+
+			gbjson = ifrThree.contentWindow.gbjson;
+console.log( 'gbjson', e);
+			examineGbjson(  );
+
+	}
 
 	function getFolderContents( path = '' ) {
 
