@@ -13,3 +13,4 @@ Two samples:
 
 
 
+Click on any file in the left menu to view it in 3D

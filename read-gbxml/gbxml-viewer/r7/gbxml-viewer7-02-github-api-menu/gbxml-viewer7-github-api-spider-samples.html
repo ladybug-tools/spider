@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "ist, open and view all the Spider gbXML sample files on GitHub." >
+<meta name = "description" content = "List, open and view all the Spider gbXML sample files on GitHub." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-14" >
 <title>Spider sample gbXML files</title>
@@ -103,7 +103,7 @@
 
 	function init() {
 
-		urlInfo.href = 'https://github.com/' + user + repo;
+		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -169,7 +169,7 @@
 
 				'<a href=#' + fileName + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</a> ' +
 
-				'<a href=gbxml-viewer-basic.html#' + urlGitHubPage + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
+				'<a href=' + threeDefaultFile + '#' + urlGitHubPage + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
 
 			'</div>';
 
