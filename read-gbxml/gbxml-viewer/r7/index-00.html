@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "List and view all the gbXML files in all the folders" >
+<meta name = "description" content = "List, open and view all the latest Ladybug Tools/Spider gbXML Viewer scripts." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-11" >
-<title>gbXML Viewer7 Table of Contents</title>
+<title>gbXML Viewer R7 Table of Contents</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -17,7 +17,7 @@
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
-	a { color: var( --mnu-color ); text-decoration: none; }
+	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
@@ -31,8 +31,9 @@
 	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; height: 100%;
-		overflow-x: hidden; padding: 30px 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; padding: 30px 10px 0 10px;
+		height: 100%; overflow-x: hidden; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
 	#hamburger { background-color: #edd; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
@@ -59,21 +60,22 @@
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
+
 		<div id = "divBreadcrumbs"></div>
 
 		<div id = "divMenuItems" ></div>
 
-		<p>Tooltips provide file size. Click 'Octocat' icon to view source code on GitHub. Click &#x2750; icon to obtain a link to the individual file.</p>
+		<p>Tooltips provide file size. Clock pencil icon to view source code on GitHub.</p>
 
 		<div id= "divFooter" >
 
 			<hr>
 
-			<div title='many thanks!' ><a href=#../../../../pages/credits.md >Credits</a></div>
-			<div><a href=#../../../../pages/code-of-conduct.md >Code of Conduct</a></div>
-			<div><a href=#../../../../pages/contributing.md >Contributing</a></div>
-			<div><a href=#../../../../pages/license.md >License</a></div>
-			<div><a href=#../../../../pages/markdown-help.md >Markdown Help</a></div>
+			<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
+			<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
+			<div><a href=#../../../pages/contributing.md >Contributing</a></div>
+			<div><a href=#../../../pages/license.md >License</a></div>
+			<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
 			<div><a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
 
 			<p onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >&#x1f578;</p>
@@ -100,12 +102,9 @@
 
 	const user = 'ladybug-tools'
 	const repo = '/spider';
-	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-heads-up-display/';
+	const pathRepo = 'read-gbxml/gbxml-viewer/r7/';
 
-	const threeDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
-
-	const uriDefaultFile = './README.md';
-
+	const uriDefaultFile = '../README.md';
 
 	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 > </a>';
 
@@ -119,7 +118,7 @@
 
 	function init() {
 
-		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo;
+		urlInfo.href = 'https://github.com/' + user + repo + '/tree/master/read-gbxml/gbxml-viewer';
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -149,14 +148,6 @@
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
 			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
-
-		} else if ( ulc.endsWith( '.xml' ) ) {
-
-//console.log( 'url', url );
-
-			divContents.style.maxWidth = '100%';
-			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
 
 		} else {
 
@@ -232,9 +223,10 @@
 
 		}
 
-		const ignoreFiles = [ 'indexxxx.html' ];
+		const ignoreFiles = [ '.gitattributes', '.gitignore', 'index.js', 'index-menu.md', , 'index.js', 'spider-table-of-contents-r1.html' ];
 
 		for ( let item of items ) {
+
 
 
 			if ( item.type === 'file' ) {
