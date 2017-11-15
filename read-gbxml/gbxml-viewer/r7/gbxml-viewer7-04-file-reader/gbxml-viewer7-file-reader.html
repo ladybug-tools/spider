@@ -3,36 +3,36 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "List and view all the files in all the folders" >
+<meta name = "description" content = "Open and view gbXML files in local folders. Examine gbXML files for errors." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-11" >
-<title>Index Table of Contents</title>
+<meta name = "date" content = "2017-11-14" >
+<title>gbXML Viewer R7 File Reader</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:300px; height: 100%; }
+	html { --mnu-color: Darkorange; --mnu-back-color: WhiteSmoke; --mnu-width:300px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
-	a { color: crimson; text-decoration: none; }
+	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
 	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
-	iframe { border: 0px solid red; height: 100%; width: 100%; }
+	iframe { width: 100%; }
 
 	td { vertical-align: top; }
 
 	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; padding: 30px 10px 0 10px;
-		height: 100%; overflow-x: hidden; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; height: 100%;
+		overflow-x: hidden; padding: 30px 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
 	#hamburger { background-color: #edd; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
@@ -59,6 +59,7 @@
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
+		<p><a href="#README.md" target="_blank">Read Me</a></p>
 		<p>
 			<input type=file id=inpFile onchange=openFile(this); >
 		<p>
@@ -285,13 +286,21 @@ console.log( 'dup', vertex );
 			divContents.style.maxWidth = '100%';
 			document.body.style.overflow = 'hidden';
 
-			divContents.innerHTML = '<iframe id=ifrThree src=' + url + '  ></iframe>';
+			divContents.innerHTML = '<iframe id=ifrThree src=' + url + ' style=height:100%;border:none; ></iframe>';
 
 //			ifrThree.contentWindow.addEventListener( 'bingo', getGbjson, false );
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
 			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
+
+		} else if ( ulc.endsWith( '.xml' ) ) {
+
+//console.log( 'url', url );
+
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' ></iframe>';
 
 		} else {
 

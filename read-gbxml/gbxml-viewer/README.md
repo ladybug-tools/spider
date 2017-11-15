@@ -23,7 +23,7 @@ In folder r7/gbxml-viewer7-02-github-api-menu
 
 ## [Spider gbXML sample files]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml7-viewer-02-github-api-menu/gbxml-viewer7-github-api-spider-samples.html )
 
-* Two scripts that show how the cure file may be used to load a number of gbXML files
+* Two scripts that show how the core file is used to load a number of gbXML files
 
 ***
 
@@ -36,9 +36,9 @@ In folder r7/gbxml-viewer7-03-first-person-camera
 
 ***
 
-In folder r7/gbxml-viewer7-04-first-file-reader
+In folder r7/gbxml-viewer7-04-file-reader
 
-## [gbXML Viewer R7 First Person Camera]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/gbxml-viewer7-file-reader.html )
+## [gbXML Viewer R7 File Reader]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/gbxml-viewer7-file-reader.html )
 
 * Open and display in 3D a gbXML file that's on a local drive. Examine the file for errors.
 
