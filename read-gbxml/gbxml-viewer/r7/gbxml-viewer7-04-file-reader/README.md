@@ -17,6 +17,8 @@ Open and display in 3D a gbXML file that's on a local drive. Examine the file fo
 
 This file will probably evolve into several different files - some better for opening files and others better at examining files
 
+May also be use used to view remote or local gbXML files using a URL
+
 * <http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/gbxml-viewer7-file-reader.html#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml>
 
 ## Wish list

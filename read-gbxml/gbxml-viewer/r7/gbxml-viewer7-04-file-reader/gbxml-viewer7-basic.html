@@ -40,7 +40,7 @@
 
 
 //	const uriGbxmlDefault = '../../../data-files/SAM_Live.xml';
-	const uriGbxmlDefault = 'CDR-BHE-ZZ-M3-MX-0001-SAM_detached_mdengusiak-with-errors.xml'
+	const uriGbxmlDefault = 'CDR-BHE-ZZ-M3-MX-0001-SAM_detached_mdengusiak-with-errors.xml';
 
 	let gbjson;
 	let campusSurfaces;
@@ -130,6 +130,8 @@
 	function onHashChange() {
 
 		const url = !location.hash ? uriGbxmlDefault : location.hash.slice( 1 );
+
+		scene.userData.url = url;
 
 		requestFile( url, callbackGbXML );
 

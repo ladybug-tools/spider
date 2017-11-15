@@ -48,7 +48,7 @@
 		<p>
 			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
 			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo; 
 		</p>
 
 
@@ -59,7 +59,7 @@
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
-		<p><a href="#README.md" target="_blank">Read Me</a></p>
+		<p><a href="#README.md" target="_top">Read Me</a></p>
 		<p>
 			<input type=file id=inpFile onchange=openFile(this); >
 		<p>
@@ -121,6 +121,47 @@
 	}
 
 
+
+	function onHashChange() {
+
+		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+		const ulc = url.toLowerCase();
+
+		if ( ulc.endsWith( '.md' ) ) {
+
+			requestFile( url, callbackMarkdown );
+
+		} else if ( ulc.endsWith( '.html' ) ) {
+
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+
+			divContents.innerHTML = '<iframe id=ifrThree src=' + url + ' style=height:100%;border:none; ></iframe>';
+
+//			ifrThree.contentWindow.addEventListener( 'bingo', getGbjson, false );
+
+		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
+
+			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
+
+		} else if ( ulc.endsWith( '.xml' ) ) {
+
+//console.log( 'url', url );
+
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
+
+		} else {
+
+			requestFile( urlGitHubPage + url, callbackToTextarea );
+
+		}
+
+	}
+
+
+
 	function openFile( files ) {
 
 		var fileData, reader, data;
@@ -129,15 +170,17 @@
 		reader.onload = function( event ) {
 
 			parser = new DOMParser();
-			xmlDoc = parser.parseFromString( reader.result,"text/xml");
+			xmlDoc = parser.parseFromString( reader.result, "text/xml" );
 
 			gbjson = ifrThree.contentWindow.parseFileXML( xmlDoc.children[ 0 ] );
+
+			gbjson.name = files.files[ 0 ].name;
 
 			examineGbjson( gbjson );
 
 		}
 
-		reader.readAsText( files.files[0] );
+		reader.readAsText( files.files[ 0 ] );
 
 	}
 
@@ -150,6 +193,7 @@
 		b = '<br>';
 
 		txt = 
+			'File: ' + gbjson.name + b +
 			'Number of surfaces: ' + gbjson.Campus.Surface.length +
 			'<h3>Duplicate Surfaces</h3>';
 
@@ -272,43 +316,6 @@ console.log( 'dup', vertex );
 
 
 
-	function onHashChange() {
-
-		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
-		const ulc = url.toLowerCase();
-
-		if ( ulc.endsWith( '.md' ) ) {
-
-			requestFile( url, callbackMarkdown );
-
-		} else if ( ulc.endsWith( '.html' ) ) {
-
-			divContents.style.maxWidth = '100%';
-			document.body.style.overflow = 'hidden';
-
-			divContents.innerHTML = '<iframe id=ifrThree src=' + url + ' style=height:100%;border:none; ></iframe>';
-
-//			ifrThree.contentWindow.addEventListener( 'bingo', getGbjson, false );
-
-		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
-
-			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
-
-		} else if ( ulc.endsWith( '.xml' ) ) {
-
-//console.log( 'url', url );
-
-			divContents.style.maxWidth = '100%';
-			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' ></iframe>';
-
-		} else {
-
-			requestFile( urlGitHubPage + url, callbackToTextarea );
-
-		}
-
-	}
 
 
 	function getGbjson( e ) {
