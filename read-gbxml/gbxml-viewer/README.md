@@ -48,6 +48,11 @@ In folder r7/gbxml-viewer7-04-file-reader
 
 ***
 
+In folder r7/gbxml-viewer7-05-heads-up-displa
+
+## [gbXML Viewer7 Heads Up Display]( 
+
+
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product oof human imagination.
 
 

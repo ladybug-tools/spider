@@ -3,10 +3,10 @@
 # gbXML Viewer7 Heads Up Display Read Me
 
 
-<iframe class=iframeReadMe src=../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer7 Heads Up Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html )
+## Full screen: [gbXML Viewer7 Heads Up Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html)
 
 
 * <http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/gbxml-viewer7-file-reader.html#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml>
@@ -29,6 +29,9 @@
 
 ## Change Log
 
+### 2017-11-15 ~ Theo
+
+* First commit
 
 ***
 
