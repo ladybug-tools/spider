@@ -299,7 +299,7 @@ console.log( 'gbjson', e);
 		const html = converter.makeHtml( xhr.target.responseText );
 
 		divContents.style.maxWidth = '800px';
-		document.body.overflow = '';
+		document.body.style.overflow = '';
 		divContents.innerHTML = html;
 		window.scrollTo( 0, 0 );
 

@@ -48,10 +48,14 @@ In folder r7/gbxml-viewer7-04-file-reader
 
 ***
 
-In folder r7/gbxml-viewer7-05-heads-up-displa
+In folder r7/gbxml-viewer7-05-heads-up-display
 
-## [gbXML Viewer7 Heads Up Display]( 
+## [gbXML Viewer7 Heads Up Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html )
 
+* [Read Me]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html#README.md )
+* Add a Heads-Up-Display (HUD) to the 3D view
+
+***
 
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product oof human imagination.
 
