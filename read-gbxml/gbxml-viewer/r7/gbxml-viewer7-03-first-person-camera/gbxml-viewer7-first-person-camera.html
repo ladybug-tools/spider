@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "List, open and view all the gbXML sample files on GitHub" >
+<meta name = "description" content = "gbXML Viewer with First Person Camera" >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-10" >
-<title>GreenBuildingXML gbXML sample files</title>
+<title>gbXML Viewer7 First Person Camera</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -59,6 +59,7 @@
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
+		<p>Sample files to explore with first person camera:</p>
 
 		<div id = "divBreadcrumbs"></div>
 
@@ -83,7 +84,8 @@
 
 <script>
 
-	const threeDefaultFile = 'gbxml-viewer7-basic.html';
+//	const threeDefaultFile = 'gbxml-viewer7-basic.html';
+	const threeDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
 
 	const user = 'GreenBuildingXML'
 	const repo = '/Sample-gbXML-Files';
@@ -140,18 +142,19 @@
 			document.body.style.overflow = 'hidden';
 			divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' ></iframe>';
 
-			ifrThree.contentWindow.addEventListener( 'bingo', addControls, false );
+//			ifrThree.contentWindow.addEventListener( 'bingo', addControls, false );
 
 		}
 
 	}
 
 
-	function addControls() {
+	function onloadThree() {
+console.log( '', 23 );
 
 		const scr = ifrThree.contentDocument.body.appendChild( document.createElement( 'script' ) );
 
-		scr.src = 'camera-first-person.js';
+		scr.src = '../gbxml-viewer7-03-first-person-camera/camera-first-person.js';
 
 	}
 

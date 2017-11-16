@@ -6,7 +6,7 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="View gbXML files in 3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-14" >
+<meta name = "date" content = "2017-11-16" >
 <title>gbXML Viewer7 Basic</title>
 <style>
 
@@ -33,12 +33,14 @@
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 		</p>
 
+		<div id=divLog ></div>
+
 	</div>
 
 
 <script>
 
-	const uriGbxmlDefault = '../../../data-files/SAM_Live.xml';
+	const uriGbxmlDefault = '../../../data-files/sam-live2.xml';
 
 	var gbjson;
 	var campusSurfaces;
@@ -94,15 +96,6 @@
 
 		scene = new THREE.Scene();
 
-		THREE.EventDispatcher.call( scene );
-
-		scene.addEventListener( 'loaded', function( event ) { 
-
-			console.log( '', 23 ); 
-
-
-		} );
-
 		lightAmbient = new THREE.AmbientLight( 0x444444 );
 		scene.add( lightAmbient );
 
@@ -130,15 +123,19 @@
 
 		onHashChange();
 
-
 	}
+
 
 
 	function onClickEvent() {
 
+		divLog.innerHTML = '';
+
 		if ( parent && parent.onloadThree ) { parent.onloadThree(); }
 
 	}
+
+
 
 	function onHashChange() {
 
@@ -421,13 +418,17 @@
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-//		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
+		xhr.onprogress = onRequestFileProgress;
 		xhr.onload = callback;
 		xhr.send( null );
 
+		function onRequestFileProgress( xhr ) {
+
+			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+
+		}
+
 	}
-
-
 
 	function onWindowResize() {
 

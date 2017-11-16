@@ -14,13 +14,25 @@
 
 The core or template file to be used to read gbXML files and display them in 3D
 
-* Uses Three.js
+* Built upon the [Three.js]( https://threejs.org ) 3D JavaScript library
 * Under 500 lines of code
 * Plan-vanilla JavaScript
-* 90% easy-peasy JavaScript and 10% gnarly, linear algebra JavaScript
+	* 90% easy-peasy JavaScript and 10% gnarly, linear algebra JavaScript
+* Accepts URLs of files to view via [location.hash]( https://www.w3schools.com/jsref/prop_loc_hash.asp ) - useful in creating [permalinks]( https://en.wikipedia.org/wiki/Permalink )
+* Accepts and displays xml text data via its parseFileXML function
+	* May be data sent by an iframe parent
+	* May be date acquired by the HTML5 file reader tag
+
 
 
 ## Change Log
+
+
+### 2017-11-16 ~ Theo
+
+* sam-live2.xml set as default file to view
+* comment out even generators
+
 
 ### 2017-11-14 ~ Theo
 

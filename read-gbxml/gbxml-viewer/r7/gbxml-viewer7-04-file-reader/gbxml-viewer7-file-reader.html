@@ -95,8 +95,11 @@
 	const repo = '/spider';
 	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/';
 
-	const uriDefaultFile = 'gbxml-viewer7-basic.html';
-	const threeDefaultFile = 'gbxml-viewer7-basic.html';
+	const threeDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
+
+	const uriDefaultFile = 'https://rawgit.com/ladybug-tools/spider/master/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/data-files/sam-live2-with-errors.xml';
+
+//	const threeDefaultFile = 'gbxml-viewer7-basic.html';
 
 	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 > </a>';
 
@@ -113,8 +116,6 @@
 		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo ;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
-
-//		requestFile( urlGitHubApiContents, callbackGitHubMenu );
 
 		onHashChange();
 
@@ -150,7 +151,7 @@
 
 			divContents.style.maxWidth = '100%';
 			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
+			divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
 
 		} else {
 
@@ -167,6 +168,7 @@
 		var fileData, reader, data;
 
 		reader = new FileReader();
+		reader.onprogress = onRequestFileProgress;
 		reader.onload = function( event ) {
 
 			parser = new DOMParser();
@@ -182,6 +184,16 @@
 
 		reader.readAsText( files.files[ 0 ] );
 
+
+		function onRequestFileProgress( event ) {
+
+			ifrThree.contentWindow.divLog.innerHTML = 
+				'bytes loaded: ' + event.loaded.toLocaleString() + 
+				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+			'';
+
+		}
+
 	}
 
 
@@ -195,7 +207,7 @@
 		txt = 
 			'File: ' + gbjson.name + b +
 			'Number of surfaces: ' + gbjson.Campus.Surface.length +
-			'<h3>Duplicate Surfaces</h3>';
+			'<h3 id=h3DuplicateSurfaces >Duplicate Surfaces</h3>';
 
 		for ( let surface of gbjson.Campus.Surface ) {
 
@@ -222,8 +234,8 @@ console.log( 'duplicate surface', surface );
 		}
 
 
-		txt += '<h3>Duplicate Adjacencies</h3>';
-
+		t$ = ''
+		adjacenciesCount = 0;
 		for ( let surface of gbjson.Campus.Surface ) {
 
 			adjacencies = surface.AdjacentSpaceId;
@@ -233,7 +245,7 @@ console.log( 'duplicate surface', surface );
 //console.log( 'surface', surface );
 console.log( 'duplicate adjacencies', adjacencies );
 
-				txt += 
+				t$ += 
 					'<p>' +
 						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -242,12 +254,18 @@ console.log( 'duplicate adjacencies', adjacencies );
 						'Adjacencies : ' + adjacencies[ 0 ].spaceIdRef + b +
 					'</p>';
 
+				adjacenciesCount ++;
 
 			}
 
 		}
 
-		txt += '<h3>Duplicate Coordinates</h3>';
+		txt += '<h3>' + adjacenciesCount + 'Duplicate Adjacencies</h3>' +
+			t$;
+
+
+
+		txt += '<h3>Duplicate Coordinates - + </h3>';
 
 		items = 0;
 		verticesModelDuplicates = 0
@@ -311,6 +329,8 @@ console.log( 'dup', vertex );
 			'Duplicate vertices in model: ' + verticesModelDuplicates;
 
 		divMenuItems.innerHTML = txt;
+
+		h3DuplicateSurfaces.innerHTML += ' - ' + gbjson.Campus.Surface.length - surfaces.length;
 
 	}
 

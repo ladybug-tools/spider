@@ -6,7 +6,7 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="View gbXML files in 3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-16" >
+<meta name = "date" content = "2017-11-14" >
 <title>gbXML Viewer7 Basic</title>
 <style>
 
@@ -33,17 +33,17 @@
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 		</p>
 
-		<div id=divLog ></div>
-
 	</div>
 
 
 <script>
 
-	const uriGbxmlDefault = '../../../data-files/sam-live2.xml';
 
-	var gbjson;
-	var campusSurfaces;
+	const uriGbxmlDefault = '../../../data-files/SAM_Live.xml';
+
+	let gbjson;
+	let campusSurfaces;
+	let onloadGbjson = new Event( "bingo", { "bubbles": true, "cancelable": false } );
 
 	const colors = {
 
@@ -65,7 +65,7 @@
 
 	}
 
-	var renderer, camera, controls, scene;
+	let renderer, camera, controls, scene;
 	let lightAmbient, lightDirectional, lightPoint;
 	let cameraHelper, axesHelper;
 
@@ -119,19 +119,7 @@
 		window.addEventListener ( 'hashchange', onHashChange, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-		renderer.domElement.addEventListener( 'click', onClickEvent, false );
-
 		onHashChange();
-
-	}
-
-
-
-	function onClickEvent() {
-
-		divLog.innerHTML = '';
-
-		if ( parent && parent.onloadThree ) { parent.onloadThree(); }
 
 	}
 
@@ -162,7 +150,17 @@
 
 		gbjson = XML2jsobj( xmlNode );
 
+//console.log( 'json', gbjson );
+
 		parseGbJson( gbjson );
+
+		if ( parent && parent.onloadGbjson ) {
+
+			parent.onloadGbjson( gbjson );
+
+		}
+
+		window.dispatchEvent( onloadGbjson );
 
 		return gbjson;
 
@@ -220,7 +218,6 @@
 		}
 
 		scene.remove( campusSurfaces );
-
 		campusSurfaces = new THREE.Object3D();
 
 		for ( let i = 0; i < polyloops.length; i++ ) {
@@ -228,7 +225,6 @@
 			const material = new THREE.MeshPhongMaterial( { color: colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
 			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
-			shape.userData.data = surfaces[ i ];
 			shape.castShadow = shape.receiveShadow = true;
 			campusSurfaces.add( shape );
 
@@ -418,17 +414,13 @@
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = onRequestFileProgress;
+//		xhr.onprogress = function( xhr ) { divFileInfo.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString(); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
-		function onRequestFileProgress( xhr ) {
-
-			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
-
-		}
-
 	}
+
+
 
 	function onWindowResize() {
 

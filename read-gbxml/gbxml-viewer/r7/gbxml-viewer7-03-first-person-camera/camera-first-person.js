@@ -1,8 +1,7 @@
 
-	const firstPersonUI =
+	var firstPersonUI =
 `
 	<div id=divControls >
-
 
 		<div>
 			<button onclick=turnLeft(); title='A or left cursor key' >&#9664;</button> &nbsp;
@@ -25,28 +24,18 @@
 		'<button onclick=zoomOverTheShoulder(); >over the shoulder</button>' +
 	'';
 
-	const ui = document.body.appendChild( document.createElement( 'div' ) );
+	var ui = document.body.appendChild( document.createElement( 'div' ) );
 	ui.innerHTML = firstPersonUI;
 	ui.style.cssText = 'left: 0; position: absolute; bottom: 20px; margin: 0 auto; text-align: center; right: 0; width: 100%; ';
 
-	let avatar;
+	var avatar;
 
 	window.addEventListener( 'keydown', onKeyDown, false );
-
-//	window.addEventListener( "bingo", addAvatar );
-
-//	window.addEventListener( "bingo", addControls, false );
-
-
-//	function addControls() {
-
-
-//	}
 
 
 	function addAvatar( size = campusSurfaces.userData.radius ) {
 
-console.log( 'campusSurfaces.userData', size );
+//console.log( 'campusSurfaces.userData', size );
 
 		scene.remove( avatar );
 
@@ -77,10 +66,13 @@ console.log( 'campusSurfaces.userData', size );
 	}
 
 
+
 	function zoomOverTheShoulder() {
 
 		camera.position.set( 0.2, -2, 0.8 );
 	}
+
+
 
 	function onKeyDown ( event ) {
 
@@ -111,6 +103,7 @@ console.log( 'campusSurfaces.userData', size );
 		}
 
 	}
+
 
 
 	function goForward() {
@@ -168,5 +161,4 @@ console.log( 'campusSurfaces.userData', size );
 		avatar.rotation.x -= 0.1;
 
 	}
-
 
