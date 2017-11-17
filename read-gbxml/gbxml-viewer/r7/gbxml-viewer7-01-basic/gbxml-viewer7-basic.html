@@ -27,7 +27,15 @@
 
 	<div id = "divMenu" >
 
-		<div id = "divTitle" ></div>
+		<div id = "divTitle" >
+
+			<h1><a href="" ><script> document.write( document.title ) </script></a></h1>
+
+			<p>
+				<input type=file id=inpFile onchange=openFile(this); >
+			<p>
+
+		</div>
 
 		<p id = "divContents" >
 			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
@@ -67,16 +75,16 @@
 
 	var renderer, camera, controls, scene;
 	let lightAmbient, lightDirectional, lightPoint;
-	let cameraHelper, axesHelper;
+	var cameraHelper, axesHelper;
 
 	init();
 	animate();
 
 	function init() {
 
-		if ( window.top === window.self ) {
+		if ( window.top !== window.self ) {
 
-			divTitle.innerHTML = '<h1><a href="" >' + document.title +'</a></h1>';
+			divTitle.innerHTML = '';
 
 		}
 
@@ -88,11 +96,23 @@
 		renderer.shadowMap.renderSingleSided = false;
 		document.body.appendChild( renderer.domElement );
 
+
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.autoRotate = true;
+
+/*
+		const width = 300;
+		const height = 300;
+		camera = new THREE.OrthographicCamera( width / -3, width / 3, height / 3, height / - 3, 1, 1000 );
+		camera.position.set( 0, 0, 200 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+*/
+
 
 		scene = new THREE.Scene();
 
@@ -146,11 +166,63 @@
 	}
 
 
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+
+		}
+
+	}
+
+
+
 	function callbackGbXML( xhr ){
 
 		const response = xhr.target.responseXML.documentElement;
 
 		parseFileXML( response );
+
+	}
+
+
+
+	function openFile( files ) {
+
+		const reader = new FileReader();
+		reader.onprogress = onRequestFileProgress;
+		reader.onload = function( event ) {
+
+			const parser = new DOMParser();
+
+			const xmlDoc = parser.parseFromString( reader.result, "text/xml" );
+
+			gbjson = parseFileXML( xmlDoc.children[ 0 ] );
+
+			gbjson.name = files.files[ 0 ].name;
+
+		}
+
+		reader.readAsText( files.files[ 0 ] );
+
+		function onRequestFileProgress( event ) {
+
+			divLog.innerHTML = 
+				'bytes loaded: ' + event.loaded.toLocaleString() + 
+				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+			'';
+
+		}
 
 	}
 
@@ -411,24 +483,6 @@
 	}
 
 
-
-	function requestFile( url, callback ) {
-
-		const xhr = new XMLHttpRequest();
-		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', url, true );
-		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = onRequestFileProgress;
-		xhr.onload = callback;
-		xhr.send( null );
-
-		function onRequestFileProgress( xhr ) {
-
-			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
-
-		}
-
-	}
 
 	function onWindowResize() {
 

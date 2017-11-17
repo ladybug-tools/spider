@@ -54,18 +54,19 @@
 
 		<h2>
 			<a id = "urlInfo" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
-			<a href="" ><script> document.write( document.title )</script></a>
+			<a href="" ><script> document.write( document.title ); </script></a>
 		</h2>
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
-		<p><a href="#README.md" target="_top">Read Me</a></p>
+		<p><a href = "#README.md" target="_top" >Read Me</a></p>
+
 		<p>
-			<input type=file id=inpFile onchange=openFile(this); >
+			<input type = "file" id = "inpFile" onchange="ifrThree.contentWindow.openFile(this);" >
 		<p>
 
 
-		<div id = "divBreadcrumbs"></div>
+		<div id = "divBreadcrumbs" ></div>
 
 		<div id = "divMenuItems" ></div>
 
@@ -110,7 +111,7 @@
 
 	function init() {
 
-		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo ;
+		urlInfo.href = urlGitHubSource;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -127,7 +128,7 @@
 
 		if ( ulc.endsWith( '.md' ) ) {
 
-			requestFile( url, callbackMarkdown );
+			ifrThree.contentWindow.requestFile( url, callbackMarkdown );
 
 		} else if ( ulc.endsWith( '.html' ) ) {
 
@@ -135,8 +136,6 @@
 			document.body.style.overflow = 'hidden';
 
 			divContents.innerHTML = '<iframe id=ifrThree src=' + url + ' style=height:100%;border:none; ></iframe>';
-
-//			ifrThree.contentWindow.addEventListener( 'bingo', getGbjson, false );
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
@@ -148,148 +147,24 @@
 
 			divContents.style.maxWidth = '100%';
 			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
+			divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
 
 		} else {
 
-			requestFile( urlGitHubPage + url, callbackToTextarea );
+			ifrThree.contentWindow.requestFile( urlGitHubPage + url, callbackToTextarea );
 
 		}
 
 	}
 
 
+	function onloadThree() {
 
-	function openFile( files ) {
-
-		var fileData, reader, data;
-
-		reader = new FileReader();
-		reader.onload = function( event ) {
-
-			parser = new DOMParser();
-			xmlDoc = parser.parseFromString( reader.result, "text/xml" );
-
-			gbjson = ifrThree.contentWindow.parseFileXML( xmlDoc.children[ 0 ] );
-
-			gbjson.name = files.files[ 0 ].name;
-
-
-		}
-
-		reader.readAsText( files.files[ 0 ] );
+		icw = ifrThree.contentWindow;
+		icw.renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
 
 	}
 
-
-
-	function getGbjson( e ) {
-
-			gbjson = ifrThree.contentWindow.gbjson;
-console.log( 'gbjson', e);
-			examineGbjson(  );
-
-	}
-
-
-
-	function getFolderContents( path = '' ) {
-
-		const url = urlGitHubApiContents + path;
-
-		requestFile( url, callbackGitHubMenu );
-
-		setBreadcrumbs( path );
-
-	}
-
-
-/*
-	function setBreadcrumbs( path ) {
-
-		let txt = 
-			'<b>' +
-				'<a href=JavaScript:getFolderContents(); >' + pathRepo + '</a> &raquo; ' +
-			'</b>';
-
-		let folders = path ? path.split( '/' ) : [] ;
-
-		let str = '';
-
-		for ( let folder of folders ) {
-
-			str += folder + '/';
-
-			txt += '<b><a href=JavaScript:getFolderContents("' + str.slice( 0, -1 ) + '"); >' + folder + '</a> &raquo; </b>';
-
-		}
-
-		divBreadcrumbs.innerHTML = txt;
-
-	}
-
-
-	function callbackGitHubMenu( xhr ) {
-
-		const response = xhr.target.response;
-		const items = JSON.parse( response );
-		const len = pathRepo.length;
-
-		let txt = '';
-
-		const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins' 
-
-		for ( let item of items ) {
-
-			if ( item.type === 'dir' ) {
-
-				if ( ignoreFolders.includes( item.name ) ) { continue; }
-
-				txt +=
-					'<div style=margin-bottom:8px; >' +
-						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' + 
-							item.name  + 
-						'</a>' +
-					'</div>' +
-				'';
-
-			}
-
-		}
-
-		const ignoreFiles = [ 'indexxxx.html' ];
-
-		for ( let item of items ) {
-
-
-			if ( item.type === 'file' ) {
-
-				if ( ignoreFiles.includes( item.name ) ) { continue; }
-
-				itemPath = encodeURI( item.path.slice( len ) );
-
-				txt +=
-					'<table><tr>' +
-
-						'<td><a href="' + urlGitHubSource + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
-						'<td><a href=#' + itemPath + 
-						' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
-						( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
-						'</td>' +
-
-					'</tr></table>';
-//console.log( 'item', item );
-
-			}
-
-		}
-
-		divMenuItems.innerHTML = txt;
-
-	}
-
-
-*/
 
 
 	function callbackMarkdown( xhr ){
@@ -312,20 +187,6 @@ console.log( 'gbjson', e);
 		const response = xhr.target.response;
 
 		divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-
-	}
-
-
-
-	function requestFile( url, callback ) {
-
-		const xhr = new XMLHttpRequest();
-		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', url, true );
-		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
-		xhr.onload = callback;
-		xhr.send( null );
 
 	}
 

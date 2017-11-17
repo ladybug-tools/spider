@@ -36,6 +36,12 @@ May also be use used to view remote or local gbXML files using a URL
 ## Change Log
 
 
+### 2017-11-16 ~ Theo
+
+Examine File
+* Add count per issue found
+
+
 ### 2017-11-14 ~ Theo
 
 * First commit
