@@ -30,6 +30,9 @@ To-Do List for Geometry Page:
 	~~7. Anton, place an opacity slider here. Theo has already shown how to do this.~~
 	8. Theo, the grid extents still don't auto update when placing adjacent buildings. Please advise how to do this.
 	9. Anton, make the orthographic view unchangable to 3D.
+	10. Anton or Theo, make Roof and wall objects appear.
+	11. Anton, fix window placement.
+	12. Anton, fix ground level issues.
 
 Envelope Page:
 
