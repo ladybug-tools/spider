@@ -6,13 +6,24 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings/gbxml-viewer7-settings.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer7 Basic]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings/gbxml-viewer7-settings.html )
+## Full screen: [gbXML Viewer7 Display Settings]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings/gbxml-viewer7-settings.html )
 
 
 
 ## Concept
 
 
+## Features
+
+* Set random material
+* Draw surface normals
+* Toggle wireframe
+* Draw edges
+* Toggle axes
+* Toggle background gradient
+* Toggle scene rotation
+* Set Camera Ortho
+* Opacity slider
 
 ## Wish list
 
