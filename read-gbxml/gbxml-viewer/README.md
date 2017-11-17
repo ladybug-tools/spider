@@ -7,7 +7,7 @@ gbXML Viewer is a variety of modular experiments for viewing, examining and vali
 
 Here are links to some of the latest files. R7 is that latest release and is still a work-in-progress. Not all the scripts from previous releases have been added to R7 yet.
 
-Note that. currently,  the functionality is spread across multiple files. This is for testing and early-stage development purposes only. Sometime in the near future there will be a script that assembles multiple scripts into a single user experience.
+Note that. currently, the functionality is spread across multiple files. This is for testing and early-stage development purposes only. Sometime in the near future there will be a script that assembles multiple scripts into a single user experience.
 
  
 <iframe class=iframeReadMe src=./r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -65,7 +65,7 @@ In folder r7/gbxml-viewer7-06-settings-display
 
 ## [gbXML Viewer7 Settings Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings-display/gbxml-viewer7-settings-display.html )
 
-* [Read Me]
+* [Read Me]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/index.html#r7/gbxml-viewer7-06-settings-display/README.md )
 * Update a number of viewing parameters that control the display of the gbXML data.
 
 ***
@@ -73,17 +73,26 @@ In folder r7/gbxml-viewer7-06-settings-display
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product oof human imagination.
 
 
-R6 is mostly broken and may be ignored. Perhaps the only script to consiser is [gbXML Gallery]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/#r6/gbxml-viewer-small/gbxml-gallery.html ) where a gbXML Viewer is embedded inside a normal HTML file using an iframe.
+R6 is mostly broken and may be ignored. Perhaps the only script to consider is [gbXML Gallery]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/#r6/gbxml-viewer-small/gbxml-gallery.html ) where a gbXML Viewer is embedded inside a normal HTML file using an iframe.
 
-The last full-featured demo is in R5.
+The last full-featured demo is in R5:
 
 ## [gbXML Viewer R5]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r5/index.html )
 
+
 Prior to R5, release were given code names that related to peeps involved with the project. This confused peeps - especially th peeps whose names were being flaunted.
 
-### [gbXML Viewer R'Mostapha'.4 ]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/2017-09-29-mostapha/gbxml-viewer.html )
 
-Links to earlier releases will be added here...'
+### [gbXML Viewer 2017-09-29-mostapha ]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/2017-09-29-mostapha/gbxml-viewer.html )
+
+
+### [gbXML Viewer 2017-09-23-michal]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-23-michal/index.html )
+
+
+### [gbXML Viewer 2017-09-13-carmel]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-13-carmel/plugins/display-gbjson.html )
+
+
+### [gbXML Viewer 017-09-12-harriman]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-12-harriman/select-xml/display-gbjson.html )
 
 ***
 
