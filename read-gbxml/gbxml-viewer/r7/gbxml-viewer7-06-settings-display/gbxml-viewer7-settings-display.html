@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Open and view gbXML files in local folders." >
+<meta name = "description" content = "Update a number of viewing parameters that control the display of the gbXML data." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-15" >
-<title>gbXML Viewer R7 Display Settings</title>
+<meta name = "date" content = "2017-11-16" >
+<title>gbXML Viewer R7 Settings - Display </title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -26,10 +26,9 @@
 
 	iframe { width: 100%; }
 
-	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
-	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
-	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
-
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
 	td { vertical-align: top; }
 
@@ -91,7 +90,6 @@
 
 			<p><button onclick=toggleSceneAutoRotate() title= 'Stop the spinning!' > Toggle scene rotation </button></p>
 
-
 			<p><button onclick=setCameraOrthoPerspective() title= '' > Set Camera Ortho </button></p>
 
 			<p title='building opacity: 0 to 100%' >Opacity: 
@@ -129,7 +127,7 @@
 
 	const user = 'ladybug-tools'
 	const repo = '/spider';
-	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-templates/';
+	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings-display/';
 
 	const uriDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
 	const threeDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';

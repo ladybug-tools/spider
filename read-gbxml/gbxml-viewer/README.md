@@ -7,6 +7,9 @@ gbXML Viewer is a variety of modular experiments for viewing, examining and vali
 
 Here are links to some of the latest files. R7 is that latest release and is still a work-in-progress. Not all the scripts from previous releases have been added to R7 yet.
 
+Note that. currently,  the functionality is spread across multiple files. This is for testing and early-stage development purposes only. Sometime in the near future there will be a script that assembles multiple scripts into a single user experience.
+
+ 
 <iframe class=iframeReadMe src=./r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 _gbXML Viewer R7 Basic_
 
@@ -55,6 +58,16 @@ In folder r7/gbxml-viewer7-05-heads-up-display
 * [Read Me]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html#README.md )
 * Add a Heads-Up-Display (HUD) to the 3D view
 
+
+*** 
+
+In folder r7/gbxml-viewer7-06-settings-display
+
+## [gbXML Viewer7 Settings Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings-display/gbxml-viewer7-settings-display.html )
+
+* [Read Me]
+* Update a number of viewing parameters that control the display of the gbXML data.
+
 ***
 
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product oof human imagination.
@@ -74,7 +87,5 @@ Links to earlier releases will be added here...'
 
 ***
 
+# <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > &#x1f578; </a></center>
 
-<center title="hello!" >
-# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > &#x1f578; </a>
-</center>
