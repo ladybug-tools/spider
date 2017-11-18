@@ -1,5 +1,3 @@
-The current GUI input screens and inputs we need are complete and can be seen here: https://antonszilasi.github.io/spiderAnton/speed/speed-page.html
-
 Adjacent Buildings Page: We have this one nailed. No more need to discuss.
 
 Geometry Page: 
