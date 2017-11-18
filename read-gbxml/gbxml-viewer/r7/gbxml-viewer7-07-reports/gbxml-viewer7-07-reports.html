@@ -5,15 +5,15 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Open and view gbXML files in local folders." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-16" >
-<title>gbXML Viewer R7 Template Basic</title>
+<meta name = "date" content = "2017-11-17" >
+<title>gbXML Viewer R7 Reports</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: brown; --mnu-back-color: LightGoldenRodYellow ; --mnu-width:300px; height: 100%; }
+	html { --mnu-color: brown; --mnu-back-color: LightGoldenRodYellow ; --mnu-width:500px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
@@ -38,7 +38,7 @@
 	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; height: 100%;
 		overflow-x: hidden; padding: 30px 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
-	#hamburger { background-color: #edd; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
 
 </style>
@@ -63,9 +63,11 @@
 
 		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
 
+		<p>
+			<button onclick=createReport(); >Create report</button>
+		</p>
+
 		<p><a href = "#README.md" target="_top" >Read Me</a></p>
-
-
 
 		<p>
 			<input type = "file" id = "inpFile" onchange="ifrThree.contentWindow.openFile(this);" >
@@ -127,6 +129,62 @@
 	}
 
 
+	function createReport() {
+
+		icw = ifrThree.contentWindow;
+		gbjson = icw.gbjson;
+
+		traverse( gbjson )
+
+	}
+
+
+
+	function traverse( obj ) {
+
+		for ( i in obj ) {
+
+			if ( obj[ i ] !== null && typeof( obj[ i ] ) === 'object' ) {
+
+console.log( 'thing', i, obj[ i ]);
+
+//				traverse( obj [ i ] );
+
+			} else {
+
+console.log( 'att', i, obj[ i ]);
+
+			}
+
+		}
+
+	}
+
+
+
+/*
+
+		const propertyNames = Object.getOwnPropertyNames( gbjson ) ;
+
+console.log( 'propertyNames', propertyNames );
+
+		 gbjsonKeys = Object.keys( gbjson );  // enumerable
+
+console.log( 'gbjsonKeys', gbjsonKeys );
+
+
+		t = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur? ';
+		text = t + t + t + t;
+		checkWindow = window.open( '', 'report', 'left=400,scrollbars=yes,status=yes,width=800,height=400,top=200' );
+
+//		checkWindow = window.open( '', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes' );
+		checkWindow.document.write( '<textarea style=width:100%;height:100%; >' + text + '</textarea>' );
+		checkWindow.document.title = 'gbXML error check';
+
+//console.log( '', checkWindow );
+
+*/
+
 
 	function onHashChange() {
 
@@ -164,11 +222,15 @@
 
 
 
+
+
 	function onloadThree() {
 
 		icw = ifrThree.contentWindow;
 		icw.renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
+		gbjson = icw.gbjson;
 
+console.log( '', gbjson );
 	}
 
 
