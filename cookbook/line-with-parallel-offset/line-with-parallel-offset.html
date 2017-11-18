@@ -116,10 +116,12 @@
 		geometryOffset.vertices = verticesOffset;
 		const materialOffset = new THREE.LineBasicMaterial( { color: 'red' } );
 		const lineOffset = new THREE.Line( geometryOffset, materialOffset );
+
 		linePolygon.add( lineOffset );
 
 console.log( '', verticesOffset );
 
+		
 	}
 
 
@@ -140,7 +142,7 @@ console.log( '', verticesOffset );
 			let pt2 = points[ i + 1 ];
 
 			const angleVector = pt2.clone().sub( pt1 );
-			const angle = Math.atan2( vector.y, vector.x );
+			const angle = Math.atan2( angleVector.y, angleVector.x );
 
 // redo with THREE.Spherical?
 // https://stackoverflow.com/questions/11039841/how-to-draw-parallel-line-using-three-js
