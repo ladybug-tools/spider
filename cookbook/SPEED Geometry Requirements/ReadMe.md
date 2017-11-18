@@ -2,7 +2,7 @@
 
 Adjacent Buildings Page: We have this one nailed. No more need to discuss.
 
-Geometry Page: 
+#H1 Geometry Page: 
 
 Inputs: These are in IP. If you want to simply and say all inputs are metric, that's fine. It really doesn't matter. What does matter is that when the gbXML export is generated, it is ALWAYS in metric.
 
