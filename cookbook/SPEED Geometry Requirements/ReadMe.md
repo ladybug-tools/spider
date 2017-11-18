@@ -1,3 +1,5 @@
+** ~~ Means complete
+
 Adjacent Buildings Page: We have this one nailed. No more need to discuss.
 
 Geometry Page: 
