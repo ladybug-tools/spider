@@ -8,10 +8,10 @@ Inputs: These are in IP. If you want to simply and say all inputs are metric, th
 
 Theo, Anton has done all the below, and can add to your update tomororw the changes to defaults and enumerations later. Main thing is to add his script for length, width, and thickness.
 
-	~~1. Building Area: Default is 10000 ft2. The user can change this number to whatever they want. The field is an integer to be typed in (I would eliminate the up and down arrows).~~	
-	~~2. # of Floors: Default is 1. Enumerations available are 1-20. The field is a dropdown menu (or up an down arrows as currently is), as are all "enumeratons" from here forward.~~
-	~~3. Floor Area: Auto-calculated at Building Area/# of Floors. This field is a real number. Round to the nearest integer visually.~~
-	~~4. Floor Height: Default to 10 ft. Enumerations are 8,9,10,11,12,13,14,15,16,17,18,19,20. The user is expected to not necessarily put the ACTUAL Floor Height, simply the CONDITIONED Floor Height. ~~
+	~~ Building Area: Default is 10000 ft2. The user can change this number to whatever they want. The field is an integer to be typed in (I would eliminate the up and down arrows).~~	
+	~~ # of Floors: Default is 1. Enumerations available are 1-20. The field is a dropdown menu (or up an down arrows as currently is), as are all "enumeratons" from here forward.~~
+	~~ Floor Area: Auto-calculated at Building Area/# of Floors. This field is a real number. Round to the nearest integer visually.~~
+	~~4 Floor Height: Default to 10 ft. Enumerations are 8,9,10,11,12,13,14,15,16,17,18,19,20. The user is expected to not necessarily put the ACTUAL Floor Height, simply the CONDITIONED Floor Height. ~~
 	~~ 5. Footprint Shape: Default is Box-Shape. Enumerations are Box-Shape, L-Shape, T-Shape, and H-Shape. ~~	
 	~~6. Massing Generator: Default is Generator 1. Enumerations are Generator 1, Generator 2, and Generator 3. For now, what we are implementing is Generator 1. 2 and 3 are place holders for later. In other words, this input doesn't so anything now.~~
 	~~7. # of Footprint Shapes: Default is 1. Enumerations are 1,2,3. This field is more ME, not us.~ 
