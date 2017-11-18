@@ -43,17 +43,19 @@ Inputs: Normal mode is to have one set of inputs for the building. Existing togg
 	5. ~Fin Depth: Default is 0 (no overhangs). Enumerations are 0,1,2,3,4,5,6. 2 fins per window.~
 	6. ~Window Construction Type: Keep as is. No impact on geometry or visualization.~
 
-Theo, you're code didn't have Window Ratio variable. It's very cool. Here is the link to the html code to modify the view in your verions: https://github.com/antonszilasi/spiderAnton/blob/master/speed/geometry.js#L890-L914
+Theo, your code didn't have Window Ratio variable. It's very cool. Here is the link to the html code to modify the view in your verions: https://github.com/antonszilasi/spiderAnton/blob/master/speed/geometry.js#L890-L914
 
 This code relys on some modifications which I made in the main page (speed-page.html) and the envelope.js file which can be seen here: https://github.com/antonszilasi/spiderAnton/blob/master/speed/envelope.js#L3-L311
 
-For this reason we suggest that you work off the master branch here: https://github.com/antonszilasi/spiderAnton/tree/master/speed (as I suggested before)
+Take any approach you feel is best, but there may be some value to start working off the master branch here: https://github.com/antonszilasi/spiderAnton/tree/master/speed (as I suggested before)
 
 
 To-Do List for Envelope:
 
-	1. Theo, Update to his code for generating window array
-	2. Theo, place holes where the window surfaces are.
+	1. Update to new Html fields and window array logic per above.
+	2. Theo, place holes where the window surfaces are. (So integrate Qline with the Multiple Openings Overhangs and Fins example here:
+	http://www.ladybug.tools/spider/cookbook/multiple-openings/wall-with-multiple-openings-overhangs-fins-r1.html)
+	
 	3. Theo, enable overhang depth for geometry. 
 	4. Theo, enable fin depth for geometry. 
 
