@@ -99,6 +99,7 @@
 		divTitle.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +'</a></h1>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.shadowMap.enabled = true;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
 		document.body.appendChild( renderer.domElement );
@@ -110,6 +111,20 @@
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 
 		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+
+		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+		camera.add( lightPoint );
+		scene.add( camera );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 
@@ -201,7 +216,7 @@
 
 	function updateGeometry() {
 
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 		const vertices = qLine.polygon.geometry.vertices;
 
 		scene.remove( qLine.group );
@@ -275,7 +290,7 @@
 	function drawVerticalShapes( vertices, obj ) {
 
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 
 		for ( let i = 0; i < vertices.length - 1; i++ ) {
 
@@ -307,7 +322,7 @@
 	function drawExteriorWalls( vertices, obj ) {
 
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 
 		for ( let i = 0; i < vertices.length - 1; i++ ) {
 
@@ -343,16 +358,37 @@
 
 			if ( child instanceof THREE.Group ) {
 
-//console.log( '', child);
+//console.log( '', child.userData.angle);
 
 				const geometry = new THREE.BoxGeometry( 5, 5, 5 );
 				geometry.translate( child.userData.length / 2, 8, 0 );
-				const material = new THREE.MeshBasicMaterial( { map: north } );
+
+				angle = - child.userData.angle + qLine.orientation * Math.PI / 180;
+
+				if ( angle > - Math.PI / 4 && angle < Math.PI / 4 ) {
+
+					material = new THREE.MeshBasicMaterial( { map: north } );
+
+				} else if ( angle > Math.PI / 4 && angle < 3 * Math.PI / 4 ) {
+
+					material = new THREE.MeshBasicMaterial( { map: east } );
+
+				} else if ( angle > - 3 * Math.PI / 4 && angle < Math.PI / 4 ) {
+
+					material = new THREE.MeshBasicMaterial( { map: west } );
+
+				} else {
+
+					material = new THREE.MeshBasicMaterial( { map: south } );
+
+				}
+
 
 				const mesh = new THREE.Mesh( geometry, material );
 				child.add( mesh );
 
 			}
+
 		} );
 
 	}
@@ -400,7 +436,7 @@
 			geometryShape = new THREE.ShapeBufferGeometry( shape );
 			geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
 
-			const materialShape = new THREE.MeshNormalMaterial( { side: 2 } );
+			const materialShape = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 			const meshWall = new THREE.Mesh( geometryShape, materialShape );
 
 			meshWall.position.set ( i * lengthDelta + len05, 0, hgt05 );
@@ -422,7 +458,7 @@
 		if ( qLine.overhang < 0.5 ) { return; }
 
 		const wwr = qLine.wwr / 100;
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 
 		for ( let opening of obj.userData.openings ) {
 
@@ -443,7 +479,7 @@
 		if ( qLine.fin < 0.5 ) { return; }
 
 		const wwr = qLine.wwr / 100;
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 
 		for ( let opening of obj.userData.openings ) {
 
@@ -467,7 +503,7 @@
 
 	function drawHorizontalShapes( vertices1, vertices2, obj ) {
 
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 
 		for ( var i = 0; i < vertices1.length - 1 ; i++ ) {
 
@@ -497,8 +533,7 @@
 	function drawVerticalBisectors( vertices1, vertices2, obj ) {
 
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
-
+		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), side: 2 } );
 
 		for ( let i = 0; i < vertices1.length - 1; i++ ) {
 
