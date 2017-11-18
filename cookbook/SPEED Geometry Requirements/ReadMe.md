@@ -23,7 +23,7 @@ Theo, Anton has done all the below, and can add to your update tomororw the chan
 
 To-Do List for Geometry Page: 
 
-	1. Theo, integration of Anton's JS for length, width, and thickness this has been thouroughly tested validated, we suggest that you work off that code which has been integrated with qline here:https://github.com/antonszilasi/spiderAnton/blob/master/speed/geometry.js#L6-L612 by forking my branch here: https://github.com/antonszilasi/spiderAnton/tree/master/speed   
+	1. Theo, integration of Anton's JS for length, width, and thickness this has been thouroughly tested validated, we suggest that you work off that code which has been integrated with qline here: [https://github.com/antonszilasi/spiderAnton/blob/master/speed/geometry.js#L6-L612]: by forking my branch here: [https://github.com/antonszilasi/spiderAnton/tree/master/speed]:
 	
 	This file also contains the code with the cool window logic (see below)
 	
