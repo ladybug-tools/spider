@@ -10,7 +10,7 @@ Fourth, I tried to recreate the same model in Theo's SPEED SPEC R 2.4. The windo
 
 1. Building/Storeys/Levels/Space/Zones
 
-	In the current export, the Building always hard codes "5000" as the Building area, though it actually is 200. Volume is also 		incorrect at 50,000.<Building id="1" buildingType="Office" ><Area>5000</Area><Volume>50000</Volume>
+	In the current export, the Building always hard codes "5000" as the Building area, though it actually is 200. Volume is also 		incorrect at 50,000.
 
 2. Surface Type: Exterior Walls
 
@@ -20,19 +20,19 @@ Fourth, I tried to recreate the same model in Theo's SPEED SPEC R 2.4. The windo
 
 3. Surface Type: Openings
 
-Same coordinate ordering issue as above.
+	Same coordinate ordering issue as above.
 
 4. Surface Type: SlabOnGrade
 
-No issues here. 
+	No issues here. 
 
-Azimuths for SlabOnGrade are are always 90.
+	Azimuths for SlabOnGrade are are always 90.
 
 5. Surface Type: Roof
 
-You have one roof for Space 10 having 2 adjacent spaces when it should only have one...
+	You have one roof for Space 10 having 2 adjacent spaces when it should only have one...
 
-<Surface surfaceType="Roof" id="surface-41" >
+	<Surface surfaceType="Roof" id="surface-41" >
 			<Name>storey-2-space-10</Name>
 			<RectangularGeometry>
 				<Azimuth>90</Azimuth>
@@ -41,6 +41,6 @@ You have one roof for Space 10 having 2 adjacent spaces when it should only have
 			<AdjacentSpaceId spaceIdRef="space-10" />
 			<AdjacentSpaceId spaceIdRef="space-5" />
 
-Azimuths for roofs are are always 90.
+	Azimuths for roofs are are always 90.
 
-5. Surface Type: Interior Walls
+6. Surface Type: Interior Walls
