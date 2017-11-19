@@ -62,33 +62,49 @@
 
 
 			<p>
-				<select id=selShape size=4 onchange=updateDimensions(); >
-				<option value=box-shape.png >Box footprint</option>
-				<option value=l-shape.png >L footprint</option>
-				<option value=t-shape.png >T footprint</option>
-				<option value=h-shape.png >H footprint</option>
-
+				<select id=selShape size=5 onchange=updateDimensions(); >
+					<option value=box-shape.png selected >Box footprint</option>
+					<option value=l-shape.png >L footprint</option>
+					<option value=t-shape.png >T footprint</option>
+					<option value=h-shape.png >H footprint</option>
+					<option >Irregular polygon footprint</option>
 				</select>
 			</p>
 
-						<div>
-							Length <output id=outLength class=floatright ></output>
-							<input type=range id=inpLength oninput=updateShape(); >
-						</div>
+			<div>
+				Area <output id=outArea class=floatRight >10000</output>
+				<input type=range id=inpArea min=5000 max=50000 step=1000 value=5000 oninput=updateDimensions();outArea.value=value; >
+			</div>
 
-						<div>
-							Width <output id=outWidth class=floatright ></output>
-							<input type=range id=inpWidth oninput=updateShape(); >
-						</div>
+			<div>
+				Length <output id=outLength class=floatRight >50</output>
+				<input type=range id=inpLength min=50 max=200 step=10 value=50 oninput=updateDimensions();outLength.value=value; >
+			</div>
 
-						<div id=divThickness >
-							Thickness <output id=outThickness class=floatright ></output>
+			<div>
+				Width <output id=outWidth class=floatRight >100</output>
+				<input type=range id=inpWidth min=50 max=200 step=10 value=100 oninput=updateDimensions();outWidth.value=value; >
+			</div>
+
+			<div title='floors?' >
+				Floors <output id=outStoreys class=floatRight >1</output>
+				<input type=range id=inpStoreys min=1 max=20 step=1 value=1 oninput=updateDimensions();outStoreys.value=value; />
+			</div>
+
+			<div>
+				Floor area <output id=outFloorArea class=floatRight >999999</output>
 <!--							<input type=range id=inpThickness oninput=updateShape(); > -->
-						</div>
+			</div>
+
+			<div>
+				Thickness <output id=outThickness class=floatRight >999999</output>
+<!--							<input type=range id=inpThickness oninput=updateShape(); > -->
+			</div>
+
 
 			<p title="How low can you go?" >
 				Height <output id=outHeight class=floatRight >8</output>
-				<input type=range id=inpHeight min=8 max=15 step=1 value=10 oninput=updateDimensions();outHeight.value=value; />
+				<input type=range id=inpHeight min=8 max=20 step=1 value=10 oninput=updateDimensions();outHeight.value=value; />
 			</p>
 
 			<p title="How low can you go?" >
@@ -114,11 +130,6 @@
 			<p title='Are we Finnished yet?' >
 				Fin depth <output id=outFin class=floatRight >2</output>
 				<input type=range id=inpFin min=0 max=10 step=0.5 value=2 oninput=updateDimensions();outFin.value=value; />
-			</p>
-
-			<p title='floors?' >
-				Storeys <output id=outStoreys class=floatRight >1</output>
-				<input type=range id=inpStoreys min=1 max=10 step=1 value=1 oninput=updateDimensions();outStoreys.value=value; />
 			</p>
 
 
@@ -157,7 +168,11 @@
 
 
 	let qLine = {};
+
 	var materialParameters;
+
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh;
@@ -178,6 +193,7 @@
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -196,8 +212,9 @@
 		scene.add( camera );
 
 		window.addEventListener( 'resize', onWindowResize, false );
-
 		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 		const axesHelper = new THREE.AxesHelper( 50 );
 		scene.add( axesHelper );
@@ -224,13 +241,175 @@
 		west.center.set( 0.5, 0.5 );
 		west.rotation = Math.PI / 2;
 
-		drawRandomPolygon();
+		updateDimensions();
 
 	}
 
 
 
-	function drawRandomPolygon() {
+	function updateDimensions() {
+
+		qLine.area = parseInt( inpArea.value, 10 );
+		qLine.length = parseInt( inpLength.value, 10 );
+		qLine.width = parseInt( inpWidth.value, 10 );
+
+		qLine.storeys = parseInt( inpStoreys.value, 10 );
+		qLine.height = parseInt( inpHeight.value, 10 );
+		qLine.perimeterDepth = parseInt( inpPerimeterDepth.value, 10 );
+		qLine.openings = parseInt( inpOpenings.value, 10 );
+		qLine.wwr = parseInt( inpWindowWallRatio.value, 10 );
+
+		qLine.overhang = parseFloat( inpOverhang.value );
+		qLine.fin = parseFloat( inpFin.value );
+
+		qLine.orientation = parseInt( inpOrientation.value, 10 );
+		qLine.opacity = parseInt( inpOpacity.value, 10 ) / 100;
+
+		materialParameters = { color: 0xffffff * Math.random(), opacity: qLine.opacity, side: 2, transparent: true };
+
+		const choices = [ drawBox, drawL, drawT, drawH, drawIrregularPolygon ];
+
+		const choice = choices[ selShape.selectedIndex ]
+
+		qLine.polygonVertices = choice();
+
+		updateGeometry();
+
+	}
+
+
+
+	function drawBox() {
+
+		const len = qLine.length;
+		const wid = qLine.width;
+
+		const verticesBox = [ v( len, 0, 0 ), v( 0, 0, 0 ), v( 0, wid, 0 ), v( len, wid, 0 ), v( len, 0, 0 ) ];
+
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesPolygon;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		qLine.polygon = new THREE.Line( geometry, material );
+		qLine.polygon.name = 'polygon - box';
+
+		scene.add( qLine.polygon );
+*/
+
+		return verticesBox;
+
+	}
+
+
+	function drawL() {
+
+		const len = qLine.length;
+		const wid = qLine.width;
+		const thk = 36;
+
+		const verticesL = [
+			v( len, 0, 0 ),
+			v( 0, 0, 0 ),
+			v( 0, wid, 0 ),
+			v( thk, wid, 0 ),
+			v( thk, thk, 0 ),
+			v( len, thk, 0 ),
+			v( len, 0, 0 )
+		];
+
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesPolygon;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		qLine.polygon = new THREE.Line( geometry, material );
+		qLine.polygon.name = 'polygon - L';
+
+		scene.add( qLine.polygon );
+*/
+
+		return verticesL;
+
+	}
+
+
+	function drawT() {
+
+		const len = qLine.length;
+		const wid = qLine.width;
+		const thk = 36;
+
+		const verticesT = [
+			v( len, 0, 0 ),
+			v( 0, 0, 0 ),
+			v( 0, thk, 0 ),
+			v( 0.5 * ( len - thk ), thk, 0 ),
+			v( 0.5 * ( len - thk ), wid, 0 ),
+			v( len - 0.5 * ( len - thk ), wid, 0 ),
+			v( len - 0.5 * ( len - thk ), thk, 0 ),
+			v( len, thk, 0 ),
+			v( len, 0, 0 )
+		];
+
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesT;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		qLine.polygon = new THREE.Line( geometry, material );
+		qLine.polygon.name = 'polygon - T';
+
+		scene.add( qLine.polygon );
+*/
+
+		return verticesT;
+
+	}
+
+
+
+	function drawH() {
+
+		const len = qLine.length;
+		const wid = qLine.width;
+		const thk = 36;
+
+		const verticesH = [
+			v( len - thk, 0.5 * ( wid - thk ), 0 ),
+			v( thk, 0.5 * ( wid - thk ), 0 ),
+			v( thk, 0, 0 ),
+			v( 0, 0, 0 ),
+			v( 0, wid, 0 ),
+			v( thk, wid, 0 ),
+			v( thk, wid - 0.5 * ( wid - thk ), 0 ),
+			v( len - thk, wid - 0.5 * ( wid - thk ), 0 ),
+			v( len - thk, wid, 0 ),
+			v( len, wid, 0 ),
+			v( len, 0, 0 ),
+			v( len - thk, 0, 0 ),
+			v( len - thk, 0.5 * ( wid - thk ), 0 )
+		];
+
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesH;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		qLine.polygon = new THREE.Line( geometry, material );
+		qLine.polygon.name = 'polygon - H';
+
+		scene.add( qLine.polygon );
+*/
+
+		return verticesH;
+
+	}
+
+
+
+
+	function drawIrregularPolygon() {
 
 		const items = 20;
 
@@ -251,44 +430,24 @@
 
 		verticesPolygon.push( verticesPolygon[ 0 ] );
 
+/*
 		geometry = new THREE.Geometry();
 		geometry.vertices = verticesPolygon;
 		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 
 		qLine.polygon = new THREE.Line( geometry, material );
 
-//		scene.add( qLine.polygon );
+		scene.add( qLine.polygon );
+*/
 
-		updateDimensions();
-
-	}
-
-
-
-	function updateDimensions() {
-
-		qLine.storeys = parseInt( inpStoreys.value, 10 );
-		qLine.height = parseInt( inpHeight.value, 10 );
-		qLine.perimeterDepth = parseInt( inpPerimeterDepth.value, 10 );
-		qLine.items = parseInt( inpOpenings.value, 10 );
-		qLine.wwr = parseInt( inpWindowWallRatio.value, 10 );
-
-		qLine.overhang = parseFloat( inpOverhang.value );
-		qLine.fin = parseFloat( inpFin.value );
-
-		qLine.orientation = parseInt( inpOrientation.value, 10 );
-		qLine.opacity = parseInt( inpOpacity.value, 10 ) / 100;
-
-		materialParameters = { color: 0xffffff * Math.random(), opacity: qLine.opacity, side: 2, transparent: true };
-
-		updateGeometry();
+		return verticesPolygon;
 
 	}
 
 
 	function updateGeometry() {
 
-		const vertices = qLine.polygon.geometry.vertices;
+		const vertices = qLine.polygonVertices;
 
 		scene.remove( qLine.group );
 
@@ -327,7 +486,7 @@
 		for ( var i = 0; i < qLine.storeys; i++ ) {
 
 			const storey = new THREE.Group();
-			storey.userData.openings = [];
+
 			storey.name = 'storey' + i;
 			const shape = new THREE.Shape( verticesOffset );
 			const geometryShape = new THREE.ShapeBufferGeometry( shape );
@@ -357,7 +516,12 @@
 
 		qLine.group.rotation.z = qLine.orientation * Math.PI / 180;
 
-		drawText();
+		if ( selShape.value !== 'Irregular polygon footprint' ) {
+
+			qLine.group.position.x = qLine.length / -2;
+			qLine.group.position.y = qLine.width / -2;
+
+		}
 
 		scene.add( qLine.group );
 
@@ -365,8 +529,6 @@
 
 
 	function drawVerticalShapes( vertices, obj ) {
-
-		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
@@ -401,7 +563,6 @@
 
 	function drawExteriorWalls( vertices, obj ) {
 
-		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
 
@@ -421,85 +582,105 @@
 			wall.rotation.z = angleRadians;
 			wall.userData.length = length;
 			wall.userData.angle = angleRadians;
+			wall.userData.lengthDelta = length / qLine.openings;
+
+			drawOverhangs( length, wall );
+			drawFins( length, wall );
+
+//			if ( i === 0 ) {
+
+				drawText( wall );
+
+//			}
 
 			obj.add( wall );
 
 		}
 
-		drawOverhangs( length, obj );
-		drawFins( length, obj );
 
 	}
 
 
 
-	function drawText() {
+	function drawText( obj ) {
 
-		qLine.group.children[ 0 ].traverse( function ( child ) {
-			let material;
-			if ( child instanceof THREE.Group ) {
+//console.log( '', obj);
 
-//console.log( '', child.userData.angle);
-
-				const geometry = new THREE.BoxGeometry( 5, 5, 5 );
-				geometry.translate( child.userData.length / 2, 8, 0 );
-
-				angle = - child.userData.angle + qLine.orientation * Math.PI / 180;
-
-				if ( angle > - Math.PI / 4 && angle < Math.PI / 4 ) {
-
-					material = new THREE.MeshBasicMaterial( { map: north } );
-
-				} else if ( angle > Math.PI / 4 && angle < 3 * Math.PI / 4 ) {
-
-					material = new THREE.MeshBasicMaterial( { map: east } );
-
-				} else if ( angle > - 3 * Math.PI / 4 && angle < Math.PI / 4 ) {
-
-					material = new THREE.MeshBasicMaterial( { map: west } );
-
-				} else {
-
-					material = new THREE.MeshBasicMaterial( { map: south } );
-
-				}
+		let material;
 
 
-				const mesh = new THREE.Mesh( geometry, material );
-				child.add( mesh );
+		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		geometry.translate( obj.userData.length / 2, 8, 0 );
 
-			}
+		angle = - obj.userData.angle + qLine.orientation * Math.PI / 180;
 
-		} );
+		if ( angle > - Math.PI / 4 && angle < Math.PI / 4 ) {
+
+			material = new THREE.MeshBasicMaterial( { map: north } );
+
+		} else if ( angle > Math.PI / 4 && angle < 3 * Math.PI / 4 ) {
+
+			material = new THREE.MeshBasicMaterial( { map: east } );
+
+		} else if ( angle > - 3 * Math.PI / 4 && angle < Math.PI / 4 ) {
+
+			material = new THREE.MeshBasicMaterial( { map: west } );
+
+		} else {
+
+			material = new THREE.MeshBasicMaterial( { map: south } );
+
+		}
+
+		const mesh = new THREE.Mesh( geometry, material );
+		obj.add( mesh );
 
 	}
+
+
 
 
 	function drawOpenings( length, obj ) {
 
-		const lengthDelta = length / qLine.items;
+		const lengthDelta = length / qLine.openings;
 		const height = qLine.height;
 		const wwr = qLine.wwr / 100;
 
-		const len05 = lengthDelta * 0.5;
 		const hgt05 = qLine.height * 0.5;
 
-		const v = function ( x, y, z ){ return new THREE.Vector3( x, y, z ); };
-
+		let holes = [];
 		const wall = new THREE.Group();
 
-		const geometryBoundary = new THREE.Geometry();
-		geometryBoundary.vertices = [
+//single shape with multiple openings??
+
+		const len05 = qLine.length * 0.5;
+
+		verticesWall = [
 			v( len05, hgt05, 0 ),
 			v( -len05, hgt05, 0 ),
 			v( -len05, -hgt05, 0 ),
 			v( len05, -hgt05, 0 ),
-			v( len05, hgt05, 0 )
 		];
 
-//single shape with multiple openings??
+		verticesWall = [
+			v( 0, 0, 0 ),
+			v( length, 0, 0 ),
+			v( length, height, 0 ),
+			v( 0, height, 0 ),
+		];
+		const shape = new THREE.Shape( verticesWall );
 
-		for ( let i = 0; i < qLine.items; i++ ) {
+		const lenD05 = lengthDelta * 0.5;
+		const geometryBoundary = new THREE.Geometry();
+		geometryBoundary.vertices = [
+			v( lenD05, hgt05, 0 ),
+			v( -lenD05, hgt05, 0 ),
+			v( -lenD05, -hgt05, 0 ),
+			v( lenD05, -hgt05, 0 )
+		];
+
+
+		for ( let i = 0; i < qLine.openings; i++ ) {
 /*
 			const geometryLine = geometryBoundary.clone()
 			geometryLine.translate( i * lengthDelta - length * 0.5 + len05, 0, 5 );
@@ -507,29 +688,29 @@
 			const line = new THREE.Line( geometryLine, materialLine );
 			scene.add( line );
 */
-			const shape = new THREE.Shape( geometryBoundary.vertices.slice( 0, -1 ) );
 
-			const verticesOpening = geometryBoundary.clone().scale( wwr, wwr, wwr ).vertices.slice( 0, -1 );
-
+			const geometryOpening = geometryBoundary.clone().scale( wwr, wwr, wwr );
+			geometryOpening.translate( i * lengthDelta + lenD05, hgt05, 0 );
+			const verticesOpening = geometryOpening.vertices;
 			const hole = new THREE.Path();
 			hole.setFromPoints( verticesOpening );
 			shape.holes.push( hole );
 
-			geometryShape = new THREE.ShapeBufferGeometry( shape );
-			geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
-
-			materialParameters.color = 0xffffff * Math.random();
-			const material = new THREE.MeshPhongMaterial( materialParameters );
-
-			const meshWall = new THREE.Mesh( geometryShape, material );
-
-			meshWall.position.set ( i * lengthDelta + len05, 0, hgt05 );
-			meshWall.userData.lengthDelta = lengthDelta;
-			wall.add( meshWall );
-
-			obj.userData.openings.push( meshWall );
+			holes.push( verticesOpening );
 
 		}
+
+		geometryShape = new THREE.ShapeBufferGeometry( shape );
+		geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		const meshWall = new THREE.Mesh( geometryShape, material );
+		meshWall.userData.lengthDelta = lengthDelta;
+		meshWall.userData.holes = holes;
+
+		wall.add( meshWall );
 
 		return wall;
 
@@ -546,13 +727,15 @@
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
 
-		for ( let opening of obj.userData.openings ) {
+		for ( let i = 0; i < obj.children[ 0 ].userData.holes.length; i++ ) {
 
-			const lengthDelta = opening.userData.lengthDelta;
-			const geometry = new THREE.PlaneGeometry( lengthDelta * wwr, qLine.overhang );
+			const lengthDelta = obj.userData.lengthDelta;
+
+			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, qLine.overhang );
 			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( 0, qLine.overhang * 0.5, qLine.height * wwr / 2 );
-			opening.add( mesh );
+			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta, qLine.overhang * 0.5, qLine.height * 0.5 + qLine.height * 0.5  * wwr );
+			obj.add( mesh );
+
 
 		}
 
@@ -569,19 +752,19 @@
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
 
-		for ( let opening of obj.userData.openings ) {
+		for ( let i = 0; i < obj.children[ 0 ].userData.holes.length; i++ ) {
 
-			const lengthDelta = opening.userData.lengthDelta;
-			const geometry = new THREE.PlaneGeometry( qLine.height * wwr, qLine.fin );
+			const lengthDelta = obj.userData.lengthDelta;
+			const geometry = new THREE.PlaneBufferGeometry( qLine.height * wwr, qLine.fin );
 			geometry.rotateY( Math.PI / 2 );
 
 			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( lengthDelta * 0.5 * wwr, qLine.fin * 0.5, 0 );
-			opening.add( mesh );
+			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, qLine.fin * 0.5, qLine.height * 0.5 );
+			obj.add( mesh );
 
 			const mesh2 = mesh.clone();
-			mesh2.position.set( - lengthDelta * 0.5 * wwr, qLine.fin * 0.5, 0 );
-			opening.add( mesh2 );
+			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, qLine.fin * 0.5, qLine.height * 0.5  );
+			obj.add( mesh2 );
 
 		}
 
@@ -618,10 +801,7 @@
 
 
 
-
 	function drawVerticalBisectors( vertices1, vertices2, obj ) {
-
-		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
@@ -660,8 +840,6 @@
 	function offsetPoints( obj, points, offsetX, offsetY  = 0 ) {
 
 // 2017-11-17
-
-		const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
 		let lines = [];
 
@@ -782,6 +960,30 @@
 		} );
 
 	}
+
+
+
+	function toggleNav() {
+
+		const width = getComputedStyle( document.documentElement ).getPropertyValue( '--mnu-width' );
+
+		if ( !divMenu.style.width || divMenu.style.width === width ) {
+
+			divMenu.style.width = 0;
+			divMenu.style.padding = 0;
+			hamburger.style.left = '-100px';
+
+		} else {
+
+			divMenu.style.width = width;
+			divMenu.style.padding = '30px 10px 30px 10px';
+			hamburger.style.left = 'calc( var( --mnu-width ) - 100px )';
+
+		}
+
+	}
+
+
 
 	function onWindowResize() {
 
