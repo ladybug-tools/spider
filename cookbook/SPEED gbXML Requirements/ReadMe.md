@@ -32,7 +32,7 @@ Fourth, I tried to recreate the same model in Theo's SPEED SPEC R 2.4. The windo
 
 	You have one roof for Space 10 having 2 adjacent spaces when it should only have one...
 
-	<Surface surfaceType="Roof" id="surface-41" >
+	 <Surface surfaceType="Roof" id="surface-41" >
 			<Name>storey-2-space-10</Name>
 			<RectangularGeometry>
 				<Azimuth>90</Azimuth>
