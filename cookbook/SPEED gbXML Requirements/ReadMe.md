@@ -1,34 +1,67 @@
-Ahhhh, and so take another stand against the gbXML challenge! I believe we close. There are quite a few open source codes out there to help with this, but it's truly easier just do it ourselves, and we are not going from the ground up anymore, we are almost to the mountain top. I'm going to give a simple conceptual example, then a reverse engineering gbXML from OS, then take some current speed-specfication exports and point out what I need needs to be changed. I bet you with a day or two of close coordination, we can knock this out once and for all!
+Ahhhh, and so take another stand against the gbXML challenge! I believe we close. There are quite a few open source codes out there to help with this, but it's truly easier just do it ourselves, and we are not going from the ground up anymore, we are almost to the mountain top. Here's what I've done....
 
-Gents,
+First, I created a ppt within this cookbook that goes through a series of unit cases for each element we need to support. It shows the appropriate coordinate ordering, normal, and gbXML syntax for SPEED (though 99% of applies in general). This should  give you all the general informaiton you need to know to write out a valid gbXML file for OpenStudio.
 
-I did what I should have done a while ago to nail down minimum critical path objects and formatting for gbXML to Open Studio API conversions. First, I used Grasshopper to create a simple box building, 2 floors, perimeter core zoning, one single window on each floor south and west, overhangs on the windows and a rectangular fin on each windows, as well as a simple box for an adjacent building. These elements comprise of everything we need to support for our tool. See images here and here: 
+Second, I created a simple test case in Rhino, with all the senarios we will run into (200 ft2, 2 floors, perimeter core zoning, overhangs, fins, 1 adjacent building, interior walls, windows, roofs, baseslabs, ceilings). It's a perfect box with windows on the south and west side, overhangs on the south and west windows, and a single fine on the south and west sides. I then generated an OSM file using Honeybee, imported into Open Studio, made sure it ran correclty, then exported a gbXMl file out. This is the "reverse engineering" of the test case. 
 
-https://perkinswill.app.box.com/s/1e3k7vo3n8x69euxy84wde7h61ii8j8s
+Third, I started deleting some content that the OS studio app created like loads, constructions, etc., converted naming conventions to those we use, deleted Rectangular Geometry except for Azimuth, and I imported it back into OS desktop to confirm it stilI worked smoothly and the simulation run (and it did). This file is the target for our collaborative gbXML export for SPEED. This file is attached to the cookbook. At the beginning of the attached ppt, you can a view of the model in Rhino, using Theo's gbXML viewer, and in Open Studio. The coordinates of the test case area shown in the last few slides of the ppt, and match exactly those that appear in the valid/target gbXML file.
 
-I used the OS component in Grasshopper to create on OSM file directly. I imported it into OS desktop, and confirmed the simulation ran correctly. Then I EXPORTED a gbXML file to know exactly what OS would need if I imported it. I then took that file, and started deleting some content that the OS studio app created (like loads, constructions, etc.) Then I imported it back into OS desktop to confirm it stilI worked smoothly and the simulation run (and it did). Therefore, I now have created a gbXML file that works specifically for Open Studio here. This is what we should target to mimic for the Build Well export as we are certain now it's simulation error free. It imports perfectly into the gbXML viewer v5 and it also imports correctly into FZK viewer without error.
+Fourth, I tried to recreate the same model in Theo's SPEED SPEC R 2.4. The window coordinates are a bit off, and there are no fins, and there are overhangs on the north and east sides with the original test case didn't. Doesn't matter. I then exported a gbXML file using the currrent gbXML export. I tried importing it into Open Studio, and reviewed the entire file manually in Sublime. The following are my findings...
 
-I took a look at this file next to what is currently exported by Build Well, and below summarizing the where changes are needed.
+1. Building/Storeys/Levels/Space/Zones
 
-For Space definitions, we see this in the working file:
+In the current export, the Building always hard codes "5000" as the Building area, though it actually is 200. Volume is also incorrect at 50,000.<Building id="1" buildingType="Office" ><Area>5000</Area><Volume>50000</Volume>
 
- <Space zoneIdRef="Zone1" id="Zone1_space" buildingStoreyIdRef="Building_Story_1">
-    <Name>Zone1_space</Name>
-    <Area>21.000000</Area>
-    <Volume>105.000000</Volume>
-  </Space>
-In the Build Well export we have this:
+Other than that everything is correct!!!
 
-          <Space zoneIdRef="bw-zone-1" id="bw-space-6" buildingStoreyIdRef="bw-story-2" 
-           conditionType="HeatedAndCooled" >
-			<Name>space 6</Name>
-			<Description>length front</Description>
-			<Area>623.5281374238571</Area>
-			<Volume>7482.337649086285</Volume>
-		</Space>
-The structure is the same, but in the Build Well export above at some point the zone IDs start to diverge from the space IDs. The Zone ID and the Space ID should always be the same.
+2. Surface Type: Exterior Walls
 
-There is no need for space shell geometry for Open Studio, nor for the import into FZK Viewer.
+The first thing that needs to change here is getting the correct Azimuth. 0 is north, 90 is east, 180 is south, and 270 is west to START. As the user changes the input Orientation, the new Azimuth is this (starting azimuth+Orientation).
+
+The second thing is that while all coordinates are counterclockwise from the correct vantage point, the points in the polyloop always start with the lower left corner. It should start with upper left corner. This is EnergyPlus, I agree it's stupid, but it is what it is.
+
+3 Surface Type: Openings
+
+
+
+<Surface surfaceType="Roof" id="surface-41" >
+			<Name>storey-2-space-10</Name>
+			<RectangularGeometry>
+				<Azimuth>90</Azimuth>
+			</RectangularGeometry>
+			<CADOjectId>none</CADOjectId>
+			<AdjacentSpaceId spaceIdRef="space-10" />
+			<AdjacentSpaceId spaceIdRef="space-5" />
+			<PlanarGeometry>
+				<PolyLoop>
+					<CartesianPoint>
+						<Coordinate>2</Coordinate>
+						<Coordinate>-2</Coordinate>
+						<Coordinate>10</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>-2</Coordinate>
+						<Coordinate>-2</Coordinate>
+						<Coordinate>10</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>-2</Coordinate>
+						<Coordinate>2</Coordinate>
+						<Coordinate>10</Coordinate>
+					</CartesianPoint>
+					<CartesianPoint>
+						<Coordinate>2</Coordinate>
+						<Coordinate>2</Coordinate>
+						<Coordinate>10</Coordinate>
+					</CartesianPoint>
+				</PolyLoop>
+			</PlanarGeometry>
+		</Surface>
+
+
+
+
+
 
 For shading surfaces, the working file has this:
 
