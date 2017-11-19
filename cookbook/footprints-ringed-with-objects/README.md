@@ -35,6 +35,11 @@ Not everything is drawn. For example, this demo creates a single slab per story 
 
 ### 2017-11-18 ~ Theo
 
+
+23:53 ~ R1.2
+
+* started adding parameters
+
 17:27 ~ R1.1
 
 * Fix orientation and azimuth signage issues
