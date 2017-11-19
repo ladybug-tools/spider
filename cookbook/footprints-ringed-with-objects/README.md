@@ -19,15 +19,18 @@ Not everything is drawn. For example, this demo creates a single slab per story 
 
 
 
+
+
 ## Links of Interest
 
 
 
 ## Issues
 
-* 2017-11-18 ~ Orientation changes not being centered
+* Ben: orientation worked for 90 and 180. Broke down at 350. It calls everything south
 * 2017-11-18 ~ Changing opacity deletes black edges
  
+
 ## Change Log
 
 ### 2017-11-18 ~ Theo
@@ -35,7 +38,7 @@ Not everything is drawn. For example, this demo creates a single slab per story 
 17:27 ~ R1.1
 
 * Fix orientation and azimuth signage issues
-
+* 2017-11-18 ~ Orientation changes not being centered
 
 First commit
 
