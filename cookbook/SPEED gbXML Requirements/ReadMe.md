@@ -44,3 +44,23 @@ Fourth, I tried to recreate the same model in Theo's SPEED SPEC R 2.4. The windo
 	Azimuths for roofs are are always 90.
 
 6. Surface Type: Interior Walls
+
+	In many cases, the AdjacentSpace IDs are reversed. I used to think it didn't matter. But it does. See Slide 10 in PPT in this 		cookbook.Counter-clockwise coordinates always made as if looking at the interior wall from within a space. Then the space behind 	the wall is the first spaceIdref, and the space your vantage point is from is the second.
+
+	Azimuths for interior walls should be the direction of the surface normal, but I don't believe you need this, so always just put 	"90". If/when we add Rectangular Geometry, we will have to modify this.
+	
+6. Surface Type: Interior Floors/Ceilings
+
+	We want to stick with the convention of always calling these slabs in between spaces "Ceiling", not "InteriorFloor". See Slide 		10 in PPT in this cookbook. Counter-clockwise coordinates always made as if looking down on the surface from the space above. 		Then the below space is the first spaceIdref, and the space above is the second.
+	
+	Azimuths for ceilings are are always 90.
+	
+7. Surface Type: Shades: Overhangs and Fins
+
+	The coordinate ordering is correct for overhangs. Have yet to check for Fins. The trick here is Azimuth. We need the Azimuth of 	the overhang and fin to be the same as the wall they are adjacent too. This is due to the nature of how we structured the GUI. 		For example, we need to know which overhangs are facing "south", but the geometry and coordinate ordering of that overhang could 	be exactly the same as an overhang on the north. 
+
+8. Surface Type: Shades: Adjacent Building
+
+	There are two walls on shading building where the coordinate ordering needs to be reversed, the west and north facing walls. You 	can this in the OS view of the model on the first slide of the PPT attached to this cookbook.
+
+	The azimuth should be handled the same way for exterior walls.
