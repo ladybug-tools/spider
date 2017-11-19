@@ -1,71 +1,75 @@
-<gbXML xmlns="http://www.gbxml.org/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" temperatureUnit="C" useSIUnitsForResults="true" lengthUnit="Meters" SurfaceReferenceLocation="Centerline" xmlns:xhtml="http://www.w3.org/1999/xhtml" areaUnit="SquareMeters" xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" version="6.01" volumeUnit="CubicMeters">
+<?xml version="1.0" encoding="UTF-8"?>
+<gbXML xmlns="http://www.gbxml.org/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" useSIUnitsForResults="true" SurfaceReferenceLocation="Centerline" temperatureUnit="F" lengthUnit="Feet" areaUnit="SquareFeet" volumeUnit="CubicMeters" version="6.01" >
   <Campus id="Facility">
     <Name>Facility</Name>
-    <Building id="Building_1" buildingType="Unknown">
+    <Building id="Building_1" buildingType="Office">
       <Name>Building 1</Name>
       <Area>200.000000</Area>
-      <Space zoneIdRef="Zone1" id="Zone1_space" buildingStoreyIdRef="Building_Story_1">
-        <Name>Zone1_space</Name>
+      <Space zoneIdRef="zone" id="space-1" buildingStoreyIdRef="storey-1">
+        <Name>space-1</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone5" id="Zone5_space" buildingStoreyIdRef="Building_Story_1">
-        <Name>Zone5_space</Name>
+      <Space zoneIdRef="zone-5" id="space-5" buildingStoreyIdRef="storey-1">
+        <Name>space-5</Name>
         <Area>16.000000</Area>
         <Volume>80.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone4" id="Zone4_space" buildingStoreyIdRef="Building_Story_1">
-        <Name>Zone4_space</Name>
+      <Space zoneIdRef="zone-4" id="space-4" buildingStoreyIdRef="storey-1">
+        <Name>space-4</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone8" id="Zone8_space" buildingStoreyIdRef="Building_Story_2">
-        <Name>Zone8_space</Name>
+      <Space zoneIdRef="zone-8" id="space-8" buildingStoreyIdRef="storey-2">
+        <Name>space-8</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone3" id="Zone3_space" buildingStoreyIdRef="Building_Story_1">
-        <Name>Zone3_space</Name>
+      <Space zoneIdRef="zone-3" id="space-3" buildingStoreyIdRef="storey-1">
+        <Name>space-3</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone2" id="Zone2_space" buildingStoreyIdRef="Building_Story_1">
-        <Name>Zone2_space</Name>
+      <Space zoneIdRef="zone-2" id="space-2" buildingStoreyIdRef="storey-1">
+        <Name>space-2</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone7" id="Zone7_space" buildingStoreyIdRef="Building_Story_2">
-        <Name>Zone7_space</Name>
+      <Space zoneIdRef="zone-7" id="space-7" buildingStoreyIdRef="storey-2">
+        <Name>space-7</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone10" id="Zone10_space" buildingStoreyIdRef="Building_Story_2">
-        <Name>Zone10_space</Name>
+      <Space zoneIdRef="zone-10" id="space-10" buildingStoreyIdRef="storey-2">
+        <Name>space-10</Name>
         <Area>16.000000</Area>
         <Volume>80.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone9" id="Zone9_space" buildingStoreyIdRef="Building_Story_2">
-        <Name>Zone9_space</Name>
+      <Space zoneIdRef="zone-9" id="space-9" buildingStoreyIdRef="storey-2">
+        <Name>space-9</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <Space zoneIdRef="Zone6" id="Zone6_space" buildingStoreyIdRef="Building_Story_2">
-        <Name>Zone6_space</Name>
+      <Space zoneIdRef="zone-6" id="space-6" buildingStoreyIdRef="storey-2">
+        <Name>space-6</Name>
         <Area>21.000000</Area>
         <Volume>105.000000</Volume>
       </Space>
-      <BuildingStorey id="Building_Story_1">
-        <Name>Building Story 1</Name>
+      <BuildingStorey id="storey-1">
+        <Name>storey 1</Name>
         <Level>0.000000</Level>
       </BuildingStorey>
-      <BuildingStorey id="Building_Story_2">
-        <Name>Building Story 2</Name>
-        <Level>5.000000</Level>
+      <BuildingStorey id="storey-2">
+        <Name>storey 2</Name>
+        <Level>10.000000</Level>
       </BuildingStorey>
     </Building>
-    <Surface id="Zone1_Srf_1" surfaceType="Ceiling">
-      <AdjacentSpaceId spaceIdRef="Zone1_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone6_space"/>
+    <Surface id="surface-1" surfaceType="Ceiling">
+      <AdjacentSpaceId spaceIdRef="space-1"/>
+      <AdjacentSpaceId spaceIdRef="space-6"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -91,9 +95,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone5_Srf_4" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone5_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone2_space"/>
+    <Surface id="surface-2" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-5"/>
+      <AdjacentSpaceId spaceIdRef="space-2"/>
+      <RectangularGeometry>
+        <Azimuth>270</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -119,9 +126,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone5_Srf_2" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone5_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone4_space"/>
+    <Surface id="surface-3" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-5"/>
+      <AdjacentSpaceId spaceIdRef="space-4"/>
+      <RectangularGeometry>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -147,9 +156,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone10_Srf_4" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone10_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone7_space"/>
+    <Surface id="surface-4" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-10"/>
+      <AdjacentSpaceId spaceIdRef="space-7"/>
+      <RectangularGeometry>
+        <Azimuth>270</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -175,9 +187,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone5_Srf_1" surfaceType="Ceiling">
-      <AdjacentSpaceId spaceIdRef="Zone5_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone10_space"/>
+    <Surface id="surface-5" surfaceType="Ceiling">
+      <AdjacentSpaceId spaceIdRef="space-5"/>
+      <AdjacentSpaceId spaceIdRef="space-10"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -203,9 +218,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone8_Srf_5" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone8_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone10_space"/>
+    <Surface id="surface-6" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-8"/>
+      <AdjacentSpaceId spaceIdRef="space-10"/>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -231,8 +249,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone5_Srf_0" surfaceType="SlabOnGrade">
-      <AdjacentSpaceId spaceIdRef="Zone5_space"/>
+    <Surface id="surface-7" surfaceType="SlabOnGrade">
+      <AdjacentSpaceId spaceIdRef="space-5"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -258,9 +279,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone6_Srf_3" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone6_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone7_space"/>
+    <Surface id="surface-8" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-6"/>
+      <AdjacentSpaceId spaceIdRef="space-7"/>
+      <RectangularGeometry>
+        <Azimuth>315</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -286,9 +310,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone4_Srf_2" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone4_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone3_space"/>
+    <Surface id="surface-9" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-4"/>
+      <AdjacentSpaceId spaceIdRef="space-3"/>
+      <RectangularGeometry>
+        <Azimuth>315</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -314,9 +341,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone5_Srf_5" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone5_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone1_space"/>
+    <Surface id="surface-10" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-5"/>
+      <AdjacentSpaceId spaceIdRef="space-1"/>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -342,8 +372,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone10_Srf_1" surfaceType="Roof">
-      <AdjacentSpaceId spaceIdRef="Zone10_space"/>
+    <Surface id="surface-11" surfaceType="Roof">
+      <AdjacentSpaceId spaceIdRef="space-10"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -369,9 +402,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone5_Srf_3" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone5_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone3_space"/>
+    <Surface id="surface-12" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-5"/>
+      <AdjacentSpaceId spaceIdRef="space-3"/>
+      <RectangularGeometry>
+        <Azimuth>0</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -397,8 +433,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone4_Srf_0" surfaceType="SlabOnGrade">
-      <AdjacentSpaceId spaceIdRef="Zone4_space"/>
+    <Surface id="surface-13" surfaceType="SlabOnGrade">
+      <AdjacentSpaceId spaceIdRef="space-4"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -424,9 +463,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone4_Srf_1" surfaceType="Ceiling">
-      <AdjacentSpaceId spaceIdRef="Zone4_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone9_space"/>
+    <Surface id="surface-14" surfaceType="Ceiling">
+      <AdjacentSpaceId spaceIdRef="space-4"/>
+      <AdjacentSpaceId spaceIdRef="space-9"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -452,9 +494,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone4_Srf_3" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone4_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone1_space"/>
+    <Surface id="surface-15" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-4"/>
+      <AdjacentSpaceId spaceIdRef="space-1"/>
+      <RectangularGeometry>
+        <Azimuth>225</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -480,8 +525,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone2_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone2_space"/>
+    <Surface id="surface-16" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-2"/>
+      <RectangularGeometry>
+        <Azimuth>270</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -506,7 +554,10 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <Opening openingType="FixedWindow" id="Zone2_Srf_4_glz_0">
+      <Opening openingType="FixedWindow" id="opening-1">
+        <RectangularGeometry>
+          <Azimuth>270</Azimuth>
+        </RectangularGeometry>
         <PlanarGeometry>
           <PolyLoop>
             <CartesianPoint>
@@ -533,8 +584,11 @@
         </PlanarGeometry>
       </Opening>
     </Surface>
-    <Surface id="Zone4_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone4_space"/>
+    <Surface id="surface-17" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-4"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -560,9 +614,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone2_Srf_1" surfaceType="Ceiling">
-      <AdjacentSpaceId spaceIdRef="Zone2_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone7_space"/>
+    <Surface id="surface-18" surfaceType="Ceiling">
+      <AdjacentSpaceId spaceIdRef="space-2"/>
+      <AdjacentSpaceId spaceIdRef="space-7"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -588,8 +645,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone3_Srf_0" surfaceType="SlabOnGrade">
-      <AdjacentSpaceId spaceIdRef="Zone3_space"/>
+    <Surface id="surface-19" surfaceType="SlabOnGrade">
+      <AdjacentSpaceId spaceIdRef="space-3"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -615,9 +675,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone3_Srf_1" surfaceType="Ceiling">
-      <AdjacentSpaceId spaceIdRef="Zone3_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone8_space"/>
+    <Surface id="surface-20" surfaceType="Ceiling">
+      <AdjacentSpaceId spaceIdRef="space-3"/>
+      <AdjacentSpaceId spaceIdRef="space-8"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -643,8 +706,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone3_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone3_space"/>
+    <Surface id="surface-21" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-3"/>
+      <RectangularGeometry>
+        <Azimuth>0</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -670,9 +736,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone3_Srf_2" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone3_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone2_space"/>
+    <Surface id="surface-22" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-3"/>
+      <AdjacentSpaceId spaceIdRef="space-2"/>
+      <RectangularGeometry>
+        <Azimuth>225</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -698,8 +767,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone7_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone7_space"/>
+    <Surface id="surface-23" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-7"/>
+      <RectangularGeometry>
+        <Azimuth>270</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -724,7 +796,10 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <Opening openingType="FixedWindow" id="Zone7_Srf_4_glz_0">
+      <Opening openingType="FixedWindow" id="opening-2">
+        <RectangularGeometry>
+          <Azimuth>270</Azimuth>
+        </RectangularGeometry>
         <PlanarGeometry>
           <PolyLoop>
             <CartesianPoint>
@@ -751,8 +826,11 @@
         </PlanarGeometry>
       </Opening>
     </Surface>
-    <Surface id="Zone8_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone8_space"/>
+    <Surface id="surface-24" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-8"/>
+      <RectangularGeometry>
+        <Azimuth>0</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -778,9 +856,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone8_Srf_3" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone8_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone9_space"/>
+    <Surface id="surface-25" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-8"/>
+      <AdjacentSpaceId spaceIdRef="space-9"/>
+      <RectangularGeometry>
+        <Azimuth>135</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -806,8 +887,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone2_Srf_0" surfaceType="SlabOnGrade">
-      <AdjacentSpaceId spaceIdRef="Zone2_space"/>
+    <Surface id="surface-26" surfaceType="SlabOnGrade">
+      <AdjacentSpaceId spaceIdRef="space-2"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -833,9 +917,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone2_Srf_2" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone2_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone1_space"/>
+    <Surface id="surface-27" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-2"/>
+      <AdjacentSpaceId spaceIdRef="space-1"/>
+      <RectangularGeometry>
+        <Azimuth>135</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -861,8 +948,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone1_Srf_0" surfaceType="SlabOnGrade">
-      <AdjacentSpaceId spaceIdRef="Zone1_space"/>
+    <Surface id="surface-28" surfaceType="SlabOnGrade">
+      <AdjacentSpaceId spaceIdRef="space-1"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -888,8 +978,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone9_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone9_space"/>
+    <Surface id="surface-29" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-9"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -915,9 +1008,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone8_Srf_2" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone8_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone7_space"/>
+    <Surface id="surface-30" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-8"/>
+      <AdjacentSpaceId spaceIdRef="space-7"/>
+      <RectangularGeometry>
+        <Azimuth>225</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -943,8 +1039,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone1_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone1_space"/>
+    <Surface id="surface-31" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-1"/>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -969,7 +1068,10 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <Opening openingType="FixedWindow" id="Zone1_Srf_4_glz_0">
+      <Opening openingType="FixedWindow" id="opening-3">
+        <RectangularGeometry>
+          <Azimuth>180</Azimuth>
+        </RectangularGeometry>
         <PlanarGeometry>
           <PolyLoop>
             <CartesianPoint>
@@ -996,9 +1098,12 @@
         </PlanarGeometry>
       </Opening>
     </Surface>
-    <Surface id="Zone10_Srf_2" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone10_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone9_space"/>
+    <Surface id="surface-32" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-10"/>
+      <AdjacentSpaceId spaceIdRef="space-9"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1024,9 +1129,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone6_Srf_2" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone6_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone9_space"/>
+    <Surface id="surface-33" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-6"/>
+      <AdjacentSpaceId spaceIdRef="space-9"/>
+      <RectangularGeometry>
+        <Azimuth>45</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1052,8 +1160,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone7_Srf_1" surfaceType="Roof">
-      <AdjacentSpaceId spaceIdRef="Zone7_space"/>
+    <Surface id="surface-34" surfaceType="Roof">
+      <AdjacentSpaceId spaceIdRef="space-7"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1079,9 +1190,12 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone10_Srf_5" surfaceType="InteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone10_space"/>
-      <AdjacentSpaceId spaceIdRef="Zone6_space"/>
+    <Surface id="surface-35" surfaceType="InteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-10"/>
+      <AdjacentSpaceId spaceIdRef="space-6"/>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1107,8 +1221,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone9_Srf_1" surfaceType="Roof">
-      <AdjacentSpaceId spaceIdRef="Zone9_space"/>
+    <Surface id="surface-36" surfaceType="Roof">
+      <AdjacentSpaceId spaceIdRef="space-9"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1134,8 +1251,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone8_Srf_1" surfaceType="Roof">
-      <AdjacentSpaceId spaceIdRef="Zone8_space"/>
+    <Surface id="surface-37" surfaceType="Roof">
+      <AdjacentSpaceId spaceIdRef="space-8"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1161,8 +1281,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone6_Srf_1" surfaceType="Roof">
-      <AdjacentSpaceId spaceIdRef="Zone6_space"/>
+    <Surface id="surface-38" surfaceType="Roof">
+      <AdjacentSpaceId spaceIdRef="space-6"/>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1188,8 +1311,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="Zone6_Srf_4" surfaceType="ExteriorWall">
-      <AdjacentSpaceId spaceIdRef="Zone6_space"/>
+    <Surface id="surface-39" surfaceType="ExteriorWall">
+      <AdjacentSpaceId spaceIdRef="space-6"/>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1214,7 +1340,10 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <Opening openingType="FixedWindow" id="Zone6_Srf_4_glz_0">
+      <Opening openingType="FixedWindow" id="opening-4">
+        <RectangularGeometry>
+          <Azimuth>180</Azimuth>
+        </RectangularGeometry>
         <PlanarGeometry>
           <PolyLoop>
             <CartesianPoint>
@@ -1241,7 +1370,11 @@
         </PlanarGeometry>
       </Opening>
     </Surface>
-    <Surface id="shdSurface_2_0" surfaceType="Shade">
+    <Surface id="shade-1" surfaceType="Shade">
+      <Name>AdjacentBuilding</Name>
+      <RectangularGeometry>
+        <Azimuth>0</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1267,7 +1400,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_0_0" surfaceType="Shade">
+    <Surface id="shade-2" surfaceType="Shade">
+      <Name>AdjacentBuilding</Name>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1293,7 +1430,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_13_0" surfaceType="Shade">
+    <Surface id="shade-3" surfaceType="Shade">
+      <Name>Fin</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1319,7 +1460,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_5_0" surfaceType="Shade">
+    <Surface id="shade-4" surfaceType="Shade">
+      <Name>AdjacentBuilding</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1345,7 +1490,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_1_0" surfaceType="Shade">
+    <Surface id="shade-5" surfaceType="Shade">
+      <Name>AdjacentBuilding</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1371,7 +1520,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_3_0" surfaceType="Shade">
+    <Surface id="shade-6" surfaceType="Shade">
+      <Name>AdjacentBuilding</Name>
+      <RectangularGeometry>
+        <Azimuth>270</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1397,7 +1550,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_6_0" surfaceType="Shade">
+    <Surface id="shade-7" surfaceType="Shade">
+      <Name>Overhang</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1423,7 +1580,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_4_0" surfaceType="Shade">
+    <Surface id="shade-8" surfaceType="Shade">
+      <Name>AdjacentBuilding</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1449,7 +1610,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_11_0" surfaceType="Shade">
+    <Surface id="shade-9" surfaceType="Shade">
+      <Name>Fin</Name>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1475,7 +1640,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_8_0" surfaceType="Shade">
+    <Surface id="shade-10" surfaceType="Shade">
+      <Name>Overhang</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1501,7 +1670,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_7_0" surfaceType="Shade">
+    <Surface id="shade-11" surfaceType="Shade">
+      <Name>Fin</Name>
+      <RectangularGeometry>
+        <Azimuth>180</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1527,7 +1700,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_9_0" surfaceType="Shade">
+    <Surface id="shade-12" surfaceType="Shade">
+      <Name>Fin</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1553,7 +1730,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_10_0" surfaceType="Shade">
+    <Surface id="shade-13" surfaceType="Shade">
+      <Name>Overhang</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1579,7 +1760,11 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
-    <Surface id="shdSurface_12_0" surfaceType="Shade">
+    <Surface id="shade-14" surfaceType="Shade">
+      <Name>Overhang</Name>
+      <RectangularGeometry>
+        <Azimuth>90</Azimuth>
+      </RectangularGeometry>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -1606,35 +1791,35 @@
       </PlanarGeometry>
     </Surface>
   </Campus>
-  <Zone id="Zone9">
-    <Name>Zone9</Name>
+  <Zone id="zone-9">
+    <Name>zone-9</Name>
   </Zone>
-  <Zone id="Zone10">
-    <Name>Zone10</Name>
+  <Zone id="zone-10">
+    <Name>zone-10</Name>
   </Zone>
-  <Zone id="Zone2">
-    <Name>Zone2</Name>
+  <Zone id="zone-2">
+    <Name>zone-2</Name>
   </Zone>
-  <Zone id="Zone5">
-    <Name>Zone5</Name>
+  <Zone id="zone-5">
+    <Name>zone-5</Name>
   </Zone>
-  <Zone id="Zone3">
-    <Name>Zone3</Name>
+  <Zone id="zone-3">
+    <Name>zone-3</Name>
   </Zone>
-  <Zone id="Zone4">
-    <Name>Zone4</Name>
+  <Zone id="zone-4">
+    <Name>zone-4</Name>
   </Zone>
-  <Zone id="Zone1">
-    <Name>Zone1</Name>
+  <Zone id="zone-1">
+    <Name>zone-1</Name>
   </Zone>
-  <Zone id="Zone8">
-    <Name>Zone8</Name>
+  <Zone id="zone-8">
+    <Name>zone-8</Name>
   </Zone>
-  <Zone id="Zone7">
-    <Name>Zone7</Name>
+  <Zone id="zone-7">
+    <Name>zone-7</Name>
   </Zone>
-  <Zone id="Zone6">
-    <Name>Zone6</Name>
+  <Zone id="zone-6">
+    <Name>zone-6</Name>
   </Zone>
   <DocumentHistory>
     <CreatedBy personId="unknown" date="2017-10-15T19:00:44-05:00" programId="openstudio"/>
