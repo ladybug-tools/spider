@@ -17,6 +17,12 @@ The example is set up to help you find errors and find things to fix. Various el
 ## Links of Interest
 
 
+
+## Issues
+
+* 2017-11-18 ~ Orientation changes not being centered
+* 2017-11-18 ~ Changing opacity deletes black edges
+ 
 ## Change Log
 
 ### 2017-11-18 ~ Theo
