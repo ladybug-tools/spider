@@ -10,13 +10,13 @@ Fourth, I tried to recreate the same model in Theo's SPEED SPEC R 2.4. The windo
 
 1. Building/Storeys/Levels/Space/Zones
 
-In the current export, the Building always hard codes "5000" as the Building area, though it actually is 200. Volume is also incorrect at 50,000.<Building id="1" buildingType="Office" ><Area>5000</Area><Volume>50000</Volume>
+	In the current export, the Building always hard codes "5000" as the Building area, though it actually is 200. Volume is also 		incorrect at 50,000.<Building id="1" buildingType="Office" ><Area>5000</Area><Volume>50000</Volume>
 
 2. Surface Type: Exterior Walls
 
-The first thing that needs to change here is getting the correct Azimuth. 0 is north, 90 is east, 180 is south, and 270 is west to START. As the user changes the input Orientation, the new Azimuth is this (starting azimuth+Orientation).
+	The first thing that needs to change here is getting the correct Azimuth. 0 is north, 90 is east, 180 is south, and 270 is west 	to START. As the user changes the input Orientation, the new Azimuth is this (starting azimuth+Orientation).
 
-The second thing is that while all coordinates are counterclockwise from the correct vantage point, the points in the polyloop always start with the lower left corner. It should start with upper left corner. This is EnergyPlus, I agree it's stupid, but it is what it is.
+	The second thing is that while all coordinates are counterclockwise from the correct vantage point, the points in the polyloop 		always start with the lower left corner. It should start with upper left corner. This is EnergyPlus, I agree it's stupid, but it 	is what it is.
 
 3. Surface Type: Openings
 
