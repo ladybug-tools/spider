@@ -269,7 +269,7 @@
 
 		const choices = [ drawBox, drawL, drawT, drawH, drawIrregularPolygon ];
 
-		const choice = choices[ selShape.selectedIndex ]
+		const choice = choices[ selShape.selectedIndex ];
 
 		qLine.polygonVertices = choice();
 
@@ -447,8 +447,6 @@
 
 	function updateGeometry() {
 
-		const vertices = qLine.polygonVertices;
-
 		scene.remove( qLine.group );
 
 		if ( qLine.group ) {
@@ -471,9 +469,10 @@
 		qLine.group = new THREE.Group();
 		qLine.group.userData.openings = [];
 
-//		shapesPolygon = drawVerticalShapes( vertices, qLine.group );
+		const vertices = qLine.polygonVertices;
+		const verticesOffset = offsetPoints( qLine.group, vertices, -qLine.perimeterDepth, 0 );
+		qLine.group.rotation.z = - qLine.orientation * Math.PI / 180;
 
-		verticesOffset = offsetPoints( qLine.group, vertices, -qLine.perimeterDepth, 0 );
 /*
 		const geometryOffset = new THREE.Geometry();
 		geometryOffset.vertices = verticesOffset;
@@ -488,6 +487,9 @@
 			const storey = new THREE.Group();
 
 			storey.name = 'storey' + i;
+
+// draw interior floor/ceiling
+
 			const shape = new THREE.Shape( verticesOffset );
 			const geometryShape = new THREE.ShapeBufferGeometry( shape );
 
@@ -495,12 +497,12 @@
 			const material = new THREE.MeshPhongMaterial( materialParameters );
 
 			const meshShape = new THREE.Mesh( geometryShape, material );
-
 			meshShape.position.z = -5;
-
 			storey.add( meshShape );
+//
 
 			shapesOffset = drawVerticalShapes( verticesOffset, storey );
+			storey.add( shapesOffset ); // do this below too...
 
 			drawHorizontalShapes( vertices, verticesOffset, storey );
 
@@ -510,16 +512,14 @@
 
 			storey.position.z = i * 3 * qLine.height;
 
+			if ( selShape.value !== 'Irregular polygon footprint' ) {
+
+				storey.position.x = qLine.length / -2;
+				storey.position.y = qLine.width / -2;
+
+			}
+
 			qLine.group.add( storey );
-
-		}
-
-		qLine.group.rotation.z = qLine.orientation * Math.PI / 180;
-
-		if ( selShape.value !== 'Irregular polygon footprint' ) {
-
-			qLine.group.position.x = qLine.length / -2;
-			qLine.group.position.y = qLine.width / -2;
 
 		}
 
@@ -528,13 +528,15 @@
 	}
 
 
+
 	function drawVerticalShapes( vertices, obj ) {
 
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
 
-		for ( let i = 0; i < vertices.length - 1; i++ ) {
+		const walls = new THREE.Group();
 
+		for ( let i = 0; i < vertices.length - 1; i++ ) {
 
 			const vertex = vertices[ i ];
 			const vertexNext = i < vertices.length - 1 ? vertices[ i + 1 ] : vertices[ 0 ];
@@ -553,9 +555,11 @@
 			meshShape.position.copy( vertex );
 			meshShape.rotation.z = angleRadians;
 
-			obj.add( meshShape );
+			walls.add( meshShape );
 
 		}
+
+		return walls;
 
 	}
 
@@ -587,16 +591,15 @@
 			drawOverhangs( length, wall );
 			drawFins( length, wall );
 
-//			if ( i === 0 ) {
+			if ( obj.name === 'storey0' ) {
 
 				drawText( wall );
 
-//			}
+			}
 
 			obj.add( wall );
 
 		}
-
 
 	}
 
