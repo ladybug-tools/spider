@@ -335,7 +335,7 @@
 			'<p>Validations</p>' +
 			'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
 			'<p>Equations used</p>' +
-			'<p>Area = numberOffloors * ( thickness * length + thickness * ( width - thickness ) )</p>' +
+			'<p>Area = numberOfFloors * ( thickness * length + thickness * ( width - thickness ) )</p>' +
 			'<p>Width = ( ( area - thickness * length ) / thickness + thickness ) / numberOfFloors</p>' +
 			'<p>Frame: ' + renderer.info.render.frame + '</p>' +
 		'';

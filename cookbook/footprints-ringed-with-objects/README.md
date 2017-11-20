@@ -5,6 +5,9 @@
 ## [footprints ringed with objects]( http://www.ladybug.tools/spider/cookbook/footprints-ringed-with-objects/footprints-ringed-with-objects.html )
 
 
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/cookbook/footprints-ringed-with-objects/footprints-ringed-with-objects.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+
+
 ## Concept
 
 Using various polygonal footprints, create building envelope schematics that could be used to generate gbXML files
@@ -18,7 +21,14 @@ Programmers need to know that everything is there always. If you can't see it ho
 Not everything is drawn. For example, this demo creates a single slab per story and does not really identify if the slab is slabongrade/roof/ceiling whatever. The geometry is there for you to name, color, ID, duplicate, copy, or manipulate any way you wish. Creating the irregular shape is the critical thing. Duplicating the geometry 10 feet up  or down is trivial 
 
 
+### Validation
 
+The code for the parameters that generates the geometry must:
+
+* be based on normal area equations used in plane geometry
+* be algorithmically concise and readable
+* produce results that have been verified and are auditable 
+ 
 
 
 ## Links of Interest
@@ -28,10 +38,20 @@ Not everything is drawn. For example, this demo creates a single slab per story 
 ## Issues
 
 * Ben: orientation worked for 90 and 180. Broke down at 350. It calls everything south
-* 2017-11-18 ~ Changing opacity deletes black edges
+
  
 
 ## Change Log
+
+
+### 2017-11-19 ~ Theo
+
+* 2017-11-18 ~ Changing opacity deletes black edges << now can toggle edges after every update
+* rename selShape to seleFootprint because Shape already has meaning in Three.js
+
+19:37
+* parameters seem OK
+
 
 ### 2017-11-18 ~ Theo
 

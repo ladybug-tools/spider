@@ -967,6 +967,8 @@ const userChange =
 
 		}
 
+
+
 		function offsetPoints( obj, points, offsetX, offsetY  = 0 ) {
 
 			// 2017-11-17

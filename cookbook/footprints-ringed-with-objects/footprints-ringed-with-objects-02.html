@@ -93,11 +93,6 @@
 				<input type=range id=inpWidth min=50 max=300 step=1 value=100 oninput=onUpdateWidth();outWidth.value=value; >
 			</div>
 
-			<div id=divThickness >
-				Thickness <output id=outThickness class=floatRight >999999</output>
-					<input type=range id=inpThickness oninput=updateThickness();outThickness.value=value; >
-			</div>
-
 			<div title='floors?' >
 				Floors <output id=outStoreys class=floatRight >1</output>
 				<input type=range id=inpStoreys min=1 max=20 step=1 value=1 oninput=onUpdateFloorOrArea();outStoreys.value=value; />
@@ -105,6 +100,11 @@
 
 			<div>
 				Floor area <output id=outAreaFloor class=floatRight >999999</output>
+<!--							<input type=range id=inpThickness oninput=updateShape(); > -->
+			</div>
+
+			<div id=divThickness >
+				Thickness <output id=outThickness class=floatRight >999999</output>
 <!--							<input type=range id=inpThickness oninput=updateShape(); > -->
 			</div>
 
@@ -124,7 +124,6 @@
 				Perimeter depth <output id=outPerimeterDepth class=floatRight >15</output>
 				<input type=range id=inpPerimeterDepth min=10 max=20 step=1 value=15 oninput=updateDimensions();outPerimeterDepth.value=value; />
 			</p>
-
 			<p title='How open can you be?' >
 				Number of openings <output id=outOpenings class=floatRight >5</output>
 				<input type=range id=inpOpenings min=1 max=10 step=1 value=5 oninput=updateDimensions();outOpenings.value=value; />
@@ -392,9 +391,9 @@
 
 		}
 
-		qLine.width = widthNew;
-		inpWidth.value = widthNew;
-		outWidth.value = Math.round( widthNew );
+			qLine.width = widthNew;
+			inpWidth.value = widthNew;
+			outWidth.value = Math.round( widthNew );
 
 		qLine.area = areaNew;
 		outArea.value = Math.round( areaNew ).toLocaleString();
@@ -454,6 +453,7 @@
 
 		const widthNew = parseInt( inpWidth.value, 10 );;
 		qLine.width = widthNew;
+//		inpWidth.value = widthNew;
 
 		if ( selFootprint.selectedIndex === 0 ) { // box
 
@@ -461,21 +461,20 @@
 
 		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
 
-			const thk = qLine.thickness;
-			const lengthNew = ( qLine.areaFloor - thk * ( widthNew - thk ) ) / ( thk );
+			const lMinusTNow = qLine.length - qLine.thickness; 
+			const wMinusTNow = qLine.width - qLine.thickness; 
 
-			qLine.length = lengthNew;
-			inpLength.value = lengthNew;
-			outLength.value = Math.round( lengthNew );
+			const lMinusTNew = Math.sqrt( qLine.length * qLine.width - qLine.areaFloor );
+			const thicknessNew = qLine.length - lMinusTNew;
+			qLine.thickness = thicknessNew;
+			outThickness.value = Math.round( thicknessNew );
 
 		} else if ( selFootprint.selectedIndex === 3 ) {  // H
 
-			const thk = qLine.thickness;
-			const lengthNew = ( qLine.areaFloor - 2 * thk * widthNew ) / thk + 2 * thk;
+			const thicknessNew = qLine.thickness;
+			qLine.thickness = thicknessNew;
+			outThickness.value = Math.round( thicknessNew );
 
-			qLine.length = lengthNew;
-			inpLength.value = lengthNew;
-			outLength.value = Math.round( lengthNew );
 
 		}
 
@@ -484,41 +483,6 @@
 	}
 
 
-
-	function updateThickness() {
-
-		const thicknessNew = parseInt( inpThickness.value, 10 );;
-		qLine.thickness = thicknessNew;
-
-		if ( selFootprint.selectedIndex === 0 ) { // box
-
-// never gets here
-
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
-
-			const thk = qLine.thickness;
-
-			const widthNew = ( ( qLine.areaFloor - thk * qLine.length ) / thk + thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		} else if ( selFootprint.selectedIndex === 3 ) {  // H
-
-			const thk = qLine.thickness;
-
-			const widthNew = ( qLine.areaFloor - thk * ( qLine.length - 2 * thk ) ) / ( 2 * thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		}
-
-		updateDimensions();
-
-	}
 
 	function updateDimensions() {
 
@@ -547,7 +511,7 @@
 
 		qLine.areaCheck = qLine.storeys * THREE.ShapeUtils.area( qLine.polygonVertices );
 
-		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - qLine.areaCheck ).toLocaleString();
+		outAreaCheck2.innerHTML = Math.round( - qLine.areaCheck ).toLocaleString();
 
 	}
 

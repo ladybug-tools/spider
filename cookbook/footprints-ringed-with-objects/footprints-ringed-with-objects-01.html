@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="Real-time 3D buildings in your browser with menu sliding" >
+<meta name=description content="Real-time 3D in your browser with menu sliding" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-9" >
-<title>footprints ringed with objects r1.3</title>
+<meta name = "date" content = "2017-11-18" >
+<title>footprints ringed with objects r1.2</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -48,18 +48,11 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "divMenu" >
 
-		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-<!--
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
--->
-		</p>
 		<h3>
 			<a href="https://github.com/ladybug-tools/spider/tree/master/cookbook/footprints-ringed-with-objects" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
 			<a href="" ><script> document.write( document.title) </script></a>
@@ -69,7 +62,7 @@
 
 
 			<p>
-				<select id=selFootprint size=5 onchange=onSelectFootprint(); >
+				<select id=selShape size=5 onchange=initFootprint(); >
 					<option value=box-shape.png selected >Box footprint</option>
 					<option value=l-shape.png >L footprint</option>
 					<option value=t-shape.png >T footprint</option>
@@ -80,27 +73,22 @@
 
 			<div id=divArea >
 				Area <output id=outArea class=floatRight >10000</output>
-				<input type=range id=inpArea min=5000 max=50000 step=1000 value=10000 oninput=onUpdateFloorOrArea();outArea.value=value; >
+				<input type=range id=inpArea min=5000 max=50000 step=1000 value=10000 oninput=updateAreas();outArea.value=value; >
 			</div>
 
 			<div id=divLength >
 				Length <output id=outLength class=floatRight >100</output>
-				<input type=range id=inpLength min=50 max=300 step=10 value=100 oninput=onUpdateLength();outLength.value=value; >
+				<input type=range id=inpLength min=50 max=300 step=10 value=100 oninput=updateLength();outLength.value=value; >
 			</div>
 
 			<div id=divWidth >
 				Width <output id=outWidth class=floatRight >100</output>
-				<input type=range id=inpWidth min=50 max=300 step=1 value=100 oninput=onUpdateWidth();outWidth.value=value; >
-			</div>
-
-			<div id=divThickness >
-				Thickness <output id=outThickness class=floatRight >999999</output>
-					<input type=range id=inpThickness oninput=updateThickness();outThickness.value=value; >
+				<input type=range id=inpWidth min=50 max=300 step=10 value=100 oninput=updateDimensions();outWidth.value=value; >
 			</div>
 
 			<div title='floors?' >
 				Floors <output id=outStoreys class=floatRight >1</output>
-				<input type=range id=inpStoreys min=1 max=20 step=1 value=1 oninput=onUpdateFloorOrArea();outStoreys.value=value; />
+				<input type=range id=inpStoreys min=1 max=20 step=1 value=1 oninput=updateAreas();outStoreys.value=value; />
 			</div>
 
 			<div>
@@ -108,11 +96,13 @@
 <!--							<input type=range id=inpThickness oninput=updateShape(); > -->
 			</div>
 
-			<div>
-				Area check1 <output id=outAreaCheck1 class=floatRight >999999</output>
+			<div id=divThickness >
+				Thickness <output id=outThickness class=floatRight >999999</output>
+<!--							<input type=range id=inpThickness oninput=updateShape(); > -->
 			</div>
 			<div>
-				Area check2 <output id=outAreaCheck2 class=floatRight >999999</output>
+				Area double check <output id=outAreaCheck class=floatRight >999999</output>
+<!--							<input type=range id=inpThickness oninput=updateShape(); > -->
 			</div>
 
 			<p title="How low can you go?" >
@@ -124,7 +114,6 @@
 				Perimeter depth <output id=outPerimeterDepth class=floatRight >15</output>
 				<input type=range id=inpPerimeterDepth min=10 max=20 step=1 value=15 oninput=updateDimensions();outPerimeterDepth.value=value; />
 			</p>
-
 			<p title='How open can you be?' >
 				Number of openings <output id=outOpenings class=floatRight >5</output>
 				<input type=range id=inpOpenings min=1 max=10 step=1 value=5 oninput=updateDimensions();outOpenings.value=value; />
@@ -203,7 +192,7 @@
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-		camera.position.set( 100, -100, 100 );
+		camera.position.set( 100, 100, 100 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -255,49 +244,35 @@
 		west.center.set( 0.5, 0.5 );
 		west.rotation = Math.PI / 2;
 
-		onSelectFootprint();
+		initFootprint();
 
 	}
 
 
-
-	function onSelectFootprint() {
+	function initFootprint() {
 
 		inpArea.value = qLine.area = 10000;
 		outStoreys.value = inpStoreys.value = qLine.storeys = 1;
 		qLine.areaFloor = qLine.area / qLine.storeys;
 		outAreaFloor.value = Math.round( qLine.areaFloor ).toLocaleString();
 
-		if ( selFootprint.selectedIndex === 1 ) {
+		if ( selShape.selectedIndex === 1 ) {
 
-			outLength.value = inpLength.value = qLine.length = 100;
-			outWidth.value = inpWidth.value = qLine.width = 150;
-			outThickness.value = qLine.thickness = 50;
+			outLength.value = inpLength.value = qLine.length = 120;
+			outWidth.value = inpWidth.value = qLine.width = 100;
+			outThickness.value = qLine.thickness = 60;
 
-			const thk = qLine.thickness;
-			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) )
-			outAreaCheck1.innerHTML = 'L area: ' + Math.round(  area  ).toLocaleString();
+		} else if ( selShape.selectedIndex === 2 ) {
 
-		} else if ( selFootprint.selectedIndex === 2 ) {
+			outLength.value = inpLength.value = qLine.length = 120;
+			outWidth.value = inpWidth.value = qLine.width = 100;
+			outThickness.value = qLine.thickness = 60;
 
-			outLength.value = inpLength.value = qLine.length = 100;
-			outWidth.value = inpWidth.value = qLine.width = 150;
-			outThickness.value = qLine.thickness = 50;
+		} else if ( selShape.selectedIndex === 3 ) {
 
-			const thk = qLine.thickness;
-			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) )
-			outAreaCheck1.innerHTML = 'T area: ' + Math.round(  area  ).toLocaleString();
-
-
-		} else if ( selFootprint.selectedIndex === 3 ) {
-
-			outLength.value = inpLength.value = qLine.length = 150;
-			outWidth.value = inpWidth.value = qLine.width = 90;
-			outThickness.value = qLine.thickness = 40;
-
-			const thk = qLine.thickness;
-			const area = qLine.storeys * ( 2 * thk * qLine.width ) + thk * ( qLine.length - 2 * thk )
-			outAreaCheck1.innerHTML = 'H area: ' + Math.round(  area  ).toLocaleString();
+			outLength.value = inpLength.value = qLine.length = 120;
+			outWidth.value = inpWidth.value = qLine.width = 100;
+			outThickness.value = qLine.thickness = 36;
 
 		} else {
 
@@ -307,36 +282,11 @@
 
 		}
 
-
-// ui
-		if ( selFootprint.selectedIndex === 0 ) {
-
-			divThickness.style.display = 'none';
-			divWidth.style.display = 'none';
-
-		} else if ( selFootprint.selectedIndex === 4 ) {
-
-			divThickness.style.display = 'none';
-			divWidth.style.display = 'none';
-			divArea.style.display = 'none';
-			divLength.style.display = 'none';
-
-		} else {
-
-			divThickness.style.display = '';
-			divWidth.style.display = '';
-			divArea.style.display = '';
-			divLength.style.display = '';
-
-		}
-
 		updateDimensions();
 
 	}
 
-
-
-	function onUpdateFloorOrArea(){
+	function updateAreas(){
 
 		const areaNow = qLine.area;
 		const storeysNow = qLine.storeys;
@@ -352,92 +302,96 @@
 		const ratio = Math.sqrt( areaNew / areaTemp );
 //console.log( '', areaTemp, ratio );
 
-		const lengthNew = Math.round( ratio * lengthNow );
-		qLine.length = lengthNew;
-		inpLength.value = lengthNew;
-		outLength.value = Math.round( lengthNew );
 
-		if ( selFootprint.selectedIndex === 0 || selFootprint.selectedIndex === 4 ) { // box
+		if ( selShape.selectedIndex === 0 || selShape.selectedIndex === 4 ) { // box
+
+			lengthNew = Math.round( ratio * lengthNow );
+			qLine.length = lengthNew;
+			inpLength.value = lengthNew;
+			outLength.value = Math.round( lengthNew );
 
 			widthNew = areaNew / ( lengthNew * storeysNew );
-//			qLine.width = widthNew;
-//			inpWidth.value = widthNew;
-//			outWidth.value = Math.round( widthNew );
+			qLine.width = widthNew;
+			inpWidth.value = widthNew;
+			outWidth.value = Math.round( widthNew );
 
+			qLine.area = areaNew
+			outArea.value = Math.round( areaNew ).toLocaleString();
+			outAreaFloor.value = Math.round( areaFloorNew ).toLocaleString();
 
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {
+			qLine.storeys = storeysNew;
+			inpStoreys.value = storeysNew;
+
+		} else if ( selShape.selectedIndex === 1 || selShape.selectedIndex === 2 ) {
+
+			lengthNew = Math.round( ratio * lengthNow );
+			qLine.length = lengthNew;
+			inpLength.value = lengthNew;
+			outLength.value = Math.round( lengthNew );
+
+			widthNew = areaNew / ( lengthNew * storeysNew );
+			qLine.width = widthNew;
+			inpWidth.value = widthNew;
+			outWidth.value = Math.round( widthNew );
 
 			thicknessNew = Math.round( ratio * qLine.thickness );
 			qLine.thickness = thicknessNew;
 			outThickness.value = thicknessNew;
 
-			const widthNew = ( ( areaFloorNew - thicknessNew * lengthNew ) / thicknessNew + thicknessNew );
-//			qLine.width = widthNew;
-//			inpWidth.value = widthNew;
-//			outWidth.value = Math.round( widthNew );
+			qLine.area = areaNew
+			outArea.value = Math.round( areaNew ).toLocaleString();
+			outAreaFloor.value = Math.round( areaFloorNew ).toLocaleString();
 
-			const area = storeysNew * ( thicknessNew * lengthNew + thicknessNew * ( widthNew - thicknessNew ) )
-			outAreaCheck1.innerHTML = Math.round( area ).toLocaleString();
+			qLine.storeys = storeysNew;
+			inpStoreys.value = storeysNew;
 
-		} else if ( selFootprint.selectedIndex === 3 ) {
+		} else if ( selShape.selectedIndex === 3 ) {
 
-			const thicknessNew = Math.round( ratio * qLine.thickness );
+			lengthNew = Math.round( ratio * lengthNow );
+			qLine.length = lengthNew;
+			inpLength.value = lengthNew;
+			outLength.value = Math.round( lengthNew );
+
+			widthNew = areaNew / ( lengthNew * storeysNew );
+			qLine.width = widthNew;
+			inpWidth.value = widthNew;
+			outWidth.value = Math.round( widthNew );
+
+			thicknessNew = Math.round( ratio * qLine.thickness );
 			qLine.thickness = thicknessNew;
 			outThickness.value = thicknessNew;
 
-			widthNew = ( areaFloorNew - thicknessNew * ( lengthNew - 2 * thicknessNew ) ) / ( 2 * thicknessNew );
+			qLine.area = areaNew
+			outArea.value = Math.round( areaNew ).toLocaleString();
+			outAreaFloor.value = Math.round( areaFloorNew ).toLocaleString();
 
-			const area = storeysNew * ( ( 2 * thicknessNew * widthNew ) + thicknessNew * ( lengthNew - 2 * thicknessNew ) );
-			outAreaCheck1.innerHTML = 'H: ' + Math.round( area ).toLocaleString();
+			qLine.storeys = storeysNew;
+			inpStoreys.value = storeysNew;
 
 		}
-
-		qLine.width = widthNew;
-		inpWidth.value = widthNew;
-		outWidth.value = Math.round( widthNew );
-
-		qLine.area = areaNew;
-		outArea.value = Math.round( areaNew ).toLocaleString();
-
-		qLine.areaFloor = areaFloorNew;
-		outAreaFloor.value = Math.round( areaFloorNew ).toLocaleString();
-
-
-
-		qLine.storeys = storeysNew;
-		inpStoreys.value = storeysNew;
 
 		updateDimensions();
 
 	}
 
 
-
-	function onUpdateLength(){
+	function updateLength(){
 
 		const lengthNew = parseInt( inpLength.value, 10 );;
 		qLine.length = lengthNew;
 
-		if ( selFootprint.selectedIndex === 0 ) { // box
+		if ( selShape.selectedIndex === 0 ) { // box
 
-			const widthNew = qLine.areaFloor / lengthNew;
+			widthNew = qLine.areaFloor / lengthNew;
 			qLine.width = widthNew;
 			inpWidth.value = widthNew;
 			outWidth.value = Math.round( widthNew );
 
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
+		} else if ( selShape.selectedIndex === 1 || selShape.selectedIndex === 2 ) {  // L & T
 
-			const thk = qLine.thickness;
-			const widthNew = ( ( qLine.areaFloor - thk * lengthNew ) / thk + thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		} else if ( selFootprint.selectedIndex === 3 ) {  // H
-
-			const thk = qLine.thickness;
-			const widthNew = ( qLine.areaFloor - thk * ( lengthNew - 2 * thk ) ) / ( 2 * thk );
+//			widthNew = qLine.areaFloor / lengthNew;
+			thk = qLine.thickness;
+			widthNew = ( ( qLine.area - thk * lengthNew ) / thk + thk ) / qLine.storeys;
 
 			qLine.width = widthNew;
 			inpWidth.value = widthNew;
@@ -450,75 +404,8 @@
 	}
 
 
-	function onUpdateWidth(){
-
-		const widthNew = parseInt( inpWidth.value, 10 );;
-		qLine.width = widthNew;
-
-		if ( selFootprint.selectedIndex === 0 ) { // box
-
-// never gets here
-
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
-
-			const thk = qLine.thickness;
-			const lengthNew = ( qLine.areaFloor - thk * ( widthNew - thk ) ) / ( thk );
-
-			qLine.length = lengthNew;
-			inpLength.value = lengthNew;
-			outLength.value = Math.round( lengthNew );
-
-		} else if ( selFootprint.selectedIndex === 3 ) {  // H
-
-			const thk = qLine.thickness;
-			const lengthNew = ( qLine.areaFloor - 2 * thk * widthNew ) / thk + 2 * thk;
-
-			qLine.length = lengthNew;
-			inpLength.value = lengthNew;
-			outLength.value = Math.round( lengthNew );
-
-		}
-
-		updateDimensions();
-
-	}
 
 
-
-	function updateThickness() {
-
-		const thicknessNew = parseInt( inpThickness.value, 10 );;
-		qLine.thickness = thicknessNew;
-
-		if ( selFootprint.selectedIndex === 0 ) { // box
-
-// never gets here
-
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
-
-			const thk = qLine.thickness;
-
-			const widthNew = ( ( qLine.areaFloor - thk * qLine.length ) / thk + thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		} else if ( selFootprint.selectedIndex === 3 ) {  // H
-
-			const thk = qLine.thickness;
-
-			const widthNew = ( qLine.areaFloor - thk * ( qLine.length - 2 * thk ) ) / ( 2 * thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		}
-
-		updateDimensions();
-
-	}
 
 	function updateDimensions() {
 
@@ -532,22 +419,40 @@
 
 		qLine.orientation = parseInt( inpOrientation.value, 10 );
 		qLine.opacity = parseInt( inpOpacity.value, 10 ) / 100;
-		qLine.edges = null;
 
 		materialParameters = { color: 0xffffff * Math.random(), opacity: qLine.opacity, side: 2, transparent: true };
 
-
 		const choices = [ drawBox, drawL, drawT, drawH, drawIrregularPolygon ];
 
-		const choice = choices[ selFootprint.selectedIndex ];
+		const choice = choices[ selShape.selectedIndex ];
+
+		if ( selShape.selectedIndex === 0 ) {
+
+			divThickness.style.display = 'none';
+			divWidth.style.display = 'none';
+
+		} else if ( selShape.selectedIndex === 4 ) {
+
+			divThickness.style.display = 'none';
+			divWidth.style.display = 'none';
+			divArea.style.display = 'none';
+			divLength.style.display = 'none';
+
+		} else {
+
+			divThickness.style.display = '';
+			divWidth.style.display = '';
+			divArea.style.display = '';
+			divLength.style.display = '';
+		}
 
 		qLine.polygonVertices = choice();
 
 		updateGeometry();
 
-		qLine.areaCheck = qLine.storeys * THREE.ShapeUtils.area( qLine.polygonVertices );
+		qLine.areaCheck = qLine.storeys * - THREE.ShapeUtils.area( qLine.polygonVertices );
 
-		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - qLine.areaCheck ).toLocaleString();
+		outAreaCheck.innerHTML = Math.round( qLine.areaCheck ).toLocaleString();
 
 	}
 
@@ -574,7 +479,6 @@
 		return verticesBox;
 
 	}
-
 
 
 	function drawL() {
@@ -607,7 +511,6 @@
 		return verticesL;
 
 	}
-
 
 
 	function drawT() {
@@ -684,6 +587,7 @@
 
 
 
+
 	function drawIrregularPolygon() {
 
 		const items = 20;
@@ -718,7 +622,6 @@
 		return verticesPolygon;
 
 	}
-
 
 
 	function updateGeometry() {
@@ -788,7 +691,7 @@
 
 			storey.position.z = i * 3 * qLine.height;
 
-			if ( selFootprint.value !== 'Irregular polygon footprint' ) {
+			if ( selShape.value !== 'Irregular polygon footprint' ) {
 
 				storey.position.x = qLine.length / -2;
 				storey.position.y = qLine.width / -2;
@@ -887,6 +790,7 @@
 
 		let material;
 
+
 		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
 		geometry.translate( obj.userData.length / 2, 8, 0 );
 
@@ -914,6 +818,7 @@
 		obj.add( mesh );
 
 	}
+
 
 
 
@@ -1206,6 +1111,7 @@
 
 		if ( !qLine.edges ) {
 
+//			meshesEdges = new THREE.Object3D();
 			qLine.group.traverse( function ( child ) {
 
 				if ( child instanceof THREE.Mesh ) {
@@ -1219,6 +1125,8 @@
 				}
 
 			} );
+
+//			scene.add( meshesEdges );
 
 		}
 
