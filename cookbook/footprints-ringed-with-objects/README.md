@@ -20,6 +20,7 @@ Programmers need to know that everything is there always. If you can't see it ho
 
 Not everything is drawn. For example, this demo creates a single slab per story and does not really identify if the slab is slabongrade/roof/ceiling whatever. The geometry is there for you to name, color, ID, duplicate, copy, or manipulate any way you wish. Creating the irregular shape is the critical thing. Duplicating the geometry 10 feet up  or down is trivial 
 
+Note that the Width slider mirrors the Length slider actions and it also mirrors the Thickness slider actions. It is useful in debugging - but could be dropped in a production version
 
 ### Validation
 

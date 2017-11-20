@@ -263,7 +263,7 @@
 
 	function onSelectFootprint() {
 
-		inpArea.value = qLine.area = 10000;
+		outArea.value = inpArea.value = qLine.area = 10000;
 		outStoreys.value = inpStoreys.value = qLine.storeys = 1;
 		qLine.areaFloor = qLine.area / qLine.storeys;
 		outAreaFloor.value = Math.round( qLine.areaFloor ).toLocaleString();
@@ -401,8 +401,6 @@
 
 		qLine.areaFloor = areaFloorNew;
 		outAreaFloor.value = Math.round( areaFloorNew ).toLocaleString();
-
-
 
 		qLine.storeys = storeysNew;
 		inpStoreys.value = storeysNew;
