@@ -275,7 +275,7 @@
 			outThickness.value = qLine.thickness = 50;
 
 			const thk = qLine.thickness;
-			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) )
+			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) );
 			outAreaCheck1.innerHTML = 'L area: ' + Math.round(  area  ).toLocaleString();
 
 		} else if ( selFootprint.selectedIndex === 2 ) {
@@ -285,8 +285,8 @@
 			outThickness.value = qLine.thickness = 50;
 
 			const thk = qLine.thickness;
-			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) )
-			outAreaCheck1.innerHTML = 'T area: ' + Math.round(  area  ).toLocaleString();
+			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) );
+			outAreaCheck1.innerHTML = 'T area: ' + Math.round( area ).toLocaleString();
 
 
 		} else if ( selFootprint.selectedIndex === 3 ) {
@@ -296,14 +296,16 @@
 			outThickness.value = qLine.thickness = 40;
 
 			const thk = qLine.thickness;
-			const area = qLine.storeys * ( 2 * thk * qLine.width ) + thk * ( qLine.length - 2 * thk )
-			outAreaCheck1.innerHTML = 'H area: ' + Math.round(  area  ).toLocaleString();
+			const area = qLine.storeys * ( 2 * thk * qLine.width ) + thk * ( qLine.length - 2 * thk );
+			outAreaCheck1.innerHTML = 'H area: ' + Math.round( area ).toLocaleString();
 
 		} else {
 
 			outLength.value = inpLength.value = qLine.length = 100;
 			outWidth.value = inpWidth.value = qLine.width = 100;
 			outThickness.value = qLine.thickness = 60;
+			const area = qLine.storeys * qLine.length * qLine.width;
+			outAreaCheck1.innerHTML = 'Box area: ' + Math.round( area ).toLocaleString();
 
 		}
 
@@ -363,6 +365,8 @@
 //			qLine.width = widthNew;
 //			inpWidth.value = widthNew;
 //			outWidth.value = Math.round( widthNew );
+			const area = qLine.storeys * qLine.length * qLine.width;
+			outAreaCheck1.innerHTML = 'Box area: ' + Math.round( area ).toLocaleString();
 
 
 		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {
@@ -377,7 +381,7 @@
 //			outWidth.value = Math.round( widthNew );
 
 			const area = storeysNew * ( thicknessNew * lengthNew + thicknessNew * ( widthNew - thicknessNew ) )
-			outAreaCheck1.innerHTML = Math.round( area ).toLocaleString();
+			outAreaCheck1.innerHTML = 'L or T: ' + Math.round( area ).toLocaleString();
 
 		} else if ( selFootprint.selectedIndex === 3 ) {
 
