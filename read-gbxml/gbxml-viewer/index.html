@@ -17,7 +17,7 @@
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
-	a { color: crimson; text-decoration: none; }
+	a { color: var( --mnu-color ); text-decoration: none; }
 	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
@@ -26,13 +26,17 @@
 
 	iframe { width: 100%; }
 
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
 	td { vertical-align: top; }
 
 	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; padding: 30px 10px 0 10px;
-		height: 100%; overflow-x: hidden; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; height: 100%;
+		overflow-x: hidden; padding: 30px 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
 	#hamburger { background-color: #edd; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
@@ -123,8 +127,6 @@
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
 		requestFile( urlGitHubApiContents, callbackGitHubMenu );
-
-//		getFolderContents();
 
 		onHashChange();
 
@@ -264,7 +266,7 @@
 		const html = converter.makeHtml( xhr.target.responseText );
 
 		divContents.style.maxWidth = '800px';
-		document.body.overflow = '';
+		document.body.style.overflow = '';
 		divContents.innerHTML = html;
 		window.scrollTo( 0, 0 );
 

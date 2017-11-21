@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-01" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	textarea { height: 500px; width: 100%; }
+
+/*	#menu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "divHeader" >
+		<div id = "divTitle" ></div>
+		<div id = "divContents" >
+
+			<p><button onclick=addSurface(); >add to xml</button></p>
+
+		</div>
+	</div>
+
+	<div id = "divXML" ></div>
+
+<script>
+// http://onwebdevelopment.blogspot.com/2008/05/converting-xml-to-json.html
+// scroll down
+
+
+	let json = {
+		gbXML: {
+			"@attributes": { xmlns: "http://www.gbxml.org/schema", xmlns_xsd: "http://www.w3.org/2001/XMLSchema" },
+			Campus: {
+				 "@attributes": { "id" : "Facility" },
+				DaylightSavings: true,
+				Description: 'ccccc',
+				Name: 'shapeBox',
+				Location: {
+					CADModelAzimuth: 0,
+					Elevation: 0,
+					Latitude: 37.796,
+					Longitude: -122.398,
+					Name: 'shapeBox',
+					ZipcodeOrPostalCode: 94111
+				},
+				Building: {},
+				Surface: {}
+			}
+		}
+	}
+
+	const b = '<br>';
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h2>' +
+				'<a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a>' +
+			'</h2>';
+
+		updateXml();
+
+	}
+
+
+
+	function updateXml() {
+
+		xml = objectToXml( json );
+
+		divXML.innerHTML = '<textarea>' +
+		'\<?xml version="1.0" encoding="UTF-8"?>\n' +
+		xml +
+		'</textarea>';
+
+	}
+
+
+	function objectToXml( obj ) {
+
+		var xml = '';
+
+		for ( let prop in obj ) {
+
+			if ( !obj.hasOwnProperty( prop ) ) {
+
+				continue;
+
+			}
+
+			if ( obj[ prop ] === undefined ) {
+
+				continue;
+
+			}
+
+			if ( prop === '@attributes' ) { // attributes
+
+console.log( obj, 'has attributes', prop );
+
+				for ( var y in obj[ prop ] ) {
+
+console.log( 'y', y ); 
+
+					if ( obj[ prop ].hasOwnProperty( y ) ) {
+console.log( 'obj[ prop ]', obj[ prop ] );
+//					obj[ prop ].setAttribute( y, obj[ prop ][y]);
+console.log( 'attHasProperty', y );
+console.log( 'prop', obj[ prop ][ y ] );
+
+					}
+
+				}
+
+				continue;
+
+			}
+
+			xml += '<' + prop + '>';
+
+			if ( typeof obj[ prop ] === 'object' ) {
+
+				xml += '\n' + objectToXml( new Object( obj[ prop ] ) );
+
+			} else {
+
+				xml += obj[prop];
+
+			}
+
+			xml += '<\\' + prop + '>\n';
+
+		}
+
+		return xml;
+
+	}
+
+
+
+	function addSurface() {
+
+// http://onwebdevelopment.blogspot.com/2008/05/converting-xml-to-json.html
+
+		obj = {
+			Surface22: {
+				'@attributes': { surfaceType: "InteriorWall", id: "bw-surface-2" },
+				Name: 'interior-wall-floor-1-space-1',
+				CADOjectId: 888,
+				AdjacentSpaceId: spaceIdRef="bw-space-1",
+				AdjacentSpaceId: spaceIdRef="bw-space-4",
+				PlanarGeometry: {
+					PolyLoop: {
+						CartesianPoint: {
+							Coordinate:-58.6,
+							Coordinate: -81.4,
+							Coordinate: 2.4,
+						},
+						CartesianPoint: {
+							Coordinate:-58.6,
+							Coordinate:-81.4,
+							Coordinate:0,
+						},
+						CartesianPoint: {
+							Coordinate:-91.4,
+							Coordinate:-81.4,
+							Coordinate:0,
+						},
+						CartesianPoint: {
+							Coordinate:-91.4,
+							Coordinate:-81.4,
+							Coordinate:2.4,
+						}
+					}
+				}
+			}
+		};
+
+		json.gbXML.Campus.Surface = obj;
+
+		updateXml();
+
+	}
+
+</script>
+</body>
+</html>

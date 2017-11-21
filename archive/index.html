@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name = description content = "File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
+<meta name = keywords content = "ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
+<meta name = date content = "2017-08-16" >
+<title></title>
+<style id = "foo" >
+
+/* items in mostly in order of: tag/class/id then alphabetical */
+
+
+html { --mnu-back-col: lightgray; --menu-width: 250px; }
+
+body, html { background-color: #fefefe; font: 12pt monospace; height: 100%; margin: 0; }
+
+a { color: crimson; }
+
+blockquote, pre { background-color: #eee; padding: 10px; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 5px 28px; }
+	button:hover {background: #ccc; color: #fff; }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+.contents { border: 0px solid red; left: 0; margin: 0 auto; max-width: 800px; position: absolute; right: 0; }
+
+.contentsContainer { height: 100%; width: 100%; }
+
+.iframeMenu { border-width: 0; height: 100%; margin: 0; width: 100%; }
+.iframeContents { border-width: 0; height: 100%; margin: 0; width: 100%; }
+
+.menuContainer { padding: 0 10px 0 15px; }
+.menuContainer a { text-decoration: none; }
+.menuContainer a:hover, .menuContainer a:focus{ color: #f1f1f1; }
+
+
+#divContentsContainer { box-sizing: border-box; height: 100%; margin-left: var( --menu-width ); transition: margin-left .5s; 
+	position: absolute; top: 0; width: calc( 100% - var( --menu-width ) ); 
+}
+
+#divEditFile {
+	background-color: #555; color: #fff; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: 20px;
+	vertical-align: middle; z-index: 1;
+}
+
+#divEditFile:hover { cursor: pointer; opacity: 1; }
+
+#divEditFile img { vertical-align: middle; width: 24px; }
+
+#divHamburger {
+	background-color: #edd; cursor:pointer; font-size:30px;	left: var( --menu-width ); line-height: 35px; margin: 0; opacity: 0.5;
+	padding: 5px 15px 8px 10px; position: fixed; top: 80px; transition: left .5s; z-index: 1;
+}
+
+#divHamburger:hover { cursor: pointer; opacity: 1; }
+
+#divMenu {
+	background-color: var( --mnu-back-col ); box-sizing: border-box; height: 100%; left: 0; overflow: auto;
+	position: fixed; top: 0; transition: 0.5s; width: var( --menu-width ); z-index: 1;
+}
+
+#divMenu p { margin: 0 }
+
+@media screen and ( max-height: 450px ) {
+	.menu {padding-top: 15px;}
+	.menu a {font-size: 18px;}
+}
+
+
+</style>
+
+</head>
+
+<body>
+<script src = "index.js" ></script>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js" ></script>
+
+	<div id = "divMenu" class = "menu" >
+
+		<div id = "divMenuContainer" class = "menuContainer" >
+
+			<div id = "divMenuContents" class = "menuContents" ></div>
+
+		</div>
+
+	</div>
+
+
+	<div id = "divContentsContainer" class = "contentsContainer" ></div>
+
+
+	<div id = "divHamburger" onclick = "onClickSlideMenu();" > &#9776; slide</div>
+
+
+	<div id = "divEditFile" onclick = "onclickEditButton();" title = "Update this file on GitHub" ><img src = "https://status.github.com/images/invertocat.png" > Edit this file</div>
+
+
+<script>
+
+	var defaults = defaults || {};
+
+	const menuFile = defaults.menuFile ? defaults.menuFile : 'index-menu.md';
+	const menuWidth = defaults.menuWidth ? defaults.menuWidth : 250;
+	const menuPrefix = defaults.menuPrefix ? defaults.menuPrefix : 'menu';
+	const userGitHub = defaults.user ? defaults.user : '';
+	const folderGitHub = defaults.folder ? defaults.folder : '';
+
+	document.body.style.setProperty( '--menu-width', menuWidth + 'px' );
+
+
+	init();
+
+
+	function init() {
+
+		showdown.setFlavor( 'github' );
+
+		requestFile( menuFile, divMenuContents );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		onWindowResize();
+
+		window.addEventListener( 'hashchange', onHashChange, false );
+
+		onHashChange();
+
+	}
+
+
+
+	function onHashChange() {
+
+		if ( !location.hash.length ) {
+
+			location.hash = defaults.url ? defaults.url : 'README.md';
+
+			return;
+
+		}
+
+		let url = location.hash.slice( 1 );
+		let app = location.hash.split( '#' )[ 1 ];
+//console.log( 'url', url );
+
+
+//		if ( window.ifrMenu ) { ifrMenu.src = ''; }
+//		if ( window.divSubMenu ) { divSubMenu.innerHTML = ''; }
+
+		if ( url.startsWith( menuPrefix ) || url.startsWith ( menuFile ) ) {
+
+			requestFile( url, divMenuContents );
+
+		} else if ( app.endsWith( '.md' ) ) {
+
+			divContentsContainer.innerHTML = '<div id = "divContents" class = "contents" src=' + url + ' ></div>';
+
+			requestFile( url, divContents );
+
+			divContentsContainer.style.overflow = 'auto';
+
+		} else if ( app.includes( '.htm' ) ) {
+
+			divContentsContainer.innerHTML = '<iframe id=ifrContents class=iframeContents src=' + url + ' ></iframe>';
+
+			divContentsContainer.style.overflow = 'hidden';
+
+		} else {
+
+			ifrMenu.contentWindow.location.hash = url;
+			if ( parent.divContents ) { divContents.contentWindow.location.hash = url; }
+			ifrContents.contentWindow.location.hash = url;
+		}
+
+	}
+
+
+
+	function onWindowResize(){
+
+		const iframes = document.getElementsByClassName( 'iframeReadMe' );
+		const display = window.innerWidth < 1350 ? 'none' : '';
+
+		for ( let i = 0; i < iframes.length; i++ ) {
+
+			if ( iframes[ i ].className === 'iframeReadMe' ) {
+
+				iframes[ i ].style.display = display;
+
+			}
+
+		}
+
+		divEditFile.style.display = display;
+		divHamburger.innerHTML = display === 'none' ? '&#9776;' : '&#9776; slide';
+		divHamburger.style.top = display === 'none' ? '0' : '80px';
+
+
+		if ( !divMenu.style.width || divMenu.style.width === '250px' ) {
+
+			divContentsContainer.style.width = ( window.clientWidth -  menuWidth ) + 'px';
+
+		} else {
+
+			divContentsContainer.style.width = window.clientWidth + 'px';
+
+		}
+
+	}
+
+
+
+	function onClickSlideMenu() {
+
+		const visible = !divMenu.style.width || divMenu.style.width ===  menuWidth + 'px' ? false : true;
+
+		divMenu.style.width = visible ? menuWidth + 'px' : '0';
+		divHamburger.style.left = visible ? menuWidth + 'px' : '0';
+
+		divContentsContainer.style.marginLeft = visible ? menuWidth + 'px' : '0';
+		divContentsContainer.style.width = visible ? ( window.innerWidth - menuWidth ) + 'px' : window.innerWidth + 'px';
+
+	}
+
+
+
+	function onclickEditButton(){
+
+		const file = location.hash.slice( 1 ) ? location.hash.slice( 1 ) : defaults.url; // 'README.md';
+
+ 		window.open( 'https://github.com/' + userGitHub + '/' + folderGitHub + 'blob/master/' + file );
+
+	}
+
+
+
+	function requestFile( url, target ) {
+
+		const converter = new showdown.Converter();
+
+		const xhr = new XMLHttpRequest();
+		xhr.open( 'get', url, true );
+		xhr.onload = function() {
+
+			target.innerHTML = converter.makeHtml( xhr.responseText );
+
+			title = url.split( '/' ).pop().replace( /-|.md|.html/g, ' ' );
+
+			document.title = title + ' - ' + userGitHub;
+
+			window.scrollTo( 0, 0 );
+
+			onWindowResize();
+
+		};
+
+		xhr.send( null );
+
+	}
+
+
+</script>
+</body>
+</html>

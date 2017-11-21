@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-01" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	textarea { height: 500px; width: 100%; }
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+<script src="https://cdn.rawgit.com/vkiryukhin/vkBeautify/master/vkbeautify.js"></script>
+
+	<div id = "divHeader" >
+		<div id = "divTitle" ></div>
+		<p id = "divContents" >
+			<textarea id=txtArea ></textarea>
+		</p>
+	</div>
+
+	<div id = "divMenu" ></div>
+
+<script>
+
+	const b = '<br>';
+
+	init();
+
+	function init() {
+
+		let txt;
+
+		divTitle.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
+
+		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divContents.innerHTML += b;
+
+
+/*
+
+	var sMyString = '<a id="a"><b id="b">hey!</b></a>';
+	var oParser = new DOMParser();
+	var oDOM = oParser.parseFromString(sMyString, "text/xml");
+	// print the name of the root element or error message
+	console.log(oDOM.documentElement.nodeName == "parsererror" ? "error while parsing" : oDOM.documentElement.nodeName);
+
+*/
+
+// https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/How_to_create_a_DOM_tree
+thing =
+
+{
+  "people": {
+    "person": [{
+      "address": [{
+        "@street": "321 south st",
+        "@city": "denver",
+        "@state": "co",
+        "@country": "usa"
+      }, {
+        "@street": "123 main st",
+        "@city": "arlington",
+        "@state": "ma",
+        "@country": "usa"
+      }],
+      "@first-name": "eric",
+      "@middle-initial": "H",
+      "@last-name": "jung"
+    }, {
+      "address": [{
+        "@street": "321 north st",
+        "@city": "atlanta",
+        "@state": "ga",
+        "@country": "usa"
+      }, {
+        "@street": "123 west st",
+        "@city": "seattle",
+        "@state": "wa",
+        "@country": "usa"
+      }, {
+        "@street": "321 south avenue",
+        "@city": "denver",
+        "@state": "co",
+        "@country": "usa"
+      }],
+      "@first-name": "jed",
+      "@last-name": "brown"
+    }]
+  }
+};
+
+
+
+	let json = {
+
+		gbXML: {
+ 			"@xmlns": "http://www.gbxml.org/schema", 
+			"@xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+			"@xsi:schemaLocation": "http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd",
+			"@xmlns:xhtml": "http://www.w3.org/1999/xhtml",
+			"@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+			"@useSIUnitsForResults": "true",
+			"@SurfaceReferenceLocation": "Centerline",
+			"@temperatureUnit": "F",
+			"@lengthUnit": "Feet",
+			"@areaUnit": "SquareFeet",
+			"@volumeUnit": "CubicMeters",
+			"@version": "6.01",
+			Campus: {
+			 "@id" : "Facility" 
+			},
+			DaylightSavings: true,
+			Description: 'ccccc',
+			Name: 'shapeBox',
+			Location: {
+				CADModelAzimuth: 0,
+				Elevation: 0,
+				Latitude: 37.796,
+				Longitude: -122.398,
+				Name: 'shapeBox',
+				ZipcodeOrPostalCode: 94111
+			},
+
+			Building: {},
+			Surface: {}
+		}
+	}
+
+
+//var oSerializer = new XMLSerializer();
+//var sXML = oSerializer.serializeToString( thing );
+
+//		parser = new window.DOMParser();
+
+//		sXML = parser.parseFromString( thing , "text/xml");
+
+
+		xml = createXML ( json )
+
+console.log( '', xml  );
+
+//		divContents.appendChild( xml )
+
+// https://stackoverflow.com/questions/9898698/convert-xml-to-string-and-append-to-page
+		var xmlText = new XMLSerializer().serializeToString( xml);
+		var xmlTextNode = document.createTextNode(xmlText);
+		txtArea.appendChild(xmlTextNode);
+
+		txtArea.value = vkbeautify.xml(document.getElementById("txtArea").value);
+	}
+
+
+
+https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
+
+
+	function createXML (oObjTree) {
+
+		function loadObjTree (oParentEl, oParentObj) {
+
+			var vValue, oChild;
+
+			if ( oParentObj.constructor === String || oParentObj.constructor === Number || oParentObj.constructor === Boolean ) {
+
+				oParentEl.appendChild(oNewDoc.createTextNode(oParentObj.toString())); /* verbosity level is 0 or 1 */
+
+				if (oParentObj === oParentObj.valueOf()) { return; }
+
+			} else if (oParentObj.constructor === Date) {
+
+				oParentEl.appendChild(oNewDoc.createTextNode(oParentObj.toGMTString()));
+
+			}
+
+			for (var sName in oParentObj) {
+
+			if (isFinite(sName)) { continue; } /* verbosity level is 0 */
+
+				vValue = oParentObj[sName];
+
+				if (sName === "keyValue") {
+
+					if (vValue !== null && vValue !== true) { 
+
+						oParentEl.appendChild(oNewDoc.createTextNode(vValue.constructor === Date ? vValue.toGMTString() : String(vValue))); 
+
+					}
+
+				} else if (sName === "keyAttributes") { /* verbosity level is 3 */
+
+					for (var sAttrib in vValue) { oParentEl.setAttribute(sAttrib, vValue[sAttrib]); }
+
+				} else if (sName.charAt(0) === "@") {
+
+					oParentEl.setAttribute(sName.slice(1), vValue);
+
+				} else if (vValue.constructor === Array ) {
+
+					for (var nItem = 0; nItem < vValue.length; nItem++ ) {
+
+						oChild = oNewDoc.createElement(sName );
+						loadObjTree(oChild, vValue[nItem]);
+						oParentEl.appendChild(oChild);
+
+					}
+
+				} else {
+
+					oChild = oNewDoc.createElement(sName);
+
+					if ( vValue instanceof Object ) {
+
+						loadObjTree(oChild, vValue);
+
+					} else if (vValue !== null && vValue !== true ) {
+
+						oChild.appendChild(oNewDoc.createTextNode( vValue.toString() ) );
+//						oChild.innerHTML += oNewDoc.createTextNode( vValue.toString());
+
+					}
+
+					oParentEl.appendChild(oChild);
+
+				}
+
+			}
+
+		}
+
+		const oNewDoc = document.implementation.createDocument( "", "", null);
+
+		loadObjTree( oNewDoc, oObjTree );
+
+		return oNewDoc;
+
+	}
+
+</script>
+</body>
+</html>
