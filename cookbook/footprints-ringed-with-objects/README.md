@@ -22,6 +22,8 @@ Not everything is drawn. For example, this demo creates a single slab per story 
 
 Note that the Width slider mirrors the Length slider actions and it also mirrors the Thickness slider actions. It is useful in debugging - but could be dropped in a production version
 
+
+
 ### Validation
 
 The code for the parameters that generates the geometry must:
@@ -38,11 +40,20 @@ The code for the parameters that generates the geometry must:
 
 ## Issues
 
-* Ben: orientation worked for 90 and 180. Broke down at 350. It calls everything south
 
  
 
 ## Change Log
+
+
+### 2017-11-20 ~ Theo
+
+R1.5
+
+* Derive world azimuth data and add to walls
+* Adjust azimuth indicators to suit
+	* Ben: orientation worked for 90 and 180. Broke down at 350. It calls everything south
+
 
 
 ### 2017-11-19 ~ Theo
