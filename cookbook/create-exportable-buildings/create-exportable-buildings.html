@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Real-time 3D buildings in your browser with menu sliding" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-21" >
-<title>footprints ringed with objects r1.5</title>
+<meta name = "date" content = "2017-11-19" >
+<title>create exportable buildings r1.0 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -67,7 +67,7 @@
 
 		<div id = "divContents" >
 
-
+<!--
 			<p>
 				<select id=selFootprint size=5 onchange=onSelectFootprint(); >
 					<option value=box-shape.png selected >Box footprint</option>
@@ -105,7 +105,6 @@
 
 			<div>
 				Floor area <output id=outAreaFloor class=floatRight >999999</output>
-<!--							<input type=range id=inpThickness oninput=updateShape(); > -->
 			</div>
 
 			<div>
@@ -172,7 +171,7 @@
 			<div><img src=west.png height=18px > west</div>
 
 		</div>
-
+-->
 	</div>
 
 
@@ -255,12 +254,21 @@
 		west.center.set( 0.5, 0.5 );
 		west.rotation = Math.PI / 2;
 
-		onSelectFootprint();
+//		onSelectFootprint();
 
+		qLine.area = 10000;
+		qLine.storeys = 1;
+		qLine.areaFloor = qLine.area / qLine.storeys;
+
+		qLine.length = 100;
+		qLine.width = 100;
+		qLine.thickness = 60;
+
+		updateDimensions();
 	}
 
 
-
+/*
 	function onSelectFootprint() {
 
 		outArea.value = inpArea.value = qLine.area = 10000;
@@ -334,7 +342,7 @@
 
 	}
 
-
+/*
 
 	function onUpdateFloorOrArea(){
 
@@ -490,7 +498,7 @@
 
 		if ( selFootprint.selectedIndex === 0 ) { // box
 
-// never gets here, said he merrily
+// never gets here
 
 		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
 
@@ -518,28 +526,31 @@
 
 	}
 
+*/
 
 
 	function updateDimensions() {
 
-		qLine.height = parseInt( inpHeight.value, 10 );
-		qLine.perimeterDepth = parseInt( inpPerimeterDepth.value, 10 );
-		qLine.openings = parseInt( inpOpenings.value, 10 );
-		qLine.wwr = parseInt( inpWindowWallRatio.value, 10 );
 
-		qLine.overhang = parseFloat( inpOverhang.value );
-		qLine.fin = parseFloat( inpFin.value );
+		qLine.height = 10; //parseInt( inpHeight.value, 10 );
+		qLine.perimeterDepth = 15; //parseInt( inpPerimeterDepth.value, 10 );
+		qLine.openings = 5; // parseInt( inpOpenings.value, 10 );
+		qLine.wwr = 40; // parseInt( inpWindowWallRatio.value, 10 );
 
-		qLine.orientation = parseInt( inpOrientation.value, 10 );
-		qLine.opacity = parseInt( inpOpacity.value, 10 ) / 100;
+		qLine.overhang = 3; // parseFloat( inpOverhang.value );
+		qLine.fin = 2; // parseFloat( inpFin.value );
+
+		qLine.orientation = 0; // parseInt( inpOrientation.value, 10 );
+		qLine.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
 		qLine.edges = null;
+
 
 		materialParameters = { color: 0xffffff * Math.random(), opacity: qLine.opacity, side: 2, transparent: true };
 
 
 		const choices = [ drawBox, drawL, drawT, drawH, drawIrregularPolygon ];
 
-		const choice = choices[ selFootprint.selectedIndex ];
+		const choice = choices[ 0 ];
 
 		qLine.polygonVertices = choice();
 
@@ -547,7 +558,7 @@
 
 		qLine.areaCheck = qLine.storeys * THREE.ShapeUtils.area( qLine.polygonVertices );
 
-		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - qLine.areaCheck ).toLocaleString();
+//		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - qLine.areaCheck ).toLocaleString();
 
 	}
 
@@ -762,7 +773,7 @@
 
 			const storey = new THREE.Group();
 
-			storey.name = 'storey-' + i;
+			storey.name = 'storey' + i;
 
 // draw interior floor/ceiling
 
@@ -774,7 +785,6 @@
 
 			const meshShape = new THREE.Mesh( geometryShape, material );
 			meshShape.position.z = -5;
-			meshShape.name = 'interior-celing';
 			storey.add( meshShape );
 //
 
@@ -789,109 +799,18 @@
 
 			storey.position.z = i * 3 * qLine.height;
 
-			if ( selFootprint.value !== 'Irregular polygon footprint' ) {
+//			if ( selFootprint.value !== 'Irregular polygon footprint' ) {
 
 				storey.position.x = qLine.length / -2;
 				storey.position.y = qLine.width / -2;
 
-			}
+//		}
 
 			qLine.group.add( storey );
 
 		}
 
 		scene.add( qLine.group );
-
-		addAngles();
-
-	}
-
-
-// now all geometry created and in position, so read local data, transform to world, and add as text to items;
-
-	function addAngles() {
-
-		qLine.group.updateMatrixWorld( true );
-
-		for ( var i = 0; i < qLine.group.children.length; i++ ) {
-
-			storey = qLine.group.children[ i ];
-
-//console.log( 'storey',  storey );
-
-			for ( let j = 0; j < storey.children.length; j++ ) {
-
-				item = storey.children[ j ];
-
-				if ( item instanceof THREE.Group  ) {
-
-//console.log( '', item.getWorldQuaternion() );
-
-					angle = Math.round( - item.getWorldRotation().z * 180 / Math.PI );
-
-					angle = angle < 0 ? angle + 360 : angle;
-
-
-					item.userData.angle = angle;
-
-					if ( storey.name === 'storey-0' && item.name.startsWith( 'wall-' ) ) {
-
-						drawText( item );
-
-//console.log( 'item', item.name, angle );
-
-					}
-
-				}
-
-
-			}
-
-		}
-
-	}
-
-
-
-	function drawText( obj ) {
-
-//console.log( 'qLine.orientation', qLine.orientation );
-
-		let material;
-
-		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
-		geometry.translate( obj.userData.length / 2, 8, 0 );
-
-		angle =  obj.userData.angle;
-
-		if ( angle >= 315 || angle < 45 ) {
-
-//console.log( 'north', angle, obj.name );
-
-			material = new THREE.MeshBasicMaterial( { map: north } );
-
-		} else if ( angle >= 45 && angle < 135 ) {
-
-//console.log( 'east', angle );
-
-			material = new THREE.MeshBasicMaterial( { map: east } );
-
-		} else if ( angle >= 135 && angle < 225 ) {
-
-//console.log( 'south', angle);
-
-			material = new THREE.MeshBasicMaterial( { map: south } );
-
-		} else {
-
-//console.log( 'west', angle );
-
-			material = new THREE.MeshBasicMaterial( { map: west } );
-
-		}
-
-		const mesh = new THREE.Mesh( geometry, material );
-		obj.add( mesh );
 
 	}
 
@@ -903,7 +822,6 @@
 		const material = new THREE.MeshPhongMaterial( materialParameters );
 
 		const walls = new THREE.Group();
-		walls.name = 'interior-walls';
 
 		for ( let i = 0; i < vertices.length - 1; i++ ) {
 
@@ -923,7 +841,7 @@
 			const meshShape = new THREE.Mesh( geometryShape, material );
 			meshShape.position.copy( vertex );
 			meshShape.rotation.z = angleRadians;
-			meshShape.name = 'interior-wall' + i;
+
 			walls.add( meshShape );
 
 		}
@@ -948,39 +866,63 @@
 
 			const length = vertex.distanceTo( vertexNext );
 
-			wall = drawOpenings( length, obj );
+			const wall = drawOpenings( length, obj );
 
-			wall.name = 'wall-' + i;
+			wall.name = 'wall' + i;
 			wall.position.copy( vertex );
 			wall.rotation.z = angleRadians;
-
 			wall.userData.length = length;
-//			wall.userData.angle = angleRadians;
-
-/*
-obj.updateMatrixWorld( true );
-wall.updateMatrixWorld( true );
-wall.updateMatrix( true );
-	worldQuaternion = new THREE.Quaternion();
-
-	worldQuaternion = wall.getWorldQuaternion();
-console.log( 'getQuaternion', angleRadians, worldQuaternion );
-//console.log( 'getWorldRotation', wall.getWorldRotation() );
-*/
-
+			wall.userData.angle = angleRadians;
 			wall.userData.lengthDelta = length / qLine.openings;
+
 			drawOverhangs( length, wall );
 			drawFins( length, wall );
 
-			if ( obj.name === 'storey-0' ) {
+			if ( obj.name === 'storey0' ) {
 
-//				drawText( wall );
+				drawText( wall );
 
 			}
 
 			obj.add( wall );
 
 		}
+
+	}
+
+
+
+	function drawText( obj ) {
+
+//console.log( '', obj);
+
+		let material;
+
+		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		geometry.translate( obj.userData.length / 2, 8, 0 );
+
+		angle = - obj.userData.angle + qLine.orientation * Math.PI / 180;
+
+		if ( angle > - Math.PI / 4 && angle < Math.PI / 4 ) {
+
+			material = new THREE.MeshBasicMaterial( { map: north } );
+
+		} else if ( angle > Math.PI / 4 && angle < 3 * Math.PI / 4 ) {
+
+			material = new THREE.MeshBasicMaterial( { map: east } );
+
+		} else if ( angle > - 3 * Math.PI / 4 && angle < Math.PI / 4 ) {
+
+			material = new THREE.MeshBasicMaterial( { map: west } );
+
+		} else {
+
+			material = new THREE.MeshBasicMaterial( { map: south } );
+
+		}
+
+		const mesh = new THREE.Mesh( geometry, material );
+		obj.add( mesh );
 
 	}
 
@@ -1079,9 +1021,9 @@ console.log( 'getQuaternion', angleRadians, worldQuaternion );
 
 			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, qLine.overhang );
 			const mesh = new THREE.Mesh( geometry, material );
-			mesh.name = 'overhang-' + i;
 			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta, qLine.overhang * 0.5, qLine.height * 0.5 + qLine.height * 0.5  * wwr );
 			obj.add( mesh );
+
 
 		}
 
@@ -1106,12 +1048,10 @@ console.log( 'getQuaternion', angleRadians, worldQuaternion );
 
 			const mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, qLine.fin * 0.5, qLine.height * 0.5 );
-			mesh.name = 'fin-1-' + i;
 			obj.add( mesh );
 
 			const mesh2 = mesh.clone();
 			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, qLine.fin * 0.5, qLine.height * 0.5  );
-			mesh.name = 'fin-2-' + i;
 			obj.add( mesh2 );
 
 		}
@@ -1140,7 +1080,7 @@ console.log( 'getQuaternion', angleRadians, worldQuaternion );
 			const geometryShape = new THREE.ShapeBufferGeometry( shape );
 
 			const meshShape = new THREE.Mesh( geometryShape, material );
-			meshShape.name = 'ceiling-' + i;
+
 			obj.add( meshShape );
 
 		}
@@ -1172,7 +1112,7 @@ console.log( 'getQuaternion', angleRadians, worldQuaternion );
 			const meshShape = new THREE.Mesh( geometryShape, material );
 			meshShape.position.copy( vertex1 );
 			meshShape.rotation.z = angleRadians;
-			meshShape.name = 'diagonal-' + i;
+
 			obj.add( meshShape );
 
 		}
@@ -1273,38 +1213,6 @@ console.log( 'getQuaternion', angleRadians, worldQuaternion );
 
 
 
-	function toggleEdges() {
-
-		if ( !qLine.edges ) {
-
-			qLine.group.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-
-					const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
-					qLine.edges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
-					qLine.edges.visible = false;
-
-					child.add( qLine.edges );
-
-				}
-
-			} );
-
-		}
-
-
-		qLine.group.traverse( function ( child ) {
-
-			if ( child instanceof THREE.LineSegments ) {
-
-				child.visible = child.visible === true ? false : true;
-
-			}
-
-		} );
-
-	}
 
 
 
