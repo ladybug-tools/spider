@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="Real-time 3D buildings in your browser with menu sliding" >
+<meta name=description content="Export generated building data to a gbXML file" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-19" >
+<meta name = "date" content = "2017-11-21" >
 <title>create exportable buildings r1.0 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -22,6 +22,7 @@
 	blockquote, pre { background-color: #eee; padding: 10px; }
 	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: white }
+	button { width: 100% }
 
 	iframe { width: 100%; }
 
@@ -50,6 +51,7 @@
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/vkiryukhin/vkBeautify/master/vkbeautify.js"></script>
 
 	<div id = "divMenu" >
 
@@ -67,111 +69,30 @@
 
 		<div id = "divContents" >
 
-<!--
-			<p>
-				<select id=selFootprint size=5 onchange=onSelectFootprint(); >
-					<option value=box-shape.png selected >Box footprint</option>
-					<option value=l-shape.png >L footprint</option>
-					<option value=t-shape.png >T footprint</option>
-					<option value=h-shape.png >H footprint</option>
-					<option >Irregular polygon footprint</option>
-				</select>
-			</p>
+		<p><button onclick=onSelectFootprint(0); >draw Box</button></p>
 
-			<div id=divArea >
-				Area <output id=outArea class=floatRight >10000</output>
-				<input type=range id=inpArea min=5000 max=50000 step=1000 value=10000 oninput=onUpdateFloorOrArea();outArea.value=value; >
-			</div>
+		<p><button onclick=onSelectFootprint(1); >draw L</button></p>
 
-			<div id=divLength >
-				Length <output id=outLength class=floatRight >100</output>
-				<input type=range id=inpLength min=50 max=300 step=10 value=100 oninput=onUpdateLength();outLength.value=value; >
-			</div>
+		<p><button onclick=onSelectFootprint(2); >draw T</button></p>
 
-			<div id=divWidth >
-				Width <output id=outWidth class=floatRight >100</output>
-				<input type=range id=inpWidth min=50 max=300 step=1 value=100 oninput=onUpdateWidth();outWidth.value=value; >
-			</div>
+		<p><button onclick=onSelectFootprint(3); >draw H</button></p>
 
-			<div id=divThickness >
-				Thickness <output id=outThickness class=floatRight >999999</output>
-					<input type=range id=inpThickness oninput=updateThickness();outThickness.value=value; >
-			</div>
+		<p><button onclick=onSelectFootprint(4); >draw Irregular Polygon</button></p>
 
-			<div title='floors?' >
-				Floors <output id=outStoreys class=floatRight >1</output>
-				<input type=range id=inpStoreys min=1 max=20 step=1 value=1 oninput=onUpdateFloorOrArea();outStoreys.value=value; />
-			</div>
+		<hr>
 
-			<div>
-				Floor area <output id=outAreaFloor class=floatRight >999999</output>
-			</div>
+		<div id = "divExportGbxml" >
 
-			<div>
-				Area check1 <output id=outAreaCheck1 class=floatRight >999999</output>
-			</div>
-			<div>
-				Area check2 <output id=outAreaCheck2 class=floatRight >999999</output>
-			</div>
+			<p> 1. <button onclick=getBuildingData(); >Get building data</button></p>
 
-			<p title="How low can you go?" >
-				Height <output id=outHeight class=floatRight >8</output>
-				<input type=range id=inpHeight min=8 max=20 step=1 value=10 oninput=updateDimensions();outHeight.value=value; />
-			</p>
+			<p> 2. <button onclick = checkGbxmlData(); >Check the data</button></p>
 
-			<p title="How low can you go?" >
-				Perimeter depth <output id=outPerimeterDepth class=floatRight >15</output>
-				<input type=range id=inpPerimeterDepth min=10 max=20 step=1 value=15 oninput=updateDimensions();outPerimeterDepth.value=value; />
-			</p>
+			<p> 2. <button onclick = saveFile(); >Save building data to file</button> </p>
 
-			<p title='How open can you be?' >
-				Number of openings <output id=outOpenings class=floatRight >5</output>
-				<input type=range id=inpOpenings min=1 max=10 step=1 value=5 oninput=updateDimensions();outOpenings.value=value; />
-			</p>
-
-
-			<p title='Let the sun shine in' >
-				Window to wall ratio in %<output id=outWindowWallRatio class=floatRight >40</output>
-				<input type=range id=inpWindowWallRatio min=1 max=99 step=1 value=40 oninput=updateDimensions();outWindowWallRatio.value=value; />
-			</p>
-
-			<p title='may your hangovers be shorter than your overhangs' >
-				Overhang depth <output id=outOverhang class=floatRight >3</output>
-				<input type=range id=inpOverhang min=0 max=10 step=0.5 value=3 oninput=updateDimensions();outOverhang.value=value; />
-			</p>
-
-			<p title='Are we Finnished yet?' >
-				Fin depth <output id=outFin class=floatRight >2</output>
-				<input type=range id=inpFin min=0 max=10 step=0.5 value=2 oninput=updateDimensions();outFin.value=value; />
-			</p>
-
-
-			<p title='Orientation?' >
-				Orientation <output id=outOrientation class=floatRight >0</output>
-				<input type=range id=inpOrientation min=0 max=350 step=10 value=0 oninput=updateDimensions();outOrientation.value=value; />
-			</p>
-
-			<p title='Opacity' >
-				Opacity <output id=outOpacity class=floatRight >85</output>
-				<input type=range id=inpOpacity min=0 max=100 step=10 value=85 oninput=updateDimensions();outOpacity.value=value; />
-			</p>
-
-			<p><button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button></p>
-
-			<p><button onclick=toggleEdges(); >toggle edges</button></p>
-
-			<p>Legend</p>
-
-			<div><img src=north.png height=18px > north</div>
-
-			<div><img src=east.png height=18px > east</div>
-
-			<div><img src=south.png height=18px > south</div>
-
-			<div><img src=west.png height=18px > west</div>
+			<div id = divExportContent ></div>
 
 		</div>
--->
+
 	</div>
 
 
@@ -179,10 +100,16 @@
 
 <script>
 
+	let json;
 
-	let qLine = {};
+	let gbxml;
+	let campus;
+
+	let theBuilding = {};
 
 	var materialParameters;
+
+	var checkWindow;
 
 	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
@@ -195,13 +122,15 @@
 
 	function init() {
 
+		const size = 256;
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.shadowMap.enabled = true;
-		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.setSize( size, size );
 
 		document.body.appendChild( renderer.domElement );
+		renderer.domElement.style.margin = '20px 0 0 340px';
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera = new THREE.PerspectiveCamera( 40, size / size, 1, 1000 );
 		camera.position.set( 100, -100, 100 );
 		camera.up.set( 0, 0, 1 );
 
@@ -254,311 +183,92 @@
 		west.center.set( 0.5, 0.5 );
 		west.rotation = Math.PI / 2;
 
-//		onSelectFootprint();
+		addAjacentBuildings();
 
-		qLine.area = 10000;
-		qLine.storeys = 1;
-		qLine.areaFloor = qLine.area / qLine.storeys;
+		onSelectFootprint();
 
-		qLine.length = 100;
-		qLine.width = 100;
-		qLine.thickness = 60;
-
-		updateDimensions();
 	}
 
 
-/*
-	function onSelectFootprint() {
+	function onSelectFootprint( choiceIndex = 0 ) {
 
-		outArea.value = inpArea.value = qLine.area = 10000;
-		outStoreys.value = inpStoreys.value = qLine.storeys = 1;
-		qLine.areaFloor = qLine.area / qLine.storeys;
-		outAreaFloor.value = Math.round( qLine.areaFloor ).toLocaleString();
+		theBuilding.area = 10000;
+		theBuilding.storeys = 2;
+		theBuilding.areaFloor = theBuilding.area / theBuilding.storeys;
+		Math.round( theBuilding.areaFloor ).toLocaleString();
 
-		if ( selFootprint.selectedIndex === 1 ) {
+		if ( choiceIndex === 1 ) {
 
-			outLength.value = inpLength.value = qLine.length = 100;
-			outWidth.value = inpWidth.value = qLine.width = 150;
-			outThickness.value = qLine.thickness = 50;
+			theBuilding.length = 100;
+			theBuilding.width = 150;
+			theBuilding.thickness = 50;
+			theBuilding.footprint = 'L';
 
-			const thk = qLine.thickness;
-			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) )
-			outAreaCheck1.innerHTML = 'L area: ' + Math.round(  area  ).toLocaleString();
+		} else if ( choiceIndex === 2 ) {
 
-		} else if ( selFootprint.selectedIndex === 2 ) {
+			theBuilding.length = 100;
+			theBuilding.width = 150;
+			theBuilding.thickness = 50;
+			theBuilding.footprint = 'T';
 
-			outLength.value = inpLength.value = qLine.length = 100;
-			outWidth.value = inpWidth.value = qLine.width = 150;
-			outThickness.value = qLine.thickness = 50;
+		} else if ( choiceIndex === 3 ) {
 
-			const thk = qLine.thickness;
-			const area = qLine.storeys * ( thk * qLine.length + thk * ( qLine.width - thk ) )
-			outAreaCheck1.innerHTML = 'T area: ' + Math.round(  area  ).toLocaleString();
+			theBuilding.length = 150;
+			theBuilding.width = 90;
+			theBuilding.thickness = 40;
+			theBuilding.footprint = 'H';
 
+		} else if ( choiceIndex === 0 ) {
 
-		} else if ( selFootprint.selectedIndex === 3 ) {
-
-			outLength.value = inpLength.value = qLine.length = 150;
-			outWidth.value = inpWidth.value = qLine.width = 90;
-			outThickness.value = qLine.thickness = 40;
-
-			const thk = qLine.thickness;
-			const area = qLine.storeys * ( 2 * thk * qLine.width ) + thk * ( qLine.length - 2 * thk )
-			outAreaCheck1.innerHTML = 'H area: ' + Math.round(  area  ).toLocaleString();
+			theBuilding.length = 100;
+			theBuilding.width = 100;
+			theBuilding.thickness = 60;
+			theBuilding.footprint = 'Box';
 
 		} else {
 
-			outLength.value = inpLength.value = qLine.length = 100;
-			outWidth.value = inpWidth.value = qLine.width = 100;
-			outThickness.value = qLine.thickness = 60;
+			theBuilding.length = 100;
+			theBuilding.width = 100;
+			theBuilding.thickness = 60;
+			theBuilding.footprint = 'Polygon';
 
 		}
 
-
-// ui
-		if ( selFootprint.selectedIndex === 0 ) {
-
-			divThickness.style.display = 'none';
-			divWidth.style.display = 'none';
-
-		} else if ( selFootprint.selectedIndex === 4 ) {
-
-			divThickness.style.display = 'none';
-			divWidth.style.display = 'none';
-			divArea.style.display = 'none';
-			divLength.style.display = 'none';
-
-		} else {
-
-			divThickness.style.display = '';
-			divWidth.style.display = '';
-			divArea.style.display = '';
-			divLength.style.display = '';
-
-		}
-
-		updateDimensions();
-
-	}
-
-/*
-
-	function onUpdateFloorOrArea(){
-
-		const areaNow = qLine.area;
-		const storeysNow = qLine.storeys;
-		const lengthNow = qLine.length;
-		const widthNow = qLine.width;
-
-		areaNew = parseInt( inpArea.value, 10 );
-		storeysNew = parseInt( inpStoreys.value, 10 );
-		areaFloorNew = areaNew / storeysNew;
-//console.log( '', areaNew, storeysNew, areaFloorNew );
-
-		const areaTemp = areaNow * storeysNew / storeysNow;
-		const ratio = Math.sqrt( areaNew / areaTemp );
-//console.log( '', areaTemp, ratio );
-
-		const lengthNew = Math.round( ratio * lengthNow );
-		qLine.length = lengthNew;
-		inpLength.value = lengthNew;
-		outLength.value = Math.round( lengthNew );
-
-		if ( selFootprint.selectedIndex === 0 || selFootprint.selectedIndex === 4 ) { // box
-
-			widthNew = areaNew / ( lengthNew * storeysNew );
-//			qLine.width = widthNew;
-//			inpWidth.value = widthNew;
-//			outWidth.value = Math.round( widthNew );
-
-
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {
-
-			thicknessNew = Math.round( ratio * qLine.thickness );
-			qLine.thickness = thicknessNew;
-			outThickness.value = thicknessNew;
-
-			const widthNew = ( ( areaFloorNew - thicknessNew * lengthNew ) / thicknessNew + thicknessNew );
-//			qLine.width = widthNew;
-//			inpWidth.value = widthNew;
-//			outWidth.value = Math.round( widthNew );
-
-			const area = storeysNew * ( thicknessNew * lengthNew + thicknessNew * ( widthNew - thicknessNew ) )
-			outAreaCheck1.innerHTML = Math.round( area ).toLocaleString();
-
-		} else if ( selFootprint.selectedIndex === 3 ) {
-
-			const thicknessNew = Math.round( ratio * qLine.thickness );
-			qLine.thickness = thicknessNew;
-			outThickness.value = thicknessNew;
-
-			widthNew = ( areaFloorNew - thicknessNew * ( lengthNew - 2 * thicknessNew ) ) / ( 2 * thicknessNew );
-
-			const area = storeysNew * ( ( 2 * thicknessNew * widthNew ) + thicknessNew * ( lengthNew - 2 * thicknessNew ) );
-			outAreaCheck1.innerHTML = 'H: ' + Math.round( area ).toLocaleString();
-
-		}
-
-		qLine.width = widthNew;
-		inpWidth.value = widthNew;
-		outWidth.value = Math.round( widthNew );
-
-		qLine.area = areaNew;
-		outArea.value = Math.round( areaNew ).toLocaleString();
-
-		qLine.areaFloor = areaFloorNew;
-		outAreaFloor.value = Math.round( areaFloorNew ).toLocaleString();
-
-		qLine.storeys = storeysNew;
-		inpStoreys.value = storeysNew;
-
-		updateDimensions();
+		updateDimensions( choiceIndex );
 
 	}
 
 
 
-	function onUpdateLength(){
-
-		const lengthNew = parseInt( inpLength.value, 10 );;
-		qLine.length = lengthNew;
-
-		if ( selFootprint.selectedIndex === 0 ) { // box
-
-			const widthNew = qLine.areaFloor / lengthNew;
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
-
-			const thk = qLine.thickness;
-			const widthNew = ( ( qLine.areaFloor - thk * lengthNew ) / thk + thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		} else if ( selFootprint.selectedIndex === 3 ) {  // H
-
-			const thk = qLine.thickness;
-			const widthNew = ( qLine.areaFloor - thk * ( lengthNew - 2 * thk ) ) / ( 2 * thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		}
-
-		updateDimensions();
-
-	}
+	function updateDimensions( choiceIndex = 0 ) {
 
 
-	function onUpdateWidth(){
+		theBuilding.storeyHeight = 10; //parseInt( inpHeight.value, 10 );
+		theBuilding.perimeterDepth = 15; //parseInt( inpPerimeterDepth.value, 10 );
+		theBuilding.openings = 5; // parseInt( inpOpenings.value, 10 );
+		theBuilding.wwr = 40; // parseInt( inpWindowWallRatio.value, 10 );
 
-		const widthNew = parseInt( inpWidth.value, 10 );;
-		qLine.width = widthNew;
+		theBuilding.overhang = 3; // parseFloat( inpOverhang.value );
+		theBuilding.fin = 2; // parseFloat( inpFin.value );
 
-		if ( selFootprint.selectedIndex === 0 ) { // box
+		theBuilding.orientation = 0; // parseInt( inpOrientation.value, 10 );
+		theBuilding.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
+		theBuilding.edges = null;
 
-// never gets here
-
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
-
-			const thk = qLine.thickness;
-			const lengthNew = ( qLine.areaFloor - thk * ( widthNew - thk ) ) / ( thk );
-
-			qLine.length = lengthNew;
-			inpLength.value = lengthNew;
-			outLength.value = Math.round( lengthNew );
-
-		} else if ( selFootprint.selectedIndex === 3 ) {  // H
-
-			const thk = qLine.thickness;
-			const lengthNew = ( qLine.areaFloor - 2 * thk * widthNew ) / thk + 2 * thk;
-
-			qLine.length = lengthNew;
-			inpLength.value = lengthNew;
-			outLength.value = Math.round( lengthNew );
-
-		}
-
-		updateDimensions();
-
-	}
-
-
-
-	function updateThickness() {
-
-		const thicknessNew = parseInt( inpThickness.value, 10 );;
-		qLine.thickness = thicknessNew;
-
-		if ( selFootprint.selectedIndex === 0 ) { // box
-
-// never gets here
-
-		} else if ( selFootprint.selectedIndex === 1 || selFootprint.selectedIndex === 2 ) {  // L & T
-
-			const thk = qLine.thickness;
-
-			const widthNew = ( ( qLine.areaFloor - thk * qLine.length ) / thk + thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		} else if ( selFootprint.selectedIndex === 3 ) {  // H
-
-			const thk = qLine.thickness;
-
-			const widthNew = ( qLine.areaFloor - thk * ( qLine.length - 2 * thk ) ) / ( 2 * thk );
-
-			qLine.width = widthNew;
-			inpWidth.value = widthNew;
-			outWidth.value = Math.round( widthNew );
-
-		}
-
-		updateDimensions();
-
-	}
-
-*/
-
-
-	function updateDimensions() {
-
-
-		qLine.height = 10; //parseInt( inpHeight.value, 10 );
-		qLine.perimeterDepth = 15; //parseInt( inpPerimeterDepth.value, 10 );
-		qLine.openings = 5; // parseInt( inpOpenings.value, 10 );
-		qLine.wwr = 40; // parseInt( inpWindowWallRatio.value, 10 );
-
-		qLine.overhang = 3; // parseFloat( inpOverhang.value );
-		qLine.fin = 2; // parseFloat( inpFin.value );
-
-		qLine.orientation = 0; // parseInt( inpOrientation.value, 10 );
-		qLine.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
-		qLine.edges = null;
-
-
-		materialParameters = { color: 0xffffff * Math.random(), opacity: qLine.opacity, side: 2, transparent: true };
+		materialParameters = { color: 0xffffff * Math.random(), opacity: theBuilding.opacity, side: 2, transparent: true };
 
 
 		const choices = [ drawBox, drawL, drawT, drawH, drawIrregularPolygon ];
 
-		const choice = choices[ 0 ];
+		const choice = choices[ choiceIndex ];
 
-		qLine.polygonVertices = choice();
+		theBuilding.polygonVertices = choice();
 
 		updateGeometry();
 
-		qLine.areaCheck = qLine.storeys * THREE.ShapeUtils.area( qLine.polygonVertices );
+		theBuilding.areaCheck = theBuilding.storeys * THREE.ShapeUtils.area( theBuilding.polygonVertices );
 
-//		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - qLine.areaCheck ).toLocaleString();
+//		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - theBuilding.areaCheck ).toLocaleString();
 
 	}
 
@@ -566,8 +276,8 @@
 
 	function drawBox() {
 
-		const len = qLine.length;
-		const wid = qLine.width;
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
 
 		const verticesBox = [ v( len, 0, 0 ), v( 0, 0, 0 ), v( 0, wid, 0 ), v( len, wid, 0 ), v( len, 0, 0 ) ];
 
@@ -576,10 +286,10 @@
 		geometry.vertices = verticesPolygon;
 		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 
-		qLine.polygon = new THREE.Line( geometry, material );
-		qLine.polygon.name = 'polygon - box';
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - box';
 
-		scene.add( qLine.polygon );
+		scene.add( theBuilding.polygon );
 */
 
 		return verticesBox;
@@ -590,9 +300,9 @@
 
 	function drawL() {
 
-		const len = qLine.length;
-		const wid = qLine.width;
-		const thk = qLine.thickness;
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
 
 		const verticesL = [
 			v( len, 0, 0 ),
@@ -609,10 +319,10 @@
 		geometry.vertices = verticesPolygon;
 		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 
-		qLine.polygon = new THREE.Line( geometry, material );
-		qLine.polygon.name = 'polygon - L';
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - L';
 
-		scene.add( qLine.polygon );
+		scene.add( theBuilding.polygon );
 */
 
 		return verticesL;
@@ -623,9 +333,9 @@
 
 	function drawT() {
 
-		const len = qLine.length;
-		const wid = qLine.width;
-		const thk = qLine.thickness;
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
 
 		const verticesT = [
 			v( len, 0, 0 ),
@@ -644,10 +354,10 @@
 		geometry.vertices = verticesT;
 		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 
-		qLine.polygon = new THREE.Line( geometry, material );
-		qLine.polygon.name = 'polygon - T';
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - T';
 
-		scene.add( qLine.polygon );
+		scene.add( theBuilding.polygon );
 */
 
 		return verticesT;
@@ -658,9 +368,9 @@
 
 	function drawH() {
 
-		const len = qLine.length;
-		const wid = qLine.width;
-		const thk = qLine.thickness;
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
 
 		const verticesH = [
 			v( len - thk, 0.5 * ( wid - thk ), 0 ),
@@ -683,10 +393,10 @@
 		geometry.vertices = verticesH;
 		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 
-		qLine.polygon = new THREE.Line( geometry, material );
-		qLine.polygon.name = 'polygon - H';
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - H';
 
-		scene.add( qLine.polygon );
+		scene.add( theBuilding.polygon );
 */
 
 		return verticesH;
@@ -721,9 +431,9 @@
 		geometry.vertices = verticesPolygon;
 		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
 
-		qLine.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon = new THREE.Line( geometry, material );
 
-		scene.add( qLine.polygon );
+		scene.add( theBuilding.polygon );
 */
 
 		return verticesPolygon;
@@ -734,11 +444,11 @@
 
 	function updateGeometry() {
 
-		scene.remove( qLine.group );
+		scene.remove( theBuilding.group );
 
-		if ( qLine.group ) {
+		if ( theBuilding.group ) {
 
-			qLine.group.traverse( function ( child ) {
+			theBuilding.group.traverse( function ( child ) {
 
 				if ( child.geometry ) {
 
@@ -753,75 +463,119 @@
 
 		}
 
-		qLine.group = new THREE.Group();
-		qLine.group.userData.openings = [];
+		theBuilding.group = new THREE.Group();
+		theBuilding.group.userData.openings = [];
 
-		const vertices = qLine.polygonVertices;
-		const verticesOffset = offsetPoints( qLine.group, vertices, -qLine.perimeterDepth, 0 );
-		qLine.group.rotation.z = - qLine.orientation * Math.PI / 180;
+		const vertices = theBuilding.polygonVertices;
+		const verticesOffset = offsetPoints( theBuilding.group, vertices, -theBuilding.perimeterDepth, 0 );
+		theBuilding.group.rotation.z = - theBuilding.orientation * Math.PI / 180;
 
 /*
 		const geometryOffset = new THREE.Geometry();
 		geometryOffset.vertices = verticesOffset;
 		const materialOffset = new THREE.LineBasicMaterial( { color: 'red' } );
 		const lineOffset = new THREE.Line( geometryOffset, materialOffset );
-		qLine.group.add( lineOffset );
+		theBuilding.group.add( lineOffset );
 */
 
 
-		for ( var i = 0; i < qLine.storeys; i++ ) {
+		for ( var i = 0; i < theBuilding.storeys; i++ ) {
 
 			const storey = new THREE.Group();
 
-			storey.name = 'storey' + i;
+			storey.name = 'storey-' + ( i + 1 );
 
 // draw interior floor/ceiling
 
-			const shape = new THREE.Shape( verticesOffset );
-			const geometryShape = new THREE.ShapeBufferGeometry( shape );
+			const ceilings = new THREE.Group();
+			ceilings.name = 'ceilings';
+			storey.add( ceilings );
+
+			const shapeOffset = new THREE.Shape( verticesOffset );
+			const geometryShapeOffset = new THREE.ShapeBufferGeometry( shapeOffset );
 
 			materialParameters.color = 0xffffff * Math.random();
 			const material = new THREE.MeshPhongMaterial( materialParameters );
 
-			const meshShape = new THREE.Mesh( geometryShape, material );
-			meshShape.position.z = -5;
-			storey.add( meshShape );
+			const meshCeiling = new THREE.Mesh( geometryShapeOffset, material );
+			meshCeiling.position.z = -5;
+			meshCeiling.name = 'ceiling-1-interior';
+			meshCeiling.userData.angle = 90 + theBuilding.orientation;
+
+			ceilings.add( meshCeiling );
+
+			drawCeilings( vertices, verticesOffset, ceilings );
 //
 
-			shapesOffset = drawVerticalShapes( verticesOffset, storey );
-			storey.add( shapesOffset ); // do this below too...
+			const interiorWalls = new THREE.Group();
+			interiorWalls.name = 'interior-walls';
+			storey.add( interiorWalls );
 
-			drawHorizontalShapes( vertices, verticesOffset, storey );
+			drawInteriorWalls( verticesOffset, interiorWalls );
 
-			drawVerticalBisectors( vertices, verticesOffset, storey );
+			const interiorWallsDiagonal = new THREE.Group();
+			interiorWallsDiagonal.name = 'interior-walls-diagonal';
+			storey.add( interiorWallsDiagonal );
+
+			drawInteriorWallsDiagonal( vertices, verticesOffset, interiorWallsDiagonal );
 
 			drawExteriorWalls( vertices, storey );
 
-			storey.position.z = i * 3 * qLine.height;
+			storey.position.z = i * 3 * theBuilding.storeyHeight;
 
-//			if ( selFootprint.value !== 'Irregular polygon footprint' ) {
+			if ( theBuilding.footprint !== 'Polygon' ) {
 
-				storey.position.x = qLine.length / -2;
-				storey.position.y = qLine.width / -2;
-
-//		}
-
-			qLine.group.add( storey );
+				storey.position.x = - theBuilding.length / 2;
+				storey.position.y = - theBuilding.width / 2;
 
 		}
 
-		scene.add( qLine.group );
+			theBuilding.group.add( storey );
+
+		}
+
+		scene.add( theBuilding.group );
+
+		addAngles();
 
 	}
 
 
 
-	function drawVerticalShapes( vertices, obj ) {
+	function drawCeilings( vertices1, vertices2, obj ) {
 
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
 
-		const walls = new THREE.Group();
+		for ( var i = 0; i < vertices1.length - 1 ; i++ ) {
+
+			const verticesShape = [
+
+				vertices1[ i ],
+				vertices2[ i ],
+				vertices2[ i + 1 ],
+				vertices1[ i + 1 ]
+
+			];
+
+			const shape = new THREE.Shape( verticesShape );
+			const geometryShape = new THREE.ShapeBufferGeometry( shape );
+
+			const meshShape = new THREE.Mesh( geometryShape, material );
+			meshShape.name = 'ceiling-' + ( i + 2 );
+			meshShape.userData = 90 + theBuilding.orientation;
+			obj.add( meshShape );
+
+		}
+
+	}
+
+
+
+	function drawInteriorWalls( vertices, obj ) {
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
 
 		for ( let i = 0; i < vertices.length - 1; i++ ) {
 
@@ -832,7 +586,7 @@
 
 			const length = vertex.distanceTo( vertexNext );
 
-			const verticesShape = [ v2( 0, 0 ), v2( length, 0 ), v2( length, qLine.height ), v2( 0, qLine.height ) ];
+			const verticesShape = [ v2( 0, 0 ), v2( length, 0 ), v2( length, theBuilding.storeyHeight ), v2( 0, theBuilding.storeyHeight ) ];
 
 			const shape = new THREE.Shape( verticesShape );
 			const geometryShape = new THREE.ShapeBufferGeometry( shape );
@@ -841,12 +595,153 @@
 			const meshShape = new THREE.Mesh( geometryShape, material );
 			meshShape.position.copy( vertex );
 			meshShape.rotation.z = angleRadians;
+			meshShape.name = 'interior-wall-' + ( i + 1 );
 
-			walls.add( meshShape );
+			obj.add( meshShape );
 
 		}
 
-		return walls;
+	}
+
+
+
+	function drawInteriorWallsDiagonal( vertices1, vertices2, obj ) {
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		for ( let i = 0; i < vertices1.length - 1; i++ ) {
+
+			const vertex1 = vertices1[ i ];
+			const vertex2 = vertices2[ i ];
+			const angleVector = vertex2.clone().sub( vertex1 );
+			const angleRadians = Math.atan2( angleVector.y, angleVector.x );
+
+			const length = vertex1.distanceTo( vertex2 );
+
+			const verticesShape = [ v2( 0, 0 ), v2( length, 0 ), v2( length, theBuilding.storeyHeight ), v2( 0, theBuilding.storeyHeight ) ];
+
+			const shape = new THREE.Shape( verticesShape );
+			const geometryShape = new THREE.ShapeBufferGeometry( shape );
+			geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+
+			const meshShape = new THREE.Mesh( geometryShape, material );
+			meshShape.position.copy( vertex1 );
+			meshShape.rotation.z = angleRadians;
+			meshShape.name = 'interior-wall-' + ( i + 1 ) + '-diagonal';
+			obj.add( meshShape );
+
+		}
+
+	}
+
+
+
+// now all geometry created and in position, so read local data, transform to world, and add as text to items;
+
+	function addAngles() {
+
+		theBuilding.group.updateMatrixWorld( true );
+
+
+		theBuilding.group.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && !child.name.startsWith( 'ceiling' ) ) {
+
+					let angle = Math.round( - child.getWorldRotation().z * 180 / Math.PI );
+
+					angle = angle < 0 ? angle + 360 : angle;
+
+					child.userData.angle = angle;
+//console.log( 'ang', angle );
+
+			}
+
+		} );
+
+
+		for ( var i = 0; i < theBuilding.group.children.length; i++ ) {
+
+			storey = theBuilding.group.children[ i ];
+
+//console.log( 'storey',  storey );
+
+			for ( let j = 0; j < storey.children.length; j++ ) {
+
+				item = storey.children[ j ];
+
+				if ( item instanceof THREE.Group || item instanceof THREE.Mesh ) {
+
+//console.log( '', item.getWorldQuaternion() );
+
+					angle = Math.round( - item.getWorldRotation().z * 180 / Math.PI );
+
+					angle = angle < 0 ? angle + 360 : angle;
+
+
+					item.userData.angle = angle;
+
+					if ( storey.name === 'storey-1' && item.name.startsWith( 'wall-' ) ) {
+
+						drawText( item );
+
+//console.log( 'item', item.name, angle );
+
+					}
+
+				}
+
+
+			}
+
+		}
+
+
+
+	}
+
+
+
+	function drawText( obj ) {
+
+//console.log( 'theBuilding.orientation', theBuilding.orientation );
+
+		let material;
+
+		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		geometry.translate( obj.userData.length / 2, 8, 0 );
+
+		angle = obj.userData.angle;
+
+		if ( angle >= 315 || angle < 45 ) {
+
+//console.log( 'north', angle, obj.name );
+
+			material = new THREE.MeshBasicMaterial( { map: north } );
+
+		} else if ( angle >= 45 && angle < 135 ) {
+
+//console.log( 'east', angle );
+
+			material = new THREE.MeshBasicMaterial( { map: east } );
+
+		} else if ( angle >= 135 && angle < 225 ) {
+
+//console.log( 'south', angle);
+
+			material = new THREE.MeshBasicMaterial( { map: south } );
+
+		} else {
+
+//console.log( 'west', angle );
+
+			material = new THREE.MeshBasicMaterial( { map: west } );
+
+		}
+
+		const mesh = new THREE.Mesh( geometry, material );
+
+		obj.add( mesh );
 
 	}
 
@@ -868,19 +763,20 @@
 
 			const wall = drawOpenings( length, obj );
 
-			wall.name = 'wall' + i;
+			wall.name = 'wall-' + i;
 			wall.position.copy( vertex );
 			wall.rotation.z = angleRadians;
+
 			wall.userData.length = length;
 			wall.userData.angle = angleRadians;
-			wall.userData.lengthDelta = length / qLine.openings;
+			wall.userData.lengthDelta = length / theBuilding.openings;
 
 			drawOverhangs( length, wall );
 			drawFins( length, wall );
 
-			if ( obj.name === 'storey0' ) {
+			if ( obj.name === 'storey-0' ) {
 
-				drawText( wall );
+//				drawText( wall );
 
 			}
 
@@ -892,56 +788,20 @@
 
 
 
-	function drawText( obj ) {
-
-//console.log( '', obj);
-
-		let material;
-
-		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
-		geometry.translate( obj.userData.length / 2, 8, 0 );
-
-		angle = - obj.userData.angle + qLine.orientation * Math.PI / 180;
-
-		if ( angle > - Math.PI / 4 && angle < Math.PI / 4 ) {
-
-			material = new THREE.MeshBasicMaterial( { map: north } );
-
-		} else if ( angle > Math.PI / 4 && angle < 3 * Math.PI / 4 ) {
-
-			material = new THREE.MeshBasicMaterial( { map: east } );
-
-		} else if ( angle > - 3 * Math.PI / 4 && angle < Math.PI / 4 ) {
-
-			material = new THREE.MeshBasicMaterial( { map: west } );
-
-		} else {
-
-			material = new THREE.MeshBasicMaterial( { map: south } );
-
-		}
-
-		const mesh = new THREE.Mesh( geometry, material );
-		obj.add( mesh );
-
-	}
-
-
-
 	function drawOpenings( length, obj ) {
 
-		const lengthDelta = length / qLine.openings;
-		const height = qLine.height;
-		const wwr = qLine.wwr / 100;
-
-		const hgt05 = qLine.height * 0.5;
+		const lengthDelta = length / theBuilding.openings;
+		const storeyHeight = theBuilding.storeyHeight;
+		const wwr = theBuilding.wwr / 100;
+		const height = storeyHeight;
+		const hgt05 = theBuilding.storeyHeight * 0.5;
 
 		let holes = [];
 		const wall = new THREE.Group();
 
 //single shape with multiple openings??
 
-		const len05 = qLine.length * 0.5;
+		const len05 = theBuilding.length * 0.5;
 
 		verticesWall = [
 			v( len05, hgt05, 0 ),
@@ -956,6 +816,7 @@
 			v( length, height, 0 ),
 			v( 0, height, 0 ),
 		];
+
 		const shape = new THREE.Shape( verticesWall );
 
 		const lenD05 = lengthDelta * 0.5;
@@ -968,7 +829,7 @@
 		];
 
 
-		for ( let i = 0; i < qLine.openings; i++ ) {
+		for ( let i = 0; i < theBuilding.openings; i++ ) {
 /*
 			const geometryLine = geometryBoundary.clone()
 			geometryLine.translate( i * lengthDelta - length * 0.5 + len05, 0, 5 );
@@ -1008,9 +869,9 @@
 
 	function drawOverhangs( length, obj ) {
 
-		if ( qLine.overhang < 0.5 ) { return; }
+		if ( theBuilding.overhang < 0.5 ) { return; }
 
-		const wwr = qLine.wwr / 100;
+		const wwr = theBuilding.wwr / 100;
 
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
@@ -1019,11 +880,11 @@
 
 			const lengthDelta = obj.userData.lengthDelta;
 
-			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, qLine.overhang );
+			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, theBuilding.overhang );
 			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta, qLine.overhang * 0.5, qLine.height * 0.5 + qLine.height * 0.5  * wwr );
+			mesh.name = 'overhang-' + i;
+			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta, theBuilding.overhang * 0.5, theBuilding.storeyHeight * 0.5 + theBuilding.storeyHeight * 0.5  * wwr );
 			obj.add( mesh );
-
 
 		}
 
@@ -1033,9 +894,9 @@
 
 	function drawFins( length, obj ) {
 
-		if ( qLine.fin < 0.5 ) { return; }
+		if ( theBuilding.fin < 0.5 ) { return; }
 
-		const wwr = qLine.wwr / 100;
+		const wwr = theBuilding.wwr / 100;
 
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
@@ -1043,82 +904,22 @@
 		for ( let i = 0; i < obj.children[ 0 ].userData.holes.length; i++ ) {
 
 			const lengthDelta = obj.userData.lengthDelta;
-			const geometry = new THREE.PlaneBufferGeometry( qLine.height * wwr, qLine.fin );
+			const geometry = new THREE.PlaneBufferGeometry( theBuilding.storeyHeight * wwr, theBuilding.fin );
 			geometry.rotateY( Math.PI / 2 );
 
 			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, qLine.fin * 0.5, qLine.height * 0.5 );
+			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, theBuilding.fin * 0.5, theBuilding.storeyHeight * 0.5 );
+			mesh.name = 'fin-1-' + i;
 			obj.add( mesh );
 
 			const mesh2 = mesh.clone();
-			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, qLine.fin * 0.5, qLine.height * 0.5  );
+			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, theBuilding.fin * 0.5, theBuilding.storeyHeight * 0.5  );
+			mesh.name = 'fin-2-' + i;
 			obj.add( mesh2 );
 
 		}
 
 	}
-
-
-
-	function drawHorizontalShapes( vertices1, vertices2, obj ) {
-
-		materialParameters.color = 0xffffff * Math.random();
-		const material = new THREE.MeshPhongMaterial( materialParameters );
-
-		for ( var i = 0; i < vertices1.length - 1 ; i++ ) {
-
-			const verticesShape = [
-
-				vertices1[ i ],
-				vertices2[ i ],
-				vertices2[ i + 1 ],
-				vertices1[ i + 1 ]
-
-			];
-
-			const shape = new THREE.Shape( verticesShape );
-			const geometryShape = new THREE.ShapeBufferGeometry( shape );
-
-			const meshShape = new THREE.Mesh( geometryShape, material );
-
-			obj.add( meshShape );
-
-		}
-
-	}
-
-
-
-	function drawVerticalBisectors( vertices1, vertices2, obj ) {
-
-		materialParameters.color = 0xffffff * Math.random();
-		const material = new THREE.MeshPhongMaterial( materialParameters );
-
-		for ( let i = 0; i < vertices1.length - 1; i++ ) {
-
-			const vertex1 = vertices1[ i ];
-			const vertex2 = vertices2[ i ];
-			const angleVector = vertex2.clone().sub( vertex1 );
-			const angleRadians = Math.atan2( angleVector.y, angleVector.x );
-
-			const length = vertex1.distanceTo( vertex2 );
-
-			const verticesShape = [ v2( 0, 0 ), v2( length, 0 ), v2( length, qLine.height ), v2( 0, qLine.height ) ];
-
-			const shape = new THREE.Shape( verticesShape );
-			const geometryShape = new THREE.ShapeBufferGeometry( shape );
-			geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
-
-			const meshShape = new THREE.Mesh( geometryShape, material );
-			meshShape.position.copy( vertex1 );
-			meshShape.rotation.z = angleRadians;
-
-			obj.add( meshShape );
-
-		}
-
-	}
-
 
 
 
@@ -1213,9 +1014,6 @@
 
 
 
-
-
-
 	function toggleNav() {
 
 		const width = getComputedStyle( document.documentElement ).getPropertyValue( '--mnu-width' );
@@ -1239,11 +1037,11 @@
 
 
 	function onWindowResize() {
-
-		camera.aspect = window.innerWidth / window.innerHeight;
+		size = 256;
+		camera.aspect = size / size;
 		camera.updateProjectionMatrix();
 
-		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.setSize( size, size );
 
 //console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
@@ -1256,6 +1054,465 @@
 		requestAnimationFrame( animate );
 		renderer.render( scene, camera );
 		controls.update();
+
+	}
+
+
+/////////////////////////////////////
+
+
+	function addAjacentBuildings() {
+
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 ); // use scale to set size
+		const material = new THREE.MeshPhongMaterial();
+		const meshAdjacent = new THREE.Mesh( geometry, material );
+
+		meshAdjacent.name = 'building-adjacent';
+		meshAdjacent.scale.set( 20, 20, 100 ); // scale is easier to deal with than geometry vertices
+		meshAdjacent.position.set( 0, 80, 50 );
+		scene.add( meshAdjacent );
+
+	}
+
+
+//////////////////////////////////////
+
+
+
+	function getBuildingData() {
+
+		initExportGbxml();
+
+
+		getBuildingStoreys();
+
+		getSurfaces();
+
+		getSpaces();
+
+		getZones();
+
+console.log( 'json', json.gbXML );
+
+		divJson = document.body.appendChild( document.createElement( 'div' ) );
+		divJson.style.cssText = 'height: 100%; overflow: auto;  width: 800px; position: absolute; right: 30px; top: 20px;' ; 
+
+		divJson.innerHTML = '<textarea id=txtJson style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
+
+
+	}
+
+
+
+	function initExportGbxml() {
+
+		json = {
+
+			gbXML: {
+					"@xmlns": "http://www.gbxml.org/schema", 
+					"@xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+					"@xsi:schemaLocation": "http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd",
+					"@xmlns:xhtml": "http://www.w3.org/1999/xhtml",
+					"@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+					"@useSIUnitsForResults": "true",
+					"@SurfaceReferenceLocation": "Centerline",
+					"@temperatureUnit": "F",
+					"@lengthUnit": "Feet",
+					"@areaUnit": "SquareFeet",
+					"@volumeUnit": "CubicMeters",
+					"@version": "6.01",
+
+				Campus: {
+
+					"@id" : "Facility",
+					DaylightSavings: true,
+					Description: 'Generated by Ladybug-Tools/Spider/Build Well',
+					Name: 'shapeBox',
+
+					Location: {
+						CADModelAzimuth: 0,
+						Elevation: 0,
+						Latitude: 37.796,
+						Longitude: -122.398,
+						Name: 'Financial District Redevelopment Area',
+						ZipcodeOrPostalCode: 94111
+					},
+
+					Building: {
+						"@id": 1,
+						"@buildingType": "Office",
+						"BuildingStorey": [],
+						"Space": []
+					},
+
+					Surface: [],
+
+				},
+				Zone: [],
+				DocumentHistory: []
+
+			}
+
+
+		}
+
+/*
+		campus = {};
+
+// area and volume need figuring out. Are they givens or calculated at run time?
+
+		campus.area = 5000;
+		campus.buildingId = 1;
+		campus.cadModelAzimuth = 0;
+
+		campus.elevation = 000000;
+
+		campus.locationName = 'San Francisco CA United States';
+
+		campus.opacity = 90;
+		campus.orientation = 0;
+
+
+//		campus.storeys = 1; // + Math.floor( 4 * Math.random() );
+//		campus.storeyHeight = 10;
+		campus.streetAddress = '440 Davis Court';
+
+		campus.wwr = 40 + Math.floor( 40 * Math.random() );
+		theBuilding.spaces = [];
+		theBuilding.zones = [];
+		theBuilding.name = 'theBuilding';
+
+		buildings = getBuildings();
+*/
+
+	}
+
+
+
+	function getBuildings() {
+
+		let buildings = [];
+
+		for ( let child of scene.children ) {
+
+			if ( child.name.includes( 'uilding' ) && child.visible === true ) {
+
+				buildings.push( child );
+
+			}
+
+		}
+
+		return buildings;
+
+	}
+
+
+
+	function getBuildingStoreys() {
+
+		const storeys = json.gbXML.Campus.Building.BuildingStorey;
+
+		for ( let i = 0; i < theBuilding.storeys; i++ ) {
+
+			const storey = storeys[ i ];
+
+			const obj = {
+
+					"@id": "storey-" + ( i + 1 ),
+					"Name": "storey-" + ( i + 1 ),
+					"Level": ( i * theBuilding.storeyHeight )
+
+				}
+
+			storeys.push( obj );
+
+		}
+
+	}
+
+
+
+	function getSpaces() {
+
+		const spaces = json.gbXML.Campus.Building.Space;
+
+		for ( let i = 0; i < theBuilding.storeys; i++ ) {
+
+			const space = spaces[ i ];
+
+			const obj = {
+
+					"@id": "space-" + ( i + 1 ),
+					"@buildingStoreyIdRef": 999999,
+					"@zoneIdRef": 999999,
+					"conditionType": "HeatedAndCooled",
+					"Name": "space-" + ( i + 1 ),
+					"Description": "internal space",
+					"Area": 999999,
+					"Volume": 999999
+
+				}
+
+			spaces.push( obj );
+
+		}
+
+	}
+
+
+
+	function getSurfaces() {
+
+//console.log( 'storey', theBuilding.group.children[ 0 ] );
+
+		const surfaces = json.gbXML.Campus.Surface;
+
+		const ceilings = theBuilding.group.children[0].getObjectByName( 'ceilings' );
+		const interiorWalls = theBuilding.group.children[0].getObjectByName( 'interior-walls' );
+		const interiorWallsDiagonal = theBuilding.group.children[0].getObjectByName( 'interior-walls-diagonal' );
+
+		const spacesPerStorey = ceilings.children.length;
+
+		let surfaceCount = 1;
+		let spaceCount = 1;
+
+		for ( let i = 0; i < theBuilding.storeys; i++ ) {
+
+			for ( let j = 0; j < spacesPerStorey; j++ ) {
+
+				const surfaceCeiling = {
+
+					"@surfaceType": "ceiling",
+
+					"@id": "surface-" + surfaceCount,
+					"Name": "storey-" + ( i + 1 ) + '-space-' + spaceCount,
+
+					"RectangularGeometry": {
+						"Azimuth": 90 //ceilings.children[ j ].userData.angle
+					},
+
+					"CADOjectId": "none",
+					"AdjacentSpaceId": {
+						"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
+					},
+					"PlanarGeometry": {
+						"PolyLoop": []
+					}
+
+				};
+
+				surfaceCount ++;
+
+				surfaces.push( surfaceCeiling );
+
+
+				if ( j < interiorWalls.children.length ) {
+
+					const surfaceIteriorWall = {
+
+						"@surfaceType": "InteriorWall",
+						"@id": "surface-" + surfaceCount,
+						"Name": 'storey-' + ( i + 1 ) + '-' + interiorWalls.children[ j ].name + '-space-' + spaceCount,
+						"RectangularGeometry": {
+							"Azimuth": interiorWalls.children[ j ].userData.angle
+						},
+						"CADOjectId": "none",
+						"AdjacentSpaceId": {
+							"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
+						},
+						"PlanarGeometry": {
+							"PolyLoop": []
+						}
+					};
+
+					surfaceCount ++;
+
+					surfaces.push( surfaceIteriorWall );
+
+				}
+
+
+				if ( j < interiorWallsDiagonal.children.length ) {
+
+					const surfaceInteriorWallDiagonal = {
+
+						"@surfaceType": "InteriorWall",
+						"@id": "surface-" + surfaceCount,
+						"Name": 'storey-' + ( i + 1 ) + '-' + interiorWalls.children[ j ].name + '-space-' + spaceCount,
+						"RectangularGeometry": {
+							"Azimuth": interiorWalls.children[ j ].userData.angle
+						},
+						"CADOjectId": "none",
+						"AdjacentSpaceId": {
+							"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
+						},
+						"PlanarGeometry": {
+							"PolyLoop": []
+						}
+					};
+
+					surfaceCount ++;
+
+					surfaces.push( surfaceInteriorWallDiagonal );
+
+				}
+
+				spaceCount ++;
+
+			}
+
+		}
+
+	}
+
+
+
+
+	function getZones() {
+
+	}
+
+
+/////////////////
+
+
+https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
+
+
+	function createXML ( oObjTree ) {
+
+		function loadObjTree (oParentEl, oParentObj) {
+
+			var vValue, oChild;
+
+			if ( oParentObj.constructor === String || oParentObj.constructor === Number || oParentObj.constructor === Boolean ) {
+
+				oParentEl.appendChild(oNewDoc.createTextNode(oParentObj.toString())); /* verbosity level is 0 or 1 */
+
+				if ( oParentObj === oParentObj.valueOf()) { return; }
+
+			} else if (oParentObj.constructor === Date) {
+
+				oParentEl.appendChild(oNewDoc.createTextNode(oParentObj.toGMTString()));
+
+			}
+
+			for ( var sName in oParentObj ) {
+
+			if (isFinite(sName)) { continue; } /* verbosity level is 0 */
+
+				vValue = oParentObj[sName];
+
+				if (sName === "keyValue") {
+
+					if (vValue !== null && vValue !== true) { 
+
+						oParentEl.appendChild(oNewDoc.createTextNode(vValue.constructor === Date ? vValue.toGMTString() : String(vValue))); 
+
+					}
+
+				} else if (sName === "keyAttributes") { /* verbosity level is 3 */
+
+					for (var sAttrib in vValue) { oParentEl.setAttribute(sAttrib, vValue[sAttrib]); }
+
+				} else if (sName.charAt(0) === "@") {
+
+					oParentEl.setAttribute(sName.slice(1), vValue);
+
+				} else if (vValue.constructor === Array ) {
+
+					for (var nItem = 0; nItem < vValue.length; nItem++ ) {
+
+						oChild = oNewDoc.createElement(sName );
+						loadObjTree(oChild, vValue[nItem]);
+						oParentEl.appendChild(oChild);
+
+					}
+
+				} else {
+
+					oChild = oNewDoc.createElement(sName);
+
+					if ( vValue instanceof Object ) {
+
+						loadObjTree(oChild, vValue);
+
+					} else if (vValue !== null && vValue !== true ) {
+
+						oChild.appendChild(oNewDoc.createTextNode( vValue.toString() ) );
+//						oChild.innerHTML += oNewDoc.createTextNode( vValue.toString());
+
+					}
+
+					oParentEl.appendChild(oChild);
+
+				}
+
+			}
+
+		}
+
+		const oNewDoc = document.implementation.createDocument( "", "", null);
+
+		loadObjTree( oNewDoc, oObjTree );
+
+		return oNewDoc;
+
+	}
+
+
+
+	function checkGbxmlData() {
+
+		if ( !json ){ alert( 'get building data first' ); return; }
+
+		xml = createXML ( json );
+
+console.log( '', xml  );
+
+//		divContents.appendChild( xml )
+
+// https://stackoverflow.com/questions/9898698/convert-xml-to-string-and-append-to-page
+
+		text = 'lines checked: '; // + lines.length + ' - errors found:' + errors + n;
+
+//		checkWindow = window.open( '', '', 'left=400,width=800,height=400,top=200' );
+
+//		checkWindow.document.write( '<textarea id=txt style=width:100%;height:100%; >' + json + '</textarea>' );
+//		checkWindow.document.title = 'gbXML error check';
+
+		var xmlText = new XMLSerializer().serializeToString( xml );
+		var xmlTextNode = document.createTextNode( xmlText );
+
+		txtJson.appendChild( xmlTextNode );
+
+		txtJson.value = vkbeautify.xml( document.getElementById("txtJson").value );
+
+//console.log( '', checkWindow );
+
+	}
+
+////////////////////
+
+	function saveFile() {
+
+		if( !txtJson.value ) { alert( 'Get some building data first.' ); return; }
+
+		let blob;
+
+		blob = new Blob( [ txtJson.value ] );
+
+		let a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		const fileName = theBuilding.footprint.toLowerCase() + '-' + theBuilding.area + 'area-' + theBuilding.storeys + 'flr-' + theBuilding.orientation + 'deg' + '.xml';
+		a.download = fileName;
+
+		a.click();
+//		delete a;
+		a = null;
+
+		if ( window.checkWindow !== undefined ) { window.checkWindow.close(); }
 
 	}
 
