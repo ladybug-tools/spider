@@ -8,7 +8,7 @@
 _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 
-## Full Screen: [create exportable buildings]( http://www.ladybug.tools/spider/#cookbook/create-exportable-buildings/create-exportable-buildings.html )
+## Full Screen: [create exportable buildings]( http://www.ladybug.tools/spider/cookbook/create-exportable-buildings/create-exportable-buildings.html )
 
 Export generated building data to a gbXML file
 ## Concept
