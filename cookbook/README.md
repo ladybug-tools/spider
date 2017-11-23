@@ -4,3 +4,6 @@
 
 # Cookbook Read Me
 
+## Coding Style
+
+These scripts here are cook book style example code
