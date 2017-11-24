@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "List and view all the files in all the folders" >
+<meta name = "description" content = "List and view all the files in all the folders. File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name = "keywords" content = "JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-20" >
-<title>Spider Table of Contents</title>
+<title>Ladybug Tools / Spider Table of Contents</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -113,14 +113,16 @@
 	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 
 	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
-	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
+
+	const urlGitHubSource = 'https://github.com/' + user + repo;
+//	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
 
 	init();
 
 	function init() {
 
-		urlInfo.href = 'https://github.com/' + user + repo;
+		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -134,10 +136,10 @@
 
 	function onHashChange() {
 
-// set breadcrumbs
-
 		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
+
+		setBreadcrumbs( url.slice( 0, url.lastIndexOf( '/' ) ) ); 
 
 		if ( ulc.endsWith( '.md' ) ) {
 
@@ -150,14 +152,13 @@
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
-			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
+			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' style=margin:20px; >';
 
 		} else {
 
 			requestFile( urlGitHubPage + url, callbackToTextarea );
 
 		}
-
 
 	}
 
@@ -176,12 +177,12 @@
 
 
 	function setBreadcrumbs( path ) {
-//console.log( 'pat', path );
+
 		let txt = 
 			'<b>' +
 				'<a href=JavaScript:getFolderContents(); >' + 
 
-					( pathRepo ? pathRepo : '&#x2302' ) + 
+					( pathRepo ? pathRepo : '<span style=font-size:24px >&#x2302</span>' ) + 
 
 				'</a> &raquo; ' +
 			'</b>';

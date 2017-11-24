@@ -10,7 +10,7 @@ Here are links to some of the latest files. R7 is that latest release and is sti
 Note that. currently, the functionality is spread across multiple files. This is for testing and early-stage development purposes only. Sometime in the near future there will be a script that assembles multiple scripts into a single user experience.
 
  
-<iframe class=iframeReadMe src=./r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=.=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 _gbXML Viewer R7 Basic_
 
 ***

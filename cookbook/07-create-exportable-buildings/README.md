@@ -1,23 +1,46 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#cookbook/create-exportable-buildings/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#cookbook/07-create-exportable-buildings/README.md "View file as a web page." ) </span>
 
 
 # [create exportable buildings Read Me]( #README.md )
 
 
-<iframe src=http://www.ladybug.tools/spider/cookbook/create-exportable-buildings/create-exportable-buildings.html width=100% height=600px ></iframe>
+<iframe src=http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings.html width=100% height=600px ></iframe>
 _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 
-## Full Screen: [create exportable buildings]( http://www.ladybug.tools/spider/cookbook/create-exportable-buildings/create-exportable-buildings.html )
+## Full Screen: [create exportable buildings]( http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings.html )
 
-Export generated building data to a gbXML file
+
 ## Concept
+
+Export generated 3D building data to a gbXML file
+
+* Select a building footprint and pre-determined parameters
+* Generate and view a JSON file with building data
+* Generate, view and export a gbXML fie with the building data
+* Designed to help build test cases
+
+## To Do
+
+* 2017-11-23 ~ Generate buildings via and API and/or location.hash parameters
+
 
 
 ## Links of Interest
 
 
 ## Change Log
+
+
+### 2017-11-23 ~ Theo
+
+10:30
+
+11:31
+* Add resize 3D view window
+16:52
+* PolyLoop/Coordinates are a WIP
+
 
 ### 2017-11-22 ~ Theo
 
