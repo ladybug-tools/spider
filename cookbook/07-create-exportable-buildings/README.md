@@ -32,6 +32,14 @@ Export generated 3D building data to a gbXML file
 ## Change Log
 
 
+### 2017-11-24 ~ Theo
+
+16:07
+R1.2
+* Numerous export gbXML fixes
+	* Can now export files that are readable by gbXML Viewer
+
+
 ### 2017-11-23 ~ Theo
 
 10:30

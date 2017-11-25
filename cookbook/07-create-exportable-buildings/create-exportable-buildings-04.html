@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Export self-generated 3D building data to a gbXML files" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-24" >
-<title>create exportable buildings r1.2 </title>
+<meta name = "date" content = "2017-11-23" >
+<title>create exportable buildings r1.1 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -1246,7 +1246,6 @@ console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 
 		const surfaces = json.gbXML.Campus.Surface;
 
-/*
 		let ceilings = theBuilding.group.children[ 0 ].getObjectByName( 'storey-1' );
 console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 		const spacesPerStorey = ceilings.children.length;
@@ -1254,7 +1253,6 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 		const interiorWalls = theBuilding.group.children[0].getObjectByName( 'interior-walls' );
 		const interiorWallsDiagonal = theBuilding.group.children[0].getObjectByName( 'interior-walls-diagonal' );
 		const exteriorWalls = theBuilding.group.children[0].getObjectByName( 'exterior-walls' );
-*/
 
 
 		let surfaceCount = theBuilding.surfaceCount = 1;
@@ -1268,18 +1266,31 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 
 		const storeys = theBuilding.group.children;
 
-
 		for ( let i = 0; i < storeys.length; i++ ) {
 
-			const storey = storeys[ i ];
+			const storey = storeys.children[ i ];
+
+//console.log( 'storey', storey );
 
 			const ceilings = storey.children[ 0 ];
 
-			for ( let j = 0; j < ceilings.children.length; j++ ) {
+			for ( let j = 0; j < spacesPerStorey; j++ ) {
 
 				const ceiling = ceilings.children[ j ];
 
 				const ceilingGeometry = new THREE.Geometry().fromBufferGeometry( ceiling.geometry );
+/*
+				ceiling.userData.verticesWorld = [];
+
+				for ( let k = 0; k < ceilingGeometry.vertices.length; k++ ) {
+
+					const vector = ceilingGeometry.vertices[ k ].clone();
+					ceiling.userData.verticesWorld.push( ceiling.localToWorld( vector ) );
+
+				}
+
+//console.log( ceiling.name, ceiling.userData.verticesWorld );
+*/
 
 				const surfaceCeiling = {
 
@@ -1302,50 +1313,59 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 
 				};
 
+//				getPolyLoop( surfaceCeiling, ceiling.userData.verticesWorld );
 				getPolyLoop2( surfaceCeiling, ceiling );
 
 				surfaceCount ++;
 
 				surfaces.push( surfaceCeiling );
 
-			}
 
 
-			const interiorWalls = storey.children[ 1 ];
+				if ( j < interiorWalls.children.length ) {
 
-			for ( let j = 0; j < interiorWalls.children.length; j++ ) {
+					const interiorWall = interiorWalls.children[ j ];
+/*
+					const interiorWallGeometry = new THREE.Geometry().fromBufferGeometry( interiorWall.geometry );
 
-				const interiorWall = interiorWalls.children[ j ];
+					interiorWall.userData.verticesWorld = [];
 
-				const surfaceInteriorWall = {
+					for ( let k = 0; k < interiorWallGeometry.vertices.length; k++ ) {
 
-					"@surfaceType": "InteriorWall",
-					"@id": "surface-" + surfaceCount,
-					"Name": 'storey-' + ( i + 1 ) + '-' + interiorWall.name + '-space-' + spaceCount,
-					"RectangularGeometry": {
-						"Azimuth": interiorWall.userData.angle
-					},
-					"CADOjectId": "none",
-					"AdjacentSpaceId": {
-						"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
-					},
-					"PlanarGeometry": {
-						"PolyLoop": []
+						const vector = interiorWallGeometry.vertices[ k ].clone();
+						interiorWall.userData.verticesWorld.push( interiorWall.localToWorld( vector ) );
+
 					}
-				};
+*/
 
-				getPolyLoop2( surfaceInteriorWall, interiorWall );
+					const surfaceInteriorWall = {
 
-				surfaceCount ++;
+						"@surfaceType": "InteriorWall",
+						"@id": "surface-" + surfaceCount,
+						"Name": 'storey-' + ( i + 1 ) + '-' + interiorWall.name + '-space-' + spaceCount,
+						"RectangularGeometry": {
+							"Azimuth": interiorWall.userData.angle
+						},
+						"CADOjectId": "none",
+						"AdjacentSpaceId": {
+							"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
+						},
+						"PlanarGeometry": {
+							"PolyLoop": []
+						}
+					};
 
-				surfaces.push( surfaceInteriorWall );
+//					getPolyLoop( surfaceInteriorWall, interiorWall.userData.verticesWorld );
+					getPolyLoop2( surfaceInteriorWall, interiorWall );
 
-			}
+					surfaceCount ++;
+
+					surfaces.push( surfaceInteriorWall );
+
+				}
 
 
-			const interiorWallsDiagonal = storey.children[ 2 ];
-
-			for ( let j = 0; j < interiorWallsDiagonal.children.length; j++ ) {
+				if ( j < interiorWallsDiagonal.children.length ) {
 
 					const interiorDiagonalWall = interiorWallsDiagonal.children[ j ];
 
@@ -1376,7 +1396,6 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 				}
 
 
-/*
 
 				if ( j < exteriorWalls.children.length ) {
 
@@ -1414,11 +1433,28 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 				}
 
 				spaceCount ++;
-*/
+
+			}
 
 		}
 
 	}
+
+	function xxxxgetWorldCoordinates( obj ) {
+
+		const objNewGeometry = new THREE.Geometry().fromBufferGeometry( obj.geometry );
+
+		obj.userData.verticesWorld = [];
+
+		for ( let k = 0; k < objNewGeometry.vertices.length; k++ ) {
+
+			const vector = objNewGeometry.vertices[ k ].clone();
+			obj.userData.verticesWorld.push( obj.localToWorld( vector ) );
+
+		}
+
+	}
+
 
 
 	function getPolyLoop2( surface, mesh ) {

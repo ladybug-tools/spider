@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Export self-generated 3D building data to a gbXML files" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-24" >
-<title>create exportable buildings r1.2 </title>
+<meta name = "date" content = "2017-11-23" >
+<title>create exportable buildings r1.1 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -1246,7 +1246,6 @@ console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 
 		const surfaces = json.gbXML.Campus.Surface;
 
-/*
 		let ceilings = theBuilding.group.children[ 0 ].getObjectByName( 'storey-1' );
 console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 		const spacesPerStorey = ceilings.children.length;
@@ -1254,7 +1253,7 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 		const interiorWalls = theBuilding.group.children[0].getObjectByName( 'interior-walls' );
 		const interiorWallsDiagonal = theBuilding.group.children[0].getObjectByName( 'interior-walls-diagonal' );
 		const exteriorWalls = theBuilding.group.children[0].getObjectByName( 'exterior-walls' );
-*/
+
 
 
 		let surfaceCount = theBuilding.surfaceCount = 1;
@@ -1264,22 +1263,32 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 		let zoneCount = theBuilding.zoneCount = 1;
 
 		theBuilding.group.updateMatrixWorld( true );
-//		theBuilding.group.updateMatrix();
+		theBuilding.group.updateMatrix();
 
-		const storeys = theBuilding.group.children;
+		for ( let i = 0; i < theBuilding.group.children.length; i++ ) {
 
+			const storey = theBuilding.group.children[ i ];
 
-		for ( let i = 0; i < storeys.length; i++ ) {
-
-			const storey = storeys[ i ];
+console.log( 'storey', storey );
 
 			const ceilings = storey.children[ 0 ];
 
-			for ( let j = 0; j < ceilings.children.length; j++ ) {
+			for ( let j = 0; j < spacesPerStorey; j++ ) {
 
 				const ceiling = ceilings.children[ j ];
 
 				const ceilingGeometry = new THREE.Geometry().fromBufferGeometry( ceiling.geometry );
+
+				ceiling.userData.verticesWorld = [];
+
+				for ( let k = 0; k < ceilingGeometry.vertices.length; k++ ) {
+
+					const vector = ceilingGeometry.vertices[ k ].clone();
+					ceiling.userData.verticesWorld.push( ceiling.localToWorld( vector ) );
+
+				}
+
+//console.log( ceiling.name, ceiling.userData.verticesWorld );
 
 				const surfaceCeiling = {
 
@@ -1302,60 +1311,37 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 
 				};
 
-				getPolyLoop2( surfaceCeiling, ceiling );
+				getPolyLoop( surfaceCeiling, ceiling.userData.verticesWorld );
 
 				surfaceCount ++;
 
 				surfaces.push( surfaceCeiling );
 
-			}
 
 
-			const interiorWalls = storey.children[ 1 ];
+				if ( j < interiorWalls.children.length ) {
 
-			for ( let j = 0; j < interiorWalls.children.length; j++ ) {
+					const interiorWall = interiorWalls.children[ j ];
 
-				const interiorWall = interiorWalls.children[ j ];
 
-				const surfaceInteriorWall = {
+					const interiorWallGeometry = new THREE.Geometry().fromBufferGeometry( interiorWall.geometry );
 
-					"@surfaceType": "InteriorWall",
-					"@id": "surface-" + surfaceCount,
-					"Name": 'storey-' + ( i + 1 ) + '-' + interiorWall.name + '-space-' + spaceCount,
-					"RectangularGeometry": {
-						"Azimuth": interiorWall.userData.angle
-					},
-					"CADOjectId": "none",
-					"AdjacentSpaceId": {
-						"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
-					},
-					"PlanarGeometry": {
-						"PolyLoop": []
+					interiorWall.userData.verticesWorld = [];
+
+					for ( let k = 0; k < interiorWallGeometry.vertices.length; k++ ) {
+
+						const vector = interiorWallGeometry.vertices[ k ].clone();
+						interiorWall.userData.verticesWorld.push( interiorWall.localToWorld( vector ) );
+
 					}
-				};
 
-				getPolyLoop2( surfaceInteriorWall, interiorWall );
-
-				surfaceCount ++;
-
-				surfaces.push( surfaceInteriorWall );
-
-			}
-
-
-			const interiorWallsDiagonal = storey.children[ 2 ];
-
-			for ( let j = 0; j < interiorWallsDiagonal.children.length; j++ ) {
-
-					const interiorDiagonalWall = interiorWallsDiagonal.children[ j ];
-
-					const surfaceInteriorDiagonalWall = {
+					const surfaceInteriorWall = {
 
 						"@surfaceType": "InteriorWall",
 						"@id": "surface-" + surfaceCount,
-						"Name": 'storey-' + ( i + 1 ) + '-' + interiorDiagonalWall.name + '-space-' + spaceCount,
+						"Name": 'storey-' + ( i + 1 ) + '-' + interiorWall.name + '-space-' + spaceCount,
 						"RectangularGeometry": {
-							"Azimuth": interiorDiagonalWall.userData.angle
+							"Azimuth": interiorWall.userData.angle
 						},
 						"CADOjectId": "none",
 						"AdjacentSpaceId": {
@@ -1364,23 +1350,47 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 						"PlanarGeometry": {
 							"PolyLoop": []
 						}
-
 					};
 
-					getPolyLoop2( surfaceInteriorDiagonalWall, interiorDiagonalWall );
+					getPolyLoop( surfaceInteriorWall, interiorWall.userData.verticesWorld );
 
 					surfaceCount ++;
 
-					surfaces.push( surfaceInteriorDiagonalWall );
+					surfaces.push( surfaceInteriorWall );
 
 				}
 
 
-/*
+				if ( j < interiorWallsDiagonal.children.length ) {
+
+					const surfaceInteriorWallDiagonal = {
+
+						"@surfaceType": "InteriorWall",
+						"@id": "surface-" + surfaceCount,
+						"Name": 'storey-' + ( i + 1 ) + '-' + interiorWallsDiagonal.children[ j ].name + '-space-' + spaceCount,
+						"RectangularGeometry": {
+							"Azimuth": interiorWallsDiagonal.children[ j ].userData.angle
+						},
+						"CADOjectId": "none",
+						"AdjacentSpaceId": {
+							"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
+						},
+						"PlanarGeometry": {
+							"PolyLoop": []
+						}
+					};
+
+					surfaceCount ++;
+
+					surfaces.push( surfaceInteriorWallDiagonal );
+
+				}
+
+
 
 				if ( j < exteriorWalls.children.length ) {
 
-					const exteriorWall = exteriorWalls.children[ j ];
+					exteriorWall = exteriorWalls.children[ j ];
 
 					const surfaceExteriorWall = {
 
@@ -1401,149 +1411,54 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 
 					};
 
-					getPolyLoop2( surfaceExteriorWall, exteriorWall );
-
-//					getOpenings( surfaceExteriorWall, exteriorWall );
+					getOpenings( surfaceExteriorWall, exteriorWall );
 
 					surfaceCount ++;
 
 					surfaces.push( surfaceExteriorWall );
 
-//					addOverHangsFins( surfaces, exteriorWall );
+					addOverHangsFins( surfaces, exteriorWall );
+
+//					surfaces.push( overHangs );
+
 
 				}
 
 				spaceCount ++;
-*/
+
+			}
 
 		}
 
 	}
 
 
-	function getPolyLoop2( surface, mesh ) {
+	function getPolyLoop( surface, vertices ) {
 
-// this function works OK but creates too many CartesianPoint elements.
-// See checkGbxmlData for search and replace fix
-
-// console.log( 'surface', surface );
-//console.log( 'mesh', mesh );
-
-		const meshNewGeometry = new THREE.Geometry().fromBufferGeometry( mesh.geometry );
-		const vertices = [];
-		const len = mesh.name.startsWith( 'exterior-wall' ) ? 4 : meshNewGeometry.vertices.length;
-console.log( mesh.name, len );
-		for ( let k = 0; k < len; k++ ) {
-//		for ( let k = 0; k < 4; k++ ) { // exterior walls have 12 vertices
-
-			const vector = meshNewGeometry.vertices[ k ].clone();
-			vertices.push( mesh.localToWorld( vector ) );
-
-		}
-
-		mesh.userData.verticesWorld = vertices;
-
-//console.log( 'vertices', vertices );
-
-		const cartesianPoint = [];
-
-		for ( let i = 0; i < vertices.length; i++ ) {
-
-			vertex = vertices[ i ];
-
-			const point = { CartesianPoint: [
-
-					{ Coordinate: Number( vertex.x.toFixed(4) ) },
-					{ Coordinate: Number( vertex.y.toFixed(4) ) },
-					{ Coordinate: Number( vertex.z.toFixed(4) ) }
-
-				]
-
-			};
-
-			surface.PlanarGeometry.PolyLoop.push( point );
-
-		}
-
-	}
-
-
-
-	function xxxgetPolyLoop( surface, vertices ) {
-
-// this function works OK but creates too many CartesianPoint elements.
-// See checkGbxmlData for search and replace fix
-
-//console.log( 'surface', surface );
-
-		const cartesianPoint = [];
-
-		for ( let i = 0; i < vertices.length; i++ ) {
-
-			vertex = vertices[ i ];
-
-			const point = { CartesianPoint: [
-
-					{ Coordinate: Number( vertex.x.toFixed(4) ) },
-					{ Coordinate: Number( vertex.y.toFixed(4) ) },
-					{ Coordinate: Number( vertex.z.toFixed(4) ) }
-
-				]
-
-			};
-
-			surface.PlanarGeometry.PolyLoop.push( point );
-
-		}
-
-	}
-
-
-	function zzzzgetPolyLoop( surface, vertices ) {
-
-// sandbox of fails
-
-//console.log( 'surface', surface );
+console.log( 'surface', surface );
 
 //		surface.PlanarGeometry.PolyLoop.
 
-		const cartesianPoint = []; //  { CartesianPoint: [] }; // { CartesianPoint: { Coordinate: [] } };
+		const cartesianPoint = []; // { CartesianPoint: { Coordinate: [] } };
 
 		for ( let i = 0; i < vertices.length; i++ ) {
 
 			vertex = vertices[ i ];
 
-			const point = [
+			const point = { CartesianPoint: [
 
-				{ Coordinate: Number( vertex.x.toFixed(4) ) },
-				{ Coordinate: Number( vertex.y.toFixed(4) ) },
-				{ Coordinate: Number( vertex.z.toFixed(4) ) }
+					{ Coordinate: Number( vertex.x.toFixed(4) ) },
+					{ Coordinate: Number( vertex.y.toFixed(4) ) },
+					{ Coordinate: Number( vertex.z.toFixed(4) ) }
 
-			 ];
+				]
+			};
 
 			cartesianPoint.push( point );
 
-//			obj = { CartesianPoint: cartesianPoint }
-
-//			surface.PlanarGeometry.PolyLoop.push( obj )
-
 		}
 
-
-		for ( var i = 0; i < vertices.length; i++ ) {
-
-			cp = { CartesianPoint: cartesianPoint[ i ] };
-
-			surface.PlanarGeometry.PolyLoop.push( cp );
-
-		}
-
-console.log( '', cartesianPoint );
-
-console.log( 'surf', surface.PlanarGeometry.PolyLoop );
-
-
-//		surface.PlanarGeometry = { PolyLoop: cartesianPoint };
+		surface.PlanarGeometry.PolyLoop = cartesianPoint;
 
 	}
 
@@ -1579,11 +1494,11 @@ console.log( 'surf', surface.PlanarGeometry.PolyLoop );
 
 
 
-	function addOverHangsFins( surfaces, mesh ) {
+	function addOverHangsFins( surfaces, obj ) {
 
-//console.log( 'wall', mesh.children );
+//console.log( 'wall', obj.children );
 
-		mesh.traverse( function ( child ) {
+		obj.traverse( function ( child ) {
 
 			if ( child.name !== 'azimuth-indicator' ) {
 
@@ -1593,14 +1508,12 @@ console.log( 'surf', surface.PlanarGeometry.PolyLoop );
 						"@id": "shade-" + theBuilding.shadeCount,
 						"Name": child.name,
 						"RectangularGeometry": {
-							"Azimuth": mesh.userData.angle
+							"Azimuth": obj.userData.angle
 						},
 						"PlanarGeometry": {
 							"PolyLoop": []
 						}
 				};
-
-				getPolyLoop2( surface, child );
 
 				surfaces.push( surface );
 
@@ -1669,7 +1582,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 				if ( oParentObj === oParentObj.valueOf()) { return; }
 
-			} else if ( oParentObj.constructor === Date) {
+			} else if (oParentObj.constructor === Date) {
 
 				oParentEl.appendChild(oNewDoc.createTextNode(oParentObj.toGMTString()));
 
@@ -1677,29 +1590,29 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 			for ( var sName in oParentObj ) {
 
-			if ( isFinite(sName)) { continue; } /* verbosity level is 0 */
+			if (isFinite(sName)) { continue; } /* verbosity level is 0 */
 
 				vValue = oParentObj[sName];
 
-				if ( sName === "keyValue") {
+				if (sName === "keyValue") {
 
-					if ( vValue !== null && vValue !== true) {
+					if (vValue !== null && vValue !== true) {
 
 						oParentEl.appendChild(oNewDoc.createTextNode(vValue.constructor === Date ? vValue.toGMTString() : String(vValue)));
 
 					}
 
-				} else if ( sName === "keyAttributes") { /* verbosity level is 3 */
+				} else if (sName === "keyAttributes") { /* verbosity level is 3 */
 
-					for ( var sAttrib in vValue) { oParentEl.setAttribute(sAttrib, vValue[sAttrib]); }
+					for (var sAttrib in vValue) { oParentEl.setAttribute(sAttrib, vValue[sAttrib]); }
 
-				} else if ( sName.charAt(0) === "@") {
+				} else if (sName.charAt(0) === "@") {
 
 					oParentEl.setAttribute(sName.slice(1), vValue);
 
-				} else if ( vValue.constructor === Array ) {
+				} else if (vValue.constructor === Array ) {
 
-					for ( var nItem = 0; nItem < vValue.length; nItem++ ) {
+					for (var nItem = 0; nItem < vValue.length; nItem++ ) {
 
 						oChild = oNewDoc.createElement(sName );
 						loadObjTree(oChild, vValue[nItem]);
@@ -1713,16 +1626,16 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 					if ( vValue instanceof Object ) {
 
-						loadObjTree( oChild, vValue);
+						loadObjTree(oChild, vValue);
 
-					} else if ( vValue !== null && vValue !== true ) {
+					} else if (vValue !== null && vValue !== true ) {
 
 						oChild.appendChild(oNewDoc.createTextNode( vValue.toString() ) );
 //						oChild.innerHTML += oNewDoc.createTextNode( vValue.toString());
 
 					}
 
-					oParentEl.appendChild( oChild);
+					oParentEl.appendChild(oChild);
 
 				}
 
@@ -1748,30 +1661,17 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		divGbxml.style.cssText = 'height: 90%;  width: 800px; position: absolute; right: 50px; top: 50px; z-index: 2; ' ;
 		divGbxml.innerHTML = '<textarea id=txtGbxml style=height:100%;width:100%; ></textarea>';
 
-		gbxml = createXML ( json );
+		xml = createXML ( json );
 
-//console.log( 'gbxml', gbxml  );
+console.log( 'xml', xml  );
 
 // https://stackoverflow.com/questions/9898698/convert-xml-to-string-and-append-to-page
 
-		const xmlText = new XMLSerializer().serializeToString( gbxml );
+		const xmlText = new XMLSerializer().serializeToString( xml );
 		const xmlTextNode = document.createTextNode( xmlText );
 
 		txtGbxml.appendChild( xmlTextNode );
-
-// the kludge to get around getPolyLoop fail
-
-		re = /\<\/CartesianPoint>\<CartesianPoint>/gi;
-
-		txtGbxml.value = txtGbxml.value.replace( re, '' )
-
-		re = /\<\/PolyLoop>\<PolyLoop>/gi;
-
-		txtGbxml.value = txtGbxml.value.replace( re, '' )
-
 		txtGbxml.value = formatXml( txtGbxml.value );
-
-
 
 	}
 
