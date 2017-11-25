@@ -4,14 +4,13 @@ To-Do List for Geometry Page:
 
 	1. Add roof slab.
 	2. Change orientation symbols.
-	3. Connect overhangs and fins.
-	4. Integrate hole code and single surface.
-	5. Activate Window Ratio.
-	6. x,y,z axis.
-	7. Edges on permanently.
-	8. Tighten up colors.
-	9. Make ortho view unchangable. 
-	10. Add dimensions in 2D text for Length, Width, and Thickeness.
+	3. Connect fins.
+	4. Activate Window Ratio.
+	5. x,y,z axis.
+	6. Edges on permanently.
+	7. Tighten up colors.
+	8. Make ortho view unchangable. 
+	9. Add dimensions in 2D text for Length, Width, and Thickeness.
 
 Envelope Page:
 
