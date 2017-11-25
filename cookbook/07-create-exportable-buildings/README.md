@@ -10,7 +10,7 @@ _txt_
 
 ## Full Screen: [create exportable buildings]( http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings.html )
 
-
+## Full Screen: [sample gbXML file viewer]( http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/test-gbxml-files/gbxml-viewer.html )
 
 
 ## Concept
