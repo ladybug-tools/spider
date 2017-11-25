@@ -11,6 +11,8 @@ _txt_
 ## Full Screen: [create exportable buildings]( http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings.html )
 
 
+
+
 ## Concept
 
 Export generated 3D building data to a gbXML file
@@ -31,6 +33,12 @@ Export generated 3D building data to a gbXML file
 
 ## Change Log
 
+
+### 2017-11-25 ~ Theo
+
+* Exporting exterior walls, overhangs and fins with point/vertices sequence so that things appear in 3D view and in gbXML viewer
+	* Creating geometry using BufferGeometry.setFromPoints << learned a new trick here
+* Add gbXML sample file viewer
 
 ### 2017-11-24 ~ Theo
 

@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Export self-generated 3D building data to a gbXML files" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-25" >
-<title>create exportable buildings r1.3 </title>
+<meta name = "date" content = "2017-11-24" >
+<title>create exportable buildings r1.2 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -143,10 +143,7 @@
 
 	function init() {
 
-		const size = 500;
-
-		divRender.style.cssText += ' height: 500px; ';
-
+		const size = 300;
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.shadowMap.enabled = true;
 		renderer.setSize( size, size );
@@ -228,8 +225,8 @@
 		theBuilding.openings = 2; // parseInt( inpOpenings.value, 10 );
 		theBuilding.wwr = 40; // parseInt( inpWindowWallRatio.value, 10 );
 
-		theBuilding.overhang = 5; // parseFloat( inpOverhang.value );
-		theBuilding.fin = 8; // parseFloat( inpFin.value );
+		theBuilding.overhang = 3; // parseFloat( inpOverhang.value );
+		theBuilding.fin = 2; // parseFloat( inpFin.value );
 
 		theBuilding.orientation = 0; // parseInt( inpOrientation.value, 10 );
 		theBuilding.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
@@ -900,27 +897,10 @@ console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 
 			const lengthDelta = obj.userData.lengthDelta;
 
-// looks like points and position calculations could be simplified
-
-			var points = [
-
-				v( lengthDelta * wwr, theBuilding.overhang, 0 ),
-				v( 0, theBuilding.overhang, 0 ),
-				v( 0, 0, 0 ),
-
-				v( lengthDelta * wwr, theBuilding.overhang, 0 ),
-				v( 0, 0, 0 ),
-				v( lengthDelta * wwr, 0, 0 )
-
-			];
-
-//			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, theBuilding.overhang );
-			const geometry = new THREE.BufferGeometry();
-			geometry.setFromPoints( points );
-
+			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, theBuilding.overhang );
 			const mesh = new THREE.Mesh( geometry, material );
 			mesh.name = 'overhang-' + i;
-			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta - lengthDelta * 0.5  * wwr, 0, theBuilding.storeyHeight * 0.5 + theBuilding.storeyHeight * 0.5  * wwr );
+			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta, theBuilding.overhang * 0.5, theBuilding.storeyHeight * 0.5 + theBuilding.storeyHeight * 0.5  * wwr );
 			obj.add( mesh );
 
 		}
@@ -941,32 +921,16 @@ console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 		for ( let i = 0; i < obj.userData.holes.length; i++ ) {
 
 			const lengthDelta = obj.userData.lengthDelta;
-
-			var points = [
-				v( 0, theBuilding.fin, theBuilding.storeyHeight * wwr ),
-				v( 0, 0, theBuilding.storeyHeight * wwr  ),
-				v( 0, 0, 0 ),
-
-				v( 0, theBuilding.fin, theBuilding.storeyHeight * wwr ),
-				v( 0, 0, 0 ),
-				v( 0, theBuilding.fin, 0 )
-
-			];
-
-//			const geometry = new THREE.PlaneBufferGeometry( theBuilding.storeyHeight * wwr, theBuilding.fin );
-			const geometry = new THREE.BufferGeometry();
-			geometry.setFromPoints( points );
-//			geometry.rotateY( Math.PI / 2 );
+			const geometry = new THREE.PlaneBufferGeometry( theBuilding.storeyHeight * wwr, theBuilding.fin );
+			geometry.rotateY( Math.PI / 2 );
 
 			const mesh = new THREE.Mesh( geometry, material );
-//			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, theBuilding.fin * 0.5, theBuilding.storeyHeight * 0.5 );
-			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr );
-
+			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, theBuilding.fin * 0.5, theBuilding.storeyHeight * 0.5 );
 			mesh.name = 'fin-1-' + i;
 			obj.add( mesh );
 
 			const mesh2 = mesh.clone();
-			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr  );
+			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, theBuilding.fin * 0.5, theBuilding.storeyHeight * 0.5  );
 			mesh.name = 'fin-2-' + i;
 			obj.add( mesh2 );
 
@@ -1295,7 +1259,7 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 		let shadeCount = theBuilding.shadeCount = 1;
 		let zoneCount = theBuilding.zoneCount = 1;
 
-//		theBuilding.group.updateMatrixWorld( true );
+		theBuilding.group.updateMatrixWorld( true );
 //		theBuilding.group.updateMatrix();
 
 		const storeys = theBuilding.group.children;
@@ -1408,44 +1372,45 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 				}
 
 
-			const exteriorWalls = storey.children[ 3 ];
+/*
 
-			for ( let j = 0; j < exteriorWalls.children.length; j++ ) {
+				if ( j < exteriorWalls.children.length ) {
 
-				const exteriorWall = exteriorWalls.children[ j ];
+					const exteriorWall = exteriorWalls.children[ j ];
 
-				const surfaceExteriorWall = {
+					const surfaceExteriorWall = {
 
-					"@surfaceType": "ExteriorWall",
-					"@id": "surface-" + surfaceCount,
-					"Name": 'storey-' + ( i + 1 ) + '-' + exteriorWalls.children[ j ].name + '-space-' + spaceCount,
-					"RectangularGeometry": {
-						"Azimuth": exteriorWalls.children[ j ].userData.angle
-					},
-					"CADOjectId": "none",
-					"AdjacentSpaceId": {
-						"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
-					},
-					"PlanarGeometry": {
-						"PolyLoop": []
-					},
-					"Opening": []
+						"@surfaceType": "ExteriorWall",
+						"@id": "surface-" + surfaceCount,
+						"Name": 'storey-' + ( i + 1 ) + '-' + exteriorWalls.children[ j ].name + '-space-' + spaceCount,
+						"RectangularGeometry": {
+							"Azimuth": exteriorWalls.children[ j ].userData.angle
+						},
+						"CADOjectId": "none",
+						"AdjacentSpaceId": {
+							"@spaceIdRef": "space-" + ( spaceCount + 1 ) // embellish
+						},
+						"PlanarGeometry": {
+							"PolyLoop": []
+						},
+						"Opening": []
 
-				};
+					};
 
-				getPolyLoop2( surfaceExteriorWall, exteriorWall );
+					getPolyLoop2( surfaceExteriorWall, exteriorWall );
 
-				surfaces.push( surfaceExteriorWall );
+//					getOpenings( surfaceExteriorWall, exteriorWall );
 
-				surfaceCount ++;
+					surfaceCount ++;
 
-				addOverHangsFins( surfaces, exteriorWall );
+					surfaces.push( surfaceExteriorWall );
 
-//				getOpenings( surfaceExteriorWall, exteriorWall );
+//					addOverHangsFins( surfaces, exteriorWall );
 
-			}
+				}
 
-			spaceCount ++;
+				spaceCount ++;
+*/
 
 		}
 
@@ -1455,17 +1420,17 @@ console.log( 'ceilings', theBuilding.group.children[ 0 ] );
 	function getPolyLoop2( surface, mesh ) {
 
 // this function works OK but creates too many CartesianPoint elements.
-// See checkGbxmlData below for temporary search and replace fix
+// See checkGbxmlData for search and replace fix
 
-//console.log( 'surface', surface );
-//console.log( 'mesh.geo', mesh.geometry );
+// console.log( 'surface', surface );
+//console.log( 'mesh', mesh );
 
 		const meshNewGeometry = new THREE.Geometry().fromBufferGeometry( mesh.geometry );
 		const vertices = [];
 		const len = mesh.name.startsWith( 'exterior-wall' ) ? 4 : meshNewGeometry.vertices.length;
 console.log( mesh.name, len );
-
 		for ( let k = 0; k < len; k++ ) {
+//		for ( let k = 0; k < 4; k++ ) { // exterior walls have 12 vertices
 
 			const vector = meshNewGeometry.vertices[ k ].clone();
 			vertices.push( mesh.localToWorld( vector ) );
@@ -1500,6 +1465,86 @@ console.log( mesh.name, len );
 
 
 
+	function xxxgetPolyLoop( surface, vertices ) {
+
+// this function works OK but creates too many CartesianPoint elements.
+// See checkGbxmlData for search and replace fix
+
+//console.log( 'surface', surface );
+
+		const cartesianPoint = [];
+
+		for ( let i = 0; i < vertices.length; i++ ) {
+
+			vertex = vertices[ i ];
+
+			const point = { CartesianPoint: [
+
+					{ Coordinate: Number( vertex.x.toFixed(4) ) },
+					{ Coordinate: Number( vertex.y.toFixed(4) ) },
+					{ Coordinate: Number( vertex.z.toFixed(4) ) }
+
+				]
+
+			};
+
+			surface.PlanarGeometry.PolyLoop.push( point );
+
+		}
+
+	}
+
+
+	function zzzzgetPolyLoop( surface, vertices ) {
+
+// sandbox of fails
+
+//console.log( 'surface', surface );
+
+//		surface.PlanarGeometry.PolyLoop.
+
+		const cartesianPoint = []; //  { CartesianPoint: [] }; // { CartesianPoint: { Coordinate: [] } };
+
+		for ( let i = 0; i < vertices.length; i++ ) {
+
+			vertex = vertices[ i ];
+
+			const point = [
+
+				{ Coordinate: Number( vertex.x.toFixed(4) ) },
+				{ Coordinate: Number( vertex.y.toFixed(4) ) },
+				{ Coordinate: Number( vertex.z.toFixed(4) ) }
+
+			 ];
+
+			cartesianPoint.push( point );
+
+//			obj = { CartesianPoint: cartesianPoint }
+
+//			surface.PlanarGeometry.PolyLoop.push( obj )
+
+		}
+
+
+		for ( var i = 0; i < vertices.length; i++ ) {
+
+			cp = { CartesianPoint: cartesianPoint[ i ] };
+
+			surface.PlanarGeometry.PolyLoop.push( cp );
+
+		}
+
+console.log( '', cartesianPoint );
+
+console.log( 'surf', surface.PlanarGeometry.PolyLoop );
+
+
+//		surface.PlanarGeometry = { PolyLoop: cartesianPoint };
+
+	}
+
+
+
 	function getOpenings( surface, obj ) {
 
 //console.log( 'wall', obj.userData.holes );
@@ -1507,8 +1552,6 @@ console.log( mesh.name, len );
 		holes = obj.userData.holes;
 
 		for ( var i = 0; i < holes.length; i++ ) {
-
-			hole = holes[ i ];
 
 			opening =
 				{
@@ -1521,17 +1564,6 @@ console.log( mesh.name, len );
 						"PolyLoop": []
 					}
 				};
-
-			geometry = new THREE.BufferGeometry();
-			geometry.setFromPoints( hole );
-		geometry.computeFaceNormals();
-		geometry.computeVertexNormals();
-			mesh = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
-			mesh.name = 'opening';
-
-//console.log( 'mesh', mesh );
-
-			getPolyLoop2( opening, mesh );
 
 			surface.Opening.push( opening );
 
