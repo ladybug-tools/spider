@@ -34,6 +34,14 @@ Export generated 3D building data to a gbXML file
 ## Change Log
 
 
+### 2017-11-26 ~ Theo
+
+* Calculating and adding openings as meshes
+	* Still have issues exporting the data to gbXML
+* Added preliminary Space and Zone elements to export function
+* Code clean-up
+
+
 ### 2017-11-25 ~ Theo
 
 * Exporting exterior walls, overhangs and fins with point/vertices sequence so that things appear in 3D view and in gbXML viewer

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="Create and export self-generated 3D building data to gbXML files" >
+<meta name=description content="Export self-generated 3D building data to a gbXML files" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-26" >
+<meta name = "date" content = "2017-11-25" >
 <title>create exportable buildings r1.4 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -82,9 +82,9 @@
 
 		<p><button onclick=onSelectFootprint(3); >draw H</button></p>
 
-		<p><button onclick=onSelectFootprint(4); >draw 3 story Box</button></p>
+		<p><button onclick=onSelectFootprint(); >draw Irregular Polygon</button></p>
 
-		<p><button onclick=onSelectFootprint(999); >draw Irregular Polygon</button></p>
+		<p><button onclick=onSelectFootprint(4); >draw 3 story Box</button></p>
 
 		<hr>
 
@@ -101,11 +101,11 @@
 
 			<p>Work-in-progress</p>
 
-			<p>Not yet processing adjacencies, area and volumes. ID creation still in infancy.</p>
+			<p>Not yet processing adjacencies or id numbering</p>
 
 			<p>But is creating, displaying and exporting all desired surface types and creating readable JSON and pretty-printed gbXML</p>
 
-			<p>View sample files with <a href="./test-gbxml-files/gbxml-viewer.html" target="_blank">Sample gbXML File Viewer</a></p>
+			<p>View sample files with <a href="http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/test-gbxml-files/gbxml-viewer.html" target="_blank">Sample gbXML File Viewer</a></p>
 
 			<hr>
 
@@ -212,21 +212,6 @@
 
 
 
-	function addAjacentBuildings() {
-
-		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 ); // use scale to set size
-		const material = new THREE.MeshPhongMaterial();
-		const meshAdjacent = new THREE.Mesh( geometry, material );
-
-		meshAdjacent.name = 'building-adjacent';
-		meshAdjacent.scale.set( 20, 20, 100 ); // scale is easier to deal with than geometry vertices
-		meshAdjacent.position.set( 0, 80, 50 );
-		scene.add( meshAdjacent );
-
-	}
-
-
-
 	function onSelectFootprint( choiceIndex = 0 ) {
 
 		theBuilding.area = 10000;
@@ -236,7 +221,7 @@
 
 		theBuilding.storeyHeight = 10; //parseInt( inpHeight.value, 10 );
 		theBuilding.perimeterDepth = 15; //parseInt( inpPerimeterDepth.value, 10 );
-		theBuilding.openingsPerWall = 2; // parseInt( inpOpenings.value, 10 );
+		theBuilding.openings = 2; // parseInt( inpOpenings.value, 10 );
 		theBuilding.wwr = 40; // parseInt( inpWindowWallRatio.value, 10 );
 
 		theBuilding.overhang = 5; // parseFloat( inpOverhang.value );
@@ -249,7 +234,7 @@
 		theBuilding.footprints = [ 'Box', 'L', 'T', 'H', 'Polygon' ];
 		materialParameters = { color: 0xffffff * Math.random(), opacity: theBuilding.opacity, side: 2, transparent: true };
 
-// Each button relates to a particular footprint and custom set of parameters
+
 		if ( choiceIndex === 0 ) {
 
 			theBuilding.length = 100;
@@ -286,7 +271,7 @@
 			theBuilding.footprint = 'Box';
 
 			theBuilding.storeys = 3;
-			theBuilding.openingsPerWall = 5; // parseInt( inpOpenings.value, 10 );
+			theBuilding.openings = 5; // parseInt( inpOpenings.value, 10 );
 			theBuilding.wwr = 80; // parseInt( inpWindowWallRatio.value, 10 );
 			theBuilding.overhang = 10; // parseFloat( inpOverhang.value );
 			theBuilding.fin = 8; // parseFloat( inpFin.value );
@@ -318,29 +303,11 @@
 
 		theBuilding.polygonVertices = choice();
 
-		updateTheBuilding();
+		updateGeometry();
 
 		theBuilding.areaCheck = theBuilding.storeys * THREE.ShapeUtils.area( theBuilding.polygonVertices );
 
 //		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - theBuilding.areaCheck ).toLocaleString();
-
-	}
-
-
-
-	function drawTestPolygon( vertices, name = 'test-polygon', color = 0x000000 ) {
-
-		const geometry = new THREE.Geometry();
-		geometry.vertices = vertices;
-		const material = new THREE.LineBasicMaterial( { color: color } );
-
-		scene.remove( theBuilding.polygon );
-
-		theBuilding.polygon = new THREE.Line( geometry, material );
-		theBuilding.polygon.name = name;
-		theBuilding.polygon.position.z = -20;
-
-		scene.add( theBuilding.polygon );
 
 	}
 
@@ -353,7 +320,16 @@
 
 		const verticesBox = [ v( len, 0, 0 ), v( 0, 0, 0 ), v( 0, wid, 0 ), v( len, wid, 0 ), v( len, 0, 0 ) ];
 
-		drawTestPolygon( verticesBox, 'polygon Box' );
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesPolygon;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - box';
+
+		scene.add( theBuilding.polygon );
+*/
 
 		return verticesBox;
 
@@ -377,7 +353,16 @@
 			v( len, 0, 0 )
 		];
 
-		drawTestPolygon( verticesL, 'polygon L' );
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesPolygon;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - L';
+
+		scene.add( theBuilding.polygon );
+*/
 
 		return verticesL;
 
@@ -403,7 +388,16 @@
 			v( len, 0, 0 )
 		];
 
-		drawTestPolygon( verticesT, 'polygon T' );
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesT;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - T';
+
+		scene.add( theBuilding.polygon );
+*/
 
 		return verticesT;
 
@@ -433,7 +427,16 @@
 			v( len - thk, 0.5 * ( wid - thk ), 0 )
 		];
 
-		drawTestPolygon( verticesH, 'polygon H' );
+/*
+		const geometry = new THREE.Geometry();
+		geometry.vertices = verticesH;
+		const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = 'polygon - H';
+
+		scene.add( theBuilding.polygon );
+*/
 
 		return verticesH;
 
@@ -462,7 +465,15 @@
 
 		verticesPolygon.push( verticesPolygon[ 0 ] );
 
-		drawTestPolygon( verticesPolygon, 'polygon irregular' );
+/*
+		geometry = new THREE.Geometry();
+		geometry.vertices = verticesPolygon;
+		material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		theBuilding.polygon = new THREE.Line( geometry, material );
+
+		scene.add( theBuilding.polygon );
+*/
 
 		return verticesPolygon;
 
@@ -470,7 +481,7 @@
 
 
 
-	function updateTheBuilding() {
+	function updateGeometry() {
 
 		scene.remove( theBuilding.group );
 
@@ -492,14 +503,20 @@
 		}
 
 		theBuilding.group = new THREE.Group();
-		theBuilding.group.userData.openingsPerWall = [];
+		theBuilding.group.userData.openings = [];
 
 		const vertices = theBuilding.polygonVertices;
 		const verticesOffset = offsetPoints( theBuilding.group, vertices, -theBuilding.perimeterDepth, 0 );
 		theBuilding.group.rotation.z = - theBuilding.orientation * Math.PI / 180;
 
-// overwrites previous polygon
-		drawTestPolygon( verticesOffset, 'polygon offset', 0xff0000 ); 
+/*
+		const geometryOffset = new THREE.Geometry();
+		geometryOffset.vertices = verticesOffset;
+		const materialOffset = new THREE.LineBasicMaterial( { color: 'red' } );
+		const lineOffset = new THREE.Line( geometryOffset, materialOffset );
+		theBuilding.group.add( lineOffset );
+*/
+
 
 		for ( var i = 0; i < theBuilding.storeys; i++ ) {
 
@@ -507,6 +524,7 @@
 
 			storey.name = 'storey-' + ( i + 1 );
 
+// draw interior floor/ceiling
 
 			const ceilings = new THREE.Group();
 			ceilings.name = storey.name;
@@ -527,7 +545,7 @@
 			ceilings.add( meshCeiling );
 
 			drawCeilings( vertices, verticesOffset, ceilings );
-
+//
 
 			const interiorWalls = new THREE.Group();
 			interiorWalls.name = 'interior-walls';
@@ -535,20 +553,17 @@
 
 			drawInteriorWalls( verticesOffset, interiorWalls );
 
-
 			const interiorWallsDiagonal = new THREE.Group();
 			interiorWallsDiagonal.name = 'interior-walls-diagonal';
 			storey.add( interiorWallsDiagonal );
 
 			drawInteriorWallsDiagonal( vertices, verticesOffset, interiorWallsDiagonal );
 
-
 			const exteriorWalls = new THREE.Group();
 			exteriorWalls.name = 'exterior-walls';
 			storey.add( exteriorWalls );
 
 			drawExteriorWalls( vertices, exteriorWalls );
-
 
 			storey.position.z = i * 3 * theBuilding.storeyHeight;
 
@@ -557,7 +572,7 @@
 				storey.position.x = - theBuilding.length / 2;
 				storey.position.y = - theBuilding.width / 2;
 
-			}
+		}
 
 			theBuilding.group.add( storey );
 
@@ -567,7 +582,7 @@
 
 		addAngles();
 
-//console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
+console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 
 	}
 
@@ -669,6 +684,87 @@
 
 
 
+// now all geometry created and in position, so read local data, transform to world, and add as text to items;
+
+	function addAngles() {
+
+		theBuilding.group.updateMatrixWorld( true );
+
+
+		theBuilding.group.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && !child.name.startsWith( 'ceiling' ) ) {
+
+					let angle = Math.round( - child.getWorldRotation().z * 180 / Math.PI );
+
+					angle = angle < 0 ? angle + 360 : angle;
+
+					child.userData.angle = angle;
+//console.log( 'ang', child.name, angle );
+
+			}
+
+		} );
+
+
+		walls = theBuilding.group.children[ 0 ].children[ 3 ].children;
+
+		for ( let wall of walls) {
+
+			drawText( wall );
+
+		}
+
+	}
+
+
+
+	function drawText( obj ) {
+
+//console.log( 'theBuilding.orientation', theBuilding.orientation );
+
+		let material;
+
+		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		geometry.translate( obj.userData.length / 2, 8, 0 );
+
+		angle = obj.userData.angle;
+
+		if ( angle >= 315 || angle < 45 ) {
+
+//console.log( 'north', angle, obj.name );
+
+			material = new THREE.MeshBasicMaterial( { map: north } );
+
+		} else if ( angle >= 45 && angle < 135 ) {
+
+//console.log( 'east', angle );
+
+			material = new THREE.MeshBasicMaterial( { map: east } );
+
+		} else if ( angle >= 135 && angle < 225 ) {
+
+//console.log( 'south', angle);
+
+			material = new THREE.MeshBasicMaterial( { map: south } );
+
+		} else {
+
+//console.log( 'west', angle );
+
+			material = new THREE.MeshBasicMaterial( { map: west } );
+
+		}
+
+		const mesh = new THREE.Mesh( geometry, material );
+		mesh.name = 'azimuth-indicator';
+
+		obj.add( mesh );
+
+	}
+
+
+
 	function drawExteriorWalls( vertices, obj ) {
 
 		materialParameters.color = 0xffffff * Math.random();
@@ -683,17 +779,16 @@
 
 			const length = vertex.distanceTo( vertexNext );
 
-			const wall = drawWallWithHoles( length, obj );
+			const wall = drawWallAndOpenings( length, obj );
 
 			wall.name = 'exterior-wall-' + ( i + 1 );
 			wall.position.copy( vertex );
 			wall.rotation.z = angleRadians;
 
 			wall.userData.length = length;
-			wall.userData.lengthDelta = length / theBuilding.openingsPerWall;
+			wall.userData.lengthDelta = length / theBuilding.openings;
 			wall.userData.angle = angleRadians;
 
-			drawOpenings( length, wall );
 			drawOverhangs( length, wall );
 			drawFins( length, wall );
 
@@ -705,17 +800,30 @@
 
 
 
-	function drawWallWithHoles( length ) {
+	function drawWallAndOpenings( length ) {
 
-		const lengthDelta = length / theBuilding.openingsPerWall;
+		const lengthDelta = length / theBuilding.openings;
 		const storeyHeight = theBuilding.storeyHeight;
 		const wwr = theBuilding.wwr / 100;
 		const height = storeyHeight;
 		const hgt05 = theBuilding.storeyHeight * 0.5;
-		const wallOpenings = new THREE.Object3D();
-		wallOpenings.name = 'openings';
 
 		let holes = [];
+
+//		const wall = new THREE.Group();
+
+//single shape with multiple openings??
+/*
+
+		const len05 = theBuilding.length * 0.5;
+
+		verticesWall = [
+			v( len05, hgt05, 0 ),
+			v( -len05, hgt05, 0 ),
+			v( -len05, -hgt05, 0 ),
+			v( len05, -hgt05, 0 ),
+		];
+*/
 
 		verticesWall = [
 			v( 0, 0, 0 ),
@@ -736,7 +844,14 @@
 		];
 
 
-		for ( let i = 0; i < theBuilding.openingsPerWall; i++ ) {
+		for ( let i = 0; i < theBuilding.openings; i++ ) {
+/*
+			const geometryLine = geometryBoundary.clone()
+			geometryLine.translate( i * lengthDelta - length * 0.5 + len05, 0, 5 );
+			const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
+			const line = new THREE.Line( geometryLine, materialLine );
+			scene.add( line );
+*/
 
 			const geometryOpening = geometryBoundary.clone().scale( wwr, wwr, wwr );
 			geometryOpening.translate( i * lengthDelta + lenD05, hgt05, 0 );
@@ -746,15 +861,6 @@
 			shape.holes.push( hole );
 
 			holes.push( verticesOpening );
-/*
-			const shapeOpening = new THREE.Shape( verticesOpening );
-			shapeGeoShape = new THREE.ShapeBufferGeometry( shapeOpening );
-			shapeGeoShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
-
-			const meshOpening = new THREE.Mesh( shapeGeoShape, materialOpening );
-			meshOpening.name = 'opening';
-			wallOpenings.add( meshOpening );
-*/
 
 		}
 
@@ -768,52 +874,10 @@
 		meshWall.userData.lengthDelta = lengthDelta;
 		meshWall.userData.holes = holes;
 		meshWall.name = 'wall';
-//		meshWall.userData.openings = wallOpenings;
+
+//		wall.add( meshWall );
 
 		return meshWall;
-
-	}
-
-
-
-	function drawOpenings( length, obj ) {
-
-		if ( theBuilding.overhang < 0.5 ) { return; }
-
-		const wwr = theBuilding.wwr / 100;
-
-		const materialOpening = new THREE.MeshPhongMaterial( { color: 0xffffff, emissive: 0xffffff, opacity: 0.1, side: 2, transparent: true } );
-
-		for ( let i = 0; i < obj.userData.holes.length; i++ ) {
-
-			const lengthDelta = obj.userData.lengthDelta;
-
-// looks like points and position calculations could be simplified
-
-			var points = [
-
-				v( 0, 0, 0 ),
-				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
-				v( 0, 0, theBuilding.storeyHeight * wwr ),
-
-				v( lengthDelta * wwr, 0, 0 ),
-				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
-				v( 0, 0, 0 )
-
-
-			];
-
-//			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, theBuilding.overhang );
-			const geometry = new THREE.BufferGeometry();
-			geometry.setFromPoints( points );
-
-			const mesh = new THREE.Mesh( geometry, materialOpening );
-			mesh.name = 'opening-' + i;
-			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta - lengthDelta * 0.5  * wwr, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr );
-
-			obj.add( mesh );
-
-		}
 
 	}
 
@@ -903,87 +967,6 @@
 			obj.add( mesh2 );
 
 		}
-
-	}
-
-
-
-// now all geometry created and in position, so read local data, transform to world, and add as text to items;
-
-	function addAngles() {
-
-		theBuilding.group.updateMatrixWorld( true );
-
-
-		theBuilding.group.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh && !child.name.startsWith( 'ceiling' ) ) {
-
-					let angle = Math.round( - child.getWorldRotation().z * 180 / Math.PI );
-
-					angle = angle < 0 ? angle + 360 : angle;
-
-					child.userData.angle = angle;
-//console.log( 'ang', child.name, angle );
-
-			}
-
-		} );
-
-
-		walls = theBuilding.group.children[ 0 ].children[ 3 ].children;
-
-		for ( let wall of walls) {
-
-			drawText( wall );
-
-		}
-
-	}
-
-
-
-	function drawText( obj ) {
-
-//console.log( 'theBuilding.orientation', theBuilding.orientation );
-
-		let material;
-
-		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
-		geometry.translate( obj.userData.length / 2, 8, 0 );
-
-		angle = obj.userData.angle;
-
-		if ( angle >= 315 || angle < 45 ) {
-
-//console.log( 'north', angle, obj.name );
-
-			material = new THREE.MeshBasicMaterial( { map: north } );
-
-		} else if ( angle >= 45 && angle < 135 ) {
-
-//console.log( 'east', angle );
-
-			material = new THREE.MeshBasicMaterial( { map: east } );
-
-		} else if ( angle >= 135 && angle < 225 ) {
-
-//console.log( 'south', angle);
-
-			material = new THREE.MeshBasicMaterial( { map: south } );
-
-		} else {
-
-//console.log( 'west', angle );
-
-			material = new THREE.MeshBasicMaterial( { map: west } );
-
-		}
-
-		const mesh = new THREE.Mesh( geometry, material );
-		mesh.name = 'azimuth-indicator';
-
-		obj.add( mesh );
 
 	}
 
@@ -1080,7 +1063,75 @@
 
 
 
+	function toggleNav() {
+
+		const width = getComputedStyle( document.documentElement ).getPropertyValue( '--mnu-width' );
+
+		if ( !divMenu.style.width || divMenu.style.width === width ) {
+
+			divMenu.style.width = 0;
+			divMenu.style.padding = 0;
+			hamburger.style.left = '-100px';
+			divRender.style.left = '50px';
+
+		} else {
+
+			divMenu.style.width = width;
+			divMenu.style.padding = '30px 10px 30px 10px';
+			hamburger.style.left = 'calc( var( --mnu-width ) - 100px )';
+			divRender.style.left = 'calc( var( --mnu-width ) + 50px )';
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+// https://stackoverflow.com/questions/6492683/how-to-detect-divs-dimension-changed
+//console.log( '', divRender );
+
+		size = 300;
+		camera.aspect = divRender.clientWidth / divRender.clientHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( divRender.clientWidth, divRender.clientHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+
 /////////////////////////////////////
+
+
+	function addAjacentBuildings() {
+
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 ); // use scale to set size
+		const material = new THREE.MeshPhongMaterial();
+		const meshAdjacent = new THREE.Mesh( geometry, material );
+
+		meshAdjacent.name = 'building-adjacent';
+		meshAdjacent.scale.set( 20, 20, 100 ); // scale is easier to deal with than geometry vertices
+		meshAdjacent.position.set( 0, 80, 50 );
+		scene.add( meshAdjacent );
+
+	}
+
+
+//////////////////////////////////////
+
 
 
 	function getBuildingData() {
@@ -1222,14 +1273,23 @@
 //console.log( 'storey', theBuilding.group.children[ 0 ] );
 
 		const surfaces = json.gbXML.Campus.Surface;
-		const spaces = json.gbXML.Campus.Building.Space;
-		const zones = json.gbXML.Zone;
+
+/*
+		let ceilings = theBuilding.group.children[ 0 ].getObjectByName( 'storey-1' );
+console.log( 'ceilings', theBuilding.group.children[ 0 ] );
+		const spacesPerStorey = ceilings.children.length;
+
+		const interiorWalls = theBuilding.group.children[0].getObjectByName( 'interior-walls' );
+		const interiorWallsDiagonal = theBuilding.group.children[0].getObjectByName( 'interior-walls-diagonal' );
+		const exteriorWalls = theBuilding.group.children[0].getObjectByName( 'exterior-walls' );
+*/
+
 
 		let surfaceCount = theBuilding.surfaceCount = 1;
 		let spaceCount = theBuilding.spaceCount = 1;
 		let openingCount = theBuilding.openingCount = 1;
 		let shadeCount = theBuilding.shadeCount = 1;
-//		let zoneCount = theBuilding.zoneCount = 1;
+		let zoneCount = theBuilding.zoneCount = 1;
 
 //		theBuilding.group.updateMatrixWorld( true );
 //		theBuilding.group.updateMatrix();
@@ -1270,37 +1330,11 @@
 
 				};
 
-				getPolyLoop2( surfaceCeiling, ceiling, ceiling.geometry );
+				getPolyLoop2( surfaceCeiling, ceiling );
 
 				surfaceCount ++;
 
 				surfaces.push( surfaceCeiling );
-
-////
-
-				const space = {
-
-					"@id": "zone-" + spaceCount,
-					"@zoneIdRef": 999999,
-					"@buildingStoreyIdRef": 'storey-' + ( i + 1 ),
-					Name: 'storey-' + ( i + 1 ) + '-zone-' + spaceCount,
-					Area: 999999,
-					Volume: 999999
-
-				};
-
-				spaces.push( space );
-
-				const zone = {
-
-					"@id": "zone-" + spaceCount,
-					Name: 'storey-' + ( i + 1 ) + '-zone-' + spaceCount
-
-				};
-
-				zones.push( zone );
-
-				spaceCount ++;
 
 			}
 
@@ -1328,7 +1362,7 @@
 					}
 				};
 
-				getPolyLoop2( surfaceInteriorWall, interiorWall, interiorWall.geometry );
+				getPolyLoop2( surfaceInteriorWall, interiorWall );
 
 				surfaceCount ++;
 
@@ -1361,7 +1395,7 @@
 
 					};
 
-					getPolyLoop2( surfaceInteriorDiagonalWall, interiorDiagonalWall, interiorDiagonalWall.geometry );
+					getPolyLoop2( surfaceInteriorDiagonalWall, interiorDiagonalWall );
 
 					surfaceCount ++;
 
@@ -1395,9 +1429,7 @@
 
 				};
 
-				getPolyLoop2( surfaceExteriorWall, exteriorWall, exteriorWall.geometry );
-
-				addOpenings( surfaceExteriorWall, exteriorWall );
+				getPolyLoop2( surfaceExteriorWall, exteriorWall );
 
 				surfaces.push( surfaceExteriorWall );
 
@@ -1405,16 +1437,18 @@
 
 				addOverHangsFins( surfaces, exteriorWall );
 
+//				getOpenings( surfaceExteriorWall, exteriorWall );
 
 			}
+
+			spaceCount ++;
 
 		}
 
 	}
 
 
-
-	function getPolyLoop2( surface, mesh, geometry ) {
+	function getPolyLoop2( surface, mesh ) {
 
 // this function works OK but creates too many CartesianPoint elements.
 // See checkGbxmlData below for temporary search and replace fix
@@ -1422,10 +1456,10 @@
 //console.log( 'surface', surface );
 //console.log( 'mesh.geo', mesh.geometry );
 
-		const meshNewGeometry = new THREE.Geometry().fromBufferGeometry( geometry );
+		const meshNewGeometry = new THREE.Geometry().fromBufferGeometry( mesh.geometry );
 		const vertices = [];
 		const len = mesh.name.startsWith( 'exterior-wall' ) ? 4 : meshNewGeometry.vertices.length;
-//console.log( mesh.name, len );
+console.log( mesh.name, len );
 
 		for ( let k = 0; k < len; k++ ) {
 
@@ -1462,38 +1496,44 @@
 
 
 
-	function addOpenings( surface, mesh ) {
+	function getOpenings( surface, obj ) {
 
-//console.log( 'wall', mesh );
+//console.log( 'wall', obj.userData.holes );
 
+		holes = obj.userData.holes;
 
-		mesh.traverse( function ( child ) {
+		for ( var i = 0; i < holes.length; i++ ) {
 
-			if ( child.name.startsWith( 'opening-' ) ) {
+			hole = holes[ i ];
 
-				let opening = {
+			opening =
+				{
 					"@openingType": "FixedWindow",
 					"@id": "opening-" + theBuilding.openingCount,
 					"RectangularGeometry": {
-						"Azimuth": mesh.userData.angle
+						"Azimuth": obj.userData.angle
 					},
 					"PlanarGeometry": {
 						"PolyLoop": []
 					}
 				};
 
-				getPolyLoop2( opening, mesh, child.geometry );
+			geometry = new THREE.BufferGeometry();
+			geometry.setFromPoints( hole );
+		geometry.computeFaceNormals();
+		geometry.computeVertexNormals();
+			mesh = new THREE.Mesh( geometry, new THREE.MeshNormalMaterial() );
+			mesh.name = 'opening';
 
-				surface.Opening.push( opening );
+//console.log( 'mesh', mesh );
 
-//console.log( 'child', child );
-//console.log( 'opening', opening );
+			getPolyLoop2( opening, mesh );
 
-				theBuilding.openingCount ++;
+			surface.Opening.push( opening );
 
-			}
+			theBuilding.openingCount ++;
 
-		} );
+		}
 
 	}
 
@@ -1501,11 +1541,11 @@
 
 	function addOverHangsFins( surfaces, mesh ) {
 
-//console.log( 'wall', mesh );
+//console.log( 'wall', mesh.children );
 
 		mesh.traverse( function ( child ) {
 
-			if ( child.name !== 'azimuth-indicator' && !child.name.startsWith( 'opening-' ) ) {
+			if ( child.name !== 'azimuth-indicator' ) {
 
 				let surface =
 					{
@@ -1520,7 +1560,7 @@
 						}
 				};
 
-				getPolyLoop2( surface, child, child.geometry );
+				getPolyLoop2( surface, child );
 
 				surfaces.push( surface );
 
@@ -1738,6 +1778,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 	}
 
 
+////////////////////
 
 	function saveFile() {
 
@@ -1758,58 +1799,6 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		a = null;
 
 		if ( window.checkWindow !== undefined ) { window.checkWindow.close(); }
-
-	}
-
-
-	function toggleNav() {
-
-		const width = getComputedStyle( document.documentElement ).getPropertyValue( '--mnu-width' );
-
-		if ( !divMenu.style.width || divMenu.style.width === width ) {
-
-			divMenu.style.width = 0;
-			divMenu.style.padding = 0;
-			hamburger.style.left = '-100px';
-			divRender.style.left = '50px';
-
-		} else {
-
-			divMenu.style.width = width;
-			divMenu.style.padding = '30px 10px 30px 10px';
-			hamburger.style.left = 'calc( var( --mnu-width ) - 100px )';
-			divRender.style.left = 'calc( var( --mnu-width ) + 50px )';
-
-		}
-
-	}
-
-
-
-/////////////////
-
-	function onWindowResize() {
-
-// https://stackoverflow.com/questions/6492683/how-to-detect-divs-dimension-changed
-//console.log( '', divRender );
-
-		size = 300;
-		camera.aspect = divRender.clientWidth / divRender.clientHeight;
-		camera.updateProjectionMatrix();
-
-		renderer.setSize( divRender.clientWidth, divRender.clientHeight );
-
-//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
-
-	}
-
-
-
-	function animate() {
-
-		requestAnimationFrame( animate );
-		renderer.render( scene, camera );
-		controls.update();
 
 	}
 

@@ -17,6 +17,31 @@
                 <Name>storey-1</Name>
                 <Level>0</Level>
             </BuildingStorey>
+            <Space id="zone-1" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-1</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-2" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-2</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-3" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-3</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-4" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-4</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-5" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-5</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
         </Building>
         <Surface surfaceType="Ceiling" id="surface-1">
             <Name>storey-1-storey-1-ceiling-1-interior-space-1</Name>
@@ -51,12 +76,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-2">
-            <Name>storey-1-storey-1-ceiling-2-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-2-space-2</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-3"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -83,12 +108,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-3">
-            <Name>storey-1-storey-1-ceiling-3-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-3-space-3</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-4"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -115,12 +140,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-4">
-            <Name>storey-1-storey-1-ceiling-4-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-4-space-4</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-5"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -147,12 +172,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-5">
-            <Name>storey-1-storey-1-ceiling-5-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-5-space-5</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -179,12 +204,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-6">
-            <Name>storey-1-interior-wall-1-space-1</Name>
+            <Name>storey-1-interior-wall-1-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -211,12 +236,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-7">
-            <Name>storey-1-interior-wall-2-space-1</Name>
+            <Name>storey-1-interior-wall-2-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -243,12 +268,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-8">
-            <Name>storey-1-interior-wall-3-space-1</Name>
+            <Name>storey-1-interior-wall-3-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -275,12 +300,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-9">
-            <Name>storey-1-interior-wall-4-space-1</Name>
+            <Name>storey-1-interior-wall-4-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -307,12 +332,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-10">
-            <Name>storey-1-interior-wall-diagonal-1-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-1-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>225</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -339,12 +364,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-11">
-            <Name>storey-1-interior-wall-diagonal-2-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-2-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>315</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -371,12 +396,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-12">
-            <Name>storey-1-interior-wall-diagonal-3-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-3-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>45</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -403,12 +428,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-13">
-            <Name>storey-1-interior-wall-diagonal-4-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-4-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -435,12 +460,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-14">
-            <Name>storey-1-exterior-wall-1-space-1</Name>
+            <Name>storey-1-exterior-wall-1-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -465,6 +490,64 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-1">
+                <RectangularGeometry>
+                    <Azimuth>180</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-2">
+                <RectangularGeometry>
+                    <Azimuth>180</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
         <Surface surfaceType="Shade" id="shade-1">
             <Name>exterior-wall-1</Name>
@@ -737,12 +820,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-15">
-            <Name>storey-1-exterior-wall-2-space-1</Name>
+            <Name>storey-1-exterior-wall-2-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -767,6 +850,64 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-3">
+                <RectangularGeometry>
+                    <Azimuth>270</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-4">
+                <RectangularGeometry>
+                    <Azimuth>270</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
         <Surface surfaceType="Shade" id="shade-8">
             <Name>exterior-wall-2</Name>
@@ -1039,12 +1180,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-16">
-            <Name>storey-1-exterior-wall-3-space-1</Name>
+            <Name>storey-1-exterior-wall-3-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -1069,6 +1210,64 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-5">
+                <RectangularGeometry>
+                    <Azimuth>0</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-6">
+                <RectangularGeometry>
+                    <Azimuth>0</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-30</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
         <Surface surfaceType="Shade" id="shade-15">
             <Name>exterior-wall-3</Name>
@@ -1341,12 +1540,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-17">
-            <Name>storey-1-exterior-wall-4-space-1</Name>
+            <Name>storey-1-exterior-wall-4-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -1371,6 +1570,64 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-7">
+                <RectangularGeometry>
+                    <Azimuth>90</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-8">
+                <RectangularGeometry>
+                    <Azimuth>90</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>4</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>30</Coordinate>
+                            <Coordinate>0</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
         <Surface surfaceType="Shade" id="shade-22">
             <Name>exterior-wall-4</Name>
@@ -1643,4 +1900,19 @@
             </PlanarGeometry>
         </Surface>
     </Campus>
+    <Zone id="zone-1">
+        <Name>storey-1-zone-1</Name>
+    </Zone>
+    <Zone id="zone-2">
+        <Name>storey-1-zone-2</Name>
+    </Zone>
+    <Zone id="zone-3">
+        <Name>storey-1-zone-3</Name>
+    </Zone>
+    <Zone id="zone-4">
+        <Name>storey-1-zone-4</Name>
+    </Zone>
+    <Zone id="zone-5">
+        <Name>storey-1-zone-5</Name>
+    </Zone>
 </gbXML>
