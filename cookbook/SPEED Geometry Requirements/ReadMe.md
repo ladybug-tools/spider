@@ -2,13 +2,8 @@ Geometry Page:
 Inputs: These are in IP. If you want to simply and say all inputs are metric, that's fine. It really doesn't matter. What does matter is that when the gbXML export is generated, it is ALWAYS in metric.
 To-Do List for Geometry Page: 
 
-	1. Add roof slab.
 	2. Change orientation symbols.
-	3. Connect fins.
-	4. Activate Window Ratio.
 	5. x,y,z axis.
-	6. Edges on permanently.
-	7. Tighten up colors.
 	8. Make ortho view unchangable. 
 	9. Add dimensions in 2D text for Length, Width, and Thickeness.
 
