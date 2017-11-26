@@ -4,7 +4,6 @@ To-Do List for Geometry Page:
 
 	2. Change orientation symbols.
 	5. x,y,z axis.
-	8. Make ortho view unchangable. 
 	9. Add dimensions in 2D text for Length, Width, and Thickeness.
 
 Envelope Page:
