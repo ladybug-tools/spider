@@ -3,7 +3,7 @@ Inputs: These are in IP. If you want to simply and say all inputs are metric, th
 To-Do List for Geometry Page: 
 
 	2. Change orientation symbols.
-	5. x,y,z axis.
+	5. x,y,z axis labels.
 	9. Add dimensions in 2D text for Length, Width, and Thickeness.
 
 Envelope Page:
@@ -21,6 +21,8 @@ Space Layout: Looking pretty good now. As footprint shape changes, number of zon
 
 To-Do List for Space Layout
 
-	1. Add 2D text to orthographic view for Zone # and area.
+	1. Add 2D text to orthographic view for Zone # and area. 
+	2. Area values used for Area Breakdown.
+	3. Show N,W,E,W on each side.
 	
 http://www.ladybug.tools/spider/sandbox/speed-specification/r2/speed-spec-r2.html
