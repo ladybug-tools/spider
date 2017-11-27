@@ -30,6 +30,8 @@
 	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
+	summary { font-size: 14pt; font-weight: 600; }
+
 	td { vertical-align: top; }
 
 	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
@@ -50,9 +52,9 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
+			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
 		</p>
 
 
@@ -85,6 +87,10 @@
 		<div><a href="#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml" >Urban House</a></div>
 		<div><a href="#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml" >Open Studio SED</a></div>
 
+		<hr>
+
+		<div id=divReport ></div>
+
 	</div>
 
 
@@ -116,6 +122,8 @@
 	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
 
+	const b = '<br>';
+
 	init();
 
 	function init() {
@@ -134,29 +142,118 @@
 		icw = ifrThree.contentWindow;
 		gbjson = icw.gbjson;
 
-		traverse( gbjson )
+		gbxml = traverse( gbjson );
+
+console.log( 'gbxml', gbxml );
+
+		divReport.innerHTML = addDetails( 'gbXML', gbxml.attributes );
+
+		campus = traverse( gbjson.Campus );
+		divReport.innerHTML += addDetails( 'Campus', campus.attributes );
+
+
+		zones = traverse( gbjson.Zone );
+		divReport.innerHTML += addDetails( 'Zones', zones.attributes );
+
+
+		documents = traverse( gbjson.DocumentHistory );
+
+		divReport.innerHTML +=  '<h3>Documents</h3>' + documents.attributes;
+
+		surfaces = traverse( gbjson.Campus.Surface );
+
+		divReport.innerHTML +=  '<h3>Surfaces</h3>' + surfaces.attributes;
+
+		txt = getSurfaces();
+
+		divReport.innerHTML += txt;
 
 	}
 
 
+	function getSurfaces() {
+
+		surfaces = gbjson.Campus.Surface;
+		let txt = ''
+console.log( 'surfaces', surfaces );
+
+		txt += 'Surfaces: ' + surfaces.length + b;
+
+		types = [];
+		typesCount = [];
+
+		for ( let surface of surfaces ) {
+
+			index = types.indexOf( surface.surfaceType );
+
+			if ( index < 0 ) { 
+
+				types.push( surface.surfaceType );
+				typesCount[ types.length - 1 ] = 1;
+
+			} else {
+
+				typesCount[ index ] ++;
+
+			}
+
+		}
+
+		for ( let i = 0; i < types.length; i++ ) {
+
+			txt += types[ i ] + ': ' + typesCount[ i ] + b;
+
+		}
+
+		return txt;
+
+	}
+
+
+	function addDetails( summary, text ) {
+
+		const txt =
+
+		'<details>' +
+			'<summary>' + summary + '</summary>' +
+			text +
+		'</details>';
+
+		return txt;
+
+	}
+
 
 	function traverse( obj ) {
 
-		for ( i in obj ) {
+		const b = '<br>';
+		elements = [];
+		txt = '';
+
+		for ( let i in obj ) {
 
 			if ( obj[ i ] !== null && typeof( obj[ i ] ) === 'object' ) {
 
-console.log( 'thing', i, obj[ i ]);
+				if ( elements.indexOf( i ) < 0 ) {
+
+					elements.push( i );
+//					txt += '<h3>' + i + '</h3>';
+
+				}
 
 //				traverse( obj [ i ] );
 
 			} else {
 
-console.log( 'att', i, obj[ i ]);
+//console.log( 'attribute', i, obj[ i ] );
+
+				txt += i + ': ' + obj[ i ] + b;
 
 			}
 
-		}
+		};
+
+		return { elements: elements, attributes: txt };
 
 	}
 
@@ -175,6 +272,7 @@ console.log( 'gbjsonKeys', gbjsonKeys );
 
 		t = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur? ';
 		text = t + t + t + t;
+
 		checkWindow = window.open( '', 'report', 'left=400,scrollbars=yes,status=yes,width=800,height=400,top=200' );
 
 //		checkWindow = window.open( '', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes' );
@@ -184,6 +282,7 @@ console.log( 'gbjsonKeys', gbjsonKeys );
 //console.log( '', checkWindow );
 
 */
+
 
 
 	function onHashChange() {
@@ -231,6 +330,7 @@ console.log( 'gbjsonKeys', gbjsonKeys );
 		gbjson = icw.gbjson;
 
 console.log( '', gbjson );
+
 	}
 
 

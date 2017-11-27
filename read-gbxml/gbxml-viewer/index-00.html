@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "List and view all the files in all the folders. File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
-<meta name = "keywords" content = "JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-26" >
-<title>Ladybug Tools / Spider / Table of Contents</title>
+<meta name = "description" content = "List, open and view all the latest Ladybug Tools/Spider gbXML Viewer scripts." >
+<meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-11" >
+<title>gbXML Viewer Table of Contents</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -38,7 +38,7 @@
 	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; height: 100%;
 		overflow-x: hidden; padding: 30px 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
-	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+	#hamburger { background-color: #edd; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
 
 </style>
@@ -50,15 +50,16 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
 <!--
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo;
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
 -->
 		</p>
 
+
 		<h2>
-			<a id = "urlInfo" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 title='Octocat'  ></a>
+			<a id = "urlInfo" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
 			<a href="" ><script> document.write( document.title )</script></a>
 		</h2>
 
@@ -68,19 +69,18 @@
 
 		<div id = "divMenuItems" ></div>
 
-		<p>Tooltips provide file size. Click <img src="https://status.github.com/images/invertocat.png" height=18 title='Octocat' > icon to view source code on GitHub. Click &#x2750; icon to obtain a link to the individual file.</p>
+		<p>Tooltips provide file size. Click 'Octocat' icon to view source code on GitHub. Click &#x2750; icon to obtain a link to the individual file.</p>
 
 		<div id= "divFooter" >
 
 			<hr>
 
-			<div title='many thanks!' ><a href=#pages/credits.md >Credits</a></div>
-			<div><a href=#pages/code-of-conduct.md >Code of Conduct</a></div>
-			<div><a href=#pages/contributing.md >Contributing</a></div>
-			<div><a href=#pages/license.md >License</a></div>
-			<div><a href=#pages/markdown-help.md >Markdown Help</a></div>
+			<div title='many thanks!' ><a href=#../../pages/credits.md >Credits</a></div>
+			<div><a href=#../../pages/code-of-conduct.md >Code of Conduct</a></div>
+			<div><a href=#../../pages/contributing.md >Contributing</a></div>
+			<div><a href=#../../pages/license.md >License</a></div>
+			<div><a href=#../../pages/markdown-help.md >Markdown Help</a></div>
 			<div><a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
-			<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
 
 			<p onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >&#x1f578;</p>
 
@@ -96,32 +96,33 @@
 	</div>
 
 
-	<div id = "hamburger" onclick=toggleNav(); > slide &#9776;  </div>
+	<div id = "hamburger" onclick=toggleNav(); >
+
+		slide &#9776; 
+
+	</div>
 
 <script>
 
 	const user = 'ladybug-tools'
 	const repo = '/spider';
-	const pathRepo = '';
+	const pathRepo = 'read-gbxml/gbxml-viewer/';
 
-//	const uriDefaultFile = './README.md';
-	const uriDefaultFile = 'plugins/view-github-issues.html'
+	const uriDefaultFile = './README.md';
 
 	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 > </a>';
 
 	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 
 	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
-
-	const urlGitHubSource = 'https://github.com/' + user + repo;
-//	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
+	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
 
 	init();
 
 	function init() {
 
-		urlInfo.href = urlGitHubSource;
+		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -135,28 +136,8 @@
 
 	function onHashChange() {
 
-		let url, ulc;
-
-		if ( !location.hash ) {
-
-			url = uriDefaultFile;
-			ulc = url.toLowerCase();
-
-		} else {
-
-			url = location.hash.slice( 1 );
-			ulc = url.toLowerCase();
-
-			crumbs = url.lastIndexOf( '/' ) > 0 ? url.slice( 0, url.lastIndexOf( '/' ) ) : '';
-//console.log( url.lastIndexOf( '/' ), crumbs );
-
-			setBreadcrumbs( crumbs );
-
-//console.log( '',  urlGitHubApiContents + url.slice( 0, url.lastIndexOf( '/' ) + 1 ) );
-
-			requestFile( urlGitHubApiContents + url.slice( 0, url.lastIndexOf( '/' ) + 1 ), callbackGitHubMenu );
-
-		}
+		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+		const ulc = url.toLowerCase();
 
 		if ( ulc.endsWith( '.md' ) ) {
 
@@ -164,12 +145,11 @@
 
 		} else if ( ulc.endsWith( '.html' ) ) {
 
-			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe src=' + url + ' style=border:none;height:100%;width100%; ></iframe>';
+			divContents.innerHTML = '<iframe src=' + url + ' height=100% width=100% ></iframe>';
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
-			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' style=margin:20px; >';
+			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
 
 		} else {
 
@@ -195,13 +175,9 @@
 
 	function setBreadcrumbs( path ) {
 
-		let txt =
+		let txt = 
 			'<b>' +
-				'<a href=JavaScript:getFolderContents(); >' +
-
-					( pathRepo ? pathRepo : '<span style=font-size:24px >&#x2302</span>' ) +
-
-				'</a> &raquo; ' +
+				'<a href=JavaScript:getFolderContents(); >' + pathRepo + '</a> &raquo; ' +
 			'</b>';
 
 		let folders = path ? path.split( '/' ) : [] ;
@@ -229,9 +205,7 @@
 
 		let txt = '';
 
-	if ( items.message ) { alert( items.message ); return; }
-
-		const ignoreFolders = [ 'data' ]; //, 'plugins'
+		const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins' 
 
 		for ( let item of items ) {
 
@@ -241,8 +215,8 @@
 
 				txt +=
 					'<div style=margin-bottom:8px; >' +
-						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' +
-							item.name  +
+						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' + 
+							item.name  + 
 						'</a>' +
 					'</div>' +
 				'';
@@ -251,9 +225,10 @@
 
 		}
 
-		const ignoreFiles = [ '.gitattributes', '.gitignore', 'ladybug-tools-spider.html' ];
+		const ignoreFiles = [ 'indexxxx.html' ];
 
 		for ( let item of items ) {
+
 
 			if ( item.type === 'file' ) {
 
@@ -264,28 +239,14 @@
 				txt +=
 					'<table><tr>' +
 
-						'<td><a href="' + urlGitHubSource + '/blob/master/' + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
-						'<td>' +
-
-// choose to access remote or local files
-//							'<a href=#' + urlGitHubPage + pathRepo + itemPath +
-							'<a href=#' + itemPath +
-
-							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
-// choose to access remote or local files
-//							( item.path.endsWith( 'html' ) ? '<a href=' + urlGitHubPage + pathRepo + itemPath + ' >&#x2750;</a>' : '' ) +
-							( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
-
+						'<td><a href="' + urlGitHubSource + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
+						'<td><a href=#' + itemPath + 
+						' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
+						( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
 						'</td>' +
 
 					'</tr></table>';
-
-				if ( item.path !== 'README.md' && item.name.toLowerCase() === 'readme.md' ) {
-
-//					location.hash = urlGitHubPage + pathRepo + itemPath;
-					location.hash = itemPath;
-
-				}
+//console.log( 'item', item );
 
 			}
 

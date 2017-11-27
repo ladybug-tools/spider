@@ -30,6 +30,14 @@
 ## Change Log
 
 
+### 2017-11-26 ~ Theo
+
+Looking at recursive traversal techniques. Probably not worth it. Better to handles each JSON object on its own terms,
+
+
+
+
+
 ***
 
 

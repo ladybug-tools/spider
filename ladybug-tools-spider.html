@@ -51,8 +51,10 @@
 
 		<p>
 			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
+<!--
 			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-<!--			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; -->
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+-->
 		</p>
 
 		<h2>
@@ -72,11 +74,11 @@
 
 			<hr>
 
-			<div title='many thanks!' ><a href=#../../pages/credits.md >Credits</a></div>
-			<div><a href=#../../pages/code-of-conduct.md >Code of Conduct</a></div>
-			<div><a href=#../../pages/contributing.md >Contributing</a></div>
-			<div><a href=#../../pages/license.md >License</a></div>
-			<div><a href=#../../pages/markdown-help.md >Markdown Help</a></div>
+			<div title='many thanks!' ><a href=#pages/credits.md >Credits</a></div>
+			<div><a href=#pages/code-of-conduct.md >Code of Conduct</a></div>
+			<div><a href=#pages/contributing.md >Contributing</a></div>
+			<div><a href=#pages/license.md >License</a></div>
+			<div><a href=#pages/markdown-help.md >Markdown Help</a></div>
 			<div><a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
 			<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
 
@@ -92,6 +94,7 @@
 		<div id = "divContents" ></div>
 
 	</div>
+
 
 	<div id = "hamburger" onclick=toggleNav(); > slide &#9776;  </div>
 
@@ -247,7 +250,7 @@ console.log( url.lastIndexOf( '/' ), crumbs );
 
 		}
 
-		const ignoreFiles = [ '.gitattributes', '.gitignore' ];
+		const ignoreFiles = [ '.gitattributes', '.gitignore', 'ladybug-tools-spider.html' ];
 
 		for ( let item of items ) {
 
@@ -260,7 +263,7 @@ console.log( url.lastIndexOf( '/' ), crumbs );
 				txt +=
 					'<table><tr>' +
 
-						'<td><a href="' + urlGitHubSource + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
+						'<td><a href="' + urlGitHubSource + '/blob/master/' + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
 						'<td>' +
 
 // choose to access remote or local files
