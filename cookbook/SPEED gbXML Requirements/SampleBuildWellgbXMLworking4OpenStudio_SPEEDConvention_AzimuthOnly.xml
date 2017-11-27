@@ -530,6 +530,8 @@
       <RectangularGeometry>
         <Azimuth>270</Azimuth>
       </RectangularGeometry>
+
+
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -545,13 +547,17 @@
           <CartesianPoint>
             <Coordinate>0.000000</Coordinate>
             <Coordinate>0.000000</Coordinate>
-            <Coordinate>0.000000</Coordinate>
+            <Coordinate>-10.000000</Coordinate>
           </CartesianPoint>
           <CartesianPoint>
             <Coordinate>0.000000</Coordinate>
             <Coordinate>0.000000</Coordinate>
             <Coordinate>5.000000</Coordinate>
           </CartesianPoint>
+
+
+
+
         </PolyLoop>
       </PlanarGeometry>
       <Opening openingType="FixedWindow" id="opening-1">

@@ -694,7 +694,6 @@
 			wall.userData.angle = angleRadians;
 
 			drawOpenings( length, wall );
-
 			drawOverhangs( length, wall );
 			drawFins( length, wall );
 
@@ -794,12 +793,13 @@
 			var points = [
 
 				v( 0, 0, 0 ),
-				v( lengthDelta * wwr, 0, 0 ),
-				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
-
 				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
 				v( 0, 0, theBuilding.storeyHeight * wwr ),
+
+				v( lengthDelta * wwr, 0, 0 ),
+				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
 				v( 0, 0, 0 )
+
 
 			];
 
@@ -851,7 +851,7 @@
 			geometry.setFromPoints( points );
 
 			const mesh = new THREE.Mesh( geometry, material );
-			mesh.name = 'overhang-' + ( i + 1 );
+			mesh.name = 'overhang-' + i;
 			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta - lengthDelta * 0.5  * wwr, 0, theBuilding.storeyHeight * 0.5 + theBuilding.storeyHeight * 0.5  * wwr );
 			obj.add( mesh );
 
@@ -894,12 +894,12 @@
 //			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, theBuilding.fin * 0.5, theBuilding.storeyHeight * 0.5 );
 			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr );
 
-			mesh.name = 'fin-1-' + ( i + 1 );
+			mesh.name = 'fin-1-' + i;
 			obj.add( mesh );
 
 			const mesh2 = mesh.clone();
 			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr  );
-			mesh.name = 'fin-2-' + ( i + 2 );
+			mesh.name = 'fin-2-' + i;
 			obj.add( mesh2 );
 
 		}
@@ -1091,6 +1091,10 @@
 
 		getSurfaces();
 
+//		getSpaces();
+
+//		getZones();
+
 //console.log( 'json', json.gbXML );
 
 		divJson = document.body.appendChild( document.createElement( 'div' ) );
@@ -1168,7 +1172,7 @@
 	}
 
 
-// not used yet
+
 	function getBuildings() {
 
 		let buildings = [];
@@ -1410,7 +1414,7 @@
 
 
 
-	function getPolyLoop2( surface, mesh ) {
+	function getPolyLoop2( surface, mesh, geometry ) {
 
 // this function works OK but creates too many CartesianPoint elements.
 // See checkGbxmlData below for temporary search and replace fix
@@ -1418,7 +1422,7 @@
 //console.log( 'surface', surface );
 //console.log( 'mesh.geo', mesh.geometry );
 
-		const meshNewGeometry = new THREE.Geometry().fromBufferGeometry( mesh.geometry );
+		const meshNewGeometry = new THREE.Geometry().fromBufferGeometry( geometry );
 		const vertices = [];
 		const len = mesh.name.startsWith( 'exterior-wall' ) ? 4 : meshNewGeometry.vertices.length;
 //console.log( mesh.name, len );
@@ -1462,6 +1466,7 @@
 
 //console.log( 'wall', mesh );
 
+
 		mesh.traverse( function ( child ) {
 
 			if ( child.name.startsWith( 'opening-' ) ) {
@@ -1477,7 +1482,7 @@
 					}
 				};
 
-				getPolyLoop2( opening, child );
+				getPolyLoop2( opening, mesh, child.geometry );
 
 				surface.Opening.push( opening );
 
@@ -1500,9 +1505,7 @@
 
 		mesh.traverse( function ( child ) {
 
-			if ( child.name.startsWith( 'overhang-' ) || child.name.startsWith( 'fin-' ) ) {
-
-//console.log( 'child.name',child.name );
+			if ( child.name !== 'azimuth-indicator' && !child.name.startsWith( 'opening-' ) ) {
 
 				let surface =
 					{
@@ -1517,7 +1520,7 @@
 						}
 				};
 
-				getPolyLoop2( surface, child  );
+				getPolyLoop2( surface, child, child.geometry );
 
 				surfaces.push( surface );
 

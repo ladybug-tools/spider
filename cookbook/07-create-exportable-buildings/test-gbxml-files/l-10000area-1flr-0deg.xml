@@ -17,6 +17,41 @@
                 <Name>storey-1</Name>
                 <Level>0</Level>
             </BuildingStorey>
+            <Space id="zone-1" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-1</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-2" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-2</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-3" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-3</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-4" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-4</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-5" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-5</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-6" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-6</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
+            <Space id="zone-7" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
+                <Name>storey-1-zone-7</Name>
+                <Area>999999</Area>
+                <Volume>999999</Volume>
+            </Space>
         </Building>
         <Surface surfaceType="Ceiling" id="surface-1">
             <Name>storey-1-storey-1-ceiling-1-interior-space-1</Name>
@@ -61,12 +96,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-2">
-            <Name>storey-1-storey-1-ceiling-2-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-2-space-2</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-3"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -93,12 +128,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-3">
-            <Name>storey-1-storey-1-ceiling-3-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-3-space-3</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-4"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -125,12 +160,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-4">
-            <Name>storey-1-storey-1-ceiling-4-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-4-space-4</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-5"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -157,12 +192,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-5">
-            <Name>storey-1-storey-1-ceiling-5-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-5-space-5</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -189,12 +224,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-6">
-            <Name>storey-1-storey-1-ceiling-6-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-6-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -221,12 +256,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Ceiling" id="surface-7">
-            <Name>storey-1-storey-1-ceiling-7-space-1</Name>
+            <Name>storey-1-storey-1-ceiling-7-space-7</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-8"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -253,12 +288,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-8">
-            <Name>storey-1-interior-wall-1-space-1</Name>
+            <Name>storey-1-interior-wall-1-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -285,12 +320,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-9">
-            <Name>storey-1-interior-wall-2-space-1</Name>
+            <Name>storey-1-interior-wall-2-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -317,12 +352,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-10">
-            <Name>storey-1-interior-wall-3-space-1</Name>
+            <Name>storey-1-interior-wall-3-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -349,12 +384,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-11">
-            <Name>storey-1-interior-wall-4-space-1</Name>
+            <Name>storey-1-interior-wall-4-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -381,12 +416,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-12">
-            <Name>storey-1-interior-wall-5-space-1</Name>
+            <Name>storey-1-interior-wall-5-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -413,12 +448,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-13">
-            <Name>storey-1-interior-wall-6-space-1</Name>
+            <Name>storey-1-interior-wall-6-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -445,12 +480,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-14">
-            <Name>storey-1-interior-wall-diagonal-1-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-1-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>225</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -477,12 +512,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-15">
-            <Name>storey-1-interior-wall-diagonal-2-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-2-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>315</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -509,12 +544,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-16">
-            <Name>storey-1-interior-wall-diagonal-3-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-3-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>45</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -541,12 +576,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-17">
-            <Name>storey-1-interior-wall-diagonal-4-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-4-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -573,12 +608,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-18">
-            <Name>storey-1-interior-wall-diagonal-5-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-5-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -605,12 +640,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="InteriorWall" id="surface-19">
-            <Name>storey-1-interior-wall-diagonal-6-space-1</Name>
+            <Name>storey-1-interior-wall-diagonal-6-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -637,12 +672,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-20">
-            <Name>storey-1-exterior-wall-1-space-1</Name>
+            <Name>storey-1-exterior-wall-1-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -667,78 +702,86 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-1">
+                <RectangularGeometry>
+                    <Azimuth>180</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>35</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>15</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>15</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>15</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>35</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>35</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-2">
+                <RectangularGeometry>
+                    <Azimuth>180</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-15</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-35</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-35</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-35</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-15</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-15</Coordinate>
+                            <Coordinate>-75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
         <Surface surfaceType="Shade" id="shade-1">
-            <Name>exterior-wall-1</Name>
-            <RectangularGeometry>
-                <Azimuth>180</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-2">
-            <Name>overhang-0</Name>
-            <RectangularGeometry>
-                <Azimuth>180</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>15</Coordinate>
-                        <Coordinate>-80</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>35</Coordinate>
-                        <Coordinate>-80</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>35</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>15</Coordinate>
-                        <Coordinate>-80</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>35</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>15</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-3">
             <Name>overhang-1</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
@@ -746,6 +789,46 @@
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
+                        <Coordinate>15</Coordinate>
+                        <Coordinate>-80</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-80</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>15</Coordinate>
+                        <Coordinate>-80</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>15</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-2">
+            <Name>overhang-2</Name>
+            <RectangularGeometry>
+                <Azimuth>180</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
                         <Coordinate>-35</Coordinate>
                         <Coordinate>-80</Coordinate>
                         <Coordinate>7</Coordinate>
@@ -778,8 +861,8 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-4">
-            <Name>fin-2-0</Name>
+        <Surface surfaceType="Shade" id="shade-3">
+            <Name>fin-2-2</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
@@ -812,6 +895,46 @@
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>15</Coordinate>
+                        <Coordinate>-83</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-4">
+            <Name>fin-1-1</Name>
+            <RectangularGeometry>
+                <Azimuth>180</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
                         <Coordinate>-83</Coordinate>
                         <Coordinate>3</Coordinate>
                     </CartesianPoint>
@@ -819,39 +942,39 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-5">
-            <Name>fin-1-0</Name>
+            <Name>fin-2-3</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-83</Coordinate>
                         <Coordinate>7</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-75</Coordinate>
                         <Coordinate>7</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-75</Coordinate>
                         <Coordinate>3</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-83</Coordinate>
                         <Coordinate>7</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-75</Coordinate>
                         <Coordinate>3</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-83</Coordinate>
                         <Coordinate>3</Coordinate>
                     </CartesianPoint>
@@ -859,47 +982,7 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-6">
-            <Name>fin-2-1</Name>
-            <RectangularGeometry>
-                <Azimuth>180</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>-83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>-83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>-83</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-7">
-            <Name>fin-1-1</Name>
+            <Name>fin-1-2</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
@@ -939,12 +1022,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-21">
-            <Name>storey-1-exterior-wall-2-space-1</Name>
+            <Name>storey-1-exterior-wall-2-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -969,78 +1052,86 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-3">
+                <RectangularGeometry>
+                    <Azimuth>270</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-52.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-22.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-22.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-22.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-52.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>-52.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-4">
+                <RectangularGeometry>
+                    <Azimuth>270</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>22.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>52.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>52.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>52.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>22.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-50</Coordinate>
+                            <Coordinate>22.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-8">
-            <Name>exterior-wall-2</Name>
-            <RectangularGeometry>
-                <Azimuth>270</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-9">
-            <Name>overhang-0</Name>
-            <RectangularGeometry>
-                <Azimuth>270</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-55</Coordinate>
-                        <Coordinate>-22.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-55</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-55</Coordinate>
-                        <Coordinate>-22.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-22.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-10">
+        <Surface surfaceType="Shade" id="shade-7">
             <Name>overhang-1</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
@@ -1049,6 +1140,46 @@
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>-55</Coordinate>
+                        <Coordinate>-22.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-55</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-55</Coordinate>
+                        <Coordinate>-22.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>-22.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-8">
+            <Name>overhang-2</Name>
+            <RectangularGeometry>
+                <Azimuth>270</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-55</Coordinate>
                         <Coordinate>52.5</Coordinate>
                         <Coordinate>7</Coordinate>
                     </CartesianPoint>
@@ -1080,8 +1211,8 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-11">
-            <Name>fin-2-0</Name>
+        <Surface surfaceType="Shade" id="shade-9">
+            <Name>fin-2-2</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
@@ -1115,93 +1246,93 @@
                     <CartesianPoint>
                         <Coordinate>-58</Coordinate>
                         <Coordinate>-22.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-10">
+            <Name>fin-1-1</Name>
+            <RectangularGeometry>
+                <Azimuth>270</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-58</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-58</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-58</Coordinate>
+                        <Coordinate>-52.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-11">
+            <Name>fin-2-3</Name>
+            <RectangularGeometry>
+                <Azimuth>270</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-58</Coordinate>
+                        <Coordinate>52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>52.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-58</Coordinate>
+                        <Coordinate>52.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>52.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-58</Coordinate>
+                        <Coordinate>52.5</Coordinate>
                         <Coordinate>3</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-12">
-            <Name>fin-1-0</Name>
-            <RectangularGeometry>
-                <Azimuth>270</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-58</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-58</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-58</Coordinate>
-                        <Coordinate>-52.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-13">
-            <Name>fin-2-1</Name>
-            <RectangularGeometry>
-                <Azimuth>270</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-58</Coordinate>
-                        <Coordinate>52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>52.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-58</Coordinate>
-                        <Coordinate>52.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>52.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-58</Coordinate>
-                        <Coordinate>52.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-14">
-            <Name>fin-1-1</Name>
+            <Name>fin-1-2</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
@@ -1241,12 +1372,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-22">
-            <Name>storey-1-exterior-wall-3-space-1</Name>
+            <Name>storey-1-exterior-wall-3-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -1271,78 +1402,86 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-5">
+                <RectangularGeometry>
+                    <Azimuth>0</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-42.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-32.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-32.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-32.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-42.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-42.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-6">
+                <RectangularGeometry>
+                    <Azimuth>0</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>-17.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-7.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-7.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-7.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-17.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>-17.5</Coordinate>
+                            <Coordinate>75</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-15">
-            <Name>exterior-wall-3</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-16">
-            <Name>overhang-0</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>80</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>80</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>80</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-17">
+        <Surface surfaceType="Shade" id="shade-13">
             <Name>overhang-1</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
@@ -1350,6 +1489,46 @@
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>80</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>80</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>80</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-14">
+            <Name>overhang-2</Name>
+            <RectangularGeometry>
+                <Azimuth>0</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
                         <Coordinate>-7.5</Coordinate>
                         <Coordinate>80</Coordinate>
                         <Coordinate>7</Coordinate>
@@ -1378,132 +1557,132 @@
                         <Coordinate>-7.5</Coordinate>
                         <Coordinate>75</Coordinate>
                         <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-15">
+            <Name>fin-2-2</Name>
+            <RectangularGeometry>
+                <Azimuth>0</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-16">
+            <Name>fin-1-1</Name>
+            <RectangularGeometry>
+                <Azimuth>0</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-17">
+            <Name>fin-2-3</Name>
+            <RectangularGeometry>
+                <Azimuth>0</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-7.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-7.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-7.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-7.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-7.5</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-7.5</Coordinate>
+                        <Coordinate>83</Coordinate>
+                        <Coordinate>3</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-18">
-            <Name>fin-2-0</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-19">
-            <Name>fin-1-0</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-20">
-            <Name>fin-2-1</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-7.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-7.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-7.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-7.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-7.5</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-7.5</Coordinate>
-                        <Coordinate>83</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-21">
-            <Name>fin-1-1</Name>
+            <Name>fin-1-2</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
@@ -1543,12 +1722,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-23">
-            <Name>storey-1-exterior-wall-4-space-1</Name>
+            <Name>storey-1-exterior-wall-4-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -1573,78 +1752,86 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-7">
+                <RectangularGeometry>
+                    <Azimuth>90</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>60</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>40</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>40</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>40</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>60</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>60</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-8">
+                <RectangularGeometry>
+                    <Azimuth>90</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>10</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>-10</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>-10</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>-10</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>10</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>0</Coordinate>
+                            <Coordinate>10</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-22">
-            <Name>exterior-wall-4</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-23">
-            <Name>overhang-0</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>5</Coordinate>
-                        <Coordinate>40</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>5</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>5</Coordinate>
-                        <Coordinate>40</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>40</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-24">
+        <Surface surfaceType="Shade" id="shade-19">
             <Name>overhang-1</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
@@ -1653,6 +1840,46 @@
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>5</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-20">
+            <Name>overhang-2</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>5</Coordinate>
                         <Coordinate>-10</Coordinate>
                         <Coordinate>7</Coordinate>
                     </CartesianPoint>
@@ -1684,8 +1911,8 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-25">
-            <Name>fin-2-0</Name>
+        <Surface surfaceType="Shade" id="shade-21">
+            <Name>fin-2-2</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
@@ -1724,88 +1951,88 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-26">
-            <Name>fin-1-0</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>8</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>8</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>8</Coordinate>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-27">
-            <Name>fin-2-1</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>8</Coordinate>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>8</Coordinate>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>8</Coordinate>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-28">
+        <Surface surfaceType="Shade" id="shade-22">
             <Name>fin-1-1</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>8</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>8</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>8</Coordinate>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-23">
+            <Name>fin-2-3</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>8</Coordinate>
+                        <Coordinate>-10</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>-10</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>-10</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>8</Coordinate>
+                        <Coordinate>-10</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>-10</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>8</Coordinate>
+                        <Coordinate>-10</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-24">
+            <Name>fin-1-2</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
@@ -1845,12 +2072,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-24">
-            <Name>storey-1-exterior-wall-5-space-1</Name>
+            <Name>storey-1-exterior-wall-5-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -1875,78 +2102,86 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-9">
+                <RectangularGeometry>
+                    <Azimuth>0</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>7.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>17.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>17.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>17.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>7.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>7.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-10">
+                <RectangularGeometry>
+                    <Azimuth>0</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>32.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>42.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>42.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>42.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>32.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>32.5</Coordinate>
+                            <Coordinate>-25</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-29">
-            <Name>exterior-wall-5</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-30">
-            <Name>overhang-0</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>17.5</Coordinate>
-                        <Coordinate>-20</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-20</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>17.5</Coordinate>
-                        <Coordinate>-20</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>17.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-31">
+        <Surface surfaceType="Shade" id="shade-25">
             <Name>overhang-1</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
@@ -1954,6 +2189,46 @@
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
+                        <Coordinate>17.5</Coordinate>
+                        <Coordinate>-20</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-20</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>17.5</Coordinate>
+                        <Coordinate>-20</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>17.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-26">
+            <Name>overhang-2</Name>
+            <RectangularGeometry>
+                <Azimuth>0</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
                         <Coordinate>42.5</Coordinate>
                         <Coordinate>-20</Coordinate>
                         <Coordinate>7</Coordinate>
@@ -1986,8 +2261,8 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-32">
-            <Name>fin-2-0</Name>
+        <Surface surfaceType="Shade" id="shade-27">
+            <Name>fin-2-2</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
@@ -2026,88 +2301,88 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-33">
-            <Name>fin-1-0</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-17</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-17</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>7.5</Coordinate>
-                        <Coordinate>-17</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-34">
-            <Name>fin-2-1</Name>
-            <RectangularGeometry>
-                <Azimuth>0</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>42.5</Coordinate>
-                        <Coordinate>-17</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>42.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>42.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>42.5</Coordinate>
-                        <Coordinate>-17</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>42.5</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>42.5</Coordinate>
-                        <Coordinate>-17</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-35">
+        <Surface surfaceType="Shade" id="shade-28">
             <Name>fin-1-1</Name>
+            <RectangularGeometry>
+                <Azimuth>0</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-17</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-17</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>7.5</Coordinate>
+                        <Coordinate>-17</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-29">
+            <Name>fin-2-3</Name>
+            <RectangularGeometry>
+                <Azimuth>0</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>42.5</Coordinate>
+                        <Coordinate>-17</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>42.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>42.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>42.5</Coordinate>
+                        <Coordinate>-17</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>42.5</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>42.5</Coordinate>
+                        <Coordinate>-17</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-30">
+            <Name>fin-1-2</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
@@ -2147,12 +2422,12 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-25">
-            <Name>storey-1-exterior-wall-6-space-1</Name>
+            <Name>storey-1-exterior-wall-6-space-8</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -2177,78 +2452,86 @@
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
+            <Opening openingType="FixedWindow" id="opening-11">
+                <RectangularGeometry>
+                    <Azimuth>90</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-32.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-42.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-42.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-42.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-32.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-32.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
+            <Opening openingType="FixedWindow" id="opening-12">
+                <RectangularGeometry>
+                    <Azimuth>90</Azimuth>
+                </RectangularGeometry>
+                <PlanarGeometry>
+                    <PolyLoop>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-57.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-67.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-67.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-67.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-57.5</Coordinate>
+                            <Coordinate>7</Coordinate>
+                        </CartesianPoint>
+                        <CartesianPoint>
+                            <Coordinate>50</Coordinate>
+                            <Coordinate>-57.5</Coordinate>
+                            <Coordinate>3</Coordinate>
+                        </CartesianPoint>
+                    </PolyLoop>
+                </PlanarGeometry>
+            </Opening>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-36">
-            <Name>exterior-wall-6</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-37">
-            <Name>overhang-0</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>55</Coordinate>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>55</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>55</Coordinate>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-42.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-38">
+        <Surface surfaceType="Shade" id="shade-31">
             <Name>overhang-1</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
@@ -2257,6 +2540,46 @@
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>55</Coordinate>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>55</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>55</Coordinate>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-42.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-32">
+            <Name>overhang-2</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>55</Coordinate>
                         <Coordinate>-67.5</Coordinate>
                         <Coordinate>7</Coordinate>
                     </CartesianPoint>
@@ -2288,8 +2611,8 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-39">
-            <Name>fin-2-0</Name>
+        <Surface surfaceType="Shade" id="shade-33">
+            <Name>fin-2-2</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
@@ -2328,88 +2651,88 @@
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
-        <Surface surfaceType="Shade" id="shade-40">
-            <Name>fin-1-0</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>58</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>58</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>58</Coordinate>
-                        <Coordinate>-32.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-41">
-            <Name>fin-2-1</Name>
-            <RectangularGeometry>
-                <Azimuth>90</Azimuth>
-            </RectangularGeometry>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>58</Coordinate>
-                        <Coordinate>-67.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-67.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-67.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>58</Coordinate>
-                        <Coordinate>-67.5</Coordinate>
-                        <Coordinate>7</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-67.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>58</Coordinate>
-                        <Coordinate>-67.5</Coordinate>
-                        <Coordinate>3</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="Shade" id="shade-42">
+        <Surface surfaceType="Shade" id="shade-34">
             <Name>fin-1-1</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>58</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>58</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>58</Coordinate>
+                        <Coordinate>-32.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-35">
+            <Name>fin-2-3</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>58</Coordinate>
+                        <Coordinate>-67.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-67.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-67.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>58</Coordinate>
+                        <Coordinate>-67.5</Coordinate>
+                        <Coordinate>7</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-67.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>58</Coordinate>
+                        <Coordinate>-67.5</Coordinate>
+                        <Coordinate>3</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-36">
+            <Name>fin-1-2</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
@@ -2449,4 +2772,25 @@
             </PlanarGeometry>
         </Surface>
     </Campus>
+    <Zone id="zone-1">
+        <Name>storey-1-zone-1</Name>
+    </Zone>
+    <Zone id="zone-2">
+        <Name>storey-1-zone-2</Name>
+    </Zone>
+    <Zone id="zone-3">
+        <Name>storey-1-zone-3</Name>
+    </Zone>
+    <Zone id="zone-4">
+        <Name>storey-1-zone-4</Name>
+    </Zone>
+    <Zone id="zone-5">
+        <Name>storey-1-zone-5</Name>
+    </Zone>
+    <Zone id="zone-6">
+        <Name>storey-1-zone-6</Name>
+    </Zone>
+    <Zone id="zone-7">
+        <Name>storey-1-zone-7</Name>
+    </Zone>
 </gbXML>

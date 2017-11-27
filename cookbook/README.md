@@ -7,3 +7,31 @@
 ## Coding Style
 
 These scripts here are cook book style example code
+
+
+### Strategies
+
+The scripts are intended to help with rapid iteration. For example, choosing a pretty color or selecting a pleasing length may require the viewing of numerous fails involving editing the code, saving it, refreshing the browser, and judging the results. 
+
+Until there is an AI debugger for ugliness, the path toward a beautiful user experience is paved with the the coder's fails.
+
+* Use a variety of color to indicate that adjacent and connected elements are actually separate elements
+* If a feature creates an element then display that element immediately and in a distinguishable manner. 
+	* You should not have to click to see if something is actually there
+* Enable viewing everything upon loading
+	* use transparency and 'exploding' element positions
+* Allow as much possible user interaction as possible
+	* Cookbook examples are places where you find out what crashes your app
+	* Will your script survive a user entering negative numbers?
+	* Can things get too big or small or invisible and come back and still be usable
+	* Preventing users from entering invalid data is a very separate issue
+
+### Files
+
+A the examples here are standalone files
+
+They follow the Three.js examples: https://threejs.org/examples/
+
+* All HTML, CSS and JavaScript - apart from library files - are in a single HTML files
+
+ 
