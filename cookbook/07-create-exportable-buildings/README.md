@@ -34,6 +34,18 @@ Export generated 3D building data to a gbXML file
 ## Change Log
 
 
+### 2017-11-28 ~ Theo
+
+* Add adjacent building gbxml
+	* Azimuth a place holder
+
+
+### 2017-11-27 ~ Theo
+
+* Openings exporting nicely
+* Add area and volume calculations
+* Started cleaning up IDs and adjacencies
+
 ### 2017-11-26 ~ Theo
 
 * Calculating and adding openings as meshes

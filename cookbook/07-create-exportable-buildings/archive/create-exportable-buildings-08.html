@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Create and export self-generated 3D building data to gbXML files" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-28" >
-<title>create exportable buildings r1.6 </title>
+<meta name = "date" content = "2017-11-27" >
+<title>create exportable buildings r1.5 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -127,8 +127,9 @@
 	let gbxml;
 
 	let campus;
-	let buildings;
-	let theBuilding;
+	let theBuilding = {};
+
+	var checkWindow;
 
 	var materialParameters;
 	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -179,7 +180,6 @@
 
 
 		const axesHelper = new THREE.AxesHelper( 50 );
-		axesHelper.name = 'axesHelper'
 		scene.add( axesHelper );
 /*
 		geometry = new THREE.BoxGeometry( 50, 50, 50 );
@@ -229,12 +229,6 @@
 
 	function onSelectFootprint( choiceIndex = 0 ) {
 
-		theBuilding = {};
-		theBuilding.name = 'theBuilding';
-
-		theBuilding.orientation = 0; // parseInt( inpOrientation.value, 10 );
-		theBuilding.footprints = [ 'Box', 'L', 'T', 'H', 'Polygon' ];
-
 		theBuilding.area = 10000;
 		theBuilding.storeys = 1;
 		theBuilding.areaFloor = theBuilding.area / theBuilding.storeys;
@@ -248,13 +242,14 @@
 		theBuilding.overhang = 5; // parseFloat( inpOverhang.value );
 		theBuilding.fin = 8; // parseFloat( inpFin.value );
 
+		theBuilding.orientation = 0; // parseInt( inpOrientation.value, 10 );
 		theBuilding.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
 		theBuilding.edges = null;
 
+		theBuilding.footprints = [ 'Box', 'L', 'T', 'H', 'Polygon' ];
 		materialParameters = { color: 0xffffff * Math.random(), opacity: theBuilding.opacity, side: 2, transparent: true };
 
-// Each button relates to a particular footprint and a custom set of parameters
-
+// Each button relates to a particular footprint and custom set of parameters
 		if ( choiceIndex === 0 ) {
 
 			theBuilding.length = 100;
@@ -497,22 +492,21 @@
 		}
 
 		theBuilding.group = new THREE.Group();
-		theBuilding.group.name = theBuilding.name;
-
-//		theBuilding.group.userData.openingsPerWall = [];
+		theBuilding.group.userData.openingsPerWall = [];
 
 		const vertices = theBuilding.polygonVertices;
 		const verticesOffset = offsetPoints( theBuilding.group, vertices, -theBuilding.perimeterDepth, 0 );
 		theBuilding.group.rotation.z = - theBuilding.orientation * Math.PI / 180;
 
-// overwrites previous test polygon
-		drawTestPolygon( verticesOffset, 'polygon offset', 0xff0000 );
+// overwrites previous polygon
+		drawTestPolygon( verticesOffset, 'polygon offset', 0xff0000 ); 
 
 		for ( var i = 0; i < theBuilding.storeys; i++ ) {
 
 			const storey = new THREE.Group();
 
 			storey.name = 'storey-' + ( i + 1 );
+
 
 			const ceilings = new THREE.Group();
 			ceilings.name = storey.name;
@@ -1091,21 +1085,11 @@
 
 	function getBuildingData() {
 
-		theBuilding.surfaceCount = 1;
-		theBuilding.spaceCount = 1;
-		theBuilding.openingCount = 1;
-		theBuilding.shadeCount = 1;
-		theBuilding.area = 0;
-
 		initExportGbxml();
-
-
 
 		getBuildingStoreys();
 
 		getSurfaces();
-
-		getAdjacentBuildings();
 
 //console.log( 'json', json.gbXML );
 
@@ -1182,8 +1166,33 @@
 
 */
 
+		theBuilding.surfaceCount = 1;
+		theBuilding.spaceCount = 1;
+		theBuilding.openingCount = 1;
+		theBuilding.shadeCount = 1;
+		theBuilding.area = 0;
+
 	}
 
+
+// not used yet
+	function getBuildings() {
+
+		let buildings = [];
+
+		for ( let child of scene.children ) {
+
+			if ( child.name.includes( 'uilding' ) && child.visible === true ) {
+
+				buildings.push( child );
+
+			}
+
+		}
+
+		return buildings;
+
+	}
 
 
 
@@ -1449,11 +1458,13 @@
 
 			const point = { CartesianPoint: [
 
-				{ Coordinate: Number( vertex.x.toFixed( 4 ) ) },
-				{ Coordinate: Number( vertex.y.toFixed( 4 ) ) },
-				{ Coordinate: Number( vertex.z.toFixed( 4 ) ) }
+					{ Coordinate: Number( vertex.x.toFixed(4) ) },
+					{ Coordinate: Number( vertex.y.toFixed(4) ) },
+					{ Coordinate: Number( vertex.z.toFixed(4) ) }
 
-			] };
+				]
+
+			};
 
 			surface.PlanarGeometry.PolyLoop.push( point );
 
@@ -1474,11 +1485,11 @@
 				let opening = {
 					"@openingType": "FixedWindow",
 					"@id": "opening-" + theBuilding.openingCount,
-					RectangularGeometry: {
-						Azimuth: mesh.userData.angle
+					"RectangularGeometry": {
+						"Azimuth": mesh.userData.angle
 					},
-					PlanarGeometry: {
-						PolyLoop: []
+					"PlanarGeometry": {
+						"PolyLoop": []
 					}
 				};
 
@@ -1509,16 +1520,17 @@
 
 //console.log( 'child.name',child.name );
 
-				let surface = {
-					"@surfaceType": "Shade",
-					"@id": "shade-" + theBuilding.shadeCount,
-					"Name": child.name,
-					"RectangularGeometry": {
-						"Azimuth": mesh.userData.angle
-					},
-					"PlanarGeometry": {
-						"PolyLoop": []
-					}
+				let surface =
+					{
+						"@surfaceType": "Shade",
+						"@id": "shade-" + theBuilding.shadeCount,
+						"Name": child.name,
+						"RectangularGeometry": {
+							"Azimuth": mesh.userData.angle
+						},
+						"PlanarGeometry": {
+							"PolyLoop": []
+						}
 				};
 
 				getPolyLoop2( surface, child  );
@@ -1536,70 +1548,40 @@
 
 
 
-	function getAdjacentBuildings() {
+	function getSpaces() {
 
-		const surfaces = json.gbXML.Campus.Surface;
+		const spaces = json.gbXML.Campus.Building.Space;
 
-		for ( let child of scene.children ) {
+		for ( let i = 0; i < theBuilding.storeys; i++ ) {
 
-			if ( child.name.startsWith( 'building-adjacent' ) ) {
+			const space = spaces[ i ];
 
-				const geometry = new THREE.Geometry().fromBufferGeometry( child.geometry.clone() );
+			const obj = {
 
-				let vertexCount = 0;
-
-				for ( let i = 0; i < 5; i++ ) {
-
-					const surface = {
-						"@surfaceType": "Shade",
-						"@id": "shade-" + theBuilding.shadeCount,
-						Name: child.name,
-						RectangularGeometry: {
-							Azimuth: 90 // child.userData.angle
-						},
-						PlanarGeometry: {
-							PolyLoop: []
-						}
-					};
-
-					const v1 = child.localToWorld ( geometry.vertices[ vertexCount++ ] );
-					const v2 = child.localToWorld ( geometry.vertices[ vertexCount++ ] );
-					const v3 = child.localToWorld ( geometry.vertices[ vertexCount++ ] );
-					const v4 = child.localToWorld ( geometry.vertices[ vertexCount++ ] );
-
-					const vertices = [ v2, v1, v3, v4 ];
-
-					for ( let j = 0; j < 4; j++ ) {
-
-						const cartesianPoint = [];
-						let vertex = vertices[ j ];
-
-						const point = { CartesianPoint: [
-
-								{ Coordinate: Number( vertex.x.toFixed( 4 ) ) },
-								{ Coordinate: Number( vertex.y.toFixed( 4 ) ) },
-								{ Coordinate: Number( vertex.z.toFixed( 4 ) ) }
-
-							]
-
-						};
-
-						surface.PlanarGeometry.PolyLoop.push( point );
-
-					}
-
-					surfaces.push( surface );
-
-					theBuilding.shadeCount ++;
+					"@id": "space-" + ( i + 1 ),
+					"@buildingStoreyIdRef": theBuilding.spaceCount,
+					"@zoneIdRef": "zone-" + ( i + 1 ),
+					"conditionType": "HeatedAndCooled",
+					"Name": "space-" + ( i + 1 ),
+					"Description": "internal space" + ( i + 1 ),
+					"Area": 999999,
+					"Volume": 999999
 
 				}
 
-			}
+			spaces.push( obj );
+
+			theBuilding.spaceCount ++;
 
 		}
 
 	}
 
+
+
+	function getZones() {
+
+	}
 
 
 /////////////////
