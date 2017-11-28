@@ -14,33 +14,38 @@
         </Location>
         <Building id="1" buildingType="Office">
             <BuildingStorey id="storey-1">
-                <Name>storey-1</Name>
+                <Name>storey 1</Name>
                 <Level>0</Level>
             </BuildingStorey>
-            <Space id="zone-1" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
-                <Name>storey-1-zone-1</Name>
-                <Area>999999</Area>
-                <Volume>999999</Volume>
+            <Space id="space-1" zoneIdRef="zone-1" buildingStoreyIdRef="storey-1" conditionType="HeatedAndCooled">
+                <Name>storey-1-space-1</Name>
+                <Description>internal space 1</Description>
+                <Area>4,900</Area>
+                <Volume>49,000</Volume>
             </Space>
-            <Space id="zone-2" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
-                <Name>storey-1-zone-2</Name>
-                <Area>999999</Area>
-                <Volume>999999</Volume>
+            <Space id="space-2" zoneIdRef="zone-2" buildingStoreyIdRef="storey-1" conditionType="HeatedAndCooled">
+                <Name>storey-1-space-2</Name>
+                <Description>internal space 1</Description>
+                <Area>1,275</Area>
+                <Volume>12,750</Volume>
             </Space>
-            <Space id="zone-3" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
-                <Name>storey-1-zone-3</Name>
-                <Area>999999</Area>
-                <Volume>999999</Volume>
+            <Space id="space-3" zoneIdRef="zone-3" buildingStoreyIdRef="storey-1" conditionType="HeatedAndCooled">
+                <Name>storey-1-space-3</Name>
+                <Description>internal space 1</Description>
+                <Area>1,275</Area>
+                <Volume>12,750</Volume>
             </Space>
-            <Space id="zone-4" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
-                <Name>storey-1-zone-4</Name>
-                <Area>999999</Area>
-                <Volume>999999</Volume>
+            <Space id="space-4" zoneIdRef="zone-4" buildingStoreyIdRef="storey-1" conditionType="HeatedAndCooled">
+                <Name>storey-1-space-4</Name>
+                <Description>internal space 1</Description>
+                <Area>1,275</Area>
+                <Volume>12,750</Volume>
             </Space>
-            <Space id="zone-5" zoneIdRef="999999" buildingStoreyIdRef="storey-1">
-                <Name>storey-1-zone-5</Name>
-                <Area>999999</Area>
-                <Volume>999999</Volume>
+            <Space id="space-5" zoneIdRef="zone-5" buildingStoreyIdRef="storey-1" conditionType="HeatedAndCooled">
+                <Name>storey-1-space-5</Name>
+                <Description>internal space 1</Description>
+                <Area>1,275</Area>
+                <Volume>12,750</Volume>
             </Space>
         </Building>
         <Surface surfaceType="Ceiling" id="surface-1">
@@ -49,7 +54,8 @@
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-1"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -81,7 +87,8 @@
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-3"/>
+            <AdjacentSpaceId spaceIdRef="space-2"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -113,7 +120,8 @@
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-4"/>
+            <AdjacentSpaceId spaceIdRef="space-3"/>
+            <AdjacentSpaceId spaceIdRef="space-8"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -145,7 +153,8 @@
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-5"/>
+            <AdjacentSpaceId spaceIdRef="space-4"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -177,7 +186,8 @@
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-5"/>
+            <AdjacentSpaceId spaceIdRef="space-10"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -209,7 +219,8 @@
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -241,7 +252,8 @@
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -273,7 +285,8 @@
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -305,7 +318,8 @@
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -337,7 +351,8 @@
                 <Azimuth>225</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -369,7 +384,8 @@
                 <Azimuth>315</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -401,7 +417,8 @@
                 <Azimuth>45</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -433,7 +450,8 @@
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
