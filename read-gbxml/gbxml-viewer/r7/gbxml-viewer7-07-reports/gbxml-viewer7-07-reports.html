@@ -21,7 +21,7 @@
 	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
-	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; margin: 3px; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	iframe { width: 100%; }
@@ -34,14 +34,17 @@
 
 	td { vertical-align: top; }
 
+	.toggle { width: 160px; }
 	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 
 	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; height: 100%;
-		overflow-x: hidden; padding: 30px 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+		overflow-x: hidden; padding: 0 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
 	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
+
+	#ib { display: inline-block; width: 160px; }
 
 </style>
 </head>
@@ -78,7 +81,7 @@
 
 		<div id = "divBreadcrumbs" ></div>
 
-		<div id = "divMenuItems" ></div>
+
 
 		<hr>
 
@@ -90,7 +93,7 @@
 		<hr>
 
 		<div id=divReport ></div>
-
+		<div id = "divMenuItems" ></div>
 	</div>
 
 
@@ -105,11 +108,13 @@
 
 <script>
 
+	let icw;
 	let gbjson;
+	let meshSurfaces;
 
 	const user = 'ladybug-tools';
 	const repo = '/spider';
-	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-templates/';
+	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-07-reports/';
 
 	const uriDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
 	const threeDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
@@ -120,7 +125,6 @@
 
 	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
 	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
-
 
 	const b = '<br>';
 
@@ -139,34 +143,36 @@
 
 	function createReport() {
 
-		icw = ifrThree.contentWindow;
-		gbjson = icw.gbjson;
+		onloadThree();
 
-		gbxml = traverse( gbjson );
+//		icw = ifrThree.contentWindow;
+//		gbjson = icw.gbjson;
 
-console.log( 'gbxml', gbxml );
+		gbxml = traversGbjson( gbjson );
+
+//console.log( 'gbxml', gbxml );
 
 		divReport.innerHTML = addDetails( 'gbXML', gbxml.attributes );
 
-		campus = traverse( gbjson.Campus );
+		campus = traversGbjson( gbjson.Campus );
 		divReport.innerHTML += addDetails( 'Campus', campus.attributes );
 
 
-		zones = traverse( gbjson.Zone );
+		zones = traversGbjson( gbjson.Zone );
 		divReport.innerHTML += addDetails( 'Zones', zones.attributes );
 
 
-		documents = traverse( gbjson.DocumentHistory );
+		documents = traversGbjson( gbjson.DocumentHistory );
+		divReport.innerHTML += addDetails( 'Documents', documents.attributes );
 
-		divReport.innerHTML +=  '<h3>Documents</h3>' + documents.attributes;
 
-		surfaces = traverse( gbjson.Campus.Surface );
+		surfaces = traversGbjson( gbjson.Campus.Surface );
+		detail = getSurfaces();
+		divReport.innerHTML += addDetails( detail.summary, detail.flowContent, 'open' );
 
-		divReport.innerHTML +=  '<h3>Surfaces</h3>' + surfaces.attributes;
+//		divReport.innerHTML += txt;
 
-		txt = getSurfaces();
-
-		divReport.innerHTML += txt;
+		examineGbjson( gbjson );
 
 	}
 
@@ -174,10 +180,12 @@ console.log( 'gbxml', gbxml );
 	function getSurfaces() {
 
 		surfaces = gbjson.Campus.Surface;
-		let txt = ''
-console.log( 'surfaces', surfaces );
 
-		txt += 'Surfaces: ' + surfaces.length + b;
+		let txt = '';
+
+//console.log( 'surfaces', surfaces );
+
+		txt += '';
 
 		types = [];
 		typesCount = [];
@@ -201,20 +209,65 @@ console.log( 'surfaces', surfaces );
 
 		for ( let i = 0; i < types.length; i++ ) {
 
-			txt += types[ i ] + ': ' + typesCount[ i ] + b;
+			txt += '<button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + '%' + b;
 
 		}
 
-		return txt;
+		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: ' 
+
+		const summary = 'Surfaces: ' + surfaces.length;
+
+		return { summary: summary, flowContent: txt };
 
 	}
 
 
-	function addDetails( summary, text ) {
 
+	function toggleSurfaceType( that ) {
+
+//console.log( '', that.innerText );
+
+		meshSurfaces.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && child.userData.data.surfaceType !== that.innerText ) {
+
+				child.material.wireframe = true;
+				child.material.opacity = 0.1;
+
+			} else if ( child.material ) {
+
+				child.material.wireframe = false;
+				child.material.opacity = 0.85;
+
+			}
+
+		} );
+
+	}
+
+
+	function toggleAllVisible() {
+
+		meshSurfaces.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.wireframe = false;
+				child.material.opacity = 0.85;
+
+			}
+		} );
+
+	}
+
+
+
+	function addDetails( summary, text, open = '' ) {
+
+		text = text ? text : 'no attributes';
 		const txt =
 
-		'<details>' +
+		'<details ' + open + ' >' +
 			'<summary>' + summary + '</summary>' +
 			text +
 		'</details>';
@@ -224,7 +277,7 @@ console.log( 'surfaces', surfaces );
 	}
 
 
-	function traverse( obj ) {
+	function traversGbjson( obj ) {
 
 		const b = '<br>';
 		elements = [];
@@ -241,13 +294,13 @@ console.log( 'surfaces', surfaces );
 
 				}
 
-//				traverse( obj [ i ] );
+//				traversGbjson( obj [ i ] );
 
 			} else {
 
 //console.log( 'attribute', i, obj[ i ] );
 
-				txt += i + ': ' + obj[ i ] + b;
+				txt += '<div id=ib >' + i + '</div>: ' + obj[ i ] + b;
 
 			}
 
@@ -259,31 +312,208 @@ console.log( 'surfaces', surfaces );
 
 
 
-/*
+	function examineGbjson( gbjson ) {
 
-		const propertyNames = Object.getOwnPropertyNames( gbjson ) ;
+		surfaces = [];
 
-console.log( 'propertyNames', propertyNames );
-
-		 gbjsonKeys = Object.keys( gbjson );  // enumerable
-
-console.log( 'gbjsonKeys', gbjsonKeys );
-
-
-		t = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur? ';
-		text = t + t + t + t;
-
-		checkWindow = window.open( '', 'report', 'left=400,scrollbars=yes,status=yes,width=800,height=400,top=200' );
-
-//		checkWindow = window.open( '', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes' );
-		checkWindow.document.write( '<textarea style=width:100%;height:100%; >' + text + '</textarea>' );
-		checkWindow.document.title = 'gbXML error check';
-
-//console.log( '', checkWindow );
-
-*/
+		const b = '<br>';
+		let txt = 
+			'File: ' + gbjson.name + b +
+			'Number of surfaces: ' + gbjson.Campus.Surface.length +
+		'';
 
 
+		let t$ = '';
+
+		let surfacesCount = 0;
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
+
+			if ( !surfaces.includes( points ) ) { 
+
+				surfaces.push( points ); 
+
+			} else {
+
+console.log( 'duplicate surface', surface );
+
+				t$ += 
+					'<p>' +
+						'id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+					'</p>';
+
+				surfacesCount ++;
+			}
+
+		}
+
+		divReport.innerHTML += addDetails( 'Duplicate Surfaces: ' + surfacesCount, t$ );
+//		txt += '<h3>' + surfacesCount + ' Duplicate Surfaces</h3>' + t$;
+
+
+		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> ' 
+
+
+		adjacenciesCount = 0;
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			adjacencies = surface.AdjacentSpaceId;
+
+			if ( Array.isArray( adjacencies )  && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+
+//console.log( 'surface', surface );
+//console.log( 'duplicate adjacencies', adjacencies );
+
+				t$ += 
+					'<p>' +
+						'id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: <button onclick=toggleDuplicateAdjacency(this); style=width:200px >' + surface.Name + '</button>' + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+						'Adjacencies : ' + adjacencies[ 0 ].spaceIdRef + b +
+					'</p>';
+
+				adjacenciesCount ++;
+
+			}
+
+		}
+
+
+//		txt += '<h3>' + adjacenciesCount + ' Duplicate Adjacencies</h3>' + t$;
+
+		divReport.innerHTML += addDetails( 'Duplicate Adjacencies: ' + adjacenciesCount, t$, 'open' );
+
+
+		coordinatesCount = 0;
+		verticesModelDuplicates = 0
+		verticesModel = [];
+		t$ = ''
+
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			points = surface.PlanarGeometry.PolyLoop.CartesianPoint;
+
+			verticesSurface = [];
+
+			for ( point of points ) {
+
+				vertex = JSON.stringify( point );
+
+				if ( !verticesSurface.includes( vertex ) ) { 
+
+					verticesSurface.push( vertex ); 
+
+				} else {
+
+console.log( 'dup', vertex );
+
+				t$ += 
+					'<p>' +
+						'id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+//						'Adjacencies : ' + adjacencies[ 0 ].spaceIdRef + b +
+					'</p>';
+
+
+				}
+
+
+				if ( !verticesModel.includes( vertex ) ) { 
+
+					verticesModel.push( vertex ); 
+
+				} else {
+
+//console.log( 'dup in model', vertex );
+
+					verticesModelDuplicates ++;
+
+				}
+
+				coordinatesCount ++;
+
+			}
+
+//console.log( '', vertices );
+
+		}
+
+		t$ = '' +
+			'Coordinates checked: ' + coordinatesCount + b +
+			'Unique coordinates in model: ' + verticesModel.length + b +
+			'Duplicate coordinates in model: ' + verticesModelDuplicates + b +
+		'';
+
+
+		divReport.innerHTML += addDetails( 'Duplicate Coordinates', t$ );
+
+//		divMenuItems.innerHTML = txt;
+
+
+	}
+
+
+	function toggleDuplicateAdjacency( that ) {
+
+//console.log( '', that.innerText );
+
+		let thatChild;
+
+		meshSurfaces.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && child.userData.data.Name !== that.innerText ) {
+
+				child.material.wireframe = true;
+				child.material.opacity = 0.1;
+
+
+			} else if ( child.material ) {
+
+				child.material.wireframe = false;
+				child.material.opacity = 1;
+				 thatChild = child;
+
+			}
+
+		} );
+
+//console.log( 'thatChild', thatChild );
+
+		space = thatChild.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef;
+
+		meshSurfaces.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
+				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
+				&& child !== thatChild
+			) {
+
+
+				child.material.wireframe = false;
+				child.material.opacity = 0.2;
+console.log( 'space', space );
+
+
+			} else {
+
+
+
+			}
+
+		} );
+
+
+	}
 
 	function onHashChange() {
 
@@ -321,15 +551,18 @@ console.log( 'gbjsonKeys', gbjsonKeys );
 
 
 
-
-
 	function onloadThree() {
 
 		icw = ifrThree.contentWindow;
-		icw.renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
+//		icw.renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
 		gbjson = icw.gbjson;
 
-console.log( '', gbjson );
+//console.log( '', gbjson );
+
+		THREE = icw.THREE;
+		meshSurfaces = icw.scene.children[ 4 ];
+
+//console.log( 'meshSurfaces', meshSurfaces );
 
 	}
 

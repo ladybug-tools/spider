@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "List and view all the files in all the folders. File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name = "keywords" content = "JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-26" >
+<meta name = "date" content = "2017-11-28" >
 <title>Ladybug Tools / Spider / Table of Contents</title>
 
 <style>
@@ -280,7 +280,8 @@
 
 					'</tr></table>';
 
-				if ( item.path !== 'README.md' && item.name.toLowerCase() === 'readme.md' ) {
+				if ( ( !location.hash || location.hash.toLowerCase().endsWith( 'readme.md' ) )
+						&& item.path !== 'README.md' && item.name.toLowerCase() === 'readme.md' ) {
 
 //					location.hash = urlGitHubPage + pathRepo + itemPath;
 					location.hash = itemPath;

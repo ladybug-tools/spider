@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "List and view all the files in all the folders. File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name = "keywords" content = "JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-22" >
-<title>Ladybug Tools / Spider Table of Contents</title>
+<meta name = "date" content = "2017-11-28" >
+<title>Ladybug Tools / Spider / Table of Contents</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -50,10 +50,10 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
 <!--
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo;
 -->
 		</p>
 
@@ -148,7 +148,8 @@
 			ulc = url.toLowerCase();
 
 			crumbs = url.lastIndexOf( '/' ) > 0 ? url.slice( 0, url.lastIndexOf( '/' ) ) : '';
-console.log( url.lastIndexOf( '/' ), crumbs );
+//console.log( url.lastIndexOf( '/' ), crumbs );
+
 			setBreadcrumbs( crumbs );
 
 //console.log( '',  urlGitHubApiContents + url.slice( 0, url.lastIndexOf( '/' ) + 1 ) );
@@ -194,11 +195,11 @@ console.log( url.lastIndexOf( '/' ), crumbs );
 
 	function setBreadcrumbs( path ) {
 
-		let txt = 
+		let txt =
 			'<b>' +
-				'<a href=JavaScript:getFolderContents(); >' + 
+				'<a href=JavaScript:getFolderContents(); >' +
 
-					( pathRepo ? pathRepo : '<span style=font-size:24px >&#x2302</span>' ) + 
+					( pathRepo ? pathRepo : '<span style=font-size:24px >&#x2302</span>' ) +
 
 				'</a> &raquo; ' +
 			'</b>';
@@ -228,9 +229,9 @@ console.log( url.lastIndexOf( '/' ), crumbs );
 
 		let txt = '';
 
-		const ignoreFolders = [ 'data' ]; //, 'plugins' 
+	if ( items.message ) { alert( items.message ); return; }
 
-//		if ( items.message ) { alert( items.message ); return; }
+		const ignoreFolders = [ 'data' ]; //, 'plugins'
 
 		for ( let item of items ) {
 
@@ -240,8 +241,8 @@ console.log( url.lastIndexOf( '/' ), crumbs );
 
 				txt +=
 					'<div style=margin-bottom:8px; >' +
-						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' + 
-							item.name  + 
+						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' +
+							item.name  +
 						'</a>' +
 					'</div>' +
 				'';
@@ -267,8 +268,8 @@ console.log( url.lastIndexOf( '/' ), crumbs );
 						'<td>' +
 
 // choose to access remote or local files
-//							'<a href=#' + urlGitHubPage + pathRepo + itemPath + 
-							'<a href=#' + itemPath + 
+//							'<a href=#' + urlGitHubPage + pathRepo + itemPath +
+							'<a href=#' + itemPath +
 
 							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
 // choose to access remote or local files
@@ -279,7 +280,8 @@ console.log( url.lastIndexOf( '/' ), crumbs );
 
 					'</tr></table>';
 
-				if ( item.path !== 'README.md' && item.name.toLowerCase() === 'readme.md' ) {
+				if ( ( !location.hash || location.hash.toLowerCase().endsWith( 'readme.md' ) )
+						&& item.path !== 'README.md' && item.name.toLowerCase() === 'readme.md' ) {
 
 //					location.hash = urlGitHubPage + pathRepo + itemPath;
 					location.hash = itemPath;
