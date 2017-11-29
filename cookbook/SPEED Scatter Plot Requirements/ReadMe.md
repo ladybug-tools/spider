@@ -6,7 +6,7 @@
 
 -Add the equivalent of the Design and Performance dashboard.
 
--Select and size proper axis titles, including units, ticks, and size of ticks.
+-Select and size proper axis titles, including units, ticks, and size of ticks and value labels.
 
 -Method to ensure axis titles are readable when rotation occurs.
 
@@ -23,6 +23,8 @@
 -Show axis on scatter plot.
 
 -Use Pareto Front JS to make all the Pareto Optimimal Designs some unique color, like white.
+
+-Make 3D grid only one quadrant like in spec.
 
 From previous issue:
 
