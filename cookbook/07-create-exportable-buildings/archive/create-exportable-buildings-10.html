@@ -247,7 +247,7 @@
 
 		theBuilding.storeyHeight = 10; //parseInt( inpHeight.value, 10 );
 		theBuilding.perimeterDepth = 15; //parseInt( inpPerimeterDepth.value, 10 );
-		theBuilding.openingsPerWall = 2; // parseInt( inpOpenings.value, 10 );
+		theBuilding.openingsPerWall = 3; // parseInt( inpOpenings.value, 10 );
 		theBuilding.wwr = 40; // parseInt( inpWindowWallRatio.value, 10 );
 
 		theBuilding.overhang = 5; // parseFloat( inpOverhang.value );
@@ -518,6 +518,8 @@
 
 			storey.name = 'storey-' + ( i + 1 );
 
+// tbd: rename ceiling to slab to clarify its multiple uses
+
 			const slabs = new THREE.Group();
 			slabs.name = storey.name;
 			storey.add( slabs );
@@ -702,6 +704,8 @@
 			wall.userData.lengthDelta = length / theBuilding.openingsPerWall;
 			wall.userData.angle = angleRadians;
 
+//			drawOpenings( length, wall );
+
 			drawOverhangs( length, wall );
 			drawFins( length, wall );
 
@@ -720,6 +724,8 @@
 		const wwr = theBuilding.wwr / 100;
 		const height = storeyHeight;
 		const hgt05 = theBuilding.storeyHeight * 0.5;
+//		const wallOpenings = new THREE.Object3D();
+//		wallOpenings.name = 'openings';
 
 		let holes = [];
 
@@ -756,6 +762,16 @@
 			const geometryHoles = geometryOpening.clone().applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
 			holes.push( geometryHoles.vertices );
 
+/*
+			const shapeOpening = new THREE.Shape( verticesOpening );
+			shapeGeoShape = new THREE.ShapeBufferGeometry( shapeOpening );
+			shapeGeoShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+
+			const meshOpening = new THREE.Mesh( shapeGeoShape, materialOpening );
+			meshOpening.name = 'opening';
+			wallOpenings.add( meshOpening );
+*/
+
 		}
 
 		geometryShape = new THREE.ShapeBufferGeometry( shape );
@@ -769,10 +785,59 @@
 		meshWall.userData.holes = holes;
 		meshWall.name = 'wall';
 
+//		meshWall.userData.openings = wallOpenings;
+
 		return meshWall;
 
 	}
 
+
+/*
+	function drawOpenings( length, obj ) {
+
+		if ( theBuilding.overhang < 0.5 ) { return; }
+
+		wwr = theBuilding.wwr / 100;
+
+		const materialOpening = new THREE.MeshPhongMaterial( { color: 0xffffff, emissive: 0xffffff, opacity: 1, side: 2, transparent: true } );
+
+		for ( let i = 0; i < obj.userData.holes.length; i++ ) {
+
+			const lengthDelta = obj.userData.lengthDelta;
+*/
+
+// looks like points and position calculations could be simplified
+/*
+			var points = [
+
+				v( lengthDelta * wwr, 0, 0 ),
+				v( 0, 0, 0 ),
+				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
+
+				v( lengthDelta * wwr, 0, 0 ),
+				v( 0, 0, 0 ),
+				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr )
+
+
+			];
+*/
+/*
+			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, theBuilding.storeyHeight * wwr );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+//			const geometry = new THREE.BufferGeometry();
+//			geometry.setFromPoints( points );
+
+			const mesh = new THREE.Mesh( geometry, materialOpening );
+			mesh.name = 'opening-' + i;
+//			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta - lengthDelta * 0.5  * wwr, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr );
+			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta, 0, theBuilding.storeyHeight * 0.5 );
+
+			obj.add( mesh );
+
+		}
+
+	}
+*/
 
 
 	function drawOverhangs( length, obj ) {
@@ -1520,10 +1585,19 @@
 				}
 			};
 
+			vertices = [];
+
 			for ( let j = 0; j < 4; j++ ) {
 
 				const vector = holes[ j ].clone();
-				const vertex = mesh.localToWorld( vector );
+				vertices.push( mesh.localToWorld( vector ) );
+
+			}
+
+			for ( let i = 0; i < 4; i++ ) {
+
+				vertex = vertices[ i ];
+
 				const point = { CartesianPoint: [
 
 					{ Coordinate: Number( vertex.x.toFixed( 4 ) ) },
@@ -1537,6 +1611,9 @@
 			}
 
 			surface.Opening.push( opening );
+
+//console.log( 'child', child );
+//console.log( 'opening', opening );
 
 			theBuilding.openingCount ++;
 

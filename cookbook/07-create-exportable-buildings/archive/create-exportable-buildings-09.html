@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Create and export self-generated 3D building data to gbXML files" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-29" >
-<title>create exportable buildings r1.7 </title>
+<meta name = "date" content = "2017-11-28" >
+<title>create exportable buildings r1.6 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -518,11 +518,14 @@
 
 			storey.name = 'storey-' + ( i + 1 );
 
-			const slabs = new THREE.Group();
-			slabs.name = storey.name;
-			storey.add( slabs );
+// tbd: rename ceiling to slab to clarify its multiple uses
 
-			drawSlab( vertices, verticesOffset, slabs );
+			const ceilings = new THREE.Group();
+			ceilings.name = storey.name;
+			storey.add( ceilings );
+
+
+			drawSlab( vertices, verticesOffset, ceilings );
 
 			const shapeOffset = new THREE.Shape( verticesOffset );
 			const geometryShapeOffset = new THREE.ShapeBufferGeometry( shapeOffset );
@@ -530,13 +533,13 @@
 			materialParameters.color = 0xffffff * Math.random();
 			const material = new THREE.MeshPhongMaterial( materialParameters );
 
-			const meshSlab = new THREE.Mesh( geometryShapeOffset, material );
-			meshSlab.position.z = -5;
-			meshSlab.name = storey.name + '-slab-1-interior';
-			meshSlab.userData.angle = 90 + theBuilding.orientation;
-			meshSlab.userData.verticesLocal = verticesOffset;
+			const meshCeiling = new THREE.Mesh( geometryShapeOffset, material );
+			meshCeiling.position.z = -5;
+			meshCeiling.name = storey.name + '-ceiling-1-interior';
+			meshCeiling.userData.angle = 90 + theBuilding.orientation;
+			meshCeiling.userData.verticesLocal = verticesOffset;
 
-			slabs.add( meshSlab );
+			ceilings.add( meshCeiling );
 
 			const interiorWalls = new THREE.Group();
 			interiorWalls.name = 'interior-walls';
@@ -702,6 +705,8 @@
 			wall.userData.lengthDelta = length / theBuilding.openingsPerWall;
 			wall.userData.angle = angleRadians;
 
+			drawOpenings( length, wall );
+
 			drawOverhangs( length, wall );
 			drawFins( length, wall );
 
@@ -720,15 +725,16 @@
 		const wwr = theBuilding.wwr / 100;
 		const height = storeyHeight;
 		const hgt05 = theBuilding.storeyHeight * 0.5;
+		const wallOpenings = new THREE.Object3D();
+		wallOpenings.name = 'openings';
 
 		let holes = [];
 
 		verticesWall = [
+			v( 0, 0, 0 ),
 			v( length, 0, 0 ),
 			v( length, height, 0 ),
 			v( 0, height, 0 ),
-			v( 0, 0, 0 )
-
 		];
 
 		const shape = new THREE.Shape( verticesWall );
@@ -736,11 +742,10 @@
 		const lenD05 = lengthDelta * 0.5;
 		const geometryBoundary = new THREE.Geometry();
 		geometryBoundary.vertices = [
-			v( -lenD05, hgt05, 0 ),
 			v( lenD05, hgt05, 0 ),
-			v( lenD05, -hgt05, 0 ),
-			v( -lenD05, -hgt05, 0 )
-
+			v( -lenD05, hgt05, 0 ),
+			v( -lenD05, -hgt05, 0 ),
+			v( lenD05, -hgt05, 0 )
 		];
 
 
@@ -753,8 +758,16 @@
 			hole.setFromPoints( verticesOpening );
 			shape.holes.push( hole );
 
-			const geometryHoles = geometryOpening.clone().applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
-			holes.push( geometryHoles.vertices );
+			holes.push( verticesOpening );
+/*
+			const shapeOpening = new THREE.Shape( verticesOpening );
+			shapeGeoShape = new THREE.ShapeBufferGeometry( shapeOpening );
+			shapeGeoShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+
+			const meshOpening = new THREE.Mesh( shapeGeoShape, materialOpening );
+			meshOpening.name = 'opening';
+			wallOpenings.add( meshOpening );
+*/
 
 		}
 
@@ -768,8 +781,51 @@
 		meshWall.userData.lengthDelta = lengthDelta;
 		meshWall.userData.holes = holes;
 		meshWall.name = 'wall';
+//		meshWall.userData.openings = wallOpenings;
 
 		return meshWall;
+
+	}
+
+
+
+	function drawOpenings( length, obj ) {
+
+		if ( theBuilding.overhang < 0.5 ) { return; }
+
+		const wwr = theBuilding.wwr / 100;
+
+		const materialOpening = new THREE.MeshPhongMaterial( { color: 0xffffff, emissive: 0xffffff, opacity: 0.1, side: 2, transparent: true } );
+
+		for ( let i = 0; i < obj.userData.holes.length; i++ ) {
+
+			const lengthDelta = obj.userData.lengthDelta;
+
+// looks like points and position calculations could be simplified
+
+			var points = [
+
+				v( 0, 0, 0 ),
+				v( lengthDelta * wwr, 0, 0 ),
+				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
+
+				v( lengthDelta * wwr, 0, theBuilding.storeyHeight * wwr ),
+				v( 0, 0, theBuilding.storeyHeight * wwr ),
+				v( 0, 0, 0 )
+
+			];
+
+//			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, theBuilding.overhang );
+			const geometry = new THREE.BufferGeometry();
+			geometry.setFromPoints( points );
+
+			const mesh = new THREE.Mesh( geometry, materialOpening );
+			mesh.name = 'opening-' + i;
+			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta - lengthDelta * 0.5  * wwr, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr );
+
+			obj.add( mesh );
+
+		}
 
 	}
 
@@ -873,7 +929,7 @@
 
 		theBuilding.group.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh && !child.name.startsWith( 'slab' ) ) {
+			if ( child instanceof THREE.Mesh && !child.name.startsWith( 'ceiling' ) ) {
 
 					let angle = Math.round( - child.getWorldRotation().z * 180 / Math.PI );
 
@@ -1206,12 +1262,12 @@
 
 //slab.position.z = theBuilding.storeyHeight;
 				delta = j === slabsPerStory - 1 ? 5 : 0;
-				const ceiling = slab.clone();
+				ceiling = slab.clone();
 				ceiling.geometry = slab.geometry.clone();
 				ceiling.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, theBuilding.storeyHeight + delta ) );
 				ceiling.geometry.verticesNeedUpdate = true;
 
-//console.log( '', slab );
+console.log( '', slab );
 
 				getPolyLoop2( surfaceSlab, ceiling );
 
@@ -1394,7 +1450,6 @@
 	}
 
 
-
 	function getSlabType( type, storey, surfaceCount, spaceCount ) {
 
 		const slab = {
@@ -1453,8 +1508,6 @@
 
 	}
 
-
-
 	function getPolyLoop2( surface, mesh ) {
 
 // this function works OK but creates too many CartesianPoint elements.
@@ -1505,42 +1558,33 @@
 
 //console.log( 'wall', mesh );
 
-		for ( var i = 0; i < mesh.userData.holes.length; i++ ) {
+		mesh.traverse( function ( child ) {
 
-			holes = mesh.userData.holes[ i ];
+			if ( child.name.startsWith( 'opening-' ) ) {
 
-			let opening = {
-				"@openingType": "FixedWindow",
-				"@id": "opening-" + theBuilding.openingCount,
-				RectangularGeometry: {
-					Azimuth: mesh.userData.angle
-				},
-				PlanarGeometry: {
-					PolyLoop: []
-				}
-			};
+				let opening = {
+					"@openingType": "FixedWindow",
+					"@id": "opening-" + theBuilding.openingCount,
+					RectangularGeometry: {
+						Azimuth: mesh.userData.angle
+					},
+					PlanarGeometry: {
+						PolyLoop: []
+					}
+				};
 
-			for ( let j = 0; j < 4; j++ ) {
+				getPolyLoop2( opening, child );
 
-				const vector = holes[ j ].clone();
-				const vertex = mesh.localToWorld( vector );
-				const point = { CartesianPoint: [
+				surface.Opening.push( opening );
 
-					{ Coordinate: Number( vertex.x.toFixed( 4 ) ) },
-					{ Coordinate: Number( vertex.y.toFixed( 4 ) ) },
-					{ Coordinate: Number( vertex.z.toFixed( 4 ) ) }
+//console.log( 'child', child );
+//console.log( 'opening', opening );
 
-				] };
-
-				opening.PlanarGeometry.PolyLoop.push( point );
+				theBuilding.openingCount ++;
 
 			}
 
-			surface.Opening.push( opening );
-
-			theBuilding.openingCount ++;
-
-		}
+		} );
 
 	}
 
