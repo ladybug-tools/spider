@@ -17,19 +17,25 @@ _txt_
 
 Export generated 3D building data to a gbXML file
 
-* Select a building footprint and pre-determined parameters
+* Click buttons to select a building footprint and pre-determined parameters
 * Generate and view a JSON file with building data
 * Generate, view and export a gbXML fie with the building data
 * Designed to help build test cases
 
 ## To Do
 
-* 2017-11-23 ~ Generate buildings via and API and/or location.hash parameters
+* 2017-11-23 ~ Generate buildings via an API and/or location.hash parameters
 
 
 
-## Links of Interest
+## Issues
 
+https://github.com/ladybug-tools/spider/tree/master/cookbook/SPEED%20Geometry%20Requirements
+
+> Geometry Page: Inputs: These are in IP. If you want to simply and say all inputs are metric, that's fine. It really doesn't matter. 
+> What does matter is that when the gbXML export is generated, it is ALWAYS in metric. To-Do List for Geometry Page:
+
+Why?
 
 ## Change Log
 
@@ -38,7 +44,14 @@ Export generated 3D building data to a gbXML file
 
 * Add adjacent building gbxml
 	* Azimuth a place holder
+* Generate SlabOnGrade, Ceiling and Roof slabs
+	* Repositioned in gbXML file
+* Continue Adjacency, Space and ID fixes
 
+Sample gbXML Files
+* Single story files import int Open Studio without error messages
+* Multiple storey file generate error messages
+* All files: exterior wall invisible
 
 ### 2017-11-27 ~ Theo
 

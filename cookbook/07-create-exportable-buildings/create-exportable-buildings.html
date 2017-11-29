@@ -101,9 +101,11 @@
 
 			<p>Work-in-progress</p>
 
-			<p>Not yet processing adjacent buildings, adjacencies, area and volumes. ID creation still in infancy.</p>
-
-			<p>But is creating, displaying and exporting all desired surface types and creating readable JSON and pretty-printed gbXML</p>
+			<p>Sample gbXML Files<br>
+				* Single story files import into Open Studio without error messages<br>
+				* Multiple storey files generate Open Studio error messages<br>
+				* All files: exterior wall invisible in Open Studio
+			</p>
 
 			<p>View sample files with <a href="./test-gbxml-files/gbxml-viewer.html" target="_blank">Sample gbXML File Viewer</a></p>
 
@@ -179,7 +181,7 @@
 
 
 		const axesHelper = new THREE.AxesHelper( 50 );
-		axesHelper.name = 'axesHelper'
+		axesHelper.name = 'axesHelper';
 		scene.add( axesHelper );
 /*
 		geometry = new THREE.BoxGeometry( 50, 50, 50 );
@@ -203,6 +205,9 @@
 		west = loader.load( 'west.png' );
 		west.center.set( 0.5, 0.5 );
 		west.rotation = Math.PI / 2;
+
+
+		theBuilding = {};
 
 		addAjacentBuildings();
 
@@ -229,7 +234,7 @@
 
 	function onSelectFootprint( choiceIndex = 0 ) {
 
-		theBuilding = {};
+
 		theBuilding.name = 'theBuilding';
 
 		theBuilding.orientation = 0; // parseInt( inpOrientation.value, 10 );
@@ -250,6 +255,7 @@
 
 		theBuilding.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
 		theBuilding.edges = null;
+		theBuilding.storeyStretch = 3;
 
 		materialParameters = { color: 0xffffff * Math.random(), opacity: theBuilding.opacity, side: 2, transparent: true };
 
@@ -499,8 +505,6 @@
 		theBuilding.group = new THREE.Group();
 		theBuilding.group.name = theBuilding.name;
 
-//		theBuilding.group.userData.openingsPerWall = [];
-
 		const vertices = theBuilding.polygonVertices;
 		const verticesOffset = offsetPoints( theBuilding.group, vertices, -theBuilding.perimeterDepth, 0 );
 		theBuilding.group.rotation.z = - theBuilding.orientation * Math.PI / 180;
@@ -514,9 +518,14 @@
 
 			storey.name = 'storey-' + ( i + 1 );
 
+// tbd: rename ceiling to slab to clarify its multiple uses
+
 			const ceilings = new THREE.Group();
 			ceilings.name = storey.name;
 			storey.add( ceilings );
+
+
+			drawSlab( vertices, verticesOffset, ceilings );
 
 			const shapeOffset = new THREE.Shape( verticesOffset );
 			const geometryShapeOffset = new THREE.ShapeBufferGeometry( shapeOffset );
@@ -531,9 +540,6 @@
 			meshCeiling.userData.verticesLocal = verticesOffset;
 
 			ceilings.add( meshCeiling );
-
-			drawCeilings( vertices, verticesOffset, ceilings );
-
 
 			const interiorWalls = new THREE.Group();
 			interiorWalls.name = 'interior-walls';
@@ -556,7 +562,7 @@
 			drawExteriorWalls( vertices, exteriorWalls );
 
 
-			storey.position.z = i * 3 * theBuilding.storeyHeight;
+			storey.position.z = i * theBuilding.storeyHeight * theBuilding.storeyStretch;
 
 			if ( theBuilding.footprint !== 'Polygon' ) {
 
@@ -579,7 +585,7 @@
 
 
 
-	function drawCeilings( vertices1, vertices2, obj ) {
+	function drawSlab( vertices1, vertices2, obj ) {
 
 		materialParameters.color = 0xffffff * Math.random();
 		const material = new THREE.MeshPhongMaterial( materialParameters );
@@ -599,7 +605,7 @@
 			const geometryShape = new THREE.ShapeBufferGeometry( shape );
 
 			const meshShape = new THREE.Mesh( geometryShape, material );
-			meshShape.name = obj.name + '-ceiling-' + ( i + 2 );
+			meshShape.name = obj.name + '-slab-' + ( i + 2 );
 			meshShape.userData.angle = 90 + theBuilding.orientation;
 			meshShape.userData.verticesLocal = verticesShape;
 			obj.add( meshShape );
@@ -1186,7 +1192,6 @@
 
 
 
-
 	function getBuildingStoreys() {
 
 		const storeys = json.gbXML.Campus.Building.BuildingStorey;
@@ -1232,47 +1237,66 @@
 		for ( let i = 0; i < storeys.length; i++ ) {
 
 			const storey = storeys[ i ];
+			const storeyCount = i + 1;
 
-			const ceilings = storey.children[ 0 ];
-			const ceilingsPerStory = ceilings.children.length;
+			const slabs = storey.children[ 0 ];
+			const slabsPerStory = slabs.children.length;
+			theBuilding.slabsPerStory = slabsPerStory;
 
-			for ( let j = 0; j < ceilingsPerStory; j++ ) {
+			for ( let j = 0; j < slabsPerStory; j++ ) {
 
-				const ceiling = ceilings.children[ j ];
+				const slab = slabs.children[ j ];
 
-				const ceilingGeometry = new THREE.Geometry().fromBufferGeometry( ceiling.geometry );
-//console.log( 'ceilingGeometry', ceilingGeometry  );
+				const slabGeometry = new THREE.Geometry().fromBufferGeometry( slab.geometry );
+//console.log( 'slabGeometry', slabGeometry  );
 
-				const area = THREE.ShapeUtils.area( ceilingGeometry.vertices.reverse() );
+				const area = THREE.ShapeUtils.area( slabGeometry.vertices.reverse() );
 				theBuilding.area += area;
 //console.log( 'area', theBuilding.area );
 //console.log( 'area', area.toLocaleString() );
 //console.log( 'volume', ( area * theBuilding.storeyHeight ).toLocaleString() );
 
-				const surfaceCeiling = {
+				type = storeyCount === theBuilding.storeys ? 'slabRoof' : 'slabCeiling';
 
-					"@surfaceType": "Ceiling",
-					"@id": "surface-" + surfaceCount,
-					Name: 'storey-' + ( i + 1 ) + '-' + ceiling.name + '-space-' + spaceCount,
-					RectangularGeometry: {
-						Azimuth: 90
-					},
-					CADOjectId: "none",
-					AdjacentSpaceId: [
-						{ "@spaceIdRef": "space-" + spaceCount },
-						{ "@spaceIdRef": "space-" + ( spaceCount + ceilingsPerStory ) },
-					],
-					PlanarGeometry: {
-						PolyLoop: []
-					}
+				surfaceSlab = getSlabType( type, storeyCount, surfaceCount, spaceCount );
 
-				};
+//slab.position.z = theBuilding.storeyHeight;
+				delta = j === slabsPerStory - 1 ? 5 : 0;
+				ceiling = slab.clone();
+				ceiling.geometry = slab.geometry.clone();
+				ceiling.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, theBuilding.storeyHeight + delta ) );
+				ceiling.geometry.verticesNeedUpdate = true;
 
-				getPolyLoop2( surfaceCeiling, ceiling );
+console.log( '', slab );
+
+				getPolyLoop2( surfaceSlab, ceiling );
 
 				surfaceCount ++;
 
-				surfaces.push( surfaceCeiling );
+				surfaces.push( surfaceSlab );
+
+
+				if ( storeyCount === 1 ) {
+
+					slabOnGrade = slab.clone();
+
+					if ( j === slabsPerStory - 1 ) {
+
+						slabOnGrade.geometry = slab.geometry.clone();
+						slabOnGrade.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, delta ) );
+						slabOnGrade.geometry.verticesNeedUpdate = true;
+
+					}
+
+					surfaceSlab = getSlabType( 'slabOnGrade', storeyCount, surfaceCount, spaceCount );
+
+					getPolyLoop2( surfaceSlab, slabOnGrade );
+
+					surfaceCount ++;
+
+					surfaces.push( surfaceSlab );
+
+				}
 
 ////
 
@@ -1280,9 +1304,9 @@
 
 					"@id": "space-" + spaceCount,
 					"@zoneIdRef": "zone-" + spaceCount,
-					"@buildingStoreyIdRef": 'storey-' + ( i + 1 ),
+					"@buildingStoreyIdRef": 'storey-' + storeyCount,
 					"@conditionType": "HeatedAndCooled",
-					Name: 'storey-' + ( i + 1 ) + '-space-' + spaceCount,
+					Name: 'storey-' + storeyCount + '-space-' + spaceCount,
 					Description: "internal space " + spaceCount,
 					Area: area.toLocaleString(),
 					Volume: ( area * theBuilding.storeyHeight ).toLocaleString()
@@ -1294,7 +1318,7 @@
 				const zone = {
 
 					"@id": "zone-" + spaceCount,
-					Name: 'storey-' + ( i + 1 ) + '-zone-' + spaceCount
+					Name: 'storey-' + storeyCount + '-zone-' + spaceCount
 
 				};
 
@@ -1306,6 +1330,8 @@
 
 
 			const interiorWalls = storey.children[ 1 ];
+
+			spaceCount = i * slabsPerStory + 1;
 
 			for ( let j = 0; j < interiorWalls.children.length; j++ ) {
 
@@ -1321,8 +1347,8 @@
 					},
 					CADOjectId: "none",
 					AdjacentSpaceId: [
+						{ "@spaceIdRef": "space-" + ( i * slabsPerStory + slabsPerStory ) },
 						{ "@spaceIdRef": "space-" + spaceCount },
-						{ "@spaceIdRef": "space-" + ( spaceCount + 1 ) },
 					],
 					PlanarGeometry: {
 						PolyLoop: []
@@ -1335,12 +1361,18 @@
 
 				surfaces.push( surfaceInteriorWall );
 
+				spaceCount ++;
+
 			}
 
 
 			const interiorWallsDiagonal = storey.children[ 2 ];
 
-			for ( let j = 0; j < interiorWallsDiagonal.children.length; j++ ) {
+			spaceCount = i * slabsPerStory + 1;
+
+			const len = interiorWallsDiagonal.children.length;
+
+			for ( let j = 0; j < len ; j++ ) {
 
 					const interiorDiagonalWall = interiorWallsDiagonal.children[ j ];
 
@@ -1354,8 +1386,8 @@
 						},
 						CADOjectId: "none",
 						AdjacentSpaceId: [
-							{ "@spaceIdRef": "space-" + spaceCount },
-							{ "@spaceIdRef": "space-" + ( spaceCount + 1 ) },
+							{ "@spaceIdRef": "space-" + ( j < len - 1 ? spaceCount + 1 : spaceCount - slabsPerStory + 2 ) },
+							{ "@spaceIdRef": "space-" + spaceCount }
 						],
 						PlanarGeometry: {
 							PolyLoop: []
@@ -1368,6 +1400,8 @@
 					surfaceCount ++;
 
 					surfaces.push( surfaceInteriorDiagonalWall );
+
+					spaceCount ++;
 
 				}
 
@@ -1416,6 +1450,63 @@
 	}
 
 
+	function getSlabType( type, storey, surfaceCount, spaceCount ) {
+
+		const slab = {
+
+			slabOnGrade: {
+
+				"@surfaceType": "SlabOnGrade",
+				"@id": "surface-" + surfaceCount,
+				Name: 'storey-' + storey + '-slabongrade-space-' + spaceCount,
+				RectangularGeometry: {
+					Azimuth: 90
+				},
+				CADOjectId: "none",
+				AdjacentSpaceId: { "@spaceIdRef": "space-" + spaceCount },
+				PlanarGeometry: {
+					PolyLoop: []
+				}
+
+			},
+			slabCeiling: {
+
+				"@surfaceType": "Ceiling",
+				"@id": "surface-" + theBuilding.surfaceCount,
+				Name: 'storey-' + storey + '-ceiling-space-' + spaceCount,
+				RectangularGeometry: {
+					Azimuth: 90
+				},
+				CADOjectId: "none",
+				AdjacentSpaceId: [
+					{ "@spaceIdRef": "space-" + spaceCount },
+					{ "@spaceIdRef": "space-" + ( spaceCount + theBuilding.slabsPerStory ) }
+				],
+				PlanarGeometry: {
+					PolyLoop: []
+				}
+
+			},
+			slabRoof: {
+
+				"@surfaceType": "Roof",
+				"@id": "surface-" + surfaceCount,
+				Name: 'storey-' + storey + '-roof-space-' + spaceCount,
+				RectangularGeometry: {
+					Azimuth: 90
+				},
+				CADOjectId: "none",
+				AdjacentSpaceId: { "@spaceIdRef": "space-" + spaceCount },
+				PlanarGeometry: {
+					PolyLoop: []
+				}
+
+			}
+		};
+
+		return slab[ type ];
+
+	}
 
 	function getPolyLoop2( surface, mesh ) {
 
