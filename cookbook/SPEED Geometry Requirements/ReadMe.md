@@ -2,27 +2,12 @@ Geometry Page:
 Inputs: These are in IP. If you want to simply and say all inputs are metric, that's fine. It really doesn't matter. What does matter is that when the gbXML export is generated, it is ALWAYS in metric.
 To-Do List for Geometry Page: 
 
-	2. Change orientation symbols.
-	5. x,y,z axis labels.
-	9. Add dimensions in 2D text for Length, Width, and Thickeness.
-
-Envelope Page:
-
-Inputs: Normal mode is to have one set of inputs for the building. Existing toggle allows for inputs to be specified by orientation. Orientaiton convention is as follows: 315-45 is north, 46-135 is east, 136-225 is south, 226-314 is west. This angles are the Azimuths. Azimuths are calculated by taking starting Azimuth, and adding "Orientation" to it. Simplest way. Code Anton uses on his version includes this:
-
-	~~1. Building WWR: Default is 40%. Enumerations are 10%, 15%, 20%....95%. Will will avoid 0% and 100% to avoid headaches.~~
-	~~2. % of Windows: Default is 2. Enumerations are 1,2,3...10.~~
-	~~3. Window Ratio: Default is 0.5. This input is a slider that goes from 0.1-0.9. This will avoid problems with EnergyPlus having overlapping vertices.~~
-	4. ~Overhang Depth: Default is 0 (no overhangs). Enumerations are 0,1,2,3,4,5,6. One overhang per window.~
-	5. ~Fin Depth: Default is 0 (no overhangs). Enumerations are 0,1,2,3,4,5,6. 2 fins per window.~
-	6. ~Window Construction Type: Keep as is. No impact on geometry or visualization.
-
-Space Layout: Looking pretty good now. As footprint shape changes, number of zones available to assign space type to changes. Eliminate 3D image. Only want a 2D image the user cannot rotate to 3D. In an ideal world, the 2D orthographic view is the actual view, but that requires the 2D text to label zones. 
-
-To-Do List for Space Layout
-
-	1. Add 2D text to orthographic view for Zone # and area. 
-	2. Area values used for Area Breakdown.
-	3. Show N,W,E,W on each side.
-	
-http://www.ladybug.tools/spider/sandbox/speed-specification/r2/speed-spec-r2.html
+	1. Change orientation symbols to letters, oriented correctly.
+	2. Change axis symbols to letters, oriented correctly.
+	3. Enable valid rotation of axis with symbols.
+	4. Auto-extend grid size.
+	5. Add a HUD with Length, Width, Thickness, and zone diagram when hover over ortho view on geometry page only.
+	6. Set a singular orientation symbol on 3D and 2d views, offset 5m from the closest surface. From global origin reference, 		North/South should be located always at Width/2+5m from origin and East/West Length/2+5m from global origin.Vector placement of 	symbol in terms of rotation always equals orientation. Given the orientation, it is known when to change one orientaiton symbol 	to another. Orientaiton convention is as follows: 315-45 is north, 46-135 is east, 136-225 is south, 226-314 is west. 
+	7. Add math equations to calculate zone area and produce Area Breakdown.
+	8. Assign zone numbers in space layout ortho view in appropriate location. Lock view to fill screen. Show the shape as if the 		scene were reverted to orientaiton=0, and display the x,y axis rotated to the (-orientation) value.
+	9. Constrain Window Ratio to 0.1 and 0.9
