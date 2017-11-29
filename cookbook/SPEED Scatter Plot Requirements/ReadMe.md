@@ -1,1 +1,14 @@
+-Add design and performance constraints for the 198 run design space. Make the ranges of the sliders such that they are the max adn min of the parameteter range in the project (ME to do this).
+-Moving constriants will grey out designs, make very light gray.
+-Add Output Preference slider tied to selected output variables, each with a Minimize or Maximize toggle radio toggle.
+-Add the equivalent of the Design and Performance dashboard.
+-Select and size proper axis titles, including units, ticks, and size of ticks.
+-Method to ensure axis titles are readable when rotation occurs.
+-Make a HUD that shows the desired list of input and static parameters, with the SVG of the geometry. Size appropriately.
+-Allow for preference shading using Output Preference.
+-Make design points actual building geometry using geom.js code. 
+-Make sure designs can scale appropriate so not all bunched up.
+-The scatter plot needs a title.
+-Show axis on scatter plot.
+-Use Pareto Front JS to make all the Pareto Optimimal Designs some unique color, like white.
 
