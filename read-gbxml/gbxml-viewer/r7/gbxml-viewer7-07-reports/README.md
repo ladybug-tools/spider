@@ -37,6 +37,8 @@ Many fun improvements
 * Add buttons to toggle the display of different surface types
 * Add buttons to toggle display of duplicate adjacencies
 
+The code is very, very messy.
+
 ### 2017-11-26 ~ Theo
 
 Looking at recursive traversal techniques. Probably not worth it. Better to handles each JSON object on its own terms,
