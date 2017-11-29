@@ -519,6 +519,8 @@ console.log( 'space', space );
 		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
 
+		divReport.innerHTML = ''
+
 		if ( ulc.endsWith( '.md' ) ) {
 
 			ifrThree.contentWindow.requestFile( url, callbackMarkdown );
@@ -545,6 +547,7 @@ console.log( 'space', space );
 			ifrThree.contentWindow.requestFile( urlGitHubPage + url, callbackToTextarea );
 
 		}
+
 
 	}
 
