@@ -2,10 +2,10 @@
 
 # Footprints ringed with objects
 
-## [footprints ringed with objects]( http://www.ladybug.tools/spider/cookbook/footprints-ringed-with-objects/footprints-ringed-with-objects.html )
+## [footprints ringed with objects]( http://www.ladybug.tools/spider/cookbook/06-footprints-ringed-with-objects/footprints-ringed-with-objects.html )
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/cookbook/footprints-ringed-with-objects/footprints-ringed-with-objects.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/cookbook/06-footprints-ringed-with-objects/footprints-ringed-with-objects.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
 ## Concept

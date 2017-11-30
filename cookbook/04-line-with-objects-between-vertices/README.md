@@ -3,10 +3,10 @@
 # line with objects between vertices read me
 
 
-### [line-with-objects-between-vertices-r2.html]( http://www.ladybug.tools/spider/cookbook/line-with-objects-between-vertices/line-with-objects-between-vertices-r2.html )
+### [line-with-objects-between-vertices-r2.html]( http://www.ladybug.tools/spider/cookbook/04-line-with-objects-between-vertices/line-with-objects-between-vertices-r2.html )
 
 
-### [line-with-objects-between-vertices-r1.html]( http://www.ladybug.tools/spider/cookbook/line-with-objects-between-vertices/line-with-objects-between-vertices-r1.html )
+### [line-with-objects-between-vertices-r1.html]( http://www.ladybug.tools/spider/cookbook/04-line-with-objects-between-vertices/line-with-objects-between-vertices-r1.html )
 
 See also notes in script menu.
 
