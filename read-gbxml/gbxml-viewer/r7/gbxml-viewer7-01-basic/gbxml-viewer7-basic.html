@@ -233,7 +233,8 @@
 	function parseFileXML( xmlNode ) {
 
 		gbjson = XML2jsobj( xmlNode );
-console.log( 'gbjson', gbjson );
+//console.log( 'gbjson', gbjson );
+
 		parseGbJson( gbjson );
 
 		return gbjson;
@@ -320,8 +321,9 @@ console.log( 'gbjson', gbjson );
 
 		for ( let CartesianPoint of polyloop.CartesianPoint ) {
 
-			const p = CartesianPoint.Coordinate;
-			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
+//			const p = CartesianPoint.Coordinate;
+//			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
+			const point = new THREE.Vector3().fromArray( CartesianPoint.Coordinate );
 
 			points.push( point );
 
@@ -335,7 +337,7 @@ console.log( 'gbjson', gbjson );
 
 	function drawShapeSinglePassObjects( vertices, material, holes ) {
 
-// there are going to be simpler ways of doing this
+// let there be simpler ways to do this
 
 		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
 
@@ -366,7 +368,7 @@ console.log( 'gbjson', gbjson );
 
 			}
 
-			let hole = new THREE.Path();
+			const hole = new THREE.Path();
 
 			hole.setFromPoints( verticesHoles );
 

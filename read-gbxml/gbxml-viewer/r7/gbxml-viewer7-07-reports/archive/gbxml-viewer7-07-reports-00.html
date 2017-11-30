@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Open and view gbXML files in local folders. View stats and locate issues." >
+<meta name = "description" content = "Open and view gbXML files in local folders." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-17" >
 <title>gbXML Viewer R7 Reports</title>
@@ -75,11 +75,12 @@
 		<p><a href = "#README.md" target="_top" >Read Me</a></p>
 
 		<p>
-			<input type = "file" id = "inpFile" onchange="divReport.innerHTML='';ifrThree.contentWindow.openFile(this);" >
+			<input type = "file" id = "inpFile" onchange="ifrThree.contentWindow.openFile(this);" >
 		<p>
 
 
 		<div id = "divBreadcrumbs" ></div>
+
 
 
 		<hr>
@@ -115,10 +116,10 @@
 	const repo = '/spider';
 	const pathRepo = 'read-gbxml/gbxml-viewer/r7/gbxml-viewer7-07-reports/';
 
-	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
-
 	const uriDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
 	const threeDefaultFile = '../gbxml-viewer7-01-basic/gbxml-viewer7-basic.html';
+
+	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
 
 	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 
@@ -140,77 +141,21 @@
 	}
 
 
-	function onHashChange() {
-
-		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
-		const ulc = url.toLowerCase();
-
-		divReport.innerHTML = '';
-
-		if ( ulc.endsWith( '.md' ) ) {
-
-			ifrThree.contentWindow.requestFile( url, callbackMarkdown );
-
-		} else if ( ulc.endsWith( '.html' ) ) {
-
-			divContents.style.maxWidth = '100%';
-			document.body.style.overflow = 'hidden';
-
-			divContents.innerHTML = '<iframe id=ifrThree src=' + url + ' style=height:100%;border:none; ></iframe>';
-
-		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
-
-			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
-
-		} else if ( ulc.endsWith( '.xml' ) ) {
-
-			divContents.style.maxWidth = '100%';
-			document.body.style.overflow = 'hidden';
-			divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
-
-		} else {
-
-			ifrThree.contentWindow.requestFile( urlGitHubPage + url, callbackToTextarea );
-
-		}
-
-	}
-
-
-	function onloadThree() {
-
-//		createReport();
-
-	}
-
 	function createReport() {
 
-		icw = ifrThree.contentWindow;
-		gbjson = icw.gbjson;
-//console.log( '', gbjson );
+		onloadThree();
 
-		THREE = icw.THREE;
-		meshSurfaces = icw.scene.children[ 4 ];
+//		icw = ifrThree.contentWindow;
+//		gbjson = icw.gbjson;
 
 		gbxml = traversGbjson( gbjson );
+
 //console.log( 'gbxml', gbxml );
 
 		divReport.innerHTML = addDetails( 'gbXML', gbxml.attributes );
 
 		campus = traversGbjson( gbjson.Campus );
 		divReport.innerHTML += addDetails( 'Campus', campus.attributes );
-
-		locate = traversGbjson( gbjson.Campus.Location );
-		txt = getLocation();
-		divReport.innerHTML += addDetails( 'Campus Location' + txt, locate.attributes );
-
-
-		building = traversGbjson( gbjson.Campus.Building );
-		divReport.innerHTML += addDetails( 'Building', building.attributes );
-
-		spaces = getSpaces();
-
-		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent );
 
 
 		zones = traversGbjson( gbjson.Zone );
@@ -230,133 +175,6 @@
 		examineGbjson( gbjson );
 
 	}
-
-
-	function getSpaces() {
-
-		spaces = gbjson.Campus.Building.Space;
-console.log( '', spaces  );
-
-		let txt = '';
-
-
-		count = 1;
-
-		if ( spaces.length) {
-
-			for ( let space of spaces ) {
-//console.log( 'space', space );
-
-				txt += '<div style=margin-bottom:10px; > ' +
-					( count ++ ) +
-					'. id: ' + space.id + b +
-					' name: <button onclick=toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
-					' area: ' + Number( space.Area ).toFixed( 1 ) + b +
-				'</div>'
-
-			}
-
-		}
-
-		return { summary: 'Spaces > ' + count, flowContent: txt };
-
-	}
-
-
-
-	function toggleSpace( id ) {
-
-//console.log( '', id );
-
-		meshSurfaces.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-
-				if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
-					( id === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || id === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
-				) {
-
-				child.material.wireframe = false;
-				child.material.opacity = 0.85;
-//console.log( 'space', space );
-
-				} else {
-
-					child.material.wireframe = true;
-					child.material.opacity = 0.2;
-
-				}
-
-			}
-
-		} );
-
-	}
-
-
-
-	function getLocation() {
-
-		const locate = gbjson.Campus.Location;
-		let text;
-
-		if ( locate && locate.Latitude && locate.Longitude ) {
-
-			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
-			text = ' > <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
-
-		} else {
-
-			text = '';
-
-		}
-
-		return text;
-
-	}
-
-
-	function traversGbjson( obj ) {
-
-		const b = '<br>';
-		const elements = [];
-		let txt = '';
-
-		for ( let i in obj ) {
-
-			if ( obj[ i ] !== null && typeof( obj[ i ] ) === 'object' ) {
-
-				if ( elements.indexOf( i ) < 0 ) { elements.push( i ); }
-
-			} else {
-
-				txt += '<div id=ib >' + i + '</div>: ' + obj[ i ] + b;
-
-			}
-
-		};
-
-		return { elements: elements, attributes: txt };
-
-	}
-
-
-
-	function addDetails( summary, text, open = '' ) {
-
-		text = text ? text : 'no attributes';
-		const txt =
-
-		'<details ' + open + ' >' +
-			'<summary>' + summary + '</summary>' +
-			text +
-		'</details>';
-
-		return txt;
-
-	}
-
 
 
 	function getSurfaces() {
@@ -428,7 +246,6 @@ console.log( '', spaces  );
 	}
 
 
-
 	function toggleAllVisible() {
 
 		meshSurfaces.traverse( function ( child ) {
@@ -445,6 +262,56 @@ console.log( '', spaces  );
 
 
 
+	function addDetails( summary, text, open = '' ) {
+
+		text = text ? text : 'no attributes';
+		const txt =
+
+		'<details ' + open + ' >' +
+			'<summary>' + summary + '</summary>' +
+			text +
+		'</details>';
+
+		return txt;
+
+	}
+
+
+	function traversGbjson( obj ) {
+
+		const b = '<br>';
+		elements = [];
+		txt = '';
+
+		for ( let i in obj ) {
+
+			if ( obj[ i ] !== null && typeof( obj[ i ] ) === 'object' ) {
+
+				if ( elements.indexOf( i ) < 0 ) {
+
+					elements.push( i );
+//					txt += '<h3>' + i + '</h3>';
+
+				}
+
+//				traversGbjson( obj [ i ] );
+
+			} else {
+
+//console.log( 'attribute', i, obj[ i ] );
+
+				txt += '<div id=ib >' + i + '</div>: ' + obj[ i ] + b;
+
+			}
+
+		};
+
+		return { elements: elements, attributes: txt };
+
+	}
+
+
+
 	function examineGbjson( gbjson ) {
 
 		surfaces = [];
@@ -454,6 +321,7 @@ console.log( '', spaces  );
 			'File: ' + gbjson.name + b +
 			'Number of surfaces: ' + gbjson.Campus.Surface.length +
 		'';
+
 
 		let t$ = '';
 
@@ -472,8 +340,8 @@ console.log( '', spaces  );
 console.log( 'duplicate surface', surface );
 
 				t$ += 
-					'<p>' + surfacesCount + 
-						'. id: ' + surface.id + b +
+					'<p>' +
+						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						'Name: ' + surface.Name + b +
 						'CADObjectId: ' + surface.CADObjectId + b +
@@ -497,7 +365,7 @@ console.log( 'duplicate surface', surface );
 
 			adjacencies = surface.AdjacentSpaceId;
 
-			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+			if ( Array.isArray( adjacencies )  && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
 
 //console.log( 'surface', surface );
 //console.log( 'duplicate adjacencies', adjacencies );
@@ -629,6 +497,7 @@ console.log( 'dup', vertex );
 				&& child !== thatChild
 			) {
 
+
 				child.material.wireframe = false;
 				child.material.opacity = 0.2;
 console.log( 'space', space );
@@ -642,16 +511,64 @@ console.log( 'space', space );
 
 		} );
 
+
+	}
+
+	function onHashChange() {
+
+		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+		const ulc = url.toLowerCase();
+
+		divReport.innerHTML = ''
+
+		if ( ulc.endsWith( '.md' ) ) {
+
+			ifrThree.contentWindow.requestFile( url, callbackMarkdown );
+
+		} else if ( ulc.endsWith( '.html' ) ) {
+
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+
+			divContents.innerHTML = '<iframe id=ifrThree src=' + url + ' style=height:100%;border:none; ></iframe>';
+
+		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
+
+			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' >';
+
+		} else if ( ulc.endsWith( '.xml' ) ) {
+
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+			divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + urlGitHubPage + url + ' style=height:100%;border:none; ></iframe>';
+
+		} else {
+
+			ifrThree.contentWindow.requestFile( urlGitHubPage + url, callbackToTextarea );
+
+		}
+
+
 	}
 
 
 
+	function onloadThree() {
+
+		icw = ifrThree.contentWindow;
+//		icw.renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
+		gbjson = icw.gbjson;
+
+//console.log( '', gbjson );
+
+		THREE = icw.THREE;
+		meshSurfaces = icw.scene.children[ 4 ];
+
+//console.log( 'meshSurfaces', meshSurfaces );
+
+	}
 
 
-
-
-
-///////////////
 
 	function callbackMarkdown( xhr ){
 

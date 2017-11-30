@@ -23,9 +23,20 @@ The core or template file to be used to read gbXML files and display them in 3D
 	* May be data sent by an iframe parent
 	* May be date acquired by the HTML5 file reader tag
 
+## Sample files to load
+
+* [Open Studio SampleX ML]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml )
+* [Sample Building]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-02-github-api-menu/gbxml-viewer7-github-api-spider-samples.html#SampleBuildWell%20gbXML%20working4%20OpenStudio.xml )
+* [gbXMLStandard Single Family Residential 2016.xml]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-02-github-api-menu/gbxml-viewer7-github-api-spider-samples.html#gbXMLStandard%20Single%20Family%20Residential%202016.xml )
 
 
 ## Change Log
+
+
+### 2017-11-29 ~ Theo
+
+* Add sample links to read me
+* Minor simplification to basic
 
 
 ### 2017-11-16 ~ Theo

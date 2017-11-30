@@ -2,7 +2,7 @@
 
 # First Person Camera Read Me
 
-## Full screen: [gbXML Viewer7 First Person Camera]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-03-first-person-camera/gbxml-viewer7-github-api-gbxml-samples.html )
+## Full screen: [gbXML Viewer7 First Person Camera]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-03-first-person-camera/gbxml-viewer7-first-person-camera.html )
 
 
 Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen

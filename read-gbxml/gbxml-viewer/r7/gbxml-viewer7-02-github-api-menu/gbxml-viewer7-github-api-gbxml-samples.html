@@ -48,7 +48,7 @@
 		<p>
 			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
 			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="../index.html" target=_top style=font-size:24px; >&#x2302;</a> &raquo; 
 		</p>
 
 
@@ -96,6 +96,7 @@
 	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 
 	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/' + pathRepo;
+
 	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
 
@@ -103,7 +104,9 @@
 
 	function init() {
 
-		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo + ;
+//		urlInfo.href = urlGitHubSource; // 'https://github.com/' + user + repo + ;
+		urlInfo.href = 'https://github.com/ladybug-tools/spider/blob/master/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-02-github-api-menu/gbxml-viewer7-github-api-gbxml-samples.html';
+
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
