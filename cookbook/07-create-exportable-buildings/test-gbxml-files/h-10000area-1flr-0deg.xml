@@ -1773,7 +1773,7 @@
                 <Azimuth>315</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-0"/>
+            <AdjacentSpaceId spaceIdRef="space-1"/>
             <AdjacentSpaceId spaceIdRef="space-12"/>
             <PlanarGeometry>
                 <PolyLoop>

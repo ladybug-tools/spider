@@ -678,7 +678,7 @@
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-0"/>
+            <AdjacentSpaceId spaceIdRef="space-1"/>
             <AdjacentSpaceId spaceIdRef="space-4"/>
             <PlanarGeometry>
                 <PolyLoop>
@@ -4215,7 +4215,7 @@
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-5"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
             <AdjacentSpaceId spaceIdRef="space-9"/>
             <PlanarGeometry>
                 <PolyLoop>
@@ -7747,7 +7747,7 @@
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-10"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
             <AdjacentSpaceId spaceIdRef="space-14"/>
             <PlanarGeometry>
                 <PolyLoop>

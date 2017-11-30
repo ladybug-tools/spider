@@ -1345,37 +1345,6 @@
 
 				addSpaceAndZone( area );
 
-////
-
-
-/*
-				const space = {
-
-					"@id": "space-" + spaceCount,
-					"@zoneIdRef": "zone-" + spaceCount,
-					"@buildingStoreyIdRef": 'storey-' + storeyCount,
-					"@conditionType": "HeatedAndCooled",
-					Name: 'storey-' + storeyCount + '-space-' + spaceCount,
-					Description: "internal space " + spaceCount,
-					Area: area.toLocaleString(),
-					Volume: ( area * theBuilding.storeyHeight ).toLocaleString()
-
-				};
-
-				spaces.push( space );
-
-				const zone = {
-
-					"@id": "zone-" + spaceCount,
-					Name: 'storey-' + storeyCount + '-zone-' + spaceCount
-
-				};
-
-				zones.push( zone );
-
-				spaceCount ++;
-*/
-
 			}
 
 
@@ -1437,7 +1406,7 @@
 						},
 						CADOjectId: "none",
 						AdjacentSpaceId: [
-							{ "@spaceIdRef": "space-" + ( j < len - 1 ? spaceCount + 1 : spaceCount - slabsPerStory + 1 ) },
+							{ "@spaceIdRef": "space-" + ( j < len - 1 ? spaceCount + 1 : ( i * slabsPerStory + 1 ) ) },
 							{ "@spaceIdRef": "space-" + spaceCount }
 						],
 						PlanarGeometry: {
