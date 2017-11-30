@@ -1953,151 +1953,301 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-25">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-26">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-27">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-28">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-29">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-30">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-31">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-32">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-33">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-34">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>

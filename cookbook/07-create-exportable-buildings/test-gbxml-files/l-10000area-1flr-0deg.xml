@@ -897,7 +897,7 @@
                 <Azimuth>135</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-1"/>
+            <AdjacentSpaceId spaceIdRef="space-0"/>
             <AdjacentSpaceId spaceIdRef="space-6"/>
             <PlanarGeometry>
                 <PolyLoop>
@@ -925,31 +925,31 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-27">
-            <Name>storey-1-exterior-wall-1-space-7</Name>
+            <Name>storey-1-exterior-wall-1-space-1</Name>
             <RectangularGeometry>
                 <Azimuth>180</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-1"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>50</Coordinate>
                         <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>50</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
                         <Coordinate>-75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -964,12 +964,7 @@
                         <CartesianPoint>
                             <Coordinate>35</Coordinate>
                             <Coordinate>-75</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>15</Coordinate>
-                            <Coordinate>-75</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>15</Coordinate>
@@ -979,12 +974,7 @@
                         <CartesianPoint>
                             <Coordinate>15</Coordinate>
                             <Coordinate>-75</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>35</Coordinate>
-                            <Coordinate>-75</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>35</Coordinate>
@@ -1003,12 +993,7 @@
                         <CartesianPoint>
                             <Coordinate>-15</Coordinate>
                             <Coordinate>-75</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-35</Coordinate>
-                            <Coordinate>-75</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-35</Coordinate>
@@ -1018,12 +1003,7 @@
                         <CartesianPoint>
                             <Coordinate>-35</Coordinate>
                             <Coordinate>-75</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-15</Coordinate>
-                            <Coordinate>-75</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-15</Coordinate>
@@ -1275,32 +1255,32 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-28">
-            <Name>storey-1-exterior-wall-2-space-7</Name>
+            <Name>storey-1-exterior-wall-2-space-2</Name>
             <RectangularGeometry>
                 <Azimuth>270</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-2"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>-50</Coordinate>
                         <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>-50</Coordinate>
                         <Coordinate>-75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
@@ -1314,12 +1294,7 @@
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
                             <Coordinate>-52.5</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-50</Coordinate>
-                            <Coordinate>-22.5</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
@@ -1329,12 +1304,7 @@
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
                             <Coordinate>-22.5</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-50</Coordinate>
-                            <Coordinate>-52.5</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
@@ -1353,12 +1323,7 @@
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
                             <Coordinate>22.5</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-50</Coordinate>
-                            <Coordinate>52.5</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
@@ -1368,12 +1333,7 @@
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
                             <Coordinate>52.5</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-50</Coordinate>
-                            <Coordinate>22.5</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-50</Coordinate>
@@ -1625,31 +1585,31 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-29">
-            <Name>storey-1-exterior-wall-3-space-7</Name>
+            <Name>storey-1-exterior-wall-3-space-3</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-3"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>-50</Coordinate>
                         <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>-50</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
                         <Coordinate>75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -1664,12 +1624,7 @@
                         <CartesianPoint>
                             <Coordinate>-42.5</Coordinate>
                             <Coordinate>75</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-32.5</Coordinate>
-                            <Coordinate>75</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-32.5</Coordinate>
@@ -1679,12 +1634,7 @@
                         <CartesianPoint>
                             <Coordinate>-32.5</Coordinate>
                             <Coordinate>75</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-42.5</Coordinate>
-                            <Coordinate>75</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-42.5</Coordinate>
@@ -1703,12 +1653,7 @@
                         <CartesianPoint>
                             <Coordinate>-17.5</Coordinate>
                             <Coordinate>75</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-7.5</Coordinate>
-                            <Coordinate>75</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-7.5</Coordinate>
@@ -1718,12 +1663,7 @@
                         <CartesianPoint>
                             <Coordinate>-7.5</Coordinate>
                             <Coordinate>75</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>-17.5</Coordinate>
-                            <Coordinate>75</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>-17.5</Coordinate>
@@ -1975,32 +1915,32 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-30">
-            <Name>storey-1-exterior-wall-4-space-7</Name>
+            <Name>storey-1-exterior-wall-4-space-4</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-4"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>0</Coordinate>
                         <Coordinate>75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-25</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>0</Coordinate>
-                        <Coordinate>-25</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>0</Coordinate>
                         <Coordinate>75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>-25</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>0</Coordinate>
+                        <Coordinate>-25</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
@@ -2014,12 +1954,7 @@
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
                             <Coordinate>60</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>0</Coordinate>
-                            <Coordinate>40</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
@@ -2029,12 +1964,7 @@
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
                             <Coordinate>40</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>0</Coordinate>
-                            <Coordinate>60</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
@@ -2053,12 +1983,7 @@
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
                             <Coordinate>10</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>0</Coordinate>
-                            <Coordinate>-10</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
@@ -2068,12 +1993,7 @@
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
                             <Coordinate>-10</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>0</Coordinate>
-                            <Coordinate>10</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>0</Coordinate>
@@ -2325,31 +2245,31 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-31">
-            <Name>storey-1-exterior-wall-5-space-7</Name>
+            <Name>storey-1-exterior-wall-5-space-5</Name>
             <RectangularGeometry>
                 <Azimuth>0</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-5"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>0</Coordinate>
                         <Coordinate>-25</Coordinate>
-                        <Coordinate>10</Coordinate>
+                        <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>50</Coordinate>
+                        <Coordinate>0</Coordinate>
                         <Coordinate>-25</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>50</Coordinate>
                         <Coordinate>-25</Coordinate>
-                        <Coordinate>0</Coordinate>
+                        <Coordinate>10</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>0</Coordinate>
+                        <Coordinate>50</Coordinate>
                         <Coordinate>-25</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -2364,12 +2284,7 @@
                         <CartesianPoint>
                             <Coordinate>7.5</Coordinate>
                             <Coordinate>-25</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>17.5</Coordinate>
-                            <Coordinate>-25</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>17.5</Coordinate>
@@ -2379,12 +2294,7 @@
                         <CartesianPoint>
                             <Coordinate>17.5</Coordinate>
                             <Coordinate>-25</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>7.5</Coordinate>
-                            <Coordinate>-25</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>7.5</Coordinate>
@@ -2403,12 +2313,7 @@
                         <CartesianPoint>
                             <Coordinate>32.5</Coordinate>
                             <Coordinate>-25</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>42.5</Coordinate>
-                            <Coordinate>-25</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>42.5</Coordinate>
@@ -2418,12 +2323,7 @@
                         <CartesianPoint>
                             <Coordinate>42.5</Coordinate>
                             <Coordinate>-25</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>32.5</Coordinate>
-                            <Coordinate>-25</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>32.5</Coordinate>
@@ -2675,32 +2575,32 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="ExteriorWall" id="surface-32">
-            <Name>storey-1-exterior-wall-6-space-7</Name>
+            <Name>storey-1-exterior-wall-6-space-6</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>50</Coordinate>
                         <Coordinate>-25</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>-75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>50</Coordinate>
                         <Coordinate>-25</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-75</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
@@ -2714,12 +2614,7 @@
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
                             <Coordinate>-32.5</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>50</Coordinate>
-                            <Coordinate>-42.5</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
@@ -2729,12 +2624,7 @@
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
                             <Coordinate>-42.5</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>50</Coordinate>
-                            <Coordinate>-32.5</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
@@ -2753,12 +2643,7 @@
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
                             <Coordinate>-57.5</Coordinate>
-                            <Coordinate>3</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>50</Coordinate>
-                            <Coordinate>-67.5</Coordinate>
-                            <Coordinate>3</Coordinate>
+                            <Coordinate>7</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
@@ -2768,12 +2653,7 @@
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
                             <Coordinate>-67.5</Coordinate>
-                            <Coordinate>7</Coordinate>
-                        </CartesianPoint>
-                        <CartesianPoint>
-                            <Coordinate>50</Coordinate>
-                            <Coordinate>-57.5</Coordinate>
-                            <Coordinate>7</Coordinate>
+                            <Coordinate>3</Coordinate>
                         </CartesianPoint>
                         <CartesianPoint>
                             <Coordinate>50</Coordinate>
@@ -3025,151 +2905,301 @@
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-37">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-38">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-39">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-40">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>
         </Surface>
         <Surface surfaceType="Shade" id="shade-41">
-            <Name>building-adjacent</Name>
+            <Name>building-adjacent-ben</Name>
             <RectangularGeometry>
                 <Azimuth>90</Azimuth>
             </RectangularGeometry>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-16.6506</Coordinate>
+                        <Coordinate>121.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>90</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>-26.6506</Coordinate>
+                        <Coordinate>103.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>-10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>16.6506</Coordinate>
+                        <Coordinate>78.8397</Coordinate>
+                        <Coordinate>30</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>10</Coordinate>
-                        <Coordinate>70</Coordinate>
-                        <Coordinate>100</Coordinate>
+                        <Coordinate>26.6506</Coordinate>
+                        <Coordinate>96.1603</Coordinate>
+                        <Coordinate>30</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-42">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-43">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-44">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-45">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="Shade" id="shade-46">
+            <Name>building-adjacent-anton</Name>
+            <RectangularGeometry>
+                <Azimuth>90</Azimuth>
+            </RectangularGeometry>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-107.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-92.5</Coordinate>
+                        <Coordinate>-40</Coordinate>
+                        <Coordinate>20</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
             </PlanarGeometry>

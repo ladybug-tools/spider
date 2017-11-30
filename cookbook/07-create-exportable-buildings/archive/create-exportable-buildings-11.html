@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="Create and export self-generated 3D building data to gbXML files. See www.gbxml.org" >
+<meta name=description content="Create and export self-generated 3D building data to gbXML files" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-30" >
-<title>create exportable buildings r1.8 </title>
+<meta name = "date" content = "2017-11-29" >
+<title>create exportable buildings r1.7 </title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -82,17 +82,9 @@
 
 		<p><button onclick=onSelectFootprint(3); >draw H</button></p>
 
-		<p><button onclick=onSelectFootprint(999); >draw irregular polygon</button></p>
-
 		<p><button onclick=onSelectFootprint(4); >draw 3 story Box</button></p>
 
-		<p><button onclick=onSelectFootprint(5); >draw 2 story L</button></p>
-
-		<p><button onclick=onSelectFootprint(6); >draw 3 story T</button></p>
-
-		<p><button onclick=onSelectFootprint(7); >draw 10 story H</button></p>
-
-		<p><button onclick=onSelectFootprint(8); >draw 3 storey irregular polygon</button></p>
+		<p><button onclick=onSelectFootprint(999); >draw Irregular Polygon</button></p>
 
 		<hr>
 
@@ -106,7 +98,6 @@
 
 			<div id = divExportContent ></div>
 
-			<p>View sample files with <a href="./test-gbxml-files/gbxml-viewer.html" target="_blank">Sample gbXML File Viewer</a></p>
 
 			<p>Work-in-progress / 2017-11-29</p>
 
@@ -120,6 +111,7 @@
 				* Creating more test cases
 			</p>
 
+			<p>View sample files with <a href="./test-gbxml-files/gbxml-viewer.html" target="_blank">Sample gbXML File Viewer</a></p>
 
 			<hr>
 
@@ -180,7 +172,6 @@
 		scene.add( lightAmbient );
 
 		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
-		lightDirectional.position.set ( -50, -100, 100 );
 		lightDirectional.shadow.mapSize.width = 2048;  // default 512
 		lightDirectional.shadow.mapSize.height = 2048;
 		lightDirectional.castShadow = true;
@@ -236,20 +227,13 @@
 
 		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 ); // use scale to set size
 		const material = new THREE.MeshPhongMaterial();
+		const meshAdjacent = new THREE.Mesh( geometry, material );
 
-		const meshAdjacent1 = new THREE.Mesh( geometry, material );
-		meshAdjacent1.name = 'building-adjacent-ben';
-		meshAdjacent1.scale.set( 20, 50, 30 ); // scale is easier to deal with than geometry vertices
-		meshAdjacent1.position.set( 0, 100, 15 );
-		meshAdjacent1.rotation.z = Math.PI / 3;
-		scene.add( meshAdjacent1 );
+		meshAdjacent.name = 'building-adjacent';
+		meshAdjacent.scale.set( 20, 20, 100 ); // scale is easier to deal with than geometry vertices
+		meshAdjacent.position.set( 0, 80, 50 );
+		scene.add( meshAdjacent );
 
-		const meshAdjacent2 = new THREE.Mesh( geometry, material );
-		meshAdjacent2.name = 'building-adjacent-anton';
-		meshAdjacent2.scale.set( 15, 80, 20 ); // scale is easier to deal with than geometry vertices
-		meshAdjacent2.position.set( -100, 0, 10 );
-
-		scene.add( meshAdjacent2 );
 	}
 
 
@@ -264,7 +248,7 @@
 		theBuilding.orientation = 0; // parseInt( inpOrientation.value, 10 );
 		theBuilding.footprints = [ 'Box', 'L', 'T', 'H', 'Polygon' ];
 
-		theBuilding.area = 10000; // not used
+		theBuilding.area = 10000;
 		theBuilding.storeys = 1;
 		theBuilding.areaFloor = theBuilding.area / theBuilding.storeys;
 		Math.round( theBuilding.areaFloor ).toLocaleString();
@@ -328,88 +312,10 @@
 
 			theBuilding.opacity = 0.55; // parseInt( inpOpacity.value, 10 ) / 100;
 
-		} else if ( choiceIndex === 5 ) {
-
-			theBuilding.orientation = 20;
-			theBuilding.length = 100;
-			theBuilding.width = 100;
-			theBuilding.thickness = 30;
-			theBuilding.footprint = 'L';
-
-			theBuilding.storeys = 2;
-			theBuilding.openingsPerWall = 5; // parseInt( inpOpenings.value, 10 );
-			theBuilding.wwr = 20; // parseInt( inpWindowWallRatio.value, 10 );
-			theBuilding.overhang = 1; // parseFloat( inpOverhang.value );
-			theBuilding.fin = 2; // parseFloat( inpFin.value );
-
-			theBuilding.storeyHeight = 20; //parseInt( inpHeight.value, 10 );
-			theBuilding.perimeterDepth = 10, //parseInt( inpPerimeterDepth.value, 10 );
-			theBuilding.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
-			theBuilding.storeyStretch = 1;
-
-		} else if ( choiceIndex === 6 ) {
-
-			theBuilding.orientation = -30;
-			theBuilding.length = 150;
-			theBuilding.width = 100;
-			theBuilding.thickness = 50;
-			theBuilding.footprint = 'T';
-
-			theBuilding.storeys = 3;
-			theBuilding.openingsPerWall = 3; // parseInt( inpOpenings.value, 10 );
-			theBuilding.wwr = 90; // parseInt( inpWindowWallRatio.value, 10 );
-			theBuilding.overhang = 5; // parseFloat( inpOverhang.value );
-			theBuilding.fin = 5; // parseFloat( inpFin.value );
-
-			theBuilding.storeyHeight = 10; //parseInt( inpHeight.value, 10 );
-			theBuilding.perimeterDepth = 20, //parseInt( inpPerimeterDepth.value, 10 );
-			theBuilding.opacity = 0.35; // parseInt( inpOpacity.value, 10 ) / 100;
-			theBuilding.storeyStretch = 1.2;
-
-
-		} else if ( choiceIndex === 7 ) {
-
-			theBuilding.orientation = -45;
-			theBuilding.length = 150;
-			theBuilding.width = 100;
-			theBuilding.thickness = 50;
-			theBuilding.footprint = 'H';
-
-			theBuilding.storeys = 10;
-			theBuilding.openingsPerWall = 2; // parseInt( inpOpenings.value, 10 );
-			theBuilding.wwr = 70; // parseInt( inpWindowWallRatio.value, 10 );
-			theBuilding.overhang = 2; // parseFloat( inpOverhang.value );
-			theBuilding.fin = 1; // parseFloat( inpFin.value );
-
-			theBuilding.storeyHeight = 12; //parseInt( inpHeight.value, 10 );
-			theBuilding.perimeterDepth = 10, //parseInt( inpPerimeterDepth.value, 10 );
-			theBuilding.opacity = 0.15; // parseInt( inpOpacity.value, 10 ) / 100;
-			theBuilding.storeyStretch = 1.5;
-
-
-		} else if ( choiceIndex === 8 ) {
-
-			theBuilding.orientation = 0;
-			theBuilding.length = 80;
-			theBuilding.width = 80;
-			theBuilding.thickness = 30;
-			theBuilding.footprint = 'Polygon';
-
-			theBuilding.storeys = 3;
-			theBuilding.openingsPerWall = 5; // parseInt( inpOpenings.value, 10 );
-			theBuilding.wwr = 70; // parseInt( inpWindowWallRatio.value, 10 );
-			theBuilding.overhang = 8; // parseFloat( inpOverhang.value );
-			theBuilding.fin = 7; // parseFloat( inpFin.value );
-
-			theBuilding.storeyHeight = 12; //parseInt( inpHeight.value, 10 );
-			theBuilding.perimeterDepth = 15, //parseInt( inpPerimeterDepth.value, 10 );
-			theBuilding.opacity = 0.15; // parseInt( inpOpacity.value, 10 ) / 100;
-			theBuilding.storeyStretch = 1.5;
-
 		} else {
 
-			theBuilding.length = 150;
-			theBuilding.width = 80;
+			theBuilding.length = 100;
+			theBuilding.width = 100;
 			theBuilding.thickness = 60;
 			theBuilding.footprint = 'Polygon';
 
