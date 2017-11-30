@@ -40,6 +40,15 @@ Why?
 ## Change Log
 
 
+### 2017-11-29 ~ Theo
+
+* All Open Studio messages resolved except for slab renaming messages in multi-storey buildings
+
+To Do
+	* Various orientation issues
+	* Checking adjacencies and IDs
+	* Creating more test cases
+
 ### 2017-11-28 ~ Theo
 
 * Add adjacent building gbxml
@@ -49,7 +58,7 @@ Why?
 * Continue Adjacency, Space and ID fixes
 
 Sample gbXML Files
-* Single story files import int Open Studio without error messages
+* Single story files import into Open Studio without error messages
 * Multiple storey file generate error messages
 * All files: exterior wall invisible
 

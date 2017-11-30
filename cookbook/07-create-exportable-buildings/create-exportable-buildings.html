@@ -99,12 +99,16 @@
 			<div id = divExportContent ></div>
 
 
-			<p>Work-in-progress</p>
+			<p>Work-in-progress / 2017-11-29</p>
 
 			<p>Sample gbXML Files<br>
-				* Single story files import into Open Studio without error messages<br>
-				* Multiple storey files generate Open Studio error messages<br>
-				* All files: exterior wall invisible in Open Studio
+				* All Open Studio messages resolved except for slab renaming messages in multi-storey buildings<br>
+			</p>
+
+			<p>To Do<br>
+				* Various orientation issues<br>
+				* Checking adjacencies and IDs<br>
+				* Creating more test cases
 			</p>
 
 			<p>View sample files with <a href="./test-gbxml-files/gbxml-viewer.html" target="_blank">Sample gbXML File Viewer</a></p>
@@ -131,6 +135,8 @@
 	let campus;
 	let buildings;
 	let theBuilding;
+
+	var divJson, divGbxml;
 
 	var materialParameters;
 	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -234,6 +240,8 @@
 
 	function onSelectFootprint( choiceIndex = 0 ) {
 
+		if ( divJson ) { document.body.removeChild( divJson ) };
+		if ( divGbxml ) { document.body.removeChild( divGbxml ) };
 
 		theBuilding.name = 'theBuilding';
 
@@ -1049,8 +1057,6 @@
 
 		initExportGbxml();
 
-
-
 		getBuildingStoreys();
 
 		getSurfaces();
@@ -1171,7 +1177,7 @@
 		const zones = json.gbXML.Zone;
 
 		let surfaceCount = theBuilding.surfaceCount;
-		let spaceCount = theBuilding.spaceCount;
+		let spaceCount; //  = theBuilding.spaceCount;
 		let openingCount = theBuilding.openingCount;
 		let shadeCount = theBuilding.shadeCount;
 
@@ -1182,6 +1188,7 @@
 
 			const storey = storeys[ i ];
 			const storeyCount = i + 1;
+			theBuilding.storeyCount = storeyCount;
 
 			const slabs = storey.children[ 0 ];
 			const slabsPerStory = slabs.children.length;
@@ -1200,12 +1207,11 @@
 //console.log( 'area', area.toLocaleString() );
 //console.log( 'volume', ( area * theBuilding.storeyHeight ).toLocaleString() );
 
-				type = storeyCount === theBuilding.storeys ? 'slabRoof' : 'slabCeiling';
+				const type = storeyCount === theBuilding.storeys ? 'slabRoof' : 'slabCeiling';
 
-				surfaceSlab = getSlabType( type, storeyCount, surfaceCount, spaceCount );
+				let surfaceSlab = getSlabType( type, storeyCount, surfaceCount, theBuilding.spaceCount );
 
-//slab.position.z = theBuilding.storeyHeight;
-				delta = j === slabsPerStory - 1 ? 5 : 0;
+				let delta = j === slabsPerStory - 1 ? 5 : 0; // un-exaggerate interior floor elevation
 				const ceiling = slab.clone();
 				ceiling.geometry = slab.geometry.clone();
 				ceiling.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, theBuilding.storeyHeight + delta ) );
@@ -1219,7 +1225,6 @@
 
 				surfaces.push( surfaceSlab );
 
-
 				if ( storeyCount === 1 ) {
 
 					slabOnGrade = slab.clone();
@@ -1232,7 +1237,7 @@
 
 					}
 
-					surfaceSlab = getSlabType( 'slabOnGrade', storeyCount, surfaceCount, spaceCount );
+					surfaceSlab = getSlabType( 'slabOnGrade', storeyCount, surfaceCount, theBuilding.spaceCount );
 
 					getPolyLoop2( surfaceSlab, slabOnGrade );
 
@@ -1240,10 +1245,16 @@
 
 					surfaces.push( surfaceSlab );
 
+//					addSpaceAndZone( area );
+
 				}
+
+				addSpaceAndZone( area );
 
 ////
 
+
+/*
 				const space = {
 
 					"@id": "space-" + spaceCount,
@@ -1269,6 +1280,7 @@
 				zones.push( zone );
 
 				spaceCount ++;
+*/
 
 			}
 
@@ -1297,14 +1309,15 @@
 					PlanarGeometry: {
 						PolyLoop: []
 					}
+
 				};
 
 				getPolyLoop2( surfaceInteriorWall, interiorWall );
 
-				surfaceCount ++;
 
 				surfaces.push( surfaceInteriorWall );
 
+				surfaceCount ++;
 				spaceCount ++;
 
 			}
@@ -1330,7 +1343,7 @@
 						},
 						CADOjectId: "none",
 						AdjacentSpaceId: [
-							{ "@spaceIdRef": "space-" + ( j < len - 1 ? spaceCount + 1 : spaceCount - slabsPerStory + 2 ) },
+							{ "@spaceIdRef": "space-" + ( j < len - 1 ? spaceCount + 1 : spaceCount - slabsPerStory + 1 ) },
 							{ "@spaceIdRef": "space-" + spaceCount }
 						],
 						PlanarGeometry: {
@@ -1341,16 +1354,17 @@
 
 					getPolyLoop2( surfaceInteriorDiagonalWall, interiorDiagonalWall );
 
-					surfaceCount ++;
-
 					surfaces.push( surfaceInteriorDiagonalWall );
 
+					surfaceCount ++;
 					spaceCount ++;
 
 				}
 
 
 			const exteriorWalls = storey.children[ 3 ];
+
+			spaceCount = i * slabsPerStory + 1;
 
 			for ( let j = 0; j < exteriorWalls.children.length; j++ ) {
 
@@ -1385,11 +1399,49 @@
 
 				addOverHangsFins( surfaces, exteriorWall );
 
+				spaceCount ++;
+
 			}
 
 		}
 
 		json.gbXML.Campus.Building.Area = theBuilding.area.toLocaleString();
+
+	}
+
+
+
+	function addSpaceAndZone( area ) {
+
+		const spaces = json.gbXML.Campus.Building.Space;
+		const zones = json.gbXML.Zone;
+
+		const space = {
+
+			"@id": "space-" + theBuilding.spaceCount,
+			"@zoneIdRef": "zone-" + theBuilding.spaceCount,
+			"@buildingStoreyIdRef": 'storey-' + theBuilding.storeyCount,
+			"@conditionType": "HeatedAndCooled",
+			Name: 'storey-' + theBuilding.storeyCount + '-space-' + theBuilding.spaceCount,
+			Description: "internal space " + theBuilding.spaceCount,
+			Area: area.toLocaleString(),
+			Volume: ( area * theBuilding.storeyHeight ).toLocaleString()
+
+		};
+
+		spaces.push( space );
+
+		const zone = {
+
+			"@id": "zone-" + theBuilding.spaceCount,
+			Name: 'storey-' + theBuilding.storeyCount + '-zone-' + theBuilding.spaceCount
+
+		};
+
+		zones.push( zone );
+
+		theBuilding.spaceCount ++;
+
 
 	}
 
@@ -1838,6 +1890,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		if ( window.checkWindow !== undefined ) { window.checkWindow.close(); }
 
 	}
+
 
 
 	function toggleNav() {

@@ -38,6 +38,7 @@ In folder r7/gbxml-viewer7-03-first-person-camera
 
 ## [gbXML Viewer7 First Person Camera]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-03-first-person-camera/gbxml-viewer7-github-api-gbxml-samples.html )
 
+* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-03-first-person-camera/README.md )
 * Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen. This is a new and experimental feature.
 
 
@@ -47,15 +48,16 @@ In folder r7/gbxml-viewer7-04-file-reader
 
 ## [gbXML Viewer7 File Reader]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/gbxml-viewer7-file-reader.html )
 
+* [Read Me]) http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/README.md )
 * Open and display in 3D a gbXML file that's on a local drive. Examine the file for errors.
-
+* This module also has the first pass at creating reports on gbXML files. 
 ***
 
 In folder r7/gbxml-viewer7-05-heads-up-display
 
 ## [gbXML Viewer7 Heads Up Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html )
 
-* [Read Me]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html#README.md )
+* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/README.md )
 * Add a Heads-Up-Display (HUD) to the 3D view
 
 
@@ -65,8 +67,22 @@ In folder r7/gbxml-viewer7-06-settings-display
 
 ## [gbXML Viewer7 Settings Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings-display/gbxml-viewer7-settings-display.html )
 
-* [Read Me]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/index.html#r7/gbxml-viewer7-06-settings-display/README.md )
+* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings-display/README.md)
 * Update a number of viewing parameters that control the display of the gbXML data.
+
+***
+
+
+In folder r7/gbxml-viewer7-07-reports
+
+## [gbXML Viewer7 Reports]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-07-reports/gbxml-viewer7-07-reports.html )
+
+* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-07-reports/README.md )
+* View a variety of statistics that relate to the gbXML file
+* Locate and view duplicate surfaces
+
+
+***
 
 ***
 

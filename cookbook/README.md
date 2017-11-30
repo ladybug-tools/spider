@@ -34,6 +34,7 @@ The tricks include:
 	* Preventing users from entering invalid data is a very separate issue
 		* And we need to provide some cookbook examples of helping you input useful data 
 * Do not apply fixes for particular operating systems
+	* Try to make code easier and faster to read / avoid thinking about complications / grasp the essence
 	* Example: issues with iframes on Apple mobile devices
 	* Example: wide lines on Widows OS with certain browsers
 
