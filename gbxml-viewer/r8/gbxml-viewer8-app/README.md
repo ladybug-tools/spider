@@ -1,18 +1,21 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-app/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer8 Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-app/gbxml-viewer8-app.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+# gbXML Viewer8 App Read Me
 
 
-## Full screen: [gbXML Viewer8 App]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html )
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-* <http://www.ladybug.tools/spider/gbxml-viewer/r8/>
+## Full screen: [gbXML Viewer8 App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+
+
+Use this link:
+
+* <http://www.ladybug.tools/spider/gbxml-viewer/>
 
 ## Concept
 
+* All the gbXML Viewer8 modules all together andavailable in a single app
 
 
 ## Wish list
