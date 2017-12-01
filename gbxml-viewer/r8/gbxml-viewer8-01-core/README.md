@@ -1,14 +1,11 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/index.html#gbxml-viewer-01-basic/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-01-core/README.md "View file as a web page." ) </span>
 
 
+# gbXML Viewer8 Core Read Me
 
-# gbXML Viewer8 Basic Read Me
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html width=100% height=600px;  >Iframes are not displayed on github.com</iframe>
 
-## Full screen [gbXML Viewer8 Basic]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html )
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=600px;  >Iframes are not displayed on github.com</iframe>
-
+## Full screen [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html )
 
 ## Concept
 
@@ -25,13 +22,18 @@ The core or template file to be used to read gbXML files and display them in 3D
 
 ## Sample files to load
 
-* [Open Studio SampleX ML]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml )
-* [Sample Building]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-02-github-api-menu/gbxml-viewer7-github-api-spider-samples.html#SampleBuildWell%20gbXML%20working4%20OpenStudio.xml )
-* [gbXMLStandard Single Family Residential 2016.xml]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-02-github-api-menu/gbxml-viewer7-github-api-spider-samples.html#gbXMLStandard%20Single%20Family%20Residential%202016.xml )
+* [Open Studio SampleX ML]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml )
+* [Sample Building]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html#SampleBuildWell%20gbXML%20working4%20OpenStudio.xml )
+* [gbXMLStandard Single Family Residential 2016.xml]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html#gbXMLStandard%20Single%20Family%20Residential%202016.xml )
 
 
 ## Change Log
 
+
+### 2017-12-01 ~ Theo
+
+* Code clean-up
+* Update readme
 
 ### 2017-11-29 ~ Theo
 

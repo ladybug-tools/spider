@@ -8,6 +8,9 @@
 	gal.repo = '/Sample-gbXML-Files';
 	gal.pathRepo = '';
 
+	gal.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+
+	gal.threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core.html';
 
 	gal.urlGitHubApiContents = 'https://api.github.com/repos/' + gal.user + gal.repo + '/contents/' + gal.pathRepo;
 
@@ -34,11 +37,11 @@
 
 			'<div style=margin-bottom:8px; >' +
 
-				'<a href=' + gal.urlGitHubSource + fileName + ' title="Edit me" >' + iconInfo + '</a>' +
+				'<a href=' + gal.urlGitHubSource + fileName + ' title="Edit me" >' + gal.iconInfo + '</a>' +
 
-				'<a href=#' + gal.urlGitHubPage + fileName + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</a> ' +
+				' <a href=#' + gal.urlGitHubPage + fileName + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</a> ' +
 
-				'<a href=' + threeDefaultFile + '#' + gal.urlGitHubPage + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
+				' <a href=' + gal.threeDefaultFile + '#' + gal.urlGitHubPage + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
 
 			'</div>';
 

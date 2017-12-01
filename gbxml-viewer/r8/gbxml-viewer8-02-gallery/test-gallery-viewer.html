@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "test gallery bookmarklets" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-12-01" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	iframe { height: 500px; width: 100%; }
+
+</style>
+</head>
+<body>
+
+	<div id = "divHeader" >
+		<div id = "divTitle" ></div>
+	</div>
+
+	<p>Galleries of sample gbXML files</p>
+
+	<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer-gallery-gbxml.js';document.head.appendChild(script);})()" >gbXML on GitHub</a></p>
+
+	<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer-gallery-spider-data.js';document.head.appendChild(script);})()" >Spider data on GitHub</a></p>
+
+	<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer-gallery-spider-build-well.js';document.head.appendChild(script);})()" >Spider cookbook GitHub</a></p>
+
+
+	<iframe id=ifrTest src='../gbxml-viewer8-01-core/gbxml-viewer8-core.html' ></iframe>
+
+<script>
+
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		onHashChange();
+
+	}
+
+
+	function onHashChange() {
+
+		const url = location.hash.slice( 1 );
+
+		ifrTest.src = '../gbxml-viewer8-01-core/gbxml-viewer8-core.html' + '#' + url
+
+	}
+
+</script>
+</body>
+</html>
