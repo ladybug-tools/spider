@@ -4,7 +4,7 @@
 	var divAppMenu = divAppMenu || undefined;
 
 
-	let icw;
+	var icw;
 	let gbjson;
 	let meshSurfaces;
 

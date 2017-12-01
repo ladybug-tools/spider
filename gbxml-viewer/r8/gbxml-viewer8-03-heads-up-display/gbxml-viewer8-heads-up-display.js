@@ -1,4 +1,6 @@
 
+	var icw;
+	var THREE;
 
 	var headsUp; 
 
