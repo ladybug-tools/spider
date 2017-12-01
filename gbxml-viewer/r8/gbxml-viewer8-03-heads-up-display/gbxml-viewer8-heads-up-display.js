@@ -11,8 +11,9 @@
 		if ( !headsUp ) {
 
 			headsUp = document.body.appendChild( document.createElement( 'div' ) );
-			headsUp.style.cssText = 'background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.95; ' +
-			'position: absolute; ';
+			headsUp.style.cssText = 
+				'background-color: #ddd; border-radius: 8px; display: none; max-width: 200px; opacity: 0.95; ' +
+			' padding: 0 5px 10px 5px; position: absolute; ';
 
 		}
 
@@ -37,7 +38,6 @@
 
 		window.objects = [];
 		window.mouse = new THREE.Vector2();
-
 
 //		headsUp = ifrContents.contentDocument.appendChild( document.createElement( 'div' ) ); // in three.js file
 
