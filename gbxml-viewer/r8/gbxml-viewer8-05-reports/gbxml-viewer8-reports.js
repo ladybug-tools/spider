@@ -5,8 +5,8 @@
 
 
 	var icw;
-	let gbjson;
-	let meshSurfaces;
+	var gbjson;
+	var meshSurfaces;
 
 	const b = '<br>';
 
