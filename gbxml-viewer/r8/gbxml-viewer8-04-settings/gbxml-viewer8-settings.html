@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open and view gbXML files in local folders." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-11-30" >
-<title>gbXML Viewer R8 Template Basic</title>
+<title>gbXML Viewer R8 Settings</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -65,8 +65,6 @@
 
 		<p><a href = "#README.md" target="_top" >Read Me</a></p>
 
-
-
 		<p>
 			<input type = "file" id = "inpFile" onchange="ifrThree.contentWindow.openFile(this);" >
 		<p>
@@ -75,6 +73,10 @@
 		<div id = "divBreadcrumbs" ></div>
 
 		<div id = "divMenuItems" ></div>
+
+		<hr>
+
+		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p>
 
 		<hr>
 
