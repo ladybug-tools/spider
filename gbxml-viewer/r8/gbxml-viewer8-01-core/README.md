@@ -2,9 +2,9 @@
 
 
 
-# gbXML Viewer7 Basic Read Me
+# gbXML Viewer8 Basic Read Me
 
-## Full screen [gbXML Viewer7 Basic]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html )
+## Full screen [gbXML Viewer8 Basic]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html )
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=600px;  >Iframes are not displayed on github.com</iframe>

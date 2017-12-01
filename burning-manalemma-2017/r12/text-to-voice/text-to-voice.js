@@ -1,53 +1,7 @@
-<!doctype html>
-<html lang = "en" >
-<head>
-<meta charset = "utf-8" >
-<meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic HTML template" >
-<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-08-04" >
-<title></title>
-<style>
 
-	body { background-color: beige; font: 12pt monospace; margin: 0 auto; max-width: 300px;  padding: 0 3px; }
-	a { color: crimson; text-decoration: none; }
+console.log( '', 23 );
 
-	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
-	button:hover { background: #ccc; color: #fff }
-
-	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
-	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
-	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
-
-</style>
-</head>
-<body>
-
-	<div id = "menu" >
-		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
-		<p><button onclick='sayThis("“Do you want cream or sugar?”")'; "What the Java Cow asks" >Say test test</button></p>
-		<p><button onclick='sayTextFromPlaya()'; >Say text from the Playa</button></p>
-		<p>from: <a href="http://sound-fix.com/2015920ill-be-right-back-other-hilarious-things-overheard-at-burning-man/" target="_blank">“I’ll be right back” & Other Hilarious Things Overheard at Burning Man</a></p>
-		<p><button onclick=synth.cancel();count=-1; >Shut Up!</button></p>
-
-		<hr>
-
-		<p>'Theo in a bottle'<br><button onclick='count=0;onExplainMapOverlay()'; >About Map Overlay</button></p>
-		<div id = "contents" ></div>
-		<p>
-	</div>
-
-<script>
-// https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
-// https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
-// http://stackoverflow.com/questions/21513706/getting-the-list-of-voices-in-speechsynthesis-of-chrome-web-speech-api
-
-// file:///C:/Users/Theo/Dropbox/Public/git-repos/jaanga.github.io/cookbook-html/examples/text-to-speech/
-// http://jaanga.github.io/cookbook-html/examples/text-to-speech/speech-synth-basic/speech-synth-basic-r2.html
-
-// https://medium.com/@ssingh/overheard-at-burning-man-82553ad00b4b
-// https://burningman.org/culture/glossary/
-
+	var divTooToo = divTooToo || undefined;
 
 	let synth;
 	let voices;
@@ -80,16 +34,6 @@
 
 	];
 
-	let textOverlay = [
-
-		'The map overlays are like carpet underlays but placed on the top side',
-		'- just like the wet tee-shirt adorns the human body.',
-		'Click on any of the map sources - and',
-		'Bingo!',
-		'Images from that very nice source become the new overlay.',
-		'Thanks to Google, MapBox, Open Street Map and ESRI',
-		'Now let\'s get back to the Playa!'
-	];
 
 	let count = -1;
 	const b = '<br>';
@@ -98,17 +42,25 @@
 
 	function init() {
 
-		let txt;
+		if ( !divTooToo ) {
 
-		if ( window.top === window.self ) {
-
-			title.innerHTML = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
-
-		} else {
-
-			parent.ifrMenuSub.style.height = '350px';
+			divTooToo = document.body.appendChild( document.createElement( 'div' ) );
+			divTooToo.style.cssText = 
+				'background-color: white; border: 1px solid red; max-width: 350px; opacity: 0.85; ' +
+				' padding: 10px; position: fixed; right: 30px; top: 20px; z-index:100000; ';
 
 		}
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divTooToo.innerHTML = 
+`
+		<div id = "header" ><h1><a id = "title" href = "" ></a></h1></div>
+		<p><button onclick='sayThis("“Do you want cream or sugar?”")'; "What the Java Cow asks" >Say test test</button></p>
+		<p><button onclick='sayTextFromPlaya()'; >Say text from the Playa</button></p>
+		<p>from: <a href="http://sound-fix.com/2015920ill-be-right-back-other-hilarious-things-overheard-at-burning-man/" target="_blank">“I’ll be right back” & Other Hilarious Things Overheard at Burning Man</a></p>
+		<p><button onclick=synth.cancel();count=-1; >Shut Up!</button></p>
+`;
 
 		if ( 'speechSynthesis' in window ) {
 
@@ -140,6 +92,7 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 	}
 
 
+
 	function sayThis( text ) {
 
 		var utterThis;
@@ -165,7 +118,6 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 
 		}
 
-
 // console.log( 'utterThis', utterThis );
 
 //		utterThis.pitch = 0.5;
@@ -177,6 +129,7 @@ console.log( 'Sorry, speech synthesis isn\'t supported.' );
 		synth.speak( utterThis );
 
 	}
+
 
 
 	function sayTextFromPlaya() {
@@ -256,8 +209,3 @@ console.log( 'nn', parent.mnuOverlays );
 		synth.speak( utterThis );
 
 	}
-
-
-</script>
-</body>
-</html>
