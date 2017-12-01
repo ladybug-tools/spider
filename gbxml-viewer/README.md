@@ -1,85 +1,23 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/ "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
 
 
 # gbXML Viewer Read Me
 
 gbXML Viewer is a variety of modular experiments for viewing, examining and validating gbXML files in 3D in your browser.
 
-Here are links to some of the latest files. R7 is that latest release and is still a work-in-progress. Not all the scripts from previous releases have been added to R7 yet.
+Below are links to some of the latest files. R8 is that latest release and is still a work-in-progress. Not all the scripts from previous releases have been added to R7 yet.
 
 Note that. currently, the functionality is spread across multiple files. This is for testing and early-stage development purposes only. Sometime in the near future there will be a script that assembles multiple scripts into a single user experience.
 
  
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
-_gbXML Viewer R7 Basic_
-
-***
-
-In folder r7/gbxml-viewer7-01-basic
-
-## [ gbXML Viewer7 Basic ]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html )
-
-* [Read Me]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/index.html#r7/gbxml-viewer7-01-basic/README.md )
-* The core file used by all the scripts
-
-***
-
-In folder r7/gbxml-viewer7-02-github-api-menu
-
-## [GreenBuildingXML gbXML sample files]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-02-github-api-menu/gbxml-viewer7-github-api-gbxml-samples.html )
-
-## [Spider gbXML sample files]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml7-viewer-02-github-api-menu/gbxml-viewer7-github-api-spider-samples.html )
-
-* Two scripts that show how the core file is used to load a number of gbXML files
-
-***
-
-In folder r7/gbxml-viewer7-03-first-person-camera
-
-## [gbXML Viewer7 First Person Camera]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-03-first-person-camera/gbxml-viewer7-github-api-gbxml-samples.html )
-
-* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-03-first-person-camera/README.md )
-* Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen. This is a new and experimental feature.
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-app/gbxml-viewer8-app.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+_gbXML Viewer R8
+_
 
 
-***
-
-In folder r7/gbxml-viewer7-04-file-reader
-
-## [gbXML Viewer7 File Reader]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/gbxml-viewer7-file-reader.html )
-
-* [Read Me]) http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/README.md )
-* Open and display in 3D a gbXML file that's on a local drive. Examine the file for errors.
-* This module also has the first pass at creating reports on gbXML files. 
-***
-
-In folder r7/gbxml-viewer7-05-heads-up-display
-
-## [gbXML Viewer7 Heads Up Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html )
-
-* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/README.md )
-* Add a Heads-Up-Display (HUD) to the 3D view
+## Full screen: [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-app/gbxml-viewer8-app.html )
 
 
-*** 
-
-In folder r7/gbxml-viewer7-06-settings-display
-
-## [gbXML Viewer7 Settings Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings-display/gbxml-viewer7-settings-display.html )
-
-* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-06-settings-display/README.md)
-* Update a number of viewing parameters that control the display of the gbXML data.
-
-***
-
-
-In folder r7/gbxml-viewer7-07-reports
-
-## [gbXML Viewer7 Reports]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-07-reports/gbxml-viewer7-07-reports.html )
-
-* [Read Me]( http://www.ladybug.tools/spider/index.html#read-gbxml/gbxml-viewer/r7/gbxml-viewer7-07-reports/README.md )
-* View a variety of statistics that relate to the gbXML file
-* Locate and view duplicate surfaces
 
 
 ***
