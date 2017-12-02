@@ -3,7 +3,7 @@
 	var divAppMenu = divAppMenu || undefined;
 
 	var icw;
-	var gbjson;
+//	var gbjson;
 	var meshSurfaces;
 
 	const b = '<br>';
