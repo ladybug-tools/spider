@@ -1,5 +1,4 @@
 
-console.log( '', 23 );
 
 	var divAppMenu = divAppMenu || undefined;
 

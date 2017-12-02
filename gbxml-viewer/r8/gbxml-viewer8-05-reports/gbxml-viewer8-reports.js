@@ -2,11 +2,10 @@
 
 	var divAppMenu = divAppMenu || undefined;
 
-//	var icw;
+	var icw = icw || undefined;
 //	var gbjson;
 	var meshSurfaces;
 
-	const b = '<br>';
 
 	init();
 
@@ -96,6 +95,7 @@ console.log( 'gbjson', icw.gbjson );
 		spaces = gbjson.Campus.Building.Space;
 console.log( '', spaces  );
 
+		const b = '<br>';
 		let txt = '';
 
 
@@ -250,7 +250,7 @@ console.log( '', spaces  );
 
 		for ( let i = 0; i < types.length; i++ ) {
 
-			txt += '<button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + '%' + b;
+			txt += '<button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + '%<br>';
 
 		}
 

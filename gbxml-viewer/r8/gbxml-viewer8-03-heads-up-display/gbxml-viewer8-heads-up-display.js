@@ -1,6 +1,6 @@
 
-	var icw;
-	var THREE;
+	var icw = icw || undefined;
+	var THREE = THREE || undefined;
 
 	var headsUp; 
 

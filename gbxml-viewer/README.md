@@ -28,6 +28,7 @@ Note that. currently, the functionality is spread across multiple files. This is
 
 ### Heads-up Display
 
+* 2017-12-01 ~ Add better display = none on new file loaded
 * 2017-12-01 ~ Add choice of display in right-side menu
 * 2017-12-01 ~ What data should be included in heads-up display
  
