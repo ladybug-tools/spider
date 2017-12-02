@@ -31,11 +31,11 @@ The core or template file to be used to read gbXML files and display them in 3D
 
 With gbXML Viewer you may link to local files on your hard drive if you are running gbXML Viewer locally.
 
-For example if you have both gbXML Viewer8 Core and a gbXML file in the roo folder of drive D, then the URL might look like this in a browser running on Microsoft Windows: 
+For example if you have both gbXML Viewer8 Core and a gbXML file in the root folder of drive D in a browser running on Microsoft Windows, then the URL might look like this: 
 
 * file:///D:/gbxml-viewer8-core.html#file:///D:/open-studio-seb.xml
 
-Using a remotely hosted gbXML Viewer to load files off your hard drive is much more of an issue because of security concerns.
+Using a remotely hosted gbXML Viewer - such as hosted on GitHub - to load files off your hard drive is much more of an issue because of security concerns.
 
 ### Setting up a local file viewer
 
@@ -45,13 +45,13 @@ Go to this link:
 
 Open the Context Menu ( right-click menu ) in your main browser window and click on 'Save As'
 
-Once the file is saved, you should be able to open it just as you might do with any HTML file on your computer.
+Once the file is saved to your hard disk, you should be able to open it just as you might do with any HTML file on your computer.
 
-When yu load the file, it will display a sample file from the sample folder.
+When you load the file, it will display a sample file from the sample folder.
 
-Edit the address and add the URL for any local XML fil on your drive. The easiest method to obtain thr URL is to drag the xml file into your browser. Your browser will create the URL automatically
+Now you can edit the URL in the address bar: add a '#' followed by the URL for any local XML file on your device. BTW, the easiest method to obtain the URL for a local file is to drag the xml file into your browser. Your browser will creates local file URLs automatically.
 
-2017-12-02 ~ Currently the Core script seems to be working as desired and the App script is not working. Efforts will be made to get all the scripts runnable both from a server and locally on a computer or mobile device.
+2017-12-02 ~ Currently the Core script seems to be working as desired and the App script is not working. Efforts will be made to get all the gbXML Viewer scripts runnable both from a server and locally on a computer or mobile device.
  
 
 
