@@ -3,11 +3,11 @@ console.log( '', 23 );
 
 	var divAppMenu = divAppMenu || undefined;
 
-//	var icw;
-	let opacity;
-	let cameraOrtho;
+//	var icw = icw || undefined;
+//	var opacity = opacity ;
+//	var cameraOrtho;
 
-	let surfaceEdges;
+	var surfaceEdges;
 
 
 	init();
