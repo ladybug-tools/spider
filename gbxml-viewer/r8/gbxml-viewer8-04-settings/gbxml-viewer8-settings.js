@@ -5,7 +5,7 @@ console.log( '', 23 );
 
 //	var icw = icw || undefined;
 //	var opacity = opacity ;
-//	var cameraOrtho;
+	var cameraOrtho = cameraOrtho || undefined;
 
 	var surfaceEdges;
 
