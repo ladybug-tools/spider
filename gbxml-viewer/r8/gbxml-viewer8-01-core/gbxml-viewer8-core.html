@@ -40,7 +40,7 @@
 <script>
 
 	const uriGbxmlDefault = 
-
+		location.protocol === 'file:' ? 'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml' :
 		'../../gbxml-sample-files/sam-live2.xml';
 
 	var gbjson;

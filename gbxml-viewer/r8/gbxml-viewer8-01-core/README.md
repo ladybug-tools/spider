@@ -43,10 +43,15 @@ Go to this link:
 
 * <https://raw.githubusercontent.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html>
 
-Open the Contect Menu in your main browser window and click on 'Save As'
+Open the Context Menu ( right-click menu ) in your main browser window and click on 'Save As'
 
-Omce the file is saved, you should be able to open just as you might do with any HTML file on your computer.
+Once the file is saved, you should be able to open it just as you might do with any HTML file on your computer.
 
+When yu load the file, it will display a sample file from the sample folder.
+
+Edit the address and add the URL for any local XML fil on your drive. The easiest method to obtain thr URL is to drag the xml file into your browser. Your browser will create the URL automatically
+
+2017-12-02 ~ Currently the Core script seems to be working as desired and the App script is not working. Efforts will be made to get all the scripts runnable both from a server and locally on a computer or mobile device.
  
 
 
