@@ -148,11 +148,12 @@
 			ulc = url.toLowerCase();
 
 			crumbs = url.lastIndexOf( '/' ) > 0 ? url.slice( 0, url.lastIndexOf( '/' ) ) : '';
+
 //console.log( url.lastIndexOf( '/' ), crumbs );
 
 			setBreadcrumbs( crumbs );
 
-//console.log( '',  urlGitHubApiContents + url.slice( 0, url.lastIndexOf( '/' ) + 1 ) );
+//console.log( 'crumbs',  crumbs );
 
 			requestFile( urlGitHubApiContents + url.slice( 0, url.lastIndexOf( '/' ) + 1 ), callbackGitHubMenu );
 
@@ -179,7 +180,7 @@
 
 	}
 
-
+// 		location.protocol === 'file:' ? './' :
 
 	function getFolderContents( path = '' ) {
 

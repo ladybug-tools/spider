@@ -27,6 +27,29 @@ The core or template file to be used to read gbXML files and display them in 3D
 * [gbXMLStandard Single Family Residential 2016.xml]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html#gbXMLStandard%20Single%20Family%20Residential%202016.xml )
 
 
+## Running Files locally
+
+With gbXML Viewer you may link to local files on your hard drive if you are running gbXML Viewer locally.
+
+For example if you have both gbXML Viewer8 Core and a gbXML file in the roo folder of drive D, then the URL might look like this in a browser running on Microsoft Windows: 
+
+* file:///D:/gbxml-viewer8-core.html#file:///D:/open-studio-seb.xml
+
+Using a remotely hosted gbXML Viewer to load files off your hard drive is much more of an issue because of security concerns.
+
+### Setting up a local file viewer
+
+Go to this link:
+
+* <https://raw.githubusercontent.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html>
+
+Open the Contect Menu in your main browser window and click on 'Save As'
+
+Omce the file is saved, you should be able to open just as you might do with any HTML file on your computer.
+
+ 
+
+
 ## Change Log
 
 
