@@ -23,20 +23,51 @@ Note that. currently, the functionality is spread across multiple files. This is
 ## To Do
 
 
+### Core
 
-## Change Log
+* 2017-12-01 ~ Load files via drag and drop
+* 2017-12-01 ~ load local files via location.hash
+
+
+### First Person camera
+
+* 2017-12-01 ~ Locate camera/controls target inside a given space / zoom into the space
 
 ### Heads-up Display
 
 * 2017-12-01 ~ Add better display = none on new file loaded
 * 2017-12-01 ~ Add choice of display in right-side menu
-* 2017-12-01 ~ What data should be included in heads-up display
- 
+* 2017-12-01 ~ What data should be included in heads-up display?
+* 2017-12-02 ~ Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
+
+
+### Reports
+
+* 2017-12-02 ~ Do a better job of displaying/reporting duplicates
+* 2017-12-02 ~ Report and display surfaces with duplicate CAD IDs
+* 2017-12-02 ~ Highlight and display tine areas
+* 2017-12-02 ~ Highlight and display surfaces that are inside larger surfaces
+
+
+### Settings
+
+* 2017-12-01 ~ Add a 'ground' that can receive shadow
+
 ### Template
 
-* Add hamburger/slider men
+* 2017-12-01 ~ Add hamburger/slider men
 
 
+Not yet started
+
+### Export gbXML files
+
+Will most likely build upon
+
+* [create exportable buildings]( https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings )
+
+
+## Change Log
 
 ### 2017-11-30
 
