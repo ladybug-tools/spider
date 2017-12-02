@@ -2,7 +2,7 @@
 
 	var divAppMenu = divAppMenu || undefined;
 
-	var icw;
+//	var icw;
 //	var gbjson;
 	var meshSurfaces;
 

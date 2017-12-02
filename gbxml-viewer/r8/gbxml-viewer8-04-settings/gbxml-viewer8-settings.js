@@ -3,7 +3,7 @@ console.log( '', 23 );
 
 	var divAppMenu = divAppMenu || undefined;
 
-	var icw;
+//	var icw;
 	let opacity;
 	let cameraOrtho;
 
