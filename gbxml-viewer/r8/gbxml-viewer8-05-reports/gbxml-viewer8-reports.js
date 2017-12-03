@@ -91,7 +91,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 		divReport.innerHTML += addDetails( 'Building', building.attributes );
 
 		const spaces = getSpaces();
-		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent, );
+		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent, 'open' );
 
 		const spacesTiny = getSpacesTiny();
 		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent );
@@ -456,7 +456,7 @@ console.log( 'duplicate surface', surface );
 
 //		txt += '<h3>' + adjacenciesCount + ' Duplicate Adjacencies</h3>' + t$;
 
-		divReport.innerHTML += addDetails( 'Duplicate Adjacencies: ' + adjacenciesCount, t$, 'open' );
+		divReport.innerHTML += addDetails( 'Duplicate Adjacencies: ' + adjacenciesCount, t$ );
 
 
 		coordinatesCount = 0;

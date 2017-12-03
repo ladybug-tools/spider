@@ -54,6 +54,7 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 * Generally: move to show edges not wireframe
 	* make things visible and invisible over changing opacity
+* Now shows all surfaces connected to a space
 * Now have surfaceMeshes and surfaceEdges
 * Add Tiny Spaces and Tiny Surfaces to menu. Latter not yet wired up
 
