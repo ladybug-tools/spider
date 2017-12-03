@@ -10,9 +10,10 @@ _gbXML Viewer R8_
 ## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-app/gbxml-viewer8-app.html )
 
 
-## Concept
+## Concept: Knowledge embedded in gbXML Files is viewable, analyzable and editable with free, open source web apps
 
 ### Issue / The problem to be solved
+
 
 About [Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building_XML )
 
@@ -145,7 +146,6 @@ See also:
 
 * 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
 * 2017-12-02 ~ Michal: Report and display surfaces with duplicate CAD IDs
-* 2017-12-02 ~ Michal: Highlight and display tiny areas
 * 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
 
 
@@ -171,6 +171,11 @@ Will most likely build upon
 
 ## Change Log
 
+
+### 2017-12-03 ~ Theo
+
+* 2017-12-02 ~ Michal: Highlight and display tiny areas << Added Report > Tiny Surfaces 
+ 
 ### 2017-12-02 ~ Theo
 
 * 2017-12-01 ~ Michal: load local files via location.hash < see read me for Core module

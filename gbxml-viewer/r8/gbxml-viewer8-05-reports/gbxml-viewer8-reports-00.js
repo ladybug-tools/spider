@@ -8,7 +8,6 @@
 	var surfaceMeshes;
 	var surfaceEdges;
 
-	var b = '<br>';
 
 	init();
 
@@ -47,7 +46,6 @@ console.log( 'gbjson', icw.gbjson );
 	}
 
 
-
 	function createReport() {
 
 		icw = ifrThree.contentWindow;
@@ -60,7 +58,7 @@ console.log( 'gbjson', icw.gbjson );
 
 		scene.remove( surfaceEdges );
 
-//console.log( 'surfaceEdges', surfaceEdges );
+console.log( 'surfaceEdges', surfaceEdges );
 
 /*
 		if ( surfaceEdges && surfaceEdges.children ) {
@@ -94,7 +92,7 @@ console.log( 'gbjson', icw.gbjson );
 		divReport.innerHTML += addDetails( 'Building', building.attributes );
 
 		const spaces = getSpaces();
-		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent );
+		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent, 'open' );
 
 		const spacesTiny = getSpacesTiny();
 		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent );
@@ -105,23 +103,15 @@ console.log( 'gbjson', icw.gbjson );
 		const documents = traversGbjson( gbjson.DocumentHistory );
 		divReport.innerHTML += addDetails( 'Documents', documents.attributes );
 
-//		const surfaces = traversGbjson( gbjson.Campus.Surface );
-		const surfaces = getSurfaces();
-		divReport.innerHTML += addDetails( surfaces.summary, surfaces.flowContent );
+		const surfaces = traversGbjson( gbjson.Campus.Surface );
+		const detail = getSurfaces();
+		divReport.innerHTML += addDetails( detail.summary, detail.flowContent );
 
-//		examineGbjson( gbjson );
+		examineGbjson( gbjson );
 
-		const surfaceDuplicateCoordinates = getSurfaceDuplicatesCoordinates();
-		divReport.innerHTML += addDetails( surfaceDuplicateCoordinates.summary, surfaceDuplicateCoordinates.flowContent );
 
-		const surfaceDuplicateCadIds = getSurfaceDuplicateCadIds();
-		divReport.innerHTML += addDetails( surfaceDuplicateCadIds.summary, surfaceDuplicateCadIds.flowContent );
-
-		const surfaceDuplicateAdjacencies = getSurfaceDuplicateAdjacencies();
-		divReport.innerHTML += addDetails( surfaceDuplicateAdjacencies.summary, surfaceDuplicateAdjacencies.flowContent );
-
-		const surfaceTinies = getSurfacesTinies();
-		divReport.innerHTML += addDetails( surfaceTinies.summary, surfaceTinies.flowContent );
+		const surfacesTiny = getSurfacesTiny();
+		divReport.innerHTML += addDetails( surfacesTiny.summary, surfacesTiny.flowContent );
 
 	}
 
@@ -195,6 +185,7 @@ console.log( 'gbjson', icw.gbjson );
 	function getSpaces() {
 
 		const spaces = gbjson.Campus.Building.Space;
+		const b = '<br>';
 		let flowContent = '';
 		let count = 1;
 //console.log( '', spaces  );
@@ -218,7 +209,6 @@ console.log( 'gbjson', icw.gbjson );
 		return { summary: 'Spaces &raquo; ' + count, flowContent: flowContent };
 
 	}
-
 
 
 	function getSpacesTiny() {
@@ -253,247 +243,6 @@ console.log( 'gbjson', icw.gbjson );
 		return { summary: 'Tiny Spaces &raquo; ' + count, flowContent: flowContent };
 
 	}
-
-
-
-	function getSurfaces() {
-
-		surfaces = gbjson.Campus.Surface;
-
-		let txt = '';
-
-//console.log( 'surfaces', surfaces );
-
-		types = [];
-		typesCount = [];
-
-		for ( let surface of surfaces ) {
-
-			index = types.indexOf( surface.surfaceType );
-
-			if ( index < 0 ) { 
-
-				types.push( surface.surfaceType );
-				typesCount[ types.length - 1 ] = 1;
-
-			} else {
-
-				typesCount[ index ] ++;
-
-			}
-
-		}
-
-		for ( let i = 0; i < types.length; i++ ) {
-
-			txt += '<button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + '%<br>';
-
-		}
-
-		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: ' 
-
-		const summary = 'Surfaces: ' + surfaces.length;
-
-		return { summary: summary, flowContent: txt };
-
-	}
-
-
-
-	function getSurfaceDuplicatesCoordinates() {
-
-		const surfacesPolyLoops = [];
-		const surfaces = gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
-
-			if ( !surfacesPolyLoops.includes( points ) ) { 
-
-				surfacesPolyLoops.push( points ); 
-
-			} else {
-
-				flowContent += 
-					'<p>' + count + 
-						'. id: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-					'</p>';
-
-				count ++;
-
-			}
-
-		}
-
-		return { summary: 'Duplicate Coordinates &raquo; ' + count, flowContent: flowContent };
-
-	}
-
-
-
-	function getSurfaceDuplicateCadIds() {
-
-		const surfacesIds = [];
-		const surfaces = gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			const id = surface.CADObjectId;
-
-			if ( !surfacesIds.includes( id ) ) { 
-
-				surfacesIds.push( points ); 
-
-			} else {
-
-				flowContent += 
-					'<p>' + count + 
-						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-					'</p>';
-
-				count ++;
-
-			}
-
-		}
-
-		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent };
-
-	}
-
-
-
-	function getSurfaceDuplicateAdjacencies() {
-
-		const surfacesAdjacencies = [];
-		const surfaces = gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			adjacencies = surface.AdjacentSpaceId;
-
-			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
-
-				surfacesAdjacencies.push( adjacencies ); 
-console.log( 'adjacencies', adjacencies  );
-
-				flowContent += 
-					'<p>' + count + 
-						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-					'</p>';
-
-				count ++;
-
-			}
-
-		}
-
-		return { summary: 'Duplicate Adjacencies &raquo; ' + count, flowContent: flowContent };
-
-	}
-
-
-	function getSurfacesTinies() {
-
-		surfaces = gbjson.Campus.Surface;
-		const b = '<br>';
-		let flowContent = '';
-		let count = 0;
-
-//console.log( 'surfaces', surfaces );
-
-		for ( let surface of surfaces ) {
-
-
-			height = parseFloat( surface.RectangularGeometry.Height );
-			width = parseFloat( surface.RectangularGeometry.Width );
-			surfaceArea = height * width;
-
-			if ( parseFloat( surfaceArea ) < 1 ) {
-
-//console.log( 'surface', surface );
-
-				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
-				if ( adjacency ) {
-				spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
-				}
-
-				flowContent += '<div style=margin-bottom:10px; > ' +
-					( ++ count ) +
-					'. id: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-					'surfaceType: ' + surface.surfaceType + b +
-					( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-					( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-					' area: ' + Number( surfaceArea ).toFixed( 1 ) + b +
-					( spaceId ? 'Space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
-
-				'</div>';
-
-			}
-
-		}
-
-		return { summary: 'Tiny Surfaces &raquo; ' + count, flowContent: flowContent };
-
-	}
-
-
-
-	function toggleSurface( id ) {
-
-		for ( let child of surfaceMeshes ) {
-
-			if ( child.userData.data.id !== id ) {
-
-				child.visible = false;
-
-			} else {
-
-				child.visible = true;
-
-			}
-
-		};
-
-	}
-
-
-
-	function toggleSurfaceType( that ) {
-
-		for ( let child of surfaceMeshes ) {
-
-			if ( child.userData.data.surfaceType !== that.innerText ) {
-
-				child.visible = false;
-
-			} else {
-
-				child.visible = true;
-
-			}
-
-		};
-
-	}
-
 
 
 	function toggleSpace( id ) {
@@ -547,6 +296,70 @@ console.log( 'adjacencies', adjacencies  );
 		}
 
 		surfaceEdges.visible = !surfaceEdges.visible;
+
+	}
+
+
+
+	function getSurfaces() {
+
+		surfaces = gbjson.Campus.Surface;
+
+		let txt = '';
+
+//console.log( 'surfaces', surfaces );
+
+		types = [];
+		typesCount = [];
+
+		for ( let surface of surfaces ) {
+
+			index = types.indexOf( surface.surfaceType );
+
+			if ( index < 0 ) { 
+
+				types.push( surface.surfaceType );
+				typesCount[ types.length - 1 ] = 1;
+
+			} else {
+
+				typesCount[ index ] ++;
+
+			}
+
+		}
+
+		for ( let i = 0; i < types.length; i++ ) {
+
+			txt += '<button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + '%<br>';
+
+		}
+
+		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: ' 
+
+		const summary = 'Surfaces: ' + surfaces.length;
+
+		return { summary: summary, flowContent: txt };
+
+	}
+
+
+
+	function toggleSurfaceType( that ) {
+
+		for ( let child of surfaceMeshes ) {
+
+			if ( child.userData.data.surfaceType !== that.innerText ) {
+
+				child.visible = false;
+
+			} else {
+
+				child.visible = true;
+
+			}
+
+		};
 
 	}
 
@@ -772,6 +585,44 @@ console.log( 'space', space );
 
 	}
 
+
+	function getSurfacesTiny() {
+
+		surfaces = gbjson.Campus.Surface;
+		const b = '<br>';
+		let flowContent = 'Coming soon!';
+		let count = 0;
+
+console.log( 'surfaces', surfaces );
+		if ( surfaces.length ) {
+
+			for ( let surfacein in surfaces ) {
+//console.log( 'surface', surface );
+
+/*
+				if ( parseFloat( area ) < 2 ) {
+
+					flowContent += '<div style=margin-bottom:10px; > ' +
+						( count ++ ) +
+						'. id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+						' name: <button onclick=toggleSurface("' + space.id + '"); >' + space.Name + '</button>' + b +
+						' area: ' + Number( surface.Area ).toFixed( 1 ) + b +
+					'</div>';
+
+				}
+
+*/
+
+			}
+
+		}
+
+		return { summary: 'Tiny Surfaces &raquo; ' + count, flowContent: flowContent };
+
+	}
 
 
 
