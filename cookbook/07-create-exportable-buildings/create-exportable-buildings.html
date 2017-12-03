@@ -1171,7 +1171,11 @@
 		document.body.addEventListener('click', function(){
     	var el = document.getElementById( 'txtJson' );
     	console.log(el);
-			el.parentNode.removeChild( el );
+    	if(el !== null)
+    	{
+    	  el.parentNode.removeChild( el );	
+    	}
+			
     }, true); 
 	}
 
@@ -1179,6 +1183,7 @@
   	 console.log("opening txtjson window");
 
      divJson = document.body.appendChild( document.createElement( 'div' ) );
+     divJson.id = 'createBuildingTxtArea'
 		 divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
 		 divJson.innerHTML = '<textarea id=txtJson style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
 		 callback();
