@@ -1170,13 +1170,13 @@
 	{
 		console.log('binding to txt window.')
 		var el = document.getElementById( 'txtJson' );
-		let list = el.addEventListener('click', function(){
+		let list = el.addEventListener('click', function handler(e){
     	console.log(this);
     	if(this !== null)
     	{
     	  el.parentNode.removeChild( el );	
     	}
-			
+			e.currentTarget.removeEventListener(e.type,handler)
     }, true); 
 	}
 
