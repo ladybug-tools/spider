@@ -53,11 +53,15 @@ Now you can edit the URL in the address bar: add a '#' followed by the URL for a
 
 2017-12-02 ~ Currently the Core script seems to be working as desired and the App script is not working. Efforts will be made to get all the gbXML Viewer scripts runnable both from a server and locally on a computer or mobile device.
  
+The ultimate goal is to be able to offer various analytical batch operations that run either locally or in the cloud.
+
 
 
 ## Change Log
 
+### 2017-12-02 ~ Theo
 
+re
 ### 2017-12-01 ~ Theo
 
 * Code clean-up

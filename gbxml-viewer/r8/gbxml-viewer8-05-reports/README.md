@@ -6,24 +6,45 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer8 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html )
+## Full screen test: [gbXML Viewer8 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html )
+
+## Full screen embedded [ gbXML Viewer8 App]( http://www.ladybug.tools/spider/gbxml-viewer )
 
 
 ## Concept
 
-* Create a text report of data included in gbXML files
-* Toggle the display of different surface types
-* Create detailed interactive reports of duplicate surfaces
+From Wikipedia: [XML]( https://en.wikipedia.org/wiki/XML )
 
-## Wish list
+> In computing, Extensible Markup Language (XML) is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable.
 
-* See main read me
+The issue is that gbXML files may be huge and analyzing the data can be tricky.
+
+### Mission
+
+* Create text reports of data embedded in gbXML files
+* Toggle the display of 3D surfaces based on user input
+* Create detailed interactive reports of issues discoverd.
+
+
+### Features
+
+#### Campus Location
+
+* If Latitude and longitutude are provided, link to call for a Google map is displayed
+
+#### Spaces
+
+* Lists all spaced
+* Button to view only Surfaces linked to given shape
+
+ 
+
+## Wish list / To Do
+
+* See main [read me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md )
+
 
 ## Issues
-
-
-
-## Links of Interest
 
 
 

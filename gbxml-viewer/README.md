@@ -99,11 +99,24 @@ See also:
 
 #### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-02-gallery/README.md )
 
-#### Full Screen: [gbXML Viewer8 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-02-gallery/test-gallery-viewer.html )
+#### Full Screen test: [gbXML Viewer8 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-02-gallery/test-gallery-viewer.html )
 
 
 
+### Settings
 
+
+### Reports
+
+
+#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-05-reports/README.md )
+
+#### Full screen test: [gbXML Viewer8 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html )
+
+
+* Create text reports of data embedded in gbXML files
+* Toggle the display of 3D surfaces based on user input
+* Create detailed interactive reports of issues discoverd.
 
 
 ## To Do
