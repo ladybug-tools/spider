@@ -34,8 +34,8 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 
 ### 2017-12-02 ~ Theo
 
-* test wirks with core r2 
-
+* test works with core r2 
+* readme fixes
 
 
 ### 2017-11-15 ~ Theo

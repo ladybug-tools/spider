@@ -3,10 +3,10 @@
 # gbXML Viewer8 Settings Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-04-settings/test-settings.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-04-settings/test-gbxml-viewer8-settings.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test: [gbXML Viewer8 Settings]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-04-settings/test-settings.html )
+## Full screen test: [gbXML Viewer8 Settings]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-04-settings/test-gbxml-viewer8-settings.html )
 
 
 ## Concept
@@ -35,8 +35,7 @@
 
 
 
-## Links of Interest
-
+## To Do for test file
 
 
 ## Change Log
@@ -44,6 +43,13 @@
 ### 2017-12-02 ~ Theo
 
 * update readme
+* Test file updates
+	* link to github
+	* file reader button
+	* Sample load URL by location.hash link
+	* load resport menu on start up
+* Settings.js
+	* Moving to surfaceMeshes and toggling Edges over wirframe
 
 
 ### 2017-12-01 ~ Theo

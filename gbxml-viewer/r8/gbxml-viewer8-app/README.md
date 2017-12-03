@@ -26,11 +26,18 @@ Use this link:
 
 
 
-## Links of Interest
+## To Do
+
+* 2017-12-02 ~ Add requestFile() instead of using the one in more - might simplify the path thing 
 
 
 
 ## Change Log
+
+
+* Works with Cure R2
+
+
 
 
 ***

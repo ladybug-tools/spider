@@ -34,7 +34,7 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 #### Spaces
 
-* Lists all spaced
+* Lists all spaces
 * Button to view only Surfaces linked to given shape
 
  
@@ -49,6 +49,14 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 
 ## Change Log
+
+### 2017-12-02 ~ Theo
+
+* Generally: move to show edges not wireframe
+	* make things visible and invisible over changing opacity
+* Now have surfaceMeshes and surfaceEdges
+* Add Tiny Spaces and Tiny Surfaces to menu. Latter not yet wired up
+
 
 
 ### 2017-12-01 ~ Theo
