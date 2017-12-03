@@ -3,10 +3,10 @@
 # gbXML Viewer8 Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer8 Basic]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html )
+## Full screen: [gbXML Viewer8 Basic]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html )
 
 
 The read me file with full details is in the main gbXML Viewer folder just above here

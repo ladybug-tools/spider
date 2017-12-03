@@ -37,6 +37,11 @@
 
 ## Change Log
 
+### 2017-12-02 ~ Theo
+
+* Test uses core r2
+* update readme
+
 ### 2017-12-01 ~ Theo
 
 * Update read me

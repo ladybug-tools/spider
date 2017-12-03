@@ -43,7 +43,7 @@
 
 //		headsUp = ifrContents.contentDocument.appendChild( document.createElement( 'div' ) ); // in three.js file
 
-		campusSurfacesArray = icw.campusSurfaces.children;
+		campusSurfacesArray = icw.surfaceMeshes.children;
 
 		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );

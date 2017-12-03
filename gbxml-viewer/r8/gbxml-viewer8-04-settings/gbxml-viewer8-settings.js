@@ -2,10 +2,11 @@
 
 	var divAppMenu = divAppMenu || undefined;
 
-//	var icw = icw || undefined;
-//	var opacity = opacity ;
-	var cameraOrtho = cameraOrtho || undefined;
-
+	var icw = icw || undefined;
+	var THREE;
+	var surfaceMeshes
+	var opacity;
+	var cameraOrtho;
 	var surfaceEdges;
 
 
@@ -23,6 +24,8 @@
 		}
 
 		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		surfaceMeshes = icw.surfaceMeshes;
 
 		divAppMenu.innerHTML =
 
@@ -93,12 +96,11 @@
 
 	function setRandomMaterial() {
 
-		THREE = icw.THREE;
 
-		if ( !surfaceEdges ) {
+//		if ( !surfaceMeshes ) {
 
 //			meshesEdges = new THREE.Object3D();
-			icw.campusSurfaces.traverse( function ( child ) {
+			icw.surfaceMeshes.traverse( function ( child ) {
 
 				if ( child instanceof THREE.Mesh ) {
 
@@ -116,7 +118,7 @@
 
 //			scene.add( meshesEdges );
 
-		}
+//		}
 
 	}
 
@@ -124,7 +126,7 @@
 
 	function drawSurfaceNormals() {
 
-		icw.campusSurfaces.traverse( function ( child ) {
+		icw.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof icw.THREE.Mesh ) {
 
@@ -138,7 +140,8 @@
 	}
 
 
-	function toggleEdges() {
+
+	function toggleEdgesxxxx() {
 
 		THREE = icw.THREE;
 
@@ -175,6 +178,34 @@
 		} );
 
 	}
+
+
+	function toggleEdges() {
+
+		if ( !surfaceEdges ) {
+
+			surfaceEdges = new THREE.Group();
+
+			icw.surfaceMeshes.traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh ) {
+					const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
+					let surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
+					surfaceEdge.rotation.copy( child.rotation );
+					surfaceEdge.position.copy( child.position );
+					surfaceEdges.add( surfaceEdge );
+				}
+			} );
+
+			surfaceEdges.visible = false;
+			icw.scene.add( surfaceEdges );
+
+		}
+
+		surfaceEdges.visible = !surfaceEdges.visible;
+
+	}
+
 
 
 
@@ -225,6 +256,6 @@
 		icw.camera.updateProjectionMatrix();
 		icw.controls = controlsOrtho;
 
-		icw.zoomObjectBoundingSphere( icw.campusSurfaces )
+		icw.zoomObjectBoundingSphere( icw.surfaceMeshes )
 
 	}

@@ -3,8 +3,10 @@
 	var divAppMenu = divAppMenu || undefined;
 
 	var icw = icw || undefined;
-//	var gbjson;
-	var meshSurfaces;
+	var gbjson, gbxml;
+	var THREE;
+	var surfaceMeshes;
+	var surfaceEdges;
 
 
 	init();
@@ -19,22 +21,25 @@
 				' padding: 10px; position: fixed; right: 30px; top: 20px; z-index:100000; ';
 
 		}
+
 /*
 		icw = ifrThree.contentWindow;
 
 console.log( 'scene', icw );
 
-console.log( 'campusSurfaces', icw.campusSurfaces );
+console.log( 'surfaceMeshes', icw.surfaceMeshes );
 
 console.log( 'gbjson', icw.gbjson );
+
 */
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
 		divAppMenu.innerHTML = 
 
-			'<div id = divReport ></div>';
+			'<p><button onclick=toggleEdges(); >toggle edges</button></p>' +
 
+			'<div id = divReport ></div>';
 
 		createReport(); 
 
@@ -45,142 +50,77 @@ console.log( 'gbjson', icw.gbjson );
 
 		icw = ifrThree.contentWindow;
 		gbjson = icw.gbjson;
-//console.log( '', gbjson );
-
 		THREE = icw.THREE;
-		meshSurfaces = icw.scene.children[ 4 ];
+		scene = icw.scene;
+
+		surfaceMeshes = icw.scene.getObjectByName( 'surfaceMeshes' ).children;
+		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
+
+		scene.remove( surfaceEdges );
+
+console.log( 'surfaceEdges', surfaceEdges );
+
+/*
+		if ( surfaceEdges && surfaceEdges.children ) {
+
+			for ( let child of surfaceEdges ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+			};
+
+		}
+*/
+
+		toggleEdges();
 
 		gbxml = traversGbjson( gbjson );
 //console.log( 'gbxml', gbxml );
 
 		divReport.innerHTML = addDetails( 'gbXML', gbxml.attributes );
 
-		campus = traversGbjson( gbjson.Campus );
+		const campus = traversGbjson( gbjson.Campus );
 		divReport.innerHTML += addDetails( 'Campus', campus.attributes );
 
-		locate = traversGbjson( gbjson.Campus.Location );
-		txt = getLocation();
-		divReport.innerHTML += addDetails( 'Campus Location' + txt, locate.attributes );
+		const locate = traversGbjson( gbjson.Campus.Location );
+		const mapLink = getGoogleMap();
+		divReport.innerHTML += addDetails( 'Campus Location' + mapLink, locate.attributes );
 
 
-		building = traversGbjson( gbjson.Campus.Building );
+		const building = traversGbjson( gbjson.Campus.Building );
 		divReport.innerHTML += addDetails( 'Building', building.attributes );
 
-		spaces = getSpaces();
+		const spaces = getSpaces();
+		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent, 'open' );
 
-		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent );
+		const spacesTiny = getSpacesTiny();
+		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent );
 
-
-		zones = traversGbjson( gbjson.Zone );
+		const zones = traversGbjson( gbjson.Zone );
 		divReport.innerHTML += addDetails( 'Zones', zones.attributes );
 
-
-		documents = traversGbjson( gbjson.DocumentHistory );
+		const documents = traversGbjson( gbjson.DocumentHistory );
 		divReport.innerHTML += addDetails( 'Documents', documents.attributes );
 
-
-		surfaces = traversGbjson( gbjson.Campus.Surface );
-		detail = getSurfaces();
-		divReport.innerHTML += addDetails( detail.summary, detail.flowContent, 'open' );
-
-//		divReport.innerHTML += txt;
+		const surfaces = traversGbjson( gbjson.Campus.Surface );
+		const detail = getSurfaces();
+		divReport.innerHTML += addDetails( detail.summary, detail.flowContent );
 
 		examineGbjson( gbjson );
 
-	}
 
-
-	function getSpaces() {
-
-		spaces = gbjson.Campus.Building.Space;
-console.log( '', spaces  );
-
-		const b = '<br>';
-		let txt = '';
-
-
-		count = 1;
-
-		if ( spaces.length) {
-
-			for ( let space of spaces ) {
-//console.log( 'space', space );
-
-				txt += '<div style=margin-bottom:10px; > ' +
-					( count ++ ) +
-					'. id: ' + space.id + b +
-					' name: <button onclick=toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
-					' area: ' + Number( space.Area ).toFixed( 1 ) + b +
-				'</div>'
-
-			}
-
-		}
-
-		return { summary: 'Spaces > ' + count, flowContent: txt };
+		const surfacesTiny = getSurfacesTiny();
+		divReport.innerHTML += addDetails( surfacesTiny.summary, surfacesTiny.flowContent );
 
 	}
 
-
-
-	function toggleSpace( id ) {
-
-//console.log( '', id );
-
-		meshSurfaces.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-
-				if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
-					( id === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || id === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
-				) {
-
-				child.material.wireframe = false;
-				child.material.opacity = 0.85;
-//console.log( 'space', space );
-
-				} else {
-
-					child.material.wireframe = true;
-					child.material.opacity = 0.2;
-
-				}
-
-			}
-
-		} );
-
-	}
-
-
-
-	function getLocation() {
-
-		const locate = gbjson.Campus.Location;
-		let text;
-
-		if ( locate && locate.Latitude && locate.Longitude ) {
-
-			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
-			text = ' > <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
-
-		} else {
-
-			text = '';
-
-		}
-
-		return text;
-
-	}
 
 
 	function traversGbjson( obj ) {
 
-		const b = '<br>';
 		const elements = [];
-		let txt = '';
+		let attributes = '';
 
 		for ( let i in obj ) {
 
@@ -190,13 +130,13 @@ console.log( '', spaces  );
 
 			} else {
 
-				txt += '<div id=ib >' + i + '</div>: ' + obj[ i ] + b;
+				attributes += '<div><div id=ib >' + i + '</div>: ' + obj[ i ] + '</div>';
 
 			}
 
 		};
 
-		return { elements: elements, attributes: txt };
+		return { elements: elements, attributes: attributes };
 
 	}
 
@@ -204,15 +144,158 @@ console.log( '', spaces  );
 
 	function addDetails( summary, text, open = '' ) {
 
-		text = text ? text : 'no attributes';
-		const txt =
+		flowContent = text ? text : 'no attributes';
 
-		'<details ' + open + ' >' +
-			'<summary>' + summary + '</summary>' +
-			text +
-		'</details>';
+		const details =
+			'<details ' + open + ' >' +
+				'<summary>' + summary + '</summary>' +
+				flowContent +
+			'</details>' +
+		'';
 
-		return txt;
+		return details;
+
+	}
+
+
+
+	function getGoogleMap() {
+
+		const locate = gbjson.Campus.Location;  // remember that location is a reserved word in your browser
+		let linkToMap;
+
+		if ( locate && locate.Latitude && locate.Longitude ) {
+
+			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
+
+			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
+
+		} else {
+
+			linkToMap = '';
+
+		}
+
+		return linkToMap;
+
+	}
+
+
+
+	function getSpaces() {
+
+		const spaces = gbjson.Campus.Building.Space;
+		const b = '<br>';
+		let flowContent = '';
+		let count = 1;
+//console.log( '', spaces  );
+
+		if ( spaces.length ) {
+
+			for ( let space of spaces ) {
+//console.log( 'space', space );
+
+				flowContent += '<div style=margin-bottom:10px; > ' +
+					( count ++ ) +
+					'. id: ' + space.id + b +
+					' name: <button onclick=toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
+					' area: ' + Number( space.Area ).toFixed( 1 ) + b +
+				'</div>';
+
+			}
+
+		}
+
+		return { summary: 'Spaces &raquo; ' + count, flowContent: flowContent };
+
+	}
+
+
+	function getSpacesTiny() {
+
+		const spaces = gbjson.Campus.Building.Space;
+		const b = '<br>';
+		let flowContent = '';
+		let count = 0;
+//console.log( '', spaces  );
+
+		if ( spaces.length ) {
+
+			for ( let space of spaces ) {
+//console.log( 'space', space );
+
+				if ( parseFloat( space.Area ) < 2 ) {
+
+					flowContent += '<div style=margin-bottom:10px; > ' +
+						( count ++ ) +
+						'. id: ' + space.id + b +
+						' name: <button onclick=toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
+						' area: ' + Number( space.Area ).toFixed( 1 ) + b +
+					'</div>';
+
+				}
+
+
+			}
+
+		}
+
+		return { summary: 'Tiny Spaces &raquo; ' + count, flowContent: flowContent };
+
+	}
+
+
+	function toggleSpace( id ) {
+
+//console.log( 'id', id );
+
+		for ( let child of surfaceMeshes ) {
+
+			child.visible = false;
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
+
+			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
+
+				child.visible = true;
+
+			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
+
+				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
+
+					child.visible = true;
+
+				}
+
+			}
+
+		} 
+
+	}
+
+
+
+	function toggleEdges() {
+
+		if ( !surfaceEdges ) {
+
+			surfaceEdges = new THREE.Group();
+
+			for ( let child of surfaceMeshes ) {
+
+				const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
+				let surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
+				surfaceEdge.rotation.copy( child.rotation );
+				surfaceEdge.position.copy( child.position );
+				surfaceEdges.add( surfaceEdge );
+
+			};
+
+			surfaceEdges.visible = false;
+			scene.add( surfaceEdges );
+
+		}
+
+		surfaceEdges.visible = !surfaceEdges.visible;
 
 	}
 
@@ -225,8 +308,6 @@ console.log( '', spaces  );
 		let txt = '';
 
 //console.log( 'surfaces', surfaces );
-
-		txt += '';
 
 		types = [];
 		typesCount = [];
@@ -266,23 +347,19 @@ console.log( '', spaces  );
 
 	function toggleSurfaceType( that ) {
 
-//console.log( '', that.innerText );
+		for ( let child of surfaceMeshes ) {
 
-		meshSurfaces.traverse( function ( child ) {
+			if ( child.userData.data.surfaceType !== that.innerText ) {
 
-			if ( child instanceof THREE.Mesh && child.userData.data.surfaceType !== that.innerText ) {
+				child.visible = false;
 
-				child.material.wireframe = true;
-				child.material.opacity = 0.1;
+			} else {
 
-			} else if ( child.material ) {
-
-				child.material.wireframe = false;
-				child.material.opacity = 0.85;
+				child.visible = true;
 
 			}
 
-		} );
+		};
 
 	}
 
@@ -290,15 +367,13 @@ console.log( '', spaces  );
 
 	function toggleAllVisible() {
 
-		meshSurfaces.traverse( function ( child ) {
+		for ( let child of surfaceMeshes ) {
 
-			if ( child instanceof THREE.Mesh ) {
+			child.material.wireframe = false;
+			child.material.opacity = 0.85;
+			child.visible = true;
 
-				child.material.wireframe = false;
-				child.material.opacity = 0.85;
-
-			}
-		} );
+		};
 
 	}
 
@@ -339,9 +414,12 @@ console.log( 'duplicate surface', surface );
 					'</p>';
 
 				surfacesCount ++;
+
 			}
 
 		}
+
+
 
 		divReport.innerHTML += addDetails( 'Duplicate Surfaces: ' + surfacesCount, t$ );
 //		txt += '<h3>' + surfacesCount + ' Duplicate Surfaces</h3>' + t$;
@@ -379,7 +457,7 @@ console.log( 'duplicate surface', surface );
 
 //		txt += '<h3>' + adjacenciesCount + ' Duplicate Adjacencies</h3>' + t$;
 
-		divReport.innerHTML += addDetails( 'Duplicate Adjacencies: ' + adjacenciesCount, t$, 'open' );
+		divReport.innerHTML += addDetails( 'Duplicate Adjacencies: ' + adjacenciesCount, t$ );
 
 
 		coordinatesCount = 0;
@@ -453,57 +531,98 @@ console.log( 'dup', vertex );
 	}
 
 
+
 	function toggleDuplicateAdjacency( that ) {
 
 //console.log( '', that.innerText );
 
 		let thatChild;
 
-		meshSurfaces.traverse( function ( child ) {
+//		surfaceMeshes.traverse( function ( child ) {
+		for ( let child of surfaceMeshes ) {
 
 			if ( child instanceof THREE.Mesh && child.userData.data.Name !== that.innerText ) {
 
-				child.material.wireframe = true;
-				child.material.opacity = 0.1;
-
+//				child.material.wireframe = true;
+//				child.material.opacity = 0.1;
+				child.visible = false;
 
 			} else if ( child.material ) {
 
-				child.material.wireframe = false;
-				child.material.opacity = 1;
-				 thatChild = child;
+//				child.material.wireframe = false;
+//				child.material.opacity = 1;
+				child.visible = true;
+				thatChild = child;
 
 			}
 
-		} );
+		};
 
 //console.log( 'thatChild', thatChild );
 
 		space = thatChild.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef;
 
-		meshSurfaces.traverse( function ( child ) {
+//		surfaceMeshes.traverse( function ( child ) {
+		for ( let child of surfaceMeshes ) {
 
-			if ( child instanceof THREE.Mesh && Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
+
+			if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
 				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
 				&& child !== thatChild
 			) {
 
-				child.material.wireframe = false;
-				child.material.opacity = 0.2;
+//				child.material.wireframe = false;
+//				child.material.opacity = 0.2;
+				child.visible = true;
 console.log( 'space', space );
 
 
 			} else {
 
-
-
 			}
 
-		} );
+		};
 
 	}
 
 
+	function getSurfacesTiny() {
+
+		surfaces = gbjson.Campus.Surface;
+		const b = '<br>';
+		let flowContent = 'Coming soon!';
+		let count = 0;
+
+console.log( 'surfaces', surfaces );
+		if ( surfaces.length ) {
+
+			for ( let surfacein in surfaces ) {
+//console.log( 'surface', surface );
+
+/*
+				if ( parseFloat( area ) < 2 ) {
+
+					flowContent += '<div style=margin-bottom:10px; > ' +
+						( count ++ ) +
+						'. id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+						' name: <button onclick=toggleSurface("' + space.id + '"); >' + space.Name + '</button>' + b +
+						' area: ' + Number( surface.Area ).toFixed( 1 ) + b +
+					'</div>';
+
+				}
+
+*/
+
+			}
+
+		}
+
+		return { summary: 'Tiny Surfaces &raquo; ' + count, flowContent: flowContent };
+
+	}
 
 
 
