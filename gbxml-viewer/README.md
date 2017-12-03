@@ -125,7 +125,7 @@ See also:
 ### Core
 
 * 2017-12-01 ~ Load files via drag and drop
-* 2017-12-01 ~ Michal: load local files via location.hash
+* 2017-12-02 ~ Add test file??
 * Lights and shadows
 * Section views
 
@@ -145,7 +145,7 @@ See also:
 
 * 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
 * 2017-12-02 ~ Michal: Report and display surfaces with duplicate CAD IDs
-* 2017-12-02 ~ Michal: Highlight and display tine areas
+* 2017-12-02 ~ Michal: Highlight and display tiny areas
 * 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
 
 
@@ -170,6 +170,10 @@ Will most likely build upon
 
 
 ## Change Log
+
+### 2017-12-02 ~ Theo
+
+* 2017-12-01 ~ Michal: load local files via location.hash < see read me for Core module
 
 ### 2017-11-30
 

@@ -1,15 +1,13 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/index.html#gbxml-viewer-03-first-person-camera/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-03-heads-up-display/README.md  "View file as a web page." ) </span>
 
-# gbXML Viewer7 Heads Up Display Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-01-basic/gbxml-viewer7-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+# gbXML Viewer8 Heads Up Display Read Me
 
 
-## Full screen: [gbXML Viewer7 Heads Up Display]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-05-heads-up-display/gbxml-viewer7-heads-up-display.html)
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-03-heads-up-display/test-gbxml-viewer8-heads-up-display.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-* <http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/gbxml-viewer7-04-file-reader/gbxml-viewer7-file-reader.html#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml>
+## Full screen: [test gbXML Viewer8 Heads Up Display]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-03-heads-up-display/test-gbxml-viewer8-heads-up-display.html )
+
 
 ## Concept
 
@@ -33,6 +31,12 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 
 
 ## Change Log
+
+### 2017-12-02 ~ Theo
+
+* test wirks with core r2 
+
+
 
 ### 2017-11-15 ~ Theo
 

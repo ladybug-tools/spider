@@ -6,7 +6,7 @@
 <meta name=description content="View gbXML files in 3D in your browser. Open files using File Reader or by URL in location.hash.Base Script used by gbXML Viewer modules." >
 <meta name=keywords content="gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-02" >
-<title>gbXML Viewer8 Core</title>
+<title>gbXML Viewer8 Core R2</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -44,7 +44,7 @@
 		'../../gbxml-sample-files/sam-live2.xml';
 
 	var gbjson;
-	var meshSurfaces;
+	var surfaceMeshes;
 
 	const colors = {
 
@@ -92,7 +92,6 @@
 		renderer.shadowMap.renderReverseSided = false;
 		renderer.shadowMap.renderSingleSided = false;
 		document.body.appendChild( renderer.domElement );
-
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		camera.up.set( 0, 0, 1 );
@@ -279,9 +278,27 @@
 
 		}
 
-		scene.remove( meshSurfaces );
+		scene.remove( surfaceMeshes );
 
-		meshSurfaces = new THREE.Object3D();
+		if ( surfaceMeshes ) {
+
+			surfaceMeshes.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+				if ( child.texture ) { child.texture.dispose(); }
+
+			} );
+
+		}
+
+		surfaceMeshes = new THREE.Object3D();
+		surfaceMeshes.name = 'surfaceMeshes';
 
 		for ( let i = 0; i < polyloops.length; i++ ) {
 
@@ -290,13 +307,13 @@
 			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
 			shape.userData.data = surfaces[ i ];
 			shape.castShadow = shape.receiveShadow = true;
-			meshSurfaces.add( shape );
+			surfaceMeshes.add( shape );
 
 		}
 
-		scene.add( meshSurfaces );
+		scene.add( surfaceMeshes );
 
-		zoomObjectBoundingSphere( meshSurfaces );
+		zoomObjectBoundingSphere( surfaceMeshes );
 
 	}
 
@@ -386,7 +403,7 @@
 
 		} else {
 
-			const bbox = new THREE.Box3().setFromObject( meshSurfaces );
+			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
 			const sphere = bbox.getBoundingSphere();
 			center = sphere.center;
 			radius = sphere.radius;

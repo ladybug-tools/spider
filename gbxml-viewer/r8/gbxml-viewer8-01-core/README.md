@@ -33,9 +33,10 @@ With gbXML Viewer you may link to local files on your hard drive if you are runn
 
 For example if you have both gbXML Viewer8 Core and a gbXML file in the root folder of drive D in a browser running on Microsoft Windows, then the URL might look like this: 
 
-* file:///D:/gbxml-viewer8-core.html#file:///D:/open-studio-seb.xml
+* file:///D:/gbxml-viewer8-core-02.html#file:///D:/open-studio-seb.xml
 
 Using a remotely hosted gbXML Viewer - such as hosted on GitHub - to load files off your hard drive is much more of an issue because of security concerns.
+
 
 ### Setting up a local file viewer
 
@@ -51,6 +52,8 @@ When you load the file, it will display a sample file from the sample folder.
 
 Now you can edit the URL in the address bar: add a '#' followed by the URL for any local XML file on your device. BTW, the easiest method to obtain the URL for a local file is to drag the xml file into your browser. Your browser will creates local file URLs automatically.
 
+Also, if you are careful, you can use a relative path such as: <viewer-script.html>#../../data-files/test.xml.
+
 2017-12-02 ~ Currently the Core script seems to be working as desired and the App script is not working. Efforts will be made to get all the gbXML Viewer scripts runnable both from a server and locally on a computer or mobile device.
  
 The ultimate goal is to be able to offer various analytical batch operations that run either locally or in the cloud.
@@ -61,7 +64,16 @@ The ultimate goal is to be able to offer various analytical batch operations tha
 
 ### 2017-12-02 ~ Theo
 
-re
+* Update Read Me
+	* Add local file viewing info
+* Update Core description
+* Core R2
+	* rename campusSurface to surfaceMeshes < used everyhere so needed new title so as not to break everything
+* Rename and update window onload things 
+* Add: surfaceMeshes.name = 'surfaceMeshes';
+* Add: uriGbxmlDefault =  location.protocol === 'file:' ? etc to load cload file when local and local (to cloud) file when in cloud. So there is always something to see
+
+
 ### 2017-12-01 ~ Theo
 
 * Code clean-up
