@@ -28,14 +28,14 @@ Use this link:
 
 ## To Do
 
-* 2017-12-02 ~ Add requestFile() instead of using the one in more - might simplify the path thing 
-
+* 2017-12-02 ~ Add requestFile() instead of using the one in Core - might simplify the complicated path thing 
+* 2017-12-02 ~ Add: don't disply right-menu when in child mode
 
 
 ## Change Log
 
 
-* Works with Cure R2
+* Works with Core R2
 
 
 
