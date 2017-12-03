@@ -1165,13 +1165,13 @@
 
 	}
 
-	function bindTotxtJsonWindow()
+	function bindTotxtJsonWindow(callback)
 	{
 		console.log('binding to txt window.')
-		document.body.addEventListener('click', function(){
-    	var el = document.getElementById( 'txtJson' );
-    	console.log(el);
-    	if(el !== null)
+		var el = document.getElementById( 'txtJson' );
+		let list = el.addEventListener('click', function(){
+    	console.log(this);
+    	if(this !== null)
     	{
     	  el.parentNode.removeChild( el );	
     	}
@@ -1186,7 +1186,7 @@
      divJson.id = 'createBuildingTxtArea'
 		 divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
 		 divJson.innerHTML = '<textarea id=txtJson style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
-		 callback();
+		 callback(removeBind);
   }
  
 	function initExportGbxml() {
