@@ -137,6 +137,8 @@
 
 <script>
 
+  
+
 	let json;
 	let gbxml;
 
@@ -1158,15 +1160,35 @@
 		getAdjacentBuildings();
 
 //console.log( 'json', json.gbXML );
-
-		divJson = document.body.appendChild( document.createElement( 'div' ) );
-		divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
-		divJson.innerHTML = '<textarea id=txtJson style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
+		console.log('json', json);
+		console.log('gbxml', gbxml);
+    openTxtJsonWindow(bindTotxtJsonWindow);
 
 	}
 
+	function bindTotxtJsonWindow(callback)
+	{
+		console.log('binding to txt window.')
+		var el = document.getElementById( 'txtJson' );
+		let list = el.addEventListener('click', function handler(e){
+    	console.log(this);
+    	if(this !== null)
+    	{
+    	  el.parentNode.removeChild( el );	
+    	}
+			e.currentTarget.removeEventListener(e.type,handler)
+    }, true); 
+	}
 
+  function openTxtJsonWindow(){
+  	 console.log("opening txtjson window");
 
+     divJson = document.body.appendChild( document.createElement( 'div' ) );
+     divJson.id = 'createBuildingTxtArea'
+		 divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
+		 divJson.innerHTML = '<textarea id=txtJson style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
+  }
+ 
 	function initExportGbxml() {
 
 		json = {
@@ -1886,6 +1908,13 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 
 
+	}
+
+	function findOverhangAsimuth()
+	{
+		const surfaces = json.gbXML.Campus.Surface;
+		//separate into three groups: exterior walls, fins, and overhangs
+		//grab openings for the vertices
 	}
 
 
