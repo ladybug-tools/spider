@@ -59,6 +59,7 @@ console.log( 'gbjson', icw.gbjson );
 		scene.remove( surfaceEdges );
 
 console.log( 'surfaceEdges', surfaceEdges );
+
 /*
 		if ( surfaceEdges && surfaceEdges.children ) {
 

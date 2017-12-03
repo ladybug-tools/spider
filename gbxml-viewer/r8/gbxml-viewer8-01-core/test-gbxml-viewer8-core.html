@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "test gbxml viewer8 template bookmarklets" >
+<meta name = "description" content = "test gbxml viewer8 core" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-01" >
 <title></title>
@@ -35,7 +35,7 @@
 			"JavaScript:( 
 				function(){ 
 					var script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = 'test-gbxml-viewer8-template.js'; 
+					script.src = 'test-gbxml-viewer8-core.js'; 
 			} )()"
 		>
 		test</a>
@@ -44,16 +44,18 @@
 
 	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html' ></iframe>
 
-	<p>Different ways of loading files</p>
+	<h3>Methods to load gbXML files into this iframe</h3>
+
 	<p>
-		JavaScript: Update iframe src: <a href="JavaScript:(function(){
+		JavaScript: Use a link to update iframe src:<br>
+		<a href="JavaScript:(function(){
 			ifrThree.src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html#https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/sam-live2.xml';
 		})()" >
 		sam live2</a>
 	</p>
 
 	<p>
-		JavaScript: Update iframe location hash to cloud URL:<br>
+		JavaScript: Use a link to update iframe location hash to cloud URL:<br>
 		<a href="JavaScript:(function(){
 			ifrThree.contentWindow.location.hash='#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/rac_basic_sample_project.xml';
 		})()" >
@@ -61,7 +63,7 @@
 	</p>
 
 	<p>
-		JavaScript: Update iframe location hash to relative URL:<br>
+		JavaScript: Use a link to update iframe location hash to relative URL:<br>
 		<a href="JavaScript:(function(){
 			ifrThree.contentWindow.location.hash='#../../../read-gbxml/data-files/rac_basic_sample_project.xml';
 		})()" >
@@ -69,7 +71,7 @@
 	</p>
 
 	<p>
-		Use file dialog box to open local file:<br>
+		Use operating system file dialog box to open local file:<br>
 			<input type=file id=inpFile onchange=icw.openFile(this); >
 	<p>
 

@@ -62,6 +62,13 @@ The ultimate goal is to be able to offer various analytical batch operations tha
 
 ## Change Log
 
+### 2017-12-03 ~ Theo
+
+Show different methods to load gbXML files anf display in 3D in an iframe
+* Add test-gbxml-viewer8-template.html
+* Add test-gbxml-viewer8-template.js
+
+
 ### 2017-12-02 ~ Theo
 
 * Update Read Me
