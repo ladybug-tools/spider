@@ -1319,8 +1319,8 @@
 //console.log( 'slabGeometry', slabGeometry  );
 
 				const area = THREE.ShapeUtils.area( slabGeometry.vertices.reverse() );
+				theBuilding.area += area;
 				console.log('the slab area: ', area);
-
 				console.log( 'area', theBuilding.area );
 				console.log( 'area', area.toLocaleString() );
 				console.log( 'volume', ( area * theBuilding.storeyHeight ).toLocaleString() );
