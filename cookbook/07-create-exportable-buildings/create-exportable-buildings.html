@@ -1152,21 +1152,6 @@
 		theBuilding.area = 0;
 
     
-    fns = [initExportGbxml,getBuildingStoreys.getSurfaces,getAdjacentBuildings,updateJson];
-
-    function chain(fn)
-		{
-
-			if(fn) 
-			{
-				console.log(fn);
-
-	    	fn(() => chain(fns.shift()));
-	  	}
-		}
-
-		console.log('chaining')
-    chain(fns.shift());
 		
 		initExportGbxml();
 		getBuildingStoreys();
