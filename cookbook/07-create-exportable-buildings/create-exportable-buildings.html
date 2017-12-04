@@ -1952,7 +1952,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		const reg = /(>)(<)(\/*)/g;
 		let pad = 0;
 
-		xml = xml.replace( reg, '$1\r\n$2$3' );
+		xml = xml.toString().replace( reg, '$1\r\n$2$3' );
 
 		return xml.split('\r\n').map(( node, index ) => {
 
