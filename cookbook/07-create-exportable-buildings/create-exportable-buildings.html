@@ -1882,11 +1882,11 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		gbxml = createXML ( json )
     console.log("gbxml: ", gbxml)
 
-		const xmlText = new XMLSerializer().serializeToString( formatXml(gbxml) );
+		const xmlText = new XMLSerializer().serializeToString( gbxml );
     var inner_id = 'txtGbxml';
-    openInspectorWindow(bindToInspectorWindow, inner_id, xmlText);
+    openInspectorWindow(bindToInspectorWindow, inner_id, formatXml(xmlText));
 
-		txtGbxml.appendChild( xmlTextNode );
+		
 
 // the kludge to get around getPolyLoop fail
 
