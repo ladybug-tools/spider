@@ -1880,9 +1880,10 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 		if ( !json ){ alert( 'get building data first' ); return; }
 		gbxml = createXML ( json )
-
+    console.log("gbxml: ", gbxml)
+    
 		const xmlText = new XMLSerializer().serializeToString( gbxml );
-    var inner_id = 'txtGbxml'
+    var inner_id = 'txtGbxml';
     openInspectorWindow(bindToInspectorWindow, inner_id, xmlText);
 
 		txtGbxml.appendChild( xmlTextNode );
