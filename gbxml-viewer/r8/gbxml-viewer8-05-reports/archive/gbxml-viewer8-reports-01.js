@@ -5,18 +5,14 @@
 	var icw = icw || undefined;
 	var gbjson, gbxml;
 	var THREE;
-	var surfaceGroup;
 	var surfaceMeshes;
 	var surfaceEdges;
 
-	var telltale;
 	var b = '<br>';
 
-	initReport();
+	init();
 
-
-
-	function initReport() {
+	function init() {
 
 		if ( !divAppMenu ) {
 
@@ -26,6 +22,25 @@
 				' padding: 10px; position: fixed; right: 30px; top: 20px; z-index:100000; ';
 
 		}
+
+/*
+		icw = ifrThree.contentWindow;
+
+console.log( 'scene', icw );
+
+console.log( 'surfaceMeshes', icw.surfaceMeshes );
+
+console.log( 'gbjson', icw.gbjson );
+
+*/
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divAppMenu.innerHTML = 
+
+			'<p><button onclick=toggleEdges(); >toggle edges</button></p>' +
+
+			'<div id = divReport ></div>';
 
 		createReport(); 
 
@@ -40,22 +55,27 @@
 		THREE = icw.THREE;
 		scene = icw.scene;
 
-		surfaceGroup = icw.scene.getObjectByName( 'surfaceMeshes' );
-		surfaceMeshes = surfaceGroup.children;
+		surfaceMeshes = icw.scene.getObjectByName( 'surfaceMeshes' ).children;
 		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
 
-		divAppMenu.innerHTML = 
+		scene.remove( surfaceEdges );
 
-			'<p>' +
-				'<button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
-				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-				' <button onclick=icw.zoomObjectBoundingSphere(surfaceGroup); >reset view</button>' +
+//console.log( 'surfaceEdges', surfaceEdges );
 
-			'</p>' +
+/*
+		if ( surfaceEdges && surfaceEdges.children ) {
 
-			'<div id = divReport ></div>';
+			for ( let child of surfaceEdges ) {
 
-console.log( 'surfaceEdges', surfaceEdges );
+					child.geometry.dispose();
+					child.material.dispose();
+
+			};
+
+		}
+*/
+
+		toggleEdges();
 
 		gbxml = traversGbjson( gbjson );
 //console.log( 'gbxml', gbxml );
@@ -368,7 +388,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
 
 				surfacesAdjacencies.push( adjacencies ); 
-//console.log( 'adjacencies', adjacencies  );
+console.log( 'adjacencies', adjacencies  );
 
 				flowContent += 
 					'<p>' + count + 
@@ -411,11 +431,8 @@ console.log( 'surfaceEdges', surfaceEdges );
 //console.log( 'surface', surface );
 
 				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
-
 				if ( adjacency ) {
-
-					spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
-
+				spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
 				}
 
 				flowContent += '<div style=margin-bottom:10px; > ' +
@@ -443,17 +460,13 @@ console.log( 'surfaceEdges', surfaceEdges );
 
 		for ( let child of surfaceMeshes ) {
 
-			if ( child.userData.data.id === id ) {
+			if ( child.userData.data.id !== id ) {
 
-				child.visible = true;
-
-console.log( '', child );
-
-				zoomIntoSurface( child );
+				child.visible = false;
 
 			} else {
 
-				child.visible = false;
+				child.visible = true;
 
 			}
 
@@ -462,29 +475,6 @@ console.log( '', child );
 	}
 
 
-	function zoomIntoSurface( surface ){
-
-//surfaceGroup.geometry.computeBoundingSphere();
-console.log( 'surface', surface );
-		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
-
-
-		radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
-
-		scene.remove( telltale );
-		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-		const material = new THREE.MeshNormalMaterial();
-		telltale = new THREE.Mesh( geometry, material );
-		telltale.position.copy( center );
-		scene.add( telltale );
-
-
-		icw.controls.target.copy( center );
-		icw.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
-
-console.log( 'bbb', center, radius );
-
-	}
 
 	function toggleSurfaceType( that ) {
 
@@ -535,7 +525,34 @@ console.log( 'bbb', center, radius );
 
 
 
-	function xxxtoggleAllVisible() {
+	function toggleEdges() {
+
+		if ( !surfaceEdges ) {
+
+			surfaceEdges = new THREE.Group();
+
+			for ( let child of surfaceMeshes ) {
+
+				const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
+				let surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
+				surfaceEdge.rotation.copy( child.rotation );
+				surfaceEdge.position.copy( child.position );
+				surfaceEdges.add( surfaceEdge );
+
+			};
+
+			surfaceEdges.visible = false;
+			scene.add( surfaceEdges );
+
+		}
+
+		surfaceEdges.visible = !surfaceEdges.visible;
+
+	}
+
+
+
+	function toggleAllVisible() {
 
 		for ( let child of surfaceMeshes ) {
 
@@ -549,7 +566,7 @@ console.log( 'bbb', center, radius );
 
 
 
-	function xxxexamineGbjson( gbjson ) {
+	function examineGbjson( gbjson ) {
 
 		surfaces = [];
 

@@ -20,20 +20,21 @@
 <body>
 
 	<div id = "divHeader" >
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/" >gh</a>
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>Click 'heaps-up display' to load heads-up display</p>
+	<p>If it does not start automatically, click 'heads-up display' to load heads-up display</p>
 
 	<p>
-		<a href="
+		<a id=aThree href="
 			JavaScript:(function(){var script=document.createElement('script');
 			script.src='gbxml-viewer8-heads-up-display.js';document.head.appendChild(script);})()" >
 		heads-up display</a>
 	</p>
 
 
-	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html' ></iframe>
+	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
 
 <script>
 
@@ -43,6 +44,13 @@
 	function init() {
 
 		divTitle.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
+
+	}
+
+
+	function onloadThreejs() {
+
+		aThree.click();
 
 	}
 

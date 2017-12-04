@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "test gallery bookmarklets" >
+<meta name = "description" content = "Galleries of sample gbXML files. Test sample gbXML files gallery bookmarklets" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-01" >
-<title></title>
+<meta name = "date" content = "2017-12-04" >
+<title>test-gallery-viewer.html</title>
 <style>
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
@@ -20,18 +20,17 @@
 <body>
 
 	<div id = "divHeader" >
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/" >gh</a>
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>Galleries of sample gbXML files</p>
-
-	<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer-gallery-gbxml.js';document.head.appendChild(script);})()" >gbXML on GitHub</a></p>
+	<p><a id=aThree href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer-gallery-gbxml.js';document.head.appendChild(script);})()" >gbXML on GitHub</a></p>
 
 	<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer-gallery-spider-data.js';document.head.appendChild(script);})()" >Spider data on GitHub</a></p>
 
 	<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='gbxml-viewer-gallery-spider-build-well.js';document.head.appendChild(script);})()" >Spider cookbook GitHub</a></p>
 
-	<iframe id=ifrTest src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html' ></iframe>
+	<iframe id=ifrTest src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
 
 <script>
 
@@ -40,7 +39,10 @@
 
 	function init() {
 
-		divTitle.innerHTML = '<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>';
+		divTitle.innerHTML = 
+			'<h2><a  href = "" >' + document.title + '</a></h2>' +
+			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+		'';
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -53,7 +55,14 @@
 
 		const url = location.hash.slice( 1 );
 
-		ifrTest.src = '../gbxml-viewer8-01-core/gbxml-viewer8-core.html' + '#' + url
+//		ifrTest.src = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' + '#' + url
+		ifrTest.contentWindow.location.hash = '#' + url;
+
+	}
+
+	function onloadThreejs() {
+
+		aThree.click();
 
 	}
 

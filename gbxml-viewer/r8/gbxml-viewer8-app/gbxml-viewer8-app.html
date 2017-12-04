@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Open and view gbXML files in local folders. See www.gbxml.org" >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-03" >
-<title>gbXML Viewer R8.2</title>
+<meta name = "date" content = "2017-12-034" >
+<title>gbXML Viewer R8.3</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -116,8 +116,8 @@
 	const repo = '/spider';
 	const pathRepo = 'gbxml-viewer/r8/gbxml-viewer8-app/';
 
-	const uriDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html';
-	const threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html';
+	const uriDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html';
+	const threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html';
 
 	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
 
@@ -148,7 +148,7 @@
 
 		if ( ulc.endsWith( '.md' ) ) {
 
-			ifrThree.contentWindow.requestFile( url, callbackMarkdown );
+			requestFile( url, callbackMarkdown );
 
 		} else if ( ulc.endsWith( '.html' ) ) {
 
@@ -169,7 +169,7 @@
 
 		} else {
 
-			ifrThree.contentWindow.requestFile( urlGitHubPage + url, callbackToTextarea );
+			requestFile( urlGitHubPage + url, callbackToTextarea );
 
 		}
 
@@ -228,6 +228,25 @@
 			divMenu.style.padding = '30px 10px 0 10px';
 			hamburger.style.left = 'calc( var( --mnu-width ) - 100px )';
 			divContainer.style.marginLeft = width;
+
+		}
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 

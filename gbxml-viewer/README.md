@@ -144,8 +144,8 @@ See also:
 
 ### Reports
 
+* 2017-12-02 ~ Michal: Zoom and center duplicate surfaces
 * 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
-* 2017-12-02 ~ Michal: Report and display surfaces with duplicate CAD IDs
 * 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
 
 
@@ -153,14 +153,16 @@ See also:
 
 * 2017-12-01 ~ Add a 'ground' that can receive shadow
 
+
 ### Template
 
 * 2017-12-01 ~ Add hamburger/slider men
 
 
-Not yet started
 
 ### Export gbXML files
+
+Not yet started
 
 2017-12-02 ~ Michal: Add abilty to edit and save gbXML files
 
@@ -174,6 +176,7 @@ Will most likely build upon
 
 ### 2017-12-03 ~ Theo
 
+* 2017-12-02 ~ Michal: Report and display surfaces with duplicate CAD IDs
 * 2017-12-02 ~ Michal: Highlight and display tiny areas << Added Report > Tiny Surfaces 
  
 ### 2017-12-02 ~ Theo
