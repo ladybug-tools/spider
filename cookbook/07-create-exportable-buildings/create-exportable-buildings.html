@@ -1171,10 +1171,10 @@
 	{
 		console.log('binding to '+id+' window.')
 		document.addEventListener('click', function handler(e){
-			console.log(e);
+			console.log(e.target);
     	if(e.target && e.target.id == id)
     	{
-    	  el.parentNode.removeChild( el );	
+    	  e.target.parentNode.removeChild( e.target );	
     	}
 			e.currentTarget.removeEventListener(e.type,handler)
     }, true); 
