@@ -1882,7 +1882,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		gbxml = createXML ( json )
     console.log("gbxml: ", gbxml)
 
-		const xmlText = new XMLSerializer().serializeToString( gbxml );
+		var xmlText = new XMLSerializer().serializeToString( gbxml );
 		xmlText = formatXml(xmlText)
     var inner_id = 'txtGbxml';
     openInspectorWindow(bindToInspectorWindow, inner_id, xmlText);
