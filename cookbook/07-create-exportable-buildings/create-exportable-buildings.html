@@ -1233,7 +1233,7 @@
 						"@id": 1,
 						"@buildingType": "Office",
 						Name: 'theBuilding ' + theBuilding.footprint + ' shape',
-						Area: theBuilding.area,
+						Area: 0,
 						BuildingStorey: [],
 						Space: []
 					},
@@ -1313,7 +1313,7 @@
 				const area = THREE.ShapeUtils.area( slabGeometry.vertices.reverse() );
 				building.Area += area;
 				console.log('the slab area: ', area);
-				console.log( 'area', building.area );
+				console.log( 'area', building.Area );
 				console.log( 'area', area.toLocaleString() );
 				console.log( 'volume', ( area * theBuilding.storeyHeight ).toLocaleString() );
 
