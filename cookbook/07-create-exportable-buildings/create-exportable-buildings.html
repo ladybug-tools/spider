@@ -1166,6 +1166,7 @@
 
   function updateJson()
   {
+  	console.log('showing json');
   	console.log('json', json);
 		var inner_id = 'txtJson'
 		var innertext = JSON.stringify( json, null, 4 )
@@ -1282,6 +1283,7 @@
 		const surfaces = json.gbXML.Campus.Surface;
 		const spaces = json.gbXML.Campus.Building.Space;
 		const zones = json.gbXML.Zone;
+		const building = json.gbXML.Campus.Building;
 
 		let surfaceCount = theBuilding.surfaceCount;
 		let spaceCount; //  = theBuilding.spaceCount;
@@ -1309,9 +1311,9 @@
 //console.log( 'slabGeometry', slabGeometry  );
 
 				const area = THREE.ShapeUtils.area( slabGeometry.vertices.reverse() );
-				theBuilding.area += area;
+				building.Area += area;
 				console.log('the slab area: ', area);
-				console.log( 'area', theBuilding.area );
+				console.log( 'area', building.area );
 				console.log( 'area', area.toLocaleString() );
 				console.log( 'volume', ( area * theBuilding.storeyHeight ).toLocaleString() );
 
