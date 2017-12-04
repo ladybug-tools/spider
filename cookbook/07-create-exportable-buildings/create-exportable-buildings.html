@@ -1992,7 +1992,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		if( !gbxml ) { alert( 'Get some building data first.' ); return; }
 
 		let blob;
-    const xmlText = new XMLSerializer().serializeToString( gbxml );
+    var xmlText = new XMLSerializer().serializeToString( gbxml );
 		xmlText = formatXml(xmlText);
 
 		blob = new Blob( [ xmlText ],{ type: 'text/xml' } );
