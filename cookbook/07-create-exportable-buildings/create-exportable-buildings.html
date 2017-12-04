@@ -1163,7 +1163,7 @@
 		console.log('json', json);
 		console.log('gbxml', gbxml);
 		var inner_id = "txtJson"
-    openTxtJsonWindow(bindTotxtJsonWindow, );
+    openInspectorWindow(bindTotxtJsonWindow, inner_id);
 
 	}
 
@@ -1181,8 +1181,8 @@
     }, true); 
 	}
 
-  function openTxtJsonWindow(callback, id){
-  	 console.log("opening txtjson window");
+  function openInspectorWindow(callback, id){
+  	 console.log("opening " + id + " window");
 
      divJson = document.body.appendChild( document.createElement( 'div' ) );
 		 divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
