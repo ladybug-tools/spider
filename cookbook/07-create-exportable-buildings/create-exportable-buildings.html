@@ -1151,22 +1151,23 @@
 		theBuilding.shadeCount = 1;
 		theBuilding.area = 0;
 
-		initExportGbxml();
+		initExportGbxml(getBuildingStoreys);
 
-		getBuildingStoreys();
+		getBuildingStoreys(getSurfaces);
 
-		getSurfaces();
+		getSurfaces(getAdjacentBuildings);
 
-		getAdjacentBuildings();
+		getAdjacentBuildings(updateJson);
 
-//console.log( 'json', json.gbXML );
-		console.log('json', json);
-		console.log('gbxml', gbxml);
+	}
+
+  function updateJson()
+  {
+  	console.log('json', json);
 		var inner_id = 'txtJson'
 		var innertext = JSON.stringify( json, null, 4 )
     openInspectorWindow(bindToInspectorWindow, inner_id, innertext);
-
-	}
+  }
 
 	function bindToInspectorWindow(id)
 	{
@@ -1190,7 +1191,7 @@
      callback(id);
   }
  
-	function initExportGbxml() {
+	function initExportGbxml(callback) {
 
 		json = {
 
@@ -1240,26 +1241,14 @@
 				DocumentHistory: []
 
 			}
-
+      
 		}
-
-/*
-
-// area and volume need figuring out. Are they givens or calculated at run time?
-
-		campus.buildingId = 1;
-		campus.cadModelAzimuth = 0;
-		campus.elevation = 000000;
-		campus.locationName = 'San Francisco CA United States';
-		campus.streetAddress = '440 Davis Court';
-
-*/
-
+    callback()
 	}
 
 
 
-	function getBuildingStoreys() {
+	function getBuildingStoreys(callback) {
 
 		const storeys = json.gbXML.Campus.Building.BuildingStorey;
 
@@ -1278,14 +1267,13 @@
 			storeys.push( obj );
 
 		}
-
-
+    callback();
 	}
 
 
 // tbd: break up into smaller functions
 
-	function getSurfaces() {
+	function getSurfaces(callback) {
 
 //console.log( 'storey', theBuilding.group.children[ 0 ] );
 
@@ -1493,7 +1481,7 @@
 		}
 
 		//json.gbXML.Campus.Building.Area = theBuilding.area.toLocaleString();
-
+    callback();
 	}
 
 
@@ -1722,7 +1710,7 @@
 
 
 
-	function getAdjacentBuildings() {
+	function getAdjacentBuildings(callback) {
 
 		const surfaces = json.gbXML.Campus.Surface;
 
@@ -1783,7 +1771,7 @@
 			}
 
 		}
-
+		callback();
 	}
 
 
