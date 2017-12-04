@@ -1153,7 +1153,7 @@
 
     
     let fns = [initExportGbxml,getBuildingStoreys.getSurfaces,getAdjacentBuildings,updateJson]
-		
+		console.log('chaining')
     chain(fns.shift());
 		
 		//initExportGbxml(getBuildingStoreys);
@@ -1169,7 +1169,7 @@
 	    	fn(() => chain(fns.shift()));
 	  	}
 		}
-		
+
 	}
 
 	
