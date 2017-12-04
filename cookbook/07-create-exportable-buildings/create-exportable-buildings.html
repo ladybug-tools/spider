@@ -1151,15 +1151,28 @@
 		theBuilding.shadeCount = 1;
 		theBuilding.area = 0;
 
-		initExportGbxml(getBuildingStoreys(getSurfaces(getAdjacentBuildings(updateJson))));
-
+    
+    let fns = [initExportGbxml,getBuildingStoreys.getSurfaces,getAdjacentBuildings,updateJson]
+		
+    chain(fns.shift());
+		
+		//initExportGbxml(getBuildingStoreys);
+		//getSurfaces(getAdjacentBuildings);
 		// getBuildingStoreys(getSurfaces);
-
 		// getSurfaces(getAdjacentBuildings);
-
 		// getAdjacentBuildings(updateJson);
 
+		function chain(fn)
+		{
+			if(fn) 
+			{
+	    	fn(() => chain(fns.shift()));
+	  	}
+		}
+		
 	}
+
+	
 
   function updateJson()
   {
