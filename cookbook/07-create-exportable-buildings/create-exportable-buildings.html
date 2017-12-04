@@ -1163,13 +1163,13 @@
 		console.log('json', json);
 		console.log('gbxml', gbxml);
 		var inner_id = "txtJson"
-    openInspectorWindow(bindTotxtJsonWindow, inner_id);
+    openInspectorWindow(bindToInspectorWindow, inner_id);
 
 	}
 
-	function bindTotxtJsonWindow(id)
+	function bindToInspectorWindow(id)
 	{
-		console.log('binding to txt window.')
+		console.log('binding to '+id+' window.')
 		var el = document.getElementById( id );
 		let list = el.addEventListener('click', function handler(e){
     	console.log(this);
