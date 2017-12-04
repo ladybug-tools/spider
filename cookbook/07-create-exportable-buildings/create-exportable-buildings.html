@@ -1151,13 +1151,13 @@
 		theBuilding.shadeCount = 1;
 		theBuilding.area = 0;
 
-		initExportGbxml(getBuildingStoreys);
+		initExportGbxml(getBuildingStoreys(getSurfaces(getAdjacentBuildings(updateJson))));
 
-		getBuildingStoreys(getSurfaces);
+		// getBuildingStoreys(getSurfaces);
 
-		getSurfaces(getAdjacentBuildings);
+		// getSurfaces(getAdjacentBuildings);
 
-		getAdjacentBuildings(updateJson);
+		// getAdjacentBuildings(updateJson);
 
 	}
 
