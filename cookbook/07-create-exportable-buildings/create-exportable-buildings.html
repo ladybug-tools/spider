@@ -1780,7 +1780,7 @@
 /////////////////
 
 
-https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
+//https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 
 	function createXML ( oObjTree ) {
@@ -1881,15 +1881,15 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
     // the kludge to get around getPolyLoop fail
 
-		// re = /\<\/CartesianPoint>\<CartesianPoint>/gi;
+		re = /\<\/CartesianPoint>\<CartesianPoint>/gi;
 
-		// txtGbxml.value = txtGbxml.value.replace( re, '' )
+		txtGbxml.value = txtGbxml.value.replace( re, '' )
 
-		// re = /\<\/PolyLoop>\<PolyLoop>/gi;
+		re = /\<\/PolyLoop>\<PolyLoop>/gi;
 
-		// txtGbxml.value = txtGbxml.value.replace( re, '' )
+		txtGbxml.value = txtGbxml.value.replace( re, '' )
 
-		// txtGbxml.value = formatXml( txtGbxml.value );
+		txtGbxml.value = formatXml( txtGbxml.value );
 
 
 
