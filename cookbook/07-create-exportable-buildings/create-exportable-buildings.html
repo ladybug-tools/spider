@@ -1879,29 +1879,11 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 	function checkGbxmlData() {
 
 		if ( !json ){ alert( 'get building data first' ); return; }
-
-		var inner_id = 'txtGbxml'
-
-		divJson = document.body.appendChild( document.createElement( 'div' ) );
-		 divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
-		 divJson.innerHTML = '<textarea id=' + id + '' + ' style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
-
-
-		divGbxml = document.body.appendChild( document.createElement( 'div' ) );
-		divGbxml.style.cssText = 'height: 90%;  width: 800px; position: absolute; right: 50px; top: 50px; z-index: 2; ' ;
-		divGbxml.innerHTML = '<textarea id='  + inner_id + ' style=height:100%;width:100%; ></textarea>';
-
-		
-    openInspectorWindow(bindToInspectorWindow, inner_id);
-
-		gbxml = createXML ( json );
-
-//console.log( 'gbxml', gbxml  );
-
-// https://stackoverflow.com/questions/9898698/convert-xml-to-string-and-append-to-page
+		gbxml = createXML ( json )
 
 		const xmlText = new XMLSerializer().serializeToString( gbxml );
-		const xmlTextNode = document.createTextNode( xmlText );
+    var inner_id = 'txtGbxml'
+    openInspectorWindow(bindToInspectorWindow, inner_id, xmlText);
 
 		txtGbxml.appendChild( xmlTextNode );
 
