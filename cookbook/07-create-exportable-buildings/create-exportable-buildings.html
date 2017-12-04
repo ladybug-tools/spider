@@ -1163,7 +1163,8 @@
 		console.log('json', json);
 		console.log('gbxml', gbxml);
 		var inner_id = 'txtJson'
-    openInspectorWindow(bindToInspectorWindow, inner_id);
+		var innertext = JSON.stringify( json, null, 4 )
+    openInspectorWindow(bindToInspectorWindow, inner_id, innertext);
 
 	}
 
@@ -1180,12 +1181,12 @@
     }, true); 
 	}
 
-  function openInspectorWindow(callback, id){
+  function openInspectorWindow(callback, id, innertext){
   	 console.log("opening " + id + " window");
 
      divJson = document.body.appendChild( document.createElement( 'div' ) );
 		 divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
-		 divJson.innerHTML = '<textarea id=' + id + '' + ' style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
+		 divJson.innerHTML = '<textarea id=' + id + '' + ' style=height:100%;width:100%; >' + innertext + '</textarea>';
      callback(id);
   }
  
@@ -1879,9 +1880,19 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 		if ( !json ){ alert( 'get building data first' ); return; }
 
+		var inner_id = 'txtGbxml'
+
+		divJson = document.body.appendChild( document.createElement( 'div' ) );
+		 divJson.style.cssText = 'height: 90%; width: 800px; position: absolute; right: 30px; top: 20px; z-index: 1;' ;
+		 divJson.innerHTML = '<textarea id=' + id + '' + ' style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
+
+
 		divGbxml = document.body.appendChild( document.createElement( 'div' ) );
 		divGbxml.style.cssText = 'height: 90%;  width: 800px; position: absolute; right: 50px; top: 50px; z-index: 2; ' ;
-		divGbxml.innerHTML = '<textarea id=txtGbxml style=height:100%;width:100%; ></textarea>';
+		divGbxml.innerHTML = '<textarea id='  + inner_id + ' style=height:100%;width:100%; ></textarea>';
+
+		
+    openInspectorWindow(bindToInspectorWindow, inner_id);
 
 		gbxml = createXML ( json );
 
