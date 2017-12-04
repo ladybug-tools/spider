@@ -1170,10 +1170,9 @@
 	function bindToInspectorWindow(id)
 	{
 		console.log('binding to '+id+' window.')
-		var el = document.getElementById( 'txtJson' );
-		let list = el.addEventListener('click', function handler(e){
-    	console.log(this);
-    	if(this !== null)
+		document.addEventListener('click', function handler(e){
+			console.log(e);
+    	if(e.target && e.target.id == id)
     	{
     	  el.parentNode.removeChild( el );	
     	}
