@@ -1170,7 +1170,7 @@
 	function bindToInspectorWindow(id)
 	{
 		console.log('binding to '+id+' window.')
-		var el = document.getElementById( id );
+		var el = document.getElementById( id.toString() );
 		let list = el.addEventListener('click', function handler(e){
     	console.log(this);
     	if(this !== null)
