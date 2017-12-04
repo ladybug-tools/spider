@@ -13,7 +13,7 @@
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
-	iframe { height: 800px; width: 100%; }
+	iframe { height: 600px; width: 100%; }
 
 </style>
 </head>
@@ -35,6 +35,14 @@
 
 
 	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
+
+	<p>
+		JavaScript: Update iframe location hash to relative URL:<br>
+		<a href="JavaScript:(function(){
+			ifrThree.contentWindow.location.hash='#../../../read-gbxml/data-files/gbXMLStandard Single Family Residential 2016.xml';
+		})()" >
+		gbXMLStandard Single Family Residential 2016</a>
+	</p>
 
 <script>
 

@@ -14,8 +14,9 @@
 
 			headsUp = document.body.appendChild( document.createElement( 'div' ) );
 			headsUp.style.cssText = 
-				'background-color: #ddd; border-radius: 8px; display: none; max-width: 200px; opacity: 0.95; ' +
-			' padding: 0 5px 10px 5px; position: absolute; ';
+				'background-color: #ddd; border-radius: 8px; display: none; max-height: 300px; max-width: 200px; opacity: 0.95; ' +
+				' overflow: auto; padding: 0 5px 10px 5px; position: absolute; ' +
+			'';
 
 		}
 
