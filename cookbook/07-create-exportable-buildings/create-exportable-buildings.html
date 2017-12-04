@@ -1168,12 +1168,11 @@
 		console.log('chaining')
     chain(fns.shift());
 		
-		//initExportGbxml(getBuildingStoreys);
-		//getSurfaces(getAdjacentBuildings);
-		// getBuildingStoreys(getSurfaces);
-		// getSurfaces(getAdjacentBuildings);
-		// getAdjacentBuildings(updateJson);
-
+		initExportGbxml();
+		getBuildingStoreys();
+		getSurfaces();
+		getAdjacentBuildings();
+    updateJson();
 		
 
 	}
@@ -1210,7 +1209,7 @@
      callback(id);
   }
  
-	function initExportGbxml(callback) {
+	function initExportGbxml() {
 
 		json = {
 
@@ -1262,12 +1261,11 @@
 			}
       
 		}
-    callback()
 	}
 
 
 
-	function getBuildingStoreys(callback) {
+	function getBuildingStoreys() {
 
 		const storeys = json.gbXML.Campus.Building.BuildingStorey;
 
@@ -1286,13 +1284,12 @@
 			storeys.push( obj );
 
 		}
-    callback();
 	}
 
 
 // tbd: break up into smaller functions
 
-	function getSurfaces(callback) {
+	function getSurfaces() {
 
 //console.log( 'storey', theBuilding.group.children[ 0 ] );
     console.log("making surfaces");
@@ -1501,7 +1498,6 @@
 		}
 
 		//json.gbXML.Campus.Building.Area = theBuilding.area.toLocaleString();
-    callback();
 	}
 
 
