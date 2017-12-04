@@ -102,7 +102,7 @@
 
 			<p> 2. <button onclick = checkGbxmlData(); >Check the data / gbxml</button></p>
 
-			<p> 2. <button onclick = saveFile(); >Save building data to file</button> </p>
+			<p> 3. <button onclick = saveFile(); >Save building data to file</button> </p>
 
 			<div id = divExportContent ></div>
 
@@ -1883,22 +1883,23 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
     console.log("gbxml: ", gbxml)
 
 		const xmlText = new XMLSerializer().serializeToString( gbxml );
+		xmlText = formatXml(xmlText)
     var inner_id = 'txtGbxml';
-    openInspectorWindow(bindToInspectorWindow, inner_id, formatXml(xmlText));
+    openInspectorWindow(bindToInspectorWindow, inner_id, xmlText);
 
 		
 
-// the kludge to get around getPolyLoop fail
+    // the kludge to get around getPolyLoop fail
 
-		re = /\<\/CartesianPoint>\<CartesianPoint>/gi;
+		// re = /\<\/CartesianPoint>\<CartesianPoint>/gi;
 
-		txtGbxml.value = txtGbxml.value.replace( re, '' )
+		// txtGbxml.value = txtGbxml.value.replace( re, '' )
 
-		re = /\<\/PolyLoop>\<PolyLoop>/gi;
+		// re = /\<\/PolyLoop>\<PolyLoop>/gi;
 
-		txtGbxml.value = txtGbxml.value.replace( re, '' )
+		// txtGbxml.value = txtGbxml.value.replace( re, '' )
 
-		txtGbxml.value = formatXml( txtGbxml.value );
+		// txtGbxml.value = formatXml( txtGbxml.value );
 
 
 
@@ -1943,7 +1944,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 	}
 
 
-
+  
 	function formatXml(xml) {
 
 // https://gist.github.com/sente/1083506/d2834134cd070dbcc08bf42ee27dabb746a1c54d
@@ -1991,8 +1992,10 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		if( !gbxml ) { alert( 'Get some building data first.' ); return; }
 
 		let blob;
+    const xmlText = new XMLSerializer().serializeToString( gbxml );
+		xmlText = formatXml(xmlText);
 
-		blob = new Blob( [ txtGbxml.value ] );
+		blob = new Blob( [ xmlText ],{ type: 'text/xml' } );
 
 		let a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
