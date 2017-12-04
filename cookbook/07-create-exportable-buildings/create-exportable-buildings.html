@@ -1228,7 +1228,7 @@
 						"@id": 1,
 						"@buildingType": "Office",
 						Name: 'theBuilding ' + theBuilding.footprint + ' shape',
-						Area: 999999,
+						Area: theBuilding.area,
 						BuildingStorey: [],
 						Space: []
 					},
@@ -1492,7 +1492,7 @@
 
 		}
 
-		json.gbXML.Campus.Building.Area = theBuilding.area.toLocaleString();
+		//json.gbXML.Campus.Building.Area = theBuilding.area.toLocaleString();
 
 	}
 
