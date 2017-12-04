@@ -1592,7 +1592,7 @@
 
 //console.log( 'surface', surface );
 //console.log( 'mesh.geo', mesh.geometry );
-
+    console.log('making polyloop')
 		const meshNewGeometry = new THREE.Geometry().fromBufferGeometry( mesh.geometry );
 		const vertices = [];
 		const len = mesh.name.startsWith( 'exterior-wall' ) ? 4 : meshNewGeometry.vertices.length;
@@ -1622,7 +1622,7 @@
 				{ Coordinate: Number( vertex.z.toFixed( 4 ) ) }
 
 			] };
-
+      console.log('cartesian point', point);
 			surface.PlanarGeometry.PolyLoop.push( point );
 
 		}
