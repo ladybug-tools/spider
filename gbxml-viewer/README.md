@@ -130,11 +130,14 @@ See also:
 * Lights and shadows
 * Section views
 
+### Right Side Menu
+
+* Add menu slider
+
 ### First Person camera
 
 
 ### Heads-up Display
-
 
 * 2017-12-01 ~ Add choice of display in right-side menu
 * 2017-12-01 ~ What data should be included in heads-up display?
