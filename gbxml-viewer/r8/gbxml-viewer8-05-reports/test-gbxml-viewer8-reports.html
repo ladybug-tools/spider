@@ -48,20 +48,12 @@
 		<input type=file id=inpFile onchange=icw.openFile(this);divReport.innerHTML=''; >
 	<p>
 
-	<p><a href="JavaScript:( function(){
-			ifrThree.src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html#https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/sam-live2.xml';
-			})()" >
-		sam live2</a>
-	</p>
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" >sam live2</a> </p>
 
-	<p>
-		JavaScript: Use a link to update iframe location hash to cloud URL:<br>
-		<a href="JavaScript:(function(){
-			ifrThree.contentWindow.location.hash='#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/rac_basic_sample_project.xml';
-			initReport();
-		})()" >
-		rac_basic_sample_project</a>
-	</p>
+
+	<p><a href="#../../../read-gbxml/data-files/rac_basic_sample_project.xml" >rac_basic_sample_project</a> </p>
+
+	<p>Duplicate coordinates: <a href="#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml" >ARCH_ASHRAE Headquarters </a> </p>
 
 <script>
 
@@ -75,6 +67,19 @@
 			'<h2><a href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		onHashChange();
+
+	}
+
+
+	function onHashChange() {
+
+		const url = location.hash.slice( 1 );
+
+		ifrThree.contentWindow.location.hash = '#' + url;
 
 	}
 

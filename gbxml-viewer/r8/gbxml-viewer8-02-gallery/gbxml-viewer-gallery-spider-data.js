@@ -73,8 +73,9 @@
 		if ( !divAppMenu ) {
 
 			divAppMenu= document.body.appendChild( document.createElement( 'div' ) );
-			divAppMenu.style.cssText = 'background-color: white; border: 1px solid red; max-width: 350px; opacity: 0.85; ' +
-				' padding: 10px; position: fixed; right: 30px; top: 20px; z-index:100000; ';
+			divAppMenu.style.cssText = 
+				'background-color: white; border: 1px solid red; max-height: 95%; max-width: 350px; opacity: 0.85; ' +
+				' overflow: auto; padding: 10px; position: fixed; right: 30px; top: 20px; z-index: 100000; ';
 
 		}
 

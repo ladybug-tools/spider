@@ -49,13 +49,11 @@
 			'<p>' +
 				'<button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
 				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-				' <button onclick=icw.zoomObjectBoundingSphere(surfaceGroup); >reset view</button>' +
+				' <button onclick=icw.zoomObjectBoundingSphere(surfaceGroup);icw.setAllVisible(); >reset view</button>' +
 
 			'</p>' +
 
 			'<div id = divReport ></div>';
-
-console.log( 'surfaceEdges', surfaceEdges );
 
 		gbxml = traversGbjson( gbjson );
 //console.log( 'gbxml', gbxml );
@@ -282,20 +280,27 @@ console.log( 'surfaceEdges', surfaceEdges );
 
 	function getSurfaceDuplicatesCoordinates() {
 
-		const surfacesPolyLoops = [];
+		const surfacePolyLoops = [];
+		const surfaceIds = [];
 		const surfaces = gbjson.Campus.Surface;
 		let count = 0;
 		let flowContent = '';
 
-		for ( let surface of surfaces ) {
+		for ( let i = 0; i <  surfaces.length; i++ ) {
 
+			surface = surfaces[ i ]
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
+			index = surfacePolyLoops.indexOf( points );
 
-			if ( !surfacesPolyLoops.includes( points ) ) { 
+			if ( index < 0 ) { 
 
-				surfacesPolyLoops.push( points ); 
+				surfacePolyLoops.push( points ); 
+				surfaceIds.push( i );
 
 			} else {
+
+				idOther = surfaces[ surfaceIds[ index ] ];
+//console.log( 'idOther', idOther );
 
 				flowContent += 
 					'<p>' + count + 
@@ -303,7 +308,12 @@ console.log( 'surfaceEdges', surfaceEdges );
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-					'</p>';
+						'<hr>' +
+						'id of duplicate: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
+						'surfaceType: ' + idOther.surfaceType + b +
+						( idOther.Name ? 'Name: ' + idOther.Name + b : '' ) +
+						( idOther.CADObjectId ? 'CADObjectId: ' + idOther.CADObjectId + b : '' ) +
+					'</p>' + b;
 
 				count ++;
 
@@ -390,6 +400,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 	}
 
 
+
 	function getSurfacesTinies() {
 
 		surfaces = gbjson.Campus.Surface;
@@ -447,7 +458,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 
 				child.visible = true;
 
-console.log( '', child );
+//console.log( '', child );
 
 				zoomIntoSurface( child );
 
@@ -462,10 +473,10 @@ console.log( '', child );
 	}
 
 
+
 	function zoomIntoSurface( surface ){
 
-//surfaceGroup.geometry.computeBoundingSphere();
-console.log( 'surface', surface );
+//console.log( 'surface', surface );
 		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
 
 
@@ -482,9 +493,11 @@ console.log( 'surface', surface );
 		icw.controls.target.copy( center );
 		icw.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
 
-console.log( 'bbb', center, radius );
+//console.log( 'bbb', center, radius );
 
 	}
+
+
 
 	function toggleSurfaceType( that ) {
 
@@ -530,20 +543,6 @@ console.log( 'bbb', center, radius );
 			}
 
 		} 
-
-	}
-
-
-
-	function xxxtoggleAllVisible() {
-
-		for ( let child of surfaceMeshes ) {
-
-			child.material.wireframe = false;
-			child.material.opacity = 0.85;
-			child.visible = true;
-
-		};
 
 	}
 

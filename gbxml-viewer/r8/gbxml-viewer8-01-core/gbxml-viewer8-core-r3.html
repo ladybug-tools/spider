@@ -31,11 +31,14 @@
 	</div>
 
 	<p id = "divContents" >
+
 		<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 
 		<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>
 
 		<button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>
+
+		<button onclick=zoomObjectBoundingSphere(surfaceMeshes);setAllVisible(); >reset view</button>
 
 	</p>
 
@@ -45,7 +48,10 @@
 <script>
 
 	const uriGbxmlDefault = 
-		location.protocol === 'file:' ? 'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml' :
+		location.protocol === 'file:' ? 
+//		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml' 
+		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
+		:
 		'../../gbxml-sample-files/sam-live2.xml';
 
 	var gbjson;
@@ -221,7 +227,6 @@
 	}
 
 
-
 // loads any text file - from file reader or location hash or wherever
 
 	function parseFileXML( xmlNode ) {
@@ -234,6 +239,62 @@
 		onWindowLoad();
 
 		return gbjson;
+
+	}
+
+
+
+	function XML2jsobj( node ) {
+
+		let	data = {};
+
+		function Add( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		};
+
+		let child, childNode;
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			Add( childNode.name, childNode.value );
+
+		}
+
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
+
+					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else { // sub-object
+
+					Add( childNode.nodeName, XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
 
 	}
 
@@ -470,57 +531,19 @@
 
 
 
-	function XML2jsobj( node ) {
+	function setAllVisible() {
 
-		let	data = {};
+		for ( let child of surfaceMeshes.children ) {
 
-		function Add( name, value ) {
-
-			if ( data[ name ] ) {
-
-				if ( data[ name ].constructor !== Array ) {
-
-					data[ name ] = [ data[ name ] ];
-
-				}
-
-				data[ name ][ data[ name ].length ] = value;
-
-			} else {
-
-				data[ name ] = value;
-
-			}
+			child.visible = true;
 
 		};
 
-		let child, childNode;
+		for ( let child of surfaceEdges.children ) {
 
-		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+			child.visible = true;
 
-			Add( childNode.name, childNode.value );
-
-		}
-
-		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
-
-			if ( childNode.nodeType === 1 ) {
-
-				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
-
-					Add( childNode.nodeName, childNode.firstChild.nodeValue );
-
-				} else { // sub-object
-
-					Add( childNode.nodeName, XML2jsobj( childNode ) );
-
-				}
-
-			}
-
-		}
-
-		return data;
+		};
 
 	}
 
@@ -546,6 +569,7 @@
 		controls.update();
 
 	}
+
 
 
 </script>
