@@ -15,13 +15,11 @@
 
 ## Features
 
-* Set random material
-	* Not yet a toggle/Reload page to return to a normal surface colora
-* Draw surface normals
-* Toggle wireframe
-* Draw edges
-* Toggle axes
+* Set random, phonf=g default, normal or default material
 * Toggle background gradient
+* Toggle wireframe
+* Draw surface normals
+* Toggle axes
 * Toggle scene rotation
 * Set Camera Ortho
 	* Not yet a toggle/Reload page to return to a perspective view
@@ -39,6 +37,15 @@
 
 
 ## Change Log
+
+
+### 2017-12-04 ~ Theo
+
+* Add more materials
+* Reorder items, drop edges as covered elsewhere
+* Gradient inside iframe only
+* Update Test
+* Test loads script on load
 
 ### 2017-12-02 ~ Theo
 

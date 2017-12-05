@@ -2,7 +2,7 @@
 
 	var divAppMenu = divAppMenu || undefined;
 
-	var icw = icw || undefined;
+	var icw;
 	var THREE;
 	var surfaceMeshes
 	var opacity;
@@ -33,17 +33,25 @@
 
 			'<p><button onclick=setRandomMaterial(); >Set random material</button></p>' +
 
-			'<p><button onclick=drawSurfaceNormals(); > Draw surface normals </button></p>' +
+			'<p><button onclick=setPhongDefaultMaterial(); >Set default phong material</button></p>' +
+
+			'<p><button onclick=setNormalMaterial(); >Set normal material</button></p>' +
+
+			'<p><button onclick=setDefaultMaterial(); >Set default material</button></p>' +
+
+			'<hr>' +
+
+			'<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
 
 			'<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>' +
 
-			'<p><button onclick=toggleEdges(); >Draw edges </button></p>' +
+			'<p><button onclick=drawSurfaceNormals(); > Draw surface normals </button></p>' +
+
+//			'<p><button onclick=toggleEdges(); >Draw edges </button></p>' +
 
 //			<p><button onclick=toggleGrid(); >Toggle grid</button></p>
 
 			'<p><button onclick=toggleAxesHelper(); >Toggle axes</button></p>' +
-
-			'<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
 
 			'<p><button onclick=toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
 
@@ -59,23 +67,97 @@
 
 
 
-	function updateOpacity() {
+	function setRandomMaterial() {
 
-		opacity = parseInt( rngOpacity.value, 10 );
-		outOpacity.value = opacity + '%';
+		surfaceMeshes.traverse( function ( child ) {
 
-		icw.scene.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
 
-			if ( child instanceof icw.THREE.Mesh ) {
-
-				child.material.opacity = opacity / 100;
+				child.material = new THREE.MeshPhongMaterial( {
+					color: 0xffffff * Math.random(),
+					polygonOffset: false,
+					polygonOffsetFactor: 10, // positive value pushes polygon further away
+					polygonOffsetUnits: 1,
+					side: 2,
+					transparent: true
+				} );
 
 			}
 
 		} );
 
+	}
+
+
+
+	function setPhongDefaultMaterial() {
+
+		surfaceMeshes.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material = new THREE.MeshPhongMaterial( {
+					side: 2,
+					transparent: true
+				} );
+
+			}
+
+		} );
 
 	}
+
+
+
+	function setNormalMaterial() {
+
+		surfaceMeshes.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material = new THREE.MeshNormalMaterial( {
+					side: 2,
+					transparent: true
+				} );
+
+			}
+
+		} );
+
+	}
+
+
+
+	function setDefaultMaterial() {
+
+		surfaceMeshes.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material =
+					new THREE.MeshPhongMaterial( { color: icw.colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+
+			}
+
+		} );
+
+	}
+
+/////////////////
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		ifrThree.contentDocument.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
 
 
 
@@ -93,34 +175,6 @@
 
 	}
 
-
-	function setRandomMaterial() {
-
-
-//		if ( !surfaceMeshes ) {
-
-//			meshesEdges = new THREE.Object3D();
-			icw.surfaceMeshes.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-
-					child.material = new THREE.MeshPhongMaterial( {
-						color: 0xffffff * Math.random(),
-						polygonOffset: false,
-						polygonOffsetFactor: 10, // positive value pushes polygon further away
-						polygonOffsetUnits: 1,
-						side: 2
-					} );
-
-				}
-
-			} );
-
-//			scene.add( meshesEdges );
-
-//		}
-
-	}
 
 
 
@@ -141,87 +195,6 @@
 
 
 
-	function toggleEdgesxxxx() {
-
-		THREE = icw.THREE;
-
-		if ( !surfaceEdges ) {
-
-//			meshesEdges = new THREE.Object3D();
-			icw.campusSurfaces.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-
-					const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
-					let surfaceEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
-					surfaceEdges.visible = false;
-
-					child.add( surfaceEdges );
-
-				}
-
-			} );
-
-//			scene.add( meshesEdges );
-
-		}
-
-
-		icw.campusSurfaces.traverse( function ( child ) {
-
-			if ( child instanceof THREE.LineSegments ) {
-
-				child.visible = child.visible === true ? false : true;
-
-			}
-
-		} );
-
-	}
-
-
-	function toggleEdges() {
-
-		if ( !surfaceEdges ) {
-
-			surfaceEdges = new THREE.Group();
-
-			icw.surfaceMeshes.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-					const edgesGeometry = new THREE.EdgesGeometry( child.geometry );
-					let surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
-					surfaceEdge.rotation.copy( child.rotation );
-					surfaceEdge.position.copy( child.position );
-					surfaceEdges.add( surfaceEdge );
-				}
-			} );
-
-			surfaceEdges.visible = false;
-			icw.scene.add( surfaceEdges );
-
-		}
-
-		surfaceEdges.visible = !surfaceEdges.visible;
-
-	}
-
-
-
-
-
-	function toggleBackgroundGradient() {
-
-// 2016-07-18
-
-		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
-		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
-		var image = document.body.style.backgroundImage;
-
-		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
-			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
-
-	}
 
 
 	function toggleAxesHelper() {
@@ -259,3 +232,23 @@
 		icw.zoomObjectBoundingSphere( icw.surfaceMeshes )
 
 	}
+
+
+	function updateOpacity() {
+
+		opacity = parseInt( rngOpacity.value, 10 );
+		outOpacity.value = opacity + '%';
+
+		icw.scene.traverse( function ( child ) {
+
+			if ( child instanceof icw.THREE.Mesh ) {
+
+				child.material.opacity = opacity / 100;
+
+			}
+
+		} );
+
+
+	}
+

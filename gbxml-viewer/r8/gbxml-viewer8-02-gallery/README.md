@@ -37,6 +37,18 @@
 
 ## Change Log
 
+
+### 2017-12-04 ~ Theo
+
+Test:
+
+* Use R3 core
+* Update header
+* Test: Load first gallery on load
+
+Scripts
+* Use R3 core
+
 ### 2017-12-02 ~ Theo
 
 * Test uses core r2

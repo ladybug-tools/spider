@@ -11,7 +11,7 @@
 
 	gal.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 
-	gal.threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core.html';
+	gal.threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html';
 
 	gal.urlGitHubApiContents = 'https://api.github.com/repos/' + gal.user + gal.repo + '/contents/' + gal.pathRepo;
 

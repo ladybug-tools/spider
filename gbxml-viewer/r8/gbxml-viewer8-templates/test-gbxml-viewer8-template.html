@@ -32,10 +32,10 @@
 
 	<p>
 		<a id=aThree href=
-			"JavaScript:( 
-				function(){ 
+			"JavaScript:(
+				function(){
 					var script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = 'test-gbxml-viewer8-template.js'; 
+					script.src = 'test-gbxml-viewer8-template.js';
 			} )()"
 		>
 		test</a>
@@ -70,11 +70,10 @@
 
 	<p>
 		JavaScript: button to update location.hash to a relative URL:<br>
-		<button onclick="ifrThree.contentWindow.location.hash='#../../../read-gbxml/data-files/gbXMLStandard Single Family Residential 2016.xml'" >
-			gbXMLStandard Single Family Residential 2016
+		<button onclick="ifrThree.contentWindow.location.hash='#../../../read-gbxml/data-files/gbXMLStandardv Retail Big Box.xml'" >
+			gbXMLStandardv Retail Big Box
 		</button>
 
-		
 	</p>
 	<p>
 		Use file dialog box to open local file:<br>
@@ -96,7 +95,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
