@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Open and view gbXML files in local folders. See www.gbxml.org" >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-034" >
+<meta name = "date" content = "2017-12-04" >
 <title>gbXML Viewer R8.3</title>
 
 <style>
@@ -21,8 +21,9 @@
 	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
-	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
-	button:hover { background-color: #ccc; color: white }
+
+//	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+//	button:hover { background-color: #ccc; color: white }
 
 	iframe { width: 100%; }
 
@@ -85,7 +86,7 @@
 
 
 <!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display.js';document.head.appendChild(script);})()" >heads-up display</a></p> -->
-		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display.js';document.head.appendChild(script);})()" >heads-up display</a></p>
+		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display.js';document.head.appendChild(script);})()" >enable heads-up display</a></p>
 
 <!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p> -->
 		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p>
@@ -111,6 +112,7 @@
 
 //	var icw;
 //	var gbjson;
+	var headsUp; 
 
 	const user = 'ladybug-tools';
 	const repo = '/spider';
@@ -146,6 +148,8 @@
 		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
 
+		if ( headsUp ) { headsUp.style.display = 'none' };
+
 		if ( ulc.endsWith( '.md' ) ) {
 
 			requestFile( url, callbackMarkdown );
@@ -177,10 +181,8 @@
 
 
 
-	function onloadThree() {
+	function onloadThreejs() {
 
-//		icw = ifrThree.contentWindow;
-//		icw.renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
 		aThree.click();
 
 	}

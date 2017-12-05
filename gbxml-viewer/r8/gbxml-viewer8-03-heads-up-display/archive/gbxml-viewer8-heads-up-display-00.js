@@ -138,7 +138,7 @@
 
 		if ( adjacenciesTxt !== 'no adjacency' ) {
 
-			if ( Array.isArray( adjacenciesTxt ) === true ) {
+			if ( data.AdjacentSpaceId.length ) {
 
 //console.log( 'adjacenciesTxt', adjacenciesTxt );
 
@@ -150,7 +150,7 @@
 					adjacenciesTxt = 
 
 						'<hr>' + 
-						'adjacency 1:  <button onclick=toggleSpace("' + space1.id + '"); >' + space1.id + '</button>' + b +
+						'adjacency: ' + data.AdjacentSpaceId[ 0 ].spaceIdRef + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
 						( space.Description ? 'description: ' + space.Description + b : '' )  +
 						( space.Area ? 'area: ' + space.Area + b : '' )  +
@@ -160,13 +160,10 @@
 						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
 
 						'<hr>' + 
-						'adjacency 2: <button onclick=toggleSpace("' + space2.id + '"); >' + space2.id + '</button>' + b +
+						'adjacency: ' + data.AdjacentSpaceId[ 1 ].spaceIdRef +  b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
 						( space.Description ? 'description: ' + space.Description + b : '' )  +
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
-						'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
-
-
 					'';
 
 				} else {
@@ -186,7 +183,7 @@
 
 				adjacenciesTxt = 
 					'<hr>' +
-					'adjacency space id: <button onclick=toggleSpace("' + space.id + '"); >' + space.id + '</button>' + b +
+					'adjacency: ' + data.AdjacentSpaceId.spaceIdRef + b +
 					( space.Name ? 'name: ' + space.Name + b : '' )  +
 					( space.Description ? 'description: ' + space.Description + b : '' )  +
 					( space.Area ? 'area: ' + space.Area + b : '' )  +
@@ -194,8 +191,6 @@
 					( space.conditionType ? 'conditionType: ' + space.conditionType + b : '' )  +
 					( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
 					( space.CADObjectId ? 'CADObjectId: ' + space.CADObjectId + b : '' ) +
-					'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
-
 				b;
 
 			}
@@ -227,8 +222,8 @@
 
 		if ( !space ) {
 
-//console.log( 'spaceIdRef', spaceIdRef );
-//console.log( 'space', gbjson.Campus.Building.Space );
+console.log( 'spaceIdRef', spaceIdRef );
+console.log( 'space', gbjson.Campus.Building.Space );
 //console.log( 'txt', txtz );
 
 		}
@@ -237,34 +232,6 @@
 
 	}
 
-
-
-	function toggleSpace( id ) {
-
-//console.log( 'id', id );
-
-		for ( let child of icw.surfaceMeshes.children ) {
-
-			child.visible = false;
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
-
-			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
-
-				child.visible = true;
-
-			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
-
-				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
-
-					child.visible = true;
-
-				}
-
-			}
-
-		} 
-
-	}
 
 
 	function onDocumentMouseDown( event ) {

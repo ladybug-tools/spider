@@ -299,8 +299,10 @@
 
 			} else {
 
-				idOther = surfaces[ surfaceIds[ index ] ];
-//console.log( 'idOther', idOther );
+				surfOther = surfaces[ surfaceIds[ index ] ];
+
+console.log( 'surface', surface );
+console.log( 'surfOther', surfOther );
 
 				flowContent += 
 					'<p>' + count + 
@@ -310,9 +312,10 @@
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
 						'<hr>' +
 						'id of duplicate: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + idOther.surfaceType + b +
-						( idOther.Name ? 'Name: ' + idOther.Name + b : '' ) +
-						( idOther.CADObjectId ? 'CADObjectId: ' + idOther.CADObjectId + b : '' ) +
+						'surfaceType: ' + surfOther.surfaceType + b +
+						( surfOther.Name ? 'Name: ' + surfOther.Name + b : '' ) +
+						( surfOther.CADObjectId ? 'CADObjectId: ' + surfOther.CADObjectId + b : '' ) +
+
 					'</p>' + b;
 
 				count ++;

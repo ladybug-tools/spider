@@ -132,11 +132,10 @@ See also:
 
 ### First Person camera
 
-* 2017-12-01 ~ Michal: Locate camera/controls target inside a given space / zoom into the space
 
 ### Heads-up Display
 
-* 2017-12-01 ~ Add better display = none on new file loaded
+
 * 2017-12-01 ~ Add choice of display in right-side menu
 * 2017-12-01 ~ What data should be included in heads-up display?
 * 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
@@ -144,7 +143,6 @@ See also:
 
 ### Reports
 
-* 2017-12-02 ~ Michal: Zoom and center duplicate surfaces
 * 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
 * 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
 
@@ -155,8 +153,6 @@ See also:
 
 
 ### Template
-
-* 2017-12-01 ~ Add hamburger/slider men
 
 
 
@@ -172,6 +168,19 @@ Will most likely build upon
 
 
 ## Change Log
+
+
+### 2017-12-04 ~ Theo
+
+Little fixes and new features everywhere
+
+* Add buttons to heads-up display
+* Add choices to Settings
+* Add surfacem edges and rest buttons to core
+* 2017-12-02 ~ Michal: Zoom and center duplicate surfaces, duplicate coordinates, tiny surfaces
+* 2017-12-01 ~ Add better display = none on new file loaded
+* 2017-12-01 ~ Add hamburger/slider menu
+* 2017-12-01 ~ Michal: Locate camera/controls target inside a given space / zoom into the space
 
 
 ### 2017-12-03 ~ Theo
