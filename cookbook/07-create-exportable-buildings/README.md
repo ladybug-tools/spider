@@ -40,8 +40,14 @@ Why?
 ## Change Log
 
 
-### 2017-11-30 ~ Theo
+### 2017-12-05 ~ Theo
 
+Note that @ChienTC made edits to [create-exportable-buildings.html]( https://github.com/ladybug-tools/spider/blob/master/cookbook/07-create-exportable-buildings/create-exportable-buildings.html)
+
+Created a new version of the file at [create-exportable-buildings-theo.html( https://github.com/ladybug-tools/spider/blob/master/cookbook/07-create-exportable-buildings/create-exportable-buildings-theo.html )
+
+* Fix a bug where internal diagonal walls were incorrectly position
+* Updated all ten sample gbXML files
 
 
 ### 2017-11-29 ~ Theo

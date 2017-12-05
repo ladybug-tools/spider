@@ -1407,7 +1407,7 @@
         <Surface surfaceType="InteriorWall" id="surface-39">
             <Name>storey-1-interior-wall-diagonal-1-space-1</Name>
             <RectangularGeometry>
-                <Azimuth>315</Azimuth>
+                <Azimuth>225</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
             <AdjacentSpaceId spaceIdRef="space-2"/>
@@ -1415,22 +1415,22 @@
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-20</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>50</Coordinate>
+                        <Coordinate>-50</Coordinate>
                         <Coordinate>-5</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>50</Coordinate>
+                        <Coordinate>-50</Coordinate>
                         <Coordinate>-5</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
-                        <Coordinate>35</Coordinate>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>-20</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -1449,39 +1449,6 @@
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>-35</Coordinate>
-                        <Coordinate>-20</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-5</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>-5</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>-20</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="InteriorWall" id="surface-41">
-            <Name>storey-1-interior-wall-diagonal-3-space-3</Name>
-            <RectangularGeometry>
-                <Azimuth>225</Azimuth>
-            </RectangularGeometry>
-            <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-4"/>
-            <AdjacentSpaceId spaceIdRef="space-3"/>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
                         <Coordinate>-45</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
@@ -1497,6 +1464,39 @@
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>-35</Coordinate>
+                        <Coordinate>-45</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="InteriorWall" id="surface-41">
+            <Name>storey-1-interior-wall-diagonal-3-space-3</Name>
+            <RectangularGeometry>
+                <Azimuth>315</Azimuth>
+            </RectangularGeometry>
+            <CADOjectId>none</CADOjectId>
+            <AdjacentSpaceId spaceIdRef="space-4"/>
+            <AdjacentSpaceId spaceIdRef="space-3"/>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-75</Coordinate>
+                        <Coordinate>-45</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-60</Coordinate>
+                        <Coordinate>-30</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-60</Coordinate>
+                        <Coordinate>-30</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-75</Coordinate>
                         <Coordinate>-45</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -1506,44 +1506,11 @@
         <Surface surfaceType="InteriorWall" id="surface-42">
             <Name>storey-1-interior-wall-diagonal-4-space-4</Name>
             <RectangularGeometry>
-                <Azimuth>315</Azimuth>
+                <Azimuth>45</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
             <AdjacentSpaceId spaceIdRef="space-5"/>
             <AdjacentSpaceId spaceIdRef="space-4"/>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>-45</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-60</Coordinate>
-                        <Coordinate>-30</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-60</Coordinate>
-                        <Coordinate>-30</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-75</Coordinate>
-                        <Coordinate>-45</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="InteriorWall" id="surface-43">
-            <Name>storey-1-interior-wall-diagonal-5-space-5</Name>
-            <RectangularGeometry>
-                <Azimuth>45</Azimuth>
-            </RectangularGeometry>
-            <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-6"/>
-            <AdjacentSpaceId spaceIdRef="space-5"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -1563,6 +1530,39 @@
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>-75</Coordinate>
+                        <Coordinate>45</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="InteriorWall" id="surface-43">
+            <Name>storey-1-interior-wall-diagonal-5-space-5</Name>
+            <RectangularGeometry>
+                <Azimuth>135</Azimuth>
+            </RectangularGeometry>
+            <CADOjectId>none</CADOjectId>
+            <AdjacentSpaceId spaceIdRef="space-6"/>
+            <AdjacentSpaceId spaceIdRef="space-5"/>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>-35</Coordinate>
+                        <Coordinate>45</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>30</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-50</Coordinate>
+                        <Coordinate>30</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>-35</Coordinate>
                         <Coordinate>45</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -1581,39 +1581,6 @@
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>-35</Coordinate>
-                        <Coordinate>45</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>30</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-50</Coordinate>
-                        <Coordinate>30</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
-                        <Coordinate>45</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="InteriorWall" id="surface-45">
-            <Name>storey-1-interior-wall-diagonal-7-space-7</Name>
-            <RectangularGeometry>
-                <Azimuth>135</Azimuth>
-            </RectangularGeometry>
-            <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-8"/>
-            <AdjacentSpaceId spaceIdRef="space-7"/>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>-35</Coordinate>
                         <Coordinate>20</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
@@ -1629,6 +1596,39 @@
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>-35</Coordinate>
+                        <Coordinate>20</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="InteriorWall" id="surface-45">
+            <Name>storey-1-interior-wall-diagonal-7-space-7</Name>
+            <RectangularGeometry>
+                <Azimuth>45</Azimuth>
+            </RectangularGeometry>
+            <CADOjectId>none</CADOjectId>
+            <AdjacentSpaceId spaceIdRef="space-8"/>
+            <AdjacentSpaceId spaceIdRef="space-7"/>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>20</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>5</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>5</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
                         <Coordinate>20</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -1647,39 +1647,6 @@
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>35</Coordinate>
-                        <Coordinate>20</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>5</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>50</Coordinate>
-                        <Coordinate>5</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>35</Coordinate>
-                        <Coordinate>20</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="InteriorWall" id="surface-47">
-            <Name>storey-1-interior-wall-diagonal-9-space-9</Name>
-            <RectangularGeometry>
-                <Azimuth>45</Azimuth>
-            </RectangularGeometry>
-            <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-10"/>
-            <AdjacentSpaceId spaceIdRef="space-9"/>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>35</Coordinate>
                         <Coordinate>45</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
@@ -1695,6 +1662,39 @@
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>35</Coordinate>
+                        <Coordinate>45</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="InteriorWall" id="surface-47">
+            <Name>storey-1-interior-wall-diagonal-9-space-9</Name>
+            <RectangularGeometry>
+                <Azimuth>135</Azimuth>
+            </RectangularGeometry>
+            <CADOjectId>none</CADOjectId>
+            <AdjacentSpaceId spaceIdRef="space-10"/>
+            <AdjacentSpaceId spaceIdRef="space-9"/>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>75</Coordinate>
+                        <Coordinate>45</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>30</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>60</Coordinate>
+                        <Coordinate>30</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>75</Coordinate>
                         <Coordinate>45</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -1704,44 +1704,11 @@
         <Surface surfaceType="InteriorWall" id="surface-48">
             <Name>storey-1-interior-wall-diagonal-10-space-10</Name>
             <RectangularGeometry>
-                <Azimuth>135</Azimuth>
+                <Azimuth>225</Azimuth>
             </RectangularGeometry>
             <CADOjectId>none</CADOjectId>
             <AdjacentSpaceId spaceIdRef="space-11"/>
             <AdjacentSpaceId spaceIdRef="space-10"/>
-            <PlanarGeometry>
-                <PolyLoop>
-                    <CartesianPoint>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>45</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>30</Coordinate>
-                        <Coordinate>10</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>60</Coordinate>
-                        <Coordinate>30</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                    <CartesianPoint>
-                        <Coordinate>75</Coordinate>
-                        <Coordinate>45</Coordinate>
-                        <Coordinate>0</Coordinate>
-                    </CartesianPoint>
-                </PolyLoop>
-            </PlanarGeometry>
-        </Surface>
-        <Surface surfaceType="InteriorWall" id="surface-49">
-            <Name>storey-1-interior-wall-diagonal-11-space-11</Name>
-            <RectangularGeometry>
-                <Azimuth>225</Azimuth>
-            </RectangularGeometry>
-            <CADOjectId>none</CADOjectId>
-            <AdjacentSpaceId spaceIdRef="space-12"/>
-            <AdjacentSpaceId spaceIdRef="space-11"/>
             <PlanarGeometry>
                 <PolyLoop>
                     <CartesianPoint>
@@ -1761,6 +1728,39 @@
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>75</Coordinate>
+                        <Coordinate>-45</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                </PolyLoop>
+            </PlanarGeometry>
+        </Surface>
+        <Surface surfaceType="InteriorWall" id="surface-49">
+            <Name>storey-1-interior-wall-diagonal-11-space-11</Name>
+            <RectangularGeometry>
+                <Azimuth>315</Azimuth>
+            </RectangularGeometry>
+            <CADOjectId>none</CADOjectId>
+            <AdjacentSpaceId spaceIdRef="space-12"/>
+            <AdjacentSpaceId spaceIdRef="space-11"/>
+            <PlanarGeometry>
+                <PolyLoop>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
+                        <Coordinate>-45</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-30</Coordinate>
+                        <Coordinate>10</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>50</Coordinate>
+                        <Coordinate>-30</Coordinate>
+                        <Coordinate>0</Coordinate>
+                    </CartesianPoint>
+                    <CartesianPoint>
+                        <Coordinate>35</Coordinate>
                         <Coordinate>-45</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
@@ -1779,22 +1779,22 @@
                 <PolyLoop>
                     <CartesianPoint>
                         <Coordinate>35</Coordinate>
-                        <Coordinate>-45</Coordinate>
+                        <Coordinate>-20</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>50</Coordinate>
-                        <Coordinate>-30</Coordinate>
+                        <Coordinate>-5</Coordinate>
                         <Coordinate>10</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>50</Coordinate>
-                        <Coordinate>-30</Coordinate>
+                        <Coordinate>-5</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                     <CartesianPoint>
                         <Coordinate>35</Coordinate>
-                        <Coordinate>-45</Coordinate>
+                        <Coordinate>-20</Coordinate>
                         <Coordinate>0</Coordinate>
                     </CartesianPoint>
                 </PolyLoop>
