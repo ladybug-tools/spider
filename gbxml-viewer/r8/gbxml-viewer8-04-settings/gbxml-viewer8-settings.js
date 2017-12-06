@@ -50,11 +50,12 @@
 
 			'<p><button onclick=toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Draw surface normals </button></p>' +
 
-//			'<p><button onclick=toggleEdges(); >Draw edges </button></p>' +
-
-//			<p><button onclick=toggleGrid(); >Toggle grid</button></p>
-
 			'<p><button onclick=toggleAxesHelper(); >Toggle axes</button></p>' +
+
+			'<p><button onclick=toggleGridHelper(); >Toggle grid</button></p>' +
+
+			'<p><button onclick=toggleGroundHelper(); >Toggle ground</button></p>' +
+
 
 			'<p><button onclick=toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
 
@@ -146,6 +147,8 @@
 
 	}
 
+
+
 /////////////////
 
 	function toggleBackgroundGradient() {
@@ -210,10 +213,52 @@
 
 
 
-
 	function toggleAxesHelper() {
 
 		icw.axesHelper.visible = !icw.axesHelper.visible;
+
+	}
+
+
+
+	function toggleGridHelper() {
+
+		if ( !icw.gridHelper ) {
+
+			icw.gridHelper = new THREE.GridHelper( 3 * surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
+
+			icw.gridHelper.rotation.x = Math.PI / 2;
+			icw.gridHelper.position.set( icw.axesHelper.position.x, icw.axesHelper.position.y, 0 );
+			surfaceMeshes.add( icw.gridHelper );
+
+			icw.gridHelper.visible = false;
+
+		}
+
+		icw.gridHelper.visible = !icw.gridHelper.visible;
+
+	}
+
+
+	function toggleGroundHelper() {
+
+		if ( !icw.groundHelper ) {
+
+			icw.groundHelper = new THREE.GridHelper( 3 * surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
+
+			const geometry = new THREE.BoxBufferGeometry( 3 * surfaceMeshes.userData.radius, 3 * surfaceMeshes.userData.radius, 1  );
+			const material = new THREE.MeshPhongMaterial( { color: 'green', opacity: 0.85, transparent: true } );
+			icw.groundHelper= new THREE.Mesh( geometry, material );
+			icw.groundHelper.name = 'groundHelper';
+
+			icw.groundHelper.position.set( icw.axesHelper.position.x, icw.axesHelper.position.y, -0.51 );
+			surfaceMeshes.add( icw.groundHelper );
+
+			icw.groundHelper.visible = false;
+
+		}
+
+		icw.groundHelper.visible = !icw.groundHelper.visible;
 
 	}
 
@@ -246,6 +291,7 @@
 		icw.zoomObjectBoundingSphere( icw.surfaceMeshes )
 
 	}
+
 
 
 	function updateOpacity() {

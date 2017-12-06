@@ -173,13 +173,29 @@ Will most likely build upon
 ## Change Log
 
 
+### 2017-12-06 ~ Theo
+
+App2 R8.5
+12:44
+* Fixed: reset view not resetting surfaces visible
+* Settings: add toggle grid
+* Settings: add toggle ground
+* App2: add footer
+
+
+### 2017-12-06 ~ Theu
+
+R8.5 ~ new user interface
+* Everything left menu
+
+
 ### 2017-12-04 ~ Theo
 
 Little fixes and new features everywhere
 
 * Add buttons to heads-up display
 * Add choices to Settings
-* Add surfacem edges and rest buttons to core
+* Add surface edges and rest buttons to core
 * 2017-12-02 ~ Michal: Zoom and center duplicate surfaces, duplicate coordinates, tiny surfaces
 * 2017-12-01 ~ Add better display = none on new file loaded
 * 2017-12-01 ~ Add hamburger/slider menu

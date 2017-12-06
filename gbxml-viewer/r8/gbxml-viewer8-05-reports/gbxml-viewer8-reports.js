@@ -49,7 +49,7 @@
 			'<p>' +
 				'<button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
 				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-				' <button onclick=icw.zoomObjectBoundingSphere(surfaceGroup);icw.setAllVisible(); >reset view</button>' +
+				' <button onclick=icw.setAllVisible();icw.zoomObjectBoundingSphere(surfaceGroup); >reset view</button>' +
 			'</p>' +
 
 			'<div id = divReport ></div>';

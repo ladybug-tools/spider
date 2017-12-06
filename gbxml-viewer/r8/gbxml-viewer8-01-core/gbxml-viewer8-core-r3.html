@@ -38,7 +38,7 @@
 
 		<button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>
 
-		<button onclick=zoomObjectBoundingSphere(surfaceMeshes);setAllVisible(); >reset view</button>
+		<button onclick=setAllVisible();zoomObjectBoundingSphere(surfaceMeshes); >reset view</button>
 
 	</p>
 
@@ -81,7 +81,7 @@
 
 	var renderer, camera, controls, scene;
 	let lightAmbient, lightDirectional, lightPoint;
-	var cameraHelper, axesHelper;
+	var cameraHelper, axesHelper, gridHelper, groundHelper;
 
 	init();
 	animate();
@@ -128,7 +128,7 @@
 		camera.add( lightPoint );
 		scene.add( camera );
 
-		axesHelper = new THREE.AxesHelper( 50 );
+		axesHelper = new THREE.AxesHelper( 1 );
 		scene.add( axesHelper );
 
 		window.addEventListener( 'resize', onWindowResize, false );
@@ -501,7 +501,7 @@
 
 		} else {
 
-			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+			const bbox = new THREE.Box3().setFromObject( obj );
 			const sphere = bbox.getBoundingSphere();
 			center = sphere.center;
 			radius = sphere.radius;
@@ -515,6 +515,8 @@
 		controls.maxDistance = 5 * radius;
 
 		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+
+		axesHelper.scale.set( radius, radius, radius );
 		axesHelper.position.copy( center );
 
 		camera.far = 10 * radius; //2 * camera.position.length();
@@ -534,15 +536,21 @@
 
 	function setAllVisible() {
 
+		surfaceMeshes.visible = true;
+
 		for ( let child of surfaceMeshes.children ) {
 
-			child.visible = true;
+			child.material.opacity = 0.85;
+			child.material.wireframe = false;
 
 		};
 
+		surfaceEdges.visible = true;
+
 		for ( let child of surfaceEdges.children ) {
 
-			child.visible = true;
+//			child.material.opacity = 0.85;
+			child.material.wireframe = false;
 
 		};
 
