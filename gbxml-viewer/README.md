@@ -3,11 +3,11 @@
 
 # gbXML Viewer8 Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-app/gbxml-viewer8-app.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px >Iframes are not displayed on github.com</iframe>
 _gbXML Viewer R8_
 
 
-## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-app/gbxml-viewer8-app.html )
+## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
 
 ## Concept: Knowledge embedded in gbXML Files is viewable, analyzable and editable with free, open source web apps
