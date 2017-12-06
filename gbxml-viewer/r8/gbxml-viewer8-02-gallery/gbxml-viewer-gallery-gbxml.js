@@ -1,7 +1,5 @@
 
 
-	var divAppMenu = divAppMenu || undefined;
-
 	var gal = {};
 
 	gal.user = 'GreenBuildingXML'

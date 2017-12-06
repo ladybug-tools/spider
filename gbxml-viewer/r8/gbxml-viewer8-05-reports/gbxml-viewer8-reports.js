@@ -1,6 +1,6 @@
 // Copyright 2017 Ladybug Tools authors. MIT License
 
-	var divAppMenu = divAppMenu || undefined;
+//	var divAppMenu = divAppMenu || undefined;
 
 	var icw = icw || undefined;
 	var gbjson, gbxml;
@@ -50,7 +50,6 @@
 				'<button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
 				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
 				' <button onclick=icw.zoomObjectBoundingSphere(surfaceGroup);icw.setAllVisible(); >reset view</button>' +
-
 			'</p>' +
 
 			'<div id = divReport ></div>';
@@ -268,7 +267,7 @@
 
 		}
 
-		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: ' 
+		txt += '<button class=toggle onclick=icw.setAllVisible(); >all visible</button>: ' 
 
 		const summary = 'Surfaces: ' + surfaces.length;
 

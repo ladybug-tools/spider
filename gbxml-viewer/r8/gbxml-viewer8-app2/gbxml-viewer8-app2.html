@@ -3,25 +3,25 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Open and view gbXML files in local folders." >
+<meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-11-30" >
-<title>gbXML Viewer R8 Template Basic</title>
+<meta name = "date" content = "2017-12-05" >
+<title>gbXML Viewer R8.4 App2</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: brown; --mnu-back-color: LightGoldenRodYellow ; --mnu-width:300px; height: 100%; }
+	html { --mnu-color: PapayaWhip ; --mnu-back-color: RebeccaPurple ; --mnu-width:350px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
-	a { color: var( --mnu-color ); text-decoration: none; }
-	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
+	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
+	#divMenu a:hover, #divMenua:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
-	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+//	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: white }
 
 	iframe { width: 100%; }
@@ -35,8 +35,10 @@
 	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; height: 100%; margin: 0;
-		overflow-x: hidden; padding: 30px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; color: #ddd; height: 100%; margin: 0;
+		overflow: auto; padding: 0px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+
+
 
 	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
@@ -57,48 +59,74 @@
 
 		<div id=divTitle ></div>
 
-<!--
-		<h2>
-			<a id = "urlInfo" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
-			<a href="" ><script> document.write( document.title ); </script></a>
-		</h2>
+		<hr>
 
-		<p><script> document.write(document.head.querySelector( '[name=description]' ).content ); </script></p>
--->
+		<p>Folders on GitHub  with sample gbXML files to investigate</p>
+
+		<p><a href="JavaScript:( function(){
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src='../gbxml-viewer8-02-gallery/gbxml-viewer-gallery-gbxml.js';
+			})()" >
+			GreenBuildingXML/Sample-gbXML-Files</a>
+		</p>
 
 		<p>
-			<a id=aThree href=
-				"JavaScript:(
-					function(){
-						const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = 'test-gbxml-viewer8-template.js';
-				} )()"
-			>
-			test</a>
+			<a href="JavaScript:(function(){
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src='../gbxml-viewer8-02-gallery/gbxml-viewer-gallery-spider-data.js';
+			})()" >
+			ladybug-tools/spider/read-gbxml/data-files</a>
 		</p>
+
+		<p>
+			<a href="JavaScript:(function(){
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src='../gbxml-viewer8-02-gallery/gbxml-viewer-gallery-spider-build-well.js';
+			})()" >
+			spider/cookbook/07-create-exportable-buildings/test-gbxml-files/</a>
+		</p>
+
 
 		<p>
 			<input type = "file" id = "inpFile" onchange="ifrThree.contentWindow.openFile(this);" >
 		<p>
 
-
-		<div id = "divBreadcrumbs" ></div>
-
-		<div id = "divMenuItems" ></div>
-
 		<hr>
 
-		<p><a href = "#README.md" target="_top" >Read Me</a></p>
 
-		<div>Sample files</div>
+<!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display.js';document.head.appendChild(script);})()" >heads-up display</a></p> -->
+		<p><a href="JavaScript:(function(){
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src='../gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display2.js';
+			})()" title="Click on any surface to view its details" >enable heads-up display</a>
+		</p>
 
+<!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p> -->
+		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p>
 
-		<div><a href="#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml" >Urban House</a></div>
-		<div><a href="#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml" >Open Studio SED</a></div>
+<!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';document.head.appendChild(script);})()" >reports</a></p> -->
+		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';document.head.appendChild(script);})()" >reports</a></p>
 
 		<hr>
 
 		<div id=divAppMenu ></div>
+
+		<hr>
+
+
+		<p>
+			<a id=aSplashScreen href=
+				"JavaScript:( function(){
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = 'test-gbxml-viewer8-splash-screen.js';
+				} )()"
+			>
+			splash screen</a>
+		</p>
+
+		<p><a href = "#README.md" target="_top" >read me</a></p>
+
+
 
 	</div>
 
@@ -131,6 +159,8 @@
 
 	init();
 
+
+
 	function init() {
 
 		divTitle.innerHTML =
@@ -143,8 +173,11 @@
 
 		'';
 
+		divAppMenu.id = 'divAppMenu';
+
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
+		aSplashScreen.click();
 
 	}
 
@@ -185,8 +218,9 @@
 
 
 
-	function onloadThree() {
+	function onloadThreejs() {
 
+console.log( 'hi', 23 );
 
 	}
 
@@ -253,7 +287,7 @@
 
 		function onRequestFileProgress( xhr ) {
 
-			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+//			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 

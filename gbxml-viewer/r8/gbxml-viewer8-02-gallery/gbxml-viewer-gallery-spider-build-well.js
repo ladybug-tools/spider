@@ -1,6 +1,6 @@
 
 
-	var divAppMenu = divAppMenu || undefined;
+//	var divAppMenu = divAppMenu || undefined;
 
 
 	var gal = gal || {};

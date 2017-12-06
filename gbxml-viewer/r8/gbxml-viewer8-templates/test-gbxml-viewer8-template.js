@@ -1,7 +1,7 @@
 // Copyright 2017 Ladybug Tools authors. MIT License
 
 
-	var divAppMenu;
+//	var divAppMenu;
 	var icw;
 	var THREE;
 	var scene;
@@ -22,6 +22,15 @@
 
 		}
 
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divAppMenu.innerHTML = 
+			'<p>' + txt + '<p>' +
+//			'<p>surfaces: ' + icw.surfaceMeshes.children.length + '</p>'
+		'';
+
+
+/*
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
 		scene = icw.scene;
@@ -31,12 +40,13 @@
 console.log( 'scene', icw );
 console.log( 'gbjson', gbjson );
 console.log( 'surfaceMeshes', surfaceMeshes );
+*/
 
-		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+		url = 'https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml'
 
-		divAppMenu.innerHTML = 
-			txt +
-			'<p>surfaces: ' + icw.surfaceMeshes.children.length + '</p>';
+		divContents.style.maxWidth = '100%';
+		document.body.style.overflow = 'hidden';
+		divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + url + ' style=height:100%;border:none; ></iframe>';
 
 
 	}

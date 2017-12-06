@@ -1,14 +1,16 @@
 
 
-	var divAppMenu = divAppMenu || undefined;
+//	var divAppMenu = divAppMenu || undefined;
 
 	var icw;
 	var THREE;
+	var scene;
 	var surfaceMeshes
 	var opacity;
 	var cameraOrtho;
 	var surfaceEdges;
 
+	var helperNormalsFaces
 
 	init();
 
@@ -25,6 +27,7 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
+		scene = icw.scene;
 		surfaceMeshes = icw.surfaceMeshes;
 
 		divAppMenu.innerHTML =
@@ -43,9 +46,9 @@
 
 			'<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
 
-			'<p><button onclick=toggleWireframe(); > Toggle wireframe </button></p>' +
+			'<p><button onclick=toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>' +
 
-			'<p><button onclick=drawSurfaceNormals(); > Draw surface normals </button></p>' +
+			'<p><button onclick=toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Draw surface normals </button></p>' +
 
 //			'<p><button onclick=toggleEdges(); >Draw edges </button></p>' +
 
@@ -178,18 +181,29 @@
 
 
 
-	function drawSurfaceNormals() {
+	function toggleSurfaceNormals() {
 
-		icw.surfaceMeshes.traverse( function ( child ) {
+		if ( !helperNormalsFaces ) {
 
-			if ( child instanceof icw.THREE.Mesh ) {
+			helperNormalsFaces = new THREE.Group();
 
-				helperNormalsFaces = new icw.THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
-				icw.scene.add( helperNormalsFaces );
+			surfaceMeshes.traverse( function ( child ) {
 
-			}
+				if ( child instanceof THREE.Mesh ) {
 
-		} );
+					helperNormalsFace = new THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
+					helperNormalsFaces.add( helperNormalsFace );
+
+				}
+
+			} );
+
+			scene.add( helperNormalsFaces );
+			helperNormalsFaces.visible = false;
+
+		}
+
+		helperNormalsFaces.visible = !helperNormalsFaces.visible;
 
 	}
 
