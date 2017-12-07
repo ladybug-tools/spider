@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-05" >
-<title>gbXML Viewer R8.5 App2</title>
+<title>gbXML Viewer R8.6 App2</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -99,10 +99,15 @@
 				const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src='../gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display2.js';
 			})()" title="Click on any surface to view its details" >enable heads-up display</a>
+
+				<button onclick=stopHeadsUp() >stop heads-up</button>
 		</p>
 
 <!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p> -->
-		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p>
+		<p><a href="JavaScript:(function(){
+			var script=document.createElement('script');
+			script.src='../gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';
+			document.head.appendChild(script);})()" >settings</a></p>
 
 <!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';document.head.appendChild(script);})()" >reports</a></p> -->
 		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';document.head.appendChild(script);})()" >reports</a></p>
@@ -125,7 +130,6 @@
 		</p>
 
 		<p><a href = "#README.md" target="_top" >read me</a></p>
-
 
 		<div id= "divFooter" >
 
@@ -192,7 +196,9 @@
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
-		aSplashScreen.click();
+//		aSplashScreen.click();
+
+		onHashChange();
 
 	}
 
@@ -200,7 +206,19 @@
 
 	function onHashChange() {
 
-		const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+		if ( !location.hash ) {
+
+			aSplashScreen.click();
+
+			url = uriDefaultFile;
+
+		} else {
+
+			url = location.hash.slice( 1 );
+
+		}
+
+//		const url = ? uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
 
 		if ( ulc.endsWith( '.md' ) ) {

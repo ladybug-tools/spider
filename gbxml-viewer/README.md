@@ -184,10 +184,20 @@ App2 R8.5
 
 * 2017-12-01 ~ Add a 'ground' that can receive shadow
 
-### 2017-12-06 ~ Theu
+8.6
+* Fix some of the reset view issues
+* Highlight all duplicate adjacencies in red
+* Add better spacing between duplicate adjacencies log
+* Tiny surface telltale now has opacity - so you can see very tine things inside the telltale
+* location hash and splash screen working together better
+
+
+### 2017-12-05 ~ Theo
 
 R8.5 ~ new user interface
-* Everything
+* Everything in left menu
+
+
 ### 2017-12-04 ~ Theo
 
 Little fixes and new features everywhere

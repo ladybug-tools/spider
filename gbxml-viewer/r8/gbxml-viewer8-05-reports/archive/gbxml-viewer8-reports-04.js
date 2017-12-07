@@ -9,7 +9,6 @@
 	var surfaceMeshes;
 	var surfaceEdges;
 
-	var surfaceAdjacencies;
 	var telltale;
 	var b = '<br>';
 
@@ -44,8 +43,6 @@
 		surfaceGroup = icw.scene.getObjectByName( 'surfaceMeshes' );
 		surfaceMeshes = surfaceGroup.children;
 		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
-
-		surfaceAdjacencies = [];
 
 		divAppMenu.innerHTML = 
 
@@ -345,7 +342,7 @@ console.log( 'surfOther', surfOther );
 
 			if ( !surfacesIds.includes( id ) ) { 
 
-				surfacesIds.push( id ); 
+				surfacesIds.push( points ); 
 
 			} else {
 
@@ -363,9 +360,6 @@ console.log( 'surfOther', surfOther );
 
 		}
 
-console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
-
-		count = surfacesIds.length === 1 ? 0 : count;
 		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent };
 
 	}
@@ -374,6 +368,7 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 
 	function getSurfaceDuplicateAdjacencies() {
 
+		const surfacesAdjacencies = [];
 		const surfaces = gbjson.Campus.Surface;
 		let count = 0;
 		let flowContent = '';
@@ -384,8 +379,7 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 
 			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
 
-				surfaceAdjacencies.push( surface.Name ); 
-
+				surfacesAdjacencies.push( adjacencies ); 
 //console.log( 'adjacencies', adjacencies  );
 
 				flowContent += 
@@ -395,7 +389,7 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
 						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-					'</p><hr>';
+					'</p>';
 
 				count ++;
 
@@ -460,8 +454,6 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 
 	function toggleSurface( id ) {
 
-		surfaceGroup.visible = true;
-
 		for ( let child of surfaceMeshes ) {
 
 			if ( child.userData.data.id === id ) {
@@ -489,11 +481,12 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 //console.log( 'surface', surface );
 		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
 
+
 		radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
 
 		scene.remove( telltale );
 		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
+		const material = new THREE.MeshNormalMaterial();
 		telltale = new THREE.Mesh( geometry, material );
 		telltale.position.copy( center );
 		scene.add( telltale );
@@ -510,9 +503,6 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 
 	function toggleSurfaceType( that ) {
 
-		surfaceGroup.visible = true;
-//console.log( '', surfaceAdjacencies );
-
 		for ( let child of surfaceMeshes ) {
 
 			if ( child.userData.data.surfaceType !== that.innerText ) {
@@ -520,8 +510,6 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 				child.visible = false;
 
 			} else {
-
-				if ( surfaceAdjacencies.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
 
 				child.visible = true;
 
@@ -536,8 +524,6 @@ console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 	function toggleSpace( id ) {
 
 //console.log( 'id', id );
-
-		surfaceGroup.visible = true;
 
 		for ( let child of surfaceMeshes ) {
 
@@ -723,25 +709,31 @@ console.log( 'dup', vertex );
 
 		let thatChild;
 
-		surfaceGroup.visible = true;
-
+//		surfaceMeshes.traverse( function ( child ) {
 		for ( let child of surfaceMeshes ) {
 
 			if ( child instanceof THREE.Mesh && child.userData.data.Name !== that.innerText ) {
 
+//				child.material.wireframe = true;
+//				child.material.opacity = 0.1;
 				child.visible = false;
 
 			} else if ( child.material ) {
 
+//				child.material.wireframe = false;
+//				child.material.opacity = 1;
 				child.visible = true;
 				thatChild = child;
 
 			}
 
-		}
+		};
+
+//console.log( 'thatChild', thatChild );
 
 		space = thatChild.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef;
 
+//		surfaceMeshes.traverse( function ( child ) {
 		for ( let child of surfaceMeshes ) {
 
 
@@ -750,6 +742,8 @@ console.log( 'dup', vertex );
 				&& child !== thatChild
 			) {
 
+//				child.material.wireframe = false;
+//				child.material.opacity = 0.2;
 				child.visible = true;
 console.log( 'space', space );
 
@@ -758,7 +752,7 @@ console.log( 'space', space );
 
 			}
 
-		}
+		};
 
 	}
 

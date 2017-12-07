@@ -34,7 +34,6 @@
 
 	function initHeadsUp() {
 
-
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
 		renderer = icw.renderer;
@@ -54,6 +53,20 @@
 
 		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
 		renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
+
+	}
+
+
+
+	function stopHeadsUp() {
+
+		if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+		if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+		headsUp.style.display = 'none';
+		campusSurfacesArray = [];
+
+		renderer.domElement.removeEventListener( 'click', icw.onDocumentMouseMove, false );
+		renderer.domElement.removeEventListener( 'click', icw.onDocumentMouseDown, false );
 
 	}
 
