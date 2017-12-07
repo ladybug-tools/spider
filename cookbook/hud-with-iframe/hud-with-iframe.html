@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser with menu sliding" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-17" >
+<title></title>
+<style>
+/* Copyright 2017 pushMe pullYou authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: cornsilk; --mnu-width:300px; height: 100%; }
+
+	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
+
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #888; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: white }
+
+	iframe { height: 300px; width: 260px; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+/*
+	td { vertical-align: top; }
+
+	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
+*/
+
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 20px;
+		overflow-x: hidden; padding: 30px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+
+	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<h1>
+<!--			<a href="" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a> -->
+			<a href="" ><script> document.write( location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) ) </script></a>
+		</h1>
+
+		<div id=headsUp ><iframe id=ifrThree src=threejs-for-iframe.html ></iframe></div>
+
+		<p><button onclick=drawTheBuilding(); >draw the building</button></p>
+
+		<div id = "divContents" >
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+		</div>
+
+		<div id=log ></div>
+
+	</div>
+
+
+	<div id = "hamburger" onclick=toggleNav(); > slide &#9776;  </div>
+
+<script>
+
+	var icw;
+	var theBuilding;
+
+	let intersected;
+
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 100, 100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotateSpeed = - controls.autoRotateSpeed
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+		const axesHelper = new THREE.AxesHelper( 50 );
+		scene.add( axesHelper );
+
+		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+//		scene.add( mesh );
+
+		cubes = drawCubes();
+
+		scene.add( cubes )
+		initHeadsUp();
+
+	}
+
+
+	function drawTheBuilding() {
+
+		icw = ifrThree.contentWindow;
+		theBuilding = icw.theBuilding;
+		theBuilding.length = theBuilding.length ? theBuilding.length : 100;
+
+		theBuilding.width = theBuilding.width ? theBuilding.width : 100;
+		theBuilding.thickness = 40;
+
+		theBuilding.storeys = theBuilding.storeys ? theBuilding.storeys : 1;
+		theBuilding.orientation = Math.floor( Math.random() * 90 );
+
+		const choicesFootprint = [ icw.drawBox, icw.drawL, icw.drawT, icw.drawH, icw.drawIrregularPolygon ];
+		const choice = choicesFootprint[ Math.floor( Math.random() * 4 ) ];
+		theBuilding.polygonVertices = choice();
+
+		theBuilding.storeyHeight = 8 + Math.floor( Math.random() * 12 );
+		theBuilding.perimeterDepth = 10 + Math.floor( Math.random() * 10 );
+		theBuilding.openingsPerWall = 1 + Math.floor( Math.random() * 4 );
+		theBuilding.wwr = 1 + Math.floor( Math.random() * 98 );
+
+		theBuilding.overhang = Math.floor( Math.random() * 10 ); // parseFloat( inpOverhang.value );
+		theBuilding.fin = Math.floor( Math.random() * 10 ); // parseFloat( inpFin.value );
+
+		icw.updateTheBuilding();
+
+//console.log( '', theBuilding );
+
+	}
+
+	function drawCubes() {
+
+		const cubes = new THREE.Object3D();
+		let geometry, material, mesh, edges;
+
+		geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+		for ( let i = 0; i < 50; i++ ) {
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff * Math.random(),
+				emissive: 0xffffff * Math.random(),
+				opacity: Math.random(),
+				specular: 0xffffff * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+				transparent: true
+			} );
+
+//			material = new THREE.MeshNormalMaterial();
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.scale.set( 5 + Math.floor( Math.random() * 5 ), 5 + Math.floor( Math.random() * 5 ), 5 + 5 * Math.floor( Math.random() * 5 ) )
+			mesh.position.set( 100 * Math.random() - 50, 100 * Math.random() - 50, 100 * Math.random() - 50 );
+//			mesh.rotation.set( 6.3 * Math.random(), 1.57 * Math.random(), 3.14 * Math.random() );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			mesh.name = 'cube ' + i;
+			cubes.add( mesh );
+
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			edges = new THREE.LineSegments( geometryEdge, material );
+			mesh.add( edges ); // add wireframe as a child of the parent mesh
+
+		}
+
+		return cubes;
+
+	}
+
+
+
+
+
+	function initHeadsUp() {
+
+
+
+		window.objects = [];
+		window.mouse = new THREE.Vector2();
+
+//		var window.intersected;
+
+//		headsUp = document.body.appendChild( document.createElement( 'div' ) );
+//		headsUp.style.cssText = 'background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.85; ' +
+//			'position: absolute; ';
+
+		renderer.domElement.addEventListener( 'click', onDocumentMouseMove, false );
+//		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && child.name ) {
+
+				objects.push( child );
+
+			}
+
+		} );
+
+	}
+
+
+	function onDocumentMouseMove( event ) {
+
+		var raycaster, intersects;
+
+		event.preventDefault();
+
+		if ( event.buttons > 0 ) { return; }
+
+		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+		raycaster = new THREE.Raycaster();
+		raycaster.setFromCamera( mouse, camera );
+
+		intersects = raycaster.intersectObjects( cubes.children );
+
+		if ( intersects.length > 0 ) {
+
+//			intersected = intersects[ 0 ].object
+
+			if ( intersected != intersects[ 0 ].object ) {
+
+				if ( intersected ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
+				intersected = intersects[ 0 ].object;
+
+				intersected.currentHex = intersected.material.emissive.getHex();
+				intersected.material.emissive.setHex( 0xff0000 );
+
+				intersected.currentOpacity = intersected.material.opacity;
+				intersected.material.opacity = 1;
+
+				intersected.rotation.y += 0.1;
+				log.innerHTML = 'Selected cube ID: ' + intersected.name + '<br>';
+
+			}
+
+		} else {
+
+			if ( intersected ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+			if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
+			intersected = undefined;
+
+			log.innerHTML = 'No cube selected';
+
+		}
+
+		setHeadsUp( event );
+
+	}
+
+
+
+	function setHeadsUp( event ) {
+
+		let txt;
+		const b = '<br>'
+
+		if ( intersected === undefined ){
+
+			if ( event.type === 'touchstart' ) {
+
+				headsUp.style.display = 'none';
+
+			}
+
+			document.body.style.cursor = 'auto';
+			return;
+
+		}
+
+		icw = ifrThree.contentWindow;
+		theBuilding = icw.theBuilding;
+		theBuilding.length = 10 * intersected.scale.x;
+		theBuilding.width = 10 * intersected.scale.y;
+		theBuilding.storeys = 1 + Math.floor( intersected.scale.z / 10 );
+		drawTheBuilding();
+
+		log.innerHTML += 
+
+			'length: ' + theBuilding.length + '<br>' +
+			'width: ' + theBuilding.width + '<br>' +
+			'storeys: ' + theBuilding.storeys + '<br>' +
+		''
+/*
+//		headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
+		headsUp.style.top = '20px'; //-50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
+		headsUp.style.display = '';
+
+		txt =
+			intersected.name + b +
+			mouse.x + b +
+			mouse.y +
+
+		'';
+
+		headsUp.innerHTML = txt;
+*/
+
+		document.body.style.cursor = 'pointer';
+
+	}
+
+
+
+	function onDocumentMouseDown( event ) {
+
+		headsUp.style.display = 'none';
+
+	}
+
+
+	function onDocumentTouchStart( event ) {
+
+	//	event.preventDefault();
+
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+
+		onDocumentMouseMove( event );
+
+	}
+
+
+	function toggleNav() {
+
+		const width = getComputedStyle( document.documentElement ).getPropertyValue( '--mnu-width' );
+
+		if ( !divMenu.style.width || divMenu.style.width === width ) {
+
+			divMenu.style.width = 0;
+			divMenu.style.padding = 0;
+			hamburger.style.left = '-100px';
+
+		} else {
+
+			divMenu.style.width = width;
+			divMenu.style.padding = '30px 10px 30px 10px';
+			hamburger.style.left = 'calc( var( --mnu-width ) - 100px )';
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

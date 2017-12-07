@@ -250,7 +250,7 @@
 			const material = new THREE.MeshPhongMaterial( { color: 'green', opacity: 0.85, transparent: true } );
 			icw.groundHelper= new THREE.Mesh( geometry, material );
 			icw.groundHelper.name = 'groundHelper';
-
+			icw.groundHelper.receiveShadow = true;
 			icw.groundHelper.position.set( icw.axesHelper.position.x, icw.axesHelper.position.y, -0.51 );
 			surfaceMeshes.add( icw.groundHelper );
 

@@ -152,11 +152,11 @@ See also:
 
 ### Settings
 
-* 2017-12-01 ~ Add a 'ground' that can receive shadow
 
 
 ### Template
 
+* 2017-12-06 ~ Add slider to move ground up or down
 
 
 ### Export gbXML files
@@ -182,13 +182,12 @@ App2 R8.5
 * Settings: add toggle ground
 * App2: add footer
 
+* 2017-12-01 ~ Add a 'ground' that can receive shadow
 
 ### 2017-12-06 ~ Theu
 
 R8.5 ~ new user interface
-* Everything left menu
-
-
+* Everything
 ### 2017-12-04 ~ Theo
 
 Little fixes and new features everywhere

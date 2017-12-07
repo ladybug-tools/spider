@@ -1,0 +1,1069 @@
+
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-12-06" >
+<title>threejs-for-iframe.html</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+
+	#divMenu { position: absolute; text-align: center; width: 100%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
+
+<!--
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+		<div id = "contents" >
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+		</div>
+
+	</div>
+-->
+
+<script>
+
+//	var campus;
+	var buildings;
+	var theBuilding;
+
+//	var divJson, divGbxml;
+
+	var materialParameters;
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/scatter-well/';
+
+	let renderer, camera, controls, scene;
+	let lightAmbient, lightDirectional
+	let cameraHelper, gridHelper, axesHelper;
+
+	init();
+	animate();
+
+	function init() {
+
+/*
+		divTitle.innerHTML = 
+			'<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
+*/
+
+		const size = 150;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.shadowMap.enabled = true;
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10 * size );
+		camera.position.set( size, -size, size );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 10 * size;
+		controls.target.set( 0, 0, 50 );
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( 0.1 * size, 0.1 * size, 1 );
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+//		addHelpers();
+
+		theBuilding = {};
+
+		addAjacentBuildings();
+
+		onSelectFootprint();
+
+	}
+
+
+	function addHelpers( size = 100 ) {
+
+		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera ) 
+		scene.add( cameraHelper );
+
+		axesHelper = new THREE.AxesHelper( size );
+		scene.add( axesHelper );
+
+		gridHelper = new THREE.GridHelper( size );
+		gridHelper.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+
+		scene.add( gridHelper );
+
+	}
+
+
+
+
+	function addAjacentBuildings() {
+
+		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 ); // use scale to set size
+		const material = new THREE.MeshPhongMaterial();
+
+		const meshAdjacent1 = new THREE.Mesh( geometry, material );
+		meshAdjacent1.name = 'building-adjacent-ben';
+		meshAdjacent1.scale.set( 20, 50, 30 ); // scale is easier to deal with than geometry vertices
+		meshAdjacent1.position.set( 0, 100, 15 );
+		meshAdjacent1.rotation.z = Math.PI / 3;
+		scene.add( meshAdjacent1 );
+
+		const meshAdjacent2 = new THREE.Mesh( geometry, material );
+		meshAdjacent2.name = 'building-adjacent-anton';
+		meshAdjacent2.scale.set( 15, 80, 20 ); // scale is easier to deal with than geometry vertices
+		meshAdjacent2.position.set( -100, 0, 10 );
+
+		scene.add( meshAdjacent2 );
+	}
+
+
+
+
+	function onSelectFootprint( choiceIndex = 0 ) {
+
+		theBuilding.name = 'theBuilding';
+
+
+		theBuilding.orientation = 0; // parseInt( inpOrientation.value, 10 );
+		theBuilding.footprints = [ 'Box', 'L', 'T', 'H', 'Polygon' ];
+
+		theBuilding.area = 10000; // not used
+		theBuilding.storeys = 1;
+		theBuilding.areaFloor = theBuilding.area / theBuilding.storeys;
+		Math.round( theBuilding.areaFloor ).toLocaleString();
+
+		theBuilding.storeyHeight = 10; //parseInt( inpHeight.value, 10 );
+		theBuilding.perimeterDepth = 15; //parseInt( inpPerimeterDepth.value, 10 );
+		theBuilding.openingsPerWall = 2; // parseInt( inpOpenings.value, 10 );
+		theBuilding.wwr = 40; // parseInt( inpWindowWallRatio.value, 10 );
+
+		theBuilding.overhang = 5; // parseFloat( inpOverhang.value );
+		theBuilding.fin = 8; // parseFloat( inpFin.value );
+
+		theBuilding.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
+		theBuilding.edges = null;
+		theBuilding.storeyStretch = 3;
+
+		materialParameters = { color: 0xffffff * Math.random(), opacity: theBuilding.opacity, side: 2, transparent: true };
+
+// Each button relates to a particular footprint and a custom set of parameters
+
+		if ( choiceIndex === 0 ) {
+
+			theBuilding.length = 100;
+			theBuilding.width = 100;
+			theBuilding.thickness = 60;
+			theBuilding.footprint = 'Box';
+
+		} else if ( choiceIndex === 1 ) {
+
+			theBuilding.length = 100;
+			theBuilding.width = 150;
+			theBuilding.thickness = 50;
+			theBuilding.footprint = 'L';
+
+		} else if ( choiceIndex === 2 ) {
+
+			theBuilding.length = 100;
+			theBuilding.width = 150;
+			theBuilding.thickness = 50;
+			theBuilding.footprint = 'T';
+
+		} else if ( choiceIndex === 3 ) {
+
+			theBuilding.length = 150;
+			theBuilding.width = 90;
+			theBuilding.thickness = 40;
+			theBuilding.footprint = 'H';
+
+		} else if ( choiceIndex === 4 ) {
+
+			theBuilding.length = 100;
+			theBuilding.width = 100;
+			theBuilding.thickness = 60;
+			theBuilding.footprint = 'Box';
+
+			theBuilding.storeys = 3;
+			theBuilding.openingsPerWall = 5; // parseInt( inpOpenings.value, 10 );
+			theBuilding.wwr = 80; // parseInt( inpWindowWallRatio.value, 10 );
+			theBuilding.overhang = 10; // parseFloat( inpOverhang.value );
+			theBuilding.fin = 8; // parseFloat( inpFin.value );
+
+			theBuilding.opacity = 0.55; // parseInt( inpOpacity.value, 10 ) / 100;
+
+		} else if ( choiceIndex === 5 ) {
+
+			theBuilding.orientation = 20;
+			theBuilding.length = 100;
+			theBuilding.width = 100;
+			theBuilding.thickness = 30;
+			theBuilding.footprint = 'L';
+
+			theBuilding.storeys = 2;
+			theBuilding.openingsPerWall = 5; // parseInt( inpOpenings.value, 10 );
+			theBuilding.wwr = 20; // parseInt( inpWindowWallRatio.value, 10 );
+			theBuilding.overhang = 1; // parseFloat( inpOverhang.value );
+			theBuilding.fin = 2; // parseFloat( inpFin.value );
+
+			theBuilding.storeyHeight = 20; //parseInt( inpHeight.value, 10 );
+			theBuilding.perimeterDepth = 10, //parseInt( inpPerimeterDepth.value, 10 );
+			theBuilding.opacity = 0.85; // parseInt( inpOpacity.value, 10 ) / 100;
+			theBuilding.storeyStretch = 1;
+
+		} else if ( choiceIndex === 6 ) {
+
+			theBuilding.orientation = -30;
+			theBuilding.length = 150;
+			theBuilding.width = 100;
+			theBuilding.thickness = 50;
+			theBuilding.footprint = 'T';
+
+			theBuilding.storeys = 3;
+			theBuilding.openingsPerWall = 3; // parseInt( inpOpenings.value, 10 );
+			theBuilding.wwr = 90; // parseInt( inpWindowWallRatio.value, 10 );
+			theBuilding.overhang = 5; // parseFloat( inpOverhang.value );
+			theBuilding.fin = 5; // parseFloat( inpFin.value );
+
+			theBuilding.storeyHeight = 10; //parseInt( inpHeight.value, 10 );
+			theBuilding.perimeterDepth = 20, //parseInt( inpPerimeterDepth.value, 10 );
+			theBuilding.opacity = 0.35; // parseInt( inpOpacity.value, 10 ) / 100;
+			theBuilding.storeyStretch = 1.2;
+
+
+		} else if ( choiceIndex === 7 ) {
+
+			theBuilding.orientation = -45;
+			theBuilding.length = 150;
+			theBuilding.width = 100;
+			theBuilding.thickness = 50;
+			theBuilding.footprint = 'H';
+
+			theBuilding.storeys = 10;
+			theBuilding.openingsPerWall = 2; // parseInt( inpOpenings.value, 10 );
+			theBuilding.wwr = 70; // parseInt( inpWindowWallRatio.value, 10 );
+			theBuilding.overhang = 2; // parseFloat( inpOverhang.value );
+			theBuilding.fin = 1; // parseFloat( inpFin.value );
+
+			theBuilding.storeyHeight = 12; //parseInt( inpHeight.value, 10 );
+			theBuilding.perimeterDepth = 10, //parseInt( inpPerimeterDepth.value, 10 );
+			theBuilding.opacity = 0.15; // parseInt( inpOpacity.value, 10 ) / 100;
+			theBuilding.storeyStretch = 1.5;
+
+
+		} else if ( choiceIndex === 8 ) {
+
+			theBuilding.orientation = 0;
+			theBuilding.length = 80;
+			theBuilding.width = 80;
+			theBuilding.thickness = 30;
+			theBuilding.footprint = 'Polygon';
+
+			theBuilding.storeys = 3;
+			theBuilding.openingsPerWall = 5; // parseInt( inpOpenings.value, 10 );
+			theBuilding.wwr = 70; // parseInt( inpWindowWallRatio.value, 10 );
+			theBuilding.overhang = 8; // parseFloat( inpOverhang.value );
+			theBuilding.fin = 7; // parseFloat( inpFin.value );
+
+			theBuilding.storeyHeight = 12; //parseInt( inpHeight.value, 10 );
+			theBuilding.perimeterDepth = 15, //parseInt( inpPerimeterDepth.value, 10 );
+			theBuilding.opacity = 0.15; // parseInt( inpOpacity.value, 10 ) / 100;
+			theBuilding.storeyStretch = 1.5;
+
+		} else {
+
+			theBuilding.length = 150;
+			theBuilding.width = 80;
+			theBuilding.thickness = 60;
+			theBuilding.footprint = 'Polygon';
+
+		}
+
+		updateDimensions();
+
+	}
+
+
+
+	function updateDimensions() {
+
+		const choicesFootprint = [ drawBox, drawL, drawT, drawH, drawIrregularPolygon ];
+
+		choiceIndex = theBuilding.footprints.indexOf( theBuilding.footprint );
+
+		const choice = choicesFootprint[ choiceIndex ];
+
+		theBuilding.polygonVertices = choice();
+
+		updateTheBuilding();
+
+		theBuilding.areaCheck = theBuilding.storeys * THREE.ShapeUtils.area( theBuilding.polygonVertices );
+
+//		outAreaCheck2.innerHTML = ( new Date() ).toLocaleTimeString() + ' ' + Math.round( - theBuilding.areaCheck ).toLocaleString();
+
+	}
+
+
+
+	function drawTestPolygon( vertices, name = 'test-polygon', color = 0x000000 ) {
+
+		const geometry = new THREE.Geometry();
+		geometry.vertices = vertices;
+		const material = new THREE.LineBasicMaterial( { color: color } );
+
+		scene.remove( theBuilding.polygon );
+
+		theBuilding.polygon = new THREE.Line( geometry, material );
+		theBuilding.polygon.name = name;
+		theBuilding.polygon.position.z = -20;
+
+		scene.add( theBuilding.polygon );
+
+	}
+
+
+
+	function drawBox() {
+
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+
+		const verticesBox = [ v( len, 0, 0 ), v( 0, 0, 0 ), v( 0, wid, 0 ), v( len, wid, 0 ), v( len, 0, 0 ) ];
+
+//		drawTestPolygon( verticesBox, 'polygon Box' );
+
+		return verticesBox;
+
+	}
+
+
+
+	function drawL() {
+
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
+
+		const verticesL = [
+			v( len, 0, 0 ),
+			v( 0, 0, 0 ),
+			v( 0, wid, 0 ),
+			v( thk, wid, 0 ),
+			v( thk, thk, 0 ),
+			v( len, thk, 0 ),
+			v( len, 0, 0 )
+		];
+
+//		drawTestPolygon( verticesL, 'polygon L' );
+
+		return verticesL;
+
+	}
+
+
+
+	function drawT() {
+
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
+
+		const verticesT = [
+			v( len, 0, 0 ),
+			v( 0, 0, 0 ),
+			v( 0, thk, 0 ),
+			v( 0.5 * ( len - thk ), thk, 0 ),
+			v( 0.5 * ( len - thk ), wid, 0 ),
+			v( len - 0.5 * ( len - thk ), wid, 0 ),
+			v( len - 0.5 * ( len - thk ), thk, 0 ),
+			v( len, thk, 0 ),
+			v( len, 0, 0 )
+		];
+
+//		drawTestPolygon( verticesT, 'polygon T' );
+
+		return verticesT;
+
+	}
+
+
+
+	function drawH() {
+
+		const len = theBuilding.length;
+		const wid = theBuilding.width;
+		const thk = theBuilding.thickness;
+
+		const verticesH = [
+			v( len - thk, 0.5 * ( wid - thk ), 0 ),
+			v( thk, 0.5 * ( wid - thk ), 0 ),
+			v( thk, 0, 0 ),
+			v( 0, 0, 0 ),
+			v( 0, wid, 0 ),
+			v( thk, wid, 0 ),
+			v( thk, wid - 0.5 * ( wid - thk ), 0 ),
+			v( len - thk, wid - 0.5 * ( wid - thk ), 0 ),
+			v( len - thk, wid, 0 ),
+			v( len, wid, 0 ),
+			v( len, 0, 0 ),
+			v( len - thk, 0, 0 ),
+			v( len - thk, 0.5 * ( wid - thk ), 0 )
+		];
+
+//		drawTestPolygon( verticesH, 'polygon H' );
+
+		return verticesH;
+
+	}
+
+
+
+	function drawIrregularPolygon() {
+
+		const items = 20;
+
+		const radius = 75;
+		let delta = 10 + Math.random() * 2;
+		const theta = Math.PI / 2;
+
+		verticesPolygon = [];
+
+		for ( var i = 0; i < items ; i++ ) {
+
+			delta = i % 2 ? - delta : delta + Math.random() * 5;
+
+			vertex = new THREE.Spherical( radius + delta, 2 * i * Math.PI / items, theta );
+			verticesPolygon.push( new THREE.Vector3().setFromSpherical ( vertex ) );
+
+		}
+
+		verticesPolygon.push( verticesPolygon[ 0 ] );
+
+		drawTestPolygon( verticesPolygon, 'polygon irregular' );
+
+		return verticesPolygon;
+
+	}
+
+
+
+	function updateTheBuilding() {
+
+		scene.remove( theBuilding.group );
+
+		if ( theBuilding.group ) {
+
+			theBuilding.group.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+				if ( child.texture ) { child.texture.dispose(); }
+
+			} );
+
+		}
+
+		theBuilding.group = new THREE.Group();
+		theBuilding.group.name = theBuilding.name;
+
+		const vertices = theBuilding.polygonVertices;
+		const verticesOffset = offsetPoints( theBuilding.group, vertices, -theBuilding.perimeterDepth, 0 );
+		theBuilding.group.rotation.z = - theBuilding.orientation * Math.PI / 180;
+
+// overwrites previous test polygon
+//		drawTestPolygon( verticesOffset, 'polygon offset', 0xff0000 );
+
+		for ( var i = 0; i < theBuilding.storeys; i++ ) {
+
+			const storey = new THREE.Group();
+
+			storey.name = 'storey-' + ( i + 1 );
+
+			const slabs = new THREE.Group();
+			slabs.name = storey.name;
+			storey.add( slabs );
+
+			drawSlab( vertices, verticesOffset, slabs );
+
+			const shapeOffset = new THREE.Shape( verticesOffset );
+			const geometryShapeOffset = new THREE.ShapeBufferGeometry( shapeOffset );
+
+			materialParameters.color = 0xffffff * Math.random();
+			const material = new THREE.MeshPhongMaterial( materialParameters );
+
+			const meshSlab = new THREE.Mesh( geometryShapeOffset, material );
+			meshSlab.position.z = -5;
+			meshSlab.name = storey.name + '-slab-1-interior';
+			meshSlab.userData.angle = 90 + theBuilding.orientation;
+			meshSlab.userData.verticesLocal = verticesOffset;
+
+			slabs.add( meshSlab );
+
+			const interiorWalls = new THREE.Group();
+			interiorWalls.name = 'interior-walls';
+			storey.add( interiorWalls );
+
+			drawInteriorWalls( verticesOffset, interiorWalls );
+
+
+			const interiorWallsDiagonal = new THREE.Group();
+			interiorWallsDiagonal.name = 'interior-walls-diagonal';
+			storey.add( interiorWallsDiagonal );
+
+			drawInteriorWallsDiagonal( vertices, verticesOffset, interiorWallsDiagonal );
+
+
+			const exteriorWalls = new THREE.Group();
+			exteriorWalls.name = 'exterior-walls';
+			storey.add( exteriorWalls );
+
+			drawExteriorWalls( vertices, exteriorWalls );
+
+
+			storey.position.z = i * theBuilding.storeyHeight * theBuilding.storeyStretch;
+
+			if ( theBuilding.footprint !== 'Polygon' ) {
+
+				storey.position.x = - theBuilding.length / 2;
+				storey.position.y = - theBuilding.width / 2;
+
+			}
+
+			theBuilding.group.add( storey );
+
+		}
+
+		scene.add( theBuilding.group );
+
+//		addAngles();
+
+//console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
+
+	}
+
+
+
+	function drawSlab( vertices1, vertices2, obj ) {
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		for ( var i = 0; i < vertices1.length - 1 ; i++ ) {
+
+			const verticesShape = [
+
+				vertices1[ i ],
+				vertices2[ i ],
+				vertices2[ i + 1 ],
+				vertices1[ i + 1 ]
+
+			];
+
+			const shape = new THREE.Shape( verticesShape );
+			const geometryShape = new THREE.ShapeBufferGeometry( shape );
+
+			const meshShape = new THREE.Mesh( geometryShape, material );
+			meshShape.name = obj.name + '-slab-' + ( i + 2 );
+			meshShape.userData.angle = 90 + theBuilding.orientation;
+			meshShape.userData.verticesLocal = verticesShape;
+			obj.add( meshShape );
+
+		}
+
+	}
+
+
+
+	function drawInteriorWalls( vertices, obj ) {
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		for ( let i = 0; i < vertices.length - 1; i++ ) {
+
+			const vertex = vertices[ i ];
+			const vertexNext = i < vertices.length - 1 ? vertices[ i + 1 ] : vertices[ 0 ];
+			const angleVector = vertexNext.clone().sub( vertex ).normalize();
+			const angleRadians = Math.atan2( angleVector.y, angleVector.x );
+
+			const length = vertex.distanceTo( vertexNext );
+
+			const verticesShape = [ v2( 0, 0 ), v2( length, 0 ), v2( length, theBuilding.storeyHeight ), v2( 0, theBuilding.storeyHeight ) ];
+
+			const shape = new THREE.Shape( verticesShape );
+			const geometryShape = new THREE.ShapeBufferGeometry( shape );
+			geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+
+			const meshShape = new THREE.Mesh( geometryShape, material );
+			meshShape.position.copy( vertex );
+			meshShape.rotation.z = angleRadians;
+			meshShape.name = 'interior-wall-' + ( i + 1 );
+
+			obj.add( meshShape );
+
+		}
+
+	}
+
+
+
+	function drawInteriorWallsDiagonal( vertices1, vertices2, obj ) {
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+
+		for ( let i = 0; i < vertices1.length - 1; i++ ) {
+
+//			const vertex1 = vertices1[ i ];
+//			const vertex2 = vertices2[ i ];
+
+			vertex1 = i < vertices1.length - 2 ? vertices1[ i + 1 ] : vertices1[ 0 ];
+			vertex2 = i < vertices2.length - 2 ? vertices2[ i + 1 ] : vertices2[ 0 ];
+
+			const angleVector = vertex2.clone().sub( vertex1 );
+			const angleRadians = Math.atan2( angleVector.y, angleVector.x );
+
+			const length = vertex1.distanceTo( vertex2 );
+
+			const verticesShape = [ v2( 0, 0 ), v2( length, 0 ), v2( length, theBuilding.storeyHeight ), v2( 0, theBuilding.storeyHeight ) ];
+
+			const shape = new THREE.Shape( verticesShape );
+			const geometryShape = new THREE.ShapeBufferGeometry( shape );
+			geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+//			geometryShape.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI / 2 ) );
+
+			const meshShape = new THREE.Mesh( geometryShape, material );
+
+
+			meshShape.position.copy( vertex1 );
+			meshShape.rotation.z = angleRadians;
+			meshShape.name = 'interior-wall-diagonal-' + ( i + 1 );
+			obj.add( meshShape );
+
+		}
+
+	}
+
+
+
+	function drawExteriorWalls( vertices, obj ) {
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		for ( let i = 0; i < vertices.length - 1; i++ ) {
+
+			const vertex = vertices[ i ];
+			const vertexNext = i < vertices.length - 1 ? vertices[ i + 1 ] : vertices[ 0 ];
+			const angleVector = vertexNext.clone().sub( vertex ).normalize();
+			const angleRadians = Math.atan2( angleVector.y, angleVector.x );
+
+			const length = vertex.distanceTo( vertexNext );
+
+			const wall = drawWallWithHoles( length, obj );
+
+			wall.name = 'exterior-wall-' + ( i + 1 );
+			wall.position.copy( vertex );
+			wall.rotation.z = angleRadians;
+
+			wall.userData.length = length;
+			wall.userData.lengthDelta = length / theBuilding.openingsPerWall;
+			wall.userData.angle = angleRadians;
+
+			drawOverhangs( length, wall );
+			drawFins( length, wall );
+
+			obj.add( wall );
+
+		}
+
+	}
+
+
+
+	function drawWallWithHoles( length ) {
+
+		const lengthDelta = length / theBuilding.openingsPerWall;
+		const storeyHeight = theBuilding.storeyHeight;
+		const wwr = theBuilding.wwr / 100;
+		const height = storeyHeight;
+		const hgt05 = theBuilding.storeyHeight * 0.5;
+
+		let holes = [];
+
+		verticesWall = [
+			v( length, 0, 0 ),
+			v( length, height, 0 ),
+			v( 0, height, 0 ),
+			v( 0, 0, 0 )
+
+		];
+
+		const shape = new THREE.Shape( verticesWall );
+
+		const lenD05 = lengthDelta * 0.5;
+		const geometryBoundary = new THREE.Geometry();
+		geometryBoundary.vertices = [
+			v( -lenD05, hgt05, 0 ),
+			v( lenD05, hgt05, 0 ),
+			v( lenD05, -hgt05, 0 ),
+			v( -lenD05, -hgt05, 0 )
+
+		];
+
+
+		for ( let i = 0; i < theBuilding.openingsPerWall; i++ ) {
+
+			const geometryOpening = geometryBoundary.clone().scale( wwr, wwr, wwr );
+			geometryOpening.translate( i * lengthDelta + lenD05, hgt05, 0 );
+			const verticesOpening = geometryOpening.vertices;
+			const hole = new THREE.Path();
+			hole.setFromPoints( verticesOpening );
+			shape.holes.push( hole );
+
+			const geometryHoles = geometryOpening.clone().applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+			holes.push( geometryHoles.vertices );
+
+		}
+
+		geometryShape = new THREE.ShapeBufferGeometry( shape );
+		geometryShape.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		const meshWall = new THREE.Mesh( geometryShape, material );
+		meshWall.userData.lengthDelta = lengthDelta;
+		meshWall.userData.holes = holes;
+		meshWall.name = 'wall';
+
+		return meshWall;
+
+	}
+
+
+
+	function drawOverhangs( length, obj ) {
+
+		if ( theBuilding.overhang < 0.5 ) { return; }
+
+		const wwr = theBuilding.wwr / 100;
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		for ( let i = 0; i < obj.userData.holes.length; i++ ) {
+
+			const lengthDelta = obj.userData.lengthDelta;
+
+// looks like points and position calculations could be simplified
+
+			var points = [
+
+				v( lengthDelta * wwr, theBuilding.overhang, 0 ),
+				v( 0, theBuilding.overhang, 0 ),
+				v( 0, 0, 0 ),
+
+				v( lengthDelta * wwr, theBuilding.overhang, 0 ),
+				v( 0, 0, 0 ),
+				v( lengthDelta * wwr, 0, 0 )
+
+			];
+
+//			const geometry = new THREE.PlaneBufferGeometry( lengthDelta * wwr, theBuilding.overhang );
+			const geometry = new THREE.BufferGeometry();
+			geometry.setFromPoints( points );
+
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.name = 'overhang-' + ( i + 1 );
+			mesh.position.set( i * lengthDelta + 0.5 * lengthDelta - lengthDelta * 0.5  * wwr, 0, theBuilding.storeyHeight * 0.5 + theBuilding.storeyHeight * 0.5  * wwr );
+			obj.add( mesh );
+
+		}
+
+	}
+
+
+
+	function drawFins( length, obj ) {
+
+		if ( theBuilding.fin < 0.5 ) { return; }
+
+		const wwr = theBuilding.wwr / 100;
+
+		materialParameters.color = 0xffffff * Math.random();
+		const material = new THREE.MeshPhongMaterial( materialParameters );
+
+		for ( let i = 0; i < obj.userData.holes.length; i++ ) {
+
+			const lengthDelta = obj.userData.lengthDelta;
+
+			var points = [
+				v( 0, theBuilding.fin, theBuilding.storeyHeight * wwr ),
+				v( 0, 0, theBuilding.storeyHeight * wwr  ),
+				v( 0, 0, 0 ),
+
+				v( 0, theBuilding.fin, theBuilding.storeyHeight * wwr ),
+				v( 0, 0, 0 ),
+				v( 0, theBuilding.fin, 0 )
+
+			];
+
+//			const geometry = new THREE.PlaneBufferGeometry( theBuilding.storeyHeight * wwr, theBuilding.fin );
+			const geometry = new THREE.BufferGeometry();
+			geometry.setFromPoints( points );
+//			geometry.rotateY( Math.PI / 2 );
+
+			const mesh = new THREE.Mesh( geometry, material );
+//			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, theBuilding.fin * 0.5, theBuilding.storeyHeight * 0.5 );
+			mesh.position.set( i * lengthDelta + lengthDelta * 0.5 * wwr + lengthDelta / 2, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr );
+
+			mesh.name = 'fin-1-' + ( i + 1 );
+			obj.add( mesh );
+
+			const mesh2 = mesh.clone();
+			mesh2.position.set( i * lengthDelta - lengthDelta * 0.5 * wwr + lengthDelta / 2, 0, theBuilding.storeyHeight * 0.5 - theBuilding.storeyHeight * 0.5  * wwr  );
+			mesh.name = 'fin-2-' + ( i + 2 );
+			obj.add( mesh2 );
+
+		}
+
+	}
+
+
+
+// now all geometry created and in position, so read local data, transform to world, and add as text to items;
+
+	function cccccaddAngles() {
+
+		theBuilding.group.updateMatrixWorld( true );
+
+
+		theBuilding.group.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && !child.name.startsWith( 'slab' ) ) {
+
+					let angle = Math.round( - child.getWorldRotation().z * 180 / Math.PI );
+
+					angle = angle < 0 ? angle + 360 : angle;
+
+					child.userData.angle = angle;
+//console.log( 'ang', child.name, angle );
+
+			}
+
+		} );
+
+
+		walls = theBuilding.group.children[ 0 ].children[ 3 ].children;
+
+		for ( let wall of walls) {
+
+			drawText( wall );
+
+		}
+
+	}
+
+
+
+	function cccccdrawText( obj ) {
+
+//console.log( 'theBuilding.orientation', theBuilding.orientation );
+
+		let material;
+
+		const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		geometry.translate( obj.userData.length / 2, 8, 0 );
+
+		angle = obj.userData.angle;
+
+		if ( angle >= 315 || angle < 45 ) {
+
+//console.log( 'north', angle, obj.name );
+
+			material = new THREE.MeshBasicMaterial( { map: north } );
+
+		} else if ( angle >= 45 && angle < 135 ) {
+
+//console.log( 'east', angle );
+
+			material = new THREE.MeshBasicMaterial( { map: east } );
+
+		} else if ( angle >= 135 && angle < 225 ) {
+
+//console.log( 'south', angle);
+
+			material = new THREE.MeshBasicMaterial( { map: south } );
+
+		} else {
+
+//console.log( 'west', angle );
+
+			material = new THREE.MeshBasicMaterial( { map: west } );
+
+		}
+
+		const mesh = new THREE.Mesh( geometry, material );
+		mesh.name = 'azimuth-indicator';
+
+		obj.add( mesh );
+
+	}
+
+
+
+// points or vertices??
+// Mr.doob uses points. https://threejs.org/docs/#api/extras/core/Path
+
+	function offsetPoints( obj, points, offsetX, offsetY  = 0 ) {
+
+// 2017-11-17
+
+		let lines = [];
+
+		for ( let i = 0; i < points.length - 1; i++ ) {
+
+			let pt1 = points[ i ];
+			let pt2 = points[ i + 1 ];
+
+			const angleVector = pt2.clone().sub( pt1 );
+			const angle = Math.atan2( angleVector.y, angleVector.x );
+
+// redo with THREE.Spherical?
+// https://stackoverflow.com/questions/11039841/how-to-draw-parallel-line-using-three-js
+// https://stackoverflow.com/questions/43229743/offset-mesh-in-three-js
+
+			const offsetPt1 = v( pt1.x - offsetX * Math.cos( angle - Math.PI / 2 ), pt1.y + offsetX * Math.sin( angle + Math.PI / 2 ), 0 );
+			const offsetPt2 = v( pt2.x - offsetX * Math.cos( angle - Math.PI / 2 ), pt2.y + offsetX * Math.sin( angle + Math.PI / 2 ), 0 );
+
+			const line = new THREE.Line3( offsetPt1, offsetPt2 );
+			lines.push( line );
+
+		}
+
+// if first and last point close, deal with it
+
+		if ( points[ 0 ].distanceTo( points[ points.length - 1 ] ) < 0.01 ) {
+
+			pt1 = intersectionTwoLines( lines[ 0 ], lines [ lines.length - 1 ] );
+			pt2 = pt1;
+
+		} else {
+
+			pt1 = lines[ 0 ].start;
+			pt2 = lines[ lines.length - 1 ].end;
+
+		}
+
+		const pointsOffset = [ v( pt1.x, pt1.y, offsetY ) ];
+
+		for ( let i = 0; i < lines.length - 1; i++ ) {
+
+			const pt = intersectionTwoLines( lines[ i ], lines [ i + 1 ] );
+
+			pointsOffset.push( v( pt.x, pt.y, offsetY ) );
+
+		}
+
+		pointsOffset.push( pt2 );
+
+		return pointsOffset;
+
+	}
+
+
+
+	function intersectionTwoLines( line1, line2 ) {
+
+// Use Three.js Ray?
+// 2016-02-10
+// Thanks to http://jsfiddle.net/justin_c_rounds/Gd2S2/ && http://jsfiddle.net/user/justin_c_rounds/fiddles/
+
+		const line1start = line1.start;
+		const line1end = line1.end;
+		const line2start = line2.start;
+		const line2end = line2.end;
+
+		const denominator =
+			( line2end.y - line2start.y ) * ( line1end.x - line1start.x )
+			- ( line2end.x - line2start.x ) * ( line1end.y - line1start.y );
+
+		if ( denominator == 0 ) { return; }
+
+		const a =
+			( ( line2end.x - line2start.x ) * ( line1start.y - line2start.y )
+			- ( line2end.y - line2start.y ) * ( line1start.x - line2start.x ) ) / denominator;
+
+		const x = line1start.x + ( a * ( line1end.x - line1start.x ) );
+		const y = line1start.y + ( a * ( line1end.y - line1start.y ) );
+
+		return new THREE.Vector3( x, y, 0 );
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>
