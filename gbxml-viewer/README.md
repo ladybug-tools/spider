@@ -185,12 +185,13 @@ App2 R8.5
 * 2017-12-01 ~ Add a 'ground' that can receive shadow
 
 8.6
+21:32
 * Fix some of the reset view issues
 * Highlight all duplicate adjacencies in red
 * Add better spacing between duplicate adjacencies log
 * Tiny surface telltale now has opacity - so you can see very tine things inside the telltale
 * location hash and splash screen working together better
-
+* Add button to turn off heads-up - not yet a nice toggle
 
 ### 2017-12-05 ~ Theo
 

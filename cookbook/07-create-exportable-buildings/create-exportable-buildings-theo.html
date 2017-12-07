@@ -1303,7 +1303,7 @@
 				const slabGeometry = new THREE.Geometry().fromBufferGeometry( slab.geometry );
 //console.log( 'slabGeometry', slabGeometry  );
 
-				const area = THREE.ShapeUtils.area( slabGeometry.vertices.reverse() );
+				const area = THREE.ShapeUtils.area( slabGeometry.clone().vertices.reverse() );
 				theBuilding.area += area;
 //console.log( 'area', theBuilding.area );
 //console.log( 'area', area.toLocaleString() );

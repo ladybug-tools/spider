@@ -303,8 +303,8 @@
 
 				surfOther = surfaces[ surfaceIds[ index ] ];
 
-console.log( 'surface', surface );
-console.log( 'surfOther', surfOther );
+//console.log( 'surface', surface );
+//console.log( 'surfOther', surfOther );
 
 				flowContent += 
 					'<p>' + count + 
@@ -318,7 +318,7 @@ console.log( 'surfOther', surfOther );
 						( surfOther.Name ? 'Name: ' + surfOther.Name + b : '' ) +
 						( surfOther.CADObjectId ? 'CADObjectId: ' + surfOther.CADObjectId + b : '' ) +
 
-					'</p>' + b;
+					'</p><hr>' + b;
 
 				count ++;
 
