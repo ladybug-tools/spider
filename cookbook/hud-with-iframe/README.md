@@ -16,7 +16,7 @@ _HUD with iframe_
 * Given a number of objects in 3D space in a main window
 	* Clicking on any one of the objects in the main window causes objects to appear in a smaller window
 	* Various parameters of the objects in the smaller window are based ob the parameters of the object selected in the main window
-
+	* Intended for use with [Scatter Well]( http://www.ladybug.tools/spider/#sandbox/scatter-well/README.md )
 
 
 ## Change Log
