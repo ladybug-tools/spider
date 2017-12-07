@@ -44,9 +44,12 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 		url = 'https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml'
 
-		divContents.style.maxWidth = '100%';
-		document.body.style.overflow = 'hidden';
-		divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + url + ' style=height:100%;border:none; ></iframe>';
+		if ( parent && parent.divContents ) {
 
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+			divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + url + ' style=height:100%;border:none; ></iframe>';
+
+		}
 
 	}

@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-05" >
-<title>gbXML Viewer R8.6 App2</title>
+<title>gbXML Viewer R8.7 App2</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -32,13 +32,13 @@
 
 	td { vertical-align: top; }
 
+	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+
 	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 
 	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; color: #ddd; height: 100%; margin: 0;
 		overflow: auto; padding: 0px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
-
-
 
 	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
@@ -87,12 +87,12 @@
 		</p>
 
 
-		<p>
+		<p id=dragArea class=dragDropArea >
+			Drag and drop a gbXML file in this area or <br>
 			<input type = "file" id = "inpFile" onchange="ifrThree.contentWindow.openFile(this);" >
 		<p>
 
 		<hr>
-
 
 <!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display.js';document.head.appendChild(script);})()" >heads-up display</a></p> -->
 		<p><a href="JavaScript:(function(){
@@ -196,7 +196,8 @@
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
-//		aSplashScreen.click();
+		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+		dragArea.addEventListener( 'drop', drop, false );
 
 		onHashChange();
 
@@ -244,6 +245,26 @@
 		} else {
 
 			requestFile( urlGitHubPage + url, callbackToTextarea );
+
+		}
+
+	}
+
+
+
+	function drop( event ) {
+
+		event.preventDefault(); 
+
+		var iframeUrl = event.dataTransfer.getData( 'URL' );
+
+		if ( iframeUrl ) {
+
+			ifrThree.contentWindow.location.hash = iframeUrl;
+
+		} else {
+
+			ifrThree.contentWindow.openFile( event.dataTransfer );
 
 		}
 

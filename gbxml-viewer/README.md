@@ -125,8 +125,7 @@ See also:
 
 ### Core
 
-* 2017-12-01 ~ Load files via drag and drop
-* 2017-12-02 ~ Add test file??
+
 * Lights and shadows
 * Section views
 
@@ -139,7 +138,7 @@ See also:
 
 ### Heads-up Display
 
-* 2017-12-01 ~ Add choice of display in right-side menu
+
 * 2017-12-01 ~ What data should be included in heads-up display?
 * 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
 
@@ -172,6 +171,22 @@ Will most likely build upon
 
 ## Change Log
 
+
+### 2017-12-07 ~ Theo
+
+R8.7
+* Templates: code clean-up
+	* Add drag and drop capability
+* Settings:
+	* Add set color by exposure type
+* App2
+	* Add drag and drop capability
+
+Done
+
+* 2017-12-01 ~ Load files via drag and drop
+* 2017-12-02 ~ Add test file??
+* 2017-12-01 ~ Add choice to display in right-side menu
 
 ### 2017-12-06 ~ Theo
 

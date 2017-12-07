@@ -42,6 +42,9 @@
 
 			'<p><button onclick=setDefaultMaterial(); >Set default material</button></p>' +
 
+			'<p><button onclick=setExposureMaterial(); >Set exposure type material</button></p>' +
+
+
 			'<hr>' +
 
 			'<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
@@ -140,6 +143,43 @@
 
 				child.material =
 					new THREE.MeshPhongMaterial( { color: icw.colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+
+			}
+
+		} );
+
+	}
+
+
+	function setExposureMaterial() {
+
+
+		var colorsExposure = {
+
+			InteriorWall: 0xffff00,
+			ExteriorWall: 0x00ff00,
+			Roof: 0x00ff00,
+			InteriorFloor: 0xffff00,
+			ExposedFloor: 0x00ff00,
+			Shade: 0x00ff00,
+			UndergroundWall: 0x00ffff,
+			UndergroundSlab: 0x00ffff,
+			Ceiling: 0xffff00,
+			Air: 0xffff00,
+			UndergroundCeiling: 0xffff00,
+			RaisedFloor: 0xffff00,
+			SlabOnGrade: 0x00ffff,
+			FreestandingColumn: 0xffff00,
+			EmbeddedColumn: 0xffff00
+
+		}
+
+		surfaceMeshes.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material =
+					new THREE.MeshPhongMaterial( { color: colorsExposure[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
 			}
 
