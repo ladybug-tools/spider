@@ -114,10 +114,9 @@ See also:
 
 #### Full screen test: [gbXML Viewer8 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html )
 
-
 * Create text reports of data embedded in gbXML files
 * Toggle the display of 3D surfaces based on user input
-* Create detailed interactive reports of issues discoverd.
+* Create detailed interactive reports of issues discovered.
 
 
 ## To Do
@@ -125,31 +124,29 @@ See also:
 
 ### Core
 
-
 * Better lights and shadows
 * Section views
-
-### Right Side Menu
-
-* Add menu slider
 
 ### First Person camera
 
 
 ### Heads-up Display
 
+* 2017-12-07 ~ Theo: Add better size adjustment
+* 2017-12-07 ~ Michal: toggle for HUD
 * 2017-12-01 ~ What data should be included in heads-up display?
 * 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
 
 
-### Reports
-
-* 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
-* 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
-
-
 ### Settings
 
+* 2017-12-07 ~ Michal: Toggle for Ortho camera
+
+### Reports
+
+* 2017-12-07 ~ Theo: Refresh reports each time a new model is loaded
+* 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
+* 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
 
 
 ### Template
@@ -161,7 +158,7 @@ See also:
 
 Not yet started
 
-2017-12-02 ~ Michal: Add abilty to edit and save gbXML files
+2017-12-02 ~ Michal: Add ability to edit and save gbXML files
 
 Will most likely build upon
 

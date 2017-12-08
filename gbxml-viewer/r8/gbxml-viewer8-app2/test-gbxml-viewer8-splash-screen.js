@@ -8,7 +8,21 @@
 		let txt = 
 
 `
+
 <details open>
+<summary>2017-12-07</summary>
+
+R8.7<br>
+* View building storeys<br>
+* Zoom into spaces<br>
+* Drag and drop files<br>
+* And many small fixes<br>
+
+</details>
+
+<br>
+
+<details>
 <summary>2017-12-06</summary>
 
 R8.5
@@ -19,8 +33,6 @@ R8.5
 * App2: add footer menu items<br>
 
 </details>
-
-<br>
 
 <details>
 <summary>2017-12-05</summary>
