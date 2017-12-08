@@ -162,11 +162,12 @@ See also:
 
 ### Settings
 
-* 2017-12-07 ~ Michal: Set smallnes size for tiny spaces and tiny surfaces
+* 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
 * 2017-12-07 ~ Michal: Toggle for Ortho camera
 
 ### Reports
 
+* 2017-12-08 ~ Michal: Is there any chace to almost replicate in storey view - floor plans with space name and number
 * 2017-12-07 ~ Theo: Refresh reports each time a new model is loaded
 * 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
 * 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
@@ -189,6 +190,23 @@ Will most likely build upon
 
 
 ## Change Log
+
+
+### 2017-12-08 ~ Theo
+
+* Core
+	* Add 'reset view' button resets background, camera, material colors
+* Reports
+	* Add toggle visibility for each surface type
+	* Add display zone count and names per storey
+
+Note
+'reset view' button not currently working in reports, so has been disabled for the moment
+
+Done
+* 2017-12-08 ~ Michal: reset view: includes background gradient , materials colors or camera ortho
+* 2017-12-08 ~ Michal: Storey ability to hide roofs or floor to better see layout
+* 2017-12-08 ~ Michal: can we show number of zones per storey?
 
 
 ### 2017-12-07 ~ Theo

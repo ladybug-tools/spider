@@ -54,6 +54,10 @@
 		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
 		renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
 
+console.log( '',  );
+
+		aHeadsUp.style.backgroundColor = 'pink';
+
 	}
 
 

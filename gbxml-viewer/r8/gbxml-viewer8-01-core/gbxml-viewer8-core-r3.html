@@ -541,9 +541,16 @@
 
 		surfaceMeshes.visible = true;
 
+		document.body.style.backgroundImage = '';
+
+
+
 		for ( let child of surfaceMeshes.children ) {
 
-			child.material.opacity = 0.85;
+
+			child.material = new THREE.MeshPhongMaterial( { 
+				color: colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } 
+			);
 			child.material.wireframe = false;
 			child.visible = true;
 
@@ -557,6 +564,15 @@
 			child.material.wireframe = false;
 
 		};
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
+
+		camera.add( lightPoint );
+		scene.add( camera );
 
 	}
 

@@ -10,6 +10,21 @@
 `
 
 <details open>
+<summary>2017-12-08</summary>
+
+R8.8<br>
+Core<br>
+	* Add 'reset view' button resets background, camera, material colors<br>
+Reports<br>
+	* Add toggle visibility for each surface type<br>
+	* Add display zone count and names per storey<br>
+
+
+</details>
+
+<br>
+
+<details>
 <summary>2017-12-07</summary>
 
 R8.7<br>
@@ -19,8 +34,6 @@ R8.7<br>
 * And many small fixes<br>
 
 </details>
-
-<br>
 
 <details>
 <summary>2017-12-06</summary>

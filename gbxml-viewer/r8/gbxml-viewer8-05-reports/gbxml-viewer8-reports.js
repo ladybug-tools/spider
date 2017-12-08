@@ -179,6 +179,7 @@
 		const storeys = gbjson.Campus.Building.BuildingStorey;
 		let flowContent = '';
 		let count = 0;
+		let zones;
 //console.log( 'storeys', storeys  );
 
 		if ( storeys ) {
@@ -191,8 +192,8 @@
 					flowContent += '<div style=margin-bottom:10px; > ' +
 						( count ++ ) +
 						'. id: ' + storey.id + b +
-						' name: <button onclick=toggleStorey("' + storey.id + '"); >' + storey.Name + '</button>' + b +
-						( storey.Level ? 'Level: ' + storey.Level + b : '' ) +
+						' name: <button onclick=\'zones = toggleStorey("' + storey.id + '",this);\' >' + storey.Name + '</button>' + b +
+						( storey.Level ? 'level: ' + storey.Level + b : '' ) +
 					'</div>';
 
 				}
@@ -204,8 +205,8 @@
 				flowContent += '<div style=margin-bottom:10px; > ' +
 					( ++ count ) +
 					'. id: ' + storeys.id + b +
-					' name: <button onclick=toggleStorey("' + storeys.id + '"); >' + storeys.Name + '</button>' + b +
-					( storeys.Level ? 'Level: ' + storeys.Level + b : '' ) +
+					' name: <button onclick=\'zones = toggleStorey("' + storeys.id + '",this);\' >' + storeys.Name + '</button>' + b +
+					( storeys.Level ? 'level: ' + storeys.Level + b : '' ) +
 				'</div>';
 
 
@@ -313,11 +314,18 @@
 
 		for ( let i = 0; i < types.length; i++ ) {
 
-			txt += '<button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + '%<br>';
+			txt += 
+				'<button class=toggle onclick=seTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
+				' <button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + 
+				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + 
+				'%<br>';
 
 		}
+/*
+		txt += 
 
-		txt += '<button class=toggle onclick=icw.setAllVisible(); >all visible</button>: ' 
+			'<button class=toggle onclick=icw.setAllVisible();icw.zoomObjectBoundingSphere(surfaceMeshes); >all visible</button>: ' 
+*/
 
 		const summary = 'Surfaces: ' + surfaces.length;
 
@@ -505,12 +513,14 @@
 
 
 
-	function toggleStorey( id ) {
+	function toggleStorey( id, node ) {
 
 //console.log( 'id', id );
 
 		const spaces = gbjson.Campus.Building.Space;
 		surfaceGroup.visible = true;
+
+		zones = [];
 
 		for ( let child of surfaceMeshes ) {
 
@@ -530,16 +540,24 @@
 
 				if ( space.id === spaceIdRef && space.buildingStoreyIdRef === id ) {
 
+
 					child.visible = true;
+
+					if ( !zones.includes( space.zoneIdRef ) ) { zones.push( space.zoneIdRef ); }
 
 				}
 
 			}
 
 		}
+console.log( 'node', node );
+
+		tt = node
+		node.parentNode.innerHTML += 'zones ' + zones.length + ': ' + zones.join();
+
+		return zones;
 
 	}
-
 
 
 
@@ -608,6 +626,27 @@
 				if ( surfaceAdjacencies.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
 
 				child.visible = true;
+
+			}
+
+		};
+
+	}
+
+
+
+	function seTypeInvisible( that ) {
+
+		surfaceGroup.visible = true;
+//console.log( '', surfaceAdjacencies );
+
+		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
+
+		for ( let child of surfaceMeshes ) {
+
+			if ( child.userData.data.surfaceType === that.value ) {
+
+				child.visible = !child.visible;
 
 			}
 
