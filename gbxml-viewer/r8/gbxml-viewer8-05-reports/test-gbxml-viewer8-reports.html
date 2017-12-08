@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Create text reports of data embedded in gbXML files. Toggle the display of 3D surfaces based on user input. Create detailed interactive reports of issues discoverd." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-04" >
-<title></title>
+<meta name = "date" content = "2017-12-07" >
+<title>test gbxml viewer8 reports</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -18,6 +18,8 @@
 	button:hover { background-color: #ccc; color: #fff }
 
 	iframe { height: 500px; width: 100%; }
+
+	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
 </style>
 </head>
@@ -31,35 +33,28 @@
 	<p>If it does not open automatically, click 'reports' to load reports menu.</p>
 
 	<p>
-		<a id=aThree href=
-			"JavaScript:(function(){var script=document.createElement('script');
+		<a id=aThree href="JavaScript:(function(){
+			const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src='gbxml-viewer8-reports.js';
-			document.head.appendChild(script);})()" >
+		})()" >
 		reports</a>
 	</p>
 
-<!--
-	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html#../../gbxml-sample-files/sam-live2.xml' ></iframe>
--->
 	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
 
-	<div id=divAppMenu ></div>
+	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
-	<p>
-		<input type=file id=inpFile onchange=icw.openFile(this);divReport.innerHTML=''; >
-	<p>
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/gbxml-standard-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></p>
+
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/open-studio-seb.xml" >open studio seb</a></p>
 
 	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" >sam live2</a> </p>
 
-
-	<p><a href="#../../../read-gbxml/data-files/rac_basic_sample_project.xml" >rac_basic_sample_project</a> </p>
-
-	<p>Duplicate coordinates: <a href="#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml" >ARCH_ASHRAE Headquarters </a> </p>
-
-	<p>Duplicate coordinates: <a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" </a> </p>
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml" >urban house mep</a></p>
 
 <script>
 
+	var divAppMenu;
 
 	init();
 
@@ -67,15 +62,19 @@
 	function init() {
 
 		divTitle.innerHTML = 
-			'<h2><a href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>' +
+			'<h2><a  href = "" >' + document.title + '</a></h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
+		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+		dragArea.addEventListener( 'drop', drop, false );
+
 		onHashChange();
 
 	}
+
 
 
 	function onHashChange() {
@@ -85,6 +84,26 @@
 		ifrThree.contentWindow.location.hash = '#' + url;
 
 	}
+
+
+	function drop( event ) {
+
+		event.preventDefault(); 
+
+		var iframeUrl = event.dataTransfer.getData( 'URL' );
+
+		if ( iframeUrl ) {
+
+			ifrThree.contentWindow.location.hash = iframeUrl;
+
+		} else {
+
+			ifrThree.contentWindow.openFile( event.dataTransfer );
+
+		}
+
+	}
+
 
 
 	function onloadThreejs() {

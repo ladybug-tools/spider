@@ -69,11 +69,9 @@
 		const mapLink = getGoogleMap();
 		divReport.innerHTML += addDetails( 'Campus Location' + mapLink, locate.attributes );
 
+
 		const building = traversGbjson( gbjson.Campus.Building );
 		divReport.innerHTML += addDetails( 'Building', building.attributes );
-
-		const storeys = getStoreys();
-		divReport.innerHTML += addDetails( storeys.summary, storeys.flowContent );
 
 		const spaces = getSpaces();
 		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent );
@@ -169,51 +167,6 @@
 		}
 
 		return linkToMap;
-
-	}
-
-
-
-	function getStoreys() {
-
-		const storeys = gbjson.Campus.Building.BuildingStorey;
-		let flowContent = '';
-		let count = 0;
-//console.log( 'storeys', storeys  );
-
-		if ( storeys ) {
-
-			if ( Array.isArray( storeys ) === true ) {
-
-				for ( let storey of storeys ) {
-//console.log( 'storey', storey );
-
-					flowContent += '<div style=margin-bottom:10px; > ' +
-						( count ++ ) +
-						'. id: ' + storey.id + b +
-						' name: <button onclick=toggleStorey("' + storey.id + '"); >' + storey.Name + '</button>' + b +
-						( storey.Level ? 'Level: ' + storey.Level + b : '' ) +
-					'</div>';
-
-				}
-
-			} else {
-
-//console.log( 'storeys', storeys );
-
-				flowContent += '<div style=margin-bottom:10px; > ' +
-					( ++ count ) +
-					'. id: ' + storeys.id + b +
-					' name: <button onclick=toggleStorey("' + storeys.id + '"); >' + storeys.Name + '</button>' + b +
-					( storeys.Level ? 'Level: ' + storeys.Level + b : '' ) +
-				'</div>';
-
-
-			}
-
-		}
-
-		return { summary: 'Storeys &raquo; ' + count, flowContent: flowContent };
 
 	}
 
@@ -410,7 +363,7 @@
 
 		}
 
-//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
+console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 
 		count = surfacesIds.length === 1 ? 0 : count;
 		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent };
@@ -423,7 +376,7 @@
 
 		const surfaces = gbjson.Campus.Surface;
 		let count = 0;
-		let flowContent = '<br>';
+		let flowContent = '';
 
 		for ( let surface of surfaces ) {
 
@@ -436,15 +389,15 @@
 //console.log( 'adjacencies', adjacencies  );
 
 				flowContent += 
-					'<div style=margin-bottom:35px; >' + 
-						( ++ count ) +  
+					'<p>' + count + 
 						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
 						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-					
-					'<hr></div>';
+					'</p><hr>';
+
+				count ++;
 
 			}
 
@@ -505,44 +458,6 @@
 
 
 
-	function toggleStorey( id ) {
-
-//console.log( 'id', id );
-
-		const spaces = gbjson.Campus.Building.Space;
-		surfaceGroup.visible = true;
-
-		for ( let child of surfaceMeshes ) {
-
-			child.visible = false;
-
-		}
-
-		for ( let child of surfaceMeshes ) {
-
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-			if ( !adjacentSpaceId ) { continue; }
-
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-			for ( let space of spaces ) {
-
-				if ( space.id === spaceIdRef && space.buildingStoreyIdRef === id ) {
-
-					child.visible = true;
-
-				}
-
-			}
-
-		}
-
-	}
-
-
-
-
 	function toggleSurface( id ) {
 
 		surfaceGroup.visible = true;
@@ -570,8 +485,8 @@
 
 
 	function zoomIntoSurface( surface ){
-//console.log( 'surface', surface );
 
+//console.log( 'surface', surface );
 		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
 
 		radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
@@ -582,6 +497,7 @@
 		telltale = new THREE.Mesh( geometry, material );
 		telltale.position.copy( center );
 		scene.add( telltale );
+
 
 		icw.controls.target.copy( center );
 		icw.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
@@ -619,14 +535,13 @@
 
 	function toggleSpace( id ) {
 
-
+//console.log( 'id', id );
 
 		surfaceGroup.visible = true;
 
 		for ( let child of surfaceMeshes ) {
 
 			child.visible = false;
-
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
 
 			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
@@ -639,20 +554,164 @@
 
 					child.visible = true;
 
-					const type = child.userData.data.surfaceType;
-
-					if ( type === 'InteriorFloor' || type === 'SlabOnGrade' || type === 'RaisedFloor' || type === 'UndergroundSlab' ) {
-
-						zoomIntoSurface( child )
-
-					}
-
 				}
 
 			}
 
-
 		} 
+
+	}
+
+
+
+	function xxxexamineGbjson( gbjson ) {
+
+		surfaces = [];
+
+		const b = '<br>';
+		let txt = 
+			'File: ' + gbjson.name + b +
+			'Number of surfaces: ' + gbjson.Campus.Surface.length +
+		'';
+
+		let t$ = '';
+
+		let surfacesCount = 0;
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
+
+			if ( !surfaces.includes( points ) ) { 
+
+				surfaces.push( points ); 
+
+			} else {
+
+console.log( 'duplicate surface', surface );
+
+				t$ += 
+					'<p>' + surfacesCount + 
+						'. id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+					'</p>';
+
+				surfacesCount ++;
+
+			}
+
+		}
+
+
+
+		divReport.innerHTML += addDetails( 'Duplicate Surfaces: ' + surfacesCount, t$ );
+//		txt += '<h3>' + surfacesCount + ' Duplicate Surfaces</h3>' + t$;
+
+
+		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> ' 
+
+
+		adjacenciesCount = 0;
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			adjacencies = surface.AdjacentSpaceId;
+
+			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+
+//console.log( 'surface', surface );
+//console.log( 'duplicate adjacencies', adjacencies );
+
+				t$ += 
+					'<p>' +
+						( adjacenciesCount + 1 ) + '. id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: <button onclick=toggleDuplicateAdjacency(this); style=width:200px >' + surface.Name + '</button>' + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+						'Adjacencies : ' + adjacencies[ 0 ].spaceIdRef + b +
+					'</p>';
+
+				adjacenciesCount ++;
+
+			}
+
+		}
+
+
+//		txt += '<h3>' + adjacenciesCount + ' Duplicate Adjacencies</h3>' + t$;
+
+		divReport.innerHTML += addDetails( 'Duplicate Adjacencies: ' + adjacenciesCount, t$ );
+
+
+		coordinatesCount = 0;
+		verticesModelDuplicates = 0
+		verticesModel = [];
+		t$ = ''
+
+
+		for ( let surface of gbjson.Campus.Surface ) {
+
+			points = surface.PlanarGeometry.PolyLoop.CartesianPoint;
+
+			verticesSurface = [];
+
+			for ( point of points ) {
+
+				vertex = JSON.stringify( point );
+
+				if ( !verticesSurface.includes( vertex ) ) { 
+
+					verticesSurface.push( vertex ); 
+
+				} else {
+
+console.log( 'dup', vertex );
+
+				t$ += 
+					'<p>' +
+						'id: ' + surface.id + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						'Name: ' + surface.Name + b +
+						'CADObjectId: ' + surface.CADObjectId + b +
+//						'Adjacencies : ' + adjacencies[ 0 ].spaceIdRef + b +
+					'</p>';
+
+				}
+
+
+				if ( !verticesModel.includes( vertex ) ) { 
+
+					verticesModel.push( vertex ); 
+
+				} else {
+
+//console.log( 'dup in model', vertex );
+
+					verticesModelDuplicates ++;
+
+				}
+
+				coordinatesCount ++;
+
+			}
+
+//console.log( '', vertices );
+
+		}
+
+		t$ = '' +
+			'Coordinates checked: ' + coordinatesCount + b +
+			'Unique coordinates in model: ' + verticesModel.length + b +
+			'Duplicate coordinates in model: ' + verticesModelDuplicates + b +
+		'';
+
+
+		divReport.innerHTML += addDetails( 'Duplicate Coordinates', t$ );
+
+//		divMenuItems.innerHTML = txt;
+
 
 	}
 
@@ -685,6 +744,7 @@
 
 		for ( let child of surfaceMeshes ) {
 
+
 			if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
 				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
 				&& child !== thatChild
@@ -692,6 +752,7 @@
 
 				child.visible = true;
 console.log( 'space', space );
+
 
 			} else {
 

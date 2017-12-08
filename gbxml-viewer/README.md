@@ -126,7 +126,7 @@ See also:
 ### Core
 
 
-* Lights and shadows
+* Better lights and shadows
 * Section views
 
 ### Right Side Menu
@@ -137,7 +137,6 @@ See also:
 
 
 ### Heads-up Display
-
 
 * 2017-12-01 ~ What data should be included in heads-up display?
 * 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
@@ -177,8 +176,16 @@ Will most likely build upon
 R8.7
 * Templates: code clean-up
 	* Add drag and drop capability
+	* Better selection of sample files
 * Settings:
 	* Add set color by exposure type
+	* Add drag and drop capability
+	* Better selection of sample files
+* Reports
+	* Add drag and drop capability
+	* Better selection of sample files
+	* Add view storey
+	* Add is a space has an 'InteriorFloor' or 'SlabOnGrade' or 'RaisedFloor' or 'UndergroundSlab' then zoom into that space
 * App2
 	* Add drag and drop capability
 
