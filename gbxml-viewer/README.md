@@ -102,13 +102,35 @@ See also:
 
 #### Full Screen test: [gbXML Viewer8 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-02-gallery/test-gallery-viewer.html )
 
+* Use the GitHub API to obtain directory listings of file names
+* Display list of file names as links to source
+* Clicking links displays
+	* The source
+	* View the file in this gallery window
+	* View the file full screen in its own window
+		* Link may be use to embed file in other app or HTML pages
+
 
 
 ### Settings
 
+#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-04-settings/README.md )
+
+#### Full Screen test: [test-gbxml-viewer8-settings ]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-04-settings/test-gbxml-viewer8-settings.html )
+
+* Set random, phonf=g default, normal or default material
+* Toggle background gradient
+* Toggle wireframe
+* Draw surface normals
+* Toggle axes
+* Toggle scene rotation
+* Set Camera Ortho
+	* Not yet a toggle/Reload page to return to a perspective view
+* Opacity slider
+
+
 
 ### Reports
-
 
 #### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-05-reports/README.md )
 
@@ -140,6 +162,7 @@ See also:
 
 ### Settings
 
+* 2017-12-07 ~ Michal: Set smallnes size for tiny spaces and tiny surfaces
 * 2017-12-07 ~ Michal: Toggle for Ortho camera
 
 ### Reports
