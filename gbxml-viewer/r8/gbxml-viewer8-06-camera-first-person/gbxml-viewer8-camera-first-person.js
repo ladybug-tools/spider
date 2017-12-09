@@ -58,12 +58,18 @@
 
 			butCameraFirstPerson.style.backgroundColor = 'pink';
 
+		} else {
+
+			toggleCameraFirstPersonOff()
+
+
 		}
 
 	}
 
 
 	function toggleCameraFirstPersonOff() {
+
 console.log( '', 23 );
 		scene.remove( avatar );
 		butCameraFirstPerson.style.backgroundColor = '';
