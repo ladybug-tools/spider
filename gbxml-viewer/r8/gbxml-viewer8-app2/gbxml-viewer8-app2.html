@@ -94,23 +94,37 @@
 
 		<hr>
 
-<!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display.js';document.head.appendChild(script);})()" >heads-up display</a></p> -->
-		<p><a href="JavaScript:(function(){
+		<p>
+			<button id=butHeadsUp onclick="( function(){
 				const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src='../gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display2.js';
-			})()" title="Click on any surface to view its details" >enable heads-up display</a>
-
-				<button onclick=stopHeadsUp() >stop heads-up</button>
+				script.src = '../gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display3.js';
+			;})()" >
+			toggle heads-up</button>
 		</p>
 
 <!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p> -->
-		<p><a href="JavaScript:(function(){
+		<p>
+			<a href="JavaScript:(function(){
 			var script=document.createElement('script');
 			script.src='../gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';
 			document.head.appendChild(script);})()" >settings</a></p>
 
 <!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';document.head.appendChild(script);})()" >reports</a></p> -->
-		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='../gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';document.head.appendChild(script);})()" >reports</a></p>
+		<p>
+			<a href="JavaScript:(function(){
+				var script=document.createElement('script');
+				script.src='../gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';
+				document.head.appendChild(script);
+			})()" >reports</a></p>
+
+
+		<p>
+			<button id=butCameraFirstPerson onclick="( function(){
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gbxml-viewer8-06-camera-first-person/gbxml-viewer8-camera-first-person.js';
+			} )()" >
+			gbxml-viewer8-camera-first-person</button>
+		</p>
 
 		<hr>
 

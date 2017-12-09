@@ -315,8 +315,8 @@
 
 		if ( !cameraOrtho ) {
 
-			const width = 300;
-			const height = 300;
+			const width = 300; //surfaceMeshes.userData.radius > 10 ? 3 * surfaceMeshes.userData.radius : 200;
+			const height = 300; // surfaceMeshes.userData.radius > 10 ? 3 * surfaceMeshes.userData.radius : 200; //; //  * surfaceMeshes.userData.radius;
 			cameraOrtho = new icw.THREE.OrthographicCamera( width / -3, width / 3, height / 3, height / - 3, 1, 1000 );
 			cameraOrtho.up.set( 0, 0, 1 );
 			icw.scene.add( cameraOrtho );

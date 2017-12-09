@@ -155,7 +155,6 @@ See also:
 ### Heads-up Display
 
 * 2017-12-07 ~ Theo: Add better size adjustment
-* 2017-12-07 ~ Michal: toggle for HUD
 * 2017-12-01 ~ What data should be included in heads-up display?
 * 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
 
@@ -167,7 +166,7 @@ See also:
 
 ### Reports
 
-* 2017-12-08 ~ Michal: Is there any chace to almost replicate in storey view - floor plans with space name and number
+* 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
 * 2017-12-07 ~ Theo: Refresh reports each time a new model is loaded
 * 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
 * 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
@@ -194,6 +193,15 @@ Will most likely build upon
 
 ### 2017-12-08 ~ Theo
 
+
+R8.9
+* Core
+	* Add 'reset view' calls createReport() 
+* HUD
+	* Add toggle button
+	* Toggle off when new file loaded
+
+R8.8
 * Core
 	* Add 'reset view' button resets background, camera, material colors
 * Reports
@@ -204,6 +212,7 @@ Note
 'reset view' button not currently working in reports, so has been disabled for the moment
 
 Done
+* 2017-12-07 ~ Michal: toggle for HUD
 * 2017-12-08 ~ Michal: reset view: includes background gradient , materials colors or camera ortho
 * 2017-12-08 ~ Michal: Storey ability to hide roofs or floor to better see layout
 * 2017-12-08 ~ Michal: can we show number of zones per storey?

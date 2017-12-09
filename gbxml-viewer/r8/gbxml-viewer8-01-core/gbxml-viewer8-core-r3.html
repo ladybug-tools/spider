@@ -543,10 +543,7 @@
 
 		document.body.style.backgroundImage = '';
 
-
-
 		for ( let child of surfaceMeshes.children ) {
-
 
 			child.material = new THREE.MeshPhongMaterial( { 
 				color: colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } 
@@ -573,6 +570,8 @@
 
 		camera.add( lightPoint );
 		scene.add( camera );
+
+		if ( parent.createReport ) { parent.createReport(); }
 
 	}
 

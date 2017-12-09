@@ -4,76 +4,68 @@
 	var renderer;
 	var camera;
 	var gbjson;
-	var headsUp; 
+	var divHeadsUp; 
 	var intersected;
 	var objects;
 	var mouse;
 
-	init();
 
-	function init() {
+	initHeadsUp();
 
-		if ( !headsUp ) {
+	function initHeadsUp() {
 
-			headsUp = document.body.appendChild( document.createElement( 'div' ) );
-			headsUp.style.cssText = 
-				'background-color: #ddd; border-radius: 8px; display: none; height: 300px; min-width: 200px; opacity: 0.95; ' +
-				' overflow: auto; padding: 0 5px 10px 5px; position: fixed; resize: both; z-index: 1000; ' +
+		if ( !divHeadsUp ) {
+
+			divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
+			divHeadsUp.style.cssText = 
+				'background-color: #ddd; border-radius: 8px; display: none; min-height: 100px; min-width: 200px; opacity: 0.95; ' +
+				' overflow: auto; padding: 5px 5px 10px 5px; position: fixed; resize: both; z-index: 1000; ' +
 			'';
 
 		}
 
-		icw = ifrThree.contentWindow;
-		icw.renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
+		if ( butHeadsUp.style.backgroundColor !== 'pink' ) {
 
-		initHeadsUp();
+			icw = ifrThree.contentWindow;
+			THREE = icw.THREE;
+			renderer = icw.renderer;
+			camera = icw.camera;
+			gbjson = icw.gbjson;
+			surfaceMeshesChildren = icw.surfaceMeshes.children;
 
-	}
+			mouse = new THREE.Vector2();
 
+			icw.addEventListener ( 'hashchange', toggleHeadsUpOff, false );
 
+			renderer.domElement.addEventListener( 'click', onDocumentMouseMove, false );
+			renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
 
-	function initHeadsUp() {
+			butHeadsUp.style.backgroundColor = 'pink';
 
-		icw = ifrThree.contentWindow;
-		THREE = icw.THREE;
-		renderer = icw.renderer;
-		camera = icw.camera;
-		gbjson = icw.gbjson;
+		} else {
 
-		objects = [];
-		mouse = new THREE.Vector2();
+			toggleHeadsUpOff();
 
-		campusSurfacesArray = icw.surfaceMeshes.children;
-
-//		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
-//		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
-
-		renderer.domElement.addEventListener( 'click', onDocumentMouseMove, false );
-//		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
-
-		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
-		renderer.domElement.addEventListener( 'click', icw.onClickEvent, false );
-
-console.log( '',  );
-
-		aHeadsUp.style.backgroundColor = 'pink';
+		}
 
 	}
 
 
 
-	function stopHeadsUp() {
+	function toggleHeadsUpOff() {
 
 		if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
 		if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
-		headsUp.style.display = 'none';
-		campusSurfacesArray = [];
+		divHeadsUp.style.display = 'none';
+		surfaceMeshesChildren = [];
 
 		renderer.domElement.removeEventListener( 'click', icw.onDocumentMouseMove, false );
 		renderer.domElement.removeEventListener( 'click', icw.onDocumentMouseDown, false );
 
-	}
+		butHeadsUp.style.backgroundColor = '';
 
+
+	}
 
 
 	function onDocumentMouseMove( event ) {
@@ -90,7 +82,7 @@ console.log( '',  );
 		raycaster = new THREE.Raycaster();
 		raycaster.setFromCamera( mouse, camera );
 
-		intersects = raycaster.intersectObjects( campusSurfacesArray );
+		intersects = raycaster.intersectObjects( surfaceMeshesChildren );
 
 		if ( intersects.length > 0 ) {
 
@@ -127,7 +119,7 @@ console.log( '',  );
 	}
 
 
-
+// needs big clean up
 	function setHeadsUp( event ) {
 
 		let txt;
@@ -137,7 +129,7 @@ console.log( '',  );
 
 			if ( event.type === 'touchstart' ) {
 
-				headsUp.style.display = 'none';
+				divHeadsUp.style.display = 'none';
 
 			}
 
@@ -147,14 +139,14 @@ console.log( '',  );
 
 		}
 
-//		headsUp.style.left = 0 + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
-//		headsUp.style.top = 30 + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
+//		divHeadsUp.style.left = 0 + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
+//		divHeadsUp.style.top = 30 + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
 
-		headsUp.style.right = '20px'; // + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
-		headsUp.style.top = '20px'; // + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
+		divHeadsUp.style.right = '20px'; // + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
+		divHeadsUp.style.top = '20px'; // + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
 
-		headsUp.style.display = '';
-//console.log( '', headsUp.style.left, headsUp.style.top );
+		divHeadsUp.style.display = '';
+//console.log( '', divHeadsUp.style.left, divHeadsUp.style.top );
 
 		data = intersected.userData.data;
 //console.log( 'data', data );
@@ -189,8 +181,7 @@ console.log( '',  );
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
 						( space.Description ? 'description: ' + space.Description + b : '' )  +
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
-						'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
-
+//						'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
 
 					'';
 
@@ -219,7 +210,7 @@ console.log( '',  );
 					( space.conditionType ? 'conditionType: ' + space.conditionType + b : '' )  +
 					( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
 					( space.CADObjectId ? 'CADObjectId: ' + space.CADObjectId + b : '' ) +
-					'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
+//					'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
 
 				b;
 
@@ -230,7 +221,7 @@ console.log( '',  );
 //		adjacenciesTxt = adjacencies.length ? '
 
 		txt =
-			'<button onclick=headsUp.style.display="none"; >&#x2716;</button>' + b +
+			'<button onclick=divHeadsUp.style.display="none"; >&#x2716;</button>' + b +
 			( data.Name ? 'name: ' + data.Name + b : '' )  +
 			'id: ' + data.id + b +
 			'surface: ' + data.surfaceType + b +
@@ -238,7 +229,7 @@ console.log( '',  );
 			adjacenciesTxt + 
 		'';
 
-		headsUp.innerHTML = txt;
+		divHeadsUp.innerHTML = txt;
 		document.body.style.cursor = 'pointer';
 
 	}
@@ -295,7 +286,7 @@ console.log( '',  );
 
 	function onDocumentMouseDown( event ) {
 
-		headsUp.style.display = 'none';
+		divHeadsUp.style.display = 'none';
 		renderer.domElement.removeEventListener( 'click', icw.onClickEvent, false );
 
 	}
