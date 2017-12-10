@@ -25,6 +25,17 @@ In the meantime we offer our humble thanks and great admiration to:
 	* Burning mAnalemma
 * [Howler.js]( https://github.com/goldfire/howler.js )
 	* Burning mAnalemma
+
+## gbXML-related
+
+* xml to JSON
+
+Thanks to Craig Buckler of OptimalWorks.net
+
+* https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
+* http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
+
+
 * [gbxml.org]( http://www.gbxml.org/ )
 > gbXML is an industry supported schema for sharing building information between disparate building design software tools.
 
