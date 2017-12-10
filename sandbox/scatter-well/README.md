@@ -13,7 +13,7 @@
 ## [Scatter Well ~ Google Spreadsheet Data R2]( https://ladybug-tools.github.io/spider/sandbox/scatter-well/get-google-spreadsheet-data/get-google-spreadsheet-data-r2.html )
 
 
-## [Scatter Well ~ Google Spreadsheet Data Pareto Sim R1]( http://www.ladybug.tools/spider/sandbox/scatter-well/get-google-spreadsheet-data-pareto/get-google-spreadsheet-data-pareto-r3.html
+## [Scatter Well ~ Google Spreadsheet Data Pareto Sim R1]( http://www.ladybug.tools/spider/sandbox/scatter-well/get-google-spreadsheet-data-pareto/get-google-spreadsheet-data-pareto-r3.html )
 
 ## Issues
 
