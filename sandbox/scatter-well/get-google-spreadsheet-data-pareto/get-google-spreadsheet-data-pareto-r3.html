@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-08-01" >
+<title>Scatter Well ~ Google Spreadsheet Data Pareto Sim R1</title>
+<style>
+
+	html { --mnu-color: blue; --mnu-back-color: lavender; --mnu-width: 300px;  height: 100%; }
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	input[ type=range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; box-sizing: border-box; width: 100% }
+	input[ type=range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+
+	h3 { margin: 0; }
+	img { opacity: 1; }
+
+	#menu { margin: 20px; position: absolute; right: 0; }
+
+	#menu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); max-width: var( --mnu-width ); padding: 5px;  }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "menu" >
+
+		<div id = "divTitle" ></div>
+			<p id=log >
+			<div id = "contents" >
+
+		<p>Nothing done to prettify the spread.</p>
+
+		<p>Click on slider to see default colors overwritten by Pareto values taken from spreadsheet</p>
+
+		<p title='howdy' >
+			parato numbers <output id=outPareto class=floatRight >5</output>
+			<input type=range id=inpPareto min=1 max=5 step=1 value=1 oninput=outPareto.value=value;updateColors(); />
+		</p>
+
+<!--
+
+			<p>Data from <a href="https://docs.google.com/spreadsheets/d/1CC31wOdnhe6DLUyKYWrdMgMhd6QH97NjjdPmVSdqjZ4/edit#gid=0" target="_blank">Design Space for Theo</a>.
+				Compare with <a href="https://docs.google.com/spreadsheets/d/1CC31wOdnhe6DLUyKYWrdMgMhd6QH97NjjdPmVSdqjZ4/edit#gid=831701409" target="_blank">2D scatter plot.</a></p>
+
+			<h3>Legend</h3>
+
+			<p>Chart shows H, L & T shapes</p>
+			<p>EUI kwh/m2 = X-axis</p>
+			<p>Annual Cooling Load = Y-axis</p>
+			<p>Number of Floors = Z-axis</p>
+			<p>Annual Heating Load = symbol color (needs own legend)</p>
+			<p>Building Height = symbol Z axis</p>
+			<p>Building Length (X1/2/3)  = symbol X axis</p>
+			<p>Building Width (Y1/2/3)  = symbol Y axis</p>
+			<p>Building orientation = Z rotation</p>
+			<p>Win/Wall Ratio = symbol opacity</p>
+-->
+		</div>
+
+		<details>
+
+			<summary> Display settings </summary>
+
+
+			<p><button onclick=toggleWireframe(); title='See number of floors' > Toggle wireframe </button></p>
+
+			<p><button onclick=toggleGrid(); >Toggle Grid</button></p>
+
+			<p><button onclick=toggleAxesHelper(); >Toggle Axes</button></p>
+
+			<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
+
+			<p><button onclick=toggleSceneAutoRotate() title= 'Stop the spinning!' > Toggle scene rotation </button></p>
+
+		</details>
+	</div>
+
+<script>
+
+	let url;
+
+// SS must be published
+
+// https://docs.google.com/spreadsheets/d/17cct_eo6odACejno1YnDPxXXyOoNxxjs02zhXTNdWwo/edit#gid=1750244370
+//	url = 'https://spreadsheets.google.com/feeds/list/17cct_eo6odACejno1YnDPxXXyOoNxxjs02zhXTNdWwo/1/public/values?alt=json';
+
+// https://docs.google.com/spreadsheets/d/1CC31wOdnhe6DLUyKYWrdMgMhd6QH97NjjdPmVSdqjZ4/edit#gid=0
+	url = 'https://spreadsheets.google.com/feeds/list/1CC31wOdnhe6DLUyKYWrdMgMhd6QH97NjjdPmVSdqjZ4/1/public/values?alt=json';
+
+// https://docs.google.com/spreadsheets/d/1RrcrsKeaZUCnZhOOq9UrAuvsp3HnSYEGot1i61FK6iw/edit#gid=908347707
+	url = 'https://spreadsheets.google.com/feeds/list/1RrcrsKeaZUCnZhOOq9UrAuvsp3HnSYEGot1i61FK6iw/1/public/values?alt=json';
+
+	url2 = 'https://spreadsheets.google.com/feeds/list/1RrcrsKeaZUCnZhOOq9UrAuvsp3HnSYEGot1i61FK6iw/2/public/values?alt=json';
+
+	const infoURI = 'https://github.com/ladybug-tools/spider/tree/master/sandbox/scatter-well/';
+
+	var spreadsheetCells;
+	var datapoints = [];
+	var meshes, meshEdges;
+	var hGeometry, lGeometry, tGeometry;
+
+	const d2r = Math.PI / 180;
+	const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+
+	const b = '<br>';
+	var intersected;
+
+	var axesHelper, gridHelper;
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		divTitle.innerHTML = 
+			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 120, 120, 120 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 600;
+		controls.target.set( 50, 50, 50 );
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		const ambient = new THREE.AmbientLight( 0x444444 );
+		scene.add( ambient );
+
+		const directionalLight = new THREE.DirectionalLight( 0xffeedd );
+		directionalLight.position.set( 0, 0, 100 ); //.normalize();
+		scene.add( directionalLight );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+		toggleGrid();
+
+//		axesHelper = new THREE.AxesHelper( 100 );
+
+		initHeadsUp();
+
+		placard = drawPlacard( ['X-axis', 'EUI', 'kwh/m2' ], 0.05, 1, 110, 0, 0 );
+		scene.add( placard );
+
+		placard = drawPlacard( ['Y-axis', 'annual cooling load', 'kwh' ], 0.05, 120, 0, 110, 0 );
+		scene.add( placard );
+
+		placard = drawPlacard( ['Z-axis', 'Nunber of Floors' ], 0.05, 240, 0, 0, 110 );
+		scene.add( placard );
+
+		hShape();
+		lShape();
+		tShape();
+
+		toggleBackgroundGradient();
+
+		requestFile( url, callbackUrl );
+
+		requestFile( url2, callbackUrl2 );
+	}
+
+
+
+	function updateColors () {
+
+//console.log( '', inpPareto.value );
+
+		for ( let i = 0; i < spreadsheetCells.length; i++ ) {
+
+			cell = spreadsheetCellsColors[ i ];
+			mesh = meshes.children[ i ];
+
+			col = cell[ 'gsx$col' + inpPareto.value ].$t;
+
+			color = new THREE.Color( col );
+			mesh.material.color = color;
+			mesh.material.needsUpdate = true;
+
+		}
+
+	}
+
+
+	function requestFile( url, callback ) {
+
+//		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+
+	function callbackUrl( xhr ) {
+
+		let response, json;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+//			contents.innerHTML = response;
+
+		json = JSON.parse( response );
+//console.log( 'json', json );
+
+		spreadsheetCells = json.feed.entry; // from spreadsheet
+
+//console.log( 'spreadsheetCells', spreadsheetCells );
+
+		drawGraph();
+
+	}
+
+
+	function callbackUrl2( xhr ) {
+
+		let response, json;
+
+		response = xhr.target.response;
+//console.log( 'response', response );
+
+//			contents.innerHTML = response;
+
+		json = JSON.parse( response );
+//console.log( 'json', json );
+
+		spreadsheetCellsColors = json.feed.entry; // from spreadsheet
+
+//console.log( 'spreadsheetCellsColors', spreadsheetCellsColors );
+
+
+	}
+
+
+	function drawGraph() {
+
+		meshes = new THREE.Object3D();
+
+		let geometry, material, mesh, edges;
+
+
+		for ( let i = 0; i < spreadsheetCells.length; i++ ) {
+
+			cell = spreadsheetCells[ i ];
+
+			if ( cell.gsx$footprintshape.$t === 'T-Shape' ) {
+
+				geometry = tShape( parseInt( cell.gsx$offloors.$t, 10 ) );
+
+			} else if ( cell.gsx$footprintshape.$t === 'L-Shape' ) {
+
+				geometry = lShape( parseInt( cell.gsx$offloors.$t, 10 ) );
+
+			} else {
+
+				geometry = hShape( parseInt( cell.gsx$offloors.$t, 10 ) );
+
+			}
+
+			const x = parseFloat( (cell.gsx$constructioncost.$t).slice( 1 ) ) * 80 - 60;
+			const y = parseFloat( cell.gsx$offloors.$t ) * 30 - 25;
+			const z = parseFloat( cell.gsx$energyuseintensitykbtuft2.$t ) * 2 - 80;
+//			z = parseFloat( cell.gsx$euikwhm2.$t ) * 0.6 - 60;
+
+			material = new THREE.MeshPhongMaterial( {
+				color: 0xffffff,
+				emissive: 0x333333,
+				opacity: 0.6 * parseFloat( cell.gsx$wwr.$t ),
+//				specular: 0xffffff * Math.random(),
+//				shading: THREE.FlatShading,
+//				shininess: 10,
+				transparent: true
+			} );
+//			material.color.setHSL( ( parseFloat( cell.gsx$annualheatingloadkwh.$t ) - 40000 ) / 60000, 0.8, 0.5 );
+//			material = new THREE.MeshNormalMaterial( { opacity: 0.5 * parseFloat( cell.gsx$wwrs.$t ), transparent: true } );
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( x, y, z );
+			mesh.scale.set( 1, 1, 1 );
+//			mesh.rotation.z = d2r * parseFloat( cell.gsx$orientationdegrees.$t );
+			meshes.add( mesh );
+
+			geometryEdge = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			material = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+			edges = new THREE.LineSegments( geometryEdge, material );
+			mesh.add( edges ); // add wireframe as a child of the parent mesh
+
+			datapoints.push( mesh );
+			mesh.name = cell.gsx$imagereference.$t.slice( 0, cell.gsx$imagereference.$t.indexOf( '_' ) );
+			mesh.userData = cell;
+			mesh.userData.id = i + 1;
+			meshes.add( mesh );
+
+		}
+
+		scene.add( meshes );
+
+	}
+
+
+
+	function hShape( floors ) {
+
+		const pts = [ 
+			v2( 0, 0 ), 
+			v2( 10, 0 ), 
+			v2( 10, 10 ), 
+			v2( 20, 10 ), 
+			v2( 20, 0 ), 
+			v2( 30, 0 ), 
+			v2( 30, 30 ), 
+			v2( 20, 30 ), 
+			v2( 20, 20 ), 
+			v2( 10, 20 ), 
+			v2( 10, 30 ), 
+			v2( 0, 30 )
+		]
+
+//		scene.remove( mesh );
+		const shape = new THREE.Shape( pts );
+		const hGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
+		return hGeometry;
+	}
+
+
+	function lShape( floors ) {
+
+		const pts = [ 
+			v2( 0, 0 ), 
+			v2( 20, 0 ), 
+			v2( 20, 10 ), 
+			v2( 10, 10 ), 
+			v2( 10, 25 ), 
+			v2( 0, 25 )
+		]
+
+//		scene.remove( mesh );
+		const shape = new THREE.Shape( pts );
+		const lGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors  } );
+		return lGeometry;
+
+	}
+
+
+
+	function tShape( floors ) {
+
+		const pts = [ 
+			v2( 0, 10 ), 
+			v2( 10, 10 ), 
+			v2( 10, 00 ), 
+			v2( 20, 0 ), 
+			v2( 20, 10 ),
+			v2( 30, 10 ),
+			v2( 30, 20 ),
+			v2( 0, 20 )
+		]
+
+//		scene.remove( mesh );
+		const shape = new THREE.Shape( pts );
+		const tGeometry = new THREE.ExtrudeBufferGeometry( shape, { bevelEnabled: false, amount: 1, steps: floors } );
+		return tGeometry;
+	}
+
+
+
+
+///////////////////////
+
+
+	function initHeadsUp() {
+
+		window.objects = [];
+		window.mouse = new THREE.Vector2();
+		window.intersected;
+
+		headsUp = document.body.appendChild( document.createElement( 'div' ) );
+		headsUp.style.cssText = 'background-color: #ddd; border-radius: 8px; display: none; padding: 0 5px 10px 5px; opacity: 0.95; ' +
+			'position: absolute; ';
+
+		renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+/*
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && child.name ) {
+
+				objects.push( child );
+
+			}
+
+		} );
+*/
+	}
+
+
+	function onDocumentMouseMove( event ) {
+
+		var raycaster, intersects;
+
+		event.preventDefault();
+
+		if ( event.buttons > 0 ) { return; }
+
+		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+		raycaster = new THREE.Raycaster();
+		raycaster.setFromCamera( mouse, camera );
+
+		intersects = raycaster.intersectObjects( datapoints );
+
+		if ( intersects.length > 0 ) {
+
+			if ( intersected != intersects[ 0 ].object ) {
+
+				if ( intersected ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
+				intersected = intersects[ 0 ].object;
+				intersected.currentHex = intersected.material.emissive.getHex();
+				intersected.material.emissive.setHex( 0xff0000 );
+
+				intersected.currentOpacity = intersected.material.opacity;
+				intersected.material.opacity = 1;
+
+			}
+
+		} else {
+
+			if ( intersected ) { intersected.material.emissive.setHex( intersected.currentHex ); }
+			if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+
+			intersected = undefined;
+
+		}
+
+		setHeadsUp( event );
+
+	}
+
+
+
+	function setHeadsUp( event ) {
+
+		let txt;
+		const b = '<br>'
+
+		if ( intersected === undefined ){
+
+			if ( event.type === 'touchstart' ) {
+
+				headsUp.style.display = 'none';
+
+			}
+
+			document.body.style.cursor = 'auto';
+			return;
+
+		}
+
+		headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
+		headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
+		headsUp.style.display = '';
+
+//console.log( 'intersected', intersected );
+//console.log( '', intersected.userData.content.$t );
+		txt =
+			'all the variables for ' + intersected.name + b +
+			intersected.userData.content.$t.replace( /,/gi, b ).replace( 'windowtype:','windowtype:' + b ) + b+
+//			'<img src=https://ladybug-tools.github.io/spider/SVG/' + intersected.userData.gsx$imagereference.$t + ' >' + b +
+		'';
+
+//		headsUp.innerHTML = txt;
+		document.body.style.cursor = 'pointer';
+
+	}
+
+
+
+	function onDocumentMouseDown( event ) {
+
+		headsUp.style.display = 'none';
+
+	}
+
+
+
+	function onDocumentTouchStart( event ) {
+
+	//	event.preventDefault();
+
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+
+		onDocumentMouseMove( event );
+
+	}
+
+
+/////////////////
+
+
+	function drawPlacard( text, scale, color, x, y, z ) {
+
+// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
+
+		var placard = new THREE.Object3D();
+		var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+		var texture = canvasMultilineText( text, { backgroundColor: color }   );
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+
+		var geometry = new THREE.Geometry();
+		geometry.vertices = [ v( x, y, 0 ),  v( x, y, z ) ];
+		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		var line = new THREE.Line( geometry, material );
+
+		placard.add( sprite, line );
+
+		return placard;
+
+
+		function canvasMultilineText( textArray, parameters ) {
+
+			var parameters = parameters || {} ;
+
+			var canvas = document.createElement( 'canvas' );
+			var context = canvas.getContext( '2d' );
+			var width = parameters.width ? parameters.width : 0;
+			var font = parameters.font ? parameters.font : '48px monospace';
+			var color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+			if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+			context.font = font;
+
+			for ( var i = 0; i < textArray.length; i++) {
+
+				width = context.measureText( textArray[ i ] ).width > width ? context.measureText( textArray[ i ] ).width : width;
+
+			}
+
+			canvas.width = width + 20;
+			canvas.height =  parameters.height ? parameters.height : textArray.length * 60;
+
+			context.fillStyle = 'hsl( ' + color + ', 80%, 50% )' ;
+			context.fillRect( 0, 0, canvas.width, canvas.height);
+
+			context.lineWidth = 1 ;
+			context.strokeStyle = '#000';
+			context.strokeRect( 0, 0, canvas.width, canvas.height );
+
+			context.fillStyle = '#000' ;
+			context.font = font;
+
+			for ( i = 0; i < textArray.length; i++) {
+
+				context.fillText( textArray[ i ], 10, 48  + i * 60 );
+
+			}
+
+			var texture = new THREE.Texture( canvas );
+			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			texture.needsUpdate = true;
+
+			return texture;
+
+		}
+
+	}
+
+
+
+/////////////////
+
+
+	function toggleGrid( size = 100 ) {
+
+		if ( !gridHelper ) {
+
+			gridHelper = new THREE.Object3D();
+
+			obj = new THREE.GridHelper( size, 20, 'blue', 'lightblue' );
+			obj.rotation.x = 0.5 * Math.PI;
+			obj.position.set( 50, 50, 0 );
+			gridHelper.add( obj );
+
+			obj = new THREE.GridHelper( size, 20, 'red', 'pink' );
+	//		obj.rotation.x = 0.5 * Math.PI;
+			obj.position.set( 50, 0, 50 );
+			gridHelper.add( obj );
+
+
+			obj = new THREE.GridHelper( size, 20, 'green', 'lightgreen' );
+			obj.rotation.z = 0.5 * Math.PI;
+			obj.position.set( 0, 50, 50 );
+			gridHelper.add( obj );
+
+			scene.add( gridHelper );
+
+			gridHelper.visible = false;
+
+		}
+
+		gridHelper.visible = !gridHelper.visible;
+
+	}
+
+
+
+	function toggleWireframe() {
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.wireframe = !child.material.wireframe;
+
+			}
+
+		} );
+
+	}
+
+
+
+	function toggleAxesHelper() {
+
+		axesHelper.visible = !axesHelper.visible;
+
+	}
+
+
+	function toggleSceneAutoRotate() {
+
+		controls.autoRotate = !controls.autoRotate;
+
+	}
+
+
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
+
+
+
+//////////////////
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>
