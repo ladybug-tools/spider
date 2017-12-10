@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "test gbxml viewer8 core" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-01" >
-<title></title>
+<meta name = "date" content = "2017-12-10" >
+<title>test-gbxml-viewer8-core</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -15,6 +15,8 @@
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
 	iframe { height: 500px; width: 100%; }
+
+	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
 </style>
 </head>
@@ -25,75 +27,77 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'test' to load test menu</p>
-
-	</p>
-
+	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<a id=aThree href=
-			"JavaScript:( 
-				function(){ 
-					var script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = 'test-gbxml-viewer8-core.js'; 
-			} )()"
-		>
-		test</a>
+		<a id=aThree href="JavaScript:( function(){
+			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = 'test-gbxml-viewer8-core.js';
+		} )()" >
+		test-gbxml-viewer8-core</a>
 	</p>
 
+	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
 
-	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html' ></iframe>
+	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
-	<h3>Methods to load gbXML files into this iframe</h3>
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/gbxml-standard-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></p>
 
-	<p>
-		JavaScript: Use a link to update iframe src:<br>
-		<a href="JavaScript:(function(){
-			ifrThree.src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html#https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/sam-live2.xml';
-		})()" >
-		sam live2</a>
-	</p>
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/open-studio-seb.xml" >open studio seb</a></p>
 
-	<p>
-		JavaScript: Use a link to update iframe location hash to cloud URL:<br>
-		<a href="JavaScript:(function(){
-			ifrThree.contentWindow.location.hash='#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/rac_basic_sample_project.xml';
-		})()" >
-		rac_basic_sample_project</a>
-	</p>
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" >sam live2</a> </p>
 
-	<p>
-		JavaScript: Use a link to update iframe location hash to relative URL:<br>
-		<a href="JavaScript:(function(){
-			ifrThree.contentWindow.location.hash='#../../../read-gbxml/data-files/rac_basic_sample_project.xml';
-		})()" >
-		rac_basic_sample_project</a>
-	</p>
-
-	<p>
-		Use operating system file dialog box to open local file:<br>
-			<input type=file id=inpFile onchange=icw.openFile(this); >
-	<p>
-
-	<p>Drag and drop coming soon</p>
-
-	<p>See the tricks:<br><a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r8/gbxml-viewer8-templates/test-gbxml-viewer8-template.html" >
-		source code of this HTML file</a>
-	</p>
+	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml" >urban house mep</a></p>
 
 <script>
 
+	var divAppMenu;
 
 	init();
-
 
 
 	function init() {
 
 		divTitle.innerHTML = 
-			'<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>' +
+			'<h2><a  href = "" >' + document.title + '</a></h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+		dragArea.addEventListener( 'drop', drop, false );
+
+		onHashChange();
+
+	}
+
+
+
+	function onHashChange() {
+
+		const url = location.hash.slice( 1 );
+
+		ifrThree.contentWindow.location.hash = '#' + url;
+
+	}
+
+
+	function drop( event ) {
+
+		event.preventDefault(); 
+
+		var iframeUrl = event.dataTransfer.getData( 'URL' );
+
+		if ( iframeUrl ) {
+
+			ifrThree.contentWindow.location.hash = iframeUrl;
+
+		} else {
+
+			ifrThree.contentWindow.openFile( event.dataTransfer );
+
+		}
 
 	}
 
