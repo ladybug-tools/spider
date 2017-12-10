@@ -49,11 +49,11 @@
 
 <script>
 
-	const uriGbxmlDefault = 
-		location.protocol === 'file:' ? 
-		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml' 
+	const uriGbxmlDefault =
+		location.protocol === 'file:' ?
+		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 //		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
-//		'../../../read-gbxml/data-files/sam-live2.xml' 
+//		'../../../read-gbxml/data-files/sam-live2.xml'
 //		'../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml'
 		:
 		'../../gbxml-sample-files/sam-live2.xml';
@@ -222,8 +222,8 @@
 
 		function onRequestFileProgress( event ) {
 
-			divLog.innerHTML = 
-				'bytes loaded: ' + event.loaded.toLocaleString() + 
+			divLog.innerHTML =
+				'bytes loaded: ' + event.loaded.toLocaleString() +
 				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
 			'';
 
@@ -253,7 +253,7 @@
 
 	function XML2jsobj( node ) {
 
-		let	data = {};
+		let data = {};
 
 		function Add( name, value ) {
 
@@ -273,7 +273,7 @@
 
 			}
 
-		};
+		}
 
 		let child, childNode;
 
@@ -549,8 +549,8 @@
 
 		for ( let child of surfaceMeshes.children ) {
 
-			child.material = new THREE.MeshPhongMaterial( { 
-				color: colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } 
+			child.material = new THREE.MeshPhongMaterial( {
+				color: colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true }
 			);
 			child.material.wireframe = false;
 			child.visible = true;
