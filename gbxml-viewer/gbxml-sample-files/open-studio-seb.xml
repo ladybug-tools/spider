@@ -1,6 +1,11 @@
 <gbXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" volumeUnit="CubicMeters" xmlns="http://www.gbxml.org/schema" xsi:schemaLocation="http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd" SurfaceReferenceLocation="Centerline" useSIUnitsForResults="true" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="6.01" lengthUnit="Meters" xmlns:xhtml="http://www.w3.org/1999/xhtml" areaUnit="SquareMeters" temperatureUnit="C">
   <Campus id="Facility">
     <Name>Facility</Name>
+    <Location>
+      <Elevation>1829</Elevation>
+      <Latitude>39.74</Latitude>
+      <Longitude>-105.18</Longitude>
+    </Location>
     <Building id="East_entrance_bldg_v2" buildingType="Unknown">
       <Name>East entrance bldg v2</Name>
       <Area>69.758039</Area>

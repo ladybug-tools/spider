@@ -10,7 +10,27 @@
 `
 
 <details open>
+<summary>2017-12-10</summary>
+
+R8.10<br>
+* Add 'first person' camera<br>
+* Add beginning of drawing an analemma<br>
+* Normals now only assed to visible elements<br>
+
+
+</details>
+
+<br>
+
+<details>
 <summary>2017-12-08</summary>
+
+R8.9<br>
+* Core<br>
+	* Add 'reset view' calls createReport()<br>
+* HUD<br>
+	* Add toggle button<br>
+	* Toggle off when new file loaded<br>
 
 R8.8<br>
 Core<br>
@@ -21,8 +41,6 @@ Reports<br>
 
 
 </details>
-
-<br>
 
 <details>
 <summary>2017-12-07</summary>

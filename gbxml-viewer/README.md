@@ -81,6 +81,9 @@ See also:
 * https://knowledge.autodesk.com/support/revit-products/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F-htm.html
 * http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html
 
+### Sample gbXML Files
+
+* https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml
 
 
 ## Modules
@@ -134,7 +137,7 @@ See also:
 
 #### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-05-reports/README.md )
 
-#### Full screen test: [gbXML Viewer8 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html )
+#### Full screen test: [tezt gbXML Viewer8 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html )
 
 * Create text reports of data embedded in gbXML files
 * Toggle the display of 3D surfaces based on user input
@@ -142,6 +145,13 @@ See also:
 
 ### Camera - First Person
 
+
+#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-06-camera-first-person/README.md )
+
+#### Full screen test: [test gbxml viewer8 camera first-person]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-06-camera-first-person/test-gbxml-viewer8-camera-first-person.html )
+
+* Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen
+* This is a new and experimental feature.
 
 
 ## To Do
@@ -152,20 +162,20 @@ See also:
 * Better lights and shadows
 * Section views
 
-### First Person camera
-
 
 ### Heads-up Display
 
-* 2017-12-07 ~ Theo: Add better size adjustment
+* 2017-12-07 ~ Theo: Add better size adjustment to text box
 * 2017-12-01 ~ What data should be included in heads-up display?
 * 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
 
 
 ### Settings
 
+* 2017-12-10 ~ Michal: can we switch off shadows?
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
-* 2017-12-07 ~ Michal: Toggle for Ortho camera
+* 2017-12-06 ~ Add slider to move ground up or down
+
 
 ### Reports
 
@@ -175,16 +185,21 @@ See also:
 * 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
 
 
+### First Person camera
+
+
+
 ### Template
 
-* 2017-12-06 ~ Add slider to move ground up or down
+
 
 
 ### Export gbXML files
 
 Not yet started
 
-2017-12-02 ~ Michal: Add ability to edit and save gbXML files
+* 2017-12-10 ~ Michal: Export gbJSON
+* 2017-12-02 ~ Michal: Add ability to edit and save gbXML files
 
 Will most likely build upon
 
@@ -194,8 +209,24 @@ Will most likely build upon
 ## Change Log
 
 
-### 2017-12-08 ~ Theo
+### 2017-12-10 ~ Theo
 
+R8.10
+* Add 'first person' camera
+* Add beginning of drawing an analemma
+* Exposure type material colors updated
+* Update draw normals only if element is visible
+	* Use Reports > Surfaces to toggle element visibility then use this command
+* Update to 'toggle camera ortho'
+
+
+Done
+* 2017-12-07 ~ Michal: Toggle for Ortho camera
+* 2017-12-10 ~ Michal: Update color choices
+* 2017-12-10 ~ Michal: can we show normals for selected items only?
+
+
+### 2017-12-08 ~ Theo
 
 R8.9
 * Core

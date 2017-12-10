@@ -18,7 +18,7 @@
 * Set random, phonf=g default, normal or default material
 * Toggle background gradient
 * Toggle wireframe
-* Draw surface normals
+* Draw surface normals ~ only that ones that are currently visible
 * Toggle axes
 * Toggle scene rotation
 * Set Camera Ortho
@@ -37,6 +37,12 @@
 
 
 ## Change Log
+
+
+### 2017-12-10 ~ Theo
+
+* Add draw normals only if element is visible
+	* Use Reports > Surfaces to toggle element visibility then use this command
 
 
 ### 2017-12-04 ~ Theo

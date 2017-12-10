@@ -42,7 +42,7 @@
 
 			'<p><button onclick=setDefaultMaterial(); >Set default material</button></p>' +
 
-			'<p><button onclick=setExposureMaterial2(); >Set exposure type material</button></p>' +
+			'<p><button onclick=setExposureMaterial(); >Set exposure type material</button></p>' +
 
 
 			'<hr>' +
@@ -51,7 +51,7 @@
 
 			'<p><button onclick=toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>' +
 
-			'<p><button onclick=toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button></p>' +
+			'<p><button onclick=toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Draw surface normals </button></p>' +
 
 			'<p><button onclick=toggleAxesHelper(); >Toggle axes</button></p>' +
 
@@ -59,9 +59,10 @@
 
 			'<p><button onclick=toggleGroundHelper(); >Toggle ground</button></p>' +
 
+
 			'<p><button onclick=toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
 
-			'<p><button onclick=toggleCameraOrthoPerspective() title="" > Toggle camera ortho </button></p>' +
+			'<p><button onclick=setCameraOrthoPerspective() title="" > Set Camera Ortho </button></p>' +
 
 			'<p title="building opacity: 0 to 100%" >Opacity: ' +
 				'<output id=outOpacity class=floatRight >85%</output>' +
@@ -188,42 +189,6 @@
 
 
 
-	function setExposureMaterial2() {
-
-		var colorsExposure = {
-
-			InteriorWall: 0xff8080,
-			ExteriorWall: 0x80ff80,
-			Roof: 0x80ff80,
-			InteriorFloor: 0xff8080,
-			ExposedFloor: 0x80ff80,
-			Shade: 0x80ff80,
-			UndergroundWall: 0xd06800,
-			UndergroundSlab: 0xd06800,
-			Ceiling: 0xff8080,
-			Air: 0xff8080,
-			UndergroundCeiling: 0xff8080,
-			RaisedFloor: 0xff8080,
-			SlabOnGrade: 0xd06800,
-			FreestandingColumn: 0xff8080,
-			EmbeddedColumn: 0xff8080
-
-		}
-
-		surfaceMeshes.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.material =
-					new THREE.MeshPhongMaterial( { color: colorsExposure[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
-
-			}
-
-		} );
-
-	}
-
-
 /////////////////
 
 	function toggleBackgroundGradient() {
@@ -258,6 +223,7 @@
 
 
 
+
 	function toggleSurfaceNormals() {
 
 		if ( !helperNormalsFaces ) {
@@ -266,11 +232,11 @@
 
 			surfaceMeshes.traverse( function ( child ) {
 
-				if ( child instanceof THREE.Mesh && child.visible ) {
+				if ( child instanceof THREE.Mesh ) {
 
 					helperNormalsFace = new THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
 					helperNormalsFaces.add( helperNormalsFace );
-					helperNormalsFaces.visible = false;
+
 				}
 
 			} );
@@ -283,6 +249,8 @@
 		helperNormalsFaces.visible = !helperNormalsFaces.visible;
 
 	}
+
+
 
 
 	function toggleAxesHelper() {
@@ -343,7 +311,7 @@
 
 
 
-	function toggleCameraOrthoPerspective() {
+	function setCameraOrthoPerspective() {
 
 		if ( !cameraOrtho ) {
 
@@ -354,21 +322,13 @@
 			icw.scene.add( cameraOrtho );
 			controlsOrtho = new icw.THREE.OrbitControls( cameraOrtho, icw.renderer.domElement );
 
-			icw.camera = cameraOrtho;
-			icw.camera.updateProjectionMatrix();
-			icw.controls = controlsOrtho;
-
-			icw.zoomObjectBoundingSphere( icw.surfaceMeshes );
-
-		} else {
-
-			icw.setAllVisible();
-			icw.zoomObjectBoundingSphere(surfaceMeshes);
-			cameraOrtho = undefined;
-
 		}
 
+		icw.camera = cameraOrtho;
+		icw.camera.updateProjectionMatrix();
+		icw.controls = controlsOrtho;
 
+		icw.zoomObjectBoundingSphere( icw.surfaceMeshes )
 
 	}
 

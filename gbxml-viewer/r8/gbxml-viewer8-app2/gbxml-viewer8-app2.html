@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-08" >
-<title>gbXML Viewer R8.9 App2</title>
+<meta name = "date" content = "2017-12-10" >
+<title>gbXML Viewer R8.10 App2</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -117,6 +117,7 @@
 				document.head.appendChild(script);
 			})()" >reports</a></p>
 
+		<h3>Experiments</h3>
 
 		<p>
 			<button id=butCameraFirstPerson onclick="( function(){
@@ -124,6 +125,16 @@
 				script.src = '../gbxml-viewer8-06-camera-first-person/gbxml-viewer8-camera-first-person.js';
 			} )()" >
 			first person camera</button>
+		</p>
+
+		<p>
+			<button id=butAnalemma onclick="( function(){
+				const script0 = document.head.appendChild( document.createElement( 'script' ) );
+				script0.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gbxml-viewer8-07-analemma/gbxml-viewer8-analemma.js';
+			} )()" >
+			analemma</button> &laquo; at a very early stage. No sun yet, etc. Need to reload script before each model change.
 		</p>
 
 		<hr>

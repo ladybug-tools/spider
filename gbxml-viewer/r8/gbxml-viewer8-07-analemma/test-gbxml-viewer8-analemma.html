@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML analemma viewer" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-07" >
-<title>test-gbxml-viewer8-template</title>
+<meta name = "date" content = "2017-12-10" >
+<title>test-gbxml-viewer8-analemma</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -14,13 +14,24 @@
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
 	iframe { height: 500px; width: 100%; }
+
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
 </style>
 </head>
 <body>
+<script src = "https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js" ></script>
+
 
 	<div id = "divHeader" >
 		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/" >gh</a>
@@ -32,9 +43,9 @@
 	<p>
 		<a id=aThree href="JavaScript:( function(){
 			const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = 'gbxml-viewer8-template.js';
+			script.src = 'gbxml-viewer8-analemma.js';
 		} )()" >
-		gbxml-viewer8-template</a>
+		gbxml-viewer8-analemma</a>
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
