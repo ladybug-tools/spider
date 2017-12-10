@@ -6,8 +6,11 @@
 	var controls;
 	var surfaceMeshes;
 
+
 	var avatar;
-	var size;
+	var ui;
+	var size = 1;
+
 	var firstPersonUI =
 `
 	<div id=divControls >
@@ -24,8 +27,69 @@
 			<button onclick=goUp(); title='Plus key' >+</button> &nbsp;
 			<button onclick=goDown(); title='Minus key' >-</button>
 		</div>
+
+		<p>
+			<button onclick=zoomOverTheShoulder(); >zoom to over the shoulder</button>
+			<button id=butUIinfo onclick=divCameraInfo.style.display=divCameraInfo.style.display==='none'?'block':'none'; >?</button>
+		</p>
+
 	</div>
+`;
+
+	var divCameraFirstPerson =
 `
+	<div id=divCameraInfo style=display:none; onclick=divCameraInfo.style.display='none'; >
+
+		<p>
+		This is a new and experimental feature.
+		</p>
+
+		<p>
+		Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen
+		</p>
+
+
+		<p>
+		Your pointing device works as usual. You pay pan, zoom and rotate as you do normally
+		</p>
+
+		<p>
+		&bull; R key or Page Up key = turnUp<br>
+
+		&bull; F key or Page Down key = turnDown<br>
+
+		&bull; A key or cursor left key = turnLeft<br>
+
+		&bull; W key or cursor up key = goForward<br>
+
+		&bull; D or cursor right key = turnRight<br>
+
+		&bull; S key or cursor down key = goBack<br>
+
+		&bull; Plus key or plus numeric key = goUp<br>
+
+		&bull; Minus key or minus numeric key = goDown<br>
+		</p>
+
+		<p>
+		To help you remember:  look at tooltips over each icon</p>
+
+		<p>
+		'zoom to Over the shoulder': Zooms way into the model and lets you ride on the back of an avatar as you fly and wander around.
+		</p>
+
+		<p>
+		Flying nicely through a building takes a certain amount of skill and practice. Be patient with yourself and use the 'reset view' button often.
+		</p>
+
+		<p>
+		Using the keyboard and the mouse or fingers at the same time can be very exciting!
+		</p>
+
+
+		<p>Your avatar's name is 'Gypsy' Mila.<p>
+	</div>
+`;
 
 
 	initCameraFirstPerson();
@@ -33,35 +97,35 @@
 
 	function initCameraFirstPerson() {
 
-
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
 		scene = icw.scene;
 		camera = icw.camera;
 		controls = icw.controls;
-		surfaceMeshes = icw.surfaceMeshes;
+		axesHelper = icw.axesHelper;
 
+		surfaceMeshes = icw.surfaceMeshes;
 
 		if ( butCameraFirstPerson.style.backgroundColor !== 'pink' ) {
 
-			icw.divContents.innerHTML +=
-				'<button onclick=zoomOverTheShoulder(); >over the shoulder</button>' +
-			'';
-
-			var ui = ifrThree.contentDocument.body.appendChild( document.createElement( 'div' ) );
+			ui = ifrThree.contentDocument.body.appendChild( document.createElement( 'div' ) );
 			ui.innerHTML = firstPersonUI;
-			ui.style.cssText = 'left: 0; position: absolute; bottom: 20px; margin: 0 auto; text-align: center; right: 0; width: 100%; ';
+			ui.style.cssText = 'left: 0; position: absolute; bottom: 20px; margin: 0 auto; text-align: center; right: 0; width: 30%; ';
 
-			icw.addEventListener ( 'hashchange', toggleCameraFirstPersonOff, false );
+			uiInfo = ifrThree.contentDocument.body.appendChild( document.createElement( 'div' ) );
+			uiInfo.innerHTML = divCameraFirstPerson;
+			uiInfo.style.cssText = 'background-color: #ddd; bottom: 20px; max-width: 350px; padding: 5px; position: absolute; right: 20px;';
 
+			addEventListener ( 'hashchange', toggleCameraFirstPersonOff, false );
 			icw.addEventListener( 'keydown', onKeyDown, false );
 
 			butCameraFirstPerson.style.backgroundColor = 'pink';
 
+			addAvatar();
+
 		} else {
 
 			toggleCameraFirstPersonOff()
-
 
 		}
 
@@ -70,9 +134,15 @@
 
 	function toggleCameraFirstPersonOff() {
 
-console.log( '', 23 );
-		scene.remove( avatar );
+		avatar.visible = false;
+
 		butCameraFirstPerson.style.backgroundColor = '';
+
+		ifrThree.contentDocument.body.removeChild( ui );
+
+//		scene.add( camera );
+		icw.setAllVisible();
+		icw.zoomObjectBoundingSphere( surfaceMeshes );
 
 	}
 
@@ -81,34 +151,28 @@ console.log( '', 23 );
 
 //console.log( 'campusSurfaces.userData', size );
 
-		size = icw.gbjson.useSIUnitsForResults ? 0.1 : 1;
+		if ( !avatar ) {
 
-		scene.remove( avatar );
+			const geometryIcosahedron = new THREE.IcosahedronBufferGeometry( 1 );
+			const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
+			const geoHead = geometryIcosahedron.clone();
+			geoHead.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.5 * Math.PI ) );
+			const geoTail = geometryIcosahedron.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
+			geoTail.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -1.5, 0.3 ) );
 
-		const geometryIcosahedron = new THREE.IcosahedronBufferGeometry( 1 );
-		const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
-		const geoHead = geometryIcosahedron.clone();
-		geoHead.applyMatrix( new THREE.Matrix4().makeRotationZ( 0.5 * Math.PI ) );
-		const geoTail = geometryIcosahedron.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
-		geoTail.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -1.5, 0.3 ) );
+			avatar = new THREE.Mesh( geoHead, material );
+			avatar.add( new THREE.Mesh( geoTail, material ) );
 
-		avatar = new THREE.Mesh( geoHead, material );
-		avatar.add( new THREE.Mesh( geoTail, material ) );
+			avatar.position.copy( axesHelper.position );
+			avatar.castShadow = avatar.receiveShadow = true;
+
+		}
+
+		size = icw.gbjson.useSIUnitsForResults.toLowerCase() === 'true' ? 0.2 : 0.6;
 		avatar.scale.set( size, size, size );
-		avatar.position.copy( icw.axesHelper.position );
-		avatar.castShadow = avatar.receiveShadow = true;
-//		avatar.visible = false;
-
+		avatar.position.copy( axesHelper.position );
+		avatar.visible = true;
 		scene.add( avatar );
-		avatar.add( icw.camera );
-
-		controls.reset();
-		controls.maxDistance = 10000 * size;;
-
-		camera.far = 15000 * size;
-
-		camera.position.set( 50 * size, - 50 * size, 50 * size );
-		camera.updateProjectionMatrix();
 
 	}
 
@@ -116,8 +180,39 @@ console.log( '', 23 );
 
 	icw.zoomOverTheShoulder = function() {
 
-		if ( !avatar ) { addAvatar(); }
-		camera.position.set( 50 * size, - 50 * size, 50 * size );
+		if ( icw.gbjson.useSIUnitsForResults.toLowerCase() === 'true' ) {
+
+/*
+console.log( 'SI camera.position', camera.position );
+
+			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( -1, -3, 1 );
+			avatar.add( mesh );
+*/
+
+			controls.target.set( 0, 0, 2 );
+			camera.position.set( -1, -8, 3 );
+
+			avatar.add( camera );
+
+		} else {
+/*
+console.log( 'IP camera.position ', camera.position );
+
+			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( -1, -3, 1 );
+			avatar.add( mesh );
+*/
+
+			controls.target.set( 0, 0, 2 );
+			camera.position.set( -1, -8, 3 );
+			avatar.add( camera );
+
+		}
 
 	}
 
@@ -157,56 +252,56 @@ console.log( '', 23 );
 
 	icw.goForward = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.translateY( size );
 
 	}
 
 	icw.goBack = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.translateY( -size );
 
 	}
 
 	 icw.goUp = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.translateZ( 0.5 );
 
 	}
 
 	icw.goDown = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.translateZ( -0.5 );
 
 	}
 
 	icw.turnRight = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.z -= 0.1;
 
 	}
 
 	icw.turnLeft = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.z += 0.1;
 
 	}
 
 	icw.turnUp = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.x += 0.1;
 
 	}
 
 	icw.turnDown = function() {
 
-		if ( !avatar ) { addAvatar(); }
+//		if ( !avatar ) { addAvatar(); }
 		avatar.rotation.x -= 0.1;
 
 	}

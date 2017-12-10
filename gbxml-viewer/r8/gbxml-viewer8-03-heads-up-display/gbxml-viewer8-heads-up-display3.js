@@ -35,7 +35,7 @@
 
 			mouse = new THREE.Vector2();
 
-			icw.addEventListener ( 'hashchange', toggleHeadsUpOff, false );
+			addEventListener ( 'hashchange', toggleHeadsUpOff, false );
 
 			renderer.domElement.addEventListener( 'click', onDocumentMouseMove, false );
 			renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
