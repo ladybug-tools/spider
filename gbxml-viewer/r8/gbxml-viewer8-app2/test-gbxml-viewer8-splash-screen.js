@@ -81,9 +81,12 @@ R8.5
 `
 
 
-		divAppMenu.innerHTML = txt
+		divAppMenu.innerHTML = txt;
 
-		const url = 'https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml'
+//		const url = 'https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml';
+		const url = 'https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/sam-live2.xml';
+
+
 
 		divContents.style.maxWidth = '100%';
 		document.body.style.overflow = 'hidden';
