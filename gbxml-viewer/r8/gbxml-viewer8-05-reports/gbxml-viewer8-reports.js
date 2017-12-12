@@ -550,6 +550,7 @@
 			}
 
 		}
+
 console.log( 'node', node );
 
 		tt = node
@@ -629,7 +630,7 @@ console.log( 'node', node );
 
 			}
 
-		};
+		}
 
 	}
 

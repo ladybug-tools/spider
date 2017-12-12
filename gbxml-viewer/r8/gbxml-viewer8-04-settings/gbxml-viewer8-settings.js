@@ -197,7 +197,7 @@
 			Roof: 0x80ff80,
 			InteriorFloor: 0xff8080,
 			ExposedFloor: 0x80ff80,
-			Shade: 0x80ff80,
+			Shade: 0xffb480 ,
 			UndergroundWall: 0xd06800,
 			UndergroundSlab: 0xd06800,
 			Ceiling: 0xff8080,
