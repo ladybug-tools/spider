@@ -22,9 +22,12 @@ The core or template file to be used to read gbXML files and display them in 3D
 
 ## Sample files to load
 
-* [Open Studio SampleX ML]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml )
+* [Open Studio SampleXML]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml )
 * [Sample Building]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html#SampleBuildWell%20gbXML%20working4%20OpenStudio.xml )
 * [gbXMLStandard Single Family Residential 2016.xml]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core-r3/gbxml-viewer8-core.html#gbXMLStandard%20Single%20Family%20Residential%202016.xml )
+
+
+
 
 
 ## Running Files locally

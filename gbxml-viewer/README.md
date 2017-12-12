@@ -10,7 +10,7 @@ _gbXML Viewer R8_
 ## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
 
-## Concept: Knowledge embedded in gbXML Files is viewable, analyzable and editable with free, open source web apps
+## Concept: Knowledge embedded in gbXML files is viewable, analyzable and editable with free, open-source web apps
 
 ### Issue / The problem to be solved
 
@@ -19,21 +19,19 @@ About [Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building
 
 > gbXML allows disparate 3D [building information models (BIM)]( https://en.wikipedia.org/wiki/Building_information_modeling ) and architectural/engineering analysis software to share information with each other
 
-The current set of [BIM authoring and CAD software tools]( http://www.gbxml.org/Software_Tools_that_Support_GreenBuildingXML_gbXML ) for gbXML include various proprietary, closed source applications.
+The current set of [BIM authoring and CAD software tools]( http://www.gbxml.org/Software_Tools_that_Support_GreenBuildingXML_gbXML ) for gbXML include various proprietary, closed-source applications.
 
-gbXML being open source, it would also be nice to be able to view gbXML files in 3D in your browser with no fees and with open source code
+GbXML being open source, it would also be nice to be able to view gbXML files in 3D in your browser with no fees and with open source code.
 
-The Ladybug Tools Spider gbXML Reader scripts are first steps toward making gbXML viewers readily available
+The Ladybug Tools/Spider gbXML Reader scripts are first steps toward making gbXML viewers readily available.
 
 ### Mission
 
 gbXML Viewer is a variety of modular experiments for viewing, examining and validating gbXML files in 3D in your browser.
 
-Below are links to some of the latest files. R8 is that latest release and is still a work-in-progress. Not all the scripts from previous releases have been added to R7 yet.
+Below there are links to some of the latest files. R8 is that latest release and is still a work-in-progress.
 
-Note that. currently, the functionality is spread across multiple files. This is for testing and early-stage development purposes only. Sometime in the near future there will be a script that assembles multiple scripts into a single user experience.
 
- 
 ### Vision
 
 * Helping students, clients and non-AEC peeps gain access BIM data easily, quickly and freely
@@ -50,40 +48,65 @@ Note that. currently, the functionality is spread across multiple files. This is
 * All free and open source and hosted on GitHub
 
 
+## View Sample gbXML Files
+
+Click any of the links below to view the XML file.
+
+* Models from [NREL/OpenStudio]( https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml )
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/TwoStoryOffice_Trane.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/ZNETH.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/simpleBox_vasari.xml>
+
+* Models from: [NREL/openstudio-gbxml-validation]( https://github.com/NREL/openstudio-gbxml-validation/tree/master/gbxml_test_suite/tests/output )
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_1/test_case_1.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_/test_case_.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_/test_12case_12.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_2/test_case_2.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_3/test_case_3.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_5/test_case_5.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_6/test_case_6.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_7/test_case_7.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_8/test_case_8.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_wbt1/test_case_wbt1.xml>
+* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_wbt2/test_case_wbt2.xml>
+
+
 ## Links of Interest
 
 See also:
 
-* http://www.gbxml.org/
+* <http://www.gbxml.org/>
 > gbXML is an industry supported schema for sharing building information between disparate building design software tools.
 
-* https://github.com/GreenBuildingXML
+* <https://github.com/GreenBuildingXML>
 > Repositories for all things gbXML including validator source code, test cases, and more...
 
-* https://en.wikipedia.org/wiki/Green_Building_XML
+* <https://en.wikipedia.org/wiki/Green_Building_XML>
 > The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools. gbXML is being integrated into a range of software CAD and engineering tools and supported by leading 3D BIM vendors. gbXML is streamlined to transfer building properties to and from engineering analysis tools to reduce the interoperability issues and eliminate plan take-off time.
 
 
-* https://twitter.com/gbXML
+* <https://twitter.com/gbXML>
 > The gbXML open schema helps facilitate the transfer of building properties stored in 3D building information models (BIM) to engineering analysis tools.
 
-* https://github.com/chiensiTB/gbXMLValidator/wiki/What-is-gbXML
+* <https://github.com/chiensiTB/gbXMLValidator/wiki/What-is-gbXML>
 > What is gbXML?
 
 
-* https://greenspacelive.com/site/building-generator/
+* <https://greenspacelive.com/site/building-generator/>
 > Use the building generator for rapid production of building geometry models.
 
 
-* https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts
-* http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml
-* https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere
-* https://knowledge.autodesk.com/support/revit-products/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F-htm.html
-* http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html
+* <https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts>
+* <http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml>
+* <https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere>
+* <https://knowledge.autodesk.com/support/revit-products/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F-htm.html>
+* <http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html>
 
 ### Sample gbXML Files
 
-* https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml
+* <https://github.com/GreenBuildingXML/Sample-gbXML-Files>
+* <https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml>
+* <https://github.com/NREL/openstudio-gbxml-validation/tree/master/gbxml_test_suite/tests>
 
 
 ## Modules
@@ -92,7 +115,7 @@ See also:
 
 #### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-01-core/README.md )
 
-#### Full Screen: [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core.html )
+#### Full Screen: [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html )
 
 * View gbXML files in 3D in your browser. 
 * Open files using File Reader or by URL in location.hash.Base 
@@ -143,8 +166,9 @@ See also:
 * Toggle the display of 3D surfaces based on user input
 * Create detailed interactive reports of issues discovered.
 
-### Camera - First Person
 
+
+### Camera - First Person
 
 #### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-06-camera-first-person/README.md )
 
