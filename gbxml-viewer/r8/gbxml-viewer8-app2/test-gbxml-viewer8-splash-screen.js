@@ -9,6 +9,41 @@
 
 `
 
+
+
+
+
+
+<details open>
+<summary>2017-12-10</summary>
+
+R8.11<br>
+Reports<br>
+	* Updated to button tag<br>
+	* Storeys: display number and IDs of spaces<br>
+	* Surfaces<br>
+		* Better handling of on/off toggles<br>
+		* Add 'all visible' button<br>
+	* Duplicate Coordinates<br>
+		* Add visibility toggle for all duplicates<br>
+		* Add Space button to toggle view of space<br>
+	* Duplicate Adjacencies<br>
+		* Add visibility toggle for all duplicates<br>
+		* Add length and width of element<br>
+	* Tiny Surfaces<br>
+		* Add length and width of element<br>
+	* Invalid Adjacencies << new item<br>
+		* Checks for multiple adjacencies in objects that should only have a single adjacency<br>
+Settings<br>
+	* Add toggle buttons for surfaces/edges/all<br>
+	* Update colors<br>
+	* Colors of duplicates etc unchanged when toggling other color settings<br>
+Many other minor fixes and code clean-up<br>
+
+</details>
+
+<br>
+
 <details open>
 <summary>2017-12-10</summary>
 
@@ -19,8 +54,6 @@ R8.10<br>
 
 
 </details>
-
-<br>
 
 <details>
 <summary>2017-12-08</summary>

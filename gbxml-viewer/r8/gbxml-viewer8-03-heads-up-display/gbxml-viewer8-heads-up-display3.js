@@ -124,8 +124,9 @@
 // needs big clean up
 	function setHeadsUp( event ) {
 
+		var space1, space2;
 		let txt;
-		const b = '<br>'
+		const b = '<br>';
 
 		if ( intersected === undefined ){
 
@@ -171,17 +172,17 @@
 						'<hr>' + 
 						'adjacency 1:  <button onclick=toggleSpace("' + space1.id + '"); >' + space1.id + '</button>' + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
-						( space.Description ? 'description: ' + space.Description + b : '' )  +
-						( space.Area ? 'area: ' + space.Area + b : '' )  +
-						( space.Name ? 'name: ' + space.Name + b : '' )  +
-						( space.conditionType ? 'conditionType: ' + space.conditionType + b : '' )  +
-						( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
+						( space1.Description ? 'description: ' + space1.Description + b : '' )  +
+						( space1.Area ? 'area: ' + space1.Area + b : '' )  +
+						( space1.Name ? 'name: ' + space1.Name + b : '' )  +
+						( space1.conditionType ? 'conditionType: ' + space1.conditionType + b : '' )  +
+						( space1.zoneIdRef ? 'zoneIdRef: ' + space1.zoneIdRef + b : '' ) +
 						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
 
 						'<hr>' + 
 						'adjacency 2: <button onclick=toggleSpace("' + space2.id + '"); >' + space2.id + '</button>' + b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
-						( space.Description ? 'description: ' + space.Description + b : '' )  +
+						( space2.Description ? 'description: ' + space2.Description + b : '' )  +
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
 //						'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
 

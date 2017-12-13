@@ -15,7 +15,7 @@ _gbXML Viewer R8_
 ### Issue / The problem to be solved
 
 
-About [Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building_XML )
+About [Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building_XML ):
 
 > gbXML allows disparate 3D [building information models (BIM)]( https://en.wikipedia.org/wiki/Building_information_modeling ) and architectural/engineering analysis software to share information with each other
 
@@ -53,12 +53,13 @@ Below there are links to some of the latest files. R8 is that latest release and
 
 Click any of the links below to view the XML file.
 
-* Models from [NREL/OpenStudio]( https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml )
+### Models from [NREL/OpenStudio]( https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml )
+
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/TwoStoryOffice_Trane.xml>
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/ZNETH.xml>
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/simpleBox_vasari.xml>
 
-* Models from: [NREL/openstudio-gbxml-validation]( https://github.com/NREL/openstudio-gbxml-validation/tree/master/gbxml_test_suite/tests/output )
+### Models from: [NREL/openstudio-gbxml-validation]( https://github.com/NREL/openstudio-gbxml-validation/tree/master/gbxml_test_suite/tests/output )
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_1/test_case_1.xml>
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_/test_case_.xml>
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_/test_12case_12.xml>
