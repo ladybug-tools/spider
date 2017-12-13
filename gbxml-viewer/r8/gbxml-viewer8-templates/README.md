@@ -6,15 +6,15 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html  )
+## Full screen: [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html )
 
-Use and share this link:
+Use and share this link for gbXML Viewer8:
 
 * <http://www.ladybug.tools/spider/gbxml-viewer/r8/>
 
 ## Concept
 
-
+The files in this folder are templates or 'boilerplate' files that may be used to build gbXML viewer modules.
 
 ## Wish list
 
@@ -30,6 +30,10 @@ Use and share this link:
 
 ## Change Log
 
+
+### 2017-12-13 ~ Theo
+
+* This read me added
 
 ***
 

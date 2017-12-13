@@ -23,14 +23,14 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 * Create text reports of data embedded in gbXML files
 * Toggle the display of 3D surfaces based on user input
-* Create detailed interactive reports of issues discoverd.
+* Create detailed interactive reports of issues discovered.
 
 
 ### Features
 
 #### Campus Location
 
-* If Latitude and longitutude are provided, link to call for a Google map is displayed
+* If latitude and longitude are provided, link to call for a Google map is displayed
 
 #### Spaces
 

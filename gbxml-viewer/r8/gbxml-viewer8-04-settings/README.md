@@ -15,14 +15,13 @@
 
 ## Features
 
-* Set random, phonf=g default, normal or default material
+* Set colors to random, Phong default, normal or default material
 * Toggle background gradient
 * Toggle wireframe
 * Draw surface normals ~ only that ones that are currently visible
 * Toggle axes
 * Toggle scene rotation
 * Set Camera Ortho
-	* Not yet a toggle/Reload page to return to a perspective view
 * Opacity slider
 
 ## Wish list
@@ -38,6 +37,7 @@
 
 ## Change Log
 
+See also main gbXML Viewer read me file
 
 ### 2017-12-10 ~ Theo
 
