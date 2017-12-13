@@ -72,6 +72,10 @@ Click any of the links below to view the XML file.
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_wbt1/test_case_wbt1.xml>
 * <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_wbt2/test_case_wbt2.xml>
 
+### More Sample gbXML Files
+
+* <https://github.com/GreenBuildingXML/Sample-gbXML-Files>
+
 
 ## Links of Interest
 
@@ -105,11 +109,6 @@ See also:
 * <http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html>
 
 
-### Sample gbXML Files
-
-* <https://github.com/GreenBuildingXML/Sample-gbXML-Files>
-* <https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml>
-* <https://github.com/NREL/openstudio-gbxml-validation/tree/master/gbxml_test_suite/tests>
 
 
 ## Modules
