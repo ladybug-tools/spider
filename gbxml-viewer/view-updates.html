@@ -5,7 +5,7 @@
 <meta name = description content = "GitHub issues to blog posts" >
 <meta name = keywords content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = date content = "2017-08-21" >
-<title>View GitHub Issues</title>
+<title>View Updates</title>
 <style>
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
@@ -24,7 +24,13 @@
 			<h1><a id = "title" href = "" ></a></h1>
 		</div>
 
-		<div id = "header" ></div>
+		<div id = "header" >
+			Below are some recent status updates regarding the Ladybug Tools/ Spider efferts on gbXML.
+
+			There are more updates available on our 
+			<a href="https://github.com/ladybug-tools/spider/issues?utf8=%E2%9C%93&q=label%3AgbXML+" >GitHub issues</a> page.
+
+		</div>
 
 		<hr>
 
@@ -58,6 +64,7 @@
 
 		urlIssues = 'https://api.github.com/repos/' + user + repo + '/issues';
 
+console.log( 'urlIssues',  urlIssues );
 //		requestFile( '../pages/github-issues-header.md' , callbackHeader );
 
 		requestFile( urlIssues, callbackPost );
@@ -87,45 +94,6 @@
 
 
 
-	function xxxcallbackPost( xhr ) {
-
-console.log( '', 23 );
-		let converter;
-
-		converter = new showdown.Converter();
-
-		let response, json, lines;
-
-		response = xhr.target.response;
-console.log( 'response', response );
-
-		json = JSON.parse( response );
-console.log( 'json', json );
-
-		for ( var i = 0; i < json.length; i++ ) {
-
-			issue = json[ i ];
-
-			html = converter.makeHtml( issue.body );
-			html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
-//console.log( '', html );
-
-			contents.innerHTML += 
-
-//				'<h1>blog post: ' + ( issue.title ).link( issue.html_url ) + '</h1>' + 
-				'<h1>blog post: <a href="' + issue.html_url + '" target=_top >' + issue.title + '</a></h1>' + 
-
-				'<div><i>written on: ' + issue.created_at + 
-				' by <a target+=top href="' + issue.user.html_url + '" >' + issue.user.login +  '</a></i></div>' +
-				html +
-
-			'<hr>';
-
-		}
-
-	}
-
-
 	function callbackPost( xhr ) {
 
 		let converter;
@@ -138,12 +106,16 @@ console.log( 'json', json );
 //console.log( 'response', response );
 
 		json = JSON.parse( response );
-console.log( '', json );
+//console.log( '', json );
 
 
 		for ( var i = 0; i < json.length; i++ ) {
 
 			issue = json[ i ];
+//console.log( 'issue', issue.labels );
+
+			let keeper = isKeeper( issue.labels, 'gbXML' );
+			if ( keeper === false ) { continue; };
 
 			html = converter.makeHtml( issue.body );
 			html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
@@ -166,16 +138,29 @@ console.log( '', json );
 
 	}
 
+	function isKeeper( items, tag ) {
+
+		let keeper = false;
+
+		for ( let item of items ) {
+
+			if ( item.name === tag ) { keeper = true; }
+
+		}
+
+		return keeper;
+
+	}
 
 	function onWindowResize(){
 
 		if ( window.innerWidth < 1000 ) {
 
-			ifrReadMe.style.display = 'none';
+//			ifrReadMe.style.display = 'none';
 
 		} else {
 
-			ifrReadMe.style.display = '';
+//			ifrReadMe.style.display = '';
 
 		}
 

@@ -49,36 +49,18 @@ Below there are links to some of the latest files. R8 is that latest release and
 * All free and open source and hosted on GitHub
 
 
+## Recent Updates
+
+The [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html ) gives you a glimpse of some of the things that have been happeing recently with the gbXML Vieweer.
+
+
+
 ## View Sample gbXML Files
 
-Click any of the links below to view the XML file.
 
-### Models from [NREL/OpenStudio]( https://github.com/NREL/OpenStudio/tree/develop/openstudiocore/resources/gbxml )
-
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/TwoStoryOffice_Trane.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/ZNETH.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/OpenStudio/develop/openstudiocore/resources/gbxml/simpleBox_vasari.xml>
-
-### Models from: [NREL/openstudio-gbxml-validation]( https://github.com/NREL/openstudio-gbxml-validation/tree/master/gbxml_test_suite/tests/output )
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_1/test_case_1.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_/test_case_.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_/test_12case_12.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_2/test_case_2.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_3/test_case_3.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_5/test_case_5.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_6/test_case_6.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_7/test_case_7.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_8/test_case_8.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_wbt1/test_case_wbt1.xml>
-* <http://www.ladybug.tools/spider/gbxml-viewer#https://rawgit.com/NREL/openstudio-gbxml-validation/master/gbxml_test_suite/tests/output/test_case_wbt2/test_case_wbt2.xml>
-
-### More Sample gbXML Files
-
-* <https://github.com/GreenBuildingXML/Sample-gbXML-Files>
-
+The [gbXML Sample Files folder]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/gbxml-sample-files/README.md ) has links to a number of files you may view.
 
 ## Links of Interest
-
 
 
 See also:
@@ -103,6 +85,7 @@ See also:
 * <https://greenspacelive.com/site/building-generator/>
 > Use the building generator for rapid production of building geometry models.
 
+### More Links
 
 * <https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts>
 * <http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml>
