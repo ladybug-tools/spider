@@ -1,16 +1,16 @@
 
-	var user = 'ladybug-tools'
-	var repo = '/spider';
-	var pathRepo = 'gbxml-viewer/gbxml-sample-files/';
+	var userGallery = 'ladybug-tools'
+	var repoGallery = '/spider';
+	var pathRepoGallery = 'gbxml-viewer/gbxml-sample-files/';
 
-	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	var iconInfoGallery = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 
-	var threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html';
+	var threeDefaultFileGallery = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html';
 
-	var urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
+	var urlGitHubApiContentsGallery = 'https://api.github.com/repos/' + userGallery + repoGallery + '/contents/' + pathRepoGallery;
 
-	var urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/' + pathRepo;
-	var urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
+	var urlGitHubPageGallery = 'https://rawgit.com/' + userGallery + repoGallery + '/master/' + pathRepoGallery;
+	var urlGitHubSourceGallery = 'https://github.com/' + userGallery + repoGallery + '/blob/master/' + pathRepoGallery;
 
 
 	init();
@@ -26,7 +26,7 @@
 
 		}
 
-		requestFile( urlGitHubApiContents, callbackGitHubMenu );
+		requestFile( urlGitHubApiContentsGallery, callbackGitHubMenu );
 
 	}
 
@@ -65,11 +65,11 @@
 
 			'<div style=margin-bottom:8px; >' +
 
-				'<a href=' + urlGitHubSource + fileName + ' title="Edit me" >' + iconInfo + '</a>' +
+				'<a href=' + urlGitHubSourceGallery + fileName + ' title="Edit me" >' + iconInfoGallery + '</a>' +
 
-				' <a href=#' + urlGitHubPage + fileName + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</a> ' +
+				' <a href=#' + urlGitHubPageGallery + fileName + ' title="' + file.size.toLocaleString() + ' bytes"  >' + file.name + '</a> ' +
 
-				' <a href=' + threeDefaultFile + '#' + urlGitHubPage + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
+				' <a href=' + threeDefaultFileGallery + '#' + urlGitHubPageGallery + fileName + ' title="Link to just this file" >&#x2750;</a> ' +
 
 			'</div>';
 
