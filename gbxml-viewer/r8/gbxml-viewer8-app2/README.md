@@ -15,7 +15,7 @@ Use this link:
 
 ## Concept
 
-* All the gbXML Viewer8 modules all together andavailable in a single app
+* All the gbXML Viewer8 modules all together and available in a single app
 
 
 ## Wish list / To Do
