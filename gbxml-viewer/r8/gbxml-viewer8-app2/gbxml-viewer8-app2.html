@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-10" >
-<title>gbXML Viewer R8.10 App2</title>
+<meta name = "date" content = "2017-12-12" >
+<title>gbXML Viewer R8.11 App2</title>
 
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -21,6 +21,7 @@
 	#divMenu a:hover, #divMenua:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
+	button { font: 12pt monospace; }
 //	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: white }
 
@@ -102,20 +103,21 @@
 			toggle heads-up</button>
 		</p>
 
-<!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';document.head.appendChild(script);})()" >settings</a></p> -->
 		<p>
-			<a href="JavaScript:(function(){
-			var script=document.createElement('script');
-			script.src='../gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';
-			document.head.appendChild(script);})()" >settings</a></p>
+			<button onclick="( function(){
+				var script=document.createElement('script');
+				script.src='../gbxml-viewer8-04-settings/gbxml-viewer8-settings.js';
+				document.head.appendChild(script);
+			})()" >settings</button>
+		</p>
 
-<!--		<p><a href="JavaScript:(function(){var script=document.createElement('script');script.src='https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r8/gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';document.head.appendChild(script);})()" >reports</a></p> -->
 		<p>
-			<a href="JavaScript:(function(){
+			<button onclick="( function(){
 				var script=document.createElement('script');
 				script.src='../gbxml-viewer8-05-reports/gbxml-viewer8-reports.js';
 				document.head.appendChild(script);
-			})()" >reports</a></p>
+			} )()" >reports</button>
+		</p>
 
 		<h3>Experiments</h3>
 
@@ -134,7 +136,7 @@
 				const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gbxml-viewer8-07-analemma/gbxml-viewer8-analemma.js';
 			} )()" >
-			analemma</button> &laquo; at a very early stage. No sun yet, etc. Need to reload script before each model change.
+			sun-path / analemma</button> &laquo; at a very early stage. No sun yet, etc. Need to reload script before each model change.
 		</p>
 
 		<hr>
@@ -198,7 +200,6 @@
 
 	const urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
 	const urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
-
 
 	init();
 

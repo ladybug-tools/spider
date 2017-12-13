@@ -5,10 +5,15 @@
 	var icw;
 	var THREE;
 	var scene;
-	var surfaceMeshes
 	var opacity;
 	var cameraOrtho;
+
+	var surfaceMeshes;
 	var surfaceEdges;
+
+	var surfaceAdjacencyDuplicates;
+	var surfaceAdjacencyInvalids;
+	var surfaceCoordinateDuplicates;
 
 	var helperNormalsFaces
 
@@ -16,6 +21,8 @@
 
 
 	function init() {
+
+		if ( divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
 
 		if ( !divAppMenu ) {
 
@@ -29,10 +36,21 @@
 		THREE = icw.THREE;
 		scene = icw.scene;
 		surfaceMeshes = icw.surfaceMeshes;
+		surfaceEdges = icw.surfaceEdges;
+
+		surfaceAdjacencyDuplicates = icw.surfaceAdjacencyDuplicates;
+		surfaceAdjacencyInvalids = icw.surfaceAdjacencyInvalids;
+		surfaceCoordinateDuplicates = icw.surfaceCoordinateDuplicates;
 
 		divAppMenu.innerHTML =
 
 		'<div id = "divMenuItems" ></div>' +
+
+			'<p>' +
+				'toggles <button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
+				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
+				' <button onclick=allVisible(); >all</button>' +
+			'</p>' +
 
 			'<p><button onclick=setRandomMaterial(); >Set random material</button></p>' +
 
@@ -150,6 +168,7 @@
 	}
 
 
+
 	function setExposureMaterial() {
 
 
@@ -201,7 +220,7 @@
 			UndergroundWall: 0xd06800,
 			UndergroundSlab: 0xd06800,
 			Ceiling: 0xff8080,
-			Air: 0xff8080,
+			Air: 0xffff80,
 			UndergroundCeiling: 0xff8080,
 			RaisedFloor: 0xff8080,
 			SlabOnGrade: 0xd06800,
@@ -212,7 +231,12 @@
 
 		surfaceMeshes.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh ) {
+			if ( child instanceof THREE.Mesh 
+					&& ( surfaceAdjacencyDuplicates === undefined || surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) === false )
+					&& ( surfaceAdjacencyInvalids === undefined || surfaceAdjacencyInvalids.includes( child.userData.data.Name ) === false )
+					&& ( surfaceCoordinateDuplicates === undefined || surfaceCoordinateDuplicates.includes( child.userData.data.Name ) === false )
+
+			) {
 
 				child.material =
 					new THREE.MeshPhongMaterial( { color: colorsExposure[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
@@ -285,6 +309,7 @@
 	}
 
 
+
 	function toggleAxesHelper() {
 
 		icw.axesHelper.visible = !icw.axesHelper.visible;
@@ -312,6 +337,7 @@
 	}
 
 
+
 	function toggleGroundHelper() {
 
 		if ( !icw.groundHelper ) {
@@ -333,6 +359,7 @@
 		icw.groundHelper.visible = !icw.groundHelper.visible;
 
 	}
+
 
 
 	function toggleSceneAutoRotate() {

@@ -14,6 +14,8 @@
 
 	function initHeadsUp() {
 
+		if ( divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
+
 		if ( !divHeadsUp ) {
 
 			divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );

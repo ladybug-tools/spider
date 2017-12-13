@@ -51,9 +51,9 @@
 
 	const uriGbxmlDefault =
 		location.protocol === 'file:' ?
-		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
+//		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 //		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
-//		'../../../read-gbxml/data-files/sam-live2.xml'
+		'../../../read-gbxml/data-files/sam-live2.xml'
 //		'../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml'
 		:
 		'../../gbxml-sample-files/sam-live2.xml';
@@ -61,6 +61,10 @@
 	var gbjson;
 	var surfaceMeshes;
 	var surfaceEdges;
+
+	var surfaceAdjacencyDuplicates;
+	var surfaceAdjacencyInvalids;
+	var surfaceCoordinateDuplicates;
 
 	var colors = {
 
@@ -114,7 +118,7 @@
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.autoRotate = true;
+//		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 

@@ -2,14 +2,16 @@
 
 //	var divAppMenu = divAppMenu || undefined;
 
-	var icw = icw || undefined;
+	var icw;
 	var gbjson, gbxml;
 	var THREE;
 	var surfaceGroup;
 	var surfaceMeshes;
 	var surfaceEdges;
+	var surfaceAdjacencyDuplicates;
+	var surfaceAdjacencyInvalids;
+	var surfaceCoordinateDuplicates;
 
-	var surfaceAdjacencies;
 	var telltale;
 	var b = '<br>';
 
@@ -18,6 +20,8 @@
 
 
 	function initReport() {
+
+		if ( divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
 
 		if ( !divAppMenu ) {
 
@@ -28,7 +32,7 @@
 
 		}
 
-		createReport(); 
+		createReport();
 
 	}
 
@@ -45,14 +49,16 @@
 		surfaceMeshes = surfaceGroup.children;
 		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
 
-		surfaceAdjacencies = [];
+		surfaceAdjacencyDuplicates = [];
+		surfaceAdjacencyInvalids = [];
+		surfaceCoordinateDuplicates = [];
 
-		divAppMenu.innerHTML = 
+		divAppMenu.innerHTML =
 
 			'<p>' +
-				'<button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
+				'toggles <button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
 				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-				' <button onclick=icw.setAllVisible();icw.zoomObjectBoundingSphere(surfaceGroup); >reset view</button>' +
+				' <button onclick=allVisible(); >all</button>' +
 			'</p>' +
 
 			'<div id = divReport ></div>';
@@ -105,6 +111,10 @@
 		const surfaceTinies = getSurfacesTinies();
 		divReport.innerHTML += addDetails( surfaceTinies.summary, surfaceTinies.flowContent );
 
+
+		const surfaceAdjacencyInvalid = getSurfaceAdjacencyInvalid();
+		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent );
+
 	}
 
 
@@ -122,7 +132,7 @@
 
 			} else {
 
-				attributes += '<div><div id=ib >' + i + '</div>: ' + obj[ i ] + '</div>';
+				attributes += '<div>' + i + ': ' + obj[ i ] + '</div>';
 
 			}
 
@@ -292,14 +302,14 @@
 
 //console.log( 'surfaces', surfaces );
 
-		types = [];
-		typesCount = [];
+		const types = [];
+		const typesCount = [];
 
 		for ( let surface of surfaces ) {
 
 			index = types.indexOf( surface.surfaceType );
 
-			if ( index < 0 ) { 
+			if ( index < 0 ) {
 
 				types.push( surface.surfaceType );
 				typesCount[ types.length - 1 ] = 1;
@@ -314,18 +324,18 @@
 
 		for ( let i = 0; i < types.length; i++ ) {
 
-			txt += 
-				'<button class=toggle onclick=seTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
-				' <button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' + 
-				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) + 
+			txt +=
+				'<button class=toggleView onclick=setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
+				' <button class=toggle onclick=toggleSurfaceType(this); >' + types[ i ] + '</button>: ' +
+				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
 				'%<br>';
 
 		}
-/*
-		txt += 
 
-			'<button class=toggle onclick=icw.setAllVisible();icw.zoomObjectBoundingSphere(surfaceMeshes); >all visible</button>: ' 
-*/
+		txt +=
+
+			'<p><button class=toggle onclick=allVisible(); >all visible</button></p>';
+
 
 		const summary = 'Surfaces: ' + surfaces.length;
 
@@ -339,9 +349,14 @@
 
 		const surfacePolyLoops = [];
 		const surfaceIds = [];
+
 		const surfaces = gbjson.Campus.Surface;
 		let count = 0;
-		let flowContent = '';
+		let flowContent =
+			'<p>' +
+				'<button id=butDuplicatesCoordinates onclick=toggleAdjacencies(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
+			'</p>';
+		let spaceId;
 
 		for ( let i = 0; i <  surfaces.length; i++ ) {
 
@@ -349,24 +364,36 @@
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
 			index = surfacePolyLoops.indexOf( points );
 
-			if ( index < 0 ) { 
+			if ( index < 0 ) {
 
-				surfacePolyLoops.push( points ); 
+				surfacePolyLoops.push( points );
 				surfaceIds.push( i );
 
 			} else {
 
 				surfOther = surfaces[ surfaceIds[ index ] ];
+				surfaceCoordinateDuplicates.push( surface.Name );
 
 //console.log( 'surface', surface );
 //console.log( 'surfOther', surfOther );
 
-				flowContent += 
-					'<p>' + count + 
+
+				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
+
+				if ( adjacency ) {
+
+					spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
+
+				}
+
+				flowContent +=
+					'<p>' + count +
 						'. id: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
+					( spaceId ? 'Space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
+
 						'<hr>' +
 						'id of duplicate: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surfOther.surfaceType + b +
@@ -378,6 +405,12 @@
 				count ++;
 
 			}
+
+		}
+
+		for ( let child of surfaceMeshes ) {
+
+			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ff80ff' ); }
 
 		}
 
@@ -398,14 +431,14 @@
 
 			const id = surface.CADObjectId;
 
-			if ( !surfacesIds.includes( id ) ) { 
+			if ( !surfacesIds.includes( id ) ) {
 
-				surfacesIds.push( id ); 
+				surfacesIds.push( id );
 
 			} else {
 
-				flowContent += 
-					'<p>' + count + 
+				flowContent +=
+					'<p>' + count +
 						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
@@ -431,30 +464,45 @@
 
 		const surfaces = gbjson.Campus.Surface;
 		let count = 0;
-		let flowContent = '<br>';
+		let flowContent =
+			'<p>' +
+				'<button id=butDuplicateAdjacencies onclick=toggleAdjacencies(butDuplicateAdjacencies,surfaceAdjacencyDuplicates); >toggle all duplicates</button>' +
+			'</p>';
 
 		for ( let surface of surfaces ) {
 
 			adjacencies = surface.AdjacentSpaceId;
 
-			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+			const height = parseFloat( surface.RectangularGeometry.Height );
+			const width = parseFloat( surface.RectangularGeometry.Width );
+			const surfaceArea = height * width;
 
-				surfaceAdjacencies.push( surface.Name ); 
+			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
+
+				surfaceAdjacencyDuplicates.push( surface.Name );
 
 //console.log( 'adjacencies', adjacencies  );
 
-				flowContent += 
-					'<div style=margin-bottom:35px; >' + 
-						( ++ count ) +  
+				flowContent +=
+					'<div style=margin-bottom:35px; >' +
+						( ++ count ) +
 						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
+						' area: ' + Number( surfaceArea ).toFixed( 1 ) + ' length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
 						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-					
+
 					'<hr></div>';
 
 			}
+
+		}
+
+
+		for ( let child of surfaceMeshes ) {
+
+			if ( surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }
 
 		}
 
@@ -475,10 +523,9 @@
 
 		for ( let surface of surfaces ) {
 
-
-			height = parseFloat( surface.RectangularGeometry.Height );
-			width = parseFloat( surface.RectangularGeometry.Width );
-			surfaceArea = height * width;
+			const height = parseFloat( surface.RectangularGeometry.Height );
+			const width = parseFloat( surface.RectangularGeometry.Width );
+			const surfaceArea = height * width;
 
 			if ( parseFloat( surfaceArea ) < 1 ) {
 
@@ -498,7 +545,7 @@
 					'surfaceType: ' + surface.surfaceType + b +
 					( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 					( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-					' area: ' + Number( surfaceArea ).toFixed( 1 ) + b +
+					' area: ' + Number( surfaceArea ).toFixed( 1 ) + ' length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
 					( spaceId ? 'Space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
 
 				'</div>';
@@ -513,6 +560,59 @@
 
 
 
+	function getSurfaceAdjacencyInvalid() {
+
+
+		const surfaces = gbjson.Campus.Surface;
+		let count = 0;
+		let flowContent =
+			'<p>' +
+				'<button id=butAdjacencyInvalid onclick=toggleAdjacencies(butAdjacencyInvalid,surfaceAdjacencyInvalids); >toggle all duplicates</button>' +
+			'</p>';
+
+		const adjacencyArrayOK = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'Air' ];
+
+		for ( let surface of surfaces ) {
+
+			adjacencies = surface.AdjacentSpaceId;
+
+			if ( Array.isArray( adjacencies ) === true && adjacencyArrayOK.includes( surface.surfaceType ) === false ) {
+
+				surfaceAdjacencyInvalids.push( surface.Name );
+
+//conconsole.log( 'surface.Name', surface.Name  );
+
+				flowContent +=
+					'<div style=margin-bottom:35px; >' +
+						( ++ count ) +
+						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
+						'surfaceType: ' + surface.surfaceType + b +
+						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
+						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
+						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
+
+					'<hr></div>';
+
+			}
+
+		}
+
+
+		for ( let child of surfaceMeshes ) {
+
+			if ( surfaceAdjacencyInvalids.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
+
+		}
+
+		return { summary: 'Invalid Adjacencies &raquo; ' + count, flowContent: flowContent };
+
+
+
+
+	}
+
+
+
 	function toggleStorey( id, node ) {
 
 //console.log( 'id', id );
@@ -520,7 +620,8 @@
 		const spaces = gbjson.Campus.Building.Space;
 		surfaceGroup.visible = true;
 
-		zones = [];
+		let zones = [];
+		let spacesArray = [];
 
 		for ( let child of surfaceMeshes ) {
 
@@ -540,10 +641,11 @@
 
 				if ( space.id === spaceIdRef && space.buildingStoreyIdRef === id ) {
 
-
 					child.visible = true;
 
 					if ( !zones.includes( space.zoneIdRef ) ) { zones.push( space.zoneIdRef ); }
+
+					if ( !spacesArray.includes( space.id ) ) { spacesArray.push( space.id ); }
 
 				}
 
@@ -551,10 +653,9 @@
 
 		}
 
-console.log( 'node', node );
-
-		tt = node
-		node.parentNode.innerHTML += 'zones ' + zones.length + ': ' + zones.join();
+		node.parentNode.innerHTML += 
+			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
+			'zones ' + zones.length + ': ' + zones.join();
 
 		return zones;
 
@@ -614,7 +715,7 @@ console.log( 'node', node );
 	function toggleSurfaceType( that ) {
 
 		surfaceGroup.visible = true;
-//console.log( '', surfaceAdjacencies );
+//console.log( '', surfaceAdjacencyDuplicates );
 
 		for ( let child of surfaceMeshes ) {
 
@@ -623,8 +724,6 @@ console.log( 'node', node );
 				child.visible = false;
 
 			} else {
-
-				if ( surfaceAdjacencies.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
 
 				child.visible = true;
 
@@ -636,18 +735,22 @@ console.log( 'node', node );
 
 
 
-	function seTypeInvisible( that ) {
+	function setTypeInvisible( that ) {
 
 		surfaceGroup.visible = true;
-//console.log( '', surfaceAdjacencies );
+//console.log( '', surfaceAdjacencyDuplicates );
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
 		for ( let child of surfaceMeshes ) {
 
-			if ( child.userData.data.surfaceType === that.value ) {
+			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === 'lightblue' ) {
 
-				child.visible = !child.visible;
+				child.visible = false;
+
+			} else if ( child.userData.data.surfaceType === that.value ) {
+
+				child.visible = true;
 
 			}
 
@@ -658,8 +761,6 @@ console.log( 'node', node );
 
 
 	function toggleSpace( id ) {
-
-
 
 		surfaceGroup.visible = true;
 
@@ -692,50 +793,41 @@ console.log( 'node', node );
 			}
 
 
-		} 
+		}
 
 	}
 
 
 
-	function toggleDuplicateAdjacency( that ) {
+	function toggleAdjacencies( id, surfaceArray ) {
 
 //console.log( '', that.innerText );
 
-		let thatChild;
+		if ( id.style.backgroundColor !== 'pink' ) {
 
-		surfaceGroup.visible = true;
+			surfaceGroup.visible = true;
 
-		for ( let child of surfaceMeshes ) {
+			for ( let child of surfaceMeshes ) {
 
-			if ( child instanceof THREE.Mesh && child.userData.data.Name !== that.innerText ) {
+				if ( surfaceArray.includes( child.userData.data.Name ) ) {
 
-				child.visible = false;
+					child.visible = true;
 
-			} else if ( child.material ) {
+				} else {
 
-				child.visible = true;
-				thatChild = child;
+					child.visible = false;
 
-			}
-
-		}
-
-		space = thatChild.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef;
-
-		for ( let child of surfaceMeshes ) {
-
-			if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
-				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
-				&& child !== thatChild
-			) {
-
-				child.visible = true;
-console.log( 'space', space );
-
-			} else {
+				}
 
 			}
+
+			id.style.backgroundColor = 'pink';
+
+		} else {
+
+			allVisible();
+
+			id.style.backgroundColor = '';
 
 		}
 
@@ -743,4 +835,24 @@ console.log( 'space', space );
 
 
 
+	function allVisible() {
 
+		surfaceGroup.visible = true;
+		surfaceEdges.visible = true;
+
+		for ( let child of surfaceMeshes ) {
+
+				child.visible = true;
+
+		}
+
+		buttons = document.body.getElementsByClassName( 'toggleView' );
+
+		for ( butt of buttons ) {
+
+			butt.style.backgroundColor = '';
+
+
+		}
+
+	}

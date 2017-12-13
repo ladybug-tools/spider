@@ -103,6 +103,7 @@ See also:
 * <https://knowledge.autodesk.com/support/revit-products/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F-htm.html>
 * <http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html>
 
+
 ### Sample gbXML Files
 
 * <https://github.com/GreenBuildingXML/Sample-gbXML-Files>
@@ -233,6 +234,31 @@ Will most likely build upon
 
 ## Change Log
 
+
+
+### 2017-12-12 ~ Theo
+
+* Reports
+	* Updated to button tag
+	* Storeys: display number and IDs of spaces
+	* Surfaces
+		* Better handling of on/off toggles
+		* Add 'all visible' button
+	* Duplicate Coordinates
+		* Add visibility toggle for all duplicates
+		* Add Space button to toggle view of space
+	* Duplicate Adjacencies
+		* Add visibility toggle for all duplicates
+		* Add length and width of element
+	* Tiny Surfaces
+		* Add length and width of element
+	* Invalid Adjacencies << new item
+		* Checks for multiple adjacencies in objects that should only have a single adjacency
+* Settings
+	* Add toggle buttons for surfaces/edges/all
+	* Update colors
+	* Colors of duplicates etc unchanged when toggling other color settings
+* Many other minor fixes and code clean-up
 
 ### 2017-12-10 ~ Theo
 
