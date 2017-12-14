@@ -523,7 +523,7 @@
 							'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 							'surfaceType: ' + surface.surfaceType + b +
 							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
+//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
 						'</p>';
 
 					count ++;
@@ -532,7 +532,7 @@
 
 				flowContent += 
 
-					'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b +
+					'CADObjectId: <button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b +
 
 				'<hr>';
 
