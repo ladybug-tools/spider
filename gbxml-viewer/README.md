@@ -13,6 +13,7 @@ _gbXML Viewer R8_
 
 * a glimpse of some of the things that have been happening recently with the gbXML Viewer.
 
+
 ## Concept: Knowledge embedded in gbXML files is viewable, analyzable and editable with free, open-source web apps
 
 ### Issue / The problem to be solved
@@ -60,6 +61,8 @@ Below there are links to some of the latest files. R8 is that latest release and
 
 The [gbXML Sample Files folder]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/gbxml-sample-files/README.md ) has links to a number of files you may view.
 
+
+
 ## Links of Interest
 
 
@@ -84,6 +87,7 @@ See also:
 
 * <https://greenspacelive.com/site/building-generator/>
 > Use the building generator for rapid production of building geometry models.
+
 
 ### More Links
 
@@ -223,7 +227,7 @@ Will most likely build upon
 ### 2017-12-13 ~ Theo
 
 * Read Me files
-	* Ad many links and update text throughout
+	* Add many links and update text throughout
 * Sample files
 	* Files renamed in a consistent manner
 	* Read me added
