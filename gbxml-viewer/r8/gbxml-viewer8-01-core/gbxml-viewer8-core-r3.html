@@ -50,7 +50,7 @@
 <script>
 
 	const uriGbxmlDefault =
-		location.protocol === 'file:' ?
+		location.protocol === 'file:' ? // for testing
 //		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 //		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
 		'../../../read-gbxml/data-files/sam-live2.xml'
@@ -59,6 +59,8 @@
 		'../../gbxml-sample-files/bristol-clifton-down-road.xml';
 
 	var gbjson;
+
+// add surface group to r9?
 	var surfaceMeshes;
 	var surfaceEdges;
 
@@ -118,7 +120,7 @@
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-//		controls.autoRotate = true;
+		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -501,7 +503,6 @@
 
 
 	function zoomObjectBoundingSphere( obj ) {
-
 
 		if ( obj.geometry ) {
 // might not be necessary

@@ -9,6 +9,9 @@ _gbXML Viewer R8_
 
 ## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
+## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html ) 
+
+* a glimpse of some of the things that have been happening recently with the gbXML Viewer.
 
 ## Concept: Knowledge embedded in gbXML files is viewable, analyzable and editable with free, open-source web apps
 
@@ -49,9 +52,6 @@ Below there are links to some of the latest files. R8 is that latest release and
 * All free and open source and hosted on GitHub
 
 
-## Recent Updates
-
-The [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html ) gives you a glimpse of some of the things that have been happeing recently with the gbXML Vieweer.
 
 
 
@@ -219,6 +219,20 @@ Will most likely build upon
 
 ## Change Log
 
+
+### 2017-12-13 ~ Theo
+
+* Read Me files
+	* Ad many links and update text throughout
+* Sample files
+	* Files renamed in a consistent manner
+	* Read me added
+* View Updates
+	* View update issues a blog posts
+* Reports
+	* Duplicate CAD IDs sorted and display next to each other
+	* Every set of duplicates CAD IDs has its own toggle view button
+	* Same toogle view button added to other reports
 
 
 ### 2017-12-12 ~ Theo

@@ -13,7 +13,7 @@
 	var surfaceAdjacencyInvalids;
 	var surfaceCoordinateDuplicates;
 
-	var sud;
+	let sud
 	var telltale;
 	var b = '<br>';
 
@@ -401,13 +401,10 @@
 					( spaceId ? 'Space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
 
 						'<hr>' +
-						'id of duplicate: <button onclick=toggleSurface("' + surfOther.id + '"); >' + surfOther.id + '</button>' + b +
+						'id of duplicate: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surfOther.surfaceType + b +
 						( surfOther.Name ? 'Name: ' + surfOther.Name + b : '' ) +
-						( surfOther.CADObjectId ? 
-							'<button onclick=toggeleCadId("' + encodeURI( surfOther.CADObjectId ) + '"); >' + surfOther.CADObjectId + '</button>' + b
-							: ''
-						) +
+						( surfOther.CADObjectId ? 'CADObjectId: ' + surfOther.CADObjectId + b : '' ) +
 
 					'</p><hr>' + b;
 
@@ -429,7 +426,7 @@
 
 
 
-	function xxxxxxgetSurfaceDuplicateCadIds() {
+	function getSurfaceDuplicateCadIds() {
 
 		const surfacesIds = [];
 		const surfaces = gbjson.Campus.Surface;
@@ -440,6 +437,7 @@
 
 			const id = surface.CADObjectId;
 
+			i
 			if ( !surfacesIds.includes( id ) ) {
 
 				surfacesIds.push( id );
@@ -463,83 +461,6 @@
 //console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 
 		count = surfacesIds.length === 1 ? 0 : count;
-		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent };
-
-	}
-
-
-
-	function getSurfaceDuplicateCadIds() {
-
-		const surfacesIds = [];
-	surfaceMembers = [];
-		const surfaces = gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			const id = surface.CADObjectId;
-
-			index = surfacesIds.indexOf( id )
-			if ( index < 0 ) {
-
-				surfacesIds.push( id );
-				surfaceMembers.push( { members: [ surface ] } );
-
-			} else {
-
-				surfaceMembers[ index ].members.push( surface );
-/*
-				flowContent +=
-					'<p>' + count +
-						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-					'</p>';
-
-				count ++;
-*/
-			}
-
-		}
-
-		count = surfacesIds.length === 1 ? 0 : count;
-
-//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
-//console.log( 'surfaceMembers', surfaceMembers );
-
-		for ( member of surfaceMembers ) {
-
-			if ( member.members.length > 1 ) {
-
-//console.log( '', member.members );
-				let surface;
-				for ( surface of member.members ) {
-
-					flowContent +=
-						'<p>' + count +
-							'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-							'surfaceType: ' + surface.surfaceType + b +
-							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'</p>';
-
-					count ++;
-
-				}
-
-				flowContent += 
-
-					'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b +
-
-				'<hr>';
-
-			}
-
-		}
-
 		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent };
 
 	}
@@ -575,10 +496,7 @@
 						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 
-							'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
-							: ''
-						) +
+						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
 						' area: ' + Number( surfaceArea ).toFixed( 1 ) + ' length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
 						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
 					'<hr></div>';
@@ -631,10 +549,7 @@
 					'. id: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 					'surfaceType: ' + surface.surfaceType + b +
 					( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-					( surface.CADObjectId ? 
-						'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
-						: ''
-					) +
+					( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
 					' area: ' + Number( surfaceArea ).toFixed( 1 ) + ' length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
 					( spaceId ? 'Space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
 
@@ -882,30 +797,6 @@
 
 			}
 
-
-		}
-
-	}
-
-
-
-	function toggeleCadId( CADObjectId ) {
-
-//console.log( '', CADObjectId );
-		surfaceGroup.visible = true;
-		surfaceEdges.visible = true;
-
-		for ( let child of surfaceMeshes ) {
-
-			if ( encodeURI( child.userData.data.CADObjectId ) === CADObjectId ) {
-
-				child.visible = true;
-
-			} else {
-
-				child.visible = false;
-
-			}
 
 		}
 
