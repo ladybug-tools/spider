@@ -54,8 +54,6 @@ Below there are links to some of the latest files. R8 is that latest release and
 
 
 
-
-
 ## View Sample gbXML Files
 
 
@@ -169,13 +167,33 @@ See also:
 * This is a new and experimental feature.
 
 
+### Sun Path / Analemma
+
+#### [Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r8/gbxml-viewer8-07-analemma/README.md )
+
+#### Full screen test: [test gbxml viewer8 analemma]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-07-analemma/test-gbxml-viewer8-analemma.html )
+
+See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.md )
+
+
+
+
 ### Bl.ocks Edition
 
-View as Bl.ocks
-<http://bl.ocks.org/theo-armour/163685de4d1fdacd70b2ffd446e8c874>
+View as [Bl.ocks]( https://bl.ocks.org/ ) 
 
-View as Gist
-<https://gist.github.com/theo-armour/163685de4d1fdacd70b2ffd446e8c874/edit>
+Bl.ocks (pronounced “Blocks”) is a simple viewer for sharing code examples hosted on GitHub Gist. 
+
+* <http://bl.ocks.org/theo-armour/163685de4d1fdacd70b2ffd446e8c874>
+
+View as [Gist]( https://help.github.com/articles/about-gists/ )
+
+
+Gists are a great way to share your work. You can share single files, parts of files, or full applications. You can access gists at https://gist.github.com.
+
+* <https://gist.github.com/theo-armour/163685de4d1fdacd70b2ffd446e8c874/edit>
+
+
 
 
 ## To Do
@@ -222,6 +240,7 @@ View as Gist
 
 Not yet started
 
+* 2017-12-15 ~ Theo: export selected spaces or zones to gbxml?
 * 2017-12-10 ~ Michal: Export gbJSON
 * 2017-12-02 ~ Michal: Add ability to edit and save gbXML files
 
@@ -231,6 +250,14 @@ Will most likely build upon
 
 
 ## Change Log
+
+
+
+### 2017-12-15 ~ Theo
+
+* Sun Path / Analemma 3D
+	* Mostly functioning as intended
+	* Minor issues still to be fixed
 
 
 ### 2017-12-13 ~ Theo
@@ -245,7 +272,7 @@ Will most likely build upon
 * Reports
 	* Duplicate CAD IDs sorted and display next to each other
 	* Every set of duplicates CAD IDs has its own toggle view button
-	* Same toogle view button added to other reports
+	* Same toggle view button added to other reports
 
 
 ### 2017-12-12 ~ Theo

@@ -67,7 +67,7 @@
 
 		inpAddress.select();
 
-		parent.ifrGeocoder.height = '280';
+		if( parent && parent.ifrGeocoder ) { parent.ifrGeocoder.height = '280' };
 
 	}
 
@@ -91,8 +91,8 @@
 
 		);
 
-		parent.ifrGeocoder.height = '120';
 
+		if ( parent && parent.ifrGeocoder ) { parent.ifrGeocoder.height = '120' };
 	}
 
 
@@ -128,14 +128,23 @@
 
 //			parent.mainIframe.contentWindow.location.hash = hash;
 
-			parent.location.hash = source + '#' + hash;
 
-			parent.info.innerHTML = txt;
+			if ( parent && parent.ifrGeocoder ) {
 
-			parent.place = place;
-			parent.offsetUTC = place.utc_offset
+				parent.location.hash = source + '#' + hash;
+
+				parent.info.innerHTML = txt;
+
+				parent.place = place;
+				parent.offsetUTC = place.utc_offset
 
 //console.log( 'place ', place );
+
+			} else {
+
+				menuGeocoderMessage.innerHTML += txt;
+
+			}
 
 		}
 

@@ -6,7 +6,7 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer8 App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
 
 Use this link:
@@ -28,6 +28,8 @@ See main read me file
 
 
 ## Change Log
+
+
 
 ### 2017-12-05 ~ Theo
 

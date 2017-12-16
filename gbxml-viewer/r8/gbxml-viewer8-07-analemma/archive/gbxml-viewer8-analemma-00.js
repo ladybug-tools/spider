@@ -29,11 +29,8 @@
 
 	<p>
 	Click to start & stop: <br>
-	<button id=butPlayTheYear onclick="togglePlayTheYear();" >Play the Solar Year</button>
+	<button onclick="togglePlayTheYear();" >Play the Solar Year</button>
 	</p>
-
-	<div id=logLocation ></div>
-
 `;
 
 	var defaultLatitude = 37.796;
@@ -49,14 +46,15 @@
 	parameters.latitude = defaultLatitude;
 	parameters.longitude = defaultLongitude;
 	parameters.groundSize = 10;
-	parameters.analemmaRadius = 0.8 * parameters.groundSize;
+	analemmaRadius = 0.8 * parameters.groundSize;
 
-	parameters.offsetUTC = 0;
+	parameters.offsetUTC = -420;
 
 	parameters.date = 21;
-	parameters.month =12;
+	parameters.month = 2;
 	parameters.hour = 12 - parameters.offsetUTC / 60;
 	parameters.minutes = 0;
+
 
 	var icw;
 	var THREE;
@@ -71,10 +69,10 @@
 
 	var sun;
 	var analemma;
+//	var analemmaRadius;
 
 	var daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
-	var rafPlayTheYear;
 	var playTheYear = false;
 
 	var count = 0;
@@ -87,7 +85,7 @@
 
 		if ( !divAppMenu ) {
 
-			divAppMenu = document.body.appendChild( document.createElement( 'div' ) );
+			divAppMenu= document.body.appendChild( document.createElement( 'div' ) );
 			divAppMenu.style.cssText = 
 				'background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px; ' +
 				'opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; ' +
@@ -95,7 +93,14 @@
 
 		}
 
-		divAppMenu.innerHTML = uiAnalemma;
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divAppMenu.innerHTML = 
+			uiAnalemma +
+//			'<p>surfaces: ' + icw.surfaceMeshes.children.length + '</p>'
+		'';
+
+
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
@@ -108,28 +113,31 @@
 		lightDirectional = icw.lightDirectional;
 		cameraHelper = icw.cameraHelper;
 
-		parameters.latitude = gbjson.Campus.Location.Latitude;
-		parameters.longitude = gbjson.Campus.Location.Longitude;
-		const now = Math.floor( Date.now() / 1000 );
-
-		url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + 
-			parameters.latitude + ',' + parameters.longitude + '&timestamp=' + now;
-
-		requestFile( url, callbackUtcOffset );
-
 		object3D = new THREE.Object3D();
 
-//		lights = icw.lights;
+//		lights = pcc.lights;
 /*
 console.log( 'scene', icw );
 console.log( 'gbjson', gbjson );
 console.log( 'surfaceMeshes', surfaceMeshes );
 */
 
-// allow clicking anywhere to set off init
-		inpMonth.oninput = initSunPath;
-		inpDate.oninput = initSunPath;
-		inpHour.oninput = initSunPath;
+
+		inpMonth.onclick = initSunPath;
+		inpDate.onclick = initSunPath;
+		inpHour.onclick = initSunPath;
+
+/*
+		url = 'https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/open-studio-seb.xml'
+
+		if ( parent && parent.divContents ) {
+
+			divContents.style.maxWidth = '100%';
+			document.body.style.overflow = 'hidden';
+			divContents.innerHTML = '<iframe id=ifrThree src=' + threeDefaultFile + '#' + url + ' style=height:100%;border:none; ></iframe>';
+
+		}
+*/
 
 	}
 
@@ -144,28 +152,24 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 		outDate.value = inpDate.value = parameters.date;
 
-		inpHour.value = parameters.hour + parameters.offsetUTC / 60;
+		inpHour.value = parameters.hours + parameters.offsetUTC / 60;
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;
 
-//		if ( !analemma ) {
+		if ( !analemma ) {
 
-		drawAnalemma();
+			drawAnalemma();
 
-		initSunAndLight();
+//			initSunAndLight();
 
-//		}
+		}
 
-// init happened so assign actual task
-		inpMonth.oninput = setMonth;
-		inpDate.oninput = setDate;
-		inpHour.oninput = setHour;
+		inpMonth.onclick = setMonth;
+		inpDate.onclick = setDate;
+		inpHour.onclick = setHour;
 
-		cancelAnimationFrame( rafPlayTheYear );
+//		playTheYear = true;
 
-		playTheYear = true;
-		butPlayTheYear.style.backgroundColor = 'pink';
-
-		if ( playTheYear ) { play(); }
+//		if ( playTheYear ) { play(); }
 
 	}
 
@@ -181,13 +185,11 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 		colors = [ 'bisque', 'deeppink', 'sienna', 'darkorange', 'indigo', 'lime',
 		'purple', 'honeydew', 'coral', 'gold', 'gray', 'maroon' ];
 
-		scene.remove( analemma );
-
 		analemma = new THREE.Object3D();
 
 		year = ( new Date() ).getUTCFullYear();
 
-		parameters.analemmaRadius = surfaceMeshes.userData.radius;
+		analemmaRadius = surfaceMeshes.userData.radius;
 
 		for ( hours = 0; hours < 24; hours++ ) {
 
@@ -202,7 +204,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 					analemmaDateUTC = new Date( Date.UTC( year, month, date, hour, 0, 0 ) );
 
-					analemma.sunPosition = getSunPositionXYZ( parameters.analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
+					analemma.sunPosition = getSunPositionXYZ( analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
 
 					vertices.push( analemma.sunPosition.xyz );
 
@@ -226,7 +228,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 			line = new THREE.Line( geometry, material );
 			analemma.add( line );
 
-			placard = drawPlacard( '' + hours, 0.001 * parameters.analemmaRadius, analemmaColor, vertices[ 0 ].x, vertices[ 0 ].y, vertices[ 0 ].z );
+			placard = drawPlacard( '' + hours, 0.02, analemmaColor, vertices[ 0 ].x, vertices[ 0 ].y, vertices[ 0 ].z );
 			analemma.add( placard );
 
 		}
@@ -242,7 +244,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 			for ( hours = 0; hours < 24; hours++ ) {
 
 				analemmaDateUTC = new Date( Date.UTC( year, month, 21, hours, 0, 0 ) );
-				analemmaSunPosition = getSunPositionXYZ( parameters.analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
+				analemmaSunPosition = getSunPositionXYZ( analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
 
 				vertices.push( analemmaSunPosition.xyz );
 
@@ -258,7 +260,6 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 //		object3D.remove( analemma );
 //		object3D.add( analemma );
 		analemma.position.copy( icw.axesHelper.position );
-//		analemma.rotation.z += Math.PI;
 
 		scene.add( analemma );
 
@@ -272,13 +273,12 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 		var geometry, material, d;
 
-		lightDirectional.remove( sun )
-		geometry = new THREE.SphereBufferGeometry( parameters.analemmaRadius / 10, 20, 10 );
+		geometry = new THREE.SphereBufferGeometry( 3, 20, 10 );
 		material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 		sun = new THREE.Mesh( geometry, material );
 
 		sun.name = 'sun';
-//console.log( 'icw', icw, lightDirectional );
+//console.log( 'pcc', pcc, lightDirectional );
 		lightDirectional.add( sun );
 
 //		scene.add( lights );
@@ -297,7 +297,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 		year = d.getUTCFullYear();
 
 		dateThere = new Date( Date.UTC( year, parameters.month, parameters.date, parameters.hour, parameters.minutes, 0 ) );
-		sun.userData.position = getSunPositionXYZ( parameters.analemmaRadius, dateThere, parameters.latitude, parameters.longitude );
+		sun.userData.position = getSunPositionXYZ( analemmaRadius, dateThere, parameters.latitude, parameters.longitude );
 
 		lightDirectional.position.copy( controls.target.clone().add( sun.userData.position.xyz ) );
 
@@ -310,9 +310,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	function goToNextHour() {
 
-		if ( !icw ) { initSunPath(); }
-
-		if ( !divAppMenu.innerHTML.includes( 'initSunPath' ) && playTheYear ) { togglePlayTheYear(); return; }
+		if ( !pcc ) { initSunPath(); }
 
 		thisHour = parseInt( inpHour.value, 10 );
 		thisDate = parseInt( inpDate.value, 10 );
@@ -358,7 +356,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	function setMonth() {
 
-		if ( !icw ) { initSunPath(); }
+		if ( !pcc ) { initSunPath(); }
 
 		parameters.month = parseInt( inpMonth.value, 10 );
 
@@ -374,7 +372,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	function setDate() {
 
-		if ( !icw ) { initSunPath(); }
+		if ( !pcc ) { initSunPath(); }
 
 		outDate.value = parameters.date = parseInt( inpDate.value, 10 );
 
@@ -388,7 +386,8 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	function setHour() {
 
-		if ( !icw ) { initSunPath(); }
+
+		if ( !pcc ) { initSunPath(); }
 
 		parameters.hour = parseInt( inpHour.value - parameters.offsetUTC / 60, 10 );
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;
@@ -403,15 +402,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	function togglePlayTheYear() {
 
-		cancelAnimationFrame( rafPlayTheYear );
 		playTheYear = !playTheYear;
-
-		if ( divAppMenu.innerHTML.includes( 'initSunPath' ) ) {
-
-			butPlayTheYear.style.backgroundColor = butPlayTheYear.style.backgroundColor === 'pink' ? '' : 'pink';
-
-		}
-
 		play();
 
 	}
@@ -420,7 +411,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	function play() {
 
-		rafPlayTheYear = requestAnimationFrame( play );
+		requestAnimationFrame( play );
 
 		if ( count++ % 10 === 0 && playTheYear ) {
 
@@ -429,6 +420,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 		}
 
 	}
+
 
 
 
@@ -507,7 +499,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 		var sunPosition, x, y, z;
 
-		sunPosition = getSunPosition( timeThere, latitude, longitude ); // from solar-calculator ... .js
+		sunPosition = getSunPosition( timeThere, latitude - 90, longitude ); // from solar-calculator ... .js
 
 		x = radius * Math.cos( sunPosition.altitude * d2r ) * Math.sin( sunPosition.azimuth * d2r );
 		y = radius * Math.cos( sunPosition.altitude * d2r ) * Math.cos( sunPosition.azimuth * d2r );
@@ -525,63 +517,8 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	}
 
-
-
 	function lat2tile( latitude, zoom ) {
 
 		return Math.floor( ( 1 - Math.log( Math.tan( latitude * pi / 180 ) + 1 / Math.cos( latitude * pi / 180) ) / pi ) / 2 * Math.pow( 2, zoom ) );
-
-	}
-
-
-
-
-	function requestFile( url, callback ) {
-
-		const xhr = new XMLHttpRequest();
-		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', url, true );
-		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
-		xhr.onload = callback;
-		xhr.send( null );
-
-	}
-
-
-
-	function callbackUtcOffset( xhr ) {
-
-		let response, json, lines;
-
-		response = xhr.target.response;
-
-//console.log( 'response', response );
-
-//		divContents.innerHTML += '<p>response:' + b + response + '</p>';
-
-		json = JSON.parse( response );
-
-console.log( 'json', json );
-
-/*
-		jsonString = JSON.stringify( json, null, ' ' );
-
-		divContents.innerHTML += '<p>JSON.stringify:' + b + response + '</p>';
-
-		divContents.innerHTML += '<p>UTC offset: ' + ( json.rawOffset / 60 ) +  '</p>';
-*/
-
-		parameters.offsetUTC = json.rawOffset / 60;
-
-		logLocation.innerHTML =
-
-			'<p>Latitude: ' + parameters.latitude + '</p>' +
-
-			'<p>Longitude: ' + parameters.longitude + '</p>' +
-
-			'<p>UTC offset: ' + parameters.offsetUTC + '</p>' +
-
-		'';
 
 	}
