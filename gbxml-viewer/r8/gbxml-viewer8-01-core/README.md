@@ -7,6 +7,13 @@
 
 ## Full screen [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html )
 
+## Full screen [gbXML Viewer8 Core Robust]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3-robust.html )
+
+* This is a special version of gbXML Viewer for very large files. 
+* Click 'choose file' to select a file. Then wait until all the bytes have been loaded - at least a full minute.
+* And then wait a bit more and then click 'parse gbXML'.
+* Also a good idea to refresh the page prior to loading file and to have the JavaScript console open.
+
 ## Concept
 
 The core or template file to be used to read gbXML files and display them in 3D
