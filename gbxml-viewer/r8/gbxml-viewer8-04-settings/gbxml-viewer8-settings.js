@@ -22,7 +22,7 @@
 
 	function init() {
 
-		if ( divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
+		if ( divContents && divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
 
 		if ( !divAppMenu ) {
 
@@ -34,6 +34,7 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
+		renderer = icw.renderer;
 		scene = icw.scene;
 		surfaceMeshes = icw.surfaceMeshes;
 		surfaceEdges = icw.surfaceEdges;
@@ -52,6 +53,7 @@
 				' <button onclick=allVisible(); >all</button>' +
 			'</p>' +
 
+
 			'<p><button onclick=setRandomMaterial(); >Set random material</button></p>' +
 
 			'<p><button onclick=setPhongDefaultMaterial(); >Set default phong material</button></p>' +
@@ -65,6 +67,8 @@
 
 			'<hr>' +
 
+			'<p><button onclick=toggleShadowMap(); >Toggle shadows</button></p>' +
+
 			'<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
 
 			'<p><button onclick=toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>' +
@@ -73,9 +77,17 @@
 
 			'<p><button onclick=toggleAxesHelper(); >Toggle axes</button></p>' +
 
-			'<p><button onclick=toggleGridHelper(); >Toggle grid</button></p>' +
+			'<p>' +
+				'<button onclick=toggleGridHelper(); >Toggle grid</button> ' + 
+				'<button onclick=updateMeshLevel("gridHelper",+0.2); >+</button> ' +
+				'<button onclick=updateMeshLevel("gridHelper",-0.2); >-</button>' +
+			'</p>' +
 
-			'<p><button onclick=toggleGroundHelper(); >Toggle ground</button></p>' +
+			'<p>' +
+				'<button onclick=toggleGroundHelper(); >Toggle ground</button> ' + 
+				'<button onclick=updateMeshLevel("groundHelper",+0.2); >+</button> ' +
+				'<button onclick=updateMeshLevel("groundHelper",-0.2); >-</button>' +
+			'</p>' +
 
 			'<p><button onclick=toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
 
@@ -84,8 +96,19 @@
 			'<p title="building opacity: 0 to 100%" >Opacity: ' +
 				'<output id=outOpacity class=floatRight >85%</output>' +
 				'<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >' +
-			'</p>';
+			'</p>' +
 
+			'<p title="building surface separation: 0 to 100%" >Explode view horizontal: ' +
+				'<output id=outViewExplode class=floatRight >0%</output>' +
+				'<input type="range" id="rngViewExplode" min=0 max=100 step=1 value=0 oninput=updateViewExplodeHorizontal(); >' +
+			'</p>' +
+
+			'<p title="building surface separation: 0 to 100%" >Explode view vertical: ' +
+				'<output id=outViewExplodeVertical class=floatRight >0%</output>' +
+				'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=updateViewExplodeVertical(); >' +
+			'</p>' +
+
+			'';
 
 	}
 
@@ -250,6 +273,27 @@
 
 /////////////////
 
+
+	function toggleShadowMap() {
+
+		renderer.shadowMap.enabled = !renderer.shadowMap.enabled;
+
+		scene.traverse( function ( child ) {
+
+//			if ( child.material ) {
+
+				child.castShadow = !child.castShadow;
+				child.receiveShadow = !child.receiveShadow;
+//				child.material.needsUpdate = true; 
+
+//			}
+
+		} );
+
+	}
+
+
+
 	function toggleBackgroundGradient() {
 
 // 2016-07-18
@@ -262,7 +306,6 @@
 			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
 
 	}
-
 
 
 
@@ -284,6 +327,14 @@
 
 	function toggleSurfaceNormals() {
 
+		let helperNormalsFaces = scene.getObjectByName( 'helperNormalsFaces' );
+
+		if ( helperNormalsFaces ) {
+
+			scene.remove( helperNormalsFaces );
+
+		}
+
 		if ( !helperNormalsFaces ) {
 
 			helperNormalsFaces = new THREE.Group();
@@ -294,11 +345,14 @@
 
 					helperNormalsFace = new THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
 					helperNormalsFaces.add( helperNormalsFace );
+
 					helperNormalsFaces.visible = false;
+
 				}
 
 			} );
 
+			helperNormalsFaces.name = 'helperNormalsFaces';
 			scene.add( helperNormalsFaces );
 			helperNormalsFaces.visible = false;
 
@@ -320,19 +374,25 @@
 
 	function toggleGridHelper() {
 
-		if ( !icw.gridHelper ) {
+		let meshGridHelper = surfaceMeshes.getObjectByName( 'gridHelper' );
 
-			icw.gridHelper = new THREE.GridHelper( 3 * surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
+		if ( !meshGridHelper) {
 
-			icw.gridHelper.rotation.x = Math.PI / 2;
-			icw.gridHelper.position.set( icw.axesHelper.position.x, icw.axesHelper.position.y, 0 );
-			surfaceMeshes.add( icw.gridHelper );
+			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
 
-			icw.gridHelper.visible = false;
+			meshGridHelper = new THREE.GridHelper( 3 * surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
+			meshGridHelper.rotation.x = Math.PI / 2;
+			meshGridHelper.position.set( icw.axesHelper.position.x, icw.axesHelper.position.y, bbox.min.z );
+			meshGridHelper.name = 'gridHelper';
+			surfaceMeshes.add( meshGridHelper );
+
+			surfaceMeshes.add( meshGridHelper );
+
+			meshGridHelper.visible = false;
 
 		}
 
-		icw.gridHelper.visible = !icw.gridHelper.visible;
+		meshGridHelper.visible = !meshGridHelper.visible;
 
 	}
 
@@ -340,23 +400,26 @@
 
 	function toggleGroundHelper() {
 
-		if ( !icw.groundHelper ) {
+		let meshGroundHelper = surfaceMeshes.getObjectByName( 'groundHelper' );
 
-			icw.groundHelper = new THREE.GridHelper( 3 * surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
+		if ( !meshGroundHelper ) {
+
+			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
 
 			const geometry = new THREE.BoxBufferGeometry( 3 * surfaceMeshes.userData.radius, 3 * surfaceMeshes.userData.radius, 1  );
 			const material = new THREE.MeshPhongMaterial( { color: 'green', opacity: 0.85, transparent: true } );
-			icw.groundHelper= new THREE.Mesh( geometry, material );
-			icw.groundHelper.name = 'groundHelper';
-			icw.groundHelper.receiveShadow = true;
-			icw.groundHelper.position.set( icw.axesHelper.position.x, icw.axesHelper.position.y, -0.51 );
-			surfaceMeshes.add( icw.groundHelper );
+			meshGroundHelper = new THREE.Mesh( geometry, material );
+			meshGroundHelper.name = 'groundHelper';
+			meshGroundHelper.receiveShadow = true;
+			meshGroundHelper.position.set( icw.axesHelper.position.x, icw.axesHelper.position.y, bbox.min.z - 0.5 );
 
-			icw.groundHelper.visible = false;
+			surfaceMeshes.add( meshGroundHelper );
+
+			meshGroundHelper.visible = false;
 
 		}
 
-		icw.groundHelper.visible = !icw.groundHelper.visible;
+		meshGroundHelper.visible = !meshGroundHelper.visible;
 
 	}
 
@@ -418,4 +481,74 @@
 
 
 	}
+
+
+	function updateViewExplodeHorizontal() {
+
+		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				if ( !child.userData.positionStart ) {
+
+					child.userData.positionStart = child.position.clone();
+
+				}
+
+				const p = child.userData.positionStart;
+
+				child.position.x = s * p.x;
+				child.position.y = s * p.y;
+
+			}
+
+		} );
+
+	}
+
+
+
+	function updateViewExplodeVertical() {
+
+		const sz = 1 + parseFloat( rngViewExplodeVertical.value ) / 10;
+
+		surfaceMeshes.traverse( function ( child ) {
+
+//			if ( child instanceof THREE.Mesh ) {
+
+				if ( !child.userData.positionStart ) {
+
+					child.userData.positionStart = child.position.clone();
+
+				}
+
+				const p = child.userData.positionStart;
+
+				child.position.z = sz * p.z;
+
+//			}
+
+		} );
+
+	}
+
+
+	function updateMeshLevel( meshName, delta ) {
+
+		const mesh = surfaceMeshes.getObjectByName( meshName );
+
+		if ( mesh ) {
+
+			mesh.position.z += delta;
+
+		}
+
+	}
+
+
+
+
+
 

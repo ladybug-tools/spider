@@ -12,6 +12,8 @@
 
 	function init() {
 
+		if ( divContents && divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
+
 		if ( !divAppMenu ) {
 
 			divAppMenu= document.body.appendChild( document.createElement( 'div' ) );

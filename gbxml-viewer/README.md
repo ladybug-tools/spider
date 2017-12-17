@@ -252,10 +252,23 @@ Will most likely build upon
 ## Change Log
 
 
+### 2017-12-17 ~ Theo
+
+* Settings
+	* Toggle ground and toggle Grid
+		* Resets with each new model
+		* Autot-positioned at bounding box minimum
+		* Buttons added to increase or decrease of height level
+	* Toggle surface normals
+		* Resets with each new model
+	* Add toggle shade and shadows
+	* Add explode view horizontal and vertical
+		* First pass / still many issues / but will eventually be lots of fun
+
+
 ### 2017-12-16 ~ Theo
 
 * Add 'Robust' Core version
-
 
 
 ### 2017-12-15 ~ Theo

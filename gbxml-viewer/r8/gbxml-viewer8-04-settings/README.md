@@ -17,12 +17,13 @@
 
 * Set colors to random, Phong default, normal or default material
 * Toggle background gradient
-* Toggle wireframe
+* Toggle wireframe mode
 * Draw surface normals ~ only that ones that are currently visible
-* Toggle axes
+* Toggle axes, grid, ground
+	* Adjust height levels of grid and ground
 * Toggle scene rotation
-* Set Camera Ortho
-* Opacity slider
+* Toggle camera Ortho
+* Opacity slider for entire model
 
 ## Wish list
 
@@ -38,6 +39,20 @@
 ## Change Log
 
 See also main gbXML Viewer read me file
+
+
+### 2017-12-17 ~ Theo
+
+* Toggle ground and toggle Grid
+	* Resets with each new model
+	* Autot-positioned at bounding box minimum
+	* Buttons added to increase or decrease of height level
+* Toggle surface normals
+	* Resets with each new model
+* Add toggle shade and shadows
+* Add explode view horizontal and vertical
+	* First pass / still many issues / but will eventually be lots of fun
+
 
 ### 2017-12-10 ~ Theo
 

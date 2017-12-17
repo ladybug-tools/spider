@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Test sample gbXML files settings" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-07" >
+<meta name = "date" content = "2017-12-17" >
 <title>test-gbxml-viewer8-settings</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
@@ -19,6 +19,12 @@
 
 	iframe { height: 500px; width: 100%; }
 
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+
 </style>
 </head>
 <body>
@@ -31,7 +37,7 @@
 	<p>If it does not open automatically, click 'settings' to load settings menu.</p>
 
 	<p>
-		<a id=aThree href="JavaScript:(function(){
+		<a id=aThree href="JavaScript:( function(){
 			const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = 'gbxml-viewer8-settings.js';
 		})()" >
@@ -41,19 +47,23 @@
 
 	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
 
-	<p><input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
+	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/gbxml-standard-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></p>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/boston-ma-urban-house-mep.xml" >boston-ma-urban-house-mep.xml</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/bristol-clifton-down-road.xml" >bristol-clifton-down-road.xml</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/columbia-sc-two-story-education-trane.xml" >columbia-sc-two-story-education-trane</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/coventry-university-of-warwick.xml" >coventry-university-of-warwick.xml</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
+	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/open-studio-seb.xml" >open studio seb</a></p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" >sam live2</a> </p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml" >urban house mep</a></p>
 
 <script>
 
 	var divAppMenu;
+	var divContents;
 
 	init();
 
@@ -64,6 +74,9 @@
 			'<h2><a href = "" >' + document.title + '</a></h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
+
+		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+		dragArea.addEventListener( 'drop', drop, false );
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -78,6 +91,26 @@
 		const url = location.hash.slice( 1 );
 
 		ifrThree.contentWindow.location.hash = '#' + url;
+
+	}
+
+
+
+	function drop( event ) {
+
+		event.preventDefault(); 
+
+		var iframeUrl = event.dataTransfer.getData( 'URL' );
+
+		if ( iframeUrl ) {
+
+			ifrThree.contentWindow.location.hash = iframeUrl;
+
+		} else {
+
+			ifrThree.contentWindow.openFile( event.dataTransfer );
+
+		}
 
 	}
 

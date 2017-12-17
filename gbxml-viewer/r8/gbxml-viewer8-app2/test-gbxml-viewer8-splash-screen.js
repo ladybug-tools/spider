@@ -14,8 +14,8 @@
 
 
 
-<details open>
-<summary>2017-12-10</summary>
+<details>
+<summary>2017-12-11</summary>
 
 R8.11<br>
 Reports<br>
@@ -42,9 +42,7 @@ Many other minor fixes and code clean-up<br>
 
 </details>
 
-<br>
-
-<details open>
+<details>
 <summary>2017-12-10</summary>
 
 R8.10<br>

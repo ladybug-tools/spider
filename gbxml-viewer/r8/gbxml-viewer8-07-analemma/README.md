@@ -31,6 +31,12 @@ See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.
 ## Change Log
 
 
+### 2017-12-17 ~ Theo
+
+* Add resetShadowMap()
+	* Fixes things if shadows have been turned off in Settings
+
+
 ***
 
 

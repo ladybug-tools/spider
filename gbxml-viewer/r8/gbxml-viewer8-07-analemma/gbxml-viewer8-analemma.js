@@ -99,6 +99,7 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
+		renderer = icw.renderer;
 		scene = icw.scene;
 		gbjson = icw.gbjson;
 
@@ -147,13 +148,11 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 		inpHour.value = parameters.hour + parameters.offsetUTC / 60;
 		outHour.value =  parameters.hour + parameters.offsetUTC / 60;
 
-//		if ( !analemma ) {
+		resetShadowMap();
 
 		drawAnalemma();
 
 		initSunAndLight();
-
-//		}
 
 // init happened so assign actual task
 		inpMonth.oninput = setMonth;
@@ -169,6 +168,23 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 	}
 
+
+	function resetShadowMap() {
+
+		if ( renderer.shadowMap.enabled === false ) {
+
+		renderer.shadowMap.enabled = true;
+
+			scene.traverse( function ( child ) {
+
+				child.castShadow = true;
+				child.receiveShadow = true;
+
+			} );
+
+		}
+
+	}
 
 
 	function drawAnalemma() {
