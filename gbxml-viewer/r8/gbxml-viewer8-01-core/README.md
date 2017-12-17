@@ -73,6 +73,13 @@ The ultimate goal is to be able to offer various analytical batch operations tha
 ## Change Log
 
 
+
+### 2017-12-16 ~ Theo
+
+* Add 'Robust' version
+
+
+
 ### 2017-12-10 ~ Theo
 
 * Add new test file

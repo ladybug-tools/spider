@@ -94,6 +94,8 @@
 
 		<p><button onclick=onSelectFootprint(8); >draw 3 storey irregular polygon</button></p>
 
+		<p><button onclick=onSelectFootprint(9); >draw 100 storey irregular polygon</button></p>
+
 		<hr>
 
 		<div id = "divExportGbxml" >
@@ -397,6 +399,26 @@
 
 			theBuilding.storeys = 3;
 			theBuilding.openingsPerWall = 5; // parseInt( inpOpenings.value, 10 );
+			theBuilding.wwr = 70; // parseInt( inpWindowWallRatio.value, 10 );
+			theBuilding.overhang = 8; // parseFloat( inpOverhang.value );
+			theBuilding.fin = 7; // parseFloat( inpFin.value );
+
+			theBuilding.storeyHeight = 12; //parseInt( inpHeight.value, 10 );
+			theBuilding.perimeterDepth = 15, //parseInt( inpPerimeterDepth.value, 10 );
+			theBuilding.opacity = 0.15; // parseInt( inpOpacity.value, 10 ) / 100;
+			theBuilding.storeyStretch = 1.5;
+
+
+		} else if ( choiceIndex === 9 ) {
+
+			theBuilding.orientation = 0;
+			theBuilding.length = 80;
+			theBuilding.width = 80;
+			theBuilding.thickness = 30;
+			theBuilding.footprint = 'Polygon';
+
+			theBuilding.storeys = 10;
+			theBuilding.openingsPerWall = 8; // parseInt( inpOpenings.value, 10 );
 			theBuilding.wwr = 70; // parseInt( inpWindowWallRatio.value, 10 );
 			theBuilding.overhang = 8; // parseFloat( inpOverhang.value );
 			theBuilding.fin = 7; // parseFloat( inpFin.value );

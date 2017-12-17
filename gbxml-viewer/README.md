@@ -252,6 +252,11 @@ Will most likely build upon
 ## Change Log
 
 
+### 2017-12-16 ~ Theo
+
+* Add 'Robust' Core version
+
+
 
 ### 2017-12-15 ~ Theo
 
