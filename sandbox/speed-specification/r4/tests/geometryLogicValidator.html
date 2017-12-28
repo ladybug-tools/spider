@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "speed shape geometry" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-31" >
+<title>SPEED / Geometry</title>
+<style>
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+	canvas { border: 1px solid black; }
+	select { width: 150px; }
+	table { border-spacing: 20px; width: 100%; }
+	input, input[ type = number ] { width: 50px; }
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+	td { text-align: center; }
+	.checkbox { text-align: right; }
+	.column { display: inline-block; line-height: 30px; width: 150px;}
+	.floatright { float: right; }
+	#canvasPerspective { position:absolute; right: 100px; top: 50%; }
+	#canvasOrtho { position:absolute; left: 100px; top: 50%; }
+	#divDimensions, #divDimensions div { left: 0; margin: 20px auto; right: 0; width: 250px; }
+	#divInput, #divCalcs { display: inline-block; margin: 0 10px; vertical-align: top; width: 300px; }
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "header" >
+
+		<h1 id = "title" >
+			<a href="./index.html" target=_top >&#x2302;</a> &raquo;
+			<a href="" >Site Content</a>
+			<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/shape-geometry.html target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+
+		</h1>
+
+		<h2>Geometry Logic Ready for Testing</h2>
+
+	</div>
+
+	<div id = "divInput" >
+
+		<table>
+
+			<tr>
+				<td>Building Area</td><td># of Floors</td><td>Floor Area</td><td>Floor Height</td><td># of Footprint Shapes (does nothing)</td>
+			</tr>
+
+			<tr>
+				<td><input type=number id=inpArea step=50 onchange=changeBuildingArea(); ></td>
+				<td><input type=number id=inpFloors step=1 onchange=changeNumFloors();></td>
+				<td><output type=number id=outFloorArea ></output></td>
+				<td><input type=number id=inpHeight onChange=updateShape(); ></td>
+				<td><input type=number id=inpShapeCount ></td>
+			</tr>
+
+		</table>
+
+		<table>
+
+			<tr>
+				<td>Footprint Shape</td><td>Massing Generator(does nothing)</td><td>Perimeter Depth(does nothing)</td><td>Orientation(does nothing)</td>
+			</tr>
+
+			<tr>
+				<td><select id=selShape size=4 onchange=changeBuildingShape(); ></select></td><td><select id=selMassing ></select></td><td><input type=number id=inpPerimeterDepth ></td><td><input type=number id=inpOrientation oninput=updateShape(); ></td>
+			</tr>
+
+		</table>
+
+		<div id=divDimensions >
+
+			<div>Footprint dimensions</div>
+
+			<div>
+				Length <output id=outLength class=floatright ></output>
+				<input type=range step=0.5 id=inpLength class="slider" oninput=changeLengthSlider(); >
+				<input type="text" id="lengthSlider" value="">
+			</div>
+
+			<div>
+				Width <output id=outWidth class=floatright ></output>
+				<input type=range step=0.5 id=inpWidth class="slider" oninput=changeWidthSlider(); >
+				<input type="text" id="widthSlider" value="">
+			</div>
+
+			<div id=divThickness >
+				Thickness <output id=outThickness class=floatright ></output>
+			</div>
+
+			<div id=divValidation ></div>
+
+		</div>
+
+	</div>
+
+	<canvas id="canvasPerspective" height=1 width=1 ></canvas>
+
+	<canvas id="canvasOrtho"  height=1 width=1 ></canvas>
+
+<script>
+	let theBuilding;
+	let gridHelper, axesHelper;
+	let renderer, camera, controls, scene;
+	let lightAmbient, lightDirectional, cameraHelper, axisHelper;
+	var buildingArea,numFloors
+	var length,width
+	var widthMin,widthMax
+	var lengthMin,lengthMax
+	var thickness
+	var calculatedFloorArea
+	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+	var v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
+	var pi = Math.PI;
+	const d2r = pi / 180, r2d = 180 /pi;
+	const buildingShapes =
+	{
+		"Lshape":0,
+		"Hshape":1,
+		"Tshape":2,
+		"Boxshape":3
+	};
+	const userChange =
+	{
+		"buildingArea":0,
+		"numFloors":1,
+		"lengthChange":2,
+		"widthChange":3,
+		"buildingShape":4,
+		"irrevelent":5
+	};
+	/// Helper functions
+	function stringOfBuildingShapeToBuildingShapeEnum(selectedShapeType){
+		if (selectedShapeType === "L-Shape")
+		{
+			return buildingShapes.Lshape
+		}
+		else if (selectedShapeType === "H-Shape")
+		{
+			return buildingShapes.Hshape
+		}
+		else if (selectedShapeType === "T-Shape")
+		{
+			return buildingShapes.Tshape
+		}
+		else if (selectedShapeType === "Box-Shape")
+		{
+			return buildingShapes.Boxshape
+		}
+		else {
+			throw new Error('Cannot convert string '+string+ ' to building shape enum!!')
+		}
+	}
+	init();
+	function init() {
+		initThreejs();
+		initInputFields();
+		animate();
+	}
+	function initInputFields(){
+		/// Assume that we start on L-shape with a building area of 5000 and 1 floor
+		inpArea.value = 5000;
+		buildingArea = 5000;
+		numFloors = 1;
+		inpFloors.min = 1;
+		inpFloors.max = 20;
+		inpFloors.value = 1;
+		inpHeight.min = 8;
+		inpHeight.max = 20;
+		inpHeight.value = 10;
+		inpShapeCount.min = 1;
+		inpShapeCount.max = 10;
+		inpShapeCount.value = 3;
+		selShape.innerHTML =
+			'<option>Box-Shape</option>' +
+			'<option>L-Shape</option>' +
+			'<option>T-Shape</option>' +
+			'<option>H-Shape</option>' +
+		'';
+		selShape.selectedIndex = 1;
+		selMassing.innerHTML =
+			'<option>Generator 1</option>' +
+			'<option>Generator 2</option>' +
+			'<option>Generator 3</option>' +
+		'';
+		inpPerimeterDepth.min = 10;
+		inpPerimeterDepth.max = 20;
+		inpPerimeterDepth.value = 3;
+		inpOrientation.min = -90;
+		inpOrientation.max = 90;
+			implementUserChange(userChange.buildingShape,stringOfBuildingShapeToBuildingShapeEnum(selShape.value))
+		}
+		/// Helper functions
+		function updateTextInput(val,elementID)
+		{
+			document.getElementById(elementID).value=val;
+		}
+		function roundHalf(num) {
+    	return Math.round(num*2)/2;
+		}
+		function updateThicknessLshape(lengthLocal,widthLocal)
+		{
+			buildingArea = parseFloat(inpArea.value)
+			numFloors = parseInt(inpFloors.value)
+			floorArea = buildingArea/numFloors
+		}
+		function updateThicknessHshape(lengthLocal,widthLocal)
+		{
+			buildingArea = parseFloat(inpArea.value)
+			numFloors = parseInt(inpFloors.value)
+			floorArea = buildingArea/numFloors
+		}
+		/// Implemented using the table in Geometry Logic map
+		function changeBuildingShape(buildingShape = stringOfBuildingShapeToBuildingShapeEnum(selShape.value))
+		{
+			// Strangely in slider the values are stored as strings we need to make sure that they are parsed as numbers before used
+			implementUserChange(userChange.buildingShape,buildingShape)
+		}
+		function changeNumFloors(buildingShape = stringOfBuildingShapeToBuildingShapeEnum(selShape.value))
+		{
+			implementUserChange(userChange.numFloors,buildingShape)
+		}
+		function changeBuildingArea(buildingShape = stringOfBuildingShapeToBuildingShapeEnum(selShape.value))
+		{
+			implementUserChange(userChange.buildingArea,buildingShape)
+		}
+		function changeLengthSlider(buildingShape = stringOfBuildingShapeToBuildingShapeEnum(selShape.value))
+		{
+			implementUserChange(userChange.lengthChange,buildingShape)
+		}
+		function changeWidthSlider(buildingShape = stringOfBuildingShapeToBuildingShapeEnum(selShape.value))
+		{
+			implementUserChange(userChange.widthChange,buildingShape)
+		}
+	function initThreejs() {
+		let widthLocal,heightLocal
+		widthLocal = 300;
+		heightLocal = 300;
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setClearColor( 0xffffff, 1 );
+		renderer.setSize( widthLocal, heightLocal );
+		renderer.shadowMap.enabled = true;
+		context1 = canvasPerspective.getContext( '2d' );
+		context2 = canvasOrtho.getContext( '2d' );
+		camera1 = new THREE.PerspectiveCamera( 40, widthLocal / heightLocal, 1, 1000 );
+		camera1.position.set( -80, -250, 200 );
+		camera1.up.set( 0, 0, 1 );
+		controls = new THREE.OrbitControls( camera1, canvasPerspective );
+		controls.maxDistance = 600;
+		camera2 = new THREE.OrthographicCamera( widthLocal / -3, widthLocal / 3, heightLocal / 3, heightLocal / - 3, 1, 1000 );
+		camera2.position.set( 0, 0, 100 );
+		camera2.up.set( 0, 0, 1 );
+		controls2 = new THREE.OrbitControls( camera2, canvasOrtho );
+		scene = new THREE.Scene();
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+		const size = 100
+		lightDirectional = new THREE.DirectionalLight( 0xffeedd );
+		lightDirectional.position.set( -size, size, size );
+		lightDirectional.shadow.camera.scale.set( 13, 15, 0.5 );
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+		addHelpers();
+	}
+	function addHelpers( size = 200 ) {
+		scene.remove( gridHelper, axesHelper );
+		gridHelper = new THREE.GridHelper( size, size / 10 );
+		gridHelper.rotation.x = 0.5 * Math.PI;
+		axesHelper = new THREE.AxesHelper( size * 0.1 );
+		axesHelper.position.set( -0.5 * size, -0.5 * size, 15 );
+		axesHelper.material.linewidth = 20;
+		scene.add( gridHelper, axesHelper );
+	}
+	function doCalculations(resolve,reject,typeUserChange,buildingShape)
+	{ //// General method for doing calculations
+		let factorChange
+		let lengthLocal,widthLocal
+		let localWidthMin,localWidthMax
+		let localLengthMin,localLengthMax
+		let newfloorArea
+		let newNumOfFloors
+		function calculateThicknessArea(buildingShape,floorArea,lengthLocal,widthLocal)
+		{
+			switch (buildingShape)
+			{
+				case buildingShapes.Lshape:
+					console.log("Calculating L-shape")
+					a = (lengthLocal+widthLocal)/2
+					b = Math.sqrt(Math.pow(a,2)-floorArea)
+					thickness = a-b
+					calculatedFloorArea = (widthLocal*thickness)+((lengthLocal-thickness)*thickness)
+					break;
+				case buildingShapes.Hshape:
+					a = (lengthLocal+2*widthLocal)/4
+					b = Math.sqrt(Math.pow(a,2)-floorArea/2)
+					thickness = a-b
+					/// the thickness of the middle part of the H-shape is equal to thickness
+					calculatedFloorArea = (2*widthLocal*thickness)+(thickness*(lengthLocal-2*thickness))
+					break;
+				case buildingShapes.Tshape:
+					a = (lengthLocal+widthLocal)/2
+					b = Math.sqrt(Math.pow(a,2)-floorArea)
+					thickness = a-b
+					calculatedFloorArea = (thickness*lengthLocal)+(thickness*(widthLocal-thickness))
+					break;
+				case buildingShapes.Boxshape:
+					lengthMax = Math.sqrt(floorArea*10);
+					lengthMin = Math.sqrt(floorArea/10);
+					/// Length min and max????
+					widthMax = floorArea/lengthLocal
+					widthMin = floorArea/parseFloat(lengthLocal);
+					calculatedFloorArea = widthLocal*lengthLocal
+					thickness = "NA"
+					break;
+				default:
+					return reject('Building type enum does not exist!');
+			}
+		}
+		function calculateMinMax(buildingShape,floorArea,lengthLocal,widthLocal)
+		{
+				switch (buildingShape)
+				{
+					case buildingShapes.Lshape:
+						// create factor change on the length
+						/// Length is x
+						lengthMax = 2*Math.sqrt(floorArea*1.8);
+						lengthMin = 2/3*Math.sqrt(floorArea*1.8);
+						/// Width is y
+						widthMax =  10*(floorArea/parseFloat(lengthLocal))-0.9*parseFloat(lengthLocal);
+						widthMin = floorArea/parseFloat(lengthLocal)+0.05*parseFloat(lengthLocal);
+						return [lengthMax,lengthMin,widthMax,widthMin]
+						break;
+					case buildingShapes.Hshape:
+						lengthMax = 2*Math.sqrt(floorArea*(9/7));
+						lengthMin = 2/3*Math.sqrt(floorArea*(9/7));
+						widthMax =  5*(floorArea/parseFloat(lengthLocal))-0.4*parseFloat(lengthLocal);
+						widthMin = floorArea/parseFloat(lengthLocal)+0.1*parseFloat(lengthLocal);
+						return [lengthMax,lengthMin,widthMax,widthMin]
+						break;
+					case buildingShapes.Tshape:
+						lengthMax = 2*Math.sqrt(floorArea*1.8);
+						lengthMin = 2/3*Math.sqrt(floorArea*1.8);
+						widthMax =  10*(floorArea/parseFloat(lengthLocal))-0.9*parseFloat(lengthLocal);
+						widthMin = floorArea/parseFloat(lengthLocal)+0.05*parseFloat(lengthLocal);
+						return [lengthMax,lengthMin,widthMax,widthMin]
+						break;
+					case buildingShapes.Boxshape:
+						lengthMax = Math.sqrt(floorArea*10);
+						lengthMin = Math.sqrt(floorArea/10);
+						/// Length min and max????
+						widthMax = Math.sqrt(floorArea*10);
+						widthMin = Math.sqrt(floorArea/10);
+						thickness = "NA"
+						return [lengthMax,lengthMin,widthMax,widthMin]
+						break;
+					default:
+						return reject('Building type enum does not exist!');
+				}
+			}
+		switch (typeUserChange)
+		{
+			case userChange.buildingArea:
+				// Calculate new floor area
+				newbuildingArea = parseFloat(inpArea.value)
+				factorChange = newbuildingArea/buildingArea
+				lengthLocal = Math.sqrt(factorChange)*length
+				widthLocal = Math.sqrt(factorChange)*width
+				newFloorArea = newbuildingArea/numFloors
+				minmax = calculateMinMax(buildingShape,newFloorArea,lengthLocal,widthLocal)
+				calculateThicknessArea(buildingShape,newFloorArea,lengthLocal,widthLocal,thickness)
+				localLengthMax = minmax[0]
+				localLengthMin = minmax[1]
+				localWidthMax = minmax[2]
+				localWidthMin = minmax[3]
+				// Update building area for future
+				buildingArea = newbuildingArea
+				break;
+			case userChange.numFloors:
+				newNumOfFloors = parseFloat(inpFloors.value)
+				factorChange = numFloors/newNumOfFloors
+				lengthLocal = Math.sqrt(factorChange)*length
+				widthLocal = Math.sqrt(factorChange)*width
+				newFloorArea = buildingArea/newNumOfFloors
+				minmax = calculateMinMax(buildingShape,newFloorArea,lengthLocal,widthLocal)
+				calculateThicknessArea(buildingShape,newFloorArea,lengthLocal,widthLocal,thickness)
+				localLengthMax = minmax[0]
+				localLengthMin = minmax[1]
+				localWidthMax = minmax[2]
+				localWidthMin = minmax[3]
+				// Update building area for future
+				numFloors = newNumOfFloors
+				break;
+			case userChange.lengthChange:
+				lengthLocal = parseFloat(inpLength.value)
+				factor = (width-widthMin)/(widthMax-widthMin)
+				floorArea = buildingArea/numFloors
+				//[lengthMax,lengthMin,widthMax,widthMin]
+				minmax = calculateMinMax(buildingShape,floorArea,lengthLocal,widthLocal)
+				localLengthMax = minmax[0]
+				localLengthMin = minmax[1]
+				localWidthMax = minmax[2]
+				localWidthMin = minmax[3]
+				if (buildingShape == buildingShapes.Boxshape)
+				{
+					widthLocal = floorArea/lengthLocal
+					calculateThicknessArea(buildingShape,floorArea,lengthLocal,widthLocal,thickness)
+				}
+				else {
+					widthLocal = factor*(localWidthMax-localWidthMin)+localWidthMin
+				}
+				// Must re-calculate thickness for length change
+				calculateThicknessArea(buildingShape,floorArea,lengthLocal,widthLocal,thickness)
+				break;
+			case userChange.widthChange:
+				floorArea = buildingArea/numFloors
+				lengthLocal = length
+				if (buildingShape == buildingShapes.Boxshape)
+				{
+					widthLocal = width
+				}
+				else {
+					widthLocal = parseFloat(inpWidth.value)
+				}
+				localLengthMax = lengthMax
+				localLengthMin = lengthMin
+				localWidthMax = widthMax
+				localWidthMin = widthMin
+				calculateThicknessArea(buildingShape,floorArea,length,widthLocal)
+				break;
+			case userChange.buildingShape:
+					floorArea = buildingArea/numFloors
+					// Calculate Length and Width for each shape
+					switch (buildingShape)
+					{
+						case buildingShapes.Lshape:
+							lengthLocal = Math.sqrt(floorArea*1.8)
+							widthLocal = Math.sqrt(floorArea*1.8)
+							break;
+						case buildingShapes.Hshape:
+							lengthLocal = Math.sqrt(floorArea*(9/7))
+							widthLocal = Math.sqrt(floorArea*(9/7))
+							break;
+						case buildingShapes.Tshape:
+							lengthLocal = Math.sqrt(floorArea*1.8)
+							widthLocal = Math.sqrt(floorArea*1.8)
+							break;
+						case buildingShapes.Boxshape:
+							lengthLocal = Math.sqrt(floorArea)
+							widthLocal = floorArea/lengthLocal
+							break;
+						default:
+							return reject('Building type enum does not exist!');
+					}
+					minmax = calculateMinMax(buildingShape,floorArea,lengthLocal,widthLocal)
+					calculateThicknessArea(buildingShape,floorArea,lengthLocal,widthLocal)
+					localLengthMax = minmax[0]
+					localLengthMin = minmax[1]
+					localWidthMax = minmax[2]
+					localWidthMin = minmax[3]
+			case userChange.irrevelent:
+				factorChange = 1
+				break;
+			default:
+				return reject('Type of user change doesnt exist');
+		}
+		return resolve({length:lengthLocal,width:widthLocal,lengthMax:localLengthMax,lengthMin:localLengthMin,widthMax:localWidthMax,widthMin:localWidthMin})
+	}
+	function updateShape(values)
+	{
+		outThickness.value = thickness
+		divValidation.innerHTML =
+			'<h3>Results from geometry logic</h3>' +
+			'building Area: ' + inpArea.value + '<br>' +
+			'number of Floors: ' + inpFloors.value + '<br>' +
+			'floor Area: ' + parseFloat(inpArea.value)/parseFloat(inpFloors.value) + '<br>' +
+			'<b>calculated floor Area: ' + calculatedFloorArea + '</b><br>' +
+			'<br>' +
+			'<b>Length<br></b>' +
+			'length: ' + values.length + '<br>' +
+			'lengthMin: ' + values.lengthMin + '<br>' +
+			'lengthMax: ' + values.lengthMax + '<br>' +
+			//			'lengthRange(): ' + lengthRange + '<br>' +
+			'<br>' +
+			'<b>Width</b><br>' +
+			'width: ' + values.width + '<br>' +
+			'widthMin: ' + values.widthMin + '<br>' +
+			'widthMax: ' + values.widthMax + '<br>' +
+			//			'widthRange(): ' + widthRange + '<br>' +
+			'<br>' +
+		'';
+		// theBuilding = {}
+		//
+		// const pathFunctions = [ getPathBox, getPathL, getPathT , getPathH ];
+		//
+		// theBuilding.storeyHeight = parseInt( inpHeight.value, 10 );
+		// theBuilding.orientation = parseInt( inpOrientation.value, 10 );
+		//
+		// let mesh = theBuilding.mesh;
+		//
+		// scene.remove( theBuilding.mesh );
+		//
+		// const pathFunction = pathFunctions[ selShape.selectedIndex ];
+		//
+		// theBuilding.path = pathFunction();
+		//
+		// console.log(theBuilding.path)
+		//
+		// theBuilding.shape = selShape[ selShape.selectedIndex ];
+		// theBuilding.mesh = createShape();
+		//
+		// theBuilding.mesh.name = 'theBuilding';
+		// theBuilding.mesh.position.z =  0.5 * theBuilding.storeyHeight * theBuilding.storeys;
+		// theBuilding.mesh.rotation.z = - d2r * theBuilding.orientation;
+		//
+		// scene.add( theBuilding.mesh );
+		//
+		// outFloorArea.value = Math.round( theBuilding.area / theBuilding.storeys ).toLocaleString();
+		// outLength.value = theBuilding.length.toFixed();
+		// outWidth.value = theBuilding.width.toFixed();
+		// outThickness.value = theBuilding.thickness.toFixed();
+	}
+	function implementUserChange(typeUserChange,buildingShape)
+	{
+		// Promise chaining taken from - https://javascript.info/promise-chaining
+		new Promise(function(resolve,reject)
+		{
+			// First do all calculations
+			doCalculations(resolve,reject,typeUserChange,buildingShape)
+		})
+		.then(function(values)
+			{
+				/// Update text on sliders
+				updateTextInput(values.length,"lengthSlider")
+				updateTextInput(values.width,'widthSlider')
+				//Update stored values and slider values
+				inpWidth.max = values.widthMax
+				widthMax = values.widthMax
+				inpWidth.min = values.widthMin
+				widthMin = values.widthMin
+				inpWidth.value = values.width
+				width = values.width
+				inpLength.max =  values.lengthMax
+				lengthMax = values.lengthMax
+				inpLength.min = values.lengthMin
+				lengthMin  = values.lengthMin
+				inpLength.value = values.length
+				length = values.length
+				return values
+			})
+			.then(function(values)
+				{
+					// Update the shape + display all the values
+					updateShape(values)
+				}
+			)
+	}
+	function getPathBox() {
+		let area = theBuilding.area;
+		let len = theBuilding.length;
+		let wid = theBuilding.width;
+		let flr = theBuilding.storeys ;
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
+			const areaNew = parseInt( inpArea.value, 10 )
+			const flrNew = parseInt( inpFloors.value, 10 );
+			const areaTemp = area * flrNew / flr;
+			const ratio = Math.sqrt( area / areaTemp );
+			len = Math.round( ratio * len );
+			wid = areaNew / ( len * flrNew );
+			flr = flrNew;
+			theBuilding.area = areaNew;
+			theBuilding.storeys = flrNew;
+			theBuilding.length = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+			inpWidth.value = wid;
+		} else if ( len !== parseInt( inpLength.value, 10 ) ) {
+			len = parseInt( inpLength.value, 10 );
+			wid = area / ( len * flr );
+			theBuilding.length = len;
+			theBuilding.width = wid;
+			inpWidth.value = wid;
+		} else if ( wid !== parseInt( inpWidth.value, 10 ) ) {
+			wid = parseInt( inpWidth.value, 10 );
+			len = area / ( wid * flr );
+			theBuilding.length = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+		}
+		const pathBox = [ v2( len, 0 ), v2( 0, 0 ), v2( 0, wid ), v2( len, wid ), v2( len, 0 ) ];
+		// divValidation.innerHTML =
+		// 	'<p>Validations</p>' +
+		// 	'<p>Calculated Area: ' + flr * ( len * wid ) + '<p>' +
+		// 	'<p>[flr * ( len * wid )]</p>' +
+		// 	'<p>Frame: ' + renderer.info.render.frame + '</p>' +
+		// '';
+		divThickness.style.display = 'none';
+		//console.log( 'theBuilding', theBuilding );
+		return pathBox;
+	}
+	function getPathL() {
+		let area = theBuilding.area;
+		let flr = theBuilding.storeys;
+		let len = theBuilding.length;
+		let wid = theBuilding.width;
+		let thk = theBuilding.thickness;
+		if ( theBuilding.lengthInit === 0 ) {
+			inpLength.value = 120;
+		}
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
+			const areaNew = parseInt( inpArea.value, 10 )
+			const flrNew = parseInt( inpFloors.value, 10 );
+			const areaTemp = area * flrNew / flr;
+			const ratio = Math.sqrt( area / areaTemp );
+			flr = flrNew;
+			len = Math.round( ratio * len );
+			wid = ( ( area - thk * len ) / thk + thk ) / flr;
+			theBuilding.area = areaNew;
+			theBuilding.storeys = flr;
+			theBuilding.length = theBuilding.lengthInit = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+			inpWidth.value = wid;
+		} else if ( len !== parseInt( inpLength.value, 10 ) ) {
+			len = parseInt( inpLength.value, 10 );
+			wid = ( ( area - thk * len ) / thk + thk ) / flr;
+			theBuilding.length = theBuilding.lengthInit = len;
+			theBuilding.width = wid;
+			inpWidth.value = wid;
+		} else if ( wid !== parseInt( inpWidth.value, 10 ) ) {
+			wid = parseInt( inpWidth.value, 10 );
+			len = ( area - thk * ( wid - thk ) ) / ( thk * flr );
+			theBuilding.length = theBuilding.lengthInit = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+		}
+		const pathL = [
+			v2( len, 0 ),
+			v2( 0, 0 ),
+			v2( 0, wid ),
+			v2( thk, wid ),
+			v2( thk, thk ),
+			v2( len, thk ),
+			v2( len, 0 )
+		];
+		// divValidation.innerHTML =
+		// 	'<p>Validations</p>' +
+		// 	'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
+		// 	'<p>[ flr * ( thk * len + thk * ( wid - thk ) ) ]</p>' +
+		// 	'<p>Frame: ' + renderer.info.render.frame + '</p>' +
+		// '';
+		divThickness.style.display = '';
+		return pathL;
+	}
+	function getPathT() {
+		let area = theBuilding.area;
+		let flr = theBuilding.storeys;
+		let len = theBuilding.length;
+		let wid = theBuilding.width;
+		let thk = theBuilding.thickness;
+		if ( theBuilding.lengthInit === 0 ) {
+			inpLength.value = 120;
+		}
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
+			const areaNew = parseInt( inpArea.value, 10 )
+			const flrNew = parseInt( inpFloors.value, 10 );
+			const areaTemp = area * flrNew / flr;
+			const ratio = Math.sqrt( area / areaTemp );
+			flr = flrNew;
+			len = Math.round( ratio * len );
+			wid = ( ( area - thk * len ) / thk + thk ) / flr;
+			theBuilding.area = areaNew;
+			theBuilding.storeys = flr;
+			theBuilding.lengthInit = theBuilding.length = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+			inpWidth.value = wid;
+		} else if ( len !== parseInt( inpLength.value, 10 ) ) {
+			len = parseInt( inpLength.value, 10 );
+			wid = ( ( area - thk * len ) / thk + thk ) / flr;
+			theBuilding.lengthInit = theBuilding.length = len;
+			theBuilding.width = wid;
+			inpWidth.value = wid;
+		} else if ( wid !== parseInt( inpWidth.value, 10 ) ) {
+			wid = parseInt( inpWidth.value, 10 );
+			len = ( area - thk * ( wid - thk ) ) / ( thk * flr );
+			theBuilding.lengthInit = theBuilding.length = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+		}
+		const pathT = [
+			v2( len, 0 ),
+			v2( 0, 0 ),
+			v2( 0, thk ),
+			v2( 0.5 * ( len - thk ), thk ),
+			v2( 0.5 * ( len - thk ), wid ),
+			v2( len - 0.5 * ( len - thk ), wid ),
+			v2( len - 0.5 * ( len - thk ), thk ),
+			v2( len, thk ),
+			v2( len, 0 )
+		];
+		// divValidation.innerHTML =
+		// 	'<p>Validations T Shape</p>' +
+		// 	'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
+		// 	'<p>[ flr * ( thk * len + thk * ( wid - thk ) ) ]</p>' +
+		// 	'<p>Frame: ' + renderer.info.render.frame + '</p>' +
+		// '';
+		divThickness.style.display = '';
+		return pathT;
+	}
+	function getPathH() {
+		let area = theBuilding.area;
+		let flr = theBuilding.storeys;
+		const flrNew = parseInt( inpFloors.value, 10 );
+		let len = theBuilding.length;
+		let wid = theBuilding.width;
+		let thk = theBuilding.thickness;
+		if ( theBuilding.lengthInit === 0 ) {
+			inpLength.value = 120;
+		}
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
+			const areaNew = parseInt( inpArea.value, 10 );
+			const areaTemp = area * flrNew / flr;
+			const ratio = Math.sqrt( area / areaTemp );
+			len = Math.round( ratio * len );
+			wid =  ( area - thk * ( len - 2 * thk ) ) / ( 2 * thk * flrNew );
+			theBuilding.area = areaNew;
+			theBuilding.storeys = flr = flrNew;
+			theBuilding.lengthInit = theBuilding.length = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+			inpWidth.value = wid;
+		} else if ( len !== parseInt( inpLength.value, 10 ) ) {
+			len = parseInt( inpLength.value, 10 );
+			wid = ( area - thk * ( len - 2 * thk ) ) / ( 2 * thk * flr );
+			theBuilding.lengthInit = theBuilding.length = len;
+			theBuilding.width = wid;
+			inpWidth.value = wid;
+		} else if ( wid !== parseInt( inpWidth.value, 10 ) ) {
+			wid = parseInt( inpWidth.value, 10 );
+			len = ( ( area - thk * wid ) / thk + 2 * thk ) / flr;
+			theBuilding.lengthInit = theBuilding.length = len;
+			theBuilding.width = wid;
+			inpLength.value = len;
+		}
+		const pathH = [
+			v2( len - thk, 0.5 * ( wid - thk ) ),
+			v2( thk, 0.5 * ( wid - thk ) ),
+			v2( thk, 0 ),
+			v2( 0, 0 ),
+			v2( 0, wid ),
+			v2( thk, wid ),
+			v2( thk, wid - 0.5 * ( wid - thk ) ),
+			v2( len - thk, wid - 0.5 * ( wid - thk ) ),
+			v2( len - thk, wid ),
+			v2( len, wid ),
+			v2( len, 0 ),
+			v2( len - thk, 0 ),
+			v2( len - thk, 0.5 * ( wid - thk ) )
+		];
+		// divValidation.innerHTML =
+		// 	'<p>Valibations - H Shape</p>' +
+		// 	'<p>Calculated Area: ' + ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) + '</p>' +
+		// 	'<p>[ ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) ]</p>' +
+		// 	'<p>Frame: ' + renderer.info.render.frame + '</p>' +
+		// '';
+		divThickness.style.display = '';
+		return pathH;
+	}
+	function createShape() {
+		let shape;
+		shape = new THREE.Shape( theBuilding.path );
+		const amount = theBuilding.storeyHeight * theBuilding.storeys;
+		geometry = new THREE.ExtrudeGeometry( shape, { bevelEnabled: false, amount: amount } );
+		geometry.center();
+		const material = new THREE.MeshPhongMaterial();
+		const mesh = new THREE.Mesh( geometry, material );
+		const edgesGeometry = new THREE.EdgesGeometry( geometry );
+		const meshEdges = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+		mesh.add( meshEdges );
+		return mesh;
+	}
+	function animate() {
+		requestAnimationFrame( animate );
+		renderer.autoClear = true;
+		controls.update();
+		renderer.render( scene, camera1 );
+		context1.drawImage( renderer.domElement, 0, 0 );
+		controls2.update();
+		renderer.render( scene, camera2 );
+		context2.drawImage( renderer.domElement, 0, 0 );
+	}
+</script>
+</body>
+</html>
