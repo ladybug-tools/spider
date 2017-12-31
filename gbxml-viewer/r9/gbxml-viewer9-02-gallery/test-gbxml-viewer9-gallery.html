@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML viewer gallery" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-30" >
-<title>test-gbxml-viewer9-template</title>
+<title>test-gbxml-viewer9-gallery</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -23,7 +23,7 @@
 <body>
 
 	<div id = "divHeader" >
-		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/" >gh</a>
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r9/" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
 		<div id = "divTitle" ></div>
 	</div>
 
@@ -32,12 +32,31 @@
 	<p>
 		<a id=aThree href="JavaScript:( function(){
 			const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = 'gbxml-viewer9-template.js';
+			script.src = 'gbxml-viewer9-gallery-gbxml.js';
 		} )()" >
-		gbxml-viewer8-template</a>
+		gbxml-viewer9-gallery-gbxml</a>
 	</p>
 
-	<iframe id=ifrThree src='http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
+
+	<p>
+		<a href="JavaScript:( function(){
+			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = 'gbxml-viewer9-gallery-spider-build-well.js';
+		} )()" >
+		gbxml-viewer9-gallery-spider-build-well</a>
+	</p>
+
+
+	<p>
+		<a href="JavaScript:( function(){
+			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = 'gbxml-viewer9-gallery-spider-viewer-samples.js';
+		} )()" >
+		gbxml-viewer9-gallery-spider-viewer-samples</a>
+	</p>
+
+
+	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
 
 	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
@@ -51,23 +70,14 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
-
-
-<!--
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/open-studio-seb.xml" >open studio seb</a></p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" >sam live2</a> </p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml" >urban house mep</a></p>
-
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/.xml" ></a></div>
-
--->
 <script>
 
-	var divAppMenu;
+	var divMenuItems;
 	var divContents;
+
+	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+	var threeDefaultFile = '../gbxml-viewer9-01-core/gbxml-viewer9-core.html';
+
 
 	init();
 

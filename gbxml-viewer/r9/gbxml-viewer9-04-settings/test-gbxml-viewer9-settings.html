@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML files settings" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-30" >
-<title>test-gbxml-viewer9-template</title>
+<meta name = "date" content = "2017-12-17" >
+<title>test-gbxml-viewer9-settings</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -14,7 +14,14 @@
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; margin: 3px; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
 	iframe { height: 500px; width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
@@ -23,21 +30,22 @@
 <body>
 
 	<div id = "divHeader" >
-		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/" >gh</a>
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/gbxml-viewer9-04-settings" >gh</a>
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'template' to load test menu</p>
+	<p>If it does not open automatically, click 'settings' to load settings menu.</p>
 
 	<p>
 		<a id=aThree href="JavaScript:( function(){
 			const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = 'gbxml-viewer9-template.js';
-		} )()" >
-		gbxml-viewer8-template</a>
+			script.src = 'gbxml-viewer9-settings.js';
+		})()" >
+		Settings</a>
 	</p>
 
-	<iframe id=ifrThree src='http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
+
+	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
 
 	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
@@ -52,21 +60,9 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
 
-
-<!--
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/open-studio-seb.xml" >open studio seb</a></p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" >sam live2</a> </p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml" >urban house mep</a></p>
-
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/.xml" ></a></div>
-
--->
 <script>
 
-	var divAppMenu;
+	var divMenuItems;
 	var divContents;
 
 	init();
@@ -75,14 +71,14 @@
 	function init() {
 
 		divTitle.innerHTML = 
-			'<h2><a  href = "" >' + document.title + '</a></h2>' +
+			'<h2><a href = "" >' + document.title + '</a></h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
 
-		window.addEventListener ( 'hashchange', onHashChange, false );
-
 		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
 		dragArea.addEventListener( 'drop', drop, false );
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
 
 		onHashChange();
 
@@ -97,6 +93,7 @@
 		ifrThree.contentWindow.location.hash = '#' + url;
 
 	}
+
 
 
 	function drop( event ) {

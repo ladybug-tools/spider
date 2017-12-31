@@ -23,7 +23,7 @@
 <body>
 
 	<div id = "divHeader" >
-		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/" >gh</a>
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r9/" >gh</a>
 		<div id = "divTitle" ></div>
 	</div>
 
@@ -34,10 +34,10 @@
 			const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = 'gbxml-viewer9-template.js';
 		} )()" >
-		gbxml-viewer8-template</a>
+		gbxml-viewer9-template</a>
 	</p>
 
-	<iframe id=ifrThree src='http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html' ></iframe>
+	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
 
 	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
@@ -51,8 +51,6 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
-
-
 <!--
 
 	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/open-studio-seb.xml" >open studio seb</a></p>
@@ -64,9 +62,10 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/.xml" ></a></div>
 
 -->
+
 <script>
 
-	var divAppMenu;
+	var divMenuItems;
 	var divContents;
 
 	init();
