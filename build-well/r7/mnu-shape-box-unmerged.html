@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-09-30" >
 <title>Box Shape R5</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -49,7 +49,7 @@
 			<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
 
 <<<<<<< HEAD
-			<p title='Area from 100 to 1000000' >Building Area: 
+			<p title='Area from 100 to 1000000' >Building Area:
 				<input id=inpBuildingArea type = number min=1 max=1000000 step=1 value=10000 oninput="validity.valid||(value='');" onchange=updateShape() class=floatRight >
 =======
 
@@ -63,12 +63,12 @@
 			</p>
 
 <<<<<<< HEAD
-			<p title='How many storeys? 1 to 161'>Number of Floors: 
+			<p title='How many storeys? 1 to 161'>Number of Floors:
 				<input id=inpNumberOfFloors type=number min=1 max=161 value=1 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 			</p>
 
 
-			<p title= 'Measured in square feet' >Floor Area: 
+			<p title= 'Measured in square feet' >Floor Area:
 				<span id=inpFloorArea class=floatRight >0</span>
 =======
 			<p title = 'How many storeys?'>Number of Floors:
@@ -86,11 +86,11 @@
 			</p>
 
 <<<<<<< HEAD
-			<p title= 'Measured from 8 to 15' >Floor Height: 
+			<p title= 'Measured from 8 to 15' >Floor Height:
 				<input id=inpFloorHeight type=number min=8 max=15 value=12 onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title= 'measured from 10 to 20' >Perimeter Depth: 
+			<p title= 'measured from 10 to 20' >Perimeter Depth:
 				<input id=inpPerimterDepth type=number min=10 max=20 value=15 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 =======
 			<p title= 'Measured in feet' >Floor Height:
@@ -107,11 +107,11 @@
 			</p>
 
 <<<<<<< HEAD
-			<p title= 'Depicted only when > 0 and < 10' >Overhang Depth: 
+			<p title= 'Depicted only when > 0 and < 10' >Overhang Depth:
 				<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title= 'building angle in degrees -180 to 180' >Orientation: 
+			<p title= 'building angle in degrees -180 to 180' >Orientation:
 				<input type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight >
 =======
 			<p title= 'Depicted with a highly exaggerated depth' >Overhang Depth:
@@ -130,7 +130,7 @@
 
 			<p>
 <<<<<<< HEAD
-				<button onclick=saveFile(); >save building data to file</button> 
+				<button onclick=saveFile(); >save building data to file</button>
 =======
 				<button onclick = saveFile(); >save building data to file</button>
 >>>>>>> origin/master
@@ -287,7 +287,7 @@
 		const width = parseFloat( inpWidth1.innerHTML );
 <<<<<<< HEAD
 		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
-		const areaCurrent = length * width * floors; // building.userData.areaCurrent; 
+		const areaCurrent = length * width * floors; // building.userData.areaCurrent;
 =======
 		const floors = parseInt( inpNumberOfFloors.value, 10 );
 		const areaCurrent = length * width * floors; // building.userData.areaCurrent;
@@ -304,7 +304,7 @@
 <<<<<<< HEAD
 		inpBuildingArea.value = areaNew;
 		inpNumberOfFloors.value = floors;
-		inpLength1.value = lengthNew.toFixed(); 
+		inpLength1.value = lengthNew.toFixed();
 =======
 		inpLength1.value = lengthNew.toFixed();
 >>>>>>> origin/master
@@ -338,7 +338,7 @@
 		inpNumberOfFloors.value = floors;
 		inpPerimterDepth.value = perDep;
 
-		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
+		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab
 =======
 		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab
 >>>>>>> origin/master

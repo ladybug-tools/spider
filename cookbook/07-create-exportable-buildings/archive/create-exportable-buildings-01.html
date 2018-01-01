@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-11-21" >
 <title>create exportable buildings r1.0 </title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -56,10 +56,10 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
 <!--
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo;
 -->
 		</p>
 		<h3>
@@ -1095,7 +1095,7 @@
 console.log( 'json', json.gbXML );
 
 		divJson = document.body.appendChild( document.createElement( 'div' ) );
-		divJson.style.cssText = 'height: 100%; overflow: auto;  width: 800px; position: absolute; right: 30px; top: 20px;' ; 
+		divJson.style.cssText = 'height: 100%; overflow: auto;  width: 800px; position: absolute; right: 30px; top: 20px;' ;
 
 		divJson.innerHTML = '<textarea id=txtJson style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
 
@@ -1109,7 +1109,7 @@ console.log( 'json', json.gbXML );
 		json = {
 
 			gbXML: {
-					"@xmlns": "http://www.gbxml.org/schema", 
+					"@xmlns": "http://www.gbxml.org/schema",
 					"@xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
 					"@xsi:schemaLocation": "http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd",
 					"@xmlns:xhtml": "http://www.w3.org/1999/xhtml",
@@ -1406,9 +1406,9 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 				if (sName === "keyValue") {
 
-					if (vValue !== null && vValue !== true) { 
+					if (vValue !== null && vValue !== true) {
 
-						oParentEl.appendChild(oNewDoc.createTextNode(vValue.constructor === Date ? vValue.toGMTString() : String(vValue))); 
+						oParentEl.appendChild(oNewDoc.createTextNode(vValue.constructor === Date ? vValue.toGMTString() : String(vValue)));
 
 					}
 

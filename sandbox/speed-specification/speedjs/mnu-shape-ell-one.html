@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-11" >
 <title>L Shape One</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -135,10 +135,10 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
-				'<a href = "" >' + document.title + '</a> &nbsp; ' +  
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
 			'</h3>' +
 		'';
@@ -465,7 +465,7 @@ console.log( 'length diff', length1, length2 );
 //console.log( '', wallExt.children[ 0 ] );
 			wallExt.children[ 0 ].geometry.attributes.position.array[ 9 ] += 2 * perDep;
 
-			if ( i === 0 ) { 
+			if ( i === 0 ) {
 
 				zones.push( { name: 'zone 6', description: 'width right back', area: area, volume: volume } );
 
@@ -494,14 +494,14 @@ console.log( 'length diff', length1, length2 );
 
 
 			wallExt = createExternalWall( len2, hgt, i, spaceId );
-			wallExt.position.set( len1 - len105 - len205, ( wid105 + wid205 ) - wid2, i * hgt );  
+			wallExt.position.set( len1 - len105 - len205, ( wid105 + wid205 ) - wid2, i * hgt );
 
 //console.log( '', wallExt.children[ 0 ] );  // add check if exists
 			wallExt.children[ 0 ].geometry.attributes.position.array[ 6 ] -= 2 * perDep;
 
-			if ( i === 0 ) { 
+			if ( i === 0 ) {
 
-				zones.push( { name: 'zone 3', description: 'length back right ', area: area, volume: volume } ); 
+				zones.push( { name: 'zone 3', description: 'length back right ', area: area, volume: volume } );
 
 				wallExt.children[ 1 ].geometry.attributes.position.array[ 6 ] -= 2 * perDep;
 

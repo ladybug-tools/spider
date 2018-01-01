@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-11-30" >
 <title>create exportable buildings r1.8 </title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -137,7 +137,7 @@
 
 <script>
 
-  
+
 
 	let json;
 	let gbxml;
@@ -1151,18 +1151,18 @@
 		theBuilding.shadeCount = 1;
 		theBuilding.area = 0;
 
-    
-		
+
+
 		initExportGbxml();
 		getBuildingStoreys();
 		getSurfaces();
 		getAdjacentBuildings();
     updateJson();
-		
+
 
 	}
 
-	
+
 
   function updateJson()
   {
@@ -1180,10 +1180,10 @@
 			console.log(e.target);
     	if(e.target && e.target.id == id)
     	{
-    	  e.target.parentNode.removeChild( e.target );	
+    	  e.target.parentNode.removeChild( e.target );
     	}
 			e.currentTarget.removeEventListener(e.type,handler)
-    }, true); 
+    }, true);
 	}
 
 
@@ -1195,7 +1195,7 @@
 		 divJson.innerHTML = '<textarea id=' + id + '' + ' style=height:100%;width:100%; >' + innertext + '</textarea>';
      callback(id);
   }
- 
+
 
 	function initExportGbxml() {
 
@@ -1247,7 +1247,7 @@
 				DocumentHistory: []
 
 			}
-      
+
 		}
 	}
 
@@ -1879,7 +1879,7 @@
     var inner_id = 'txtGbxml';
     openInspectorWindow(bindToInspectorWindow, inner_id, xmlText);
 
-		
+
 
     // the kludge to get around getPolyLoop fail
 
@@ -1936,7 +1936,7 @@
 	}
 
 
-  
+
 	function formatXml(xml) {
 
 // https://gist.github.com/sente/1083506/d2834134cd070dbcc08bf42ee27dabb746a1c54d

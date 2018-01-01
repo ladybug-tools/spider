@@ -5,10 +5,11 @@
 	var renderer;
 	var camera;
 	var gbjson;
-	var divHeadsUp; 
+	var surfaceMeshesChildren;
+
+	var divHeadsUp;
 	var intersected;
 	var objects;
-	var surfaceMeshesChildren;
 	var mouse;
 
 
@@ -19,7 +20,7 @@
 		if ( !divHeadsUp ) {
 
 			divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
-			divHeadsUp.style.cssText = 
+			divHeadsUp.style.cssText =
 				'background-color: #ddd; border-radius: 8px; display: none; min-height: 100px; min-width: 200px; opacity: 0.95; ' +
 				' overflow: auto; padding: 5px 5px 10px 5px; position: fixed; resize: both; z-index: 1000; ' +
 			'';
@@ -165,11 +166,11 @@
 				space1 = getSpaceId( adjacenciesTxt[ 0 ].spaceIdRef );
 				space2 = getSpaceId( adjacenciesTxt[ 1 ].spaceIdRef );
 
-				if ( space1 && space2 ) { 
+				if ( space1 && space2 ) {
 
-					adjacenciesTxt = 
+					adjacenciesTxt =
 
-						'<hr>' + 
+						'<hr>' +
 						'adjacency 1:  <button onclick=toggleSpace("' + space1.id + '"); >' + space1.id + '</button>' + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
 						( space1.Description ? 'description: ' + space1.Description + b : '' )  +
@@ -179,7 +180,7 @@
 						( space1.zoneIdRef ? 'zoneIdRef: ' + space1.zoneIdRef + b : '' ) +
 						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
 
-						'<hr>' + 
+						'<hr>' +
 						'adjacency 2: <button onclick=toggleSpace("' + space2.id + '"); >' + space2.id + '</button>' + b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
 						( space2.Description ? 'description: ' + space2.Description + b : '' )  +
@@ -203,7 +204,7 @@
 
 				if ( !space ) { return; }
 
-				adjacenciesTxt = 
+				adjacenciesTxt =
 					'<hr>' +
 					'adjacency space id: <button onclick=toggleSpace("' + space.id + '"); >' + space.id + '</button>' + b +
 					( space.Name ? 'name: ' + space.Name + b : '' )  +
@@ -229,7 +230,7 @@
 			'id: ' + data.id + b +
 			'surface: ' + data.surfaceType + b +
 			( data.CADObjectId ? 'CADObjectId: ' + data.CADObjectId + b : '' ) +
-			adjacenciesTxt + 
+			adjacenciesTxt +
 		'';
 
 		divHeadsUp.innerHTML = txt;
@@ -282,7 +283,7 @@
 
 			}
 
-		} 
+		}
 
 	}
 

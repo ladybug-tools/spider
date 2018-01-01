@@ -1,4 +1,4 @@
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 // the naming of things is very messy indeed
 
@@ -770,7 +770,7 @@ console.log( 'pathRoof', pathRoof );
 
 
 
-	function getSurfacesAdjacentBuildings( building ) { 
+	function getSurfacesAdjacentBuildings( building ) {
 
 		let textSurfaces = '';
 
@@ -782,7 +782,7 @@ console.log( 'pathRoof', pathRoof );
 
 		for ( let i = 0; i < 5; i++ ) {
 
-			textSurfaces += 
+			textSurfaces +=
 				'\t\t<Surface surfaceType="Shade" id="shade-' + ( shadeId ++ ) + '" >\n' +
 				'\t\t\t<Name>' + building.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +

@@ -9,7 +9,7 @@
 <title>gbXML Viewer R7 Reports</title>
 
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -273,8 +273,8 @@ console.log( '', spaces  );
 			if ( child instanceof THREE.Mesh ) {
 
 
-				if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
-					( id === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || id === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
+				if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true &&
+					( id === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || id === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef )
 				) {
 
 				child.material.wireframe = false;
@@ -376,7 +376,7 @@ console.log( '', spaces  );
 
 			index = types.indexOf( surface.surfaceType );
 
-			if ( index < 0 ) { 
+			if ( index < 0 ) {
 
 				types.push( surface.surfaceType );
 				typesCount[ types.length - 1 ] = 1;
@@ -395,7 +395,7 @@ console.log( '', spaces  );
 
 		}
 
-		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: ' 
+		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: '
 
 		const summary = 'Surfaces: ' + surfaces.length;
 
@@ -450,7 +450,7 @@ console.log( '', spaces  );
 		surfaces = [];
 
 		const b = '<br>';
-		let txt = 
+		let txt =
 			'File: ' + gbjson.name + b +
 			'Number of surfaces: ' + gbjson.Campus.Surface.length +
 		'';
@@ -463,16 +463,16 @@ console.log( '', spaces  );
 
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
 
-			if ( !surfaces.includes( points ) ) { 
+			if ( !surfaces.includes( points ) ) {
 
-				surfaces.push( points ); 
+				surfaces.push( points );
 
 			} else {
 
 console.log( 'duplicate surface', surface );
 
-				t$ += 
-					'<p>' + surfacesCount + 
+				t$ +=
+					'<p>' + surfacesCount +
 						'. id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						'Name: ' + surface.Name + b +
@@ -488,7 +488,7 @@ console.log( 'duplicate surface', surface );
 //		txt += '<h3>' + surfacesCount + ' Duplicate Surfaces</h3>' + t$;
 
 
-		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> ' 
+		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> '
 
 
 		adjacenciesCount = 0;
@@ -497,12 +497,12 @@ console.log( 'duplicate surface', surface );
 
 			adjacencies = surface.AdjacentSpaceId;
 
-			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
 
 //console.log( 'surface', surface );
 //console.log( 'duplicate adjacencies', adjacencies );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						( adjacenciesCount + 1 ) + '. id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -539,15 +539,15 @@ console.log( 'duplicate surface', surface );
 
 				vertex = JSON.stringify( point );
 
-				if ( !verticesSurface.includes( vertex ) ) { 
+				if ( !verticesSurface.includes( vertex ) ) {
 
-					verticesSurface.push( vertex ); 
+					verticesSurface.push( vertex );
 
 				} else {
 
 console.log( 'dup', vertex );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -559,9 +559,9 @@ console.log( 'dup', vertex );
 				}
 
 
-				if ( !verticesModel.includes( vertex ) ) { 
+				if ( !verticesModel.includes( vertex ) ) {
 
-					verticesModel.push( vertex ); 
+					verticesModel.push( vertex );
 
 				} else {
 
@@ -624,8 +624,8 @@ console.log( 'dup', vertex );
 
 		meshSurfaces.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh && Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
-				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
+			if ( child instanceof THREE.Mesh && Array.isArray( child.userData.data.AdjacentSpaceId ) === true &&
+				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef )
 				&& child !== thatChild
 			) {
 

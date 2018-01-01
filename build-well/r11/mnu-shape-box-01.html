@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-13" >
 <title>Box Shape</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -44,7 +44,7 @@
 
 		<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
 
-		<p title='Area from 1 to 1000000' >Building Area: 
+		<p title='Area from 1 to 1000000' >Building Area:
 			<input id=inpBuildingArea type = number min=1 max=1000000 step=1 value=8000 oninput="validity.valid||(value='');" onchange=updateShape() class=floatRight >
 		</p>
 
@@ -52,11 +52,11 @@
 			<input type=number id=inpLength1 min=1 max=200 step=1 value=80 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='How many storeys? 1 to 161'>Number of Floors: 
+		<p title='How many storeys? 1 to 161'>Number of Floors:
 			<input id=inpNumberOfFloors type=number min=1 max=161 value=1 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='Measured in square feet' >Floor Area: 
+		<p title='Measured in square feet' >Floor Area:
 			<span id=inpFloorArea class=floatRight >0</span>
 		</p>
 
@@ -68,11 +68,11 @@
 			<span type=number id=spnVolume class=floatRight ></span>
 		</p>
 
-		<p title='Measured from 8 to 15' >Floor Height: 
+		<p title='Measured from 8 to 15' >Floor Height:
 			<input id=inpFloorHeight type=number min=8 max=15 value=12 onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='measured from 10 to 20' >Perimeter Depth: 
+		<p title='measured from 10 to 20' >Perimeter Depth:
 			<input id=inpPerimeterDepth type=number min=10 max=20 value=15 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
@@ -80,11 +80,11 @@
 			<input type=number id=inpWindowWallRatio min=1 max=99 step=1 value=40 oninput="validity.valid||(value='');" onclick=updateShape(); class=floatRight />
 		</p>
 
-		<p title='Depicted only when > 0 and < 10' >Overhang Depth: 
+		<p title='Depicted only when > 0 and < 10' >Overhang Depth:
 			<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='building angle in degrees -180 to 180' >Orientation: 
+		<p title='building angle in degrees -180 to 180' >Orientation:
 			<input type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight >
 		</p>
 
@@ -124,7 +124,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
@@ -208,7 +208,7 @@
 		const width = building.area / ( building.length1 * building.floors );
 		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
 
-		const areaCurrent = length * width * floors; 
+		const areaCurrent = length * width * floors;
 		const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
 		const ratio = Math.sqrt( areaNew / areaCurrent );
 
@@ -216,7 +216,7 @@
 		const widthNew =  ratio * width; // parseFloat( inpWidth1.innerHTML );
 		const areaFloor = widthNew * lengthNew;
 
-		inpLength1.value = lengthNew.toFixed(); 
+		inpLength1.value = lengthNew.toFixed();
 		inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
 
 		inpBuildingArea.value = areaNew;
@@ -242,7 +242,7 @@
 		const width = parseFloat( inpWidth1.innerHTML );
 		const floors = inpNumberOfFloors.value ? parseInt( inpNumberOfFloors.value, 10 ): parseInt( inpNumberOfFloors.min, 10 );
 
-		const areaCurrent = length * width * floors; 
+		const areaCurrent = length * width * floors;
 		const areaNew = inpBuildingArea.value ? parseFloat( inpBuildingArea.value ): parseFloat( inpBuildingArea.min );
 		const ratio = Math.sqrt( areaNew / areaCurrent );
 
@@ -250,7 +250,7 @@
 		const widthNew =  ratio * width; // parseFloat( inpWidth1.innerHTML );
 		const areaFloor = widthNew * lengthNew;
 
-		inpLength1.value = lengthNew.toFixed(); 
+		inpLength1.value = lengthNew.toFixed();
 		inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
 
 		inpBuildingArea.value = areaNew;
@@ -308,7 +308,7 @@
 		const floors = building.floors;
 		const hgt = building.floorHeight;
 		const perDep = building.perimeterDepth;
-		
+
 		const len05 = len * 0.5;
 		const wid05 = wid * 0.5;
 

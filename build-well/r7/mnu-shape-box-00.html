@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-09-29" >
 <title>Box Shape R4</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -49,7 +49,7 @@
 			<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
 
 
-			<p title = 'Measured in square feet' >Building Area: 
+			<p title = 'Measured in square feet' >Building Area:
 				<input id=inpBuildingArea type = number min=1000 max=1000000 step=100 value=10000 onchange=updateShape() class=floatRight >
 			</p>
 
@@ -57,12 +57,12 @@
 				<input type=number id=inpLength1 min = 0 max = 100 step = 1 value = 80 onchange=updateShape(); class = floatRight >
 			</p>
 
-			<p title = 'How many storeys?'>Number of Floors: 
+			<p title = 'How many storeys?'>Number of Floors:
 				<input id=inpNumberOfFloors type = number min = 1 max = 161 value = 1 onchange = updateShape(); class = floatRight >
 			</p>
 
 
-			<p title= 'Measured in square feet' >Floor Area: 
+			<p title= 'Measured in square feet' >Floor Area:
 				<span id=inpFloorArea class = floatRight >0</span>
 			</p>
 
@@ -70,11 +70,11 @@
 				<span type=number id=inpWidth1 min = 0 max = 100 step = 1 value = 50 onchange=updateShape(); class = floatRight ></span>
 			</p>
 
-			<p title= 'Measured in feet' >Floor Height: 
+			<p title= 'Measured in feet' >Floor Height:
 				<input id=inpFloorHeight type = number min = 8 max = 15 value = 12 onchange = updateShape(); class = floatRight >
 			</p>
 
-			<p title= 'measured in feet' >Perimeter Depth: 
+			<p title= 'measured in feet' >Perimeter Depth:
 				<input id=inpPerimterDepth type = number min = 10 max = 20 value = 15 onchange = updateShape(); class = floatRight >
 			</p>
 
@@ -82,11 +82,11 @@
 				<input type=number id=inpWindowWallRatio min=1 max=99 step=5 value=40 onclick=updateShape(); class = floatRight />
 			</p>
 
-			<p title= 'Depicted with a highly exaggerated depth' >Overhang Depth: 
+			<p title= 'Depicted with a highly exaggerated depth' >Overhang Depth:
 				<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title= 'building angle in degrees' >Orientation: 
+			<p title= 'building angle in degrees' >Orientation:
 				<input type=number id=inpOrientation min = -180 max = 180 step = 5 value = 0 onchange = updateShape(); class = floatRight >
 
 			</p>
@@ -96,7 +96,7 @@
 			</p>
 
 			<p>
-				<button onclick = saveFile(); >save building data to file</button> 
+				<button onclick = saveFile(); >save building data to file</button>
 			</p>
 -->
 
@@ -123,14 +123,14 @@
 
 	let geometry, material, mesh;
 
-	const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+	const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 
 	init();
 
 
 	function init() {
 
-		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 
@@ -254,7 +254,7 @@
 		const length = parseFloat( inpLength1.value );
 		const width = parseFloat( inpWidth1.innerHTML );
 		const floors = parseInt( inpNumberOfFloors.value, 10 );
-		const areaCurrent = length * width * floors; // building.userData.areaCurrent; 
+		const areaCurrent = length * width * floors; // building.userData.areaCurrent;
 
 
 		const areaNew = parseFloat( inpBuildingArea.value );
@@ -264,7 +264,7 @@
 		const lengthNew = ratio * parseFloat( inpLength1.value );
 		const widthNew =  ratio * parseFloat( inpWidth1.innerHTML );
 
-		inpLength1.value = lengthNew.toFixed(); 
+		inpLength1.value = lengthNew.toFixed();
 		inpWidth1.innerHTML = widthNew.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
 		inpFloorArea.innerHTML = ( widthNew * lengthNew / floors ).toLocaleString( undefined, { maximumFractionDigits: 1 } );
 
@@ -298,7 +298,7 @@
 
 		let intWallCount = 5;
 
-		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
+		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab
 
 // length front
 			wall = createExternalWall( len, hgt, i, 1 );
@@ -346,7 +346,7 @@
 
 			}
 
-// width right 
+// width right
 			wall = createExternalWall( wid, hgt, i, 4 );
 			wall.rotation.z = -Math.PI / 2;
 			wall.position.set( len05, wid05, i * hgt );
@@ -366,10 +366,10 @@
 			slab = createSlab( len, wid );
 
 			slab.position.set( -len05, -wid05, i * hgt );
-			slab.name = 
-				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
-				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
-				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
+			slab.name =
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' +
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' +
+				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' +
 				'Slab.1,BaseSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
 //			buildingData.value += slab.name;
 			building.add( slab );
@@ -378,10 +378,10 @@
 
 		roof = createSlab( len, wid );
 		roof.position.set( -len05, -wid05, i * hgt );
-		roof.name = 
-			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' + 
-			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' + 
-			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' + 
+		roof.name =
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',1,0,0,0\n' +
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',2,' + len + ',0,0\n' +
+			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',3,' + len + ',' + wid + ',0\n' +
 			'Slab.2,RoofSlab,Level.' + ( i + 1 ) + ',4,0,' + wid + ',0\n';
 //		buildingData.value += roof.name;
 		building.add( roof );
@@ -395,10 +395,10 @@
 
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		const shape = new THREE.Shape( [ 
-			v2( 0, 0 ), 
-			v2( length, 0 ), 
-			v2( length, width ), 
+		const shape = new THREE.Shape( [
+			v2( 0, 0 ),
+			v2( length, 0 ),
+			v2( length, width ),
 			v2( 0, width ),
 			v2( 0, 0 )
 		] );
@@ -422,19 +422,19 @@
 		const deltaH = wwr * height05;
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		const shapeVertices = [ 
-			v2( 0, 0 ), 
-			v2( length, 0 ), 
-			v2( length, height ), 
+		const shapeVertices = [
+			v2( 0, 0 ),
+			v2( length, 0 ),
+			v2( length, height ),
 			v2( 0, height ),
 			v2( 0, 0 )
 		];
 		const shape = new THREE.Shape( shapeVertices );
 
-		const holeVertices = [ 
-			v2( length05 - deltaL, height05 - deltaH ), 
-			v2( length05 + deltaL, height05 - deltaH ), 
-			v2( length05 + deltaL, height05 + deltaH ), 
+		const holeVertices = [
+			v2( length05 - deltaL, height05 - deltaH ),
+			v2( length05 + deltaL, height05 - deltaH ),
+			v2( length05 + deltaL, height05 + deltaH ),
 			v2( length05 - deltaL, height05 + deltaH ),
 			v2( length05 - deltaL, height05 - deltaH )
 		];
@@ -452,10 +452,10 @@
 		let c = mesh.geometry.attributes.position.array; // c = coordinate
 		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
 
-		mesh.name = 
-			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ] + '\n' + 
-			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ] + '\n' + 
-			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ] + '\n' + 
+		mesh.name =
+			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ] + '\n' +
+			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ] + '\n' +
+			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',3,' + c[ 6 ] + ',' + c[ 7 ] + ',' + c[ 8 ] + '\n' +
 			'Wall.' + id + ',ExteriorWall,Level.' + ( floor + 1 ) + ',4,' + c[ 9 ] + ',' + c[ 10 ] + ',' + c[ 11 ] + '\n' +
 
 			'Window.' + id + ',ExteriorWindow,Level.' + ( floor + 1 ) + ',1,' + c[ 12 ] + ',' + c[ 13 ] + ',' + c[ 14 ].toFixed( 3 ) + '\n' +
@@ -477,7 +477,7 @@
 
 			c = plane.geometry.attributes.position.array; // c = coordinate
 			c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-			plane.name = 
+			plane.name =
 
 				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
 				'Overhang.' + id + ',ExteriorWindowOverhang,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ].toFixed( 3 ) + '\n' +
@@ -501,10 +501,10 @@
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 		const perDep = parseFloat( inpPerimterDepth.value );
 
-		const shape = new THREE.Shape( [ 
-			v2( 0, 0 ), 
-			v2( length, 0 ), 
-			v2( length, height ), 
+		const shape = new THREE.Shape( [
+			v2( 0, 0 ),
+			v2( length, 0 ),
+			v2( length, height ),
 			v2( 0, height ),
 			v2( 0, 0 )
 		] );
@@ -514,10 +514,10 @@
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
 		const mesh = new THREE.Mesh( geometry, material );
 
-		const shape2 = new THREE.Shape( [ 
-			v2( 0, 0 ), 
-			v2( Math.SQRT2 * perDep, 0 ), 
-			v2( Math.SQRT2 * perDep, height ), 
+		const shape2 = new THREE.Shape( [
+			v2( 0, 0 ),
+			v2( Math.SQRT2 * perDep, 0 ),
+			v2( Math.SQRT2 * perDep, height ),
 			v2( 0, height ),
 			v2( 0, 0 )
 		] );
@@ -530,7 +530,7 @@
 
 		c = mesh.geometry.attributes.position.array; // c = coordinate
 		c = c.map( function( x ){ return x < 0.000001 ? 0 : x; } );
-		mesh.name = 
+		mesh.name =
 
 			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',1,' + c[ 0 ] + ',' + c[ 1 ] + ',' + c[ 2 ].toFixed( 3 ) + '\n' +
 			'Wall.' + id + ',InternalWall,Level.' + ( floor + 1 ) + ',2,' + c[ 3 ] + ',' + c[ 4 ] + ',' + c[ 5 ].toFixed( 3 ) + '\n' +

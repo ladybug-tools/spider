@@ -1,4 +1,4 @@
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 
 // You are probably better at doing this sort of stuff than I am. ;-)
@@ -231,7 +231,7 @@
 								// H-shape has lots of zones ensure extra scalling down of zones to make sure that tehy fit
 								draw2Dtext(prefix + zoneNumber,size,centroid.x + mgn_x,centroid.y - mgn_y,qLine.height,spaceLayout.group, angle);
 							}
-							else 
+							else
 							{
 								if(zoneNumber == 0)
 									zoneNumber = 5;

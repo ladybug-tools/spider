@@ -9,7 +9,7 @@
 <title>gbXML Viewer Table of Contents</title>
 
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -50,10 +50,10 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
 <!--
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo;
 -->
 		</p>
 
@@ -98,7 +98,7 @@
 
 	<div id = "hamburger" onclick=toggleNav(); >
 
-		slide &#9776; 
+		slide &#9776;
 
 	</div>
 
@@ -175,7 +175,7 @@
 
 	function setBreadcrumbs( path ) {
 
-		let txt = 
+		let txt =
 			'<b>' +
 				'<a href=JavaScript:getFolderContents(); >' + pathRepo + '</a> &raquo; ' +
 			'</b>';
@@ -205,7 +205,7 @@
 
 		let txt = '';
 
-		const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins' 
+		const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins'
 
 		for ( let item of items ) {
 
@@ -215,8 +215,8 @@
 
 				txt +=
 					'<div style=margin-bottom:8px; >' +
-						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' + 
-							item.name  + 
+						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' +
+							item.name  +
 						'</a>' +
 					'</div>' +
 				'';
@@ -240,7 +240,7 @@
 					'<table><tr>' +
 
 						'<td><a href="' + urlGitHubSource + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
-						'<td><a href=#' + itemPath + 
+						'<td><a href=#' + itemPath +
 						' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
 						( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
 						'</td>' +

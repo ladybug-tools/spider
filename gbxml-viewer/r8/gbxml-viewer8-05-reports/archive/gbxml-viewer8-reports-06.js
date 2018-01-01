@@ -1,4 +1,4 @@
-// Copyright 2017 Ladybug Tools authors. MIT License
+// Copyright 2018 Ladybug Tools authors. MIT License
 
 //	var divAppMenu = divAppMenu || undefined;
 
@@ -658,7 +658,7 @@
 
 		}
 
-		node.parentNode.innerHTML += 
+		node.parentNode.innerHTML +=
 			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
 			'zones ' + zones.length + ': ' + zones.join();
 

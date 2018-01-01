@@ -1,4 +1,4 @@
-// Copyright 2017 Ladybug Tools authors. MIT License
+// Copyright 2018 Ladybug Tools authors. MIT License
 
 
 //	var divAppMenu;
@@ -8,7 +8,7 @@
 	var gbjson;
 	var surfaceMeshes;
 
-	var uiAnalemma = 
+	var uiAnalemma =
 `
 	<p>
 		<button onclick="initSunPath();" >Draw Sun & Analemma</button>
@@ -88,7 +88,7 @@
 		if ( !divAppMenu ) {
 
 			divAppMenu = document.body.appendChild( document.createElement( 'div' ) );
-			divAppMenu.style.cssText = 
+			divAppMenu.style.cssText =
 				'background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px; ' +
 				'opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; ' +
 			'';
@@ -113,7 +113,7 @@
 		parameters.longitude = gbjson.Campus.Location.Longitude;
 		const now = Math.floor( Date.now() / 1000 );
 
-		url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + 
+		url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' +
 			parameters.latitude + ',' + parameters.longitude + '&timestamp=' + now;
 
 		requestFile( url, callbackUtcOffset );

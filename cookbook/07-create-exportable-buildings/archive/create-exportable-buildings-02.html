@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-11-21" >
 <title>create exportable buildings r1.0 </title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -58,10 +58,10 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
 <!--
-			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo;
 -->
 		</p>
 		<h3>
@@ -1079,7 +1079,7 @@ console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 //console.log( 'json', json.gbXML );
 
 		divJson = document.body.appendChild( document.createElement( 'div' ) );
-		divJson.style.cssText = 'height: 90%;  width: 800px; position: absolute; right: 30px; top: 20px;' ; 
+		divJson.style.cssText = 'height: 90%;  width: 800px; position: absolute; right: 30px; top: 20px;' ;
 		divJson.innerHTML = '<textarea id=txtJson style=height:100%;width:100%; >' + JSON.stringify( json, null, 4 ) + '</textarea>';
 
 
@@ -1092,7 +1092,7 @@ console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 		json = {
 
 			gbXML: {
-					"@xmlns": "http://www.gbxml.org/schema", 
+					"@xmlns": "http://www.gbxml.org/schema",
 					"@xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
 					"@xsi:schemaLocation": "http://www.gbxml.org/schema http://gbxml.org/schema/6-01/GreenBuildingXML_Ver6.01.xsd",
 					"@xmlns:xhtml": "http://www.w3.org/1999/xhtml",
@@ -1370,8 +1370,8 @@ console.log( 'theBuilding', theBuilding.group.children[ 0 ] );
 
 		for ( var i = 0; i < holes.length; i++ ) {
 
-			opening = 
-				{ 
+			opening =
+				{
 					"@openingType": "FixedWindow",
 					"@id": "opening-" + 999999,
 					"RectangularGeometry": {
@@ -1397,8 +1397,8 @@ console.log( 'wall', obj.children );
 
 			if ( child.name !== 'azimuth-indicator' ) {
 
-				let surface = 
-					{ 
+				let surface =
+					{
 						"@surfaceType": "Shade",
 						"@id": "shade-" + 999999,
 						"Name": child.name,
@@ -1488,9 +1488,9 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 
 				if (sName === "keyValue") {
 
-					if (vValue !== null && vValue !== true) { 
+					if (vValue !== null && vValue !== true) {
 
-						oParentEl.appendChild(oNewDoc.createTextNode(vValue.constructor === Date ? vValue.toGMTString() : String(vValue))); 
+						oParentEl.appendChild(oNewDoc.createTextNode(vValue.constructor === Date ? vValue.toGMTString() : String(vValue)));
 
 					}
 
@@ -1550,7 +1550,7 @@ https://developer.mozilla.org/en-US/docs/Archive/JXON#Reverse_Algorithms
 		if ( !json ){ alert( 'get building data first' ); return; }
 
 		divGbxml = document.body.appendChild( document.createElement( 'div' ) );
-		divGbxml.style.cssText = 'height: 90%;  width: 800px; position: absolute; right: 50px; top: 50px;' ; 
+		divGbxml.style.cssText = 'height: 90%;  width: 800px; position: absolute; right: 50px; top: 50px;' ;
 		divGbxml.innerHTML = '<textarea id=txtGbxml style=height:100%;width:100%; ></textarea>';
 
 		xml = createXML ( json );

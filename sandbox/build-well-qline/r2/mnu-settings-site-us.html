@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-13" >
 <title>Site Settings</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -69,12 +69,12 @@
 
 		<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
 
-		<p title='building opacity: 0 to 100%' >Opacity: 
+		<p title='building opacity: 0 to 100%' >Opacity:
 			<output id=outOpacity class=floatRight >100%</output>
 			<input type="range" id="rngOpacity" min=0 max=100 step=1 value=100 onchange=updateOpacity(); >
 		</p>
 
-		<p title='floor separation: 0 to 100 in units' >Vertical separation: 
+		<p title='floor separation: 0 to 100 in units' >Vertical separation:
 			<output id=outVertical class=floatRight >20</output>
 			<input type="range" id="rngVertical" min=0 max=100 step=1 value=20 onchange=updateVertical(); >
 		</p>
@@ -169,10 +169,10 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
-				'<a href = "" >' + document.title + '</a> &nbsp; ' +  
+				'<a href = "" >' + document.title + '</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="top" >' + iconEdit + '</a>' +
 			'</h3>' +
 		'';
@@ -390,7 +390,7 @@
 				'gbXML version: 6.01' + b +
 			b;
 
-			building.useSIUnitsForResults = true; 
+			building.useSIUnitsForResults = true;
 			building.temperatureUnit = 'C';
 			building.SurfaceReferenceLocation = 'Centerline' ;
 			building.areaUnit = 'SquareMeters';
@@ -411,7 +411,7 @@
 				'gbXML version: 6.01' + b +
 			b;
 
-			building.useSIUnitsForResults = false; 
+			building.useSIUnitsForResults = false;
 			building.temperatureUnit = 'C';
 			building.SurfaceReferenceLocation = 'Centerline' ;
 			building.areaUnit = 'SquareFeet';

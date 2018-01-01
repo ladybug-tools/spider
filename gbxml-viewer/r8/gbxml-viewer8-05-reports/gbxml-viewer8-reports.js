@@ -1,4 +1,4 @@
-// Copyright 2017 Ladybug Tools authors. MIT License
+// Copyright 2018 Ladybug Tools authors. MIT License
 
 //	var divAppMenu = divAppMenu || undefined;
 
@@ -404,7 +404,7 @@
 						'id of duplicate: <button onclick=toggleSurface("' + surfOther.id + '"); >' + surfOther.id + '</button>' + b +
 						'surfaceType: ' + surfOther.surfaceType + b +
 						( surfOther.Name ? 'Name: ' + surfOther.Name + b : '' ) +
-						( surfOther.CADObjectId ? 
+						( surfOther.CADObjectId ?
 							'<button onclick=toggeleCadId("' + encodeURI( surfOther.CADObjectId ) + '"); >' + surfOther.CADObjectId + '</button>' + b
 							: ''
 						) +
@@ -530,7 +530,7 @@
 
 				}
 
-				flowContent += 
+				flowContent +=
 
 					'CADObjectId: <button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b +
 
@@ -575,7 +575,7 @@
 						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 
+						( surface.CADObjectId ?
 							'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
 							: ''
 						) +
@@ -631,7 +631,7 @@
 					'. id: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 					'surfaceType: ' + surface.surfaceType + b +
 					( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-					( surface.CADObjectId ? 
+					( surface.CADObjectId ?
 						'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
 						: ''
 					) +
@@ -743,7 +743,7 @@
 
 		}
 
-		node.parentNode.innerHTML += 
+		node.parentNode.innerHTML +=
 			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
 			'zones ' + zones.length + ': ' + zones.join();
 

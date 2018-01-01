@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-09-30" >
 <title>Adjacent Buildings R2</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -44,7 +44,7 @@
 
 		<div id = "title" ></div>
 
-		<p title = 'Select a building to edit' >Building: 
+		<p title = 'Select a building to edit' >Building:
 			<select id = selBuilding onchange = getBuilding(); size = 5 ></select>
 		</p>
 
@@ -55,26 +55,26 @@
 
 		<p id = "info" ></p>
 
-		<p title = 'Title of the model' >Name: 
+		<p title = 'Title of the model' >Name:
 			<input id=inpName onchange = buildWell(); class = floatRight style=width:150px;  ></p>
 
-		<p title = 'left and right from origin in feet' >offset x: 
+		<p title = 'left and right from origin in feet' >offset x:
 			<input type=number id=inpOffsetX onchange = buildWell(); class = floatRight ></p>
 
-		<p title = 'front and back distance from origin in feet'>offset y: 
+		<p title = 'front and back distance from origin in feet'>offset y:
 			<input type=number id=inpOffsetY onchange = buildWell(); class = floatRight ></p>
 
-		<p title = 'x distance in feet' >length: 
+		<p title = 'x distance in feet' >length:
 			<input type=number id=inpLength min=1 oninput="validity.valid||(value='');" onchange = buildWell(); class = floatRight ></p>
 
-		<p title = 'Y distance in feet' >width: 
+		<p title = 'Y distance in feet' >width:
 			<input type=number id=inpWidth min=1 oninput="validity.valid||(value='');" onchange = buildWell(); class = floatRight >
 		</p>
 
 		<p title = 'Z distance in feet: 1 to 1000' >height:
 <!--			<input type=number id=inpHeight min=1 max=1000 step=1 onchange=buildWell(); class = floatRight ></p> -->
 			<input type=number id=inpHeight min=1 max=1000 step=1 oninput="validity.valid||(value='');" onchange=buildWell(); class = floatRight ></p>
- 
+
 		<p title = 'building angle in degrees: -180 to 180' >orientation on site:
 			<input type=number type=number id=inpAngle min=-180 max=180 step=1 value=0 onchange=buildWell(); class=floatRight />
 		</p>
@@ -107,7 +107,7 @@
 
 	function init() {
 
-		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		if ( parent && parent.ifrContents || parent.divContents.className === 'contentsScrolling' ) {
@@ -179,7 +179,7 @@
 
 		for ( let building of buildings.children ) {
 
-			selBuilding.innerHTML += '<option>' + building.name + '</option>'; 
+			selBuilding.innerHTML += '<option>' + building.name + '</option>';
 
 		}
 
@@ -218,7 +218,7 @@
 
 		} );
 
-		if ( building.material ) { 
+		if ( building.material ) {
 
 			building.material.opacity = 1;
 
@@ -230,7 +230,7 @@
 
 	function buildWell() {
 
-		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 
 		const buildingOld = buildings.getObjectByName( selBuilding.value );
 

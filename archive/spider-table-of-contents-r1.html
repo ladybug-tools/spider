@@ -9,7 +9,7 @@
 <title>Spider Table of Contents</title>
 
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -31,7 +31,7 @@
 	#divContents { height: 100%; left: 0; position: absolute; margin: 0 auto; max-width: 800px; right: 0;}
 
 	#divMenu { background-color: ivory; box-sizing: border-box; margin: 0px 10px; }
-	#divMenu { height: 100%; left: 0; overflow: hidden; 
+	#divMenu { height: 100%; left: 0; overflow: hidden;
 		position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
 
 	#hamburger { background-color: #edd;  box-sizing: border-box; cursor: pointer; font-size:30px; left: 300px; line-height: 30px; margin: 0; padding: 5px 15px 8px 10px;
@@ -166,7 +166,7 @@
 						'<table><tr>' +
 
 							'<td><a href="' + encodeURI( urlGitHubSource + item.path ) + '" target=_top >' + infoIcon + '</a></td>' +
-							'<td><a href=#' + encodeURI( item.path ) + 
+							'<td><a href=#' + encodeURI( item.path ) +
 							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
 							( item.path.endsWith( 'html' ) ? '<a href=' + encodeURI( urlGitHubPage + item.path ) + ' >&#x1F5D7;</a>' : '' ) +
 							'</td>' +

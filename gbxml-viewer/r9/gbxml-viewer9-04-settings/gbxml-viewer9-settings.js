@@ -3,11 +3,11 @@
 	var icw;
 	var THREE;
 	var scene;
-	var opacity;
-	var cameraOrtho;
-
 	var surfaceMeshes;
 	var surfaceEdges;
+
+	var opacity;
+	var cameraOrtho;
 
 	var surfaceAdjacencyDuplicates;
 	var surfaceAdjacencyInvalids;
@@ -71,13 +71,13 @@
 					'<p><button onclick=toggleAxesHelper(); >Toggle axes</button></p>' +
 
 					'<p>' +
-						'<button onclick=toggleGridHelper(); >Toggle grid</button> ' + 
+						'<button onclick=toggleGridHelper(); >Toggle grid</button> ' +
 						'<button onclick=updateMeshLevel("gridHelper",+0.2); >+</button> ' +
 						'<button onclick=updateMeshLevel("gridHelper",-0.2); >-</button>' +
 					'</p>' +
 
 					'<p>' +
-						'<button onclick=toggleGroundHelper(); >Toggle ground</button> ' + 
+						'<button onclick=toggleGroundHelper(); >Toggle ground</button> ' +
 						'<button onclick=updateMeshLevel("groundHelper",+0.2); >+</button> ' +
 						'<button onclick=updateMeshLevel("groundHelper",-0.2); >-</button>' +
 					'</p>' +
@@ -265,7 +265,7 @@
 
 		surfaceMeshes.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh 
+			if ( child instanceof THREE.Mesh
 					&& ( surfaceAdjacencyDuplicates === undefined || surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) === false )
 					&& ( surfaceAdjacencyInvalids === undefined || surfaceAdjacencyInvalids.includes( child.userData.data.Name ) === false )
 					&& ( surfaceCoordinateDuplicates === undefined || surfaceCoordinateDuplicates.includes( child.userData.data.Name ) === false )
@@ -295,7 +295,7 @@
 
 				child.castShadow = !child.castShadow;
 				child.receiveShadow = !child.receiveShadow;
-//				child.material.needsUpdate = true; 
+//				child.material.needsUpdate = true;
 
 //			}
 

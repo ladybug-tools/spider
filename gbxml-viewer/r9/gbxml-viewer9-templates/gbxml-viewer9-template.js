@@ -1,11 +1,20 @@
-// Copyright 2017 Ladybug Tools authors. MIT License
-
+// Copyright 2018 Ladybug Tools authors. MIT License
 
 	var icw;
 	var THREE;
+	var renderer;
 	var scene;
+	var camera;
+	var controls;
+
+	var gbxml;
 	var gbjson;
+
+	var surfaceGroup;
 	var surfaceMeshes;
+	var surfaceMeshesChildren;
+	var surfaceEdges;
+
 
 	init();
 
@@ -17,15 +26,25 @@
 
 			icw = ifrThree.contentWindow;
 			THREE = icw.THREE;
+			renderer = icw.renderer;
 			scene = icw.scene;
+			camera = icw.camera;
+
+			gbxml = icw.gbxml;
 			gbjson = icw.gbjson;
+
+		// clean up
+			surfaceGroup = icw.scene.getObjectByName( 'surfaceMeshes' );
+			surfaceMeshesChildren = surfaceGroup.children;
+			surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
 			surfaceMeshes = icw.surfaceMeshes;
+
 
 console.log( 'scene', icw );
 console.log( 'gbjson', gbjson );
 console.log( 'surfaceMeshes', surfaceMeshes );
 
-			divMenuItems.innerHTML = 
+			divMenuItems.innerHTML =
 
 				'<details id = detTemplate open>' +
 					'<summary>Template</summary>' +

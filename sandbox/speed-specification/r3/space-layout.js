@@ -1,4 +1,4 @@
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 
 // You are probably better at doing this sort of stuff than I am. ;-)

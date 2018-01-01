@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-09-30" >
 <title>L Shape R5</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -48,7 +48,7 @@
 
 			<p><small>Use your tab and cursor keys to update parameters in a speedy fashion.</small></p>
 
-			<p title='Area from 100 to 1000000' >Building Area: 
+			<p title='Area from 100 to 1000000' >Building Area:
 				<input id=inpBuildingArea type = number min=1 max=1000000 step=1 value=5400 oninput="validity.valid||(value='');" onchange=updateShape() class=floatRight >
 			</p>
 
@@ -60,12 +60,12 @@
 				<input type=number id=inpLength2 min=1 max=100 step=1 value=40 onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title='How many storeys? 1 to 161'>Number of Floors: 
+			<p title='How many storeys? 1 to 161'>Number of Floors:
 				<input id=inpNumberOfFloors type=number min=1 max=161 value=1 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 			</p>
 
 
-			<p title= 'Measured in square feet' >Floor Area: 
+			<p title= 'Measured in square feet' >Floor Area:
 				<span id=inpFloorArea class=floatRight >0</span>
 			</p>
 
@@ -78,11 +78,11 @@
 			</p>
 
 
-			<p title= 'Measured in feet' >Floor Height: 
+			<p title= 'Measured in feet' >Floor Height:
 				<input id=inpFloorHeight type=number min=8 max=15 value=12 onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title= 'measured from 10 to 20' >Perimeter Depth: 
+			<p title= 'measured from 10 to 20' >Perimeter Depth:
 				<input id=inpPerimterDepth type=number min=10 max=20 value=15 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 			</p>
 
@@ -90,11 +90,11 @@
 				<input type=number id=inpWindowWallRatio min=1 max=99 step=1 value=40 oninput="validity.valid||(value='');" onclick=updateShape(); class=floatRight />
 			</p>
 
-			<p title= 'Depicted only when > 0 and < 10' >Overhang Depth: 
+			<p title= 'Depicted only when > 0 and < 10' >Overhang Depth:
 				<input type=number id=inpOverhangDepth min=0 max=10 step=0.5 value=0 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 			</p>
 
-			<p title= 'building angle in degrees -180 to 180' >Orientation: 
+			<p title= 'building angle in degrees -180 to 180' >Orientation:
 				<input type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight >
 
 			</p>
@@ -105,7 +105,7 @@
 			</p>
 
 			<p>
-				<button onclick=saveFile(); >save building data to file</button> 
+				<button onclick=saveFile(); >save building data to file</button>
 			</p>
 -->
 
@@ -131,13 +131,13 @@
 
 	let geometry, material, mesh;
 
-	const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+	const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 
 	init();
 
 	function init() {
 
-		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		title.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 
@@ -279,8 +279,8 @@ console.log( 'building.scale.x', building.scale.x );
 
 		inpBuildingArea.value = areaNew;
 		inpNumberOfFloors.value = floors;
-		inpLength1.value = length1New.toFixed(); 
-		inpLength2.value = length2New.toFixed(); 
+		inpLength1.value = length1New.toFixed();
+		inpLength2.value = length2New.toFixed();
 		inpWidth1.innerHTML = width1New.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
 		inpWidth2.innerHTML = width2New.toLocaleString( undefined, { maximumFractionDigits: 1 } ); // ( area / length / floors ) > 1 ?( area / length / floors ) : 1 ;
 
@@ -307,7 +307,7 @@ console.log( 'building.scale.x', building.scale.x );
 
 		let intWallCount = 7;
 
-		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab 
+		for ( var i = 0; i < floors; i++ ) { // 'var' !important > gives us height of roof slab
 
 // length front
 			wall = createExternalWall( len1 + len2, hgt, i, 1 );
@@ -433,10 +433,10 @@ console.log( 'building.scale.x', building.scale.x );
 
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		const shape = new THREE.Shape( [ 
-			v2( 0, 0 ), 
-			v2( length, 0 ), 
-			v2( length, width ), 
+		const shape = new THREE.Shape( [
+			v2( 0, 0 ),
+			v2( length, 0 ),
+			v2( length, width ),
 			v2( 0, width ),
 			v2( 0, 0 )
 		] );
@@ -460,19 +460,19 @@ console.log( 'building.scale.x', building.scale.x );
 		const deltaH = wwr * height05;
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 
-		const shapeVertices = [ 
-			v2( 0, 0 ), 
-			v2( length, 0 ), 
-			v2( length, height ), 
+		const shapeVertices = [
+			v2( 0, 0 ),
+			v2( length, 0 ),
+			v2( length, height ),
 			v2( 0, height ),
 			v2( 0, 0 )
 		];
 		const shape = new THREE.Shape( shapeVertices );
 
-		const holeVertices = [ 
-			v2( length05 - deltaL, height05 - deltaH ), 
-			v2( length05 + deltaL, height05 - deltaH ), 
-			v2( length05 + deltaL, height05 + deltaH ), 
+		const holeVertices = [
+			v2( length05 - deltaL, height05 - deltaH ),
+			v2( length05 + deltaL, height05 - deltaH ),
+			v2( length05 + deltaL, height05 + deltaH ),
 			v2( length05 - deltaL, height05 + deltaH ),
 			v2( length05 - deltaL, height05 - deltaH )
 		];
@@ -514,10 +514,10 @@ console.log( 'building.scale.x', building.scale.x );
 		const v2 = function( x, y ){ return new THREE.Vector2( x, y ); };
 		const perDep = parseFloat( inpPerimterDepth.value );
 
-		const shape = new THREE.Shape( [ 
-			v2( 0, 0 ), 
-			v2( length, 0 ), 
-			v2( length, height ), 
+		const shape = new THREE.Shape( [
+			v2( 0, 0 ),
+			v2( length, 0 ),
+			v2( length, height ),
 			v2( 0, height ),
 			v2( 0, 0 )
 		] );
@@ -527,10 +527,10 @@ console.log( 'building.scale.x', building.scale.x );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
 		const mesh = new THREE.Mesh( geometry, material );
 
-		const shape2 = new THREE.Shape( [ 
-			v2( 0, 0 ), 
-			v2( Math.SQRT2 * perDep, 0 ), 
-			v2( Math.SQRT2 * perDep, height ), 
+		const shape2 = new THREE.Shape( [
+			v2( 0, 0 ),
+			v2( Math.SQRT2 * perDep, 0 ),
+			v2( Math.SQRT2 * perDep, height ),
 			v2( 0, height ),
 			v2( 0, 0 )
 		] );

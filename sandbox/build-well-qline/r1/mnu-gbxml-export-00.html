@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-18" >
 <title>Menu gbXML Export</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -45,7 +45,7 @@
 
 		<p id = "divInfo" ></p>
 
-		<p title = 'Select a building to edit' >Buildings: 
+		<p title = 'Select a building to edit' >Buildings:
 			<select id = selObject onchange = getObject(buildings); size = 9 ></select>
 		</p>
 
@@ -107,10 +107,10 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
-				'<a href = "" >' + document.title + ' ' + release.toUpperCase() + '</a> &nbsp; ' +  
+				'<a href = "" >' + document.title + ' ' + release.toUpperCase() + '</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="top" >&#x24D8</a>' +
 			'</h3>';
 
@@ -170,7 +170,7 @@
 		for ( let i = 0; i < objects.children.length; i++ ) {
 
 			let obj = objects.children[ i ];
-			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
 
 		}
 
@@ -226,7 +226,7 @@
 
 		textMenu = '';
 
-		textMenu += 
+		textMenu +=
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 //			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
@@ -288,7 +288,7 @@
 
 			parent.divContents.innerHTML =
 
-				'gbXML data<textarea id=buildingData >' + 
+				'gbXML data<textarea id=buildingData >' +
 				textMenu + '</textarea>'
 
 			'';
@@ -299,9 +299,9 @@
 
 		} else {
 
-		scope.divScreenText.innerHTML = 
+		scope.divScreenText.innerHTML =
 
-			'gbXML data<textarea id=buildingData >' + 
+			'gbXML data<textarea id=buildingData >' +
 			textMenu + '</textarea>'
 
 		'';
@@ -319,7 +319,7 @@
 
 		for ( var i = 0; i < building.floors; i++ ) {
 
-			textBuildingStoreys += 
+			textBuildingStoreys +=
 				'\t\t\t<BuildingStorey id="bw-storey-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t\t<Name>"storey-' + ( i + 1 ) + '"</Name>\n' +
 				'\t\t\t\t<Level>' + ( i * building.floorHeight + 1 ) + '</Level>\n' +
@@ -341,7 +341,7 @@
 		let textSpace = '';
 		let spaces;
 
-//		if ( !building.spaces.length ) { 
+//		if ( !building.spaces.length ) {
 
 console.log( 'no spaces', building.mesh );
 
@@ -358,7 +358,7 @@ storey = 1;
 				area = vertex1.distanceTo( vertex2 ) * building.perimeterDepth;
 				volume = area * building.floorHeight;
 
-				building.spaces.push( { name: 'space ' + ( i + 1 ), id: ( i + 1 ), description: 'a space', 
+				building.spaces.push( { name: 'space ' + ( i + 1 ), id: ( i + 1 ), description: 'a space',
 					area: area, storey: storey, volume: volume, zone: ( i + 1 ) } );
 
 			}
@@ -372,7 +372,7 @@ storey = 1;
 
 				space = spaces[ i ];
 
-				textSpace += 
+				textSpace +=
 					'\t\t\t<Space zoneIdRef="bw-zone-' + space.zone + '" ' +
 						'id="bw-space-' + ( i + 1 ) + '" ' +
 						'buildingStoreyIdRef="bw-storey-' + space.storey + '" ' +
@@ -415,7 +415,7 @@ storey = 1;
 			for ( var i = 0; i < zonesCount; i++ ) {
 
 
-				building.spaces.push( { name: 'space ' + ( i + 1 ), id: ( i + 1 ), description: 'xxx', 
+				building.spaces.push( { name: 'space ' + ( i + 1 ), id: ( i + 1 ), description: 'xxx',
 					area: area, storey: storey, volume: volume, zone: ( i + 1 ) } );
 
 					building.zones.push( { name: 'zone ' + ( i + 1 ), description: 'a zone' } );
@@ -427,7 +427,7 @@ storey = 1;
 			for ( let i = 0; i < building.zones.length; i++ ) {
 
 				const zone = building.zones[ i ];
-				textZones += 
+				textZones +=
 					'\t<Zone id="bw-zone-' + ( i + 1 ) + '" >\n' +
 					'\t\t<Name>' + zone.name + '</Name>\n' +
 					'\t\t<Description>' + zone.description + '</Description>\n' +
@@ -488,45 +488,45 @@ storey = 1;
 
 					if ( surface.name === 'ExteriorWall' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'InteriorWall' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace[ 0 ]  + '" />\n' +
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace[ 1 ] + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'SlabOnGrade' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace + '" />\n' +
 //							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'InteriorFloor' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace  + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'Roof' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace  + '" />\n' +
 						'';
 
 					} else {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw-space-' + surface.userData.idSpace  + '" />\n' +
 						'';
 
 					}
 
-					textSurfaces += 
+					textSurfaces +=
 						'\t\t<Surface surfaceType="' + surface.name + '" id="bw-surface-' + ( j ) + '" >\n' +
 						'\t\t\t<Name>' + surface.name + '</Name>\n' +
 						'\t\t\t<CADOjectId>none</CADOjectId>\n' +
@@ -561,7 +561,7 @@ storey = 1;
 
 					if ( geometry.vertices.length > 4 ) {
 
-						textSurfaces += 
+						textSurfaces +=
 							'\t\t\t\t</PolyLoop>\n' +
 							'\t\t\t</PlanarGeometry>\n' +
 							'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + ( j + 1 ) + '" >\n' +
@@ -631,7 +631,7 @@ storey = 1;
 
 			const slab = building.slabs[ i ];
 
-			textSlabs += 
+			textSlabs +=
 				'\t\t<Surface surfaceType="' + slab.name + '" id="bw-' + slab.name + '-building-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t<Name>' + building.mesh.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
@@ -689,7 +689,7 @@ storey = 1;
 
 			const overhang = building.overhangs[ i ];
 
-			textOver += 
+			textOver +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t<Name>' + building.mesh.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
@@ -741,7 +741,7 @@ storey = 1;
 
 
 
-	function getSurfacesAdjacentBuildings( building ) { 
+	function getSurfacesAdjacentBuildings( building ) {
 
 		let textMenu = '';
 
@@ -753,7 +753,7 @@ storey = 1;
 
 		for ( let j = 0; j < 5; j++ ) {
 
-			textMenu += 
+			textMenu +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( j + 1 ) + '" >\n' +
 				'\t\t\t<Name>' + building.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +

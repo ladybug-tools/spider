@@ -1,9 +1,9 @@
 
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: darkorange; --mnu-back-color: palegreen   ; --mnu-width:350px; height: 100%; }
+	html { --mnu-color: gold; --mnu-back-color: MediumAquaMarine    ; --mnu-width:350px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; }
 
@@ -11,7 +11,7 @@
 	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
-	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; margin: 2px; padding: 3px 20px; }
+	button, input[ type=button ] { background-color: #888; border: none; color: var( --mnu-color ); cursor: pointer; margin: 2px; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: white }
 
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }

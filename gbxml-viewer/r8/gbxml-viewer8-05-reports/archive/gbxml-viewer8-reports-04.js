@@ -1,4 +1,4 @@
-// Copyright 2017 Ladybug Tools authors. MIT License
+// Copyright 2018 Ladybug Tools authors. MIT License
 
 //	var divAppMenu = divAppMenu || undefined;
 
@@ -27,7 +27,7 @@
 
 		}
 
-		createReport(); 
+		createReport();
 
 	}
 
@@ -44,7 +44,7 @@
 		surfaceMeshes = surfaceGroup.children;
 		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
 
-		divAppMenu.innerHTML = 
+		divAppMenu.innerHTML =
 
 			'<p>' +
 				'<button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
@@ -248,7 +248,7 @@
 
 			index = types.indexOf( surface.surfaceType );
 
-			if ( index < 0 ) { 
+			if ( index < 0 ) {
 
 				types.push( surface.surfaceType );
 				typesCount[ types.length - 1 ] = 1;
@@ -267,7 +267,7 @@
 
 		}
 
-		txt += '<button class=toggle onclick=icw.setAllVisible(); >all visible</button>: ' 
+		txt += '<button class=toggle onclick=icw.setAllVisible(); >all visible</button>: '
 
 		const summary = 'Surfaces: ' + surfaces.length;
 
@@ -291,9 +291,9 @@
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
 			index = surfacePolyLoops.indexOf( points );
 
-			if ( index < 0 ) { 
+			if ( index < 0 ) {
 
-				surfacePolyLoops.push( points ); 
+				surfacePolyLoops.push( points );
 				surfaceIds.push( i );
 
 			} else {
@@ -303,8 +303,8 @@
 console.log( 'surface', surface );
 console.log( 'surfOther', surfOther );
 
-				flowContent += 
-					'<p>' + count + 
+				flowContent +=
+					'<p>' + count +
 						'. id: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
@@ -340,14 +340,14 @@ console.log( 'surfOther', surfOther );
 
 			const id = surface.CADObjectId;
 
-			if ( !surfacesIds.includes( id ) ) { 
+			if ( !surfacesIds.includes( id ) ) {
 
-				surfacesIds.push( points ); 
+				surfacesIds.push( points );
 
 			} else {
 
-				flowContent += 
-					'<p>' + count + 
+				flowContent +=
+					'<p>' + count +
 						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
@@ -377,13 +377,13 @@ console.log( 'surfOther', surfOther );
 
 			adjacencies = surface.AdjacentSpaceId;
 
-			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
 
-				surfacesAdjacencies.push( adjacencies ); 
+				surfacesAdjacencies.push( adjacencies );
 //console.log( 'adjacencies', adjacencies  );
 
-				flowContent += 
-					'<p>' + count + 
+				flowContent +=
+					'<p>' + count +
 						'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
@@ -544,7 +544,7 @@ console.log( 'surfOther', surfOther );
 
 			}
 
-		} 
+		}
 
 	}
 
@@ -555,7 +555,7 @@ console.log( 'surfOther', surfOther );
 		surfaces = [];
 
 		const b = '<br>';
-		let txt = 
+		let txt =
 			'File: ' + gbjson.name + b +
 			'Number of surfaces: ' + gbjson.Campus.Surface.length +
 		'';
@@ -568,16 +568,16 @@ console.log( 'surfOther', surfOther );
 
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
 
-			if ( !surfaces.includes( points ) ) { 
+			if ( !surfaces.includes( points ) ) {
 
-				surfaces.push( points ); 
+				surfaces.push( points );
 
 			} else {
 
 console.log( 'duplicate surface', surface );
 
-				t$ += 
-					'<p>' + surfacesCount + 
+				t$ +=
+					'<p>' + surfacesCount +
 						'. id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						'Name: ' + surface.Name + b +
@@ -596,7 +596,7 @@ console.log( 'duplicate surface', surface );
 //		txt += '<h3>' + surfacesCount + ' Duplicate Surfaces</h3>' + t$;
 
 
-		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> ' 
+		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> '
 
 
 		adjacenciesCount = 0;
@@ -605,12 +605,12 @@ console.log( 'duplicate surface', surface );
 
 			adjacencies = surface.AdjacentSpaceId;
 
-			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
 
 //console.log( 'surface', surface );
 //console.log( 'duplicate adjacencies', adjacencies );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						( adjacenciesCount + 1 ) + '. id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -647,15 +647,15 @@ console.log( 'duplicate surface', surface );
 
 				vertex = JSON.stringify( point );
 
-				if ( !verticesSurface.includes( vertex ) ) { 
+				if ( !verticesSurface.includes( vertex ) ) {
 
-					verticesSurface.push( vertex ); 
+					verticesSurface.push( vertex );
 
 				} else {
 
 console.log( 'dup', vertex );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -667,9 +667,9 @@ console.log( 'dup', vertex );
 				}
 
 
-				if ( !verticesModel.includes( vertex ) ) { 
+				if ( !verticesModel.includes( vertex ) ) {
 
-					verticesModel.push( vertex ); 
+					verticesModel.push( vertex );
 
 				} else {
 
@@ -737,8 +737,8 @@ console.log( 'dup', vertex );
 		for ( let child of surfaceMeshes ) {
 
 
-			if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
-				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
+			if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true &&
+				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef )
 				&& child !== thatChild
 			) {
 

@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-25" >
 <title>gbXML Export</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -46,7 +46,7 @@
 
 		<p id = "divInfo" ></p>
 
-		<p title = 'Select a building to edit' >Buildings: 
+		<p title = 'Select a building to edit' >Buildings:
 			<select id = selObject onchange = getObject(buildings); size = 9 ></select>
 		</p>
 
@@ -110,7 +110,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
@@ -175,7 +175,7 @@
 		for ( let i = 0; i < objects.children.length; i++ ) {
 
 			let obj = objects.children[ i ];
-			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
 
 		}
 
@@ -216,7 +216,7 @@
 
 		textMenu = '';
 
-		textMenu += 
+		textMenu +=
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 			'<gbXML xmlns="http://www.gbxml.org/schema" ' +
@@ -282,7 +282,7 @@
 
 			parent.divContents.innerHTML =
 
-				'gbXML data<textarea id=buildingData >' + 
+				'gbXML data<textarea id=buildingData >' +
 				textMenu + '</textarea>'
 
 			'';
@@ -293,9 +293,9 @@
 
 		} else {
 
-		scope.divScreenText.innerHTML = 
+		scope.divScreenText.innerHTML =
 
-			'gbXML data<textarea id=buildingData >' + 
+			'gbXML data<textarea id=buildingData >' +
 			textMenu + '</textarea>'
 
 		'';
@@ -314,7 +314,7 @@
 
 			const storey = i + 1;
 
-			textBuildingStoreys += 
+			textBuildingStoreys +=
 				'\t\t\t<BuildingStorey id="bw-storey-' + storey + '" >\n' +
 				'\t\t\t\t<Name>"storey-' + storey + '"</Name>\n' +
 				'\t\t\t\t<Level>' + ( i * building.floorHeight ) + '</Level>\n' +
@@ -353,7 +353,7 @@
 				const area = vertex1.distanceTo( vertex2 ) * building.perimeterDepth;
 				const volume = area * building.floorHeight;
 
-				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space', 
+				spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'externally-facing space',
 					area: area, storey: storey, volume: volume, zone: spaceId } );
 
 				building.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
@@ -363,7 +363,7 @@
 // interior area
 
 
-			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space', 
+			spaces.push( { name: 'Floor: ' + storey + ' Space: ' + spaceId, id: spaceId, description: 'internal space',
 				area: 23, storey: storey, volume: 23, zone: spaceId } );
 
 			building.zones.push( { name: 'Floor: ' + storey + ' Zone: ' + spaceId, description: 'a zone' } );
@@ -376,7 +376,7 @@
 
 			const space = spaces[ j ];
 
-			textSpace += 
+			textSpace +=
 				'\t\t\t<Space ' +
 					'id="bw-space-' + space.id + '" ' +
 					'buildingStoreyIdRef="bw-storey-' + space.storey + '" ' +
@@ -408,7 +408,7 @@
 
 			const zone = building.zones[ i ];
 
-			textZones += 
+			textZones +=
 				'\t<Zone id="bw-zone-' + ( i + 1 ) + '" >\n' +
 				'\t\t<Name>' + zone.name + '</Name>\n' +
 				'\t\t<Description>' + zone.description + '</Description>\n' +
@@ -488,7 +488,7 @@
 					type: 'InteriorFloor',
 					spaceId1: spaceId,
 					spaceId2: undefined,
-					surfaceId: surfaceId, 
+					surfaceId: surfaceId,
 					vertices: [ vertices[ pt1 ], vertices[ pt1 + 1 ], vertices[ pt2 + 1 ], vertices[ pt2 ] ]
 				};
 
@@ -503,7 +503,7 @@
 					type: 'InteriorWall',
 					spaceId1: spaceId,
 					spaceId2: interiorSpaceId,
-					surfaceId: surfaceId, 
+					surfaceId: surfaceId,
 					vertices: [ vertices[ pt1 + 1 ], vertices[ pt1 + 2 ], vertices[ pt2 + 2 ], vertices[ pt2 + 1 ] ]
 				};
 
@@ -520,7 +520,7 @@
 						type: 'Roof',
 						spaceId1: spaceId,
 						spaceId2: undefined,
-						surfaceId: surfaceId, 
+						surfaceId: surfaceId,
 						vertices: [ vertices[ pt1 + 2 ], vertices[ pt1 + 3 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
 					};
 
@@ -537,7 +537,7 @@
 					type: 'ExteriorWall',
 					spaceId1: spaceId,
 					spaceId2: undefined,
-					surfaceId: surfaceId, 
+					surfaceId: surfaceId,
 					vertices: [ vertices[ pt1 + 3 ], vertices[ pt1 + 4 ], vertices[ pt2 + 4 ], vertices[ pt2 + 3 ] ]
 				};
 				surfaceId ++;
@@ -551,7 +551,7 @@
 					type: 'InteriorWall',
 					spaceId1: spaceId,
 					spaceId2: ( spaceId < spacesPerStorey ? spaceId + 1 : 1 ),
-					surfaceId: surfaceId, 
+					surfaceId: surfaceId,
 					vertices: [ vertices[ pt2 + 1 ], vertices[ pt2 ], vertices[ pt2 + 3 ], vertices[ pt2 + 2 ] ]
 				};
 
@@ -594,7 +594,7 @@
 //		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		let textSingleSurfaces =  
+		let textSingleSurfaces =
 
 			'\t\t<Surface surfaceType="' + quad.type + '" id="bw-surface-' + quad.surfaceId + '" >\n' +
 				'\t\t\t<Name>' + quad.name + '</Name>\n' +
@@ -623,7 +623,7 @@
 
 		textOpen = quad.type === 'ExteriorWall' ? getOpening( quad ) : '';
 
-		textSingleSurfaces +=  
+		textSingleSurfaces +=
 			'\t\t\t\t</PolyLoop>\n' +
 			'\t\t\t</PlanarGeometry>\n' +
 				textOpen +
@@ -644,7 +644,7 @@
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 //		let mesh;
 
-		textOpening += 
+		textOpening +=
 			'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + quad.surfaceId + '" >\n' +
 			'\t\t\t\t<PlanarGeometry>\n' +
 			'\t\t\t\t\t<PolyLoop>\n' +
@@ -704,7 +704,7 @@
 			type: type,
 			spaceId1: spaceId,
 			spaceId2: undefined,
-			surfaceId: surfaceId, 
+			surfaceId: surfaceId,
 			vertices: geometry.vertices
 		};
 
@@ -736,7 +736,7 @@
 			const overhang = floor.children[ i ];
 			if ( overhang.name !== 'overhang' ) { continue; }
 
-			textOver += 
+			textOver +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( overhangId ++ ) + '" >\n' +
 				'\t\t\t<Name>overhang-floor-' + floor.userData.floor +'-space-' + ( id++ )+ '</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
@@ -789,7 +789,7 @@
 
 
 
-	function getSurfacesAdjacentBuildings( building ) { 
+	function getSurfacesAdjacentBuildings( building ) {
 
 		let textMenu = '';
 
@@ -802,7 +802,7 @@
 //		const geometry = new THREE.BoxBufferGeometry( 1, 1, 100 );
 //		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		const faces =  [ 
+		const faces =  [
 			[v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
 			[v( mi.x, mx.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ],
 			[v( mi.x, mi.y, mi.z ), v( mi.x, mx.y, mi.z ), v( mi.x, mx.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
@@ -812,7 +812,7 @@
 
 		for ( let i = 0; i < faces.length; i++ ) {
 
-			textMenu += 
+			textMenu +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t<Name>' + building.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +

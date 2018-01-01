@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-09-29" >
 <title>gbXML Settings & Export</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -65,7 +65,7 @@
 
 -->
 			<p>
-				<button onclick = saveFile(); >save building data to file</button> 
+				<button onclick = saveFile(); >save building data to file</button>
 			</p>
 
 		<h4>gbXML settings in alphabetical order</h4>
@@ -102,7 +102,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		if ( parent && parent.ifrContents || parent.divContents.className === 'contentsScrolling' ) {
@@ -214,18 +214,18 @@
 
 				oo = line.match( /"(.*?)"/ );
 
-				if ( oo ) { 
-//console.log( '', oo[ 1 ] ); 
+				if ( oo ) {
+//console.log( '', oo[ 1 ] );
 					str += '<option>' + oo[ 1 ] + '</option>';
 				}
 			}
 
 //console.log( '', str );
 
-			if ( str ) { 
+			if ( str ) {
 				txt += str + '\n';
 			}
-		} 
+		}
 
 		divInfo.innerHTML = txt;
 
@@ -285,8 +285,8 @@ console.log( 'building', building );
 						Volume: 123,
 						PeopleNumber: 123
 					},
-					Surface: [ 
-						{ 
+					Surface: [
+						{
 							surfaceType: "InteriorWall",
 							PlanarGeometry: {
 								PolyLoop: {

@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-28" >
 <title>Zones</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -51,11 +51,11 @@
 			<select id=selObject onchange=getObject(buildings); ></select>
 		</p>
 
-		<p title = 'Select a zone/space to edit' >Zones: 
+		<p title = 'Select a zone/space to edit' >Zones:
 			<select id = selZone onchange = getZoneData(buildings); size = 10 ></select>
 		</p>
 
-		<p title = 'Select a type for the zone/space' >Space Type: 
+		<p title = 'Select a type for the zone/space' >Space Type:
 			<select id = selSpaceType onchange = setSpaceType(buildings); size = 10 ></select>
 		</p>
 
@@ -94,7 +94,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
@@ -159,7 +159,7 @@
 		for ( i = 0; i < spaceTypes.length; i++ ) {
 
 			let type = spaceTypes[ i ];
-			selSpaceType.innerHTML += '<option>' + type + '</option>'; 
+			selSpaceType.innerHTML += '<option>' + type + '</option>';
 
 		}
 

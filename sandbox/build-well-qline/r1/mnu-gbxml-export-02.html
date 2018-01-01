@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-18" >
 <title>gbXML Export</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -46,7 +46,7 @@
 
 		<p id = "divInfo" ></p>
 
-		<p title = 'Select a building to edit' >Buildings: 
+		<p title = 'Select a building to edit' >Buildings:
 			<select id = selObject onchange = getObject(buildings); size = 9 ></select>
 		</p>
 
@@ -110,7 +110,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
 				'<a  href = "" >' + document.title + ' ' + release.toUpperCase() + '</a> &nbsp; ' +
@@ -175,7 +175,7 @@
 		for ( let i = 0; i < objects.children.length; i++ ) {
 
 			let obj = objects.children[ i ];
-			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
 
 		}
 
@@ -216,7 +216,7 @@
 
 		textMenu = '';
 
-		textMenu += 
+		textMenu +=
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 //			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
@@ -278,7 +278,7 @@
 
 			parent.divContents.innerHTML =
 
-				'gbXML data<textarea id=buildingData >' + 
+				'gbXML data<textarea id=buildingData >' +
 				textMenu + '</textarea>'
 
 			'';
@@ -289,9 +289,9 @@
 
 		} else {
 
-		scope.divScreenText.innerHTML = 
+		scope.divScreenText.innerHTML =
 
-			'gbXML data<textarea id=buildingData >' + 
+			'gbXML data<textarea id=buildingData >' +
 			textMenu + '</textarea>'
 
 		'';
@@ -309,7 +309,7 @@
 
 		for ( var i = 0; i < building.floors; i++ ) {
 
-			textBuildingStoreys += 
+			textBuildingStoreys +=
 				'\t\t\t<BuildingStorey id="bw-storey-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t\t<Name>"storey-' + ( i + 1 ) + '"</Name>\n' +
 				'\t\t\t\t<Level>' + ( i * building.floorHeight + 1 ) + '</Level>\n' +
@@ -344,7 +344,7 @@ storey = 1;
 			const area = vertex1.distanceTo( vertex2 ) * building.perimeterDepth;
 			const volume = area * building.floorHeight;
 
-			spaces.push( { name: 'space ' + ( i + 1 ), id: ( i + 1 ), description: 'a space', 
+			spaces.push( { name: 'space ' + ( i + 1 ), id: ( i + 1 ), description: 'a space',
 				area: area, storey: storey, volume: volume, zone: ( i + 1 ) } );
 
 		}
@@ -353,7 +353,7 @@ storey = 1;
 
 			const space = spaces[ i ];
 
-			textSpace += 
+			textSpace +=
 				'\t\t\t<Space zoneIdRef="bw-zone-' + space.zone + '" ' +
 					'id="bw-space-' + ( i + 1 ) + '" ' +
 					'buildingStoreyIdRef="bw-storey-' + space.storey + '" ' +
@@ -394,7 +394,7 @@ storey = 1;
 		for ( let i = 0; i < building.zones.length; i++ ) {
 
 			const zone = building.zones[ i ];
-			textZones += 
+			textZones +=
 				'\t<Zone id="bw-zone-' + ( i + 1 ) + '" >\n' +
 				'\t\t<Name>' + zone.name + '</Name>\n' +
 				'\t\t<Description>' + zone.description + '</Description>\n' +
@@ -494,7 +494,7 @@ storey = 1;
 		const geo = new THREE.BoxBufferGeometry( 3, 1, 10 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		let textSingleSurfaces =  
+		let textSingleSurfaces =
 
 			'\t\t<Surface surfaceType="' + type + '" id="bw-surface-' + id + '" >\n' +
 //				'\t\t\t<Name>' + surface.name + '</Name>\n' +
@@ -520,7 +520,7 @@ storey = 1;
 
 		textOpen = type === 'ExteriorWall' ? getOpening( floor, vertices, id ) : '';
 
-		textSingleSurfaces +=  
+		textSingleSurfaces +=
 			'\t\t\t\t</PolyLoop>\n' +
 			'\t\t\t</PlanarGeometry>\n' +
 				textOpen +
@@ -557,7 +557,7 @@ storey = 1;
 
 console.log( 'opening', opening, id );
 
-			textOpening += 
+			textOpening +=
 	//			'\t\t\t\t</PolyLoop>\n' +
 	//			'\t\t\t</PlanarGeometry>\n' +
 				'\t\t\t<Opening openingType="OperableWindow" id="bw-opening-' + id + '" >\n' +
@@ -665,7 +665,7 @@ console.log( '', verts[ 0 ] );
 			const overhang = floor.children[ i ];
 			if ( overhang.name !== 'overhang' ) { continue; }
 
-			textOver += 
+			textOver +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-building-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t<Name>' + building.mesh.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +
@@ -718,7 +718,7 @@ console.log( '', verts[ 0 ] );
 
 
 
-	function getSurfacesAdjacentBuildings( building ) { 
+	function getSurfacesAdjacentBuildings( building ) {
 
 		let textMenu = '';
 
@@ -735,7 +735,7 @@ console.log( '', verts[ 0 ] );
 		const geometry = new THREE.BoxBufferGeometry( 1, 1, 100 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, transparent: true } );
 
-		const faces =  [ 
+		const faces =  [
 			[v( mi.x, mi.y, mi.z ), v( mx.x, mi.y, mi.z ), v( mx.x, mi.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
 			[v( mi.x, mx.y, mi.z ), v( mx.x, mx.y, mi.z ), v( mx.x, mx.y, mx.z ), v( mi.x, mx.y, mx.z ) ],
 			[v( mi.x, mi.y, mi.z ), v( mi.x, mx.y, mi.z ), v( mi.x, mx.y, mx.z ), v( mi.x, mi.y, mx.z ) ],
@@ -745,7 +745,7 @@ console.log( '', verts[ 0 ] );
 
 		for ( let i = 0; i < faces.length; i++ ) {
 
-			textMenu += 
+			textMenu +=
 				'\t\t<Surface surfaceType="Shade" id="bw-shade-' + ( i + 1 ) + '" >\n' +
 				'\t\t\t<Name>' + building.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +

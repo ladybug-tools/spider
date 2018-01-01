@@ -1,4 +1,4 @@
-// Copyright 2017 Ladybug Tools authors. MIT License
+// Copyright 2018 Ladybug Tools authors. MIT License
 
 	var divAppMenu = divAppMenu || undefined;
 
@@ -35,13 +35,13 @@ console.log( 'gbjson', icw.gbjson );
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
-		divAppMenu.innerHTML = 
+		divAppMenu.innerHTML =
 
 			'<p><button onclick=toggleEdges(); >toggle edges</button></p>' +
 
 			'<div id = divReport ></div>';
 
-		createReport(); 
+		createReport();
 
 	}
 
@@ -268,7 +268,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 
 			}
 
-		} 
+		}
 
 	}
 
@@ -316,7 +316,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 
 			index = types.indexOf( surface.surfaceType );
 
-			if ( index < 0 ) { 
+			if ( index < 0 ) {
 
 				types.push( surface.surfaceType );
 				typesCount[ types.length - 1 ] = 1;
@@ -335,7 +335,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 
 		}
 
-		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: ' 
+		txt += '<button class=toggle onclick=toggleAllVisible(); >all visible</button>: '
 
 		const summary = 'Surfaces: ' + surfaces.length;
 
@@ -384,7 +384,7 @@ console.log( 'surfaceEdges', surfaceEdges );
 		surfaces = [];
 
 		const b = '<br>';
-		let txt = 
+		let txt =
 			'File: ' + gbjson.name + b +
 			'Number of surfaces: ' + gbjson.Campus.Surface.length +
 		'';
@@ -397,16 +397,16 @@ console.log( 'surfaceEdges', surfaceEdges );
 
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
 
-			if ( !surfaces.includes( points ) ) { 
+			if ( !surfaces.includes( points ) ) {
 
-				surfaces.push( points ); 
+				surfaces.push( points );
 
 			} else {
 
 console.log( 'duplicate surface', surface );
 
-				t$ += 
-					'<p>' + surfacesCount + 
+				t$ +=
+					'<p>' + surfacesCount +
 						'. id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						'Name: ' + surface.Name + b +
@@ -425,7 +425,7 @@ console.log( 'duplicate surface', surface );
 //		txt += '<h3>' + surfacesCount + ' Duplicate Surfaces</h3>' + t$;
 
 
-		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> ' 
+		t$ = '<button class=toggle onclick=toggleAllVisible(); >all visible</button> '
 
 
 		adjacenciesCount = 0;
@@ -434,12 +434,12 @@ console.log( 'duplicate surface', surface );
 
 			adjacencies = surface.AdjacentSpaceId;
 
-			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+			if ( Array.isArray( adjacencies ) && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
 
 //console.log( 'surface', surface );
 //console.log( 'duplicate adjacencies', adjacencies );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						( adjacenciesCount + 1 ) + '. id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -476,15 +476,15 @@ console.log( 'duplicate surface', surface );
 
 				vertex = JSON.stringify( point );
 
-				if ( !verticesSurface.includes( vertex ) ) { 
+				if ( !verticesSurface.includes( vertex ) ) {
 
-					verticesSurface.push( vertex ); 
+					verticesSurface.push( vertex );
 
 				} else {
 
 console.log( 'dup', vertex );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -496,9 +496,9 @@ console.log( 'dup', vertex );
 				}
 
 
-				if ( !verticesModel.includes( vertex ) ) { 
+				if ( !verticesModel.includes( vertex ) ) {
 
-					verticesModel.push( vertex ); 
+					verticesModel.push( vertex );
 
 				} else {
 
@@ -566,8 +566,8 @@ console.log( 'dup', vertex );
 		for ( let child of surfaceMeshes ) {
 
 
-			if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true && 
-				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef ) 
+			if ( Array.isArray( child.userData.data.AdjacentSpaceId ) === true &&
+				( space === child.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef || space === child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef )
 				&& child !== thatChild
 			) {
 

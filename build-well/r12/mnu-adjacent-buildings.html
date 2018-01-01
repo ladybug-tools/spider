@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-13" >
 <title>Adjacent Buildings</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -44,7 +44,7 @@
 
 		<div id=info ></div>
 
-		<p title = 'Select an object to edit' >Buildings: 
+		<p title = 'Select an object to edit' >Buildings:
 			<select id = selObject onchange = getObject(buildings); size = 5 ></select>
 		</p>
 
@@ -52,26 +52,26 @@
 		<p>
 			<button onclick = deleteObject(buildings); >delete</button>
 			<button onclick = addObject(buildings); >add </button>
-			<button onclick = saveFile(buildings); >save json file</button> 
+			<button onclick = saveFile(buildings); >save json file</button>
 		</p>
 
-		<p title = 'Title of the model' >Name: 
+		<p title = 'Title of the model' >Name:
 			<input id=inpName onchange = buildWell(buildings); class = floatRight style=width:150px; >
 		</p>
 
-		<p title = 'left and right from origin in feet' >offset x: 
+		<p title = 'left and right from origin in feet' >offset x:
 			<input type=number id=inpOffsetX onchange = buildWell(buildings);; class = floatRight >
 		</p>
 
-		<p title = 'front and back distance from origin in feet'>offset y: 
+		<p title = 'front and back distance from origin in feet'>offset y:
 			<input type=number id=inpOffsetY onchange = buildWell(buildings);; class = floatRight >
 		</p>
 
-		<p title = 'x distance in feet' >length: 
+		<p title = 'x distance in feet' >length:
 			<input type=number id=inpLength min=1 oninput="validity.valid||(value='');" onchange = buildWell(buildings);; class = floatRight >
 		</p>
 
-		<p title = 'Y distance in feet' >width: 
+		<p title = 'Y distance in feet' >width:
 			<input type=number id=inpWidth min=1 oninput="validity.valid||(value='');" onchange = buildWell(buildings);; class = floatRight >
 		</p>
 
@@ -117,8 +117,8 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
-			'<h3><a href = "" >' + document.title + '</a> &nbsp; ' +  
+		divTitle.innerHTML =
+			'<h3><a href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
@@ -179,7 +179,7 @@
 		for ( let i = 0; i < objects.children.length; i++ ) {
 
 			let obj = objects.children[ i ];
-			selObject.innerHTML += '<option>' + obj.name + '</option>'; 
+			selObject.innerHTML += '<option>' + obj.name + '</option>';
 
 		}
 
@@ -251,7 +251,7 @@
 
 	function buildWell( objects ) {
 
-		const d2r = Math.PI / 180, r2d = 180 / Math.PI; 
+		const d2r = Math.PI / 180, r2d = 180 / Math.PI;
 console.log( 'objects', objects );
 		const objectOld = objects.getObjectByName( selObject.value );
 

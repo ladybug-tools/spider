@@ -9,7 +9,7 @@
 <title>gbXML Viewer R7 File Reader 1.1</title>
 
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -46,9 +46,9 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
+			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
 		</p>
 
 
@@ -88,7 +88,7 @@
 
 	<div id = "hamburger" onclick=toggleNav(); >
 
-		slide &#9776; 
+		slide &#9776;
 
 	</div>
 
@@ -196,8 +196,8 @@
 
 		function onRequestFileProgress( event ) {
 
-			ifrThree.contentWindow.divLog.innerHTML = 
-				'bytes loaded: ' + event.loaded.toLocaleString() + 
+			ifrThree.contentWindow.divLog.innerHTML =
+				'bytes loaded: ' + event.loaded.toLocaleString() +
 				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
 			'';
 
@@ -212,7 +212,7 @@
 		surfaces = [];
 
 		const b = '<br>';
-		let txt = 
+		let txt =
 			'File: ' + gbjson.name + b +
 			'Number of surfaces: ' + gbjson.Campus.Surface.length +
 		'';
@@ -223,15 +223,15 @@
 
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
 
-			if ( !surfaces.includes( points ) ) { 
+			if ( !surfaces.includes( points ) ) {
 
-				surfaces.push( points ); 
+				surfaces.push( points );
 
 			} else {
 
 console.log( 'duplicate surface', surface );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -254,12 +254,12 @@ console.log( 'duplicate surface', surface );
 
 			adjacencies = surface.AdjacentSpaceId;
 
-			if ( Array.isArray( adjacencies )  && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) { 
+			if ( Array.isArray( adjacencies )  && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
 
 //console.log( 'surface', surface );
 console.log( 'duplicate adjacencies', adjacencies );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -296,15 +296,15 @@ console.log( 'duplicate adjacencies', adjacencies );
 
 				vertex = JSON.stringify( point );
 
-				if ( !verticesSurface.includes( vertex ) ) { 
+				if ( !verticesSurface.includes( vertex ) ) {
 
-					verticesSurface.push( vertex ); 
+					verticesSurface.push( vertex );
 
 				} else {
 
 console.log( 'dup', vertex );
 
-				t$ += 
+				t$ +=
 					'<p>' +
 						'id: ' + surface.id + b +
 						'surfaceType: ' + surface.surfaceType + b +
@@ -317,9 +317,9 @@ console.log( 'dup', vertex );
 				}
 
 
-				if ( !verticesModel.includes( vertex ) ) { 
+				if ( !verticesModel.includes( vertex ) ) {
 
-					verticesModel.push( vertex ); 
+					verticesModel.push( vertex );
 
 				} else {
 
@@ -376,7 +376,7 @@ console.log( 'gbjson', e);
 
 	function setBreadcrumbs( path ) {
 
-		let txt = 
+		let txt =
 			'<b>' +
 				'<a href=JavaScript:getFolderContents(); >' + pathRepo + '</a> &raquo; ' +
 			'</b>';
@@ -406,7 +406,7 @@ console.log( 'gbjson', e);
 
 		let txt = '';
 
-		const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins' 
+		const ignoreFolders = [ 'SVG', 'SVG2', 'SVGs_3DScatterPlot', 'data']; //, 'plugins'
 
 		for ( let item of items ) {
 
@@ -416,8 +416,8 @@ console.log( 'gbjson', e);
 
 				txt +=
 					'<div style=margin-bottom:8px; >' +
-						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' + 
-							item.name  + 
+						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' +
+							item.name  +
 						'</a>' +
 					'</div>' +
 				'';
@@ -441,7 +441,7 @@ console.log( 'gbjson', e);
 					'<table><tr>' +
 
 						'<td><a href="' + urlGitHubSource + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
-						'<td><a href=#' + itemPath + 
+						'<td><a href=#' + itemPath +
 						' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
 						( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
 						'</td>' +

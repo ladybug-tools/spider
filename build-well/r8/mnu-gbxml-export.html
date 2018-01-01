@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-01" >
 <title>Menu gbXML Export</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -52,7 +52,7 @@
 		</p>
 
 		<p>
-			<button onclick = saveFile(); >save building data to file</button> 
+			<button onclick = saveFile(); >save building data to file</button>
 		</p>
 
 		<p>2017-10-01: Currently only saves the simple box buildings</p>
@@ -92,7 +92,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		divTitle.innerHTML = '<h3><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h3>';
 
 		if ( parent && parent.ifrContents || parent.divContents.className === 'contentsScrolling' ) {
@@ -161,7 +161,7 @@
 
 		let txt = '';
 		bwId ++;
-		txt += 
+		txt +=
 //			'<?xml version="1.0" encoding="UTF-16"?>\n' +
 			'<?xml version="1.0" encoding="UTF-8"?>\n' +
 //			'<gbXML useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37" xmlns="http://www.gbxml.org/schema">\n' +
@@ -202,9 +202,9 @@
 			'</gbXML>\n' +
 		'';
 
-		scope.divScreenText.innerHTML = 
+		scope.divScreenText.innerHTML =
 
-			'gbXML data<textarea id=buildingData >' + 
+			'gbXML data<textarea id=buildingData >' +
 			txt + '</textarea>'
 
 		'';
@@ -221,7 +221,7 @@
 
 			bwId ++;
 
-			textBuildingStoreys += 
+			textBuildingStoreys +=
 				'\t\t\t<BuildingStorey id="bw' + bwId + '" >\n' +
 				'\t\t\t\t<Name>"bw-storey-' + bwId + '"</Name>\n' +
 				'\t\t\t\t<Level>' + ( i * building.userData.floorHeight ) + '</Level>\n' +
@@ -246,7 +246,7 @@
 			bwId ++;
 
 			const zone = zones[ i ];
-			textSpace += 
+			textSpace +=
 				'\t\t\t<Space zoneIdRef="' + zone.spaceId + '" conditionType="HeatedAndCooled" id="bw' + bwId + '" >\n' +
 				'\t\t\t\t<Name>' + zone.name + '</Name>\n' +
 				'\t\t\t\t<Description>' + zone.description + '</Description>\n' +
@@ -300,20 +300,20 @@
 
 					if ( surface.name === 'ExteriorWall' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'InteriorWall' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId - 2 ) + '" />\n' +
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
 						'';
 
 					} else if ( surface.name === 'SlabOnGrade' || surface.name === 'InteriorFloor' ||surface.name === 'Roof' ) {
 
-						adjacency = 
+						adjacency =
 							'\t\t\t<AdjacentSpaceId spaceIdRef="bw' + ( bwId + 2 ) + '" />\n' +
 						'';
 
@@ -323,7 +323,7 @@
 
 					}
 
-					txt += 
+					txt +=
 						'\t\t<Surface surfaceType="' + surface.name + '" id="bw' + ( bwId ) + '" >\n' +
 						'\t\t\t<Name>' + surface.name + '</Name>\n' +
 						'\t\t\t<CADOjectId>none</CADOjectId>\n' +
@@ -347,7 +347,7 @@
 
 					if ( geometry.vertices.length > 4 ) {
 
-						txt += 
+						txt +=
 							'\t\t\t\t</PolyLoop>\n' +
 							'\t\t\t</PlanarGeometry>\n' +
 							'\t\t\t<Opening surfaceType="OperableWindow" id="bw' + ( bwId ) + '" >\n' +
@@ -400,9 +400,9 @@
 
 
 
-	function getSurfacesAdjantBuildings( building ) { 
+	function getSurfacesAdjantBuildings( building ) {
 
-//console.log( 'geo', building.geometry.clone() ); 
+//console.log( 'geo', building.geometry.clone() );
 
 		let txt = '';
 		geo = new THREE.Geometry().fromBufferGeometry( building.geometry.clone() );
@@ -413,7 +413,7 @@
 
 		for ( let j = 0; j < 6; j++ ) {
 
-			txt += 
+			txt +=
 				'\t\t<Surface surfaceType="Shade" id="bw' + ( bwId++ ) + '" >\n' +
 				'\t\t\t<Name>' + building.name +'</Name>\n' +
 				'\t\t\t<PlanarGeometry>\n' +

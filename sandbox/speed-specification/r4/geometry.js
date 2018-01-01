@@ -1,4 +1,4 @@
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 	function initGeometryInputFields(){
 

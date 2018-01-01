@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-23" >
 <title>Shape Editor</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp */
 
@@ -46,7 +46,7 @@
 
 		<p><small>Parametric 3D building schematics created and updated in a game-like fashion</small></p>
 
-		<p title='Area from 1 to 100000' >Building Area: 
+		<p title='Area from 1 to 100000' >Building Area:
 			<input id=inpBuildingArea type = number min=100 max=100000 step=10 value=800 oninput="validity.valid||(value='');" onchange=updateShape() class=floatRight >
 		</p>
 
@@ -61,16 +61,16 @@
 		</p>
 
 
-		<p title='How many storeys? 1 to 161'>Number of Floors (not fully functional): 
+		<p title='How many storeys? 1 to 161'>Number of Floors (not fully functional):
 			<output id=outNumberOfFloors class=floatRight ></output>
 			<input type="range" id="rngNumberOfFloors" min=1 max=10 step=1 value=1 onchange=updateShape(); >
 		</p>
 
-		<p title='Measured from 8 to 15' >Floor Height: 
+		<p title='Measured from 8 to 15' >Floor Height:
 			<input id=inpFloorHeight type=number min=2 max=15 value=2.1 onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='measured from 10 to 20' >Perimeter Depth meters: 
+		<p title='measured from 10 to 20' >Perimeter Depth meters:
 			<input id=inpPerimeterDepth type=number min=3 max=8 value=3.6 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
@@ -78,11 +78,11 @@
 			<input type=number id=inpWindowWallRatio min=1 max=99 step=1 value=40 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight />
 		</p>
 
-		<p disabled=true title='Depicted only when > 0 and < 10' >Overhang Depth: 
+		<p disabled=true title='Depicted only when > 0 and < 10' >Overhang Depth:
 			<input type=number id=inpOverhangDepth min=0 max=3 step=0.3 value=0 oninput="validity.valid||(value='');" onchange=updateShape(); class=floatRight >
 		</p>
 
-		<p title='building angle in degrees -180 to 180' >Orientation degrees: 
+		<p title='building angle in degrees -180 to 180' >Orientation degrees:
 			<span type=number id=inpOrientation min=-180 max=180 step=1 value=0 onchange=updateShape(); class=floatRight ></span>
 			<output id=outTempleWidth ></output>
 			<input type="range" id="rngOrientation" min=-180 max=180 step=1 value=0 oninput=updateShape(); >
@@ -124,7 +124,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				( window.self === window.top ? '<a href="./build-well.html" target="_top">bwell</a><br>' : '' ) +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
@@ -291,7 +291,7 @@
 		const floors = rngNumberOfFloors.value ? parseInt( rngNumberOfFloors.value, 10 ) : 1;
 		const height = inpFloorHeight.value ? Math.abs( parseFloat( inpFloorHeight.value ) ): parseFloat( inpFloorHeight.min );
 		const orientation = rngOrientation.value ? parseFloat( rngOrientation.value ) : 0;
-		
+
 		const overhangDepth = inpOverhangDepth.value ? parseFloat( inpOverhangDepth.value ) : 0;
 		const perDep = inpPerimeterDepth.value ? parseFloat( inpPerimeterDepth.value ) : parseFloat( inpPerimeterDepth.min );
 		const volume = building.areaFloor * building.floors * height;

@@ -9,7 +9,7 @@
 <title>gbXML Viewer7 Heads Up Display</title>
 
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -46,9 +46,9 @@
 	<div id = "divMenu" >
 
 		<p>
-			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; 
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
+			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
 		</p>
 
 
@@ -86,7 +86,7 @@
 
 	<div id = "hamburger" onclick=toggleNav(); >
 
-		slide &#9776; 
+		slide &#9776;
 
 	</div>
 
@@ -208,8 +208,8 @@
 
 		function onRequestFileProgress( event ) {
 
-			ifrThree.contentWindow.divLog.innerHTML = 
-				'bytes loaded: ' + event.loaded.toLocaleString() + 
+			ifrThree.contentWindow.divLog.innerHTML =
+				'bytes loaded: ' + event.loaded.toLocaleString() +
 				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
 			'';
 
@@ -423,11 +423,11 @@ console.log( 'gbjson', ifrThree.contentWindow.scene );
 				space1 = getSpaceId( adjacenciesTxt[ 0 ].spaceIdRef );
 				space2 = getSpaceId( adjacenciesTxt[ 1 ].spaceIdRef );
 
-				if ( space1 && space2 ) { 
+				if ( space1 && space2 ) {
 
-					adjacenciesTxt = 
+					adjacenciesTxt =
 
-						'<hr>' + 
+						'<hr>' +
 						'adjacency: ' + data.AdjacentSpaceId[ 0 ].spaceIdRef + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
 						( space.Description ? 'description: ' + space.Description + b : '' )  +
@@ -437,7 +437,7 @@ console.log( 'gbjson', ifrThree.contentWindow.scene );
 						( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
 						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
 
-						'<hr>' + 
+						'<hr>' +
 						'adjacency: ' + data.AdjacentSpaceId[ 1 ].spaceIdRef +  b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
 						( space.Description ? 'description: ' + space.Description + b : '' )  +
@@ -459,7 +459,7 @@ console.log( 'gbjson', ifrThree.contentWindow.scene );
 
 				if ( !space ) { return; }
 
-				adjacenciesTxt = 
+				adjacenciesTxt =
 					'<hr>' +
 					'adjacency: ' + data.AdjacentSpaceId.spaceIdRef + b +
 					( space.Name ? 'name: ' + space.Name + b : '' )  +
@@ -482,7 +482,7 @@ console.log( 'gbjson', ifrThree.contentWindow.scene );
 			'id: ' + data.id + b +
 			'surface: ' + data.surfaceType + b +
 			( data.CADObjectId ? 'CADObjectId: ' + data.CADObjectId + b : '' ) +
-			adjacenciesTxt + 
+			adjacenciesTxt +
 		'';
 
 		headsUp.innerHTML = txt;

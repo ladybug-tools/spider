@@ -1,4 +1,4 @@
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 	let context1, context2;
 
@@ -88,7 +88,7 @@
         	if(scene.page != "geometry" && scene.page != "envelope")
         		return;
 
-        	// var building 	= 
+        	// var building 	=
             var raycaster 	= new THREE.Raycaster();
             var mouse 		= new THREE.Vector2();
             var obj_arr 	= scene.getObjectByName("theBuilding").children[0].children;
@@ -118,7 +118,7 @@
             			img_src = "images/h_hud.png";
             		break;
 
-            		default : 
+            		default :
             			img_src = "images/box_hud.png";
             		break;
             	}

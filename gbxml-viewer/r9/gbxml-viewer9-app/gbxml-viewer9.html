@@ -19,8 +19,8 @@
 
 			<div>
 				<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-				<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-				<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo; 
+				<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
+				<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
 			</div>
 
 			<h2>
@@ -47,7 +47,7 @@
 
 			<summary>Toggle Features</summary>
 
-			<button id=butHeadsUp onclick = 
+			<button id=butHeadsUp onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gbxml-viewer9-03-heads-up-display/gbxml-viewer9-heads-up-display.js';" >heads-up display</button>
 
@@ -55,13 +55,22 @@
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gbxml-viewer9-04-settings/gbxml-viewer9-settings.js'; " >settings</button>
 
-			<button id=butReports onclick = 
+			<button id=butReports onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gbxml-viewer9-05-reports/gbxml-viewer9-reports.js'; " >reports</button>
 
-			<button id=butCameraFirstPerson onclick = 
+			<button id=butCameraFirstPerson onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-06-camera-first-person/gbxml-viewer9-camera-first-person.js';" >first person camera</button>
+				script.src = '../gbxml-viewer9-06-camera-first-person/gbxml-viewer9-camera-first-person.js';" >
+			first person camera</button>
+
+			<button id=butAnalemma onclick="
+				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+				scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gbxml-viewer9-07-analemma/gbxml-viewer9-analemma.js'; " >
+			sun-path / analemma</button>
+
 
 		</details>
 

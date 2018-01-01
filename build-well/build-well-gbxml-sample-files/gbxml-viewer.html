@@ -8,7 +8,7 @@
 <meta name = "date" content = "2017-10-25" >
 <title>Build View gbXML Sample Files</title>
 <style>
-/* Copyright 2017 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
@@ -102,7 +102,7 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
+		divTitle.innerHTML =
 			'<h3>' +
 				'<a  href = "" >' + document.title + '</a> &nbsp; ' +
 				'<a href=' + infoURI + ' target="_top" >' + iconEdit + '</a>' +
@@ -133,7 +133,7 @@
 
 	function loadXML( url ) {
 
-		requestFile( url.replace(/raw\.githubusercontent/,'rawgit'), ifrMenuSub.contentWindow.callbackGbXML ); 
+		requestFile( url.replace(/raw\.githubusercontent/,'rawgit'), ifrMenuSub.contentWindow.callbackGbXML );
 
 	}
 
@@ -170,10 +170,10 @@
 			if ( file.name === 'README.md' || !file.name.endsWith( '.xml' ) ) { continue; }
 
 			txt += '<div style=margin-bottom:3px;  >' +
-				'<a href=JavaScript:JavaScript:loadXML("' + file.download_url + '"); ' + 
-				' title="' + file.size.toLocaleString() + ' bytes"  >' + 
+				'<a href=JavaScript:JavaScript:loadXML("' + file.download_url + '"); ' +
+				' title="' + file.size.toLocaleString() + ' bytes"  >' +
 				file.name + '</a> ' +
-				'<a href=' + uriSource + file.name + 
+				'<a href=' + uriSource + file.name +
 				' title="Edit me" > &#x1f589;</a>' +
 			'</div>';
 
@@ -204,10 +204,10 @@
 			if ( file.name === 'links-of-interest.md' || file.name === 'github-issues-header.md' ) { continue; }
 
 			txt += '<div>' +
-				'<a href=#' + file.download_url + 
-				' title="' + file.size.toLocaleString() + ' bytes"  >' + 
+				'<a href=#' + file.download_url +
+				' title="' + file.size.toLocaleString() + ' bytes"  >' +
 				file.name + '</a>' +
-				'<a href=https://github.com/ladybug-tools/spider/tree/master/pages/' + file.name + 
+				'<a href=https://github.com/ladybug-tools/spider/tree/master/pages/' + file.name +
 				' title="Edit me" > &#x1f589;</a>' +
 			'<div>';
 
