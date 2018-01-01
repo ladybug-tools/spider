@@ -30,11 +30,9 @@
 	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<a id=aThree href="JavaScript:( function(){
-			const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = 'gbxml-viewer9-heads-up-display.js';
-		} )()" >
-		gbxml-viewer9-heads-up-display</a>
+
+		<button id=butHeadsUp onclick = "const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = 'gbxml-viewer9-heads-up-display.js';" >gbxml-viewer9-heads-up-display</button>
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
@@ -65,8 +63,6 @@
 
 <script>
 
-	var divMenuItems;
-	var divContents;
 
 	init();
 
@@ -120,7 +116,7 @@
 
 	function onloadThreejs() {
 
-		aThree.click();
+		butHeadsUp.click();
 
 	}
 

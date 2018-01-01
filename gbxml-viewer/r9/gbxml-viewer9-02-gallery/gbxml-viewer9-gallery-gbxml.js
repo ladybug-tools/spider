@@ -5,26 +5,13 @@
 	var pathRepo = '';
 
 	var urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
-
 	var urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
 	var urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
-
-
 
 	initGalleryGbxml();
 
 
 	function initGalleryGbxml() {
-
-		if ( !window.divMenuItems ) {
-
-			divMenuItems = document.body.appendChild( document.createElement( 'div' ) );
-			divMenuItems.style.cssText = 
-				'background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px; ' +
-				'opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; ' +
-			'';
-
-		}
 
 		ifrThree.contentWindow.requestFile( urlGitHubApiContents, callbackGitHubMenu );
 
@@ -37,7 +24,7 @@
 		const response = xhr.target.response;
 		const files = JSON.parse( response );
 
-		let txt = '<h3>gbXML Sample Files on GitHub</h3>';
+		let txt = '';
 
 		for ( let i = 0; i < files.length; i++ ) {
 
@@ -61,7 +48,12 @@
 
 		}
 
-		divMenuItems.innerHTML = txt;
+		divMenuItems.innerHTML = 
+
+			'<details open>' +
+				'<summary>gbXML Sample Files on GitHub</summary>' +
+				txt +
+			'</details>';
 
 	}
 

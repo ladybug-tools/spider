@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Test sample gbXML viewer template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-30" >
-<title>test-gbxml-viewer9-template</title>
+<meta name = "date" content = "2017-12-31" >
+<title>test-gbxml-viewer9-camera-first-person</title>
 <style>
 /* Copyright 2017 Ladybug Tools authors. MIT License */
 
@@ -18,24 +18,23 @@
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
-	#divMenuItems { background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px;
-		opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; }
-
 </style>
 </head>
 <body>
 
 	<div id = "divHeader" >
-		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r9/" >gh</a>
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r9/gbxml-viewer9-06-camera-first-person/" >gh</a>
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'template' to load test menu</p>
+	<p>click 'gbxml-viewer8-camera-first-person' to toggle the camera</p>
 
 	<p>
-		<button id=butTemplate onclick = 
-			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = 'gbxml-viewer9-template.js';" > gbxml-viewer9-template </button>
+		<button id=butCameraFirstPerson onclick="( function(){
+			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gbxml-viewer9-06-camera-first-person/gbxml-viewer9-camera-first-person.js';
+		} )()" >
+		gbxml-viewer8-camera-first-person</button>
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
@@ -51,8 +50,6 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
-
-	<div id=divMenuItems ></div>
 
 <script>
 
@@ -109,7 +106,10 @@
 
 	function onloadThreejs() {
 
-		butTemplate.click();
+//		aThree.click();
+
+//		const url = location.hash.slice( 1 );
+//		ifrThree.contentWindow.location.hash = '#' + url;
 
 	}
 

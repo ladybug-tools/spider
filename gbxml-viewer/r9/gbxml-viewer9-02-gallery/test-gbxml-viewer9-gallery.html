@@ -18,6 +18,9 @@
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
+	#divMenuItems { background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px;
+		opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; }
+
 </style>
 </head>
 <body>
@@ -70,9 +73,11 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
+	<div id=divMenuItems ></div>
+
 <script>
 
-	var divMenuItems;
+
 	var divContents;
 
 	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
@@ -99,7 +104,7 @@
 	}
 
 
-
+// needs work so does not reload menu
 	function onHashChange() {
 
 		const url = location.hash.slice( 1 );

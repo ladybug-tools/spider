@@ -24,19 +24,21 @@
 
 	function initReport() {
 
-//		if ( divContents && divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
+		if ( butReports.style.backgroundColor !== 'pink' ) {
 
-		if ( !divMenuItems ) {
+			createReport();
 
-			divMenuItems = document.body.appendChild( document.createElement( 'div' ) );
-			divMenuItems.style.cssText = 
-				'background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px; ' +
-				'opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; ' +
-			'';
+			butReports.style.backgroundColor = 'pink';
+
+		} else {
+
+			element = document.getElementById( 'detReports' );
+
+			element.remove();
+
+			butReports.style.backgroundColor = '';
 
 		}
-
-		createReport();
 
 	}
 
@@ -50,7 +52,7 @@
 		scene = icw.scene;
 
 		surfaceGroup = icw.scene.getObjectByName( 'surfaceMeshes' );
-		surfaceMeshes = surfaceGroup.children;
+		surfaceMeshesChildren = surfaceGroup.children;
 		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
 
 		surfaceAdjacencyDuplicates = [];
@@ -62,14 +64,24 @@
 		sud.tinySurfaceSquareMeters = 1;
 
 		divMenuItems.innerHTML =
-			'<h3>Reports</h3>' +
-			'<p>' +
-				'toggles <button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
-				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-				' <button onclick=allVisible(); >all visible</button>' +
-			'</p>' +
 
-			'<div id = divReport ></div>';
+			'<details id=detReports open >' +
+
+				'<summary>Reports</summary>' +
+
+				'<p>' +
+					'toggles <button onclick=surfaceGroup.visible=!surfaceGroup.visible; >surfaces</button>' +
+					' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
+					' <button onclick=allVisible(); >all visible</button>' +
+				'</p>' +
+
+				'<div id=divReport ></div>' +
+
+			'</details>' +
+
+			divMenuItems.innerHTML +
+
+		'';
 
 		gbxml = traversGbjson( gbjson );
 //console.log( 'gbxml', gbxml );
@@ -121,6 +133,8 @@
 
 		const surfaceAdjacencyInvalid = getSurfaceAdjacencyInvalid();
 		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent );
+
+		setIfrThree();
 
 	}
 
@@ -418,7 +432,7 @@
 
 		}
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ff80ff' ); }
 
@@ -588,7 +602,7 @@
 		}
 
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			if ( surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }
 
@@ -689,7 +703,7 @@
 		}
 
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			if ( surfaceAdjacencyInvalids.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
 
@@ -714,13 +728,13 @@
 		let zones = [];
 		let spacesArray = [];
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			child.visible = false;
 
 		}
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId
 
@@ -758,7 +772,7 @@
 
 		surfaceGroup.visible = true;
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			if ( child.userData.data.id === id ) {
 
@@ -808,7 +822,7 @@
 		surfaceGroup.visible = true;
 //console.log( '', surfaceAdjacencyDuplicates );
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			if ( child.userData.data.surfaceType !== that.innerText ) {
 
@@ -833,7 +847,7 @@
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === 'lightblue' ) {
 
@@ -855,7 +869,7 @@
 
 		surfaceGroup.visible = true;
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			child.visible = false;
 
@@ -896,7 +910,7 @@
 		surfaceGroup.visible = true;
 		surfaceEdges.visible = true;
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 			if ( encodeURI( child.userData.data.CADObjectId ) === CADObjectId ) {
 
@@ -922,7 +936,7 @@
 
 			surfaceGroup.visible = true;
 
-			for ( let child of surfaceMeshes ) {
+			for ( let child of surfaceMeshesChildren ) {
 
 				if ( surfaceArray.includes( child.userData.data.Name ) ) {
 
@@ -955,7 +969,7 @@
 		surfaceGroup.visible = true;
 		surfaceEdges.visible = true;
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshesChildren ) {
 
 				child.visible = true;
 

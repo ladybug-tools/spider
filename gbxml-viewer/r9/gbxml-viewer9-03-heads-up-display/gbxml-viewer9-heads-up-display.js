@@ -8,15 +8,13 @@
 	var divHeadsUp; 
 	var intersected;
 	var objects;
+	var surfaceMeshesChildren;
 	var mouse;
-	var butHeadsUp;
 
 
 	initHeadsUp();
 
 	function initHeadsUp() {
-
-//		if ( divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
 
 		if ( !divHeadsUp ) {
 
@@ -28,24 +26,7 @@
 
 		}
 
-/*
-		if ( !butHeadsUp ){
-
-		divMenuItems.innerHTML +=
-`
-		<p>
-			<button id=butHeadsUp onclick="( function(){
-				const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer8-03-heads-up-display/gbxml-viewer8-heads-up-display3.js';
-			;})()" >
-			toggle heads-up</button>
-		</p>
-`;
-
-		}
-
 		if ( butHeadsUp.style.backgroundColor !== 'pink' ) {
-*/
 
 			icw = ifrThree.contentWindow;
 			THREE = icw.THREE;
@@ -56,11 +37,11 @@
 
 			mouse = new THREE.Vector2();
 
-//			addEventListener ( 'hashchange', toggleHeadsUpOff, false );
-
 			renderer.domElement.addEventListener( 'click', onDocumentMouseMove, false );
 			renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
-/*
+
+			setIfrThree();
+
 			butHeadsUp.style.backgroundColor = 'pink';
 
 		} else {
@@ -68,7 +49,6 @@
 			toggleHeadsUpOff();
 
 		}
-*/
 
 	}
 
@@ -86,8 +66,8 @@
 
 		butHeadsUp.style.backgroundColor = '';
 
-
 	}
+
 
 
 	function onDocumentMouseMove( event ) {

@@ -1,7 +1,5 @@
 
 
-//	var divAppMenu = divAppMenu || undefined;
-
 	var icw;
 	var THREE;
 	var scene;
@@ -22,95 +20,106 @@
 
 	function init() {
 
-//		if ( divContents && divContents.getElementsByTagName( 'iframe' ).length === 0 ) { alert( 'Please first load a model' ); return; }
+		if ( butSettings.style.backgroundColor !== 'pink' ) {
 
-		if ( !divMenuItems ) {
+			icw = ifrThree.contentWindow;
+			THREE = icw.THREE;
+			renderer = icw.renderer;
+			scene = icw.scene;
+			surfaceMeshes = icw.surfaceMeshes;
+			surfaceEdges = icw.surfaceEdges;
 
-			divMenuItems = document.body.appendChild( document.createElement( 'div' ) );
-			divMenuItems.style.cssText = 
-				'background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px; ' +
-				'opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; ' +
+			surfaceAdjacencyDuplicates = icw.surfaceAdjacencyDuplicates;
+			surfaceAdjacencyInvalids = icw.surfaceAdjacencyInvalids;
+			surfaceCoordinateDuplicates = icw.surfaceCoordinateDuplicates;
+
+
+			divMenuItems.innerHTML =
+
+				'<details id=detSettings open>' +
+
+					'<summary>Settings</summary>' +
+
+					'<p>' +
+						'toggles<br><button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
+						' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
+						' <button onclick=allVisible(); >all</button>' +
+					'</p>' +
+
+
+					'<p><button onclick=setRandomMaterial(); >Set random material</button></p>' +
+
+					'<p><button onclick=setPhongDefaultMaterial(); >Set default phong material</button></p>' +
+
+					'<p><button onclick=setNormalMaterial(); >Set normal material</button></p>' +
+
+					'<p><button onclick=setDefaultMaterial(); >Set default material</button></p>' +
+
+					'<p><button onclick=setExposureMaterial2(); >Set exposure type material</button></p>' +
+
+
+					'<hr>' +
+
+					'<p><button onclick=toggleShadowMap(); >Toggle shadows</button></p>' +
+
+					'<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
+
+					'<p><button onclick=toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>' +
+
+					'<p><button onclick=toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button></p>' +
+
+					'<p><button onclick=toggleAxesHelper(); >Toggle axes</button></p>' +
+
+					'<p>' +
+						'<button onclick=toggleGridHelper(); >Toggle grid</button> ' + 
+						'<button onclick=updateMeshLevel("gridHelper",+0.2); >+</button> ' +
+						'<button onclick=updateMeshLevel("gridHelper",-0.2); >-</button>' +
+					'</p>' +
+
+					'<p>' +
+						'<button onclick=toggleGroundHelper(); >Toggle ground</button> ' + 
+						'<button onclick=updateMeshLevel("groundHelper",+0.2); >+</button> ' +
+						'<button onclick=updateMeshLevel("groundHelper",-0.2); >-</button>' +
+					'</p>' +
+
+					'<p><button onclick=toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
+
+					'<p><button onclick=toggleCameraOrthoPerspective() title="" > Toggle camera ortho </button></p>' +
+
+					'<p title="building opacity: 0 to 100%" >Opacity: ' +
+						'<output id=outOpacity class=floatRight >85%</output>' +
+						'<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >' +
+					'</p>' +
+
+					'<p title="building surface separation: 0 to 100%" >Explode view horizontal: ' +
+						'<output id=outViewExplode class=floatRight >0%</output>' +
+						'<input type="range" id="rngViewExplode" min=0 max=100 step=1 value=0 oninput=updateViewExplodeHorizontal(); >' +
+					'</p>' +
+
+					'<p title="building surface separation: 0 to 100%" >Explode view vertical: ' +
+						'<output id=outViewExplodeVertical class=floatRight >0%</output>' +
+						'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=updateViewExplodeVertical(); >' +
+					'</p>' +
+
+				'</details>' +
+
+				divMenuItems.innerHTML +
+
 			'';
+
+			setIfrThree();
+
+			butSettings.style.backgroundColor = 'pink';
+
+		} else {
+
+			element = document.getElementById( 'detSettings' );
+
+			element.remove();
+
+			butSettings.style.backgroundColor = '';
 
 		}
-
-		icw = ifrThree.contentWindow;
-		THREE = icw.THREE;
-		renderer = icw.renderer;
-		scene = icw.scene;
-		surfaceMeshes = icw.surfaceMeshes;
-		surfaceEdges = icw.surfaceEdges;
-
-		surfaceAdjacencyDuplicates = icw.surfaceAdjacencyDuplicates;
-		surfaceAdjacencyInvalids = icw.surfaceAdjacencyInvalids;
-		surfaceCoordinateDuplicates = icw.surfaceCoordinateDuplicates;
-
-		divMenuItems.innerHTML =
-
-			'<h3>Settings</h3>' +
-
-			'<p>' +
-				'toggles<br><button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
-				' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-				' <button onclick=allVisible(); >all</button>' +
-			'</p>' +
-
-
-			'<p><button onclick=setRandomMaterial(); >Set random material</button></p>' +
-
-			'<p><button onclick=setPhongDefaultMaterial(); >Set default phong material</button></p>' +
-
-			'<p><button onclick=setNormalMaterial(); >Set normal material</button></p>' +
-
-			'<p><button onclick=setDefaultMaterial(); >Set default material</button></p>' +
-
-			'<p><button onclick=setExposureMaterial2(); >Set exposure type material</button></p>' +
-
-
-			'<hr>' +
-
-			'<p><button onclick=toggleShadowMap(); >Toggle shadows</button></p>' +
-
-			'<p><button onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
-
-			'<p><button onclick=toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>' +
-
-			'<p><button onclick=toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button></p>' +
-
-			'<p><button onclick=toggleAxesHelper(); >Toggle axes</button></p>' +
-
-			'<p>' +
-				'<button onclick=toggleGridHelper(); >Toggle grid</button> ' + 
-				'<button onclick=updateMeshLevel("gridHelper",+0.2); >+</button> ' +
-				'<button onclick=updateMeshLevel("gridHelper",-0.2); >-</button>' +
-			'</p>' +
-
-			'<p>' +
-				'<button onclick=toggleGroundHelper(); >Toggle ground</button> ' + 
-				'<button onclick=updateMeshLevel("groundHelper",+0.2); >+</button> ' +
-				'<button onclick=updateMeshLevel("groundHelper",-0.2); >-</button>' +
-			'</p>' +
-
-			'<p><button onclick=toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
-
-			'<p><button onclick=toggleCameraOrthoPerspective() title="" > Toggle camera ortho </button></p>' +
-
-			'<p title="building opacity: 0 to 100%" >Opacity: ' +
-				'<output id=outOpacity class=floatRight >85%</output>' +
-				'<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >' +
-			'</p>' +
-
-			'<p title="building surface separation: 0 to 100%" >Explode view horizontal: ' +
-				'<output id=outViewExplode class=floatRight >0%</output>' +
-				'<input type="range" id="rngViewExplode" min=0 max=100 step=1 value=0 oninput=updateViewExplodeHorizontal(); >' +
-			'</p>' +
-
-			'<p title="building surface separation: 0 to 100%" >Explode view vertical: ' +
-				'<output id=outViewExplodeVertical class=floatRight >0%</output>' +
-				'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=updateViewExplodeVertical(); >' +
-			'</p>' +
-
-			'';
 
 	}
 
@@ -556,7 +565,7 @@
 		surfaceGroup.visible = true;
 		surfaceEdges.visible = true;
 
-		for ( let child of surfaceMeshes ) {
+		for ( let child of surfaceMeshes.children ) {
 
 				child.visible = true;
 
