@@ -102,13 +102,13 @@ See also:
 
 ### Core
 
-#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-01-core/README.md )
+#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-01-core/README.md )
 
-#### Full Screen: [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html )
+#### Full Screen: [gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html )
 
 * View gbXML files in 3D in your browser.
-* Open files using File Reader or by URL in location.hash.Base
-* Base Script used by gbXML Viewer modules.
+* Open files using File Reader or by URL in location.hash
+* Base script used by all the other gbXML Viewer modules
 
 
 ### Gallery
@@ -133,7 +133,7 @@ See also:
 
 #### Full Screen test: [test-gbxml-viewer8-settings ]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-04-settings/test-gbxml-viewer8-settings.html )
 
-* Set random, phonf=g default, normal or default material
+* Set random, phong default, normal or default material
 * Toggle background gradient
 * Toggle wireframe
 * Draw surface normals
