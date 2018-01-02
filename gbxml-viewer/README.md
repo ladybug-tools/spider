@@ -13,6 +13,10 @@ _gbXML Viewer R9_
 
 * a glimpse of some of the things that have been happening recently with the gbXML Viewer.
 
+## Current Problems
+
+* Reports module appearing more than once
+
 ***
 
 ## The Concept: Knowledge embedded in gbXML files is viewable, analyzable and editable with free, open-source web apps
@@ -251,6 +255,16 @@ Feel free to add new ideas
 ### First Person camera
 
 
+### Sun Path / Analemmas
+
+* 2018-01-01 ~ Theo: Multiple suns
+
+
+### Screen Capture
+
+* 2018-01-01 ~ Much better control over the camera
+
+
 ### Templates
 
 
@@ -288,7 +302,7 @@ Done
 * Settings
 	* Toggle ground and toggle Grid
 		* Resets with each new model
-		* Autot-positioned at bounding box minimum
+		* Auto-positioned at bounding box minimum
 		* Buttons added to increase or decrease of height level
 	* Toggle surface normals
 		* Resets with each new model
@@ -468,8 +482,6 @@ Little fixes and new features everywhere
 * First Commit
 
 See also [R7 Read Me]( #read-gbxml/README.md ) for earlier changes
-
-***
 
 ***
 
