@@ -58,15 +58,15 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 			'';
 
-			setIfrThree();
+			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butTemplate.style.backgroundColor = 'pink';
 
 		} else {
 
-			element = document.getElementById( 'detTemplate' );
+//			element = document.getElementById( 'detTemplate' );
 
-			element.remove();
+			detTemplate.remove();
 
 			butTemplate.style.backgroundColor = '';
 

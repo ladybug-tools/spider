@@ -1,7 +1,3 @@
-<span style=display:none; >
-[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://pushme-pullyou.github.io/index.html#utilities/markdown-cheat-sheet.md "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/pushme-pullyou/pushme-pullyou.github.io/tree/master/cookbook-html/templates/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' />
 
 
 [Markdown Cheat Sheet]( #utilities/markdown-cheat-sheet.md )

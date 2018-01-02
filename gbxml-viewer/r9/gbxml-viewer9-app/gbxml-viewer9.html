@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-30" >
-<title>gbXML Viewer 9.0</title>
+<title>gbXML Viewer 9.0 App</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -24,7 +24,7 @@
 			</div>
 
 			<h2>
-				<a  href = "" >gbXML Viewer 9.0</a>
+				<a  href = "" >gbXML Viewer 9.0 App</a>
 			</h2>
 
 			<div><small>Open, view and investigate <a href=http://gbxml.org >gbXML</a> files in 3D in your browser with free, open source entry-level JavaScript</small></div>
@@ -49,15 +49,18 @@
 
 			<button id=butHeadsUp onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-03-heads-up-display/gbxml-viewer9-heads-up-display.js';" >heads-up display</button>
+				script.src = '../gbxml-viewer9-03-heads-up-display/gbxml-viewer9-heads-up-display.js';" >
+			heads-up display</button>
 
 			<button id=butSettings onclick=
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-04-settings/gbxml-viewer9-settings.js'; " >settings</button>
+				script.src = '../gbxml-viewer9-04-settings/gbxml-viewer9-settings.js'; " >
+			settings</button>
 
 			<button id=butReports onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-05-reports/gbxml-viewer9-reports.js'; " >reports</button>
+				script.src = '../gbxml-viewer9-05-reports/gbxml-viewer9-reports.js'; " >
+			reports</button>
 
 			<button id=butCameraFirstPerson onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -71,6 +74,33 @@
 				script.src = '../gbxml-viewer9-07-analemma/gbxml-viewer9-analemma.js'; " >
 			sun-path / analemma</button>
 
+			<button id=butScreenCapture onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
+			screen capture </button>
+
+
+			<p>Sample files on GitHub to explore</p>
+
+			<a href = "JavaScript:( function(){
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-02-gallery/gbxml-viewer9-gallery-gbxml.js';
+			} )()" >
+			gbXML Sample Files</a> <br>
+
+			<a href= "JavaScript:( function(){
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-02-gallery/gbxml-viewer9-gallery-spider-build-well.js';
+			} )()" >
+			Spider Build Well</a> <br>
+
+			<a href=
+			"JavaScript:(
+				function(){
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-02-gallery/gbxml-viewer9-gallery-spider-viewer-samples.js';
+			} )()" >
+			Spider gbXML Viewer sample files</a>
 
 		</details>
 

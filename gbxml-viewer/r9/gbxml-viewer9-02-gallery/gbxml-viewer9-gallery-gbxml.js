@@ -34,7 +34,7 @@
 
 			const fileName = encodeURI( file.name );
 
-			txt += 
+			txt +=
 
 			'<div style=margin-bottom:8px; >' +
 
@@ -48,12 +48,12 @@
 
 		}
 
-		divMenuItems.innerHTML = 
+		divMenuItems.innerHTML =
 
 			'<details open>' +
 				'<summary>gbXML Sample Files on GitHub</summary>' +
 				txt +
-			'</details>';
+			'</details>' + divMenuItems.innerHTML;
 
 	}
 

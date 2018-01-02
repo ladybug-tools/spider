@@ -6,7 +6,7 @@
 <meta name = "description" content = "Test sample gbXML viewer template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-30" >
-<title>test-gbxml-viewer9-template</title>
+<title>test-gbxml-viewer9-screen-capture</title>
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
@@ -33,9 +33,9 @@
 	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
+		<button id=butScreenCapture onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = 'gbxml-viewer9-template.js';" > gbxml-viewer9-template </button>
+			script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" > screen capture </button>
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
@@ -87,6 +87,7 @@
 	}
 
 
+
 	function drop( event ) {
 
 		event.preventDefault();
@@ -109,7 +110,7 @@
 
 	function onloadThreejs() {
 
-		butTemplate.click();
+		butScreenCapture.click();
 
 	}
 

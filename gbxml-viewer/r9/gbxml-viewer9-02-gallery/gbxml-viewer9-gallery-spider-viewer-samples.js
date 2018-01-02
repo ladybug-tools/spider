@@ -36,7 +36,7 @@
 
 			const fileName = encodeURI( file.name );
 
-			txt += 
+			txt +=
 
 			'<div style=margin-bottom:8px; >' +
 
@@ -50,12 +50,12 @@
 
 		}
 
-		divMenuItems.innerHTML += 
+		divMenuItems.innerHTML =
 
 			'<details open>' +
 				'<summary>Ladybug Tools/Spider gbXML Viewer sample files on GitHub</summary>' +
 				txt +
-			'</details>';
+			'</details>' + divMenuItems.innerHTML;
 
 	}
 

@@ -9,7 +9,7 @@ _gbXML Viewer R8_
 
 ## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
-## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html ) 
+## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
 * a glimpse of some of the things that have been happening recently with the gbXML Viewer.
 
@@ -106,8 +106,8 @@ See also:
 
 #### Full Screen: [gbXML Viewer8 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html )
 
-* View gbXML files in 3D in your browser. 
-* Open files using File Reader or by URL in location.hash.Base 
+* View gbXML files in 3D in your browser.
+* Open files using File Reader or by URL in location.hash.Base
 * Base Script used by gbXML Viewer modules.
 
 
@@ -180,9 +180,9 @@ See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.
 
 ### Bl.ocks Edition
 
-View as [Bl.ocks]( https://bl.ocks.org/ ) 
+View as [Bl.ocks]( https://bl.ocks.org/ )
 
-Bl.ocks (pronounced “Blocks”) is a simple viewer for sharing code examples hosted on GitHub Gist. 
+Bl.ocks (pronounced “Blocks”) is a simple viewer for sharing code examples hosted on GitHub Gist.
 
 * <http://bl.ocks.org/theo-armour/163685de4d1fdacd70b2ffd446e8c874>
 
@@ -214,9 +214,9 @@ Gists are a great way to share your work. You can share single files, parts of f
 
 ### Settings
 
-* 2017-12-10 ~ Michal: can we switch off shadows?
+
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
-* 2017-12-06 ~ Add slider to move ground up or down
+
 
 
 ### Reports
@@ -230,10 +230,7 @@ Gists are a great way to share your work. You can share single files, parts of f
 ### First Person camera
 
 
-
 ### Template
-
-
 
 
 ### Export gbXML files
@@ -251,6 +248,19 @@ Will most likely build upon
 
 ## Change Log
 
+
+### 2018-01-01 ~ Theo
+
+* R9.0
+* Redesigned user experience
+	* All modules may loaded and used simultaneously
+	* Switch between text and 3D without losing your place
+* Has all the modules of R8
+* Add screen capture modules
+
+Done
+* 2017-12-10 ~ Michal: can we switch off shadows?
+* 2017-12-06 ~ Add slider to move ground up or down
 
 ### 2017-12-17 ~ Theo
 
@@ -338,7 +348,7 @@ Done
 
 R8.9
 * Core
-	* Add 'reset view' calls createReport() 
+	* Add 'reset view' calls createReport()
 * HUD
 	* Add toggle button
 	* Toggle off when new file loaded
@@ -426,8 +436,8 @@ Little fixes and new features everywhere
 ### 2017-12-03 ~ Theo
 
 * 2017-12-02 ~ Michal: Report and display surfaces with duplicate CAD IDs
-* 2017-12-02 ~ Michal: Highlight and display tiny areas << Added Report > Tiny Surfaces 
- 
+* 2017-12-02 ~ Michal: Highlight and display tiny areas << Added Report > Tiny Surfaces
+
 ### 2017-12-02 ~ Theo
 
 * 2017-12-01 ~ Michal: load local files via location.hash < see read me for Core module
