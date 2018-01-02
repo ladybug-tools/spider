@@ -30,9 +30,9 @@
 
 		} else {
 
-			element = document.getElementById( 'detReports' );
+//			element = document.getElementById( 'detReports' );
 
-			element.remove();
+			detReports.remove();
 
 			butReports.style.backgroundColor = '';
 
@@ -132,7 +132,8 @@
 		const surfaceAdjacencyInvalid = getSurfaceAdjacencyInvalid();
 		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent );
 
-		setIfrThree();
+// following causes error when inside an iframe in a read me
+		if ( parent.setIfrThree ) { setIfrThree(); }
 
 	}
 

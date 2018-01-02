@@ -5,14 +5,17 @@
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html width=100% height=600px;  >Iframes are not displayed on github.com</iframe>
 
-## Full screen [gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core-r3.html )
+## Full screen [gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html )
 
-## Full screen [gbXML Viewer9 Core Robust]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core-r3-robust.html )
+## Full screen [gbXML Viewer9 Core Robust]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core-robust.html )
 
 * 'Robust' is a special version of gbXML Viewer for very large files
 * Click 'choose file' to select a file. Then wait until all the bytes have been loaded - at least a full minute
 * And then wait a bit more and then click 'parse gbXML'
 * Also a good idea to refresh the page prior to loading file and to have the JavaScript console open
+
+## Full screen test [Test gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/test-gbxml-viewer9-core.html )
+
 
 ## Concept
 

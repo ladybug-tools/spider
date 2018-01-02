@@ -1,14 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer9-05-reports/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-05-reports/README.md "View file as a web page." ) </span>
 
 # gbXML Viewer9 Reports Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test: [gbXML Viewer9 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html )
-
-## Full screen embedded [ gbXML Viewer9 App]( http://www.ladybug.tools/spider/gbxml-viewer )
+## Full screen test: [Test gbXML Viewer9 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html )
 
 
 ## Concept
@@ -37,7 +35,7 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 * Lists all spaces
 * Button to view only Surfaces linked to given shape
 
- 
+
 
 ## Wish list / To Do
 
@@ -49,6 +47,10 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 
 ## Change Log
+
+### 2018-01-02 ~ Theo
+
+* R9 updates
 
 ### 2017-12-02 ~ Theo
 

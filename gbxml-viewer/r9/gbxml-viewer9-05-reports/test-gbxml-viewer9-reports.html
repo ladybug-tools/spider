@@ -36,11 +36,11 @@
 	<p>If it does not open automatically, click 'reports' to load reports menu.</p>
 
 	<p>
-		<a id=aThree href="JavaScript:( function(){
-			const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src='gbxml-viewer9-reports.js';
-		})()" >
-		reports</a>
+		<button id=butReports onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src='../gbxml-viewer9-05-reports/gbxml-viewer9-reports.js'; " >
+		reports</button>
+
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
@@ -115,7 +115,7 @@
 
 	function onloadThreejs() {
 
-		aThree.click();
+		butReports.click();
 
 	}
 

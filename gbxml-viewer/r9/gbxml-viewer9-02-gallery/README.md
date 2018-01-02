@@ -6,7 +6,7 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-02-gallery/test-gbxml-viewer9-gallery.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer9 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-02-gallery/test-gbxml-viewer9-gallery.html )
+## Full screen test: [Test gbXML Viewer9 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-02-gallery/test-gbxml-viewer9-gallery.html )
 
 
 * <http://www.ladybug.tools/spider/gbxml-viewer/>
@@ -29,13 +29,17 @@
 
 ## Issues
 
+* Test script: currently adding to current menu. Should toggle instead
 
 
 ## Links of Interest
 
+add links to libs
 
 
 ## Change Log
+
+
 
 ### 2018-01-01 ~ Theo
 

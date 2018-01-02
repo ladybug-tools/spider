@@ -41,7 +41,7 @@
 			renderer.domElement.addEventListener( 'click', onDocumentMouseMove, false );
 			renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
 
-			setIfrThree();
+			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butHeadsUp.style.backgroundColor = 'pink';
 

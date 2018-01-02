@@ -8,8 +8,6 @@
 	var gbjson;
 	var surfaceMeshes;
 
-
-
 	var defaultLatitude = 37.796;
 	var defaultLongitude = -122.398;
 
@@ -79,7 +77,7 @@
 
 			divMenuItems.innerHTML = `
 
-				<details id = detAnalemmae open>
+				<details id = detAnalemma open>
 					<summary>Sun Path / Analemma</summary>
 
 						<p>
@@ -126,17 +124,14 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 			inpDate.oninput = initSunPath;
 			inpHour.oninput = initSunPath;
 
-
-
-			setIfrThree();
+// following causes error when inside an iframe in a read me
+			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butAnalemma.style.backgroundColor = 'pink';
 
 		} else {
 
-			element = document.getElementById( 'detTemplate' );
-
-			element.remove();
+			detAnalemma.remove();
 
 			butAnalemma.style.backgroundColor = '';
 

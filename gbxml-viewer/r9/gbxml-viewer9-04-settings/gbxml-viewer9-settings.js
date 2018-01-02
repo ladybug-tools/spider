@@ -33,12 +33,12 @@
 			surfaceAdjacencyInvalids = icw.surfaceAdjacencyInvalids;
 			surfaceCoordinateDuplicates = icw.surfaceCoordinateDuplicates;
 
-
 			divMenuItems.innerHTML =
 
-				'<details id=detSettings open>' +
+				'<details id=detSettings open >' +
 
 					'<summary>Settings</summary>' +
+
 
 					'<p>' +
 						'toggles<br><button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
@@ -101,21 +101,20 @@
 						'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=updateViewExplodeVertical(); >' +
 					'</p>' +
 
+
 				'</details>' +
 
 				divMenuItems.innerHTML +
-
 			'';
 
-			setIfrThree();
+// following causes error when inside an iframe in a read me
+			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butSettings.style.backgroundColor = 'pink';
 
 		} else {
 
-			element = document.getElementById( 'detSettings' );
-
-			element.remove();
+			detSettings.remove();
 
 			butSettings.style.backgroundColor = '';
 

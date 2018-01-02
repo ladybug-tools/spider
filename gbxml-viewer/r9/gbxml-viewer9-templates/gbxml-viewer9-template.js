@@ -58,6 +58,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 
 			'';
 
+// following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butTemplate.style.backgroundColor = 'pink';

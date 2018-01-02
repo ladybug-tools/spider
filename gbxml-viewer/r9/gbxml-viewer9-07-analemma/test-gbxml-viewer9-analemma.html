@@ -25,6 +25,9 @@
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
+	#divMenuItems { background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px;
+		opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; }
+
 </style>
 </head>
 <body>
@@ -40,7 +43,7 @@
 	<p>If it does not open automatically, click 'sun-path / analemma' to load test menu</p>
 
 		<p>
-			<button id=aThree onclick="( function(){
+			<button id=butAnalemma onclick="( function(){
 				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 				scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 				const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -63,6 +66,7 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
+	<div id=divMenuItems ></div>
 
 <script>
 
@@ -120,7 +124,7 @@
 
 	function onloadThreejs() {
 
-		aThree.click();
+		butAnalemma.click();
 
 	}
 

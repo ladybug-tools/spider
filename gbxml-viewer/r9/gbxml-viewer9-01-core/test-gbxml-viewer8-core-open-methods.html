@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "test gbxml viewer8 core" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-12-01" >
+<title></title>
+<style>
+/* Copyright 2018 Ladybug Tools authors. MIT License */
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	iframe { height: 500px; width: 100%; }
+
+</style>
+</head>
+<body>
+
+	<div id = "divHeader" >
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r8/" >gh</a>
+		<div id = "divTitle" ></div>
+	</div>
+
+	<p>If it does not open automatically, click 'test' to load test menu</p>
+
+	</p>
+
+
+	<p>
+		<a id=aThree href=
+			"JavaScript:(
+				function(){
+					var script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = 'test-gbxml-viewer8-core.js';
+			} )()"
+		>
+		test</a>
+	</p>
+
+
+	<iframe id=ifrThree src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html' ></iframe>
+
+	<h3>Methods to load gbXML files into this iframe</h3>
+
+	<p>
+		JavaScript: Use a link to update iframe src:<br>
+		<a href="JavaScript:(function(){
+			ifrThree.src='../gbxml-viewer8-01-core/gbxml-viewer8-core-r2.html#https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/sam-live2.xml';
+		})()" >
+		sam live2</a>
+	</p>
+
+	<p>
+		JavaScript: Use a link to update iframe location hash to cloud URL:<br>
+		<a href="JavaScript:(function(){
+			ifrThree.contentWindow.location.hash='#https://rawgit.com/ladybug-tools/spider/master/read-gbxml/data-files/rac_basic_sample_project.xml';
+		})()" >
+		rac_basic_sample_project</a>
+	</p>
+
+	<p>
+		JavaScript: Use a link to update iframe location hash to relative URL:<br>
+		<a href="JavaScript:(function(){
+			ifrThree.contentWindow.location.hash='#../../../read-gbxml/data-files/rac_basic_sample_project.xml';
+		})()" >
+		rac_basic_sample_project</a>
+	</p>
+
+	<p>
+		Use operating system file dialog box to open local file:<br>
+			<input type=file id=inpFile onchange=icw.openFile(this); >
+	<p>
+
+	<p>Drag and drop coming soon</p>
+
+	<p>See the tricks:<br><a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r8/gbxml-viewer8-templates/test-gbxml-viewer8-template.html" >
+		source code of this HTML file</a>
+	</p>
+
+<script>
+
+
+	init();
+
+
+
+	function init() {
+
+		divTitle.innerHTML =
+			'<h2><a  href = "" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) + '</a></h2>' +
+			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+		'';
+
+	}
+
+
+
+	function onloadThreejs() {
+
+		aThree.click();
+
+	}
+
+
+</script>
+</body>
+</html>

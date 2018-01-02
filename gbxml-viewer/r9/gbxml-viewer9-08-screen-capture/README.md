@@ -1,19 +1,17 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-08-screen-capture/README.md "View file as a web page." ) </span>
 
 # gbXML Viewer9 Screen Capture Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-templates/test-gbxml-viewer9-template.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-08-screen-capture/test-gbxml-viewer9-screen-capture.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer9 Screen Capture]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-templates/test-gbxml-viewer9-template.html )
+## Full screen test: [Test gbXML Viewer9 Screen Capture]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-08-screen-capture/test-gbxml-viewer9-screen-capture.html )
 
-Use and share this link for gbXML Viewer9:
-
-* <http://www.ladybug.tools/spider/gbxml-viewer/r9/>
 
 ## Concept
 
+* Save to animated GIF files ~ with custom camera paths and event handling
 
 
 ## Wish list
