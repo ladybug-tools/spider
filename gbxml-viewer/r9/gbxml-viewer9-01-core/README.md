@@ -71,7 +71,7 @@ The ultimate goal is to be able to offer various analytical batch operations tha
 
 ## Change Log
 
-See also main gbXML READMe.md
+See also main gbXML README.md
 
 
 ### 2018-01-01 ~ Theo

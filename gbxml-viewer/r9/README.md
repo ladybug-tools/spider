@@ -4,7 +4,7 @@
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
-_[gbXML Viewer9 Core]( gbxml-viewer9-01-core/gbxml-viewer9-core.html )_
+_[gbXML Viewer9 Core]( gbxml-viewer9-01-core/gbxml-viewer9-core.html ) ~ click the 'view model' button in left menu to view full screen_
 
 ## Full screen: [gbXML Viewer9 App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
@@ -28,10 +28,19 @@ This folder contains the basic script that does all the hard work of opening gbX
 
 ### Full screen:  [gbXML Viewer9 Core]( #../gbxml-viewer9-01-core/gbxml-viewer9-core.html )
 
-### [gbXML Viewer9 Core test script]( ../gbxml-viewer9-01-core/test-gbxml-viewer9-core.html )
+You may use this script as a template for building our own apps
 
-You may use this script as a template for building our own apps.
+### Full screen:  [Test gbXML Viewer9 Core]( ../gbxml-viewer9-01-core/test-gbxml-viewer9-core.html )
 
+You may uses this script to verify that the code works in an iframe and that menus work as intended
+
+***
+
+_The following contains a number of links that update the menu and load external JavaScript on the fly at runtime._
+
+_At the moment, all scripts are also in the menu. They only work when the full gbXML Viewer app is running_
+
+_In the future, however, the hope is to be able to add special links using easy-to-edit Markdown files that cause special or additional features to load and run._
 
 ## gbXML Viewer9 Gallery
 
@@ -63,6 +72,7 @@ Ladybug Tools/Spider gbXML Viewer sample files on GitHub</a>
 
 ## Heads-Up Display
 
+### Full screen: [Test gbXML Viewer9 Heads-Up Display]( ../gbxml-viewer9-03-heads-up-displa/test-gbxml-viewer9-heads-up-displa.html )
 
 <a href= "JavaScript:( function(){
 		const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -71,11 +81,9 @@ Ladybug Tools/Spider gbXML Viewer sample files on GitHub</a>
 Ladybug Tools/Spider gbXML Viewer Heads-Up Display</a>
 
 
-
-
-
-
 ## Reports
+
+### Full screen: [Test gbXML Viewer9 Reports]( ../gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html )
 
 <a href = "JavaScript:( function(){
 	const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -87,6 +95,8 @@ gbXML Viewer Reports</a>
 
 ## Settings
 
+### Full screen: [Test gbXML Viewer9 Settings]( ../gbxml-viewer9-04-settings/test-gbxml-viewer9-settings.html )
+
 <a href = "JavaScript:( function(){
 	const script = document.head.appendChild( document.createElement( 'script' ) );
 	script.src = '../gbxml-viewer9-04-settings/gbxml-viewer9-settings.js';
@@ -94,19 +104,18 @@ gbXML Viewer Reports</a>
 gbXML Viewer Settings</a>
 
 
-## Template
+## Templates
 
-### [Test gbXML Viewer9 Template]( ../gbxml-viewer9-template/test-gbxml-viewer9-template.html )
+### Full screen: [Test gbXML Viewer9 Templates]( ../gbxml-viewer9-templates/test-gbxml-viewer9-template.html )
 
-<a href=
-"JavaScript:(
-	function(){
+<!--
+<a href= "JavaScript:( function(){
 		const script = document.head.appendChild( document.createElement( 'script' ) );
 		script.src = '../gbxml-viewer9-templates/gbxml-viewer9-template.js';
-} )()"
->
+} )()" >
 gbXML Viewer Template</a>
 
+-->
 
 
 ***

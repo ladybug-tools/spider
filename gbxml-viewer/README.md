@@ -1,22 +1,23 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
 
 
-# gbXML Viewer8 Read Me
+# gbXML Viewer9 Read Me
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px >Iframes are not displayed on github.com</iframe>
-_gbXML Viewer R8_
+_gbXML Viewer R9_
 
 
-## Full screen: [gbXML Viewer8]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen: [gbXML Viewer9]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
 * a glimpse of some of the things that have been happening recently with the gbXML Viewer.
 
+***
 
-## Concept: Knowledge embedded in gbXML files is viewable, analyzable and editable with free, open-source web apps
+## The Concept: Knowledge embedded in gbXML files is viewable, analyzable and editable with free, open-source web apps
 
-### Issue / The problem to be solved
+### The issues / The problems to be solved
 
 
 About [Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building_XML ):
@@ -97,14 +98,27 @@ See also:
 
 
 
+***
 
 ## Modules
 
+GbXML Viewer is a collection of small JavaScript files that work together to enable the viewing of gbXML files.
+
+The goals for the files include:
+
+* Files are no more than a few hundred lines
+* Code is simple, plain-vanilla JavaScript
+* Every JavaScript files has an accompanying standalone HTML file for testing purposes
+
+The various modules are described below.
+
 ### Core
 
-#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-01-core/README.md )
+#### [gbXML Viewer9 Core Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-01-core/README.md )
 
 #### Full Screen: [gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html )
+
+#### Full screen test: [Test gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/test-gbxml-viewer9-core.html )
 
 * View gbXML files in 3D in your browser.
 * Open files using File Reader or by URL in location.hash
@@ -113,9 +127,9 @@ See also:
 
 ### Gallery
 
-#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-02-gallery/README.md )
+#### [gbXML Viewer9 Gallery Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-02-gallery/README.md )
 
-#### Full Screen test: [gbXML Viewer8 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-02-gallery/test-gallery-viewer.html )
+#### Full screen test: [Test gbXML Viewer9 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-02-gallery/test-gbxml-viewer9-gallery.html )
 
 * Use the GitHub API to obtain directory listings of file names
 * Display list of file names as links to source
@@ -129,9 +143,9 @@ See also:
 
 ### Settings
 
-#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-04-settings/README.md )
+#### [gbXML Viewer9 Settings Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-04-settings/README.md )
 
-#### Full Screen test: [test-gbxml-viewer8-settings ]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-04-settings/test-gbxml-viewer8-settings.html )
+#### Full screen test: [Test gbXML Viewer9 Settings ]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-04-settings/test-gbxml-viewer9-settings.html )
 
 * Set random, phong default, normal or default material
 * Toggle background gradient
@@ -147,9 +161,9 @@ See also:
 
 ### Reports
 
-#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-05-reports/README.md )
+#### [gbXML Viewer9 Reports Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-05-reports/README.md )
 
-#### Full screen test: [tezt gbXML Viewer8 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-05-reports/test-gbxml-viewer8-reports.html )
+#### Full screen test: [Test gbXML Viewer9 Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html )
 
 * Create text reports of data embedded in gbXML files
 * Toggle the display of 3D surfaces based on user input
@@ -159,9 +173,9 @@ See also:
 
 ### Camera - First Person
 
-#### [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r8/gbxml-viewer8-06-camera-first-person/README.md )
+#### [gbXML Viewer9 Camera - First Person Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r9/gbxml-viewer9-06-camera-first-person/README.md )
 
-#### Full screen test: [test gbxml viewer8 camera first-person]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-06-camera-first-person/test-gbxml-viewer8-camera-first-person.html )
+#### Full screen test: [Test gbXML Viewer9 camera first-person]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-06-camera-first-person/test-gbxml-viewer9-camera-first-person.html )
 
 * Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen
 * This is a new and experimental feature.
@@ -169,25 +183,32 @@ See also:
 
 ### Sun Path / Analemma
 
-#### [Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r8/gbxml-viewer8-07-analemma/README.md )
+#### [gbXML Viewer9 Analemma Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r9/gbxml-viewer9-07-analemma/README.md )
 
-#### Full screen test: [test gbxml viewer8 analemma]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-07-analemma/test-gbxml-viewer8-analemma.html )
+#### Full screen test: [Test gbxml Viewer9 Analemma]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-07-analemma/test-gbxml-viewer9-analemma.html )
 
 See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.md )
 
 
+### Screen Capture
+
+
+#### [gbXML Viewer9 Screen Capture Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r9/gbxml-viewer9-08-screen-capture/README.md )
+
+#### Full screen test: [Test gbxml Viewer9 Screen Capture]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-08-screen-capture/test-gbxml-viewer9-screen-capture.html )
+
+* Create animated GIFs
 
 
 ### Bl.ocks Edition
 
 View as [Bl.ocks]( https://bl.ocks.org/ )
 
-Bl.ocks (pronounced “Blocks”) is a simple viewer for sharing code examples hosted on GitHub Gist.
+> Bl.ocks (pronounced “Blocks”) is a simple viewer for sharing code examples hosted on GitHub Gist.
 
 * <http://bl.ocks.org/theo-armour/163685de4d1fdacd70b2ffd446e8c874>
 
 View as [Gist]( https://help.github.com/articles/about-gists/ )
-
 
 Gists are a great way to share your work. You can share single files, parts of files, or full applications. You can access gists at https://gist.github.com.
 
@@ -195,9 +216,11 @@ Gists are a great way to share your work. You can share single files, parts of f
 
 
 
+***
 
-## To Do
+## To Do / Wish List Items
 
+Feel free to add new ideas
 
 ### Core
 
@@ -214,9 +237,7 @@ Gists are a great way to share your work. You can share single files, parts of f
 
 ### Settings
 
-
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
-
 
 
 ### Reports
@@ -230,7 +251,7 @@ Gists are a great way to share your work. You can share single files, parts of f
 ### First Person camera
 
 
-### Template
+### Templates
 
 
 ### Export gbXML files

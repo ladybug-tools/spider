@@ -73,12 +73,23 @@ function init() {
 
 				<summary>Screen Capture</summary>
 
-				<p><button onclick=setIframe(); >Set Iframe</button></p>
+				<p><button onclick=setIframe(); >1. Set Iframe</button></p>
 
-				<p><button onclick=updateScene(); >update scene</button></p>
+				<p><button onclick=updateScene(); >2. update scene</button></p>
 
-				<p><button onclick=capturer.start(); >capture start</button></p>
+				<p><button onclick=capturer.start(); >3. capture start</button></p>
 
+				<p>
+					Open the Developer Tools console to monitor progress of the animation creation.
+					Once the animation is created, you will be prompted to ave the file.
+				</p>
+
+				<p>
+					This module is still at a very early stage of development.
+					There are many more controls and features still to be added.
+				</p>
+				</details>` +
+/*
 				<p><button onclick="capturer.stop();step=-1;" >capture stop</button></p>
 
 				<p><button onclick=capturer.save(); >capture save</button></p>
@@ -101,8 +112,8 @@ function init() {
 				<p><button id=toggleVisible onclick = toggleHelpers(); >Toggle Helpers</button></p>
 
 				<div id = "contents" ></div>
+*/
 
-			</details>` +
 
 		divMenuItems.innerHTML;
 
