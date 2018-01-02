@@ -86,6 +86,7 @@ function init() {
 
 				<p>
 					This module is still at a very early stage of development.
+					The jiggling is an issue, but does not affect the GIF.
 					There are many more controls and features still to be added.
 				</p>
 				</details>` +
