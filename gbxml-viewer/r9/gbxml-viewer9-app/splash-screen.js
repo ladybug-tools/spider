@@ -18,6 +18,8 @@
 
 				<p>The big new feature is the screen capture utility. Now you can create animated GIFs from your files.</p>
 
+				<p>2018-01-02 ~ minor fixes throughout</p>
+
 			</details>
 
 		`;

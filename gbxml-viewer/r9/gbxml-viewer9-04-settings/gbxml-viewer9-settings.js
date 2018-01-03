@@ -13,7 +13,7 @@
 	var surfaceAdjacencyInvalids;
 	var surfaceCoordinateDuplicates;
 
-	var helperNormalsFaces
+	var helperNormalsFaces;
 
 	init();
 
@@ -105,6 +105,7 @@
 				'</details>' +
 
 				divMenuItems.innerHTML +
+
 			'';
 
 // following causes error when inside an iframe in a read me
