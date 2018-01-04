@@ -164,6 +164,7 @@
 			requestFile( url, callbackMarkdown );
 
 		} else if ( ulc.endsWith( '.html' ) ) {
+// needs revisiting so 'view-github-issues' scrolls more nicely
 
 			document.body.style.overflow = 'hidden';
 			divContents.innerHTML = '<iframe src=' + url + ' style=border:none;height:100%;width100%; ></iframe>';
