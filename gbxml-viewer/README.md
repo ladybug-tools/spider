@@ -11,11 +11,8 @@ _gbXML Viewer R9_
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
-* a glimpse of some of the things that have been happening recently with the gbXML Viewer.
+* News on what's happening with the gbXML Viewer.
 
-## Current Problems
-
-* Reports module appearing more than once
 
 ***
 
