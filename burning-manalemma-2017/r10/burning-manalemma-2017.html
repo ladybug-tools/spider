@@ -30,8 +30,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
 <script src = "burning-man-temple-2017.js" ></script>
 
 	<div id="header" >
@@ -88,7 +88,7 @@
 
 	'';
 
-	
+
 
 	function setContents( file ) {
 
@@ -104,9 +104,9 @@
 		folder = ( parent && parent.THREE ) ? '' : 'r' + revisionNumber + '/';
 //console.log( 'folder', folder );
 
-		if ( parent ) { 
+		if ( parent ) {
 
-			parent.ifrMenuSub.src = folder + file; 
+			parent.ifrMenuSub.src = folder + file;
 
 		} else {
 
@@ -159,7 +159,7 @@
 	var lights;
 	var lightAmbient, lightPointCamera, lightDirectional, cameraHelper;
 
-	var axisHelper;
+	var axesHelper;
 	var renderer, camera, controls, scene;
 
 	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi * 2;
@@ -405,14 +405,14 @@
 		var lights = new THREE.Object3D();
 		lights.name = 'lights';
 
-//		if ( !lightAmbient ) { 
+//		if ( !lightAmbient ) {
 
 			lightAmbient = new THREE.AmbientLight( 0x444444 );
 			lights.add( lightAmbient );
 
 //		}
 
-//		if ( !lightPointCamera ) { 
+//		if ( !lightPointCamera ) {
 
 			lightPointCamera = new THREE.PointLight( 0xffffff, 0.5 );
 			camera.add( lightPointCamera );
@@ -421,7 +421,7 @@
 
 //		}
 
-//		if ( !lightDirectional ) { 
+//		if ( !lightDirectional ) {
 
 			lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
 			lightDirectional.position.set( -size + 0.5 * groundSize, size, size + 0.5 * groundSize );
@@ -447,9 +447,9 @@
 
 	function drawHelpers() {
 
-		axisHelper = new THREE.AxisHelper( 100 );
-		axisHelper.name = 'axisHelper';
-		object3D.add( axisHelper );
+		axesHelper = new THREE.AxesHelper( 100 );
+		axesHelper.name = 'axesHelper';
+		object3D.add( axesHelper );
 
 	}
 
@@ -481,7 +481,7 @@
 
 	function getHeightMapData( map ) {
 
-//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox 
+//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox
 
 		let geometry, material;
 		let heightmapCanvas, heightmapContext;
@@ -780,7 +780,7 @@ console.log( 'json', i, json.features[ i ] );
 					structure.userData.geometryOriginal = structure.geometry.clone();
 					structures.add( structure );
 					parameters.structuresArray.push( structure );
-					
+
 				}
 
 			}
@@ -929,7 +929,7 @@ console.log( 'error', e, shape );
 		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 0, groundSize, groundSize ) ) );
 
 		lightDirectional.position.copy( controls.target.clone().add( new THREE.Vector3( -groundSize, groundSize, groundSize ) ) );
-		lightDirectional.target = axisHelper;
+		lightDirectional.target = axesHelper;
 
 		object3D.position.copy( center );
 

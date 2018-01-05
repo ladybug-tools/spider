@@ -23,16 +23,16 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "menu" >
 
 		<div id = "divTitle" ></div>
 		<p id=log >
 		<div id = "contents" >
-			<button onclick=drawSpheres() >draw spheres</button> 
-			<button onclick=drawBoxes() >draw boxes</button> 
+			<button onclick=drawSpheres() >draw spheres</button>
+			<button onclick=drawBoxes() >draw boxes</button>
  			<button onclick=drawCylinders() >draw Cylinders</button>
 		</div>
 
@@ -53,8 +53,8 @@
 
 	function init() {
 
-		divTitle.innerHTML = 
-			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' + 
+		divTitle.innerHTML =
+			'<h2><a  href = "" >' + document.title + '</a> &nbsp; ' +
 			'<a href=' + infoURI + ' target="top" >&#x24D8</a></h2>';
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
@@ -84,8 +84,8 @@
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-		const axisHelper = new THREE.AxisHelper( 60 );
-		scene.add( axisHelper );
+		const axesHelper = new THREE.AxesHelper( 60 );
+		scene.add( axesHelper );
 
 //		obj = drawCubes();
 //		scene.add( obj );
@@ -149,7 +149,7 @@
 
 		for ( let i = 0; i < splinePoints.length; i++ ) {
 
-			pt = splinePoints[i] 
+			pt = splinePoints[i]
 
 			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
@@ -227,7 +227,7 @@
 
 		for ( let i = 0; i < splinePoints.length; i++ ) {
 
-			pt = splinePoints[i] 
+			pt = splinePoints[i]
 
 			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
@@ -304,7 +304,7 @@
 
 		for ( let i = 0; i < splinePoints.length; i++ ) {
 
-			pt = splinePoints[i] 
+			pt = splinePoints[i]
 
 			material = new THREE.MeshPhongMaterial( {
 				color: 0xffffff,
