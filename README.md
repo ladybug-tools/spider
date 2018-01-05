@@ -10,12 +10,11 @@ _See also the files at the links below for glimpses of what will be showing up h
 * <http://www.ladybug.tools/ladybug-web/>
 -->
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-app/gbxml-viewer9.html#https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/Urban_House_MEP.xml width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
-_[gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer ) - view [gbXML]( http://www.gbxml.org ) files in 3D_
+<iframe class=iframeReadMe src=./plugins/iframe-carousel-r1.html width=100% height=480 ></iframe>
 
+_All of the above are embedded interactive scripts_
 
 <!-- This is a sample read me file Template.
-
 The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-more/#README.md )
  -->
 
@@ -24,6 +23,16 @@ The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-
 ### Issue / The problem to be solved
 
 The purpose of the Spider web presence is still a work-in-progress.
+
+The main issue is that much of the currently available software for carrying out building visualization and analysis is expensive, hardwired and not easily accessible.
+
+Solutions to these issues might include:
+
+Provide free, simple, easy-to access tools to enable analysis of building outcomes earlier in the design process - or even as a stimulator of the design process
+
+Offer easy-to-read code written so that designers and engineers may monitor, verify and enhance the efforts - and, yes, full stack developers are welcome too.
+
+Enable just-in-time custom solutions. Every building is both unique and standards-adherent. The visualization and analysis tools should be the same.
 
 <!-- The general idea is to adapt the practices developed in Christopher Alexander's _et al_ [A Pattern Language]( https://books.google.com/books?id=hwAHmktpk5IC&pg=PR10#v=onepage&q&f=false ) - as summarized on page 10.
 
@@ -68,17 +77,27 @@ Life here on Earth is quite amazing and enjoyable. We'd like to help make Earth 
 
 See also:
 
+Thoughts we like:
 * <https://readmetips.github.io/>
 * <https://opensource.guide/>
 * <https://www.w3schools.com/howto/>
-* https://glitch.com/
-* https://bl.ocks.org/
-* https://threejs.org/
-* https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+
+Technology that helps beginners build more technology
+
+* <https://glitch.com/>
+* <https://bl.ocks.org/>
+* <https://threejs.org/>
+* <https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API>
 
 
 ## Change Log
 _This particular change log mostly covers info in this read me. Most folders here each have their own equally fascinating read me file._
+
+
+### 2018-01-05 ~ Theo
+
+* Add carousel
+* Add text
 
 ### 2018-01-02 ~ Theo
 

@@ -4,6 +4,9 @@
 [Ladybug Tools > Spider > gbXML Viewer Read Me]( #README.md )
 ====
 
+## _This folder will be deprecated. Updates are at [gbXML Viewer]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/index.html#gbxml-viewer/README.md )_
+
+<hr>
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/index.html width=100% height=600px ></iframe>
 
@@ -113,7 +116,11 @@ types = [ 'InteriorWall', 'ExteriorWall', 'Roof', 'InteriorFloor', 'ExposedFloor
 * InteriorFloor
 * ExposedFloor
 * Shade
-* UndergroundWall* UndergroundSlab* Ceiling* Air* UndergroundCeiling
+* UndergroundWall
+* UndergroundSlab
+* Ceiling
+* Air
+* UndergroundCeiling
 * RaisedFloor
 * SlabOnGrade
 * FreestandingColumn
@@ -252,7 +259,7 @@ Documentation: The upper portion of the building envelope that is adjacent to tw
 
 ### Air
 
-Documentation: Air membrane between two conditioned or unconditioned spaces with a tilt between 0° and 180°. 
+Documentation: Air membrane between two conditioned or unconditioned spaces with a tilt between 0° and 180°.
 
 ### UndergroundCeiling
 
@@ -313,7 +320,7 @@ Documentation: Embedded column in wall specified by a surface which is coplanar 
 * Opens and displays local files using your file dialog box
 
 * gbXML Viewer 'Mostapha'.3
-* This is the first pass at adding colors(random), lights, shade and shadow. 
+* This is the first pass at adding colors(random), lights, shade and shadow.
 
 ### 2017-09-30 ~ Theo
 
@@ -343,7 +350,7 @@ Next release should have usual features plus: actual holes in the surfaces and n
 * Handles all sorts of polyloop types - with good speed
 * And I learned all about conjugating quaternions in the process ;-)
 
- 
+
 
 ### 2017-09-25 ~ Theo
 
@@ -361,7 +368,7 @@ Next release should have usual features plus: actual holes in the surfaces and n
 	* Drawing a higher percentage of elements as Three.js
 		* Some elements still flying off into space
 		* Lines are drawn when shape has not been generated
-	
+
 
 ### 2017-09-23 ~ Theo
 
@@ -398,7 +405,7 @@ Next release should have usual features plus: actual holes in the surfaces and n
 * Reports the number of polyloops drawn as lines only
 	* Mostly because number of vertices does equal 4
 
-Code can use a lot of clean up. 
+Code can use a lot of clean up.
 
 ### 2017-09-09 ~ Theo
 

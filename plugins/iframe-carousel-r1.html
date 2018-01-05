@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "web page carousel" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-01-04" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	iframe { border: none; margin: 0; }
+	iframe {
+		display: block;
+		border: 0;
+		-moz-transition:    all 1.9s;
+		-webkit-transition: all 1.9s;
+		-ms-transition:     all 1.9s;
+		-o-transition:      all 1.9s;
+		transition:         all 1.9s;
+		opacity: 1;
+
+	}
+	iframe.fade-out { opacity: 0; }
+	iframe.fade-in { opacity: 1; }
+
+</style>
+</head>
+<body>
+
+	<div id = "header" >
+		<div id = "title" ></div>
+		<div id = "contents" >
+		</div>
+	</div>
+
+	<iframe id=ifr width=100% height=480px ></iframe>
+
+<script>
+
+	const sites = [
+
+		{ fileName: 'http://www.ladybug.tools/spider/analemma3d/index.html#r20/analemma3d.html',
+			title: 'Analemma 3D' },
+		{ fileName: 'http://www.ladybug.tools/spider/build-well/r13/build-well.html',
+			title: 'Build Well' },
+		{ fileName: 'http://www.ladybug.tools/spider/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420', title: 'BurningmAnalemma' },
+		{ fileName: 'http://www.ladybug.tools/spider/cookbook/scatter-well/r1/index.html', title: 'Scatter Well' },
+		{ fileName: 'http://www.ladybug.tools/spider/gbxml-viewer', title: 'gbXML Viewer'}
+
+	];
+
+	let timer;
+	let index = Math.floor( Math.random() * sites.length );
+
+	init();
+
+	function init() {
+
+		clearInterval( timer );
+
+		displayNext();
+
+		timer = setInterval( displayNext, 10000 );
+
+	}
+
+
+	function displayNext() {
+
+		index = index >= sites.length ? 0 : index;
+
+		if ( ! sites[ index ].fileName ) { return; }
+
+
+		ifr.onload = function() { ifr.className = 'fade-in'; }
+
+		setTimeout( function(){ ifr.className = 'fade-out'; }, 8000);
+
+		ifr.src = sites[ index ].fileName;
+
+		index++;
+
+	}
+
+
+</script>
+</body>
+</html>
