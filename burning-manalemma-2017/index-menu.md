@@ -79,4 +79,4 @@
 [code of conduct ]( #../pages/code-of-conduct.md "Play hard and play fair" )
 [contributing    ]( #../pages/contributing.md "How to get started" )
 
-<h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/images/graph/ladybug.png width=36 title="Hi there!" ></h1>
+<h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/assets/img/ladybug.png width=36 title="Hi there!" ></h1>
