@@ -60,7 +60,7 @@ Selected destinations
 ### [Christ Redeemer, Rio di Janeiro]( #r20/analemma3d.html#latitude:-22.951916,longitude:-43.21048719999999,zoom:15,offsetUTC:-180 "7 structures" )
 
 ### [Tenzing-Hillary Airport, Nepal]( #r20/analemma3d.html#latitude:27.68777799999999,longitude:86.73138360000007,zoom:15,offsetUTC:345 "77 structures" )
- 
+
 
 ***
 
@@ -69,4 +69,4 @@ Selected destinations
 [contributing    ]( #../pages/contributing.md )
 <!-- [settings        ]( #menus/menu-settings.md ) -->
 
-<h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/images/graph/ladybug.png width=36 ></h1>
+<h1 style=text-align:center; ><img src=https://ladybug-tools.github.io/assets/img/ladybug.png width=36 ></h1>
