@@ -433,6 +433,8 @@
 
 		for ( let child of surfaceMeshesChildren ) {
 
+			if ( !child.userData.data ) { continue; }
+
 			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ff80ff' ); }
 
 		}
@@ -593,7 +595,7 @@
 							'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
 							: ''
 						) +
-						' area: ' + Number( surfaceArea ).toFixed( 1 ) + ' length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
+						' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
 						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
 					'<hr></div>';
 			}
@@ -602,6 +604,8 @@
 
 
 		for ( let child of surfaceMeshesChildren ) {
+
+			if ( !child.userData.data ) { continue; }
 
 			if ( surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }
 
@@ -649,7 +653,7 @@
 						'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
 						: ''
 					) +
-					' area: ' + Number( surfaceArea ).toFixed( 1 ) + ' length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
+					' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
 					( spaceId ? 'Space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
 
 				'</div>';
@@ -704,6 +708,8 @@
 
 		for ( let child of surfaceMeshesChildren ) {
 
+			if ( !child.userData.data ) { continue; }
+
 			if ( surfaceAdjacencyInvalids.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
 
 		}
@@ -734,6 +740,8 @@
 		}
 
 		for ( let child of surfaceMeshesChildren ) {
+
+			if ( !child.userData.data ) { continue; }
 
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId
 
@@ -848,6 +856,8 @@
 
 		for ( let child of surfaceMeshesChildren ) {
 
+			if ( !child.userData.data ) { continue; }
+
 			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === 'lightblue' ) {
 
 				child.visible = false;
@@ -869,6 +879,8 @@
 		surfaceGroup.visible = true;
 
 		for ( let child of surfaceMeshesChildren ) {
+
+			if ( !child.userData.data ) { continue; }
 
 			child.visible = false;
 
@@ -911,6 +923,9 @@
 
 		for ( let child of surfaceMeshesChildren ) {
 
+
+			if ( !child.userData.data ) { continue; }
+
 			if ( encodeURI( child.userData.data.CADObjectId ) === CADObjectId ) {
 
 				child.visible = true;
@@ -936,6 +951,8 @@
 			surfaceGroup.visible = true;
 
 			for ( let child of surfaceMeshesChildren ) {
+
+				if ( !child.userData.data ) { continue; }
 
 				if ( surfaceArray.includes( child.userData.data.Name ) ) {
 

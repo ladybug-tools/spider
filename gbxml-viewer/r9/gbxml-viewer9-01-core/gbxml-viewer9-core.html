@@ -554,6 +554,8 @@
 
 		for ( let child of surfaceMeshes.children ) {
 
+			if ( !child.userData.data ) { continue; }
+
 			child.material = new THREE.MeshPhongMaterial( {
 				color: colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true }
 			);
