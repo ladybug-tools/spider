@@ -18,15 +18,15 @@
 
 ### [Move / Travel]( #menus/menu-move.md )
 ### [Overlays]( #menus/menu-overlays.md )
-### [Analemma]( #menus/menu-analemma.md )
+### [Sun Path / Analemma]( #menus/menu-analemma.md )
 ### [Sun Range]( #menus/menu-sun-range.md )
 ### [Solar Access]( #menus/menu-solar-access.md )
-
+### [Screen Capture]( #dialog-screen-capture.md "Create an animated GIF" )
+<!--
 ### [Skew Test]( #menus/menu-skew-test.md )
 ### [EPW JSON]( #menus/menu-epw-json.md "EnergyPlus Weather Files in 3D" )
 ### [EPW Play Weather]( #menus/menu-epw-json-play.md "Play EPW Weather Files in 3D" )
-
-### [Screen Capture]( #dialog-screen-capture.md "Create an animated GIF" )
+-->
 
 ***
 
@@ -39,4 +39,4 @@
 [contributing    ]( #../foot-contributing.md )
 [settings        ]( #menus/menu-settings.md )
 
-<h1 style=text-align:center; ><img src=../images/ladybug-logo.png height=32 ></h1>
+<h1 style=text-align:center; ><img src=../../assets/img/ladybug.png height=32 ></h1>

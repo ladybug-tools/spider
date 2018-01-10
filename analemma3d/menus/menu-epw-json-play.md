@@ -44,4 +44,4 @@
 [contributing    ]( #../foot-contributing.md )
 [settings        ]( #menus/menu-settings.md )
 
-<h1 style=text-align:center; ><img src=../images/ladybug-logo.png height=32 ></h1>
+<h1 style=text-align:center; ><img src=../../assets/img/ladybug.png height=32 ></h1>
