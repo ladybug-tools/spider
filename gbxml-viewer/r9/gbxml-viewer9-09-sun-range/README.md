@@ -2,6 +2,7 @@
 
 # gbXML Viewer9 Sun Range Read Me
 
+## Beginning to work but still many issues. Code needs big cleanup
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-09-sun-range/test-gbxml-viewer9-sun-range.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 

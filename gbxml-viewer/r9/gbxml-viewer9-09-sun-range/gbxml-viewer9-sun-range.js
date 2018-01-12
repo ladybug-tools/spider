@@ -40,19 +40,22 @@
 
 	var controls;
 	var lightDirectional;
+	var lightPointCamera;
 	var cameraHelper;
 
-	var object3D;
+
 	var structures;
 	var ground;
 
 	var sun;
 	var analemma;
+	var analemmaRadius = 80;
 
-	var daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-
-	var rafPlayTheYear;
-	var playTheYear = false;
+	var suns;
+	var sunHelpers = [];
+	var lights;
+	var sunRangeLightIntensity = 0.6;
+	var lightAmbientIntensity = 100;
 
 	var count = 0;
 
@@ -106,12 +109,17 @@
 			THREE = icw.THREE;
 			renderer = icw.renderer;
 			scene = icw.scene;
+			camera = icw.camera;
 			gbjson = icw.gbjson;
+
+			parameters.latitude = gbjson.Campus.Location.Latitude
+			parameters.longitude = gbjson.Campus.Location.Longitude;
 
 			surfaceMeshes = icw.surfaceMeshes;
 
 			controls = icw.controls;
 			lightDirectional = icw.lightDirectional;
+			lightAmbient = icw.lightAmbient;
 			cameraHelper = icw.cameraHelper;
 
 
@@ -145,8 +153,6 @@
 
 
 	function initSunRange() {
-
-
 
 /*
 		parameters.date = 21;
@@ -261,8 +267,8 @@
 
 		}
 
-		object3D.remove( analemma );
-		object3D.add( analemma );
+		scene.remove( analemma );
+		scene.add( analemma );
 
 	}
 
@@ -273,13 +279,13 @@
 		var sun, sunHelper, dateThere, d;
 		let geometry, material, mesh;
 
-		pmc.scene.remove( pmc.lightDirectional, pmc.lightAmbient );
-		pmc.scene.remove( pmc.lights );
+		scene.remove( lightDirectional, lightAmbient );
+		scene.remove( lights );
 
-		pmc.object3D.remove( pmc.lights );
-		pmc.camera.remove( pmc.lightPointCamera );
+		scene.remove( lights );
+		camera.remove( lightPointCamera );
 
-		pmc.lights = new THREE.Object3D();
+		lights = new THREE.Object3D();
 
 //console.log( '', scene.children );
 
@@ -309,11 +315,11 @@
 		par.sunRangeCount = 11;
 
 
-		pmc.lightAmbient = new THREE.AmbientLight();
+		lightAmbient = new THREE.AmbientLight();
 		c = par.lightAmbientColor;
-		pmc.lightAmbient.color = new THREE.Color( 'rgb( ' + c + ',' + c + ',' + c + ' )' );
+		lightAmbient.color = new THREE.Color( 'rgb( ' + c + ',' + c + ',' + c + ' )' );
 
-		pmc.lights.add( pmc.lightAmbient );
+		lights.add( lightAmbient );
 
 		suns = []; //new THREE.Object3D();
 
@@ -344,7 +350,7 @@
 			mesh = new THREE.Mesh( geometry, material );
 			sun.add( mesh );
 
-			pmc.lights.add( sun );
+			lights.add( sun );
 			suns.push( sun );
 /*
 			if ( par.sunRangeHelpers === 1 ) {
@@ -367,7 +373,7 @@
 
 //console.log( 'sun.userData.position', sun.userData.position);
 
-			sun.position.copy( pmc.ground.position.clone().add( sun.userData.position.xyz )  );
+			sun.position.copy( icw.axesHelper.position.clone().add( sun.userData.position.xyz )  );
 
 			if ( par.sunRangePlacards === 1 ) {
 
@@ -383,7 +389,7 @@
 
 //		lights.add( suns );
 
-		pmc.object3D.add( pmc.lights );
+		scene.add( lights );
 
 	}
 
@@ -395,7 +401,7 @@
 
 		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-//		pmc.parameters.month = parseInt( inpMonth.value, 10 );
+//		parameters.month = parseInt( inpMonth.value, 10 );
 
 		outMonth.value = parseInt( inpMonth.value, 10 ) + 1;
 
@@ -427,7 +433,7 @@
 
 		outAmbientIntensity.value = par.lightAmbientIntensity = parseFloat( inpAmbientIntensity.value );
 
-		pmc.lightAmbient.color = new THREE.Color( "rgb( " + par.lightAmbientIntensity + ',' + par.lightAmbientIntensity + ',' + par.lightAmbientIntensity + " )" );
+		lightAmbient.color = new THREE.Color( "rgb( " + par.lightAmbientIntensity + ',' + par.lightAmbientIntensity + ',' + par.lightAmbientIntensity + " )" );
 
 		for ( var i = 0; i < suns.length; i++ ) {
 
