@@ -3,10 +3,10 @@
 # gbXML Viewer9 Sun Range Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-tange.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-09-sun-range/test-gbxml-viewer9-sun-range.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer9 Sun Range]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.html )
+## Full screen: [gbXML Viewer9 Sun Range]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-09-sun-range/test-gbxml-viewer9-sun-range.html )
 
 Use and share this link for gbXML Viewer:
 
