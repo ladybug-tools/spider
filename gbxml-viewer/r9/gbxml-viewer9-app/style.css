@@ -11,6 +11,7 @@
 	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
+
 	button, input[ type=button ] { background-color: #888; border: none; color: var( --mnu-color ); cursor: pointer; margin: 2px; padding: 3px 20px; }
 	button:hover { background-color: #ccc; color: white }
 

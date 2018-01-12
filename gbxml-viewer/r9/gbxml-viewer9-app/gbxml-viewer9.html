@@ -74,6 +74,13 @@
 				script.src = '../gbxml-viewer9-07-analemma/gbxml-viewer9-analemma.js'; " >
 			sun-path / analemma</button>
 
+			<button id=butSunRange onclick="
+			const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
+			sun-range</button>
+
 			<button id=butScreenCapture onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
