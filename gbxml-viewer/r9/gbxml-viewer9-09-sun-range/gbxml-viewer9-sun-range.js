@@ -1,4 +1,25 @@
 
+	var defaultLatitude = 37.796;
+	var defaultLongitude = -122.398;
+
+//	const defaultLatitude = 40.786944;
+//	const defaultLongitude = -119.204444;
+
+	var defaultOffsetUTC = 0;
+
+	var parameters = {};
+//	parameters.zoom = 16;
+//	parameters.latitude = defaultLatitude;
+//	parameters.longitude = defaultLongitude;
+//	parameters.groundSize = 10;
+	parameters.analemmaRadius = 80; // 0.8 * parameters.groundSize;
+
+	parameters.offsetUTC = defaultOffsetUTC;
+
+//	parameters.date = 21;
+//	parameters.month =12;
+//	parameters.hour = 12 - parameters.offsetUTC / 60;
+//	parameters.minutes = 0;
 
 	var icw;
 	var THREE;
@@ -7,62 +28,32 @@
 	var camera;
 	var controls;
 
-	var gbxml;
 	var gbjson;
 
 	var surfaceGroup;
 	var surfaceMeshes;
-	var surfaceMeshesChildren;
-	var surfaceEdges;
+//	var surfaceMeshesChildren;
+//	var surfaceEdges;
 
-
-	var defaultLatitude = 37.796;
-	var defaultLongitude = -122.398;
-
-//	const defaultLatitude = 40.786944;
-//	const defaultLongitude = -119.204444;
-	var defaultOffsetUTC = -420;
-
-
-	var parameters = {};
-	parameters.zoom = 16;
-	parameters.latitude = defaultLatitude;
-	parameters.longitude = defaultLongitude;
-	parameters.groundSize = 10;
-	parameters.analemmaRadius = 0.8 * parameters.groundSize;
-
-	parameters.offsetUTC = 0;
-
-	parameters.date = 21;
-	parameters.month =12;
-	parameters.hour = 12 - parameters.offsetUTC / 60;
-	parameters.minutes = 0;
-
-	var controls;
 	var lightDirectional;
 	var lightPointCamera;
 	var cameraHelper;
+//	var structures;
+//	var ground;
 
-
-	var structures;
-	var ground;
-
-	var sun;
+//	var sun;
 	var analemma;
-	var analemmaRadius = 80;
+//	var analemmaRadius = 80;
 
 	var suns;
-	var sunHelpers = [];
+//	var sunHelpers = [];
+
 	var lights;
 	var sunRangeLightIntensity = 0.6;
 	var lightAmbientIntensity = 100;
 
 	var count = 0;
-
-	var menuItems =
-`
-
-
+	var menuItems = `
 		<details id = detSunRange open >
 			<summary>Sun Range</summary>
 
@@ -110,18 +101,17 @@
 			renderer = icw.renderer;
 			scene = icw.scene;
 			camera = icw.camera;
-			gbjson = icw.gbjson;
-
-			parameters.latitude = gbjson.Campus.Location.Latitude
-			parameters.longitude = gbjson.Campus.Location.Longitude;
-
-			surfaceMeshes = icw.surfaceMeshes;
-
 			controls = icw.controls;
+
 			lightDirectional = icw.lightDirectional;
 			lightAmbient = icw.lightAmbient;
 			cameraHelper = icw.cameraHelper;
 
+			surfaceMeshes = icw.surfaceMeshes;
+
+			gbjson = icw.gbjson;
+			parameters.latitude = gbjson.Campus.Location.Latitude
+			parameters.longitude = gbjson.Campus.Location.Longitude;
 
 			inpMonth.onchange = setMonth;
 			inpMonth.value = 11;
@@ -130,9 +120,6 @@
 			inpDate.onchange = setDate;
 			inpDate.value = 21;
 			outDate.value = 21;
-
-
-
 
 // following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
@@ -148,7 +135,6 @@
 		}
 
 	}
-
 
 
 
@@ -213,7 +199,7 @@
 
 					analemmaDateUTC = new Date( Date.UTC( year, month, date, hour, 0, 0 ) );
 
-					analemma.sunPosition = getSunPositionXYZ( analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
+					analemma.sunPosition = getSunPositionXYZ( parameters.analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
 
 					vertices.push( analemma.sunPosition.xyz );
 
@@ -254,7 +240,7 @@
 			for ( hours = 0; hours < 24; hours++ ) {
 
 				analemmaDateUTC = new Date( Date.UTC( year, month, 21, hours, 0, 0 ) );
-				analemmaSunPosition = getSunPositionXYZ( analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
+				analemmaSunPosition = getSunPositionXYZ( parameters.analemmaRadius, analemmaDateUTC, parameters.latitude, parameters.longitude );
 
 				vertices.push( analemmaSunPosition.xyz );
 
@@ -266,6 +252,8 @@
 			analemma.add( line );
 
 		}
+
+		analemma.position.copy( icw.axesHelper.position.clone() );
 
 		scene.remove( analemma );
 		scene.add( analemma );
@@ -369,7 +357,7 @@
 
 			dateThere = new Date( Date.UTC( par.year, par.month, par.date, par.sunRangeStart - par.offsetThere, par.minutes + i * par.sunRangeMinutes ) );
 
-			sun.userData.position = getSunPositionXYZ( analemmaRadius, dateThere, parameters.latitude, parameters.longitude );
+			sun.userData.position = getSunPositionXYZ( parameters.analemmaRadius, dateThere, parameters.latitude, parameters.longitude );
 
 //console.log( 'sun.userData.position', sun.userData.position);
 
@@ -399,13 +387,13 @@
 
 	function setMonth() {
 
-		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
+//		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
 //		parameters.month = parseInt( inpMonth.value, 10 );
 
 		outMonth.value = parseInt( inpMonth.value, 10 ) + 1;
 
-//		drawSunRange();
+		drawSunRange();
 
 // console.log( '', parent.ifrMain.contentWindow.parameters.month );
 
@@ -415,11 +403,11 @@
 
 	function setDate() {
 
-		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return }
+//		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return }
 
 		outDate.value = parseInt( inpDate.value, 10 );
 
-//		drawSunRange();
+		drawSunRange();
 
 // console.log( '', parent.ifrMain.contentWindow.parameters.date );
 
@@ -520,7 +508,7 @@
 
 		var sunPosition, x, y, z;
 
-		sunPosition = getSunPosition( timeThere, latitude - 90, longitude ); // from solar-calculator ... .js
+		sunPosition = getSunPosition( timeThere, latitude, longitude ); // from solar-calculator ... .js
 
 		x = radius * Math.cos( sunPosition.altitude * d2r ) * Math.sin( sunPosition.azimuth * d2r );
 		y = radius * Math.cos( sunPosition.altitude * d2r ) * Math.cos( sunPosition.azimuth * d2r );
