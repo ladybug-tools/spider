@@ -76,6 +76,12 @@ Create eleven suns casting shadows
 
 ## Change Log
 
+2018-01-16 ~ Theo
+
+need to add
+
+https://developers.google.com/maps/documentation/timezone/intro
+
 
 ### 2018-01-13 ~ Theo
 
