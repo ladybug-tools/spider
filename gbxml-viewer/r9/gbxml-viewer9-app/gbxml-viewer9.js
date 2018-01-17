@@ -1,5 +1,5 @@
 
-	let uriDefaultFile = '../README.md';
+	let uriDefaultFile = '../../README.md';
 
 //	location.hash = 'threejs-basic.html';
 
@@ -7,12 +7,10 @@
 	var threeDefaultFile = '../gbxml-viewer9-01-core/gbxml-viewer9-core.html';
 
 
+
 	init();
 
 	function init() {
-
-
-
 
 /// contents
 
@@ -69,7 +67,7 @@
 
 	function drop( event ) {
 
-		event.preventDefault(); 
+		event.preventDefault();
 		setIfrThree();
 
 		var iframeUrl = event.dataTransfer.getData( 'URL' );

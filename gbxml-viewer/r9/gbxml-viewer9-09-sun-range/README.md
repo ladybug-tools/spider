@@ -52,6 +52,7 @@ Create eleven suns casting shadows
 * Press Control-U/Command-Option-U to view the source code
 * Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
 
+
 ## Links of Interest
 
 * [Wikipedia Sun Path]( https://en.wikipedia.org/wiki/Sun_path )
@@ -70,13 +71,20 @@ Create eleven suns casting shadows
 
 ## Issues
 
-* 2018-01-13 ~ Not updating Sun Range when new model loaded
 * 2018-01-13 ~ possible to enter invalid dates
 
 
 ## Change Log
 
-2018-01-16 ~ Theo
+
+### 2018-01-17 ~ Theo
+
+* Add get UTC offset from Google Maps API
+
+Done
+* 2018-01-13 ~ Not updating Sun Range when new model loaded
+
+### 2018-01-16 ~ Theo
 
 need to add
 

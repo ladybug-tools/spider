@@ -1,10 +1,10 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
 
 
-# gbXML Viewer9 Read Me
+# gbXML Viewer Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px >Iframes are not displayed on github.com</iframe>
-_gbXML Viewer R9_
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+_gbXML Viewer R9 Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
 
 ## Full screen: [gbXML Viewer9]( http://www.ladybug.tools/spider/gbxml-viewer/ )
@@ -56,8 +56,16 @@ Below there are links to some of the latest files. R8 is that latest release and
 
 
 
-## View Sample gbXML Files
+## Things you can do using this script
 
+* Use one/two/three fingers to rotate/zoom/pan the display in 3D
+	* Or left/scroll/right with your pointing device
+* Click the three bars( 'hamburger menu icon' ) to slide the menu in and out
+* Click the [Stats]( https://github.com/mrdoob/stats.js/ ) box in the footer to toggle FPS / MS / MB views
+* Press Control-U/Command-Option-U to view the source code
+* Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
+
+### View Sample gbXML Files
 
 The [gbXML Sample Files folder]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/gbxml-sample-files/README.md ) has links to a number of files you may view.
 
@@ -188,7 +196,18 @@ The various modules are described below.
 
 #### Full screen test: [Test gbxml Viewer9 Analemma]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-07-analemma/test-gbxml-viewer9-analemma.html )
 
-See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.md )
+See also [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.md )
+
+
+
+### Sun Range
+
+#### [gbXML Viewer9 Sun Range Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r9/gbxml-viewer9-09-sun-range/README.md )
+
+#### Full screen test: [Test gbxml Viewer9 Sun Range]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-09-sun-range/test-gbxml-viewer9-sun-range.html )
+
+See also [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.md )
+
 
 
 ### Screen Capture
@@ -277,8 +296,19 @@ Will most likely build upon
 
 * [create exportable buildings]( https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings )
 
+***
 
 ## Change Log
+
+## 2018-01-17 ~ Theo
+
+* App R9.3
+* Add Octocat link to App menu
+* Change default read me from release read me to main read me
+* Read me iframe link from App to Core
+* Add link to release red me on menu
+* Add Sun Range links to read me
+
 
 ## 2018-01-02 ~ Theo
 

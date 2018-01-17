@@ -78,6 +78,10 @@
 
 			</p>
 
+			<div id=logLocation ></div>
+
+			<hr>
+
 			<p>
 			</i>Setting the light intensities properly is still not easy enough. Updating month & date: has isues with lights</i>
 			</p>
@@ -120,6 +124,12 @@
 			inpDate.onchange = setDate;
 			inpDate.value = 21;
 			outDate.value = 21;
+
+			const now = Math.floor( Date.now() / 1000 );
+			const url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' +
+			parameters.latitude + ',' + parameters.longitude + '&timestamp=' + now;
+
+			requestFile( url, callbackUtcOffset );
 
 // following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
@@ -499,6 +509,44 @@
 			return texture;
 
 		}
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+
+	function callbackUtcOffset( xhr ) {
+
+		const response = xhr.target.response;
+//console.log( 'response', response );
+
+		const json = JSON.parse( response );
+//console.log( 'json', json );
+
+		parameters.offsetUTC = json.rawOffset / 60;
+
+		logLocation.innerHTML =
+
+			'<p>Latitude: ' + parameters.latitude + '</p>' +
+
+			'<p>Longitude: ' + parameters.longitude + '</p>' +
+
+			'<p>UTC offset: ' + parameters.offsetUTC + '</p>' +
+
+		'';
 
 	}
 
