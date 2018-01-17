@@ -1,15 +1,15 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/gbxml-viewer/index.html#README.md "View file as a web page." ) </span>
 
-# gbXML Viewer9 Release 9 Read Me
+# gbXML Viewer Release 9 Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
 _[gbXML Viewer9 Core]( gbxml-viewer9-01-core/gbxml-viewer9-core.html ) ~ click the 'view model' button in left menu to view full screen_
 
-## Full screen: [gbXML Viewer9 App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen: [gbXML Viewer Release 9 App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
 
-## Full screen: [gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer8-core.html )
+## Full screen: [gbXML Viewer Release 9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer8-core.html )
 
 The Ladybug Tools/Spider [gbXML]( http://www.gbxml.org/ ) Viewer is a folder of scripts that enable you to see text data files for buildings as a full 3D renderings.
 
