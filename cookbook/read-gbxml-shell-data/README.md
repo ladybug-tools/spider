@@ -8,7 +8,7 @@
 _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 
-## Full Screen: [Read gbXML Shell Data]( http://www.ladybug.tools/spider/#cookbook/read-gbxml-shell-data/read-gbxml-shell-data.html )
+## Full Screen: [Read gbXML Shell Data]( http://www.ladybug.tools/spider/cookbook/read-gbxml-shell-data/read-gbxml-shell-data.html )
 
 
 ## Concept
