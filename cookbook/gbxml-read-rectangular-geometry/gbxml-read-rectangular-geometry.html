@@ -37,11 +37,11 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 
 		<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 
-		<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>
+		<button onclick=rectangleMeshes.visible=!rectangleMeshes.visible; >surfaces</button>
 
-		<button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>
+		<button onclick=rectangleEdges.visible=!rectangleEdges.visible; >edges</button>
 
-		<button onclick=setAllVisible();zoomObjectBoundingSphere(surfaceMeshes); >reset view</button>
+		<button onclick=setAllVisible();zoomObjectBoundingSphere(rectangleMeshes); >reset view</button>
 
 	</p>
 
@@ -61,12 +61,8 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 	var gbjson;
 
 // add surface group to r9?
-	var surfaceMeshes;
-	var surfaceEdges;
-
-	var surfaceAdjacencyDuplicates;
-	var surfaceAdjacencyInvalids;
-	var surfaceCoordinateDuplicates;
+	var rectangleMeshes;
+	var rectangleEdges;
 
 	var colors = {
 
@@ -244,7 +240,7 @@ function onWindowLoad() {
 	function parseFileXML( xmlNode ) {
 
 		gbjson = XML2jsobj( xmlNode );
-		//console.log( 'gbjson', gbjson );
+//console.log( 'gbjson', gbjson );
 
 		parseGbJson( gbjson );
 
@@ -253,6 +249,8 @@ function onWindowLoad() {
 		return gbjson;
 
 	}
+
+
 
 // https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
 // http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
@@ -315,41 +313,39 @@ function onWindowLoad() {
 
 	function parseGbJson( gbjson ) {
 
-console.log( 'gbjson', gbjson.Campus.Building.Space );
+console.log( 'gbjson', gbjson );
 
-		const spaces = gbjson.Campus.Building.Space;
+		surfaces = gbjson.Campus.Surface;
 
-		let polyloops = [];
-		let openings = [];
+/*
+		let rectangles = [];
 
-		for ( let space of spaces ) {
+		for ( let surface of surfaces ) {
 
-//console.log( 'geo', space.ShellGeometry.ClosedShell.PolyLoop );
+//console.log( 'surface', surface );
 
-			shell = space.ShellGeometry.ClosedShell.PolyLoop;
+			rectangle = surface.RectangularGeometry;
 
-//console.log( 'shell', shell );
+//console.log( 'rectangle', rectangle );
 
-			for ( polyloop of shell ) {
+			const point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
 
-//console.log( 'polyloop', polyloop );
+//console.log( 'point', point );
 
-				points = getPoints( polyloop );
-
-			polyloops.push( points );
-			}
+			rectangles.push( rectangle );
 
 
 		}
 
-console.log( 'polyloops', polyloops );
+console.log( 'rectangles', rectangles );
+*/
 
 
-	scene.remove( surfaceMeshes, surfaceEdges );
+	scene.remove( rectangleMeshes, rectangleEdges );
 
-	if ( surfaceMeshes ) {
+	if ( rectangleMeshes ) {
 
-		surfaceMeshes.traverse( function ( child ) {
+		rectangleMeshes.traverse( function ( child ) {
 
 			if ( child.geometry ) {
 
@@ -365,10 +361,9 @@ console.log( 'polyloops', polyloops );
 	}
 
 
+	if ( rectangleEdges ) {
 
-	if ( surfaceEdges ) {
-
-		surfaceEdges.traverse( function ( child ) {
+		rectangleEdges.traverse( function ( child ) {
 
 			if ( child.geometry ) {
 
@@ -381,32 +376,43 @@ console.log( 'polyloops', polyloops );
 
 	}
 
-		surfaceMeshes = new THREE.Object3D();
-		surfaceMeshes.name = 'surfaceMeshes';
+		rectangleMeshes = new THREE.Object3D();
+		rectangleMeshes.name = 'rectangleMeshes';
 
-		surfaceEdges = new THREE.Object3D();
-		surfaceEdges.name = 'surfaceEdges';
+		rectangleEdges = new THREE.Object3D();
+		rectangleEdges.name = 'rectangleEdges';
 
-		for ( let i = 0; i < polyloops.length; i++ ) {
+		for ( let i = 0; i < surfaces.length; i++ ) {
 
-			const material = new THREE.MeshPhongMaterial( { side: 2, opacity: 0.85, transparent: true } );
+			surface = surfaces[ i ];
+			const rectangle = surface.RectangularGeometry;
+			const width = parseFloat( rectangle.Width );
+			const height = parseFloat( rectangle.Height );
+			const material = new THREE.MeshPhongMaterial( { color: colors[ surface.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+			const geometry = new THREE.PlaneGeometry( width, height);
 
-			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
-//			shape.userData.data = surfaces[ i ];
-			shape.castShadow = shape.receiveShadow = true;
-			surfaceMeshes.add( shape );
+			const rectangleMesh = new THREE.Mesh( geometry, material );
+			const point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
+			rectangleMesh.position.set( point.x - 0.5 * width, point.y, point.z - 0.5 * height );
+			const azimuth = parseFloat( rectangle.Azimuth ) * Math.PI / 180;
+			const tilt = parseFloat( rectangle.Tilt ) * Math.PI / 180;
+			rectangleMesh.rotation.set( tilt, 0, azimuth );
+			rectangleMesh.userData.data = surface;
+			rectangleMesh.castShadow = rectangleMesh.receiveShadow = true;
+			rectangleMeshes.add( rectangleMesh );
 
-			const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
-			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
-			surfaceEdge.rotation.copy( shape.rotation );
-			surfaceEdge.position.copy( shape.position );
-			surfaceEdges.add( surfaceEdge );
+			const edgesGeometry = new THREE.EdgesGeometry( rectangleMesh.geometry );
+			const rectangleEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
+			rectangleEdge.rotation.copy( rectangleMesh.rotation );
+			rectangleEdge.position.copy( rectangleMesh.position );
+			rectangleEdges.add( rectangleEdge );
 
 		}
 
-		scene.add( surfaceMeshes, surfaceEdges );
+		scene.add( rectangleMeshes, rectangleEdges );
 
-		zoomObjectBoundingSphere( surfaceMeshes );
+		zoomObjectBoundingSphere( rectangleMeshes );
+
 
 	}
 
@@ -531,11 +537,11 @@ console.log( 'polyloops', polyloops );
 
 	function setAllVisible() {
 
-		surfaceMeshes.visible = true;
+		rectangleMeshes.visible = true;
 
 		document.body.style.backgroundImage = '';
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of rectangleMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -547,9 +553,9 @@ console.log( 'polyloops', polyloops );
 
 		};
 
-		surfaceEdges.visible = true;
+		rectangleEdges.visible = true;
 
-		for ( let child of surfaceEdges.children ) {
+		for ( let child of rectangleEdges.children ) {
 
 		//			child.material.opacity = 0.85;
 			child.material.wireframe = false;
