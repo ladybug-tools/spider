@@ -317,40 +317,64 @@ console.log( 'gbjson', gbjson );
 
 		surfaces = gbjson.Campus.Surface;
 
-		scene.remove( rectangleMeshes, rectangleEdges );
+/*
+		let rectangles = [];
 
-		if ( rectangleMeshes ) {
+		for ( let surface of surfaces ) {
 
-			rectangleMeshes.traverse( function ( child ) {
+//console.log( 'surface', surface );
 
-				if ( child.geometry ) {
+			rectangle = surface.RectangularGeometry;
 
-					child.geometry.dispose();
-					child.material.dispose();
+//console.log( 'rectangle', rectangle );
 
-				}
+			const point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
 
-				if ( child.texture ) { child.texture.dispose(); }
+//console.log( 'point', point );
 
-			} );
+			rectangles.push( rectangle );
+
 
 		}
 
+console.log( 'rectangles', rectangles );
+*/
 
-		if ( rectangleEdges ) {
 
-			rectangleEdges.traverse( function ( child ) {
+	scene.remove( rectangleMeshes, rectangleEdges );
 
-				if ( child.geometry ) {
+	if ( rectangleMeshes ) {
 
-					child.geometry.dispose();
-					child.material.dispose();
+		rectangleMeshes.traverse( function ( child ) {
 
-				}
+			if ( child.geometry ) {
 
-			} );
+				child.geometry.dispose();
+				child.material.dispose();
 
-		}
+			}
+
+			if ( child.texture ) { child.texture.dispose(); }
+
+		} );
+
+	}
+
+
+	if ( rectangleEdges ) {
+
+		rectangleEdges.traverse( function ( child ) {
+
+			if ( child.geometry ) {
+
+				child.geometry.dispose();
+				child.material.dispose();
+
+			}
+
+		} );
+
+	}
 
 		rectangleMeshes = new THREE.Object3D();
 		rectangleMeshes.name = 'rectangleMeshes';
@@ -362,18 +386,17 @@ console.log( 'gbjson', gbjson );
 
 			surface = surfaces[ i ];
 			const rectangle = surface.RectangularGeometry;
-			width = parseFloat( rectangle.Width );
+			const width = parseFloat( rectangle.Width );
 			const height = parseFloat( rectangle.Height );
 			const material = new THREE.MeshPhongMaterial( { color: colors[ surface.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 			const geometry = new THREE.PlaneGeometry( width, height);
 
-			rectangleMesh = new THREE.Mesh( geometry, material );
-			point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
-//			rectangleMesh.position.set( parseFloat( point.x - 0.5 * width, point.y, point.z - 0.5 * height );
-			rectangleMesh.position.set( parseFloat( point.x ), parseFloat( point.y ), parseFloat( point.z ) );
+			const rectangleMesh = new THREE.Mesh( geometry, material );
+			const point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
+			rectangleMesh.position.set( point.x - 0.5 * width, point.y, point.z - 0.5 * height );
 			const azimuth = parseFloat( rectangle.Azimuth ) * Math.PI / 180;
 			const tilt = parseFloat( rectangle.Tilt ) * Math.PI / 180;
-			rectangleMesh.rotation.set( tilt, 0 ,azimuth );
+			rectangleMesh.rotation.set( tilt, 0, azimuth );
 			rectangleMesh.userData.data = surface;
 			rectangleMesh.castShadow = rectangleMesh.receiveShadow = true;
 			rectangleMeshes.add( rectangleMesh );

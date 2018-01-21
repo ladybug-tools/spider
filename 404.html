@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<meta name=author content='Theo Armour' >
+<title></title>
+</head>
+<body>
+<script>
+// Welcome. Anybody who looks at the source code of other people's error pages must be wonderful.
+
+	document.body.style.cssText = ' font: bold 12pt monospace; ';
+
+	const user = 'ladybug-tools';
+	const repo = '/spider';
+	const info = document.body.appendChild( document.createElement( 'div' ) );
+
+	document.title = '404 for ' + user + repo
+	info.innerHTML =
+
+	'<center><h1 title="This is the 404 Error page" >Oops</h1>' +
+		'<p>Website: <a href=http://' + user + '.github.io' + repo + ' title="Go to the apps" >' + user + '.github.io</a></p>' +
+		'<p>Source code: <a href=https://github.com/' + user + repo + ' title="Go to the source code" >github.com/' + user + repo + '</a></p>' +
+	'</center>';
+
+</script>
+</body>
+</html>

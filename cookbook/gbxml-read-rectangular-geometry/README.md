@@ -26,6 +26,16 @@ Open a gbXML file, identify its rectangular geometry data and display this in in
 
 ## Change Log
 
+### 2018-01-21 ~ Theo
+
+All the surfaces appear in a nice speedy manner.
+
+But: Having many issues because gbXML interpret XYZ origin, origin offset, rotation and rotation origin in different ways.
+
+Need to start with a very simple gbXML object - perhaps just a plane or cube - and work from there.
+
+
+
 ### 2018-01-19 ~ Theo
 
 * First commit
