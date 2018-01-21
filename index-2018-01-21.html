@@ -150,22 +150,18 @@
 
 		} else {
 
-//https://rawgit.com/ladybug-tools/spider/master
-
 			url = location.hash.slice( 1 );
 			ulc = url.toLowerCase();
 
-console.log( 'url', url );
+			crumbs = url.lastIndexOf( '/' ) > 0 ? url.slice( 0, url.lastIndexOf( '/' ) ) : '';
 
-//			crumbs = url.lastIndexOf( '/' ) > 0 ? url.slice( 0, url.lastIndexOf( '/' ) ) : '';			start =  url.lastIndexOf( '/' );
-			crumbs = url.startsWith( 'https://' ) ? url.slice( 47 ) : url;
-			crumbs2 = crumbs.lastIndexOf( '/' ) > 0 ? crumbs.slice( 0, crumbs.lastIndexOf( '/' ) ) : '';
+//console.log( url.lastIndexOf( '/' ), crumbs );
 
-console.log( 'crumbs2',  crumbs2 );
-			setBreadcrumbs( crumbs2 );
+			setBreadcrumbs( crumbs );
 
-//			requestFile( urlGitHubApiContents + url.slice( 0, url.lastIndexOf( '/' ) + 1 ), callbackGitHubMenu );
-			requestFile( urlGitHubApiContents + crumbs2, callbackGitHubMenu );
+//console.log( 'crumbs',  crumbs );
+
+			requestFile( urlGitHubApiContents + url.slice( 0, url.lastIndexOf( '/' ) + 1 ), callbackGitHubMenu );
 
 		}
 
@@ -174,7 +170,6 @@ console.log( 'crumbs2',  crumbs2 );
 			requestFile( url, callbackMarkdown );
 
 		} else if ( ulc.endsWith( '.html' ) ) {
-
 // needs revisiting so 'view-github-issues' scrolls more nicely
 
 			document.body.style.overflow = 'hidden';
@@ -197,7 +192,6 @@ console.log( 'crumbs2',  crumbs2 );
 	function getFolderContents( path = '' ) {
 
 		const url = urlGitHubApiContents + path;
-//		const url = path;
 
 		requestFile( url, callbackGitHubMenu );
 
@@ -282,13 +276,13 @@ console.log( 'crumbs2',  crumbs2 );
 						'<td>' +
 
 // choose to access remote or local files
-							'<a href=#' + urlGitHubPage + pathRepo + itemPath +
-//							'<a href=#' + itemPath +
+//							'<a href=#' + urlGitHubPage + pathRepo + itemPath +
+							'<a href=#' + itemPath +
 
 							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
 // choose to access remote or local files
-							( item.path.endsWith( 'html' ) ? '<a href=' + urlGitHubPage + pathRepo + itemPath + ' >&#x2750;</a>' : '' ) +
-//							( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
+//							( item.path.endsWith( 'html' ) ? '<a href=' + urlGitHubPage + pathRepo + itemPath + ' >&#x2750;</a>' : '' ) +
+							( item.path.endsWith( 'html' ) ? '<a href=' + itemPath + ' >&#x2750;</a>' : '' ) +
 
 						'</td>' +
 
@@ -297,8 +291,8 @@ console.log( 'crumbs2',  crumbs2 );
 				if ( ( !location.hash || location.hash.toLowerCase().endsWith( 'readme.md' ) )
 						&& item.path !== 'README.md' && item.name.toLowerCase() === 'readme.md' ) {
 
-					location.hash = urlGitHubPage + pathRepo + itemPath;
-//					location.hash = itemPath;
+//					location.hash = urlGitHubPage + pathRepo + itemPath;
+					location.hash = itemPath;
 
 				}
 
