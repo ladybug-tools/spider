@@ -61,6 +61,9 @@
 		sud.tinySpaceSquareMeters = 2;
 		sud.tinySurfaceSquareMeters = 1;
 
+		let spaces;
+		let storeys;
+
 		divMenuItems.innerHTML =
 
 			'<details id=detReports open >' +
@@ -96,11 +99,11 @@
 		const building = traversGbjson( gbjson.Campus.Building );
 		divReport.innerHTML += addDetails( 'Building', building.attributes );
 
-		const storeys = getStoreys();
-		divReport.innerHTML += addDetails( storeys.summary, storeys.flowContent );
+		const storeysText = getStoreys();
+		divReport.innerHTML += addDetails( storeysText.summary, storeysText.flowContent );
 
-		const spaces = getSpaces();
-		divReport.innerHTML += addDetails( spaces.summary, spaces.flowContent );
+		const spacesText = getSpaces();
+		divReport.innerHTML += addDetails( spacesText.summary, spacesText.flowContent );
 
 		const spacesTiny = getSpacesTiny();
 		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent );
@@ -206,7 +209,7 @@
 
 	function getStoreys() {
 
-		const storeys = gbjson.Campus.Building.BuildingStorey;
+		storeys = gbjson.Campus.Building.BuildingStorey;
 		let flowContent = '';
 		let count = 0;
 		let zones;
@@ -252,7 +255,7 @@
 
 	function getSpaces() {
 
-		const spaces = gbjson.Campus.Building.Space;
+		spaces = gbjson.Campus.Building.Space;
 		let flowContent = '';
 		let count = 1;
 //console.log( '', spaces  );
@@ -273,6 +276,7 @@
 
 		}
 
+
 		return { summary: 'Spaces &raquo; ' + count, flowContent: flowContent };
 
 	}
@@ -285,7 +289,7 @@
 		const b = '<br>';
 		let flowContent = '';
 		let count = 0;
-//console.log( '', spaces  );
+	//console.log( '', spaces  );
 
 		if ( spaces.length ) {
 
@@ -488,7 +492,7 @@
 	function getSurfaceDuplicateCadIds() {
 
 		const surfacesIds = [];
-	surfaceMembers = [];
+		const surfaceMembers = [];
 		const surfaces = gbjson.Campus.Surface;
 		let count = 0;
 		let flowContent = '';
@@ -648,13 +652,14 @@
 					( ++ count ) +
 					'. id: <button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 					'surfaceType: ' + surface.surfaceType + b +
-					( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
+					( surface.Name ? 'name: ' + surface.Name + b : '' ) +
 					( surface.CADObjectId ?
 						'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
 						: ''
 					) +
 					' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
-					( spaceId ? 'Space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
+					( spaceId ? 'space:  <button onclick=toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' +
+				b : '' ) +
 
 				'</div>';
 
@@ -669,7 +674,6 @@
 
 
 	function getSurfaceAdjacencyInvalid() {
-
 
 		const surfaces = gbjson.Campus.Surface;
 		let count = 0;
@@ -769,6 +773,17 @@
 			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
 			'zones ' + zones.length + ': ' + zones.join();
 
+
+		for ( let storey of storeys ) {
+
+			if ( id === storey.id ) {
+
+				icw.divLog.innerHTML = 'Storey name: ' + storey.Name;
+
+			}
+
+		}
+
 		return zones;
 
 	}
@@ -817,6 +832,7 @@
 
 		icw.controls.target.copy( center );
 		icw.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
+
 
 //console.log( 'bbb', center, radius );
 
@@ -890,6 +906,7 @@
 
 				child.visible = true;
 
+
 			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
 
 				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
@@ -900,7 +917,7 @@
 
 					if ( type === 'InteriorFloor' || type === 'SlabOnGrade' || type === 'RaisedFloor' || type === 'UndergroundSlab' ) {
 
-						zoomIntoSurface( child )
+						zoomIntoSurface( child );
 
 					}
 
@@ -908,6 +925,15 @@
 
 			}
 
+		}
+
+		for ( let space of spaces ) {
+
+			if ( id === space.id ) {
+
+				icw.divLog.innerHTML = 'Space name: ' + space.Name;
+
+			}
 
 		}
 

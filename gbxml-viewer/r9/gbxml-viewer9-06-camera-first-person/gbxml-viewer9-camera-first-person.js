@@ -18,8 +18,8 @@
 		<div>
 			<button onclick=turnLeft(); title='A or left cursor key' >&#9664;</button> &nbsp;
 			<button onclick=goForward(); title='W or up cursor key' >&#9650;</button> &nbsp;
-			<button onclick=goBack(); title='' >&#9660;</button> &nbsp;
-			<button onclick=turnRight(); >&#9654;</button>
+			<button onclick=goBack(); title='S or down cursor key' >&#9660;</button> &nbsp;
+			<button onclick=turnRight(); title='D or right cursor key' >&#9654;</button>
 		</div>
 		<div>
 			<button onclick=turnUp(); title='R or page up key' >&#9651;</button> &nbsp;
@@ -29,8 +29,8 @@
 		</div>
 
 		<p>
-			<button onclick=zoomOverTheShoulder(); >zoom to over the shoulder</button>
-			<button id=butUIinfo onclick=divCameraInfo.style.display=divCameraInfo.style.display==='none'?'block':'none'; >?</button>
+			<button onclick=zoomOverTheShoulder(); title='Fly through the space with your avatar' >zoom to over the shoulder</button>
+			<button id=butUIinfo onclick=divCameraInfo.style.display=divCameraInfo.style.display==='none'?'block':'none'; title='Click for help' >?</button>
 		</p>
 
 	</div>

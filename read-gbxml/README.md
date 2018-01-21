@@ -4,7 +4,7 @@
 [Ladybug Tools > Spider > gbXML Viewer Read Me]( #README.md )
 ====
 
-## _This folder will be deprecated. Updates are at [gbXML Viewer]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/index.html#gbxml-viewer/README.md )_
+## <i style=background-color:yellow;color:magenta >This folder will be deprecated. Updates are at [gbXML Viewer]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/index.html#gbxml-viewer/README.md )</i>
 
 <hr>
 
