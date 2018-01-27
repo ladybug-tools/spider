@@ -1,15 +1,16 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" >
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="View gbXML files in 3D in your browser. Open files using File Reader or by URL in location.hash.Base Script used by gbXML Viewer modules." >
-<meta name=keywords content="gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-28" >
-<title>gbXML Viewer9 Core</title>
+<meta name=description content="Open a gbXML file, identify its rectangular geometry data and display this in interactive 3D in your browser" >
+<meta name=keywords content="gbXML,Ladybug Toools,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-01-19" >
+<title>gbXML Read  Rectangular Geometry</title>
 <style>
+/* Copyright 2018 Ladybug Tools authors. MIT License */
 
-	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+body { font: 11pt monospace; margin: 0; overflow: hidden; }
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
@@ -36,16 +37,15 @@
 
 		<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 
-		<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>
+		<button onclick=rectangleMeshes.visible=!rectangleMeshes.visible; >surfaces</button>
 
-		<button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>
+		<button onclick=rectangleEdges.visible=!rectangleEdges.visible; >edges</button>
 
-		<button onclick=setAllVisible();zoomObjectBoundingSphere(surfaceMeshes); >reset view</button>
+		<button onclick=setAllVisible();zoomObjectBoundingSphere(rectangleMeshes); >reset view</button>
 
 	</p>
 
 	<div id=divLog ></div>
-
 
 <script>
 
@@ -53,20 +53,16 @@
 		location.protocol === 'file:' ? // for testing
 //		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 //		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
-		'../../../read-gbxml/data-files/sam-live2.xml'
-//		'../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml'
+//		'../../../read-gbxml/data-files/sam-live2.xml'
+		'../../gbxml-viewer/gbxml-sample-files/bristol-clifton-down-road.xml'
 		:
-		'../../gbxml-sample-files/bristol-clifton-down-road.xml';
+		'../../gbxml-viewer/gbxml-sample-files/bristol-clifton-down-road.xml';
 
 	var gbjson;
 
 // add surface group to r9?
-	var surfaceMeshes;
-	var surfaceEdges;
-
-	var surfaceAdjacencyDuplicates;
-	var surfaceAdjacencyInvalids;
-	var surfaceCoordinateDuplicates;
+	var rectangleMeshes;
+	var rectangleEdges;
 
 	var colors = {
 
@@ -91,6 +87,7 @@
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional, lightPoint;
 	var cameraHelper, axesHelper, gridHelper, groundHelper;
+
 
 	init();
 	animate();
@@ -154,9 +151,10 @@
 	}
 
 
+
 // available if parent wants it...
 
-	function onWindowLoad() {
+function onWindowLoad() {
 
 		divLog.innerHTML = '';
 
@@ -171,8 +169,6 @@
 		const url = !location.hash ? uriGbxmlDefault : location.hash.slice( 1 );
 
 		requestFile( url, callbackGbXML );
-
-
 
 	}
 
@@ -238,6 +234,7 @@
 	}
 
 
+
 // loads any text file - from file reader or location hash or wherever
 
 	function parseFileXML( xmlNode ) {
@@ -252,6 +249,7 @@
 		return gbjson;
 
 	}
+
 
 
 // https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
@@ -315,58 +313,15 @@
 
 	function parseGbJson( gbjson ) {
 
-//console.log( 'surfaces', gbjson.Campus.Surface );
+console.log( 'gbjson', gbjson );
 
-		const surfaces = gbjson.Campus.Surface;
+		surfaces = gbjson.Campus.Surface;
 
-		let polyloops = [];
-		let openings = [];
+		scene.remove( rectangleMeshes, rectangleEdges );
 
-		for ( let surface of surfaces ) {
+		if ( rectangleMeshes ) {
 
-			if ( surface.Opening ) {
-
-				if ( surface.Opening.PlanarGeometry ) {
-
-					const polyloop = surface.Opening.PlanarGeometry.PolyLoop;
-					const points = getPoints( polyloop );
-					openings.push( [ points ] );
-
-				} else {
-
-					let arr = [];
-
-					for ( let opening of surface.Opening ) {
-
-						polyloop = opening.PlanarGeometry.PolyLoop;
-						points = getPoints( polyloop );
-						arr.push( points );
-
-					}
-
-					openings.push( arr );
-
-				}
-
-			} else {
-
-				openings.push( [] );
-
-			}
-
-			polyloop = surface.PlanarGeometry.PolyLoop;
-
-			points = getPoints( polyloop );
-
-			polyloops.push( points );
-
-		}
-
-		scene.remove( surfaceMeshes, surfaceEdges );
-
-		if ( surfaceMeshes ) {
-
-			surfaceMeshes.traverse( function ( child ) {
+			rectangleMeshes.traverse( function ( child ) {
 
 				if ( child.geometry ) {
 
@@ -381,9 +336,10 @@
 
 		}
 
-		if ( surfaceEdges ) {
 
-			surfaceEdges.traverse( function ( child ) {
+		if ( rectangleEdges ) {
+
+			rectangleEdges.traverse( function ( child ) {
 
 				if ( child.geometry ) {
 
@@ -396,32 +352,44 @@
 
 		}
 
-		surfaceMeshes = new THREE.Object3D();
-		surfaceMeshes.name = 'surfaceMeshes';
+		rectangleMeshes = new THREE.Object3D();
+		rectangleMeshes.name = 'rectangleMeshes';
 
-		surfaceEdges = new THREE.Object3D();
-		surfaceEdges.name = 'surfaceEdges';
+		rectangleEdges = new THREE.Object3D();
+		rectangleEdges.name = 'rectangleEdges';
 
-		for ( let i = 0; i < polyloops.length; i++ ) {
+		for ( let i = 0; i < surfaces.length; i++ ) {
 
-			const material = new THREE.MeshPhongMaterial( { color: colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+			surface = surfaces[ i ];
+			const rectangle = surface.RectangularGeometry;
+			width = parseFloat( rectangle.Width );
+			const height = parseFloat( rectangle.Height );
+			const material = new THREE.MeshPhongMaterial( { color: colors[ surface.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+			const geometry = new THREE.PlaneGeometry( width, height);
 
-			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
-			shape.userData.data = surfaces[ i ];
-			shape.castShadow = shape.receiveShadow = true;
-			surfaceMeshes.add( shape );
+			rectangleMesh = new THREE.Mesh( geometry, material );
+			point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
+//			rectangleMesh.position.set( parseFloat( point.x - 0.5 * width, point.y, point.z - 0.5 * height );
+			rectangleMesh.position.set( parseFloat( point.x ), parseFloat( point.y ), parseFloat( point.z ) );
+			const azimuth = parseFloat( rectangle.Azimuth ) * Math.PI / 180;
+			const tilt = parseFloat( rectangle.Tilt ) * Math.PI / 180;
+			rectangleMesh.rotation.set( tilt, 0 ,azimuth );
+			rectangleMesh.userData.data = surface;
+			rectangleMesh.castShadow = rectangleMesh.receiveShadow = true;
+			rectangleMeshes.add( rectangleMesh );
 
-			const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
-			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
-			surfaceEdge.rotation.copy( shape.rotation );
-			surfaceEdge.position.copy( shape.position );
-			surfaceEdges.add( surfaceEdge );
+			const edgesGeometry = new THREE.EdgesGeometry( rectangleMesh.geometry );
+			const rectangleEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
+			rectangleEdge.rotation.copy( rectangleMesh.rotation );
+			rectangleEdge.position.copy( rectangleMesh.position );
+			rectangleEdges.add( rectangleEdge );
 
 		}
 
-		scene.add( surfaceMeshes, surfaceEdges );
+		scene.add( rectangleMeshes, rectangleEdges );
 
-		zoomObjectBoundingSphere( surfaceMeshes );
+		zoomObjectBoundingSphere( rectangleMeshes );
+
 
 	}
 
@@ -471,7 +439,7 @@
 		const shape = new THREE.Shape( vertices );
 
 		shape.autoClose = true;
-
+/*
 		for ( let verticesHoles of holes ) {
 
 			for ( let vertex of verticesHoles ) {
@@ -487,7 +455,7 @@
 			shape.holes.push( hole );
 
 		}
-
+*/
 		const geometryShape = new THREE.ShapeGeometry( shape );
 
 		let shapeMesh = new THREE.Mesh( geometryShape, material );
@@ -503,7 +471,7 @@
 	function zoomObjectBoundingSphere( obj ) {
 
 		if ( obj.geometry ) {
-// might not be necessary
+		// might not be necessary
 
 			obj.geometry.computeBoundingSphere();
 			const center = obj.geometry.boundingSphere.center;
@@ -536,9 +504,9 @@
 		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
 		lightDirectional.target = axesHelper;
 
-//		scene.remove( cameraHelper );
-//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-//		scene.add( cameraHelper );
+		//		scene.remove( cameraHelper );
+		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		//		scene.add( cameraHelper );
 
 	}
 
@@ -546,11 +514,11 @@
 
 	function setAllVisible() {
 
-		surfaceMeshes.visible = true;
+		rectangleMeshes.visible = true;
 
 		document.body.style.backgroundImage = '';
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of rectangleMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -562,11 +530,11 @@
 
 		};
 
-		surfaceEdges.visible = true;
+		rectangleEdges.visible = true;
 
-		for ( let child of surfaceEdges.children ) {
+		for ( let child of rectangleEdges.children ) {
 
-//			child.material.opacity = 0.85;
+		//			child.material.opacity = 0.85;
 			child.material.wireframe = false;
 
 		};
@@ -580,7 +548,7 @@
 		camera.add( lightPoint );
 		scene.add( camera );
 
-//		if ( parent.createReport ) { parent.createReport(); }
+		if ( parent.createReport ) { parent.createReport(); }
 
 	}
 
@@ -606,8 +574,6 @@
 		controls.update();
 
 	}
-
-
 
 </script>
 </body>

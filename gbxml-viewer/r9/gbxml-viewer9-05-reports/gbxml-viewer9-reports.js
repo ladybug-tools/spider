@@ -255,27 +255,24 @@
 
 	function getSpaces() {
 
-		spaces = gbjson.Campus.Building.Space;
+		let spaces = gbjson.Campus.Building.Space;
 		let flowContent = '';
-		let count = 1;
-//console.log( '', spaces  );
+		let count = 0;
+//console.log( 'spaces', spaces  );
 
-		if ( spaces.length ) {
+		spaces = spaces.length ? spaces : [ spaces ];
 
-			for ( let space of spaces ) {
+		for ( let space of spaces ) {
 //console.log( 'space', space );
 
-				flowContent += '<div style=margin-bottom:10px; > ' +
-					( count ++ ) +
-					'. id: ' + space.id + b +
-					' name: <button onclick=toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
-					' area: ' + Number( space.Area ).toFixed( 1 ) + b +
-				'</div>';
-
-			}
+			flowContent += '<div style=margin-bottom:10px; > ' +
+				( ++ count ++ ) +
+				'. id: ' + space.id + b +
+				' name: <button onclick=toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
+				' area: ' + Number( space.Area ).toFixed( 1 ) + b +
+			'</div>';
 
 		}
-
 
 		return { summary: 'Spaces &raquo; ' + count, flowContent: flowContent };
 

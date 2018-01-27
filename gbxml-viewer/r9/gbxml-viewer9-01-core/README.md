@@ -77,6 +77,12 @@ The ultimate goal is to be able to offer various analytical batch operations tha
 See also main gbXML README.md
 
 
+### 2018-01-27 ~ Theo
+
+* R 9.5
+* Core: drop createReport
+* App: add onloadThreejs to update report with each new file load
+
 ### 2018-01-01 ~ Theo
 
 * Update to R9

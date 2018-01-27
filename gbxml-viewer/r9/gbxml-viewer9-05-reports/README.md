@@ -48,6 +48,12 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 ## Change Log
 
+
+### 2018-01-27 ~ Theo
+
+* Fix no data for single space issue
+* Fix incorrect space numbering
+
 ### 2018-01-02 ~ Theo
 
 * R9 updates

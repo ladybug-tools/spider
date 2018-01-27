@@ -29,6 +29,11 @@ See main read me file
 
 ## Change Log
 
+
+### 2018-01-27 ~ Theo
+
+* Add onloadThreejs to clean up reports
+
 ### 2018-01-02 ~ Theo
 
 * Copy read me to R9 and update

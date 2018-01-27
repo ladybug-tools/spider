@@ -3,7 +3,7 @@
 
 # [Read gbXML Shell Data Read Me]( #README.md )
 
-
+## <span style=color:magenta>To be deprecated. See gbxml-read-rectangular-geometry</span>
 <iframe src=http://www.ladybug.tools/spider/cookbook/read-gbxml-shell-data/read-gbxml-shell-data.html width=100% height=600px ></iframe>
 _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>

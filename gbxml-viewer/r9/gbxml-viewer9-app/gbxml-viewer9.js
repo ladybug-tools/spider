@@ -127,7 +127,16 @@
 		divContents.style.display = 'none';
 		ifrThree.style.cssText += 'display: block; z-index: 1; ';
 
+//		initReport();
+
+//		element = document.getElementById( 'detReports' );
+
+//		if ( element ) { element.remove(); }
+
+//		butReports.style.backgroundColor = '';
+
 	}
+
 
 
 	function requestFile( url, callback ) {
@@ -139,6 +148,16 @@
 //		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
+
+	}
+
+
+
+	function onloadThreejs() {
+
+		if ( window.detReports ) { detReports.remove(); }
+
+		butReports.style.backgroundColor = '';
 
 	}
 

@@ -6,7 +6,7 @@
 <meta name=description content="Open a gbXML file, identify its rectangular geometry data and display this in interactive 3D in your browser" >
 <meta name=keywords content="gbXML,Ladybug Toools,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-01-19" >
-<title>gbXML Read  Rectangular Geometry</title>
+<title>gbXML Read  Rectangular Geometry R1.1</title>
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
@@ -45,6 +45,7 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 
 	</p>
 
+	<p><button onclick=toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button></p>
 	<div id=divLog ></div>
 
 <script>
@@ -365,15 +366,23 @@ console.log( 'gbjson', gbjson );
 			width = parseFloat( rectangle.Width );
 			const height = parseFloat( rectangle.Height );
 			const material = new THREE.MeshPhongMaterial( { color: colors[ surface.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+			let azimuth = parseFloat( rectangle.Azimuth ) * Math.PI / 180;
+console.log( 'azimuth', azimuth );
+
+			let tilt = parseFloat( rectangle.Tilt ) * Math.PI / 180;
+
+			tilt = azimuth === Math.PI && tilt === 0 ? Math.PI : tilt;
+
 			const geometry = new THREE.PlaneGeometry( width, height);
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( - 0.5 * width, - 0.5 * height, 0 ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( azimuth ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - tilt ) );
 
 			rectangleMesh = new THREE.Mesh( geometry, material );
 			point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
 //			rectangleMesh.position.set( parseFloat( point.x - 0.5 * width, point.y, point.z - 0.5 * height );
 			rectangleMesh.position.set( parseFloat( point.x ), parseFloat( point.y ), parseFloat( point.z ) );
-			const azimuth = parseFloat( rectangle.Azimuth ) * Math.PI / 180;
-			const tilt = parseFloat( rectangle.Tilt ) * Math.PI / 180;
-			rectangleMesh.rotation.set( tilt, 0 ,azimuth );
+//			rectangleMesh.rotation.set( tilt, 0 , azimuth );
 			rectangleMesh.userData.data = surface;
 			rectangleMesh.castShadow = rectangleMesh.receiveShadow = true;
 			rectangleMeshes.add( rectangleMesh );
@@ -468,6 +477,44 @@ console.log( 'gbjson', gbjson );
 
 
 
+	function toggleSurfaceNormals() {
+
+		let helperNormalsFaces = scene.getObjectByName( 'helperNormalsFaces' );
+
+		if ( helperNormalsFaces ) {
+
+			scene.remove( helperNormalsFaces );
+
+		}
+
+		if ( !helperNormalsFaces ) {
+
+			helperNormalsFaces = new THREE.Group();
+
+			rectangleMeshes.traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh && child.visible ) {
+
+					helperNormalsFace = new THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
+					helperNormalsFaces.add( helperNormalsFace );
+
+					helperNormalsFaces.visible = false;
+
+				}
+
+			} );
+
+			helperNormalsFaces.name = 'helperNormalsFaces';
+			scene.add( helperNormalsFaces );
+			helperNormalsFaces.visible = false;
+
+		}
+
+		helperNormalsFaces.visible = !helperNormalsFaces.visible;
+
+	}
+
+
 	function zoomObjectBoundingSphere( obj ) {
 
 		if ( obj.geometry ) {
@@ -495,7 +542,7 @@ console.log( 'gbjson', gbjson );
 		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
 
 		axesHelper.scale.set( radius, radius, radius );
-		axesHelper.position.copy( center );
+//		axesHelper.position.copy( center );
 
 		camera.far = 10 * radius; //2 * camera.position.length();
 		camera.updateProjectionMatrix();

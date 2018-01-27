@@ -300,7 +300,14 @@ Will most likely build upon
 
 ## Change Log
 
-## 2018-01-17 ~ Theo
+### 2018-01-27 ~ Theo
+
+* Core: drop createReport
+* Reports Fix no data for single space issue
+* Reports: Fix incorrect space numbering
+* App: Add onloadThreejs to clean up reports
+
+### 2018-01-17 ~ Theo
 
 * App R9.3
 * Add Octocat link to App menu
@@ -310,7 +317,7 @@ Will most likely build upon
 * Add Sun Range links to read me
 
 
-## 2018-01-02 ~ Theo
+### 2018-01-02 ~ Theo
 
 * Fixing and updating all the R9 module read me files
 
