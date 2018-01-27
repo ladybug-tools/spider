@@ -302,6 +302,7 @@ Will most likely build upon
 
 ### 2018-01-27 ~ Theo
 
+* R9.5
 * Core: drop createReport
 * Reports Fix no data for single space issue
 * Reports: Fix incorrect space numbering

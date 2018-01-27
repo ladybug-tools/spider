@@ -266,7 +266,7 @@
 //console.log( 'space', space );
 
 			flowContent += '<div style=margin-bottom:10px; > ' +
-				( ++ count ++ ) +
+				( ++ count ) +
 				'. id: ' + space.id + b +
 				' name: <button onclick=toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
 				' area: ' + Number( space.Area ).toFixed( 1 ) + b +
