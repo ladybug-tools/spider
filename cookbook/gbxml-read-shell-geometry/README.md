@@ -8,7 +8,7 @@
 _read and display gbXML shell geometry_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 
-## Full Screen: [gbXML Read Shell Geometry]( http://www.ladybug.tools/spider/gbxml-read-shell-geometry/gbxml-read-shell-geometry.html )
+## Full Screen: [gbXML Read Shell Geometry]( http://www.ladybug.tools/spider/cookbook/gbxml-read-shell-geometry/gbxml-read-shell-geometry.html )
 
 
 ## Concept
