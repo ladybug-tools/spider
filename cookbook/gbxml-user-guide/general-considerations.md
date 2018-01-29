@@ -26,10 +26,14 @@ Your browser will either open the file or provide a helpful error message as to 
 	* Download, install and update
 
 
-	* Click 'import 
+	* Click 'import
+
+
 ### Other methods
 
 See <https://github.com/GreenBuildingXML>
+
+
 
 ## Creating or writing gbXML files
 
@@ -51,6 +55,7 @@ Equivalent to 'tags' in HTML
 > * all elements must be properly nested
 > * all attribute values must be quoted
 
+
 ### Upper and lower case elements are OK
 
 Case for elements names does not seem to matter as long as the case is the identical for opening and closing tags.
@@ -63,6 +68,7 @@ The values of attributes inside tag statements should be surrounded by quotation
 The browser will always display attribute values inside double quotes.
 
 Values between two tags may be surrounded by quotes, but quotes are not required.
+
 
 ### IDs
 
@@ -77,7 +83,7 @@ In other words:
 
 ## Elements
 
-### gbXML Element 
+### gbXML Element
 
 ````<gbXML>```` is the root element.
 
@@ -95,22 +101,22 @@ This element and any of its contents may be omitted and Open Studio will still a
 
 Attributes:
 
-* Name 
-* Description 
-* StreetAddress 
-* Area 
+* Name
+* Description
+* StreetAddress
+* Area
 * **Space** << may be the only required element
-* AverageNumberOfFloors 
-* InfiltrationFlow 
-* ShellGeometry 
-* SpaceBoundary 
-* Lighting 
-* IntEquipId 
-* MeterId 
-* PeakDomesticHotWaterFlow 
+* AverageNumberOfFloors
+* InfiltrationFlow
+* ShellGeometry
+* SpaceBoundary
+* Lighting
+* IntEquipId
+* MeterId
+* PeakDomesticHotWaterFlow
 * BuildingStorey
 	* Documentation: Captures Building Storey Structure
-	* Nice to have but seemingly not required by Open Studio in order to import without error 
+	* Nice to have but seemingly not required by Open Studio in order to import without error
 	* BuildingStorey Level: Building storey Local Placement Z coordinate.
 
 
@@ -122,3 +128,11 @@ See [Space Element Page]( #space.md )
 ### Zone Element
 
 See [Zone Element Page]( #zone.md )
+
+### Surface Element
+
+See [Surface Element]( #surface.md )
+
+
+***
+

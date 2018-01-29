@@ -24,7 +24,7 @@ Your browser will either open the file or provide a helpful error message as to 
 * <https://www.openstudio.net/>
 	* Free and open source
 	* Download, install and update
-	* Click 'import 
+	* Click 'import
 
 ### Other methods
 
@@ -76,7 +76,7 @@ In other words:
 
 ## Elements
 
-### gbXML Element 
+### gbXML Element
 
 ````<gbXML>```` is the root element.
 
@@ -94,22 +94,22 @@ This element and any of its contents may be omitted and Open Studio will still a
 
 Attributes:
 
-* Name 
-* Description 
-* StreetAddress 
-* Area 
+* Name
+* Description
+* StreetAddress
+* Area
 * **Space** << may be the only required element
-* AverageNumberOfFloors 
-* InfiltrationFlow 
-* ShellGeometry 
-* SpaceBoundary 
-* Lighting 
-* IntEquipId 
-* MeterId 
-* PeakDomesticHotWaterFlow 
+* AverageNumberOfFloors
+* InfiltrationFlow
+* ShellGeometry
+* SpaceBoundary
+* Lighting
+* IntEquipId
+* MeterId
+* PeakDomesticHotWaterFlow
 * BuildingStorey
 	* Documentation: Captures Building Storey Structure
-	* Nice to have but seemingly not required by Open Studio in order to import without error 
+	* Nice to have but seemingly not required by Open Studio in order to import without error
 	* BuildingStorey Level: Building storey Local Placement Z coordinate.
 
 
@@ -121,3 +121,11 @@ See [Space Element Page]( #space.md )
 ### Zone Element
 
 See [Zone Element Page]( #zone.md )
+
+### Surface Element
+
+See [Surface Element]( #surface.md )
+
+
+***
+

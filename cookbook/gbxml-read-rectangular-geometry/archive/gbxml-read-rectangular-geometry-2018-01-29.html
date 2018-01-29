@@ -6,7 +6,7 @@
 <meta name=description content="Open a gbXML file, identify its rectangular geometry data and display this in interactive 3D in your browser" >
 <meta name=keywords content="gbXML,Ladybug Toools,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-01-19" >
-<title>gbXML Read  Rectangular Geometry R1.3</title>
+<title>gbXML Read  Rectangular Geometry R1.2</title>
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
@@ -58,8 +58,8 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 //		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 //		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
 //		'../../read-gbxml/data-files/sam-live2.xml'
-//		'../../read-gbxml/data-files/rectangular-20x50x4.xml'
-		'../../gbxml-viewer/gbxml-sample-files/one-room.xml'
+		'../../read-gbxml/data-files/rectangular-20x50x4.xml'
+
 //		'../../gbxml-viewer/gbxml-sample-files/bristol-clifton-down-road.xml'
 
 		:
@@ -152,7 +152,7 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 		window.addEventListener ( 'hashchange', onHashChange, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-		//		window.addEventListener( 'load', onWindowLoad, false );
+//		window.addEventListener( 'load', onWindowLoad, false );
 
 		onHashChange();
 
@@ -162,7 +162,7 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 
 // available if parent wants it...
 
-	function onWindowLoad() {
+function onWindowLoad() {
 
 		divLog.innerHTML = '';
 
@@ -260,8 +260,8 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 
 
 
-	// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
-	// http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
+// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
+// http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
 
 	function XML2jsobj( node ) {
 
@@ -321,23 +321,23 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 
 	function parseGbJson( gbjson ) {
 
-	//console.log( 'gbjson', gbjson );
+//console.log( 'gbjson', gbjson );
 		divError.innerHTML = '';
 
 		const surfaces = gbjson.Campus.Surface;
-	console.log( 'surfaces', surfaces );
+console.log( 'surfaces', surfaces );
 
-	//necessary ?
+//necessary ?
 		scene.remove( rectangleMeshes, rectangleEdges );
 
-	// are these disposals necessary? Is there a better way?
+// are these disposals necessary? Is there a better way?
 
 		if ( rectangleMeshes ) {
 
 			rectangleMeshes.traverse( function ( child ) {
 
 				if ( child.geometry ) {
-	//console.log( 'child', child );
+//console.log( 'child', child );
 					child.geometry.dispose();
 					child.material.dispose();
 
@@ -371,9 +371,9 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 		rectangleEdges = new THREE.Object3D();
 		rectangleEdges.name = 'rectangleEdges';
 
-	//		for ( let i = 0; i < surfaces.length; i++ ) {
+//		for ( let i = 0; i < surfaces.length; i++ ) {
 
-	//			const surface = surfaces[ i ];
+//			const surface = surfaces[ i ];
 
 		for ( let surface of surfaces ) {
 
@@ -384,13 +384,12 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 
 			const width = parseFloat( rectangle.Width );
 			const height = parseFloat( rectangle.Height );
-			let azimuth = ( 0 + parseFloat( rectangle.Azimuth ) ) * Math.PI / 180;
-console.log( surface.surfaceType, 'azimuth', azimuth );
-
+			let azimuth = parseFloat( rectangle.Azimuth ) * Math.PI / 180;
+//console.log( 'azimuth', azimuth );
 			let tilt = - parseFloat( rectangle.Tilt ) * Math.PI / 180;
-			tilt = azimuth === Math.PI && tilt === 0 ? 1 * Math.PI : tilt;
+			tilt = azimuth === Math.PI && tilt === 0 ? Math.PI : tilt;
 
-	//			azimuth += Math.PI;
+//			azimuth += Math.PI;
 			const geometry = new THREE.PlaneGeometry( width, height);
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( - 0.5 * width, - 0.5 * height, 0 ) );
 			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( azimuth ) );
@@ -398,9 +397,9 @@ console.log( surface.surfaceType, 'azimuth', azimuth );
 
 			const rectangleMesh = new THREE.Mesh( geometry, material );
 			const point = new THREE.Vector3().fromArray( rectangle.CartesianPoint.Coordinate );
-	//			rectangleMesh.position.set( parseFloat( point.x - 0.5 * width, point.y, point.z - 0.5 * height );
+//			rectangleMesh.position.set( parseFloat( point.x - 0.5 * width, point.y, point.z - 0.5 * height );
 			rectangleMesh.position.set( parseFloat( point.x ), parseFloat( point.y ), parseFloat( point.z ) );
-	//			rectangleMesh.rotation.set( tilt, 0 , azimuth );
+//			rectangleMesh.rotation.set( tilt, 0 , azimuth );
 			rectangleMesh.userData.data = surface;
 			rectangleMesh.castShadow = rectangleMesh.receiveShadow = true;
 			rectangleMeshes.add( rectangleMesh );

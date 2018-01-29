@@ -23,8 +23,20 @@ Open a gbXML file, identify its rectangular geometry data and display this in in
 * <http://www.gbxml.org/>
 * <http://gbxml.org/schema_doc/6.01/GreenBuildingXML_Ver6.01.html#Link186>
 
+## To Do
+
+* 2018-01-29 ~ Interactive heads up display with output of parameters for each rectangle
+* 2018-01-29 ~ Check if Polyloop data is included in rectangular geometry
+
 
 ## Change Log
+
+
+### 2018-01-29 ~ The
+
+R1.3
+* Positioning improving but still has many issues
+
 
 ### 2018-01-21 ~ Theo
 

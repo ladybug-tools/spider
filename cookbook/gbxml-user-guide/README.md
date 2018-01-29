@@ -57,7 +57,7 @@ All data in this user guide is created in [Markdown]( https://en.wikipedia.org/w
 >Importing a gbXML file into an analysis software provides lots of benefits including; data consistency, integrity and importantly it will save you time, however importing the gbXML file into your analysis software can be a challenge in itself. This is quite often not something the user trying to import the file is doing wrong, but can stem from the techniques used with the model originator.
 
 <http://edsl.myzen.co.uk/downloads/misc/EDSL%20Revit%20gbXML%20Guide.pdf>
-> EDSL Guide for Revit gbXML Files ~ Introduction 
+> EDSL Guide for Revit gbXML Files ~ Introduction
 > This guide explains how to create a Revit model in such a way that it will
 create a good gbXML file. Many geometry issues with gbXML files can be corrected
 within Tas but in general the best solution is to correct the issue within the Revit file,
@@ -66,7 +66,7 @@ and a new gbXML is exported.
 
 
 * <https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts>
-> December 1, 2016 
+> December 1, 2016
 > Carmel Software was hired by the National Renewable Energy Lab (NREL) to update and improve the Green Building XML (http://www.gbXML.org) schema, all in the name of improving interoperability amongst disparate building design software tools. This progress report summarizes the work completed over the past year.
 
 * <http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml>
@@ -127,6 +127,11 @@ and a new gbXML is exported.
 
 
 ## Change Log
+
+
+### 2018-01-29 ~ Theo
+
+* General Considerations: add link to Surface Element
 
 
 ### 2017-10-28 ~ Theo
