@@ -127,8 +127,10 @@
 
 	function init() {
 
+// needs fixing
 		urlGitHubPage = location.host.startsWith( user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + '/master/';
-//console.log( 'urlGitHubPage', urlGitHubPage );
+		urlGitHubPage = '';
+console.log( 'urlGitHubPage', urlGitHubPage );
 
 		urlInfo.href = urlGitHubSource;
 
@@ -162,7 +164,7 @@
 
 			start = ( 'https://rawgit.com/' + user + repo +'/master/' ).length;
 
-			crumbs = location.host.startsWith( 'pushme-pullyou.github.io' ) ? url : url.slice( start );
+			crumbs = location.host.startsWith( user + '.github.io' ) ? url : url.slice( start );
 			crumbs2 = crumbs.lastIndexOf( '/' ) > 0 ? crumbs.slice( 0, crumbs.lastIndexOf( '/' ) ) : '';
 
 //console.log( 'crumbs2',  crumbs2 );
