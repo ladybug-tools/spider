@@ -16,8 +16,18 @@ _read and display gbXML shell geometry_
 
 ## Links of Interest
 
+## To Do
+
+* 2018-01-29 ~ Add heads-up display
+* 2018-01-29 ~ Add colors for spaces?
+* 2018-01-29 ~ Add simplified reports menu
 
 ## Change Log
+
+### 2018-01-29 ~ Theo
+
+R1.2
+* Add simplified settings menu
 
 ### 2018-01-27 ~ Theo
 

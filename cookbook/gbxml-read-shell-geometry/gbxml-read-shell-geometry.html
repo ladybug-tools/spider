@@ -6,7 +6,7 @@
 <meta name=description content="read and display gbXML shell geometry" >
 <meta name=keywords content="Ladybug Toools,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-01-27" >
-<title>gbXML Read Shell Geometry R1.1 </title>
+<title>gbXML Read Shell Geometry R1.2 </title>
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
@@ -20,6 +20,9 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 	.dragDropArea { border: 1px dashed gray; }
 
 	#divMenu { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
+
+	#divMenuItems { background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px;
+		opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; }
 
 </style>
 </head>
@@ -45,7 +48,16 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 
 	</p>
 
+	<p>
+		<button id=butSettings onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = 'gbxml-viewer9-settings.js'; " >
+		Settings</button>
+	</p>
+
 	<div id=divLog ></div>
+
+	<div id=divMenuItems ></div>
 
 <script>
 
