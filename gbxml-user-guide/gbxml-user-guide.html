@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "View info regarding gbXML files" >
+<meta name = "keywords" content = "gbXML,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-10-17" >
+<title>gbXML Guide R1.5</title>
+<style>
+/* Copyright 2018 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width: 350px; height: 100%; }
+
+	body { font: 12pt monospace; height:100%; margin: 0 0 0 350px; }
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+
+	summary { outline: none; font-size: 14pt }
+
+	#detMenu { background-color: var( --mnu-back-color ); border: 1px solid var( --mnu-color ); padding: 5px;  }
+
+	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; }
+
+	#divContents { border: 0px solid red; left: 325px; margin: 0 auto; max-width: 800px; right: 0; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<details id=detMenu open >
+
+			<summary >toggle menu</summary>
+
+			<p id = "divBreadcrumbs" >
+				<a href="../../../index.html" title='Making environmental design knowledge and tools freely accessible to every person, project and design process' target="_blank">Ladybug Tools</a>
+				&raquo; <a href="../../index.html" target="_Top" >&#x1f578;</a> &raquo;
+			</p>
+
+			<h3>
+				<a href = '' ><script> document.write( document.title )</script></a>
+				<a href=https://github.com/ladybug-tools/spider/tree/master/gbxml-user-guide/ target="top" >&#x24D8; </a>
+			</h3>
+
+			<div id = "divItems" >
+
+				<p>Click the pencil icon to edit the file on GitHub</p>
+
+				<p><a href=#general-considerations.md >General Considerations</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/general-considerations.md" target="_blank"><b>&#x1f589;</b></a></p>
+
+				<p><a href=#campus.md >Campus</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/campus.md" target="_blank"><b>&#x1f589;</b></a></p>
+
+				<p><a href=#space.md >Space</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/space.md" target="_blank"><b>&#x1f589;</b></a></p>
+
+				<p><a href=#zone.md >Zone</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/zone.md" target="_blank"><b>&#x1f589;</b></a></p>
+
+				<p><a href=#rectangular-geometry.md >Rectangular Geometry</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/rectangular-geometry.md" target="_blank"><b>&#x1f589; </b></a></p>
+
+
+				<p><a href=#surface.md  >Surface</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface.md" target="_blank"><b>&#x1f589; </b></a></p>
+
+				<h4>Surface Types</h4>
+
+				<div><a href=#surface-interior-wall.md >InteriorWall</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-interior-wall.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-exterior-wall.md >Exteriorwall</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-exterior-wall.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-roof.md >Roof</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-roof.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-interior-floor.md >InteriorFloor</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-interior-floor.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-exposed-floor.md >ExposedFloor</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-exposed-floor.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-shade.md >Shade</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-shade.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-underground-wall.md >UndergroundWall</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-underground-wall.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-underground-slab.md >UndergroundSlab</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-underground-slab.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-ceiling.md >Ceiling</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-ceiling.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-air.md >Air</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-air.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-underground-ceiling.md >UndergroundCeiling</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-underground-ceiling.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-raised-floor.md >RaisedFloor</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-raised-floor.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-slab-on-grade.md >SlabOnGrade</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-slab-on-grade.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-free-standing-column.md >FreestandingColumn</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-free-standing-column.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<div><a href=#surface-embedded-column.md >EmbeddedColumn</a> &raquo;
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-user-guide/surface-embedded-column.md" target="_blank"><b>&#x1f589; </b></a></div>
+
+				<hr>
+
+				<p>
+					Welcome to a place where you can find useful stuff regarding <a href="http://www.gbxml.org/" target="_blank">gbXML</a>
+				</p>
+
+				<p>The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools.</p>
+
+				<hr>
+
+				<div><a href=#../../pages/credits.md >Credits</a></div>
+				<div><a href=#../../pages/code-of-conduct.md >Code of Conduct</a></div>
+				<div><a href=#../../pages/contributing.md >Contributing</a></div>
+				<div><a href=#../../pages/license.md >License</a></div>
+				<div><a href=#../../pages/markdown-help.md >Markdown Help</a></div>
+
+			</div>
+
+			<hr>
+
+			<center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > &#x1f578; </a></center>
+
+		</details>
+
+
+
+	</div>
+
+	<div id =divContents ></div>
+
+<script>
+
+
+	init();
+
+
+	function init() {
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		onHashChange();
+
+	}
+
+
+
+	function onHashChange() {
+
+		const url = !location.hash ? 'introduction.md' : location.hash.slice( 1 );
+
+		requestFile( url, callbackMarkdown );
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+	function callbackMarkdown( xhr ){
+
+		const converter = new showdown.Converter();
+		const response = xhr.target.response;
+		const html = converter.makeHtml( xhr.target.responseText );
+
+		divContents.innerHTML = html;
+
+		window.scrollTo( 0, 0 );
+
+	}
+
+
+
+</script>
+</body>
+</html>
