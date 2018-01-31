@@ -58,6 +58,8 @@ Things we seem to be doing include:
 * Displaying [gbXML]( http://gbxml.org ) files in 3D
 	* See [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 	* See [gbXML User Guide]( http://www.ladybug.tools/spider/cookbook/gbxml-user-guide/gbxml-user-guide.html )
+* Create new [gbXML]( http://gbxml.org ) files and view these in 3D
+	* See [Build Well]( https://rawgit.com/ladybug-tools/spider/master/build-well/ )
 * Displaying [EPW files]( https://energyplus.net/weather/simulation ) in 3D
 * Displaying solar calculations in 3D
 	* See [Analemma 3D]( http://www.ladybug.tools/spider/analemma3d/index.html )
