@@ -119,9 +119,9 @@
 
 		linePolygon.add( lineOffset );
 
-console.log( '', verticesOffset );
+//console.log( '', verticesOffset );
 
-		
+
 	}
 
 
@@ -199,14 +199,14 @@ console.log( '', verticesOffset );
 		const line2start = line2.start;
 		const line2end = line2.end;
 
-		const denominator = 
-			( line2end.y - line2start.y ) * ( line1end.x - line1start.x ) 
+		const denominator =
+			( line2end.y - line2start.y ) * ( line1end.x - line1start.x )
 			- ( line2end.x - line2start.x ) * ( line1end.y - line1start.y );
 
 		if ( denominator == 0 ) { return; }
 
-		const a = 
-			( ( line2end.x - line2start.x ) * ( line1start.y - line2start.y ) 
+		const a =
+			( ( line2end.x - line2start.x ) * ( line1start.y - line2start.y )
 			- ( line2end.y - line2start.y ) * ( line1start.x - line2start.x ) ) / denominator;
 
 		const x = line1start.x + ( a * ( line1end.x - line1start.x ) );

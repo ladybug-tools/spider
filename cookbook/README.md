@@ -4,6 +4,8 @@
 
 # Cookbook Read Me
 
+## View all the examples: [Cookbook Gallery]( #cookbook/cookbook-gallery.html )
+
 ## Coding Style
 
 These scripts here are [cookbook]( https://en.wikipedia.org/wiki/Cookbook#Usage_outside_the_world_of_food ) style example code

@@ -128,7 +128,7 @@
 	function init() {
 
 // needs fixing
-		urlGitHubPage = location.host.startsWith( user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + '/master/';
+		urlGitHubPage = location.href.includes( user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + '/master/';
 //		urlGitHubPage = '';
 //console.log( 'urlGitHubPage', urlGitHubPage );
 

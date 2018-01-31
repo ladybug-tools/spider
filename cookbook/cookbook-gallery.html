@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Obtains the list of all sub-folders using GitHub API. Displays index file for each in an iframe. Limits the number of simultaneous WebGL rendererd" >
+<meta name = "keywords" content = "JavaScript,GitHub,API,FOSS,HTML5" >
+<meta name = "date" content = "2018-01-30" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	iframe { border: 0px solid green; height: 100%; width: 100%; }
+
+	div.ifr { border: 1px solid crimson; height:300px; margin: 100px 0 0px 0; width: 100%; }
+	div.readme { border: 1px solid blue; max-height:512px; overflow: auto; }
+
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+	<div id = "divHeader" >
+
+		<h1 id = "divTitle" >
+
+			<a href="" ><script>
+				document.write( location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) );
+				//document.write( document.title );
+			</script></a>
+
+		</h1>
+
+		<div><script> document.write( document.head.querySelector( '[name=description]' ).content )</script></div>
+
+		<div id = "divContents" >
+
+			<h2><a href=http://www.ladybug.tools/spider/cookbook/README.md>Cookbook Read Me</a></h2>
+
+		</div>
+
+	</div>
+
+	<div id=container ></div>
+
+	<div id = "divFooter" >
+
+		<hr>
+		footer
+	</div>
+
+<script>
+
+	const user = 'ladybug-tools'
+	const repo = '/spider';
+	const pathRepo = 'cookbook';
+
+	let files = [];
+
+	let iframeContainers = [];
+	let iframesActive = [];
+	let iframesActiveLimit = 3;
+
+//	var urlSource = '../../../../ladybug-tools.github.io/spider/cookbook/';
+	var urlSource = '';
+
+	let txt;
+	const b = '<br>';
+
+	init();
+	animate();
+
+	function init() {
+
+		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divContents.innerHTML += b + txt;
+
+		let url = 'https://rawgit.com/ladybug-tools/spider/master/cookbook/';
+
+		const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
+
+		const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		requestFile( urlGitHubApiContents, callbackFilesOnGitHub );
+
+	}
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+
+	function callbackFilesOnGitHub( xhr ) {
+
+		const response = xhr.target.response;
+//console.log( 'response', response );
+
+		json = JSON.parse( response );
+//console.log( 'json', json );
+
+		let count = 0;
+		for ( var i = 0; i < json.length; i++ ) {
+
+			if ( json[ i ].type !== 'dir') { continue; }
+
+			files.push ( json[ i ].name );
+
+			container.innerHTML +=
+
+				'<div class=ifr id=' + ( count++ ) + ' ></div>' +
+				'<div class=txt ></div>' +
+
+			'';
+
+		}
+
+		iframeContainers = document.getElementsByClassName( 'ifr' );
+		texts = document.getElementsByClassName( 'txt' );
+
+	}
+
+
+
+	function updateIframe( activeContainer ) {
+
+			var iframes = document.getElementsByTagName( 'iframe' );
+
+			if ( iframes.length > iframesActiveLimit ) {
+
+				var frameTooMany = iframesActive.shift();
+				frameTooMany.innerHTML = '';
+
+			}
+
+			if ( activeContainer.innerHTML === '' ) {
+
+				var id = activeContainer.id;
+
+				activeContainer.innerHTML = '<iframe src="' + urlSource + files[ id ] + '/index.html" onload=getFile(this,' + id + '); scrolling="no" ></iframe>';
+//console.log( 'files[ id ]', files[ id ], iframes );
+
+				iframesActive.push( activeContainer );
+
+			}
+
+	}
+
+
+
+	function getFile( that, index ) {
+
+		var metas = that.contentWindow.document.getElementsByTagName('meta'); ;
+		var description = 'none';
+		var keywords = 'none';
+		var date = 'none';
+		var b = '<br>';
+
+		for ( var i = 0; i < metas.length; i++ ) {
+
+			if ( metas[ i ].name === 'description' ) { description = metas[ i ].content; }
+			if ( metas[ i ].name === 'keywords' ) { keywords = metas[ i ].content; }
+			if ( metas[ i ].name === 'date' ) { date = metas[ i ].content; }
+
+		}
+
+		var folder = files[ index ].replace( 'index.html', '' );
+
+		texts[ index ].innerHTML =
+
+			'<h2>full screen: <a href=' + that.src + ' >' + that.contentWindow.document.title + '</a></h2>' +
+			'<div >' +
+				'<b>Description</b>' + b + description + b +
+				'<b>Keywords</b>' + b + keywords + b +
+				'<b>Date</b>' + b + date + b +
+				'<b>Full screen: <a href=index.html#' + folder + 'readme.md >Read Me</a></b>' +
+			'</div>' +
+//			'<div class=readme id=readme' + index + ' ></div>' +
+
+		'';
+
+//		var rm = document.getElementById( 'readme' + index )
+//		getMarkdown( urlSource + folder + '/readme.md', rm );
+
+
+		if ( that.contentWindow.controls ) {
+
+			that.contentWindow.controls.enableZoom = false;
+
+		} else if ( that.contentWindow.ifr && that.contentWindow.ifr.contentWindow.controls ) {
+
+		console.log( 'cccc', that.contentWindow.ifr );
+		// console.log( 'ddd', that.contentWindow.ifr.contentWindow );
+
+		///that.contentWindow.ifr.contentWindow.controls   );
+
+			that.contentWindow.ifr.contentWindow.controls.enableZoom = false;
+
+		}
+
+		if ( that.contentWindow.menu ) {
+
+			that.contentWindow.menu.style.overflow = 'hidden';
+
+		}
+
+		if ( that.contentWindow.contents ) {
+
+			that.contentWindow.contents.style.overflow = 'hidden';
+
+		}
+
+	}
+
+	function getMarkdown( fileName, target ) {
+
+		var xhr = new XMLHttpRequest();
+		xhr.open( 'GET', fileName, true );
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function callback() {
+
+
+			showdown.setFlavor('github');
+
+			const converter = new showdown.Converter();
+
+			target.innerHTML = converter.makeHtml( xhr.responseText );
+
+		}
+
+	}
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+
+		for ( var i = 0; i < iframeContainers.length; i++ ) {
+
+			var iframeContainer = iframeContainers[ i ];
+
+			var rect = iframeContainer.getBoundingClientRect();
+
+			if ( rect.bottom < 0 || rect.top > window.innerHeight ) { continue; }
+
+			updateIframe( iframeContainer );
+
+		}
+
+	}
+
+</script>
+</body>
+</html>
