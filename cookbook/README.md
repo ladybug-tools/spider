@@ -4,7 +4,7 @@
 
 # Cookbook Read Me
 
-## View all the examples: [Cookbook Gallery]( #cookbook/cookbook-gallery.html )
+## View all the examples: [Cookbook Gallery]( #https://rawgit.com/ladybug-tools/spider/master/cookbook/cookbook-gallery.html )
 
 ## Coding Style
 
@@ -125,3 +125,9 @@ Export generated 3D building data to a gbXML file
 * Generate and view a JSON file with building data
 * Generate, view and export a gbXML fie with the building data
 * Designed to help build test cases
+
+
+***
+
+# <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > &#x1f578; </a></center>
+
