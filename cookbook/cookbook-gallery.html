@@ -9,7 +9,7 @@
 <title></title>
 <style>
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	body { font: 12pt monospace; margin: 0 auto; }
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
@@ -93,7 +93,7 @@
 
 		const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 
-		const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+//		const urlCORS = 'https://cors-anywhere.herokuapp.com/';
 
 		requestFile( urlGitHubApiContents, callbackFilesOnGitHub );
 
@@ -234,7 +234,7 @@
 
 	}
 
-	function getMarkdown( fileName, target ) {
+	function getMarkdowncccc( fileName, target ) {
 
 		var xhr = new XMLHttpRequest();
 		xhr.open( 'GET', fileName, true );

@@ -3,12 +3,7 @@
 
 # [Spider Read Me]( #README.md )
 
-<!--
-_See also the files at the links below for glimpses of what will be showing up here._
 
-* <https://ibpsa2017.github.io/>
-* <http://www.ladybug.tools/ladybug-web/>
--->
 
 <iframe class=iframeReadMe src=./plugins/iframe-carousel-r1.html width=100% height=480 ></iframe>
 
@@ -79,10 +74,14 @@ Things we seem to be doing include:
 
 Life here on Earth is quite amazing and enjoyable. We'd like to help make Earth even cooler.
 
+
+
 ## Links of Interest
 
+_See also these two links below for previous-related efforts._
 
-See also:
+* <https://ibpsa2017.github.io/>
+* <http://www.ladybug.tools/ladybug-web/>
 
 Thoughts we like:
 * <https://readmetips.github.io/>
@@ -95,25 +94,6 @@ Technology that helps beginners build more technology
 * <https://bl.ocks.org/>
 * <https://threejs.org/>
 * <https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API>
-
-
-## Change Log
-_This particular change log mostly covers info in this read me. Most folders here each have their own equally fascinating read me file._
-
-
-### 2018-01-05 ~ Theo
-
-* Add carousel
-* Add text
-
-### 2018-01-02 ~ Theo
-
-* A few updates
-* iframe link to gbXML viewer
-
-### 2017-08-24 ~ Theo
-
-* First commit (of this read me )
 
 
 ***
