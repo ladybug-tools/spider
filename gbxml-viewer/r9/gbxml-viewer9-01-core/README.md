@@ -76,6 +76,10 @@ The ultimate goal is to be able to offer various analytical batch operations tha
 
 See also main gbXML README.md
 
+### 2018-02-02 ~ Theo
+
+R9.6
+* Add gbxml variable
 
 ### 2018-01-27 ~ Theo
 

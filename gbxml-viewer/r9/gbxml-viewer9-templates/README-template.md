@@ -8,7 +8,7 @@
 
 ## Full screen: [gbXML Viewer9 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html )
 
-Use and share this link for gbXML Viewer8:
+Use and share this link for gbXML Viewer:
 
 * <http://www.ladybug.tools/spider/gbxml-viewer/r9/>
 

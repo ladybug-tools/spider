@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="View gbXML files in 3D in your browser. Open files using File Reader or by URL in location.hash.Base Script used by gbXML Viewer modules." >
 <meta name=keywords content="gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-28" >
-<title>gbXML Viewer9 Core</title>
+<meta name = "date" content = "2018-02-02" >
+<title>gbXML Viewer9 Core R9.6</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -58,6 +58,7 @@
 		:
 		'../../gbxml-sample-files/bristol-clifton-down-road.xml';
 
+	var gbxml;
 	var gbjson;
 
 // add surface group to r9?
@@ -172,8 +173,6 @@
 
 		requestFile( url, callbackGbXML );
 
-
-
 	}
 
 
@@ -200,9 +199,9 @@
 
 	function callbackGbXML( xhr ){
 
-		const response = xhr.target.responseXML.documentElement;
+		gbxml = xhr.target.responseXML.documentElement;
 
-		parseFileXML( response );
+		parseFileXML( gbxml );
 
 	}
 

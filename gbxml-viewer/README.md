@@ -300,6 +300,11 @@ Will most likely build upon
 
 ## Change Log
 
+* R9.6
+* Core: add  gbxml var
+* Save File: first commit
+* App: add save file button
+
 ### 2018-01-27 ~ Theo
 
 * R9.5
