@@ -95,6 +95,7 @@
 				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
 
 				intersected = intersects[ 0 ].object;
+console.log( 'intersected', intersected );
 
 				if ( intersected.material.emissive ) {
 
@@ -186,7 +187,6 @@
 						( space2.Description ? 'description: ' + space2.Description + b : '' )  +
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
 //						'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
-
 					'';
 
 				} else {
@@ -230,6 +230,7 @@
 			'id: ' + data.id + b +
 			'surface: ' + data.surfaceType + b +
 			( data.CADObjectId ? 'CADObjectId: ' + data.CADObjectId + b : '' ) +
+			'height: ' + intersected.position.z.toLocaleString() + b +
 			adjacenciesTxt +
 		'';
 
