@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "This script allows you to list, open view all the files in all the Spider folders" >
 <meta name = "keywords" content = "JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-01-01" >
+<meta name = "date" content = "2018-02-01" >
 <title>Spider</title>
 
 <style>
@@ -76,9 +76,9 @@
 
 		<p>Tooltips provide file size.</p>
 
-		<div id= "divFooter" >
+		<hr>
 
-			<hr>
+		<div id= "divFooter" >
 
 			<div title='many thanks!' ><a href=#pages/credits.md >Credits</a></div>
 			<div><a href=#pages/code-of-conduct.md >Code of Conduct</a></div>
@@ -126,7 +126,7 @@
 
 	function init() {
 
-		urlGitHubPage = location.pathname.includes( user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + '/master/';
+		urlGitHubPage = location.pathname.includes( user + '/' + user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + '/master/';
 //console.log( 'urlGitHubPage', urlGitHubPage );
 
 		urlInfo.href = urlGitHubSource;
