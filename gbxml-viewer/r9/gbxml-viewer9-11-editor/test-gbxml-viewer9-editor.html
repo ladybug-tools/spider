@@ -3,19 +3,16 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Create text reports of data embedded in gbXML files. Toggle the display of 3D surfaces based on user input. Create detailed interactive reports of issues discoverd." >
-<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-12-07" >
-<title>test gbxml viewer9 reports</title>
+<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-12-30" >
+<title>test-gbxml-viewer9-editor</title>
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
-
-	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; margin: 3px; padding: 3px 20px; }
-	button:hover { background-color: #ccc; color: #fff }
 
 	iframe { height: 500px; width: 100%; }
 
@@ -29,18 +26,17 @@
 <body>
 
 	<div id = "divHeader" >
-		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r9/gbxml-viewer9-05-reports" >gh</a>
+		<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r9/" >gh</a>
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'reports' to load reports menu.</p>
+	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butReports onclick =
+		<button id=butEditor onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src='../gbxml-viewer9-05-reports/gbxml-viewer9-reports.js'; " >
-		reports</button>
-
+			script.src = '../gbxml-viewer9-11-editor/gbxml-viewer9-editor.js';" >
+			gbxml-viewer9-editor </button>
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
@@ -92,7 +88,6 @@
 	}
 
 
-
 	function drop( event ) {
 
 		event.preventDefault();
@@ -115,7 +110,7 @@
 
 	function onloadThreejs() {
 
-		butReports.click();
+		butEditor.click();
 
 	}
 

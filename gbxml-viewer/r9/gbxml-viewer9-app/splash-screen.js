@@ -8,6 +8,16 @@
 
 			<details open>
 
+				<summary>Welcome 2018-02-03</summary>
+
+				<p>
+				Starting to add saving and editing. Help text added to Reports menu. Storey and Space readout in Core work better.
+				</p>
+
+			</details>
+
+			<details>
+
 				<summary>Welcome 2018-01-01</summary>
 
 				<p>

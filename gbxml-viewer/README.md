@@ -300,8 +300,11 @@ Will most likely build upon
 
 ## Change Log
 
-* R9.6
+* R9.6a
 * Core: add  gbxml var
+* Cure: clear divLog with reset view
+* Reports: fix issues with storey and space readout in core
+* Help text added to Reports menu.
 * Save File: first commit
 * App: add save file button
 

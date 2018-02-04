@@ -79,7 +79,8 @@ See also main gbXML README.md
 ### 2018-02-02 ~ Theo
 
 R9.6
-* Add gbxml variable
+* Add global gbxml variable
+* Clear divLog when view is reset
 
 ### 2018-01-27 ~ Theo
 

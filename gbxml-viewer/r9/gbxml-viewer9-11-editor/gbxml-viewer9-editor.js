@@ -20,14 +20,9 @@
 
 	function init() {
 
-		if ( butMenuSave.style.backgroundColor !== 'pink' ) {
+		if ( butEditor.style.backgroundColor !== 'pink' ) {
 
-			let txt =
-			'<p>' +
-				'<button id=butSave onclick=saveFile() > Save file </button>' +
-			'</p>' +
-
-			'';
+			let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
 			icw = ifrThree.contentWindow;
 			THREE = icw.THREE;
@@ -44,26 +39,20 @@
 			surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
 			surfaceMeshes = icw.surfaceMeshes;
 
+
 console.log( 'scene', icw );
 console.log( 'gbjson', gbjson );
 console.log( 'surfaceMeshes', surfaceMeshes );
 
 			divMenuItems.innerHTML =
 
-				'<details id = detSave open >' +
-					'<summary>Save  File</summary>' +
+				'<details id = detEditor open>' +
+					'<summary>Template</summary>' +
 
 					'<p>' + txt + '<p>' +
-
 					'<p>surfaces: ' + icw.surfaceMeshes.children.length + '</p>' +
 
-					'<p>2018-02-02 ~ This first release of Save only saves a copy of the original file. ' +
-						'Edits and saving edits will be added in the near future. ' +
-					'</p>' +
-
 				'</details>' +
-
-				'<hr>' +
 
 				divMenuItems.innerHTML +
 
@@ -72,32 +61,17 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 // following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
-			butMenuSave.style.backgroundColor = 'pink';
+			butEditor.style.backgroundColor = 'pink';
 
 		} else {
 
 //			element = document.getElementById( 'detTemplate' );
 
-			detSave.remove();
+			detEditor.remove();
 
-			butMenuSave.style.backgroundColor = '';
+			butEditor.style.backgroundColor = '';
 
 		}
 
 	}
 
-
-	function saveFile() {
-
-		const xmlText = new XMLSerializer().serializeToString( gbxml );
-//console.log( 'xmlText', xmlText );
-
-		var blob = new Blob( [ xmlText ] );
-		var a = document.body.appendChild( document.createElement( 'a' ) );
-		a.href = window.URL.createObjectURL( blob );
-		a.download = gbjson.Campus.Building.id + '.xml';
-		a.click();
-//		delete a;
-		a = null;
-
-	}

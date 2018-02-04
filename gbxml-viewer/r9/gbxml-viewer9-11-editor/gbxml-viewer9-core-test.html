@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="View gbXML files in 3D in your browser. Open files using File Reader or by URL in location.hash.Base Script used by gbXML Viewer modules." >
 <meta name=keywords content="gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-02" >
-<title>gbXML Viewer9 Core R9.6</title>
+<meta name = "date" content = "2018-02-03" >
+<title>gbXML Viewer9 Core R9.6 Editor Dev</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -17,6 +17,10 @@
 	button:hover { background: #ccc; color: #fff }
 
 	.dragDropArea { border: 1px dashed gray; }
+
+	.container { display: flex; }
+
+	.container > div { border: 1px solid red; margin: 5px; padding: 10px; }
 
 	#divMenu { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
 
@@ -44,8 +48,16 @@
 
 	</p>
 
-	<div id=divLog ></div>
+	<div>
 
+		<button onclick=getSurfaces(); >get surfaces</button>
+		<button onclick=getSpaces(); >get spaces</button>
+		<button onclick=listSurfaces(); >list surfaces</button>
+		<button onclick=editSurfacesSpaces(); >edit Surfaces & spaces</button>
+	</p>
+
+	<div id=divLog ></div>
+	<div id=divGbxml style=max-height:600px;overflow:auto; class=container ></div>
 
 <script>
 
@@ -159,7 +171,7 @@
 
 	function onWindowLoad() {
 
-		divLog.innerHTML = '';
+//		divLog.innerHTML = '';
 
 		if ( parent && parent.onloadThreejs ) { parent.onloadThreejs(); }
 
@@ -199,12 +211,191 @@
 
 	function callbackGbXML( xhr ){
 
-		gbxml = xhr.target.responseXML.documentElement;
+//		gbxml = xhr.target.responseXML.documentElement;
+		gbxml = xhr.target.responseXML;
 
-		parseFileXML( gbxml );
+console.log( 'gbxml', gbxml );
+
+//getSurfaces();
+
+		parseFileXML( gbxml.documentElement );
 
 	}
 
+
+	function listSurfaces() {
+
+		const surfaces = gbxml.getElementsByTagName("Surface");
+console.log( 'surfaces', surfaces );
+
+		let txt = '';
+
+		for ( let i = 0; i < surfaces.length; i++) {
+
+			surface = surfaces[ i ];
+			txt +=
+				'<option>' +
+				 i + '. ' + surface.attributes.getNamedItem( 'id' ).nodeValue +
+//				 ' - ' +  surface.attributes.getNamedItem( 'surfaceType' ).nodeValue +
+				'</option>';
+
+		}
+
+		const surfaceTypes  = Object.keys( colors );
+		let options = '';
+console.log( 'surfaceTypes', surfaceTypes);
+
+		for ( var i = 0; i < surfaceTypes.length; i++ ) {
+
+			options += '<option>' + surfaceTypes[ i ] + '</option>';
+
+		}
+
+
+		const spaces = gbxml.getElementsByTagName("Space");
+console.log( 'spaces', spaces );
+
+		let txtSpaces = '<option>none</option>';
+
+		for ( let i = 0; i < spaces.length; i++) {
+
+			const space = spaces[ i ];
+
+			id = space.attributes.getNamedItem( 'id' ).nodeValue;
+
+			txtSpaces += '<option>' + id + '</option>';
+
+		}
+
+		divGbxml.innerHTML =
+			'<div>Surface<select size=10 >' + txt + '</select></div> ' +
+			'<div>Type<select size=10 >' + options + '</select></div> ' +
+			'<div>Adjacency 1<select size=10 >' + txtSpaces + '</select></div> ' +
+			'<div>Adjacency 2<select size=10 >' + txtSpaces + '</select></div>' +
+		'';
+
+	}
+
+
+
+	function getSurfaces() {
+
+		let txt = '';
+		let surfaceIds = [];
+
+		const campus = gbxml.getElementsByTagName("Campus");
+//console.log( 'campus', campus );
+
+		const surfaces = campus[0].getElementsByTagName("Surface");
+//console.log( 'surfaces', surfaces );
+
+		for ( let i = 0; i < surfaces.length; i++) {
+
+			const type = surfaces[i].attributes.getNamedItem( 'surfaceType' );
+//console.log( 'type', type );
+
+			const adjs = surfaces[ i ].getElementsByTagName( 'AdjacentSpaceId' );
+
+			var atts = [];
+
+			for ( let j = 0; j < adjs.length; j++ ) {
+
+				atts.push( adjs[ j ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
+
+			}
+
+			atts = atts.length ? atts : ['none'];
+
+//console.log( 'AdjacentSpaceId', atts.join() );
+
+			txt +=
+
+				i + '. ' + type.nodeValue +
+				' - ' + atts.join() +
+
+			'<br>';
+
+			surfaceIds.push( atts );
+		}
+
+		divGbxml.innerHTML = txt;
+
+//console.log( 'surfaceIds', surfaceIds );
+
+		return surfaceIds;
+
+	}
+
+
+
+	function getSpaces() {
+
+		let txt = '';
+		const campus = gbxml.getElementsByTagName("Campus");
+console.log( 'campus', campus );
+
+		const spaces = campus[0].getElementsByTagName("Space");
+console.log( 'spaces', spaces );
+
+		for ( let i = 0; i < spaces.length; i++) {
+
+			const space = spaces[ i ];
+
+			id = space.attributes.getNamedItem( 'id' ).nodeValue;
+
+			txt += i + '. ' + id + '<br>';
+
+		}
+
+		divGbxml.innerHTML = txt;
+
+	}
+
+
+
+	function editSurfacesSpaces() {
+
+		let txt = '';
+//		const campus = gbxml.getElementsByTagName("Campus");
+//console.log( 'campus', campus );
+
+		const surfaces = gbxml.getElementsByTagName("Surface");
+console.log( 'surfaces', surfaces );
+
+		for ( let i = 0; i < surfaces.length; i++) {
+
+			const surface = surfaces[i];
+			const type = surface.attributes.getNamedItem( 'surfaceType' );
+//console.log( 'type', type );
+			const id = surface.attributes.getNamedItem( 'id' ).nodeValue;
+
+			const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
+
+			var atts = [];
+
+			for ( let j = 0; j < adjs.length; j++ ) {
+
+				atts.push( adjs[ j ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
+
+			}
+
+			atts = atts.length ? atts : ['none'];
+
+//console.log( 'AdjacentSpaceId', atts.join() );
+
+			txt +=
+
+				i + '. ' + id + ' - ' + type.nodeValue +
+				' - ' + atts.join() +
+
+			'<br>';
+
+		}
+
+		divGbxml.innerHTML = txt;
+
+
+	}
 
 
 	function openFile( files ) {
@@ -217,6 +408,7 @@
 
 			const xmlDoc = parser.parseFromString( reader.result, "text/xml" );
 
+			gbxml = xmlDoc;
 			gbjson = parseFileXML( xmlDoc.children[ 0 ] );
 
 			if ( files.files[ 0 ] ) { gbjson.name = files.files[ 0 ].name; }
@@ -240,6 +432,8 @@
 // loads any text file - from file reader or location hash or wherever
 
 	function parseFileXML( xmlNode ) {
+
+		divGbxml.innerHTML = '';
 
 		gbjson = XML2jsobj( xmlNode );
 //console.log( 'gbjson', gbjson );
@@ -406,9 +600,18 @@
 			const material = new THREE.MeshPhongMaterial( { color: colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
 			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
+
 			shape.userData.data = surfaces[ i ];
 			shape.castShadow = shape.receiveShadow = true;
 			surfaceMeshes.add( shape );
+
+
+if ( surfaces[ i ].id === 'aim8068' ) {
+
+console.log( 'surfaces[ i ]', surfaces[ i ] );
+console.log( 'shape', shape );
+console.log( 'polyloops[ i ]', polyloops[ i ] );
+			}
 
 			const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
 			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
@@ -548,7 +751,6 @@
 		surfaceMeshes.visible = true;
 
 		document.body.style.backgroundImage = '';
-		divLog.innerHTML = '';
 
 		for ( let child of surfaceMeshes.children ) {
 

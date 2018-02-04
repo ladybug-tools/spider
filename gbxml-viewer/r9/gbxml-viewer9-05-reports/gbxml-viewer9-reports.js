@@ -80,6 +80,8 @@
 
 			'</details>' +
 
+			'<hr>' +
+
 			divMenuItems.innerHTML +
 
 		'';
@@ -106,7 +108,7 @@
 		divReport.innerHTML += addDetails( spacesText.summary, spacesText.flowContent );
 
 		const spacesTiny = getSpacesTiny();
-		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent );
+		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent, spacesTiny.info );
 
 		const zones = traversGbjson( gbjson.Zone );
 		divReport.innerHTML += addDetails( 'Zones', zones.attributes );
@@ -121,19 +123,19 @@
 //		examineGbjson( gbjson );
 
 		const surfaceDuplicateCoordinates = getSurfaceDuplicatesCoordinates();
-		divReport.innerHTML += addDetails( surfaceDuplicateCoordinates.summary, surfaceDuplicateCoordinates.flowContent );
+		divReport.innerHTML += addDetails( surfaceDuplicateCoordinates.summary, surfaceDuplicateCoordinates.flowContent, surfaceDuplicateCoordinates.info );
 
 		const surfaceDuplicateCadIds = getSurfaceDuplicateCadIds();
-		divReport.innerHTML += addDetails( surfaceDuplicateCadIds.summary, surfaceDuplicateCadIds.flowContent );
+		divReport.innerHTML += addDetails( surfaceDuplicateCadIds.summary, surfaceDuplicateCadIds.flowContent, surfaceDuplicateCadIds.info );
 
 		const surfaceDuplicateAdjacencies = getSurfaceDuplicateAdjacencies();
-		divReport.innerHTML += addDetails( surfaceDuplicateAdjacencies.summary, surfaceDuplicateAdjacencies.flowContent );
+		divReport.innerHTML += addDetails( surfaceDuplicateAdjacencies.summary, surfaceDuplicateAdjacencies.flowContent, surfaceDuplicateAdjacencies.info );
 
 		const surfaceTinies = getSurfacesTinies();
-		divReport.innerHTML += addDetails( surfaceTinies.summary, surfaceTinies.flowContent );
+		divReport.innerHTML += addDetails( surfaceTinies.summary, surfaceTinies.flowContent, surfaceTinies.info );
 
 		const surfaceAdjacencyInvalid = getSurfaceAdjacencyInvalid();
-		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent );
+		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent, surfaceAdjacencyInvalid.info );
 
 // following causes error when inside an iframe in a read me
 		if ( parent.setIfrThree ) { setIfrThree(); }
@@ -167,13 +169,14 @@
 
 
 
-	function addDetails( summary, text, open = '' ) {
+	function addDetails( summary, text, info = '', open = '' ) {
 
 		flowContent = text ? text : 'no attributes';
 
 		const details =
 			'<details ' + open + ' >' +
 				'<summary>' + summary + '</summary>' +
+				'<div><small><i>' + info + '</i></small></div>' +
 				flowContent +
 			'</details>' +
 		'';
@@ -247,6 +250,8 @@
 
 		}
 
+		flowContent += '<div id=divStoreyItems style=background-color:yellow;  ></div>';
+
 		return { summary: 'Storeys &raquo; ' + count, flowContent: flowContent };
 
 	}
@@ -255,7 +260,7 @@
 
 	function getSpaces() {
 
-		let spaces = gbjson.Campus.Building.Space;
+		spaces = gbjson.Campus.Building.Space;
 		let flowContent = '';
 		let count = 0;
 //console.log( 'spaces', spaces  );
@@ -309,7 +314,8 @@
 
 		}
 
-		return { summary: 'Tiny Spaces &raquo; ' + count, flowContent: flowContent };
+		const info = 'Information: Spaces with area smaller than 2 square units';
+		return { summary: 'Tiny Spaces &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
 
@@ -398,7 +404,6 @@
 //console.log( 'surface', surface );
 //console.log( 'surfOther', surfOther );
 
-
 				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
 
 				if ( adjacency ) {
@@ -440,7 +445,8 @@
 
 		}
 
-		return { summary: 'Duplicate Coordinates &raquo; ' + count, flowContent: flowContent };
+		const info = 'Error: Two surfaces with identical coordinates';
+		return { summary: 'Duplicate Coordinates &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
 
@@ -557,7 +563,8 @@
 
 		}
 
-		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent };
+		const info= 'Information: Multiple gbXML elements created from single CAD element';
+		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
 
@@ -612,7 +619,8 @@
 
 		}
 
-		return { summary: 'Duplicate Adjacencies &raquo; ' + count, flowContent: flowContent };
+		const info = 'Error: Interior surfaces with both adjacencies pointing to same ID';
+		return { summary: 'Duplicate Adjacencies &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
 
@@ -664,7 +672,8 @@
 
 		}
 
-		return { summary: 'Tiny Surfaces &raquo; ' + count, flowContent: flowContent };
+		const info = 'Information: Spaces with area smaller than ' + sud.tinySurfaceSquareMeters + ' square units';
+		return { summary: 'Tiny Surfaces &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
 
@@ -715,10 +724,8 @@
 
 		}
 
-		return { summary: 'Invalid Adjacencies &raquo; ' + count, flowContent: flowContent };
-
-
-
+		const info = 'Error: Surface has multiple adjacencies but should have just one';
+		return { summary: 'Invalid Adjacencies &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
 
@@ -730,6 +737,7 @@
 
 		const spaces = gbjson.Campus.Building.Space;
 		surfaceGroup.visible = true;
+		icw.divLog.innerHTML = '';
 
 		let zones = [];
 		let spacesArray = [];
@@ -766,7 +774,7 @@
 
 		}
 
-		node.parentNode.innerHTML +=
+		divStoreyItems.innerHTML =
 			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
 			'zones ' + zones.length + ': ' + zones.join();
 
@@ -790,6 +798,7 @@
 	function toggleSurface( id ) {
 
 		surfaceGroup.visible = true;
+		icw.divLog.innerHTML = '';
 
 		for ( let child of surfaceMeshesChildren ) {
 
@@ -840,6 +849,7 @@
 	function toggleSurfaceType( that ) {
 
 		surfaceGroup.visible = true;
+		icw.divLog.innerHTML = '';
 //console.log( '', surfaceAdjacencyDuplicates );
 
 		for ( let child of surfaceMeshesChildren ) {
@@ -863,6 +873,7 @@
 	function setTypeInvisible( that ) {
 
 		surfaceGroup.visible = true;
+		icw.divLog.innerHTML = '';
 //console.log( '', surfaceAdjacencyDuplicates );
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
@@ -890,6 +901,7 @@
 	function toggleSpace( id ) {
 
 		surfaceGroup.visible = true;
+		icw.divLog.innerHTML = '';
 
 		for ( let child of surfaceMeshesChildren ) {
 
@@ -943,6 +955,7 @@
 //console.log( '', CADObjectId );
 		surfaceGroup.visible = true;
 		surfaceEdges.visible = true;
+		icw.divLog.innerHTML = '';
 
 		for ( let child of surfaceMeshesChildren ) {
 
@@ -968,6 +981,8 @@
 	function toggleAdjacencies( id, surfaceArray ) {
 
 //console.log( '', that.innerText );
+
+		icw.divLog.innerHTML = '';
 
 		if ( id.style.backgroundColor !== 'pink' ) {
 
@@ -1007,6 +1022,7 @@
 
 		surfaceGroup.visible = true;
 		surfaceEdges.visible = true;
+		icw.divLog.innerHTML = '';
 
 		for ( let child of surfaceMeshesChildren ) {
 
