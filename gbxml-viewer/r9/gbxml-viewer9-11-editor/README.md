@@ -42,25 +42,29 @@ There are a number of questions:
 
 The next few releases should begin to provide some guidance in responding to these questions.
 
+#### Update 2018-02-05
+
+It looks like getting the gbXML and gbJSON data to communicate is fairly easy to do. The confusion will be in the future when you will have to switch your brain from one style to the other too frequently.
+
 
 ### Mission
 
 * View the IDs of all the surfaces in a list
 	* Select the surface you want to edit
+	* Selected surface is highlighted 'in world' and make other surfaces nearly transparent
+	* Display the name of the selected surface as a tooltip in the menu
 * View the names of all the surface types
 	* Current surface type of selected surface is highlighted
 	* Select a different surface type for the selected surface
 * View the IDs of the adjacent spaces
 	* Select different spaces for the selected surface
+* Save the edits to a new file
 
 
 ## Wish list
 
-* Highlight the selected surface 'in world' and make other surfaces nearly transparent
-* Display the name and CAD ID etc of the selected surface in the menu
-* Display the name and CAD ID etc of the selected space(s) in the menu
+* Display CAD ID etc of the selected space(s) in the menu?
 * Allow you to use all the error-locating tools in the [gbXML Viewer Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html ) script
-* **Save the edits to a new file**
 	* Perhaps in gbJSON format as well as gbXML
 
 More thoughts
@@ -78,6 +82,17 @@ More thoughts
 
 
 ## Change Log
+
+### 2018-02-05 ~ Theo
+
+* R1.2
+* Tooltip for each select Surface item shows surface name
+* Selecting a surface zooms and highlights the surface
+* Selecting a surface type updates the surfaces type
+* 'view previous update' zooms and highlights the surface previously updated
+	* Currently a reset view of the entire building is required - which hides the surface previously edited
+	* This could change in the future
+* 'save edits' save the updated data to a new gbXML file
 
 ### 2018-02-04 ~ Theo
 

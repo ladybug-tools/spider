@@ -20,7 +20,7 @@ The read me file with full details is in the main gbXML Viewer folder just above
 
 
 
-## gbXML Viewer9 Core
+## 1. gbXML Viewer9 Core
 
 This folder contains the basic script that does all the hard work of opening gbXML data files, reading the data and displaying the data in 3D using the [Three.js]( https://threejs.org ) JavaScript library.
 
@@ -43,7 +43,7 @@ _At the moment, all scripts are also in the menu. They only work when the full g
 _In the future, however, the hope is to be able to add special links using easy-to-edit Markdown files that cause special or additional features to load and run._
 
 
-## gbXML Viewer9 Gallery
+## 2. gbXML Viewer9 Gallery
 
 There are a few locations on the web that allow access to sample gbXML files that you may use for experimentation.
 
@@ -71,7 +71,7 @@ Ladybug Tools/Spider gbXML Viewer sample files on GitHub</a>
 
 
 
-## Heads-Up Display
+## 3. Heads-Up Display
 
 ### Full screen: [Test gbXML Viewer9 Heads-Up Display]( ../gbxml-viewer9-03-heads-up-displa/test-gbxml-viewer9-heads-up-displa.html )
 
@@ -82,7 +82,18 @@ Ladybug Tools/Spider gbXML Viewer sample files on GitHub</a>
 Ladybug Tools/Spider gbXML Viewer Heads-Up Display</a>
 
 
-## Reports
+## 4. Settings
+
+### Full screen: [Test gbXML Viewer9 Settings]( ../gbxml-viewer9-04-settings/test-gbxml-viewer9-settings.html )
+
+<a href = "JavaScript:( function(){
+	const script = document.head.appendChild( document.createElement( 'script' ) );
+	script.src = '../gbxml-viewer9-04-settings/gbxml-viewer9-settings.js';
+} )()" >
+gbXML Viewer Settings</a>
+
+
+## 5. Reports
 
 ### Full screen: [Test gbXML Viewer9 Reports]( ../gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html )
 
@@ -94,30 +105,30 @@ gbXML Viewer Reports</a>
 
 
 
-## Settings
-
-### Full screen: [Test gbXML Viewer9 Settings]( ../gbxml-viewer9-04-settings/test-gbxml-viewer9-settings.html )
-
-<a href = "JavaScript:( function(){
-	const script = document.head.appendChild( document.createElement( 'script' ) );
-	script.src = '../gbxml-viewer9-04-settings/gbxml-viewer9-settings.js';
-} )()" >
-gbXML Viewer Settings</a>
+### 6. First Person camera
 
 
-
-
-### First Person camera
-
-
-### Sun Path / Analemmas
+### 7. Sun Path / Analemmas
 
 * 2018-01-01 ~ Theo: Multiple suns
 
 
-### Screen Capture
+### 8. Screen Capture
 
 * 2018-01-01 ~ Much better control over the camera
+
+
+### 9. Sun Range
+
+
+### 10. Save
+
+
+
+### 11. Editor
+
+### [gbXML Viewer9 Core Editor Dev]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-11-editor/gbxml-viewer9-core-editor-dev.html )
+
 
 ## Templates
 
