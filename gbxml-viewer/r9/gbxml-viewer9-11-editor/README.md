@@ -6,7 +6,7 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-11-editor/gbxml-viewer9-core-editor-dev.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 _preliminary version - must be viewed full screen to work_
 
-## Full screen: [gbXML Viewer9 Editor]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-11-editor/gbxml-viewer9-core-editor-dev.html )
+## Full screen: [gbXML Viewer9 Editor Dev]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-11-editor/gbxml-viewer9-core-editor-dev.html )
 
 
 ## Concept
@@ -28,11 +28,11 @@ An app that enables easy viewing of gbXML files, helps with locating and highlig
 
 This script is based on manipulating XML data. The other scripts in the gbXML Viewer series manipulate JSON data extracted from the XML data.
 
-The difference is due to the intention of being able to save an edited version of the data to a new file that apart from the edits contains an identical copy of the original data.
+The difference is due to the new and added intention of being able to save an edited version of the XML data to a new file that apart from the edits contains an identical copy of the original XML data.
 
-Other scripts the Spider repo do create building data and save to the gbXML file format, but do not contain shell or rectangular geometry let alone all the other gbXML elements the original file mae have contained.
+Other scripts the Spider repo do create building data and save to the gbXML file format, but do not contain shell or rectangular geometry let alone all the other gbXML elements the original file may have contained.
 
-As of this writing, the way forward is not clear. the JSON format used here - which we call gbJSON - has enabled fast, simple relatively easy coding which has produced scripts with many features at a rapid pace.
+As of this writing, the way forward is not clear. The JSON format used here - which we call gbJSON - has enabled fast, simple relatively easy coding which has produced scripts with many features at a rapid pace.
 
 There are a number of questions:
 
@@ -41,7 +41,6 @@ There are a number of questions:
 * Can we get the gbXML and the gbJSON to play nice together?
 
 The next few releases should begin to provide some guidance in responding to these questions.
-
 
 
 ### Mission
