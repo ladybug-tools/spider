@@ -57,18 +57,22 @@
 
 	<div id=divMenuItems >
 
-		<details id = detSurfaceEdits open title='Use up and down cursor keys to scroll through the list of surfaces quickly' >
+		<details id = detSurfaceEdits open >
 
 			<summary>Surface Edits</summary>
+<!--
+			<button onclick=getSurfaces(); >get surfaces</button>
+			<button onclick=getSpaces(); >get spaces</button>
+			<button onclick=editSurfacesSpaces(); >edit Surfaces & spaces</button>
 
-			<p  ><small><i>Select a surface in the left column then update its type and adjacent spaces</i></small></p>
+			<button onclick=editSurfaces(); >edit surfaces</button>
+-->
+
+			<p><small><i>Select a surface in the left column then update its type and adjacent spaces</i></small></p>
 
 			<div id=divGbxml style=max-height:600px;overflow:auto; class=container ></div>
 
-			<div id=divUpdates >
-				<button onclick=viewPreviousUpdates(); >view previous update</button>
-				<button onclick=saveFile(); >save edits</button>
-			</div>
+			<button onclick=saveEdits(); >save edits</button>
 
 		</details>
 
@@ -121,9 +125,6 @@
 	}
 	var surfaceTypes  = Object.keys( colors );
 
-	var telltale;
-	var surfaceUpdatedId = -1;
-
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional, lightPoint;
 	var cameraHelper, axesHelper, gridHelper, groundHelper;
@@ -156,7 +157,7 @@
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		//		controls.autoRotate = true;
+//		controls.autoRotate = true;
 		controls.enableKeys = false;
 
 		scene = new THREE.Scene();
@@ -184,7 +185,7 @@
 		window.addEventListener ( 'hashchange', onHashChange, false );
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
-		//		window.addEventListener( 'load', onWindowLoad, false );
+//		window.addEventListener( 'load', onWindowLoad, false );
 
 		onHashChange();
 
@@ -195,12 +196,11 @@
 
 	function onWindowLoad() {
 
-		//divLog.innerHTML = '';
+		//		divLog.innerHTML = '';
 
 		if ( parent && parent.onloadThreejs ) { parent.onloadThreejs(); }
 
 		editSurfaces();
-
 	}
 
 
@@ -239,9 +239,85 @@
 
 		gbxml = xhr.target.responseXML.documentElement;
 
-		//console.log( 'gbxml', gbxml );
+//		console.log( 'gbxml', gbxml );
 
 		parseFileXML( gbxml );
+
+	}
+
+
+
+	function getSurfaces() {
+
+		let txt = '';
+		let surfaceIds = [];
+
+		const campus = gbxml.getElementsByTagName("Campus");
+		//console.log( 'campus', campus );
+
+		const surfaces = campus[0].getElementsByTagName("Surface");
+		//console.log( 'surfaces', surfaces );
+
+		for ( let i = 0; i < surfaces.length; i++) {
+
+			const surface = surfaces[i];
+			const type = surface.attributes.getNamedItem( 'surfaceType' );
+		//console.log( 'type', type );
+
+			const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
+
+			var atts = [];
+
+			for ( let j = 0; j < adjs.length; j++ ) {
+
+				atts.push( adjs[ j ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
+
+			}
+
+			atts = atts.length ? atts : ['none'];
+
+		//console.log( 'AdjacentSpaceId', atts.join() );
+
+			txt +=
+
+				i + '. ' + type.nodeValue +
+				' - ' + atts.join() +
+
+			'<br>';
+
+			surfaceIds.push( atts );
+		}
+
+		divGbxml.innerHTML = txt;
+
+		//console.log( 'surfaceIds', surfaceIds );
+
+		return surfaceIds;
+
+	}
+
+
+
+	function getSpaces() {
+
+		let txt = '';
+		const campus = gbxml.getElementsByTagName("Campus");
+		console.log( 'campus', campus );
+
+		const spaces = campus[0].getElementsByTagName("Space");
+		console.log( 'spaces', spaces );
+
+		for ( let i = 0; i < spaces.length; i++) {
+
+			const space = spaces[ i ];
+
+			id = space.attributes.getNamedItem( 'id' ).nodeValue;
+
+			txt += i + '. ' + id + '<br>';
+
+		}
+
+		divGbxml.innerHTML = txt;
 
 	}
 
@@ -257,19 +333,15 @@
 		for ( let i = 0; i < surfacesXml.length; i++) {
 
 			const surface = surfacesXml[ i ];
-			//console.log( 'surface', surface );
-
-			name = surface.getElementsByTagName("Name")[0].textContent;
-			//console.log( 'name', name );
 
 			txtSurfaces +=
-				'<option title=' + name + '>' +
-				surface.attributes.getNamedItem( 'id' ).nodeValue +
+				'<option>' +
+				 	i + '. ' + surface.attributes.getNamedItem( 'id' ).nodeValue +
 				'</option>';
 
 		}
 
-		//console.log( 'surfaceTypes', surfaceTypes);
+//		console.log( 'surfaceTypes', surfaceTypes);
 
 		let txtTypes = '';
 
@@ -297,23 +369,23 @@
 
 		divGbxml.innerHTML =
 
-			'<div>Surface<select id=selSurface onchange=updateSurface(); size=10 >' + txtSurfaces + '</select></div> ' +
-			'<div>Type<select id=selType size=10 onchange=updateSurfaceType(); >' + txtTypes + '</select></div> ' +
-			'<div>Adjacency 1<select id=selAdjacency1 onchange=updateAdjacency(1); size=10 >' + txtSpaces + '</select></div> ' +
-			'<div>Adjacency 2<select id=selAdjacency2 onchange=updateAdjacency(2); size=10 >' + txtSpaces + '</select></div>' +
+			'<div>Surface<select id=selSurface onchange=updateSurface() size=10 >' + txtSurfaces + '</select></div> ' +
+			'<div>Type<select id=selType size=10 >' + txtTypes + '</select></div> ' +
+			'<div>Adjacency 1<select id=selAdjacency1 size=10 >' + txtSpaces + '</select></div> ' +
+			'<div>Adjacency 2<select id=selAdjacency2 size=10 >' + txtSpaces + '</select></div>' +
 		'';
+
 
 	}
 
 
-
 	function updateSurface() {
 
-		const surface = surfacesXml[ selSurface.selectedIndex ];
-		//console.log( 'surface', surface );
+		surface = surfacesXml[ selSurface.selectedIndex ]
+//console.log( 'surface', surface );
 
 		const type = surface.attributes.getNamedItem( 'surfaceType' ).nodeValue;
-//		console.log( 'type', type );
+		console.log( 'type', type );
 		selType.selectedIndex = surfaceTypes.indexOf( type );
 
 		const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
@@ -331,114 +403,59 @@
 
 		}
 
-		selAdjacency2.selectedIndex = index;
+			selAdjacency2.selectedIndex = index;
 
-		toggleSurface( selSurface.value );
+
 
 	}
 
 
+	function saveEdits(){
 
-	function updateSurfaceType() {
-
-		surfaceUpdatedId = selSurface.selectedIndex;
-		const surface = surfacesXml[ surfaceUpdatedId ];
-		const typeNew = selType.value;
-
-		surface.attributes.getNamedItem( 'surfaceType' ).nodeValue = typeNew;
-
-		console.log( 'surface', surface );
-		parseFileXML( gbxml );
+		alert('Saving your edits could happen soon.\n\nDitto highlighting the selected surface in the 3D model.\n\nDitto displaying the adjacent spaces.');
 
 	}
 
+	function editSurfacesSpaces() {
 
-	function updateAdjacency( id ) {
+		let txt = '';
 
+		const surfaces = gbxml.getElementsByTagName("Surface");
+//		console.log( 'surfaces', surfaces );
 
-		alert( 'updates to adjacencies coming soon');
+		for ( let i = 0; i < surfaces.length; i++) {
 
-	}
+			const surface = surfaces[i];
+			const type = surface.attributes.getNamedItem( 'surfaceType' );
+			//console.log( 'type', type );
+			const id = surface.attributes.getNamedItem( 'id' ).nodeValue;
 
+			const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
 
+			var atts = [];
 
-	function viewPreviousUpdates(){
+			for ( let j = 0; j < adjs.length; j++ ) {
 
-		if ( surfaceUpdatedId < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
-
-		selSurface.selectedIndex = surfaceUpdatedId;
-		updateSurface();
-
-	}
-
-
-
-	function toggleSurface( id ) {
-
-//		surfaceGroup.visible = true;
-//		icw.divLog.innerHTML = '';
-
-		for ( let child of surfaceMeshes.children ) {
-
-			if ( child.userData.data.id === id ) {
-
-				child.visible = true;
-
-		//console.log( '', child );
-
-				zoomIntoSurface( child );
-
-			} else {
-
-				child.visible = false;
+				atts.push( adjs[ j ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
 
 			}
 
-		};
+			atts = atts.length ? atts : ['none'];
+
+			//console.log( 'AdjacentSpaceId', atts.join() );
+
+			txt +=
+
+				i + '. ' + id + ' - ' + type.nodeValue +
+				' - ' + atts.join() +
+
+			'<br>';
+
+		}
+
+		divGbxml.innerHTML = txt;
 
 	}
-
-
-
-
-	function zoomIntoSurface( surface ){
-		//console.log( 'surface', surface );
-
-		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
-
-		radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
-
-		scene.remove( telltale );
-		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
-		telltale = new THREE.Mesh( geometry, material );
-		telltale.position.copy( center );
-		scene.add( telltale );
-
-		controls.target.copy( center );
-		camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
-
-		//console.log( 'center', center, radius );
-
-	}
-
-
-
-	function saveFile() {
-
-		const xmlText = new XMLSerializer().serializeToString( gbxml );
-		//console.log( 'xmlText', xmlText );
-
-		var blob = new Blob( [ xmlText ] );
-		var a = document.body.appendChild( document.createElement( 'a' ) );
-		a.href = window.URL.createObjectURL( blob );
-		a.download = gbjson.Campus.Building.id + '.xml';
-		a.click();
-		//		delete a;
-		a = null;
-
-	}
-
 
 
 	function openFile( files ) {
