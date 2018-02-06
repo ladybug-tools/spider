@@ -45648,9 +45648,9 @@
       <Name>bldg-1</Name>
       <Description>Extracted from Revit model.</Description>
     </Building>
-    <Surface surfaceType="Roof" id="aim5362">
-      <AdjacentSpaceId spaceIdRef="aim0273"/>
-      <AdjacentSpaceId spaceIdRef="aim0316"/>
+    <Surface surfaceType="ExposedFloor" id="aim5362">
+      <AdjacentSpaceId spaceIdRef="aim0536"/>
+      <AdjacentSpaceId spaceIdRef="aim5278"/>
       <RectangularGeometry id="aim5363">
         <Azimuth>93.4364318847656</Azimuth>
         <CartesianPoint>
@@ -51425,9 +51425,9 @@
       <CADObjectId>Basic Wall: SIM_INT_SLD_Core [888658]</CADObjectId>
       <Name>N-00_118-00_119-I-W-113</Name>
     </Surface>
-    <Surface surfaceType="InteriorWall" id="aim7007">
-      <AdjacentSpaceId spaceIdRef="aim1134"/>
-      <AdjacentSpaceId spaceIdRef="aim1727"/>
+    <Surface surfaceType="Air" id="aim7007">
+      <AdjacentSpaceId spaceIdRef="aim1029"/>
+      <AdjacentSpaceId spaceIdRef="aim0724"/>
       <RectangularGeometry id="aim7008">
         <Azimuth>183.436431884766</Azimuth>
         <CartesianPoint>
@@ -53707,9 +53707,9 @@
       <CADObjectId>Basic Wall: SIM_INT_SLD_Core [890627]</CADObjectId>
       <Name>W-00_122-00_127-I-W-159</Name>
     </Surface>
-    <Surface surfaceType="InteriorFloor" id="aim7647">
-      <AdjacentSpaceId spaceIdRef="aim1543"/>
-      <AdjacentSpaceId spaceIdRef="aim3242"/>
+    <Surface surfaceType="Shade" id="aim7647">
+      <AdjacentSpaceId spaceIdRef="aim1029"/>
+      <AdjacentSpaceId spaceIdRef="aim3057"/>
       <RectangularGeometry id="aim7648">
         <Azimuth>0</Azimuth>
         <CartesianPoint>
@@ -61176,8 +61176,8 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [916729]</CADObjectId>
       <Name>N-01_118-E-W-298</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim9764">
-      <AdjacentSpaceId spaceIdRef="aim3057"/>
+    <Surface surfaceType="ExposedFloor" exposedToSun="true" id="aim9764">
+      <AdjacentSpaceId spaceIdRef="aim2779"/>
       <RectangularGeometry id="aim9765">
         <Azimuth>273.436431884766</Azimuth>
         <CartesianPoint>

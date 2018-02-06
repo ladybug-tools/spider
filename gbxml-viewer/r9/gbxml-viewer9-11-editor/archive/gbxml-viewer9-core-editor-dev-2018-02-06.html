@@ -6,7 +6,7 @@
 <meta name=description content="View gbXML files in 3D in your browser. Open files using File Reader or by URL in location.hash.Base Script used by gbXML Viewer modules." >
 <meta name=keywords content="gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-04" >
-<title>gbXML Viewer9 Core Editor Dev R1.3 </title>
+<title>gbXML Viewer9 Core Editor Dev R1.2 </title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -18,18 +18,15 @@
 
 	.dragDropArea { border: 1px dashed gray; }
 
-	.container { display: flex; flex-wrap: wrap;}
+	.container { display: flex; }
 
-	.container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
+	.container > div { border: 1px solid #ddd; margin: 5px; padding: 10px; }
 
 	#divMenu { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
 
 	#divMenuItems { background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 700px;
 		opacity: 0.95; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100; }
 
-	#divMenuItems { resize: both; overflow: auto; text-align: left; }
-
-	#divGbxml div div { border: 0px solid green; margin-bottom: 5px; }
 </style>
 </head>
 <body>
@@ -69,9 +66,8 @@
 			<div id=divGbxml style=max-height:600px;overflow:auto; class=container ></div>
 
 			<div id=divUpdates >
-				<button onclick=updateSurface(); >update surface</button>
-				<button onclick=saveFile(); >save edits</button>
 				<button onclick=viewPreviousUpdates(); >view previous update</button>
+				<button onclick=saveFile(); >save edits</button>
 			</div>
 
 		</details>
@@ -255,7 +251,7 @@
 
 		surfacesXml = gbxml.getElementsByTagName("Surface");
 		//console.log( 'surfacesXml', surfacesXml );
-		const b = '<br>';
+
 		let txtSurfaces = '';
 
 		for ( let i = 0; i < surfacesXml.length; i++) {
@@ -301,71 +297,29 @@
 
 		divGbxml.innerHTML =
 
-			'<div>' +
-				'<div>Surface</div>' +
-				'<div><input id=inpSurface oninput=updateSelect(this,selSurface); size=12 placeholder="enter surface id" ></div>' +
-				'<div><select id=selSurface onchange=selectSurface(); size=10 >' + txtSurfaces + '</select></div>' +
-				'<div><button onclick=toggleSurface(); >show surface</button></div>' +
-			'</div> ' +
-			'<div>' +
-				'<div>Type</div>' +
-				'<div><input oninput=updateSelect(this,selType); size=12  placeholder="enter type" ></div>' +
-				'<div><select id=selType size=10 >' + txtTypes + '</select></div>' +
-				'<div><button onclick=showSurfaceType(); >show type</button></div>' +
-			'</div> ' +
-			'<div>' +
-				'<div>Adjacency 1</div>' +
-				'<div><input oninput=updateSelect(this,selAdjacentSpaceId0); size=12 placeholder="enter space id" ></div>' +
-				'<div><select id=selAdjacentSpaceId0 size=10 >' + txtSpaces + '</select></div>' +
-				'<div><button onclick=toggleSpace(selAdjacentSpaceId0); >show space</button></div>' +
-			'</div> ' +
-			'<div>' +
-				'<div>Adjacency 2</div>' +
-				'<div><input oninput=updateSelect(this,selAdjacentSpaceId1); size=12 placeholder="enter space id" ></div>' +
-				'<div><select id=selAdjacentSpaceId1 size=10 >' + txtSpaces + '</select></div>' +
-				'<div><button onclick=toggleSpace(selAdjacentSpaceId1); >show space</button></div>' +
-			'</div>' +
+			'<div>Surface<select id=selSurface onchange=updateSurface(); size=10 >' + txtSurfaces + '</select></div> ' +
+			'<div>Type<select id=selType size=10 onchange=updateSurfaceType(); >' + txtTypes + '</select></div> ' +
+			'<div>Adjacency 1<select id=selAdjacency1 onchange=updateAdjacency(1); size=10 >' + txtSpaces + '</select></div> ' +
+			'<div>Adjacency 2<select id=selAdjacency2 onchange=updateAdjacency(2); size=10 >' + txtSpaces + '</select></div>' +
 		'';
 
 	}
 
 
-	function updateSelect( input, select ) {
 
-		const str = input.value.toLowerCase();
-		const options = select.options;
-		//console.log( 'str', str, select );
-
-		for ( let i = 0; i < options.length; i++ ) {
-
-			if ( options[ i ].value.toLowerCase().includes( str ) ) {
-
-				select.selectedIndex = i;
-
-				break;
-
-			}
-
-		}
-
-	}
-
-
-
-	function selectSurface() {
+	function updateSurface() {
 
 		const surface = surfacesXml[ selSurface.selectedIndex ];
 		//console.log( 'surface', surface );
 
 		const type = surface.attributes.getNamedItem( 'surfaceType' ).nodeValue;
-		//console.log( 'type', type );
-
+//		console.log( 'type', type );
 		selType.selectedIndex = surfaceTypes.indexOf( type );
 
 		const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
 
 		index = spacesXmlIds.indexOf( adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
-		selAdjacentSpaceId0.selectedIndex = index;
+		selAdjacency1.selectedIndex = index;
 
 		if ( adjs[ 1 ] ) {
 
@@ -377,7 +331,7 @@
 
 		}
 
-		selAdjacentSpaceId1.selectedIndex = index;
+		selAdjacency2.selectedIndex = index;
 
 		toggleSurface( selSurface.value );
 
@@ -385,28 +339,23 @@
 
 
 
-	function updateSurface() {
-
-		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
+	function updateSurfaceType() {
 
 		surfaceUpdatedId = selSurface.selectedIndex;
-		surface = surfacesXml[ surfaceUpdatedId ];
-		//console.log( 'surface', surface );
+		const surface = surfacesXml[ surfaceUpdatedId ];
+		const typeNew = selType.value;
 
-		surface.attributes.getNamedItem( 'surfaceType' ).nodeValue = selType.value;
+		surface.attributes.getNamedItem( 'surfaceType' ).nodeValue = typeNew;
 
-		const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
-		//console.log( 'adjs[ 0 ]', adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
-
-		adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue = selAdjacentSpaceId0.value;
-
-		if ( adjs[ 1 ] ) {
-
-			adjs[ 1 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue = selAdjacentSpaceId1.value;
-
-		}
-
+		console.log( 'surface', surface );
 		parseFileXML( gbxml );
+
+	}
+
+
+	function updateAdjacency( id ) {
+
+		alert( 'updates to adjacencies coming soon');
 
 	}
 
@@ -417,24 +366,22 @@
 		if ( surfaceUpdatedId < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
 
 		selSurface.selectedIndex = surfaceUpdatedId;
-		selectSurface();
+
+		updateSurface();
 
 	}
 
 
 
-	function toggleSurface() {
-
-		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
-
-		id = selSurface.value;
+	function toggleSurface( id ) {
 
 		for ( let child of surfaceMeshes.children ) {
 
-			if ( id === child.userData.data.id ) {
+			if ( child.userData.data.id === id ) {
 
 				child.visible = true;
-				//console.log( '', child );
+
+		//console.log( '', child );
 
 				zoomIntoSurface( child );
 
@@ -448,67 +395,6 @@
 
 	}
 
-
-
-	function showSurfaceType( that ) {
-
-		const type = selType.value;
-
-		for ( let child of surfaceMeshes.children ) {
-
-			if ( type === child.userData.data.surfaceType ) {
-
-				child.visible = true;
-
-			} else {
-
-				child.visible = false;
-
-			}
-
-		}
-
-	}
-
-
-
-	function toggleSpace( that ) {
-
-		id = that.value;
-
-		for ( let child of surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			child.visible = false;
-
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
-
-			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
-
-				child.visible = true;
-
-			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
-
-				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
-
-					child.visible = true;
-
-					const type = child.userData.data.surfaceType;
-
-//					if ( type === 'InteriorFloor' || type === 'SlabOnGrade' || type === 'RaisedFloor' || type === 'UndergroundSlab' ) {
-
-//						zoomIntoSurface( child );
-
-//					}
-
-				}
-
-			}
-
-		}
-
-	}
 
 
 
@@ -789,8 +675,8 @@
 
 		for ( let CartesianPoint of polyloop.CartesianPoint ) {
 
-		//			const p = CartesianPoint.Coordinate;
-		//			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
+//			const p = CartesianPoint.Coordinate;
+//			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
 			const point = new THREE.Vector3().fromArray( CartesianPoint.Coordinate );
 
 			points.push( point );
@@ -805,7 +691,7 @@
 
 	function drawShapeSinglePassObjects( vertices, material, holes ) {
 
-		// let there be simpler ways to do this
+// let there be simpler ways to do this
 
 		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
 
@@ -859,42 +745,42 @@
 	function zoomObjectBoundingSphere( obj ) {
 
 		if ( obj.geometry ) {
-		// might not be necessary
+// might not be necessary
 
-					obj.geometry.computeBoundingSphere();
-					const center = obj.geometry.boundingSphere.center;
-					const radius = obj.geometry.boundingSphere.radius;
+			obj.geometry.computeBoundingSphere();
+			const center = obj.geometry.boundingSphere.center;
+			const radius = obj.geometry.boundingSphere.radius;
 
-				} else {
+		} else {
 
-					const bbox = new THREE.Box3().setFromObject( obj );
-					const sphere = bbox.getBoundingSphere();
-					center = sphere.center;
-					radius = sphere.radius;
+			const bbox = new THREE.Box3().setFromObject( obj );
+			const sphere = bbox.getBoundingSphere();
+			center = sphere.center;
+			radius = sphere.radius;
 
-				}
+		}
 
-				obj.userData.center = center;
-				obj.userData.radius = radius;
+		obj.userData.center = center;
+		obj.userData.radius = radius;
 
-				controls.target.copy( center );
-				controls.maxDistance = 5 * radius;
+		controls.target.copy( center );
+		controls.maxDistance = 5 * radius;
 
-				camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
 
-				axesHelper.scale.set( radius, radius, radius );
-				axesHelper.position.copy( center );
+		axesHelper.scale.set( radius, radius, radius );
+		axesHelper.position.copy( center );
 
-				camera.far = 10 * radius; //2 * camera.position.length();
-				camera.updateProjectionMatrix();
+		camera.far = 10 * radius; //2 * camera.position.length();
+		camera.updateProjectionMatrix();
 
-				lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-				lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
-				lightDirectional.target = axesHelper;
+		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		lightDirectional.target = axesHelper;
 
-		//		scene.remove( cameraHelper );
-		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-		//		scene.add( cameraHelper );
+//		scene.remove( cameraHelper );
+//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+//		scene.add( cameraHelper );
 
 	}
 
@@ -922,7 +808,7 @@
 
 		for ( let child of surfaceEdges.children ) {
 
-		//			child.material.opacity = 0.85;
+//			child.material.opacity = 0.85;
 			child.material.wireframe = false;
 
 		};
@@ -936,7 +822,7 @@
 		camera.add( lightPoint );
 		scene.add( camera );
 
-		//		if ( parent.createReport ) { parent.createReport(); }
+//		if ( parent.createReport ) { parent.createReport(); }
 
 	}
 
@@ -949,7 +835,7 @@
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
-		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
 	}
 
