@@ -50,15 +50,20 @@ It looks like getting the gbXML and gbJSON data to communicate is fairly easy to
 ### Mission
 
 * View the IDs of all the surfaces in a list
-	* Select the surface you want to edit
+	* Select the surface you want to edit from list
+	* Input by typing the id of the surface you want to edit
 	* Selected surface is highlighted 'in world' and make other surfaces nearly transparent
 	* Display the name of the selected surface as a tooltip in the menu
 * View the names of all the surface types
 	* Current surface type of selected surface is highlighted
 	* Select a different surface type for the selected surface
+	* Input by typing the type you want
 * View the IDs of the adjacent spaces
 	* Select different spaces for the selected surface
+	* Input by typing the id of the apace you want to select
+* Update the surface to the desired parameters
 * Save the edits to a new file
+* View the previously edited surface after the redraw
 
 
 ## Wish list
@@ -82,6 +87,15 @@ More thoughts
 
 
 ## Change Log
+
+### 2018-02-06 ~ Theo
+
+* R1.3
+* Add input fields
+* Add 'show' buttons
+* Add 'update view' button
+* Various updates to user experience
+
 
 ### 2018-02-05 ~ Theo
 

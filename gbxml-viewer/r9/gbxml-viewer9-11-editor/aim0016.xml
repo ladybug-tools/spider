@@ -45890,9 +45890,9 @@
       <CADObjectId>Floor: SIM_INT_SLD_FLR FLR02 [920916]</CADObjectId>
       <Name>T-00_100-01_105-I-F-5</Name>
     </Surface>
-    <Surface surfaceType="InteriorFloor" id="aim5432">
-      <AdjacentSpaceId spaceIdRef="aim0273"/>
-      <AdjacentSpaceId spaceIdRef="aim5041"/>
+    <Surface surfaceType="UndergroundSlab" id="aim5432">
+      <AdjacentSpaceId spaceIdRef="aim0536"/>
+      <AdjacentSpaceId spaceIdRef="aim4562"/>
       <RectangularGeometry id="aim5433">
         <Azimuth>0</Azimuth>
         <CartesianPoint>
