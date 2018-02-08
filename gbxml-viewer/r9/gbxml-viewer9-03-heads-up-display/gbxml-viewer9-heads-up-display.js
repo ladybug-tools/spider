@@ -12,6 +12,7 @@
 	var objects;
 	var mouse;
 
+	var toggleCadId;
 
 	initHeadsUp();
 
@@ -172,17 +173,17 @@ console.log( 'intersected', intersected );
 					adjacenciesTxt =
 
 						'<hr>' +
-						'adjacency 1:  <button onclick=toggleSpace("' + space1.id + '"); >' + space1.id + '</button>' + b +
+						'adjacency 1:  <button onclick=toggleSpaceNoZoom("' + space1.id + '"); >' + space1.id + '</button>' + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
 						( space1.Description ? 'description: ' + space1.Description + b : '' )  +
 						( space1.Area ? 'area: ' + space1.Area + b : '' )  +
-						( space1.Name ? 'name: ' + space1.Name + b : '' )  +
+//						( space1.Name ? 'name: ' + space1.Name + b : '' )  +
 						( space1.conditionType ? 'conditionType: ' + space1.conditionType + b : '' )  +
 						( space1.zoneIdRef ? 'zoneIdRef: ' + space1.zoneIdRef + b : '' ) +
 						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
 
 						'<hr>' +
-						'adjacency 2: <button onclick=toggleSpace("' + space2.id + '"); >' + space2.id + '</button>' + b +
+						'adjacency 2: <button onclick=toggleSpaceNoZoom("' + space2.id + '"); >' + space2.id + '</button>' + b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
 						( space2.Description ? 'description: ' + space2.Description + b : '' )  +
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
@@ -206,7 +207,7 @@ console.log( 'intersected', intersected );
 
 				adjacenciesTxt =
 					'<hr>' +
-					'adjacency space id: <button onclick=toggleSpace("' + space.id + '"); >' + space.id + '</button>' + b +
+					'adjacency space id: <button onclick=toggleSpaceNoZoom("' + space.id + '"); >' + space.id + '</button>' + b +
 					( space.Name ? 'name: ' + space.Name + b : '' )  +
 					( space.Description ? 'description: ' + space.Description + b : '' )  +
 					( space.Area ? 'area: ' + space.Area + b : '' )  +
@@ -224,18 +225,62 @@ console.log( 'intersected', intersected );
 
 //		adjacenciesTxt = adjacencies.length ? '
 
+
 		txt =
 			'<button onclick=divHeadsUp.style.display="none"; >&#x2716;</button>' + b +
-			( data.Name ? 'name: ' + data.Name + b : '' )  +
+			( data.Name ? 'surface name: ' + data.Name + b : '' )  +
 			'id: ' + data.id + b +
-			'surface: ' + data.surfaceType + b +
-			( data.CADObjectId ? 'CADObjectId: ' + data.CADObjectId + b : '' ) +
+//			'type: ' + data.surfaceType + b +
+			'toggle type <button onclick=toggleSurfaceTypeHUD("' + data.surfaceType + '");  >' + data.surfaceType + '</button>' + b +
+//			'toggle storey <button onclick=toggleStoreyHUD("' + data.surfaceType + '");  > storey ' + data.surfaceType + '</button>' + b +
+// needs toggle storey
+			//			( data.CADObjectId ? 'CADObjectId: ' + data.CADObjectId + b : '' ) +
+			'CADObjectId: <button onclick=tryToggleCadId("' + encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button>' + b +
+
 			'height: ' + intersected.position.z.toLocaleString() + b +
+			'<button onclick=intersected.visible=!intersected.visible;  >toggle visibility</button>' + b +
 			adjacenciesTxt +
+			'<p><button class=toggle onclick=allVisible(); >all visible</button></p>' +
 		'';
 
 		divHeadsUp.innerHTML = txt;
 		document.body.style.cursor = 'pointer';
+
+	}
+
+
+	function toggleSurfaceTypeHUD( type ) {
+console.log( 'type ', type );
+
+		for ( let child of surfaceMeshesChildren ) {
+
+			if ( type === child.userData.data.surfaceType ) {
+
+				child.visible = true;
+
+			} else {
+
+				child.visible = false;
+
+			}
+
+		}
+
+	}
+
+
+
+	function tryToggleCadId( id ) {
+
+		if ( toggleCadId ) {
+
+			toggleCadId( id );
+
+		} else {
+
+			alert( 'Click \'reports\' button to enable this function' );
+		}
+
 
 	}
 
@@ -247,13 +292,13 @@ console.log( 'intersected', intersected );
 
 		const space = gbjson.Campus.Building.Space.find( function( item ) { return item.id === spaceIdRef; } );
 
-		if ( !space ) {
+		//		if ( !space ) {
 
-//console.log( 'spaceIdRef', spaceIdRef );
-//console.log( 'space', gbjson.Campus.Building.Space );
-//console.log( 'txt', txtz );
+		//console.log( 'spaceIdRef', spaceIdRef );
+		//console.log( 'space', gbjson.Campus.Building.Space );
+		//console.log( 'txt', txtz );
 
-		}
+		//		}
 
 		return space;
 
@@ -261,7 +306,7 @@ console.log( 'intersected', intersected );
 
 
 
-	function toggleSpace( id ) {
+	function toggleSpaceNoZoom( id ) {
 
 //console.log( 'id', id );
 
@@ -289,6 +334,7 @@ console.log( 'intersected', intersected );
 	}
 
 
+
 	function onDocumentMouseDown( event ) {
 
 		divHeadsUp.style.display = 'none';
@@ -306,5 +352,16 @@ console.log( 'intersected', intersected );
 		event.clientY = event.touches[0].clientY;
 
 		onDocumentMouseMove( event );
+
+	}
+
+
+	function allVisible() {
+
+		for ( let child of surfaceMeshesChildren ) {
+
+				child.visible = true;
+
+		}
 
 	}

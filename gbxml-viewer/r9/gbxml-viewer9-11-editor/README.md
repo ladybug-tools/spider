@@ -68,6 +68,23 @@ It looks like getting the gbXML and gbJSON data to communicate is fairly easy to
 
 ## Wish list
 
+* 2018-02-07 ~ Display file name and particular
+* 2018-02-07 ~ HUD
+	* toggle current story
+	* surface name: button to rehighlight
+	* 2nd adjacency add details
+	* movable div
+* 2018-02-07 ~ Identify cause of faulty triangulatiom
+* 2018-02-07 ~ Identify cause of faulty heights
+* 2018-02-07 ~ Help identify correct adjacency when there is a duplicate adjacency
+* 2018-02-07 ~ Process document attributes
+* 2018-02-07 ~ display describe each error on heads-up
+* 2018-02-07 ~ toggle visibility
+* 2018-02-06 ~ needs heads-up
+* 2018-02-06 ~ need to update zone / other things?
+* 2018-02-06 ~ Add a delete duplicate surface button
+* 2018-02-06 ~ cursor keys errors
+* 2018-02-06 ~ Add name as tooltip for spaces lists
 * Display CAD ID etc of the selected space(s) in the menu?
 * Allow you to use all the error-locating tools in the [gbXML Viewer Reports]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-05-reports/test-gbxml-viewer9-reports.html ) script
 	* Perhaps in gbJSON format as well as gbXML
@@ -80,13 +97,41 @@ More thoughts
 
 ## Issues
 
+### bristol-clifton-down-road.xml
 
+aim10134 = aim8861
+
+aim9649 = aim10191
+
+### london-office.xml
+
+hole in roof OK?
+roof at incorrect height
+
+283
+0 {x: -14.32279, y: 12.03971, z: 9}
+1 {x: 8.714713, y: 12.03971, z: 9}
+2 {x: 16.89971, y: 12.03971, z: 9}
+
+375
+0 {x: -14.32279, y: -15.86029, z: 9}
+1 {x: -3.410287, y: -15.86029, z: 9}
+2 {x: -3.410287, y: 12.03971, z: 9
+
+### UoW-BHE-XX-XX-M-SAM_mdengusiak.xml
+
+aim93653
 
 ## Links of Interest
 
 
 
 ## Change Log
+
+### 2018-02-07 ~ Theo
+
+* R1.4
+
 
 ### 2018-02-06 ~ Theo
 

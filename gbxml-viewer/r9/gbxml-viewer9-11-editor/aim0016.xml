@@ -45648,9 +45648,9 @@
       <Name>bldg-1</Name>
       <Description>Extracted from Revit model.</Description>
     </Building>
-    <Surface surfaceType="ExposedFloor" id="aim5362">
-      <AdjacentSpaceId spaceIdRef="aim0536"/>
-      <AdjacentSpaceId spaceIdRef="aim5278"/>
+    <Surface surfaceType="InteriorWall" id="aim5362">
+      <AdjacentSpaceId spaceIdRef="aim0273"/>
+      <AdjacentSpaceId spaceIdRef="aim0316"/>
       <RectangularGeometry id="aim5363">
         <Azimuth>93.4364318847656</Azimuth>
         <CartesianPoint>
@@ -45890,9 +45890,9 @@
       <CADObjectId>Floor: SIM_INT_SLD_FLR FLR02 [920916]</CADObjectId>
       <Name>T-00_100-01_105-I-F-5</Name>
     </Surface>
-    <Surface surfaceType="UndergroundSlab" id="aim5432">
-      <AdjacentSpaceId spaceIdRef="aim0536"/>
-      <AdjacentSpaceId spaceIdRef="aim4562"/>
+    <Surface surfaceType="InteriorFloor" id="aim5432">
+      <AdjacentSpaceId spaceIdRef="aim0273"/>
+      <AdjacentSpaceId spaceIdRef="aim5041"/>
       <RectangularGeometry id="aim5433">
         <Azimuth>0</Azimuth>
         <CartesianPoint>
@@ -51425,9 +51425,9 @@
       <CADObjectId>Basic Wall: SIM_INT_SLD_Core [888658]</CADObjectId>
       <Name>N-00_118-00_119-I-W-113</Name>
     </Surface>
-    <Surface surfaceType="Air" id="aim7007">
-      <AdjacentSpaceId spaceIdRef="aim1029"/>
-      <AdjacentSpaceId spaceIdRef="aim0724"/>
+    <Surface surfaceType="InteriorWall" id="aim7007">
+      <AdjacentSpaceId spaceIdRef="aim1134"/>
+      <AdjacentSpaceId spaceIdRef="aim1727"/>
       <RectangularGeometry id="aim7008">
         <Azimuth>183.436431884766</Azimuth>
         <CartesianPoint>
@@ -53707,9 +53707,9 @@
       <CADObjectId>Basic Wall: SIM_INT_SLD_Core [890627]</CADObjectId>
       <Name>W-00_122-00_127-I-W-159</Name>
     </Surface>
-    <Surface surfaceType="Shade" id="aim7647">
-      <AdjacentSpaceId spaceIdRef="aim1029"/>
-      <AdjacentSpaceId spaceIdRef="aim3057"/>
+    <Surface surfaceType="InteriorFloor" id="aim7647">
+      <AdjacentSpaceId spaceIdRef="aim1543"/>
+      <AdjacentSpaceId spaceIdRef="aim3242"/>
       <RectangularGeometry id="aim7648">
         <Azimuth>0</Azimuth>
         <CartesianPoint>
@@ -61176,8 +61176,8 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [916729]</CADObjectId>
       <Name>N-01_118-E-W-298</Name>
     </Surface>
-    <Surface surfaceType="ExposedFloor" exposedToSun="true" id="aim9764">
-      <AdjacentSpaceId spaceIdRef="aim2779"/>
+    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim9764">
+      <AdjacentSpaceId spaceIdRef="aim3057"/>
       <RectangularGeometry id="aim9765">
         <Azimuth>273.436431884766</Azimuth>
         <CartesianPoint>
@@ -76500,5 +76500,5 @@
       <CADModelId>d97d5d5a-5480-40f6-9cb8-451d38be32ed</CADModelId>
     </CreatedBy>
     <PersonInfo id="aim0005"/>
-  </DocumentHistory>
+  <ProgramInfo xmlns="" id="ladybug-tools-spider"><ProductName>Ladybug-Tools/spider</ProductName></ProgramInfo><ModifiedBy xmlns="" personId="Theo" programId="ladybug-tools-spide2" date="2018-02-07T23:15:19.910Z"/></DocumentHistory>
 </gbXML>

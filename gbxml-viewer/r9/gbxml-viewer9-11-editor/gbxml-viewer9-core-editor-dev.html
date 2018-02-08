@@ -70,6 +70,7 @@
 
 			<div id=divUpdates >
 				<button onclick=updateSurface(); >update surface</button>
+				<button onclick=addModifiedBy(); >add ModifiedBy </button>
 				<button onclick=saveFile(); >save edits</button>
 				<button onclick=viewPreviousUpdates(); >view previous update</button>
 			</div>
@@ -90,6 +91,7 @@
 		'../../gbxml-sample-files/bristol-clifton-down-road.xml';
 
 	var gbxml;
+	var gbxml2;
 	var gbjson;
 
 	var surfacesXml;
@@ -241,7 +243,10 @@
 
 	function callbackGbXML( xhr ){
 
+		gbxml2 =  xhr.target.responseXML;
+
 		gbxml = xhr.target.responseXML.documentElement;
+
 
 		//console.log( 'gbxml', gbxml );
 
@@ -255,7 +260,7 @@
 
 		surfacesXml = gbxml.getElementsByTagName("Surface");
 		//console.log( 'surfacesXml', surfacesXml );
-		const b = '<br>';
+
 		let txtSurfaces = '';
 
 		for ( let i = 0; i < surfacesXml.length; i++) {
@@ -328,6 +333,7 @@
 		'';
 
 	}
+
 
 
 	function updateSelect( input, select ) {
@@ -478,10 +484,9 @@
 
 		for ( let child of surfaceMeshes.children ) {
 
-			if ( !child.userData.data ) { continue; }
+//			if ( !child.userData.data ) { continue; }
 
 			child.visible = false;
-
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
 
 			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
@@ -493,14 +498,6 @@
 				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
 
 					child.visible = true;
-
-					const type = child.userData.data.surfaceType;
-
-//					if ( type === 'InteriorFloor' || type === 'SlabOnGrade' || type === 'RaisedFloor' || type === 'UndergroundSlab' ) {
-
-//						zoomIntoSurface( child );
-
-//					}
 
 				}
 
@@ -535,8 +532,69 @@
 
 
 
+	function addModifiedBy() {
+
+		// not adding spaces and new lines nicely. Why?
+
+		const documentHistoryXml = gbxml2.getElementsByTagName("DocumentHistory");
+
+		const programInfoNew = gbxml2.createElement("ProgramInfo");
+
+		programInfoNew.setAttribute("id", "ladybug-tools-spider");
+
+		documentHistoryXml[ 0 ].appendChild( programInfoNew );
+
+		const productNameNew = gbxml2.createElement("ProductName");
+
+		const newText = gbxml2.createTextNode( 'Ladybug-Tools/spider' );
+
+		productNameNew.appendChild( newText );
+
+		programInfoNew.appendChild( productNameNew );
+
+		productNameNew.nodeValue = 'Ladybug-Tools/spider';
+
+
+		const modifiedByNew = gbxml2.createElement("ModifiedBy");
+
+		modifiedByNew.setAttribute("personId", "Theo");
+
+		modifiedByNew.setAttribute("programId", "ladybug-tools-spide2" );
+
+		modifiedByNew.setAttribute("date", ( new Date() ).toISOString() );
+
+		documentHistoryXml[ 0 ].appendChild( modifiedByNew );
+
+		console.log( 'documentHistoryXml', documentHistoryXml );
+
+	}
+
+// https://stackoverflow.com/questions/376373/pretty-printing-xml-with-javascript
+// https://jsfiddle.net/klesun/sgeryvyu/5/
+	function prettifyXml(sourceXml) {
+
+		var xmlDoc = new DOMParser().parseFromString(sourceXml, 'application/xml');
+		var xsltDoc = new DOMParser().parseFromString([
+			// describes how we want to modify the XML - indent everything
+			'<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">',
+			'  <xsl:output omit-xml-declaration="yes" indent="yes"/>',
+			'    <xsl:template match="node()|@*">',
+			'      <xsl:copy><xsl:apply-templates select="node()|@*"/></xsl:copy>',
+			'    </xsl:template>',
+			'</xsl:stylesheet>',
+		].join('\n'), 'application/xml');
+
+		var xsltProcessor = new XSLTProcessor();
+		xsltProcessor.importStylesheet(xsltDoc);
+		var resultDoc = xsltProcessor.transformToDocument(xmlDoc);
+		var resultXml = new XMLSerializer().serializeToString(resultDoc);
+		return resultXml;
+
+	}
+
 	function saveFile() {
 
+		//		xmlText = prettifyXml( gbxml2 ); // not
 		const xmlText = new XMLSerializer().serializeToString( gbxml );
 		//console.log( 'xmlText', xmlText );
 

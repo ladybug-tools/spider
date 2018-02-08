@@ -53,8 +53,8 @@
 		location.protocol === 'file:' ? // for testing
 //		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 //		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
-		'../../../read-gbxml/data-files/sam-live2.xml'
 //		'../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml'
+		'../../../gbxml-viewer/gbxml-sample-files/london-office.xml'
 		:
 		'../../gbxml-sample-files/bristol-clifton-down-road.xml';
 
@@ -121,7 +121,7 @@
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.autoRotate = true;
+//		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -318,7 +318,7 @@
 
 		const surfaces = gbjson.Campus.Surface;
 
-		let polyloops = [];
+		polyloops = [];
 		let openings = [];
 
 		for ( let surface of surfaces ) {
@@ -356,10 +356,11 @@
 			polyloop = surface.PlanarGeometry.PolyLoop;
 
 			points = getPoints( polyloop );
-
 			polyloops.push( points );
 
 		}
+
+console.log( 'polyloops', polyloops );
 
 		scene.remove( surfaceMeshes, surfaceEdges );
 
@@ -405,19 +406,29 @@
 
 			const material = new THREE.MeshPhongMaterial( { color: colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
-			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
+			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ], i );
 
 			shape.userData.data = surfaces[ i ];
 			shape.castShadow = shape.receiveShadow = true;
 			surfaceMeshes.add( shape );
 
 
-if ( surfaces[ i ].id === 'aim8068' ) {
+//if ( surfaces[ i ].id === 'aim8068' ) {
+//if ( surfaces[ i ].id === 'aim9684' ) {
+if ( surfaces[ i ].id === 'aim93653' ) {
 
+console.log( 'index', i );
 console.log( 'surfaces[ i ]', surfaces[ i ] );
 console.log( 'shape', shape );
 console.log( 'polyloops[ i ]', polyloops[ i ] );
-			}
+
+}
+
+if ( surfaces[ i ].id === 'aim9684' ) {
+
+
+console.log( 'index 2', i );
+}
 
 			const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
 			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
@@ -441,8 +452,8 @@ console.log( 'polyloops[ i ]', polyloops[ i ] );
 
 		for ( let CartesianPoint of polyloop.CartesianPoint ) {
 
-//			const p = CartesianPoint.Coordinate;
-//			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
+		//			const p = CartesianPoint.Coordinate;
+		//			const point = new THREE.Vector3( parseFloat( p[ 0 ] ), parseFloat( p[ 1 ] ), parseFloat( p[ 2 ] ) );
 			const point = new THREE.Vector3().fromArray( CartesianPoint.Coordinate );
 
 			points.push( point );
@@ -455,12 +466,17 @@ console.log( 'polyloops[ i ]', polyloops[ i ] );
 
 
 
-	function drawShapeSinglePassObjects( vertices, material, holes ) {
+	function drawShapeSinglePassObjects( vertices, material, holes, index ) {
 
-// let there be simpler ways to do this
+		// let there be simpler ways to do this
 
 		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
-
+		/*
+		if ( index === 3612 ) {
+			console.log( 'vertices', vertices );
+			console.log( 'plane', plane );
+		}
+		*/
 		const obj = new THREE.Object3D();
 		obj.lookAt( plane.normal );
 

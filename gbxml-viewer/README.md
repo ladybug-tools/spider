@@ -301,6 +301,18 @@ Will most likely build upon
 
 ## Change Log
 
+### 2018-02-07 ~ Theo
+
+* R9.7
+* HUD
+	* Add toggle surface type button
+	* Add display CAD Object button
+	* Add toggle visibility button
+	* Add all visible button
+	* Duplicate coordinates now highlighted in yellow
+
+### 2018-02-02 ~ Theo
+
 * R9.6a
 * Core: add  gbxml var
 * Cure: clear divLog with reset view

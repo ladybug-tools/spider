@@ -216,7 +216,7 @@
 		let flowContent = '';
 		let count = 0;
 		let zones;
-//console.log( 'storeys', storeys  );
+		//console.log( 'storeys', storeys  );
 
 		if ( storeys ) {
 
@@ -291,12 +291,12 @@
 		const b = '<br>';
 		let flowContent = '';
 		let count = 0;
-	//console.log( '', spaces  );
+		//console.log( '', spaces  );
 
 		if ( spaces.length ) {
 
 			for ( let space of spaces ) {
-//console.log( 'space', space );
+				//console.log( 'space', space );
 
 				if ( parseFloat( space.Area ) < 2 ) {
 
@@ -327,7 +327,7 @@
 
 		let txt = '';
 
-//console.log( 'surfaces', surfaces );
+		//console.log( 'surfaces', surfaces );
 
 		const types = [];
 		const typesCount = [];
@@ -401,8 +401,8 @@
 				surfOther = surfaces[ surfaceIds[ index ] ];
 				surfaceCoordinateDuplicates.push( surface.Name );
 
-//console.log( 'surface', surface );
-//console.log( 'surfOther', surfOther );
+		//console.log( 'surface', surface );
+		//console.log( 'surfOther', surfOther );
 
 				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
 
@@ -425,7 +425,7 @@
 						'surfaceType: ' + surfOther.surfaceType + b +
 						( surfOther.Name ? 'Name: ' + surfOther.Name + b : '' ) +
 						( surfOther.CADObjectId ?
-							'<button onclick=toggeleCadId("' + encodeURI( surfOther.CADObjectId ) + '"); >' + surfOther.CADObjectId + '</button>' + b
+							'<button onclick=toggleCadId("' + encodeURI( surfOther.CADObjectId ) + '"); >CADObjectId: ' + surfOther.CADObjectId + '</button>' + b
 							: ''
 						) +
 
@@ -441,7 +441,7 @@
 
 			if ( !child.userData.data ) { continue; }
 
-			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ff80ff' ); }
+			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ffff00' ); }
 
 		}
 
@@ -483,7 +483,7 @@
 
 		}
 
-//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
+		//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
 
 		count = surfacesIds.length === 1 ? 0 : count;
 		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent };
@@ -504,7 +504,8 @@
 
 			const id = surface.CADObjectId;
 
-			index = surfacesIds.indexOf( id )
+			index = surfacesIds.indexOf( id );
+
 			if ( index < 0 ) {
 
 				surfacesIds.push( id );
@@ -530,14 +531,14 @@
 
 		count = surfacesIds.length === 1 ? 0 : count;
 
-//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
-//console.log( 'surfaceMembers', surfaceMembers );
+		//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
+		//console.log( 'surfaceMembers', surfaceMembers );
 
 		for ( member of surfaceMembers ) {
 
 			if ( member.members.length > 1 ) {
 
-//console.log( '', member.members );
+			//console.log( '', member.members );
 				let surface;
 				for ( surface of member.members ) {
 
@@ -546,7 +547,7 @@
 							'. id: ' + '<button onclick=toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 							'surfaceType: ' + surface.surfaceType + b +
 							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
+			//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
 						'</p>';
 
 					count ++;
@@ -555,7 +556,7 @@
 
 				flowContent +=
 
-					'CADObjectId: <button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b +
+					'<button onclick=toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b +
 
 				'<hr>';
 
@@ -591,7 +592,7 @@
 
 				surfaceAdjacencyDuplicates.push( surface.Name );
 
-//console.log( 'adjacencies', adjacencies  );
+		//console.log( 'adjacencies', adjacencies  );
 
 				flowContent +=
 					'<div style=margin-bottom:35px; >' +
@@ -600,7 +601,7 @@
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ?
-							'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
+							'<button onclick=toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
 							: ''
 						) +
 						' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
@@ -633,7 +634,7 @@
 		let flowContent = '';
 		let count = 0;
 
-//console.log( 'surfaces', surfaces );
+		//console.log( 'surfaces', surfaces );
 
 		for ( let surface of surfaces ) {
 
@@ -643,7 +644,7 @@
 
 			if ( parseFloat( surfaceArea ) < sud.tinySurfaceSquareMeters ) {
 
-//console.log( 'surface', surface );
+			//console.log( 'surface', surface );
 
 				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
 
@@ -659,7 +660,7 @@
 					'surfaceType: ' + surface.surfaceType + b +
 					( surface.Name ? 'name: ' + surface.Name + b : '' ) +
 					( surface.CADObjectId ?
-						'<button onclick=toggeleCadId("' + encodeURI( surface.CADObjectId ) + '"); >' + surface.CADObjectId + '</button>' + b
+						'<button onclick=toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
 						: ''
 					) +
 					' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
@@ -698,7 +699,7 @@
 
 				surfaceAdjacencyInvalids.push( surface.Name );
 
-//conconsole.log( 'surface.Name', surface.Name  );
+		//conconsole.log( 'surface.Name', surface.Name  );
 
 				flowContent +=
 					'<div style=margin-bottom:35px; >' +
@@ -707,7 +708,7 @@
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
+						'Space:  <button onclick=toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >CADObjectId: ' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
 
 					'<hr></div>';
 
@@ -733,7 +734,7 @@
 
 	function toggleStorey( id, node ) {
 
-//console.log( 'id', id );
+		//console.log( 'id', id );
 
 		const spaces = gbjson.Campus.Building.Space;
 		surfaceGroup.visible = true;
@@ -806,7 +807,7 @@
 
 				child.visible = true;
 
-//console.log( '', child );
+		//console.log( '', child );
 
 				zoomIntoSurface( child );
 
@@ -823,7 +824,7 @@
 
 
 	function zoomIntoSurface( surface ){
-//console.log( 'surface', surface );
+		//console.log( 'surface', surface );
 
 		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
 
@@ -840,7 +841,7 @@
 		icw.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
 
 
-//console.log( 'bbb', center, radius );
+		//console.log( 'bbb', center, radius );
 
 	}
 
@@ -850,7 +851,7 @@
 
 		surfaceGroup.visible = true;
 		icw.divLog.innerHTML = '';
-//console.log( '', surfaceAdjacencyDuplicates );
+		//console.log( '', surfaceAdjacencyDuplicates );
 
 		for ( let child of surfaceMeshesChildren ) {
 
@@ -874,7 +875,7 @@
 
 		surfaceGroup.visible = true;
 		icw.divLog.innerHTML = '';
-//console.log( '', surfaceAdjacencyDuplicates );
+		//console.log( '', surfaceAdjacencyDuplicates );
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
@@ -950,9 +951,9 @@
 
 
 
-	function toggeleCadId( CADObjectId ) {
+	function toggleCadId( CADObjectId ) {
 
-//console.log( '', CADObjectId );
+		//console.log( '', CADObjectId );
 		surfaceGroup.visible = true;
 		surfaceEdges.visible = true;
 		icw.divLog.innerHTML = '';
@@ -980,7 +981,7 @@
 
 	function toggleAdjacencies( id, surfaceArray ) {
 
-//console.log( '', that.innerText );
+		//console.log( '', that.innerText );
 
 		icw.divLog.innerHTML = '';
 
