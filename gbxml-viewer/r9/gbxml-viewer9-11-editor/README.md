@@ -100,27 +100,13 @@ More thoughts
 ### bristol-clifton-down-road.xml
 
 aim10134 = aim8861
-
 aim9649 = aim10191
 
 ### london-office.xml
 
 hole in roof OK?
-roof at incorrect height
 
-283
-0 {x: -14.32279, y: 12.03971, z: 9}
-1 {x: 8.714713, y: 12.03971, z: 9}
-2 {x: 16.89971, y: 12.03971, z: 9}
 
-375
-0 {x: -14.32279, y: -15.86029, z: 9}
-1 {x: -3.410287, y: -15.86029, z: 9}
-2 {x: -3.410287, y: 12.03971, z: 9
-
-### UoW-BHE-XX-XX-M-SAM_mdengusiak.xml
-
-aim93653
 
 ## Links of Interest
 

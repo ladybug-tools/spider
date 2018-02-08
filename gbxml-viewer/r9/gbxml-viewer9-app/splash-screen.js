@@ -8,6 +8,16 @@
 
 			<details open>
 
+				<summary>Welcome 2018-02-08</summary>
+
+				<p>
+				Core now corrects for duplicate vertices and other errors in gbXML files. HUD adds many more buttons
+				</p>
+
+			</details>
+
+			<details>
+
 				<summary>Welcome 2018-02-03</summary>
 
 				<p>

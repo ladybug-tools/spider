@@ -22,7 +22,7 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 
 * 2018-01-02 ~ Multiple types of heads-up
 	* Show space names at cursor locations
-* 2018-01-02 ~ Add inworl placard at cursor location
+* 2018-01-02 ~ Add inworld placard at cursor location
 
 ## Issues
 
@@ -32,6 +32,16 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 
 
 ## Change Log
+
+### 2018-02-08 ~ Theo
+
+* HUD: Add many new buttons to display
+	* ID
+	* Type
+	* CAD Object ID
+	* Spaces
+	* Storeys
+	* Visibility
 
 ### 2018-01-02 ~ Theo
 

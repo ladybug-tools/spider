@@ -301,6 +301,18 @@ Will most likely build upon
 
 ## Change Log
 
+2018-02-08 ~ Theo
+
+* R9.8a
+* HUD: Add many new buttons to display
+	* ID
+	* Type
+	* CAD Object ID
+	* Spaces
+	* Storeys
+	* Visibility
+
+
 ### 2018-02-07 ~ Theo
 
 * R9.7
@@ -310,6 +322,8 @@ Will most likely build upon
 	* Add toggle visibility button
 	* Add all visible button
 	* Duplicate coordinates now highlighted in yellow
+* Core: Add checks for duplicate extra vertices in gbXML file vertices data
+
 
 ### 2018-02-02 ~ Theo
 
