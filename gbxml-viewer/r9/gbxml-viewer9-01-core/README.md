@@ -76,6 +76,11 @@ The ultimate goal is to be able to offer various analytical batch operations tha
 
 See also main gbXML README.md
 
+### 2018-02-08 ~
+
+R9.8
+* Add checks for duplicate extra vertices in gbXML file vertices data
+
 ### 2018-02-02 ~ Theo
 
 R9.6

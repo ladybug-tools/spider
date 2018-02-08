@@ -6,7 +6,7 @@
 <meta name=description content="View gbXML files in 3D in your browser. Open files using File Reader or by URL in location.hash.Base Script used by gbXML Viewer modules." >
 <meta name=keywords content="gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-02" >
-<title>gbXML Viewer9 Core R9.6</title>
+<title>gbXML Viewer9 Core R9.8</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -448,9 +448,33 @@
 
 	function drawShapeSinglePassObjects( vertices, material, holes ) {
 
-// let there be simpler ways to do this
+		// let there be simpler ways to do this
 
-		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
+		const v0 = vertices[ 0 ];
+		const v1 = vertices[ 1 ]
+		const v2 = vertices[ 2 ];
+
+		let plane = new THREE.Plane().setFromCoplanarPoints ( v0, v1, v2 );
+
+		if ( plane.constant === 0 ) { // check for errors in gbXML vertices
+
+			if ( v0.x === v1.x && v1.x === v2.x ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+			}
+
+			if ( v0.y === v1.y && v1.y === v2.y ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+			}
+
+			if ( v0.x=== v1.x && v0.y === v1.y ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+			}
+
+			if ( v1.x=== v2.x && v1.y === v2.y ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v0, v1, vertices[ 3 ] );
+			}
+
+		}
 
 		const obj = new THREE.Object3D();
 		obj.lookAt( plane.normal );

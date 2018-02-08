@@ -406,7 +406,7 @@ console.log( 'polyloops', polyloops );
 
 			const material = new THREE.MeshPhongMaterial( { color: colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
-			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ], i );
+			const shape = drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ], surfaces[ i ].id );
 
 			shape.userData.data = surfaces[ i ];
 			shape.castShadow = shape.receiveShadow = true;
@@ -466,17 +466,41 @@ console.log( 'index 2', i );
 
 
 
-	function drawShapeSinglePassObjects( vertices, material, holes, index ) {
+	function drawShapeSinglePassObjects( vertices, material, holes, id ) {
 
 		// let there be simpler ways to do this
+		const v0 = vertices[ 0 ];
+		const v1 = vertices[ 1 ]
+		const v2 = vertices[ 2 ];
 
-		const plane = new THREE.Plane().setFromCoplanarPoints ( vertices[ 0 ], vertices[ 1 ], vertices[ 2 ] );
-		/*
-		if ( index === 3612 ) {
-			console.log( 'vertices', vertices );
-			console.log( 'plane', plane );
+		let plane = new THREE.Plane().setFromCoplanarPoints ( v0, v1, v2 );
+
+		//if ( id === 'aim92610' ) {
+		//	console.log( 'vertices', vertices );
+		//	console.log( 'plane', plane );
+		//	console.log( 'test', v0 === v1 );
+		//}
+
+		if ( plane.constant === 0 ) {
+
+			if ( v0.x === v1.x && v1.x === v2.x ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+			}
+
+			if ( v0.y === v1.y && v1.y === v2.y ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+			}
+
+			if ( v0.x=== v1.x && v0.y === v1.y ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+			}
+
+			if ( v1.x=== v2.x && v1.y === v2.y ) {
+				plane = new THREE.Plane().setFromCoplanarPoints ( v0, v1, vertices[ 3 ] );
+			}
+
 		}
-		*/
+
 		const obj = new THREE.Object3D();
 		obj.lookAt( plane.normal );
 
