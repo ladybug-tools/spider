@@ -17,9 +17,30 @@
 	iframe { height: 500px; width: 100%; }
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
-
+/*
 	#divMenuItems { background-color: white; border: 1px solid crimson; max-height: 95%; max-width: 350px;
 		opacity: 0.85; overflow: auto; padding: 10px; position: fixed; right: 20px; top: 20px; z-index:100000; }
+*/
+
+	#divDraggable {
+		background-color: #f1f1f1;
+		border: 1px solid #d3d3d3;
+		left: calc( 100% - 400px );
+		overflow: auto;
+		position: absolute;
+		resize: both;
+		text-align: center;
+		top: 100px;
+		z-index: 9;
+	}
+
+	#divDraggableHeader {
+		background-color: #2196F3;
+		color: #fff;
+		cursor: move;
+		padding: 10px;
+		z-index: 10;
+	}
 
 </style>
 </head>
@@ -73,7 +94,12 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
-	<div id=divMenuItems ></div>
+	<div id=divDraggable >
+
+			<div id=divDraggableHeader >Click here to move</div>
+			<div id=divMenuItems ></div>
+
+		</div>
 
 <script>
 
@@ -95,6 +121,8 @@
 		'';
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		dragElement( divDraggable );
 
 		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
 		dragArea.addEventListener( 'drop', drop, false );
@@ -140,6 +168,52 @@
 
 	}
 
+
+
+
+//Make the DIV element draggagle:
+// https://www.w3schools.com/howto/howto_js_draggable.asp
+
+	function dragElement( element ) {
+
+		let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+		divDraggableHeader.onmousedown = dragMouseDown;
+
+		function dragMouseDown( event ) {
+
+			event = event || window.event;
+
+			pos3 = event.clientX;
+			pos4 = event.clientY;
+			document.onmouseup = closeDragElement;
+
+			document.onmousemove = elementDrag;
+
+		}
+
+		function elementDrag( event ) {
+
+			event = event || window.event;
+
+			pos1 = pos3 - event.clientX;
+			pos2 = pos4 - event.clientY;
+			pos3 = event.clientX;
+			pos4 = event.clientY;
+
+			element.style.top = ( element.offsetTop - pos2 ) + 'px';
+			element.style.left = ( element.offsetLeft - pos1 ) + 'px';
+
+		}
+
+		function closeDragElement() {
+
+			document.onmouseup = null;
+			document.onmousemove = null;
+
+		}
+
+}
 
 </script>
 </body>

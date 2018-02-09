@@ -25,15 +25,6 @@
 				'background-color: #ddd; border-radius: 8px; display: none; min-height: 100px; min-width: 200px; opacity: 0.95; ' +
 				' overflow: auto; padding: 5px 5px 10px 5px; position: fixed; resize: both; z-index: 1000; ' +
 			'';
-			divHeadsUp.innerHTML =
-				'<div id=divDraggableHeader title="Open JavaScript console to see more data" >' +
-					'<small>Click here to move</small>' +
-					'<button onclick=divHeadsUp.style.display="none"; style=float:right; >&#x2716;</button>' +
-				'</div>' +
-				'<div id=divItems ></div>' +
-			'';
-
-			dragElement( divHeadsUp );
 
 		}
 
@@ -158,7 +149,7 @@
 		//divHeadsUp.style.left = 0 + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
 		//divHeadsUp.style.top = 30 + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
 
-//		divHeadsUp.style.right = '20px'; // + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
+		divHeadsUp.style.right = '20px'; // + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
 
 		divHeadsUp.style.left = 'calc( 100% - 400px )';
 		divHeadsUp.style.top = '20px'; // + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
@@ -185,28 +176,29 @@
 					adjacenciesTxt =
 
 						'<hr>' +
-						'adjacenct 1:  <button onclick=toggleSpaceHUD("' + space1.id + '"); >' + space1.id + '</button>' + b +
+						'adjacency 1:  <button onclick=toggleSpaceHUD("' + space1.id + '"); >' + space1.id + '</button>' + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
-						( space1.Description ? 'description: ' + space1.Description + b : '' ) +
-						( space1.Area ? 'area: ' + space1.Area + b : '' ) +
-						( space1.Volume ? 'volume: ' + space1.Volume + b : '' ) +
-						( space1.conditionType ? 'conditionType: ' + space1.conditionType + b : '' ) +
+						( space1.Description ? 'description: ' + space1.Description + b : '' )  +
+						( space1.Area ? 'area: ' + space1.Area + b : '' )  +
+						( space1.conditionType ? 'conditionType: ' + space1.conditionType + b : '' )  +
 						( space1.zoneIdRef ? 'zoneIdRef: ' + space1.zoneIdRef + b : '' ) +
+//						( space1.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space1.buildingStoreyIdRef + b : '' )  +
 						'storey: <button onclick=toggleStoreyHUD("' + space1.buildingStoreyIdRef + '"); >' + space1.buildingStoreyIdRef + '</button>' + b +
+
 						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
 
 						'<hr>' +
-						'adjacenct 2: <button onclick=toggleSpaceHUD("' + space2.id + '"); >' + space2.id + '</button>' + b +
+						'adjacency 2: <button onclick=toggleSpaceHUD("' + space2.id + '"); >' + space2.id + '</button>' + b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
-						( space2.Description ? 'description: ' + space2.Description + b : '' ) +
-						( space2.Area ? 'area: ' + space2.Area + b : '' ) +
-						( space2.Volume ? 'volume: ' + space2.Volume + b : '' ) +
-						( space2.conditionType ? 'conditionType: ' + space2.conditionType + b : '' ) +
+						( space2.Description ? 'description: ' + space2.Description + b : '' )  +
+						( space2.Area ? 'area: ' + space2.Area + b : '' )  +
+						( space2.conditionType ? 'conditionType: ' + space2.conditionType + b : '' )  +
 						( space2.zoneIdRef ? 'zoneIdRef: ' + space2.zoneIdRef + b : '' ) +
 //						( space2.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space2.buildingStoreyIdRef + b : '' )  +
 						'storey: <button onclick=toggleStoreyHUD("' + space2.buildingStoreyIdRef + '"); >' + space2.buildingStoreyIdRef + '</button>' + b +
 
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
+						//						'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
 					'';
 
 				} else {
@@ -226,15 +218,17 @@
 
 				adjacenciesTxt =
 					'<hr>' +
-					'adjacenct space id: <button onclick=toggleSpaceHUD("' + space.id + '"); >' + space.id + '</button>' + b +
+					'adjacency space id: <button onclick=toggleSpaceHUD("' + space.id + '"); >' + space.id + '</button>' + b +
 					( space.Name ? 'name: ' + space.Name + b : '' )  +
 					( space.Description ? 'description: ' + space.Description + b : '' )  +
 					( space.Area ? 'area: ' + space.Area + b : '' )  +
-					( space.Volume ? 'volume: ' + space.Volume + b : '' )  +
+//					( space.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space.buildingStoreyIdRef + b : '' )  +
 					'storey: <button onclick=toggleStoreyHUD("' + space.buildingStoreyIdRef + '"); >' + space.buildingStoreyIdRef + '</button>' + b +
 					( space.conditionType ? 'conditionType: ' + space.conditionType + b : '' )  +
 					( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
 					( space.CADObjectId ? 'CADObjectId: ' + space.CADObjectId + b : '' ) +
+				//'<button onclick=icw.zoomObjectBoundingSphere(icw.surfaceMeshes);icw.setAllVisible(); >reset view</button>' +
+
 				b;
 
 			}
@@ -245,30 +239,26 @@
 
 
 		txt =
-			'<p>' +
+			'<button onclick=divHeadsUp.style.display="none"; >&#x2716;</button>' + b +
+
+
+//			'id: ' + data.id + b +
 			'id: <button onclick=toggleSurfaceHUD("' + data.id + '")  >' + data.id + '</button>' + b +
 			( data.Name ? 'surface name: ' + data.Name + b : '' )  +
 			'toggle type <button onclick=toggleSurfaceTypeHUD("' + data.surfaceType + '");  >' + data.surfaceType + '</button>' + b +
-			'CADObjectId: <button onclick=toggleCadIdHUD("' + encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button>' + b +
-			'</p>' +
-			'<p>' +
-				'<button onclick=intersected.visible=!intersected.visible;  >toggle surface visibility</button> ' +
-				'<button class=toggle onclick=alert("coming-soon!"); >delete surface</button>' +
-			'</p>' +
+			'CADObjectId: <button onclick=tryToggleCadId("' + encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button>' + b +
+			'<button onclick=intersected.visible=!intersected.visible;  >toggle visibility</button>' + b +
 			adjacenciesTxt +
-			'<p>' +
-				'<button class=toggle onclick=allVisible(); >all visible</button> ' +
-			'</p>' +
+			'<p><button class=toggle onclick=allVisible(); >all visible</button></p>' +
 		'';
 
-		divItems.innerHTML = txt;
+		divHeadsUp.innerHTML = txt;
 		document.body.style.cursor = 'pointer';
 
 	}
 
-
-
 	function toggleSurfaceHUD ( id ) {
+;
 
 		for ( let child of surfaceMeshesChildren ) {
 
@@ -287,8 +277,6 @@
 		}
 
 	}
-
-
 
 	function toggleSurfaceTypeHUD( type ) {
 
@@ -311,12 +299,19 @@
 	}
 
 
-
 	function toggleCadIdHUD( CADObjectId ) {
+
+		//console.log( '', CADObjectId );
+		surfaceGroup.visible = true;
+		surfaceEdges.visible = true;
+		icw.divLog.innerHTML = '';
 
 		for ( let child of surfaceMeshesChildren ) {
 
-			if ( CADObjectId === encodeURI( child.userData.data.CADObjectId ) ) {
+
+			if ( !child.userData.data ) { continue; }
+
+			if ( encodeURI( child.userData.data.CADObjectId ) === CADObjectId ) {
 
 				child.visible = true;
 
@@ -330,15 +325,19 @@
 
 	}
 
-
-
-	function getSpaceId( spaceIdRef ) {
+	function getSpaceId( spaceIdRef, txtz ) {
 
 		if ( !gbjson.Campus.Building.Space || !gbjson.Campus.Building.Space.length ) { return; }
 
 		const space = gbjson.Campus.Building.Space.find( function( item ) { return item.id === spaceIdRef; } );
 
-//		console.log( 'space', space );
+		//		if ( !space ) {
+
+		//console.log( 'spaceIdRef', spaceIdRef );
+		//console.log( 'space', gbjson.Campus.Building.Space );
+		//console.log( 'txt', txtz );
+
+		//		}
 
 		return space;
 
@@ -347,6 +346,8 @@
 
 
 	function toggleSpaceHUD( id ) {
+
+		//console.log( 'id', id );
 
 		for ( let child of icw.surfaceMeshes.children ) {
 
@@ -369,19 +370,18 @@
 
 		}
 
-		const space = gbjson.Campus.Building.Space.find( function( item ) { return item.id === id; } );
-
-		console.log( 'space', space );
-
 	}
 
 
 
-	function toggleStoreyHUD( id ) {
+	function toggleStoreyHUD( id, node ) {
 
 		//console.log( 'id', id );
 
 		const spaces = gbjson.Campus.Building.Space;
+
+		let zones = [];
+		let spacesArray = [];
 
 		for ( let child of surfaceMeshesChildren ) {
 
@@ -390,6 +390,8 @@
 		}
 
 		for ( let child of surfaceMeshesChildren ) {
+
+			//			if ( !child.userData.data ) { continue; }
 
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId
 
@@ -403,15 +405,35 @@
 
 					child.visible = true;
 
+						//					if ( !zones.includes( space.zoneIdRef ) ) { zones.push( space.zoneIdRef ); }
+
+						//					if ( !spacesArray.includes( space.id ) ) { spacesArray.push( space.id ); }
+
 				}
 
 			}
 
 		}
 
-		const storey = gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
+		/*
+		divStoreyItems.innerHTML =
+			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
+			'zones ' + zones.length + ': ' + zones.join();
 
-		console.log( 'storey', storey );
+
+		for ( let storey of storeys ) {
+
+			if ( id === storey.id ) {
+
+				icw.divLog.innerHTML = 'Storey name: ' + storey.Name;
+
+			}
+
+		}
+
+		return zones;
+
+		*/
 
 	}
 

@@ -18,6 +18,26 @@
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
+	#divDraggable {
+		background-color: #f1f1f1;
+		border: 1px solid #d3d3d3;
+		left: calc( 100% - 400px );
+		overflow: auto;
+		position: absolute;
+		resize: both;
+		text-align: center;
+		top: 100px;
+		z-index: 9;
+	}
+
+	#divDraggableHeader {
+		background-color: #2196F3;
+		color: #fff;
+		cursor: move;
+		padding: 10px;
+		z-index: 10;
+	}
+
 </style>
 </head>
 <body>
@@ -30,7 +50,6 @@
 	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-
 		<button id=butHeadsUp onclick = "const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = 'gbxml-viewer9-heads-up-display.js';" >gbxml-viewer9-heads-up-display</button>
 	</p>
@@ -48,18 +67,6 @@
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
 	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
-
-<!--
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/open-studio-seb.xml" >open studio seb</a></p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/sam-live2.xml" >sam live2</a> </p>
-
-	<p><a href="#../../../gbxml-viewer/gbxml-sample-files/urban-house-mep.xml" >urban house mep</a></p>
-
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/.xml" ></a></div>
-
--->
 
 <script>
 
@@ -120,6 +127,50 @@
 
 	}
 
+
+//Make the DIV element draggagle:
+// https://www.w3schools.com/howto/howto_js_draggable.asp
+
+	function dragElement( element ) {
+
+		let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+		divDraggableHeader.onmousedown = dragMouseDown;
+
+		function dragMouseDown( event ) {
+
+			event = event || window.event;
+
+			pos3 = event.clientX;
+			pos4 = event.clientY;
+			document.onmouseup = closeDragElement;
+
+			document.onmousemove = elementDrag;
+
+		}
+
+		function elementDrag( event ) {
+
+			event = event || window.event;
+
+			pos1 = pos3 - event.clientX;
+			pos2 = pos4 - event.clientY;
+			pos3 = event.clientX;
+			pos4 = event.clientY;
+
+			element.style.top = ( element.offsetTop - pos2 ) + 'px';
+			element.style.left = ( element.offsetLeft - pos1 ) + 'px';
+
+		}
+
+		function closeDragElement() {
+
+			document.onmouseup = null;
+			document.onmousemove = null;
+
+		}
+
+	}
 
 </script>
 </body>

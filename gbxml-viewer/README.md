@@ -301,6 +301,14 @@ Will most likely build upon
 
 ## Change Log
 
+2018-02-09 ~ Theo
+
+* R9.9
+* App: Add sucky iOS iframe auto-resize workaround
+* HUD:
+	* Enable draggable div
+	* Fix CASObjectId issue
+
 2018-02-08 ~ Theo
 
 * R9.8a

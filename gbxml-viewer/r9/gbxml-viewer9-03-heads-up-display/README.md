@@ -33,6 +33,14 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 
 ## Change Log
 
+### 2018-02-09 ~ Theo
+
+* HUD
+	* Enable draggable and resizable div
+	* Fix CASObjectId issue
+	* Add volume output
+	* Add more console.log outputs
+
 ### 2018-02-08 ~ Theo
 
 * HUD: Add many new buttons to display

@@ -29,6 +29,9 @@ See main read me file
 
 ## Change Log
 
+### 2018-02-09 ~ Theo
+
+* Add sucky iOS iframe auto-resize workaround
 
 ### 2018-01-27 ~ Theo
 

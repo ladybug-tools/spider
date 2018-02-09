@@ -49,7 +49,7 @@ console.log( 'surfaceMeshes', surfaceMeshes );
 				'<details id = detTemplate open>' +
 					'<summary>Template</summary>' +
 
-					'<p>' + txt + '<p>' +
+					'<p style=width:300px; >' + txt + '<p>' +
 					'<p>surfaces: ' + icw.surfaceMeshes.children.length + '</p>' +
 
 				'</details>' +
