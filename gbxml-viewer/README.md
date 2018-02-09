@@ -311,6 +311,7 @@ Will most likely build upon
 	* Spaces
 	* Storeys
 	* Visibility
+* Core: Add checks for duplicate extra vertices in gbXML file vertices data
 
 
 ### 2018-02-07 ~ Theo
@@ -322,7 +323,6 @@ Will most likely build upon
 	* Add toggle visibility button
 	* Add all visible button
 	* Duplicate coordinates now highlighted in yellow
-* Core: Add checks for duplicate extra vertices in gbXML file vertices data
 
 
 ### 2018-02-02 ~ Theo
