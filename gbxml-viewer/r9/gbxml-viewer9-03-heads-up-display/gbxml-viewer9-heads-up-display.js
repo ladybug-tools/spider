@@ -263,7 +263,7 @@
 			adjacenciesTxt +
 			'<p>' +
 				'<button class=toggle onclick=allVisible(); >all visible</button> ' +
-				'<button onclick=displayTelltales(); >display telltales</button>' +
+				'<button onclick=displayTelltales(); title="A work-in-progress" >display telltales</button>' +
 			'</p>' +
 		'';
 
