@@ -308,8 +308,12 @@ Will most likely build upon
 * HUD:
 	* Enable draggable div
 	* Fix CASObjectId issue
+	* Add volume output
+	* Add more console.log outputs
+	* Add telltales with vertex numbering
 
-2018-02-08 ~ Theo
+
+### 2018-02-08 ~ Theo
 
 * R9.8a
 * HUD: Add many new buttons to display

@@ -4,6 +4,8 @@
 	var THREE;
 	var renderer;
 	var camera;
+	var scene;
+
 	var gbjson;
 	var surfaceMeshesChildren;
 
@@ -11,6 +13,8 @@
 	var intersected;
 	var objects;
 	var mouse;
+
+	var telltales;
 
 	var toggleCadId;
 
@@ -43,6 +47,7 @@
 			THREE = icw.THREE;
 			renderer = icw.renderer;
 			camera = icw.camera;
+			scene = icw.scene
 			gbjson = icw.gbjson;
 			surfaceMeshesChildren = icw.surfaceMeshes.children;
 
@@ -258,6 +263,7 @@
 			adjacenciesTxt +
 			'<p>' +
 				'<button class=toggle onclick=allVisible(); >all visible</button> ' +
+				'<button onclick=displayTelltales(); >display telltales</button>' +
 			'</p>' +
 		'';
 
@@ -265,6 +271,115 @@
 		document.body.style.cursor = 'pointer';
 
 	}
+
+
+	function displayTelltales() {
+
+		scene.remove( telltales );
+
+		telltales = new THREE.Object3D();
+
+		const vertices = intersected.geometry.vertices;
+
+		for ( let i = 0; i < vertices.length; i++ ) {
+
+			const vertex = vertices[ i ];
+			const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( vertex.x, vertex.y, vertex.z ) );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.copy( intersected.position );
+			mesh.quaternion.copy( intersected.quaternion );
+
+			placard = drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z  );
+			placard.position.copy( intersected.position );
+			placard.quaternion.copy( intersected.quaternion );
+
+			// console.log( 'placard', placard );
+			telltales.add( placard );
+			telltales.add( mesh );
+
+		}
+
+		icw.scene.add( telltales );
+
+	}
+
+
+
+
+	function drawPlacard( text, scale, color, x, y, z ) {
+
+		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
+
+		var placard = new THREE.Object3D();
+		var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+		var texture = canvasMultilineText( text, { backgroundColor: color }   );
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+
+		var geometry = new THREE.Geometry();
+		geometry.vertices = [ v( 0, 0, 0 ),  v( x, y, z ) ];
+		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		var line = new THREE.Line( geometry, material );
+
+//		placard.add( sprite, line );
+		placard.add( sprite );
+		return placard;
+
+
+		function canvasMultilineText( textArray, parameters ) {
+
+			var parameters = parameters || {} ;
+
+			var canvas = document.createElement( 'canvas' );
+			var context = canvas.getContext( '2d' );
+			var width = parameters.width ? parameters.width : 0;
+			var font = parameters.font ? parameters.font : '48px monospace';
+			var color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+
+			if ( typeof textArray === 'string' ) textArray = [ textArray ];
+
+			context.font = font;
+
+			for ( var i = 0; i < textArray.length; i++) {
+
+				width = context.measureText( textArray[ i ] ).width > width ? context.measureText( textArray[ i ] ).width : width;
+
+			}
+
+			canvas.width = width + 20;
+			canvas.height =  parameters.height ? parameters.height : textArray.length * 60;
+
+			context.fillStyle = 'hsl( ' + color + ', 80%, 50% )' ;
+			context.fillRect( 0, 0, canvas.width, canvas.height);
+
+			context.lineWidth = 1 ;
+			context.strokeStyle = '#000';
+			context.strokeRect( 0, 0, canvas.width, canvas.height );
+
+			context.fillStyle = '#000' ;
+			context.font = font;
+
+			for ( i = 0; i < textArray.length; i++) {
+
+				context.fillText( textArray[ i ], 10, 48  + i * 60 );
+
+			}
+
+			var texture = new THREE.Texture( canvas );
+			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			texture.needsUpdate = true;
+
+			return texture;
+
+		}
+
+	}
+
 
 
 
@@ -419,7 +534,9 @@
 
 	function onDocumentMouseDown( event ) {
 
+//		icw.dragMouseDown;( event );
 		divHeadsUp.style.display = 'none';
+
 		renderer.domElement.removeEventListener( 'click', icw.onClickEvent, false );
 
 	}
@@ -433,6 +550,7 @@
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;
 
+//		icw.dragElement;( event );
 		onDocumentMouseMove( event );
 
 	}
@@ -447,3 +565,4 @@
 		}
 
 	}
+

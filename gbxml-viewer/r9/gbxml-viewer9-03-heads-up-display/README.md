@@ -40,6 +40,7 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 	* Fix CASObjectId issue
 	* Add volume output
 	* Add more console.log outputs
+	* Add telltales with vertex numbering
 
 ### 2018-02-08 ~ Theo
 
