@@ -149,16 +149,6 @@
 
 		<iframe id=ifrThree src="../gbxml-viewer9-01-core/gbxml-viewer9-core.html" height=100% width=100% ></iframe>
 
-		// sucky iOS iframe auto-resize workaround
-
-		if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
-
-			ifrThree.style.width = getComputedStyle( ifrThree ).width;
-			ifrThree.style.height = getComputedStyle( ifrThree ).height;
-			ifrThree.setAttribute( 'scrolling', 'no' );
-
-		}
-
 		<div id = "divContents" ></div>
 
 	</div>
