@@ -307,7 +307,7 @@
 
 	function toggleBackgroundGradient() {
 
-// 2016-07-18
+		// 2016-07-18
 
 		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
 		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
@@ -527,7 +527,7 @@
 
 		surfaceMeshes.traverse( function ( child ) {
 
-//			if ( child instanceof THREE.Mesh ) {
+		//			if ( child instanceof THREE.Mesh ) {
 
 				if ( !child.userData.positionStart ) {
 

@@ -14,9 +14,8 @@
 	var objects;
 	var mouse;
 
-	var telltales;
-
-	var toggleCadId;
+	var telltalesVertex;
+	var telltalesPolyloop;
 
 	initHeadsUp();
 
@@ -163,7 +162,6 @@
 		//divHeadsUp.style.left = 0 + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
 		//divHeadsUp.style.top = 30 + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
 
-//		divHeadsUp.style.right = '20px'; // + 0.5 * icw.window.innerWidth + mouse.x * 0.5 * icw.innerWidth + 'px';
 
 		divHeadsUp.style.left = 'calc( 100% - 400px )';
 		divHeadsUp.style.top = '20px'; // + 0.5 * icw.window.innerHeight - mouse.y * 0.5 * icw.window.innerHeight + 'px';
@@ -263,7 +261,8 @@
 			adjacenciesTxt +
 			'<p>' +
 				'<button class=toggle onclick=allVisible(); >all visible</button> ' +
-				'<button onclick=displayTelltales(); title="A work-in-progress" >display telltales</button>' +
+				'<button onclick=displayTelltalesVertex(); title="Three.js data" >vertex telltales</button> ' +
+				'<button onclick=displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>' +
 			'</p>' +
 		'';
 
@@ -273,11 +272,15 @@
 	}
 
 
-	function displayTelltales() {
 
-		scene.remove( telltales );
+	function displayTelltalesVertex() {
 
-		telltales = new THREE.Object3D();
+		scene.remove( telltalesVertex );
+
+		if( !intersected ) { return; }
+
+		telltalesVertex = new THREE.Object3D();
+
 
 		const vertices = intersected.geometry.vertices;
 
@@ -291,20 +294,82 @@
 			mesh.position.copy( intersected.position );
 			mesh.quaternion.copy( intersected.quaternion );
 
-			placard = drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z  );
+			placard = drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z + 0.5 );
 			placard.position.copy( intersected.position );
 			placard.quaternion.copy( intersected.quaternion );
 
 			// console.log( 'placard', placard );
-			telltales.add( placard );
-			telltales.add( mesh );
+			telltalesVertex.add( placard );
+			telltalesVertex.add( mesh );
 
 		}
 
-		icw.scene.add( telltales );
+		icw.scene.add( telltalesVertex );
 
 	}
 
+
+
+	function displayTelltalesPolyloop() {
+
+		scene.remove( telltalesPolyloop );
+
+		if( !intersected ) { return; }
+
+		telltalesPolyloop = new THREE.Object3D();
+
+		const vertices = intersected.userData.data.PlanarGeometry.PolyLoop.CartesianPoint;
+
+		for ( let i = 0; i < vertices.length; i++ ) {
+
+			const vertex = vertices[ i ].Coordinate;
+			const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			// console.log( 'vertex', vertex );
+
+			mesh.position.set( parseFloat( vertex[ 0 ] ), parseFloat( vertex[ 1 ] ), parseFloat( vertex[ 2 ] ) );
+
+			placard = drawPlacard( i.toString(), 0.01, 200, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
+			// console.log( 'placard', placard );
+			telltalesPolyloop.add( placard );
+			telltalesPolyloop.add( mesh );
+
+		}
+
+		const openings = intersected.userData.data.Opening ? intersected.userData.data.Opening : [];
+
+		for ( let i = 0; i < openings.length; i++ ) {
+
+			const opening = openings[ i ]
+			//console.log( 'opening', opening );
+
+			const vertices = opening.PlanarGeometry.PolyLoop.CartesianPoint;
+			//console.log( 'vertices', vertices );
+
+			for ( let i = 0; i < vertices.length; i++ ) {
+
+				const vertex = vertices[ i ].Coordinate;
+				const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+				const material = new THREE.MeshNormalMaterial();
+				const mesh = new THREE.Mesh( geometry, material );
+				// console.log( 'vertex', vertex );
+
+				mesh.position.set( parseFloat( vertex[ 0 ] ), parseFloat( vertex[ 1 ] ), parseFloat( vertex[ 2 ] ) );
+
+				placard = drawPlacard( i.toString(), 0.01, 10, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
+				// console.log( 'placard', placard );
+				telltalesPolyloop.add( placard );
+				telltalesPolyloop.add( mesh );
+
+			}
+
+
+		}
+
+		scene.add( telltalesPolyloop );
+
+	}
 
 
 
@@ -326,7 +391,7 @@
 		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
 		var line = new THREE.Line( geometry, material );
 
-//		placard.add( sprite, line );
+		//placard.add( sprite, line );
 		placard.add( sprite );
 		return placard;
 
@@ -379,7 +444,6 @@
 		}
 
 	}
-
 
 
 
@@ -453,7 +517,7 @@
 
 		const space = gbjson.Campus.Building.Space.find( function( item ) { return item.id === spaceIdRef; } );
 
-//		console.log( 'space', space );
+		//		console.log( 'space', space );
 
 		return space;
 
@@ -534,7 +598,7 @@
 
 	function onDocumentMouseDown( event ) {
 
-//		icw.dragMouseDown;( event );
+		//icw.dragMouseDown;( event );
 		divHeadsUp.style.display = 'none';
 
 		renderer.domElement.removeEventListener( 'click', icw.onClickEvent, false );
@@ -550,7 +614,7 @@
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;
 
-//		icw.dragElement;( event );
+		//		icw.dragElement;( event );
 		onDocumentMouseMove( event );
 
 	}

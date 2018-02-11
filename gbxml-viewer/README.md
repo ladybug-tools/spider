@@ -301,12 +301,20 @@ Will most likely build upon
 
 ## Change Log
 
-2018-02-09 ~ Theo
+### 2018-02-10 ~ Theo
+
+* HUD:
+	* Adjust position of placards
+	* Add polyloop telltales
+
+
+### 2018-02-09 ~ Theo
 
 * R9.9
 * App: Add sucky iOS iframe auto-resize workaround
 * HUD:
-	* Enable draggable div
+	* Enable draggable and resizable div
+		* Not yet working on mobile devices
 	* Fix CASObjectId issue
 	* Add volume output
 	* Add more console.log outputs
