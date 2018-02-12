@@ -37,7 +37,7 @@
 			divHeadsUp.innerHTML =
 				'<div id=divDraggableHeader title="Open JavaScript console to see more data" >' +
 					'<small>Click here to move</small>' +
-					'<button onclick=divHeadsUp.style.display="none"; style=float:right; >&#x2716;</button>' +
+					'<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>' +
 				'</div>' +
 				'<div id=divItems ></div>' +
 			'';
