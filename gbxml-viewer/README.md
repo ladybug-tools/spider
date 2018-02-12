@@ -248,25 +248,25 @@ Feel free to add new ideas
 * Better lights and shadows
 * Section views
 
+### Gallery
+
+* 2018-02-11 ~ Theo: update links to new folder
 
 ### Heads-up Display
 
-* 2017-12-07 ~ Theo: Add better size adjustment to text box
 * 2017-12-01 ~ What data should be included in heads-up display?
-* 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
 
 
 ### Settings
 
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
+* 2018-02-11 ~ Theo: Fix explode view so it works
+* 2018-02-11 ~ Theo: Add section views
 
 
 ### Reports
 
 * 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
-* 2017-12-07 ~ Theo: Refresh reports each time a new model is loaded
-* 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
-* 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
 
 
 ### First Person camera
@@ -274,12 +274,14 @@ Feel free to add new ideas
 
 ### Sun Path / Analemmas
 
-* 2018-01-01 ~ Theo: Multiple suns
-
 
 ### Screen Capture
 
 * 2018-01-01 ~ Much better control over the camera
+
+
+### Sun Range
+
 
 
 ### Templates
@@ -287,7 +289,6 @@ Feel free to add new ideas
 
 ### Export gbXML files
 
-Not yet started
 
 * 2017-12-15 ~ Theo: export selected spaces or zones to gbxml?
 * 2017-12-10 ~ Michal: Export gbJSON
@@ -300,6 +301,18 @@ Will most likely build upon
 ***
 
 ## Change Log
+
+### 2018-02-11 ~ Theo
+
+* App & HUD: More efforts on touch-enabled interaction and Apple support
+
+Done at one time or another
+* 2017-12-07 ~ Theo: Add better size adjustment to text box
+* 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
+* 2017-12-07 ~ Theo: Refresh reports each time a new model is loaded
+* 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
+* 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
+
 
 ### 2018-02-10 ~ Theo
 

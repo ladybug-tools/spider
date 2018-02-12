@@ -34,6 +34,7 @@
 				'background-color: #ddd; border-radius: 8px; display: none; min-height: 100px; min-width: 200px; opacity: 0.95; ' +
 				' overflow: auto; padding: 5px 5px 10px 5px; position: fixed; resize: both; z-index: 1000; ' +
 			'';
+
 			divHeadsUp.innerHTML =
 				'<div id=divDraggableHeader title="Open JavaScript console to see more data" >' +
 					'<small>Click here to move</small>' +

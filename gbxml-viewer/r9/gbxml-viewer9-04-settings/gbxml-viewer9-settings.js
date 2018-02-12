@@ -108,7 +108,7 @@
 
 			'';
 
-// following causes error when inside an iframe in a read me
+			// following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butSettings.style.backgroundColor = 'pink';
@@ -494,7 +494,7 @@
 	}
 
 
-	function updateViewExplodeHorizontal() {
+	function updateViewExplodeHorizontalOriginal() {
 
 		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
 
@@ -519,6 +519,39 @@
 
 	}
 
+
+	function updateViewExplodeHorizontal() {
+
+		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
+
+		const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+		const sphere = bbox.getBoundingSphere();
+		center = sphere.center;
+		radius = sphere.radius;
+
+		console.log( 'center', center );
+		console.log( 'radius', radius );
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				if ( !child.userData.positionStart ) {
+
+					child.userData.positionStart = child.position.clone();
+					child.userData.vectorStart = child.position.clone().sub( center );
+				}
+
+				const p = child.userData.positionStart;
+				const v = child.userData.vectorStart;
+
+				child.position.copy( center.add( v.multiplyScalar( 1.02 ) ) );
+
+			}
+
+		} );
+
+	}
 
 
 	function updateViewExplodeVertical() {
