@@ -67,6 +67,7 @@
 
 	function drop( event ) {
 
+		event.preventDefault();
 		setIfrThree();
 
 		var iframeUrl = event.dataTransfer.getData( 'URL' );
@@ -80,8 +81,6 @@
 			ifrThree.contentWindow.openFile( event.dataTransfer );
 
 		}
-
-		event.preventDefault();
 
 	}
 
@@ -132,13 +131,19 @@
 
 		if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
 
-//			ifrThree.style.width = getComputedStyle( ifrThree ).width;
-//			ifrThree.style.width = getComputedStyle( document.body ).width;
-//			ifrThree.style.width = window.innerWidth + 'px';
+			ifrThree.style.width = getComputedStyle( ifrThree ).width;
 			ifrThree.style.height = getComputedStyle( ifrThree ).height;
 			ifrThree.setAttribute( 'scrolling', 'no' );
 
 		}
+
+//		initReport();
+
+//		element = document.getElementById( 'detReports' );
+
+//		if ( element ) { element.remove(); }
+
+//		butReports.style.backgroundColor = '';
 
 	}
 
@@ -171,8 +176,8 @@
 	function toggleNav() {
 
 		const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' );
-		//console.log( 'ww', width, divMenu.style.width  );
-		// needs fixing
+//console.log( 'ww', width, divMenu.style.width  );
+// needs fixing
 		if ( !divMenu.style.width || divMenu.style.width === '350px' ) {
 
 			divMenu.style.width = '0';
@@ -190,3 +195,48 @@
 		}
 
 	}
+
+
+//Make the DIV element draggable:
+// https://www.w3schools.com/howto/howto_js_draggable.asp
+
+function dragElementxxxx( element ) {
+
+	let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+	divDraggableHeader.onmousedown = dragMouseDown;
+
+	function dragMouseDown( event ) {
+
+		event = event || window.event;
+
+		pos3 = event.clientX;
+		pos4 = event.clientY;
+		document.onmouseup = closeDragElement;
+
+		document.onmousemove = elementDrag;
+
+	}
+
+	function elementDrag( event ) {
+
+		event = event || window.event;
+
+		pos1 = pos3 - event.clientX;
+		pos2 = pos4 - event.clientY;
+		pos3 = event.clientX;
+		pos4 = event.clientY;
+
+		element.style.top = ( element.offsetTop - pos2 ) + 'px';
+		element.style.left = ( element.offsetLeft - pos1 ) + 'px';
+
+	}
+
+	function closeDragElement() {
+
+		document.onmouseup = null;
+		document.onmousemove = null;
+
+	}
+
+}

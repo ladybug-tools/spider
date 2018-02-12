@@ -25,9 +25,12 @@ See main read me file
 ## Issues
 
 
-
-
 ## Change Log
+
+
+### 2018-02-11 ~ Theo
+
+* App & HUD: More efforts on touch-enabled interaction and Apple support
 
 ### 2018-02-09 ~ Theo
 

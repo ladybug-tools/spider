@@ -17,12 +17,6 @@
 	var telltalesVertex;
 	var telltalesPolyloop;
 
-	var draggableLeft;
-	var draggableTop;
-
-	var draggableStartX;
-	var draggableStartY;
-
 	initHeadsUp();
 
 	function initHeadsUp() {
@@ -42,14 +36,7 @@
 				'<div id=divItems ></div>' +
 			'';
 
-			divDraggableHeader.style.cssText =
-				'background-color: #2196F3; color: #fff; cursor: move; padding: 10px; z-index: 10;';
-
-			divDraggableHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
-			window.addEventListener( 'mouseup', onMouseUpDraggable, false );
-
-			divDraggableHeader.addEventListener( 'touchstart', onTouchStartDraggable, false );
-			divDraggableHeader.addEventListener( 'touchmove', onTouchMoveDraggable, false );
+			dragElement( divHeadsUp );
 
 		}
 
@@ -643,67 +630,3 @@
 
 	}
 
-
-	function onMouseDownDraggable( event ) {
-
-		draggableTop = event.clientY - divHeadsUp.offsetTop;
-		draggableLeft = event.clientX - divHeadsUp.offsetLeft;
-
-		window.addEventListener('mousemove', onMouseMoveDraggable, true );
-
-	}
-
-
-
-	function onMouseMoveDraggable( event ){
-
-		divHeadsUp.style.top = ( event.clientY - draggableTop ) + 'px';
-		divHeadsUp.style.left = ( event.clientX - draggableLeft ) + 'px';
-
-	}
-
-
-
-	function onMouseUpDraggable() {
-
-		window.removeEventListener( 'mousemove', onMouseMoveDraggable, true );
-
-	}
-
-
-
-	function onTouchStartDraggable( event ){
-
-		draggableLeft = divHeadsUp.offsetLeft;
-		draggableStartX = event.changedTouches[ 0 ].clientX;
-		draggableTop = divHeadsUp.offsetTop;
-		draggableStartY = event.changedTouches[ 0 ].clientY;
-		//console.log( 'draggableTop', draggableTop, draggableStartY );
-		event.preventDefault();
-
-		//console.log ('Status: touchstart', 'ClientX: ' + draggableStartX + 'px' );
-
-	}
-
-
-
-	function onTouchMoveDraggable( event ){
-
-		const distX = event.changedTouches[ 0 ].clientX - draggableStartX;
-		let left = draggableLeft + distX > document.body.clientWidth - 100 ? document.body.clientWidth - 100 : draggableLeft + distX;
-		left = draggableLeft + distX < 0 ? 0 : left;
-		//console.log( 'left2', left  );
-		divHeadsUp.style.left = left + 'px';
-
-		const distY = event.changedTouches[ 0 ].clientY - draggableStartY;
-		// top is a reserved word
-		let ttop = draggableTop + distY > window.innerHeight - 100 ? window.innerHeight - 100 : draggableTop + distY;
-		ttop = draggableTop + distY < 0 ? 0 : ttop;
-		//console.log( 'ttop', ttop  );
-		divHeadsUp.style.top = ttop + 'px';
-
-		event.preventDefault();
-
-		//console.log ( 'Status: touchmove', 'Horizontal distance traveled: ' + distY + 'px' );
-
-	}
