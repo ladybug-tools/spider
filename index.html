@@ -108,6 +108,7 @@
 	const user = 'ladybug-tools';
 	const repo = '/spider';
 	const pathRepo = '';
+	const branch = '/master/'
 
 	const uriDefaultFile = 'README.md';
 //	const uriDefaultFile = '../../plugins/view-github-issues.html'
@@ -125,7 +126,7 @@
 
 	function init() {
 
-		urlGitHubPage = location.pathname.includes( user + '/' + user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + '/master/';
+		urlGitHubPage = location.pathname.includes( user + '/' + user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + branch;
 //console.log( 'urlGitHubPage', urlGitHubPage );
 
 		urlInfo.href = urlGitHubSource;
@@ -241,7 +242,7 @@
 
 		if ( items.message ) { alert( items.message ); return; }
 
-		const ignoreFolders = [ 'data' ]; //, 'plugins'
+		const ignoreFolders = [ 'archive', 'data', 'pages', 'plugins', 'read-gbxml' ]; //, 'plugins'
 
 		for ( let item of items ) {
 
@@ -261,7 +262,7 @@
 
 		}
 
-		const ignoreFiles = [ '.gitattributes', '.gitignore', '404', 'ladybug-tools-spider.html' ];
+		const ignoreFiles = [ '.gitattributes', '.gitignore', '404.html', 'ladybug-tools-spider.html' ];
 
 		for ( let item of items ) {
 
@@ -274,7 +275,7 @@
 				txt +=
 					'<table><tr>' +
 
-						'<td><a href="' + urlGitHubSource + '/blob/master/' + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
+						'<td><a href="' + urlGitHubSource + '/blob' + branch + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
 						'<td>' +
 
 							'<a href=#' + urlGitHubPage + pathRepo + itemPath +
@@ -350,11 +351,13 @@
 
 			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
 			hamburger.style.left = '-100px';
+			divContainer.style.marginLeft = '0';
 
-			} else {
+		} else {
 
-				divMenu.style.left = 0;
-				hamburger.style.left = left;
+			divMenu.style.left = 0;
+			hamburger.style.left = left;
+			divContainer.style.marginLeft = 'var( --mnu-width )';
 
 		}
 
