@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-// Welcome. Anybody who looks at the source code of other people's error pages must be wonderful.
+// Welcome. Anybody who looks at the source code of other people's error pages must be wonderful!
 
 	document.body.style.cssText = ' font: bold 12pt monospace; ';
 
@@ -18,10 +18,26 @@
 	document.title = '404 for ' + user + repo
 	info.innerHTML =
 
-	'<center><h1 title="This is the 404 Error page" >Oops</h1>' +
-		'<p>Website: <a href=http://' + user + '.github.io' + repo + ' title="Go to the apps" >' + user + '.github.io</a></p>' +
+	'<center>' +
+		'<h1 title="This is the 404 error page" >Oops</h1>' +
+		'<p>Website: <a href=http://' + user + '.github.io' + repo + ' title="Go to the apps" >' + user + '.github.io' + repo + '</a></p>' +
 		'<p>Source code: <a href=https://github.com/' + user + repo + ' title="Go to the source code" >github.com/' + user + repo + '</a></p>' +
 	'</center>';
+
+	toggleBackgroundGradient();
+
+	function toggleBackgroundGradient() {
+
+// 2016-07-18
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
 
 </script>
 </body>
