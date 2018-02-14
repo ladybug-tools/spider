@@ -302,6 +302,15 @@ Will most likely build upon
 
 ## Change Log
 
+
+### 2018-02-13 ~ Theo
+
+* Settings:
+	* Explode view beginning to operate as desired.
+	* Still much to do to improve the user experience
+	* Reload web page required to fully reset view.
+
+
 ### 2018-02-11 ~ Theo
 
 * App & HUD: More efforts on touch-enabled interaction and Apple support

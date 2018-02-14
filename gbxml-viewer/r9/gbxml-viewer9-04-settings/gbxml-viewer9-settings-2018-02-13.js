@@ -91,16 +91,16 @@
 						'<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >' +
 					'</p>' +
 
-					'<p title="building surface separation: 0 to 100%" >Explode view: ' +
+					'<p title="building surface separation: 0 to 100%" >Explode view horizontal: ' +
 						'<output id=outViewExplode class=floatRight >0%</output>' +
-						'<input type="range" id="rngViewExplode" min=-50 max=50 step=1 value=0 onchange=updateViewExplodeHorizontal(); >' +
+						'<input type="range" id="rngViewExplode" min=0 max=100 step=1 value=0 oninput=updateViewExplodeHorizontal(); >' +
 					'</p>' +
-/*
+
 					'<p title="building surface separation: 0 to 100%" >Explode view vertical: ' +
 						'<output id=outViewExplodeVertical class=floatRight >0%</output>' +
 						'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=updateViewExplodeVertical(); >' +
 					'</p>' +
-*/
+
 
 				'</details>' +
 
@@ -112,14 +112,6 @@
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butSettings.style.backgroundColor = 'pink';
-
-			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
-			const sphere = bbox.getBoundingSphere();
-			center = sphere.center;
-			radius = sphere.radius;
-
-			console.log( 'center', center );
-			console.log( 'radius', radius );
 
 		} else {
 
@@ -528,24 +520,17 @@
 	}
 
 
-
 	function updateViewExplodeHorizontal() {
 
-		const s = parseFloat( rngViewExplode.value ) / 3;
+		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
 
-		surfaceEdges.visible = false;
+		const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+		const sphere = bbox.getBoundingSphere();
+		center = sphere.center;
+		radius = sphere.radius;
 
-		/*
-		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
-		const material = new THREE.MeshNormalMaterial();
-		bmesh = new THREE.Mesh( geometry, material );
-		bmesh.position.copy( center );
-		scene.add( bmesh );
-		//console.log( 'bmesh', bmesh );
-		*/
-
-		scene.updateMatrixWorld();
-
+		console.log( 'center', center );
+		console.log( 'radius', radius );
 
 		scene.traverse( function ( child ) {
 
@@ -553,53 +538,14 @@
 
 				if ( !child.userData.positionStart ) {
 
-					if ( child.geometry.boundingSphere ) {
-
-						const pp = child.geometry.boundingSphere.center.clone();
-						pp.applyMatrix4( child.matrixWorld );
-						child.userData.positionStart = pp;
-
-						//const pp = child.clone();
-						//child.userData.positionStart = pp.localToWorld( child.geometry.boundingSphere.center );
-
-					} else {
-
-						child.userData.positionStart = child.position.clone();
-
-					}
-
-					//var vector = child.position.clone();
-					//vector.applyMatrix4( child.matrixWorld );
-					//const vector = child.localToWorld( child.position.clone() );
-					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
-
+					child.userData.positionStart = child.position.clone();
+					child.userData.vectorStart = child.position.clone().sub( center );
 				}
 
-				const p = child.userData.positionStart.clone();
-				const vec = child.userData.vectorStart.clone();
+				const p = child.userData.positionStart;
+				const v = child.userData.vectorStart;
 
-				/*
-				const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-				const material = new THREE.MeshNormalMaterial();
-				const amesh = new THREE.Mesh( geometry, material );
-				amesh.position.copy( p );
-				scene.add( amesh );
-
-				let geometry2, material2, line;
-
-				geometry2 = new THREE.Geometry();
-				pp = p.clone().add( vec.multiplyScalar( 2 ) );
-//				console.log( 'pp', pp );
-				geometry2.vertices = [ p, pp ];
-				material2 = new THREE.LineBasicMaterial( { color: 0x000000 } );
-				line = new THREE.Line( geometry2, material2 );
-				scene.add( line );
-				*/
-
-				//				vv = new THREE.Vector3( 5, 0, 0 );
-				child.position.add( vec.multiplyScalar( s ) );
-				console.log( 's', s );
-//				child.position.copy( p );
+				child.position.copy( center.add( v.multiplyScalar( 1.02 ) ) );
 
 			}
 
@@ -626,7 +572,7 @@
 
 				child.position.z = sz * p.z;
 
-			//			}
+//			}
 
 		} );
 

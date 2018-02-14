@@ -40,6 +40,13 @@
 
 See also main gbXML Viewer read me file
 
+### 2018-02-13 ~ Theo
+
+* Settings:
+	* Explode view beginning to operate as desired.
+	* Still much to do to improve the user experience
+	* Reload web page required to fully reset view.
+
 ### 2018-01-02 ~ Theo
 
 * R9 updates

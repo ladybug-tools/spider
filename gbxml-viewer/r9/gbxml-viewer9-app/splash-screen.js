@@ -8,6 +8,16 @@
 
 			<details open>
 
+				<summary>Welcome 2018-02-13</summary>
+
+				<p>
+				Settings menu: Explode view beginning to operate as desired. Still much to do to improve the user experience. Reload web page required to fully reset view.
+				</p>
+
+			</details>
+
+			<details>
+
 				<summary>Welcome 2018-02-08</summary>
 
 				<p>

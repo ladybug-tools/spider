@@ -6,7 +6,7 @@
 <meta name=description content="View gbXML files in 3D in your browser. Open files using File Reader or by URL in location.hash.Base Script used by gbXML Viewer modules." >
 <meta name=keywords content="gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-02" >
-<title>gbXML Viewer9 Core R9.8</title>
+<title>gbXML Viewer9 Core</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -88,6 +88,8 @@
 		EmbeddedColumn: 0x80806E
 
 	}
+
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional, lightPoint;
