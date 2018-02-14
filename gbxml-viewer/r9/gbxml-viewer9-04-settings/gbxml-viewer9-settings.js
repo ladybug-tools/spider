@@ -535,6 +535,14 @@
 
 		surfaceEdges.visible = false;
 
+		const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+		const sphere = bbox.getBoundingSphere();
+		center = sphere.center;
+		radius = sphere.radius;
+
+//		console.log( 'center', center );
+//		console.log( 'radius', radius );
+
 		/*
 		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
 		const material = new THREE.MeshNormalMaterial();
@@ -551,6 +559,7 @@
 
 			if ( child instanceof THREE.Mesh ) {
 
+				child.updateMatrixWorld();
 				if ( !child.userData.positionStart ) {
 
 					if ( child.geometry.boundingSphere ) {
@@ -598,7 +607,7 @@
 
 				//				vv = new THREE.Vector3( 5, 0, 0 );
 				child.position.add( vec.multiplyScalar( s ) );
-				console.log( 's', s );
+//				console.log( 's', s );
 //				child.position.copy( p );
 
 			}
