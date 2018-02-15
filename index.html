@@ -3,9 +3,9 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "This script allows you to list, open view all the files in all the Spider folders" >
+<meta name = "description" content = "This menu script allows you to list, open and view the files in selected Spider folders" >
 <meta name = "keywords" content = "JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-01" >
+<meta name = "date" content = "2018-02-14" >
 <title>Spider</title>
 
 <style>
@@ -81,6 +81,7 @@
 		<div id= "divFooter" >
 
 			<div title='many thanks!' ><a href=#pages/credits.md >Credits</a></div>
+			<div title='' ><a href=#pages/about-this-cms.md >About this CMS</a></div>
 			<div><a href=#pages/code-of-conduct.md >Code of Conduct</a></div>
 			<div><a href=#pages/contributing.md >Contributing</a></div>
 			<div><a href=#pages/license.md >License</a></div>
@@ -126,8 +127,8 @@
 
 	function init() {
 
-		urlGitHubPage = location.pathname.includes( user + '/' + user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + branch;
-//console.log( 'urlGitHubPage', urlGitHubPage );
+		urlGitHubPage = location.href.includes( '/' + user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + branch;
+		//console.log( 'urlGitHubPage', urlGitHubPage );
 
 		urlInfo.href = urlGitHubSource;
 		urlInfo.innerHTML = iconInfo;
@@ -143,7 +144,7 @@
 	function onHashChange() {
 
 		let url, ulc, pathCurrent;
-
+/*
 		if ( !location.hash ) {
 
 			url = urlGitHubPage + uriDefaultFile;
@@ -151,6 +152,7 @@
 			pathCurrent = '';
 
 		} else {
+*/
 
 			url = location.hash.slice( 1 );
 			ulc = url.toLowerCase();
@@ -159,11 +161,9 @@
 			const crumbs = url.slice( urlGitHubPage.length );
 			pathCurrent = crumbs.lastIndexOf( '/' ) > 0 ? crumbs.slice( 0, crumbs.lastIndexOf( '/' ) ) : '';
 
-//console.log( 'pathCurrent',  pathCurrent );
+			//console.log( 'pathCurrent',  pathCurrent );
 
-		}
-
-
+//		}
 
 		getFolderContents( pathCurrent );
 
@@ -286,8 +286,10 @@
 
 					'</tr></table>';
 
+// simplify
 				if ( ( !location.hash || location.hash.toLowerCase().endsWith( 'readme.md' ) )
-					&& item.path !== 'README.md' && item.name.toLowerCase() === 'readme.md' ) {
+					//&& item.path !== 'README.md'
+					&& item.name.toLowerCase() === 'readme.md' ) {
 
 					location.hash = urlGitHubPage + pathRepo + itemPath;
 
