@@ -32,7 +32,7 @@
 			divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
 			divHeadsUp.style.cssText =
 				'background-color: #ddd; border-radius: 8px; display: none; min-height: 100px; min-width: 200px; opacity: 0.95; ' +
-				' overflow: auto; padding: 5px 5px 10px 5px; position: fixed; resize: both; z-index: 1000; ' +
+				' overflow: auto; padding: 5px 5px 10px 5px; position: fixed; resize: both; z-index: 10; ' +
 			'';
 
 			divHeadsUp.innerHTML =
