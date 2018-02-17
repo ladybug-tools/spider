@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Real-time 3D in your browser with menu sliding" >
+<meta name = "keywords" content = "Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-02-13" >
+<title>gbXML Viewer10 Core</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
+<script src = "gbxml-viewer10-core.js" ></script>
+
+	<div id = "divMenu" >
+
+		<h1 id=divTitle ><a href="" ><script> document.write( document.title ) </script></a></h1>
+
+		<p>
+			<input type=file id=inpFile onchange=openFile(this); >
+		<p>
+
+		<p id = "divContents" >
+
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+
+			<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>
+
+			<button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>
+
+			<button onclick=setAllVisible();zoomObjectBoundingSphere(surfaceMeshes); >reset view</button>
+
+		</p>
+
+		<div id=divLog ></div>
+
+	</div>
+
+
+<script>
+
+	initThreeGbxml();
+	animate();
+
+</script>
+</body>
+</html>
