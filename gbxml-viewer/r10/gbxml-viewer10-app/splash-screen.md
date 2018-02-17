@@ -5,7 +5,7 @@
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
-In the Settings menu, the 'explode' feature is still not perfect but much improved.
+In the Settings menu, the 'Explode view' feature is still not perfect but has been much improved.
 
 _Please suggest what you would like to see here._
 
