@@ -28,6 +28,12 @@
 ## Wish list
 
 * Too many items to list
+* 2018-02-17 ~ Split into settings and views
+	* Separate View menu
+		* Explodes
+		* Sections
+		* Ortho view
+		* Multiple renderers?
 
 ## Issues
 

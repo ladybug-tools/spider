@@ -3,14 +3,14 @@
 # gbXML Viewer10 Templates Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-templates/gbxml-viewer10-template.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-templates/test-gbxml-viewer10-template.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer10 Templates]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-templates/gbxml-viewer10-template.html )
+## Full screen: [gbXML Viewer10 Templates]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-templates/test-gbxml-viewer10-template.html )
 
 Use and share this link for gbXML Viewer10:
 
-* <http://www.ladybug.tools/spider/gbxml-viewer/r10/>
+* <http://www.ladybug.tools/spider/gbxml-viewer/>
 
 ## Concept
 

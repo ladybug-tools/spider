@@ -3,11 +3,15 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: lightpink; --mnu-back-color: brown    ; --mnu-width:320px; height: 100%; }
+:root {
+	--but-bg-color: aqua;
+}
+
+	html { --mnu-color: lightpink; --mnu-back-color: brown    ; --mnu-width: 320px; --but-back-color: aqua; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
 
-	a { color: MediumAquaMarine; text-decoration: none; }
+	a { color: indianred; text-decoration: none; }
 	a:hover, a:focus, #divHamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }

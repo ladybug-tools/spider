@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML viewer save" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-15" >
-<title>test-gbxml-viewer10-template</title>
+<meta name = "date" content = "2018-02-17" >
+<title>test-gbxml-viewer10-save</title>
 <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
@@ -15,17 +15,17 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'template' to load test menu</p>
+	<p>If it does not open automatically, click 'gbxml-viewer10-save' to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
+		<button id=butMenuSave onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gbxml-viewer10-templates/gbxml-viewer10-template.js';
-			divDraggable.style.display='block';" >
-			gbxml-viewer10-template </button>
+			script.src = '../gbxml-viewer10-07-save/gbxml-viewer10-save.js';
+			divDraggable.style.display='block';onLoadThreejs();" >
+			gbxml-viewer10-save </button>
 	</p>
 
-	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' onload=butTemplate.click(); ></iframe>
+	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' ></iframe>
 
 	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
@@ -129,9 +129,22 @@
 
 
 
-	function onloadThreejs() {
 
-		butTemplate.click();
+
+	function onLoadThreejs() {
+
+		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		renderer = icw.renderer;
+		scene = icw.scene;
+		camera = icw.camera;
+
+		gbxml = icw.gbxml;
+		gbjson = icw.gbjson;
+
+		surfaceEdges = icw.surfaceEdges;
+		surfaceMeshes = icw.surfaceMeshes;
+
 
 	}
 

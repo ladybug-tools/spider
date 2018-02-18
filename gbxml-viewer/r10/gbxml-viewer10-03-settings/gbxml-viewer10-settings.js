@@ -1,11 +1,4 @@
 
-/*
-	var icw;
-	var THREE;
-	var scene;
-	var surfaceMeshes;
-	var surfaceEdges;
-*/
 
 	var opacity;
 	var cameraOrtho;
@@ -21,19 +14,8 @@
 
 	function init() {
 
-		if ( butSettings.style.backgroundColor !== 'pink' ) {
-/*
-			icw = ifrThree.contentWindow;
-			THREE = THREE;
-			renderer = renderer;
-			scene = scene;
-			surfaceMeshes = surfaceMeshes;
-			surfaceEdges = surfaceEdges;
+		if ( butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
-			surfaceAdjacencyDuplicates = surfaceAdjacencyDuplicates;
-			surfaceAdjacencyInvalids = surfaceAdjacencyInvalids;
-			surfaceCoordinateDuplicates = surfaceCoordinateDuplicates;
-*/
 			divMenuItems.innerHTML =
 
 				'<details id=detSettings open >' +
@@ -112,7 +94,7 @@
 			// following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
-			butSettings.style.backgroundColor = 'pink';
+			butSettings.style.backgroundColor = 'var( --but-bg-color )';
 
 			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
 			const sphere = bbox.getBoundingSphere();

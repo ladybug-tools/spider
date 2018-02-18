@@ -1,45 +1,4 @@
-<!doctype html>
-<html lang = "en" >
-<head>
-<meta charset = "utf-8" >
-<meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Basic HTML template" >
-<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2017-08-04" >
-<title></title>
-<style>
 
-	body { font: 12pt monospace; margin: 0; }
-	a { color: crimson; text-decoration: none; }
-
-	#header { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
-	#menu { margin: 0 20px; max-width: 300px; position: absolute; top: 0;}
-	#ifrContents { height: 500px; width: 100%; }
-
-</style>
-</head>
-<body>
-
-	<div id = "header" >
-		<div id = "title" ></div>
-		<p>
-			<a href="#latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600" >Sydney</a>
-			<a href="#latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420" >Coit</a>
-		</p>
-		<div id = "contents" ></div>
-	</div>
-
-	<div id = "menu" >
-
-		<div id=divMenuSub class=divMenuSub ></div>
-		<div id=calculations ></div>
-
-
-	</div>
-
-<script>
-
-	let aaaa = 23
 
 	let sydney = 'latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600';
 	let sfHyatt = 'latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420';
@@ -47,12 +6,6 @@
 	let coit = 'latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420';
 	let santaBarbara = 'latitude:34.4208305,longitude:-119.69819,zoom:16,offsetUTC:-420';
 	let blackRock = 'latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420';
-
-	let scope;
-
-	var THREE;
-	var scene;
-	var lights;
 
 //	const defaultLatitude = 37.796;
 //	const defaultLongitude = -122.398;
@@ -73,99 +26,50 @@
 	parameters.OffsetUTC = defaultOffsetUTC;
 */
 
-	let ground;
+	let ground, structures;
 	let terrain = {};
 	let count;
+	let rasterContext
 
 	const mbptoken='pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
 	const b = '<br>';
 
-	init();
+	function initTerrain() {
 
-	function init() {
+		divMenuItems.innerHTML =
+`
+			<details id = detTerrain open >
 
-		let txt;
+				<summary>Calculations</summary>
 
-		if ( window.self === window.top  ) {
+				<div id=calculations></div>
 
-			title.innerHTML = '<h2><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5).replace( /-/g, ' ' ) +'</a></h2>';
+			</details>
 
-			contents.innerHTML = '<iframe id=ifrContents src=test-threejs-basic.html ></iframe>';
+			<details open >
 
-			scope = ifrContents.contentWindow;
+				<summary>Heightmap</summary>
+				<div id=heightmap ></div>
 
-			ifrContents.onload = initVariables;
+			</details>
+`;
 
-		} else if ( parent && parent.THREE ) {
 
-//			parent.ifrMenuSub.style.display = 'none';
-
-			scope = parent;
-
-			initVariables();
-
-//			parent.ifrMenuSub.style.height = '0px';
-
-//console.log( 'mnu-content-terrain: parent has Three' );
-
-		} else if ( parent && parent.ifrContents ) {
-
-//			ifrMenuSub.style.display = 'none';
-
-			scope = parent.ifrContents.contentWindow;
-
-			initVariables();
-
-			parent.ifrMenuSub.style.height = '0px';
-//scope.console.log( 'mnu-content-terrain: parent has ifrContents.contentWindow' );
-
-		}
+		initVariables();
 
 	}
 
 
-
 	function initVariables() {
 
-		THREE = scope.THREE;
-		renderer = scope.renderer;
-		scene = scope.scene;
-		camera = scope.camera;
-		controls = scope.controls;
-		parameters = scope.parameters;
-
-		lightDirectional = scope.lightDirectional;
-		mesh = scope.mesh;
-		ground = scope.ground;
-		temple = scope.temple;
-		structures = scope.structures;
-		axisHelper = scope.axisHelper;
-		cameraHelper = scope.cameraHelper;
-
-
-		scope.updateTerrain = updateTerrain;
-		scope.drawMapOverlay = drawMapOverlay;
-
-/*
-//		scope.initVariables = initVariables;
-		scope.parameters = parameters;
-//		scope.getParametersFromHash = getParametersFromHash
-		scope.getCalcs = getCalcs;
-		scope.drawTerrain = drawTerrain;
-//		scope.getHeightMapData = getHeightMapData;
-*/
-
-
 		parameters.side = 2;
-		parameters.groundSize = 100;
+		parameters.groundSize = 100;  // size in units of Three.jd=s plane geometry
 		parameters.mPixel = [ 156412, 78206, 39103, 19551, 9776, 4888, 2444, 1222, 610.984, 305.492, 152.746, 76.373, 38.187, 19.093, 9.547, 4.773, 2.387, 1.193, 0.596, 0.298 ]
 		parameters.pixelsPerTile = 256;
-		parameters.tilesPerSide = 4; // odd number please
+		parameters.tilesPerSide = 4;
 
-console.log( 'structures', structures );
-		scene.remove( ground, structures );
-
-//		if ( !lights ) { addLights(); };
+		//console.log( 'structures', structures );
+		//	scene.remove( ground, structures );
 
 		addEventListener( 'hashchange', onHashChange, false );
 
@@ -174,25 +78,25 @@ console.log( 'structures', structures );
 	}
 
 
-
 	function onHashChange() {
 
-//console.log( 'mnu-content hash', location.hash );
+		//console.log( 'mnu-content hash', location.hash );
 
-//		getParametersFromHash();
+		//		getParametersFromHash();
 
-//	}
+		//	}
 
 
-//	function getParametersFromHash() {
+		//	function getParametersFromHash() {
 
 		let hash, str, params;
 
 		if ( !location.hash ) {
 
-//console.log( 'mnu-contents: no hash' );
+		//console.log( 'mnu-contents: no hash' );
 
-			location.hash = sfHyatt; //blackRock;
+			location.hash = sfHyatt; //
+			//location.hash = blackRock;
 
 			return;
 
@@ -201,7 +105,7 @@ console.log( 'structures', structures );
 		hash = location.hash.slice( 1 );
 
 		str = '{"' + hash.replace( /:/g, '":"' ).replace( /,/g, '", "' ) + '"}';
-//scope.console.log( 'getParametersFromHash', str );
+		//console.log( 'getParametersFromHash', str );
 
 		params = JSON.parse( str );
 
@@ -211,12 +115,10 @@ console.log( 'structures', structures );
 		parameters.offsetUTC = params.offsetUTC ? parseInt( params.offsetUTC, 10 ) : defaultOffsetUTC;
 		parameters.heightScale = params.heightScale ? params.heightScale : defaultHeightScale;
 
-//scope.console.log( 'getParametersFromHash', parameters );
+		//console.log( 'getParametersFromHash', parameters );
 
-		scope.parameters = parameters;
-
-console.log( 'structures', structures );
-		scene.remove( ground, structures );
+		//console.log( 'structures', structures );
+		//scene.remove( ground, structures );
 
 		getCalcs();
 
@@ -226,10 +128,10 @@ console.log( 'structures', structures );
 
 	function updateTerrain() {
 
-//scope.console.log( 'mnu-content-terrain updateTerrain' );
+		//scope.console.log( 'mnu-content-terrain updateTerrain' );
 
 		getCalcs();
-//		lights = scope.lights;
+		//		lights = scope.lights;
 
 	}
 
@@ -237,7 +139,7 @@ console.log( 'structures', structures );
 
 	function getCalcs( ) {
 
-//console.log( 'parameters', parameters );
+		//console.log( 'parameters', parameters );
 
 		let tileX, tileY;
 		let latMin, latMax, lonMin, lonMax;
@@ -254,25 +156,22 @@ console.log( 'structures', structures );
 		latMin =  tile2lat( tileY + 1, zoom );
 		latMax =  tile2lat( tileY, zoom );
 
-
 		lonMin = tile2lon( tileX, zoom );
 		lonMax = tile2lon( tileX + 1, zoom );
 
 		latDelta = ( latMax - latMin );
 		lonDelta = ( lonMax - lonMin );
 
-// tile pixels - not screen pixels
+		// tile pixels - not screen pixels
 
-		latDegreesPerPixel = latDelta / 256;
-		lonDegreesPerPixel = lonDelta / 256;
+		latDegreesPerPixel = latDelta / parameters.pixelsPerTile;
+		lonDegreesPerPixel = lonDelta / parameters.pixelsPerTile;
 
-		latPixelsPerDegree = 256 / latDelta;
-		lonPixelsPerDegree = 256 / lonDelta;
+		latPixelsPerDegree = parameters.pixelsPerTile / latDelta;
+		lonPixelsPerDegree = parameters.pixelsPerTile / lonDelta;
 
 		parameters.metersPerPixel = parameters.mPixel[ zoom ];
 		parameters.metersPerTile = parameters.metersPerPixel * 256;
-
-//		parameters.metersPerPixel = metersPerPixel;
 
 		parameters.latDelta = latDelta;
 		parameters.lonDelta = lonDelta;
@@ -280,36 +179,36 @@ console.log( 'structures', structures );
 		parameters.scaleX = parameters.groundSize / lonDelta;
 		parameters.scaleZ = parameters.groundSize / latDelta;
 
+		// center the desired lat/lon within a 4x4 grid of image tiles.
 		latDeltaTarget = latitude - latMin;
 		lonDeltaTarget = longitude - lonMin;
 
 		latDiff = latDeltaTarget / latDelta;
 		lonDiff = lonDeltaTarget / lonDelta;
 
+		//need more wiggle room here / not wired to 4x4
 		if ( latDiff < 0.25 ) { parameters.titleOffsetY = 3; }
 		else if ( latDiff < 0.5 ) { parameters.titleOffsetY = 2; }
 		else if ( latDiff < 0.75 ) { parameters.titleOffsetY = 1; }
 		else { parameters.titleOffsetY = 0; }
-
 
 		if ( lonDiff < 0.25 ) { parameters.titleOffsetX = 0; }
 		else if ( lonDiff < 0.5 ) { parameters.titleOffsetX = 1; }
 		else if ( lonDiff < 0.75 ) { parameters.titleOffsetX = 2; }
 		else { parameters.titleOffsetX = 3; }
 
-//console.log( 'parameters.titleOffsetX', parameters.titleOffsetX, lonDiff.toFixed( 2 ) );
-//console.log( 'parameters.titleOffsetY', parameters.titleOffsetY, latDiff.toFixed( 2 ) );
+		//console.log( 'parameters.titleOffsetX', parameters.titleOffsetX, lonDiff.toFixed( 2 ) );
+		// console.log( 'parameters.titleOffsetY', parameters.titleOffsetY, latDiff.toFixed( 2 ) );
 
-/*
-		d = new Date();
+		/*
+				d = new Date();
+				parameters.month = d.getUTCMonth();
+				parameters.date = d.getUTCDate();
+				parameters.hours =  d.getUTCHours();
+				parameters.minutes = d.getUTCMinutes();
+		*/
 
-		parameters.month = d.getUTCMonth();
-		parameters.date = d.getUTCDate();
-		parameters.hours =  d.getUTCHours();
-		parameters.minutes = d.getUTCMinutes();
-*/
-
-		scope.calculations.innerHTML =
+		calculations.innerHTML =
 
 			'<p>Latitude: ' + latitude.toFixed( 4 ) + '</p>' +
 			'<p>Longitude: ' + longitude.toFixed( 4 ) + '</p>' +
@@ -335,23 +234,22 @@ console.log( 'structures', structures );
 
 	function drawTerrain() {
 
-		let zoom, x, y, geometryGround, materialGround;
-		let imageLoader, str;
+//		let zoom, x, y, geometryGround, materialGround;
+//		let imageLoader, str;
 
-		zoom = parameters.zoom;
-		x = parameters.x = lon2tile( parameters.longitude, zoom );
-		y = parameters.y = lat2tile( parameters.latitude, zoom );
+		const zoom = parameters.zoom;
+		const x = parameters.x = lon2tile( parameters.longitude, zoom );
+		const y = parameters.y = lat2tile( parameters.latitude, zoom );
 
-		urlGED = 'https://api.mapbox.com/v4/mapbox.terrain-rgb/' + zoom + '/' + x + '/' + y + '.pngraw?access_token=' + mbptoken;
-//console.log( '', urlGED ); // click to see terrain / global elevation data / GED
+		const urlGED = 'https://api.mapbox.com/v4/mapbox.terrain-rgb/' + zoom + '/' + x + '/' + y + '.pngraw?access_token=' + mbptoken;
+		//console.log( '', urlGED ); // click to see terrain / global elevation data / GED
 
-		imageLoader = new THREE.ImageLoader();
+		const imageLoader = new THREE.ImageLoader();
 		imageLoader.crossOrigin = 'anonymous';
 		imageLoader.load( urlGED , getHeightMapData );
 
-		str = 'https://tile.openstreetmap.org/' + zoom + '/' + x + '/' + y + '.png';
-//scope.console.log( '', str );
-
+		const str = 'https://tile.openstreetmap.org/' + zoom + '/' + x + '/' + y + '.png';
+		//console.log( '', str );
 
 	}
 
@@ -359,39 +257,38 @@ console.log( 'structures', structures );
 
 	function getHeightMapData( map ) {
 
-//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox
+		//	height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1) - from mapbox
 
-//scope.console.log( 'hm', map );
+		//scope.console.log( 'hm', map );
 
-		let geometry, material;
-		let heightmapCanvas, heightmapContext;
-		let scaleTerrain, data, vertices, r, g, b;  // Note: b is a const elsewhere
+//		let heightmapCanvas, heightmapContext;
+//		let r, g, b;  // Note: b is a const elsewhere
+//		parameters.metersPerPixel = parameters.mPixel[ parameters.zoom ];
 
-		parameters.metersPerPixel = parameters.mPixel[ parameters.zoom ];
+		const scaleTerrain = parameters.heightScale * 100 / ( 256 * parameters.metersPerPixel );
 
-		scaleTerrain = parameters.heightScale * 100 / ( 256 * parameters.metersPerPixel );
-
-		heightmapCanvas = document.createElement( 'canvas' );
+		const heightmapCanvas = document.createElement( 'canvas' );
 
 		heightmapCanvas.style.cssText = ' ';
-		heightmapCanvas.width = 256;
-		heightmapCanvas.height = 256;
-		heightmapContext = heightmapCanvas.getContext( '2d' );
+		const size = parameters.pixelsPerTile;
+		heightmapCanvas.width = size;
+		heightmapCanvas.height = size;
+		const heightmapContext = heightmapCanvas.getContext( '2d' );
 
-		heightmapContext.drawImage( map, 0, 0, 256, 256, 0, 0, 256, 256 );
+		heightmapContext.drawImage( map, 0, 0, size, size, 0, 0, size, size );
 
-		data = heightmapContext.getImageData( 0, 0, 256, 256 ).data;
+		const data = heightmapContext.getImageData( 0, 0, size, size ).data;
 
-		geometry = new THREE.PlaneBufferGeometry( parameters.groundSize, parameters.groundSize, 255, 255 );
+		const geometry = new THREE.PlaneBufferGeometry( parameters.groundSize, parameters.groundSize, size - 1, size - 1 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0.5 * parameters.groundSize, 0, 0.5 * parameters.groundSize ) );
-		vertices = geometry.attributes.position.array;
+		const vertices = geometry.attributes.position.array;
 
 		for ( let i = 1, j = 0; i < vertices.length; i += 3 ) {
 
-			r = data[ j++ ];
-			g = data[ j++ ];
-			b = data[ j++ ];
+			const r = data[ j++ ];
+			const g = data[ j++ ];
+			const b = data[ j++ ];
 			j++;
 
 			vertices[ i ] = scaleTerrain * ( 0.1 * ( r * 65536 + g * 256 + b ) - 10000 );
@@ -400,8 +297,9 @@ console.log( 'structures', structures );
 
 		geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
-//		geometry.center();
-		material = new THREE.MeshNormalMaterial( { opacity: 0.75 } );
+		//geometry.center();
+
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.75 } );
 
 		scene.remove( ground, structures );
 		ground = new THREE.Mesh( geometry, material );
@@ -410,12 +308,11 @@ console.log( 'structures', structures );
 		ground.receiveShadow = true;
 
 		scene.add( ground );
-		scope.ground = ground;
 
 		drawMapOverlay();
 
-		scope.heightmap.innerHTML = '<div id=hm ></div>';
-		scope.heightmap.appendChild( heightmapCanvas );
+//		heightmap.innerHTML = '<div id=hm ></div>';
+		heightmap.appendChild( heightmapCanvas );
 
 	}
 
@@ -423,21 +320,17 @@ console.log( 'structures', structures );
 
 
 	function drawMapOverlay() {
-//scope.console.log( 'drawMapOverlay', 23 );
+		//console.log( 'drawMapOverlay', 23 );
 
-		let baseURL, tileX, tileY, tileOffset, count;
 		const opacity = 1;
 		const zoom =  parameters.zoom + 2;
-
-
-		let tilesPerSide = parameters.tilesPerSide;
-		let img, texture;
-
-		let rasterCanvas = document.createElement( 'canvas' );
+		const tilesPerSide = parameters.tilesPerSide;
+		const rasterCanvas = document.createElement( 'canvas' );
 		rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
-//		scope.document.body.appendChild( rasterCanvas );
+//		document.body.appendChild( rasterCanvas );
 //		rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
-		let rasterContext = rasterCanvas.getContext( '2d' );
+
+		const rasterContext = rasterCanvas.getContext( '2d' );
 
 		if ( !parameters.mapType ) {
 
@@ -446,31 +339,31 @@ console.log( 'structures', structures );
 
 		}
 
-		tileOffset = Math.floor( 0.5 * tilesPerSide );
-		tileX = lon2tile( parameters.longitude, zoom ) - parameters.titleOffsetX;
-		tileY = lat2tile( parameters.latitude, zoom ) - parameters.titleOffsetY;
+//		const tileOffset = Math.floor( 0.5 * tilesPerSide );
+		const tileX = lon2tile( parameters.longitude, zoom ) - parameters.titleOffsetX;
+		const tileY = lat2tile( parameters.latitude, zoom ) - parameters.titleOffsetY;
 
-		count = 0;
-		baseURL = parameters.mapType[ 1 ];
+		let count = 0;
+		const baseURL = parameters.mapType[ 1 ];
 
-		for ( var x = 0; x < tilesPerSide; x++ ) {
+		for ( let x = 0; x < tilesPerSide; x++ ) {
 
-			for ( var y = 0; y < tilesPerSide; y++ ) {
+			for ( let y = 0; y < tilesPerSide; y++ ) {
 
 				if ( parameters.selectedIndex < 4 ) {
 
 					loadImage( baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
-//scope.console.log( 'google', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+					//console.log( 'google', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
 
 				} else if ( parameters.selectedIndex === 7 ) {
 
 					loadImage( baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg', x , y );
-//scope.console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
+					//console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
 
 				} else {
 
 					loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
-//scope.console.log( '', parameters.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+					//console.log( '', parameters.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
 
 				}
 
@@ -480,14 +373,14 @@ console.log( 'structures', structures );
 
 
 		function loadImage( url, x, y ) {
-//console.log( 'load image', x, y );
-//scope.info.innerHTML += 'url ' + url + ' x' + x + ' y' + y + b;
+			//console.log( 'load image', x, y );
+			//scope.info.innerHTML += 'url ' + url + ' x' + x + ' y' + y + b;
 
-			let img = scope.document.createElement( 'img' );
+			const img = document.createElement( 'img' );
 			img.crossOrigin = 'anonymous';
 			img.src = url;
 
-			let texture = new THREE.Texture( rasterCanvas );
+			const texture = new THREE.Texture( rasterCanvas );
 			texture.minFilter = texture.magFilter = THREE.NearestFilter;
 			texture.needsUpdate = true;
 			const pixelsPerTile = parameters.pixelsPerTile;
@@ -495,32 +388,32 @@ console.log( 'structures', structures );
 
 			img.onload = function(){
 
-//scope.info.innerHTML += + count + ' ';
-				rasterContext.drawImage( img, 0, 0, 256, 256, x * pixelsPerTile, y * pixelsPerTile, pixelsPerTile, pixelsPerTile );
+				//info.innerHTML += + count + ' ';
+				rasterContext.drawImage( img, 0, 0, pixelsPerTile, pixelsPerTile, x * pixelsPerTile, y * pixelsPerTile, pixelsPerTile, pixelsPerTile );
 
 				count++;
 
-				if ( count > tilesPerSideSquared  - 1 ) {
+				if ( count >= tilesPerSideSquared ) {
 
-//scope.info.innerHTML += 'ground.material.map' + texture.uuid;
+					//info.innerHTML += 'ground.material.map' + texture.uuid;
 
 					if ( lightDirectional ) {
-//scope.console.log( 'lights true', lightDirectional );
+						//console.log( 'lights true', lightDirectional );
 
 						ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
 
 
 					} else {
-//scope.console.log( 'lights false', lights );
+						//console.log( 'lights false', lights );
 
 						ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
 
 					}
 
-//					ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
-//					ground.geometry.computeFaceNormals();
-//					ground.geometry.computeVertexNormals();
-					ground.material.needsUpdate = true;
+					//ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+					//ground.geometry.computeFaceNormals();
+					//ground.geometry.computeVertexNormals();
+//					ground.material.needsUpdate = true;
 
 					setCamera();
 
@@ -530,32 +423,29 @@ console.log( 'structures', structures );
 
 		}
 
-	}
 
+	}
 
 
 
 	function setCamera() {
 
-		if ( !ground.geometry ) { return; }
+//		if ( !ground.geometry ) { return; }
 
 		const size = parameters.groundSize;
-		ground.geometry.computeBoundingSphere();
-		center = ground.geometry.boundingSphere.center;
+//		ground.geometry.computeBoundingSphere();
+		const center = ground.geometry.boundingSphere.center;
 		controls.target.copy( center );
 
-		axisHelper.position.copy( center );
+		axesHelper.position.copy( center );
 
-//scope.console.log( 'center', center, camera.position );
+		//console.log( 'center', center, camera.position );
 
 		camera.position.copy( controls.target.clone().add( new THREE.Vector3( 0, size, size ) ) );
 
 		lightDirectional.position.copy( controls.target.clone().add( new THREE.Vector3( -size, size, size ) ) );
 
-		lightDirectional.target = axisHelper;
-
-//		object3D.position.copy( center );
-
+		lightDirectional.target = axesHelper;
 
 	}
 
@@ -567,6 +457,7 @@ console.log( 'structures', structures );
 
 	}
 
+
 	function lat2tile( latitude, zoom ) {
 
 		const pi = Math.PI;
@@ -574,11 +465,13 @@ console.log( 'structures', structures );
 
 	}
 
+
 	function tile2lon( x, zoom ) {
 
 		return ( x / Math.pow( 2, zoom ) * 360 - 180 );
 
 	}
+
 
 	function tile2lat( y, zoom ) {
 
@@ -587,8 +480,3 @@ console.log( 'structures', structures );
 		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
 
 	}
-
-
-</script>
-</body>
-</html>

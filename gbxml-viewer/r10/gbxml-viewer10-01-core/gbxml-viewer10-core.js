@@ -11,7 +11,6 @@
 	var gbxml;
 	var gbjson;
 
-	// add surface group to r9?
 	var surfaceMeshes;
 	var surfaceEdges;
 
@@ -38,8 +37,6 @@
 		EmbeddedColumn: 0x80806E
 
 	}
-
-	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional, lightPoint;

@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML viewer heads-up display" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-15" >
-<title>test-gbxml-viewer10-template</title>
+<meta name = "date" content = "2018-02-17" >
+<title>test-gbxml-viewer10-heads-up-display</title>
 <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
@@ -18,14 +18,14 @@
 	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
+		<button id=butHeadsUp onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gbxml-viewer10-templates/gbxml-viewer10-template.js';
-			divDraggable.style.display='block';" >
-			gbxml-viewer10-template </button>
+			script.src = '../gbxml-viewer10-05-heads-up-display/gbxml-viewer10-heads-up-display.js';
+			divDraggable.style.display='block';onloadThreejs();" >
+			gbxml-viewer10-heads-up-display </button>
 	</p>
 
-	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' onload=butTemplate.click(); ></iframe>
+	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' ></iframe>
 
 	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
@@ -50,6 +50,8 @@
 		<div id=divMenuItems ></div>
 
 	</div>
+
+
 
 <script>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
@@ -76,6 +78,7 @@
 		dragArea.addEventListener( 'drop', drop, false );
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
+
 		onHashChange();
 
 	}
@@ -131,12 +134,23 @@
 
 	function onloadThreejs() {
 
-		butTemplate.click();
+		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		renderer = icw.renderer;
+		camera = icw.camera;
+		scene = icw.scene
+		gbjson = icw.gbjson;
+		surfaceMeshes = icw.surfaceMeshes;
+		surfaceEdges = icw.surfaceEdges;
+
+//		butHeadsUp.click();
 
 	}
 
 
 
+
+//Make the DIV element draggagle:
 // https://www.w3schools.com/howto/howto_js_draggable.asp
 
 	function dragElement( element ) {

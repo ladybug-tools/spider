@@ -7,8 +7,11 @@
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2017-12-30" >
 <title>test-gbxml-viewer9-heads-up-display</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
+
+	/*
 
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
@@ -18,7 +21,6 @@
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
 
-/*
 	#divDraggable {
 		background-color: #f1f1f1;
 		border: 1px solid #d3d3d3;
@@ -53,10 +55,12 @@
 
 	<p>
 		<button id=butHeadsUp onclick = "const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = 'gbxml-viewer9-heads-up-display.js';" >gbxml-viewer9-heads-up-display</button>
+			script.src = 'gbxml-viewer9-heads-up-display.js';" >
+			gbxml-viewer9-heads-up-display
+		</button>
 	</p>
 
-	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' ></iframe>
+	<iframe id=ifrThree src='../gbxml-viewer9-01-core/gbxml-viewer9-core.html' onload=onloadThreejs(); ></iframe>
 
 	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this); ><p>
 
@@ -124,6 +128,14 @@
 
 
 	function onloadThreejs() {
+
+		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		renderer = icw.renderer;
+		camera = icw.camera;
+		scene = icw.scene
+		gbjson = icw.gbjson;
+		surfaceMeshes = icw.surfaceMeshes;
 
 		butHeadsUp.click();
 

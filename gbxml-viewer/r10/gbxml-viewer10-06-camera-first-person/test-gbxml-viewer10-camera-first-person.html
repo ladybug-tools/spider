@@ -3,13 +3,15 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML files settings" >
-<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-01-02" >
-<title>test-gbxml-viewer10-settings</title>
+<meta name = "description" content = "Test sample gbXML viewer first person camera" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-02-15" >
+<title>test-gbxml-viewer10-camera-first-person</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
+/*
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
@@ -19,12 +21,7 @@
 
 	iframe { height: 500px; width: 100%; }
 
-	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
-	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
-	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
-
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
-
 
 	#divDraggable {
 		background-color: #f1f1f1;
@@ -46,6 +43,7 @@
 		padding: 10px;
 		z-index: 10;
 	}
+*/
 
 </style>
 </head>
@@ -55,34 +53,36 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'settings' to load settings menu.</p>
-
+	<!--
+	<p>If it does not open automatically, click 'template' to load test menu</p>
 	<p>
-		<button id=butSettings onclick =
+		<button id=butCameraFirstPerson onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gbxml-viewer10-03-settings/gbxml-viewer10-settings.js'; " >
-		Settings</button>
+			script.src = '../gbxml-viewer10-06-camera-first-person/gbxml-viewer10-camera-first-person.js';
+			divDraggable.style.display='block';" >
+			gbxml-viewer10-camera-first-person </button>
 	</p>
-
-	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' ></iframe>
+-->
+	<iframe id=ifrThree src='./gbxml-viewer10-core-camera-first-person.html' ></iframe>
 
 	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
 
 	<div><a href="#../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/boston-ma-urban-house-mep.xml" >boston-ma-urban-house-mep.xml</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/bristol-clifton-down-road.xml" >bristol-clifton-down-road.xml</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/columbia-sc-two-story-education-trane.xml" >columbia-sc-two-story-education-trane</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/coventry-university-of-warwick.xml" >coventry-university-of-warwick.xml</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
-	<div><a href="#../../../gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/boston-ma-urban-house-mep.xml" >boston-ma-urban-house-mep.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/bristol-clifton-down-road.xml" >bristol-clifton-down-road.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml" >columbia-sc-two-story-education-trane</a></div>
+	<div><a href="#../../gbxml-sample-files/coventry-university-of-warwick.xml" >coventry-university-of-warwick.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
+
 
 	<div id=divDraggable >
 
 		<div id = "divDraggableHeader" >
-				Click here to move
-				<button ontouchstart=divDraggable.style.display="none"; onclick=divDraggable.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+			Click here to move
+			<button ontouchstart=divDraggable.style.display="none"; onclick=divDraggable.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 		</div>
 
 		<div id=divMenuItems ></div>
@@ -113,7 +113,6 @@
 		dragArea.addEventListener( 'drop', drop, false );
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
-
 		onHashChange();
 
 	}
@@ -124,10 +123,30 @@
 
 		const url = location.hash.slice( 1 );
 
+//		ifrThree.contentWindow.location.hash = '#' + url;
 		ifrThree.src = threeDefaultFile + location.hash;
 		ifrThree.contentWindow.location.reload();
 	}
 
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		//		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+		//			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+
+		}
+
+	}
 
 
 	function drop( event ) {
@@ -152,9 +171,10 @@
 
 	function onloadThreejs() {
 
-		butSettings.click();
+		butTemplate.click();
 
 	}
+
 
 
 
@@ -177,7 +197,7 @@
 
 			document.onmousemove = elementDrag;
 
-	}
+		}
 
 		function elementDrag( event ) {
 
@@ -201,7 +221,6 @@
 		}
 
 	}
-
 
 </script>
 </body>

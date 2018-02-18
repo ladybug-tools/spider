@@ -17,7 +17,7 @@
 
 	function init() {
 
-		if ( butGalleryBuildWell.style.backgroundColor !== 'pink' ) {
+		if ( butGalleryBuildWell.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			divMenuItems.innerHTML =
 
@@ -35,7 +35,7 @@
 
 			requestFile( urlGitHubApiContents, callbackGitHubMenu );
 
-			butGalleryBuildWell.style.backgroundColor = 'pink';
+			butGalleryBuildWell.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 

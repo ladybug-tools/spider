@@ -3,12 +3,11 @@
 
 # gbXML Viewer Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-01-core/gbxml-viewer9-core.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
-_gbXML Viewer R9 Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-01-core/gbxml-viewer10-core.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+_gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
-## _This document will be split into two: a read me file and an introduction file for the Viewer_
 
-## Full screen: [gbXML Viewer9]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen: [gbXML Viewer10]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
@@ -302,6 +301,16 @@ Will most likely build upon
 
 ## Change Log
 
+### 2018-02-17 ~ Theo
+
+* Add HUD, first person and Save to R10
+* Update and enhance template style sheet and files
+
+
+### 2018-02-16 ~ Theo
+
+R10
+* First commit
 
 ### 2018-02-13 ~ Theo
 

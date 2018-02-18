@@ -6,8 +6,7 @@
 <meta name = "description" content = "Real-time 3D in your browser with menu sliding" >
 <meta name = "keywords" content = "Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-13" >
-<title>gbXML Viewer10 Core</title>
-
+<title>gbXML Viewer10 Core / Camera First Person</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -15,7 +14,7 @@
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
-	button:hover, button:focus{ background: #ccc; color: yellow }
+	button:hover { background: #ccc; color: #fff }
 
 	#divMenu { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
 
@@ -24,7 +23,7 @@
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
-<script src = "gbxml-viewer10-core.js" ></script>
+<script src = "../gbxml-viewer10-01-core/gbxml-viewer10-core.js" ></script>
 
 	<div id = "divMenu" >
 
@@ -48,9 +47,18 @@
 
 		<div id=divLog ></div>
 
+		<p>
+			<button id=butCameraFirstPerson onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gbxml-viewer10-06-camera-first-person/gbxml-viewer10-camera-first-person.js';"b>
+			gbxml-viewer10-camera-first-person </button>
+		</p>
+
 	</div>
 
+
 	<div id=divContainer ></div>
+
 
 <script>
 
@@ -58,5 +66,6 @@
 	animate();
 
 </script>
+
 </body>
 </html>

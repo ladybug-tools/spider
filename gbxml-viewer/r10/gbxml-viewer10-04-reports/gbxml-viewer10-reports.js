@@ -13,11 +13,11 @@
 
 	function initReport() {
 
-		if ( butReports.style.backgroundColor !== 'pink' ) {
+		if ( butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			createReport();
 
-			butReports.style.backgroundColor = 'pink';
+			butReports.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
@@ -964,7 +964,7 @@
 
 	function allVisible() {
 
-		//		surfaceGroup.visible = true;
+		surfaceMeshes.visible = true;
 		surfaceEdges.visible = true;
 		divLog.innerHTML = '';
 

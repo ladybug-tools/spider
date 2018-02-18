@@ -11,10 +11,20 @@ _Please suggest what you would like to see here._
 
 <details open>
 
+<summary>Welcome 2018-02-17</summary>
+
+<p>
+Add three more modules: heads-up display, first person camera and save.
+</p>
+
+</details><details open>
+
 <summary>Welcome 2018-02-16</summary>
 
 <p>
 R10 first commit. A significant revision. The code is smaller, simpler and faster. About half the R9 code is in 10. The remaining modules should be available soon.
+
+The interface give more emphasis to the model - and less to the menus. And, of course, new and more colors.
 </p>
 
 </details>

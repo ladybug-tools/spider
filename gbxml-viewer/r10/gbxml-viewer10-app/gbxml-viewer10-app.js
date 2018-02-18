@@ -14,7 +14,7 @@
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
 		divContentsHeader.style.cssText =
-		'background-color: #2196F3; color: #fff; cursor: move; padding: 10px; z-index: 10;';
+		'background-color: LightSalmon   ; color: #fff; cursor: move; padding: 10px; z-index: 10;';
 
 		divContentsHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
 		window.addEventListener( 'mouseup', onMouseUpDraggable, false );

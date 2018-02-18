@@ -7,9 +7,10 @@
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-15" >
 <title>test-gbxml-viewer10-gallery</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
-
+/*
 	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
@@ -38,6 +39,7 @@
 		padding: 10px;
 		z-index: 10;
 	}
+*/
 
 </style>
 </head>
@@ -124,7 +126,6 @@
 
 		const url = location.hash.slice( 1 );
 
-//		ifrThree.contentWindow.location.hash = '#' + url;
 		ifrThree.src = threeDefaultFile+ location.hash;
 		ifrThree.contentWindow.location.reload();
 
