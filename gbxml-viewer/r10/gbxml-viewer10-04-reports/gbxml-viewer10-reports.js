@@ -58,9 +58,9 @@
 
 				'<div id=divReport ></div>' +
 
-			'</details>' +
+				'<hr>' +
 
-			'<hr>' +
+			'</details>' +
 
 			divMenuItems.innerHTML +
 

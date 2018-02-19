@@ -301,6 +301,30 @@ Will most likely build upon
 
 ## Change Log
 
+
+### 2018-02-18 ~ Theo
+
+R10.2
+* Three.js core:
+	* If location.hash calls for non-gbXML file then load default file
+	* Feeble start to name spacing
+	* Update test script titles
+	* Update readme links
+* Gallery
+	* Fix HR issues
+	* Test works OK
+	* Fix readme links
+* Editor
+	* Added to GV App
+	* Standalone test file also works
+	* Not fully tested/completed
+* App
+	* divContainer
+		* resizes more nicely
+		* styles enhanced
+	* divMenu
+		* resizes and moves - a bit flakey though
+
 ### 2018-02-17 ~ Theo
 
 * Add HUD, first person and Save to R10

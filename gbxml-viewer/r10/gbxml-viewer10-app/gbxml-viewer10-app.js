@@ -1,20 +1,16 @@
 
 	const uriDefaultFile = 'splash-screen.md';
 
-	var draggableLeft;
-	var draggableTop;
+	let draggableLeft;
+	let draggableTop;
 
-	var draggableStartX;
-	var draggableStartY;
-
+	let draggableStartX;
+	let draggableStartY;
 
 
 	function initCore() {
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
-
-		divContentsHeader.style.cssText =
-		'background-color: LightSalmon   ; color: #fff; cursor: move; padding: 10px; z-index: 10;';
 
 		divContentsHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
 		window.addEventListener( 'mouseup', onMouseUpDraggable, false );
@@ -22,6 +18,8 @@
 		divContentsHeader.addEventListener( 'touchstart', onTouchStartDraggable, false );
 		divContentsHeader.addEventListener( 'touchmove', onTouchMoveDraggable, false );
 
+		divMenuHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
+//		window.addEventListener( 'mouseup', onMouseUpDraggable, false );
 
 		divMenu.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
 
@@ -42,11 +40,11 @@
 
 		} else if ( ulc.endsWith( '.xml' ) ) {
 
-			requestFile( url, callbackGbXML );
+			requestFile( url, THR.callbackGbXML );
 
-		} else if ( ulc.endsWith( '.html' ) ) {
+//		} else if ( ulc.endsWith( '.html' ) ) {
 
-			setIfrThree();
+//			setIfrThree();
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
@@ -104,10 +102,11 @@
 
 	function onMouseDownDraggable( event ) {
 
-		draggableTop = event.clientY - divContainer.offsetTop;
-		draggableLeft = event.clientX - divContainer.offsetLeft;
+		draggableTop = event.clientY - event.target.parentNode.offsetTop;
+		draggableLeft = event.clientX - event.target.parentNode.offsetLeft;
 
 		window.addEventListener('mousemove', onMouseMoveDraggable, true );
+		event.preventDefault();
 
 	}
 
@@ -115,8 +114,9 @@
 
 	function onMouseMoveDraggable( event ){
 
-		divContainer.style.top = ( event.clientY - draggableTop ) + 'px';
-		divContainer.style.left = ( event.clientX - draggableLeft ) + 'px';
+		event.target.parentNode.style.top = ( event.clientY - draggableTop ) + 'px';
+		event.target.parentNode.style.left = ( event.clientX - draggableLeft ) + 'px';
+		event.preventDefault();
 
 	}
 
@@ -125,6 +125,7 @@
 	function onMouseUpDraggable() {
 
 		window.removeEventListener( 'mousemove', onMouseMoveDraggable, true );
+		event.preventDefault();
 
 	}
 
@@ -132,9 +133,9 @@
 
 	function onTouchStartDraggable( event ){
 
-		draggableLeft = divContainer.offsetLeft;
+		draggableLeft = event.target.parentNode.offsetLeft;
 		draggableStartX = event.changedTouches[ 0 ].clientX;
-		draggableTop = divContainer.offsetTop;
+		draggableTop = event.target.parentNode.offsetTop;
 		draggableStartY = event.changedTouches[ 0 ].clientY;
 		//console.log( 'draggableTop', draggableTop, draggableStartY );
 		event.preventDefault();
@@ -149,14 +150,14 @@
 		let left = draggableLeft + distX > document.body.clientWidth - 100 ? document.body.clientWidth - 100 : draggableLeft + distX;
 		left = draggableLeft + distX < 0 ? 0 : left;
 		//console.log( 'left2', left  );
-		divContainer.style.left = left + 'px';
+		event.target.parentNode.style.left = left + 'px';
 
 		const distY = event.changedTouches[ 0 ].clientY - draggableStartY;
 		// top is a reserved word
 		let ttop = draggableTop + distY > window.innerHeight - 100 ? window.innerHeight - 100 : draggableTop + distY;
 		ttop = draggableTop + distY < 0 ? 0 : ttop;
 		//console.log( 'ttop', ttop  );
-		divContainer.style.top = ttop + 'px';
+		event.target.parentNode.style.top = ttop + 'px';
 
 		event.preventDefault();
 
@@ -167,22 +168,22 @@
 
 ////
 
-function toggleNav() {
+	function toggleNav() {
 
-	const left = 'calc( var( --mnu-width ) - 100px )';
+		const left = 'calc( var( --mnu-width ) - 100px )';
 
-	divContainer.style.display="none";
+		divContainer.style.display="none";
 
-	if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
+		if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
 
-		divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
-		divHamburger.style.left = '-100px';
+			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			divHamburger.style.left = '-100px';
 
-	} else {
+		} else {
 
-		divMenu.style.left = 0;
-		divHamburger.style.left = left;
+			divMenu.style.left = 0;
+			divHamburger.style.left = left;
+
+		}
 
 	}
-
-}

@@ -5,146 +5,161 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-16" >
-<title>gbXML Viewer 10.1</title>
+<meta name = "date" content = "2018-02-18" >
+<title>gbXML Viewer 10.2</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
-<script src = "gbxml-viewer10-app.js" ></script>
+<script src = "../gbxml-viewer10-app/gbxml-viewer10-app.js" ></script>
 <script src = "../gbxml-viewer10-01-core/gbxml-viewer10-core.js" ></script>
 
-	<div id=divMenu >
+	<div id = "divMenu" >
 
-		<details open >
+		<div id = "divMenuHeader" >
 
-			<summary>Header</summary>
-
-			<div>
-				<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-				<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
-				<a href="../../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
-			</div>
-
-			<h2>
-				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 title='Octocat'  ></a>
-				<a href="" ><script> document.write( document.title ); </script></a>
-			</h2>
-
-			<p><script> document.write( document.head.querySelector( '[name=description]' ).content )</script></p>
-
-			<p id=dragArea class=dragDropArea >
-				Drag and drop Three.js files into this box or <br>
-				<input type = "file" id = "inpFile" onchange="openFile(this);" >
-			<p>
-
-			<hr>
-
-		</details>
-
-
-		<details open >
-
-			<summary>Toggle Features</summary>
-
-			<button id=butHeadsUp onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-05-heads-up-display/gbxml-viewer10-heads-up-display.js';" >
-			heads-up display</button>
-
-			<button id=butSettings onclick=
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-03-settings/gbxml-viewer10-settings.js'; " >
-			settings</button>
-
-			<button id=butReports onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-04-reports/gbxml-viewer10-reports.js'; " >
-			reports</button>
-
-			<button id=butCameraFirstPerson onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-06-camera-first-person/gbxml-viewer10-camera-first-person.js';" >
-			first person camera</button>
-
-<!--
-			<button id=butAnalemma onclick="
-				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-				scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-				const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-07-analemma/gbxml-viewer9-analemma.js'; " >
-			sun-path / analemma</button>
-
-			<button id=butSunRange onclick="
-			const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-			const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
-			sun-range</button>
-
-			<button id=butScreenCapture onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
-			screen capture </button>
-
--->
-
-			<button id=butMenuSave onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-07-save/gbxml-viewer10-save.js';" >
-			save file </button>
-
-
-			<p>Sample files on GitHub to explore:</p>
-
-			<button id=butGalleryGbxml onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-gbxml.js';" >
-				gbXML.org Sample Files
-			</button>
-
-			<button id=butGallerySampleFiles onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-gbxml-sample-files.js';" >
-				Spider gbXML sample files
-			</button>
-
-			<button id=butGalleryBuildWell onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-build-well.js';" >
-				Spider Build Well
-			</button>
-
-			<hr>
-
-		</details>
-
-		<div id = "divMenuItems" >
+			<small>Click here to move</small>
 
 		</div>
 
-		<details open >
+		<div id = "divMenuContents" >
 
-			<summary>Footer</summary>
+			<details open >
 
-			<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
-			<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
-			<div><a href=#../../../pages/contributing.md >Contributing</a></div>
-			<div><a href=#../../../pages/license.md >License</a></div>
-			<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
-			<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
-			<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
+				<summary>Header</summary>
 
-			<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' > &#x1f578; </h2>
+				<div>
+					<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
+					<a href="../../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
+				</div>
 
-		</details>
+				<h2>
+					<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 title='Octocat'  ></a>
+					<a href="" ><script> document.write( document.title ); </script></a>
+				</h2>
+
+				<p><script> document.write( document.head.querySelector( '[name=description]' ).content )</script></p>
+
+				<p id=dragArea class=dragDropArea >
+					Drag and drop Three.js files into this box or <br>
+					<input type = "file" id = "inpFile" onchange="openFile(this);" >
+				<p>
+
+				<hr>
+
+			</details>
+
+
+			<details open >
+
+				<summary>Toggle Features</summary>
+
+				<button id=butHeadsUp onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-05-heads-up-display/gbxml-viewer10-heads-up-display.js';" >
+				heads-up display</button>
+
+				<button id=butSettings onclick=
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-03-settings/gbxml-viewer10-settings.js'; " >
+				settings</button>
+
+				<button id=butReports onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-04-reports/gbxml-viewer10-reports.js'; " >
+				reports</button>
+
+				<button id=butCameraFirstPerson onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-06-camera-first-person/gbxml-viewer10-camera-first-person.js';" >
+				first person camera</button>
+
+	<!--
+				<button id=butAnalemma onclick="
+					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-07-analemma/gbxml-viewer9-analemma.js'; " >
+				sun-path / analemma</button>
+
+				<button id=butSunRange onclick="
+				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+				scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
+				sun-range</button>
+
+				<button id=butScreenCapture onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
+				screen capture </button>
+
+				<button id=butMenuSave onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-07-save/gbxml-viewer10-save.js';" >
+				save file </button>
+	-->
+
+				<button id=butEditor onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-08-editor/gbxml-viewer10-editor.js';" >
+				edit file </button>
+
+
+
+				<p>Sample files on GitHub to explore:</p>
+
+				<button id=butGalleryGbxml onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-gbxml.js';" >
+					gbXML.org Sample Files
+				</button>
+
+				<button id=butGallerySampleFiles onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-gbxml-sample-files.js';" >
+					Spider gbXML sample files
+				</button>
+
+				<button id=butGalleryBuildWell onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-build-well.js';" >
+					Spider Build Well
+				</button>
+
+				<hr>
+
+			</details>
+
+
+			<div id = "divMenuItems" ></div>
+
+
+			<details open >
+
+				<summary>Footer</summary>
+
+				<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
+				<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
+				<div><a href=#../../../pages/contributing.md >Contributing</a></div>
+				<div><a href=#../../../pages/license.md >License</a></div>
+				<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
+				<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+				<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
+
+				<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' > &#x1f578; </h2>
+
+			</details>
+
+		</div>
 
 	</div>
 
-	<div id = "divHamburger" onclick=toggleNav(); > slide &#9776; </div>
 
+	<div id = "divHamburger" onclick=toggleNav(); > slide &#9776; </div>
 
 
 	<div id = "divMenuInWorld" >
@@ -165,12 +180,16 @@
 
 	</div>
 
+
 	<div id = "divContainer" >
+
 			<div id = "divContentsHeader" >
 				<small>Click here to move</small>
 				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
 			</div>
+
 			<div id = "divContents" ></div>
+
 	</div>
 
 <script>

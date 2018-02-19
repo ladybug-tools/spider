@@ -22,11 +22,23 @@ Use this link:
 
 See main read me file
 
+* 2018-02-18 ~ Menus remember their position from session to session
+
 ## Issues
+
+* 2018-02-18 ~ Drag and drop broken
 
 
 ## Change Log
 
+### 2018-02-18 ~ Theo
+
+R10.2
+* divContainer
+	* resizes more nicely
+	* styles enhanced
+* divMenu
+	* resizes and moves - a bit flakey though
 
 ### 2018-02-16 ~ Theo
 

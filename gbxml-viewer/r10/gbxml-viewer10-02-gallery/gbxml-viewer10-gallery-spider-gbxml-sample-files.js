@@ -25,7 +25,9 @@
 				'<details id = detSampleFiles open>' +
 					'<summary>Ladybug Tools/Spider gbXML Viewer sample files on GitHub</summary>' +
 
-					'<p id=pSampleFiles ><p>' +
+					'<p id=pSampleFiles ></p>' +
+
+					'<hr>' +
 
 				'</details>' +
 

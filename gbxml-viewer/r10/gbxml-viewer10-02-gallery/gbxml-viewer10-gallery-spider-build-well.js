@@ -25,7 +25,9 @@
 
 					'<summary>Build Well on GitHub</summary>' +
 
-					'<div id=divGalleryBuildWell ><div>' +
+					'<div id=divGalleryBuildWell ></div>' +
+
+					'<hr>' +
 
 				'</details>' +
 

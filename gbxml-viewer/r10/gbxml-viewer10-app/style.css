@@ -3,11 +3,9 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-:root {
-	--but-bg-color: aqua;
-}
+	:root { --mnu-color: lightpink; --mnu-back-color: brown; --mnu-width: 355px; --but-bg-color: aqua; }
 
-	html { --mnu-color: lightpink; --mnu-back-color: brown    ; --mnu-width: 320px; --but-back-color: aqua; height: 100%; }
+	html { height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
 
@@ -17,7 +15,7 @@
 	blockquote, pre { background-color: #eee; padding: 10px; }
 
 	button, input[ type=button ] { background-color: #888; border: none; color: var( --mnu-color ); cursor: pointer; margin: 2px; padding: 3px 20px; }
-	button:hover { background-color: #ccc; color: white }
+	button:hover { color: white }
 
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
@@ -26,19 +24,28 @@
 	summary { font-weight: bold; }
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+	.flex-container { display: flex; flex-wrap: wrap;}
+	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
 
-	#divContainer { background-color: white; border: 1px solid #888; display: none; height: 80%; left: 380px;
-		margin: 0; max-width: 800px;
-		overflow: auto; padding: 10px; position: fixed; resize: both; top: 50px; }
+	#divContainer { background-color: white; border: 1px solid #888; display: none; height: 80%; left: 400px;
+		margin: 0; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px; }
 
+	#divContentsHeader {background-color: LightSalmon; color: #fff; cursor: move; padding: 10px; z-index: 10;}
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 20px; max-height: 95%;
-		overflow: auto; padding: 0px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
-
-	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
+	#divContents { margin: 10px; }
 
 	#divHamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
 
-	#divMenuInWorld { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; left: 20px; margin: 0; max-height: 95%;
+		overflow: auto; position: fixed; top: 20px; resize: both; width: var( --mnu-width ); z-index: 1;
+		transition: .5s;}
+
+	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
+
+	#divMenuHeader { background-color:  lightgreen; cursor: move; padding: 10px; }
+
+	#divMenuContents { padding: 10px; }
+
+	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 50%; }
 

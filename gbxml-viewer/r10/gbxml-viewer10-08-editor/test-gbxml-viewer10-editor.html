@@ -3,11 +3,18 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer heads-up display" >
+<meta name = "description" content = "Test sample gbXML viewer editor" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-17" >
-<title>test-gbxml-viewer10-heads-up-display</title>
+<meta name = "date" content = "2018-02-18" >
+<title>test-gbxml-viewer10-editor</title>
 <link rel="stylesheet" type="text/css" href="../style.css">
+<style>
+
+	.container { display: flex; flex-wrap: wrap;}
+
+.container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
+
+</style>
 </head>
 <body>
 
@@ -15,16 +22,14 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'gbxml-viewer10-heads-up-display' to load test menu</p>
-
-	<p>Click on any surface in the model to view its details</p>
+	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butHeadsUp onclick =
+		<button id=butEditor onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gbxml-viewer10-05-heads-up-display/gbxml-viewer10-heads-up-display.js';
-			divDraggable.style.display='block';onloadThreejs();" >
-			gbxml-viewer10-heads-up-display </button>
+			script.src = '../gbxml-viewer10-08-editor/gbxml-viewer10-editor.js';
+			divDraggable.style.display='block';" >
+			gbxml-viewer10-editor </button>
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' ></iframe>
@@ -53,13 +58,29 @@
 
 	</div>
 
-
-
 <script>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
 	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	var threeDefaultFile = '../gbxml-viewer10-01-core/gbxml-viewer10-core.html';
+
+
+	var icw;
+	var THREE;
+	var renderer;
+	var scene;
+	var camera;
+	var controls;
+
+	var gbxml;
+
+	var gbjson;
+
+	var surfaceGroup;
+	var surfaceMeshes;
+	var surfaceMeshesChildren;
+	var surfaceEdges;
+	var surfaceTypes;
 
 	init();
 
@@ -86,22 +107,34 @@
 	}
 
 
-
 	function onloadThreejs() {
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
 		renderer = icw.renderer;
+		scene = icw.scene;
 		camera = icw.camera;
-		scene = icw.scene
-		gbjson = icw.gbjson;
-		surfaceMeshes = icw.surfaceMeshes;
-		surfaceEdges = icw.surfaceEdges;
+		controls = icw.controls;
 
-		butHeadsUp.click();
+		gbxml = icw.gbxml;
+		gbjson = icw.gbjson;
+
+	// clean up
+		surfaceGroup = icw.scene.getObjectByName( 'surfaceMeshes' );
+		surfaceMeshesChildren = surfaceGroup.children;
+		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
+		surfaceMeshes = icw.surfaceMeshes;
+		surfaceTypes  = icw.surfaceTypes;
+
+		parseFileXML = icw.parseFileXML;
+
+//console.log( 'scene', icw );
+//console.log( 'gbjson', gbjson );
+//console.log( 'surfaceMeshes', surfaceMeshes );
+
+		butEditor.click();
 
 	}
-
 
 
 	function onHashChange() {

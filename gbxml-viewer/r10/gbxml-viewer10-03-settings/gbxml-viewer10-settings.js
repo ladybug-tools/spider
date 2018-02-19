@@ -84,6 +84,7 @@
 						'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=updateViewExplodeVertical(); >' +
 					'</p>' +
 */
+					'<hr>' +
 
 				'</details>' +
 

@@ -121,6 +121,27 @@
 
 
 
+
+
+	function onloadThreejs() {
+
+		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		renderer = icw.renderer;
+		camera = icw.camera;
+		controls = icw.controls;
+		scene = icw.scene
+		gbjson = icw.gbjson;
+		surfaceMeshes = icw.surfaceMeshes;
+		surfaceEdges = icw.surfaceEdges;
+		divLog = icw.divLog;
+
+		console.log( 'scene', scene );
+
+	}
+
+
+
 	function onHashChange() {
 
 		const url = location.hash.slice( 1 );
@@ -172,28 +193,6 @@
 
 
 
-	function onloadThreejs() {
-
-		icw = ifrThree.contentWindow;
-		THREE = icw.THREE;
-		renderer = icw.renderer;
-		camera = icw.camera;
-		controls = icw.controls;
-		scene = icw.scene
-		gbjson = icw.gbjson;
-		surfaceMeshes = icw.surfaceMeshes;
-		surfaceEdges = icw.surfaceEdges;
-		divLog = icw.divLog;
-
-console.log( 'scene', scene );
-
-
-	}
-
-
-
-
-//Make the DIV element draggagle:
 // https://www.w3schools.com/howto/howto_js_draggable.asp
 
 	function dragElement( element ) {

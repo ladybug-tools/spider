@@ -11,6 +11,14 @@ _Please suggest what you would like to see here._
 
 <details open>
 
+<summary>Welcome 2018-02-18</summary>
+
+<p>
+Add Edit module. All menus movable and resizable. Many fixes throughout
+</p>
+
+</details><details open>
+
 <summary>Welcome 2018-02-17</summary>
 
 <p>

@@ -1,6 +1,6 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10/gbxml-viewer10-01-core/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html##https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r10/gbxml-viewer10-01-core/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer10 Template Read Me
+# gbXML Viewer10 Three Core Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-01-core/gbxml-viewer10-core.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -16,8 +16,10 @@ Use and share this link for gbXML Viewer10:
 
 The files in this folder are templates or 'boilerplate' files that may be used to build gbXML viewer modules.
 
-## Wish list
+## Wish list / ToDo
 
+* 2018-02-18 ~ Test file needs drag and drop
+* 2018-02-18 ~ Full name spacing
 
 
 ## Issues
@@ -29,6 +31,15 @@ The files in this folder are templates or 'boilerplate' files that may be used t
 
 
 ## Change Log
+
+### 2018-02-18 ~ Theo
+
+R10.2
+
+* If location.hash calls for non-gbXML file then load default file
+* Feeble start to name spacing
+* Update test script titles
+* Update readme links
 
 
 ### 2018-02-15 ~ Theo

@@ -3,10 +3,10 @@
 # gbXML Viewer10 Gallery Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer9-02-gallery/test-gbxml-viewer10-gallery.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-02-gallery/test-gbxml-viewer10-gallery.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test: [Test gbXML Viewer10 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer10-02-gallery/test-gbxml-viewer10-gallery.html )
+## Full screen test: [Test gbXML Viewer10 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-02-gallery/test-gbxml-viewer10-gallery.html )
 
 
 * <http://www.ladybug.tools/spider/gbxml-viewer/>
@@ -41,6 +41,13 @@
 ## Change Log
 
 
+### 2018-02-18 ~ Theo
+
+R10.2
+* Gallery
+	* Fix HR issues
+	* Test works OK
+	* Fix readme links
 
 ### 2018-02-16 ~ The0
 

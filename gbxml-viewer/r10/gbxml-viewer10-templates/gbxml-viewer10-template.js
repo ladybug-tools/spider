@@ -10,17 +10,19 @@
 
 			divMenuItems.innerHTML =
 
-				'<details id = detTemplate open>' +
+				`<details id = detTemplate open>
 
-					'<summary>Template</summary>' +
+					<summary>Template</summary>
 
-					'<p style=width:300px; >' + txt + '<p>' +
+					<p style=width:300px; >` + txt + `<p>
 
-				'</details>' +
+					<hr>
 
-				divMenuItems.innerHTML +
+				</details>
 
-			'';
+
+
+			` + divMenuItems.innerHTML;
 
 			butTemplate.style.backgroundColor = 'var( --but-bg-color )';
 

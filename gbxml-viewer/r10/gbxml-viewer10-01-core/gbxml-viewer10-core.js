@@ -8,6 +8,8 @@
 	:
 	'../../gbxml-sample-files/bristol-clifton-down-road.xml';
 
+	var THR = {};
+
 	var gbxml;
 	var gbjson;
 
@@ -37,6 +39,8 @@
 		EmbeddedColumn: 0x80806E
 
 	}
+
+	var surfaceTypes  = Object.keys( colors );
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional, lightPoint;
@@ -86,15 +90,33 @@
 
 		//window.addEventListener( 'load', onWindowLoad, false );
 
-		const url = !location.hash ? uriGbxmlDefault : location.hash.slice( 1 );
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
-		requestFile( url, callbackGbXML );
+			const url = location.hash.slice( 1 );
+
+			THR.requestFile( url, THR.callbackGbXML );
+
+		} else {
+
+			THR.requestFile( uriGbxmlDefault, THR.callbackGbXML );
+
+		}
 
 	}
 
 
+// available if parent wants it.
+// called by parseFileXML()
 
-	function requestFile( url, callback ) {
+	function onWindowLoad() {
+
+		//divLog.innerHTML = '';
+
+		if ( parent && parent.onloadThreejs ) { parent.onloadThreejs(); }
+
+	}
+
+	THR.requestFile = function requestFile( url, callback ) {
 
 		const xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
@@ -114,7 +136,7 @@
 
 
 
-	function callbackGbXML( xhr ){
+	THR.callbackGbXML = function callbackGbXML( xhr ){
 
 		gbxml = xhr.target.responseXML.documentElement;
 
@@ -162,6 +184,8 @@
 		//console.log( 'gbjson', gbjson );
 
 		parseGbJson( gbjson );
+
+		onWindowLoad();
 
 		return gbjson;
 
