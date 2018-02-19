@@ -4,11 +4,11 @@
 # [create exportable buildings Read Me]( #README.md )
 
 
-<iframe src=http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings.html width=100% height=600px ></iframe>
-_txt_
-<span style="display: none" >Iframes are not viewable in GitHub source code view</span>
+<iframe src=http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings-theo.html width=100% height=600px >Iframes are not viewable in GitHub source code view<</iframe>
+_create exportable buildings_
 
-## Full Screen: [create exportable buildings]( http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings-theo.html )
+
+## Full Screen: [create exportable buildings-theo]( http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/create-exportable-buildings-theo.html )
 
 ## Full Screen: [sample gbXML file viewer]( http://www.ladybug.tools/spider/cookbook/07-create-exportable-buildings/test-gbxml-files/gbxml-viewer.html )
 
