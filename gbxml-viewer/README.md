@@ -299,6 +299,12 @@ Will most likely build upon
 
 ***
 
+## Issues
+
+* 2018-02-18 ~ Menu items not updating when loading new files
+* 2018-02-18 ~ Drag and drop broken
+
+
 ## Change Log
 
 

@@ -7,13 +7,13 @@
 
 	var telltalesVertex;
 	var telltalesPolyloop;
-
+/*
 	var draggableLeft;
 	var draggableTop;
 
 	var draggableStartX;
 	var draggableStartY;
-
+*/
 	initHeadsUp();
 
 	function initHeadsUp() {
