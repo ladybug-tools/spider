@@ -307,6 +307,14 @@ Will most likely build upon
 
 ## Change Log
 
+### 2018-02-19 ~ Theo
+
+R10.3
+* Many fixes
+* Menus move more smoothly
+* Editing, deleting and saving all working - but testing has just started
+* HUD updates with Editor (but not vice versa yet)
+
 
 ### 2018-02-18 ~ Theo
 

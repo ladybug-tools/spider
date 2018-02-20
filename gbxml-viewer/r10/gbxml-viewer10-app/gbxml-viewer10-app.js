@@ -12,14 +12,16 @@
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
+		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+		dragArea.addEventListener( 'drop', drop, false );
+
 		divContentsHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
-		window.addEventListener( 'mouseup', onMouseUpDraggable, false );
 
 		divContentsHeader.addEventListener( 'touchstart', onTouchStartDraggable, false );
 		divContentsHeader.addEventListener( 'touchmove', onTouchMoveDraggable, false );
 
 		divMenuHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
-//		window.addEventListener( 'mouseup', onMouseUpDraggable, false );
+		window.addEventListener( 'mouseup', onMouseUpDraggable, false );
 
 		divMenu.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
 
@@ -59,6 +61,26 @@
 	}
 
 
+	function onloadThreejs() {
+
+		if ( window.detReports ) {
+
+			window.detReports.remove();
+			butReports.style.backgroundColor = '';
+
+		}
+
+		if ( window.detSurfaceEdits ) {
+
+			window.detSurfaceEdits.remove();
+			butEditor.style.backgroundColor = '';
+
+		}
+
+	}
+
+
+
 
 	function requestFile( url, callback ) {
 
@@ -69,6 +91,26 @@
 //		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
+
+	}
+
+
+
+	function drop( event ) {
+
+		event.preventDefault();
+
+		const iframeUrl = event.dataTransfer.getData( 'URL' );
+
+		if ( iframeUrl ) {
+
+			location.hash = iframeUrl;
+
+		} else {
+
+			openFile( event.dataTransfer );
+
+		}
 
 	}
 

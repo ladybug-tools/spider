@@ -5,22 +5,22 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-18" >
-<title>gbXML Viewer 10.2</title>
+<meta name = "date" content = "2018-02-19" >
+<title>gbXML Viewer 10.3</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
-<script src = "../gbxml-viewer10-app/gbxml-viewer10-app.js" ></script>
 <script src = "../gbxml-viewer10-01-core/gbxml-viewer10-core.js" ></script>
+<script src = "../gbxml-viewer10-app/gbxml-viewer10-app.js" ></script>
 
 	<div id = "divMenu" >
 
-		<div id = "divMenuHeader" >
+		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
 
-			<small>Click here to move</small>
+			Click here to move
 
 		</div>
 
@@ -184,7 +184,7 @@
 	<div id = "divContainer" >
 
 			<div id = "divContentsHeader" >
-				<small>Click here to move</small>
+				Click here to move
 				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
 			</div>
 

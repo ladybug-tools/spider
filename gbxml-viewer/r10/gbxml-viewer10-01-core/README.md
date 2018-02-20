@@ -32,6 +32,10 @@ The files in this folder are templates or 'boilerplate' files that may be used t
 
 ## Change Log
 
+### 2018-02-19 ~ Theo
+
+* Add drag and drop to test
+
 ### 2018-02-18 ~ Theo
 
 R10.2

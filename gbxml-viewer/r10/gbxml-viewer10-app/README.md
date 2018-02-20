@@ -32,6 +32,14 @@ See main read me file
 
 ## Change Log
 
+### 2018-02-19 ~ Theo
+
+R10.3
+
+App
+* 2018-02-18 ~ Drag and drop broken << many fixes
+
+
 ### 2018-02-18 ~ Theo
 
 R10.2

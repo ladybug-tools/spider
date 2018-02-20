@@ -7,7 +7,7 @@
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-18" >
 <title>test-gbxml-viewer10-editor</title>
-<link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="../gbxml-viewer10-templates/style-template.css" >
 <style>
 
 	.container { display: flex; flex-wrap: wrap;}
@@ -28,13 +28,15 @@
 		<button id=butEditor onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = '../gbxml-viewer10-08-editor/gbxml-viewer10-editor.js';
-			divDraggable.style.display='block';" >
+			divMenu.style.display='block';" >
 			gbxml-viewer10-editor </button>
 	</p>
 
 	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' ></iframe>
 
-	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
+	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or
+		<input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this); >
+	<p>
 
 	<div><a href="#../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
 	<div><a href="#../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
@@ -47,11 +49,11 @@
 	<div><a href="#../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
 
-	<div id=divDraggable >
+	<div id = "divMenu" >
 
-		<div id = "divDraggableHeader" >
+		<div id = "divMenuHeader" >
 			Click here to move
-			<button ontouchstart=divDraggable.style.display="none"; onclick=divDraggable.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 		</div>
 
 		<div id=divMenuItems ></div>
@@ -73,12 +75,10 @@
 	var controls;
 
 	var gbxml;
-
+	var gbxmlResponseXML;
 	var gbjson;
 
-	var surfaceGroup;
 	var surfaceMeshes;
-	var surfaceMeshesChildren;
 	var surfaceEdges;
 	var surfaceTypes;
 
@@ -95,10 +95,11 @@
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
 
-		dragElement( divDraggable );
-
 		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
 		dragArea.addEventListener( 'drop', drop, false );
+
+		divMenuHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
+		window.addEventListener( 'mouseup', onMouseUpDraggable, false );
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -117,20 +118,27 @@
 		controls = icw.controls;
 
 		gbxml = icw.gbxml;
+		gbxmlResponseXML = icw.gbxmlResponseXML;
+		//console.log( 'gbxmlResponseXML', gbxmlResponseXML);
 		gbjson = icw.gbjson;
 
-	// clean up
-		surfaceGroup = icw.scene.getObjectByName( 'surfaceMeshes' );
-		surfaceMeshesChildren = surfaceGroup.children;
-		surfaceEdges = icw.scene.getObjectByName( 'surfaceEdges' );
+		surfaceEdges = icw.surfaceEdges;
 		surfaceMeshes = icw.surfaceMeshes;
 		surfaceTypes  = icw.surfaceTypes;
 
 		parseFileXML = icw.parseFileXML;
 
-//console.log( 'scene', icw );
-//console.log( 'gbjson', gbjson );
-//console.log( 'surfaceMeshes', surfaceMeshes );
+		//console.log( 'scene', icw );
+		//console.log( 'gbxml', gbxml );
+		//console.log( 'gbjson', gbjson );
+		//console.log( 'surfaceMeshes', surfaceMeshes );
+
+		if ( window.detSurfaceEdits ) {
+
+			window.detSurfaceEdits.remove();
+			butEditor.style.backgroundColor = '';
+
+		}
 
 		butEditor.click();
 
@@ -145,25 +153,6 @@
 
 
 
-	function requestFile( url, callback ) {
-
-		const xhr = new XMLHttpRequest();
-		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', url, true );
-		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		//		xhr.onprogress = onRequestFileProgress;
-		xhr.onload = callback;
-		xhr.send( null );
-
-		function onRequestFileProgress( xhr ) {
-
-		//			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
-
-		}
-
-	}
-
-
 	function drop( event ) {
 
 		event.preventDefault();
@@ -173,6 +162,7 @@
 		if ( iframeUrl ) {
 
 			ifrThree.contentWindow.location.hash = iframeUrl;
+			ifrThree.contentWindow.location.reload();
 
 		} else {
 
@@ -184,46 +174,70 @@
 
 
 
-// https://www.w3schools.com/howto/howto_js_draggable.asp
+/////////////
 
-	function dragElement( element ) {
+	function onMouseDownDraggable( event ) {
 
-		let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+		draggableTop = event.clientY - event.target.parentNode.offsetTop;
+		draggableLeft = event.clientX - event.target.parentNode.offsetLeft;
 
-		divDraggableHeader.onmousedown = dragMouseDown;
+		window.addEventListener('mousemove', onMouseMoveDraggable, true );
+		event.preventDefault();
 
-		function dragMouseDown( event ) {
+	}
 
-			event = event || window.event;
 
-			pos3 = event.clientX;
-			pos4 = event.clientY;
-			document.onmouseup = closeDragElement;
 
-			document.onmousemove = elementDrag;
+	function onMouseMoveDraggable( event ){
 
-		}
+		event.target.parentNode.style.top = ( event.clientY - draggableTop ) + 'px';
+		event.target.parentNode.style.left = ( event.clientX - draggableLeft ) + 'px';
+		event.preventDefault();
 
-		function elementDrag( event ) {
+	}
 
-			event = event || window.event;
 
-			pos1 = pos3 - event.clientX;
-			pos2 = pos4 - event.clientY;
-			pos3 = event.clientX;
-			pos4 = event.clientY;
 
-			element.style.top = ( element.offsetTop - pos2 ) + 'px';
-			element.style.left = ( element.offsetLeft - pos1 ) + 'px';
+	function onMouseUpDraggable() {
 
-		}
+		window.removeEventListener( 'mousemove', onMouseMoveDraggable, true );
+		event.preventDefault();
 
-		function closeDragElement() {
+	}
 
-			document.onmouseup = null;
-			document.onmousemove = null;
 
-		}
+
+	function onTouchStartDraggable( event ){
+
+		draggableLeft = event.target.parentNode.offsetLeft;
+		draggableStartX = event.changedTouches[ 0 ].clientX;
+		draggableTop = event.target.parentNode.offsetTop;
+		draggableStartY = event.changedTouches[ 0 ].clientY;
+		//console.log( 'draggableTop', draggableTop, draggableStartY );
+		event.preventDefault();
+
+	}
+
+
+
+	function onTouchMoveDraggable( event ){
+
+		const distX = event.changedTouches[ 0 ].clientX - draggableStartX;
+		let left = draggableLeft + distX > document.body.clientWidth - 100 ? document.body.clientWidth - 100 : draggableLeft + distX;
+		left = draggableLeft + distX < 0 ? 0 : left;
+		//console.log( 'left2', left  );
+		event.target.parentNode.style.left = left + 'px';
+
+		const distY = event.changedTouches[ 0 ].clientY - draggableStartY;
+		// top is a reserved word
+		let ttop = draggableTop + distY > window.innerHeight - 100 ? window.innerHeight - 100 : draggableTop + distY;
+		ttop = draggableTop + distY < 0 ? 0 : ttop;
+		//console.log( 'ttop', ttop  );
+		event.target.parentNode.style.top = ttop + 'px';
+
+		event.preventDefault();
+
+		//console.log ( 'Status: touchmove', 'Horizontal distance traveled: ' + distY + 'px' );
 
 	}
 

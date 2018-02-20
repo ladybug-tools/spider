@@ -16,6 +16,8 @@
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover, button:focus{ background: #ccc; color: yellow }
 
+	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+
 	#divMenu { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
 
 </style>
@@ -36,8 +38,8 @@
 
 		<p><script> document.write( document.head.querySelector( '[name=description]' ).content ) </script></p>
 
-		<p>
-			<input type=file id=inpFile onchange=openFile(this); >
+		<p id=dragArea class=dragDropArea >
+			Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=openFile(this); >
 		<p>
 
 		<p id = "divContents" >
@@ -60,8 +62,30 @@
 
 <script>
 
+	dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+	dragArea.addEventListener( 'drop', drop, false );
+
 	initThreeGbxml();
 	animate();
+
+
+	function drop( event ) {
+
+		const iframeUrl = event.dataTransfer.getData( 'URL' );
+
+		if ( iframeUrl ) {
+
+			location.hash = iframeUrl;
+
+		} else {
+
+			openFile( event.dataTransfer );
+
+		}
+
+		event.preventDefault();
+
+	}
 
 </script>
 </body>

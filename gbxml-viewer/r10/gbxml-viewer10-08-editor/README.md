@@ -3,7 +3,7 @@
 # gbXML Viewer10 Editor Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-08-editor/gbxml-viewer10-core-editor-dev.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-08-editor/test-gbxml-viewer10-editor.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 _preliminary version - must be viewed full screen to work_
 
 ## Full screen: [gbXML Viewer10 Editor Dev]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-08-editor/gbxml-viewer10-core-editor-dev.html )

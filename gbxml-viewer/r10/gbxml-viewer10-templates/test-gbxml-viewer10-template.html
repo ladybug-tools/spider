@@ -7,7 +7,7 @@
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-15" >
 <title>test-gbxml-viewer10-template</title>
-<link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="../gbxml-viewer10-templates/style-template.css" >
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 		<button id=butTemplate onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = '../gbxml-viewer10-templates/gbxml-viewer10-template.js';
-			divDraggable.style.display='block';" >
+			divMenu.style.display='block';" >
 			gbxml-viewer10-template </button>
 	</p>
 
@@ -40,11 +40,11 @@
 	<div><a href="#../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
 
-	<div id=divDraggable >
+	<div id = "divMenu" >
 
-		<div id = "divDraggableHeader" >
+		<div id = "divMenuHeader" >
 			Click here to move
-			<button ontouchstart=divDraggable.style.display="none"; onclick=divDraggable.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 		</div>
 
 		<div id=divMenuItems ></div>
@@ -70,10 +70,13 @@
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
 
-		dragElement( divDraggable );
+//		dragElement( divDraggable );
 
 		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
 		dragArea.addEventListener( 'drop', drop, false );
+
+		divMenuHeader.addEventListener( 'mousedown', onMouseDownDraggable, false );
+		window.addEventListener( 'mouseup', onMouseUpDraggable, false );
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 		onHashChange();
@@ -98,7 +101,7 @@
 
 
 
-	function requestFile( url, callback ) {
+	function ccccrequestFile( url, callback ) {
 
 		const xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
@@ -137,48 +140,72 @@
 
 
 
-// https://www.w3schools.com/howto/howto_js_draggable.asp
+/////////////
 
-	function dragElement( element ) {
+	function onMouseDownDraggable( event ) {
 
-		let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+		draggableTop = event.clientY - event.target.parentNode.offsetTop;
+		draggableLeft = event.clientX - event.target.parentNode.offsetLeft;
 
-		divDraggableHeader.onmousedown = dragMouseDown;
-
-		function dragMouseDown( event ) {
-
-			event = event || window.event;
-
-			pos3 = event.clientX;
-			pos4 = event.clientY;
-			document.onmouseup = closeDragElement;
-
-			document.onmousemove = elementDrag;
+		window.addEventListener('mousemove', onMouseMoveDraggable, true );
+		event.preventDefault();
 
 		}
 
-		function elementDrag( event ) {
 
-			event = event || window.event;
 
-			pos1 = pos3 - event.clientX;
-			pos2 = pos4 - event.clientY;
-			pos3 = event.clientX;
-			pos4 = event.clientY;
+		function onMouseMoveDraggable( event ){
 
-			element.style.top = ( element.offsetTop - pos2 ) + 'px';
-			element.style.left = ( element.offsetLeft - pos1 ) + 'px';
+		event.target.parentNode.style.top = ( event.clientY - draggableTop ) + 'px';
+		event.target.parentNode.style.left = ( event.clientX - draggableLeft ) + 'px';
+		event.preventDefault();
 
 		}
 
-		function closeDragElement() {
 
-			document.onmouseup = null;
-			document.onmousemove = null;
+
+		function onMouseUpDraggable() {
+
+		window.removeEventListener( 'mousemove', onMouseMoveDraggable, true );
+		event.preventDefault();
 
 		}
 
-	}
+
+
+		function onTouchStartDraggable( event ){
+
+		draggableLeft = event.target.parentNode.offsetLeft;
+		draggableStartX = event.changedTouches[ 0 ].clientX;
+		draggableTop = event.target.parentNode.offsetTop;
+		draggableStartY = event.changedTouches[ 0 ].clientY;
+		//console.log( 'draggableTop', draggableTop, draggableStartY );
+		event.preventDefault();
+
+		}
+
+
+
+		function onTouchMoveDraggable( event ){
+
+		const distX = event.changedTouches[ 0 ].clientX - draggableStartX;
+		let left = draggableLeft + distX > document.body.clientWidth - 100 ? document.body.clientWidth - 100 : draggableLeft + distX;
+		left = draggableLeft + distX < 0 ? 0 : left;
+		//console.log( 'left2', left  );
+		event.target.parentNode.style.left = left + 'px';
+
+		const distY = event.changedTouches[ 0 ].clientY - draggableStartY;
+		// top is a reserved word
+		let ttop = draggableTop + distY > window.innerHeight - 100 ? window.innerHeight - 100 : draggableTop + distY;
+		ttop = draggableTop + distY < 0 ? 0 : ttop;
+		//console.log( 'ttop', ttop  );
+		event.target.parentNode.style.top = ttop + 'px';
+
+		event.preventDefault();
+
+		//console.log ( 'Status: touchmove', 'Horizontal distance traveled: ' + distY + 'px' );
+
+		}
 
 </script>
 </body>

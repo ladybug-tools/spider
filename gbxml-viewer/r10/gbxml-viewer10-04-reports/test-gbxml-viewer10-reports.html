@@ -7,47 +7,10 @@
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-16" >
 <title>test gbxml viewer10 reports</title>
-<link rel="stylesheet" type="text/css" href="../style.css">
-<style>
-/* Copyright 2018 Ladybug Tools authors. MIT License */
-/*
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
-	a { color: crimson; text-decoration: none; }
-	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
-
-	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; margin: 3px; padding: 3px 20px; }
-	button:hover { background-color: #ccc; color: #fff }
-
-	iframe { height: 500px; width: 100%; }
-
-	.dragDropArea { border: 1px dashed gray; padding: 5px; }
-
-
-	#divDraggable {
-		background-color: #f1f1f1;
-		border: 1px solid #d3d3d3;
-		left: calc( 100% - 400px );
-		overflow: auto;
-		padding: 10px;
-		position: absolute;
-		resize: both;
-
-		top: 100px;
-		z-index: 9;
-	}
-
-	#divDraggableHeader {
-		background-color: #2196F3;
-		color: #fff;
-		cursor: move;
-		padding: 10px;
-		z-index: 10;
-	}
-*/
-
-</style>
+<link rel="stylesheet" type="text/css" href="../gbxml-viewer10-templates/style-template.css" >
 </head>
 <body>
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 	<div id = "divHeader" >
 		<div id = "divTitle" ></div>
@@ -57,7 +20,7 @@
 
 	<p>
 		<button id=butReports onclick =
-			"onloadThreejs();const script = document.head.appendChild( document.createElement( 'script' ) );
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src='../gbxml-viewer10-04-reports/gbxml-viewer10-reports.js';
 			divDraggable.style.display='block';" >
 		reports</button>
@@ -66,7 +29,7 @@
 
 	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' ); ></iframe>
 
-	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
+	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this); ><p>
 
 	<div><a href="#../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
 	<div><a href="#../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
@@ -108,6 +71,7 @@
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
 
+		// to be updated
 		dragElement( divDraggable );
 
 		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
@@ -118,8 +82,6 @@
 		onHashChange();
 
 	}
-
-
 
 
 
@@ -136,7 +98,16 @@
 		surfaceEdges = icw.surfaceEdges;
 		divLog = icw.divLog;
 
-		console.log( 'scene', scene );
+		//console.log( 'scene', scene );
+
+		if ( window.detReports ) {
+
+			window.detReports.remove();
+			butReports.style.backgroundColor = '';
+
+		}
+
+		butReports.click();
 
 	}
 
@@ -144,9 +115,6 @@
 
 	function onHashChange() {
 
-		const url = location.hash.slice( 1 );
-
-//		ifrThree.contentWindow.location.hash = '#' + url;
 		ifrThree.src = threeDefaultFile + location.hash;
 		ifrThree.contentWindow.location.reload();
 

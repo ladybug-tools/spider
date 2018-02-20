@@ -7,13 +7,8 @@
 
 	var telltalesVertex;
 	var telltalesPolyloop;
-/*
-	var draggableLeft;
-	var draggableTop;
 
-	var draggableStartX;
-	var draggableStartY;
-*/
+
 	initHeadsUp();
 
 	function initHeadsUp() {
@@ -22,13 +17,14 @@
 
 			divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
 			divHeadsUp.style.cssText =
-				'background-color: #f8f8f8; border-radius: 8px; display: none; min-height: 100px; min-width: 200px; opacity: 0.95; ' +
-				' overflow: auto; padding: 5px 5px 10px 5px; position: fixed; resize: both; z-index: 10; ' +
+				'background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px ); '+
+				'min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto; ' +
+				'padding: 5px 5px 10px 5px; position: fixed; resize: both; top: 20px; z-index: 10; ' +
 			'';
 
 			divHeadsUp.innerHTML =
 				'<div id=divDraggableHeader2 title="Open JavaScript console to see more data" >' +
-					'<small>Click here to move</small>' +
+					'Click here to move' +
 					'<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>' +
 				'</div>' +
 				'<div id=divItems ></div>' +
@@ -38,10 +34,11 @@
 				'background-color: indianred; color: #fff; cursor: move; padding: 10px; z-index: 10;';
 
 			divDraggableHeader2.addEventListener( 'mousedown', onMouseDownDraggable, false );
-			window.addEventListener( 'mouseup', onMouseUpDraggable, false );
 
 			divDraggableHeader2.addEventListener( 'touchstart', onTouchStartDraggable, false );
 			divDraggableHeader2.addEventListener( 'touchmove', onTouchMoveDraggable, false );
+
+//			window.addEventListener( 'mouseup', onMouseUpDraggable, false );
 
 		}
 
@@ -49,10 +46,10 @@
 
 			mouse = new THREE.Vector2();
 
-			renderer.domElement.addEventListener( 'click', onDocumentMouseMove, false );
-			renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+			renderer.domElement.addEventListener( 'click', onRendererMouseMoveHUD, false );
+			renderer.domElement.addEventListener( 'touchstart', onRendererTouchStartHUD, false );
 
-			if ( parent.setIfrThree ) { setIfrThree(); }
+//			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			butHeadsUp.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -73,8 +70,8 @@
 		divHeadsUp.style.display = 'none';
 		surfaceMeshesChildren = [];
 
-		renderer.domElement.removeEventListener( 'click', onDocumentMouseMove, false );
-		renderer.domElement.removeEventListener( 'click', onDocumentMouseDown, false );
+		renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
+		renderer.domElement.removeEventListener( 'click', onRendererMouseDownHUD, false );
 
 		butHeadsUp.style.backgroundColor = '';
 
@@ -82,7 +79,7 @@
 
 
 
-	function onDocumentMouseMove( event ) {
+	function onRendererMouseMoveHUD( event ) {
 
 		var raycaster, intersects;
 
@@ -160,8 +157,8 @@
 		//divHeadsUp.style.left = 0 + 0.5 * window.innerWidth + mouse.x * 0.5 * innerWidth + 'px';
 		//divHeadsUp.style.top = 30 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 
-		divHeadsUp.style.left = 'calc( 100% - 400px )';
-		divHeadsUp.style.top = '20px'; // + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
+		//divHeadsUp.style.left = 'calc( 100% - 400px )';
+		//divHeadsUp.style.top = '20px'; // + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 
 		divHeadsUp.style.display = '';
 		//console.log( '', divHeadsUp.style.left, divHeadsUp.style.top );
@@ -203,7 +200,7 @@
 						( space2.Volume ? 'volume: ' + space2.Volume + b : '' ) +
 						( space2.conditionType ? 'conditionType: ' + space2.conditionType + b : '' ) +
 						( space2.zoneIdRef ? 'zoneIdRef: ' + space2.zoneIdRef + b : '' ) +
-//						( space2.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space2.buildingStoreyIdRef + b : '' )  +
+		//						( space2.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space2.buildingStoreyIdRef + b : '' )  +
 						'storey: <button onclick=toggleStoreyHUD("' + space2.buildingStoreyIdRef + '"); >' + space2.buildingStoreyIdRef + '</button>' + b +
 
 						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
@@ -241,7 +238,7 @@
 
 		}
 
-			//		adjacenciesTxt = adjacencies.length ? '
+		//adjacenciesTxt = adjacencies.length ? '
 
 
 		txt =
@@ -253,7 +250,7 @@
 			'</p>' +
 			'<p>' +
 				'<button onclick=intersected.visible=!intersected.visible;  >toggle surface visibility</button> ' +
-				'<button class=toggle onclick=alert("coming-soon!"); >delete surface</button>' +
+				'<button class=toggle onclick=HUDdeleteSurface("' + data.id + '"); >delete surface</button>' +
 			'</p>' +
 			adjacenciesTxt +
 			'<p>' +
@@ -266,9 +263,54 @@
 		divItems.innerHTML = txt;
 		document.body.style.cursor = 'pointer';
 
+		if( window.detSurfaceEdits ) {
+
+			inpSurface.value = data.id;
+			selSurface.value = data.id;
+			const surface = surfacesXml[ selSurface.selectedIndex ];
+			//console.log( 'surface', surface );
+
+			const type = surface.attributes.getNamedItem( 'surfaceType' ).nodeValue;
+			//console.log( 'type', type );
+
+			selType.selectedIndex = surfaceTypes.indexOf( type );
+
+			const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
+
+			index = spacesXmlIds.indexOf( adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
+			selAdjacentSpaceId0.selectedIndex = index;
+
+			if ( adjs[ 1 ] ) {
+
+				index = spacesXmlIds.indexOf( adjs[ 1 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
+
+			} else {
+
+				index = 0;
+
+			}
+
+			selAdjacentSpaceId1.selectedIndex = index;
+
+		}
+
 	}
 
 
+
+	function HUDdeleteSurface( id ){
+
+//		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
+
+			surfacesResponse = gbxmlResponseXML.getElementsByTagName("Surface");
+
+			surface = surfacesResponse[ id ];
+			console.log( 'surface to delete', surface );
+
+			surface.remove();
+			surfaceMeshes.remove( intersected );
+
+	}
 
 	function displayTelltalesVertex() {
 
@@ -593,18 +635,18 @@
 
 
 
-	function onDocumentMouseDown( event ) {
+	function onRendererMouseDownHUD( event ) {
 
 		//dragMouseDown;( event );
 		divHeadsUp.style.display = 'none';
 
-		renderer.domElement.removeEventListener( 'click', onClickEvent, false );
+		renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
 
 	}
 
 
 
-	function onDocumentTouchStart( event ) {
+	function onRendererTouchStartHUD( event ) {
 
 		event.preventDefault();
 
@@ -612,7 +654,7 @@
 		event.clientY = event.touches[0].clientY;
 
 		//		dragElement;( event );
-		onDocumentMouseMove( event );
+		onRendererMouseMoveHUD( event );
 
 	}
 
@@ -627,70 +669,5 @@
 				child.visible = true;
 
 		}
-
-	}
-
-
-	function onMouseDownDraggable( event ) {
-
-		draggableTop = event.clientY - divHeadsUp.offsetTop;
-		draggableLeft = event.clientX - divHeadsUp.offsetLeft;
-
-		window.addEventListener('mousemove', onMouseMoveDraggable, true );
-
-	}
-
-
-
-	function onMouseMoveDraggable( event ){
-
-		divHeadsUp.style.top = ( event.clientY - draggableTop ) + 'px';
-		divHeadsUp.style.left = ( event.clientX - draggableLeft ) + 'px';
-
-	}
-
-
-
-	function onMouseUpDraggable() {
-
-		window.removeEventListener( 'mousemove', onMouseMoveDraggable, true );
-
-	}
-
-
-
-	function onTouchStartDraggable( event ){
-
-		draggableLeft = divHeadsUp.offsetLeft;
-		draggableStartX = event.changedTouches[ 0 ].clientX;
-		draggableTop = divHeadsUp.offsetTop;
-		draggableStartY = event.changedTouches[ 0 ].clientY;
-		//console.log( 'draggableTop', draggableTop, draggableStartY );
-		event.preventDefault();
-
-		//console.log ('Status: touchstart', 'ClientX: ' + draggableStartX + 'px' );
-
-	}
-
-
-
-	function onTouchMoveDraggable( event ){
-
-		const distX = event.changedTouches[ 0 ].clientX - draggableStartX;
-		let left = draggableLeft + distX > document.body.clientWidth - 100 ? document.body.clientWidth - 100 : draggableLeft + distX;
-		left = draggableLeft + distX < 0 ? 0 : left;
-		//console.log( 'left2', left  );
-		divHeadsUp.style.left = left + 'px';
-
-		const distY = event.changedTouches[ 0 ].clientY - draggableStartY;
-		// top is a reserved word
-		let ttop = draggableTop + distY > window.innerHeight - 100 ? window.innerHeight - 100 : draggableTop + distY;
-		ttop = draggableTop + distY < 0 ? 0 : ttop;
-		//console.log( 'ttop', ttop  );
-		divHeadsUp.style.top = ttop + 'px';
-
-		event.preventDefault();
-
-		//console.log ( 'Status: touchmove', 'Horizontal distance traveled: ' + distY + 'px' );
 
 	}

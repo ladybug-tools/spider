@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-02-15" >
+<title>test-gbxml-viewer10-template</title>
+<link rel="stylesheet" type="text/css" href="../gbxml-viewer10-templates/style-template.css" >
+</head>
+<body>
+
+	<div id = "divHeader" >
+		<div id = "divTitle" ></div>
+	</div>
+
+	<p>If it does not open automatically, click 'template' to load test menu</p>
+
+	<p>
+		<button id=butTemplate onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gbxml-viewer10-templates/gbxml-viewer10-template.js';
+			divDraggable.style.display='block';" >
+			gbxml-viewer10-template </button>
+	</p>
+
+	<iframe id=ifrThree src='../gbxml-viewer10-01-core/gbxml-viewer10-core.html' ></iframe>
+
+	<p id=dragArea class=dragDropArea >Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.openFile(this);divReport.innerHTML=''; ><p>
+
+	<div><a href="#../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
+	<div><a href="#../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/boston-ma-urban-house-mep.xml" >boston-ma-urban-house-mep.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/bristol-clifton-down-road.xml" >bristol-clifton-down-road.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml" >columbia-sc-two-story-education-trane</a></div>
+	<div><a href="#../../gbxml-sample-files/coventry-university-of-warwick.xml" >coventry-university-of-warwick.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
+	<div><a href="#../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
+
+
+	<div id=divDraggable >
+
+		<div id = "divDraggableHeader" >
+			Click here to move
+			<button ontouchstart=divDraggable.style.display="none"; onclick=divDraggable.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+		</div>
+
+		<div id=divMenuItems ></div>
+
+	</div>
+
+<script>
+/* Copyright 2018 Ladybug Tools authors. MIT License */
+
+	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	var threeDefaultFile = '../gbxml-viewer10-01-core/gbxml-viewer10-core.html';
+
+	init();
+
+
+	function init() {
+
+		divTitle.innerHTML =
+			'<h2>' +
+				'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + iconInfo + '</a>' +
+				' <a  href = "" >' + document.title + '</a>' +
+			'</h2>' +
+			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+		'';
+
+		dragElement( divDraggable );
+
+		dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+		dragArea.addEventListener( 'drop', drop, false );
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+		onHashChange();
+
+	}
+
+
+
+	function onloadThreejs() {
+
+		butTemplate.click();
+
+	}
+
+
+
+	function onHashChange() {
+
+		ifrThree.src = threeDefaultFile + location.hash;
+		ifrThree.contentWindow.location.reload();
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		//		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+		//			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+
+		}
+
+	}
+
+
+	function drop( event ) {
+
+		event.preventDefault();
+
+		var iframeUrl = event.dataTransfer.getData( 'URL' );
+
+		if ( iframeUrl ) {
+
+			ifrThree.contentWindow.location.hash = iframeUrl;
+
+		} else {
+
+			ifrThree.contentWindow.openFile( event.dataTransfer );
+
+		}
+
+	}
+
+
+
+// https://www.w3schools.com/howto/howto_js_draggable.asp
+
+	function dragElement( element ) {
+
+		let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+		divDraggableHeader.onmousedown = dragMouseDown;
+
+		function dragMouseDown( event ) {
+
+			event = event || window.event;
+
+			pos3 = event.clientX;
+			pos4 = event.clientY;
+			document.onmouseup = closeDragElement;
+
+			document.onmousemove = elementDrag;
+
+		}
+
+		function elementDrag( event ) {
+
+			event = event || window.event;
+
+			pos1 = pos3 - event.clientX;
+			pos2 = pos4 - event.clientY;
+			pos3 = event.clientX;
+			pos4 = event.clientY;
+
+			element.style.top = ( element.offsetTop - pos2 ) + 'px';
+			element.style.left = ( element.offsetLeft - pos1 ) + 'px';
+
+		}
+
+		function closeDragElement() {
+
+			document.onmouseup = null;
+			document.onmousemove = null;
+
+		}
+
+	}
+
+</script>
+</body>
+</html>

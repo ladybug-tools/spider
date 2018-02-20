@@ -1,8 +1,11 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-	var gbxml2;
+	var gbxmlResponseXML;
+	var surfacesXml;
+
 	var telltale;
 	var surfaceUpdatedId = -1;
+
 
 	initEditor();
 
@@ -21,10 +24,11 @@
 					<div id=divGbxml style=max-height:600px;overflow:auto; class=flex-container ></div>
 
 					<div id=divUpdates >
-						<button onclick=updateSurface(); >update surface</button>
-						<button onclick=addModifiedBy(); >add ModifiedBy </button>
-						<button onclick=saveFile(); >save edits</button>
-						<button onclick=viewPreviousUpdates(); >view previous update</button>
+						<button onclick=EDTupdateSurface(); >update surface</button>
+						<button onclick=EDTdeleteSurface(); >delete surface</button>
+						<button onclick=EDTaddModifiedBy(); >add ModifiedBy </button>
+						<button onclick=EDTsaveFile(); >save edits</button>
+						<button onclick=EDTviewPreviousUpdates(); >view previous update</button>
 					</div>
 
 					<hr>
@@ -34,7 +38,8 @@
 			` + divMenuItems.innerHTML;
 
 			butEditor.style.backgroundColor = 'var( --but-bg-color )';
-			editSurfaces();
+
+			initMenuEditSurfaces();
 
 		} else {
 
@@ -48,7 +53,7 @@
 
 
 
-	function editSurfaces() {
+	function initMenuEditSurfaces() {
 
 		surfacesXml = gbxml.getElementsByTagName("Surface");
 		console.log( 'surfacesXml', surfacesXml );
@@ -60,12 +65,20 @@
 			const surface = surfacesXml[ i ];
 			//console.log( 'surface', surface );
 
-			name = surface.getElementsByTagName("Name")[0].textContent;
-			//console.log( 'name', name );
+			if ( surface.getElementsByTagName("Name")[0] ) {
+
+				name = surface.getElementsByTagName("Name")[0].textContent;
+				//console.log( 'name', name );
+
+			} else {
+
+				name = '';
+
+			}
 
 			txtSurfaces +=
 				'<option title=' + name + '>' +
-				surface.attributes.getNamedItem( 'id' ).nodeValue +
+					surface.attributes.getNamedItem( 'id' ).nodeValue +
 				'</option>';
 
 		}
@@ -100,27 +113,27 @@
 
 			'<div>' +
 				'<div>Surface</div>' +
-				'<div><input id=inpSurface oninput=updateSelect(this,selSurface); size=12 placeholder="enter surface id" ></div>' +
-				'<div><select id=selSurface onchange=selectSurface(); size=10 >' + txtSurfaces + '</select></div>' +
-				'<div><button onclick=toggleSurface(); >show surface</button></div>' +
+				'<div><input id=inpSurface oninput=EDTupdateSelect(this,selSurface); size=12 placeholder="enter surface id" ></div>' +
+				'<div><select id=selSurface onchange=EDTselectSurface(); size=10 >' + txtSurfaces + '</select></div>' +
+				'<div><button onclick=EDTtoggleSurface(); >show surface</button></div>' +
 			'</div> ' +
 			'<div>' +
 				'<div>Type</div>' +
-				'<div><input oninput=updateSelect(this,selType); size=12  placeholder="enter type" ></div>' +
+				'<div><input oninput=EDTupdateSelect(this,selType); size=12  placeholder="enter type" ></div>' +
 				'<div><select id=selType size=10 >' + txtTypes + '</select></div>' +
-				'<div><button onclick=showSurfaceType(); >show type</button></div>' +
+				'<div><button onclick=EDTshowSurfaceType(); >show type</button></div>' +
 			'</div> ' +
 			'<div>' +
 				'<div>Adjacency 1</div>' +
-				'<div><input oninput=updateSelect(this,selAdjacentSpaceId0); size=12 placeholder="enter space id" ></div>' +
+				'<div><input oninput=EDTpdateSelect(this,selAdjacentSpaceId0); size=12 placeholder="enter space id" ></div>' +
 				'<div><select id=selAdjacentSpaceId0 size=10 >' + txtSpaces + '</select></div>' +
-				'<div><button onclick=toggleSpace(selAdjacentSpaceId0); >show space</button></div>' +
+				'<div><button onclick=EDTtoggleSpace(selAdjacentSpaceId0); >show space</button></div>' +
 			'</div> ' +
 			'<div>' +
 				'<div>Adjacency 2</div>' +
-				'<div><input oninput=updateSelect(this,selAdjacentSpaceId1); size=12 placeholder="enter space id" ></div>' +
+				'<div><input oninput=EDTupdateSelect(this,selAdjacentSpaceId1); size=12 placeholder="enter space id" ></div>' +
 				'<div><select id=selAdjacentSpaceId1 size=10 >' + txtSpaces + '</select></div>' +
-				'<div><button onclick=toggleSpace(selAdjacentSpaceId1); >show space</button></div>' +
+				'<div><button onclick=EDTtoggleSpace(selAdjacentSpaceId1); >show space</button></div>' +
 			'</div>' +
 		'';
 
@@ -128,7 +141,7 @@
 
 
 
-	function updateSelect( input, select ) {
+	function EDTupdateSelect( input, select ) {
 
 		const str = input.value.toLowerCase();
 		const options = select.options;
@@ -150,7 +163,7 @@
 
 
 
-	function selectSurface() {
+	function EDTselectSurface() {
 
 		const surface = surfacesXml[ selSurface.selectedIndex ];
 		//console.log( 'surface', surface );
@@ -177,13 +190,13 @@
 
 		selAdjacentSpaceId1.selectedIndex = index;
 
-		toggleSurface( selSurface.value );
+		EDTtoggleSurface();
 
 	}
 
 
 
-	function updateSurface() {
+	function EDTupdateSurface() {
 
 		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
 
@@ -210,18 +223,18 @@
 
 
 
-	function viewPreviousUpdates(){
+	function EDTviewPreviousUpdates(){
 
 		if ( surfaceUpdatedId < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
 
 		selSurface.selectedIndex = surfaceUpdatedId;
-		selectSurface();
+		EDTselectSurface();
 
 	}
 
 
 
-	function toggleSurface() {
+	function EDTtoggleSurface() {
 
 		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
 
@@ -234,7 +247,14 @@
 				child.visible = true;
 				//console.log( '', child );
 
-				zoomIntoSurface( child );
+				EDTzoomIntoSurface( child );
+
+				if ( window.divHeadsUp ) {
+
+					intersected = child;
+					setHeadsUp();
+
+				}
 
 			} else {
 
@@ -248,7 +268,7 @@
 
 
 
-	function showSurfaceType( that ) {
+	function EDTshowSurfaceType( that ) {
 
 		const type = selType.value;
 
@@ -270,13 +290,11 @@
 
 
 
-	function toggleSpace( that ) {
+	function EDTtoggleSpace( that ) {
 
 		id = that.value;
 
 		for ( let child of surfaceMeshes.children ) {
-
-//			if ( !child.userData.data ) { continue; }
 
 			child.visible = false;
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
@@ -301,12 +319,12 @@
 
 
 
-	function zoomIntoSurface( surface ){
+	function EDTzoomIntoSurface( surface ){
 		//console.log( 'surface', surface );
 
-		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
+		const center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
 
-		radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
+		const radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
 
 		scene.remove( telltale );
 		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
@@ -323,22 +341,48 @@
 	}
 
 
+	function EDTdeleteSurface(){
 
-	function addModifiedBy() {
+		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
+
+			surfaceUpdatedId = selSurface.selectedIndex;
+			surfacesResponse = gbxmlResponseXML.getElementsByTagName("Surface");
+
+			surface = surfacesResponse[ surfaceUpdatedId ];
+			console.log( 'surface to delete', surface );
+
+			surface.remove();
+
+			id = selSurface.value;
+
+			for ( let child of surfaceMeshes.children ) {
+
+				if ( id === child.userData.data.id ) {
+
+					surfaceMeshes.remove( child );
+				}
+
+			}
+
+	}
+
+
+
+	function EDTaddModifiedBy() {
 
 		// not adding spaces and new lines nicely. Why?
 
-		const documentHistoryXml = gbxml2.getElementsByTagName( "DocumentHistory" );
+		const documentHistoryXml = gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
 
-		const programInfoNew = gbxml2.createElement( "ProgramInfo" );
+		const programInfoNew = gbxmlResponseXML.createElement( "ProgramInfo" );
 
 		programInfoNew.setAttribute( "id", "ladybug-tools-spider" );
 
 		documentHistoryXml[ 0 ].appendChild( programInfoNew );
 
-		const productNameNew = gbxml2.createElement( "ProductName" );
+		const productNameNew = gbxmlResponseXML.createElement( "ProductName" );
 
-		const newText = gbxml2.createTextNode( 'Ladybug-Tools/spider' );
+		const newText = gbxmlResponseXML.createTextNode( 'Ladybug-Tools/spider' );
 
 		productNameNew.appendChild( newText );
 
@@ -347,7 +391,7 @@
 		productNameNew.nodeValue = 'Ladybug-Tools/spider';
 
 
-		const modifiedByNew = gbxml2.createElement( "ModifiedBy" );
+		const modifiedByNew = gbxmlResponseXML.createElement( "ModifiedBy" );
 
 		modifiedByNew.setAttribute( "personId", "Theo" );
 
@@ -361,9 +405,12 @@
 
 	}
 
+
+
 // https://stackoverflow.com/questions/376373/pretty-printing-xml-with-javascript
 // https://jsfiddle.net/klesun/sgeryvyu/5/
-	function prettifyXml(sourceXml) {
+
+	function EDTprettifyXml(sourceXml) {
 
 		var xmlDoc = new DOMParser().parseFromString(sourceXml, 'application/xml');
 		var xsltDoc = new DOMParser().parseFromString([
@@ -384,9 +431,11 @@
 
 	}
 
-	function saveFile() {
 
-		//		xmlText = prettifyXml( gbxml2 ); // not
+
+	function EDTsaveFile() {
+
+		//		xmlText = prettifyXml( gbxmlResponseXML ); // not
 		const xmlText = new XMLSerializer().serializeToString( gbxml );
 		//console.log( 'xmlText', xmlText );
 

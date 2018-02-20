@@ -30,6 +30,13 @@ The files in this folder are templates or 'boilerplate' files that may be used t
 
 ## Change Log
 
+### 2018-02-19 ~ Theo
+
+* Change style sheet to
+
+```
+<link rel="stylesheet" type="text/css" href="../gbxml-viewer10-templates/style-template.css" >
+```
 
 ### 2018-02-15 ~ Theo
 

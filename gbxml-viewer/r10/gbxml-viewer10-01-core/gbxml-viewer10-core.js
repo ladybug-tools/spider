@@ -11,6 +11,7 @@
 	var THR = {};
 
 	var gbxml;
+	var gbxmlResponseXML;
 	var gbjson;
 
 	var surfaceMeshes;
@@ -39,12 +40,13 @@
 		EmbeddedColumn: 0x80806E
 
 	}
-
 	var surfaceTypes  = Object.keys( colors );
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional, lightPoint;
 	var cameraHelper, axesHelper, gridHelper, groundHelper;
+
+
 
 	function initThreeGbxml() {
 
@@ -116,6 +118,8 @@
 
 	}
 
+
+
 	THR.requestFile = function requestFile( url, callback ) {
 
 		const xhr = new XMLHttpRequest();
@@ -138,6 +142,7 @@
 
 	THR.callbackGbXML = function callbackGbXML( xhr ){
 
+		gbxmlResponseXML =  xhr.target.responseXML;
 		gbxml = xhr.target.responseXML.documentElement;
 
 		parseFileXML( gbxml );
@@ -154,9 +159,13 @@
 
 			const parser = new DOMParser();
 
-			const xmlDoc = parser.parseFromString( reader.result, "text/xml" );
+			gbxmlResponseXML = parser.parseFromString( reader.result, "text/xml" );
+			//console.log( 'gbxmlResponseXML2', gbxmlResponseXML2 );
 
-			gbjson = parseFileXML( xmlDoc.children[ 0 ] );
+			gbxml = gbxmlResponseXML.children[ 0 ];
+			//console.log( 'gbxml', gbxml );
+
+			gbjson = parseFileXML( gbxml );
 
 			if ( files.files[ 0 ] ) { gbjson.name = files.files[ 0 ].name; }
 

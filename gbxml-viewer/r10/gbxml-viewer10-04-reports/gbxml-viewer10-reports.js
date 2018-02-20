@@ -66,10 +66,10 @@
 
 		'';
 
-		gbxml = traversGbjson( gbjson );
-		//console.log( 'gbxml', gbxml );
+		const gbxmlText = traversGbjson( gbjson );
+		//console.log( 'gbxmlText', gbxmlText );
 
-		divReport.innerHTML = addDetails( 'gbXML', gbxml.attributes );
+		divReport.innerHTML = addDetails( 'gbxmlText', gbxmlText.attributes );
 
 		const campus = traversGbjson( gbjson.Campus );
 		divReport.innerHTML += addDetails( 'Campus', campus.attributes );
@@ -118,7 +118,7 @@
 		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent, surfaceAdjacencyInvalid.info );
 
 		// following causes error when inside an iframe in a read me
-		if ( parent.setIfrThree ) { setIfrThree(); }
+		//if ( parent.setIfrThree ) { setIfrThree(); }
 
 	}
 
@@ -741,7 +741,6 @@
 
 	function toggleSurface( id ) {
 
-//		surfaceGroup.visible = true;
 		divLog.innerHTML = '';
 
 		for ( let child of surfaceMeshes.children ) {
@@ -750,9 +749,16 @@
 
 				child.visible = true;
 
-		//console.log( '', child );
+				//console.log( '', child );
 
 				zoomIntoSurface( child );
+
+				if ( window.divHeadsUp ) {
+
+					intersected = child;
+					setHeadsUp();
+
+				}
 
 			} else {
 
