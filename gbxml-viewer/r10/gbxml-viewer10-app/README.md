@@ -26,8 +26,6 @@ See main read me file
 
 ## Issues
 
-* 2018-02-18 ~ Menu items not updating when loading new files
-* 2018-02-18 ~ Drag and drop broken
 
 
 ## Change Log
@@ -39,6 +37,9 @@ R10.3
 App
 * 2018-02-18 ~ Drag and drop broken << many fixes
 
+Fixed mostly
+* 2018-02-18 ~ Menu items not updating when loading new files
+* 2018-02-18 ~ Drag and drop broken
 
 ### 2018-02-18 ~ Theo
 

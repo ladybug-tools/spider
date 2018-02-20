@@ -313,7 +313,7 @@ R10.3
 * Many fixes
 * Menus move more smoothly
 * Editing, deleting and saving all working - but testing has just started
-* HUD updates with Editor (but not vice versa yet)
+* HUD updates with Editor and reports
 
 
 ### 2018-02-18 ~ Theo

@@ -11,6 +11,17 @@ _Please suggest what you would like to see here._
 
 <details open>
 
+<summary>Welcome 2018-02-19 ~ R10.3</summary>
+
+<p>
+* Many fixes
+* Menus move more smoothly
+* Editing, deleting and saving all working - but testing has just started
+* HUD updates with Editor and reports
+</p>
+
+</details><details open>
+
 <summary>Welcome 2018-02-18</summary>
 
 <p>
