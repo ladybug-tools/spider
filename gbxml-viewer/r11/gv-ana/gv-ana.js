@@ -110,8 +110,6 @@
 		} else {
 
 			detAnalemma.remove();
-
-
 			scene.remove( analemma );
 			lightDirectional.remove( sun );
 
