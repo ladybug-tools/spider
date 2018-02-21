@@ -2,10 +2,10 @@
 	let COR = {};
 
 	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
-	COR.threeDefaultFile = '../gbxml-viewer10-01-core/gbxml-viewer10-core.html';
+	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
+	COR.uriDefaultFile = 'splash-screen.md';
 
 	COR.gbxmlSampleFiles =
-
 	`
 		<div><a href="#../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
 		<div><a href="#../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
@@ -35,11 +35,64 @@
 
 		if ( window.divMenuHeader ) {
 			divMenuHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
+		}
+
+		if ( window.divContentsHeader ) {
+			divContentsHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			divContentsHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			divContentsHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+		}
+
+		window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
+
+		window.addEventListener ( 'hashchange', COR.onHashChange, false );
+
+	}
+
+
+	COR.onHashChange = () => {
+
+		const url = !location.hash ? COR.uriDefaultFile : location.hash.slice( 1 );
+		const ulc = url.toLowerCase();
+
+		if ( ulc.endsWith( '.md' ) ) {
+
+			COR.requestFile( url, callbackMarkdown );
+
+		} else if ( ulc.endsWith( '.xml' ) ) {
+
+			console.log( 'url', url );
+
+			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+
+//		} else if ( ulc.endsWith( '.html' ) ) {
+
+//			setIfrThree();
+
+		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
+
+			divContents.innerHTML = '<img src=' + url + ' >';
+
+		} else {
+
+			COR.requestFile( urlGitHubPage + url, callbackToTextarea );
+
 		}
 
 	}
 
+
+	COR.requestFile = ( url, callback ) => {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
 
 
 	COR.requestFileAndProgress = ( url, callback ) => {
@@ -100,6 +153,30 @@
 
 	}
 
+
+
+	function callbackMarkdown( xhr ){
+
+		showdown.setFlavor('github');
+		const converter = new showdown.Converter();
+		const response = xhr.target.response;
+		const html = converter.makeHtml( xhr.target.responseText );
+
+		divContents.innerHTML = html;
+		divContainer.style.display = 'block';
+		window.scrollTo( 0, 0 );
+
+	}
+
+
+
+	function callbackToTextarea( xhr ){
+
+		const response = xhr.target.response;
+		divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
+		divContainer.style.display = 'block'
+
+	}
 
 
 /////////////

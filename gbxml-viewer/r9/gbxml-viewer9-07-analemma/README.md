@@ -18,7 +18,7 @@ See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.
 
 ## Wish list
 
-
+* 2018-02-21 ~ Add automatic addition of ground
 
 ## Issues
 

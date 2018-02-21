@@ -86,7 +86,8 @@
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
 
-		//window.addEventListener( 'load', onWindowLoad, false );
+		// in iframe: loads default / standalone: opens permalinks
+		//console.log( 'location.hash', location );
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
@@ -99,6 +100,7 @@
 			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
 
 		}
+
 
 		THR.renderer= renderer;
 		THR.scene = scene;

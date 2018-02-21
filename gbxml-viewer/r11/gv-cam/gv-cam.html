@@ -6,7 +6,7 @@
 <meta name = "description" content = "Test sample gbXML viewer template" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-15" >
-<title>gv-tmp-gbxml-viewer-template-test</title>
+<title>gv-cam-gbxml-viewer-first person camera</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -21,11 +21,11 @@
 	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
+		<button id=butCameraFirstPerson onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-tmp/gv-tmp-test-menu.js';
+			script.src = '../gv-cam/gv-cam.js';
 			divMenu.style.display='block';" >
-			gbxml-viewer10-template </button>
+			gbxml-viewer first person camera </button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
@@ -92,7 +92,7 @@
 
 		console.log( 'scene', scene );
 
-		butTemplate.click();
+		butCameraFirstPerson.click();
 
 	}
 
@@ -100,12 +100,8 @@
 
 	function onHashChange() {
 
-		const url = COR.threeDefaultFile + location.hash;
-		console.log( 'url', url );
-
-		ifrThree.src = url;
+		ifrThree.src = COR.threeDefaultFile + location.hash;
 		ifrThree.contentWindow.location.reload();
-
 	}
 
 

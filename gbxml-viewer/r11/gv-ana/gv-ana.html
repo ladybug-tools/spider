@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML viewer Sun path / Analemma" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-15" >
-<title>gv-tmp-gbxml-viewer-template-test</title>
+<meta name = "date" content = "2018-02-21" >
+<title>gv-ana gbxml-viewer-template-Sun pathe / Analemma</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -21,11 +21,13 @@
 	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
-			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-tmp/gv-tmp-test-menu.js';
+		<button id=butAnalemma onclick =
+			"const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-ana/gv-ana.js';
 			divMenu.style.display='block';" >
-			gbxml-viewer10-template </button>
+			gv-ana gbxml-viewer Sun path / Analemma </button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
@@ -92,7 +94,7 @@
 
 		console.log( 'scene', scene );
 
-		butTemplate.click();
+		butAnalemma.click();
 
 	}
 

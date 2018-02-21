@@ -72,19 +72,24 @@
 				script.src = '../gv-rep/gv-rep.js'; " >
 				reports</button>
 
-<!--
-				<button id=butCameraFirstPerson onclick =
+				<button id=butEditor onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer10-06-camera-first-person/gbxml-viewer10-camera-first-person.js';" >
-				first person camera</button>
+					script.src = '../gv-edt/gv-edt.js';" >
+				edit file </button>
 
+				<button id=butCameraFirstPerson onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-cam/gv-cam.js';" >
+				first person camera</button>
 
 				<button id=butAnalemma onclick="
 					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 					const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer9-07-analemma/gbxml-viewer9-analemma.js'; " >
+					script.src = '../gv-ana/gv-ana.js'; " >
 				sun-path / analemma</button>
+
+<!--
 
 				<button id=butSunRange onclick="
 				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
@@ -105,32 +110,26 @@
 
 -->
 
-				<button id=butEditor onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-edt/gv-edt.js';" >
-				edit file </button>
-
-<!--
 				<p>Sample files on GitHub to explore:</p>
 
 				<button id=butGalleryGbxml onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-gbxml.js';" >
+					script.src = '../gv-gal/gv-gal-gbxml.js';" >
 					gbXML.org Sample Files
 				</button>
 
 				<button id=butGallerySampleFiles onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-gbxml-sample-files.js';" >
+					script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
 					Spider gbXML sample files
 				</button>
 
 				<button id=butGalleryBuildWell onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-build-well.js';" >
+					script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
 					Spider Build Well
 				</button>
--->
+
 				<hr>
 
 			</details>
@@ -198,6 +197,7 @@
 	COR.initCore();
 	THR.initThreeGbxml();
 	THR.animate();
+	COR.onHashChange();
 
 	let colors;
 	let gbxml;
