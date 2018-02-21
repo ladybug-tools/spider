@@ -45,15 +45,37 @@ Below there are links to some of the latest files. R8 is that latest release and
 
 ### Features
 
-* View gbXML files in 3D or as text in your browser
-	* Create gbJSON files for easier processing
-* Full zoom, pan and rotate
-* Run on computer, tablet and phone
-* Adjust a wide variety of viewing parameters
-* View the full gamut of data typically available in a gbXML file
-* Open files via URL or open file dialog
-* All free and open source and hosted on GitHub
+Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript.
 
+User experience
+* Runs on computer, tablet and phone
+* Highly adjustable workspace
+* View the full gamut of data typically available in a gbXML file
+Viewing
+* View gbXML files in 3D
+* Full zoom, pan and rotate
+* Adjust a wide variety of viewing parameters including opacity, colors and materials
+* Exploded views and orthographic views
+* Toggle display of individual surfaces, zones, spaces, storey and surface types
+* Optional first person camera enables model fly-throughs
+Editing
+* Identifies automatically:
+	* Duplicate surfaces
+	* Surfaces with duplicate adjacent spaces
+	* Tiny surfaces and tiny spaces
+* Reassign surface type and adjacent spaces for all surfaces
+* Click any surface to view its parameters
+File handling
+* Open files via open file dialog or drag and drop
+* Open files via URL using a link or simply by copying and pasting into the address bar
+* Save edited data to a new gbXML file with updated document history
+Code
+* All plain vanilla client-side JavaScript
+* Creates gbJSON data for easier processing
+* All free and open source and hosted on GitHub
+BonusFeatures
+* Sun path diagrams with analemmas
+* Screen capture to video
 
 
 ## Things you can do using this script
