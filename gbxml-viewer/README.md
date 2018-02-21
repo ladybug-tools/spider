@@ -51,6 +51,7 @@ User experience
 * Runs on computer, tablet and phone
 * Highly adjustable workspace
 * View the full gamut of data typically available in a gbXML file
+
 Viewing
 * View gbXML files in 3D
 * Full zoom, pan and rotate
@@ -58,6 +59,7 @@ Viewing
 * Exploded views and orthographic views
 * Toggle display of individual surfaces, zones, spaces, storey and surface types
 * Optional first person camera enables model fly-throughs
+
 Editing
 * Identifies automatically:
 	* Duplicate surfaces
@@ -65,6 +67,7 @@ Editing
 	* Tiny surfaces and tiny spaces
 * Reassign surface type and adjacent spaces for all surfaces
 * Click any surface to view its parameters
+
 File handling
 * Open files via open file dialog or drag and drop
 * Open files via URL using a link or simply by copying and pasting into the address bar
@@ -73,6 +76,7 @@ Code
 * All plain vanilla client-side JavaScript
 * Creates gbJSON data for easier processing
 * All free and open source and hosted on GitHub
+
 BonusFeatures
 * Sun path diagrams with analemmas
 * Screen capture to video
