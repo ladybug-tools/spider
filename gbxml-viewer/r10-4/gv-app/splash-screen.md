@@ -14,7 +14,7 @@ _Please suggest what you would like to see here._
 <summary>Welcome 2018-02-21 ~ R10.4</summary>
 
 * Many fixes 'under the hood' / User interface has few changes
-* Must watch video: [gbXML Viewer User Guide]( https://www.youtube.com/watch?v=3ZSp18WzhvM )
+* Must watch video: [gbXML Viewer User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 * [Name spaces]( https://en.wikipedia.org/wiki/Namespace ) implemented for much of the code
 	* Prevents functions and variables in one module trashing a similarly named items in another module
 * 'Edit file' workflow improved
