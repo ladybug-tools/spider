@@ -1,13 +1,6 @@
 
-	let SET = {};
-/*
-	let colors = GBX.colors;
-	let gbjson = GBX.gbjson;
-	let surfaceMeshes = GBX.surfaceMeshes;
-	let surfaceEdges = GBX.surfaceEdges;
-	let zoomObjectBoundingSphere = GBX.zoomObjectBoundingSphere;
-	let setAllVisible = GBX.setAllVisible;
-*/
+	var SET = {};
+
 
 	initSettings();
 

@@ -45,7 +45,7 @@
 
 				<p id=dragArea class=dragDropArea >
 					Drag and drop Three.js files into this box or <br>
-					<input type = "file" id = "inpFile" onchange="openFile(this);" >
+					<input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this)" >
 				<p>
 
 				<hr>
@@ -57,80 +57,87 @@
 
 				<summary>Toggle Features</summary>
 
-				<button id=butHeadsUp onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-hud/gv-hud.js';" >
-				heads-up display</button>
-
 				<button id=butSettings onclick=
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-set/gv-set.js'; " >
 				settings</button>
 
 				<button id=butReports onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-rep/gv-rep.js'; " >
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-rep/gv-rep.js'; " >
 				reports</button>
+
+				<button id=butHeadsUp onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-hud/gv-hud.js';" >
+				heads-up display</button>
 
 				<button id=butEditor onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-edt/gv-edt.js';" >
 				edit file </button>
 
-				<button id=butCameraFirstPerson onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-cam/gv-cam.js';" >
-				first person camera</button>
+				<hr>
 
-				<button id=butAnalemma onclick="
+				<details open>
+					<summary>things to try</summary>
+
+					<button id=butCameraFirstPerson onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-cam/gv-cam.js';" >
+					first person camera</button>
+
+					<button id=butAnalemma onclick="
+						const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+						scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+						const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-ana/gv-ana.js'; " >
+					sun-path / analemma</button>
+
+	<!--
+
+					<button id=butSunRange onclick="
 					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 					const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-ana/gv-ana.js'; " >
-				sun-path / analemma</button>
+					script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
+					sun-range</button>
 
-<!--
+					<button id=butScreenCapture onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
+					screen capture </button>
 
-				<button id=butSunRange onclick="
-				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-				scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-				const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
-				sun-range</button>
+					<button id=butMenuSave onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gbxml-viewer10-07-save/gbxml-viewer10-save.js';" >
+					save file </button>
 
-				<button id=butScreenCapture onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
-				screen capture </button>
+	-->
 
-				<button id=butMenuSave onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer10-07-save/gbxml-viewer10-save.js';" >
-				save file </button>
+					<p>Sample files on GitHub to explore:</p>
 
--->
+					<button id=butGalleryGbxml onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-gbxml.js';" >
+						gbXML.org Sample Files
+					</button>
 
-				<p>Sample files on GitHub to explore:</p>
+					<button id=butGallerySampleFiles onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
+						Spider gbXML sample files
+					</button>
 
-				<button id=butGalleryGbxml onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-gal/gv-gal-gbxml.js';" >
-					gbXML.org Sample Files
-				</button>
+					<button id=butGalleryBuildWell onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
+						Spider Build Well
+					</button>
 
-				<button id=butGallerySampleFiles onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
-					Spider gbXML sample files
-				</button>
+					<hr>
 
-				<button id=butGalleryBuildWell onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
-					Spider Build Well
-				</button>
-
-				<hr>
+				</details>
 
 			</details>
 

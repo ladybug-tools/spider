@@ -22,11 +22,11 @@
 					<div id=divGbxml style=max-height:600px;overflow:auto; class=flex-container ></div>
 
 					<div id=divUpdates >
-						<button onclick=EDT.updateSurface(); >update surface</button>
-						<button onclick=EDT.deleteSurface(); >delete surface</button>
-						<button onclick=EDT.addModifiedBy(); >add ModifiedBy </button>
-						<button onclick=EDT.saveFile(); >save edits</button>
-						<button onclick=EDT.viewPreviousUpdates(); >view previous update</button>
+						<button onclick=EDT.updateSurface(); title='Click here to confirm the updates' >update surface</button>
+						<button onclick=EDT.deleteSurface(); title='Removes the selected surface from the model' >delete surface</button>
+						<button onclick=EDT.addModifiedBy(); title='adds name, app, date and time of the edits' >add ModifiedBy </button>
+						<button onclick=EDT.saveFile(); title='creates a new file with the changes' >save edits</button>
+<!--						<button onclick=EDT.viewPreviousUpdates(); >view previous update</button> -->
 					</div>
 
 					<hr>
@@ -54,7 +54,7 @@
 	function initMenuEditSurfaces() {
 
 		EDT.surfacesXml = gbxml.getElementsByTagName("Surface");
-		console.log( 'EDT.surfacesXml', EDT.surfacesXml );
+//		console.log( 'EDT.surfacesXml', EDT.surfacesXml );
 
 		let txtSurfaces = '';
 
@@ -169,9 +169,21 @@
 
 		selType.selectedIndex = surfaceTypes.indexOf( type );
 
+
+
+
 		const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
 
-		index = spacesXmlIds.indexOf( adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
+		if ( adjs[ 0 ] ) {
+
+			index = spacesXmlIds.indexOf( adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
+
+		} else {
+
+			index = 0;
+
+		}
+
 		selAdjacentSpaceId0.selectedIndex = index;
 
 		if ( adjs[ 1 ] ) {
@@ -201,6 +213,19 @@
 
 		surface.attributes.getNamedItem( 'surfaceType' ).nodeValue = selType.value;
 
+		const id = selSurface.value;
+
+		for ( child of surfaceMeshes.children ) {
+
+			if ( id === child.userData.data.id ) {
+				// console.log( 'child', child );
+				child.material.color.setHex( GBX.colors[ selType.value ] );
+				child.material.needsUpdate = true
+				break;
+			}
+
+		}
+
 		const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
 		//console.log( 'adjs[ 0 ]', adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
 
@@ -212,7 +237,7 @@
 
 		}
 
-//		GBX.parseFileXML( gbxml );
+		//		GBX.parseFileXML( gbxml );
 
 	}
 
@@ -341,24 +366,33 @@
 
 		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
 
-			surfaceUpdatedId = selSurface.selectedIndex;
-			surfacesResponse = gbxmlResponseXML.getElementsByTagName("Surface");
+		id = selSurface.value;
 
-			surface = surfacesResponse[ surfaceUpdatedId ];
-			console.log( 'surface to delete', surface );
+		const proceed = confirm( 'OK to delete surface: ' + id + '?' );
 
-			surface.remove();
+		if( !proceed ){ return; }
 
-			id = selSurface.value;
+		surfaceUpdatedId = selSurface.selectedIndex;
+		surfacesResponse = gbxmlResponseXML.getElementsByTagName("Surface");
 
-			for ( let child of surfaceMeshes.children ) {
+		surface = surfacesResponse[ surfaceUpdatedId ];
 
-				if ( id === child.userData.data.id ) {
+		console.log( 'surface to delete', surface );
 
-					surfaceMeshes.remove( child );
-				}
+		surface.remove();
+
+
+		for ( let child of surfaceMeshes.children ) {
+
+			if ( id === child.userData.data.id ) {
+
+				surfaceMeshes.remove( child );
 
 			}
+
+		}
+
+		initMenuEditSurfaces();
 
 	}
 
@@ -368,7 +402,7 @@
 
 		// not adding spaces and new lines nicely. Why?
 
-		const documentHistoryXml = gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
+		documentHistoryXml = gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
 
 		const programInfoNew = gbxmlResponseXML.createElement( "ProgramInfo" );
 
@@ -389,15 +423,15 @@
 
 		const modifiedByNew = gbxmlResponseXML.createElement( "ModifiedBy" );
 
-		modifiedByNew.setAttribute( "personId", "Theo" );
+		modifiedByNew.setAttribute( "personId", "Your name" );
 
-		modifiedByNew.setAttribute( "programId", "ladybug-tools-spide2" );
+		modifiedByNew.setAttribute( "programId", "ladybug-tools-spider" );
 
 		modifiedByNew.setAttribute( "date", ( new Date() ).toISOString() );
 
 		documentHistoryXml[ 0 ].appendChild( modifiedByNew );
 
-		console.log( 'documentHistoryXml', documentHistoryXml );
+		alert( 'Adding to gbXML:\n\n' + gbxmlResponseXML.getElementsByTagName( "ModifiedBy" )[0].outerHTML );
 
 	}
 

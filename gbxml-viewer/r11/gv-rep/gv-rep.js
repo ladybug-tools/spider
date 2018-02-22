@@ -757,7 +757,7 @@
 				if ( window.divHeadsUp ) {
 
 					intersected = child;
-					REP.setHeadsUp();
+					HUD.setHeadsUp();
 
 				}
 
@@ -776,9 +776,9 @@
 	REP.zoomIntoSurface = ( surface ) => {
 		//console.log( 'surface', surface );
 
-		center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
-
-		radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
+		const center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
+		const radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
+		//console.log( 'bbb', center, radius );
 
 		scene.remove( telltale );
 		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
@@ -790,16 +790,12 @@
 		controls.target.copy( center );
 		camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
 
-
-		//console.log( 'bbb', center, radius );
-
 	}
 
 
 
 	REP.toggleSurfaceType = ( that ) => {
 
-		//		surfaceGroup.visible = true;
 		divLog.innerHTML = '';
 		//console.log( '', surfaceAdjacencyDuplicates );
 
@@ -935,7 +931,7 @@
 
 		divLog.innerHTML = '';
 
-		if ( id.style.backgroundColor !== 'pink' ) {
+		if ( id.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			//surfaceGroup.visible = true;
 
@@ -955,7 +951,7 @@
 
 			}
 
-			id.style.backgroundColor = 'pink';
+			id.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
@@ -981,7 +977,7 @@
 
 		}
 
-		buttons = document.body.getElementsByClassName( 'toggleView' );
+		const buttons = document.body.getElementsByClassName( 'toggleView' );
 
 		for ( butt of buttons ) {
 

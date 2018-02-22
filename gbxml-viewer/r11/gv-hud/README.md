@@ -6,7 +6,7 @@
 <iframe class=iframeReadMe src=http://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r11/gv-hud/gv-hud.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test: [Test gbXML Viewer Heads Up Display]( http://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r11/gv-hud/gv-hud.html )
+## Full screen test: [gbXML Viewer Heads Up Display]( http://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r11/gv-hud/gv-hud.html )
 
 
 ## Concept

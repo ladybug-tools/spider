@@ -1,5 +1,5 @@
 
-	let HUD = {};
+	var HUD = {};
 
 	var divHeadsUp;
 	var intersected;
@@ -50,9 +50,9 @@
 			renderer.domElement.addEventListener( 'click', onRendererMouseMoveHUD, false );
 			renderer.domElement.addEventListener( 'touchstart', onRendererTouchStartHUD, false );
 
-//			if ( parent.setIfrThree ) { setIfrThree(); }
-
 			butHeadsUp.style.backgroundColor = 'var( --but-bg-color )';
+
+			HUD.surfacesXml = gbxml.getElementsByTagName("Surface");
 
 		} else {
 
@@ -183,28 +183,28 @@
 					adjacenciesTxt =
 
 						'<hr>' +
-						'adjacenct 1:  <button onclick=HUD.toggleSpaceHUD("' + space1.id + '"); >' + space1.id + '</button>' + b +
+						'adjacent 1:  <button onclick=HUD.toggleSpaceHUD("' + space1.id + '"); >' + space1.id + '</button>' + b +
 						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
 						( space1.Description ? 'description: ' + space1.Description + b : '' ) +
 						( space1.Area ? 'area: ' + space1.Area + b : '' ) +
 						( space1.Volume ? 'volume: ' + space1.Volume + b : '' ) +
-						( space1.conditionType ? 'conditionType: ' + space1.conditionType + b : '' ) +
-						( space1.zoneIdRef ? 'zoneIdRef: ' + space1.zoneIdRef + b : '' ) +
+						( space1.conditionType ? 'condition type: ' + space1.conditionType + b : '' ) +
+						( space1.zoneIdRef ? 'zone id rRef: ' + space1.zoneIdRef + b : '' ) +
 						'storey: <button onclick=HUD.toggleStoreyHUD("' + space1.buildingStoreyIdRef + '"); >' + space1.buildingStoreyIdRef + '</button>' + b +
-						( space1.CADObjectId ? 'CADObjectId: ' + space1.CADObjectId + b : '' ) +
+						( space1.CADObjectId ? 'cad object id: ' + space1.CADObjectId + b : '' ) +
 
 						'<hr>' +
-						'adjacenct 2: <button onclick=HUD.toggleSpaceHUD("' + space2.id + '"); >' + space2.id + '</button>' + b +
+						'adjacent 2: <button onclick=HUD.toggleSpaceHUD("' + space2.id + '"); >' + space2.id + '</button>' + b +
 						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
 						( space2.Description ? 'description: ' + space2.Description + b : '' ) +
 						( space2.Area ? 'area: ' + space2.Area + b : '' ) +
 						( space2.Volume ? 'volume: ' + space2.Volume + b : '' ) +
-						( space2.conditionType ? 'conditionType: ' + space2.conditionType + b : '' ) +
-						( space2.zoneIdRef ? 'zoneIdRef: ' + space2.zoneIdRef + b : '' ) +
+						( space2.conditionType ? 'condition type: ' + space2.conditionType + b : '' ) +
+						( space2.zoneIdRef ? 'zone id ref: ' + space2.zoneIdRef + b : '' ) +
 		//						( space2.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space2.buildingStoreyIdRef + b : '' )  +
 						'storey: <button onclick=HUD.toggleStoreyHUD("' + space2.buildingStoreyIdRef + '"); >' + space2.buildingStoreyIdRef + '</button>' + b +
 
-						( space2.CADObjectId ? 'CADObjectId: ' + space2.CADObjectId + b : '' ) +
+						( space2.CADObjectId ? 'cad object id: ' + space2.CADObjectId + b : '' ) +
 					'';
 
 				} else {
@@ -224,16 +224,16 @@
 
 				adjacenciesTxt =
 					'<hr>' +
-					'adjacenct space id: <button onclick=HUD.toggleSpaceHUD("' + space.id + '"); >' + space.id + '</button>' + b +
+					'adjacent space id: <button onclick=HUD.toggleSpaceHUD("' + space.id + '"); >' + space.id + '</button>' + b +
 					( space.Name ? 'name: ' + space.Name + b : '' )  +
-					( space.Description ? 'description: ' + space.Description + b : '' )  +
-					( space.Area ? 'area: ' + space.Area + b : '' )  +
-					( space.Volume ? 'volume: ' + space.Volume + b : '' )  +
+					( space.Description ? 'description: ' + space.Description + b : '' ) +
+					( space.Area ? 'area: ' + space.Area + b : '' ) +
+					( space.Volume ? 'volume: ' + space.Volume + b : '' ) +
 					'storey: <button onclick=HUD.toggleStoreyHUD("' + space.buildingStoreyIdRef + '"); >' + space.buildingStoreyIdRef + '</button>' + b +
-					( space.conditionType ? 'conditionType: ' + space.conditionType + b : '' )  +
-					( space.zoneIdRef ? 'zoneIdRef: ' + space.zoneIdRef + b : '' ) +
-					( space.CADObjectId ? 'CADObjectId: ' + space.CADObjectId + b : '' ) +
-				b;
+					( space.conditionType ? 'condition type: ' + space.conditionType + b : '' )  +
+					( space.zoneIdRef ? 'zone id ref: ' + space.zoneIdRef + b : '' ) +
+					( space.CADObjectId ? 'CAD Object Id: ' + space.CADObjectId + b : '' ) +
+				'';
 
 			}
 
@@ -244,19 +244,22 @@
 
 		txt =
 			'<p>' +
-			'id: <button onclick=HUD.toggleSurfaceHUD("' + data.id + '")  >' + data.id + '</button>' + b +
-			( data.Name ? 'surface name: ' + data.Name + b : '' )  +
-			'toggle type <button onclick=HUD.toggleSurfaceTypeHUD("' + data.surfaceType + '");  >' + data.surfaceType + '</button>' + b +
-			'CADObjectId: <button onclick=HUD.toggleCadIdHUD("' + encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button>' + b +
+			'surface id: <button onclick=HUD.toggleSurfaceHUD("' + data.id + '")  >' + data.id + '</button>' + b +
+			( data.Name ? 'surface name: ' + data.Name + b : '' ) +
+			'type <button onclick=HUD.toggleSurfaceTypeHUD("' + data.surfaceType + '");  >' + data.surfaceType + '</button>' + b +
+			( data.CADObjectId ? 'cad object id: <button onclick=HUD.toggleCadIdHUD("' + encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button>' + b : '' ) +
 			'</p>' +
 			'<p>' +
-				'<button onclick=intersected.visible=!intersected.visible;  >toggle surface visibility</button> ' +
+				'<button onclick=intersected.visible=!intersected.visible;  >toggle visibility</button> ' +
 				'<button class=toggle onclick=HUD.deleteSurface("' + data.id + '"); >delete surface</button>' +
 			'</p>' +
+
 			adjacenciesTxt +
+
 			'<p>' +
-				'<button class=toggle onclick=HUD.allVisible(); >all visible</button> ' +
-				'<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button> ' +
+				'<button class=toggle onclick=HUD.allVisible(); >all visible</button>' +
+				'<hr>' +
+				'For debug: <button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button> ' +
 				'<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>' +
 			'</p>' +
 		'';
@@ -264,11 +267,11 @@
 		divItems.innerHTML = txt;
 		document.body.style.cursor = 'pointer';
 
-		if( window.detSurfaceEdits ) {
+		if ( window.detSurfaceEdits ) {
 
 			inpSurface.value = data.id;
 			selSurface.value = data.id;
-			const surface = surfacesXml[ selSurface.selectedIndex ];
+			const surface = HUD.surfacesXml[ selSurface.selectedIndex ];
 			//console.log( 'surface', surface );
 
 			const type = surface.attributes.getNamedItem( 'surfaceType' ).nodeValue;
@@ -301,15 +304,17 @@
 
 	HUD.deleteSurface = ( id ) => {
 
-//		if ( selSurface.selectedIndex < 0 ) { alert( 'Please first select a surface and make an edit' ); return; }
+		const proceed = confirm( 'OK to delete surface: ' + id + '?\n\nUse \'edit file\' to save deletes.' );
 
-			surfacesResponse = gbxmlResponseXML.getElementsByTagName("Surface");
+		if( !proceed ){ return; }
 
-			surface = surfacesResponse[ id ];
-			console.log( 'surface to delete', surface );
+		surfacesResponse = gbxmlResponseXML.getElementsByTagName("Surface");
 
-			surface.remove();
-			surfaceMeshes.remove( intersected );
+		surface = surfacesResponse[ id ];
+		console.log( 'surface to delete', surface );
+
+		surface.remove();
+		surfaceMeshes.remove( intersected );
 
 	}
 
