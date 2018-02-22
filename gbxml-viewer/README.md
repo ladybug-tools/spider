@@ -11,7 +11,7 @@ _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on s
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
-## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=3ZSp18WzhvM )
+## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 
 * News on what's happening with the gbXML Viewer.
 
