@@ -1,15 +1,25 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10
+# gbXML Viewer R11
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
-In the Settings menu, the 'Explode view' feature is still not perfect but has been much improved.
+
 
 _Please suggest what you would like to see here._
 
 <details open>
+
+<summary>Welcome 2018-02-21 ~ R11</summary>
+
+* Many fixes 'under the hood' / User interface has few changes
+* Must watch video: [gbXML Viewer User Guide]( https://www.youtube.com/watch?v=3ZSp18WzhvM )
+* [Name spaces]( https://en.wikipedia.org/wiki/Namespace ) implemented for much of the code
+	* Prevents functions and variables in one module trashing a similarly named items in another module
+* 'Edit file' workflow improved
+
+</details><details>
 
 <summary>Welcome 2018-02-19 ~ R10.3</summary>
 
@@ -20,15 +30,15 @@ _Please suggest what you would like to see here._
 * HUD updates with Editor and reports
 </p>
 
-</details><details open>
+</details><details>
 
 <summary>Welcome 2018-02-18</summary>
 
 <p>
-Add Edit module. All menus movable and resizable. Many fixes throughout
+Add Edit module. All menus movable and resizable. Many fixes throughout. In the Settings menu, the 'Explode view' feature is still not perfect but has been much improved.
 </p>
 
-</details><details open>
+</details><details>
 
 <summary>Welcome 2018-02-17</summary>
 
@@ -36,7 +46,7 @@ Add Edit module. All menus movable and resizable. Many fixes throughout
 Add three more modules: heads-up display, first person camera and save.
 </p>
 
-</details><details open>
+</details><details>
 
 <summary>Welcome 2018-02-16</summary>
 
@@ -46,9 +56,7 @@ R10 first commit. A significant revision. The code is smaller, simpler and faste
 The interface give more emphasis to the model - and less to the menus. And, of course, new and more colors.
 </p>
 
-</details>
-
-<details>
+</details><details>
 
 <summary>Welcome 2018-02-13</summary>
 

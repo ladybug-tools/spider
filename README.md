@@ -4,7 +4,6 @@
 # [Spider Read Me]( #README.md )
 
 
-
 <iframe class=iframeReadMe src=./plugins/iframe-carousel-r1.html width=100% height=480 ></iframe>
 
 _All of the above are embedded interactive scripts_
@@ -17,6 +16,12 @@ The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-
 ## Ladybug Tools / Spider: [Latest Issues and Updates]( #plugins/view-github-issues.html )
 
 ## Apps: [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [Analemma 3D]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
+
+## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=3ZSp18WzhvM )
+
+* Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
+
+
 
 ## Concept
 
