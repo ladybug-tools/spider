@@ -6,15 +6,14 @@
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
 
+### Must watch video: [gbXML Viewer User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 
-_Please suggest what you would like to see here._
 
 <details open>
 
 <summary>Welcome 2018-02-21 ~ R10.4</summary>
 
 * Many fixes 'under the hood' / User interface has few changes
-* Must watch video: [gbXML Viewer User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 * [Name spaces]( https://en.wikipedia.org/wiki/Namespace ) implemented for much of the code
 	* Prevents functions and variables in one module trashing a similarly named items in another module
 * 'Edit file' workflow improved
