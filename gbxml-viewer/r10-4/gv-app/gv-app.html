@@ -230,6 +230,32 @@
 
 	}
 
+
+
+
+////
+
+	function toggleNav() {
+
+		const left = 'calc( var( --mnu-width ) - 100px )';
+
+		divContainer.style.display="none";
+
+		if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
+
+			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			divHamburger.style.left = '-100px';
+
+		} else {
+
+			divMenu.style.left = 0;
+			divHamburger.style.left = left;
+
+		}
+
+	}
+
+
 </script>
 </body>
 </html>

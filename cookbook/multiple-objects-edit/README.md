@@ -1,5 +1,19 @@
 
 
+
+## Multiple Objects Edit
+
+### [multiple objects interactive selection](  https://rawgit.com/ladybug-tools/spider/master/cookbook/multiple-objects-edit/multiple-objects-interactive-selection.html)
+
+Prototype interface and workflow for editing multiple surfaces in gbXML Viewer
+
+Constraints
+* Select and deselect multiple objects
+* Update attribute - such as color or type - to selected objects
+* Delete selected objects
+
+
+
 ### Drag Controls
 
 Only useful for dragging. Doh!
