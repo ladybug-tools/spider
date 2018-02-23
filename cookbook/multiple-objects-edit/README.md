@@ -3,7 +3,7 @@
 
 ## Multiple Objects Edit
 
-### [multiple objects interactive selection](  https://rawgit.com/ladybug-tools/spider/master/cookbook/multiple-objects-edit/multiple-objects-interactive-selection.html)
+### [multiple objects interactive selection]( https://rawgit.com/ladybug-tools/spider/master/cookbook/multiple-objects-edit/multiple-objects-interactive-selection.html )
 
 Prototype interface and workflow for editing multiple surfaces in gbXML Viewer
 
