@@ -20,17 +20,17 @@ The read me file with full details is in the main gbXML Viewer folder just above
 
 
 
-## 1. gbXML Viewer Core
+## gbXML Viewer Core
 
 This folder contains the basic script that does all the hard work of opening gbXML data files, reading the data and displaying the data in 3D using the [Three.js]( https://threejs.org ) JavaScript library.
 
-### [gbXML Viewer Core Read Me]( #../gv-cor/README.md )
+### [gbXML Viewer Core Read Me]( #gbxml-viewer/r10-4/gv-cor/README.md )
 
-### Full screen:  [gbXML Viewer10 Core]( #../gv-cor/gv-cor.html )
+### Full screen:  [gbXML Viewer Core]( #gbxml-viewer/r10-4/gv-cor/gv-cor.html )
 
 You may use this script as a template for building our own apps
 
-### Full screen:  [Test gbXML Viewer10 Core]( ../gbxml-viewer10-01-core/test-gbxml-viewer10-core.html )
+### Full screen:  [gbXML Viewer Core]( gbxml-viewer/r10-4/gv-cor/gv-cor.html )
 
 You may uses this script to verify that the code works in an iframe and that menus work as intended
 
