@@ -49,7 +49,7 @@
 			</p>
 			<p>Press Control-U/Command-Option-U to view the source code</p>
 			<p>Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors</p>
-			<p>Click <a href="https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart" target="_blank">&#x24D8</a> to go to the read me file which has more info</p>
+			<p>Click <a href="https://github.com/ladybug-tools/spider/tree/master/cookbook/nurbs-chart" target="_blank">&#x24D8</a> to go to the read me file which has more info</p>
 			</details>
 
 		</details>
@@ -107,8 +107,8 @@
 
 	function init() {
 
-		title.innerHTML = 
-			'<h2><a href="" >' + document.title +'</a> &nbsp; ' + 
+		title.innerHTML =
+			'<h2><a href="" >' + document.title +'</a> &nbsp; ' +
 				('&#x24D8').link( 'https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart' ) +
 			'</h2>';
 
@@ -171,7 +171,7 @@
 
 	function addNURBS() {
 
-		
+
 		const degree1 = nurbsControlPoints.length - 1; // # of spaces between x control points
 		const degree2 = nurbsControlPoints[ 0 ].length - 1; // # spaces between y control points
 
@@ -187,7 +187,7 @@
 
 /*
 		material = new THREE.MeshPhongMaterial( {
-			color: 0xffffff * Math.random(), 
+			color: 0xffffff * Math.random(),
 			polygonOffset: true,
 			polygonOffsetFactor: 1, // positive value pushes polygon further away
 			polygonOffsetUnits: 1,
