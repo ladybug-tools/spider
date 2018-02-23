@@ -12,7 +12,7 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	html { --mnu-color: MediumSlateBlue; --mnu-back-color: cornsilk; --mnu-width:300px; height: 100%; }
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: cornsilk; --mnu-width:350px; height: 100%; }
 
 	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
 
@@ -36,8 +36,8 @@
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 */
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 20px;
-		overflow-x: hidden; padding: 25px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 20px; max-height: 95%;
+		overflow: auto; padding: 25px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
 
 	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
@@ -69,7 +69,10 @@
 
 			<p><select id=selObjects size="10" >
 				<option>Select objects</option>
-			</select></p>
+			</select>
+		</p><p>
+			<button onclick=deselectAll(); >deselect all</button>
+			</p>
 
 			<p>
 				<select id=selColor size="10" >
@@ -83,9 +86,8 @@
 				<option>LavenderBlush </option>
 				<option>PaleGoldenRod </option>
 				<option>IndianRed</option>
-
-				SaddleBrown
 			</select>
+
 			</p>
 			<p>
 			<button onclick=updateColorObjects(); >update color selected objects</button>
@@ -164,7 +166,6 @@
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
 
-
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
 
@@ -208,6 +209,18 @@
 	}
 
 
+	function deselectAll() {
+
+		for ( let child of objects.children ) {
+
+			child.material.emissive.setHex( child.currentHex );
+			child.selected = false;
+
+		}
+
+		selObjects.innerHTML = '<option>Select objects</option>';
+
+	}
 
 	function updateSelection() {
 
@@ -262,7 +275,8 @@
 			}
 
 		}
-		selObjects.innerHTML = 'Select objects';
+
+		selObjects.innerHTML = '<option>Select objects</option>';
 
 	}
 
