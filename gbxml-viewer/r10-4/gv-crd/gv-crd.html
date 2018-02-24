@@ -6,7 +6,7 @@
 <meta name = "description" content = "Test sample gbXML viewer template" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-23" >
-<title>gv-tmp - gbXML Viewer Template</title>
+<title>gv-tmp - gbXML Viewer Duplicate Coordinates</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -21,18 +21,20 @@
 	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
+		<button id=butCoordinates onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-tmp/gv-tmp.js';
+			script.src = '../gv-crd/gv-crd.js';
 			divMenu.style.display='block';" >
-			gv-tmp gbxml viewer template </button>
+			gv-crd gbxml viewer Duplicate Coordinates </button>
 	</p>
 
-	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
+	<iframe id=ifrThree src='../gv-thr/gv-thr.html#../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml' ></iframe>
 
 	<p id=dragAreaToIframe class=dragDropArea >
 		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); >
 	<p>
+
+	<div id = "divLog" ></div>
 
 	<div id = "divSampleFiles" ></div>
 
@@ -51,6 +53,7 @@
 
 
 	COR.initCore();
+
 	init();
 
 
@@ -67,6 +70,7 @@
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
+
 		onHashChange();
 
 	}
@@ -83,6 +87,8 @@
 		axesHelper = icw.THR.axesHelper;
 		lightDirectional = icw.THR.lightDirectional;
 		colors = icw.GBX.colors;
+		gbxml = icw.GBX.gbxml;
+		gbxmlResponseXML = icw.GBX.gbxmlResponseXML;
 		gbjson = icw.GBX.gbjson;
 		surfaceMeshes = icw.GBX.surfaceMeshes;
 		surfaceEdges = icw.GBX.surfaceEdges;
@@ -92,7 +98,7 @@
 
 		console.log( 'scene', scene );
 
-		butTemplate.click();
+		butCoordinates.click();
 
 	}
 

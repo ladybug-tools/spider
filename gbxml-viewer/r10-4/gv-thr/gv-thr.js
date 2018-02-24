@@ -1,5 +1,5 @@
 
-	const uriGbxmlDefault =
+	var uriGbxmlDefault =
 	location.protocol === 'file:' ? // for testing
 	//		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 	//		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
@@ -113,6 +113,7 @@
 		THR.axesHelper = axesHelper;
 		THR.gridHelper = gridHelper;
 		THR.groundHelper = groundHelper;
+
 	}
 
 

@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-20" >
-<title>gbXML Viewer 10.4</title>
+<meta name = "date" content = "2018-02-23" >
+<title>gbXML Viewer 10.5</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -77,6 +77,11 @@
 					script.src = '../gv-edt/gv-edt.js';" >
 				edit file </button>
 
+				<button id=butCoordinates onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-crd/gv-crd.js';" >
+				edit duplicate surfaces </button>
+
 				<hr>
 
 				<details open>
@@ -94,7 +99,7 @@
 						script.src = '../gv-ana/gv-ana.js'; " >
 					sun-path / analemma</button>
 
-	<!--
+<!--
 
 					<button id=butSunRange onclick="
 					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );

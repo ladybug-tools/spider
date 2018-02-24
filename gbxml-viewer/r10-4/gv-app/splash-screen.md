@@ -9,8 +9,26 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 ### Must watch video:
 [![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 
+<!--
+<details open>
+
+<summary>Welcome  - ~ R.</summary>
+
+</details>
+-->
 
 <details open>
+
+<summary>Welcome 2018-02-23 - ~ R10.5</summary>
+
+* Add 'edit duplicate surfaces' module
+	* Finds all instances of two surfaces with identical coordinates
+	* Tools to help with understanding circumstances
+	* Delete duplicates and save changes
+
+### Issue: After each file load, you must toggle each menu button
+
+</details><details open>
 
 <summary>Welcome 2018-02-21 ~ R10.4</summary>
 
