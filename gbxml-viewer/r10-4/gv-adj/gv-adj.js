@@ -179,10 +179,7 @@
 		const surfaces = GBX.gbjson.Campus.Surface;
 		const b = '<br>';
 		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butDuplicateAdjacencies onclick=GBV.toggleDuplicates(butDuplicateAdjacencies,surfaceAdjacentsDuplicates); >toggle all duplicates</button>' +
-			'</p>';
+		let flowContent = '';
 
 		for ( let surface of surfaces ) {
 
