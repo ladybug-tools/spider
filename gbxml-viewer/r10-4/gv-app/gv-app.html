@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-23" >
-<title>gbXML Viewer 10.5</title>
+<meta name = "date" content = "2018-02-25" >
+<title>gbXML Viewer 10.6</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -15,7 +15,8 @@
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
-
+<script src = "../gv-gbv/gv-gbv.js" ></script>
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 	<div id = "divMenu" >
 
 		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
@@ -81,6 +82,11 @@
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-crd/gv-crd.js';" >
 				edit duplicate surfaces </button>
+
+				<button id=butAdjacents onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-adj/gv-adj.js';" >
+				edit duplicate adjacents </button>
 
 				<hr>
 
@@ -178,13 +184,13 @@
 
 			<p >
 
-				<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
 
 				<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>
 
 				<button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>
 
-				<button onclick=setAllVisible();zoomObjectBoundingSphere(surfaceMeshes); >reset view</button>
+				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(surfaceMeshes); >reset view</button>
 
 			</p>
 
@@ -215,10 +221,10 @@
 	let gbxml;
 	let gbxmlResponseXML;
 	let gbjson;
+	let surfaceJson;
 	let surfaceMeshes;
 	let surfaceEdges;
 	let surfaceTypes;
-	let zoomObjectBoundingSphere;
 	let setAllVisible;
 
 	function onloadThreejs() {
@@ -227,11 +233,10 @@
 		gbxml = GBX.gbxml;
 		gbxmlResponseXML = GBX.gbxmlResponseXML;
 		gbjson = GBX.gbjson;
+		surfaceJson = gbjson.Campus.Surface;
 		surfaceMeshes = GBX.surfaceMeshes;
 		surfaceEdges = GBX.surfaceEdges;
 		surfaceTypes = GBX.surfaceTypes;
-		zoomObjectBoundingSphere = GBX.zoomObjectBoundingSphere;
-		setAllVisible = GBX.setAllVisible;
 
 	}
 

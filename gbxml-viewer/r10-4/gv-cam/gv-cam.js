@@ -146,16 +146,16 @@
 			avatar = new THREE.Mesh( geoHead, material );
 			avatar.add( new THREE.Mesh( geoTail, material ) );
 
-			avatar.position.copy( axesHelper.position );
+			avatar.position.copy( THR.axesHelper.position );
 			avatar.castShadow = avatar.receiveShadow = true;
 
 		}
 
 		size = gbjson.useSIUnitsForResults.toLowerCase() === 'true' ? 0.2 : 0.6;
 		avatar.scale.set( size, size, size );
-		avatar.position.copy( axesHelper.position );
+		avatar.position.copy( THR.axesHelper.position );
 		avatar.visible = true;
-		scene.add( avatar );
+		THR.scene.add( avatar );
 
 	}
 
@@ -175,10 +175,10 @@
 						avatar.add( mesh );
 			*/
 
-			controls.target.set( 0, 0, 2 );
-			camera.position.set( -1, -8, 3 );
+			THR.controls.target.set( 0, 0, 2 );
+			THR.camera.position.set( -1, -8, 3 );
 
-			avatar.add( camera );
+			avatar.add( THR.camera );
 
 		} else {
 
@@ -192,9 +192,9 @@
 					avatar.add( mesh );
 		*/
 
-			controls.target.set( 0, 0, 2 );
-			camera.position.set( -1, -8, 3 );
-			avatar.add( camera );
+			THR.controls.target.set( 0, 0, 2 );
+			THR.camera.position.set( -1, -8, 3 );
+			avatar.add( THR.camera );
 
 		}
 
@@ -206,7 +206,7 @@
 
 		//console.log( 'key', event.keyCode );
 
-		controls.enableKeys = false;
+		THR.controls.enableKeys = false;
 		event.preventDefault();
 
 		switch( event.keyCode ) {

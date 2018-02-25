@@ -56,7 +56,7 @@
 				'<p>' +
 					'toggles <button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
 					' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-					' <button onclick=REP.allVisible(); >all visible</button>' +
+					' <button onclick=GBV.setAllVisible(); >all visible</button>' +
 				'</p>' +
 
 				'<div id=divReport ></div>' +
@@ -402,7 +402,7 @@
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
 						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-					( spaceId ? 'Space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
+						( spaceId ? 'Space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
 
 						'<hr>' +
 						'id of duplicate: <button onclick=REP.toggleSurface("' + surfOther.id + '"); >' + surfOther.id + '</button>' + b +
@@ -544,6 +544,7 @@
 						'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
 						'surfaceType: ' + surface.surfaceType + b +
 						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
+						( surface.constructionIdRef ? 'construction id ref: ' + surface.constructionIdRef + b : '' ) +
 						( surface.CADObjectId ?
 							'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
 							: ''
@@ -780,15 +781,15 @@
 		const radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
 		//console.log( 'bbb', center, radius );
 
-		scene.remove( telltale );
+		THR.scene.remove( telltale );
 		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
 		telltale = new THREE.Mesh( geometry, material );
 		telltale.position.copy( center );
-		scene.add( telltale );
+		THR.scene.add( telltale );
 
-		controls.target.copy( center );
-		camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
+		THR.controls.target.copy( center );
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
 
 	}
 

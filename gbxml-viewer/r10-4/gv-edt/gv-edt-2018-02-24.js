@@ -23,9 +23,9 @@
 
 					<div id=divUpdates >
 						<button onclick=EDT.updateSurface(); title='Click here to confirm the updates' >update surface</button>
-						<button onclick=GBV.deleteSurface(selSurface.value); title='Removes the selected surface from the model' >delete surface</button>
+						<button onclick=EDT.deleteSurface(); title='Removes the selected surface from the model' >delete surface</button>
 						<button onclick=EDT.addModifiedBy(); title='adds name, app, date and time of the edits' >add ModifiedBy </button>
-						<button onclick=GBV.saveFile(); title='creates a new file with the changes' >save edits</button>
+						<button onclick=EDT.saveFile(); title='creates a new file with the changes' >save edits</button>
 <!--						<button onclick=EDT.viewPreviousUpdates(); >view previous update</button> -->
 					</div>
 
@@ -350,7 +350,7 @@
 
 
 
-	EDT.xxxxzoomIntoSurface = ( surface ) => {
+	EDT.zoomIntoSurface = ( surface ) => {
 		//console.log( 'surface', surface );
 
 		const center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );

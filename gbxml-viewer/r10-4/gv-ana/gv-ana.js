@@ -156,11 +156,11 @@
 
 	function resetShadowMap() {
 
-		if ( renderer.shadowMap.enabled === false ) {
+		if ( THR.renderer.shadowMap.enabled === false ) {
 
-		renderer.shadowMap.enabled = true;
+			THR.renderer.shadowMap.enabled = true;
 
-			scene.traverse( function ( child ) {
+			THR.scene.traverse( function ( child ) {
 
 				child.castShadow = true;
 				child.receiveShadow = true;
@@ -182,7 +182,7 @@
 		colors = [ 'bisque', 'deeppink', 'sienna', 'darkorange', 'indigo', 'lime',
 		'purple', 'honeydew', 'coral', 'gold', 'gray', 'maroon' ];
 
-		scene.remove( analemma );
+		THR.scene.remove( analemma );
 
 		analemma = new THREE.Object3D();
 
@@ -258,10 +258,10 @@
 
 		//		object3D.remove( analemma );
 		//		object3D.add( analemma );
-		analemma.position.copy( axesHelper.position );
+		analemma.position.copy( THR.axesHelper.position );
 		//		analemma.rotation.z += Math.PI;
 
-		scene.add( analemma );
+		THR.scene.add( analemma );
 
 		//console.log( 'analemma', analemma );
 
@@ -273,14 +273,14 @@
 
 		var geometry, material, d;
 
-		lightDirectional.remove( sun );
+		THR.lightDirectional.remove( sun );
 		geometry = new THREE.SphereBufferGeometry( parameters.analemmaRadius / 10, 20, 10 );
 		material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 		sun = new THREE.Mesh( geometry, material );
 
 		sun.name = 'sun';
 		//console.log( 'icw', icw, lightDirectional );
-		lightDirectional.add( sun );
+		THR.lightDirectional.add( sun );
 
 		//		scene.add( lights );
 
@@ -300,7 +300,7 @@
 		dateThere = new Date( Date.UTC( year, parameters.month, parameters.date, parameters.hour, parameters.minutes, 0 ) );
 		sun.userData.position = getSunPositionXYZ( parameters.analemmaRadius, dateThere, parameters.latitude, parameters.longitude );
 
-		lightDirectional.position.copy( controls.target.clone().add( sun.userData.position.xyz ) );
+		THR.lightDirectional.position.copy( THR.controls.target.clone().add( sun.userData.position.xyz ) );
 
 		//console.log( 'lightDirectional.position', lightDirectional.position );
 		//console.log( 'sun.position', sun.position );

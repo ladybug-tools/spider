@@ -233,9 +233,9 @@
 
 	SET.toggleShadowMap = () => {
 
-		renderer.shadowMap.enabled = !renderer.shadowMap.enabled;
+		THR.renderer.shadowMap.enabled = !THR.renderer.shadowMap.enabled;
 
-		scene.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
 //			if ( child.material ) {
 
@@ -268,7 +268,7 @@
 
 	SET.toggleWireframe = () => {
 
-		scene.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -284,11 +284,11 @@
 
 	SET.toggleSurfaceNormals = () => {
 
-		let helperNormalsFaces = scene.getObjectByName( 'helperNormalsFaces' );
+		let helperNormalsFaces = THR.scene.getObjectByName( 'helperNormalsFaces' );
 
 		if ( helperNormalsFaces ) {
 
-			scene.remove( helperNormalsFaces );
+			THR.scene.remove( helperNormalsFaces );
 
 		}
 
@@ -310,7 +310,7 @@
 			} );
 
 			helperNormalsFaces.name = 'helperNormalsFaces';
-			scene.add( helperNormalsFaces );
+			THR.scene.add( helperNormalsFaces );
 			helperNormalsFaces.visible = false;
 
 		}
@@ -323,7 +323,7 @@
 
 	SET.toggleAxesHelper = () => {
 
-		axesHelper.visible = !axesHelper.visible;
+		THR.axesHelper.visible = !THR.axesHelper.visible;
 
 	}
 
@@ -339,7 +339,7 @@
 
 			meshGridHelper = new THREE.GridHelper( 3 * surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
 			meshGridHelper.rotation.x = Math.PI / 2;
-			meshGridHelper.position.set( axesHelper.position.x, axesHelper.position.y, bbox.min.z );
+			meshGridHelper.position.set( THR.axesHelper.position.x, THR.axesHelper.position.y, bbox.min.z );
 			meshGridHelper.name = 'gridHelper';
 			surfaceMeshes.add( meshGridHelper );
 
@@ -368,7 +368,7 @@
 			meshGroundHelper = new THREE.Mesh( geometry, material );
 			meshGroundHelper.name = 'groundHelper';
 			meshGroundHelper.receiveShadow = true;
-			meshGroundHelper.position.set( axesHelper.position.x, axesHelper.position.y, bbox.min.z - 0.5 );
+			meshGroundHelper.position.set( THR.axesHelper.position.x, THR.axesHelper.position.y, bbox.min.z - 0.5 );
 
 			surfaceMeshes.add( meshGroundHelper );
 
@@ -384,7 +384,7 @@
 
 	SET.toggleSceneAutoRotate = () => {
 
-		controls.autoRotate = !controls.autoRotate;
+		THR.controls.autoRotate = !THR.controls.autoRotate;
 
 	}
 
@@ -392,25 +392,25 @@
 
 	SET.toggleCameraOrthoPerspective = () => {
 
-		if ( !SET.cameraOrtho ) {
+		if ( SET.cameraOrtho === undefined ) {
 
 			const width = 300; //surfaceMeshes.userData.radius > 10 ? 3 * surfaceMeshes.userData.radius : 200;
 			const height = 300; // surfaceMeshes.userData.radius > 10 ? 3 * surfaceMeshes.userData.radius : 200; //; //  * surfaceMeshes.userData.radius;
 			SET.cameraOrtho = new THREE.OrthographicCamera( width / -3, width / 3, height / 3, height / - 3, 1, 1000 );
 			SET.cameraOrtho.up.set( 0, 0, 1 );
-			scene.add( SET.cameraOrtho );
-			SET.controlsOrtho = new THREE.OrbitControls( SET.cameraOrtho, renderer.domElement );
+			THR.scene.add( SET.cameraOrtho );
+			SET.controlsOrtho = new THREE.OrbitControls( SET.cameraOrtho, THR.renderer.domElement );
 
-			camera = SET.cameraOrtho;
-			camera.updateProjectionMatrix();
-			controls = SET.controlsOrtho;
+			THR.camera = SET.cameraOrtho;
+			THR.camera.updateProjectionMatrix();
+			THR.controls = SET.controlsOrtho;
 
-			GBX.zoomObjectBoundingSphere( surfaceMeshes );
+			GBV.zoomObjectBoundingSphere( surfaceMeshes );
 
 		} else {
 
-			SET.allVisible();
-			GBX.zoomObjectBoundingSphere( surfaceMeshes );
+			GBV.setAllVisible();
+			GBV.zoomObjectBoundingSphere( surfaceMeshes );
 			SET.cameraOrtho = undefined;
 
 		}
@@ -424,7 +424,7 @@
 		const opacity = parseInt( rngOpacity.value, 10 );
 		outOpacity.value = opacity + '%';
 
-		scene.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -442,7 +442,7 @@
 
 		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
 
-		scene.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -488,10 +488,10 @@
 		//console.log( 'bmesh', bmesh );
 		*/
 
-		scene.updateMatrixWorld();
+		THR.scene.updateMatrixWorld();
 
 
-		scene.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 

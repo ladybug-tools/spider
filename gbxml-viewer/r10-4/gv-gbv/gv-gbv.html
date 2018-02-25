@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer reports" >
+<meta name = "description" content = "Utilities to toggle, zoom and view gbXML elements" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-15" >
-<title>gv-rep</title>
+<meta name = "date" content = "2018-02-24" >
+<title>gv-gbv - gbXML Viewer gbXML View Utilities</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -18,20 +18,20 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'gv rep' to load test menu</p>
+	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butReports onclick =
+		<button id=butGbxmlView onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-rep/gv-rep.js';
+			script.src = '../gv-gbv/gv-gbv.js';
 			divMenu.style.display='block';" >
-			gv rep </button>
+			gv-gbv gbXML View Utilities </button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
 
 	<p id=dragAreaToIframe class=dragDropArea >
-		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this) >
+		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); >
 	<p>
 
 	<div id = "divSampleFiles" ></div>
@@ -76,8 +76,9 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
-		GBV = icw.GBV;
+		THR = icw.THR;
 		GBX = icw.GBX;
+		GBV = icw.GBV;
 		renderer = icw.THR.renderer;
 		camera = icw.THR.camera;
 		controls = icw.THR.controls;
@@ -85,18 +86,22 @@
 		axesHelper = icw.THR.axesHelper;
 		lightDirectional = icw.THR.lightDirectional;
 		colors = icw.GBX.colors;
-		gbjson = icw.GBX.gbjson;
+		//gbxml = icw.GBX.gbxml;
+		//gbjson = icw.GBX.gbjson;
+		//surfaceJson = gbjson.Campus.Surface;
 		surfaceMeshes = icw.GBX.surfaceMeshes;
 		surfaceEdges = icw.GBX.surfaceEdges;
-		divLog = icw.divLog;
-		zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
-		setAllVisible = icw.GBX.setAllVisible;
+		surfaceTypes = icw.GBX.surfaceTypes;
+		spaceXml = gbjson.Campus.Building.Space;
+
+		//divLog = icw.divLog;
+		//zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
+		//setAllVisible = icw.GBX.setAllVisible;
 
 		console.log( 'scene', scene );
-		butReports.click();
+		controls.autoRotate = false;
 
-
-
+		butGbxmlView.click();
 
 	}
 
@@ -104,10 +109,13 @@
 
 	function onHashChange() {
 
-		ifrThree.src = COR.threeDefaultFile + location.hash;
-		ifrThree.contentWindow.location.reload();
-	}
+		const url = COR.threeDefaultFile + location.hash;
+		console.log( 'url', url );
 
+		ifrThree.src = url;
+		ifrThree.contentWindow.location.reload();
+
+	}
 
 
 </script>

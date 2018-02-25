@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Core read and display a gbXML file using Three.js" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-20" >
-<title>gv-thr gbXML Viewer10.4 Three.js</title>
+<meta name = "date" content = "2018-02-24" >
+<title>gv-thr gbXML Viewer Three.js</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -27,6 +27,7 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
+<script src = "../gv-gbv/gv-gbv.js" ></script>
 
 	<div id = "divMenu" >
 
@@ -45,13 +46,13 @@
 
 		<p id = "divContents" >
 
-			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
 
 			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
 
 			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
 
-			<button onclick=GBX.setAllVisible();GBX.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
+			<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
 
 		</p>
 
@@ -69,7 +70,7 @@
 
 	onloadThreejs = () => {
 
-		console.log( 'scene', scene );
+		console.log( 'scene', THR.scene );
 
 	}
 

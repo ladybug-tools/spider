@@ -47,8 +47,8 @@
 
 			mouse = new THREE.Vector2();
 
-			renderer.domElement.addEventListener( 'click', onRendererMouseMoveHUD, false );
-			renderer.domElement.addEventListener( 'touchstart', onRendererTouchStartHUD, false );
+			THR.renderer.domElement.addEventListener( 'click', onRendererMouseMoveHUD, false );
+			THR.renderer.domElement.addEventListener( 'touchstart', onRendererTouchStartHUD, false );
 
 			butHeadsUp.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -71,8 +71,8 @@
 		divHeadsUp.style.display = 'none';
 		surfaceMeshesChildren = [];
 
-		renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
-		renderer.domElement.removeEventListener( 'click', onRendererMouseDownHUD, false );
+		THR.renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
+		THR.renderer.domElement.removeEventListener( 'click', onRendererMouseDownHUD, false );
 
 		butHeadsUp.style.backgroundColor = '';
 
@@ -88,11 +88,11 @@
 
 		if ( event.buttons > 0 ) { return; }
 
-		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+		mouse.x = ( event.clientX / THR.renderer.domElement.clientWidth ) * 2 - 1;
+		mouse.y = - ( event.clientY / THR.renderer.domElement.clientHeight ) * 2 + 1;
 
 		raycaster = new THREE.Raycaster();
-		raycaster.setFromCamera( mouse, camera );
+		raycaster.setFromCamera( mouse, THR.camera );
 
 		intersects = raycaster.intersectObjects( surfaceMeshes.children );
 
@@ -251,7 +251,7 @@
 			'</p>' +
 			'<p>' +
 				'<button onclick=intersected.visible=!intersected.visible;  >toggle visibility</button> ' +
-				'<button class=toggle onclick=HUD.deleteSurface("' + data.id + '"); >delete surface</button>' +
+				'<button class=toggle onclick=GBV.deleteSurface("' + data.id + '"); >delete surface</button>' +
 			'</p>' +
 
 			adjacenciesTxt +

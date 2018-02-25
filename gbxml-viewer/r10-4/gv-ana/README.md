@@ -1,12 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-ana/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10-4/gv-ana/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer11 Sun Path / Analemma Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-ana/gv-ana.html width=100% height=500px >Iframes are not displayed on github.com</iframe>
+# gbXML Viewer Sun Path / Analemma Read Me
 
 
-## Full screen test: [gv-ana gbXML Viewer11 Analemma]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-ana/gv-ana.html )
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-4/gv-ana/gv-ana.html width=100% height=500px >Iframes are not displayed on github.com</iframe>
+
+
+## Full screen test: [gv-ana gbXML Viewer Sun Path / Analemma]( http://www.ladybug.tools/spider/gbxml-viewer/r10-4/gv-ana/gv-ana.html )
 
 
 
@@ -22,7 +22,8 @@ See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.
 
 ## Issues
 
-* 2018-02-21 ~ // needs name space update
+* 2018-02-24 ~ Play the year toggle broken
+* 2018-02-21 ~ needs name space update
 
 
 ## Links of Interest
@@ -34,7 +35,7 @@ See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.
 
 ### 2018-02-21 ~ Theo
 
-R11
+r10
 
 ### 2017-12-17 ~ Theo
 

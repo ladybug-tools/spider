@@ -13,6 +13,7 @@
 	GBX.gbxml = null;
 	GBX.gbxmlResponseXML;
 	GBX.gbjson;
+	GBX.surfaceJson = null;
 
 	GBX.surfaceMeshes = null;
 	GBX.surfaceEdges = null;
@@ -38,14 +39,15 @@
 	}
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
-	let renderer, camera, controls, scene;
-	let lightAmbient, lightDirectional, lightPoint;
-	let cameraHelper, axesHelper, gridHelper, groundHelper;
+
 
 
 
 	THR.initThreeGbxml = () => {
 
+		let renderer, camera, controls, scene;
+		let lightAmbient, lightDirectional, lightPoint;
+		let cameraHelper, axesHelper, gridHelper, groundHelper;
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMap.enabled = true;
@@ -117,6 +119,22 @@
 	}
 
 
+	THR.varsGlobalToLocal = () => {
+
+		const renderer = THR.renderer;
+		const scene = THR.scene;
+		const camera = THR.camera;
+		const controls = THR.controls;
+		const lightAmbient = THR.lightAmbient;
+		const lightDirectional = THR.lightDirectional;
+		const lightPoint = THR.lightPoint;
+		const cameraHelper = THR.cameraHelper;
+		const axesHelper = THR.axesHelper;
+		const gridHelper = THR.gridHelper;
+		const groundHelper = THR.groundHelper;
+
+	}
+
 	// available if parent wants it.
 	// called by parseFileXML()
 
@@ -130,10 +148,10 @@
 
 	THR.onWindowResize = () => {
 
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
+		THR.camera.aspect = window.innerWidth / window.innerHeight;
+		THR.camera.updateProjectionMatrix();
 
-		renderer.setSize( window.innerWidth, window.innerHeight );
+		THR.renderer.setSize( window.innerWidth, window.innerHeight );
 
 		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
@@ -144,8 +162,8 @@
 	THR.animate = () => {
 
 		requestAnimationFrame( THR.animate );
-		renderer.render( scene, camera );
-		controls.update();
+		THR.renderer.render( THR.scene, THR.camera );
+		THR.controls.update();
 
 	}
 
@@ -178,6 +196,7 @@
 			//console.log( 'GBX.gbxml', GBX.gbxml );
 
 			GBX.gbjson = GBX.parseFileXML( GBX.gbxml );
+//			GBX.surfaceJson = GBX.gbjson.Campus.Surface;
 
 			if ( files.files[ 0 ] ) { GBX.gbjson.name = files.files[ 0 ].name; }
 
@@ -202,6 +221,7 @@
 	GBX.parseFileXML = xmlNode => {
 
 		GBX.gbjson = GBX.XML2jsobj( xmlNode );
+		GBX.surfaceJson = GBX.gbjson.Campus.Surface;
 		//console.log( 'GBX.gbjson', GBX.gbjson );
 
 		GBX.parseGbJson( GBX.gbjson );
@@ -321,7 +341,7 @@
 
 		}
 
-		scene.remove( GBX.surfaceMeshes, GBX.surfaceEdges );
+		THR.scene.remove( GBX.surfaceMeshes, GBX.surfaceEdges );
 
 		if ( GBX.surfaceMeshes ) {
 
@@ -378,7 +398,7 @@
 
 		}
 
-		scene.add( GBX.surfaceMeshes, GBX.surfaceEdges );
+		THR.scene.add( GBX.surfaceMeshes, GBX.surfaceEdges );
 
 		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
@@ -483,6 +503,14 @@
 
 	GBX.zoomObjectBoundingSphere = obj => {
 
+		const renderer = THR.renderer;
+		const scene = THR.scene;
+		const camera = THR.camera;
+		const controls = THR.controls;
+		const lightDirectional = THR.lightDirectional;
+		const lightPoint = THR.lightPoint;
+		const axesHelper = THR.axesHelper;
+
 		if ( obj.geometry ) {
 			// might not be necessary
 
@@ -526,6 +554,13 @@
 
 
 	GBX.setAllVisible = () => {
+
+		const renderer = THR.renderer;
+		const scene = THR.scene;
+		let camera = THR.camera;
+		let controls = THR.controls;
+		const lightPoint = THR.lightPoint;
+
 
 		GBX.surfaceMeshes.visible = true;
 

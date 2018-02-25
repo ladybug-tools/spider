@@ -11,7 +11,7 @@
 </head>
 <body>
 <script src = "../gv-cor/gv-cor.js" ></script>
-<script src = "../gv-thr/gv-thr.js" ></script>
+
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 	<div id = "divHeader" >
@@ -76,6 +76,8 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
+		THR = icw.THR;
+		GBV = icw.GBV;
 		renderer = icw.THR.renderer;
 		camera = icw.THR.camera;
 		controls = icw.THR.controls;
@@ -87,8 +89,8 @@
 		surfaceMeshes = icw.GBX.surfaceMeshes;
 		surfaceEdges = icw.GBX.surfaceEdges;
 		divLog = icw.divLog;
-		zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
-		setAllVisible = icw.GBX.setAllVisible;
+		//zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
+		//setAllVisible = icw.GBX.setAllVisible;
 
 		console.log( 'scene', scene );
 

@@ -11,7 +11,7 @@
 </head>
 <body>
 <script src = "../gv-cor/gv-cor.js" ></script>
-<script src = "../gv-thr/gv-thr.js" ></script>
+
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 	<div id = "divHeader" >
@@ -80,23 +80,27 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
-		renderer = icw.THR.renderer;
-		camera = icw.THR.camera;
-		controls = icw.THR.controls;
-		scene = icw.THR.scene;
-		axesHelper = icw.THR.axesHelper;
-		lightDirectional = icw.THR.lightDirectional;
-		colors = icw.GBX.colors;
-		gbxml = icw.GBX.gbxml;
-		gbxmlResponseXML = icw.GBX.gbxmlResponseXML;
-		gbjson = icw.GBX.gbjson;
-		surfaceMeshes = icw.GBX.surfaceMeshes;
-		surfaceEdges = icw.GBX.surfaceEdges;
-		divLog = icw.divLog;
-		zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
-		setAllVisible = icw.GBX.setAllVisible;
+		THR = icw.THR;
+		GBX = icw.GBX;
+		GBV = icw.GBV;
+		//renderer = icw.THR.renderer;
+		//camera = icw.THR.camera;
+		//controls = icw.THR.controls;
+		//scene = icw.THR.scene;
+		//axesHelper = icw.THR.axesHelper;
+		//lightDirectional = icw.THR.lightDirectional;
+		//colors = icw.GBX.colors;
+		//gbxml = icw.GBX.gbxml;
+		//gbxmlResponseXML = icw.GBX.gbxmlResponseXML;
+		//gbjson = icw.GBX.gbjson;
+		//surfaceJson = gbjson.Campus.Surface;
+		//surfaceMeshes = icw.GBX.surfaceMeshes;
+		//surfaceEdges = icw.GBX.surfaceEdges;
+		//divLog = icw.divLog;
+		//zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
+		//setAllVisible = icw.GBX.setAllVisible;
 
-		console.log( 'scene', scene );
+		console.log( 'scene', THR.scene );
 
 		butCoordinates.click();
 
