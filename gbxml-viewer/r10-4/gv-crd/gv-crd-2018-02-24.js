@@ -174,7 +174,7 @@
 
 		const info =
 
-		sumSummary.innerHTML= 'Duplicate Coordinates &raquo; ' + count
+		sumSummary.innerHTML= 'Duplicate Surfaces &raquo; ' + count;
 		divInfo.innerHTML = 'Two surfaces with identical coordinates';
 		divCoordinates.innerHTML= flowContent;
 

@@ -1,7 +1,7 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10.6
+# gbXML Viewer R10.7
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
@@ -17,9 +17,23 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 </details>
 -->
 
+### Issue: After each file load, you should toggle each menu button
+
 <details open>
 
-<summary>Welcome 2018-02-25 - ~ R10.6</summary>
+<summary>Welcome 2018-02-25 ~ R10.7</summary>
+
+Heads-up Display
+* Many fixes
+* Streamline/simplify the UI
+
+Edit Duplicate Adjacents
+* Simplified
+* Works more closely with HUD
+
+</details><details>
+
+<summary>Welcome 2018-02-25 ~ R10.6</summary>
 * Add GBV module
 	* No user iterface interaction / all behind the scenes
 	* Standardizes and simplifies many viewing functions
@@ -27,9 +41,7 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 	* Finds all instances of surfaces with two identical adjacent spaces
 	* Tools to help with understanding circumstances
 	* At a very early stage. Cannot edit or save yet
-</details><details open>
-
-
+</details><details>
 
 <summary>Welcome 2018-02-23 - ~ R10.5</summary>
 
@@ -38,7 +50,7 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 	* Tools to help with understanding circumstances
 	* Delete duplicates and save changes
 
-### Issue: After each file load, you must toggle each menu button
+
 
 </details><details open>
 

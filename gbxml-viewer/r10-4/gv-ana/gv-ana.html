@@ -6,12 +6,12 @@
 <meta name = "description" content = "Test sample gbXML viewer Sun path / Analemma" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-21" >
-<title>gv-ana gbxml-viewer-template-Sun pathe / Analemma</title>
+<title>gv-ana gbxml-viewer-template-Sun Path / Analemma</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
 <script src = "../gv-cor/gv-cor.js" ></script>
-<script src = "../gv-thr/gv-thr.js" ></script>
+
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 	<div id = "divHeader" >
@@ -27,7 +27,7 @@
 			const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = '../gv-ana/gv-ana.js';
 			divMenu.style.display='block';" >
-			gv-ana gbxml-viewer Sun path / Analemma </button>
+			gv-ana gbxml-viewer Sun ath / Analemma </button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
@@ -78,21 +78,13 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
-		renderer = icw.THR.renderer;
-		camera = icw.THR.camera;
-		controls = icw.THR.controls;
-		scene = icw.THR.scene;
-		axesHelper = icw.THR.axesHelper;
-		lightDirectional = icw.THR.lightDirectional;
-		colors = icw.GBX.colors;
-		gbjson = icw.GBX.gbjson;
-		surfaceMeshes = icw.GBX.surfaceMeshes;
-		surfaceEdges = icw.GBX.surfaceEdges;
-		divLog = icw.divLog;
-		zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
-		setAllVisible = icw.GBX.setAllVisible;
+		THR = icw.THR;
+		GBX = icw.GBX;
+		GBV = icw.GBV;
 
-		console.log( 'scene', scene );
+		THR.controls.autoRotate = false;
+
+		console.log( 'scene', THR.scene );
 
 		butAnalemma.click();
 

@@ -4,6 +4,8 @@
 
 	initGbxmlView();
 
+
+
 	function initGbxmlView() {
 
 		if ( !window.butGbxmlView ) { return; }
@@ -58,7 +60,7 @@
 			<hr>
 			<select id = "selSurface" size=10 ></select>
 			<button onclick=GBV.showSurface(selSurface.value); >GBV.showSurface</button>
-			<button onclick=GBV.showCadId(encodeURI(surfaceJson[selSurface.selectedIndex].CADObjectId)); >GBV.showCadId</button>
+			<button onclick=GBV.showCadId(encodeURI(GBX.surfaceJson[selSurface.selectedIndex].CADObjectId)); >GBV.showCadId</button>
 			<button onclick=GBV.zoomIntoSurface(selSurface.value); >GBV.zoomIntoSurface</button>
 			<button onclick=GBV.deleteSurface(selSurface.value); >GBV.deleteSurface</button>
 
@@ -79,18 +81,19 @@
 	function getMenuItems() {
 
 		let txt = '';
-		surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
+		GBX.surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
 
 		selSurface.innerHTML = txt;
 		selSurface.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
 
 		txt = '';
-		surfaceTypes.forEach( function( element ) { txt += '<option>' + element + '</option>'; } );
+		GBX.surfaceTypes.forEach( function( element ) { txt += '<option>' + element + '</option>'; } );
 
 		selType.innerHTML = txt;
 		selType.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
 
 		txt = '';
+		const spaceXml = GBX.gbjson.Campus.Building.Space;
 		spaceXml.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
 
 		selSpace.innerHTML = txt;
@@ -140,6 +143,14 @@
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
 
+		if ( window.divHeadsUp ) {
+
+			const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === id );
+			intersected = surfaceMesh;
+			HUD.setHeadsUp();
+
+		}
+
 	};
 
 
@@ -159,6 +170,18 @@
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
 	};
+
+
+
+	GBV.getSpaceId = ( spaceIdRef ) => {
+
+		if ( !GBX.gbjson.Campus.Building.Space || !GBX.gbjson.Campus.Building.Space.length ) { return; }
+
+		const space = GBX.gbjson.Campus.Building.Space.find( element => element.id === spaceIdRef );
+
+		return space;
+
+	}
 
 
 
@@ -188,6 +211,34 @@
 		}
 
 	};
+
+
+
+	GBV.showStorey = ( id ) => {
+
+		//console.log( 'id', id );
+
+		spaces = GBX.gbjson.Campus.Building.Space;
+
+		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId
+
+			if ( !adjacentSpaceId ) { continue; }
+
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === id ? true : child.visible );
+
+		}
+
+		const storey = GBX.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
+
+		console.log( 'storey', storey );
+
+	}
 
 
 

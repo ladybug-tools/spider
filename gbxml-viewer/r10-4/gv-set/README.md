@@ -48,6 +48,11 @@
 See also main gbXML Viewer read me file
 
 
+### 2018-02-25 ~ Theo
+
+R10.7
+* making more vars name space friendly
+
 ### 2018-02-24 ~ Theo
 
 R10.4

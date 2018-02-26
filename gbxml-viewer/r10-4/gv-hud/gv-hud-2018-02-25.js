@@ -10,48 +10,40 @@
 	var telltalesPolyloop;
 
 
-
 	initHeadsUp();
 
 	function initHeadsUp() {
 
+		if ( !divHeadsUp ) {
+
+			divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
+			divHeadsUp.style.cssText =
+				'background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px ); '+
+				'min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto; ' +
+				'padding: 5px 5px 10px 5px; position: fixed; resize: both; top: 20px; z-index: 10; ' +
+			'';
+
+			divHeadsUp.innerHTML =
+				'<div id=divDraggableHeader2 title="Open JavaScript console to see more data" >' +
+					'Click here to move' +
+					'<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>' +
+				'</div>' +
+				'<div id=divItems ></div>' +
+			'';
+
+			divDraggableHeader2.style.cssText =
+				'background-color: indianred; color: #fff; cursor: move; padding: 10px; z-index: 10;';
+
+			divDraggableHeader2.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+
+			divDraggableHeader2.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			divDraggableHeader2.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+
+//			window.addEventListener( 'mouseup', onMouseUpDraggable, false );
+
+		}
+
 		if ( butHeadsUp.style.backgroundColor !== 'var( --but-bg-color )' ) {
-
-			if ( !divHeadsUp ) {
-
-				divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
-				divHeadsUp.style.cssText =
-				`
-					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px );
-					min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
-					padding: 5px 5px 10px 5px; position: fixed; resize: both; top: 20px; z-index: 10;
-				`;
-
-				divHeadsUp.innerHTML =
-				`
-					<div id=divDraggableHeader2 title="Open JavaScript console to see more data" >
-						Click here to move
-						<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
-					</div>
-					<div id=divHUDheader ></div>
-					<div id=divHUDItems ></div>
-					<div id=divHUDfooter ></div>
-				`;
-
-				setSelectSurfaceType();
-
-				divDraggableHeader2.style.cssText =
-					'background-color: indianred; color: #fff; cursor: move; padding: 10px; z-index: 10;';
-
-				divDraggableHeader2.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-
-				divDraggableHeader2.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-				divDraggableHeader2.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
-
-				//window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false ); //in COR
-
-
-			}
 
 			mouse = new THREE.Vector2();
 
@@ -59,6 +51,8 @@
 			THR.renderer.domElement.addEventListener( 'touchstart', onRendererTouchStartHUD, false );
 
 			butHeadsUp.style.backgroundColor = 'var( --but-bg-color )';
+
+			HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 
 		} else {
 
@@ -74,13 +68,11 @@
 
 		if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
 		if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
-
 		divHeadsUp.style.display = 'none';
-//		divHeadsUp.innerHTML = '';
+		GBX.surfaceMeshesChildren = [];
 
 		THR.renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
 		THR.renderer.domElement.removeEventListener( 'click', onRendererMouseDownHUD, false );
-		THR.renderer.domElement.removeEventListener( 'touchstart', onRendererTouchStartHUD, false );
 
 		butHeadsUp.style.backgroundColor = '';
 
@@ -89,8 +81,6 @@
 
 
 	function onRendererMouseMoveHUD( event ) {
-
-//		if ( butHeadsUp.style.backgroundColor !== 'var( --but-bg-color )' ) { return; }
 
 		var raycaster, intersects;
 
@@ -143,75 +133,13 @@
 	}
 
 
-
-	function onRendererMouseDownHUD( event ) {
-
-		//dragMouseDown;( event );
-		divHeadsUp.style.display = 'none';
-
-		THR.renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
-
-	}
-
-
-
-	function onRendererTouchStartHUD( event ) {
-
-		event.preventDefault();
-
-		event.clientX = event.touches[0].clientX;
-		event.clientY = event.touches[0].clientY;
-
-		//		dragElement;( event );
-		onRendererMouseMoveHUD( event );
-
-	}
-
-
-
-	function setSelectSurfaceType() {
-
-		let txt = '<select id = "selType" onchange=HUD.updateType(this.value); >';
-
-		for ( let type of GBX.surfaceTypes) {
-
-			txt += '<option>' + type + '</option>'
-
-		}
-
-		HUD.selTypeHtml =  txt + '</select>';
-
-	}
-
-
-
-	HUD.updateType = () => {
-
-		// console.log( 'id', HUD.data );
-		const surface = HUD.data;
-		const id = surface.id;
-		surface.surfaceType = selType.value;
-		//console.log( 'surface', surface );
-
-		HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
-//		console.log( 'HUD.surfacesXml', HUD.surfacesXml);
-		surfaceXml = HUD.surfacesXml[ id ];
-		surfaceXml.attributes.getNamedItem( 'surfaceType' ).nodeValue = selType.value;
-
-		const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === id );
-		surfaceMesh.material.color.setHex( GBX.colors[ selType.value ] );
-		surfaceMesh.material.needsUpdate = true
-
-	}
-
-
+// needs big clean up
 
 	HUD.setHeadsUp = ( event ) => {
 
 		var space1, space2;
-//		let txt;
+		let txt;
 		const b = '<br>';
-		setSelectSurfaceType();
 
 		if ( intersected === undefined ){
 
@@ -227,44 +155,17 @@
 
 		}
 
+		//divHeadsUp.style.left = 0 + 0.5 * window.innerWidth + mouse.x * 0.5 * innerWidth + 'px';
+		//divHeadsUp.style.top = 30 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
+
+		//divHeadsUp.style.left = 'calc( 100% - 400px )';
+		//divHeadsUp.style.top = '20px'; // + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
+
 		divHeadsUp.style.display = '';
 		//console.log( '', divHeadsUp.style.left, divHeadsUp.style.top );
 
-		const data = intersected.userData.data;
-		HUD.data = data;
+		data = intersected.userData.data;
 		//console.log( 'data', data );
-
-		const height = parseFloat( data.RectangularGeometry.Height );
-		const width = parseFloat( data.RectangularGeometry.Width );
-		const surfaceArea = height * width;
-
-		const headerTxt =
-		`
-			toggle the visible items<br>
-			<button onclick=intersected.visible=!intersected.visible; >element</button>
-			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
-			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
-			<button onclick=GBV.setAllVisible(); >all</button>
-			edit the surface<br>
-			<button class=toggle onclick=GBV.deleteSurface("' + data.id + '"); >delete surface</button>
-			<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
-			<br>
-			<b>surface</b><br>
-			id <button onclick=GBV.showSurface(this.innerText)  >` + data.id + `</button>
-			<button onclick=GBV.zoomIntoSurface("` + data.id + `"); >zoom</button>
-			<br>`
-			+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
-
-			`type <button onclick=GBV.showSurfaceType(this.innerText);  >` + data.surfaceType + `</button>` +
-			` edit ` + HUD.selTypeHtml +
-			`<br>`+
-
-			( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
-				encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button><br>' : '' ) +
-			`area <i>` + Number( surfaceArea ).toFixed( 1 ) +
-			`</i><br>length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) +
-			`</i></p>
-		`;
 
 		adjacenciesTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : 'no adjacency';
 
@@ -274,35 +175,36 @@
 
 				//console.log( 'adjacenciesTxt', adjacenciesTxt );
 
-				space1 = GBV.getSpaceId( adjacenciesTxt[ 0 ].spaceIdRef );
-				space2 = GBV.getSpaceId( adjacenciesTxt[ 1 ].spaceIdRef );
+				space1 = HUD.getSpaceId( adjacenciesTxt[ 0 ].spaceIdRef );
+				space2 = HUD.getSpaceId( adjacenciesTxt[ 1 ].spaceIdRef );
 
 				if ( space1 && space2 ) {
 
 					adjacenciesTxt =
 
 						'<hr>' +
-						'<b>adjacent space 1</b>  <button onclick=GBV.showSpace(this.innerText); >' + space1.id + '</button>' + b +
-						( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
-						( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
-						( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
-						( space1.Volume ? '</i> volume </i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-						( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' ) +
-						( space1.zoneIdRef ? 'zone id ref <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
-						'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
-						( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
+						'adjacent 1:  <button onclick=HUD.toggleSpaceHUD("' + space1.id + '"); >' + space1.id + '</button>' + b +
+						( space1.Name ? 'name: ' + space1.Name + b : '' ) +
+						( space1.Description ? 'description: ' + space1.Description + b : '' ) +
+						( space1.Area ? 'area: ' + space1.Area + b : '' ) +
+						( space1.Volume ? 'volume: ' + space1.Volume + b : '' ) +
+						( space1.conditionType ? 'condition type: ' + space1.conditionType + b : '' ) +
+						( space1.zoneIdRef ? 'zone id rRef: ' + space1.zoneIdRef + b : '' ) +
+						'storey: <button onclick=HUD.toggleStoreyHUD("' + space1.buildingStoreyIdRef + '"); >' + space1.buildingStoreyIdRef + '</button>' + b +
+						( space1.CADObjectId ? 'cad object id: ' + space1.CADObjectId + b : '' ) +
 
 						'<hr>' +
-						'<b>adjacent space 2</b> <button onclick=GBV.showSpace(this.innerText); >' + space2.id + '</button>' + b +
-						( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
-						( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
-						( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
-						( space2.Volume ? ' volume <i>' + Number( space2.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-						( space2.conditionType ? 'condition type <i>' + space2.conditionType + '</i>' + b : '' ) +
-						( space2.zoneIdRef ? 'zone id ref <i>' + space2.zoneIdRef + '</i>' + b : '' ) +
-						'storey <button onclick=GBV.showStorey(this.innerText); >' + space2.buildingStoreyIdRef + '</button>' + b +
+						'adjacent 2: <button onclick=HUD.toggleSpaceHUD("' + space2.id + '"); >' + space2.id + '</button>' + b +
+						( space2.Name ? 'name: ' + space2.Name + b : '' ) +
+						( space2.Description ? 'description: ' + space2.Description + b : '' ) +
+						( space2.Area ? 'area: ' + space2.Area + b : '' ) +
+						( space2.Volume ? 'volume: ' + space2.Volume + b : '' ) +
+						( space2.conditionType ? 'condition type: ' + space2.conditionType + b : '' ) +
+						( space2.zoneIdRef ? 'zone id ref: ' + space2.zoneIdRef + b : '' ) +
+		//						( space2.buildingStoreyIdRef ? 'buildingStoreyIdRef: ' + space2.buildingStoreyIdRef + b : '' )  +
+						'storey: <button onclick=HUD.toggleStoreyHUD("' + space2.buildingStoreyIdRef + '"); >' + space2.buildingStoreyIdRef + '</button>' + b +
 
-						( space2.CADObjectId ? 'cad object id <i>' + space2.CADObjectId + '</i>' + b : '' ) +
+						( space2.CADObjectId ? 'cad object id: ' + space2.CADObjectId + b : '' ) +
 					'';
 
 				} else {
@@ -316,39 +218,53 @@
 				//console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef );
 				//console.log( 'adjacenciesTxt', adjacenciesTxt );
 
-				space = GBV.getSpaceId( data.AdjacentSpaceId.spaceIdRef, 'single' );
+				space = HUD.getSpaceId( data.AdjacentSpaceId.spaceIdRef, 'single' );
 
 				if ( !space ) { return; }
+
 				adjacenciesTxt =
 					'<hr>' +
-					'<b>adjacent space id</b> <button onclick=GBV.showSpace(this.innerText); >' + space.id + '</button>' + b +
-					( space.Name ? 'name <i>' + space.Name +  '</i>' +b : '' )  +
-					( space.Description ? 'description: <i>' + encodeURI( space.Description ) +  '</i>' +b : '' ) +
-					( space.Area ? 'area <i>' + Number( space.Area ).toFixed( 1 ) + '</i>' : '' ) +
-					( space.Volume ? ' volume <i>' + Number( space.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-					'storey <button onclick=GBV.showStorey(this.innerText); >' + space.buildingStoreyIdRef + '</button>' + b +
-					( space.conditionType ? 'condition type <i>' + space.conditionType + '</i>' + b : '' )  +
-					( space.zoneIdRef ? 'zone id ref <i>' + space.zoneIdRef + '</i>' + b : '' ) +
-					( space.CADObjectId ? 'CAD Object Id <i>' + space.CADObjectId + '</i>' + b : '' ) +
+					'adjacent space id: <button onclick=HUD.toggleSpaceHUD("' + space.id + '"); >' + space.id + '</button>' + b +
+					( space.Name ? 'name: ' + space.Name + b : '' )  +
+					( space.Description ? 'description: ' + space.Description + b : '' ) +
+					( space.Area ? 'area: ' + space.Area + b : '' ) +
+					( space.Volume ? 'volume: ' + space.Volume + b : '' ) +
+					'storey: <button onclick=HUD.toggleStoreyHUD("' + space.buildingStoreyIdRef + '"); >' + space.buildingStoreyIdRef + '</button>' + b +
+					( space.conditionType ? 'condition type: ' + space.conditionType + b : '' )  +
+					( space.zoneIdRef ? 'zone id ref: ' + space.zoneIdRef + b : '' ) +
+					( space.CADObjectId ? 'CAD Object Id: ' + space.CADObjectId + b : '' ) +
 				'';
 
 			}
 
 		}
 
-		const footerTxt =
-		`
-			<hr>
-			For debug: <button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
-			<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
-		`;
+		//adjacenciesTxt = adjacencies.length ? '
 
-		divHUDheader.innerHTML = headerTxt;
-		divHUDItems.innerHTML = adjacenciesTxt;
-		divHUDfooter.innerHTML = footerTxt;
 
-		selType.value = data.surfaceType;
+		txt =
+			'<p>' +
+			'surface id: <button onclick=HUD.toggleSurfaceHUD("' + data.id + '")  >' + data.id + '</button>' + b +
+			( data.Name ? 'surface name: ' + data.Name + b : '' ) +
+			'type <button onclick=HUD.toggleSurfaceTypeHUD("' + data.surfaceType + '");  >' + data.surfaceType + '</button>' + b +
+			( data.CADObjectId ? 'cad object id: <button onclick=HUD.toggleCadIdHUD("' + encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button>' + b : '' ) +
+			'</p>' +
+			'<p>' +
+				'<button onclick=intersected.visible=!intersected.visible;  >toggle visibility</button> ' +
+				'<button class=toggle onclick=GBV.deleteSurface("' + data.id + '"); >delete surface</button>' +
+			'</p>' +
 
+			adjacenciesTxt +
+
+			'<p>' +
+				'<button class=toggle onclick=HUD.allVisible(); >all visible</button>' +
+				'<hr>' +
+				'For debug: <button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button> ' +
+				'<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>' +
+			'</p>' +
+		'';
+
+		divItems.innerHTML = txt;
 		document.body.style.cursor = 'pointer';
 
 		if ( window.detSurfaceEdits ) {
@@ -386,7 +302,23 @@
 
 
 
-/////////
+	HUD.deleteSurface = ( id ) => {
+
+		const proceed = confirm( 'OK to delete surface: ' + id + '?\n\nUse \'edit file\' to save deletes.' );
+
+		if( !proceed ){ return; }
+
+		surfacesResponse = gbxmlResponseXML.getElementsByTagName("Surface");
+
+		surface = surfacesResponse[ id ];
+		console.log( 'surface to delete', surface );
+
+		surface.remove();
+		GBX.surfaceMeshes.remove( intersected );
+
+	}
+
+
 
 	HUD.displayTelltalesVertex = () => {
 
@@ -561,3 +493,189 @@
 	}
 
 
+
+	HUD.toggleSurfaceHUD = ( id ) => {
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			if ( id === child.userData.data.id ) {
+
+				child.visible = true;
+
+				//console.log( '', child );
+
+			} else {
+
+				child.visible = false;
+
+			}
+
+		}
+
+	}
+
+
+
+	HUD.toggleSurfaceTypeHUD = ( type ) => {
+
+		//console.log( 'type ', type );
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			if ( type === child.userData.data.surfaceType ) {
+
+				child.visible = true;
+
+			} else {
+
+				child.visible = false;
+
+			}
+
+		}
+
+	}
+
+
+
+	HUD.toggleCadIdHUD = ( CADObjectId ) => {
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			if ( CADObjectId === encodeURI( child.userData.data.CADObjectId ) ) {
+
+				child.visible = true;
+
+			} else {
+
+				child.visible = false;
+
+			}
+
+		}
+
+	}
+
+
+
+	HUD.getSpaceId = ( spaceIdRef ) => {
+
+		if ( !GBX.gbjson.Campus.Building.Space || !GBX.gbjson.Campus.Building.Space.length ) { return; }
+
+		const space = GBX.gbjson.Campus.Building.Space.find( function( item ) { return item.id === spaceIdRef; } );
+
+		//		console.log( 'space', space );
+
+		return space;
+
+	}
+
+
+
+	HUD.toggleSpaceHUD = ( id ) => {
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			child.visible = false;
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
+
+			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
+
+				child.visible = true;
+
+			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
+
+				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
+
+					child.visible = true;
+
+				}
+
+			}
+
+		}
+
+		const space = gbjson.Campus.Building.Space.find( function( item ) { return item.id === id; } );
+
+		console.log( 'space', space );
+
+	}
+
+
+
+	HUD.toggleStoreyHUD = ( id ) => {
+
+		//console.log( 'id', id );
+
+		const spaces = gbjson.Campus.Building.Space;
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			child.visible = false;
+
+		}
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId
+
+			if ( !adjacentSpaceId ) { continue; }
+
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			for ( let space of spaces ) {
+
+				if ( space.id === spaceIdRef && space.buildingStoreyIdRef === id ) {
+
+					child.visible = true;
+
+				}
+
+			}
+
+		}
+
+		const storey = gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
+
+		console.log( 'storey', storey );
+
+	}
+
+
+
+	function onRendererMouseDownHUD( event ) {
+
+		//dragMouseDown;( event );
+		divHeadsUp.style.display = 'none';
+
+		renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
+
+	}
+
+
+
+	function onRendererTouchStartHUD( event ) {
+
+		event.preventDefault();
+
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+
+		//		dragElement;( event );
+		onRendererMouseMoveHUD( event );
+
+	}
+
+
+	HUD.allVisible = () => {
+
+		GBX.surfaceMeshes.visible = true;
+		GBX.surfaceEdges.visible = true;
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+				child.visible = true;
+
+		}
+
+	}

@@ -45648,7 +45648,47 @@
       <Name>bldg-1</Name>
       <Description>Extracted from Revit model.</Description>
     </Building>
-    
+    <Surface surfaceType="InteriorWall" id="aim5362">
+      <AdjacentSpaceId spaceIdRef="aim0273"/>
+      <AdjacentSpaceId spaceIdRef="aim0316"/>
+      <RectangularGeometry id="aim5363">
+        <Azimuth>93.4364318847656</Azimuth>
+        <CartesianPoint>
+          <Coordinate>497.6739</Coordinate>
+          <Coordinate>1030.624</Coordinate>
+          <Coordinate>19.25</Coordinate>
+        </CartesianPoint>
+        <Tilt>90</Tilt>
+        <Width>1.56492185592651</Width>
+        <Height>3.90000009536743</Height>
+      </RectangularGeometry>
+      <PlanarGeometry>
+        <PolyLoop>
+          <CartesianPoint>
+            <Coordinate>497.6739</Coordinate>
+            <Coordinate>1030.624</Coordinate>
+            <Coordinate>19.25</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>497.7677</Coordinate>
+            <Coordinate>1032.187</Coordinate>
+            <Coordinate>19.25</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>497.7677</Coordinate>
+            <Coordinate>1032.187</Coordinate>
+            <Coordinate>23.15</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>497.6739</Coordinate>
+            <Coordinate>1030.624</Coordinate>
+            <Coordinate>23.15</Coordinate>
+          </CartesianPoint>
+        </PolyLoop>
+      </PlanarGeometry>
+      <CADObjectId>Basic Wall: SIM_INT_SLD_Core [883750]</CADObjectId>
+      <Name>N-00_100-00_101-I-W-1</Name>
+    </Surface>
     <Surface surfaceType="InteriorWall" id="aim5374">
       <AdjacentSpaceId spaceIdRef="aim0273"/>
       <AdjacentSpaceId spaceIdRef="aim0405"/>
@@ -67723,7 +67763,7 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [922094]</CADObjectId>
       <Name>E-02_114-E-W-406</Name>
     </Surface>
-    <Surface surfaceType="Roof" exposedToSun="true" id="aim11616">
+    <Surface surfaceType="Shade" exposedToSun="true" id="aim11616">
       <AdjacentSpaceId spaceIdRef="aim4147"/>
       <RectangularGeometry id="aim11617">
         <Azimuth>180</Azimuth>

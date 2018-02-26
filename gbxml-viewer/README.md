@@ -335,6 +335,18 @@ Will most likely build upon
 
 ## Change Log
 
+
+### 2018-02-25 ~ Theo
+
+R10.y
+* All modules updated. Name space fixes etc
+* HUD
+	* Many fixes
+	* Streamline/simplify the UI
+* Edit duplicate adjacents
+	* Simplified
+	* Works more closely with HUD
+
 ### 2018-02-19 ~ Theo
 
 R10.3

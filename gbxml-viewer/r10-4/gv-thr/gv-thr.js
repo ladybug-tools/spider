@@ -15,8 +15,8 @@
 	GBX.gbjson;
 	GBX.surfaceJson = null;
 
-	GBX.surfaceMeshes = null;
-	GBX.surfaceEdges = null;
+	GBX.surfaceMeshes;
+	GBX.surfaceEdges;
 
 	GBX.colors = {
 

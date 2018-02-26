@@ -169,9 +169,6 @@
 
 		selType.selectedIndex = surfaceTypes.indexOf( type );
 
-
-
-
 		const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
 
 		if ( adjs[ 0 ] ) {

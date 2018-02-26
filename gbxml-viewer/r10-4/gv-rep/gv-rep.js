@@ -5,7 +5,7 @@
 	var surfaceAdjacencyDuplicates;
 	var surfaceAdjacencyInvalids;
 	var surfaceCoordinateDuplicates;
-
+	var storeys;
 	var sud;
 	var telltale;
 	var b = '<br>';
@@ -37,13 +37,13 @@
 		let addDetails = REP.addDetails;
 
 		let spaces;
-		let storeys;
+
 
 		surfaceAdjacencyDuplicates = [];
 		surfaceAdjacencyInvalids = [];
 		surfaceCoordinateDuplicates = [];
 
-		sud = surfaceMeshes.userData;
+		sud = GBX.surfaceMeshes.userData;
 		sud.tinySpaceSquareMeters = 2;
 		sud.tinySurfaceSquareMeters = 1;
 
@@ -69,19 +69,19 @@
 
 		'';
 
-		const gbxmlText = traversGbjson( gbjson );
+		const gbxmlText = traversGbjson( GBX.gbjson );
 		//console.log( 'gbxmlText', gbxmlText );
 
 		divReport.innerHTML = addDetails( 'gbxmlText', gbxmlText.attributes );
 
-		const campus = traversGbjson( gbjson.Campus );
+		const campus = traversGbjson( GBX.gbjson.Campus );
 		divReport.innerHTML += addDetails( 'Campus', campus.attributes );
 
-		const locate = traversGbjson( gbjson.Campus.Location );
+		const locate = traversGbjson( GBX.gbjson.Campus.Location );
 		const mapLink = REP.getGoogleMap();
 		divReport.innerHTML += addDetails( 'Campus Location' + mapLink, locate.attributes );
 
-		const building = traversGbjson( gbjson.Campus.Building );
+		const building = traversGbjson( GBX.gbjson.Campus.Building );
 		divReport.innerHTML += addDetails( 'Building', building.attributes );
 
 		const storeysText = REP.getStoreys();
@@ -93,10 +93,10 @@
 		const spacesTiny = REP.getSpacesTiny();
 		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent, spacesTiny.info );
 
-		const zones = traversGbjson( gbjson.Zone );
+		const zones = traversGbjson( GBX.gbjson.Zone );
 		divReport.innerHTML += addDetails( 'Zones', zones.attributes );
 
-		const documents = traversGbjson( gbjson.DocumentHistory );
+		const documents = traversGbjson( GBX.gbjson.DocumentHistory );
 		divReport.innerHTML += addDetails( 'Documents', documents.attributes );
 
 		//		const surfaces = traversGbjson( gbjson.Campus.Surface );
@@ -172,7 +172,7 @@
 
 	REP.getGoogleMap = () => {
 
-		const locate = gbjson.Campus.Location;  // remember that location is a reserved word in your browser
+		const locate = GBX.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
 		let linkToMap;
 
 		if ( locate && locate.Latitude && locate.Longitude ) {
@@ -195,7 +195,7 @@
 
 	REP.getStoreys = () => {
 
-		storeys = gbjson.Campus.Building.BuildingStorey;
+		storeys = GBX.gbjson.Campus.Building.BuildingStorey;
 		let flowContent = '';
 		let count = 0;
 		let zones;
@@ -243,7 +243,7 @@
 
 	REP.getSpaces = () => {
 
-		spaces = gbjson.Campus.Building.Space;
+		spaces = GBX.gbjson.Campus.Building.Space;
 		let flowContent = '';
 		let count = 0;
 		//console.log( 'spaces', spaces  );
@@ -270,7 +270,7 @@
 
 	REP.getSpacesTiny = () => {
 
-		const spaces = gbjson.Campus.Building.Space;
+		const spaces = GBX.gbjson.Campus.Building.Space;
 		const b = '<br>';
 		let flowContent = '';
 		let count = 0;
@@ -306,7 +306,7 @@
 
 	REP.getSurfaces = () => {
 
-		surfaces = gbjson.Campus.Surface;
+		surfaces = GBX.gbjson.Campus.Surface;
 
 		let txt = '';
 
@@ -361,7 +361,7 @@
 		const surfaceIds = [];
 		surfaceCoordinateDuplicates = [];
 
-		const surfaces = gbjson.Campus.Surface;
+		const surfaces = GBX.gbjson.Campus.Surface;
 		let count = 0;
 		let flowContent =
 			'<p>' +
@@ -421,7 +421,7 @@
 
 		}
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -440,7 +440,7 @@
 
 		const surfacesIds = [];
 		const surfaceMembers = [];
-		const surfaces = gbjson.Campus.Surface;
+		const surfaces = GBX.gbjson.Campus.Surface;
 		let count = 0;
 		let flowContent = '';
 
@@ -508,7 +508,7 @@
 
 		}
 
-		const info= 'Information: Multiple gbXML elements created from single CAD element';
+		const info = 'Information: Multiple gbXML elements created from single CAD element';
 		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
@@ -517,7 +517,7 @@
 
 	REP.getSurfaceDuplicateAdjacencies = () => {
 
-		const surfaces = gbjson.Campus.Surface;
+		const surfaces = GBX.gbjson.Campus.Surface;
 		let count = 0;
 		let flowContent =
 			'<p>' +
@@ -557,7 +557,7 @@
 		}
 
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -574,7 +574,7 @@
 
 	REP.getSurfacesTinies = () => {
 
-		surfaces = gbjson.Campus.Surface;
+		surfaces = GBX.gbjson.Campus.Surface;
 		const b = '<br>';
 		let flowContent = '';
 		let count = 0;
@@ -627,7 +627,7 @@
 
 	REP.getSurfaceAdjacencyInvalid = () => {
 
-		const surfaces = gbjson.Campus.Surface;
+		const surfaces = GBX.gbjson.Campus.Surface;
 		let count = 0;
 		let flowContent =
 			'<p>' +
@@ -662,7 +662,7 @@
 		}
 
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -681,20 +681,20 @@
 
 		//console.log( 'id', id );
 
-		const spaces = gbjson.Campus.Building.Space;
+		const spaces = GBX.gbjson.Campus.Building.Space;
 		//		surfaceGroup.visible = true;
-		divLog.innerHTML = '';
+		icw.divLog.innerHTML = '';
 
 		let zones = [];
 		let spacesArray = [];
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			child.visible = false;
 
 		}
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -729,7 +729,7 @@
 
 			if ( id === storey.id ) {
 
-				divLog.innerHTML = 'Storey name: ' + storey.Name;
+				icw.divLog.innerHTML = 'Storey name: ' + storey.Name;
 
 			}
 
@@ -743,9 +743,9 @@
 
 	REP.toggleSurface = ( id ) => {
 
-		divLog.innerHTML = '';
+		icw.divLog.innerHTML = '';
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( child.userData.data.id === id ) {
 
@@ -797,10 +797,10 @@
 
 	REP.toggleSurfaceType = ( that ) => {
 
-		divLog.innerHTML = '';
+		icw.divLog.innerHTML = '';
 		//console.log( '', surfaceAdjacencyDuplicates );
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( child.userData.data.surfaceType !== that.innerText ) {
 
@@ -821,12 +821,12 @@
 	REP.setTypeInvisible = ( that ) => {
 
 		//		surfaceGroup.visible = true;
-		divLog.innerHTML = '';
+		icw.divLog.innerHTML = '';
 		//console.log( '', surfaceAdjacencyDuplicates );
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -849,9 +849,9 @@
 	REP.toggleSpace = ( id ) => {
 
 		//		surfaceGroup.visible = true;
-		divLog.innerHTML = '';
+		icw.divLog.innerHTML = '';
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -888,7 +888,7 @@
 
 			if ( id === space.id ) {
 
-				divLog.innerHTML = 'Space name: ' + space.Name;
+				icw.divLog.innerHTML = 'Space name: ' + space.Name;
 
 			}
 
@@ -902,11 +902,10 @@
 
 		//console.log( '', CADObjectId );
 		//		surfaceGroup.visible = true;
-		surfaceEdges.visible = true;
-		divLog.innerHTML = '';
+		GBX.surfaceEdges.visible = true;
+		icw.divLog.innerHTML = '';
 
-		for ( let child of surfaceMeshes.children ) {
-
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -930,13 +929,13 @@
 
 		//console.log( '', that.innerText );
 
-		divLog.innerHTML = '';
+		icw.divLog.innerHTML = '';
 
 		if ( id.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			//surfaceGroup.visible = true;
 
-			for ( let child of surfaceMeshes.children ) {
+			for ( let child of GBX.surfaceMeshes.children ) {
 
 				if ( !child.userData.data ) { continue; }
 
@@ -968,11 +967,11 @@
 
 	REP.allVisible = () => {
 
-		surfaceMeshes.visible = true;
-		surfaceEdges.visible = true;
-		divLog.innerHTML = '';
+		GBX.surfaceMeshes.visible = true;
+		GBX.surfaceEdges.visible = true;
+		icw.divLog.innerHTML = '';
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 				child.visible = true;
 

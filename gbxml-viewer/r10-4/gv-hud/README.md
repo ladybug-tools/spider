@@ -37,10 +37,16 @@ The next steps may include
 
 ## Change Log
 
+### 2018-02-25 ~ Theo
+
+R10.7
+* HUD
+	* Many fixes
+	* Streamline/simplify the UI
 
 ### 2018-02-21 ~ Theo
 
-R11
+R10.4
 * Name space started
 
 ### 2018-02-17 ~ Theo

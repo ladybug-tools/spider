@@ -1,41 +1,41 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-	var uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
-
-	var telltale;
-
 	init();
 
 	function init() {
 
-		if ( butCoordinates.style.backgroundColor !== 'var( --but-bg-color )' ) {
-
+		if ( butAdjacents.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			divMenuItems.innerHTML =
 
-				`<details id = detCoordinates open>
+				`<details id = "detAdjacents" open>
 
-					<summary id=sumCRDSummary >Duplicate Coordinates</summary>
+					<summary id = "sumSummary" >Duplicate Adjacents</summary>
 
-					<div id=divCRDInfo ></div>
+					<div id=divInfo ></div>
 
 					<p>
-						toggles<br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+						toggles <br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
 						<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
 						<button onclick=GBV.setAllVisible(); >all visible</button>
 					</p>
 
+					<p>
+					<button id=butDuplicateAdjacents onclick=GBV.toggleDuplicates(butDuplicateAdjacents,surfaceAdjacentsDuplicates); >toggle all duplicate adjacents</button>
+					<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
+
+					</p>
+					<hr>
 					<div id=divCoordinates ></div>
 
-					<hr>
 
 				</details>
 
 			` + divMenuItems.innerHTML;
 
-			butCoordinates.style.backgroundColor = 'var( --but-bg-color )';
+			butAdjacents.style.backgroundColor = 'var( --but-bg-color )';
 
-			getSurfaceDuplicatesCoordinates();
+			getSurfaceDuplicatesAdjacents();
 
 			THR.controls.autoRotate = false;
 
@@ -43,7 +43,7 @@
 
 			detCoordinates.remove();
 
-			butCoordinates.style.backgroundColor = '';
+			butAdjacents.style.backgroundColor = '';
 
 		}
 
@@ -51,24 +51,18 @@
 
 
 
-	function getSurfaceDuplicatesCoordinates() {
+	function xxxgetSurfaceDuplicatesAdjacents() {
 
 		const surfacePolyLoops = [];
 		const surfaceIds = [];
-		surfaceCoordinateDuplicates = [];
+		surfaceAdjacentsDuplicates = [];
 
 		const surfaces = GBX.surfaceJson;
 		const b = '<br>';
 
 		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butDuplicatesCoordinates onclick=GBV.toggleDuplicates(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
+		let flowContent = '';
 
-				'<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>' +
-
-				'</p>' +
-				'<hr>';
 
 		let spaceId;
 
@@ -168,13 +162,71 @@
 
 			if ( !child.userData.data ) { continue; }
 
-			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ffff00' ); }
+			if ( surfaceAdjacentsDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ffff00' ); }
 
 		}
 
-		sumCRDSummary.innerHTML= 'Duplicate Surfaces &raquo; <span style=background-color:yellow; >&nbsp;' + count + ' found&nbsp;</span>';
-		divCRDInfo.innerHTML = 'Two surfaces with identical coordinates';
+		sumSummary.innerHTML= 'Duplicate Adjacents &raquo; ' + count;
+		divInfo.innerHTML = 'Surfaces with two identical adjacents';
 		divCoordinates.innerHTML= flowContent;
 
 	}
 
+
+
+	function getSurfaceDuplicatesAdjacents() {
+		surfaceAdjacentsDuplicates = [];
+		const surfaces = GBX.gbjson.Campus.Surface;
+		const b = '<br>';
+		let count = 0;
+		let flowContent = '';
+
+		for ( let surface of surfaces ) {
+
+			adjacencies = surface.AdjacentSpaceId;
+
+			const height = parseFloat( surface.RectangularGeometry.Height );
+			const width = parseFloat( surface.RectangularGeometry.Width );
+			const surfaceArea = height * width;
+
+			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
+
+				surfaceAdjacentsDuplicates.push( surface.Name );
+
+		//console.log( 'adjacencies', adjacencies  );
+
+				flowContent +=
+					'<div style=margin-bottom:35px; >' +
+						( ++ count ) +
+						'. id: ' + '<button onclick=GBV.showSurface("' + surface.id + '"); >' + surface.id + '</button> ' +
+							'<button onclick=GBV.zoomIntoSurface("' + surface.id + '"); >zoom</button>' + b +
+							'surface type: <button class=toggle onclick=GBV.showSurfaceType(this.innerText); >' + surface.surfaceType + '</button>: ' + b +
+						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
+						( surface.constructionIdRef ? 'construction id ref: ' + surface.constructionIdRef + b : '' ) +
+						( surface.CADObjectId ?
+							'<button onclick=GBV.showCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
+							: ''
+						) +
+						' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
+						'space 1:  <button onclick=GBV.showSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
+						'space 2:  <button onclick=GBV.showSpace("' + adjacencies[ 1 ].spaceIdRef + '"); >' + adjacencies[ 1 ].spaceIdRef + '</button>' + b +
+					'<hr></div>';
+			}
+
+		}
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			if ( !child.userData.data ) { continue; }
+
+			if ( surfaceAdjacentsDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }
+
+		}
+
+		const info = 'Error: Interior surfaces with both adjacencies pointing to same ID';
+//		return { summary: 'Duplicate Adjacencies &raquo; ' + count, flowContent: flowContent, info: info };
+
+		sumSummary.innerHTML= 'Duplicate Adjacents &raquo; ' + count;
+		divInfo.innerHTML = info
+		divCoordinates.innerHTML= flowContent;
+	}

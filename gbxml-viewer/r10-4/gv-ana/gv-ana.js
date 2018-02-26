@@ -45,8 +45,8 @@
 
 		if ( butAnalemma.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
-			parameters.latitude = gbjson.Campus.Location.Latitude;
-			parameters.longitude = gbjson.Campus.Location.Longitude;
+			parameters.latitude = GBX.gbjson.Campus.Location.Latitude;
+			parameters.longitude = GBX.gbjson.Campus.Location.Longitude;
 			if ( !parameters.latitude ) {alert( 'Need latitude and longitude in gbXML file'); return; }
 
 			const now = Math.floor( Date.now() / 1000 );
@@ -94,7 +94,7 @@
 			/*
 			console.log( 'scene', icw );
 			console.log( 'gbjson', gbjson );
-			console.log( 'surfaceMeshes', surfaceMeshes );
+			console.log( 'GBX.surfaceMeshes', GBX.surfaceMeshes );
 			*/
 
 			// allow clicking anywhere to set off init
@@ -188,7 +188,7 @@
 
 		year = ( new Date() ).getUTCFullYear();
 
-		parameters.analemmaRadius = surfaceMeshes.userData.radius;
+		parameters.analemmaRadius = GBX.surfaceMeshes.userData.radius;
 
 		for ( hours = 0; hours < 24; hours++ ) {
 

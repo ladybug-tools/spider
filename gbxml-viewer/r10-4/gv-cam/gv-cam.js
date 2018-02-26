@@ -123,8 +123,8 @@
 
 		document.body.removeChild( ui );
 
-		setAllVisible();
-		zoomObjectBoundingSphere( surfaceMeshes );
+		GBV.setAllVisible();
+		GBV.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
 	}
 
@@ -151,7 +151,7 @@
 
 		}
 
-		size = gbjson.useSIUnitsForResults.toLowerCase() === 'true' ? 0.2 : 0.6;
+		size = GBX.gbjson.useSIUnitsForResults.toLowerCase() === 'true' ? 0.2 : 0.6;
 		avatar.scale.set( size, size, size );
 		avatar.position.copy( THR.axesHelper.position );
 		avatar.visible = true;
@@ -163,7 +163,7 @@
 
 	zoomOverTheShoulder = function() {
 
-		if ( gbjson.useSIUnitsForResults.toLowerCase() === 'true' ) {
+		if ( GBX.gbjson.useSIUnitsForResults.toLowerCase() === 'true' ) {
 
 			/*
 			console.log( 'SI camera.position', camera.position );

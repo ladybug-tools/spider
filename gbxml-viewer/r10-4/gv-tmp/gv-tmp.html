@@ -5,13 +5,13 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "Test sample gbXML viewer template" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-23" >
+<meta name = "date" content = "2018-02-25" >
 <title>gv-tmp - gbXML Viewer Template</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
 <script src = "../gv-cor/gv-cor.js" ></script>
-<script src = "../gv-thr/gv-thr.js" ></script>
+
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 	<div id = "divHeader" >
@@ -76,21 +76,13 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
-		renderer = icw.THR.renderer;
-		camera = icw.THR.camera;
-		controls = icw.THR.controls;
-		scene = icw.THR.scene;
-		axesHelper = icw.THR.axesHelper;
-		lightDirectional = icw.THR.lightDirectional;
-		colors = icw.GBX.colors;
-		gbjson = icw.GBX.gbjson;
-		surfaceMeshes = icw.GBX.surfaceMeshes;
-		surfaceEdges = icw.GBX.surfaceEdges;
-		divLog = icw.divLog;
-		zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
-		setAllVisible = icw.GBX.setAllVisible;
+		THR = icw.THR;
+		GBX = icw.GBX;
+		GBV = icw.GBV;
 
-		console.log( 'scene', scene );
+		THR.controls.autoRotate = false;
+
+		console.log( 'scene', THR.scene );
 
 		butTemplate.click();
 

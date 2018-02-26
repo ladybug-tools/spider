@@ -16,9 +16,9 @@
 
 
 					'<p>' +
-						'toggles<br><button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
-						' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
-						' <button onclick=SET.allVisible(); >all</button>' +
+						'toggles<br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>' +
+						' <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>' +
+						' <button onclick=GBV.setAllVisible(); >all</button>' +
 					'</p>' +
 
 
@@ -70,12 +70,12 @@
 						'<output id=outViewExplode class=floatRight >0%</output>' +
 						'<input type="range" id="rngViewExplode" min=-50 max=50 step=1 value=0 onchange=SET.updateViewExplodeHorizontal(); >' +
 					'</p>' +
-/*
-					'<p title="building surface separation: 0 to 100%" >Explode view vertical: ' +
-						'<output id=outViewExplodeVertical class=floatRight >0%</output>' +
-						'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=SET.updateViewExplodeVertical(); >' +
-					'</p>' +
-*/
+			/*
+								'<p title="building surface separation: 0 to 100%" >Explode view vertical: ' +
+									'<output id=outViewExplodeVertical class=floatRight >0%</output>' +
+									'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=SET.updateViewExplodeVertical(); >' +
+								'</p>' +
+			*/
 					'<hr>' +
 
 				'</details>' +
@@ -89,7 +89,7 @@
 
 			butSettings.style.backgroundColor = 'var( --but-bg-color )';
 
-			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+			const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 			const sphere = bbox.getBoundingSphere();
 			center = sphere.center;
 			radius = sphere.radius;
@@ -111,7 +111,7 @@
 
 	SET.setRandomMaterial = () => {
 
-		surfaceMeshes.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -134,7 +134,7 @@
 
 	SET.setPhongDefaultMaterial = () => {
 
-		surfaceMeshes.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -153,7 +153,7 @@
 
 	SET.setNormalMaterial = () => {
 
-		surfaceMeshes.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -172,12 +172,12 @@
 
 	SET.setDefaultMaterial = () => {
 
-		surfaceMeshes.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
 				child.material =
-					new THREE.MeshPhongMaterial( { color: colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+					new THREE.MeshPhongMaterial( { color: GBX.colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
 			}
 
@@ -209,7 +209,7 @@
 
 		}
 
-		surfaceMeshes.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh
 					&& ( SET.surfaceAdjacencyDuplicates === undefined || SET.surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) === false )
@@ -237,13 +237,13 @@
 
 		THR.scene.traverse( function ( child ) {
 
-//			if ( child.material ) {
+				//			if ( child.material ) {
 
 				child.castShadow = !child.castShadow;
 				child.receiveShadow = !child.receiveShadow;
-//				child.material.needsUpdate = true;
+				//				child.material.needsUpdate = true;
 
-//			}
+				//			}
 
 		} );
 
@@ -331,19 +331,17 @@
 
 	SET.toggleGridHelper = () => {
 
-		let meshGridHelper = surfaceMeshes.getObjectByName( 'gridHelper' );
+		let meshGridHelper = GBX.surfaceMeshes.getObjectByName( 'gridHelper' );
 
 		if ( !meshGridHelper) {
 
-			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+			const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 
-			meshGridHelper = new THREE.GridHelper( 3 * surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
+			meshGridHelper = new THREE.GridHelper( 3 * GBX.surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
 			meshGridHelper.rotation.x = Math.PI / 2;
 			meshGridHelper.position.set( THR.axesHelper.position.x, THR.axesHelper.position.y, bbox.min.z );
 			meshGridHelper.name = 'gridHelper';
-			surfaceMeshes.add( meshGridHelper );
-
-			surfaceMeshes.add( meshGridHelper );
+			GBX.surfaceMeshes.add( meshGridHelper );
 
 			meshGridHelper.visible = false;
 
@@ -357,20 +355,20 @@
 
 	SET.toggleGroundHelper = () => {
 
-		let meshGroundHelper = surfaceMeshes.getObjectByName( 'groundHelper' );
+		let meshGroundHelper = GBX.surfaceMeshes.getObjectByName( 'groundHelper' );
 
 		if ( !meshGroundHelper ) {
 
-			const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+			const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 
-			const geometry = new THREE.BoxBufferGeometry( 3 * surfaceMeshes.userData.radius, 3 * surfaceMeshes.userData.radius, 1  );
+			const geometry = new THREE.BoxBufferGeometry( 3 * GBX.surfaceMeshes.userData.radius, 3 * GBX.surfaceMeshes.userData.radius, 1  );
 			const material = new THREE.MeshPhongMaterial( { color: 'green', opacity: 0.85, transparent: true } );
 			meshGroundHelper = new THREE.Mesh( geometry, material );
 			meshGroundHelper.name = 'groundHelper';
 			meshGroundHelper.receiveShadow = true;
 			meshGroundHelper.position.set( THR.axesHelper.position.x, THR.axesHelper.position.y, bbox.min.z - 0.5 );
 
-			surfaceMeshes.add( meshGroundHelper );
+			GBX.surfaceMeshes.add( meshGroundHelper );
 
 			meshGroundHelper.visible = false;
 
@@ -405,12 +403,12 @@
 			THR.camera.updateProjectionMatrix();
 			THR.controls = SET.controlsOrtho;
 
-			GBV.zoomObjectBoundingSphere( surfaceMeshes );
+			GBV.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
 		} else {
 
 			GBV.setAllVisible();
-			GBV.zoomObjectBoundingSphere( surfaceMeshes );
+			GBV.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 			SET.cameraOrtho = undefined;
 
 		}
@@ -469,15 +467,15 @@
 
 		const s = parseFloat( rngViewExplode.value ) / 3;
 
-		surfaceEdges.visible = false;
+		GBX.surfaceEdges.visible = false;
 
-		const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 		const sphere = bbox.getBoundingSphere();
 		center = sphere.center;
 		radius = sphere.radius;
 
-//		console.log( 'center', center );
-//		console.log( 'radius', radius );
+		//		console.log( 'center', center );
+		//		console.log( 'radius', radius );
 
 		/*
 		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
@@ -489,7 +487,6 @@
 		*/
 
 		THR.scene.updateMatrixWorld();
-
 
 		THR.scene.traverse( function ( child ) {
 
@@ -535,7 +532,7 @@
 
 				geometry2 = new THREE.Geometry();
 				pp = p.clone().add( vec.multiplyScalar( 2 ) );
-//				console.log( 'pp', pp );
+			//				console.log( 'pp', pp );
 				geometry2.vertices = [ p, pp ];
 				material2 = new THREE.LineBasicMaterial( { color: 0x000000 } );
 				line = new THREE.Line( geometry2, material2 );
@@ -544,8 +541,8 @@
 
 				//				vv = new THREE.Vector3( 5, 0, 0 );
 				child.position.add( vec.multiplyScalar( s ) );
-//				console.log( 's', s );
-//				child.position.copy( p );
+				//				console.log( 's', s );
+				//				child.position.copy( p );
 
 			}
 
@@ -558,7 +555,7 @@
 
 		const sz = 1 + parseFloat( rngViewExplodeVertical.value ) / 10;
 
-		surfaceMeshes.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 				if ( !child.userData.positionStart ) {
 
@@ -578,7 +575,7 @@
 
 	SET.updateMeshLevel = ( meshName, delta ) => {
 
-		const mesh = surfaceMeshes.getObjectByName( meshName );
+		const mesh = GBX.surfaceMeshes.getObjectByName( meshName );
 
 		if ( mesh ) {
 
@@ -588,28 +585,5 @@
 
 	}
 
-
-
-	SET.allVisible = () => {
-
-		surfaceMeshes.visible = true;
-		surfaceEdges.visible = true;
-
-		for ( let child of surfaceMeshes.children ) {
-
-				child.visible = true;
-
-		}
-
-		buttons = document.body.getElementsByClassName( 'toggleView' );
-
-		for ( butt of buttons ) {
-
-			butt.style.backgroundColor = '';
-
-
-		}
-
-	}
 
 
