@@ -53,7 +53,7 @@
 
 	function initMenuEditSurfaces() {
 
-		EDT.surfacesXml = gbxml.getElementsByTagName("Surface");
+		EDT.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 //		console.log( 'EDT.surfacesXml', EDT.surfacesXml );
 
 		let txtSurfaces = '';
@@ -85,13 +85,13 @@
 
 		let txtTypes = '';
 
-		for ( let i = 0; i < surfaceTypes.length; i++ ) {
+		for ( let i = 0; i < GBX.surfaceTypes.length; i++ ) {
 
-			txtTypes += '<option>' + surfaceTypes[ i ] + '</option>';
+			txtTypes += '<option>' + GBX.surfaceTypes[ i ] + '</option>';
 
 		}
 
-		spacesXml = gbxml.getElementsByTagName("Space");
+		spacesXml = GBX.gbxml.getElementsByTagName("Space");
 		spacesXmlIds = ['none'];
 		//console.log( 'spacesXml', spacesXml );
 
@@ -167,7 +167,7 @@
 		const type = surface.attributes.getNamedItem( 'surfaceType' ).nodeValue;
 		//console.log( 'type', type );
 
-		selType.selectedIndex = surfaceTypes.indexOf( type );
+		selType.selectedIndex = GBX.surfaceTypes.indexOf( type );
 
 		const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
 
@@ -261,7 +261,7 @@
 
 		if ( window.divHeadsUp ) {
 
-			const surfaceMesh = surfaceMeshes.children.find( element => element.userData.data.id === id );
+			const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === id );
 			intersected = surfaceMesh;
 			HUD.setHeadsUp();
 
@@ -300,7 +300,7 @@
 
 		const type = selType.value;
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( type === child.userData.data.surfaceType ) {
 
@@ -322,7 +322,7 @@
 
 		id = that.value;
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			child.visible = false;
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
@@ -390,11 +390,11 @@
 		surface.remove();
 
 
-		for ( let child of surfaceMeshes.children ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( id === child.userData.data.id ) {
 
-				surfaceMeshes.remove( child );
+				GBX.surfaceMeshes.remove( child );
 
 			}
 

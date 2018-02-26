@@ -2,7 +2,7 @@
 
 	var user = 'ladybug-tools'
 	var repo = '/spider';
-	var pathRepo = 'gbxml-viewer/gbxml-sample-files/';
+	var pathRepo = 'gbxml-sample-files/';
 
 	var urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 
@@ -17,8 +17,6 @@
 	function init() {
 
 		if ( butGallerySampleFiles.style.backgroundColor !== 'var( --but-bg-color )' ) {
-
-			let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
 			divMenuItems.innerHTML =
 

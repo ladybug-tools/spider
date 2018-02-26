@@ -272,24 +272,27 @@ Feel free to add new ideas
 
 ### Core
 
+* 2018-02-25 ~ View gbXML source code
+
+### View Module / TBD
+
 * Better lights and shadows
 * Section views
+* 2018-02-11 ~ Theo: Add section views
 
 ### Gallery
 
-* 2018-02-11 ~ Theo: update links to new folder
 
 ### Heads-up Display
 
+* 2018-02-25 ~ Edit Adjacent Spade IDs
 * 2017-12-01 ~ What data should be included in heads-up display?
 
 
 ### Settings
 
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
-* 2018-02-11 ~ Theo: Fix explode view so it works
-* 2018-02-11 ~ Theo: Add section views
-
+* 2018-02-25 ~ Add plus minus and default buttons to explode view
 
 ### Reports
 
@@ -301,13 +304,13 @@ Feel free to add new ideas
 
 ### Sun Path / Analemmas
 
+### Sun Range
 
 ### Screen Capture
 
 * 2018-01-01 ~ Much better control over the camera
 
 
-### Sun Range
 
 
 
@@ -329,8 +332,8 @@ Will most likely build upon
 
 ## Issues
 
-* 2018-02-18 ~ Menu items not updating when loading new files
-* 2018-02-18 ~ Drag and drop broken
+* 2018-02-18 ~ Menu items should update/reset when loading new files
+
 
 
 ## Change Log
@@ -338,7 +341,7 @@ Will most likely build upon
 
 ### 2018-02-25 ~ Theo
 
-R10.y
+R10.7
 * All modules updated. Name space fixes etc
 * HUD
 	* Many fixes
@@ -346,6 +349,11 @@ R10.y
 * Edit duplicate adjacents
 	* Simplified
 	* Works more closely with HUD
+
+Done
+* 2018-02-18 ~ Drag and drop broken
+* 2018-02-11 ~ Theo: update links to new folder
+* 2018-02-11 ~ Theo: Fix explode view so it works
 
 ### 2018-02-19 ~ Theo
 
