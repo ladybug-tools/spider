@@ -8,10 +8,10 @@
 
 ## Full screen: [gbXML Viewer Template]( http://www.ladybug.tools/spider/gbxml-viewer/r10-4/gv-tmp/gv-tmp.html )
 
-Use and share this link for gbXML Viewer:
+Use and share these links for gbXML Viewer:
 
-* <http://www.ladybug.tools/spider/gbxml-viewer/>
-
+* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
+* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 ## Concept
 
