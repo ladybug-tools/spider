@@ -6,7 +6,9 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-01-core/gbxml-viewer10-core.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
 _[gbXML Viewer10 Core]( gbxml-viewer10-01-core/gbxml-viewer10-core.html ) ~ click the 'view model' button in left menu to view full screen_
 
-## Full screen: [gbXML Viewer Release 10 App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
+
+## Full Screen pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 
 ## Full screen: [gbXML Viewer Release 10 Core]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-01-core/gbxml-viewer8-core.html )

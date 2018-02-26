@@ -7,7 +7,10 @@
 _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
 
-## Full screen: [gbXML Viewer10]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
+
+## Full Screen pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
+
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
