@@ -366,7 +366,8 @@
 		let flowContent =
 			'<p>' +
 				'<button id=butDuplicatesCoordinates onclick=REP.toggleAdjacencies(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
-			'</p>';
+			'</p>' +
+			'<p style=background-color:yellow;color:red;>This menu will be deprecated. Use other edit buttons.</p>';
 		let spaceId;
 
 		for ( let i = 0; i <  surfaces.length; i++ ) {
@@ -522,7 +523,8 @@
 		let flowContent =
 			'<p>' +
 				'<button id=butDuplicateAdjacencies onclick=REP.toggleAdjacencies(butDuplicateAdjacencies,surfaceAdjacencyDuplicates); >toggle all duplicates</button>' +
-			'</p>';
+			'</p>' +
+			'<p style=background-color:yellow;color:red;>This menu will be deprecated. Use other edit buttons.</p>';
 
 		for ( let surface of surfaces ) {
 
@@ -743,7 +745,7 @@
 
 	REP.toggleSurface = ( id ) => {
 
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
@@ -797,7 +799,7 @@
 
 	REP.toggleSurfaceType = ( that ) => {
 
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 		//console.log( '', surfaceAdjacencyDuplicates );
 
 		for ( let child of GBX.surfaceMeshes.children ) {
@@ -821,7 +823,7 @@
 	REP.setTypeInvisible = ( that ) => {
 
 		//		surfaceGroup.visible = true;
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 		//console.log( '', surfaceAdjacencyDuplicates );
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
@@ -849,7 +851,7 @@
 	REP.toggleSpace = ( id ) => {
 
 		//		surfaceGroup.visible = true;
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
@@ -903,7 +905,7 @@
 		//console.log( '', CADObjectId );
 		//		surfaceGroup.visible = true;
 		GBX.surfaceEdges.visible = true;
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
@@ -929,7 +931,7 @@
 
 		//console.log( '', that.innerText );
 
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 
 		if ( id.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -969,7 +971,7 @@
 
 		GBX.surfaceMeshes.visible = true;
 		GBX.surfaceEdges.visible = true;
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
