@@ -19,6 +19,19 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 
 <details open>
 
+<summary>Welcome 2018-02-26 - ~ R10.8</summary>
+
+App
+* Menus reset when new model loaded
+
+HUD
+* Fix delete not deleting
+* Add ZXCV access keys to toggle visibility
+	* ALT + key to toggle element/surfaces/edges/all
+* Add input and select alternative spaces
+
+</details><details open>
+
 <summary>Welcome 2018-02-25 ~ R10.7</summary>
 
 Heads-up Display
