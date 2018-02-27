@@ -685,7 +685,7 @@
 
 		const spaces = GBX.gbjson.Campus.Building.Space;
 		//		surfaceGroup.visible = true;
-		icw.divLog.innerHTML = '';
+		//icw.divLog.innerHTML = '';
 
 		let zones = [];
 		let spacesArray = [];
@@ -726,7 +726,7 @@
 			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
 			'zones ' + zones.length + ': ' + zones.join();
 
-
+/*
 		for ( let storey of storeys ) {
 
 			if ( id === storey.id ) {
@@ -736,7 +736,7 @@
 			}
 
 		}
-
+*/
 		return zones;
 
 	}
@@ -885,7 +885,7 @@
 			}
 
 		}
-
+/*
 		for ( let space of spaces ) {
 
 			if ( id === space.id ) {
@@ -895,7 +895,7 @@
 			}
 
 		}
-
+*/
 	}
 
 
