@@ -186,12 +186,14 @@
 
 
 	GBV.showSpace = id => {
+		//console.log( 'id', id );
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
 			child.visible = false;
 
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
+
 			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
 
 				//console.log( 'adjacentSpaceId', adjacentSpaceId );
@@ -236,7 +238,7 @@
 
 		const storey = GBX.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
 
-		console.log( 'storey', storey );
+		//	console.log( 'storey', storey );
 
 	}
 

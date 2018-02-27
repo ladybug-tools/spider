@@ -8,11 +8,14 @@ button, input[ type=button ] { background-color: #ddd; border: none; color: var(
 button:hover { background-color: #ccc; color: #fff }
 
 iframe { height: 500px; width: 100%; }
-
+i { color: blue; }
 .dragDropArea { border: 1px dashed gray; padding: 5px; }
+
 .flex-container { display: flex; flex-wrap: wrap; }
 .flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
 
+.flex-container2 { display: flex; flex-wrap: wrap; }
+.flex-container2 > div { /* border: 1px solid #ddd; margin: 5px; padding: 5px; */ }
 
 #divDraggable, #divMenu {
 	background-color: #f1f1f1;

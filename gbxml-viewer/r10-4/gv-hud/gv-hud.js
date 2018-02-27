@@ -24,13 +24,13 @@
 				`
 					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px );
 					min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
-					padding: 5px 5px 10px 5px; position: fixed; resize: both; top: 20px; z-index: 10;
+					padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 20px; z-index: 10;
 				`;
 
 				divHeadsUp.innerHTML =
 				`
 					<div id=divDraggableHeader2 title="Open JavaScript console to see more data" >
-						Click here to move
+						click here to move
 						<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 					</div>
 					<div id=divHUDheader ></div>
@@ -38,7 +38,17 @@
 					<div id=divHUDfooter ></div>
 				`;
 
-				setSelectSurfaceType();
+//				setSelectSurfaceType();
+
+				let txt = '<select id = "selType" onchange=HUD.updateType(this.value); >';
+
+				for ( let type of GBX.surfaceTypes) {
+
+					txt += '<option>' + type + '</option>'
+
+				}
+
+				HUD.selTypeHtml =  txt + '</select>';
 
 				divDraggableHeader2.style.cssText =
 					'background-color: indianred; color: #fff; cursor: move; padding: 10px; z-index: 10;';
@@ -49,7 +59,6 @@
 				divDraggableHeader2.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 
 				//window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false ); //in COR
-
 
 			}
 
@@ -67,6 +76,8 @@
 		}
 
 	}
+
+
 
 
 
@@ -162,24 +173,7 @@
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;
 
-		//		dragElement;( event );
 		onRendererMouseMoveHUD( event );
-
-	}
-
-
-
-	function setSelectSurfaceType() {
-
-		let txt = '<select id = "selType" onchange=HUD.updateType(this.value); >';
-
-		for ( let type of GBX.surfaceTypes) {
-
-			txt += '<option>' + type + '</option>'
-
-		}
-
-		HUD.selTypeHtml =  txt + '</select>';
 
 	}
 
@@ -208,11 +202,6 @@
 
 	HUD.setHeadsUp = ( event ) => {
 
-		var space1, space2;
-//		let txt;
-		const b = '<br>';
-		setSelectSurfaceType();
-
 		if ( intersected === undefined ){
 
 			if ( event.type === 'touchstart' ) {
@@ -227,8 +216,22 @@
 
 		}
 
+		let space1, space2;
+		const b = '<br>';
+
+		let txt = '<select id = "selType" onchange=HUD.updateType(this.value); >';
+
+		for ( let type of GBX.surfaceTypes) {
+
+			txt += '<option>' + type + '</option>'
+
+		}
+
+		const selTypeHtml =  txt + '</select>';
+
+
+
 		divHeadsUp.style.display = '';
-		//console.log( '', divHeadsUp.style.left, divHeadsUp.style.top );
 
 		const data = intersected.userData.data;
 		HUD.data = data;
@@ -241,14 +244,16 @@
 		const headerTxt =
 		`
 			toggle the visible items<br>
-			<button onclick=intersected.visible=!intersected.visible; >element</button>
-			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
-			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
-			<button onclick=GBV.setAllVisible(); >all</button>
+			<button onclick=intersected.visible=!intersected.visible; accesskey="z" title = "key Z" >element</button>
+			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; accesskey="x" title = "key X" >surfaces</button>
+			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; accesskey="c" title = "key C"  >edges</button>
+			<button onclick=GBV.setAllVisible(); accesskey="v" title = "key V" >all</button>
+			<br>
 			edit the surface<br>
-			<button class=toggle onclick=GBV.deleteSurface("' + data.id + '"); >delete surface</button>
+			<button class=toggle onclick=GBV.deleteSurface("` + data.id + `"); >delete surface</button>
 			<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
 			<br>
+
 			<b>surface</b><br>
 			id <button onclick=GBV.showSurface(this.innerText)  >` + data.id + `</button>
 			<button onclick=GBV.zoomIntoSurface("` + data.id + `"); >zoom</button>
@@ -256,83 +261,111 @@
 			+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
 
 			`type <button onclick=GBV.showSurfaceType(this.innerText);  >` + data.surfaceType + `</button>` +
-			` edit ` + HUD.selTypeHtml +
-			`<br>`+
+			` edit <select id = "selType" onchange=HUD.updateType(this.value); >` + GBX.surfaceTypeOptions + `</select>
+			<br>`+
 
 			( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
-				encodeURI( data.CADObjectId ) + '"); >' + data.CADObjectId + '</button><br>' : '' ) +
+				encodeURI( data.CADObjectId ) + `"); >` + data.CADObjectId + `</button><br>` : `` ) +
 			`area <i>` + Number( surfaceArea ).toFixed( 1 ) +
 			`</i><br>length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) +
 			`</i></p>
+			<hr>
 		`;
 
-		adjacenciesTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : 'no adjacency';
+		adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : 'no adjacency';
 
-		if ( adjacenciesTxt !== 'no adjacency' ) {
+		if ( adjacentsTxt !== 'no adjacency' ) {
 
-			if ( Array.isArray( adjacenciesTxt ) === true ) {
+			if ( Array.isArray( adjacentsTxt ) === true ) {
 
-				//console.log( 'adjacenciesTxt', adjacenciesTxt );
+				//console.log( 'adjacentsTxt', adjacentsTxt );
 
-				space1 = GBV.getSpaceId( adjacenciesTxt[ 0 ].spaceIdRef );
-				space2 = GBV.getSpaceId( adjacenciesTxt[ 1 ].spaceIdRef );
+				space1 = GBV.getSpaceId( adjacentsTxt[ 0 ].spaceIdRef );
+				space2 = GBV.getSpaceId( adjacentsTxt[ 1 ].spaceIdRef );
 
 				if ( space1 && space2 ) {
 
-					adjacenciesTxt =
-
+					adjacentsTxt =
+						'<div class=flex-container2 >' +
+							'<div >' +
+								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 ><br>' +
+								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spaceOptions + '</select><br>' +
+							'</div>' +
+							'<div style=margin-left:15px;>' +
+								'<b>adjacent space 1</b> ' + b +
+								'id <button onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' +
+									'<button onclick=JavaScript:alert("coming soon"); >update</button>' + b +
+								( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
+								( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
+								( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
+								( space1.Volume ? '</i> volume </i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
+								( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' ) +
+								( space1.zoneIdRef ? 'zone id ref <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
+								'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
+								( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
+							'</div>' +
+						'</div>' +
 						'<hr>' +
-						'<b>adjacent space 1</b>  <button onclick=GBV.showSpace(this.innerText); >' + space1.id + '</button>' + b +
-						( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
-						( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
-						( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
-						( space1.Volume ? '</i> volume </i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-						( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' ) +
-						( space1.zoneIdRef ? 'zone id ref <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
-						'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
-						( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
 
-						'<hr>' +
-						'<b>adjacent space 2</b> <button onclick=GBV.showSpace(this.innerText); >' + space2.id + '</button>' + b +
-						( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
-						( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
-						( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
-						( space2.Volume ? ' volume <i>' + Number( space2.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-						( space2.conditionType ? 'condition type <i>' + space2.conditionType + '</i>' + b : '' ) +
-						( space2.zoneIdRef ? 'zone id ref <i>' + space2.zoneIdRef + '</i>' + b : '' ) +
-						'storey <button onclick=GBV.showStorey(this.innerText); >' + space2.buildingStoreyIdRef + '</button>' + b +
-
-						( space2.CADObjectId ? 'cad object id <i>' + space2.CADObjectId + '</i>' + b : '' ) +
-					'';
+						'<div class=flex-container2 >' +
+							'<div >' +
+								'<input oninput=HUD.updateSelect(this,selSpace2); size=6 ><br>' +
+								'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spaceOptions + '</select><br>' +
+							'</div>' +
+							'<div style=margin-left:15px; >' +
+								'<b>adjacent space 2</b> ' + b +
+								'id <button onclick=GBV.showSpace(this.innerText);selSpace2.value=this.innerText; >' + space2.id + '</button> ' +
+									'<button onclick=JavaScript:alert("coming soon"); >update</button>' + b +
+								( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
+								( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
+								( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
+								( space2.Volume ? ' volume <i>' + Number( space2.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
+								( space2.conditionType ? 'condition type <i>' + space2.conditionType + '</i>' + b : '' ) +
+								( space2.zoneIdRef ? 'zone id ref <i>' + space2.zoneIdRef + '</i>' + b : '' ) +
+								'storey <button onclick=GBV.showStorey(this.innerText); >' + space2.buildingStoreyIdRef + '</button>' + b +
+								( space2.CADObjectId ? 'cad object id <i>' + space2.CADObjectId + '</i>' + b : '' ) +
+							'</div>' +
+						'</div>';
 
 				} else {
 
-					adjacenciesTxt = 'adjacencies: ' + data.AdjacentSpaceId[ 0 ] + ' ' + data.AdjacentSpaceId[ 1 ];
+					adjacentsTxt = 'adjacencies: ' + data.AdjacentSpaceId[ 0 ] + ' ' + data.AdjacentSpaceId[ 1 ];
 
 				}
 
 			} else {
 
 				//console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef );
-				//console.log( 'adjacenciesTxt', adjacenciesTxt );
+				//console.log( 'adjacentsTxt', adjacentsTxt );
 
-				space = GBV.getSpaceId( data.AdjacentSpaceId.spaceIdRef, 'single' );
+				space1 = GBV.getSpaceId( data.AdjacentSpaceId.spaceIdRef, 'single' );
 
-				if ( !space ) { return; }
-				adjacenciesTxt =
-					'<hr>' +
-					'<b>adjacent space id</b> <button onclick=GBV.showSpace(this.innerText); >' + space.id + '</button>' + b +
-					( space.Name ? 'name <i>' + space.Name +  '</i>' +b : '' )  +
-					( space.Description ? 'description: <i>' + encodeURI( space.Description ) +  '</i>' +b : '' ) +
-					( space.Area ? 'area <i>' + Number( space.Area ).toFixed( 1 ) + '</i>' : '' ) +
-					( space.Volume ? ' volume <i>' + Number( space.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-					'storey <button onclick=GBV.showStorey(this.innerText); >' + space.buildingStoreyIdRef + '</button>' + b +
-					( space.conditionType ? 'condition type <i>' + space.conditionType + '</i>' + b : '' )  +
-					( space.zoneIdRef ? 'zone id ref <i>' + space.zoneIdRef + '</i>' + b : '' ) +
-					( space.CADObjectId ? 'CAD Object Id <i>' + space.CADObjectId + '</i>' + b : '' ) +
-				'';
+				if ( !space1 ) { return; }
+
+				adjacentsTxt =
+					'<div class=flex-container2 >' +
+					'<div >' +
+						'<input oninput=HUD.updateSelect(this,selSpace1); size=6 ><br>' +
+						'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spaceOptions + '</select><br>' +
+					'</div>' +
+					'<div style=margin-left:15px; >' +
+						'<b>adjacent space 1</b> ' + b +
+						'id <button onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' +
+							'<button onclick=JavaScript:alert("coming soon"); >update</button>' + b +
+						( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
+						( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
+						( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) + '</i>' : '' ) +
+						( space1.Volume ? ' volume <i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
+						'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
+						( space1.conditionType ? 'condition <i>' + space1.conditionType + '</i>' + b : '' )  +
+						( space1.zoneIdRef ? 'zone id <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
+						( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
+					'</div>' +
+				'</div>';
 
 			}
+
+
 
 		}
 
@@ -344,10 +377,12 @@
 		`;
 
 		divHUDheader.innerHTML = headerTxt;
-		divHUDItems.innerHTML = adjacenciesTxt;
+		divHUDItems.innerHTML = adjacentsTxt;
 		divHUDfooter.innerHTML = footerTxt;
 
 		selType.value = data.surfaceType;
+		if ( window.selSpace1 ) { selSpace1.value = space1.id; }
+		if ( window.selSpace2 ) { selSpace2.value = space2.id; }
 
 		document.body.style.cursor = 'pointer';
 
@@ -355,6 +390,7 @@
 
 			inpSurface.value = data.id;
 			selSurface.value = data.id;
+
 			const surface = HUD.surfacesXml[ selSurface.selectedIndex ];
 			//console.log( 'surface', surface );
 
@@ -384,6 +420,27 @@
 
 	}
 
+
+	HUD.updateSelect = ( input, select ) => {
+
+		const str = input.value.toLowerCase();
+		select.value = input.value;
+
+		for ( let option of select.options ) {
+
+			if ( option.value.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+
+				break;
+
+			}
+
+		}
+
+		select.click();
+
+	}
 
 
 /////////

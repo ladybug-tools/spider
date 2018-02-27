@@ -13,8 +13,8 @@
 	GBX.gbxml = null;
 	GBX.gbxmlResponseXML;
 	GBX.gbjson;
-	GBX.surfaceJson = null;
 
+	GBX.surfaceJson = null;
 	GBX.surfaceMeshes;
 	GBX.surfaceEdges;
 
@@ -39,7 +39,14 @@
 	}
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
+	let txt = '';
+	for ( let type of GBX.surfaceTypes ) {
 
+		txt += '<option>' + type + '</option>';
+
+	}
+
+	GBX.surfaceTypeOptions = txt;
 
 
 
@@ -119,7 +126,7 @@
 	}
 
 
-	THR.varsGlobalToLocal = () => {
+	THR.xxxvarsGlobalToLocal = () => {
 
 		const renderer = THR.renderer;
 		const scene = THR.scene;
@@ -402,6 +409,19 @@
 
 		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
+		GBX.spaces = GBX.gbjson.Campus.Building.Space;
+
+		let txt = '<option>none</option>';
+
+		for ( let space of GBX.spaces ) {
+
+			txt += '<option>' + space.id + '</option>';
+
+		}
+
+		GBX.spaceOptions = txt;
+		//console.log( 'GBX.spaceOptions', GBX.spaceOptions);
+
 	}
 
 
@@ -561,7 +581,6 @@
 		let controls = THR.controls;
 		const lightPoint = THR.lightPoint;
 
-
 		GBX.surfaceMeshes.visible = true;
 
 		document.body.style.backgroundImage = '';
@@ -598,4 +617,3 @@
 		scene.add( camera );
 
 	}
-

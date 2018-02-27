@@ -37,6 +37,15 @@ The next steps may include
 
 ## Change Log
 
+### 2018-02-26 ~ Theo
+
+R10.8
+* HUD
+* Fix delete not deleting
+* Add ZXCV access keys to toggle visibility
+	* ALT + key to toggle element.surfaces/edges/all
+* Add input and select alternative spaces
+
 ### 2018-02-25 ~ Theo
 
 R10.7
