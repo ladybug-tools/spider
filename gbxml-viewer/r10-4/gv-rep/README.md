@@ -39,13 +39,18 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 ## Wish list / To Do
 
 * See main [read me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md )
-
-
+* 2018-02-26 ~ Next and previous buttons to navigate through storeys, surfaces, spaces etc
+* 2018-02-26 ~ Surfaces, Spaces: checkbox for auto-zooming
+* 2018-02-26 ~ Better telltale size for small surfaces
 ## Issues
 
 
 
 ## Change Log
+
+### 2018-02-26 ~ Theo
+
+R10.8
 
 ### 2018-02-24 ~ Theo
 

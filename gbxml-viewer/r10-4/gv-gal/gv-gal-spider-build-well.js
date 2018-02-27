@@ -21,7 +21,7 @@
 
 			divMenuItems.innerHTML =
 
-				'<details id = detGalleryBuildWell open>' +
+				'<details id = detGalleryBuildWell  class=app-menu open>' +
 
 					'<summary>Build Well on GitHub</summary>' +
 

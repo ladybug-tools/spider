@@ -21,7 +21,7 @@
 
 			divMenuItems.innerHTML =
 
-				'<details id = detGalleryGbxml open>' +
+				'<details id = detGalleryGbxml  class=app-menu open>' +
 
 					'<summary>gbXML Sample Files on GitHub</summary>' +
 

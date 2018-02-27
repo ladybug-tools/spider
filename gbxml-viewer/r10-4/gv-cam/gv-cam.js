@@ -1,9 +1,7 @@
 
 	// having issues adding a name space here
 
-	var avatar;
-	var ui;
-	var size = 1;
+
 
 	var firstPersonUI =
 		`
@@ -88,9 +86,12 @@
 
 		if ( butCameraFirstPerson.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
-			ui = document.body.appendChild( document.createElement( 'div' ) );
-			ui.innerHTML = firstPersonUI;
-			ui.style.cssText = 'left: 0; position: absolute; bottom: 20px; margin: 0 auto; text-align: center; right: 0; width: 30%; ';
+			window.CAM = {};
+
+			CAM.size = 1;
+			CAM.ui = document.body.appendChild( document.createElement( 'div' ) );
+			CAM.ui.innerHTML = firstPersonUI;
+			CAM.ui.style.cssText = 'left: 0; position: absolute; bottom: 20px; margin: 0 auto; text-align: center; right: 0; width: 30%; ';
 
 			uiInfo = document.body.appendChild( document.createElement( 'div' ) );
 			uiInfo.innerHTML = divCameraFirstPerson;
@@ -117,11 +118,11 @@
 
 	function toggleCameraFirstPersonOff() {
 
-		avatar.visible = false;
+		CAM.avatar.visible = false;
 
-		butCameraFirstPerson.style.backgroundColor = '';
+//		butCameraFirstPerson.style.backgroundColor = '';
 
-		document.body.removeChild( ui );
+		document.body.removeChild( CAM.ui );
 
 		GBV.setAllVisible();
 		GBV.zoomObjectBoundingSphere( GBX.surfaceMeshes );
@@ -134,7 +135,7 @@
 
 		//console.log( 'campusSurfaces.userData', size );
 
-		if ( !avatar ) {
+		if ( !CAM.avatar ) {
 
 			const geometryIcosahedron = new THREE.IcosahedronBufferGeometry( 1 );
 			const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), emissive: 0x555555, shininess: 50 });
@@ -143,19 +144,19 @@
 			const geoTail = geometryIcosahedron.clone().applyMatrix( new THREE.Matrix4().makeScale( 1, 3, 0.5 ) );
 			geoTail.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -1.5, 0.3 ) );
 
-			avatar = new THREE.Mesh( geoHead, material );
-			avatar.add( new THREE.Mesh( geoTail, material ) );
+			CAM.avatar = new THREE.Mesh( geoHead, material );
+			CAM.avatar.add( new THREE.Mesh( geoTail, material ) );
 
-			avatar.position.copy( THR.axesHelper.position );
-			avatar.castShadow = avatar.receiveShadow = true;
+			CAM.avatar.position.copy( THR.axesHelper.position );
+			CAM.avatar.castShadow = CAM.avatar.receiveShadow = true;
 
 		}
 
-		size = GBX.gbjson.useSIUnitsForResults.toLowerCase() === 'true' ? 0.2 : 0.6;
-		avatar.scale.set( size, size, size );
-		avatar.position.copy( THR.axesHelper.position );
-		avatar.visible = true;
-		THR.scene.add( avatar );
+		CAM.size = GBX.gbjson.useSIUnitsForResults.toLowerCase() === 'true' ? 0.2 : 0.6;
+		CAM.avatar.scale.set( CAM.size, CAM.size, CAM.size );
+		CAM.avatar.position.copy( THR.axesHelper.position );
+		CAM.avatar.visible = true;
+		THR.scene.add( CAM.avatar );
 
 	}
 
@@ -172,13 +173,13 @@
 						const material = new THREE.MeshNormalMaterial();
 						const mesh = new THREE.Mesh( geometry, material );
 						mesh.position.set( -1, -3, 1 );
-						avatar.add( mesh );
+						CAM.avatar.add( mesh );
 			*/
 
 			THR.controls.target.set( 0, 0, 2 );
 			THR.camera.position.set( -1, -8, 3 );
 
-			avatar.add( THR.camera );
+			CAM.avatar.add( THR.camera );
 
 		} else {
 
@@ -189,12 +190,12 @@
 					const material = new THREE.MeshNormalMaterial();
 					const mesh = new THREE.Mesh( geometry, material );
 					mesh.position.set( -1, -3, 1 );
-					avatar.add( mesh );
+					CAM.avatar.add( mesh );
 		*/
 
 			THR.controls.target.set( 0, 0, 2 );
 			THR.camera.position.set( -1, -8, 3 );
-			avatar.add( THR.camera );
+			CAM.avatar.add( THR.camera );
 
 		}
 
@@ -236,49 +237,49 @@
 
 	goForward = () => {
 
-		avatar.translateY( size );
+		CAM.avatar.translateY( CAM.size );
 
 	}
 
 	goBack = () => {
 
-		avatar.translateY( -size );
+		CAM.avatar.translateY( -CAM.size );
 
 	}
 
 	 goUp = () => {
 
-		avatar.translateZ( 0.5 );
+		CAM.avatar.translateZ( 0.5 );
 
 	}
 
 	goDown = () => {
 
-		avatar.translateZ( -0.5 );
+		CAM.avatar.translateZ( -0.5 );
 
 	}
 
 	turnRight = () => {
 
-		avatar.rotation.z -= 0.1;
+		CAM.avatar.rotation.z -= 0.1;
 
 	}
 
 	turnLeft = () => {
 
-		avatar.rotation.z += 0.1;
+		CAM.avatar.rotation.z += 0.1;
 
 	}
 
 	turnUp = () => {
 
-		avatar.rotation.x += 0.1;
+		CAM.avatar.rotation.x += 0.1;
 
 	}
 
 	turnDown = () => {
 
-		avatar.rotation.x -= 0.1;
+		CAM.avatar.rotation.x -= 0.1;
 
 	}
 

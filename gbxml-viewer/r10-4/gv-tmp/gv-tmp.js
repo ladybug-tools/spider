@@ -9,7 +9,7 @@
 
 			divMenuItems.innerHTML =
 
-				`<details id = detTemplate open>
+				`<details id = detTemplate  class=app-menu open>
 
 					<summary>Template</summary>
 

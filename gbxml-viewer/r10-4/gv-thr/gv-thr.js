@@ -413,11 +413,13 @@
 
 		let txt = '<option>none</option>';
 
+//		if ( GBX.spaces.length ) {
 		for ( let space of GBX.spaces ) {
 
 			txt += '<option>' + space.id + '</option>';
 
 		}
+//		}
 
 		GBX.spaceOptions = txt;
 		//console.log( 'GBX.spaceOptions', GBX.spaceOptions);

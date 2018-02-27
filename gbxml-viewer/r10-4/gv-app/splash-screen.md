@@ -1,7 +1,7 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10.7
+# gbXML Viewer R10.8
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
@@ -16,8 +16,6 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 
 </details>
 -->
-
-### Issue: After each file load, you should toggle each menu button
 
 <details open>
 

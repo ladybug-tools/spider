@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-25" >
-<title>gbXML Viewer 10.7</title>
+<meta name = "date" content = "2018-02-26" >
+<title>gbXML Viewer 10.8</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -16,12 +16,14 @@
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
 <script src = "../gv-gbv/gv-gbv.js" ></script>
+
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+
 	<div id = "divMenu" >
 
 		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
 
-			Click here to move
+			click here to move
 
 		</div>
 
@@ -46,7 +48,7 @@
 
 				<p id=dragArea class=dragDropArea >
 					Drag and drop Three.js files into this box or <br>
-					<input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this)" >
+					<input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" >
 				<p>
 
 				<hr>
@@ -58,32 +60,32 @@
 
 				<summary>Toggle Features</summary>
 
-				<button id=butSettings onclick=
+				<button id=butSettings class=app-menu onclick=
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-set/gv-set.js'; " >
 				settings</button>
 
-				<button id=butReports onclick =
+				<button id=butReports class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep/gv-rep.js'; " >
 				reports</button>
 
-				<button id=butHeadsUp onclick =
+				<button id=butHeadsUp class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-hud/gv-hud.js';" >
 				heads-up display</button>
 
-				<button id=butEditor onclick =
+				<button id=butEditor class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-edt/gv-edt.js';" >
 				edit file </button>
 
-				<button id=butCoordinates onclick =
+				<button id=butCoordinates class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-crd/gv-crd.js';" >
 				edit duplicate surfaces </button>
 
-				<button id=butAdjacents onclick =
+				<button id=butAdjacents class=app-menu onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-adj/gv-adj.js';" >
 				edit duplicate adjacents </button>
@@ -93,49 +95,47 @@
 				<details open>
 					<summary>things to try</summary>
 
-					<button id=butCameraFirstPerson onclick =
+					<button id=butCameraFirstPerson class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-cam/gv-cam.js';" >
+					script.src = '../gv-cam/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
 					first person camera</button>
 
-					<button id=butAnalemma onclick="
+					<button id=butAnalemma class=app-menu onclick="
 						const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 						scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 						const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gv-ana/gv-ana.js'; " >
+						script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
 					sun-path / analemma</button>
 
 <!--
-
-					<button id=butSunRange onclick="
+					<button id=butSunRange class=app-menu onclick="
 					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 					const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
 					sun-range</button>
 
-					<button id=butScreenCapture onclick =
+					<button id=butScreenCapture class=app-menu onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
 					screen capture </button>
-
 	-->
 
 					<p>Sample files on GitHub to explore:</p>
 
-					<button id=butGalleryGbxml onclick =
+					<button id=butGalleryGbxml class=app-menu onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-gbxml.js';" >
 						gbXML.org Sample Files
 					</button>
 
-					<button id=butGallerySampleFiles onclick =
+					<button id=butGallerySampleFiles class=app-menu onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
 						Spider gbXML sample files
 					</button>
 
-					<button id=butGalleryBuildWell onclick =
+					<button id=butGalleryBuildWell class=app-menu onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
 						Spider Build Well
@@ -181,11 +181,11 @@
 
 				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
 
-				<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>
+				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
 
-				<button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>
+				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
 
-				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(surfaceMeshes); >reset view</button>
+				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
 
 			</p>
 
@@ -211,30 +211,36 @@
 	THR.initThreeGbxml();
 	THR.animate();
 	COR.onHashChange();
-/*
-	let colors;
-	let gbxml;
-	let gbxmlResponseXML;
-	let gbjson;
-	let surfaceJson;
-	let surfaceMeshes;
-	let surfaceEdges;
-	let surfaceTypes;
-	let setAllVisible;
-*/
+
+
+
 	function onloadThreejs() {
-/*
-		colors = GBX.colors;
-		gbxml = GBX.gbxml;
-		gbxmlResponseXML = GBX.gbxmlResponseXML;
-		gbjson = GBX.gbjson;
-		surfaceJson = gbjson.Campus.Surface;
-		surfaceMeshes = GBX.surfaceMeshes;
-		surfaceEdges = GBX.surfaceEdges;
-		surfaceTypes = GBX.surfaceTypes;
-*/
+
+
+		resetMenu();
+
 	}
 
+
+	function resetMenu () {
+
+		menuButtons = document.querySelectorAll( "button.app-menu" );
+
+		menuButtons.forEach(  element => element.style.backgroundColor ='' );
+
+		menuDetails = document.querySelectorAll( "details.app-menu" );
+
+		menuDetails.forEach(  element => element.remove() );
+
+		if ( window.divHeadsUp ){
+
+			divHeadsUp.style.display="none";
+
+		}
+
+
+
+	}
 
 
 

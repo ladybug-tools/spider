@@ -8,7 +8,7 @@
 
 			divMenuItems.innerHTML =
 
-				`<details id = "detAdjacents" open>
+				`<details id = "detAdjacents" class=app-menu open>
 
 					<summary id = "sumADJSummary" >Duplicate Adjacents</summary>
 

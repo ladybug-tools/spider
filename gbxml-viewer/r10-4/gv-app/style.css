@@ -24,8 +24,13 @@
 	summary { font-weight: bold; }
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+
 	.flex-container { display: flex; flex-wrap: wrap;}
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
+
+	.flex-container2 { display: flex; flex-wrap: wrap; }
+	.flex-container2 > div { /* border: 1px solid #ddd; margin: 5px; padding: 5px; */ }
+
 
 	#divContainer { background-color: white; border: 1px solid #888; display: none; height: 80%; left: 400px;
 		margin: 0; max-width: 900px;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px; }

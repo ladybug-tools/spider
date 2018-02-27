@@ -38,6 +38,7 @@
 
 		let spaces;
 
+
 		surfaceAdjacencyDuplicates = [];
 		surfaceAdjacencyInvalids = [];
 		surfaceCoordinateDuplicates = [];
@@ -53,8 +54,7 @@
 				'<summary>Reports</summary>' +
 
 				'<p>' +
-					'toggles<br>' +
-					'<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
+					'toggles <button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
 					' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
 					' <button onclick=GBV.setAllVisible(); >all visible</button>' +
 				'</p>' +

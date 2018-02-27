@@ -13,7 +13,7 @@
 
 			divMenuItems.innerHTML =
 
-				`<details id = detCoordinates open>
+				`<details id = detCoordinates  class=app-menu open>
 
 					<summary id=sumCRDSummary >Duplicate Coordinates</summary>
 

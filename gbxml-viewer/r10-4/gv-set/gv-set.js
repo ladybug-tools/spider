@@ -10,7 +10,7 @@
 
 			divMenuItems.innerHTML =
 
-				'<details id=detSettings open >' +
+				'<details id=detSettings class=app-menu open >' +
 
 					'<summary>Settings</summary>' +
 

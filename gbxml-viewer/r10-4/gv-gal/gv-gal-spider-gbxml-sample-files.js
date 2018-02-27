@@ -20,7 +20,7 @@
 
 			divMenuItems.innerHTML =
 
-				'<details id = detSampleFiles open>' +
+				'<details id = detSampleFiles  class=app-menu open>' +
 					'<summary>Ladybug Tools/Spider gbXML Viewer sample files on GitHub</summary>' +
 
 					'<p id=pSampleFiles ></p>' +

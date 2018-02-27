@@ -23,7 +23,7 @@
 				divHeadsUp.style.cssText =
 				`
 					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px );
-					min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
+					max-height: 95%; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
 					padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 20px; z-index: 10;
 				`;
 
@@ -294,7 +294,7 @@
 							'<div style=margin-left:15px;>' +
 								'<b>adjacent space 1</b> ' + b +
 								'id <button onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' +
-									'<button onclick=JavaScript:alert("coming soon"); >update</button>' + b +
+									'<button onclick=JavaScript:alert("coming-soon"); >update</button>' + b +
 								( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
 								( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
 								( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
@@ -315,7 +315,7 @@
 							'<div style=margin-left:15px; >' +
 								'<b>adjacent space 2</b> ' + b +
 								'id <button onclick=GBV.showSpace(this.innerText);selSpace2.value=this.innerText; >' + space2.id + '</button> ' +
-									'<button onclick=JavaScript:alert("coming soon"); >update</button>' + b +
+									'<button onclick=JavaScript:alert("coming-soon"); >update</button>' + b +
 								( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
 								( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
 								( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
@@ -351,7 +351,7 @@
 					'<div style=margin-left:15px; >' +
 						'<b>adjacent space 1</b> ' + b +
 						'id <button onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' +
-							'<button onclick=JavaScript:alert("coming soon"); >update</button>' + b +
+							'<button onclick=JavaScript:alert("coming-soon"); >update</button>' + b +
 						( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
 						( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
 						( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) + '</i>' : '' ) +

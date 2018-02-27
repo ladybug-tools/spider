@@ -110,8 +110,8 @@
 		} else {
 
 			detAnalemma.remove();
-			scene.remove( analemma );
-			lightDirectional.remove( sun );
+			THR.scene.remove( analemma );
+			THR.lightDirectional.remove( sun );
 
 			butAnalemma.style.backgroundColor = '';
 

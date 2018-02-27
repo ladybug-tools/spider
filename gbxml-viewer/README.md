@@ -342,6 +342,13 @@ Will most likely build upon
 ## Change Log
 
 
+### 2018-02-26 ~ Theo
+
+R10.8
+
+App
+* Menus reset when new model loaded
+
 ### 2018-02-25 ~ Theo
 
 R10.7

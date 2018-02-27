@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer reports" >
+<meta name = "description" content = "Test sample gbXML Viewer Reports" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-02-15" >
-<title>gv-rep</title>
+<title>gv-rep gbXML Viewer Reports</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -18,14 +18,14 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'gv rep' to load test menu</p>
+	<p>If it does not open automatically, click 'gv rep gbXML Viewer Reports' to load test menu</p>
 
 	<p>
 		<button id=butReports onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = '../gv-rep/gv-rep.js';
 			divMenu.style.display='block';" >
-			gv rep </button>
+			gv rep gbXML Viewer Reports</button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
@@ -79,26 +79,11 @@
 		THR = icw.THR;
 		GBV = icw.GBV;
 		GBX = icw.GBX;
-		/*
-		renderer = icw.THR.renderer;
-		camera = icw.THR.camera;
-		controls = icw.THR.controls;
-		scene = icw.THR.scene;
-		axesHelper = icw.THR.axesHelper;
-		lightDirectional = icw.THR.lightDirectional;
-		colors = icw.GBX.colors;
-		gbjson = icw.GBX.gbjson;
-		surfaceMeshes = icw.GBX.surfaceMeshes;
-		surfaceEdges = icw.GBX.surfaceEdges;
-		divLog = icw.divLog;
-		zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
-		setAllVisible = icw.GBX.setAllVisible;
-		*/
+
+		THR.controls.autoRotate = false;
+
 		console.log( 'scene', THR.scene );
 		butReports.click();
-
-
-
 
 	}
 
@@ -106,8 +91,12 @@
 
 	function onHashChange() {
 
-		ifrThree.src = COR.threeDefaultFile + location.hash;
+		const url = COR.threeDefaultFile + location.hash;
+		console.log( 'url', url );
+
+		ifrThree.src = url;
 		ifrThree.contentWindow.location.reload();
+
 	}
 
 
