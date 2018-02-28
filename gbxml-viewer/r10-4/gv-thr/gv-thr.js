@@ -51,6 +51,19 @@
 
 
 	THR.initThreeGbxml = () => {
+/*
+		if ( window.self === window.top ) {
+
+			divTitle.innerHTML =
+				'<h2>' +
+					'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + COR.iconInfo + '</a>' +
+					' <a  href = "" >' + document.title + '</a>' +
+				'</h2>' +
+				'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+			'';
+
+		}
+*/
 
 		let renderer, camera, controls, scene;
 		let lightAmbient, lightDirectional, lightPoint;

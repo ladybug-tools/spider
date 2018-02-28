@@ -16,9 +16,9 @@
 				<details id = detSurfaceEdits  class=app-menu open title='Use up and down cursor keys to scroll through the list of surfaces quickly' >
 
 					<summary>Surface Edits</summary>
-
+/*
 					<p style=background-color:yellow;color:red;>This menu will be deprecated. Use other edit buttons.</p>
-
+*/
 					<p><small><i>Select a surface in the left column then update its type and adjacent spaces</i></small></p>
 
 					<div id=divGbxml style=max-height:600px;overflow:auto; class=flex-container ></div>

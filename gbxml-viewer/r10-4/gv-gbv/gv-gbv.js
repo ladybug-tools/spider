@@ -177,7 +177,9 @@
 
 		if ( !GBX.gbjson.Campus.Building.Space || !GBX.gbjson.Campus.Building.Space.length ) { return; }
 
-		const space = GBX.gbjson.Campus.Building.Space.find( element => element.id === spaceIdRef );
+		let space = GBX.gbjson.Campus.Building.Space.find( element => element.id === spaceIdRef );
+
+		space = space ? space : 'none';
 
 		return space;
 
