@@ -1,3 +1,4 @@
+
 	var SET = {};
 
 
@@ -6,9 +7,6 @@
 	function initSettings() {
 
 		if ( butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
-
-
-			SET.explodeStart = false;
 
 			divMenuItems.innerHTML =
 
@@ -68,20 +66,17 @@
 						'<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >' +
 					'</p>' +
 
-					/*
 					'<p title="building surface separation: 0 to 100%" >Explode view: ' +
 						'<output id=outViewExplode class=floatRight >0%</output>' +
 						'<input type="range" id="rngViewExplode" min=-50 max=50 step=1 value=0 onchange=SET.updateViewExplodeHorizontal(); >' +
-					'</p>' +
-					*/
-
-					'<p title="building surface separation: 0 to 100%" >Explode view <br>' +
-						'<button onclick=SET.explodeMinus();> minus </button>' +
-						'<button onclick=SET.explodeReset(); >reset</button>' +
-						'<button onclick=SET.explodePlus();> plus </button>' +
-					'</p>' +
-
-
+						'<button onclick=SET.resetExplode(); >reset</button>' +
+						'</p>' +
+			/*
+								'<p title="building surface separation: 0 to 100%" >Explode view vertical: ' +
+									'<output id=outViewExplodeVertical class=floatRight >0%</output>' +
+									'<input type="range" id="rngViewExplodeVertical" min=0 max=100 step=1 value=0 oninput=SET.updateViewExplodeVertical(); >' +
+								'</p>' +
+			*/
 					'<hr>' +
 
 				'</details>' +
@@ -441,7 +436,7 @@
 
 	}
 
-/*
+
 	SET.updateViewExplodeHorizontalOriginal = () => {
 
 		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
@@ -467,9 +462,9 @@
 
 	}
 
-*/
 
-	SET.xxxupdateViewExplodeHorizontal = () => {
+
+	SET.updateViewExplodeHorizontal = () => {
 
 		const s = parseFloat( rngViewExplode.value ) / 3;
 
@@ -499,8 +494,6 @@
 			if ( child instanceof THREE.Mesh ) {
 
 				child.updateMatrixWorld();
-
-				child.userData.positionStart1 = child.position.clone();
 
 				if ( !child.userData.positionStart ) {
 
@@ -558,147 +551,9 @@
 
 	}
 
-	SET.explodeReset = () => {
+	Set.resetExplode = () => {
 
-		if ( SET.explodeStart === false ) { SET.explodeInit() };
 
-		THR.scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.position.copy( child.userData.positionStart1 );
-
-			}
-
-		} );
-
-		GBX.surfaceEdges.visible = true;
-
-	}
-
-
-
-	SET.explodeInit = () => {
-
-		THR.scene.updateMatrixWorld();
-
-		THR.scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.updateMatrixWorld();
-
-				child.userData.positionStart1 = child.position.clone();
-
-			}
-
-		} );
-
-		SET.explodeStart = true;
-
-	}
-
-
-
-	SET.explodePlus = () => {
-
-		if ( SET.explodeStart === false ) { SET.explodeInit() };
-
-		const s = 1;
-
-		GBX.surfaceEdges.visible = false;
-
-		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
-		const sphere = bbox.getBoundingSphere();
-		center = sphere.center;
-		radius = sphere.radius;
-
-		THR.scene.updateMatrixWorld();
-
-		THR.scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.updateMatrixWorld();
-
-				if ( !child.userData.positionStart ) {
-
-					if ( child.geometry.boundingSphere ) {
-
-						const pp = child.geometry.boundingSphere.center.clone();
-						pp.applyMatrix4( child.matrixWorld );
-						child.userData.positionStart = pp;
-
-					} else {
-
-						child.userData.positionStart = child.position.clone();
-
-					}
-
-					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
-
-				}
-
-				const p = child.userData.positionStart.clone();
-				const vec = child.userData.vectorStart.clone();
-
-//				child.position.add( new THREE.Vector3( 1.2 * ( vec.x ), 1.2* ( vec.y ), 0 ) );
-				child.position.add( vec.multiplyScalar( s ) );
-			}
-
-		} );
-
-	}
-
-
-
-	SET.explodeMinus = () => {
-
-		const s = 1;
-
-		if ( SET.explodeStart === false ) { SET.explodeInit() };
-
-		GBX.surfaceEdges.visible = false;
-
-		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
-		const sphere = bbox.getBoundingSphere();
-		center = sphere.center;
-		radius = sphere.radius;
-
-		THR.scene.updateMatrixWorld();
-
-		THR.scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.updateMatrixWorld();
-
-				if ( !child.userData.positionStart ) {
-
-					if ( child.geometry.boundingSphere ) {
-
-						const pp = child.geometry.boundingSphere.center.clone();
-						pp.applyMatrix4( child.matrixWorld );
-						child.userData.positionStart = pp;
-
-					} else {
-
-						child.userData.positionStart = child.position.clone();
-
-					}
-
-					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
-
-				}
-
-				const p = child.userData.positionStart.clone();
-				const vec = child.userData.vectorStart.clone();
-
-				child.position.sub( vec.multiplyScalar( s ) );
-
-			}
-
-		} );
 
 	}
 

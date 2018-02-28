@@ -3,9 +3,9 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML Viewer settings" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-20 ~ " >
+<meta name = "date" content = "2018-02-27" >
 <title>gv-set-gbxml-viewer-settings-test</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
@@ -25,7 +25,7 @@
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = '../gv-set/gv-set.js';
 			divMenu.style.display='block';" >
-			gv-set-settings</button>
+			gv-set gbXML Viewer settings</button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
@@ -33,6 +33,8 @@
 	<p id=dragAreaToIframe class=dragDropArea >
 		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this) >
 	<p>
+
+	<div id=divLog ></div>
 
 	<div id = "divSampleFiles" ></div>
 
@@ -79,21 +81,6 @@
 		THR = icw.THR;
 		GBX = icw.GBX;
 		GBV = icw.GBV;
-		/*
-		renderer = icw.THR.renderer;
-		camera = icw.THR.camera;
-		controls = icw.THR.controls;
-		scene = icw.THR.scene;
-		axesHelper = icw.THR.axesHelper;
-		lightDirectional = icw.THR.lightDirectional;
-		colors = icw.GBX.colors;
-		gbjson = icw.GBX.gbjson;
-		surfaceMeshes = icw.GBX.surfaceMeshes;
-		surfaceEdges = icw.GBX.surfaceEdges;
-		divLog = icw.divLog;
-		//zoomObjectBoundingSphere = icw.GBX.zoomObjectBoundingSphere;
-		//setAllVisible = icw.GBX.setAllVisible;
-		*/
 
 		THR.controls.autoRotate = false;
 

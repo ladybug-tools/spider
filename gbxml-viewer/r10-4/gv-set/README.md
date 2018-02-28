@@ -47,6 +47,11 @@
 
 See also main gbXML Viewer read me file
 
+### 2018-02-27 ~ Theo
+
+R10.9
+Settings
+* Explode view with minus, reset and plus buttons
 
 ### 2018-02-25 ~ Theo
 

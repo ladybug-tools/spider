@@ -12,12 +12,34 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 <!--
 <details open>
 
-<summary>Welcome  - ~ R.</summary>
+<summary>Welcome  ~ R.</summary>
 
 </details>
 -->
 
 <details open>
+
+<summary>Welcome 2018-02-27 - ~ R10.9</summary>
+
+Reports
+* Fix silly devLog bug that was breaking everything
+* Fix visibility toggles
+* Add new menu item: CAD Object ID Groups < wishlist item
+
+HUD
+* Add modified by button
+* Add select surface list
+* Add input surface ID
+* Started update surface adjacent spaces
+	* Issue with using cursor keys
+* Started fix surface type adjacent space update
+	* Handling changes to number of adjacent spaces still incomplete - ie from shade to interior wall
+
+Settings
+* Explode view with minus, reset and plus buttons
+* Starting to be interesting / need separate horizontal and vertical scaling
+
+</details><details open>
 
 <summary>Welcome 2018-02-26 - ~ R10.8</summary>
 
