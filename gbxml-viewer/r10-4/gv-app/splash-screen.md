@@ -1,7 +1,7 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10.9.1
+# gbXML Viewer R10.9.2
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
@@ -21,6 +21,7 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 
 <summary>Welcome 2018-02-27 - ~ R10.9</summary>
 
+
 Reports
 * Fix silly devLog bug that was breaking everything
 * Fix visibility toggles
@@ -38,6 +39,10 @@ HUD
 Settings
 * Explode view with minus, reset and plus buttons
 * Starting to be interesting / need separate horizontal and vertical scaling
+
+10.9.2
+* Fix surface normals not showing
+* Fix Duplicate CADObjectId not showing
 
 </details><details open>
 

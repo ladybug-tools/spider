@@ -478,7 +478,7 @@
 
 
 
-	REP.getSurfaceDuplicateCadIds =() => {
+	REP.vvvvgetSurfaceDuplicateCadIds =() => {
 
 		const surfacesIds = [];
 		const surfaceMembers = [];
@@ -555,6 +555,84 @@
 
 	}
 
+
+
+	REP.getSurfaceDuplicateCadIds =() => {
+
+		const surfacesIds = [];
+		const surfaceMembers = [];
+		const surfaces = GBX.gbjson.Campus.Surface;
+		let count = 0;
+		let flowContent = '';
+
+		for ( let surface of surfaces ) {
+
+			const id = surface.CADObjectId;
+
+			index = surfacesIds.indexOf( id );
+
+			if ( index < 0 ) {
+
+				surfacesIds.push( id );
+				surfaceMembers.push( { members: [ surface ] } );
+
+			} else {
+
+				surfaceMembers[ index ].members.push( surface );
+		/*
+						flowContent +=
+							'<p>' + count +
+								'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
+								'surfaceType: ' + surface.surfaceType + b +
+								( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
+								( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
+							'</p>';
+
+						count ++;
+		*/
+			}
+
+		}
+
+		count = surfacesIds.length === 1 ? 0 : count;
+
+		//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
+		//console.log( 'surfaceMembers', surfaceMembers );
+
+		for ( member of surfaceMembers ) {
+
+			if ( member.members.length > 1 ) {
+
+			//console.log( '', member.members );
+				let surface;
+				for ( surface of member.members ) {
+
+					flowContent +=
+						'<p>' + count +
+							'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
+							'surfaceType: ' + surface.surfaceType + b +
+							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
+			//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
+						'</p>';
+
+					count ++;
+
+				}
+
+				flowContent +=
+
+					'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b +
+
+				'<hr>';
+
+			}
+
+		}
+
+		const info = 'Information: Multiple gbXML elements created from single CAD element';
+		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent, info: info };
+
+	}
 
 
 	REP.getSurfaceDuplicateAdjacencies = () => {
@@ -952,7 +1030,7 @@
 
 			if ( !child.userData.data ) { continue; }
 
-			if ( child.userData.data.CADObjectId === CADObjectId ) {
+			if ( encodeURI( child.userData.data.CADObjectId ) === CADObjectId ) {
 
 				child.visible = true;
 

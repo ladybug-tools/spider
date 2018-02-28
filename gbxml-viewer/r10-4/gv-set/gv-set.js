@@ -302,7 +302,7 @@
 
 			helperNormalsFaces = new THREE.Group();
 
-			surfaceMeshes.traverse( function ( child ) {
+			GBX.surfaceMeshes.traverse( function ( child ) {
 
 				if ( child instanceof THREE.Mesh && child.visible ) {
 
