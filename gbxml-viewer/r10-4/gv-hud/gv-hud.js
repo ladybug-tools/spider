@@ -138,6 +138,7 @@
 				intersected.currentOpacity = intersected.material.opacity;
 				intersected.material.opacity = 1;
 
+				HUD.setHeadsUp( event );
 			}
 
 		} else {
@@ -149,7 +150,7 @@
 
 		}
 
-		HUD.setHeadsUp( event );
+
 
 	}
 
@@ -195,6 +196,7 @@
 
 		}
 
+		THR.controls.keys = false;
 		let space1, space2;
 		divHeadsUp.style.display = '';
 
@@ -218,26 +220,34 @@
 			edit the surface<br>
 			<button class=toggle onclick=GBV.deleteSurface("` + data.id + `"); >delete surface</button>
 			<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
-			<br>
+			<br><hr>
 
-			<b>surface</b><br>
-			id <button onclick=GBV.showSurface(this.innerText)  >` + data.id + `</button>
-			<button onclick=GBV.zoomIntoSurface("` + data.id + `"); >zoom</button>
-			<br>`
-			+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
-			`type <button onclick=GBV.showSurfaceType(this.innerText);  >` + data.surfaceType + `</button>` +
-			` edit <select id = "selType" onchange=HUD.updateType(this.value); >` + GBX.surfaceTypeOptions + `</select>
-			<br>`
-			+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
-				encodeURI( data.CADObjectId ) + `"); >` + data.CADObjectId + `</button><br>` : `` ) +
-			`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
-				` length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) + `</i>` +
-			`<hr>
+			<div class=flex-container2 >
+				<div>
+					<input oninput=HUD.updateSelect(this,selSurface); size=6 placeholder="surface id" ><br>
+					<select id=selSurface onclick=GBV.showSurface(this.value); onchange=GBV.showSurface(this.value); size=10 >` + GBX.surfacesOptions + `</select><br>
+				</div>
+				<div style=margin-left:15px;overflow-x:auto;max-width:270px; >
+					<b>surface</b><br>
+
+					id <button onclick=GBV.showSurface(this.innerText)  >` + data.id + `</button>
+					<button onclick=GBV.zoomIntoSurface("` + data.id + `"); >zoom</button>
+					<br>`
+					+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
+					`type <button onclick=GBV.showSurfaceType(this.innerText);  >` + data.surfaceType + `</button>` +
+					` edit <select id = "selType" onchange=HUD.updateType(this.value); >` + GBX.surfaceTypeOptions + `</select>
+					<br>`
+					+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
+						encodeURI( data.CADObjectId ) + `"); >` + data.CADObjectId + `</button><br>` : `` ) +
+					`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
+						` length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) + `</i>` +
+				`<div>
+			</div>
 		`;
 
-		adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : 'no adjacency';
+		adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency';
 
-		if ( adjacentsTxt !== 'no adjacency' ) {
+		if ( adjacentsTxt !== '<hr>no adjacency' ) {
 
 			if ( Array.isArray( adjacentsTxt ) === true ) {
 
@@ -245,15 +255,15 @@
 
 				space1 = GBV.getSpaceId( adjacentsTxt[ 0 ].spaceIdRef );
 				space2 = GBV.getSpaceId( adjacentsTxt[ 1 ].spaceIdRef );
-				console.log( 'space1', space1 );
+				//console.log( 'space1', space1 );
 
 				if ( space1 && space2 ) {
 					// make into function
 					adjacentsTxt =
-						'<div class=flex-container2 >' +
+						'<hr><div class=flex-container2 >' +
 							'<div >' +
-								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space 1 id" ><br>' +
-								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spaceOptions + '</select><br>' +
+								'<input oninput=HUD.updateSelect(this,selSpace1);this.click(); size=6 placeholder="space 1 id" ><br>' +
+								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
 							'</div>' +
 							'<div style=margin-left:15px;>' +
 								'<b>adjacent space 1</b> ' + b +
@@ -274,7 +284,7 @@
 						'<div class=flex-container2 >' +
 							'<div >' +
 								'<input oninput=HUD.updateSelect(this,selSpace2); size=6  placeholder="space 2 id" ><br>' +
-								'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spaceOptions + '</select><br>' +
+								'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
 							'</div>' +
 							'<div style=margin-left:15px; >' +
 								'<b>adjacent space 2</b> ' + b +
@@ -307,10 +317,10 @@
 				if ( !space1 ) { return; }
 
 				adjacentsTxt =
-					'<div class=flex-container2 >' +
+					'<hr><div class=flex-container2 >' +
 						'<div >' +
-							'<input oninput=HUD.updateSelect(this,selSpace1); size=6  placeholder="space id" ><br>' +
-							'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spaceOptions + '</select><br>' +
+							'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
+							'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
 						'</div>' +
 						'<div style=margin-left:15px; >' +
 							'<b>adjacent space 1</b> ' + b +
@@ -343,6 +353,7 @@
 		divHUDfooter.innerHTML = footerTxt;
 
 		selType.value = data.surfaceType;
+		selSurface.value = data.id;
 		if ( window.selSpace1 ) { selSpace1.value = space1.id; }
 		if ( window.selSpace2 ) { selSpace2.value = space2.id; }
 
@@ -478,7 +489,7 @@
 
 		}
 
-		select.click();
+
 
 	}
 

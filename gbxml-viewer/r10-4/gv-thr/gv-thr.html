@@ -34,13 +34,8 @@
 		<div id = "divMenuInWorld" >
 
 			<div id = "divTitle" ></div>
-<!--
-			<p id=dragArea class=dragDropArea >
-				Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=GBX.openGbxmlFile(this); >
-			<p>
--->
-		</div>
 
+		</div>
 
 		<p id = "divContents" >
 
@@ -65,6 +60,32 @@
 	COR.initCore();
 	THR.initThreeGbxml();
 	THR.animate();
+
+	init();
+
+
+	function init() {
+
+		if ( window.self === window.top ) {
+
+			divTitle.innerHTML =
+				'<h2>' +
+					'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + COR.iconInfo + '</a>' +
+					' <a  href = "" >' + document.title + '</a>' +
+				'</h2>' +
+				'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+
+				'<p id=dragArea class=dragDropArea >' +
+					'Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=GBX.openGbxmlFile(this); >' +
+				'<p>' +
+
+			'';
+
+		}
+
+	}
+
+
 
 	onloadThreejs = () => {
 

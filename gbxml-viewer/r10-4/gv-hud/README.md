@@ -37,6 +37,12 @@ The next steps may include
 
 ## Change Log
 
+10.9
+HUD
+* Many fixes to adjacent spaces updates
+* Fixes to surface type updates
+	* Handling changes to number of adjacent spaces still incomplete - ie shade to interior wall
+
 ### 2018-02-26 ~ Theo
 
 R10.8

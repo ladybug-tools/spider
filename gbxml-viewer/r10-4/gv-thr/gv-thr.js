@@ -40,6 +40,7 @@
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
 	let txt = '';
+
 	for ( let type of GBX.surfaceTypes ) {
 
 		txt += '<option>' + type + '</option>';
@@ -51,19 +52,6 @@
 
 
 	THR.initThreeGbxml = () => {
-/*
-		if ( window.self === window.top ) {
-
-			divTitle.innerHTML =
-				'<h2>' +
-					'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + COR.iconInfo + '</a>' +
-					' <a  href = "" >' + document.title + '</a>' +
-				'</h2>' +
-				'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
-			'';
-
-		}
-*/
 
 		let renderer, camera, controls, scene;
 		let lightAmbient, lightDirectional, lightPoint;
@@ -138,22 +126,6 @@
 
 	}
 
-
-	THR.xxxvarsGlobalToLocal = () => {
-
-		const renderer = THR.renderer;
-		const scene = THR.scene;
-		const camera = THR.camera;
-		const controls = THR.controls;
-		const lightAmbient = THR.lightAmbient;
-		const lightDirectional = THR.lightDirectional;
-		const lightPoint = THR.lightPoint;
-		const cameraHelper = THR.cameraHelper;
-		const axesHelper = THR.axesHelper;
-		const gridHelper = THR.gridHelper;
-		const groundHelper = THR.groundHelper;
-
-	}
 
 	// available if parent wants it.
 	// called by parseFileXML()
@@ -316,7 +288,7 @@
 
 		//console.log( 'surfaces', gbjson.Campus.Surface );
 
-		const surfaces = gbjson.Campus.Surface;
+		const surfaces = GBX.surfaceJson;// gbjson.Campus.Surface;
 
 		let polyloops = [];
 		let openings = [];
@@ -422,20 +394,32 @@
 
 		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
-		GBX.spaces = GBX.gbjson.Campus.Building.Space;
+		GBX.spacesJson = GBX.gbjson.Campus.Building.Space;
 
 		let txt = '<option>none</option>';
 
-//		if ( GBX.spaces.length ) {
-		for ( let space of GBX.spaces ) {
+		//if ( GBX.spaces.length ) {
+		for ( let space of GBX.spacesJson ) {
 
 			txt += '<option>' + space.id + '</option>';
 
 		}
-//		}
-
-		GBX.spaceOptions = txt;
+		//}
 		//console.log( 'GBX.spaceOptions', GBX.spaceOptions);
+
+		GBX.spacesOptions = txt;
+
+
+		txt = '';
+		for ( let surface of GBX.surfaceJson ) {
+
+			txt += '<option>' + surface.id + '</option>';
+
+		}
+
+		GBX.surfacesOptions = txt;
+
+		GBX.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 
 	}
 

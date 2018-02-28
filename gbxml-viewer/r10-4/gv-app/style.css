@@ -29,7 +29,7 @@
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
 
 	.flex-container2 { display: flex; flex-wrap: wrap; }
-	.flex-container2 > div { /* border: 1px solid #ddd; margin: 5px; padding: 5px; */ }
+	.flex-container2 > div { }
 
 
 	#divContainer { background-color: white; border: 1px solid #888; display: none; height: 80%; left: 400px;
