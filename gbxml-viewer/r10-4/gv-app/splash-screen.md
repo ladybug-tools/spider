@@ -1,7 +1,7 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10.8
+# gbXML Viewer R10.9.1
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
@@ -29,9 +29,9 @@ Reports
 HUD
 * Add modified by button
 * Add select surface list
+	* Issue with using cursor keys
 * Add input surface ID
 * Started update surface adjacent spaces
-	* Issue with using cursor keys
 * Started fix surface type adjacent space update
 	* Handling changes to number of adjacent spaces still incomplete - ie from shade to interior wall
 

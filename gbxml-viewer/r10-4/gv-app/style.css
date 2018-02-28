@@ -21,6 +21,8 @@
 	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
+	i { color: blue; }
+
 	summary { font-weight: bold; }
 
 	.dragDropArea { border: 1px dashed gray; padding: 5px; }
