@@ -54,8 +54,8 @@
 
 				'<p>' +
 					'toggles<br>' +
-					'<button onclick=surfaceMeshes.visible=!surfaceMeshes.visible; >surfaces</button>' +
-					' <button onclick=surfaceEdges.visible=!surfaceEdges.visible; >edges</button>' +
+					'<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>' +
+					' <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>' +
 					' <button onclick=GBV.setAllVisible(); >all visible</button>' +
 				'</p>' +
 
@@ -110,6 +110,9 @@
 
 		const surfaceDuplicateCadIds = REP.getSurfaceDuplicateCadIds();
 		divReport.innerHTML += addDetails( surfaceDuplicateCadIds.summary, surfaceDuplicateCadIds.flowContent, surfaceDuplicateCadIds.info );
+
+		const surfaceCadIdGroups = REP.getSurfaceCadIdGroups();
+		divReport.innerHTML += addDetails( surfaceCadIdGroups.summary, surfaceCadIdGroups.flowContent, surfaceCadIdGroups.info );
 
 		const surfaceDuplicateAdjacencies = REP.getSurfaceDuplicateAdjacencies();
 		divReport.innerHTML += addDetails( surfaceDuplicateAdjacencies.summary, surfaceDuplicateAdjacencies.flowContent, surfaceDuplicateAdjacencies.info );
@@ -437,6 +440,44 @@
 
 
 
+	REP.getSurfaceCadIdGroups =() => {
+
+
+		CadIds = [];
+		const surfaceMembers = [];
+		const surfaces = GBX.gbjson.Campus.Surface;
+		let count = 0;
+		let flowContent = '';
+
+		for ( let surface of surfaces ) {
+
+			if ( !surface.CADObjectId ) { continue; }
+
+			id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
+
+			if ( !CadIds.includes( id ) ) {
+
+				CadIds.push( id );
+
+				flowContent +=
+
+					'<button onclick=REP.toggleCadIdGroup("' + encodeURI( id )+ '"); >' + id + '</button>' + b +
+
+				'';
+
+			}
+
+		}
+
+		//console.log( '', CadIds.length );
+
+		const info = 'Information: Revit CAD Object Groups';
+		return { summary: 'CAD Object ID Groups &raquo; ' + CadIds.length, flowContent: flowContent, info: info };
+
+	}
+
+
+
 	REP.getSurfaceDuplicateCadIds =() => {
 
 		const surfacesIds = [];
@@ -510,7 +551,7 @@
 		}
 
 		const info = 'Information: Multiple gbXML elements created from single CAD element';
-		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent, info: info };
+		return { summary: 'Duplicate CAD Object IDs &raquo; ' + count, flowContent: flowContent, info: info };
 
 	}
 
@@ -726,17 +767,17 @@
 			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
 			'zones ' + zones.length + ': ' + zones.join();
 
-/*
-		for ( let storey of storeys ) {
+		/*
+				for ( let storey of storeys ) {
 
-			if ( id === storey.id ) {
+					if ( id === storey.id ) {
 
-				icw.divLog.innerHTML = 'Storey name: ' + storey.Name;
+						icw.divLog.innerHTML = 'Storey name: ' + storey.Name;
 
-			}
+					}
 
-		}
-*/
+				}
+		*/
 		return zones;
 
 	}
@@ -850,7 +891,7 @@
 
 	REP.toggleSpace = ( id ) => {
 
-		//		surfaceGroup.visible = true;
+		//surfaceGroup.visible = true;
 		//icw.divLog.innerHTML = '';
 
 		for ( let child of GBX.surfaceMeshes.children ) {
@@ -885,17 +926,17 @@
 			}
 
 		}
-/*
-		for ( let space of spaces ) {
+		/*
+				for ( let space of spaces ) {
 
-			if ( id === space.id ) {
+					if ( id === space.id ) {
 
-				icw.divLog.innerHTML = 'Space name: ' + space.Name;
+						icw.divLog.innerHTML = 'Space name: ' + space.Name;
 
-			}
+					}
 
-		}
-*/
+				}
+		*/
 	}
 
 
@@ -911,7 +952,41 @@
 
 			if ( !child.userData.data ) { continue; }
 
-			if ( encodeURI( child.userData.data.CADObjectId ) === CADObjectId ) {
+			if ( child.userData.data.CADObjectId === CADObjectId ) {
+
+				child.visible = true;
+
+			} else {
+
+				child.visible = false;
+
+			}
+
+		}
+
+	}
+
+
+
+	REP.toggleCadIdGroup = ( CADObjectGroupId ) => {
+
+		//console.log( 'CADObjectGroupId', CADObjectGroupId );
+		//		surfaceGroup.visible = true;
+		GBX.surfaceEdges.visible = true;
+		//icw.divLog.innerHTML = '';
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			child.visible = false;
+
+		}
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			if ( !child.userData.data.CADObjectId ) { continue; }
+
+			id = encodeURI( child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ) );
+
+			if ( id === CADObjectGroupId ) {
 
 				child.visible = true;
 

@@ -348,6 +348,45 @@
 
 
 
+	GBV.addModifiedBy = () => {
+
+		// not adding spaces and new lines nicely. Why?
+
+		documentHistoryXml = GBX.gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
+
+		const programInfoNew = GBX.gbxmlResponseXML.createElement( "ProgramInfo" );
+
+		programInfoNew.setAttribute( "id", "ladybug-tools-spider" );
+
+		documentHistoryXml[ 0 ].appendChild( programInfoNew );
+
+		const productNameNew = GBX.gbxmlResponseXML.createElement( "ProductName" );
+
+		const newText = GBX.gbxmlResponseXML.createTextNode( 'Ladybug-Tools/spider' );
+
+		productNameNew.appendChild( newText );
+
+		programInfoNew.appendChild( productNameNew );
+
+		productNameNew.nodeValue = 'Ladybug-Tools/spider';
+
+
+		const modifiedByNew = GBX.gbxmlResponseXML.createElement( "ModifiedBy" );
+
+		modifiedByNew.setAttribute( "personId", "Your name" );
+
+		modifiedByNew.setAttribute( "programId", "ladybug-tools-spider" );
+
+		modifiedByNew.setAttribute( "date", ( new Date() ).toISOString() );
+
+		documentHistoryXml[ 0 ].appendChild( modifiedByNew );
+
+		alert( 'Adding to gbXML:\n\n' + GBX.gbxmlResponseXML.getElementsByTagName( "ModifiedBy" )[0].outerHTML );
+
+	}
+
+
+
 	GBV.saveFile = () => {
 
 		//xmlText = prettifyXml( gbxmlResponseXML ); // not

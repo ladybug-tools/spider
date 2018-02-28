@@ -219,6 +219,7 @@
 			<br>
 			edit the surface<br>
 			<button class=toggle onclick=GBV.deleteSurface("` + data.id + `"); >delete surface</button>
+			<button onclick=GBV.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
 			<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
 			<br><hr>
 
@@ -262,7 +263,7 @@
 					adjacentsTxt =
 						'<hr><div class=flex-container2 >' +
 							'<div >' +
-								'<input oninput=HUD.updateSelect(this,selSpace1);this.click(); size=6 placeholder="space 1 id" ><br>' +
+								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space 1 id" ><br>' +
 								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
 							'</div>' +
 							'<div style=margin-left:15px;>' +

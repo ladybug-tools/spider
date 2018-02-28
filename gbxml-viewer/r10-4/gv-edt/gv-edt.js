@@ -412,17 +412,17 @@
 
 		// not adding spaces and new lines nicely. Why?
 
-		documentHistoryXml = gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
+		documentHistoryXml = GBX.gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
 
-		const programInfoNew = gbxmlResponseXML.createElement( "ProgramInfo" );
+		const programInfoNew = GBX.gbxmlResponseXML.createElement( "ProgramInfo" );
 
 		programInfoNew.setAttribute( "id", "ladybug-tools-spider" );
 
 		documentHistoryXml[ 0 ].appendChild( programInfoNew );
 
-		const productNameNew = gbxmlResponseXML.createElement( "ProductName" );
+		const productNameNew = GBX.gbxmlResponseXML.createElement( "ProductName" );
 
-		const newText = gbxmlResponseXML.createTextNode( 'Ladybug-Tools/spider' );
+		const newText = GBX.gbxmlResponseXML.createTextNode( 'Ladybug-Tools/spider' );
 
 		productNameNew.appendChild( newText );
 
@@ -431,7 +431,7 @@
 		productNameNew.nodeValue = 'Ladybug-Tools/spider';
 
 
-		const modifiedByNew = gbxmlResponseXML.createElement( "ModifiedBy" );
+		const modifiedByNew = GBX.gbxmlResponseXML.createElement( "ModifiedBy" );
 
 		modifiedByNew.setAttribute( "personId", "Your name" );
 
@@ -441,7 +441,7 @@
 
 		documentHistoryXml[ 0 ].appendChild( modifiedByNew );
 
-		alert( 'Adding to gbXML:\n\n' + gbxmlResponseXML.getElementsByTagName( "ModifiedBy" )[0].outerHTML );
+		alert( 'Adding to gbXML:\n\n' + GBX.gbxmlResponseXML.getElementsByTagName( "ModifiedBy" )[0].outerHTML );
 
 	}
 
