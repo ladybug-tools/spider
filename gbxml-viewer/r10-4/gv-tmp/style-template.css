@@ -10,6 +10,10 @@ button:hover { background-color: #ccc; color: #fff }
 iframe { height: 500px; width: 100%; }
 i { color: blue; }
 
+input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
 .dragDropArea { border: 1px dashed gray; padding: 5px; }
 
 .flex-container { display: flex; flex-wrap: wrap; }

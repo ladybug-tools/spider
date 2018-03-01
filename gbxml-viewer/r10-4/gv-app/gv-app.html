@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-27" >
-<title>gbXML Viewer 10.9.2</title>
+<meta name = "date" content = "2018-02-28" >
+<title>gbXML Viewer 10.10</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -107,7 +107,7 @@
 						script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
 					sun-path / analemma</button>
 
-<!--
+					<!--
 					<button id=butSunRange class=app-menu onclick="
 					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
@@ -119,7 +119,7 @@
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
 					screen capture </button>
-	-->
+					-->
 
 					<p>Sample files on GitHub to explore:</p>
 
@@ -172,7 +172,7 @@
 	</div>
 
 
-	<div id = "divHamburger" onclick=toggleNav(); > slide &#9776; </div>
+	<div id = "divHamburger" onclick=APP.toggleNav(); > slide &#9776; </div>
 
 
 	<div id = "divMenuInWorld" >
@@ -209,6 +209,8 @@
 
 <script>
 
+	var APP = {};
+
 	COR.initCore();
 	THR.initThreeGbxml();
 	THR.animate();
@@ -218,16 +220,17 @@
 
 	function onloadThreejs() {
 
-		resetMenu();
+		APP.resetMenu();
 
 	}
 
 
-	function resetMenu () {
+
+	APP.resetMenu = function () {
 
 		menuButtons = document.querySelectorAll( "button.app-menu" );
 
-		menuButtons.forEach(  element => element.style.backgroundColor ='' );
+		menuButtons.forEach( element => element.style.backgroundColor ='' );
 
 		menuDetails = document.querySelectorAll( "details.app-menu" );
 
@@ -245,9 +248,7 @@
 
 
 
-////
-
-	function toggleNav() {
+	APP.toggleNav = function() {
 
 		const left = 'calc( var( --mnu-width ) - 100px )';
 

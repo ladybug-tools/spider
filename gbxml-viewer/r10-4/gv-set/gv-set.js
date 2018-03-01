@@ -1,9 +1,10 @@
+// Copyright 2018 Ladybug Tools authors. MIT License
+
 	var SET = {};
 
+//	initSettings();
 
-	initSettings();
-
-	function initSettings() {
+	SET.initSettings = function() {
 
 		if ( butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -16,13 +17,11 @@
 
 					'<summary>Settings</summary>' +
 
-
 					'<p>' +
 						'toggles<br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>' +
 						' <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>' +
 						' <button onclick=GBV.setAllVisible(); >all</button>' +
 					'</p>' +
-
 
 					'<p><button onclick=SET.setRandomMaterial(); >Set random material</button></p>' +
 
@@ -33,7 +32,6 @@
 					'<p><button onclick=SET.setDefaultMaterial(); >Set default material</button></p>' +
 
 					'<p><button onclick=SET.setExposureMaterial(); >Set exposure type material</button></p>' +
-
 
 					'<hr>' +
 
@@ -61,21 +59,16 @@
 
 					'<p><button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
 
-					'<p><button onclick=SET.toggleCameraOrthoPerspective() title="" > Toggle camera ortho </button></p>' +
+					'<p><button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button></p>' +
 
-					'<p title="building opacity: 0 to 100%" >Opacity: ' +
-						'<output id=outOpacity class=floatRight >85%</output>' +
+					'<p title="building opacity: 0 to 100%" >Opacity ' +
+						'<output id=outOpacity class=floatRight >85%</output><br>' +
 						'<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >' +
 					'</p>' +
 
-					/*
-					'<p title="building surface separation: 0 to 100%" >Explode view: ' +
-						'<output id=outViewExplode class=floatRight >0%</output>' +
-						'<input type="range" id="rngViewExplode" min=-50 max=50 step=1 value=0 onchange=SET.updateViewExplodeHorizontal(); >' +
-					'</p>' +
-					*/
 
-					'<p title="building surface separation: 0 to 100%" >Explode view <br>' +
+
+					'<p title="building surface separation" >Explode view <br>' +
 						'<button onclick=SET.explodeMinus();> minus </button>' +
 						'<button onclick=SET.explodeReset(); >reset</button>' +
 						'<button onclick=SET.explodePlus();> plus </button>' +
@@ -90,18 +83,7 @@
 
 			'';
 
-			// following causes error when inside an iframe in a read me
-			//if ( parent.setIfrThree ) { setIfrThree(); }
-
 			butSettings.style.backgroundColor = 'var( --but-bg-color )';
-
-			const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
-			const sphere = bbox.getBoundingSphere();
-			center = sphere.center;
-			radius = sphere.radius;
-
-			//console.log( 'center', center );
-			//console.log( 'radius', radius );
 
 		} else {
 
@@ -111,11 +93,11 @@
 
 		}
 
-	}
+	}();
 
 
 
-	SET.setRandomMaterial = () => {
+	SET.setRandomMaterial = function() {
 
 		GBX.surfaceMeshes.traverse( function ( child ) {
 
@@ -134,11 +116,11 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.setPhongDefaultMaterial = () => {
+	SET.setPhongDefaultMaterial = function() {
 
 		GBX.surfaceMeshes.traverse( function ( child ) {
 
@@ -153,11 +135,11 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.setNormalMaterial = () => {
+	SET.setNormalMaterial = function() {
 
 		GBX.surfaceMeshes.traverse( function ( child ) {
 
@@ -172,11 +154,11 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.setDefaultMaterial = () => {
+	SET.setDefaultMaterial = function() {
 
 		GBX.surfaceMeshes.traverse( function ( child ) {
 
@@ -189,11 +171,11 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.setExposureMaterial = () => {
+	SET.setExposureMaterial = function() {
 
 		var colorsExposure = {
 
@@ -213,7 +195,7 @@
 			FreestandingColumn: 0xff8080,
 			EmbeddedColumn: 0xff8080
 
-		}
+		};
 
 		GBX.surfaceMeshes.traverse( function ( child ) {
 
@@ -231,13 +213,13 @@
 
 		} );
 
-	}
+	};
 
 
 /////////////////
 
 
-	SET.toggleShadowMap = () => {
+	SET.toggleShadowMap = function() {
 
 		THR.renderer.shadowMap.enabled = !THR.renderer.shadowMap.enabled;
 
@@ -253,26 +235,26 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.toggleBackgroundGradient = () => {
+	SET.toggleBackgroundGradient = function() {
 
 		// 2016-07-18
 
 		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
-		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); };
 		var image = document.body.style.backgroundImage;
 
 		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
 			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
 
-	}
+	};
 
 
 
-	SET.toggleWireframe = () => {
+	SET.toggleWireframe = function() {
 
 		THR.scene.traverse( function ( child ) {
 
@@ -284,11 +266,11 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.toggleSurfaceNormals = () => {
+	SET.toggleSurfaceNormals = function() {
 
 		let helperNormalsFaces = THR.scene.getObjectByName( 'helperNormalsFaces' );
 
@@ -306,7 +288,7 @@
 
 				if ( child instanceof THREE.Mesh && child.visible ) {
 
-					helperNormalsFace = new THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
+					const helperNormalsFace = new THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
 					helperNormalsFaces.add( helperNormalsFace );
 
 					helperNormalsFaces.visible = false;
@@ -323,19 +305,19 @@
 
 		helperNormalsFaces.visible = !helperNormalsFaces.visible;
 
-	}
+	};
 
 
 
-	SET.toggleAxesHelper = () => {
+	SET.toggleAxesHelper = function() {
 
 		THR.axesHelper.visible = !THR.axesHelper.visible;
 
-	}
+	};
 
 
 
-	SET.toggleGridHelper = () => {
+	SET.toggleGridHelper = function() {
 
 		let meshGridHelper = GBX.surfaceMeshes.getObjectByName( 'gridHelper' );
 
@@ -355,11 +337,11 @@
 
 		meshGridHelper.visible = !meshGridHelper.visible;
 
-	}
+	};
 
 
 
-	SET.toggleGroundHelper = () => {
+	SET.toggleGroundHelper = function() {
 
 		let meshGroundHelper = GBX.surfaceMeshes.getObjectByName( 'groundHelper' );
 
@@ -382,21 +364,25 @@
 
 		meshGroundHelper.visible = !meshGroundHelper.visible;
 
-	}
+	};
 
 
 
-	SET.toggleSceneAutoRotate = () => {
+	SET.toggleSceneAutoRotate = function() {
 
 		THR.controls.autoRotate = !THR.controls.autoRotate;
 
-	}
+	};
 
 
 
-	SET.toggleCameraOrthoPerspective = () => {
+	SET.toggleCameraOrthoPerspective = function() {
+
 
 		if ( SET.cameraOrtho === undefined ) {
+
+			SET.cameraPerspective = THR.camera;
+			SET.controlsPerspective = THR.controls;
 
 			const width = 300; //surfaceMeshes.userData.radius > 10 ? 3 * surfaceMeshes.userData.radius : 200;
 			const height = 300; // surfaceMeshes.userData.radius > 10 ? 3 * surfaceMeshes.userData.radius : 200; //; //  * surfaceMeshes.userData.radius;
@@ -404,26 +390,39 @@
 			SET.cameraOrtho.up.set( 0, 0, 1 );
 			THR.scene.add( SET.cameraOrtho );
 			SET.controlsOrtho = new THREE.OrbitControls( SET.cameraOrtho, THR.renderer.domElement );
+		}
+
+		if ( butSetOrtho.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			THR.camera = SET.cameraOrtho;
 			THR.camera.updateProjectionMatrix();
 			THR.controls = SET.controlsOrtho;
 
-			GBV.zoomObjectBoundingSphere( GBX.surfaceMeshes );
+			GBX.setAllVisible();
+			GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
+
+			butSetOrtho.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
-			GBV.setAllVisible();
-			GBV.zoomObjectBoundingSphere( GBX.surfaceMeshes );
-			SET.cameraOrtho = undefined;
+
+			THR.camera = SET.cameraPerspective;
+			THR.camera.updateProjectionMatrix();
+			THR.controls = SET.controlsPerspective;
+//			THR.scene.remove( SET.cameraOrtho );
+
+			GBX.setAllVisible();
+			GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
+
+			butSetOrtho.style.backgroundColor = '';
 
 		}
 
-	}
+	};
 
 
 
-	SET.updateOpacity = () => {
+	SET.updateOpacity = function() {
 
 		const opacity = parseInt( rngOpacity.value, 10 );
 		outOpacity.value = opacity + '%';
@@ -439,128 +438,13 @@
 		} );
 
 
-	}
+	};
 
-/*
-	SET.updateViewExplodeHorizontalOriginal = () => {
 
-		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
 
-		THR.scene.traverse( function ( child ) {
+	SET.explodeReset = function() {
 
-			if ( child instanceof THREE.Mesh ) {
-
-				if ( !child.userData.positionStart ) {
-
-					child.userData.positionStart = child.position.clone();
-
-				}
-
-				const p = child.userData.positionStart;
-
-				child.position.x = s * p.x;
-				child.position.y = s * p.y;
-
-			}
-
-		} );
-
-	}
-
-*/
-
-	SET.xxxupdateViewExplodeHorizontal = () => {
-
-		const s = parseFloat( rngViewExplode.value ) / 3;
-
-		GBX.surfaceEdges.visible = false;
-
-		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
-		const sphere = bbox.getBoundingSphere();
-		center = sphere.center;
-		radius = sphere.radius;
-
-		//		console.log( 'center', center );
-		//		console.log( 'radius', radius );
-
-		/*
-		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
-		const material = new THREE.MeshNormalMaterial();
-		bmesh = new THREE.Mesh( geometry, material );
-		bmesh.position.copy( center );
-		scene.add( bmesh );
-		//console.log( 'bmesh', bmesh );
-		*/
-
-		THR.scene.updateMatrixWorld();
-
-		THR.scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.updateMatrixWorld();
-
-				child.userData.positionStart1 = child.position.clone();
-
-				if ( !child.userData.positionStart ) {
-
-					if ( child.geometry.boundingSphere ) {
-
-						const pp = child.geometry.boundingSphere.center.clone();
-						pp.applyMatrix4( child.matrixWorld );
-						child.userData.positionStart = pp;
-
-						//const pp = child.clone();
-						//child.userData.positionStart = pp.localToWorld( child.geometry.boundingSphere.center );
-
-					} else {
-
-						child.userData.positionStart = child.position.clone();
-
-					}
-
-					//var vector = child.position.clone();
-					//vector.applyMatrix4( child.matrixWorld );
-					//const vector = child.localToWorld( child.position.clone() );
-					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
-
-				}
-
-				const p = child.userData.positionStart.clone();
-				const vec = child.userData.vectorStart.clone();
-
-				/*
-				const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-				const material = new THREE.MeshNormalMaterial();
-				const amesh = new THREE.Mesh( geometry, material );
-				amesh.position.copy( p );
-				scene.add( amesh );
-
-				let geometry2, material2, line;
-
-				geometry2 = new THREE.Geometry();
-				pp = p.clone().add( vec.multiplyScalar( 2 ) );
-				//				console.log( 'pp', pp );
-				geometry2.vertices = [ p, pp ];
-				material2 = new THREE.LineBasicMaterial( { color: 0x000000 } );
-				line = new THREE.Line( geometry2, material2 );
-				scene.add( line );
-				*/
-
-				//				vv = new THREE.Vector3( 5, 0, 0 );
-				child.position.add( vec.multiplyScalar( s ) );
-				//				console.log( 's', s );
-				//				child.position.copy( p );
-
-			}
-
-		} );
-
-	}
-
-	SET.explodeReset = () => {
-
-		if ( SET.explodeStart === false ) { SET.explodeInit() };
+		if ( SET.explodeStart === false ) { SET.explodeInit(); }
 
 		THR.scene.traverse( function ( child ) {
 
@@ -574,11 +458,11 @@
 
 		GBX.surfaceEdges.visible = true;
 
-	}
+	};
 
 
 
-	SET.explodeInit = () => {
+	SET.explodeInit = function() {
 
 		THR.scene.updateMatrixWorld();
 
@@ -596,13 +480,13 @@
 
 		SET.explodeStart = true;
 
-	}
+	};
 
 
 
-	SET.explodePlus = () => {
+	SET.explodePlus = function() {
 
-		if ( SET.explodeStart === false ) { SET.explodeInit() };
+		if ( SET.explodeStart === false ) { SET.explodeInit(); }
 
 		const s = 1;
 
@@ -610,8 +494,8 @@
 
 		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 		const sphere = bbox.getBoundingSphere();
-		center = sphere.center;
-		radius = sphere.radius;
+		const center = sphere.center;
+		const radius = sphere.radius;
 
 		THR.scene.updateMatrixWorld();
 
@@ -648,22 +532,22 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.explodeMinus = () => {
+	SET.explodeMinus = function() {
 
 		const s = 1;
 
-		if ( SET.explodeStart === false ) { SET.explodeInit() };
+		if ( SET.explodeStart === false ) { SET.explodeInit(); }
 
 		GBX.surfaceEdges.visible = false;
 
 		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 		const sphere = bbox.getBoundingSphere();
-		center = sphere.center;
-		radius = sphere.radius;
+		const center = sphere.center;
+		const radius = sphere.radius;
 
 		THR.scene.updateMatrixWorld();
 
@@ -700,9 +584,11 @@
 
 		} );
 
-	}
+	};
 
-	SET.updateViewExplodeVertical = () => {
+
+
+	SET.updateViewExplodeVertical = function() {
 
 		const sz = 1 + parseFloat( rngViewExplodeVertical.value ) / 10;
 
@@ -720,11 +606,11 @@
 
 		} );
 
-	}
+	};
 
 
 
-	SET.updateMeshLevel = ( meshName, delta ) => {
+	SET.updateMeshLevel = function( meshName, delta ) {
 
 		const mesh = GBX.surfaceMeshes.getObjectByName( meshName );
 
@@ -734,7 +620,7 @@
 
 		}
 
-	}
+	};
 
 
 

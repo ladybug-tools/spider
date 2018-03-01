@@ -486,6 +486,7 @@
 	}
 
 
+
 	function updateViewExplodeHorizontalOriginal() {
 
 		const s = 1 + parseFloat( rngViewExplode.value ) / 500;
@@ -524,8 +525,8 @@
 		center = sphere.center;
 		radius = sphere.radius;
 
-//		console.log( 'center', center );
-//		console.log( 'radius', radius );
+		//		console.log( 'center', center );
+		//		console.log( 'radius', radius );
 
 		/*
 		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
@@ -583,7 +584,7 @@
 
 				geometry2 = new THREE.Geometry();
 				pp = p.clone().add( vec.multiplyScalar( 2 ) );
-//				console.log( 'pp', pp );
+				//				console.log( 'pp', pp );
 				geometry2.vertices = [ p, pp ];
 				material2 = new THREE.LineBasicMaterial( { color: 0x000000 } );
 				line = new THREE.Line( geometry2, material2 );
@@ -592,8 +593,8 @@
 
 				//				vv = new THREE.Vector3( 5, 0, 0 );
 				child.position.add( vec.multiplyScalar( s ) );
-//				console.log( 's', s );
-//				child.position.copy( p );
+				//				console.log( 's', s );
+				//				child.position.copy( p );
 
 			}
 

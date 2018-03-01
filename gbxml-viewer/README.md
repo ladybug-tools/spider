@@ -342,12 +342,31 @@ Will most likely build upon
 ## Change Log
 
 
+
+### 2018-02-28 ~ Theo
+
+SET
+* Passed through JSLint ~ many slight fixes
+* Toggle Ortho camera now working
+* Update name space variables
+APP
+* Update name space variables
+HUD
+* Update name space variables
+* Fix no-scroll select surface
+* Rejig update buttons
+* Improve menu width handling
+* When change type, adjacent spaces update more correctly
+
+
 ### 2018-02-26 ~ Theo
 
 R10.8
 
 App
 * Menus reset when new model loaded
+
+
 
 ### 2018-02-25 ~ Theo
 

@@ -1,3 +1,8 @@
+/*global
+
+THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rngOpacity,rngViewExplodeVertical
+
+*/
 
 	var HUD = {};
 
@@ -8,7 +13,6 @@
 
 	var telltalesVertex;
 	var telltalesPolyloop;
-
 
 
 	initHeadsUp();
@@ -38,17 +42,7 @@
 					<div id=divHUDfooter ></div>
 				`;
 
-//				setSelectSurfaceType();
 
-				let txt = '<select id = "selType" onchange=HUD.updateType(this.value); >';
-
-				for ( let type of GBX.surfaceTypes) {
-
-					txt += '<option>' + type + '</option>'
-
-				}
-
-				HUD.selTypeHtml =  txt + '</select>';
 
 				divDraggableHeader2.style.cssText =
 					'background-color: indianred; color: #fff; cursor: move; padding: 10px; z-index: 10;';
@@ -103,7 +97,8 @@
 
 		//if ( butHeadsUp.style.backgroundColor !== 'var( --but-bg-color )' ) { return; }
 
-		var raycaster, intersects;
+		var raycaster;
+		var intersects;
 
 		event.preventDefault();
 
@@ -180,7 +175,9 @@
 
 
 
-	HUD.setHeadsUp = ( event ) => {
+	HUD.setHeadsUp = function( event ) {
+		var space1;
+		var space2;
 
 		if ( intersected === undefined ) {
 
@@ -197,7 +194,6 @@
 		}
 
 		THR.controls.keys = false;
-		let space1, space2;
 		divHeadsUp.style.display = '';
 
 		const data = intersected.userData.data;
@@ -226,7 +222,8 @@
 			<div class=flex-container2 >
 				<div>
 					<input oninput=HUD.updateSelect(this,selSurface); size=6 placeholder="surface id" ><br>
-					<select id=selSurface onclick=GBV.showSurface(this.value); onchange=GBV.showSurface(this.value); size=10 >` + GBX.surfacesOptions + `</select><br>
+					<select id=selSurface onclick=HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=10 >` + GBX.surfacesOptions + `</select><br>
+					<button onclick=HUD.setHeadsUp(); >update</button>
 				</div>
 				<div style=margin-left:15px;overflow-x:auto;max-width:270px; >
 					<b>surface</b><br>
@@ -265,11 +262,11 @@
 							'<div >' +
 								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space 1 id" ><br>' +
 								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
+								'<button onclick=HUD.updateSpace(1); >update</button>' + b +
 							'</div>' +
-							'<div style=margin-left:15px;>' +
+							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
 								'<b>adjacent space 1</b> ' + b +
-								'id <button id=butSpace1 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' +
-									'<button onclick=HUD.updateSpace(1); >update</button>' + b +
+								'id <button id=butSpace1 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
 								( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
 								( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
 								( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
@@ -286,11 +283,11 @@
 							'<div >' +
 								'<input oninput=HUD.updateSelect(this,selSpace2); size=6  placeholder="space 2 id" ><br>' +
 								'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
-							'</div>' +
-							'<div style=margin-left:15px; >' +
+								'<button onclick=HUD.updateSpace(2); >update</button>' + b +
+								'</div>' +
+							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
 								'<b>adjacent space 2</b> ' + b +
-								'id <button id=butSpace2 onclick=GBV.showSpace(this.innerText);selSpace2.value=this.innerText; >' + space2.id + '</button> ' +
-									'<button onclick=HUD.updateSpace(2); >update</button>' + b +
+								'id <button id=butSpace2 onclick=GBV.showSpace(this.innerText);selSpace2.value=this.innerText; >' + space2.id + '</button> ' + b +
 								( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
 								( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
 								( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
@@ -322,11 +319,11 @@
 						'<div >' +
 							'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
 							'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
-						'</div>' +
-						'<div style=margin-left:15px; >' +
+							'<button onclick=HUD.updateSpace(0); >update</button>' + b +
+							'</div>' +
+						'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
 							'<b>adjacent space 1</b> ' + b +
-							'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' +
-								'<button onclick=HUD.updateSpace(0); >update</button>' + b +
+							'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
 							( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
 							( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
 							( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) + '</i>' : '' ) +
@@ -360,51 +357,29 @@
 
 		document.body.style.cursor = 'pointer';
 
-		/*
-		if ( window.detSurfaceEdits ) {
-
-			inpSurface.value = data.id;
-			selSurface.value = data.id;
-
-			const surface = HUD.surfacesXml[ selSurface.selectedIndex ];
-			//console.log( 'surface', surface );
-
-			const type = surface.attributes.getNamedItem( 'surfaceType' ).nodeValue;
-			//console.log( 'type', type );
-
-			selType.selectedIndex = GBX.surfaceTypes.indexOf( type );
-
-			const adjs = surface.getElementsByTagName( 'AdjacentSpaceId' );
-
-			index = spacesXmlIds.indexOf( adjs[ 0 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
-			selAdjacentSpaceId0.selectedIndex = index;
-
-			if ( adjs[ 1 ] ) {
-
-				index = spacesXmlIds.indexOf( adjs[ 1 ].attributes.getNamedItem( 'spaceIdRef' ).nodeValue );
-
-			} else {
-
-				index = 0;
-
-			}
-
-			selAdjacentSpaceId1.selectedIndex = index;
-
-		}
-		*/
-
-	}
+	};
 
 
 
-	HUD.updateSpace = ( spaceRef ) => {
-		console.log( 'spaceRef', spaceRef );
+	HUD.updateSurface = function( id ) {
+
+		GBX.surfaceMeshes.children.forEach( function( element ) { element.visible = element.userData.data.id === id ? true : false; } );
+
+		const surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+		intersected = surfaceMesh;
+
+	};
+
+
+
+	HUD.updateSpace = function( spaceRef ) {
+		//console.log( 'spaceRef', spaceRef );
 
 		const surfaceJson = HUD.data;
 		const surfaceId = surfaceJson.id;
+		var adjacentNew;
 
-		HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
+		HUD.surfacesXml = GBX.gbxmlResponseXML.getElementsByTagName("Surface");
 		//console.log( 'HUD.surfacesXml', HUD.surfacesXml);
 
 		surfaceXml = HUD.surfacesXml[ surfaceJson.id ];
@@ -414,67 +389,108 @@
 			spaceId = selSpace1.value;
 			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
 			butSpace0.innerText = spaceId;
-			adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
-			adjacentSpace.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = spaceId;
-//			console.log( 'adjacentSpace', adjacentSpace );
+			//			adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId");
+
+			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			adjacentNew.setAttribute( "spaceIdRef", "none" );
+			surfaceXml.appendChild( adjacentNew );
+
+			console.log( 'surfaceXml', surfaceXml);
+
+//			adjacentSpace.setAttribute( "spaceIdRef", "23" );
+			console.log( 'adjacentNew', adjacentNew );
 
 		} else if ( spaceRef === 1 ) {
 
 			spaceId = selSpace1.value;
+			console.log( 'spaceId', spaceId );
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
 			butSpace1.innerText = spaceId;
-			adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
-			adjacentSpace.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = spaceId;
-//			console.log( 'adjacentSpace', adjacentSpace );
+
+			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			surfaceXml.appendChild( adjacentNew );
+
+			console.log( 'surfaceXml', surfaceXml);
+
+			//adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
+			//adjacentSpace.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = spaceId;
+			//console.log( 'adjacentSpace', adjacentSpace );
 
 		} else if ( spaceRef === 2 ) {
 
 			const spaceId = selSpace2.value;
 			surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId;
 			butSpace2.innerText = spaceId;
-			const adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
-			adjacentSpace.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = spaceId;
-//			console.log( 'adjacentSpace', adjacentSpace );
+
+			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			surfaceXml.appendChild( adjacentNew );
+
+			console.log( 'surfaceXml', surfaceXml);
+			//const adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
+			//adjacentSpace.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = spaceId;
+			//console.log( 'adjacentSpace', adjacentSpace );
 
 		}
 
-//		console.log( 'surfaceJson', surfaceJson );
+		console.log( 'surfaceJson', surfaceJson );
 
 		HUD.setHeadsUp();
 
-	}
+	};
 
 
 
-	HUD.updateType = () => {
+	HUD.updateType = function() {
 
 		// console.log( 'id', HUD.data );
 
 		const surface = HUD.data;
 		const id = surface.id;
-		surface.surfaceType = selType.value;
+		const typePrev = surface.AdjacentSpaceId;
+		const typeNew = surface.surfaceType = selType.value;
 		//console.log( 'surface', surface );
 
 		HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 		//		console.log( 'HUD.surfacesXml', HUD.surfacesXml);
 
 		surfaceXml = HUD.surfacesXml[ id ];
-		surfaceXml.attributes.getNamedItem( 'surfaceType' ).nodeValue = selType.value;
+		surfaceXml.attributes.getNamedItem( 'surfaceType' ).nodeValue = typeNew;
 
-		surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === id );
-		surfaceMesh.material.color.setHex( GBX.colors[ selType.value ] );
+		surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+		surfaceMesh.material.color.setHex( GBX.colors[ typeNew ] );
 		surfaceMesh.material.needsUpdate = true;
 		surfaceJson = surfaceMesh.userData.data;
-		const adjacentSpaceId = surfaceJson.AdjacentSpaceId ? surfaceJson.AdjacentSpaceId : [];
-		adjacentSpaceId[ 0 ] = adjacentSpaceId[ 0 ] ? adjacentSpaceId[ 0 ] : { spaceIdRef: 'none' };
-		adjacentSpaceId[ 1 ] = adjacentSpaceId[ 1 ] ? adjacentSpaceId[ 1 ] : { spaceIdRef: 'none' };
-		console.log( 'surfaceMesh', surfaceMesh );
 
-	}
+		const types = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'Air', 'UndergroundCeiling', 'RaisedFloor'];
+
+		if ( typeNew === 'Shade' ) {
+
+			delete surfaceJson.AdjacentSpaceId;
+
+		} else if ( types.includes( typeNew ) ) {
+
+			surfaceJson.AdjacentSpaceId= [];
+			adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+			adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
+			adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+
+		} else {
+
+			surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
+
+		}
+
+		console.log( 'shade surfaceJson', surfaceJson );
+
+		HUD.setHeadsUp();
+
+	};
 
 
 
-	HUD.updateSelect = ( input, select ) => {
+	HUD.updateSelect = function( input, select ) {
 
 		const str = input.value.toLowerCase();
 
@@ -490,14 +506,12 @@
 
 		}
 
-
-
-	}
+	};
 
 
 /////////
 
-	HUD.displayTelltalesVertex = () => {
+	HUD.displayTelltalesVertex = function() {
 
 		THR.scene.remove( telltalesVertex );
 
@@ -530,11 +544,11 @@
 
 		THR.scene.add( telltalesVertex );
 
-	}
+	};
 
 
 
-	HUD.displayTelltalesPolyloop = () => {
+	HUD.displayTelltalesPolyloop = function() {
 
 		THR.scene.remove( telltalesPolyloop );
 
@@ -593,11 +607,11 @@
 
 		THR.scene.add( telltalesPolyloop );
 
-	}
+	};
 
 
 
-	HUD.drawPlacard = ( text, scale, color, x, y, z ) => {
+	HUD.drawPlacard = function( text, scale, color, x, y, z ) {
 
 		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
 
@@ -667,6 +681,6 @@
 
 		}
 
-	}
+	};
 
 

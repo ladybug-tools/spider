@@ -142,7 +142,7 @@
 	GBV.showSurface = ( id ) => {
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
-
+/*
 		if ( window.divHeadsUp ) {
 
 			const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === id );
@@ -150,6 +150,7 @@
 			HUD.setHeadsUp();
 
 		}
+*/
 
 	};
 
