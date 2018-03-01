@@ -14,7 +14,7 @@
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
 
-	button, input[ type=button ] { background-color: #888; border: none; color: var( --mnu-color ); cursor: pointer; margin: 2px; padding: 3px 20px; }
+	button, input[ type=button ] { background-color: #888; border: none; color: var( --mnu-color ); cursor: pointer; margin: 2px; padding: 3px 10px; }
 	button:hover, button:focus { color: white }
 
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }

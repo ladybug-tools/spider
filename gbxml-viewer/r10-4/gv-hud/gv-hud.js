@@ -73,8 +73,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-
-
 	function toggleHeadsUpOff() {
 
 		if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
@@ -377,6 +375,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const surfaceJson = HUD.data;
 		const surfaceId = surfaceJson.id;
+		var adjacentPrev = surfaceJson.AdjacentSpaceId;
 		var adjacentNew;
 
 		HUD.surfacesXml = GBX.gbxmlResponseXML.getElementsByTagName("Surface");
@@ -389,15 +388,14 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			spaceId = selSpace1.value;
 			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
 			butSpace0.innerText = spaceId;
-			//			adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId");
+			//adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId");
 
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", "none" );
 			surfaceXml.appendChild( adjacentNew );
-
 			console.log( 'surfaceXml', surfaceXml);
 
-//			adjacentSpace.setAttribute( "spaceIdRef", "23" );
+
 			console.log( 'adjacentNew', adjacentNew );
 
 		} else if ( spaceRef === 1 ) {
@@ -406,6 +404,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			console.log( 'spaceId', spaceId );
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
 			butSpace1.innerText = spaceId;
+
 
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
