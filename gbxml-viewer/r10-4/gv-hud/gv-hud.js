@@ -225,7 +225,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					<select id=selSurface onclick=HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=10 >` + GBX.surfacesOptions + `</select><br>
 					<button onclick=HUD.setHeadsUp(); >update</button>
 				</div>
-				<div style=margin-left:15px;overflow-x:auto;max-width:270px; >
+				<div style=margin-left:15px;overflow-x:auto;max-width:260px; >
 					<b>surface</b><br>
 
 					id <button onclick=GBV.showSurface(this.innerText)  >` + data.id + `</button>

@@ -1,7 +1,7 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10.9.2
+# gbXML Viewer R10.10
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
@@ -17,10 +17,31 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 </details>
 -->
 
+
+
 <details open>
 
-<summary>Welcome 2018-02-27 - ~ R10.9</summary>
+<summary>Welcome 2018-02-28 ~ R10.10</summary>
 
+R10.10
+SET
+* Passed through JSLint ~ many slight fixes
+* Toggle Ortho camera now working
+* Update name space variables
+
+APP
+* Update name space variables
+
+HUD
+* Update name space variables
+* Fix no-scroll select surface
+* Rejig update buttons
+* Improve menu width handling
+* When change type, adjacent spaces update more correctly
+
+</details><details open>
+
+<summary>Welcome 2018-02-27 - ~ R10.9</summary>
 
 Reports
 * Fix silly devLog bug that was breaking everything
