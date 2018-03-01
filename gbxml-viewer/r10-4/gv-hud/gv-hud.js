@@ -27,7 +27,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				divHeadsUp.style.cssText =
 				`
 					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px );
-					max-height: 95%; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
+					max-height: 97%; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
 					padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; z-index: 10;
 				`;
 

@@ -44,8 +44,8 @@
 	#divHamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; left: 20px; margin: 0; max-height: 95%;
-		overflow: auto; position: fixed; top: 20px; resize: both; width: var( --mnu-width ); z-index: 1;
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; left: 20px; margin: 0; max-height: 98%;
+		overflow: auto; position: fixed; top: 10px; resize: both; width: var( --mnu-width ); z-index: 1;
 		transition: .5s;}
 
 	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
