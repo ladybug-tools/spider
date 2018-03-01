@@ -236,7 +236,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
 						encodeURI( data.CADObjectId ) + `"); >` + data.CADObjectId + `</button><br>` : `` ) +
 					`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
-						` len <i>` + height.toFixed( 3 ) + `</i> wid <i>` + width.toFixed( 3 ) + `</i>` +
+						` ln <i>` + height.toFixed( 3 ) + `</i> wd <i>` + width.toFixed( 3 ) + `</i>` +
 				`<div>
 			</div>
 		`;
