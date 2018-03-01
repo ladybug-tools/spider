@@ -25,10 +25,12 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 
 R10.:1O:10.1
 * HUD select now sho 8 items instead of 10
-R10.:1O:10.2
+R10.:1O:10.2 / R10.:1O:10.4 / / R10.:1O:10.5
 * Various menu size fixes
 R10.:1O:10.3
 * Save file working again
+
+
 
 R10.10
 SET

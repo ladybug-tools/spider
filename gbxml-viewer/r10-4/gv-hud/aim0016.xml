@@ -67763,7 +67763,7 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [922094]</CADObjectId>
       <Name>E-02_114-E-W-406</Name>
     </Surface>
-    <Surface surfaceType="Shade" exposedToSun="true" id="aim11616">
+    <Surface surfaceType="Roof" exposedToSun="true" id="aim11616">
       <AdjacentSpaceId spaceIdRef="aim4147"/>
       <RectangularGeometry id="aim11617">
         <Azimuth>180</Azimuth>
@@ -68723,7 +68723,7 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [922257]</CADObjectId>
       <Name>S-02_115-E-W-413</Name>
     </Surface>
-    <Surface surfaceType="Roof" exposedToSun="true" id="aim11879">
+    <Surface surfaceType="InteriorFloor" exposedToSun="true" id="aim11879">
       <AdjacentSpaceId spaceIdRef="aim4199"/>
       <RectangularGeometry id="aim11880">
         <Azimuth>180</Azimuth>
@@ -74588,7 +74588,7 @@
       <CADObjectId>Basic Wall: SIM_MASS_SLD [959714]</CADObjectId>
       <Name>X-S-523</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim13476">
+    <Surface surfaceType="Shade" exposedToSun="true" id="aim13476">
       <RectangularGeometry id="aim13477">
         <Azimuth>93.4364318847656</Azimuth>
         <CartesianPoint>
