@@ -26,7 +26,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
 				divHeadsUp.style.cssText =
 				`
-					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px );
+					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 390px );
 					max-height: 97%; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
 					padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; z-index: 10;
 				`;
