@@ -222,7 +222,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			<div class=flex-container2 >
 				<div>
 					<input oninput=HUD.updateSelect(this,selSurface); size=6 placeholder="surface id" ><br>
-					<select id=selSurface onclick=HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=10 >` + GBX.surfacesOptions + `</select><br>
+					<select id=selSurface onclick=HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` + GBX.surfacesOptions + `</select><br>
 					<button onclick=HUD.setHeadsUp(); >update</button>
 				</div>
 				<div style=margin-left:15px;overflow-x:auto;max-width:260px; >
@@ -261,7 +261,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						'<hr><div class=flex-container2 >' +
 							'<div >' +
 								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space 1 id" ><br>' +
-								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
+								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
 								'<button onclick=HUD.updateSpace(1); >update</button>' + b +
 							'</div>' +
 							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
@@ -282,7 +282,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						'<div class=flex-container2 >' +
 							'<div >' +
 								'<input oninput=HUD.updateSelect(this,selSpace2); size=6  placeholder="space 2 id" ><br>' +
-								'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
+								'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
 								'<button onclick=HUD.updateSpace(2); >update</button>' + b +
 								'</div>' +
 							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
