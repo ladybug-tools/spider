@@ -18,8 +18,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r87/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "menu" >
 
@@ -65,8 +65,8 @@
 
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		axisHelper = new THREE.AxisHelper( 50 );
-		scene.add( axisHelper );
+		axesHelper = new THREE.AxisHelper( 50 );
+		scene.add( axesHelper );
 
 		geometry = new THREE.BoxGeometry( 1, 1, 1 );
 		material = new THREE.MeshNormalMaterial();

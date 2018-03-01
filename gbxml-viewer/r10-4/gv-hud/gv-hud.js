@@ -311,7 +311,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				space1 = GBV.getSpaceId( data.AdjacentSpaceId.spaceIdRef, 'single' );
 
 				if ( !space1 ) { return; }
-
+				console.log( 'hud space1.id', space1.id );
 				adjacentsTxt =
 					'<hr><div class=flex-container2 >' +
 						'<div >' +
@@ -398,7 +398,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
 			butSpace1.innerText = spaceId;
 
-
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );
@@ -445,6 +444,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 		surfaceMesh.material.color.setHex( GBX.colors[ typeNew ] );
 		surfaceMesh.material.needsUpdate = true;
+
 		surfaceJson = surfaceMesh.userData.data;
 
 		const types = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'Air', 'UndergroundCeiling', 'RaisedFloor'];
@@ -452,6 +452,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		if ( typeNew === 'Shade' ) {
 
 			delete surfaceJson.AdjacentSpaceId;
+			console.log( 'typeNew', typeNew );
+			console.log( 'surfaceXml',  surfaceXml );
+
+//			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+//			adjacentNew.setAttribute( "spaceIdRef", "none" );
+//			surfaceXml.appendChild( adjacentNew );
 
 		} else if ( types.includes( typeNew ) ) {
 
@@ -464,6 +470,11 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			if ( Array.isArray( spaceIdPrev ) === true ) {
 
+				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev[ 0 ] };
+
+			} else if ( spaceIdPrev ) {
+
+				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev };
 
 			} else {
 
@@ -473,7 +484,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		console.log( 'shade surfaceJson', surfaceJson );
+//		console.log( 'type surfaceJson', surfaceJson );
 
 		HUD.setHeadsUp();
 
