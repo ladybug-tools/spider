@@ -4,6 +4,7 @@
 # gbXML Viewer Read Me
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-01-core/gbxml-viewer10-core.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+
 _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
 
@@ -14,10 +15,11 @@ _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on s
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
-## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
-
 * News on what's happening with the gbXML Viewer.
 
+## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
+
+* Michal's must watch video
 
 ***
 
@@ -38,9 +40,13 @@ The Ladybug Tools/Spider gbXML Reader scripts are first steps toward making gbXM
 
 ### Mission
 
-gbXML Viewer is a variety of modular experiments for viewing, examining and validating gbXML files in 3D in your browser.
+gbXML Viewer is a collection of modular experiments for viewing, examining and validating gbXML files in 3D in your browser.
 
-Below there are links to some of the latest files. R8 is that latest release and is still a work-in-progress.
+Objectives
+
+* Loads almost instantly
+* Non-modal interface
+* Fast effective workflow: get things done faster
 
 
 ### Vision
@@ -48,43 +54,89 @@ Below there are links to some of the latest files. R8 is that latest release and
 * Helping students, clients and non-AEC peeps gain access BIM data easily, quickly and freely
 
 
-### Features
+## gbXM Viewer Features
 
 Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript.
 
-User experience
-* Runs on computer, tablet and phone
+### User experience
+* Runs in your browser on computer, tablet and phone
 * Highly adjustable workspace
+* Movable, sliding resizable menus
 * View the full gamut of data typically available in a gbXML file
-
-Viewing
 * View gbXML files in 3D
 * Full zoom, pan and rotate
-* Adjust a wide variety of viewing parameters including opacity, colors and materials
-* Exploded views and orthographic views
-* Toggle display of individual surfaces, zones, spaces, storey and surface types
-* Optional first person camera enables model fly-throughs
 
-Editing
+### Settings and Viewing Menu
+* Adjust a wide variety of viewing parameters
+	* Opacity, colors and materials
+	* Shadows, edges, normals
+	* Axes, grid, ground and gradient background
+	* Wireframe and rotation
+* Exploded 3D views
+* Perspective and orthographic views
+* Buttons to toggle display of individual surfaces, zones, spaces, storey and surface types
+
+### Reports / Data Menu
+* View all project textual metadata
+* Link to Google map focussed on project lat/lon
+* Buttons to highlight surfaces, spaces, stories and zones
+	* Individually
+	* By surface type
+	* By individual CAD object IDs
+	* By groups of CAD Objects
+* Toggle visibility of all items
+* Zoom to selected surface or space
+
+### Reports / Issue tracking Menu
 * Identifies automatically:
 	* Duplicate surfaces
 	* Surfaces with duplicate adjacent spaces
+	* Multiple elements with identical CAD Object ID
 	* Tiny surfaces and tiny spaces
-* Reassign surface type and adjacent spaces for all surfaces
-* Click any surface to view its parameters
 
-File handling
+
+### Heads-up Display (HUD) / Editing
+* Highlight and toggle visibility of elements, surfaces, edges
+	* Click menu items or use ALT + ZXCV keys
+* Click on any surface in the model
+	* View id, name, type CAD object id
+	* View dimensions and area
+	* Delete surface
+* Select any surface from scrolling list to see it highlighted on screen and parameters displayed
+* Reassign surface type and adjacent spaces for all surfaces
+	* View adjacent space parameters
+	* Toggle view of space and story
+	* Select adjacent spaces from scrolling list
+
+
+### Main Menu & Heads-up Display (HUD) / File handling
 * Open files via open file dialog or drag and drop
 * Open files via URL using a link or simply by copying and pasting into the address bar
 * Save edited data to a new gbXML file with updated document history
-Code
+
+### Code
 * All plain vanilla client-side JavaScript
+* Built over the Three.js WebGL JavaScript library
+* Uses Showdown to turn Markdown into HTML
+* Every menu has own JavaScript file, HTML test file and read me
+* Every menu has its own name space and only loads when first called
 * Creates gbJSON data for easier processing
 * All free and open source and hosted on GitHub
 
-BonusFeatures
+### Bonus / Experimental Feature
+* Optional first person camera enables model fly-through
+	* Use mouse, menu or cursor keys to control full range of motion
+	* 3D avatar guides you through space
 * Sun path diagrams with analemmas
+	Uses Ladybug Tools / Spider Solar Calculator to position Sun correctly for lat/lon at any month, day and hour
 * Screen capture to video
+	* Currently only on previous release
+
+### Sample gbXML File galleries
+* Uses GitHub API to obtain directory listings and load gbXML files in several selected repositories
+	* gbXML.org sample files
+	* Spider Build Well project files
+	* Various files used for testing
 
 
 ## Things you can do using this script
@@ -96,9 +148,6 @@ BonusFeatures
 * Press Control-U/Command-Option-U to view the source code
 * Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
 
-### View Sample gbXML Files
-
-The [gbXML Sample Files folder]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/gbxml-sample-files/README.md ) has links to a number of files you may view.
 
 
 
