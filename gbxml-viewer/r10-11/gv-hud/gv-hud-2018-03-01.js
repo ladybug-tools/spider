@@ -26,7 +26,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				divHeadsUp = document.body.appendChild( document.createElement( 'div' ) );
 				divHeadsUp.style.cssText =
 				`
-					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px );
+					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 390px );
 					max-height: 97%; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
 					padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; z-index: 10;
 				`;
@@ -236,12 +236,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
 						encodeURI( data.CADObjectId ) + `"); >` + data.CADObjectId + `</button><br>` : `` ) +
 					`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
-						` ln <i>` + height.toFixed( 3 ) + `</i> wd <i>` + width.toFixed( 3 ) + `</i>` +
+						` length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) + `</i>` +
 				`<div>
 			</div>
 		`;
 
-		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency';
+		adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency';
 
 		if ( adjacentsTxt !== '<hr>no adjacency' ) {
 
@@ -305,15 +305,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			} else {
 
-				console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef );
+				//console.log( 'data.AdjacentSpaceId.spaceIdRef', data.AdjacentSpaceId.spaceIdRef );
 				//console.log( 'adjacentsTxt', adjacentsTxt );
-				//console.log( 'hud AdjacentSpaceId', data.AdjacentSpaceId );
 
-				space1 = GBV.getSpaceId( data.AdjacentSpaceId.spaceIdRef );
-				console.log( 'hud space1', space1 );
+				space1 = GBV.getSpaceId( data.AdjacentSpaceId.spaceIdRef, 'single' );
 
 				if ( !space1 ) { return; }
-
 
 				adjacentsTxt =
 					'<hr><div class=flex-container2 >' +
@@ -378,32 +375,46 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const surfaceJson = HUD.data;
 		const surfaceId = surfaceJson.id;
-		let adjacentNew;
+		var adjacentPrev = surfaceJson.AdjacentSpaceId;
+		var adjacentNew;
 
 		HUD.surfacesXml = GBX.gbxmlResponseXML.getElementsByTagName("Surface");
+		//console.log( 'HUD.surfacesXml', HUD.surfacesXml);
 
-		const surfaceXml = HUD.surfacesXml[ surfaceJson.id ];
+		surfaceXml = HUD.surfacesXml[ surfaceJson.id ];
 
 		if ( spaceRef === 0  ) {
 
-			const spaceId = selSpace1.value;
+			spaceId = selSpace1.value;
 			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
 			butSpace0.innerText = spaceId;
+			//adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId");
 
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", "none" );
 			surfaceXml.appendChild( adjacentNew );
+			console.log( 'surfaceXml', surfaceXml);
+
+
+			console.log( 'adjacentNew', adjacentNew );
 
 		} else if ( spaceRef === 1 ) {
 
-			const spaceId = selSpace1.value;
+			spaceId = selSpace1.value;
 			console.log( 'spaceId', spaceId );
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
 			butSpace1.innerText = spaceId;
 
+
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );
+
+			console.log( 'surfaceXml', surfaceXml);
+
+			//adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
+			//adjacentSpace.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = spaceId;
+			//console.log( 'adjacentSpace', adjacentSpace );
 
 		} else if ( spaceRef === 2 ) {
 
@@ -415,10 +426,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );
 
-		}
+			console.log( 'surfaceXml', surfaceXml);
+			//const adjacentSpace = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
+			//adjacentSpace.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = spaceId;
+			//console.log( 'adjacentSpace', adjacentSpace );
 
-		//console.log( 'surfaceXml', surfaceXml);
-		//console.log( 'adjacentNew', adjacentNew );
+		}
 
 		console.log( 'surfaceJson', surfaceJson );
 
@@ -433,26 +446,20 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		// console.log( 'id', HUD.data );
 
 		const surface = HUD.data;
+		const id = surface.id;
+		const typePrev = surface.AdjacentSpaceId;
+		const typeNew = surface.surfaceType = selType.value;
 		//console.log( 'surface', surface );
 
-		const id = surface.id;
-		const spaceIdPrev = surface.AdjacentSpaceId;
-		console.log( 'spaceIdPrev', spaceIdPrev );
-
-		const typeNew = surface.surfaceType = selType.value;
-		console.log( 'typeNew', typeNew );
-
 		HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
+		//		console.log( 'HUD.surfacesXml', HUD.surfacesXml);
 
 		surfaceXml = HUD.surfacesXml[ id ];
-		//console.log( 'surfaceXml',  surfaceXml );
-
 		surfaceXml.attributes.getNamedItem( 'surfaceType' ).nodeValue = typeNew;
 
 		surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 		surfaceMesh.material.color.setHex( GBX.colors[ typeNew ] );
 		surfaceMesh.material.needsUpdate = true;
-
 		surfaceJson = surfaceMesh.userData.data;
 
 		const types = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'Air', 'UndergroundCeiling', 'RaisedFloor'];
@@ -461,97 +468,24 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			delete surfaceJson.AdjacentSpaceId;
 
-			const spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
-			//console.log( 'spaceId',  spaceId);
+		} else if ( types.includes( typeNew ) ) {
 
-			const removed = surfaceXml.removeChild( spaceId );
-			console.log( '0/123 removed', removed.nodeName );
+			surfaceJson.AdjacentSpaceId= [];
+			adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+			adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
+			adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
 
-		} else if ( types.includes( typeNew ) ) {  // type new is two adjacents
+		} else {
 
-			console.log( 'typeNew', typeNew );
-
-//			surfaceJson.AdjacentSpaceId= [];
-//			adjacentSpaceId = surfaceJson.AdjacentSpaceId;
-//			adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
-//			adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
-
-			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
-
-				// leave things untouched
-				console.log( '2/2spaceIdPrev',  spaceIdPrev );
-
-			} else if ( spaceIdPrev ) { // type prev is single adjacent
-
-				//surfaceJson.AdjacentSpaceId = spaceIdPrev; //{ spaceIdRef: spaceIdPrev };
-
-				surfaceJson.AdjacentSpaceId= [];
-				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
-				adjacentSpaceId[ 0 ] = { spaceIdRef: 'spaceIdPrev' };
-				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
-
-				spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId");
-				console.log( '2/1 spaceId',  spaceId);
-
-				const spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
-				//console.log( 'spaceId',  spaceId);
-				const removed = surfaceXml.removeChild(spaceId);
-				console.log( 'removed', removed.nodeName );
-
-			} else { // type prev is no adjacent
-
-				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
-				console.log( '2/0 no spaceIdPrev',  spaceIdPrev );
-
-			}
-
-		} else { // type new is single adjacent
-
-			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
-
-				console.log( 'spaceIdPrev',spaceIdPrev[ 0 ] );
-				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev[ 0 ] };
-
-				adjacentXml = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
-				const removed = surfaceXml.removeChild( adjacentXml);
-				adjacentXml = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
-				const removed2 = surfaceXml.removeChild( adjacentXml);
-
-				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-				newAdj.setAttribute( "spaceIdRef", spaceIdPrev[ 0 ].spaceIdRef ) ;
-				xx = surfaceXml.appendChild( newAdj );
-				console.log( 'xx', xx );
-
-			} else if ( spaceIdPrev ) { // type prev is single adjacent
-
-				// leave things untouched
-				//surfaceJson.AdjacentSpaceId = spaceIdPrev; //{ spaceIdRef: spaceIdPrev };
-				spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
-				console.log( '1/1 no changes spaceId',  spaceId);
-
-			} else { // type prev is no adjacent
-
-				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
-				console.log( '1/0 no spaceIdPrev',  spaceIdPrev );
-
-			}
+			surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
 		}
 
-		console.log( 'surfaceXml',  surfaceXml );
-
-		//console.log( 'type surfaceJson', surfaceJson );
+		console.log( 'shade surfaceJson', surfaceJson );
 
 		HUD.setHeadsUp();
 
 	};
-
-/*
-
-shade to shade OK
-shade to one adjacent: OK
-
-*/
 
 
 

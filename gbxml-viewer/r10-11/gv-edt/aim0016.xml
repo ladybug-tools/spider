@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-16"?><gbXML xmlns="http://www.gbxml.org/schema" useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37">
+<gbXML xmlns="http://www.gbxml.org/schema" useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37">
   <Campus id="aim0002">
     <Location>
       <StationId IDType="WMO">140741_2006</StationId>
@@ -45648,7 +45648,7 @@
       <Name>bldg-1</Name>
       <Description>Extracted from Revit model.</Description>
     </Building>
-    <Surface surfaceType="InteriorWall" id="aim5362">
+    <Surface surfaceType="InteriorFloor" id="aim5362">
       <AdjacentSpaceId spaceIdRef="aim0273"/>
       <AdjacentSpaceId spaceIdRef="aim0316"/>
       <RectangularGeometry id="aim5363">
@@ -48594,7 +48594,7 @@
       <CADObjectId>Basic Wall: SIM_INT_SLD_Core [886153]</CADObjectId>
       <Name>S-00_110-00_129-I-W-61</Name>
     </Surface>
-    <Surface surfaceType="InteriorWall" id="aim6207">
+    <Surface surfaceType="InteriorFloor" id="aim6207">
       <AdjacentSpaceId spaceIdRef="aim0724"/>
       <AdjacentSpaceId spaceIdRef="aim2879"/>
       <RectangularGeometry id="aim6208">
@@ -73428,7 +73428,7 @@
       <CADObjectId>Basic Wall: SIM_INT_SLD_Partition [928690]</CADObjectId>
       <Name>N-RF_102-RF_103-I-W-496</Name>
     </Surface>
-    <Surface surfaceType="Roof" exposedToSun="true" id="aim13183">
+    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim13183">
       <AdjacentSpaceId spaceIdRef="aim5320"/>
       <RectangularGeometry id="aim13184">
         <Azimuth>93.4364318847656</Azimuth>
@@ -76500,5 +76500,7 @@
       <CADModelId>d97d5d5a-5480-40f6-9cb8-451d38be32ed</CADModelId>
     </CreatedBy>
     <PersonInfo id="aim0005"/>
-  </DocumentHistory>
+  <ProgramInfo xmlns="" id="ladybug-tools-spider">
+  	<ProductName>Ladybug-Tools/spider</ProductName></ProgramInfo>
+	  <ModifiedBy xmlns="" personId="Theo" programId="ladybug-tools-spider2" date="2018-02-22T03:31:27.920Z"/><ProgramInfo xmlns="" id="ladybug-tools-spider"><ProductName>Ladybug-Tools/spider</ProductName></ProgramInfo><ModifiedBy xmlns="" personId="Theo" programId="ladybug-tools-spider2" date="2018-02-22T03:34:29.236Z"/></DocumentHistory>
 </gbXML>

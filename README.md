@@ -12,6 +12,10 @@ _All of the above are embedded interactive scripts_
 The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-more/#README.md )
  -->
 
+### Welcome TAS users! We will have an updated stable version of gbXML Viewer up over this weekend.
+
+### In the meantime, please use the links here: [gbXML Viewer Read Me]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/index.html#gbxml-viewer/README.md )
+
 
 
 ## Ladybug Tools / Spider: [Latest Issues and Updates]( #plugins/view-github-issues.html )

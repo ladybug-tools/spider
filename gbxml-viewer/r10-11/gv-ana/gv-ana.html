@@ -3,10 +3,10 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "Test file for sample gbXML viewer template" >
+<meta name = "description" content = "Test sample gbXML viewer Sun path / Analemma" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-02" >
-<title>gv-tmp - gbXML Viewer Template</title>
+<meta name = "date" content = "2018-02-21" >
+<title>gv-ana gbxml-viewer-template-Sun Path / Analemma</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -18,33 +18,30 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'gv-tmp gbxml viewer template' button to load test menu</p>
+	<p>If it does not open automatically, click 'template' to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
-			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-tmp/gv-tmp.js';
+		<button id=butAnalemma onclick =
+			"const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-ana/gv-ana.js';
 			divMenu.style.display='block';" >
-			gv-tmp gbxml viewer template </button>
+			gv-ana gbxml-viewer Sun ath / Analemma </button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
 
 	<p id=dragAreaToIframe class=dragDropArea >
-		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); >
-		<br>
+		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this) >
 	<p>
 
-	<div id=divLog ></div>
-
 	<div id = "divSampleFiles" ></div>
-
-	<p><a href=index.html >Read Me file</a></a></p>
 
 	<div id = "divMenu" >
 
 		<div id = "divMenuHeader" >
-			click here to move
+			Click here to move
 			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 		</div>
 
@@ -89,7 +86,7 @@
 
 		console.log( 'scene', THR.scene );
 
-		butTemplate.click();
+		butAnalemma.click();
 
 	}
 
