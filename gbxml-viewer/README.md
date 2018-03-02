@@ -28,6 +28,7 @@ _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on s
 ## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 
 * Michal's must watch video
+* Tania Becker commented: 'Fascinating video. It's well explained and easy to understand even for a lay person. It sparkles!'
 
 
 ## Full Screen early version: [gbXML Viewer R3]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-23-michal/index.html )
