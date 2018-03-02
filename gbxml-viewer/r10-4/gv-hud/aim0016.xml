@@ -1,4 +1,4 @@
-<gbXML xmlns="http://www.gbxml.org/schema" useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37">
+<?xml version="1.0" encoding="UTF-16"?><gbXML xmlns="http://www.gbxml.org/schema" useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37">
   <Campus id="aim0002">
     <Location>
       <StationId IDType="WMO">140741_2006</StationId>
@@ -67763,7 +67763,7 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [922094]</CADObjectId>
       <Name>E-02_114-E-W-406</Name>
     </Surface>
-    <Surface surfaceType="InteriorFloor" exposedToSun="true" id="aim11616">
+    <Surface surfaceType="Roof" exposedToSun="true" id="aim11616">
       <AdjacentSpaceId spaceIdRef="aim4147"/>
       <RectangularGeometry id="aim11617">
         <Azimuth>180</Azimuth>
@@ -72832,8 +72832,8 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [927801]</CADObjectId>
       <Name>S-RF_100-E-W-484</Name>
     </Surface>
-    <Surface surfaceType="Roof" exposedToSun="true" id="aim13016">
-      <AdjacentSpaceId spaceIdRef="aim5184"/>
+    <Surface surfaceType="Shade" exposedToSun="true" id="aim13016">
+      
       <RectangularGeometry id="aim13017">
         <Azimuth>180</Azimuth>
         <CartesianPoint>
