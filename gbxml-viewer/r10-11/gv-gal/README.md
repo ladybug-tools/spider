@@ -1,15 +1,18 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-gal/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10-11/gv-gal/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer10 Gallery Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-gal/gv-gal.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+# gbXML Viewer Gallery Read Me
 
 
-## Full screen test: [Test gbXML Viewer11 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-gal.html )
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-gal/gv-gal.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-* <http://www.ladybug.tools/spider/gbxml-viewer/>
+## Full screen test: [Test gbXML Viewer11 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-gal/gv-gal.html )
+
+
+Use and share these links for gbXML Viewer:
+
+* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
+* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 ## Concept
 

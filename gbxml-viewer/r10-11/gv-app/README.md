@@ -2,16 +2,15 @@
 
 # gbXML Viewer10 App Read Me
 
-<!--
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px >Iframes are not displayed on github.com</iframe>
+
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px>Iframes are not displayed on github.com</iframe>
 
 
-## Full screen: [gbXML Viewer10]( http://www.ladybug.tools/spider/gbxml-viewer/ )
--->
+Use and share these links for gbXML Viewer:
 
-Use this link:
+* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
+* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
-* <http://www.ladybug.tools/spider/gbxml-viewer/>
 
 ## Concept
 

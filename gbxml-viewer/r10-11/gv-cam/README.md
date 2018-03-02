@@ -1,11 +1,11 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-cam/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10-11/gv-cam/README.md "View file as a web page." ) </span>
 
 # gbXML Viewer First Person Camera Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cam/gv-cam.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cam/gv-cam.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test: [gv-cam gbXML Viewer11 First Person Camera]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cam/test-gv-cam.html )
+## Full screen test: [gv-cam gbXML Viewer10-11 First Person Camera]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cam/test-gv-cam.html )
 
 
 Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen
@@ -65,7 +65,7 @@ Using the keyboard and the mouse or fingers at the same time can be very excitin
 
 ### 2018-02-21 ~ Theo
 
-* R11
+* R10-4
 
 ### 2018-02-17 ~ Theo
 

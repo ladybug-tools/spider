@@ -73,7 +73,8 @@
 
 			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
 
-				ADJsurfaceAdjacentsDuplicates.push( surface.id );
+				// why doesn't id work??
+				ADJsurfaceAdjacentsDuplicates.push( surface.Name );
 
 				//console.log( 'adjacencies', adjacencies  );
 
@@ -85,7 +86,7 @@
 						<button class=toggle onclick=GBV.showSurfaceType(this.innerText); >` + surface.surfaceType + `</button><br>`
 						+ ( surface.Name ? 'name <i>' + surface.Name + '</i><br>' : '' )
 						+ ( surface.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
-						encodeURI( surface.CADObjectId ) + `"); >` + surface.CADObjectId + `</button><br>` : `` ) +
+							encodeURI( surface.CADObjectId ) + `"); >` + surface.CADObjectId + `</button><br>` : `` ) +
 						`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
 						` length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) + `</i>
 					</div>`;
@@ -95,7 +96,7 @@
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
-			if ( ADJsurfaceAdjacentsDuplicates.includes( child.userData.data.id ) ) { child.material.color.set( '#c080ff' ); }
+			if ( ADJsurfaceAdjacentsDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }
 
 		}
 

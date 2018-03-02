@@ -17,13 +17,13 @@ The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-
 ### In the meantime, please use the links here: [gbXML Viewer Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md )
 
 
-
 ## Ladybug Tools / Spider: [Latest Issues and Updates]( #plugins/view-github-issues.html )
 
 ## Apps: [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [Analemma 3D]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
 
 ## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 
+* Michal's must watch video
 * Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
 
 

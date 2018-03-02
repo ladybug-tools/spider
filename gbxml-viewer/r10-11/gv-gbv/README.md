@@ -8,10 +8,10 @@
 
 ## Full screen: [gbXML Viewer View Utilities]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-gbv/gv-gbv.html )
 
-Use and share this link for gbXML Viewer:
+Use and share these links for gbXML Viewer:
 
-* <http://www.ladybug.tools/spider/gbxml-viewer/>
-
+* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
+* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 ## Concept
 

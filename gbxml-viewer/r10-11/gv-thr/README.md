@@ -8,10 +8,10 @@
 
 ## Full screen: [gbXML Viewer Three.js ]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-thr/gv-thr.html )
 
-Use and share this link for gbXML Viewer:
+Use and share these links for the full gbXML Viewer:
 
-* <http://www.ladybug.tools/spider/gbxml-viewer/>
-
+* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
+* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 ## Concept
 

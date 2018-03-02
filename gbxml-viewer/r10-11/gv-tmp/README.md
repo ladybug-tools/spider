@@ -11,7 +11,7 @@
 ## [Read Me Template]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10-11/gv-tmp/README-template.md )
 
 
-Use and share these links for gbXML Viewer:
+Use and share these links for the full gbXML Viewer:
 
 * Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
 * Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
