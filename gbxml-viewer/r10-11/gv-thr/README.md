@@ -3,7 +3,7 @@
 # gbXML Viewer Three.js Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-hr/gv-thr.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-thr/gv-thr.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
 ## Full screen: [gbXML Viewer Three.js ]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-thr/gv-thr.html )
