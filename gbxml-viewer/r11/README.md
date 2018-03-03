@@ -1,15 +1,17 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/gbxml-viewer/10-11/index.html#README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/gbxml-viewer/11/index.html#README.md "View file as a web page." ) </span>
 
-# gbXML Viewer Release 10 Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cor/gv-cor.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
-_[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cor/gv-cor.html ) ~ click the 'view model' button in left menu to view full screen_
-
-## Full screen: [gbXML Viewer Release 10 App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+# gbXML Viewer Release 11 Read Me
 
 
-## Full screen: [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cor/gv-cor.html )
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
+
+_[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html ) ~ click the 'view model' button in left menu to view full screen_
+
+
+## Full screen: [gbXML Viewer App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+
+
+## Full screen: [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html )
 
 The Ladybug Tools/Spider [gbXML]( http://www.gbxml.org/ ) Viewer is a folder of scripts that enable you to see text data files for buildings as a full 3D renderings.
 
@@ -18,134 +20,132 @@ The read me file with full details is in the main gbXML Viewer folder just above
 ***
 
 
+## gbXML Viewer Duplicate Adjacent Spaces
+
+folder: gv-adj = name space: ADJ{} = title: gbXML Viewer Duplicate Adjacent Spaces
+
+### [gbXML Viewer Duplicate Adjacent Spaces Read Me]( #gbxml-viewer/r11/gv-adj/README.md )
+
+### Full screen test script: [gbXML Viewer Duplicate Adjacent Spaces / Analemma]( gbxml-viewer/r11/gv-adj/gv-adj.html )
+
+
+## gbXML Viewer Sun Path / Analemmas
+
+folder: gv-ana = name space: ANA{} = title: gbXML Viewer Sun Path / Analemma
+
+### [gbXML Viewer Sun Path / Analemma Read Me]( #gbxml-viewer/r11/gv-ana/README.md )
+
+### Full screen test script: [gbXML Viewer Sun Path / Analemma]( gbxml-viewer/r11/gv-ana/gv-ana.html )
+
+
+## gbXML Viewer First Person camera
+
+folder: gv-cam = name space: CAM{} = title: gbXML Viewer First Person Camera
+
+### [gbXML Viewer First Person Camera Read Me]( #gbxml-viewer/r11/gv-cam/README.md )
+
+### Full screen test script: [gbXML Viewer First Person Camera]( gbxml-viewer/r11/gv-cam/gv-cam.html )
 
 
 ## gbXML Viewer Core
 
-This folder contains the basic script that does all the hard work of opening gbXML data files, reading the data and displaying the data in 3D using the [Three.js]( https://threejs.org ) JavaScript library.
+folder: gv-cor = name space: VOR{} = title: gbXML Viewer Core
 
-### [gbXML Viewer Core Read Me]( #gbxml-viewer/r10-11/gv-cor/README.md )
+### [gbXML Viewer Core Read Me]( #gbxml-viewer/r11/gv-cor/README.md )
+
+### Full screen test script: [gbXML Viewer Core]( gbxml-viewer/r11/gv-cor/gv-cor.html )
 
 
-### Full screen:  [gbXML Viewer Core]( gbxml-viewer/r10-11/gv-cor/gv-cor.html )
+## gbXML Viewer Duplicate Coordinates
 
-You may uses this script to verify that the code works in an iframe and that menus work as intended
+folder: gv-crd = name space: CRD{} = title: gbXML Viewer Duplicate Coordinates
+
+### [gbXML Viewer Duplicate Coordinates Read Me]( #gbxml-viewer/r11/gv-crd/README.md )
+
+### Full screen test script: [gbXML Viewer Duplicate Coordinates]( gbxml-viewer/r11/gv-crd/gv-crd.html )
+
+
+## gbXML Viewer Gallery
+
+folder: gv-gal = name space: GAL{} = gbXML Viewer Gallery
+
+### [gbXML Viewer Gallery Read Me]( #gbxml-viewer/r11/gv-gal/README.md )
+
+### Full screen test script: [gbXML Viewer Gallery]( gbxml-viewer/r11/gv-gal/gv-gal.html )
+
+
+## gbXML Viewer View Utilities
+
+folder: gv-gbv = name space: GBV{} = gbXML Viewer View Utilities
+
+### [gbXML Viewer View Utilities Read Me]( #gbxml-viewer/r11/gv-gbv/README.md )
+
+### Full screen test script: [gbXML Viewer View Utilities]( gbxml-viewer/r11/gv-gbv/gv-gbv.html )
+
+
+
+## gbXML Viewer Heads-Up Display (HUD)
+
+folder: gv-hud = name space: HUD = gbXML Viewer Heads-Up Display (HUD)
+
+### [gbXML Viewer Heads-Up Display (HUD) Read Me]( #gbxml-viewer/r11/gv-hud/README.md )
+
+### Full screen test script: [gbXML Viewer Heads-Up Display]( gbxml-viewer/r11/gv-hud/gv-hud.html )
+
+
+## gbXML Viewer Reports
+
+folder: gv-grep = name space: REP{} = gbXML Viewer Reports
+
+### [gbXML Viewer Reports Read Me]( #gbxml-viewer/r11/gv-rep/README.md )
+
+### Full screen test script: [gbXML Viewer Reports]( gbxml-viewer/r11/gv-rep/gv-rep.html )
+
+
+## gbXML Viewer Settings
+
+folder: gv-gal = name space: SET{} = gbXML Viewer Settings
+
+### [gbXML Viewer Settings Read Me]( #gbxml-viewer/r11/gv-set/README.md )
+
+### Full screen test script: [gbXML Settings Settings]( gbxml-viewer/r11/gb-set/gv-set.html )
+
+
+## gbXML Viewer Three.js
+
+folder: gv-tmp = name space: TMP{} = gbXML Viewer Three.js
+
+### [gbXML Viewer Three.js Read Me]( #gbxml-viewer/r11/gv-thr/README.md )
+
+### Full screen test script: [gbXML Viewer Three.js]( gbxml-viewer/r11/gc-thr/gv-thr.html )
+
+
+## gbXML Viewer Templates
+
+folder: gv-tmp = name space: TMP{} = gbXML Viewer Templates
+
+### [gbXML Viewer Templates Read Me]( #gbxml-viewer/r11/gv-tmp/README.md )
+
+### Full screen test script: [gbXML Viewer Templates]( gbxml-viewer/r11/gc-tmp/gv-tmp.html )
+
+
 
 ***
 
-_The following contains a number of links that update the menu and load external JavaScript on the fly at runtime._
+_In previous release but not yet updated for R11_
 
-_At the moment, all scripts are also in the menu. They only work when the full gbXML Viewer app is running_
+### gbXML Viewer Screen Capture
 
-_In the future, however, the hope is to be able to add special links using easy-to-edit Markdown files that cause special or additional features to load and run._
-
-
-## 2. gbXML ViewerGallery
-
-There are a few locations on the web that allow access to sample gbXML files that you may use for experimentation.
-
-Click on any of the links below to load menus that will list each of the available files.
-
-<a href = "JavaScript:( function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-gbxml.js';
-} )()" >
-gbXML Sample Files on GitHub</a>
-
-<a href= "JavaScript:( function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-build-well.js';
-} )()" >
-Ladybug Tools/Spider Build Well on GitHub</a>
-
-<a href=
-"JavaScript:(
-	function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-viewer-samples.js';
-} )()" >
-Ladybug Tools/Spider gbXML Viewer sample files on GitHub</a>
+* 2018-01-01 ~ Need much better control over the camera
 
 
-
-## 3. Heads-Up Display
-
-### Full screen: [Test gbXML Viewer10 Heads-Up Display]( ../gbxml-viewer10-03-heads-up-displa/test-gbxml-viewer10-heads-up-displa.html )
-
-<a href= "JavaScript:( function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gbxml-viewer10-03-heads-up-display/gbxml-viewer10-heads-up-display.js';
-} )()" >
-Ladybug Tools/Spider gbXML Viewer Heads-Up Display</a>
+### gbXML Viewer  Sun Range
 
 
-## 4. Settings
-
-### Full screen: [Test gbXML Viewer10 Settings]( ../gbxml-viewer10-04-settings/test-gbxml-viewer10-settings.html )
-
-<a href = "JavaScript:( function(){
-	const script = document.head.appendChild( document.createElement( 'script' ) );
-	script.src = '../gbxml-viewer10-04-settings/gbxml-viewer10-settings.js';
-} )()" >
-gbXML Viewer Settings</a>
+### gbXML Viewer Editor ~ _To Be Deprecated??_
 
 
-## 5. Reports
-
-### Full screen: [Test gbXML Viewer10 Reports]( ../gbxml-viewer10-05-reports/test-gbxml-viewer10-reports.html )
-
-<a href = "JavaScript:( function(){
-	const script = document.head.appendChild( document.createElement( 'script' ) );
-	script.src = '../gbxml-viewer10-05-reports/gbxml-viewer10-reports.js';
-} )()" >
-gbXML Viewer Reports</a>
-
-
-
-### 6. First Person camera
-
-
-### 7. Sun Path / Analemmas
-
-* 2018-01-01 ~ Theo: Multiple suns
-
-
-### 8. Screen Capture
-
-* 2018-01-01 ~ Much better control over the camera
-
-
-### 10. Sun Range
-
-
-### 10. Save
-
-
-
-### 11. Editor
-
-### [gbXML Viewer10 Core Editor Dev]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-11-editor/gbxml-viewer10-core-editor-dev.html )
-
-
-## Templates
-
-### Full screen: [Test gbXML Viewer10 Templates]( ../gbxml-viewer10-templates/test-gbxml-viewer10-template.html )
-
-<!--
-<a href= "JavaScript:( function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gbxml-viewer10-templates/gbxml-viewer10-template.js';
-} )()" >
-gbXML Viewer Template</a>
-
--->
-
-
-
-
-### Export gbXML files
-
-Not yet started
+### gbXML Viewer Export gbXML files ~ Not yet started
 
 * 2017-12-15 ~ Theo: export selected spaces or zones to gbxml?
 * 2017-12-10 ~ Michal: Export gbJSON

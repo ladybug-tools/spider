@@ -7,19 +7,19 @@
 
 _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
-### Welcome TAS users! We will have an updated stable version of gbXML Viewer up over this weekend.
-
-### In the meantime, please use these links:
+### Welcome TAS users! We will have a pre-release version of gbXML Viewer R11 up over this weekend.
 
 
-## Full screen stable release R10.4: <http://www.ladybug.tools/spider/gbxml-viewer/>
+## Full screen stable release R10.11: <http://www.ladybug.tools/spider/gbxml-viewer/>
 
+<!--
 ## Full Screen pre-release R10.10: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 
 ## Full Screen pre-release R10.9: <http://www.ladybug.tools/spider/gbxml-viewer/r10-9/gv-app/gv-app.html>
 
 * Earlier version with partially functioning HUD updates
+-->
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
