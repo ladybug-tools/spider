@@ -1,7 +1,7 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10.10
+# gbXML Viewer R10.11
 
 gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
@@ -23,7 +23,15 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 
 <summary>Welcome 2018-03-02 ~ R10.11</summary>
 
-</details><details open>
+Congratulations to Michal for a successful TAS User presentation.
+
+R10.11 is the new stable release
+
+* Updates to all index read me files
+* Fixes and more element details to Duplicate Adjacents meu
+
+
+</details><details>
 
 <summary>Welcome 2018-02-28 ~ R10.10</summary>
 
@@ -52,9 +60,9 @@ HUD
 * Improve menu width handling
 * When change type, adjacent spaces update more correctly
 
-</details><details open>
+</details><details>
 
-<summary>Welcome 2018-02-27 - ~ R10.9</summary>
+<summary>Welcome 2018-02-27 ~ R10.9</summary>
 
 Reports
 * Fix silly devLog bug that was breaking everything
@@ -78,9 +86,9 @@ Settings
 * Fix surface normals not showing
 * Fix Duplicate CADObjectId not showing
 
-</details><details open>
+</details><details>
 
-<summary>Welcome 2018-02-26 - ~ R10.8</summary>
+<summary>Welcome 2018-02-26 ~ R10.8</summary>
 
 App
 * Menus reset when new model loaded
@@ -91,7 +99,7 @@ HUD
 	* ALT + key to toggle element/surfaces/edges/all
 * Add input and select alternative spaces
 
-</details><details open>
+</details><details>
 
 <summary>Welcome 2018-02-25 ~ R10.7</summary>
 
@@ -115,7 +123,7 @@ Edit Duplicate Adjacents
 	* At a very early stage. Cannot edit or save yet
 </details><details>
 
-<summary>Welcome 2018-02-23 - ~ R10.5</summary>
+<summary>Welcome 2018-02-23 ~ R10.5</summary>
 
 * Add 'edit duplicate surfaces' module
 	* Finds all instances of two surfaces with identical coordinates
@@ -124,7 +132,7 @@ Edit Duplicate Adjacents
 
 
 
-</details><details open>
+</details><details>
 
 <summary>Welcome 2018-02-21 ~ R10.4</summary>
 

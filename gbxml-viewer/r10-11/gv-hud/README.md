@@ -37,6 +37,27 @@ The next steps may include
 
 ## Change Log
 
+### 2018-03-02 ~ Theo
+
+Surface type changes
+
+No adjacents
+* From shade to shade: no change / OK
+* From shade to single adjacent: display empty single adjacent space edit area / OK
+* From shade to two adjacents: display two empty adjacent space areas / OK
+
+Single adjacent
+* From single to shade: remove adjacent / display none / OK
+* From single to single: no change OK / OK
+* From single to two adjacents: add adjacent space OK / display two empty adjacent space areas first with pre-existing adjacent OK /
+
+Two adjacents
+* From two to shade: remove both / display none / OK
+* From two to single: remove 2nd OK / display 2nd XX/
+* From two to two: no change OK / display two OK/
+
+
+### 2018-02-28 ~ Theo
 10.9
 HUD
 * Many fixes to adjacent spaces updates

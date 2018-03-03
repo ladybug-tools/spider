@@ -14,7 +14,7 @@ input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; backgro
 input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
-.dragDropArea { border: 1px dashed gray; padding: 5px; }
+.dragDropArea { border: 1px dashed gray; line-height: 40px; padding: 5px; }
 
 .flex-container { display: flex; flex-wrap: wrap; }
 .flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
