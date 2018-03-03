@@ -7,8 +7,8 @@
 	:
 	'../../gbxml-sample-files/bristol-clifton-down-road.xml';
 
-	var GBX = {};
 	var THR = {};
+	var GBX = {};
 
 	GBX.gbxml = null;
 	GBX.gbxmlResponseXML;

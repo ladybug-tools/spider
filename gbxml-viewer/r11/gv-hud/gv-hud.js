@@ -464,52 +464,63 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			delete surfaceJson.AdjacentSpaceId;
 
 			// xml
-			if ( Array.isArray( spaceIdPrev ) === true ) {
+			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
-				const spaceId1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
+				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
+				console.log( 'adjSpace1',  adjSpace1 );
+				const removeId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+				const removed1 = surfaceXml.removeChild( adjSpace1 );
+
+				const adjSpace2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
+				//console.log( 'adjSpace2', adjSpace2 );
+				const removeId2 = adjSpace2.getAttribute( 'spaceIdRef' );
+				const removed2 = surfaceXml.removeChild( adjSpace2 );
+
+				console.log( 'prev 2 / now 0 / removed id1: ', removeId1, ' id2: ', removedId2 );
+
+			} else { // type prev is single adjacent
+
+				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
 				//console.log( 'spaceId',  spaceId);
-				const removed1 = surfaceXml.removeChild( spaceId1 );
+				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+				const removed1 = surfaceXml.removeChild( adjSpace1 );
 
-				const spaceId2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
-				//console.log( 'spaceId',  spaceId);
-				const removed2 = surfaceXml.removeChild( spaceId2 );
-
-				console.log( '0/2 removed', removed1.nodeName, removed2.nodeName );
-
-			} else {
-
-				const spaceId1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
-				//console.log( 'spaceId',  spaceId);
-				const removed1 = surfaceXml.removeChild( spaceId1 );
+				console.log( 'prev 1 or 0 / now 0 / id: ', removedId1);
 
 			}
 
-		} else if ( types.includes( typeNew ) ) {  // type new is two adjacents
+		} else if ( types.includes( typeNew ) ) { // type new is two adjacents
 
 			console.log( 'typeNew', typeNew );
 
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
 				// leave things untouched
-				console.log( '2/2 spaceIdPrev',  spaceIdPrev );
+				console.log( ' prev 2 / now 2 spaceIdPrev', spaceIdPrev );
 
 			} else if ( spaceIdPrev ) { // type prev is single adjacent
 
 				//surfaceJson.AdjacentSpaceId = spaceIdPrev; //{ spaceIdRef: spaceIdPrev };
-				spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
-				gg = spaceId.getAttribute( 'spaceIdRef' )
-				console.log( '2/1 spaceId',  gg );
+				prevAdj = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
+				const prevId = prevAdj.getAttribute( 'spaceIdRef' );
 
 				surfaceJson.AdjacentSpaceId= [];
 				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
-				adjacentSpaceId[ 0 ] = { spaceIdRef: gg };
+				adjacentSpaceId[ 0 ] = { spaceIdRef: prevId };
 				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+
+				console.log( 'prev 1 / now 2 / spaceId', prevId );
 
 			} else { // type prev is shade / no adjacent
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
-				console.log( '2/0 no spaceIdPrev',  spaceIdPrev );
+				surfaceJson.AdjacentSpaceId= [];
+				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+				adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
+				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+
+				console.log( 'prev 0 / new 2 / adjacentSpaceId', adjacentSpaceId );
 
 			}
 
@@ -527,8 +538,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 				newAdj.setAttribute( "spaceIdRef", spaceIdPrev[ 0 ].spaceIdRef ) ;
-				xx = surfaceXml.appendChild( newAdj );
-				console.log( 'xx', xx );
+				const newAdjTxt = surfaceXml.appendChild( newAdj );
+				console.log( '1=2/1', newAdjTxt );
 
 			} else if ( spaceIdPrev ) { // type prev is single adjacent
 
@@ -553,13 +564,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		HUD.setHeadsUp();
 
 	};
-
-/*
-
-shade to shade OK
-shade to one adjacent: OK
-
-*/
 
 
 

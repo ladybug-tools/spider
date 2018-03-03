@@ -177,17 +177,19 @@ The various modules are described below. They are listed in alphabetical order o
 
 
 
-## gv-thr gbXML Viewer Three.js
+## gv-thr / gb-gbx gbXML Viewer Three.js
 
 * Built over the Three.js WebGL JavaScript library
 * Folder: gv-thr
 * Name space: THR{}
+* Name space: GBX{}
 * Title: gbXML Viewer Three.js
 
 ### [gbXML Viewer Three.js Read Me]( #gbxml-viewer/r11/gv-thr/README.md )
 
 ### Full screen test script: [gbXML Viewer Three.js]( gbxml-viewer/r11/gc-thr/gv-thr.html )
 
+Note: the GBX name space vaiables and methods ar to be separated out into their own folder and files
 
 
 ## gv-tmp gbXML Viewer Templates

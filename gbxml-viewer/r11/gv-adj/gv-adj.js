@@ -1,7 +1,7 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
 
-	const ADJsurfaceAdjacentsDuplicates = [];
+	var ADJsurfaceAdjacentsDuplicates = [];
 
 
 
