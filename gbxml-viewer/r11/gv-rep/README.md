@@ -52,6 +52,11 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 ## Change Log
 
+### 2018-03-03 ~ Theo
+
+R11
+* CAD Object ID Groups sorted
+
 ### 2018-02-26 ~ Theo
 
 R10.8

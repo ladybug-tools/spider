@@ -50,7 +50,6 @@
 	GBX.surfaceTypeOptions = txt;
 
 
-
 	THR.initThreeGbxml = () => {
 
 		let renderer, camera, controls, scene;
@@ -130,15 +129,15 @@
 	// available if parent wants it.
 	// called by parseFileXML()
 
-	THR.onWindowLoad = () => {
+	THR.onWindowLoad = function() {
 
 		if ( parent && parent.onloadThreejs ) { parent.onloadThreejs(); }
 
-	}
+	};
 
 
 
-	THR.onWindowResize = () => {
+	THR.onWindowResize = function() {
 
 		THR.camera.aspect = window.innerWidth / window.innerHeight;
 		THR.camera.updateProjectionMatrix();
@@ -147,11 +146,11 @@
 
 		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
-	}
+	};
 
 
 
-	THR.animate = () => {
+	THR.animate = function() {
 
 		requestAnimationFrame( THR.animate );
 		THR.renderer.render( THR.scene, THR.camera );
@@ -162,18 +161,18 @@
 
 //////////
 
-	GBX.callbackGbXML = ( xhr ) => {
+	GBX.callbackGbXML = function( xhr ) {
 
 		GBX.gbxmlResponseXML =  xhr.target.responseXML;
 		GBX.gbxml = xhr.target.responseXML.documentElement;
 
 		GBX.parseFileXML( GBX.gbxml );
 
-	}
+	};
 
 
 
-	GBX.openGbxmlFile = files => {
+	GBX.openGbxmlFile = function( files ) {
 
 		const reader = new FileReader();
 		reader.onprogress = onRequestFileProgress;
@@ -188,7 +187,7 @@
 			//console.log( 'GBX.gbxml', GBX.gbxml );
 
 			GBX.gbjson = GBX.parseFileXML( GBX.gbxml );
-//			GBX.surfaceJson = GBX.gbjson.Campus.Surface;
+		//			GBX.surfaceJson = GBX.gbjson.Campus.Surface;
 
 			if ( files.files[ 0 ] ) { GBX.gbjson.name = files.files[ 0 ].name; }
 
@@ -205,12 +204,12 @@
 
 		}
 
-	}
+	};
 
 
 	// loads any text file - from file reader or location hash or wherever
 
-	GBX.parseFileXML = xmlNode => {
+	GBX.parseFileXML = function( xmlNode ) {
 
 		GBX.gbjson = GBX.XML2jsobj( xmlNode );
 		GBX.surfaceJson = GBX.gbjson.Campus.Surface;
@@ -228,7 +227,7 @@
 	// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
 	// http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
 
-	GBX.XML2jsobj = node => {
+	GBX.XML2jsobj = function( node ) {
 
 		let data = {};
 
@@ -284,14 +283,13 @@
 
 
 
-	GBX.parseGbJson = gbjson  => {
+	GBX.parseGbJson = function( gbjson ) {
 
 		//console.log( 'surfaces', gbjson.Campus.Surface );
 
-		const surfaces = GBX.surfaceJson;// gbjson.Campus.Surface;
-
-		let polyloops = [];
-		let openings = [];
+		const surfaces = GBX.surfaceJson; // gbjson.Campus.Surface;
+		const polyloops = [];
+		const openings = [];
 
 		for ( let surface of surfaces ) {
 
@@ -405,10 +403,10 @@
 
 		}
 		//}
+
 		//console.log( 'GBX.spaceOptions', GBX.spaceOptions);
 
 		GBX.spacesOptions = txt;
-
 
 		txt = '';
 		for ( let surface of GBX.surfaceJson ) {
@@ -419,13 +417,24 @@
 
 		GBX.surfacesOptions = txt;
 
+		var arr= [];
+		for ( let surface of GBX.surfaceJson ) {
+
+			arr.push( '<option>' + surface.CADObjectId + '</option>' );
+
+		}
+
+		GBX.surfacesCadObj = arr.sort().join();
+
+//		console.log( 'GBX.surfacesCadObj', GBX.surfacesCadObj);
+
 		GBX.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 
 	}
 
 
 
-	GBX.getPoints = polyloop => {
+	GBX.getPoints = function( polyloop ) {
 
 		const points = [];
 
@@ -443,7 +452,7 @@
 
 
 
-	GBX.drawShapeSinglePassObjects = ( vertices, material, holes ) => {
+	GBX.drawShapeSinglePassObjects = function( vertices, material, holes ) {
 
 		// let there be simpler ways to do this
 
@@ -520,7 +529,7 @@
 
 
 
-	GBX.zoomObjectBoundingSphere = obj => {
+	GBX.zoomObjectBoundingSphere = function( obj ) {
 
 		const renderer = THR.renderer;
 		const scene = THR.scene;
@@ -564,15 +573,15 @@
 		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
 		lightDirectional.target = axesHelper;
 
-	//		scene.remove( cameraHelper );
-	//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-	//		scene.add( cameraHelper );
+		//		scene.remove( cameraHelper );
+		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		//		scene.add( cameraHelper );
 
 	}
 
 
 
-	GBX.setAllVisible = () => {
+	GBX.setAllVisible = function() {
 
 		const renderer = THR.renderer;
 		const scene = THR.scene;

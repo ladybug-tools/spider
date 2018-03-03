@@ -18,10 +18,28 @@ gbXML Viewer is a collection of free, open source modular JavaScript experiments
 -->
 
 
-
 <details open>
 
-<summary>Welcome 2018-03-02 ~ R10.11</summary>
+<summary>Welcome 2018-03-03 ~ R11.1</summary>
+
+HUD
+* All surface type changes handled
+* Add details tags/triangles to all three areas
+* Comment out zone info
+* Add more tooltips
+* Add select CAD Object ID
+* Add update and save CAD Object ID - working roughly
+
+Reports
+* CAD Object ID Groups sorted
+
+Duplicate Adjacents
+
+* Fix toggle all issues button not highlighting
+
+</details><details open>
+
+<summary>Welcome 2018-03-02 ~ R10.11 / R11</summary>
 
 Congratulations to Michal for a successful TAS User presentation.
 

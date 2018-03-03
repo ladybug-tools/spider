@@ -206,10 +206,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		const headerTxt =
 		`
 			toggle the visible items<br>
-			<button onclick=intersected.visible=!intersected.visible; accesskey="z" title = "key Z" >element</button>
-			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; accesskey="x" title = "key X" >surfaces</button>
-			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; accesskey="c" title = "key C"  >edges</button>
-			<button onclick=GBV.setAllVisible(); accesskey="v" title = "key V" >all</button>
+			<button onclick=intersected.visible=!intersected.visible; accesskey="z" title = "access key + Z" >surface</button>
+			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; accesskey="x" title = "access key +  X" >surfaces</button>
+			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; accesskey="c" title = "access key + C"  >edges</button>
+			<button onclick=GBV.setAllVisible(); accesskey="v" title = "access key + V" >all</button>
 			<br>
 			edit the surface<br>
 			<button class=toggle onclick=GBV.deleteSurface("` + data.id + `"); >delete surface</button>
@@ -217,28 +217,33 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
 			<br><hr>
 
-			<div class=flex-container2 >
+
+				<details open>
+				<summary><b>surface</b></summary>
+				<div class=flex-container2 >
 				<div>
 					<input oninput=HUD.updateSelect(this,selSurface); size=6 placeholder="surface id" ><br>
 					<select id=selSurface onclick=HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` + GBX.surfacesOptions + `</select><br>
 					<button onclick=HUD.setHeadsUp(); >update</button>
 				</div>
-				<div style=margin-left:15px;overflow-x:auto;max-width:260px; >
-					<b>surface</b><br>
+				<div style=margin-left:15px;max-width:260px; >
 
-					id <button onclick=GBV.showSurface(this.innerText)  >` + data.id + `</button>
-					<button onclick=GBV.zoomIntoSurface("` + data.id + `"); >zoom</button>
+					id <button onclick=GBV.showSurface(this.innerText) title="show only this surface" >` + data.id + `</button>
+					<button onclick=GBV.zoomIntoSurface("` + data.id + `"); title="zoom into just this surface" >zoom</button>
 					<br>`
 					+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
-					`type <button onclick=GBV.showSurfaceType(this.innerText);  >` + data.surfaceType + `</button>` +
-					` edit <select id = "selType" onchange=HUD.updateType(this.value); >` + GBX.surfaceTypeOptions + `</select>
+					`type <button onclick=GBV.showSurfaceType(this.innerText); title="show all of this type" >` + data.surfaceType + `</button>` + b +
+					` update <select id = "selType" onchange=HUD.updateType(this.value); title="change to another type of surface" >` + GBX.surfaceTypeOptions + `</select>
 					<br>`
 					+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
-						encodeURI( data.CADObjectId ) + `"); >` + data.CADObjectId + `</button><br>` : `` ) +
-					`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
-						` ln <i>` + height.toFixed( 3 ) + `</i> wd <i>` + width.toFixed( 3 ) + `</i>` +
+						encodeURI( data.CADObjectId ) + `"); title="Show all surfaces in this CAD object" >` + data.CADObjectId + `</button><br>` : `` ) +
+						`<select id=selCadId onchange=HUD.updateCadId(this);>` + GBX.surfacesCadObj +`</select>` +
+						`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
+						` ln <i title="length" >` + height.toFixed( 3 ) + `</i> wd <i title="width" >` + width.toFixed( 3 ) + `</i>` +
 				`<div>
-			</div>
+				</div>
+				</details>
+
 		`;
 
 		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency';
@@ -256,46 +261,51 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				if ( space1 && space2 ) {
 					// make into function
 					adjacentsTxt =
-						'<hr><div class=flex-container2 >' +
-							'<div >' +
-								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space 1 id" ><br>' +
-								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
-								'<button onclick=HUD.updateSpace(1); >update</button>' + b +
-							'</div>' +
-							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
-								'<b>adjacent space 1</b> ' + b +
-								'id <button id=butSpace1 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
-								( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
-								( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
-								( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
-								( space1.Volume ? '</i> volume </i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-								( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' ) +
-								( space1.zoneIdRef ? 'zone id ref <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
-								'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
-								( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
-							'</div>' +
-						'</div>' +
 						'<hr>' +
-
-						'<div class=flex-container2 >' +
-							'<div >' +
-								'<input oninput=HUD.updateSelect(this,selSpace2); size=6  placeholder="space 2 id" ><br>' +
-								'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
-								'<button onclick=HUD.updateSpace(2); >update</button>' + b +
+						'<details open >' +
+							'<summary><b>adjacent space 1</b></summary>' +
+							'<div class=flex-container2 >' +
+								'<div >' +
+									'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space 1 id" ><br>' +
+									'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
+									'<button onclick=HUD.updateSpace(1); >update</button>' + b +
 								'</div>' +
-							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
-								'<b>adjacent space 2</b> ' + b +
-								'id <button id=butSpace2 onclick=GBV.showSpace(this.innerText);selSpace2.value=this.innerText; >' + space2.id + '</button> ' + b +
-								( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
-								( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
-								( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
-								( space2.Volume ? ' volume <i>' + Number( space2.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-								( space2.conditionType ? 'condition type <i>' + space2.conditionType + '</i>' + b : '' ) +
-								( space2.zoneIdRef ? 'zone id ref <i>' + space2.zoneIdRef + '</i>' + b : '' ) +
-								'storey <button onclick=GBV.showStorey(this.innerText); >' + space2.buildingStoreyIdRef + '</button>' + b +
-								( space2.CADObjectId ? 'cad object id <i>' + space2.CADObjectId + '</i>' + b : '' ) +
+								'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
+									'id <button id=butSpace1 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
+									( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
+									( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
+									( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
+									( space1.Volume ? '</i> volume </i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
+									( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' ) +
+//									( space1.zoneIdRef ? 'zone id ref <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
+									'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
+									( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
+								'</div>' +
 							'</div>' +
-						'</div>';
+						'</details>' +
+						'<hr>' +
+						'<details open >' +
+							'<summary><b>adjacent space 2</b></summary>' +
+							'<div class=flex-container2 >' +
+								'<div >' +
+									'<input oninput=HUD.updateSelect(this,selSpace2); size=6  placeholder="space 2 id" ><br>' +
+									'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
+									'<button onclick=HUD.updateSpace(2); >update</button>' + b +
+									'</div>' +
+								'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
+									'id <button id=butSpace2 onclick=GBV.showSpace(this.innerText);selSpace2.value=this.innerText; >' + space2.id + '</button> ' + b +
+									( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
+									( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
+									( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
+									( space2.Volume ? ' volume <i>' + Number( space2.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
+									( space2.conditionType ? 'condition type <i>' + space2.conditionType + '</i>' + b : '' ) +
+//									( space2.zoneIdRef ? 'zone id ref <i>' + space2.zoneIdRef + '</i>' + b : '' ) +
+									'storey <button onclick=GBV.showStorey(this.innerText); >' + space2.buildingStoreyIdRef + '</button>' + b +
+									( space2.CADObjectId ? 'cad object id <i>' + space2.CADObjectId + '</i>' + b : '' ) +
+								'</div>' +
+							'</div>' +
+						'</details>' +
+						'';
 
 				} else {
 
@@ -316,25 +326,30 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 				adjacentsTxt =
-					'<hr><div class=flex-container2 >' +
-						'<div >' +
-							'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
-							'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
-							'<button onclick=HUD.updateSpace(0); >update</button>' + b +
+					'<hr>' +
+					'<details open >' +
+						'<summary><b>adjacent space 2</b></summary>' +
+						'<div class=flex-container2 >' +
+							'<div >' +
+								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
+								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=10 >' + GBX.spacesOptions + '</select><br>' +
+								'<button onclick=HUD.updateSpace(0); >update</button>' + b +
+								'</div>' +
+							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
+								'<b>adjacent space 1</b> ' + b +
+								'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
+								( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
+								( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
+								( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) + '</i>' : '' ) +
+								( space1.Volume ? ' volume <i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
+								'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
+								( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' )  +
+								( space1.zoneIdRef ? 'zone id <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
+								( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
 							'</div>' +
-						'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
-							'<b>adjacent space 1</b> ' + b +
-							'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
-							( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
-							( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
-							( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) + '</i>' : '' ) +
-							( space1.Volume ? ' volume <i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-							'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
-							( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' )  +
-							( space1.zoneIdRef ? 'zone id <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
-							( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
 						'</div>' +
-					'</div>';
+					'</details>' +
+					'';
 
 			}
 
@@ -528,7 +543,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
-
 				const adjacentXml2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
 				const removed2 = surfaceXml.removeChild( adjacentXml2 );
 
@@ -589,6 +603,36 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
+	HUD.updateCadId = function( that ){
+
+		const surface = HUD.data;
+		//console.log( 'surface', surface );
+
+		const id = surface.id;
+
+		HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
+
+		surfaceXml = HUD.surfacesXml[ id ];
+		console.log( 'surfaceXml',  surfaceXml );
+
+		id2 = surfaceXml.getElementsByTagName("CADObjectId")[ 0 ];
+
+		console.log( 'id.nv', id2.innerHTML );
+
+//		surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
+		id2.innerHTML = that.value;
+
+		console.log( 'that', that.value );
+
+		surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = that.value;
+
+		surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+
+		surfaceMesh.userData.data.CADObjectId = that.value;
+
+		HUD.setHeadsUp();
+
+	}
 /////////
 
 	HUD.displayTelltalesVertex = function() {

@@ -36,6 +36,10 @@ Use and share these links for gbXML Viewer:
 
 ## Change Log
 
+### 2018-03-03 ~ Theo
+
+* Fix toggle all issues button not highlighting
+
 ### 2018-03-02 ~  Theo
 
 * Fix toggle all issues

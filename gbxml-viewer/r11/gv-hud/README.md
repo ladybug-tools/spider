@@ -17,6 +17,8 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 
 > Although they were initially developed for military aviation, HUDs are now used in commercial aircraft, automobiles, and other (mostly professional) applications.
 
+This feature could also be termed a '[context menu]( https://en.wikipedia.org/wiki/Context_menu )'.
+
 
 ## Wish list
 
@@ -44,11 +46,13 @@ The following cases need to be handled when changing the type of the surface
 * From shade to two adjacents: display two empty adjacent space areas / OK
 
 #### Single adjacent
+
 * From single to shade: remove adjacent / display none / OK
 * From single to single: no change OK / OK
 * From single to two adjacents: add adjacent space OK / display two empty adjacent space areas first with pre-existing adjacent OK /
 
 #### Two adjacents
+
 * From two to shade: remove both / display none / OKOK
 * From two to single: remove 2nd OK / display 2nd /
 * From two to two: no change OK / display two OK/
@@ -64,7 +68,11 @@ The following cases need to be handled when changing the type of the surface
 ### 2018-03-03 ~ Theo
 
 * All surface type changes handled
-
+* Add details tags/triangles to all three areas
+* Comment out zone info
+* Add more tooltips
+* Add select CAD Object ID
+* Add update and save CAD Object ID - working roughly
 
 ### 2018-03-02 ~ Theo
 

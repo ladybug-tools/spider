@@ -442,8 +442,7 @@
 
 	REP.getSurfaceCadIdGroups =() => {
 
-
-		CadIds = [];
+		const cadIds = [];
 		const surfaceMembers = [];
 		const surfaces = GBX.gbjson.Campus.Surface;
 		let count = 0;
@@ -455,24 +454,32 @@
 
 			id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
 
-			if ( !CadIds.includes( id ) ) {
+			if ( !cadIds.includes( id ) ) {
 
-				CadIds.push( id );
-
+				cadIds.push( id );
+/*
 				flowContent +=
 
 					'<button onclick=REP.toggleCadIdGroup("' + encodeURI( id )+ '"); >' + id + '</button>' + b +
 
 				'';
+*/
 
 			}
 
 		}
 
+		cadIds.sort();
+
+		for ( let id of cadIds ){
+
+			flowContent += '<button onclick=REP.toggleCadIdGroup("' + encodeURI( id )+ '"); >' + id + '</button>' + b;
+		}
+
 		//console.log( '', CadIds.length );
 
 		const info = 'Information: Revit CAD Object Groups';
-		return { summary: 'CAD Object ID Groups &raquo; ' + CadIds.length, flowContent: flowContent, info: info };
+		return { summary: 'CAD Object ID Groups &raquo; ' + cadIds.length, flowContent: flowContent, info: info };
 
 	}
 
