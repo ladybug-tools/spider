@@ -32,30 +32,43 @@ The next steps may include
 * Drawing telltales for the gbXML polyloops to see if any visible idiosyncracies in the error causing surfaces can  be identified.
 * Embedding a new shape drawing function that can be used to correct the errors
 
+
+### Surface type changes
+
+The following cases need to be handled when changing the type of the surface
+
+#### No adjacents
+
+* From shade to shade: no change / OK
+* From shade to single adjacent: display empty single adjacent space edit area / OK
+* From shade to two adjacents: display two empty adjacent space areas / OK
+
+#### Single adjacent
+* From single to shade: remove adjacent / display none / OK
+* From single to single: no change OK / OK
+* From single to two adjacents: add adjacent space OK / display two empty adjacent space areas first with pre-existing adjacent OK /
+
+#### Two adjacents
+* From two to shade: remove both / display none / OKOK
+* From two to single: remove 2nd OK / display 2nd /
+* From two to two: no change OK / display two OK/
+
+
 ## Links of Interest
 
 
 ## Change Log
 
+
+
+### 2018-03-03 ~ Theo
+
+* All surface type changes handled
+
+
 ### 2018-03-02 ~ Theo
 
-Surface type changes
-
-No adjacents
-* From shade to shade: no change / OK
-* From shade to single adjacent: display empty single adjacent space edit area / OK
-* From shade to two adjacents: display two empty adjacent space areas / OK
-
-Single adjacent
-* From single to shade: remove adjacent / display none / OK
-* From single to single: no change OK / OK
-* From single to two adjacents: add adjacent space OK / display two empty adjacent space areas first with pre-existing adjacent OK /
-
-Two adjacents
-* From two to shade: remove both / display none / OK
-* From two to single: remove 2nd OK / display 2nd XX/
-* From two to two: no change OK / display two OK/
-
+* Most surface type changes handles
 
 ### 2018-02-28 ~ Theo
 10.9

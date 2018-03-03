@@ -546,7 +546,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			} else if ( spaceIdPrev ) { // type prev is single adjacent
 
 				// leave things untouched
-
 				const spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
 
 				console.log( 'prev 1 / new 1 / no changes spaceId',  spaceId );
