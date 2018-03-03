@@ -2,10 +2,10 @@
 
 # gbXML Viewer First Person Camera Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cam/gv-cam.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cam/gv-cam.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test: [gv-cam gbXML Viewer10-11 First Person Camera]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cam/test-gv-cam.html )
+## Full screen test: [gv-cam gbXML Viewer First Person Camera]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cam/gv-cam.html )
 
 
 Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen

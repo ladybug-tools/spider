@@ -8,21 +8,36 @@
 _[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html ) ~ click the 'view model' button in left menu to view full screen_
 
 
-## Full screen: [gbXML Viewer App]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen pre-release: [gbXML Viewer Application]( http://www.ladybug.tools/spider/gbxml-viewer/dev )
 
+* All the gbXML Viewer modules all together and available in a single application
 
-## Full screen: [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html )
+## Full screen pre-release: [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html )
 
-The Ladybug Tools/Spider [gbXML]( http://www.gbxml.org/ ) Viewer is a folder of scripts that enable you to see text data files for buildings as a full 3D renderings.
 
 The read me file with full details is in the main gbXML Viewer folder just above here.
 
 ***
 
+## Modules
+
+The Ladybug Tools/Spider GbXML Viewer is a collection of small JavaScript files that work together to enable the viewing of [gbXML]( http://www.gbxml.org/ ) files.
+
+The goals for the files include:
+
+* Files are no more than a few hundred lines
+* Code is simple, plain-vanilla JavaScript
+* Every JavaScript files has an accompanying standalone HTML file for testing purposes
+
+The various modules are described below.
+
 
 ## gbXML Viewer Duplicate Adjacent Spaces
 
-folder: gv-adj = name space: ADJ{} = title: gbXML Viewer Duplicate Adjacent Spaces
+* Identifies gbXML viewer duplicate adjacents - Detect surface with identical space ids
+* Folder: gv-adj
+* Name space: ADJ{}
+* title: gbXML Viewer Duplicate Adjacent Spaces
 
 ### [gbXML Viewer Duplicate Adjacent Spaces Read Me]( #gbxml-viewer/r11/gv-adj/README.md )
 
@@ -32,7 +47,10 @@ folder: gv-adj = name space: ADJ{} = title: gbXML Viewer Duplicate Adjacent Spac
 
 ## gbXML Viewer Sun Path / Analemmas
 
-folder: gv-ana = name space: ANA{} = title: gbXML Viewer Sun Path / Analemma
+* Creates a Sun path / Analemma for given latitude/longitude
+* folder: gv-ana
+* Name space: ANA{}
+* Title: gbXML Viewer Sun Path / Analemma
 
 ### [gbXML Viewer Sun Path / Analemma Read Me]( #gbxml-viewer/r11/gv-ana/README.md )
 
@@ -42,7 +60,10 @@ folder: gv-ana = name space: ANA{} = title: gbXML Viewer Sun Path / Analemma
 
 ## gbXML Viewer Application
 
-folder: gv-app = name space: APP{} = title: gbXML Viewer Application
+* All the gbXML Viewer modules all together and available in a single application
+* folder: gv-app
+* name space: APP{}
+* itle: gbXML Viewer Application
 
 ### [gbXML Viewer Application Read Me]( #gbxml-viewer/r11/gv-app/README.md )
 
@@ -52,7 +73,10 @@ folder: gv-app = name space: APP{} = title: gbXML Viewer Application
 
 ## gbXML Viewer First Person camera
 
-folder: gv-cam = name space: CAM{} = title: gbXML Viewer First Person Camera
+* Fly through models following an avatar
+* folder: gv-cam
+* name space: CAM{}
+* title: gbXML Viewer First Person Camera
 
 ### [gbXML Viewer First Person Camera Read Me]( #gbxml-viewer/r11/gv-cam/README.md )
 
@@ -62,7 +86,10 @@ folder: gv-cam = name space: CAM{} = title: gbXML Viewer First Person Camera
 
 ## gbXML Viewer Core
 
-folder: gv-cor = name space: VOR{} = title: gbXML Viewer Core
+* Core read and display a gbXML file using Three.js
+* Folder: gv-cor
+* Name space: VOR{}
+* Title: gbXML Viewer Core
 
 ### [gbXML Viewer Core Read Me]( #gbxml-viewer/r11/gv-cor/README.md )
 
@@ -156,6 +183,7 @@ _In previous release but not yet updated for R11_
 
 ### gbXML Viewer Screen Capture
 
+* Create animated GIFs
 * 2018-01-01 ~ Need much better control over the camera
 
 
@@ -175,13 +203,27 @@ Will most likely build upon
 
 * [create exportable buildings]( https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings )
 
+### Bl.ocks Edition
+
+View as [Bl.ocks]( https://bl.ocks.org/ )
+
+> Bl.ocks (pronounced “Blocks”) is a simple viewer for sharing code examples hosted on GitHub Gist.
+
+* <http://bl.ocks.org/theo-armour/163685de4d1fdacd70b2ffd446e8c874>
+
+View as [Gist]( https://help.github.com/articles/about-gists/ )
+
+Gists are a great way to share your work. You can share single files, parts of files, or full applications. You can access gists at https://gist.github.com.
+
+* <https://gist.github.com/theo-armour/163685de4d1fdacd70b2ffd446e8c874/edit>
+
 
 
 ***
 
 ## Previous Releases
 
-Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product oof human imagination.
+Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product of human imagination and effort.
 
 ### [gbXML Viewer R9]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-app/gbxml-viewer9.html )
 

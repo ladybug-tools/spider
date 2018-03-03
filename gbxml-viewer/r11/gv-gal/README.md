@@ -1,12 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10-11/gv-gal/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-gal/README.md "View file as a web page." ) </span>
 
 # gbXML Viewer Gallery Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-gal/gv-gal.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-gal/gv-gal.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test: [Test gbXML Viewer11 Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-gal/gv-gal.html )
+## Full screen test: [gbXML Viewer Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-gal/gv-gal.html )
 
 
 Use and share these links for gbXML Viewer:
@@ -15,6 +15,15 @@ Use and share these links for gbXML Viewer:
 * Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 ## Concept
+
+* Use the GitHub API to obtain directory listings of file names
+* Display list of file names as links to source
+* Clicking links displays
+	* The source
+	* View the file in this gallery window
+	* View the file full screen in its own window
+		* Link may be use to embed file in other app or HTML pages
+
 
 There are a few locations on the web that allow access to sample gbXML files that you may use for experimentation.
 

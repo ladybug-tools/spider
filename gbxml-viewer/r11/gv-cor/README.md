@@ -22,6 +22,9 @@ Displaying the data in 3D using the [Three.js]( https://threejs.org ) JavaScript
 
 You may uses this script to verify that the code works in an iframe and that menus work as intended
 
+* View gbXML files in 3D in your browser.
+* Open files using File Reader or by URL in location.hash
+* Base script used by all the other gbXML Viewer modules
 
 needs combining with this read me
 
