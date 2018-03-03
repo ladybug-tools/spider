@@ -468,15 +468,15 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
 				console.log( 'adjSpace1',  adjSpace1 );
-				const removeId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
 				const removed1 = surfaceXml.removeChild( adjSpace1 );
 
 				const adjSpace2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
 				//console.log( 'adjSpace2', adjSpace2 );
-				const removeId2 = adjSpace2.getAttribute( 'spaceIdRef' );
+				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
 				const removed2 = surfaceXml.removeChild( adjSpace2 );
 
-				console.log( 'prev 2 / now 0 / removed id1: ', removeId1, ' id2: ', removedId2 );
+				console.log( 'prev 2 / now 0 / removed id1: ', removedId1, ' id2: ', removedId2 );
 
 			} else { // type prev is single adjacent
 
@@ -485,7 +485,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
 				const removed1 = surfaceXml.removeChild( adjSpace1 );
 
-				console.log( 'prev 1 or 0 / now 0 / id: ', removedId1);
+				console.log( 'prev 1 or 0 / now 0 / id: ', removedId1 );
 
 			}
 
@@ -509,7 +509,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				adjacentSpaceId[ 0 ] = { spaceIdRef: prevId };
 				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
 
-				console.log( 'prev 1 / now 2 / spaceId', prevId );
+				console.log( 'prev 1 / now 2 / prevId', prevId );
 
 			} else { // type prev is shade / no adjacent
 
@@ -528,30 +528,34 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
-				console.log( 'spaceIdPrev',spaceIdPrev[ 0 ] );
-				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev[ 0 ] };
 
-				adjacentXml = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
-				const removed = surfaceXml.removeChild( adjacentXml);
-				adjacentXml = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
-				const removed2 = surfaceXml.removeChild( adjacentXml);
+				const adjacentXml2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
+				const removed2 = surfaceXml.removeChild( adjacentXml2 );
+
+				const adjacentXml1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
+				const removed1 = surfaceXml.removeChild( adjacentXml1 );
 
 				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 				newAdj.setAttribute( "spaceIdRef", spaceIdPrev[ 0 ].spaceIdRef ) ;
 				const newAdjTxt = surfaceXml.appendChild( newAdj );
-				console.log( '1=2/1', newAdjTxt );
+
+				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev[ 0 ].spaceIdRef };
+
+				console.log( 'prev 2 / new 1', newAdjTxt );
 
 			} else if ( spaceIdPrev ) { // type prev is single adjacent
 
 				// leave things untouched
-				//surfaceJson.AdjacentSpaceId = spaceIdPrev; //{ spaceIdRef: spaceIdPrev };
-				spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
-				console.log( '1/1 no changes spaceId',  spaceId);
+
+				const spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
+
+				console.log( 'prev 1 / new 1 / no changes spaceId',  spaceId );
 
 			} else { // type prev is no adjacent
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
-				console.log( '1/0 no spaceIdPrev',  spaceIdPrev );
+
+				console.log( 'prev 0 / new 1 / no spaceIdPrev',  spaceIdPrev );
 
 			}
 
