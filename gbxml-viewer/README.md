@@ -12,10 +12,10 @@ _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on s
 
 ## Full screen stable release R10.11: <http://www.ladybug.tools/spider/gbxml-viewer/>
 
+
+## Full Screen pre-release R11: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
+
 <!--
-## Full Screen pre-release R10.10: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
-
-
 ## Full Screen pre-release R10.9: <http://www.ladybug.tools/spider/gbxml-viewer/r10-9/gv-app/gv-app.html>
 
 * Earlier version with partially functioning HUD updates

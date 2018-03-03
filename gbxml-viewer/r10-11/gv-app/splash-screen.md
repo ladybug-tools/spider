@@ -3,7 +3,7 @@
 
 # gbXML Viewer R10.11
 
-gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
+gbXML Viewer is a collection of free, open source modular JavaScript experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
 
 ### Must watch video:

@@ -1,9 +1,9 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R10.11
+# gbXML Viewer R11
 
-gbXML Viewer is a collection of free, open source of modular experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
+gbXML Viewer is a collection of free, open source modular JavaScript experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
 
 ### Must watch video:
@@ -16,6 +16,8 @@ gbXML Viewer is a collection of free, open source of modular experiments for vie
 
 </details>
 -->
+
+
 
 <details open>
 
@@ -218,9 +220,215 @@ Happy new year!
 
 <p>2018-01-02 ~ minor fixes throughout</p>
 
-</details>
+</details><details>
 
-_Click outside this window to close it._
+<summary>Welcome 2017</summary>
+
+
+
+## 2018-01-02 ~ Theo
+
+* Fixing and updating all the R9 module read me files
+
+### 2018-01-01 ~ Theo
+
+* R9.0
+* Redesigned user experience
+	* All modules may loaded and used simultaneously
+	* Switch between text and 3D without losing your place
+* Has all the modules of R8
+* Add screen capture modules
+
+Done
+* 2017-12-10 ~ Michal: can we switch off shadows?
+* 2017-12-06 ~ Add slider to move ground up or down
+
+### 2017-12-17 ~ Theo
+
+* Settings
+	* Toggle ground and toggle Grid
+		* Resets with each new model
+		* Auto-positioned at bounding box minimum
+		* Buttons added to increase or decrease of height level
+	* Toggle surface normals
+		* Resets with each new model
+	* Add toggle shade and shadows
+	* Add explode view horizontal and vertical
+		* First pass / still many issues / but will eventually be lots of fun
+
+
+### 2017-12-16 ~ Theo
+
+* Add 'Robust' Core version
+
+
+### 2017-12-15 ~ Theo
+
+* Sun Path / Analemma 3D
+	* Mostly functioning as intended
+	* Minor issues still to be fixed
+
+
+### 2017-12-13 ~ Theo
+
+* Read Me files
+	* Add many links and update text throughout
+* Sample files
+	* Files renamed in a consistent manner
+	* Read me added
+* View Updates
+	* View update issues a blog posts
+* Reports
+	* Duplicate CAD IDs sorted and display next to each other
+	* Every set of duplicates CAD IDs has its own toggle view button
+	* Same toggle view button added to other reports
+
+
+### 2017-12-12 ~ Theo
+
+* Reports
+	* Updated to button tag
+	* Storeys: display number and IDs of spaces
+	* Surfaces
+		* Better handling of on/off toggles
+		* Add 'all visible' button
+	* Duplicate Coordinates
+		* Add visibility toggle for all duplicates
+		* Add Space button to toggle view of space
+	* Duplicate Adjacencies
+		* Add visibility toggle for all duplicates
+		* Add length and width of element
+	* Tiny Surfaces
+		* Add length and width of element
+	* Invalid Adjacencies << new item
+		* Checks for multiple adjacencies in objects that should only have a single adjacency
+* Settings
+	* Add toggle buttons for surfaces/edges/all
+	* Update colors
+	* Colors of duplicates etc unchanged when toggling other color settings
+* Many other minor fixes and code clean-up
+
+### 2017-12-10 ~ Theo
+
+R8.10
+* Add 'first person' camera
+* Add beginning of drawing an analemma
+* Exposure type material colors updated
+* Update draw normals only if element is visible
+	* Use Reports > Surfaces to toggle element visibility then use this command
+* Update to 'toggle camera ortho'
+
+
+Done
+* 2017-12-07 ~ Michal: Toggle for Ortho camera
+* 2017-12-10 ~ Michal: Update color choices
+* 2017-12-10 ~ Michal: can we show normals for selected items only?
+
+
+### 2017-12-08 ~ Theo
+
+R8.9
+* Core
+	* Add 'reset view' calls createReport()
+* HUD
+	* Add toggle button
+	* Toggle off when new file loaded
+
+R8.8
+* Core
+	* Add 'reset view' button resets background, camera, material colors
+* Reports
+	* Add toggle visibility for each surface type
+	* Add display zone count and names per storey
+
+Note
+'reset view' button not currently working in reports, so has been disabled for the moment
+
+Done
+* 2017-12-07 ~ Michal: toggle for HUD
+* 2017-12-08 ~ Michal: reset view: includes background gradient , materials colors or camera ortho
+* 2017-12-08 ~ Michal: Storey ability to hide roofs or floor to better see layout
+* 2017-12-08 ~ Michal: can we show number of zones per storey?
+
+
+### 2017-12-07 ~ Theo
+
+R8.7
+* Templates: code clean-up
+	* Add drag and drop capability
+	* Better selection of sample files
+* Settings:
+	* Add set color by exposure type
+	* Add drag and drop capability
+	* Better selection of sample files
+* Reports
+	* Add drag and drop capability
+	* Better selection of sample files
+	* Add view storey
+	* Add is a space has an 'InteriorFloor' or 'SlabOnGrade' or 'RaisedFloor' or 'UndergroundSlab' then zoom into that space
+* App2
+	* Add drag and drop capability
+
+Done
+
+* 2017-12-01 ~ Load files via drag and drop
+* 2017-12-02 ~ Add test file??
+* 2017-12-01 ~ Add choice to display in right-side menu
+
+### 2017-12-06 ~ Theo
+
+App2 R8.5
+12:44
+* Fixed: reset view not resetting surfaces visible
+* Settings: add toggle grid
+* Settings: add toggle ground
+* App2: add footer
+
+* 2017-12-01 ~ Add a 'ground' that can receive shadow
+
+8.6
+21:32
+* Fix some of the reset view issues
+* Highlight all duplicate adjacencies in red
+* Add better spacing between duplicate adjacencies log
+* Tiny surface telltale now has opacity - so you can see very tine things inside the telltale
+* location hash and splash screen working together better
+* Add button to turn off heads-up - not yet a nice toggle
+
+### 2017-12-05 ~ Theo
+
+R8.5 ~ new user interface
+* Everything in left menu
+
+
+### 2017-12-04 ~ Theo
+
+Little fixes and new features everywhere
+
+* Add buttons to heads-up display
+* Add choices to Settings
+* Add surface edges and rest buttons to core
+* 2017-12-02 ~ Michal: Zoom and center duplicate surfaces, duplicate coordinates, tiny surfaces
+* 2017-12-01 ~ Add better display = none on new file loaded
+* 2017-12-01 ~ Add hamburger/slider menu
+* 2017-12-01 ~ Michal: Locate camera/controls target inside a given space / zoom into the space
+
+
+### 2017-12-03 ~ Theo
+
+* 2017-12-02 ~ Michal: Report and display surfaces with duplicate CAD IDs
+* 2017-12-02 ~ Michal: Highlight and display tiny areas << Added Report > Tiny Surfaces
+
+### 2017-12-02 ~ Theo
+
+* 2017-12-01 ~ Michal: load local files via location.hash < see read me for Core module
+
+### 2017-11-30
+
+* First Commit
+
+
+</details>
 
 ***
 
