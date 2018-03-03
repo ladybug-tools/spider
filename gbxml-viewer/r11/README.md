@@ -14,6 +14,7 @@ _[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv
 
 ## Full screen pre-release: [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html )
 
+* Core utilities to read and display a gbXML file
 
 The read me file with full details is in the main gbXML Viewer folder just above here.
 
