@@ -3,11 +3,11 @@
 
 # gbXML Viewer Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-01-core/gbxml-viewer10-core.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cor/gv-cor.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
-_gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
+_gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
-### Welcome TAS users! We will have a pre-release version of gbXML Viewer R11 up over this weekend.
+### Welcome TAS users!
 
 
 ## Full screen stable release R10.11: <http://www.ladybug.tools/spider/gbxml-viewer/>
@@ -24,6 +24,7 @@ _gbXML Viewer R10 Core ~ the basic HTML, CSS and JavaScript used by all add-on s
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
 * News on what's happening with the gbXML Viewer.
+
 
 ## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 
@@ -75,6 +76,7 @@ Objectives
 Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript.
 
 ### User experience
+
 * Runs in your browser on computer, tablet and phone
 * Highly adjustable workspace
 * Movable, sliding resizable menus
@@ -83,6 +85,7 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 * Full zoom, pan and rotate
 
 ### Settings and Viewing Menu
+
 * Adjust a wide variety of viewing parameters
 	* Set random, phong default, normal or default material
 	* Opacity slider
@@ -107,6 +110,7 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 
 
 ### Reports / Issue tracking Menu
+
 * Identifies automatically:
 	* Duplicate surfaces
 	* Surfaces with duplicate adjacent spaces
@@ -131,11 +135,13 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 
 
 ### Main Menu & Heads-up Display (HUD) / File handling
+
 * Open files via open file dialog or drag and drop
 * Open files via URL using a link or simply by copying and pasting into the address bar
 * Save edited data to a new gbXML file with updated document history
 
 ### Code
+
 * All plain vanilla client-side JavaScript
 * Built over the Three.js WebGL JavaScript library
 * Uses Showdown to turn Markdown into HTML

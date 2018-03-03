@@ -27,9 +27,10 @@ The goals for the files include:
 
 * Files are no more than a few hundred lines
 * Code is simple, plain-vanilla JavaScript
-* Every JavaScript files has an accompanying standalone HTML file for testing purposes
+* Every JavaScript file has an accompanying standalone HTML file for testing purposes
+* Every JavaScript file has its own name space so you can quickly identify the location of variables and functions
 
-The various modules are described below.
+The various modules are described below. They are list in alphabetical order of their three letter folder/ name-space id.
 
 
 ## gbXML Viewer Duplicate Adjacent Spaces
@@ -99,7 +100,10 @@ The various modules are described below.
 
 ## gbXML Viewer Duplicate Coordinates
 
-folder: gv-crd = name space: CRD{} = title: gbXML Viewer Duplicate Coordinates
+* Locates and identifies identical surfaces
+* Folder: gv-crd
+* Name space: CRD{}
+* Title: gbXML Viewer Duplicate Coordinates
 
 ### [gbXML Viewer Duplicate Coordinates Read Me]( #gbxml-viewer/r11/gv-crd/README.md )
 
@@ -109,7 +113,10 @@ folder: gv-crd = name space: CRD{} = title: gbXML Viewer Duplicate Coordinates
 
 ## gbXML Viewer Gallery
 
-folder: gv-gal = name space: GAL{} = gbXML Viewer Gallery
+* Use the GitHub API to obtain directory listings of gbXML files
+* Folder: gv-gal
+* Name space: GAL{}
+* Title: gbXML Viewer Gallery
 
 ### [gbXML Viewer Gallery Read Me]( #gbxml-viewer/r11/gv-gal/README.md )
 
@@ -119,7 +126,10 @@ folder: gv-gal = name space: GAL{} = gbXML Viewer Gallery
 
 ## gbXML Viewer View Utilities
 
-folder: gv-gbv = name space: GBV{} = gbXML Viewer View Utilities
+* Utilities to toggle, zoom and view gbXML elements
+* Folder: gv-gbv
+* Name space: GBV{}
+* Title: gbXML Viewer View Utilities
 
 ### [gbXML Viewer View Utilities Read Me]( #gbxml-viewer/r11/gv-gbv/README.md )
 
@@ -129,7 +139,10 @@ folder: gv-gbv = name space: GBV{} = gbXML Viewer View Utilities
 
 ## gbXML Viewer Heads-Up Display (HUD)
 
-folder: gv-hud = name space: HUD = gbXML Viewer Heads-Up Display (HUD)
+* View and modify detailed parameters of any selected surface
+* Folder: gv-hud
+* Name space: HUD
+* Title gbXML Viewer Heads-Up Display (HUD)
 
 ### [gbXML Viewer Heads-Up Display (HUD) Read Me]( #gbxml-viewer/r11/gv-hud/README.md )
 
@@ -139,7 +152,10 @@ folder: gv-hud = name space: HUD = gbXML Viewer Heads-Up Display (HUD)
 
 ## gbXML Viewer Reports
 
-folder: gv-grep = name space: REP{} = gbXML Viewer Reports
+*  View and locate a variety of data in the model
+* Folder: gv-grep
+* Name space: REP{}
+* Title: gbXML Viewer Reports
 
 ### [gbXML Viewer Reports Read Me]( #gbxml-viewer/r11/gv-rep/README.md )
 
@@ -149,7 +165,10 @@ folder: gv-grep = name space: REP{} = gbXML Viewer Reports
 
 ## gbXML Viewer Settings
 
-folder: gv-gal = name space: SET{} = gbXML Viewer Settings
+* Adjust a wide variety of viewing parameters
+* Folder: gv-gal
+* Name space: SET{}
+* Title:  gbXML Viewer Settings
 
 ### [gbXML Viewer Settings Read Me]( #gbxml-viewer/r11/gv-set/README.md )
 
@@ -159,7 +178,10 @@ folder: gv-gal = name space: SET{} = gbXML Viewer Settings
 
 ## gbXML Viewer Three.js
 
-folder: gv-tmp = name space: TMP{} = gbXML Viewer Three.js
+* Built over the Three.js WebGL JavaScript library
+* Folder: gv-thr
+* Name space: THR{}
+* Title: gbXML Viewer Three.js
 
 ### [gbXML Viewer Three.js Read Me]( #gbxml-viewer/r11/gv-thr/README.md )
 
@@ -169,7 +191,10 @@ folder: gv-tmp = name space: TMP{} = gbXML Viewer Three.js
 
 ## gbXML Viewer Templates
 
-folder: gv-tmp = name space: TMP{} = gbXML Viewer Templates
+* Boilerplate for creating new modules
+* Folder: gv-tmp
+* Name space: TMP{}
+* Title: gbXML Viewer Templates
 
 ### [gbXML Viewer Templates Read Me]( #gbxml-viewer/r11/gv-tmp/README.md )
 
@@ -179,7 +204,7 @@ folder: gv-tmp = name space: TMP{} = gbXML Viewer Templates
 
 ***
 
-_In previous release but not yet updated for R11_
+_In previous releases but not yet updated for R11_
 
 ### gbXML Viewer Screen Capture
 
@@ -216,7 +241,6 @@ View as [Gist]( https://help.github.com/articles/about-gists/ )
 Gists are a great way to share your work. You can share single files, parts of files, or full applications. You can access gists at https://gist.github.com.
 
 * <https://gist.github.com/theo-armour/163685de4d1fdacd70b2ffd446e8c874/edit>
-
 
 
 ***

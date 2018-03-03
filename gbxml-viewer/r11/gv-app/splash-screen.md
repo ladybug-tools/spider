@@ -35,6 +35,10 @@ Heads-up display (hud)
 * See [hud read me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10-11/gv-hud/README.md ) change log
 * Have not yet tested saving edits
 
+R11 is the new pre-release
+
+Many updates to all the Read Me files
+
 </details><details>
 
 <summary>Welcome 2018-02-28 ~ R10.10</summary>
