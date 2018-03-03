@@ -30,10 +30,10 @@ The goals for the files include:
 * Every JavaScript file has an accompanying standalone HTML file for testing purposes
 * Every JavaScript file has its own name space so you can quickly identify the location of variables and functions
 
-The various modules are described below. They are list in alphabetical order of their three letter folder/ name-space id.
+The various modules are described below. They are listed in alphabetical order of their three letter folder/ name-space id.
 
 
-## gbXML Viewer Duplicate Adjacent Spaces
+## gv-adj gbXML Viewer Duplicate Adjacent Spaces
 
 * Identifies gbXML viewer duplicate adjacents - Detect surface with identical space ids
 * Folder: gv-adj
@@ -46,7 +46,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Sun Path / Analemmas
+## gv-ana gbXML Viewer Sun Path / Analemmas
 
 * Creates a Sun path / Analemma for given latitude/longitude
 * folder: gv-ana
@@ -59,7 +59,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Application
+## gv-app gbXML Viewer Application
 
 * All the gbXML Viewer modules all together and available in a single application
 * folder: gv-app
@@ -72,7 +72,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer First Person camera
+##gv-cam gbXML Viewer First Person camera
 
 * Fly through models following an avatar
 * folder: gv-cam
@@ -85,7 +85,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Core
+## gv-cor gbXML Viewer Core
 
 * Core read and display a gbXML file using Three.js
 * Folder: gv-cor
@@ -98,7 +98,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Duplicate Coordinates
+## gv-crd gbXML Viewer Duplicate Coordinates
 
 * Locates and identifies identical surfaces
 * Folder: gv-crd
@@ -111,7 +111,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Gallery
+## gv-gal gbXML Viewer Gallery
 
 * Use the GitHub API to obtain directory listings of gbXML files
 * Folder: gv-gal
@@ -124,7 +124,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer View Utilities
+## gv-gbv gbXML Viewer View Utilities
 
 * Utilities to toggle, zoom and view gbXML elements
 * Folder: gv-gbv
@@ -137,7 +137,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Heads-Up Display (HUD)
+## gv-hud gbXML Viewer Heads-Up Display (HUD)
 
 * View and modify detailed parameters of any selected surface
 * Folder: gv-hud
@@ -150,7 +150,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Reports
+## gv-rep gbXML Viewer Reports
 
 *  View and locate a variety of data in the model
 * Folder: gv-grep
@@ -163,7 +163,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Settings
+## gv-set gbXML Viewer Settings
 
 * Adjust a wide variety of viewing parameters
 * Folder: gv-gal
@@ -176,7 +176,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Three.js
+## gv-thr gbXML Viewer Three.js
 
 * Built over the Three.js WebGL JavaScript library
 * Folder: gv-thr
@@ -189,7 +189,7 @@ The various modules are described below. They are list in alphabetical order of 
 
 
 
-## gbXML Viewer Templates
+## gv-tmp gbXML Viewer Templates
 
 * Boilerplate for creating new modules
 * Folder: gv-tmp
