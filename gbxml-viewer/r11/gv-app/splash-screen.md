@@ -20,7 +20,19 @@ gbXML Viewer is a collection of free, open source modular JavaScript experiments
 
 <details open>
 
-<summary>Welcome 2018-03-03 ~ R11.1</summary>
+<summary>Welcome 2018-03-04 ~ R11.3</summary>
+
+
+Settings
+
+* Tighten up the menu
+* Add section view ~ _Work-in-progress.
+
+
+</details><details open>
+
+<summary>Welcome 2018-03-03 ~ R11.1 / R11.2</summary>
+
 Settings
 
 * Add explode view by storeys
@@ -33,6 +45,7 @@ HUD
 * Add more tooltips
 * Add select CAD Object ID
 * Add update and save CAD Object ID - working roughly
+* R11.2: fix to save file issue
 
 Reports
 

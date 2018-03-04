@@ -2,6 +2,9 @@
 
 	var SET = {};
 
+	SET.localClip1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
+	SET.localClip2= new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 );
+
 //	initSettings();
 
 	SET.initSettings = function() {
@@ -17,64 +20,110 @@
 
 					<summary>Settings</summary>
 
-					<p>
-						toggles<br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+					<div>
+						<b>visibility toggles</b><br>
+						<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
 						 <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
 						 <button onclick=GBV.setAllVisible(); >all</button>
-					</p>
-
-					<p><button onclick=SET.setRandomMaterial(); >Set random material</button></p>
-
-					<p><button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button></p>
-
-					<p><button onclick=SET.setNormalMaterial(); >Set normal material</button></p>
-
-					<p><button onclick=SET.setDefaultMaterial(); >Set default material</button></p>
-
-					<p><button onclick=SET.setExposureMaterial(); >Set exposure type material</button></p>
+					</div>
 
 					<hr>
 
-					<p><button onclick=SET.toggleShadowMap(); >Toggle shadows</button></p>
+					<div>
+						<b>materials settings</b><br>
+						<button onclick=SET.setRandomMaterial(); >Set random material</button>
 
-					<p><button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button></p>
+						<button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button>
 
-					<p><button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>
+						<button onclick=SET.setNormalMaterial(); >Set normal material</button>
 
-					<p><button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button></p>
+						<button onclick=SET.setDefaultMaterial(); >Set default material</button>
 
-					<p><button onclick=SET.toggleAxesHelper(); >Toggle axes</button></p>
+						<button onclick=SET.setExposureMaterial(); >Set exposure type material</button>
 
-					<p>
+						<button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button>
+					</div>
+
+					<div title="building opacity: 0 to 100%" >Opacity
+						<output id=outOpacity class=floatRight >85%</output><br>
+						<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
+					</div>
+
+					<hr>
+
+					<div>
+
+						<b>scene settings</b><br>
+						<button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button>
+
+					<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
+					</div>
+
+					<p><button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
+
+					<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
+
+					</p>
+
+
+					<p><button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
+
+					<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
+
+					</p>
+
+					<div>
 						<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
 						<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
 						<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
-					</p>
+					</div>
 
-					<p>
+					<div>
 						<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
 						<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
 						<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
-					</p>
-
-					<p><button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>
-
-					<p><button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button></p>
-
-					<p title="building opacity: 0 to 100%" >Opacity
-						<output id=outOpacity class=floatRight >85%</output><br>
-						<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
-					</p>
-
-					<p title="building surface separation" >Explode view <br>
-						<button onclick=SET.explodeMinus();> minus </button>
-						<button onclick=SET.explodeReset(); >reset</button>
-						<button onclick=SET.explodePlus();> plus </button>
-					</p>
-
-					<p><button onclick=SET.explodeByStoreys(); >explode by storeys</button></p>
+					</div>
 
 					<hr>
+
+					<p>
+						<div title="building surface separation" >
+							<b>explode view</b><br>
+							<div><button onclick=SET.explodeByStoreys(); >explode by storeys</button></div>
+
+							<button onclick=SET.explodeMinus();> minus </button>
+							<button onclick=SET.explodeReset(); >reset</button>
+							<button onclick=SET.explodePlus();> plus </button>
+						</div>
+
+					</p>
+
+					<div>
+
+						<b>section view</b><br>
+
+						<p><i>Work-in-progress. To get a feeling: With default model in view, click 'toggle section view' button then set 'rotate section...' to -27.</i></p>
+
+						<div>
+							<button id=butSectionView onclick=SET.toggleSectionView() >toggle section view</button>
+						</div>
+
+						clipping plane front: <output id=outClip1 >40</output><br>
+						<input type=range id=inpClip1 max=50 min=-50 step=1 value=40
+						oninput=outClip1.value=SET.localClip1.constant=inpClip1.valueAsNumber; title="-50 to 50: OK" >
+					</div>
+
+					<div>
+						clipping plane front: <output id=outClip2 >40</output><br>
+						<input type=range id=inpClip2 max=50 min=-50 step=1 value=40
+							oninput=outClip2.value=SET.localClip2.constant=inpClip2.valueAsNumber; title="-50 to 50: OK" >
+					</div>
+
+					<div>
+						rotate section on Z-axis: <output id=outRotate >0</output><br>
+						<input type=range id=inpRotate max=180 min=-180 step=1 value=0
+							oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
+					</div>
 
 				</details>`
 
@@ -520,7 +569,7 @@
 
 				}
 
-//				const p = child.userData.positionStart.clone();
+				//const p = child.userData.positionStart.clone();
 				const vec = child.userData.vectorStart.clone();
 
 				//child.position.add( new THREE.Vector3( 1.2 * ( vec.x ), 1.2* ( vec.y ), 0 ) );
@@ -622,7 +671,7 @@
 
 					}
 
-//					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
+					//child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
 					child.userData.vectorStart = child.userData.positionStart.clone(); //.sub( center ).normalize();
 
 				}
@@ -635,28 +684,6 @@
 				child.position.add( vec2 );
 
 			}
-
-		} );
-
-	};
-
-
-
-	SET.vvvupdateViewExplodeVertical = function() {
-
-		const sz = 1 + parseFloat( rngViewExplodeVertical.value ) / 10;
-
-		GBX.surfaceMeshes.traverse( function ( child ) {
-
-				if ( !child.userData.positionStart ) {
-
-					child.userData.positionStart = child.position.clone();
-
-				}
-
-				const p = child.userData.positionStart;
-
-				child.position.z = sz * p.z;
 
 		} );
 
@@ -677,4 +704,44 @@
 	};
 
 
+//////////
 
+	SET.updateClipAngle = function() {
+
+		const angle = inpRotate.valueAsNumber * Math.PI / 180;
+
+		SET.localClip1.normal = new THREE.Vector3( Math.cos( angle ), Math.sin( angle ), THR.axesHelper.position.x );
+		SET.localClip2.normal = new THREE.Vector3( Math.cos( angle + Math.PI ), Math.sin( angle + Math.PI ), 0 );
+
+	};
+
+
+
+	SET.toggleSectionView = function() {
+
+		if ( butSectionView.style.backgroundColor !== 'aqua' ) {
+
+			THR.scene.traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh ) {
+
+					child.material.clippingPlanes = [ SET.localClip1, SET.localClip2 ],
+					child.material.clipShadows = true,
+					child.material.needsUpdate = true;
+
+				}
+
+			} );
+
+			THR.renderer.localClippingEnabled = true;
+			butSectionView.style.backgroundColor = 'aqua';
+
+		} else {
+
+			THR.renderer.localClippingEnabled = false;
+
+			butSectionView.style.backgroundColor = '';
+
+		}
+
+	}

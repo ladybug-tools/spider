@@ -34,7 +34,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				divHeadsUp.innerHTML =
 				`
 					<div id=divDraggableHeader2 title="Open JavaScript console to see more data" >
-						click here to move
+						heads-up display / click here to move
 						<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 					</div>
 					<div id=divHUDheader ></div>
@@ -216,7 +216,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			<button onclick=GBV.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
 			<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
 			<br><hr>
-
 
 				<details open>
 				<summary><b>surface</b></summary>

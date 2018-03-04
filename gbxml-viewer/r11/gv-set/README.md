@@ -48,6 +48,13 @@
 See also main gbXML Viewer read me file
 
 
+### 2018-03-04 ~
+
+* Tighten up the menu
+* Add section view
+> _Work-in-progress. To get a feeling: With default model in view, click 'toggle section view' button then set 'rotate section...' to -27._
+
+
 ### 2018-03-03 ~ Theo
 
 R11

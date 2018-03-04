@@ -72832,8 +72832,8 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [927801]</CADObjectId>
       <Name>S-RF_100-E-W-484</Name>
     </Surface>
-    <Surface surfaceType="Roof" exposedToSun="true" id="aim13016">
-      <AdjacentSpaceId spaceIdRef="aim5184"/>
+    <Surface surfaceType="Shade" exposedToSun="true" id="aim13016">
+      
       <RectangularGeometry id="aim13017">
         <Azimuth>180</Azimuth>
         <CartesianPoint>

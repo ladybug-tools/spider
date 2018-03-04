@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level JavaScript." >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-02" >
-<title>gbXML Viewer 11.2</title>
+<meta name = "date" content = "2018-03-04" >
+<title>gbXML Viewer 11.3</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -23,7 +23,7 @@
 
 		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
 
-			click here to move
+			main menu / click to move
 
 		</div>
 
@@ -89,6 +89,11 @@
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-adj/gv-adj.js';" >
 				edit duplicate adjacents </button>
+
+				<button id=butSaveEdits class=app-menu onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-sav/gv-sav.js';" >
+				save edits </button>
 
 				<hr>
 
@@ -200,7 +205,7 @@
 	<div id = "divContainer" >
 
 			<div id = "divContentsHeader" >
-				click here to move / click outside to close
+				pop-up window / click here to move / click outside to close
 				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
 			</div>
 
@@ -243,7 +248,7 @@
 
 		}
 
-
+		butHeadsUp.click();
 
 	}
 
