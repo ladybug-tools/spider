@@ -394,7 +394,7 @@
 	GBV.saveFile = () => {
 
 		//xmlText = prettifyXml( gbxmlResponseXML ); // not
-		const xmlText = new XMLSerializer().serializeToString( GBX.gbxmlResponseXML );
+		const xmlText = new XMLSerializer().serializeToString( GBX.gbxml );
 		//console.log( 'xmlText', xmlText );
 
 		var blob = new Blob( [ xmlText ] );
