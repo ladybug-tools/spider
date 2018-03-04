@@ -209,7 +209,7 @@
 			if ( Array.isArray( storeys ) === true ) {
 
 				for ( let storey of storeys ) {
-		//console.log( 'storey', storey );
+					//console.log( 'storey', storey );
 
 					flowContent += '<div style=margin-bottom:10px; > ' +
 						( count ++ ) +
@@ -457,13 +457,6 @@
 			if ( !cadIds.includes( id ) ) {
 
 				cadIds.push( id );
-/*
-				flowContent +=
-
-					'<button onclick=REP.toggleCadIdGroup("' + encodeURI( id )+ '"); >' + id + '</button>' + b +
-
-				'';
-*/
 
 			}
 
@@ -810,8 +803,6 @@
 		//console.log( 'id', id );
 
 		const spaces = GBX.gbjson.Campus.Building.Space;
-		//		surfaceGroup.visible = true;
-		//icw.divLog.innerHTML = '';
 
 		let zones = [];
 		let spacesArray = [];

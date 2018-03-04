@@ -12,76 +12,73 @@
 			SET.explodeStart = false;
 
 			divMenuItems.innerHTML =
+			`
+				<details id=detSettings class=app-menu open >
 
-				'<details id=detSettings class=app-menu open >' +
+					<summary>Settings</summary>
 
-					'<summary>Settings</summary>' +
+					<p>
+						toggles<br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+						 <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+						 <button onclick=GBV.setAllVisible(); >all</button>
+					</p>
 
-					'<p>' +
-						'toggles<br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>' +
-						' <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>' +
-						' <button onclick=GBV.setAllVisible(); >all</button>' +
-					'</p>' +
+					<p><button onclick=SET.setRandomMaterial(); >Set random material</button></p>
 
-					'<p><button onclick=SET.setRandomMaterial(); >Set random material</button></p>' +
+					<p><button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button></p>
 
-					'<p><button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button></p>' +
+					<p><button onclick=SET.setNormalMaterial(); >Set normal material</button></p>
 
-					'<p><button onclick=SET.setNormalMaterial(); >Set normal material</button></p>' +
+					<p><button onclick=SET.setDefaultMaterial(); >Set default material</button></p>
 
-					'<p><button onclick=SET.setDefaultMaterial(); >Set default material</button></p>' +
+					<p><button onclick=SET.setExposureMaterial(); >Set exposure type material</button></p>
 
-					'<p><button onclick=SET.setExposureMaterial(); >Set exposure type material</button></p>' +
+					<hr>
 
-					'<hr>' +
+					<p><button onclick=SET.toggleShadowMap(); >Toggle shadows</button></p>
 
-					'<p><button onclick=SET.toggleShadowMap(); >Toggle shadows</button></p>' +
+					<p><button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button></p>
 
-					'<p><button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button></p>' +
+					<p><button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>
 
-					'<p><button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button></p>' +
+					<p><button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button></p>
 
-					'<p><button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button></p>' +
+					<p><button onclick=SET.toggleAxesHelper(); >Toggle axes</button></p>
 
-					'<p><button onclick=SET.toggleAxesHelper(); >Toggle axes</button></p>' +
+					<p>
+						<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
+						<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
+						<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
+					</p>
 
-					'<p>' +
-						'<button onclick=SET.toggleGridHelper(); >Toggle grid</button> ' +
-						'<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button> ' +
-						'<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>' +
-					'</p>' +
+					<p>
+						<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
+						<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
+						<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
+					</p>
 
-					'<p>' +
-						'<button onclick=SET.toggleGroundHelper(); >Toggle ground</button> ' +
-						'<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button> ' +
-						'<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>' +
-					'</p>' +
+					<p><button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>
 
-					'<p><button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button></p>' +
+					<p><button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button></p>
 
-					'<p><button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button></p>' +
+					<p title="building opacity: 0 to 100%" >Opacity
+						<output id=outOpacity class=floatRight >85%</output><br>
+						<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
+					</p>
 
-					'<p title="building opacity: 0 to 100%" >Opacity ' +
-						'<output id=outOpacity class=floatRight >85%</output><br>' +
-						'<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >' +
-					'</p>' +
+					<p title="building surface separation" >Explode view <br>
+						<button onclick=SET.explodeMinus();> minus </button>
+						<button onclick=SET.explodeReset(); >reset</button>
+						<button onclick=SET.explodePlus();> plus </button>
+					</p>
 
+					<p><button onclick=SET.explodeByStoreys(); >explode by storeys</button></p>
 
+					<hr>
 
-					'<p title="building surface separation" >Explode view <br>' +
-						'<button onclick=SET.explodeMinus();> minus </button>' +
-						'<button onclick=SET.explodeReset(); >reset</button>' +
-						'<button onclick=SET.explodePlus();> plus </button>' +
-					'</p>' +
+				</details>`
 
-
-					'<hr>' +
-
-				'</details>' +
-
-				divMenuItems.innerHTML +
-
-			'';
+			+ divMenuItems.innerHTML;
 
 			butSettings.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -409,7 +406,7 @@
 			THR.camera = SET.cameraPerspective;
 			THR.camera.updateProjectionMatrix();
 			THR.controls = SET.controlsPerspective;
-//			THR.scene.remove( SET.cameraOrtho );
+			//THR.scene.remove( SET.cameraOrtho );
 
 			GBX.setAllVisible();
 			GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
@@ -523,11 +520,13 @@
 
 				}
 
-				const p = child.userData.positionStart.clone();
+//				const p = child.userData.positionStart.clone();
 				const vec = child.userData.vectorStart.clone();
 
-//				child.position.add( new THREE.Vector3( 1.2 * ( vec.x ), 1.2* ( vec.y ), 0 ) );
+				//child.position.add( new THREE.Vector3( 1.2 * ( vec.x ), 1.2* ( vec.y ), 0 ) );
 				child.position.add( vec.multiplyScalar( s ) );
+
+
 			}
 
 		} );
@@ -588,7 +587,62 @@
 
 
 
-	SET.updateViewExplodeVertical = function() {
+	SET.explodeByStoreys = function() {
+
+		if ( SET.explodeStart === false ) { SET.explodeInit(); }
+
+		const s = 1;
+
+		GBX.surfaceEdges.visible = false;
+
+		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
+		const sphere = bbox.getBoundingSphere();
+		center = sphere.center;
+		radius = sphere.radius;
+
+		THR.scene.updateMatrixWorld();
+
+		THR.scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.updateMatrixWorld();
+
+				if ( !child.userData.positionStart ) {
+
+					if ( child.geometry.boundingSphere ) {
+
+						const pp = child.geometry.boundingSphere.center.clone();
+						pp.applyMatrix4( child.matrixWorld );
+						child.userData.positionStart = pp;
+
+					} else {
+
+						child.userData.positionStart = child.position.clone();
+
+					}
+
+//					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
+					child.userData.vectorStart = child.userData.positionStart.clone(); //.sub( center ).normalize();
+
+				}
+
+				const vec = child.userData.vectorStart.clone();
+
+				//child.position.add( new THREE.Vector3( 1.2 * ( vec.x ), 1.2* ( vec.y ), 0 ) );
+				//child.position.add( vec.multiplyScalar( s ) );
+				vec2 = new THREE.Vector3( 0, 0, 3 * vec.z - radius );
+				child.position.add( vec2 );
+
+			}
+
+		} );
+
+	};
+
+
+
+	SET.vvvupdateViewExplodeVertical = function() {
 
 		const sz = 1 + parseFloat( rngViewExplodeVertical.value ) / 10;
 

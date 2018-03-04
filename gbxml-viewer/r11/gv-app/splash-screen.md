@@ -21,8 +21,12 @@ gbXML Viewer is a collection of free, open source modular JavaScript experiments
 <details open>
 
 <summary>Welcome 2018-03-03 ~ R11.1</summary>
+Settings
+
+* Add explode view by storeys
 
 HUD
+
 * All surface type changes handled
 * Add details tags/triangles to all three areas
 * Comment out zone info
@@ -31,6 +35,7 @@ HUD
 * Add update and save CAD Object ID - working roughly
 
 Reports
+
 * CAD Object ID Groups sorted
 
 Duplicate Adjacents

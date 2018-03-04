@@ -47,6 +47,12 @@
 
 See also main gbXML Viewer read me file
 
+
+### 2018-03-03 ~ Theo
+
+R11
+* Add explode by storeys
+
 ### 2018-02-27 ~ Theo
 
 R10.9
