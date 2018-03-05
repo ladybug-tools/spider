@@ -20,7 +20,13 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
-<summary>Welcome 2018-03-04 ~ R11.3</summary>
+<summary>Welcome 2018-03-04 ~ R11.3 / R11.4 </summary>
+
+R11.4
+APP / Style.css
+* Add .highlight class with new var --highlight-color
+* Set highlight background-color to Spring Green as per Michalina new palette
+* Add css vars to HUD mnu
 
 R11.3 to stable release
 

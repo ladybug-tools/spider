@@ -3,7 +3,14 @@
 
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
-	:root { --mnu-color: DarkBlue; --mnu-back-color: Gold; --mnu-width: 355px; --but-bg-color: LightCoral; }
+	:root {
+		--mnu-color: DarkBlue;
+		--mnu-back-color: Gold;
+		--mnu-header-color: LightSkyBlue;
+		--mnu-width: 355px;
+		--but-bg-color: LightCoral;
+		--highlight-color: SpringGreen;
+	}
 
 	html { height: 100%; }
 
@@ -14,7 +21,7 @@
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
 
-	button, input[ type=button ] { background-color: #888; border: none; color: lightSalmon; cursor: pointer; margin: 2px; padding: 3px 10px; }
+	button, input[ type=button ] { background-color: #888; border: none; color: lightBlue; cursor: pointer; margin: 2px; padding: 3px 10px; }
 	button:hover, button:focus { color: white }
 
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -33,11 +40,12 @@
 	.flex-container2 { display: flex; flex-wrap: wrap; }
 	.flex-container2 > div { }
 
+	.highlight { background-color: var( --highlight-color ) }
 
 	#divContainer { background-color: white; border: 1px solid #888; display: none; height: 80%; left: 400px;
 		margin: 0; max-width: 900px;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px; }
 
-	#divContentsHeader {background-color: LightSkyBlue; color: #fff; cursor: move; padding: 10px; z-index: 10;}
+	#divContentsHeader {background-color: var( --mnu-header-color ); color: #fff; cursor: move; padding: 10px; z-index: 10;}
 
 	#divContents { margin: 10px; }
 
@@ -50,7 +58,7 @@
 
 	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
 
-	#divMenuHeader { background-color: LightSkyBlue; cursor: move; padding: 10px; }
+	#divMenuHeader { background-color: var( --mnu-header-color ); cursor: move; padding: 10px; }
 
 	#divMenuContents { padding: 10px; }
 

@@ -236,7 +236,7 @@
 
 		}
 
-		flowContent += '<div id=divStoreyItems style=background-color:yellow;  ></div>';
+		flowContent += '<div id=divStoreyItems style=background-color:var(--highlight-color);  ></div>';
 
 		return { summary: 'Storeys &raquo; ' + count, flowContent: flowContent };
 
@@ -370,7 +370,7 @@
 			'<p>' +
 				'<button id=butDuplicatesCoordinates onclick=REP.toggleAdjacencies(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
 			'</p>' +
-			'<p style=background-color:yellow;color:red;>This menu will be deprecated. Use other edit buttons.</p>';
+			'<p style=background-color:var(--highlight-color);color:red;>This menu will be deprecated. Use other edit buttons.</p>';
 		let spaceId;
 
 		for ( let i = 0; i <  surfaces.length; i++ ) {
@@ -643,7 +643,7 @@
 			'<p>' +
 				'<button id=butDuplicateAdjacencies onclick=REP.toggleAdjacencies(butDuplicateAdjacencies,surfaceAdjacencyDuplicates); >toggle all duplicates</button>' +
 			'</p>' +
-			'<p style=background-color:yellow;color:red;>This menu will be deprecated. Use other edit buttons.</p>';
+			'<p style=background-color:var(--highlight-color);color:red;>This menu will be deprecated. Use other edit buttons.</p>';
 
 		for ( let surface of surfaces ) {
 

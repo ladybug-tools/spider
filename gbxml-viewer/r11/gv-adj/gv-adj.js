@@ -100,7 +100,7 @@
 
 		}
 
-		sumADJSummary.innerHTML= 'Duplicate Adjacents &raquo;  <span style=background-color:yellow; >&nbsp;' + count + ' found&nbsp;</span>';
+		sumADJSummary.innerHTML= 'Duplicate Adjacents &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + count + ' found&nbsp;</span>';
 
 		divADJadjacents.innerHTML= contents;
 

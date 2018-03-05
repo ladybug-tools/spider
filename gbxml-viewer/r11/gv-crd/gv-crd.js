@@ -172,7 +172,7 @@
 
 		}
 
-		sumCRDSummary.innerHTML= 'Duplicate Surfaces &raquo; <span style=background-color:yellow; >&nbsp;' + count + ' found&nbsp;</span>';
+		sumCRDSummary.innerHTML= 'Duplicate Surfaces &raquo; <span style=background-color:var(--highlight-color); >&nbsp;' + count + ' found&nbsp;</span>';
 		divCRDInfo.innerHTML = 'Two surfaces with identical coordinates';
 		divCoordinates.innerHTML= flowContent;
 

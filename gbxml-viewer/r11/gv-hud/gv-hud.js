@@ -41,7 +41,7 @@
 
 
 				divDraggableHeader2.style.cssText =
-					'background-color: lightskyblue; color: #000; cursor: move; padding: 10px; z-index: 10;';
+					'background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px; z-index: 10;';
 
 				divDraggableHeader2.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
 

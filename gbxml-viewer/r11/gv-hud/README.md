@@ -32,6 +32,8 @@ The next steps may include
 * Drawing telltales for the gbXML polyloops to see if any visible idiosyncracies in the error causing surfaces can  be identified.
 * Embedding a new shape drawing function that can be used to correct the errors
 
+### Save File
+
 
 ### Surface type changes
 
@@ -60,6 +62,31 @@ The following cases need to be handled when changing the type of the surface
 
 
 ## Change Log
+
+### 2018-03-05 ~ Theo
+
+Manual testing R11.3
+* Delete surfaces
+	* Test: 2 or more models / 2 or more surface types / save and open:
+		* R11.3 2018-03-05 11:16 ~ save OK
+* Change surface type
+	* Test: 2 or more models / 2 or more surface types / save and open:
+		* R11.3 2018-03-05 11:22 ~ Bristol model: OK
+		* R11.3 2018-03-05 11:22 ~ save with issues: Golden model - roof to interior wall- only one adjacent
+* Change CAD Object ID
+	* Test: 2 or more models / change 2 or CAD IDs / save and open:
+		* R11.3 2018-03-05 11:29 ~ Bristol model: OK
+		* R11.3 2018-03-05 11:36 ~ London model: OK
+* Change Adjacent Surface ID
+	* Test: 2 or more models / change 2 or adjacent space IDs for every type of change / save and open:
+		* All shade: no adjacent space to change
+		* Exterior wall: change to another space with exterior wall: Bristol model:
+			* Bristol model: partial fail - New spaces added but old space not deleted - so exterior wall becomes a two adjacent type
+		* Interior floor: change adjacent #1 to another interior space
+			* Bristol model: fail
+
+
+
 
 ### 2018-03-04 ~ Theo
 

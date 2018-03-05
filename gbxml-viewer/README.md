@@ -290,6 +290,9 @@ See also:
 
 ### HUD ~ Heads-up Display
 
+* 2018-03-05 ~ Goal: surfac + two adjacents all visible at once
+	* 2018-03-05 ~ Drop description
+	* 2018-03-05 ~ Reduce selects to 5
 * 2018-03-04 ~ Identify adjcent spaces
 * 2018-01-02 ~ Multiple types of heads-up modules with different agendas
 	* Show space names at cursor locations
@@ -297,6 +300,7 @@ See also:
 * 2018-03-04 ~ Use main style sheet?
 
 ### REP ~ Reports
+
 
 * 2018-03-04 ~ Export spaces and storeys as gbJSOM. .RAD files etc
 * 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
@@ -306,6 +310,7 @@ See also:
 
 ### SAV ~ Save Changes
 
+* 2018-03-05 ~ Add ability to add/merge changes
 * 2018-03-04 ~ Add user surface defined colors
 * 2018-03-04 ~ Add user defined inserts
 * 2018-03-04 ~ Add user-defined settings such as view point
@@ -314,13 +319,14 @@ See also:
 
 ### SET ~ Settings
 
+* Add ( random? ) colors by space
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
 * Better lights and shadows
 
 
 ### THR / GBX ~ Three.js
 
-* 2018-03-04 ~ Sort out divLog
+* 2018-03-04 ~ Sort out divLog / make pretty / more useful
 * 2018-03-04 ~ Add file load time readout
 * 2018-03-04 ~ Add file name readout
 * 2018-03-04 ~ Split into separate modules

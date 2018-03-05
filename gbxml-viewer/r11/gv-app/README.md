@@ -30,6 +30,14 @@ See main read me file
 
 ## Change Log
 
+### 2018-03-05 ~ Theo
+
+R11.4
+
+APP / Style.css
+* Add .highlight class with new var --highlight-color
+* Set highlight background-color to Spring Green as per Michalina new palette
+* Add css vars to HUD mnu
 
 ### 2018-03-04 Theo
 
