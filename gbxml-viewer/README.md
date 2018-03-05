@@ -137,6 +137,12 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 * Open files via URL using a link or simply by copying and pasting into the address bar
 * Save edited data to a new gbXML file with updated document history
 
+### SAV ~ Save Changes
+
+* Save your editing changes to a file for reuse with next incoming gbXML source file update
+* Save time with gbXML files that are frequently updated
+
+
 ### THR ~ Code
 
 * All plain vanilla client-side JavaScript
@@ -225,7 +231,7 @@ See also:
 
 ### 000
 
-* 2018-03-04 ~ R11 to stable release
+
 * 2018-03-04 ~ Start R12
 
 ### ADJ ~ Duplicate Adjacents
@@ -268,10 +274,15 @@ See also:
 * 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
 	* Upgrade so identifies any surface within another surface
 
+
 ### GAL ~ Gallery
 
+* 2018-03-04 ~ Test new smaller files to see if they load faster
+* 2018-03-04 ~ Random image on start-up?
 * Links to more sample files
+	* Where to find more
 * Credits to sources of files
+
 
 ### GBV ~ gbXML View Utilities
 
@@ -295,16 +306,15 @@ See also:
 
 ### SAV ~ Save Changes
 
-
 * 2018-03-04 ~ Add user surface defined colors
 * 2018-03-04 ~ Add user defined inserts
+* 2018-03-04 ~ Add user-defined settings such as view point
+* 2018-03-04 ~ Add default UI parameters
+
 
 ### SET ~ Settings
 
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
-
-### SET ~ Settings / Views
-
 * Better lights and shadows
 
 
@@ -313,7 +323,7 @@ See also:
 * 2018-03-04 ~ Sort out divLog
 * 2018-03-04 ~ Add file load time readout
 * 2018-03-04 ~ Add file name readout
-* Split into separate modules
+* 2018-03-04 ~ Split into separate modules
 
 
 ### TMP ~ Templates
@@ -349,7 +359,11 @@ Will most likely build upon
 
 * [create exportable buildings]( https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings )
 
+## Things you could do
 
+* Help make an NPM for gbXML Viewer
+* Help translate
+* Help design and build test scripts
 
 <!--
 ***

@@ -22,6 +22,8 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <summary>Welcome 2018-03-04 ~ R11.3</summary>
 
+R11.3 to stable release
+
 Settings Module
 
 * Tighten up the menu
