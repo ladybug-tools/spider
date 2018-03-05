@@ -22,9 +22,7 @@ This feature could also be termed a '[context menu]( https://en.wikipedia.org/wi
 
 ## Wish list
 
-* 2018-01-02 ~ Multiple types of heads-up
-	* Show space names at cursor locations
-* 2018-01-02 ~ Add inworld placard at cursor location
+See main read me
 
 ## Issues
 
@@ -53,8 +51,8 @@ The following cases need to be handled when changing the type of the surface
 
 #### Two adjacents
 
-* From two to shade: remove both / display none / OKOK
-* From two to single: remove 2nd OK / display 2nd /
+* From two to shade: remove both / display none OK /
+* From two to single: remove 2nd OK / display 2nd OK /
 * From two to two: no change OK / display two OK/
 
 
@@ -63,6 +61,14 @@ The following cases need to be handled when changing the type of the surface
 
 ## Change Log
 
+### 2018-03-04 ~ Theo
+
+* Update menu colors
+* Add code to help with saving edit changes
+
+Done
+* 2018-02-25 ~ Edit Adjacent Spade IDs
+* 2017-12-01 ~ What data should be included in heads-up display?
 
 
 ### 2018-03-03 ~ Theo

@@ -2,6 +2,9 @@
 
 	var GBV = {};
 
+	GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
+
+
 	initGbxmlView();
 
 
@@ -328,6 +331,8 @@
 		const surfacesResponse = GBX.gbxml.getElementsByTagName("Surface");
 		surface = surfacesResponse[ id ];
 		surface.remove();
+		GBV.surfaceChanges.deletes.push( id );
+
 		console.log( 'id', id, 'surface to delete', surface );
 
 		// remove from gbjson

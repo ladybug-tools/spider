@@ -10,15 +10,12 @@ _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scrip
 ### Welcome [TAS]( http://www.edsl.net/main/ ) users!
 
 
-## Full screen stable release R10.11: <http://www.ladybug.tools/spider/gbxml-viewer/>
+## Full screen stable release R11: <http://www.ladybug.tools/spider/gbxml-viewer/>
 
-
-## Full Screen pre-release R11: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 <!--
-## Full Screen pre-release R10.9: <http://www.ladybug.tools/spider/gbxml-viewer/r10-9/gv-app/gv-app.html>
+## Full Screen pre-release R11: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
-* Earlier version with partially functioning HUD updates
 -->
 
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
@@ -140,7 +137,7 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 * Open files via URL using a link or simply by copying and pasting into the address bar
 * Save edited data to a new gbXML file with updated document history
 
-### Code
+### THR ~ Code
 
 * All plain vanilla client-side JavaScript
 * Built over the Three.js WebGL JavaScript library
@@ -221,44 +218,120 @@ See also:
 
 ## To Do / Wish List Items
 
-Feel free to add new ideas
+* Feel free to add new ideas
+* Sections are based on the current set of modules
+* Items are listed in alphabetical order of their three letter folder/ name-space id
+* More links and details available in the [Release Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r11/README.md )
 
-### Core
+### 000
+
+* 2018-03-04 ~ R11 to stable release
+* 2018-03-04 ~ Start R12
+
+### ADJ ~ Duplicate Adjacents
+
+
+### ANA ~ Sun Path / Analemma
+
+* 2018-01-01 ~ Theo: Multiple suns
+* 2018-02-21 ~ Add automatic addition of ground
+
+
+### APP ~ Application Menu
+
+* 2018-02-18 ~ Menus remember their position from session to session
+
+#### Style Sheet
+
+* 2018-03-04 ~ More CSS vars
+
+### CAM ~ First Person camera
+
+* 2018-03-04 ~ Avatar talks / Identifies current space and direction
+* 2017-11-13 ~ Choose whether you fly through walls or bump into them
+* 2017-11-13 ~ Better adjustment of movement speed depending on scale
+* 2017-11-13 ~ Speed up and slow down controls
+* 2017-11-13 ~ Create your own fly through paths and can be replayed
+
+
+### COR Core
 
 * 2018-02-25 ~ View gbXML source code
-
-### View Module / TBD
-
-* Better lights and shadows
-* Section views
-* 2018-02-11 ~ Theo: Add section views
-
-### Gallery
+* 2018-03-02 ~ Add test file
+* 2018-02-18 ~ Test file needs drag and drop
+* 2018-02-18 ~ Full name spacing
 
 
-### Heads-up Display
 
-* 2018-02-25 ~ Edit Adjacent Spade IDs
-* 2017-12-01 ~ What data should be included in heads-up display?
+### CRD ~ Duplicate Coordinates
+
+* 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
+	* Upgrade so identifies any surface within another surface
+
+### GAL ~ Gallery
+
+* Links to more sample files
+* Credits to sources of files
+
+### GBV ~ gbXML View Utilities
 
 
-### Settings
+
+### HUD ~ Heads-up Display
+
+* 2018-03-04 ~ Identify adjcent spaces
+* 2018-01-02 ~ Multiple types of heads-up modules with different agendas
+	* Show space names at cursor locations
+* 2018-01-02 ~ Add in-world placard at cursor location
+* 2018-03-04 ~ Use main style sheet?
+
+### REP ~ Reports
+
+* 2018-03-04 ~ Export spaces and storeys as gbJSOM. .RAD files etc
+* 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
+* 2018-02-26 ~ Next and previous buttons to navigate through storeys, surfaces, spaces etc
+* 2018-02-26 ~ Surfaces, Spaces: checkbox for auto-zooming
+* 2018-02-26 ~ Better telltale size for small surfaces
+
+### SAV ~ Save Changes
+
+
+* 2018-03-04 ~ Add user surface defined colors
+* 2018-03-04 ~ Add user defined inserts
+
+### SET ~ Settings
 
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
-* 2018-02-25 ~ Add plus minus and default buttons to explode view
 
-### Reports
+### SET ~ Settings / Views
 
-* 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
-
-
-### First Person camera
+* Better lights and shadows
 
 
-### Sun Path / Analemmas
+### THR / GBX ~ Three.js
+
+* 2018-03-04 ~ Sort out divLog
+* 2018-03-04 ~ Add file load time readout
+* 2018-03-04 ~ Add file name readout
+* Split into separate modules
+
+
+### TMP ~ Templates
+
+* 2018-03-04 ~ Use main style sheet?
+
+***
+
+## Other Bits and Pieces
+
+### Main Read Me (this file )
+
+* 2018-03-04 ~ Finish merging Change Log into Version Read Me
 
 
 ### Sun Range
+
+* Add to R11
 
 
 ### Screen Capture
@@ -266,11 +339,7 @@ Feel free to add new ideas
 * 2018-01-01 ~ Much better control over the camera
 
 
-### Templates
-
-
 ### Export gbXML files
-
 
 * 2017-12-15 ~ Theo: export selected spaces or zones to gbxml?
 * 2017-12-10 ~ Michal: Export gbJSON
@@ -280,6 +349,9 @@ Will most likely build upon
 
 * [create exportable buildings]( https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings )
 
+
+
+<!--
 ***
 
 ## Change Log
@@ -664,6 +736,7 @@ Little fixes and new features everywhere
 
 * First Commit
 
+-->
 
 ***
 

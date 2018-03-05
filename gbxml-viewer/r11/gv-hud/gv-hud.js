@@ -1,8 +1,4 @@
-/*global
-
-THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rngOpacity,rngViewExplodeVertical
-
-*/
+// Copyright 2018 Ladybug Tools authors. MIT License
 
 	var HUD = {};
 
@@ -45,7 +41,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 				divDraggableHeader2.style.cssText =
-					'background-color: indianred; color: #fff; cursor: move; padding: 10px; z-index: 10;';
+					'background-color: lightskyblue; color: #000; cursor: move; padding: 10px; z-index: 10;';
 
 				divDraggableHeader2.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
 
@@ -231,7 +227,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					<button onclick=GBV.zoomIntoSurface("` + data.id + `"); title="zoom into just this surface" >zoom</button>
 					<br>`
 					+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
-					`type <button onclick=GBV.showSurfaceType(this.innerText); title="show all of this type" >` + data.surfaceType + `</button>` + b +
+					`type <button butType onclick=GBV.showSurfaceType(this.innerText); title="show all of this type" >` + data.surfaceType + `</button>` + b +
 					` update <select id = "selType" onchange=HUD.updateType(this.value); title="change to another type of surface" >` + GBX.surfaceTypeOptions + `</select>
 					<br>`
 					+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
@@ -276,7 +272,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 									( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) : '' ) +
 									( space1.Volume ? '</i> volume </i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
 									( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' ) +
-//									( space1.zoneIdRef ? 'zone id ref <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
+									//( space1.zoneIdRef ? 'zone id ref <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
 									'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
 									( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
 								'</div>' +
@@ -298,7 +294,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 									( space2.Area ? 'area <i>' + Number( space2.Area ).toFixed( 1 ) : '' ) + '</i>' +
 									( space2.Volume ? ' volume <i>' + Number( space2.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
 									( space2.conditionType ? 'condition type <i>' + space2.conditionType + '</i>' + b : '' ) +
-//									( space2.zoneIdRef ? 'zone id ref <i>' + space2.zoneIdRef + '</i>' + b : '' ) +
+									//( space2.zoneIdRef ? 'zone id ref <i>' + space2.zoneIdRef + '</i>' + b : '' ) +
 									'storey <button onclick=GBV.showStorey(this.innerText); >' + space2.buildingStoreyIdRef + '</button>' + b +
 									( space2.CADObjectId ? 'cad object id <i>' + space2.CADObjectId + '</i>' + b : '' ) +
 								'</div>' +
@@ -327,7 +323,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				adjacentsTxt =
 					'<hr>' +
 					'<details open >' +
-						'<summary><b>adjacent space 2</b></summary>' +
+						'<summary><b>adjacent space 1</b></summary>' +
 						'<div class=flex-container2 >' +
 							'<div >' +
 								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
@@ -335,7 +331,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 								'<button onclick=HUD.updateSpace(0); >update</button>' + b +
 								'</div>' +
 							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
-								'<b>adjacent space 1</b> ' + b +
+								//'<b>adjacent space 1</b> ' + b +
 								'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
 								( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
 								( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
@@ -369,6 +365,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		selSurface.value = data.id;
 		if ( window.selSpace1 ) { selSpace1.value = space1.id; }
 		if ( window.selSpace2 ) { selSpace2.value = space2.id; }
+		selCadId.value = data.CADObjectId;
 
 		document.body.style.cursor = 'pointer';
 
@@ -405,19 +402,24 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			butSpace0.innerText = spaceId;
 
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-			adjacentNew.setAttribute( "spaceIdRef", "none" );
+			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );
+
+			GBV.surfaceChanges.oneAdjacent.push( { id:surfaceId, spaceId: spaceId } )
 
 		} else if ( spaceRef === 1 ) {
 
 			const spaceId = selSpace1.value;
 			console.log( 'spaceId', spaceId );
+
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
 			butSpace1.innerText = spaceId;
 
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );
+
+			GBV.surfaceChanges.twoAdjacent.push( { id:surfaceId, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
 		} else if ( spaceRef === 2 ) {
 
@@ -428,6 +430,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );
+
+			GBV.surfaceChanges.twoAdjacent.push( { id:surfaceId, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
 		}
 
@@ -451,11 +455,11 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const id = surface.id;
 		const spaceIdPrev = surface.AdjacentSpaceId;
-
-		console.log( 'spaceIdPrev', spaceIdPrev );
+		//console.log( 'spaceIdPrev', spaceIdPrev );
 
 		const typeNew = surface.surfaceType = selType.value;
-		console.log( 'typeNew', typeNew );
+		//console.log( 'typeNew', typeNew );
+		GBV.surfaceChanges.types.push( { id: id, type: typeNew } );
 
 		HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 
@@ -481,16 +485,18 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
 				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
-				console.log( 'adjSpace1',  adjSpace1 );
+				//console.log( 'adjSpace1',  adjSpace1 );
+
 				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
 				const removed1 = surfaceXml.removeChild( adjSpace1 );
 
 				const adjSpace2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
 				//console.log( 'adjSpace2', adjSpace2 );
+
 				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
 				const removed2 = surfaceXml.removeChild( adjSpace2 );
 
-				console.log( 'prev 2 / now 0 / removed id1: ', removedId1, ' id2: ', removedId2 );
+				//console.log( 'prev 2 / now 0 / removed id1: ', removedId1, ' id2: ', removedId2 );
 
 			} else { // type prev is single adjacent
 
@@ -499,18 +505,18 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
 				const removed1 = surfaceXml.removeChild( adjSpace1 );
 
-				console.log( 'prev 1 or 0 / now 0 / id: ', removedId1 );
+				//console.log( 'prev 1 or 0 / now 0 / id: ', removedId1 );
 
 			}
 
 		} else if ( types.includes( typeNew ) ) { // type new is two adjacents
 
-			console.log( 'typeNew', typeNew );
+			//console.log( 'typeNew', typeNew );
 
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
 				// leave things untouched
-				console.log( ' prev 2 / now 2 spaceIdPrev', spaceIdPrev );
+				//console.log( ' prev 2 / now 2 spaceIdPrev', spaceIdPrev );
 
 			} else if ( spaceIdPrev ) { // type prev is single adjacent
 
@@ -523,7 +529,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				adjacentSpaceId[ 0 ] = { spaceIdRef: prevId };
 				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
 
-				console.log( 'prev 1 / now 2 / prevId', prevId );
+				//console.log( 'prev 1 / now 2 / prevId', prevId );
 
 			} else { // type prev is shade / no adjacent
 
@@ -554,27 +560,26 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev[ 0 ].spaceIdRef };
 
-				console.log( 'prev 2 / new 1', newAdjTxt );
+				//console.log( 'prev 2 / new 1', newAdjTxt );
 
 			} else if ( spaceIdPrev ) { // type prev is single adjacent
 
 				// leave things untouched
 				const spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
 
-				console.log( 'prev 1 / new 1 / no changes spaceId',  spaceId );
+				//console.log( 'prev 1 / new 1 / no changes spaceId',  spaceId );
 
 			} else { // type prev is no adjacent
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
-				console.log( 'prev 0 / new 1 / no spaceIdPrev',  spaceIdPrev );
+				//console.log( 'prev 0 / new 1 / no spaceIdPrev',  spaceIdPrev );
 
 			}
 
 		}
 
-		console.log( 'surfaceXml',  surfaceXml );
-
+		//console.log( 'surfaceXml',  surfaceXml );
 		//console.log( 'type surfaceJson', surfaceJson );
 
 		HUD.setHeadsUp();
@@ -609,19 +614,19 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const id = surface.id;
 
-		HUD.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
+		HUD.surfacesXml = GBX.gbxml.getElementsByTagName( "Surface" );
 
 		surfaceXml = HUD.surfacesXml[ id ];
-		console.log( 'surfaceXml',  surfaceXml );
+		//console.log( 'surfaceXml',  surfaceXml );
 
-		id2 = surfaceXml.getElementsByTagName("CADObjectId")[ 0 ];
+		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
 
-		console.log( 'id.nv', id2.innerHTML );
+		//console.log( 'cadObjId', cadObjId.innerHTML );
 
-//		surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
-		id2.innerHTML = that.value;
+		//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
+		cadObjId.innerHTML = that.value;
 
-		console.log( 'that', that.value );
+		//console.log( 'that', that.value );
 
 		surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = that.value;
 
@@ -629,9 +634,13 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		surfaceMesh.userData.data.CADObjectId = that.value;
 
+		GBV.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
+
 		HUD.setHeadsUp();
 
 	}
+
+
 /////////
 
 	HUD.displayTelltalesVertex = function() {

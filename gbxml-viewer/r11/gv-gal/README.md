@@ -61,8 +61,6 @@ Ladybug Tools/Spider gbXML Viewer sample files on GitHub</a>
 
 ## Wish list
 
-* Links to more sample files
-* Credits to sources of files
 
 ## Issues
 

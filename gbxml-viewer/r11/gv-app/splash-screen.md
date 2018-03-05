@@ -3,7 +3,7 @@
 
 # gbXML Viewer R11
 
-gbXML Viewer is a collection of free, open source modular JavaScript experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
+gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three.js experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
 
 
 ### Must watch video:
@@ -22,12 +22,33 @@ gbXML Viewer is a collection of free, open source modular JavaScript experiments
 
 <summary>Welcome 2018-03-04 ~ R11.3</summary>
 
-
-Settings
+Settings Module
 
 * Tighten up the menu
 * Add section view ~ _Work-in-progress.
 
+Application Menu Module
+
+* Update menu colors. Thanks to Michalina for the palette
+* Delete edit menu
+* Add 'manage save changes files' menu button
+* Add links and text edits throughout
+
+Save Changes Module
+
+* First commit
+* Add save changes to file button and code
+* Add open file button and code
+* Only very lightly test
+
+HUD Module
+
+* Update menu colors
+* Add code to help with saving edit changes
+
+Read Me Files
+
+* Manu updates
 
 </details><details open>
 

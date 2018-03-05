@@ -46,10 +46,6 @@ Using the keyboard and the mouse or fingers at the same time can be very excitin
 
 ## Wish list
 
-* 2017-11-13 ~ Choose whether you fly through walls or bump into them
-* 2017-11-13 ~ Better adjustment of movement speed depending on scale
-* 2017-11-13 ~ Speed up and slow down controls
-* 2017-11-13 ~ Create your own fly through paths and can be replayed
 
 
 ## Issues

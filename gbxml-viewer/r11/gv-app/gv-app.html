@@ -40,7 +40,7 @@
 				</div>
 
 				<h2>
-					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r11/gv-app/gv-app.html" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 title="click the 'Octocat' to view the source code on GitHub" ></a>
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r11/gv-app/gv-app.html" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 style=background-color:yellow; title="click the 'Octocat' to view the source code on GitHub" ></a>
 					<a href="" ><script> document.write( document.title ); </script></a>
 				</h2>
 
@@ -74,12 +74,12 @@
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-hud/gv-hud.js';" >
 				heads-up display</button>
-
+				<!--
 				<button id=butEditor class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-edt/gv-edt.js';" >
 				edit file </button>
-
+				-->
 				<button id=butCoordinates class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-crd/gv-crd.js';" >
@@ -90,10 +90,10 @@
 				script.src = '../gv-adj/gv-adj.js';" >
 				edit duplicate adjacents </button>
 
-				<button id=butSaveEdits class=app-menu onclick =
+				<button id=butSaveChanges class=app-menu onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-sav/gv-sav.js';" >
-				save edits </button>
+				script.src = '../gv-sav/gv-sav.js';" title="Save time with gbXML files that are frequently updated" >
+				manage save changes files</button>
 
 				<hr>
 

@@ -33,10 +33,6 @@ needs combining with this read me
 
 ## Wish list / ToDo
 
-* 2018-03-02 ~ Add test file
-* 2018-02-18 ~ Test file needs drag and drop
-* 2018-02-18 ~ Full name spacing
-
 
 ## Issues
 

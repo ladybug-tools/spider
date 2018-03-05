@@ -1,11 +1,11 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-app/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer Application Read Me
+# gbXML Viewer Application Menu Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px>Iframes are not displayed on github.com</iframe>
 
-## Full screen: [gbXML Viewer Application]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-app/gv-app.html )
+## Full screen: [gbXML Viewer Application Menu]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-app/gv-app.html )
 
 
 Use and share these links for gbXML Viewer:
@@ -16,14 +16,13 @@ Use and share these links for gbXML Viewer:
 
 ## Concept
 
-* All the gbXML Viewer modules all together and available in a single application*
+* Menut that brings all the gbXML Viewer modules together and available in a single application
 
 
 ## Wish list / To Do
 
 See main read me file
 
-* 2018-02-18 ~ Menus remember their position from session to session
 
 ## Issues
 
@@ -31,9 +30,18 @@ See main read me file
 
 ## Change Log
 
+
+### 2018-03-04 Theo
+
+* Update menu colors. Thanks to Michalina for the palette
+* Delete edit menu
+* Add 'manage save changes files' menu button
+* Add links and text edits throughout
+
+
 ### 2018-02-21 ~ Theo
 
-R11
+R10.11
 
 ### 2018-02-19 ~ Theo
 

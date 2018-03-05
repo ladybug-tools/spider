@@ -18,7 +18,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<summary>Template</summary>
 
-					<div id = "divTemplate" style=width:300px; ><div>
+					<div id = "divTemplate" style=width:300px; ></div>
 
 					<hr>
 
