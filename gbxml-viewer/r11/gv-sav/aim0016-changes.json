@@ -1,1 +1,1 @@
-{"deletes":["aim11616","aim13094","aim9508","aim6419","aim6460","aim6525","aim6487","aim8228"],"types":[{"id":"aim13416","type":"Roof"},{"id":"aim13406","type":"ExteriorWall"}],"oneAdjacent":[{"id":"aim13016","spaceId":"aim5320"}],"twoAdjacent":[{"id":"aim6366","spaceId":["aim0808","aim0273"]}],"cadObjs":[{"id":"aim13265","cadId":"Floor: SIM_INT_SLD_FLR FLR02 [925161]"},{"id":"aim13476","cadId":"Floor: SIM_INT_SLD_FLR FLR02 [925161]"}]}
+{"deletes":["aim11616","aim13094"],"types":[],"oneAdjacent":[],"twoAdjacent":[],"cadObjs":[]}

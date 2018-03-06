@@ -290,7 +290,8 @@ See also:
 
 ### HUD ~ Heads-up Display
 
-* 2018-03-05 ~ Goal: surfac + two adjacents all visible at once
+* 2018-03-05 ~ Check prettiness of display of a greater variety of files
+* 2018-03-05 ~ Goal: surface + two adjacent: all visible at once
 	* 2018-03-05 ~ Drop description
 	* 2018-03-05 ~ Reduce selects to 5
 * 2018-03-04 ~ Identify adjcent spaces
@@ -310,6 +311,7 @@ See also:
 
 ### SAV ~ Save Changes
 
+* 2018-03-05 ~ Add pretty print to file
 * 2018-03-05 ~ Add ability to add/merge changes
 * 2018-03-04 ~ Add user surface defined colors
 * 2018-03-04 ~ Add user defined inserts
