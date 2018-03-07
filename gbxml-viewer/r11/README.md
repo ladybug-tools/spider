@@ -55,7 +55,7 @@ The various modules are described below. They are listed in alphabetical order o
 * Creates a Sun path / Analemma for given latitude/longitude
 * folder: gv-ana
 * Name space: ANA{}
-* Title: gbXML Viewer Sun Path / Analemma
+* title: gbXML Viewer Sun Path / Analemma
 
 ### [gbXML Viewer Sun Path / Analemma Read Me]( #gbxml-viewer/r11/gv-ana/README.md )
 
@@ -65,10 +65,12 @@ The various modules are described below. They are listed in alphabetical order o
 
 ## gv-app gbXML Viewer Application
 
+_This script calls and combines all the module into a single app_
+
 * All the gbXML Viewer modules all together and available in a single application
 * folder: gv-app
 * name space: APP{}
-* itle: gbXML Viewer Application
+* title: gbXML Viewer Application
 
 ### [gbXML Viewer Application Read Me]( #gbxml-viewer/r11/gv-app/README.md )
 
@@ -76,7 +78,7 @@ The various modules are described below. They are listed in alphabetical order o
 
 
 
-##gv-cam gbXML Viewer First Person camera
+## gv-cam gbXML Viewer First Person camera
 
 * Fly through models following an avatar
 * folder: gv-cam
@@ -141,6 +143,19 @@ The various modules are described below. They are listed in alphabetical order o
 
 
 
+## gv-gbx gbXML Viewer View gbXML Utilities
+
+* Utilities to open and parse gbXML files and to translate the data to gbJSON and Three,js
+* Folder: gv-gbx
+* Name space: GBX{}
+* Title: gbXML Viewer gbXML Utilities
+
+### [gbXML Viewer gbXML Utilities Read Me]( #gbxml-viewer/r11/gv-gbx/README.md )
+
+### Full screen test script: [gbXML Viewer gbXML Utilities]( gbxml-viewer/r11/gv-gxv/gv-gbx.html )
+
+
+
 ## gv-hud gbXML Viewer Heads-Up Display (HUD)
 
 * View and modify detailed parameters of any selected surface
@@ -180,7 +195,7 @@ The various modules are described below. They are listed in alphabetical order o
 
 
 
-## gv-thr / gb-gbx gbXML Viewer Three.js
+## gv-thr gbXML Viewer Three.js
 
 * Built over the Three.js WebGL JavaScript library
 * Folder: gv-thr
@@ -193,6 +208,7 @@ The various modules are described below. They are listed in alphabetical order o
 ### Full screen test script: [gbXML Viewer Three.js]( gbxml-viewer/r11/gc-thr/gv-thr.html )
 
 Note: the GBX name space vaiables and methods ar to be separated out into their own folder and files
+
 
 
 ## gv-tmp gbXML Viewer Templates
@@ -221,7 +237,7 @@ _In previous releases but not yet updated for R11_
 ### gbXML Viewer  Sun Range
 
 
-### gbXML Viewer Editor ~ _To Be Deprecated??_
+### gbXML Viewer Editor ~ _Deprecated_
 
 
 ### gbXML Viewer Export gbXML files ~ Not yet started
@@ -254,6 +270,10 @@ Gists are a great way to share your work. You can share single files, parts of f
 ## Previous Releases
 
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product of human imagination and effort.
+
+### [gbXML Viewer R10]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-app/gv-app.html )
+
+
 
 ### [gbXML Viewer R9]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-app/gbxml-viewer9.html )
 
