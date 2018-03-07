@@ -3,9 +3,11 @@
 # gbXML Viewer Release 11 Read Me
 
 <!--
+
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
 
 _[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html ) ~ click the 'view model' button in left menu to view full screen_
+
 -->
 
 ## Full screen pre-release: [gbXML Viewer Application]( http://www.ladybug.tools/spider/gbxml-viewer/dev )

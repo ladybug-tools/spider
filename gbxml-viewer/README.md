@@ -3,7 +3,7 @@
 
 # gbXML Viewer Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-cor/gv-cor.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
