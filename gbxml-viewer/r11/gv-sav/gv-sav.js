@@ -104,19 +104,28 @@
 	SAV.openChanges = function( files ) {
 
 		var fileData, reader, data;
-		divLog.style.textAlign = 'left';
-		divLog.innerHTML = '<div id=divSavHeader ></div><div id=divSavContents ></div';
+
+		divContents.innerHTML =
+		`
+			<h3>statistics for save changes file</h3>
+			<div id=divSavHeader ></div>
+			<h3>actions taken</h3>
+			<div id=divSavContents ></div>
+			<h3>save changes file source code</h3>
+			<textArea id=txtSaveSource style="height:300px;width:100%;" ></textArea>
+		`;
+
+		divContainer.style.display = 'block';
+		window.scrollTo( 0, 0 );
 
 		reader = new FileReader();
 		reader.onload = function( event ) {
 
 			GBV.surfaceChanges = JSON.parse( reader.result );
-			//txtArea.innerHTML = JSON.stringify( json, null, ' ' );
+			txtSaveSource.value = JSON.stringify( GBV.surfaceChanges, null, ' ' );
 
-			SAV.getUpdates();
-
-			divSavHeader.innerHTML +=
-				'<br>name: ' + files.files[0].name + '<br>' +
+			divSavHeader.innerHTML =
+				'name: <i>' + files.files[0].name + '</i><br>' +
 				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
 				'type: ' + files.files[0].type + '<br>' +
 				'modified: ' + files.files[0].lastModifiedDate.toLocaleDateString() + '<br>' +
@@ -126,6 +135,8 @@
 				'one adjacent changes: ' + GBV.surfaceChanges.oneAdjacent.length + '<br>' +
 				'two adjacent changes: ' + GBV.surfaceChanges.twoAdjacent.length + '<br>' +
 			'<br>';
+
+			SAV.getUpdates();
 
 //			console.log( '', files );
 

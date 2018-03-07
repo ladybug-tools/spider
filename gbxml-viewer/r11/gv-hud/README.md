@@ -63,6 +63,15 @@ The following cases need to be handled when changing the type of the surface
 
 ## Change Log
 
+### 2018-03-06 ~ Theo
+
+* Reduce vertical size of HUD to make all three areas visible on a laptop
+	* 2018-03-05 ~ Drop description << done
+	* 2018-03-05 ~ Reduce selects to 5 << done
+* * 2018-03-05 ~ Check prettiness of display of a greater variety of files << mostly OK
+* Continue adjusting HUD horizontal CSS
+
+
 ### 2018-03-05 ~ Theo
 
 Manual testing R11.3

@@ -47,13 +47,18 @@
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
+		COR.timeStart = Date.now();
+
 	}
+
 
 
 	COR.onHashChange = () => {
 
 		const url = !location.hash ? COR.uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
+
+		COR.timeStart = Date.now();
 
 		if ( ulc.endsWith( '.md' ) ) {
 
@@ -107,7 +112,10 @@
 
 		function onRequestFileProgress( xhr ) {
 
-			divLog.innerHTML = 'bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+			//console.log( 'xhr', xhr );
+
+			GBX.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
+			divLog.innerHTML = GBX.fileAttributes.name + ' bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 
@@ -189,7 +197,7 @@
 		window.addEventListener('mousemove', COR.onMouseMoveDraggable, true );
 		event.preventDefault();
 
-	}
+	};
 
 
 
@@ -199,7 +207,7 @@
 		event.target.parentNode.style.left = ( event.clientX - COR.draggableLeft ) + 'px';
 		event.preventDefault();
 
-	}
+	};
 
 
 
@@ -221,7 +229,7 @@
 		//console.log( 'draggableTop', draggableTop, draggableStartY );
 		event.preventDefault();
 
-	}
+	};
 
 
 
@@ -244,6 +252,6 @@
 
 		event.preventDefault();
 
-	}
+	};
 
 

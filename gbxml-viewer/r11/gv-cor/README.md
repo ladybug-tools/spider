@@ -44,6 +44,12 @@ needs combining with this read me
 
 ## Change Log
 
+### 2018-03-06 ~ Theo
+
+* 2018-03-04 ~ Add file load time readout << done
+* Add file name to divLog progress report
+* 2018-03-04 ~ Sort out divLog / make pretty / more useful << working on it // see also SAV use of divContainer
+
 ### 2018-03-02 ~ Thwo
 
 R11
@@ -51,6 +57,9 @@ R11
 ### 2018-02-19 ~ Theo
 
 * Add drag and drop to test
+* 2018-03-02 ~ Add test file
+* 2018-02-18 ~ Test file needs drag and drop
+* 2018-02-18 ~ Full name spacing
 
 ### 2018-02-18 ~ Theo
 

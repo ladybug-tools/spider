@@ -32,6 +32,14 @@ Use and share these links for the full gbXML Viewer:
 
 ## Change Log
 
+### 2018-03-06 ~ Theo
+
+* GBV.surfaceChanges refreshed each time a new model is loaded
+* Error messages created if surface not found / app continues even surface not found
+* Save changes statistics/log and source code displayed in a divContainer at each load
+* After you open a save changes file you may continue adding to it and save the old and new edits to a new file
+
+
 ### 2018-03-04 ~ Theo
 
 R11.3

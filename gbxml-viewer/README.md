@@ -66,6 +66,8 @@ Objectives
 
 ## Current Issues of Note
 
+
+
 ***
 
 ## gbXM Viewer Features
@@ -229,8 +231,7 @@ See also:
 * Items are listed in alphabetical order of their three letter folder/ name-space id
 * More links and details available in the [Release Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r11/README.md )
 
-### 000
-
+### Dev
 
 * 2018-03-04 ~ Start R12
 
@@ -245,11 +246,14 @@ See also:
 
 ### APP ~ Application Menu
 
+* 2018-03-06 ~ App onload loads previously reference model
 * 2018-02-18 ~ Menus remember their position from session to session
+
 
 #### Style Sheet
 
 * 2018-03-04 ~ More CSS vars
+
 
 ### CAM ~ First Person camera
 
@@ -262,11 +266,6 @@ See also:
 
 ### COR Core
 
-* 2018-02-25 ~ View gbXML source code
-* 2018-03-02 ~ Add test file
-* 2018-02-18 ~ Test file needs drag and drop
-* 2018-02-18 ~ Full name spacing
-
 
 
 ### CRD ~ Duplicate Coordinates
@@ -278,9 +277,9 @@ See also:
 ### GAL ~ Gallery
 
 * 2018-03-04 ~ Test new smaller files to see if they load faster
-* 2018-03-04 ~ Random image on start-up?
+* 2018-03-04 ~ Random model on start-up?
 * Links to more sample files
-	* Where to find more
+	* Where to find more?
 * Credits to sources of files
 
 
@@ -290,18 +289,18 @@ See also:
 
 ### HUD ~ Heads-up Display
 
-* 2018-03-05 ~ Check prettiness of display of a greater variety of files
-* 2018-03-05 ~ Goal: surface + two adjacent: all visible at once
-	* 2018-03-05 ~ Drop description
-	* 2018-03-05 ~ Reduce selects to 5
-* 2018-03-04 ~ Identify adjcent spaces
+* 2018-03-06 ~ Add what you see upon open depends on current window inner height
+	* 2018-03-05 ~ Goal: surface + two adjacent: all visible at once
+* 2018-03-06 ~ Add 'match parameters of previously selected surface' buttons
+
+* 2018-03-04 ~ Identify adjacent spaces
 * 2018-01-02 ~ Multiple types of heads-up modules with different agendas
 	* Show space names at cursor locations
 * 2018-01-02 ~ Add in-world placard at cursor location
 * 2018-03-04 ~ Use main style sheet?
 
-### REP ~ Reports
 
+### REP ~ Reports
 
 * 2018-03-04 ~ Export spaces and storeys as gbJSOM. .RAD files etc
 * 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
@@ -309,9 +308,10 @@ See also:
 * 2018-02-26 ~ Surfaces, Spaces: checkbox for auto-zooming
 * 2018-02-26 ~ Better telltale size for small surfaces
 
+
 ### SAV ~ Save Changes
 
-* 2018-03-05 ~ Add pretty print to file
+* 2018-03-05 ~ Add pretty print to output file
 * 2018-03-05 ~ Add ability to add/merge changes
 * 2018-03-04 ~ Add user surface defined colors
 * 2018-03-04 ~ Add user defined inserts
@@ -328,19 +328,19 @@ See also:
 
 ### THR / GBX ~ Three.js
 
-* 2018-03-04 ~ Sort out divLog / make pretty / more useful
-* 2018-03-04 ~ Add file load time readout
-* 2018-03-04 ~ Add file name readout
-* 2018-03-04 ~ Split into separate modules
+* 2018-03-06 ~ Three.js R90
+
 
 
 ### TMP ~ Templates
 
 * 2018-03-04 ~ Use main style sheet?
 
+
 ***
 
 ## Other Bits and Pieces
+
 
 ### Main Read Me (this file )
 
@@ -349,16 +349,18 @@ See also:
 
 ### Sun Range
 
-* Add to R11
+* Add to R12?
 
 
 ### Screen Capture
 
+* Add to R12?
 * 2018-01-01 ~ Much better control over the camera
 
 
 ### Export gbXML files
 
+* 2018-02-25 ~ View gbXML source code
 * 2017-12-15 ~ Theo: export selected spaces or zones to gbxml?
 * 2017-12-10 ~ Michal: Export gbJSON
 * 2017-12-02 ~ Michal: Add ability to edit and save gbXML files
@@ -367,398 +369,13 @@ Will most likely build upon
 
 * [create exportable buildings]( https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings )
 
+
 ## Things you could do
 
 * Help make an NPM for gbXML Viewer
 * Help translate
 * Help design and build test scripts
 
-<!--
-***
-
-## Change Log
-
-In process of being collected in Splash Screen file
-
-### 2018-02-28 ~ Theo
-
-R10.10
-SET
-* Passed through JSLint ~ many slight fixes
-* Toggle Ortho camera now working
-* Update name space variables
-APP
-* Update name space variables
-HUD
-* Update name space variables
-* Fix no-scroll select surface
-* Rejig update buttons
-* Improve menu width handling
-* When change type, adjacent spaces update more correctly
-
-
-### 2018-02-26 ~ Theo
-
-R10.8
-
-App
-* Menus reset when new model loaded
-
-
-
-### 2018-02-25 ~ Theo
-
-R10.7
-* All modules updated. Name space fixes etc
-* HUD
-	* Many fixes
-	* Streamline/simplify the UI
-* Edit duplicate adjacents
-	* Simplified
-	* Works more closely with HUD
-
-Done
-* 2018-02-18 ~ Drag and drop broken
-* 2018-02-11 ~ Theo: update links to new folder
-* 2018-02-11 ~ Theo: Fix explode view so it works
-
-### 2018-02-19 ~ Theo
-
-R10.3
-* Many fixes
-* Menus move more smoothly
-* Editing, deleting and saving all working - but testing has just started
-* HUD updates with Editor and reports
-
-
-### 2018-02-18 ~ Theo
-
-R10.2
-* Three.js core:
-	* If location.hash calls for non-gbXML file then load default file
-	* Feeble start to name spacing
-	* Update test script titles
-	* Update readme links
-* Gallery
-	* Fix HR issues
-	* Test works OK
-	* Fix readme links
-* Editor
-	* Added to GV App
-	* Standalone test file also works
-	* Not fully tested/completed
-* App
-	* divContainer
-		* resizes more nicely
-		* styles enhanced
-	* divMenu
-		* resizes and moves - a bit flakey though
-
-### 2018-02-17 ~ Theo
-
-* Add HUD, first person and Save to R10
-* Update and enhance template style sheet and files
-
-
-### 2018-02-16 ~ Theo
-
-R10
-* First commit
-
-### 2018-02-13 ~ Theo
-
-* Settings:
-	* Explode view beginning to operate as desired.
-	* Still much to do to improve the user experience
-	* Reload web page required to fully reset view.
-
-
-### 2018-02-11 ~ Theo
-
-* App & HUD: More efforts on touch-enabled interaction and Apple support
-
-Done at one time or another
-* 2017-12-07 ~ Theo: Add better size adjustment to text box
-* 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
-* 2017-12-07 ~ Theo: Refresh reports each time a new model is loaded
-* 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
-* 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
-
-
-### 2018-02-10 ~ Theo
-
-* HUD:
-	* Adjust position of placards
-	* Add polyloop telltales
-
-
-### 2018-02-09 ~ Theo
-
-* R9.9
-* App: Add sucky iOS iframe auto-resize workaround
-* HUD:
-	* Enable draggable and resizable div
-		* Not yet working on mobile devices
-	* Fix CASObjectId issue
-	* Add volume output
-	* Add more console.log outputs
-	* Add telltales with vertex numbering
-
-
-### 2018-02-08 ~ Theo
-
-* R9.8a
-* HUD: Add many new buttons to display
-	* ID
-	* Type
-	* CAD Object ID
-	* Spaces
-	* Storeys
-	* Visibility
-* Core: Add checks for duplicate extra vertices in gbXML file vertices data
-
-
-### 2018-02-07 ~ Theo
-
-* R9.7
-* HUD
-	* Add toggle surface type button
-	* Add display CAD Object button
-	* Add toggle visibility button
-	* Add all visible button
-	* Duplicate coordinates now highlighted in yellow
-
-
-### 2018-02-02 ~ Theo
-
-* R9.6a
-* Core: add  gbxml var
-* Cure: clear divLog with reset view
-* Reports: fix issues with storey and space readout in core
-* Help text added to Reports menu.
-* Save File: first commit
-* App: add save file button
-
-### 2018-01-27 ~ Theo
-
-* R9.5
-* Core: drop createReport
-* Reports Fix no data for single space issue
-* Reports: Fix incorrect space numbering
-* App: Add onloadThreejs to clean up reports
-
-### 2018-01-17 ~ Theo
-
-* App R9.3
-* Add Octocat link to App menu
-* Change default read me from release read me to main read me
-* Read me iframe link from App to Core
-* Add link to release red me on menu
-* Add Sun Range links to read me
-
-
-### 2018-01-02 ~ Theo
-
-* Fixing and updating all the R9 module read me files
-
-### 2018-01-01 ~ Theo
-
-* R9.0
-* Redesigned user experience
-	* All modules may loaded and used simultaneously
-	* Switch between text and 3D without losing your place
-* Has all the modules of R8
-* Add screen capture modules
-
-Done
-* 2017-12-10 ~ Michal: can we switch off shadows?
-* 2017-12-06 ~ Add slider to move ground up or down
-
-### 2017-12-17 ~ Theo
-
-* Settings
-	* Toggle ground and toggle Grid
-		* Resets with each new model
-		* Auto-positioned at bounding box minimum
-		* Buttons added to increase or decrease of height level
-	* Toggle surface normals
-		* Resets with each new model
-	* Add toggle shade and shadows
-	* Add explode view horizontal and vertical
-		* First pass / still many issues / but will eventually be lots of fun
-
-
-### 2017-12-16 ~ Theo
-
-* Add 'Robust' Core version
-
-
-### 2017-12-15 ~ Theo
-
-* Sun Path / Analemma 3D
-	* Mostly functioning as intended
-	* Minor issues still to be fixed
-
-
-### 2017-12-13 ~ Theo
-
-* Read Me files
-	* Add many links and update text throughout
-* Sample files
-	* Files renamed in a consistent manner
-	* Read me added
-* View Updates
-	* View update issues a blog posts
-* Reports
-	* Duplicate CAD IDs sorted and display next to each other
-	* Every set of duplicates CAD IDs has its own toggle view button
-	* Same toggle view button added to other reports
-
-
-### 2017-12-12 ~ Theo
-
-* Reports
-	* Updated to button tag
-	* Storeys: display number and IDs of spaces
-	* Surfaces
-		* Better handling of on/off toggles
-		* Add 'all visible' button
-	* Duplicate Coordinates
-		* Add visibility toggle for all duplicates
-		* Add Space button to toggle view of space
-	* Duplicate Adjacencies
-		* Add visibility toggle for all duplicates
-		* Add length and width of element
-	* Tiny Surfaces
-		* Add length and width of element
-	* Invalid Adjacencies << new item
-		* Checks for multiple adjacencies in objects that should only have a single adjacency
-* Settings
-	* Add toggle buttons for surfaces/edges/all
-	* Update colors
-	* Colors of duplicates etc unchanged when toggling other color settings
-* Many other minor fixes and code clean-up
-
-### 2017-12-10 ~ Theo
-
-R8.10
-* Add 'first person' camera
-* Add beginning of drawing an analemma
-* Exposure type material colors updated
-* Update draw normals only if element is visible
-	* Use Reports > Surfaces to toggle element visibility then use this command
-* Update to 'toggle camera ortho'
-
-
-Done
-* 2017-12-07 ~ Michal: Toggle for Ortho camera
-* 2017-12-10 ~ Michal: Update color choices
-* 2017-12-10 ~ Michal: can we show normals for selected items only?
-
-
-### 2017-12-08 ~ Theo
-
-R8.9
-* Core
-	* Add 'reset view' calls createReport()
-* HUD
-	* Add toggle button
-	* Toggle off when new file loaded
-
-R8.8
-* Core
-	* Add 'reset view' button resets background, camera, material colors
-* Reports
-	* Add toggle visibility for each surface type
-	* Add display zone count and names per storey
-
-Note
-'reset view' button not currently working in reports, so has been disabled for the moment
-
-Done
-* 2017-12-07 ~ Michal: toggle for HUD
-* 2017-12-08 ~ Michal: reset view: includes background gradient , materials colors or camera ortho
-* 2017-12-08 ~ Michal: Storey ability to hide roofs or floor to better see layout
-* 2017-12-08 ~ Michal: can we show number of zones per storey?
-
-
-### 2017-12-07 ~ Theo
-
-R8.7
-* Templates: code clean-up
-	* Add drag and drop capability
-	* Better selection of sample files
-* Settings:
-	* Add set color by exposure type
-	* Add drag and drop capability
-	* Better selection of sample files
-* Reports
-	* Add drag and drop capability
-	* Better selection of sample files
-	* Add view storey
-	* Add is a space has an 'InteriorFloor' or 'SlabOnGrade' or 'RaisedFloor' or 'UndergroundSlab' then zoom into that space
-* App2
-	* Add drag and drop capability
-
-Done
-
-* 2017-12-01 ~ Load files via drag and drop
-* 2017-12-02 ~ Add test file??
-* 2017-12-01 ~ Add choice to display in right-side menu
-
-### 2017-12-06 ~ Theo
-
-App2 R8.5
-12:44
-* Fixed: reset view not resetting surfaces visible
-* Settings: add toggle grid
-* Settings: add toggle ground
-* App2: add footer
-
-* 2017-12-01 ~ Add a 'ground' that can receive shadow
-
-8.6
-21:32
-* Fix some of the reset view issues
-* Highlight all duplicate adjacencies in red
-* Add better spacing between duplicate adjacencies log
-* Tiny surface telltale now has opacity - so you can see very tine things inside the telltale
-* location hash and splash screen working together better
-* Add button to turn off heads-up - not yet a nice toggle
-
-### 2017-12-05 ~ Theo
-
-R8.5 ~ new user interface
-* Everything in left menu
-
-
-### 2017-12-04 ~ Theo
-
-Little fixes and new features everywhere
-
-* Add buttons to heads-up display
-* Add choices to Settings
-* Add surface edges and rest buttons to core
-* 2017-12-02 ~ Michal: Zoom and center duplicate surfaces, duplicate coordinates, tiny surfaces
-* 2017-12-01 ~ Add better display = none on new file loaded
-* 2017-12-01 ~ Add hamburger/slider menu
-* 2017-12-01 ~ Michal: Locate camera/controls target inside a given space / zoom into the space
-
-
-### 2017-12-03 ~ Theo
-
-* 2017-12-02 ~ Michal: Report and display surfaces with duplicate CAD IDs
-* 2017-12-02 ~ Michal: Highlight and display tiny areas << Added Report > Tiny Surfaces
-
-### 2017-12-02 ~ Theo
-
-* 2017-12-01 ~ Michal: load local files via location.hash < see read me for Core module
-
-### 2017-11-30
-
-* First Commit
-
--->
 
 ***
 

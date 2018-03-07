@@ -715,7 +715,7 @@
 				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
 
 				if ( adjacency ) {
-
+					// fix to handle surface.AdjacentSpaceId[ 0 ]
 					spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
 
 				}
@@ -730,8 +730,8 @@
 						: ''
 					) +
 					' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
-					( spaceId ? 'space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' +
-				b : '' ) +
+					//					( spaceId ? 'space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' +
+					//				b : '' ) +
 
 				'</div>';
 

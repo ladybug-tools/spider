@@ -46,6 +46,9 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 ## Issues
 
+* https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard.xml
+	* uses one id for spaces so many duplicate adjacent issues
+
 
 
 ## Change Log

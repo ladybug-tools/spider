@@ -6,7 +6,7 @@
 <meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-03-02" >
-<title>gv-tmp - gbXML Viewer Template</title>
+<title>gv-tmp - gbXML Viewer gbXML Utilities</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -18,14 +18,14 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'gv-tmp gbxml viewer template' button to load test menu</p>
+	<p>If it does not open automatically, click 'gv-tmp gbxml viewer gbXML Utilities' button to load test menu</p>
 
 	<p>
-		<button id=butTemplate onclick =
+		<button id=butGbx onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-tmp/gv-tmp.js';
+			script.src = '../gv-gbx/gv-gbx.js';
 			divMenu.style.display='block';" >
-			gv-tmp gbxml viewer template </button>
+			gv-tmp gbxml viewer gbXML Utilities </button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
@@ -89,7 +89,7 @@
 
 		console.log( 'scene', THR.scene );
 
-		butTemplate.click();
+		butGbx.click();
 
 	}
 

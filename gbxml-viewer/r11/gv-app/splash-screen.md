@@ -20,6 +20,29 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
+<summary>Welcome 2018-03-06  ~ R10.5 / R10.6</summary>
+
+HUD
+
+* Reduce vertical size of HUD to make all three areas visible on a laptop
+	* 2018-03-05 ~ Drop description << done
+	* 2018-03-05 ~ Reduce selects to 5 << done
+* * 2018-03-05 ~ Check prettiness of display of a greater variety of files << mostly OK
+* Continue adjusting HUD horizontal CSS
+
+GBX ~ nothing vieawble in UI here
+* First commit
+* 2018-03-04 ~ Split into separate modules << here we are
+
+SAV ~ Save Changes
+* GBV.surfaceChanges refreshed each time a new model is loaded
+* Error messages created if surface not found / app continues even surface not found
+* Save changes statistics/log and source code displayed in a divContainer at each load
+* After you open a save changes file you may continue adding to it and save the old and new edits to a new file
+
+
+</details><details open>
+
 <summary>Welcome 2018-03-04 ~ R11.3 / R11.4 </summary>
 
 R11.4
@@ -176,6 +199,9 @@ HUD
 
 <summary>Welcome 2018-02-25 ~ R10.7</summary>
 
+R10.7
+* All modules updated. Name space fixes etc
+
 Heads-up Display
 * Many fixes
 * Streamline/simplify the UI
@@ -183,6 +209,12 @@ Heads-up Display
 Edit Duplicate Adjacents
 * Simplified
 * Works more closely with HUD
+
+Done
+* 2018-02-18 ~ Drag and drop broken
+* 2018-02-11 ~ Theo: update links to new folder
+* 2018-02-11 ~ Theo: Fix explode view so it works
+
 
 </details><details>
 
@@ -194,6 +226,7 @@ Edit Duplicate Adjacents
 	* Finds all instances of surfaces with two identical adjacent spaces
 	* Tools to help with understanding circumstances
 	* At a very early stage. Cannot edit or save yet
+
 </details><details>
 
 <summary>Welcome 2018-02-23 ~ R10.5</summary>
@@ -218,81 +251,182 @@ Edit Duplicate Adjacents
 
 <summary>Welcome 2018-02-19 ~ R10.3</summary>
 
-<p>
 * Many fixes
 * Menus move more smoothly
 * Editing, deleting and saving all working - but testing has just started
 * HUD updates with Editor and reports
-</p>
+
 
 </details><details>
 
-<summary>Welcome 2018-02-18</summary>
+<summary>Welcome 2018-02-18 ~ R10.2</summary>
 
-<p>
+
 Add Edit module. All menus movable and resizable. Many fixes throughout. In the Settings menu, the 'Explode view' feature is still not perfect but has been much improved.
-</p>
+
+Three.js core:
+	* If location.hash calls for non-gbXML file then load default file
+	* Feeble start to name spacing
+	* Update test script titles
+	* Update readme links
+
+Gallery
+	* Fix HR issues
+	* Test works OK
+	* Fix readme links
+
+Editor
+	* Added to GV App
+	* Standalone test file also works
+	* Not fully tested/completed
+
+App
+	* divContainer
+		* resizes more nicely
+		* styles enhanced
+	* divMenu
+		* resizes and moves - a bit flakey though
+
 
 </details><details>
 
 <summary>Welcome 2018-02-17</summary>
 
-<p>
 Add three more modules: heads-up display, first person camera and save.
-</p>
+
+* Add HUD, first person and Save to R10
+* Update and enhance template style sheet and files
+
+
 
 </details><details>
 
 <summary>Welcome 2018-02-16</summary>
 
-<p>
+
 R10 first commit. A significant revision. The code is smaller, simpler and faster. About half the R9 code is in 10. The remaining modules should be available soon.
 
 The interface give more emphasis to the model - and less to the menus. And, of course, new and more colors.
-</p>
+
+### 2018-02-16 ~ Theo
+
+R10
+* First commit
 
 </details><details>
 
 <summary>Welcome 2018-02-13</summary>
 
-<p>
+
 Settings menu: Explode view beginning to operate as desired. Still much to do to improve the user experience. Reload web page required to fully reset view.
-</p>
+
+### 2018-02-13 ~ Theo
+
+* Settings:
+	* Explode view beginning to operate as desired.
+	* Still much to do to improve the user experience
+	* Reload web page required to fully reset view.
+
+
+### 2018-02-11 ~ Theo
+
+* App & HUD: More efforts on touch-enabled interaction and Apple support
+
+Done at one time or another
+* 2017-12-07 ~ Theo: Add better size adjustment to text box
+* 2017-12-02 ~ Michal: Add filters to ignore shade surfaces. Or perhaps only display for certain surface types
+* 2017-12-07 ~ Theo: Refresh reports each time a new model is loaded
+* 2017-12-02 ~ Michal: Do a better job of displaying/reporting duplicates
+* 2017-12-02 ~ Michal: Highlight and display surfaces that are inside larger surfaces
+
+
+### 2018-02-10 ~ Theo
+
+* HUD:
+	* Adjust position of placards
+	* Add polyloop telltales
+
+
+### 2018-02-09 ~ Theo
+
+* R9.9
+* App: Add sucky iOS iframe auto-resize workaround
+* HUD:
+	* Enable draggable and resizable div
+		* Not yet working on mobile devices
+	* Fix CASObjectId issue
+	* Add volume output
+	* Add more console.log outputs
+	* Add telltales with vertex numbering
 
 </details><details>
 
 <summary>Welcome 2018-02-08</summary>
 
-<p>
+### 2018-02-08 ~ Theo
 Core now corrects for duplicate vertices and other errors in gbXML files. HUD adds many more buttons
-</p>
+
+* R9.8a
+* HUD: Add many new buttons to display
+	* ID
+	* Type
+	* CAD Object ID
+	* Spaces
+	* Storeys
+	* Visibility
+* Core: Add checks for duplicate extra vertices in gbXML file vertices data
+
+
+### 2018-02-07 ~ Theo
+
+* R9.7
+* HUD
+	* Add toggle surface type button
+	* Add display CAD Object button
+	* Add toggle visibility button
+	* Add all visible button
+	* Duplicate coordinates now highlighted in yellow
+
 
 </details><details>
 
 <summary>Welcome 2018-02-03</summary>
 
-<p>
+
 Starting to add saving and editing. Help text added to Reports menu. Storey and Space readout in Core work better.
-</p>
+
+### 2018-02-02 ~ Theo
+
+* R9.6a
+* Core: add  gbxml var
+* Cure: clear divLog with reset view
+* Reports: fix issues with storey and space readout in core
+* Help text added to Reports menu.
+* Save File: first commit
+* App: add save file button
+
 
 </details><details>
 
-<summary>Welcome 2018-01-01</summary>
+<summary>Welcome 2018-01</summary>
 
-<p>
-Happy new year!
-</p>
 
-<p>Please welcome gbXML Viewer R9 with its redesigned user experience.</p>
+### 2018-01-27 ~ Theo
 
-<p>The big new feature is the screen capture utility. Now you can create animated GIFs from your files.</p>
+* R9.5
+* Core: drop createReport
+* Reports Fix no data for single space issue
+* Reports: Fix incorrect space numbering
+* App: Add onloadThreejs to clean up reports
 
-<p>2018-01-02 ~ minor fixes throughout</p>
+### 2018-01-17 ~ Theo
 
-</details><details>
-
-<summary>Welcome 2017</summary>
-
+* App R9.3
+* Add Octocat link to App menu
+* Change default read me from release read me to main read me
+* Read me iframe link from App to Core
+* Add link to release red me on menu
+* Add Sun Range links to read me
 
 
 ## 2018-01-02 ~ Theo
@@ -300,6 +434,14 @@ Happy new year!
 * Fixing and updating all the R9 module read me files
 
 ### 2018-01-01 ~ Theo
+
+Happy new year!
+
+Please welcome gbXML Viewer R9 with its redesigned user experience.
+
+The big new feature is the screen capture utility. Now you can create animated GIFs from your files.
+
+2018-01-02 ~ minor fixes throughout
 
 * R9.0
 * Redesigned user experience
@@ -312,6 +454,9 @@ Done
 * 2017-12-10 ~ Michal: can we switch off shadows?
 * 2017-12-06 ~ Add slider to move ground up or down
 
+</details><details>
+
+<summary>Welcome 2017</summary>
 ### 2017-12-17 ~ Theo
 
 * Settings
