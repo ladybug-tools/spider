@@ -6,7 +6,7 @@
 <meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-03-04" >
-<title>gv-sav - gbXML Viewer Save Edits</title>
+<title>gv-sav - gbXML Viewer Save Changes</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
@@ -18,14 +18,14 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'gv-tmp gbxml viewer template' button to load test menu</p>
+	<p>If it does not open automatically, click 'gv-sav gbXML Viewer Save Changes' button to load test menu</p>
 
 	<p>
-		<button id=butSaveEdits onclick =
+		<button id=butSaveChanges onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = '../gv-sav/gv-sav.js';
 			divMenu.style.display='block';" >
-			gv-tmp gbxml viewer template </button>
+			gv-sav gbXML Viewer Save Changes </button>
 	</p>
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
@@ -89,7 +89,7 @@
 
 		console.log( 'scene', THR.scene );
 
-		butSaveEdits.click();
+		butSaveChanges.click();
 
 	}
 

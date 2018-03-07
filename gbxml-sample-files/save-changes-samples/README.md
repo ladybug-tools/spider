@@ -31,8 +31,8 @@ We can, however, already use the Save Changes files to track and replicate the e
 
 Two files in the current list create errors that you can replicate and view:
 
-* <aim0013-change-type-shade-to-exteriorwall.json>
-* <aim0016-changes-change-type-shade-to-exteriorwall.json>
+* aim0013-change-type-shade-to-exteriorwall.json
+* aim0016-changes-change-type-shade-to-exteriorwall.json
 
 Future release of the gbXML Viewer will be updated so as to fix theses errors.
 
@@ -54,8 +54,6 @@ GbXML Viewer has to methods for saving edits.
 The current priority is to fix Save Changes over Save Edits. A good reason being that fixes to Save Changes is likely to fix issues with Save Edits but not _vice versa_. Also Save Changes can be used to build test cases for Save Edits errors but not _vice versa_.
 
 
-
-
 ## Wish list
 
 
@@ -66,7 +64,7 @@ The current priority is to fix Save Changes over Save Edits. A good reason being
 
 ## Links of Interest
 
-
+* [gbXML Viewer Save Changes Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-sav/README.md )
 
 ## Change Log
 
