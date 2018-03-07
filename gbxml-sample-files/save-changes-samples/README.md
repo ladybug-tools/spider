@@ -1,4 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-tmp/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-sample-files/save-changes-samples/README.md "View file as a web page." ) </span>
 
 # gbXML Viewer Save Changes Samples Read Me
 
@@ -19,7 +19,7 @@ Use and share these links for the full gbXML Viewer:
 
 ### Save Changes
 
-'Save Changes' is a module in gbX<L viewer that allows you to save the edits you make to a gbXML to a file. Later you can use that file to carry out the identical edits on a later release of the gbXML file.
+'Save Changes' is a module in gbXML viewer that allows you to save the edits you make to a gbXML to a file. Later you can use that file to carry out the identical edits on a later release of the gbXML file.
 
 This folder contains a number of save changes sample files.
 
@@ -31,8 +31,8 @@ We can, however, already use the Save Changes files to track and replicate the e
 
 Two files in the current list create errors that you can replicate and view:
 
-* aim0013-change-type-shade-to-exteriorwall.json
-* aim0016-changes-change-type-shade-to-exteriorwall.json
+* <aim0013-change-type-shade-to-exteriorwall.json>
+* <aim0016-changes-change-type-shade-to-exteriorwall.json>
 
 Future release of the gbXML Viewer will be updated so as to fix theses errors.
 
