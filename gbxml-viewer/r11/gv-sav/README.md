@@ -21,7 +21,6 @@ Use and share these links for the full gbXML Viewer:
 
 ## Wish list
 
-*
 
 
 ## Issues
@@ -30,7 +29,7 @@ Use and share these links for the full gbXML Viewer:
 
 ## Links of Interest
 
-
+* [gbXML Viewer Save Changes Samples Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-sample-files/save-changes-samples/README.md )]
 
 ## Change Log
 
