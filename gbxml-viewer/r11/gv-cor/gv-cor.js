@@ -3,7 +3,7 @@
 
 	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
-	COR.uriDefaultFile = 'splash-screen.md'; // maybe shoulf be in APP?
+	COR.uriDefaultFile = 'splash-screen.md'; // maybe should be in APP?
 
 	COR.gbxmlSampleFiles =
 	`

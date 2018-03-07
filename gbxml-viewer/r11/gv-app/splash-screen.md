@@ -40,6 +40,13 @@ SAV ~ Save Changes
 * Save changes statistics/log and source code displayed in a divContainer at each load
 * After you open a save changes file you may continue adding to it and save the old and new edits to a new file
 
+APP ~ main application menu
+
+* Add more tooltips
+
+Core
+
+* Add file name and time to load
 
 </details><details open>
 
