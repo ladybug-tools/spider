@@ -51,7 +51,7 @@ GbXML Viewer has to methods for saving edits.
 
 ### 2018-03-06 ~ Current Priority
 
-The current priority is to fix Save Changes over Save Edits. A good reason being that fixes to Save Changes is likely to fix issues with Save Edits but not _vice versa_. Also Save Changes can be used to build test cases for Save Changes errors but not _vice versa_.
+The current priority is to fix Save Changes over Save Edits. A good reason being that fixes to Save Changes is likely to fix issues with Save Edits but not _vice versa_. Also Save Changes can be used to build test cases for Save Edits errors but not _vice versa_.
 
 
 
