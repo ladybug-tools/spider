@@ -237,6 +237,8 @@ See also:
 
 ### ADJ ~ Duplicate Adjacents
 
+* 2018-03-08 ~ Michal: sort the adjacent spaces / by size
+* 2018-03-08 ~ Combine with duplicate coordinates and put into Issues button area
 
 ### ANA ~ Sun Path / Analemma
 
@@ -270,13 +272,13 @@ See also:
 
 ### CRD ~ Duplicate Coordinates
 
+* 2018-03-08 ~ Combine with duplicate adjacents / R12
 * 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
 	* Upgrade so identifies any surface within another surface
 
 
 ### GAL ~ Gallery
 
-* 2018-03-04 ~ Test new smaller files to see if they load faster
 * 2018-03-04 ~ Random model on start-up?
 * Links to more sample files
 	* Where to find more?
@@ -292,7 +294,6 @@ See also:
 * 2018-03-06 ~ Add what you see upon open depends on current window inner height
 	* 2018-03-05 ~ Goal: surface + two adjacent: all visible at once
 * 2018-03-06 ~ Add 'match parameters of previously selected surface' buttons
-
 * 2018-03-04 ~ Identify adjacent spaces
 * 2018-01-02 ~ Multiple types of heads-up modules with different agendas
 	* Show space names at cursor locations

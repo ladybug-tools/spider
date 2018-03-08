@@ -94,6 +94,8 @@
 
 		}
 
+
+
 		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( ADJsurfaceAdjacentsDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }

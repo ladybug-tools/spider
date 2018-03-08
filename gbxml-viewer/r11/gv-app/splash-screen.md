@@ -20,7 +20,9 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
-<summary>Welcome 2018-03-07 ~ R10.7 / 8 / 9</summary>
+<summary>Welcome 2018-03-07 ~ R10.7 / 8 / 9 / 10</summary>
+
+11.10 ~ fixes issues with 'save edis' / fixes resetting the lights issue
 
 11.9 SAV: fixes unable to select new space if space = none
 
@@ -42,7 +44,7 @@ Better to use the following steps:
 4. Open and apply the save changes file you just created.
 5. Then use Save Edits to save the final updated version of the model
 
-This workflow will be improved in future realeases
+This workflow will be improved in future releases
 
 </details><details open>
 
@@ -73,6 +75,10 @@ APP ~ main application menu
 Core
 
 * Add file name and time to load
+
+Done
+
+* 2018-03-04 ~ Test new smaller files to see if they load faster
 
 </details><details open>
 

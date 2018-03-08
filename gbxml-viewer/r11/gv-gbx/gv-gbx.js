@@ -462,9 +462,10 @@
 	}
 
 
-
+	// GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes);
 	GBX.zoomObjectBoundingSphere = function( obj ) {
 
+		/*
 		const renderer = THR.renderer;
 		const scene = THR.scene;
 		const camera = THR.camera;
@@ -472,6 +473,7 @@
 		const lightDirectional = THR.lightDirectional;
 		const lightPoint = THR.lightPoint;
 		const axesHelper = THR.axesHelper;
+		*/
 
 		if ( obj.geometry ) {
 			// might not be necessary
@@ -492,20 +494,20 @@
 		obj.userData.center = center;
 		obj.userData.radius = radius;
 
-		controls.target.copy( center );
-		controls.maxDistance = 5 * radius;
+		THR.controls.target.copy( center );
+		THR.controls.maxDistance = 5 * radius;
 
-		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
 
-		axesHelper.scale.set( radius, radius, radius );
-		axesHelper.position.copy( center );
+		THR.axesHelper.scale.set( radius, radius, radius );
+		THR.axesHelper.position.copy( center );
 
-		camera.far = 10 * radius; //2 * camera.position.length();
-		camera.updateProjectionMatrix();
+		THR.camera.far = 10 * radius; //2 * camera.position.length();
+		THR.camera.updateProjectionMatrix();
 
-		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
-		lightDirectional.target = axesHelper;
+		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		THR.lightDirectional.target = THR.axesHelper;
 
 		//		scene.remove( cameraHelper );
 		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
@@ -516,12 +518,13 @@
 
 
 	GBX.setAllVisible = function() {
-
+		/*
 		const renderer = THR.renderer;
 		const scene = THR.scene;
 		let camera = THR.camera;
 		let controls = THR.controls;
 		const lightPoint = THR.lightPoint;
+		*/
 
 		GBX.surfaceMeshes.visible = true;
 
@@ -549,13 +552,13 @@
 
 		};
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
-		camera.up.set( 0, 0, 1 );
+		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
+		THR.camera.up.set( 0, 0, 1 );
 
-		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.autoRotate = true;
+		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
+		THR.controls.autoRotate = true;
 
-		camera.add( lightPoint );
-		scene.add( camera );
+		THR.camera.add( THR.lightPoint );
+		THR.scene.add( THR.camera );
 
 	}

@@ -72869,7 +72869,7 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <CADObjectId>Basic Roof: SIM_EXT_SLD_Roof DA01 [929326]</CADObjectId>
+      <CADObjectId>Floor: SIM_INT_SLD_FLR FLR02 [925161]</CADObjectId>
       <Name>T-RF_100-E-R-485</Name>
     </Surface>
     <Surface surfaceType="InteriorWall" id="aim13027">
@@ -73150,7 +73150,7 @@
       </PlanarGeometry>
       <CADObjectId>Basic Roof: SIM_EXT_SLD_Roof DA01 [929349]</CADObjectId>
       <Name>T-RF_101-E-R-491</Name>
-    </Surface>
+    <AdjacentSpaceId xmlns="" spaceIdRef="aim0273"/></Surface>
     <Surface surfaceType="InteriorWall" id="aim13105">
       <AdjacentSpaceId spaceIdRef="aim5231"/>
       <AdjacentSpaceId spaceIdRef="aim5278"/>
@@ -74624,7 +74624,7 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <CADObjectId>Basic Wall: SIM_MASS_SLD [959715]</CADObjectId>
+      <CADObjectId>Basic Roof: SIM_EXT_SLD_Roof DA01 [926733]</CADObjectId>
       <Name>X-S-524</Name>
     </Surface>
     <Surface surfaceType="Shade" exposedToSun="true" id="aim13486">
