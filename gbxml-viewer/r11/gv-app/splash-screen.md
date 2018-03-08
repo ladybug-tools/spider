@@ -28,8 +28,17 @@ SAV ~ Save Changes and Save Edits
 * Able to save both Save Changes and Save Edits for all seven use cases
 * Only lightly tested
 
-Still with errors: Making edits with HUD and then directly using Save Edits. Better to use Save Changes use Save Edits
+Still with errors: Making edits with HUD and then directly using Save Edits.
 
+Better to use the following steps:
+
+1. Make some edits with HUD
+2. Use Save Changes to save the edits to a file
+3. Open fresh version of the model.
+4. Open and apply the save changes file you just created.
+5. Then use Save Edits to save the final updated version of the model
+
+This workflow will be improved in future realeases
 
 </details><details open>
 
