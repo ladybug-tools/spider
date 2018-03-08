@@ -20,6 +20,15 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
+<summary>Welcome 2018-03-07 ~ R10.7</summary>
+
+Save Changes and Save Edits
+* Add create adjacent attribute data when saving a changed surface type
+* Able to save both Save Changes and Save Edits for all seven use cases
+
+
+</details><details open>
+
 <summary>Welcome 2018-03-06  ~ R10.5 / R10.6</summary>
 
 HUD

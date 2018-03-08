@@ -33,6 +33,11 @@ Use and share these links for the full gbXML Viewer:
 
 ## Change Log
 
+### 2018-03-07 ~ Theo
+
+* Add create adjacent attribute data when saving a changed surface type
+* Able to save both Save Changes and Save Edits for all seven use cases
+
 ### 2018-03-06 ~ Theo
 
 * GBV.surfaceChanges refreshed each time a new model is loaded

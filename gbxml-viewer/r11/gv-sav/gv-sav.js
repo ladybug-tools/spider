@@ -175,7 +175,7 @@
 
 		for ( let surface of GBV.surfaceChanges.types ) {
 
-			const surfaceXml = GBX.gbxml.getElementsByTagName( "Surface"  )[ surface.id ];
+			surfaceXml = GBX.gbxml.getElementsByTagName( "Surface"  )[ surface.id ];
 
 			if ( !surfaceXml ) {
 
@@ -186,10 +186,122 @@
 
 				surfaceXml.attributes.getNamedItem( 'surfaceType' ).nodeValue = surface.type;
 
-				const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surface.id );
+				surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surface.id );
 				surfaceMesh.userData.data.surfaceType = surface.type;
 				surfaceMesh.material.color.setHex( GBX.colors[ surface.type ] );
 				surfaceMesh.material.needsUpdate = true;
+
+				const twoAdjacents = [ 'InteriorWall', 'InteriorFloor', 'Ceiling', 'Air', 'RaisedFloor' ];
+
+				if ( twoAdjacents.includes( surface.type ) ) { // new is two adjacent
+
+					if ( !surfaceMesh.userData.data.AdjacentSpaceId ){ // was Shade
+
+						const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+						newAdj.setAttribute( "spaceIdRef", "none" ) ;
+						const newAdjTxt = surfaceXml.appendChild( newAdj );
+
+						const newAdj2 = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+						newAdj2.setAttribute( "spaceIdRef", "none" ) ;
+						const newAdjTxt2 = surfaceXml.appendChild( newAdj2 );
+
+						surfaceMesh.userData.data.AdjacentSpaceId = [ { "spaceIdRef": 'none' }, { "spaceIdRef": 'none' } ];
+						console.log( 'was 0 / now 2', surfaceXml );
+
+					} else if (  Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) === true ) { // was already two adjacent
+
+						console.log( 'was 2 / now 2', surfaceXml );
+
+					} else { // was one adjacent
+
+						const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+						newAdj.setAttribute( "spaceIdRef", "none" ) ;
+						const newAdjTxt = surfaceXml.appendChild( newAdj );
+
+						surfaceMesh.userData.data.AdjacentSpaceId = [ { "spaceIdRef": surfaceMesh.userData.data.AdjacentSpaceId.spaceIdRef }, { "spaceIdRef": 'none' } ];
+						console.log( 'was 1 / now 2', surfaceXml );
+
+					}
+
+				} else { // new is Shade or one adjacent
+
+					console.log( 'new 0 or 1  ', surfaceXml );
+					console.log( 'mesh data[ 0 ]', surfaceMesh.userData.data.AdjacentSpaceId  );
+					console.log( 'surface.type', surface.type );
+					console.log( 'Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId )', Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) );
+
+					if ( Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) === true && surface.type === 'Shade' ) {
+
+						const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
+						//console.log( 'adjSpace1',  adjSpace1 );
+
+						const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+						const removed1 = surfaceXml.removeChild( adjSpace1 );
+
+						const adjSpace2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
+						//console.log( 'adjSpace2', adjSpace2 );
+
+						const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
+						const removed2 = surfaceXml.removeChild( adjSpace2 );
+						console.log( 'removedId2', removedId2 );
+
+						delete( surfaceMesh.userData.data.AdjacentSpaceId );
+						console.log( 'surfaceMesh', surfaceMesh );
+
+						console.log( 'was 2 / now 0', surfaceXml );
+
+					} else if ( Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) === false && surface.type === 'Shade' ) {
+
+						adjSpace1 = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
+						console.log( 'adjSpace1',  adjSpace1 );
+
+//						removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+						removed1 = surfaceXml.removeChild( adjSpace1 );
+
+						delete( surfaceMesh.userData.data.AdjacentSpaceId );
+						console.log( 'surfaceMesh', surfaceMesh );
+						console.log( 'surfaceXml', surfaceXml );
+
+						console.log( ' was 1 or 0 / now 0 / ' );
+
+					} else if ( Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) === false && surface.type !== 'Shade' ) {
+
+						if ( surfaceMesh.userData.data.AdjacentSpaceId !== undefined ) {
+
+							console.log( 'surfaceMesh', surfaceMesh.userData.data.AdjacentSpaceId );
+							console.log( 'surfaceXml', surfaceXml );
+
+							console.log( 'was 1 / now 1 / ' );
+
+						} else {
+
+							const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+							newAdj.setAttribute( "spaceIdRef", surfaceMesh.userData.data.AdjacentSpaceId ) ;
+							const newAdjTxt = surfaceXml.appendChild( newAdj );
+
+							surfaceMesh.userData.data.AdjacentSpaceId = { "spaceIdRef": "none" };
+							console.log( 'surfaceMesh', surfaceMesh.userData.data.AdjacentSpaceId );
+							console.log( 'surfaceXml', surfaceXml );
+
+							console.log( 'was 0 / now 1 / ' );
+
+						}
+
+					}
+
+
+					/*
+					if ( !surfaceMesh.userData.data.AdjacentSpaceId ) {
+
+						surfaceMesh.userData.data.AdjacentSpaceId = { "spaceIdRef": 'none' };
+						const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+						newAdj.setAttribute( "spaceIdRef", surfaceMesh.userData.data.AdjacentSpaceId ) ;
+						const newAdjTxt = surfaceXml.appendChild( newAdj );
+						console.log( 'ccccccc', surfaceXml );
+					}
+					*/
+
+				}
 
 				divSavContents.innerHTML += 'Types changes - updated surface id: ' + surface.id + '<br>';
 
@@ -233,9 +345,9 @@
 			} else {
 
 				const adj = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
-				const att = adj.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = surface.spaceId;
 
-				console.log( 'adj', adj, att );
+				const att = adj.attributes.getNamedItem( 'spaceIdRef' ).nodeValue = surface.spaceId;
+				//console.log( 'adj', adj, att );
 
 				const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surface.id );
 				surfaceMesh.userData.data.AdjacentSpaceId = { "spaceIdRef": surface.spaceId };
@@ -273,3 +385,4 @@
 		}
 
 	}
+

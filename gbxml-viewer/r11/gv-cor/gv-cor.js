@@ -115,7 +115,7 @@
 			//console.log( 'xhr', xhr );
 
 			GBX.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
-			divLog.innerHTML = GBX.fileAttributes.name + ' bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+			divLog.innerHTML = GBX.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 
@@ -213,8 +213,8 @@
 
 	COR.onMouseUpDraggable = () => {
 
-	window.removeEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
-	event.preventDefault();
+		window.removeEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
+		event.preventDefault();
 
 	}
 

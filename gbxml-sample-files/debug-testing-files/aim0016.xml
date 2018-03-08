@@ -49193,7 +49193,7 @@
       </PlanarGeometry>
       <CADObjectId>Floor: SIM_INT_SLD_FLR FLR02 [921021]</CADObjectId>
       <Name>T-00_112-01_116-I-F-73</Name>
-    <AdjacentSpaceId xmlns="" spaceIdRef="aim0273"/></Surface>
+    </Surface>
     <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim6378">
       <AdjacentSpaceId spaceIdRef="aim0855"/>
       <RectangularGeometry id="aim6379">
@@ -49729,7 +49729,7 @@
       </PlanarGeometry>
       <CADObjectId>Floor: SIM_INT_AIR [921010]</CADObjectId>
       <Name>T-00_113-01_115-I-F-80</Name>
-    <AdjacentSpaceId xmlns="" spaceIdRef="aim0273"/></Surface>
+    </Surface>
     <Surface surfaceType="InteriorFloor" id="aim6525">
       <AdjacentSpaceId spaceIdRef="aim0855"/>
       <AdjacentSpaceId spaceIdRef="aim2879"/>
@@ -72712,7 +72712,7 @@
       <CADObjectId>Floor: SIM_EXT_GRD_FLR FLR01 [912214]</CADObjectId>
       <Name>B-B1_109-U-F-481</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim12983">
+    <Surface surfaceType="InteriorWall" exposedToSun="true" id="aim12983">
       <AdjacentSpaceId spaceIdRef="aim5184"/>
       <RectangularGeometry id="aim12984">
         <Azimuth>93.4364318847656</Azimuth>
@@ -72751,7 +72751,7 @@
       </PlanarGeometry>
       <CADObjectId>Basic Wall: SIM_EXT_SLD [927670]</CADObjectId>
       <Name>N-RF_100-E-W-482</Name>
-    </Surface>
+    <AdjacentSpaceId xmlns="" spaceIdRef="none"/></Surface>
     <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim12994">
       <AdjacentSpaceId spaceIdRef="aim5184"/>
       <RectangularGeometry id="aim12995">

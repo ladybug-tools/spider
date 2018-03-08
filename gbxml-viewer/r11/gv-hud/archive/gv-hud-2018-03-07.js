@@ -328,16 +328,10 @@
 		divHUDItems.innerHTML = adjacentsTxt;
 		divHUDfooter.innerHTML = footerTxt;
 
-
 		selType.value = data.surfaceType;
 		selSurface.value = data.id;
-
-		const value1 = space1 && space1.id ? space1.id : 'none';
-		const value2 = space2 && space2.id ? space2.id : 'none';
-
-		if ( window.selSpace1 ) { selSpace1.value = value1; }
-		if ( window.selSpace2 ) { selSpace2.value = value2; }
-
+		if ( window.selSpace1 ) { selSpace1.value = space1.id; }
+		if ( window.selSpace2 ) { selSpace2.value = space2.id; }
 		selCadId.value = data.CADObjectId;
 
 		document.body.style.cursor = 'pointer';
@@ -573,10 +567,10 @@
 
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
-				const adjacentXml2 = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 1 ];
+				const adjacentXml2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 1 ];
 				const removed2 = surfaceXml.removeChild( adjacentXml2 );
 
-				const adjacentXml1 = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
+				const adjacentXml1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
 				const removed1 = surfaceXml.removeChild( adjacentXml1 );
 
 				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
@@ -596,13 +590,8 @@
 
 			} else { // type prev is no adjacent
 
-				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-				newAdj.setAttribute( "spaceIdRef", "none" ) ;
-				const newAdjTxt = surfaceXml.appendChild( newAdj );
-
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
-				surfaceMesh.userData.data.AdjacentSpaceId = 'none';
 				//console.log( 'prev 0 / new 1 / no spaceIdPrev',  spaceIdPrev );
 
 			}
@@ -651,30 +640,22 @@
 
 		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
 
-		if ( cadObjId ) {
+		//console.log( 'cadObjId', cadObjId.innerHTML );
 
-		console.log( 'cadObjId', cadObjId.innerHTML );
+		//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
+		cadObjId.innerHTML = that.value;
 
-			//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
-			cadObjId.innerHTML = that.value;
+		//console.log( 'that', that.value );
 
-			//console.log( 'that', that.value );
+		surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = that.value;
 
-			surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = that.value;
+		surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 
-			surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+		surfaceMesh.userData.data.CADObjectId = that.value;
 
-			surfaceMesh.userData.data.CADObjectId = that.value;
+		GBV.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
 
-			GBV.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
-
-			HUD.setHeadsUp();
-
-		} else {
-
-			alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
-
-		}
+		HUD.setHeadsUp();
 
 	}
 
