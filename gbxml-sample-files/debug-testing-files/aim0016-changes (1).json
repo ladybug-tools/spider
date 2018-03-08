@@ -1,1 +1,1 @@
-{"deletes":[],"types":[{"id":"aim11616","type":"InteriorFloor"}],"oneAdjacent":[],"twoAdjacent":[],"cadObjs":[]}
+{"deletes":[],"types":[{"id":"aim13416","type":"Roof"}],"oneAdjacent":[{"id":"aim13416","spaceId":"aim0273"},{"id":"aim13416","spaceId":"aim0273"}],"twoAdjacent":[],"cadObjs":[]}

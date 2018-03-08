@@ -426,6 +426,8 @@
 			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
 			butSpace0.innerText = spaceId;
 
+			console.log( 'spaceId', spaceId );
+
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );

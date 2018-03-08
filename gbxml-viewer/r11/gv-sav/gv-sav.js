@@ -250,19 +250,30 @@
 
 						console.log( 'was 2 / now 0', surfaceXml );
 
-					} else if ( Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) === false && surface.type === 'Shade' ) {
+					} else if ( Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) === true && surface.type !== 'Shade' ) {
 
-						adjSpace1 = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
-						console.log( 'adjSpace1',  adjSpace1 );
 
-//						removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
-						removed1 = surfaceXml.removeChild( adjSpace1 );
+						const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
+						//console.log( 'adjSpace1',  adjSpace1 );
 
-						delete( surfaceMesh.userData.data.AdjacentSpaceId );
+						const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+						const removed1 = surfaceXml.removeChild( adjSpace1 );
+
+						const adjSpace2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
+
+						const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
+//						const removed2 = surfaceXml.removeChild( adjSpace2 );
+
+						//console.log( 'adjSpace2', adjSpace2 );
+
+						//delete( surfaceMesh.userData.data.AdjacentSpaceId );
+						//console.log( 'surfaceMesh', surfaceMesh );
+
+						surfaceMesh.userData.data.AdjacentSpaceId = { "spaceIdRef": removedId2 };
 						console.log( 'surfaceMesh', surfaceMesh );
 						console.log( 'surfaceXml', surfaceXml );
 
-						console.log( ' was 1 or 0 / now 0 / ' );
+						console.log( ' was 2 / now 1 / ' );
 
 					} else if ( Array.isArray( surfaceMesh.userData.data.AdjacentSpaceId ) === false && surface.type !== 'Shade' ) {
 
@@ -288,18 +299,6 @@
 						}
 
 					}
-
-
-					/*
-					if ( !surfaceMesh.userData.data.AdjacentSpaceId ) {
-
-						surfaceMesh.userData.data.AdjacentSpaceId = { "spaceIdRef": 'none' };
-						const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-						newAdj.setAttribute( "spaceIdRef", surfaceMesh.userData.data.AdjacentSpaceId ) ;
-						const newAdjTxt = surfaceXml.appendChild( newAdj );
-						console.log( 'ccccccc', surfaceXml );
-					}
-					*/
 
 				}
 
