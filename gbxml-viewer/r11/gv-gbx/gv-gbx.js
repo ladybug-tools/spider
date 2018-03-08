@@ -322,7 +322,7 @@
 		}
 
 		THR.scene.add( GBX.surfaceMeshes, GBX.surfaceEdges );
-		THR.renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
 		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
 		GBX.spacesJson = GBX.gbjson.Campus.Building.Space;
@@ -556,7 +556,7 @@
 		THR.camera.up.set( 0, 0, 1 );
 
 		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
-		THR.controls.autoRotate = true;
+		// THR.controls.autoRotate = true;
 
 		THR.camera.add( THR.lightPoint );
 		THR.scene.add( THR.camera );
