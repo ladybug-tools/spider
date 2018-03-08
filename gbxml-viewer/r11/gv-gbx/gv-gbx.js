@@ -322,7 +322,7 @@
 		}
 
 		THR.scene.add( GBX.surfaceMeshes, GBX.surfaceEdges );
-
+		THR.renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
 		GBX.spacesJson = GBX.gbjson.Campus.Building.Space;
