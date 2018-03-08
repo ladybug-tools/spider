@@ -22,9 +22,13 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <summary>Welcome 2018-03-07 ~ R10.7</summary>
 
-Save Changes and Save Edits
-* Add create adjacent attribute data when saving a changed surface type
+SAV ~ Save Changes and Save Edits
+
+* Add and create correct adjacent attribute data when saving a changed surface type
 * Able to save both Save Changes and Save Edits for all seven use cases
+* Only lightly tested
+
+Still with errors: Making edits with HUD and then directly using Save Edits. Better to use Save Changes use Save Edits
 
 
 </details><details open>
