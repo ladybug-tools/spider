@@ -1,1 +1,1 @@
-{"deletes":[],"types":[{"id":"aim6366","type":"Roof"},{"id":"aim13416","type":"Roof"}],"oneAdjacent":[{"id":"aim13416","spaceId":"aim0405"}],"twoAdjacent":[],"cadObjs":[]}
+{"deletes":[],"types":[{"id":"aim13416","type":"InteriorWall"}],"oneAdjacent":[],"twoAdjacent":[{"id":"aim13416","spaceId":["aim0316","none"]},{"id":"aim13416","spaceId":["aim0316","aim0363"]}],"cadObjs":[]}

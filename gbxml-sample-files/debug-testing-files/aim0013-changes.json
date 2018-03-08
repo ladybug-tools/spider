@@ -1,1 +1,1 @@
-{"deletes":["aim9503","aim9694"],"types":[{"id":"aim8767","type":"InteriorWall"},{"id":"aim6422","type":"ExteriorWall"},{"id":"aim9155","type":"ExteriorWall"},{"id":"aim9017","type":"Roof"},{"id":"aim8767","type":"ExteriorWall"}],"oneAdjacent":[],"twoAdjacent":[],"cadObjs":[]}
+{"deletes":[],"types":[{"id":"aim9694","type":"InteriorWall"}],"oneAdjacent":[],"twoAdjacent":[{"id":"aim9694","spaceId":["aim0265","none"]},{"id":"aim9694","spaceId":["aim0265","aim0265"]}],"cadObjs":[]}

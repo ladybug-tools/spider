@@ -1,6 +1,7 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
 	var SAV = {};
+	var HUD = HUD || {};
 
 	SAV.initChanges = function() {
 
@@ -383,7 +384,11 @@
 
 		}
 
-		HUD.setHeadsUp();
+		if ( HUD.setHeadsUp ) {
+
+			HUD.setHeadsUp();
+
+	}
 
 	}
 

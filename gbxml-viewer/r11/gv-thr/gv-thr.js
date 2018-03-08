@@ -59,18 +59,21 @@
 		// in iframe: loads default / standalone: opens permalinks
 		//console.log( 'location.hash', location );
 
-		if ( location.hash && location.hash.endsWith( '.xml') ) {
+		//if ( window.self !== window.top ) {
 
-			const url = location.hash.slice( 1 );
+			if ( location.hash && location.hash.endsWith( '.xml') ) {
 
-			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+				const url = location.hash.slice( 1 );
 
-		} else {
+				COR.requestFileAndProgress( url, GBX.callbackGbXML );
 
-			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
+			} else {
 
-		}
+				COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
 
+			}
+
+		//}
 
 		THR.renderer= renderer;
 		THR.scene = scene;

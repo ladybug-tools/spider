@@ -511,7 +511,6 @@
 			// xml
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
-
 				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
 				//console.log( 'adjSpace1',  adjSpace1 );
 
@@ -524,19 +523,16 @@
 				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
 				const removed2 = surfaceXml.removeChild( adjSpace2 );
 
-//				delete( surfaceJson.AdjacentSpaceId );
-
-				console.log( 'old 2 / new 0 / removed id1: ', removedId1, ' id2: ', removedId2, surfaceXml );
+				//console.log( 'prev 2 / now 0 / removed id1: ', removedId1, ' id2: ', removedId2 );
 
 			} else { // type prev is single adjacent
 
 				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
 				//console.log( 'spaceId',  spaceId);
-
 				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
 				const removed1 = surfaceXml.removeChild( adjSpace1 );
 
-				console.log( 'old 1 / new 0 / id: ', removedId1, surfaceXml );
+				//console.log( 'prev 1 or 0 / now 0 / id: ', removedId1 );
 
 			}
 
@@ -560,7 +556,7 @@
 				adjacentSpaceId[ 0 ] = { spaceIdRef: prevId };
 				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
 
-				console.log( 'old 1 / new 2 / prevId', prevId, surfaceXml );
+				//console.log( 'prev 1 / now 2 / prevId', prevId );
 
 			} else { // type prev is shade / no adjacent
 
@@ -592,14 +588,14 @@
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev[ 0 ].spaceIdRef };
 
-				console.log( 'old 2 / new 1', newAdjTxt, surfaceXml );
+				//console.log( 'prev 2 / new 1', newAdjTxt );
 
 			} else if ( spaceIdPrev ) { // type prev is single adjacent
 
 				// leave things untouched
 				const spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
 
-				console.log( 'old 1 / new 1 / no changes spaceId',  spaceId, surfaceXml );
+				//console.log( 'prev 1 / new 1 / no changes spaceId',  spaceId );
 
 			} else { // type prev is no adjacent
 
@@ -610,7 +606,7 @@
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
 //				surfaceMesh.userData.data.AdjacentSpaceId = 'none';
-				console.log( 'old 0 / new 1 / no spaceIdPrev', spaceIdPrev, surfaceXml );
+				console.log( 'old 0 / new 1 / no spaceIdPrev',  spaceIdPrev );
 
 			}
 

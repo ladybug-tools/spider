@@ -44,6 +44,10 @@ needs combining with this read me
 
 ## Change Log
 
+### 2018-03-08 ~ Theo
+
+* Simplify and make runnable by itself
+
 ### 2018-03-06 ~ Theo
 
 * 2018-03-04 ~ Add file load time readout << done

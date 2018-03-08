@@ -2,8 +2,8 @@
 	let COR = {};
 
 	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
-	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
-	COR.uriDefaultFile = 'splash-screen.md'; // maybe should be in APP?
+	//COR.threeDefaultFile = '../gv-thr/gv-thr.html';
+	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
 
 	COR.gbxmlSampleFiles =
 	`
@@ -48,6 +48,12 @@
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 		COR.timeStart = Date.now();
+
+		if ( window.self === window.top ) {
+
+			//COR.onHashChange();
+
+		}
 
 	}
 
