@@ -20,7 +20,11 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
-<summary>Welcome 2018-03-07 ~ R10.7</summary>
+<summary>Welcome 2018-03-07 ~ R10.7 / 8 / 9</summary>
+
+11.9 SAV: fixes unable to select new space if space = none
+
+11.8 SAV: fixes 2 to 1 update
 
 SAV ~ Save Changes and Save Edits
 

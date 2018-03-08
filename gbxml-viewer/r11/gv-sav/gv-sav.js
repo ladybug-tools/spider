@@ -383,5 +383,7 @@
 
 		}
 
+		HUD.setHeadsUp();
+
 	}
 
