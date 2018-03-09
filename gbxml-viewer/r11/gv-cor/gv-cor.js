@@ -1,7 +1,12 @@
+// Copyright 2018 Ladybug Tools authors. MIT License
+
 
 	let COR = {};
 
-	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	COR.iconInfo = '<img src="GitHub-Mark-32px.png" height=14 >';
+
+
 	//COR.threeDefaultFile = '../gv-thr/gv-thr.html';
 	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
 
@@ -58,6 +63,7 @@
 	}
 
 
+	// handle location.hash change events
 
 	COR.onHashChange = () => {
 
@@ -76,9 +82,9 @@
 
 			COR.requestFileAndProgress( url, GBX.callbackGbXML );
 
-//		} else if ( ulc.endsWith( '.html' ) ) {
+			//} else if ( ulc.endsWith( '.html' ) ) {
 
-//			setIfrThree();
+			//setIfrThree();
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
@@ -93,17 +99,19 @@
 	}
 
 
+
 	COR.requestFile = ( url, callback ) => {
 
 		const xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		//xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
 	}
+
 
 
 	COR.requestFileAndProgress = ( url, callback ) => {
@@ -128,10 +136,73 @@
 	}
 
 
+		// handle callbacks with file data events
+
+		function callbackMarkdown( xhr ){
+
+			showdown.setFlavor('github');
+			const converter = new showdown.Converter();
+			//const response = xhr.target.response;
+			const html = converter.makeHtml( xhr.target.responseText );
+
+			divContents.innerHTML = html;
+			divContainer.style.display = 'block';
+			window.scrollTo( 0, 0 );
+
+		}
+
+
+
+		function callbackToTextarea( xhr ){
+
+			const response = xhr.target.response;
+			divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
+			divContainer.style.display = 'block'
+
+		}
+
+
+
+	// handle fileReader events
+
+	COR.openFile = function( files ) {
+
+		var fileData, reader, data;
+
+		reader = new FileReader();
+
+		reader.onload = function( event ) {
+
+			console.log( 'event', event );
+
+			//txtArea.innerHTML = reader.result;
+			COR.callbackMarkdownData( reader.result );
+
+			divLog.innerHTML =
+				'name: ' + files.files[0].name + '<br>' +
+				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
+				'type: ' + files.files[0].type + '<br>' +
+				'modified: ' + files.files[0].lastModifiedDate.toLocaleDateString() +
+			'';
+
+			console.log( '', files );
+
+		}
+
+		reader.readAsText( files.files[0] );
+
+	}
+
+
+
+	// handle drag and drop events
 
 	COR.drop = event => {
 
+		console.log( 'event', event );
+
 		const iframeUrl = event.dataTransfer.getData( 'URL' );
+
 
 		if ( iframeUrl ) {
 
@@ -168,13 +239,13 @@
 	}
 
 
+	// handle drag and drop events
 
-	function callbackMarkdown( xhr ){
+	COR.callbackMarkdownData = function ( markdown ){
 
 		showdown.setFlavor('github');
 		const converter = new showdown.Converter();
-		const response = xhr.target.response;
-		const html = converter.makeHtml( xhr.target.responseText );
+		const html = converter.makeHtml( markdown );
 
 		divContents.innerHTML = html;
 		divContainer.style.display = 'block';
@@ -183,17 +254,7 @@
 	}
 
 
-
-	function callbackToTextarea( xhr ){
-
-		const response = xhr.target.response;
-		divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-		divContainer.style.display = 'block'
-
-	}
-
-
-/////////////
+	// handle menu header dragging with mouse or touch events
 
 	COR.onMouseDownDraggable = event  => {
 

@@ -93,16 +93,28 @@ _This script calls and combines all the module into a single app_
 
 ## gv-cor gbXML Viewer Core
 
-* Core read and display a gbXML file using Three.js
+* Core file browse, read and display utilities
 * Folder: gv-cor
-* Name space: VOR{}
+* Name space: COR{}
 * Title: gbXML Viewer Core
 
 ### [gbXML Viewer Core Read Me]( #gbxml-viewer/r11/gv-cor/README.md )
 
 ### Full screen test script: [gbXML Viewer Core]( gbxml-viewer/r11/gv-cor/gv-cor.html )
 
+### Features
 
+* Core file browse, read and display utilities
+* handle location.hash change events
+* Handle XMLHttpRequests
+	* Handle onRequestFileProgress events
+* Handle callbacks with file data events
+	* Markdown
+* Handle fileReader events
+* Handle drag and drop events
+* Handle drag and drop events
+* Handle menu header dragging with mouse or touch events
+* Incorporate and embody main style sheet parameters
 
 ## gv-crd gbXML Viewer Duplicate Coordinates
 

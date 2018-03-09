@@ -66,8 +66,6 @@
 
 			initMenuTemplate();
 
-
-
 			butGbx.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
@@ -88,7 +86,7 @@
 
 	};
 
-
+	GBX.surfaceTypeOptions = txt;
 
 	GBX.callbackGbXML = function( xhr ) {
 

@@ -32,7 +32,7 @@
 
 	summary { font-weight: bold; }
 
-	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
 
 	.flex-container { display: flex; flex-wrap: wrap;}
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
