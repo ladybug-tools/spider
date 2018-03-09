@@ -21,7 +21,7 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <summary>Welcome 2018-03-08 ~ R11.11</summary>
 
-APP
+APP ~ main menu
 
 * Done: 2018-03-06 ~ App onload reloads previously referenced model
 	* Paste file name into main menu input box
@@ -31,7 +31,7 @@ APP
 	* Click main menu title to reload
 
 
-SET
+SET ~ Settings
 
 * Sections: beginning to work as desired
 
