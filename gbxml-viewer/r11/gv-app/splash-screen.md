@@ -20,9 +20,21 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
+<summary>Welcome 2018-03-08 ~ R11.11</summary>
+
+APP
+
+* Done: 2018-03-06 ~ App onload loads previously referenced model
+
+
+</details><details open>
+
 <summary>Welcome 2018-03-07 ~ R10.7 / 8 / 9 / 10</summary>
 
-11.10 ~ fixes issues with 'save edis' / fixes resetting the lights issue
+11.10
+* Fixes issues with 'save edits'
+* Fixes resetting the lights issue /
+ * Done: 2018-03-06 ~ Three.js R90
 
 11.9 SAV: fixes unable to select new space if space = none
 

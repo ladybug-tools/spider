@@ -233,6 +233,7 @@ See also:
 
 ### Dev
 
+* 2018-03-08 ~ Start an Issues men item
 * 2018-03-04 ~ Start R12
 
 ### ADJ ~ Duplicate Adjacents
@@ -248,7 +249,8 @@ See also:
 
 ### APP ~ Application Menu
 
-* 2018-03-06 ~ App onload loads previously reference model
+* 2018-03-08 ~ Bring all file loading over to APP?
+* 2018-03-04 ~ Random model on start-up?
 * 2018-02-18 ~ Menus remember their position from session to session
 
 
@@ -272,14 +274,13 @@ See also:
 
 ### CRD ~ Duplicate Coordinates
 
-* 2018-03-08 ~ Combine with duplicate adjacents / R12
+* 2018-03-08 ~ Combine with duplicate adjacent / R12
 * 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
 	* Upgrade so identifies any surface within another surface
 
 
 ### GAL ~ Gallery
 
-* 2018-03-04 ~ Random model on start-up?
 * Links to more sample files
 	* Where to find more?
 * Credits to sources of files
@@ -287,6 +288,11 @@ See also:
 
 ### GBV ~ gbXML View Utilities
 
+
+
+### GBV ~ gbXML View Utilities
+
+* 2018-03-08 ~ Simpler loading flow
 
 
 ### HUD ~ Heads-up Display
@@ -298,23 +304,24 @@ See also:
 * 2018-01-02 ~ Multiple types of heads-up modules with different agendas
 	* Show space names at cursor locations
 * 2018-01-02 ~ Add in-world placard at cursor location
-* 2018-03-04 ~ Use main style sheet?
+* @@@ 2018-03-04 ~ Use main style sheet?
 
 
 ### REP ~ Reports
 
+* 2018-03-08 ~ Search for spaces
 * 2018-03-04 ~ Export spaces and storeys as gbJSOM. .RAD files etc
 * 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
 * 2018-02-26 ~ Next and previous buttons to navigate through storeys, surfaces, spaces etc
 * 2018-02-26 ~ Surfaces, Spaces: checkbox for auto-zooming
-* 2018-02-26 ~ Better telltale size for small surfaces
+* @@@ 2018-02-26 ~ Better telltale size for small surfaces
 
 
 ### SAV ~ Save Changes
 
 * 2018-03-05 ~ Add pretty print to output file
 * 2018-03-05 ~ Add ability to add/merge changes
-* 2018-03-04 ~ Add user surface defined colors
+* @@@ 2018-03-04 ~ Add user surface defined colors
 * 2018-03-04 ~ Add user defined inserts
 * 2018-03-04 ~ Add user-defined settings such as view point
 * 2018-03-04 ~ Add default UI parameters
@@ -322,15 +329,15 @@ See also:
 
 ### SET ~ Settings
 
+* @@@ 2018-03-08 ~ fix Sectioning issues
 * Add ( random? ) colors by space
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
 * Better lights and shadows
 
 
-### THR / GBX ~ Three.js
+### THR ~ Three.js
 
-* 2018-03-06 ~ Three.js R90
-
+* 2018-03-08 ~ Simpler loading flow
 
 
 ### TMP ~ Templates

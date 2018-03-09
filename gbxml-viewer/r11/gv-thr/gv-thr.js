@@ -6,6 +6,10 @@
 	:
 	'../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
 
+	//   ../../../gbxml-sample-files/golden-co-open-studio-seb.xml
+	//   ../../../gbxml-sample-files/omha-nb-zneth.xml
+	//   ../../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml
+
 
 	var THR = {};
 
@@ -20,8 +24,8 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMap.enabled = true;
 		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-		renderer.shadowMap.renderReverseSided = false;
-		renderer.shadowMap.renderSingleSided = false;
+//		renderer.shadowMap.renderReverseSided = false;
+//		renderer.shadowMap.renderSingleSided = false;
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -56,6 +60,12 @@
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
 
+		const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
+		inpFilePath.value = thrFilePath;
+
+		uriGbxmlDefault = inpFilePath.value ? inpFilePath.value : uriGbxmlDefault; // for testing
+
 		// in iframe: loads default / standalone: opens permalinks
 		//console.log( 'location.hash', location );
 
@@ -86,6 +96,19 @@
 		THR.axesHelper = axesHelper;
 		THR.gridHelper = gridHelper;
 		THR.groundHelper = groundHelper;
+
+	}
+
+
+
+	THR.updateDefaultFilePath = function() {
+
+		location.hash=inpFilePath.value;
+
+		const thrFilePath = inpFilePath.value;
+		localStorage.setItem('thrFilePath', thrFilePath );
+
+		COR.requestFileAndProgress( thrFilePath, GBX.callbackGbXML );
 
 	}
 

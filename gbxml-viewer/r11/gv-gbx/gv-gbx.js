@@ -30,6 +30,11 @@
 
 	}
 
+
+
+	GBX.initTemplate = function () {
+
+
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
 	let txt = '';
@@ -42,9 +47,6 @@
 
 	GBX.surfaceTypeOptions = txt;
 
-
-
-	GBX.initTemplate = function () {
 
 		if ( butGbx.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -342,6 +344,7 @@
 		GBX.spacesOptions = txt;
 
 		txt = '';
+
 		for ( let surface of GBX.surfaceJson ) {
 
 			txt += '<option>' + surface.id + '</option>';
@@ -350,20 +353,22 @@
 
 		GBX.surfacesOptions = txt;
 
-		var arr= [];
+		const surfacesOptions= [];
+
 		for ( let surface of GBX.surfaceJson ) {
 
-			arr.push( '<option>' + surface.CADObjectId + '</option>' );
+			surfacesOptions.push( '<option>' + surface.CADObjectId + '</option>' );
 
 		}
 
-		GBX.surfacesCadObj = arr.sort().join();
+		GBX.surfacesCadObj = surfacesOptions.sort().join();
 
 //		console.log( 'GBX.surfacesCadObj', GBX.surfacesCadObj);
 
 		GBX.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 
 		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart);
+
 	}
 
 

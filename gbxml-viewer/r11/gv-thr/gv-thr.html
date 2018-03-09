@@ -23,8 +23,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
 
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
@@ -60,29 +60,32 @@
 
 <script>
 
+	init();
 //	COR.initCore();
 	THR.initThreeGbxml();
 	THR.animate();
 
-	init();
 
 
 	function init() {
 
+		COR.timeStart = Date.now();
+
 		if ( window.self === window.top ) {
 
 			divTitle.innerHTML =
-				'<h2>' +
-					'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + COR.iconInfo + '</a>' +
-					' <a  href = "" >' + document.title + '</a>' +
-				'</h2>' +
-				'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+			`
+				<h2>
+					<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >` + COR.iconInfo + `</a>
+					<a  href = "" >` + document.title + `</a>
+				</h2>
+				<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
 
-				'<p id=dragArea class=dragDropArea >' +
-					'Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=GBX.openGbxmlFile(this); >' +
-				'<p>' +
-
-			'';
+				<p id=dragArea class=dragDropArea >
+					Drag and drop a gbXML file into this box or <input type=file id=inpFile onchange=GBX.openGbxmlFile(this); ><br>
+					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=60 >
+				<p>
+			`;
 
 		}
 
