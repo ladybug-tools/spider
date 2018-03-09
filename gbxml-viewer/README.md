@@ -304,7 +304,7 @@ See also:
 * 2018-01-02 ~ Multiple types of heads-up modules with different agendas
 	* Show space names at cursor locations
 * 2018-01-02 ~ Add in-world placard at cursor location
-* @@@ 2018-03-04 ~ Use main style sheet?
+* 2018-03-04 ~ Use main style sheet? << there seem to be some curious issues with doing so
 
 
 ### REP ~ Reports

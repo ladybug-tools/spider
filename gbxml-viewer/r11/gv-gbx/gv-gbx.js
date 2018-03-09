@@ -30,11 +30,6 @@
 
 	}
 
-
-
-	GBX.initTemplate = function () {
-
-
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
 	let txt = '';
@@ -44,6 +39,11 @@
 		txt += '<option>' + type + '</option>';
 
 	}
+
+
+	GBX.initTemplate = function () {
+
+
 
 	GBX.surfaceTypeOptions = txt;
 

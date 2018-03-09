@@ -62,9 +62,9 @@
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
-		inpFilePath.value = thrFilePath;
+		parent.inpFilePath.value = thrFilePath;
 
-		uriGbxmlDefault = inpFilePath.value ? inpFilePath.value : uriGbxmlDefault; // for testing
+		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 		// in iframe: loads default / standalone: opens permalinks
 		//console.log( 'location.hash', location );
@@ -103,9 +103,9 @@
 
 	THR.updateDefaultFilePath = function() {
 
-		location.hash=inpFilePath.value;
+		location.hash = parent.inpFilePath.value;
 
-		const thrFilePath = inpFilePath.value;
+		const thrFilePath = parent.inpFilePath.value;
 		localStorage.setItem('thrFilePath', thrFilePath );
 
 		COR.requestFileAndProgress( thrFilePath, GBX.callbackGbXML );

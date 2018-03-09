@@ -10,8 +10,10 @@
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
-<script src = "../gv-cor/gv-cor.js" ></script>
-<script src = "../gv-thr/gv-thr.js" ></script>
+		<script src = "../gv-cor/gv-cor.js" ></script>
+		<script src = "../gv-thr/gv-thr.js" ></script>
+		<script src = "../gv-gbx/gv-gbx.js" ></script>
+		<script src = "../gv-gbv/gv-gbv.js" ></script>
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 	<div id = "divHeader" >
@@ -31,7 +33,8 @@
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
 
 	<p id=dragAreaToIframe class=dragDropArea >
-		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); >
+		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); ><br>
+		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=60 >
 	<p>
 
 	<div id = "divSampleFiles" ></div>
@@ -50,8 +53,8 @@
 <script>
 
 
-	COR.initCore();
 	init();
+	COR.initCore();
 
 
 	function init() {
