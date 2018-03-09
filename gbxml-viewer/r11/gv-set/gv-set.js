@@ -102,29 +102,31 @@
 
 						<b>section view</b><br>
 
-						<p><i>Work-in-progress. To get a feeling: With default model in view, click 'toggle section view' button then set 'rotate section...' to -27.</i></p>
+						<p><i>Work-in-progress</i></p>
 
 						<div>
 							<button id=butSectionView onclick=SET.toggleSectionView() >toggle section view</button>
 						</div>
 
-						clipping plane front: <output id=outClip1 >40</output><br>
-						<input type=range id=inpClip1 max=50 min=-50 step=1 value=40
-						oninput=outClip1.value=SET.localClip1.constant=inpClip1.valueAsNumber; title="-50 to 50: OK" >
+						clipping plane front: <output id=outClip1 >0</output><br>
+						<input type=range id=inpClip1 max=50 min=-50 step=1 value=0
+						oninput=outClip1.value=inpClip1.value;SET.updateCLipX(); title="-50 to 50: OK" >
 					</div>
+
 
 					<div>
-						clipping plane front: <output id=outClip2 >40</output><br>
-						<input type=range id=inpClip2 max=50 min=-50 step=1 value=40
-							oninput=outClip2.value=SET.localClip2.constant=inpClip2.valueAsNumber; title="-50 to 50: OK" >
+						clipping plane back: <output id=outClip2 >-10</output><br>
+						<input type=range id=inpClip2 max=50 min=-50 step=1 value=-10
+						oninput=outClip2.value=inpClip2.value;SET.updateCLipX(); title="-50 to 50: OK" >
 					</div>
 
+					<!--
 					<div>
-						rotate section on Z-axis: <output id=outRotate >0</output><br>
-						<input type=range id=inpRotate max=180 min=-180 step=1 value=0
-							oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
+					rotate section on Z-axis: <output id=outRotate >0</output><br>
+					<input type=range id=inpRotate max=180 min=-180 step=1 value=1
+					oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
 					</div>
-
+					-->
 				</details>`
 
 			+ divMenuItems.innerHTML;
@@ -711,9 +713,21 @@
 		const angle = inpRotate.valueAsNumber * Math.PI / 180;
 
 		SET.localClip1.normal = new THREE.Vector3( Math.cos( angle ), Math.sin( angle ), THR.axesHelper.position.x );
-		SET.localClip2.normal = new THREE.Vector3( Math.cos( angle + Math.PI ), Math.sin( angle + Math.PI ), 0 );
+//		SET.localClip2.normal = new THREE.Vector3( Math.cos( angle + Math.PI ), Math.sin( angle + Math.PI ), THR.axesHelper.position.x );
+		SET.localClip2.normal = new THREE.Vector3( Math.cos( angle ), Math.sin( angle ), THR.axesHelper.position.x );
 
 	};
+
+
+	SET.updateCLipX = function() {
+
+		const origin = THR.axesHelper.position.x;
+
+		SET.localClip1.constant = origin + parseInt( inpClip1.value, 10 );
+
+		SET.localClip2.constant = - origin + - parseInt( inpClip2.value, 10 );
+console.log( '', SET.localClip2.constant );
+	}
 
 
 
@@ -735,6 +749,10 @@
 
 			THR.renderer.localClippingEnabled = true;
 			butSectionView.style.backgroundColor = 'aqua';
+
+			//SET.localClip1.constant = THR.axesHelper.position.x;
+
+			SET.updateCLipX();
 
 		} else {
 

@@ -17,15 +17,23 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 </details>
 -->
 
-
 <details open>
 
 <summary>Welcome 2018-03-08 ~ R11.11</summary>
 
 APP
 
-* Done: 2018-03-06 ~ App onload loads previously referenced model
+* Done: 2018-03-06 ~ App onload reloads previously referenced model
+	* Paste file name into main menu input box
+	* Use relative file path: ../../filename.xml
+	* Use local URL: file:///D:/Dropbox/gbxml-sample-files/filename.xml
+	* Use www URL: https://rawgit.com/ladybug-tools/spider/master/gbxml-sample-files/london-office.xml
+	* Click main menu title to reload
 
+
+SET
+
+* Sections: beginning to work as desired
 
 </details><details open>
 

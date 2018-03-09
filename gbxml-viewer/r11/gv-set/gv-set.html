@@ -31,7 +31,8 @@
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
 
 	<p id=dragAreaToIframe class=dragDropArea >
-		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this) >
+		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this) ><br>
+		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=60 >
 	<p>
 
 	<div id=divLog ></div>
