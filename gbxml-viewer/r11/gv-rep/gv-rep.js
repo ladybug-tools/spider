@@ -161,7 +161,7 @@
 
 		const details =
 			'<details ' + open + ' >' +
-				'<summary>' + summary + '</summary>' +
+				'<summary style=color:#333; >' + summary + '</summary>' +
 				'<div><small><i>' + info + '</i></small></div>' +
 				flowContent +
 			'</details>' +

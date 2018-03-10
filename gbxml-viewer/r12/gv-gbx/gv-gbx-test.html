@@ -38,7 +38,7 @@
 				gv-gbx gbxml viewer gbXML Utilities </button>
 		</p>
 
-		<iframe id=ifrThree src='../gv-gbx/gv-gbx-basic.html' ></iframe>
+		<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
 
 		<div id=divMenuFileOpening ></div>
 
@@ -76,12 +76,12 @@
 
 	COR.initCore();
 
-
-	initTemplate();
+	initTest();
 
 	initGbx();
 
-	function initTemplate() {
+
+	function initTest() {
 
 		divMenuTitle.innerHTML = COR.menuTitle;
 
@@ -91,10 +91,7 @@
 
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 
-		window.addEventListener ( 'hashchange', onHashChange, false );
-
-		//location.hash = '23';
-
+		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 		COR.onHashChange();
 
@@ -142,6 +139,7 @@
 	};
 
 
+
 	function onloadThreejs() {
 
 		icw = ifrThree.contentWindow;
@@ -158,22 +156,6 @@
 		divContainer.style.display = 'none';
 
 	}
-
-
-
-
-	function onHashChange() {
-
-		//const url = COR.threeDefaultFile + location.hash;
-		const url = 'gv-gbx-basic.html' + location.hash;
-		console.log( 'url', url );
-
-		ifrThree.src = url;
-		ifrThree.contentWindow.location.reload();
-
-		}
-
-
 
 </script>
 </body>

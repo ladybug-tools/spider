@@ -29,7 +29,7 @@
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
 <script src = "../gv-gbx/gv-gbx.js" ></script>
-<script src = "../gv-gbv/gv-gbv.js" ></script>
+
 
 	<div id = "divMenu" >
 
@@ -47,7 +47,7 @@
 
 			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
 
-			<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
+			<button onclick=GBX.setAllVisible();GBX.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
 
 		</p>
 
@@ -63,6 +63,7 @@
 	init();
 
 	COR.initCore();
+
 	THR.initThreeGbxml();
 	THR.animate();
 

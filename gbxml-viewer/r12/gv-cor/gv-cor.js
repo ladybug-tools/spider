@@ -6,6 +6,8 @@
 	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r12/';
 
+	urlGitHubPage = 'https://rawgit.com/ladybug-tools.github.io/spider/master/';
+
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	COR.iconGitHubMark = "../gv-cor/gitHub-mark.png";
 

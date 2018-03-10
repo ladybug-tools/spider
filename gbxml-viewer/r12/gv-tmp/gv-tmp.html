@@ -73,10 +73,9 @@
 
 <script>
 
-	COR.initCore();
-
-
 	initTemplate();
+
+	COR.initCore();
 
 	function initTemplate() {
 
@@ -90,7 +89,7 @@
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
-		location.hash = '23';
+		//location.hash = '23';
 
 		COR.onHashChange();
 
@@ -111,6 +110,7 @@
 
 		butTemplate.click();
 		divContainer.style.display = 'none';
+
 	}
 
 
