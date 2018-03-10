@@ -3,13 +3,14 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "gbXML Viewer Reports ~ view and locate a variety of data in the model" >
+<meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-02-15" >
-<title>gv-rep gbXML Viewer Reports</title>
+<meta name = "date" content = "2018-03-02" >
+<title>gv-gbx - gbXML Viewer gbXML Utilities</title>
 <link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
 </head>
 <body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
@@ -18,17 +19,17 @@
 		<div id = "divTitle" ></div>
 	</div>
 
-	<p>If it does not open automatically, click 'gv rep gbXML Viewer Reports' to load test menu</p>
+	<p>If it does not open automatically, click 'gv-tmp gbxml viewer gbXML Utilities' button to load test menu</p>
 
 	<p>
-		<button id=butReports onclick =
+		<button id=butGbx onclick =
 			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-rep/gv-rep.js';
+			script.src = '../gv-gbx/gv-gbx.js';
 			divMenu.style.display='block';" >
-			gv rep gbXML Viewer Reports</button>
+			gv-tmp gbxml viewer gbXML Utilities </button>
 	</p>
 
-	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
+	<iframe id=ifrThree src='../gv-gbx/gv-gbx-basic.html' ></iframe>
 
 	<div id=divMenuFileOpening ></div>
 
@@ -41,7 +42,7 @@
 	<div id = "divMenu" >
 
 		<div id = "divMenuHeader" >
-			Click here to move
+			click here to move
 			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 		</div>
 
@@ -49,10 +50,13 @@
 
 	</div>
 
+	<div id=divContainer ><div id=divContents ></div></div>
+
 <script>
 
 
-	COR.initCore();
+//	COR.initCore();
+
 	init();
 
 
@@ -71,6 +75,7 @@
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
+
 		onHashChange();
 
 	}
@@ -81,13 +86,14 @@
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
 		THR = icw.THR;
-		GBV = icw.GBV;
 		GBX = icw.GBX;
+		GBV = icw.GBV;
 
 		THR.controls.autoRotate = false;
 
 		console.log( 'scene', THR.scene );
-		butReports.click();
+
+		//butGbx.click();
 
 	}
 
@@ -95,7 +101,8 @@
 
 	function onHashChange() {
 
-		const url = COR.threeDefaultFile + location.hash;
+		//const url = COR.threeDefaultFile + location.hash;
+		const url = 'gv-gbx-basic.html' + location.hash;
 		console.log( 'url', url );
 
 		ifrThree.src = url;

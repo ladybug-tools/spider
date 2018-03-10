@@ -182,7 +182,8 @@
 
 			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
 
-			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
+//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
+			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank ><img src="world-map.png" height=18; ></a>';
 
 		} else {
 
@@ -190,7 +191,7 @@
 
 		}
 
-		return linkToMap;
+		return '<span title="Use context menu to open a Google Map in a new tab" >' + linkToMap + '<span>';
 
 	}
 
@@ -338,7 +339,8 @@
 		for ( let i = 0; i < types.length; i++ ) {
 
 			txt +=
-				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
+//				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
+				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' ><img src="eye.png" height=18></button>' +
 				' <button class=toggle onclick=REP.toggleSurfaceType(this); >' + types[ i ] + '</button>: ' +
 				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
 				'%<br>';

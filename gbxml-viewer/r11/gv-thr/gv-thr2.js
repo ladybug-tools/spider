@@ -14,7 +14,7 @@
 	var THR = {};
 
 
-	THR.initThreeGbxml = () => {
+	THR.initThree = function() {
 
 		let renderer, camera, controls, scene;
 		let lightAmbient, lightDirectional, lightPoint;
@@ -24,8 +24,6 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMap.enabled = true;
 		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-//		renderer.shadowMap.renderReverseSided = false;
-//		renderer.shadowMap.renderSingleSided = false;
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -60,31 +58,6 @@
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
 
-		const thrFilePath = localStorage.getItem( 'thrFilePath' );
-
-		parent.inpFilePath.value = thrFilePath;
-
-		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
-
-		// in iframe: loads default / standalone: opens permalinks
-		//console.log( 'location.hash', location );
-
-		//if ( window.self !== window.top ) {
-
-			if ( location.hash && location.hash.endsWith( '.xml') ) {
-
-				const url = location.hash.slice( 1 );
-
-				COR.requestFileAndProgress( url, GBX.callbackGbXML );
-
-			} else {
-
-				COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
-
-			}
-
-		//}
-
 		THR.renderer= renderer;
 		THR.scene = scene;
 		THR.camera = camera;
@@ -97,20 +70,7 @@
 		THR.gridHelper = gridHelper;
 		THR.groundHelper = groundHelper;
 
-	}
-
-
-
-	THR.updateDefaultFilePath = function() {
-
-		location.hash = parent.inpFilePath.value;
-
-		const thrFilePath = parent.inpFilePath.value;
-		localStorage.setItem('thrFilePath', thrFilePath );
-
-		COR.requestFileAndProgress( thrFilePath, GBX.callbackGbXML );
-
-	}
+	};
 
 
 	// available if parent wants it.
@@ -144,3 +104,4 @@
 		THR.controls.update();
 
 	}
+

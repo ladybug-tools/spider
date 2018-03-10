@@ -1,0 +1,44 @@
+:root { --but-bg-color: aqua; }
+
+body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+a { color: crimson; text-decoration: none; }
+a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; margin: 3px; padding: 3px 20px; }
+button:hover { background-color: #ccc; color: #fff }
+
+iframe { height: 500px; width: 100%; }
+i { color: blue; }
+
+input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+.dragDropArea { border: 1px dashed gray; line-height: 40px; padding: 5px; }
+
+.flex-container { display: flex; flex-wrap: wrap; }
+.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
+
+.flex-container2 { display: flex; flex-wrap: wrap; }
+.flex-container2 > div { /* border: 1px solid #ddd; margin: 5px; padding: 5px; */ }
+
+#divDraggable, #divMenu {
+	background-color: #f1f1f1;
+	border: 1px solid #d3d3d3;
+	left: calc( 100% - 400px );
+	max-height: 85%;
+	overflow: auto;
+	padding: 10px;
+	position: absolute;
+	resize: both;
+	top: 100px;
+	z-index: 9;
+}
+
+#divDraggableHeader, #divMenuHeader {
+	background-color: #2196F3;
+	color: #fff;
+	cursor: move;
+	padding: 10px;
+	z-index: 10;
+}

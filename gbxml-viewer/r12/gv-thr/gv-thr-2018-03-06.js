@@ -1,5 +1,14 @@
-// Copyright 2018 Ladybug Tools authors. MIT License
 
+	var uriGbxmlDefault =
+	location.protocol === 'file:' ? // for testing
+	//		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
+	//		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
+	'../../../gbxml-sample-files/bristol-clifton-down-road.xml'
+	:
+	'../../../gbxml-sample-files/bristol-clifton-down-road.xml';
+
+	var THR = {};
+	/*
 	var GBX = {};
 
 	GBX.gbxml = null;
@@ -29,10 +38,9 @@
 		EmbeddedColumn: 0x80806E
 
 	}
-
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
-	txt = '';
+	let txt = '';
 
 	for ( let type of GBX.surfaceTypes ) {
 
@@ -41,49 +49,120 @@
 	}
 
 	GBX.surfaceTypeOptions = txt;
+	*/
 
-	GBX.initTemplate = function () {
+	THR.initThreeGbxml = () => {
 
-		if ( butGbx.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		let renderer, camera, controls, scene;
+		let lightAmbient, lightDirectional, lightPoint;
+		let cameraHelper, axesHelper, gridHelper, groundHelper;
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.shadowMap.enabled = true;
+		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+		renderer.shadowMap.renderReverseSided = false;
+		renderer.shadowMap.renderSingleSided = false;
+		document.body.appendChild( renderer.domElement );
 
-			divMenuItems.innerHTML =
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
+		camera.up.set( 0, 0, 1 );
 
-				`<details id = detTemplate  class=app-menu open>
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
 
-					<summary>Template</summary>
+		scene = new THREE.Scene();
 
-					<div id = "divTemplate" style=width:300px; ><div>
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
 
-					<hr>
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+		lightDirectional.shadow.mapSize.width = 2048;  // default 512
+		lightDirectional.shadow.mapSize.height = 2048;
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
 
-				</details>
+		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+		camera.add( lightPoint );
+		scene.add( camera );
 
-			` + divMenuItems.innerHTML;
+		axesHelper = new THREE.AxesHelper( 1 );
+		scene.add( axesHelper );
 
-			initMenuTemplate();
+		window.addEventListener( 'resize', THR.onWindowResize, false );
+		window.addEventListener( 'orientationchange',THR.onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 
-			butGbx.style.backgroundColor = 'var( --but-bg-color )';
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
+
+		// in iframe: loads default / standalone: opens permalinks
+		//console.log( 'location.hash', location );
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			COR.requestFileAndProgress( url, GBX.callbackGbXML );
 
 		} else {
 
-			detTemplate.remove();
-
-			butGbx.style.backgroundColor = '';
+			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
 
 		}
 
-		function initMenuTemplate() {
 
-			txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+		THR.renderer= renderer;
+		THR.scene = scene;
+		THR.camera = camera;
+		THR.controls = controls;
+		THR.lightAmbient = lightAmbient;
+		THR.lightDirectional = lightDirectional;
+		THR.lightPoint = lightPoint;
+		THR.cameraHelper = cameraHelper;
+		THR.axesHelper = axesHelper;
+		THR.gridHelper = gridHelper;
+		THR.groundHelper = groundHelper;
 
-			divTemplate.innerHTML = '<p>' + txt + '<p>';
+	}
 
-		}
+
+	// available if parent wants it.
+	// called by parseFileXML()
+
+	THR.onWindowLoad = function() {
+
+		if ( parent && parent.onloadThreejs ) { parent.onloadThreejs(); }
 
 	};
 
-	//GBX.surfaceTypeOptions = txt;
 
+
+	THR.onWindowResize = function() {
+
+		THR.camera.aspect = window.innerWidth / window.innerHeight;
+		THR.camera.updateProjectionMatrix();
+
+		THR.renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	};
+
+
+
+	THR.animate = function() {
+
+		requestAnimationFrame( THR.animate );
+		THR.renderer.render( THR.scene, THR.camera );
+		THR.controls.update();
+
+	}
+
+
+//////////
+
+	/*
 	GBX.callbackGbXML = function( xhr ) {
 
 		GBX.gbxmlResponseXML =  xhr.target.responseXML;
@@ -96,12 +175,6 @@
 
 
 	GBX.openGbxmlFile = function( files ) {
-
-		//console.log( 'file', files.files[ 0 ] );
-
-		COR.timeStart = Date.now();
-
-		GBX.fileAttributes = files.files[ 0 ];
 
 		const reader = new FileReader();
 		reader.onprogress = onRequestFileProgress;
@@ -116,7 +189,7 @@
 			//console.log( 'GBX.gbxml', GBX.gbxml );
 
 			GBX.gbjson = GBX.parseFileXML( GBX.gbxml );
-			//GBX.surfaceJson = GBX.gbjson.Campus.Surface;
+		//			GBX.surfaceJson = GBX.gbjson.Campus.Surface;
 
 			if ( files.files[ 0 ] ) { GBX.gbjson.name = files.files[ 0 ].name; }
 
@@ -127,8 +200,8 @@
 		function onRequestFileProgress( event ) {
 
 			divLog.innerHTML =
-				GBX.fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
-//				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+				'bytes loaded: ' + event.loaded.toLocaleString() +
+				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
 			'';
 
 		}
@@ -338,7 +411,6 @@
 		GBX.spacesOptions = txt;
 
 		txt = '';
-
 		for ( let surface of GBX.surfaceJson ) {
 
 			txt += '<option>' + surface.id + '</option>';
@@ -347,21 +419,18 @@
 
 		GBX.surfacesOptions = txt;
 
-		const surfacesOptions= [];
-
+		var arr= [];
 		for ( let surface of GBX.surfaceJson ) {
 
-			surfacesOptions.push( '<option>' + surface.CADObjectId + '</option>' );
+			arr.push( '<option>' + surface.CADObjectId + '</option>' );
 
 		}
 
-		GBX.surfacesCadObj = surfacesOptions.sort().join();
+		GBX.surfacesCadObj = arr.sort().join();
 
-		//		console.log( 'GBX.surfacesCadObj', GBX.surfacesCadObj);
+//		console.log( 'GBX.surfacesCadObj', GBX.surfacesCadObj);
 
 		GBX.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
-
-		//divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
 	}
 
@@ -461,10 +530,9 @@
 	}
 
 
-	// GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes);
+
 	GBX.zoomObjectBoundingSphere = function( obj ) {
 
-		/*
 		const renderer = THR.renderer;
 		const scene = THR.scene;
 		const camera = THR.camera;
@@ -472,7 +540,6 @@
 		const lightDirectional = THR.lightDirectional;
 		const lightPoint = THR.lightPoint;
 		const axesHelper = THR.axesHelper;
-		*/
 
 		if ( obj.geometry ) {
 			// might not be necessary
@@ -493,20 +560,20 @@
 		obj.userData.center = center;
 		obj.userData.radius = radius;
 
-		THR.controls.target.copy( center );
-		THR.controls.maxDistance = 5 * radius;
+		controls.target.copy( center );
+		controls.maxDistance = 5 * radius;
 
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
 
-		THR.axesHelper.scale.set( radius, radius, radius );
-		THR.axesHelper.position.copy( center );
+		axesHelper.scale.set( radius, radius, radius );
+		axesHelper.position.copy( center );
 
-		THR.camera.far = 10 * radius; //2 * camera.position.length();
-		THR.camera.updateProjectionMatrix();
+		camera.far = 10 * radius; //2 * camera.position.length();
+		camera.updateProjectionMatrix();
 
-		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
-		THR.lightDirectional.target = THR.axesHelper;
+		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		lightDirectional.target = axesHelper;
 
 		//		scene.remove( cameraHelper );
 		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
@@ -517,13 +584,12 @@
 
 
 	GBX.setAllVisible = function() {
-		/*
+
 		const renderer = THR.renderer;
 		const scene = THR.scene;
 		let camera = THR.camera;
 		let controls = THR.controls;
 		const lightPoint = THR.lightPoint;
-		*/
 
 		GBX.surfaceMeshes.visible = true;
 
@@ -551,13 +617,15 @@
 
 		};
 
-		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
-		THR.camera.up.set( 0, 0, 1 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
+		camera.up.set( 0, 0, 1 );
 
-		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
-		// THR.controls.autoRotate = true;
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
 
-		THR.camera.add( THR.lightPoint );
-		THR.scene.add( THR.camera );
+		camera.add( lightPoint );
+		scene.add( camera );
 
 	}
+
+	*/

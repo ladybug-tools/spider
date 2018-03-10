@@ -42,7 +42,9 @@
 
 	GBX.surfaceTypeOptions = txt;
 
-	GBX.initTemplate = function () {
+
+
+	function xxxinitGbx() {
 
 		if ( butGbx.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -82,7 +84,7 @@
 
 	};
 
-	//GBX.surfaceTypeOptions = txt;
+
 
 	GBX.callbackGbXML = function( xhr ) {
 
@@ -99,7 +101,7 @@
 
 		//console.log( 'file', files.files[ 0 ] );
 
-		COR.timeStart = Date.now();
+		GBX.timeStart = Date.now();
 
 		GBX.fileAttributes = files.files[ 0 ];
 

@@ -21,10 +21,7 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <summary>Welcome 2018-03-09 ~ R11.12</summary>
 
-
 This release is a stable version release candidate. If this release is considered good, then development will continue on a fresh cade base. This means that you will be able to use this release for work without worrying too much that the programmers might do something awful over night.
-
-R11.12.1  ~ Add eye.png to REP/Reports
 
 APP ~ Main application module
 
