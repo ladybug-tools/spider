@@ -32,7 +32,7 @@
 
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
-	let txt = '';
+	txt = '';
 
 	for ( let type of GBX.surfaceTypes ) {
 
@@ -40,13 +40,9 @@
 
 	}
 
-
-	GBX.initTemplate = function () {
-
-
-
 	GBX.surfaceTypeOptions = txt;
 
+	GBX.initTemplate = function () {
 
 		if ( butGbx.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -78,7 +74,7 @@
 
 		function initMenuTemplate() {
 
-			let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+			txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
 			divTemplate.innerHTML = '<p>' + txt + '<p>';
 
@@ -86,7 +82,7 @@
 
 	};
 
-	GBX.surfaceTypeOptions = txt;
+	//GBX.surfaceTypeOptions = txt;
 
 	GBX.callbackGbXML = function( xhr ) {
 

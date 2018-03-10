@@ -5,13 +5,13 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-08" >
-<title>gbXML Viewer 11.11</title>
+<meta name = "date" content = "2018-03-09" >
+<title>gbXML Viewer 11.12</title>
 <link rel="stylesheet" type="text/css" href="../gv-app/style.css" >
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r89/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-gbx/gv-gbx.js" ></script>
@@ -41,7 +41,8 @@
 				</div>
 
 				<h2>
-					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r11/gv-app/gv-app.html" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 style=background-color:yellow; title="click the 'Octocat' to view the source code on GitHub" ></a>
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r11/gv-app/gv-app.html" target="_top" >
+						<img src="../gv-cor/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
 					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
 				</h2>
 
@@ -100,6 +101,7 @@
 				<hr>
 
 				<details open>
+
 					<summary>things to try</summary>
 
 					<button id=butCameraFirstPerson class=app-menu onclick =
@@ -157,10 +159,12 @@
 
 			<div id = "divMenuItems" ></div>
 
+			<div id=divMenuFooter ></div>
 
+			<!--
 			<details open >
 
-				<summary>Footer</summary>
+				<summary>footer</summary>
 
 				<div title='' ><a href=#../README.md >Release Read Me</a></div>
 				<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
@@ -174,7 +178,7 @@
 				<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' > &#x1f578; </h2>
 
 			</details>
-
+			-->
 		</div>
 
 	</div>
@@ -218,6 +222,7 @@
 <script>
 
 	var APP = {};
+	divMenuFooter.innerHTML = COR.menuFooter;
 
 	COR.initCore();
 	THR.initThreeGbxml();
@@ -225,8 +230,8 @@
 	COR.onHashChange(); // loads splash screen and gets things rolling
 
 
-
 	function onloadThreejs() {
+
 
 		APP.resetMenu();
 

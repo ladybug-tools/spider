@@ -29,9 +29,7 @@
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
 
-	<p id=dragAreaToIframe class=dragDropArea >
-		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); >
-	<p>
+	<div id=divMenuFileOpening ></div>
 
 	<div id = "divSampleFiles" ></div>
 
@@ -44,9 +42,12 @@
 			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 		</div>
 
+
+
 		<div id=divMenuItems ></div>
 
 	</div>
+
 
 <script>
 
@@ -64,6 +65,8 @@
 			'</h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
+
+		divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 

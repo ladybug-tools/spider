@@ -19,7 +19,28 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
+<summary>Welcome 2018-03-09 ~ R11.12</summary>
+
+This release is a stable version release candidate. If this release is considered good, then development will continue on a fresh cade base. This means that you will be able to use this release for work without worrying too much that the programmers might do something awful over night.
+
+APP ~ Main application module
+
+* Style sheet: Add box-shadows and other visual effects
+* Footer pages: Split Release read me into two files / New Previous Releases page link added to menu
+
+COR ~ Core module
+
+* Much code clean-up and making functions more reusable
+
+ETC
+* Quite a bit of work on the read me files
+
+
+</details><details open>
+
 <summary>Welcome 2018-03-08 ~ R11.11</summary>
+
+R11.11.1 ~ Bug fixes
 
 APP ~ main menu
 
@@ -30,10 +51,10 @@ APP ~ main menu
 	* Use www URL: https://rawgit.com/ladybug-tools/spider/master/gbxml-sample-files/london-office.xml
 	* Click main menu title to reload
 
-
 SET ~ Settings
 
 * Sections: beginning to work as desired
+* Dealt with: 2018-03-08 ~ fix Sectioning issues
 
 </details><details open>
 
@@ -186,11 +207,14 @@ R11 is the new pre-release
 
 Many updates to all the Read Me files
 
+
+
+
 </details><details>
 
-<summary>Welcome 2018-02-28 ~ R10.10</summary>
+<summary>Welcome 2018-02 ~ February ~ R9.6 to 10.10</summary>
 
-R10.:1O:10.1
+R1O:10.1
 * HUD select now sho 8 items instead of 10
 R10.:1O:10.2 / R10.:1O:10.4 / R10.:1O:10.5
 * Various menu size fixes
@@ -215,9 +239,7 @@ HUD
 * Improve menu width handling
 * When change type, adjacent spaces update more correctly
 
-</details><details>
-
-<summary>Welcome 2018-02-27 ~ R10.9</summary>
+### Welcome 2018-02-27 ~ R10.9
 
 Reports
 * Fix silly devLog bug that was breaking everything
@@ -241,9 +263,7 @@ Settings
 * Fix surface normals not showing
 * Fix Duplicate CADObjectId not showing
 
-</details><details>
-
-<summary>Welcome 2018-02-26 ~ R10.8</summary>
+### Welcome 2018-02-26 ~ R10.8</summary>
 
 App
 * Menus reset when new model loaded
@@ -254,9 +274,7 @@ HUD
 	* ALT + key to toggle element/surfaces/edges/all
 * Add input and select alternative spaces
 
-</details><details>
-
-<summary>Welcome 2018-02-25 ~ R10.7</summary>
+### Welcome 2018-02-25 ~ R10.7</summary>
 
 R10.7
 * All modules updated. Name space fixes etc
@@ -275,9 +293,7 @@ Done
 * 2018-02-11 ~ Theo: Fix explode view so it works
 
 
-</details><details>
-
-<summary>Welcome 2018-02-25 ~ R10.6</summary>
+### >Welcome 2018-02-25 ~ R10.6</summary>
 * Add GBV module
 	* No user iterface interaction / all behind the scenes
 	* Standardizes and simplifies many viewing functions
@@ -286,9 +302,7 @@ Done
 	* Tools to help with understanding circumstances
 	* At a very early stage. Cannot edit or save yet
 
-</details><details>
-
-<summary>Welcome 2018-02-23 ~ R10.5</summary>
+### Welcome 2018-02-23 ~ R10.5</summary>
 
 * Add 'edit duplicate surfaces' module
 	* Finds all instances of two surfaces with identical coordinates
@@ -297,18 +311,14 @@ Done
 
 
 
-</details><details>
-
-<summary>Welcome 2018-02-21 ~ R10.4</summary>
+### Welcome 2018-02-21 ~ R10.4</summary>
 
 * Many fixes 'under the hood' / User interface has few changes
 * [Name spaces]( https://en.wikipedia.org/wiki/Namespace ) implemented for much of the code
 	* Prevents functions and variables in one module trashing a similarly named items in another module
 * 'Edit file' workflow improved
 
-</details><details>
-
-<summary>Welcome 2018-02-19 ~ R10.3</summary>
+### Welcome 2018-02-19 ~ R10.3</summary>
 
 * Many fixes
 * Menus move more smoothly
@@ -316,9 +326,7 @@ Done
 * HUD updates with Editor and reports
 
 
-</details><details>
-
-<summary>Welcome 2018-02-18 ~ R10.2</summary>
+### Welcome 2018-02-18 ~ R10.2</summary>
 
 
 Add Edit module. All menus movable and resizable. Many fixes throughout. In the Settings menu, the 'Explode view' feature is still not perfect but has been much improved.
@@ -347,9 +355,7 @@ App
 		* resizes and moves - a bit flakey though
 
 
-</details><details>
-
-<summary>Welcome 2018-02-17</summary>
+### Welcome 2018-02-17</summary>
 
 Add three more modules: heads-up display, first person camera and save.
 
@@ -358,9 +364,7 @@ Add three more modules: heads-up display, first person camera and save.
 
 
 
-</details><details>
-
-<summary>Welcome 2018-02-16</summary>
+### Welcome 2018-02-16</summary>
 
 
 R10 first commit. A significant revision. The code is smaller, simpler and faster. About half the R9 code is in 10. The remaining modules should be available soon.
@@ -372,9 +376,7 @@ The interface give more emphasis to the model - and less to the menus. And, of c
 R10
 * First commit
 
-</details><details>
-
-<summary>Welcome 2018-02-13</summary>
+### >Welcome 2018-02-13</summary>
 
 
 Settings menu: Explode view beginning to operate as desired. Still much to do to improve the user experience. Reload web page required to fully reset view.
@@ -418,9 +420,6 @@ Done at one time or another
 	* Add more console.log outputs
 	* Add telltales with vertex numbering
 
-</details><details>
-
-<summary>Welcome 2018-02-08</summary>
 
 ### 2018-02-08 ~ Theo
 Core now corrects for duplicate vertices and other errors in gbXML files. HUD adds many more buttons
@@ -447,9 +446,7 @@ Core now corrects for duplicate vertices and other errors in gbXML files. HUD ad
 	* Duplicate coordinates now highlighted in yellow
 
 
-</details><details>
-
-<summary>Welcome 2018-02-03</summary>
+### Welcome 2018-02-03</summary>
 
 
 Starting to add saving and editing. Help text added to Reports menu. Storey and Space readout in Core work better.
@@ -467,7 +464,7 @@ Starting to add saving and editing. Help text added to Reports menu. Storey and 
 
 </details><details>
 
-<summary>Welcome 2018-01</summary>
+<summary>Welcome 2018-01 ~ January ~ R9 to R9.5</summary>
 
 
 ### 2018-01-27 ~ Theo

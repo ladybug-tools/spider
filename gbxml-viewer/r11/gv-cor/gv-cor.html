@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Core file browse, read and display utilities" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-08" >
+<meta name = "date" content = "2018-03-09" >
 <title>gbXML Viewer Core</title>
 <link rel="stylesheet" type="text/css" href="../gv-app/style.css" >
 <style>
@@ -42,32 +42,33 @@
 
 		<div id = "divMenuContents" >
 
-			<h1 id=divTitle >
-				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/gbxml-viewer10-core" >
-					<img src="GitHub-Mark-32px.png" height=18 >
-				</a>
-				<a href="" ><script> document.write( document.title ) </script></a>
-			</h1>
+			<details open >
 
-			<p><script> document.write( document.head.querySelector( '[name=description]' ).content ) </script></p>
+				<summary>header</summary>
 
-			<p id=dragArea class=dragDropArea >
-				Drag and drop a file file in here<br>
-				or <input type=file id=inpFile onchange=COR.openFile(this); ><br>
-				or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
-				<br>		<p>
+				<div id=divMenuBreadcrumbs ></div>
 
-			<p id = "divMenuContents" >
-				<!--
-				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+				<div id=divMenuTitle ></div>
 
-				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+				<div id=divMenuDescription ></div>
 
-				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+				<div id=divMenuFileOpening ></div>
 
-				<button onclick=GBX.setAllVisible();GBX.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
-				-->
-			</p>
+			</details>
+
+			<details open >
+
+				<summary title="the primary viewer tools are here" >features</summary>
+
+				<div id = "divMenuItems" >
+
+					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+				</div>
+
+			</details>
+
+			<div id=divMenuFooter ></div>
 
 			<div id=divLog ></div>
 
@@ -75,14 +76,56 @@
 
 	</div>
 
-	<div id=divContainer ><div id=divContents ></div></div>
+	<div id = "divHamburger" onclick=COR.toggleNav(); > slide &#9776; </div>
+
+	<div id=divContainer >
+
+		<div id = "divContentsHeader" >
+				pop-up window / click here to move / click outside to close
+				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+		</div>
+
+		<div id=divContents ></div>
+
+	</div>
+
+
+	<div id=divHeadsUp >
+
+		<div id=divDraggableHeader2 title="Open JavaScript console to see more data" >
+			heads-up display / click here to move
+			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+		</div>
+
+		<div id=divHUDheader ></div>
+
+		<div id=divHUDItems >
+			lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+		</div>
+		<div id=divHUDfooter >foot</div>
+
+	</div>
 
 <script>
 
 	COR.initCore();
 
-//	THR.initThreeGbxml();
-//	THR.animate();
+	if ( window.self === window.top ) {
+
+		location.hash = COR.uriDefaultFile;
+
+		divMenuBreadcrumbs.innerHTML = COR.menuBreadcrumbs;
+
+		divMenuTitle.innerHTML = COR.menuTitle;
+
+		divMenuDescription.innerHTML = COR.menuDescription;
+
+		divMenuFileOpening.innerHTML = COR.menuFileOpening;
+
+		divMenuFooter.innerHTML = COR.menuFooter;
+
+	}
+
 
 </script>
 </body>

@@ -3,12 +3,68 @@
 
 	let COR = {};
 
-	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
-	COR.iconInfo = '<img src="GitHub-Mark-32px.png" height=14 >';
+	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r11/';
 
+	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	COR.iconGitHubMark = "gitHub-mark.png";
 
 	//COR.threeDefaultFile = '../gv-thr/gv-thr.html';
 	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
+
+	COR.menuBreadcrumbs =
+
+	`<div>
+		<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+		<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
+		<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
+	</div>`;
+
+	COR.menuTitle =
+
+	`<h2>
+		<a href="` + COR.releaseSourceURL + `" target=_top >
+			<img src=` + COR.iconGitHubMark + ` height=18 style=opacity:0.3; ></a>
+			<a href="" >` + document.title +`</a>
+	</h2>`;
+
+	COR.menuDescription =
+
+	`<div title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>` +
+		document.head.querySelector( '[name=description]' ).content +
+	`</small></div>`;
+
+	COR.menuFileOpening =
+
+	`<p id=dragArea class=dragDropArea >
+		Drag & drop a file in this box<br>
+		or <input type=file id=inpFile onchange=COR.openFile(this); ><br>
+		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
+		<br>
+	<p>`;
+
+	COR.menuFooter =
+	`<details open >
+
+		<summary>footer</summary>
+
+		<div title='' ><a href=#../README.md >Release Read Me</a></div>
+		<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
+		<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
+		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
+		<div><a href=#../../../pages/contributing.md >Contributing</a></div>
+		<div><a href=#../../../pages/license.md >License</a></div>
+		<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
+		<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+		<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
+
+		<hr>
+		<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
+			title='go to top and, btw, my web is better than your web' > <img src=../gv-cor/spider-web.png height=24 style=opacity:0.5; > </h2>
+
+	</details>`;
+
+	// unicode spider web &#x1f578;
 
 	COR.gbxmlSampleFiles =
 	`
@@ -40,6 +96,8 @@
 
 		if ( window.divMenuHeader ) {
 			divMenuHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			divMenuHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			divMenuHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
 		if ( window.divContentsHeader ) {
@@ -48,24 +106,26 @@
 			divContentsHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
+		if ( window.divHeadsUp ) {
+			divHeadsUp.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			divHeadsUp.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			divHeadsUp.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+		}
+
 		window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 		COR.timeStart = Date.now();
 
-		if ( window.self === window.top ) {
 
-			//COR.onHashChange();
-
-		}
 
 	}
 
 
 	// handle location.hash change events
 
-	COR.onHashChange = () => {
+	COR.onHashChange = function() {
 
 		const url = !location.hash ? COR.uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
@@ -256,12 +316,12 @@
 
 	// handle menu header dragging with mouse or touch events
 
-	COR.onMouseDownDraggable = event  => {
+	COR.onMouseDownDraggable = function( event ) {
 
 		COR.draggableTop = event.clientY - event.target.parentNode.offsetTop;
 		COR.draggableLeft = event.clientX - event.target.parentNode.offsetLeft;
 
-		window.addEventListener('mousemove', COR.onMouseMoveDraggable, true );
+		window.addEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
 		event.preventDefault();
 
 	};
@@ -322,3 +382,22 @@
 	};
 
 
+	COR.toggleNav = function() {
+
+		const left = 'calc( var( --mnu-width ) - 100px )';
+
+		divContainer.style.display="none";
+
+		if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
+
+			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			divHamburger.style.left = '-100px';
+
+		} else {
+
+			divMenu.style.left = 0;
+			divHamburger.style.left = left;
+
+		}
+
+	}

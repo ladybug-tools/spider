@@ -30,9 +30,7 @@
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html#../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml' ></iframe>
 
-	<p id=dragAreaToIframe class=dragDropArea >
-		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); >
-	<p>
+	<div id=divMenuFileOpening ></div>
 
 	<div id = "divLog" ></div>
 
@@ -66,6 +64,8 @@
 			'</h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
+
+		divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 

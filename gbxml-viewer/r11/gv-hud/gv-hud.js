@@ -25,6 +25,9 @@
 					background-color: #f8f8f8; border-radius: 8px; display: none; left: calc( 100% - 400px );
 					max-height: 97%; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
 					padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; z-index: 10;
+
+						box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
 				`;
 
 				divHeadsUp.innerHTML =

@@ -319,6 +319,7 @@ See also:
 
 ### SAV ~ Save Changes
 
+* 2018-03-09 ~ Add save level of a ground plane
 * 2018-03-05 ~ Add pretty print to output file
 * 2018-03-05 ~ Add ability to add/merge changes
 * @@@ 2018-03-04 ~ Add user surface defined colors
@@ -329,7 +330,6 @@ See also:
 
 ### SET ~ Settings
 
-* @@@ 2018-03-08 ~ fix Sectioning issues
 * Add ( random? ) colors by space
 * 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
 * Better lights and shadows
