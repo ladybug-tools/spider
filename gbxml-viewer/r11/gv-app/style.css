@@ -72,7 +72,7 @@
 
 	#divMenuHeader { background-color: var( --mnu-header-color ); cursor: move; padding: 10px; }
 
-	#divMenuContents { padding: 10px; }
+	#divMenuContents {  box-sizing: border-box; padding: 10px; }
 
 	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 40%; }
 

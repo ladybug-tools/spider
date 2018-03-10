@@ -46,12 +46,14 @@
 					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
 				</h2>
 
-				<p title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><script> document.write( document.head.querySelector( '[name=description]' ).content )</script></p>
+				<p title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>
+					<script> document.write( document.head.querySelector( '[name=description]' ).content )</script>
+				</small></p>
 
 				<p id=dragArea class=dragDropArea >
-					Drag & drop gbXML file in this box<br>
+					Drag & drop gbXML file to this box<br>
 					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
-					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=40 title='paste a file path or URL here then press Enter' >
+					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 				<p>
 
 				<hr>
