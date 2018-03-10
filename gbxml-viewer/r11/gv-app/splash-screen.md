@@ -26,7 +26,7 @@ This release is a stable version release candidate. If this release is considere
 APP ~ Main application module
 
 * Style sheet: Add box-shadows and other visual effects
-* Footer pages: Split Release read me into two files / New Previous Releases page link added to menu
+* Footer pages: Split Release Read Me into two files / New Previous Releases page link added to menu
 
 COR ~ Core module
 
