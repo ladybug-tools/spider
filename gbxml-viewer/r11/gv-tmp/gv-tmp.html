@@ -30,11 +30,7 @@
 
 	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
 
-	<p id=dragAreaToIframe class=dragDropArea >
-		Drag and drop a gbXML file in here or <input type=file id=inpFile onchange=ifrThree.contentWindow.GBX.openGbxmlFile(this); ><br>
-		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=60 >
-		<br>
-	<p>
+	<div id=divMenuFileOpening ></div>
 
 	<div id=divLog ></div>
 
@@ -58,13 +54,12 @@
 <script>
 
 
+
+	initTemplate();
+
 	COR.initCore();
 
-
-	init();
-
-
-	function init() {
+	function initTemplate() {
 
 		divTitle.innerHTML =
 			'<h2>' +
@@ -73,6 +68,8 @@
 			'</h2>' +
 			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
 		'';
+
+		divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 
@@ -103,7 +100,7 @@
 	function onHashChange() {
 
 		const url = COR.threeDefaultFile + location.hash;
-		console.log( 'url', url );
+		//console.log( 'url', url );
 
 		ifrThree.src = url;
 		ifrThree.contentWindow.location.reload();

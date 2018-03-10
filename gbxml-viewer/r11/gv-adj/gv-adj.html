@@ -31,6 +31,8 @@
 
 	<div id=divMenuFileOpening ></div>
 
+	<div id=divLog ></div>
+
 	<div id = "divSampleFiles" ></div>
 
 	<p><a href=index.html >Read Me file</a></a></p>
@@ -42,8 +44,6 @@
 			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 		</div>
 
-
-
 		<div id=divMenuItems ></div>
 
 	</div>
@@ -51,12 +51,12 @@
 
 <script>
 
+	initAdajacent();
 
 	COR.initCore();
-	init();
 
 
-	function init() {
+	function initAdajacent() {
 
 		divTitle.innerHTML =
 			'<h2>' +

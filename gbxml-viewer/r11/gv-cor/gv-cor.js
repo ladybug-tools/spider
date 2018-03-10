@@ -9,7 +9,7 @@
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	COR.iconGitHubMark = "gitHub-mark.png";
 
-	//COR.threeDefaultFile = '../gv-thr/gv-thr.html';
+	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
 	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
 
 	COR.menuBreadcrumbs =
@@ -117,8 +117,6 @@
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 		COR.timeStart = Date.now();
-
-
 
 	}
 
@@ -235,8 +233,16 @@
 
 			console.log( 'event', event );
 
-			//txtArea.innerHTML = reader.result;
-			COR.callbackMarkdownData( reader.result );
+			if ( files.files[0].name.toLowerCase().endsWith( '.xml' ) ) {
+
+				GBX.openGbxmlFile( files );
+
+			} else {
+
+				//txtArea.innerHTML = reader.result;
+				COR.callbackMarkdownData( reader.result );
+
+			}
 
 			divLog.innerHTML =
 				'name: ' + files.files[0].name + '<br>' +
@@ -257,7 +263,7 @@
 
 	// handle drag and drop events
 
-	COR.drop = event => {
+	COR.drop = function( event ) {
 
 		console.log( 'event', event );
 

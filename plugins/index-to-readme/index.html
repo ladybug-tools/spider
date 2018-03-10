@@ -13,26 +13,25 @@
 	const pathname = location.pathname;
 	console.log( 'pathname', pathname);
 
+	let path;
+
 	const repo = 'spider';
 
 	if ( protocol === 'file:' ) {
 
 		const sliceStart = pathname.indexOf( repo ) + repo.length + 1;
-		console.log( 'sliceStart', sliceStart );
+		//console.log( 'sliceStart', sliceStart );
 
 		path = pathname.slice( sliceStart, pathname.lastIndexOf( '/' )  );
-		console.log( 'path', path );
+		//console.log( 'path', path );
 
 	} else if ( protocol.includes( 'http' ) ) {
 
-		//sliceStart = location.hostname.indexOf( repo ) + 1;
-		//user = location.hostname.slice( 0, sliceStart );
 		path = pathname.slice( 1, pathname.lastIndexOf( '/' )  );
 
 	}
 
-	pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
-
+	const pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
 	console.log( 'pathFull', pathFull );
 
 	window.location.href = pathFull;
@@ -43,7 +42,7 @@
 const pathname = location.pathname;
 path = pathname.slice( 1, pathname.lastIndexOf( '/' )  );
 console.log( 'path', path );
-	pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
+pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
 console.log( 'pathFull', pathFull);
 
 */
