@@ -4,6 +4,7 @@
 ## Support
 
 ### Help
+
 For general information, 'How do you...?' help and general questions, please post a new topic on the Ladybug Tools forum:
 
 ### [Ladybug Tools Forum / Spider Category]( http://discourse.ladybug.tools/c/spider)
@@ -32,10 +33,20 @@ None. After all, it's nearly perfect
 * More links and details available in the [Release Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r11/README.md )
 * Completed items are documented on the release notes - which are displayd in the 'splash screen' that appears in the pop-up window when you first open the Viewer
 
-### Dev
+### Dev ~ Items not specific to any module
 
-* 2018-03-08 ~ Start an Issues menu item
-* 2018-03-04 ~ Start R12
+For R12
+
+* New color scheme palette
+* Link to [gbXML User Guide]( http://www.ladybug.tools/spider/read-gbxml/gbxml-user-guide/gbxml-user-guide.html )
+
+Style Sheet
+
+* 2018-03-04 ~ More CSS vars
+
+view-updates.html
+
+* Shows posts in issues that have been closed
 
 ### ADJ ~ Duplicate Adjacents
 
@@ -50,14 +61,7 @@ None. After all, it's nearly perfect
 
 ### APP ~ Application Menu
 
-* 2018-03-08 ~ Bring all file loading over to APP?
 * 2018-03-04 ~ Random model on start-up?
-* 2018-02-18 ~ Menus remember their position from session to session
-
-
-#### Style Sheet
-
-* 2018-03-04 ~ More CSS vars
 
 
 ### CAM ~ First Person camera
@@ -71,6 +75,7 @@ None. After all, it's nearly perfect
 
 ### COR Core
 
+* 2018-02-18 ~ Menus remember their position from session to session
 
 
 ### CRD ~ Duplicate Coordinates
@@ -91,7 +96,7 @@ None. After all, it's nearly perfect
 
 
 
-### GBV ~ gbXML View Utilities
+### GBX ~ gbXML Utilities
 
 * 2018-03-08 ~ Simpler loading flow
 
@@ -143,7 +148,7 @@ None. After all, it's nearly perfect
 
 ### TMP ~ Templates
 
-* 2018-03-04 ~ Use main style sheet?
+
 
 
 ***

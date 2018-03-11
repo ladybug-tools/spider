@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.5/dist/showdown.min.js" ></script>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 
 	<div id = "menu" >
 
@@ -27,7 +27,7 @@
 		<div id = "header" >
 			Below are some recent status updates regarding the Ladybug Tools/ Spider efferts on gbXML.
 
-			There are more updates available on our 
+			There are more updates available on our
 			<a href="https://github.com/ladybug-tools/spider/issues?utf8=%E2%9C%93&q=label%3AgbXML+" >GitHub issues</a> page.
 
 		</div>
@@ -53,19 +53,19 @@
 
 		showdown.setFlavor( 'github' );
 
-		if ( window.top !== window.self ) { 
+		if ( window.top !== window.self ) {
 
-//			parent.divSubMenu.innerHTML = '';
-//			parent.ifrMenu.src = '';
+			//			parent.divSubMenu.innerHTML = '';
+			//			parent.ifrMenu.src = '';
 
 		}
 
 		let urlIssues;
 
-		urlIssues = 'https://api.github.com/repos/' + user + repo + '/issues';
+		urlIssues = 'https://api.github.com/repos/' + user + repo + '/issues?q=is%3Aissue+is%3Aclosed';
 
-console.log( 'urlIssues',  urlIssues );
-//		requestFile( '../pages/github-issues-header.md' , callbackHeader );
+		console.log( 'urlIssues',  urlIssues );
+		//		requestFile( '../pages/github-issues-header.md' , callbackHeader );
 
 		requestFile( urlIssues, callbackPost );
 
@@ -82,7 +82,7 @@ console.log( 'urlIssues',  urlIssues );
 		converter = new showdown.Converter();
 
 		response = xhr.target.response;
-//console.log( 'response', response );
+		//console.log( 'response', response );
 
 		html = converter.makeHtml( response );
 
@@ -103,16 +103,16 @@ console.log( 'urlIssues',  urlIssues );
 		let response, json, lines;
 
 		response = xhr.target.response;
-//console.log( 'response', response );
+		//console.log( 'response', response );
 
 		json = JSON.parse( response );
-//console.log( '', json );
+		//console.log( '', json );
 
 
 		for ( var i = 0; i < json.length; i++ ) {
 
 			issue = json[ i ];
-//console.log( 'issue', issue.labels );
+			//console.log( 'issue', issue.labels );
 
 			let keeper = isKeeper( issue.labels, 'gbXML' );
 			if ( keeper === false ) { continue; };
@@ -121,12 +121,12 @@ console.log( 'urlIssues',  urlIssues );
 			html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
 //console.log( '', html );
 
-			contents.innerHTML += 
+			contents.innerHTML +=
 
-				'<h1>blog post: <a href="' + issue.html_url + '" target=_top >' + issue.title + '</a></h1>' + 
+				'<h1>blog post: <a href="' + issue.html_url + '" target=_top >' + issue.title + '</a></h1>' +
 
 				'<div>' +
-					'<i>written on: ' + issue.created_at + 
+					'<i>written on: ' + issue.created_at +
 					' by <a target+=top href="' + issue.user.html_url + '" >' + issue.user.login +  '</a></i>' +
 				'</div>' +
 

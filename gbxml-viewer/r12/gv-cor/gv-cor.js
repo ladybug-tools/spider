@@ -13,7 +13,7 @@
 	COR.iconSpiderWeb = "../assets/spider-web.png";  // &#x1f578;
 
 	//COR.threeDefaultFile = '../gv-thr/gv-thr.html';
-	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
+	COR.uriDefaultFile = '../assets/splash-screen.md'; // maybe should be in APP?
 
 	COR.menuBreadcrumbs =
 

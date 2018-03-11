@@ -198,7 +198,7 @@
 	</div>
 
 
-	<div id = "divHamburger" onclick=APP.toggleNav(); > slide &#9776; </div>
+	<div id = "divHamburger" onclick=COR.toggleNav(); > slide &#9776; </div>
 
 
 	<div id = "divMenuInWorld" >
@@ -236,20 +236,45 @@
 <script>
 
 	var APP = {};
-	divMenuFooter.innerHTML = COR.menuFooter;
+	GBX.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
 
 	COR.initCore();
+
 	THR.initThree();
 	THR.animate();
+
 	COR.onHashChange(); // loads splash screen and gets things rolling
+
+	initApp();
+
+	function initApp() {
 
 		divMenuBreadcrumbs.innerHTML = COR.menuBreadcrumbs;
 
-divMenuTitle.innerHTML = COR.menuTitle;
+		divMenuTitle.innerHTML = COR.menuTitle;
 
-divMenuDescription.innerHTML = COR.menuDescription;
+		divMenuDescription.innerHTML = COR.menuDescription;
 
-divMenuFileOpening.innerHTML = COR.menuFileOpening;
+		divMenuFileOpening.innerHTML = COR.menuFileOpening;
+
+		divMenuFooter.innerHTML = COR.menuFooter;
+
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+		const url = location.hash.slice( 1 );
+
+			COR.requestFile( url, GBX.callbackGbXML );
+
+		} else {
+
+			COR.requestFile( GBX.defaultURL, GBX.callbackGbXML );
+
+		}
+
+	}
+
+
 
 	function onloadThreejs() {
 
@@ -277,15 +302,15 @@ divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
 		}
 
-		GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
+		//GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
 
-		butHeadsUp.click();
+		//butHeadsUp.click();
 
 	}
 
 
 
-	APP.toggleNav = function() {
+	APP.bbbtoggleNav = function() {
 
 		const left = 'calc( var( --mnu-width ) - 100px )';
 
