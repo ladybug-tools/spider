@@ -3,13 +3,14 @@
 [Markdown Cheat Sheet]( #utilities/markdown-cheat-sheet.md )
 ===
 
-Interesting things you can do with Markdown.
+We use [Markdown]( https://en.wikipedia.org/wiki/Markdown ) for creating read me and other text files. Markdown may also be used to enhance the display of GitHub isues. Interesting things you can do with Markdown are listed below.
 
 
 ### Links of Interest
 
 * <https://github.com/showdownjs/showdown>
 * <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>
+
 
 ### Text
 
@@ -21,8 +22,9 @@ _italics_
 
 **Bold**
 
+	****Bold Italics****
 
-
+****Bold Italics****
 
 ### Horizontal rules
 

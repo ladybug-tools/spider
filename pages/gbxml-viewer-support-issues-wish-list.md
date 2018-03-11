@@ -12,7 +12,7 @@ For general information, 'How do you...?' help and general questions, please pos
 
 ### Bug Reports
 
-For bug reports, problems with the code and wish list requests, please open an issue on GitHUb:
+For bug reports, problems with the code and wish list requests, please open an issue on GitHUb and tell us how to reproduce the problem:
 
 ### [Ladybug-Tools / Spider Issues]( https://github.com/ladybug-tools/spider/issues )
 
@@ -20,7 +20,7 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ## Current Issues with gbXML Viewer
 
-None. After all, it's nearly perfect
+The 'reset view' button in the in-world ( center of screen) menu may not always perform a complete reset of all viewing parameters. You may need to reload the web page in order to start. An easy way to to this is to click the gbXML Viewer title in the main menu.
 
 
 ***

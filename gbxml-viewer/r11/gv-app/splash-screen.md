@@ -33,6 +33,7 @@ R11.12.4
 * Drop default files feature for now
 * Update the various text files
 * Fix some Unicode as image issues
+* Fixing pop-up onload scroll to top issues
 
 R11.12.3
 

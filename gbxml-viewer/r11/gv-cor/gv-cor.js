@@ -56,7 +56,7 @@
 		<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
 		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
 		<div><a href=#../../../pages/contributing.md >Contributing</a></div>
-		<div><a href=#../../../pages/license.md >License</a></div>
+		<div><a href=#../../../pages/license.md >Copyright & License</a></div>
 		<div><a href=http://www.ladybug.tools/spider/gbxml-user-guide/gbxml-user-guide.html >gbXML Schema User Guide</a></div>
 		<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
 		<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
@@ -208,9 +208,14 @@
 			//const response = xhr.target.response;
 			const html = converter.makeHtml( xhr.target.responseText );
 
+//			divContainer.innerHTML = '<div id=divContents >' + html + '</div>';
 			divContents.innerHTML = html;
 			divContainer.style.display = 'block';
 			window.scrollTo( 0, 0 );
+			divContainer.scrollTop = 0;
+//			divContents.scrollTop = 0;
+			divContainer.scrollTo( 0, 0 );
+//			divContents.scrollTo( 0, 0 );
 
 		}
 
