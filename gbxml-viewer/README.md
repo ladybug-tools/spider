@@ -11,7 +11,7 @@ _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scrip
 
 
 ## Full screen stable release R11:
-## <http://www.ladybug.tools/spider/gbxml-viewer/>
+## <http://www.ladybug.tools/spider/gbxml-viewer>
 
 
 <!--

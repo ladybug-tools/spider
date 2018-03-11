@@ -3,14 +3,13 @@
 
 # gbXML Viewer R11
 
-[gbXML Viewer]( https://github.com/ladybug-tools/spider ) is a collection of free, open source modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript )/[WebGL]( https://www.khronos.org/webgl/ )/[Three.js]( https://threejs.org/) experiments for viewing, validating and editing [gbXML]( http://gbxml.org ) files in 3D in your browser.
+[gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" )/[WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" )/[Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
 
-Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues )
+Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
 
-### Must watch YouTube video:
+### Must watch and thumbs-up YouTube video:
 
-[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY )
-
+[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY "With music and voiceover by the multi-talented Michalina" )
 
 
 <!--
@@ -26,7 +25,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider ) &nbs
 <summary>Welcome 2018-03-09 ~ R11.12.4</summary>
 
 
-This release is the stable version release. Further development will continue on a fresh cade base. You may use this release for work without worrying too much that the programmers might do something awful with the code over night. ;-)
+This release is the stable version release. Further development will continue on a fresh code base. You may use this release for work without worrying too much that the programmers might do something awful with the code over night. ;-)
 
 R11.12.4
 
