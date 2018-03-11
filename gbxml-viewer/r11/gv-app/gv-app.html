@@ -224,7 +224,8 @@
 <script>
 
 	var APP = {};
-	divMenuFooter.innerHTML = COR.menuFooter;
+
+	initApp();
 
 	COR.initCore();
 	THR.initThreeGbxml();
@@ -232,13 +233,26 @@
 	COR.onHashChange(); // loads splash screen and gets things rolling
 
 
-	function onloadThreejs() {
+	function initApp() {
 
-		APP.resetMenu();
+		divMenuFooter.innerHTML = COR.menuFooter;
 
-		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+
+		} else {
+
+			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
+
+		}
 
 	}
+
+
+
 
 
 
@@ -251,6 +265,7 @@
 		menuDetails = document.querySelectorAll( "details.app-menu" );
 
 		menuDetails.forEach(  element => element.remove() );
+
 
 		if ( window.divHeadsUp ){
 
@@ -265,6 +280,13 @@
 	}
 
 
+	function onloadThreejs() {
+
+		APP.resetMenu();
+
+		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
+
+	}
 
 	APP.toggleNav = function() {
 

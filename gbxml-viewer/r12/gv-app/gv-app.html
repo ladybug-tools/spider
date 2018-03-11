@@ -164,6 +164,11 @@
 						Spider Build Well
 					</button>
 
+					<button id=butExplorer class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-exp/gv-exp.js';" >
+					Module Explorer
+				</button>
 					<hr>
 
 				</details>
@@ -305,28 +310,6 @@
 		//GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
 
 		//butHeadsUp.click();
-
-	}
-
-
-
-	APP.bbbtoggleNav = function() {
-
-		const left = 'calc( var( --mnu-width ) - 100px )';
-
-		divContainer.style.display="none";
-
-		if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
-
-			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
-			divHamburger.style.left = '-100px';
-
-		} else {
-
-			divMenu.style.left = 0;
-			divHamburger.style.left = left;
-
-		}
 
 	}
 

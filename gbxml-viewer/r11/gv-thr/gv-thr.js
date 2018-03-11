@@ -70,7 +70,7 @@
 		//console.log( 'location.hash', location );
 
 		//if ( window.self !== window.top ) {
-
+/*
 			if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 				const url = location.hash.slice( 1 );
@@ -82,6 +82,7 @@
 				COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
 
 			}
+*/
 
 		//}
 
@@ -108,7 +109,7 @@
 		const thrFilePath = parent.inpFilePath.value;
 		localStorage.setItem('thrFilePath', thrFilePath );
 
-		COR.requestFileAndProgress( thrFilePath, GBX.callbackGbXML );
+//		COR.requestFileAndProgress( thrFilePath, GBX.callbackGbXML );
 
 	}
 

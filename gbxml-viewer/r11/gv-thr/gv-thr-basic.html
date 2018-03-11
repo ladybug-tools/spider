@@ -24,7 +24,6 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
 
-
 <script src = "../gv-thr/gv-thr.js" ></script>
 
 
@@ -58,10 +57,11 @@
 
 <script>
 
-	THR.initThree();
+	init();
+
+	THR.initThreeGbxml();
 	THR.animate();
 
-	init();
 
 	function init() {
 
@@ -72,18 +72,18 @@
 				</a>
 				<a  href = "" >` + document.title + `</a>
 			</h2>
+
 			<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
 
+			<p id=dragArea class=dragDropArea >
+				Drag and drop a gbXML file into this box or <input type=file id=inpFile onchange=GBX.openGbxmlFile(this); ><br>
+				or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=60 >
+			<p>
 		`;
 
-		THR.camera.position.set( 100, 10, 100 );
 
-		geometry = new THREE.BoxGeometry( 50, 50, 50 );
-		material = new THREE.MeshNormalMaterial();
-		mesh = new THREE.Mesh( geometry, material );
-		THR.scene.add( mesh );
 
-		THR.onWindowLoad();
+//		THR.onWindowLoad();
 
 	}
 
@@ -92,6 +92,13 @@
 	onloadThreejs = function() {
 
 		console.log( 'scene', THR.scene );
+
+		THR.camera.position.set( 100, 10, 100 );
+
+		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		THR.scene.add( mesh );
 
 	};
 

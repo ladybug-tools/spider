@@ -13,7 +13,7 @@
 
 		document.title = SET.title;
 		aDocumentTitle.innerHTML = SET.title;
-		butSettings.innerHTML = SET.title;
+		//butSettings.innerHTML = SET.title;
 
 		if ( butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
 

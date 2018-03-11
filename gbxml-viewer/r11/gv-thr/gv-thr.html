@@ -88,8 +88,22 @@
 					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=60 >
 				<p>
 			`;
+		}
+
+
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+
+		} else {
+
+			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
 
 		}
+
 
 	}
 

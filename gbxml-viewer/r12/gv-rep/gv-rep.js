@@ -4,7 +4,7 @@
 
 	REP.title = 'gv-tmp - gbXML Viewer Report';
 
-	var butReports = butMenuLoad;
+	//var butReports = butMenuLoad;
 
 	var surfaceAdjacencyDuplicates;
 	var surfaceAdjacencyInvalids;
@@ -19,7 +19,7 @@
 
 		document.title = REP.title;
 		aDocumentTitle.innerHTML = REP.title;
-		butMenuLoad.innerHTML = REP.title;
+		//butReports.innerHTML = REP.title;
 
 		if ( butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
