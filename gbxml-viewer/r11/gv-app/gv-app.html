@@ -35,8 +35,8 @@
 				<summary>Header</summary>
 
 				<div>
-					<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-					<a href="http://www.ladybug.tools/spider/" target="_top" ><img src=spider-web.png  height=18 ></a> &raquo;
+					<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=spider-web.png  height=18 ></a> &raquo;
 					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 				</div>
 
@@ -188,22 +188,22 @@
 	</div>
 
 
-	<div id = "divHamburger" onclick=APP.toggleNav(); > slide &#9776; </div>
+	<div id = "divHamburger" onclick=APP.toggleNav(); title="Hide this menu" > slide &#9776; </div>
 
 
-	<div id = "divMenuInWorld" >
+	<div id = "divMenuInWorld" title="This is called the 'in-world menu'">
 
 			<div id = "divTitle" ></div>
 
 			<p >
 
-				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; title="toggle the scene spinning" >rotation</button>
 
-				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
 
-				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; title="toggle the side lines" >edges</button>
 
-				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
+				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view"  >reset view</button>
 
 			</p>
 

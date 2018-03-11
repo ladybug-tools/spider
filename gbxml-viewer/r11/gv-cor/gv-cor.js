@@ -57,6 +57,7 @@
 		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
 		<div><a href=#../../../pages/contributing.md >Contributing</a></div>
 		<div><a href=#../../../pages/license.md >License</a></div>
+		<div><a href=http://www.ladybug.tools/spider/gbxml-user-guide/gbxml-user-guide.html >gbXML Schema User Guide</a></div>
 		<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
 		<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
 		<!--
