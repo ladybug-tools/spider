@@ -5,9 +5,9 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-09" >
-<title>gbXML Viewer 11.12</title>
-<link rel="stylesheet" type="text/css" href="../gv-app/style.css" >
+<meta name = "date" content = "2018-03-10" >
+<title>gbXML Viewer 12</title>
+<link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
@@ -16,7 +16,9 @@
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-gbx/gv-gbx.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
+<!--
 <script src = "../gv-gbv/gv-gbv.js" ></script>
+-->
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
@@ -34,6 +36,7 @@
 
 				<summary>Header</summary>
 
+				<!--
 				<div>
 					<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
 					<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
@@ -42,17 +45,28 @@
 
 				<h2>
 					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r11/gv-app/gv-app.html" target="_top" >
-						<img src="../gv-cor/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
+						<img src="../assets/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
 					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
 				</h2>
 
-				<p title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><script> document.write( document.head.querySelector( '[name=description]' ).content )</script></p>
+				<p title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>
+					<script> document.write( document.head.querySelector( '[name=description]' ).content )</script>
+				</small></p>
 
 				<p id=dragArea class=dragDropArea >
-					Drag and drop gbXML file in this box<br>
+					drag&drop gbXML files to this box<br>
 					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
-					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=40 title='paste a file path or URL here then press Enter' >
+					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 				<p>
+				-->
+
+				<div id=divMenuBreadcrumbs ></div>
+
+				<div id=divMenuTitle ></div>
+
+				<div id=divMenuDescription ></div>
+
+				<div id=divMenuFileOpening ></div>
 
 				<hr>
 
@@ -225,10 +239,17 @@
 	divMenuFooter.innerHTML = COR.menuFooter;
 
 	COR.initCore();
-	THR.initThreeGbxml();
+	THR.initThree();
 	THR.animate();
 	COR.onHashChange(); // loads splash screen and gets things rolling
 
+		divMenuBreadcrumbs.innerHTML = COR.menuBreadcrumbs;
+
+divMenuTitle.innerHTML = COR.menuTitle;
+
+divMenuDescription.innerHTML = COR.menuDescription;
+
+divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
 	function onloadThreejs() {
 

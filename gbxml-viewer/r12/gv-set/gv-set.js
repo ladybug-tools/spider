@@ -6,7 +6,7 @@
 	SET.localClip1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
 	SET.localClip2= new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 );
 
-	var butSettings = butMenuLoad;
+	//var butSettings = butMenuLoad;
 //	initSettings();
 
 	SET.initSettings = function() {

@@ -40,7 +40,7 @@
 	COR.menuFileOpening =
 
 	`<p id=dragArea class=dragDropArea >
-		Drag & drop a file in this box<br>
+		drag&drop gbXML file to this box<br>
 		or <input type=file id=inpFile onchange=COR.openFile(this); ><br>
 		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
 		<br>
@@ -52,6 +52,7 @@
 		<summary>footer</summary>
 
 		<div title='' ><a href=#../README.md >Release Read Me</a></div>
+		<div title='' ><a href=#../../../pages/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
 		<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
 		<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
 		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
