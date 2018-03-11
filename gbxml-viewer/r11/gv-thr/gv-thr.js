@@ -62,9 +62,9 @@
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
-		parent.inpFilePath.value = thrFilePath;
+		//parent.inpFilePath.value = thrFilePath;
 
-		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
+		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 		// in iframe: loads default / standalone: opens permalinks
 		//console.log( 'location.hash', location );

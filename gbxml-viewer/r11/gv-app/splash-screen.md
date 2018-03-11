@@ -3,11 +3,15 @@
 
 # gbXML Viewer R11
 
-gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three.js experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
+[gbXML Viewer]( https://github.com/ladybug-tools/spider ) is a collection of free, open source modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript )/[WebGL]( https://www.khronos.org/webgl/ )/[Three.js]( https://threejs.org/) experiments for viewing, validating and editing [gbXML]( http://gbxml.org ) files in 3D in your browser.
+
+Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues )
+
+### Must watch YouTube video:
+
+[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY )
 
 
-### Must watch video:
-[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
 
 <!--
 <details open>
@@ -19,18 +23,28 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
-<summary>Welcome 2018-03-09 ~ R11.12</summary>
+<summary>Welcome 2018-03-09 ~ R11.12.4</summary>
 
 
-This release is a stable version release candidate. If this release is considered good, then development will continue on a fresh cade base. This means that you will be able to use this release for work without worrying too much that the programmers might do something awful over night.
+This release is the stable version release. Further development will continue on a fresh cade base. You may use this release for work without worrying too much that the programmers might do something awful with the code over night. ;-)
+
+R11.12.4
+
+* Reorganize footer links
+* Drop default files feature for now
+* Update the various text files
+* Fix some Unicode as image issues
+
+R11.12.3
+
+* Add 'Support, Issues, Wish List & Wanted' page with link in main menu footer
+	* Closes: 2018-03-08 ~ Start an Issues menu item
 
 R11.12.1
 
 * Add eye.png to REP/Reports
 
-R11.12.3
-* Add 'Support, Issues, Wish List & Wanted' page with link in main menu footer
-	* Closes: 2018-03-08 ~ Start an Issues menu item
+R11.12.0
 
 APP ~ Main application module
 

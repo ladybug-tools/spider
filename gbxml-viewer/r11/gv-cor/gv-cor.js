@@ -48,8 +48,10 @@
 
 		<summary>footer</summary>
 
-		<div title='' ><a href=#../README.md >Release Read Me</a></div>
 		<div title='' ><a href=#../../../pages/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
+		<div title='' ><a href=#./splash-screen.md >Introduction/ splash screen</a></div>
+		<div title='' ><a href=#../../README.md >Viewer Read Me</a></div>
+		<div title='' ><a href=#../README.md >Release Read Me</a></div>
 		<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
 		<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
 		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
@@ -57,8 +59,9 @@
 		<div><a href=#../../../pages/license.md >License</a></div>
 		<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
 		<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+		<!--
 		<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
-
+		-->
 		<hr>
 		<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
 			title='go to top and, btw, my web is better than your web' > <img src=../gv-cor/spider-web.png height=24 style=opacity:0.5; > </h2>

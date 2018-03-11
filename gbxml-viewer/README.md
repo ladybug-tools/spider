@@ -3,53 +3,55 @@
 
 # gbXML Viewer Read Me
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-thr/gv-thr.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r11/gv-thr/gv-thr.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
 ### Welcome [TAS]( http://www.edsl.net/main/ ) users!
 
 
-## Full screen stable release R11: <http://www.ladybug.tools/spider/gbxml-viewer/>
+## Full screen stable release R11:
+## <http://www.ladybug.tools/spider/gbxml-viewer/>
 
 
 <!--
 ## Full Screen pre-release R11: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
-
--->
-
 ## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
 
 * News on what's happening with the gbXML Viewer.
 
+## Full Screen early version: [gbXML Viewer R3]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-23-michal/index.html )
 
-## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
+-->
 
-* Michal's must watch video
+
+
+## YouTube Video:
+## [Ladybug Tools / Spider / gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
+
+* Michal's must watch video ~ updated 2018-03-11
 * Tania Becker commented: 'Fascinating video. It's well explained and easy to understand even for a lay person. It sparkles!'
 
 
-## Full Screen early version: [gbXML Viewer R3]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-23-michal/index.html )
 
 ***
 
-
-### The concept / The desired patter:
+### The concept / The desired pattern:
 
 ## Knowledge embedded in gbXML files is viewable, analyzable and editable in real-time interactive 3D with free, open-source web apps
 
-### The issues / The problems to be solved
+### The current issues / The problems to be solved
 
 
-About [Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building_XML ):
+[Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building_XML ) as described by its authors:
 
 > gbXML allows disparate 3D [building information models (BIM)]( https://en.wikipedia.org/wiki/Building_information_modeling ) and architectural/engineering analysis software to share information with each other
 
-The current set of [BIM authoring and CAD software tools]( http://www.gbxml.org/Software_Tools_that_Support_GreenBuildingXML_gbXML ) for gbXML include various proprietary, closed-source applications.
+The current set of [BIM authoring and CAD software tools]( http://www.gbxml.org/Software_Tools_that_Support_GreenBuildingXML_gbXML ) for gbXML include various proprietary, closed-source applications that you must download and install.
 
 GbXML being open source, it would also be nice to be able to view gbXML files in 3D in your browser with no fees and with open source code.
 
-The Ladybug Tools/Spider gbXML Reader scripts are first steps toward making gbXML viewers readily available.
+The Ladybug Tools/Spider gbXML Viewer scripts are first steps toward making gbXML viewers readily available.
 
 ### Mission
 
@@ -60,12 +62,12 @@ Objectives
 * Loads almost instantly
 * Non-modal interface
 * Fast effective workflow: get things done faster
-
+* Full interactive 3D
 
 ### Vision
 
 * Helping students, clients and non-AEC peeps gain access BIM data easily, quickly and freely
-
+* Facilitating the transfer of data between design programs and analysis programs
 
 
 ***

@@ -13,6 +13,7 @@ _[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv
 ## Full screen stable release [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html )
 
 * Core utilities to read and display a gbXML file
+The [read me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md ) file with full details is in the main gbXML Viewer folder just above here.
 
 -->
 
@@ -20,8 +21,8 @@ _[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv
 
 * All the gbXML Viewer modules all together and available in a single application
 
+## YouTube Video: [gbXML Viewer User Guide]( https://youtu.be/2QHrbuKIkdY )
 
-The [read me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md ) file with full details is in the main gbXML Viewer folder just above here.
 
 ***
 

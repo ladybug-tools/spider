@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-09" >
-<title>gbXML Viewer 11.12.3</title>
+<meta name = "date" content = "2018-03-11" >
+<title>gbXML Viewer 11.12.4</title>
 <link rel="stylesheet" type="text/css" href="../gv-app/style.css" >
 </head>
 <body>
@@ -36,7 +36,7 @@
 
 				<div>
 					<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-					<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" ><img src=spider-web.png  height=18 ></a> &raquo;
 					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 				</div>
 
@@ -51,10 +51,12 @@
 				</small></p>
 
 				<p id=dragArea class=dragDropArea >
-					Drag&drop gbXML file to this box<br>
+					Drag&drop gbXML files to this box<br>
 					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
+					<!--
 					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
-				<p>
+					-->
+					<p>
 
 				<hr>
 
