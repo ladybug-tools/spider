@@ -3,11 +3,11 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
-<meta name = "description" content = "Core file browse, read and display utilities" >
+<meta name = "description" content = "gbXML Viewer ~ core file browse, read and display utilities" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-09" >
+<meta name = "date" content = "2018-03-10" >
 <title>gbXML Viewer Core</title>
-<link rel="stylesheet" type="text/css" href="../gv-app/style.css" >
+<link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
@@ -47,6 +47,8 @@
 
 					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
 
+					<hr>
+
 				</div>
 
 			</details>
@@ -64,9 +66,11 @@
 	<div id=divContainer >
 
 		<div id = "divContentsHeader" >
+
 				pop-up window / click here to move / click outside to close
 				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
-		</div>
+
+			</div>
 
 		<div id=divContents ></div>
 

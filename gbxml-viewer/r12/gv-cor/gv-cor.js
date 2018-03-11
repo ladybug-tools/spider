@@ -1,7 +1,7 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
 
-	let COR = {};
+	var COR = {};
 
 	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r12/';
@@ -9,7 +9,8 @@
 	urlGitHubPage = 'https://rawgit.com/ladybug-tools.github.io/spider/master/';
 
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
-	COR.iconGitHubMark = "../gv-cor/gitHub-mark.png";
+	COR.iconGitHubMark = "../assets/gitHub-mark.png";
+	COR.iconSpiderWeb = "../assets/spider-web.png";  // &#x1f578;
 
 	//COR.threeDefaultFile = '../gv-thr/gv-thr.html';
 	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
@@ -18,7 +19,7 @@
 
 	`<div>
 		<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-		<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
+		<a href="http://www.ladybug.tools/spider/" target="_top" > <img src=` + COR.iconSpiderWeb + `  height=18 ></a> &raquo;
 		<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 	</div>`;
 
@@ -27,7 +28,7 @@
 	`<h2>
 		<a href="` + COR.releaseSourceURL + `" target=_top >
 			<img src=` + COR.iconGitHubMark + ` height=18 style=opacity:0.3; ></a>
-			<a href="" >` + document.title +`</a>
+			<a id=aDocumentTitle href="" >` + document.title +`</a>
 	</h2>`;
 
 	COR.menuDescription =
@@ -55,14 +56,14 @@
 		<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
 		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
 		<div><a href=#../../../pages/contributing.md >Contributing</a></div>
-		<div><a href=#../../../pages/license.md >License</a></div>
+		<div><a href=#../../../pages/license.md >Copyright & License</a></div>
 		<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
 		<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
 		<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
 
 		<hr>
 		<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
-			title='go to top and, btw, my web is better than your web' > <img src=../gv-cor/spider-web.png height=24 style=opacity:0.5; > </h2>
+			title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
 
 	</details>`;
 

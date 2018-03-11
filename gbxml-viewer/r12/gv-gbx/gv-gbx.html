@@ -88,7 +88,9 @@
 			<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
 
 		`;
-console.log( 'location.hash', location.hash );
+
+		//console.log( 'location.hash', location.hash );
+
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 			const url = location.hash.slice( 1 );

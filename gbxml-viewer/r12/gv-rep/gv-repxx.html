@@ -31,14 +31,11 @@
 		<p>If it does not open automatically, click the following button to load test menu</p>
 
 		<p>
-			<button id=butMenuLoad >
-				<!--
-				onclick =
+			<button id=butMenuLoad onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-tmp/gv-tmp.js';
+				script.src = '../gv-rep/gv-rep.js';
 				divHeadsUp.style.display='block';" >
-				-->
-				gv-tmp </button>
+				gv-tmp gbxml viewer template </button>
 		</p>
 
 		<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
@@ -79,15 +76,14 @@
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
 
-	ScriptSource =  fname + '.js';
 
 	initTemplate();
 
 	COR.initCore();
 
 	function initTemplate() {
+
 
 		divMenuTitle.innerHTML = COR.menuTitle;
 
@@ -96,12 +92,6 @@
 		divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
-
-		butMenuLoad.onclick = function() {
-			script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = ScriptSource;
-			divHeadsUp.style.display='block';
-		}
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
@@ -117,6 +107,7 @@
 		THR = icw.THR;
 		GBX = icw.GBX;
 		GBV = icw.GBV;
+
 
 		THR.controls.autoRotate = false;
 

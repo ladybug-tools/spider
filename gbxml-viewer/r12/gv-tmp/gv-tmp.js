@@ -8,9 +8,17 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	var TMP = {};
 
+	TMP.title = 'gv-tmp - gbXML Viewer Template';
+
+	//self starting using ();
+
 	TMP.initTemplate = function () {
 
-		if ( butTemplate.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		document.title = TMP.title;
+		aDocumentTitle.innerHTML = TMP.title;
+		butMenuLoad.innerHTML = TMP.title;
+
+		if ( butMenuLoad.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			divMenuItems.innerHTML =
 
@@ -20,21 +28,19 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<div id = "divTemplate" style=width:300px; ></div>
 
-					<hr>
-
 				</details>
 
 			` + divMenuItems.innerHTML;
 
 			initMenuTemplate();
 
-			butTemplate.style.backgroundColor = 'var( --but-bg-color )';
+			butMenuLoad.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
 			detTemplate.remove();
 
-			butTemplate.style.backgroundColor = '';
+			butMenuLoad.style.backgroundColor = '';
 
 		}
 
@@ -42,7 +48,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
-			divTemplate.innerHTML = '<p>' + txt + '<p>';
+			divTemplate.innerHTML = '<p>' + txt + '</p><hr>';
 
 		}
 
