@@ -26,7 +26,7 @@ _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scrip
 
 
 
-## YouTube Video:
+## Must watch and thumbs-up YouTube video:
 ## [Ladybug Tools / Spider / gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
 
 * Michal's must watch video ~ updated 2018-03-11
@@ -85,22 +85,28 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 * View gbXML files in 3D
 * Full zoom, pan and rotate
 
-### Settings and Viewing Menu
+### SET Module ~ Settings and Viewing Menu
 
 * Adjust a wide variety of viewing parameters
-	* Set random, phong default, normal or default material
-	* Opacity slider
-	* Shadows, edges, surface normals
-	* Axes, grid, ground and gradient background
-	* Wireframe and scene rotation
-* Exploded 3D views
-* Perspective and orthographic views
-* Buttons to toggle display of individual surfaces, zones, spaces, storey and surface types
+* Control the appearance of the surfaces
+	* Set default, random, Phong default, normal or exposure-type material to all surfaces
+	* Update opacity slider
+* Control the appearance of the scene
+	* Toggle shadows, edges, surface normals
+	* Toggle wireframe
+	* Toggle gradient background
+* Control the content of the scene
+	* Toggle axes, grid and ground
+* Control the behavior of the scene
+	* Toggle scene rotation
+	* Toggle perspective and orthographic views
+	* Set exploded 3D views
+	* Set section Views _work-in-progress_
 
 
-### Reports / Data Menu
+### REP Module ~ Reports / Data Menu
 * View all project textual metadata embedded in gbXML files
-* Link to Google map focussed on project lat/lon
+* Link to Google map focussed on project latitude and longitude
 * Buttons to highlight surfaces, spaces, stories and zones
 	* Individually
 	* By surface type
@@ -110,16 +116,17 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 * Zoom to selected surface or space
 
 
-### Reports / Issue tracking Menu
+### REP Module ~ Reports / Issue tracking Menu
 
-* Identifies automatically:
+* Identify and inspect programmatically:
 	* Duplicate surfaces
 	* Surfaces with duplicate adjacent spaces
 	* Multiple elements with identical CAD Object ID
 	* Tiny surfaces and tiny spaces
 
+Note these REP menu items will evolve into their own ISS issues module in a future release
 
-### Heads-up Display (HUD) / Editing
+### HUD Module ~ Heads-up Display / Editing
 
 * Toggle the display of 3D surfaces based on user input
 * Highlight and toggle visibility of elements, surfaces, edges
@@ -147,6 +154,29 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 * Save time with gbXML files that are frequently updated
 
 
+
+### CAM Module ~ First person camera Menu
+* Optional first person camera enables model fly-through
+	* Fly through and around your models.
+	* Use cursor keys or WASD keys.
+	* Click on the icons at bottom of your screen
+	* Use mouse, menu or cursor keys to control full range of motion
+	* 3D avatar guides you through space
+
+### ANA Module ~ Sun Path / Analemmas Menu
+* Sun path diagrams with analemmas
+	Uses Ladybug Tools / Spider Solar Calculator to position Sun correctly for lat/lon at any month, day and hour
+* Screen capture to video
+	* Currently only on previous release
+
+### GAL Module / Sample gbXML File galleries
+* Uses GitHub API to obtain directory listings and load gbXML files in several selected repositories
+	* gbXML.org sample files
+	* Spider Build Well project files
+	* Various files used for testing
+
+Behind the Scenes
+
 ### THR ~ Code
 
 * All plain vanilla client-side JavaScript
@@ -157,25 +187,7 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 * Creates gbJSON data for easier processing
 * All free and open source and hosted on GitHub
 
-### Bonus / Experimental Feature
-* Optional first person camera enables model fly-through
-	* Fly through and around your models.
-	* Use cursor keys or WASD keys.
-	* Click on the icons at bottom of your screen
-	* Use mouse, menu or cursor keys to control full range of motion
-	* 3D avatar guides you through space
 
-
-* Sun path diagrams with analemmas
-	Uses Ladybug Tools / Spider Solar Calculator to position Sun correctly for lat/lon at any month, day and hour
-* Screen capture to video
-	* Currently only on previous release
-
-### Sample gbXML File galleries
-* Uses GitHub API to obtain directory listings and load gbXML files in several selected repositories
-	* gbXML.org sample files
-	* Spider Build Well project files
-	* Various files used for testing
 
 
 ## Things you can do using this script

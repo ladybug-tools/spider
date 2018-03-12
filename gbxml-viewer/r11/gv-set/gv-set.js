@@ -127,6 +127,7 @@
 					oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
 					</div>
 					-->
+					<hr>
 				</details>`
 
 			+ divMenuItems.innerHTML;
