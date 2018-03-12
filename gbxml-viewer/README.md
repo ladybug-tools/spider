@@ -177,7 +177,7 @@ Note these REP menu items will evolve into their own ISS issues module in a futu
 
 Behind the Scenes
 
-### THR ~ Code
+### APP/ THR / COD / GBX ~ the engines that make it all work
 
 * All plain vanilla client-side JavaScript
 * Built over the Three.js WebGL JavaScript library
