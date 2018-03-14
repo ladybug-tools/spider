@@ -2,20 +2,29 @@
 
 	var SET = {};
 
-	SET.title = 'gv-set - gbXML Viewer Settings';
 	SET.localClip1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
 	SET.localClip2= new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 );
 
-	//var butSettings = butMenuLoad;
 //	initSettings();
 
 	SET.initSettings = function() {
 
-		document.title = SET.title;
-		aDocumentTitle.innerHTML = SET.title;
-		//butSettings.innerHTML = SET.title;
+		if ( window.butMenuLoad ) {
 
-		if ( butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
+			SET.butSettings = butMenuLoad;
+
+			SET.title = 'gv-set - gbXML Viewer Settings';
+			document.title = SET.title;
+			aDocumentTitle.innerHTML = SET.title;
+			SET.butSettings.innerHTML = SET.title;
+
+		} else {
+
+			SET.butSettings = butSettings;
+
+		}
+
+		if ( SET.butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			SET.explodeStart = false;
 
@@ -136,13 +145,13 @@
 
 			+ divMenuItems.innerHTML;
 
-			butSettings.style.backgroundColor = 'var( --but-bg-color )';
+			SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
 			detSettings.remove();
 
-			butSettings.style.backgroundColor = '';
+			SET.butSettings.style.backgroundColor = '';
 
 		}
 

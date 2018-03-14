@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "gbXML Viewer First Person Camera: fly through models following an avatar" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-03" >
+<title>gv-cam-gbXML Viewer First Person Camera</title>
+<link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
+</head>
+<body>
+<script src = "../gv-cor/gv-cor.js" ></script>
+
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+
+	<div id = "divHeader" >
+		<div id = "divTitle" ></div>
+	</div>
+
+	<p>If it does not open automatically, click 'template' to load test menu</p>
+
+	<p>
+		<button id=butCameraFirstPerson onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-cam/gv-cam.js';
+			divMenu.style.display='block';" >
+			gv-cam gbxml-viewer first person camera </button>
+	</p>
+
+	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
+
+	<div id=divMenuFileOpening ></div>
+
+	<div id = "divLog" ></div>
+
+	<div id = "divSampleFiles" ></div>
+
+	<div id = "divMenu" >
+
+		<div id = "divMenuHeader" >
+			Click here to move
+			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+		</div>
+
+		<div id=divMenuItems ></div>
+
+	</div>
+
+<script>
+
+	init();
+
+	COR.initCore();
+
+
+	function init() {
+
+		divTitle.innerHTML =
+			'<h2>' +
+				'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + COR.iconInfo + '</a>' +
+				' <a  href = "" >' + document.title + '</a>' +
+			'</h2>' +
+			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+		'';
+
+		divMenuFileOpening.innerHTML = COR.menuFileOpening;
+
+		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+		onHashChange();
+
+	}
+
+
+	function onloadThreejs() {
+
+		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		THR = icw.THR;
+		GBX = icw.GBX;
+		GBV = icw.GBV;
+
+		THR.controls.autoRotate = false;
+
+		console.log( 'scene', THR.scene );
+
+		butCameraFirstPerson.click();
+
+	}
+
+
+
+	function onHashChange() {
+
+		ifrThree.src = COR.threeDefaultFile + location.hash;
+		ifrThree.contentWindow.location.reload();
+	}
+
+
+
+</script>
+</body>
+</html>

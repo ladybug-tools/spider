@@ -22,6 +22,20 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
+<summary>Welcome 2018-03-13 ~ R11.12.5</summary>
+
+APP ~ Main Application
+* File open dialog: default file type set as 'XML Document'.
+	* Response to issue: [filter files to gbXML only #89](https://github.com/ladybug-tools/spider/issues/89)
+
+R11 now has two links
+
+Full screen stable release (fingers-crossed) R11.12.5: <br><http://www.ladybug.tools/spider/gbxml-viewer>
+
+Full screen stable release R11.12.4: <br><http://www.ladybug.tools/spider/gbxml-viewer/r11-12-4/gv-app/gv-app.html>
+
+</details><details open>
+
 <summary>Welcome 2018-03-09 ~ R11.12.4</summary>
 
 

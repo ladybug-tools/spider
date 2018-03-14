@@ -1,0 +1,91 @@
+
+/* Copyright 2018 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	:root {
+		--mnu-color: DarkBlue;
+		--mnu-back-color: Gold;
+		--mnu-header-color: LightSkyBlue;
+		--mnu-width: 355px;
+		--but-bg-color: LightCoral;
+		--highlight-color: SpringGreen;
+	}
+
+	html { height: 100%; }
+
+	body, html { color: DarkBlue; font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
+
+	a { color: LightSalmon; text-decoration: none; }
+	a:hover, a:focus, #divHamburger:hover { background-color: yellow; color: #8888; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+
+	button, input[ type=button ] { background-color: #888; border: none; color: lightBlue; cursor: pointer; margin: 2px; padding: 3px 10px; }
+	button:hover, button:focus { color: white }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+
+	i { color: blue; }
+
+	summary { font-weight: bold; }
+
+	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
+
+	.flex-container { display: flex; flex-wrap: wrap;}
+	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
+
+	.flex-container2 { display: flex; flex-wrap: wrap; }
+	.flex-container2 > div { }
+
+	.highlight { background-color: var( --highlight-color ) }
+
+	#divContainer { background-color: white; border: 1px solid #aaa; border-radius: 2px; display: none; height: 80%; left: 400px;
+		margin: 0; max-width: 900px;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px;
+	}
+	#divContainer  {
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	}
+
+	#divContentsHeader {background-color: var( --mnu-header-color ); color: #fff; cursor: move; padding: 10px; z-index: 10;}
+
+	#divContents { margin: 10px; }
+
+	#divHamburger { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
+	#divHamburger {
+		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	}
+	#divMenu { background-color: var( --mnu-back-color ); border-radius: 2px; box-sizing: border-box; left: 20px; margin: 0; max-height: 98%;
+		overflow: auto; position: fixed; top: 10px; resize: both; width: var( --mnu-width ); z-index: 1;
+		transition: .5s;}
+	#divMenu {
+		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	}
+
+	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
+	#divMenu h2 { margin: 5px 0; }
+	#divMenu summary { color: #aaa; }
+
+	#divMenuHeader { background-color: var( --mnu-header-color ); cursor: move; padding: 10px; }
+
+	#divMenuContents {  box-sizing: border-box; padding: 10px; }
+
+	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 40%; }
+
+	#divHeadsUp {
+		background-color: #f8f8f8; border-radius: 2px; display: ; left: calc( 100% - 400px );
+		max-height: 97%; max-width: 400px; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
+		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; z-index: 10;
+	}
+	#divHeadsUp {
+		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	}
+
+	#divDraggableHeader2 {
+		background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px; z-index: 10;
+	}
+

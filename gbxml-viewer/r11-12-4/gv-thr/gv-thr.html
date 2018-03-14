@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Core read and display a gbXML file using Three.js" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-02-24" >
+<title>gv-thr gbXML Viewer Three.js</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover, button:focus{ background: #ccc; color: yellow }
+
+	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+
+	#divMenu {background-color: #fff;  left: 0; margin: auto; position: absolute; opacity: 0.95;  right: 0; text-align: center; width: 40%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+
+<script src = "../gv-cor/gv-cor.js" ></script>
+<script src = "../gv-thr/gv-thr.js" ></script>
+<script src = "../gv-gbx/gv-gbx.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<div id = "divMenuInWorld" >
+
+			<div id = "divTitle" ></div>
+
+		</div>
+
+		<p id = "divContents" >
+
+			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+
+			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+
+			<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+
+			<button onclick=GBX.setAllVisible();GBX.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
+
+		</p>
+
+		<div id=divLog ></div>
+
+	</div>
+
+	<div id=divContainer ></div>
+
+
+<script>
+
+	init();
+
+	COR.initCore();
+
+	THR.initThreeGbxml();
+	THR.animate();
+
+
+
+	function init() {
+
+		COR.timeStart = Date.now();
+
+		if ( window.self === window.top ) {
+
+			divTitle.innerHTML =
+			`
+				<h2>
+					<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >` + COR.iconInfo + `</a>
+					<a  href = "" >` + document.title + `</a>
+				</h2>
+				<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
+
+				<p id=dragArea class=dragDropArea >
+					Drag and drop a gbXML file into this box or <input type=file id=inpFile onchange=GBX.openGbxmlFile(this); ><br>
+					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); size=60 >
+				<p>
+			`;
+		}
+
+
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+
+		} else {
+
+			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
+
+		}
+
+
+	}
+
+
+
+	onloadThreejs = () => {
+
+		console.log( 'scene', THR.scene );
+
+	}
+
+</script>
+</body>
+</html>

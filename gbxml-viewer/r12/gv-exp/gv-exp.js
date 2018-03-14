@@ -6,19 +6,28 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-	var TMP = {};
-
-	TMP.title = 'gv-tmp - gbXML Viewer Template';
+	var EXP = {};
 
 	//self starting using ();
 
-	TMP.initTemplate = function () {
+	EXP.initTemplate = function () {
 
-		//document.title = TMP.title;
-		//aDocumentTitle.innerHTML = TMP.title;
-		//butExplore.innerHTML = TMP.title;
+		if ( window.butMenuLoad ) {
 
-		if ( butExplorer.style.backgroundColor !== 'var( --but-bg-color )' ) {
+			EXP.butModuleExplorer = butMenuLoad;
+
+			EXP.title = 'gv-tmp - gbXML Viewer Module Explorer';;
+			document.title = EXP.title;
+			aDocumentTitle.innerHTML = EXP.title;
+			EXP.butModuleExplorer.innerHTML = EXP.title;
+
+		} else {
+
+			EXP.butModuleExplorer = butModuleExplorer;
+
+		}
+
+		if ( EXP.butModuleExplorer.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			divMenuItems.innerHTML =
 
@@ -81,13 +90,13 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			` + divMenuItems.innerHTML;
 
 
-			butExplorer.style.backgroundColor = 'var( --but-bg-color )';
+			EXP.butModuleExplorer.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
 			detTemplate.remove();
 
-			butExplorer.style.backgroundColor = '';
+			EXP.butModuleExplorer.style.backgroundColor = '';
 
 		}
 

@@ -59,6 +59,7 @@
 	#divHamburger {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	}
+
 	#divMenu { background-color: var( --mnu-back-color ); border-radius: 2px; box-sizing: border-box; left: 20px; margin: 0; max-height: 98%;
 		overflow: auto; position: fixed; top: 10px; resize: both; width: var( --mnu-width ); z-index: 1;
 		transition: .5s;}
@@ -76,10 +77,19 @@
 
 	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 40%; }
 
+
+	#divHamburgerRight { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer;
+		display: none; font-size: 30px;
+		 left: calc( 100% - var(--mnu-width ) - 90px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 20; }
+	#divHamburgerRight {
+		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	}
+
 	#divHeadsUp {
-		background-color: #f8f8f8; border-radius: 2px; display: ; left: calc( 100% - 400px );
+		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - 400px );
 		max-height: 97%; max-width: 400px; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
-		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; z-index: 10;
+		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; transition: .5s; z-index: 10;
 	}
 	#divHeadsUp {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);

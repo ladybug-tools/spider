@@ -8,17 +8,26 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	var TMP = {};
 
-	TMP.title = 'gv-tmp - gbXML Viewer Template';
-
 	//self starting using ();
 
 	TMP.initTemplate = function () {
 
-		document.title = TMP.title;
-		aDocumentTitle.innerHTML = TMP.title;
-		butMenuLoad.innerHTML = TMP.title;
+		if ( window.butMenuLoad ) {
 
-		if ( butMenuLoad.style.backgroundColor !== 'var( --but-bg-color )' ) {
+			TMP.butMenuTemplate = butMenuLoad;
+
+			TMP.title = 'gv-tmp - gbXML Viewer Template';;
+			document.title = TMP.title;
+			aDocumentTitle.innerHTML = TMP.title;
+			TMP.butMenuTemplate.innerHTML = TMP.title;
+
+		} else {
+
+			TMP.butMenuTemplate = butSettings;
+
+		}
+
+		if ( TMP.butMenuTemplate.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			divMenuItems.innerHTML =
 
@@ -34,13 +43,13 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			initMenuTemplate();
 
-			butMenuLoad.style.backgroundColor = 'var( --but-bg-color )';
+			TMP.butMenuTemplate.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
 			detTemplate.remove();
 
-			butMenuLoad.style.backgroundColor = '';
+			TMP.butMenuTemplate.style.backgroundColor = '';
 
 		}
 

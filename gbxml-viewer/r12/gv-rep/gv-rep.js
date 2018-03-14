@@ -2,10 +2,6 @@
 
 	var REP = {};
 
-	REP.title = 'gv-tmp - gbXML Viewer Report';
-
-	//var butReports = butMenuLoad;
-
 	var surfaceAdjacencyDuplicates;
 	var surfaceAdjacencyInvalids;
 	var surfaceCoordinateDuplicates;
@@ -17,21 +13,35 @@
 
 	REP.initReport = function() {
 
-		document.title = REP.title;
-		aDocumentTitle.innerHTML = REP.title;
-		//butReports.innerHTML = REP.title;
 
-		if ( butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( window.butMenuLoad ) {
+
+			REP.butReports = butMenuLoad;
+
+			REP.title = 'gv-tmp - gbXML Viewer Report';
+			document.title = REP.title;
+			aDocumentTitle.innerHTML = REP.title;
+			REP.butReports.innerHTML = REP.title;
+
+		} else {
+
+			//return;
+
+			REP.butReports = butReports;
+
+		}
+
+		if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			REP.createReport();
 
-			butReports.style.backgroundColor = 'var( --but-bg-color )';
+			REP.butReports.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
 			detReports.remove();
 
-			butReports.style.backgroundColor = '';
+			REP.butReports.style.backgroundColor = '';
 
 		}
 

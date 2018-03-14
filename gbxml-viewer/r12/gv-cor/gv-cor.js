@@ -41,7 +41,7 @@
 
 	`<p id=dragArea class=dragDropArea >
 		drag&drop gbXML file to this box<br>
-		or <input type=file id=inpFile onchange=COR.openFile(this); ><br>
+		or <input type=file id=inpFile onchange=COR.openFile(this); accept=".xml" ><br>
 		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
 		<br>
 	<p>`;
@@ -322,7 +322,13 @@
 		divContainer.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
+		divContainer.scrollTop = 0;
+		//			divContents.scrollTop = 0;
+		divContainer.scrollTo( 0, 0 );
+		//			divContents.scrollTo( 0, 0 );
+
 	}
+
 
 
 	// handle menu header dragging with mouse or touch events

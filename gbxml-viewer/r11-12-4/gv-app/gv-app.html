@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-11" >
+<title>gbXML Viewer 11.12.4</title>
+<link rel="stylesheet" type="text/css" href="../gv-app/style.css" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
+<script src = "../gv-cor/gv-cor.js" ></script>
+<script src = "../gv-gbx/gv-gbx.js" ></script>
+<script src = "../gv-thr/gv-thr.js" ></script>
+<script src = "../gv-gbv/gv-gbv.js" ></script>
+
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+
+	<div id = "divMenu" >
+
+		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
+
+			main menu / click to move
+
+		</div>
+
+		<div id = "divMenuContents" >
+
+			<details open >
+
+				<summary>Header</summary>
+
+				<div>
+					<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=spider-web.png  height=18 ></a> &raquo;
+					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
+				</div>
+
+				<h2>
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r11/gv-app/gv-app.html" target="_top" >
+						<img src="../gv-cor/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
+					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
+				</h2>
+
+				<p title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>
+					<script> document.write( document.head.querySelector( '[name=description]' ).content )</script>
+				</small></p>
+
+				<p id=dragArea class=dragDropArea >
+					Drag&drop gbXML files to this box<br>
+					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
+					<!--
+					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
+					-->
+					<p>
+
+				<hr>
+
+			</details>
+
+
+			<details open >
+
+				<summary title="the primary viewer tools are here" >toggle features</summary>
+
+				<button id=butSettings class=app-menu onclick=
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-set/gv-set.js'; " title="Update colors, views and other parameters" >
+				settings</button>
+
+				<button id=butReports class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-rep/gv-rep.js'; " >
+				reports</button>
+
+				<button id=butHeadsUp class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-hud/gv-hud.js';" >
+				heads-up display</button>
+				<!--
+				<button id=butEditor class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-edt/gv-edt.js';" >
+				edit file </button>
+				-->
+				<button id=butCoordinates class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-crd/gv-crd.js';" >
+				edit duplicate surfaces </button>
+
+				<button id=butAdjacents class=app-menu onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-adj/gv-adj.js';" >
+				edit duplicate adjacents </button>
+
+				<button id=butSaveChanges class=app-menu onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-sav/gv-sav.js';" title="Save time with gbXML files that are frequently updated" >
+				manage save changes files</button>
+
+				<hr>
+
+				<details open>
+
+					<summary>things to try</summary>
+
+					<button id=butCameraFirstPerson class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-cam/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
+					first person camera</button>
+
+					<button id=butAnalemma class=app-menu onclick="
+						const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+						scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+						const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
+					sun-path / analemma</button>
+
+					<!--
+					<button id=butSunRange class=app-menu onclick="
+					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
+					sun-range</button>
+
+					<button id=butScreenCapture class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
+					screen capture </button>
+					-->
+
+					<p>Sample files to explore on GitHub :</p>
+
+					<button id=butGalleryGbxml class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-gbxml.js';" >
+						gbXML.org sample files
+					</button>
+
+					<button id=butGallerySampleFiles class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
+						Spider gbXML sample files
+					</button>
+
+					<button id=butGalleryBuildWell class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
+						Spider Build Well
+					</button>
+
+					<hr>
+
+				</details>
+
+			</details>
+
+
+			<div id = "divMenuItems" ></div>
+
+			<div id=divMenuFooter ></div>
+
+			<!--
+			<details open >
+
+				<summary>footer</summary>
+
+				<div title='' ><a href=#../README.md >Release Read Me</a></div>
+				<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
+				<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
+				<div><a href=#../../../pages/contributing.md >Contributing</a></div>
+				<div><a href=#../../../pages/license.md >License</a></div>
+				<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
+				<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+				<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
+
+				<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' > &#x1f578; </h2>
+
+			</details>
+			-->
+		</div>
+
+	</div>
+
+
+	<div id = "divHamburger" onclick=APP.toggleNav(); title="Hide this menu" > slide &#9776; </div>
+
+
+	<div id = "divMenuInWorld" title="This is called the 'in-world menu'">
+
+			<div id = "divTitle" ></div>
+
+			<p >
+
+				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; title="toggle the scene spinning" >rotation</button>
+
+				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
+
+				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; title="toggle the side lines" >edges</button>
+
+				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view"  >reset view</button>
+
+			</p>
+
+		<div id=divLog ></div>
+
+	</div>
+
+
+	<div id = "divContainer" >
+
+			<div id = "divContentsHeader" >
+				pop-up window / click here to move / click outside to close
+				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+			</div>
+
+			<div id = "divContents" ></div>
+
+	</div>
+
+<script>
+
+	var APP = {};
+
+	initApp();
+
+	COR.initCore();
+	THR.initThreeGbxml();
+	THR.animate();
+	COR.onHashChange(); // loads splash screen and gets things rolling
+
+
+	function initApp() {
+
+		divMenuFooter.innerHTML = COR.menuFooter;
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+
+		} else {
+
+			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
+
+		}
+
+	}
+
+
+
+
+
+
+	APP.resetMenu = function () {
+
+		menuButtons = document.querySelectorAll( "button.app-menu" );
+
+		menuButtons.forEach( element => element.style.backgroundColor ='' );
+
+		menuDetails = document.querySelectorAll( "details.app-menu" );
+
+		menuDetails.forEach(  element => element.remove() );
+
+
+		if ( window.divHeadsUp ){
+
+			divHeadsUp.style.display="none";
+
+		}
+
+		GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
+
+		butHeadsUp.click();
+
+	}
+
+
+	function onloadThreejs() {
+
+		APP.resetMenu();
+
+		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
+
+	}
+
+
+
+	APP.toggleNav = function() {
+
+		const left = 'calc( var( --mnu-width ) - 100px )';
+
+		divContainer.style.display="none";
+
+		if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
+
+			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			divHamburger.style.left = '-100px';
+
+		} else {
+
+			divMenu.style.left = 0;
+			divHamburger.style.left = left;
+
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

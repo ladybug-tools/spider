@@ -8,18 +8,23 @@
 
 _[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html ) ~ click the 'view model' button in left menu to view full screen_
 
-## Full screen pre-release: [gbXML Viewer Application]( http://www.ladybug.tools/spider/gbxml-viewer/dev )
-
 ## Full screen stable release [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html )
 
 * Core utilities to read and display a gbXML file
 The [read me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md ) file with full details is in the main gbXML Viewer folder just above here.
 
+## Full screen stable release: [gbXML Viewer Application]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+* All the gbXML Viewer modules all together and available in a single application
+
+
 -->
 
-## Full screen stable release: [gbXML Viewer Application]( http://www.ladybug.tools/spider/gbxml-viewer/ )
 
-* All the gbXML Viewer modules all together and available in a single application
+## Full screen stable release (fingers-crossed) R11.12.5: <http://www.ladybug.tools/spider/gbxml-viewer>
+
+### Full screen stable release R11.12.4: <br><http://www.ladybug.tools/spider/gbxml-viewer/r11-12-4/gv-app/gv-app.html>
+
+#### Full screen development very pre-release R12: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 ## YouTube Video: [gbXML Viewer User Guide]( https://youtu.be/2QHrbuKIkdY )
 

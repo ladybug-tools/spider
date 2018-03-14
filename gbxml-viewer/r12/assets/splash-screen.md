@@ -19,6 +19,26 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
+<summary>Welcome 2018-03-13 ~ R12.1</summary>
+
+Goals for R12
+
+* Simplify the core modules quite a bit
+	* Make things so that Python coders say it's almost as easy as Python
+* Split Reports into two modules
+	* Reports - Identify spaces, surfaces, storeys etc
+		Make selecting things as easy as Heads-up display
+	* Issues - Identify duplicate surfaces or surfaces with two identical adjacent spaces etc / find the problem areas
+* Maybe start an analysis effort that includes things like Window Wall Ratios
+
+APP and all the test files now seem to co-exist fairly well
+* This will be ongoing effort
+* Every module in its own folder
+* Index and test HTML will be identical in all folders
+* Only .js  and read me files in each module need updating
+
+</details><details open>
+
 <summary>Welcome 2018-03-10 ~ R12.0 </summary>
 
 

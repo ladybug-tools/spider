@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-02" >
+<title>gv-gbx - gbXML Viewer gbXML Utilities</title>
+<link rel="stylesheet" type="text/css" href="../gv-tmp/style-template.css" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
+<script src = "../gv-cor/gv-cor.js" ></script>
+
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+
+	<div id = "divHeader" >
+		<div id = "divTitle" ></div>
+	</div>
+
+	<p>If it does not open automatically, click 'gv-tmp gbxml viewer gbXML Utilities' button to load test menu</p>
+
+	<p>
+		<button id=butGbx onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-gbx/gv-gbx.js';
+			divMenu.style.display='block';" >
+			gv-tmp gbxml viewer gbXML Utilities </button>
+	</p>
+
+	<iframe id=ifrThree src='../gv-gbx/gv-gbx-basic.html' ></iframe>
+
+	<div id=divMenuFileOpening ></div>
+
+	<div id=divLog ></div>
+
+	<div id = "divSampleFiles" ></div>
+
+	<p><a href=index.html >Read Me file</a></a></p>
+
+	<div id = "divMenu" >
+
+		<div id = "divMenuHeader" >
+			click here to move
+			<button ontouchstart=divMenu.style.display="none"; onclick=divMenu.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+		</div>
+
+		<div id=divMenuItems ></div>
+
+	</div>
+
+	<div id=divContainer ><div id=divContents ></div></div>
+
+<script>
+
+
+//	COR.initCore();
+
+	init();
+
+
+	function init() {
+
+		divTitle.innerHTML =
+			'<h2>' +
+				'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + COR.iconInfo + '</a>' +
+				' <a  href = "" >' + document.title + '</a>' +
+			'</h2>' +
+			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+		'';
+
+		divMenuFileOpening.innerHTML = COR.menuFileOpening;
+
+		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		onHashChange();
+
+	}
+
+
+	function onloadThreejs() {
+
+		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		THR = icw.THR;
+		GBX = icw.GBX;
+		GBV = icw.GBV;
+
+		THR.controls.autoRotate = false;
+
+		console.log( 'scene', THR.scene );
+
+		//butGbx.click();
+
+	}
+
+
+
+	function onHashChange() {
+
+		//const url = COR.threeDefaultFile + location.hash;
+		const url = 'gv-gbx-basic.html' + location.hash;
+		console.log( 'url', url );
+
+		ifrThree.src = url;
+		ifrThree.contentWindow.location.reload();
+
+	}
+
+
+
+</script>
+</body>
+</html>
