@@ -1,11 +1,11 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-app/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer Application Menu Read Me
+# gv-App / gbXML Viewer Application Module Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px>Iframes are not displayed on github.com</iframe>
 
-## Full screen: [gbXML Viewer Application Menu]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-app/gv-app.html )
+## Full screen: [gbXML Viewer Application Module]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-app/gv-app.html )
 
 
 Use and share these links for gbXML Viewer:
@@ -16,8 +16,34 @@ Use and share these links for gbXML Viewer:
 
 ## Concept
 
-* Menut that brings all the gbXML Viewer modules together and available in a single application
+* Script that brings all the gbXML Viewer modules together and available in a single application
+	* Script that runs first when loading
+* Links to the style sheet
+* Makes the calls to all JavaScript libraries required at load time
+	* Showdown
+	* COR
+	* THR
+	* GBV
+	* GBX
+	* HUD
+* Contains the HTML the creates the menus
+* About one hundred lines of JavaScript to reset the menus
+* Allows access to;
+	* gbXML files
+	* Markdown files
+	* Most any file type
 
+
+### Style Sheet Notes
+
+* Selectors in order of tags, classes and ID then alphabetical
+* Properties in alphabetical order
+
+### Menus
+
+* Resizable, draggable and closable
+* All work on computers, tablets and phones
+* Menu colors are updated every release
 
 ## Wish list / To Do
 
@@ -29,6 +55,18 @@ See main read me file
 
 
 ## Change Log
+
+
+### 2018-03-14 ~ Theo
+
+R12.1
+* Big menu clean-up
+* Add links and tooltips from lates R11
+* Add back HTML instead of using vars
+* Move right nav to COR
+* Add default file capability with text input box
+* Add file open help page and info icon on app menu
+
 
 ### 2018-03-05 ~ Theo
 

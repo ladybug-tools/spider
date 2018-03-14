@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-03-10" >
-<title>gbXML Viewer 12</title>
+<title>gbXML Viewer 12.1</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
@@ -15,12 +15,9 @@
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-gbx/gv-gbx.js" ></script>
-<script src = "../gv-gbv/gv-gbv.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
 <script src = "../gv-hud/gv-hud.js" ></script>
-<!--
 <script src = "../gv-gbv/gv-gbv.js" ></script>
--->
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
@@ -38,10 +35,9 @@
 
 				<summary>Header</summary>
 
-				<!--
 				<div>
-					<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-					<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
+					<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png  height=18 ></a> &raquo;
 					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 				</div>
 
@@ -58,17 +54,9 @@
 				<p id=dragArea class=dragDropArea >
 					drag&drop gbXML files to this box<br>
 					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
-					or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
+					or enter a default file path &nbsp;&nbsp;<a href=#../assets/file-open.md> &#x24D8; </a>
+					<input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 				<p>
-				-->
-
-				<div id=divMenuBreadcrumbs ></div>
-
-				<div id=divMenuTitle ></div>
-
-				<div id=divMenuDescription ></div>
-
-				<div id=divMenuFileOpening ></div>
 
 				<hr>
 
@@ -177,6 +165,7 @@
 						script.src = '../gv-tmp/gv-tmp.js';" >
 						gbXML Viewer Menu Template
 					</button>
+
 					<hr>
 
 				</details>
@@ -186,26 +175,27 @@
 
 			<div id = "divMenuItems" ></div>
 
-			<div id=divMenuFooter ></div>
-
-			<!--
 			<details open >
 
 				<summary>footer</summary>
 
 				<div title='' ><a href=#../README.md >Release Read Me</a></div>
+				<div title='' ><a href=#../../../pages/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
+				<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
 				<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
 				<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
 				<div><a href=#../../../pages/contributing.md >Contributing</a></div>
-				<div><a href=#../../../pages/license.md >License</a></div>
+				<div><a href=#../../../pages/license.md >Copyright & License</a></div>
 				<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
 				<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
 				<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
 
-				<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' > &#x1f578; </h2>
+				<hr>
+				<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
+					title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
 
 			</details>
-			-->
+
 		</div>
 
 	</div>
@@ -214,19 +204,19 @@
 	<div id = "divHamburger" onclick=COR.toggleNav(); > slide &#9776; </div>
 
 
-	<div id = "divMenuInWorld" >
+	<div id = "divMenuInWorld" title="This is called the 'in-world menu'">
 
 			<div id = "divTitle" ></div>
 
 			<p >
 
-				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; title="toggle the scene spinning" >rotation</button>
 
-				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
 
-				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; title="toggle the side lines" >edges</button>
 
-				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); >reset view</button>
+				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view"  >reset view</button>
 
 			</p>
 
@@ -247,9 +237,10 @@
 	</div>
 
 
-	<div id = "divHamburgerRight" onclick=APP.toggleNavRight(); > &#9776; </div>
+	<div id = "divHamburgerRight" onclick=COR.toggleNavRight(); > &#9776; </div>
 
 	<div id = "divHeadsUp" >
+
 		<div id=divDraggableHeader2 title="Open JavaScript console to see more data" >
 			heads-up display / click here to move
 			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
@@ -257,47 +248,50 @@
 		<div id=divHUDheader ></div>
 		<div id=divHUDItems ></div>
 		<div id=divHUDfooter ></div>
+
 	</div>
 
 
 <script>
 
+	function startTalking(){
+
+//		butSettings.click();
+
+		butSetRandomMaterial.click();
+
+	}
+
 	var APP = {};
+
 	GBX.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
 
 	COR.initCore();
-
+	COR.onHashChange(); // loads splash screen and gets things rolling
 	THR.initThree();
 	THR.animate();
 
 	initHeadsUp();
-
-	COR.onHashChange(); // loads splash screen and gets things rolling
-
-	initApp();
+	initApp(); // loads default gbXML
 
 	function initApp() {
 
-		divMenuBreadcrumbs.innerHTML = COR.menuBreadcrumbs;
+		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
-		divMenuTitle.innerHTML = COR.menuTitle;
+		inpFilePath.value = thrFilePath;
 
-		divMenuDescription.innerHTML = COR.menuDescription;
-
-		divMenuFileOpening.innerHTML = COR.menuFileOpening;
-
-		divMenuFooter.innerHTML = COR.menuFooter;
+		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 		const url = location.hash.slice( 1 );
 
-			COR.requestFile( url, GBX.callbackGbXML );
+			COR.requestFileAndProgress( url, GBX.callbackGbXML );
 
 		} else {
 
-			COR.requestFile( GBX.defaultURL, GBX.callbackGbXML );
+			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
 
 		}
 
@@ -325,41 +319,8 @@
 
 		menuDetails.forEach(  element => element.remove() );
 
-		if ( window.divHeadsUp ){
-
-//			divHeadsUp.style.display="none";
-
-		}
-
-		//GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
-
-//		butHeadsUp.click();
-
-
 	}
 
-
-
-	APP.toggleNavRight = function() {
-
-		const left = 'calc( 100% - var( --mnu-width ) - 90px )';
-
-		divContainer.style.display="none";
-
-		if ( divHamburgerRight.style.left === '' || divHamburgerRight.style.left === left ) {
-
-			//divHeadsUp.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
-			divHeadsUp.style.left = 'calc( 100% )';
-			divHamburgerRight.style.left = 'calc( 100% - 90px )';
-
-		} else {
-
-			divHeadsUp.style.left = 'calc( 100% - var( --mnu-width ) - 50px )';
-			divHamburgerRight.style.left = left;
-
-		}
-
-	}
 
 </script>
 </body>

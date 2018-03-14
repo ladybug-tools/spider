@@ -58,6 +58,7 @@
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 		renderer.domElement.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
 
+
 		THR.renderer= renderer;
 		THR.scene = scene;
 		THR.camera = camera;
@@ -83,6 +84,16 @@
 	};
 
 
+	THR.updateDefaultFilePath = function() {
+
+		location.hash = parent.inpFilePath.value;
+
+		const thrFilePath = parent.inpFilePath.value;
+		localStorage.setItem('thrFilePath', thrFilePath );
+
+//		COR.requestFileAndProgress( thrFilePath, GBX.callbackGbXML );
+
+	}
 
 	THR.onWindowResize = function() {
 

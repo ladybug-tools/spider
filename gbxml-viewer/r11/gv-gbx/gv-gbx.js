@@ -82,7 +82,7 @@
 
 	};
 
-	//GBX.surfaceTypeOptions = txt;
+
 
 	GBX.callbackGbXML = function( xhr ) {
 

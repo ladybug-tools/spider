@@ -31,7 +31,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			divMenuItems.innerHTML =
 
-				`<details id = detTemplate  class=app-menu open>
+				`<details id = detModuleExplorer  class=app-menu open >
 
 					<summary>Module Read Me Explorer</summary>
 
@@ -40,7 +40,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					<p>the main menu</p>
 
 					<div><a href="#../gv-app/README.md" >APP ~ Application Module</a><br>
-					The base file that call alls the modules</div>
+					The base file that calls the various modules</div>
 
 					<p>the essentials</p>
 
@@ -94,7 +94,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
-			detTemplate.remove();
+			detModuleExplorer.remove();
 
 			EXP.butModuleExplorer.style.backgroundColor = '';
 

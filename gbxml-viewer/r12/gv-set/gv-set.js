@@ -45,7 +45,7 @@
 
 					<div>
 						<b>materials settings</b><br>
-						<button onclick=SET.setRandomMaterial(); >Set random material</button>
+						<button id=butSetRandomMaterial onclick=SET.setRandomMaterial(); >Set random material</button>
 
 						<button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button>
 

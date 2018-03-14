@@ -23,7 +23,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
-			TMP.butMenuTemplate = butSettings;
+			TMP.butMenuTemplate = butMenuTemplate;
 
 		}
 
@@ -57,7 +57,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
-			divTemplate.innerHTML = '<p>' + txt + '</p><hr>';
+			divTemplate.innerHTML =
+				'<textarea id=txtTemplate placeholder="a place for sticky notes" style="height:100px;width:100%;" onchange=localStorage.setItem("gvTemplate",this.value);></textarea>' +
+			'<hr>';
+
+			gvTemplate = localStorage.getItem( 'gvTemplate' );
+			txtTemplate.value = gvTemplate;
 
 		}
 

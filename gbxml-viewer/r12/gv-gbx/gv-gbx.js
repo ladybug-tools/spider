@@ -42,9 +42,7 @@
 
 	GBX.surfaceTypeOptions = txt;
 
-
-
-	function xxxinitGbx() {
+	GBX.initTemplate = function () {
 
 		if ( butGbx.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -101,7 +99,7 @@
 
 		//console.log( 'file', files.files[ 0 ] );
 
-		GBX.timeStart = Date.now();
+		COR.timeStart = Date.now();
 
 		GBX.fileAttributes = files.files[ 0 ];
 
@@ -394,25 +392,26 @@
 		const v0 = vertices[ 0 ];
 		const v1 = vertices[ 1 ]
 		const v2 = vertices[ 2 ];
+		const vNth = vertices[ vertices.length - 1 ];
 
 		let plane = new THREE.Plane().setFromCoplanarPoints ( v0, v1, v2 );
 
 		if ( plane.constant === 0 ) { // check for errors in gbXML vertices
 
 			if ( v0.x === v1.x && v1.x === v2.x ) {
-				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vNth );
 			}
 
 			if ( v0.y === v1.y && v1.y === v2.y ) {
-				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vNth );
 			}
 
 			if ( v0.x=== v1.x && v0.y === v1.y ) {
-				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vertices[ 3 ] );
+				plane = new THREE.Plane().setFromCoplanarPoints ( v1, v2, vNth );
 			}
 
 			if ( v1.x=== v2.x && v1.y === v2.y ) {
-				plane = new THREE.Plane().setFromCoplanarPoints ( v0, v1, vertices[ 3 ] );
+				plane = new THREE.Plane().setFromCoplanarPoints ( v0, v1, vNth );
 			}
 
 		}

@@ -53,6 +53,7 @@
 	#divContentsHeader {background-color: var( --mnu-header-color ); color: #fff; cursor: move; padding: 10px; z-index: 10;}
 
 	#divContents { margin: 10px; }
+	#divContents iframe { display: none; }
 
 	#divHamburger { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }

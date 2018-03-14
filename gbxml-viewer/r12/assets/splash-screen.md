@@ -3,11 +3,13 @@
 
 # gbXML Viewer R12
 
-gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three.js experiments for viewing, examining and validating [gbXML]( http://gbxml.org ) files in 3D in your browser.
+[gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" )/[WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" )/[Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
 
+Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
 
-### Must watch video:
-[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
+### Must watch and thumbs-up YouTube video:
+
+[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY "With music and voiceover by the multi-talented Michalina" )
 
 <!--
 <details open>

@@ -6,19 +6,15 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-exp/gv-exp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test script: [gbXML Viewer Module Explorer]( http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-exp/gv-exp.html )
-
-Use and share these links for the full gbXML Viewer:
-
-* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
-* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
 ## Concept
 
+* Display an overview of all the modules in gbXML Viewer in a speedy fashion
 
 
 ## Wish list
 
+* Add links to source code?
 
 
 ## Issues
@@ -31,6 +27,9 @@ Use and share these links for the full gbXML Viewer:
 
 ## Change Log
 
+### 2018-03-14 ~
+
+* Add iframe display none to divContents to simplify appearance
 
 
 ***

@@ -212,6 +212,11 @@
 			divContainer.style.display = 'block';
 			window.scrollTo( 0, 0 );
 
+			divContainer.scrollTop = 0;
+			//			divContents.scrollTop = 0;
+			divContainer.scrollTo( 0, 0 );
+			//			divContents.scrollTo( 0, 0 );
+
 		}
 
 
@@ -220,7 +225,7 @@
 
 			const response = xhr.target.response;
 			divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-			divContainer.style.display = 'block'
+			divContainer.style.display = 'block';
 
 		}
 
@@ -242,10 +247,15 @@
 
 				GBX.openGbxmlFile( files );
 
-			} else {
+			} else if ( files.files[0].name.toLowerCase().endsWith( '.md' ) ) {
 
 				//txtArea.innerHTML = reader.result;
 				COR.callbackMarkdownData( reader.result );
+
+			} else {
+
+				divContents.innerHTML = '<textarea style=height:500px;width:100%; >' + reader.result + '</textarea>';
+				divContainer.style.display = 'block';
 
 			}
 
@@ -414,6 +424,28 @@
 
 			divMenu.style.left = 0;
 			divHamburger.style.left = left;
+
+		}
+
+	}
+
+
+	COR.toggleNavRight = function() {
+
+		const left = 'calc( 100% - var( --mnu-width ) - 90px )';
+
+		divContainer.style.display="none";
+
+		if ( divHamburgerRight.style.left === '' || divHamburgerRight.style.left === left ) {
+
+			//divHeadsUp.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			divHeadsUp.style.left = 'calc( 100% )';
+			divHamburgerRight.style.left = 'calc( 100% - 90px )';
+
+		} else {
+
+			divHeadsUp.style.left = 'calc( 100% - var( --mnu-width ) - 50px )';
+			divHamburgerRight.style.left = left;
 
 		}
 
