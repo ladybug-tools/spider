@@ -1,1 +1,1 @@
-{"deletes":[],"types":[{"id":"aim9694","type":"InteriorWall"}],"oneAdjacent":[],"twoAdjacent":[{"id":"aim9694","spaceId":["aim0265","none"]},{"id":"aim9694","spaceId":["aim0265","aim0265"]}],"cadObjs":[]}
+{"deletes":["aim9694"],"types":[],"oneAdjacent":[],"twoAdjacent":[],"cadObjs":[{"id":"aim9155","cadId":"Basic Roof: SIM_EXT_SLD_Roof DA01 [929127]"}]}

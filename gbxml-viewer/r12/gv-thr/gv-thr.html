@@ -23,10 +23,9 @@
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
-
-
+<script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
-
+<script src = "../gv-gbx/gv-gbx.js" ></script>
 
 	<div id = "divMenu" >
 
@@ -39,6 +38,7 @@
 		<p id = "divContents" >
 
 			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+
 			<!--
 			<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
 
@@ -78,10 +78,11 @@
 
 		THR.camera.position.set( 100, 10, 100 );
 
-		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		geometry = new THREE.BoxGeometry( 5, 5, 50 );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
 		THR.scene.add( mesh );
+
 
 		THR.onWindowLoad();
 

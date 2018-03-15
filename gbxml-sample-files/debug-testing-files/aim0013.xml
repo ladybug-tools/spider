@@ -43511,9 +43511,9 @@
       </PlanarGeometry>
       <Name>X-01_104-01_104-I-O-224</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="false" id="aim6422">
-      
-      
+    <Surface surfaceType="Air" exposedToSun="false" id="aim6422">
+      <AdjacentSpaceId spaceIdRef="aim1946"/>
+      <AdjacentSpaceId spaceIdRef="aim1946"/>
       <RectangularGeometry id="aim6423">
         <Azimuth>94.6246948242188</Azimuth>
         <CartesianPoint>
@@ -43550,7 +43550,7 @@
         </PolyLoop>
       </PlanarGeometry>
       <Name>X-01_104-01_104-I-O-225</Name>
-    <AdjacentSpaceId xmlns="" spaceIdRef="aim1946"/></Surface>
+    </Surface>
     <Surface surfaceType="Air" exposedToSun="false" id="aim6434">
       <AdjacentSpaceId spaceIdRef="aim1946"/>
       <AdjacentSpaceId spaceIdRef="aim1946"/>
@@ -51943,9 +51943,9 @@
       </PlanarGeometry>
       <Name>X-01_123-01_123-I-O-416</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="false" id="aim8767">
-      
-      
+    <Surface surfaceType="Air" exposedToSun="false" id="aim8767">
+      <AdjacentSpaceId spaceIdRef="aim3295"/>
+      <AdjacentSpaceId spaceIdRef="aim3295"/>
       <RectangularGeometry id="aim8768">
         <Azimuth>94.6246948242188</Azimuth>
         <CartesianPoint>
@@ -51992,7 +51992,7 @@
         </PolyLoop>
       </PlanarGeometry>
       <Name>X-01_123-01_123-I-O-417</Name>
-    <AdjacentSpaceId xmlns="" spaceIdRef="aim3295"/></Surface>
+    </Surface>
     <Surface surfaceType="Air" exposedToSun="false" id="aim8781">
       <AdjacentSpaceId spaceIdRef="aim3295"/>
       <AdjacentSpaceId spaceIdRef="aim3295"/>
@@ -53347,9 +53347,9 @@
       </PlanarGeometry>
       <Name>X-01_130-01_130-I-O-447</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="false" id="aim9155">
-      
-      
+    <Surface surfaceType="Air" exposedToSun="false" id="aim9155" CADObjectId="Basic Roof: SIM_EXT_SLD_Roof DA01 [929127]">
+      <AdjacentSpaceId spaceIdRef="aim3610"/>
+      <AdjacentSpaceId spaceIdRef="aim3610"/>
       <RectangularGeometry id="aim9156">
         <Azimuth>90</Azimuth>
         <CartesianPoint>
@@ -53391,7 +53391,7 @@
         </PolyLoop>
       </PlanarGeometry>
       <Name>X-01_130-01_130-I-O-448</Name>
-    <AdjacentSpaceId xmlns="" spaceIdRef="aim3610"/></Surface>
+    </Surface>
     <Surface surfaceType="Air" exposedToSun="false" id="aim9168">
       <AdjacentSpaceId spaceIdRef="aim3610"/>
       <AdjacentSpaceId spaceIdRef="aim3610"/>
@@ -54601,7 +54601,85 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD WA36 [917123]</CADObjectId>
       <Name>X-S-475</Name>
     </Surface>
-    
+    <Surface surfaceType="Shade" exposedToSun="true" id="aim9503">
+      <RectangularGeometry id="aim9504">
+        <Azimuth>94.6246948242188</Azimuth>
+        <CartesianPoint>
+          <Coordinate>-122.8982</Coordinate>
+          <Coordinate>45.83013</Coordinate>
+          <Coordinate>12.26834</Coordinate>
+        </CartesianPoint>
+        <Tilt>90</Tilt>
+        <Width>19.8344440460205</Width>
+        <Height>2.91383600234985</Height>
+      </RectangularGeometry>
+      <PlanarGeometry>
+        <PolyLoop>
+          <CartesianPoint>
+            <Coordinate>-122.8982</Coordinate>
+            <Coordinate>45.83013</Coordinate>
+            <Coordinate>12.27745</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-122.6748</Coordinate>
+            <Coordinate>48.59137</Coordinate>
+            <Coordinate>12.27745</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-122.6748</Coordinate>
+            <Coordinate>48.59137</Coordinate>
+            <Coordinate>12.26833</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-122.6746</Coordinate>
+            <Coordinate>48.59466</Coordinate>
+            <Coordinate>12.26833</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-122.6714</Coordinate>
+            <Coordinate>48.63336</Coordinate>
+            <Coordinate>12.28763</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-121.9901</Coordinate>
+            <Coordinate>57.05637</Coordinate>
+            <Coordinate>12.28763</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-121.9901</Coordinate>
+            <Coordinate>57.05637</Coordinate>
+            <Coordinate>12.26833</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-121.9898</Coordinate>
+            <Coordinate>57.05966</Coordinate>
+            <Coordinate>12.26833</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-121.9867</Coordinate>
+            <Coordinate>57.09836</Coordinate>
+            <Coordinate>12.28763</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-121.299</Coordinate>
+            <Coordinate>65.6</Coordinate>
+            <Coordinate>12.28763</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-121.299</Coordinate>
+            <Coordinate>65.6</Coordinate>
+            <Coordinate>15.2</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-122.8982</Coordinate>
+            <Coordinate>45.83013</Coordinate>
+            <Coordinate>15.2</Coordinate>
+          </CartesianPoint>
+        </PolyLoop>
+      </PlanarGeometry>
+      <CADObjectId>Basic Wall: SIM_EXT_SLD WA36 [917128]</CADObjectId>
+      <Name>X-S-476</Name>
+    </Surface>
     <Surface surfaceType="Shade" exposedToSun="true" id="aim9521">
       <RectangularGeometry id="aim9522">
         <Azimuth>94.6246948242188</Azimuth>

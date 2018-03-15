@@ -20,6 +20,7 @@
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
 
+
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 	<div id=divTemplateBody >
@@ -79,7 +80,7 @@
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
+	fname = 'gv-thr'; //location.href.split( '/' ).pop().replace( '.html', '' );
 
 	ScriptSource =  fname + '.js';
 
@@ -122,7 +123,7 @@
 
 		console.log( 'scene', THR.scene );
 
-		butMenuLoad.click();
+//		butMenuLoad.click();
 
 		divContainer.style.display = 'none';
 

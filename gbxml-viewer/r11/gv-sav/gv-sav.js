@@ -321,13 +321,27 @@
 
 			} else {
 
-				const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
-				cadObjId.innerHTML = surface.cadId;
+				cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
 
-				const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surface.id );
-				surfaceMesh.userData.data.CADObjectId = surface.cadId;
+				if ( cadObjId ) {
 
-				divSavContents.innerHTML += 'change cad object for surface  id: ' + surface.id + '<br>';
+					cadObjId.innerHTML = surface.cadId;
+
+					const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surface.id );
+					surfaceMesh.userData.data.CADObjectId = surface.cadId;
+
+					divSavContents.innerHTML += 'change cad object for surface id: ' + surface.id + '<br>';
+
+				} else {
+
+					surfaceXml.setAttribute( "CADObjectId", surface.cadId);
+
+					const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surface.id );
+					surfaceMesh.userData.data.CADObjectId = surface.cadId;
+
+					divSavContents.innerHTML += 'Added cad object for surface  id: ' + surface.id + '<br>';
+
+				}
 
 			}
 

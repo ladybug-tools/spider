@@ -3,11 +3,28 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
-<meta name = "description" content = "gbXML Viewer ~ core file browse, read and display utilities" >
+<meta name = "description" content = "Core file browse, read and display utilities" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-10" >
+<meta name = "date" content = "2018-03-09" >
 <title>gbXML Viewer Core</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<style>
+/*
+	body { font: 11pt monospace; margin: 0; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover, button:focus{ background: #ccc; color: yellow }
+
+	.dragDropArea { border: 1px dashed gray; padding: 5px; }
+
+	#divMenu { left: 0; margin: auto; position: absolute; right: 0; text-align: center; width: 50%; }
+
+	#divContainer { border: 1px solid red; left: 0; margin: auto; position: absolute; right: 0; top: 200px; width: 900px; }
+*/
+
+</style>
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
@@ -47,8 +64,6 @@
 
 					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
 
-					<hr>
-
 				</div>
 
 			</details>
@@ -66,11 +81,9 @@
 	<div id=divContainer >
 
 		<div id = "divContentsHeader" >
-
 				pop-up window / click here to move / click outside to close
 				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
-
-			</div>
+		</div>
 
 		<div id=divContents ></div>
 

@@ -44,3 +44,10 @@ The goal is to have gbXML viewer open files in whatever way is best and fastest 
 ### Do you need to inspect a lot of files quickly?
 
 * Drag and and drop files into the Viewer
+
+***
+
+
+# <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > &#x1f578; </a></center>
+
+

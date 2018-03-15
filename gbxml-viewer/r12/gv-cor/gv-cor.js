@@ -1,25 +1,22 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
 
-	var COR = {};
+	let COR = {};
 
 	COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
-	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r12/';
-
-	urlGitHubPage = 'https://rawgit.com/ladybug-tools.github.io/spider/master/';
+	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r11/';
 
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	COR.iconGitHubMark = "../assets/gitHub-mark.png";
-	COR.iconSpiderWeb = "../assets/spider-web.png";  // &#x1f578;
 
-	//COR.threeDefaultFile = '../gv-thr/gv-thr.html';
-	COR.uriDefaultFile = '../assets/splash-screen.md'; // maybe should be in APP?
+	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
+	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
 
 	COR.menuBreadcrumbs =
 
 	`<div>
 		<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-		<a href="http://www.ladybug.tools/spider/" target="_top" > <img src=` + COR.iconSpiderWeb + `  height=18 ></a> &raquo;
+		<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
 		<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 	</div>`;
 
@@ -28,7 +25,7 @@
 	`<h2>
 		<a href="` + COR.releaseSourceURL + `" target=_top >
 			<img src=` + COR.iconGitHubMark + ` height=18 style=opacity:0.3; ></a>
-			<a id=aDocumentTitle href="" >` + document.title +`</a>
+			<a href="" >` + document.title +`</a>
 	</h2>`;
 
 	COR.menuDescription =
@@ -40,7 +37,7 @@
 	COR.menuFileOpening =
 
 	`<p id=dragArea class=dragDropArea >
-		drag&drop gbXML file to this box<br>
+		Drag & drop a file in this box<br>
 		or <input type=file id=inpFile onchange=COR.openFile(this); accept=".xml" ><br>
 		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
 		<br>
@@ -51,20 +48,24 @@
 
 		<summary>footer</summary>
 
-		<div title='' ><a href=#../README.md >Release Read Me</a></div>
 		<div title='' ><a href=#../../../pages/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
+		<div title='' ><a href=#./splash-screen.md >Introduction/ splash screen</a></div>
+		<div title='' ><a href=#../../README.md >Viewer Read Me</a></div>
+		<div title='' ><a href=#../README.md >Release Read Me</a></div>
 		<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
 		<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
 		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
 		<div><a href=#../../../pages/contributing.md >Contributing</a></div>
 		<div><a href=#../../../pages/license.md >Copyright & License</a></div>
+		<div><a href=http://www.ladybug.tools/spider/gbxml-user-guide/gbxml-user-guide.html >gbXML Schema User Guide</a></div>
 		<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
 		<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+		<!--
 		<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
-
+		-->
 		<hr>
 		<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
-			title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
+			title='go to top and, btw, my web is better than your web' > <img src=../gv-cor/spider-web.png height=24 style=opacity:0.5; > </h2>
 
 	</details>`;
 
@@ -86,7 +87,7 @@
 
 
 
-	COR.initCore = function() {
+	COR.initCore = () => {
 
 		if ( window.dragArea ) {
 			dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
@@ -130,7 +131,6 @@
 	COR.onHashChange = function() {
 
 		const url = !location.hash ? COR.uriDefaultFile : location.hash.slice( 1 );
-
 		const ulc = url.toLowerCase();
 
 		COR.timeStart = Date.now();
@@ -208,14 +208,14 @@
 			//const response = xhr.target.response;
 			const html = converter.makeHtml( xhr.target.responseText );
 
+//			divContainer.innerHTML = '<div id=divContents >' + html + '</div>';
 			divContents.innerHTML = html;
 			divContainer.style.display = 'block';
 			window.scrollTo( 0, 0 );
-
 			divContainer.scrollTop = 0;
-			//			divContents.scrollTop = 0;
+//			divContents.scrollTop = 0;
 			divContainer.scrollTo( 0, 0 );
-			//			divContents.scrollTo( 0, 0 );
+//			divContents.scrollTo( 0, 0 );
 
 		}
 
@@ -225,7 +225,7 @@
 
 			const response = xhr.target.response;
 			divContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-			divContainer.style.display = 'block';
+			divContainer.style.display = 'block'
 
 		}
 
@@ -247,15 +247,10 @@
 
 				GBX.openGbxmlFile( files );
 
-			} else if ( files.files[0].name.toLowerCase().endsWith( '.md' ) ) {
+			} else {
 
 				//txtArea.innerHTML = reader.result;
 				COR.callbackMarkdownData( reader.result );
-
-			} else {
-
-				divContents.innerHTML = '<textarea style=height:500px;width:100%; >' + reader.result + '</textarea>';
-				divContainer.style.display = 'block';
 
 			}
 
@@ -278,7 +273,7 @@
 
 	// handle drag and drop events
 
-	COR.drop = event => {
+	COR.drop = function( event ) {
 
 		console.log( 'event', event );
 
@@ -332,13 +327,7 @@
 		divContainer.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
-		divContainer.scrollTop = 0;
-		//			divContents.scrollTop = 0;
-		divContainer.scrollTo( 0, 0 );
-		//			divContents.scrollTo( 0, 0 );
-
 	}
-
 
 
 	// handle menu header dragging with mouse or touch events
@@ -424,28 +413,6 @@
 
 			divMenu.style.left = 0;
 			divHamburger.style.left = left;
-
-		}
-
-	}
-
-
-	COR.toggleNavRight = function() {
-
-		const left = 'calc( 100% - var( --mnu-width ) - 90px )';
-
-		divContainer.style.display="none";
-
-		if ( divHamburgerRight.style.left === '' || divHamburgerRight.style.left === left ) {
-
-			//divHeadsUp.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
-			divHeadsUp.style.left = 'calc( 100% )';
-			divHamburgerRight.style.left = 'calc( 100% - 90px )';
-
-		} else {
-
-			divHeadsUp.style.left = 'calc( 100% - var( --mnu-width ) - 50px )';
-			divHamburgerRight.style.left = left;
 
 		}
 

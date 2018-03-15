@@ -90,14 +90,13 @@
 	#divHeadsUp {
 		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - 400px );
 		max-height: 97%; max-width: 400px; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
-		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; transition: .5s; z-index: 10;
+		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; transition: .5s;
 	}
 	#divHeadsUp {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	}
-
-	#divDraggableHeader2 {
-		background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px; z-index: 10;
+	#divHeadsUpHeader {
+		background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px;
 	}
 
 

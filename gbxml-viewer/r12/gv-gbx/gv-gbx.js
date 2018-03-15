@@ -99,7 +99,7 @@
 
 		//console.log( 'file', files.files[ 0 ] );
 
-		COR.timeStart = Date.now();
+		//COR.timeStart = Date.now();
 
 		GBX.fileAttributes = files.files[ 0 ];
 

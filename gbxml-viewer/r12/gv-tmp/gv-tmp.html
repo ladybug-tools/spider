@@ -3,68 +3,49 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "gbXML Viewer ~ template - 'boilerplate for creating new modules'" >
+<meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-10" >
-<title></title>
-<link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<meta name = "date" content = "2018-03-02" >
+<title>gv-tmp - gbXML Viewer Template</title>
+<link rel="stylesheet" type="text/css" href="../assets/style-template.css" >
 <style>
 
-	body { overflow: auto; }
-	#divTemplateBody { margin: 0 auto; max-width: 800px; }
-	iframe { height: 500px; width: 100%; }
+		body { overflow: auto;  margin: 0 auto; max-width: 800px; }
+		#divTemplateBody {}
+		iframe { height: 500px; width: 100%; }
 
-</style>
+	</style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
-	<div id=divTemplateBody >
-
-		<div id=divMenuTitle ></div>
-
-		<div id=divMenuDescription ></div>
-
-		<p>If it does not open automatically, click the following button to load test menu</p>
-
-		<p>
-			<button id=butMenuLoad >
-				<!--
-				onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-tmp/gv-tmp.js';
-				divHeadsUp.style.display='block';" >
-				-->
-				gv-tmp </button>
-		</p>
-
-		<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
-
-		<div id=divMenuFileOpening ></div>
-
-		<p><a href=#README.md >Read Me file</a></p>
-
-		<div id=divLog ></div>
-
-		<div id = "divSampleFiles" ></div>
-
+	<div id = "divHeader" >
+		<div id = "divTitle" ></div>
 	</div>
 
-	<div id=divContainer >
+	<p>If it does not open automatically, click 'gv-tmp gbxml viewer template' button to load test menu</p>
 
-			<div id = "divContentsHeader" >
-					pop-up window / click here to move / click outside to close
-					<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
-			</div>
+	<p>
+		<button id=butTemplate onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-tmp/gv-tmp.js';
+			divMenu.style.display='block';" >
+			gv-tmp gbxml viewer template </button>
+	</p>
 
-			<div id=divContents ></div>
+	<iframe id=ifrThree src='../gv-thr/gv-thr.html' ></iframe>
 
-	</div>
+	<div id=divMenuFileOpening ></div>
 
-	<div id = "divHeadsUp" >
+	<div id=divLog ></div>
+
+	<div id = "divSampleFiles" ></div>
+
+	<p><a href=index.html >Read Me file</a></a></p>
+
+	<div id = "divMenu" >
 
 		<div id = "divMenuHeader" >
 			click here to move
@@ -75,13 +56,11 @@
 
 	</div>
 
+	<div id=divContainer ><div id=divContents ></div></div>
+
 <script>
 
-	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
-
-	ScriptSource =  fname + '.js';
 
 	initTemplate();
 
@@ -89,23 +68,21 @@
 
 	function initTemplate() {
 
-		divMenuTitle.innerHTML = COR.menuTitle;
-
-		divMenuDescription.innerHTML = COR.menuDescription;
+		divTitle.innerHTML =
+			'<h2>' +
+				'<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r10/" >' + COR.iconInfo + '</a>' +
+				' <a  href = "" >' + document.title + '</a>' +
+			'</h2>' +
+			'<p>' + document.head.querySelector( '[name=description]' ).content + '</p>' +
+		'';
 
 		divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 
-		butMenuLoad.onclick = function() {
-			script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = ScriptSource;
-			divHeadsUp.style.display='block';
-		}
+		window.addEventListener ( 'hashchange', onHashChange, false );
 
-		window.addEventListener ( 'hashchange', COR.onHashChange, false );
-
-		COR.onHashChange();
+		onHashChange();
 
 	}
 
@@ -114,6 +91,7 @@
 
 		icw = ifrThree.contentWindow;
 		THREE = icw.THREE;
+//		COR = icw.COR;
 		THR = icw.THR;
 		GBX = icw.GBX;
 		GBV = icw.GBV;
@@ -122,11 +100,22 @@
 
 		console.log( 'scene', THR.scene );
 
-		butMenuLoad.click();
-
-		divContainer.style.display = 'none';
+		butTemplate.click();
 
 	}
+
+
+
+	function onHashChange() {
+
+		const url = COR.threeDefaultFile + location.hash;
+		//console.log( 'url', url );
+
+		ifrThree.src = url;
+		ifrThree.contentWindow.location.reload();
+
+	}
+
 
 
 </script>

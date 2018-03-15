@@ -21,7 +21,6 @@
 		} else {
 
 			return;
-
 			//GBV.butGbxmlView = butGbxmlView;
 
 		}
