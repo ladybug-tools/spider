@@ -4,6 +4,8 @@
 
 	GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
 
+	var REP = {};
+
 
 	//initGbxmlView();
 
@@ -53,7 +55,7 @@
 
 		}
 
-	}();
+	};
 
 
 
@@ -86,19 +88,18 @@
 
 
 			<details open >
-				<summary>surfaces individually</summary>
-				 <button onclick=GBV.showSurface(selSurface.value); >select</button>
-				 <button onclick=GBV.zoomIntoSurface(selSurface.value); >zoom</button>
-				 <button onclick=GBV.deleteSurface(selSurface.value); >delete</button>
+				<summary>Surfaces Individually</summary>
+				 <button onclick=GBV.showSurface(property.value); >select</button>
+				 <button onclick=GBV.zoomIntoSurface(property.value); >zoom</button>
+				 <button onclick=GBV.deleteSurface(property.value); >delete</button>
 				<div style="border:1px solid red;display:inline-block;" >
 					<input size=6 ><br>
-					<select id = "selSurface" size=10 ></select><br>
-
+					<select id = "property" size=10 ></select><br>
 				</div>
 				<div style="border:1px solid red;display:inline-block;width:200px;vertical-align:top;" >
 					name<br>
 					description<br>
-					<button onclick=GBV.showCadId(encodeURI(GBX.surfaceJson[selSurface.selectedIndex].CADObjectId)); >GBV.showCadId</button>
+					<button onclick=GBV.showCadId(encodeURI(GBX.surfaceJson[property.selectedIndex].CADObjectId)); >GBV.showCadId</button>
 					<select id = "selType" size=3 ></select>
 					<button onclick=GBV.showSurfaceType(selType.value); >GBV.showSurfaceType</button>
 					storey<br>
@@ -110,70 +111,70 @@
 			</details>
 
 			<details>
-			<summary>surfaces by type</summary>
-			<select id = "selSpace" size=10 ></select>
-			<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<summary>Surfaces by Type</summary>
+				<div id=divSurfacesByType ></div>
+				<hr>
 			</details>
 
-			<details open >
-				<summary>spaces</summary>
-				<select id = "selSpace" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+			<details>
+				<summary>Spaces</summary>
+				<div style="border:1px solid red;display:inline-block;" >
+					<input size=6 ><br>
+					<select id = "selSpace" size=10 ></select>
+				</div>
 				<hr>
 			</details>
 
 			<details >
 				<summary>Storeys</summary>
 				<select id = "selStorey" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<button onclick=GBV.showStorey(selStorey.value); >Show</button>
 				<hr>
 			</details>
 
-			<details >
+			<details>
 				<summary>Zones</summary>
-				<select id = "selStorey" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<!--
+				<select id = "selZone" size=10 ></select>
+				-->
+				<div id=divZones ></div>
 				<hr>
 			</details>
 
-			<details >
+			<details open >
 				<summary>CAD Object Groups</summary>
-				<select id = "selStorey" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<div id=divCadIdGroup ></div>
 				<hr>
 			</details>
 
 			<details >
 				<summary>CAD Object IDs</summary>
-				<select id = "selStorey" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<div></div>
 			</details>
+
+			<hr>
 
 			<details >
 				<summary>gbXML Attributes</summary>
-				<select id = "selStorey" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<div id=divGbxmlAttributes ></div>
 				<hr>
 			</details>
 
 			<details >
 				<summary>Campus</summary>
-				<select id = "selStorey" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<div id=divCampus ></div>
 				<hr>
 			</details>
 
 			<details >
-				<summary>Campus Location</summary>
-				<select id = "selStorey" size=10 ></select>
-				<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+				<summary id=sumCampusLocation >Campus Location</summary>
+				<div id=divCampusLocation ></div>
 				<hr>
 			</details>
 
 			<details >
 			<summary>Building</summary>
-			<select id = "selStorey" size=10 ></select>
-			<button onclick=GBV.showSpace(selSpace.value); >GBV.GBV.showSpace</button>
+			<div id=divCampusBuilding ></div>
 			<hr>
 		</details>
 		`;
@@ -189,63 +190,188 @@
 		let txt = '';
 		GBX.surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
 
-		selSurface.innerHTML = txt;
-		selSurface.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
+		property.innerHTML = txt;
+		property.selectedIndex = 0; //Math.floor( Math.random() * property.length );
 
 		txt = '';
 		GBX.surfaceTypes.forEach( function( element ) { txt += '<option>' + element + '</option>'; } );
 
 		selType.innerHTML = txt;
-		selType.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
+		selType.selectedIndex = 0;
+
+		divSurfacesByType.innerHTML = REP.getSurfacesByType().flowContent;
 
 		txt = '';
 		const spaceXml = GBX.gbjson.Campus.Building.Space;
 		spaceXml.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
 
 		selSpace.innerHTML = txt;
-		selSpace.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
+		selSpace.selectedIndex = 0;
+
+		let storeys = '';
+		const storeyXml = GBX.gbjson.Campus.Building.BuildingStorey;
+		storeyXml.forEach( function( element ) { storeys += '<option>' + element.id + '</option>'; } );
+
+		selStorey.innerHTML = storeys;
+		selStorey.selectedIndex = 0;
+
+
+		divZones.innerHTML += REP.traverseGbjson( GBX.gbjson.Zone ).attributes;
+
+		divCadIdGroup.innerHTML = REP.getSurfaceCadIdGroups().flowContent;
+		///
+
+		divGbxmlAttributes.innerHTML = REP.traverseGbjson( GBX.gbjson ).attributes;
+
+		divCampus.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus ).attributes;
+
+		divCampusLocation.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Location ).attributes;
+		const mapLink = REP.getGoogleMap();
+		sumCampusLocation.innerHTML += mapLink;
+
+		divCampusBuilding.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building ).attributes;
+
 
 	}
 
 
 
-	GBV.toggleDuplicates = ( button, surfaceArray ) => {
+	REP.traverseGbjson = function traverseGbjson( obj ) {
 
-		if ( button.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		const elements = [];
+		let attributes = '';
 
-			GBX.surfaceMeshes.children.forEach( element => element.visible = surfaceArray.includes( element.userData.data.Name ) ? true : false );
+		for ( let property in obj ) {
 
-			/*
-			for ( let child of surfaceMeshes.children ) {
+			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
-				if ( surfaceArray.includes( child.userData.data.Name ) ) {
+				if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
 
-					child.visible = true;
+			} else {
 
-				} else {
-
-					child.visible = false;
-
-				}
+				attributes += '<div>' + property + ': ' + obj[ property ] + '</div>';
 
 			}
 
-			*/
+		};
 
-			button.style.backgroundColor = 'var( --but-bg-color )';
+		return { elements: elements, attributes: attributes };
 
-		} else {
+	}
 
-			GBV.setAllVisible();
 
-			button.style.backgroundColor = '';
+	REP.getSurfacesByType = function() {
+
+		surfaces = GBX.gbjson.Campus.Surface;
+
+		let txt = '';
+
+		//console.log( 'surfaces', surfaces );
+
+		const types = [];
+		const typesCount = [];
+
+		for ( let surface of surfaces ) {
+
+			index = types.indexOf( surface.surfaceType );
+
+			if ( index < 0 ) {
+
+				types.push( surface.surfaceType );
+				typesCount[ types.length - 1 ] = 1;
+
+			} else {
+
+				typesCount[ index ] ++;
+
+			}
 
 		}
+
+		for ( let i = 0; i < types.length; i++ ) {
+
+			txt +=
+//				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
+				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' ><img src="../assets/eye.png" height=18></button>' +
+				' <button class=toggle onclick=REP.toggleSurfaceType(this); >' + types[ i ] + '</button>: ' +
+				typesCount[ i ] + '-' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
+				'%<br>';
+
+		}
+
+		txt +=
+
+			'<p><button class=toggle onclick=REP.allVisible(); >all visible</button></p>';
+
+
+		const summary = 'Surfaces: ' + surfaces.length;
+
+		return { summary: summary, flowContent: txt };
 
 	}
 
 
 
+	REP.getSurfaceCadIdGroups = function() {
+
+		const cadIds = [];
+		const surfaceMembers = [];
+		const surfaces = GBX.gbjson.Campus.Surface;
+		let count = 0;
+		let flowContent = '';
+
+		for ( let surface of surfaces ) {
+
+			if ( !surface.CADObjectId ) { continue; }
+
+			id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
+
+			if ( !cadIds.includes( id ) ) {
+
+				cadIds.push( id );
+
+			}
+
+		}
+
+		cadIds.sort();
+
+		for ( let id of cadIds ){
+
+			flowContent += '<button onclick=REP.toggleCadIdGroup("' + encodeURI( id )+ '"); >' + id + '</button><br>';
+
+		}
+
+		//console.log( '', CadIds.length );
+
+		const info = 'Information: Revit CAD Object Groups';
+		return { summary: 'CAD Object ID Groups &raquo; ' + cadIds.length, flowContent: flowContent, info: info };
+
+	}
+
+
+	REP.getGoogleMap = () => {
+
+		const locate = GBX.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
+		let linkToMap;
+
+		if ( locate && locate.Latitude && locate.Longitude ) {
+
+			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
+
+			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f310; </a>';
+//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
+//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > <img src=world-map.png height=18 > </a>';
+
+		} else {
+
+			linkToMap = '';
+
+		}
+
+		return '<span title="Use context menu to open a Google Map in a new tab" >' + linkToMap + '<span>';
+
+	}
 
 
 	GBV.showSurface = ( id ) => {
@@ -391,37 +517,6 @@
 
 
 
-	GBV.zoomObjectBoundingSphere = obj => {
-
-		const bbox = new THREE.Box3().setFromObject( obj );
-		const sphere = bbox.getBoundingSphere();
-		center = sphere.center;
-		radius = sphere.radius;
-
-		obj.userData.center = center;
-		obj.userData.radius = radius;
-
-		THR.controls.target.copy( center );
-		THR.controls.maxDistance = 5 * radius;
-
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
-
-		THR.axesHelper.scale.set( radius, radius, radius );
-		THR.axesHelper.position.copy( center );
-
-		THR.camera.far = 10 * radius; //2 * camera.position.length();
-		THR.camera.updateProjectionMatrix();
-
-		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
-		THR.lightDirectional.target = THR.axesHelper;
-
-		//		scene.remove( cameraHelper );
-		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-		//		scene.add( cameraHelper );
-
-	};
-
 
 
 	GBV.deleteSurface = id => {
@@ -514,3 +609,6 @@
 		a = null;
 
 	}
+
+
+	GBV.initGbxmlView();
