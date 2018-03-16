@@ -19,7 +19,13 @@
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
-<script src = "../gv-tmp/gv-tst.js" ></script>
+<script src = "../gv-thr/gv-thr.js" ></script>
+<script src = "../gv-gbx/gv-gbx.js" ></script>
+<!--
+<script src = "../gv-hud/gv-hud.js" ></script>
+-->
+
+<script src = "../gv-gbv/gv-gbv.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
@@ -44,6 +50,8 @@
 
 		<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
 
+<!--
+
 		<div id=divMenuFileOpening ></div>
 
 		<p><a href=#README.md >Read Me file</a></p>
@@ -51,7 +59,7 @@
 		<div id=divLog ></div>
 
 		<div id = "divSampleFiles" ></div>
-
+-->
 	</div>
 
 	<div id=divContainer >
@@ -80,23 +88,29 @@
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = 'gv-thr'; //location.href.split( '/' ).pop().replace( '.html', '' );
+	fname = location.href.split( '/' ).pop().replace( '.html', '' );
 
 	ScriptSource =  fname + '.js';
 
 	initTemplate();
 
+
 	COR.initCore();
 
 	function initTemplate() {
 
-		divMenuTitle.innerHTML = TST.menuTitle;
+		divMenuTitle.innerHTML = COR.menuTitle;
 
-		divMenuDescription.innerHTML = TST.menuDescription;
+		divMenuDescription.innerHTML = COR.menuDescription;
 
-		divMenuFileOpening.innerHTML = TST.menuFileOpening;
+//		divMenuFileOpening.innerHTML = COR.menuFileOpening;
 
-		divSampleFiles.innerHTML = TST.gbxmlSampleFiles;
+//		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
+
+	//divHeadsUp.style.display='block';
+	//GBV.initGbxmlView();
+
+
 
 		butMenuLoad.onclick = function() {
 			script = document.head.appendChild( document.createElement( 'script' ) );
@@ -104,9 +118,9 @@
 			divHeadsUp.style.display='block';
 		}
 
-		window.addEventListener ( 'hashchange', COR.onHashChange, false );
+//		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
-		//COR.onHashChange();
+//		COR.onHashChange();
 
 	}
 
@@ -123,9 +137,9 @@
 
 		console.log( 'scene', THR.scene );
 
-//		butMenuLoad.click();
+		//butMenuLoad.click();
 
-		divContainer.style.display = 'none';
+//		divContainer.style.display = 'none';
 
 	}
 

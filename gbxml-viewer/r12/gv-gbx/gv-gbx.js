@@ -552,6 +552,7 @@
 
 		};
 
+/*
 		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
 		THR.camera.up.set( 0, 0, 1 );
 
@@ -560,5 +561,6 @@
 
 		THR.camera.add( THR.lightPoint );
 		THR.scene.add( THR.camera );
+*/
 
 	}

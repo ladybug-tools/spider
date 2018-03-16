@@ -24,14 +24,17 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <summary>Welcome 2018-03-15 ~ R11.12.6</summary>
 
-A fix to one of Michal's wish list items. Also a symbolic step: gbXML Viewer is now adding new data to a gbXML file.
+A fix to one of @MichalDengusiak's wish list items. Also a symbolic step: gbXML Viewer is now adding new data to a gbXML file.
 
 HUD ~ Heads-up Display Module
 * Select and add a new CAD Object ID to any surface even if the current ID is undefined
-	* Previously: put up an alert and ignore the change request
-* 'Save edits' button saves the edits to a new file
+	* Previously: put up an alert and ignored the change request
+* 'Save edits' button saves the edits to a new gbXML file
+
 SAV ~ Save Changes Module
-* If a surface has no defined CAD Object ID, tesponds to a request to change CAD Object ID by adding the new ID to the surface
+* If a surface has no defined CAD Object ID, responds to a request to change CAD Object ID by adding a new ID to the surface
+* 'Save changes' button saves the changes to the make changes json file for reuse on later versions of the gxXML file
+
 
 </details><details open>
 

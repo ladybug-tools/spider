@@ -10,8 +10,9 @@
 	COR.iconGitHubMark = "../assets/gitHub-mark.png";
 
 	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
-	COR.uriDefaultFile = '../gv-app/splash-screen.md'; // maybe should be in APP?
+	COR.uriDefaultFile = '../assets/splash-screen.md'; // maybe should be in APP?
 
+	/*
 	COR.menuBreadcrumbs =
 
 	`<div>
@@ -65,7 +66,7 @@
 		-->
 		<hr>
 		<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
-			title='go to top and, btw, my web is better than your web' > <img src=../gv-cor/spider-web.png height=24 style=opacity:0.5; > </h2>
+			title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
 
 	</details>`;
 
@@ -85,9 +86,9 @@
 
 	`;
 
+*/
 
-
-	COR.initCore = () => {
+	COR.initCore = function() {
 
 		if ( window.dragArea ) {
 			dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );

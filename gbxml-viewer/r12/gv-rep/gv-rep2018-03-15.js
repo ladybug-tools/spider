@@ -1,6 +1,6 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-	REP = {};
+	var REP = {};
 
 	var surfaceAdjacencyDuplicates;
 	var surfaceAdjacencyInvalids;
@@ -11,7 +11,7 @@
 	var b = '<br>';
 
 
-	REP.initReport = () => {
+	REP.initReport = function() {
 
 
 		if ( window.butMenuLoad ) {
@@ -30,7 +30,6 @@
 			REP.butReports = butReports;
 
 		}
-
 
 		if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -109,9 +108,6 @@
 		const spacesText = REP.getSpaces();
 		divReport.innerHTML += addDetails( spacesText.summary, spacesText.flowContent );
 
-		const spacesTiny = REP.getSpacesTiny();
-		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent, spacesTiny.info );
-
 		const zones = traversGbjson( GBX.gbjson.Zone );
 		divReport.innerHTML += addDetails( 'Zones', zones.attributes );
 
@@ -124,23 +120,9 @@
 
 		//		examineGbjson( gbjson );
 
-		const surfaceDuplicateCoordinates = REP.getSurfaceDuplicatesCoordinates();
-		divReport.innerHTML += addDetails( surfaceDuplicateCoordinates.summary, surfaceDuplicateCoordinates.flowContent, surfaceDuplicateCoordinates.info );
-
-		const surfaceDuplicateCadIds = REP.getSurfaceDuplicateCadIds();
-		divReport.innerHTML += addDetails( surfaceDuplicateCadIds.summary, surfaceDuplicateCadIds.flowContent, surfaceDuplicateCadIds.info );
-
 		const surfaceCadIdGroups = REP.getSurfaceCadIdGroups();
 		divReport.innerHTML += addDetails( surfaceCadIdGroups.summary, surfaceCadIdGroups.flowContent, surfaceCadIdGroups.info );
 
-		const surfaceDuplicateAdjacencies = REP.getSurfaceDuplicateAdjacencies();
-		divReport.innerHTML += addDetails( surfaceDuplicateAdjacencies.summary, surfaceDuplicateAdjacencies.flowContent, surfaceDuplicateAdjacencies.info );
-
-		const surfaceTinies = REP.getSurfacesTinies();
-		divReport.innerHTML += addDetails( surfaceTinies.summary, surfaceTinies.flowContent, surfaceTinies.info );
-
-		const surfaceAdjacencyInvalid = REP.getSurfaceAdjacencyInvalid();
-		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent, surfaceAdjacencyInvalid.info );
 
 		// following causes error when inside an iframe in a read me
 		//if ( parent.setIfrThree ) { setIfrThree(); }
@@ -201,9 +183,8 @@
 
 			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
 
-			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f310; </a>';
 //			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
-//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > <img src=world-map.png height=18 > </a>';
+			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > <img src=../assets/world-map.png height=18 > </a>';
 
 		} else {
 
@@ -380,88 +361,6 @@
 
 
 
-	REP.getSurfaceDuplicatesCoordinates =() => {
-
-		const surfacePolyLoops = [];
-		const surfaceIds = [];
-		surfaceCoordinateDuplicates = [];
-
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butDuplicatesCoordinates onclick=REP.toggleAdjacencies(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
-			'</p>' +
-			'<p style=background-color:var(--highlight-color);color:red;>This menu will be deprecated. Use other edit buttons.</p>';
-		let spaceId;
-
-		for ( let i = 0; i <  surfaces.length; i++ ) {
-
-			surface = surfaces[ i ]
-			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
-			index = surfacePolyLoops.indexOf( points );
-
-			if ( index < 0 ) {
-
-				surfacePolyLoops.push( points );
-				surfaceIds.push( i );
-
-			} else {
-
-				surfOther = surfaces[ surfaceIds[ index ] ];
-				surfaceCoordinateDuplicates.push( surface.Name );
-
-		//console.log( 'surface', surface );
-		//console.log( 'surfOther', surfOther );
-
-				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
-
-				if ( adjacency ) {
-
-					spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
-
-				}
-
-				flowContent +=
-					'<p>' + count +
-						'. id: <button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						( spaceId ? 'Space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
-
-						'<hr>' +
-						'id of duplicate: <button onclick=REP.toggleSurface("' + surfOther.id + '"); >' + surfOther.id + '</button>' + b +
-						'surfaceType: ' + surfOther.surfaceType + b +
-						( surfOther.Name ? 'Name: ' + surfOther.Name + b : '' ) +
-						( surfOther.CADObjectId ?
-							'<button onclick=REP.toggleCadId("' + encodeURI( surfOther.CADObjectId ) + '"); >CADObjectId: ' + surfOther.CADObjectId + '</button>' + b
-							: ''
-						) +
-
-					'</p><hr>' + b;
-
-				count ++;
-
-			}
-
-		}
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ffff00' ); }
-
-		}
-
-		const info = 'Error: Two surfaces with identical coordinates';
-		return { summary: 'Duplicate Coordinates &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
 	REP.getSurfaceCadIdGroups =() => {
 
 		const cadIds = [];
@@ -498,325 +397,6 @@
 
 	}
 
-
-
-	REP.vvvvgetSurfaceDuplicateCadIds =() => {
-
-		const surfacesIds = [];
-		const surfaceMembers = [];
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			const id = surface.CADObjectId;
-
-			index = surfacesIds.indexOf( id );
-
-			if ( index < 0 ) {
-
-				surfacesIds.push( id );
-				surfaceMembers.push( { members: [ surface ] } );
-
-			} else {
-
-				surfaceMembers[ index ].members.push( surface );
-		/*
-						flowContent +=
-							'<p>' + count +
-								'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-								'surfaceType: ' + surface.surfaceType + b +
-								( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-								( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-							'</p>';
-
-						count ++;
-		*/
-			}
-
-		}
-
-		count = surfacesIds.length === 1 ? 0 : count;
-
-		//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
-		//console.log( 'surfaceMembers', surfaceMembers );
-
-		for ( member of surfaceMembers ) {
-
-			if ( member.members.length > 1 ) {
-
-			//console.log( '', member.members );
-				let surface;
-				for ( surface of member.members ) {
-
-					flowContent +=
-						'<p>' + count +
-							'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-							'surfaceType: ' + surface.surfaceType + b +
-							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-			//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'</p>';
-
-					count ++;
-
-				}
-
-				flowContent +=
-
-					'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b +
-
-				'<hr>';
-
-			}
-
-		}
-
-		const info = 'Information: Multiple gbXML elements created from single CAD element';
-		return { summary: 'Duplicate CAD Object IDs &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.getSurfaceDuplicateCadIds =() => {
-
-		const surfacesIds = [];
-		const surfaceMembers = [];
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			const id = surface.CADObjectId;
-
-			index = surfacesIds.indexOf( id );
-
-			if ( index < 0 ) {
-
-				surfacesIds.push( id );
-				surfaceMembers.push( { members: [ surface ] } );
-
-			} else {
-
-				surfaceMembers[ index ].members.push( surface );
-		/*
-						flowContent +=
-							'<p>' + count +
-								'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-								'surfaceType: ' + surface.surfaceType + b +
-								( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-								( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-							'</p>';
-
-						count ++;
-		*/
-			}
-
-		}
-
-		count = surfacesIds.length === 1 ? 0 : count;
-
-		//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
-		//console.log( 'surfaceMembers', surfaceMembers );
-
-		for ( member of surfaceMembers ) {
-
-			if ( member.members.length > 1 ) {
-
-			//console.log( '', member.members );
-				let surface;
-				for ( surface of member.members ) {
-
-					flowContent +=
-						'<p>' + count +
-							'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-							'surfaceType: ' + surface.surfaceType + b +
-							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-			//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'</p>';
-
-					count ++;
-
-				}
-
-				flowContent +=
-
-					'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b +
-
-				'<hr>';
-
-			}
-
-		}
-
-		const info = 'Information: Multiple gbXML elements created from single CAD element';
-		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-	REP.getSurfaceDuplicateAdjacencies = () => {
-
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butDuplicateAdjacencies onclick=REP.toggleAdjacencies(butDuplicateAdjacencies,surfaceAdjacencyDuplicates); >toggle all duplicates</button>' +
-			'</p>' +
-			'<p style=background-color:var(--highlight-color);color:red;>This menu will be deprecated. Use other edit buttons.</p>';
-
-		for ( let surface of surfaces ) {
-
-			adjacencies = surface.AdjacentSpaceId;
-
-			const height = parseFloat( surface.RectangularGeometry.Height );
-			const width = parseFloat( surface.RectangularGeometry.Width );
-			const surfaceArea = height * width;
-
-			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
-
-				surfaceAdjacencyDuplicates.push( surface.Name );
-
-		//console.log( 'adjacencies', adjacencies  );
-
-				flowContent +=
-					'<div style=margin-bottom:35px; >' +
-						( ++ count ) +
-						'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.constructionIdRef ? 'construction id ref: ' + surface.constructionIdRef + b : '' ) +
-						( surface.CADObjectId ?
-							'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
-							: ''
-						) +
-						' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
-						'Space:  <button onclick=REP.toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-					'<hr></div>';
-			}
-
-		}
-
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			if ( surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }
-
-		}
-
-		const info = 'Error: Interior surfaces with both adjacencies pointing to same ID';
-		return { summary: 'Duplicate Adjacencies &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.getSurfacesTinies = () => {
-
-		surfaces = GBX.gbjson.Campus.Surface;
-		const b = '<br>';
-		let flowContent = '';
-		let count = 0;
-
-		//console.log( 'surfaces', surfaces );
-
-		for ( let surface of surfaces ) {
-
-			const height = parseFloat( surface.RectangularGeometry.Height );
-			const width = parseFloat( surface.RectangularGeometry.Width );
-			const surfaceArea = height * width;
-
-			if ( parseFloat( surfaceArea ) < sud.tinySurfaceSquareMeters ) {
-
-			//console.log( 'surface', surface );
-
-				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
-
-				if ( adjacency ) {
-					// fix to handle surface.AdjacentSpaceId[ 0 ]
-					spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
-
-				}
-
-				flowContent += '<div style=margin-bottom:10px; > ' +
-					( ++ count ) +
-					'. id: <button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-					'surfaceType: ' + surface.surfaceType + b +
-					( surface.Name ? 'name: ' + surface.Name + b : '' ) +
-					( surface.CADObjectId ?
-						'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
-						: ''
-					) +
-					' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
-					//					( spaceId ? 'space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' +
-					//				b : '' ) +
-
-				'</div>';
-
-			}
-
-		}
-
-		const info = 'Information: Spaces with area smaller than ' + sud.tinySurfaceSquareMeters + ' square units';
-		return { summary: 'Tiny Surfaces &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.getSurfaceAdjacencyInvalid = () => {
-
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butAdjacencyInvalid onclick=REP.toggleAdjacencies(butAdjacencyInvalid,surfaceAdjacencyInvalids); >toggle all duplicates</button>' +
-			'</p>';
-
-		const adjacencyArrayOK = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'Air' ];
-
-		for ( let surface of surfaces ) {
-
-			adjacencies = surface.AdjacentSpaceId;
-
-			if ( Array.isArray( adjacencies ) === true && adjacencyArrayOK.includes( surface.surfaceType ) === false ) {
-
-				surfaceAdjacencyInvalids.push( surface.Name );
-
-		//conconsole.log( 'surface.Name', surface.Name  );
-
-				flowContent +=
-					'<div style=margin-bottom:35px; >' +
-						( ++ count ) +
-						'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'Space:  <button onclick=REP.toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >CADObjectId: ' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-
-					'<hr></div>';
-
-			}
-
-		}
-
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			if ( surfaceAdjacencyInvalids.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
-
-		}
-
-		const info = 'Error: Surface has multiple adjacencies but should have just one';
-		return { summary: 'Invalid Adjacencies &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
 
 
 
@@ -1133,31 +713,6 @@
 			REP.allVisible();
 
 			id.style.backgroundColor = '';
-
-		}
-
-	}
-
-
-
-	REP.allVisible = () => {
-
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceEdges.visible = true;
-		//icw.divLog.innerHTML = '';
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-				child.visible = true;
-
-		}
-
-		const buttons = document.body.getElementsByClassName( 'toggleView' );
-
-		for ( butt of buttons ) {
-
-			butt.style.backgroundColor = '';
-
 
 		}
 
