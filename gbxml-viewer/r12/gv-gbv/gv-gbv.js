@@ -156,8 +156,6 @@
 
 
 
-
-
 	GBV.showSurface = ( id ) => {
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
@@ -175,17 +173,17 @@
 
 
 
-
-	GBV.showCadId = CADObjectId => {
+	GBV.showCadId = function( CADObjectId ) {
+		//console.log( 'CADObjectId', CADObjectId );
 
 		GBX.surfaceMeshes.children.forEach( element =>
-			element.visible = encodeURI( element.userData.data.CADObjectId ) === CADObjectId ? true : false );
+			element.visible = element.userData.data.CADObjectId === CADObjectId ? true : false );
 
 	};
 
 
 
-	GBV.showSurfaceType = type => {
+	GBV.showSurfaceType = function( type ) {
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
@@ -207,7 +205,7 @@
 
 
 
-	GBV.showSpace = id => {
+	GBV.showSpace = function( id ) {
 		//console.log( 'id', id );
 
 		for ( let child of GBX.surfaceMeshes.children ) {
@@ -220,7 +218,6 @@
 
 				//console.log( 'adjacentSpaceId', adjacentSpaceId );
 				child.visible = true;
-
 
 			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
 

@@ -10,18 +10,18 @@
 
 	//initHeadsUp();
 
-	function initHeadsUp() {
+	 HUD.initHeadsUp = function() {
 
 			mouse = new THREE.Vector2();
 
-			THR.renderer.domElement.addEventListener( 'click', onRendererMouseMoveHUD, false );
-			THR.renderer.domElement.addEventListener( 'touchstart', onRendererTouchStartHUD, false );
+			THR.renderer.domElement.addEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
+			THR.renderer.domElement.addEventListener( 'touchstart', HUD.onRendererTouchStartHUD, false );
 
 	}
 
 
 
-	function onRendererMouseMoveHUD( event ) {
+	HUD.onRendererMouseMoveHUD = function( event ) {
 
 		var raycaster;
 		var intersects;
@@ -46,6 +46,7 @@
 				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
 
 				intersected = intersects[ 0 ].object;
+				HUD.setHeadsUp( event );
 
 				console.log( 'intersected', intersected );
 
@@ -59,7 +60,8 @@
 				intersected.currentOpacity = intersected.material.opacity;
 				intersected.material.opacity = 1;
 
-				HUD.setHeadsUp( event );
+
+
 			}
 
 		} else {
@@ -71,11 +73,12 @@
 
 		}
 
+
 	}
 
 
 
-	function onRendererMouseDownHUD( event ) {
+	HUD.onRendererMouseDownHUD= function( event ) {
 
 		//dragMouseDown;( event );
 		divHeadsUp.style.display = 'none';
@@ -86,7 +89,7 @@
 
 
 
-	function onRendererTouchStartHUD( event ) {
+	HUD.onRendererTouchStartHUD = function( event ) {
 
 		event.preventDefault();
 
@@ -118,7 +121,7 @@
 
 		}
 
-		THR.controls.keys = false;
+		//THR.controls.keys = false;
 		divHeadsUp.style.display = 'block';
 		divHamburgerRight.style.display = 'block';
 
@@ -256,13 +259,14 @@
 			</details>
 		`;
 
+
 		divHUDheader.innerHTML = headerTxt;
 		divHUDItems.innerHTML = adjacentsTxt;
 		divHUDfooter.innerHTML = footerTxt;
 
 
 		selType.value = data.surfaceType;
-		selSurface.value = data.id;
+		HUDselSurface.value = data.id;
 
 		const value1 = space1 && space1.id ? space1.id : 'none';
 		const value2 = space2 && space2.id ? space2.id : 'none';
@@ -291,14 +295,14 @@
 					<button class=toggle onclick=GBV.deleteSurface("` + data.id + `"); >delete surface</button>
 					<button onclick=GBV.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
 					<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
-					<br><hr>
+					<hr>
 
 						<details open>
 						<summary><b>surface</b></summary>
 						<div class=flex-container2 >
 							<div style=padding-right:15px; >
-								<input oninput=HUD.updateSelect(this,selSurface); size=6 placeholder="surface id" ><br>
-								<select id=selSurface onclick=HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` + GBX.surfacesOptions + `</select><br>
+								<input oninput=HUD.updateSelect(this,HUDselSurface); size=6 placeholder="surface id" ><br>
+								<select id=HUDselSurface onclick=console.log('',this.value);HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` + GBX.surfacesOptions + `</select><br>
 								<button onclick=HUD.setHeadsUp(); >update</button>
 							</div>
 							<div style=max-width:270px; >
@@ -335,6 +339,7 @@
 		GBX.surfaceMeshes.children.forEach( function( element ) { element.visible = element.userData.data.id === id ? true : false; } );
 
 		const surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+		console.log( 'surfaceMesh', surfaceMesh );
 		intersected = surfaceMesh;
 
 	};

@@ -112,10 +112,11 @@
 			divContentsHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
-		if ( window.divHeadsUp ) {
-			divHeadsUp.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			divHeadsUp.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			divHeadsUp.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+
+		if ( window.divHeadsUpHeader ) {
+			divHeadsUpHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			divHeadsUpHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			divHeadsUpHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
 		window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
@@ -123,6 +124,7 @@
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 		COR.timeStart = Date.now();
+
 
 	}
 
@@ -414,6 +416,28 @@
 
 			divMenu.style.left = 0;
 			divHamburger.style.left = left;
+
+		}
+
+	}
+
+
+	COR.toggleNavRight = function() {
+
+		const left = 'calc( 100% - var( --mnu-width ) - 90px )';
+
+		divContainer.style.display="none";
+
+		if ( divHamburgerRight.style.left === '' || divHamburgerRight.style.left === left ) {
+
+			//divHeadsUp.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			divHeadsUp.style.left = 'calc( 100% )';
+			divHamburgerRight.style.left = 'calc( 100% - 90px )';
+
+		} else {
+
+			divHeadsUp.style.left = 'calc( 100% - var( --mnu-width ) - 50px )';
+			divHamburgerRight.style.left = left;
 
 		}
 

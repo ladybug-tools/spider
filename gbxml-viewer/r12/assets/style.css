@@ -40,6 +40,7 @@
 
 	.flex-container2 { display: flex; flex-wrap: wrap; }
 	.flex-container2 > div { }
+	.div2 { margin-left:15px;overflow-x:auto;max-width:calc(100% - 100px); }
 
 	.highlight { background-color: var( --highlight-color ) }
 

@@ -1,0 +1,19 @@
+{"deletes":[], "types": [],"oneAdjacent":[],"twoAdjacent":[],"cadObjs":[], "surfaceColors": {
+	"InteriorWall": 1000000,
+	"ExteriorWall": 2000000,
+	"Roof": 3000000,
+	"InteriorFloor": 4000000,
+	"ExposedFloor": 5000000,
+	"Shade": 6000000,
+	"UndergroundWall": 7000000,
+	"UndergroundSlab": 8000000,
+	"Ceiling": 9000000,
+	"Air": 10000000,
+	"UndergroundCeiling": 11000000,
+	"RaisedFloor": 12000000,
+	"SlabOnGrade": 13000000,
+	"FreestandingColumn": 14000000,
+	"EmbeddedColumn": 15000000
+
+}
+}

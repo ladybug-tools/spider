@@ -1,4 +1,13 @@
-:root { --but-bg-color: aqua; }
+
+:root {
+	--mnu-color: DarkBlue;
+	--mnu-back-color: Gold;
+	--mnu-header-color: LightSkyBlue;
+	--mnu-width: 355px;
+	--but-bg-color: LightCoral;
+	--highlight-color: SpringGreen;
+}
+
 
 body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
 a { color: crimson; text-decoration: none; }
@@ -21,6 +30,7 @@ input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; backgrou
 
 .flex-container2 { display: flex; flex-wrap: wrap; }
 .flex-container2 > div { /* border: 1px solid #ddd; margin: 5px; padding: 5px; */ }
+.div2 { margin-left:15px;overflow-x:auto;max-width:calc(100% - 100px); }
 
 #divDraggable, #divMenu {
 	background-color: #f1f1f1;
@@ -41,4 +51,24 @@ input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; backgrou
 	cursor: move;
 	padding: 10px;
 	z-index: 10;
+}
+
+#divHamburgerRight { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer;
+	display: none; font-size: 30px;
+	 left: calc( 100% - var(--mnu-width ) - 90px );
+	line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; }
+#divHamburgerRight {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+#divHeadsUp {
+	background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - 400px );
+	max-height: 97%; max-width: 400px; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
+	padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; transition: .5s;
+}
+#divHeadsUp {
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+#divHeadsUpHeader {
+	background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px;
 }
