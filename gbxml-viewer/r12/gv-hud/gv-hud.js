@@ -83,7 +83,7 @@
 		//dragMouseDown;( event );
 		divHeadsUp.style.display = 'none';
 
-		THR.renderer.domElement.removeEventListener( 'click', onRendererMouseMoveHUD, false );
+		THR.renderer.domElement.removeEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
 
 	}
 
@@ -96,7 +96,7 @@
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;
 
-		onRendererMouseMoveHUD( event );
+		HUD.onRendererMouseMoveHUD( event );
 
 	}
 
