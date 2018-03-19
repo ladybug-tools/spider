@@ -84,8 +84,8 @@
 
 	#divHamburgerRight { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer;
 		display: none; font-size: 30px;
-		 left: calc( 100% - var(--mnu-width ) - 90px );
-		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 20; }
+		 left: calc( 100% - var(--mnu-right-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 50px; transition: left .5s; z-index: 20; }
 	#divHamburgerRight {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	}

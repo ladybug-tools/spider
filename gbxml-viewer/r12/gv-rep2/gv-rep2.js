@@ -253,7 +253,7 @@
 
 
 	REP.showCadIdGroup = ( CADObjectGroupId ) => {
-		console.log( 'CADObjectGroupId', CADObjectGroupId);
+		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
 		GBX.surfaceEdges.visible = true;
 

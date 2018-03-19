@@ -33,7 +33,7 @@
 	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-width ) - 150px ); }
 	.flex-div2 { border: 1px red solid; overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 100px ); }
 
-	#divDraggable {
+	#divDraggable, #divMenu {
 		background-color: #f1f1f1;
 		border: 1px solid #d3d3d3;
 		left: calc( 100% - 400px );

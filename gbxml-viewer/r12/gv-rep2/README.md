@@ -30,14 +30,41 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 ### Features
 
-#### Campus Location
 
-* If latitude and longitude are provided, link to call for a Google map is displayed
-
-#### Spaces
-
-* Lists all spaces
-* Button to view only Surfaces linked to given shape
+* Identify and locate all surfaces individually
+	* Reports number of surfaces found
+	* Select surface by typing ID with smart search or by scrolling through list with cursor keys
+		* Selected surface is highlighted in the 3D model as fast as you can scroll
+	* For each surface you can toggle visibility, zoom in or delete
+	* All available attribute data for each surface is displayable
+* Identify groups of surfaces by type
+	* Reports number of types found
+	* Highlight selected group
+	* Turn visibility on and off for each type
+	* Basic stats displayed
+	* Handy make all visible button
+* Identify and locate all spaces
+	* Reports number of spaces found
+	* Select space by typing ID with smart search or by scrolling through list with cursor keys
+		* Selected space is highlighted in the 3D model as fast as you can scroll
+	* All available attribute data for each space is displayable
+* Identify and locate all storey data
+	* Reports number of storeys found
+	* Select storey by typing ID with smart search or by scrolling through list with cursor keys
+		* Selected storey is highlighted in the 3D model as fast as you can scroll
+	* All available attribute data for each storey is displayable
+* Basic attribute information for zones is available
+* Highlight groups of CAD Objects
+	* Reports number of groups found
+* Identify and locate all CAD Object IDs
+	* Reports number of storeys found
+* All available attributes of the following elements are displayable
+	* Root gbXML element
+	* Campus
+	* Campus Location
+		* If latitude and longitude are provided, link to call for a Google map is displayed
+	* Campus Building
+	* Documentation (if available)
 
 
 ## Wish list / To Do
@@ -46,12 +73,16 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 ## Issues
 
-* https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/gbXMLStandard.xml
-	* uses one id for spaces so many duplicate adjacent issues
+
 
 
 
 ## Change Log
+
+### 2018-03-18 ~ Theo
+
+R12.2
+* Reports2 now in operation / needs testing
 
 ### 2018-03-03 ~ Theo
 

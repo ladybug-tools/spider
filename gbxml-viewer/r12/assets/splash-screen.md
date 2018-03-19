@@ -21,7 +21,14 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-03-13 ~ R12.1</summary>
+<summary>Welcome 2018-03-19 ~ R12.3</summary>
+
+
+R12.3 ~ Most modules working
+* Reports 2 menu: simpler code / faster / workflow more streamlined
+* Issues: split off from reports / Adjacent spaces items now sorted
+* Save changes: now supports loading color schemes
+* Right menu has slider
 
 Goals for R12
 

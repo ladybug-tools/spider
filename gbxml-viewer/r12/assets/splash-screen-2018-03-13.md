@@ -19,8 +19,13 @@ gbXML Viewer is a collection of free, open source modular JavaScript/WebGL/Three
 
 <details open>
 
-<summary>Welcome 2018-03-10 ~ R12.0 </summary>
+<summary>Welcome 2018-03-10 ~ R12.0-3</summary>
 
+R12.3 ~ Most modules working
+* Reports 2 menu: simpler code / faster / workflow more streamlined
+* Issues: split off from reports / Adjacent spaces items now sorted
+* Save changes: now supports loading color schemes
+* Right menu has slider
 
 R12 First Commit
 * Big effort to simplify the core scripts and streamline the loading process
