@@ -1,5 +1,7 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
+// HUD html is defined in gv-gbx.html amd gv-app.html
+
 	var HUD = {};
 
 	var intersected;
@@ -277,7 +279,6 @@
 		selCadId.value = data.CADObjectId;
 
 		document.body.style.cursor = 'pointer';
-
 
 
 		function setHeaderAndSurfaceText () {

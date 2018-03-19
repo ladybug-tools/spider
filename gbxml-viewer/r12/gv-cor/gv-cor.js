@@ -424,21 +424,21 @@
 
 	COR.toggleNavRight = function() {
 
-		const left = 'calc( 100% - var( --mnu-right-width ) - 100px )';
-		divHeadsUp.style.width = 'var( --mnu-right-width )';
+		left = 'calc( 100% - var( --mnu-right-width ) - 100px )';
+		//divHeadsUp.style.width = 'var( --mnu-right-width )';
 
-		divContainer.style.display="none";
+		divContainer.style.display = "none";
 
 		if ( divHamburgerRight.style.left === '' || divHamburgerRight.style.left === left ) {
 
 			//divHeadsUp.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
-			divHeadsUp.style.left = 'calc( 100% )';
-			divHamburgerRight.style.left = 'calc( 100% - 90px )';
+			divHamburgerRight.style.left = 'calc( 100% - 50px )';
+			divHeadsUp.style.left = '100%';
 
 		} else {
 
-			divHeadsUp.style.left = 'calc( 100% - var( --mnu-right-width ) - 50px )';
-			divHamburgerRight.style.left = left;
+			divHamburgerRight.style.left = 'calc( 100% - var( --mnu-right-width ) - 100px )';
+			divHeadsUp.style.left = 'calc( 100% - var( --mnu-right-width ) - 70px )';
 
 		}
 

@@ -42,6 +42,8 @@
 
 	GBX.surfaceTypeOptions = txt;
 
+
+
 	GBX.initTemplate = function () {
 
 		if ( butGbx.style.backgroundColor !== 'var( --but-bg-color )' ) {
@@ -52,7 +54,7 @@
 
 					<summary>Template</summary>
 
-					<div id = "divTemplate" style=width:300px; ><div>
+					<div id = "divTemplate" ><div>
 
 					<hr>
 

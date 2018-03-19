@@ -42,7 +42,7 @@
 	.flex-container2 { display: flex; flex-wrap: wrap; }
 	.flex-div1 { border: 0px solid #f00; padding-right:15px; }
 	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-width ) - 150px ); }
-	.flex-div2 { overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 100px ); }
+	.flex-div2 { border: 1px red solid; overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 100px ); }
 
 	.highlight { background-color: var( --highlight-color ) }
 
