@@ -72,3 +72,6 @@ input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; backgrou
 #divHeadsUpHeader {
 	background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px;
 }
+
+#divMenuInWorld {
+	background-color: #fff;  left: 0; margin: auto; position: absolute; opacity: 0.75;  right: 0; text-align: center; width: 50%; }

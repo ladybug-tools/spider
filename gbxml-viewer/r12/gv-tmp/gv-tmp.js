@@ -34,7 +34,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<summary>Template</summary>
 
-					<div id = "divTemplate" style=width:300px; ></div>
+					<div id = "divTemplate" ></div>
 
 					<hr>
 
@@ -61,6 +61,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			divTemplate.innerHTML =
 			`
 				<textarea id=txtTemplate placeholder="a place for sticky notes" style="height:100px;width:100%;" onchange=localStorage.setItem("gvTemplate",this.value);></textarea>
+
+				<details open >
+					<summary id = "TMPsumTemplate" >Template</summary>
+					<div>` + txt + `</div>
+				</details>
+
 			`;
 
 			gvTemplate = localStorage.getItem( 'gvTemplate' );

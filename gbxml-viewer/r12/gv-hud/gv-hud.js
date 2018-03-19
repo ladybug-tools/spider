@@ -156,12 +156,12 @@
 						'<details open >' +
 							'<summary><b>adjacent space 1</b></summary>' +
 							'<div class=flex-container2 >' +
-								'<div style=padding-right:15px; >' +
+								'<div class=flex-div1 >' +
 									'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space 1 id" ><br>' +
 									'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=5 >' + GBX.spacesOptions + '</select><br>' +
 									'<button onclick=HUD.updateSpace(1); >update</button>' + b +
 								'</div>' +
-								'<div style=max-width:270px; >' +
+								'<div class=flex-div2 >' +
 									'id <button id=butSpace1 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
 									( space1.Name ? 'name <i>' + space1.Name + '</i>' + b : '' ) +
 									//( space1.Description ? 'description <i>' + encodeURI( space1.Description ) + '</i>' +b : '' ) +
@@ -178,12 +178,12 @@
 						'<details open >' +
 							'<summary><b>adjacent space 2</b></summary>' +
 							'<div class=flex-container2 >' +
-								'<div style=padding-right:15px; >' +
+								'<div class=flex-div1 >' +
 									'<input oninput=HUD.updateSelect(this,selSpace2); size=6  placeholder="space 2 id" ><br>' +
 									'<select id=selSpace2 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=5 >' + GBX.spacesOptions + '</select><br>' +
 									'<button onclick=HUD.updateSpace(2); >update</button>' + b +
 									'</div>' +
-								'<div style=max-width:270px; >' +
+								'<div class=flex-div2 >' +
 									'id <button id=butSpace2 onclick=GBV.showSpace(this.innerText);selSpace2.value=this.innerText; >' + space2.id + '</button> ' + b +
 									( space2.Name ? 'name <i>' + space2.Name + '</i>' + b : '' ) +
 									//( space2.Description ? 'description <i>' + encodeURI( space2.Description ) + '</i>' + b : '' ) +
@@ -222,12 +222,12 @@
 					'<details open >' +
 						'<summary><b>adjacent space 1</b></summary>' +
 						'<div class=flex-container2 >' +
-							'<div >' +
+							'<div class=flex-div1 >' +
 								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
 								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
 								'<button onclick=HUD.updateSpace(0); >update</button>' + b +
 								'</div>' +
-							'<div style=margin-left:15px;overflow-x:auto;max-width:270px; >' +
+							'<div class=flex-div2 >' +
 								//'<b>adjacent space 1</b> ' + b +
 								'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
 								( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
@@ -300,12 +300,12 @@
 						<details open>
 						<summary><b>surface</b></summary>
 						<div class=flex-container2 >
-							<div style=padding-right:15px; >
+							<div class=flex-div1 >
 								<input oninput=HUD.updateSelect(this,HUDselSurface); size=6 placeholder="surface id" ><br>
 								<select id=HUDselSurface onclick=console.log('',this.value);HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` + GBX.surfacesOptions + `</select><br>
 								<button onclick=HUD.setHeadsUp(); >update</button>
 							</div>
-							<div style=max-width:270px; >
+							<div class=flex-div2 >
 
 								id <button onclick=GBV.showSurface(this.innerText) title="show only this surface" >` + data.id + `</button>
 								<button onclick=GBV.zoomIntoSurface("` + data.id + `"); title="zoom into just this surface" >zoom</button>

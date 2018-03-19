@@ -424,7 +424,8 @@
 
 	COR.toggleNavRight = function() {
 
-		const left = 'calc( 100% - var( --mnu-width ) - 90px )';
+		const left = 'calc( 100% - var( --mnu-right-width ) - 100px )';
+		divHeadsUp.style.width = 'var( --mnu-right-width )';
 
 		divContainer.style.display="none";
 
@@ -436,7 +437,7 @@
 
 		} else {
 
-			divHeadsUp.style.left = 'calc( 100% - var( --mnu-width ) - 50px )';
+			divHeadsUp.style.left = 'calc( 100% - var( --mnu-right-width ) - 50px )';
 			divHamburgerRight.style.left = left;
 
 		}

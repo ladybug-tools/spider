@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-14" >
-<title>gbXML Viewer 12.1</title>
+<meta name = "date" content = "2018-03-18" >
+<title>gbXML Viewer 12.2</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
@@ -46,11 +46,11 @@
 						<img src="../assets/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
 					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
 				</h2>
-
+				<!--
 				<p title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>
 					<script> document.write( document.head.querySelector( '[name=description]' ).content )</script>
 				</small></p>
-
+				-->
 				<p id=dragArea class=dragDropArea >
 					drag&drop gbXML files to this box<br>
 					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
@@ -65,42 +65,43 @@
 
 			<details open >
 
-				<summary title="the primary viewer tools are here" >toggle features</summary>
+				<summary title="the primary viewer tools are here" >Features</summary>
 
 				<button id=butSettings class=app-menu onclick=
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-set/gv-set.js'; " title="Update colors, views and other parameters" >
-				settings</button>
+				Settings</button>
 
 				<button id=butReports2 class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep2/gv-rep2.js'; " >
-				reports 2</button>
+					script.src = '../gv-rep2/gv-rep2.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
+				Reports 2</button>
+
+				<button id=butIssues class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-iss/gv-iss.js';" title="Highlight duplicate items and areas of concern in a gbXML file" >
+				Issues</button>
 
 				<button id=butReports class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep/gv-rep.js'; " >
+					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated" >
 				reports</button>
-				<!--
-				<button id=butHeadsUp class=app-menu onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-hud/gv-hud.js';" >
-				heads-up display</button>
 
+				<!--
 				<button id=butEditor class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-edt/gv-edt.js';" >
 				edit file </button>
-				-->
 				<button id=butCoordinates class=app-menu onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-crd/gv-crd.js';" >
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-crd/gv-crd.js';" >
 				edit duplicate surfaces </button>
 
 				<button id=butAdjacents class=app-menu onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-adj/gv-adj.js';" >
 				edit duplicate adjacents </button>
+				-->
 
 				<button id=butSaveChanges class=app-menu onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -109,9 +110,9 @@
 
 				<hr>
 
-				<details open>
+				<details>
 
-					<summary>things to try</summary>
+					<summary>Things to try</summary>
 
 					<button id=butCameraFirstPerson class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -171,7 +172,7 @@
 						gbXML Viewer Menu Template
 					</button>
 
-					<hr>
+
 
 				</details>
 
@@ -180,9 +181,9 @@
 
 			<div id = "divMenuItems" ></div>
 
-			<details open >
+			<details>
 
-				<summary>footer</summary>
+				<summary>Footer</summary>
 
 				<div title='' ><a href=#../README.md >Release Read Me</a></div>
 				<div title='' ><a href=#../../../pages/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>

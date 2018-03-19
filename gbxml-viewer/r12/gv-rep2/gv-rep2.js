@@ -29,7 +29,7 @@
 
 					<summary>Reports</summary>
 
-					<div id = "divGbxmlView" style=width:300px; ><div>
+					<div id = "divGbxmlView" ><div>
 
 					<hr>
 
@@ -78,23 +78,11 @@
 				 <button onclick=GBV.deleteSurface(REPselSurface.value); >delete</button>
 
 				<div class=flex-container2 >
-					<div>
+					<div class="flex-div1" >
 						<input oninput=REP.updateSelect(this,REPselSurface); size=6 placeholder="surface id"><br>
 						<select id = "REPselSurface" onclick=GBV.showSurface(this.value);REP.updateSurfaceAttributes(); onchange=GBV.showSurface(this.value);REP.updateSurfaceAttributes(); size=10 ></select><br>
 					</div>
-					<div id=REPdivSurfacesIndividually class=div2 >
-					<!--
-						name<br>
-						description<br>
-						<button onclick=GBV.showCadId(GBX.surfaceJson[REPselSurface.selectedIndex].CADObjectId); >GBV.showCadId</button>
-						<select id = "REPselType" size=3 ></select>
-						<button onclick=GBV.showSurfaceType(REPselType.value); >GBV.showSurfaceType</button>
-						storey<br>
-						zone<br>
-						openings<br>
-						area len wid<br>
-					-->
-					</div>
+					<div id=REPdivSurfacesIndividually class="flex-left-div2" ></div>
 				</div>
 				<hr>
 			</details>
@@ -108,11 +96,11 @@
 			<details>
 				<summary id = "REPsumSpaces" >Spaces</summary>
 				<div class=flex-container2 >
-					<div >
+					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,REPselSpace); size=6 placeholder="space id" ><br>
 						<select id = "REPselSpace" onclick=GBV.showSpace(this.value);REP.updateSpaceAttributes(); onchange=GBV.showSpace(this.value);REP.updateSpaceAttributes(); size=10 ></select>
 					</div>
-					<div id = "REPdivSpaces" class=div2 ></div>
+					<div id = "REPdivSpaces" class=flex-left-div2  ></div>
 				</div>
 				<hr>
 			</details>
@@ -120,11 +108,11 @@
 			<details>
 				<summary id = "REPsumStoreys" >Storeys</summary>
 				<div class=flex-container2 >
-					<div>
+					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,selStorey); size=6 placeholder="storey id" ><br>
 						<select id = "REPselStorey" onclick=GBV.showStorey(this.value);REP.updateStoreyAttributes(); onchange=GBV.showStorey(this.value);REP.updateStoreyAttributes(); size=10 ></select>
 					</div>
-					<div id = "REPdivStoreys" class=div2 ></div>
+					<div id = "REPdivStoreys" class=flex-left-div2  ></div>
 				</div>
 				<hr>
 			</details>

@@ -359,7 +359,7 @@
 		for ( let i = 0; i < types.length; i++ ) {
 
 			txt +=
-//				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
+			//				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
 				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' ><img src="../assets/eye.png" height=18></button>' +
 				' <button class=toggle onclick=REP.toggleSurfaceType(this); >' + types[ i ] + '</button>: ' +
 				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
@@ -787,7 +787,7 @@
 
 				surfaceAdjacencyInvalids.push( surface.Name );
 
-		//conconsole.log( 'surface.Name', surface.Name  );
+				//console.log( 'surface.Name', surface.Name  );
 
 				flowContent +=
 					'<div style=margin-bottom:35px; >' +

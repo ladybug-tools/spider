@@ -6,8 +6,9 @@
 	:root {
 		--mnu-color: DarkBlue;
 		--mnu-back-color: Gold;
-		--mnu-header-color: LightSkyBlue;
-		--mnu-width: 355px;
+		--mnu-header-color: #87cefa;
+		--mnu-width: 350px;
+		--mnu-right-width: 370px;
 		--but-bg-color: LightCoral;
 		--highlight-color: SpringGreen;
 	}
@@ -31,7 +32,7 @@
 
 	i { color: blue; }
 
-	summary { font-weight: bold; }
+	summary { color: #999; font-weight: bold; }
 
 	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
 
@@ -39,8 +40,9 @@
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
 
 	.flex-container2 { display: flex; flex-wrap: wrap; }
-	.flex-container2 > div { }
-	.div2 { margin-left:15px;overflow-x:auto;max-width:calc(100% - 100px); }
+	.flex-div1 { border: 0px solid #f00; padding-right:15px; }
+	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-width ) - 150px ); }
+	.flex-div2 { overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 100px ); }
 
 	.highlight { background-color: var( --highlight-color ) }
 
@@ -71,7 +73,7 @@
 
 	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
 	#divMenu h2 { margin: 5px 0; }
-	#divMenu summary { color: #aaa; }
+
 
 	#divMenuHeader { background-color: var( --mnu-header-color ); cursor: move; padding: 10px; }
 
@@ -89,8 +91,8 @@
 	}
 
 	#divHeadsUp {
-		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - 400px );
-		max-height: 97%; max-width: 400px; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
+		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - var( --mnu-right-width ) - 50px );
+		max-height: 97%;  max-width: var( --mnu-right-width ); min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
 		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; transition: .5s;
 	}
 	#divHeadsUp {

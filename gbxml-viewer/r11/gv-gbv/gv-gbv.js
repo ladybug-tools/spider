@@ -163,7 +163,7 @@
 
 
 
-	GBV.showCadId = CADObjectId => {
+	GBV.showCadId = function( CADObjectId ) {
 
 		GBX.surfaceMeshes.children.forEach( element =>
 			element.visible = encodeURI( element.userData.data.CADObjectId ) === CADObjectId ? true : false );
@@ -194,7 +194,7 @@
 
 
 
-	GBV.showSpace = id => {
+	GBV.showSpace = function( id ) {
 		//console.log( 'id', id );
 
 		for ( let child of GBX.surfaceMeshes.children ) {
