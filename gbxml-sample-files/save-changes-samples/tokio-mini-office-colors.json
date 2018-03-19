@@ -1,19 +1,18 @@
 { "surfaceColors" : {
-
-	"InteriorWall": "LightSlateGray",
-	"ExteriorWall": "Plum",
-	"Roof": "DarkSeaGreen",
-	"InteriorFloor": "HotPink",
-	"ExposedFloor": "DarkOrchid",
-	"Shade": "DarkGray",
-	"UndergroundWall": "Indigo",
-	"UndergroundSlab": "Navy",
-	"Ceiling": "LightPink",
-	"Air": "AntiqueWhite",
-	"UndergroundCeiling": "RosyBrown",
-	"RaisedFloor": "Pink",
-	"SlabOnGrade": "DarkViolet",
-	"FreestandingColumn": "GoldenRod",
-	"EmbeddedColumn": "Gold"
-}
+		"InteriorWall": "LightSlateGray",
+		"ExteriorWall": "Plum",
+		"Roof": "DarkSeaGreen",
+		"InteriorFloor": "HotPink",
+		"ExposedFloor": "DarkOrchid",
+		"Shade": "DarkGray",
+		"UndergroundWall": "Indigo",
+		"UndergroundSlab": "Navy",
+		"Ceiling": "LightPink",
+		"Air": "AntiqueWhite",
+		"UndergroundCeiling": "RosyBrown",
+		"RaisedFloor": "Pink",
+		"SlabOnGrade": "DarkViolet",
+		"FreestandingColumn": "GoldenRod",
+		"EmbeddedColumn": "Gold"
+	}
 }
