@@ -8,7 +8,7 @@
 		--mnu-back-color: Gold;
 		--mnu-header-color: #87cefa;
 		--mnu-width: 350px;
-		--mnu-right-width: 370px;
+		--mnu-right-width: 350px;
 		--but-bg-color: LightCoral;
 		--highlight-color: SpringGreen;
 	}
@@ -40,9 +40,9 @@
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
 
 	.flex-container2 { display: flex; flex-wrap: wrap; }
-	.flex-div1 { border: 0px solid #f00; padding-right:15px; }
-	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-width ) - 150px ); }
-	.flex-div2 { border: 1px red solid; overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 100px ); }
+	.flex-div1 { border: 1px solid #f00; width:95px }
+	.flex-left-div2 { border: 1px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-width ) - 150px ); }
+	.flex-div2 { border: 1px red solid; overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 120px ); }
 
 	.highlight { background-color: var( --highlight-color ) }
 
@@ -74,26 +74,23 @@
 	#divMenu a { color: var( --mnu-color ); text-decoration: none; }
 	#divMenu h2 { margin: 5px 0; }
 
-
 	#divMenuHeader { background-color: var( --mnu-header-color ); cursor: move; padding: 10px; }
-
 	#divMenuContents { padding: 10px; }
 
 	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 40%; }
 
 
 	#divHamburgerRight { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer;
-		display: none; font-size: 30px;
-		 left: calc( 100% - var(--mnu-right-width ) - 100px );
+		display: none; font-size: 30px; left: calc( 100% - var(--mnu-right-width ) - 70px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 50px; transition: left .5s; z-index: 20; }
 	#divHamburgerRight {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	}
 
 	#divHeadsUp {
-		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - var( --mnu-right-width ) - 50px );
+		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - var( --mnu-right-width ) - 20px );
 		max-height: 97%;  max-width: var( --mnu-right-width ); min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
-		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; transition: .5s;
+		 position: fixed; resize: both; top: 10px; transition: .5s;
 	}
 	#divHeadsUp {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -102,4 +99,7 @@
 		background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px;
 	}
 
+	#divHUDheader { padding: 0 10px 0 10px; }
+	#divHUDItems { padding: 0 10px 0 10px; }
+	#divHUDfooter { padding: 0 10px 0 10px; }
 

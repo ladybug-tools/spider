@@ -37,6 +37,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 				`<details id = ISSdetIssues  class=app-menu open>
 
+					<p>
+						toggles <br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+						<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+						<button onclick=GBV.setAllVisible(); >all visible</button>
+					</p>
+
 					<summary>Issues</summary>
 
 					<details>
@@ -45,12 +51,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 						<p>
 							Surfaces with two adjacent spaces pointing to identical space id. Use with heads-up display.
-						</p>
-
-						<p>
-							toggles <br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
-							<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
-							<button onclick=GBV.setAllVisible(); >all visible</button>
 						</p>
 
 						<p>
@@ -69,24 +69,92 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 						<div id=divCRDInfo ></div>
 
-						<p>
-							toggle visibility<br>
-							<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
-							<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
-							<button onclick=GBV.setAllVisible(); >all visible</button>
-						</p>
-
-						<div id=divCoordinates ></div>
+						<div id=ISSdivDuplicateSurfaces ></div>
 
 					</details>
+
+
+					<details>
+
+						<summary id = "ISSsumSurfacesUndefinedCadId" >Undefined CAD Object ID</summary>
+
+						<div >Surfaces with undefined ID</div>
+
+						<div class=flex-container2 >
+							<div class=flex-div1 >
+								<input oninput=ISS.updateSelect(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+								<select id = "ISSselSurfaceUndefined"
+									onclick=GBV.showSurface(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); onchange=GBV.showSurface(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); size=10 ><option>none found</option></select><br>
+								 <button onclick=GBV.zoomIntoSurface(ISSselSurfaceUndefined.value); title="zoom into just this surface" >zoom</button>
+								 </div>
+							<div id = "ISSdivSurfacesUndefinedAttributes" class=flex-left-div2 ></div>
+						</div>
+
+						<div id=ISSdivSurfacesUndefinedCadId ></div>
+
+						<hr>
+
+					</details>
+
+
+					<details>
+
+						<summary id = "ISSsumSurfacesTiny" >Tiny Surfaces</summary>
+
+						<div >Surfaces that are small</div>
+						Minimum size <output id=ISSoutMinSize >0.5</output>
+						<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
+						<div class=flex-container2 >
+							<div class=flex-div1 >
+								<input oninput=ISS.updateSelect(this,ISSselSurfaceTiny); size=6 placeholder="surface id" ><br>
+								<select id = "ISSselSurfaceTiny"
+								onclick=GBV.showSurface(this.value);ISS.updateSurfaceTinyAttributes(); onchange=GBV.showSurface(this.value);ISS.updateSurfaceTinyAttributes(); size=10 ><option>none found</option></select><br>
+								<button onclick=GBV.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
+							</div>
+							<div id = "ISSdivSurfacesTinyAttributes" class=flex-left-div2 ></div>
+						</div>
+
+						<div id=ISSdivSurfacesTiny ></div>
+
+					</details>
+
+					<!--
+					<details>
+
+						<summary id = "ISSsumSurfacesInside" >Surfaces Inside Surfaces</summary>
+
+						<div >Surfaces that are inside another surface</div>
+
+						<div class=flex-container2 >
+							<div class=flex-div1 >
+								<input oninput=ISS.updateSelect(this,ISSselSurfaceInside); size=6 placeholder="surface id" ><br>
+								<select id = "ISSselSurfaceInside"
+								onclick=GBV.showSurface(this.value);ISS.updateSurfaceInsideAttributes(); onchange=GBV.showSurface(this.value);ISS.updateSurfaceInsideAttributes(); size=10 ><option>none found</option></select><br>
+								<button onclick=GBV.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
+							</div>
+							<div id = "ISSdivSurfacesInsideAttributes" class=flex-left-div2 ></div>
+						</div>
+
+						<div id=ISSdivSurfacesInside ></div>
+
+					</details>
+					-->
+
 					<hr>
+
 				</details>
 
 			` + divMenuItems.innerHTML;
 
-			ISS.getSurfaceDuplicatesAdjacents();
+			ISS.getSurfacesDuplicatesAdjacents();
 
-			getSurfaceDuplicatesCoordinates();
+			ISS.getSurfacesDuplicatesCoordinates();
+
+			ISS.getSurfacesUndefinedCadId();
+
+			ISS.getSurfacesTiny();
+
+//			ISS.getSurfacesInside();
 
 			ISS.butMenuIssues.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -98,11 +166,15 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
+		divContainer.style.display = 'none';
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
+
 	};
 
 
 
-	ISS.getSurfaceDuplicatesAdjacents = function() {
+	ISS.getSurfacesDuplicatesAdjacents = function() {
 
 		surfaces = GBX.gbjson.Campus.Surface;
 		let count = 0;
@@ -205,14 +277,19 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	function getSurfaceDuplicatesCoordinates() {
+	//////////
+
+	ISS.getSurfacesDuplicatesCoordinates = function() {
 
 		const surfacePolyLoops = [];
 		const surfaceIds = [];
 		surfaceCoordinateDuplicates = [];
 
-		//let spaceId1;
-		//let spaceId2;
+		let spaceId1;
+		let spaceId2;
+
+		let spaceIdOther1;
+		let spaceIdOther2;
 
 		const surfaces = GBX.surfaceJson;
 		const b = '<br>';
@@ -275,6 +352,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						spaceIdOther1 = surfaceOther.AdjacentSpaceId[ 0 ].spaceIdRef;
 						spaceIdOther2 = surfaceOther.AdjacentSpaceId[ 1 ].spaceIdRef;
 
+
 					} else {
 
 						spaceIdOther1 = surfaceOther.AdjacentSpaceId.spaceIdRef;
@@ -332,7 +410,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISSsumDuplicateSurfaces.innerHTML= 'Duplicate Surfaces &raquo; <span style=background-color:var(--highlight-color); >&nbsp;' + count + ' found&nbsp;</span>';
 		divCRDInfo.innerHTML = 'Two surfaces with identical coordinates';
-		divCoordinates.innerHTML= flowContent;
+		ISSdivDuplicateSurfaces.innerHTML= flowContent;
 
 	}
 
@@ -344,6 +422,158 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			element.visible = element.userData.data.CADObjectId === id ? true : false );
 
 	};
+
+
+	//////////
+
+	ISS.getSurfacesUndefinedCadId = function() {
+
+		ISS.surfacesUndefinedId = GBX.surfaceJson.filter( element => element.CADObjectId === undefined );
+
+		//console.log( 'surfacesUndefinedId', ISS.surfacesUndefinedId );
+
+		ISSsumSurfacesUndefinedCadId.innerHTML= 'Undefined CAD Object ID &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesUndefinedId.length + ' found&nbsp;</span>';
+
+		let txt = '';
+		ISS.surfacesUndefinedId.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
+		ISSselSurfaceUndefined.innerHTML = txt ? txt : '<option>none found</option>';
+		ISSselSurfaceUndefined.selectedIndex = 0; //Math.floor( Math.random() * property.length )
+
+	}
+
+	ISS.updateSurfaceUndefinedCadIdAttributes = function() {
+
+		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.traverseGbjson( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] ).attributes;
+
+		HUD.updateSurface( ISSselSurfaceUndefined.value );
+		HUD.setHeadsUp();
+
+	}
+
+
+	/////////
+
+	ISS.getSurfacesTiny = function() {
+
+		const size = 0.01 * parseFloat( ISSinpMinSize.value );
+		ISS.surfacesTiny = GBX.surfaceJson.filter( surface =>
+			parseFloat( surface.RectangularGeometry.Height ) * parseFloat( surface.RectangularGeometry.Width  ) < size );
+
+
+		ISSsumSurfacesTiny.innerHTML= 'Tiny Surfaces &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesTiny.length + ' found&nbsp;</span>';
+
+		let txt = '';
+		ISS.surfacesTiny.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
+		ISSselSurfaceTiny.innerHTML = txt ? txt : '<option>none found</option>';
+		ISSselSurfaceTiny.selectedIndex = 0;
+
+//		if ( ISSselSurfaceTiny.length ) { ISS.updateSurfaceTinyAttributes(); }
+
+	}
+
+
+	ISS.updateSurfaceTinyAttributes = function() {
+
+		const surface = ISS.surfacesTiny[ ISSselSurfaceTiny.selectedIndex ];
+		height = parseFloat( surface.RectangularGeometry.Height );
+		width = parseFloat( surface.RectangularGeometry.Width );
+		area =  height * width;
+		txt = ISS.traverseGbjson( surface ).attributes;
+		ISSdivSurfacesTinyAttributes.innerHTML =
+			txt + '<br>' +
+			'height: ' + height.toLocaleString() + '<br>' +
+			'width: ' + width.toLocaleString() + '<br>' +
+			'area: ' + area.toLocaleString() + '<br>' +
+		'';
+
+		HUD.updateSurface( ISSselSurfaceTiny.value );
+		HUD.setHeadsUp();
+
+	}
+
+
+	ISS.getSurfacesInside = function() {
+
+		count = 0;
+		ISS.surfacesInside = [];
+		GBX.surfaceMeshes.children.forEach( child => child.visible = false );
+
+		for ( let surface of GBX.surfaceMeshes.children ) {
+
+			surface.geometry.computeBoundingBox();
+
+			for ( let surface2 of GBX.surfaceMeshes.children ) {
+
+				surface2.geometry.computeBoundingBox();
+
+				if ( surface.userData.data.id !== surface2.userData.data.id && surface.position === surface2.position &&
+					surface.geometry.boundingBox.containsBox( surface2.geometry.boundingBox ) ) {
+
+					ISS.surfacesInside.push( [ surface, surface2 ])
+					surface2.visible = true;
+				}
+
+			}
+
+		}
+
+		console.log( ISS.surfacesInside.length , ISS.surfacesInside );
+
+
+		ISSsumSurfacesInside.innerHTML= 'Surfaces Inside Surfaces &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesInside.length + ' found&nbsp;</span>';
+
+		let txt = '';
+		ISS.surfacesInside.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
+		ISSselSurfaceInside.innerHTML = txt ? txt : '<option>none found</option>';
+		ISSselSurfaceInside.selectedIndex = 0;
+	}
+
+	//////////
+
+	ISS.traverseGbjson = function traverseGbjson( obj ) {
+
+		const elements = [];
+		let attributes = '';
+
+		for ( let property in obj ) {
+
+			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
+
+				if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
+
+			} else {
+
+				attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
+
+			}
+
+		};
+
+		return { elements: elements, attributes: attributes };
+
+	}
+
+
+	// copied from  HUD/ move to GBV?
+	ISS.updateSelect = function( input, select ) {
+
+		const str = input.value.toLowerCase();
+
+		for ( let option of select.options ) {
+
+			if ( option.value.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+				//select.click();
+
+				break;
+
+			}
+
+		}
+
+	};
+
 
 
 	ISS.initIssues();

@@ -37,11 +37,12 @@
 			gv-tmp gbxml viewer template </button>
 	</p>
 	-->
+
 	<p>
 		<button id=butMenuLoad >gv-tmp </button>
 	</p>
 
-	<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
+	<iframe id=ifrThree  ></iframe>
 
 	<div id=divMenuFileOpening ></div>
 
@@ -69,10 +70,10 @@
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
+	const fname = location.pathname.split( '/' ).pop().replace( '.html', '' );
 
-	ScriptSource =  fname + '.js';
-
+	const scriptSource =  fname + '.js';
+	//const scriptSource = 'gv-tmp.js';
 
 	initTemplate();
 
@@ -90,7 +91,7 @@
 
 		butMenuLoad.onclick = function() {
 			script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = ScriptSource;
+			script.src = scriptSource;
 			divMenu.style.display='block';
 		}
 
@@ -99,24 +100,27 @@
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
-/*
-		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
+
+
+		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 			const url = location.hash.slice( 1 );
-
+			//console.log( 'url', url );
 			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
 			//ifrThree.contentWindow.location.hash = uriGbxmlDefault;
+			ifrThree.src = '../gv-gbx/gv-gbx.html#' + url;
+//			ifrThree.contentWindow.location.reload();
 
 		} else {
 
-			console.log( 'uriGbxmlDefault', uriGbxmlDefault );
+			//console.log( 'uriGbxmlDefault', uriGbxmlDefault );
 			//COR.requestFileAndProgress( uriGbxmlDefault, ifrThree.contentWindow.GBX.callbackGbXML );
-			ifrThree.src = '../gv-gbx/gv-gbx.html#' + uriGbxmlDefault;
-			ifrThree.contentWindow.location.reload();
+			ifrThree.src = '../gv-gbx/gv-gbx.html' //#' + uriGbxmlDefault;
+			//ifrThree.contentWindow.location.reload();
 		}
-*/
+
 
 	}
 

@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/style-template.css" >
 <style>
 
-		body { overflow: auto;  margin: 0 auto; max-width: 900px; }
+		body { overflow: auto;  margin: 0 auto; max-width: 800px; }
 		#divTemplateBody {}
 		iframe { height: 500px; width: 100%; }
 
@@ -27,11 +27,22 @@
 
 	<div id=divMenuDescription ></div>
 
+	<p>If it does not open automatically, click 'gv-tmp gbxml viewer template' button to load test menu</p>
+	<!--
+	<p>
+		<button id=butTemplate onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-tmp/gv-tmp.js';
+			divMenu.style.display='block';" >
+			gv-tmp gbxml viewer template </button>
+	</p>
+	-->
+
 	<p>
 		<button id=butMenuLoad >gv-tmp </button>
 	</p>
 
-	<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
+	<iframe id=ifrThree  ></iframe>
 
 	<div id=divMenuFileOpening ></div>
 
@@ -59,10 +70,10 @@
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
+	const fname = location.pathname.split( '/' ).pop().replace( '.html', '' );
 
-	ScriptSource =  fname + '.js';
-
+	const scriptSource =  fname + '.js';
+	//const scriptSource = 'gv-tmp.js';
 
 	initTemplate();
 
@@ -80,7 +91,7 @@
 
 		butMenuLoad.onclick = function() {
 			script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = ScriptSource;
+			script.src = scriptSource;
 			divMenu.style.display='block';
 		}
 
@@ -89,24 +100,23 @@
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
-/*
-		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
+
+
+		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 			const url = location.hash.slice( 1 );
+			//console.log( 'url', url );
 
-			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
-			//ifrThree.contentWindow.location.hash = uriGbxmlDefault;
+			ifrThree.src = '../gv-gbx/gv-gbx.html#' + url;
 
 		} else {
 
-			console.log( 'uriGbxmlDefault', uriGbxmlDefault );
-			//COR.requestFileAndProgress( uriGbxmlDefault, ifrThree.contentWindow.GBX.callbackGbXML );
-			ifrThree.src = '../gv-gbx/gv-gbx.html#' + uriGbxmlDefault;
-			ifrThree.contentWindow.location.reload();
+			ifrThree.src = '../gv-gbx/gv-gbx.html' //#' + uriGbxmlDefault;
+
 		}
-*/
+
 
 	}
 

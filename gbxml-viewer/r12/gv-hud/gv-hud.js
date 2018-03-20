@@ -14,10 +14,10 @@
 
 	 HUD.initHeadsUp = function() {
 
-			mouse = new THREE.Vector2();
+		mouse = new THREE.Vector2();
 
-			THR.renderer.domElement.addEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
-			THR.renderer.domElement.addEventListener( 'touchstart', HUD.onRendererTouchStartHUD, false );
+		THR.renderer.domElement.addEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
+		THR.renderer.domElement.addEventListener( 'touchstart', HUD.onRendererTouchStartHUD, false );
 
 	}
 
@@ -138,9 +138,9 @@
 
 		const headerTxt = setHeaderAndSurfaceText();
 
-		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency<hr>';
+		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacent spaces<hr>';
 
-//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
+		//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
 		if ( data.AdjacentSpaceId ) {
 
 			if ( Array.isArray( adjacentsTxt ) === true ) {
@@ -462,7 +462,7 @@
 				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
 				const removed2 = surfaceXml.removeChild( adjSpace2 );
 
-//				delete( surfaceJson.AdjacentSpaceId );
+		//				delete( surfaceJson.AdjacentSpaceId );
 
 				console.log( 'old 2 / new 0 / removed id1: ', removedId1, ' id2: ', removedId2, surfaceXml );
 
@@ -506,9 +506,9 @@
 
 				surfaceJson.AdjacentSpaceId= [ { "spaceIdRef": "none" }, { "spaceIdRef": "none" }];
 
-//				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
-//				adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
-//				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+		//				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+		//				adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
+		//				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
 
 				console.log( 'old 0 / new 2 / adjacentSpaceId', surfaceJson.adjacentSpaceId );
 
@@ -541,13 +541,13 @@
 
 			} else { // type prev is no adjacent
 
-//				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-//				newAdj.setAttribute( "spaceIdRef", "none" ) ;
-//				const newAdjTxt = surfaceXml.appendChild( newAdj );
+		//				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+		//				newAdj.setAttribute( "spaceIdRef", "none" ) ;
+		//				const newAdjTxt = surfaceXml.appendChild( newAdj );
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
-//				surfaceMesh.userData.data.AdjacentSpaceId = 'none';
+				//				surfaceMesh.userData.data.AdjacentSpaceId = 'none';
 				console.log( 'old 0 / new 1 / no spaceIdPrev', spaceIdPrev, surfaceXml );
 
 			}

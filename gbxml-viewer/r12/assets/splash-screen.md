@@ -23,6 +23,13 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <summary>Welcome 2018-03-19 ~ R12.3</summary>
 
+R12.4
+* ISS/Issues module:
+	* Add check for undefined CAD Object ID
+	* Add check for tiny surfaces
+	* Add check for surfaces that contain other surfaces or overlap
+		* Currently turned off because uses much time and has found none so far
+		* Work-in-progress
 
 R12.3 ~ Most modules working
 * Reports 2 menu: simpler code / faster / workflow more streamlined

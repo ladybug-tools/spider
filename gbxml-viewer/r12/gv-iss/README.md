@@ -14,15 +14,25 @@
 * Identify and locate issues within gbXML files
 	* Surfaces that have duplicate adjacent spaces
 	* Surfaces that have identical coordinates
+	* Surfaces that have no cad object ids
+		* Select ID by smart search
+		* Reports number found
+		* Displays attribute data
+		* Zoom into selected element
+	* Surfaces that are tiny
+		* Select ID by smart search
+		* Reports number found
+		* Displays attribute data
+		* Zoom into selected element
+	* Surfaces that contain other surfaces or overlap
+		* Currently turned off because uses much time and has found none so far
+		* Work-in-progress
 
 
 ## Wish list
 
 * Identify
-	* Surfaces that are tiny
-	* Surfaces that contain other surfaces or overlap
 	* Surfaces that have an incorrect number of adjacent spaces
-	* Surfaces that have no cad object ids
 	* Surfaces that are mis-identified as to being interior or exterior surfaces
 	* Surfaces with openings that overlap
 

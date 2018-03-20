@@ -303,11 +303,15 @@
 		*/
 	}
 
+
+
 	REP.updateSurfaceAttributes = function() {
 
 		REPdivSurfacesIndividually.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Surface[ REPselSurface.selectedIndex ] ).attributes;
 
 	}
+
+
 
 	REP.updateSurfacesByType = function() {
 
@@ -373,6 +377,8 @@
 		REP.updateSpaceAttributes();
 	}
 
+
+
 	REP.updateSpaceAttributes = function() {
 
 		REPdivSpaces.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
@@ -397,11 +403,15 @@
 
 	}
 
+
+
 	REP.updateStoreyAttributes = function() {
 
 		REPdivStoreys.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 
 	}
+
+
 
 	REP.UpdateCadIdGroups = function() {
 

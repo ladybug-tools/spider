@@ -60,14 +60,15 @@
 
 	TST.gbxmlSampleFiles =
 	`
-		<div><a href="#../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
-		<div><a href="#../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/boston-ma-urban-house-mep.xml" >boston-ma-urban-house-mep.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/bristol-clifton-down-road.xml" >bristol-clifton-down-road.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml" >columbia-sc-two-story-education-trane</a></div>
-		<div><a href="#../../gbxml-sample-files/coventry-university-of-warwick.xml" >coventry-university-of-warwick.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/old-factory.xml" >old-factory.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
+		<div><a href="#../../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/boston-ma-urban-house-mep.xml" >boston-ma-urban-house-mep.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/bristol-clifton-down-road-small.xml" >bristol-clifton-down-road-small.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml" >columbia-sc-two-story-education-trane</a></div>
+		<div><a href="#../../../gbxml-sample-files/coventry-university-of-warwick-small.xml" >coventry-university-of-warwick-small.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
+		<div><a href="#../../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
 	`;

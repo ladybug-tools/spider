@@ -155,6 +155,11 @@
 
 		}
 
+		divContainer.style.display = 'none';
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
+
+
 	}();
 
 
@@ -391,7 +396,9 @@
 			meshGridHelper.rotation.x = Math.PI / 2;
 			meshGridHelper.position.set( THR.axesHelper.position.x, THR.axesHelper.position.y, bbox.min.z );
 			meshGridHelper.name = 'gridHelper';
-			GBX.surfaceMeshes.add( meshGridHelper );
+
+			//GBX.surfaceMeshes.add( meshGridHelper );
+			THR.scene.add( meshGridHelper );
 
 			meshGridHelper.visible = false;
 
@@ -405,7 +412,7 @@
 
 	SET.toggleGroundHelper = function() {
 
-		let meshGroundHelper = GBX.surfaceMeshes.getObjectByName( 'groundHelper' );
+		let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
 
 		if ( !meshGroundHelper ) {
 
@@ -418,7 +425,8 @@
 			meshGroundHelper.receiveShadow = true;
 			meshGroundHelper.position.set( THR.axesHelper.position.x, THR.axesHelper.position.y, bbox.min.z - 0.5 );
 
-			GBX.surfaceMeshes.add( meshGroundHelper );
+			//GBX.surfaceMeshes.add( meshGroundHelper );
+			THR.scene.add( meshGroundHelper );
 
 			meshGroundHelper.visible = false;
 
@@ -709,7 +717,8 @@
 
 	SET.updateMeshLevel = function( meshName, delta ) {
 
-		const mesh = GBX.surfaceMeshes.getObjectByName( meshName );
+		//const mesh = GBX.surfaceMeshes.getObjectByName( meshName );
+		const mesh = THR.scene.getObjectByName( meshName );
 
 		if ( mesh ) {
 

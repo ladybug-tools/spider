@@ -5,7 +5,7 @@
 
 	SAV.initChanges = function() {
 
-		GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [], surfaceColors: [] };
+		//GBV.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [], surfaceColors: [] };
 
 	};
 
@@ -57,9 +57,9 @@
 
 			` + divMenuItems.innerHTML;
 
-//			initMenuSaveChanges();
+				//initMenuSaveChanges();
 
-//			SAV.initChanges();
+				//			SAV.initChanges();
 
 			SAV.butSaveChanges.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -111,7 +111,7 @@
 		a.href = window.URL.createObjectURL( blob );
 		a.download = GBX.gbjson.Campus.Building.id + '-changes.json';
 		a.click();
-//		delete a;
+		//		delete a;
 		a = null;
 
 	};
@@ -143,9 +143,9 @@
 
 			divSavHeader.innerHTML =
 				'name: <i>' + files.files[0].name + '</i><br>' +
-				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
-				'type: ' + files.files[0].type + '<br>' +
-				'modified: ' + files.files[0].lastModifiedDate.toLocaleDateString() + '<br>' +
+				'size: <i>' + files.files[0].size.toLocaleString() + ' bytes</i><br>' +
+				( files.files[0].type  ? 'type: <i>' + files.files[0].type + '</i><br>' : '' ) +
+				'modified: <i>' + files.files[0].lastModifiedDate.toLocaleDateString() + '</i><br>' +
 				( GBV.surfaceChanges.deletes ? 'deletes: ' + GBV.surfaceChanges.deletes.length + '<br>' : '' )+
 				( GBV.surfaceChanges.types ? 'type changes: ' + GBV.surfaceChanges.types.length + '<br>' : '' ) +
 				( GBV.surfaceChanges.cadObjs ? 'cad id changes: ' + GBV.surfaceChanges.cadObjs.length + '<br>' : '' ) +
@@ -155,7 +155,7 @@
 
 			SAV.getUpdates();
 
-//			console.log( '', files );
+			//console.log( '', files );
 
 		}
 
@@ -189,7 +189,9 @@
 				}
 
 			}
+
 		}
+
 
 		if ( GBV.surfaceChanges.types ) {
 
@@ -282,7 +284,7 @@
 							const adjSpace2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
 
 							const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
-	//						const removed2 = surfaceXml.removeChild( adjSpace2 );
+							//const removed2 = surfaceXml.removeChild( adjSpace2 );
 
 							//console.log( 'adjSpace2', adjSpace2 );
 
@@ -327,9 +329,12 @@
 				}
 
 			}
+
 		}
 
+
 		if ( GBV.surfaceChanges.cadObjs ) {
+
 			for ( let surface of GBV.surfaceChanges.cadObjs ) {
 
 				const surfaceXml = GBX.gbxml.getElementsByTagName( "Surface"  )[ surface.id ];
@@ -400,6 +405,7 @@
 
 		}
 
+
 		if ( GBV.surfaceChanges.twoAdjacent ) {
 
 			for ( let surface of GBV.surfaceChanges.twoAdjacent ) {
@@ -430,6 +436,7 @@
 
 		}
 
+
 		if ( GBV.surfaceChanges.surfaceColors ) {
 
 			//GBX.colors = GBV.surfaceChanges.surfaceColors;
@@ -444,12 +451,39 @@
 
 			}
 
-//			console.log( '', JSON.stringify( GBX.colors ) );
+			//console.log( '', JSON.stringify( GBX.colors ) );
+
 			GBX.setAllVisible();
 
 			divSavContents.innerHTML += 'update colors ' + JSON.stringify( GBX.colors ) + '<br>';
 
 		}
+
+		if ( GBV.surfaceChanges.groundPlane ) {
+
+			let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
+			const color = GBV.surfaceChanges.groundPlane.color;
+			elevation = GBV.surfaceChanges.groundPlane.elevation;
+
+			if ( !meshGroundHelper ) {
+
+				const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
+
+				const geometry = new THREE.BoxBufferGeometry( 3 * GBX.surfaceMeshes.userData.radius, 3 * GBX.surfaceMeshes.userData.radius, 1  );
+				const material = new THREE.MeshPhongMaterial( { color: color, opacity: 0.85, transparent: true } );
+				meshGroundHelper = new THREE.Mesh( geometry, material );
+				meshGroundHelper.name = 'groundHelper';
+				meshGroundHelper.receiveShadow = true;
+				meshGroundHelper.position.set( THR.axesHelper.position.x, THR.axesHelper.position.y, elevation );
+
+				//GBX.surfaceMeshes.add( meshGroundHelper );
+				THR.scene.add( meshGroundHelper );
+
+
+			}
+
+		}
+
 
 		if ( HUD.setHeadsUp ) {
 
