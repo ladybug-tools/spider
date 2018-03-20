@@ -8,7 +8,9 @@
 
 _All of the above are embedded interactive scripts_
 
-<!-- This is a sample read me file Template.
+<!--
+
+This is a sample read me file Template.
 The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-more/#README.md )
  -->
 
