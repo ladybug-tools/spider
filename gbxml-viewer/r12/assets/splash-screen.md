@@ -21,7 +21,13 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-03-19 ~ R12.3</summary>
+<summary>Welcome 2018-03-19 ~ R12.5</summary>
+
+R12.5
+* SAV/ Save changes
+	* Add load ground plane
+	* Add load background gradient
+	* Add ability to parse files at load time
 
 R12.4
 * ISS/Issues module:

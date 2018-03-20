@@ -20,9 +20,13 @@
 			aDocumentTitle.innerHTML = SAV.title;
 			SAV.butSaveChanges.innerHTML = SAV.title;
 
+			divContainer.style.display = 'none';
+			THR.controls.autoRotate = false;
+			THR.controls.keys = false;
+
 		} else {
 
-			SAV.butSaveChanges = butMenuTemplate;
+			SAV.butSaveChanges = butSaveChanges;
 
 		}
 
@@ -93,9 +97,6 @@
 
 		}
 
-		divContainer.style.display = 'none';
-		THR.controls.autoRotate = false;
-		THR.controls.keys = false;
 
 	}();
 
@@ -444,10 +445,10 @@
 			for ( let type of GBX.surfaceTypes ) {
 
 				color = GBV.surfaceChanges.surfaceColors[ type ];
-				console.log( '', color );
+				//console.log( '', color );
 
 				GBX.colors[ type ] = color ? new THREE.Color( color.toLowerCase() ) : GBX.colors[ type ];
-				console.log( 'GBX.colors[ type ]', type,  GBX.colors[ type ]);
+				//console.log( 'GBX.colors[ type ]', type,  GBX.colors[ type ]);
 
 			}
 
@@ -455,7 +456,7 @@
 
 			GBX.setAllVisible();
 
-			divSavContents.innerHTML += 'update colors ' + JSON.stringify( GBX.colors ) + '<br>';
+			//divSavContents.innerHTML += 'update colors ' + JSON.stringify( GBX.colors ) + '<br>';
 
 		}
 
@@ -481,6 +482,19 @@
 
 
 			}
+
+		}
+
+
+		if ( GBV.surfaceChanges.backgroundGradient === true ) {
+
+			var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+			var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); };
+			var image = document.body.style.backgroundImage;
+
+			document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+				pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
 
 		}
 

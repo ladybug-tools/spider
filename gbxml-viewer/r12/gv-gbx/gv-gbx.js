@@ -130,7 +130,7 @@
 
 			divLog.innerHTML =
 				GBX.fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
-//				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+		//				( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
 			'';
 
 		}

@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-19" >
-<title>gbXML Viewer 12.4</title>
+<meta name = "date" content = "2018-03-20" >
+<title>gbXML Viewer 12.5</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
@@ -261,17 +261,10 @@
 
 <script>
 
-	function startTalking(){
-
-//		butSettings.click();
-
-		butSetRandomMaterial.click();
-
-	}
-
 	var APP = {};
 
 	GBX.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+	//GBX.defaultURL = '../../../gbxml-sample-files/old-factory.xml';
 
 	COR.initCore();
 	COR.onHashChange(); // loads splash screen and gets things rolling
@@ -299,7 +292,7 @@
 
 		} else {
 
-			COR.requestFileAndProgress( uriGbxmlDefault, GBX.callbackGbXML );
+			COR.requestFileAndProgress( GBX.defaultURL, GBX.callbackGbXML );
 
 		}
 
@@ -315,9 +308,28 @@
 
 		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
+		const scriptSave = document.head.appendChild( document.createElement( 'script' ) );
+		scriptSave.src = '../gv-sav/gv-sav.js';
+
+		scriptSave.onload = function() {
+
+			url = '../../../gbxml-sample-files/save-changes-samples/changes-bristol-clifton-town-road.json';
+
+			COR.requestFileAndProgress( url, APP.callbackJson );
+
+		}
+
 	}
 
 
+	APP.callbackJson = function( xhr ) {
+
+		const response = xhr.target.response;
+		GBV.surfaceChanges = JSON.parse( response )
+		console.log( '',  GBV.surfaceChanges );
+		SAV.getUpdates();
+
+};
 
 	APP.resetMenu = function () {
 
