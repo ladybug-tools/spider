@@ -30,11 +30,11 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			divMenuItems.innerHTML =
 
-				`<details id = detNumbers  class=app-menu open>
+				`<details id = NUMdetNumbers  class=app-menu open>
 
 					<summary>Numbers</summary>
 
-					<div id = "divNumbers" ></div>
+					<div id = "NUMdivNumbersWallExterior" ></div>
 
 					<hr>
 
@@ -42,17 +42,21 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			` + divMenuItems.innerHTML;
 
-			initMenuNumbers();
+			//initMenuNumbers();
+
+			NUM.getSurfacesExternalWall();
 
 			NUM.butMenuNumbers.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
-			detNumbers.remove();
+			NUMdetNumbers.remove();
 
 			NUM.butMenuNumbers.style.backgroundColor = '';
 
 		}
+
+
 
 		function initMenuNumbers() {
 
@@ -73,8 +77,43 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			txtNumbers.value = gvNumbers;
 		}
 
-	}();
+	};
+
+
+	NUM.getSurfacesExternalWall = function() {
+
+		NUM.surfacesExteriorWall = GBX.surfaceJson.filter( element => element.surfaceType === 'ExteriorWall' );
+		//console.log( 'NUM.surfacesExteriorWall', NUM.surfacesExteriorWall );
+
+		NUM.SurfacesWithOpenings = NUM.surfacesExteriorWall.filter( surface => surface.Opening );
+		console.log( 'NUM.SurfacesWithOpenings', NUM.SurfacesWithOpenings );
+
+		NUM.setsOpenings = NUM.SurfacesWithOpenings.filter( setOpenings => setOpenings.Opening.length );
+		console.log( 'NUM.openings', NUM.openings );
+
+		NUM.openings = [];
+		for ( surface of NUM.SurfacesWithOpenings ) {
+
+			if ( surface.Opening.length ) {
+
+				NUM.openings.push ( ...surface.Opening );
+
+			} else {
+
+				NUM.openings.push ( surface.Opening );
+			}
+
+		}
+		console.log( 'NUM.openings', NUM.openings );
+
+		NUMdivNumbersWallExterior.innerHTML =
+
+			'Exterior Wall Surfaces: ' + NUM.surfacesExteriorWall.length + '<br>' +
+			'Exterior Wall Surfaces with Openings: ' + NUM.SurfacesWithOpenings.length + '<br>' +
+			'Openings: ' + NUM.openings.length + '<br>' +
+		'';
+	}
 
 
 
-
+	NUM.initNumbers();
