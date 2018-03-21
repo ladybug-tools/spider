@@ -25,7 +25,7 @@
 
 		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
 
-			main menu / click to move
+			left menu / click to move
 
 		</div>
 
@@ -75,33 +75,24 @@
 				<button id=butReports2 class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep2/gv-rep2.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
-				Reports 2</button>
+				Reports</button>
 
 				<button id=butIssues class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-iss/gv-iss.js';" title="Highlight duplicate items and areas of concern in a gbXML file" >
 				Issues</button>
 
+				<button id=butMenuNumbers class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-num/gv-num.js'; " title="To be deprecated" >
+				Numbers</button>
+
 				<button id=butReports class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated" >
+					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated" style=opacity:0.6; >
 				reports</button>
 
-				<!--
-				<button id=butEditor class=app-menu onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-edt/gv-edt.js';" >
-				edit file </button>
-				<button id=butCoordinates class=app-menu onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-crd/gv-crd.js';" >
-				edit duplicate surfaces </button>
 
-				<button id=butAdjacents class=app-menu onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-adj/gv-adj.js';" >
-				edit duplicate adjacents </button>
-				-->
 
 				<button id=butSaveChanges class=app-menu onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -248,7 +239,7 @@
 	<div id = "divHeadsUp" >
 
 		<div id=divHeadsUpHeader title="Open JavaScript console to see more data" >
-			heads-up display / click here to move
+			right menu / click here to move
 			<!--
 			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
 			-->
@@ -341,7 +332,7 @@
 
 		const response = xhr.target.response;
 		GBV.surfaceChanges = JSON.parse( response )
-		console.log( '',  GBV.surfaceChanges );
+
 		SAV.getUpdates();
 
 	};

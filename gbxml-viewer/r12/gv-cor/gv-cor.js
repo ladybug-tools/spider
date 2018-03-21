@@ -403,13 +403,13 @@
 
 	COR.toggleNav = function() {
 
-		const left = 'calc( var( --mnu-width ) - 100px )';
+		const left = 'calc( var( --mnu-left-width ) - 100px )';
 
 		divContainer.style.display="none";
 
 		if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
 
-			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			divMenu.style.left = 'calc( -1 * var( --mnu-left-width ) - 20px )';
 			divHamburger.style.left = '-100px';
 
 		} else {
