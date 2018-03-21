@@ -30,11 +30,11 @@ R12.6
 	* Trying to learn how to control right menu / let it flow and grow nicely
 	* Make 3D model more visible on loading
 * APP/Menu
-	* Only load changes JSON file when intitial default model is loaded
-	*
+	* Only load changes JSON file when initial default model is loaded
 * ISS/Issues module
 	* Add 'Surfaces wth close vertex' item
-
+* NUM/Numbers module
+	* First commit
 R12.5
 * SAV/ Save changes
 	* Add load ground plane

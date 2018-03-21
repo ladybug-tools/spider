@@ -11,8 +11,9 @@
 <style>
 
 		body { overflow: auto;  margin: 0 auto; max-width: 800px; }
-		#divTemplateBody {}
+		h2 { margin: 0; }
 		iframe { height: 500px; width: 100%; }
+		#divTemplateBody {}
 
 	</style>
 </head>
@@ -27,29 +28,20 @@
 
 	<div id=divMenuDescription ></div>
 
-	<p>If it does not open automatically, click 'gv-tmp gbxml viewer template' button to load test menu</p>
-	<!--
-	<p>
-		<button id=butTemplate onclick =
-			"const script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = '../gv-tmp/gv-tmp.js';
-			divMenu.style.display='block';" >
-			gv-tmp gbxml viewer template </button>
-	</p>
-	-->
 	<p>
 		<button id=butMenuLoad >gv-tmp </button>
 	</p>
 
-	<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
+	<iframe id=ifrThree ></iframe>
+
+	<div id = "divSampleFiles" ></div>
 
 	<div id=divMenuFileOpening ></div>
 
 	<div id=divLog ></div>
 
-	<p><a href=index.html >Read Me file</a></a></p>
+	<p><a href=index.html >Read Me file</a></p>
 
-	<div id = "divSampleFiles" ></div>
 
 	<div id = "divMenu" >
 
@@ -66,12 +58,14 @@
 
 <script>
 
+	//const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	let uriGbxmlDefault;
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
+	const fname = location.pathname.split( '/' ).pop().replace( '.html', '' );
 
-	ScriptSource =  fname + '.js';
+	const scriptSource =  fname + '.js';
 
 
 	initTemplate();
@@ -94,9 +88,8 @@
 			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 
 			script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = ScriptSource;
+			script.src = scriptSource;
 			divMenu.style.display='block';
-
 		}
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
@@ -104,24 +97,23 @@
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
-/*
-		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
+
+
+		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 			const url = location.hash.slice( 1 );
+			//console.log( 'url', url );
 
-			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
-			//ifrThree.contentWindow.location.hash = uriGbxmlDefault;
+			ifrThree.src = '../gv-gbx/gv-gbx.html#' + url;
 
 		} else {
 
-			console.log( 'uriGbxmlDefault', uriGbxmlDefault );
-			//COR.requestFileAndProgress( uriGbxmlDefault, ifrThree.contentWindow.GBX.callbackGbXML );
-			ifrThree.src = '../gv-gbx/gv-gbx.html#' + uriGbxmlDefault;
-			ifrThree.contentWindow.location.reload();
+			ifrThree.src = '../gv-gbx/gv-gbx.html' + ( uriGbxmlDefault ? '#' + uriGbxmlDefault : '' );
+
 		}
-*/
+
 
 	}
 
@@ -135,6 +127,8 @@
 		GBV = icw.GBV;
 
 		THR.controls.autoRotate = false;
+		divContainer.style.display = 'none';
+		THR.controls.keys = false;
 
 		console.log( 'scene', THR.scene );
 

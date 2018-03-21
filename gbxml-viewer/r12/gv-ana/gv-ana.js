@@ -35,10 +35,12 @@
 	var daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
 	var rafPlayTheYear;
+
 	var playTheYear = false;
 
 	var count = 0;
 
+	var butColor;
 
 	initAnalemma();
 
@@ -49,7 +51,7 @@
 
 			ANA.butAnalemma = butMenuLoad;
 
-			ANA.title = 'gv-ANA - gbXML Viewer Template';;
+			ANA.title = 'gv-ANA - gbXML Viewer Sun Path / Analemma';
 			document.title = ANA.title;
 			aDocumentTitle.innerHTML = ANA.title;
 			ANA.butAnalemma.innerHTML = ANA.title;
@@ -60,7 +62,9 @@
 
 		}
 
-		if ( ANA.butAnalemma.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		console.log( 'ANA.butAnalemma.style.backgroundColor', ANA.butAnalemma.style.backgroundColor );
+
+		if ( ANA.butAnalemma.style.backgroundColor === '' ) {
 
 			parameters.latitude = GBX.gbjson.Campus.Location.Latitude;
 			parameters.longitude = GBX.gbjson.Campus.Location.Longitude;
@@ -123,6 +127,7 @@
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			ANA.butAnalemma.style.backgroundColor = 'var( --but-bg-color )';
+			butColor = getComputedStyle(ANA.butAnalemma).getPropertyValue("--but-bg-color");
 
 		} else {
 
@@ -134,6 +139,7 @@
 
 		}
 
+		console.log( 'butColor', butColor );
 	}
 
 
@@ -330,7 +336,7 @@
 
 		if ( butPlayTheYear.style.backgroundColor !== 'var( --but-bg-color )') { initSunPath( false ); }
 
-		if ( !divMenuItems.innerHTML.includes( 'initSunPath' ) && playTheYear ) { togglePlayTheYear(); return; }
+//		if ( !divMenuItems.innerHTML.includes( 'initSunPath' ) && playTheYear ) { togglePlayTheYear(); return; }
 
 		thisHour = parseInt( inpHour.value, 10 );
 		thisDate = parseInt( inpDate.value, 10 );
@@ -426,7 +432,7 @@
 
 		if ( divMenuItems.innerHTML.includes( 'initSunPath' ) ) {
 
-			butPlayTheYear.style.backgroundColor = butPlayTheYear.style.backgroundColor === 'var( --but-bg-color )' ? '' : 'pink';
+			butPlayTheYear.style.backgroundColor = butPlayTheYear.style.backgroundColor === 'var( --but-bg-color, pink )';
 
 		}
 
@@ -576,7 +582,7 @@
 
 		//console.log( 'response', response );
 
-		//		divContents.innerHTML += '<p>response:' + b + response + '</p>';
+		//divContents.innerHTML += '<p>response:' + b + response + '</p>';
 
 		json = JSON.parse( response );
 

@@ -1,5 +1,5 @@
 
-	:root {
+	:root, html {
 		--mnu-color: DarkBlue;
 		--mnu-back-color: Gold;
 		--mnu-header-color: #87cefa;

@@ -127,7 +127,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						<summary id = "ISSsumSurfacesVertexClose" >Surfaces Close Vertex</summary>
 
 						<div >Surfaces that have close vertices. Use telltales in right menu to identify the vertices.</div>
-						Test distance <output id=ISSoutMinDistance >0.5</output>
+						Test distance <output id=ISSoutMinDistance >0.2</output>
 						<input id=ISSinpMinDistance type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinDistance.value=this.value*0.01;ISS.getSurfacesVertexClose(); >
 						<div class=flex-container2 >
 							<div class=flex-div1 >
