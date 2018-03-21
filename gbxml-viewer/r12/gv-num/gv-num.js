@@ -86,10 +86,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		//console.log( 'NUM.surfacesExteriorWall', NUM.surfacesExteriorWall );
 
 		NUM.SurfacesWithOpenings = NUM.surfacesExteriorWall.filter( surface => surface.Opening );
-		console.log( 'NUM.SurfacesWithOpenings', NUM.SurfacesWithOpenings );
-
-		NUM.setsOpenings = NUM.SurfacesWithOpenings.filter( setOpenings => setOpenings.Opening.length );
-		console.log( 'NUM.openings', NUM.openings );
+		//console.log( 'NUM.SurfacesWithOpenings', NUM.SurfacesWithOpenings );
 
 		NUM.openings = [];
 		for ( surface of NUM.SurfacesWithOpenings ) {
@@ -102,9 +99,21 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 				NUM.openings.push ( surface.Opening );
 			}
+			if ( surface.Opening.length ) { console.log( 'surface.Opening.length', surface.Opening.length ); }
+		}
+		//console.log( 'NUM.openings', NUM.openings );
+
+
+		for ( opening of NUM.openings ) {
+			//console.log( 'opening', opening.PlanarGeometry.PolyLoop );
+
+			points = opening.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
+			//console.log( 'points', points );
+			//console.log( 'area', THREE.ShapeUtils.area( points ) );
 
 		}
-		console.log( 'NUM.openings', NUM.openings );
+
+
 
 		NUMdivNumbersWallExterior.innerHTML =
 
@@ -115,5 +124,20 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	}
 
 
+	NUM.getPoints = function( polyloop ) {
+
+		const points = [];
+
+		for ( let CartesianPoint of polyloop.CartesianPoint ) {
+
+			const point = new THREE.Vector3().fromArray( CartesianPoint.Coordinate );
+
+			points.push( point );
+
+		}
+
+		return points;
+
+	}
 
 	NUM.initNumbers();
