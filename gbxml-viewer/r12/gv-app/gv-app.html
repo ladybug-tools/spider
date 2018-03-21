@@ -307,7 +307,7 @@
 
 	function onloadThreejs() {
 
-		APP.resetMenu();
+
 
 		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
@@ -321,7 +321,7 @@
 				url = '../../../gbxml-sample-files/save-changes-samples/changes-bristol-clifton-town-road.json';
 
 				COR.requestFileAndProgress( url, APP.callbackJson );
-
+				APP.resetMenu();
 			}
 
 		} else {
@@ -333,6 +333,7 @@
 
 		}
 
+		APP.resetMenu();
 	}
 
 

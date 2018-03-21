@@ -40,10 +40,10 @@
 	.flex-container { display: flex; flex-wrap: wrap;}
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
 
-	.flex-container2 { display: flex; flex-wrap: wrap; }
-	.flex-div1 { border: 1px solid #f00; width:95px }
+	.flex-container2 { display: flex; }
+	.flex-div1 { border: 1px solid #f00; overflow-x: auto; margin-right: 10px; min-width:95px }
 	.flex-left-div2 { border: 1px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-left-width ) - 150px ); }
-	.flex-div2 { border: 1px red solid; overflow-x: auto; width: calc( var( --mnu-right-width ) - 130px ); }
+	.flex-div2 { border: 1px red solid; overflow-x: auto; }
 
 	.highlight { background-color: var( --highlight-color ) }
 
