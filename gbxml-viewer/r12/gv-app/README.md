@@ -50,6 +50,9 @@ Needed?
 
 See main read me file
 
+* Style names needs cleaning up
+	* Needs netter 'left menu', 'middle menu', right-menu' conventions
+	* Big change / much testing / Do this in R13
 
 ## Issues
 
@@ -57,6 +60,10 @@ See main read me file
 
 ## Change Log
 
+R12.6
+* Style: update pop-up width and position
+	* Trying to make more of the 3D model viewable on startup
+* APP: SAV/Changes are only applied if no location hash and default file
 
 ### 2018-03-14 ~ Theo
 

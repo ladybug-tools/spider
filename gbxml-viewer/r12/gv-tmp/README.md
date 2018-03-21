@@ -26,13 +26,22 @@ The files in this folder are templates or 'boilerplate' files that may be used t
 
 ## Issues
 
-
+* 2018-03-20 ~ Octocat icon links to anticipated GH folder
+* 2018-03-20 ~ Single style sheet for APP and TMP
+* 2018-03-20 ~ Read Me file links to anticipated file
 
 ## Links of Interest
 
 
 
 ## Change Log
+
+### 2018-03-20 ~ Theo
+
+* Fix location hash issues
+* Fix default file issues
+* Update display text locations
+
 
 ### 2018-03-02 ~ Theo
 

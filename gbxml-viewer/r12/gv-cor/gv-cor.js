@@ -424,7 +424,13 @@
 
 	COR.toggleNavRight = function() {
 
-		left = 'calc( 100% - var( --mnu-right-width ) - 100px )';
+		menuRightWidth = divHeadsUp.style.width ? divHeadsUp.style.width.slice( 0, -2 ) : '420' ;
+		menuRightLeft = ( window.innerWidth - menuRightWidth - 20 ) + 'px';
+		console.log( 'menuRightLeft', menuRightLeft );
+
+
+		left = ( window.innerWidth ) - 470 + 'px'; // calc( 100% - var( --mnu-right-width ) - 100px )';
+		leftMenu =  ( window.innerWidth ) - 450 + 'px';
 		//divHeadsUp.style.width = 'var( --mnu-right-width )';
 
 		divContainer.style.display = "none";
@@ -437,8 +443,8 @@
 
 		} else {
 
-			divHamburgerRight.style.left = 'calc( 100% - var( --mnu-right-width ) - 100px )';
-			divHeadsUp.style.left = 'calc( 100% - var( --mnu-right-width ) - 70px )';
+			divHamburgerRight.style.left = left; // 'calc( 100% - var( --mnu-right-width ) - 100px )';
+			divHeadsUp.style.left = menuRightLeft; // 'calc( 100% - var( --mnu-right-width ) - 70px )';
 
 		}
 

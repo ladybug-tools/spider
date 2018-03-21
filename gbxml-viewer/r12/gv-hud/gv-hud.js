@@ -257,6 +257,7 @@
 				<p>
 					<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
 					<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
+					<button onclick=HUD.removeTelltales() >remove</button>
 				<p>
 			</details>
 		`;
@@ -660,6 +661,16 @@
 		THR.scene.add( telltalesVertex );
 
 	};
+
+
+
+	HUD.removeTelltales = function() {
+
+
+		THR.scene.remove( telltalesPolyloop );
+		THR.scene.remove( telltalesVertex );
+
+	}
 
 
 

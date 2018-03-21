@@ -8,7 +8,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	GBX.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 
-	var telltale;
 
 	var ISS = {};
 
@@ -24,12 +23,16 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			aDocumentTitle.innerHTML = ISS.title;
 			ISS.butMenuIssues.innerHTML = ISS.title;
 
+
 		} else {
 
 			ISS.butMenuIssues = butIssues;
 
 		}
 
+		THR.controls.autoRotate = false;
+		divContainer.style.display = 'none';
+		THR.controls.keys = false;
 
 		if ( ISS.butMenuIssues.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
@@ -101,8 +104,9 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 						<summary id = "ISSsumSurfacesTiny" >Tiny Surfaces</summary>
 
-						<div >Surfaces that are small</div>
-						Minimum size <output id=ISSoutMinSize >0.5</output>
+						<div >Surfaces that are smaller than a specified area,</div>
+
+						Test size <output id=ISSoutMinSize >0.5</output>
 						<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
 						<div class=flex-container2 >
 							<div class=flex-div1 >
@@ -118,7 +122,53 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					</details>
 
+					<details>
+
+						<summary id = "ISSsumSurfacesVertexClose" >Surfaces Close Vertex</summary>
+
+						<div >Surfaces that have close vertices. Use telltales in right menu to identify the vertices.</div>
+						Test distance <output id=ISSoutMinDistance >0.5</output>
+						<input id=ISSinpMinDistance type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinDistance.value=this.value*0.01;ISS.getSurfacesVertexClose(); >
+						<div class=flex-container2 >
+							<div class=flex-div1 >
+								<input oninput=ISS.updateSelect(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
+								<select id = "ISSselSurfaceVertexClose"
+								onclick=GBV.showSurface(this.value);ISS.updateSurfaceVertexCloseAttributes();
+								onchange=GBV.showSurface(this.value);ISS.updateSurfaceVertexCloseAttributes(); size=10 ></select><br>
+								<button onclick=GBV.zoomIntoSurface(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
+							</div>
+							<div id = "ISSdivSurfacesVertexCloseAttributes" class=flex-left-div2 ></div>
+						</div>
+
+						<div id=ISSdivSurfacesVertexClose ></div>
+
+					</details>
+
+
 					<!--
+
+					<details>
+
+						<summary id = "ISSsumSurfacesXXX" >Surfaces XXX</summary>
+
+						<div >Surfaces that are XXX</div>
+						Minimum size <output id=ISSoutMinSize >0.5</output>
+						<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
+						<div class=flex-container2 >
+							<div class=flex-div1 >
+								<input oninput=ISS.updateSelect(this,ISSselSurfaceXXX); size=6 placeholder="surface id" ><br>
+								<select id = "ISSselSurfaceXXX"
+								onclick=GBV.showSurface(this.value);ISS.updateSurfaceXXXAttributes();
+								onchange=GBV.showSurface(this.value);ISS.updateSurfaceXXXAttributes(); size=10 ></select><br>
+								<button onclick=GBV.zoomIntoSurface(ISSselSurfaceXXX.value); title="zoom into just this surface" >zoom</button>
+							</div>
+							<div id = "ISSdivSurfacesXXXAttributes" class=flex-left-div2 ></div>
+						</div>
+
+						<div id=ISSdivSurfacesTiny ></div>
+
+					</details>
+
 					<details>
 
 						<summary id = "ISSsumSurfacesInside" >Surfaces Inside Surfaces</summary>
@@ -154,7 +204,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			ISS.getSurfacesTiny();
 
-//			ISS.getSurfacesInside();
+			ISS.getSurfacesVertexClose();
+
+
+			//ISS.getSurfacesInside(); // not found to be useful yet
 
 			ISS.butMenuIssues.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -165,10 +218,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			ISS.butMenuIssues.style.backgroundColor = '';
 
 		}
-
-		divContainer.style.display = 'none';
-		THR.controls.autoRotate = false;
-		THR.controls.keys = false;
 
 	};
 
@@ -415,6 +464,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	}
 
 
+
 	ISS.showCadId2 = function( CADObjectId ) {
 		//console.log( 'CADObjectId', CADObjectId);
 		const id = decodeURI( CADObjectId );
@@ -440,6 +490,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSselSurfaceUndefined.selectedIndex = 0; //Math.floor( Math.random() * property.length )
 
 	}
+
+
 
 	ISS.updateSurfaceUndefinedCadIdAttributes = function() {
 
@@ -467,7 +519,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSselSurfaceTiny.innerHTML = txt ? txt : '<option>none found</option>';
 		ISSselSurfaceTiny.selectedIndex = 0;
 
-//		if ( ISSselSurfaceTiny.length ) { ISS.updateSurfaceTinyAttributes(); }
+		//	if ( ISSselSurfaceTiny.length ) { ISS.updateSurfaceTinyAttributes(); }
 
 	}
 
@@ -492,10 +544,94 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	}
 
 
+	/////////
+
+
+	ISS.getSurfacesVertexClose = function() {
+
+		const distance = 0.01 * parseFloat( ISSinpMinDistance.value );
+		ISS.surfacesVertexClose = [];
+
+		//GBX.surfaceMeshes.children.forEach( child => child.visible = false );
+
+		for ( let surface of GBX.surfaceMeshes.children ) {
+
+			vertices = surface.geometry.vertices;
+
+				if ( vertices.length > 4 ) {
+
+					for ( i = 1; i <  vertices.length; i++ ) {
+
+						if ( vertices[ i ].distanceTo( vertices[ i - 1 ] ) < distance ) {
+
+							if ( ISS.surfacesVertexClose.indexOf( surface ) === -1 ) {
+
+								ISS.surfacesVertexClose.push( surface )
+								//surface.visible = true;
+								//console.log( 'vertex', vertex );
+							}
+
+						}
+
+					}
+
+				}
+
+		}
+
+		console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
+
+		ISSsumSurfacesVertexClose.innerHTML= 'Surfaces with close vertex &raquo; ' +
+			'<span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesVertexClose.length + ' found&nbsp;</span>';
+
+		let txt = '';
+		ISS.surfacesVertexClose.forEach( function( element ) { txt += '<option>' + element.userData.data.id + '</option>'; } );
+		ISSselSurfaceVertexClose.innerHTML = txt ? txt : '<option>none found</option>';
+		ISSselSurfaceVertexClose.selectedIndex = 0;
+
+
+	}
+
+
+
+	ISS.updateSurfaceVertexCloseAttributes = function() {
+
+		const surface = ISS.surfacesVertexClose[ ISSselSurfaceVertexClose.selectedIndex ];
+		const vertices = surface.geometry.vertices;
+		const distance = 0.01 * parseFloat( ISSinpMinDistance.value );
+
+		let txt = ISS.traverseGbjson( surface.userData.data ).attributes + '<br>';
+
+		for ( i = 1; i <  vertices.length; i++ ) {
+
+			if ( vertices[ i ].distanceTo( vertices[ i - 1 ] ) < distance ) {
+				//console.log( 'vv', vertices[ i ], vertices[ i ].distanceTo( vertices[ i - 1 ] ) );
+
+				txt += 'Close coordinates: ' + ( i - 1 ) + ' and ' + i + ': ' +
+				vertices[ i ].distanceTo( vertices[ i - 1 ] ) + '<br>';
+
+			}
+
+		}
+
+		ISSdivSurfacesVertexCloseAttributes.innerHTML =
+			txt + '<br>' +
+
+		'';
+
+		HUD.updateSurface( ISSselSurfaceVertexClose.value );
+		HUD.setHeadsUp();
+
+	}
+
+
+
+	/////////
+
 	ISS.getSurfacesInside = function() {
 
-		count = 0;
 		ISS.surfacesInside = [];
+
 		GBX.surfaceMeshes.children.forEach( child => child.visible = false );
 
 		for ( let surface of GBX.surfaceMeshes.children ) {
@@ -519,13 +655,14 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		console.log( ISS.surfacesInside.length , ISS.surfacesInside );
 
-
 		ISSsumSurfacesInside.innerHTML= 'Surfaces Inside Surfaces &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesInside.length + ' found&nbsp;</span>';
 
 		let txt = '';
-		ISS.surfacesInside.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
+		ISS.surfacesInside.forEach( function( element ) { txt += '<option>' + element.userData.data.id + '</option>'; } );
+		console.log( 'txt', txt );
 		ISSselSurfaceInside.innerHTML = txt ? txt : '<option>none found</option>';
 		ISSselSurfaceInside.selectedIndex = 0;
+
 	}
 
 	//////////

@@ -386,7 +386,7 @@
 
 	SET.toggleGridHelper = function() {
 
-		let meshGridHelper = GBX.surfaceMeshes.getObjectByName( 'gridHelper' );
+		let meshGridHelper = THR.scene.getObjectByName( 'gridHelper' );
 
 		if ( !meshGridHelper) {
 

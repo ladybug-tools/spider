@@ -10,7 +10,7 @@
 	GBX.surfaceMeshes;
 	GBX.surfaceEdges;
 
-	GBX.colors = {
+	GBX.colorsDefault = {
 
 		InteriorWall: 0x008000,
 		ExteriorWall: 0xFFB400,
@@ -29,6 +29,8 @@
 		EmbeddedColumn: 0x80806E
 
 	}
+
+	GBX.colors = Object.assign({}, GBX.colorsDefault );
 
 	GBX.surfaceTypes  = Object.keys( GBX.colors );
 
@@ -553,6 +555,8 @@
 			child.material.wireframe = false;
 
 		};
+
+		HUD.removeTelltales();
 
 /*
 		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );

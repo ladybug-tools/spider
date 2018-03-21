@@ -11,9 +11,8 @@
 <style>
 
 		body { overflow: auto;  margin: 0 auto; max-width: 800px; }
-		h2 { margin: 0; }
-		iframe { height: 500px; width: 100%; }
 		#divTemplateBody {}
+		iframe { height: 500px; width: 100%; }
 
 	</style>
 </head>
@@ -28,20 +27,30 @@
 
 	<div id=divMenuDescription ></div>
 
+	<p>If it does not open automatically, click 'gv-tmp gbxml viewer template' button to load test menu</p>
+	<!--
+	<p>
+		<button id=butTemplate onclick =
+			"const script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-tmp/gv-tmp.js';
+			divMenu.style.display='block';" >
+			gv-tmp gbxml viewer template </button>
+	</p>
+	-->
+
 	<p>
 		<button id=butMenuLoad >gv-tmp </button>
 	</p>
 
-	<iframe id=ifrThree ></iframe>
-
-	<div id = "divSampleFiles" ></div>
+	<iframe id=ifrThree  ></iframe>
 
 	<div id=divMenuFileOpening ></div>
 
 	<div id=divLog ></div>
 
-	<p><a href=index.html >Read Me file</a></p>
+	<p><a href=index.html >Read Me file</a></a></p>
 
+	<div id = "divSampleFiles" ></div>
 
 	<div id = "divMenu" >
 
@@ -58,15 +67,13 @@
 
 <script>
 
-	const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
-	//let uriGbxmlDefault;
 
 	var icw, THREE, THR, GBX, GBV;
 
 	const fname = location.pathname.split( '/' ).pop().replace( '.html', '' );
 
 	const scriptSource =  fname + '.js';
-
+	//const scriptSource = 'gv-tmp.js';
 
 	initTemplate();
 
@@ -101,13 +108,17 @@
 
 			const url = location.hash.slice( 1 );
 			//console.log( 'url', url );
-
+			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
+			//ifrThree.contentWindow.location.hash = uriGbxmlDefault;
 			ifrThree.src = '../gv-gbx/gv-gbx.html#' + url;
+//			ifrThree.contentWindow.location.reload();
 
 		} else {
 
-			ifrThree.src = '../gv-gbx/gv-gbx.html' + ( uriGbxmlDefault ? '#' + uriGbxmlDefault : '' );
-
+			//console.log( 'uriGbxmlDefault', uriGbxmlDefault );
+			//COR.requestFileAndProgress( uriGbxmlDefault, ifrThree.contentWindow.GBX.callbackGbXML );
+			ifrThree.src = '../gv-gbx/gv-gbx.html' //#' + uriGbxmlDefault;
+			//ifrThree.contentWindow.location.reload();
 		}
 
 
@@ -121,11 +132,8 @@
 		THR = icw.THR;
 		GBX = icw.GBX;
 		GBV = icw.GBV;
-		HUD = icw.HUD;
 
 		THR.controls.autoRotate = false;
-		divContainer.style.display = 'none';
-		THR.controls.keys = false;
 
 		console.log( 'scene', THR.scene );
 

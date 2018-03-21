@@ -63,6 +63,10 @@ The following cases need to be handled when changing the type of the surface
 
 ## Change Log
 
+### 2018-03-20 ~ Theo
+
+* Add remove telltales
+
 ### 2018-03-06 ~ Theo
 
 * Reduce vertical size of HUD to make all three areas visible on a laptop

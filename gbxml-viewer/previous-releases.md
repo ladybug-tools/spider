@@ -3,7 +3,7 @@
 
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product of human imagination and effort.
 
-### [gbXML Viewer R10]( http://www.ladybug.tools/spider/gbxml-viewer/r10-11/gv-app/gv-app.html )
+### [gbXML Viewer R10]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gv-app/gv-app.html )
 
 
 ### [gbXML Viewer R9]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-app/gbxml-viewer9.html )

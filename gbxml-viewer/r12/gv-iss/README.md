@@ -23,11 +23,17 @@
 		* Select ID by smart search
 		* Reports number found
 		* Displays attribute data
+		* Displays surface height, width and area
 		* Zoom into selected element
 	* Surfaces that contain other surfaces or overlap
 		* Currently turned off because uses much time and has found none so far
 		* Work-in-progress
-
+	* Surfaces that have vertices very close togther
+		* Select ID by smart search
+		* Reports number found
+		* Displays attribute data
+		* Zoom into selected element
+		* Identifies vertex IDs that are close and displays the distance apart
 
 ## Wish list
 
