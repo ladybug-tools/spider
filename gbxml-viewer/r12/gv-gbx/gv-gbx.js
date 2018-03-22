@@ -329,13 +329,13 @@
 
 		let txt = '<option>none</option>';
 
-		//if ( GBX.spaces.length ) {
-		for ( let space of GBX.spacesJson ) {
+		if ( GBX.spaces ) {
+			for ( let space of GBX.spacesJson ) {
 
-			txt += '<option>' + space.id + '</option>';
+				txt += '<option>' + space.id + '</option>';
 
+			}
 		}
-		//}
 
 		//console.log( 'GBX.spaceOptions', GBX.spaceOptions);
 

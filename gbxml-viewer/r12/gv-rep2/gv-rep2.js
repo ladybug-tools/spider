@@ -25,7 +25,7 @@
 
 			divMenuItems.innerHTML =
 
-				`<details id = detGbxmlView open>
+				`<details id = detGbxmlView open >
 
 					<summary>Reports</summary>
 
@@ -363,11 +363,22 @@
 
 	REP.updateSpace = function() {
 
-		let txt = '';
-		const spaceXml = GBX.gbjson.Campus.Building.Space;
-		spaceXml.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
+		let spaces = '';
+		let spaceXml = GBX.gbjson.Campus.Building.Space;
 
-		REPselSpace.innerHTML = txt;
+		if ( !spaceXml ) { return; }
+
+		if ( spaceXml.length ) {
+
+			spaceXml.forEach( function( element ) { spaces += '<option>' + element.id + '</option>'; } );
+
+		} else {
+
+			spaces = '<option>' + spaceXml.id + '</option>';
+
+		}
+
+		REPselSpace.innerHTML = spaces;
 		REPselSpace.selectedIndex = 0;
 
 		REPsumSpaces.innerHTML = 'Spaces  &raquo; ' + REPselSpace.length;
@@ -389,8 +400,20 @@
 	REP.updateStoreys = function() {
 
 		let storeys = '';
-		const storeyXml = GBX.gbjson.Campus.Building.BuildingStorey;
-		storeyXml.forEach( function( element ) { storeys += '<option>' + element.id + '</option>'; } );
+		let storeyXml = GBX.gbjson.Campus.Building.BuildingStorey;
+		//console.log( 'storeyXml', storeyXml );
+
+		if ( !storeyXml ) { return; }
+
+		if ( storeyXml.length ) {
+
+			storeyXml.forEach( function( element ) { storeys += '<option>' + element.id + '</option>'; } );
+
+		} else {
+
+			storeys = '<option>' + storeyXml.id + '</option>';
+
+		}
 
 		REPselStorey.innerHTML = storeys;
 		REPselStorey.selectedIndex = 0;

@@ -184,6 +184,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			const triangle = NUM.getTriangle( points );
 			//console.log( 'triangle', triangle.normal() );
+			if ( !triangle ) { console.log( 'surface error', opening ); continue; };
 
 			const obj = new THREE.Object3D();
 			obj.lookAt( triangle.normal() );  // copy the rotation of the triangle
@@ -274,10 +275,13 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const wwr = 100 * NUM.openingsArea / NUM.surfacesExteriorWallArea;
 
-		NUMdivStoreys.innerHTML =
-			'<div><b>Storeys</b><div>' +
-			'Number of Storeys: ' + GBX.gbjson.Campus.Building.BuildingStorey.length + '<br>' +
-		'';
+		if ( GBX.gbjson.Campus.Building.BuildingStorey ) {
+
+			NUMdivStoreys.innerHTML =
+				'<div><b>Storeys</b><div>' +
+				'Number of Storeys: ' + GBX.gbjson.Campus.Building.BuildingStorey.length + '<br>' +
+			'';
+		}
 
 		tesa =
 			NUM.surfacesExteriorWallArea + NUM.surfacesRoofArea;
