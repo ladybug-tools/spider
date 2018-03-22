@@ -490,6 +490,7 @@
 
 			const bbox = new THREE.Box3().setFromObject( obj );
 			const sphere = bbox.getBoundingSphere();
+			//GBX.boundingBox = bbox;
 			center = sphere.center;
 			radius = sphere.radius;
 
@@ -558,15 +559,15 @@
 
 		HUD.removeTelltales();
 
-/*
-		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
-		THR.camera.up.set( 0, 0, 1 );
+		/*
+				THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
+				THR.camera.up.set( 0, 0, 1 );
 
-		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
-		// THR.controls.autoRotate = true;
+				THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
+				// THR.controls.autoRotate = true;
 
-		THR.camera.add( THR.lightPoint );
-		THR.scene.add( THR.camera );
-*/
+				THR.camera.add( THR.lightPoint );
+				THR.scene.add( THR.camera );
+		*/
 
 	}

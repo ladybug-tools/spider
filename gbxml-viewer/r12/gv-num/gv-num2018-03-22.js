@@ -34,11 +34,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<summary>Numbers</summary>
 
-					<div id = "NUMdivStoreys" ></div>
-					<div id = "NUMdivSurfaceTypeAreas" ></div>
-					<div id = "NUMdivExteriorAreas" ></div>
-					<div id = "NUMdivOpenings" ></div>
-					<div id = "NUMdivOrientation" ></div>
+					<div id = "NUMdivNumbersWallExterior" ></div>
 
 					<hr>
 
@@ -49,10 +45,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			//initMenuNumbers();
 			NUM.timeStart = Date.now();
 
-			NUM.getSurfaceTypesData();
-			NUM.getOpenings();
-			NUM.setDisplay();
-			//NUM.getSurfacesExteriorWall();
+			NUM.getSurfacesExteriorWall();
 
 			NUM.butMenuNumbers.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -89,68 +82,39 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	NUM.getSurfaceTypesData = function() {
 
-		surfaces = GBX.gbjson.Campus.Surface;
-
-		let txt = '<b>Floor Areas by Surface Type</b><br>';
-		const types = [];
-		const typesCount = [];
-
-		for ( let surfaceType of GBX.surfaceTypes ) {
-
-			NUM[ 'surfaces' + surfaceType + 'Area' ] =  0;
-
-		}
-
-		for ( let surface of surfaces ) {
-
-			index = types.indexOf( surface.surfaceType );
-
-			if ( index < 0 ) {
-
-				types.push( surface.surfaceType );
-				typesCount[ types.length - 1 ] = 1;
-
-
-			} else {
-
-				typesCount[ index ] ++;
-
-			}
-
-		}
-
-		for ( let i = 0; i < types.length; i++ ) {
-
-			txt +=
-				' <button class=toggle onclick=GBV.showSurfaceType(this.innerText); >' + types[ i ] + '</button> area: ' +
-				NUM.getSurfacesArea( types[ i ] ).toLocaleString() +
-
-				'<br>';
-
-		}
-
-		tfa =
-			NUM.surfacesInteriorFloorArea +
-			NUM.surfacesSlabOnGradeArea +
-			NUM.surfacesRaisedFloorArea +
-			NUM.surfacesUndergroundSlabArea;
-
-		NUMdivSurfaceTypeAreas.innerHTML =
-			txt +
-			'<div>Total floor area: ' + tfa.toLocaleString() + '<div>';
-
-
-	}
-
-
-
-	NUM.getOpenings = function() {
+	NUM.getSurfacesExteriorWall = function() {
 
 		NUM.surfacesExteriorWall = GBX.surfaceJson.filter( element => element.surfaceType === 'ExteriorWall' );
 		//console.log( 'NUM.surfacesExteriorWall', NUM.surfacesExteriorWall );
-//		NUM.surfacesExteriorWallArea = NUM.getSurfacesArea( NUM.surfacesExteriorWall );
+		NUM.surfacesExteriorWallArea = NUM.getSurfacesArea( NUM.surfacesExteriorWall );
+
+		/*
+		NUM.surfacesExteriorWallArea = 0;
+
+		for ( surface of NUM.surfacesExteriorWall ) {
+			//console.log( 'surface', surface.PlanarGeometry.PolyLoop );
+
+			const points = surface.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
+			//console.log( 'points', points );
+
+			const triangle = NUM.getTriangle( points );
+			//console.log( 'triangle', triangle.normal() );
+
+			const obj = new THREE.Object3D();
+			obj.lookAt( triangle.normal() );  // copy the rotation of the triangle
+			obj.quaternion.conjugate();
+			obj.updateMatrixWorld();
+
+			points.map( point => obj.localToWorld( point ) );
+			//console.log( 'points', points );
+
+			NUM.surfacesExteriorWallArea += THREE.ShapeUtils.area( points );
+			//console.log( 'area', THREE.ShapeUtils.area( points ) );
+
+		}
+
+		*/
 
 		NUM.SurfacesWithOpenings = NUM.surfacesExteriorWall.filter( surface => surface.Opening );
 		//console.log( 'NUM.SurfacesWithOpenings', NUM.SurfacesWithOpenings );
@@ -173,7 +137,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 		//console.log( 'NUM.openings', NUM.openings );
-
+		/*
 		NUM.openingsArea = 0;
 
 		for ( opening of NUM.openings ) {
@@ -197,16 +161,46 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			//console.log( 'area', THREE.ShapeUtils.area( points ) );
 
 		}
+		*/
+
+		NUM.openingsArea = NUM.getSurfacesArea( NUM.openings );
+
+		NUM.surfacesUndergroundWalls = GBX.surfaceJson.filter( element => element.surfaceType === 'UndergroundWall' );
+		NUM.undergroundWallArea = NUM.getSurfacesArea( NUM.surfacesUndergroundWalls );
+
+		/*
+		for ( undergroundWall of NUM.surfacesUndergroundWalls ) {
+			//console.log( 'undergroundWall', undergroundWall.PlanarGeometry.PolyLoop );
+
+			const points = undergroundWall.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
+			//console.log( 'points', points );
+
+			const triangle = NUM.getTriangle( points );
+			//console.log( 'triangle', triangle.normal() );
+
+			const obj = new THREE.Object3D();
+			obj.lookAt( triangle.normal() );  // copy the rotation of the triangle
+			obj.quaternion.conjugate();
+			obj.updateMatrixWorld();
+
+			points.map( point => obj.localToWorld( point ) );
+			//console.log( 'points', points );
+
+			NUM.undergroundWallArea += THREE.ShapeUtils.area( points );
+			//console.log( 'area', THREE.ShapeUtils.area( points ) );
+
+		}
+
+		*/
+
+		NUM.setDisplay();
 
 	}
 
 
-
-
-	NUM.getSurfacesArea = function( type ) {
+	NUM.getSurfacesArea = function( surfaces ) {
 
 		let area = 0;
-		const surfaces = GBX.surfaceJson.filter( element => element.surfaceType === type );
 
 		for ( surface of surfaces ) {
 			//console.log( 'undergroundWall', undergroundWall.PlanarGeometry.PolyLoop );
@@ -215,10 +209,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			//console.log( 'points', points );
 
 			const triangle = NUM.getTriangle( points );
-			//console.log( 'triangle', triangle );
-			if ( !triangle ) { console.log( 'surface error', surface ); continue; };
-
-			//console.log( 'triangle,normal', triangle.normal() );
+			//console.log( 'triangle', triangle.normal() );
 
 			const obj = new THREE.Object3D();
 			obj.lookAt( triangle.normal() );  // copy the rotation of the triangle
@@ -231,8 +222,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			area += THREE.ShapeUtils.area( points );
 			//console.log( 'area', THREE.ShapeUtils.area( points ) );
 
-			NUM[ 'surfaces' + type + 'Area' ] = area;
-
 		}
 
 		return area;
@@ -244,7 +233,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	NUM.getTriangle = function( points, start = 0 ) {
 
-		if ( start + 2 >= points.length ) { divLog.innerHTML = 'no more points'; return; }
+		//if ( start + 2 >= points.length ) { divLog.innerHTML = 'no more points'; return; }
 
 		const triangle = new THREE.Triangle();
 		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
@@ -259,7 +248,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		if ( triangle.area() === 0 ) {
 
 			start++;
-			NUM.getTriangle( points, start );
+			colinearTest( points, start );
 
 		} else {
 
@@ -274,43 +263,24 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const wwr = 100 * NUM.openingsArea / NUM.surfacesExteriorWallArea;
 
-		NUMdivStoreys.innerHTML =
-			'<div><b>Storeys</b><div>' +
+
+		NUMdivNumbersWallExterior.innerHTML =
+
 			'Number of Storeys: ' + GBX.gbjson.Campus.Building.BuildingStorey.length + '<br>' +
-		'';
-
-		tesa =
-			NUM.surfacesExteriorWallArea + NUM.surfacesRoofArea;
-
-
-		NUMdivExteriorAreas.innerHTML =
-		'<div><b>Exterior Areas</b><div>' +
-			'Exterior surfaces: ' + tesa.toLocaleString() + '<br>' +
-		'';
-
-		NUMdivOpenings.innerHTML =
-
-			'<div><b>Openings</b></div>' +
-//			'Exterior Wall Surfaces: ' + NUM.surfacesExteriorWall.length + '<br>' +
-//			'Exterior Wall Surfaces with Openings: ' + NUM.SurfacesWithOpenings.length + '<br>' +
-
-//			'Underground Wall Area: ' + NUM.undergroundWallArea.toLocaleString() + '<br>' +
-
+			'Exterior Wall Surfaces: ' + NUM.surfacesExteriorWall.length + '<br>' +
+			'Exterior Wall Surfaces with Openings: ' + NUM.SurfacesWithOpenings.length + '<br>' +
 			'Exterior Wall Area: ' + NUM.surfacesExteriorWallArea.toLocaleString() + '<br>' +
+
+			'Underground Wall Area: ' + NUM.undergroundWallArea.toLocaleString() + '<br>' +
+
 			'Openings: ' + NUM.openings.length + '<br>' +
 			'Openings area: ' + NUM.openingsArea.toLocaleString() + '<br>' +
 
 			'Window to Wall Ratio: ' + wwr.toLocaleString() + '%<br>' +
 
+			'Time: ' + ( Date.now() - NUM.timeStart ) + '<br>' +
 		'';
 
-		NUMdivOrientation.innerHTML =
-
-		'<div><b>Orientation</b></div>' +
-			'Coming soon' +
-			'<hr>' +
-			'Time: ' + ( Date.now() - NUM.timeStart ) + '<br>' +
-		''
 	}
 
 
