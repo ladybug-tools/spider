@@ -13,7 +13,14 @@
 
 ## Wish list
 
-
+* 2018-03-22 ~ Add select by storey / show in 3D / display attributes
+* 2018-03-22 ~ Add Zones
+* 2018-03-22 ~ Button to show surfaces for total floor area
+* 2018-03-22 ~ Button to show surfaces for exterior area
+* 2018-03-22 ~ Add calculate and show building bounding box
+* 2018-03-22 ~ Add north point toggle
+* 2018-03-22 ~ Add show orientation by color
+* 2018-03-22 ~ Add show openings / make clickable / App to report
 
 ## Issues
 
@@ -24,6 +31,11 @@
 
 
 ## Change Log
+
+### 2018-03-22 ~ Theo
+
+R12.7
+* Add many new numbers
 
 ### 2018-03-20 ~ Theo
 
