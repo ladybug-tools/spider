@@ -51,8 +51,10 @@ Needed?
 See main read me file
 
 * Style names needs cleaning up
-	* Needs netter 'left menu', 'middle menu', right-menu' conventions
+	* Needs better 'left menu', 'middle menu', right-menu' conventions
 	* Big change / much testing / Do this in R13
+	* Set rems as unit
+	* https://webdesign.tutsplus.com/tutorials/comprehensive-guide-when-to-use-em-vs-rem--cms-23984
 
 ## Issues
 
