@@ -70,6 +70,9 @@
 			parameters.longitude = GBX.gbjson.Campus.Location.Longitude;
 			if ( !parameters.latitude ) {alert( 'Need latitude and longitude in gbXML file'); return; }
 
+			const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+
 			const now = Math.floor( Date.now() / 1000 );
 
 			url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' +

@@ -5,15 +5,16 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-20" >
+<meta name = "date" content = "2018-03-23" >
 <title>gv-tmp - gbXML Viewer Template</title>
 <link rel="stylesheet" type="text/css" href="../assets/style-template.css" >
 <style>
 
 		body { overflow: auto;  margin: 0 auto; max-width: 800px; }
 		h2 { margin: 0; }
+		i { color: blue; }
 		iframe { height: 500px; width: 100%; }
-		#divTemplateBody {}
+		summary { font-weight: bold; }
 
 	</style>
 </head>
@@ -58,14 +59,20 @@
 
 <script>
 
-	//const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
-	let uriGbxmlDefault;
+	const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//let uriGbxmlDefault;
 
 	var icw, THREE, THR, GBX, GBV;
 
-	const fname = location.pathname.split( '/' ).pop().replace( '.html', '' );
+	const pathNameArray = location.pathname.split( '/' );
 
-	const scriptSource =  fname + '.js';
+	const releaseId =  pathNameArray[ pathNameArray.length - 3 ];
+	//console.log( 'releaseId', releaseId);
+
+	const fileName = pathNameArray.pop().replace( '.html', '' );
+
+
+	const scriptSource =  fileName + '.js';
 
 
 	initTemplate();
@@ -74,7 +81,7 @@
 
 	function initTemplate() {
 
-		divMenuTitle.innerHTML = TST.menuTitle;
+		divMenuTitle.innerHTML = releaseId + ' ' + TST.menuTitle;
 
 		divMenuDescription.innerHTML = TST.menuDescription;
 
@@ -93,7 +100,6 @@
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
-
 
 		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 

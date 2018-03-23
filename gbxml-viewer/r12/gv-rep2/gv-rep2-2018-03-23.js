@@ -25,11 +25,11 @@
 
 			divMenuItems.innerHTML =
 
-				`<details id = detReports open >
+				`<details id = detGbxmlView open >
 
 					<summary>Reports</summary>
 
-					<div id = "divReports" ><div>
+					<div id = "divGbxmlView" ><div>
 
 					<hr>
 
@@ -37,13 +37,13 @@
 
 			` + divMenuItems.innerHTML;
 
-			initMenuReports();
+			initMenuGbxmlView();
 
 			REP.butReports.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
-			detReports.remove();
+			detGbxmlView.remove();
 
 			REP.butReports.style.backgroundColor = '';
 
@@ -57,11 +57,11 @@
 
 
 
-	function initMenuReports() {
+	function initMenuGbxmlView() {
 
 		//surfaceCoordinateDuplicates = [];
 
-		divReports.innerHTML =
+		divGbxmlView.innerHTML =
 		`
 			<div>
 				<div>toggle the visible elements</div>
@@ -109,7 +109,7 @@
 				<summary id = "REPsumStoreys" >Storeys</summary>
 				<div class=flex-container2 >
 					<div class=flex-div1 >
-						<input oninput=REP.updateSelect(this,REPselStorey); size=6 placeholder="storey id" ><br>
+						<input oninput=REP.updateSelect(this,selStorey); size=6 placeholder="storey id" ><br>
 						<select id = "REPselStorey" onclick=GBV.showStorey(this.value);REP.updateStoreyAttributes(); onchange=GBV.showStorey(this.value);REP.updateStoreyAttributes(); size=10 ></select>
 					</div>
 					<div id = "REPdivStoreys" class=flex-left-div2  ></div>
@@ -118,18 +118,8 @@
 			</details>
 
 			<details>
-
-
 				<summary id = "REPsumZones" >Zones</summary>
-
-				<div class=flex-container2 >
-					<div class=flex-div1 >
-						<input oninput=REP.updateSelect(this,REPselZone); size=6 placeholder="zone id" ><br>
-						<select id = "REPselZone" onclick=GBV.showZone(this.value);REP.updateZoneAttributes();
-							onchange=GBV.showZone(this.value);REP.updateZoneAttributes(); size=10 ></select>
-					</div>
-					<div id = "REPdivZones" class=flex-left-div2  ></div>
-				</div>
+				<div id = "REPdivZones" ></div>
 				<hr>
 			</details>
 
@@ -192,9 +182,7 @@
 
 		REP.updateStoreys();
 
-		REP.updateZones();
-
-		//REPdivZones.innerHTML += REP.traverseGbjson( GBX.gbjson.Zone ).attributes;
+		REPdivZones.innerHTML += REP.traverseGbjson( GBX.gbjson.Zone ).attributes;
 
 		REP.UpdateCadIdGroups();
 
@@ -446,66 +434,6 @@
 
 	}
 
-
-	REP.updateZones = function() {
-
-		let zones = '';
-		let zoneXml = GBX.gbjson.Zone;
-		//console.log( 'zoneXml', zoneXml );
-
-		if ( !zoneXml ) {
-
-			REPselZone.innerHTML = '<option>none</option>';
-			return;
-
-		}
-
-		if ( zoneXml.length ) {
-
-			zoneXml.forEach( function( element ) { zones += '<option>' + element.id + '</option>'; } );
-
-		} else {
-
-			zones = '<option>' + zoneXml.id + '</option>';
-
-		}
-
-		REPselZone.innerHTML = zones;
-		REPselZone.selectedIndex = 0;
-
-		REPsumZones.innerHTML = 'Zones  &raquo; ' + REPselZone.length;
-
-		//GBV.showSpace( REPselStorey.value );
-		//REPdivzones.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
-		REP.updateZoneAttributes();
-
-	}
-
-
-
-	REP.updateZoneAttributes = function() {
-
-		console.log( '',  );
-
-//		if ( Array.isArray( GBX.gbjson.Zone ) ) {
-
-//		REPdivZones.innerHTML = REP.traverseGbjson( GBX.gbjson.Zone[ REPselZone.selectedIndex ] ).attributes;
-
-		//let zone;
-
-		if ( Array.isArray( GBX.gbjson.Zone ) ) {
-
-			zone = GBX.gbjson.Zone[ REPselZone.selectedIndex ]
-
-		} else {
-
-			zone = GBX.gbjson.Zone;
-
-		}
-
-		REPdivZones.innerHTML = REP.traverseGbjson( zone ).attributes;
-
-	}
 
 
 	REP.UpdateCadIdGroups = function() {

@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-23" >
+<meta name = "date" content = "2018-03-02" >
 <title>gv-tmp - gbXML Viewer Template</title>
 <link rel="stylesheet" type="text/css" href="../assets/style-template.css" >
 <style>
@@ -23,7 +23,7 @@
 <script src = "../gv-tmp/gv-tst.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
-
+<!-- special loaderer for analemma -->
 	<div id=divMenuTitle ></div>
 
 	<div id=divMenuDescription ></div>
@@ -58,20 +58,14 @@
 
 <script>
 
-	const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
-	//let uriGbxmlDefault;
+	//const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	let uriGbxmlDefault;
 
 	var icw, THREE, THR, GBX, GBV;
 
-	const pathNameArray = location.pathname.split( '/' );
+	const fname = location.pathname.split( '/' ).pop().replace( '.html', '' );
 
-	const releaseId =  pathNameArray[ pathNameArray.length - 3 ];
-	//console.log( 'releaseId', releaseId);
-
-	const fileName = pathNameArray.pop().replace( '.html', '' );
-
-
-	const scriptSource =  fileName + '.js';
+	const scriptSource =  fname + '.js';
 
 
 	initTemplate();
@@ -80,7 +74,7 @@
 
 	function initTemplate() {
 
-		divMenuTitle.innerHTML = releaseId + ' ' + TST.menuTitle;
+		divMenuTitle.innerHTML = TST.menuTitle;
 
 		divMenuDescription.innerHTML = TST.menuDescription;
 
@@ -89,6 +83,10 @@
 		divSampleFiles.innerHTML = TST.gbxmlSampleFiles;
 
 		butMenuLoad.onclick = function() {
+
+//			const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+//			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+
 			script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = scriptSource;
 			divMenu.style.display='block';
@@ -99,6 +97,7 @@
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
+
 
 		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 

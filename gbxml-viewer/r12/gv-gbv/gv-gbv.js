@@ -239,7 +239,7 @@
 
 		//console.log( 'id', id );
 
-		spaces = GBX.gbjson.Campus.Building.Space;
+		const spaces = GBX.gbjson.Campus.Building.Space;
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
 
@@ -258,6 +258,44 @@
 		const storey = GBX.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
 
 		//	console.log( 'storey', storey );
+
+	}
+
+
+
+	GBV.showZone = function ( zoneIdRef ) {
+
+		console.log( 'zoneIdRef', zoneIdRef );
+
+		const spaces = GBX.gbjson.Campus.Building.Space;
+
+		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId
+
+			if ( !adjacentSpaceId ) { continue; }
+
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.zoneIdRef === zoneIdRef ? true : child.visible );
+
+		}
+
+		let zone;
+
+		if ( Array.isArray( GBX.gbjson.Zone ) ) {
+
+			zone = GBX.gbjson.Zone.find( function( item ) { return item.id === zoneIdRef; } );
+
+		} else {
+
+			zone = GBX.gbjson.Zone;
+
+		}
+
+		console.log( 'zone', zone );
 
 	}
 
