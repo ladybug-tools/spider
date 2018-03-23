@@ -1,7 +1,5 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-// HUD html is defined in gv-gbx.html amd gv-app.html
-
 	var HUD = {};
 
 	var intersected;
@@ -10,9 +8,9 @@
 	var telltalesVertex;
 	var telltalesPolyloop;
 
-	//initHeadsUp();
+	//HUD.initHeadsUp();
 
-	 HUD.initHeadsUp = function() {
+	 HUD.initHeadsUp = function() { // called from app.html or gbx.html
 
 		mouse = new THREE.Vector2();
 
@@ -106,8 +104,8 @@
 
 	HUD.setHeadsUp = function( event ) {
 
-		var space1;
-		var space2;
+		let space1;
+		let space2;
 
 		if ( intersected === undefined ) {
 
@@ -218,7 +216,6 @@
 
 				if ( !space1 ) { return; }
 
-
 				adjacentsTxt =
 					'<hr>' +
 					'<details open >' +
@@ -257,7 +254,7 @@
 				<p>
 					<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
 					<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
-					<button onclick=HUD.removeTelltales() >remove</button>
+					<button onclick=HUD.removeTelltales() >remove telltales</button>
 				<p>
 			</details>
 		`;

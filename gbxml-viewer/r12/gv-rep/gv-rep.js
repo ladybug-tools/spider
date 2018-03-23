@@ -16,7 +16,7 @@
 
 		if ( window.butMenuLoad ) {
 
-			REP.butReports = butMenuLoad;
+			REP.butReports0 = butMenuLoad;
 
 			REP.title = 'gv-tmp - gbXML Viewer Report';
 			document.title = REP.title;
@@ -32,7 +32,7 @@
 		}
 
 
-		if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( REP.butReports0.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			REP.createReport();
 
@@ -42,7 +42,7 @@
 
 			detReports.remove();
 
-			REP.butReports.style.backgroundColor = '';
+			REP.butReports0.style.backgroundColor = '';
 
 		}
 

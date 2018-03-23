@@ -62,6 +62,14 @@ See main read me file
 
 ## Change Log
 
+### 2018-03-23
+
+R12.8
+* Fix reports menu not deleting itself
+* Make sample file more visible
+
+### 2018-03-23
+
 R12.6
 * Style: update pop-up width and position
 	* Trying to make more of the 3D model viewable on startup

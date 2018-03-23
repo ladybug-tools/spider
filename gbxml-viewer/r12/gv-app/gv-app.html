@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-22" >
-<title>gbXML Viewer 12.7</title>
+<meta name = "date" content = "2018-03-23" >
+<title>gbXML Viewer 12.8</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
@@ -51,12 +51,33 @@
 					<script> document.write( document.head.querySelector( '[name=description]' ).content )</script>
 				</small></p>
 				-->
+
 				<p id=dragArea class=dragDropArea >
 					drag&drop gbXML files here<br>
 					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md>&#x24D8;</a>
 					<input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
-				<p>
+
+					or explore sample files<br>
+
+					<button id=butGalleryGbxml class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-gbxml.js';" >
+						gbXML.org
+					</button>
+
+					<button id=butGallerySampleFiles class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
+						Spider
+					</button>
+
+					<button id=butGalleryBuildWell class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
+						Build Well
+					</button>
+					<p>
 
 				<hr>
 
@@ -72,7 +93,7 @@
 					script.src = '../gv-set/gv-set.js'; " title="Update colors, views and other parameters" >
 				Settings</button>
 
-				<button id=butReports2 class=app-menu onclick =
+				<button id=butReports class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep2/gv-rep2.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
@@ -87,9 +108,9 @@
 					script.src = '../gv-num/gv-num.js'; " title="To be deprecated" >
 				Numbers</button>
 
-				<button id=butReports class=app-menu onclick =
+				<button id=butReports0 class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated" style=opacity:0.6; >
+					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated"      style=opacity:0.6; >
 				reports</button>
 
 
@@ -117,39 +138,6 @@
 						script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
 					sun-path / analemma</button>
 
-					<!--
-					<button id=butSunRange class=app-menu onclick="
-					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-					const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
-					sun-range</button>
-
-					<button id=butScreenCapture class=app-menu onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
-					screen capture </button>
-					-->
-
-					<p>Sample files on GitHub to explore:</p>
-
-					<button id=butGalleryGbxml class=app-menu onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gv-gal/gv-gal-gbxml.js';" >
-						gbXML.org Sample Files
-					</button>
-
-					<button id=butGallerySampleFiles class=app-menu onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
-						Spider gbXML sample files
-					</button>
-
-					<button id=butGalleryBuildWell class=app-menu onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
-						Spider Build Well
-					</button>
 
 					<button id=butModuleExplorer class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -164,6 +152,19 @@
 					</button>
 
 
+					<!--
+					<button id=butSunRange class=app-menu onclick="
+					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
+					sun-range</button>
+
+					<button id=butScreenCapture class=app-menu onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
+					screen capture </button>
+					-->
 
 				</details>
 

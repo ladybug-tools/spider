@@ -325,41 +325,45 @@
 
 		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
+		// Do the following in HUD in R13
 		GBX.spacesJson = GBX.gbjson.Campus.Building.Space;
 
-		let txt = '<option>none</option>';
+		let spacesOptions = '<option>none</option>';
 
-		if ( GBX.spaces ) {
+		if ( GBX.spacesJson ) {
+
 			for ( let space of GBX.spacesJson ) {
 
-				txt += '<option>' + space.id + '</option>';
+				spacesOptions += '<option>' + space.id + '</option>';
 
 			}
+
 		}
 
+		GBX.spacesOptions = spacesOptions;
 		//console.log( 'GBX.spaceOptions', GBX.spaceOptions);
 
-		GBX.spacesOptions = txt;
 
-		txt = '';
-
-		for ( let surface of GBX.surfaceJson ) {
-
-			txt += '<option>' + surface.id + '</option>';
-
-		}
-
-		GBX.surfacesOptions = txt;
-
-		const surfacesOptions= [];
+		let surfacesOptions = '';
 
 		for ( let surface of GBX.surfaceJson ) {
 
-			surfacesOptions.push( '<option>' + surface.CADObjectId + '</option>' );
+			surfacesOptions += '<option>' + surface.id + '</option>';
 
 		}
 
-		GBX.surfacesCadObj = surfacesOptions.sort().join();
+		GBX.surfacesOptions = surfacesOptions;
+
+		const cadIdOptions = [];
+
+		for ( let surface of GBX.surfaceJson ) {
+
+			cadIdOptions.push( '<option>' + surface.CADObjectId + '</option>' );
+
+		}
+
+
+		GBX.surfacesCadObj = cadIdOptions.sort().join();
 
 		//		console.log( 'GBX.surfacesCadObj', GBX.surfacesCadObj);
 

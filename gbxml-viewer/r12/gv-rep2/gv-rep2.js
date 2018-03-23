@@ -4,24 +4,24 @@
 	var REP = {};
 
 
-	REP.initGbxmlView = function() {
+	REP.initReport = function() {
 ;
 		if ( window.butMenuLoad ) {
 
-			REP.butGbxmlView = butMenuLoad;
+			REP.butReports = butMenuLoad;
 
-			REP.title = 'gv-tmp - gbXML Viewer Reports2';;
+			REP.title = 'gv-tmp - gbXML Viewer Reports';;
 			document.title = REP.title;
 			aDocumentTitle.innerHTML = REP.title;
-			REP.butGbxmlView.innerHTML = REP.title;
+			REP.butReports.innerHTML = REP.title;
 
 		} else {
 
-			REP.butGbxmlView = butReports2;
+			REP.butReports = butReports;
 
 		}
 
-		if ( REP.butGbxmlView.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
 			divMenuItems.innerHTML =
 
@@ -39,13 +39,13 @@
 
 			initMenuGbxmlView();
 
-			REP.butGbxmlView.style.backgroundColor = 'var( --but-bg-color )';
+			REP.butReports.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
 			detGbxmlView.remove();
 
-			REP.butGbxmlView.style.backgroundColor = '';
+			REP.butReports.style.backgroundColor = '';
 
 		}
 
@@ -564,4 +564,4 @@
 
 
 
-	REP.initGbxmlView();
+	REP.initReport();
