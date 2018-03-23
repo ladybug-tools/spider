@@ -21,9 +21,9 @@ The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-
 
 ## Ladybug Tools / Spider: [Latest Issues and Updates]( #plugins/view-github-issues.html )
 
-## Apps: [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [Analemma 3D]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
+## Apps: [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [gbXML Viewer  Dev]( http://www.ladybug.tools/spider/gbxml-viewer/dev/ ) ~ [Analemma 3D]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
 
-## YouTube Video: [gbXML Viewer ~ User Guide]( https://www.youtube.com/watch?v=YqEkc3rvxYs )
+## YouTube Video: [gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
 
 * Michal's must watch video
 * Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
