@@ -263,6 +263,39 @@
 
 
 
+
+	GBV.showFloorSlabs = function( id ) {
+
+		//console.log( 'id', id );
+
+		const spaces = GBX.gbjson.Campus.Building.Space;
+
+		const types = ['InteriorFloor', 'SlabOnGrade', 'RaisedFloor', 'UndergroundSlab']
+
+		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId
+
+			if ( !adjacentSpaceId ) { continue; }
+
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			spaces.forEach( element => { child.visible = element.id === spaceIdRef
+				&& element.buildingStoreyIdRef === id  && types.includes( child.userData.data.surfaceType )  ? true : child.visible;
+
+			} );
+
+		}
+
+		GBV.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
+		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
+
+	}
+
+
+
 	GBV.showZone = function ( zoneIdRef ) {
 
 		console.log( 'zoneIdRef', zoneIdRef );
@@ -300,6 +333,33 @@
 	}
 
 
+
+	GBV.showBySurfaceTypeArray = function( types ) {
+
+		console.log( 'types', types );
+
+		const spaces = GBX.gbjson.Campus.Building.Space;
+
+		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			//adjacentSpaceId = child.userData.data.AdjacentSpaceId
+
+			//if ( !adjacentSpaceId ) { continue; }
+
+			//spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			spaces.forEach( element => { child.visible = types.includes( child.userData.data.surfaceType )  ? true : child.visible;
+
+			} );
+
+		}
+
+		GBV.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
+		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
+
+	}
 
 	GBV.setAllVisible = () => {
 

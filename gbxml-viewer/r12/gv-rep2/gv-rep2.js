@@ -487,11 +487,11 @@
 
 		console.log( '',  );
 
-//		if ( Array.isArray( GBX.gbjson.Zone ) ) {
+		//		if ( Array.isArray( GBX.gbjson.Zone ) ) {
 
-//		REPdivZones.innerHTML = REP.traverseGbjson( GBX.gbjson.Zone[ REPselZone.selectedIndex ] ).attributes;
+		//		REPdivZones.innerHTML = REP.traverseGbjson( GBX.gbjson.Zone[ REPselZone.selectedIndex ] ).attributes;
 
-		//let zone;
+		let zone;
 
 		if ( Array.isArray( GBX.gbjson.Zone ) ) {
 
