@@ -26,7 +26,7 @@ See main read me
 
 ## Issues
 
-Very occasionally the Three.js Shape function draws surfaces with openings incorrectly. This occurs when a border of an opening lies on top of a border of the surface. In other words the topology changes from an 'O' to a 'U'. Given gthat the Shaup function handles the grrat majority of cases as anticipated, chasing down the cause and remedies of this issue loos like it may be a ongoing struggle.
+Very occasionally the Three.js Shape function draws surfaces with openings incorrectly. This occurs when a border of an opening lies on top of a border of the surface. In other words the topology changes from an 'O' to a 'U'. Given that the Shape function handles the great majority of cases as anticipated, chasing down the cause and remedies of this issue loos like it may be a ongoing struggle.
 
 The next steps may include
 * Drawing telltales for the gbXML polyloops to see if any visible idiosyncracies in the error causing surfaces can  be identified.

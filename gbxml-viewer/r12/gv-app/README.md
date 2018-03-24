@@ -1,18 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-app/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-app/README.md "View file as a web page." ) </span>
 
-# gv-App / gbXML Viewer / Application Module Read Me
+# R12 gv-App / gbXML Viewer / Application Module Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px>Iframes are not displayed on github.com</iframe>
 
 ## Full screen: [gbXML Viewer Application Module]( http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html )
 
-
-Use and share these links for gbXML Viewer:
-
-* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
-* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
-Needed?
 
 
 ## Concept
@@ -55,6 +49,7 @@ See main read me file
 	* Big change / much testing / Do this in R13
 	* Set rems as unit
 	* https://webdesign.tutsplus.com/tutorials/comprehensive-guide-when-to-use-em-vs-rem--cms-23984
+
 
 ## Issues
 

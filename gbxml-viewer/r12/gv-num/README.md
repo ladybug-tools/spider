@@ -1,6 +1,6 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-num/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-num/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer Template Read Me
+# R12 gbXML Viewer Numbers Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-num/gv-num.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -9,10 +9,12 @@
 
 ## Concept
 
+"gbXML Viewer ~ Numbers ~ surface area statistics, ratios and orientation"
 
 
 ## Wish list
 
+* 2018-03-23 ~ Standardize width of buttons
 * 2018-03-23 ~ Add data embedded in gbXMK file where available
 * 2018-03-23 ~ Add area by cad id group
 * 2018-03-22 ~ Add calculate and show building bounding box

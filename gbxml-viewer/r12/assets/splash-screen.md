@@ -23,7 +23,23 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-03-22 ~ R12.7</summary>
+<summary>Welcome 2018-03-23 ~ R12.8</summary>
+
+R12.8
+* NUM / Nubers Module
+	* 2018-03-22 ~ Add select by storey / show in 3D / display attributes
+	* 2018-03-22 ~ Add Zones
+	* 2018-03-22 ~ Button to show surfaces for total floor area
+	* 2018-03-22 ~ Button to show surfaces for exterior area
+	* 2018-03-22 ~ Add show orientation by color
+	* 2018-03-22 ~ Add show openings / make clickable / App to report
+* APP / Application Module
+	* Fix reports menu not deleting itself
+	*  Make sample file more visible
+* HUD / Heads-up Display
+	* Fix spaces not showing in HUD select space
+
+Some issues with update in the HUD.
 
 R12.7
 * NUM/ Numbers Module

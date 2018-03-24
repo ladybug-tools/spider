@@ -1,4 +1,4 @@
-{
+{ 	"deletes": [], "types": [], "oneAdjacent": [], "twoAdjacent": [], "cadObjs": [],
 	"surfaceColors" : {
 		"InteriorWall": "LightSlateGray",
 		"ExteriorWall": "Plum",

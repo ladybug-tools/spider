@@ -5,14 +5,16 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
 <meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-02" >
+<meta name = "date" content = "2018-03-23" >
 <title>gv-tmp - gbXML Viewer Template</title>
 <link rel="stylesheet" type="text/css" href="../assets/style-template.css" >
 <style>
 
-		body { overflow: auto;  margin: 0 auto; max-width: 1000px; }
-		#divTemplateBody {}
-		iframe { height: 700px; width: 100%; }
+		body { overflow: auto;  margin: 0 auto; max-width: 800px; }
+		h2 { margin: 0; }
+		i { color: blue; }
+		iframe { height: 500px; width: 100%; }
+		summary { font-weight: bold; }
 
 	</style>
 </head>
@@ -31,7 +33,7 @@
 		<button id=butMenuLoad >gv-tmp </button>
 	</p>
 
-	<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
+	<iframe id=ifrThree ></iframe>
 
 	<div id = "divSampleFiles" ></div>
 
@@ -39,7 +41,8 @@
 
 	<div id=divLog ></div>
 
-	<p><a href=index.html >Read Me file</a></a></p>
+	<p><a href=index.html >Read Me file</a></p>
+
 
 	<div id = "divMenu" >
 
@@ -56,13 +59,20 @@
 
 <script>
 
+	const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//let uriGbxmlDefault;
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
+	const pathNameArray = location.pathname.split( '/' );
 
-	ScriptSource =  fname + '.js';
+	const releaseId =  pathNameArray[ pathNameArray.length - 3 ];
+	//console.log( 'releaseId', releaseId);
 
+	const fileName = pathNameArray.pop().replace( '.html', '' );
+
+
+	const scriptSource =  fileName + '.js';
 
 
 	initTemplate();
@@ -71,7 +81,7 @@
 
 	function initTemplate() {
 
-		divMenuTitle.innerHTML = TST.menuTitle;
+		divMenuTitle.innerHTML = releaseId + ' ' + TST.menuTitle;
 
 		divMenuDescription.innerHTML = TST.menuDescription;
 
@@ -81,7 +91,7 @@
 
 		butMenuLoad.onclick = function() {
 			script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = ScriptSource;
+			script.src = scriptSource;
 			divMenu.style.display='block';
 		}
 
@@ -90,24 +100,22 @@
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
-/*
-		uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
+
+		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 			const url = location.hash.slice( 1 );
+			//console.log( 'url', url );
 
-			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
-			//ifrThree.contentWindow.location.hash = uriGbxmlDefault;
+			ifrThree.src = '../gv-gbx/gv-gbx.html#' + url;
 
 		} else {
 
-			console.log( 'uriGbxmlDefault', uriGbxmlDefault );
-			//COR.requestFileAndProgress( uriGbxmlDefault, ifrThree.contentWindow.GBX.callbackGbXML );
-			ifrThree.src = '../gv-gbx/gv-gbx.html#' + uriGbxmlDefault;
-			ifrThree.contentWindow.location.reload();
+			ifrThree.src = '../gv-gbx/gv-gbx.html' + ( uriGbxmlDefault ? '#' + uriGbxmlDefault : '' );
+
 		}
-*/
+
 
 	}
 
@@ -121,6 +129,8 @@
 		GBV = icw.GBV;
 
 		THR.controls.autoRotate = false;
+		divContainer.style.display = 'none';
+		THR.controls.keys = false;
 
 		console.log( 'scene', THR.scene );
 

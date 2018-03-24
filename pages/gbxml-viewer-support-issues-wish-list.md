@@ -20,6 +20,8 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ## Current Issues with gbXML Viewer
 
+2018-03-23 ~ HUD / spaces not updating properly
+
 The 'reset view' button in the in-world ( center of screen) menu may not always perform a complete reset of all viewing parameters. You may need to reload the web page in order to start. An easy way to to this is to click the gbXML Viewer title in the main menu.
 
 
