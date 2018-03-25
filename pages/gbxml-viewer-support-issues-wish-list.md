@@ -50,6 +50,8 @@ view-updates.html
 
 * Shows posts in issues that have been closed
 
+
+
 ### ADJ ~ Duplicate Adjacents
 
 * 2018-03-08 ~ Michal: sort the adjacent spaces / by size

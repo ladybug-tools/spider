@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-03-25" >
+<title>Style Viewer</title>
+<style>
+
+	/* all the colors that need editing are in the root section */
+
+	:root {
+
+	--body-color: DarkBlue;
+
+	--a-color: Salmon;
+	--a-color-hover: gray;
+	--a-back-color-hover: yellow;
+
+	--i-color: blue;
+
+	--mnu-color: DarkBlue;
+	--mnu-back-color: Gold;
+
+	--mnu-header-color: white;
+	--mnu-header-back-color: #87cefa;
+
+	--mnu-a-color: Salmon;
+
+	--but-color:lightBlue;
+	--but-color-hover:white;
+	--but-back-color:gray;
+	--but-back-color-hover:Salmon;
+
+	--summary-color: gray;
+	--highlight-color: SpringGreen;
+
+	--mnu-left-width: 23rem;
+	--mnu-right-width: 25rem;
+
+	}
+
+
+
+html { height: 100%; }
+
+body, html { color: var( --body-color ); font: 12pt monospace; lefy: 0;  margin: 0 auto; max-width: 40rem; right: 0; }
+
+a { color: var( --a-color ); text-decoration: none; }
+a:hover, a:focus, #divHamburger:hover { background-color: var( --a-back-color-hover ); color:var( --a-color-hover ); }
+
+button, input[ type=button ] { background-color: var( --but-back-color ); border: none; color: var( --but-color );
+	cursor: pointer; margin: 2px; padding: 3px 5px; }
+button:hover, button:focus { background-color: var( --but-back-color-hover ); color: var( --but-color-hover ) }
+
+input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+
+i { color: var( --i-color ) }
+
+summary { color: var( --summary-color ); font-weight: bold; }
+
+.highlight { background-color: var( --highlight-color ) }
+
+
+#divHamburger { background-color: var( --highlight-color ); box-sizing: border-box; border-radius: 2px; cursor: pointer;
+	font-size: 30px; left: calc( var( --mnu-left-width ) - 100px );
+	line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10;
+}
+#divHamburger {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+#divMenu { background-color: var( --mnu-back-color ); border-radius: 2px; box-sizing: border-box; left: 20px; margin: 0; max-height: 98%;
+	overflow: auto; position: fixed; top: 10px; resize: both; width: var( --mnu-left-width ); z-index: 1;
+	transition: .5s;
+}
+#divMenu {
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+#divMenu a { color: var( --mnu-a-color ); text-decoration: none; }
+#divMenu h2 { margin: 5px 0; }
+
+#divMenuHeader { background-color: var( --mnu-header-back-color );  color: var( --mnu-header-color ); cursor: move; padding: 10px; }
+#divMenuContents { padding: 10px; }
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
+
+			left menu / click to move
+
+		</div>
+
+		<div id = "divMenuContents" >
+
+			<details open >
+
+				<summary>This is a summary element</summary>
+
+				<p><button onclick=alert("hi");>button 1</button></p>
+
+				<p><button onclick=alert("hi");>button 2</button></p>
+
+				<p><a href='' >This is link 1</a></p>
+
+				<p><a href='' >This is link 2</a></p>
+
+			</details>
+
+		</div>
+
+	</div>
+
+	<div id = "divHamburger" onclick=alert("hi"); > slide &#9776; </div>
+
+	<div id = "divHeader" >
+
+		<h1><a href="" >Style Viewer</a></h1>
+
+		<div id = "divContents" >
+
+			<p><button onclick=onclick=alert("hi"); >button</button></p>
+
+			<p><i>text in italics</i></p>
+			<p><a href="" >lorem ipsum</a>, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+
+		</div>
+
+	</div>
+
+</body>
+</html>

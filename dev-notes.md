@@ -5,7 +5,18 @@
 ## Wish List / ToDo
 
 404 Page with 3D Spider
-* Spider body made by editing a plane geometry - stretching and flatenning spheres
+* Spider body made by editing a plane geometry - stretching and flattening spheres
+
+Coming soon
+
+buttons stick to side
+bounding box
+Northpoint
+signage
+Solar Access going
+Screen Cap
+Explore modules
+gltf?
 
 
 ## Change Log
