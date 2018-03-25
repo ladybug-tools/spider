@@ -25,8 +25,23 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <summary>Welcome 2018-03-23 ~ R12.8</summary>
 
+R12.9
+CSS
+* Widths to rems
+* Most all colors by css vars
+
+APP / Application Module
+* Rejigged menu / item positions
+
+NUM / Numbers Module
+* 2018-03-23 ~ Standardize width of buttons
+* Add Michalina's new orientation color palette
+* Menu uses HTML details
+* Menu add toggle visability buttons
+* Add more Orientation features WWR etc
+
 R12.8
-* NUM / Nubers Module
+* NUM / Numbers Module
 	* 2018-03-22 ~ Add select by storey / show in 3D / display attributes
 	* 2018-03-22 ~ Add Zones
 	* 2018-03-22 ~ Button to show surfaces for total floor area

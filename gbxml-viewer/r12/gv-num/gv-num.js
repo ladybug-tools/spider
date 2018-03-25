@@ -54,23 +54,26 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 								</div>
 								<div id = "NUMdivStoreys" class=flex-left-div2  ></div>
 						</div>
+						<hr>
 					</details>
 
 					<details>
 						<summary >Areas by Surface Type</summary>
 						<div id = "NUMdivSurfaceTypeAreas" ></div>
+						<hr>
 					</details>
 
 					<details>
 						<summary >Exterior Areas</summary>
 						<div id = "NUMdivExteriorAreas" ></div>
+						<hr>
 					</details>
 
 					<details>
 						<summary >Openings</summary>
 						<div id = "NUMdivOpenings" ></div>
+						<hr>
 					</details>
-
 
 					<details>
 						<summary >Orientation</summary>
@@ -585,7 +588,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			if ( oriented[ key ].openings.length > 0 ) {
 
-				num = 'wwr: ' + Math.round( 100 * oriented[ key ].areaOpenings / oriented[ key ].areaWalls ).toLocaleString() + '%';
+				num = 'wwr:' + Math.round( 100 * oriented[ key ].areaOpenings / oriented[ key ].areaWalls ).toLocaleString() + '%';
 
 			} else {
 

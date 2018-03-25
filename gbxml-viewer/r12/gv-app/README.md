@@ -57,6 +57,16 @@ See main read me file
 
 ## Change Log
 
+### 2018-03-24 ~ Theo
+
+R12.9
+CSS
+* Widths to rems
+* Most all colors by css vars
+APP
+* Rejigged menu / item positions
+
+
 ### 2018-03-23
 
 R12.8

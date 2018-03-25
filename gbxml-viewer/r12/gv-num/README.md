@@ -18,7 +18,7 @@
 * 2018-03-23 ~ Add data embedded in gbXML file where available
 * 2018-03-23 ~ Add area by cad id group
 * 2018-03-22 ~ Add calculate and show building bounding box
-* 2018-03-22 ~ Add north point toggle
+* 2018-03-22 ~ Add north point toggle < to settinngs?
 * 2018-03-22 ~ Openings / make clickable / App to report
 
 ## Issues
@@ -39,7 +39,8 @@ R12.9
 * 2018-03-23 ~ Standardize width of buttons
 * Add Michalina's new orientation color palette
 * Menu uses HTML details
-* Menu as toggle view buttons
+* Menu add toggle visability buttons
+* Add more Orientation features WWR etc
 
 
 ### 2018-03-23 ~ Theo
