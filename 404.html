@@ -9,7 +9,9 @@
 <script>
 // Welcome. Anybody who looks at the source code of other people's error pages must be wonderful!
 
-	document.body.style.cssText = ' font: bold 12pt monospace; ';
+// Written in 'everything-JavaScript' style
+
+	document.body.style.cssText = ' font: bold 12pt monospace; height: ' + window.innerHeight + 'px; overflow: hidden;';
 
 	const user = 'ladybug-tools';
 	const repo = '/spider';
@@ -18,13 +20,14 @@
 	document.title = '404 for ' + user + repo
 	info.innerHTML =
 
-	'<center>' +
+	'<div style=background-color:white;left:0;margin:auto;max-width:50%;opacity:0.5;right:0;text-align:center; >' +
 		'<h1 title="This is the 404 error page" >Oops</h1>' +
-		'<p>Website: <a href=http://' + user + '.github.io' + repo + ' title="Go to the apps" >' + user + '.github.io' + repo + '</a></p>' +
-		'<p>Source code: <a href=https://github.com/' + user + repo + ' title="Go to the source code" >github.com/' + user + repo + '</a></p>' +
-	'</center>';
+		'<h2>Website: <a href=http://' + user + '.github.io' + repo + ' title="Go to the apps" >' + user + '.github.io' + repo + '</a></h2>' +
+		'<h2>Source code: <a href=https://github.com/' + user + repo + ' title="Go to the source code" >github.com/' + user + repo + '</a></h2>' +
+	'</div>';
 
 	toggleBackgroundGradient();
+
 
 	function toggleBackgroundGradient() {
 

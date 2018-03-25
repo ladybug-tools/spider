@@ -75,8 +75,6 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 
 
-
-
 ## Change Log
 
 ### 2018-03-23 ~ Theo

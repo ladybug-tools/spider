@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-23" >
-<title>gbXML Viewer 12.8</title>
+<meta name = "date" content = "2018-03-24" >
+<title>gbXML Viewer 12.9</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
@@ -121,57 +121,58 @@
 				manage save changes files</button>
 
 				<hr>
-
-				<details>
-
-					<summary>Things to try</summary>
-
-					<button id=butCameraFirstPerson class=app-menu onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-cam/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
-					first person camera</button>
-
-					<button id=butAnalemma class=app-menu onclick="
-						const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-						scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-						const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
-					sun-path / analemma</button>
-
-
-					<button id=butModuleExplorer class=app-menu onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-exp/gv-exp.js';" >
-					Module Explorer
-					</button>
-
-					<button id=butMenuTemplate class=app-menu onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gv-tmp/gv-tmp.js';" >
-						gbXML Viewer Menu Template
-					</button>
-
-
-					<!--
-					<button id=butSunRange class=app-menu onclick="
-					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-					const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
-					sun-range</button>
-
-					<button id=butScreenCapture class=app-menu onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
-						script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
-					screen capture </button>
-					-->
-
-				</details>
-
 			</details>
 
 
 			<div id = "divMenuItems" ></div>
+
+			<details>
+
+				<summary>Things to try</summary>
+
+				<button id=butCameraFirstPerson class=app-menu onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-cam/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
+				first person camera</button>
+
+				<button id=butAnalemma class=app-menu onclick="
+					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
+				sun-path / analemma</button>
+
+
+				<button id=butModuleExplorer class=app-menu onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-exp/gv-exp.js';" >
+				Module Explorer
+				</button>
+
+				<button id=butMenuTemplate class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-tmp/gv-tmp.js';" >
+					gbXML Viewer Menu Template
+				</button>
+
+
+				<!--
+				<button id=butSunRange class=app-menu onclick="
+				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+				scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
+				sun-range</button>
+
+				<button id=butScreenCapture class=app-menu onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
+				screen capture </button>
+				-->
+
+			</details>
+
+
 
 			<details>
 
@@ -314,12 +315,16 @@
 
 				COR.requestFileAndProgress( url, APP.callbackJson );
 				APP.resetMenu();
+
 			}
 
 		} else {
 
 			let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
 			THR.scene.remove( meshGroundHelper );
+			let openings = THR.scene.getObjectByName( 'openingMeshes' );
+			THR.scene.remove( openings );
+
 			GBX.colors = GBX.colorsDefault;
 			GBX.setAllVisible();
 

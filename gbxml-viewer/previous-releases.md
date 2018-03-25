@@ -3,7 +3,7 @@
 
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product of human imagination and effort.
 
-### [gbXML Viewer R10]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gv-app/gv-app.html )
+### [gbXML Viewer R10]( http://www.ladybug.tools/spider/gbxml-viewer/r10/gbxml-viewer10-app/gbxml-viewer10.html )
 
 
 ### [gbXML Viewer R9]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-app/gbxml-viewer9.html )
@@ -17,8 +17,6 @@ Below are links to prior releases. Most releases have code that is running. They
 See also [R7 Read Me]( #read-gbxml/README.md ) for earlier changes
 
 R6 is mostly broken and may be ignored. Perhaps the only script to consider is [gbXML Gallery]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/#r6/gbxml-viewer-small/gbxml-gallery.html ) where a gbXML Viewer is embedded inside a normal HTML file using an iframe.
-
-The last full-featured demo is in R5:
 
 ### [gbXML Viewer R5]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r5/index.html )
 

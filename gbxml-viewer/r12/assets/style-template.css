@@ -6,6 +6,7 @@
 		--mnu-width: 350px;
 		--mnu-right-width: 370px;
 		--but-bg-color: LightCoral;
+		--but-back-color: LightCoral;
 		--highlight-color: SpringGreen;
 	}
 
@@ -13,7 +14,8 @@
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
 
-	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; margin: 3px; padding: 3px 20px; }
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;
+		margin: 3px; padding: 3px 10px; }
 	button:hover { background-color: #ccc; color: #fff }
 
 	iframe { height: 500px; width: 100%; }
@@ -32,6 +34,8 @@
 	.flex-div1 { border: 0px solid #f00; padding-right:15px; }
 	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-width ) - 150px ); }
 	.flex-div2 { border: 1px red solid; overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 100px ); }
+
+	summary { color: var( --summary-color ); font-weight: bold; }
 
 	#divDraggable, #divMenu {
 		background-color: #f1f1f1;

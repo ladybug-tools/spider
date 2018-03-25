@@ -172,6 +172,12 @@
 	};
 
 
+	GBV.showSurfacesInSurfaceArray = ( surfaces ) => {
+
+		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
+
+
+	};
 
 	GBV.showCadId = function( CADObjectId ) {
 		//console.log( 'CADObjectId', CADObjectId );
@@ -260,7 +266,6 @@
 		//	console.log( 'storey', storey );
 
 	}
-
 
 
 
@@ -360,6 +365,8 @@
 		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
 
 	}
+
+
 
 	GBV.setAllVisible = () => {
 

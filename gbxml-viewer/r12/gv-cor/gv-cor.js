@@ -426,7 +426,7 @@
 
 		menuRightWidth = divHeadsUp.style.width ? divHeadsUp.style.width.slice( 0, -2 ) : '420' ;
 		menuRightLeft = ( window.innerWidth - menuRightWidth - 20 ) + 'px';
-		console.log( 'menuRightLeft', menuRightLeft );
+		//console.log( 'menuRightLeft', menuRightLeft );
 
 
 		left = ( window.innerWidth ) - 470 + 'px'; // calc( 100% - var( --mnu-right-width ) - 100px )';

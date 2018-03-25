@@ -6,17 +6,19 @@
 
 <iframe class=iframeReadMe src=./plugins/iframe-carousel-r1.html width=100% height=480 ></iframe>
 
-_All of the above are embedded interactive scripts_
+_All of the above are embedded interactive scripts available here_
 
 <!--
 
 This is a sample read me file Template.
 The real TooTo read me here: [Read Me]( https://pushme-pullyou.github.io/tootoo-more/#README.md )
- -->
-
 ### Welcome TAS users! We will have an updated stable version of gbXML Viewer up over this weekend.
 
 ### In the meantime, please use the links here: [gbXML Viewer Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md )
+
+
+
+ -->
 
 
 ## Ladybug Tools / Spider: [Latest Issues and Updates]( #plugins/view-github-issues.html )

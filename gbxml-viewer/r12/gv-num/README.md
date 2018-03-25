@@ -14,8 +14,8 @@
 
 ## Wish list
 
-* 2018-03-23 ~ Standardize width of buttons
-* 2018-03-23 ~ Add data embedded in gbXMK file where available
+* 2018-03-24 ~ Add area by space
+* 2018-03-23 ~ Add data embedded in gbXML file where available
 * 2018-03-23 ~ Add area by cad id group
 * 2018-03-22 ~ Add calculate and show building bounding box
 * 2018-03-22 ~ Add north point toggle
@@ -25,11 +25,22 @@
 
 * Still a work-in-progress
 
+* Is knowing the number of surfaces in a particular set interesting
+	* Could be added as a tooltip
+
+
 ## Links of Interest
 
 
 
 ## Change Log
+
+R12.9
+* 2018-03-23 ~ Standardize width of buttons
+* Add Michalina's new orientation color palette
+* Menu uses HTML details
+* Menu as toggle view buttons
+
 
 ### 2018-03-23 ~ Theo
 

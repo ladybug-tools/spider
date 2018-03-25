@@ -29,28 +29,53 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		if ( NUM.butMenuNumbers.style.backgroundColor !== 'var( --but-bg-color )' ) {
 
-//			Number of Storeys: ` + NUM.storeysNumber + `<br>
 			divMenuItems.innerHTML =
 
-				`<details id = NUMdetNumbers  class=app-menu open>
+				`
+				<details id = NUMdetNumbers  class=app-menu open>
 
 					<summary>Numbers</summary>
 
-					<div><b id="NUMdivStoreyNumber" >Storeys</b><div>
-					<div class=flex-container2 >
-							<div class=flex-div1 >
-								<input oninput=NUM.updateSelect(this,NUMselStorey); size=6 placeholder="zone id" ><br>
-								<select id = "NUMselStorey" onclick=GBV.showFloorSlabs(this.value);NUM.updateStoreyAttributes();
-									onchange=GBV.showFloorSlabs(this.value);NUM.updateStoreyAttributes(); ></select>
-							</div>
-							<div id = "NUMdivStoreys" class=flex-left-div2  ></div>
+					<div>
+						<div>toggle the visible elements</div>
+						<button onclick=NUM.openingMeshes.visible=!NUM.openingMeshes.visible; >openings</button>
+						<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+						<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+						<button onclick=GBX.setAllVisible();NUM.openingMeshes.visible=true; >all visible</button>
 					</div>
 
+					<details>
+						<summary id="NUMdivStoreyNumber" >Areas by Storey</summary>
+						<div class=flex-container2 >
+								<div class=flex-div1 >
+									<input oninput=NUM.updateSelect(this,NUMselStorey); size=6 placeholder="storey id" ><br>
+									<select id = "NUMselStorey" onclick=GBV.showFloorSlabs(this.value);NUM.updateStoreyAttributes();
+										onchange=GBV.showFloorSlabs(this.value);NUM.updateStoreyAttributes(); ></select>
+								</div>
+								<div id = "NUMdivStoreys" class=flex-left-div2  ></div>
+						</div>
+					</details>
 
-					<div id = "NUMdivSurfaceTypeAreas" ></div>
-					<div id = "NUMdivExteriorAreas" ></div>
-					<div id = "NUMdivOpenings" ></div>
-					<div id = "NUMdivOrientation" ></div>
+					<details>
+						<summary >Areas by Surface Type</summary>
+						<div id = "NUMdivSurfaceTypeAreas" ></div>
+					</details>
+
+					<details>
+						<summary >Exterior Areas</summary>
+						<div id = "NUMdivExteriorAreas" ></div>
+					</details>
+
+					<details>
+						<summary >Openings</summary>
+						<div id = "NUMdivOpenings" ></div>
+					</details>
+
+
+					<details>
+						<summary >Orientation</summary>
+						<div id = "NUMdivOrientation" ></div>
+					</details>
 
 					<hr>
 
@@ -58,17 +83,13 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			` + divMenuItems.innerHTML;
 
-			//initMenuNumbers();
 			NUM.timeStart = Date.now();
 
 			NUM.getStoreys();
 			NUM.getSurfaceTypes();
+			NUM.getExteriorAreas();
 			NUM.getOpenings();
-			NUM.setOpeningsText();
 			NUM.getOrientations();
-			//NUM.toggleSurfaceNormals();
-
-			//NUM.getSurfacesExteriorWall();
 
 			NUM.butMenuNumbers.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -80,33 +101,11 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-
-
-		function initMenuNumbers() {
-
-			let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
-
-			divNumbers.innerHTML =
-			`
-				<textarea id=txtNumbers placeholder="a place for sticky notes" style="height:100px;width:100%;" onchange=localStorage.setItem("gvNumbers",this.value);></textarea>
-
-				<details open >
-					<summary id = "NUMsumNumbers" >Numbers</summary>
-					<div>` + txt + `</div>
-				</details>
-
-			`;
-
-			gvNumbers = localStorage.getItem( 'gvNumbers' );
-			txtNumbers.value = gvNumbers;
-		}
-
 	};
 
 
 
 	NUM.getStoreys = function() {
-
 
 		if ( !GBX.gbjson.Campus.Building.BuildingStorey ) {
 
@@ -127,7 +126,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}
 
-			NUMdivStoreyNumber.innerHTML = 'Storeys &raquo; ' + NUM.storeysNumber;
+			NUMdivStoreyNumber.innerHTML = 'Areas by Storey &raquo; ' + NUM.storeysNumber;
 			NUMselStorey.innerHTML = storeyOptions;
 			NUMselStorey.selectedIndex = 0;
 			NUMselStorey.size = NUM.storeysNumber < 10 ? NUM.storeysNumber : 10;
@@ -158,7 +157,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		const area = NUM.getSurfacesAreaByArrayOfSurfaces( GBV.floorSlabs );
 
 		NUMdivStoreys.innerHTML = NUM.traverseGbjson( id ).attributes + '<br>' +
-			'area: ' + area.toLocaleString();
+			'area: ' + Math.round( area ).toLocaleString();
 
 		NUM.hideOpenings()
 
@@ -170,7 +169,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const surfaces = GBX.gbjson.Campus.Surface;
 
-		let txt = '<b>Areas by Surface Type</b><br>';
+		let txt = '<b></b><br>';
 		const types = [];
 		const typesCount = [];
 
@@ -201,8 +200,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		for ( let i = 0; i < types.length; i++ ) {
 
 			txt +=
-				' <button class=toggle onclick=GBV.showSurfaceType(this.innerText);NUM.hideOpenings(); >' + types[ i ] + '</button> area: ' +
-				NUM.getSurfacesArea( types[ i ] ).toLocaleString() +
+				' <button style=width:8rem; class=toggle onclick=GBV.showSurfaceType(this.innerText);NUM.hideOpenings(); >' + types[ i ] + '</button> area: ' +
+				Math.round( NUM.getSurfacesArea( types[ i ] ) ).toLocaleString() +
 
 				'<br>';
 
@@ -217,12 +216,24 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		surfaceTypes = ["InteriorFloor","RaisedFloor","SlabOnGrade","UndergroundSlab"];
 
 		NUMdivSurfaceTypeAreas.innerHTML =
-			txt +
-			'<div><button onclick=GBV.showBySurfaceTypeArray(surfaceTypes);NUM.hideOpenings(); >Total floor</button> area: ' + tfa.toLocaleString() + '<div>';
+			txt + '<br>' +
+			'<div><button style=width:8rem; onclick=GBV.showBySurfaceTypeArray(surfaceTypes);NUM.hideOpenings(); >Total floor</button> area: ' + Math.round( tfa ).toLocaleString() + '<div>';
 
 
 	}
 
+
+
+	NUM.getExteriorAreas = function() {
+
+		const tesa = NUM.surfacesExteriorWallArea + NUM.surfacesRoofArea;
+
+		NUMdivExteriorAreas.innerHTML =
+			'<button style=width:8rem; onclick=GBV.showBySurfaceTypeArray(["ExteriorWall","Roof"]); >Exterior surfaces</button> area: ' +
+			Math.round( tesa ).toLocaleString() + '<br>' +
+		'';
+
+	}
 
 
 	NUM.getOpenings = function() {
@@ -290,43 +301,29 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			let shapeMesh = new THREE.Mesh( geometryShape, material );
 			shapeMesh.lookAt( triangle.normal ); // quaternion.copy( obj.quaternion );
 			shapeMesh.position.copy( triangle.normal.multiplyScalar( - triangle.constant ) );
+			shapeMesh.userData.data = opening;
 
 			NUM.openingMeshes.add( shapeMesh );
 
 		}
 
+		NUM.openingMeshes.name = 'openingMeshes';
+
 		THR.scene.add( NUM.openingMeshes );
 		//console.log( 'NUM.openingMeshes', NUM.openingMeshes );
 
-	}
-
-
-
-	NUM.setOpeningsText = function() {
-
 		const wwr = 100 * NUM.openingsArea / NUM.surfacesExteriorWallArea;
 
-		tesa =
-			NUM.surfacesExteriorWallArea + NUM.surfacesRoofArea;
-
-		const surfaceTypes = ["ExteriorWall","Roof"];
-
-		NUMdivExteriorAreas.innerHTML =
-		'<div><b>Exterior Areas</b><div>' +
-			'<button onclick=GBV.showBySurfaceTypeArray(["ExteriorWall","Roof"]); >Exterior surfaces</button> area: ' + tesa.toLocaleString() + '<br>' +
-		'';
+		//const surfaceTypes = ["ExteriorWall","Roof"];
 
 		NUMdivOpenings.innerHTML =
 
-			'<div><b>Openings</b></div>' +
-			//			'Exterior Wall Surfaces: ' + NUM.surfacesExteriorWall.length + '<br>' +
-			//			'Exterior Wall Surfaces with Openings: ' + NUM.SurfacesWithOpenings.length + '<br>' +
+			'<button style=width:8rem; onclick=GBV.showBySurfaceTypeArray(["ExteriorWall"]); >Exterior Wall</button> area: ' +
+			Math.round( NUM.surfacesExteriorWallArea ).toLocaleString() + '<br>' +
 
-			//			'Underground Wall Area: ' + NUM.undergroundWallArea.toLocaleString() + '<br>' +
-
-			'<button onclick=GBV.showBySurfaceTypeArray(["ExteriorWall"]); >Exterior Wall</button> area: ' + NUM.surfacesExteriorWallArea.toLocaleString() + '<br>' +
 			'Openings: ' + NUM.openings.length + '<br>' +
-			'<button onclick=NUM.openingMeshes.visible=!NUM.openingMeshes.visible >Openings Toggle</button> area: ' + NUM.openingsArea.toLocaleString() + '<br>' +
+			'<button style=width:8rem; onclick=NUM.openingMeshes.visible=!NUM.openingMeshes.visible >Openings Toggle</button> area: ' +
+			Math.round( NUM.openingsArea ).toLocaleString() + '<br>' +
 
 			'Window to Wall Ratio: ' + wwr.toLocaleString() + '%<br>' +
 			'<small>Clickable openings on the way</small>'
@@ -447,7 +444,25 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	NUM.getOrientations = function(){
 
 		const surfaces = GBX.surfaceJson.filter( element => element.surfaceType === 'ExteriorWall' );
-		let oriented = { n: [], ne: [], e: [], se: [], s: [], sw: [], w: [], nw: []};
+		oriented = {
+			North: { items: [], openings: [], color: 'Blue' },
+			NorthEast: { items:[], openings: [], color: 'Magenta' },
+			East: { items:[], openings: [], color: 'DarkOrange' },
+			SouthEast: { items:[], openings: [], color: 'OrangeRed' },
+			South: { items:[], openings: [], color: 'Red' },
+			SouthWest: { items:[], openings: [], color: 'Salmon' },
+			West: { items:[], openings: [], color: 'Chocolate' },
+			NorthWest: { items:[], openings: [], color: 'Gold' }
+		};
+
+		keys = Object.keys( oriented );
+		//console.log( 'keys', keys );
+
+		for ( let key of keys ) {
+
+			oriented[ key ].material = new THREE.MeshBasicMaterial( { color: oriented[ key ].color.toLowerCase(), side: 2 } );
+
+		}
 
 		for ( surface of surfaces ) {
 			//console.log( 'undergroundWall', undergroundWall.PlanarGeometry.PolyLoop );
@@ -458,78 +473,150 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			const triangle = NUM.getTriangle( points );
 			//console.log( 'normal', triangle.normal );
 
+			if ( !triangle ) { console.log( 'error', surface ); continue; }
 			angle = Math.atan2( triangle.normal.y, triangle.normal.x) * 180 / Math.PI + 180;
 			//console.log( 'angle', angle );
+
 
 			const wall = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === surface.id );
 
 			if ( angle < 22.5 && angle >= 0 || angle > 337.5 && angle < 360 ) {
 
-				wall.material = new THREE.MeshBasicMaterial( { color: 0x00ff00, side: 2 } );
-				oriented.e.push( wall );
+				wall.material = oriented.East.material
+				oriented.East.items.push( wall );
 
 			} else if ( angle >= 22.5 && angle < 67.5) {
 
-				wall.material = new THREE.MeshBasicMaterial( { color: 0xffff00, side: 2 } );
-				oriented.se.push( wall );
+				wall.material = oriented.SouthEast.material
+				oriented.SouthEast.items.push( wall );
 
 			} else if ( angle >= 67.7 && angle < 112.5 ) {
 
-				wall.material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
-				oriented.s.push( wall );
+				wall.material = oriented.South.material
+				oriented.South.items.push( wall );
 
 			} else if ( angle >= 112.5 && angle < 157.5 ) {
 
-				wall.material = new THREE.MeshBasicMaterial( { color: 0x00ffff, side: 2 } );
-				oriented.sw.push( wall );
+				wall.material = oriented.SouthWest.material
+				oriented.SouthWest.items.push( wall );
 
 			} else if ( angle >= 157.5 && angle < 202.5 ) {
 
-				wall.material = new THREE.MeshBasicMaterial( { color: 0x0000ff, side: 2 } );
-				oriented.w.push( wall );
+				wall.material = oriented.West.material
+				oriented.West.items.push( wall );
 
 			} else if ( angle >= 202.5 && angle < 247.5 ) {
 
-				wall.material = new THREE.MeshBasicMaterial( { color: 0xff0000, side: 2 } );
-				oriented.nw.push( wall );
+				wall.material = oriented.NorthWest.material
+				oriented.NorthWest.items.push( wall );
 
 			}	else if ( angle >= 247.5 && angle < 292.5 ) {
 
-					wall.material = new THREE.MeshBasicMaterial( { color: 0xffffff, side: 2 } );
-					oriented.n.push( wall );
+				wall.material = oriented.North.material
+				oriented.North.items.push( wall );
 
 			} else {  // > 292 && < 337.5
 
-				wall.material = new THREE.MeshBasicMaterial( { color: 0xff00ff, side: 2 } );
-				oriented.ne.push( wall );
+				wall.material = oriented.NorthEast.material
+				oriented.NorthEast.items.push( wall );
+
+			}
+
+		}
+
+		for ( opening of NUM.openings ) {
+			//console.log( 'opening', opening );
+
+			const points = opening.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
+			//console.log( 'points', points );
+
+			const triangle = NUM.getTriangle( points );
+			//console.log( 'normal', triangle.normal );
+			if ( !triangle ) { console.log( 'error', surface ); continue; }
+
+			angle = Math.atan2( triangle.normal.y, triangle.normal.x) * 180 / Math.PI + 180;
+			//console.log( 'angle', angle );
+
+			const openingMesh = NUM.openingMeshes.children.find( ( element ) => element.userData.data.id === opening.id );
+
+			if ( angle < 22.5 && angle >= 0 || angle > 337.5 && angle < 360 ) {
+
+				oriented.East.openings.push( openingMesh );
+
+			} else if ( angle >= 22.5 && angle < 67.5) {
+
+				oriented.SouthEast.openings.push( openingMesh );
+
+			} else if ( angle >= 67.7 && angle < 112.5 ) {
+
+				oriented.South.openings.push( openingMesh );
+
+			} else if ( angle >= 112.5 && angle < 157.5 ) {
+
+				oriented.SouthWest.openings.push( openingMesh );
+
+			} else if ( angle >= 157.5 && angle < 202.5 ) {
+
+				oriented.West.openings.push( openingMesh );
+
+			} else if ( angle >= 202.5 && angle < 247.5 ) {
+
+				oriented.NorthWest.openings.push( openingMesh );
+
+			}	else if ( angle >= 247.5 && angle < 292.5 ) {
+
+				oriented.North.openings.push( openingMesh );
+
+			} else {  // > 292 && < 337.5
+
+				oriented.NorthEast.openings.push( openingMesh );
 
 			}
 
 		}
 
 
-		NUMdivOrientation.innerHTML =
+		txt = '';
 
-		'<div><b>Orientation</b></div>' +
-			'<button style=background-color:white; >North</button> items: ' + oriented.n.length + '<br>' +
-			'<button style=background-color:#f0f; >North East</button> items: ' + oriented.ne.length + '<br>' +
-			'<button style=background-color:blue; >East</button> items: ' + oriented.e.length + '<br>' +
-			'<button style=background-color:#ff0; >South East</button> items: ' + oriented.se.length + '<br>' +
-			'<button style=background-color:black;colo:white; >South</button> items: ' + oriented.s.length + '<br>' +
-			'<button style=background-color:#0ff; >South West</button> items: ' + oriented.sw.length + '<br>' +
-			'<button style=background-color:green; >West</button> items: ' + oriented.w.length + '<br>' +
-			'<button style=background-color:#f00; >North West</button> items: ' + oriented.nw.length + '<br>' +
-			'Colors a bit messed up. No areas yet. All to be fixed'
-			'<hr>' +
-			'Time: ' + ( Date.now() - NUM.timeStart ) + '<br>' +
-		''
+		for ( let key of keys ) {
+
+			oriented[ key ].areaWalls = NUM.getSurfacesAreaByArrayOfSurfaces( oriented[ key ].items );
+			oriented[ key ].areaOpenings = NUM.getSurfacesAreaByArrayOfSurfaces( oriented[ key ].openings );
+
+			if ( oriented[ key ].openings.length > 0 ) {
+
+				num = 'wwr: ' + Math.round( 100 * oriented[ key ].areaOpenings / oriented[ key ].areaWalls ).toLocaleString() + '%';
+
+			} else {
+
+				num = '';
+
+			}
+
+			txt += '<button onclick=NUM.showSurfacesInArray("' + key + '"); style=width:5rem;background-color:' + oriented[ key ].color + '; >' + key +
+			'</button> wall:' + Math.round(oriented[ key ].areaWalls).toLocaleString() +
+			' open:' + Math.round(oriented[ key ].areaOpenings).toLocaleString() +
+			' ' + num + '<br>';
+		}
+
+		NUMdivOrientation.innerHTML = txt
+
 	}
 
 
 
+	NUM.showSurfacesInArray = function ( key ) {
+
+		surfaces = oriented[ key ].items
+		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
+		surfaces.forEach( element => element.visible = true );
+
+	};
+
+
 	NUM.hideOpenings = function() {
 
-		NUM.openingMeshes.visible = false;
+		if ( NUM.openingMeshes ) { NUM.openingMeshes.visible = false; }
 
 	}
 

@@ -4,57 +4,36 @@
 /* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
 
 	:root {
-
-		--body-color: DarkBlue;
-
 		--a-color: Salmon;
-		--a-color-hover: #888;
-		--a-back-color-hover: yellow;
-
-		--i-color: blue;
-
 		--mnu-color: DarkBlue;
 		--mnu-back-color: Gold;
-
-		--mnu-header-color: white;
-		--mnu-header-back-color: #87cefa;
-
-		--mnu-a-color: Salmon;
-
-		--but-color:lightBlue;
-		--but-color-hover:white;
-		--but-back-color:#888;
-		--but-back-color-hover:Salmon;
-
-		--summary-color: #999;
+		--mnu-header-color: #87cefa;
+		--mnu-left-width: 350px;
+		--mnu-right-width: 400px;
+		--but-bg-color: LightCoral;
 		--highlight-color: SpringGreen;
-
-		--mnu-left-width: 23rem;
-		--mnu-right-width: 25rem;
-
 	}
 
 	html { height: 100%; }
 
-	body, html { color: var( --body-color ); font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
+	body, html { color: DarkBlue; font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
 
 	a { color: var( --a-color ); text-decoration: none; }
-	a:hover, a:focus, #divHamburger:hover { background-color: var( --a-back-color-hover ); color:var( --a-color-hover ); }
+	a:hover, a:focus, #divHamburger:hover { background-color: yellow; color: #8888; }
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
 
-	button, input[ type=button ] { background-color: var( --but-back-color ); border: none; color: var( --but-color );
-		cursor: pointer; margin: 2px; padding: 3px 5px; }
-	button:hover, button:focus { background-color: var( --but-back-color-hover ); color: var( --but-color-hover ) }
+	button, input[ type=button ] { background-color: #888; border: none; color: lightBlue; cursor: pointer; margin: 2px; padding: 3px 10px; }
+	button:hover, button:focus { color: white }
 
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
 
-	i { color: var( --i-color ) }
+	i { color: blue; }
 
-	summary { color: var( --summary-color ); font-weight: bold; }
+	summary { color: #999; font-weight: bold; }
 
 	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
 
@@ -69,20 +48,19 @@
 	.highlight { background-color: var( --highlight-color ) }
 
 	#divContainer { background-color: white; border: 1px solid #aaa; border-radius: 2px; display: none; height: 80%;
-		 left: calc( 100% - 47rem );
-		margin: 0; width: 40rem;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px;
+		 left: calc( 100% - 650px );
+		margin: 0; width: 600px;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px;
 	}
 	#divContainer  {
 		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	}
 
-	#divContentsHeader {background-color: var( --mnu-header-back-color ); color: var( --mnu-header-color ); cursor: move; padding: 10px; z-index: 10;}
+	#divContentsHeader {background-color: var( --mnu-header-color ); color: #fff; cursor: move; padding: 10px; z-index: 10;}
 
 	#divContents { margin: 10px; }
 	#divContents iframe { display: none; }
 
-	#divHamburger { background-color: var( --highlight-color ); box-sizing: border-box; border-radius: 2px; cursor: pointer;
-		font-size: 30px; left: calc( var( --mnu-left-width ) - 100px );
+	#divHamburger { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer; font-size: 30px; left: calc( var( --mnu-left-width ) - 100px );
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
 	#divHamburger {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -95,32 +73,32 @@
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	}
 
-	#divMenu a { color: var( --mnu-a-color ); text-decoration: none; }
+	#divMenu a { color: var( --a-color ); text-decoration: none; }
 	#divMenu h2 { margin: 5px 0; }
 
-	#divMenuHeader { background-color: var( --mnu-header-back-color );  color: var( --mnu-header-color ); cursor: move; padding: 10px; }
+	#divMenuHeader { background-color: var( --mnu-header-color ); cursor: move; padding: 10px; }
 	#divMenuContents { padding: 10px; }
 
 	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 40%; }
 
 
-	#divHamburgerRight { background-color: var( --highlight-color ); box-sizing: border-box; border-radius: 2px; cursor: pointer;
+	#divHamburgerRight { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer;
 		display: none; font-size: 30px; left: calc( 100% - var( --mnu-right-width ) - 70px );
-		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 50px; transition: left .5s; z-index: 10; }
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 50px; transition: left .5s; z-index: 20; }
 	#divHamburgerRight {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	}
 
-	#divHeadsUpHeader {
-		background-color: var( --mnu-header-back-color ); color: var( --mnu-header-color ); cursor: move; padding: 10px;
-	}
 	#divHeadsUp {
 		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - var( --mnu-right-width ) - 20px );
 		max-height: 97%; min-height: 100px; opacity: 0.95; overflow: auto;
-		 position: fixed; resize: both; top: 10px; width: var( --mnu-right-width ); transition: .5s; z-index: 1;
+		 position: fixed; resize: both; top: 10px; width: var( --mnu-right-width ); transition: .5s;
 	}
 	#divHeadsUp {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	}
+	#divHeadsUpHeader {
+		background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px;
 	}
 
 	#divHUDheader { padding: 0 10px 0 10px; }
