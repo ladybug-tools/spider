@@ -23,7 +23,21 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-03-23 ~ R12.8</summary>
+<summary>Welcome 2018-03-25 ~ R12.10</summary>
+
+R12.10
+COR / Core Modules
+* Simplify slider code
+	* sticks to side
+	* Should work better on a phone
+* Update core.html so shows all three windows
+	* Follows APP menu more closely
+CSS
+* Works with new slider code
+* Various ID name changes
+
+
+
 
 R12.9
 CSS
