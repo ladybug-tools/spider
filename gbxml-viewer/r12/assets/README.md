@@ -2,7 +2,9 @@
 
 # R12 gbXML Viewer Assets Read Me
 
+[Style Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/r12/assets/style-viewer.html )
 
+[Style Viewer Source ]( https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r12/assets/style-viewer.html )
 
 ## Concept
 
@@ -22,6 +24,13 @@ Style sheets, images and similar project assets
 
 
 ## Change Log
+
+### 2018-03-25 ~ Theo
+
+CSS
+* Works with new slider code
+* Various ID name changes
+* Add  Viewer Style script
 
 ### 2018-03-23 ~ Theo
 

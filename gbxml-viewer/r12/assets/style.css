@@ -81,16 +81,17 @@
 	#divContents { margin: 10px; }
 	#divContents iframe { display: none; }
 
-	#divHamburger { background-color: var( --highlight-color ); box-sizing: border-box; border-radius: 2px; cursor: pointer;
-		font-size: 30px; left: calc( var( --mnu-left-width ) - 100px );
+	#divHamburgerLeft { background-color: var( --highlight-color ); box-sizing: border-box; border-radius: 2px; cursor: pointer;
+		font-size: 30px; left: 0;
+		/*left: calc( var( --mnu-left-width ) - 100px ); */
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
-	#divHamburger {
+	#divHamburgerLeft {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	}
 
-	#divMenu { background-color: var( --mnu-back-color ); border-radius: 2px; box-sizing: border-box; left: 20px; margin: 0; max-height: 98%;
-		overflow: auto; position: fixed; top: 10px; resize: both; width: var( --mnu-left-width ); z-index: 1;
-		transition: .5s;}
+	#divMenu { background-color: var( --mnu-back-color ); border-radius: 2px; box-sizing: border-box; left: 2rem;
+		margin: 0; max-height: 98%; overflow: auto; position: fixed; top: 10px; resize: both; width: var( --mnu-left-width );
+		transition: .5s;  z-index: 1; }
 	#divMenu {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	}
@@ -105,7 +106,10 @@
 
 
 	#divHamburgerRight { background-color: var( --highlight-color ); box-sizing: border-box; border-radius: 2px; cursor: pointer;
-		display: none; font-size: 30px; left: calc( 100% - var( --mnu-right-width ) - 70px );
+		display: none; font-size: 30px;
+
+		/* left: calc( 100% - var( --mnu-right-width ) - 70px ); */
+		right: 0;
 		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 50px; transition: left .5s; z-index: 10; }
 	#divHamburgerRight {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -122,8 +126,11 @@
 	#divHeadsUp {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	}
+	#divHeadsUp div.mnuRightDiv { padding: 0 10px 0 10px; }
 
+	/*
 	#divHUDheader { padding: 0 10px 0 10px; }
 	#divHUDItems { padding: 0 10px 0 10px; }
 	#divHUDfooter { padding: 0 10px 0 10px; }
+	*/
 

@@ -1,17 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html##https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r11/gv-cor/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html##https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r12/gv-cor/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer Core Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+# R12 gbXML Viewer Core Read Me
 
 
-## Full screen: [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cor/gv-cor.html )
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-cor/gv-cor.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
-Use and share these links for gbXML Viewer:
 
-* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
-* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
+## Full screen: [gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-cor/gv-cor.html )
 
 
 ## Concept
@@ -43,6 +38,16 @@ needs combining with this read me
 
 
 ## Change Log
+
+
+### 2018-03-25 ~ Theo
+
+* Simplify slider code
+	* sticks to side
+	* Should work better on a phone
+* Update core.html so shows all three windows
+	* Follows APP menu more closely
+
 
 ### 2018-03-08 ~ Theo
 

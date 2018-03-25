@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-24" >
-<title>gbXML Viewer 12.9</title>
+<meta name = "date" content = "2018-03-25" >
+<title>gbXML Viewer 12.10</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 </head>
 <body>
@@ -23,7 +23,7 @@
 
 	<div id = "divMenu" >
 
-		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" >
+		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!"  style=text-align:right; >
 
 			left menu / click to move
 
@@ -200,10 +200,10 @@
 	</div>
 
 
-	<div id = "divHamburger" onclick=COR.toggleNav(); > slide &#9776; </div>
+	<div id = "divHamburgerLeft" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
 
 
-	<div id = "divMenuInWorld" title="This is called the 'in-world menu'">
+	<div id = "divMenuInWorld" title="This is called the 'in-world menu'" >
 
 			<div id = "divTitle" ></div>
 
@@ -247,9 +247,9 @@
 			-->
 		</div>
 
-		<div id=divHUDheader ></div>
-		<div id=divHUDItems ></div>
-		<div id=divHUDfooter ></div>
+		<div id=divHUDheader class=mnuRightDiv ></div>
+		<div id=divHUDItems class=mnuRightDiv ></div>
+		<div id=divHUDfooter class=mnuRightDiv ></div>
 
 	</div>
 
@@ -300,8 +300,6 @@
 
 	function onloadThreejs() {
 
-
-
 		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
 		if ( GBX.gbxmlResponseXML.URL.includes( 'bristol-clifton-down-road' ) ) {
@@ -342,6 +340,8 @@
 		SAV.getUpdates();
 
 	};
+
+
 
 	APP.resetMenu = function () {
 

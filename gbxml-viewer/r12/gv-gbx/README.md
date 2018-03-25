@@ -1,21 +1,17 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r11/gv-gbx/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-gbx/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer gbXML Utilities Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-gbx/gv-gbx.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+# R12 gbXML Viewer gbXML Utilities Read Me
 
 
-## Full screen test script: [gbXML Viewer gbXML Utilities]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-gbx/gv-gbx.html )
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-gbx/gv-gbx.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
-Use and share these links for the full gbXML Viewer:
 
-* Stable release: <http://www.ladybug.tools/spider/gbxml-viewer/>
-* Pre-release: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
+## Full screen test script: [gbXML Viewer gbXML Utilities]( http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-gbx/gv-gbx.html )
 
 ## Concept
 
-
+* The script the parses gbXML files and translates into "gbJSON" and Three.js 3 meshes
+* Requires COR, HUD
 
 ## Wish list
 
@@ -30,6 +26,8 @@ Use and share these links for the full gbXML Viewer:
 
 
 ## Change Log
+
+
 
 
 ### 2018-03-06 ~ Theo

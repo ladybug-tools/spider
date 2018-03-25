@@ -12,81 +12,6 @@
 	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
 	COR.uriDefaultFile = '../assets/splash-screen.md'; // maybe should be in APP?
 
-	/*
-	COR.menuBreadcrumbs =
-
-	`<div>
-		<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
-		<a href="http://www.ladybug.tools/spider/" target="_top" > &#x1f578;</a> &raquo;
-		<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
-	</div>`;
-
-	COR.menuTitle =
-
-	`<h2>
-		<a href="` + COR.releaseSourceURL + `" target=_top >
-			<img src=` + COR.iconGitHubMark + ` height=18 style=opacity:0.3; ></a>
-			<a href="" >` + document.title +`</a>
-	</h2>`;
-
-	COR.menuDescription =
-
-	`<div title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>` +
-		document.head.querySelector( '[name=description]' ).content +
-	`</small></div>`;
-
-	COR.menuFileOpening =
-
-	`<p id=dragArea class=dragDropArea >
-		Drag & drop a file in this box<br>
-		or <input type=file id=inpFile onchange=COR.openFile(this); accept=".xml" ><br>
-		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
-		<br>
-	<p>`;
-
-	COR.menuFooter =
-	`<details open >
-
-		<summary>footer</summary>
-
-		<div title='' ><a href=#../../../pages/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
-		<div title='' ><a href=#./splash-screen.md >Introduction/ splash screen</a></div>
-		<div title='' ><a href=#../../README.md >Viewer Read Me</a></div>
-		<div title='' ><a href=#../README.md >Release Read Me</a></div>
-		<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
-		<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
-		<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
-		<div><a href=#../../../pages/contributing.md >Contributing</a></div>
-		<div><a href=#../../../pages/license.md >Copyright & License</a></div>
-		<div><a href=http://www.ladybug.tools/spider/gbxml-user-guide/gbxml-user-guide.html >gbXML Schema User Guide</a></div>
-		<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
-		<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
-		<!--
-		<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
-		-->
-		<hr>
-		<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
-			title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
-
-	</details>`;
-
-	// unicode spider web &#x1f578;
-
-	COR.gbxmlSampleFiles =
-	`
-		<div><a href="#../../gbxml-sample-files/annapolis-md-single-family-residential-2016.xml" >gbxml standard single family residential 2016</a></div>
-		<div><a href="#../../gbxml-sample-files/aspen-co-resort-retail.xml" >aspen-co-resort-retail.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/boston-ma-urban-house-mep.xml" >boston-ma-urban-house-mep.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/bristol-clifton-down-road.xml" >bristol-clifton-down-road.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml" >columbia-sc-two-story-education-trane</a></div>
-		<div><a href="#../../gbxml-sample-files/coventry-university-of-warwick.xml" >coventry-university-of-warwick.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/golden-co-open-studio-seb.xml" >golden-co-open-studio-seb.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/london-office.xml" >london-office.xml</a></div>
-		<div><a href="#../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
-
-	`;
-
-*/
 
 	COR.initCore = function() {
 
@@ -124,7 +49,6 @@
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 		COR.timeStart = Date.now();
-
 
 	}
 
@@ -202,16 +126,16 @@
 	}
 
 
-		// handle callbacks with file data events
+	// handle callbacks with file data events
 
-		function callbackMarkdown( xhr ){
+	function callbackMarkdown( xhr ){
 
 			showdown.setFlavor('github');
 			const converter = new showdown.Converter();
 			//const response = xhr.target.response;
 			const html = converter.makeHtml( xhr.target.responseText );
 
-//			divContainer.innerHTML = '<div id=divContents >' + html + '</div>';
+			//			divContainer.innerHTML = '<div id=divContents >' + html + '</div>';
 			divContents.innerHTML = html;
 			divContainer.style.display = 'block';
 			window.scrollTo( 0, 0 );
@@ -401,21 +325,19 @@
 	};
 
 
-	COR.toggleNav = function() {
+	COR.toggleNavLeft = function() {
 
-		const left = 'calc( var( --mnu-left-width ) - 100px )';
+		divContainer.style.display = 'none';
 
-		divContainer.style.display="none";
+		if ( divHamburgerLeft.style.left === '' || divHamburgerLeft.style.left === '0px' ) {
 
-		if ( divHamburger.style.left === '' || divHamburger.style.left === left ) {
-
-			divMenu.style.left = 'calc( -1 * var( --mnu-left-width ) - 20px )';
-			divHamburger.style.left = '-100px';
+			divMenu.style.left = 'calc( -2rem  - var( --mnu-left-width ) )';
+			divHamburgerLeft.style.left = '-6rem';
 
 		} else {
 
-			divMenu.style.left = 0;
-			divHamburger.style.left = left;
+			divMenu.style.left = '2rem';
+			divHamburgerLeft.style.left = 0;
 
 		}
 
@@ -424,27 +346,21 @@
 
 	COR.toggleNavRight = function() {
 
-		menuRightWidth = divHeadsUp.style.width ? divHeadsUp.style.width.slice( 0, -2 ) : '420' ;
-		menuRightLeft = ( window.innerWidth - menuRightWidth - 20 ) + 'px';
+		const menuRightWidth = divHeadsUp.style.width ? divHeadsUp.style.width.slice( 0, -2 ) : '420' ;
+		const menuRightLeft = ( window.innerWidth - menuRightWidth - 20 ) + 'px';
 		//console.log( 'menuRightLeft', menuRightLeft );
-
-
-		left = ( window.innerWidth ) - 470 + 'px'; // calc( 100% - var( --mnu-right-width ) - 100px )';
-		leftMenu =  ( window.innerWidth ) - 450 + 'px';
-		//divHeadsUp.style.width = 'var( --mnu-right-width )';
 
 		divContainer.style.display = "none";
 
-		if ( divHamburgerRight.style.left === '' || divHamburgerRight.style.left === left ) {
+		if ( divHamburgerRight.style.backgroundColor === '' ) {
 
-			//divHeadsUp.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
-			divHamburgerRight.style.left = 'calc( 100% - 50px )';
+			divHamburgerRight.style.backgroundColor = 'yellow';
 			divHeadsUp.style.left = '100%';
 
 		} else {
 
-			divHamburgerRight.style.left = left; // 'calc( 100% - var( --mnu-right-width ) - 100px )';
-			divHeadsUp.style.left = menuRightLeft; // 'calc( 100% - var( --mnu-right-width ) - 70px )';
+			divHamburgerRight.style.backgroundColor = '';
+			divHeadsUp.style.left = menuRightLeft;
 
 		}
 

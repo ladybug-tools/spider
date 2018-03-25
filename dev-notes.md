@@ -7,15 +7,16 @@
 404 Page with 3D Spider
 * Spider body made by editing a plane geometry - stretching and flattening spheres
 
-Coming soon
+Coming soon to gbXML Viewer
 
+R13
 buttons stick to side
-bounding box
-Northpoint
-signage
+NUM bounding box
+SET Northpoint
+SET? signage
 Solar Access going
-Screen Cap
-Explore modules
+CAP Screen Cap
+EXP Explore modules
 gltf?
 
 
