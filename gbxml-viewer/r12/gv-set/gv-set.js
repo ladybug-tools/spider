@@ -296,7 +296,7 @@
 
 				child.castShadow = !child.castShadow;
 				child.receiveShadow = !child.receiveShadow;
-				//				child.material.needsUpdate = true;
+				child.material.needsUpdate = true;
 
 				//			}
 

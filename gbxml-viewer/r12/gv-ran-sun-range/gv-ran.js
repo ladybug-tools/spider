@@ -37,6 +37,7 @@
 
 	var lightDirectional;
 	var lightPointCamera;
+	var lightPoint;
 	var cameraHelper;
 //	var structures;
 //	var ground;
@@ -49,8 +50,8 @@
 //	var sunHelpers = [];
 
 	var lights;
-	var sunRangeLightIntensity = 0.6;
-	var lightAmbientIntensity = 100;
+	var sunRangeLightIntensity = 0.5;
+	var lightAmbientIntensity = 30;
 
 	var count = 0;
 	var menuItems = `
@@ -91,29 +92,49 @@
 
 `;
 
+	var RAN = {};
 
 	init();
 
 	function init() {
 
-		if ( butSunRange.style.backgroundColor !== 'pink' ) {
+		if ( window.butMenuLoad ) {
+
+			RAN.butMenuSunRange = butMenuLoad;
+
+			RAN.title = 'gv-RAN - gbXML Viewer Sun Range';;
+			document.title = RAN.title;
+			aDocumentTitle.innerHTML = RAN.title;
+			RAN.butMenuSunRange.innerHTML = RAN.title;
+
+		} else {
+
+			RAN.butMenuSunRange = butMenuTemplate;
+
+		}
+
+
+		const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+		scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+
+		if ( RAN.butMenuSunRange.style.backgroundColor !== 'var( --but-back-color )' ) {
+
 
 			divMenuItems.innerHTML = menuItems + divMenuItems.innerHTML;
 
-			icw = ifrThree.contentWindow;
-			THREE = icw.THREE;
-			renderer = icw.renderer;
-			scene = icw.scene;
-			camera = icw.camera;
-			controls = icw.controls;
 
-			lightDirectional = icw.lightDirectional;
-			lightAmbient = icw.lightAmbient;
-			cameraHelper = icw.cameraHelper;
+			renderer = THR.renderer;
+			scene = THR.scene;
+			camera = THR.camera;
+			controls = THR.controls;
 
-			surfaceMeshes = icw.surfaceMeshes;
+			lightDirectional = THR.lightDirectional;
+			lightAmbient = THR.lightAmbient;
+			cameraHelper = THR.cameraHelper;
 
-			gbjson = icw.gbjson;
+			surfaceMeshes = GBX.surfaceMeshes;
+
+			gbjson = GBX.gbjson;
 			parameters.latitude = gbjson.Campus.Location.Latitude
 			parameters.longitude = gbjson.Campus.Location.Longitude;
 
@@ -134,15 +155,19 @@
 // following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
-			butSunRange.style.backgroundColor = 'pink';
+			RAN.butMenuSunRange.style.backgroundColor = 'var( --but-back-color )';
 
 		} else {
 
 			detSunRange.remove();
 
-			butSunRange.style.backgroundColor = '';
+			RAN.butMenuSunRange.style.backgroundColor = '';
 
 		}
+
+		divContainer.style.display = 'none';
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
 
 	}
 
@@ -263,10 +288,10 @@
 
 		}
 
-		analemma.position.copy( icw.axesHelper.position.clone() );
+		analemma.position.copy( THR.axesHelper.position.clone() );
 
-		scene.remove( analemma );
-		scene.add( analemma );
+		THR.scene.remove( analemma );
+		THR.scene.add( analemma );
 
 	}
 
@@ -274,14 +299,14 @@
 
 	function drawSunRange() {
 
-		var sun, sunHelper, dateThere, d;
+		//var sun, sunHelper, dateThere, d;
 		let geometry, material, mesh;
 
-		scene.remove( lightDirectional, lightAmbient );
+		scene.remove( lightDirectional, lightAmbient, lightPoint );
 		scene.remove( lights );
 
 		scene.remove( lights );
-		camera.remove( lightPointCamera );
+		camera.remove( lightPoint, lightPointCamera );
 
 		lights = new THREE.Object3D();
 
@@ -315,9 +340,9 @@
 
 		lightAmbient = new THREE.AmbientLight();
 		c = par.lightAmbientColor;
-		lightAmbient.color = new THREE.Color( 'rgb( ' + c + ',' + c + ',' + c + ' )' );
-
-		lights.add( lightAmbient );
+		//lightAmbient.color = new THREE.Color( 'rgb( ' + c + ',' + c + ',' + c + ' )' );
+		//lightAmbient.color = new THREE.Color( 'white' );
+		//lights.add( lightAmbient );
 
 		suns = []; //new THREE.Object3D();
 
@@ -339,7 +364,7 @@
 
 			sun.castShadow = true;
 
-//			sun.target = ground;
+			sun.target = THR.axesHelper;
 
 //			scene.add( new THREE.CameraHelper( sun.shadow.camera ) );
 
@@ -350,17 +375,17 @@
 
 			lights.add( sun );
 			suns.push( sun );
-/*
-			if ( par.sunRangeHelpers === 1 ) {
 
-				sunHelper = new THREE.CameraHelper( sun.shadow.camera );
-				suns.add( sunHelper );
+			//			if ( par.sunRangeHelpers === 1 ) {
 
-			}
+				//sunHelper = new THREE.CameraHelper( sun.shadow.camera );
+				//suns.push( sunHelper );
 
-*/
+			//			}
 
-			par.year = 2017
+
+
+			par.year = 2018
 			par.month = inpMonth.value;
 			par.date = inpDate.value;
 			par.minutes = 0;
@@ -369,9 +394,9 @@
 
 			sun.userData.position = getSunPositionXYZ( parameters.analemmaRadius, dateThere, parameters.latitude, parameters.longitude );
 
-//console.log( 'sun.userData.position', sun.userData.position);
+			//console.log( 'sun.userData.position', sun.userData.position);
 
-			sun.position.copy( icw.axesHelper.position.clone().add( sun.userData.position.xyz )  );
+			sun.position.copy( THR.axesHelper.position.clone().add( sun.userData.position.xyz )  );
 
 			if ( par.sunRangePlacards === 1 ) {
 
@@ -389,6 +414,31 @@
 
 		scene.add( lights );
 
+		let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
+
+		if ( meshGroundHelper ) {
+			meshGroundHelper.receiveShadow = true;
+			meshGroundHelper.material.color.set( 0xffffff );
+			meshGroundHelper.material.needsUpdate = true;
+		}
+		THR.renderer.shadowMap.enabled = true;
+
+		//THR.scene.traverse( function ( child ) {
+
+				//if ( child.material ) {
+
+		for ( surface of GBX.surfaceMeshes.children ) {
+
+//				child.castShadow = true
+//				child.receiveShadow = true
+				surface.material.color.set( 0xffffff );
+
+				surface.material.needsUpdate = true;
+
+			}
+
+		//} );
+
 	}
 
 
@@ -397,15 +447,15 @@
 
 	function setMonth() {
 
-//		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
+		//		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return; }
 
-//		parameters.month = parseInt( inpMonth.value, 10 );
+		//		parameters.month = parseInt( inpMonth.value, 10 );
 
 		outMonth.value = parseInt( inpMonth.value, 10 ) + 1;
 
 		drawSunRange();
 
-// console.log( '', parent.ifrMain.contentWindow.parameters.month );
+		// console.log( '', parent.ifrMain.contentWindow.parameters.month );
 
 	}
 
@@ -413,13 +463,13 @@
 
 	function setDate() {
 
-//		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return }
+		//		if ( !parent.ifrMain ) { alert( 'please enter a location' ); return }
 
 		outDate.value = parseInt( inpDate.value, 10 );
 
 		drawSunRange();
 
-// console.log( '', parent.ifrMain.contentWindow.parameters.date );
+		// console.log( '', parent.ifrMain.contentWindow.parameters.date );
 
 	}
 
@@ -445,7 +495,7 @@
 
 	function drawPlacard( text, scale, color, x, y, z ) {
 
-// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/functions/placards
+		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/functions/placards
 
 		let placard = new THREE.Object3D();
 		var texture = canvasMultilineText( text, { backgroundColor: color }   );
@@ -453,12 +503,12 @@
 		let sprite = new THREE.Sprite( spriteMaterial );
 		sprite.position.set( x * 1.1, y * 1.1, z * 1.1 ) ;
 		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
-/*
-		let geometry = new THREE.Geometry();
-		geometry.vertices = [ v( 0, 0, 0 ),  v( x, y, z ) ];
-		let material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
-		let line = new THREE.Line( geometry, material );
-*/
+		/*
+				let geometry = new THREE.Geometry();
+				geometry.vertices = [ v( 0, 0, 0 ),  v( x, y, z ) ];
+				let material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+				let line = new THREE.Line( geometry, material );
+		*/
 		placard.add( sprite /*,  line */ );
 
 		return placard;

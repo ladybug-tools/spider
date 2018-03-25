@@ -142,6 +142,11 @@
 					script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
 				sun-path / analemma</button>
 
+				<button id=butSunRange class=app-menu onclick="
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-ran-sun-range/gv-ran.js'; " title='Let many Suns into you life' >
+				sun-range</button>
+
 
 				<button id=butModuleExplorer class=app-menu onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -156,14 +161,8 @@
 				</button>
 
 
-				<!--
-				<button id=butSunRange class=app-menu onclick="
-				const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-				scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-				const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gbxml-viewer9-09-sun-range/gbxml-viewer9-sun-range.js'; " >
-				sun-range</button>
 
+				<!--
 				<button id=butScreenCapture class=app-menu onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
@@ -279,7 +278,6 @@
 
 		GBX.defaultURL = parent.inpFilePath.value ? parent.inpFilePath.value : GBX.defaultURL; // for testing
 
-
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 		const url = location.hash.slice( 1 );
@@ -320,6 +318,7 @@
 
 			let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
 			THR.scene.remove( meshGroundHelper );
+
 			let openings = THR.scene.getObjectByName( 'openingMeshes' );
 			THR.scene.remove( openings );
 
