@@ -104,9 +104,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		divContainer.style.display = 'none';
-		THR.controls.autoRotate = false;
-		THR.controls.keys = false;
 	};
 
 
@@ -207,7 +204,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			txt +=
 				' <button style=width:8rem; class=toggle onclick=GBV.showSurfaceType(this.innerText);NUM.hideOpenings(); >' + types[ i ] + '</button> area: ' +
-					Math.round( NUM.getSurfacesArea( types[ i ] ) ).toLocaleString() +
+				Math.round( NUM.getSurfacesArea( types[ i ] ) ).toLocaleString() +
 
 				'<br>';
 
@@ -232,12 +229,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	NUM.getExteriorAreas = function() {
 
-		const tesa = NUM.surfacesExteriorWallArea + NUM.surfacesRoofArea +
-		NUM.surfacesExposedFloorArea + NUM.surfacesSlabOnGradeArea + NUM.surfacesUndergroundSlabArea + NUM.surfacesUndergroundWallArea;
+		const tesa = NUM.surfacesExteriorWallArea + NUM.surfacesRoofArea;
 
-		// array of types must be embedded , use double quotes and have no spaces
 		NUMdivExteriorAreas.innerHTML =
-			'<button style=width:8rem; onclick=GBV.showBySurfaceTypeArray(["ExteriorWall","Roof","ExposedFloor","SlabOnGrade","UndergroundSlab","UndergroundWall"]); >Exterior surfaces</button> area: ' +
+			'<button style=width:8rem; onclick=GBV.showBySurfaceTypeArray(["ExteriorWall","Roof"]); >Exterior surfaces</button> area: ' +
 			Math.round( tesa ).toLocaleString() + '<br>' +
 		'';
 
