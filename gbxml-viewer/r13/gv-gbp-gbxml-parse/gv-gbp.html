@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
-<meta name = "description" content = "Core read, parse and display a gbXML file using Three.js" >
+<meta name = "description" content = "Core read, parse a gbXML file display using Three.js" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-03-26" >
 <title>gv-gbp gbXML Viewer gbXML Parser</title>
@@ -51,33 +51,17 @@
 
 	GBP.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
 	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//GBP.defaultURL = '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml';
 
 	THR.initThree();
 
 	THR.animate();
 
-	GBP.requestFile = function( url, callback ) {
 
-		const xhr = new XMLHttpRequest();
-		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', url, true );
-		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = onRequestFileProgress;
-		xhr.onload = callback;
-		xhr.send( null );
-
-		function onRequestFileProgress( xhr ) {
-
-			//console.log( 'xhr', xhr );
-
-			GBP.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
-			divLog.innerHTML = GBP.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
-
-		}
-
-	}
 
 	initGBP();
+
+
 
 	function initGBP() {
 
@@ -86,8 +70,9 @@
 		divTitle.innerHTML =
 		`
 			<h2>
-				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r12/" >gh
+				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/gv-gbp-gbxml-parse" >gh
 				</a>
+				||
 				<a  href = "" >` + document.title + `</a>
 			</h2>
 			<p>` + document.head.querySelector( '[name=description]' ).content + `</p>

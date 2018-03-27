@@ -9,6 +9,7 @@
 	GBP.surfaceJson = null;
 	GBP.surfaceMeshes;
 	GBP.surfaceEdges;
+	GBP.surfaceOpenings;
 
 	GBP.colorsDefault = {
 
@@ -33,6 +34,28 @@
 	GBP.colors = Object.assign({}, GBP.colorsDefault );
 
 	GBP.surfaceTypes  = Object.keys( GBP.colors );
+
+
+	GBP.requestFile = function( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+			//console.log( 'xhr', xhr );
+
+			GBP.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
+			divLog.innerHTML = GBP.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+
+		}
+
+	}
 
 
 
@@ -102,7 +125,7 @@
 
 		return GBP.gbjson;
 
-	}
+	};
 
 
 	// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
@@ -160,11 +183,11 @@
 
 		return data;
 
-	}
+	};
 
 
 
-	GBP.parseGbJson = function( gbjson ) {
+	GBP.parseGbJson = function() {
 
 		//console.log( 'surfaces', gbjson.Campus.Surface );
 
@@ -172,6 +195,7 @@
 		const polyloops = [];
 		const openings = [];
 
+		// fork into separate clean-up function
 		for ( let surface of surfaces ) {
 
 			if ( surface.Opening ) {
@@ -205,7 +229,6 @@
 			}
 
 			const polyloop = surface.PlanarGeometry.PolyLoop;
-
 			const points = GBP.getPoints( polyloop );
 
 			polyloops.push( points );
@@ -273,9 +296,11 @@
 
 		for ( let i = 0; i < polyloops.length; i++ ) {
 
-			const material = new THREE.MeshPhongMaterial( { color: GBP.colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+			const material = new THREE.MeshPhongMaterial( {
+				color: GBP.colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
 			const shape = GBP.drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
+
 			shape.userData.data = surfaces[ i ];
 			shape.castShadow = shape.receiveShadow = true;
 			GBP.surfaceMeshes.add( shape );
@@ -284,17 +309,13 @@
 			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
 			surfaceEdge.rotation.copy( shape.rotation );
 			surfaceEdge.position.copy( shape.position );
-			GBP.surfaceEdges.add( surfaceEdge );
+			GBP.surfaceEdges.add( surfaceEdge ); // or add to surfaces??
 
 		}
 
 		THR.scene.add( GBP.surfaceMeshes, GBP.surfaceEdges );
 
-
-
-		console.log( 'parseGbJson', Date.now() - timeStart );
-
-	}
+	};
 
 
 
@@ -318,7 +339,7 @@
 		vertices.map( vertex => obj.localToWorld( vertex ) );
 
 		const shape = new THREE.Shape( vertices );
-		shape.autoClose = true;
+		//shape.autoClose = true;
 
 		for ( let verticesHoles of holes ) {
 
@@ -334,6 +355,7 @@
 
 		const geometryShape = new THREE.ShapeGeometry( shape );
 
+		// material to here
 		const shapeMesh = new THREE.Mesh( geometryShape, material );
 
 		shapeMesh.lookAt( plane.normal );
@@ -344,62 +366,68 @@
 	};
 
 
+
 	GBP.getPlane = function( points, start = 0 ) {
 
 		const triangle = new THREE.Triangle();
 		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+		const pl = new THREE.Plane();
+		GBP.plane = triangle.plane( pl );
 
-		/*
-		console.log( 'start', start );
-		console.log( 'triangle', triangle );
-		console.log( 'area', triangle.area() );
-		console.log( 'normal', triangle.normal() );
-		*/
+		//if ( triangle.area() != 0 ) {
 
-		if ( triangle.area() > 0 ) {
+			/*
+			if ( start > 1 ) {
+				console.log( 'start', start );
+				console.log( 'triangle', triangle );
+				console.log( 'area', triangle.area() );
+				console.log( 'normal', triangle.normal() );
+				pl.normal.y = 0;
+				console.log( 'plane', pl );
+			}
+			*/
+			//return plane;
 
-			const plane = new THREE.Plane();
-			return triangle.plane( plane );
+		//} else
 
-		} else if ( triangle.area() === 0 ) {
+		if ( triangle.area() === 0 ) {
 
 			start++;
-			NUM.getTriangle( points, start );
+			GBP.getPlane( points, start );
 
 		}
+
+		return GBP.plane;
 
 	};
 
 
 
-	// GBP.setAllVisible();GBV.zoomObjectBoundingSphere(GBP.surfaceMeshes);
-
 	GBP.zoomObjectBoundingSphere = function( obj ) {
 
 		const bbox = new THREE.Box3().setFromObject( obj );
-		//GBP.boundingBox = bbox;
+		GBP.boundingBox = bbox;
 
 		const sphere = bbox.getBoundingSphere();
 		const center = sphere.center;
 		const radius = sphere.radius;
 
-		obj.userData.center = center;
-		obj.userData.radius = radius;
-
 		THR.controls.target.copy( center );
 		THR.controls.maxDistance = 5 * radius;
 
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		THR.camera.far = 10 * radius; //2 * camera.position.length();
+		THR.camera.updateProjectionMatrix();
+
+		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
+		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		THR.lightDirectional.target = THR.axesHelper;
 
 		THR.axesHelper.scale.set( radius, radius, radius );
 		THR.axesHelper.position.copy( center );
 
-		THR.camera.far = 10 * radius; //2 * camera.position.length();
-		THR.camera.updateProjectionMatrix();
-
-		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-		THR.lightDirectional.shadow.camera.scale.set( -0.2 * radius, -0.2 * radius, 0.01 * radius );
-		THR.lightDirectional.target = THR.axesHelper;
+		obj.userData.center = center;
+		obj.userData.radius = radius;
 
 		//		scene.remove( cameraHelper );
 		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
@@ -436,4 +464,5 @@
 
 		document.body.style.backgroundImage = '';
 		divLog.innerHTML = '';
+
 	};

@@ -91,6 +91,7 @@
 
 	THR.onWindowLoad = function() {
 
+		// behavior not good inside iframe
 		if ( parent && parent.onloadThreejs ) { parent.onloadThreejs(); }
 
 	};
