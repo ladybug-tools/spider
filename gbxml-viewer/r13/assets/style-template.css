@@ -1,0 +1,82 @@
+
+	:root, html {
+		--mnu-color: DarkBlue;
+		--mnu-back-color: Gold;
+		--mnu-header-color: #87cefa;
+		--mnu-width: 350px;
+		--mnu-right-width: 370px;
+		--but-bg-color: LightCoral;
+		--but-back-color: LightCoral;
+		--highlight-color: SpringGreen;
+	}
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer;
+		margin: 3px; padding: 3px 10px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	iframe { height: 500px; width: 100%; }
+	i { color: blue; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.dragDropArea { border: 1px dashed gray; line-height: 40px; padding: 5px; }
+
+	.flex-container { display: flex; flex-wrap: wrap;}
+	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
+
+	.flex-container2 { display: flex; flex-wrap: wrap; }
+	.flex-div1 { border: 0px solid #f00; padding-right:15px; }
+	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-width ) - 150px ); }
+	.flex-div2 { border: 1px red solid; overflow-x: auto; max-width: calc( var( --mnu-right-width ) - 100px ); }
+
+	summary { color: var( --summary-color ); font-weight: bold; }
+
+	#divDraggable, #divMenu {
+		background-color: #f1f1f1;
+		border: 1px solid #d3d3d3;
+		left: calc( 100% - 400px );
+		max-height: 85%;
+		overflow: auto;
+		padding: 10px;
+		position: absolute;
+		resize: both;
+		top: 100px;
+		z-index: 9;
+	}
+
+	#divDraggableHeader, #divMenuHeader {
+		background-color: #2196F3;
+		color: #fff;
+		cursor: move;
+		padding: 10px;
+		z-index: 10;
+	}
+
+	#divHamburgerRight { background-color: LightGreen; box-sizing: border-box; border-radius: 2px; cursor: pointer;
+		display: none; font-size: 30px;
+		left: calc( 100% - var(--mnu-width ) - 90px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; }
+	#divHamburgerRight {
+		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	}
+
+	#divHeadsUp {
+		background-color: #f8f8f8; border-radius: 2px; display: none; left: calc( 100% - 400px );
+		max-height: 97%; max-width: 400px; min-height: 100px; min-width: 200px; opacity: 0.95; overflow: auto;
+		padding: 5px 5px 10px 10px; position: fixed; resize: both; top: 10px; transition: .5s;
+	}
+	#divHeadsUp {
+		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	}
+	#divHeadsUpHeader {
+		background-color: var( --mnu-header-color ); color: var( --mnu-color ); cursor: move; padding: 10px;
+	}
+
+	#divMenuInWorld {
+		background-color: #fff;  left: 0; margin: auto; position: absolute; opacity: 0.75;  right: 0; text-align: center; width: 50%; }

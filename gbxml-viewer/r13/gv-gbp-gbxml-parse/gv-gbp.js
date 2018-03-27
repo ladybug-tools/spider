@@ -1,0 +1,439 @@
+// Copyright 2018 Ladybug Tools authors. MIT License
+
+	var GBP = {};
+
+	GBP.gbxml = null;
+	GBP.gbxmlResponseXML;
+	GBP.gbjson;
+
+	GBP.surfaceJson = null;
+	GBP.surfaceMeshes;
+	GBP.surfaceEdges;
+
+	GBP.colorsDefault = {
+
+		InteriorWall: 0x008000,
+		ExteriorWall: 0xFFB400,
+		Roof: 0x800000,
+		InteriorFloor: 0x80FFFF,
+		ExposedFloor: 0x40B4FF,
+		Shade: 0xFFCE9D,
+		UndergroundWall: 0xA55200,
+		UndergroundSlab: 0x804000,
+		Ceiling: 0xFF8080,
+		Air: 0xFFFF00,
+		UndergroundCeiling: 0x408080,
+		RaisedFloor: 0x4B417D,
+		SlabOnGrade: 0x804000,
+		FreestandingColumn: 0x808080,
+		EmbeddedColumn: 0x80806E
+
+	}
+
+	GBP.colors = Object.assign({}, GBP.colorsDefault );
+
+	GBP.surfaceTypes  = Object.keys( GBP.colors );
+
+
+
+	GBP.callbackGbXML = function( xhr ) {
+
+		GBP.gbxmlResponseXML =  xhr.target.responseXML;
+		GBP.gbxml = xhr.target.responseXML.documentElement;
+
+		GBP.parseFileXML( GBP.gbxml );
+
+	};
+
+
+
+	GBP.openGbxmlFile = function( files ) {
+
+		//console.log( 'file', files.files[ 0 ] );
+
+		GBP.fileAttributes = files.files[ 0 ];
+
+		const reader = new FileReader();
+		reader.onprogress = onRequestFileProgress;
+		reader.onload = function( event ) {
+
+			const parser = new DOMParser();
+
+			GBP.gbxmlResponseXML = parser.parseFromString( reader.result, "text/xml" );
+			//console.log( 'gbxmlResponseXML2', gbxmlResponseXML2 );
+
+			GBP.gbxml = GBP.gbxmlResponseXML.children[ 0 ];
+			//console.log( 'GBP.gbxml', GBP.gbxml );
+
+			GBP.gbjson = GBP.parseFileXML( GBP.gbxml );
+			//GBP.surfaceJson = GBP.gbjson.Campus.Surface;
+
+			if ( files.files[ 0 ] ) { GBP.gbjson.fileName = files.files[ 0 ].name; }
+
+		}
+
+		reader.readAsText( files.files[ 0 ] );
+
+		function onRequestFileProgress( event ) {
+
+			divLog.innerHTML =
+				GBP.fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
+				//( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+			'';
+
+		}
+
+	};
+
+
+	// loads any text file - from file reader or location hash or wherever
+
+	GBP.parseFileXML = function( xmlNode ) {
+
+		GBP.gbjson = GBP.XML2jsobj( xmlNode );
+		GBP.surfaceJson = GBP.gbjson.Campus.Surface;
+		//console.log( 'GBP.gbjson', GBP.gbjson );
+
+		GBP.parseGbJson( GBP.gbjson );
+
+		GBP.zoomObjectBoundingSphere( GBP.surfaceMeshes );
+
+		THR.onWindowLoad();
+
+		return GBP.gbjson;
+
+	}
+
+
+	// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
+	// http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
+
+	GBP.XML2jsobj = function( node ) {
+
+		let data = {};
+
+		function Add( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		}
+
+		let child, childNode;
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			Add( childNode.name, childNode.value );
+
+		}
+
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
+
+					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else { // sub-object
+
+					Add( childNode.nodeName, GBP.XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
+
+	}
+
+
+
+	GBP.parseGbJson = function( gbjson ) {
+
+		//console.log( 'surfaces', gbjson.Campus.Surface );
+
+		const surfaces = GBP.surfaceJson; // gbjson.Campus.Surface;
+		const polyloops = [];
+		const openings = [];
+
+		for ( let surface of surfaces ) {
+
+			if ( surface.Opening ) {
+
+				if ( surface.Opening.PlanarGeometry ) {
+
+					const polyloop = surface.Opening.PlanarGeometry.PolyLoop;
+					const points = GBP.getPoints( polyloop );
+					openings.push( [ points ] );
+
+				} else { // undefined === array of openings
+
+					const arr = [];
+
+					for ( let opening of surface.Opening ) {
+
+						const polyloop = opening.PlanarGeometry.PolyLoop;
+						const points = GBP.getPoints( polyloop );
+						arr.push( points );
+
+					}
+
+					openings.push( arr );
+
+				}
+
+			} else {
+
+				openings.push( [] );
+
+			}
+
+			const polyloop = surface.PlanarGeometry.PolyLoop;
+
+			const points = GBP.getPoints( polyloop );
+
+			polyloops.push( points );
+
+		}
+
+		THR.scene.remove( GBP.surfaceMeshes, GBP.surfaceEdges, GBP.surfaceOpenings );
+
+		if ( GBP.surfaceMeshes ) {
+
+			GBP.surfaceMeshes.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+				if ( child.texture ) { child.texture.dispose(); }
+
+			} );
+
+		}
+
+		if ( GBP.surfaceEdges ) {
+
+			GBP.surfaceEdges.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+			} );
+
+		}
+
+		if ( GBP.surfaceOpenings ) {
+
+			GBP.surfaceOpenings.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+			} );
+
+		}
+
+
+		GBP.surfaceMeshes = new THREE.Object3D();
+		GBP.surfaceMeshes.name = 'GBP.surfaceMeshes';
+
+		GBP.surfaceEdges = new THREE.Object3D();
+		GBP.surfaceEdges.name = 'GBP.surfaceEdges';
+
+		GBP.surfaceOpenings = new THREE.Object3D();
+		GBP.surfaceOpenings.name = 'GBP.surfaceOpenings';
+
+		for ( let i = 0; i < polyloops.length; i++ ) {
+
+			const material = new THREE.MeshPhongMaterial( { color: GBP.colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+
+			const shape = GBP.drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
+			shape.userData.data = surfaces[ i ];
+			shape.castShadow = shape.receiveShadow = true;
+			GBP.surfaceMeshes.add( shape );
+
+			const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
+			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
+			surfaceEdge.rotation.copy( shape.rotation );
+			surfaceEdge.position.copy( shape.position );
+			GBP.surfaceEdges.add( surfaceEdge );
+
+		}
+
+		THR.scene.add( GBP.surfaceMeshes, GBP.surfaceEdges );
+
+
+
+		console.log( 'parseGbJson', Date.now() - timeStart );
+
+	}
+
+
+
+	GBP.getPoints = function( polyloop ) {
+
+		return points = polyloop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
+
+	};
+
+
+
+	GBP.drawShapeSinglePassObjects = function( vertices, material, holes ) {
+
+		const plane = GBP.getPlane( vertices );
+
+		const obj = new THREE.Object3D();
+		obj.lookAt( plane.normal );  // copy the rotation of the triangle
+		obj.quaternion.conjugate();
+		obj.updateMatrixWorld();
+
+		vertices.map( vertex => obj.localToWorld( vertex ) );
+
+		const shape = new THREE.Shape( vertices );
+		shape.autoClose = true;
+
+		for ( let verticesHoles of holes ) {
+
+			const hole = new THREE.Path();
+
+			verticesHoles.map( vertex => obj.localToWorld( vertex ) );
+
+			hole.setFromPoints( verticesHoles );
+
+			shape.holes.push( hole );
+
+		}
+
+		const geometryShape = new THREE.ShapeGeometry( shape );
+
+		const shapeMesh = new THREE.Mesh( geometryShape, material );
+
+		shapeMesh.lookAt( plane.normal );
+		shapeMesh.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
+
+		return shapeMesh;
+
+	};
+
+
+	GBP.getPlane = function( points, start = 0 ) {
+
+		const triangle = new THREE.Triangle();
+		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+
+		/*
+		console.log( 'start', start );
+		console.log( 'triangle', triangle );
+		console.log( 'area', triangle.area() );
+		console.log( 'normal', triangle.normal() );
+		*/
+
+		if ( triangle.area() > 0 ) {
+
+			const plane = new THREE.Plane();
+			return triangle.plane( plane );
+
+		} else if ( triangle.area() === 0 ) {
+
+			start++;
+			NUM.getTriangle( points, start );
+
+		}
+
+	};
+
+
+
+	// GBP.setAllVisible();GBV.zoomObjectBoundingSphere(GBP.surfaceMeshes);
+
+	GBP.zoomObjectBoundingSphere = function( obj ) {
+
+		const bbox = new THREE.Box3().setFromObject( obj );
+		//GBP.boundingBox = bbox;
+
+		const sphere = bbox.getBoundingSphere();
+		const center = sphere.center;
+		const radius = sphere.radius;
+
+		obj.userData.center = center;
+		obj.userData.radius = radius;
+
+		THR.controls.target.copy( center );
+		THR.controls.maxDistance = 5 * radius;
+
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+
+		THR.axesHelper.scale.set( radius, radius, radius );
+		THR.axesHelper.position.copy( center );
+
+		THR.camera.far = 10 * radius; //2 * camera.position.length();
+		THR.camera.updateProjectionMatrix();
+
+		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		THR.lightDirectional.shadow.camera.scale.set( -0.2 * radius, -0.2 * radius, 0.01 * radius );
+		THR.lightDirectional.target = THR.axesHelper;
+
+		//		scene.remove( cameraHelper );
+		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		//		scene.add( cameraHelper );
+
+	};
+
+
+
+	GBP.setAllVisible = function() {
+
+		GBP.surfaceMeshes.visible = true;
+
+		for ( let child of GBP.surfaceMeshes.children ) {
+
+			if ( !child.userData.material ) { continue; }
+
+			child.material = new THREE.MeshPhongMaterial( {
+				color: GBP.colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true }
+			);
+			child.material.wireframe = false;
+			child.visible = true;
+
+		};
+
+		GBP.surfaceEdges.visible = true;
+
+		//for ( let child of GBP.surfaceEdges.children ) {
+
+			//child.material.opacity = 0.85;
+			//child.material.wireframe = false;
+
+		//};
+
+		document.body.style.backgroundImage = '';
+		divLog.innerHTML = '';
+	};
