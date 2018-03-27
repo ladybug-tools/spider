@@ -12,18 +12,27 @@
 ## Concept
 
 This folder contains the basic script that creates the menus, opens Markdown files, converts Markdown files to HTML
+* View gbXML files in 3D in your browser.
+* Open files using HTML5 File Reader or by URL in location.hash
+* Base script used by all the other gbXML Viewer modules
 
 Displaying the data in 3D using the [Three.js]( https://threejs.org ) JavaScript library is in the 'gv-thr' folder.
 
 You may uses this script to verify that menus work as intended
 
-* View gbXML files in 3D in your browser.
-* Open files using HTML5 File Reader or by URL in location.hash
-* Base script used by all the other gbXML Viewer modules
+* Sets default URLs
+* Adds event handlers
+* Handles location hash change events
+* Makes XMLHttpRequest calls
+* Handles FileReader requests
+* Responds to drag and drop events
+* Handles moving the menus by monitoring mouse and touch events
+* Responds to calls to slide the left and right menus
+
 
 needs combining with this read me
 
-<http://www.ladybug.tools/spider/#gbxml-viewer/r9/gbxml-viewer9-01-core/README.md>
+* <http://www.ladybug.tools/spider/#gbxml-viewer/r9/gbxml-viewer9-01-core/README.md>
 
 
 ## Wish list / ToDo
