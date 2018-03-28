@@ -29,6 +29,8 @@ The 'reset view' button in the in-world ( center of screen) menu may not always 
 
 ## To Do / Wish List Items
 
+
+* 2018-03-28 ~ MD ~ Report ~ Check number of verticies in Openings. Flag greater than 4 (e+ requirement)
 * Feel free to add new ideas
 * Sections are based on the current set of modules
 * Items are listed in alphabetical order of their three letter folder/ name-space id
