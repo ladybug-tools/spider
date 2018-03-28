@@ -1,12 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-set/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-set-settings/README.md "View file as a web page." ) </span>
 
-# r12 gbXML Viewer Settings Read Me
-
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-set/gv-set.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+# r13 gbXML Viewer Settings Read Me
 
 
-## Full screen test script: [gbXML Viewer Settings]( http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-set/gv-set.html )
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-set-settings/gv-set.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+
+
+## Full screen Settings: [gbXML Viewer Settings]( http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-set-settings/gv-set.html )
 
 
 ## Concept
@@ -46,6 +46,12 @@
 ## Change Log
 
 See also main gbXML Viewer read me file
+
+
+### 2018-03-27 ~ Theo
+
+R13
+* First commit
 
 
 ### 2018-03-27 ~ Theo

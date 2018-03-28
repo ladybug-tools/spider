@@ -87,7 +87,6 @@
 
 	COR.initCore();
 
-
 	function initTemplate() {
 
 		divMenuTitle.innerHTML = COR.menuTitle;
@@ -99,7 +98,7 @@
 		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
 
 		butMenuLoad.onclick = function() {
-			const script = document.head.appendChild( document.createElement( 'script' ) );
+			script = document.head.appendChild( document.createElement( 'script' ) );
 			script.src = ScriptSource;
 			divHeadsUp.style.display='block';
 		}

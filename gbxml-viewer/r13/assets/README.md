@@ -1,14 +1,16 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-tmp/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-tmp/README.md "View file as a web page." ) </span>
 
-# R12 gbXML Viewer Assets Read Me
+# r13 gbXML Viewer Assets Read Me
 
-[Style Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/r12/assets/style-viewer.html )
+[Style Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/r13/assets/style-viewer.html )
 
-[Style Viewer Source ]( https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r12/assets/style-viewer.html )
+[Style Viewer Source ]( https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/assets/style-viewer.html )
 
 ## Concept
 
-Style sheets, images and similar project assets
+A directory for style sheets, images, markdown pages and similar project assets
+
+* Style Viewer: allows you to view the colors used in menus
 
 
 ## Wish list
@@ -24,6 +26,11 @@ Style sheets, images and similar project assets
 
 
 ## Change Log
+
+### 2018-03-27 ~ Theo
+
+CSS
+* Style Viewer R2: adds menu text color and more examples of usage
 
 ### 2018-03-25 ~ Theo
 

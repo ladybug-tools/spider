@@ -30,12 +30,11 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 ### Features
 
-
 * Identify and locate all surfaces individually
 	* Reports number of surfaces found
 	* Select surface by typing ID with smart search or by scrolling through list with cursor keys
 		* Selected surface is highlighted in the 3D model as fast as you can scroll
-	* For each surface you can toggle visibility, zoom in or delete
+	* For each surface you can toggle visibility, zoom in to selected surface or delete
 	* All available attribute data for each surface is displayable
 * Identify groups of surfaces by type
 	* Reports number of types found
@@ -47,6 +46,7 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 	* Reports number of spaces found
 	* Select space by typing ID with smart search or by scrolling through list with cursor keys
 		* Selected space is highlighted in the 3D model as fast as you can scroll
+		* 	* For each space you can toggle visibility or zoom in to selected space
 	* All available attribute data for each space is displayable
 * Identify and locate all storey data
 	* Reports number of storeys found

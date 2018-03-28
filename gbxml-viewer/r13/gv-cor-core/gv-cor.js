@@ -1,14 +1,14 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
 
-	let COR = {};
+	var COR = {};
 
 	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/';
 
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	COR.iconGitHubMark = "../assets/gitHub-mark.png";
 
-	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
+	COR.threeDefaultFile = '../gv-thr-threejs/gv-thr-run.html';
 	COR.uriDefaultFile = '../assets/splash-screen.md';
 
 
@@ -69,7 +69,7 @@
 
 			console.log( 'url', url );
 
-			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+			COR.requestFileAndProgress( url, GBP.callbackGbXML );
 
 			//} else if ( ulc.endsWith( '.html' ) ) {
 
@@ -117,8 +117,8 @@
 
 			//console.log( 'xhr', xhr );
 
-			GBX.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
-			divLog.innerHTML = GBX.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+			COR.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
+			divLog.innerHTML = COR.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 
@@ -134,14 +134,14 @@
 			//const response = xhr.target.response;
 			const html = converter.makeHtml( xhr.target.responseText );
 
-			//			divContainer.innerHTML = '<div id=divContents >' + html + '</div>';
+			//divContainer.innerHTML = '<div id=divContents >' + html + '</div>';
 			divContents.innerHTML = html;
 			divContainer.style.display = 'block';
 			window.scrollTo( 0, 0 );
 			divContainer.scrollTop = 0;
-//			divContents.scrollTop = 0;
+			//divContents.scrollTop = 0;
 			divContainer.scrollTo( 0, 0 );
-//			divContents.scrollTo( 0, 0 );
+			//divContents.scrollTo( 0, 0 );
 
 		}
 

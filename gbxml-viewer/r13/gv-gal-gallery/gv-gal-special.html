@@ -20,9 +20,7 @@
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" >http://showdownjs.com/</script>
-<!--
 <script src = "../gv-cor-core/gv-cor.js" ></script>
--->
 <script src = "../gv-tmp-template/gv-tst.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
@@ -35,6 +33,26 @@
 
 		<p>
 			<button id=butMenuLoad >gv-tmp </button>
+		</p>
+
+		<p>
+			<button id=butGalleryGbxml onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-gal-gallery/gv-gal-gbxml.js';" >
+				gallery gbxml
+			</button>
+
+			<button id=butGallerySampleFiles onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-gal-gallery/gv-gal-spider-gbxml-sample-files.js';" >
+				gallery gbxml viewer sample files
+			</button>
+
+			<button id=butGalleryBuildWell onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-gal-gallery/gv-gal-spider-build-well.js';" >
+				gallery build well
+			</button>
 		</p>
 
 		<iframe id=ifrThree ></iframe>
@@ -59,14 +77,9 @@
 
 			<h2><a href="" >gbXML Viewer template</a></h2>
 
-			<details>
-
-				<summary>Summary</summary>
-				<div>
-					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
-				</div>
-
-			</details>
+			<div>
+				lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+			</div>
 
 			<hr>
 
@@ -171,7 +184,7 @@
 
 		console.log( 'scene', THR.scene );
 
-		butMenuLoad.click();
+		//butMenuLoad.click();
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 

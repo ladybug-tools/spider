@@ -11,6 +11,40 @@
 
 * Display an overview of all the modules in gbXML Viewer in a speedy fashion
 
+## Mission
+
+* Enable easy access to the
+	* Source code for every module
+	* Read Me file for every module
+	* List the features and benefits for every module ising Mission and Vission statements
+	* Easy access to the Change log, issues list and wish list for every module
+
+
+## Concept
+
+Different people have different needs
+
+Users / Tech
+	* Where do I find this feature?
+	* How do I use this feature
+
+Users / Non-Tech
+	* Where do I find this feature?
+	* How do I use this feature
+
+Advocates
+	* What can the app do? Can it do something I need to get done by today
+	* What can I share with my colleagues that will demonstrate the utility of this app?
+	* I'm writing an article, a list of features would really simplify things for me
+
+Developers / 'You'
+* Where is the source code for a particular feature?
+* Can I use just a single aspect of this program in my program in a tidy fashion? Or will I have to fork huge chunks of code?
+
+Developers / 'Us'
+* How can we write text once nd have the text in one place and yet use it everywhere?
+* How can a single set of notes provide benefit to multiple audience types?
+
 
 ## Wish list
 
@@ -30,6 +64,7 @@
 ### 2018-03-26 ~ Theo
 
 R13
+* Update readme
 
 ### 2018-03-14 ~ Theo
 

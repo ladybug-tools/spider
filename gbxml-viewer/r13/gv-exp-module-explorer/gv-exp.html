@@ -10,16 +10,19 @@
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <style>
 
-		body { overflow: scroll; }
-		h2 { margin: 0; }
+		body { overflow: auto; }
+
 		iframe { height: 500px; width: 100%; }
 		#divMainContents { margin: 0 auto; max-width: 800px; }
+		#divMainContents h2 { margin: 0; }
 
 	</style>
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" >http://showdownjs.com/</script>
+<!--
 <script src = "../gv-cor-core/gv-cor.js" ></script>
+-->
 <script src = "../gv-tmp-template/gv-tst.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
@@ -52,13 +55,19 @@
 
 
 		<details open>
+
 			<summary>header</summary>
 
 			<h2><a href="" >gbXML Viewer template</a></h2>
 
-			<div>
-				lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
-			</div>
+			<details>
+
+				<summary>Summary</summary>
+				<div>
+					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+				</div>
+
+			</details>
 
 			<hr>
 
@@ -96,7 +105,7 @@
 
 	initTemplate();
 
-	COR.initCore();
+	//COR.initCore();
 
 	function initTemplate() {
 
@@ -116,7 +125,7 @@
 
 		}
 
-		window.addEventListener ( 'hashchange', COR.onHashChange, false );
+		window.addEventListener ( 'hashchange', onHashChange, false );
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
@@ -124,21 +133,29 @@
 
 		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
+		onHashChange();
+
+	}
+
+
+	function onHashChange() {
+
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
-			const url = location.hash.slice( 1 );
-			//console.log( 'url', url );
+		const url = location.hash.slice( 1 );
+		//console.log( 'url', url );
 
-			ifrThree.src = '../gb-gbp-gbxml-parse/gv-gbp.html#' + url;
+			ifrThree.src = '../gv-gbp-gbxml-parse/gv-gbp-run.html#' + url;
+			ifrThree.contentWindow.location.reload(); // true forces all assets to reload
 
 		} else {
 
-			ifrThree.src = '../gv-gbp-gbxml-parse/gv-gbp.html' + ( uriGbxmlDefault ? '#' + uriGbxmlDefault : '' );
+			ifrThree.src = '../gv-gbp-gbxml-parse/gv-gbp-run.html' + ( uriGbxmlDefault ? '#' + uriGbxmlDefault : '' );
 
 		}
 
-
 	}
+
 
 
 	function onloadThreejs() {
@@ -158,7 +175,6 @@
 		butMenuLoad.click();
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
-
 
 	}
 

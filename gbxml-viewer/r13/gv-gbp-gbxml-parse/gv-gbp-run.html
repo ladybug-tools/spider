@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Core read, parse a gbXML file display using Three.js" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-26" >
+<title>gv-gbp gbXML Viewer gbXML Parser</title>
+<link rel="stylesheet" type="text/css" href="../assets/style.css" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+
+<script src = "../gv-thr-threejs/gv-thr.js" ></script>
+<script src = "../gv-gbp-gbxml-parse/gv-gbp.js" ></script>
+<!--
+<script src = "../gv-hud/gv-hud.js" ></script>
+<script src = "../gv-gbv/gv-gbv.js" ></script>
+-->
+
+	<div id = "divMenuInWorld" >
+
+		<div id = "divMenuInWorld2" >
+
+			<div id = "divTitle" ></div>
+
+		</div>
+
+		<p id = "divContents" >
+
+			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+
+			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+
+			<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+
+			<button onclick=GBP.setAllVisible();GBP.zoomObjectBoundingSphere(GBP.surfaceMeshes); >reset view</button>
+
+		</p>
+
+		<div id=divLog ></div>
+
+	</div>
+
+
+
+<script>
+
+
+	GBP.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//GBP.defaultURL = '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml';
+
+	THR.initThree();
+
+	THR.animate();
+
+
+
+	initGBP();
+
+
+
+	function initGBP() {
+
+		timeStart = Date.now();
+
+		divTitle.innerHTML =
+		`
+			<h2>
+				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/gv-gbp-gbxml-parse" >gh
+				</a>
+				||
+				<a  href = "" >` + document.title + `</a>
+			</h2>
+			<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
+
+		`;
+
+		//console.log( 'location.hash', location.hash );
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			GBP.requestFile( url, GBP.callbackGbXML );
+
+		} else {
+
+			GBP.requestFile( GBP.defaultURL, GBP.callbackGbXML );
+
+		}
+
+	}
+
+
+	onloadThreejs = function() {
+
+		console.log( 'scene', THR.scene );
+
+		console.log( 'onloadThreejs', Date.now() - timeStart );
+
+	};
+
+</script>
+</body>
+</html>

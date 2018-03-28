@@ -2,107 +2,165 @@
 <html lang = "en" >
 <head>
 <meta charset = "utf-8" >
-<meta name = "viewport" content= "width=device-width, initial-scale=1" >
-<meta name = "description" content = "Core read, parse a gbXML file display using Three.js" >
-<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-03-26" >
-<title>gv-gbp gbXML Viewer gbXML Parser</title>
+<title>gv-tmp - gbXML Viewer Template</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<style>
+
+		body { overflow: scroll; }
+		h2 { margin: 0; }
+		iframe { height: 500px; width: 100%; }
+		#divMainContents { margin: 0 auto; max-width: 800px; }
+
+	</style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" >http://showdownjs.com/</script>
+<script src = "../gv-cor-core/gv-cor.js" ></script>
+<script src = "../gv-tmp-template/gv-tst.js" ></script>
 
-<script src = "../gv-thr-threejs/gv-thr.js" ></script>
-<script src = "../gv-gbp-gbxml-parse/gv-gbp.js" ></script>
-<!--
-<script src = "../gv-hud/gv-hud.js" ></script>
-<script src = "../gv-gbv/gv-gbv.js" ></script>
--->
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
-	<div id = "divMenuInWorld" >
+	<div id=divMainContents >
 
-		<div id = "divMenuInWorld2" >
+		<div id=divMenuTitle ></div>
 
-			<div id = "divTitle" ></div>
+		<div id=divMenuDescription ></div>
 
-		</div>
-
-		<p id = "divContents" >
-
-			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
-
-			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
-
-			<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
-
-			<button onclick=GBP.setAllVisible();GBP.zoomObjectBoundingSphere(GBP.surfaceMeshes); >reset view</button>
-
+		<p>
+			<button id=butMenuLoad >gv-tmp </button>
 		</p>
+
+		<iframe id=ifrThree ></iframe>
+
+		<div id = "divSampleFiles" ></div>
+
+		<div id=divMenuFileOpening ></div>
 
 		<div id=divLog ></div>
 
+		<p><a href=index.html >Read Me file</a></p>
+
 	</div>
 
+	<div id = "divMenuLeft" >
 
+		<p id=pMenuLeftHeader style=text-align:right; >left menu / click to move</p>
+
+
+		<details open>
+			<summary>header</summary>
+
+			<h2><a href="" >gbXML Viewer template</a></h2>
+
+			<div>
+				lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+			</div>
+
+			<hr>
+
+		</details>
+
+		<div id=divMenuItems >
+
+			<h2 onclick=divMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center;
+			title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
+
+		</div>
+
+	</div>
+
+	<div id = "divHamburgerLeft" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
+
+	<div id=divContainer ><div id=divContents ></div></div>
 
 <script>
 
+	const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//let uriGbxmlDefault;
 
-	GBP.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
-	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
-	//GBP.defaultURL = '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml';
+	var icw, THREE, THR, GBX, GBV;
 
-	THR.initThree();
+	const pathNameArray = location.pathname.split( '/' );
 
-	THR.animate();
+	const releaseId =  pathNameArray[ pathNameArray.length - 3 ];
+	//console.log( 'releaseId', releaseId);
 
+	const fileName = pathNameArray.pop().replace( '.html', '' );
 
-
-	initGBP();
-
+	const scriptSource =  fileName + '.js';
 
 
-	function initGBP() {
+	initTemplate();
 
-		timeStart = Date.now();
+	COR.initCore();
 
-		divTitle.innerHTML =
-		`
-			<h2>
-				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/gv-gbp-gbxml-parse" >gh
-				</a>
-				||
-				<a  href = "" >` + document.title + `</a>
-			</h2>
-			<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
+	function initTemplate() {
 
-		`;
+		divMenuTitle.innerHTML = releaseId + ' ' + TST.menuTitle;
 
-		//console.log( 'location.hash', location.hash );
+		divMenuDescription.innerHTML = TST.menuDescription;
+
+		divMenuFileOpening.innerHTML = TST.menuFileOpening;
+
+		divSampleFiles.innerHTML = TST.gbxmlSampleFiles;
+
+		butMenuLoad.onclick = function() {
+
+			script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = scriptSource;
+			//divMenu.style.display='block';
+
+		}
+
+		window.addEventListener ( 'hashchange', COR.onHashChange, false );
+
+		const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
+		inpFilePath.value = thrFilePath;
+
+		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
 			const url = location.hash.slice( 1 );
+			//console.log( 'url', url );
 
-			GBP.requestFile( url, GBP.callbackGbXML );
+			ifrThree.src = '../gb-gbp-gbxml-parse/gv-gbp.html#' + url;
 
 		} else {
 
-			GBP.requestFile( GBP.defaultURL, GBP.callbackGbXML );
+			ifrThree.src = '../gv-gbp-gbxml-parse/gv-gbp.html' + ( uriGbxmlDefault ? '#' + uriGbxmlDefault : '' );
 
 		}
+
 
 	}
 
 
-	onloadThreejs = function() {
+	function onloadThreejs() {
+
+		icw = ifrThree.contentWindow;
+		THREE = icw.THREE;
+		THR = icw.THR;
+		GBX = icw.GBX;
+		GBV = icw.GBV;
+
+		THR.controls.autoRotate = false;
+		divContainer.style.display = 'none';
+		THR.controls.keys = false;
 
 		console.log( 'scene', THR.scene );
 
-		console.log( 'onloadThreejs', Date.now() - timeStart );
+		butMenuLoad.click();
 
-	};
+		const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
+
+	}
 
 </script>
 </body>

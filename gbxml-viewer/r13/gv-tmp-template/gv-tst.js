@@ -1,5 +1,11 @@
 	var TST = {};
 
+	// get by algo
+	TST.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/';
+
+	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	TST.iconGitHubMark = "../assets/gitHub-mark.png";
+
 	TST.menuBreadcrumbs =
 
 	`<div>
@@ -11,8 +17,8 @@
 	TST.menuTitle =
 
 	`<h2>
-		<a href="` + COR.releaseSourceURL + `" target=_top >
-			<img src=` + COR.iconGitHubMark + ` height=18 style=opacity:0.3; ></a>
+		<a href="` + TST.releaseSourceURL + `" target=_top >
+			<img src=` + TST.iconGitHubMark + ` height=18 style=opacity:0.3; ></a>
 			<a id=aDocumentTitle href="" >` + document.title +`</a>
 	</h2>`;
 

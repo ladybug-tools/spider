@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Core file open and display and menu creating utilities" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-26" >
+<title>gbXML Viewer Core</title>
+<link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<style>
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
+<script src = "../gv-cor/gv-cor.js" ></script>
+
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+
+	<div id = "divMenu" >
+
+		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!" style=text-align:right; >
+
+				left menu / click to move
+
+		</div>
+
+		<div id = "divMenuContents" >
+
+			<details open >
+
+				<summary>Header</summary>
+
+				<div>
+					<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png  height=18 ></a> &raquo;
+					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
+				</div>
+
+				<h2>
+					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r12/gv-app/gv-app.html" target="_top" >
+						<img src="../assets/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
+					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
+				</h2>
+
+				<hr>
+			</details>
+
+			<details open >
+
+				<summary title="the primary viewer tools are here" >Features</summary>
+
+				<div id = "divMenuItems" >
+
+					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+				</div>
+				<hr>
+			</details>
+
+			<div id=divMenuFooter >
+
+				<details open >
+
+					<summary title="support, issues, credits, license and whatever" >Footer</summary>
+
+					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+					<hr>
+				</details>
+
+			</div>
+
+			<h2 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center;
+				title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
+
+			<div id=divLog ></div>
+
+		</div>
+
+	</div>
+
+	<div id = "divHamburgerLeft" onclick=COR.toggleNavLeft(); title="click to hide this menu" > slide &#9776; </div>
+
+	<div id=divContainer >
+
+		<div id = "divContentsHeader" >
+				pop-up window / click here to move / click outside to close
+				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+		</div>
+
+		<div id=divContents ></div>
+
+	</div>
+
+	<div id = "divHamburgerRight" onclick=COR.toggleNavRight(); > &#9776; </div>
+
+	<div id = "divHeadsUp" >
+
+		<div id=divHeadsUpHeader title="Open JavaScript console to see more data" >
+			right menu / click here to move
+			<!--
+			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+			-->
+		</div>
+
+		<div id=divHUDheader class=mnuRightDiv >lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</div>
+		<div id=divHUDItems class=mnuRightDiv></div>
+		<div id=divHUDfooter class=mnuRightDiv ></div>
+
+	</div>
+
+<script>
+
+	COR.initCore();
+
+	if ( window.self === window.top ) {
+
+		// display the splash-screen
+		location.hash = COR.uriDefaultFile;
+
+		// disply the right-menu
+		divHeadsUp.style.display = 'block';
+		divHamburgerRight.style.display = 'block';
+
+	}
+
+
+</script>
+</body>
+</html>

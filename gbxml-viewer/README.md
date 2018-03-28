@@ -89,6 +89,8 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 
 ### SET Module ~ Settings and Viewing Menu
 
+_ To be Deprecated. See Explorer Module for later releases._
+
 * Adjust a wide variety of viewing parameters
 * Control the appearance of the surfaces
 	* Set default, random, Phong default, normal or exposure-type material to all surfaces
@@ -107,6 +109,9 @@ Open, view and investigate gbXML files in 3D in your browser with free, open sou
 
 
 ### REP Module ~ Reports / Data Menu
+
+_ To be Deprecated. See Explorer Module for later releases._
+
 * View all project textual metadata embedded in gbXML files
 * Link to Google map focussed on project latitude and longitude
 * Buttons to highlight surfaces, spaces, stories and zones
@@ -172,6 +177,9 @@ Note these REP menu items will evolve into their own ISS issues module in a futu
 	* Currently only on previous release
 
 ### GAL Module / Sample gbXML File galleries
+
+_ To be Deprecated. See Explorer Module for later releases._
+
 * Uses GitHub API to obtain directory listings and load gbXML files in several selected repositories
 	* gbXML.org sample files
 	* Spider Build Well project files
