@@ -3,68 +3,48 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "gbXML Viewer ~ template - 'boilerplate for creating new modules'" >
+<meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-10" >
-<title></title>
-<link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<meta name = "date" content = "2018-03-23" >
+<title>gv-tmp - gbXML Viewer Template</title>
+<link rel="stylesheet" type="text/css" href="../assets/style-template.css" >
 <style>
 
-	body { overflow: auto; }
-	#divTemplateBody { margin: 0 auto; max-width: 800px; }
-	iframe { height: 500px; width: 100%; }
+		body { overflow: auto;  margin: 0 auto; max-width: 800px; }
+		h2 { margin: 0; }
+		i { color: blue; }
+		iframe { height: 500px; width: 100%; }
+		summary { font-weight: bold; }
 
-</style>
+	</style>
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-cor/gv-cor.js" ></script>
+<script src = "../gv-tmp/gv-tst.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
-	<div id=divTemplateBody >
+	<div id=divMenuTitle ></div>
 
-		<div id=divMenuTitle ></div>
+	<div id=divMenuDescription ></div>
 
-		<div id=divMenuDescription ></div>
+	<p>
+		<button id=butMenuLoad >gv-tmp </button>
+	</p>
 
-		<p>If it does not open automatically, click the following button to load test menu</p>
+	<iframe id=ifrThree ></iframe>
 
-		<p>
-			<button id=butMenuLoad >
-				<!--
-				onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-tmp/gv-tmp.js';
-				divHeadsUp.style.display='block';" >
-				-->
-				gv-tmp </button>
-		</p>
+	<div id = "divSampleFiles" ></div>
 
-		<iframe id=ifrThree src='../gv-gbx/gv-gbx.html' ></iframe>
+	<div id=divMenuFileOpening ></div>
 
-		<div id=divMenuFileOpening ></div>
+	<div id=divLog ></div>
 
-		<p><a href=#README.md >Read Me file</a></p>
+	<p><a href=index.html >Read Me file</a></p>
 
-		<div id=divLog ></div>
 
-		<div id = "divSampleFiles" ></div>
-
-	</div>
-
-	<div id=divContainer >
-
-			<div id = "divContentsHeader" >
-					pop-up window / click here to move / click outside to close
-					<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
-			</div>
-
-			<div id=divContents ></div>
-
-	</div>
-
-	<div id = "divHeadsUp" >
+	<div id = "divMenu" >
 
 		<div id = "divMenuHeader" >
 			click here to move
@@ -75,13 +55,25 @@
 
 	</div>
 
+	<div id=divContainer ><div id=divContents ></div></div>
+
 <script>
+
+	const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//let uriGbxmlDefault;
 
 	var icw, THREE, THR, GBX, GBV;
 
-	fname = location.href.split( '/' ).pop().replace( '.html', '' );
+	const pathNameArray = location.pathname.split( '/' );
 
-	ScriptSource =  fname + '.js';
+	const releaseId =  pathNameArray[ pathNameArray.length - 3 ];
+	//console.log( 'releaseId', releaseId);
+
+	const fileName = pathNameArray.pop().replace( '.html', '' );
+
+
+	const scriptSource =  fileName + '.js';
+
 
 	initTemplate();
 
@@ -89,23 +81,41 @@
 
 	function initTemplate() {
 
-		divMenuTitle.innerHTML = COR.menuTitle;
+		divMenuTitle.innerHTML = releaseId + ' ' + TST.menuTitle;
 
-		divMenuDescription.innerHTML = COR.menuDescription;
+		divMenuDescription.innerHTML = TST.menuDescription;
 
-		divMenuFileOpening.innerHTML = COR.menuFileOpening;
+		divMenuFileOpening.innerHTML = TST.menuFileOpening;
 
-		divSampleFiles.innerHTML = COR.gbxmlSampleFiles;
+		divSampleFiles.innerHTML = TST.gbxmlSampleFiles;
 
 		butMenuLoad.onclick = function() {
 			script = document.head.appendChild( document.createElement( 'script' ) );
-			script.src = ScriptSource;
-			divHeadsUp.style.display='block';
+			script.src = scriptSource;
+			divMenu.style.display='block';
 		}
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
-		COR.onHashChange();
+		const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
+		inpFilePath.value = thrFilePath;
+
+		//uriGbxmlDefault = parent.inpFilePath.value ? parent.inpFilePath.value : uriGbxmlDefault; // for testing
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+			//console.log( 'url', url );
+
+			ifrThree.src = '../gv-gbx/gv-gbx.html#' + url;
+
+		} else {
+
+			ifrThree.src = '../gv-gbx/gv-gbx.html' + ( uriGbxmlDefault ? '#' + uriGbxmlDefault : '' );
+
+		}
+
 
 	}
 
@@ -119,15 +129,17 @@
 		GBV = icw.GBV;
 
 		THR.controls.autoRotate = false;
+		divContainer.style.display = 'none';
+		THR.controls.keys = false;
 
 		console.log( 'scene', THR.scene );
 
 		butMenuLoad.click();
 
-		divContainer.style.display = 'none';
+		const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
 
 	}
-
 
 </script>
 </body>

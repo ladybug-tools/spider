@@ -21,7 +21,7 @@
 			REP.title = 'gv-tmp - gbXML Viewer Report';
 			document.title = REP.title;
 			aDocumentTitle.innerHTML = REP.title;
-			REP.butReports.innerHTML = REP.title;
+			REP.butReports0.innerHTML = REP.title;
 
 		} else {
 

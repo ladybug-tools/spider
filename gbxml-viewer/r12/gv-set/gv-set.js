@@ -155,7 +155,7 @@
 
 		}
 
-		divPopUp.style.display = 'none';
+		divContainer.style.display = 'none';
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
 

@@ -31,10 +31,10 @@
 			divMenuLeftHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
-		if ( window.divPopUpHeader ) {
-			divPopUpHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			divPopUpHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			divPopUpHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+		if ( window.divContentsHeader ) {
+			divContentsHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			divContentsHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			divContentsHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
 
@@ -78,7 +78,7 @@
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
-			divPopUpContents.innerHTML = '<img src=' + url + ' >';
+			divContainerContents.innerHTML = '<img src=' + url + ' >';
 
 		} else {
 
@@ -135,14 +135,14 @@
 			//const response = xhr.target.response;
 			const html = converter.makeHtml( xhr.target.responseText );
 
-			//			divPopUp.innerHTML = '<div id=divPopUpContents >' + html + '</div>';
-			divPopUpContents.innerHTML = html;
-			divPopUp.style.display = 'block';
+			//			divContainer.innerHTML = '<div id=divContainerContents >' + html + '</div>';
+			divContents.innerHTML = html;
+			divContainer.style.display = 'block';
 			window.scrollTo( 0, 0 );
-			divPopUp.scrollTop = 0;
-//			divPopUpContents.scrollTop = 0;
-			divPopUp.scrollTo( 0, 0 );
-//			divPopUpContents.scrollTo( 0, 0 );
+			divContainer.scrollTop = 0;
+//			divContainerContents.scrollTop = 0;
+			divContainer.scrollTo( 0, 0 );
+//			divContainerContents.scrollTo( 0, 0 );
 
 		}
 
@@ -151,8 +151,8 @@
 		function callbackToTextarea( xhr ){
 
 			const response = xhr.target.response;
-			divPopUpContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-			divPopUp.style.display = 'block'
+			divContainerContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
+			divContainer.style.display = 'block'
 
 		}
 
@@ -250,8 +250,8 @@
 		const converter = new showdown.Converter();
 		const html = converter.makeHtml( markdown );
 
-		divPopUpContents.innerHTML = html;
-		divPopUp.style.display = 'block';
+		divContainerContents.innerHTML = html;
+		divContainer.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
 	}
@@ -327,7 +327,7 @@
 
 	COR.toggleNavLeft = function() {
 
-		divPopUp.style.display = 'none';
+		divContainer.style.display = 'none';
 
 		if ( divHamburgerLeft.style.left === '' || divHamburgerLeft.style.left === '0px' ) {
 
@@ -350,7 +350,7 @@
 		const menuRightLeft = ( window.innerWidth - menuRightWidth - 20 ) + 'px';
 		//console.log( 'menuRightLeft', menuRightLeft );
 
-		divPopUp.style.display = "none";
+		divContainer.style.display = "none";
 
 		if ( divHamburgerRight.style.backgroundColor === '' ) {
 
