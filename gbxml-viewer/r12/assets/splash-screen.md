@@ -25,9 +25,13 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <summary>Welcome 2018-03-29 ~ R12.12</summary>
 
+R12.13
+APP/ All modules
+* Fix issues with menu buttons not resetting style on new model load
+
 R12.12
 CSS / APP
-* Add user selectable color themes
+* Add user selected color themes
 
 APP
 * Turn off automatic load of saved changes

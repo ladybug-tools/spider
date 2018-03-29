@@ -27,7 +27,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		if ( EXP.butModuleExplorer.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( EXP.butModuleExplorer.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( EXP.butModuleExplorer.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
@@ -90,13 +91,16 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			` + divMenuItems.innerHTML;
 
 
-			EXP.butModuleExplorer.style.backgroundColor = 'var( --but-bg-color )';
+			//EXP.butModuleExplorer.style.backgroundColor = 'var( --but-bg-color )';
+			EXP.butModuleExplorer.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detModuleExplorer.remove();
 
 			EXP.butModuleExplorer.style.backgroundColor = '';
+			EXP.butModuleExplorer.style.fontStyle = '';
+			EXP.butModuleExplorer.style.fontWeight = '';
 
 		}
 
