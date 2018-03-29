@@ -29,6 +29,7 @@ The 'reset view' button in the in-world ( center of screen) menu may not always 
 
 ## To Do / Wish List Items
 
+* 2018-03-29 ~ MD ~ Right Menu ~ CADObjectID drop down - display only Unique Names 
 * 2018-03-29 ~ MD ~ Report ~ Add Display Exposed by Sun (so we can see which surfaces are hit by sun) 
 * 2018-03-29 ~ MD ~ Settings ~ Add Material settings color by Space
 * 2018-03-29 ~ MD ~ Report ~ Display Openings (Windows, Doors, Rooflights) 
