@@ -27,7 +27,7 @@
 
 			//return;
 
-			REP.butReports = butReports;
+			REP.butReports0 = butReports;
 
 		}
 
@@ -36,7 +36,7 @@
 
 			REP.createReport();
 
-			REP.butReports.style.backgroundColor = 'var( --but-bg-color )';
+			REP.butReports0.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 

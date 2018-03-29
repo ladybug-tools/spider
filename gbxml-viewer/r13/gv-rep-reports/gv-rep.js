@@ -49,7 +49,7 @@
 
 		}
 
-		divPopUp.style.display = 'none';
+		divContainer.style.display = 'none';
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
 
@@ -65,9 +65,9 @@
 		`
 			<div>
 				<div>toggle the visible elements</div>
-				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
-				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
-				<button onclick=GBX.setAllVisible(); >all visible</button>
+				<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+				<button onclick=GBP.setAllVisible(); >all visible</button>
 			</div>
 			<hr>
 
@@ -194,7 +194,7 @@
 
 		REP.updateZones();
 
-		//REPdivZones.innerHTML += REP.traverseGbjson( GBX.gbjson.Zone ).attributes;
+		//REPdivZones.innerHTML += REP.traverseGbjson( GBP.gbjson.Zone ).attributes;
 
 		REP.UpdateCadIdGroups();
 
@@ -202,15 +202,15 @@
 
 		///
 
-		divGbxmlAttributes.innerHTML = REP.traverseGbjson( GBX.gbjson ).attributes;
+		divGbxmlAttributes.innerHTML = REP.traverseGbjson( GBP.gbjson ).attributes;
 
-		divCampus.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus ).attributes;
+		divCampus.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus ).attributes;
 
-		divCampusLocation.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Location ).attributes;
+		divCampusLocation.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Location ).attributes;
 		const mapLink = REP.getGoogleMap();
 		sumCampusLocation.innerHTML += mapLink;
 
-		divCampusBuilding.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building ).attributes;
+		divCampusBuilding.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building ).attributes;
 
 	}
 
@@ -245,7 +245,7 @@
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
-		for ( let child of GBX.surfaceMeshes.children ) {
+		for ( let child of GBP.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
@@ -267,15 +267,15 @@
 	REP.showCadIdGroup = ( CADObjectGroupId ) => {
 		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
-		GBX.surfaceEdges.visible = true;
+		GBP.surfaceEdges.visible = true;
 
-		for ( let child of GBX.surfaceMeshes.children ) {
+		for ( let child of GBP.surfaceMeshes.children ) {
 
 			child.visible = false;
 
 		}
 
-		for ( let child of GBX.surfaceMeshes.children ) {
+		for ( let child of GBP.surfaceMeshes.children ) {
 
 			if ( !child.userData.data.CADObjectId ) { continue; }
 
@@ -299,7 +299,7 @@
 	REP.updateSurfacesIndividually = function() {
 
 		let txt = '';
-		GBX.surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
+		GBP.surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
 
 		REPselSurface.innerHTML = txt;
 		REPselSurface.selectedIndex = 0; //Math.floor( Math.random() * property.length );
@@ -308,7 +308,7 @@
 
 		/*
 		txt = '';
-		GBX.surfaceTypes.forEach( function( element ) { txt += '<option>' + element + '</option>'; } );
+		GBP.surfaceTypes.forEach( function( element ) { txt += '<option>' + element + '</option>'; } );
 
 		REPselType.innerHTML = txt;
 		REPselType.selectedIndex = 0;
@@ -319,7 +319,7 @@
 
 	REP.updateSurfaceAttributes = function() {
 
-		REPdivSurfacesIndividually.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Surface[ REPselSurface.selectedIndex ] ).attributes;
+		REPdivSurfacesIndividually.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Surface[ REPselSurface.selectedIndex ] ).attributes;
 
 	}
 
@@ -327,7 +327,7 @@
 
 	REP.updateSurfacesByType = function() {
 
-		surfaces = GBX.gbjson.Campus.Surface;
+		surfaces = GBP.gbjson.Campus.Surface;
 
 		let txt = '';
 		const types = [];
@@ -376,7 +376,7 @@
 	REP.updateSpace = function() {
 
 		let spaces = '';
-		let spaceXml = GBX.gbjson.Campus.Building.Space;
+		let spaceXml = GBP.gbjson.Campus.Building.Space;
 
 		if ( !spaceXml ) { return; }
 
@@ -396,7 +396,7 @@
 		REPsumSpaces.innerHTML = 'Spaces  &raquo; ' + REPselSpace.length;
 
 		//GBV.showSpace( REPselSpace.value )
-		// REPdivSpaces.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
+		// REPdivSpaces.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
 		REP.updateSpaceAttributes();
 	}
 
@@ -404,7 +404,7 @@
 
 	REP.updateSpaceAttributes = function() {
 
-		REPdivSpaces.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
+		REPdivSpaces.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
 
 	}
 
@@ -412,7 +412,7 @@
 	REP.updateStoreys = function() {
 
 		let storeys = '';
-		let storeyXml = GBX.gbjson.Campus.Building.BuildingStorey;
+		let storeyXml = GBP.gbjson.Campus.Building.BuildingStorey;
 		//console.log( 'storeyXml', storeyXml );
 
 		if ( !storeyXml ) { return; }
@@ -433,7 +433,7 @@
 		REPsumStoreys.innerHTML = 'Storeys  &raquo; ' + REPselStorey.length;
 
 		//GBV.showSpace( REPselStorey.value );
-		//REPdivStoreys.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
+		//REPdivStoreys.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 		REP.updateStoreyAttributes();
 
 	}
@@ -442,7 +442,7 @@
 
 	REP.updateStoreyAttributes = function() {
 
-		REPdivStoreys.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
+		REPdivStoreys.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 
 	}
 
@@ -450,7 +450,7 @@
 	REP.updateZones = function() {
 
 		let zones = '';
-		let zoneXml = GBX.gbjson.Zone;
+		let zoneXml = GBP.gbjson.Zone;
 		//console.log( 'zoneXml', zoneXml );
 
 		if ( !zoneXml ) {
@@ -476,7 +476,7 @@
 		REPsumZones.innerHTML = 'Zones  &raquo; ' + REPselZone.length;
 
 		//GBV.showSpace( REPselStorey.value );
-		//REPdivzones.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
+		//REPdivzones.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 		REP.updateZoneAttributes();
 
 	}
@@ -487,19 +487,19 @@
 
 		console.log( '',  );
 
-		//		if ( Array.isArray( GBX.gbjson.Zone ) ) {
+		//		if ( Array.isArray( GBP.gbjson.Zone ) ) {
 
-		//		REPdivZones.innerHTML = REP.traverseGbjson( GBX.gbjson.Zone[ REPselZone.selectedIndex ] ).attributes;
+		//		REPdivZones.innerHTML = REP.traverseGbjson( GBP.gbjson.Zone[ REPselZone.selectedIndex ] ).attributes;
 
 		let zone;
 
-		if ( Array.isArray( GBX.gbjson.Zone ) ) {
+		if ( Array.isArray( GBP.gbjson.Zone ) ) {
 
-			zone = GBX.gbjson.Zone[ REPselZone.selectedIndex ]
+			zone = GBP.gbjson.Zone[ REPselZone.selectedIndex ]
 
 		} else {
 
-			zone = GBX.gbjson.Zone;
+			zone = GBP.gbjson.Zone;
 
 		}
 
@@ -512,7 +512,7 @@
 
 		const cadIds = [];
 		const surfaceMembers = [];
-		const surfaces = GBX.gbjson.Campus.Surface;
+		const surfaces = GBP.gbjson.Campus.Surface;
 		let count = 0;
 		let contents = '';
 
@@ -554,7 +554,7 @@
 	REP.updateCadIds = function() {
 
 		const cadIds = [];
-		const surfaces = GBX.gbjson.Campus.Surface;
+		const surfaces = GBP.gbjson.Campus.Surface;
 		let txt = '';
 
 		for ( let surface of surfaces ) {
@@ -613,7 +613,7 @@
 
 	REP.getGoogleMap = () => {
 
-		const locate = GBX.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
+		const locate = GBP.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
 		let linkToMap;
 
 		if ( locate && locate.Latitude && locate.Longitude ) {

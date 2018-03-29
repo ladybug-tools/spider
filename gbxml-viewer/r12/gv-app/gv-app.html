@@ -5,9 +5,10 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-27" >
-<title>gbXML Viewer 12.11</title>
-<link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<meta name = "date" content = "2018-03-29" >
+<title>gbXML Viewer 12.12</title>
+<link rel="stylesheet" type="text/css" href="../assets/style2.css" >
+<link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
@@ -21,13 +22,13 @@
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
-	<div id = "divMenu" >
+	<div id = "divMenuLeft" class=w3-theme-l5 >
 
-		<div id = "divMenuHeader" title="There's a lot to move here. Be slow and gentle!"  style=text-align:right; >
+		<p id = "pMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!"  style=text-align:right; >
 
 			left menu / click to move
 
-		</div>
+		</p>
 
 		<div id = "divMenuContents" >
 
@@ -52,6 +53,8 @@
 				</small></p>
 				-->
 
+				<div id=divRowButtonsStyle ></div>
+
 				<p id=dragArea class=dragDropArea >
 					drag&drop gbXML files here<br>
 					or <input type = "file" id = "inpFile" onchange="GBX.openGbxmlFile(this);" ><br>
@@ -60,19 +63,19 @@
 
 					or explore sample files<br>
 
-					<button id=butGalleryGbxml class=app-menu onclick =
+					<button id=butGalleryGbxml class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-gbxml.js';" >
 						gbXML.org
 					</button>
 
-					<button id=butGallerySampleFiles class=app-menu onclick =
+					<button id=butGallerySampleFiles class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
 						Spider
 					</button>
 
-					<button id=butGalleryBuildWell class=app-menu onclick =
+					<button id=butGalleryBuildWell class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
 						Build Well
@@ -88,34 +91,32 @@
 
 				<summary title="the primary viewer tools are here" >Features</summary>
 
-				<button id=butSettings class=app-menu onclick=
+				<button id=butSettings class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-set/gv-set.js'; " title="Update colors, views and other parameters" >
 				Settings</button>
 
-				<button id=butReports class=app-menu onclick =
+				<button id=butReports class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep2/gv-rep2.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
-				<button id=butIssues class=app-menu onclick =
+				<button id=butIssues class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-iss/gv-iss.js';" title="Highlight duplicate items and areas of concern in a gbXML file" >
 				Issues</button>
 
-				<button id=butMenuNumbers class=app-menu onclick =
+				<button id=butMenuNumbers class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-num/gv-num.js'; " title="To be deprecated" >
 				Numbers</button>
 
-				<button id=butReports0 class=app-menu onclick =
+				<button id=butReports0 class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated"      style=opacity:0.6; >
 				reports</button>
 
-
-
-				<button id=butSaveChanges class=app-menu onclick =
+				<button id=butSaveChanges class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-sav/gv-sav.js';" title="Save time with gbXML files that are frequently updated" >
 				manage save changes files</button>
@@ -130,31 +131,31 @@
 
 				<summary>Things to try</summary>
 
-				<button id=butCameraFirstPerson class=app-menu onclick =
+				<button id=butCameraFirstPerson class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-cam/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
 				first person camera</button>
 
-				<button id=butAnalemma class=app-menu onclick="
+				<button id=butAnalemma class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
 					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 					const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-ana/gv-ana.js'; " title='Let a little Sunshine into you life' >
 				sun-path / analemma</button>
 
-				<button id=butSunRange class=app-menu onclick="
+				<button id=butSunRange class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
 				const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-ran-sun-range/gv-ran.js'; " title='Let many Suns into you life' >
 				sun-range</button>
 
 
-				<button id=butModuleExplorer class=app-menu onclick =
+				<button id=butModuleExplorer class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-exp/gv-exp.js';" >
 				Module Explorer
 				</button>
 
-				<button id=butMenuTemplate class=app-menu onclick =
+				<button id=butMenuTemplate class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-tmp/gv-tmp.js';" >
 					gbXML Viewer Menu Template
@@ -163,15 +164,13 @@
 
 
 				<!--
-				<button id=butScreenCapture class=app-menu onclick =
+				<button id=butScreenCapture class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
 				screen capture </button>
 				-->
 
 			</details>
-
-
 
 			<details>
 
@@ -199,7 +198,7 @@
 	</div>
 
 
-	<div id = "divHamburgerLeft" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
+	<div id = "divHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
 
 
 	<div id = "divMenuInWorld" title="This is called the 'in-world menu'" >
@@ -208,13 +207,13 @@
 
 			<p >
 
-				<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; title="toggle the scene spinning" >rotation</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=THR.controls.autoRotate=!THR.controls.autoRotate; title="toggle the scene spinning" >rotation</button>
 
-				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
 
-				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; title="toggle the side lines" >edges</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; title="toggle the side lines" >edges</button>
 
-				<button onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view"  >reset view</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view"  >reset view</button>
 
 			</p>
 
@@ -223,23 +222,23 @@
 	</div>
 
 
-	<div id = "divContainer" >
+	<div id = "divPopUp" >
 
-			<div id = "divContentsHeader" >
+			<div id = "divPopUpHeader" class="w3-theme-d2 w3-hover-theme" >
 				pop-up window / click here to move / click outside to close
-				<button ontouchstart=divContainer.style.display="none"; onclick=divContainer.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" ontouchstart=divPopUp.style.display="none"; onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
 			</div>
 
-			<div id = "divContents" ></div>
+			<div id = "divPopUpContents" ></div>
 
 	</div>
 
 
-	<div id = "divHamburgerRight" onclick=COR.toggleNavRight(); > &#9776; </div>
+	<div id = "divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); > &#9776; </div>
 
-	<div id = "divHeadsUp" >
+	<div id = "divHeadsUp"  class=w3-theme-l5 >
 
-		<div id=divHeadsUpHeader title="Open JavaScript console to see more data" >
+		<div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
 			right menu / click here to move
 			<!--
 			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
@@ -272,6 +271,23 @@
 
 	function initApp() {
 
+		let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
+		color = color ? color : 'lime';
+		stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		const colors = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'khaki', 'yellow',
+			'amber', 'orange', 'deep-orange', 'blue-grey', 'brown', 'grey', 'dark-grey', 'black', 'w3schools' ];
+
+		txt = '';
+
+		for ( let color of colors ){
+
+			txt += '<a href=JavaScript: onclick=setStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
+				' title="' + color + '" >&bull;</a> ';
+		}
+
+		divRowButtonsStyle.innerHTML = txt;
+
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
@@ -299,7 +315,7 @@
 	function onloadThreejs() {
 
 		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
-
+/*
 		if ( GBX.gbxmlResponseXML.URL.includes( 'bristol-clifton-down-road' ) ) {
 
 			const scriptSave = document.head.appendChild( document.createElement( 'script' ) );
@@ -326,6 +342,7 @@
 			GBX.setAllVisible();
 
 		}
+*/
 
 		APP.resetMenu();
 	}
@@ -353,6 +370,17 @@
 		menuDetails.forEach(  element => element.remove() );
 
 	};
+
+
+	function setStyle( color ) {
+
+		stylesheetW3schools.href="https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		localStorage.setItem('GbxmlViewerStyleColor', color );
+
+	}
+
+
 
 
 </script>

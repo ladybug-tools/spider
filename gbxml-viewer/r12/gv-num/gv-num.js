@@ -104,7 +104,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		divContainer.style.display = 'none';
+		divPopUp.style.display = 'none';
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
 	};

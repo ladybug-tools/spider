@@ -56,7 +56,7 @@
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
-		renderer.domElement.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
+		renderer.domElement.addEventListener( 'click', function() { divPopUp.style.display = 'none'; }, false );
 
 
 		THR.renderer= renderer;
