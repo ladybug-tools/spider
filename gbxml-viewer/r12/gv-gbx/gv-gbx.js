@@ -260,7 +260,15 @@
 
 			points = GBX.getPoints( polyloop );
 
-			polyloops.push( points );
+			if ( points.length ) {
+
+				polyloops.push( points );
+
+			} else {
+
+				console.log( 'faulty surface', surface );
+				divLog.innerHTML += '<br>faulty surface: see JavaScript console<br>';
+			}
 
 		}
 
@@ -379,11 +387,19 @@
 
 		const points = [];
 
-		for ( let CartesianPoint of polyloop.CartesianPoint ) {
+		if ( Array.isArray( polyloop.CartesianPoint ) ) {
 
-			const point = new THREE.Vector3().fromArray( CartesianPoint.Coordinate );
+			for ( let CartesianPoint of polyloop.CartesianPoint ) {
 
-			points.push( point );
+				const point = new THREE.Vector3().fromArray( CartesianPoint.Coordinate );
+
+				points.push( point );
+
+			}
+
+		} else {
+
+			console.log( 'faulty polyloop', polyloop);
 
 		}
 
