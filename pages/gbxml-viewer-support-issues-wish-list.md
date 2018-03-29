@@ -29,6 +29,9 @@ The 'reset view' button in the in-world ( center of screen) menu may not always 
 
 ## To Do / Wish List Items
 
+* 2018-03-29 ~ MD ~ Report ~ Display Openings (Windows, Doors, Rooflights)
+* 2018-03-29 ~ MD ~ Report ~ Allow Opening modification for Opening Type: FixedWindow, OperableWindow, FixedSkylight,OperableSkylight, SlidingDoor, NonSlidingDoor, Air
+* 2018-03-29 ~ MD ~ Report ~ Storeys, Spaces, Zones to be displayed and sorted by Name, not ID
 * 2018-03-28 ~ MD ~ Report ~ CAD Object Groups. We want to be able modify: surface type or delete globally for all elements per displayed CAD Object Group. (ies requirement for air walls and floors)
 * 2018-03-28 ~ MD ~ Report ~ Check number of verticies in Surfaces and Openings. Flag greater than 4 (e+ requirement for windows)
 * Feel free to add new ideas
