@@ -84,7 +84,8 @@
 
 	function initCameraFirstPerson() {
 
-		if ( butCameraFirstPerson.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( butCameraFirstPerson.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( butCameraFirstPerson.style.fontStyle !== 'italic' ) {
 
 			window.CAM = {};
 
@@ -100,7 +101,8 @@
 			addEventListener ( 'hashchange', toggleCameraFirstPersonOff, false );
 			addEventListener( 'keydown', onKeyDown, false );
 
-			butCameraFirstPerson.style.backgroundColor = 'var( --but-bg-color )';
+			//butCameraFirstPerson.style.backgroundColor = 'var( --but-bg-color )';
+			butCameraFirstPerson.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 			addAvatar();
 
@@ -109,7 +111,8 @@
 			toggleCameraFirstPersonOff();
 
 			butCameraFirstPerson.style.backgroundColor = '';
-
+			butCameraFirstPerson.style.fontStyle = '';
+			butCameraFirstPerson.style.fontWeight = '';
 		}
 
 	}

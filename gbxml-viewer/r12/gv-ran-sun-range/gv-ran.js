@@ -109,7 +109,7 @@
 
 		} else {
 
-			RAN.butMenuSunRange = butMenuTemplate;
+			RAN.butMenuSunRange = butSunRange;
 
 		}
 
@@ -117,7 +117,8 @@
 		const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 		scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 
-		if ( RAN.butMenuSunRange.style.backgroundColor !== 'var( --but-back-color )' ) {
+		//if ( RAN.butMenuSunRange.style.backgroundColor !== 'var( --but-back-color )' ) {
+		if ( RAN.butMenuSunRange.style.fontStyle !== 'italic' ) {
 
 
 			divMenuItems.innerHTML = menuItems + divMenuItems.innerHTML;
@@ -155,13 +156,16 @@
 // following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
-			RAN.butMenuSunRange.style.backgroundColor = 'var( --but-back-color )';
+			//RAN.butMenuSunRange.style.backgroundColor = 'var( --but-back-color )';
+			RAN.butMenuSunRange.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detSunRange.remove();
 
 			RAN.butMenuSunRange.style.backgroundColor = '';
+			RAN.butMenuSunRange.style.fontStyle = '';
+			RAN.butMenuSunRange.style.fontWeight = '';
 
 		}
 
@@ -410,34 +414,36 @@
 		}
 
 
-//		lights.add( suns );
+		//		lights.add( suns );
 
 		scene.add( lights );
 
 		let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
 
 		if ( meshGroundHelper ) {
+
 			meshGroundHelper.receiveShadow = true;
 			meshGroundHelper.material.color.set( 0xffffff );
 			meshGroundHelper.material.needsUpdate = true;
 		}
+
 		THR.renderer.shadowMap.enabled = true;
 
-		//THR.scene.traverse( function ( child ) {
+			//THR.scene.traverse( function ( child ) {
 
 				//if ( child.material ) {
 
 		for ( surface of GBX.surfaceMeshes.children ) {
 
-//				child.castShadow = true
-//				child.receiveShadow = true
+				//				child.castShadow = true
+				//				child.receiveShadow = true
 				surface.material.color.set( 0xffffff );
 
 				surface.material.needsUpdate = true;
 
 			}
 
-		//} );
+			//} );
 
 	}
 

@@ -34,11 +34,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		divContainer.style.display = 'none';
 		THR.controls.keys = false;
 
-		if ( ISS.butMenuIssues.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( ISS.butMenuIssues.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( ISS.butMenuIssues.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
-				`<details id = ISSdetIssues  class=app-menu open>
+				`<details id = ISSdetIssues  class=app-menu open >
 
 					<p>
 						toggles <br><button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
@@ -209,13 +210,16 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			//ISS.getSurfacesInside(); // not found to be useful yet
 
-			ISS.butMenuIssues.style.backgroundColor = 'var( --but-bg-color )';
+			//ISS.butMenuIssues.style.backgroundColor = 'var( --but-bg-color )';
+			ISS.butMenuIssues.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			ISSdetIssues.remove();
 
 			ISS.butMenuIssues.style.backgroundColor = '';
+			ISS.butMenuIssues.style.fontStyle = '';
+			ISS.butMenuIssues.style.fontWeight = '';
 
 		}
 

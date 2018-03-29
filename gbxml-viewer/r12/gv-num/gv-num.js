@@ -27,7 +27,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 
 
-		if ( NUM.butMenuNumbers.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( NUM.butMenuNumbers.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( NUM.butMenuNumbers.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
@@ -94,13 +95,16 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			NUM.getOpenings();
 			NUM.getOrientations();
 
-			NUM.butMenuNumbers.style.backgroundColor = 'var( --but-bg-color )';
+			//NUM.butMenuNumbers.style.backgroundColor = 'var( --but-bg-color )';
+			NUM.butMenuNumbers.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			NUMdetNumbers.remove();
 
 			NUM.butMenuNumbers.style.backgroundColor = '';
+			NUM.butMenuNumbers.style.fontStyle = '';
+			NUM.butMenuNumbers.style.fontWeight = '';
 
 		}
 

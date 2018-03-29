@@ -24,7 +24,7 @@
 
 		}
 
-		if ( SET.butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( SET.butSettings.style.fontStyle !== 'italic' ) {
 
 			SET.explodeStart = false;
 
@@ -145,13 +145,17 @@
 
 			+ divMenuItems.innerHTML;
 
-			SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
+			//SET.butSettings.style.fontStyle = 'italic';
+			//SET.butSettings.style.fontWeight = 'bold';
+			SET.butSettings.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detSettings.remove();
 
-			SET.butSettings.style.backgroundColor = '';
+			//SET.butSettings.style.fontStyle = '';
+			//SET.butSettings.style.fontWeight = '';
+			SET.butSettings.style.cssText = 'background-color: none; font-style: none; font-weight: none';
 
 		}
 

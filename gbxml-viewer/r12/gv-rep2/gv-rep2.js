@@ -21,11 +21,12 @@
 
 		}
 
-		if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( REP.butReports.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
-				`<details id = detReports open >
+				`<details id = detReports open class=app-menu open >
 
 					<summary>Reports</summary>
 
@@ -39,14 +40,16 @@
 
 			initMenuReports();
 
-			REP.butReports.style.backgroundColor = 'var( --but-bg-color )';
+			//REP.butReports.style.backgroundColor = 'var( --but-bg-color )';
+			REP.butReports.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detReports.remove();
 
 			REP.butReports.style.backgroundColor = '';
-
+			REP.butReports.style.fontStyle = '';
+			REP.butReports.style.fontWeight = '';
 		}
 
 		divContainer.style.display = 'none';
@@ -485,7 +488,7 @@
 
 	REP.updateZoneAttributes = function() {
 
-		console.log( '',  );
+		//console.log( '',  );
 
 		//		if ( Array.isArray( GBX.gbjson.Zone ) ) {
 

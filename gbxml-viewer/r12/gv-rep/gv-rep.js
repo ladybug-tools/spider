@@ -27,22 +27,26 @@
 
 			//return;
 
-			REP.butReports0 = butReports;
+			REP.butReports0 = butReports0;
 
 		}
 
 
-		if ( REP.butReports0.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( REP.butReports0.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( REP.butReports0.style.fontStyle !== 'italic' ) {
 
 			REP.createReport();
 
-			REP.butReports0.style.backgroundColor = 'var( --but-bg-color )';
+			//REP.butReports0.style.backgroundColor = 'var( --but-bg-color )';
+			REP.butReports0.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detReports.remove();
 
 			REP.butReports0.style.backgroundColor = '';
+			REP.butReports0.style.fontStyle = '';
+			REP.butReports0.style.fontWeight = '';
 
 		}
 

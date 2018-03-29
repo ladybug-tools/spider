@@ -267,7 +267,7 @@
 			} else {
 
 				console.log( 'faulty surface', surface );
-				divLog.innerHTML += '<br>faulty surface: see JavaScript console<br>';
+				divLog.innerHTML += '<br>faulty surface: ' + surface.id + ' - see JavaScript console for details<br>';
 			}
 
 		}

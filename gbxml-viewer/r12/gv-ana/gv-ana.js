@@ -64,7 +64,8 @@
 
 		console.log( 'ANA.butAnalemma.style.backgroundColor', ANA.butAnalemma.style.backgroundColor );
 
-		if ( ANA.butAnalemma.style.backgroundColor === '' ) {
+		//if ( ANA.butAnalemma.style.backgroundColor === '' ) {
+		if ( ANA.butAnalemma.style.fontStyle !== 'italic' ) {
 
 			parameters.latitude = GBX.gbjson.Campus.Location.Latitude;
 			parameters.longitude = GBX.gbjson.Campus.Location.Longitude;
@@ -129,8 +130,9 @@
 			// following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
-			ANA.butAnalemma.style.backgroundColor = 'var( --but-bg-color )';
-			butColor = getComputedStyle(ANA.butAnalemma).getPropertyValue("--but-bg-color");
+			//ANA.butAnalemma.style.backgroundColor = 'var( --but-bg-color )';
+			//butColor = getComputedStyle(ANA.butAnalemma).getPropertyValue("--but-bg-color");
+			ANA.butAnalemma.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
@@ -139,6 +141,8 @@
 			THR.lightDirectional.remove( sun );
 
 			ANA.butAnalemma.style.backgroundColor = '';
+			ANA.butAnalemma.style.fontStyle = '';
+			ANA.butAnalemma.style.fontWeight = '';
 
 		}
 

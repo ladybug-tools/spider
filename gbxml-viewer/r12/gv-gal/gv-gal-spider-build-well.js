@@ -17,7 +17,8 @@
 
 	function init() {
 
-		if ( butGalleryBuildWell.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( butGalleryBuildWell.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( butGalleryBuildWell.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
@@ -37,13 +38,16 @@
 
 			COR.requestFileAndProgress( urlGitHubApiContents, callbackGitHubMenu );
 
-			butGalleryBuildWell.style.backgroundColor = 'var( --but-bg-color )';
+			//butGalleryBuildWell.style.backgroundColor = 'var( --but-bg-color )';
+			butGalleryBuildWell.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detGalleryBuildWell.remove();
 
 			butGalleryBuildWell.style.backgroundColor = '';
+			butGalleryBuildWell.style.fontStyle = '';
+			butGalleryBuildWell.style.fontWeight = '';
 
 		}
 

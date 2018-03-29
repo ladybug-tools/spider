@@ -26,11 +26,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 
 
-		if ( TMP.butMenuTemplate.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( TMP.butMenuTemplate.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( TMP.butMenuTemplate.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
-				`<details id = detTemplate  class=app-menu open>
+				`<details id = detTemplate  class=app-menu open >
 
 					<summary>Template</summary>
 
@@ -44,13 +45,17 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			initMenuTemplate();
 
-			TMP.butMenuTemplate.style.backgroundColor = 'var( --but-bg-color )';
+			//TMP.butMenuTemplate.style.backgroundColor = 'var( --but-bg-color )';
+			TMP.butMenuTemplate.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detTemplate.remove();
 
+			//TMP.butMenuTemplate.style.backgroundColor = '';
 			TMP.butMenuTemplate.style.backgroundColor = '';
+			TMP.butMenuTemplate.style.fontStyle = '';
+			TMP.butMenuTemplate.style.fontWeight = '';
 
 		}
 

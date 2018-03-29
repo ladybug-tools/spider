@@ -5,6 +5,9 @@
 
 :root {
 
+	--but-back-color: pink;
+	--but-bg-color: yellow;
+
 	--mnu-left-width: 23rem;
 	--mnu-right-width: 25rem;
 
@@ -36,7 +39,8 @@
 	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-left-width ) - 150px ); }
 	.flex-div2 { border: 0px red solid; overflow-x: auto; }
 
-	.highlight { background-color: var( --highlight-color ) }
+	.highlight { background-color: yellow; }
+	.inUse { font-style: 'italic'; font-weight: 'bold';}
 
 	#divContainer {
 		background-color: white; display: none; height: 80%; left: calc( 100% - 47rem );

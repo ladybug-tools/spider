@@ -63,19 +63,19 @@
 
 					or explore sample files<br>
 
-					<button id=butGalleryGbxml class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+					<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-gbxml.js';" >
 						gbXML.org
 					</button>
 
-					<button id=butGallerySampleFiles class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-spider-gbxml-sample-files.js';" >
 						Spider
 					</button>
 
-					<button id=butGalleryBuildWell class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+					<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal/gv-gal-spider-build-well.js';" >
 						Build Well
@@ -288,6 +288,15 @@
 
 		divRowButtonsStyle.innerHTML = txt;
 
+		stylesheetW3schools.onload = function(){
+
+			console.log( 'stylesheetW3schools', stylesheetW3schools );
+			classElement = document.querySelector( '.w3-theme-d1');
+			console.log( 'w3-theme-d1', style = getComputedStyle(classElement).backgroundColor );
+			APP.backgroundColor = getComputedStyle(classElement).backgroundColor;
+
+		}
+
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		inpFilePath.value = thrFilePath;
@@ -363,7 +372,8 @@
 
 		menuButtons = document.querySelectorAll( "button.app-menu" );
 
-		menuButtons.forEach( element => element.style.backgroundColor ='' );
+		menuButtons.forEach( element => {
+			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight =''; } );
 
 		menuDetails = document.querySelectorAll( "details.app-menu" );
 

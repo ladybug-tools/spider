@@ -31,7 +31,8 @@
 		}
 
 
-		if ( SAV.butSaveChanges.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		//if ( SAV.butSaveChanges.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( SAV.butSaveChanges.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
@@ -65,13 +66,16 @@
 
 				//			SAV.initChanges();
 
-			SAV.butSaveChanges.style.backgroundColor = 'var( --but-bg-color )';
+			//SAV.butSaveChanges.style.backgroundColor = 'var( --but-bg-color )';
+			SAV.butSaveChanges.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detSaveChanges.remove();
 
 			SAV.butSaveChanges.style.backgroundColor = '';
+			SAV.butSaveChanges.style.fontStyle = '';
+			SAV.butSaveChanges.style.fontWeight = '';
 
 		}
 
