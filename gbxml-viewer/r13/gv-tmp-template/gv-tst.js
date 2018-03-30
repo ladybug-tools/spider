@@ -6,6 +6,7 @@
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	TST.iconGitHubMark = "../assets/gitHub-mark.png";
 
+
 	TST.menuBreadcrumbs =
 
 	`<div>
@@ -32,7 +33,7 @@
 
 	`<p id=dragArea class=dragDropArea >
 		Drag & drop a file in this box<br>
-		or <input type=file id=inpFile onchange=COR.openFile(this); accept=".xml" ><br>
+		or <input type=file id=inpFile onchange=GBP.openFile(this); accept=".xml" ><br>
 		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
 		<br>
 	<p>`;
@@ -78,3 +79,8 @@
 		<div><a href="#../../../gbxml-sample-files/omha-nb-zneth.xml" >omha-nb-zneth.xml</a></div>
 
 	`;
+
+	//GBP.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//GBP.defaultURL = '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml';
+

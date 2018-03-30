@@ -20,11 +20,12 @@
 
 		} else {
 
+			divPopUp.style.display = 'none';
 			SET.butSettings = butSettings;
 
 		}
 
-		if ( SET.butSettings.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( SET.butSettings.style.fontStyle !== 'italic' ) {
 
 			SET.explodeStart = false;
 
@@ -145,20 +146,33 @@
 
 			+ divMenuItems.innerHTML;
 
-			SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
+			//SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
+			SET.butSettings.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
+
+			butts = detSettings.getElementsByTagName( "button" );
+			//console.log( 'butts', butts );
+
+			for ( butt of butts ) {
+
+				butt.classList.add( "app-menu" );
+				butt.classList.add( "w3-theme-d1" );
+				butt.classList.add( "w3-hover-theme" );
+				butt.classList.add( "w3-hover-border-theme" );
+
+			}
 
 		} else {
 
 			detSettings.remove();
 
 			SET.butSettings.style.backgroundColor = '';
+			SET.butSettings.style.fontStyle = '';
+			SET.butSettings.style.fontWeight = '';
 
 		}
 
-		divPopUp.style.display = 'none';
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
-
 
 	}();
 

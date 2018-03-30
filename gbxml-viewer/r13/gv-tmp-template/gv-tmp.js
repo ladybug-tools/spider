@@ -25,14 +25,13 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-
-		if ( TMP.butMenuTemplate.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( TMP.butMenuTemplate.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
-				`<details id = detTemplate  class=app-menu open>
+				`<details id = "detTemplate" class = "app-menu" open >
 
-					<summary>Template</summary>
+					<summary>Template Summary</summary>
 
 					<div id = "divTemplate" ></div>
 
@@ -44,13 +43,15 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			initMenuTemplate();
 
-			TMP.butMenuTemplate.style.backgroundColor = 'var( --but-bg-color )';
+			TMP.butMenuTemplate.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detTemplate.remove();
 
 			TMP.butMenuTemplate.style.backgroundColor = '';
+			TMP.butMenuTemplate.style.fontStyle = '';
+			TMP.butMenuTemplate.style.fontWeight = '';
 
 		}
 
@@ -60,16 +61,26 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			divTemplate.innerHTML =
 			`
+				<p>
+					<b>visibility toggles</b><br>
+					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+						<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+						<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all</button>
+				</p>
+
+				<p>
+					<input type=range id=inpClip2 max=50 min=-50 step=1 value=-10
+						oninput=outClip2.value=inpClip2.value;SET.updateCLipX(); title="-50 to 50: OK" >
+				</p>
+
 				<textarea id=txtTemplate placeholder="a place for sticky notes" style="height:100px;width:100%;" onchange=localStorage.setItem("gvTemplate",this.value);></textarea>
 
-				<details open >
-					<summary id = "TMPsumTemplate" >Template</summary>
-					<div>` + txt + `</div>
-				</details>
+				<p>` + txt + `</p>
 
 			`;
 
 			gvTemplate = localStorage.getItem( 'gvTemplate' );
+
 			txtTemplate.value = gvTemplate;
 		}
 

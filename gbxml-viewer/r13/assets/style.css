@@ -69,7 +69,7 @@
 	#divMenuLeft a { text-decoration: none; }
 	#divMenuLeft h2 { margin: 5px 0; }
 
-	#divMenuLeft div { padding: 0 10px 0 10px; }
+	#divMenuLeft details { padding: 0 20px 0 10px; }
 	#pMenuLeftHeader { cursor: move; margin: 0; padding: 10px; }
 	#divMenuLeftContents { padding: 10px; }
 

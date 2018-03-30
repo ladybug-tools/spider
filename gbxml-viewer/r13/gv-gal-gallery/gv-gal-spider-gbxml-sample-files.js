@@ -10,17 +10,17 @@
 	var urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
 	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
-	var threeDefaultFile = '../gbxml-viewer10-01-core/gbxml-viewer10-core.html';
+	//var threeDefaultFile = '../gbxml-viewer10-01-core/gbxml-viewer10-core.html';
 
 	init();
 
 	function init() {
 
-		if ( butGallerySampleFiles.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( butGallerySampleFiles.style.fontStyle !== 'italic' ) {
 
 			divMenuItems.innerHTML =
 
-				'<details id = detSampleFiles  class=app-menu open>' +
+				'<details id = detSampleFiles  class=app-menu open >' +
 					'<summary>Ladybug Tools/Spider gbXML Viewer sample files on GitHub</summary>' +
 
 					'<p id=pSampleFiles ></p>' +
@@ -35,14 +35,16 @@
 
 			COR.requestFileAndProgress( urlGitHubApiContents, callbackGitHubMenu );
 
-			butGallerySampleFiles.style.backgroundColor = 'var( --but-bg-color )';
-
+			butGallerySampleFiles.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detSampleFiles.remove();
 
 			butGallerySampleFiles.style.backgroundColor = '';
+			butGallerySampleFiles.style.fontStyle = '';
+			butGallerySampleFiles.style.fontWeight = '';
+
 
 		}
 

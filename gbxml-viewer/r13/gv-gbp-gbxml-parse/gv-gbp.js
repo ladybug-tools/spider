@@ -59,6 +59,44 @@
 
 
 
+
+	GBP.openFile = function( files ) {
+
+		var fileData, reader, data;
+
+		reader = new FileReader();
+
+		reader.onload = function( event ) {
+
+			console.log( 'event', event );
+
+			if ( files.files[0].name.toLowerCase().endsWith( '.xml' ) ) {
+
+				GBP.openGbxmlFile( files );
+
+			} else {
+
+				console.log( 'oops files', files );
+
+			}
+
+			divLog.innerHTML =
+				'name: ' + files.files[0].name + '<br>' +
+				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
+				'type: ' + files.files[0].type + '<br>' +
+				'modified: ' + files.files[0].lastModifiedDate.toLocaleDateString() +
+			'';
+
+			console.log( '', files );
+
+		}
+
+		reader.readAsText( files.files[0] );
+
+	}
+
+
+
 	GBP.callbackGbXML = function( xhr ) {
 
 		GBP.gbxmlResponseXML =  xhr.target.responseXML;

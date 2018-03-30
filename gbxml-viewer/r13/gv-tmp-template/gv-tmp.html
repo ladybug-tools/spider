@@ -3,11 +3,12 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1">
-<meta name = "description" content = "gbXML viewer template ~ 'Boilerplate for creating new modules'" >
+<meta name = "description" content = "gbXML viewer template ~ 'Boilerplate' for creating new modules" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-26" >
+<meta name = "date" content = "2018-03-29" >
 <title>gv-tmp - gbXML Viewer Template</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 <style>
 
 		body { overflow: auto; }
@@ -20,12 +21,71 @@
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" >http://showdownjs.com/</script>
-<!--
-<script src = "../gv-cor-core/gv-cor.js" ></script>
--->
 <script src = "../gv-tmp-template/gv-tst.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+
+		<div id = "divMenuLeft" class = "w3-theme-l5" >
+
+		<p id = "pMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!"  style=text-align:right; >
+				left menu / click to move
+
+		</p>
+
+		<!--
+		<div id = "divMenuContentsxxxx" >
+		-->
+
+			<details open>
+
+				<summary>header</summary>
+
+				<h2><a href="" >gbXML Viewer template</a></h2>
+
+				<div id=divRowButtonsStyle ></div>
+
+				<hr>
+
+			</details>
+
+			<details open >
+
+				<summary title="the primary viewer tools are here" >Features</summary>
+
+				<p>
+					<button id=butMenuLoad class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" >gv-tmp </button>
+				</p>
+
+
+				<hr>
+
+			</details>
+
+
+			<div id=divMenuItems ></div>
+
+
+			<details>
+
+				<summary>Footer</summary>
+
+				<p>footer text here</p>
+				<p>footer text here</p>
+
+			</details>
+
+			<h2 onclick=divMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center;
+			title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
+
+		<!--
+		</div>
+		-->
+
+	</div>
+
+	<!--
+	<div id = "divHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
+	-->
 
 	<div id=divMainContents >
 
@@ -33,9 +93,11 @@
 
 		<div id=divMenuDescription ></div>
 
+		<!--
 		<p>
 			<button id=butMenuLoad >gv-tmp </button>
 		</p>
+		-->
 
 		<iframe id=ifrThree ></iframe>
 
@@ -49,48 +111,15 @@
 
 	</div>
 
-	<div id = "divMenuLeft" >
-
-		<p id=pMenuLeftHeader style=text-align:right; >left menu / click to move</p>
-
-
-		<details open>
-			<summary>header</summary>
-
-			<h2><a href="" >gbXML Viewer template</a></h2>
-
-			<details>
-
-				<summary>Summary</summary>
-				<div>
-					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
-				</div>
-
-			</details>
-
-			<hr>
-
-		</details>
-
-		<div id=divMenuItems >
-
-			<h2 onclick=divMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center;
-			title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
-
-		</div>
-
-	</div>
-
-	<div id = "divHamburgerLeft" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
 
 	<div id=divContainer ><div id=divContents ></div></div>
 
 <script>
 
-	const uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	var uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 	//let uriGbxmlDefault;
 
-	var icw, THREE, THR, GBX, GBV;
+	var icw, THREE, THR, GBP, GBV;
 
 	const pathNameArray = location.pathname.split( '/' );
 
@@ -107,6 +136,24 @@
 	//COR.initCore();
 
 	function initTemplate() {
+
+		let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
+		color = color ? color : 'khaki';
+		stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		const colors = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'khaki', 'yellow',
+			'amber', 'orange', 'deep-orange', 'blue-grey', 'brown', 'grey', 'dark-grey', 'black', 'w3schools' ];
+
+		let txt = '';
+
+		for ( let color of colors ){
+
+			txt += '<a href=JavaScript: onclick=setStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
+				' title="' + color + '" >&bull;</a> ';
+
+		}
+
+		divRowButtonsStyle.innerHTML = txt;
 
 		divMenuTitle.innerHTML = releaseId + ' ' + TST.menuTitle;
 
@@ -174,6 +221,16 @@
 		butMenuLoad.click();
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
+	}
+
+
+
+	function setStyle( color ) {
+
+		stylesheetW3schools.href="https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		localStorage.setItem('GbxmlViewerStyleColor', color );
 
 	}
 
