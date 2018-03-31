@@ -23,12 +23,16 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-03-26 ~ R13.0 </summary>
+<summary>Welcome 2018-03-31 ~ R13.0 </summary>
 
 R13
 * 2018-03-26:First Commit
-* 2018-03-29: Multiple color themes and menu-toogles looking good
-
+* 2018-03-29: Multiple color themes and menu-toggles looking good
+* 2018-03-31 ~ REP / Reports Module
+	* New user experience
+	* Display reports for all available attributes for surfaces, spaces, storeys, zones and openings
+	* Add opening visibility toggle
+	* Add 'Exposed to Sun' button
 </details>
 
 ### R13 Objectives

@@ -74,8 +74,8 @@
 	#divMenuLeftContents { padding: 10px; }
 
 
-	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 40%; }
-
+	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 60%; }
+	#divMenuInWorld h2 { margin: 0; }
 
 	#divHamburgerRight {
 		cursor: pointer; display: none; font-size: 30px; right: 0; line-height: 30px;

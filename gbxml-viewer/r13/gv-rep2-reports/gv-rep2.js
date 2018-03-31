@@ -38,6 +38,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						<b>visibility toggles</b><br>
 						<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
 							<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+							<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
 							<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all</button>
 					</p>
 
@@ -45,7 +46,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 						<summary>Select Report</summary>
 
-						<select id=REP2selReport size=10 ></select>
+						<select id=REP2selReport onclick=REP2.showReport(); onchange=REP2.showReport(); size=10 ></select>
 
 						<div id=REP2divReport ></div>
 
@@ -131,9 +132,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 
 		function initMenuRep2() {
-
-			REP2selReport.onchange = REP2.showReport;
-
 
 			REP2.items = [];
 
@@ -324,7 +322,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			case 'Zone':
 				REP2.showZone(REPselItem.value);
 				break;
-			case 'Opening':
+			case 'Openings':
 				REP2.showOpening(REPselItem.value);
 				break;
 			default:
@@ -336,7 +334,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	REP2.getInteractions = function() {
 
 		item = REP2.items[ REP2selReport.selectedIndex ];
-		console.log( 'item', item );
+		//console.log( 'item', item );
 
 		if ( item.title === 'Surface' ) {
 
@@ -367,7 +365,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				<button onclick=REP2.showZone(REPselItem.value); >select</button>
 			`;
 
-		} else if ( item.title === 'Opening' ) {
+		} else if ( item.title === 'Openings' ) {
 
 			REP2divInteract.innerHTML =
 			`
@@ -508,7 +506,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	REP2.showZone = function ( zoneIdRef ) {
 
-		console.log( 'zoneIdRef', zoneIdRef );
+		//console.log( 'zoneIdRef', zoneIdRef );
 
 		const spaces = GBP.gbjson.Campus.Building.Space;
 
@@ -547,6 +545,22 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	REP2.showOpening = function( id ) {
 
 		console.log( 'opening id', id );
+		GBP.surfaceMeshes.visible = false;
+		GBP.openingMeshes.visible = true;
+
+		GBP.openingMeshes.children.forEach( element => {
+
+			element.visible = element.userData.data.id === id ? true : false;
+
+			if ( element.visible === true  ) {
+
+				element.material.opacity = 1;
+				element.material.side = 2;
+				element.material.needsUpdate = true;
+
+			}
+
+		} );
 
 	}
 
@@ -590,6 +604,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		txt +=
 
+			'<p><button class=toggle onclick=REP2.showExposedToSun(); >Exposed to Sun</button> </p>' +
 			'<p><button class=toggle onclick=GBP.setAllVisible(); >all visible</button></p>';
 
 
@@ -630,6 +645,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	};
 
+
+	REP2.showExposedToSun = function(  ) {
+
+		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.exposedToSun === "true" ? true : false );
+
+	};
 
 
 	REP2.setMenuCadIdGroups = function() {
@@ -705,6 +726,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 
 	}
+
 
 
 	REP2.getGoogleMap = () => {
