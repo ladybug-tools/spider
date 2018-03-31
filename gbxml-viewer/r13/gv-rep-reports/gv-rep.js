@@ -105,7 +105,8 @@
 				<div class=flex-container2 >
 					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,REPselSpace); size=6 placeholder="space id" ><br>
-						<select id = "REPselSpace" onclick=GBI.showSpace(this.value);REP.updateSpaceAttributes(); onchange=GBI.showSpace(this.value);REP.updateSpaceAttributes(); size=10 ></select>
+						<select id = "REPselSpace" onclick=GBI.showSpace(this.value);REP.updateSpaceAttributes(REPdivSpaces,REPselSpace);
+							onchange=GBI.showSpace(this.value);REP.updateSpaceAttributes(REPdivSpaces,REPselSpace); size=10 ></select>
 					</div>
 					<div id = "REPdivSpaces" class=flex-left-div2  ></div>
 				</div>
@@ -126,11 +127,12 @@
 			</details>
 
 			<details>
-				<summary id = "REPsumStoreys" >Storeys</summary>
+				<summary id = "REPsumStoreys" >Storeys by ID</summary>
 				<div class=flex-container2 >
 					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,REPselStorey); size=6 placeholder="storey id" ><br>
-						<select id = "REPselStorey" onclick=GBI.showStorey(this.value);REP.updateStoreyAttributes(); onchange=GBI.showStorey(this.value);REP.updateStoreyAttributes(); size=10 ></select>
+						<select id = "REPselStorey" onclick=GBI.showStorey(this.value);REP.updateStoreyAttributes(REPdivStoreys,REPselStorey);
+							onchange=GBI.showStorey(this.value);REP.updateStoreyAttributes(REPdivStoreys,REPselStorey); size=10 ></select>
 					</div>
 					<div id = "REPdivStoreys" class=flex-left-div2  ></div>
 				</div>
@@ -138,10 +140,20 @@
 			</details>
 
 			<details>
+				<summary id = "REPsumStoreysName" >Storeys by Name</summary>
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=REP.updateSelect(this,REPselStoreyName); size=6 placeholder="storey name" ><br>
+						<select id = "REPselStoreyName" onclick=GBI.showStorey(this.value);REP.updateStoreyAttributes(REPdivStoreysName,REPselStoreyName);
+							onchange=GBI.showStorey(this.value);REP.updateStoreyAttributes(REPdivStoreysName,REPselStoreyName); size=10 ></select>
+					</div>
+					<div id = "REPdivStoreysName" class=flex-left-div2  ></div>
+				</div>
+				<hr>
+			</details>
 
-
+			<details>
 				<summary id = "REPsumZones" >Zones</summary>
-
 				<div class=flex-container2 >
 					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,REPselZone); size=6 placeholder="zone id" ><br>
@@ -212,7 +224,9 @@
 
 		REP.updateSpaceByName();
 
-		REP.updateStoreys();
+		REP.updateStoreysById();
+
+		REP.updateStoreysName();
 
 		REP.updateZones();
 
@@ -459,7 +473,7 @@
 	}
 
 
-	REP.updateStoreys = function() {
+	REP.updateStoreysById = function() {
 
 		let storeys = '';
 		let storeyXml = GBP.gbjson.Campus.Building.BuildingStorey;
@@ -480,21 +494,48 @@
 		REPselStorey.innerHTML = storeys;
 		REPselStorey.selectedIndex = 0;
 
-		REPsumStoreys.innerHTML = 'Storeys  &raquo; ' + REPselStorey.length;
+		REPsumStoreys.innerHTML = 'Storeys by ID &raquo; ' + REPselStorey.length;
 
-		//GBI.showSpace( REPselStorey.value );
-		//REPdivStoreys.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
-		REP.updateStoreyAttributes();
+		REP.updateStoreyAttributes( REPdivStoreys, REPselStorey );
+
+	}
+
+
+	REP.updateStoreysName = function() {
+
+		let storeys = '';
+		let storeyXml = GBP.gbjson.Campus.Building.BuildingStorey;
+		//console.log( 'storeyXml', storeyXml );
+
+		if ( !storeyXml ) { return; }
+
+		if ( storeyXml.length ) {
+
+			storeyXml.forEach( function( element ) { storeys += '<option value=' + element.id + ' >' + element.Name + '</option>'; } );
+
+		} else {
+
+			storeys = '<option>' + storeyXml.Name + '</option>';
+
+		}
+
+		REPselStoreyName.innerHTML = storeys;
+		REPselStoreyName.selectedIndex = 0;
+
+		REPsumStoreysName.innerHTML = 'Storeys  by Name &raquo; ' + REPselStoreyName.length;
+
+		REP.updateStoreyAttributes( REPdivStoreysName, REPselStoreyName );
 
 	}
 
 
 
-	REP.updateStoreyAttributes = function() {
+	REP.updateStoreyAttributes = function( divStoreys, selStorey ) {
 
-		REPdivStoreys.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
+		divStoreys.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ selStorey.selectedIndex ] ).attributes;
 
 	}
+
 
 
 	REP.updateZones = function() {

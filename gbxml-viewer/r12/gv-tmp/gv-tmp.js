@@ -52,7 +52,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			detTemplate.remove();
 
-			//TMP.butMenuTemplate.style.backgroundColor = '';
 			TMP.butMenuTemplate.style.backgroundColor = '';
 			TMP.butMenuTemplate.style.fontStyle = '';
 			TMP.butMenuTemplate.style.fontWeight = '';

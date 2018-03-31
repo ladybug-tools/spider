@@ -66,6 +66,8 @@
 
 			COR.requestFile( url, callbackMarkdown );
 
+			if ( window.divHeadsUp ) { divHeadsUp.style.display="none"; }
+
 		} else if ( ulc.endsWith( '.xml' ) ) {
 
 			console.log( 'url', url );

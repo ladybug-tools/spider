@@ -477,11 +477,12 @@
 
 	GBP.setAllVisible = function() {
 
+		console.log( '', 23 );
 		GBP.surfaceMeshes.visible = true;
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
-			if ( !child.userData.material ) { continue; }
+			if ( !child.material ) { continue; }
 
 			child.material = new THREE.MeshPhongMaterial( {
 				color: GBP.colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true }
@@ -501,6 +502,6 @@
 		//};
 
 		document.body.style.backgroundImage = '';
-		divLog.innerHTML = '';
+		divLog.innerHTML = '??';
 
 	};

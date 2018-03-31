@@ -84,6 +84,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			txtTemplate.value = gvTemplate;
 		}
 
+		divPopUp.style.display = 'none';
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
+
 	}();
 
 

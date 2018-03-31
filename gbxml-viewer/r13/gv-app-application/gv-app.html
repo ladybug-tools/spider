@@ -101,7 +101,7 @@
 
 				<button id=butReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep-reports/gv-rep.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
+					script.src = '../gv-rep2-reports/gv-rep2.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
 				<button id=butIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
@@ -317,6 +317,7 @@
 
 		}
 
+		THR.renderer.domElement.addEventListener( 'click', function() { divPopUp.style.display = 'none'; }, false );
 		THR.controls.enableKeys = false;
 
 	}
