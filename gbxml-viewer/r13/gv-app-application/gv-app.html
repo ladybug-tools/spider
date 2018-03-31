@@ -18,7 +18,7 @@
 <script src = "../gv-gbp-gbxml-parse/gv-gbp.js" ></script>
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
 <!--
-<script src = "../gv-gbv/gv-gbv.js" ></script>
+<script src = "../gv-GBI/gv-GBI.js" ></script>
 <script src = "../gv-hud/gv-hud.js" ></script>
 -->
 
@@ -220,7 +220,7 @@
 
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; title="toggle the side lines" >edges</button>
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible();GBV.zoomObjectBoundingSphere(GBP.surfaceMeshes); title="Go to the home view"  >reset view</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible();GBP.zoomObjectBoundingSphere(GBP.surfaceMeshes); title="Go to the home view"  >reset view</button>
 
 			</p>
 
@@ -362,7 +362,7 @@
 	APP.callbackJson = function( xhr ) {
 
 		const response = xhr.target.response;
-		GBV.surfaceChanges = JSON.parse( response )
+		GBI.surfaceChanges = JSON.parse( response )
 
 		SAV.getUpdates();
 

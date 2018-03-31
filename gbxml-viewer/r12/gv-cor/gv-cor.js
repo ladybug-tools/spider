@@ -25,16 +25,16 @@
 			dragAreaToIframe.addEventListener( 'drop', COR.dropIframe, false );
 		}
 
-		if ( window.divMenuLeftHeader ) {
-			divMenuLeftHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			divMenuLeftHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			divMenuLeftHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+		if ( window.pMenuLeftHeader ) {
+			pMenuLeftHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			pMenuLeftHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			pMenuLeftHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
-		if ( window.divContentsHeader ) {
-			divContentsHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			divContentsHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			divContentsHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+		if ( window.divContainerHeader ) {
+			divContainerHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			divContainerHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			divContainerHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
 

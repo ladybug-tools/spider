@@ -25,6 +25,9 @@
 		//if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
 		if ( REP.butReports.style.fontStyle !== 'italic' ) {
 
+			script = document.head.appendChild( document.createElement( 'script' ) );
+			script.src = '../gv-gbi-gbxml-interact/gv-gbi.js';
+
 			divMenuItems.innerHTML =
 
 				`<details id = "detReports" class = "app-menu"  open >
@@ -77,14 +80,14 @@
 
 			<details open >
 				<summary id = "REPsumSurfacesIndividually" >Surfaces Individually</summary>
-				 <button onclick=GBV.showSurface(REPselSurface.value); >select</button>
-				 <button onclick=GBV.zoomIntoSurface(REPselSurface.value); >zoom</button>
-				 <button onclick=GBV.deleteSurface(REPselSurface.value); >delete</button>
+				 <button onclick=GBI.showSurface(REPselSurface.value); >select</button>
+				 <button onclick=GBI.zoomIntoSurface(REPselSurface.value); >zoom</button>
+				 <button onclick=GBI.deleteSurface(REPselSurface.value); >delete</button>
 
 				<div class=flex-container2 >
 					<div class="flex-div1" >
 						<input oninput=REP.updateSelect(this,REPselSurface); size=6 placeholder="surface id"><br>
-						<select id = "REPselSurface" onclick=GBV.showSurface(this.value);REP.updateSurfaceAttributes(); onchange=GBV.showSurface(this.value);REP.updateSurfaceAttributes(); size=10 ></select><br>
+						<select id = "REPselSurface" onclick=GBI.showSurface(this.value);REP.updateSurfaceAttributes(); onchange=GBI.showSurface(this.value);REP.updateSurfaceAttributes(); size=10 ></select><br>
 					</div>
 					<div id=REPdivSurfacesIndividually class="flex-left-div2" ></div>
 				</div>
@@ -98,13 +101,26 @@
 			</details>
 
 			<details>
-				<summary id = "REPsumSpaces" >Spaces</summary>
+				<summary id = "REPsumSpaces" >Spaces by ID</summary>
 				<div class=flex-container2 >
 					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,REPselSpace); size=6 placeholder="space id" ><br>
-						<select id = "REPselSpace" onclick=GBV.showSpace(this.value);REP.updateSpaceAttributes(); onchange=GBV.showSpace(this.value);REP.updateSpaceAttributes(); size=10 ></select>
+						<select id = "REPselSpace" onclick=GBI.showSpace(this.value);REP.updateSpaceAttributes(); onchange=GBI.showSpace(this.value);REP.updateSpaceAttributes(); size=10 ></select>
 					</div>
 					<div id = "REPdivSpaces" class=flex-left-div2  ></div>
+				</div>
+				<hr>
+			</details>
+
+			<details>
+				<summary id = "REPsumSpacesName" >Spaces by Name</summary>
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=REP.updateSelectText(this,REPselSpaceName); size=6 placeholder="space name" ><br>
+						<select id = "REPselSpaceName" onclick=GBI.showSpace(this.value);REP.updateSpaceAttributes(REPdivSpacesName,REPselSpaceName);
+							onchange=GBI.showSpace(this.value);REP.updateSpaceAttributes(REPdivSpacesName,REPselSpaceName); size=10 ></select>
+					</div>
+					<div id = "REPdivSpacesName" class=flex-left-div2  ></div>
 				</div>
 				<hr>
 			</details>
@@ -114,7 +130,7 @@
 				<div class=flex-container2 >
 					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,REPselStorey); size=6 placeholder="storey id" ><br>
-						<select id = "REPselStorey" onclick=GBV.showStorey(this.value);REP.updateStoreyAttributes(); onchange=GBV.showStorey(this.value);REP.updateStoreyAttributes(); size=10 ></select>
+						<select id = "REPselStorey" onclick=GBI.showStorey(this.value);REP.updateStoreyAttributes(); onchange=GBI.showStorey(this.value);REP.updateStoreyAttributes(); size=10 ></select>
 					</div>
 					<div id = "REPdivStoreys" class=flex-left-div2  ></div>
 				</div>
@@ -129,8 +145,8 @@
 				<div class=flex-container2 >
 					<div class=flex-div1 >
 						<input oninput=REP.updateSelect(this,REPselZone); size=6 placeholder="zone id" ><br>
-						<select id = "REPselZone" onclick=GBV.showZone(this.value);REP.updateZoneAttributes();
-							onchange=GBV.showZone(this.value);REP.updateZoneAttributes(); size=10 ></select>
+						<select id = "REPselZone" onclick=GBI.showZone(this.value);REP.updateZoneAttributes();
+							onchange=GBI.showZone(this.value);REP.updateZoneAttributes(); size=10 ></select>
 					</div>
 					<div id = "REPdivZones" class=flex-left-div2  ></div>
 				</div>
@@ -149,7 +165,7 @@
 			<details>
 				<summary id = "REPsumCadIds" >CAD Object IDs</summary>
 				<input oninput=REP.updateSelect(this,REPselCadId); style=width:100% placeholder="cad object id" ><br>
-				<select id = "REPselCadId" onclick=GBV.showCadId(this.value); onchange=GBV.showCadId(this.value); size=10 ></select>
+				<select id = "REPselCadId" onclick=GBI.showCadId(this.value); onchange=GBI.showCadId(this.value); size=10 ></select>
 
 			</details>
 
@@ -192,7 +208,9 @@
 
 		REP.updateSurfacesByType();
 
-		REP.updateSpace();
+		REP.updateSpaceById();
+
+		REP.updateSpaceByName();
 
 		REP.updateStoreys();
 
@@ -244,7 +262,7 @@
 	}
 
 
-	// to GBV?
+	// to GBI?
 	REP.setTypeInvisible = function( that ) {
 
 		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
@@ -306,6 +324,7 @@
 		GBP.surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
 
 		REPselSurface.innerHTML = txt;
+
 		REPselSurface.selectedIndex = 0; //Math.floor( Math.random() * property.length );
 		REPsumSurfacesIndividually.innerHTML = 'Surfaces Individually &raquo; ' + REPselSurface.length;
 		REP.updateSurfaceAttributes();
@@ -359,7 +378,7 @@
 			txt +=
 				//'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
 				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' ><img src="../assets/eye.png" height=18></button>' +
-				' <button class=toggle onclick=GBV.showSurfaceType(this.innerText); >' + types[ i ] + '</button>: ' +
+				' <button class=toggle onclick=GBI.showSurfaceType(this.innerText); >' + types[ i ] + '</button>: ' +
 				typesCount[ i ] + '-' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
 				'%<br>';
 
@@ -367,7 +386,7 @@
 
 		txt +=
 
-			'<p><button class=toggle onclick=GBV.setAllVisible(); >all visible</button></p>';
+			'<p><button class=toggle onclick=GBI.setAllVisible(); >all visible</button></p>';
 
 
 		REPsumSurfacesByType.innerHTML = 'Surfaces By Type &raquo; ' + types.length;
@@ -377,7 +396,7 @@
 
 
 
-	REP.updateSpace = function() {
+	REP.updateSpaceById = function() {
 
 		let spaces = '';
 		let spaceXml = GBP.gbjson.Campus.Building.Space;
@@ -397,18 +416,45 @@
 		REPselSpace.innerHTML = spaces;
 		REPselSpace.selectedIndex = 0;
 
-		REPsumSpaces.innerHTML = 'Spaces  &raquo; ' + REPselSpace.length;
+		REPsumSpaces.innerHTML = 'Spaces by ID &raquo; ' + REPselSpace.length;
 
-		//GBV.showSpace( REPselSpace.value )
-		// REPdivSpaces.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
-		REP.updateSpaceAttributes();
+		REP.updateSpaceAttributes( REPdivSpaces, REPselSpace );
+
 	}
 
 
 
-	REP.updateSpaceAttributes = function() {
+	REP.updateSpaceByName = function() {
 
-		REPdivSpaces.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
+		let spaces = '';
+		let spaceXml = GBP.gbjson.Campus.Building.Space;
+
+		if ( !spaceXml ) { return; }
+
+		if ( spaceXml.length ) {
+
+			spaceXml.forEach( function( element ) { spaces += '<option value=' + element.id + ' >' + element.Name + '</option>'; } );
+
+		} else {
+
+			spaces = '<option>' + spaceXml.Name + '</option>';
+
+		}
+
+		REPselSpaceName.innerHTML = spaces;
+		REPselSpaceName.selectedIndex = 0;
+
+		REPsumSpacesName.innerHTML = 'Spaces by Name &raquo; ' + REPselSpaceName.length;
+
+		REP.updateSpaceAttributes( REPdivSpacesName, REPselSpaceName );
+
+	}
+
+
+
+	REP.updateSpaceAttributes = function( divSpaces, selSpace ) {
+
+		divSpaces.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.Space[ selSpace.selectedIndex ] ).attributes;
 
 	}
 
@@ -436,7 +482,7 @@
 
 		REPsumStoreys.innerHTML = 'Storeys  &raquo; ' + REPselStorey.length;
 
-		//GBV.showSpace( REPselStorey.value );
+		//GBI.showSpace( REPselStorey.value );
 		//REPdivStoreys.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 		REP.updateStoreyAttributes();
 
@@ -479,7 +525,7 @@
 
 		REPsumZones.innerHTML = 'Zones  &raquo; ' + REPselZone.length;
 
-		//GBV.showSpace( REPselStorey.value );
+		//GBI.showSpace( REPselStorey.value );
 		//REPdivzones.innerHTML = REP.traverseGbjson( GBP.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 		REP.updateZoneAttributes();
 
@@ -593,7 +639,7 @@
 
 
 
-	// copied from  HUD/ move to GBV?
+	// copied from  HUD/ move to GBI?
 	REP.updateSelect = function( input, select ) {
 
 		const str = input.value.toLowerCase();
@@ -613,6 +659,25 @@
 
 	};
 
+
+	REP.updateSelectText = function( input, select ) {
+
+		const str = input.value.toLowerCase();
+
+		for ( let option of select.options ) {
+
+			if ( option.innerHTML.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+				//select.click();
+
+				break;
+
+			}
+
+		}
+
+	};
 
 
 	REP.getGoogleMap = () => {
