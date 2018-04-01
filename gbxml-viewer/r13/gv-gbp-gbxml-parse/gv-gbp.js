@@ -385,7 +385,7 @@
 		}
 		//console.log( 'GBP.openings', GBP.openings );
 
-		GBP.openingsArea = 0;
+		//GBP.openingsArea = 0;
 
 		var material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.1, transparent: true } );
 		GBP.openingMeshes = new THREE.Object3D();
@@ -410,7 +410,8 @@
 			points.map( point => obj2.localToWorld( point ) );
 			//console.log( 'points', points );
 
-			GBP.openingsArea += THREE.ShapeUtils.area( points );
+			area = THREE.ShapeUtils.area( points );
+			//GBP.openingsArea += area
 			//console.log( 'area', THREE.ShapeUtils.area( points ) );
 
 			shape = new THREE.Shape( points );
@@ -423,6 +424,7 @@
 			shapeMesh.lookAt( triangle.normal ); // quaternion.copy( obj.quaternion );
 			shapeMesh.position.copy( triangle.normal.multiplyScalar( - triangle.constant ) );
 			shapeMesh.userData.data = opening;
+			shapeMesh.userData.area = area
 
 			GBP.openingMeshes.add( shapeMesh );
 

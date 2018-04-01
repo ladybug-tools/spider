@@ -13,11 +13,11 @@
 
 ## Mission
 
-* Enable easy access to the
+* Enable easy access to the:
 	* Source code for every module
 	* Read Me file for every module
-	* List the features and benefits for every module ising Mission and Vission statements
-	* Easy access to the Change log, issues list and wish list for every module
+	* List the features and benefits for every module using Mission and Vision statements
+	* Change log, issues list and wish list for every module
 
 
 ## Concept
@@ -42,7 +42,7 @@ Developers / 'You'
 * Can I use just a single aspect of this program in my program in a tidy fashion? Or will I have to fork huge chunks of code?
 
 Developers / 'Us'
-* How can we write text once nd have the text in one place and yet use it everywhere?
+* How can we write text once and have the text in one place and yet use it everywhere?
 * How can a single set of notes provide benefit to multiple audience types?
 
 
@@ -60,6 +60,10 @@ Developers / 'Us'
 
 
 ## Change Log
+
+### 2018-03-31 ~ Theo
+
+* Adding more text
 
 ### 2018-03-26 ~ Theo
 

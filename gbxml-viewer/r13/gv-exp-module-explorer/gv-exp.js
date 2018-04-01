@@ -58,6 +58,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<p><a href="#../assets/about-gbxml-viewer.md" >About gbXML Viewer</a></p>
 
+					<p><a href="#../gv-exp-module-explorer/README.md" >EXP ~ Module Explorer Module</a><br>
+					Provides easy access to all the documentation in all the moduless' read me files</p>
+
+
 					<p>The Left Menu Modules</p>
 
 					<p><a href="#../gv-app-application/README.md" >APP ~ Application Module</a><br>
@@ -78,11 +82,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<p>The Things to Try Modules</p>
 
-					<p><a href="#../gv-exp-module-explorer/README.md" >EXP ~ Module Explorer Module</a><br>
-					Easy access to all the documentation in the Read me files</p>
 
 					<p><a href="#../gv-tmp-template/README.md" >TMP ~ Template Module</a><br>
 					Templates to help you start creating new modules</p>
+
 
 					<p>The Back-End Essentials</p>
 
@@ -97,6 +100,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<p><a href="#../gv-gbp-gbxml-parse/README.md" >GBP ~ gbXML Parse Module</a><br>
 					Translates gbXML text to JSON then to 3D meshes</p>
+
+
 
 					<p><a href="#../assets/README.md" >Assets Directory</a><br>
 					Provides access to style sheets, images, documents and utilities</p>

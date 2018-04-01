@@ -73,6 +73,7 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Wish list / To Do
 
+* 2018-04-01 ~ Theo ~ Add 'Openings by Type' report
 * 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities
 * 2018-03-31 ~ Any of the attributes could be buttons. Are there attributes where buttons would be really useful.
 * 2018-03-31 ~ We now do two specialty reports: 'Surfaces by Type + Exposed to Sun' and 'Cad Object Groups'. Should there be others?

@@ -9,7 +9,7 @@
 	* Load via URLs, file dialog box, drag and drop and more
 * View each gbXML file as an interactive 3D building on your computer, tablet and phone
 	* Mouse, stylus and finder-touch-enabled
-* View all components contained in the gbXML files singly and collectively in 3D along with all text attributes
+* View all components contained in the gbXML files singly and collectively in 3D along with all their associated text attributes
 	* Interactive menu-driven user interface makes features easy to find
 * Identify issues in gbXML file data that may impede loading into downstream apps
 	* Identify faulty duplication, missing required items, reversed normals
@@ -17,7 +17,7 @@
 	* Window to Wall ratios for the eight compass directions, exposed to Sun surfaces and more
 * Enable the updating and error-fixing of some aspects of the gbXML files as well as adding simple elements
 	* Add ground planes, add colors of surfaces, create sections and exploded views
-* Serve as an input/output engine for calculations performed by other apps. For example: Sun paths, fly-through's and more
+* Serve as an input/output engine for calculations performed by other apps. For example: Sun paths, fly-through and more
 	* Spin-offs are working with Node.js and on Amazon Web Services
 * Integrate nicely into complex, ongoing large project web-enabled workflows
 	* Save edits and apply these to the next release of the incoming files, play nice in an iframe, cross-origin-friendly
