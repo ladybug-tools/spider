@@ -25,6 +25,10 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <summary>Welcome 2018-03-29 ~ R12.12</summary>
 
+R12.14
+HUD / Right Menu
+* Fix polyloop telltales not showing/ causing JavaScript error
+
 R12.13
 APP/ All modules
 * Fix issues with menu buttons not resetting style on new model load

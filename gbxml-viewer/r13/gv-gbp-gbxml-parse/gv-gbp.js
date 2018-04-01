@@ -597,6 +597,6 @@
 		//};
 
 		document.body.style.backgroundImage = '';
-		divLog.innerHTML = '??';
+		divLog.innerHTML = '';
 
 	};

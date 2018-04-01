@@ -2,6 +2,7 @@
 # About gbXML Viewer
 
 <i>The Module Explorer button in the Left Menu enables you to access help, source code and support for every module in gbXML Viewer</i>
+
 ## Mission
 
 * Browse and display numerous building models contained in [gbXML]( https://gbxml.org ) files as easily and as quickly as possible - at no charge

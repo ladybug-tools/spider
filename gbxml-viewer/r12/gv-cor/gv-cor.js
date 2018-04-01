@@ -7,7 +7,7 @@
 	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r11/';
 
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
-	COR.iconGitHubMark = "../assets/gitHub-mark.png";
+	COR.iconGitHubMark = "../assets/github-mark.png";
 
 	COR.threeDefaultFile = '../gv-thr/gv-thr.html';
 	COR.uriDefaultFile = '../assets/splash-screen.md'; // maybe should be in APP?

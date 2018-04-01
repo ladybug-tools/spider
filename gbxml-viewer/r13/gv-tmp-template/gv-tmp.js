@@ -21,6 +21,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
+			divPopUp.style.display = 'none';
 			TMP.butMenuTemplate = butMenuTemplate;
 
 		}
@@ -84,7 +85,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			txtTemplate.value = gvTemplate;
 		}
 
-		divPopUp.style.display = 'none';
+
+		divLog.innerHTML = '';
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
 
