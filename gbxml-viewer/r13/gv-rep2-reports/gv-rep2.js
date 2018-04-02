@@ -262,7 +262,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		REPselItem.innerHTML = txt;
 		REPselItem.selectedIndex = 0;
 
-		REP2.getAttributes();
+		//REP2.getAttributes();
 
 		//REPsumSurfacesIndividually.innerHTML = 'Surfaces Individually &raquo; ' + REPselSurface.length;
 
@@ -323,7 +323,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				REP2.showZone(REPselItem.value);
 				break;
 			case 'Openings':
-				REP2.showOpening(REPselItem.value);
+				REP2.showOpening( REPselItem.value );
+				const points = item.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) );
+				//console.log( 'points', points.length )
+				REP2divAttributes.innerHTML += '<br>Vertices: ' + points.length
 				break;
 			default:
 
@@ -544,7 +547,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	REP2.showOpening = function( id ) {
 
-		console.log( 'opening id', id );
+		//console.log( 'opening id', id );
+
 		GBP.surfaceMeshes.visible = false;
 		GBP.openingMeshes.visible = true;
 

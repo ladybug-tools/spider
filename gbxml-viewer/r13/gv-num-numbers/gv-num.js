@@ -25,6 +25,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
+			divPopUp.style.display = 'none';
 			NUM.butMenuNumbers = butMenuNumbers;
 
 		}
@@ -67,7 +68,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						<hr>
 					</details>
 
-					<details open>
+					<details>
 						<summary >Areas by Opening Type</summary>
 						<div id = "NUMdivOpenings" ></div>
 						<hr>
@@ -112,7 +113,6 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		divContainer.style.display = 'none';
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
 	};

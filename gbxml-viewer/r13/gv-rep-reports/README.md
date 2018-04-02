@@ -86,7 +86,12 @@ The purpose of this module is to provide you with any and all useful data embedd
 ## Change Log
 
 
-###2018-03-31 ~ Theo
+### 2018-04-01 ~ Theo
+
+R13.0
+* Add vertices count for openings
+
+### 2018-03-31 ~ Theo
 
 R13.0
 * Complete re-write

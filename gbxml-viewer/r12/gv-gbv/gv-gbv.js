@@ -189,9 +189,6 @@
 
 
 
-
-
-
 	GBV.getSpaceId = ( spaceIdRef ) => {
 
 		if ( !GBX.gbjson.Campus.Building.Space || !GBX.gbjson.Campus.Building.Space.length ) { return; }

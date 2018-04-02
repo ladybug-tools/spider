@@ -1,11 +1,11 @@
-// Copyright 2018 Ladybug Tools authors. MIT License
+	// Copyright 2018 Ladybug Tools authors. MIT License
 
 	var SET = {};
 
 	SET.localClip1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
 	SET.localClip2= new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 );
 
-//	initSettings();
+	//	initSettings();
 
 	SET.initSettings = function() {
 
@@ -740,7 +740,7 @@
 		const angle = inpRotate.valueAsNumber * Math.PI / 180;
 
 		SET.localClip1.normal = new THREE.Vector3( Math.cos( angle ), Math.sin( angle ), THR.axesHelper.position.x );
-//		SET.localClip2.normal = new THREE.Vector3( Math.cos( angle + Math.PI ), Math.sin( angle + Math.PI ), THR.axesHelper.position.x );
+		//		SET.localClip2.normal = new THREE.Vector3( Math.cos( angle + Math.PI ), Math.sin( angle + Math.PI ), THR.axesHelper.position.x );
 		SET.localClip2.normal = new THREE.Vector3( Math.cos( angle ), Math.sin( angle ), THR.axesHelper.position.x );
 
 	};
@@ -753,7 +753,7 @@
 		SET.localClip1.constant = origin + parseInt( inpClip1.value, 10 );
 
 		SET.localClip2.constant = - origin + - parseInt( inpClip2.value, 10 );
-console.log( '', SET.localClip2.constant );
+		console.log( '', SET.localClip2.constant );
 	}
 
 

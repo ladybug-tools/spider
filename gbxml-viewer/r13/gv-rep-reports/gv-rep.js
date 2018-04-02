@@ -599,6 +599,7 @@
 	}
 
 
+
 	REP.UpdateCadIdGroups = function() {
 
 		const cadIds = [];
@@ -719,6 +720,7 @@
 		}
 
 	};
+
 
 
 	REP.getGoogleMap = () => {
