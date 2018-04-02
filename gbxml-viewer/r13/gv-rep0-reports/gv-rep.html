@@ -56,6 +56,9 @@
 					<button id=butMenuLoad class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" >gv-tmp </button>
 				</p>
 
+				<div>
+					aaa bbb ccc
+				</div>
 
 				<hr>
 
@@ -116,8 +119,8 @@
 
 <script>
 
-	//var uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
-	var uriGbxmlDefault;
+	var uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//let uriGbxmlDefault;
 
 	var icw, THREE, THR, GBP, GBV;
 
@@ -150,7 +153,6 @@
 
 			txt += '<a href=JavaScript: onclick=setStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
 				' title="' + color + '" >&bull;</a> ';
-
 		}
 
 		divRowButtonsStyle.innerHTML = txt;

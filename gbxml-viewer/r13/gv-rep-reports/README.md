@@ -73,7 +73,7 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Wish list / To Do
 
-* 2018-04-01 ~ Theo ~ Add 'Openings by Type' report
+* 2018-04-02 ~ Update all get functions so they return objects
 * 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities
 * 2018-03-31 ~ Any of the attributes could be buttons. Are there attributes where buttons would be really useful.
 * 2018-03-31 ~ We now do two specialty reports: 'Surfaces by Type + Exposed to Sun' and 'Cad Object Groups'. Should there be others?
@@ -85,7 +85,12 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Change Log
 
+### 2018-04-02 ~ Theo
 
+* Rename from rep2 to rep throughout
+* Editing function names to match more closely to their use
+* Add Openings by Type panel
+	* Done: 2018-04-01 ~ Theo ~ Add 'Openings by Type' report
 ### 2018-04-01 ~ Theo
 
 R13.0
@@ -97,71 +102,6 @@ R13.0
 * Complete re-write
 * Much more abstracted, complete, simplified and automated
 * Adds 'Exposed to Sun' button
-
-### 2018-03-23 ~ Theo
-
-R12.8
-* Adds better Zones display
-
-### 2018-03-18 ~ Theo
-
-R12.2
-* Reports2 now in operation / needs testing
-
-### 2018-03-03 ~ Theo
-
-R11
-* CAD Object ID Groups sorted
-
-### 2018-02-26 ~ Theo
-
-R10.8
-
-### 2018-02-24 ~ Theo
-
-R10.4
-
-### 2018-02-16 ~ Theo
-
-R10
-
-### 2018-01-27 ~ Theo
-
-* Fix no data for single space issue
-* Fix incorrect space numbering
-
-### 2018-01-02 ~ Theo
-
-* R9 updates
-
-### 2017-12-02 ~ Theo
-
-* Generally: move to show edges not wireframe
-	* make things visible and invisible over changing opacity
-* Now shows all surfaces connected to a space
-* Now have surfaceMeshes and surfaceEdges
-* Add Tiny Spaces and Tiny Surfaces to menu. Latter not yet wired up
-
-
-
-### 2017-12-01 ~ Theo
-
-* Bring into R8
-
-### 2017-11-28 ~ Theo
-
-Many fun improvements
-
-* Add details tag to the various sections
-* Add buttons to toggle the display of different surface types
-* Add buttons to toggle display of duplicate adjacencies
-
-The code is very, very messy.
-
-### 2017-11-26 ~ Theo
-
-Looking at recursive traversal techniques. Probably not worth it. Better to handles each JSON object on its own terms,
-
 
 
 

@@ -18,12 +18,11 @@
 	* Showdown
 	* COR
 	* THR
-	* GBV
-	* GBX
+	* GBP
 	* HUD
 * Contains the HTML the creates the menus
 * About one hundred lines of JavaScript to reset the menus
-* Allows access to;
+* Allows access to locate, open and display:
 	* gbXML files
 	* Markdown files
 	* Most any file type
@@ -37,12 +36,33 @@
 ### Menus
 
 * Resizable, draggable and closable
-* All work on computers, tablets and phones
+* All UI elements work on computers, tablets and phones
 * Menu colors are updated every release
+* User interface is themable
+
 
 ## Wish list / To Do
 
 See main read me file
+
+* 2018-04-02 ~ Theo ~ 'Edit this file' buttons?
+* 2018-04-02 ~ Theo ~ Display and edit gbXML Files??
+* 2018-04-02 ~ Theo ~ Combine right meu and PopUp menu into a single window with two styles??
+
+
+## Issues
+
+
+
+## Change Log
+
+
+### 2018-04-02 ~ Theo
+
+R13
+* Coming on nicely
+
+#### Mostly dealt with
 
 * Style names needs cleaning up
 	* Needs better 'left menu', 'middle menu', right-menu' conventions
@@ -51,11 +71,6 @@ See main read me file
 	* https://webdesign.tutsplus.com/tutorials/comprehensive-guide-when-to-use-em-vs-rem--cms-23984
 
 
-## Issues
-
-
-
-## Change Log
 
 ### 2018-03-24 ~ Theo
 

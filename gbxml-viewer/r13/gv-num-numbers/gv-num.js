@@ -41,6 +41,8 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<summary>Numbers</summary>
 
+					<p></small>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</small></p>
+
 					<div>
 						<div>toggle the visible elements</div>
 						<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
@@ -676,8 +678,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			const openingMesh = GBP.openingMeshes.children.find( ( element ) => element.userData.data.id === opening.id );
 
-			if ( !openingMesh ) { console.log( 'no mesh', 23 ); continue; }
-
+			if ( !openingMesh ) { console.log( 'no mesh', opening ); continue; }
 
 			if ( angle < 22.5 && angle >= 0 || angle > 337.5 && angle < 360 ) {
 
@@ -803,6 +804,8 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	NUM.showOpeningType = function( type ) {
 
 		GBP.surfaceMeshes.visible = false;
+		GBP.surfaceEdges.visible = false;
+		GBP.openingMeshes.visible = true;
 
 		if ( type ) {
 

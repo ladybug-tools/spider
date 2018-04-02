@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 />
+</head>
+<body>
+<script src= https://ladybug-tools.github.io/ladybug-web/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js ></script>
+<script>
+
+	const date = new Date();
+	const latitude = 37.796
+	const longitude = -122.398;
+
+	const position = getSunPosition( date, latitude, longitude );
+
+	console.log( 'position', position );
+	document.write( JSON.stringify( position ) );
+
+	// {azimuth: 273.7677670190359, altitude: 3.5450909885719994, century: 0.18249396886930566}
+
+</script>
+</body>
+</html>

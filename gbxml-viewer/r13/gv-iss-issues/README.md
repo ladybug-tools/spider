@@ -38,6 +38,7 @@
 ## Wish list
 
 * Identify
+	* Openings with more that four vertices
 	* Surfaces that have an incorrect number of adjacent spaces
 	* Surfaces that are mis-identified as to being interior or exterior surfaces
 	* Surfaces with openings that overlap
@@ -56,6 +57,7 @@
 
 R13
 * First commit
+* Reduce dependencies
 
 
 ### 2018-03-18 ~ Theo

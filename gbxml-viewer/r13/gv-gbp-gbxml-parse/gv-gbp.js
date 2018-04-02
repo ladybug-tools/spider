@@ -350,8 +350,6 @@
 
 		GBP.getOpenings();
 
-
-
 		THR.scene.add( GBP.surfaceMeshes, GBP.surfaceEdges );
 
 	};
@@ -387,7 +385,7 @@
 
 		//GBP.openingsArea = 0;
 
-		var material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.1, transparent: true } );
+		var material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.1, side: 2, transparent: true } );
 		GBP.openingMeshes = new THREE.Object3D();
 
 		for ( opening of GBP.openings ) {

@@ -11,7 +11,7 @@
 
 ## Concept
 
-* Update a number of viewing parameters that control the display of the gbXML Viewer.
+* Update a number of parameters that control the display and rendering of the gbXML file as a 3D model.
 
 ## Features
 
@@ -34,6 +34,7 @@
 
 ## Wish list
 
+* 2018-04-02 ~ Theo ~ Select color themes and other parameters such as adding of ground planes from a list of color theme files
 
 
 ## Issues

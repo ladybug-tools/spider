@@ -1,10 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-num/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-num-numbers/README.md "View file as a web page." ) </span>
 
 # r13 gbXML Viewer Numbers Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-num-numbers/gv-num.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
+
+## Full screen test script: [gbXML Viewer Numbers]( http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-num-numbers/gv-num.html )
 
 
 ## Concept
@@ -37,7 +39,7 @@
 ## Issues
 
 * Still a work-in-progress
-
+* 2018-04-02 ~ Theo ~ needs better handling of internal doors
 * Is knowing the number of surfaces in a particular set interesting?
 	* Could be added as a tooltip
 

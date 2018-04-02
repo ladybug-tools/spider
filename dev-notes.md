@@ -24,6 +24,18 @@ gltf?
 _This particular change log mostly covers info in this read me. Most folders here each have their own equally fascinating read me file._
 
 
+### 2018-04-02 ~ Theo
+
+If a functions returns something it's a 'get'
+
+If a function just alter variables it's a 'set'
+
+http://www.progressivejava.net/2012/12/set-and-get-what-they-are-and-how-to-use-these-methods-correctly.html
+
+How to use getters and setters
+* We get to get information. This type of method always returns a value.
+* We use set to set values. This type of method usually does not return values, just change variables.
+
 
 ### 2018-01-05 ~ Theo
 

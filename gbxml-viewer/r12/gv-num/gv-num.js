@@ -37,6 +37,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<summary>Numbers</summary>
 
+					<p><small><i>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</i></small></p>
+
 					<div>
 						<div>toggle the visible elements</div>
 						<button onclick=NUM.openingMeshes.visible=!NUM.openingMeshes.visible; >openings</button>

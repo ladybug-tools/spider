@@ -23,11 +23,15 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-03-29 ~ R12.12</summary>
+<summary>Welcome 2018-04-02 ~ R12.15</summary>
+
+R12.15
+NUM / Numbers Module
+	* Add note: 'All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file'
 
 R12.14
 HUD / Right Menu
-* Fix polyloop telltales not showing/ causing JavaScript error
+* Fix polyloop telltales not showing / causing JavaScript error
 
 R12.13
 APP/ All modules

@@ -8,8 +8,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 
-	let spaceId1;
-	let spaceId2;
+	var spaceId1;
+	var spaceId2;
 
 	var ISS = {};
 
@@ -28,12 +28,12 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
+			divPopUp.style.display = 'none';
 			ISS.butMenuIssues = butIssues;
 
 		}
 
 		THR.controls.autoRotate = false;
-		divContainer.style.display = 'none';
 		THR.controls.keys = false;
 
 		//if ( ISS.butMenuIssues.style.backgroundColor !== 'var( --but-bg-color )' ) {
@@ -148,6 +148,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 					</details>
 
+					<button onclick=ISS.showOpenings5PlusVertices(); >Show Openings > 5 Vertices</button><br>
 
 					<!--
 
@@ -228,6 +229,22 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	};
 
+
+	ISS.showOpenings5PlusVertices = function() {
+
+		console.log( 'GBP.openings', GBP.openings );
+
+		for ( opening of GBP.openings ) {
+
+			if ( opening.PlanarGeometry.PolyLoop.CartesianPoint.length > 4 ) {
+
+				console.log( 'bingo', opening );
+				console.log( 'vertices', opening.PlanarGeometry.PolyLoop.CartesianPoint.length );
+
+			}
+		}
+
+	}
 
 
 	ISS.getSurfacesDuplicatesAdjacents = function() {
@@ -649,7 +666,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
+		//console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
 
 		ISSsumSurfacesVertexClose.innerHTML= 'Surfaces with close vertex &raquo; ' +
 			'<span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesVertexClose.length + ' found&nbsp;</span>';

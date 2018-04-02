@@ -23,7 +23,16 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-03-31 ~ R13.0 </summary>
+<summary>Welcome 2018-04-02 ~ R13.1 </summary>
+
+R13.1
+* Starting to have revision numbers
+* REP / Reports Module
+	Add 'Openings by Type' panel
+
+Issue: Process of toggling the visibility of meshes, edges and openings needs streamlining.
+	* Often things that should made visible are not.
+	* You need to click the 'all' button too often
 
 R13
 * 2018-03-26:First Commit

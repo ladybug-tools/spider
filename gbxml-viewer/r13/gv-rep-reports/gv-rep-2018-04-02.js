@@ -700,7 +700,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	}
 
 
-
 	REP2.showCadIdGroup = ( CADObjectGroupId ) => {
 		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
@@ -730,7 +729,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 
 	}
-
 
 
 	REP2.getGoogleMap = () => {
