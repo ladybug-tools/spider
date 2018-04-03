@@ -5,7 +5,7 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-08" >
+<meta name = "date" content = "2018-04-03" >
 <title></title>
 <style>
 
@@ -30,8 +30,16 @@
 
 		<div id = "divContents" >
 
+			<p style=width:25rem; >Given 5 cubes and a ground of 100 x 100 meshes,
+				cast a 'shadow' as if Sun is directly overhead
+			</p>
+
 			<p>
 				<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+			</p>
+
+			<p>
+					<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 			</p>
 
 			<p>
@@ -43,7 +51,7 @@
 			</p>
 
 			<p>
-				<button onclick=softEdges(); >3. shadow often edges</button>
+				<button onclick=softEdges(); >3. soften shadow edges</button>
 			</p>
 
 		</div>
@@ -96,8 +104,6 @@
 
 		drawGround();
 
-		//addVertexColors();
-
 	}
 
 
@@ -120,10 +126,11 @@
 				var intersects = raycaster.intersectObjects( cubes.children );
 
 				color = intersects.length > 0 ? 0xff0000 : 0x888888;
+				z = intersects.length > 0 ? 2 : 0;
 
 				material = new THREE.MeshBasicMaterial( { color: color, side: 2 } );
 				mesh = new THREE.Mesh( geometry, material );
-				mesh.position.set( x, y, 0 );
+				mesh.position.set( x, y, z );
 				ground.add( mesh )
 
 			}

@@ -9,9 +9,17 @@
 _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 -->
-## Full Screen: [Raycasting 2]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-2.html )
 
+## [Raycasting 3]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-3.html )
 
+* Adds a Sun with user-selectable azimuth and altitude
+* Updates scene in 30 to milliseconds
+
+## [Raycasting 2]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-2.html )
+
+* First commit
+* Draw 5 cubes, set rays to be vertical, cast 'shadow' on 100 x 10 grid of meshes, if shadow update mesh color
+* Function to soften the shade edges a bit
 
 ## Concept
 
