@@ -29,8 +29,8 @@
 			selType = icw.selType;
 			HUDselSurface = icw.HUDselSurface;
 
-			HUD.getMenuOptions();
 
+			HUD.getMenuOptions();
 
 		} else {
 
@@ -79,6 +79,7 @@
 
 		GBP.surfacesOptions = surfacesOptions;
 
+
 		const cadIdOptions = [];
 
 		for ( let surface of GBP.surfaceJson ) {
@@ -86,6 +87,16 @@
 			cadIdOptions.push( '<option>' + surface.CADObjectId + '</option>' );
 
 		}
+
+		let surfaceTypeOptions = '';
+
+		for ( let type of GBP.surfaceTypes ) {
+
+			surfaceTypeOptions += '<option>' + type + '</option>';
+
+		}
+
+		GBP.surfaceTypeOptions = surfaceTypeOptions;
 
 
 		GBP.surfacesCadObj = cadIdOptions.sort().join();
@@ -387,9 +398,11 @@
 								id <button onclick=GBI.showSurface(this.innerText) title="show only this surface" >` + data.id + `</button>
 								<button onclick=GBI.zoomIntoSurface("` + data.id + `"); title="zoom into just this surface" >zoom</button>
 								<br>`
-								+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
-								`type <button butType onclick=GBI.showSurfaceType(this.innerText); title="show all of this type" >` + data.surfaceType + `</button>` + b +
-								` update <select id = "selType" onchange=HUD.updateType(this.value); title="change to another type of surface" >` + GBP.surfaceTypeOptions + `</select>
+								+ ( data.Name ? 'name <i>' + data.Name + '</i>' + b : '' ) +
+								`type <button butType onclick=GBI.showSurfaceType(this.innerText); title="show all of this type" >` +
+									data.surfaceType + `</button>` + b +
+								` update <select id = "selType" onchange=HUD.updateType(this.value);
+									title="change to another type of surface" >` + GBP.surfaceTypeOptions + `</select>
 								<br>`
 								+ ( data.CADObjectId ? 'cad object id <button onclick=GBI.showCadId("' +
 									encodeURI( data.CADObjectId ) + `"); title="Show all surfaces in this CAD object" >` + data.CADObjectId + `</button><br>` : `` ) +

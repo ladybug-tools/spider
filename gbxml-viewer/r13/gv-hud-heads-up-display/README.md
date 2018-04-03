@@ -67,8 +67,9 @@ The following cases need to be handled when changing the type of the surface
 
 R13
 * First commit
-
-
+* Most everything appears to be working
+* Add new style sheet theming
+* Add new run html / mostly working in template test HTML file
 
 ***
 
