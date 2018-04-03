@@ -21,9 +21,9 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ### Mission
 
-* Create text reports of data embedded in gbXML files
-* Toggle and zoom the display of 3D surfaces based on user input
-* Create detailed interactive reports of issues discovered.
+* Create text reports of all data of interest embedded in gbXML files
+* Toggle the visibility of individual and groups of elements
+* Zoom the view to display selected elements or groups of elements
 
 
 ### Features
@@ -73,10 +73,10 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Wish list / To Do
 
-* 2018-04-02 ~ Update all get functions so they return objects
+
 * 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities
 * 2018-03-31 ~ Any of the attributes could be buttons. Are there attributes where buttons would be really useful.
-* 2018-03-31 ~ We now do two specialty reports: 'Surfaces by Type + Exposed to Sun' and 'Cad Object Groups'. Should there be others?
+* 2018-03-31 ~ We now do three specialty reports: 'Surfaces by Type + Exposed to Sun', 'Openings by Type' and 'Cad Object Groups'. Should there be others?
 
 
 ## Issues
@@ -84,6 +84,13 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 
 ## Change Log
+
+R13.2
+* REP / Reports Module
+	* All functions either set or get
+	* All functions follow clearer naming structure
+
+Done: * 2018-04-02 ~ Update all get functions so they return objects
 
 ### 2018-04-02 ~ Theo
 
