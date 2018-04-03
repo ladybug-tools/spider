@@ -8,13 +8,16 @@
 <iframe src=http://www.ladybug.tools/spider/cookbook/templates/cookbook-template-threejs-hamburger.html width=100% height=600px ></iframe>
 _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
+-->
 
 ## Full Screen: []( http://www.ladybug.tools/spider/#cookbook/solar-studies/glitch-demo/glitch-demo.html )
 
--->
 
 ## Concept
 
+
+* Code: <https://glitch.com/edit/#!/solar-access?path=README.md:1:0>
+* Website: <https://solar-access.glitch.me/>
 
 ## Links of Interest
 
