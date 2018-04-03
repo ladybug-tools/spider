@@ -316,7 +316,6 @@
 
 		material = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors, side: 2, wireframe: false } ); // 2 sides for intersects to work!
 
-
 		geometry = new THREE.SphereGeometry( 25, 24, 12 );
 
 		mesh = new THREE.Mesh( geometry, material );
@@ -349,6 +348,7 @@
 
 		drawCentroids( mesh );
 
+		/*
 		geometry = new THREE.PlaneGeometry( 100, 100, 20, 20 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
 
@@ -359,6 +359,7 @@
 		mesh.name = ( 'mesh' );
 
 		drawCentroids( mesh );
+		*/
 
 	}
 
@@ -415,8 +416,6 @@
 				obj = new THREE.Mesh( geometry, material );
 				scene.add( obj );
 
-
-
 				drawCentroids( obj );
 
 			}
@@ -448,8 +447,6 @@
 
 				object = new THREE.Mesh( geometry, material );
 				scene.add( object );
-
-
 
 				drawCentroids( object );
 
@@ -512,8 +509,8 @@
 			centroid = object.userData.centroids[ i ];
 			count = 0;
 
-			placard = drawPlacard( '' + i, 0.02, 80, centroid.x, centroid.y, centroid.z );
-			scene.add( placard );
+			//placard = drawPlacard( '' + i, 0.02, 80, centroid.x, centroid.y, centroid.z );
+			//scene.add( placard );
 
 			for ( let j = 0; j < suns.children.length; j++ ) {
 
@@ -535,10 +532,10 @@
 
 				if ( intersects.length > 0 ) { count++; }
 
-					geo = new THREE.Geometry();
-					geo.vertices = [ centroid, centroid.clone().add( p2 ) ];
-					line = new THREE.Line( geo, materialLine );
-					scene.add( line );
+					//geo = new THREE.Geometry();
+					//geo.vertices = [ centroid, centroid.clone().add( p2 ) ];
+					//line = new THREE.Line( geo, materialLine );
+					//scene.add( line );
 
 					/*
 					for ( k = 0; k < intersects.length; k++ ) {
