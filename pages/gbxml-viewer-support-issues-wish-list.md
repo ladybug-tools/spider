@@ -20,6 +20,15 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ## Current Issues with gbXML Viewer
 
+
+2018-04-02 ~ 3D Model / In-world
+
+
+2018-04-02 ~ HUD
+
+When there are duplicate surface and/or duplicate adjacent spaces, toggling the visibility of one of the items may cause both items not to be visible.
+
+
 2018-03-23 ~ HUD / spaces not updating properly
 
 The 'reset view' button in the in-world ( center of screen) menu may not always perform a complete reset of all viewing parameters. You may need to reload the web page in order to start. An easy way to to this is to click the gbXML Viewer title in the main menu.
@@ -29,10 +38,13 @@ The 'reset view' button in the in-world ( center of screen) menu may not always 
 
 ## To Do / Wish List Items
 
-* 2018-03-29 ~ MD ~ Right Menu ~ CADObjectID drop down - display only Unique Names 
-* 2018-03-29 ~ MD ~ Report ~ Add Display Exposed by Sun (so we can see which surfaces are hit by sun) 
+* 2018-04-02 ~ MD/Theo HUD / Heads-Up Display ~ Select from CAD Object types not from entire list
+* 2018-04-02 ~ MD/Theo ~ Add volume calculations
+* 2018-04-02 ~ MD/Theo ~ Delete selected coordinates in surfaces and openings and save edits
+* 2018-03-29 ~ MD ~ Right Menu ~ CADObjectID drop down - display only Unique Names
+* 2018-03-29 ~ MD ~ Report ~ Add Display Exposed by Sun (so we can see which surfaces are hit by sun)
 * 2018-03-29 ~ MD ~ Settings ~ Add Material settings color by Space
-* 2018-03-29 ~ MD ~ Report ~ Display Openings (Windows, Doors, Rooflights) 
+* 2018-03-29 ~ MD ~ Report ~ Display Openings (Windows, Doors, Rooflights)
 * 2018-03-29 ~ MD ~ Report ~ Display Openings (Windows, Doors, Rooflights) in Groups per CADObject ID same way we have CADObjectGroups
 * 2018-03-29 ~ MD ~ Report ~ Allow Opening modification for Opening Type per CADObjectGroups: FixedWindow, OperableWindow, FixedSkylight,OperableSkylight, SlidingDoor, NonSlidingDoor, Air
 * 2018-03-29 ~ MD ~ Report ~ Storeys, Spaces, Zones to be displayed and sorted by Name, not ID

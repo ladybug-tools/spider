@@ -41,7 +41,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<summary>Numbers</summary>
 
-					<p></small>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</small></p>
+					<p><small>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</small></p>
 
 					<div>
 						<div>toggle the visible elements</div>

@@ -330,6 +330,13 @@
 	}
 
 
+	GBV.showSurfaceType = type => {
+
+		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
+
+	};
+
+
 
 	GBV.showBySurfaceTypeArray = function( types ) {
 

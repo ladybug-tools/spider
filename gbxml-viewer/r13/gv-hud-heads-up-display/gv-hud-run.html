@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Core read, parse a gbXML file display using Three.js" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-04-02" >
+<title>gv-hud gbXML Viewer Heads-Up Display</title>
+<link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+<script src = "../gv-cor-core/gv-cor.js" ></script>
+<script src = "../gv-thr-threejs/gv-thr.js" ></script>
+<script src = "../gv-gbp-gbxml-parse/gv-gbp.js" ></script>
+<script src = "../gv-gbi-gbxml-interact/gv-gbi.js" ></script>
+<script src = "../gv-hud-heads-up-display/gv-hud.js" ></script>
+<!--
+<script src = "../gv-gbv/gv-gbv.js" ></script>
+-->
+
+	<div id = "divMenuInWorld" >
+
+		<div id = "divMenuInWorld2" >
+
+			<div id = "divTitle" ></div>
+
+		</div>
+
+		<p id = "divContents" >
+
+			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+
+			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+
+			<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+
+			<button onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; >openings</button>
+
+			<button onclick=GBP.setAllVisible();GBP.zoomObjectBoundingSphere(GBP.surfaceMeshes); >reset view</button>
+
+		</p>
+
+		<div id=divLog ></div>
+
+	</div>
+
+
+	<div id = "divHamburgerRight" onclick=COR.toggleNavRight(); > &#9776; </div>
+
+	<div id = "divHeadsUp" class = "w3-theme-l5" >
+
+		<div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
+			right menu / click here to move
+			<!--
+			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+			-->
+		</div>
+
+		<div id=divHUDheader class=mnuRightDiv ></div>
+		<div id=divHUDItems class=mnuRightDiv ></div>
+		<div id=divHUDfooter class=mnuRightDiv ></div>
+
+	</div>
+
+	<div id=divPopUp ></div>
+<script>
+
+
+	GBP.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//GBP.defaultURL = '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml';
+
+
+	THR.initThree();
+
+	THR.animate();
+
+	initHUD();
+
+	function initHUD() {
+
+		timeStart = Date.now();
+
+		let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
+		color = color ? color : 'khaki';
+		stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		divTitle.innerHTML =
+		`
+			<h2>
+				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/gv-gbp-gbxml-parse" >gh
+				</a>
+				||
+				<a  href = "" >` + document.title + `</a>
+			</h2>
+			<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
+
+		`;
+
+		//console.log( 'location.hash', location.hash );
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			GBP.requestFile( url, GBP.callbackGbXML );
+
+		} else {
+
+			GBP.requestFile( GBP.defaultURL, GBP.callbackGbXML );
+
+		}
+
+	}
+
+
+
+	onloadThreejs = function() {
+
+		console.log( 'scene', THR.scene );
+
+		console.log( 'onloadThreejs', Date.now() - timeStart );
+
+		HUD.getMenuOptions();
+
+
+	};
+
+
+</script>
+</body>
+</html>

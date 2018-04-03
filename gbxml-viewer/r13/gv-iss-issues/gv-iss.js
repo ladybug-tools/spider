@@ -128,7 +128,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<details>
 
-						<summary id = "ISSsumSurfacesVertexClose" >Surfaces Close Vertex</summary>
+						<summary id = "ISSsumSurfacesVertexClose" >Very Close Vertices</summary>
 
 						<div >Surfaces that have close vertices. Use telltales in right menu to identify the vertices.</div>
 						Test distance <output id=ISSoutMinDistance >0.2</output>
@@ -148,7 +148,14 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 					</details>
 
-					<button onclick=ISS.showOpenings5PlusVertices(); >Show Openings > 5 Vertices</button><br>
+					<details id = "ISSdetOpeningVertices4Plus" >
+
+						<summary id = "ISSsumOpeningVertices4Pli=us" >Opening Vertices > 4 </summary>
+
+						<div id=ISSdivOpeningVertices4Plus ></div>
+
+					</details>
+
 
 					<!--
 
@@ -211,6 +218,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			ISS.getSurfacesVertexClose();
 
+			ISSdetOpeningVertices4Plus.innerHTML = ISS.getOpeningVertices4Plus();
+
 
 			//ISS.getSurfacesInside(); // not found to be useful yet
 
@@ -230,19 +239,78 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
-	ISS.showOpenings5PlusVertices = function() {
+	ISS.getOpeningVertices4Plus = function() {
 
-		console.log( 'GBP.openings', GBP.openings );
+		//console.log( 'GBP.openings', GBP.openings );
+
+		let items = [];
 
 		for ( opening of GBP.openings ) {
 
 			if ( opening.PlanarGeometry.PolyLoop.CartesianPoint.length > 4 ) {
 
-				console.log( 'bingo', opening );
-				console.log( 'vertices', opening.PlanarGeometry.PolyLoop.CartesianPoint.length );
+				//console.log( 'bingo', opening );
+				//console.log( 'vertices', opening.PlanarGeometry.PolyLoop.CartesianPoint.length );
 
+				items.push( opening );
 			}
 		}
+
+		txt = '';
+		items.forEach( element => txt += '<option value=' + element.id + ' >' + element.Name + '</option>' );
+
+		summary = '<summary>Opening Vertices > 4 &raquo; ' + items.length + ' found</summary>';
+
+		contents = //'<select size=' + ( items.length < 10 ? items.length : 10 ) + ' >' + txt + '<select>';
+
+		`
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<select id=ISSselOpen size=` + ( items.length < 10 ? items.length : 10 ) +
+						` onclick=ISS.setOpeningVisible(this.value);
+						onchange=ISS.setOpeningVisible(this.value); >` + txt + `</select><br>
+				</div>
+				<div id = "ISSdivAttributes" class=flex-left-div2 ></div>
+			</div>
+			`;
+
+
+//			<input oninput=ISS.updateSelect(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
+//				<button onclick=ISS.zoomIntoSurface(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
+
+		return summary + contents;
+
+	}
+
+
+	ISS.setOpeningVisible = function( id ) {
+
+		//console.log( 'opening id', id );
+
+		GBP.surfaceMeshes.visible = false;
+		GBP.surfaceEdges.visible = false;
+		GBP.openingMeshes.visible = true;
+
+		GBP.openingMeshes.children.forEach( element => {
+
+			element.visible = element.userData.data.id === id ? true : false;
+
+			if ( element.visible === true  ) {
+
+				element.material.opacity = 1;
+				element.material.side = 2;
+				element.material.needsUpdate = true;
+
+			}
+
+		} );
+
+		let item = GBP.openings.find( element => element.id === id );
+		//console.log( 'item', item );
+
+		const attributes = ISS.traverseGbjson( item );
+		ISSdivAttributes.innerHTML = ( ISSselOpen.selectedIndex + 1 ) + '.<br>' + attributes + '<br>' +
+			'Vertices: ' + points.length;
 
 	}
 
@@ -306,7 +374,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			surfaceMesh.material.color.set( '#c080ff' );
 		}
 
-		ISSsumDuplicateAdjacentSpaces.innerHTML= 'Duplicate Adjacents &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + count + ' found&nbsp;</span>';
+		ISSsumDuplicateAdjacentSpaces.innerHTML= 'Duplicate Adjacent Space &raquo; <span style=background-color:var(--highlight-color); >' + count + ' found&nbsp;</span>';
 
 		ISSdivAdjacents.innerHTML= contents;
 
@@ -542,7 +610,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//console.log( 'surfacesUndefinedId', ISS.surfacesUndefinedId );
 
-		ISSsumSurfacesUndefinedCadId.innerHTML= 'Undefined CAD Object ID &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesUndefinedId.length + ' found&nbsp;</span>';
+		ISSsumSurfacesUndefinedCadId.innerHTML= 'Undefined CAD Object IDs &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesUndefinedId.length + ' found&nbsp;</span>';
 
 		let txt = '';
 		ISS.surfacesUndefinedId.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
@@ -555,7 +623,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.updateSurfaceUndefinedCadIdAttributes = function() {
 
-		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.traverseGbjson( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] ).attributes;
+		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.traverseGbjson( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] );
 
 		if ( window.HUD ) {
 			HUD.updateSurface( ISSselSurfaceUndefined.value );
@@ -591,7 +659,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		height = parseFloat( surface.RectangularGeometry.Height );
 		width = parseFloat( surface.RectangularGeometry.Width );
 		area =  height * width;
-		txt = ISS.traverseGbjson( surface ).attributes;
+		txt = ISS.traverseGbjson( surface );
 		ISSdivSurfacesTinyAttributes.innerHTML =
 			txt + '<br>' +
 			'height: ' + height.toLocaleString() + '<br>' +
@@ -668,7 +736,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
 
-		ISSsumSurfacesVertexClose.innerHTML= 'Surfaces with close vertex &raquo; ' +
+		ISSsumSurfacesVertexClose.innerHTML= 'Very Close Vertices &raquo; ' +
 			'<span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesVertexClose.length + ' found&nbsp;</span>';
 
 		let txt = '';
@@ -687,7 +755,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		const vertices = surface.geometry.vertices;
 		const distance = 0.01 * parseFloat( ISSinpMinDistance.value );
 
-		let txt = ISS.traverseGbjson( surface.userData.data ).attributes + '<br>';
+		let txt = ISS.traverseGbjson( surface.userData.data ) + '<br>';
 
 		for ( i = 1; i <  vertices.length; i++ ) {
 
@@ -792,7 +860,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		};
 
-		return { elements: elements, attributes: attributes };
+		return attributes;
 
 	}
 

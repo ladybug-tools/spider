@@ -255,7 +255,7 @@ THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems,rngOpaci
 					<select id = "REPselItem" onclick=REP.getAttributes(); onchange=REP.getAttributes(); size=10 ></select>
 				</div>
 				<div id = "REPdivAttributes" class=flex-left-div2  ></div>
-				</div>
+			</div>
 
 		`;
 
@@ -339,7 +339,7 @@ THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems,rngOpaci
 				REP.showOpening( REPselItem.value );
 				const points = item.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) );
 				//console.log( 'points', points.length )
-				REPdivAttributes.innerHTML += '<br>Vertices: ' + points.length
+				REPdivAttributes.innerHTML += '<br>Vertices: ' + points.length;
 				break;
 			default:
 
