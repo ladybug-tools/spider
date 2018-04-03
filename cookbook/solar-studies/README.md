@@ -48,12 +48,12 @@ Givens:
 See also the read me file in the sub-folders
 
 
-### 2018-04-02 ~ Theo
+### 2018-04-01 ~ Theo
 
 * First commit
-* Dowloaded and got working 'Solar Access' from glitch.me
+* Downloaded and got working [Solar Access]( cookbook/solar-studies/glitch-demo/solar-access-r2.html ) from glitch.me
 * Created Solar Calculator Three.js
-* Created Raycaster 2
+* Created [Raycaster 2]( cookbook/solar-studies/raycasting/raycasting-2.html )
 
 
 
