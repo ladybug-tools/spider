@@ -204,9 +204,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<hr>
 
-				</details>
+				</details>`;
 
-			` + divMenuItems.innerHTML;
+			//` + divMenuItems.innerHTML;
 
 			ISS.getSurfacesDuplicatesAdjacents();
 
@@ -228,7 +228,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
-			ISSdetIssues.remove();
+			//ISSdetIssues.remove();
+			divMenuItems.innerHTML = '';
 
 			ISS.butMenuIssues.style.backgroundColor = '';
 			ISS.butMenuIssues.style.fontStyle = '';

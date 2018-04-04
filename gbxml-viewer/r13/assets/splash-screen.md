@@ -21,6 +21,23 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 </details>
 -->
 
+<details open >
+
+<summary>Welcome 2018-04-03 ~ R13.2.</summary>
+
+REP / Reports Module
+* Very reorganized / all functions based on set and get
+	* Should be more maintainable and extendable
+* Variable and function names with clearer / more self-evident structure
+
+APP / Application Module
+
+* Only a single Feature panel is visible at any given time
+	* Multiple visible panels added complexity without much benefit
+
+
+</details>
+
 <details open>
 
 <summary>Welcome 2018-04-02 ~ R13.1 </summary>

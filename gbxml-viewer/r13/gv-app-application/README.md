@@ -56,6 +56,11 @@ See main read me file
 
 ## Change Log
 
+### 2018-04-03 ~ Theo
+
+R13.2
+
+* Left Menu: now displays only a single feature
 
 ### 2018-04-02 ~ Theo
 

@@ -142,9 +142,9 @@
 					oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
 					</div>
 					-->
-				</details>`;
+				</details>`
 
-			//+ divMenuItems.innerHTML;
+			+ divMenuItems.innerHTML;
 
 			//SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
 			SET.butSettings.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
@@ -163,8 +163,8 @@
 
 		} else {
 
-			// detSettings.remove();
-			divMenuItems.innerHTML = '';
+			detSettings.remove();
+
 			SET.butSettings.style.backgroundColor = '';
 			SET.butSettings.style.fontStyle = '';
 			SET.butSettings.style.fontWeight = '';

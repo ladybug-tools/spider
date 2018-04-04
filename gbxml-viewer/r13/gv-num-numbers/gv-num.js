@@ -89,9 +89,9 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<hr>
 
-				</details>
+				</details>`;
 
-			` + divMenuItems.innerHTML;
+			//` + divMenuItems.innerHTML;
 
 			NUM.timeStart = Date.now();
 
@@ -107,7 +107,8 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
-			NUMdetNumbers.remove();
+			//NUMdetNumbers.remove();
+			divMenuItems.innerHTML = '';
 
 			NUM.butMenuNumbers.style.backgroundColor = '';
 			NUM.butMenuNumbers.style.fontStyle = '';
@@ -678,7 +679,10 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			const openingMesh = GBP.openingMeshes.children.find( ( element ) => element.userData.data.id === opening.id );
 
-			if ( !openingMesh ) { console.log( 'no mesh', opening ); continue; }
+			if ( !openingMesh ) {
+				//console.log( 'no mesh', opening );
+				continue;
+			}
 
 			if ( angle < 22.5 && angle >= 0 || angle > 337.5 && angle < 360 ) {
 

@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-03-27" >
-<title>gbXML Viewer 13.1</title>
+<meta name = "date" content = "2018-04-03" >
+<title>gbXML Viewer 13.2</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -97,26 +97,26 @@
 				<summary title="the primary viewer tools are here" >Features</summary>
 
 				<button id=butSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-set-settings/gv-set.js'; " title="Update colors, explode models and adjust viewing viewing parameters" >
 				Settings</button>
 
 				<button id=butMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep-reports/gv-rep.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
 				<button id=butMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-num-numbers/gv-num.js'; " title="To be deprecated" >
 				Numbers</button>
 
 				<button id=butIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-iss-issues/gv-iss.js';" title="Highlight duplicate items and areas of concern in a gbXML file" >
 				Issues</button>
 
-				<p><small><i></i>More modules are just waiting to be upgraded</i></small></p>
+
 
 
 				<!--
@@ -143,6 +143,8 @@
 			<details>
 
 				<summary>Things to Try</summary>
+
+				<p><small><i></i>More modules are just waiting to be upgraded</i></small></p>
 
 				<!--
 				<button id=butCameraFirstPerson class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
