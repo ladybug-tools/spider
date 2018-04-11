@@ -374,7 +374,7 @@
 
 		let zone;
 
-		if ( Array.isArray( GBP.gbjson.Zone ) ) {
+		 {
 
 			zone = GBP.gbjson.Zone.find( function( item ) { return item.id === zoneIdRef; } );
 

@@ -13,6 +13,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	var ISS = {};
 
+	// call at bottom of file
 
 	ISS.initIssues = function () {
 
@@ -39,187 +40,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		//if ( ISS.butMenuIssues.style.backgroundColor !== 'var( --but-bg-color )' ) {
 		if ( ISS.butMenuIssues.style.fontStyle !== 'italic' ) {
 
-			divMenuItems.innerHTML =
-
-				`<details id = ISSdetIssues  class=app-menu open >
-
-					<p>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; >openings</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all</button>
-					</p>
-
-					<summary>Issues</summary>
-
-					<details>
-
-						<summary id = "ISSsumDuplicateAdjacentSpaces" >Duplicate Adjacent Spaces</summary>
-
-						<p>
-							Surfaces with two adjacent spaces pointing to identical space id. Use with heads-up display.
-						</p>
-
-						<p>
-							<button id=ISSbutDuplicateAdjacent onclick=ISS.toggleDuplicateAdjacent(); >toggle all duplicate adjacent spaces</button>
-						</p>
-
-						<hr>
-
-						<div id=ISSdivAdjacents ></div>
-
-					</details>
-
-					<details>
-
-						<summary id = "ISSsumDuplicateSurfaces" >Duplicate Surfaces</summary>
-
-						<div id=divCRDInfo ></div>
-
-						<div id=ISSdivDuplicateSurfaces ></div>
-
-					</details>
-
-
-					<details>
-
-						<summary id = "ISSsumSurfacesUndefinedCadId" >Undefined CAD Object ID</summary>
-
-						<div >Surfaces with undefined ID</div>
-
-						<div class=flex-container2 >
-							<div class=flex-div1 >
-								<input oninput=ISS.updateSelect(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
-								<select id = "ISSselSurfaceUndefined"
-									onclick=ISS.showSurface(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); onchange=ISS.showSurface(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); size=10 ><option>none found</option></select><br>
-								 <button onclick=ISS.zoomIntoSurface(ISSselSurfaceUndefined.value); title="zoom into just this surface" >zoom</button>
-								 </div>
-							<div id = "ISSdivSurfacesUndefinedAttributes" class=flex-left-div2 ></div>
-						</div>
-
-						<div id=ISSdivSurfacesUndefinedCadId ></div>
-
-						<hr>
-
-					</details>
-
-
-					<details>
-
-						<summary id = "ISSsumSurfacesTiny" >Tiny Surfaces</summary>
-
-						<div >Surfaces that are smaller than a specified area,</div>
-
-						Test size <output id=ISSoutMinSize >0.5</output>
-						<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
-						<div class=flex-container2 >
-							<div class=flex-div1 >
-								<input oninput=ISS.updateSelect(this,ISSselSurfaceTiny); size=6 placeholder="surface id" ><br>
-								<select id = "ISSselSurfaceTiny"
-								onclick=ISS.showSurface(this.value);ISS.updateSurfaceTinyAttributes(); onchange=ISS.showSurface(this.value);ISS.updateSurfaceTinyAttributes(); size=10 ><option>none found</option></select><br>
-								<button onclick=ISS.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
-							</div>
-							<div id = "ISSdivSurfacesTinyAttributes" class=flex-left-div2 ></div>
-						</div>
-
-						<div id=ISSdivSurfacesTiny ></div>
-
-					</details>
-
-					<details>
-
-						<summary id = "ISSsumSurfacesVertexClose" >Very Close Vertices</summary>
-
-						<div >Surfaces that have close vertices. Use telltales in right menu to identify the vertices.</div>
-						Test distance <output id=ISSoutMinDistance >0.2</output>
-						<input id=ISSinpMinDistance type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinDistance.value=this.value*0.01;ISS.getSurfacesVertexClose(); >
-						<div class=flex-container2 >
-							<div class=flex-div1 >
-								<input oninput=ISS.updateSelect(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
-								<select id = "ISSselSurfaceVertexClose"
-								onclick=ISS.showSurface(this.value);ISS.updateSurfaceVertexCloseAttributes();
-								onchange=ISS.showSurface(this.value);ISS.updateSurfaceVertexCloseAttributes(); size=10 ></select><br>
-								<button onclick=ISS.zoomIntoSurface(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
-							</div>
-							<div id = "ISSdivSurfacesVertexCloseAttributes" class=flex-left-div2 ></div>
-						</div>
-
-						<div id=ISSdivSurfacesVertexClose ></div>
-
-					</details>
-
-					<details id = "ISSdetOpeningVertices4Plus" >
-
-						<summary id = "ISSsumOpeningVertices4Pli=us" >Opening Vertices > 4 </summary>
-
-						<div id=ISSdivOpeningVertices4Plus ></div>
-
-					</details>
-
-
-					<!--
-
-					<details>
-
-						<summary id = "ISSsumSurfacesXXX" >Surfaces XXX</summary>
-
-						<div >Surfaces that are XXX</div>
-						Minimum size <output id=ISSoutMinSize >0.5</output>
-						<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
-						<div class=flex-container2 >
-							<div class=flex-div1 >
-								<input oninput=ISS.updateSelect(this,ISSselSurfaceXXX); size=6 placeholder="surface id" ><br>
-								<select id = "ISSselSurfaceXXX"
-								onclick=ISS.showSurface(this.value);ISS.updateSurfaceXXXAttributes();
-								onchange=ISS.showSurface(this.value);ISS.updateSurfaceXXXAttributes(); size=10 ></select><br>
-								<button onclick=ISS.zoomIntoSurface(ISSselSurfaceXXX.value); title="zoom into just this surface" >zoom</button>
-							</div>
-							<div id = "ISSdivSurfacesXXXAttributes" class=flex-left-div2 ></div>
-						</div>
-
-						<div id=ISSdivSurfacesTiny ></div>
-
-					</details>
-
-					<details>
-
-						<summary id = "ISSsumSurfacesInside" >Surfaces Inside Surfaces</summary>
-
-						<div >Surfaces that are inside another surface</div>
-
-						<div class=flex-container2 >
-							<div class=flex-div1 >
-								<input oninput=ISS.updateSelect(this,ISSselSurfaceInside); size=6 placeholder="surface id" ><br>
-								<select id = "ISSselSurfaceInside"
-								onclick=ISS.showSurface(this.value);ISS.updateSurfaceInsideAttributes(); onchange=ISS.showSurface(this.value);ISS.updateSurfaceInsideAttributes(); size=10 ><option>none found</option></select><br>
-								<button onclick=ISS.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
-							</div>
-							<div id = "ISSdivSurfacesInsideAttributes" class=flex-left-div2 ></div>
-						</div>
-
-						<div id=ISSdivSurfacesInside ></div>
-
-					</details>
-					-->
-
-					<hr>
-
-				</details>`;
-
-			//` + divMenuItems.innerHTML;
-
-			ISS.getSurfacesDuplicatesAdjacents();
-
-			ISS.getSurfacesDuplicatesCoordinates();
-
-			ISS.getSurfacesUndefinedCadId();
-
-			ISS.getSurfacesTiny();
-
-			ISS.getSurfacesVertexClose();
-
-			ISSdetOpeningVertices4Plus.innerHTML = ISS.getOpeningVertices4Plus();
-
+			ISS.getMenuItems();
 
 			//ISS.getSurfacesInside(); // not found to be useful yet
 
@@ -240,83 +61,119 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
-	ISS.getOpeningVertices4Plus = function() {
+	ISS.getMenuItems = function() {
 
-		//console.log( 'GBP.openings', GBP.openings );
+		divMenuItems.innerHTML =
 
-		let items = [];
+		`<details id = ISSdetIssues  class=app-menu open >
 
-		for ( opening of GBP.openings ) {
+			<summary>Issues</summary>
 
-			if ( opening.PlanarGeometry.PolyLoop.CartesianPoint.length > 4 ) {
+			<div id=ISSdetPanelVisibilityToggle ></div>
 
-				//console.log( 'bingo', opening );
-				//console.log( 'vertices', opening.PlanarGeometry.PolyLoop.CartesianPoint.length );
+			<div id=ISSdetPanelSurfacesDuplicateAdjacentSpaces ></div>
 
-				items.push( opening );
-			}
-		}
+			<div id=ISSdetPanelSurfacesDuplicateCoordinates ></div>
 
-		txt = '';
-		items.forEach( element => txt += '<option value=' + element.id + ' >' + element.Name + '</option>' );
+			<div id=ISSdetPanelSurfacesUndefinedCadId ></div>
 
-		summary = '<summary>Opening Vertices > 4 &raquo; ' + items.length + ' found</summary>';
+			<div id=ISSdetPanelSurfacesTiny ></div>
 
-		contents = //'<select size=' + ( items.length < 10 ? items.length : 10 ) + ' >' + txt + '<select>';
+			<div id=ISSdetPanelSurfacesVertexClose ></div>
 
-		`
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<select id=ISSselOpen size=` + ( items.length < 10 ? items.length : 10 ) +
-						` onclick=ISS.setOpeningVisible(this.value);
-						onchange=ISS.setOpeningVisible(this.value); >` + txt + `</select><br>
+			<div id=ISSdetPanelOpeningVertices4Plus ></div>
+
+			<!--
+
+			<details>
+
+				<summary id = "ISSsumSurfacesXXX" >Surfaces XXX</summary>
+
+				<div >Surfaces that are XXX</div>
+				Minimum size <output id=ISSoutMinSize >0.5</output>
+				<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceXXX); size=6 placeholder="surface id" ><br>
+						<select id = "ISSselSurfaceXXX"
+						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes();
+						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes(); size=10 ></select><br>
+						<button onclick=ISS.zoomIntoSurface(ISSselSurfaceXXX.value); title="zoom into just this surface" >zoom</button>
+					</div>
+					<div id = "ISSdivSurfacesXXXAttributes" class=flex-left-div2 ></div>
 				</div>
-				<div id = "ISSdivAttributes" class=flex-left-div2 ></div>
-			</div>
-			`;
 
+				<div id=ISSdivSurfacesTiny ></div>
 
-//			<input oninput=ISS.updateSelect(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
-//				<button onclick=ISS.zoomIntoSurface(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
+			</details>
 
-		return summary + contents;
+			<details>
+
+				<summary id = "ISSsumSurfacesInside" >Surfaces Inside Surfaces</summary>
+
+				<div >Surfaces that are inside another surface</div>
+
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceInside); size=6 placeholder="surface id" ><br>
+						<select id = "ISSselSurfaceInside"
+						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); size=10 ><option>none found</option></select><br>
+						<button onclick=ISS.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
+					</div>
+					<div id = "ISSdivSurfacesInsideAttributes" class=flex-left-div2 ></div>
+				</div>
+
+				<div id=ISSdivSurfacesInside ></div>
+
+			</details>
+			-->
+
+			<hr>
+
+		</details>`;
+
+	//` + divMenuItems.innerHTML;
+
+		ISSdetPanelVisibilityToggle.innerHTML = ISS.getPanelVisibilityToggle();
+
+		ISSdetPanelSurfacesDuplicateAdjacentSpaces.innerHTML = ISS.getPanelSurfacesDuplicateAdjacentSpaces();
+
+		ISSdetPanelSurfacesDuplicateCoordinates.innerHTML = ISS.getPanelSurfacesDuplicateCoordinates();
+
+		ISSdetPanelSurfacesUndefinedCadId.innerHTML = ISS.getPanelSurfacesUndefinedCadId();
+
+		ISSdetPanelSurfacesTiny.innerHTML = ISS.getPanelSurfacesTiny();
+
+		ISSdetPanelSurfacesVertexClose.innerHTML = ISS.getPanelSurfacesVertexClose();
+
+		ISSdetPanelOpeningVertices4Plus.innerHTML = ISS.getPanelOpeningVertices4Plus();
 
 	}
 
 
-	ISS.setOpeningVisible = function( id ) {
 
-		//console.log( 'opening id', id );
+	ISS.getPanelVisibilityToggle = function() {
 
-		GBP.surfaceMeshes.visible = false;
-		GBP.surfaceEdges.visible = false;
-		GBP.openingMeshes.visible = true;
+		const txt =
 
-		GBP.openingMeshes.children.forEach( element => {
+		`<details open >
 
-			element.visible = element.userData.data.id === id ? true : false;
+			<summary>Visibility Toggles</summary>
 
-			if ( element.visible === true  ) {
+			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all visible</button>
 
-				element.material.opacity = 1;
-				element.material.side = 2;
-				element.material.needsUpdate = true;
+		</details>`;
 
-			}
+		return txt;
 
-		} );
-
-		let item = GBP.openings.find( element => element.id === id );
-		//console.log( 'item', item );
-
-		const attributes = ISS.traverseGbjson( item );
-		ISSdivAttributes.innerHTML = ( ISSselOpen.selectedIndex + 1 ) + '.<br>' + attributes + '<br>' +
-			'Vertices: ' + points.length;
-
-	}
+	};
 
 
-	ISS.getSurfacesDuplicatesAdjacents = function() {
+
+	ISS.getPanelSurfacesDuplicateAdjacentSpaces = function() {
 
 		surfaces = GBP.gbjson.Campus.Surface;
 		let count = 0;
@@ -362,11 +219,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			contents +=
 			`<div style=margin-bottom:15px; >` +
 				( ++ count ) +
-				` <button onclick=ISS.showSurface(this.innerText); >` + surface.id + `</button>
+				` <button onclick=ISS.setSurfaceVisible(this.innerText); >` + surface.id + `</button>
 				<button onclick=ISS.zoomIntoSurface("` + surface.id + `"); >zoom</button>
-				<button class=toggle onclick=ISS.showSurfaceType(this.innerText); >` + surface.surfaceType + `</button><br>`
+				<button class=toggle onclick=ISS.setSurfaceTypeVisible(this.innerText); >` + surface.surfaceType + `</button><br>`
 				+ ( surface.Name ? `name <i>` + surface.Name + `</i><br>` : `` )
-				+ ( surface.CADObjectId ? `cad object id <button onclick=ISS.showCadId(` + ( count - 1 ) + `); >` + surface.CADObjectId + `</button><br>` : `` ) +
+				+ ( surface.CADObjectId ? `cad object id <button onclick=ISS.setCadIdVisible(` + ( count - 1 ) + `); >` + surface.CADObjectId + `</button><br>` : `` ) +
 				`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
 				` length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) + `</i>
 			</div>`;
@@ -375,92 +232,31 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			surfaceMesh.material.color.set( '#c080ff' );
 		}
 
-		ISSsumDuplicateAdjacentSpaces.innerHTML= 'Duplicate Adjacent Space &raquo; <span style=background-color:var(--highlight-color); >' + count + ' found&nbsp;</span>';
+		const txt =
+		`<details>
 
-		ISSdivAdjacents.innerHTML= contents;
+			<summary >Duplicate Adjacent Space &raquo; ` + count + ` found</summary>
 
-	}
+			<p>
+				Surfaces with two adjacent spaces pointing to identical space id. Use with heads-up display.
+			</p>
 
+			<p>
+				<button id=ISSbutDuplicateAdjacent onclick=ISS.setDuplicateAdjacentSpaceVisibleToggle(); >toggle all duplicate adjacent spaces</button>
+			</p>
+			<hr>
 
+			<div >` + contents + `</div>
 
-	ISS.toggleDuplicateAdjacent = function() {
+		</details>`;
 
-		if ( ISSbutDuplicateAdjacent.style.backgroundColor !== 'var( --but-bg-color )' ) {
-
-			GBP.surfaceMeshes.children.forEach( child => child.visible = false );
-
-			for ( let item of ISS.surfaceAdjacentsDuplicates ) {
-
-				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === item.id );
-				surfaceMesh.visible = true;
-
-			}
-
-			ISSbutDuplicateAdjacent.style.backgroundColor = 'var( --but-bg-color )';
-
-		} else {
-
-			ISS.setAllVisible();
-
-			ISSbutDuplicateAdjacent.style.backgroundColor = '';
-
-		}
+		return txt;
 
 	}
 
 
 
-	ISS.toggleDuplicates = function( button, surfaceArray ) {
-
-		if ( button.style.backgroundColor !== 'var( --but-bg-color )' ) {
-			count = 0;
-			GBP.surfaceMeshes.children.forEach( element =>
-				{ element.visible = surfaceArray.includes( element.userData.data.Name ) ? true : false; count = element.visible ? count++ : count;} );
-				console.log( '', count );
-
-			/*
-			for ( let child of surfaceMeshes.children ) {
-
-				if ( surfaceArray.includes( child.userData.data.Name ) ) {
-
-					child.visible = true;
-
-				} else {
-
-					child.visible = false;
-
-				}
-
-			}
-
-			*/
-
-			button.style.backgroundColor = 'var( --but-bg-color )';
-
-		} else {
-
-			GBP.setAllVisible();
-
-			button.style.backgroundColor = '';
-
-		}
-
-	}
-
-
-
-	ISS.showCadId = function( index ) {
-
-		GBP.surfaceMeshes.children.forEach( element =>
-			element.visible = element.userData.data.CADObjectId === ISS.surfaceAdjacentsDuplicates[ index ].cadId ? true : false );
-
-	};
-
-
-
-	//////////
-
-	ISS.getSurfacesDuplicatesCoordinates = function() {
+	ISS.getPanelSurfacesDuplicateCoordinates = function() {
 
 		const surfacePolyLoops = [];
 		const surfaceIds = [];
@@ -476,7 +272,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		let flowContent =
 			'<p>' +
 
-				'<button id=butDuplicatesCoordinates onclick=ISS.toggleDuplicates(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
+				'<button id=butDuplicatesCoordinates onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
 
 				'<button onclick=ISS.saveFile(); title="creates a new file with the changes" >save edits</button>' +
 
@@ -541,30 +337,30 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				flowContent +=
 					'<div id= "divSurface' + surface.id +'" >' +
-						count + '. id: <button onclick=ISS.showSurface(this.innerText); >' + surface.id + '</button>' +
+						count + '. id: <button onclick=ISS.setSurfaceVisible(this.innerText); >' + surface.id + '</button>' +
 							'<button onclick=ISS.zoomIntoSurface("' + surface.id + '"); >zoom</button>' + b +
-						'surface type: <button class=toggle onclick=ISS.showSurfaceType(this.innerText); >' + surface.surfaceType + '</button>: ' + b +
+						'surface type: <button class=toggle onclick=ISS.setSurfaceTypeVisible(this.innerText); >' + surface.surfaceType + '</button>: ' + b +
 						( surface.Name ? 'name: ' + surface.Name + b : '' ) +
 						( surface.constructionIdRef ? 'construction id ref: ' + surface.constructionIdRef + b : '' ) +
 						( spaceId1 ? 'space:  <button onclick=ISS.showSpace(spaceId1); >' + spaceId1 + '</button>' + b : '' ) +
 						( spaceId2 ? 'space:  <button onclick=ISS.showSpace(spaceId2); >' + spaceId2 + '</button>' + b : '' ) +
 						( surface.CADObjectId ?
-							'<button onclick=ISS.showCadId2("' + encodeURI( surface.CADObjectId ) + '"); >cad object id: ' + surface.CADObjectId + '</button>' + b
+							'<button onclick=ISS.setCadIdVisible2("' + encodeURI( surface.CADObjectId ) + '"); >cad object id: ' + surface.CADObjectId + '</button>' + b
 							: ''
 						) +
 						'delete: <button onclick=ISS.deleteSurface(this.innerText) >' + surface.id + '</button>' +
 						'</div>' +
 						'<hr>' +
 						'<div id= "divSurface' + surfaceOther.id +'" >' +
-						'id of duplicate: <button onclick=ISS.showSurface(this.innerText); >' + surfaceOther.id + '</button>' +
+						'id of duplicate: <button onclick=ISS.setSurfaceVisible(this.innerText); >' + surfaceOther.id + '</button>' +
 							'<button onclick=ISS.zoomIntoSurface("' + surfaceOther.id + '"); >zoom</button>' + b +
-						'surface type: <button class=toggle onclick=ISS.showSurfaceType(this.innerText); >' + surfaceOther.surfaceType + '</button>: ' + b +
+						'surface type: <button class=toggle onclick=ISS.setSurfaceTypeVisible(this.innerText); >' + surfaceOther.surfaceType + '</button>: ' + b +
 						( surfaceOther.Name ? 'name: ' + surfaceOther.Name + b : '' ) +
 						( surfaceOther.constructionIdRef ? 'construction id ref: ' + surfaceOther.constructionIdRef + b : '' ) +
 						( spaceIdOther1 ? 'space:  <button onclick=ISS.showSpace(spaceIdOther1); >' + spaceIdOther1 + '</button>' + b : '' ) +
 						( spaceIdOther2 ? 'space:  <button onclick=ISS.showSpace(spaceIdOther2); >' + spaceIdOther2 + '</button>' + b : '' ) +
 						( surfaceOther.CADObjectId ?
-							'<button onclick=ISS.showCadId2("' + encodeURI( surfaceOther.CADObjectId ) + '"); >cad object id: ' + surfaceOther.CADObjectId + '</button>' + b
+							'<button onclick=ISS.setCadIdVisible2("' + encodeURI( surfaceOther.CADObjectId ) + '"); >cad object id: ' + surfaceOther.CADObjectId + '</button>' + b
 							: ''
 						) +
 						'delete: <button onclick=ISS.deleteSurface(this.innerText); >' + surfaceOther.id + '</button>' +
@@ -586,126 +382,121 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		ISSsumDuplicateSurfaces.innerHTML= 'Duplicate Surfaces &raquo; <span style=background-color:var(--highlight-color); >&nbsp;' + count + ' found&nbsp;</span>';
-		divCRDInfo.innerHTML = 'Two surfaces with identical coordinates';
-		ISSdivDuplicateSurfaces.innerHTML= flowContent;
+		//ISSsumDuplicateSurfaces.innerHTML= '';
+		//divCRDInfo.innerHTML =
+		//ISSdivDuplicateSurfaces.innerHTML= flowContent;
+
+		const txt =
+
+		`<details>
+
+			<summary id = "ISSsumDuplicateSurfaces" >Duplicate Coordinates &raquo; ` + count + `</summary>
+
+			<div >Two surfaces with identical coordinates</div>
+
+			<divs >` + flowContent + `</div>
+
+		</details>`;
+
+		return txt;
 
 	}
 
 
 
-	ISS.showCadId2 = function( CADObjectId ) {
-		//console.log( 'CADObjectId', CADObjectId);
-		const id = decodeURI( CADObjectId );
-		GBP.surfaceMeshes.children.forEach( element =>
-			element.visible = element.userData.data.CADObjectId === id ? true : false );
-
-	};
-
-
-	//////////
-
-	ISS.getSurfacesUndefinedCadId = function() {
+	ISS.getPanelSurfacesUndefinedCadId = function() {
 
 		ISS.surfacesUndefinedId = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
 
-		//console.log( 'surfacesUndefinedId', ISS.surfacesUndefinedId );
+		let options = '';
+		ISS.surfacesUndefinedId.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
 
-		ISSsumSurfacesUndefinedCadId.innerHTML= 'Undefined CAD Object IDs &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesUndefinedId.length + ' found&nbsp;</span>';
+		const details =
+		`<details>
 
-		let txt = '';
-		ISS.surfacesUndefinedId.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
-		ISSselSurfaceUndefined.innerHTML = txt ? txt : '<option>none found</option>';
-		ISSselSurfaceUndefined.selectedIndex = 0; //Math.floor( Math.random() * property.length )
+			<summary id = "ISSsumSurfacesUndefinedCadId" >Undefined CAD Object IDs &raquo; ` + ISS.surfacesUndefinedId.length + ` found</summary>
+
+			<div >Surfaces with undefined ID</div>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceUndefined"
+						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes();
+						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); size=10 >` +
+						options + `
+						</select><br>
+					<button onclick=ISS.zoomIntoSurface(ISSselSurfaceUndefined.value); title="zoom into just this surface" >zoom</button>
+					</div>
+				<div id = "ISSdivSurfacesUndefinedAttributes" class=flex-left-div2 ></div>
+			</div>
+
+			<div id=ISSdivSurfacesUndefinedCadId ></div>
+
+			<hr>
+
+		</details>`;
+
+		return details;
 
 	}
 
 
 
-	ISS.updateSurfaceUndefinedCadIdAttributes = function() {
+	ISS.getPanelSurfacesTiny = function() {
 
-		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.traverseGbjson( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] );
+		const sizeDefault = window.ISSinpMinSize ? parseFloat( ISSinpMinSize.value ) : 50;
 
-		if ( window.HUD ) {
-			HUD.updateSurface( ISSselSurfaceUndefined.value );
-			HUD.setHeadsUp();
-		}
-	}
-
-
-	/////////
-
-	ISS.getSurfacesTiny = function() {
-
-		const size = 0.01 * parseFloat( ISSinpMinSize.value );
+		const size = 0.01 * sizeDefault; // parseFloat( ISSinpMinSize.value );
 		ISS.surfacesTiny = GBP.surfaceJson.filter( surface =>
 			parseFloat( surface.RectangularGeometry.Height ) * parseFloat( surface.RectangularGeometry.Width  ) < size );
 
+		let options = '';
+		ISS.surfacesTiny.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
 
-		ISSsumSurfacesTiny.innerHTML= 'Tiny Surfaces &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesTiny.length + ' found&nbsp;</span>';
+		const details =
 
-		let txt = '';
-		ISS.surfacesTiny.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
-		ISSselSurfaceTiny.innerHTML = txt ? txt : '<option>none found</option>';
-		ISSselSurfaceTiny.selectedIndex = 0;
+		`<details>
 
-		//	if ( ISSselSurfaceTiny.length ) { ISS.updateSurfaceTinyAttributes(); }
+			<summary id = "ISSsumSurfacesTiny" >Tiny Surfaces &raquo; ` + ISS.surfacesTiny.length + ` found</summary>
+
+			<div >Surfaces that are smaller than a specified area,</div>
+
+			Test size <output id=ISSoutMinSize >` + size + `</output>
+			<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1
+				onchange=ISSoutMinSize.value=this.value*0.01;ISS.getPanelSurfacesTiny(); >
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceTiny); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceTiny"
+						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceTinyAttributes();
+						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceTinyAttributes(); size=10 >` +
+						options +
+						`</select><br>
+					<button onclick=ISS.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
+				</div>
+				<div id="ISSdivSurfacesTinyAttributes2" class=flex-left-div2 ></div>
+			</div>
+
+			<div id=xxxISSdivSurfacesTiny ></div>
+
+		</details>`;
+
+		return details;
 
 	}
 
 
-	ISS.updateSurfaceTinyAttributes = function() {
 
-		const surface = ISS.surfacesTiny[ ISSselSurfaceTiny.selectedIndex ];
-		height = parseFloat( surface.RectangularGeometry.Height );
-		width = parseFloat( surface.RectangularGeometry.Width );
-		area =  height * width;
-		txt = ISS.traverseGbjson( surface );
-		ISSdivSurfacesTinyAttributes.innerHTML =
-			txt + '<br>' +
-			'height: ' + height.toLocaleString() + '<br>' +
-			'width: ' + width.toLocaleString() + '<br>' +
-			'area: ' + area.toLocaleString() + '<br>' +
-		'';
+	ISS.getPanelSurfacesVertexClose = function() {
 
-		if ( window.HUD != undefined ) {
+		distanceDefault = window.ISSinpMinDistance ? parseFloat( ISSinpMinDistance.value ) : 50;
 
-			HUD.updateSurface( ISSselSurfaceTiny.value );
-			HUD.setHeadsUp();
+		const distance = 0.01 * distanceDefault;
+		//console.log( 'distance', distance );
 
-		}
-
-	}
-
-
-	ISS.zoomIntoSurface = ( id ) => {
-		//console.log( 'id', id );
-
-		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
-		//console.log( '', surfaceMesh );
-
-		const center = surfaceMesh.localToWorld( surfaceMesh.geometry.boundingSphere.center.clone() );
-		const radius = surfaceMesh.geometry.boundingSphere.radius > 1 ? surfaceMesh.geometry.boundingSphere.radius : 1;
-		//console.log( 'center * radius', center, radius );
-
-		THR.scene.remove( ISS.telltale );
-		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
-		ISS.telltale = new THREE.Mesh( geometry, material );
-		ISS.telltale.position.copy( center );
-		THR.scene.add( ISS.telltale );
-
-		THR.controls.target.copy( center );
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
-
-	};
-
-	/////////
-
-
-	ISS.getSurfacesVertexClose = function() {
-
-		const distance = 0.01 * parseFloat( ISSinpMinDistance.value );
 		ISS.surfacesVertexClose = [];
 
 		//GBP.surfaceMeshes.children.forEach( child => child.visible = false );
@@ -737,56 +528,92 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
 
-		ISSsumSurfacesVertexClose.innerHTML= 'Very Close Vertices &raquo; ' +
-			'<span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesVertexClose.length + ' found&nbsp;</span>';
 
-		let txt = '';
-		ISS.surfacesVertexClose.forEach( function( element ) { txt += '<option>' + element.userData.data.id + '</option>'; } );
-		ISSselSurfaceVertexClose.innerHTML = txt ? txt : '<option>none found</option>';
-		ISSselSurfaceVertexClose.selectedIndex = 0;
+		let options = '';
+		ISS.surfacesVertexClose.forEach( function( element ) { options += '<option>' + element.userData.data.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
 
+		const details =
+
+		`<details ontoggle=ISSselSurfaceVertexClose.selectedIndex=0;ISSselSurfaceVertexClose.click(); >
+
+			<summary>Very Close Vertices &raquo; ` + ISS.surfacesVertexClose.length + ` found</summary>
+
+			<div >Surfaces that have close vertices. Use telltales in right menu to identify the vertices.</div>
+			Test distance <output id=ISSoutMinDistance >` + distance + `</output>
+			<input id=ISSinpMinDistance type=range min=0 max=100 value=` + distanceDefault + ` step=1
+				onchange=ISSdetPanelSurfacesVertexClose.innerHTML=ISS.getPanelSurfacesVertexClose(); >
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceVertexClose"
+						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes();
+						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes(); size=10 >` +
+						options +
+					`</select><br>
+					<button onclick=ISS.zoomIntoSurface(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
+				</div>
+				<div id = "ISSdivSurfacesVertexCloseAttributes" class=flex-left-div2 ></div>
+			</div>
+
+			<div id=xxxISSdivSurfacesVertexClose ></div>
+
+		</details>`;
+
+		return details;
 
 	}
 
 
 
-	ISS.updateSurfaceVertexCloseAttributes = function() {
+	ISS.getPanelOpeningVertices4Plus = function() {
 
-		const surface = ISS.surfacesVertexClose[ ISSselSurfaceVertexClose.selectedIndex ];
-		const vertices = surface.geometry.vertices;
-		const distance = 0.01 * parseFloat( ISSinpMinDistance.value );
+		//console.log( 'GBP.openings', GBP.openings );
 
-		let txt = ISS.traverseGbjson( surface.userData.data ) + '<br>';
+		let items = [];
 
-		for ( i = 1; i <  vertices.length; i++ ) {
+		ISS.OpeningVertices4Plus  = items;
 
-			if ( vertices[ i ].distanceTo( vertices[ i - 1 ] ) < distance ) {
-				//console.log( 'vv', vertices[ i ], vertices[ i ].distanceTo( vertices[ i - 1 ] ) );
+		for ( opening of GBP.openings ) {
 
-				txt += 'Close coordinates: ' + ( i - 1 ) + ' and ' + i + ': ' +
-				vertices[ i ].distanceTo( vertices[ i - 1 ] ) + '<br>';
+			if ( opening.PlanarGeometry.PolyLoop.CartesianPoint.length > 4 ) {
+				opening.Vertices = opening.PlanarGeometry.PolyLoop.CartesianPoint.length;
+				items.push( opening );
 
 			}
-
 		}
 
-		ISSdivSurfacesVertexCloseAttributes.innerHTML =
-			txt + '<br>' +
+		let options = '';
+		items.forEach( element => options += '<option value=' + element.id + ' >' + element.Name + '</option>' );
+		options = options ? options : '<option>none found</option>';
 
-		'';
+		const details =
 
-		if ( window.HUD ) {
+		`<details id = "ISSdetOpeningVertices4Plus" >
 
-			HUD.updateSurface( ISSselSurfaceVertexClose.value );
-			HUD.setHeadsUp();
+			<summary >Opening Vertices > 4 &raquo; ` + items.length + ` found </summary>
 
-		}
+			<div class=flex-container2 >
+
+				<div class=flex-div1 >
+					<select id=ISSselOpen size=` + ( items.length < 10 ? items.length : 10 ) +
+						` onclick=ISS.setOpeningVisible(this.value);ISS.setPanelOpeningAttributes();
+						onchange=ISS.setOpeningVisible(this.value);ISS.setPanelOpeningAttributes(); >` +
+						options +
+						`</select>
+				</div>
+				<div id = "ISSdivAttributes" class=flex-left-div2 ></div>
+
+			</div>
+
+		</details>`;
+
+		return details;
 
 	}
 
 
-
-	/////////
+	///////// not needed
 
 	ISS.getSurfacesInside = function() {
 
@@ -825,20 +652,231 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	}
 
-	//////////
 
-	ISS.showSurface = function( id ) {
+
+	////////// set Visible
+
+
+	ISS.setSurfaceVisible = function( id ) {
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
 
 	};
 
 
-	ISS.showSurfaceType = function( type ) {
+
+	ISS.setSurfaceTypeVisible = function( type ) {
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
 	};
+
+
+
+	ISS.setSurfaceArrayVisibleToggle = function( button, surfaceArray ) {
+
+		if ( button.style.backgroundColor !== 'var( --but-bg-color )' ) {
+			count = 0;
+			GBP.surfaceMeshes.children.forEach( element =>
+				{ element.visible = surfaceArray.includes( element.userData.data.Name ) ? true : false; count = element.visible ? count++ : count;} );
+				console.log( '', count );
+
+			button.style.backgroundColor = 'var( --but-bg-color )';
+
+		} else {
+
+			GBP.setAllVisible();
+
+			button.style.backgroundColor = '';
+
+		}
+
+	}
+
+
+
+	ISS.setCadIdVisible = function( index ) {
+
+		GBP.surfaceMeshes.children.forEach( element =>
+			element.visible = element.userData.data.CADObjectId === ISS.surfaceAdjacentsDuplicates[ index ].cadId ? true : false );
+
+	};
+
+
+
+	ISS.setCadIdVisible2 = function( CADObjectId ) {
+
+		const id = decodeURI( CADObjectId );
+		GBP.surfaceMeshes.children.forEach( element =>
+			element.visible = element.userData.data.CADObjectId === id ? true : false );
+
+	};
+
+
+
+	ISS.setOpeningVisible = function( id ) {
+
+		//console.log( 'opening id', id );
+
+		GBP.surfaceMeshes.visible = false;
+		GBP.surfaceEdges.visible = false;
+		GBP.openingMeshes.visible = true;
+
+		GBP.openingMeshes.children.forEach( element => {
+
+			element.visible = element.userData.data.id === id ? true : false;
+
+			if ( element.visible === true  ) {
+
+				element.material.opacity = 1;
+				element.material.side = 2;
+				element.material.needsUpdate = true;
+
+			}
+
+		} );
+
+	}
+
+
+
+	ISS.setDuplicateAdjacentSpaceVisibleToggle = function() {
+
+		if ( ISSbutDuplicateAdjacent.style.backgroundColor !== 'var( --but-bg-color )' ) {
+
+			GBP.surfaceMeshes.children.forEach( child => child.visible = false );
+
+			for ( let item of ISS.surfaceAdjacentsDuplicates ) {
+
+				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === item.id );
+				surfaceMesh.visible = true;
+
+			}
+
+			ISSbutDuplicateAdjacent.style.backgroundColor = 'var( --but-bg-color )';
+
+		} else {
+
+			GBP.setAllVisible();
+
+			ISSbutDuplicateAdjacent.style.backgroundColor = '';
+
+		}
+
+	}
+
+
+
+	/////////
+
+	ISS.zoomIntoSurface = ( id ) => {
+		//console.log( 'id', id );
+
+		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
+		//console.log( '', surfaceMesh );
+
+		const center = surfaceMesh.localToWorld( surfaceMesh.geometry.boundingSphere.center.clone() );
+		const radius = surfaceMesh.geometry.boundingSphere.radius > 1 ? surfaceMesh.geometry.boundingSphere.radius : 1;
+		//console.log( 'center * radius', center, radius );
+
+		THR.scene.remove( ISS.telltale );
+		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
+		ISS.telltale = new THREE.Mesh( geometry, material );
+		ISS.telltale.position.copy( center );
+		THR.scene.add( ISS.telltale );
+
+		THR.controls.target.copy( center );
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
+
+	};
+
+
+
+	/////////
+
+
+	ISS.updateSurfaceUndefinedCadIdAttributes = function() {
+
+		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.traverseGbjson( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] );
+
+		if ( window.HUD ) {
+			HUD.updateSurface( ISSselSurfaceUndefined.value );
+			HUD.setHeadsUp();
+		}
+	}
+
+
+	ISS.updateSurfaceTinyAttributes = function() {
+
+		const surface = ISS.surfacesTiny[ ISSselSurfaceTiny.selectedIndex ];
+		height = parseFloat( surface.RectangularGeometry.Height );
+		width = parseFloat( surface.RectangularGeometry.Width );
+		area =  height * width;
+		txt = ISS.traverseGbjson( surface );
+
+		ISSdivSurfacesTinyAttributes2.innerHTML =
+			txt + '<br>' +
+			'height: ' + height.toLocaleString() + '<br>' +
+			'width: ' + width.toLocaleString() + '<br>' +
+			'area: ' + area.toLocaleString() + '<br>' +
+		'';
+
+		if ( window.HUD != undefined ) {
+
+			HUD.updateSurface( ISSselSurfaceTiny.value );
+			HUD.setHeadsUp();
+
+		}
+
+	}
+
+
+	ISS.updateSurfaceVertexCloseAttributes = function() {
+
+		const surface = ISS.surfacesVertexClose[ ISSselSurfaceVertexClose.selectedIndex ];
+		const vertices = surface.geometry.vertices;
+		const distance = 0.01 * parseFloat( ISSinpMinDistance.value );
+
+		let txt = ISS.traverseGbjson( surface.userData.data ) + '<br>';
+
+		for ( i = 1; i <  vertices.length; i++ ) {
+
+			if ( vertices[ i ].distanceTo( vertices[ i - 1 ] ) < distance ) {
+				//console.log( 'vv', vertices[ i ], vertices[ i ].distanceTo( vertices[ i - 1 ] ) );
+
+				txt += 'Close coordinates: ' + ( i - 1 ) + ' and ' + i + ': ' +
+				vertices[ i ].distanceTo( vertices[ i - 1 ] ) + '<br>';
+
+			}
+
+		}
+
+		ISSdivSurfacesVertexCloseAttributes.innerHTML =
+			txt + '<br>' +
+
+		'';
+
+		if ( window.HUD ) {
+
+			HUD.updateSurface( ISSselSurfaceVertexClose.value );
+			HUD.setHeadsUp();
+
+		}
+
+	}
+
+
+
+	ISS.setPanelOpeningAttributes = function() {
+
+		let item = GBP.openings.find( element => element.id === ISSselOpen.value );
+		const attributes = ISS.getGbjsonAttributes( item );
+		ISSdivAttributes.innerHTML = ( ISSselOpen.selectedIndex + 1 ) + '.<br>' + attributes;
+
+	}
+
+	//////////
 
 
 
@@ -866,19 +904,57 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	}
 
 
-	// copied from  HUD/ move to GBV?
-	ISS.updateSelect = function( input, select ) {
+
+	ISS.getGbjsonAttributes = function( obj ) {
+
+		let attributes = '';
+
+		for ( property in obj ) {
+
+			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
+
+				if ( property === 'AdjacentSpaceId' ) {
+
+					//console.log( 'property', obj[ property ].length );
+
+					if ( Array.isArray( obj[ property ] ) ) {
+
+						attributes += '<div>' + property + ': <i>' + obj[ property ][ 0 ].spaceIdRef + '</i></div>';
+						attributes += '<div>' + property + ': <i>' + obj[ property ][ 1 ].spaceIdRef + '</i></div>';
+
+					} else {
+
+						attributes += '<div>' + property + ': <i>' + obj[ property ].spaceIdRef + '</i></div>';
+
+					}
+
+				}
+
+			} else {
+
+				attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
+
+			}
+
+		};
+
+		return attributes;
+
+	};
+
+
+
+	ISS.setSelectedIndex = function( input, select ) {
 
 		const str = input.value.toLowerCase();
 
 		for ( let option of select.options ) {
 
-			if ( option.value.toLowerCase().includes( str ) ) {
+			if ( option.innerHTML.toLowerCase().includes( str ) ) {
 
 				select.value = option.value;
-				//select.click();
 
-				break;
+				return;
 
 			}
 

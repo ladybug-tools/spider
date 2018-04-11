@@ -338,13 +338,18 @@
 
 		let spacesOptions = '<option>none</option>';
 
-		if ( GBX.spacesJson ) {
+		if ( Array.isArray( GBX.spacesJson ) ) {
+		//if ( GBX.spacesJson ) {
 
 			for ( let space of GBX.spacesJson ) {
 
 				spacesOptions += '<option>' + space.id + '</option>';
 
 			}
+
+		} else {
+
+			spacesOptions += '<option>' + GBX.spacesJson.id + '</option>';
 
 		}
 

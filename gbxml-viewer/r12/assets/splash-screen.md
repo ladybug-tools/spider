@@ -23,7 +23,14 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-04-02 ~ R12.15</summary>
+<summary>Welcome 2018-04-10 ~ R12.16</summary>
+
+R12.16
+HUD / Heads-Up Module
+* If gbXML file has only a single space:
+	* Formerly: displays blank HUD
+	* Now: displays relevant HUD data plus following message 'Model has only a single space, therefore there is no adjacent space data to be shown here.'
+
 
 R12.15
 NUM / Numbers Module

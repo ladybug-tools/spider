@@ -435,7 +435,7 @@ THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems,rngOpaci
 
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=REP.setSelected(this); size=` +
+					<input oninput=REP.setSelectedIndex(this); size=` +
 					( item.gbjson.length < 10 ? item.gbjson.length : 10 ) +
 					` placeholder="` + item.attribute + `" ><br>
 					<select id = "REPselItem" onclick=REP.setPanelAttributes(); onchange=REP.setPanelAttributes(); size=10 ></select>
@@ -470,7 +470,7 @@ THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems,rngOpaci
 
 
 
-	REP.setSelected = function( input ) {
+	REP.setSelectedIndex = function( input ) {
 
 		const str = input.value.toLowerCase();
 

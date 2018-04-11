@@ -51,13 +51,13 @@ ISS / Issues & Num / Numbers Modules
 * Various fixes
 
 HUD / Heads-Up Display Module
-	* Added and appears to be functioning OK
-	* Add the style theming to the window
-	* Streamline self-loading capability
+* Added and appears to be functioning OK
+* Add the style theming to the window
+* Streamline self-loading capability
 
 Issue: Process of toggling the visibility of meshes, edges and openings needs streamlining.
-	* Often things that should be made visible when clicking around are not
-	* You need to click the 'all' button too often
+* Often things that should be made visible when clicking around are not
+* You need to click the 'all' button too often
 
 R13
 * 2018-03-26:First Commit

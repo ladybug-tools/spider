@@ -214,34 +214,40 @@
 				space1 = GBV.getSpaceId( data.AdjacentSpaceId.spaceIdRef );
 				//console.log( 'hud space1', space1 );
 
-				if ( !space1 ) { return; }
+				if ( !space1 ) {
 
-				adjacentsTxt =
-					'<hr>' +
-					'<details open >' +
-						'<summary><b>adjacent space 1</b></summary>' +
-						'<div class=flex-container2 >' +
-							'<div class=flex-div1 >' +
-								'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
-								'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
-								'<button onclick=HUD.updateSpace(0); >update</button>' + b +
+					adjacentsTxt = '<hr><p>Model has only a single space, therefore there is no adjacent space data to be shown here.</p>'
+
+				} else {
+
+					adjacentsTxt =
+						'<hr>' +
+						'<details open >' +
+							'<summary><b>adjacent space 1</b></summary>' +
+							'<div class=flex-container2 >' +
+								'<div class=flex-div1 >' +
+									'<input oninput=HUD.updateSelect(this,selSpace1); size=6 placeholder="space id" ><br>' +
+									'<select id=selSpace1 onclick=GBV.showSpace(this.value); onchange=GBV.showSpace(this.value); size=8 >' + GBX.spacesOptions + '</select><br>' +
+									'<button onclick=HUD.updateSpace(0); >update</button>' + b +
+									'</div>' +
+								'<div class=flex-div2 >' +
+									//'<b>adjacent space 1</b> ' + b +
+									'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
+									( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
+									//( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
+									( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) + '</i>' : '' ) +
+									( space1.Volume ? ' volume <i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
+									'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
+									( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' )  +
+									//( space1.zoneIdRef ? 'zone id <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
+									( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
 								'</div>' +
-							'<div class=flex-div2 >' +
-								//'<b>adjacent space 1</b> ' + b +
-								'id <button id=butSpace0 onclick=GBV.showSpace(this.innerText);selSpace1.value=this.innerText; >' + space1.id + '</button> ' + b +
-								( space1.Name ? 'name <i>' + space1.Name +  '</i>' + b : '' ) +
-								//( space1.Description ? 'description <i>' + encodeURI( space1.Description ) +  '</i>' +b : '' ) +
-								( space1.Area ? 'area <i>' + Number( space1.Area ).toFixed( 1 ) + '</i>' : '' ) +
-								( space1.Volume ? ' volume <i>' + Number( space1.Volume ).toFixed( 1 ) + '</i>' + b : '' ) +
-								'storey <button onclick=GBV.showStorey(this.innerText); >' + space1.buildingStoreyIdRef + '</button>' + b +
-								( space1.conditionType ? 'condition type <i>' + space1.conditionType + '</i>' + b : '' )  +
-								//( space1.zoneIdRef ? 'zone id <i>' + space1.zoneIdRef + '</i>' + b : '' ) +
-								( space1.CADObjectId ? 'cad object id <i>' + space1.CADObjectId + '</i>' + b : '' ) +
 							'</div>' +
-						'</div>' +
-						'<hr>';
-					'</details>' +
+							'<hr>';
+						'</details>' +
 					'';
+
+				}
 
 			}
 
@@ -258,7 +264,6 @@
 				<p>
 			</details>
 		`;
-
 
 		divHUDheader.innerHTML = headerTxt;
 		divHUDItems.innerHTML = adjacentsTxt;
