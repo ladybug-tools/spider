@@ -37,6 +37,8 @@ needs combining with this read me
 
 ## Wish list / ToDo
 
+* 2018-04-12 ~ Theo ~ Combine with APP?
+
 
 ## Issues
 

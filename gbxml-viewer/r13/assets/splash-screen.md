@@ -21,6 +21,29 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 </details>
 -->
 
+
+<details open>
+
+<summary>Welcome 2018-04-11 ~ R13.3</summary>
+
+
+HUD /Head-up Display Module
+* If gbXML file has only a single space:
+	* Past: displays blank HUD
+	* Now: displays relevant HUD data plus following message 'Model has only a single space, therefore there is no adjacent space data to be shown here.'
+
+REP / Reports Module
+* Element attributes starting to have buttons to update the display
+	* Buttons for: ID, Surface type, Adjacent spaces, CAD object ID, Space and Zone
+* Spaces report has zoom button
+
+CSS / Style Sheet
+* Better handling of sliding menus and pop ups on small devices
+* Left menu needs more work
+
+</details>
+
+
 <details open >
 
 <summary>Welcome 2018-04-03 ~ R13.2.</summary>
@@ -35,13 +58,27 @@ APP / Application Module
 * Only a single Feature panel is visible at any given time
 	* Multiple visible panels added complexity without much benefit
 
-
 </details>
 
-<details open>
+<details>
 
 <summary>Welcome 2018-04-02 ~ R13.1 </summary>
 
+R13.2
+
+HUD /Head-up Display Module
+* If gbXML file has only a single space:
+	* Past: displays blank HUD
+	* Now: displays relevant HUD data plus following message 'Model has only a single space, therefore there is no adjacent space data to be shown here.'
+
+REP / Reports Module
+* Element attributes starting to have buttons to update the display
+	* Buttons for: ID, Surface type, Adjacent spaces, CAD object ID, Space and Zone
+* Spaces report has zoom button
+
+CSS / Style Sheet
+* Better handling of sliding menus and pop ups on small devices
+* Left
 R13.1
 * Starting to have revision numbers
 * REP / Reports Module

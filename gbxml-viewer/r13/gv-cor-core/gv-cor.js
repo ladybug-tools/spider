@@ -159,6 +159,8 @@
 
 	// handle fileReader events
 
+
+
 	COR.openFile = function( files ) {
 
 		var fileData, reader, data;
@@ -345,23 +347,43 @@
 	}
 
 
-	COR.toggleNavRight = function() {
 
-		const menuRightWidth = divHeadsUp.style.width ? divHeadsUp.style.width.slice( 0, -2 ) : '420' ;
-		const menuRightLeft = ( window.innerWidth - menuRightWidth - 20 ) + 'px';
-		//console.log( 'menuRightLeft', menuRightLeft );
+	COR.toggleNavRight = function() {
 
 		divPopUp.style.display = "none";
 
-		if ( divHamburgerRight.style.backgroundColor === '' ) {
+		if ( divHeadsUp.style.left === '100%' ) {
 
-			divHamburgerRight.style.backgroundColor = 'yellow';
-			divHeadsUp.style.left = '100%';
+			if ( window.innerWidth > 900 ) {
+
+				divHeadsUp.style.left = '70%';
+
+			} else if ( window.innerWidth > 600 ) {
+
+				divHeadsUp.style.left = '70%'
+
+			} else {
+
+				divHeadsUp.style.left = '60%';
+
+			}
 
 		} else {
 
-			divHamburgerRight.style.backgroundColor = '';
-			divHeadsUp.style.left = menuRightLeft;
+			divHeadsUp.style.left = '100%';
+
+		}
+
+	}
+
+	COR.setButtonStyleClass = function( item ) {
+
+		const butts = item.getElementsByTagName( "button" );
+		//console.log( 'butts', butts );
+
+		for ( let butt of butts ) {
+
+			butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
 
 		}
 

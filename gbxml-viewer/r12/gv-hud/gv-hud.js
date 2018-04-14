@@ -60,8 +60,6 @@
 				intersected.currentOpacity = intersected.material.opacity;
 				intersected.material.opacity = 1;
 
-
-
 			}
 
 		} else {
@@ -73,14 +71,12 @@
 
 		}
 
-
 	}
 
 
 
 	HUD.onRendererMouseDownHUD= function( event ) {
 
-		//dragMouseDown;( event );
 		divHeadsUp.style.display = 'none';
 
 		THR.renderer.domElement.removeEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
@@ -585,6 +581,7 @@
 	};
 
 
+
 	HUD.updateCadId = function( that ){
 
 		const surface = HUD.data;
@@ -668,7 +665,6 @@
 
 	HUD.removeTelltales = function() {
 
-
 		THR.scene.remove( telltalesPolyloop );
 		THR.scene.remove( telltalesVertex );
 
@@ -698,6 +694,7 @@
 
 			placard = HUD.drawPlacard( i.toString(), 0.01, 200, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
 			// console.log( 'placard', placard );
+
 			telltalesPolyloop.add( placard );
 			telltalesPolyloop.add( mesh );
 

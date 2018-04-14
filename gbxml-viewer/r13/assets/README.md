@@ -27,6 +27,14 @@ A directory for style sheets, images, markdown pages and similar project assets
 
 ## Change Log
 
+
+### 2018-04-11 ~ Theo
+
+CSS / Style Sheet
+* Better handling of sliding menus and pop ups on small devices
+* Left menu needs more work
+
+
 ### 2018-03-27 ~ Theo
 
 CSS

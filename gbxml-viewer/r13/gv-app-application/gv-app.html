@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-04-03" >
-<title>gbXML Viewer 13.2</title>
+<meta name = "date" content = "2018-04-12" >
+<title>gbXML Viewer 13.4</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -117,8 +117,6 @@
 				Issues</button>
 
 
-
-
 				<!--
 
 				<button id=butReports0 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
@@ -214,7 +212,6 @@
 
 	</div>
 
-
 	<div id = "divHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
 
 
@@ -247,7 +244,7 @@
 
 				pop-up window / click here to move / click outside to close
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme"  ontouchstart=divPopUp.style.display="none"; onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" ontouchstart=divPopUp.style.display="none"; onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
 
 			</div>
 
@@ -330,6 +327,7 @@
 		}
 
 		THR.renderer.domElement.addEventListener( 'click', function() { divPopUp.style.display = 'none'; }, false );
+		THR.renderer.domElement.addEventListener( 'touchstart', function() { divPopUp.style.display = 'none'; }, false );
 		THR.controls.enableKeys = false;
 
 	}

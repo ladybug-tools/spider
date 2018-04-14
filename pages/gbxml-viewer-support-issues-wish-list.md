@@ -20,13 +20,22 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ## Current Issues with gbXML Viewer
 
+2018-04-11 ~ 3D Model / In-world display
 
-2018-04-02 ~ 3D Model / In-world
+When openings are being displayed with partial opacity, then surfaces behind an opening may appear to disappear> Solution: toggle the visibility of openings. This is a limitation of Three.JS and WebGL defaults and is likely to take some time to fix.
 
+
+
+
+2018-04-11 ~ HUD
+
+R12: If an elemeent has no existing CAD Object ID, then you cannot eit or add a AD Object ID. To be fixed in R13.
 
 2018-04-02 ~ HUD
 
-When there are duplicate surface and/or duplicate adjacent spaces, toggling the visibility of one of the items may cause both items not to be visible.
+When there are duplicate surface and/or duplicate adjacent spaces, toggling the visibility of one of the items may cause both items not to be visible. Cause still being investigated.
+
+Too often you may need to click 'all visible' to get an element to appear. The whole visible/invisible toggles thing needs cleaning up
 
 
 2018-03-23 ~ HUD / spaces not updating properly

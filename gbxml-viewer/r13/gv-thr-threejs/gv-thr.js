@@ -68,6 +68,8 @@
 		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
 
 		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'touchstart', function() { controls.autoRotate = false; }, false );
+
 		//renderer.domElement.addEventListener( 'click', function() { divContainer.style.display = 'none'; }, false );
 
 

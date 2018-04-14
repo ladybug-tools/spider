@@ -8,10 +8,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 
+	var ISS = {};
+
 	var spaceId1;
 	var spaceId2;
-
-	var ISS = {};
 
 	// call at bottom of file
 
@@ -37,19 +37,14 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
 
-		//if ( ISS.butMenuIssues.style.backgroundColor !== 'var( --but-bg-color )' ) {
 		if ( ISS.butMenuIssues.style.fontStyle !== 'italic' ) {
 
 			ISS.getMenuItems();
 
-			//ISS.getSurfacesInside(); // not found to be useful yet
-
-			//ISS.butMenuIssues.style.backgroundColor = 'var( --but-bg-color )';
 			ISS.butMenuIssues.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
-			//ISSdetIssues.remove();
 			divMenuItems.innerHTML = '';
 
 			ISS.butMenuIssues.style.backgroundColor = '';
@@ -164,6 +159,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all visible</button>
+
+			<hr>
 
 		</details>`;
 

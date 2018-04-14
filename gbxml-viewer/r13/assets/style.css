@@ -20,7 +20,8 @@
 
 	blockquote, pre { background-color: #eee; padding: 10px; }
 
-	button, input[ type=button ] { margin: 2px; padding: 3px 5px; }
+	button, input[ type=button ] { border-width: 1px; border-radius: 2px; margin: 0px; padding: 2px 5px; }
+
 
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
@@ -28,6 +29,8 @@
 
 	summary { font-weight: bold; }
 
+	.attributeTitle {font-size: smaller; font-style: italic }
+	.attributeValue { color: blue }
 	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
 
 	.flex-container { display: flex; flex-wrap: wrap;}
@@ -79,13 +82,6 @@
 	#divMenuInWorld { left: 0; margin: auto; position: fixed; right: 0; text-align: center; width: 60%; }
 	#divMenuInWorld h2 { margin: 0; }
 
-	#divHamburgerRight {
-		cursor: pointer; display: none; font-size: 30px; right: 0; line-height: 30px;
-		margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 50px; transition: left .5s; z-index: 10; }
-	#divHamburgerRight { box-sizing: border-box; border-radius: 2px;
-		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-	}
-
 	#divHeadsUp {
 		border-radius: 2px; display: none; left: calc( 100% - var( --mnu-right-width ) - 20px );
 		max-height: 97%; min-height: 100px; opacity: 0.95; overflow: auto;
@@ -97,4 +93,27 @@
 	#divHeadsUpHeader { cursor: move; padding: 10px; }
 	#divHeadsUp div.mnuRightDiv { padding: 0 10px 0 10px; }
 
+
+	#divHamburgerRight {
+		cursor: pointer; display: none; font-size: 30px; right: 0; line-height: 30px;
+		margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 50px; transition: left .5s; z-index: 10; }
+	#divHamburgerRight { box-sizing: border-box; border-radius: 2px;
+		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	}
+
+
+	@media screen and (max-width: 900px) {
+
+		#divMenuLeft { left: -23em }
+		#divPopUp { left: 40%; width: 50%; }
+		#divHeadsUp { left: 70%; }
+	}
+
+	@media screen and (max-width: 600px) {
+
+		#divMenuLeft { left: -23em; }
+		#divPopUp { left: 50%; width: 48%; }
+		#divHeadsUp { left: 60%; top: 80px; }
+
+	}
 

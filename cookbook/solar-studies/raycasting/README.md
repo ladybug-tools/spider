@@ -10,10 +10,30 @@ _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 -->
 
+
+
+## [Raycasting 4]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-4.html )
+
+<img src=cookbook/solar-studies/raycasting/raycasting-4.png width=500 >
+
+* Adds soft shadows using vertex colors
+* Warning: extremely slow because it does 50 x 50 & 6 ray castings
+* Should be able to drop the casts down to 50 x 50
+* Z-axis is the new up
+
+
+
+***
+
 ## [Raycasting 3]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-3.html )
 
-* Adds a Sun with user-selectable azimuth and altitude
+<img src=cookbook/solar-studies/raycasting/raycasting-3.png width=500 >
+
+* Adds a Sun with user-selected azimuth and altitude
 * Updates scene in 30 to milliseconds
+* Highly pixelated edges
+
+***
 
 ## [Raycasting 2]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-2.html )
 
@@ -28,6 +48,10 @@ _txt_
 
 
 ## Change Log
+
+### 2018-04-14 ~ Theo
+
+* Raycasting 4
 
 ### 2018-04-02 ~ Theo
 

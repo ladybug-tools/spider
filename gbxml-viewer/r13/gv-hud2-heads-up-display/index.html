@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+</head>
+<body>
+<script>
+
+
+	const protocol = location.protocol;
+	console.log( 'protocol', protocol );
+
+	const pathname = location.pathname;
+	console.log( 'pathname', pathname);
+
+	let path;
+
+	const repo = 'spider';
+
+	if ( protocol === 'file:' ) {
+
+		const sliceStart = pathname.indexOf( repo ) + repo.length + 1;
+		//console.log( 'sliceStart', sliceStart );
+
+		path = pathname.slice( sliceStart, pathname.lastIndexOf( '/' )  );
+		//console.log( 'path', path );
+
+	} else if ( protocol.includes( 'http' ) ) {
+
+		path = pathname.slice( 1, pathname.lastIndexOf( '/' )  );
+
+	}
+
+	const pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
+	console.log( 'pathFull', pathFull );
+
+	window.location.href = pathFull;
+
+
+/*
+
+const pathname = location.pathname;
+path = pathname.slice( 1, pathname.lastIndexOf( '/' )  );
+console.log( 'path', path );
+pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
+console.log( 'pathFull', pathFull);
+
+*/
+
+</script>
+</body>
+</html>

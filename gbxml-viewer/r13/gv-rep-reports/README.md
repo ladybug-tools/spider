@@ -85,12 +85,30 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Change Log
 
+
+### 2018-04-12 ~ Theo
+
+R13.4
+REP / Reports Module
+* Better handling of zones
+* More code streamlining
+
+### 2018-04-11 ~ Theo
+
+R13.3
+REP / Reports Module
+* Element attributes starting to have buttons to update the display
+	* Buttons for: ID, Surface type, Adjacent spaces, CAD object ID, Space and Zone
+* Spaces report has zoom button
+
+### 2018-04-03 ~ Theo
+
 R13.2
-* REP / Reports Module
+REP / Reports Module
 	* All functions either set or get
 	* All functions follow clearer naming structure
 
-Done: * 2018-04-02 ~ Update all get functions so they return objects
+Done: 2018-04-02 ~ Update all get functions so they return objects
 
 ### 2018-04-02 ~ Theo
 
@@ -98,6 +116,7 @@ Done: * 2018-04-02 ~ Update all get functions so they return objects
 * Editing function names to match more closely to their use
 * Add Openings by Type panel
 	* Done: 2018-04-01 ~ Theo ~ Add 'Openings by Type' report
+
 ### 2018-04-01 ~ Theo
 
 R13.0

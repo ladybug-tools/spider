@@ -2,17 +2,11 @@
 
 	var HUD = {};
 
-	var intersected;
-	var mouse;
 
-	var telltalesVertex;
-	var telltalesPolyloop;
 
-	//HUD.initHeadsUp();
+	 HUD.initHeadsUp = function() { // called from bottom of script
 
-	 HUD.initHeadsUp = function() { // called from app.html or gbx.html
-
-		if ( window.butMenuLoad ) {
+		if ( window.butMenuLoad ) { // we are in an iframe
 
 			HUD.butMenuHUD = butMenuLoad;
 
@@ -23,34 +17,40 @@
 
 			divHeadsUp = icw.divHeadsUp;
 			divHamburgerRight = icw.divHamburgerRight;
-			divHUDheader = icw.divHUDheader;
-			divHUDItems = icw.divHUDItems;
-			divHUDfooter = icw.divHUDfooter;
+			HUDdivHeader = icw.HUDdivHeader;
+			HUDdivItems = icw.HUDdixItems;
+			HUDdivTellTales = icw.HUDdivTellTales;
 			selType = icw.selType;
 			HUDselSurface = icw.HUDselSurface;
 
-
-			HUD.getMenuOptions();
+			HUD.setMenuOptions();
 
 		} else {
-
-			//divPopUp.style.display = 'none';
-			//HUD.butMenuHUD = butHeadsUpDisplay;
 
 		}
 
 	};
 
 
-	HUD.getMenuOptions = function() {
 
-		mouse = new THREE.Vector2();
+	HUD.setMenuOptions = function() {
+
+		HUD.mouse = new THREE.Vector2();
 
 		THR.renderer.domElement.addEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
 		THR.renderer.domElement.addEventListener( 'touchstart', HUD.onRendererTouchStartHUD, false );
 
+		HUDdivShowHide.innerHTML = GBI.getPanelShowHide();
 
-		// Do the following in HUD in R13
+		HUDdivEditSurface.innerHTML = GBI.getPanelEditSurface();
+
+		HUDdivTellTales.innerHTML = HUD.getPanelTellTale();
+
+
+		COR.setButtonStyleClass( divHeadsUp );
+
+		/////
+
 		GBP.spacesJson = GBP.gbjson.Campus.Building.Space;
 
 		let spacesOptions = '<option>none</option>';
@@ -72,7 +72,6 @@
 
 		GBP.spacesOptions = spacesOptions;
 		//console.log( 'GBP.spaceOptions', GBP.spaceOptions);
-
 
 
 		let surfacesOptions = '';
@@ -106,65 +105,60 @@
 
 
 		GBP.surfacesCadObj = cadIdOptions.sort().join();
-
-		//		console.log( 'GBP.surfacesCadObj', GBP.surfacesCadObj);
+		//console.log( 'GBP.surfacesCadObj', GBP.surfacesCadObj);
 
 		GBP.surfacesXml = GBP.gbxml.getElementsByTagName("Surface");
-
-
-//		if ( ifrThree.src !== 'gv-hud-run.html' ) { ifrThree.src = 'gv-hud-run.html'; }
 
 	}
 
 
-	HUD.onRendererMouseMoveHUD = function( event ) {
 
-		var raycaster;
-		var intersects;
+	HUD.onRendererMouseMoveHUD = function( event ) {
 
 		event.preventDefault();
 
 		if ( event.buttons > 0 ) { return; }
 
-		mouse.x = ( event.clientX / THR.renderer.domElement.clientWidth ) * 2 - 1;
-		mouse.y = - ( event.clientY / THR.renderer.domElement.clientHeight ) * 2 + 1;
+		HUD.mouse.x = ( event.clientX / THR.renderer.domElement.clientWidth ) * 2 - 1;
+		HUD.mouse.y = - ( event.clientY / THR.renderer.domElement.clientHeight ) * 2 + 1;
 
-		raycaster = new THREE.Raycaster();
-		raycaster.setFromCamera( mouse, THR.camera );
+		const raycaster = new THREE.Raycaster();
+		raycaster.setFromCamera( HUD.mouse, THR.camera );
 
-		intersects = raycaster.intersectObjects( GBP.surfaceMeshes.children );
+		const intersects = raycaster.intersectObjects( GBP.surfaceMeshes.children );
 
 		if ( intersects.length > 0 ) {
-			//console.log( 'intersected', intersected );
 
-			if ( intersected != intersects[ 0 ].object ) {
+			if ( HUD.intersected != intersects[ 0 ].object ) {
+				//console.log( 'HUD.intersected', HUD.intersected );
 
-				if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
-				if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+				if ( HUD.intersected && HUD.intersected.material.emissive ) { HUD.intersected.material.emissive.setHex( HUD.intersected.currentHex ); }
+				if ( HUD.intersected ) { HUD.intersected.material.opacity = HUD.intersected.currentOpacity; }
 
-				intersected = intersects[ 0 ].object;
+				HUD.intersected = intersects[ 0 ].object;
+
 				HUD.setHeadsUp( event );
 
-				console.log( 'intersected', intersected );
+				console.log( 'HUD.intersected', HUD.intersected );
 
-				if ( intersected.material.emissive ) {
+				if ( HUD.intersected.material.emissive ) {
 
-					intersected.currentHex = intersected.material.emissive.getHex();
-					intersected.material.emissive.setHex( 0xff0000 );
+					HUD.intersected.currentHex = HUD.intersected.material.emissive.getHex();
+					HUD.intersected.material.emissive.setHex( 0xff0000 );
 
 				}
 
-				intersected.currentOpacity = intersected.material.opacity;
-				intersected.material.opacity = 1;
+				HUD.intersected.currentOpacity = HUD.intersected.material.opacity;
+				HUD.intersected.material.opacity = 1;
 
 			}
 
 		} else {
 
-			if ( intersected && intersected.material.emissive ) { intersected.material.emissive.setHex( intersected.currentHex ); }
-			if ( intersected ) { intersected.material.opacity = intersected.currentOpacity; }
+			if ( HUD.intersected && HUD.intersected.material.emissive ) { HUD.intersected.material.emissive.setHex( HUD.intersected.currentHex ); }
+			if ( HUD.intersected ) { HUD.intersected.material.opacity = HUD.intersected.currentOpacity; }
 
-			intersected = undefined;
+			HUD.intersected = undefined;
 
 		}
 
@@ -174,7 +168,6 @@
 
 	HUD.onRendererMouseDownHUD= function( event ) {
 
-		//dragMouseDown;( event );
 		divHeadsUp.style.display = 'none';
 
 		THR.renderer.domElement.removeEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
@@ -196,12 +189,31 @@
 
 
 
+	HUD.getPanelTellTale = function () {
+
+		const tellTale =
+		`<details>
+			<summary>For debugging surface appearance</summary>
+			<p>
+				<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
+				<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
+				<button onclick=HUD.removeTelltales() >remove telltales</button>
+			<p>
+		</details>`;
+
+		return tellTale;
+
+	}
+
+
+
 	HUD.setHeadsUp = function( event ) {
 
 		let space1;
 		let space2;
 
-		if ( intersected === undefined ) {
+		// needed??
+		if ( HUD.intersected === undefined ) {
 
 			if ( event && event.type === 'touchstart' ) {
 
@@ -219,9 +231,11 @@
 		divHeadsUp.style.display = 'block';
 		divHamburgerRight.style.display = 'block';
 
-		const data = intersected.userData.data;
+		const data = HUD.intersected.userData.data;
 		HUD.data = data;
 		//console.log( 'data', data );
+
+
 
 		const b = '<br>';
 		const height = parseFloat( data.RectangularGeometry.Height );
@@ -229,7 +243,7 @@
 		const surfaceArea = height * width;
 
 		const headerTxt = setHeaderAndSurfaceText();
-
+		/*
 		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacent spaces<hr>';
 
 		//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
@@ -360,8 +374,8 @@
 		`;
 
 
-		divHUDheader.innerHTML = headerTxt;
-		divHUDItems.innerHTML = adjacentsTxt;
+
+//		divHUDItems.innerHTML = adjacentsTxt;
 		divHUDfooter.innerHTML = footerTxt;
 
 
@@ -378,59 +392,49 @@
 
 		document.body.style.cursor = 'pointer';
 
+		*/
+
+		HUDdivItems.innerHTML = headerTxt;
 
 		function setHeaderAndSurfaceText () {
 
 			const headerTxt =
-				`
-					toggle the visible items<br>
-					<button onclick=intersected.visible=!intersected.visible; accesskey="z" title = "access key + Z" >surface</button>
-					<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; accesskey="x" title = "access key +  X" >surfaces</button>
-					<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; accesskey="c" title = "access key + C"  >edges</button>
-					<button onclick=GBI.setAllVisible(); accesskey="v" title = "access key + V" >all</button>
-					<br>
+				`<details open >
 
-					edit the surface<br>
-					<button class=toggle onclick=GBI.deleteSurface("` + data.id + `"); >delete surface</button>
-					<button onclick=GBI.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
-					<button onclick=GBI.saveFile(); title="creates a new file with the changes" >save edits</button>
-					<hr>
+					<summary><b>Surface</b></summary>
 
-					<details open>
-						<summary><b>surface</b></summary>
-						<div class=flex-container2 >
-							<div class=flex-div1 >
-								<input oninput=HUD.updateSelect(this,HUDselSurface); size=6 placeholder="surface id" ><br>
-								<select id=HUDselSurface onclick=console.log('',this.value);HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` +
-									 GBP.surfacesOptions + `</select><br>
-								<button onclick=HUD.setHeadsUp(); >update</button>
-							</div>
-							<div class=flex-div2 >
-
-								id <button onclick=GBI.showSurface(this.innerText) title="show only this surface" >` + data.id + `</button>
-								<button onclick=GBI.zoomIntoSurface("` + data.id + `"); title="zoom into just this surface" >zoom</button>
-								<br>`
-								+ ( data.Name ? 'name <i>' + data.Name + '</i>' + b : '' ) +
-								`type <button butType onclick=GBI.showSurfaceType(this.innerText); title="show all of this type" >` +
-									data.surfaceType + `</button>` + b +
-								` update <select id = "selType" onchange=HUD.updateType(this.value);
-									title="change to another type of surface" >` + GBP.surfaceTypeOptions + `</select>
-								<br>`
-								+ ( data.CADObjectId ? 'cad object id <button onclick=GBI.showCadId("' +
-									encodeURI( data.CADObjectId ) + `"); title="Show all surfaces in this CAD object" >` + data.CADObjectId + `</button><br>` : `` ) +
-									`<select id=selCadId onchange=HUD.updateCadId(this);>` + GBP.surfacesCadObj +`</select><br>` +
-									`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
-									` ln <i title="length" >` + height.toFixed( 3 ) + `</i> wd <i title="width" >` + width.toFixed( 3 ) + `</i>` +
-							`<div>
+					<div class=flex-container2 >
+						<div class=flex-div1 >
+							<input oninput=HUD.updateSelect(this,HUDselSurface); size=6 placeholder="surface id" ><br>
+							<select id=HUDselSurface onclick=console.log('',this.value);HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` +
+									GBP.surfacesOptions + `</select><br>
+							<button onclick=HUD.setHeadsUp(); >update</button>
 						</div>
-					</details>
 
-				`;
+						<div class=flex-div2 >
+
+							id <button onclick=GBI.showSurface(this.innerText) title="show only this surface" >` + data.id + `</button>
+							<button onclick=GBI.zoomIntoSurface("` + data.id + `"); title="zoom into just this surface" >zoom</button>
+							<br>`
+							+ ( data.Name ? 'name <i>' + data.Name + '</i>' + b : '' ) +
+							`type <button butType onclick=GBI.showSurfaceType(this.innerText); title="show all of this type" >` +
+								data.surfaceType + `</button>` + b +
+							` update <select id = "selType" onchange=HUD.updateType(this.value);
+								title="change to another type of surface" >` + GBP.surfaceTypeOptions + `</select>
+							<br>`
+							+ ( data.CADObjectId ? 'cad object id <button onclick=GBI.showCadId("' +
+								encodeURI( data.CADObjectId ) + `"); title="Show all surfaces in this CAD object" >` + data.CADObjectId + `</button><br>` : `` ) +
+								`<select id=selCadId onchange=HUD.updateCadId(this);>` + GBP.surfacesCadObj +`</select><br>` +
+								`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
+								` ln <i title="length" >` + height.toFixed( 3 ) + `</i> wd <i title="width" >` + width.toFixed( 3 ) + `</i>` +
+						`</div>
+					</div>
+					<hr>
+				</details>`;
 
 			return headerTxt;
 
 		}
-
 
 	};
 
@@ -442,7 +446,7 @@
 
 		const surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 		console.log( 'surfaceMesh', surfaceMesh );
-		intersected = surfaceMesh;
+		HUD.intersected = surfaceMesh;
 
 	};
 
@@ -730,14 +734,14 @@
 
 	HUD.displayTelltalesVertex = function() {
 
-		THR.scene.remove( telltalesVertex );
+		THR.scene.remove( HUD.telltalesVertex );
 
-		if( !intersected ) { return; }
+		if( !HUD.intersected ) { return; }
 
-		telltalesVertex = new THREE.Object3D();
+		HUD.telltalesVertex = new THREE.Object3D();
 
 
-		const vertices = intersected.geometry.vertices;
+		const vertices = HUD.intersected.geometry.vertices;
 
 		for ( let i = 0; i < vertices.length; i++ ) {
 
@@ -746,20 +750,20 @@
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( vertex.x, vertex.y, vertex.z ) );
 			const material = new THREE.MeshNormalMaterial();
 			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.copy( intersected.position );
-			mesh.quaternion.copy( intersected.quaternion );
+			mesh.position.copy( HUD.intersected.position );
+			mesh.quaternion.copy( HUD.intersected.quaternion );
 
 			placard = HUD.drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z + 0.5 );
-			placard.position.copy( intersected.position );
-			placard.quaternion.copy( intersected.quaternion );
+			placard.position.copy( HUD.intersected.position );
+			placard.quaternion.copy( HUD.intersected.quaternion );
 
 			// console.log( 'placard', placard );
-			telltalesVertex.add( placard );
-			telltalesVertex.add( mesh );
+			HUD.telltalesVertex.add( placard );
+			HUD.telltalesVertex.add( mesh );
 
 		}
 
-		THR.scene.add( telltalesVertex );
+		THR.scene.add( HUD.telltalesVertex );
 
 	};
 
@@ -767,13 +771,13 @@
 
 	HUD.displayTelltalesPolyloop = function() {
 
-		THR.scene.remove( telltalesPolyloop );
+		THR.scene.remove( HUD.telltalesPolyloop );
 
-		if( !intersected ) { return; }
+		if( !HUD.intersected ) { return; }
 
-		telltalesPolyloop = new THREE.Object3D();
+		HUD.telltalesPolyloop = new THREE.Object3D();
 
-		const vertices = intersected.userData.data.PlanarGeometry.PolyLoop.CartesianPoint;
+		const vertices = HUD.intersected.userData.data.PlanarGeometry.PolyLoop.CartesianPoint;
 
 		for ( let i = 0; i < vertices.length; i++ ) {
 
@@ -787,12 +791,12 @@
 
 			placard = HUD.drawPlacard( i.toString(), 0.01, 200, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
 			// console.log( 'placard', placard );
-			telltalesPolyloop.add( placard );
-			telltalesPolyloop.add( mesh );
+			HUD.telltalesPolyloop.add( placard );
+			HUD.telltalesPolyloop.add( mesh );
 
 		}
 
-		const openings = intersected.userData.data.Opening ? intersected.userData.data.Opening : [];
+		const openings = HUD.intersected.userData.data.Opening ? HUD.intersected.userData.data.Opening : [];
 
 		for ( let i = 0; i < openings.length; i++ ) {
 
@@ -814,15 +818,15 @@
 
 				placard = HUD.drawPlacard( i.toString(), 0.01, 10, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
 				// console.log( 'placard', placard );
-				telltalesPolyloop.add( placard );
-				telltalesPolyloop.add( mesh );
+				HUD.telltalesPolyloop.add( placard );
+				HUD.telltalesPolyloop.add( mesh );
 
 			}
 
 
 		}
 
-		THR.scene.add( telltalesPolyloop );
+		THR.scene.add( HUD.telltalesPolyloop );
 
 	};
 
@@ -830,8 +834,8 @@
 
 	HUD.removeTelltales = function() {
 
-		THR.scene.remove( telltalesPolyloop );
-		THR.scene.remove( telltalesVertex );
+		THR.scene.remove( HUD.telltalesPolyloop );
+		THR.scene.remove( HUD.telltalesVertex );
 
 	}
 

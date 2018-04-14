@@ -15,30 +15,32 @@
 * Areas by Storey
 * Areas by Surface Type
 	* Buttons toggle visibility of each surface type
-* Exterior Areas
-* Openings for entire model
+* Areas by Exterior Surfaces
+* Areas by Opening type
 	* Reports areas of walls and openings and window to wall ratio
 * Orientation for the eight compass sectors
 	* Reports areas of walls and openings and window to wall ratios
 	* Toggle visibility of each surface
-* toggle the visible elements
+* Toggle the visible elements
 	* openings  surfaces  edges  all visible
 
 ## Wish list
 
 * 2018-03-27 ~ Button color of each surface type should be the color of each type
+* 2018-04-13 ~ Theo move more functions to GBI
 * 2018-03-27 ~ Add show exposed to Sun surfaces
 * 2018-03-24 ~ Add area by space <<<
 * 2018-03-23 ~ Add data embedded in gbXML file where available
 * 2018-03-23 ~ Add area by cad id group
 * 2018-03-22 ~ Add calculate and show building bounding box
-* 2018-03-22 ~ Add north point toggle < to settinngs?
+* 2018-03-22 ~ Add north point toggle < to settings?
 * 2018-03-22 ~ Openings / make clickable / App to report
 
 
 ## Issues
 
 * Still a work-in-progress
+* 2018-04-13 ~ Theo ~ GBP.openings and NUM.openings differ
 * 2018-04-02 ~ Theo ~ In need of a clean up and streamlining
 * 2018-04-02 ~ Theo ~ needs better handling of internal doors
 * Is knowing the number of surfaces in a particular set interesting?
@@ -50,6 +52,16 @@
 
 
 ## Change Log
+
+
+### 2018-04-13 ~ Theo
+
+ditto
+
+### 2018-04-12 ~ Theo
+
+R13.4
+* Continue transforming to get and set type code
 
 
 ### 2018-04-02 ~ Theo

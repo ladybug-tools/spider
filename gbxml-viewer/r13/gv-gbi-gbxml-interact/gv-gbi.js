@@ -374,7 +374,7 @@
 
 		let zone;
 
-		 {
+		if ( Array.isArray( GBX.gbjson.Zone ) ) {
 
 			zone = GBP.gbjson.Zone.find( function( item ) { return item.id === zoneIdRef; } );
 
@@ -402,11 +402,7 @@
 	};
 
 
-
 	// Zooming
-
-
-
 	GBI.ZZZzoomObjectBoundingSphere = function( obj ) {
 
 		const bbox = new THREE.Box3().setFromObject( obj );
@@ -440,7 +436,51 @@
 
 
 
+	GBI.getPanelShowHide = function() {
+
+		const txt =
+
+		`<details open >
+
+			<summary>Show / Hide</summary>
+
+			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+				<button onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
+				<button onclick=GBP.setAllVisible(); >all visible</button>
+
+			<hr>
+
+		</details>`;
+
+		return txt;
+
+	};
+
+
 	// Editing
+
+
+	GBI.getPanelEditSurface = function() {
+
+		const txt =
+		`<details>
+
+			<summary>Edit the Surface</summary>
+
+			<button class=toggle onclick=GBI.deleteSurface(); >delete surface</button>
+				<button onclick=GBI.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
+				<button onclick=GBI.saveFile(); title="creates a new file with the changes" >save edits</button>
+
+			<hr>
+
+		</details>`;
+
+		return txt;
+
+	}
+
+
 
 	GBI.deleteSurface = function( id ) {
 
