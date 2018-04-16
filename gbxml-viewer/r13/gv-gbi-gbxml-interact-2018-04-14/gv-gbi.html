@@ -56,6 +56,9 @@
 					<button id=butMenuLoad class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" >gv-tmp </button>
 				</p>
 
+				<div>
+					aaa bbb ccc
+				</div>
 
 				<hr>
 
@@ -69,15 +72,8 @@
 
 				<summary>Footer</summary>
 
-				<p>
-					<b>Visibility toggles</b><br>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; >openings</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all</button>
-				</p>
-
-				<p>text text <a href="" >link</a> text text</p>
+				<p>footer text here</p>
+				<p>footer text here</p>
 
 			</details>
 
@@ -157,7 +153,6 @@
 
 			txt += '<a href=JavaScript: onclick=setStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
 				' title="' + color + '" >&bull;</a> ';
-
 		}
 
 		divRowButtonsStyle.innerHTML = txt;
@@ -217,7 +212,7 @@
 		THREE = icw.THREE;
 		THR = icw.THR;
 		GBP = icw.GBP;
-		GBI = icw.GBI;
+		GBV = icw.GBV;
 
 		THR.controls.autoRotate = false;
 		divContainer.style.display = 'none';

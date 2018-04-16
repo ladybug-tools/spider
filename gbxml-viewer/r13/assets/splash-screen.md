@@ -24,6 +24,14 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
+<summary>Welcome 2018-04-15 ~ R13.4</summary>
+
+A very extensive rewrite of REP/GBI/NUM/ISS/HUD in progress
+
+
+</details>
+<details open>
+
 <summary>Welcome 2018-04-11 ~ R13.3</summary>
 
 

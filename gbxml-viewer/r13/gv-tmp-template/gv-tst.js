@@ -3,6 +3,7 @@
 	// get by algo
 	TST.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/';
 
+
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 	TST.iconGitHubMark = "../assets/github-mark.png";
 
@@ -15,6 +16,7 @@
 		<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 	</div>`;
 
+
 	TST.menuTitle =
 
 	`<h2>
@@ -23,11 +25,13 @@
 			<a id=aDocumentTitle href="" >` + document.title +`</a>
 	</h2>`;
 
+
 	TST.menuDescription =
 
 	`<div title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>` +
 		document.head.querySelector( '[name=description]' ).content +
 	`</small></div>`;
+
 
 	TST.menuFileOpening =
 
@@ -37,6 +41,7 @@
 		or enter a default file path <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; >
 		<br>
 	<p>`;
+
 
 	TST.menuFooter =
 	`<details open >

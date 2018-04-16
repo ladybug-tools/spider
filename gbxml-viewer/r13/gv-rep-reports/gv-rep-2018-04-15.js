@@ -1,7 +1,8 @@
-/*
-global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuItems,rngOpacity,rngViewExplodeVertical
+/*global
+
+THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems,rngOpacity,rngViewExplodeVertical
+
 */
-/* jshint esversion: 6 */
 
 // Copyright 2018 Ladybug Tools authors. MIT License
 
@@ -13,7 +14,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 			REP.butMenuReports = butMenuLoad;
 
-			REP.title = 'gv-REP - gbXML Viewer Rep';
+			REP.title = 'gv-REP - gbXML Viewer Rep';;
 			document.title = REP.title;
 			aDocumentTitle.innerHTML = REP.title;
 			REP.butMenuReports.innerHTML = REP.title;
@@ -60,7 +61,6 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 	};
 
 
-
 	REP.getMenuItems = function(){
 
 		let txt =
@@ -79,8 +79,6 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 			<div id=REPdivMenuPanelCadObjectsByType ></div>
 
 			<hr>
-
-			<!-- could move to GBI -->
 
 			<details >
 				<summary>gbXML Attributes</summary>
@@ -104,11 +102,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 				<summary>Building</summary>
 				<div id=REPdivCampusBuilding ></div>
 			</details>
-
-			<p>
-				<small><i>Want reports on more gbXML elements? <br><a href="https://github.com/ladybug-tools/spider/issues" >Just shout</a> and they will appear.</i></small>
-			</p>
-
+			<small><i>Want reports on more gbXML elements? <br><a href="https://github.com/ladybug-tools/spider/issues" >Just shout</a> and they will appear.</i></small>
 			<hr>
 
 		</details>`;
@@ -118,57 +112,72 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 	};
 
 
-
 	REP.setMenuItems = function() {
 
-		REP.reportTypes = [];  // better name
+		REP.items = [];  // better name
 
-		//REPdivMenuPanelPrelims.innerHTML = REP.getPanelVisibilityToggle();
-
-		REPdivMenuPanelPrelims.innerHTML = GBI.getPanelShowHide();
+		REPdivMenuPanelPrelims.innerHTML = REP.getPanelVisibilityToggle();
 
 		REPdivMenuPanelSelectReport.innerHTML = REP.getPanelSelectReport();
 		//console.log( 'REPselReport', REPselReport );
 
-		let txt = REP.getPanelSelectOptions( GBP.gbjson.Campus.Surface, 'Surface' );
+		REPselReport.innerHTML = REP.getPanelSelectOptions( GBP.gbjson.Campus.Surface, 'Surface' );
 
-		txt += REP.getPanelSelectOptions( GBP.gbjson.Campus.Building.Space, 'Space' );
+		REPselReport.innerHTML += REP.getPanelSelectOptions( GBP.gbjson.Campus.Building.Space, 'Space' );
 		//REP.getMenu( GBP.gbjson.Campus.Building.Space, 'Space' );
 
-		txt += REP.getPanelSelectOptions( GBP.gbjson.Campus.Building.BuildingStorey, 'Storey' );
+		REPselReport.innerHTML += REP.getPanelSelectOptions( GBP.gbjson.Campus.Building.BuildingStorey, 'Storey' );
 		//REP.getMenu( GBP.gbjson.Campus.Building.BuildingStorey, 'Storey' );
 
-		txt += REP.getPanelSelectOptions( GBP.gbjson.Zone, 'Zone' );
+		REPselReport.innerHTML += REP.getPanelSelectOptions( GBP.gbjson.Zone, 'Zone' );
 		//REP.getMenu( [ GBP.gbjson.Zone ], 'Zone' );
 
-		txt += REP.getPanelSelectOptionsOpenings();
-
-		REPselReport.innerHTML = txt;
-		///
-
-		REP.setMenuPanelSurfacesByType( REPdivMenuPanelSurfacesByType );
-
-		REP.setMenuPanelOpeningsByType( REPdivMenuPanelOpeningsByType );
-
-		//REPdivMenuPanelCadObjectsByType.innerHTML = REP.getMenuPanelCadObjectsByType();
-		REP.setMenuPanelCadObjectsByType( REPdivMenuPanelCadObjectsByType );
+		REPselReport.innerHTML += REP.getPanelSelectOptionsOpenings();
 
 		///
 
-		//REPdivGbxmlAttributes.innerHTML = REP.getGbjsonAttributes( GBP.gbjson );
-		GBI.setGbjsonAttributes( GBP.gbjson, REPdivGbxmlAttributes );
+		REPdivMenuPanelSurfacesByType.innerHTML = REP.getMenuPanelSurfacesByType();
 
-		//REPdivCampus.innerHTML = REP.getGbjsonAttributes( GBP.gbjson.Campus );
-		GBI.setGbjsonAttributes( GBP.gbjson.Campus, REPdivCampus );
+		REPdivMenuPanelOpeningsByType.innerHTML = REP.getMenuPanelOpeningsByType();
 
-		//REPdivCampusLocation.innerHTML = REP.getGbjsonAttributes( GBP.gbjson.Campus.Location );
-		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Location, REPdivCampusLocation);
+		REPdivMenuPanelCadObjectsByType.innerHTML = REP.getMenuPanelCadObjectsByType();
+
+
+		///
+
+		REPdivGbxmlAttributes.innerHTML = REP.getGbjsonAttributes( GBP.gbjson );
+
+		REPdivCampus.innerHTML = REP.getGbjsonAttributes( GBP.gbjson.Campus );
+
+		REPdivCampusLocation.innerHTML = REP.getGbjsonAttributes( GBP.gbjson.Campus.Location );
 
 		const mapLink = REP.getGoogleMap();
 		REPsumCampusLocation.innerHTML += mapLink;
 
-		//REPdivCampusBuilding.innerHTML = REP.getGbjsonAttributes( GBP.gbjson.Campus.Building );
-		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Building, REPdivCampusBuilding );
+		REPdivCampusBuilding.innerHTML = REP.getGbjsonAttributes( GBP.gbjson.Campus.Building );
+
+	};
+
+
+
+	REP.getPanelVisibilityToggle = function() {
+
+		const txt =
+
+		`<details open >
+
+			<summary>Visibility Toggles</summary>
+
+			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all visible</button>
+
+			<hr>
+
+		</details>`;
+
+		return txt;
 
 	};
 
@@ -184,11 +193,9 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 				<summary>Select Report</summary>
 
-				<div>
-					<select id=REPselReport onclick=REP.setPanelReport(); onchange=REP.setPanelReport(); size=10 ></select>
-				</div>
+				<select id=REPselReport onclick=REP.setPanelReport(); onchange=REP.setPanelReport(); size=10 ></select>
 
-				<div id=REPdivReport ></div>
+				<p id=REPdivReport ></p>
 
 				<div id=REPdivInteract ></div>
 
@@ -202,7 +209,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 
 
-	REP.getPanelSelectOptions = function( parent, element ) {
+	REP.getPanelSelectOptions = function( parent, title ) {
 
 		const obj = Array.isArray( parent ) ? parent[ 0 ] : parent; // [parent[ 0 ] : parent;
 		// what about others in array?
@@ -214,25 +221,15 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
 				//if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
+
 			} else {
 
-				const item = {};
-
-				item.attribute = property;
-				item.divAttributes = 'REPdivElementAttributes';
-
-				item.parent = parent;
-				item.element = element;
-				item.placeholder = property;
-				item.selItem = 'REPselReportType';
-
-				REP.reportTypes.push( item );
-
-				options += '<option value=' + property + ' >' + element + ' by ' + property + '</option>';
+				REP.items.push( { gbjson: parent, attribute: property, title: title } );
+				options += '<option value=' + property + ' >' + title + ' by ' + property + '</option>';
 
 			}
 
-		}
+		};
 
 		return options;
 
@@ -247,7 +244,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		REP.openings = [];
 
-		for ( let surface of REP.SurfacesWithOpenings ) {
+		for ( surface of REP.SurfacesWithOpenings ) {
 
 			if ( surface.Opening.length ) {
 
@@ -270,41 +267,55 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 	REP.setPanelReport = function() {
 
-		let item = REP.reportTypes[ REPselReport.selectedIndex ];
+		let item = REP.items[ REPselReport.selectedIndex ];
+
 		//console.log( 'item', item );
 
 		REPdivReport.innerHTML =
 
 		`<div>
 
-			<p><b>` + item.element + ' by ' + item.attribute + ' &raquo; ' + item.parent.length + ` items</b><br></p>
+			<b>` + item.title + ' by ' + item.attribute + ' &raquo; ' + item.gbjson.length + ` items</b><br>
 
-			<div id=REPdivElements ></div>
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=REP.setSelectedIndex(this); size=` +
+					( item.gbjson.length < 10 ? item.gbjson.length : 10 ) +
+					` placeholder="` + item.attribute + `" ><br>
+					<select id = "REPselItem" onclick=REP.setPanelAttributes(); onchange=REP.setPanelAttributes(); size=10 ></select>
+				</div>
+				<div id = "REPdivAttributes" class=flex-left-div2  ></div>
+			</div>
 
 		</div>`;
 
-		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
+		let arr = [];
 
-		item.optionValues = arr.map( element => [ element[ item.attribute ], element.id ] );
+		console.log( 'item', item );
 
-		item.optionValues.sort( ( a, b ) => {
-			if ( a[ 0 ] === b[ 0 ] ) { return 0; } else { return ( a[ 0 ] < b[ 0 ] ) ? -1 : 1; }
-		} );
-		//console.log( 'item.optionValues', item.optionValues );
+		item.gbjson = Array.isArray( item.gbjson ) ? item.gbjson : [ item.gbjson ];
 
-		item.divTarget = document.getElementById( 'REPdivElements' );
-		//console.log( 'item', item );
+			item.gbjson.forEach( element => arr.push( [ element[ item.attribute ], element.id ] ) );
 
-		GBI.setElementPanel2( item );
+			arr.sort( ( a, b ) => {
+				if ( a[ 0 ] === b[ 0 ] ) { return 0; } else { return ( a[ 0 ] < b[ 0 ] ) ? -1 : 1; }
+			} );
+			//console.log( 'arr', arr );
+
+			let txt = '';
+			arr.forEach( function( element ) { txt += '<option value=' + element[ 1 ] + ' title="id: ' +
+			element[ 1 ] + '" >' + element[ 0 ] + '</option>' } );
+			REPselItem.innerHTML = txt;
+			REPselItem.selectedIndex = 0;
 
 		REP.setPanelInteractions();
 
-	};
+	}
 
 
 	/////
 
-	REP.setMenuPanelSurfacesByType = function( target ) {
+	REP.getMenuPanelSurfacesByType = function() {
 
 		const surfaces = GBP.gbjson.Campus.Surface;
 
@@ -314,7 +325,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		for ( let surface of surfaces ) {
 
-			const index = types.indexOf( surface.surfaceType );
+			index = types.indexOf( surface.surfaceType );
 
 			if ( index < 0 ) {
 
@@ -356,14 +367,15 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		</details>`;
 
-		target.innerHTML = details;
+		return details;
 
 	};
 
 
 
-	REP.setMenuPanelOpeningsByType = function( target ) {
+	REP.getMenuPanelOpeningsByType = function() {
 
+		const openings = [];
 		const types = [];
 
 		for ( let opening of REP.openings ) {
@@ -396,32 +408,31 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 			<summary>Openings by Type &raquo; ` + types.length + `</summary>
 
-			<p>
-				<select id = "REPselOpeningsByType" onclick=REP.setOpeningTypeVisible(this.value);
-					onchange=REP.setOpeningTypeVisible(this.value); size=` + types.length + ` >` +
-					txt +
-				`</select>
-			</p>
+			<select id = "REPselOpeningsByType" onclick=REP.setOpeningTypeVisible(this.value);
+				onchange=REP.setOpeningTypeVisible(this.value); size=` + types.length + ` >` +
+				txt +
+			`</select>
 
 		</details>`;
 
-		target.innerHTML = details;
+		return details;
 
 	};
 
 
 
-	REP.setMenuPanelCadObjectsByType = function( target ) {
+	REP.getMenuPanelCadObjectsByType = function() {
 
 		const surfaces = GBP.gbjson.Campus.Surface;
 		const cadIds = [];
+		let count = 0;
 		let contents = '';
 
 		for ( let surface of surfaces ) {
 
 			if ( !surface.CADObjectId ) { continue; }
 
-			const id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
+			id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
 
 			if ( !cadIds.includes( id ) ) {
 
@@ -447,16 +458,14 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 			<summary >CAD Objects by Type &raquo; ` + cadIds.length + `</summary>
 
-			<p>
-				<select id = "REPselCadIdGroups" onclick=REP.setCadObjectTypeVisible(this.value);
-					onchange=REP.setCadObjectTypeVisible(this.value); size=10 >` +
-					txt +
-				`</select>
-			</p>
+			<select id = "REPselCadIdGroups" onclick=REP.setCadObjectTypeVisible(this.value);
+				onchange=REP.setCadObjectTypeVisible(this.value); size=10 >` +
+				txt +
+			`</select>
 
 		</details>`;
 
-		target.innerHTML = details;
+		return details;
 
 	};
 
@@ -464,23 +473,23 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 	/////
 
-	REP.xxxxsetPanelAttributes = function() {
+	REP.setPanelAttributes = function() {
 
 		//type = REPselReport.value;
-		const typeItem = REP.reportTypes[ REPselReport.selectedIndex ];
+		typeItem = REP.items[ REPselReport.selectedIndex ];
 		//console.log( 'typeItem', typeItem );
 
-		const itemId = REPselItem.value;
+		itemId = REPselItem.value;
 		//console.log( 'itemId', itemId);
 
 		let item = typeItem.gbjson.find( element => element.id === itemId );
 		//console.log( 'item', item );
 
-		const attributes = REP.getGbjsonAttributes( item );
+		attributes = REP.getGbjsonAttributes( item );
 		REPdivAttributes.innerHTML = ( REPselItem.selectedIndex + 1 ) + '.<br>' + attributes;
 		//console.log( 'ell', REP.getGbjsonAttributes( item ).elements );
 
-		switch( typeItem.element ) {
+		switch( typeItem.title ) {
 
 			case 'Surface':
 				REP.setSurfaceVisible( REPselItem.value );
@@ -511,44 +520,44 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 	REP.setPanelInteractions = function() {
 
-		const item = REP.reportTypes[ REPselReport.selectedIndex ];
+		item = REP.items[ REPselReport.selectedIndex ];
 		//console.log( 'item', item );
 
-		if ( item.element === 'Surface' ) {
+		if ( item.title === 'Surface' ) {
 
 			REPdivInteract.innerHTML =
 			`
-				<button onclick=GBI.setSurfaceVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
-				<button onclick=GBI.setSurfaceZoom(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >zoom</button>
+				<button onclick=REP.setSurfaceVisible(REPselItem.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+				<button onclick=REP.zoomIntoSurface(REPselItem.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >zoom</button>
 			`;
 
-		} else if ( item.element === 'Space' ) {
+		} else if ( item.title === 'Space' ) {
 
 			REPdivInteract.innerHTML =
 			`
-				<button onclick=GBI.setSpaceVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
-				`;
-
-//				<button onclick=GBI.setSurfaceZoom(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme">zoom</button>
-		} else if ( item.element === 'Storey' ) {
-
-			REPdivInteract.innerHTML =
-			`
-				<button onclick=GBI.setStoreyVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+				<button onclick=REP.setSpaceVisible(REPselItem.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+				<button onclick=REP.setZoomToSpace(REPselItem.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme">zoom</button>
 			`;
 
-		}else if ( item.element === 'Zone' ) {
+		} else if ( item.title === 'Storey' ) {
 
 			REPdivInteract.innerHTML =
 			`
-				<button onclick=GBI.setZoneVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+				<button onclick=REP.setStoreyVisible(REPselItem.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
 			`;
 
-		} else if ( item.element === 'Openings' ) {
+		}else if ( item.title === 'Zone' ) {
 
 			REPdivInteract.innerHTML =
 			`
-				<button onclick=GBI.setOpeningVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+				<button onclick=REP.setZoneVisible(REPselItem.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+			`;
+
+		} else if ( item.title === 'Openings' ) {
+
+			REPdivInteract.innerHTML =
+			`
+				<button onclick=REP.setOpeningVisible(REPselItem.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
 			`;
 
 		}
@@ -559,7 +568,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 	///// individual elements
 
-	REP.xxxsetSurfaceVisible = function( id ) {
+	REP.setSurfaceVisible = function( id ) {
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
 
@@ -585,7 +594,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 			child.visible = false;
 
-			const adjacentSpaceId = child.userData.data.AdjacentSpaceId;
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
 			//console.log( 'adjacentSpaceId', adjacentSpaceId );
 
 			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
@@ -618,18 +627,18 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId
 
 			if ( !adjacentSpaceId ) { continue; }
 
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef;
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
 
 			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === id ? true : child.visible );
 
 		}
 
-		//const storey = GBP.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
-		//console.log( 'storey', storey );
+		const storey = GBP.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
+		//	console.log( 'storey', storey );
 
 	};
 
@@ -650,7 +659,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 			if ( !adjacentSpaceId ) { continue; }
 
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef;
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
 
 			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.zoneIdRef === zoneIdRef ? true : child.visible );
 
@@ -670,7 +679,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		//console.log( 'zone', zone );
 
-	};
+	}
 
 
 
@@ -776,7 +785,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 			}
 
-		}
+		};
 
 	};
 
@@ -857,7 +866,7 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		let attributes = '';
 
-		for ( let property in obj ) {
+		for ( property in obj ) {
 
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
@@ -918,19 +927,31 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		return txt;
 
-	};
+	}
 
 
 
 	REP.getAttributeCadObjectId = function( cadId ) {
 
 		const txt = '<div><span class=attributeTitle >cad object id</span>: ' +
-			'<button onclick=GBI.setCadObjectIdVisible(this.innerText); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >' +
+			'<button onclick=REP.setCadObjectIdVisible(this.innerText); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >' +
 			cadId + '</button></div>';
 
 		return txt;
 
-	};
+	}
+
+
+
+	REP.getAttributeId = function( id ) {
+
+		const txt = '<div><span class=attributeTitle >id</span>: ' +
+		'<button onclick=REP.setSurfaceVisible(this.innerText); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >' +
+			id + '</button></div>';
+
+		return txt;
+
+	}
 
 
 
@@ -954,12 +975,12 @@ global THR, THREE, GBP, GBI,window, document,butSettings, detSettings,divMenuIte
 
 		return txt;
 
-	};
+	}
 
 
 	//////////
 
-	REP.xxxsetSelectedIndex = function( input ) {
+	REP.setSelectedIndex = function( input ) {
 
 		const str = input.value.toLowerCase();
 

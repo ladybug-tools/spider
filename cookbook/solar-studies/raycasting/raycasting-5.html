@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Casting measuran=ble shadows by Raycasting" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-04-13" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; background-color: #ddd; width: 20rem; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divContents" >
+
+			<p>
+				<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+			</p>
+
+			<p>
+				<button onclick=drawCubes(); >1. update cube positions & rotations</button>
+			</p>
+
+			<p>
+				<button onclick=drawGround(); >2. draw ground with shadows</button>
+			</p>
+			<!--
+			<p>
+				<button onclick=softEdges(); >3. soften shadow edges</button>
+			</p>
+			-->
+			<p>
+				azimuth <output id=outAzimuth class=floatRight >90</output><br>
+				<input type=range id=inpAzimuth min=90 max=270 step=1 value=180 oninput=setSunVector();outAzimuth.value=value; />
+			</p>
+
+			<p>
+				altitude <output id=outAltitude class=floatRight >70</output><br>
+				<input type=range id=inpAltitude min=0 max=90 step=1 value=70 oninput=setSunVector();outAltitude.value=value; />
+			</p>
+		</div>
+
+	</div>
+
+<script>
+
+	const size = 50;
+
+	var ground;
+	var cubes;
+	var sun;
+	var vector;
+	var timeStart;
+
+	var raycaster = new THREE.Raycaster();
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+
+	var renderer, camera, controls, scene, axesHelper;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		divTitle.innerHTML =
+		`<h1>
+			<a href="" >` + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +`</a>
+		</h1>`;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -size, -size, 80 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		drawCubes();
+
+		setSunVector();
+
+	}
+
+
+	function drawCubes() {
+
+		scene.remove( cubes );
+
+		cubes = new THREE.Object3D();
+
+		var material = new THREE.MeshNormalMaterial();
+		var geometry = new THREE.BoxGeometry( 0.15 * size, 0.15 * size, 0.15 * size );
+
+		for ( var i = 0; i < 8; i++ ) {
+
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( 0.8 * size * Math.random() - 0.4 * size, 0.8 * size * Math.random() - 0.4 * size, 0.5 * size * Math.random() + 10 );
+			mesh.rotation.y = 6 * Math.random();
+			mesh.rotation.z = 6 * Math.random();
+			cubes.add( mesh );
+
+		}
+
+		scene.add( cubes )
+
+	}
+
+
+
+	function setSunVector() {
+
+		timeStart = Date.now();
+
+		if ( !sun ) {
+
+			const geometry = new THREE.SphereBufferGeometry( 5 );
+			//geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -0.5 * Math.PI ) );
+			const material = new THREE.MeshBasicMaterial( { color: 'yellow', side: 2 } );
+			sun = new THREE.Mesh( geometry, material );
+
+			scene.add( sun );
+
+		}
+
+		//scene.remove( sun )
+
+		phi = ( parseInt( inpAltitude.value, 10 ) ) * Math.PI / 180;
+		theta = parseInt( inpAzimuth.value, 10 ) * Math.PI / 180;
+
+		const spherical = new THREE.Spherical ( 0.8 * size, - phi, - theta );
+		//console.log( 'spherical', spherical );
+
+		vector = new THREE.Vector3().setFromSpherical( spherical );
+		vector = vector.applyMatrix4( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+		//console.log( 'vector', vector );
+
+		sun.position.copy( vector.clone() );
+		//sun.rotation.x += Math.PI / 2;
+
+		vector.normalize();
+
+		drawGround();
+
+	}
+
+
+
+	function drawGround() {
+
+		scene.remove( ground );
+
+		geometry = new THREE.PlaneGeometry( size, size, size + 1, size + 1);
+
+		for ( var i = 0; i < geometry.vertices.length; i++ ) {
+
+			point = geometry.vertices[ i ];
+			color = new THREE.Color().setHSL( 0.9 * ( 0.5 * size - point.x ) / size, 1, 0.8 );
+			geometry.colors[ i ] = color; // use this array for convenience
+		}
+
+		geometry.faces.forEach( face =>
+			face.vertexColors = [ geometry.colors[ face[ 'a' ] ], geometry.colors[ face[ 'b' ] ], geometry.colors[ face[ 'c' ] ] ]
+		);
+
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, side: THREE.DoubleSide, vertexColors: THREE.VertexColors } );
+		ground = new THREE.Mesh( geometry, material );
+
+		scene.add( ground );
+
+	}
+
+
+
+	function softEdges() {
+
+		for ( let i = 0; i < ground.children.length - 1; i++ ) {
+
+			mesh1 = ground.children[ i ];
+			mesh2 = ground.children[ i + 1 ];
+
+			if ( mesh1.material.color.r === 0.5333333333333333 && mesh2.material.color.r === 1 ) {
+
+				//console.log( '',  mesh1.material.color );
+				mesh2.material.color = new THREE.Color( 0xff6666 );
+				i++;
+
+			} else if ( mesh1.material.color.r === 1 && mesh2.material.color.r === 0.5333333333333333 ) {
+
+				//console.log( '',  mesh1.material.color );
+				mesh1.material.color = new THREE.Color( 0xff4444 );
+
+			}
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

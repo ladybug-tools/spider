@@ -28,27 +28,13 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		if ( TMP.butMenuTemplate.style.fontStyle !== 'italic' ) {
 
-			divMenuItems.innerHTML =
-
-				`<details id = "detTemplate" class = "app-menu" open >
-
-					<summary>Template Summary</summary>
-
-					<div id = "divTemplate" ></div>
-
-					<hr>
-
-				</details>
-
-			` + divMenuItems.innerHTML;
-
-			initMenuTemplate();
+			TMP.setPanelTemplate();
 
 			TMP.butMenuTemplate.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
-			detTemplate.remove();
+			divMenuItems.innerHTML = '';
 
 			TMP.butMenuTemplate.style.backgroundColor = '';
 			TMP.butMenuTemplate.style.fontStyle = '';
@@ -56,42 +42,70 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		function initMenuTemplate() {
-
-			let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
-
-			divTemplate.innerHTML =
-			`
-				<p>
-					<b>visibility toggles</b><br>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
-					<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all</button>
-				</p>
-
-				<p>
-					<input type=range id=inpClip2 max=50 min=-50 step=1 value=-10
-						oninput=outClip2.value=inpClip2.value;SET.updateCLipX(); title="-50 to 50: OK" >
-				</p>
-
-				<textarea id=txtTemplate placeholder="a place for sticky notes" style="height:100px;width:100%;" onchange=localStorage.setItem("gvTemplate",this.value);></textarea>
-
-				<p>` + txt + `</p>
-
-			`;
-
-			gvTemplate = localStorage.getItem( 'gvTemplate' );
-
-			txtTemplate.value = gvTemplate;
-		}
-
-
 		divLog.innerHTML = '';
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
 
-	}();
+	};
 
 
+	TMP.setPanelTemplate = function() {
 
+		divMenuItems.innerHTML =
+
+		`<details id = "detTemplate" class = "app-menu" open >
+
+			<summary>Template Panel Summary</summary>
+
+			<div id = "TMPdivShowHide" ></div>
+
+			<div id = "TMPdivEditSurface" ></div>
+
+			<div id = "TMPdivTemplate" ></div>
+
+			<hr>
+
+		</details>`;
+
+		TMPdivShowHide.innerHTML = GBI.getPanelShowHide();
+
+		TMPdivEditSurface.innerHTML = GBI.getPanelEditSurface();
+
+		let txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		TMPdivTemplate.innerHTML =
+
+		`<details open >
+			<summary>Template Panel Items</summary>
+
+			<p>
+				<input type=range id=inpClip2 max=50 min=-50 step=1 value=-10
+					oninput=outClip2.value=inpClip2.value;SET.updateCLipX(); title="-50 to 50: OK" >
+			</p>
+
+			<textarea id=txtTemplate placeholder="a place for sticky notes" style="height:100px;width:100%;" onchange=localStorage.setItem("gvTemplate",this.value);></textarea>
+
+			<div id=TMPdivElement ></div>
+			<div id=TMPdivInputSelect ></div>
+
+		</details>`;
+
+		gvTemplate = localStorage.getItem( 'gvTemplate' );
+
+		txtTemplate.value = gvTemplate;
+
+		TMPdivElement.innerHTML = GBI.getElementPanel();
+
+		const options =
+		`<option>aaa bbb ccc</option>
+		<option>bbb ccc ddd</option>
+		<option>cccc ddd eee</option>
+		`;
+
+		//TMPdivInputSelect.innerHTML = GBI.getDivInputSelect(  'aaa', 'items', 'ccc', options );
+
+	}
+
+
+	TMP.initTemplate();
 

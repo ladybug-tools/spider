@@ -137,9 +137,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISSdetPanelSurfacesUndefinedCadId.innerHTML = ISS.getPanelSurfacesUndefinedCadId();
 
-		ISS.setPanelSurfacesTiny();
+		ISSdetPanelSurfacesTiny.innerHTML = ISS.getPanelSurfacesTiny();
 
-		ISS.setPanelSurfacesVertexClose();
+		ISSdetPanelSurfacesVertexClose.innerHTML = ISS.getPanelSurfacesVertexClose();
 
 		ISSdetPanelOpeningVertices4Plus.innerHTML = ISS.getPanelOpeningVertices4Plus();
 
@@ -441,7 +441,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setPanelSurfacesTiny = function() {
+	ISS.getPanelSurfacesTiny = function() {
 
 		const sizeDefault = window.ISSinpMinSize ? parseFloat( ISSinpMinSize.value ) : 50;
 
@@ -449,49 +449,45 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.surfacesTiny = GBP.surfaceJson.filter( surface =>
 			parseFloat( surface.RectangularGeometry.Height ) * parseFloat( surface.RectangularGeometry.Width  ) < size );
 
-		//let options = '';
-		//ISS.surfacesTiny.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		//options = options ? options : '<option>none found</option>';
+		let options = '';
+		ISS.surfacesTiny.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
 
-		ISSdetPanelSurfacesTiny.innerHTML =
+		const details =
 
 		`<details>
 
 			<summary id = "ISSsumSurfacesTiny" >Tiny Surfaces &raquo; ` + ISS.surfacesTiny.length + ` found</summary>
 
-			<div ><small>Surfaces with area smaller than a set minimum</small></div>
+			<div >Surfaces that are smaller than a specified area,</div>
 
-			<p>
-				Set minimum area: <output id=ISSoutMinSize >` + size + `</output>
-				<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1
+			Test size <output id=ISSoutMinSize >` + size + `</output>
+			<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1
 				onchange=ISSoutMinSize.value=this.value*0.01;ISS.getPanelSurfacesTiny(); >
-			</p>
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceTiny); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceTiny"
+						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceTinyAttributes();
+						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceTinyAttributes(); size=10 >` +
+						options +
+						`</select><br>
+					<button onclick=ISS.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
+				</div>
+				<div id="ISSdivSurfacesTinyAttributes2" class=flex-left-div2 ></div>
+			</div>
 
-			<div id=ISSdivSurfacesTiny ></div>
-
-			<button onclick=ISS.zoomIntoSurface(ISSselSurfacesTiny.value); title="zoom into just this surface" >zoom</button>
-
-			<hr>
+			<div id=xxxISSdivSurfacesTiny ></div>
 
 		</details>`;
 
-		let data = {};
-		data.attribute = 'IdTiny';
-		data.gbjson = ISS.surfacesTiny.map ( item => item.id );
-		data.selItem = 'ISSselSurfacesTiny';
-
-		ISSdivSurfacesTiny.innerHTML = GBI.getElementPanel( data );
-		ISSselSurfacesTiny.selectedIndex = 0;
-		ISSselSurfacesTiny.click();
-
-
-		//return details;
+		return details;
 
 	}
 
 
 
-	ISS.setPanelSurfacesVertexClose = function() {
+	ISS.getPanelSurfacesVertexClose = function() {
 
 		distanceDefault = window.ISSinpMinDistance ? parseFloat( ISSinpMinDistance.value ) : 50;
 
@@ -506,63 +502,34 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			vertices = surface.geometry.vertices;
 
-			if ( vertices.length > 4 ) {
+				if ( vertices.length > 4 ) {
 
-				for ( i = 1; i <  vertices.length; i++ ) {
+					for ( i = 1; i <  vertices.length; i++ ) {
 
-					if ( vertices[ i ].distanceTo( vertices[ i - 1 ] ) < distance ) {
+						if ( vertices[ i ].distanceTo( vertices[ i - 1 ] ) < distance ) {
 
-						if ( ISS.surfacesVertexClose.indexOf( surface ) === -1 ) {
+							if ( ISS.surfacesVertexClose.indexOf( surface ) === -1 ) {
 
-							ISS.surfacesVertexClose.push( surface )
-							//surface.visible = true;
-							//console.log( 'vertex', vertex );
+								ISS.surfacesVertexClose.push( surface )
+								//surface.visible = true;
+								//console.log( 'vertex', vertex );
+							}
+
 						}
 
 					}
 
 				}
 
-			}
-
 		}
 
 		//console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
-		//let options = '';
-		//ISS.surfacesVertexClose.forEach( function( element ) { options += '<option>' + element.userData.data.id + '</option>'; } );
-		//options = options ? options : '<option>none found</option>';
-
-		data = {};
-		data.attribute = 'Id';
-		data.gbjson = ISS.surfacesVertexClose.map ( item => item.userData.data.id );
-		data.selItem = 'ISSselVertexClose';
-
-		ISSdetPanelSurfacesVertexClose.innerHTML =
-
-		`<details>
-
-			<summary>Very Close Vertices by Id &raquo; ` + data.gbjson.length + ` items</summary>
-			<div><small>Surfaces that have vertices closer to a set distance. Use telltales in right menu to identify the vertices.</small></div>
-
-			<p>
-				Set minimum distance: <output id=ISSoutMinDistance >` + distance + `</output><br>
-				<input id=ISSinpMinDistance type=range min=0 max=100 value=` + distanceDefault + ` step=1
-				onchange=ISS.setPanelSurfacesVertexClose(); >
-			</p>
-
-			<div id=ISSdivVertexClose ></div>
-
-			<hr>
-
-		<details>`
 
 
-		ISSdivVertexClose.innerHTML = GBI.getElementPanel( data );
+		let options = '';
+		ISS.surfacesVertexClose.forEach( function( element ) { options += '<option>' + element.userData.data.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
 
-		ISSselVertexClose.selectedIndex = 0;
-		ISSselVertexClose.click();
-
-		/*
 		const details =
 
 		`<details ontoggle=ISSselSurfaceVertexClose.selectedIndex=0;ISSselSurfaceVertexClose.click(); >
@@ -591,11 +558,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		</details>`;
 
 		return details;
-		*/
-
-
-
-
 
 	}
 
