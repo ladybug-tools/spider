@@ -211,10 +211,6 @@
 
 		}
 
-
-
-
-
 		//ground.material.vertexColors = THREE.VertexColors;
 		material = new THREE.MeshBasicMaterial( { color: 0xbbbbbb, side: 2, vertexColors: THREE.VertexColors } );
 		ground = new THREE.Mesh( geometry, material );
@@ -225,7 +221,7 @@
 			face2 = geometry.faces[ i + 3 ];
 
 			if ( face1.vertexColors[ 0 ] && face1.vertexColors[ 0 ].r !== 1) {
-console.log( '', face1.vertexColors[ 0 ].r );
+				console.log( '', face1.vertexColors[ 0 ].r );
 				geometry.faces[ i - 1 ].vertexColors[ 0 ] = new THREE.Color( 0xffbbbb );
 				geometry.faces[ i - 1 ].vertexColors[ 1 ] = new THREE.Color( 0xffbbbb );
 				geometry.faces[ i - 1 ].vertexColors[ 2 ] = new THREE.Color( 0xffbbbb );
