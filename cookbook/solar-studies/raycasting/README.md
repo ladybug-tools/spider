@@ -12,7 +12,7 @@ _txt_
 
 ## Prototype: [Raycasting 7]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-7.html )
 
-<img src=cookbook/solar-studies/raycasting/raycasting-7.png width=500 >
+<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-7.png width=500 >
 
 A bit of a dead end, probably. I was hoping by varying the distance between the ground planes down to zero to be able to smush the multiple planes into a single plane. In order to appear visually correct the mesh background would have to be transparent and the shadows partially transparent.
 
@@ -29,7 +29,7 @@ Anyway. it's kind of a fun looking prototype and I will certainly keep trying to
 
 ## Prototype: [Raycasting 6]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-6.html )
 
-<img src=cookbook/solar-studies/raycasting/raycasting-6.png width=500 >
+<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-6.png width=500 >
 
 * Proof of concept achieved
 	* Given an azimuth & altitude, a number of random objects, and a ground, the script casts rays from a number of points on the grid and calculates whether a point receives sunlight or shadow.
@@ -45,7 +45,7 @@ Anyway. it's kind of a fun looking prototype and I will certainly keep trying to
 
 ## Prototype: [Raycasting 5]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-5.html )
 
-<img src=cookbook/solar-studies/raycasting/raycasting-5.png width=500 >
+<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-5.png width=500 >
 
 * A work-in-progress / Returning to process used in Raycasting 1
 * Switching over to a single mesh composed of a number of segments per side
@@ -56,7 +56,7 @@ Anyway. it's kind of a fun looking prototype and I will certainly keep trying to
 
 ## Prototype: [Raycasting 4]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-4.html )
 
-<img src=cookbook/solar-studies/raycasting/raycasting-4.png width=500 >
+<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-4.png width=500 >
 
 * Adds soft shadows using vertex colors
 * Ground is composed of individual meshes
@@ -70,7 +70,7 @@ Anyway. it's kind of a fun looking prototype and I will certainly keep trying to
 
 ## Prototype: [Raycasting 3]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-3.html )
 
-<img src=cookbook/solar-studies/raycasting/raycasting-3.png width=500 >
+<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-3.png width=500 >
 
 * Adds a Sun with user-selected azimuth and altitude
 * Updates scene in 30 to milliseconds
@@ -80,7 +80,7 @@ Anyway. it's kind of a fun looking prototype and I will certainly keep trying to
 
 ## Prototype: [Raycasting 2]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-2.html )
 
-<img src=cookbook/solar-studies/raycasting/raycasting-2.png width=500 >
+<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-2.png width=500 >
 
 * First commit
 * Draw 5 cubes, set rays to be vertical, cast 'shadow' on 100 x 100 grid of meshes, if shadow update mesh color
@@ -89,7 +89,7 @@ Anyway. it's kind of a fun looking prototype and I will certainly keep trying to
 
 ## Prototype: [Raycasting 1]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-1.html )
 
-<img src=cookbook/solar-studies/raycasting/raycasting-1.png width=500 >
+<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-1.png width=500 >
 
 * First commit
 
