@@ -22,10 +22,11 @@ _txt_
 * New features
 	* Button to toggle wireframe
 	* Button to toggle vertex normals
-	* Azimuth and alitude sliders work as intended
+	* Azimuth and altitude sliders work as intended
 	* Shadows are drawn automatically at load time
 
 ***
+
 ## Prototype: [Raycasting 5]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-5.html )
 
 <img src=cookbook/solar-studies/raycasting/raycasting-5.png width=500 >

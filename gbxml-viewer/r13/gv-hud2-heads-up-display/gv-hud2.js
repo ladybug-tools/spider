@@ -43,19 +43,23 @@
 
 		THR.renderer.domElement.addEventListener( 'touchstart', HUD.onRendererTouchStartHUD, false );
 
-		HUDdivShowHide.innerHTML = GBI.getPanelShowHide();
 
-		HUDdivEditSurface.innerHTML = GBI.getPanelEditSurface();
+		//HUDdivShowHide.innerHTML = GBI.getPanelShowHide();
+		GBI.setPanelShowHide( HUDdivShowHide );
 
-		HUD.setPanelSurface();
+		//HUDdivEditSurface.innerHTML = GBI.getPanelEditSurface();
+		GBI.setPanelEditSurface( HUDdivEditSurface );
 
-		HUDdivTellTales.innerHTML = HUD.getPanelTellTale();
+		HUD.setPanelSurface( HUDdivItems );
+
+		HUD.setPanelTellTale( HUDdivTellTales );
 
 		COR.setButtonStyleClass( divHeadsUp );
 
 
 		/////
 
+		/*
 		GBP.spacesJson = GBP.gbjson.Campus.Building.Space;
 
 		let spacesOptions = '<option>none</option>';
@@ -112,8 +116,9 @@
 		//console.log( 'GBP.surfacesCadObj', GBP.surfacesCadObj);
 
 		GBP.surfacesXml = GBP.gbxml.getElementsByTagName("Surface");
+		*/
 
-	}
+	};
 
 
 
@@ -166,39 +171,7 @@
 
 		}
 
-	}
-
-
-	HUD.setPanelSurface = function() {
-
-		THR.controls.keys = false;
-
-		HUDdivItems.innerHTML =
-
-		`<details open >
-
-			<summary><b>Surface</b></summary>
-
-			<div id = "HUDdivInputSelect" ></div>
-
-			<button onclick=GBI.setSurfaceZoom(HUDselId.value); title="zoom into just this surface" >zoom</button>
-
-			<hr>
-
-		</details>`;
-
-		data = {};
-
-		data.title = 'Surface';
-		data.attribute = 'id';
-		data.selItem = 'HUDselId';
-		data.gbjson = GBP.surfaceJson.map ( item => item.id );
-		data.target = 'GBIdiv' + data.attribute;
-
-		HUD.data = data;
-		HUDdivInputSelect.innerHTML = GBI.getElementPanel( data );
-
-	}
+	};
 
 
 
@@ -208,7 +181,7 @@
 
 		THR.renderer.domElement.removeEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
 
-	}
+	};
 
 
 
@@ -221,25 +194,7 @@
 
 		HUD.onRendererMouseMoveHUD( event );
 
-	}
-
-
-
-	HUD.getPanelTellTale = function () {
-
-		const tellTale =
-		`<details>
-			<summary>For debugging surface appearance</summary>
-			<p>
-				<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
-				<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
-				<button onclick=HUD.removeTelltales() >remove telltales</button>
-			<p>
-		</details>`;
-
-		return tellTale;
-
-	}
+	};
 
 
 
@@ -282,6 +237,60 @@
 	};
 
 
+	//////////
+
+	HUD.setPanelSurface = function( target ) {
+
+		THR.controls.keys = false;
+
+		target.innerHTML =
+
+		`<details open >
+
+			<summary><b>Surface</b></summary>
+
+			<div id = "HUDdivInputSelect" ></div>
+
+			<button onclick=GBI.setSurfaceZoom(HUDselId.value); title="zoom into just this surface" >zoom</button>
+
+			<hr>
+
+		</details>`;
+
+		let data = {};
+		data.attribute = '';
+		data.divTarget = document.getElementById( 'HUDdivInputSelect' );
+		data.divAttribute = 'id';
+		data.element = 'Surface';
+		data.parent = GBP.surfaceJson;
+		data.placeholder = 'surface id'
+		data.selItem = 'HUDselId';
+		data.optionValues = GBP.surfaceJson.map ( item => [ item.id, item.id ] );
+
+		HUD.data = data;
+
+		GBI.setElementPanel2( data );
+
+	};
+
+
+
+	HUD.setPanelTellTale = function ( target ) {
+
+		target.innerHTML =
+		`<details>
+			<summary>For debugging surface appearance</summary>
+			<p>
+				<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
+				<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
+				<button onclick=HUD.removeTelltales() >remove telltales</button>
+			<p>
+		</details>`;
+
+	};
+
+
+	/////////
 
 	HUD.updateSurface = function( id ) {
 
@@ -511,26 +520,6 @@
 
 
 
-	HUD.updateSelect = function( input, select ) {
-
-		const str = input.value.toLowerCase();
-
-		for ( let option of select.options ) {
-
-			if ( option.value.toLowerCase().includes( str ) ) {
-
-				select.value = option.value;
-
-				break;
-
-			}
-
-		}
-
-	};
-
-
-
 	HUD.updateCadId = function( that ){
 
 		const surface = HUD.data;
@@ -570,7 +559,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -681,7 +670,7 @@
 		THR.scene.remove( HUD.telltalesPolyloop );
 		THR.scene.remove( HUD.telltalesVertex );
 
-	}
+	};
 
 
 	HUD.drawPlacard = function( text, scale, color, x, y, z ) {

@@ -6,8 +6,9 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 // Copyright 2018 Ladybug Tools authors. MIT License
 
+	//var uriGbxmlDefault = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//let uriGbxmlDefault;
 
-	// needs a cleanup / streamlining / going from gets to sets
 
 	var NUM = {};
 
@@ -146,7 +147,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			<div class=flex-container2 >
 
 					<div class=flex-div1 >
-						<input oninput=GBI.setSelectedIndex(this,NUMselStorey); size=6 placeholder="storey id" ><br>
+						<input oninput=NUM.setSelectedIndex(this,NUMselStorey); size=6 placeholder="storey id" ><br>
 						<select id = "NUMselStorey" onclick=NUM.showFloorSlabs(this.value);NUM.setStoreyAttributes();
 							onchange=NUM.showFloorSlabs(this.value);NUM.setStoreyAttributes();
 							size=` + ( storeys.length < 10 ? storeys.length : 10 ) + ` >` + storeyOptions + `</select>
@@ -170,8 +171,6 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const id = GBP.gbjson.Campus.Building.BuildingStorey[ NUMselStorey.selectedIndex ];
 
-		GBP.openingMeshes.visible = false;
-
 		NUM.floorSlabs = GBP.surfaceMeshes.children.filter( child => child.visible === true );
 		//console.log( 'NUM.floorSlabs', NUM.floorSlabs );
 
@@ -180,9 +179,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		NUMdivStoreys.innerHTML = NUM.traverseGbjson( id ).attributes + '<br>' +
 			'area: ' + Math.round( area ).toLocaleString();
 
-		// not yet
-		//GBI.setGbjsonAttributes( id, NUMdivStoreys ) + '<br>' +
-		//'area: ' + Math.round( area ).toLocaleString();
+		NUM.hideOpenings()
 
 	}
 
@@ -227,7 +224,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			txt +=
 			' <button style=width:8rem;' +
-				' class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >' + types[ i ] +
+				' class=toggle onclick=NUM.showSurfaceType(this.innerText);NUM.hideOpenings(); >' + types[ i ] +
 					'</button> area: ' +
 				area +
 			'';
@@ -253,7 +250,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			txt +
 
 			`<p>
-				<button style=width:8rem; onclick=NUM.showBySurfaceTypeArray(surfaceTypes); >Total floor</button>  area: ` +
+				<button style=width:8rem; onclick=NUM.showBySurfaceTypeArray(surfaceTypes);NUM.hideOpenings(); >Total floor</button>  area: ` +
 					Math.round( tfa ).toLocaleString() + `</p>
 
 			<hr>
@@ -321,7 +318,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			const area = NUM.getAreaOpeningTypes( types[ i ] )
 			txt +=
-				` <button style=width:8rem; class=toggle onclick=GBI.setOpeningTypeVisible(this.innerText); >` +
+				` <button style=width:8rem; class=toggle onclick=NUM.showOpeningType(this.innerText); >` +
 					types[ i ] +
 					`</button> area: ` + Math.round( area ).toLocaleString() +
 					` count: ` + typesCount[ i ] +
@@ -339,7 +336,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			<p>`+
 				txt +
 			`</p>
-			<div><button style=width:8rem; onclick=GBI.setOpeningTypeVisible(); >
+			<div><button style=width:8rem; onclick=NUM.showOpeningType(); >
 				Total openings</button> area: ` + Math.round( areaTotal ).toLocaleString() +
 				` count: ` + countTotal +
 			`<div>
@@ -364,8 +361,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			const points = opening.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
 			//console.log( 'points', points );
 
-			//const triangle = NUM.getTriangle( points );
-			const triangle = GBP.getPlane( points );
+			const triangle = NUM.getTriangle( points );
 			//console.log( 'triangle', triangle );
 			if ( !triangle ) { console.log( 'opening error', opening ); continue; };
 
@@ -433,8 +429,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			// // Move to getTriangle??
 
-			//const triangle = NUM.getTriangle( points );
-			const triangle = GBP.getPlane( points );
+			const triangle = NUM.getTriangle( points );
 			//console.log( 'triangle', triangle );
 			if ( !triangle ) { console.log( 'surface error', surface ); continue; };
 
@@ -474,8 +469,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			const points = surface.userData.data.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
 			//console.log( 'points', points );
 
-			//const triangle = NUM.getTriangle( points );
-			const triangle = GBP.getPlane( points );
+			const triangle = NUM.getTriangle( points );
 			//console.log( 'triangle', triangle );
 
 			if ( !triangle ) { console.log( 'surface error', surface ); continue; };
@@ -498,6 +492,38 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 
 		return area;
+
+	}
+
+
+	// Move to THR?
+
+	NUM.getTriangle = function( points, start = 0 ) {
+
+		if ( start + 2 >= points.length ) { divLog.innerHTML = 'no more points'; return; }
+
+		triangle = new THREE.Triangle();
+		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+
+		/*
+		console.log( 'start', start );
+		console.log( 'triangle', triangle );
+		console.log( 'area', triangle.area() );
+		console.log( 'normal', triangle.normal() );
+		*/
+
+		if ( triangle.area() === 0 ) {
+
+			start++;
+			NUM.getTriangle( points, start );
+
+		} else {
+
+			//return triangle;
+
+			const plane = new THREE.Plane();
+			return triangle.plane( plane );
+		}
 
 	}
 
@@ -533,8 +559,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			const points = surface.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
 			//console.log( 'points', points );
 
-			//const triangle = NUM.getTriangle( points );
-			const triangle = GBP.getPlane( points );
+			const triangle = NUM.getTriangle( points );
 			//console.log( 'normal', triangle.normal );
 
 			if ( !triangle ) { console.log( 'error', surface ); continue; }
@@ -594,8 +619,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			const points = opening.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
 			//console.log( 'points', points );
 
-			//const triangle = NUM.getTriangle( points );
-			const triangle = GBP.getPlane( points );
+			const triangle = NUM.getTriangle( points );
 			//console.log( 'normal', triangle.normal );
 			if ( !triangle ) { console.log( 'error', surface ); continue; }
 
@@ -687,7 +711,6 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	}
 
 
-	////////// Show ? Hide
 
 	NUM.showSurfacesInArray = function ( key ) {
 
@@ -699,6 +722,14 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 	//combine with by array
+
+	NUM.showSurfaceType = function( type ) {
+
+		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
+
+	};
+
+
 
 	NUM.showBySurfaceTypeArray = function( types ) {
 
@@ -731,13 +762,37 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
+	NUM.showOpeningType = function( type ) {
+
+		GBP.surfaceMeshes.visible = false;
+		GBP.surfaceEdges.visible = false;
+		GBP.openingMeshes.visible = true;
+
+		if ( type ) {
+
+			GBP.openingMeshes.children.forEach( element => element.visible = element.userData.data.openingType === type ? true : false );
+
+		} else {
+
+			GBP.openingMeshes.children.forEach( element => element.visible = true );
+
+		}
+
+	};
+
+
+
+	NUM.hideOpenings = function() {
+
+		if ( GBP.openingMeshes ) { GBP.openingMeshes.visible = false; }
+
+	};
+
+
+
 	NUM.showFloorSlabs = function( id ) {
 
 		//console.log( 'id', id );
-
-		GBP.surfaceEdges.visible = true;
-		GBP.surfaceMeshes.visible = true;
-		GBP.openingMeshes.visible = false;
 
 		const spaces = GBP.gbjson.Campus.Building.Space;
 
@@ -787,6 +842,48 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		};
 
 		return { elements: elements, attributes: attributes };
+
+	};
+
+
+
+	// copied from  HUD/ move to GBV?
+	NUM.xxxupdateSelect = function( input, select ) {
+
+		const str = input.value.toLowerCase();
+
+		for ( let option of select.options ) {
+
+			if ( option.value.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+				//select.click();
+
+				break;
+
+			}
+
+		}
+
+	};
+
+
+
+	NUM.setSelectedIndex = function( input, select ) {
+
+		const str = input.value.toLowerCase();
+
+		for ( let option of select.options ) {
+
+			if ( option.innerHTML.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+
+				return;
+
+			}
+
+		}
 
 	};
 

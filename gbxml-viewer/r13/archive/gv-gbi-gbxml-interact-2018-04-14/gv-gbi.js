@@ -161,7 +161,8 @@
 	}
 
 
-	// Surfaces
+
+	// Shoe / Hide Surfaces
 
 	GBI.showSurface = function( id ) {
 

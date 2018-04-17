@@ -6,7 +6,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-	GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
+	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 
 	var ISS = {};
 
@@ -89,11 +89,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
 				<div class=flex-container2 >
 					<div class=flex-div1 >
-						<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceXXX); size=6 placeholder="surface id" ><br>
+						<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceXXX); size=6 placeholder="surface id" ><br>
 						<select id = "ISSselSurfaceXXX"
-						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes();
-						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes(); size=10 ></select><br>
-						<button onclick=ISS.zoomIntoSurface(ISSselSurfaceXXX.value); title="zoom into just this surface" >zoom</button>
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes();
+						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes(); size=10 ></select><br>
+						<button onclick=GBI.setSurfaceZoom(ISSselSurfaceXXX.value); title="zoom into just this surface" >zoom</button>
 					</div>
 					<div id = "ISSdivSurfacesXXXAttributes" class=flex-left-div2 ></div>
 				</div>
@@ -110,10 +110,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				<div class=flex-container2 >
 					<div class=flex-div1 >
-						<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceInside); size=6 placeholder="surface id" ><br>
+						<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceInside); size=6 placeholder="surface id" ><br>
 						<select id = "ISSselSurfaceInside"
-						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); size=10 ><option>none found</option></select><br>
-						<button onclick=ISS.zoomIntoSurface(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); size=10 ><option>none found</option></select><br>
+						<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
 					</div>
 					<div id = "ISSdivSurfacesInsideAttributes" class=flex-left-div2 ></div>
 				</div>
@@ -127,9 +127,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		</details>`;
 
-	//` + divMenuItems.innerHTML;
+		//` + divMenuItems.innerHTML;
 
-		ISSdetPanelVisibilityToggle.innerHTML = ISS.getPanelVisibilityToggle();
+		ISSdetPanelVisibilityToggle.innerHTML = GBI.getPanelShowHide(); //ISS.getPanelVisibilityToggle();
 
 		ISSdetPanelSurfacesDuplicateAdjacentSpaces.innerHTML = ISS.getPanelSurfacesDuplicateAdjacentSpaces();
 
@@ -142,29 +142,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.setPanelSurfacesVertexClose();
 
 		ISSdetPanelOpeningVertices4Plus.innerHTML = ISS.getPanelOpeningVertices4Plus();
-
-	}
-
-
-
-	ISS.getPanelVisibilityToggle = function() {
-
-		const txt =
-
-		`<details open >
-
-			<summary>Visibility Toggles</summary>
-
-			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); >all visible</button>
-
-			<hr>
-
-		</details>`;
-
-		return txt;
 
 	};
 
@@ -216,9 +193,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			contents +=
 			`<div style=margin-bottom:15px; >` +
 				( ++ count ) +
-				` <button onclick=ISS.setSurfaceVisible(this.innerText); >` + surface.id + `</button>
-				<button onclick=ISS.zoomIntoSurface("` + surface.id + `"); >zoom</button>
-				<button class=toggle onclick=ISS.setSurfaceTypeVisible(this.innerText); >` + surface.surfaceType + `</button><br>`
+				` <button onclick=GBI.setSurfaceVisible(this.innerText); >` + surface.id + `</button>
+				<button onclick=GBI.setSurfaceZoom("` + surface.id + `"); >zoom</button>
+				<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >` + surface.surfaceType + `</button><br>`
 				+ ( surface.Name ? `name <i>` + surface.Name + `</i><br>` : `` )
 				+ ( surface.CADObjectId ? `cad object id <button onclick=ISS.setCadIdVisible(` + ( count - 1 ) + `); >` + surface.CADObjectId + `</button><br>` : `` ) +
 				`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
@@ -249,7 +226,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		return txt;
 
-	}
+	};
 
 
 
@@ -334,9 +311,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				flowContent +=
 					'<div id= "divSurface' + surface.id +'" >' +
-						count + '. id: <button onclick=ISS.setSurfaceVisible(this.innerText); >' + surface.id + '</button>' +
-							'<button onclick=ISS.zoomIntoSurface("' + surface.id + '"); >zoom</button>' + b +
-						'surface type: <button class=toggle onclick=ISS.setSurfaceTypeVisible(this.innerText); >' + surface.surfaceType + '</button>: ' + b +
+						count + '. id: <button onclick=GBI.setSurfaceVisible(this.innerText); >' + surface.id + '</button>' +
+							'<button onclick=GBI.setSurfaceZoom("' + surface.id + '"); >zoom</button>' + b +
+						'surface type: <button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >' + surface.surfaceType + '</button>: ' + b +
 						( surface.Name ? 'name: ' + surface.Name + b : '' ) +
 						( surface.constructionIdRef ? 'construction id ref: ' + surface.constructionIdRef + b : '' ) +
 						( spaceId1 ? 'space:  <button onclick=ISS.showSpace(spaceId1); >' + spaceId1 + '</button>' + b : '' ) +
@@ -349,9 +326,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 						'</div>' +
 						'<hr>' +
 						'<div id= "divSurface' + surfaceOther.id +'" >' +
-						'id of duplicate: <button onclick=ISS.setSurfaceVisible(this.innerText); >' + surfaceOther.id + '</button>' +
-							'<button onclick=ISS.zoomIntoSurface("' + surfaceOther.id + '"); >zoom</button>' + b +
-						'surface type: <button class=toggle onclick=ISS.setSurfaceTypeVisible(this.innerText); >' + surfaceOther.surfaceType + '</button>: ' + b +
+						'id of duplicate: <button onclick=GBI.setSurfaceVisible(this.innerText); >' + surfaceOther.id + '</button>' +
+							'<button onclick=GBI.setSurfaceZoom("' + surfaceOther.id + '"); >zoom</button>' + b +
+						'surface type: <button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >' + surfaceOther.surfaceType + '</button>: ' + b +
 						( surfaceOther.Name ? 'name: ' + surfaceOther.Name + b : '' ) +
 						( surfaceOther.constructionIdRef ? 'construction id ref: ' + surfaceOther.constructionIdRef + b : '' ) +
 						( spaceIdOther1 ? 'space:  <button onclick=ISS.showSpace(spaceIdOther1); >' + spaceIdOther1 + '</button>' + b : '' ) +
@@ -397,7 +374,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		return txt;
 
-	}
+	};
 
 
 
@@ -418,13 +395,13 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
 					<select id = "ISSselSurfaceUndefined"
-						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes();
-						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); size=10 >` +
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes();
+						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); size=10 >` +
 						options + `
 						</select><br>
-					<button onclick=ISS.zoomIntoSurface(ISSselSurfaceUndefined.value); title="zoom into just this surface" >zoom</button>
+					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceUndefined.value); title="zoom into just this surface" >zoom</button>
 					</div>
 				<div id = "ISSdivSurfacesUndefinedAttributes" class=flex-left-div2 ></div>
 			</div>
@@ -437,7 +414,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		return details;
 
-	}
+	};
 
 
 
@@ -469,7 +446,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdivSurfacesTiny ></div>
 
-			<button onclick=ISS.zoomIntoSurface(ISSselSurfacesTiny.value); title="zoom into just this surface" >zoom</button>
+			<button onclick=GBI.setSurfaceZoom(ISSselSurfacesTiny.value); title="zoom into just this surface" >zoom</button>
 
 			<hr>
 
@@ -487,7 +464,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//return details;
 
-	}
+	};
 
 
 
@@ -575,13 +552,13 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				onchange=ISSdetPanelSurfacesVertexClose.innerHTML=ISS.getPanelSurfacesVertexClose(); >
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=ISS.setSelectedIndex(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
+					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
 					<select id = "ISSselSurfaceVertexClose"
-						onclick=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes();
-						onchange=ISS.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes(); size=10 >` +
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes();
+						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes(); size=10 >` +
 						options +
 					`</select><br>
-					<button onclick=ISS.zoomIntoSurface(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
+					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
 				</div>
 				<div id = "ISSdivSurfacesVertexCloseAttributes" class=flex-left-div2 ></div>
 			</div>
@@ -597,7 +574,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	}
+	};
 
 
 
@@ -632,8 +609,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				<div class=flex-div1 >
 					<select id=ISSselOpen size=` + ( items.length < 10 ? items.length : 10 ) +
-						` onclick=ISS.setOpeningVisible(this.value);ISS.setPanelOpeningAttributes();
-						onchange=ISS.setOpeningVisible(this.value);ISS.setPanelOpeningAttributes(); >` +
+						` onclick=GBI.setOpeningVisible(this.value);ISS.setPanelOpeningAttributes();
+						onchange=GBI.setOpeningVisible(this.value);ISS.setPanelOpeningAttributes(); >` +
 						options +
 						`</select>
 				</div>
@@ -645,10 +622,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		return details;
 
-	}
+	};
 
 
-	///////// not needed
+	///////// test not needed / never found any
 
 	ISS.getSurfacesInside = function() {
 
@@ -685,28 +662,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSselSurfaceInside.innerHTML = txt ? txt : '<option>none found</option>';
 		ISSselSurfaceInside.selectedIndex = 0;
 
-	}
+	};
 
 
 
 	////////// set Visible
-
-
-	ISS.setSurfaceVisible = function( id ) {
-
-		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
-
-	};
-
-
-
-	ISS.setSurfaceTypeVisible = function( type ) {
-
-		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
-
-	};
-
-
 
 	ISS.setSurfaceArrayVisibleToggle = function( button, surfaceArray ) {
 
@@ -726,7 +686,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-	}
+	};
 
 
 
@@ -746,32 +706,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			element.visible = element.userData.data.CADObjectId === id ? true : false );
 
 	};
-
-
-
-	ISS.setOpeningVisible = function( id ) {
-
-		//console.log( 'opening id', id );
-
-		GBP.surfaceMeshes.visible = false;
-		GBP.surfaceEdges.visible = false;
-		GBP.openingMeshes.visible = true;
-
-		GBP.openingMeshes.children.forEach( element => {
-
-			element.visible = element.userData.data.id === id ? true : false;
-
-			if ( element.visible === true  ) {
-
-				element.material.opacity = 1;
-				element.material.side = 2;
-				element.material.needsUpdate = true;
-
-			}
-
-		} );
-
-	}
 
 
 
@@ -798,32 +732,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-	}
-
-
-
-	/////////
-
-	ISS.zoomIntoSurface = ( id ) => {
-		//console.log( 'id', id );
-
-		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
-		//console.log( '', surfaceMesh );
-
-		const center = surfaceMesh.localToWorld( surfaceMesh.geometry.boundingSphere.center.clone() );
-		const radius = surfaceMesh.geometry.boundingSphere.radius > 1 ? surfaceMesh.geometry.boundingSphere.radius : 1;
-		//console.log( 'center * radius', center, radius );
-
-		THR.scene.remove( ISS.telltale );
-		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
-		ISS.telltale = new THREE.Mesh( geometry, material );
-		ISS.telltale.position.copy( center );
-		THR.scene.add( ISS.telltale );
-
-		THR.controls.target.copy( center );
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
-
 	};
 
 
@@ -833,13 +741,14 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.updateSurfaceUndefinedCadIdAttributes = function() {
 
-		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.traverseGbjson( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] );
+		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.getGbjsonAttributes( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] );
 
 		if ( window.HUD ) {
 			HUD.updateSurface( ISSselSurfaceUndefined.value );
 			HUD.setHeadsUp();
 		}
-	}
+	};
+
 
 
 	ISS.updateSurfaceTinyAttributes = function() {
@@ -848,7 +757,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		height = parseFloat( surface.RectangularGeometry.Height );
 		width = parseFloat( surface.RectangularGeometry.Width );
 		area =  height * width;
-		txt = ISS.traverseGbjson( surface );
+		txt = ISS.getGbjsonAttributes( surface );
 
 		ISSdivSurfacesTinyAttributes2.innerHTML =
 			txt + '<br>' +
@@ -864,7 +773,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-	}
+	};
+
 
 
 	ISS.updateSurfaceVertexCloseAttributes = function() {
@@ -873,7 +783,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		const vertices = surface.geometry.vertices;
 		const distance = 0.01 * parseFloat( ISSinpMinDistance.value );
 
-		let txt = ISS.traverseGbjson( surface.userData.data ) + '<br>';
+		let txt = ISS.getGbjsonAttributes( surface.userData.data ) + '<br>';
 
 		for ( i = 1; i <  vertices.length; i++ ) {
 
@@ -899,7 +809,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-	}
+	};
 
 
 
@@ -909,35 +819,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		const attributes = ISS.getGbjsonAttributes( item );
 		ISSdivAttributes.innerHTML = ( ISSselOpen.selectedIndex + 1 ) + '.<br>' + attributes;
 
-	}
+	};
+
 
 	//////////
-
-
-
-	ISS.traverseGbjson = function traverseGbjson( obj ) {
-
-		const elements = [];
-		let attributes = '';
-
-		for ( let property in obj ) {
-
-			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
-
-				if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
-
-			} else {
-
-				attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
-
-			}
-
-		};
-
-		return attributes;
-
-	}
-
 
 
 	ISS.getGbjsonAttributes = function( obj ) {
@@ -974,26 +859,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		};
 
 		return attributes;
-
-	};
-
-
-
-	ISS.setSelectedIndex = function( input, select ) {
-
-		const str = input.value.toLowerCase();
-
-		for ( let option of select.options ) {
-
-			if ( option.innerHTML.toLowerCase().includes( str ) ) {
-
-				select.value = option.value;
-
-				return;
-
-			}
-
-		}
 
 	};
 

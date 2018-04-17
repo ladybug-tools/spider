@@ -18,7 +18,7 @@ The files in this folder are templates or 'boilerplate' files that may be used t
 
 ## Wish list
 
-
+* 2018-04-16 ~ Theo ~ Move to full screen template
 
 ## Issues
 

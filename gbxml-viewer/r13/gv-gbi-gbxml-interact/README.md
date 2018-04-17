@@ -15,7 +15,8 @@
 
 ## Wish list
 
-
+* 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities
+* 2018-03-31 ~ Any of the attributes could be buttons. Are there attributes where buttons would be really useful.
 
 ## Issues
 
@@ -26,6 +27,10 @@
 
 
 ## Change Log
+
+### 2018-04-16 ~ Theo
+
+R13.5
 
 
 ### 2018-03-23 ~ Theo

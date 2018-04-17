@@ -73,9 +73,7 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Wish list / To Do
 
-
-* 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities
-* 2018-03-31 ~ Any of the attributes could be buttons. Are there attributes where buttons would be really useful.
+* 2018-04-16 ~ Theo ~ continue init menu cleanup
 * 2018-03-31 ~ We now do three specialty reports: 'Surfaces by Type + Exposed to Sun', 'Openings by Type' and 'Cad Object Groups'. Should there be others?
 
 
@@ -85,6 +83,10 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Change Log
 
+### 2018-04-16 ~ Theo
+
+R13.5
+* Good clean-up after yesterday's many updates
 
 ### 2018-04-12 ~ Theo
 

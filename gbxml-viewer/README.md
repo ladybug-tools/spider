@@ -1,20 +1,18 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
 
 
-# gbXML Viewer Read Me
+# Spider gbXML Viewer Read Me
 
 <iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r11/gv-thr/gv-thr.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
-### Welcome [TAS]( http://www.edsl.net/main/ ) users!
 
 
-## Full screen stable release: <http://www.ladybug.tools/spider/gbxml-viewer>
+## Full screen stable release R12: <http://www.ladybug.tools/spider/gbxml-viewer>
 
-#### Full screen development stable release candidate R12: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
-
-#### Full screen development pre-release R13: <br><http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-app-application/gv-app.html>
+### Full screen development release R13: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
+_Both of the above links are shortcuts that link to the appropriate address. You should bookmark these links in order to stay up to date._
 
 <!--
 ## Full Screen pre-release R11: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
@@ -27,20 +25,26 @@ _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scrip
 -->
 
 
+***
 
 ## Must watch and thumbs-up YouTube video:
-## [Ladybug Tools / Spider / gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
+
+### [Ladybug Tools / Spider / gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
 
 * Michal's must watch video ~ updated 2018-03-11
 * Tania Becker commented: 'Fascinating video. It's well explained and easy to understand even for a lay person. It sparkles!'
 
+***
 
+## Previous Releases
+
+* [Spider gbXML Viewer Previous Releases]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
 
 ***
 
-### The concept / The desired pattern:
+## The concept / The desired pattern:
 
-## Knowledge embedded in gbXML files is viewable, analyzable and editable in real-time interactive 3D with free, open-source web apps
+#### Knowledge embedded in gbXML files is viewable, analyzable and editable in real-time interactive 3D with free, open-source web apps
 
 ### The current issues / The problems to be solved
 

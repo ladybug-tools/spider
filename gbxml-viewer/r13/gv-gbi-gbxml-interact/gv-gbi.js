@@ -1,3 +1,8 @@
+/*
+global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
+*/
+/* jshint esversion: 6 */
+
 // Copyright 2018 Ladybug Tools authors. MIT License
 
 	var GBI = {};
@@ -388,6 +393,9 @@
 
 	GBI.setCadObjectIdVisible = function( CadId ) {
 
+		GBP.surfaceMeshes.visible = true;
+		GBP.surfaceEdges.visible = true;
+
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.CADObjectId === CadId ? true : false );
 
 	};
@@ -437,17 +445,17 @@
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
 
 			if ( !adjacentSpaceId ) { continue; }
 
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef;
 
 			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === id ? true : child.visible );
 
 		}
 
-		const storey = GBP.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
+		//const storey = GBP.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
 		//	console.log( 'storey', storey );
 
 	};
@@ -458,6 +466,7 @@
 
 		//console.log( 'opening id', id );
 
+		GBP.surfaceEdges.visible = false;
 		GBP.surfaceMeshes.visible = false;
 		GBP.openingMeshes.visible = true;
 
@@ -525,27 +534,16 @@
 
 		//console.log( 'zone', zone );
 
-	}
+	};
 
 
 
 	///// Show / Hide by Type of Element
 
 
+	GBI.setExposedToSunVisible = function(  ) {
 
-	GBI.setSurfaceTypeVisible = function( type ) {
-
-		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
-
-	};
-
-
-
-	GBI.setOpeningTypeVisible = function( type ) {
-
-		GBP.surfaceEdges.visible = false;
-		GBP.surfaceMeshes.visible = false;
-		GBP.openingMeshes.children.forEach( element => element.visible = element.userData.data.openingType === type? true : false );
+		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.exposedToSun === "true" ? true : false );
 
 	};
 
@@ -583,9 +581,33 @@
 
 
 
-	GBI.setExposedToSunVisible = function(  ) {
+	GBI.setOpeningTypeVisible = function( type ) {
 
-		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.exposedToSun === "true" ? true : false );
+		GBP.surfaceEdges.visible = false;
+		GBP.surfaceMeshes.visible = false;
+		GBP.openingMeshes.visible = true;
+
+		if ( type ) {
+
+			GBP.openingMeshes.children.forEach( element => element.visible = element.userData.data.openingType === type ? true : false );
+
+		} else {
+
+			GBP.openingMeshes.children.forEach( element => element.visible = true );
+
+		}
+
+	};
+
+
+
+	GBI.setSurfaceTypeVisible = function( type ) {
+
+		GBP.surfaceEdges.visible = true;
+		GBP.surfaceMeshes.visible = true;
+		GBP.openingMeshes.visible = false;
+
+		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
 	};
 
@@ -609,7 +631,7 @@
 
 			}
 
-		};
+		}
 
 	};
 
@@ -627,12 +649,11 @@
 
 		return space;
 
-	}
+	};
 
 
 
 	////////// Set Menu Panels
-
 
 	GBI.getElementPanel = function( item ){
 
@@ -664,12 +685,11 @@
 
 		return divElement;
 
-	}
+	};
 
 
 
 	GBI.setElementPanel2 = function( item ){
-
 
 		item = item || {};
 		item.attribute = item.attribute ? item.attribute : '';
@@ -683,8 +703,8 @@
 		let options = '';
 		//item.ids.forEach( id => options += '<option>' + id + '</option>' );
 
-		item.optionValues.forEach( function( option ) { options += '<option value=' + option[ 1 ] + ' title="id: ' +
-		option[ 1 ] + '" >' + option[ 0 ] + '</option>' } );
+		item.optionValues.forEach( option =>
+			options += '<option value=' + option[ 1 ] + ' title="id: ' + option[ 1 ] + '" >' + option[ 0 ] + '</option>' );
 
 		//console.log( 'item', item );
 
@@ -694,9 +714,8 @@
 				<div class=flex-div1 >
 					<input oninput=GBI.setSelectedIndex(this,` + item.selItem + `);
 						placeholder="` + item.placeholder + `" style=margin-bottom:0.5rem;width:95%; >
-					<select id = ` + item.selItem + `
-						onchange=GBI.setSurfaceVisible(this.value);GBI.setIdAttributes(this.value);
-					size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) + ` style=width:100%; >` + options + `</select>
+					<select id = ` + item.selItem +
+						` size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) + ` style=width:100%; >` + options + `</select>
 				</div>
 				<div id = ` + item.divAttributes + ` class=flex-left-div2  >
 					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.?
@@ -711,14 +730,16 @@
 		//console.log( 'target', target );
 
 		selectTarget.onclick= function() {
-			GBI.setSurfaceVisible(this.value );GBI.setIdAttributes(this.value, item ); };
-			selectTarget.onchange =  function() {
-				GBI.setSurfaceVisible(this.value);GBI.setIdAttributes(this.value, item ); };
+			//GBI.setSurfaceVisible(selectTarget.value );
+			GBI.setIdAttributes(selectTarget.value, item ); };
+		selectTarget.onchange =  function() {
+			//GBI.setSurfaceVisible(selectTarget.value);
+			GBI.setIdAttributes(selectTarget.value, item ); };
 
-		selectTarget.selectedIndex = 0;
-		selectTarget.click();
+		//selectTarget.selectedIndex = 0;
+		//selectTarget.click();
 
-	}
+	};
 
 
 
@@ -795,8 +816,9 @@
 	};
 
 
+
 	GBI.setIdAttributes = function ( id, item ) {
-		//console.log( 'item', item );
+		//console.log( 'item', item, 'id', id );
 
 		//let item = REP.reportTypes[ REPselReport.selectedIndex ];
 		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
@@ -805,7 +827,7 @@
 
 		let attributes = '';
 
-		for ( property in obj ) {
+		for ( let property in obj ) {
 
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
@@ -861,6 +883,8 @@
 
 
 
+	//////////
+
 	GBI.getAttributeAdjacentSpace = function( spaceIdRef ) {
 
 		const txt = '<div><span class=attributeTitle >adjacent space id</span>: ' +
@@ -869,7 +893,7 @@
 
 		return txt;
 
-	}
+	};
 
 
 
@@ -881,7 +905,7 @@
 
 		return txt;
 
-	}
+	};
 
 
 
@@ -893,7 +917,7 @@
 
 		return txt;
 
-	}
+	};
 
 
 
@@ -920,7 +944,7 @@
 
 		return txt;
 
-	}
+	};
 
 
 
@@ -944,6 +968,28 @@
 		</details>`;
 
 		return txt;
+
+	};
+
+
+
+
+	GBI.setPanelShowHide = function( target ) {
+
+		target.innerHTML =
+
+		`<details open >
+
+			<summary>Show / Hide</summary>
+
+			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
+				<button onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
+				<button onclick=GBP.setAllVisible(); >all visible</button>
+
+			<hr>
+
+		</details>`;
 
 	};
 
@@ -980,7 +1026,26 @@
 
 		return txt;
 
-	}
+	};
+
+
+
+	GBI.setPanelEditSurface = function( target ) {
+
+		target.innerHTML =
+		`<details>
+
+			<summary>Edit the Surface</summary>
+
+			<button class=toggle onclick=GBI.deleteSurface(); >delete surface</button>
+				<button onclick=GBI.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
+				<button onclick=GBI.saveFile(); title="creates a new file with the changes" >save edits</button>
+
+			<hr>
+
+		</details>`;
+
+	};
 
 
 
@@ -1010,7 +1075,7 @@
 		element =  document.getElementById( 'divSurface' + id );
 		// console.log( 'element', element );
 		if ( element ) {
-			element.innerHTML = '<p>Surface deleted</p>' + element.innerHTML
+			element.innerHTML = '<p>Surface deleted</p>' + element.innerHTML;
 			element.style.opacity = 0.2;
 		}
 
@@ -1055,7 +1120,7 @@
 
 		alert( 'Adding to gbXML:\n\n' + GBP.gbxmlResponseXML.getElementsByTagName( "ModifiedBy" )[0].outerHTML );
 
-	}
+	};
 
 
 
@@ -1073,4 +1138,4 @@
 		//		delete a;
 		a = null;
 
-	}
+	};
