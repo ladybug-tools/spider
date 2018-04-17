@@ -1,15 +1,15 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R12
+# Spider gbXML Viewer R12
 
-[gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" )/[WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" )/[Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
+[gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
 
-<span style=color:magenta>Click or touch the model to get going</span>
+<span style=color:magenta>Click or touch the 3D model to get going!</span>
 
 Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
 
-### Must watch and thumbs-up YouTube video:
+### Please watch and thumbs-up our YouTube video:
 
 [![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY "With music and voiceover by the multi-talented Michalina" )
 
@@ -21,7 +21,24 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 </details>
 -->
 
-<details open>
+<details open >
+
+<summary>Welcome 2018-04-16  ~ R12.17</summary>
+
+R12.7
+* New stable release.Yay!
+
+New Features include
+* Faster, more bullet-resistent code
+* Choice of user interface colors
+* Many workflow simplifications
+* Reports on more types of gbXML elements and attributes
+* Added openings as displayable objects
+* Added new issue finders
+* Added new area and orientation calculations panel
+* Operation on mobile devices improved
+
+</details><details>
 
 <summary>Welcome 2018-04-10 ~ R12.16</summary>
 
@@ -146,7 +163,7 @@ APP and all the test files now seem to co-exist fairly well
 * Index and test HTML will be identical in all folders
 * Only .js  and read me files in each module need updating
 
-</details><details open>
+</details><details>
 
 <summary>Welcome 2018-03-10 ~ R12.0 </summary>
 
