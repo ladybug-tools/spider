@@ -867,7 +867,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 			} else {
 
-				attributes += '<div><span class=attributeTitle >' + property + ':</span> ' +
+				attributes += '<div><span class=attributeTitle >' + property + ':</span><br>' +
 					'<span class=attributeValue >' + obj[ property ] + '</span></div>';
 
 			}
@@ -879,6 +879,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		//console.log( 'selectTarget', selectTarget );
 		selectTarget.innerHTML = attributes;
 
+		COR.setButtonStyleClass( selectTarget );
 	};
 
 
@@ -911,9 +912,15 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	GBI.getAttributeId = function( id ) {
 
-		const txt = '<div><span class=attributeTitle >id</span>: ' +
-		'<button onclick=GBI.setSurfaceVisible(this.innerText); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >' +
-			id + '</button></div>';
+		const txt =
+		`<div>
+			<span class=attributeTitle >id</span>:<br>
+			<button onclick=GBI.setSurfaceVisible(this.innerText); >` +
+			id +
+			`</button>
+			<button onclick=GBI.setSurfaceZoom("` + id + `"); >&#8981;</button>
+
+		</div>`;
 
 		return txt;
 
@@ -926,9 +933,14 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	GBI.getAttributeSurfaceType = function( surfaceType ) {
 
-		const txt = '<div><span class=attributeTitle >surface type:</span>: ' +
-		'<button onclick=GBI.setSurfaceTypeVisible(this.innerText); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >' +
-			surfaceType + '</button></div>';
+		const txt =
+		`<div>
+			<span class=attributeTitle >surface type</span>:<br>
+			<button onclick=GBI.setSurfaceTypeVisible(this.innerText); >` +
+			surfaceType +
+			`</button>
+			<button onclick=GBI.setSurfaceZoom("` + surfaceType + `"); >&#8981;</button>
+		</div>`;
 
 		return txt;
 
@@ -973,19 +985,20 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 
-
 	GBI.setPanelShowHide = function( target ) {
 
 		target.innerHTML =
 
 		`<details open >
 
-			<summary>Show / Hide</summary>
+			<summary>Show || Hide / Zoom</summary>
 
 			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
 				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
 				<button onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
-				<button onclick=GBP.setAllVisible(); >all visible</button>
+				<button onclick=GBP.setAllVisible(); >all</button>
+				/
+				<button onclick=GBP.setAllVisible(); >zoom</button>
 
 			<hr>
 

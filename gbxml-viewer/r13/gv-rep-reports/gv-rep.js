@@ -125,7 +125,8 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		//REPdivMenuPanelPrelims.innerHTML = REP.getPanelVisibilityToggle();
 
-		REPdivMenuPanelPrelims.innerHTML = GBI.getPanelShowHide();
+		//REPdivMenuPanelPrelims.innerHTML = GBI.getPanelShowHide();
+		GBI.setPanelShowHide( REPdivMenuPanelPrelims );
 
 		REPdivMenuPanelSelectReport.innerHTML = REP.getPanelSelectReport();
 		//console.log( 'REPselReport', REPselReport );
@@ -200,7 +201,7 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 	REP.getPanelSelectOptions = function( parent, element ) {
 
-		const obj = Array.isArray( parent ) ? parent[ 0 ] : parent; // [parent[ 0 ] : parent;
+		const obj = Array.isArray( parent ) ? parent[ 0 ] : parent;
 		// what about others in array?
 
 		let options = '';
@@ -216,7 +217,6 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 				item.attribute = property;
 				item.divAttributes = 'REPdivElementAttributes';
-
 				item.parent = parent;
 				item.element = element;
 				item.placeholder = property;
@@ -292,6 +292,12 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 		//console.log( 'item', item );
 
 		GBI.setElementPanel2( item );
+
+		console.log( 'REPselReportType', REPselReportType );
+
+
+		REPselReportType.selectedIndex = 0;
+		REPselReportType.click();
 
 		REP.setPanelInteractions();
 

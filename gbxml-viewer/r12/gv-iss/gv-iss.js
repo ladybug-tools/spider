@@ -11,6 +11,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	var ISS = {};
 
+	var spaceId1;
+	var spaceId2;
 
 	ISS.initIssues = function () {
 
@@ -338,8 +340,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		const surfaceIds = [];
 		surfaceCoordinateDuplicates = [];
 
-		let spaceId1;
-		let spaceId2;
+
 
 		let spaceIdOther1;
 		let spaceIdOther2;

@@ -59,7 +59,8 @@ As you move your cursor over any symbol its full details appear in the pop-up di
 
 
 * https://energyplus.net/weather
-
+* http://climate.onebuilding.org/
+* https://github.com/chiensiTB/EPWRawWeather
 
 ## To Dp
 
