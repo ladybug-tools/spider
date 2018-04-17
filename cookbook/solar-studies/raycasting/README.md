@@ -12,7 +12,7 @@ _txt_
 
 ## Prototype: [Raycasting 7]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-7.html )
 
-<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-7.png width=500 >
+<img src=https://rawgit.com/ladybug-tools/spider/master/cookbook/solar-studies/raycasting/raycasting-7.png width=500 >
 
 A bit of a dead end, probably. I was hoping by varying the distance between the ground planes down to zero to be able to smush the multiple planes into a single plane. In order to appear visually correct the mesh background would have to be transparent and the shadows partially transparent.
 
@@ -29,7 +29,7 @@ Anyway. it's kind of a fun looking prototype and I will certainly keep trying to
 
 ## Prototype: [Raycasting 6]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-6.html )
 
-<img src=http://www.ladybug.tools/cookbook/solar-studies/raycasting/raycasting-6.png width=500 >
+<img src=https://rawgit.com/ladybug-tools/spider/master/cookbook/solar-studies/raycasting/raycasting-6.png width=500 >
 
 * Proof of concept achieved
 	* Given an azimuth & altitude, a number of random objects, and a ground, the script casts rays from a number of points on the grid and calculates whether a point receives sunlight or shadow.
