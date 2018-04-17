@@ -25,7 +25,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <summary>Welcome 2018-04-16  ~ R12.17</summary>
 
-R12.7 ~ New stable release.Yay!
+R12.17 ~ New stable release.Yay!
 
 New Features include:
 * Faster, more bullet-resistent code
@@ -36,6 +36,7 @@ New Features include:
 * Added new issue finders
 * Added new area and orientation calculations panel
 * Operation on mobile devices improved
+* Second pass at adding edit and save changes capability
 
 </details><details>
 
