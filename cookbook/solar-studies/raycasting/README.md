@@ -10,6 +10,22 @@ _txt_
 <span style="display: none" >Iframes are not viewable in GitHub source code view</span>
 -->
 
+## Prototype: [Raycasting 7]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-7.html )
+
+<img src=cookbook/solar-studies/raycasting/raycasting-7.png width=500 >
+
+A bit of a dead end, probably. I was hoping by varying the distance between the ground planes down to zero to be able to smush the multiple planes into a single plane. In order to appear visually correct the mesh background would have to be transparent and the shadows partially transparent.
+
+Three.js mesh materials support opacity for entire meshes but not for individual vertices.
+
+Two possible solutions:
+
+1. Draw only a single mesh ground plane and 'add up' the colors for each sun at each vertex
+2. Create a bitmap of the shadows and apply that as a texture to each ground plane
+
+Another possibility would be to use a shader, but that is above my pay grade.
+
+Anyway. it's kind of a fun looking prototype and I will certainly keep trying to express the shadows on multiple planes - along with each sun and its shadows a different color. This will help to identify which date and times have betteror worse outcomes.
 
 ## Prototype: [Raycasting 6]( http://www.ladybug.tools/spider/cookbook/solar-studies/raycasting/raycasting-6.html )
 
@@ -84,6 +100,10 @@ _txt_
 
 ## Links of Interest
 
+Transparent meshes
+* https://github.com/mrdoob/three.js/issues/2118
+	* http://jsfiddle.net/FtML5/3/
+* https://github.com/mrdoob/three.js/pull/6898
 
 ## Change Log
 
