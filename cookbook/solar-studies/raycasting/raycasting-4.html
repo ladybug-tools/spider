@@ -112,7 +112,7 @@
 
 		drawCubes();
 
-		setSunVector();
+		//setSunVector();
 
 	}
 
@@ -136,7 +136,9 @@
 
 		}
 
-		scene.add( cubes )
+		scene.add( cubes );
+
+		setTimeout( setSunVector, 100 );
 
 	}
 
