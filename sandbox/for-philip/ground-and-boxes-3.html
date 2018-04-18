@@ -38,11 +38,6 @@
 				<button onclick=toggleWireframe(); >toggle wireframe</button>
 			</p>
 
-			<p>
-				<button onclick=updateVertexColors(); >update vertex colors & opacity</button>
-			</p>
-
-
 		</div>
 
 	</div>
@@ -50,6 +45,7 @@
 <script>
 
 	let ground, box1, box2;
+	let sun, vector;
 
 	let renderer, camera, controls, scene, axesHelper;
 
@@ -84,22 +80,13 @@
 		scene.add( axesHelper );
 
 
-		drawGround();
-
 		drawBox1();
 
 		drawBox2();
+
+		drawSun()
 	}
 
-
-	function drawGround() {
-
-		const geometry = new THREE.PlaneGeometry( 100, 100, 20, 20 );
-		const material = new THREE.MeshNormalMaterial( { side: 2 } );
-		ground = new THREE.Mesh( geometry, material );
-		scene.add( ground );
-
-	}
 
 
 	function drawBox1() {
@@ -111,6 +98,7 @@
 		scene.add( box1 );
 
 	}
+
 
 	function drawBox2() {
 
@@ -124,6 +112,68 @@
 	}
 
 
+	function drawSun() {
+
+		const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+		vector = v( 20, -50, 60 );
+
+		const geometry = new THREE.SphereBufferGeometry( 5 );
+		const material = new THREE.MeshBasicMaterial( { color: 'yellow', side: 2 } );
+		sun = new THREE.Mesh( geometry, material );
+		sun.position.copy( vector );
+
+		scene.add( sun );
+
+		setTimeout( drawGround, 100 );
+
+	}
+
+
+	function drawGround() {
+
+		const geometry = new THREE.PlaneGeometry( 100, 100, 50, 50 );
+		var raycaster = new THREE.Raycaster();
+		vector.normalize();
+
+		for ( let i = 0; i < geometry.vertices.length; i++ ) {
+
+			point = geometry.vertices[ i ];
+
+			raycaster.set( point, vector );
+
+			const intersects = raycaster.intersectObjects( [ box1, box2 ] );
+
+			let color = intersects.length > 0 ? 0.2 : 0.7;
+			color = new THREE.Color().setHSL( color, 1, 0.8 );
+			geometry.colors[ i ] = color;
+
+		}
+
+		geometry.faces.forEach( face =>
+
+			face.vertexColors = [
+				geometry.colors[ face[ 'a' ] ],
+				geometry.colors[ face[ 'b' ] ],
+				geometry.colors[ face[ 'c' ] ]
+			]
+
+		);
+
+		material = new THREE.MeshBasicMaterial( {
+			color: 0xffffff,
+			opacity: 0.7,
+			side: THREE.DoubleSide,
+			transparent: true,
+			vertexColors: THREE.VertexColors
+		} );
+
+		scene.remove( ground );
+		ground = new THREE.Mesh( geometry, material );
+		scene.add( ground );
+
+	}
+
+
 	function toggleWireframe() {
 
 		ground.material.wireframe =
@@ -131,42 +181,6 @@
 		box2.material.wireframe = !ground.material.wireframe;
 
 	}
-
-
-	function updateVertexColors() {
-
-		const geometry = new THREE.PlaneGeometry( 100, 100, 20, 20 );
-
-		for ( let i = 0; i < geometry.vertices.length; i++ ) {
-
-			color = new THREE.Color().setHSL( Math.random(), 1, 0.8 );
-			geometry.colors[ i ] = color;
-
-		}
-
-			geometry.faces.forEach( face =>
-
-				face.vertexColors = [
-					geometry.colors[ face[ 'a' ] ],
-					geometry.colors[ face[ 'b' ] ],
-					geometry.colors[ face[ 'c' ] ]
-				]
-
-			);
-
-			material = new THREE.MeshBasicMaterial( {
-				color: 0xffffff,
-				opacity: 0.7,
-				side: THREE.DoubleSide,
-				transparent: true,
-				vertexColors: THREE.VertexColors } );
-
-			scene.remove( ground );
-			ground = new THREE.Mesh( geometry, material );
-			scene.add( ground );
-
-	}
-
 
 
 

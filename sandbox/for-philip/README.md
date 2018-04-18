@@ -6,12 +6,23 @@
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test script: [ground and boxes]( http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-1.html )
-
-* Ground plane with two boxes using the Three.js JavaScript library
-
 ## Concept
 
+Entry level ray-casting with Three.js
+
+## [ground and boxes 1]( http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-1.html )
+
+* Ground plane with two boxes using the Three.js JavaScript library
+* 'toggle rotation' button
+
+## [ground and boxes 2]( http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-2.html )
+
+* Add 'toggle wireframe' button
+* Adds 'update vertex colors and opacity' button
+
+## [ground and boxes 3]( http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-3.html )
+
+* Adds basic ray casting to determine whether a vertex in the ground plane is in shadow or not
 
 
 ## Wish list
