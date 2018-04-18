@@ -376,15 +376,3 @@
 
 	}
 
-	COR.setButtonStyleClass = function( item ) {
-
-		const butts = item.getElementsByTagName( "button" );
-		//console.log( 'butts', butts );
-
-		for ( let butt of butts ) {
-
-			butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-
-		}
-
-	}

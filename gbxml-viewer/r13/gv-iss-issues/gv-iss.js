@@ -78,6 +78,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdetPanelOpeningVertices4Plus ></div>
 
+			<div id=ISSdetPanelSurfaceTypeInvalid ></div>
+
+			<div id=ISSdetPanelOpeningTypeInvalid ></div>
+
 			<!--
 
 			<details>
@@ -142,6 +146,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.setPanelSurfacesVertexClose();
 
 		ISSdetPanelOpeningVertices4Plus.innerHTML = ISS.getPanelOpeningVertices4Plus();
+
+		ISS.setPanelSurfaceTypeInvalid( ISSdetPanelSurfaceTypeInvalid );
+
+		ISS.setPanelOpeningTypeInvalid( ISSdetPanelOpeningTypeInvalid );
 
 	};
 
@@ -380,7 +388,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.getPanelSurfacesUndefinedCadId = function() {
 
-		ISS.surfacesUndefinedId = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
+		ISS.surfacesUndefinedId = GBP.surfaceJson.filter( element => element.CADObjectId === undefined || element.CADObjectId === '' );
 
 		let options = '';
 		ISS.surfacesUndefinedId.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
@@ -621,6 +629,82 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		</details>`;
 
 		return details;
+
+	};
+
+
+
+	ISS.setPanelSurfaceTypeInvalid = function( target ) {
+
+		ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
+
+		let options = '';
+		ISS.surfaceTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
+
+		target.innerHTML =
+		`<details>
+
+			<summary id = "ISSsumSurfaceTypeInvalid" >Surface Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
+
+			<div >Surfaces with undefined ID</div>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceUndefined"
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceTypeInvalid();
+						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceTypeInvalid(); size=10 >` +
+						options + `
+						</select><br>
+					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
+					</div>
+				<div id = "ISSdivSurfaceTypeInvalid" class=flex-left-div2 ></div>
+			</div>
+
+			<div id=ISSdivSurfaceTypeInvalid ></div>
+
+			<hr>
+
+		</details>`;
+
+	};
+
+
+
+	ISS.setPanelOpeningTypeInvalid = function( target ) {
+
+		ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
+
+		let options = '';
+		ISS.surfaceTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
+
+		target.innerHTML =
+		`<details>
+
+			<summary id = "ISSsumOpeningTypeInvalid" >Opening Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
+
+			<div >Openings with undefined ID</div>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=GBI.setSelectedIndex(this,ISSselOpeningUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselOpeningUndefined"
+						onclick=GBI.setOpeningVisible(this.value);ISS.updateOpeningTypeInvalid();
+						onchange=GBI.setOpeningVisible(this.value);ISS.updateOpeningTypeInvalid(); size=10 >` +
+						options + `
+						</select><br>
+					<button onclick=GBI.setOpeningZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this surface" >zoom</button>
+					</div>
+				<div id = "ISSdivOpeningTypeInvalid" class=flex-left-div2 ></div>
+			</div>
+
+			<div id=ISSdivOpeningTypeInvalid ></div>
+
+			<hr>
+
+		</details>`;
 
 	};
 

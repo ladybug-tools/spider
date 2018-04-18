@@ -342,7 +342,8 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			<div><button style=width:8rem; onclick=GBI.setOpeningTypeVisible(); >
 				Total openings</button> area: ` + Math.round( areaTotal ).toLocaleString() +
 				` count: ` + countTotal +
-			`<div>
+				`<br><i style=color:red; >Issue: only showing external openings</i>
+			<div>
 			<hr>
 		</details>`;
 

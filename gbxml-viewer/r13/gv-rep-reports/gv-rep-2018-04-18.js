@@ -303,8 +303,7 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 	};
 
 
-
-	///// Types
+	/////
 
 	REP.setMenuPanelSurfacesByType = function( target ) {
 

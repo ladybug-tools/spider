@@ -147,6 +147,9 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					</details>
 
+					<div id=ISSdetPanelSurfaceTypeInvalid ></div>
+
+					<div id=ISSdetPanelOpeningTypeInvalid ></div>
 
 					<!--
 
@@ -208,6 +211,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			ISS.getSurfacesTiny();
 
 			ISS.getSurfacesVertexClose();
+
+			ISS.setPanelSurfaceTypeInvalid( ISSdetPanelSurfaceTypeInvalid );
+
+			ISS.setPanelOpeningTypeInvalid( ISSdetPanelOpeningTypeInvalid );
 
 
 			//ISS.getSurfacesInside(); // not found to be useful yet
@@ -508,6 +515,102 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
+
+	ISS.setPanelSurfaceTypeInvalid = function( target ) {
+
+		ISS.surfaceTypeInvalid = GBX.surfaceJson.filter( element => GBX.surfaceTypes.indexOf( element.surfaceType ) < 0 );
+
+		let options = '';
+		ISS.surfaceTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
+
+		target.innerHTML =
+		`<details>
+
+			<summary id = "ISSsumSurfaceTypeInvalid" >Surface Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
+
+			<div >Surfaces with undefined ID</div>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceUndefined"
+						onclick=GBV.showSurface(this.value);ISS.updateSurfaceTypeInvalid();
+						onchange=GBV.showSurface(this.value);ISS.updateSurfaceTypeInvalid(); size=10 >` +
+						options + `
+						</select><br>
+					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
+					</div>
+				<div id = "ISSdivSurfaceTypeInvalid" class=flex-left-div2 ></div>
+			</div>
+
+			<div id=ISSdivSurfaceTypeInvalid ></div>
+
+			<hr>
+
+		</details>`;
+
+	};
+
+
+	ISS.setPanelOpeningTypeInvalid = function( target ) {
+
+		let openingTypes = [ 'FixedWindow', 'OperableWindow', 'FixedSkylight', 'OperableSkylight', 'SlidingDoor', 'NonSlidingDoor', 'Air' ];
+
+		ISS.openings = [];
+
+		for ( var i = 0; i < GBX.surfaceJson.length; i++ ) {
+
+			element = GBX.surfaceJson[ i ];
+
+			if ( element.Opening ) {
+
+				element.Opening = Array.isArray( element.Opening ) ? element.Opening : [ element.Opening ];
+
+				ISS.openings.push( ...element.Opening );
+
+			}
+
+		}
+
+		ISS.openingTypeInvalid = ISS.openings.filter( opening => !openingTypes.includes( opening.openingType ) );
+
+		console.log( 'ISS.openingTypeInvalid', ISS.openingTypeInvalid );
+
+		//ISS.openingTypeInvalid = GBX.openingJson.filter( element => element.Opening &&
+		//	( openingTypes.indexOf( element.Opening.openingType ) || openingTypes.indexOf( element.Opening.openingType[ 0 ] )< 0 ) );
+
+
+		let options = '';
+		ISS.openingTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
+
+		target.innerHTML =
+		`<details>
+
+			<summary id = "ISSsumOpeningTypeInvalid" >Opening Type Invalid &raquo; ` + ISS.openingTypeInvalid.length + ` found</summary>
+
+			<div >Openings with invalid type</div>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=GBI.setSelectedIndex(this,ISSselOpeningUndefined); size=6 placeholder="opening id" ><br>
+					<select id = "ISSselOpeningUndefined"
+						onclick=GBV.showSurface(this.value);ISS.updateOpeningTypeInvalid(this.value);
+						onchange=GBV.showSurface(this.value);ISS.updateOpeningTypeInvalid(this.value); size=10 >` +
+						options + `
+						</select><br>
+					<button onclick=GBI.setSurfaceZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this opening" >zoom</button>
+					</div>
+				<div id = "ISSdivOpeningTypeInvalid" class=flex-left-div2 ></div>
+			</div>
+
+			<hr>
+
+		</details>`;
+
+	};
+
 	/////////
 
 	ISS.getSurfacesTiny = function() {
@@ -549,6 +652,20 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
+
+	ISS.updateOpeningTypeInvalid = function( id ) {
+
+
+		opening = ISS.openingTypeInvalid.find( item => item.id === id );
+console.log( 'opening', ISS.traverseGbjson( opening ) );
+		ISSdivOpeningTypeInvalid.innerHTML = ISS.traverseGbjson( opening ).attributes;
+
+
+
+
+	}
+
+
 	/////////
 
 
@@ -584,7 +701,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
+		//console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
 
 		ISSsumSurfacesVertexClose.innerHTML= 'Surfaces with close vertex &raquo; ' +
 			'<span style=background-color:var(--highlight-color); >&nbsp;' + ISS.surfacesVertexClose.length + ' found&nbsp;</span>';
@@ -628,6 +745,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		HUD.setHeadsUp();
 
 	};
+
+
 
 
 

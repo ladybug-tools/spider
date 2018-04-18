@@ -256,7 +256,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			element.visible = element.userData.data.id === id ? true : false;
 
 			if ( element.visible === true  ) {
-
 				element.material.opacity = 1;
 				element.material.side = 2;
 				element.material.needsUpdate = true;
@@ -503,7 +502,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		THR.controls.target.copy( center );
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 
-
 	}
 
 
@@ -605,6 +603,30 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	//GBP.zoomObjectBoundingSphere = function( obj )
 
+
+	GBI.setZoneZoom = function( zoneId ) {
+
+		GBI.setZoneVisible( zoneId );
+
+		let meshes = GBP.surfaceMeshes.children.filter( element => element.userData.data.zoneIdRef === zoneId );
+		meshes = meshes.map( item => item.clone() );
+		//console.log( 'meshes', meshes );
+
+		const surfaceMeshes = new THREE.Object3D();
+		surfaceMeshes.add( ...meshes );
+		//console.log( '', surfaceMesh );
+
+		const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+		const sphere = bbox.getBoundingSphere();
+		const center = sphere.center;
+		const radius = sphere.radius;
+		//console.log( 'center * radius', center, radius );
+
+		THR.controls.target.copy( center );
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
+
+
+	}
 
 
 	////////// Spaces
@@ -735,6 +757,110 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	////////// Set Menu Panel Attributes
 
+
+
+	GBI.setIdAttributes = function ( id, item ) {
+		console.log( 'item', item, 'id', id );
+
+		//let item = REP.reportTypes[ REPselReport.selectedIndex ];
+		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
+		obj = arr.find( element => element.id === id );
+		//console.log( 'obj', obj );
+
+		let attributes =
+		`<div>` +
+				( REPselReportType.selectedIndex + 1 ) +
+			`. ` +
+			id +
+		`</div>`;
+
+
+		for ( let property in obj ) {
+
+			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
+
+				if ( property === 'AdjacentSpaceId' ) {
+
+					//console.log( 'property', obj[ property ].length );
+
+					if ( Array.isArray( obj[ property ] ) ) {
+
+						attributes += GBI.getAttributeAdjacentSpace( obj[ property ][ 0 ].spaceIdRef );
+						attributes += GBI.getAttributeAdjacentSpace( obj[ property ][ 1 ].spaceIdRef );
+
+					} else {
+
+						attributes += GBI.getAttributeAdjacentSpace( obj[ property ].spaceIdRef );
+
+					}
+
+				}
+
+			} else if ( property === 'buildingStoreyIdRef' && obj[ property ] ) {
+
+					attributes += GBI.getAttributeStorey( obj[ property ] );
+
+			} else if ( item.element === 'Surface' && property === 'CADObjectId' ) {
+
+				attributes += GBI.getAttributeCadObjectId( obj[ property ] );
+
+			} else if ( property === 'id' && obj[ property ] ) {
+
+				if ( item.element === 'Openings' ) {
+
+					attributes += GBI.getAttributeOpenings( obj[ property ] );
+
+				} else if ( item.element === 'Surface' ) {
+
+					attributes += GBI.getAttributeSurfaceId( obj[ property ] );
+
+				} else if ( item.element === 'Space' ) {
+
+					attributes += GBI.getAttributeAdjacentSpace( obj[ property ] );
+
+				} else if ( item.element === 'Storey' ) {
+
+					attributes += GBI.getAttributeStorey( obj[ property ] );
+
+				}else if ( item.element === 'Zone' ) {
+
+					attributes += GBI.getAttributeZone( obj[ property ] );
+
+				} else {
+
+					attributes += '<div><span class=attributeTitle >' + property + ':</span><br>' +
+						'<span class=attributeValue >' + obj[ property ] + '</span></div>';
+
+				}
+
+			} else if ( property === 'surfaceType' ) {
+
+				attributes += GBI.getAttributeSurfaceType( obj[ property ] );
+
+			} else if ( property === 'zoneIdRef' ) {
+
+				attributes += GBI.getAttributeZone( obj[ property ] );
+
+			} else {
+
+				attributes += '<div><span class=attributeTitle >' + property + ':</span><br>' +
+					'<span class=attributeValue >' + obj[ property ] + '</span></div>';
+
+			}
+
+		}
+		//console.log( 'attributes', attributes );
+
+		selectTarget = item.divTarget.getElementsByClassName( 'flex-left-div2' )[ 0 ];
+		//console.log( 'selectTarget', selectTarget );
+		selectTarget.innerHTML = attributes;
+
+		GBI.setButtonStyleClass( selectTarget );
+
+	};
+
+
+
 	GBI.setGbjsonAttributes = function( id, target) {
 		//console.log( 'target', target );
 
@@ -787,79 +913,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 
-	GBI.setIdAttributes = function ( id, item ) {
-		//console.log( 'item', item, 'id', id );
-
-		//let item = REP.reportTypes[ REPselReport.selectedIndex ];
-		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
-		obj = arr.find( element => element.id === id );
-		//console.log( 'obj', obj );
-
-		let attributes = '';
-
-		for ( let property in obj ) {
-
-			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
-
-				if ( property === 'AdjacentSpaceId' ) {
-
-					//console.log( 'property', obj[ property ].length );
-
-					if ( Array.isArray( obj[ property ] ) ) {
-
-						attributes += GBI.getAttributeAdjacentSpace( obj[ property ][ 0 ].spaceIdRef );
-						attributes += GBI.getAttributeAdjacentSpace( obj[ property ][ 1 ].spaceIdRef );
-
-					} else {
-
-						attributes += GBI.getAttributeAdjacentSpace( obj[ property ].spaceIdRef );
-
-					}
-
-				}
-
-
-			} else if ( item.element === 'Surface' && property === 'CADObjectId' ) {
-
-				attributes += GBI.getAttributeCadObjectId( obj[ property ] );
-
-			} else if ( item.element === 'Surface' && property === 'id' && obj[ property ] ) {
-
-				attributes += GBI.getAttributeId( obj[ property ] );
-
-			} else if ( item.element === 'Space' && property === 'id' && obj[ property ] ) {
-
-				//console.log( 'obj[ property ]', obj[ property ] );
-				attributes += GBI.getAttributeAdjacentSpace( obj[ property ] );
-
-			} else if ( property === 'surfaceType' ) {
-
-				attributes += GBI.getAttributeSurfaceType( obj[ property ] );
-
-			} else if ( property === 'zoneIdRef' ) {
-
-				attributes += GBI.getAttributeZone( obj[ property ] );
-
-			} else {
-
-				attributes += '<div><span class=attributeTitle >' + property + ':</span><br>' +
-					'<span class=attributeValue >' + obj[ property ] + '</span></div>';
-
-			}
-
-		}
-		//console.log( 'attributes', attributes );
-
-		selectTarget = item.divTarget.getElementsByClassName( 'flex-left-div2' )[ 0 ];
-		//console.log( 'selectTarget', selectTarget );
-		selectTarget.innerHTML = attributes;
-
-		COR.setButtonStyleClass( selectTarget );
-
-	};
-
-
-
 	//////////
 
 	GBI.getAttributeAdjacentSpace = function( spaceIdRef ) {
@@ -896,23 +949,21 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	};
 
 
-
-	GBI.getAttributeId = function( id ) {
+	GBI.getAttributeOpenings = function( id ) {
 
 		const txt =
 		`<div>
 			<span class=attributeTitle >id</span>:<br>
-			<button onclick=GBI.setSurfaceVisible(this.innerText); >` +
+			<button onclick=GBI.setOpeningVisible(this.innerText); >` +
 			id +
-			`</button>
-			<button onclick=GBI.setSurfaceZoom("` + id + `"); >&#8981;</button>
+			`</button><br>
+			<span style=color:red; >Issue: only shows external doors</span>
+			</div>`;
 
-		</div>`;
-
+			//<button onclick=GBI.setSurfaceZoom("` + id + `"); >&#8981;</button>
 		return txt;
 
 	};
-
 
 	GBI.getAttributeSurfaceId = function( id ) {
 
@@ -922,21 +973,40 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			<button onclick=GBI.setSurfaceVisible(this.innerText); >` +
 			id +
 			`</button>
-			<button onclick=GBI.setSurfaceZoom("` + id + `"); >&#8981;</button>
+			</div>`;
 
-		</div>`;
-
+			//<button onclick=GBI.setSurfaceZoom("` + id + `"); >&#8981;</button>
 		return txt;
 
 	};
 
 
 
+	GBI.getAttributeStorey = function( storeyId ) {
+
+		const txt =
+		`<div>
+			<span class=attributeTitle >storey id</span>:<br>
+			<button onclick=GBI.setStoreyVisible(this.innerText); >`+
+			storeyId +
+			`</button>
+		</div>`;
+
+		return txt;
+
+	};
+
 	GBI.getAttributeZone = function( zoneId ) {
 
-		const txt = '<div><span class=attributeTitle >zone id</span>:<br>' +
-		'<button onclick=GBI.setZoneVisible(this.innerText); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >' +
-			zoneId + '</button></div>';
+		const txt =
+		`<div>
+			<span class=attributeTitle >zone id</span>:<br>
+			<button onclick=GBI.setZoneVisible(this.innerText); >` +
+			zoneId +
+		`</button>
+		</div>`;
+
+		//<button onclick=GBI.setZoneZoom("` + zoneId + `"); >&#8981;</button>
 
 		return txt;
 
@@ -1021,6 +1091,23 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		GBP.surfaceMeshes.children.forEach( child => child.visible = true );
 
 	};
+
+
+	////////// Style
+
+
+	GBI.setButtonStyleClass = function( item ) {
+
+		const butts = item.getElementsByTagName( "button" );
+		//console.log( 'butts', butts );
+
+		for ( let butt of butts ) {
+
+			butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+
+		}
+
+	}
 
 
 
