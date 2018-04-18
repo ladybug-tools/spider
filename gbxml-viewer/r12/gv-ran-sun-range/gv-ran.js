@@ -153,7 +153,7 @@
 
 			requestFile( url, callbackUtcOffset );
 
-// following causes error when inside an iframe in a read me
+		// following causes error when inside an iframe in a read me
 			if ( parent.setIfrThree ) { setIfrThree(); }
 
 			//RAN.butMenuSunRange.style.backgroundColor = 'var( --but-back-color )';
@@ -179,19 +179,19 @@
 
 	function initSunRange() {
 
-/*
-		parameters.date = 21;
-		parameters.month = 11;
-		parameters.hours = 12 - parameters.offsetUTC / 60;
-		parameters.minutes = 0;
+		/*
+				parameters.date = 21;
+				parameters.month = 11;
+				parameters.hours = 12 - parameters.offsetUTC / 60;
+				parameters.minutes = 0;
 
-//console.log( '', parameters );
-*/
+		//console.log( '', parameters );
+		*/
 
-//		inpMonth.value = parameters.month;
-//		outMonth.value = parameters.month + 1;
+		//		inpMonth.value = parameters.month;
+		//		outMonth.value = parameters.month + 1;
 
-//		outDate.value = inpDate.value = parameters.date;
+		//		outDate.value = inpDate.value = parameters.date;
 
 		outSunIntensity.value = inpSunIntensity.value = sunRangeLightIntensity;
 		outAmbientIntensity.value = inpAmbientIntensity.value = lightAmbientIntensity;
@@ -206,6 +206,7 @@
 		inpAmbientIntensity.onchange = setSunIntensity;
 
 	}
+
 
 
 	function drawAnalemma() {
@@ -254,7 +255,7 @@
 			material = new THREE.LineBasicMaterial( {
 
 				linewidth: 2,
-//				color: 0xffffff,
+		//				color: 0xffffff,
 				vertexColors: THREE.VertexColors
 
 			} );
@@ -314,7 +315,7 @@
 
 		lights = new THREE.Object3D();
 
-//console.log( '', scene.children );
+		//console.log( '', scene.children );
 
 
 		if ( suns ) {
@@ -370,7 +371,7 @@
 
 			sun.target = THR.axesHelper;
 
-//			scene.add( new THREE.CameraHelper( sun.shadow.camera ) );
+		//			scene.add( new THREE.CameraHelper( sun.shadow.camera ) );
 
 			geometry = new THREE.SphereBufferGeometry( 5, 20, 10 );
 			material = new THREE.MeshBasicMaterial( { color: 0xffee00 } );
@@ -446,8 +447,6 @@
 			//} );
 
 	}
-
-
 
 
 
@@ -587,10 +586,10 @@
 	function callbackUtcOffset( xhr ) {
 
 		const response = xhr.target.response;
-//console.log( 'response', response );
+		//console.log( 'response', response );
 
 		const json = JSON.parse( response );
-//console.log( 'json', json );
+		//console.log( 'json', json );
 
 		parameters.offsetUTC = json.rawOffset / 60;
 
@@ -621,7 +620,6 @@
 		return { xyz: new THREE.Vector3( x, y, z ), azimuth: sunPosition.azimuth, altitude: ( sunPosition.altitude > 0 ? 90 - sunPosition.altitude: sunPosition.altitude ) };
 
 	}
-
 
 
 

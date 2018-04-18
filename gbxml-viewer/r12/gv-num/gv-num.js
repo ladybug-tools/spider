@@ -173,7 +173,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		NUM.hideOpenings()
 
-	}
+	};
 
 
 
@@ -232,7 +232,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			'<div><button style=width:8rem; onclick=GBV.showBySurfaceTypeArray(surfaceTypes);NUM.hideOpenings(); >Total floor</button> area: ' + Math.round( tfa ).toLocaleString() + '<div>';
 
 
-	}
+	};
 
 
 
@@ -247,7 +247,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			Math.round( tesa ).toLocaleString() + '<br>' +
 		'';
 
-	}
+	};
 
 
 	NUM.getOpenings = function() {
@@ -344,7 +344,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		'';
 
-	}
+	};
 
 
 
@@ -382,7 +382,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		return area;
 
-	}
+	};
 
 
 
@@ -421,7 +421,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		return area;
 
 
-	}
+	};
 
 
 
@@ -452,7 +452,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			return triangle.plane( plane );
 		}
 
-	}
+	};
+
 
 
 	NUM.getOrientations = function(){
@@ -615,7 +616,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		NUMdivOrientation.innerHTML = txt
 
-	}
+	};
 
 
 
@@ -628,11 +629,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
+
 	NUM.hideOpenings = function() {
 
 		if ( NUM.openingMeshes ) { NUM.openingMeshes.visible = false; }
 
-	}
+	};
 
 
 
@@ -657,7 +659,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		return { elements: elements, attributes: attributes };
 
-	}
+	};
 
 
 

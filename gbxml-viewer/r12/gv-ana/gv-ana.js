@@ -343,7 +343,7 @@
 
 		if ( butPlayTheYear.style.backgroundColor !== 'var( --but-bg-color )') { initSunPath( false ); }
 
-//		if ( !divMenuItems.innerHTML.includes( 'initSunPath' ) && playTheYear ) { togglePlayTheYear(); return; }
+		//		if ( !divMenuItems.innerHTML.includes( 'initSunPath' ) && playTheYear ) { togglePlayTheYear(); return; }
 
 		thisHour = parseInt( inpHour.value, 10 );
 		thisDate = parseInt( inpDate.value, 10 );

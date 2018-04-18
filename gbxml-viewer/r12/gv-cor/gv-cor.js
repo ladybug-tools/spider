@@ -50,7 +50,7 @@
 
 		COR.timeStart = Date.now();
 
-	}
+	};
 
 
 	// handle location.hash change events
@@ -88,7 +88,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -102,7 +102,7 @@
 		xhr.onload = callback;
 		xhr.send( null );
 
-	}
+	};
 
 
 
@@ -125,7 +125,7 @@
 
 		}
 
-	}
+	};
 
 
 	// handle callbacks with file data events
@@ -142,9 +142,9 @@
 			divContainer.style.display = 'block';
 			window.scrollTo( 0, 0 );
 			divContainer.scrollTop = 0;
-//			divContainerContents.scrollTop = 0;
+			//			divContainerContents.scrollTop = 0;
 			divContainer.scrollTo( 0, 0 );
-//			divContainerContents.scrollTo( 0, 0 );
+			//			divContainerContents.scrollTo( 0, 0 );
 
 		}
 
@@ -161,6 +161,8 @@
 
 
 	// handle fileReader events
+
+
 
 	COR.openFile = function( files ) {
 
@@ -288,7 +290,7 @@
 		window.removeEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
 		event.preventDefault();
 
-	}
+	};
 
 
 
@@ -343,7 +345,7 @@
 
 		}
 
-	}
+	};
 
 
 	COR.toggleNavRight = function() {
@@ -366,4 +368,4 @@
 
 		}
 
-	}
+	};

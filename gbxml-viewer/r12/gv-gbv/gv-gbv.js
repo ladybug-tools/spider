@@ -90,7 +90,7 @@
 
 		getMenuItems();
 
-	}
+	};
 
 
 
@@ -115,7 +115,7 @@
 		selSpace.innerHTML = txt;
 		selSpace.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
 
-	}
+	};
 
 
 
@@ -152,7 +152,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -172,10 +172,10 @@
 	};
 
 
+
 	GBV.showSurfacesInSurfaceArray = ( surfaces ) => {
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
-
 
 	};
 
@@ -201,7 +201,7 @@
 
 		return space;
 
-	}
+	};
 
 
 
@@ -259,7 +259,7 @@
 
 		//	console.log( 'storey', storey );
 
-	}
+	};
 
 
 
@@ -291,7 +291,7 @@
 		GBV.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
 		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
 
-	}
+	};
 
 
 
@@ -329,7 +329,7 @@
 
 		console.log( 'zone', zone );
 
-	}
+	};
 
 
 
@@ -366,7 +366,7 @@
 		GBV.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
 		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
 
-	}
+	};
 
 
 
@@ -509,7 +509,7 @@
 
 		alert( 'Adding to gbXML:\n\n' + GBX.gbxmlResponseXML.getElementsByTagName( "ModifiedBy" )[0].outerHTML );
 
-	}
+	};
 
 
 

@@ -292,7 +292,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISSdivAdjacents.innerHTML= contents;
 
-	}
+	};
 
 
 
@@ -319,7 +319,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-	}
+	};
 
 
 
@@ -466,7 +466,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		divCRDInfo.innerHTML = 'Two surfaces with identical coordinates';
 		ISSdivDuplicateSurfaces.innerHTML= flowContent;
 
-	}
+	};
 
 
 
@@ -494,7 +494,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSselSurfaceUndefined.innerHTML = txt ? txt : '<option>none found</option>';
 		ISSselSurfaceUndefined.selectedIndex = 0; //Math.floor( Math.random() * property.length )
 
-	}
+	};
 
 
 
@@ -505,7 +505,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		HUD.updateSurface( ISSselSurfaceUndefined.value );
 		HUD.setHeadsUp();
 
-	}
+	};
 
 
 	/////////
@@ -526,7 +526,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//	if ( ISSselSurfaceTiny.length ) { ISS.updateSurfaceTinyAttributes(); }
 
-	}
+	};
 
 
 	ISS.updateSurfaceTinyAttributes = function() {
@@ -546,7 +546,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		HUD.updateSurface( ISSselSurfaceTiny.value );
 		HUD.setHeadsUp();
 
-	}
+	};
 
 
 	/////////
@@ -595,7 +595,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSselSurfaceVertexClose.selectedIndex = 0;
 
 
-	}
+	};
 
 
 
@@ -627,7 +627,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		HUD.updateSurface( ISSselSurfaceVertexClose.value );
 		HUD.setHeadsUp();
 
-	}
+	};
 
 
 
@@ -668,7 +668,9 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSselSurfaceInside.innerHTML = txt ? txt : '<option>none found</option>';
 		ISSselSurfaceInside.selectedIndex = 0;
 
-	}
+	};
+
+
 
 	//////////
 
@@ -693,7 +695,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		return { elements: elements, attributes: attributes };
 
-	}
+	};
+
 
 
 	// copied from  HUD/ move to GBV?

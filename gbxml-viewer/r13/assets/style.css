@@ -36,9 +36,9 @@
 	.flex-container { display: flex; flex-wrap: wrap;}
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
 
-	.flex-container2 { display: flex; }
-	.flex-div1 { border: 0px solid #f00; overflow-x: auto; margin-right: 10px; min-width:95px }
-	.flex-left-div2 { border: 0px solid #f00; overflow-x: auto; max-width: calc( var( --mnu-left-width ) - 150px ); }
+	.flex-container2 { box-sizing: border-box; display: flex;}
+	.flex-div1 { border: 0px solid #f00; box-sizing: border-box; overflow-x: auto; margin-right: 10px; min-width:7rem; }
+	.flex-left-div2 { border: 0px solid #f00; box-sizing: border-box; overflow-x: auto; max-width: calc( var( --mnu-left-width ) - 150px ); }
 	.flex-div2 { border: 0px red solid; overflow-x: auto; }
 
 	.highlight { background-color: var( --highlight-color ) }
@@ -100,6 +100,8 @@
 	#divHamburgerRight { box-sizing: border-box; border-radius: 2px;
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	}
+
+	#divLog { max-height: 200px }
 
 
 	@media screen and (max-width: 900px) {

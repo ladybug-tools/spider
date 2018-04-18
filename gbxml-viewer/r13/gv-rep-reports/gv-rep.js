@@ -293,13 +293,12 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		GBI.setElementPanel2( item );
 
-		console.log( 'REPselReportType', REPselReportType );
-
+		//console.log( 'REPselReportType', REPselReportType );
 
 		REPselReportType.selectedIndex = 0;
 		REPselReportType.click();
 
-		REP.setPanelInteractions();
+		//REP.setPanelInteractions();
 
 	};
 
@@ -420,7 +419,19 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		for ( let surface of surfaces ) {
 
-			if ( !surface.CADObjectId ) { continue; }
+			//if ( !surface.CADObjectId ) { continue; }
+
+			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
+
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				divLog.style.height = '500px';
+				divLog.style.overflow = 'auto';
+
+				console.log( 'surface', surface );
+				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
+				continue;
+
+			}
 
 			const id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
 

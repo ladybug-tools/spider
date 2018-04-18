@@ -251,8 +251,6 @@
 
 			<div id = "HUDdivInputSelect" ></div>
 
-			<button onclick=GBI.setSurfaceZoom(HUDselId.value); title="zoom into just this surface" >zoom</button>
-
 			<hr>
 
 		</details>`;

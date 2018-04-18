@@ -71,7 +71,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -81,7 +81,7 @@
 
 		THR.renderer.domElement.removeEventListener( 'click', HUD.onRendererMouseMoveHUD, false );
 
-	}
+	};
 
 
 
@@ -94,7 +94,7 @@
 
 		HUD.onRendererMouseMoveHUD( event );
 
-	}
+	};
 
 
 
@@ -621,7 +621,7 @@
 
 		}
 
-	}
+	};
 
 
 ///////// 	// to COR or THR?
@@ -668,7 +668,7 @@
 		THR.scene.remove( telltalesPolyloop );
 		THR.scene.remove( telltalesVertex );
 
-	}
+	};
 
 
 
@@ -735,6 +735,8 @@
 	};
 
 
+
+	// move to THR
 
 	HUD.drawPlacard = function( text, scale, color, x, y, z ) {
 

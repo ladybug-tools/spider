@@ -50,7 +50,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -206,8 +206,8 @@
 			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
 
 			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f310; </a>';
-//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
-//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > <img src=world-map.png height=18 > </a>';
+			//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
+			//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > <img src=world-map.png height=18 > </a>';
 
 		} else {
 
@@ -661,6 +661,7 @@
 	}
 
 
+
 	REP.getSurfaceDuplicateAdjacencies = () => {
 
 		const surfaces = GBX.gbjson.Campus.Surface;
@@ -936,7 +937,7 @@
 		THR.controls.target.copy( center );
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
 
-	}
+	};
 
 
 
@@ -1140,7 +1141,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -1165,7 +1166,7 @@
 
 		}
 
-	}
+	};
 
 
 

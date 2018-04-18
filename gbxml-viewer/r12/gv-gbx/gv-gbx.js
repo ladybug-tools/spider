@@ -154,7 +154,7 @@
 
 		return GBX.gbjson;
 
-	}
+	};
 
 
 	// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
@@ -212,7 +212,7 @@
 
 		return data;
 
-	}
+	};
 
 
 
@@ -384,7 +384,7 @@
 
 		//divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
-	}
+	};
 
 
 
@@ -410,7 +410,7 @@
 
 		return points;
 
-	}
+	};
 
 
 
@@ -488,7 +488,7 @@
 
 		return shapeMesh;
 
-	}
+	};
 
 
 	// GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes);

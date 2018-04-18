@@ -23,7 +23,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open >
 
-<summary>Welcome 2018-04-16  ~ R12.17</summary>
+<summary>Welcome 2018-04-17  ~ R12.17/18/19</summary>
 
 R12.17 ~ New stable release.Yay!
 
@@ -37,6 +37,13 @@ New Features include:
 * Added new area and orientation calculations panel
 * Operation on mobile devices improved
 * Second pass at adding edit and save changes capability
+
+
+R12.18
+* ISS > Duplicate Suraces: Fixes spaces not displaying
+
+R12.19
+* REP2 > CAD Objects:Fixes issues when CAD Object ID is malformed in gbXML file
 
 </details><details>
 

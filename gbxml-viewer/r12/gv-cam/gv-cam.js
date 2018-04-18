@@ -115,7 +115,7 @@
 			butCameraFirstPerson.style.fontWeight = '';
 		}
 
-	}
+	};
 
 
 
@@ -123,14 +123,14 @@
 
 		CAM.avatar.visible = false;
 
-//		butCameraFirstPerson.style.backgroundColor = '';
+		//		butCameraFirstPerson.style.backgroundColor = '';
 
 		document.body.removeChild( CAM.ui );
 
 		GBV.setAllVisible();
 		GBV.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
-	}
+	};
 
 
 
@@ -161,7 +161,7 @@
 		CAM.avatar.visible = true;
 		THR.scene.add( CAM.avatar );
 
-	}
+	};
 
 
 
@@ -250,7 +250,7 @@
 
 	}
 
-	 goUp = () => {
+	goUp = () => {
 
 		CAM.avatar.translateZ( 0.5 );
 

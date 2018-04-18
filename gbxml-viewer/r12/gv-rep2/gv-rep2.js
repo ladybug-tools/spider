@@ -5,7 +5,7 @@
 
 
 	REP.initReport = function() {
-;
+
 		if ( window.butMenuLoad ) {
 
 			REP.butReports = butMenuLoad;
@@ -181,7 +181,7 @@
 
 		getMenuItems();
 
-	}
+	};
 
 
 
@@ -215,11 +215,11 @@
 
 		divCampusBuilding.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building ).attributes;
 
-	}
+	};
 
 
 
-	REP.traverseGbjson = function traverseGbjson( obj ) {
+	REP.traverseGbjson = function( obj ) {
 
 		const elements = [];
 		let attributes = '';
@@ -240,7 +240,8 @@
 
 		return { elements: elements, attributes: attributes };
 
-	}
+	};
+
 
 
 	// to GBV?
@@ -264,10 +265,11 @@
 
 		};
 
-	}
+	};
 
 
-	REP.showCadIdGroup = ( CADObjectGroupId ) => {
+
+	REP.showCadIdGroup = function( CADObjectGroupId ) {
 		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
 		GBX.surfaceEdges.visible = true;
@@ -280,9 +282,10 @@
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
-			if ( !child.userData.data.CADObjectId ) { continue; }
+			if ( !child.userData.data.CADObjectId || typeof child.userData.data.CADObjectId !== 'string' ) { continue; }
 
 			id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ) ;
+
 			if ( id.includes( CADObjectGroupId ) ) {
 
 				child.visible = true;
@@ -295,7 +298,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -316,7 +319,7 @@
 		REPselType.innerHTML = txt;
 		REPselType.selectedIndex = 0;
 		*/
-	}
+	};
 
 
 
@@ -324,7 +327,7 @@
 
 		REPdivSurfacesIndividually.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Surface[ REPselSurface.selectedIndex ] ).attributes;
 
-	}
+	};
 
 
 
@@ -372,7 +375,7 @@
 		REPsumSurfacesByType.innerHTML = 'Surfaces By Type &raquo; ' + types.length;
 		REPdivSurfacesByType.innerHTML = txt;
 
-	}
+	};
 
 
 
@@ -401,7 +404,7 @@
 		//GBV.showSpace( REPselSpace.value )
 		// REPdivSpaces.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
 		REP.updateSpaceAttributes();
-	}
+	};
 
 
 
@@ -439,7 +442,7 @@
 		//REPdivStoreys.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 		REP.updateStoreyAttributes();
 
-	}
+	};
 
 
 
@@ -447,7 +450,8 @@
 
 		REPdivStoreys.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 
-	}
+	};
+
 
 
 	REP.updateZones = function() {
@@ -482,7 +486,7 @@
 		//REPdivzones.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
 		REP.updateZoneAttributes();
 
-	}
+	};
 
 
 
@@ -508,7 +512,7 @@
 
 		REPdivZones.innerHTML = REP.traverseGbjson( zone ).attributes;
 
-	}
+	};
 
 
 	REP.UpdateCadIdGroups = function() {
@@ -519,9 +523,19 @@
 		let count = 0;
 		let contents = '';
 
-		for ( let surface of surfaces ) {
+		for ( surface of surfaces ) {
 
-			if ( !surface.CADObjectId ) { continue; }
+			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
+
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				divLog.style.height = '500px';
+				divLog.style.overflow = 'auto';
+
+				console.log( 'surface', surface );
+				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
+				continue;
+
+			}
 
 			id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
 
@@ -550,7 +564,7 @@
 		REPsumCadIdGroups.innerHTML = 'CAD Object Groups &raquo; ' + cadIds.length;
 		//REPdivCadIdGroups.innerHTML = contents;
 
-	}
+	};
 
 
 
@@ -588,7 +602,7 @@
 
 		REPsumCadIds.innerHTML = 'CAD Object IDs &raquo; ' + REPselCadId.length;
 
-	}
+	};
 
 
 
@@ -614,7 +628,7 @@
 
 
 
-	REP.getGoogleMap = () => {
+	REP.getGoogleMap = function() {
 
 		const locate = GBX.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
 		let linkToMap;
@@ -635,7 +649,7 @@
 
 		return '<span title="Use context menu to open a Google Map in a new tab" >' + linkToMap + '<span>';
 
-	}
+	};
 
 
 

@@ -754,7 +754,7 @@
 
 		SET.localClip2.constant = - origin + - parseInt( inpClip2.value, 10 );
 		console.log( '', SET.localClip2.constant );
-	}
+	};
 
 
 
