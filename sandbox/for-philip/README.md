@@ -54,7 +54,9 @@ Entry level ray-casting with Three.js
 
 ## Wish list
 
-
+* 12 * 14 Suns
+* Add gbXML file
+* Export to file ??
 
 ## Issues
 

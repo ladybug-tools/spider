@@ -408,8 +408,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ) ;
 
 			if ( id.includes( CADObjectGroupId ) ) {
-				if ( id === CADObjectGroupId ) { console.log( 'equal id\n', id, '\n', CADObjectGroupId ); }
-				console.log( 'equal id\n', id, '\n', CADObjectGroupId );
+
 				child.visible = true;
 
 			} else {
@@ -761,26 +760,20 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 	GBI.setIdAttributes = function ( id, item ) {
-		//console.log( 'item', item, 'id', id );
+		console.log( 'item', item, 'id', id );
 
 		//let item = REP.reportTypes[ REPselReport.selectedIndex ];
 		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
 		obj = arr.find( element => element.id === id );
 		//console.log( 'obj', obj );
 
-		/*
 		let attributes =
 		`<div>` +
 				( REPselReportType.selectedIndex + 1 ) +
 			`. ` +
 			id +
 		`</div>`;
-		*/
 
-		let attributes =
-		`<div>` +
-			id +
-		`</div>`;
 
 		for ( let property in obj ) {
 
@@ -868,9 +861,10 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 
-	GBI.setGbjsonAttributes = function( obj, target, title ) {
-		//console.log( 'obj', obj );
+	GBI.setGbjsonAttributes = function( id, target) {
 		//console.log( 'target', target );
+
+		obj = GBP.surfaceJson.find( element => element.id === id );
 
 		let attributes = '';
 
@@ -878,9 +872,31 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
-				//console.log( 'property', obj );
+				if ( property === 'AdjacentSpaceId' ) {
+
+					//console.log( 'property', obj[ property ].length );
+
+					if ( Array.isArray( obj[ property ] ) ) {
+
+						//attributes += '<div>' + property + ': <i>' + obj[ property ][ 0 ].spaceIdRef + '</i></div>';
+						//attributes += '<div>' + property + ': <i>' + obj[ property ][ 1 ].spaceIdRef + '</i></div>';
+						attributes += '<div><span class=attributeTitle >' + property + ':</span> ' +
+						'<span class=attributeValue >' + obj[ property ][ 0 ] + '</span></div>';
+						attributes += '<div><span class=attributeTitle >' + property + ':</span> ' +
+						'<span class=attributeValue >' + obj[ property ][ 1 ] + '</span></div>';
+
+					} else {
+
+						//attributes += '<div>' + property + ': <i>' + obj[ property ].spaceIdRef + '</i></div>';
+						attributes += '<div><span class=attributeTitle >' + property + ':</span> ' +
+						'<span class=attributeValue >' + obj[ property ] + '</span></div>';
+					}
+
+				}
 
 			} else {
+
+				//attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
 
 				attributes += '<div><span class=attributeTitle >' + property + ':</span> ' +
 				'<span class=attributeValue >' + obj[ property ] + '</span></div>';
@@ -891,13 +907,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		};
 		//console.log( 'attributes', attributes );
 
-		target.innerHTML =
-
-		`<details >
-			<summary>` + title + `</summary>` +
-			attributes +
-			`<hr>
-		</details>`;
+		target.innerHTML = attributes;
 
 	};
 
@@ -939,7 +949,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	};
 
 
-
 	GBI.getAttributeOpenings = function( id ) {
 
 		const txt =
@@ -955,8 +964,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		return txt;
 
 	};
-
-
 
 	GBI.getAttributeSurfaceId = function( id ) {
 
@@ -988,8 +995,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		return txt;
 
 	};
-
-
 
 	GBI.getAttributeZone = function( zoneId ) {
 
@@ -1025,6 +1030,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		return txt;
 
 	};
+
+
 
 
 

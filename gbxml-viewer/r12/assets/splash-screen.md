@@ -23,7 +23,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open >
 
-<summary>Welcome 2018-04-17  ~ R12.17/18/19</summary>
+<summary>Welcome 2018-04-17  ~ R12.17-22</summary>
 
 R12.17 ~ New stable release.Yay!
 
@@ -38,12 +38,18 @@ New Features include:
 * Operation on mobile devices improved
 * Second pass at adding edit and save changes capability
 
+Ongoing minor fixes
 
 R12.18
 * ISS > Duplicate Suraces: Fixes spaces not displaying
 
 R12.19
 * REP2 > CAD Objects:Fixes issues when CAD Object ID is malformed in gbXML file
+
+R12.20/21/22
+* Add ISS > Surface TtType Invalid
+* Add ISS > Opening Type Invalid
+* Add and later fix ISS > Adjacent Space Invalid
 
 </details><details>
 

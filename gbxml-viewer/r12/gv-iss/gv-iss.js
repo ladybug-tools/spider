@@ -130,8 +130,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						<summary id = "ISSsumSurfacesVertexClose" >Surfaces Close Vertex</summary>
 
 						<div >Surfaces that have close vertices. Use telltales in right menu to identify the vertices.</div>
+
 						Test distance <output id=ISSoutMinDistance >0.2</output>
 						<input id=ISSinpMinDistance type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinDistance.value=this.value*0.01;ISS.getSurfacesVertexClose(); >
+
 						<div class=flex-container2 >
 							<div class=flex-div1 >
 								<input oninput=ISS.updateSelect(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
@@ -140,8 +142,10 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 								onchange=GBV.showSurface(this.value);ISS.updateSurfaceVertexCloseAttributes(); size=10 ></select><br>
 								<button onclick=GBV.zoomIntoSurface(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
 							</div>
+
 							<div id = "ISSdivSurfacesVertexCloseAttributes" class=flex-left-div2 ></div>
 						</div>
+
 
 						<div id=ISSdivSurfacesVertexClose ></div>
 
@@ -559,7 +563,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.adjacentSpaceInvalid = [];
 
-		twoSpaces = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'UndergroundSlab', 'UndergroundWall' ]
+		twoSpaces = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'UndergroundCeiling' ]
 		for ( let i = 0; i < GBX.surfaceJson.length; i++ ) {
 
 			surface = GBX.surfaceJson[ i ];

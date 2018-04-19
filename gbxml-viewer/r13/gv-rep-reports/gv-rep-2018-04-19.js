@@ -27,7 +27,9 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		if ( REP.butMenuReports.style.fontStyle !== 'italic' ) {
 
-			REP.setMenuItems( divMenuItems );
+			divMenuItems.innerHTML = REP.getMenuItems();
+
+			REP.setMenuItems();
 
 			REP.butMenuReports.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
@@ -59,10 +61,9 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 
 
-	REP.setMenuItems = function( target ) {
+	REP.getMenuItems = function(){
 
-		target.innerHTML  =
-
+		let txt =
 		`<details id = "detReports" class = "app-menu" open >
 
 			<summary>Reports</summary>
@@ -70,7 +71,6 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 			<div id=REPdivMenuPanelPrelims ></div>
 
 			<div id=REPdivMenuPanelSelectReport ></div>
-
 
 			<div id=REPdivMenuPanelSurfacesByType ></div>
 
@@ -80,13 +80,30 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 			<hr>
 
-			<div id=REPdivGbxmlAttributes ></div>
+			<!-- could move to GBI -->
 
-			<div id=REPdivCampus ></div>
+			<details >
+				<summary>gbXML Attributes</summary>
+				<div id=REPdivGbxmlAttributes ></div>
+				<hr>
+			</details>
 
-			<div id=REPdivCampusLocation ></div>
+			<details >
+				<summary>Campus</summary>
+				<div id=REPdivCampus ></div>
+				<hr>
+			</details>
 
-			<div id=REPdivCampusBuilding ></div>
+			<details >
+				<summary id=REPsumCampusLocation >Campus Location</summary>
+				<div id=REPdivCampusLocation ></div>
+				<hr>
+			</details>
+
+			<details >
+				<summary>Building</summary>
+				<div id=REPdivCampusBuilding ></div>
+			</details>
 
 			<p>
 				<small><i>Want reports on more gbXML elements? <br><a href="https://github.com/ladybug-tools/spider/issues" >Just shout</a> and they will appear.</i></small>
@@ -96,20 +113,38 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		</details>`;
 
+		return txt;
 
-		REP.reportTypes = [];
+	};
 
+
+
+	REP.setMenuItems = function() {
+
+		REP.reportTypes = [];  // better name
+
+		//REPdivMenuPanelPrelims.innerHTML = REP.getPanelVisibilityToggle();
+
+		//REPdivMenuPanelPrelims.innerHTML = GBI.getPanelShowHide();
 		GBI.setPanelShowHide( REPdivMenuPanelPrelims );
 
-		REP.getPanelSelectReport( REPdivMenuPanelSelectReport );
+		REPdivMenuPanelSelectReport.innerHTML = REP.getPanelSelectReport();
+		//console.log( 'REPselReport', REPselReport );
 
-		REP.setPanelSelectOptions( REPselReport, GBP.gbjson.Campus.Surface, 'Surface' );
+		let txt = REP.getPanelSelectOptions( GBP.gbjson.Campus.Surface, 'Surface' );
 
-		REP.setPanelSelectOptions( REPselReport, GBP.gbjson.Campus.Building.BuildingStorey, 'Storey' );
+		txt += REP.getPanelSelectOptions( GBP.gbjson.Campus.Building.Space, 'Space' );
+		//REP.getMenu( GBP.gbjson.Campus.Building.Space, 'Space' );
 
-		REP.setPanelSelectOptions( REPselReport, GBP.gbjson.Zone, 'Zone' );
+		txt += REP.getPanelSelectOptions( GBP.gbjson.Campus.Building.BuildingStorey, 'Storey' );
+		//REP.getMenu( GBP.gbjson.Campus.Building.BuildingStorey, 'Storey' );
 
-		REP.setPanelSelectOptionsOpenings( REPselReport );
+		txt += REP.getPanelSelectOptions( GBP.gbjson.Zone, 'Zone' );
+		//REP.getMenu( [ GBP.gbjson.Zone ], 'Zone' );
+
+		txt += REP.getPanelSelectOptionsOpenings();
+
+		REPselReport.innerHTML = txt;
 
 		///
 
@@ -121,15 +156,16 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		///
 
-		GBI.setGbjsonAttributes( GBP.gbjson, REPdivGbxmlAttributes, 'gbXML' );
+		GBI.setGbjsonAttributes( GBP.gbjson, REPdivGbxmlAttributes );
 
-		GBI.setGbjsonAttributes( GBP.gbjson.Campus, REPdivCampus, 'Campus' );
+		GBI.setGbjsonAttributes( GBP.gbjson.Campus, REPdivCampus );
 
-		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Location, REPdivCampusLocation, 'Campus Location' );
+		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Location, REPdivCampusLocation);
 
 		const mapLink = REP.getGoogleMap();
+		REPsumCampusLocation.innerHTML += mapLink;
 
-		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Building, REPdivCampusBuilding, 'Building ' + mapLink );
+		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Building, REPdivCampusBuilding );
 
 	};
 
@@ -137,13 +173,13 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 	// init Select Report details panel
 
-	REP.getPanelSelectReport = function( reports ) {
+	REP.getPanelSelectReport = function() {
 
-		reports.innerHTML =
+		const reports =
 
 		`<details open >
 
-				<summary>Select Report by Item</summary>
+				<summary>Select Report</summary>
 
 				<div>
 					<select id=REPselReport onclick=REP.setPanelReportResults(); onchange=REP.setPanelReportResults(); size=10 ></select>
@@ -157,13 +193,16 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		<hr>`;
 
+		return reports;
+
 	};
 
 
 
-	REP.setPanelSelectOptions = function( target, parent, element ) {
+	REP.getPanelSelectOptions = function( parent, element ) {
 
 		const obj = Array.isArray( parent ) ? parent[ 0 ] : parent;
+		// what about others in array?
 
 		let options = '';
 
@@ -191,13 +230,13 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		}
 
-		target.innerHTML += options;
+		return options;
 
 	};
 
 
 
-	REP.setPanelSelectOptionsOpenings = function( target ) {
+	REP.getPanelSelectOptionsOpenings = function() {
 
 		REP.SurfacesWithOpenings = GBP.surfaceJson.filter( surface => surface.Opening );
 		//console.log( 'REP.SurfacesWithOpenings', REP.SurfacesWithOpenings );
@@ -219,7 +258,7 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 		}
 		//console.log( 'REP.openings', REP.openings );
 
-		REP.setPanelSelectOptions( target, REP.openings, 'Openings' );
+		return REP.getPanelSelectOptions( REP.openings, 'Openings' );
 
 	};
 
@@ -254,8 +293,12 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		GBI.setElementPanel2( item );
 
+		//console.log( 'REPselReportType', REPselReportType );
+
 		REPselReportType.selectedIndex = 0;
 		REPselReportType.click();
+
+		//REP.setPanelInteractions();
 
 	};
 
@@ -391,7 +434,7 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 			}
 
-			const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' );
+			const id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
 
 			if ( !cadIds.includes( id ) ) {
 
@@ -401,7 +444,6 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		}
 
-		console.log( 'cadIds', cadIds );
 		cadIds.sort();
 
 		let txt = '';
@@ -431,6 +473,55 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 	};
 
+
+
+	/////
+
+	REP.setPanelInteractions = function() {
+
+		const item = REP.reportTypes[ REPselReport.selectedIndex ];
+		//console.log( 'item', item );
+
+		if ( item.element === 'Surface' ) {
+
+			REPdivInteract.innerHTML =
+			`
+				<button onclick=GBI.setSurfaceVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+				<button onclick=GBI.setSurfaceZoom(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >zoom</button>
+			`;
+
+		} else if ( item.element === 'Space' ) {
+
+			REPdivInteract.innerHTML =
+			`
+				<button onclick=GBI.setSpaceVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+				`;
+
+		//				<button onclick=GBI.setSurfaceZoom(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme">zoom</button>
+		} else if ( item.element === 'Storey' ) {
+
+			REPdivInteract.innerHTML =
+			`
+				<button onclick=GBI.setStoreyVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+			`;
+
+		}else if ( item.element === 'Zone' ) {
+
+			REPdivInteract.innerHTML =
+			`
+				<button onclick=GBI.setZoneVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+			`;
+
+		} else if ( item.element === 'Openings' ) {
+
+			REPdivInteract.innerHTML =
+			`
+				<button onclick=GBI.setOpeningVisible(REPselReportType.value); class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" >select</button>
+			`;
+
+		}
+
+	};
 
 
 	REP.getGoogleMap = function() {

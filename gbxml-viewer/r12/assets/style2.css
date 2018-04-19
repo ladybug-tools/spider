@@ -64,7 +64,7 @@
 	}
 
 	#divMenuLeft {
-		border-radius: 2px; box-sizing: border-box; left: 2rem; margin: 0; max-height: 98%; overflow: auto; position: fixed;
+		border-radius: 2px; box-sizing: border-box; left: 2rem; margin: 0; max-height: 98%; overflow: auto; padding: 0 10px; position: fixed;
 		top: 10px; resize: both; width: var( --mnu-left-width ); transition: .5s;  z-index: 1; }
 	#divMenuLeft {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -73,7 +73,10 @@
 	#divMenuLeft a { text-decoration: none; }
 	#divMenuLeft h2 { margin: 5px 0; }
 
+	/*
 	#divMenuLeft div { padding: 0 10px 0 10px; }
+	*/
+
 	#pMenuLeftHeader { cursor: move; margin: 0; padding: 10px; }
 	#divMenuLeftContents { padding: 10px; }
 
