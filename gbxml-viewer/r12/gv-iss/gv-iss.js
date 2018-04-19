@@ -537,17 +537,17 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<summary id = "ISSsumSurfaceTypeInvalid" >Surface Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
 
-			<div >Surfaces with undefined ID</div>
+			<div >Surfaces with invalid ID</div>
 
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
-					<select id = "ISSselSurfaceUndefined"
+					<input oninput=ISS.updateSelect(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceTypeInvalid"
 						onclick=GBV.showSurface(this.value);ISS.updateSurfaceTypeInvalid();
 						onchange=GBV.showSurface(this.value);ISS.updateSurfaceTypeInvalid(); size=10 >` +
 						options + `
 						</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
+					<button onclick=GBV.zoomIntoSurface(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
 					</div>
 				<div id = "ISSdivSurfaceTypeInvalid" class=flex-left-div2 ></div>
 			</div>
@@ -556,64 +556,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		</details>`;
 
-	};
-
-
-	ISS.setPanelAdjacentSpaceInvalid = function( target ) {
-
-		ISS.adjacentSpaceInvalid = [];
-
-		twoSpaces = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'UndergroundCeiling' ]
-		for ( let i = 0; i < GBX.surfaceJson.length; i++ ) {
-
-			surface = GBX.surfaceJson[ i ];
-
-			if ( surface.surfaceType === 'Shade' && surface.AdjacentSpaceId !== undefined ) {
-				console.log( 'shade surface', surface );
-				ISS.adjacentSpaceInvalid.push( surface );
-
-			} else if ( twoSpaces.includes( surface.surfaceType ) && surface.AdjacentSpaceId.length !== 2 ) {
-
-				console.log( 'surface', surface );
-				ISS.adjacentSpaceInvalid.push( surface );
-
-			} else if ( surface.surfaceType !== 'Shade' && !surface.AdjacentSpaceId ) {
-
-				console.log( 'surface', surface );
-				//ISS.adjacentSpaceInvalid.push( surface );
-
-			}
-
-		}
-
-		let options = '';
-		ISS.adjacentSpaceInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		options = options ? options : '<option>none found</option>';
-
-		target.innerHTML =
-		`<details>
-
-			<summary id = "ISSsumAdjacentSpaceInvalid" >Adjacent Space Invalid &raquo; ` + ISS.adjacentSpaceInvalid.length + ` found</summary>
-
-			<div >Surfaces with undefined ID</div>
-
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
-					<select id = "ISSselSurfaceUndefined"
-						onclick=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid();
-						onchange=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid(); size=10 >` +
-						options + `
-						</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button>
-					</div>
-				<div id = "ISSdivAdjacentSpaceInvalid" class=flex-left-div2 ></div>
-			</div>
-
-			<hr>
-
-		</details>`;
-		console.log( '',target );
 	};
 
 
@@ -655,20 +597,88 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselOpeningUndefined); size=6 placeholder="opening id" ><br>
-					<select id = "ISSselOpeningUndefined"
+					<input oninput=ISS.updateSelect(this,ISSselOpeningUndefined); size=6 placeholder="opening id" ><br>
+					<select id = "ISSselOpeningTypeInvalid"
 						onclick=GBV.showSurface(this.value);ISS.updateOpeningTypeInvalid(this.value);
 						onchange=GBV.showSurface(this.value);ISS.updateOpeningTypeInvalid(this.value); size=10 >` +
 						options + `
 						</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this opening" >zoom</button>
-					</div>
+					<button onclick=GBV.zoomIntoSurface(ISSselOpeningTypeInvalid.value); title="zoom into just this opening" >zoom</button>
+				</div>
 				<div id = "ISSdivOpeningTypeInvalid" class=flex-left-div2 ></div>
 			</div>
 
 			<hr>
 
 		</details>`;
+
+	};
+
+
+
+	ISS.setPanelAdjacentSpaceInvalid = function( target ) {
+
+		ISS.adjacentSpaceInvalid = [];
+
+		twoSpaces = ['Air', 'InteriorWall', 'InteriorFloor', 'Ceiling' ];
+		oneSpace = [ 'ExteriorWall', 'Roof', 'ExposedFloor', 'UndergroundCeiling', 'UndergroundWall', 'UndergroundSlab',
+			'RaisedFloor', 'SlabOnGrade', 'FreestandingColumn', 'EmbeddedColumn' ];
+
+		for ( let i = 0; i < GBX.surfaceJson.length; i++ ) {
+
+			surface = GBX.surfaceJson[ i ];
+
+			if ( surface.surfaceType === 'Shade' && surface.AdjacentSpaceId !== undefined ) {
+				//console.log( 'shade surface', surface );
+				ISS.adjacentSpaceInvalid.push( surface );
+
+			} else if ( twoSpaces.includes( surface.surfaceType ) && surface.AdjacentSpaceId.length !== 2 ) {
+
+				//console.log( 'two space', surface );
+				ISS.adjacentSpaceInvalid.push( surface );
+
+			}else if ( oneSpace.includes( surface.surfaceType ) && !surface.AdjacentSpaceId ) {
+
+				//console.log( 'one space', surface );
+				ISS.adjacentSpaceInvalid.push( surface );
+
+			} else {
+
+				//console.log( 'ok surface', surface );
+				//ISS.adjacentSpaceInvalid.push( surface );
+
+			}
+
+		}
+
+		let options = '';
+		ISS.adjacentSpaceInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
+
+		target.innerHTML =
+		`<details>
+
+			<summary id = "ISSsumAdjacentSpaceInvalid" >Adjacent Space Invalid &raquo; ` + ISS.adjacentSpaceInvalid.length + ` found</summary>
+
+			<div >Surfaces with Invalid Adjacent Spaces </div>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=ISS.updateSelect(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselAdjacentSpaceInvalid"
+						onclick=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid(this.value);
+						onchange=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid(this.value); size=10 >` +
+						options + `
+						</select><br>
+					<button onclick=GBV.zoomIntoSurface(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button>
+				</div>
+				<div id = "ISSdivAdjacentSpaceInvalid" class=flex-left-div2 ></div>
+			</div>
+
+			<hr>
+
+		</details>`;
+		//console.log( 'target',target );
 
 	};
 
@@ -727,8 +737,9 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 	ISS.updateAdjacentSpaceInvalid = function( id ) {
-
+		console.log( 'id', id );
 		surface = ISS.adjacentSpaceInvalid.find( item => item.id === id );
+		console.log( 'surface', surface );
 
 		ISSdivAdjacentSpaceInvalid.innerHTML = ISS.traverseGbjson( surface ).attributes;
 
@@ -869,15 +880,17 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		for ( let property in obj ) {
 
-			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
+//			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
-				if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
+				//if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
 
-			} else {
+				elements.push( property );
+
+//			} else {
 
 				attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
 
-			}
+//			}
 
 		};
 

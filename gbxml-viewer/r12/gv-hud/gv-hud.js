@@ -317,7 +317,7 @@
 								+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
 									encodeURI( data.CADObjectId ) + `"); title="Show all surfaces in this CAD object" >` + data.CADObjectId + `</button><br>` : `` ) +
 									`<input oninput=HUD.updateSelect(this,selCadId); placeholder="cad id">
-									<select id=selCadId onchange=HUD.updateCadId(this);>` + GBX.surfacesCadObj +`</select><br>` +
+									<select id=selCadId onchange=HUD.updateCadId(this); onclick=HUD.updateCadId(this);>` + GBX.surfacesCadObj +`</select><br>` +
 									`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
 									` ln <i title="length" >` + height.toFixed( 3 ) + `</i> wd <i title="width" >` + width.toFixed( 3 ) + `</i>` +
 							`<div>

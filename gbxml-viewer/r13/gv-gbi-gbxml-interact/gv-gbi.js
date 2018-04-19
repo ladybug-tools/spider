@@ -408,8 +408,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ) ;
 
 			if ( id.includes( CADObjectGroupId ) ) {
-				if ( id === CADObjectGroupId ) { console.log( 'equal id\n', id, '\n', CADObjectGroupId ); }
-				console.log( 'equal id\n', id, '\n', CADObjectGroupId );
+				if ( id !== CADObjectGroupId ) { console.log( 'equal id\n', id, '\n', CADObjectGroupId ); }
+				//console.log( 'id\n', id, '\n', CADObjectGroupId );
 				child.visible = true;
 
 			} else {
