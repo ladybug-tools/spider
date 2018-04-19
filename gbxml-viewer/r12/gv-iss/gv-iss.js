@@ -151,6 +151,9 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<div id=ISSdetPanelOpeningTypeInvalid ></div>
 
+					<div id=ISSdetPanelAdjacentSpaceInvalid ></div>
+
+
 					<!--
 
 					<details>
@@ -216,6 +219,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			ISS.setPanelOpeningTypeInvalid( ISSdetPanelOpeningTypeInvalid );
 
+			ISS.setPanelAdjacentSpaceInvalid( ISSdetPanelAdjacentSpaceInvalid );
 
 			//ISS.getSurfacesInside(); // not found to be useful yet
 
@@ -544,13 +548,70 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				<div id = "ISSdivSurfaceTypeInvalid" class=flex-left-div2 ></div>
 			</div>
 
-			<div id=ISSdivSurfaceTypeInvalid ></div>
-
 			<hr>
 
 		</details>`;
 
 	};
+
+
+	ISS.setPanelAdjacentSpaceInvalid = function( target ) {
+
+		ISS.adjacentSpaceInvalid = [];
+
+		twoSpaces = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'UndergroundSlab', 'UndergroundWall' ]
+		for ( let i = 0; i < GBX.surfaceJson.length; i++ ) {
+
+			surface = GBX.surfaceJson[ i ];
+
+			if ( surface.surfaceType === 'Shade' && surface.AdjacentSpaceId !== undefined ) {
+				console.log( 'shade surface', surface );
+				ISS.adjacentSpaceInvalid.push( surface );
+
+			} else if ( twoSpaces.includes( surface.surfaceType ) && surface.AdjacentSpaceId.length !== 2 ) {
+
+				console.log( 'surface', surface );
+				ISS.adjacentSpaceInvalid.push( surface );
+
+			} else if ( surface.surfaceType !== 'Shade' && !surface.AdjacentSpaceId ) {
+
+				console.log( 'surface', surface );
+				//ISS.adjacentSpaceInvalid.push( surface );
+
+			}
+
+		}
+
+		let options = '';
+		ISS.adjacentSpaceInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
+
+		target.innerHTML =
+		`<details>
+
+			<summary id = "ISSsumAdjacentSpaceInvalid" >Adjacent Space Invalid &raquo; ` + ISS.adjacentSpaceInvalid.length + ` found</summary>
+
+			<div >Surfaces with undefined ID</div>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselSurfaceUndefined"
+						onclick=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid();
+						onchange=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid(); size=10 >` +
+						options + `
+						</select><br>
+					<button onclick=GBI.setSurfaceZoom(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button>
+					</div>
+				<div id = "ISSdivAdjacentSpaceInvalid" class=flex-left-div2 ></div>
+			</div>
+
+			<hr>
+
+		</details>`;
+		console.log( '',target );
+	};
+
 
 
 	ISS.setPanelOpeningTypeInvalid = function( target ) {
@@ -559,9 +620,9 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.openings = [];
 
-		for ( var i = 0; i < GBX.surfaceJson.length; i++ ) {
+		for ( let i = 0; i < GBX.surfaceJson.length; i++ ) {
 
-			element = GBX.surfaceJson[ i ];
+			const element = GBX.surfaceJson[ i ];
 
 			if ( element.Opening ) {
 
@@ -575,11 +636,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.openingTypeInvalid = ISS.openings.filter( opening => !openingTypes.includes( opening.openingType ) );
 
-		console.log( 'ISS.openingTypeInvalid', ISS.openingTypeInvalid );
-
-		//ISS.openingTypeInvalid = GBX.openingJson.filter( element => element.Opening &&
-		//	( openingTypes.indexOf( element.Opening.openingType ) || openingTypes.indexOf( element.Opening.openingType[ 0 ] )< 0 ) );
-
+		//console.log( 'ISS.openingTypeInvalid', ISS.openingTypeInvalid );
 
 		let options = '';
 		ISS.openingTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
@@ -610,6 +667,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		</details>`;
 
 	};
+
+
 
 	/////////
 
@@ -655,13 +714,19 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.updateOpeningTypeInvalid = function( id ) {
 
-
 		opening = ISS.openingTypeInvalid.find( item => item.id === id );
-console.log( 'opening', ISS.traverseGbjson( opening ) );
+
 		ISSdivOpeningTypeInvalid.innerHTML = ISS.traverseGbjson( opening ).attributes;
 
+	}
 
 
+
+	ISS.updateAdjacentSpaceInvalid = function( id ) {
+
+		surface = ISS.adjacentSpaceInvalid.find( item => item.id === id );
+
+		ISSdivAdjacentSpaceInvalid.innerHTML = ISS.traverseGbjson( surface ).attributes;
 
 	}
 
