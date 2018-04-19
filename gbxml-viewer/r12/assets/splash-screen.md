@@ -3,9 +3,7 @@
 
 # Spider gbXML Viewer R12
 
-[gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
-
-<span style=color:magenta>Click or touch the 3D model to get going!</span>
+[gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. <span style=color:magenta>Click or touch the 3D model to get going!</span>
 
 Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
 
@@ -23,11 +21,9 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open >
 
-<summary>Welcome 2018-04-17  ~ R12.17-22</summary>
+<summary>New stable release.Yay! New Features include:</summary>
 
-R12.17 ~ New stable release.Yay!
 
-New Features include:
 * Faster, more bullet-resistent code
 * Choice of user interface colors
 * Many workflow simplifications
@@ -38,7 +34,18 @@ New Features include:
 * Operation on mobile devices improved
 * Second pass at adding edit and save changes capability
 
-Ongoing minor fixes
+<details open>
+
+<summary>Welcome 2018-04-19 ~ R12.23</summary>
+
+R12.33
+* HUD > Ass input tag above select CAD Object ID
+
+R12.20/21/22
+* Add ISS > Surface TtType Invalid
+* Add ISS > Opening Type Invalid
+* Add and later fix ISS > Adjacent Space Invalid
+
 
 R12.18
 * ISS > Duplicate Suraces: Fixes spaces not displaying
@@ -46,10 +53,6 @@ R12.18
 R12.19
 * REP2 > CAD Objects:Fixes issues when CAD Object ID is malformed in gbXML file
 
-R12.20/21/22
-* Add ISS > Surface TtType Invalid
-* Add ISS > Opening Type Invalid
-* Add and later fix ISS > Adjacent Space Invalid
 
 </details><details>
 
