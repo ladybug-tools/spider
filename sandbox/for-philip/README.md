@@ -44,6 +44,14 @@ Entry level ray-casting with Three.js
 
 * Adds draw 14 sets of area in shadow for each Sun.
 
+## [ground and boxes 6]( http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-6.html )
+
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-6.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+
+* Adds increments vertex Z-axis when the vertex is in shadow for every Sun
+
+
+
 ## Wish list
 
 
@@ -58,11 +66,14 @@ Entry level ray-casting with Three.js
 
 ## Change Log
 
-###
+### 2018-04-18 ~ Theo
+
+* ground and boxes 4/5
 
 ### 2018-04-17 ~ Theo
 
 * First commit
+* ground and boxes 1/2/3
 
 ***
 
