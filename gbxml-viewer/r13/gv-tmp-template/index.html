@@ -27,12 +27,12 @@
 
 	} else if ( protocol.includes( 'http' ) ) {
 
-		path = pathname.slice( 10, pathname.lastIndexOf( '/' )  );
+		path = pathname.slice( 1, pathname.lastIndexOf( '/' )  );
 		console.log( 'path', path );
 
 	}
 
-	const pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
+	const pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ).slice( 3 ) + '/index.html#' + path + '/README.md';
 	console.log( 'pathFull', pathFull );
 
 	window.location.href = pathFull;
