@@ -13,7 +13,7 @@
 	const pathname = location.pathname;
 	console.log( 'pathname', pathname);
 
-	let path;
+	let path, path2, pathFull;
 
 	const repo = 'spider';
 
@@ -25,13 +25,19 @@
 		path = pathname.slice( sliceStart, pathname.lastIndexOf( '/' )  );
 		//console.log( 'path', path );
 
+		pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ).slice( 3 ) + '/index.html#' + path2 + '/README.md';
+
 	} else if ( protocol.includes( 'http' ) ) {
 
-		path = pathname.slice( 1, pathname.lastIndexOf( '/' ) );
+		path = pathname.slice( 8, pathname.lastIndexOf( '/' )  ).replace( /-/g, '' ).replace( /\w+/g, '..' )
+		console.log( 'path', path );
+		path2 = pathname.slice( 4, pathname.lastIndexOf( '/' )  );
+		console.log( 'path2', path2 );
+		pathFull = path + '/index.html#' + path2 + '/README.md';
 
 	}
 
-	const pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path + '/README.md';
+
 	console.log( 'pathFull', pathFull );
 
 	window.location.href = pathFull;

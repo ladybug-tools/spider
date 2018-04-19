@@ -47,9 +47,11 @@ The 'reset view' button in the in-world ( center of screen) menu may not always 
 
 ## To Do / Wish List Items
 
+* 2018-04-19 ~ MD ~ HUD ~ Add Flip surface to fix normals issue.
+* 2018-04-19 ~ MD ~ Settings ~ Toggle Normals, Exposure View ... introduce two colors on both side of surface. It will be grey on opposite side to normal and green as we have now on side facing normals to allow easy identification.
 * 2018-04-17 ~ MD ~ Issue ~ Allow multiple selection or all delete of duplicate surfaces.
 * 2018-04-17 ~ MD ~ Report ~ Add Report to display to show internal surfaces that have only one adjacency.  They must have two.
-* 2018-04-17 ~ MD ~ Report ~ Add Report to display ovelrapping surfaces with not the same shape or partialy overlap.
+* 2018-04-17 ~ MD ~ Report ~ Add Report to display overlapping surfaces with not the same shape or partially overlap.
 * 2018-04-02 ~ MD/Theo HUD / Heads-Up Display ~ Select from CAD Object types not from entire list
 * 2018-04-02 ~ MD/Theo ~ Add volume calculations
 * 2018-04-02 ~ MD/Theo ~ Delete selected coordinates in surfaces and openings and save edits
