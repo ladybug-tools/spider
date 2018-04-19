@@ -29,11 +29,11 @@
 		
 	} else if ( protocol.includes( 'http' ) ) {
 
-		path = pathname.slice( 8, pathname.lastIndexOf( '/' )  );
+		path = pathname.slice( 8, pathname.lastIndexOf( '/' )  ).replace( /-/g, '' ).replace( /\w+/g, '..' ) 
 		console.log( 'path', path );
-		path2 = pathname.slice( 12, pathname.lastIndexOf( '/' )  );
+		path2 = pathname.slice( 8, pathname.lastIndexOf( '/' )  );
 		console.log( 'path2', path2 );
-		pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path2 + '/README.md';
+		pathFull = path + '/index.html#' + path2 + '/README.md';
 
 	}
 
