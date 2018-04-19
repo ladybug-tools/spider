@@ -13,7 +13,7 @@
 	const pathname = location.pathname;
 	console.log( 'pathname', pathname);
 
-	let path;
+	let path, path2, pathFull;
 
 	const repo = 'spider';
 
@@ -25,7 +25,7 @@
 		path = pathname.slice( sliceStart, pathname.lastIndexOf( '/' )  );
 		//console.log( 'path', path );
 
-		const pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ).slice( 3 ) + '/index.html#' + path2 + '/README.md';
+		pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ).slice( 3 ) + '/index.html#' + path2 + '/README.md';
 		
 	} else if ( protocol.includes( 'http' ) ) {
 
@@ -33,7 +33,7 @@
 		console.log( 'path', path );
 		path2 = pathname.slice( 12, pathname.lastIndexOf( '/' )  );
 		console.log( 'path2', path2 );
-		const pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path2 + '/README.md';
+		pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ) + '/index.html#' + path2 + '/README.md';
 
 	}
 
