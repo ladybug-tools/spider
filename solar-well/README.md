@@ -1,4 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/solar-well/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( #solar-well/README.md "View file as a web page." ) </span>
 
 # [Solar-Well Read Me]( #solar-well/README.md )
 
@@ -12,11 +12,16 @@ _First project here. Use the left menu to explore more and better(?) scripts_
 
 ## Concept
 
+Inexperienced designers are bewildered by the complexities of creating Solar visualizations. The productivity of professionals is bogged down by the technical machinations of running the tools.
+
+Solar visualizations that run in your browser and may be operated by newbs and pushed to the limits by the pros could be enlightening.
+
 
 
 ## Wish list
 
-
+* People help us come up with a mission and vision
+* Display Radiance calculation results in your browser
 
 ## Issues
 
