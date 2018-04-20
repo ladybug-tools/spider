@@ -61,8 +61,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	}();
 
-
-
 	function initMenuGbxmlView() {
 
 		surfaceCoordinateDuplicates = [];
@@ -102,8 +100,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	}
 
-
-
 	function getMenuItems() {
 
 		let txt = '';
@@ -126,8 +122,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		selSpace.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
 
 	}
-
-
 
 	GBI.toggleDuplicates = function( button, surfaceArray ) {
 
@@ -222,9 +216,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		//console.log( 'GBI.floorSlabs', GBI.floorSlabs);
 
 	}
-
 */
-
 
 
 	////////// Show/Hide by Individual Elements
@@ -389,10 +381,12 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	};
 
 
-
 	GBI.setCadObjectTypeVisible = ( CADObjectGroupId ) => {
+		// used by REP
+
 		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
+		const cadId = CADObjectGroupId.trim()
 		GBP.surfaceEdges.visible = true;
 
 		for ( let child of GBP.surfaceMeshes.children ) {
@@ -405,10 +399,10 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 			if ( !child.userData.data.CADObjectId || typeof child.userData.data.CADObjectId !== 'string' ) { continue; }
 
-			id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ) ;
+			id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ).trim() ;
 
-			if ( id.includes( CADObjectGroupId ) ) {
-				if ( id !== CADObjectGroupId ) { console.log( 'equal id\n', id, '\n', CADObjectGroupId ); }
+			if ( id === cadId ) {
+				//console.log( 'equal id\n', id.length, '\n', CADObjectGroupId.length );
 				//console.log( 'id\n', id, '\n', CADObjectGroupId );
 				child.visible = true;
 
@@ -648,6 +642,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	////////// Set Menu Panels
 
+
 	GBI.getElementPanel = function( item ){
 
 		item = item || {};
@@ -675,6 +670,10 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.?
 				</div>
 			</div>`;
+
+
+		console.log( 'divElement', divElement );
+		console.log( 'item', item );
 
 		return divElement;
 
@@ -726,7 +725,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			//GBI.setSurfaceVisible(selectTarget.value );
 			GBI.setIdAttributes(selectTarget.value, item ); };
 		selectTarget.onchange =  function() {
-			GBI.setSurfaceVisible(selectTarget.value);
+			GBI.setSurfaceVisible(selectTarget.value); //////////// make work for any element
 			GBI.setIdAttributes(selectTarget.value, item ); };
 
 		//selectTarget.selectedIndex = 0;
@@ -1052,7 +1051,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	};
 
 
-
+	// used by IDD
 	GBI.setPanelShowHide = function( target ) {
 
 		target.innerHTML =

@@ -36,10 +36,10 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-04-19 ~ R12.23</summary>
+<summary>Welcome 2018-04-19 ~ R12.23/24</summary>
 
-R12.23
-* HUD > Ass input tag above select CAD Object ID
+R12.23/24
+* HUD > Add * Fix: input tag above select CAD Object ID
 
 R12.20/21/22
 * Add ISS > Surface TtType Invalid

@@ -66,8 +66,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdetPanelVisibilityToggle ></div>
 
-			<div id = "ISSdetPanelMetadataIssues" ></div>
-
 			<div id=ISSdetPanelSurfacesDuplicateAdjacentSpaces ></div>
 
 			<div id=ISSdetPanelSurfacesDuplicateCoordinates ></div>
@@ -135,10 +133,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//` + divMenuItems.innerHTML;
 
-		//ISSdetPanelVisibilityToggle.innerHTML = GBI.getPanelShowHide(); //ISS.getPanelVisibilityToggle();
-		GBI.setPanelShowHide( ISSdetPanelVisibilityToggle );
-
-		ISS.setPanelMetadataIssues( ISSdetPanelMetadataIssues );
+		ISSdetPanelVisibilityToggle.innerHTML = GBI.getPanelShowHide(); //ISS.getPanelVisibilityToggle();
 
 		ISSdetPanelSurfacesDuplicateAdjacentSpaces.innerHTML = ISS.getPanelSurfacesDuplicateAdjacentSpaces();
 
@@ -155,46 +150,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.setPanelSurfaceTypeInvalid( ISSdetPanelSurfaceTypeInvalid );
 
 		ISS.setPanelOpeningTypeInvalid( ISSdetPanelOpeningTypeInvalid );
-
-	};
-
-
-
-	ISS.setPanelMetadataIssues = function( target ) {
-
-		const required = [ 'areaUnit', 'lengthUnit', 'temperatureUnit', 'useSIUnitsForResults', 'version', 'volumeUnit', 'xmlns' ];
-
-		let provided = [];
-		let missing = [];
-		let count = 0;
-
-		for ( property in GBP.gbjson ) {
-
-			//provided.push( property );
-
-			if ( required.includes( property) ) {
-
-				count++
-				provided.push( property );
-
-			} else {
-
-
-			}
-
-		}
-		//console.log( 'provided', provided );
-
-		target.innerHTML =
-		`<details open>
-
-			<summary>Metadata Issues</summary>
-
-			<div>gbXML attributes provided: ` + provided.join( ', ' ) + `</div>
-
-			<div>missing: ` + ( required.length - count ) + `</div>
-
-		</details>`;
 
 	};
 
@@ -511,8 +466,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		data.selItem = 'ISSselSurfacesTiny';
 
 		ISSdivSurfacesTiny.innerHTML = GBI.getElementPanel( data );
-		//ISSselSurfacesTiny.selectedIndex = 0;
-		//ISSselSurfacesTiny.click();
+		ISSselSurfacesTiny.selectedIndex = 0;
+		ISSselSurfacesTiny.click();
+
+
+		//return details;
 
 	};
 

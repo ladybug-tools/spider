@@ -105,6 +105,8 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		REP.setPanelSelectOptions( REPselReport, GBP.gbjson.Campus.Surface, 'Surface' );
 
+		REP.setPanelSelectOptions( REPselReport, GBP.gbjson.Campus.Building.Space, 'Space' );
+
 		REP.setPanelSelectOptions( REPselReport, GBP.gbjson.Campus.Building.BuildingStorey, 'Storey' );
 
 		REP.setPanelSelectOptions( REPselReport, GBP.gbjson.Zone, 'Zone' );
@@ -401,7 +403,7 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 		}
 
-		console.log( 'cadIds', cadIds );
+		//console.log( 'cadIds', cadIds );
 		cadIds.sort();
 
 		let txt = '';
@@ -419,7 +421,8 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 			<summary >CAD Objects by Type &raquo; ` + cadIds.length + `</summary>
 
 			<p>
-				<select id = "REPselCadIdGroups" onclick=GBI.setCadObjectTypeVisible(this.value);
+				<select id = "REPselCadIdGroups"
+					onclick=GBI.setCadObjectTypeVisible(this.value);
 					onchange=GBI.setCadObjectTypeVisible(this.value); size=10 >` +
 					txt +
 				`</select>
