@@ -6,7 +6,7 @@
 <meta name = "description" content = "Core read, parse a gbXML file display using Three.js" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-03-26" >
-<title>gv-gbp gbXML Viewer gbXML Parser</title>
+<title>Sun Range gbXML 1</title>
 <style>
 
 body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; margin: 0; overflow: hidden; }
@@ -55,6 +55,7 @@ body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; mar
 
 <script>
 
+	var ground, vector;
 
 	GBP.defaultURL = 'http://www.ladybug.tools/spider/gbxml-sample-files/bristol-clifton-down-road-small.xml';
 	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
@@ -74,7 +75,7 @@ body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; mar
 		divTitle.innerHTML =
 		`
 			<h2>
-				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/gv-gbp-gbxml-parse" >gh
+				<a href="https://github.com/ladybug-tools/spider/tree/master/solar-well/sun-range-gbxml-dev" >gh
 				</a>
 				||
 				<a  href = "" >` + document.title + `</a>
@@ -108,9 +109,79 @@ body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; mar
 		console.log( 'onloadThreejs', Date.now() - timeStart );
 
 		THR.controls.autoRotate = false;
+		THR.scene.remove( THR.lightDirectional, THR.lightAmbient, THR.lightPoint );
+		//THR.camera.position.set( 550, -1000, 115 );
+
+		drawSun();
 
 	};
 
+
+
+	function drawSun() {
+
+		const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+		vector = v( -20, -50, 30 );
+
+		const geometry = new THREE.SphereBufferGeometry( 5 );
+		const material = new THREE.MeshBasicMaterial( { color: 'yellow', side: 2 } );
+		sun = new THREE.Mesh( geometry, material );
+		sun.position.copy( THR.axesHelper.position.clone().add( vector ) );
+
+		THR.scene.add( sun );
+
+		setTimeout( drawGround, 100 );
+
+	}
+
+
+	function drawGround() {
+
+		p = THR.axesHelper.position;
+		const geometry = new THREE.PlaneGeometry( 100, 100, 100, 100 );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( p.x, p.y, p.z - 6.2 ) );
+
+		var raycaster = new THREE.Raycaster();
+		vector.normalize();
+
+		for ( let i = 0; i < geometry.vertices.length; i++ ) {
+
+			point = geometry.vertices[ i ];
+
+			raycaster.set( point, vector );
+
+			const intersects = raycaster.intersectObjects( GBP.surfaceMeshes.children );
+			//console.log( 'intersects', intersects );
+			let color = intersects.length > 0 ? 0.2 : 0.7;
+			color = new THREE.Color().setHSL( color, 1, 0.8 );
+			geometry.colors[ i ] = color;
+
+		}
+
+		geometry.faces.forEach( face =>
+
+			face.vertexColors = [
+				geometry.colors[ face[ 'a' ] ],
+				geometry.colors[ face[ 'b' ] ],
+				geometry.colors[ face[ 'c' ] ]
+			]
+
+		);
+
+		material = new THREE.MeshBasicMaterial( {
+			color: 0xffffff,
+			opacity: 0.7,
+			side: THREE.DoubleSide,
+			transparent: true,
+			vertexColors: THREE.VertexColors
+		} );
+
+		THR.scene.remove( ground );
+		ground = new THREE.Mesh( geometry, material );
+		//ground.position.copy( THR.axesHelper.position.clone() )
+		THR.scene.add( ground );
+
+	}
 
 </script>
 </body>
