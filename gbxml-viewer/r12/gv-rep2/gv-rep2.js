@@ -528,7 +528,7 @@
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
 				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
-				divLog.style.height = '500px';
+				divLog.style.height = '50px';
 				divLog.style.overflow = 'auto';
 
 				console.log( 'surface', surface );
