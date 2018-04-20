@@ -3,10 +3,10 @@
 # Solar-Well Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-tmp/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://rawgit.com/ladybug-tools/spider/master/solar-well/sun-range-dev/ground-and-boxes-1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test script: [gbXML Viewer Template]( http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-tmp/gv-tmp.html )
+## [ground and boxes 1]( http://rawgit.com/ladybug-tools/spider/master/solar-well/sun-range-dev/ground-and-boxes-1.html )
 
 
 ## Concept
