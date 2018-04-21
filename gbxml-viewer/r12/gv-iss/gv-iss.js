@@ -684,12 +684,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}else if ( oneSpace.includes( surface.surfaceType ) && !surface.AdjacentSpaceId ) {
 
-				//console.log( 'one space', surface );
+				console.log( 'one space w/0', surface );
 				ISS.adjacentSpaceInvalid.push( surface );
 
 			} else if ( oneSpace.includes( surface.surfaceType ) && Array.isArray( surface.AdjacentSpaceId ) ) {
 
-					console.log( 'surface', typeof surface.AdjacentSpaceId );
+					console.log( 'surface w/2', surface );
 					ISS.adjacentSpaceInvalid.push( surface );
 
 			} else {
@@ -706,7 +706,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		options = options ? options : '<option>none found</option>';
 
 		target.innerHTML =
-		`<details open>
+		`<details>
 
 			<summary id = "ISSsumAdjacentSpaceInvalid" >Adjacent Space Invalid &raquo; ` + ISS.adjacentSpaceInvalid.length + ` found</summary>
 
