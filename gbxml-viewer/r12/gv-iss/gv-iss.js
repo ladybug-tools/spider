@@ -721,7 +721,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 						options + `
 						</select><br>
 
-					<!-- <button onclick=GBV.zoomIntoSurface(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button> -->
+					<button onclick=GBV.zoomIntoSurface(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button>
 
 				</div>
 				<div id = "ISSdivAdjacentSpaceInvalid" class=flex-left-div2 ></div>
@@ -811,6 +811,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			ISS.traverseGbjson( surface ).attributes +
 			`<p>Spaces will be displayed in R13</p>
 			<p>Further surface details available in JavaScript Console</p>`;
+
+		GBV.showSurface( id );
 
 	}
 
