@@ -15,8 +15,12 @@
 
 ## Wish list
 
+* 2018-04-21 ~ Openings by Type: what attribute info to add?
+* 2018-04-21 ~ CAD Objects by Type: what attribute info to add?
+* 2018-04-21 ~ Theo Storey attribute item has a zoom button
+* 2018-04-21 ~ Theo ~ Element attribute card: title could be button that would cause XML text to be displayed in pop-up window
 * 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities
-* 2018-03-31 ~ Any of the attributes could be buttons. Are there attributes where buttons would be really useful.
+* 2018-03-31 ~ Any of the attributes could be buttons. Are there attributes where buttons would be really useful??
 
 ## Issues
 

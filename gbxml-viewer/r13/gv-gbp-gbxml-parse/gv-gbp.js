@@ -558,6 +558,7 @@
 
 	GBP.setAllVisible = function() {
 
+		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
 		GBP.openingMeshes.visible = true;
 
@@ -586,8 +587,6 @@
 			child.visible = true;
 
 		};
-
-		GBP.surfaceEdges.visible = true;
 
 		//for ( let child of GBP.surfaceEdges.children ) {
 

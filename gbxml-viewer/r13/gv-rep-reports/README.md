@@ -83,6 +83,10 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Change Log
 
+### 2018-04-21 ~ Theo
+
+* R13 Report beginning to look good
+
 ### 2018-04-20 ~ Theo
 
 * Add all elements automatically visible on change

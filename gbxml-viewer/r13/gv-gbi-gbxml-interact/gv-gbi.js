@@ -236,7 +236,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 	GBI.setOpeningVisible = function( id ) {
-
 		//console.log( 'opening id', id );
 
 		GBP.surfaceEdges.visible = false;
@@ -334,7 +333,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 	GBI.setZoneVisible = function ( zoneIdRef ) {
-
 		//console.log( 'zoneIdRef', zoneIdRef );
 
 		const spaces = GBP.gbjson.Campus.Building.Space;
@@ -596,7 +594,6 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 	};
 
-	//GBP.zoomObjectBoundingSphere = function( obj )
 
 
 	GBI.setZoneZoom = function( zoneId ) {
@@ -624,7 +621,30 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	}
 
 
-	////////// Spaces
+
+	GBI.setBuildingZoom = function( cadId ) {
+
+		let meshes = GBP.surfaceMeshes.children.filter( element => element.userData.data.surfaceType === 'ExteriorWall' );
+		meshes = meshes.map( item => item.clone() );
+		//console.log( 'meshes', meshes );
+
+		const surfaceMeshes = new THREE.Object3D();
+		surfaceMeshes.add( ...meshes );
+		//console.log( '', surfaceMesh );
+
+		const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+		const sphere = bbox.getBoundingSphere();
+		const center = sphere.center;
+		const radius = sphere.radius;
+		//console.log( 'center * radius', center, radius );
+
+		THR.controls.target.copy( center );
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.2 * radius, - 1.2 * radius, 1.2 * radius ) ) );
+
+	}
+
+
+	////////// get IDs
 
 	GBI.getSpaceId = function( spaceIdRef ) {
 
@@ -704,14 +724,13 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 			`<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,` + item.selItem + `);
-						placeholder="` + item.placeholder + `" style=margin-bottom:0.5rem;width:6rem; ><br>
-					<select id = ` + item.selItem +
-						` size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) + ` style=min-width:6rem; >` + options + `</select>
+					<input oninput=GBI.setSelectedIndex(this,${item.selItem});
+						placeholder="${item.placeholder}" style=margin-bottom:0.5rem;width:6rem; ><br>
+					<select id =${item.selItem}
+						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
+						 ` style=min-width:6rem; >${options}</select>
 				</div>
-				<div id = ` + item.divAttributes + ` class=flex-left-div2 >
-					999
-				</div>
+				<div id = ${item.divAttributes} class=flex-left-div2 ></div>
 			</div>`;
 
 		item.divTarget.innerHTML = divElement;
@@ -722,23 +741,26 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		//console.log( 'target', target );
 
 		selectTarget.onclick= function() {
+
 			//GBI.setSurfaceVisible(selectTarget.value );
-			GBI.setIdAttributes(selectTarget.value, item ); };
-		selectTarget.onchange =  function() {
-			//GBI.setSurfaceVisible(selectTarget.value); //////////// make work for any element
-			GBI.setItemVisible( selectTarget.value, item )
-			GBI.setIdAttributes( selectTarget.value, item );
+			GBI.setElementIdAttributes(selectTarget.value, item );
+
 		};
 
-		//selectTarget.selectedIndex = 0;
-		//selectTarget.click();
+		selectTarget.onchange =  function() {
+
+			GBI.setElementVisible( selectTarget.value, item )
+			GBI.setElementIdAttributes( selectTarget.value, item );
+
+		};
 
 	};
 
 
-	GBI.setItemVisible = function( id, item ) {
-		console.log( 'id', id );
-		console.log( 'item', item );
+
+	GBI.setElementVisible = function( id, item ) {
+		//console.log( 'id', id );
+		//console.log( 'item', item );
 
 		if ( item.element === 'Surface') {
 
@@ -788,27 +810,14 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 
-	GBI.setIdAttributes = function ( id, item ) {
+	GBI.setElementIdAttributes = function ( id, item ) {
 		//console.log( 'item', item, 'id', id );
 
-		//let item = REP.reportTypes[ REPselReport.selectedIndex ];
 		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
 		obj = arr.find( element => element.id === id );
 		//console.log( 'obj', obj );
 
-		/*
-		let attributes =
-		`<div>` +
-				( REPselReportType.selectedIndex + 1 ) +
-			`. ` +
-			id +
-		`</div>`;
-		*/
-
-		let attributes =
-		`<div>` +
-			id +
-		`</div>`;
+		let attributes = `<div>id: <b>${id}</b></div>`;
 
 		for ( let property in obj ) {
 
@@ -845,13 +854,13 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 					attributes += GBI.getAttributeOpenings( obj[ property ] );
 
-				} else if ( item.element === 'Surface' ) {
-
-					attributes += GBI.getAttributeSurfaceId( obj[ property ] );
-
 				} else if ( item.element === 'Space' ) {
 
 					attributes += GBI.getAttributeAdjacentSpace( obj[ property ] );
+
+				} else if ( item.element === 'Surface' ) {
+
+					attributes += GBI.getAttributeSurfaceId( obj[ property ] );
 
 				} else if ( item.element === 'Storey' ) {
 
@@ -863,8 +872,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 				} else {
 
-					attributes += '<div><span class=attributeTitle >' + property + ':</span><br>' +
-						'<span class=attributeValue >' + obj[ property ] + '</span></div>';
+					attributes += `<div><span class=attributeTitle >${property}:</span><br>
+						<span class=attributeValue >${obj[ property ]}</span></div>`;
 
 				}
 
@@ -878,8 +887,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 			} else {
 
-				attributes += '<div><span class=attributeTitle >' + property + ':</span><br>' +
-					'<span class=attributeValue >' + obj[ property ] + '</span></div>';
+				attributes += `<div><span class=attributeTitle >${property}:</span><br>
+				<span class=attributeValue >${obj[ property ]}</span></div>`;
 
 			}
 
@@ -888,6 +897,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 		selectTarget = item.divTarget.getElementsByClassName( 'flex-left-div2' )[ 0 ];
 		//console.log( 'selectTarget', selectTarget );
+
 		selectTarget.innerHTML = attributes;
 
 		GBI.setButtonStyleClass( selectTarget );
@@ -897,6 +907,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 	GBI.setGbjsonAttributes = function( obj, target, title ) {
+		// Used: ??
 		//console.log( 'obj', obj );
 		//console.log( 'target', target );
 
@@ -910,8 +921,11 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 			} else {
 
-				attributes += '<div><span class=attributeTitle >' + property + ':</span> ' +
-				'<span class=attributeValue >' + obj[ property ] + '</span></div>';
+				attributes +=
+				`<div>
+					<span class=attributeTitle >${property}:</span>
+					<span class=attributeValue >${obj[ property ]}</span>
+				</div>`;
 
 
 			}
@@ -922,7 +936,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		target.innerHTML =
 
 		`<details >
-			<summary>` + title + `</summary>` +
+			<summary>${title}</summary>` +
 			attributes +
 			`<hr>
 		</details>`;
@@ -938,10 +952,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		const txt =
 		`<div>
 			<span class=attributeTitle >adjacent space id</span>:<br>
-			<button onclick=GBI.setSpaceVisible(this.innerText); >` +
-			spaceIdRef +
-			`</button>
-			<button onclick=GBI.setSpaceZoom("` + spaceIdRef + `"); >&#8981;</button>
+			<button onclick=GBI.setSpaceVisible(this.innerText); >${spaceIdRef}</button>
+			<button onclick=GBI.setSpaceZoom("${spaceIdRef}"); >&#8981;</button>
 		</div>`;
 
 		return txt;
@@ -956,10 +968,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		const txt =
 		`<div>
 			<span class=attributeTitle >cad object id</span>:<br>
-			<button id=buttId onclick=GBI.setCadObjectIdVisible(this.innerText); >` +
-			cadId +
-			`</button>
-			<button onclick=GBI.setCadIdZoom(buttId.innerText); >&#8981;</button>
+			<button id=buttId onclick=GBI.setCadObjectIdVisible(this.innerText); >${cadId}</button>
+			<button onclick=GBI.setCadIdZoom(buttId.innerText); >&#8981;</button> // cadID has spaces
 		</div>`;
 
 		return txt;
@@ -973,9 +983,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		const txt =
 		`<div>
 			<span class=attributeTitle >id</span>:<br>
-			<button onclick=GBI.setOpeningVisible(this.innerText); >` +
-			id +
-			`</button><br>
+			<button onclick=GBI.setOpeningVisible(this.innerText); >${id}</button><br>
 			<span style=color:red; >Issue: only shows external doors</span>
 			</div>`;
 
@@ -991,12 +999,10 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		const txt =
 		`<div>
 			<span class=attributeTitle >id</span>:<br>
-			<button onclick=GBI.setSurfaceVisible(this.innerText); >` +
-			id +
-			`</button>
-			</div>`;
+			<button onclick=GBI.setSurfaceVisible(this.innerText); >${id}</button>
+			<button onclick=GBI.setSurfaceZoom("${id}"); >&#8981;</button>
+		</div>`;
 
-			//<button onclick=GBI.setSurfaceZoom("` + id + `"); >&#8981;</button>
 		return txt;
 
 	};
@@ -1008,10 +1014,9 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		const txt =
 		`<div>
 			<span class=attributeTitle >storey id</span>:<br>
-			<button onclick=GBI.setStoreyVisible(this.innerText); >`+
-			storeyId +
-			`</button>
+			<button onclick=GBI.setStoreyVisible(this.innerText); >${storeyId}</button>
 		</div>`;
+		// add zoom
 
 		return txt;
 
@@ -1024,9 +1029,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		const txt =
 		`<div>
 			<span class=attributeTitle >zone id</span>:<br>
-			<button onclick=GBI.setZoneVisible(this.innerText); >` +
-			zoneId +
-		`</button>
+			<button onclick=GBI.setZoneVisible(this.innerText); >${zoneId}</button>
 		</div>`;
 
 		//<button onclick=GBI.setZoneZoom("` + zoneId + `"); >&#8981;</button>
@@ -1044,9 +1047,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 		const txt =
 		`<div>
 			<span class=attributeTitle >surface type</span>:<br>
-			<button onclick=GBI.setSurfaceTypeVisible(this.innerText); >` +
-			surfaceType +
-			`</button>
+			<button onclick=GBI.setSurfaceTypeVisible(this.innerText); >${surfaceType}</button>
 			<button onclick=GBI.setSurfaceTypeZoom("` + surfaceType + `"); >&#8981;</button>
 		</div>`;
 
@@ -1080,8 +1081,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	};
 
 
-	// used by IDD
 	GBI.setPanelShowHide = function( target ) {
+		// used by IDD
 
 		target.innerHTML =
 
@@ -1094,7 +1095,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 				<button onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
 				<button onclick=GBP.setAllVisible(); >all</button>
 				/
-				<button onclick=GBP.setAllVisible(); >zoom</button>
+				<button onclick=GBI.setBuildingZoom(); >zoom all</button>
 
 			<hr>
 
@@ -1104,7 +1105,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 
-	GBI.setAllVisible = function() {
+	GBI.xxxsetAllVisible = function() {
 
 		GBP.surfaceMeshes.visible = true;
 		GBP.surfaceEdges.visible = true;
