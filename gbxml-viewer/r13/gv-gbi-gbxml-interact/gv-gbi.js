@@ -1,6 +1,4 @@
-/*
-global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
-*/
+/* global THR, THREE, GBP, window, document */
 /* jshint esversion: 6 */
 
 // Copyright 2018 Ladybug Tools authors. MIT License
@@ -623,6 +621,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 	GBI.setBuildingZoom = function( cadId ) {
+		// Used: GBI.setPanelShowHide
 
 		let meshes = GBP.surfaceMeshes.children.filter( element => element.userData.data.surfaceType === 'ExteriorWall' );
 		meshes = meshes.map( item => item.clone() );
@@ -647,6 +646,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	////////// get IDs
 
 	GBI.getSpaceId = function( spaceIdRef ) {
+		// Used: ??
 
 		if ( !GBP.gbjson.Campus.Building.Space || !GBP.gbjson.Campus.Building.Space.length ) { return; }
 
@@ -784,7 +784,9 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 		}
 
-	}
+	};
+
+
 
 	GBI.setSelectedIndex = function( input, select ) {
 
@@ -861,6 +863,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 				} else if ( item.element === 'Surface' ) {
 
 					attributes += GBI.getAttributeSurfaceId( obj[ property ] );
+					HUDdivAttributes.innerHTML = 'id ' + obj[ property ]
 
 				} else if ( item.element === 'Storey' ) {
 
@@ -967,11 +970,10 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 		const txt =
 		`<div>
-			<span class=attributeTitle >cad object id</span>:<br>
+			<span class=attributeTitle >cad object id</span>: <button onclick=GBI.setCadIdZoom(buttId.innerText); >&#8981;</button><br>
 			<button id=buttId onclick=GBI.setCadObjectIdVisible(this.innerText); >${cadId}</button>
-			<button onclick=GBI.setCadIdZoom(buttId.innerText); >&#8981;</button> // cadID has spaces
-		</div>`;
 
+		</div>`; // cadID has spaces
 		return txt;
 
 	};
@@ -1060,7 +1062,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	///////// Show / Hide
 
 	GBI.getPanelShowHide = function() {
-
+		//used by HUD/
 		const txt =
 
 		`<details open >
@@ -1082,7 +1084,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 	GBI.setPanelShowHide = function( target ) {
-		// used by IDD
+		// used by HUD2/ISS/REP
 
 		target.innerHTML =
 
@@ -1119,7 +1121,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 	GBI.setButtonStyleClass = function( item ) {
-
+		// used by REP/HUD
 		const butts = item.getElementsByTagName( "button" );
 		//console.log( 'butts', butts );
 

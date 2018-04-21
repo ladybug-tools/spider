@@ -687,6 +687,11 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				//console.log( 'one space', surface );
 				ISS.adjacentSpaceInvalid.push( surface );
 
+			} else if ( oneSpace.includes( surface.surfaceType ) && Array.isArray( surface.AdjacentSpaceId ) ) {
+
+					console.log( 'surface', typeof surface.AdjacentSpaceId );
+					ISS.adjacentSpaceInvalid.push( surface );
+
 			} else {
 
 				//console.log( 'ok surface', surface );
@@ -701,7 +706,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		options = options ? options : '<option>none found</option>';
 
 		target.innerHTML =
-		`<details>
+		`<details open>
 
 			<summary id = "ISSsumAdjacentSpaceInvalid" >Adjacent Space Invalid &raquo; ` + ISS.adjacentSpaceInvalid.length + ` found</summary>
 

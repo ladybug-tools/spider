@@ -62,6 +62,10 @@ The following cases need to be handled when changing the type of the surface
 
 ## Change Log
 
+### 2018-04-21 ~ Theo
+
+R13.6
+
 ### 2018-04-12 ~ Theo
 
 R13.4

@@ -54,7 +54,7 @@
 
 		HUD.setPanelTellTale( HUDdivTellTales );
 
-		COR.setButtonStyleClass( divHeadsUp );
+		GBI.setButtonStyleClass( divHeadsUp );
 
 
 		/////
@@ -226,7 +226,6 @@
 		//console.log( 'data', data );
 
 
-		//const b = '<br>';
 		const height = parseFloat( data.RectangularGeometry.Height );
 		const width = parseFloat( data.RectangularGeometry.Width );
 		const surfaceArea = height * width;
