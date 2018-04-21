@@ -83,6 +83,11 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Change Log
 
+### 2018-04-20 ~ Theo
+
+* Add all elements automatically visible on change
+
+
 ### 2018-04-16 ~ Theo
 
 R13.5

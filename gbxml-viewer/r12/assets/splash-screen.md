@@ -39,8 +39,10 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 * File and folder cleanup and old file archiving
 * Clean up in-world menu text
-* Add R13 CAD Object ID check
-* Add R13 Metadata Issues
+* REP > Add R13 CAD Object ID check
+* ISS > Add R13 Metadata Issues
+* ISS > cleanup invalid surface, opening and adjacent spaces code
+
 
 </details><details>
 

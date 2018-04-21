@@ -25,7 +25,7 @@ _Interesting weirdness: the ground plane is not displaying in an iframe but is d
 ## Wish list
 
 * See also Sun Range Dev wish list
-* 2018-04-20 ~ Theo ~ only create shadows for exposed surfaces
+* 2018-04-20 ~ Theo ~ only create shadows for exposed surfaces. build a new gbXML parset just for shading. exposed surfaces only. White Phong or basic material
 
 * Export to file ??
 

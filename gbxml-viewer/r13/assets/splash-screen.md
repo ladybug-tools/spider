@@ -28,9 +28,25 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 A very extensive rewrite of REP/GBI/NUM/ISS/HUD in progress
 
+HUD /Head-up Display Module
+* If gbXML file has only a single space:
+	* Past: displays blank HUD
+	* Now: displays relevant HUD data plus following message 'Model has only a single space, therefore there is no adjacent space data to be shown here.'
+
+REP / Reports Module
+* Element attributes starting to have buttons to update the display
+	* Buttons for: ID, Surface type, Adjacent spaces, CAD object ID, Space and Zone
+* Add all elements automatically visible in model view on change
+
+ISS / Issues Module
+* Add metadata check
+* Add surface type, opening type and adjacent space checks
+
+CSS / Style Sheet
+* Better handling of sliding menus and pop ups on small devices
 
 </details>
-<details open>
+<details>
 
 <summary>Welcome 2018-04-11 ~ R13.3</summary>
 
@@ -43,7 +59,11 @@ HUD /Head-up Display Module
 REP / Reports Module
 * Element attributes starting to have buttons to update the display
 	* Buttons for: ID, Surface type, Adjacent spaces, CAD object ID, Space and Zone
-* Spaces report has zoom button
+* Add all elements automatically visible in model view on change
+
+ISS / Issues Module
+* Add metadata check
+* Add surface type, opening type and adjacent space checks
 
 CSS / Style Sheet
 * Better handling of sliding menus and pop ups on small devices
@@ -52,9 +72,9 @@ CSS / Style Sheet
 </details>
 
 
-<details open >
+<details>
 
-<summary>Welcome 2018-04-03 ~ R13.2.</summary>
+<summary>Welcome 2018-04-03 ~ R13.2</summary>
 
 REP / Reports Module
 * Very reorganized / all functions based on set and get
@@ -117,13 +137,14 @@ R13
 ### R13 Objectives
 
 * Seriously simplify GBP module << done
-* Reorganized HTML element IDs and CSS style names so all items correspond to one another nicely
+* Reorganized HTML element IDs and CSS style names so all items correspond to one another nicely << getting there
 * Establish the Modules Explorer as the single source for access to features list, change log, support, links to GitHub source and read me, and more
-* Continue adding items to Reports, Issues and Numbers
-* Establish three sets of CSS styles for:
+* Continue adding items to Reports, Issues and Numbers << lots happenning here
+* Establish three sets of CSS styles for: << Nope. Added 23 user selected UI color schemes instead
 	* "Archie" the architect: all Pastels/ Looks Like Apple made it
 	* "Cody" the coder: White text on black
 	* "Inge" the ingénieure: All the colors imaginable
+
 
 
 ***

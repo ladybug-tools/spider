@@ -53,6 +53,14 @@
 
 ## Change Log
 
+
+### 2018-04-20 ~ Theo
+
+* Add metadata check
+* Add surface type, opening type and adjacent space checks
+* Fixes to invalid elements ongoing
+
+
 ### 2018-04-01 ~ Theo
 
 R13

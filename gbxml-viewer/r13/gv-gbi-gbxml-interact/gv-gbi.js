@@ -222,14 +222,14 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	////////// Show/Hide by Individual Elements
 
 
-	GBI.setCadObjectIdVisible = function( CadId ) {
+	GBI.setCadObjectIdVisible = function( cadId ) {
 
 		GBP.surfaceMeshes.visible = true;
 		GBP.surfaceEdges.visible = true;
 		GBP.openingMeshes.visible = false;
 
 		GBP.surfaceMeshes.children.forEach( element =>
-			element.visible = element.userData.data.CADObjectId === CadId ? true : false );
+			element.visible = element.userData.data.CADObjectId === cadId ? true : false );
 
 	};
 
@@ -260,8 +260,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 
 
-	GBI.setSpaceVisible = function( id ) {
-		//console.log( 'id', id );
+	GBI.setSpaceVisible = function( spaceId ) {
+		//console.log( 'spaceId', spaceId );
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
@@ -274,13 +274,13 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			const adjacentSpaceId = child.userData.data.AdjacentSpaceId;
 			//console.log( 'adjacentSpaceId', adjacentSpaceId );
 
-			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
+			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && spaceId === adjacentSpaceId.spaceIdRef ) {
 
 				child.visible = true;
 
 			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
 
-				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
+				if ( spaceId === adjacentSpaceId[ 0 ].spaceIdRef || spaceId === adjacentSpaceId[ 1 ].spaceIdRef ) {
 
 					child.visible = true;
 
@@ -725,8 +725,10 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			//GBI.setSurfaceVisible(selectTarget.value );
 			GBI.setIdAttributes(selectTarget.value, item ); };
 		selectTarget.onchange =  function() {
-			GBI.setSurfaceVisible(selectTarget.value); //////////// make work for any element
-			GBI.setIdAttributes(selectTarget.value, item ); };
+			//GBI.setSurfaceVisible(selectTarget.value); //////////// make work for any element
+			GBI.setItemVisible( selectTarget.value, item )
+			GBI.setIdAttributes( selectTarget.value, item );
+		};
 
 		//selectTarget.selectedIndex = 0;
 		//selectTarget.click();
@@ -734,6 +736,33 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 	};
 
 
+	GBI.setItemVisible = function( id, item ) {
+		console.log( 'id', id );
+		console.log( 'item', item );
+
+		if ( item.element === 'Surface') {
+
+			GBI.setSurfaceVisible( id );
+
+		} else if ( item.element === 'Space') {
+
+			GBI.setSpaceVisible( id );
+
+		} else if ( item.element === 'Storey') {
+
+			GBI.setStoreyVisible( id );
+
+		} else if ( item.element === 'Zone') {
+
+			GBI.setZoneVisible( id );
+
+		} else if ( item.element === 'Openings') {
+
+			GBI.setOpeningVisible( id );
+
+		}
+
+	}
 
 	GBI.setSelectedIndex = function( input, select ) {
 
