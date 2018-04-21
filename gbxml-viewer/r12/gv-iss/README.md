@@ -52,6 +52,11 @@
 
 ## Change Log
 
+### 2018-04-20 ~ Theo
+
+R12.26
+* Add R13 Metadata Issues
+
 ### 2018-03-18 ~ Theo
 
 R12.2

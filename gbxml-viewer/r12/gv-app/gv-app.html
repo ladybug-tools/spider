@@ -6,8 +6,8 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-04-19" >
-<title>gbXML Viewer 12.25</title>
-<link rel="stylesheet" type="text/css" href="../assets/style2.css" >
+<title>gbXML Viewer 12.26</title>
+<link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
 <body>
@@ -98,7 +98,7 @@
 
 				<button id=butReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep2/gv-rep2.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
+					script.src = '../gv-rep/gv-rep.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
 				<button id=butIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
@@ -113,7 +113,7 @@
 
 				<button id=butReports0 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated"      style=opacity:0.6; >
+					script.src = '../gv-rep0/gv-rep0.js'; " title="To be deprecated"      style=opacity:0.6; >
 				reports</button>
 
 				<button id=butSaveChanges class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
@@ -325,7 +325,8 @@
 
 	function onloadThreejs() {
 
-		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
+		divLog.innerHTML += '<div>milliseconds to load: ' + ( Date.now() - COR.timeStart ).toLocaleString() + '<div>';
+
 /*
 		if ( GBX.gbxmlResponseXML.URL.includes( 'bristol-clifton-down-road' ) ) {
 

@@ -21,20 +21,29 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open >
 
-<summary>New stable release.Yay! New Features include:</summary>
-
+<summary>New stable release. Yay! New Features include:</summary>
 
 * Faster, more bullet-resistent code
 * Choice of user interface colors
 * Many workflow simplifications
 * Reports on more types of gbXML elements and attributes
-* Added openings as displayable objects
+* Add openings as displayable objects
 * Added new issue finders
-* Added new area and orientation calculations panel
+* Add new area and orientation calculations panel
 * Operation on mobile devices improved
-* Second pass at adding edit and save changes capability
+* Second pass at adding edit, save and reload changes capability
 
-<details open>
+</details><details open>
+
+<summary>Welcome 2018-04-20 ~ R12.26</summary>
+
+* File and folder cleanup and old file archiving
+* Clean up in-world menu text
+* Add R13 CAD Object ID check
+* Add R13 Metadata Issues
+
+</details><details>
+
 
 <summary>Welcome 2018-04-19 ~ R12.23/24</summary>
 

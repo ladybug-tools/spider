@@ -84,8 +84,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdetPanelOpeningTypeInvalid ></div>
 
-			<div id=ISSdetPanelAdjacentSpaceInvalid ></div>
-
 			<!--
 
 			<details>
@@ -152,13 +150,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.setPanelSurfacesVertexClose();
 
-		ISS.setPanelOpeningVertices4Plus( ISSdetPanelOpeningVertices4Plus );
+		ISSdetPanelOpeningVertices4Plus.innerHTML = ISS.getPanelOpeningVertices4Plus();
 
 		ISS.setPanelSurfaceTypeInvalid( ISSdetPanelSurfaceTypeInvalid );
 
 		ISS.setPanelOpeningTypeInvalid( ISSdetPanelOpeningTypeInvalid );
-
-		ISS.setPanelAdjacentSpaceInvalid( ISSdetPanelAdjacentSpaceInvalid );
 
 	};
 
@@ -190,7 +186,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		//console.log( 'provided', provided );
 
 		target.innerHTML =
-		`<details>
+		`<details open>
 
 			<summary>Metadata Issues</summary>
 
@@ -477,7 +473,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPanelSurfacesTiny = function() {
 
-		const sizeDefault = window.ISSinpMinSize ? parseFloat( ISSinpMinSize.value ) : 20;
+		const sizeDefault = window.ISSinpMinSize ? parseFloat( ISSinpMinSize.value ) : 50;
 
 		const size = 0.01 * sizeDefault; // parseFloat( ISSinpMinSize.value );
 		ISS.surfacesTiny = GBP.surfaceJson.filter( surface =>
@@ -524,7 +520,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPanelSurfacesVertexClose = function() {
 
-		distanceDefault = window.ISSinpMinDistance ? parseFloat( ISSinpMinDistance.value ) : 20;
+		distanceDefault = window.ISSinpMinDistance ? parseFloat( ISSinpMinDistance.value ) : 50;
 
 		const distance = 0.01 * distanceDefault;
 		//console.log( 'distance', distance );
@@ -591,7 +587,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSdivVertexClose.innerHTML = GBI.getElementPanel( data );
 
 		ISSselVertexClose.selectedIndex = 0;
-		//ISSselVertexClose.click();
+		ISSselVertexClose.click();
 
 		/*
 		const details =
@@ -632,7 +628,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setPanelOpeningVertices4Plus = function( target ) {
+	ISS.getPanelOpeningVertices4Plus = function() {
 
 		//console.log( 'GBP.openings', GBP.openings );
 
@@ -653,7 +649,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		items.forEach( element => options += '<option value=' + element.id + ' >' + element.Name + '</option>' );
 		options = options ? options : '<option>none found</option>';
 
-		target.innerHTML =
+		const details =
 
 		`<details id = "ISSdetOpeningVertices4Plus" >
 
@@ -674,14 +670,15 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		</details>`;
 
+		return details;
+
 	};
 
 
 
 	ISS.setPanelSurfaceTypeInvalid = function( target ) {
 
-		//ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
-		ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => GBP.surfaceTypes.indexOf( element.surfaceType ) < 0 );
+		ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
 
 		let options = '';
 		ISS.surfaceTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
@@ -698,8 +695,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				<div class=flex-div1 >
 					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
 					<select id = "ISSselSurfaceUndefined"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.setPanelSurfaceTypeAttributes();
-						onchange=GBI.setSurfaceVisible(this.value);ISS.setPanelSurfaceTypeAttributes(); size=10 >` +
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceTypeInvalid();
+						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceTypeInvalid(); size=10 >` +
 						options + `
 						</select><br>
 					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
@@ -719,128 +716,39 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPanelOpeningTypeInvalid = function( target ) {
 
-		let openingTypes = [ 'FixedWindow', 'OperableWindow', 'FixedSkylight', 'OperableSkylight', 'SlidingDoor', 'NonSlidingDoor', 'Air' ];
-
-		ISS.openings = [];
-
-		for ( let i = 0; i < GBP.surfaceJson.length; i++ ) {
-
-			const element = GBP.surfaceJson[ i ];
-
-			if ( element.Opening ) {
-
-				element.Opening = Array.isArray( element.Opening ) ? element.Opening : [ element.Opening ];
-
-				ISS.openings.push( ...element.Opening );
-
-			}
-
-		}
-
-		ISS.openingTypeInvalid = ISS.openings.filter( opening => !openingTypes.includes( opening.openingType ) );
-
-		//console.log( 'ISS.openingTypeInvalid', ISS.openingTypeInvalid );
+		ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
 
 		let options = '';
-		ISS.openingTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		ISS.surfaceTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
 		options = options ? options : '<option>none found</option>';
 
 		target.innerHTML =
 		`<details>
 
-			<summary id = "ISSsumOpeningTypeInvalid" >Opening Type Invalid &raquo; ` + ISS.openingTypeInvalid.length + ` found</summary>
+			<summary id = "ISSsumOpeningTypeInvalid" >Opening Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
 
-			<div >Openings with invalid type</div>
+			<div >Openings with undefined ID</div>
 
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselOpeningTypeInvalid); size=6 placeholder="opening id" ><br>
-					<select id = "ISSselOpeningTypeInvalid"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.setPanelOpeningAttributes(this.value);
-						onchange=GBI.setSurfaceVisible(this.value);ISS.setPanelOpeningAttributes(this.value); size=10 >` +
+					<input oninput=GBI.setSelectedIndex(this,ISSselOpeningUndefined); size=6 placeholder="surface id" ><br>
+					<select id = "ISSselOpeningUndefined"
+						onclick=GBI.setOpeningVisible(this.value);ISS.updateOpeningTypeInvalid();
+						onchange=GBI.setOpeningVisible(this.value);ISS.updateOpeningTypeInvalid(); size=10 >` +
 						options + `
 						</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this opening" >zoom</button>
-				</div>
+					<button onclick=GBI.setOpeningZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this surface" >zoom</button>
+					</div>
 				<div id = "ISSdivOpeningTypeInvalid" class=flex-left-div2 ></div>
 			</div>
 
+			<div id=ISSdivOpeningTypeInvalid ></div>
+
 			<hr>
 
 		</details>`;
 
 	};
-
-
-
-	ISS.setPanelAdjacentSpaceInvalid = function( target ) {
-
-		ISS.adjacentSpaceInvalid = [];
-
-		twoSpaces = ['Air', 'InteriorWall', 'InteriorFloor', 'Ceiling' ];
-		oneSpace = [ 'ExteriorWall', 'Roof', 'ExposedFloor', 'UndergroundCeiling', 'UndergroundWall', 'UndergroundSlab',
-			'RaisedFloor', 'SlabOnGrade', 'FreestandingColumn', 'EmbeddedColumn' ];
-
-		for ( let i = 0; i < GBP.surfaceJson.length; i++ ) {
-
-			surface = GBP.surfaceJson[ i ];
-
-			if ( surface.surfaceType === 'Shade' && surface.AdjacentSpaceId !== undefined ) {
-				//console.log( 'shade surface', surface );
-				ISS.adjacentSpaceInvalid.push( surface );
-
-			} else if ( twoSpaces.includes( surface.surfaceType ) && surface.AdjacentSpaceId.length !== 2 ) {
-
-				//console.log( 'two space', surface );
-				ISS.adjacentSpaceInvalid.push( surface );
-
-			}else if ( oneSpace.includes( surface.surfaceType ) && !surface.AdjacentSpaceId ) {
-
-				//console.log( 'one space', surface );
-				ISS.adjacentSpaceInvalid.push( surface );
-
-			} else {
-
-				//console.log( 'ok surface', surface );
-				//ISS.adjacentSpaceInvalid.push( surface );
-
-			}
-
-		}
-
-		let options = '';
-		ISS.adjacentSpaceInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		options = options ? options : '<option>none found</option>';
-
-		target.innerHTML =
-		`<details>
-
-			<summary id = "ISSsumAdjacentSpaceInvalid" >Adjacent Space Invalid &raquo; ` + ISS.adjacentSpaceInvalid.length + ` found</summary>
-
-			<div >Surfaces with Invalid Adjacent Spaces </div>
-
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=ISS.updateSelect(this,ISSselAdjacentSpaceInvalid); size=6 placeholder="surface id" ><br>
-					<select id = "ISSselAdjacentSpaceInvalid"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.setPanelAdjacentSpaceAttributes(this.value);
-						onchange=GBI.setSurfaceVisible(this.value);ISS.setPanelAdjacentSpaceAttributes(this.value); size=10 >` +
-						options + `
-						</select><br>
-
-					<!-- <button onclick=GBV.zoomIntoSurface(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button> -->
-
-				</div>
-				<div id = "ISSdivAdjacentSpaceInvalid" class=flex-left-div2 ></div>
-			</div>
-
-			<hr>
-
-		</details>`;
-		//console.log( 'target',target );
-
-	};
-
 
 
 	///////// test not needed / never found any
@@ -1030,37 +938,15 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
-	ISS.setPanelSurfaceTypeAttributes = function( id ) {
-
-		opening = ISS.openingTypeInvalid.find( item => item.id === id );
-
-		ISSdivOpeningTypeInvalid.innerHTML = GBI.traverseGbjson( opening ).attributes;
-
-	}
-
 
 	ISS.setPanelOpeningAttributes = function() {
 
 		let item = GBP.openings.find( element => element.id === ISSselOpen.value );
-
-		//const attributes = GBI.getGbjsonAttributes( item );
-
-		//ISSdivAttributes.innerHTML = ( ISSselOpen.selectedIndex + 1 ) + '.<br>' + attributes;
-
-		GBI.setGbjsonAttributes( item, ISSdivOpeningTypeInvalid, 'opening' );
+		const attributes = ISS.getGbjsonAttributes( item );
+		ISSdivAttributes.innerHTML = ( ISSselOpen.selectedIndex + 1 ) + '.<br>' + attributes;
 
 	};
 
-
-	ISS.setPanelAdjacentSpaceAttributes = function( id ) {
-
-		console.log( 'id', id );
-		surface = ISS.adjacentSpaceInvalid.find( item => item.id === id );
-		console.log( 'surface', surface );
-
-		ISSdivAdjacentSpaceInvalid.innerHTML = GBI.traverseGbjson( surface ).attributes;
-
-	}
 
 	//////////
 

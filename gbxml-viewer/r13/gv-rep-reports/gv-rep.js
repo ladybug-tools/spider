@@ -1,6 +1,4 @@
-/*
-global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuItems
-*/
+/* global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuItems */
 /* jshint esversion: 6 */
 
 // Copyright 2018 Ladybug Tools authors. MIT License
@@ -384,8 +382,6 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
 				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
-				divLog.style.height = '500px';
-				divLog.style.overflow = 'auto';
 
 				console.log( 'surface', surface );
 				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -393,7 +389,7 @@ global THR, THREE, GBP, GBI, window, document,butSettings, detSettings,divMenuIt
 
 			}
 
-			const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' );
+			const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
 
 			if ( !cadIds.includes( id ) ) {
 

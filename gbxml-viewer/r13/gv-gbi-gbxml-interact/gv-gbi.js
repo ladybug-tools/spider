@@ -386,7 +386,7 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 
 		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
-		const cadId = CADObjectGroupId.trim()
+		const cadId = CADObjectGroupId.trim();
 		GBP.surfaceEdges.visible = true;
 
 		for ( let child of GBP.surfaceMeshes.children ) {
@@ -672,8 +672,8 @@ global THR, THREE, GBP, window, document,butSettings, detSettings,divMenuItems
 			</div>`;
 
 
-		console.log( 'divElement', divElement );
-		console.log( 'item', item );
+		//console.log( 'divElement', divElement );
+		//console.log( 'item', item );
 
 		return divElement;
 

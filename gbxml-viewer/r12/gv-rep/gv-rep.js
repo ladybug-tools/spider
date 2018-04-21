@@ -1,172 +1,238 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-	REP = {};
 
-	var surfaceAdjacencyDuplicates;
-	var surfaceAdjacencyInvalids;
-	var surfaceCoordinateDuplicates;
-	var storeys;
-	var sud;
-	var telltale;
-	var b = '<br>';
+	var REP = {};
 
 
-	REP.initReport = () => {
-
+	REP.initReport = function() {
 
 		if ( window.butMenuLoad ) {
 
-			REP.butReports0 = butMenuLoad;
+			REP.butReports = butMenuLoad;
 
-			REP.title = 'gv-tmp - gbXML Viewer Report';
+			REP.title = 'gv-tmp - gbXML Viewer Reports';;
 			document.title = REP.title;
 			aDocumentTitle.innerHTML = REP.title;
-			REP.butReports0.innerHTML = REP.title;
+			REP.butReports.innerHTML = REP.title;
 
 		} else {
 
-			//return;
-
-			REP.butReports0 = butReports0;
+			REP.butReports = butReports;
 
 		}
 
+		//if ( REP.butReports.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( REP.butReports.style.fontStyle !== 'italic' ) {
 
-		//if ( REP.butReports0.style.backgroundColor !== 'var( --but-bg-color )' ) {
-		if ( REP.butReports0.style.fontStyle !== 'italic' ) {
+			divMenuItems.innerHTML =
 
-			REP.createReport();
+				`<details id = detReports open class=app-menu open >
 
-			//REP.butReports0.style.backgroundColor = 'var( --but-bg-color )';
-			REP.butReports0.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
+					<summary>Reports</summary>
+
+					<div id = "divReports" ><div>
+
+					<hr>
+
+				</details>
+
+			` + divMenuItems.innerHTML;
+
+			initMenuReports();
+
+			//REP.butReports.style.backgroundColor = 'var( --but-bg-color )';
+			REP.butReports.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 		} else {
 
 			detReports.remove();
 
-			REP.butReports0.style.backgroundColor = '';
-			REP.butReports0.style.fontStyle = '';
-			REP.butReports0.style.fontWeight = '';
-
+			REP.butReports.style.backgroundColor = '';
+			REP.butReports.style.fontStyle = '';
+			REP.butReports.style.fontWeight = '';
 		}
+
+		divContainer.style.display = 'none';
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
 
 	};
 
 
 
-	REP.createReport = function() {
+	function initMenuReports() {
 
-		let traversGbjson = REP.traversGbjson;
-		let addDetails = REP.addDetails;
+		//surfaceCoordinateDuplicates = [];
 
-		let spaces;
+		divReports.innerHTML =
+		`
+			<div>
+				<div>toggle the visible elements</div>
+				<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+				<button onclick=GBX.setAllVisible(); >all visible</button>
+			</div>
+			<hr>
 
-		surfaceAdjacencyDuplicates = [];
-		surfaceAdjacencyInvalids = [];
-		surfaceCoordinateDuplicates = [];
+			<details open >
+				<summary id = "REPsumSurfacesIndividually" >Surfaces Individually</summary>
+				 <button onclick=GBV.showSurface(REPselSurface.value); >select</button>
+				 <button onclick=GBV.zoomIntoSurface(REPselSurface.value); >zoom</button>
+				 <button onclick=GBV.deleteSurface(REPselSurface.value); >delete</button>
 
-		sud = GBX.surfaceMeshes.userData;
-		sud.tinySpaceSquareMeters = 2;
-		sud.tinySurfaceSquareMeters = 1;
+				<div class=flex-container2 >
+					<div class="flex-div1" >
+						<input oninput=REP.updateSelect(this,REPselSurface); size=6 placeholder="surface id"><br>
+						<select id = "REPselSurface" onclick=GBV.showSurface(this.value);REP.updateSurfaceAttributes(); onchange=GBV.showSurface(this.value);REP.updateSurfaceAttributes(); size=10 ></select><br>
+					</div>
+					<div id=REPdivSurfacesIndividually class="flex-left-div2" ></div>
+				</div>
+				<hr>
+			</details>
 
-		divMenuItems.innerHTML =
+			<details>
+				<summary id = "REPsumSurfacesByType" >Surfaces by Type</summary>
+				<div id = "REPdivSurfacesByType" ></div>
+				<hr>
+			</details>
 
-			'<details id=detReports class=app-menu open >' +
+			<details>
+				<summary id = "REPsumSpaces" >Spaces</summary>
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=REP.updateSelect(this,REPselSpace); size=6 placeholder="space id" ><br>
+						<select id = "REPselSpace" onclick=GBV.showSpace(this.value);REP.updateSpaceAttributes(); onchange=GBV.showSpace(this.value);REP.updateSpaceAttributes(); size=10 ></select>
+					</div>
+					<div id = "REPdivSpaces" class=flex-left-div2  ></div>
+				</div>
+				<hr>
+			</details>
 
-				'<summary>Reports</summary>' +
+			<details>
+				<summary id = "REPsumStoreys" >Storeys</summary>
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=REP.updateSelect(this,REPselStorey); size=6 placeholder="storey id" ><br>
+						<select id = "REPselStorey" onclick=GBV.showStorey(this.value);REP.updateStoreyAttributes(); onchange=GBV.showStorey(this.value);REP.updateStoreyAttributes(); size=10 ></select>
+					</div>
+					<div id = "REPdivStoreys" class=flex-left-div2  ></div>
+				</div>
+				<hr>
+			</details>
 
-				'<p>' +
-					'toggles<br>' +
-					'<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>' +
-					' <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>' +
-					' <button onclick=GBX.setAllVisible(); >all visible</button>' +
-				'</p>' +
+			<details>
 
-				'<div id=divReport ></div>' +
 
-				'<hr>' +
+				<summary id = "REPsumZones" >Zones</summary>
 
-			'</details>' +
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=REP.updateSelect(this,REPselZone); size=6 placeholder="zone id" ><br>
+						<select id = "REPselZone" onclick=GBV.showZone(this.value);REP.updateZoneAttributes();
+							onchange=GBV.showZone(this.value);REP.updateZoneAttributes(); size=10 ></select>
+					</div>
+					<div id = "REPdivZones" class=flex-left-div2  ></div>
+				</div>
+				<hr>
+			</details>
 
-			divMenuItems.innerHTML +
+			<details >
+				<summary id = "REPsumCadIdGroups" >CAD Object Groups</summary>
+				<div id = "REPdivCadIdGroups" ></div>
 
-		'';
+				<select id = "REPselCadIdGroups" onclick=REP.showCadIdGroup(this.value); onchange=REP.showCadIdGroup(this.value); size=10 ></select>
 
-		const gbxmlText = traversGbjson( GBX.gbjson );
-		//console.log( 'gbxmlText', gbxmlText );
+				<hr>
+			</details>
 
-		divReport.innerHTML = addDetails( 'gbxmlText', gbxmlText.attributes );
+			<details>
+				<summary id = "REPsumCadIds" >CAD Object IDs</summary>
+				<input oninput=REP.updateSelect(this,REPselCadId); style=width:100% placeholder="cad object id" ><br>
+				<select id = "REPselCadId" onclick=GBV.showCadId(this.value); onchange=GBV.showCadId(this.value); size=10 ></select>
 
-		const campus = traversGbjson( GBX.gbjson.Campus );
-		divReport.innerHTML += addDetails( 'Campus', campus.attributes );
+			</details>
 
-		const locate = traversGbjson( GBX.gbjson.Campus.Location );
+			<hr>
+
+			<details >
+				<summary>gbXML Attributes</summary>
+				<div id=divGbxmlAttributes ></div>
+				<hr>
+			</details>
+
+			<details >
+				<summary>Campus</summary>
+				<div id=divCampus ></div>
+				<hr>
+			</details>
+
+			<details >
+				<summary id=sumCampusLocation >Campus Location</summary>
+				<div id=divCampusLocation ></div>
+				<hr>
+			</details>
+
+			<details >
+			<summary>Building</summary>
+			<div id=divCampusBuilding ></div>
+			<hr>
+		</details>
+		`;
+
+		getMenuItems();
+
+	};
+
+
+
+	function getMenuItems() {
+
+		REP.updateSurfacesIndividually();
+
+		REP.updateSurfacesByType();
+
+		REP.updateSpace();
+
+		REP.updateStoreys();
+
+		REP.updateZones();
+
+		//REPdivZones.innerHTML += REP.traverseGbjson( GBX.gbjson.Zone ).attributes;
+
+		REP.updateCadIdGroups();
+
+		REP.updateCadIds();
+
+		///
+
+		divGbxmlAttributes.innerHTML = REP.traverseGbjson( GBX.gbjson ).attributes;
+
+		divCampus.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus ).attributes;
+
+		divCampusLocation.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Location ).attributes;
 		const mapLink = REP.getGoogleMap();
-		divReport.innerHTML += addDetails( 'Campus Location' + mapLink, locate.attributes );
+		sumCampusLocation.innerHTML += mapLink;
 
-		const building = traversGbjson( GBX.gbjson.Campus.Building );
-		divReport.innerHTML += addDetails( 'Building', building.attributes );
+		divCampusBuilding.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building ).attributes;
 
-		const storeysText = REP.getStoreys();
-		divReport.innerHTML += addDetails( storeysText.summary, storeysText.flowContent );
-
-		const spacesText = REP.getSpaces();
-		divReport.innerHTML += addDetails( spacesText.summary, spacesText.flowContent );
-
-		const spacesTiny = REP.getSpacesTiny();
-		divReport.innerHTML += addDetails( spacesTiny.summary, spacesTiny.flowContent, spacesTiny.info );
-
-		const zones = traversGbjson( GBX.gbjson.Zone );
-		divReport.innerHTML += addDetails( 'Zones', zones.attributes );
-
-		const documents = traversGbjson( GBX.gbjson.DocumentHistory );
-		divReport.innerHTML += addDetails( 'Documents', documents.attributes );
-
-		//		const surfaces = traversGbjson( gbjson.Campus.Surface );
-		const surfaces = REP.getSurfaces();
-		divReport.innerHTML += addDetails( surfaces.summary, surfaces.flowContent );
-
-		//		examineGbjson( gbjson );
-
-		const surfaceDuplicateCoordinates = REP.getSurfaceDuplicatesCoordinates();
-		divReport.innerHTML += addDetails( surfaceDuplicateCoordinates.summary, surfaceDuplicateCoordinates.flowContent, surfaceDuplicateCoordinates.info );
-
-		const surfaceDuplicateCadIds = REP.getSurfaceDuplicateCadIds();
-		divReport.innerHTML += addDetails( surfaceDuplicateCadIds.summary, surfaceDuplicateCadIds.flowContent, surfaceDuplicateCadIds.info );
-
-		const surfaceCadIdGroups = REP.getSurfaceCadIdGroups();
-		divReport.innerHTML += addDetails( surfaceCadIdGroups.summary, surfaceCadIdGroups.flowContent, surfaceCadIdGroups.info );
-
-		const surfaceDuplicateAdjacencies = REP.getSurfaceDuplicateAdjacencies();
-		divReport.innerHTML += addDetails( surfaceDuplicateAdjacencies.summary, surfaceDuplicateAdjacencies.flowContent, surfaceDuplicateAdjacencies.info );
-
-		const surfaceTinies = REP.getSurfacesTinies();
-		divReport.innerHTML += addDetails( surfaceTinies.summary, surfaceTinies.flowContent, surfaceTinies.info );
-
-		const surfaceAdjacencyInvalid = REP.getSurfaceAdjacencyInvalid();
-		divReport.innerHTML += addDetails( surfaceAdjacencyInvalid.summary, surfaceAdjacencyInvalid.flowContent, surfaceAdjacencyInvalid.info );
-
-		// following causes error when inside an iframe in a read me
-		//if ( parent.setIfrThree ) { setIfrThree(); }
-
-	}
+	};
 
 
 
-	REP.traversGbjson = ( obj ) => {
+	REP.traverseGbjson = function( obj ) {
 
 		const elements = [];
 		let attributes = '';
 
-		for ( let i in obj ) {
+		for ( let property in obj ) {
 
-			if ( obj[ i ] !== null && typeof( obj[ i ] ) === 'object' ) {
+			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
-				if ( elements.indexOf( i ) < 0 ) { elements.push( i ); }
+				if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
 
 			} else {
 
-				attributes += '<div>' + i + ': ' + obj[ i ] + '</div>';
+				attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
 
 			}
 
@@ -174,172 +240,103 @@
 
 		return { elements: elements, attributes: attributes };
 
-	}
+	};
 
 
 
-	REP.addDetails = ( summary, text, info = '', open = '' ) => {
+	// to GBV?
+	REP.setTypeInvisible = function( that ) {
 
-		flowContent = text ? text : 'no attributes';
+		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
-		const details =
-			'<details ' + open + ' >' +
-				'<summary style=color:#333; >' + summary + '</summary>' +
-				'<div><small><i>' + info + '</i></small></div>' +
-				flowContent +
-			'</details>' +
-		'';
+		for ( let child of GBX.surfaceMeshes.children ) {
 
-		return details;
+			if ( !child.userData.data ) { continue; }
 
-	}
+			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === 'lightblue' ) {
+
+				child.visible = false;
+
+			} else if ( child.userData.data.surfaceType === that.value ) {
+
+				child.visible = true;
+
+			}
+
+		};
+
+	};
 
 
 
-	REP.getGoogleMap = () => {
+	REP.showCadIdGroup = function( CADObjectGroupId ) {
+		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
-		const locate = GBX.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
-		let linkToMap;
+		const cadId = CADObjectGroupId.trim();
+		GBX.surfaceEdges.visible = true;
 
-		if ( locate && locate.Latitude && locate.Longitude ) {
+		for ( let child of GBX.surfaceMeshes.children ) {
 
-			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
-
-			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f310; </a>';
-			//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
-			//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > <img src=world-map.png height=18 > </a>';
-
-		} else {
-
-			linkToMap = '';
+			child.visible = false;
 
 		}
 
-		return '<span title="Use context menu to open a Google Map in a new tab" >' + linkToMap + '<span>';
+		for ( let child of GBX.surfaceMeshes.children ) {
 
-	}
+			if ( !child.userData.data.CADObjectId || typeof child.userData.data.CADObjectId !== 'string' ) { continue; }
 
+			id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ).trim() ;
 
+			if ( id === cadId ) {
 
-	REP.getStoreys = () => {
-
-		storeys = GBX.gbjson.Campus.Building.BuildingStorey;
-		let flowContent = '';
-		let count = 0;
-		let zones;
-		//console.log( 'storeys', storeys  );
-
-		if ( storeys ) {
-
-			if ( Array.isArray( storeys ) === true ) {
-
-				for ( let storey of storeys ) {
-					//console.log( 'storey', storey );
-
-					flowContent += '<div style=margin-bottom:10px; > ' +
-						( count ++ ) +
-						'. id: ' + storey.id + b +
-						' name: <button onclick=\'zones = REP.toggleStorey("' + storey.id + '",this);\' >' + storey.Name + '</button>' + b +
-						( storey.Level ? 'level: ' + storey.Level + b : '' ) +
-					'</div>';
-
-				}
+				child.visible = true;
 
 			} else {
 
-		//console.log( 'storeys', storeys );
-
-				flowContent += '<div style=margin-bottom:10px; > ' +
-					( ++ count ) +
-					'. id: ' + storeys.id + b +
-					' name: <button onclick=\'zones = REP.toggleStorey("' + storeys.id + '",this);\' >' + storeys.Name + '</button>' + b +
-					( storeys.Level ? 'level: ' + storeys.Level + b : '' ) +
-				'</div>';
-
+				child.visible = false;
 
 			}
 
 		}
 
-		flowContent += '<div id=divStoreyItems style=background-color:var(--highlight-color);  ></div>';
-
-		return { summary: 'Storeys &raquo; ' + count, flowContent: flowContent };
-
-	}
+	};
 
 
 
-	REP.getSpaces = () => {
+	REP.updateSurfacesIndividually = function() {
 
-		spaces = GBX.gbjson.Campus.Building.Space;
-		let flowContent = '';
-		let count = 0;
-		//console.log( 'spaces', spaces  );
+		let txt = '';
+		GBX.surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
 
-		spaces = spaces.length ? spaces : [ spaces ];
+		REPselSurface.innerHTML = txt;
+		REPselSurface.selectedIndex = 0; //Math.floor( Math.random() * property.length );
+		REPsumSurfacesIndividually.innerHTML = 'Surfaces Individually &raquo; ' + REPselSurface.length;
+		REP.updateSurfaceAttributes();
 
-		for ( let space of spaces ) {
-		//console.log( 'space', space );
+		/*
+		txt = '';
+		GBX.surfaceTypes.forEach( function( element ) { txt += '<option>' + element + '</option>'; } );
 
-			flowContent += '<div style=margin-bottom:10px; > ' +
-				( ++ count ) +
-				'. id: ' + space.id + b +
-				' name: <button onclick=REP.toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
-				' area: ' + Number( space.Area ).toFixed( 1 ) + b +
-			'</div>';
-
-		}
-
-		return { summary: 'Spaces &raquo; ' + count, flowContent: flowContent };
-
-	}
+		REPselType.innerHTML = txt;
+		REPselType.selectedIndex = 0;
+		*/
+	};
 
 
 
-	REP.getSpacesTiny = () => {
+	REP.updateSurfaceAttributes = function() {
 
-		const spaces = GBX.gbjson.Campus.Building.Space;
-		const b = '<br>';
-		let flowContent = '';
-		let count = 0;
-		//console.log( '', spaces  );
+		REPdivSurfacesIndividually.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Surface[ REPselSurface.selectedIndex ] ).attributes;
 
-		if ( spaces.length ) {
-
-			for ( let space of spaces ) {
-				//console.log( 'space', space );
-
-				if ( parseFloat( space.Area ) < 2 ) {
-
-					flowContent += '<div style=margin-bottom:10px; > ' +
-						( count ++ ) +
-						'. id: ' + space.id + b +
-						' name: <button onclick=REP.toggleSpace("' + space.id + '"); >' + space.Name + '</button>' + b +
-						' area: ' + Number( space.Area ).toFixed( 1 ) + b +
-					'</div>';
-
-				}
-
-
-			}
-
-		}
-
-		const info = 'Information: Spaces with area smaller than 2 square units';
-		return { summary: 'Tiny Spaces &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
+	};
 
 
 
-	REP.getSurfaces = () => {
+	REP.updateSurfacesByType = function() {
 
 		surfaces = GBX.gbjson.Campus.Surface;
 
 		let txt = '';
-
-		//console.log( 'surfaces', surfaces );
-
 		const types = [];
 		const typesCount = [];
 
@@ -363,120 +360,181 @@
 		for ( let i = 0; i < types.length; i++ ) {
 
 			txt +=
-			//				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
+				//'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' >&#x1f441;</button>' +
 				'<button class=toggleView onclick=REP.setTypeInvisible(this) value=' + types[ i ] + ' ><img src="../assets/eye.png" height=18></button>' +
-				' <button class=toggle onclick=REP.toggleSurfaceType(this); >' + types[ i ] + '</button>: ' +
-				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
+				' <button class=toggle onclick=GBV.showSurfaceType(this.innerText); >' + types[ i ] + '</button>: ' +
+				typesCount[ i ] + '-' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
 				'%<br>';
 
 		}
 
 		txt +=
 
-			'<p><button class=toggle onclick=REP.allVisible(); >all visible</button></p>';
+			'<p><button class=toggle onclick=GBV.setAllVisible(); >all visible</button></p>';
 
 
-		const summary = 'Surfaces: ' + surfaces.length;
+		REPsumSurfacesByType.innerHTML = 'Surfaces By Type &raquo; ' + types.length;
+		REPdivSurfacesByType.innerHTML = txt;
 
-		return { summary: summary, flowContent: txt };
+	};
+
+
+
+	REP.updateSpace = function() {
+
+		let spaces = '';
+		let spaceXml = GBX.gbjson.Campus.Building.Space;
+
+		if ( !spaceXml ) { return; }
+
+		if ( spaceXml.length ) {
+
+			spaceXml.forEach( function( element ) { spaces += '<option>' + element.id + '</option>'; } );
+
+		} else {
+
+			spaces = '<option>' + spaceXml.id + '</option>';
+
+		}
+
+		REPselSpace.innerHTML = spaces;
+		REPselSpace.selectedIndex = 0;
+
+		REPsumSpaces.innerHTML = 'Spaces  &raquo; ' + REPselSpace.length;
+
+		//GBV.showSpace( REPselSpace.value )
+		// REPdivSpaces.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
+		REP.updateSpaceAttributes();
+	};
+
+
+
+	REP.updateSpaceAttributes = function() {
+
+		REPdivSpaces.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.Space[ REPselSpace.selectedIndex ] ).attributes;
 
 	}
 
 
+	REP.updateStoreys = function() {
 
-	REP.getSurfaceDuplicatesCoordinates =() => {
+		let storeys = '';
+		let storeyXml = GBX.gbjson.Campus.Building.BuildingStorey;
+		//console.log( 'storeyXml', storeyXml );
 
-		const surfacePolyLoops = [];
-		const surfaceIds = [];
-		surfaceCoordinateDuplicates = [];
+		if ( !storeyXml ) { return; }
 
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butDuplicatesCoordinates onclick=REP.toggleAdjacencies(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
-			'</p>' +
-			'<p style=background-color:var(--highlight-color);color:red;>This menu will be deprecated. Use other edit buttons.</p>';
-		let spaceId;
+		if ( storeyXml.length ) {
 
-		for ( let i = 0; i <  surfaces.length; i++ ) {
+			storeyXml.forEach( function( element ) { storeys += '<option>' + element.id + '</option>'; } );
 
-			surface = surfaces[ i ]
-			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
-			index = surfacePolyLoops.indexOf( points );
+		} else {
 
-			if ( index < 0 ) {
-
-				surfacePolyLoops.push( points );
-				surfaceIds.push( i );
-
-			} else {
-
-				surfOther = surfaces[ surfaceIds[ index ] ];
-				surfaceCoordinateDuplicates.push( surface.Name );
-
-		//console.log( 'surface', surface );
-		//console.log( 'surfOther', surfOther );
-
-				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
-
-				if ( adjacency ) {
-
-					spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
-
-				}
-
-				flowContent +=
-					'<p>' + count +
-						'. id: <button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						( spaceId ? 'Space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' + b : '' ) +
-
-						'<hr>' +
-						'id of duplicate: <button onclick=REP.toggleSurface("' + surfOther.id + '"); >' + surfOther.id + '</button>' + b +
-						'surfaceType: ' + surfOther.surfaceType + b +
-						( surfOther.Name ? 'Name: ' + surfOther.Name + b : '' ) +
-						( surfOther.CADObjectId ?
-							'<button onclick=REP.toggleCadId("' + encodeURI( surfOther.CADObjectId ) + '"); >CADObjectId: ' + surfOther.CADObjectId + '</button>' + b
-							: ''
-						) +
-
-					'</p><hr>' + b;
-
-				count ++;
-
-			}
+			storeys = '<option>' + storeyXml.id + '</option>';
 
 		}
 
-		for ( let child of GBX.surfaceMeshes.children ) {
+		REPselStorey.innerHTML = storeys;
+		REPselStorey.selectedIndex = 0;
 
-			if ( !child.userData.data ) { continue; }
+		REPsumStoreys.innerHTML = 'Storeys  &raquo; ' + REPselStorey.length;
 
-			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ffff00' ); }
+		//GBV.showSpace( REPselStorey.value );
+		//REPdivStoreys.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
+		REP.updateStoreyAttributes();
+
+	};
+
+
+
+	REP.updateStoreyAttributes = function() {
+
+		REPdivStoreys.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
+
+	};
+
+
+
+	REP.updateZones = function() {
+
+		let zones = '';
+		let zoneXml = GBX.gbjson.Zone;
+		//console.log( 'zoneXml', zoneXml );
+
+		if ( !zoneXml ) {
+
+			REPselZone.innerHTML = '<option>none</option>';
+			return;
 
 		}
 
-		const info = 'Error: Two surfaces with identical coordinates';
-		return { summary: 'Duplicate Coordinates &raquo; ' + count, flowContent: flowContent, info: info };
+		if ( zoneXml.length ) {
 
-	}
+			zoneXml.forEach( function( element ) { zones += '<option>' + element.id + '</option>'; } );
+
+		} else {
+
+			zones = '<option>' + zoneXml.id + '</option>';
+
+		}
+
+		REPselZone.innerHTML = zones;
+		REPselZone.selectedIndex = 0;
+
+		REPsumZones.innerHTML = 'Zones  &raquo; ' + REPselZone.length;
+
+		//GBV.showSpace( REPselStorey.value );
+		//REPdivzones.innerHTML = REP.traverseGbjson( GBX.gbjson.Campus.Building.BuildingStorey[ REPselStorey.selectedIndex ] ).attributes;
+		REP.updateZoneAttributes();
+
+	};
 
 
 
-	REP.getSurfaceCadIdGroups =() => {
+	REP.updateZoneAttributes = function() {
+
+		//console.log( '',  );
+
+		//		if ( Array.isArray( GBX.gbjson.Zone ) ) {
+
+		//		REPdivZones.innerHTML = REP.traverseGbjson( GBX.gbjson.Zone[ REPselZone.selectedIndex ] ).attributes;
+
+		let zone;
+
+		if ( Array.isArray( GBX.gbjson.Zone ) ) {
+
+			zone = GBX.gbjson.Zone[ REPselZone.selectedIndex ]
+
+		} else {
+
+			zone = GBX.gbjson.Zone;
+
+		}
+
+		REPdivZones.innerHTML = REP.traverseGbjson( zone ).attributes;
+
+	};
+
+
+	REP.updateCadIdGroups = function() {
 
 		const cadIds = [];
 		const surfaceMembers = [];
 		const surfaces = GBX.gbjson.Campus.Surface;
 		let count = 0;
-		let flowContent = '';
+		let contents = '';
 
-		for ( let surface of surfaces ) {
+		for ( surface of surfaces ) {
 
-			if ( !surface.CADObjectId ) { continue; }
+			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
+
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+
+				console.log( 'surface', surface );
+				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
+				continue;
+
+			}
 
 			id = surface.CADObjectId.replace( /\[(.*?)\]/gi, '' );
 
@@ -490,686 +548,108 @@
 
 		cadIds.sort();
 
+
+		let txt = '';
+
 		for ( let id of cadIds ){
 
-			flowContent += '<button onclick=REP.toggleCadIdGroup("' + encodeURI( id )+ '"); >' + id + '</button>' + b;
-		}
-
-		//console.log( '', CadIds.length );
-
-		const info = 'Information: Revit CAD Object Groups';
-		return { summary: 'CAD Object ID Groups &raquo; ' + cadIds.length, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.vvvvgetSurfaceDuplicateCadIds =() => {
-
-		const surfacesIds = [];
-		const surfaceMembers = [];
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			const id = surface.CADObjectId;
-
-			index = surfacesIds.indexOf( id );
-
-			if ( index < 0 ) {
-
-				surfacesIds.push( id );
-				surfaceMembers.push( { members: [ surface ] } );
-
-			} else {
-
-				surfaceMembers[ index ].members.push( surface );
-		/*
-						flowContent +=
-							'<p>' + count +
-								'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-								'surfaceType: ' + surface.surfaceType + b +
-								( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-								( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-							'</p>';
-
-						count ++;
-		*/
-			}
+			txt += '<option>' + id + '</option>';
 
 		}
 
-		count = surfacesIds.length === 1 ? 0 : count;
-
-		//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
-		//console.log( 'surfaceMembers', surfaceMembers );
-
-		for ( member of surfaceMembers ) {
-
-			if ( member.members.length > 1 ) {
-
-			//console.log( '', member.members );
-				let surface;
-				for ( surface of member.members ) {
-
-					flowContent +=
-						'<p>' + count +
-							'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-							'surfaceType: ' + surface.surfaceType + b +
-							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-			//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'</p>';
-
-					count ++;
-
-				}
-
-				flowContent +=
-
-					'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b +
-
-				'<hr>';
-
-			}
-
-		}
-
-		const info = 'Information: Multiple gbXML elements created from single CAD element';
-		return { summary: 'Duplicate CAD Object IDs &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.getSurfaceDuplicateCadIds =() => {
-
-		const surfacesIds = [];
-		const surfaceMembers = [];
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent = '';
-
-		for ( let surface of surfaces ) {
-
-			const id = surface.CADObjectId;
-
-			index = surfacesIds.indexOf( id );
-
-			if ( index < 0 ) {
-
-				surfacesIds.push( id );
-				surfaceMembers.push( { members: [ surface ] } );
-
-			} else {
-
-				surfaceMembers[ index ].members.push( surface );
-		/*
-						flowContent +=
-							'<p>' + count +
-								'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-								'surfaceType: ' + surface.surfaceType + b +
-								( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-								( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-							'</p>';
-
-						count ++;
-		*/
-			}
-
-		}
-
-		count = surfacesIds.length === 1 ? 0 : count;
-
-		//console.log( 'getSurfaceDuplicateCadIds', surfacesIds.length );
-		//console.log( 'surfaceMembers', surfaceMembers );
-
-		for ( member of surfaceMembers ) {
-
-			if ( member.members.length > 1 ) {
-
-			//console.log( '', member.members );
-				let surface;
-				for ( surface of member.members ) {
-
-					flowContent +=
-						'<p>' + count +
-							'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-							'surfaceType: ' + surface.surfaceType + b +
-							( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-			//							( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'</p>';
-
-					count ++;
-
-				}
-
-				flowContent +=
-
-					'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b +
-
-				'<hr>';
-
-			}
-
-		}
-
-		const info = 'Information: Multiple gbXML elements created from single CAD element';
-		return { summary: 'Duplicate CADObjectId &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.getSurfaceDuplicateAdjacencies = () => {
-
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butDuplicateAdjacencies onclick=REP.toggleAdjacencies(butDuplicateAdjacencies,surfaceAdjacencyDuplicates); >toggle all duplicates</button>' +
-			'</p>' +
-			'<p style=background-color:var(--highlight-color);color:red;>This menu will be deprecated. Use other edit buttons.</p>';
-
-		for ( let surface of surfaces ) {
-
-			adjacencies = surface.AdjacentSpaceId;
-
-			const height = parseFloat( surface.RectangularGeometry.Height );
-			const width = parseFloat( surface.RectangularGeometry.Width );
-			const surfaceArea = height * width;
-
-			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
-
-				surfaceAdjacencyDuplicates.push( surface.Name );
-
-		//console.log( 'adjacencies', adjacencies  );
-
-				flowContent +=
-					'<div style=margin-bottom:35px; >' +
-						( ++ count ) +
-						'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.constructionIdRef ? 'construction id ref: ' + surface.constructionIdRef + b : '' ) +
-						( surface.CADObjectId ?
-							'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
-							: ''
-						) +
-						' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
-						'Space:  <button onclick=REP.toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-					'<hr></div>';
-			}
-
-		}
-
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			if ( surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) ) { child.material.color.set( '#c080ff' ); }
-
-		}
-
-		const info = 'Error: Interior surfaces with both adjacencies pointing to same ID';
-		return { summary: 'Duplicate Adjacencies &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.getSurfacesTinies = () => {
-
-		surfaces = GBX.gbjson.Campus.Surface;
-		const b = '<br>';
-		let flowContent = '';
-		let count = 0;
-
-		//console.log( 'surfaces', surfaces );
-
-		for ( let surface of surfaces ) {
-
-			const height = parseFloat( surface.RectangularGeometry.Height );
-			const width = parseFloat( surface.RectangularGeometry.Width );
-			const surfaceArea = height * width;
-
-			if ( parseFloat( surfaceArea ) < sud.tinySurfaceSquareMeters ) {
-
-			//console.log( 'surface', surface );
-
-				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
-
-				if ( adjacency ) {
-					// fix to handle surface.AdjacentSpaceId[ 0 ]
-					spaceId = Array.isArray( surface.AdjacentSpaceId ) === true ? surface.AdjacentSpaceId[ 1 ].spaceIdRef : surface.AdjacentSpaceId.spaceIdRef
-
-				}
-
-				flowContent += '<div style=margin-bottom:10px; > ' +
-					( ++ count ) +
-					'. id: <button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-					'surfaceType: ' + surface.surfaceType + b +
-					( surface.Name ? 'name: ' + surface.Name + b : '' ) +
-					( surface.CADObjectId ?
-						'<button onclick=REP.toggleCadId("' + encodeURI( surface.CADObjectId ) + '"); >CADObjectId: ' + surface.CADObjectId + '</button>' + b
-						: ''
-					) +
-					' area: ' + Number( surfaceArea ).toFixed( 1 ) + '<br>length: ' + height.toFixed( 3 ) + ' width: ' + width.toFixed( 3 ) + b +
-					//					( spaceId ? 'space:  <button onclick=REP.toggleSpace("' + spaceId + '"); >' + spaceId + '</button>' +
-					//				b : '' ) +
-
-				'</div>';
-
-			}
-
-		}
-
-		const info = 'Information: Spaces with area smaller than ' + sud.tinySurfaceSquareMeters + ' square units';
-		return { summary: 'Tiny Surfaces &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.getSurfaceAdjacencyInvalid = () => {
-
-		const surfaces = GBX.gbjson.Campus.Surface;
-		let count = 0;
-		let flowContent =
-			'<p>' +
-				'<button id=butAdjacencyInvalid onclick=REP.toggleAdjacencies(butAdjacencyInvalid,surfaceAdjacencyInvalids); >toggle all duplicates</button>' +
-			'</p>';
-
-		const adjacencyArrayOK = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'Air' ];
-
-		for ( let surface of surfaces ) {
-
-			adjacencies = surface.AdjacentSpaceId;
-
-			if ( Array.isArray( adjacencies ) === true && adjacencyArrayOK.includes( surface.surfaceType ) === false ) {
-
-				surfaceAdjacencyInvalids.push( surface.Name );
-
-				//console.log( 'surface.Name', surface.Name  );
-
-				flowContent +=
-					'<div style=margin-bottom:35px; >' +
-						( ++ count ) +
-						'. id: ' + '<button onclick=REP.toggleSurface("' + surface.id + '"); >' + surface.id + '</button>' + b +
-						'surfaceType: ' + surface.surfaceType + b +
-						( surface.Name ? 'Name: ' + surface.Name + b : '' ) +
-						( surface.CADObjectId ? 'CADObjectId: ' + surface.CADObjectId + b : '' ) +
-						'Space:  <button onclick=REP.toggleSpace("' + adjacencies[ 0 ].spaceIdRef + '"); >CADObjectId: ' + adjacencies[ 0 ].spaceIdRef + '</button>' + b +
-
-					'<hr></div>';
-
-			}
-
-		}
-
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			if ( surfaceAdjacencyInvalids.includes( child.userData.data.Name ) ) { child.material.color.set( 'crimson' ); }
-
-		}
-
-		const info = 'Error: Surface has multiple adjacencies but should have just one';
-		return { summary: 'Invalid Adjacencies &raquo; ' + count, flowContent: flowContent, info: info };
-
-	}
-
-
-
-	REP.toggleStorey = ( id, node ) => {
-
-		//console.log( 'id', id );
-
-		const spaces = GBX.gbjson.Campus.Building.Space;
-
-		let zones = [];
-		let spacesArray = [];
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			child.visible = false;
-
-		}
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-			if ( !adjacentSpaceId ) { continue; }
-
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-			for ( let space of spaces ) {
-
-				if ( space.id === spaceIdRef && space.buildingStoreyIdRef === id ) {
-
-					child.visible = true;
-
-					if ( !zones.includes( space.zoneIdRef ) ) { zones.push( space.zoneIdRef ); }
-
-					if ( !spacesArray.includes( space.id ) ) { spacesArray.push( space.id ); }
-
-				}
-
-			}
-
-		}
-
-		divStoreyItems.innerHTML =
-			'spaces ' + spacesArray.length + ': ' + spacesArray.join() + b +
-			'zones ' + zones.length + ': ' + zones.join();
-
-		/*
-				for ( let storey of storeys ) {
-
-					if ( id === storey.id ) {
-
-						icw.divLog.innerHTML = 'Storey name: ' + storey.Name;
-
-					}
-
-				}
-		*/
-		return zones;
-
-	}
-
-
-
-	REP.toggleSurface = ( id ) => {
-
-		//icw.divLog.innerHTML = '';
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( child.userData.data.id === id ) {
-
-				child.visible = true;
-
-				//console.log( '', child );
-
-				REP.zoomIntoSurface( child );
-
-				if ( window.divHeadsUp ) {
-
-					intersected = child;
-					HUD.setHeadsUp();
-
-				}
-
-			} else {
-
-				child.visible = false;
-
-			}
-
-		};
-
-	}
-
-
-
-	REP.zoomIntoSurface = ( surface ) => {
-		//console.log( 'surface', surface );
-
-		const center = surface.localToWorld( surface.geometry.boundingSphere.center.clone() );
-		const radius = surface.geometry.boundingSphere.radius > 1 ? surface.geometry.boundingSphere.radius : 1;
-		//console.log( 'bbb', center, radius );
-
-		THR.scene.remove( telltale );
-		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
-		telltale = new THREE.Mesh( geometry, material );
-		telltale.position.copy( center );
-		THR.scene.add( telltale );
-
-		THR.controls.target.copy( center );
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
+		REPselCadIdGroups.innerHTML = txt;
+		REPselCadIdGroups.selectedIndex = 0;
+
+		REPsumCadIdGroups.innerHTML = 'CAD Object Groups &raquo; ' + cadIds.length;
+		//REPdivCadIdGroups.innerHTML = contents;
 
 	};
 
 
 
-	REP.toggleSurfaceType = ( that ) => {
+	REP.updateCadIds = function() {
 
-		//icw.divLog.innerHTML = '';
-		//console.log( '', surfaceAdjacencyDuplicates );
+		const cadIds = [];
+		const surfaces = GBX.gbjson.Campus.Surface;
+		let txt = '';
 
-		for ( let child of GBX.surfaceMeshes.children ) {
+		for ( let surface of surfaces ) {
 
-			if ( child.userData.data.surfaceType !== that.innerText ) {
+			if ( !surface.CADObjectId ) { continue; }
 
-				child.visible = false;
+			id = surface.CADObjectId;
 
-			} else {
+			if ( !cadIds.includes( id ) ) {
 
-				child.visible = true;
-
-			}
-
-		}
-
-	}
-
-
-
-	REP.setTypeInvisible = ( that ) => {
-
-		//		surfaceGroup.visible = true;
-		//icw.divLog.innerHTML = '';
-		//console.log( '', surfaceAdjacencyDuplicates );
-
-		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === 'lightblue' ) {
-
-				child.visible = false;
-
-			} else if ( child.userData.data.surfaceType === that.value ) {
-
-				child.visible = true;
-
-			}
-
-		};
-
-	}
-
-
-
-	REP.toggleSpace = ( id ) => {
-
-		//surfaceGroup.visible = true;
-		//icw.divLog.innerHTML = '';
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			child.visible = false;
-
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
-
-			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef ) {
-
-				child.visible = true;
-
-
-			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
-
-				if ( id === adjacentSpaceId[ 0 ].spaceIdRef || id === adjacentSpaceId[ 1 ].spaceIdRef ) {
-
-					child.visible = true;
-
-					const type = child.userData.data.surfaceType;
-
-					if ( type === 'InteriorFloor' || type === 'SlabOnGrade' || type === 'RaisedFloor' || type === 'UndergroundSlab' ) {
-
-						REP.zoomIntoSurface( child );
-
-					}
-
-				}
-
-			}
-
-		}
-		/*
-				for ( let space of spaces ) {
-
-					if ( id === space.id ) {
-
-						icw.divLog.innerHTML = 'Space name: ' + space.Name;
-
-					}
-
-				}
-		*/
-	}
-
-
-
-	REP.toggleCadId = ( CADObjectId ) => {
-
-		//console.log( '', CADObjectId );
-		//		surfaceGroup.visible = true;
-		GBX.surfaceEdges.visible = true;
-		//icw.divLog.innerHTML = '';
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.userData.data ) { continue; }
-
-			if ( encodeURI( child.userData.data.CADObjectId ) === CADObjectId ) {
-
-				child.visible = true;
-
-			} else {
-
-				child.visible = false;
+				cadIds.push( id );
 
 			}
 
 		}
 
-	}
+		cadIds.sort();
+		//console.log( 'cadIds', cadIds );
 
+		for ( let id of cadIds ){
 
-
-	REP.toggleCadIdGroup = ( CADObjectGroupId ) => {
-
-		//console.log( 'CADObjectGroupId', CADObjectGroupId );
-		//		surfaceGroup.visible = true;
-		GBX.surfaceEdges.visible = true;
-		//icw.divLog.innerHTML = '';
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			child.visible = false;
+			txt += '<option>' + id+ '</option>';
 
 		}
-		for ( let child of GBX.surfaceMeshes.children ) {
 
-			if ( !child.userData.data.CADObjectId ) { continue; }
+		REPselCadId.innerHTML = txt;
+		REPselCadId.selectedIndex = 0;
 
-			id = encodeURI( child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ) );
+		REPsumCadIds.innerHTML = 'CAD Object IDs &raquo; ' + REPselCadId.length;
 
-			if ( id === CADObjectGroupId ) {
+	};
 
-				child.visible = true;
 
-			} else {
 
-				child.visible = false;
+	// copied from  HUD/ move to GBV?
+	REP.updateSelect = function( input, select ) {
+
+		const str = input.value.toLowerCase();
+
+		for ( let option of select.options ) {
+
+			if ( option.value.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+				//select.click();
+
+				break;
 
 			}
 
 		}
 
-	}
+	};
 
 
 
-	REP.toggleAdjacencies = ( id, surfaceArray ) => {
+	REP.getGoogleMap = function() {
 
-		//console.log( '', that.innerText );
+		const locate = GBX.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
+		let linkToMap;
 
-		//icw.divLog.innerHTML = '';
+		if ( locate && locate.Latitude && locate.Longitude ) {
 
-		if ( id.style.backgroundColor !== 'var( --but-bg-color )' ) {
+			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
 
-			//surfaceGroup.visible = true;
-
-			for ( let child of GBX.surfaceMeshes.children ) {
-
-				if ( !child.userData.data ) { continue; }
-
-				if ( surfaceArray.includes( child.userData.data.Name ) ) {
-
-					child.visible = true;
-
-				} else {
-
-					child.visible = false;
-
-				}
-
-			}
-
-			id.style.backgroundColor = 'var( --but-bg-color )';
+			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f310; </a>';
+			//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f5fa; </a>';
+			//			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > <img src=world-map.png height=18 > </a>';
 
 		} else {
 
-			REP.allVisible();
-
-			id.style.backgroundColor = '';
+			linkToMap = '';
 
 		}
 
-	};
-
-
-
-	REP.allVisible = () => {
-
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceEdges.visible = true;
-		//icw.divLog.innerHTML = '';
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-				child.visible = true;
-
-		}
-
-		const buttons = document.body.getElementsByClassName( 'toggleView' );
-
-		for ( butt of buttons ) {
-
-			butt.style.backgroundColor = '';
-
-
-		}
+		return '<span title="Use context menu to open a Google Map in a new tab" >' + linkToMap + '<span>';
 
 	};
 
 
 
 	REP.initReport();
-
-

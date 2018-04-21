@@ -51,6 +51,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<summary>Issues</summary>
 
+					<div id = "ISSdetPanelMetadataIssues" ></div>
+
 					<details>
 
 						<summary id = "ISSsumDuplicateAdjacentSpaces" >Duplicate Adjacent Spaces</summary>
@@ -109,7 +111,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 						<div >Surfaces that are smaller than a specified area,</div>
 
-						Test size <output id=ISSoutMinSize >0.5</output>
+						Test size <output id=ISSoutMinSize >0.2</output>
 						<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
 						<div class=flex-container2 >
 							<div class=flex-div1 >
@@ -209,6 +211,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			` + divMenuItems.innerHTML;
 
+			ISS.setPanelMetadataIssues( ISSdetPanelMetadataIssues );
+
 			ISS.getSurfacesDuplicatesAdjacents();
 
 			ISS.getSurfacesDuplicatesCoordinates();
@@ -242,6 +246,45 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 	};
 
+
+
+	ISS.setPanelMetadataIssues = function( target ) {
+
+		const required = [ 'areaUnit', 'lengthUnit', 'temperatureUnit', 'useSIUnitsForResults', 'version', 'volumeUnit', 'xmlns' ];
+
+		let provided = [];
+		let missing = [];
+		let count = 0;
+
+		for ( property in GBX.gbjson ) {
+
+			//provided.push( property );
+
+			if ( required.includes( property) ) {
+
+				count++
+				provided.push( property );
+
+			} else {
+
+
+			}
+
+		}
+		//console.log( 'provided', provided );
+
+		target.innerHTML =
+		`<details>
+
+			<summary>Metadata Issues</summary>
+
+			<div>gbXML attributes provided: ` + provided.join( ', ' ) + `</div>
+
+			<div>missing: ` + ( required.length - count ) + `</div>
+
+		</details>`;
+
+	};
 
 
 	ISS.getSurfacesDuplicatesAdjacents = function() {
@@ -543,12 +586,12 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 				<div class=flex-div1 >
 					<input oninput=ISS.updateSelect(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
 					<select id = "ISSselSurfaceTypeInvalid"
-						onclick=GBV.showSurface(this.value);ISS.updateSurfaceTypeInvalid();
-						onchange=GBV.showSurface(this.value);ISS.updateSurfaceTypeInvalid(); size=10 >` +
+						onclick=ISS.updateSurfaceTypeInvalid();
+						onchange=ISS.updateSurfaceTypeInvalid(); size=10 >` +
 						options + `
 						</select><br>
 					<button onclick=GBV.zoomIntoSurface(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
-					</div>
+				</div>
 				<div id = "ISSdivSurfaceTypeInvalid" class=flex-left-div2 ></div>
 			</div>
 
@@ -597,13 +640,15 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=ISS.updateSelect(this,ISSselOpeningUndefined); size=6 placeholder="opening id" ><br>
+					<input oninput=ISS.updateSelect(this,ISSselOpeningTypeInvalid); size=6 placeholder="opening id" ><br>
 					<select id = "ISSselOpeningTypeInvalid"
-						onclick=GBV.showSurface(this.value);ISS.updateOpeningTypeInvalid(this.value);
-						onchange=GBV.showSurface(this.value);ISS.updateOpeningTypeInvalid(this.value); size=10 >` +
+						onclick=ISS.updateOpeningTypeInvalid(this.value);
+						onchange=ISS.updateOpeningTypeInvalid(this.value); size=10 >` +
 						options + `
 						</select><br>
-					<button onclick=GBV.zoomIntoSurface(ISSselOpeningTypeInvalid.value); title="zoom into just this opening" >zoom</button>
+
+						<!-- <button onclick=GBV.zoomIntoSurface(ISSselOpeningTypeInvalid.value); title="zoom into just this opening" >zoom</button> -->
+
 				</div>
 				<div id = "ISSdivOpeningTypeInvalid" class=flex-left-div2 ></div>
 			</div>
@@ -664,13 +709,15 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div class=flex-container2 >
 				<div class=flex-div1 >
-					<input oninput=ISS.updateSelect(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
+					<input oninput=ISS.updateSelect(this,ISSselAdjacentSpaceInvalid); size=6 placeholder="surface id" ><br>
 					<select id = "ISSselAdjacentSpaceInvalid"
-						onclick=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid(this.value);
-						onchange=GBV.showSurface(this.value);ISS.updateAdjacentSpaceInvalid(this.value); size=10 >` +
+						onclick=ISS.updateAdjacentSpaceInvalid(this.value);
+						onchange=ISS.updateAdjacentSpaceInvalid(this.value); size=10 >` +
 						options + `
 						</select><br>
-					<button onclick=GBV.zoomIntoSurface(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button>
+
+					<!-- <button onclick=GBV.zoomIntoSurface(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button> -->
+
 				</div>
 				<div id = "ISSdivAdjacentSpaceInvalid" class=flex-left-div2 ></div>
 			</div>
@@ -726,22 +773,39 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
+	ISS.updateSurfaceTypeInvalid = function( id ) {
+
+		surface = ISS.surfaceTypeInvalid.find( item => item.id === id );
+
+		ISSdivSurfaceTypeInvalid.innerHTML =
+			ISS.traverseGbjson( surface ).attributes;
+
+		GBV.showSurface( id );
+
+	}
+
 	ISS.updateOpeningTypeInvalid = function( id ) {
 
 		opening = ISS.openingTypeInvalid.find( item => item.id === id );
 
-		ISSdivOpeningTypeInvalid.innerHTML = ISS.traverseGbjson( opening ).attributes;
+		ISSdivOpeningTypeInvalid.innerHTML =
+			ISS.traverseGbjson( opening ).attributes +
+			`<p>Openings will be displayed in R13</p>`;
 
 	}
 
 
 
 	ISS.updateAdjacentSpaceInvalid = function( id ) {
+
 		console.log( 'id', id );
 		surface = ISS.adjacentSpaceInvalid.find( item => item.id === id );
 		console.log( 'surface', surface );
 
-		ISSdivAdjacentSpaceInvalid.innerHTML = ISS.traverseGbjson( surface ).attributes;
+		ISSdivAdjacentSpaceInvalid.innerHTML =
+			ISS.traverseGbjson( surface ).attributes +
+			`<p>Spaces will be displayed in R13</p>
+			<p>Further surface details available in JavaScript Console</p>`;
 
 	}
 
@@ -828,8 +892,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-
-
 	/////////
 
 	ISS.getSurfacesInside = function() {
@@ -880,17 +942,17 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		for ( let property in obj ) {
 
-//			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
+				//			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
 				//if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
 
 				elements.push( property );
 
-//			} else {
+				//			} else {
 
 				attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
 
-//			}
+				//			}
 
 		};
 
