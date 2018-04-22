@@ -44,16 +44,79 @@
 		THR.renderer.domElement.addEventListener( 'touchstart', HUD.onRendererTouchStartHUD, false );
 
 
+		//HUDdivShowHide.innerHTML = GBI.getPanelShowHide();
 		GBI.setPanelShowHide( HUDdivShowHide );
 
+		//HUDdivEditSurface.innerHTML = GBI.getPanelEditSurface();
 		GBI.setPanelEditSurface( HUDdivEditSurface );
 
 		HUD.setPanelSurface( HUDdivItems );
 
 		HUD.setPanelTellTale( HUDdivTellTales );
 
-
 		GBI.setButtonStyleClass( divHeadsUp );
+
+
+		/////
+
+		/*
+		GBP.spacesJson = GBP.gbjson.Campus.Building.Space;
+
+		let spacesOptions = '<option>none</option>';
+
+		if ( Array.isArray( GBP.spacesJson ) ) {
+
+			for ( let space of GBP.spacesJson ) {
+
+				spacesOptions += '<option>' + space.id + '</option>';
+
+			}
+
+		} else {
+
+			spacesOptions += '<option>' + GBP.spacesJson.id + '</option>';
+
+		}
+
+		GBP.spacesOptions = spacesOptions;
+		//console.log( 'GBP.spaceOptions', GBP.spaceOptions);
+
+
+		let surfacesOptions = '';
+
+		for ( let surface of GBP.surfaceJson ) {
+
+			surfacesOptions += '<option>' + surface.id + '</option>';
+
+		}
+
+		GBP.surfacesOptions = surfacesOptions;
+
+
+		const cadIdOptions = [];
+
+		for ( let surface of GBP.surfaceJson ) {
+
+			cadIdOptions.push( '<option>' + surface.CADObjectId + '</option>' );
+
+		}
+
+		let surfaceTypeOptions = '';
+
+		for ( let type of GBP.surfaceTypes ) {
+
+			surfaceTypeOptions += '<option>' + type + '</option>';
+
+		}
+
+		GBP.surfaceTypeOptions = surfaceTypeOptions;
+
+
+		GBP.surfacesCadObj = cadIdOptions.sort().join();
+		//console.log( 'GBP.surfacesCadObj', GBP.surfacesCadObj);
+
+		GBP.surfacesXml = GBP.gbxml.getElementsByTagName("Surface");
+		*/
 
 	};
 
@@ -159,8 +222,7 @@
 		divHamburgerRight.style.display = 'block';
 
 		const data = HUD.intersected.userData.data;
-
-		HUD.userDataData = data;
+		HUD.data = data;
 		//console.log( 'data', data );
 
 
@@ -168,8 +230,8 @@
 		const width = parseFloat( data.RectangularGeometry.Width );
 		const surfaceArea = height * width;
 
-		HUDselSurfaceId.value = data.id;
-		HUDselSurfaceId.click();
+		HUDselId.value = HUD.data.id;
+		HUDselId.click();
 
 	};
 
@@ -186,26 +248,25 @@
 
 			<summary><b>Surface</b></summary>
 
-			<div id = "HUDdivPanelSurface" ></div>
+			<div id = "HUDdivInputSelect" ></div>
 
 			<hr>
 
 		</details>`;
 
-		let item = {};
+		let data = {};
+		data.attribute = '';
+		data.divTarget = document.getElementById( 'HUDdivInputSelect' );
+		data.divAttribute = 'id';
+		data.element = 'Surface';
+		data.parent = GBP.surfaceJson;
+		data.placeholder = 'surface id'
+		data.selItem = 'HUDselId';
+		data.optionValues = GBP.surfaceJson.map ( item => [ item.id, item.id ] );
 
-		item.attribute = 'id';
-		item.divAttributes = 'HUDdivCardSurfaceAttributes';
-		item.divTarget = document.getElementById( 'HUDdivPanelSurface' );
-		item.element = 'Surface';
-		item.optionValues = GBP.surfaceJson.map ( item => [ item.id, item.id ] );
-		item.parent = GBP.surfaceJson;
-		item.placeholder = 'surface id'
-		item.selItem = 'HUDselSurfaceId';
+		HUD.data = data;
 
-		//HUD.item = item;
-
-		GBI.setElementPanel2( item );
+		GBI.setElementPanel2( data );
 
 	};
 
@@ -226,7 +287,7 @@
 	};
 
 
-	///////// Editing Elements
+	/////////
 
 	HUD.updateSurface = function( id ) {
 
@@ -243,7 +304,7 @@
 	HUD.updateSpace = function( spaceRef ) {
 		//console.log( 'spaceRef', spaceRef );
 
-		const surfaceJson = HUD.userDataData;
+		const surfaceJson = HUD.data;
 		const surfaceId = surfaceJson.id;
 		let adjacentNew;
 
@@ -306,9 +367,9 @@
 
 	HUD.updateType = function() {
 
-		// console.log( 'id', HUD.userDataData );
+		// console.log( 'id', HUD.data );
 
-		const surface = HUD.userDataData;
+		const surface = HUD.data;
 		//console.log( 'surface', surface );
 
 		const id = surface.id;
@@ -458,7 +519,7 @@
 
 	HUD.updateCadId = function( that ){
 
-		const surface = HUD.item;
+		const surface = HUD.data;
 		//console.log( 'surface', surface );
 
 		const id = surface.id;
@@ -609,7 +670,6 @@
 	};
 
 
-
 	HUD.drawPlacard = function( text, scale, color, x, y, z ) {
 
 		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
@@ -682,7 +742,5 @@
 
 	};
 
-
-	////////// here we go
 
 	HUD.initHeadsUp();

@@ -229,19 +229,6 @@
 		GBP.surfaceMeshes.children.forEach( element =>
 			element.visible = element.userData.data.CADObjectId === cadId ? true : false );
 
-		if ( HUDdivAttributes ) {
-
-			HUDdivAttributes.innerHTML =
-
-			`<div>cad object id:<br><i>${cadId}</i></div>
-
-			<div id=GBIdivCadIdGroup >cad object id:<br><i>${cadId}</i></div>
-
-
-			`
-			GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup )
-		}
-
 	};
 
 
@@ -300,12 +287,6 @@
 
 		}
 
-		if ( HUDdivAttributes ) {
-
-			GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId );
-
-		}
-
 	};
 
 
@@ -345,21 +326,6 @@
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
 
-		surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
-		recGeom = surfaceMesh.userData.data.RectangularGeometry;
-		//console.log( 'recGeom', recGeom );
-
-		if ( window.HUDdivAttributes ) {
-
-			HUDdivAttributes.innerHTML =
-
-			`<div>surface id: <i>${id}</i></div>
-			<div>width: ${parseFloat(recGeom.Width).toLocaleString()}</div>
-			<div>height: ${parseFloat(recGeom.Height).toLocaleString()}</div>
-			<div>azimiuth: ${parseFloat(recGeom.Azimuth).toLocaleString()}</div>
-			<div>tilt: ${parseFloat(recGeom.Tilt).toLocaleString()}</div>`;
-
-		}
 	};
 
 
@@ -444,12 +410,6 @@
 
 		}
 
-		if ( window.HUDdivAttributes ) {
-
-			HUDdivAttributes.innerHTML = '';
-
-		}
-
 	};
 
 
@@ -481,12 +441,6 @@
 		GBP.openingMeshes.visible = false;
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
-
-		if ( window.HUDdivAttributes ) {
-
-			HUDdivAttributes.innerHTML = '';
-
-		}
 
 	};
 
@@ -750,17 +704,16 @@
 	GBI.setElementPanel2 = function( item ){
 
 		item = item || {};
-
 		item.attribute = item.attribute ? item.attribute : '';
 		item.divAttributes = item.divAttributes || 'GBIdivSurface';
 		item.divTarget = item.divTarget || 'GBIdivElements';
 		item.element = item.element || 'Surface';
 		item.optionValues = item.optionValues || [ [ 'aaa', 1], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
-		item.parent = item.parent || GBP.surfaceJson;
 		item.placeholder = item.placeholder || 'surface id';
 		item.selItem = item.selItem || 'selItem';
 
 		let options = '';
+		//item.ids.forEach( id => options += '<option>' + id + '</option>' );
 
 		item.optionValues.forEach( option =>
 			options += '<option value=' + option[ 1 ] + ' title="id: ' + option[ 1 ] + '" >' + option[ 0 ] + '</option>' );
@@ -777,11 +730,8 @@
 						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
 						 ` style=min-width:6rem; >${options}</select>
 				</div>
-				<div id = ${item.divAttributes} class=flex-left-div2 >bbb</div>
-
-			</div>
-			<div><i><small>show/hide toggles and much more: not yet turned on</small></i></div>
-			`;
+				<div id = ${item.divAttributes} class=flex-left-div2 ></div>
+			</div>`;
 
 		item.divTarget.innerHTML = divElement;
 
@@ -864,19 +814,13 @@
 
 
 	GBI.setElementIdAttributes = function ( id, item ) {
-		//console.log( 'item', item, '\nid', id );
+		console.log( 'item', item, '\nid', id );
 
-		//console.log( 'item.parent', item.parent );
 		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
-		//console.log( 'arr', arr );
-
 		obj = arr.find( element => element.id === id );
 		//console.log( 'obj', obj );
 
-		divAttributes = document.getElementById ( item.divAttributes );
-		//console.log( 'divAttributes', divAttributes );
-
-		divAttributes.innerHTML = `<div>id: <b>${id}</b></div>`;
+		let attributes = `<div>id: <b>${id}</b></div>`;
 
 		for ( let property in obj ) {
 
@@ -888,12 +832,12 @@
 
 					if ( Array.isArray( obj[ property ] ) ) {
 
-						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ][ 0 ].spaceIdRef );
-						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ][ 1 ].spaceIdRef );
+						attributes += GBI.getAttributeAdjacentSpace( obj[ property ][ 0 ].spaceIdRef );
+						attributes += GBI.getAttributeAdjacentSpace( obj[ property ][ 1 ].spaceIdRef );
 
 					} else {
 
-						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ].spaceIdRef );
+						attributes += GBI.getAttributeAdjacentSpace( obj[ property ].spaceIdRef );
 
 					}
 
@@ -901,59 +845,98 @@
 
 			} else if ( property === 'buildingStoreyIdRef' && obj[ property ] ) {
 
-				divAttributes.innerHTML += GBI.getAttributeStorey( obj[ property ] );
+					attributes += GBI.getAttributeStorey( obj[ property ] );
 
 			} else if ( item.element === 'Surface' && property === 'CADObjectId' ) {
 
-				divAttributes.innerHTML += GBI.getAttributeCadObjectId( obj[ property ] );
+				attributes += GBI.getAttributeCadObjectId( obj[ property ] );
 
 			} else if ( property === 'id' && obj[ property ] ) {
 
 				if ( item.element === 'Openings' ) {
 
-					divAttributes.innerHTML += GBI.getAttributeOpenings( obj[ property ] );
+					attributes += GBI.getAttributeOpenings( obj[ property ] );
 
 				} else if ( item.element === 'Space' ) {
 
-					divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ] );
+					attributes += GBI.getAttributeAdjacentSpace( obj[ property ] );
+
 
 				} else if ( item.element === 'Surface' ) {
 
-					divAttributes.innerHTML += GBI.getAttributeSurfaceId( obj[ property ] );
+					attributes += GBI.getAttributeSurfaceId( obj[ property ] );
+
+					surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
+					recGeom = surfaceMesh.userData.data.RectangularGeometry;
+					//console.log( 'recGeom', recGeom );
+
+					if ( window.HUDdivAttributes ) {
+
+					HUDdivAttributes.innerHTML =
+
+						`<div>surface id: <i>${id}</i></div>
+						<div>width: ${parseFloat(recGeom.Width).toLocaleString()}</div>
+						<div>height: ${parseFloat(recGeom.Height).toLocaleString()}</div>
+						<div>azimiuth: ${parseFloat(recGeom.Azimuth).toLocaleString()}</div>
+						<div>tilt: ${parseFloat(recGeom.Tilt).toLocaleString()}</div>`;
+
+					}
 
 				} else if ( item.element === 'Storey' ) {
 
-					divAttributes.innerHTML += GBI.getAttributeStorey( obj[ property ] );
+					attributes += GBI.getAttributeStorey( obj[ property ] );
 
 				}else if ( item.element === 'Zone' ) {
 
-					divAttributes.innerHTML += GBI.getAttributeZone( obj[ property ] );
+					attributes += GBI.getAttributeZone( obj[ property ] );
 
 				} else {
 
-					divAttributes.innerHTML += `<div><span class=attributeTitle >${property}:</span><br>
+					attributes += `<div><span class=attributeTitle >${property}:</span><br>
 						<span class=attributeValue >${obj[ property ]}</span></div>`;
 
 				}
 
 			} else if ( property === 'surfaceType' ) {
 
-				divAttributes.innerHTML += GBI.getAttributeSurfaceType( obj[ property ] );
+				attributes += GBI.getAttributeSurfaceType( obj[ property ] );
 
 			} else if ( property === 'zoneIdRef' ) {
 
-				divAttributes.innerHTML += GBI.getAttributeZone( obj[ property ] );
+				attributes += GBI.getAttributeZone( obj[ property ] );
 
 			} else {
 
-				divAttributes.innerHTML += `<div><span class=attributeTitle >${property}:</span><br>
-					<span class=attributeValue >${obj[ property ]}</span></div>`;
+				attributes += `<div><span class=attributeTitle >${property}:</span><br>
+				<span class=attributeValue >${obj[ property ]}</span></div>`;
+
+			}
+
+		}
+		//console.log( 'attributes', attributes );
+
+		selectTarget = item.divTarget.getElementsByClassName( 'flex-left-div2' )[ 0 ];
+		//console.log( 'selectTarget', selectTarget );
+
+		selectTarget.innerHTML = attributes;
+
+
+		GBIbutSpaceVis.onclick = function( event ){
+
+			console.log( 'event', event );
+
+			spaceId = event.target.innerText;
+			GBI.setSpaceVisible( spaceId );
+
+			if ( HUDdivAttributes ) {
+
+				GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId );
 
 			}
 
 		}
 
-		GBI.setButtonStyleClass( divAttributes );
+		GBI.setButtonStyleClass( selectTarget );
 
 	};
 
@@ -976,25 +959,8 @@
 
 		<hr>`;
 
-		item.attribute = 'space';
-		item.divAttributes = 'GBIdivAtts';
-		item.divTarget = GBIdivSpace;
-		item.element = 'Space';
-		//item.optionValues = item.optionValues;
-		item.parent = GBP.gbjson.Campus.Building.Space;
-		item.placeholder = 'space id';
-		item.selItem = 'GBIselSpace';
-
-		item.optionValues = GBP.gbjson.Campus.Building.Space.map( item => [ item.id, item.id ] );
-
-		//console.log( 'item.optionValues', item.optionValues);
+		item.divTarget = GBIdivSpace
 		GBI.setElementPanel2( item );
-
-		sel = document.getElementById( item.selItem );
-		sel.value = id;
-		sel.click();
-
-		console.log( 'sel', sel );
 
 	};
 
@@ -1043,12 +1009,13 @@
 
 	GBI.getAttributeAdjacentSpace = function( spaceIdRef ) {
 
-		//console.log( 'spaceIdRef', spaceIdRef );
+		//console.log( 'item', item );
+
 
 		const txt =
 		`<div>
 			<span class=attributeTitle >adjacent space id</span>:<br>
-			<button id=GBIbutSpaceVis onclick=GBI.setSpaceVisible("${spaceIdRef}"); >${spaceIdRef}</button>
+			<button id=GBIbutSpaceVis onclick= >${spaceIdRef}</button>
 			<button onclick=GBI.setSpaceZoom("${spaceIdRef}"); >&#8981;</button>
 		</div>`;
 
@@ -1151,63 +1118,6 @@
 	};
 
 
-
-	GBI.setMenuPanelCadObjectsByType = function( target ) {
-
-		const surfaces = GBP.gbjson.Campus.Surface;
-		const cadIds = [];
-
-		for ( let surface of surfaces ) {
-
-			//if ( !surface.CADObjectId ) { continue; }
-
-			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
-
-				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
-
-				console.log( 'surface', surface );
-				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
-				continue;
-
-			}
-
-			const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
-
-			if ( !cadIds.includes( id ) ) {
-
-				cadIds.push( id );
-
-			}
-
-		}
-
-		//console.log( 'cadIds', cadIds );
-		cadIds.sort();
-
-		let txt = '';
-
-		for ( let id of cadIds ){
-
-			txt += '<option>' + id + '</option>';
-
-		}
-
-		const details =
-
-		`
-			<p>
-				<select id = "REPselCadIdGroups"
-					onclick=GBI.setCadObjectTypeVisible(this.value);
-					onchange=GBI.setCadObjectTypeVisible(this.value); size=10 >` +
-					txt +
-				`</select>
-			</p>
-
-		`;
-
-		target.innerHTML = details;
-
-	};
 
 	///////// Show / Hide
 
@@ -1317,7 +1227,6 @@
 
 			<summary>Edit the Surface</summary>
 
-			<p><i>Editing and saving not yet turned on</i></p>
 			<button class=toggle onclick=GBI.deleteSurface(); >delete surface</button>
 				<button onclick=GBI.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
 				<button onclick=GBI.saveFile(); title="creates a new file with the changes" >save edits</button>

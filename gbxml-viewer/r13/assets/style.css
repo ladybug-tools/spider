@@ -6,6 +6,7 @@
 :root {
 
 	--a-back-color-hover: yellow;
+	--highlight-color: yellow;
 	--mnu-left-width: 23rem;
 	--mnu-right-width: 25rem;
 
@@ -38,7 +39,8 @@
 
 	.flex-container2 { box-sizing: border-box; display: flex;}
 	.flex-div1 { border: 0px solid #f00; box-sizing: border-box; overflow-x: auto; margin-right: 10px; min-width:7rem; }
-	.flex-left-div2 { border: 0px solid #f00; box-sizing: border-box; overflow-x: auto; max-width: calc( var( --mnu-left-width ) - 150px ); }
+	.flex-left-div2 { border: 0px solid #f00; box-sizing: border-box; overflow-x: auto; max-height: 18rem;
+			max-width: calc( var( --mnu-left-width ) - 150px ); }
 	.flex-div2 { border: 0px red solid; overflow-x: auto; }
 
 	.highlight { background-color: var( --highlight-color ) }

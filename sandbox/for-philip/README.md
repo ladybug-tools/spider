@@ -3,6 +3,9 @@
 # For Philip Read Me
 
 
+Deprecated: Go to: <https://github.com/ladybug-tools/spider/tree/master/solar-well>
+
+
 ## Concept
 
 Entry level ray-casting with Three.js

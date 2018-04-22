@@ -24,7 +24,9 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-04-19 ~ R13.5</summary>
+<summary>Welcome 2018-04-22 ~ R13.7</summary>
+
+<span class=highlight>New Heads-Up Display is now turned on.</span>
 
 A very extensive rewrite of REP/GBI/NUM/ISS/HUD in progress
 

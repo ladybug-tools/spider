@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-04-21" >
-<title>gbXML Viewer 13.6</title>
+<title>gbXML Viewer 13.7</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -18,7 +18,7 @@
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
 <script src = "../gv-gbp-gbxml-parse/gv-gbp.js" ></script>
 <script src = "../gv-gbi-gbxml-interact/gv-gbi.js" ></script>
-<script src = "../gv-hud-heads-up-display/gv-hud.js" ></script>
+<script src = "../gv-hud2-heads-up-display/gv-hud2.js" ></script>
 <!--
 <script src = "../gv-GBI/gv-GBI.js" ></script>
 <script src = "../gv-hud/gv-hud.js" ></script>
@@ -253,7 +253,7 @@
 
 	</div>
 
-
+	<!--
 	<div id = "divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); > &#9776; </div>
 
 	<div id = "divHeadsUp" class = "w3-theme-l5" >
@@ -270,6 +270,24 @@
 		<div id=divHUDfooter class=mnuRightDiv ></div>
 
 	</div>
+	-->
+
+	<div id = "divHeadsUp" class = "w3-theme-l5" >
+
+		<div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
+			right menu / click here to move
+		</div>
+
+		<div id=HUDdivShowHide class=mnuRightDiv ></div>
+		<div id=HUDdivEditSurface class=mnuRightDiv ></div>
+		<div id=HUDdivItems class=mnuRightDiv ></div>
+		<div id=HUDdivAttributes class=mnuRightDiv ></div>
+		<div id=HUDdivTellTales class=mnuRightDiv ></div>
+
+	</div>
+
+	<div id = "divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); > &#9776; </div>
+
 
 
 <script>
@@ -367,8 +385,8 @@
 
 		}
 
-		HUD.getMenuOptions();
-
+		//HUD.getMenuOptions();
+		HUD.setMenuOptions();
 		APP.resetMenu();
 
 	}

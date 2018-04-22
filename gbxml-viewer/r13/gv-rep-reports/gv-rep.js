@@ -180,6 +180,7 @@
 				item.divAttributes = 'REPdivElementAttributes';
 				item.parent = parent;
 				item.element = element;
+
 				item.placeholder = property;
 				item.selItem = 'REPselReportType';
 
