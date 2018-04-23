@@ -237,14 +237,9 @@
 
 			<div id=GBIdivCadIdGroup >cad object id:<br><i>${cadId}</i></div>
 
-			<div><button onclick=alert("coming-soon"); >Update cad object group of surface</button></div>
 
-			<div><i>workflow needs fixing</i></div>
-
-			<hr>`;
-
-			GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup );
-
+			`
+			GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup )
 		}
 
 	};
@@ -489,11 +484,7 @@
 
 		if ( window.HUDdivAttributes ) {
 
-			HUDdivAttributes.innerHTML =
-			`<div>type: <i>${type}</i></div>
-			<div>more details and update type coming soon</div>
-			<hr>`;
-
+			HUDdivAttributes.innerHTML = '';
 
 		}
 
@@ -788,7 +779,9 @@
 				</div>
 				<div id = ${item.divAttributes} class=flex-left-div2 >bbb</div>
 
-			</div>`;
+			</div>
+			<div><i><small>show/hide toggles and much more: not yet turned on</small></i></div>
+			`;
 
 		item.divTarget.innerHTML = divElement;
 
@@ -973,13 +966,11 @@
 
 		`<details open >
 
-			<summary>Space</summary>
+				<summary>Space</summary>
 
-			<div id=GBIdivSpace ></div>
+				<div id=GBIdivSpace ></div>
 
-			<div id=GBIdivAtts ></div>
-
-			<div><button onclick=alert("coming-soon"); >udpate the space associated with this surface</button>
+				<div id=GBIdivAtts ></div>
 
 		</details>
 

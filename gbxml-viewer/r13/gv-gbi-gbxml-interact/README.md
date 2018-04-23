@@ -15,6 +15,8 @@
 
 ## Wish list
 
+* 2018-04-23 ~ Delete > drop alert. Add undo
+* 2018-04-23 ~ Add select attribute type to display in select list
 * 2018-04-21 ~ Openings by Type: what attribute info to add?
 * 2018-04-21 ~ CAD Objects by Type: what attribute info to add?
 * 2018-04-21 ~ Theo Storey attribute item has a zoom button
@@ -31,6 +33,12 @@
 
 
 ## Change Log
+
+### 2018-04-23 ~ Theo
+
+R13.8
+* Beginning to look OK
+* Delete button / eit panel > now working OK
 
 ### 2018-04-16 ~ Theo
 

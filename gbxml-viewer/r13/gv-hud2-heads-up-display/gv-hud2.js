@@ -188,6 +188,8 @@
 
 			<div id = "HUDdivPanelSurface" ></div>
 
+			<div><i><small>show/hide toggles and much more: not yet turned on</small></i></div>
+
 			<hr>
 
 		</details>`;
