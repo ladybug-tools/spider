@@ -38,6 +38,7 @@ First is a test gbXML file we are using for the shadow range analysis and radiat
 
 
 
+
 it can be imported into the gbXML viewer
 we took this gbXML, imported into Rhino and Grasshopper, and figured out all the settings we needed to run the shadow range analysis and solar radiation in ladybug. We identififed the ideal mesh size, size of ground plan relative to building, and reasonable computational times using partial analysis for shadows to represent months
 we then output the results into two files we custom formatted
