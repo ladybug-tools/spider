@@ -125,7 +125,7 @@
 		mesh = new THREE.Mesh( geometry, material );
 		//scene.add( mesh );
 
-		let url = 'https://rawgit.com/ladybug-tools/spider/master/solar-well/radiance-data-files/sample_file.rad'
+		let url = 'https://rawgit.com/ladybug-tools/spider/master/solar-well/radiance-data-files/sample-file.rad'
 
 		//const urlCORS = 'https://cors-anywhere.herokuapp.com/';
 
@@ -204,11 +204,12 @@
 
 	function setVerts() {
 
+		let geometry, material, mesh;
 
 		for ( thing of rad.data ) {
 
-			length = parseInt( thing[ 2 ], 10 ) / 3 + 3;
-			points = [];
+			const length = parseInt( thing[ 2 ], 10 ) / 3 + 3;
+			const points = [];
 
 			for ( var i = 3; i < length; i++ ) {
 
@@ -230,30 +231,30 @@
 
 			if ( points.length === 3 ) {
 
-				var geometry = new THREE.Geometry();
+				geometry = new THREE.Geometry();
 				geometry.vertices = [ points[ 0 ], points[ 1 ], points[ 2 ] ];
 				geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
 				geometry.computeFaceNormals();
 
-				material = new THREE.MeshNormalMaterial( { side: 2 } );
+				const material = new THREE.MeshNormalMaterial( { side: 2 } );
 				mesh = new THREE.Mesh( geometry, material );
 				mesh.castShadow = mesh.receiveShadow = true;
 				scene.add( mesh );
 
 			} else {
 
-				var geometry = new THREE.Geometry();
+				geometry = new THREE.Geometry();
 				geometry.vertices = [ points[ 0 ], points[ 1 ], points[ 2 ] ];
-				geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+				geometry.faces.push( new THREE. Face3( 0, 1, 2 ) );
 				geometry.computeFaceNormals();
 
 				material = new THREE.MeshNormalMaterial( { side: 2 } );
-				mesh = new THREE.Mesh( geometry, material );
+			mesh = new THREE.Mesh( geometry, material );
 				mesh.castShadow = mesh.receiveShadow = true;
 				scene.add( mesh );
 
 
-				var geometry = new THREE.Geometry();
+				geometry = new THREE.Geometry();
 				geometry.vertices = [ points[ 0 ], points[ 3 ], points[ 2 ] ];
 				geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
 				geometry.computeFaceNormals();
