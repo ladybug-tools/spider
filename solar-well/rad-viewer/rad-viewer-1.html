@@ -80,6 +80,8 @@
 
 <script>
 
+	var rad;
+
 	var renderer, camera, controls, scene;
 	var geometry, material, mesh, axesHelper;
 
@@ -136,17 +138,13 @@
 
 
 	function requestFile( url ) {
-
-		//		let xhr;
-
-		xhr = new XMLHttpRequest();
+		const xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
 		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
-
 
 	}
 
@@ -157,16 +155,15 @@
 		//let response, json, lines;
 
 		const response = xhr.target.response;
-		console.log( 'response', response );
+		//console.log( 'response', response );
 
-		lines = response.split(/\r\n|\n/);
-		///			lines = response.split( '\n' ).map( function( line ) { return line.split( ',' ); } );
+		const lines = response.split(/\r\n|\n/);
 
-		items = [ 'header'];
-		data = [];
-		tmp = [];
+		const items = [ 'header'];
+		const data = [];
+		let tmp = [];
 
-		for ( line of lines ) {
+		for ( let line of lines ) {
 
 			if ( line.slice( 0, 7) === 'generic' ) {
 
@@ -177,7 +174,6 @@
 			} else {
 
 				tmp.push( line );
-
 
 			}
 
@@ -195,7 +191,7 @@
 		divContents.innerHTML =
 			`<p>length: ${response.length.toLocaleString()}</p>
 			<p>lines: ${lines.length}</p>
-			<p>lines: ${items.length}</p>
+			<p>faces: ${items.length - 1 }</p>
 		`;
 
 	}
@@ -206,18 +202,18 @@
 
 		let geometry, material, mesh;
 
-		for ( thing of rad.data ) {
+		for ( let thing of rad.data ) {
 
 			const length = parseInt( thing[ 2 ], 10 ) / 3 + 3;
 			const points = [];
 
-			for ( var i = 3; i < length; i++ ) {
+			for ( let i = 3; i < length; i++ ) {
 
-				line = thing[ i ].split( ' ' ).map( item => parseFloat( item ) );
+				const line = thing[ i ].split( ' ' ).map( item => parseFloat( item ) );
 				//console.log( 'line', line );
 
-				vertex = new THREE.Vector3().fromArray( line );
-				console.log( 'vertex', vertex );
+				const vertex = new THREE.Vector3().fromArray( line );
+				//console.log( 'vertex', vertex );
 
 				points.push( vertex );
 
@@ -225,7 +221,7 @@
 
 			}
 
-			console.log( 'points', points );
+			//console.log( 'points', points );
 
 			if (points.length === 0 ) { continue; }
 
@@ -249,7 +245,7 @@
 				geometry.computeFaceNormals();
 
 				material = new THREE.MeshNormalMaterial( { side: 2 } );
-			mesh = new THREE.Mesh( geometry, material );
+				mesh = new THREE.Mesh( geometry, material );
 				mesh.castShadow = mesh.receiveShadow = true;
 				scene.add( mesh );
 
