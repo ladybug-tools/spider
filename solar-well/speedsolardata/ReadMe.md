@@ -1,5 +1,5 @@
 
-'Solar Shadow Range Analysis and Raditation test gbXML file and results data file instructions'
+**Solar Shadow Range Analysis and Raditation test gbXML file and results data file instructions**
 
 There are 3 files I posted to Github.
 https://github.com/ladybug-tools/spider/tree/master/solar-well/speedsolardata
