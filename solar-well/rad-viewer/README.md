@@ -5,15 +5,15 @@
 
 <iframe class=iframeReadMe src=http://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
-_First project here. Use the left menu to explore more and better(?) scripts_
+_First project heres_
 
 
-## full screen: [ground and boxes 1]( http://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-siewer-1.html )
+## full screen: [ground and boxes 1]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-siewer-1.html )
 
 
 ## Concept
 
-View RAD files in your browser
+View RAD produced by [Radiance]( https://radiance-online.org/ ) files in your browser
 
 
 ## Wish list
