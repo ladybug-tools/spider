@@ -1,9 +1,9 @@
 
 **Solar Shadow Range Analysis and Raditation test gbXML file and results data file instructions**
 
-There are 3 files I posted to Github.
-https://github.com/ladybug-tools/spider/tree/master/solar-well/speedsolardata
-First is a test gbXML we are using for the shadow range analysis and radiation analysis
+There are 3 files I posted to Github: https://github.com/ladybug-tools/spider/tree/master/solar-well/speedsolardata.
+
+First is a test gbXML file we are using for the shadow range analysis and radiation analysis. Simple box, one window each side, overhangs and fins south side, and an adjacent building. 
 it can be imported into the gbXML viewer
 we took this gbXML, imported into Rhino and Grasshopper, and figured out all the settings we needed to run the shadow range analysis and solar radiation in ladybug. We identififed the ideal mesh size, size of ground plan relative to building, and reasonable computational times using partial analysis for shadows to represent months
 we then output the results into two files we custom formatted
