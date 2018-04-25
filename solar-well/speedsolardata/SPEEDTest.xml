@@ -1126,6 +1126,36 @@
         </PolyLoop>
       </PlanarGeometry>
     </Surface>
+    <Surface surfaceType="Shade" id="shade-9">
+      <Name>ground</Name>
+      <RectangularGeometry>
+        <Azimuth>0</Azimuth>
+      </RectangularGeometry>
+      <PlanarGeometry>
+        <PolyLoop>
+          <CartesianPoint>
+            <Coordinate>197</Coordinate>
+            <Coordinate>197</Coordinate>
+            <Coordinate>50</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-197</Coordinate>
+            <Coordinate>197</Coordinate>
+            <Coordinate>0</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>-197</Coordinate>
+            <Coordinate>-197</Coordinate>
+            <Coordinate>0</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>197</Coordinate>
+            <Coordinate>-197/Coordinate>
+            <Coordinate>0</Coordinate>
+          </CartesianPoint>
+        </PolyLoop>
+      </PlanarGeometry>
+    </Surface>
   </Campus>
   <Zone id="zone-1">
     <Name>storey-1-zone-1</Name>
