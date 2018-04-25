@@ -3,38 +3,10 @@
 
 There are 3 files I posted to Github: https://github.com/ladybug-tools/spider/tree/master/solar-well/speedsolardata.
 
-First is a test gbXML file we are using for the shadow range analysis and radiation analysis. Simple box, one window each side, overhangs and fins south side, and an adjacent building. We also will be writing out a ground plane as a shading surface to generate the ground mesh based on the size of the building as a single story building (basically 5 times as large as the longest side in both dimensions). We determined this size is enough to capture the farthest casting shadows. Here is what it looks like in the gbXML test file:
+First is a test gbXML file we are using for the shadow range analysis and radiation analysis. Simple box, one window each side, overhangs and fins south side, and an adjacent building. We also will be writing out a ground plane as a shading surface to generate the ground mesh based on the size of the building as a single story building (basically 5 times as large as the longest side in both dimensions). We determined this size is enough to capture the farthest casting shadows. You will see it as shading.9 in the gbXML file.
 
-<Surface surfaceType="Shade" id="shade-9">
-      <Name>ground</Name>
-      <RectangularGeometry>
-        <Azimuth>0</Azimuth>
-      </RectangularGeometry>
-      <PlanarGeometry>
-        <PolyLoop>
-          <CartesianPoint>
-            <Coordinate>197</Coordinate>
-            <Coordinate>197</Coordinate>
-            <Coordinate>50</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>-197</Coordinate>
-            <Coordinate>197</Coordinate>
-            <Coordinate>0</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>-197</Coordinate>
-            <Coordinate>-197</Coordinate>
-            <Coordinate>0</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>197</Coordinate>
-            <Coordinate>-197/Coordinate>
-            <Coordinate>0</Coordinate>
-          </CartesianPoint>
-        </PolyLoop>
-      </PlanarGeometry>
-    </Surface>
+
+
 
 
 
