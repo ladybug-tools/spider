@@ -8,7 +8,7 @@
 _First project heres_
 
 
-## full screen: [ground and boxes 1]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-siewer-1.html )
+## full screen: [rad viewer 1]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-1.html )
 
 
 ## Concept
