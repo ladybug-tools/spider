@@ -182,7 +182,7 @@
 		reader = new FileReader();
 		reader.onload = function( event ) {
 
-			divData.innerHTML = reader.result;
+			//divData.innerHTML = reader.result;
 
 			divLog.innerHTML =
 				'name: ' + files.files[0].name + '<br>' +
@@ -254,36 +254,37 @@
 
 		rad.meshes = new THREE.Object3D();
 
-		for ( let thing of rad.data ) {
+		for ( let line of rad.data ) {
 
-			const length = parseInt( thing[ 2 ], 10 ) / 3 + 3;
+			const length = parseInt( line[ 2 ], 10 ) / 3 + 3;
 			const points = [];
 
 			for ( let i = 3; i < length; i++ ) {
 
-				const line = thing[ i ].split( ' ' ).map( item => parseFloat( item ) );
+				const arr = line[ i ].split( ' ' ).map( item => parseFloat( item ) );
 				//console.log( 'line', line );
 
-				const vertex = new THREE.Vector3().fromArray( line );
+				const vertex = new THREE.Vector3().fromArray( arr );
 				//console.log( 'vertex', vertex );
 
 				points.push( vertex );
 
-				if ( length === 3 ) { points.push( thing[ 3 ] ); }
+				if ( length === 3 ) { points.push( line[ 3 ] ); }
 
 			}
 			//console.log( 'points', points );
 
 			if (points.length === 0 ) { continue; }
-				geometry = new THREE.Geometry();
-				geometry.vertices = [ points[ 0 ], points[ 1 ], points[ 2 ] ];
-				geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
-				geometry.computeFaceNormals();
+
+			geometry = new THREE.Geometry();
+			geometry.vertices = [ points[ 0 ], points[ 1 ], points[ 2 ] ];
+			geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+			geometry.computeFaceNormals();
 
 
-				mesh = new THREE.Mesh( geometry, material );
-				mesh.castShadow = mesh.receiveShadow = true;
-				rad.meshes.add( mesh );
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.castShadow = mesh.receiveShadow = true;
+			rad.meshes.add( mesh );
 
 			if ( points.length === 4 ) {
 
@@ -292,7 +293,6 @@
 				geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
 				geometry.computeFaceNormals();
 
-				//material = new THREE.MeshNormalMaterial( { side: 2 } );
 				mesh = new THREE.Mesh( geometry, material );
 				mesh.castShadow = mesh.receiveShadow = true;
 				rad.meshes.add( mesh );
@@ -333,7 +333,7 @@
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
-//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
 	}
 
