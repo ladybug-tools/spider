@@ -235,15 +235,56 @@
 
 			`<div>cad object id:<br><i>${cadId}</i></div>
 
-			<div id=GBIdivCadIdGroup >cad object id:<br><i>${cadId}</i></div>
+			<p><select id=GBIselCadIDGroup ></select></p>
 
-			<div><button onclick=alert("coming-soon"); >Update cad object group of surface</button></div>
-
-			<div><i>workflow needs fixing</i></div>
+			<div><button id=butCadId >Update cad object group of surface</button></div>
 
 			<hr>`;
 
-			GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup );
+			//GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup );
+
+			//butCadId.onclick = HUD.updateCadId( GBIselCadIDGroup.value );
+
+			const surfaces = GBP.gbjson.Campus.Surface;
+			const cadIds = [];
+
+			for ( let surface of surfaces ) {
+
+				//if ( !surface.CADObjectId ) { continue; }
+
+				if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
+
+					divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+
+					console.log( 'surface', surface );
+					console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
+					continue;
+
+				}
+
+				const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
+
+				if ( !cadIds.includes( id ) ) {
+
+					cadIds.push( id );
+
+				}
+
+			}
+
+			//console.log( 'cadIds', cadIds );
+			cadIds.sort();
+
+			let txt = '';
+
+			for ( let id of cadIds ){
+
+				txt += '<option>' + id + '</option>';
+
+			}
+
+			GBIselCadIDGroup.innerHTML = txt
+			GBIselCadIDGroup.size = cadIds.length;
 
 		}
 
@@ -416,6 +457,7 @@
 	};
 
 
+
 	GBI.setCadObjectTypeVisible = ( CADObjectGroupId ) => {
 		// used by REP
 
@@ -491,11 +533,60 @@
 
 			HUDdivAttributes.innerHTML =
 			`<div>type: <i>${type}</i></div>
-			<div>more details and update type coming soon</div>
+
+			<p><select id=GBIselSurfaceType onclick=HUD.updateType() ></select></p>
+
+			<div><button>Update surface type of the surface</button></div>
+
 			<hr>`;
 
 
 		}
+
+		const surfaces = GBP.gbjson.Campus.Surface;
+
+		let txt = '';
+		const types = [];
+		const typesCount = [];
+
+		for ( let surface of surfaces ) {
+
+			const index = types.indexOf( surface.surfaceType );
+
+			if ( index < 0 ) {
+
+				types.push( surface.surfaceType );
+				typesCount[ types.length - 1 ] = 1;
+
+			} else {
+
+				typesCount[ index ] ++;
+
+			}
+
+		}
+
+
+		for ( let i = 0; i < types.length; i++ ) {
+
+			txt +=
+				`<option>${types[i]}</option>`;
+
+				/*
+				`<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this) value=` +
+					types[ i ] +
+					`><img src="../assets/eye.png" height=18></button>
+					<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >` +
+					types[ i ] +
+					`</button>: ` +
+					typesCount[ i ] + '-' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
+				`'%<br>`;
+				*/
+
+		}
+
+		GBIselSurfaceType.innerHTML = txt;
+		GBIselSurfaceType.size = types.length;
 
 	};
 
@@ -883,7 +974,7 @@
 		divAttributes = document.getElementById ( item.divAttributes );
 		//console.log( 'divAttributes', divAttributes );
 
-		divAttributes.innerHTML = `<div>id: <b>${id}</b></div>`;
+		divAttributes.innerHTML = ''; //`<div>id: <b>${id}</b></div>`;
 
 		for ( let property in obj ) {
 
@@ -953,7 +1044,7 @@
 
 			} else {
 
-				divAttributes.innerHTML += `<div><span class=attributeTitle >${property}:</span><br>
+				divAttributes.innerHTML += `<div><span class=attributeTitle >${property}:</span>
 					<span class=attributeValue >${obj[ property ]}</span></div>`;
 
 			}
@@ -979,7 +1070,7 @@
 
 			<div id=GBIdivAtts ></div>
 
-			<div><button onclick=alert("coming-soon"); >udpate the space associated with this surface</button>
+			<div><button onclick=HUD.updateSpace(); >update the space associated with this surface</button>
 
 		</details>
 

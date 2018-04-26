@@ -188,8 +188,6 @@
 
 			<div id = "HUDdivPanelSurface" ></div>
 
-			<div><i><small>show/hide toggles and much more: not yet turned on</small></i></div>
-
 			<hr>
 
 		</details>`;
@@ -317,7 +315,7 @@
 		const spaceIdPrev = surface.AdjacentSpaceId;
 		//console.log( 'spaceIdPrev', spaceIdPrev );
 
-		const typeNew = surface.surfaceType = selType.value;
+		const typeNew = surface.surfaceType = GBIselSurfaceType.value;
 		//console.log( 'typeNew', typeNew );
 		GBI.surfaceChanges.types.push( { id: id, type: typeNew } );
 
@@ -489,7 +487,7 @@
 
 			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
 
-			HUD.setHeadsUp();
+			//HUD.setHeadsUp();
 
 		} else {
 
