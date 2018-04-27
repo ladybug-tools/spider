@@ -10,6 +10,20 @@ _First project heres_
 
 ## full screen: [rad viewer 1]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-1.html )
 
+## full screen: [rad viewer 2]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-2.html )
+
+* Add local file open, read and display
+* Add toggle rotation
+* Add toggle wireframe view
+
+
+## full screen: [rad viewer 3]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-3.html )
+
+* Add better handling of text attributes in RAD data files
+* Better handling of face data
+
+Full polygons with greater than four sides still to be done
+
 
 ## Concept
 

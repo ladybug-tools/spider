@@ -1,5 +1,10 @@
 
-**Solar Shadow Range Analysis and Raditation test gbXML file and results data file instructions**
+# Solar Shadow Range Analysis and Raditation test gbXML file and results data file instructions
+
+
+## [speed result viewer 1]( http://www.ladybug.tools/spider/solar-well/speed-solar-data/speed-result-viewer-1.html )
+
+
 
 There are 3 files I posted to Github: https://github.com/ladybug-tools/spider/tree/master/solar-well/speedsolardata.
 
@@ -25,4 +30,4 @@ based on min and max values we will have to choose a color gradient for the leng
 I'll send in the am images of what the visualizations look like in GH so you can see generally what we are targeting for effect and legend design. But of course we are not constrained to that gradient or color scheme. The shadow range analysis will always show the sun path analemma in the visualizaiton. The user will have the choice toggle on or off the analemma for the solar radiation
 there is some post-processing to analysis results to do before visualizing. I
 I
-I'll detail this on github. Look forward to see what you can do with it. 
+I'll detail this on github. Look forward to see what you can do with it.
