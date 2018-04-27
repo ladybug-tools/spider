@@ -22,7 +22,7 @@ View RAD produced by [Radiance]( https://radiance-online.org/ ) files in your br
 
 ## Issues
 
-
+* <https://stackoverflow.com/questions/41706208/how-do-i-create-a-3d-polygon-from-a-series-of-3d-points-in-three-js>
 
 ## Links of Interest
 
