@@ -16,15 +16,18 @@ b. Solar Radiation Analysis: (1) The ground plane except the parts beneath the m
 
 The mesh density for each surface may be different so that the mesh points generated are an evenly distributed set of points when overlayed on the base geometry. The mesh size should be as close to 1m2 (or equivalent IP) as possible. It can be slightly larger or slightly smaller in order to generate the evenly distributed grid based on the specific length and width of the surface. This way when the mesh points and vectors and their associated analysis values are read back into three.js and visualized, they will essentially recreate the gbXML surface exactly.
            
-The mesh points and vectors that are generated will be exported to a file called SPEEDmeshes.shadowinput and SPEEDMeshes.radiationinput. Note the number of mesh points will be different in each case since the shading surfaces are meshed for radiation and not shadow range. Along with the x,y,z coordinates of each point and the 3 vector coordinates, the surface id of the parent surface will also be exported to these files for debugging purposes. The example files for the file format are SPEEDMeshesExample.shadowinput and SPEEDMeshesExample.radiationinput. 
+The mesh points and vectors that are generated will be exported to a file called SPEEDmeshes.shadowinput and SPEEDMeshes.radiationinput. Note the number of mesh points will be different in each case since the shading surfaces are meshed for radiation and not shadow range. Along with the x,y,z coordinates of each point and the 3 vector coordinates, the surface id of the parent surface will also be exported to these files for debugging purposes (shade-XX, surface-XX). The example files for the file format are SPEEDMeshesExample.shadowinput and SPEEDMeshesExample.radiationinput. The first string is the surface id, the second, third, and fourth are the x,y,z coordinates, respectively, the fifth, sixth, and seventh values are the x,y,z vector coordinates, and the eighth value is the grid size associated with the mesh point.
 
+Using this file, we will run a modified version of Mostapha's ladybug code that is independent of Rhino/GH. For now it will remain a series of python scripts with the appropriate node.js dependencies defined. The output for the shadow range and solar radiation analysis will be the same format as the input files, but with a ninth value appended to each line item, corresponding to either the hours of sunlight for the shadow range analysis or the cumulative solar radiation values. The files will be called SPEEDmeshes.shadowoutput and SPEEDMeshes.radiationoutput. The example files for the file format are SPEEDMeshesExample.shadowoutput and SPEEDMeshesExample.radiationoutput. 
+
+These files will be read in, parsed, and visualized in three.js (maybe the gbXML viewer?). Only the grid mesh areas and analysis value will be displayed (i.e. no points or vectors), though a toggle may added to the viewer to display them if desired. It is not required.
+
+
+
+
+
+---------
 First is a test gbXML file we are using for the shadow range analysis and radiation analysis. Simple box, one window each side, overhangs and fins south side, and an adjacent building. We also will be writing out a ground plane as a shading surface to generate the ground mesh based on the size of the building as a single story building (basically 5 times as large as the longest side in both dimensions). We determined this size is enough to capture the farthest casting shadows. You will see it as shading.9 in the gbXML file.
-
-
-
-
-
-
 
 it can be imported into the gbXML viewer
 we took this gbXML, imported into Rhino and Grasshopper, and figured out all the settings we needed to run the shadow range analysis and solar radiation in ladybug. We identififed the ideal mesh size, size of ground plan relative to building, and reasonable computational times using partial analysis for shadows to represent months
