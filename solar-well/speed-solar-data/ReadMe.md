@@ -10,7 +10,7 @@ Summary: Previously we evaluated using mesh points, vectors, and analysis values
 
 1. While our geometry starts as raw three.js geometry in the SPEED GUI, we will first generate a gbXML file using our existing code on node.js. This is because we have a need in some parts of the code to know the polyloops for shading surfaces for calculation of shadow masking. Using this gbXML file (which will be generated in either IP or SI), Theo will mesh the follow surfaces:
 
-  a. Shadow Range Analysis: The ground plane which will be defined as a shading surface in the gbXML file. This surface can be seen in        SPEEDTest.xml as "<Surface surfaceType="Shade" id="shade-9"><Name>Ground</Name>". We will be adding the logic on how to size this        ground plane.
+  a. Shadow Range Analysis: The ground plane which will be defined as a shading surface in the gbXML file. This surface can be seen in        SPEEDTest.xml as "surfaceType="Shade", id="shade-9", Name=Ground". We will be adding the logic on how to size this ground plane.
 
 
            
