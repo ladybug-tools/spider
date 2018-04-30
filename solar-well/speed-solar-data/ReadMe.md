@@ -19,6 +19,8 @@ Using this file, we will run a modified version of Mostapha's ladybug code that 
 
 These files will be read in, parsed, and visualized in three.js (maybe the gbXML viewer?). Only the grid mesh areas and analysis value will be displayed (i.e. no points or vectors), though a toggle may added to the viewer to display them if desired. It is not required.
 
+The resulting scenes should look like the uploaded images for various time periods, which can be annual, fall, winter, spring, summer, a given month, or a given day. Note: Shadow range for a given day will not be handled using the above method. We will use Theo's implemention using three.js light sources.
+
 **Legend and Color-Coding Scheme**
 
 With each analysis visualization, a corresponding legend must be generated. A visual example of what the legend should look like for solar radiation can be found in SolarRadiation_Summer_AllDays_Plan.jpg and for shadow range in ShadowRange_Annual_15_Plan.jpg. Ladybug uses 11 different colors for both the shadow range and solar radiation legends. We'd like to use the same number of color bins and the same colors as they are fairly conventional in other tools. When reading in the .shadowoutput and .radiationoutput files, the max value should be determined for analysis value, and the bins descretized accordingly ((max value-0)/12). Hour values for shadow range will always be whole integers, not rounding needed. Radiation values should be rounding to the nearest tenth decimal (not hundredth as shown in the images). 
