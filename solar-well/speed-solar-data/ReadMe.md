@@ -10,10 +10,13 @@ Summary: Previously we evaluated using mesh points, vectors, and analysis values
 
 1. While our geometry starts as raw three.js geometry in the SPEED GUI, we will first generate a gbXML file using our existing code on node.js. This is because we have a need in some parts of the code to know the polyloops for shading surfaces for calculation of shadow masking. Using this gbXML file (which will be generated in either IP or SI), Theo will mesh the follow surfaces:
 
-a. Shadow Range Analysis: The ground plane which will be defined as a shading surface in the gbXML file. This surface can be seen in        SPEEDTest.xml as "surfaceType="Shade", id="shade-9", Name=Ground". We will be adding the logic on how to size this ground plane.
+a. Shadow Range Analysis: (1) The ground plane except the parts beneath the main building and shading buildings and (2) all exterior wall and roof surfaces for the main building. No meshes will be made for other shading surfaces such as overhangs, fins, and adjacent buildings. The ground plane which will be defined as a shading surface in the gbXML file. This surface can be seen in        SPEEDTest.xml as "surfaceType="Shade", id="shade-9", Name=Ground". We will be adding the logic on how to size this ground plane. This ground plane will have to be reconciled with the existing ground plane that is able to be toggled on and off in the gbXML Viewer.
 
+b. Solar Radiation Analysis: (1) The ground plane except the parts beneath the main building and shading buildings and (2) all exterior wall and roof surfaces for the main building and any adjacent building. 
 
+The mesh density for each surface may be different so that the mesh points generated are an evenly distributed set of points when overlayed on the base geometry. The mesh size should be as close to 1m2 (or equivalent IP) as possible. It can be slightly larger or slightly smaller in order to generate the evenly distributed grid based on the specific length and width of the surface. This way when the mesh points and vectors and their associated analysis values are read back into three.js and visualized, they will essentially recreate the gbXML surface exactly.
            
+The mesh points and vectors that are generated will be exported to a file called SPEEDmeshes.shadowinput and SPEEDMeshes.radiationinput. Note the number of mesh points will be different in each case since the shading surfaces are meshed for radiation and not shadow range. Along with the x,y,z coordinates of each point and the 3 vector coordinates, the surface id of the parent surface will also be exported to these files for debugging purposes. The example files for the file format are SPEEDMeshesExample.shadowinput and SPEEDMeshesExample.radiationinput. 
 
 First is a test gbXML file we are using for the shadow range analysis and radiation analysis. Simple box, one window each side, overhangs and fins south side, and an adjacent building. We also will be writing out a ground plane as a shading surface to generate the ground mesh based on the size of the building as a single story building (basically 5 times as large as the longest side in both dimensions). We determined this size is enough to capture the farthest casting shadows. You will see it as shading.9 in the gbXML file.
 
@@ -35,6 +38,4 @@ We'd like  you to work your magic and take this results file and overlay on gbXM
 but for shadow you'll want the geometry overlay
 based on min and max values we will have to choose a color gradient for the lenged and grid mesh coloring
 I'll send in the am images of what the visualizations look like in GH so you can see generally what we are targeting for effect and legend design. But of course we are not constrained to that gradient or color scheme. The shadow range analysis will always show the sun path analemma in the visualizaiton. The user will have the choice toggle on or off the analemma for the solar radiation
-there is some post-processing to analysis results to do before visualizing. I
-I
-I'll detail this on github. Look forward to see what you can do with it.
+there is some post-processing to analysis results to do before visualizing. 
