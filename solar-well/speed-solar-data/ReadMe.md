@@ -22,9 +22,9 @@ Using this file, we will run a modified version of Mostapha's ladybug code that 
 
 These files will be read in, parsed, and visualized in three.js (maybe the gbXML viewer?). Only the grid mesh areas and analysis value will be displayed (i.e. no points or vectors), though a toggle may added to the viewer to display them if desired. It is not required.
 
+#Legend and Color-Coding Scheme#
 
-
-
+With each analysis visualization, a corresponding legend must be generated. A visual example of what the legend should look like for solar radiation can be found in SolarRadiation_Summer_AllDays_Plan.jpg and for shadow range in ShadowRange_Annual_15_Plan.jpg. Ladybug uses 11 different colors for both the shadow range and solar radiation legends. We'd like to use the same number of color bins and the same colors as they are fairly conventional in other tools. When reading in the .shadowoutput and .radiationoutput files, the max value should be determined for analysis value, and the bins descretized accordingly ((max value-0)/12). Hour values for shadow range will always be whole integers, not rounding needed. Radiation values should be rounding to the nearest tenth decimal (not hundredth as shown in the images). 
 
 ---------
 First is a test gbXML file we are using for the shadow range analysis and radiation analysis. Simple box, one window each side, overhangs and fins south side, and an adjacent building. We also will be writing out a ground plane as a shading surface to generate the ground mesh based on the size of the building as a single story building (basically 5 times as large as the longest side in both dimensions). We determined this size is enough to capture the farthest casting shadows. You will see it as shading.9 in the gbXML file.
