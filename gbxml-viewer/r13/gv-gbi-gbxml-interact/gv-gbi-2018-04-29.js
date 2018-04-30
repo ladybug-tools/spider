@@ -233,21 +233,17 @@
 
 			HUDdivAttributes.innerHTML =
 
-			`<details open>
+			`<div>cad object id:<br><i>${cadId}</i></div>
 
-				<summary>cad object id: ${cadId}</summary>
+			<p><select id=GBIselCadIDGroup ></select></p>
 
-				<p><select id=GBIselCadIDGroup size=10 ></select></p>
-
-				<div><button id=GBIbutCadId  >Update cad object group of surface</button></div>
-
-			</details>
+			<div><button id=butCadId >Update cad object group of surface</button></div>
 
 			<hr>`;
 
 			//GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup );
-			//onclick=HUD.updateCadId("` + GBIselCadIDGroup.value + `")
-			GBIbutCadId.onclick = HUD.updateCadId( GBIselCadIDGroup.value );
+
+			//butCadId.onclick = HUD.updateCadId( GBIselCadIDGroup.value );
 
 			const surfaces = GBP.gbjson.Campus.Surface;
 			const cadIds = [];
@@ -266,13 +262,13 @@
 
 				}
 
-				//const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
+				const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
 
-				//if ( !cadIds.includes( id ) ) {
+				if ( !cadIds.includes( id ) ) {
 
-					cadIds.push( surface.CADObjectId );
+					cadIds.push( id );
 
-				//}
+				}
 
 			}
 
@@ -287,8 +283,8 @@
 
 			}
 
-			GBIselCadIDGroup.innerHTML = txt;
-			GBIselCadIDGroup.size = 10; //cadIds.length;
+			GBIselCadIDGroup.innerHTML = txt
+			GBIselCadIDGroup.size = cadIds.length;
 
 		}
 
@@ -536,18 +532,14 @@
 		if ( window.HUDdivAttributes ) {
 
 			HUDdivAttributes.innerHTML =
+			`<div>type: <i>${type}</i></div>
 
-			`<details open>
+			<p><select id=GBIselSurfaceType ></select></p>
 
-				<summary>Surface Type: ${type}</summary>
-
-				<div><select id=GBIselSurfaceType ></select></div>
-
-				<p><button onclick=HUD.updateSurfaceType() >Update surface type of the surface</button></p>
-
-			</details>
+			<div><button onclick=HUD.updateSurfaceType() >Update surface type of the surface</button></div>
 
 			<hr>`;
+
 
 		}
 

@@ -434,13 +434,13 @@
 
 			} else { // type prev is no adjacent
 
-				//const newAdj = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-				//newAdj.setAttribute( "spaceIdRef", "none" ) ;
-				//const newAdjTxt = surfaceXml.appendChild( newAdj );
+		//				const newAdj = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+		//				newAdj.setAttribute( "spaceIdRef", "none" ) ;
+		//				const newAdjTxt = surfaceXml.appendChild( newAdj );
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
-				//surfaceMesh.userData.data.AdjacentSpaceId = 'none';
+				//				surfaceMesh.userData.data.AdjacentSpaceId = 'none';
 				console.log( 'old 0 / new 1 / no spaceIdPrev', spaceIdPrev, surfaceXml );
 
 			}
@@ -451,7 +451,6 @@
 		//console.log( 'type surfaceJson', surfaceJson );
 
 		HUD.setHeadsUp();
-		GBI.setSurfaceVisible( id )
 
 	};
 
@@ -459,8 +458,8 @@
 
 	HUD.updateCadId = function( that ){
 
-		const surface = HUD.userDataData;
-		console.log( 'surface', surface );
+		const surface = HUD.item;
+		//console.log( 'surface', surface );
 
 		const id = surface.id;
 
@@ -473,7 +472,7 @@
 
 		if ( cadObjId ) {
 
-			console.log( 'cadObjId', cadObjId.innerHTML );
+		console.log( 'cadObjId', cadObjId.innerHTML );
 
 			//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
 			cadObjId.innerHTML = that.value;
