@@ -516,7 +516,7 @@
         <Azimuth>225</Azimuth>
       </RectangularGeometry>
       <CADOjectId>none</CADOjectId>
-      <AdjacentSpaceId spaceIdRef="space-2"/>
+      <AdjacentSpaceId spaceIdRef="space-4"/>
       <AdjacentSpaceId spaceIdRef="space-1"/>
       <PlanarGeometry>
         <PolyLoop>
@@ -549,8 +549,8 @@
         <Azimuth>315</Azimuth>
       </RectangularGeometry>
       <CADOjectId>none</CADOjectId>
-      <AdjacentSpaceId spaceIdRef="space-3"/>
       <AdjacentSpaceId spaceIdRef="space-2"/>
+      <AdjacentSpaceId spaceIdRef="space-1"/>
       <PlanarGeometry>
         <PolyLoop>
           <CartesianPoint>
@@ -582,7 +582,7 @@
         <Azimuth>45</Azimuth>
       </RectangularGeometry>
       <CADOjectId>none</CADOjectId>
-      <AdjacentSpaceId spaceIdRef="space-4"/>
+      <AdjacentSpaceId spaceIdRef="space-2"/>
       <AdjacentSpaceId spaceIdRef="space-3"/>
       <PlanarGeometry>
         <PolyLoop>
@@ -615,7 +615,7 @@
         <Azimuth>135</Azimuth>
       </RectangularGeometry>
       <CADOjectId>none</CADOjectId>
-      <AdjacentSpaceId spaceIdRef="space-1"/>
+      <AdjacentSpaceId spaceIdRef="space-3"/>
       <AdjacentSpaceId spaceIdRef="space-4"/>
       <PlanarGeometry>
         <PolyLoop>
@@ -1122,36 +1122,6 @@
             <Coordinate>100</Coordinate>
             <Coordinate>60</Coordinate>
             <Coordinate>50</Coordinate>
-          </CartesianPoint>
-        </PolyLoop>
-      </PlanarGeometry>
-    </Surface>
-    <Surface surfaceType="Shade" id="shade-9">
-      <Name>ground</Name>
-      <RectangularGeometry>
-        <Azimuth>0</Azimuth>
-      </RectangularGeometry>
-      <PlanarGeometry>
-        <PolyLoop>
-          <CartesianPoint>
-            <Coordinate>197</Coordinate>
-            <Coordinate>197</Coordinate>
-            <Coordinate>50</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>-197</Coordinate>
-            <Coordinate>197</Coordinate>
-            <Coordinate>0</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>-197</Coordinate>
-            <Coordinate>-197</Coordinate>
-            <Coordinate>0</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>197</Coordinate>
-            <Coordinate>-197/Coordinate>
-            <Coordinate>0</Coordinate>
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
