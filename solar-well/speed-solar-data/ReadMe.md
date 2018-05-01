@@ -15,7 +15,7 @@ These are the steps:
       - For Radiation: Include all surfaces.
       - The mesh should be even distributed such that when you view the mesh surfaces they all combine to form the same shape as the parent surface. In order to allow for this to happen, that’s why the 1 m2 or 10 ft2 mesh size is not fixed. It can float to match the needs of each surface.
  
- 3. Once the mesh points and vectors are generated,  you export a .shadowinput and .radiationinput file. Have a button to export each file. Here is what is included and the formatting of these files:
+ 3. Once the mesh points and vectors are generated,  you export a .shadowinput and .radiationinput file. Have a button to export each file. The example files for the file format are SPEEDMeshesExample.shadowinput and SPEEDMeshesExample.radiationinput. Here is what is included and the formatting of these files:
  
     - Each mesh will have its own line item in the file. Each line item will have 9 values/strings. The general structure of each line item is (UnitSystem,SurfaceID,xCoordinateMeshCenterPoint, yCoordinateMeshCenterPoint, zCoordinateMeshCenterPoint, xVectorMeshCenterPoint, yVectorMeshCenterPoint, zVectorMeshCenterPoint,MeshLength). The mesh length is one side of the mesh (so a length not area). So if mesh is 0.9m x 0.9m, then this value will be 0.9, not 0.9^2=0.81 m2.
     - Example for a regular gbXML surface: SI,surface-9, -4.705043,-15.25,2.0955,0.0,-1.0,0.0,0.9
@@ -23,7 +23,7 @@ These are the steps:
     - Note: The SurfaceID is exactly as it shows up in the gbXML file.
     - Note: The .shadowinput file will have fewer meshes than the .radiationinput file since the shadow range analysis will not include overhangs, fins, or adjacent buildings. Fewer meshes=fewer lines in the file.
 
-At this point, we take the file, run the code for shadow range and solar radiation analysis, then we write out two output files that include the resulting analysis value, a .shadowoutput and .radiationoutput file.
+At this point, we take the file, and run a modified version of Mostapha's ladybug code that is independent of Rhino/GH. For now it will remain a series of python scripts with the appropriate node.js dependencies defined. For .radiationinput and .shadowinput files in IP, we will do an internal conversion to SI for analysis, then convert the results back to IP. The output for the shadow range and solar radiation analysis will be the same format as the input files, but with a tenth value appended to each line item, corresponding to either the hours of sunlight for the shadow range analysis or the cumulative solar radiation values. The files will be called SPEEDmeshes.shadowoutput and SPEEDMeshes.radiationoutput. The example files for the file format are SPEEDMeshesExample.shadowoutput and SPEEDMeshesExample.radiationoutput.
 
  4. Then you will import the .shadowoutput and .radiationoutput files. Have a button to import each.
   
