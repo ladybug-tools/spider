@@ -18,6 +18,8 @@ _File to de used as demo and tutorial during the webinar_
 
 ### [2018-05-08 gbXML Webinar Outline]( http://www.ladybug.tools/spider/#gbxml-viewer/2018-05-08-gbxml-webinar/2018-05-08-gbxml-webinar-outline.html )
 
+### [Source files on GitHub]( https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/2018-05-08-gbxml-webinar )
+
 
 ## Text from Invitation
 
