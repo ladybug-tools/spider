@@ -29,7 +29,7 @@ _Both of the above links are shortcuts that link to the appropriate address. You
 
 ## Webinar
 
-* [Webinar Outline]( #./assets/webinar-outline.md )
+* [Webinar Outline]( #gbxml-viewer/r13/assets/webinar-outline.md )
 
 ## Must watch and thumbs-up YouTube video:
 
