@@ -30,9 +30,11 @@ We will be holding a Green Building XML (gbXML) webinar on May 8, 2018 from 1 to
 
 All of these tools and schemas are open source and free to use helping you better analyze buildings for energy performance, daylighting, thermal performance, and much more. Please join us on May 8th for this enlightening webinar.
 
-![]( gbXMLViewer_LadybugTools.jpg )
+***
 
-![]( PluginDiagrams5.jpg )
+<img src=gbxml-viewer/2018-05-08-gbxml-webinar/gbXMLViewer_LadybugTools.jpg width=500px >
+
+![]( gbxml-viewer/2018-05-08-gbxml-webinar/PluginDiagrams5.jpg )
 
 ## Links of Interest
 
