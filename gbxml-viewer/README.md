@@ -31,6 +31,8 @@ _Both of the above links are shortcuts that link to the appropriate address. You
 
 * [Webinar Outline]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/assets/webinar-outline.md )
 
+
+
 ## Must watch and thumbs-up YouTube video:
 
 ### [Ladybug Tools / Spider / gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
