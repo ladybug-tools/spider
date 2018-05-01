@@ -7,10 +7,10 @@ These are the steps:
  1. You import gbXML file. Have button to import file in interface.
  
  2. You generate mesh points and vectors for each surface in the gbXML file. Requirements for mesh:
-      - As close to 1 m2 as possible if in SI, or 10 ft2 if in IP. This value has been optimized after testing between visualization quality and computational time.
-      - What unit system you are working in based on the units in the imported gbXML file.
-      - A grid mesh should be generated for each exterior surface in the model. Window surfaces are excluded always, as those meshes will be already represented by the meshes in the host exterior wall.
-	 i.	For Shadow: Exclude almost all shading objects (overhangs, fins, adjacent buildings). But do mesh the shading surface for the ground. We will have it included in the gbXML file. For the ground mesh you may exclude mesh points that are located under the main building or shading building (or just include them and they will be assigned analysis value of 0).
+    - As close to 1 m2 as possible if in SI, or 10 ft2 if in IP. This value has been optimized after testing between visualization quality and computational time.
+    - What unit system you are working in based on the units in the imported gbXML file.
+    - A grid mesh should be generated for each exterior surface in the model. Window surfaces are excluded always, as those meshes will be already represented by the meshes in the host exterior wall.
+      - For Shadow: Exclude almost all shading objects (overhangs, fins, adjacent buildings). But do mesh the shading surface for the ground. We will have it included in the gbXML file. For the ground mesh you may exclude mesh points that are located under the main building or shading building (or just include them and they will be assigned analysis value of 0).
 	 ii.	For Radiation: Include all surfaces.
 	 iii.	The mesh should be even distributed such that when you view the mesh surfaces they all combine to form the same shape as the parent surface. In order to allow for this to happen, that’s why the 1 m2 or 10 ft2 mesh size is not fixed. It can float to match the needs of each surface.
  
