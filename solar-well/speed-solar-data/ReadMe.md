@@ -4,7 +4,7 @@ While our geometry starts as raw three.js geometry in the SPEED GUI, we will fir
 
 These are the steps:
 
- 1. You import gbXML file. Have button to import file in interface.
+ 1. You import gbXML file. Have button to import file in interface. Our test file is SPEEDTest.xml.
  
  2. You generate mesh points and vectors for each surface in the gbXML file. Requirements for mesh:
  
