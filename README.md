@@ -13,12 +13,27 @@ _All of the above are embedded interactive scripts available here_
 
 ## Apps: [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [gbXML Viewer  Dev]( http://www.ladybug.tools/spider/gbxml-viewer/dev/ ) ~ [Analemma 3D]( https://rawgit.com/ladybug-tools/spider/master/analemma3d/index.html ) ~ [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
 
+***
+
+## gbXML Viewer to be Featured in Webinar
+
+_Link to invitation:_
+
+## [Green Building XML Webinar - May 8, 2018 at 1 pm EDT]( http://myemail.constantcontact.com/Announcing-a-gbXML-Webinar-on-Tuesday--May-8--2018-at-1-pm-EST.html?soid=1103133034893&aid=ZlDypohgPPc )
+
+> We will be holding a Green Building XML (gbXML) webinar on May 8, 2018 from 1 to 2 pm EDT. This webinar is targeted toward energy modelers, engineers, architects, software vendors, and generally anyone who is interested in viewing the latest in Ladybug Tool workflows with an emphasis on integration with Green Building XML.
+
+### [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-01-gbxml-webinar )
+
+***
+
 ## YouTube Video: [gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
 
 * Michal's must watch video
 * Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
 
 
+***
 
 ## Concept
 

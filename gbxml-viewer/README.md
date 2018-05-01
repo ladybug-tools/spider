@@ -27,13 +27,18 @@ _Both of the above links are shortcuts that link to the appropriate address. You
 
 ***
 
-## 2018-05-08 gbXML Webinar
+## gbXML Viewer to be Featured in Webinar
 
-### [Green Building XML Webinar - May 8, 2018 at 1 pm EDT ]( http://myemail.constantcontact.com/Announcing-a-gbXML-Webinar-on-Tuesday--May-8--2018-at-1-pm-EST.html?soid=1103133034893&aid=ZlDypohgPPc )
+_Link to invitation:_
 
-### [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/2018-05-01-gbxml-webinar )
+## [Green Building XML Webinar - May 8, 2018 at 1 pm EDT]( http://myemail.constantcontact.com/Announcing-a-gbXML-Webinar-on-Tuesday--May-8--2018-at-1-pm-EST.html?soid=1103133034893&aid=ZlDypohgPPc )
+
+> We will be holding a Green Building XML (gbXML) webinar on May 8, 2018 from 1 to 2 pm EDT. This webinar is targeted toward energy modelers, engineers, architects, software vendors, and generally anyone who is interested in viewing the latest in Ladybug Tool workflows with an emphasis on integration with Green Building XML.
+
+### [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-01-gbxml-webinar )
 
 
+***
 
 ## Must watch and thumbs-up YouTube video:
 
