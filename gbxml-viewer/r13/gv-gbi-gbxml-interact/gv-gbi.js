@@ -1014,7 +1014,7 @@
 		//console.log( 'arr', arr );
 
 		obj = arr.find( element => element.id === id );
-		//console.log( 'obj', obj );
+		console.log( 'obj', obj );
 
 		divAttributes = document.getElementById ( item.divAttributes );
 		//console.log( 'divAttributes', divAttributes );

@@ -20,16 +20,29 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ## Current Issues with gbXML Viewer
 
+2018-04-30 ~ App/ Application: drag and drop not working
+2018-04-30 ~ App/ApplicationL Menu left drag: also dragging in-world menu
+2018-04-30 ~ SET: update 'visibility toggles' panel to 'show hide' panel
+2018-04-30 ~ SET: When you explode space every click moves space right quite far
+2018-04-30 ~ SET: can only cut sections along north/south plane
+2018-04-30 ~ ANA: add delete sun path
+2018-04-30 ~ ANA: add ground toggle
+2018-04-30 ~ RAN: add delete sun range
+2018-04-30 ~ RAN: add ground toggle
+2018-04-30 ~ CAM: add ability to toggle cameras
+2018-04-30 ~ REP/ Reports: Openings: Add internal doors to items that may be viewed
+2018-04-30 ~ REP/ Reports: Openings: Add zoom to opening
+
+
+
 2018-04-11 ~ 3D Model / In-world display
 
 When openings are being displayed with partial opacity, then surfaces behind an opening may appear to disappear> Solution: toggle the visibility of openings. This is a limitation of Three.JS and WebGL defaults and is likely to take some time to fix.
 
 
-
-
 2018-04-11 ~ HUD
 
-R12: If an elemeent has no existing CAD Object ID, then you cannot eit or add a AD Object ID. To be fixed in R13.
+R12: If an element has no existing CAD Object ID, then you cannot eit or add a AD Object ID. To be fixed in R13.
 
 2018-04-02 ~ HUD
 

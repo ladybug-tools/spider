@@ -148,7 +148,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISSdetPanelSurfacesUndefinedCadId.innerHTML = ISS.getPanelSurfacesUndefinedCadId();
 
-		ISS.setPanelSurfacesTiny();
+		ISS.setPanelSurfacesTiny( ISSdetPanelSurfacesTiny );
 
 		ISS.setPanelSurfacesVertexClose();
 
@@ -475,7 +475,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setPanelSurfacesTiny = function() {
+	ISS.setPanelSurfacesTiny = function( target ) {
 
 		const sizeDefault = window.ISSinpMinSize ? parseFloat( ISSinpMinSize.value ) : 20;
 
@@ -483,9 +483,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.surfacesTiny = GBP.surfaceJson.filter( surface =>
 			parseFloat( surface.RectangularGeometry.Height ) * parseFloat( surface.RectangularGeometry.Width  ) < size );
 
-		//let options = '';
-		//ISS.surfacesTiny.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		//options = options ? options : '<option>none found</option>';
+		let options = '';
+		ISS.surfacesTiny.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
+		options = options ? options : '<option>none found</option>';
 
 		ISSdetPanelSurfacesTiny.innerHTML =
 
@@ -511,10 +511,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		let data = {};
 		data.attribute = 'IdTiny';
+		data.divTarget = ISSdivSurfacesTiny;
 		data.gbjson = ISS.surfacesTiny.map ( item => item.id );
 		data.selItem = 'ISSselSurfacesTiny';
 
-		ISSdivSurfacesTiny.innerHTML = GBI.getElementPanel( data );
+		GBI.setElementPanel2( data );
 		//ISSselSurfacesTiny.selectedIndex = 0;
 		//ISSselSurfacesTiny.click();
 
@@ -1037,6 +1038,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSdivOpeningTypeInvalid.innerHTML = GBI.traverseGbjson( opening ).attributes;
 
 	}
+
 
 
 	ISS.setPanelOpeningAttributes = function() {

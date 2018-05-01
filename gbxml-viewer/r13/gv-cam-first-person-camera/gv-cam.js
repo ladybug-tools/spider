@@ -74,7 +74,10 @@
 			</p>
 
 
-			<p>Your avatar's name is 'Gypsy' Mila.<p>
+			<p>Your avatar's name is 'Gypsy' Mila. Try saying g - b  - x - m - l very slowly with a soft 'zee' for the x.<p>
+
+			<p>Reload the file to exit first person camera mode.</p>
+
 		</div>
 	`;
 

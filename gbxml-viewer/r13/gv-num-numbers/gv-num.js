@@ -132,8 +132,10 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 		let storeyOptions = '';
 
 		for ( let storey of storeys ) {
+			console.log( 'storey', storey );
+			//storeyOptions += '<option>' + storey.id + '</option>';
 
-			storeyOptions += '<option>' + storey.id + '</option>';
+			storeyOptions += '<option value=' + storey.id + ' title="id: ' + storey.id + '" >' + storey.Name + '</option>';
 
 		}
 

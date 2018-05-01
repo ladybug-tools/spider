@@ -214,7 +214,7 @@
 
 		} else {
 
-			GBX.openGbxmlFile( event.dataTransfer );
+			GBP.openGbxmlFile( event.dataTransfer );
 
 		}
 
