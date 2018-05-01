@@ -49680,7 +49680,7 @@
       <Name>S-00_113-00_130-I-W-79</Name>
     </Surface>
     <Surface surfaceType="InteriorFloor" id="aim6511">
-      <AdjacentSpaceId spaceIdRef="aim0808"/>
+      <AdjacentSpaceId spaceIdRef="aim0855"/>
       <AdjacentSpaceId spaceIdRef="aim2821"/>
       <RectangularGeometry id="aim6512">
         <Azimuth>0</Azimuth>

@@ -27,9 +27,10 @@ _Both of the above links are shortcuts that link to the appropriate address. You
 
 ***
 
-## Webinar
+## 2018-05-08 gbXML Webinar
 
-* [Webinar Outline]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/assets/webinar-outline.md )
+### [Green Building XML Webinar - May 8, 2018 at 1 pm EDT ]
+* [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/2018-05-01-gbxml-webinar )
 
 
 

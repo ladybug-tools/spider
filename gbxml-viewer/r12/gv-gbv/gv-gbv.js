@@ -463,6 +463,7 @@
 
 		element =  document.getElementById( 'divSurface' + id );
 		// console.log( 'element', element );
+
 		if ( element ) {
 			element.innerHTML = '<p>Surface deleted</p>' + element.innerHTML
 			element.style.opacity = 0.2;
