@@ -24,6 +24,14 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
+<summary>Welcome 2018-04-30 ~ R13.10</summary>
+
+HUD /Head-up Display Module
+* Update CAD Object ID now working
+* Update Space ID almost working
+
+</details><details open>
+
 <summary>Welcome 2018-04-22 ~ R13.7</summary>
 
 <span class=highlight>New Heads-Up Display is now turned on.</span>

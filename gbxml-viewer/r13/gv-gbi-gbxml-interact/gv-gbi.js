@@ -216,6 +216,156 @@
 	}
 */
 
+	////////// Set Menu Panels
+
+
+	GBI.getElementPanel = function( item ){
+
+		item = item || {};
+		item.attribute = item.attribute ? item.attribute : '';
+		item.gbjson = item.gbjson || [ 1, 2, 3 ];
+		item.selItem = item.selItem || 'selItem';
+		item.element = item.element || 'Surface';
+
+		let options = '';
+		item.gbjson.forEach( id => options += '<option>' + id + '</option>' );
+
+		item.target = 'GBIdiv' + item.attribute;
+
+		divElement =
+
+			`<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=GBI.setSelectedIndex(this,` + item.selItem + `);
+						placeholder="` + item.attribute + `" style=margin-bottom:0.5rem;width:95%; >
+					<select id = ` + item.selItem + ` onclick=GBI.setSurfaceVisible(this.value);GBI.setGbjsonAttributes(this.value,` + item.target + `);
+						onchange=GBI.setSurfaceVisible(this.value);GBI.setGbjsonAttributes(this.value,` + item.target + `);
+					size=` + ( item.gbjson.length < 10 ? item.gbjson.length : 10 ) + ` style=width:100%; >` + options + `</select>
+				</div>
+				<div id = ` + item.target + ` class=flex-left-div2  >
+					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.?
+				</div>
+			</div>`;
+
+
+		//console.log( 'divElement', divElement );
+		//console.log( 'item', item );
+
+		return divElement;
+
+	};
+
+
+
+	GBI.setElementPanel2 = function( item ){
+
+		item = item || {};
+
+		item.attribute = item.attribute ? item.attribute : '';
+		item.divAttributes = item.divAttributes || 'GBIdivSurface';
+		item.divTarget = item.divTarget || 'GBIdivElements';
+		item.element = item.element || 'Surface';
+		item.optionValues = item.optionValues || [ [ 'aaa', 1], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
+		item.parent = item.parent || GBP.surfaceJson;
+		item.placeholder = item.placeholder || 'surface id';
+		item.selItem = item.selItem || 'selItem';
+
+		let options = '';
+
+		item.optionValues.forEach( option =>
+			options += '<option value=' + option[ 1 ] + ' title="id: ' + option[ 1 ] + '" >' + option[ 0 ] + '</option>' );
+
+		//console.log( 'item', item );
+
+		divElement =
+
+			`<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=GBI.setSelectedIndex(this,${item.selItem});
+						placeholder="${item.placeholder}" style=margin-bottom:0.5rem;width:6rem; ><br>
+					<select id =${item.selItem}
+						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
+						 ` style=min-width:6rem; >${options}</select>
+				</div>
+				<div id = ${item.divAttributes} class=flex-left-div2 >bbb</div>
+
+			</div>`;
+
+		item.divTarget.innerHTML = divElement;
+
+		//console.log( 'item.divTarget', item.divTarget);
+
+		const selectTarget = item.divTarget.getElementsByTagName( 'select' )[ 0 ];
+		//console.log( 'target', target );
+
+		selectTarget.onclick= function() {
+
+			//GBI.setSurfaceVisible(selectTarget.value );
+			GBI.setElementIdAttributes(selectTarget.value, item );
+
+		};
+
+		selectTarget.onchange =  function() {
+
+			GBI.setElementVisible( selectTarget.value, item )
+			GBI.setElementIdAttributes( selectTarget.value, item );
+
+		};
+
+	};
+
+
+
+	GBI.setElementVisible = function( id, item ) {
+		//console.log( 'id', id );
+		//console.log( 'item', item );
+
+		if ( item.element === 'Surface') {
+
+			GBI.setSurfaceVisible( id );
+
+		} else if ( item.element === 'Space') {
+
+			GBI.setSpaceVisible( id );
+
+		} else if ( item.element === 'Storey') {
+
+			GBI.setStoreyVisible( id );
+
+		} else if ( item.element === 'Zone') {
+
+			GBI.setZoneVisible( id );
+
+		} else if ( item.element === 'Openings') {
+
+			GBI.setOpeningVisible( id );
+
+		}
+
+	};
+
+
+
+	GBI.setSelectedIndex = function( input, select ) {
+
+		const str = input.value.toLowerCase();
+
+		// try using find
+		for ( let option of select.options ) {
+
+			if ( option.innerHTML.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+
+				return;
+
+			}
+
+		}
+
+	};
+
+
 
 	////////// Show/Hide by Individual Elements
 
@@ -229,25 +379,29 @@
 		GBP.surfaceMeshes.children.forEach( element =>
 			element.visible = element.userData.data.CADObjectId === cadId ? true : false );
 
+
 		if ( HUDdivAttributes ) {
 
 			HUDdivAttributes.innerHTML =
 
 			`<details open>
 
-				<summary>cad object id: ${cadId}</summary>
+				<summary>CAD Object ID</summary>
 
-				<p><select id=GBIselCadIDGroup size=10 ></select></p>
+				<p><select id=GBIselCadId size=10 ></select></p>
 
-				<div><button id=GBIbutCadId  >Update cad object group of surface</button></div>
+				<div><button id=GBIbutCadId onclick=GBI.updateCadId(GBIselCadId.value); >Update cad object id of surface</button></div>
 
 			</details>
 
 			<hr>`;
 
+
+			GBIselCadId.size = 10; //cadIds.length;
+
 			//GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup );
 			//onclick=HUD.updateCadId("` + GBIselCadIDGroup.value + `")
-			GBIbutCadId.onclick = HUD.updateCadId( GBIselCadIDGroup.value );
+
 
 			const surfaces = GBP.gbjson.Campus.Surface;
 			const cadIds = [];
@@ -260,8 +414,8 @@
 
 					divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
-					console.log( 'surface', surface );
-					console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
+					//console.log( 'surface', surface );
+					//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
 					continue;
 
 				}
@@ -287,13 +441,58 @@
 
 			}
 
-			GBIselCadIDGroup.innerHTML = txt;
-			GBIselCadIDGroup.size = 10; //cadIds.length;
+			GBIselCadId.innerHTML = txt;
+
+			GBIselCadId.value = cadId;
 
 		}
 
 	};
 
+
+	GBI.updateCadId = function( cadId ){
+
+		//console.log( 'cadId', cadId );
+
+		const surface = HUD.userDataData;
+		//console.log( 'surface', surface );
+
+
+		const id = surface.id;
+
+		HUD.surfacesXml = GBP.gbxml.getElementsByTagName( "Surface" );
+
+		surfaceXml = HUD.surfacesXml[ id ];
+		//console.log( 'surfaceXml',  surfaceXml );
+
+		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
+
+		if ( cadObjId ) {
+
+			//console.log( 'cadObjId', cadObjId.innerHTML );
+
+			//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
+			cadObjId.innerHTML = cadId;
+
+			//console.log( 'that', that.value );
+
+			surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = cadId;
+
+			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+
+			surfaceMesh.userData.data.CADObjectId = cadId;
+
+			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: cadId } );
+
+			HUD.setHeadsUp();
+
+		} else {
+
+			alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
+
+		}
+
+	};
 
 
 	GBI.setOpeningVisible = function( id ) {
@@ -320,8 +519,9 @@
 
 
 
-	GBI.setSpaceVisible = function( spaceId ) {
+	GBI.setSpaceVisible = function( spaceId, index ) {
 		//console.log( 'spaceId', spaceId );
+		//console.log( 'index', index );
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
@@ -352,7 +552,8 @@
 
 		if ( HUDdivAttributes ) {
 
-			GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId );
+			index = index || 0;
+			GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId, index );
 
 		}
 
@@ -797,171 +998,7 @@
 	}
 
 
-	////////// get IDs
 
-	GBI.getSpaceId = function( spaceIdRef ) {
-		// Used: ??
-
-		if ( !GBP.gbjson.Campus.Building.Space || !GBP.gbjson.Campus.Building.Space.length ) { return; }
-
-		let space = GBP.gbjson.Campus.Building.Space.find( element => element.id === spaceIdRef );
-
-		space = space ? space : 'none';
-
-		return space;
-
-	};
-
-
-
-	////////// Set Menu Panels
-
-
-	GBI.getElementPanel = function( item ){
-
-		item = item || {};
-		item.attribute = item.attribute ? item.attribute : '';
-		item.gbjson = item.gbjson || [ 1, 2, 3 ];
-		item.selItem = item.selItem || 'selItem';
-		item.element = item.element || 'Surface';
-
-		let options = '';
-		item.gbjson.forEach( id => options += '<option>' + id + '</option>' );
-
-		item.target = 'GBIdiv' + item.attribute;
-
-		divElement =
-
-			`<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,` + item.selItem + `);
-						placeholder="` + item.attribute + `" style=margin-bottom:0.5rem;width:95%; >
-					<select id = ` + item.selItem + ` onclick=GBI.setSurfaceVisible(this.value);GBI.setGbjsonAttributes(this.value,` + item.target + `);
-						onchange=GBI.setSurfaceVisible(this.value);GBI.setGbjsonAttributes(this.value,` + item.target + `);
-					size=` + ( item.gbjson.length < 10 ? item.gbjson.length : 10 ) + ` style=width:100%; >` + options + `</select>
-				</div>
-				<div id = ` + item.target + ` class=flex-left-div2  >
-					lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.?
-				</div>
-			</div>`;
-
-
-		//console.log( 'divElement', divElement );
-		//console.log( 'item', item );
-
-		return divElement;
-
-	};
-
-
-
-	GBI.setElementPanel2 = function( item ){
-
-		item = item || {};
-
-		item.attribute = item.attribute ? item.attribute : '';
-		item.divAttributes = item.divAttributes || 'GBIdivSurface';
-		item.divTarget = item.divTarget || 'GBIdivElements';
-		item.element = item.element || 'Surface';
-		item.optionValues = item.optionValues || [ [ 'aaa', 1], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
-		item.parent = item.parent || GBP.surfaceJson;
-		item.placeholder = item.placeholder || 'surface id';
-		item.selItem = item.selItem || 'selItem';
-
-		let options = '';
-
-		item.optionValues.forEach( option =>
-			options += '<option value=' + option[ 1 ] + ' title="id: ' + option[ 1 ] + '" >' + option[ 0 ] + '</option>' );
-
-		//console.log( 'item', item );
-
-		divElement =
-
-			`<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,${item.selItem});
-						placeholder="${item.placeholder}" style=margin-bottom:0.5rem;width:6rem; ><br>
-					<select id =${item.selItem}
-						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
-						 ` style=min-width:6rem; >${options}</select>
-				</div>
-				<div id = ${item.divAttributes} class=flex-left-div2 >bbb</div>
-
-			</div>`;
-
-		item.divTarget.innerHTML = divElement;
-
-		//console.log( 'item.divTarget', item.divTarget);
-
-		const selectTarget = item.divTarget.getElementsByTagName( 'select' )[ 0 ];
-		//console.log( 'target', target );
-
-		selectTarget.onclick= function() {
-
-			//GBI.setSurfaceVisible(selectTarget.value );
-			GBI.setElementIdAttributes(selectTarget.value, item );
-
-		};
-
-		selectTarget.onchange =  function() {
-
-			GBI.setElementVisible( selectTarget.value, item )
-			GBI.setElementIdAttributes( selectTarget.value, item );
-
-		};
-
-	};
-
-
-
-	GBI.setElementVisible = function( id, item ) {
-		//console.log( 'id', id );
-		//console.log( 'item', item );
-
-		if ( item.element === 'Surface') {
-
-			GBI.setSurfaceVisible( id );
-
-		} else if ( item.element === 'Space') {
-
-			GBI.setSpaceVisible( id );
-
-		} else if ( item.element === 'Storey') {
-
-			GBI.setStoreyVisible( id );
-
-		} else if ( item.element === 'Zone') {
-
-			GBI.setZoneVisible( id );
-
-		} else if ( item.element === 'Openings') {
-
-			GBI.setOpeningVisible( id );
-
-		}
-
-	};
-
-
-
-	GBI.setSelectedIndex = function( input, select ) {
-
-		const str = input.value.toLowerCase();
-
-		// try using find
-		for ( let option of select.options ) {
-
-			if ( option.innerHTML.toLowerCase().includes( str ) ) {
-
-				select.value = option.value;
-
-				return;
-
-			}
-
-		}
-
-	};
 
 
 
@@ -994,12 +1031,12 @@
 
 					if ( Array.isArray( obj[ property ] ) ) {
 
-						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ][ 0 ].spaceIdRef );
-						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ][ 1 ].spaceIdRef );
+						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ][ 0 ].spaceIdRef, 1 );
+						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ][ 1 ].spaceIdRef, 2 );
 
 					} else {
 
-						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ].spaceIdRef );
+						divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ].spaceIdRef, 0 );
 
 					}
 
@@ -1021,7 +1058,7 @@
 
 				} else if ( item.element === 'Space' ) {
 
-					divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ] );
+					divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ], 0 );
 
 				} else if ( item.element === 'Surface' ) {
 
@@ -1064,21 +1101,25 @@
 	};
 
 
-	GBI.setPanelSpaceAttributes = function( target, id ) {
 
-		item = {};
+	GBI.setPanelSpaceAttributes = function( target, spaceId, index = 0 ) {
+		//console.log( 'target', target );
+		//console.log( 'index', index );
+		//console.log( 'spaceId', spaceId );
+
+		const item = {};
 
 		target.innerHTML =
 
 		`<details open >
 
-			<summary>Space</summary>
+			<summary>Adjacent Space ` + ( index > 0 ? index : '' ) + `</summary>
 
 			<div id=GBIdivSpace ></div>
 
 			<div id=GBIdivAtts ></div>
 
-			<div><button onclick=HUD.updateSpace(); >update the space associated with this surface</button>
+			<div><button onclick=HUD.updateSpace("${spaceId}",${index}); >update the space associated with this surface</button>
 
 		</details>
 
@@ -1099,7 +1140,7 @@
 		GBI.setElementPanel2( item );
 
 		sel = document.getElementById( item.selItem );
-		sel.value = id;
+		sel.value = spaceId;
 		sel.click();
 
 		console.log( 'sel', sel );
@@ -1149,14 +1190,15 @@
 
 	//////////
 
-	GBI.getAttributeAdjacentSpace = function( spaceIdRef ) {
-
-		//console.log( 'spaceIdRef', spaceIdRef );
+	GBI.getAttributeAdjacentSpace = function( spaceIdRef, index = 0 ) {
+		// used by REP
+		console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
+		console.log( 'index', index );
 
 		const txt =
 		`<div>
-			<span class=attributeTitle >adjacent space id</span>:<br>
-			<button id=GBIbutSpaceVis onclick=GBI.setSpaceVisible("${spaceIdRef}"); >${spaceIdRef}</button>
+			<span class=attributeTitle >adjacent space ` + ( index > 0 ? index : `` ) + ` id</span>:<br>
+			<button id=GBIbutSpaceVis onclick=GBI.setSpaceVisible("${spaceIdRef}",${index}); >${spaceIdRef}</button>
 			<button onclick=GBI.setSpaceZoom("${spaceIdRef}"); >&#8981;</button>
 		</div>`;
 
@@ -1302,16 +1344,13 @@
 
 		const details =
 
-		`
-			<p>
-				<select id = "REPselCadIdGroups"
-					onclick=GBI.setCadObjectTypeVisible(this.value);
-					onchange=GBI.setCadObjectTypeVisible(this.value); size=10 >` +
-					txt +
-				`</select>
-			</p>
-
-		`;
+		`<p>
+			<select id = "REPselCadIdGroups"
+				onclick=GBI.setCadObjectTypeVisible(this.value);
+				onchange=GBI.setCadObjectTypeVisible(this.value); size=10 >` +
+				txt +
+			`</select>
+		</p>`;
 
 		target.innerHTML = details;
 
@@ -1374,6 +1413,23 @@
 		GBP.surfaceMeshes.children.forEach( child => child.visible = true );
 
 	};
+
+
+	////////// get IDs
+
+	GBI.getSpaceId = function( spaceIdRef ) {
+		// Used: ??
+
+		if ( !GBP.gbjson.Campus.Building.Space || !GBP.gbjson.Campus.Building.Space.length ) { return; }
+
+		let space = GBP.gbjson.Campus.Building.Space.find( element => element.id === spaceIdRef );
+
+		space = space ? space : 'none';
+
+		return space;
+
+	};
+
 
 
 	////////// Style

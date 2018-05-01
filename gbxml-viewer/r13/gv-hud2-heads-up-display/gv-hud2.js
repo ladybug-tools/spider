@@ -58,6 +58,7 @@
 	};
 
 
+	// Handle events
 
 	HUD.onRendererMouseMoveHUD = function( event ) {
 
@@ -184,7 +185,7 @@
 
 		`<details open >
 
-			<summary><b>Surface</b></summary>
+			<summary>Surface</summary>
 
 			<div id = "HUDdivPanelSurface" ></div>
 
@@ -226,7 +227,7 @@
 	};
 
 
-	///////// Editing Elements
+	///////// Editing Elements after push update button
 
 	HUD.updateSurface = function( id ) {
 
@@ -241,7 +242,7 @@
 
 
 	HUD.updateSpace = function( spaceRef ) {
-		//console.log( 'spaceRef', spaceRef );
+		console.log( 'spaceRef', spaceRef );
 
 		const surfaceJson = HUD.userDataData;
 		const surfaceId = surfaceJson.id;
@@ -297,6 +298,8 @@
 		//console.log( 'adjacentNew', adjacentNew );
 
 		console.log( 'surfaceJson', surfaceJson );
+
+		alert( 'update space almost working: ' + spaceRef )
 
 		HUD.setHeadsUp();
 
@@ -488,7 +491,7 @@
 
 			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
 
-			//HUD.setHeadsUp();
+			HUD.setHeadsUp();
 
 		} else {
 
