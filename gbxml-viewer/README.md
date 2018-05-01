@@ -27,6 +27,10 @@ _Both of the above links are shortcuts that link to the appropriate address. You
 
 ***
 
+## Webinar
+
+* [Webinar Outline]( #./assets/webinar-outline.md )
+
 ## Must watch and thumbs-up YouTube video:
 
 ### [Ladybug Tools / Spider / gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
