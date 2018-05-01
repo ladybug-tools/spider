@@ -35,7 +35,7 @@ _Link to invitation:_
 
 > We will be holding a Green Building XML (gbXML) webinar on May 8, 2018 from 1 to 2 pm EDT. This webinar is targeted toward energy modelers, engineers, architects, software vendors, and generally anyone who is interested in viewing the latest in Ladybug Tool workflows with an emphasis on integration with Green Building XML.
 
-### [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-01-gbxml-webinar )
+### [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-08-gbxml-webinar/README.md )
 
 
 ***
