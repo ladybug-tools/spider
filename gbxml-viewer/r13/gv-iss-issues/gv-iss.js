@@ -68,7 +68,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id = "ISSdetPanelMetadataIssues" ></div>
 
+			<div id=ISSdetPanelSurfacesDuplicateAdjacentSpaces2 ></div>
+
 			<div id=ISSdetPanelSurfacesDuplicateAdjacentSpaces ></div>
+
+			<div id=ISSdetPanelSurfacesDuplicateCoordinates2 ></div>
 
 			<div id=ISSdetPanelSurfacesDuplicateCoordinates ></div>
 
@@ -142,15 +146,22 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.setPanelMetadataIssues( ISSdetPanelMetadataIssues );
 
+
+		ISS.setPanelSurfacesDuplicateAdjacentSpaces( ISSdetPanelSurfacesDuplicateAdjacentSpaces2 );
+
 		ISSdetPanelSurfacesDuplicateAdjacentSpaces.innerHTML = ISS.getPanelSurfacesDuplicateAdjacentSpaces();
 
+
+		ISS.setPanelSurfacesDuplicateCoordinates( ISSdetPanelSurfacesDuplicateCoordinates2 );
+
 		ISSdetPanelSurfacesDuplicateCoordinates.innerHTML = ISS.getPanelSurfacesDuplicateCoordinates();
+
 
 		ISSdetPanelSurfacesUndefinedCadId.innerHTML = ISS.getPanelSurfacesUndefinedCadId();
 
 		ISS.setPanelSurfacesTiny( ISSdetPanelSurfacesTiny );
 
-		ISS.setPanelSurfacesVertexClose();
+		ISS.setPanelSurfacesVertexClose( ISSdetPanelSurfacesVertexClose );
 
 		ISS.setPanelOpeningVertices4Plus( ISSdetPanelOpeningVertices4Plus );
 
@@ -194,11 +205,85 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<summary>Metadata Issues</summary>
 
-			<div>gbXML attributes provided: ` + provided.join( ', ' ) + `</div>
+			<p>gbXML attributes provided:<br>` + provided.join( ', ' ) + `</p>
 
-			<div>missing: ` + ( required.length - count ) + `</div>
+			<div>Missing: ` + ( required.length - count ) + `</div>
 
 		</details>`;
+
+	};
+
+
+
+	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) {
+
+		surfaces = GBP.gbjson.Campus.Surface;
+		let count = 0;
+		let contents = '';
+		ISS.surfaceAdjacentsDuplicates = [];
+
+		for ( let surface of surfaces ) {
+
+			const adjacencies = surface.AdjacentSpaceId;
+
+			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
+
+				ISS.surfaceAdjacentsDuplicates.push( { id: surface.id, cadId: surface.CADObjectId } );
+
+			}
+
+		}
+
+		ISS.surfaceAdjacentsDuplicates.sort( ( aSurf, bSurf ) => {
+			const a = aSurf.cadId;
+			const b = bSurf.cadId;
+			if ( a < b ) {
+				return -1;
+			}
+			if ( a > b ) {
+				return 1;
+			}
+			// items must be equal
+			return 0;
+		} );
+
+		//console.log( 'ISS.surfaceAdjacentsDuplicates', ISS.surfaceAdjacentsDuplicates );
+
+		target.innerHTML =
+
+		`<details>
+
+			<summary id = "ISSsumSurfacesDuplicateAdjacentSpaces2" >R13 Duplicate Adjacent Space &raquo; ` + ISS.surfaceAdjacentsDuplicates.length + ` found</summary>
+
+			<p><small>
+				Surfaces with two adjacent spaces pointing to identical space ids.
+			</small></p>
+
+			<p>
+				<button id=ISSbutDuplicateAdjacent2 onclick=ISS.setDuplicateAdjacentSpaceVisibleToggle(); >toggle all duplicate adjacent spaces</button>
+			</p>
+
+			<div id=ISSdivSurfacesDuplicateAdjacentSpaces2 ></div>
+
+			<button onclick=GBI.setSurfaceZoom(ISSselSurfacesDuplicateAdjacentSpaces2.value); title="zoom into just this surface" >zoom</button>
+
+			<hr>
+
+		</details>`;
+
+		let item = {};
+		item.attribute = 'IdDuplicateAdjacent';
+		item.divAttributes = 'ISSdivISSdivSurfacesDuplicateAdjacentSpaces2Attributes';
+		item.divTarget = document.getElementById( 'ISSdivSurfacesDuplicateAdjacentSpaces2' );
+		item.element = 'Surface'
+		item.optionValues = ISS.surfaceAdjacentsDuplicates.map( item => [ item.id, item.id ] );
+		item.parent = surfaces; // ISS.surfaceAdjacentsDuplicates;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselSurfaceAdjacentsDuplicates';
+
+		GBI.setElementPanel2( item );
+		ISSselSurfaceAdjacentsDuplicates.selectedIndex = 0;
+		ISSselSurfaceAdjacentsDuplicates.click();
 
 	};
 
@@ -266,7 +351,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		const txt =
 		`<details>
 
-			<summary >Duplicate Adjacent Space &raquo; ` + count + ` found</summary>
+			<summary >R12 Duplicate Adjacent Space &raquo; ` + count + ` found</summary>
 
 			<p>
 				Surfaces with two adjacent spaces pointing to identical space id. Use with heads-up display.
@@ -282,6 +367,81 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		</details>`;
 
 		return txt;
+
+	};
+
+
+
+	ISS.setPanelSurfacesDuplicateCoordinates = function( target ) {
+
+
+		const surfacePolyLoops = [];
+		const surfaceIds = [];
+		ISS.surfaceDuplicateCoordinates = [];
+
+		let spaceIdOther1;
+		let spaceIdOther2;
+
+		const surfaces = GBP.surfaceJson;
+
+
+		let spaceId;
+
+		for ( let i = 0; i <  surfaces.length; i++ ) {
+
+			surface = surfaces[ i ]
+			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
+			index = surfacePolyLoops.indexOf( points );
+
+			if ( index < 0 ) {
+
+				surfacePolyLoops.push( points );
+				surfaceIds.push( i );
+
+			} else {
+
+				surfaceOther = surfaces[ surfaceIds[ index ] ];
+				ISS.surfaceDuplicateCoordinates.push( surface );
+
+			}
+
+		}
+
+		target.innerHTML =
+
+		`<details>
+
+			<summary id = "ISSsumSurfacesDuplicateCoordinates2" >R13 Duplicate Coordinates &raquo; ` + ISS.surfaceDuplicateCoordinates.length + ` found</summary>
+
+			<p><small>
+				Two surfaces with identical coordinates
+			</small></p>
+
+			<p>
+				<button id=butDuplicatesCoordinates2 onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates2,ISS.surfaceDuplicateCoordinates); >toggle all duplicates</button>
+			</p>
+
+			<div id=ISSdivSurfacesDuplicateCoordinates2 ></div>
+
+			<button onclick=GBI.setSurfaceZoom(ISSselSurfacesDuplicateCoordinates2.value); title="zoom into just this surface" >zoom</button>
+
+			<hr>
+
+		</details>`;
+
+		let item = {};
+		item.attribute = 'IdDuplicateCoordinates';
+		item.divAttributes = 'ISSdivISSdivSurfacesDuplicateCoordinatesAttributes2';
+		item.divTarget = document.getElementById( 'ISSdivSurfacesDuplicateCoordinates2' );
+		item.element = 'Surface'
+		item.optionValues = ISS.surfaceDuplicateCoordinates.map( element => [ element.id, element.id ] );
+		item.parent = surfaces; // ISS.surfaceAdjacentsDuplicates;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselSurfacesDuplicateCoordinates2';
+
+		GBI.setElementPanel2( item );
+		ISSselSurfacesDuplicateCoordinates2.selectedIndex = 0;
+		ISSselSurfacesDuplicateCoordinates2.click();
 
 	};
 
@@ -421,7 +581,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		`<details>
 
-			<summary id = "ISSsumDuplicateSurfaces" >Duplicate Coordinates &raquo; ` + count + `</summary>
+			<summary id = "ISSsumDuplicateSurfaces" >R12 Duplicate Coordinates &raquo; ` + count + `</summary>
 
 			<div >Two surfaces with identical coordinates</div>
 
@@ -483,22 +643,18 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.surfacesTiny = GBP.surfaceJson.filter( surface =>
 			parseFloat( surface.RectangularGeometry.Height ) * parseFloat( surface.RectangularGeometry.Width  ) < size );
 
-		let options = '';
-		ISS.surfacesTiny.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		options = options ? options : '<option>none found</option>';
-
-		ISSdetPanelSurfacesTiny.innerHTML =
+		target.innerHTML =
 
 		`<details>
 
 			<summary id = "ISSsumSurfacesTiny" >Tiny Surfaces &raquo; ` + ISS.surfacesTiny.length + ` found</summary>
 
-			<div ><small>Surfaces with area smaller than a set minimum</small></div>
+			<div ><small>Surfaces with area smaller than a minimum area.</small></div>
 
 			<p>
 				Set minimum area: <output id=ISSoutMinSize >` + size + `</output>
-				<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1
-				onchange=ISSoutMinSize.value=this.value*0.01;ISS.getPanelSurfacesTiny(); >
+				<input id=ISSinpMinSize type=range min=0 max=100 value=20 step=1
+				onchange=ISSoutMinSize.value=this.value*0.01;ISS.setPanelSurfacesTiny(ISSdetPanelSurfacesTiny); >
 			</p>
 
 			<div id=ISSdivSurfacesTiny ></div>
@@ -509,21 +665,25 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		</details>`;
 
-		let data = {};
-		data.attribute = 'IdTiny';
-		data.divTarget = ISSdivSurfacesTiny;
-		data.gbjson = ISS.surfacesTiny.map ( item => item.id );
-		data.selItem = 'ISSselSurfacesTiny';
+		let item = {};
+		item.attribute = 'IdTiny';
+		item.divAttributes = 'ISSdivSurfacesTinyAttributes';
+		item.divTarget = document.getElementById( 'ISSdivSurfacesTiny' );
+		item.element = 'Surface'
+		item.optionValues = ISS.surfacesTiny.map( item => [ item.id, item.id ] );
+		item.parent = ISS.surfacesTiny;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselSurfacesTiny';
 
-		GBI.setElementPanel2( data );
-		//ISSselSurfacesTiny.selectedIndex = 0;
-		//ISSselSurfacesTiny.click();
+		GBI.setElementPanel2( item );
+		ISSselSurfacesTiny.selectedIndex = 0;
+		ISSselSurfacesTiny.click();
 
 	};
 
 
 
-	ISS.setPanelSurfacesVertexClose = function() {
+	ISS.setPanelSurfacesVertexClose = function( target ) {
 
 		distanceDefault = window.ISSinpMinDistance ? parseFloat( ISSinpMinDistance.value ) : 20;
 
@@ -559,76 +719,44 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		//console.log( ISS.surfacesVertexClose.length , ISS.surfacesVertexClose );
-		//let options = '';
-		//ISS.surfacesVertexClose.forEach( function( element ) { options += '<option>' + element.userData.data.id + '</option>'; } );
-		//options = options ? options : '<option>none found</option>';
-
-		data = {};
-		data.attribute = 'Id';
-		data.gbjson = ISS.surfacesVertexClose.map ( item => item.userData.data.id );
-		data.selItem = 'ISSselVertexClose';
-
-		ISSdetPanelSurfacesVertexClose.innerHTML =
+		target.innerHTML =
 
 		`<details>
 
-			<summary>Very Close Vertices by Id &raquo; ` + data.gbjson.length + ` items</summary>
-			<div><small>Surfaces that have vertices closer to a set distance. Use telltales in right menu to identify the vertices.</small></div>
+			<summary id = "ISSsumSurfacesVertexClose" >Very Close Vertices by Id &raquo; ` + ISS.surfacesVertexClose.length + ` found</summary>
+
+			<p><small>
+				Surfaces that have vertices closer than a minimum distance.
+				Use telltales in right menu to identify the vertices.
+			</small></p>
 
 			<p>
 				Set minimum distance: <output id=ISSoutMinDistance >` + distance + `</output><br>
 				<input id=ISSinpMinDistance type=range min=0 max=100 value=` + distanceDefault + ` step=1
-				onchange=ISS.setPanelSurfacesVertexClose(); >
+					onchange=ISS.setPanelSurfacesVertexClose(ISSdetPanelSurfacesVertexClose); >
 			</p>
 
-			<div id=ISSdivVertexClose ></div>
+			<div id=ISSdivSurfacesVertexClose ></div>
+
+			<button onclick=GBI.setSurfaceZoom(ISSselSurfacesVertexClose.value); title="zoom into just this surface" >zoom</button>
 
 			<hr>
 
-		<details>`
-
-
-		ISSdivVertexClose.innerHTML = GBI.getElementPanel( data );
-
-		ISSselVertexClose.selectedIndex = 0;
-		//ISSselVertexClose.click();
-
-		/*
-		const details =
-
-		`<details ontoggle=ISSselSurfaceVertexClose.selectedIndex=0;ISSselSurfaceVertexClose.click(); >
-
-			<summary>Very Close Vertices &raquo; ` + ISS.surfacesVertexClose.length + ` found</summary>
-
-			<div >Surfaces that have close vertices. Use telltales in right menu to identify the vertices.</div>
-			Test distance <output id=ISSoutMinDistance >` + distance + `</output>
-			<input id=ISSinpMinDistance type=range min=0 max=100 value=` + distanceDefault + ` step=1
-				onchange=ISSdetPanelSurfacesVertexClose.innerHTML=ISS.getPanelSurfacesVertexClose(); >
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceVertexClose); size=6 placeholder="surface id" ><br>
-					<select id = "ISSselSurfaceVertexClose"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes();
-						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceVertexCloseAttributes(); size=10 >` +
-						options +
-					`</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceVertexClose.value); title="zoom into just this surface" >zoom</button>
-				</div>
-				<div id = "ISSdivSurfacesVertexCloseAttributes" class=flex-left-div2 ></div>
-			</div>
-
-			<div id=xxxISSdivSurfacesVertexClose ></div>
-
 		</details>`;
 
-		return details;
-		*/
+		let item = {};
+		item.attribute = 'IdVertexClose';
+		item.divAttributes = 'ISSdivSurfacesVertexCloseAttributes';
+		item.divTarget = document.getElementById( 'ISSdivSurfacesVertexClose' );
+		item.element = 'Surface'
+		item.optionValues = ISS.surfacesVertexClose.map( element => [ element.userData.data.id, element.userData.data.id ] );
+		item.parent = ISS.surfaceJson;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselSurfacesVertexClose';
 
-
-
-
-
+		GBI.setElementPanel2( item );
+		ISSselSurfacesVertexClose.selectedIndex = 0;
+		ISSselSurfacesVertexClose.click();
 	};
 
 
@@ -930,7 +1058,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setDuplicateAdjacentSpaceVisibleToggle = function() {
 
-		if ( ISSbutDuplicateAdjacent.style.backgroundColor !== 'var( --but-bg-color )' ) {
+		if ( ISSbutDuplicateAdjacent.style.backgroundColor !== 'pink' ) {
 
 			GBP.surfaceMeshes.children.forEach( child => child.visible = false );
 
@@ -941,7 +1069,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}
 
-			ISSbutDuplicateAdjacent.style.backgroundColor = 'var( --but-bg-color )';
+			ISSbutDuplicateAdjacent.style.backgroundColor = 'pink';
 
 		} else {
 

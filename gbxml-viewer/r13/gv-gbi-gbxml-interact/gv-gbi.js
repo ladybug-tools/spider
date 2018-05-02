@@ -220,6 +220,7 @@
 
 
 	GBI.getElementPanel = function( item ){
+		// where still used ??
 
 		item = item || {};
 		item.attribute = item.attribute ? item.attribute : '';
@@ -292,7 +293,6 @@
 			</div>`;
 
 		item.divTarget.innerHTML = divElement;
-
 		//console.log( 'item.divTarget', item.divTarget);
 
 		const selectTarget = item.divTarget.getElementsByTagName( 'select' )[ 0 ];
@@ -1014,7 +1014,7 @@
 		//console.log( 'arr', arr );
 
 		obj = arr.find( element => element.id === id );
-		console.log( 'obj', obj );
+		//console.log( 'obj', obj );
 
 		divAttributes = document.getElementById ( item.divAttributes );
 		//console.log( 'divAttributes', divAttributes );
@@ -1130,20 +1130,21 @@
 		item.divTarget = GBIdivSpace;
 		item.element = 'Space';
 		//item.optionValues = item.optionValues;
+		item.optionValues = GBP.gbjson.Campus.Building.Space.map( item => [ item.id, item.id ] );
 		item.parent = GBP.gbjson.Campus.Building.Space;
 		item.placeholder = 'space id';
 		item.selItem = 'GBIselSpace';
 
-		item.optionValues = GBP.gbjson.Campus.Building.Space.map( item => [ item.id, item.id ] );
 
 		//console.log( 'item.optionValues', item.optionValues);
+
 		GBI.setElementPanel2( item );
 
 		sel = document.getElementById( item.selItem );
 		sel.value = spaceId;
 		sel.click();
 
-		console.log( 'sel', sel );
+		//console.log( 'sel', sel );
 
 	};
 
@@ -1192,8 +1193,8 @@
 
 	GBI.getAttributeAdjacentSpace = function( spaceIdRef, index = 0 ) {
 		// used by REP
-		console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
-		console.log( 'index', index );
+		//console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
+		//console.log( 'index', index );
 
 		const txt =
 		`<div>

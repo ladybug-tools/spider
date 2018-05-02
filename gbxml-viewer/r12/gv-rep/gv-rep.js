@@ -122,7 +122,6 @@
 
 			<details>
 
-
 				<summary id = "REPsumZones" >Zones</summary>
 
 				<div class=flex-container2 >
@@ -135,6 +134,22 @@
 				</div>
 				<hr>
 			</details>
+
+
+			<details>
+
+			<summary id = "REPsumOpenings" >Openings</summary>
+
+			<div class=flex-container2 >
+				<div class=flex-div1 >
+					<input oninput=REP.updateSelect(this,REPselOpening); size=6 placeholder="zone id" ><br>
+					<select id = "REPselOpening" onclick=GBV.showZone(this.value);REP.updateZoneAttributes();
+						onchange=GBV.showZone(this.value);REP.updateZoneAttributes(); size=10 ></select>
+				</div>
+				<div id = "REPdivZones" class=flex-left-div2  ></div>
+			</div>
+			<hr>
+		</details>
 
 			<details >
 				<summary id = "REPsumCadIdGroups" >CAD Object Groups</summary>
