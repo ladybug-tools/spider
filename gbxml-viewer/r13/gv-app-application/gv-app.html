@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-04-21" >
-<title>gbXML Viewer 13.10</title>
+<meta name = "date" content = "2018-05-03" >
+<title>Aragog gbXML Viewer 13.11</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -51,6 +51,7 @@
 						<img src="../assets/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
 					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
 				</h2>
+
 				<!--
 				<p title="Thanks to Mr.doob, Ken Russell and the many WebGL peeps" ><small>
 					<script> document.write( document.head.querySelector( '[name=description]' ).content )</script>
@@ -66,7 +67,7 @@
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
 					<input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 
-					or explore sample files<br>
+					or explore sample file galleries<br>
 
 					<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -77,7 +78,13 @@
 					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 						"const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal-gallery/gv-gal-spider-gbxml-sample-files.js';" >
-						Spider
+						Samples1
+					</button>
+
+					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal-gallery/gv-gal-spider-gbxml-sample-files.js';" >
+						Samples2
 					</button>
 
 					<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
@@ -292,7 +299,7 @@
 
 	var APP = {};
 
-	GBP.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+	GBP.defaultURL = '../../2018-05-08-gbxml-webinar/gbxml-clifton-downs-broken.xml';
 	//GBP.defaultURL = '../../../gbxml-sample-files/old-factory.xml';
 
 	COR.initCore();

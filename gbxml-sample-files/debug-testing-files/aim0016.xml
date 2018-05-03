@@ -46576,9 +46576,9 @@
       <CADObjectId>Floor: SIM_INT_SLD_FLR FLR02 [921074]</CADObjectId>
       <Name>T-00_102-01_118-I-F-20</Name>
     </Surface>
-    <Surface surfaceType="InteriorFloor" id="aim5629">
-      <AdjacentSpaceId spaceIdRef="aim0363"/>
-      <AdjacentSpaceId spaceIdRef="aim5041"/>
+    <Surface surfaceType="SlabOnGrade" id="aim5629">
+      
+      
       <RectangularGeometry id="aim5630">
         <Azimuth>0</Azimuth>
         <CartesianPoint>
@@ -46616,7 +46616,7 @@
       </PlanarGeometry>
       <CADObjectId>Floor: SIM_INT_SLD_FLR FLR02 [908829]</CADObjectId>
       <Name>B-00_102-B1_109-I-F-21</Name>
-    </Surface>
+    <AdjacentSpaceId xmlns="" spaceIdRef="aim0363"/></Surface>
     <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim5641">
       <AdjacentSpaceId spaceIdRef="aim0405"/>
       <RectangularGeometry id="aim5642">
@@ -72832,7 +72832,7 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [927801]</CADObjectId>
       <Name>S-RF_100-E-W-484</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim13016">
+    <Surface surfaceType="Roof" exposedToSun="true" id="aim13016">
       <AdjacentSpaceId spaceIdRef="aim5184"/>
       <RectangularGeometry id="aim13017">
         <Azimuth>180</Azimuth>
@@ -72869,9 +72869,9 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <CADObjectId>Basic Roof: SIM_EXT_SLD_Roof DA01 [926733]</CADObjectId>
+      <CADObjectId>Basic Roof: SIM_EXT_SLD_Roof DA01 [929326]</CADObjectId>
       <Name>T-RF_100-E-R-485</Name>
-    <AdjacentSpaceId xmlns="" spaceIdRef="aim5320"/></Surface>
+    </Surface>
     <Surface surfaceType="InteriorWall" id="aim13027">
       <AdjacentSpaceId spaceIdRef="aim5184"/>
       <AdjacentSpaceId spaceIdRef="aim5278"/>

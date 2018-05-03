@@ -157,7 +157,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSdetPanelSurfacesDuplicateCoordinates.innerHTML = ISS.getPanelSurfacesDuplicateCoordinates();
 
 
-		ISSdetPanelSurfacesUndefinedCadId.innerHTML = ISS.getPanelSurfacesUndefinedCadId();
+		//ISSdetPanelSurfacesUndefinedCadId.innerHTML = ISS.getPanelSurfacesUndefinedCadId();
+
+		ISS.setPanelSurfacesUndefinedCadId( ISSdetPanelSurfacesUndefinedCadId );
 
 		ISS.setPanelSurfacesTiny( ISSdetPanelSurfacesTiny );
 
@@ -595,9 +597,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.getPanelSurfacesUndefinedCadId = function() {
+	ISS.setPanelSurfacesUndefinedCadId = function( target ) {
 
 		ISS.surfacesUndefinedId = GBP.surfaceJson.filter( element => element.CADObjectId === undefined || element.CADObjectId === '' );
+
+		/*
 
 		let options = '';
 		ISS.surfacesUndefinedId.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
@@ -630,6 +634,38 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		</details>`;
 
 		return details;
+		*/
+
+
+		target.innerHTML =
+
+		`<details>
+
+			<summary id = "ISSsumSurfacesUndefinedCadId" >Undefined CAD Object IDs &raquo; ` + ISS.surfacesUndefinedId.length + ` found</summary>
+
+			<p><small>Surfaces with undefined CAD Object ID</small></p>
+
+			<div id=ISSdivSurfacesUndefinedCadId ></div>
+
+			<button onclick=GBI.setSurfaceZoom(ISSselSurfacesUndefinedCadId.value); title="zoom into just this surface" >zoom</button>
+
+			<hr>
+
+		</details>`;
+
+		let item = {};
+		item.attribute = 'IdSurfacesUndefinedCadId';
+		item.divAttributes = 'ISSdivSurfacesUndefinedCadIdAttributes';
+		item.divTarget = document.getElementById( 'ISSdivSurfacesUndefinedCadId' );
+		item.element = 'Surface'
+		item.optionValues = ISS.surfacesUndefinedId.map( item => [ item.id, item.id ] );
+		item.parent = ISS.surfacesUndefinedCadId;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselSurfacesUndefinedCadId';
+
+		GBI.setElementPanel2( item );
+		ISSselSurfacesUndefinedCadId.selectedIndex = 0;
+		ISSselSurfacesUndefinedCadId.click();
 
 	};
 
@@ -649,7 +685,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<summary id = "ISSsumSurfacesTiny" >Tiny Surfaces &raquo; ` + ISS.surfacesTiny.length + ` found</summary>
 
-			<div ><small>Surfaces with area smaller than a minimum area.</small></div>
+			<p><small>Surfaces with area smaller than a minimum area.</small></p>
 
 			<p>
 				Set minimum area: <output id=ISSoutMinSize >` + size + `</output>
@@ -809,38 +845,37 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPanelSurfaceTypeInvalid = function( target ) {
 
-		//ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => element.CADObjectId === undefined );
 		ISS.surfaceTypeInvalid = GBP.surfaceJson.filter( element => GBP.surfaceTypes.indexOf( element.surfaceType ) < 0 );
 
-		let options = '';
-		ISS.surfaceTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		options = options ? options : '<option>none found</option>';
-
 		target.innerHTML =
+
 		`<details>
 
 			<summary id = "ISSsumSurfaceTypeInvalid" >Surface Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
 
-			<div >Surfaces with undefined ID</div>
-
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
-					<select id = "ISSselSurfaceUndefined"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.setPanelSurfaceTypeAttributes();
-						onchange=GBI.setSurfaceVisible(this.value);ISS.setPanelSurfaceTypeAttributes(); size=10 >` +
-						options + `
-						</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
-					</div>
-				<div id = "ISSdivSurfaceTypeInvalid" class=flex-left-div2 ></div>
-			</div>
+			<p><small>Surfaces with undefined surface type</small></p>
 
 			<div id=ISSdivSurfaceTypeInvalid ></div>
+
+			<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
 
 			<hr>
 
 		</details>`;
+
+		let item = {};
+		item.attribute = 'IdSurfaceTypeInvalid';
+		item.divAttributes = 'ISSdivSurfaceTypeInvalidAttributes';
+		item.divTarget = document.getElementById( 'ISSdivSurfaceTypeInvalid' );
+		item.element = 'Surface'
+		item.optionValues = ISS.surfaceTypeInvalid.map( item => [ item.id, item.id ] );
+		item.parent = ISS.surfaceTypeInvalid;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselSurfaceTypeInvalid';
+
+		GBI.setElementPanel2( item );
+		ISSselSurfaceTypeInvalid.selectedIndex = 0;
+		ISSselSurfaceTypeInvalid.click();
 
 	};
 
@@ -868,35 +903,36 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.openingTypeInvalid = ISS.openings.filter( opening => !openingTypes.includes( opening.openingType ) );
 
-		//console.log( 'ISS.openingTypeInvalid', ISS.openingTypeInvalid );
-
-		let options = '';
-		ISS.openingTypeInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		options = options ? options : '<option>none found</option>';
 
 		target.innerHTML =
+
 		`<details>
 
 			<summary id = "ISSsumOpeningTypeInvalid" >Opening Type Invalid &raquo; ` + ISS.openingTypeInvalid.length + ` found</summary>
 
-			<div >Openings with invalid type</div>
+			<p><small>Openings with invalid type</small></p>
 
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselOpeningTypeInvalid); size=6 placeholder="opening id" ><br>
-					<select id = "ISSselOpeningTypeInvalid"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.setPanelOpeningAttributes(this.value);
-						onchange=GBI.setSurfaceVisible(this.value);ISS.setPanelOpeningAttributes(this.value); size=10 >` +
-						options + `
-						</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this opening" >zoom</button>
-				</div>
-				<div id = "ISSdivOpeningTypeInvalid" class=flex-left-div2 ></div>
-			</div>
+			<div id=ISSdivOpeningTypeInvalid ></div>
+
+			<button onclick=GBI.setSurfaceZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this surface" >zoom</button>
 
 			<hr>
 
 		</details>`;
+
+		let item = {};
+		item.attribute = 'IdOpeningTypeInvalid';
+		item.divAttributes = 'ISSdivOpeningTypeInvalidAttributes';
+		item.divTarget = document.getElementById( 'ISSdivOpeningTypeInvalid' );
+		item.element = 'Surface'
+		item.optionValues = ISS.openingTypeInvalid.map( item => [ item.id, item.id ] );
+		item.parent = ISS.openingTypeInvalid;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselOpeningTypeInvalid';
+
+		GBI.setElementPanel2( item );
+		ISSselOpeningTypeInvalid.selectedIndex = 0;
+		ISSselOpeningTypeInvalid.click();
 
 	};
 
@@ -923,7 +959,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				//console.log( 'two space', surface );
 				ISS.adjacentSpaceInvalid.push( surface );
 
-			}else if ( oneSpace.includes( surface.surfaceType ) && !surface.AdjacentSpaceId ) {
+			}else if ( oneSpace.includes( surface.surfaceType ) && ( !surface.AdjacentSpaceId || surface.AdjacentSpaceId.length ) ) {
 
 				//console.log( 'one space', surface );
 				ISS.adjacentSpaceInvalid.push( surface );
@@ -937,36 +973,35 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		let options = '';
-		ISS.adjacentSpaceInvalid.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		options = options ? options : '<option>none found</option>';
-
 		target.innerHTML =
+
 		`<details>
 
 			<summary id = "ISSsumAdjacentSpaceInvalid" >Adjacent Space Invalid &raquo; ` + ISS.adjacentSpaceInvalid.length + ` found</summary>
 
-			<div >Surfaces with Invalid Adjacent Spaces </div>
+			<p><small>Surfaces with Invalid Adjacent Spaces</small></p>
 
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=ISS.updateSelect(this,ISSselAdjacentSpaceInvalid); size=6 placeholder="surface id" ><br>
-					<select id = "ISSselAdjacentSpaceInvalid"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.setPanelAdjacentSpaceAttributes(this.value);
-						onchange=GBI.setSurfaceVisible(this.value);ISS.setPanelAdjacentSpaceAttributes(this.value); size=10 >` +
-						options + `
-						</select><br>
+			<div id=ISSdivAdjacentSpaceInvalid ></div>
 
-					<!-- <button onclick=GBV.zoomIntoSurface(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button> -->
-
-				</div>
-				<div id = "ISSdivAdjacentSpaceInvalid" class=flex-left-div2 ></div>
-			</div>
+			<button onclick=GBI.setSurfaceZoom(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button>
 
 			<hr>
 
 		</details>`;
-		//console.log( 'target',target );
+
+		let item = {};
+		item.attribute = 'IdAdjacentSpaceInvalid';
+		item.divAttributes = 'ISSdivAdjacentSpaceInvalidAttributes';
+		item.divTarget = document.getElementById( 'ISSdivAdjacentSpaceInvalid' );
+		item.element = 'Surface'
+		item.optionValues = ISS.adjacentSpaceInvalid.map( item => [ item.id, item.id ] );
+		item.parent = ISS.adjacentSpaceInvalid;
+		item.placeholder = 'surface id';
+		item.selItem = 'ISSselAdjacentSpaceInvalid';
+
+		GBI.setElementPanel2( item );
+		ISSselAdjacentSpaceInvalid.selectedIndex = 0;
+		ISSselAdjacentSpaceInvalid.click();
 
 	};
 

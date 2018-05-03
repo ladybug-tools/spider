@@ -7,215 +7,6 @@
 
 	GBI.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
 
-
-	//initGbxmlView();
-
-	/*
-	GBI.initGbxmlView = function() {
-
-		if ( window.butMenuLoad ) {
-
-			GBI.butGbxmlView = butMenuLoad;
-
-			GBI.title = 'gv-tmp - gbXML Viewer Template';;
-			document.title = GBI.title;
-			aDocumentTitle.innerHTML = GBI.title;
-			GBI.butGbxmlView.innerHTML = GBI.title;
-
-		} else {
-
-			return;
-			//GBI.butGbxmlView = butGbxmlView;
-
-		}
-
-		if ( GBI.butGbxmlView.style.backgroundColor !== 'var( --but-bg-color )' ) {
-
-			divMenuItems.innerHTML =
-
-				`<details id = detGbxmlView open>
-
-					<summary>gbXML View</summary>
-
-					<div id = "divGbxmlView" style=width:300px; ><div>
-
-					<hr>
-
-				</details>
-
-			` + divMenuItems.innerHTML;
-
-			initMenuGbxmlView();
-
-			GBI.butGbxmlView.style.backgroundColor = 'var( --but-bg-color )';
-
-		} else {
-
-			detGbxmlView.remove();
-
-			GBI.butGbxmlView.style.backgroundColor = '';
-
-		}
-
-	}();
-
-	function initMenuGbxmlView() {
-
-		surfaceCoordinateDuplicates = [];
-
-		divGbxmlView.innerHTML =
-		`
-			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
-
-			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
-
-			<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button><br>
-
-			<hr>
-
-			<button id=butDuplicatesCoordinates onclick=GBI.toggleDuplicates(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>
-			<br>
-			<button onclick=GBI.setAllVisible(); >GBI.setAllVisible</button>
-			<button onclick=GBI.zoomObjectBoundingSphere(GBP.surfaceMeshes); >GBI.zoomObjectBoundingSphere</button>
-			<button onclick=GBI.saveFile(); >GBI.saveFile</button>
-			<hr>
-
-			<select id = "selSurface" size=10 ></select><br>
-			<button onclick=GBI.showSurface(selSurface.value); >GBI.showSurface</button><br>
-			<button onclick=GBI.showCadId(encodeURI(GBP.surfaceJson[selSurface.selectedIndex].CADObjectId)); >GBI.showCadId</button><br>
-			<button onclick=GBI.zoomIntoSurface(selSurface.value); >GBI.zoomIntoSurface</button><br>
-			<button onclick=GBI.deleteSurface(selSurface.value); >GBI.deleteSurface</button><br>
-
-			<select id = "selType" size=10 ></select><br>
-			<button onclick=GBI.showSurfaceType(selType.value); >GBI.showSurfaceType</button>
-			<br>
-			<select id = "selSpace" size=10 ></select>
-			<button onclick=GBI.showSpace(selSpace.value); >GBI.GBI.showSpace</button>
-
-		`;
-
-		getMenuItems();
-
-	}
-
-	function getMenuItems() {
-
-		let txt = '';
-		GBP.surfaceJson.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
-
-		selSurface.innerHTML = txt;
-		selSurface.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
-
-		txt = '';
-		GBP.surfaceTypes.forEach( function( element ) { txt += '<option>' + element + '</option>'; } );
-
-		selType.innerHTML = txt;
-		selType.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
-
-		txt = '';
-		const spaceXml = GBP.gbjson.Campus.Building.Space;
-		spaceXml.forEach( function( element ) { txt += '<option>' + element.id + '</option>'; } );
-
-		selSpace.innerHTML = txt;
-		selSpace.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
-
-	}
-
-	GBI.toggleDuplicates = function( button, surfaceArray ) {
-
-		if ( button.style.backgroundColor !== 'var( --but-bg-color )' ) {
-			count = 0;
-			GBP.surfaceMeshes.children.forEach( element =>
-				{ element.visible = surfaceArray.includes( element.userData.data.Name ) ? true : false; count = element.visible ? count++ : count;} );
-				console.log( '', count );
-
-			/*
-			for ( let child of surfaceMeshes.children ) {
-
-				if ( surfaceArray.includes( child.userData.data.Name ) ) {
-
-					child.visible = true;
-
-				} else {
-
-					child.visible = false;
-
-				}
-
-			}
-
-			*/
-			/*
-			button.style.backgroundColor = 'var( --but-bg-color )';
-
-		} else {
-
-			GBI.setAllVisible();
-
-			button.style.backgroundColor = '';
-
-		}
-
-	}
-
-	// wrong repeats by id
-	GBI.showSurfacesInSurfaceArray = function( surfaces ) {
-
-		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
-
-	};
-
-	// ??
-	GBI.showBySurfaceTypeArray = function( types ) {
-
-		console.log( 'types', types );
-
-		const spaces = GBP.gbjson.Campus.Building.Space;
-
-		GBP.surfaceMeshes.children.forEach( element => element.visible = false );
-
-		for ( let child of GBP.surfaceMeshes.children ) {
-
-			spaces.forEach( element => { child.visible = types.includes( child.userData.data.surfaceType ) ? true : child.visible; } );
-
-		}
-
-		GBI.floorSlabs = GBP.surfaceMeshes.children.filter( child => child.visible === true );
-		//console.log( 'GBI.floorSlabs', GBI.floorSlabs);
-
-	}
-
-	GBI.showFloorSlabs = function( id ) {
-
-		//console.log( 'id', id );
-
-		const spaces = GBP.gbjson.Campus.Building.Space;
-
-		const types = ['InteriorFloor', 'SlabOnGrade', 'RaisedFloor', 'UndergroundSlab']
-
-		GBP.surfaceMeshes.children.forEach( element => element.visible = false );
-
-		for ( let child of GBP.surfaceMeshes.children ) {
-
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-			if ( !adjacentSpaceId ) { continue; }
-
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-			spaces.forEach( element => { child.visible = element.id === spaceIdRef
-				&& element.buildingStoreyIdRef === id  && types.includes( child.userData.data.surfaceType )  ? true : child.visible;
-
-			} );
-
-		}
-
-		GBI.floorSlabs = GBP.surfaceMeshes.children.filter( child => child.visible === true );
-		//console.log( 'GBI.floorSlabs', GBI.floorSlabs);
-
-	}
-*/
-
 	////////// Set Menu Panels
 
 
@@ -307,7 +98,7 @@
 
 		selectTarget.onchange =  function() {
 
-			GBI.setElementVisible( selectTarget.value, item )
+			GBI.setElementVisible( selectTarget.value, item );
 			GBI.setElementIdAttributes( selectTarget.value, item );
 
 		};
@@ -450,6 +241,7 @@
 	};
 
 
+
 	GBI.updateCadId = function( cadId ){
 
 		//console.log( 'cadId', cadId );
@@ -462,7 +254,7 @@
 
 		HUD.surfacesXml = GBP.gbxml.getElementsByTagName( "Surface" );
 
-		surfaceXml = HUD.surfacesXml[ id ];
+		const surfaceXml = HUD.surfacesXml[ id ];
 		//console.log( 'surfaceXml',  surfaceXml );
 
 		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
@@ -478,7 +270,7 @@
 
 			surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = cadId;
 
-			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+			const surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 
 			surfaceMesh.userData.data.CADObjectId = cadId;
 
@@ -488,7 +280,7 @@
 
 		} else {
 
-			alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
+			alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.');
 
 		}
 
@@ -571,11 +363,11 @@
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
+			const adjacentSpaceId = child.userData.data.AdjacentSpaceId;
 
 			if ( !adjacentSpaceId ) { continue; }
 
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef;
+			const spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef;
 
 			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === id ? true : child.visible );
 
@@ -597,7 +389,7 @@
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
 
 		surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
-		recGeom = surfaceMesh.userData.data.RectangularGeometry;
+		const recGeom = surfaceMesh.userData.data.RectangularGeometry;
 		//console.log( 'recGeom', recGeom );
 
 		if ( window.HUDdivAttributes ) {
@@ -681,7 +473,7 @@
 
 			if ( !child.userData.data.CADObjectId || typeof child.userData.data.CADObjectId !== 'string' ) { continue; }
 
-			id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ).trim() ;
+			const id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ).trim() ;
 
 			if ( id === cadId ) {
 				//console.log( 'equal id\n', id.length, '\n', CADObjectGroupId.length );
@@ -848,7 +640,7 @@
 		THR.controls.target.copy( center );
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 
-	}
+	};
 
 
 
@@ -895,7 +687,7 @@
 		THR.controls.target.copy( center );
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 
-	}
+	};
 
 
 
@@ -971,7 +763,7 @@
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 
 
-	}
+	};
 
 
 
@@ -995,11 +787,7 @@
 		THR.controls.target.copy( center );
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.2 * radius, - 1.2 * radius, 1.2 * radius ) ) );
 
-	}
-
-
-
-
+	};
 
 
 	////////// Set Menu Panel Attributes
@@ -1013,7 +801,7 @@
 		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
 		//console.log( 'arr', arr );
 
-		obj = arr.find( element => element.id === id );
+		const obj = arr.find( element => element.id === id );
 		//console.log( 'obj', obj );
 
 		divAttributes = document.getElementById ( item.divAttributes );
@@ -1140,7 +928,7 @@
 
 		GBI.setElementPanel2( item );
 
-		sel = document.getElementById( item.selItem );
+		const sel = document.getElementById( item.selItem );
 		sel.value = spaceId;
 		sel.click();
 
@@ -1157,7 +945,7 @@
 
 		let attributes = '';
 
-		for ( property in obj ) {
+		for ( let property in obj ) {
 
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
@@ -1174,7 +962,7 @@
 
 			}
 
-		};
+		}
 		//console.log( 'attributes', attributes );
 
 		target.innerHTML =
@@ -1447,7 +1235,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -1496,15 +1284,15 @@
 
 	GBI.deleteSurface = function() {
 
-		id = HUDselSurfaceId.value;
+		const id = HUDselSurfaceId.value;
 
 		const proceed = confirm( 'OK to delete surface: ' + id + '?' );
 
 		if ( !proceed ){ return; }
 
 		// remove from gbxml
-		surfacesResponse = GBP.gbxml.getElementsByTagName( "Surface" );
-		surface = surfacesResponse[ id ];
+		const surfacesResponse = GBP.gbxml.getElementsByTagName( "Surface" );
+		const surface = surfacesResponse[ id ];
 		surface.remove();
 		GBI.surfaceChanges.deletes.push( id );
 
@@ -1519,7 +1307,7 @@
 		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
 		GBP.surfaceMeshes.remove( surfaceMesh );
 
-		element =  document.getElementById( 'divSurface' + id );
+		const element =  document.getElementById( 'divSurface' + id );
 		// console.log( 'element', element );
 		if ( element ) {
 			element.innerHTML = '<p>Surface deleted</p>' + element.innerHTML;
@@ -1536,7 +1324,7 @@
 
 		// not adding spaces and new lines nicely. Why?
 
-		documentHistoryXml = GBP.gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
+		const documentHistoryXml = GBP.gbxmlResponseXML.getElementsByTagName( "DocumentHistory" );
 
 		const programInfoNew = GBP.gbxmlResponseXML.createElement( "ProgramInfo" );
 

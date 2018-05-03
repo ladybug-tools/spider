@@ -1,9 +1,9 @@
 
 ## Ladybug Tools / Spider
 
-# gbXML Viewer R13
+# Aragog gbXML Viewer R13
 
-[gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
+[Aragog gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
 
 <span style=color:magenta>Click or touch the 3D model to get started!</span>
 
@@ -24,6 +24,23 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
+<summary>Welcome 2018-05-03 ~ R13.11</summary>
+
+We have a new name: "Aragog gbXML Viewer"
+
+See
+* [Aragog | Harry Potter Wiki]( http://harrypotter.wikia.com/wiki/Aragog )
+* [Aragog - Pottermore]( https://www.pottermore.com/explore-the-story/aragog )
+
+From now on, all Spider apps will contain the name of a fictional spider
+
+* <https://en.wikipedia.org/wiki/List_of_fictional_arthropods>
+
+ISS
+* All panels now support the new standardized select + attributes panel
+
+</details><details>
+
 <summary>Welcome 2018-04-30 ~ R13.10</summary>
 
 HUD /Head-up Display Module
@@ -34,7 +51,7 @@ HUD /Head-up Display Module
 
 <summary>Welcome 2018-04-22 ~ R13.7</summary>
 
-<span class=highlight>New Heads-Up Display is now turned on.</span>
+New Heads-Up Display is now turned on.
 
 A very extensive rewrite of REP/GBI/NUM/ISS/HUD in progress
 

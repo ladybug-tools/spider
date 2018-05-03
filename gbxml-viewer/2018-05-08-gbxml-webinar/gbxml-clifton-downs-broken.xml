@@ -46576,7 +46576,7 @@
       <CADObjectId>Floor: SIM_INT_SLD_FLR FLR02 [921074]</CADObjectId>
       <Name>T-00_102-01_118-I-F-20</Name>
     </Surface>
-    <Surface surfaceType="InteriorFloor" id="aim5629">
+    <Surface surfaceType="InsideFloor" id="aim5629">
       <AdjacentSpaceId spaceIdRef="aim0363"/>
       <AdjacentSpaceId spaceIdRef="aim5041"/>
       <RectangularGeometry id="aim5630">
@@ -48919,6 +48919,7 @@
     </Surface>
     <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim6300">
       <AdjacentSpaceId spaceIdRef="aim0808"/>
+	  <AdjacentSpaceId spaceIdRef="aim0808"/>
       <RectangularGeometry id="aim6301">
         <Azimuth>93.4364318847656</Azimuth>
         <CartesianPoint>
@@ -48991,7 +48992,7 @@
         <CADObjectId>Doors_ver01: SIM_EXT_SLD [893471]</CADObjectId>
         <Name>N-00_112-E-W-69-D-1</Name>
       </Opening>
-      <Opening openingType="OperableWindow" id="aim6321">
+      <Opening openingType="OpeningWindow" id="aim6321">
         <RectangularGeometry id="aim6322">
           <CartesianPoint>
             <Coordinate>1.99</Coordinate>
@@ -71920,7 +71921,6 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <CADObjectId>Basic Wall: SIM_EXT_GRD [903922]</CADObjectId>
       <Name>S-B1_106-U-W-464</Name>
     </Surface>
     <Surface surfaceType="UndergroundSlab" id="aim12767">
@@ -74588,6 +74588,47 @@
       <CADObjectId>Basic Wall: SIM_MASS_SLD [959714]</CADObjectId>
       <Name>X-S-523</Name>
     </Surface>
+
+    <Surface surfaceType="Shade" exposedToSun="true" id="aim93466">
+      <RectangularGeometry id="aim93467">
+        <Azimuth>93.4364318847656</Azimuth>
+        <CartesianPoint>
+          <Coordinate>517.9981</Coordinate>
+          <Coordinate>1008.875</Coordinate>
+          <Coordinate>19.25</Coordinate>
+        </CartesianPoint>
+        <Tilt>90</Tilt>
+        <Width>6.76100015640259</Width>
+        <Height>4.33731842041016</Height>
+      </RectangularGeometry>
+      <PlanarGeometry>
+        <PolyLoop>
+          <CartesianPoint>
+            <Coordinate>517.9981</Coordinate>
+            <Coordinate>1008.875</Coordinate>
+            <Coordinate>19.25</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>518.4034</Coordinate>
+            <Coordinate>1015.623</Coordinate>
+            <Coordinate>19.25</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>518.4034</Coordinate>
+            <Coordinate>1015.623</Coordinate>
+            <Coordinate>23.58732</Coordinate>
+          </CartesianPoint>
+          <CartesianPoint>
+            <Coordinate>517.9981</Coordinate>
+            <Coordinate>1008.875</Coordinate>
+            <Coordinate>23.58732</Coordinate>
+          </CartesianPoint>
+        </PolyLoop>
+      </PlanarGeometry>
+      <CADObjectId>Basic Wall: SIM_MASS_SLD [959714]</CADObjectId>
+      <Name>X-S-523-duplicate</Name>
+    </Surface>
+
     <Surface surfaceType="Shade" exposedToSun="true" id="aim13476">
       <RectangularGeometry id="aim13477">
         <Azimuth>93.4364318847656</Azimuth>
