@@ -11,9 +11,12 @@
 
 
 
-## Concept
+## Features
 
 See [Analemma 3D]( http://www.ladybug.tools/spider/index.html#analemma3d/README.md )
+
+* Sun path diagrams with analemmas
+	* Uses Ladybug Tools / Spider Solar Calculator to position Sun correctly for lat/lon at any month, day and hour
 
 
 ## Wish list

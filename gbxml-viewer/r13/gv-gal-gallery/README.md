@@ -9,7 +9,7 @@
 ## Full screen test: [gbXML Viewer Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-gal-gallery/gv-gal.html )
 
 
-## Concept
+## Features
 
 * Uses the GitHub API to obtain up to date listings of file names in a directory
 * Display list of file names as links to source
@@ -19,34 +19,6 @@
 	* View the file full screen in its own window
 		* Link may be use to embed file in other app or HTML pages
 
-
-<!--
-There are a few locations on the web that allow access to sample gbXML files that you may use for experimentation.
-
-Click on any of the links below to load menus that will list each of the available files.
-
-
-<a href = "JavaScript:( function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gv-gal-gallery/gv-gal-gbxml.js';
-} )()" >
-gbXML Sample Files on GitHub</a>
-
-<a href= "JavaScript:( function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-build-well.js';
-} )()" >
-Ladybug Tools/Spider Build Well on GitHub</a>
-
-<a href=
-"JavaScript:(
-	function(){
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gbxml-viewer10-02-gallery/gbxml-viewer10-gallery-spider-viewer-samples.js';
-} )()" >
-Ladybug Tools/Spider gbXML Viewer sample files on GitHub</a>
-
--->
 
 ## Wish list
 

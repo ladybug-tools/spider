@@ -26,6 +26,9 @@
 	* gbXML files
 	* Markdown files
 	* Most any file type
+* Open files via open file dialog or drag and drop
+* Open files via URL using a link or simply by copying and pasting into the address bar
+
 
 
 ### Style Sheet Notes

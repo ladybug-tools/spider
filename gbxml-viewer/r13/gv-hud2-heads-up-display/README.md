@@ -20,6 +20,23 @@ Wikipedia: [Head-up display]( https://en.wikipedia.org/wiki/Head-up_display )
 This feature could also be termed a '[context menu]( https://en.wikipedia.org/wiki/Context_menu )'.
 
 
+## Features
+
+* Toggle the display of 3D surfaces based on user input
+* Highlight and toggle visibility of elements, surfaces, edges
+	* Click menu items or use ALT + ZXCV keys
+* Click on any surface in the model
+	* View id, name, type CAD object id
+	* View dimensions and area
+	* Delete surface
+* Select any surface from scrolling list to see it highlighted on screen and parameters displayed
+* Reassign surface type and adjacent spaces for all surfaces
+	* View adjacent space parameters
+	* Toggle view of space and story
+	* Select adjacent spaces from scrolling list
+* Save edited data to a new gbXML file with updated document history
+
+
 ## Wish list
 
 See main read me

@@ -1,12 +1,24 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r10-11/gv-cam/README.md "View file as a web page." ) </span>
 
-# gbXML Viewer First Person Camera Read Me
+# R13 gbXML Viewer First Person Camera Read Me
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cam/gv-cam.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
 ## Full screen test: [gv-cam gbXML Viewer First Person Camera]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-cam/gv-cam.html )
 
+
+## Features
+
+* Optional first person camera enables model fly-through
+	* Fly through and around your models.
+	* Use cursor keys or WASD keys.
+	* Click on the icons at bottom of your screen
+	* Use mouse, menu or cursor keys to control full range of motion
+	* 3D avatar guides you through space
+
+
+## Usage
 
 Fly through and around your models. Use cursor keys or WASD keys. Click on the icons at bottom of your screen
 

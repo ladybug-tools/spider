@@ -28,19 +28,19 @@
 	* Surfaces that contain other surfaces or overlap
 		* Currently turned off because uses much time and has found none so far
 		* Work-in-progress
-	* Surfaces that have vertices very close togther
+	* Surfaces that have vertices very close together
 		* Select ID by smart search
 		* Reports number found
 		* Displays attribute data
 		* Zoom into selected element
 		* Identifies vertex IDs that are close and displays the distance apart
+	* Identify
+		* Openings with more that four vertices
+		* Surfaces that have an incorrect number of adjacent spaces
+		* Surfaces that are mis-identified as to being interior or exterior surfaces
 
 ## Wish list
 
-* Identify
-	* Openings with more that four vertices
-	* Surfaces that have an incorrect number of adjacent spaces
-	* Surfaces that are mis-identified as to being interior or exterior surfaces
 	* Surfaces with openings that overlap
 
 ## Issues

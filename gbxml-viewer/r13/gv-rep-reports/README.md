@@ -21,6 +21,7 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ### Mission
 
+* View all project textual metadata embedded in gbXML files
 * Create text reports of all data of interest embedded in gbXML files
 * Toggle the visibility of individual and groups of elements
 * Zoom the view to display selected elements or groups of elements

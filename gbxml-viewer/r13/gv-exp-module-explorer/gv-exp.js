@@ -58,10 +58,6 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 					<p><a href="#../assets/about-gbxml-viewer.md" >About gbXML Viewer</a></p>
 
-					<p><a href="#../gv-exp-module-explorer/README.md" >EXP ~ Module Explorer Module</a><br>
-					Provides easy access to all the documentation in all the moduless' read me files</p>
-
-
 					<p>The Left Menu Modules</p>
 
 					<p><a href="#../gv-app-application/README.md" >APP ~ Application Module</a><br>
@@ -70,6 +66,9 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					<p><a href="#../gv-gal-gallery/README.md" >GAL ~ Gallery Module</a><br>
 					Provides menu access to three directories of sample files you may use for learning or testing</p>
 
+					<p><a href="#../gv-hud/README.md" >HUD ~ Heads-up Display Module</a><br>
+					Right side menu. Interactive surface parameters display</p>
+
 
 					<p>The Features Modules</p>
 
@@ -77,10 +76,28 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					Update a variety of model display and viewing parameters</p>
 
 					<p><a href="#../gv-rep-reports/README.md" >REP ~ Reports Module</a><br>
-					Identify, locate and display all the elements and all their attributes in a model/p>
+					Identify, locate and display all the elements and all their attributes in a model</p>
+
+					<p><a href="#../gv-num-numbers/README.md" >NUM ~ Numbers Module</a><br>
+					area and orientation calculations</p>
+
+					<p><a href="#../gv-iss-issues/README.md" >ISS ~ Issues Module</a><br>
+					Identify the issues with a model</p>
 
 
 					<p>The Things to Try Modules</p>
+
+					<p><a href="#../gv-ana-sun-path-analemma/README.md" >ANA ~ Sun Path / Analemma Module</a><br>
+					Display the Sun light for any date and time</p>
+
+					<p><a href="#../gv-ran-sun-range/README.md" >RAN ~ Sun Range Module</a><br>
+					Display a dozen Suns casting shadows</p>
+
+					<p><a href="#../gv-cam-first-person-camera/README.md" >CAM ~ First Person Camera Module</a><br>
+					Fly around and through your models</p>
+
+					<p><a href="#../gv-exp-module-explorer/README.md" >EXP ~ Module Explorer Module</a><br>
+					Provides easy access to all the documentation in all the rad me files of all the modules</p>
 
 
 					<p><a href="#../gv-tmp-template/README.md" >TMP ~ Template Module</a><br>
@@ -102,29 +119,15 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					Translates gbXML text to JSON then to 3D meshes</p>
 
 
-
 					<p><a href="#../assets/README.md" >Assets Directory</a><br>
 					Provides access to style sheets, images, documents and utilities</p>
 
-					<!--
-					<p><a href="#../gv-gbx/README.md" >GBV ~ gbXML Viewer Module</a><br>
+					<p><a href="#../gv-gbi-gbxml-interact/README.md" >GBI ~ gbXML Interaction Module</a><br>
 					toggle/zoom the display of elements</p>
 
-
-					<p><a href="#../gv-iss/README.md" >ISS ~ Issues Module</a><br>
-					Identify the issues with a model</p>
-
-					<p><a href="#../gv-hud/README.md" >HUD ~ Heads-up Display Module</a><br>
-					Interactive surface parameters display</p>
-
+					<!--
 					<p><a href="#../gv-sav/README.md" >SAV ~ Save Changes Module</a><br>
 					Save the modifications for reuse in later updates</p>
-
-					<p><a href="#../gv-ana/README.md" >ANA ~ Sun Path / Analemma Module</a><br>
-					Display the Sun light for any date and time</p>
-
-					<p><a href="#../gv-cam/README.md" >CAM ~ First Person Camera Module</a><br>
-					Fly around and through your models</p>
 
 					-->
 
