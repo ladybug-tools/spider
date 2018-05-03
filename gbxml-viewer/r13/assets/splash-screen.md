@@ -31,13 +31,16 @@ We have a new name: "Aragog gbXML Viewer"
 See
 * [Aragog | Harry Potter Wiki]( http://harrypotter.wikia.com/wiki/Aragog )
 * [Aragog - Pottermore]( https://www.pottermore.com/explore-the-story/aragog )
+* [Scientists Name Just-Discovered Brazilian Cave Spider After Aragog from Harry Potter]( http://mentalfloss.com/article/524700/scientists-name-just-discovered-brazilian-cave-spider-after-aragog-harry-potter )
 
 From now on, all Spider apps will contain the name of a fictional spider
 
 * <https://en.wikipedia.org/wiki/List_of_fictional_arthropods>
 
-ISS
+ISS Module / Issues Panel
 * All panels now support the new standardized select + attributes panel
+
+Note: visibility toggles are having issues
 
 </details><details>
 
@@ -72,8 +75,7 @@ ISS / Issues Module
 CSS / Style Sheet
 * Better handling of sliding menus and pop ups on small devices
 
-</details>
-<details>
+</details><details>
 
 <summary>Welcome 2018-04-11 ~ R13.3</summary>
 
@@ -96,10 +98,7 @@ CSS / Style Sheet
 * Better handling of sliding menus and pop ups on small devices
 * Left menu needs more work
 
-</details>
-
-
-<details>
+</details><details>
 
 <summary>Welcome 2018-04-03 ~ R13.2</summary>
 
@@ -113,9 +112,7 @@ APP / Application Module
 * Only a single Feature panel is visible at any given time
 	* Multiple visible panels added complexity without much benefit
 
-</details>
-
-<details>
+</details><details>
 
 <summary>Welcome 2018-04-02 ~ R13.1 </summary>
 
