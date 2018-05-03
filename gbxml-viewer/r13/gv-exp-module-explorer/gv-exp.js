@@ -118,12 +118,11 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					<p><a href="#../gv-gbp-gbxml-parse/README.md" >GBP ~ gbXML Parse Module</a><br>
 					Translates gbXML text to JSON then to 3D meshes</p>
 
+					<p><a href="#../gv-gbi-gbxml-interact/README.md" >GBI ~ gbXML Interaction Module</a><br>
+					toggle/zoom the display of elements</p>
 
 					<p><a href="#../assets/README.md" >Assets Directory</a><br>
 					Provides access to style sheets, images, documents and utilities</p>
-
-					<p><a href="#../gv-gbi-gbxml-interact/README.md" >GBI ~ gbXML Interaction Module</a><br>
-					toggle/zoom the display of elements</p>
 
 					<!--
 					<p><a href="#../gv-sav/README.md" >SAV ~ Save Changes Module</a><br>
