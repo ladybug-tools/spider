@@ -598,7 +598,7 @@
 
 		if ( cadObjId ) {
 
-		console.log( 'cadObjId', cadObjId.innerHTML );
+			console.log( 'cadObjId', cadObjId.innerHTML );
 
 			//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
 			cadObjId.innerHTML = that.value;

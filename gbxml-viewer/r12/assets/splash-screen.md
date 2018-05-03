@@ -35,6 +35,14 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 </details><details open>
 
+<summary>Welcome 2018-05-03 ~ R12.30</summary>
+
+* APP: Set 'gbxml-clifton-downs-broken.xml' as default drawing
+* HUD: fix cad object id not toggling visibility
+* REP: set all panels to be closed
+
+</details><details>
+
 <summary>Welcome 2018-04-20 ~ R12.26</summary>
 
 * File and folder cleanup and old file archiving

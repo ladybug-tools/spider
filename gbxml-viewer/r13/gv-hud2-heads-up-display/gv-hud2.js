@@ -358,7 +358,7 @@
 				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
 				const removed2 = surfaceXml.removeChild( adjSpace2 );
 
-		//				delete( surfaceJson.AdjacentSpaceId );
+				//delete( surfaceJson.AdjacentSpaceId );
 
 				console.log( 'old 2 / new 0 / removed id1: ', removedId1, ' id2: ', removedId2, surfaceXml );
 
@@ -402,9 +402,9 @@
 
 				surfaceJson.AdjacentSpaceId= [ { "spaceIdRef": "none" }, { "spaceIdRef": "none" }];
 
-		//				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
-		//				adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
-		//				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+				//adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+				//adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
+				//adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
 
 				console.log( 'old 0 / new 2 / adjacentSpaceId', surfaceJson.adjacentSpaceId );
 
@@ -495,7 +495,18 @@
 
 		} else {
 
-			alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
+			//alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
+
+			surfaceXml.setAttribute( "CADObjectId", that.value );
+
+			console.log( 'surfaceXml', surfaceXml);
+			//const newCadIdTxt = surfaceXml.appendChild( newCadId );
+			//console.log( 'newCadIdTxt', newCadIdTxt);
+
+			surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+			surfaceMesh.userData.data.CADObjectId = that.value;
+
+			GBV.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
 
 		}
 

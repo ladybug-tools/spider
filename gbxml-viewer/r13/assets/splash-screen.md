@@ -40,7 +40,7 @@ From now on, all Spider apps will contain the name of a fictional spider
 ISS Module / Issues Panel
 * All panels now support the new standardized select + attributes panel
 
-Note: visibility toggles are having issues
+Note: visibility toggles are having issues. Sometimes you have to look under the surface to see it
 
 </details><details>
 

@@ -1299,7 +1299,6 @@
 		console.log( 'id', id, 'surface to delete', surface );
 
 		// remove from gbjson
-
 		GBP.surfaceJson = GBP.surfaceJson.filter( element => element.id != id );
 		console.log( 'GBP.surfaceJson', GBP.surfaceJson );
 
@@ -1309,6 +1308,7 @@
 
 		const element =  document.getElementById( 'divSurface' + id );
 		// console.log( 'element', element );
+
 		if ( element ) {
 			element.innerHTML = '<p>Surface deleted</p>' + element.innerHTML;
 			element.style.opacity = 0.2;

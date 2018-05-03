@@ -184,6 +184,7 @@
 	GBV.showCadId = function( CADObjectId ) {
 		//console.log( 'CADObjectId', CADObjectId );
 
+		CADObjectId = decodeURI( CADObjectId );
 		GBX.surfaceMeshes.children.forEach( element =>
 			element.visible = element.userData.data.CADObjectId === CADObjectId ? true : false );
 

@@ -74,7 +74,7 @@
 			</div>
 			<hr>
 
-			<details open >
+			<details>
 				<summary id = "REPsumSurfacesIndividually" >Surfaces Individually</summary>
 				 <button onclick=GBV.showSurface(REPselSurface.value); >select</button>
 				 <button onclick=GBV.zoomIntoSurface(REPselSurface.value); >zoom</button>

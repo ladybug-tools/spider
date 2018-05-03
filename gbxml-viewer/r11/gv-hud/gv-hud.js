@@ -206,7 +206,7 @@
 
 		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency<hr>';
 
-//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
+		//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
 		if ( data.AdjacentSpaceId ) {
 
 			if ( Array.isArray( adjacentsTxt ) === true ) {
@@ -612,7 +612,7 @@
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
-				//				surfaceMesh.userData.data.AdjacentSpaceId = 'none';
+				//	surfaceMesh.userData.data.AdjacentSpaceId = 'none';
 				console.log( 'old 0 / new 1 / no spaceIdPrev', spaceIdPrev, surfaceXml );
 
 			}
