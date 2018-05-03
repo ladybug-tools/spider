@@ -513,7 +513,7 @@
 	function drawGround() {
 
 		const p = axesHelper.position;
-		const geometry = new THREE.PlaneGeometry( 100, 100, 100, 100 );
+		const geometry = new THREE.PlaneGeometry( 2 * GBP.radius, 2 * GBP.radius, 100, 100 );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( p.x, p.y, GBP.boundingBox.min.z ) );
 
 		var raycaster = new THREE.Raycaster();
