@@ -6,7 +6,7 @@
 	var GBI = {};
 
 	GBI.spaceIndex = 0;
-	GBI.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
+	GBI.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], CADObjectId: [] };
 
 	////////// Set Menu Panels
 
@@ -66,8 +66,9 @@
 		let options = '';
 
 		item.optionValues.forEach( option =>
-			options += '<option value=' + option[ 1 ] + ' title="id: ' + option[ 1 ] + '" >' + option[ 0 ] + '</option>' );
+			options += '<option value=' + option[ 0 ] + ' title="id: ' + option[ 0 ] + '" >' + option[ 1 ] + '</option>' );
 
+		GBI.item = item;
 		//console.log( 'item', item );
 
 		divElement =
@@ -78,7 +79,9 @@
 						placeholder="${item.placeholder}" style=margin-bottom:0.5rem;width:6rem; ><br>
 					<select id =${item.selItem}
 						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
-						 ` style=min-width:6rem; >${options}</select>
+						 ` style=margin-bottom:0.5rem;min-width:6rem; >${options}</select>
+						<br>
+					<select onchange=GBI.updateSelect(this,${item.selItem}); style=width:6rem;><option>id</option><option selected >name</option><option>cad id</option></select>
 				</div>
 				<div id = ${item.divAttributes} class=flex-left-div2 >bbb</div>
 
@@ -93,7 +96,7 @@
 		selectTarget.onclick= function() {
 
 			//GBI.setSurfaceVisible(selectTarget.value );
-			GBI.setElementIdAttributes(selectTarget.value, item );
+			GBI.setElementIdAttributes( selectTarget.value, item );
 
 		};
 
@@ -106,6 +109,20 @@
 
 	};
 
+
+	GBI.updateSelect = function( that, sel ){
+		i = 0;
+		//console.log( 'sel', sel );
+		//console.log( 'that', that );
+		//console.log( 'GBI.item', GBI.item );
+		//ii = sel;
+
+		for ( option of sel.options ) {
+
+			option.innerText = GBI.item.optionValues[ i++ ][ that.selectedIndex ];
+
+		}
+	}
 
 
 	GBI.setElementVisible = function( id, item ) {
@@ -573,17 +590,6 @@
 			txt +=
 				`<option>${types[i]}</option>`;
 
-				/*
-				`<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this) value=` +
-					types[ i ] +
-					`><img src="../assets/eye.png" height=18></button>
-					<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >` +
-					types[ i ] +
-					`</button>: ` +
-					typesCount[ i ] + '-' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
-				`'%<br>`;
-				*/
-
 		}
 
 		GBIselSurfaceType.innerHTML = txt;
@@ -919,7 +925,7 @@
 		item.divTarget = document.getElementById( 'GBIdivSpace' );
 		item.element = 'Space';
 		//item.optionValues = item.optionValues;
-		item.optionValues = GBP.gbjson.Campus.Building.Space.map( item => [ item.id, item.id ] );
+		item.optionValues = GBP.gbjson.Campus.Building.Space.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = GBP.gbjson.Campus.Building.Space;
 		item.placeholder = 'space id';
 		item.selItem = 'GBIselSpace';

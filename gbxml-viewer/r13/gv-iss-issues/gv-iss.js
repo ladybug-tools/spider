@@ -231,6 +231,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
 
 				ISS.surfaceAdjacentsDuplicates.push( { id: surface.id, cadId: surface.CADObjectId } );
+				//ISS.surfaceAdjacentsDuplicates.push( surface );
 
 			}
 
@@ -278,7 +279,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivISSdivSurfacesDuplicateAdjacentSpaces2Attributes';
 		item.divTarget = document.getElementById( 'ISSdivSurfacesDuplicateAdjacentSpaces2' );
 		item.element = 'Surface'
-		item.optionValues = ISS.surfaceAdjacentsDuplicates.map( item => [ item.id, item.id ] );
+		item.optionValues = ISS.surfaceAdjacentsDuplicates.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = surfaces; // ISS.surfaceAdjacentsDuplicates;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfaceAdjacentsDuplicates';
@@ -436,7 +437,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivISSdivSurfacesDuplicateCoordinatesAttributes2';
 		item.divTarget = document.getElementById( 'ISSdivSurfacesDuplicateCoordinates2' );
 		item.element = 'Surface'
-		item.optionValues = ISS.surfaceDuplicateCoordinates.map( element => [ element.id, element.id ] );
+		item.optionValues = ISS.surfaceDuplicateCoordinates.map( item => [item.id, item.Name, item.CADObjectId  ] );
 		item.parent = surfaces; // ISS.surfaceAdjacentsDuplicates;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfacesDuplicateCoordinates2';
@@ -658,7 +659,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivSurfacesUndefinedCadIdAttributes';
 		item.divTarget = document.getElementById( 'ISSdivSurfacesUndefinedCadId' );
 		item.element = 'Surface'
-		item.optionValues = ISS.surfacesUndefinedId.map( item => [ item.id, item.id ] );
+		item.optionValues = ISS.surfacesUndefinedId.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = ISS.surfacesUndefinedCadId;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfacesUndefinedCadId';
@@ -706,11 +707,12 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivSurfacesTinyAttributes';
 		item.divTarget = document.getElementById( 'ISSdivSurfacesTiny' );
 		item.element = 'Surface'
-		item.optionValues = ISS.surfacesTiny.map( item => [ item.id, item.id ] );
+		item.optionValues = ISS.surfacesTiny.map( item => [ item.id, item.Name, item.CADObjectId  ] );
 		item.parent = ISS.surfacesTiny;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfacesTiny';
 
+		console.log( 'item.optionValues', item.optionValues );
 		GBI.setElementPanel2( item );
 		ISSselSurfacesTiny.selectedIndex = 0;
 		ISSselSurfacesTiny.click();
@@ -785,7 +787,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivSurfacesVertexCloseAttributes';
 		item.divTarget = document.getElementById( 'ISSdivSurfacesVertexClose' );
 		item.element = 'Surface'
-		item.optionValues = ISS.surfacesVertexClose.map( element => [ element.userData.data.id, element.userData.data.id ] );
+		item.optionValues = ISS.surfacesVertexClose.map( element => [ element.userData.data.id, element.userData.data.Name, element.userData.data.CADObjectId ] );
 		item.parent = ISS.surfaceJson;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfacesVertexClose';
@@ -868,7 +870,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivSurfaceTypeInvalidAttributes';
 		item.divTarget = document.getElementById( 'ISSdivSurfaceTypeInvalid' );
 		item.element = 'Surface'
-		item.optionValues = ISS.surfaceTypeInvalid.map( item => [ item.id, item.id ] );
+		item.optionValues = ISS.surfaceTypeInvalid.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = ISS.surfaceTypeInvalid;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfaceTypeInvalid';
@@ -925,7 +927,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivOpeningTypeInvalidAttributes';
 		item.divTarget = document.getElementById( 'ISSdivOpeningTypeInvalid' );
 		item.element = 'Surface'
-		item.optionValues = ISS.openingTypeInvalid.map( item => [ item.id, item.id ] );
+		item.optionValues = ISS.openingTypeInvalid.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = ISS.openingTypeInvalid;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselOpeningTypeInvalid';
@@ -994,7 +996,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.divAttributes = 'ISSdivAdjacentSpaceInvalidAttributes';
 		item.divTarget = document.getElementById( 'ISSdivAdjacentSpaceInvalid' );
 		item.element = 'Surface'
-		item.optionValues = ISS.adjacentSpaceInvalid.map( item => [ item.id, item.id ] );
+		item.optionValues = ISS.adjacentSpaceInvalid.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = ISS.adjacentSpaceInvalid;
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselAdjacentSpaceInvalid';

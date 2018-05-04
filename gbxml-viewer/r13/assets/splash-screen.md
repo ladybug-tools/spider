@@ -46,6 +46,9 @@ ISS Module / Issues Panel
 REP / Reports
 * Openings displaying as expected
 
+GBI / Interaction
+* Choose your select list type: id/name/cad id starting to work
+
 </details><details>
 
 <summary>Welcome 2018-04-30 ~ R13.10</summary>

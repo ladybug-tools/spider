@@ -189,7 +189,7 @@
 		item.divAttributes = 'HUDdivCardSurfaceAttributes';
 		item.divTarget = document.getElementById( 'HUDdivPanelSurface' );
 		item.element = 'Surface';
-		item.optionValues = GBP.surfaceJson.map ( item => [ item.id, item.id ] );
+		item.optionValues = GBP.surfaceJson.map ( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = GBP.surfaceJson;
 		item.placeholder = 'surface id'
 		item.selItem = 'HUDselSurfaceId';
