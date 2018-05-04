@@ -24,7 +24,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-05-03 ~ R13.11</summary>
+<summary>Welcome 2018-05-04 ~ R13.11/12</summary>
 
 We have a new name: "Aragog gbXML Viewer"
 
@@ -37,10 +37,14 @@ From now on, all Spider apps will contain the name of a fictional spider
 
 * <https://en.wikipedia.org/wiki/List_of_fictional_arthropods>
 
+HUD /Head-up Display Module
+* Update Space IDs working
+
 ISS Module / Issues Panel
 * All panels now support the new standardized select + attributes panel
 
-Note: visibility toggles are having issues. Sometimes you have to look under the surface to see it
+REP / Reports
+* Openings displaying as expected
 
 </details><details>
 
@@ -48,7 +52,7 @@ Note: visibility toggles are having issues. Sometimes you have to look under the
 
 HUD /Head-up Display Module
 * Update CAD Object ID now working
-* Update Space ID almost working
+* Update Space IDs nearly working
 
 </details><details open>
 

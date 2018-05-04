@@ -206,7 +206,7 @@
 
 		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency<hr>';
 
-//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
+		//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
 		if ( data.AdjacentSpaceId ) {
 
 			if ( Array.isArray( adjacentsTxt ) === true ) {

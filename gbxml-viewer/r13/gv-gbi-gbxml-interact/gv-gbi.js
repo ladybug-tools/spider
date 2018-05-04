@@ -5,6 +5,7 @@
 
 	var GBI = {};
 
+	GBI.spaceIndex = 0;
 	GBI.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], cadObjs: [] };
 
 	////////// Set Menu Panels
@@ -167,7 +168,7 @@
 
 		GBP.surfaceMeshes.visible = true;
 		GBP.surfaceEdges.visible = true;
-		GBP.openingMeshes.visible = false;
+		GBP.surfaceOpenings.visible = false;
 
 		GBP.surfaceMeshes.children.forEach( element =>
 			element.visible = element.userData.data.CADObjectId === cadId ? true : false );
@@ -289,14 +290,15 @@
 	};
 
 
+
 	GBI.setOpeningVisible = function( id ) {
 		//console.log( 'opening id', id );
 
-		GBP.surfaceEdges.visible = false;
+		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = false;
-		GBP.openingMeshes.visible = true;
+		GBP.surfaceOpenings.visible = true;
 
-		GBP.openingMeshes.children.forEach( element => {
+		GBP.surfaceOpenings.children.forEach( element => {
 
 			element.visible = element.userData.data.id === id ? true : false;
 
@@ -315,11 +317,11 @@
 
 	GBI.setSpaceVisible = function( spaceId ) {
 		//console.log( 'spaceId', spaceId );
-		//console.log( 'index', index );
+		//console.log( 'spaceIndex', spaceIndex );
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
-		GBP.openingMeshes.visible = false;
+		GBP.surfaceOpenings.visible = false;
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
@@ -346,10 +348,10 @@
 
 		if ( HUDdivAttributes ) {
 
-			//index = index || 0;
-			//console.log( 'index', index );
+			//spaceIndex = spaceIndex || 0;
+			//console.log( 'spaceIndex', spaceIndex );
 
-			GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId );
+			//GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId );
 
 		}
 
@@ -388,10 +390,9 @@
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
-		GBP.openingMeshes.visible = false;
+		GBP.surfaceOpenings.visible = false;
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
-
 
 		//console.log( 'recGeom', recGeom );
 
@@ -399,16 +400,8 @@
 
 			GBI.setPanelSurfaceAttributes( HUDdivAttributes, id );
 
-			/*
-			HUDdivAttributes.innerHTML =
-
-			`<div>surface id: <i>${id}</i></div>
-			<div>width: ${parseFloat(recGeom.Width).toLocaleString()}</div>
-			<div>height: ${parseFloat(recGeom.Height).toLocaleString()}</div>
-			<div>azimiuth: ${parseFloat(recGeom.Azimuth).toLocaleString()}</div>
-			<div>tilt: ${parseFloat(recGeom.Tilt).toLocaleString()}</div>`;
-			*/
 		}
+
 	};
 
 
@@ -505,18 +498,19 @@
 
 
 	GBI.setOpeningTypeVisible = function( type ) {
+		console.log( 'type', type );
 
 		GBP.surfaceEdges.visible = false;
 		GBP.surfaceMeshes.visible = false;
-		GBP.openingMeshes.visible = true;
+		GBP.surfaceOpenings.visible = true;
 
 		if ( type ) {
 
-			GBP.openingMeshes.children.forEach( element => element.visible = element.userData.data.openingType === type ? true : false );
+			GBP.surfaceOpenings.children.forEach( element => element.visible = element.userData.data.openingType === type ? true : false );
 
 		} else {
 
-			GBP.openingMeshes.children.forEach( element => element.visible = true );
+			GBP.surfaceOpenings.children.forEach( element => element.visible = true );
 
 		}
 
@@ -528,7 +522,7 @@
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
-		GBP.openingMeshes.visible = false;
+		GBP.surfaceOpenings.visible = false;
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
@@ -853,7 +847,7 @@
 
 				} else if ( item.element === 'Space' ) {
 
-					divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ], 0 );
+					divAttributes.innerHTML += GBI.getAttributeAdjacentSpace( obj[ property ], -1 );
 
 				} else if ( item.element === 'Surface' ) {
 
@@ -897,24 +891,24 @@
 
 
 
-	GBI.setPanelSpaceAttributes = function( target, spaceId ) {
+	GBI.setPanelSpaceAttributes = function( target, spaceId, spaceIndex ) {
 		//console.log( 'target', target );
-		console.log( 'index2', index );
-		//console.log( 'spaceId', spaceId );
+		//console.log( 'spaceIndex', spaceIndex );
+		GBI.spaceIndex = spaceIndex >= 0 ? spaceIndex : GBI.spaceIndex;
 
 		const item = {};
 
 		target.innerHTML =
-
+		// 	<summary>Adjacent Space ` + ( spaceIndex > 0 ? spaceIndex : '' ) + `</summary>
 		`<details open >
 
-			<summary>Adjacent Space ` + ( index > 0 ? index : '' ) + `</summary>
+			<summary>Adjacent Space ` + ( GBI.spaceIndex > -2 ? GBI.spaceIndex : '' ) + `</summary>
 
 			<div id=GBIdivSpace ></div>
 
 			<div id=GBIdivAtts ></div>
 
-			<div><button onclick=HUD.updateSpace(GBIselSpace.value,2); >update the space associated with this surface</button>
+			<div><button onclick=HUD.updateSpace(GBIselSpace.value,GBI.spaceIndex); >update the space associated with this surface</button>
 
 		</details>
 
@@ -922,14 +916,13 @@
 
 		item.attribute = 'space';
 		item.divAttributes = 'GBIdivAtts';
-		item.divTarget = GBIdivSpace;
+		item.divTarget = document.getElementById( 'GBIdivSpace' );
 		item.element = 'Space';
 		//item.optionValues = item.optionValues;
 		item.optionValues = GBP.gbjson.Campus.Building.Space.map( item => [ item.id, item.id ] );
 		item.parent = GBP.gbjson.Campus.Building.Space;
 		item.placeholder = 'space id';
 		item.selItem = 'GBIselSpace';
-
 
 		//console.log( 'item.optionValues', item.optionValues);
 
@@ -939,6 +932,8 @@
 		sel.value = spaceId;
 		sel.click();
 
+		GBI.setSpaceVisible( spaceId );
+
 		//console.log( 'sel', sel );
 
 	};
@@ -946,9 +941,14 @@
 
 	GBI.setPanelSurfaceAttributes = function( target, surfaceId ) {
 
+		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === surfaceId );
+		//console.log( 'surfaceMesh', surfaceMesh );
 
-		surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === surfaceId );
 		const recGeom = surfaceMesh.userData.data.RectangularGeometry;
+		const height = parseFloat(recGeom.Height);
+		const width = parseFloat(recGeom.Width);
+		let openings = surfaceMesh.userData.data.Opening ? surfaceMesh.userData.data.Opening.length : 0;
+		openings = openings ? openings : 0;
 
 		target.innerHTML =
 
@@ -956,10 +956,13 @@
 
 			<summary>Surface ID: ` + surfaceId + `</summary>
 
-			<div>width: ${parseFloat(recGeom.Width).toLocaleString()}</div>
-			<div>height: ${parseFloat(recGeom.Height).toLocaleString()}</div>
+			<div>rectangular width: ${width.toLocaleString()}</div>
+			<div>rectangular height: ${height.toLocaleString()}</div>
+			<div>rectangular area: ${(width * height).toLocaleString()}</div>
 			<div>azimiuth: ${parseFloat(recGeom.Azimuth).toLocaleString()}</div>
 			<div>tilt: ${parseFloat(recGeom.Tilt).toLocaleString()}</div>
+			<div>vertices: ${surfaceMesh.geometry.vertices.length}</div>
+			<div>openings: ${openings}</div>
 
 		</details>
 
@@ -1012,16 +1015,16 @@
 
 	//////////
 
-	GBI.getAttributeAdjacentSpace = function( spaceIdRef, index = 0 ) {
+	GBI.getAttributeAdjacentSpace = function( spaceIdRef, spaceIndex = 0 ) {
 		// used by REP
 		//console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
-		console.log( 'getAttributeAdjacentSpace index', index );
+		//console.log( 'getAttributeAdjacentSpace spaceIndex', spaceIndex );
 
 		const txt =
 		`<div>
-			<span class=attributeTitle >adjacent space ` + ( index > 0 ? index : `` ) + ` id</span>:<br>
-			<button id=GBIbutSpaceVis` + index + ` onclick=GBI.setSpaceVisible("${spaceIdRef}",${index}); >${spaceIdRef}</button>
-			<button onclick=GBI.setSpaceZoom("${spaceIdRef}",${index}); >&#8981;</button>
+			<span class=attributeTitle >adjacent space ` + ( spaceIndex > -2 ? spaceIndex : `` ) + ` id</span>:<br>
+			<button id=GBIbutSpaceVis` + spaceIndex + ` onclick=GBI.setPanelSpaceAttributes(HUDdivAttributes,"${spaceIdRef}",${spaceIndex}); >${spaceIdRef}</button>
+			<button onclick=GBI.setSpaceZoom("${spaceIdRef}",${spaceIndex}); >&#8981;</button>
 		</div>`;
 
 		return txt;
@@ -1190,7 +1193,7 @@
 
 			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
 				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
-				<button onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
+				<button onclick=GBP.surfaceOpenings.visible=!GBP.surfaceOpenings.visible; title="toggle the windows" >openings</button>
 				<button onclick=GBP.setAllVisible(); >all visible</button>
 
 			<hr>
@@ -1214,12 +1217,10 @@
 
 			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
 				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
-				<button onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
+				<button onclick=GBP.surfaceOpenings.visible=!GBP.surfaceOpenings.visible; title="toggle the windows" >openings</button>
 				<button onclick=GBP.setAllVisible(); >all</button>
 				/
 				<button onclick=GBI.setBuildingZoom(); >zoom all</button>
-
-			<hr>
 
 		</details>`;
 
@@ -1299,7 +1300,7 @@
 	GBI.setPanelEditSurface = function( target ) {
 
 		target.innerHTML =
-		`<details>
+		`<details open>
 
 			<summary>Edit the Surface</summary>
 

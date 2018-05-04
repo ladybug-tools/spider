@@ -3,7 +3,6 @@
 	var HUD = {};
 
 
-
 	 HUD.initHeadsUp = function() { // called from bottom of script
 
 		if ( window.butMenuLoad ) { // we are in an iframe
@@ -28,8 +27,6 @@
 		} else {
 
 		}
-
-
 
 	};
 
@@ -91,7 +88,7 @@
 				if ( HUD.intersected.material.emissive ) {
 
 					HUD.intersected.currentHex = HUD.intersected.material.emissive.getHex();
-					HUD.intersected.material.emissive.setHex( 0xff0000 );
+					HUD.intersected.material.emissive.setHex( 0x440000 );
 
 				}
 
@@ -138,9 +135,6 @@
 
 	HUD.setHeadsUp = function( event ) {
 
-		//let space1;
-		//let space2;
-
 		// needed?? in event handler??
 		if ( HUD.intersected === undefined ) {
 
@@ -164,12 +158,6 @@
 
 		HUD.userDataData = data;
 		//console.log( 'data', data );
-
-
-		//const height = parseFloat( data.RectangularGeometry.Height );
-		//const width = parseFloat( data.RectangularGeometry.Width );
-		//const surfaceArea = height * width;
-
 
 		HUDselSurfaceId.value = data.id;
 		HUDselSurfaceId.click();
@@ -232,11 +220,13 @@
 	///////// Editing Elements after push update button
 
 	HUD.updateSurface = function( id ) {
+		// not used??
 
 		GBP.surfaceMeshes.children.forEach( function( element ) { element.visible = element.userData.data.id === id ? true : false; } );
 
 		const surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 		console.log( 'surfaceMesh', surfaceMesh );
+
 		HUD.intersected = surfaceMesh;
 
 	};
@@ -250,7 +240,6 @@
 
 		const surfaceJson = HUD.userDataData;
 		const surfaceId = surfaceJson.id;
-		let adjacentNew;
 
 		HUD.surfacesXml = GBP.gbxmlResponseXML.getElementsByTagName("Surface");
 
@@ -262,11 +251,16 @@
 			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
 			GBIbutSpaceVis0.innerText = spaceId;
 
-			console.log( 'spaceId', spaceId );
+			console.log( 'surfaceXml', surfaceXml );
 
-			adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-			adjacentNew.setAttribute( "spaceIdRef", spaceId );
-			surfaceXml.appendChild( adjacentNew );
+			space = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
+			space.setAttribute( "spaceIdRef", spaceId );
+
+			console.log( 'space', space );
+
+			//adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			//surfaceXml.appendChild( adjacentNew );
 
 			GBI.surfaceChanges.oneAdjacent.push( { id:surfaceId, spaceId: spaceId } )
 
@@ -278,9 +272,14 @@
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
 			GBIbutSpaceVis1.innerText = spaceId;
 
-			adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-			adjacentNew.setAttribute( "spaceIdRef", spaceId );
-			surfaceXml.appendChild( adjacentNew );
+			console.log( 'surfaceXml', surfaceXml );
+
+			space = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
+			space.setAttribute( "spaceIdRef", spaceId );
+
+			//adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			//surfaceXml.appendChild( adjacentNew );
 
 			GBI.surfaceChanges.twoAdjacent.push( { id:surfaceId, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
@@ -290,9 +289,14 @@
 			surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId;
 			GBIbutSpaceVis2.innerText = spaceId;
 
-			adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-			adjacentNew.setAttribute( "spaceIdRef", spaceId );
-			surfaceXml.appendChild( adjacentNew );
+			console.log( 'surfaceXml', surfaceXml );
+
+			space = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 1 ];
+			space.setAttribute( "spaceIdRef", spaceId );
+
+			//adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			//surfaceXml.appendChild( adjacentNew );
 
 			GBI.surfaceChanges.twoAdjacent.push( { id:surfaceId, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 

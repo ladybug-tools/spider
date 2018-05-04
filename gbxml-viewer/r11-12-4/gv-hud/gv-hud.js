@@ -206,7 +206,7 @@
 
 		let adjacentsTxt = data.AdjacentSpaceId ? data.AdjacentSpaceId : '<hr>no adjacency<hr>';
 
-//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
+		//		if ( adjacentsTxt !== '<hr>no adjacency<hr>' ) {
 		if ( data.AdjacentSpaceId ) {
 
 			if ( Array.isArray( adjacentsTxt ) === true ) {
@@ -527,7 +527,7 @@
 				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
 				const removed2 = surfaceXml.removeChild( adjSpace2 );
 
-//				delete( surfaceJson.AdjacentSpaceId );
+		//				delete( surfaceJson.AdjacentSpaceId );
 
 				console.log( 'old 2 / new 0 / removed id1: ', removedId1, ' id2: ', removedId2, surfaceXml );
 

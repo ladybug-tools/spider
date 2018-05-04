@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-05-03" >
-<title>Aragog gbXML Viewer 13.11</title>
+<meta name = "date" content = "2018-05-04" >
+<title>Aragog gbXML Viewer 13.12</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -232,7 +232,7 @@
 
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; title="toggle the side lines" >edges</button>
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.openingMeshes.visible=!GBP.openingMeshes.visible; title="toggle the windows" >openings</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceOpenings.visible=!GBP.surfaceOpenings.visible; title="toggle the windows" >openings</button>
 
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible();GBP.zoomObjectBoundingSphere(GBP.surfaceMeshes); title="Go to the home view"  >reset view</button>
 
@@ -382,7 +382,7 @@
 			let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
 			THR.scene.remove( meshGroundHelper );
 
-			let openings = THR.scene.getObjectByName( 'openingMeshes' );
+			let openings = THR.scene.getObjectByName( 'surfaceOpenings' );
 			THR.scene.remove( openings );
 
 			GBP.colors = GBP.colorsDefault;

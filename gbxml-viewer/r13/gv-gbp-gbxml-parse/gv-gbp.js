@@ -7,9 +7,9 @@
 	GBP.gbjson;
 
 	GBP.surfaceJson = null;
-	GBP.surfaceMeshes;
-	GBP.surfaceEdges;
-	GBP.surfaceOpenings;
+	//GBP.surfaceMeshes;
+	//GBP.surfaceEdges;
+	//GBP.surfaceOpenings;
 
 	GBP.colorsDefault = {
 
@@ -328,6 +328,9 @@
 		GBP.surfaceEdges = new THREE.Object3D();
 		GBP.surfaceEdges.name = 'GBP.surfaceEdges';
 
+		GBP.surfaceOpenings = new THREE.Object3D();
+		GBP.surfaceOpenings.name = 'GBP.surfaceOpenings';
+
 		for ( let i = 0; i < polyloops.length; i++ ) {
 
 			const material = new THREE.MeshPhongMaterial( {
@@ -350,18 +353,18 @@
 
 		GBP.getOpenings();
 
-		THR.scene.add( GBP.surfaceMeshes, GBP.surfaceEdges );
+		THR.scene.add( GBP.surfaceMeshes, GBP.surfaceEdges, GBP.surfaceOpenings );
 
 	};
 
 
 	GBP.getOpenings = function() {
 
-		GBP.surfacesExteriorWall = GBP.surfaceJson.filter( element => element.surfaceType === 'ExteriorWall' );
+		//GBP.surfacesExteriorWall = GBP.surfaceJson.filter( element => element.surfaceType === 'ExteriorWall' );
 		//console.log( 'GBP.surfacesExteriorWall', GBP.surfacesExteriorWall );
 		//		GBP.surfacesExteriorWallArea = GBP.getSurfacesArea( GBP.surfacesExteriorWall );
 
-		GBP.SurfacesWithOpenings = GBP.surfacesExteriorWall.filter( surface => surface.Opening );
+		GBP.SurfacesWithOpenings = GBP.surfaceJson.filter( surface => surface.Opening );
 		//console.log( 'GBP.SurfacesWithOpenings', GBP.SurfacesWithOpenings );
 
 		GBP.openings = [];
@@ -386,7 +389,7 @@
 		//GBP.openingsArea = 0;
 
 		var material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.1, side: 2, transparent: true } );
-		GBP.openingMeshes = new THREE.Object3D();
+
 
 		for ( opening of GBP.openings ) {
 			//console.log( 'opening', opening.PlanarGeometry.PolyLoop );
@@ -424,14 +427,14 @@
 			shapeMesh.userData.data = opening;
 			shapeMesh.userData.area = area
 
-			GBP.openingMeshes.add( shapeMesh );
+			GBP.surfaceOpenings.add( shapeMesh );
 
 		}
 
-		GBP.openingMeshes.name = 'openingMeshes';
 
-		THR.scene.add( GBP.openingMeshes );
-		//console.log( 'GBP.openingMeshes', GBP.openingMeshes );
+
+		//THR.scene.add( GBP.surfaceOpenings );
+		//console.log( 'GBP.surfaceOpenings', GBP.surfaceOpenings );
 
 
 
@@ -560,7 +563,7 @@
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
-		GBP.openingMeshes.visible = true;
+		GBP.surfaceOpenings.visible = true;
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
@@ -574,14 +577,14 @@
 
 		};
 
-		GBP.openingMeshes.visible = true;
+		GBP.surfaceOpenings.visible = true;
 
-		for ( let child of GBP.openingMeshes.children ) {
+		for ( let child of GBP.surfaceOpenings.children ) {
 
 			if ( !child.material ) { continue; }
 
 			child.material = new THREE.MeshPhongMaterial( {
-				color: 0x000000, side: 2, opacity: 0.1, transparent: true }
+				color: 0x000000, side: 2, opacity: 0.5, transparent: true }
 			);
 			child.material.wireframe = false;
 			child.visible = true;
