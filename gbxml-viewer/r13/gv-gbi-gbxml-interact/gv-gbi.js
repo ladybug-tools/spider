@@ -163,6 +163,8 @@
 
 	GBI.setCadObjectIdVisible = function( cadId ) {
 
+		cadId = decodeURI( cadId );
+
 		GBP.surfaceMeshes.visible = true;
 		GBP.surfaceEdges.visible = true;
 		GBP.openingMeshes.visible = false;
@@ -311,7 +313,7 @@
 
 
 
-	GBI.setSpaceVisible = function( spaceId, index ) {
+	GBI.setSpaceVisible = function( spaceId ) {
 		//console.log( 'spaceId', spaceId );
 		//console.log( 'index', index );
 
@@ -344,8 +346,10 @@
 
 		if ( HUDdivAttributes ) {
 
-			index = index || 0;
-			GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId, index );
+			//index = index || 0;
+			//console.log( 'index', index );
+
+			GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId );
 
 		}
 
@@ -388,12 +392,14 @@
 
 		GBP.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
 
-		surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
-		const recGeom = surfaceMesh.userData.data.RectangularGeometry;
+
 		//console.log( 'recGeom', recGeom );
 
 		if ( window.HUDdivAttributes ) {
 
+			GBI.setPanelSurfaceAttributes( HUDdivAttributes, id );
+
+			/*
 			HUDdivAttributes.innerHTML =
 
 			`<div>surface id: <i>${id}</i></div>
@@ -401,7 +407,7 @@
 			<div>height: ${parseFloat(recGeom.Height).toLocaleString()}</div>
 			<div>azimiuth: ${parseFloat(recGeom.Azimuth).toLocaleString()}</div>
 			<div>tilt: ${parseFloat(recGeom.Tilt).toLocaleString()}</div>`;
-
+			*/
 		}
 	};
 
@@ -621,6 +627,7 @@
 
 	GBI.setCadIdZoom = function( cadId ) {
 
+		cadId = decodeURI( cadId );
 		GBI.setCadObjectIdVisible( cadId );
 
 		let meshes = GBP.surfaceMeshes.children.filter( element => element.userData.data.CADObjectId === cadId );
@@ -644,9 +651,9 @@
 
 
 
-	GBI.setSpaceZoom = function( id ) {
+	GBI.setSpaceZoom = function( id, index = 0 ) {
 
-		GBI.setSpaceVisible( id );
+		GBI.setSpaceVisible( id, index );
 
 		let meshes = [];
 
@@ -890,9 +897,9 @@
 
 
 
-	GBI.setPanelSpaceAttributes = function( target, spaceId, index = 0 ) {
+	GBI.setPanelSpaceAttributes = function( target, spaceId ) {
 		//console.log( 'target', target );
-		//console.log( 'index', index );
+		console.log( 'index2', index );
 		//console.log( 'spaceId', spaceId );
 
 		const item = {};
@@ -907,7 +914,7 @@
 
 			<div id=GBIdivAtts ></div>
 
-			<div><button onclick=HUD.updateSpace("${spaceId}",${index}); >update the space associated with this surface</button>
+			<div><button onclick=HUD.updateSpace(GBIselSpace.value,2); >update the space associated with this surface</button>
 
 		</details>
 
@@ -937,6 +944,32 @@
 	};
 
 
+	GBI.setPanelSurfaceAttributes = function( target, surfaceId ) {
+
+
+		surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === surfaceId );
+		const recGeom = surfaceMesh.userData.data.RectangularGeometry;
+
+		target.innerHTML =
+
+		`<details open >
+
+			<summary>Surface ID: ` + surfaceId + `</summary>
+
+			<div>width: ${parseFloat(recGeom.Width).toLocaleString()}</div>
+			<div>height: ${parseFloat(recGeom.Height).toLocaleString()}</div>
+			<div>azimiuth: ${parseFloat(recGeom.Azimuth).toLocaleString()}</div>
+			<div>tilt: ${parseFloat(recGeom.Tilt).toLocaleString()}</div>
+
+		</details>
+
+		<hr>`;
+
+
+	}
+
+
+	//////////
 
 	GBI.setGbjsonAttributes = function( obj, target, title ) {
 		// Used: ??
@@ -982,13 +1015,13 @@
 	GBI.getAttributeAdjacentSpace = function( spaceIdRef, index = 0 ) {
 		// used by REP
 		//console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
-		//console.log( 'index', index );
+		console.log( 'getAttributeAdjacentSpace index', index );
 
 		const txt =
 		`<div>
 			<span class=attributeTitle >adjacent space ` + ( index > 0 ? index : `` ) + ` id</span>:<br>
-			<button id=GBIbutSpaceVis onclick=GBI.setSpaceVisible("${spaceIdRef}",${index}); >${spaceIdRef}</button>
-			<button onclick=GBI.setSpaceZoom("${spaceIdRef}"); >&#8981;</button>
+			<button id=GBIbutSpaceVis` + index + ` onclick=GBI.setSpaceVisible("${spaceIdRef}",${index}); >${spaceIdRef}</button>
+			<button onclick=GBI.setSpaceZoom("${spaceIdRef}",${index}); >&#8981;</button>
 		</div>`;
 
 		return txt;
@@ -1002,7 +1035,7 @@
 
 		const txt =
 		`<div>
-			<span class=attributeTitle >cad object id</span>: <button onclick=GBI.setCadIdZoom(buttId.innerText); >&#8981;</button><br>
+			<span class=attributeTitle >cad object id</span>: <button onclick=GBI.setCadIdZoom("` + encodeURI(cadId) + `"); >&#8981;</button><br>
 			<button id=buttId onclick=GBI.setCadObjectIdVisible(this.innerText); >${cadId}</button>
 
 		</div>`; // cadID has spaces

@@ -138,8 +138,8 @@
 
 	HUD.setHeadsUp = function( event ) {
 
-		let space1;
-		let space2;
+		//let space1;
+		//let space2;
 
 		// needed?? in event handler??
 		if ( HUD.intersected === undefined ) {
@@ -158,6 +158,7 @@
 
 		divHeadsUp.style.display = 'block';
 		divHamburgerRight.style.display = 'block';
+		HUDdivAttributes.innerHTML = '';
 
 		const data = HUD.intersected.userData.data;
 
@@ -165,9 +166,10 @@
 		//console.log( 'data', data );
 
 
-		const height = parseFloat( data.RectangularGeometry.Height );
-		const width = parseFloat( data.RectangularGeometry.Width );
-		const surfaceArea = height * width;
+		//const height = parseFloat( data.RectangularGeometry.Height );
+		//const width = parseFloat( data.RectangularGeometry.Width );
+		//const surfaceArea = height * width;
+
 
 		HUDselSurfaceId.value = data.id;
 		HUDselSurfaceId.click();
@@ -241,7 +243,9 @@
 
 
 
-	HUD.updateSpace = function( spaceRef ) {
+	HUD.updateSpace = function( spaceId, spaceRef ) {
+
+		console.log( 'spaceId', spaceId );
 		console.log( 'spaceRef', spaceRef );
 
 		const surfaceJson = HUD.userDataData;
@@ -254,9 +258,9 @@
 
 		if ( spaceRef === 0  ) {
 
-			const spaceId = selSpace1.value;
+			const spaceId = GBIselSpace.value;
 			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
-			butSpace0.innerText = spaceId;
+			GBIbutSpaceVis0.innerText = spaceId;
 
 			console.log( 'spaceId', spaceId );
 
@@ -268,11 +272,11 @@
 
 		} else if ( spaceRef === 1 ) {
 
-			const spaceId = selSpace1.value;
+			const spaceId = GBIselSpace.value;
 			console.log( 'spaceId', spaceId );
 
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
-			butSpace1.innerText = spaceId;
+			GBIbutSpaceVis1.innerText = spaceId;
 
 			adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
@@ -282,9 +286,9 @@
 
 		} else if ( spaceRef === 2 ) {
 
-			const spaceId = selSpace2.value;
+			const spaceId = GBIselSpace.value;
 			surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId;
-			butSpace2.innerText = spaceId;
+			GBIbutSpaceVis2.innerText = spaceId;
 
 			adjacentNew = GBP.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
 			adjacentNew.setAttribute( "spaceIdRef", spaceId );
@@ -299,9 +303,9 @@
 
 		console.log( 'surfaceJson', surfaceJson );
 
-		alert( 'update space almost working: ' + spaceRef )
+		//alert( 'update space almost working: ' + spaceRef )
 
-		HUD.setHeadsUp();
+		//HUD.setHeadsUp();
 
 	};
 
