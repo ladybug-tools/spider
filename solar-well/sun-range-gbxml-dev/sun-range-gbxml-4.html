@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-08" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divContents" >
+
+			<p>
+				<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+			</p>
+
+			<p><input type=file id=inpFile onchange=GBP.openFile(this); ></p>
+
+			<p><button onclick=setOutput(); >set shadow output </button> &nbsp; <button onclick=saveFile(); >save file</button></p>
+		</div>
+
+		<div id=divLog ></div>
+
+		<br>
+
+		<div id=divOutput ></div>
+
+	</div>
+
+<script>
+// Copyright 2018 Ladybug Tools authors. MIT License
+
+	var GBP = {};
+
+	GBP.gbxml = null;
+	GBP.gbxmlResponseXML;
+	GBP.gbjson;
+
+	GBP.surfaceJson = null;
+	GBP.surfaceMeshes;
+	GBP.surfaceEdges;
+	let helperNormalsFaces;
+
+	var sun, ground, vector;
+	var renderer, camera, controls, scene, axesHelper;
+	var geometry, material, mesh;
+
+
+	function init() {
+
+		divTitle.innerHTML =
+		`<h1>
+			<a href="" >` + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +`</a>
+		</h1>`;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		//geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		//material = new THREE.MeshNormalMaterial();
+		//mesh = new THREE.Mesh( geometry, material );
+		//scene.add( mesh );
+
+		GBP.defaultURL = '../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			GBP.requestFile( url, GBP.callbackGbXML );
+
+		} else {
+
+			GBP.requestFile( GBP.defaultURL, GBP.callbackGbXML );
+
+		}
+
+	}
+
+
+
+	GBP.requestFile = function( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+			GBP.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
+			divLog.innerHTML = GBP.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+
+		}
+
+	}
+
+
+
+	GBP.openFile = function( files ) {
+
+		const reader = new FileReader();
+
+		reader.onload = function( event ) {
+
+			//console.log( 'event', event );
+
+			if ( files.files[0].name.toLowerCase().endsWith( '.xml' ) ) {
+
+				GBP.openGbxmlFile( files );
+
+			} else {
+
+				console.log( 'oops files', files );
+
+			}
+
+		}
+
+		reader.readAsText( files.files[0] );
+
+	}
+
+
+
+	GBP.callbackGbXML = function( xhr ) {
+
+		GBP.gbxmlResponseXML =  xhr.target.responseXML;
+		GBP.gbxml = xhr.target.responseXML.documentElement;
+
+		GBP.parseFileXML( GBP.gbxml );
+
+	};
+
+
+
+	GBP.openGbxmlFile = function( files ) {
+
+		//console.log( 'file', files.files[ 0 ] );
+
+		GBP.fileAttributes = files.files[ 0 ];
+
+		const reader = new FileReader();
+		reader.onprogress = onRequestFileProgress;
+		reader.onload = function( event ) {
+
+			const parser = new DOMParser();
+
+			GBP.gbxmlResponseXML = parser.parseFromString( reader.result, "text/xml" );
+			//console.log( 'gbxmlResponseXML2', gbxmlResponseXML2 );
+
+			GBP.gbxml = GBP.gbxmlResponseXML.children[ 0 ];
+			//console.log( 'GBP.gbxml', GBP.gbxml );
+
+			GBP.gbjson = GBP.parseFileXML( GBP.gbxml );
+			//GBP.surfaceJson = GBP.gbjson.Campus.Surface;
+
+			if ( files.files[ 0 ] ) { GBP.gbjson.fileName = files.files[ 0 ].name; }
+
+		}
+
+		reader.readAsText( files.files[ 0 ] );
+
+		function onRequestFileProgress( event ) {
+
+			divLog.innerHTML =
+				GBP.fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
+				//( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+			'';
+
+		}
+
+	};
+
+
+	// loads any text file - from file reader or location hash or wherever
+
+	GBP.parseFileXML = function( xmlNode ) {
+
+		GBP.gbjson = GBP.XML2jsobj( xmlNode );
+		GBP.surfaceJson = GBP.gbjson.Campus.Surface;
+		//console.log( 'GBP.gbjson', GBP.gbjson );
+
+		GBP.parseGbJson( GBP.gbjson );
+
+		GBP.zoomObjectBoundingSphere( GBP.surfaceMeshes );
+
+		drawSun();
+
+		return GBP.gbjson;
+
+	};
+
+
+	// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
+	// http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
+
+	GBP.XML2jsobj = function( node ) {
+
+		let data = {};
+
+		function Add( name, value ) {
+
+			if ( data[ name ] ) {
+
+				if ( data[ name ].constructor !== Array ) {
+
+					data[ name ] = [ data[ name ] ];
+
+				}
+
+				data[ name ][ data[ name ].length ] = value;
+
+			} else {
+
+				data[ name ] = value;
+
+			}
+
+		}
+
+		let child, childNode;
+
+		for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+			Add( childNode.name, childNode.value );
+
+		}
+
+		for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+			if ( childNode.nodeType === 1 ) {
+
+				if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
+
+					Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+				} else { // sub-object
+
+					Add( childNode.nodeName, GBP.XML2jsobj( childNode ) );
+
+				}
+
+			}
+
+		}
+
+		return data;
+
+	};
+
+
+
+	GBP.parseGbJson = function() {
+
+		const surfaces = GBP.surfaceJson; // gbjson.Campus.Surface;
+		const polyloops = [];
+		const openings = [];
+
+		for ( let surface of surfaces ) {
+
+			if ( !surface.exposedToSun ) { continue; }
+
+			const polyloop = surface.PlanarGeometry.PolyLoop;
+			const points = GBP.getPoints( polyloop );
+
+			polyloops.push( points );
+
+		}
+
+		scene.remove( GBP.surfaceMeshes, GBP.surfaceEdges );
+
+		if ( GBP.surfaceMeshes ) {
+
+			GBP.surfaceMeshes.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+				if ( child.texture ) { child.texture.dispose(); }
+
+			} );
+
+		}
+
+		if ( GBP.surfaceEdges ) {
+
+			GBP.surfaceEdges.traverse( function ( child ) {
+
+				if ( child.geometry ) {
+
+					child.geometry.dispose();
+					child.material.dispose();
+
+				}
+
+			} );
+
+		}
+
+
+		GBP.surfaceMeshes = new THREE.Object3D();
+		GBP.surfaceMeshes.name = 'GBP.surfaceMeshes';
+
+		GBP.surfaceEdges = new THREE.Object3D();
+		GBP.surfaceEdges.name = 'GBP.surfaceEdges';
+
+		for ( let i = 0; i < polyloops.length; i++ ) {
+
+			const material = new THREE.MeshBasicMaterial( { side: 2, opacity: 0.85, transparent: true } );
+
+			const shape = GBP.drawShapeSinglePassObjects( polyloops[ i ], material, openings[ i ] );
+
+			shape.userData.data = surfaces[ i ];
+			shape.castShadow = shape.receiveShadow = true;
+			GBP.surfaceMeshes.add( shape );
+
+			const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
+			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
+			surfaceEdge.rotation.copy( shape.rotation );
+			surfaceEdge.position.copy( shape.position );
+			GBP.surfaceEdges.add( surfaceEdge ); // or add to surfaces??
+
+		}
+
+		scene.add( GBP.surfaceMeshes, GBP.surfaceEdges );
+
+
+
+	};
+
+
+
+	GBP.getPoints = function( polyloop ) {
+
+		return points = polyloop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
+
+	};
+
+
+
+	GBP.drawShapeSinglePassObjects = function( vertices, material, holes ) {
+
+		const plane = GBP.getPlane( vertices );
+
+		const obj = new THREE.Object3D();
+		obj.lookAt( plane.normal );  // copy the rotation of the triangle
+		obj.quaternion.conjugate();
+		obj.updateMatrixWorld();
+
+		vertices.map( vertex => obj.localToWorld( vertex ) );
+
+		const shape = new THREE.Shape( vertices );
+		//shape.autoClose = true;
+
+		const geometryShape = new THREE.ShapeGeometry( shape );
+
+		// material to here
+		const shapeMesh = new THREE.Mesh( geometryShape, material );
+
+		shapeMesh.lookAt( plane.normal );
+		shapeMesh.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
+
+		return shapeMesh;
+
+	};
+
+
+
+	GBP.getPlane = function( points, start = 0 ) {
+
+		const triangle = new THREE.Triangle();
+		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+		const pl = new THREE.Plane();
+		GBP.plane = triangle.plane( pl );
+
+		if ( triangle.area() === 0 ) {
+
+			start++;
+			GBP.getPlane( points, start );
+
+		}
+
+		return GBP.plane;
+
+	};
+
+
+
+	GBP.zoomObjectBoundingSphere = function( obj ) {
+
+		const bbox = new THREE.Box3().setFromObject( obj );
+		GBP.boundingBox = bbox;
+
+		const sphere = bbox.getBoundingSphere();
+		const center = sphere.center;
+		const radius = sphere.radius;
+		GBP.radius = radius;
+
+		controls.target.copy( center );
+		controls.maxDistance = 8 * radius;
+
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		camera.far = 10 * radius; //2 * camera.position.length();
+		camera.updateProjectionMatrix();
+
+		axesHelper.scale.set( radius, radius, radius );
+		axesHelper.position.copy( center );
+
+		obj.userData.center = center;
+		obj.userData.radius = radius;
+
+	};
+
+
+
+	GBP.setAllVisible = function() {
+
+		GBP.surfaceEdges.visible = true;
+		GBP.surfaceMeshes.visible = true;
+		GBP.openingMeshes.visible = true;
+
+		for ( let child of GBP.surfaceMeshes.children ) {
+
+			if ( !child.material ) { continue; }
+
+			child.material = new THREE.MeshPhongMaterial( {
+				color: GBP.colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true }
+			);
+			child.material.wireframe = false;
+			child.visible = true;
+
+		};
+
+		GBP.openingMeshes.visible = true;
+
+		for ( let child of GBP.openingMeshes.children ) {
+
+			if ( !child.material ) { continue; }
+
+			child.material = new THREE.MeshPhongMaterial( {
+				color: 0x000000, side: 2, opacity: 0.1, transparent: true }
+			);
+			child.material.wireframe = false;
+			child.visible = true;
+
+		};
+
+	};
+
+
+
+
+	function drawSun() {
+
+		scene.remove( sun );
+
+		const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+		vector = v( -0.5 * GBP.radius, - GBP.radius, GBP.radius );
+
+		const geometry = new THREE.SphereBufferGeometry( 5 );
+		const material = new THREE.MeshBasicMaterial( { color: 'yellow', side: 2 } );
+		sun = new THREE.Mesh( geometry, material );
+		sun.position.copy( axesHelper.position.clone().add( vector.clone() ) );
+
+		scene.add( sun );
+
+		setTimeout( drawGround, 100 );
+
+	}
+
+
+
+	function drawGround() {
+
+		const p = axesHelper.position;
+		const geometry = new THREE.PlaneGeometry( 2 * GBP.radius, 2 * GBP.radius, 100, 100 );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( p.x, p.y, GBP.boundingBox.min.z ) );
+
+		var raycaster = new THREE.Raycaster();
+		vector.normalize();
+
+		for ( let i = 0; i < geometry.vertices.length; i++ ) {
+
+			const point = geometry.vertices[ i ];
+
+			raycaster.set( point, vector );
+
+			const intersects = raycaster.intersectObjects( GBP.surfaceMeshes.children );
+			//console.log( 'intersects', intersects );
+
+			let color = intersects.length > 0 ? 0.2 : 0.7;
+			color = new THREE.Color().setHSL( color, 1, 0.8 );
+			geometry.colors[ i ] = color;
+
+		}
+
+		geometry.faces.forEach( face =>
+
+			face.vertexColors = [
+				geometry.colors[ face[ 'a' ] ],
+				geometry.colors[ face[ 'b' ] ],
+				geometry.colors[ face[ 'c' ] ]
+			]
+
+		);
+
+		material = new THREE.MeshBasicMaterial( {
+			color: 0xffffff,
+			opacity: 0.7,
+			side: THREE.DoubleSide,
+			transparent: true,
+			vertexColors: THREE.VertexColors
+		} );
+
+		scene.remove( ground );
+		ground = new THREE.Mesh( geometry, material );
+		scene.add( ground );
+
+		setSurfaceNormals();
+
+	}
+
+
+
+
+	function setSurfaceNormals() {
+
+		const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+		scene.remove( helperNormalsFaces );
+
+		const raycaster = new THREE.Raycaster();
+		const vector = v( -0.5 * GBP.radius, - GBP.radius, GBP.radius );
+		vector.normalize();
+
+		helperNormalsFaces = new THREE.Group();
+
+		for ( let child of GBP.surfaceMeshes.children ) {
+
+			const helperNormalsFace = new THREE.FaceNormalsHelper( child, 2, 0xff00ff, 3 );
+
+			helperNormalsFaces.add( helperNormalsFace );
+
+			const arr = helperNormalsFace.geometry.attributes.position.array;
+
+			const p1 = arr.slice( 0, 3 );
+			//console.log( 'p1', p1 );
+
+			const pos = new THREE.Vector3().fromArray( p1 );
+
+			if ( arr.length > 6 ) {
+
+				p2 = helperNormalsFace.geometry.attributes.position.array.slice( 6, 9 );
+
+			}
+
+			raycaster.set( pos, vector.normalize() );
+			raycaster.near = 0.5;
+			//console.log( 'raycaster', raycaster );
+
+			const intersects = raycaster.intersectObjects( GBP.surfaceMeshes.children );
+			//console.log( 'intersects', intersects );
+
+			const geometry = new THREE.Geometry();
+			geometry.vertices = [ pos, pos.clone().add( vector ) ];
+			const material = new THREE.LineBasicMaterial( { color: 'black' } );
+			const line = new THREE.Line( geometry, material );
+			helperNormalsFace.add( line );
+
+			let color = intersects.length > 0 ? 0.2 : 0.7;
+			color = new THREE.Color().setHSL( color, 1, 0.8 );
+			child.material.color = color;
+
+		}
+
+		scene.add( helperNormalsFaces );
+
+	};
+
+
+
+	function setOutput() {
+
+		txt = '';
+
+		for ( let child of GBP.surfaceMeshes.children ) {
+
+			//console.log( 'child', child );
+
+			const data = child.userData.data;
+			const p = child.position;
+			const n = child.geometry.faces[ 0 ].normal;
+			//console.log( 'n', n );
+
+			let length = child.geometry.vertices[ 1 ].x - child.geometry.vertices[ 0 ].x;
+			length = length !== 0 ? length : child.geometry.vertices[ 2 ].x - child.geometry.vertices[ 0 ].x;
+
+			txt += 'furlongs,' + data.Name + ',' + p.x + ',' + p.y + ',' + p.z + ',' +
+				n.x + ',' + n.y + ',' + n.z + ',' +
+				Math.abs( length ) + '\n';
+
+		}
+
+		divOutput.innerText = txt;
+
+	}
+
+
+
+	function saveFile() {
+
+		var blob = new Blob( [ divOutput.innerText ] );
+		var a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = GBP.fileAttributes.name + '.shadowinput';
+		a.click();
+		//		delete a;
+		a = null;
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+
+	init();
+	animate();
+
+</script>
+</body>
+</html>
