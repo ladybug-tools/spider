@@ -116,11 +116,12 @@
 
 
 	GBI.updateSelect = function( that, select, name ){
-		i = 0;
 		//console.log( 'sel', sel );
 		//console.log( 'that', that );
 		//console.log( 'GBI.item', GBI.item );
 		//ii = sel;
+
+		let i = 0;
 
 		optionValues = GBI[ name ].optionValues;
 
@@ -206,9 +207,9 @@
 
 				<summary>CAD Object ID</summary>
 
-				<p><select id=GBIselCadId size=10 ></select></p>
+				<div><button id=GBIbutCadId onclick=HUD.updateCadId(GBIselCadId.value); >Update cad object id of surface</button></div>
 
-				<div><button id=GBIbutCadId onclick=GBI.updateCadId(GBIselCadId.value); >Update cad object id of surface</button></div>
+				<p><select id=GBIselCadId size=10 ></select></p>
 
 			</details>
 
@@ -549,9 +550,10 @@
 
 				<summary>Surface Type: ${type}</summary>
 
+				<p><button onclick=HUD.updateSurfaceType() >Update surface type of the surface</button></p>
+
 				<div><select id=GBIselSurfaceType ></select></div>
 
-				<p><button onclick=HUD.updateSurfaceType() >Update surface type of the surface</button></p>
 
 			</details>
 
@@ -802,6 +804,9 @@
 	GBI.setElementIdAttributes = function ( id, item ) {
 		//console.log( 'item', item, '\nid', id );
 
+		GBI.id = id;
+		//console.log( 'GBI.id', GBI.id );
+
 		//console.log( 'item.parent', item.parent );
 		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
 		//console.log( 'arr', arr );
@@ -908,11 +913,14 @@
 
 			<summary>Adjacent Space ` + ( GBI.spaceIndex > -2 ? GBI.spaceIndex : '' ) + `</summary>
 
+			<p>
+				<button onclick=HUD.updateSpace(GBIselSpace.value,GBI.spaceIndex); >update the space associated with this surface</button>
+			</p>
+
 			<div id=GBIdivSpace ></div>
 
 			<div id=GBIdivAtts ></div>
 
-			<div><button onclick=HUD.updateSpace(GBIselSpace.value,GBI.spaceIndex); >update the space associated with this surface</button>
 
 		</details>
 
@@ -944,6 +952,7 @@
 	};
 
 
+
 	GBI.setPanelSurfaceAttributes = function( target, surfaceId ) {
 
 		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === surfaceId );
@@ -973,14 +982,14 @@
 
 		<hr>`;
 
-
+		HUD.removeTelltales();
 	}
 
 
 	//////////
 
 	GBI.setGbjsonAttributes = function( obj, target, title ) {
-		// Used: ??
+		// still Used: ??
 		//console.log( 'obj', obj );
 		//console.log( 'target', target );
 

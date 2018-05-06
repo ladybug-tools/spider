@@ -153,6 +153,7 @@
 		divHeadsUp.style.display = 'block';
 		divHamburgerRight.style.display = 'block';
 		HUDdivAttributes.innerHTML = '';
+		HUD.removeTelltales();
 
 		const data = HUD.intersected.userData.data;
 
@@ -211,9 +212,9 @@
 		`<details>
 			<summary>Surface Coordinates</summary>
 			<p>
-				<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
-				<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
-				<button onclick=HUD.removeTelltales() >remove telltales</button>
+				<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >gbXML coordinates</button>
+				<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >Three.js vertices</button>
+				<button onclick=HUD.removeTelltales(); >remove telltales</button>
 			<p>
 			<div id=HUDdivCoordinates ></div>
 
@@ -529,69 +530,24 @@
 
 	///////// 	// to COR or THR?
 
-	HUD.displayTelltalesVertex = function() {
-
-		THR.scene.remove( HUD.telltalesVertex );
-
-		if( !HUD.intersected ) { return; }
-
-		HUD.telltalesVertex = new THREE.Object3D();
-
-		const vertices = HUD.intersected.geometry.vertices;
-
-		options = '';
-
-		for ( let i = 0; i < vertices.length; i++ ) {
-
-			const vertex = vertices[ i ];
-			const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( vertex.x, vertex.y, vertex.z ) );
-			const material = new THREE.MeshNormalMaterial();
-			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.copy( HUD.intersected.position );
-			mesh.quaternion.copy( HUD.intersected.quaternion );
-
-			placard = HUD.drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z + 0.5 );
-			placard.position.copy( HUD.intersected.position );
-			placard.quaternion.copy( HUD.intersected.quaternion );
-
-			// console.log( 'placard', placard );
-			HUD.telltalesVertex.add( placard );
-			HUD.telltalesVertex.add( mesh );
-
-			options += '<option value=${vertex} > coordinate ' + ( i + 1 ) + '</option>';
-
-		}
-
-		THR.scene.add( HUD.telltalesVertex );
-
-		HUDdivCoordinates.innerHTML =
-
-		`<div class=flex-container2 >
-
-			<div class=flex-div1 >
-				<p><select id=HUDselCoordinate onchange=HUD.setCoordinateData(); size=6 style=min-width:6rem; >${options}</select></p>
-			</div>
-
-			<div id =HUDdivCoordinatesData class=flex-left-div2 >more features coming soon</div>
-
-		</div>`;
-
-
-	};
-
-
-
 
 	HUD.displayTelltalesPolyloop = function() {
 
 		THR.scene.remove( HUD.telltalesPolyloop );
 
-		if( !HUD.intersected ) { return; }
+		//if( !HUD.intersected ) { return; }
+		if( !GBI.id ) { return; }
 
 		HUD.telltalesPolyloop = new THREE.Object3D();
+		HUD.telltalesMeshes = new THREE.Object3D();
 
-		const vertices = HUD.intersected.userData.data.PlanarGeometry.PolyLoop.CartesianPoint;
+		const surfaceJson  = GBP.surfaceJson.find( item => item.id === GBI.id );
+
+		const vertices = surfaceJson.PlanarGeometry.PolyLoop.CartesianPoint;
+
+		console.log( 'vertices', vertices );
+
+		//const vertices = HUD.intersected.userData.data.PlanarGeometry.PolyLoop.CartesianPoint;
 
 		options = '';
 
@@ -608,13 +564,16 @@
 			placard = HUD.drawPlacard( i.toString(), 0.01, 200, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
 			// console.log( 'placard', placard );
 			HUD.telltalesPolyloop.add( placard );
-			HUD.telltalesPolyloop.add( mesh );
+			HUD.telltalesMeshes.add( mesh );
 
 			options += '<option value=${vertex} > coordinate ' + ( i + 1 ) + '</option>';
 
 		}
 
-		const openings = HUD.intersected.userData.data.Opening ? HUD.intersected.userData.data.Opening : [];
+		const openings = surfaceJson.Opening ? surfaceJson.Opening : [];
+
+
+		//const openings = surfaceJson.PlanarGeometry.PolyLoop.CartesianPoint;
 
 		for ( let i = 0; i < openings.length; i++ ) {
 
@@ -644,17 +603,17 @@
 
 		}
 
-		THR.scene.add( HUD.telltalesPolyloop );
+		THR.scene.add( HUD.telltalesPolyloop, HUD.telltalesMeshes );
 
 		HUDdivCoordinates.innerHTML =
 
 		`<div class=flex-container2 >
 
 			<div class=flex-div1 >
-				<p><select id=HUDselCoordinate onchange=HUD.setCoordinateData(); size=6 style=min-width:6rem; >${options}</select></p>
+				<p><select id=HUDselCoordinate onclick=HUD.setCoordinateData(); onchange=HUD.setCoordinateData(); size=6 style=min-width:6rem; >${options}</select></p>
 			</div>
 
-			<div id =HUDdivCoordinatesData class=flex-left-div2 >more features coming soon. sometimes clicking a coordinate works</div>
+			<div id =HUDdivCoordinatesData class=flex-left-div2 >click a coordinate</div>
 
 		</div>`;
 
@@ -663,22 +622,80 @@
 
 
 
+	HUD.displayTelltalesVertex = function() {
+
+		THR.scene.remove( HUD.telltalesVertex );
+
+		//if( !HUD.intersected ) { return; }
+		if( !GBI.id ) { return; }
+
+		HUD.telltalesVertex = new THREE.Object3D();
+
+		const surfaceMesh  = GBP.surfaceMeshes.children.find( item => item.userData.data.id === GBI.id );
+
+		const vertices = HUD.intersected.geometry.vertices;
+
+		options = '';
+
+		for ( let i = 0; i < vertices.length; i++ ) {
+
+			const vertex = vertices[ i ];
+			const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( vertex.x, vertex.y, vertex.z ) );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.copy( HUD.intersected.position );
+			mesh.quaternion.copy( HUD.intersected.quaternion );
+
+			placard = HUD.drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z + 0.5 );
+			placard.position.copy( HUD.intersected.position );
+			placard.quaternion.copy( HUD.intersected.quaternion );
+
+			// console.log( 'placard', placard );
+			HUD.telltalesVertex.add( placard );
+			HUD.telltalesVertex.add( mesh );
+
+			options += '<option value=${vertex} > coordinate ' + ( i + 1 ) + '</option>';
+
+		}
+
+		THR.scene.add( HUD.telltalesVertex );
+
+		/*
+		HUDdivCoordinates.innerHTML =
+
+		`<div class=flex-container2 >
+
+			<div class=flex-div1 >
+				<p><select id=HUDselCoordinate onchange=HUD.setCoordinateData(); size=6 style=min-width:6rem; >${options}</select></p>
+			</div>
+
+			<div id =HUDdivCoordinatesData class=flex-left-div2 >more features coming soon</div>
+
+		</div>`;
+		*/
+
+
+	};
+
+
+
+
+
+
 	HUD.setCoordinateData = function() {
 
-
-		vertex = HUD.telltalesPolyloop.children[ HUDselCoordinate.selectedIndex ].position;
+		vertex = HUD.telltalesMeshes.children[ HUDselCoordinate.selectedIndex ].position;
+		console.log( 'vertex', vertex );
 
 		x = vertex;
-
-		console.log( 'vertex', x );
 
 		HUDdivCoordinatesData.innerHTML =
 		`
 		X = ${vertex.x} <br>
 		Y = ${vertex.y} <br>
 		Z = ${vertex.z} <br>
-		<button >delete</button>`;
-
+		<p><button onclick=alert("Coming-soon"); >delete</button></p>`;
 
 	}
 
@@ -687,6 +704,7 @@
 
 		THR.scene.remove( HUD.telltalesPolyloop );
 		THR.scene.remove( HUD.telltalesVertex );
+		HUDdivCoordinates.innerHTML = 'click a button';
 
 	};
 
