@@ -146,7 +146,7 @@
 				<summary>Select Report by Item</summary>
 
 				<div>
-					<select id=REPselReport onclick=REP.setPanelReportResults(); onchange=REP.setPanelReportResults(); size=10 ></select>
+					<select id=REPselReport onclick=REP.setPanelReportResults(); onchange=REP.setPanelReportResults(); size=6 ></select>
 				</div>
 
 				<div id=REPdivReport ></div>
@@ -167,6 +167,7 @@
 
 		let options = '';
 
+		/*
 		for ( let property in obj ) {
 
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
@@ -191,6 +192,22 @@
 			}
 
 		}
+		*/
+
+
+		const item = {};
+
+		//item.attribute = property;
+		item.divAttributes = 'REPdivElementAttributes';
+		item.parent = parent;
+		item.element = element;
+
+		item.placeholder = element;
+		item.selItem = 'REPselReportType';
+
+		REP.reportTypes.push( item );
+
+		options += '<option >' + element + '</option>';
 
 		target.innerHTML += options;
 
@@ -235,16 +252,17 @@
 
 		`<div>
 
-			<p><b>` + item.element + ' by ' + item.attribute + ' &raquo; ' + item.parent.length + ` items</b><br></p>
+			<p><b>` + item.element + ' &raquo; ' + ( item.parent.length ? item.parent.length : 1 ) + ` items</b><br></p>
 
 			<div id=REPdivElements ></div>
 
 		</div>`;
 
 		let arr = Array.isArray( item.parent ) ? item.parent : [ item.parent ];
+		item.name = 'itemReportResults';
+		//item.optionValues = arr.map( element => [ element[ item.attribute ], element.id ] );
 
-		item.optionValues = arr.map( element => [ element[ item.attribute ], element.id ] );
-
+		item.optionValues = arr.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.optionValues.sort( ( a, b ) => {
 			if ( a[ 0 ] === b[ 0 ] ) { return 0; } else { return ( a[ 0 ] < b[ 0 ] ) ? -1 : 1; }
 		} );
@@ -253,7 +271,7 @@
 		item.divTarget = document.getElementById( 'REPdivElements' );
 		//console.log( 'item', item );
 
-		GBI.setElementPanel2( item );
+		GBI.itemReportResults = GBI.setElementPanel2( item );
 
 		REPselReportType.selectedIndex = 0;
 		REPselReportType.click();

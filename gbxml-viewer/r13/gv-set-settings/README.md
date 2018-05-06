@@ -35,10 +35,11 @@
 ## Wish list
 
 * 2018-04-02 ~ Theo ~ Select color themes and other parameters such as adding of ground planes from a list of color theme files
-
+* 2018-05-05 ~ Theo ~ Sections work at any angle
 
 ## Issues
 
+* 2018-05-05 ~ Theo: Explode by storeys moves model inappropriately
 
 
 ## To Do for test file
@@ -53,7 +54,6 @@ See also main gbXML Viewer read me file
 
 R13
 * First commit
-
 
 ### 2018-03-27 ~ Theo
 

@@ -168,7 +168,6 @@
 	//////////
 
 	HUD.setPanelSurface = function( target ) {
-		// sets top panel
 
 		THR.controls.keys = false;
 
@@ -190,7 +189,6 @@
 		item.divAttributes = 'HUDdivCardSurfaceAttributes';
 		item.divTarget = document.getElementById( 'HUDdivPanelSurface' );
 		item.element = 'Surface';
-		item.name = 'itemSurface';
 		item.optionValues = GBP.surfaceJson.map ( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = GBP.surfaceJson;
 		item.placeholder = 'surface id'
@@ -198,8 +196,7 @@
 
 		//HUD.item = item;
 
-		GBI.itemSurface = GBI.setElementPanel2( item );
-		//console.log( 'GBI.itemSurface', GBI.itemSurface );
+		GBI.setElementPanel2( item );
 
 	};
 
@@ -209,14 +206,12 @@
 
 		target.innerHTML =
 		`<details>
-			<summary>Surface Coordinates</summary>
+			<summary>For debugging surface appearance</summary>
 			<p>
 				<button onclick=HUD.displayTelltalesVertex(); title="Three.js data" >vertex telltales</button>
 				<button onclick=HUD.displayTelltalesPolyloop(); title="gbXML data" >polyloop telltales</button>
 				<button onclick=HUD.removeTelltales() >remove telltales</button>
 			<p>
-			<div id=HUDdivCoordinates ></div>
-
 		</details>`;
 
 	};
@@ -537,9 +532,8 @@
 
 		HUD.telltalesVertex = new THREE.Object3D();
 
-		const vertices = HUD.intersected.geometry.vertices;
 
-		options = '';
+		const vertices = HUD.intersected.geometry.vertices;
 
 		for ( let i = 0; i < vertices.length; i++ ) {
 
@@ -559,27 +553,11 @@
 			HUD.telltalesVertex.add( placard );
 			HUD.telltalesVertex.add( mesh );
 
-			options += '<option value=${vertex} > coordinate ' + ( i + 1 ) + '</option>';
-
 		}
 
 		THR.scene.add( HUD.telltalesVertex );
 
-		HUDdivCoordinates.innerHTML =
-
-		`<div class=flex-container2 >
-
-			<div class=flex-div1 >
-				<p><select id=HUDselCoordinate onchange=HUD.setCoordinateData(); size=6 style=min-width:6rem; >${options}</select></p>
-			</div>
-
-			<div id =HUDdivCoordinatesData class=flex-left-div2 >more features coming soon</div>
-
-		</div>`;
-
-
 	};
-
 
 
 
@@ -592,8 +570,6 @@
 		HUD.telltalesPolyloop = new THREE.Object3D();
 
 		const vertices = HUD.intersected.userData.data.PlanarGeometry.PolyLoop.CartesianPoint;
-
-		options = '';
 
 		for ( let i = 0; i < vertices.length; i++ ) {
 
@@ -609,8 +585,6 @@
 			// console.log( 'placard', placard );
 			HUD.telltalesPolyloop.add( placard );
 			HUD.telltalesPolyloop.add( mesh );
-
-			options += '<option value=${vertex} > coordinate ' + ( i + 1 ) + '</option>';
 
 		}
 
@@ -646,41 +620,8 @@
 
 		THR.scene.add( HUD.telltalesPolyloop );
 
-		HUDdivCoordinates.innerHTML =
-
-		`<div class=flex-container2 >
-
-			<div class=flex-div1 >
-				<p><select id=HUDselCoordinate onchange=HUD.setCoordinateData(); size=6 style=min-width:6rem; >${options}</select></p>
-			</div>
-
-			<div id =HUDdivCoordinatesData class=flex-left-div2 >more features coming soon. sometimes clicking a coordinate works</div>
-
-		</div>`;
-
-
 	};
 
-
-
-	HUD.setCoordinateData = function() {
-
-
-		vertex = HUD.telltalesPolyloop.children[ HUDselCoordinate.selectedIndex ].position;
-
-		x = vertex;
-
-		console.log( 'vertex', x );
-
-		HUDdivCoordinatesData.innerHTML =
-		`
-		X = ${vertex.x} <br>
-		Y = ${vertex.y} <br>
-		Z = ${vertex.z} <br>
-		<button >delete</button>`;
-
-
-	}
 
 
 	HUD.removeTelltales = function() {

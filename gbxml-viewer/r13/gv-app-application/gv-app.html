@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-05-04" >
-<title>Aragog gbXML Viewer 13.12</title>
+<meta name = "date" content = "2018-05-05" >
+<title>Aragog gbXML Viewer 13.13</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -363,6 +363,7 @@
 		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
 		if ( GBP.gbxmlResponseXML.URL.includes( 'bristol-clifton-down-road' ) ) {
+
 			/*
 			const scriptSave = document.head.appendChild( document.createElement( 'script' ) );
 			scriptSave.src = '../gv-sav/gv-sav.js';
@@ -390,8 +391,8 @@
 
 		}
 
-		//HUD.getMenuOptions();
-		HUD.setMenuOptions();
+		HUD.setMenuOptions(); // gets things really going
+
 		APP.resetMenu();
 
 	}

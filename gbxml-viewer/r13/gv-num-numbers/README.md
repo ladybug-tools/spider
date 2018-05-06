@@ -27,8 +27,7 @@
 ## Wish list
 
 * 2018-03-27 ~ Button color of each surface type should be the color of each type
-* 2018-04-13 ~ Theo move more functions to GBI
-* 2018-03-27 ~ Add show exposed to Sun surfaces
+* 2018-03-27 ~ Add show exposed to Sun surfaces << where?
 * 2018-03-24 ~ Add area by space <<<
 * 2018-03-23 ~ Add data embedded in gbXML file where available
 * 2018-03-23 ~ Add area by cad id group
@@ -62,7 +61,7 @@ ditto
 
 R13.4
 * Continue transforming to get and set type code
-
+* 2018-04-13 ~ Theo move more functions to GBI
 
 ### 2018-04-02 ~ Theo
 

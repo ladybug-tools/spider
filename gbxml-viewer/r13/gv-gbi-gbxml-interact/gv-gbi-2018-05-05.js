@@ -12,7 +12,7 @@
 
 
 	GBI.getElementPanel = function( item ){
-		// where still used ?? to be deprecated in 14
+		// where still used ??
 
 		item = item || {};
 		item.attribute = item.attribute ? item.attribute : '';
@@ -51,19 +51,17 @@
 
 
 	GBI.setElementPanel2 = function( item ){
-		// HUD.setPanelSurface
 
 		item = item || {};
 
-		//item.attribute = item.attribute ? item.attribute : '';
-		item.divAttributes = item.divAttributes || 'GBIdivSurface'; // used here
-		item.divTarget = item.divTarget || 'GBIdivElements'; // see divElement below
-		item.element = item.element || 'Surface';  // used by GBI.setElementVisible
-		item.name = item.name || 'itemName';
-		item.optionValues = item.optionValues || [ [ item.id, item.Name, item.CADObjectId ], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
-		item.parent = item.parent || GBP.surfaceJson; // used by GBI.setElementIdAttributes
-		item.placeholder = item.placeholder || 'surface id';  // used below
-		item.selItem = item.selItem || 'selItem'; // used below
+		item.attribute = item.attribute ? item.attribute : '';
+		item.divAttributes = item.divAttributes || 'GBIdivSurface';
+		item.divTarget = item.divTarget || 'GBIdivElements';
+		item.element = item.element || 'Surface';
+		item.optionValues = item.optionValues || [ [ 'aaa', 1], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
+		item.parent = item.parent || GBP.surfaceJson;
+		item.placeholder = item.placeholder || 'surface id';
+		item.selItem = item.selItem || 'selItem';
 
 		let options = '';
 
@@ -76,7 +74,6 @@
 		divElement =
 
 			`<div class=flex-container2 >
-
 				<div class=flex-div1 >
 					<input oninput=GBI.setSelectedIndex(this,${item.selItem});
 						placeholder="${item.placeholder}" style=margin-bottom:0.5rem;width:6rem; ><br>
@@ -84,7 +81,7 @@
 						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
 						 ` style=margin-bottom:0.5rem;min-width:6rem; >${options}</select>
 						<br>
-					<select onchange=GBI.updateSelect(this,${item.selItem},"${item.name}"); style=width:6rem;><option>id</option><option selected >name</option><option>cad id</option></select>
+					<select onchange=GBI.updateSelect(this,${item.selItem}); style=width:6rem;><option>id</option><option selected >name</option><option>cad id</option></select>
 				</div>
 				<div id = ${item.divAttributes} class=flex-left-div2 >bbb</div>
 
@@ -110,23 +107,19 @@
 
 		};
 
-		return item;
-
 	};
 
 
-	GBI.updateSelect = function( that, select, name ){
+	GBI.updateSelect = function( that, sel ){
 		i = 0;
 		//console.log( 'sel', sel );
 		//console.log( 'that', that );
 		//console.log( 'GBI.item', GBI.item );
 		//ii = sel;
 
-		optionValues = GBI[ name ].optionValues;
+		for ( option of sel.options ) {
 
-		for ( option of select.options ) {
-
-			option.innerText = optionValues[ i++ ][ that.selectedIndex ];
+			option.innerText = GBI.item.optionValues[ i++ ][ that.selectedIndex ];
 
 		}
 	}
@@ -367,6 +360,15 @@
 				}
 
 			}
+
+		}
+
+		if ( HUDdivAttributes ) {
+
+			//spaceIndex = spaceIndex || 0;
+			//console.log( 'spaceIndex', spaceIndex );
+
+			//GBI.setPanelSpaceAttributes( HUDdivAttributes, spaceId );
 
 		}
 
@@ -922,7 +924,6 @@
 		item.divAttributes = 'GBIdivAtts';
 		item.divTarget = document.getElementById( 'GBIdivSpace' );
 		item.element = 'Space';
-		item.name = 'itemSpace';
 		//item.optionValues = item.optionValues;
 		item.optionValues = GBP.gbjson.Campus.Building.Space.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = GBP.gbjson.Campus.Building.Space;
@@ -931,7 +932,7 @@
 
 		//console.log( 'item.optionValues', item.optionValues);
 
-		GBI.itemSpace = GBI.setElementPanel2( item );
+		GBI.setElementPanel2( item );
 
 		const sel = document.getElementById( item.selItem );
 		sel.value = spaceId;
@@ -1059,6 +1060,7 @@
 		`<div>
 			<span class=attributeTitle >id</span>:<br>
 			<button onclick=GBI.setOpeningVisible(this.innerText); >${id}</button><br>
+			<span style=color:red; >Issue: only shows external doors</span>
 			</div>`;
 
 			//<button onclick=GBI.setSurfaceZoom("` + id + `"); >&#8981;</button>
