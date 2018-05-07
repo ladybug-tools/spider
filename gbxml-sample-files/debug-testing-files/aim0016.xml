@@ -72676,46 +72676,7 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [927670]</CADObjectId>
       <Name>N-RF_101-E-W-485</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim13008">
-      <AdjacentSpaceId spaceIdRef="aim5207"/>
-      <RectangularGeometry id="aim13009">
-        <Azimuth>180</Azimuth>
-        <CartesianPoint>
-          <Coordinate>6.9</Coordinate>
-          <Coordinate>10.09997</Coordinate>
-          <Coordinate>30.25</Coordinate>
-        </CartesianPoint>
-        <Tilt>90</Tilt>
-        <Width>6.40000057220459</Width>
-        <Height>2.29999995231628</Height>
-      </RectangularGeometry>
-      <PlanarGeometry>
-        <PolyLoop>
-          <CartesianPoint>
-            <Coordinate>6.9</Coordinate>
-            <Coordinate>10.09997</Coordinate>
-            <Coordinate>30.25</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>13.3</Coordinate>
-            <Coordinate>10.09997</Coordinate>
-            <Coordinate>30.25</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>13.3</Coordinate>
-            <Coordinate>10.09997</Coordinate>
-            <Coordinate>32.55</Coordinate>
-          </CartesianPoint>
-          <CartesianPoint>
-            <Coordinate>6.9</Coordinate>
-            <Coordinate>10.09997</Coordinate>
-            <Coordinate>32.55</Coordinate>
-          </CartesianPoint>
-        </PolyLoop>
-      </PlanarGeometry>
-      <CADObjectId>Basic Wall: SIM_EXT_SLD [927801]</CADObjectId>
-      <Name>S-RF_101-E-W-486</Name>
-    </Surface>
+    
     <Surface surfaceType="Shade" exposedToSun="true" id="aim130081">
       <AdjacentSpaceId spaceIdRef="aim5207"/>
       <RectangularGeometry id="aim130091">
@@ -73032,7 +72993,7 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <CADObjectId>Basic Wall: SIM_INT_SLD_Core [884278]</CADObjectId>
+      <CADObjectId>Basic Roof: SIM_EXT_SLD_Roof DA01 [929372]</CADObjectId>
       <Name>T-RF_102-E-R-492</Name>
     </Surface>
     <Surface surfaceType="InteriorWall" id="aim13097">
