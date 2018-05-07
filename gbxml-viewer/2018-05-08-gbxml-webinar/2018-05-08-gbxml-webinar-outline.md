@@ -4,7 +4,7 @@ Michal:
 
 Hi everybody
 
-I'm Michal Dengusiak, I'm an <job title> living in Berlin and working with Buro Hapold.  _Perhaps a bit more if you wish..._
+I'm Michal Dengusiak, I'm an <job title> living in Berlin and working with Buro Happold.  _Perhaps a bit more if you wish..._
 
 I'm here to show you Aragog. A free open source gbXML file viewer that display files in 3D in your browser.
 
@@ -152,19 +152,27 @@ Now we load the model.
 And, bingo, here is the file with all the fixes ready to go your energy analysis apps
 
 ## Closing ~ 1 minute
+_Practice the closing a lot. Help improve the text. Probably there's nothing more important._
+Onscreen:
 
-Onscreen: Load large-ish pretty, very 3D model - perhaps 'Aspen'>
+Load large-ish pretty, very 3D model - perhaps 'Aspen'
+Create a Sun path. Slide the hour indicator to show the Sun and shadows updating
 
 Dialog:
+
 In closing, I'd like to point out that the viewer can load large files
+
 It's all written open source entry-level Three.js JavaScript
+
 Anybody can ask for features or even better you can add new features yourself
 
-Here the links to th Viewer and to the source code
+Here the links to the Viewer and to the source code
 
 Thank you to Stephen Roth for organizing this webinar.
 
 For all of you watching this webinar, we hope to see you online.
+
 Feel free to contact us via GitHub or the Ladybug Tools Forum
+
 We would like your feed back in developing new ways of sharing, viewing and editing building data in free, open source tools
 
