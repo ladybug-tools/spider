@@ -1,4 +1,4 @@
-## Warmup
+## Warmup Suggestions
 
 Michal:
 
