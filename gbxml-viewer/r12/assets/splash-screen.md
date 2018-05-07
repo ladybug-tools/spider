@@ -1,7 +1,7 @@
 
 ## Ladybug Tools / Spider
 
-# Spider gbXML Viewer R12
+# Aragog Spider gbXML Viewer R12
 
 [gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. <span style=color:magenta>Click or touch the 3D model to get going!</span>
 
@@ -35,10 +35,12 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 </details><details open>
 
-<summary>Welcome 2018-05-03 ~ R12.30</summary>
+<summary>Welcome 2018-05-03 ~ R12.30/31</summary>
 
 * APP: Set 'gbxml-clifton-downs-broken.xml' as default drawing
+* APP: Update to 'Aragog'
 * HUD: fix cad object id not toggling visibility
+* HUD: fix cad object id update
 * REP: set all panels to be closed
 
 </details><details>
