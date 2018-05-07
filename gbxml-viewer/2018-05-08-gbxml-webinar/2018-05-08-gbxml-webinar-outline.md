@@ -1,3 +1,36 @@
+## Warmup
+
+Michal:
+
+Hi everybody
+
+I'm Michal Dengusiak, I'm an <job title> living in Berlin and working with Buro Hapold.  _Perhaps a bit more if you wish..._
+
+I'm here to show you Aragog. A free open source gbXML file viewer that display files in 3D in your browser.
+
+With me is Theo Armour. Hi Theo!
+
+
+Theo:
+
+Hi Michal. Yes, I'm here too.
+
+I am the developer and maintainer.
+
+I am a former licensed architect, former Program Manager for AutoCAD at Autodesk and live in San Francisco.
+
+I have been coding with the Three.js JavaScript library since 2010. My pleaseure in life is coding for 3D.
+
+I want to thank Stephen Roth for creating this event and Chris Mackay for being an excellent Ladybug Tools founder and maintainer.
+
+During the presentation I will try answer any questions in the text chare area.
+
+Michal: back to you.
+
+
+_What to show during this warm-up?_
+
+
 ## Intro ~ 3 minutes
 
 Onscreen: load default file
