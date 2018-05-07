@@ -517,10 +517,10 @@
 			//const newCadIdTxt = surfaceXml.appendChild( newCadId );
 			//console.log( 'newCadIdTxt', newCadIdTxt);
 
-			surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 			surfaceMesh.userData.data.CADObjectId = that.value;
 
-			GBV.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
+			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
 
 		}
 

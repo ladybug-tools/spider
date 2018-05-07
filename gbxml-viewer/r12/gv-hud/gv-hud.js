@@ -619,7 +619,18 @@
 
 		} else {
 
-			alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
+			//alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
+
+			surfaceXml.setAttribute( "CADObjectId", that.value );
+
+			console.log( 'surfaceXml', surfaceXml);
+			//const newCadIdTxt = surfaceXml.appendChild( newCadId );
+			//console.log( 'newCadIdTxt', newCadIdTxt);
+
+			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+			surfaceMesh.userData.data.CADObjectId = that.value;
+
+			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
 
 		}
 
