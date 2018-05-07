@@ -72676,10 +72676,9 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [927670]</CADObjectId>
       <Name>N-RF_101-E-W-485</Name>
     </Surface>
-    
-    <Surface surfaceType="Shade" exposedToSun="true" id="aim130081">
+    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim13008">
       <AdjacentSpaceId spaceIdRef="aim5207"/>
-      <RectangularGeometry id="aim130091">
+      <RectangularGeometry id="aim13009">
         <Azimuth>180</Azimuth>
         <CartesianPoint>
           <Coordinate>6.9</Coordinate>
@@ -72714,9 +72713,10 @@
           </CartesianPoint>
         </PolyLoop>
       </PlanarGeometry>
-      <CADObjectId> </CADObjectId>
+      <CADObjectId>Basic Wall: SIM_EXT_SLD [927801]</CADObjectId>
       <Name>S-RF_101-E-W-486</Name>
     </Surface>
+    
     <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim13019">
       <AdjacentSpaceId spaceIdRef="aim5207"/>
       <RectangularGeometry id="aim13020">

@@ -344,7 +344,7 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			</div>`;
 
 			surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === item.id );
-			surfaceMesh.material.color.set( '#c080ff' );
+			//surfaceMesh.material.color.set( '#c080ff' );
 		}
 
 		ISSsumDuplicateAdjacentSpaces.innerHTML= 'Duplicate Adjacents &raquo;  <span style=background-color:var(--highlight-color); >&nbsp;' + count + ' found&nbsp;</span>';

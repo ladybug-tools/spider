@@ -1361,7 +1361,7 @@
 			element.style.opacity = 0.2;
 		}
 
-		initGbxmlView();
+		//initGbxmlView();
 
 	};
 
