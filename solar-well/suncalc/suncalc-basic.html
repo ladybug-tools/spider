@@ -40,13 +40,50 @@
 
 			<p><button onclick=thing(); >button</button></p>
 
+			<p><a href="https://github.com/mourner/suncalc" target="_blank">suncalc github</a></p>
+
+			<p>Latitude : <input id=inpLatitude size=12 placeholder='' onchange=goIt(); ></p>
+			<p>Longitude: <input id=inpLongitude size=12 placeholder='' onchange=goIt(); ></p>
+
+
 		</div>
 
 	</div>
 
 	<div id = "divMenu" ></div>
 
+	<div id=divTimes ></div>
+
+	<div id=divPosition ></div>
+
 <script>
+
+
+// San Francisco
+	var latitude = 37.796;
+	var longitude = -122.398;
+
+// Paris
+	var latitude = 48.8566;
+	var longitude = 2.3522;
+/*
+
+// Igualada Spain
+	var latitude = 41.5861554761;
+	var longitude = 1.6519343471;
+
+// VNLK
+	var latitude = 27.71110193545;
+	var longitude = 86.71228385040001;
+
+// YGIL Gilgandra
+	var latitude = -31.7276314069;
+	var longitude = 148.63915118805;
+
+// PHOG hawaii
+	var latitude = 20.8968;
+	var longitude = -156.4329;
+*/
 
 	let txt;
 	const b = '<br>';
@@ -55,21 +92,42 @@
 
 	function init() {
 
-		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
 
-		divContents.innerHTML += b + txt;
-
-		var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
-
+		const times = SunCalc.getTimes( new Date(), 51.5, -0.1 );
 		console.log( 'times', times );
 
-		var sunrisePos = SunCalc.getPosition( times.sunrise, 51.5, -0.1 );
+		//let txt = '';
+		//Object.keys( times ).sort().forEach( item => txt += '<tr><td>' + item  + '</td><td>' + times[ item ].toLocaleString() + '</td></tr>' );
 
-		console.log( 'sunrisePos', sunrisePos );
+		divTimes.innerHTML = '<p>' + getJsonToHTML( times ) + '</p>';
 
+
+		var sunrisePos = SunCalc.getPosition( times.sunrise, latitude, longitude );
+		//console.log( 'sunrisePos', sunrisePos );
+		divPosition.innerHTML = '<p>sunrisePos' + getJsonToHTML( sunrisePos ) + '</p>';
+
+		var sunNow = SunCalc.getPosition( new Date(), latitude, longitude );
+		//console.log( 'sunNow', sunNow );
+		divPosition.innerHTML += '<p>sunNow' + getJsonToHTML( sunNow ) + '</p>';
+
+
+		dateThen = new Date( '2013-03-05UTC' );
+		var sunThen = SunCalc.getPosition( dateThen, latitude, longitude );
+		//console.log( 'sunThen', sunThen );
+		divPosition.innerHTML += '<p> sunThen' + getJsonToHTML( sunThen ) + '</p>';
 
 	}
 
+
+	function getJsonToHTML( obj ) {
+
+		let txt = '';
+
+		Object.keys( obj ).sort().forEach( item => txt += '<tr><td>' + item  + '</td><td>' + obj[ item ].toLocaleString() + '</td></tr>' );
+
+		return '<table>' + txt + '</table>';
+
+	}
 
 </script>
 </body>

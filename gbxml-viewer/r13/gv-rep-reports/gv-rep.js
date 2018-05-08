@@ -129,7 +129,9 @@
 
 		const mapLink = REP.getGoogleMap();
 
-		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Building, REPdivCampusBuilding, 'Building ' + mapLink );
+		const wolframAlphaLink = REP.getWolframAlpha();
+
+		GBI.setGbjsonAttributes( GBP.gbjson.Campus.Building, REPdivCampusBuilding, 'Building ' + mapLink + ' ' + wolframAlphaLink );
 
 	};
 
@@ -460,7 +462,7 @@
 
 			const link = 'https://www.google.com/maps/@' + locate.Latitude + ',' + locate.Longitude + ',17z';
 
-			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f310; </a>';
+			linkToMap = ' &raquo; <a href="'+ link + '" style=background-color:lightblue; target=_blank > &#x1f310;</a>';
 
 		} else {
 
@@ -471,6 +473,29 @@
 		return '<span title="Use context menu to open a Google Map in a new tab" >' + linkToMap + '<span>';
 
 	};
+
+
+
+	REP.getWolframAlpha = function() {
+
+		const locate = GBP.gbjson.Campus.Location;  // remember that location is a reserved word in your browser
+		let linkToMap;
+
+		if ( locate && locate.Latitude && locate.Longitude ) {
+
+			const link = 'http://www.wolframalpha.com/input/?i=' + locate.Latitude + '+degrees,+' + locate.Longitude + '+degrees';
+
+			linkToMap = ' <a href="'+ link + '"  target=_blank > info </a>';
+
+		} else {
+
+			linkToMap = '';
+
+		}
+
+		return '<span title="Use context menu to open a Wolfram Alpha in a new tab" >' + linkToMap + '<span>';
+
+	}
 
 
 

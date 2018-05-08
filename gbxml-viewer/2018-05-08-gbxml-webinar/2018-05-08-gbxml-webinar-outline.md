@@ -15,15 +15,17 @@ Theo:
 
 Hi Michal. Yes, I'm here too.
 
+And, yes, I have had the great pleasure of coding this app.
+
 I am the developer and maintainer.
 
 I am a former licensed architect, former Program Manager for AutoCAD at Autodesk and live in San Francisco.
 
-I have been coding with the Three.js JavaScript library since 2010. My pleaseure in life is coding for 3D.
+I have been coding with the Three.js JavaScript library since 2010. My pleasure in life is coding for 3D.
 
 I want to thank Stephen Roth for creating this event and Chris Mackay for being an excellent Ladybug Tools founder and maintainer.
 
-During the presentation I will try answer any questions in the text chare area.
+During the presentation I will try answer any questions in the text chat area.
 
 Michal: back to you.
 
