@@ -3,6 +3,18 @@
 
 ## [SPEED Shadow/Radiant Specification]( #sandbox/speed-solar-data/speed-shadow-radiant-spec.md )
 
+
+## Full screen: [SPEED Shadow Input 2]( https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-3.html )
+
+* Loads a pre-configured, very simple gbXML file
+* Click button to create patches at roughly one x unit x one y unit separation
+* X and Y deltas may be slightly different
+* Use slider to rotate patches to check size and position
+* Ditto wirframe button
+
+
+
+
 ## Full screen: [SPEED Shadow Input 1]( https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-1.html )
 
 * Reads gbXML files via a URL or the file dialog box

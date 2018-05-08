@@ -5,7 +5,7 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-05-06" >
+<meta name = "date" content = "2018-05-07" >
 <title></title>
 <style>
 
@@ -36,9 +36,22 @@
 				<button onclick=toggleWireframe(); >wireframe</button>
 			</p>
 
+			<p>
+				<button onclick=togglePatches(); >toggle patches</button>
+			</p>
+
+			<input id=inpRotation oninput=setRotation(); title="Set the rotation" style="width: 200px;" type="range" min="0" max="1" onchange="" step="0.05" value="0.5" >
+
+			<p>
+			Toggle the patches then:<br>
+			&bull; Use slider to get patches to line up<br>
+			&bull; Use wireframe to double check.
+			</p>
+			<!--
 			<p><input type=file id=inpFile onchange=GBP.openFile(this); ></p>
 
 			<p><button onclick=setOutput(); >set shadow input </button> &nbsp; <button onclick=saveFile(); >save file</button></p>
+			-->
 
 		</div>
 
@@ -62,7 +75,7 @@
 	GBP.surfaceJson = null;
 	GBP.surfaceMeshes;
 	GBP.surfaceEdges;
-	var surfaceNormals, helperNormalsFaces;
+	var patches;
 
 	var sun, ground, vector;
 	var renderer, camera, controls, scene, axesHelper;
@@ -101,7 +114,8 @@
 		//mesh = new THREE.Mesh( geometry, material );
 		//scene.add( mesh );
 
-		GBP.defaultURL = '../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+		//GBP.defaultURL = '../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+		GBP.defaultURL = '../../gbxml-sample-files/debug-testing-files/revit-one-room.xml';
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
@@ -228,10 +242,6 @@
 
 		GBP.zoomObjectBoundingSphere( GBP.surfaceMeshes );
 
-		//drawSun();
-		setSurfaceNormals();
-		drawGround();
-
 		return GBP.gbjson;
 
 	};
@@ -317,7 +327,7 @@
 
 			for ( let surface of surfaces ) {
 
-				if ( surface.surfaceType === 'ExteriorWall' || surface.surfaceType === 'Roof' ) {
+				if ( surface.surfaceType === 'ExteriorWall' || surface.surfaceType === 'Roof' || surface.surfaceType === 'Shade' ) {
 
 				const polyloop = surface.PlanarGeometry.PolyLoop;
 				const points = GBP.getPoints( polyloop );
@@ -486,7 +496,6 @@
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
-		GBP.openingMeshes.visible = true;
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
@@ -516,6 +525,214 @@
 
 	};
 
+
+	function togglePatches() {
+
+
+		if ( patches ) {
+
+			scene.remove( patches );
+
+			patches = undefined;
+
+		} else {
+
+			patches = new THREE.Group();
+
+			drawPatches();
+
+			scene.add ( patches );
+
+		}
+
+	}
+
+
+
+	function drawPatches() {
+
+		for ( mesh of GBP.surfaceMeshes.children ) {
+
+			//mesh.geometry.computeBoundingBox();
+
+			mesh.userData.bbox = bbox = new THREE.Box3().setFromObject( mesh );
+
+			//console.log( 'bbox.min', bbox.min );
+
+			//v = new THREE.Vector3();
+
+			center = bbox.getCenter( new THREE.Vector3() );
+			//console.log( 'center', center );
+
+			size = bbox.getSize( new THREE.Vector3() );
+			//console.log( 'size', size );
+
+			if ( mesh.userData.data.surfaceType === 'SlabOnGrade' ){
+
+				drawRoof( mesh );
+
+			} else if ( mesh.userData.data.surfaceType === 'ExteriorWall' ) {
+
+				drawWall( mesh );
+
+			}
+
+		}
+
+	}
+
+
+
+	function drawRoof( mesh ) {
+
+		//console.log( 'mesh', mesh );
+		const bbox = mesh.userData.bbox;
+
+		const size = bbox.getSize( new THREE.Vector3() );
+		//console.log( 'size', size );
+
+		const gridXCount = Math.floor( size.x );
+		const gridXDelta = size.x / gridXCount;
+
+		const gridYCount = Math.floor( size.y );
+		const gridYDelta = size.y / gridYCount;
+
+		const material = new THREE.MeshBasicMaterial( { color: 'black', opacity: 0.8, side: 2, transparent: true } );
+
+		for ( let x = 0; x < gridXCount; x++ ) {
+
+			for ( let y = 0; y < gridYCount; y++ ) {
+
+				const geometry = new THREE.PlaneBufferGeometry( gridXDelta, gridYDelta );
+				const plane = new THREE.Mesh( geometry, material );
+				plane.position.x = bbox.min.x + 0.5 * gridXDelta + x * gridXDelta;
+				plane.position.y = bbox.min.y + 0.5 * gridYDelta  + y * gridYDelta;
+				plane.position.z = bbox.min.z;
+				plane.rotation.x = 0.5;
+				//plane.rotation.z = 0.5;
+
+				patches.add( plane );
+
+			}
+
+		}
+
+	}
+
+
+
+	function drawWall( mesh ) {
+
+		//console.log( 'mesh', mesh );
+		bbox = mesh.userData.bbox;
+		//console.log( 'bbox', bbox );
+
+		size = bbox.getSize( new THREE.Vector3() );
+		//console.log( 'size', size );
+
+		if ( Math.abs( bbox.min.x - bbox.max.x ) < 0.01 ) { drawWallNorthSouth( mesh ); } else { drawWallEastWest( mesh ); }
+
+	}
+
+
+
+	function drawWallNorthSouth( mesh ) {
+
+		//console.log( 'mesh', mesh );
+
+		const bbox = mesh.userData.bbox;
+		//console.log( 'bbox', bbox );
+
+		const size = bbox.getSize( new THREE.Vector3() );
+		//console.log( 'size', size );
+
+		const gridYCount = Math.floor( size.y );
+		const gridYDelta = size.y / gridYCount;
+
+		const gridZCount = Math.floor( size.z );
+		const gridZDelta = size.z / gridZCount;
+
+		const material = new THREE.MeshBasicMaterial( { color: 'black', opacity: 0.8, side: 2, transparent: true } );
+
+		const planes = new THREE.Group();
+
+		for ( let z = 0; z < gridZCount; z++ ) {
+
+			for ( let y = 0; y < gridYCount; y++ ) {
+
+				const geometry = new THREE.PlaneBufferGeometry( gridZDelta, gridYDelta );
+				geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -0.5 * Math.PI ) );
+				const plane = new THREE.Mesh( geometry, material );
+				plane.position.z = bbox.min.z + 0.5 * gridZDelta + z * gridZDelta;
+				plane.position.y = bbox.min.y + 0.5 * gridYDelta + y * gridYDelta;
+				plane.position.x = bbox.min.x;
+				plane.rotation.x = 0.5;
+				//plane.rotation.z = 0.5;
+
+				patches.add( plane );
+
+			}
+
+		}
+
+	}
+
+
+
+	function  drawWallEastWest( mesh ) {
+
+		//console.log( 'mesh', mesh );
+
+		const bbox = mesh.userData.bbox;
+		//console.log( 'bbox', bbox );
+
+		const size = bbox.getSize( new THREE.Vector3() );
+		//console.log( 'size', size );
+
+		const gridXCount = Math.floor( size.x );
+		const gridXDelta = size.x / gridXCount;
+
+		const gridZCount = Math.floor( size.z );
+		const gridZDelta = size.z / gridZCount;
+
+		const material = new THREE.MeshBasicMaterial( { color: 'black', opacity: 0.8, side: 2, transparent: true } );
+
+		const planes = new THREE.Group();
+
+		for ( let z = 0; z < gridZCount; z++ ) {
+
+			for ( let x = 0; x < gridXCount; x++ ) {
+
+				const geometry = new THREE.PlaneBufferGeometry( gridXDelta, gridZDelta );
+				geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+				const plane = new THREE.Mesh( geometry, material );
+				plane.position.z = bbox.min.z + 0.5 * gridZDelta + z * gridZDelta;
+				plane.position.x = bbox.min.x + 0.5 * gridXDelta + x * gridXDelta;
+				plane.position.y = bbox.min.y;
+				plane.rotation.x = 0.5;
+				//plane.rotation.z = 0.5;
+
+				patches.add( plane );
+
+			}
+
+		}
+
+	}
+
+
+	function setRotation() {
+
+		const rot= parseFloat( inpRotation.value );
+
+		for ( mesh of patches.children ) {
+
+			mesh.rotation.x = rot;
+
+		}
+	}
+
+	//////////
 
 	function drawGround() {
 
@@ -636,6 +853,7 @@
 		a = null;
 
 	}
+
 
 
 	function toggleWireframe() {
