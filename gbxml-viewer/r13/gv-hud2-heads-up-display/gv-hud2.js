@@ -315,7 +315,7 @@
 
 		//alert( 'update space almost working: ' + spaceRef )
 
-		//HUD.setHeadsUp();
+		HUD.setHeadsUp();
 
 	};
 
@@ -475,35 +475,36 @@
 
 
 	HUD.updateCadId = function( that ){
+		//console.log( 'that', that );
 
 		const surface = HUD.userDataData;
-		console.log( 'surface', surface );
+		//console.log( 'surface', surface );
 
 		const id = surface.id;
 
 		HUD.surfacesXml = GBP.gbxml.getElementsByTagName( "Surface" );
 
 		surfaceXml = HUD.surfacesXml[ id ];
-		//console.log( 'surfaceXml',  surfaceXml );
 
 		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
+		//console.log( 'cadObjId', cadObjId );
 
 		if ( cadObjId ) {
 
-			console.log( 'cadObjId', cadObjId.innerHTML );
 
 			//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
-			cadObjId.innerHTML = that.value;
 
-			//console.log( 'that', that.value );
+			//cadObjId.innerHTML = that.value;
+
 
 			surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = that.value;
+			//console.log( 'surfaceXml',  surfaceXml );
 
 			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 
 			surfaceMesh.userData.data.CADObjectId = that.value;
 
-			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
+			GBI.surfaceChanges.CADObjectId.push( { id: id, cadId: that.value } );
 
 			HUD.setHeadsUp();
 
@@ -513,14 +514,14 @@
 
 			surfaceXml.setAttribute( "CADObjectId", that.value );
 
-			console.log( 'surfaceXml', surfaceXml);
+			//console.log( 'surfaceXml', surfaceXml);
 			//const newCadIdTxt = surfaceXml.appendChild( newCadId );
 			//console.log( 'newCadIdTxt', newCadIdTxt);
 
 			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 			surfaceMesh.userData.data.CADObjectId = that.value;
 
-			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
+			GBI.surfaceChanges.CADObjectId.push( { id: id, cadId: that.value } );
 
 		}
 
@@ -677,9 +678,6 @@
 
 
 	};
-
-
-
 
 
 

@@ -74,6 +74,7 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Wish list / To Do
 
+* 2018-05-07 ~ Theo ~ Add 'Edit the Surface' panel?
 * 2018-04-16 ~ Theo ~ continue init menu cleanup
 * 2018-03-31 ~ We now do three specialty reports: 'Surfaces by Type + Exposed to Sun', 'Openings by Type' and 'Cad Object Groups'. Should there be others?
 

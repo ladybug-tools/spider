@@ -207,7 +207,7 @@
 
 				<summary>CAD Object ID</summary>
 
-				<div><button id=GBIbutCadId onclick=HUD.updateCadId(GBIselCadId.value); >Update cad object id of surface</button></div>
+				<div><button id=GBIbutCadId onclick=HUD.updateCadId(GBIselCadId); >Update cad object id of surface</button></div>
 
 				<p><select id=GBIselCadId size=10 ></select></p>
 
@@ -477,6 +477,8 @@
 
 		const cadId = CADObjectGroupId.trim();
 		GBP.surfaceEdges.visible = true;
+		GBP.surfaceMeshes.visible = true;
+		GBP.surfaceOpenings.visible = false;
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 

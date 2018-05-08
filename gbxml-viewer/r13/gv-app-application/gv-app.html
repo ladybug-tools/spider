@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-05-06" >
-<title>Aragog gbXML Viewer 13.14</title>
+<meta name = "date" content = "2018-05-07" >
+<title>Aragog gbXML Viewer 13.15</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -321,12 +321,13 @@
 		const colors = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'khaki', 'yellow',
 			'amber', 'orange', 'deep-orange', 'blue-grey', 'brown', 'grey', 'dark-grey', 'black', 'w3schools' ];
 
-		txt = '';
+		let txt = '';
+		let index = 1;
 
 		for ( let color of colors ){
 
 			txt += '<a href=JavaScript: onclick=setStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
-				' title="' + color + '" >&bull;</a> ';
+				' title="' + ( index++ ) + ' ' + color + '" >&bull;</a> ';
 		}
 
 		divRowButtonsStyle.innerHTML = txt;

@@ -24,7 +24,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-05-06 ~ R13.11/12/13/14</summary>
+<summary>Welcome 2018-05-07 ~ R13.11/12/13/14/15</summary>
 
 We have a new name: "Aragog gbXML Viewer"
 
@@ -41,6 +41,7 @@ HUD /Head-up Display Module
 * Update Space IDs working
 * Rearrange button layout
 * Surface coordinates panel starting to be operational
+* Update Cad Ids fixes
 
 ISS Module / Issues Panel
 * All panels now support the new standardized select + attributes panel

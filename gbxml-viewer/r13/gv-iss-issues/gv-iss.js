@@ -56,6 +56,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
+
 	ISS.getMenuItems = function() {
 
 		divMenuItems.innerHTML =
@@ -604,6 +605,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	ISS.setPanelSurfacesUndefinedCadId = function( target ) {
 
 		ISS.surfacesUndefinedId = GBP.surfaceJson.filter( element => element.CADObjectId === undefined || element.CADObjectId === '' );
+
+		const txt = 'CAD object ID undefined<br>';
+
+		ISS.surfacesUndefinedId.forEach( surface => surface.CADObjectId = 'undefined' );
 
 		/*
 
