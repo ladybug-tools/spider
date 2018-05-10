@@ -60,9 +60,12 @@ The 'reset view' button in the in-world ( center of screen) menu may not always 
 
 ## To Do / Wish List Items
 
+* 2018-05-09 ~ @ek-cel ~ select a number of surfaces with traditional technique: hold Ctrl to add elements to selection and hold Shift to deselect elements.
+* 2018-05-09 ~ @ek-cel ~ have even more functionality: select elements with window. For example, I have many "Exterior Walls" inside the building. I want to select all of them with a selection window similar to Revit or AutoCAD.
+* 2018-05-09 ~ @ek-cel ~ have a Match tool. I would just select an sample surface and spread its properties to the selection.
 * 2018-04-19 ~ Theo ~ Add a 'separate' button that adds a distance between any duplicate items - enable both to be clickable and viewable
 * 2018-04-19 ~ Theo ~ Display issue text in HUD for any surface that has an issue. has had its color changed
-* 2018-04-19 ~ MD ~ HUD ~ Add Flip surface to reverse a normals.
+* 2018-04-19 ~ MD ~ HUD ~ Add flip surface to reverse a normals.
 * 2018-04-19 ~ MD ~ Settings ~ Toggle Normals, Exposure View ... introduce two colors on both side of surface. It will be grey on opposite side to normal and green as we have now on side facing normals to allow easy identification.
 * 2018-04-17 ~ MD ~ Issue ~ Allow multiple selection or all delete of duplicate surfaces.
 * 2018-04-17 ~ MD ~ Report ~ Add Report to display to show internal surfaces that have only one adjacency.  They must have two.

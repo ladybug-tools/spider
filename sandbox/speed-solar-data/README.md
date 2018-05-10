@@ -4,14 +4,20 @@
 ## [SPEED Shadow/Radiant Specification]( #sandbox/speed-solar-data/speed-shadow-radiant-spec.md )
 
 
-## Full screen: [SPEED Shadow Input 2]( https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-3.html )
+## Full screen: [SPEED Shadow Input 3]( https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-3.html )
+
+* As #2
+* Adds create export data and display data on-screen
+* Adds save data to file
+
+
+## Full screen: [SPEED Shadow Input 2]( https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-2.html )
 
 * Loads a pre-configured, very simple gbXML file
 * Click button to create patches at roughly one x unit x one y unit separation
 * X and Y deltas may be slightly different
 * Use slider to rotate patches to check size and position
-* Ditto wirframe button
-
+* Ditto wireframe button
 
 
 

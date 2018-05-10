@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-05-06" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"  ></script>
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divContents" >
+
+			<p>
+				<button onclick=drawAnalemma(); >draw analemma</button>
+			</p>
+
+
+		</div>
+
+		<div id=divPosition ></div>
+
+	</div>
+
+<script>
+
+	var analemma;
+
+	// San Francisco
+	var latitude = 37.796;
+	var longitude = -122.398;
+
+	/*
+	// Paris
+	var latitude = 48.8566;
+	var longitude = 2.3522;
+
+	// Igualada Spain
+	var latitude = 41.5861554761;
+	var longitude = 1.6519343471;
+
+	// VNLK
+	var latitude = 27.71110193545;
+	var longitude = 86.71228385040001;
+
+	// YGIL Gilgandra
+	var latitude = -31.7276314069;
+	var longitude = 148.63915118805;
+
+	// PHOG hawaii
+	var latitude = 20.8968;
+	var longitude = -156.4329;
+	*/
+
+	var renderer, camera, controls, scene, axesHelper;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		divTitle.innerHTML =
+		`<h1>
+			<a href="" >` + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +`</a>
+		</h1>`;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
+
+	}
+
+
+
+
+	function drawAnalemma(){
+
+		const radius = 50;
+		const offsetUTC = -7;
+		const pi05 = Math.PI * 0.5;
+
+		let colors = [ 'bisque', 'deeppink', 'sienna', 'darkorange', 'indigo', 'lime', 'purple', 'honeydew', 'coral', 'gold', 'gray', 'maroon' ];
+		let daysOfMonth = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+		scene.remove( analemma );
+
+		analemma = new THREE.Object3D();
+
+		const year = new Date().getUTCFullYear();
+
+		const materialLine = new THREE.LineBasicMaterial( {
+
+			color: 0xffffff,
+			vertexColors: THREE.VertexColors
+
+		} );
+
+		for ( let hours = 0; hours < 24; hours++ ) {
+
+			const geometryLine = new THREE.Geometry();
+			const vertices = geometryLine.vertices;
+			const hour = hours - offsetUTC / 60;
+			let i = 0;
+
+			for ( let month = 0; month < 12; month++ ) {
+
+				for ( let date = 1; date < daysOfMonth[ month ]; date++ ) {
+
+					const dateUTC = new Date( Date.UTC( year, month, date, hour, 0, 0 ) );
+
+					const sunNow = SunCalc.getPosition( dateUTC, latitude, longitude );
+					//console.log( 'sunNow', sunNow );
+
+					const spherical = new THREE.Spherical( radius, pi05 - sunNow.altitude, sunNow.azimuth, );
+					//console.log( 'spherical', spherical );
+
+					const vector = new THREE.Vector3().setFromSpherical( spherical );
+					//console.log( 'vector', vector );
+
+					vertices.push( vector );
+					geometryLine.colors[ i++ ] = new THREE.Color(  colors[ month ] );
+
+				}
+
+			}
+
+			//console.log( 'vertices', vertices );
+
+			const line = new THREE.Line( geometryLine, materialLine );
+			analemma.add( line );
+
+			//analemmaColor = hours === 0 ? 200 : 120;
+			//analemmaColor = hours === 12 ? 60 : analemmaColor;
+			//placard = drawPlacard( '' + hours, 0.001 * parameters.analemmaRadius, analemmaColor, vertices[ 0 ].x, vertices[ 0 ].y, vertices[ 0 ].z );
+			//analemma.add( placard );
+
+		}
+
+
+		const materialLine2 = new THREE.LineBasicMaterial( { color: 0xbbbbbb } );
+
+		for ( let month = 5; month < 12; month++ ) {
+
+			let geometry = new THREE.Geometry();
+			let vertices = geometry.vertices;
+
+			for ( let hours = 0; hours < 24; hours++ ) {
+
+				dateUTC = new Date( Date.UTC( year, month, 21, hours, 0, 0 ) );
+
+				const sunNow = SunCalc.getPosition( dateUTC, latitude, longitude );
+				//console.log( 'sunNow', sunNow );
+
+				const spherical = new THREE.Spherical( radius, pi05 - sunNow.altitude, sunNow.azimuth, );
+				//console.log( 'spherical', spherical );
+
+				const vector = new THREE.Vector3().setFromSpherical( spherical );
+				//console.log( 'vector', vector );
+
+				vertices.push( vector );
+
+			}
+
+			vertices.push( vertices[ 0 ] );
+
+			const line = new THREE.Line( geometry, materialLine2 );
+			analemma.add( line );
+
+		}
+
+		scene.add( analemma );
+
+	}
+
+
+
+
+	function getJsonToHTML( obj ) {
+
+		let txt = '';
+
+		Object.keys( obj ).sort().forEach( item => txt += '<tr><td>' + item  + '</td><td>' + obj[ item ].toLocaleString() + '</td></tr>' );
+
+		return '<table>' + txt + '</table>';
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>
