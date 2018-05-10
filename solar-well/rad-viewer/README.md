@@ -11,6 +11,9 @@ _Latest project here_
 ## full screen: [rad viewer 4]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-4.html )
 
 * Handles polygons with any number of vertices
+* Adds opacity slider
+* Adds edges and edges toggle
+* Add link to sample file
 
 ## full screen: [rad viewer 3]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-3.html )
 

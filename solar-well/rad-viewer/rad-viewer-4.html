@@ -74,9 +74,23 @@
 
 			<p><input type=file id=inpFile onchange=openFile(this); ></p>
 
-			<p><button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button></p>
+			<p><button onclick=requestFile("https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/Hour_13.0.rad/Hour_13.0.rad") >load Warwick</button></p>
 
-			<p><button onclick=material.wireframe=!material.wireframe; >wireframe</button></p>
+			<p>
+				<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+
+			</p>
+
+			<p>
+				<button onclick=material.wireframe=!material.wireframe; >wireframe</button>
+
+				<button onclick=rad.edges.visible=!rad.edges.visible; >toggle edges</button>
+			</p>
+
+			<div title="building opacity: 0 to 100%" >Opacity
+				<output id=outOpacity class=floatRight >85%</output><br>
+				<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >
+			</div>
 
 			<p><div id=divData ></div></p>
 
@@ -144,7 +158,7 @@
 		mesh = new THREE.Mesh( geometry, material );
 		//scene.add( mesh );
 
-		let url = 'https://rawgit.com/ladybug-tools/spider/master/solar-well/radiance-data-files/sample-file.rad'
+		let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad'
 
 		//const urlCORS = 'https://cors-anywhere.herokuapp.com/';
 
@@ -249,10 +263,11 @@
 
 	function setVerts() {
 
-		const material = new THREE.MeshNormalMaterial( { opacity: 0.75, side: 2, transparent: true } );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
 
-		scene.remove( rad.meshes );
+		scene.remove( rad.meshes, rad.edges );
 		rad.meshes = new THREE.Object3D();
+		rad.edges = new THREE.Object3D();
 
 		for ( let line of rad.data ) {
 
@@ -283,13 +298,19 @@
 
 				const shape = GBP.drawShapeSinglePassObjects( points, material, []);
 
-				rad.meshes.add( shape )
+				const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
+				const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x333333 } ) );
+				surfaceEdge.rotation.copy( shape.rotation );
+				surfaceEdge.position.copy( shape.position );
+
+				rad.meshes.add( shape, surfaceEdge );
+				rad.edges.add( surfaceEdge )
 
 			}
 
 		}
 
-		scene.add( rad.meshes );
+		scene.add( rad.meshes, rad.edges );
 
 	}
 
@@ -367,6 +388,28 @@
 		return GBP.plane;
 
 	};
+
+
+
+
+	function updateOpacity() {
+
+		const opacity = parseInt( rngOpacity.value, 10 );
+		outOpacity.value = opacity + '%';
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh ) {
+
+				child.material.opacity = opacity / 100;
+
+			}
+
+		} );
+
+
+	};
+
 
 
 	function toggleNav() {
