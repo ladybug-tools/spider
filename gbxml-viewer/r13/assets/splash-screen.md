@@ -24,6 +24,19 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
+<summary>Welcome 2018-05-10 ~ R13.16</summary>
+
+REP / Reports Module
+* Add Campus Location has link to Wolfram Alpha information about what is at latitude/longitude
+
+SET / Settings Module
+* 'Explode by storeys' and plus/minus explode all operate better together
+* Grid and ground start position now set at lowest level of exterior walls
+* Add cutting sections along Y and Z axis
+* Add some button change color on click
+
+</details><details open>
+
 <summary>Welcome 2018-05-07 ~ R13.11/12/13/14/15</summary>
 
 We have a new name: "Aragog gbXML Viewer"

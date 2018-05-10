@@ -2,14 +2,8 @@
 
 	var SET = {};
 
-	SET.localClipX1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
-	SET.localClipX2= new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 );
-
-	SET.localClipY1= new THREE.Plane( new THREE.Vector3( 0, -1, 0 ), 0 );
-	SET.localClipY2= new THREE.Plane( new THREE.Vector3( 0, 1, 0 ), 0 );
-
-	SET.localClipZ1= new THREE.Plane( new THREE.Vector3( -0, 0, -1 ), 0 );
-	SET.localClipZ2= new THREE.Plane( new THREE.Vector3( 0, 0, 1 ), 0 );
+	SET.localClip1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
+	SET.localClip2= new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 );
 
 //	initSettings();
 
@@ -120,79 +114,41 @@
 
 					</p>
 
-					<hr>
-
 					<div>
 
 						<b>section view</b><br>
 
-						<div><small><i>Work-in-progress. Click toggles twice to reset. Multiple sections coming next.</i></small></div>
-						<br>
-						<div>
-							<button id=butSectionViewX onclick=SET.toggleSectionViewX() >toggle section view X-axis</button>
-						</div>
-
-						clipping plane front: <output id=outClipX1 >0</output><br>
-						<input type=range id=inpClipX1 max=50 min=-50 step=1 value=0
-						oninput=outClipX1.value=inpClipX1.value;SET.updateCLipX(); title="-50 to 50: OK" >
+						<p><i>Work-in-progress</i></p>
 
 						<div>
-							clipping plane back: <output id=outClipX2 >-10</output><br>
-							<input type=range id=inpClipX2 max=50 min=-50 step=1 value=-10
-							oninput=outClipX2.value=inpClipX2.value;SET.updateCLipX(); title="-50 to 50: OK" >
+							<button id=butSectionView onclick=SET.toggleSectionView() >toggle section view</button>
 						</div>
 
-						<br>
-
-						<div>
-						<button id=butSectionViewY onclick=SET.toggleSectionViewY() >toggle section view Y-axis</button>
-						</div>
-
-						clipping plane front: <output id=outClipY1 >0</output><br>
-						<input type=range id=inpClipY1 max=50 min=-50 step=1 value=0
-						oninput=outClipY1.value=inpClipY1.value;SET.updateCLipY(); title="-50 to 50: OK" >
-
-						<div>
-							clipping plane back: <output id=outClipY2 >-10</output><br>
-							<input type=range id=inpClipY2 max=50 min=-50 step=1 value=-10
-							oninput=outClipY2.value=inpClipY2.value;SET.updateCLipY(); title="-50 to 50: OK" >
-						</div>
-
-						<br>
-
-						<div>
-						<button id=butSectionViewZ onclick=SET.toggleSectionViewZ() >toggle section view Z-axis</button>
-						</div>
-
-						clipping plane front: <output id=outClipZ1 >0</output><br>
-						<input type=range id=inpClipZ1 max=50 min=-50 step=1 value=0
-						oninput=outClipZ1.value=inpClipZ1.value;SET.updateCLipZ(); title="-50 to 50: OK" >
-
-						<div>
-							clipping plane back: <output id=outClipZ2 >-10</output><br>
-							<input type=range id=inpClipZ2 max=50 min=-50 step=1 value=-10
-							oninput=outClipZ2.value=inpClipZ2.value;SET.updateCLipZ(); title="-50 to 50: OK" >
-						</div>
-
-
-						<!--
-						<div>
-						rotate section on Z-axis: <output id=outRotate >0</output><br>
-						<input type=range id=inpRotate max=180 min=-180 step=1 value=1
-						oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
-						</div>
-
+						clipping plane front: <output id=outClip1 >0</output><br>
+						<input type=range id=inpClip1 max=50 min=-50 step=1 value=0
+						oninput=outClip1.value=inpClip1.value;SET.updateCLipX(); title="-50 to 50: OK" >
 					</div>
 
-						-->
-					<hr>
 
+					<div>
+						clipping plane back: <output id=outClip2 >-10</output><br>
+						<input type=range id=inpClip2 max=50 min=-50 step=1 value=-10
+						oninput=outClip2.value=inpClip2.value;SET.updateCLipX(); title="-50 to 50: OK" >
+					</div>
+
+					<!--
+					<div>
+					rotate section on Z-axis: <output id=outRotate >0</output><br>
+					<input type=range id=inpRotate max=180 min=-180 step=1 value=1
+					oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
+					</div>
+					-->
 				</details>`;
 
 			//+ divMenuItems.innerHTML;
 
 			//SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
-			SET.butSettings.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
+			SET.butSettings.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 			butts = detSettings.getElementsByTagName( "button" );
 			//console.log( 'butts', butts );
@@ -449,10 +405,7 @@
 
 		if ( !meshGridHelper) {
 
-			const meshes = GBP.surfaceMeshes.children.filter( attribute => attribute.userData.data.surfaceType === 'ExteriorWall' );
-			const obj = new THREE.Object3D();
-			obj.children = meshes;
-			const bbox = new THREE.Box3().setFromObject( obj );
+			const bbox = new THREE.Box3().setFromObject( GBP.surfaceMeshes );
 
 			meshGridHelper = new THREE.GridHelper( 3 * GBP.surfaceMeshes.userData.radius, 20, 'green', 'lightgreen' );
 			meshGridHelper.rotation.x = Math.PI / 2;
@@ -478,10 +431,7 @@
 
 		if ( !meshGroundHelper ) {
 
-			const meshes = GBP.surfaceMeshes.children.filter( attribute => attribute.userData.data.surfaceType === 'ExteriorWall' );
-			const obj = new THREE.Object3D();
-			obj.children = meshes;
-			const bbox = new THREE.Box3().setFromObject( obj );
+			const bbox = new THREE.Box3().setFromObject( GBP.surfaceMeshes );
 
 			const geometry = new THREE.BoxBufferGeometry( 3 * GBP.surfaceMeshes.userData.radius, 3 * GBP.surfaceMeshes.userData.radius, 1  );
 			const material = new THREE.MeshPhongMaterial( { color: 'green', opacity: 0.85, transparent: true } );
@@ -629,27 +579,44 @@
 		const s = 1;
 
 		GBP.surfaceEdges.visible = false;
-		GBP.surfaceOpenings.visible = false;
 
 		const bbox = new THREE.Box3().setFromObject( GBP.surfaceMeshes );
-		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+		const sphere = bbox.getBoundingSphere();
 		const center = sphere.center;
 		const radius = sphere.radius;
 
 		THR.scene.updateMatrixWorld();
 
-		GBP.surfaceMeshes.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
-			if ( child.geometry && child.geometry.boundingSphere ) {
+			if ( child instanceof THREE.Mesh ) {
 
 				child.updateMatrixWorld();
 
-				const position = child.geometry.boundingSphere.center.clone();
-				position.applyMatrix4( child.matrixWorld );
+				if ( !child.userData.positionStart ) {
 
-				const vec = position.sub( center ).normalize().multiplyScalar( s )
+					if ( child.geometry.boundingSphere ) {
 
-				child.position.add( vec );
+						const pp = child.geometry.boundingSphere.center.clone();
+						pp.applyMatrix4( child.matrixWorld );
+						child.userData.positionStart = pp;
+
+					} else {
+
+						child.userData.positionStart = child.position.clone();
+
+					}
+
+					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
+
+				}
+
+				//const p = child.userData.positionStart.clone();
+				const vec = child.userData.vectorStart.clone();
+
+				//child.position.add( new THREE.Vector3( 1.2 * ( vec.x ), 1.2* ( vec.y ), 0 ) );
+				child.position.add( vec.multiplyScalar( s ) );
+
 
 			}
 
@@ -661,32 +628,47 @@
 
 	SET.explodeMinus = function() {
 
-		if ( SET.explodeStart === false ) { SET.explodeInit(); }
-
 		const s = 1;
 
+		if ( SET.explodeStart === false ) { SET.explodeInit(); }
+
 		GBP.surfaceEdges.visible = false;
-		GBP.surfaceOpenings.visible = false;
 
 		const bbox = new THREE.Box3().setFromObject( GBP.surfaceMeshes );
-		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+		const sphere = bbox.getBoundingSphere();
 		const center = sphere.center;
 		const radius = sphere.radius;
 
 		THR.scene.updateMatrixWorld();
 
-		GBP.surfaceMeshes.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
-			if ( child.geometry && child.geometry.boundingSphere ) {
+			if ( child instanceof THREE.Mesh ) {
 
 				child.updateMatrixWorld();
 
-				const position = child.geometry.boundingSphere.center.clone();
-				position.applyMatrix4( child.matrixWorld );
+				if ( !child.userData.positionStart ) {
 
-				const vec = position.sub( center ).normalize().multiplyScalar( s )
+					if ( child.geometry.boundingSphere ) {
 
-				child.position.sub( vec );
+						const pp = child.geometry.boundingSphere.center.clone();
+						pp.applyMatrix4( child.matrixWorld );
+						child.userData.positionStart = pp;
+
+					} else {
+
+						child.userData.positionStart = child.position.clone();
+
+					}
+
+					child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
+
+				}
+
+				const p = child.userData.positionStart.clone();
+				const vec = child.userData.vectorStart.clone();
+
+				child.position.sub( vec.multiplyScalar( s ) );
 
 			}
 
@@ -706,7 +688,8 @@
 		GBP.surfaceOpenings.visible = false;
 
 		const bbox = new THREE.Box3().setFromObject( GBP.surfaceMeshes );
-		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+		const sphere = bbox.getBoundingSphere();
+		//const center = sphere.center;
 		const radius = sphere.radius;
 
 		THR.scene.updateMatrixWorld();
@@ -717,18 +700,38 @@
 
 				child.updateMatrixWorld();
 
-				if ( !child.userData.positionStart2 ) {
+				if ( !child.userData.positionStart ) {
 
-					const positionStart2 = child.geometry.boundingSphere.center.clone();
-					positionStart2.applyMatrix4( child.matrixWorld );
-					child.userData.positionStart2 = positionStart2;
+					//if ( child.geometry.boundingSphere ) {
+
+						const positionStart = child.geometry.boundingSphere.center.clone();
+						positionStart.applyMatrix4( child.matrixWorld );
+						child.userData.positionStart = positionStart;
+
+					/*
+					} else {
+
+
+						// may not be necessary
+						console.log( 'child', child );
+						child.userData.positionStart = child.position.clone();
+
+					}
+
+					//child.userData.vectorStart = child.userData.positionStart.clone().sub( center ).normalize();
+					*/
+
+					child.userData.vectorStart = child.userData.positionStart.clone();
 
 				}
 
-				child.userData.vectorStart = child.userData.positionStart2.clone();
 				const vec = child.userData.vectorStart.clone();
 
-				child.position.z += 3 * vec.z - radius;
+				//child.position.add( new THREE.Vector3( 1.2 * ( vec.x ), 1.2* ( vec.y ), 0 ) );
+				//child.position.add( vec.multiplyScalar( s ) );
+
+				const explodeZ = new THREE.Vector3( 0, 0, 3 * vec.z - radius );
+				child.position.add( explodeZ );
 
 			}
 
@@ -771,24 +774,24 @@
 
 		const origin = THR.axesHelper.position.x;
 
-		SET.localClipX1.constant = origin + parseInt( inpClipX1.value, 10 );
+		SET.localClip1.constant = origin + parseInt( inpClip1.value, 10 );
 
-		SET.localClipX2.constant = - origin + - parseInt( inpClipX2.value, 10 );
+		SET.localClip2.constant = - origin + - parseInt( inpClip2.value, 10 );
 		//console.log( '', SET.localClip2.constant );
 
 	}
 
 
 
-	SET.toggleSectionViewX = function() {
+	SET.toggleSectionView = function() {
 
-		if ( butSectionViewX.style.backgroundColor !== COR.colorButtonToggle ) {
+		if ( butSectionView.style.backgroundColor !== 'aqua' ) {
 
 			THR.scene.traverse( function ( child ) {
 
 				if ( child instanceof THREE.Mesh ) {
 
-					child.material.clippingPlanes = [ SET.localClipX1, SET.localClipX2 ],
+					child.material.clippingPlanes = [ SET.localClip1, SET.localClip2 ],
 					child.material.clipShadows = true,
 					child.material.needsUpdate = true;
 
@@ -797,10 +800,7 @@
 			} );
 
 			THR.renderer.localClippingEnabled = true;
-			butSectionViewX.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-
-			butSectionViewY.style.cssText = '';
-			butSectionViewZ.style.cssText = '';
+			butSectionView.style.backgroundColor = 'aqua';
 
 			//SET.localClip1.constant = THR.axesHelper.position.x;
 
@@ -810,120 +810,8 @@
 
 			THR.renderer.localClippingEnabled = false;
 
-			butSectionViewX.style.cssText = '';
-			butSectionViewY.style.cssText = '';
-			butSectionViewZ.style.cssText = '';
+			butSectionView.style.backgroundColor = '';
 
-		}
-
-	}
-
-
-
-
-	SET.updateCLipY = function() {
-
-		const origin = THR.axesHelper.position.y;
-
-		SET.localClipY1.constant = origin + parseInt( inpClipY1.value, 10 );
-
-		SET.localClipY2.constant = - origin + - parseInt( inpClipY2.value, 10 );
-		//console.log( '', SET.localClip2.constant );
-
-	}
-
-
-
-	SET.toggleSectionViewY = function() {
-
-		if ( butSectionViewY.style.backgroundColor !== COR.colorButtonToggle ) {
-
-			THR.scene.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-
-					child.material.clippingPlanes = [ SET.localClipY1, SET.localClipY2 ],
-					child.material.clipShadows = true,
-					child.material.needsUpdate = true;
-
-				}
-
-			} );
-
-			THR.renderer.localClippingEnabled = true;
-			butSectionViewY.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-
-			butSectionViewX.style.cssText = '';
-			butSectionViewZ.style.cssText = '';
-			//SET.localClip1.constant = THR.axesHelper.position.x;
-
-			SET.updateCLipY();
-
-		} else {
-
-			THR.renderer.localClippingEnabled = false;
-
-			butSectionViewX.style.cssText = '';
-			butSectionViewY.style.cssText = '';
-			butSectionViewZ.style.cssText = '';
-
-		}
-
-	}
-
-
-
-
-	SET.updateCLipZ = function() {
-
-		const origin = THR.axesHelper.position.z;
-
-		SET.localClipZ1.constant = origin + parseInt( inpClipZ1.value, 10 );
-
-		SET.localClipZ2.constant = - origin + - parseInt( inpClipZ2.value, 10 );
-		//console.log( '', SET.localClip2.constant );
-
-	}
-
-
-
-	SET.toggleSectionViewZ = function() {
-
-		console.log( 'butSectionViewZ.style.backgroundColor', butSectionViewZ.style.backgroundColor );
-		if ( butSectionViewZ.style.backgroundColor !== COR.colorButtonToggle ) {
-
-			THR.scene.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-
-					child.material.clippingPlanes = [ SET.localClipZ1, SET.localClipZ2 ],
-					child.material.clipShadows = true,
-					child.material.needsUpdate = true;
-
-				}
-
-			} );
-
-			THR.renderer.localClippingEnabled = true;
-			butSectionViewZ.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-			butSectionViewX.style.cssText = '';
-			butSectionViewY.style.cssText = '';
-
-			//SET.localClip1.constant = THR.axesHelper.position.x;
-
-			SET.updateCLipZ();
-
-		} else {
-
-			THR.renderer.localClippingEnabled = false;
-
-			butSectionViewX.style.cssText = '';
-			butSectionViewY.style.cssText = '';
-			butSectionViewZ.style.cssText = '';
-
-			//butSectionViewZ.style.backgroundColor = '';
-			//butSectionViewZ.style.fontStyle = '';
-			//butSectionViewZ.style.fontWeight = '';
 		}
 
 	}

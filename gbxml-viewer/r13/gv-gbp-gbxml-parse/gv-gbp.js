@@ -494,7 +494,7 @@
 		const triangle = new THREE.Triangle();
 		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
 		const pl = new THREE.Plane();
-		GBP.plane = triangle.plane( pl );
+		GBP.plane = triangle.getPlane( pl );
 
 		//if ( triangle.area() != 0 ) {
 
@@ -512,7 +512,7 @@
 
 		//} else
 
-		if ( triangle.area() === 0 ) {
+		if ( triangle.getArea() === 0 ) {
 
 			start++;
 			GBP.getPlane( points, start );
@@ -530,7 +530,7 @@
 		const bbox = new THREE.Box3().setFromObject( obj );
 		GBP.boundingBox = bbox;
 
-		const sphere = bbox.getBoundingSphere();
+		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
 		const center = sphere.center;
 		const radius = sphere.radius;
 

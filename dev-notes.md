@@ -24,6 +24,14 @@ gltf?
 _This particular change log mostly covers info in this read me. Most folders here each have their own equally fascinating read me file._
 
 
+
+### 2018-05-10 ~ Theo
+
+AGV
+* Should openings have their own opacity slider?
+* What about every surface type?
+
+
 ### 2018-04-02 ~ Theo
 
 If a functions returns something it's a 'get'

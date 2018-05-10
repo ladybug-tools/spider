@@ -603,13 +603,14 @@
 
 	GBI.setSurfaceTypeInvisible = function( that ) {
 
-		that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
+		console.log( '', that );
+		//that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
-			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === 'lightblue' ) {
+			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === COR.colorButtonToggle ) {
 
 				child.visible = false;
 

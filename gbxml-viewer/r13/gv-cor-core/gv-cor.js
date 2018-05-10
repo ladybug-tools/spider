@@ -11,6 +11,7 @@
 	COR.threeDefaultFile = '../gv-thr-threejs/gv-thr-run.html';
 	COR.uriDefaultFile = '../assets/splash-screen.md';
 
+	COR.colorButtonToggle = 'pink';
 
 	COR.initCore = function() {
 

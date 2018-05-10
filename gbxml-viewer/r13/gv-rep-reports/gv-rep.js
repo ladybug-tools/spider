@@ -312,7 +312,7 @@
 		for ( let i = 0; i < types.length; i++ ) {
 
 			txt +=
-				`<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this) value=` +
+				`<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this);toggleButtonColor(this); value=` +
 					types[ i ] +
 					`><img src="../assets/eye.png" height=18></button>
 					<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >` +
@@ -341,6 +341,19 @@
 	};
 
 
+	function toggleButtonColor( that ) {
+
+		if ( that.style.backgroundColor !== COR.colorButtonToggle ) {
+
+			that.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
+
+		} else {
+
+			that.style.cssText = '';
+
+		}
+
+	}
 
 	REP.setMenuPanelOpeningsByType = function( target ) {
 
