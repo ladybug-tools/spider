@@ -11,7 +11,12 @@ _All of the above are embedded interactive scripts available here_
 
 ## Ladybug Tools / Spider: [Latest Issues and Updates]( #plugins/view-github-issues.html )
 
-## Apps: [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ ) ~ [gbXML Viewer  Dev]( http://www.ladybug.tools/spider/gbxml-viewer/dev/ ) ~ [Analemma 3D]( https://rawgit.com/ladybug-tools/spider/master/analemma3d/index.html ) ~ [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
+## Examples
+
+* [gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+* [gbXML Viewer  Dev]( http://www.ladybug.tools/spider/gbxml-viewer/dev/ )
+* [Analemma 3D]( https://rawgit.com/ladybug-tools/spider/master/analemma3d/index.html )
+* [Burning mAnalemma 2017]( https://rawgit.com/ladybug-tools/spider/master/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
 
 ***
 
