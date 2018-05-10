@@ -29,6 +29,8 @@ Full polygons with greater than four sides still to be done
 * Add toggle rotation
 * Add toggle wireframe view
 
+There seems to be small errors here and there with openings. I have not yet identified the data not being rendered properly.
+
 ## full screen: [rad viewer 1]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-1.html )
 
 
