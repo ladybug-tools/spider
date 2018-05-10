@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library with menu sliding" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-08" >
+<title></title>
+<style>
+/* Copyright 2018 pushMe pullYou authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: cornsilk; --mnu-width:300px; height: 100%; }
+
+	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
+
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #888; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: white }
+
+	iframe { width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+/*
+	td { vertical-align: top; }
+
+	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
+*/
+
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 20px;
+		overflow-x: hidden; padding: 25px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+
+	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+
+	@media screen and (max-width: 600px) {
+		#divMenu {
+		display: none;
+		}
+	}
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div>
+			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo;
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
+			<a href="../index.html" target="_"top style=font-size:24px; >&#x2302;</a> &raquo;
+		</div>
+
+		<h1>
+			<a href="https://github.com/ladybug-tools/spider/tree/master/cookbook" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+			<a href="" ><script>
+			document.write( location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) );
+			//document.write( document.title );
+			</script></a>
+		</h1>
+
+		<div id = "divMenu2" >
+
+			<p><input type=file id=inpFile onchange=openFile(this); ></p>
+
+			<p><button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button></p>
+
+			<p><button onclick=material.wireframe=!material.wireframe; >wireframe</button></p>
+
+			<p><div id=divData ></div></p>
+
+			<p><div id=divLog ></div></p>
+
+		</div>
+
+
+		<div id = "divContents" >
+
+		</div>
+
+	</div>
+
+	<div id = "hamburger" onclick=toggleNav(); > slide &#9776; </div>
+
+<script>
+
+	var GBP = {};
+	var rad = {};
+	rad.meshes = null;
+
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh, axesHelper;
+
+	init();
+	animate();
+
+	function init() {
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+		renderer.shadowMap.enabled = true;
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 30, 30, 30 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		size = 100
+		lightDirectional = new THREE.DirectionalLight( 0xffffff );
+		lightDirectional.position.set( -size, size, size );
+	//	lightDirectional.shadow.camera.scale.set( 0.1 * size, 0.1 * size, 0.5 );
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+		axesHelper = new THREE.AxesHelper( 50 );
+		scene.add( axesHelper );
+
+		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		//scene.add( mesh );
+
+		let url = 'https://rawgit.com/ladybug-tools/spider/master/solar-well/radiance-data-files/sample-file.rad'
+
+		//const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		requestFile( url );
+
+	}
+
+
+
+	function requestFile( url ) {
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+
+	function callback( xhr ) {
+		const response = xhr.target.response;
+		//console.log( 'response', response );
+
+		parseFile( response );
+
+	}
+
+
+
+	function openFile( files ) {
+
+		var fileData, reader, data;
+
+		reader = new FileReader();
+		reader.onload = function( event ) {
+
+			//divData.innerHTML = reader.result;
+
+			divLog.innerHTML =
+				'name: ' + files.files[0].name + '<br>' +
+				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
+				'type: ' + files.files[0].type + '<br>' +
+				'modified: ' + files.files[0].lastModifiedDate.toLocaleDateString() +
+			'';
+
+			//console.log( '', files );
+
+			parseFile( reader.result );
+
+		}
+
+		reader.readAsText( files.files[0] );
+
+	}
+
+
+
+	function parseFile( text ) {
+
+		const lines = text.split(/\r\n|\n/);
+
+		const items = [ 'header'];
+		const data = [];
+		let tmp = [];
+
+		for ( line of lines ) {
+
+			//			if ( line.slice( 0, 7) === 'generic' || line.slice( 0, 3 ) === 'Ext') {
+			if ( line.search( /[a-z]/ ) >= 0) {
+
+				items.push( [ line, data ] );
+				data.push( tmp );
+				tmp = [];
+
+			} else {
+
+				tmp.push( line );
+
+			}
+
+		}
+
+		data.push( tmp );
+
+		rad.items = items;
+		rad.data = data;
+
+		setVerts();
+
+		divContents.innerHTML =
+			`<p>length: ${text.length.toLocaleString()}</p>
+			<p>lines: ${lines.length.toLocaleString()}</p>
+			<p>faces: ${(items.length - 1).toLocaleString()}</p>
+		`;
+
+	}
+
+
+
+	function setVerts() {
+
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.75, side: 2, transparent: true } );
+
+		scene.remove( rad.meshes );
+		rad.meshes = new THREE.Object3D();
+
+		for ( let line of rad.data ) {
+
+			const length = parseInt( line[ 2 ], 10 ) / 3 + 3;
+			const points = [];
+
+			for ( let i = 3; i < length; i++ ) {
+
+				line[ i ] = line[ i ].replace( /  /g, ' ' ); // use regex??
+				const arr = line[ i ].split( ' ' ).map( item => parseFloat( item ) );
+				//console.log( 'line', line );
+
+				const vertex = new THREE.Vector3().fromArray( arr );
+				//console.log( 'vertex', vertex );
+
+				points.push( vertex );
+
+				//if ( length === 3 ) { points.push( line[ 3 ] ); }
+
+			}
+			//console.log( 'points', points );
+
+			if (points.length === 0 ) {
+
+				continue;
+
+			} else {
+
+				const shape = GBP.drawShapeSinglePassObjects( points, material, []);
+
+				rad.meshes.add( shape )
+
+			}
+
+		}
+
+		scene.add( rad.meshes );
+
+	}
+
+
+
+	GBP.drawShapeSinglePassObjects = function( vertices, material, holes ) {
+
+		const plane = GBP.getPlane( vertices );
+
+		const obj = new THREE.Object3D();
+		obj.lookAt( plane.normal );  // copy the rotation of the triangle
+		obj.quaternion.conjugate();
+		obj.updateMatrixWorld();
+
+		vertices.map( vertex => obj.localToWorld( vertex ) );
+
+		const shape = new THREE.Shape( vertices );
+		//shape.autoClose = true;
+
+		for ( let verticesHoles of holes ) {
+
+			const hole = new THREE.Path();
+
+			verticesHoles.map( vertex => obj.localToWorld( vertex ) );
+
+			hole.setFromPoints( verticesHoles );
+
+			shape.holes.push( hole );
+
+		}
+
+		const geometryShape = new THREE.ShapeGeometry( shape );
+
+		// material to here
+		const shapeMesh = new THREE.Mesh( geometryShape, material );
+
+		shapeMesh.lookAt( plane.normal );
+		shapeMesh.position.copy( plane.normal.multiplyScalar( - plane.constant ) );
+
+		return shapeMesh;
+
+	};
+
+
+	GBP.getPlane = function( points, start = 0 ) {
+
+		const triangle = new THREE.Triangle();
+		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+		const pl = new THREE.Plane();
+		GBP.plane = triangle.plane( pl );
+
+		//if ( triangle.area() != 0 ) {
+
+			/*
+			if ( start > 1 ) {
+				console.log( 'start', start );
+				console.log( 'triangle', triangle );
+				console.log( 'area', triangle.area() );
+				console.log( 'normal', triangle.normal() );
+				pl.normal.y = 0;
+				console.log( 'plane', pl );
+			}
+			*/
+			//return plane;
+
+		//} else
+
+		if ( triangle.area() === 0 ) {
+
+			start++;
+			GBP.getPlane( points, start );
+
+		}
+
+		return GBP.plane;
+
+	};
+
+
+	function toggleNav() {
+
+		const left = 'calc( var( --mnu-width ) - 100px )';
+
+		if ( hamburger.style.left === '' || hamburger.style.left === left ) {
+
+			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			hamburger.style.left = '-100px';
+
+		} else {
+
+			divMenu.style.left = 0;
+			hamburger.style.left = left;
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>
