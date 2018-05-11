@@ -5,7 +5,7 @@
 
 	var REP = {};
 
-	REP.initRep = function () { // called from bottom of file
+	REP.initRep = function () { // call ed bottom of file
 
 		if ( window.butMenuLoad ) {
 
@@ -27,7 +27,7 @@
 
 			REP.setMenuItems( divMenuItems );
 
-			REP.butMenuReports.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
+			REP.butMenuReports.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 			const butts = divMenuItems.getElementsByTagName( "button" );
 			//console.log( 'butts', butts );
@@ -43,8 +43,8 @@
 			//divMenuItems.remove();
 			divMenuItems.innerHTML = '';
 
-			REP.butMenuReports.style.fontStyle = '';
 			REP.butMenuReports.style.backgroundColor = '';
+			REP.butMenuReports.style.fontStyle = '';
 			REP.butMenuReports.style.fontWeight = '';
 
 		}
@@ -61,11 +61,9 @@
 
 		target.innerHTML  =
 
-		`<details id = "detReports" open >
+		`<details id = "detReports" class = "app-menu" open >
 
-			<summary>Reports &nbsp; <a href=#../gv-rep-reports/README.md>?</a></summary>
-
-			<br>
+			<summary>Reports</summary>
 
 			<div id=REPdivMenuPanelPrelims ></div>
 
@@ -311,37 +309,25 @@
 
 		}
 
-		// do we want to sort types?
-
 		for ( let i = 0; i < types.length; i++ ) {
 
-
-			color =  GBP.colorsDefault[types[ i ]] ?  GBP.colorsDefault[types[ i ]].toString( 16 ) : '';
-			console.log( 'col', color );
-
 			txt +=
-			`
-				<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this);toggleButtonColor(this);
-					value=` + types[ i ] + `><img src="../assets/eye.png" height=18>
-				</button>
-
-				<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText);
-					style="background-color:#` + color + ` !important;" >` +
+				`<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this);toggleButtonColor(this); value=` +
 					types[ i ] +
-				`</button> ` +
-
-				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
-			`'%<br>`;
+					`><img src="../assets/eye.png" height=18></button>
+					<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >` +
+					types[ i ] +
+					`</button>: ` +
+					typesCount[ i ] + '-' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
+				`'%<br>`;
 
 		}
 
-
-
 		const details =
 
-		`<details id=REPdetSurfaceTypes >
+		`<details >
 
-			<summary >Surfaces by Type &raquo; ` + types.length + ` found</summary>
+			<summary >Surfaces by Type &raquo; ` + types.length + `</summary>
 
 			<div>` + txt +
 				`<p><button class=toggle onclick=GBI.setExposedToSunVisible(); >Exposed to Sun</button> </p>
@@ -350,23 +336,16 @@
 
 		</details>`;
 
-
 		target.innerHTML = details;
-
-		butts = REPdetSurfaceTypes.getElementsByClassName( "toggleView" );
-
-		for ( let butt of butts ) toggleButtonColor( butt );
 
 	};
 
 
 	function toggleButtonColor( that ) {
 
-		const cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-
 		if ( that.style.backgroundColor !== COR.colorButtonToggle ) {
 
-			that.style.cssText = cssText;
+			that.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 
 		} else {
 
@@ -375,8 +354,6 @@
 		}
 
 	}
-
-
 
 	REP.setMenuPanelOpeningsByType = function( target ) {
 

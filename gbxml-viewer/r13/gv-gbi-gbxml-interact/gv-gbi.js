@@ -603,7 +603,7 @@
 
 	GBI.setSurfaceTypeInvisible = function( that ) {
 
-		console.log( '', that );
+		//console.log( '', that );
 		//that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
 
 		for ( let child of GBP.surfaceMeshes.children ) {

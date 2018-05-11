@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-05-06" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"  ></script>
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divContents" >
+
+			<p>
+				<button onclick=setSunOne(); >setSunOne</button>
+			</p>
+
+			<p>
+				<button onclick=setSun24(); >setSun24</button>
+			</p>
+
+			<p>
+				<button onclick=setSun24x12(); >setSun24x12</button>
+			</p>
+
+			<p>
+				<button onclick=setSun24x12xLines(); >setSun24x12xLines</button>
+			</p>
+		</div>
+
+		<div id=divPosition ></div>
+
+	</div>
+
+<script>
+
+	var suns;
+
+// San Francisco
+	var latitude = 37.796;
+	var longitude = -122.398;
+
+// Paris
+	var latitude = 48.8566;
+	var longitude = 2.3522;
+/*
+
+// Igualada Spain
+	var latitude = 41.5861554761;
+	var longitude = 1.6519343471;
+
+// VNLK
+	var latitude = 27.71110193545;
+	var longitude = 86.71228385040001;
+
+// YGIL Gilgandra
+	var latitude = -31.7276314069;
+	var longitude = 148.63915118805;
+
+// PHOG hawaii
+	var latitude = 20.8968;
+	var longitude = -156.4329;
+*/
+
+	var renderer, camera, controls, scene, axesHelper;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		divTitle.innerHTML =
+		`<h1>
+			<a href="" >` + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +`</a>
+		</h1>`;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		geometry = new THREE.BoxGeometry( 5, 5, 5 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
+
+		/*
+		dateThen = new Date( '2013-03-05UTC' );
+		var sunThen = SunCalc.getPosition( dateThen, latitude, longitude );
+		//console.log( 'sunThen', sunThen );
+		divPosition.innerHTML += '<p> sunThen' + getJsonToHTML( sunThen ) + '</p>';
+		*/
+
+
+	}
+
+
+
+	function setSunOne(){
+
+		divPosition.innerHTML = '';
+		scene.remove( suns );
+
+		const dateThen = new Date( '2013-03-05UTC' );
+		console.log( 'dateThen', dateThen );
+		const sunThen = SunCalc.getPosition( dateThen, latitude, longitude );
+		//console.log( 'sunThen', sunThen );
+		divPosition.innerHTML += '<p> sunThen' + getJsonToHTML( sunThen ) + '</p>';
+
+		const dateThen2 = new Date( Date.UTC( 2013, 2, 5 ) );
+		console.log( 'dateThen2', dateThen2 );
+		sunThen2 = SunCalc.getPosition( dateThen2, latitude, longitude );
+		//console.log( 'sunThen', sunThen );
+		divPosition.innerHTML += '<p> sunThen 2' + getJsonToHTML( sunThen2 ) + '</p>';
+
+		spherical = new THREE.Spherical( 50, sunThen2.altitude, sunThen2.azimuth );
+		console.log( 'spherical', spherical );
+
+		geometry = new THREE.BoxGeometry( 2, 2, 2 );
+		material = new THREE.MeshNormalMaterial();
+		suns = new THREE.Mesh( geometry, material );
+		suns.position.setFromSpherical( spherical );
+		scene.add( suns );
+
+	}
+
+
+
+	function setSun24(){
+
+		const material = new THREE.MeshNormalMaterial();
+		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
+
+		divPosition.innerHTML = '';
+		scene.remove( suns );
+		suns = new THREE.Object3D();
+
+		for ( let i = 0; i < 24; i++ ) {
+
+			const dateNow = new Date( Date.UTC( 2013, 2, 5, i ) );
+			//console.log( 'dateNow', dateNow );
+
+			const sunNow = SunCalc.getPosition( dateNow, latitude, longitude );
+			console.log( 'sunNow', sunNow );
+
+			divPosition.innerHTML += '<div>' + getJsonToHTML( sunNow ) + '</div>';
+
+			const spherical = new THREE.Spherical( 50, 0.5 * Math.PI - sunNow.altitude, sunNow.azimuth, );
+			//console.log( 'spherical', spherical );
+
+			//vector = new THREE.Vector3().setFromSpherical( spherical );
+			//console.log( 'vector', vector );
+
+			const mesh = new THREE.Mesh( geometry.clone(), material );
+			mesh.position.setFromSpherical( spherical );
+			console.log( 'mesh.position', mesh.position );
+
+			suns.add( mesh );
+
+		}
+
+		scene.add( suns );
+
+	}
+
+
+
+	function setSun24x12(){
+
+		let radius = 50;
+		let pi05 = Math.PI * 0.5;
+
+		const material = new THREE.MeshNormalMaterial();
+		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
+
+		divPosition.innerHTML = '';
+		scene.remove( suns );
+		suns = new THREE.Object3D();
+
+		for ( let j = 0; j < 12; j++ ) {
+
+			for ( let i = 0; i < 24; i++ ) {
+
+				const dateNow = new Date( Date.UTC( 2013, j, 5, i ) );
+				//console.log( 'dateNow', dateNow );
+
+				const sunNow = SunCalc.getPosition( dateNow, latitude, longitude );
+				//console.log( 'sunNow', sunNow );
+
+				divPosition.innerHTML += '<div>' + getJsonToHTML( sunNow ) + '</div>';
+
+				const spherical = new THREE.Spherical( radius, pi05 - sunNow.altitude, sunNow.azimuth, );
+				//console.log( 'spherical', spherical );
+
+				const mesh = new THREE.Mesh( geometry.clone(), material );
+				mesh.position.setFromSpherical( spherical );
+				//console.log( 'mesh.position', mesh.position );
+
+				suns.add( mesh );
+
+			}
+
+		}
+
+		scene.add( suns );
+
+	}
+
+
+
+
+	function setSun24x12xLines(){
+
+		let radius = 50;
+		let pi05 = Math.PI * 0.5;
+
+		const material = new THREE.MeshNormalMaterial();
+		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
+
+		const geometryLine = new THREE.Geometry();
+		const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+		var spriteMap = new THREE.TextureLoader().load( "sun.png" );
+		var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		scene.add( sprite );
+
+		divPosition.innerHTML = '';
+		scene.remove( suns );
+		suns = new THREE.Object3D();
+
+		for ( let j = 6; j < 12; j++ ) {
+
+			points = [];
+
+			for ( let i = 6; i < 20; i++ ) {
+
+				const dateNow = new Date( Date.UTC( 2013, j, 5, i ) );
+				//console.log( 'dateNow', dateNow );
+
+				const sunNow = SunCalc.getPosition( dateNow, latitude, longitude );
+				//console.log( 'sunNow', sunNow );
+
+				//divPosition.innerHTML += '<div>' + getJsonToHTML( sunNow ) + '</div>';
+
+				const spherical = new THREE.Spherical( radius, pi05 - sunNow.altitude, sunNow.azimuth, );
+				//console.log( 'spherical', spherical );
+
+				const mesh = new THREE.Mesh( geometry.clone(), material );
+				mesh.position.setFromSpherical( spherical );
+				//console.log( 'mesh.position', mesh.position );
+
+				var sprite = new THREE.Sprite( spriteMaterial );
+				sprite.scale.set( 3, 3, 1)
+				sprite.position.setFromSpherical( spherical );
+
+				points.push( mesh.position.clone() );
+
+				suns.add( sprite );
+
+			}
+
+			//if ( j < 6 ) {
+
+				//points.push( points[ 0 ] );
+				geometryLine.vertices = points;
+				line = new THREE.Line( geometryLine.clone(), materialLine );
+				suns.add( line );
+
+			//}
+
+		}
+
+		scene.add( suns );
+
+	}
+
+
+
+
+	function getJsonToHTML( obj ) {
+
+		let txt = '';
+
+		Object.keys( obj ).sort().forEach( item => txt += '<tr><td>' + item  + '</td><td>' + obj[ item ].toLocaleString() + '</td></tr>' );
+
+		return '<table>' + txt + '</table>';
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

@@ -11,6 +11,18 @@
 
 ## Concept
 
+Given hundreds even thousands of elements, it is helpful if calculations can be carried out to summarize aspects of the data
+
+Calculate areas of items of interest
+* Areas by Storey
+* Areas by Surface Type
+* Areas by Opening Type
+* Areas by Exterior Surface
+* Another type of calculation by compass orientation
+
+
+### Features
+
 * Calculate and display surface area statistics, ratios and orientation
 * Areas by Storey
 * Areas by Surface Type
@@ -24,11 +36,12 @@
 * Toggle the visible elements
 	* openings  surfaces  edges  all visible
 
+
 ## Wish list
 
+* 2018-03-24 ~ Add area by space <<<
 * 2018-03-27 ~ Button color of each surface type should be the color of each type
 * 2018-03-27 ~ Add show exposed to Sun surfaces << where?
-* 2018-03-24 ~ Add area by space <<<
 * 2018-03-23 ~ Add data embedded in gbXML file where available
 * 2018-03-23 ~ Add area by cad id group
 * 2018-03-22 ~ Add calculate and show building bounding box

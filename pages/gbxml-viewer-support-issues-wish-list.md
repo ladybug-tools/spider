@@ -68,20 +68,18 @@ The 'reset view' button in the in-world ( center of screen) menu may not always 
 * 2018-04-19 ~ MD ~ HUD ~ Add flip surface to reverse a normals.
 * 2018-04-19 ~ MD ~ Settings ~ Toggle Normals, Exposure View ... introduce two colors on both side of surface. It will be grey on opposite side to normal and green as we have now on side facing normals to allow easy identification.
 * 2018-04-17 ~ MD ~ Issue ~ Allow multiple selection or all delete of duplicate surfaces.
-* 2018-04-17 ~ MD ~ Report ~ Add Report to display to show internal surfaces that have only one adjacency.  They must have two.
-* 2018-04-17 ~ MD ~ Report ~ Add Report to display overlapping surfaces with not the same shape or partially overlap.
+* 2018-04-17 ~ MD ~ Issues ~ Add Report to display to show internal surfaces that have only one adjacency.  They must have two.
+* 2018-04-17 ~ MD ~ Isssues ~ Add Report to display overlapping surfaces with not the same shape or partially overlap.
 * 2018-04-02 ~ MD/Theo HUD / Heads-Up Display ~ Select from CAD Object types not from entire list
 * 2018-04-02 ~ MD/Theo ~ Add volume calculations
 * 2018-04-02 ~ MD/Theo ~ Delete selected coordinates in surfaces and openings and save edits
 * 2018-03-29 ~ MD ~ Right Menu ~ CADObjectID drop down - display only Unique Names
-* 2018-03-29 ~ MD ~ Report ~ Add Display Exposed by Sun (so we can see which surfaces are hit by sun)
 * 2018-03-29 ~ MD ~ Settings ~ Add Material settings color by Space
 * 2018-03-29 ~ MD ~ Report ~ Display Openings (Windows, Doors, Rooflights)
 * 2018-03-29 ~ MD ~ Report ~ Display Openings (Windows, Doors, Rooflights) in Groups per CADObject ID same way we have CADObjectGroups
 * 2018-03-29 ~ MD ~ Report ~ Allow Opening modification for Opening Type per CADObjectGroups: FixedWindow, OperableWindow, FixedSkylight,OperableSkylight, SlidingDoor, NonSlidingDoor, Air
-* 2018-03-29 ~ MD ~ Report ~ Storeys, Spaces, Zones to be displayed and sorted by Name, not ID
-* 2018-03-28 ~ MD ~ Report ~ CAD Object Groups. We want to be able modify: surface type or delete globally for all elements per displayed CAD Object Group. (ies requirement for air walls and floors)
-* 2018-03-28 ~ MD ~ Report ~ Check number of verticies in Surfaces and Openings. Flag greater than 4 (e+ requirement for windows)
+* 2018-03-28 ~ MD ~ HUD ~ CAD Object Groups. We want to be able modify: surface type or delete globally for all elements per displayed CAD Object Group. (ies requirement for air walls and floors)
+* 2018-03-28 ~ MD ~ Issues ~ Check number of verticies in Surfaces and Openings. Flag greater than 4 (e+ requirement for windows)
 * Feel free to add new ideas
 * Sections are based on the current set of modules
 * Items are listed in alphabetical order of their three letter folder/ name-space id
@@ -172,12 +170,6 @@ view-updates.html
 
 ### REP ~ Reports
 
-* 2018-03-08 ~ Search for spaces
-* 2018-03-04 ~ Export spaces and storeys as gbJSOM. .RAD files etc
-* 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
-* 2018-02-26 ~ Next and previous buttons to navigate through storeys, surfaces, spaces etc
-* 2018-02-26 ~ Surfaces, Spaces: checkbox for auto-zooming
-* @@@ 2018-02-26 ~ Better telltale size for small surfaces
 
 
 ### SAV ~ Save Changes
@@ -189,7 +181,8 @@ view-updates.html
 * 2018-03-04 ~ Add user defined inserts
 * 2018-03-04 ~ Add user-defined settings such as view point
 * 2018-03-04 ~ Add default UI parameters
-
+* 2018-03-04 ~ Export spaces and storeys as gbJSOM. .RAD files etc
+* 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
 
 ### SET ~ Settings
 

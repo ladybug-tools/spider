@@ -1,6 +1,7 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-gal-gallery/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-gal-gallery/README.md "View file as a web page." ) </span><input type=button onclick=window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-gal-gallery/README.md';
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
-# r13 gbXML Viewer Gallery Module Read Me
+# r13 Gallery Module Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-gal-gallery/gv-gal.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -25,6 +26,8 @@
 
 ## Issues
 
+* 2018-05-11 ~ Theo ~ sample files need more and better credits
+* 2018-05-11 ~ Theo ~ All sample files need latitude and longitude
 
 
 ## Links of Interest
@@ -35,6 +38,14 @@
 
 
 ## Change Log
+
+
+### 2018-05-11 ~ Theo
+
+r13.13
+* Add link to this read me from app menu
+* Add view source button to read me
+
 
 ### 2018-03-27 ~ Theo
 

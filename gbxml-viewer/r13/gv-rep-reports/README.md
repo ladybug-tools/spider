@@ -1,6 +1,7 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-rep-reports/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-rep-reports/README.md "View file as a web page." ) </span><input type=button onclick=window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-set-settings/README.md';
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
-# r13 gbXML Viewer Reports Read Me
+# r13 Reports Module Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-rep-reports/gv-rep.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -19,13 +20,20 @@ The issue is that gbXML files may be huge and analyzing the data can be tricky.
 
 The purpose of this module is to provide you with any and all useful data embedded in a gbXML file - even very big files with just two or three clicks.
 
+Currently there are zero editing capabilities in this panel. All current editing capability is in right-hand menu.
+
+The intent is that you are not having to switch back and forth between left and right menus to do the editing. You can control the display in the let and edit on the right without having too much clicking.
+
 ### Mission
 
 * View all project textual metadata embedded in gbXML files
 * Create text reports of all data of interest embedded in gbXML files
 * Toggle the visibility of individual and groups of elements
 * Zoom the view to display selected elements or groups of elements
-
+* Identify patterns in the data,
+* Visualize patterns in the data by displaying tables of results in 3D
+* Surfaces, spaces, zones and openings are view-able as table data and sets of 3D surfaces
+* Each type of element is cataloged according to all of its attributes
 
 ### Features
 
@@ -74,16 +82,38 @@ The purpose of this module is to provide you with any and all useful data embedd
 
 ## Wish list / To Do
 
-* 2018-05-07 ~ Theo ~ Add 'Edit the Surface' panel?
-* 2018-04-16 ~ Theo ~ continue init menu cleanup
+* 2018-05-11 ~ Better openings by type handling once we have click to select the opening enabled
+* 2018-05-07 ~ Theo ~ Add 'Edit the Surface' panel - as in right menu???
 * 2018-03-31 ~ We now do three specialty reports: 'Surfaces by Type + Exposed to Sun', 'Openings by Type' and 'Cad Object Groups'. Should there be others?
-
+* 2018-02-26 ~ Better telltale size for small surfaces
 
 ## Issues
 
 
 
 ## Change Log
+
+2018-05-11 ~ Theo
+
+R13.17
+* Add button with link to source code in readme
+* Add link to read me to app menu
+* Add webimar text to read me
+* Surfaces by Type
+	* 'eye' buttons toggle visually
+	* Surface type buttons display the color of the type they toggle
+
+Done
+* 2018-04-16 ~ Theo ~ continue init menu cleanup
+
+
+Done in prior releases
+* 2018-02-26 ~ Next and previous buttons to navigate through storeys, surfaces, spaces etc
+* 2018-02-26 ~ Surfaces, Spaces: checkbox for auto-zooming
+* 2018-03-29 ~ MD ~ Report ~ Add Display Exposed by Sun (so we can see which surfaces are hit by sun)
+* 2018-03-29 ~ MD ~ Report ~ Storeys, Spaces, Zones to be displayed and sorted by Name, not ID
+* 2018-03-08 ~ Search for spaces
+* 2018-03-04 ~ More CSS vars
 
 ### 2018-04-21 ~ Theo
 

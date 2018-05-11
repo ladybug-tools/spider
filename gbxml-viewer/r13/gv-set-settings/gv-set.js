@@ -2,6 +2,7 @@
 
 	var SET = {};
 
+	// move into own related functions?
 	SET.localClipX1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
 	SET.localClipX2= new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 );
 
@@ -11,11 +12,10 @@
 	SET.localClipZ1= new THREE.Plane( new THREE.Vector3( -0, 0, -1 ), 0 );
 	SET.localClipZ2= new THREE.Plane( new THREE.Vector3( 0, 0, 1 ), 0 );
 
-//	initSettings();
 
 	SET.initSettings = function() {
 
-		if ( window.butMenuLoad ) {
+		if ( window.butMenuLoad ) { // in testing iframe
 
 			SET.butSettings = butMenuLoad;
 
@@ -33,20 +33,25 @@
 
 		if ( SET.butSettings.style.fontStyle !== 'italic' ) {
 
-			SET.explodeStart = false;
+			//SET.explodeStart = false;
 
 			divMenuItems.innerHTML =
 			`
 				<details id=detSettings class=app-menu open >
 
-					<summary>Settings</summary>
+					<summary>Settings &nbsp; <a href=#../gv-set-settings/README.md>?</a> </summary>
 
+					<!--
 					<div>
 						<b>visibility toggles</b><br>
 						<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
 						 <button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
 						 <button onclick=GBP.setAllVisible(); >all</button>
 					</div>
+					-->
+					<br>
+
+					<div id=SETdivShowHide ></div>
 
 					<hr>
 
@@ -192,32 +197,38 @@
 			//+ divMenuItems.innerHTML;
 
 			//SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
+
+			GBI.setPanelShowHide( SETdivShowHide );
+
 			SET.butSettings.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
+
 
 			butts = detSettings.getElementsByTagName( "button" );
 			//console.log( 'butts', butts );
 
 			for ( butt of butts ) {
 
-				butt.classList.add( "app-menu" );
-				butt.classList.add( "w3-theme-d1" );
-				butt.classList.add( "w3-hover-theme" );
-				butt.classList.add( "w3-hover-border-theme" );
+				//butt.classList.add( "app-menu" );
+				//butt.classList.add( "w3-theme-d1" );
+				//butt.classList.add( "w3-hover-theme" );
+				//butt.classList.add( "w3-hover-border-theme" );
+				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
 
 			}
 
 		} else {
 
-			// detSettings.remove();
 			divMenuItems.innerHTML = '';
-			SET.butSettings.style.backgroundColor = '';
 			SET.butSettings.style.fontStyle = '';
+			SET.butSettings.style.backgroundColor = '';
 			SET.butSettings.style.fontWeight = '';
 
 		}
 
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
+
+
 
 	}();
 
@@ -578,6 +589,8 @@
 
 
 
+	//////////
+
 	SET.explodeReset = function() {
 
 		if ( SET.explodeStart === false ) { SET.explodeInit(); }
@@ -756,6 +769,7 @@
 
 //////////
 
+	// to be fixed
 	SET.updateClipAngle = function() {
 
 		const angle = inpRotate.valueAsNumber * Math.PI / 180;
@@ -782,7 +796,7 @@
 
 	SET.toggleSectionViewX = function() {
 
-		if ( butSectionViewX.style.backgroundColor !== COR.colorButtonToggle ) {
+		if ( butSectionViewX.style.fontStyle !== 'italic' ) {
 
 			THR.scene.traverse( function ( child ) {
 
@@ -797,12 +811,10 @@
 			} );
 
 			THR.renderer.localClippingEnabled = true;
-			butSectionViewX.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 
+			butSectionViewX.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 			butSectionViewY.style.cssText = '';
 			butSectionViewZ.style.cssText = '';
-
-			//SET.localClip1.constant = THR.axesHelper.position.x;
 
 			SET.updateCLipX();
 
@@ -817,7 +829,6 @@
 		}
 
 	}
-
 
 
 
@@ -836,7 +847,7 @@
 
 	SET.toggleSectionViewY = function() {
 
-		if ( butSectionViewY.style.backgroundColor !== COR.colorButtonToggle ) {
+		if ( butSectionViewY.style.fontStyle !== 'italic' ) {
 
 			THR.scene.traverse( function ( child ) {
 
@@ -851,11 +862,10 @@
 			} );
 
 			THR.renderer.localClippingEnabled = true;
-			butSectionViewY.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 
+			butSectionViewY.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 			butSectionViewX.style.cssText = '';
 			butSectionViewZ.style.cssText = '';
-			//SET.localClip1.constant = THR.axesHelper.position.x;
 
 			SET.updateCLipY();
 
@@ -870,7 +880,6 @@
 		}
 
 	}
-
 
 
 
@@ -890,7 +899,8 @@
 	SET.toggleSectionViewZ = function() {
 
 		console.log( 'butSectionViewZ.style.backgroundColor', butSectionViewZ.style.backgroundColor );
-		if ( butSectionViewZ.style.backgroundColor !== COR.colorButtonToggle ) {
+
+		if ( butSectionViewZ.style.fontStyle !== 'italic' ) {
 
 			THR.scene.traverse( function ( child ) {
 
@@ -905,11 +915,10 @@
 			} );
 
 			THR.renderer.localClippingEnabled = true;
+
 			butSectionViewZ.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 			butSectionViewX.style.cssText = '';
 			butSectionViewY.style.cssText = '';
-
-			//SET.localClip1.constant = THR.axesHelper.position.x;
 
 			SET.updateCLipZ();
 
