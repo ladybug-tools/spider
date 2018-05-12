@@ -97,7 +97,7 @@ The intent is that you are not having to switch back and forth between left and 
 
 R13.17
 * Add button with link to source code in readme
-* Add link to read me to app menu
+* Add link to read me to menu panel
 * Add webinar text to read me
 * Surfaces by Type
 	* 'eye' buttons toggle visually

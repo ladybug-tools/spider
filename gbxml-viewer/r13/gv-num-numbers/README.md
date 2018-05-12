@@ -1,6 +1,7 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-num-numbers/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-num-numbers/README.md "View file as a web page." ) </span><input type=button onclick=window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-num-numbers/README.md';
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
-# r13 gbXML Viewer Numbers Read Me
+# r13 Numbers Module Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-num-numbers/gv-num.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -39,9 +40,6 @@ Calculate areas of items of interest
 
 ## Wish list
 
-* 2018-03-24 ~ Add area by space <<<
-* 2018-03-27 ~ Button color of each surface type should be the color of each type
-* 2018-03-27 ~ Add show exposed to Sun surfaces << where?
 * 2018-03-23 ~ Add data embedded in gbXML file where available
 * 2018-03-23 ~ Add area by cad id group
 * 2018-03-22 ~ Add calculate and show building bounding box
@@ -51,7 +49,7 @@ Calculate areas of items of interest
 
 ## Issues
 
-* Still a work-in-progress
+Still a work-in-progress
 * 2018-04-13 ~ Theo ~ GBP.openings and NUM.openings differ
 * 2018-04-02 ~ Theo ~ In need of a clean up and streamlining
 * 2018-04-02 ~ Theo ~ needs better handling of internal doors
@@ -65,6 +63,18 @@ Calculate areas of items of interest
 
 ## Change Log
 
+
+### 2018-05-12 ~ Theo
+
+R12.17
+* Add button with link to source code in readme
+* Add link to read me to menu panel
+* Add webinar text to read me
+
+Done
+* 2018-03-24 ~ Add area by space <<<
+* 2018-03-27 ~ Button color of each surface type should be the color of each type
+* 2018-03-27 ~ Add show exposed to Sun surfaces << where?
 
 ### 2018-04-13 ~ Theo
 

@@ -1,7 +1,7 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-iss-issues/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-iss-issues/README.md "View file as a web page." ) </span><input type=button onclick=window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-iss-issues/README.md';
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 # r13 Issues Module Read Me
-
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-iss-issues/gv-iss.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
@@ -11,10 +11,7 @@
 
 ## Concept / Features
 
-Onscreen: open and load sample model with many embedded errors. Toggle the various menus
-
-Being able to view gbXML data in interactive 3D is certainly a step in a good direction.
-An even better idea is to be able to view the issues that are preventing the export from a CAD file to be loaded by an energy analysis application.
+Being able to view gbXML data in interactive 3D is certainly a step in a good direction. An even better idea is to be able to view the issues that are preventing the export from a CAD file to be loaded by an energy analysis application.
 
 Recent releases of the Viewer are identifying typical errors.
 
@@ -50,7 +47,7 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Wish list
 
-	* Surfaces with openings that overlap
+* Add locate surfaces with openings that overlap
 
 ## Issues
 
@@ -61,6 +58,12 @@ Recent releases of the Viewer are identifying typical errors.
 
 
 ## Change Log
+
+### 2018-05-12 ~ Theo
+
+R12.17
+* Add button with link to source code in readme
+* Add link to read me to menu panel
 
 ### 2018-05-11 ~ Theo
 

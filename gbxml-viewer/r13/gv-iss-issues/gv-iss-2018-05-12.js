@@ -34,20 +34,14 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
+
 		if ( ISS.butMenuIssues.style.fontStyle !== 'italic' ) {
 
 			ISS.getMenuItems();
 
 			ISS.butMenuIssues.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
-
-			const butts = divMenuItems.getElementsByTagName( "button" );
-			//console.log( 'butts', butts );
-
-			for ( let butt of butts ) {
-
-				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-
-			}
 
 		} else {
 
@@ -58,9 +52,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			ISS.butMenuIssues.style.fontWeight = '';
 
 		}
-
-		THR.controls.autoRotate = false;
-		THR.controls.keys = false;
 
 	};
 
@@ -100,11 +91,58 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdetPanelAdjacentSpaceInvalid ></div>
 
+			<!--
+
+			<details>
+
+				<summary id = "ISSsumSurfacesXXX" >Surfaces XXX</summary>
+
+				<div >Surfaces that are XXX</div>
+				Minimum size <output id=ISSoutMinSize >0.5</output>
+				<input id=ISSinpMinSize type=range min=0 max=100 value=50 step=1 onchange=ISSoutMinSize.value=this.value*0.01;ISS.getSurfacesTiny(); >
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceXXX); size=6 placeholder="surface id" ><br>
+						<select id = "ISSselSurfaceXXX"
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes();
+						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceXXXAttributes(); size=10 ></select><br>
+						<button onclick=GBI.setSurfaceZoom(ISSselSurfaceXXX.value); title="zoom into just this surface" >zoom</button>
+					</div>
+					<div id = "ISSdivSurfacesXXXAttributes" class=flex-left-div2 ></div>
+				</div>
+
+				<div id=ISSdivSurfacesTiny ></div>
+
+			</details>
+
+			<details>
+
+				<summary id = "ISSsumSurfacesInside" >Surfaces Inside Surfaces</summary>
+
+				<div >Surfaces that are inside another surface</div>
+
+				<div class=flex-container2 >
+					<div class=flex-div1 >
+						<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceInside); size=6 placeholder="surface id" ><br>
+						<select id = "ISSselSurfaceInside"
+						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceInsideAttributes(); size=10 ><option>none found</option></select><br>
+						<button onclick=GBI.setSurfaceZoom(ISSselSurfaceTiny.value); title="zoom into just this surface" >zoom</button>
+					</div>
+					<div id = "ISSdivSurfacesInsideAttributes" class=flex-left-div2 ></div>
+				</div>
+
+				<div id=ISSdivSurfacesInside ></div>
+
+			</details>
+			-->
+
 			<hr>
 
 		</details>`;
 
+		//` + divMenuItems.innerHTML;
 
+		//ISSdetPanelVisibilityToggle.innerHTML = GBI.getPanelShowHide(); //ISS.getPanelVisibilityToggle();
 		GBI.setPanelShowHide( ISSdetPanelVisibilityToggle );
 
 		ISS.setPanelMetadataIssues( ISSdetPanelMetadataIssues );
@@ -119,6 +157,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISSdetPanelSurfacesDuplicateCoordinates.innerHTML = ISS.getPanelSurfacesDuplicateCoordinates();
 
+
+		//ISSdetPanelSurfacesUndefinedCadId.innerHTML = ISS.getPanelSurfacesUndefinedCadId();
 
 		ISS.setPanelSurfacesUndefinedCadId( ISSdetPanelSurfacesUndefinedCadId );
 

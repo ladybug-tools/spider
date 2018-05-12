@@ -316,8 +316,9 @@
 		for ( let i = 0; i < types.length; i++ ) {
 
 
-			color =  GBP.colorsDefault[types[ i ]] ?  GBP.colorsDefault[types[ i ]].toString( 16 ) : '';
-			console.log( 'col', color );
+			let color =  GBP.colorsDefault[types[ i ]] ? GBP.colorsDefault[types[ i ]].toString( 16 ) : '';
+			color = color.length > 4 ? color : '00' + color;
+			//console.log( 'col', color );
 
 			txt +=
 			`
@@ -326,7 +327,7 @@
 				</button>
 
 				<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText);
-					style="background-color:#` + color + ` !important;" >` +
+					style="width:8rem;background-color:#` + color + ` !important;" >` +
 					types[ i ] +
 				`</button> ` +
 
@@ -334,7 +335,6 @@
 			`'%<br>`;
 
 		}
-
 
 
 		const details =

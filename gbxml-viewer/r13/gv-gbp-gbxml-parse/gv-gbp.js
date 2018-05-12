@@ -602,3 +602,12 @@
 		divLog.innerHTML = '';
 
 	};
+
+
+	GBP.toggleSurfacesVisible = function() {
+
+		GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible;
+
+		GBP.surfaceMeshes.children.forEach( child => child.visible = GBP.surfaceMeshes.visible );
+
+	};

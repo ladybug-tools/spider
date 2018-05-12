@@ -116,14 +116,16 @@
 
 
 	GBI.updateSelect = function( that, select, name ){
-		//console.log( 'sel', sel );
+		//console.log( 'sel', select );
 		//console.log( 'that', that );
+		//console.log( 'name', name );
 		//console.log( 'GBI.item', GBI.item );
-		//ii = sel;
 
 		let i = 0;
 
-		optionValues = GBI[ name ].optionValues;
+		item = GBI[ name ] ? GBI[ name ] : GBI.item;  // to cover for NUM.setAreasByStorey
+
+		let optionValues = item.optionValues;
 
 		for ( option of select.options ) {
 
@@ -1231,7 +1233,7 @@
 
 			<summary>Show || Hide / Zoom</summary>
 
-			<button onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; >surfaces</button>
+			<button onclick=GBP.toggleSurfacesVisible(); >surfaces</button>
 				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
 				<button onclick=GBP.surfaceOpenings.visible=!GBP.surfaceOpenings.visible; title="toggle the windows" >openings</button>
 				<button onclick=GBP.setAllVisible(); >all</button>
@@ -1244,14 +1246,8 @@
 
 
 
-	GBI.xxxsetAllVisible = function() {
 
-		GBP.surfaceMeshes.visible = true;
-		GBP.surfaceEdges.visible = true;
 
-		GBP.surfaceMeshes.children.forEach( child => child.visible = true );
-
-	};
 
 
 	////////// get IDs

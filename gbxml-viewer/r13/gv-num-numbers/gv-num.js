@@ -38,7 +38,9 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			NUMdivMenuPanelPrelims.innerHTML = NUM.getPanelVisibilityToggle();
 
-			NUMdivStoreyAreas.innerHTML = NUM.getAreasByStorey();
+			//NUMdivStoreyAreas.innerHTML = NUM.getAreasByStorey();
+
+			NUM.setAreasByStorey( NUMdivStoreyAreas );
 
 			NUMdivSurfaceTypeAreas.innerHTML = NUM.getAreaBySurfaceType();
 
@@ -50,18 +52,28 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			NUM.butMenuNumbers.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
+			const butts = divMenuItems.getElementsByTagName( "button" );
+			//console.log( 'butts', butts );
+
+			for ( let butt of butts ) {
+
+				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+
+			}
+
 		} else {
 
 			divMenuItems.innerHTML = '';
 
-			NUM.butMenuNumbers.style.backgroundColor = '';
 			NUM.butMenuNumbers.style.fontStyle = '';
+			NUM.butMenuNumbers.style.backgroundColor = '';
 			NUM.butMenuNumbers.style.fontWeight = '';
 
 		}
 
 		THR.controls.autoRotate = false;
 		THR.controls.keys = false;
+
 	};
 
 
@@ -70,9 +82,9 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const menuItems =
 
-		`<details id = "NUMdetNumbers"  class="app-menu" open >
+		`<details id = "NUMdetNumbers" open>
 
-			<summary>Numbers</summary>
+			<summary>Numbers &nbsp; <a href=#../gv-num-numbers/README.md>?</a></summary>
 
 			<p><small>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</small></p>
 
@@ -121,7 +133,9 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	NUM.getAreasByStorey = function() {
+	NUM.setAreasByStorey = function( target ) {
+
+		GBP.surfaceOpenings.visible = false;
 
 		let storeys = GBP.gbjson.Campus.Building.BuildingStorey;
 
@@ -129,43 +143,88 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		storeys = Array.isArray( storeys ) ? storeys : [ storeys ];
 
-		let storeyOptions = '';
+		NUM.storeys = [];
 
-		for ( let storey of storeys ) {
-			//console.log( 'storey', storey );
-			//storeyOptions += '<option>' + storey.id + '</option>';
+		for ( let i = 0; i < storeys.length; i++ ) {
 
-			storeyOptions += '<option value=' + storey.id + ' title="id: ' + storey.id + '" >' + storey.Name + '</option>';
+			NUM.storeys.push( storeys[ i ] );
 
 		}
 
-		const storeysPanel =
+		NUM.storeys.sort();
+
+		target.innerHTML =
 
 		`<details>
 
-			<summary id="NUMdivStoreyNumber" >Areas by Storey &raquo; ` + storeys.length + `</summary>
+			<summary id = "NUMsumAreasByStorey" >Areas by Storey &raquo; ` + NUM.storeys.length + ` found</summary>
 
-			<div class=flex-container2 >
+			<p><small>Surface areas of floors</small></p>
 
-					<div class=flex-div1 >
-						<input oninput=GBI.setSelectedIndex(this,NUMselStorey); size=6 placeholder="storey id" ><br>
-						<select id = "NUMselStorey" onclick=NUM.showFloorSlabs(this.value);NUM.setStoreyAttributes();
-							onchange=NUM.showFloorSlabs(this.value);NUM.setStoreyAttributes();
-							size=` + ( storeys.length < 10 ? storeys.length : 10 ) + ` >` + storeyOptions + `</select>
-					</div>
+			<div id=NUMdivAreasByStorey ></div>
 
-					<div id = "NUMdivStoreys" class=flex-left-div2  ></div>
+			<p>
+				<button onclick=NUM.showFloorSlab(NUMselAreasByStorey.value); title="area this slab" >get area of slab</button>
 
-			</div>
+				<span id=NUMspnArea ></span>
+			</p>
 
 			<hr>
 
 		</details>`;
 
-		return storeysPanel;
+		let item = {};
+		item.attribute = 'idAreasByStorey';
+		item.divAttributes = 'NUMdivAreasByStoreyAtts';
+		item.divTarget = document.getElementById( 'NUMdivAreasByStorey' );
+		item.element = 'Storey';
+		item.name = 'itemAreasByStorey';
+		item.optionValues = NUM.storeys.map( item => [ item.id, item.Name, item.Level ] );
+		item.parent = GBP.gbjson.Campus.Building.BuildingStorey;
+		item.placeholder = 'storey name';
+		item.selItem = 'NUMselAreasByStorey';
+
+		GBI.itemAdjacentSpaceInvalid = GBI.setElementPanel2( item );
+		NUMselAreasByStorey.selectedIndex = 0;
+		NUMselAreasByStorey.click();
+
 
 	};
 
+
+	NUM.showFloorSlab = function( storeyId ) {
+
+		//console.log( 'id', id );
+
+		GBP.surfaceOpenings.visible = false;
+
+		const spaces = GBP.gbjson.Campus.Building.Space;
+
+		const types = [ 'Ceiling', 'InteriorFloor', 'SlabOnGrade', 'RaisedFloor', 'UndergroundSlab' ];
+
+		GBP.surfaceMeshes.children.forEach( element => element.visible = false );
+
+		for ( let child of GBP.surfaceMeshes.children ) {
+
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId
+
+			if ( !adjacentSpaceId ) { continue; }
+
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			spaces.forEach( element => { child.visible = element.id === spaceIdRef
+				&& element.buildingStoreyIdRef === storeyId  && types.includes( child.userData.data.surfaceType )  ? true : child.visible;
+
+			} );
+
+		}
+
+		NUM.floorSlabs = GBP.surfaceMeshes.children.filter( child => child.visible === true );
+		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
+
+		NUMspnArea.innerHTML = 'area: ' + NUM.getSurfacesAreaByArrayOfSurfaces( NUM.floorSlabs ).toLocaleString();
+
+	};
 
 
 	NUM.setStoreyAttributes = function() {
@@ -222,17 +281,23 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
+
 		for ( let i = 0; i < types.length; i++ ) {
+
+			color =  GBP.colorsDefault[types[ i ]] ?  GBP.colorsDefault[types[ i ]].toString( 16 ) : '';
+			color = color.length > 4 ? color : '00' + color;
+			//console.log( 'col', color );
 
 			const area = Math.round( NUM.getSurfacesArea( types[ i ] ) ).toLocaleString();
 			//console.log( 'area', area );
 
 			txt +=
-			' <button style=width:8rem;' +
-				' class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText); >' + types[ i ] +
-					'</button> area: ' +
+			` <button
+				 class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText);
+				 style="width:8rem;background-color:#` + color + ` !important;" >` + types[ i ] +
+					`</button> area: ` +
 				area +
-			'<br>';
+			`<br>`;
 
 		}
 
@@ -268,24 +333,24 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	// !! numbers differ with GBP.openings !!
-
 	NUM.getAreaByOpeningType = function() {
+
+		// !! numbers differ with GBP.openings !!
 
 		NUM.SurfacesWithOpenings = GBP.surfaceJson.filter( element => element.Opening );
 		//console.log( 'NUM.SurfacesWithOpenings', NUM.SurfacesWithOpenings );
 
-		NUM.openings = [];
+		NUM.openingsJson = [];
 
 		for ( surface of NUM.SurfacesWithOpenings ) {
 
 			if ( surface.Opening.length ) {
 
-				NUM.openings.push ( ...surface.Opening );
+				NUM.openingsJson.push ( ...surface.Opening );
 
 			} else {
 
-				NUM.openings.push ( surface.Opening );
+				NUM.openingsJson.push ( surface.Opening );
 
 			}
 
@@ -293,13 +358,14 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		//console.log( 'NUM.openings', NUM.openings );
+		//console.log( 'NUM.openingsJson', NUM.openingsJson );
+
 
 		let txt = '';
 		const types = [];
 		const typesCount = [];
 
-		for ( let opening of NUM.openings ) {
+		for ( let opening of GBP.surfaceOpenings.children ) {
 
 			index = types.indexOf( opening.openingType );
 
@@ -344,7 +410,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			<div><button style=width:8rem; onclick=GBI.setOpeningTypeVisible(); >
 				Total openings</button> area: ` + Math.round( areaTotal ).toLocaleString() +
 				` count: ` + countTotal +
-				`<br><i style=color:red; >Issue: only showing external openings</i>
+				`<br>
 			<div>
 			<hr>
 		</details>`;
@@ -359,7 +425,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		let areaTotal = 0;
 
-		const openings = NUM.openings.filter( element => element.openingType === type );
+		const openings = NUM.openingsJson.filter( element => element.openingType === type );
 
 		for ( opening of openings ) {
 			//console.log( 'undergroundWall', undergroundWall.PlanarGeometry.PolyLoop );
@@ -414,6 +480,11 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 					Exterior surfaces</button> area: ` +
 					Math.round( tesa ).toLocaleString() +
 			`</p>
+
+			<p>
+				<button class=toggle onclick=GBI.setExposedToSunVisible(); >Exposed to Sun</button>
+			</p>
+
 			<hr>
 		</details>`;
 
@@ -591,7 +662,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 
-		for ( opening of NUM.openings ) {
+		for ( opening of NUM.openingsJson ) {
 			//console.log( 'opening', opening );
 
 			const points = opening.PlanarGeometry.PolyLoop.CartesianPoint.map( CartesianPoint => new THREE.Vector3().fromArray( CartesianPoint.Coordinate ) )
@@ -605,7 +676,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 			angle = Math.atan2( triangle.normal.y, triangle.normal.x) * 180 / Math.PI + 180;
 			//console.log( 'angle', angle );
 
-			const openingMesh = GBP.openingMeshes.children.find( ( element ) => element.userData.data.id === opening.id );
+			const openingMesh = GBP.surfaceOpenings.children.find( ( element ) => element.userData.data.id === opening.id );
 
 			if ( !openingMesh ) {
 				//console.log( 'no mesh', opening );
@@ -670,7 +741,7 @@ THR, THREE, GBP, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}
 
-			txt += '<button onclick=NUM.showSurfacesInArray("' + key + '"); style=width:5rem;background-color:' + oriented[ key ].color + '; >' + key +
+			txt += '<button onclick=NUM.showSurfacesInArray("' + key + '"); style="width:5rem;background-color:' + oriented[ key ].color + ' !important;" >' + key +
 			'</button> wall:' + Math.round(oriented[ key ].areaWalls).toLocaleString() +
 			' open:' + Math.round(oriented[ key ].areaOpenings).toLocaleString() +
 			' ' + num + '<br>';
