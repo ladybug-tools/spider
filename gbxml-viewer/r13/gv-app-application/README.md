@@ -59,6 +59,12 @@ See main read me file
 
 ## Change Log
 
+### 2018-05-12 ~ Theo
+
+R13.17
+APP module / In-world menu
+* Fix 'surfaces' button
+* Add 'all' button
 
 ### 2018-05-07 ~ Theo
 

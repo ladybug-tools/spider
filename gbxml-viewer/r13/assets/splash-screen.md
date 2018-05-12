@@ -24,16 +24,44 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-05-10 ~ R13.16</summary>
+<summary>Welcome 2018-05-12 ~ R13.16/17</summary>
 
-REP / Reports Module
-* Add Campus Location has link to Wolfram Alpha information about what is at latitude/longitude
+APP module / In-world menu
+* Fix 'surfaces' button
+* Add 'all' button
 
 SET / Settings Module
 * 'Explode by storeys' and plus/minus explode all operate better together
 * Grid and ground start position now set at lowest level of exterior walls
 * Add cutting sections along Y and Z axis
-* Add some button change color on click
+* Add button with link to source code in readme
+* Add link to read me to menu panel
+* Add all buttons themed
+
+REP / Reports Module
+* Add Campus Location has link to Wolfram Alpha information about what is at latitude/longitude
+* Add button change color on click
+* Add button with link to source code in readme
+* Add link to read me to menu panel
+* Add webinar text
+* Add all buttons themed
+
+NUM / Numbers Module
+* Add button with link to source code in readme
+* Add link to read me to menu panel
+* Add webinar text to read me
+
+Done
+* 2018-03-24 ~ Add area by space <<<
+* 2018-03-27 ~ Button color of each surface type should be the color of each type
+* 2018-03-27 ~ Add show exposed to Sun surfaces
+
+ISS / Issues Module
+* Add button with link to source code in readme
+* Add link to read me to menu panel
+* Add webinar text
+* Add all buttons themed
+
 
 </details><details open>
 

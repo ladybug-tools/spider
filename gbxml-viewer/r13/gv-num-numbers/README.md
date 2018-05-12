@@ -40,6 +40,7 @@ Calculate areas of items of interest
 
 ## Wish list
 
+* 2018-05-12 ~ Add Exposed to Sun area
 * 2018-03-23 ~ Add data embedded in gbXML file where available
 * 2018-03-23 ~ Add area by cad id group
 * 2018-03-22 ~ Add calculate and show building bounding box
@@ -66,7 +67,7 @@ Still a work-in-progress
 
 ### 2018-05-12 ~ Theo
 
-R12.17
+R13.17
 * Add button with link to source code in readme
 * Add link to read me to menu panel
 * Add webinar text to read me

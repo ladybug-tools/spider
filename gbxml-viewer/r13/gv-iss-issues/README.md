@@ -61,7 +61,7 @@ Recent releases of the Viewer are identifying typical errors.
 
 ### 2018-05-12 ~ Theo
 
-R12.17
+R13.17
 * Add button with link to source code in readme
 * Add link to read me to menu panel
 
