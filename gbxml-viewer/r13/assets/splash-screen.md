@@ -11,7 +11,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 ### Please watch and thumbs-up our YouTube video:
 
-[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY "With music and voiceover by the multi-talented Michalina" )
+[![2018-05-08 Webinar: Ladybug Tools and Green Building XML: Open Source Tools for Building Analysis]( ../../../images/2018-05-08-gbxml-webinar-300px.png )]( https://www.youtube.com/watch?v=qHFEhD2SsDA "" )
 
 <!--
 <details open>
