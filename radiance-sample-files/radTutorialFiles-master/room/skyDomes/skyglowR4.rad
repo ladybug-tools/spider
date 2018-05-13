@@ -1,0 +1,38 @@
+#@rfluxmtx u=+Y h=u
+void glow groundglow
+0
+0
+4 1 1 1 0
+
+groundglow source ground
+0
+0
+4 0 0 -1 180
+
+
+#@rfluxmtx u=+Y h=r4
+void glow skyglow
+0
+0
+4 1 1 1 0
+
+skyglow source skydome
+0
+0
+4 0 0 1 180
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

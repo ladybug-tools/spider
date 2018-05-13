@@ -1,0 +1,6 @@
+!xform ./objects/Mullions.rad
+!xform ./objects/ExteriorWalls.rad
+!xform ./objects/InteriorWall.rad
+!xform ./objects/Floor.rad
+!xform ./objects/Ceiling.rad
+!xform ./objects/Ground.rad

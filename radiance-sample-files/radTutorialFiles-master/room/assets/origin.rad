@@ -1,0 +1,41 @@
+#This file contains geometry that is meant only to be used for preview purposes. It is not to be included in any simulations.
+
+#x axis is red, arrow points in positive x direction
+void plastic red 0 0 5 1 0 0 0 0
+red cylinder xAxis 0 0 7 
+-.5 0 0 
+2 0 0
+0.025
+
+red cone xDirection 0 0 8
+2.5 0 0
+2 0 0 
+0 0.05
+
+#y axis is green, arrow points in positive y direction
+void plastic green 0 0 5 0 1 0 0 0
+green cylinder yAxis 0 0 7
+0 -.5 0
+0 2 0
+0.025
+
+green cone yDirection 0 0 8
+0 2.5 0 
+0 2 0
+0 0.05 
+
+#z axis is blue, arrow points in positive z direction.
+void plastic blue 0 0 5 0 0 1 0 0
+blue cylinder zAxis 0 0 7
+0 0 -.5
+0 0 2
+0.025
+
+blue cone zDirection 0 0 8
+0 0 2.5
+0 0 2
+0 0.05
+
+#A black sphere represents the origin.
+void plastic black 0 0 5 0 0 0 0 0
+black sphere origin 0 0 4 0 0 0 0.025

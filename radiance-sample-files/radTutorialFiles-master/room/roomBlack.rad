@@ -1,0 +1,18 @@
+!xform -m black ./objects/Ground.rad
+!xform -m black ./objects/ExteriorWalls.rad
+!xform -m black ./objects/Floor.rad
+!xform -m black ./objects/InteriorWall.rad
+!xform -m black ./objects/Ceiling.rad
+
+
+
+
+
+
+
+
+
+
+
+
+

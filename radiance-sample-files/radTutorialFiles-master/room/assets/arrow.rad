@@ -1,0 +1,20 @@
+void plastic arrow_mat 0 0 5 1 0 0 0 0 
+arrow_mat cylinder arrow_base
+0 0
+7
+0 0 0 .7 0 0 .05
+
+arrow_mat cone arrow_head
+0 0
+8
+.7 0 0 1 0 0 .1 0
+
+arrow_mat ring arrow_ring
+0 0
+8
+.7 0 0 -1 0 0 0 .1
+
+arrow_mat ring arrow_end
+0 0
+8
+0 0 0 -1 0 0 0 .05

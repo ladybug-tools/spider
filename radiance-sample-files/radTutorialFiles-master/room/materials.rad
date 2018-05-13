@@ -1,0 +1,36 @@
+
+void plastic Ceiling
+0
+0
+5 0.9 0.9 0.9 0.0 0.0
+
+
+void plastic ExteriorWalls
+0
+0
+5 0.3 0.3 0.3 0.0 0.0
+
+## Grey_Tile_Floor
+void plastic Floor
+0
+0
+5 0.65 0.65 0.65 0.00 0.0
+
+## material conversion from Sketchup rgb color
+void glass Glazing
+0
+0
+3 0.65 0.65 0.65
+
+
+## Concrete_general_color_dark_brown
+void plastic Ground
+0
+0
+5 0.2 0.2 0.2 0.0 0.0
+
+## White
+void plastic InteriorWall
+0
+0
+5 0.5 0.5 0.5 0.0 0.0

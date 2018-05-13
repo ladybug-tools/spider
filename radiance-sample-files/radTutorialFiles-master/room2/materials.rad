@@ -1,0 +1,205 @@
+# Original file from su2rad edited by python script to remove aliases. The original file has been saved to C:\Users\sarith\Dropbox\LBNL\FmatrixTutorial\complexModel\1csafe8\radiance\materials.radbak
+## materials.rad
+
+## default material
+void plastic sketchup_default_material
+0
+0
+5 0.4 0.4 0.4 0 0
+
+## plastic090pc
+void plastic Ceiling
+0
+0
+5 0.9 0.9 0.9 0 0
+
+## glowWhiteMat40
+void glow Clerestory1
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow Clerestory2
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow Clerestory3
+0
+0
+4 1 1 1 0
+
+## plastic040pc
+void plastic ExteriorWalls
+0
+0
+5 0.4 0.4 0.4 0 0
+
+## plastic030pc
+void plastic Floor
+0
+0
+5 0.3 0.3 0.3 0 0
+
+## glowWhiteMat40
+void glow FmtxAbove1
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxAbove2
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxAbove3
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBack1Above
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBack1Below
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBack2Above
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBack2Below
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBelow1
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBelow2
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBelow3
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBottom1
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBottom2
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxBottom3
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxMiddle1
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxMiddle2
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxMiddle3
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxTop1
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxTop2
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow FmtxTop3
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow Glazing1
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow Glazing2
+0
+0
+4 1 1 1 0
+
+## glowWhiteMat40
+void glow Glazing3
+0
+0
+4 1 1 1 0
+
+## material conversion from Sketchup rgb color
+void plastic Grates
+0
+0
+5 0.0233 0.3400 0.5900 0.000 0.000
+
+
+## material conversion from Sketchup rgb color
+void plastic Ground
+0
+0
+5 0.3967 0.3867 0.3867 0.000 0.000
+
+
+## material conversion from Sketchup rgb color
+void plastic InteriorWall
+0
+0
+5 0.8500 0.7200 0.3367 0.000 0.000
+
+
+## material conversion from Sketchup rgb color
+void plastic Mullions
+0
+0
+5 0.3933 0.3967 0.3833 0.000 0.000
+
+
