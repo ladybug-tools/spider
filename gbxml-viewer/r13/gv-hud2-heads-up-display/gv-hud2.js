@@ -177,7 +177,7 @@
 
 		`<details open >
 
-			<summary>Surface</summary>
+			<summary>Surface &nbsp; <a href=#../gv-hud2-heads-up-display/README.md>?</a></summary>
 
 			<div id = "HUDdivPanelSurface" ></div>
 
