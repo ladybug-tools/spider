@@ -48,7 +48,8 @@ Recent releases of the Viewer are identifying typical errors.
 ## Wish list
 
 * Add locate surfaces with openings that overlap
-
+* 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
+	* Upgrade so identifies any surface within another surface
 ## Issues
 
 
@@ -64,6 +65,10 @@ Recent releases of the Viewer are identifying typical errors.
 R13.17
 * Add button with link to source code in readme
 * Add link to read me to menu panel
+
+Done long ago
+* 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
+* 2018-03-08 ~ Combine with duplicate adjacent / R12
 
 ### 2018-05-11 ~ Theo
 

@@ -215,22 +215,13 @@
 
 			</details>
 
-			<hr>
-
-			<details open>
-
-				<summary>CAD Object Group</summary>
-
-				<div><button id=GBIbutCadGroup onclick=HUD.updateCadId(GBIselCadGroup); >Update cad object group of surface</button></div>
-
-				<p id=GBIdivCadIdGroup ></p>
-
-			</details>
-
 			<hr>`;
 
 
-			GBI.setMenuPanelCadObjectsByType2( GBIdivCadIdGroup, 'GBIselCadGroup' );
+			GBIselCadId.size = 10; //cadIds.length;
+
+			//GBI.setMenuPanelCadObjectsByType( GBIdivCadIdGroup );
+			//onclick=HUD.updateCadId("` + GBIselCadIDGroup.value + `")
 
 
 			const surfaces = GBP.gbjson.Campus.Surface;
@@ -1208,55 +1199,6 @@
 
 	};
 
-
-	GBI.setMenuPanelCadObjectsByType2 = function( target, selId ) {
-
-		const surfaces = GBP.gbjson.Campus.Surface;
-		const cadIds = [];
-
-		for ( let surface of surfaces ) {
-
-			//if ( !surface.CADObjectId ) { continue; }
-
-			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
-
-				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
-
-				console.log( 'surface', surface );
-				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
-				continue;
-
-			}
-
-			const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
-
-			if ( !cadIds.includes( id ) ) {
-
-				cadIds.push( id );
-
-			}
-
-		}
-
-		//console.log( 'cadIds', cadIds );
-		cadIds.sort();
-
-		let txt = '';
-
-		for ( let id of cadIds ){
-
-			txt += '<option>' + id + '</option>';
-
-		}
-
-		const details = `<select id = "${selId}" size=10 >${txt}</select>`;
-
-		target.innerHTML = details;
-
-	};
-
-
-
 	///////// Show / Hide
 
 	GBI.getPanelShowHide = function() {
@@ -1396,35 +1338,29 @@
 
 		// remove from gbxml
 		const surfacesResponse = GBP.gbxml.getElementsByTagName( "Surface" );
-		surfaceXml = surfacesResponse[ id ];
-		//console.log( 'id', id,'\nsurface to delete', surfaceXml );
+		const surface = surfacesResponse[ id ];
+		surface.remove();
+		GBI.surfaceChanges.deletes.push( id );
 
-		name = surfaceXml.getElementsByTagName("Name")[ 0 ].innerHTML;
-		//console.log( 'name', name );
-
-		GBI.surfaceChanges.deletes.push( name );
-
-		surfaceXml.remove();
-
+		console.log( 'id', id, 'surface to delete', surface );
 
 		// remove from gbjson
 		GBP.surfaceJson = GBP.surfaceJson.filter( element => element.id != id );
-		//console.log( 'GBP.surfaceJson', GBP.surfaceJson );
+		console.log( 'GBP.surfaceJson', GBP.surfaceJson );
 
 		// remove from three.js
 		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
 		GBP.surfaceMeshes.remove( surfaceMesh );
 
-
 		const element =  document.getElementById( 'divSurface' + id );
 		// console.log( 'element', element );
 
 		if ( element ) {
-
 			element.innerHTML = '<p>Surface deleted</p>' + element.innerHTML;
 			element.style.opacity = 0.2;
-
 		}
+
+		//initGbxmlView();
 
 	};
 

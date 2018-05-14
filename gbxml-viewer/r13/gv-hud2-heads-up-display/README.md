@@ -39,7 +39,16 @@ This feature could also be termed a '[context menu]( https://en.wikipedia.org/wi
 
 ## Wish list
 
-See main read me
+* 2018-03-06 ~ Add what you see upon open depends on current window inner height
+	* 2018-03-05 ~ Goal: surface + two adjacent: all visible at once
+* 2018-03-06 ~ Add 'match parameters of previously selected surface' buttons
+* 2018-03-04 ~ Identify adjacent spaces
+* 2018-01-02 ~ Multiple types of heads-up modules with different agendas
+	* Show space names at cursor locations
+* 2018-01-02 ~ Add in-world placard at cursor location
+
+
+
 
 ## Issues
 
@@ -78,6 +87,15 @@ The following cases need to be handled when changing the type of the surface
 
 
 ## Change Log
+
+### 2018-05-13 ~ Theo
+
+R13.18
+* Add update cad object by group panel
+
+Dealt with
+* 2018-04-21 ~ CAD Objects by Type: what attribute info to add?
+* 2018-03-04 ~ Use main style sheet? << there seem to be some curious issues with doing so
 
 ### 2018-04-21 ~ Theo
 

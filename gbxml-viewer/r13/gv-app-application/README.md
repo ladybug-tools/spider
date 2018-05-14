@@ -59,6 +59,12 @@ See main read me file
 
 ## Change Log
 
+### 2018-05-13 ~ Theo
+
+R13.18
+* bristol-clifton-downs-fixed.xml set as default model
+
+
 ### 2018-05-12 ~ Theo
 
 R13.17

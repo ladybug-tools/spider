@@ -1,1 +1,1 @@
-{"deletes":[],"types":[],"oneAdjacent":[],"twoAdjacent":[{"id":"aim6511","spaceId":["aim0855","aim2779"]},{"id":"aim6511","spaceId":["aim0808","aim2779"]}],"cadObjs":[]}
+{"deletes":["T-02_114-E-R-407","T-02_115-E-R-414"],"types":[{"name":"X-S-518","type":"Roof"},{"name":"X-S-547","type":"SlabOnGrade"}],"oneAdjacent":[{"name":"T-RF_100-E-R-485","spaceId":"aim4436"}],"twoAdjacent":[{"name":"T-00_113-01_115-I-F-80","spaceId":["aim0536","aim2821"]}],"CADObjectId":[]}

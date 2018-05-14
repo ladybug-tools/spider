@@ -245,7 +245,7 @@
 		console.log( 'spaceRef', spaceRef );
 
 		const surfaceJson = HUD.userDataData;
-		const surfaceName = surfaceJson.Name;
+		const surfaceId = surfaceJson.id;
 
 		HUD.surfacesXml = GBP.gbxmlResponseXML.getElementsByTagName("Surface");
 
@@ -268,7 +268,7 @@
 			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			//surfaceXml.appendChild( adjacentNew );
 
-			GBI.surfaceChanges.oneAdjacent.push( { name: surfaceName, spaceId: spaceId } )
+			GBI.surfaceChanges.oneAdjacent.push( { id:surfaceId, spaceId: spaceId } )
 
 		} else if ( spaceRef === 1 ) {
 
@@ -287,7 +287,7 @@
 			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			//surfaceXml.appendChild( adjacentNew );
 
-			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
+			GBI.surfaceChanges.twoAdjacent.push( { id:surfaceId, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
 		} else if ( spaceRef === 2 ) {
 
@@ -304,7 +304,7 @@
 			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			//surfaceXml.appendChild( adjacentNew );
 
-			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
+			GBI.surfaceChanges.twoAdjacent.push( { id:surfaceId, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
 		}
 
@@ -334,8 +334,7 @@
 
 		const typeNew = surface.surfaceType = GBIselSurfaceType.value;
 		//console.log( 'typeNew', typeNew );
-
-		GBI.surfaceChanges.types.push( { name: surface.Name, type: typeNew } );
+		GBI.surfaceChanges.types.push( { id: id, type: typeNew } );
 
 		HUD.surfacesXml = GBP.gbxml.getElementsByTagName("Surface");
 
@@ -491,6 +490,7 @@
 		//console.log( 'cadObjId', cadObjId );
 
 		if ( cadObjId ) {
+
 
 			//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
 

@@ -50,7 +50,8 @@ value='You are now in a GitHub web page view - Click this button to view this re
 * 2018-05-11 ~ Theo ~ Add adjust rotation angle of section cuts around Z-axes
 	* Enabling cutting sections of models that are not aligned perfectly north/south
 * 2018-04-02 ~ Theo ~ Select color themes and other parameters such as adding of ground planes from a list of color theme files
-
+* 2017 ~ Add ( random? ) colors by space
+* 2017 ~ Better lights and shadows settings
 
 ## Issues
 

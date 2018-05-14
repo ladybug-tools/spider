@@ -15,10 +15,11 @@
 
 ## Wish list
 
+* 2018-05-13 ~ Theo ~ Delete vertex of a surface
+* 2018-05-13 ~ Theo ~ Edit vertex of a surface / match X, Y or Z position of another vertex
 * 2018-05-07 ~ Theo ~ Select element: sort names & cad ids
 * 2018-04-23 ~ Delete surface > drop alert. Add undo
 * 2018-04-21 ~ Openings by Type: what attribute info to add?
-* 2018-04-21 ~ CAD Objects by Type: what attribute info to add?
 * 2018-04-21 ~ Theo ~ Storey attribute item has a zoom button
 * 2018-04-21 ~ Theo ~ Element attribute card: title could be button that would cause XML text to be displayed in pop-up window
 * 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities
@@ -33,6 +34,9 @@
 
 
 ## Change Log
+
+R13.18
+* Add update cad object by group panel
 
 ### 2018-04-23 ~ Theo
 

@@ -23,6 +23,9 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Wish list
 
+* Links to more sample files
+	* Where to find more?
+* Credits to sources of files
 
 ## Issues
 

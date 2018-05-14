@@ -36,8 +36,8 @@ THR, THREE, GBX, GBV, window, document,butSettings, detSettings,divMenuItems,rng
 
 			divMenuItems.innerHTML = '';
 
-			TMP.butMenuTemplate.style.backgroundColor = '';
 			TMP.butMenuTemplate.style.fontStyle = '';
+			TMP.butMenuTemplate.style.backgroundColor = '';
 			TMP.butMenuTemplate.style.fontWeight = '';
 
 		}

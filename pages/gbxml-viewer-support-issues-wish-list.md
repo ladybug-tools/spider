@@ -133,23 +133,6 @@ view-updates.html
 * 2018-02-18 ~ Menus remember their position from session to session
 
 
-### CRD ~ Duplicate Coordinates
-
-* 2018-03-08 ~ Combine with duplicate adjacent / R12
-* 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
-	* Upgrade so identifies any surface within another surface
-
-
-### GAL ~ Gallery
-
-* Links to more sample files
-	* Where to find more?
-* Credits to sources of files
-
-
-### GBV ~ gbXML View Utilities
-
-
 
 ### GBX ~ gbXML Utilities
 
@@ -168,9 +151,6 @@ view-updates.html
 * 2018-03-04 ~ Use main style sheet? << there seem to be some curious issues with doing so
 
 
-### REP ~ Reports
-
-
 
 ### SAV ~ Save Changes
 
@@ -184,20 +164,10 @@ view-updates.html
 * 2018-03-04 ~ Export spaces and storeys as gbJSOM. .RAD files etc
 * 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
 
-### SET ~ Settings
-
-* Add ( random? ) colors by space
-* 2017-12-07 ~ Michal: Set smallness size for tiny spaces and tiny surfaces
-* Better lights and shadows
-
 
 ### THR ~ Three.js
 
 * 2018-03-08 ~ Simpler loading flow
-
-
-### TMP ~ Templates
-
 
 
 

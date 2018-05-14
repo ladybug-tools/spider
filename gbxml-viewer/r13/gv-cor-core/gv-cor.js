@@ -76,6 +76,12 @@
 
 			//setIfrThree();
 
+		} else if ( ulc.endsWith( '.json' ) ) {
+
+			console.log( 'json url', url );
+
+			COR.requestFile( url, COR.callbackJson );
+
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
 			divPopUpContents.innerHTML = '<img src=' + url + ' >';
@@ -130,33 +136,42 @@
 
 	function callbackMarkdown( xhr ){
 
-			showdown.setFlavor('github');
-			const converter = new showdown.Converter();
-			//const response = xhr.target.response;
-			const html = converter.makeHtml( xhr.target.responseText );
+		showdown.setFlavor('github');
+		const converter = new showdown.Converter();
+		//const response = xhr.target.response;
+		const html = converter.makeHtml( xhr.target.responseText );
 
-			//divPopUp.innerHTML = '<div id=divPopUpContents >' + html + '</div>';
-			divPopUpContents.innerHTML = html;
-			divPopUp.style.display = 'block';
-			window.scrollTo( 0, 0 );
-			divPopUp.scrollTop = 0;
-			//divPopUpContents.scrollTop = 0;
-			divPopUp.scrollTo( 0, 0 );
-			//divPopUpContents.scrollTo( 0, 0 );
+		//divPopUp.innerHTML = '<div id=divPopUpContents >' + html + '</div>';
+		divPopUpContents.innerHTML = html;
+		divPopUp.style.display = 'block';
+		window.scrollTo( 0, 0 );
+		divPopUp.scrollTop = 0;
+		//divPopUpContents.scrollTop = 0;
+		divPopUp.scrollTo( 0, 0 );
+		//divPopUpContents.scrollTo( 0, 0 );
 
-		}
-
-
-
-		function callbackToTextarea( xhr ){
-
-			const response = xhr.target.response;
-			divPopUpContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-			divPopUp.style.display = 'block'
-
-		}
+	}
 
 
+
+	function callbackToTextarea( xhr ){
+
+		const response = xhr.target.response;
+		divPopUpContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
+		divPopUp.style.display = 'block'
+
+	}
+
+
+
+	COR.callbackJson = function( xhr ) {
+
+		const response = xhr.target.response;
+		GBI.surfaceChanges = JSON.parse( response )
+		console.log( 'response', response);
+		SAV.getUpdates();
+
+	};
 
 	// handle fileReader events
 
