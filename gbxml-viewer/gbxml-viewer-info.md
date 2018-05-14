@@ -29,7 +29,7 @@ Issues and bugs: https://github.com/ladybug-tools/spider/issues
 
 ### Green Building XML Webinar
 
-[gbXML.org]( http://gbxml.org ) held a webinar for the Viewer on Tuesday, May 8 2018.
+[gbXML.org]( http://gbxml.org ) held a webinar for the 'Aragog' gbXML Viewer on Tuesday, May 8 2018.
 * Moderator: Stephen Roth
 * Presenters Chris Mackay and Michal Dengusiak
 

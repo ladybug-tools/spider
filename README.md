@@ -20,14 +20,26 @@ _All of the above are embedded interactive scripts available here_
 
 ***
 
-### [Webinar Files 2018-05-08]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-08-gbxml-webinar/README.md )
+
+## Green Building XML Webinar
+
+[gbXML.org]( http://gbxml.org ) held a webinar for the 'Aragog' gbXML Viewer on Tuesday, May 8 2018.
+* Moderator: Stephen Roth
+* Presenters Chris Mackay and Michal Dengusiak
+
+### Video: https://www.youtube.com/watch?v=qHFEhD2SsDA
+
+
+Invitation: https://conta.cc/2H7ex7f
+
+#### [Webinar Files 2018-05-08]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-08-gbxml-webinar/README.md )
 
 ***
 
 ## YouTube Video: [gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
 
-* Michal's must watch video
-* Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
+* Michal's and Michalina's must watch video on Spider gbXML Viewer
+	* Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
 
 
 ***
