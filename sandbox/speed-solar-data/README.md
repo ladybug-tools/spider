@@ -6,10 +6,11 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## [SPEED Shadow/Radiant Specification]( https://rawgit.com/ladybug-tools/spider/master/#sandbox/speed-solar-data/speed-shadow-radiant-spec.md )
 
+* Ben's document that outlines what's to be done
 
-## Full screen: [SPEED Shadow Input 4]( https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-4.html )
+## Full screen: [SPEED Shadow Input 4]( http://www.ladybug.tools/spider/sandbox/speed-solar-data/speed-shadow-input-4.html )
 
-<iframe class=iframeReadMe src="https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-4.html" width=100% height=400px >iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src="http://www.ladybug.tools/spider/sandbox/speed-solar-data/speed-shadow-input-4.html" width=100% height=400px >iframes are not displayed on github.com</iframe>
 
 * Loads gbxml files using file dialog box
 * Display surfaces of type ExteriorWall, Roof and Shade only
@@ -21,7 +22,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 * Patches for Shade surfaces turned off because they take too long to create. Future release will be much faster at drawing patches.
 * Future release will include openings
-
+* Trapezoids may not be an issue: treat as rectangles and delete any duplicates patches
 
 
 ## Full screen: [SPEED Shadow Input 3]( https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-solar-data/speed-shadow-input-3.html )
