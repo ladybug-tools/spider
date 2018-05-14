@@ -8,7 +8,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 * Ben's document that outlines what's to be done
 
-## Full screen: [SPEED Shadow Input 4]( http://www.ladybug.tools/spider/sandbox/speed-solar-data/speed-shadow-input-4.html )
+## Full screen: [SPEED Shadow Input 4]( https://www.ladybug.tools/spider/sandbox/speed-solar-data/speed-shadow-input-4.html )
 
 <iframe class=iframeReadMe src="http://www.ladybug.tools/spider/sandbox/speed-solar-data/speed-shadow-input-4.html" width=100% height=400px >iframes are not displayed on github.com</iframe>
 
