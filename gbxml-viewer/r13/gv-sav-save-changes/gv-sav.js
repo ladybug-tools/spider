@@ -50,14 +50,14 @@
 
 				<summary>Save your changes to a file &nbsp; <a href=#../gv-sav-save-changes/README.md>?</a></summary>
 
-				<small><p>Save your changes in the Heads-up Display to a file for reuse with next incoming gbXML source file update</p></small>
+				<small><p>Save to file edits you make with right menu Heads-up Display. Apply your edits to next incoming gbXML source file update.</p></small>
 
 				<p><button onClick=SAV.initChanges() > start a fresh session of save changes</button></p>
 
 				<p><button onclick=SAV.saveChanges(); > save your changes to a file</button></p>
 
 				<small><p>
-					Open a save changes file and apply the edits to the current model</button>
+					Open a file of saved changes. Apply the edits to the current model</button>
 				</p></small>
 
 				<p><input type=file id=inpFile onchange=SAV.openChanges(this); ></p>
@@ -67,7 +67,6 @@
 				<summary>Save changes sample files</summary>
 
 				<p><a href="#../../../gbxml-sample-files/save-changes-samples/changes-bristol-clifton-town-road.json" >Colorizer</a></p>
-
 
 				<hr>
 
@@ -83,7 +82,7 @@
 
 		console.log( 'GBI.surfaceChanges', GBI.surfaceChanges );
 
-		const output = JSON.stringify( GBI.surfaceChanges );
+		const output = JSON.stringify( GBI.surfaceChanges, null, ' ' );
 		const blob = new Blob( [ output ] );
 		let a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
@@ -97,8 +96,6 @@
 
 	SAV.openChanges = function( files ) {
 
-		var fileData, reader, data;
-
 		divPopUpContents.innerHTML =
 		`
 			<h3>statistics for save changes file</h3>
@@ -109,10 +106,10 @@
 			<textArea id=txtSaveSource style="height:300px;width:100%;" ></textArea>
 		`;
 
-		divPopUpContents.style.display = 'block';
+		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
-		reader = new FileReader();
+		const reader = new FileReader();
 		reader.onload = function( event ) {
 
 			GBI.surfaceChanges = JSON.parse( reader.result );
@@ -125,7 +122,7 @@
 				'modified: <i>' + files.files[0].lastModifiedDate.toLocaleDateString() + '</i><br>' +
 				( GBI.surfaceChanges.deletes ? 'deletes: ' + GBI.surfaceChanges.deletes.length + '<br>' : '' )+
 				( GBI.surfaceChanges.types ? 'type changes: ' + GBI.surfaceChanges.types.length + '<br>' : '' ) +
-				( GBI.surfaceChanges.cadObjs ? 'cad id changes: ' + GBI.surfaceChanges.cadObjs.length + '<br>' : '' ) +
+				( GBI.surfaceChanges.CADObjectId ? 'cad id changes: ' + GBI.surfaceChanges.CADObjectId.length + '<br>' : '' ) +
 				( GBI.surfaceChanges.oneAdjacent ? 'one adjacent changes: ' + GBI.surfaceChanges.oneAdjacent.length + '<br>' : '' ) +
 				( GBI.surfaceChanges.twoAdjacent ? 'two adjacent changes: ' + GBI.surfaceChanges.twoAdjacent.length + '<br>' : '' ) +
 			'<br>';
@@ -341,9 +338,9 @@
 		}
 
 
-		if ( GBI.surfaceChanges.cadObjs ) {
+		if ( GBI.surfaceChanges.CADObjectId ) {
 
-			for ( let item of GBI.surfaceChanges.cadObjs ) {
+			for ( let item of GBI.surfaceChanges.CADObjectId ) {
 
 				//const surfaceXml = GBP.gbxml.getElementsByTagName( "Surface"  )[ item.id ];
 

@@ -360,7 +360,6 @@
 			// xml
 			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
 
-
 				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
 				//console.log( 'adjSpace1',  adjSpace1 );
 
@@ -488,6 +487,7 @@
 		surfaceXml = HUD.surfacesXml[ id ];
 
 		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
+
 		//console.log( 'cadObjId', cadObjId );
 
 		if ( cadObjId ) {
@@ -504,7 +504,7 @@
 
 			surfaceMesh.userData.data.CADObjectId = that.value;
 
-			GBI.surfaceChanges.CADObjectId.push( { id: id, cadId: that.value } );
+			GBI.surfaceChanges.CADObjectId.push( { name: surface.Name, cadId: that.value } );
 
 			HUD.setHeadsUp();
 
@@ -521,7 +521,7 @@
 			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 			surfaceMesh.userData.data.CADObjectId = that.value;
 
-			GBI.surfaceChanges.CADObjectId.push( { id: id, cadId: that.value } );
+			GBI.surfaceChanges.CADObjectId.push( { name: surface.Name, cadId: that.value } );
 
 		}
 

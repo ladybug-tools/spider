@@ -433,6 +433,16 @@
 
 
 
+	GBI.setSurfaceVisibleToggle = function( id ) {
+
+		GBP.surfaceMeshes.visible = true;
+
+		surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id )
+
+		surfaceMesh.visible = !surfaceMesh.visible;
+
+	};
+
 	GBI.setZoneVisible = function ( zoneIdRef ) {
 		//console.log( 'zoneIdRef', zoneIdRef );
 
@@ -1098,6 +1108,7 @@
 			<span class=attributeTitle >id</span>:<br>
 			<button onclick=GBI.setSurfaceVisible(this.innerText); >${id}</button>
 			<button onclick=GBI.setSurfaceZoom("${id}"); >&#8981;</button>
+			<button onclick=GBI.setSurfaceVisibleToggle("${id}"); ><img src="../assets/eye.png" height=12></button>
 		</div>`;
 
 		return txt;

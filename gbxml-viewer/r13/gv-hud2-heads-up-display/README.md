@@ -1,6 +1,9 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-hud-heads-up-display/README.md  "View file as a web page." ) </span>
 
-# r13 gbXML Viewer Heads Up Display (HUD) Read Me
+<input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-tmp-template/README-template.md'";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
+
+# 'Aragog' gbXML Viewer R13 Heads Up Display (HUD) Read Me
 
 
 <iframe class=iframeReadMe src=http://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r13/gv-hud-heads-up-display/gv-hud.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -87,6 +90,11 @@ The following cases need to be handled when changing the type of the surface
 
 
 ## Change Log
+
+### 2018-05-14 ~ Theo
+
+R13.19
+* Add visible toggle to surface id
 
 ### 2018-05-13 ~ Theo
 

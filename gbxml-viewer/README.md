@@ -1,4 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
 
 <input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
@@ -8,15 +8,15 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 [Spider 'Aragog' gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. gbXML is an industry supported file format for sharing building information between numerous building design software tools.
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-gbp-gbxml-parse/gv-gbp-run.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/r13/gv-gbp-gbxml-parse/gv-gbp-run.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
 
 
-## Latest stable release:<br><http://www.ladybug.tools/spider/gbxml-viewer/>
+## Latest stable release:<br><https://www.ladybug.tools/spider/gbxml-viewer/>
 
-### Latest development pre-release: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev/>
+### Latest development pre-release: <br><https://www.ladybug.tools/spider/gbxml-viewer/dev/>
 _Both of the above links are shortcuts that link to the appropriate address. You should bookmark these links in order to stay up to date._
 
 
@@ -32,7 +32,7 @@ _Link to invitation:_
 
 ## Video: https://www.youtube.com/watch?v=qHFEhD2SsDA
 
-## [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-08-gbxml-webinar/README.md )
+## [Webinar Files]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-08-gbxml-webinar/README.md )
 
 
 ***

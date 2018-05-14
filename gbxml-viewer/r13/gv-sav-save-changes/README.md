@@ -1,9 +1,9 @@
 <span style="display:none;" >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-sav-save-changes/README.md "View file as a web page." ) </span>
+
 <input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-sav-save-changes/README.md'"
 value="You are now in a GitHub web page view - Click this button to view this read me file as source code" >
 
 # gbXML Viewer Save Changes Read Me
-
 
 <iframe class="iframeReadMe" src="http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-sav-save-changes/gv-sav.html" width="100%" height="400px" >iframes are not displayed on github.com</iframe>
 
@@ -27,9 +27,16 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Links of Interest
 
-* [gbXML Viewer Save Changes Samples Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-sample-files/save-changes-samples/README.md )]
+* [gbXML Viewer Save Changes Samples Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-sample-files/save-changes-samples/README.md )
 
 ## Change Log
+
+### 2018-05-14 ~ Theo
+
+R13.19
+* Pop-up window always appears
+* Output to file is now pretty printed
+* Change cad object id now works
 
 ### 2018-05-13 ~ Theo
 
