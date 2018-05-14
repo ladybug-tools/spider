@@ -1,9 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/README.md'";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
 
-# Spider gbXML Viewer Read Me
+# Spider 'Aragog' gbXML Viewer Read Me
 
-<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/r11/gv-thr/gv-thr.html  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+[Spider 'Aragog' gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. gbXML is an industry supported file format for sharing building information between numerous building design software tools.
+
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer  width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
@@ -11,23 +14,13 @@ _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scrip
 
 ## Full screen stable release R12: <http://www.ladybug.tools/spider/gbxml-viewer>
 
-### Full screen development release R13: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
+### Full screen development pre-release R13: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
 _Both of the above links are shortcuts that link to the appropriate address. You should bookmark these links in order to stay up to date._
-
-<!--
-## Full Screen pre-release R11: <http://www.ladybug.tools/spider/gbxml-viewer/dev>
-## Latest News: [View Updates]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/view-updates.html )
-
-* News on what's happening with the gbXML Viewer.
-
-## Full Screen early version: [gbXML Viewer R3]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-23-michal/index.html )
-
--->
 
 
 ***
 
-## gbXML Viewer to be Featured in Webinar
+## 'Aragog' gbXML Viewer Featured in Webinar
 
 _Link to invitation:_
 

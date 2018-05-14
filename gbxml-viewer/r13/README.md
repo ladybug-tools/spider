@@ -1,7 +1,9 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#gbxml-viewer/r13/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#gbxml-viewer/r13/README.md "View file as a web page." ) </span><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/README.md'";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
-# r13 Spider gbXML Viewer Read Me
+# Aragog gbXML Viewer R13 Read Me
 
+[Aragog gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. gbXML is an industry supported file format for sharing building information between numerous building design software tools.
 <!--
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-cor/gv-cor.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
@@ -16,7 +18,7 @@ _[gbXML Viewer Core]( http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-cor/gv
 
 -->
 
-## Full screen stable release: [gbXML Viewer Application]( http://www.ladybug.tools/spider/gbxml-viewer/ )
+## Full screen pre-release: [gbXML Viewer ]( http://www.ladybug.tools/spider/gbxml-viewer/dev/ )
 
 * All the gbXML Viewer modules all together and available in a single application
 
@@ -38,206 +40,6 @@ The goals for the files include:
 
 The various modules are described below. They are listed in alphabetical order of their three letter folder/ name-space id.
 
-***
-
-## gv-adj gbXML Viewer Duplicate Adjacent Spaces
-
-* Identifies gbXML viewer duplicate adjacents - Detect surface with identical space ids
-* Folder: gv-adj
-* Name space: ADJ{}
-* title: gbXML Viewer Duplicate Adjacent Spaces
-
-### [gbXML Viewer Duplicate Adjacent Spaces Read Me]( #gbxml-viewer/r13/gv-adj/README.md )
-
-### Full screen test script: [gbXML Viewer Duplicate Adjacent Spaces / Analemma]( gbxml-viewer/r13/gv-adj/gv-adj.html )
-
-
-
-## gv-ana gbXML Viewer Sun Path / Analemmas
-
-* Creates a Sun path / Analemma for given latitude/longitude
-* folder: gv-ana
-* Name space: ANA{}
-* title: gbXML Viewer Sun Path / Analemma
-
-### [gbXML Viewer Sun Path / Analemma Read Me]( #gbxml-viewer/r13/gv-ana/README.md )
-
-### Full screen test script: [gbXML Viewer Sun Path / Analemma]( gbxml-viewer/r13/gv-ana/gv-ana.html )
-
-
-
-## gv-app gbXML Viewer Application
-
-_This script calls and combines all the module into a single app_
-
-* All the gbXML Viewer modules all together and available in a single application
-* folder: gv-app
-* name space: APP{}
-* title: gbXML Viewer Application
-
-### [gbXML Viewer Application Read Me]( #gbxml-viewer/r13/gv-app/README.md )
-
-### Full screen test script: [gbXML Viewer Application]( gbxml-viewer/r13/gv-app/gv-app.html )
-
-
-
-## gv-cam gbXML Viewer First Person camera
-
-* Fly through models following an avatar
-* folder: gv-cam
-* name space: CAM{}
-* title: gbXML Viewer First Person Camera
-
-### [gbXML Viewer First Person Camera Read Me]( #gbxml-viewer/r13/gv-cam/README.md )
-
-### Full screen test script: [gbXML Viewer First Person Camera]( gbxml-viewer/r13/gv-cam/gv-cam.html )
-
-
-
-## gv-cor gbXML Viewer Core
-
-* Core file browse, read and display utilities
-* Folder: gv-cor
-* Name space: COR{}
-* Title: gbXML Viewer Core
-
-### [gbXML Viewer Core Read Me]( #gbxml-viewer/r13/gv-cor/README.md )
-
-### Full screen test script: [gbXML Viewer Core]( gbxml-viewer/r13/gv-cor/gv-cor.html )
-
-### Features
-
-* Core file browse, read and display utilities
-* handle location.hash change events
-* Handle XMLHttpRequests
-	* Handle onRequestFileProgress events
-* Handle callbacks with file data events
-	* Markdown
-* Handle fileReader events
-* Handle drag and drop events
-* Handle drag and drop events
-* Handle menu header dragging with mouse or touch events
-* Incorporate and embody main style sheet parameters
-
-## gv-crd gbXML Viewer Duplicate Coordinates
-
-* Locates and identifies identical surfaces
-* Folder: gv-crd
-* Name space: CRD{}
-* Title: gbXML Viewer Duplicate Coordinates
-
-### [gbXML Viewer Duplicate Coordinates Read Me]( #gbxml-viewer/r13/gv-crd/README.md )
-
-### Full screen test script: [gbXML Viewer Duplicate Coordinates]( gbxml-viewer/r13/gv-crd/gv-crd.html )
-
-
-
-## gv-gal gbXML Viewer Gallery
-
-* Use the GitHub API to obtain directory listings of gbXML files
-* Folder: gv-gal
-* Name space: GAL{}
-* Title: gbXML Viewer Gallery
-
-### [gbXML Viewer Gallery Read Me]( #gbxml-viewer/r13/gv-gal/README.md )
-
-### Full screen test script: [gbXML Viewer Gallery]( gbxml-viewer/r13/gv-gal/gv-gal.html )
-
-
-
-## gv-gbv gbXML Viewer View Utilities
-
-* Utilities to toggle, zoom and view gbXML elements
-* Folder: gv-gbv
-* Name space: GBV{}
-* Title: gbXML Viewer View Utilities
-
-### [gbXML Viewer View Utilities Read Me]( #gbxml-viewer/r13/gv-gbv/README.md )
-
-### Full screen test script: [gbXML Viewer View Utilities]( gbxml-viewer/r13/gv-gbv/gv-gbv.html )
-
-
-
-## gv-gbx gbXML Viewer View gbXML Utilities
-
-* Utilities to open and parse gbXML files and to translate the data to gbJSON and Three,js
-* Folder: gv-gbx
-* Name space: GBX{}
-* Title: gbXML Viewer gbXML Utilities
-
-### [gbXML Viewer gbXML Utilities Read Me]( #gbxml-viewer/r13/gv-gbx/README.md )
-
-### Full screen test script: [gbXML Viewer gbXML Utilities]( gbxml-viewer/r13/gv-gxv/gv-gbx.html )
-
-
-
-## gv-hud gbXML Viewer Heads-Up Display (HUD)
-
-* View and modify detailed parameters of any selected surface
-* Folder: gv-hud
-* Name space: HUD
-* Title gbXML Viewer Heads-Up Display (HUD)
-
-### [gbXML Viewer Heads-Up Display (HUD) Read Me]( #gbxml-viewer/r13/gv-hud/README.md )
-
-### Full screen test script: [gbXML Viewer Heads-Up Display]( gbxml-viewer/r13/gv-hud/gv-hud.html )
-
-
-
-## gv-rep gbXML Viewer Reports
-
-*  View and locate a variety of data in the model
-* Folder: gv-grep
-* Name space: REP{}
-* Title: gbXML Viewer Reports
-
-### [gbXML Viewer Reports Read Me]( #gbxml-viewer/r13/gv-rep/README.md )
-
-### Full screen test script: [gbXML Viewer Reports]( gbxml-viewer/r13/gv-rep/gv-rep.html )
-
-
-
-## gv-set gbXML Viewer Settings
-
-* Adjust a wide variety of viewing parameters
-* Folder: gv-gal
-* Name space: SET{}
-* Title:  gbXML Viewer Settings
-
-### [gbXML Viewer Settings Read Me]( #gbxml-viewer/r13/gv-set/README.md )
-
-### Full screen test script: [gbXML Settings Settings]( gbxml-viewer/r13/gb-set/gv-set.html )
-
-
-
-## gv-thr gbXML Viewer Three.js
-
-* Built over the Three.js WebGL JavaScript library
-* Folder: gv-thr
-* Name space: THR{}
-* Name space: GBX{}
-* Title: gbXML Viewer Three.js
-
-### [gbXML Viewer Three.js Read Me]( #gbxml-viewer/r13/gv-thr/README.md )
-
-### Full screen test script: [gbXML Viewer Three.js]( gbxml-viewer/r13/gc-thr/gv-thr.html )
-
-Note: the GBX name space vaiables and methods ar to be separated out into their own folder and files
-
-
-
-## gv-tmp gbXML Viewer Templates
-
-* Boilerplate for creating new modules
-* Folder: gv-tmp
-* Name space: TMP{}
-* Title: gbXML Viewer Templates
-
-### [gbXML Viewer Templates Read Me]( #gbxml-viewer/r13/gv-tmp/README.md )
-
-### Full screen test script: [gbXML Viewer Templates]( gbxml-viewer/r13/gc-tmp/gv-tmp.html )
-
-
 
 ***
 
@@ -248,22 +50,6 @@ _In previous releases but not yet updated for R12_
 * Create animated GIFs
 * 2018-01-01 ~ Need much better control over the camera
 
-
-### gbXML Viewer  Sun Range
-
-
-### gbXML Viewer Editor ~ _Deprecated_
-
-
-### gbXML Viewer Export gbXML files ~ Not yet started
-
-* 2017-12-15 ~ Theo: export selected spaces or zones to gbxml?
-* 2017-12-10 ~ Michal: Export gbJSON
-* 2017-12-02 ~ Michal: Add ability to edit and save gbXML files
-
-Will most likely build upon
-
-* [create exportable buildings]( https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings )
 
 ### Bl.ocks Edition
 

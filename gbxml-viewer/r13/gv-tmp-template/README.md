@@ -1,6 +1,8 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-tmp-template/README.md "View file as a web page." ) </span>
+<input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-tmp-template/README.md'";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
-# r13 gbXML Viewer Template Read Me
+# Aragog gbXML Viewer R13 Template Read Me
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-tmp-template/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -22,15 +24,23 @@ The files in this folder are templates or 'boilerplate' files that may be used t
 
 ## Issues
 
-* 2018-03-20 ~ Octocat icon links to anticipated GH folder
-* 2018-03-20 ~ Single style sheet for APP and TMP
-* 2018-03-20 ~ Read Me file links to anticipated file
+
 
 ## Links of Interest
 
-
+* https://github.com/readmeTips/readmeTips.github.io
 
 ## Change Log
+
+### 2018-05-14 ~ Theo
+
+* Add links to source code at top of read me file
+* Add readme-template.html
+
+Done
+* 2018-03-20 ~ Octocat icon links to anticipated GH folder
+* 2018-03-20 ~ Single style sheet for APP and TMP
+* 2018-03-20 ~ Read Me file links to anticipated file
 
 ### 2018-03-26 ~ Theo
 

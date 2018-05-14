@@ -11,9 +11,9 @@ _Latest project here_
 
 ## full screen: [rad viewer 6]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-6.html )
 
-* Oen files using file dialog box
-* Open files via URL asa location.hash string
-* Links to seven sample files
+* Open files using file dialog box
+* Open files via URL as a location.hash string
+* Links to nine sample files
 * Now ignores geometry it does not know how to draw
 
 
