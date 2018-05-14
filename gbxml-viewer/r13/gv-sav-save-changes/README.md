@@ -5,7 +5,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 # gbXML Viewer Save Changes Read Me
 
 
-<iframe class="iframeReadMe" src="http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-sav-save-changes/gv-sav.html" width="100%" height="400px" >
+<iframe class="iframeReadMe" src="http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-sav-save-changes/gv-sav.html" width="100%" height="400px" >iframes are not displayed on github.com</iframe>
 
 
 ## Full screen test script: [gbXML Viewer Save Changes]( http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-sav-save-changes/gv-sav.html )
