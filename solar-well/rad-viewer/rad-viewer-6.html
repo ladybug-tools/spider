@@ -101,12 +101,15 @@
 				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/bristol-clifton-downs/bristol-clifton-downs.rad" >bristol-clifton-downs.rad</a></p>
 				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/london-office/london-office.rad" >london-office.rad</a></p>
 
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room3/room.rad" >rad-tutorial-files/room3/room.rad</a></p>
+				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/openbook.rad" >openbook.rad</a></p>
 
-				<p>
-					<a href="#../../radiance-sample-files/rad-tutorial-files/room3/room.rad" >rad-tutorial-files / room3 / room.rad</a><br>
-					- <a href="#../../radiance-sample-files/rad-tutorial-files/room3/objects/ExteriorWalls.rad" >ExteriorWalls.rad</a>
-				</p>
+				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/whale2.rad" >whale2.rad</a></p>
+
+				<small><p>The following load external files and are having asynchronous file loading issues. Sometimes they load OK and sometimes they don't</p></small>
+				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room3/room.rad" >rad-tutorial-files/room3/room.rad</a></p>
+				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room2/room.rad" >rad-tutorial-files/room2/room.rad</a></p>
+				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room/room.rad" >rad-tutorial-files/room2/room.rad</a></p>
+
 
 			</details>
 
@@ -209,22 +212,23 @@
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded ); }; /// or something
+		//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded ); }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
-
-	}
-
-
 
 	function callback( xhr ) {
 
 		const response = xhr.target.response;
-		//console.log( 'response', response );
+		console.log( 'response', xhr );
 
 		parseFile( response );
 
 	}
+
+	}
+
+
+
 
 
 
@@ -247,7 +251,7 @@
 				'modified: ' + files.files[0].lastModifiedDate.toLocaleDateString() +
 			'';
 
-			console.log( 'files', files );
+			//console.log( 'files', files );
 
 			//path =  '../../radiance-sample-files/radTutorialFiles-master/room2/';
 
@@ -261,38 +265,40 @@
 
 
 
-	function parseFile( text, path ) {
+	function parseFile( text ) {
 
-		arr = location.hash.slice( 1 ).split( '/');
-		file = arr.pop();
-		path = arr.join( '/' );
+		const arr = location.hash.slice( 1 ).split( '/');
+		const file = arr.pop();
+		const path = arr.join( '/' );
 
-		console.log( 'path', path );
-
+		//console.log( 'path', path );
 
 		const lines = text.split(/\r\n|\n/);
+		//console.log( 'lines', lines );
 
 		const items = [ 'header'];
 		const data = [];
 		let tmp = [];
 
 
-		for ( line of lines ) {
+		for ( let line of lines ) {
 
-			//			if ( line.slice( 0, 7) === 'generic' || line.slice( 0, 3 ) === 'Ext') {
-			if ( line.search( /[a-z]/ ) >= 0) {
+			if ( line[0] === '#') { continue; }
 
-				if( line[0] === '#') { continue; }
+			if ( line.search( /[abcdfghijklmnopqrstuvwxyz]/ ) >= 0) {
+
 
 				if ( line.match( '!xform' ) ) {
 
-					url = line.trim().replace( /  /g, ' ' ).split( /\s/)[ 1 ];
-					console.log( 'url', url );
-					requestFile( url );
+					let url = line.trim().replace( /  /g, ' ' ).split( /\s/)[ 1 ];
+					url = url.slice( 1 );
+					console.log( 'path + url', path + url );
+
+					requestFile( path + url );
 
 				}
 
-				items.push( [ line, data ] );
+				items.push( line );
 				data.push( tmp );
 				tmp = [];
 
@@ -309,7 +315,8 @@
 		rad.items = items;
 		rad.data = data;
 
-		//console.log( 'rad', rad );
+		console.log( 'rad', rad );
+
 		setVerts();
 
 		divContents.innerHTML =
@@ -332,12 +339,17 @@
 		material = new THREE.MeshNormalMaterial( { opacity: 0.85, side: 2, transparent: true } );
 
 
-		for ( let line of rad.data ) {
+		//for ( let item of rad.items ) {
+		for ( var i = 1; i < rad.items.length; i++ ) {
 
-			//console.log( 'line', line[ 0 ] );
+			//console.log( 'item', rad.items[ i ] );
 
-			if ( line[ 0 ] === ''  ) { continue;  }
+			if ( rad.items[ i ] === '' ) { continue; }
+			if ( rad.items[ i ].includes( 'polygon') === false ) { console.log( 'voided rad.items[ i ]', rad.items[ i ] ); continue; }
 			//console.log( 'line', line );
+
+			line = rad.data[ i ];
+			//console.log( 'line', line[ 2 ] );
 
 			const length = parseInt( line[ 2 ], 10 ) / 3 + 3;
 
@@ -345,12 +357,11 @@
 
 			const points = [];
 
-
-			for ( let i = 3; i < length; i++ ) {
+			for ( let j = 3; j < length; j++ ) {
 
 				//console.log( 'line', i, line[ i ]);
 
-				arr = line[ i ].trim().replace( /  /g, ' ' ).split( /\s/).map( str => parseFloat( str ) );
+				arr = line[ j ].trim().replace( / {2,}/g, ' ' ).replace( /\t/g, '' ).split( /\s/).map( str => parseFloat( str ) );
 				//console.log( 'arr', arr );
 
 
