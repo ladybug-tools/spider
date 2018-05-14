@@ -46,9 +46,9 @@
 
 			divMenuItems.innerHTML =
 
-				`<details id = detSaveChanges  class=app-menu open>
+				`<details id = detSaveChanges class=app-menu open>
 
-				<summary>Save your changes to a file</summary>
+				<summary>Save your changes to a file &nbsp; <a href=#../gv-sav-save-changes/README.md>?</a></summary>
 
 				<small><p>Save your changes in the Heads-up Display to a file for reuse with next incoming gbXML source file update</p></small>
 
