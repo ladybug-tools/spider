@@ -1,0 +1,15 @@
+void plastic vase_mat
+0
+0
+5 .2 .3 .9 .06 0
+
+!xform -e -n daffodil1 -ry 50 -t 7 0 24 -t -2 0 0 -rz -135 daffodil.norm
+
+!genworm stem_green stem1 'hermite(0,7,0,10,t)' '0' 'hermite(5,24,15,8,t)' '.3' 10 | xform -t -2 0 0 -rz -135
+
+!xform -e -n daffodil2 -ry 50 -t 7 0 24 -t -2 0 0 -rz -215 daffodil.norm
+
+!genworm stem_green stem2 'hermite(0,7,0,10,t)' '0' 'hermite(5,24,15,8,t)' '.3' 10 | xform -t -2 0 0 -rz -215 -t 0 0 3
+
+!genrev vase_mat vase_daf 'hermite(0.585,0,-0.98,0,t)' 'hermite(0.08,0,0.66,-.707,t)' 12 -s |xform -s 30 -t .5 0 0
+

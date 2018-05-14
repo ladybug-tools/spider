@@ -1,0 +1,1975 @@
+###################################
+# Copyright (c) 1991 Cindy Larson #
+###################################
+#
+# The bedroom dresser from the cabin model
+#
+# Depends on:
+#	woodpat.cal
+#
+#	Units = meters
+#	(0,0,0) at rear right corner (as viewed from front)
+#	X-axis to left
+#	Y-axis to front
+#	Z-axis up
+#
+# Overall dimensions are .762 by .584 by 1.778 meters
+#
+###################################
+# MATERIALS:
+
+void metal mirror
+0
+0
+5	.8	.8	.8	.9	0
+
+void brightfunc xwoodpat
+4 xgrain woodpat.cal -s .025
+0
+1 .3
+
+xwoodpat plastic xpine
+0
+0
+5	.7	.25	.08	0	0
+
+void brightfunc ywoodpat
+4 ygrain woodpat.cal -s .025
+0
+1 .3
+
+ywoodpat alias ypine
+	xpine
+
+void brightfunc zwoodpat
+4 zgrain woodpat.cal -s .05833
+0
+1 .3
+
+zwoodpat alias zpine
+	xpine
+
+void metal brass
+0
+0
+5	0.68	0.27	0.002	0.95	0
+
+###################################
+# xform -e -s .0254
+#
+# The Dresser.
+# The origin is located at the dresser's base,
+# in the rear right corner (when viewed from front).
+# Scale is in inches.
+# Overall height is 70", depth is 20", and width is 30".
+#
+
+xpine polygon base.back
+0
+0
+12
+	     0.7493		     0			0
+	     0.7493		     0		   0.0508
+	     0.0127		     0		   0.0508
+	     0.0127		     0			0
+
+ypine polygon base.right
+0
+0
+12
+	     0.0127		     0		   0.0508
+	     0.0127		0.4826		   0.0508
+	     0.0127		0.4826			0
+	     0.0127		     0			0
+
+xpine polygon base.bottom
+0
+0
+12
+	     0.0127		0.4826			0
+	     0.7493		0.4826			0
+	     0.7493		     0			0
+	     0.0127		     0			0
+
+xpine polygon base.front
+0
+0
+12
+	     0.7493		0.4826			0
+	     0.0127		0.4826			0
+	     0.0127		0.4826		   0.0508
+	     0.7493		0.4826		   0.0508
+
+ypine polygon base.left
+0
+0
+12
+	     0.7493		     0		   0.0508
+	     0.7493		     0			0
+	     0.7493		0.4826			0
+	     0.7493		0.4826		   0.0508
+
+xpine polygon cabinet.back
+0
+0
+12
+	      0.762		     0		   0.0508
+	      0.762		     0		   0.8636
+		  0		     0		   0.8636
+		  0		     0		   0.0508
+
+zpine polygon cabinet.right
+0
+0
+12
+		  0		     0		   0.8636
+		  0		 0.508		   0.8636
+		  0		 0.508		   0.0508
+		  0		     0		   0.0508
+
+xpine polygon cabinet.bottom
+0
+0
+12
+		  0		 0.508		   0.0508
+	      0.762		 0.508		   0.0508
+	      0.762		     0		   0.0508
+		  0		     0		   0.0508
+
+xpine polygon cabinet.front
+0
+0
+12
+	      0.762		 0.508		   0.0508
+		  0		 0.508		   0.0508
+		  0		 0.508		   0.8636
+	      0.762		 0.508		   0.8636
+
+zpine polygon cabinet.left
+0
+0
+12
+	      0.762		     0		   0.8636
+	      0.762		     0		   0.0508
+	      0.762		 0.508		   0.0508
+	      0.762		 0.508		   0.8636
+
+xpine polygon cabinet.top
+0
+0
+12
+		  0		 0.508		   0.8636
+		  0		     0		   0.8636
+	      0.762		     0		   0.8636
+	      0.762		 0.508		   0.8636
+# xform -t 0 0 34
+# genbox zpine mirror_back 30 1 36 -r .25
+
+zpine polygon mirror_back.dhgc
+0
+0
+12
+	    0.75565		     0		  0.86995
+	    0.75565		     0		  1.77165
+	    0.00635		     0		  1.77165
+	    0.00635		     0		  0.86995
+
+zpine polygon mirror_back.oqmk
+0
+0
+12
+		  0	       0.00635		  1.77165
+		  0	       0.01905		  1.77165
+		  0	       0.01905		  0.86995
+		  0	       0.00635		  0.86995
+
+zpine polygon mirror_back.OPNM
+0
+0
+12
+	    0.00635	       0.01905		   0.8636
+	    0.75565	       0.01905		   0.8636
+	    0.75565	       0.00635		   0.8636
+	    0.00635	       0.00635		   0.8636
+
+zpine polygon mirror_back.feij
+0
+0
+12
+	    0.75565		0.0254		  0.86995
+	    0.00635		0.0254		  0.86995
+	    0.00635		0.0254		  1.77165
+	    0.75565		0.0254		  1.77165
+
+zpine polygon mirror_back.plnr
+0
+0
+12
+	      0.762	       0.00635		  1.77165
+	      0.762	       0.00635		  0.86995
+	      0.762	       0.01905		  0.86995
+	      0.762	       0.01905		  1.77165
+
+zpine polygon mirror_back.SQRT
+0
+0
+12
+	    0.00635	       0.01905		    1.778
+	    0.00635	       0.00635		    1.778
+	    0.75565	       0.00635		    1.778
+	    0.75565	       0.01905		    1.778
+
+zpine cylinder mirror_back.hi
+0
+0
+7
+	    0.00635	       0.00635		  0.86995
+	    0.75565	       0.00635		  0.86995
+	    0.00635
+
+zpine cylinder mirror_back.hl
+0
+0
+7
+	    0.00635	       0.00635		  0.86995
+	    0.00635	       0.00635		  1.77165
+	    0.00635
+
+zpine cylinder mirror_back.hj
+0
+0
+7
+	    0.00635	       0.00635		  0.86995
+	    0.00635	       0.01905		  0.86995
+	    0.00635
+
+zpine cylinder mirror_back.ki
+0
+0
+7
+	    0.75565	       0.01905		  0.86995
+	    0.75565	       0.00635		  0.86995
+	    0.00635
+
+zpine cylinder mirror_back.kj
+0
+0
+7
+	    0.75565	       0.01905		  0.86995
+	    0.00635	       0.01905		  0.86995
+	    0.00635
+
+zpine cylinder mirror_back.ko
+0
+0
+7
+	    0.75565	       0.01905		  0.86995
+	    0.75565	       0.01905		  1.77165
+	    0.00635
+
+zpine cylinder mirror_back.mi
+0
+0
+7
+	    0.75565	       0.00635		  1.77165
+	    0.75565	       0.00635		  0.86995
+	    0.00635
+
+zpine cylinder mirror_back.ml
+0
+0
+7
+	    0.75565	       0.00635		  1.77165
+	    0.00635	       0.00635		  1.77165
+	    0.00635
+
+zpine cylinder mirror_back.mo
+0
+0
+7
+	    0.75565	       0.00635		  1.77165
+	    0.75565	       0.01905		  1.77165
+	    0.00635
+
+zpine cylinder mirror_back.nj
+0
+0
+7
+	    0.00635	       0.01905		  1.77165
+	    0.00635	       0.01905		  0.86995
+	    0.00635
+
+zpine cylinder mirror_back.nl
+0
+0
+7
+	    0.00635	       0.01905		  1.77165
+	    0.00635	       0.00635		  1.77165
+	    0.00635
+
+zpine cylinder mirror_back.no
+0
+0
+7
+	    0.00635	       0.01905		  1.77165
+	    0.75565	       0.01905		  1.77165
+	    0.00635
+
+zpine sphere mirror_back.h
+0
+0
+4	     0.00635		0.00635		   0.86995	      0.00635
+
+zpine sphere mirror_back.i
+0
+0
+4	     0.75565		0.00635		   0.86995	      0.00635
+
+zpine sphere mirror_back.j
+0
+0
+4	     0.00635		0.01905		   0.86995	      0.00635
+
+zpine sphere mirror_back.k
+0
+0
+4	     0.75565		0.01905		   0.86995	      0.00635
+
+zpine sphere mirror_back.l
+0
+0
+4	     0.00635		0.00635		   1.77165	      0.00635
+
+zpine sphere mirror_back.m
+0
+0
+4	     0.75565		0.00635		   1.77165	      0.00635
+
+zpine sphere mirror_back.n
+0
+0
+4	     0.00635		0.01905		   1.77165	      0.00635
+
+zpine sphere mirror_back.o
+0
+0
+4	     0.75565		0.01905		   1.77165	      0.00635
+
+mirror polygon mirror
+0
+0
+24
+	     0.7112	     0.0254254		   1.7526
+	     0.7366	     0.0254254		   1.7272
+	     0.7366	     0.0254254		   0.9144
+	     0.7112	     0.0254254		    0.889
+	     0.0508	     0.0254254		    0.889
+	     0.0254	     0.0254254		   0.9144
+	     0.0254	     0.0254254		   1.7272
+	     0.0508	     0.0254254		   1.7526
+# The three dresser drawers.
+# xform -n drawer.0 -t 1 20 2.5 -i 0 -t 0 0 10.5
+# xform -e -n drawer.0 -t 1 20 2.5 -i 0 -t 0 0 10.5
+# genbox xpine drawer_front 28 .75 10 -r .25
+
+xpine polygon drawer.0.drawer_front.dhgc
+0
+0
+12
+	    0.73025		 0.508		  0.06985
+	    0.73025		 0.508		  0.31115
+	    0.03175		 0.508		  0.31115
+	    0.03175		 0.508		  0.06985
+
+xpine polygon drawer.0.drawer_front.oqmk
+0
+0
+12
+	     0.0254	       0.51435		  0.31115
+	     0.0254		0.5207		  0.31115
+	     0.0254		0.5207		  0.06985
+	     0.0254	       0.51435		  0.06985
+
+xpine polygon drawer.0.drawer_front.OPNM
+0
+0
+12
+	    0.03175		0.5207		   0.0635
+	    0.73025		0.5207		   0.0635
+	    0.73025	       0.51435		   0.0635
+	    0.03175	       0.51435		   0.0635
+
+xpine polygon drawer.0.drawer_front.feij
+0
+0
+12
+	    0.73025	       0.52705		  0.06985
+	    0.03175	       0.52705		  0.06985
+	    0.03175	       0.52705		  0.31115
+	    0.73025	       0.52705		  0.31115
+
+xpine polygon drawer.0.drawer_front.plnr
+0
+0
+12
+	     0.7366	       0.51435		  0.31115
+	     0.7366	       0.51435		  0.06985
+	     0.7366		0.5207		  0.06985
+	     0.7366		0.5207		  0.31115
+
+xpine polygon drawer.0.drawer_front.SQRT
+0
+0
+12
+	    0.03175		0.5207		   0.3175
+	    0.03175	       0.51435		   0.3175
+	    0.73025	       0.51435		   0.3175
+	    0.73025		0.5207		   0.3175
+
+xpine cylinder drawer.0.drawer_front.hi
+0
+0
+7
+	    0.03175	       0.51435		  0.06985
+	    0.73025	       0.51435		  0.06985
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.hl
+0
+0
+7
+	    0.03175	       0.51435		  0.06985
+	    0.03175	       0.51435		  0.31115
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.hj
+0
+0
+7
+	    0.03175	       0.51435		  0.06985
+	    0.03175		0.5207		  0.06985
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.ki
+0
+0
+7
+	    0.73025		0.5207		  0.06985
+	    0.73025	       0.51435		  0.06985
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.kj
+0
+0
+7
+	    0.73025		0.5207		  0.06985
+	    0.03175		0.5207		  0.06985
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.ko
+0
+0
+7
+	    0.73025		0.5207		  0.06985
+	    0.73025		0.5207		  0.31115
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.mi
+0
+0
+7
+	    0.73025	       0.51435		  0.31115
+	    0.73025	       0.51435		  0.06985
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.ml
+0
+0
+7
+	    0.73025	       0.51435		  0.31115
+	    0.03175	       0.51435		  0.31115
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.mo
+0
+0
+7
+	    0.73025	       0.51435		  0.31115
+	    0.73025		0.5207		  0.31115
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.nj
+0
+0
+7
+	    0.03175		0.5207		  0.31115
+	    0.03175		0.5207		  0.06985
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.nl
+0
+0
+7
+	    0.03175		0.5207		  0.31115
+	    0.03175	       0.51435		  0.31115
+	    0.00635
+
+xpine cylinder drawer.0.drawer_front.no
+0
+0
+7
+	    0.03175		0.5207		  0.31115
+	    0.73025		0.5207		  0.31115
+	    0.00635
+
+xpine sphere drawer.0.drawer_front.h
+0
+0
+4	     0.03175		0.51435		   0.06985	      0.00635
+
+xpine sphere drawer.0.drawer_front.i
+0
+0
+4	     0.73025		0.51435		   0.06985	      0.00635
+
+xpine sphere drawer.0.drawer_front.j
+0
+0
+4	     0.03175		 0.5207		   0.06985	      0.00635
+
+xpine sphere drawer.0.drawer_front.k
+0
+0
+4	     0.73025		 0.5207		   0.06985	      0.00635
+
+xpine sphere drawer.0.drawer_front.l
+0
+0
+4	     0.03175		0.51435		   0.31115	      0.00635
+
+xpine sphere drawer.0.drawer_front.m
+0
+0
+4	     0.73025		0.51435		   0.31115	      0.00635
+
+xpine sphere drawer.0.drawer_front.n
+0
+0
+4	     0.03175		 0.5207		   0.31115	      0.00635
+
+xpine sphere drawer.0.drawer_front.o
+0
+0
+4	     0.73025		 0.5207		   0.31115	      0.00635
+# xform -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+
+brass cylinder drawer.0.handle.0.right_stem
+0
+0
+7
+	      0.127	       0.52705		   0.1905
+	      0.127	       0.55245		   0.1905
+	    0.00635
+# xform -e -n drawer.0 -t 1 20 2.5 -i 0 -t 0 0 10.5
+# xform -e -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+# genworm brass right_bend cos(t*PI/2 + PI/2)+1 sin(t*PI/2 + PI/2)+1 0 .25 5
+
+brass sphere drawer.0.handle.0.right_bend.s0
+0
+0
+4	      0.1524		0.57785		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.right_bend.c1
+0
+0
+7
+	     0.1524	       0.57785		   0.1905
+     0.144550968343	0.576606835514		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.right_bend.s1
+0
+0
+4     0.144550968343	 0.576606835514		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.right_bend.c2
+0
+0
+7
+     0.144550968343	0.576606835514		   0.1905
+     0.137470254592	0.572999031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.right_bend.s2
+0
+0
+4     0.137470254592	 0.572999031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.right_bend.c3
+0
+0
+7
+     0.137470254592	0.572999031658		   0.1905
+     0.131850968343	0.567379745408		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.right_bend.s3
+0
+0
+4     0.131850968343	 0.567379745408		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.right_bend.c4
+0
+0
+7
+     0.131850968343	0.567379745408		   0.1905
+     0.128243164486	0.560299031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.right_bend.s4
+0
+0
+4     0.128243164486	 0.560299031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.right_bend.c5
+0
+0
+7
+     0.128243164486	0.560299031658		   0.1905
+	      0.127	       0.55245		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.right_bend.s5
+0
+0
+4	       0.127		0.55245		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.center
+0
+0
+7
+	     0.1524	       0.57785		   0.1905
+	     0.2286	       0.57785		   0.1905
+	    0.00635
+# xform -e -n drawer.0 -t 1 20 2.5 -i 0 -t 0 0 10.5
+# xform -e -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+# genworm brass left_bend cos(t*PI/2)+4 sin(t*PI/2)+1 0 .25 5
+
+brass sphere drawer.0.handle.0.left_bend.s0
+0
+0
+4	       0.254		0.55245		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.left_bend.c1
+0
+0
+7
+	      0.254	       0.55245		   0.1905
+     0.252756835514	0.560299031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.left_bend.s1
+0
+0
+4     0.252756835514	 0.560299031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.left_bend.c2
+0
+0
+7
+     0.252756835514	0.560299031658		   0.1905
+     0.249149031657	0.567379745408		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.left_bend.s2
+0
+0
+4     0.249149031657	 0.567379745408		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.left_bend.c3
+0
+0
+7
+     0.249149031657	0.567379745408		   0.1905
+     0.243529745408	0.572999031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.left_bend.s3
+0
+0
+4     0.243529745408	 0.572999031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.left_bend.c4
+0
+0
+7
+     0.243529745408	0.572999031658		   0.1905
+     0.236449031657	0.576606835514		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.left_bend.s4
+0
+0
+4     0.236449031657	 0.576606835514		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.left_bend.c5
+0
+0
+7
+     0.236449031657	0.576606835514		   0.1905
+	     0.2286	       0.57785		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.0.left_bend.s5
+0
+0
+4	      0.2286		0.57785		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.0.left_stem
+0
+0
+7
+	      0.254	       0.52705		   0.1905
+	      0.254	       0.55245		   0.1905
+	    0.00635
+# xform -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+
+brass cylinder drawer.0.handle.1.right_stem
+0
+0
+7
+	      0.508	       0.52705		   0.1905
+	      0.508	       0.55245		   0.1905
+	    0.00635
+# xform -e -n drawer.0 -t 1 20 2.5 -i 0 -t 0 0 10.5
+# xform -e -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+# genworm brass right_bend cos(t*PI/2 + PI/2)+1 sin(t*PI/2 + PI/2)+1 0 .25 5
+
+brass sphere drawer.0.handle.1.right_bend.s0
+0
+0
+4	      0.5334		0.57785		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.right_bend.c1
+0
+0
+7
+	     0.5334	       0.57785		   0.1905
+     0.525550968342	0.576606835514		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.right_bend.s1
+0
+0
+4     0.525550968342	 0.576606835514		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.right_bend.c2
+0
+0
+7
+     0.525550968342	0.576606835514		   0.1905
+     0.518470254592	0.572999031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.right_bend.s2
+0
+0
+4     0.518470254592	 0.572999031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.right_bend.c3
+0
+0
+7
+     0.518470254592	0.572999031658		   0.1905
+     0.512850968342	0.567379745408		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.right_bend.s3
+0
+0
+4     0.512850968342	 0.567379745408		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.right_bend.c4
+0
+0
+7
+     0.512850968342	0.567379745408		   0.1905
+     0.509243164486	0.560299031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.right_bend.s4
+0
+0
+4     0.509243164486	 0.560299031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.right_bend.c5
+0
+0
+7
+     0.509243164486	0.560299031658		   0.1905
+	      0.508	       0.55245		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.right_bend.s5
+0
+0
+4	       0.508		0.55245		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.center
+0
+0
+7
+	     0.5334	       0.57785		   0.1905
+	     0.6096	       0.57785		   0.1905
+	    0.00635
+# xform -e -n drawer.0 -t 1 20 2.5 -i 0 -t 0 0 10.5
+# xform -e -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+# genworm brass left_bend cos(t*PI/2)+4 sin(t*PI/2)+1 0 .25 5
+
+brass sphere drawer.0.handle.1.left_bend.s0
+0
+0
+4	       0.635		0.55245		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.left_bend.c1
+0
+0
+7
+	      0.635	       0.55245		   0.1905
+     0.633756835514	0.560299031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.left_bend.s1
+0
+0
+4     0.633756835514	 0.560299031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.left_bend.c2
+0
+0
+7
+     0.633756835514	0.560299031658		   0.1905
+     0.630149031658	0.567379745408		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.left_bend.s2
+0
+0
+4     0.630149031658	 0.567379745408		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.left_bend.c3
+0
+0
+7
+     0.630149031658	0.567379745408		   0.1905
+     0.624529745408	0.572999031658		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.left_bend.s3
+0
+0
+4     0.624529745408	 0.572999031658		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.left_bend.c4
+0
+0
+7
+     0.624529745408	0.572999031658		   0.1905
+     0.617449031658	0.576606835514		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.left_bend.s4
+0
+0
+4     0.617449031658	 0.576606835514		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.left_bend.c5
+0
+0
+7
+     0.617449031658	0.576606835514		   0.1905
+	     0.6096	       0.57785		   0.1905
+	    0.00635
+
+brass sphere drawer.0.handle.1.left_bend.s5
+0
+0
+4	      0.6096		0.57785		    0.1905	      0.00635
+
+brass cylinder drawer.0.handle.1.left_stem
+0
+0
+7
+	      0.635	       0.52705		   0.1905
+	      0.635	       0.55245		   0.1905
+	    0.00635
+# xform -n drawer.1 -t 1 20 2.5 -i 1 -t 0 0 10.5
+# xform -e -n drawer.1 -t 1 20 2.5 -i 1 -t 0 0 10.5
+# genbox xpine drawer_front 28 .75 10 -r .25
+
+xpine polygon drawer.1.drawer_front.dhgc
+0
+0
+12
+	    0.73025		 0.508		  0.33655
+	    0.73025		 0.508		  0.57785
+	    0.03175		 0.508		  0.57785
+	    0.03175		 0.508		  0.33655
+
+xpine polygon drawer.1.drawer_front.oqmk
+0
+0
+12
+	     0.0254	       0.51435		  0.57785
+	     0.0254		0.5207		  0.57785
+	     0.0254		0.5207		  0.33655
+	     0.0254	       0.51435		  0.33655
+
+xpine polygon drawer.1.drawer_front.OPNM
+0
+0
+12
+	    0.03175		0.5207		   0.3302
+	    0.73025		0.5207		   0.3302
+	    0.73025	       0.51435		   0.3302
+	    0.03175	       0.51435		   0.3302
+
+xpine polygon drawer.1.drawer_front.feij
+0
+0
+12
+	    0.73025	       0.52705		  0.33655
+	    0.03175	       0.52705		  0.33655
+	    0.03175	       0.52705		  0.57785
+	    0.73025	       0.52705		  0.57785
+
+xpine polygon drawer.1.drawer_front.plnr
+0
+0
+12
+	     0.7366	       0.51435		  0.57785
+	     0.7366	       0.51435		  0.33655
+	     0.7366		0.5207		  0.33655
+	     0.7366		0.5207		  0.57785
+
+xpine polygon drawer.1.drawer_front.SQRT
+0
+0
+12
+	    0.03175		0.5207		   0.5842
+	    0.03175	       0.51435		   0.5842
+	    0.73025	       0.51435		   0.5842
+	    0.73025		0.5207		   0.5842
+
+xpine cylinder drawer.1.drawer_front.hi
+0
+0
+7
+	    0.03175	       0.51435		  0.33655
+	    0.73025	       0.51435		  0.33655
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.hl
+0
+0
+7
+	    0.03175	       0.51435		  0.33655
+	    0.03175	       0.51435		  0.57785
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.hj
+0
+0
+7
+	    0.03175	       0.51435		  0.33655
+	    0.03175		0.5207		  0.33655
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.ki
+0
+0
+7
+	    0.73025		0.5207		  0.33655
+	    0.73025	       0.51435		  0.33655
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.kj
+0
+0
+7
+	    0.73025		0.5207		  0.33655
+	    0.03175		0.5207		  0.33655
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.ko
+0
+0
+7
+	    0.73025		0.5207		  0.33655
+	    0.73025		0.5207		  0.57785
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.mi
+0
+0
+7
+	    0.73025	       0.51435		  0.57785
+	    0.73025	       0.51435		  0.33655
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.ml
+0
+0
+7
+	    0.73025	       0.51435		  0.57785
+	    0.03175	       0.51435		  0.57785
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.mo
+0
+0
+7
+	    0.73025	       0.51435		  0.57785
+	    0.73025		0.5207		  0.57785
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.nj
+0
+0
+7
+	    0.03175		0.5207		  0.57785
+	    0.03175		0.5207		  0.33655
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.nl
+0
+0
+7
+	    0.03175		0.5207		  0.57785
+	    0.03175	       0.51435		  0.57785
+	    0.00635
+
+xpine cylinder drawer.1.drawer_front.no
+0
+0
+7
+	    0.03175		0.5207		  0.57785
+	    0.73025		0.5207		  0.57785
+	    0.00635
+
+xpine sphere drawer.1.drawer_front.h
+0
+0
+4	     0.03175		0.51435		   0.33655	      0.00635
+
+xpine sphere drawer.1.drawer_front.i
+0
+0
+4	     0.73025		0.51435		   0.33655	      0.00635
+
+xpine sphere drawer.1.drawer_front.j
+0
+0
+4	     0.03175		 0.5207		   0.33655	      0.00635
+
+xpine sphere drawer.1.drawer_front.k
+0
+0
+4	     0.73025		 0.5207		   0.33655	      0.00635
+
+xpine sphere drawer.1.drawer_front.l
+0
+0
+4	     0.03175		0.51435		   0.57785	      0.00635
+
+xpine sphere drawer.1.drawer_front.m
+0
+0
+4	     0.73025		0.51435		   0.57785	      0.00635
+
+xpine sphere drawer.1.drawer_front.n
+0
+0
+4	     0.03175		 0.5207		   0.57785	      0.00635
+
+xpine sphere drawer.1.drawer_front.o
+0
+0
+4	     0.73025		 0.5207		   0.57785	      0.00635
+# xform -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+
+brass cylinder drawer.1.handle.0.right_stem
+0
+0
+7
+	      0.127	       0.52705		   0.4572
+	      0.127	       0.55245		   0.4572
+	    0.00635
+# xform -e -n drawer.1 -t 1 20 2.5 -i 1 -t 0 0 10.5
+# xform -e -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+# genworm brass right_bend cos(t*PI/2 + PI/2)+1 sin(t*PI/2 + PI/2)+1 0 .25 5
+
+brass sphere drawer.1.handle.0.right_bend.s0
+0
+0
+4	      0.1524		0.57785		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.right_bend.c1
+0
+0
+7
+	     0.1524	       0.57785		   0.4572
+     0.144550968343	0.576606835514		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.right_bend.s1
+0
+0
+4     0.144550968343	 0.576606835514		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.right_bend.c2
+0
+0
+7
+     0.144550968343	0.576606835514		   0.4572
+     0.137470254592	0.572999031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.right_bend.s2
+0
+0
+4     0.137470254592	 0.572999031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.right_bend.c3
+0
+0
+7
+     0.137470254592	0.572999031658		   0.4572
+     0.131850968343	0.567379745408		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.right_bend.s3
+0
+0
+4     0.131850968343	 0.567379745408		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.right_bend.c4
+0
+0
+7
+     0.131850968343	0.567379745408		   0.4572
+     0.128243164486	0.560299031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.right_bend.s4
+0
+0
+4     0.128243164486	 0.560299031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.right_bend.c5
+0
+0
+7
+     0.128243164486	0.560299031658		   0.4572
+	      0.127	       0.55245		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.right_bend.s5
+0
+0
+4	       0.127		0.55245		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.center
+0
+0
+7
+	     0.1524	       0.57785		   0.4572
+	     0.2286	       0.57785		   0.4572
+	    0.00635
+# xform -e -n drawer.1 -t 1 20 2.5 -i 1 -t 0 0 10.5
+# xform -e -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+# genworm brass left_bend cos(t*PI/2)+4 sin(t*PI/2)+1 0 .25 5
+
+brass sphere drawer.1.handle.0.left_bend.s0
+0
+0
+4	       0.254		0.55245		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.left_bend.c1
+0
+0
+7
+	      0.254	       0.55245		   0.4572
+     0.252756835514	0.560299031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.left_bend.s1
+0
+0
+4     0.252756835514	 0.560299031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.left_bend.c2
+0
+0
+7
+     0.252756835514	0.560299031658		   0.4572
+     0.249149031657	0.567379745408		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.left_bend.s2
+0
+0
+4     0.249149031657	 0.567379745408		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.left_bend.c3
+0
+0
+7
+     0.249149031657	0.567379745408		   0.4572
+     0.243529745408	0.572999031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.left_bend.s3
+0
+0
+4     0.243529745408	 0.572999031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.left_bend.c4
+0
+0
+7
+     0.243529745408	0.572999031658		   0.4572
+     0.236449031657	0.576606835514		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.left_bend.s4
+0
+0
+4     0.236449031657	 0.576606835514		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.left_bend.c5
+0
+0
+7
+     0.236449031657	0.576606835514		   0.4572
+	     0.2286	       0.57785		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.0.left_bend.s5
+0
+0
+4	      0.2286		0.57785		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.0.left_stem
+0
+0
+7
+	      0.254	       0.52705		   0.4572
+	      0.254	       0.55245		   0.4572
+	    0.00635
+# xform -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+
+brass cylinder drawer.1.handle.1.right_stem
+0
+0
+7
+	      0.508	       0.52705		   0.4572
+	      0.508	       0.55245		   0.4572
+	    0.00635
+# xform -e -n drawer.1 -t 1 20 2.5 -i 1 -t 0 0 10.5
+# xform -e -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+# genworm brass right_bend cos(t*PI/2 + PI/2)+1 sin(t*PI/2 + PI/2)+1 0 .25 5
+
+brass sphere drawer.1.handle.1.right_bend.s0
+0
+0
+4	      0.5334		0.57785		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.right_bend.c1
+0
+0
+7
+	     0.5334	       0.57785		   0.4572
+     0.525550968342	0.576606835514		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.right_bend.s1
+0
+0
+4     0.525550968342	 0.576606835514		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.right_bend.c2
+0
+0
+7
+     0.525550968342	0.576606835514		   0.4572
+     0.518470254592	0.572999031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.right_bend.s2
+0
+0
+4     0.518470254592	 0.572999031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.right_bend.c3
+0
+0
+7
+     0.518470254592	0.572999031658		   0.4572
+     0.512850968342	0.567379745408		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.right_bend.s3
+0
+0
+4     0.512850968342	 0.567379745408		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.right_bend.c4
+0
+0
+7
+     0.512850968342	0.567379745408		   0.4572
+     0.509243164486	0.560299031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.right_bend.s4
+0
+0
+4     0.509243164486	 0.560299031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.right_bend.c5
+0
+0
+7
+     0.509243164486	0.560299031658		   0.4572
+	      0.508	       0.55245		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.right_bend.s5
+0
+0
+4	       0.508		0.55245		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.center
+0
+0
+7
+	     0.5334	       0.57785		   0.4572
+	     0.6096	       0.57785		   0.4572
+	    0.00635
+# xform -e -n drawer.1 -t 1 20 2.5 -i 1 -t 0 0 10.5
+# xform -e -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+# genworm brass left_bend cos(t*PI/2)+4 sin(t*PI/2)+1 0 .25 5
+
+brass sphere drawer.1.handle.1.left_bend.s0
+0
+0
+4	       0.635		0.55245		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.left_bend.c1
+0
+0
+7
+	      0.635	       0.55245		   0.4572
+     0.633756835514	0.560299031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.left_bend.s1
+0
+0
+4     0.633756835514	 0.560299031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.left_bend.c2
+0
+0
+7
+     0.633756835514	0.560299031658		   0.4572
+     0.630149031658	0.567379745408		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.left_bend.s2
+0
+0
+4     0.630149031658	 0.567379745408		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.left_bend.c3
+0
+0
+7
+     0.630149031658	0.567379745408		   0.4572
+     0.624529745408	0.572999031658		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.left_bend.s3
+0
+0
+4     0.624529745408	 0.572999031658		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.left_bend.c4
+0
+0
+7
+     0.624529745408	0.572999031658		   0.4572
+     0.617449031658	0.576606835514		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.left_bend.s4
+0
+0
+4     0.617449031658	 0.576606835514		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.left_bend.c5
+0
+0
+7
+     0.617449031658	0.576606835514		   0.4572
+	     0.6096	       0.57785		   0.4572
+	    0.00635
+
+brass sphere drawer.1.handle.1.left_bend.s5
+0
+0
+4	      0.6096		0.57785		    0.4572	      0.00635
+
+brass cylinder drawer.1.handle.1.left_stem
+0
+0
+7
+	      0.635	       0.52705		   0.4572
+	      0.635	       0.55245		   0.4572
+	    0.00635
+# xform -n drawer.2 -t 1 20 2.5 -i 2 -t 0 0 10.5
+# xform -e -n drawer.2 -t 1 20 2.5 -i 2 -t 0 0 10.5
+# genbox xpine drawer_front 28 .75 10 -r .25
+
+xpine polygon drawer.2.drawer_front.dhgc
+0
+0
+12
+	    0.73025		 0.508		  0.60325
+	    0.73025		 0.508		  0.84455
+	    0.03175		 0.508		  0.84455
+	    0.03175		 0.508		  0.60325
+
+xpine polygon drawer.2.drawer_front.oqmk
+0
+0
+12
+	     0.0254	       0.51435		  0.84455
+	     0.0254		0.5207		  0.84455
+	     0.0254		0.5207		  0.60325
+	     0.0254	       0.51435		  0.60325
+
+xpine polygon drawer.2.drawer_front.OPNM
+0
+0
+12
+	    0.03175		0.5207		   0.5969
+	    0.73025		0.5207		   0.5969
+	    0.73025	       0.51435		   0.5969
+	    0.03175	       0.51435		   0.5969
+
+xpine polygon drawer.2.drawer_front.feij
+0
+0
+12
+	    0.73025	       0.52705		  0.60325
+	    0.03175	       0.52705		  0.60325
+	    0.03175	       0.52705		  0.84455
+	    0.73025	       0.52705		  0.84455
+
+xpine polygon drawer.2.drawer_front.plnr
+0
+0
+12
+	     0.7366	       0.51435		  0.84455
+	     0.7366	       0.51435		  0.60325
+	     0.7366		0.5207		  0.60325
+	     0.7366		0.5207		  0.84455
+
+xpine polygon drawer.2.drawer_front.SQRT
+0
+0
+12
+	    0.03175		0.5207		   0.8509
+	    0.03175	       0.51435		   0.8509
+	    0.73025	       0.51435		   0.8509
+	    0.73025		0.5207		   0.8509
+
+xpine cylinder drawer.2.drawer_front.hi
+0
+0
+7
+	    0.03175	       0.51435		  0.60325
+	    0.73025	       0.51435		  0.60325
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.hl
+0
+0
+7
+	    0.03175	       0.51435		  0.60325
+	    0.03175	       0.51435		  0.84455
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.hj
+0
+0
+7
+	    0.03175	       0.51435		  0.60325
+	    0.03175		0.5207		  0.60325
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.ki
+0
+0
+7
+	    0.73025		0.5207		  0.60325
+	    0.73025	       0.51435		  0.60325
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.kj
+0
+0
+7
+	    0.73025		0.5207		  0.60325
+	    0.03175		0.5207		  0.60325
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.ko
+0
+0
+7
+	    0.73025		0.5207		  0.60325
+	    0.73025		0.5207		  0.84455
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.mi
+0
+0
+7
+	    0.73025	       0.51435		  0.84455
+	    0.73025	       0.51435		  0.60325
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.ml
+0
+0
+7
+	    0.73025	       0.51435		  0.84455
+	    0.03175	       0.51435		  0.84455
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.mo
+0
+0
+7
+	    0.73025	       0.51435		  0.84455
+	    0.73025		0.5207		  0.84455
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.nj
+0
+0
+7
+	    0.03175		0.5207		  0.84455
+	    0.03175		0.5207		  0.60325
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.nl
+0
+0
+7
+	    0.03175		0.5207		  0.84455
+	    0.03175	       0.51435		  0.84455
+	    0.00635
+
+xpine cylinder drawer.2.drawer_front.no
+0
+0
+7
+	    0.03175		0.5207		  0.84455
+	    0.73025		0.5207		  0.84455
+	    0.00635
+
+xpine sphere drawer.2.drawer_front.h
+0
+0
+4	     0.03175		0.51435		   0.60325	      0.00635
+
+xpine sphere drawer.2.drawer_front.i
+0
+0
+4	     0.73025		0.51435		   0.60325	      0.00635
+
+xpine sphere drawer.2.drawer_front.j
+0
+0
+4	     0.03175		 0.5207		   0.60325	      0.00635
+
+xpine sphere drawer.2.drawer_front.k
+0
+0
+4	     0.73025		 0.5207		   0.60325	      0.00635
+
+xpine sphere drawer.2.drawer_front.l
+0
+0
+4	     0.03175		0.51435		   0.84455	      0.00635
+
+xpine sphere drawer.2.drawer_front.m
+0
+0
+4	     0.73025		0.51435		   0.84455	      0.00635
+
+xpine sphere drawer.2.drawer_front.n
+0
+0
+4	     0.03175		 0.5207		   0.84455	      0.00635
+
+xpine sphere drawer.2.drawer_front.o
+0
+0
+4	     0.73025		 0.5207		   0.84455	      0.00635
+# xform -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+
+brass cylinder drawer.2.handle.0.right_stem
+0
+0
+7
+	      0.127	       0.52705		   0.7239
+	      0.127	       0.55245		   0.7239
+	    0.00635
+# xform -e -n drawer.2 -t 1 20 2.5 -i 2 -t 0 0 10.5
+# xform -e -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+# genworm brass right_bend cos(t*PI/2 + PI/2)+1 sin(t*PI/2 + PI/2)+1 0 .25 5
+
+brass sphere drawer.2.handle.0.right_bend.s0
+0
+0
+4	      0.1524		0.57785		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.right_bend.c1
+0
+0
+7
+	     0.1524	       0.57785		   0.7239
+     0.144550968343	0.576606835514		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.right_bend.s1
+0
+0
+4     0.144550968343	 0.576606835514		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.right_bend.c2
+0
+0
+7
+     0.144550968343	0.576606835514		   0.7239
+     0.137470254592	0.572999031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.right_bend.s2
+0
+0
+4     0.137470254592	 0.572999031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.right_bend.c3
+0
+0
+7
+     0.137470254592	0.572999031658		   0.7239
+     0.131850968343	0.567379745408		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.right_bend.s3
+0
+0
+4     0.131850968343	 0.567379745408		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.right_bend.c4
+0
+0
+7
+     0.131850968343	0.567379745408		   0.7239
+     0.128243164486	0.560299031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.right_bend.s4
+0
+0
+4     0.128243164486	 0.560299031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.right_bend.c5
+0
+0
+7
+     0.128243164486	0.560299031658		   0.7239
+	      0.127	       0.55245		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.right_bend.s5
+0
+0
+4	       0.127		0.55245		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.center
+0
+0
+7
+	     0.1524	       0.57785		   0.7239
+	     0.2286	       0.57785		   0.7239
+	    0.00635
+# xform -e -n drawer.2 -t 1 20 2.5 -i 2 -t 0 0 10.5
+# xform -e -n handle.0 -t 4 .75 5 -i 0 -t 15 0 0
+# genworm brass left_bend cos(t*PI/2)+4 sin(t*PI/2)+1 0 .25 5
+
+brass sphere drawer.2.handle.0.left_bend.s0
+0
+0
+4	       0.254		0.55245		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.left_bend.c1
+0
+0
+7
+	      0.254	       0.55245		   0.7239
+     0.252756835514	0.560299031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.left_bend.s1
+0
+0
+4     0.252756835514	 0.560299031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.left_bend.c2
+0
+0
+7
+     0.252756835514	0.560299031658		   0.7239
+     0.249149031657	0.567379745408		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.left_bend.s2
+0
+0
+4     0.249149031657	 0.567379745408		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.left_bend.c3
+0
+0
+7
+     0.249149031657	0.567379745408		   0.7239
+     0.243529745408	0.572999031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.left_bend.s3
+0
+0
+4     0.243529745408	 0.572999031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.left_bend.c4
+0
+0
+7
+     0.243529745408	0.572999031658		   0.7239
+     0.236449031657	0.576606835514		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.left_bend.s4
+0
+0
+4     0.236449031657	 0.576606835514		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.left_bend.c5
+0
+0
+7
+     0.236449031657	0.576606835514		   0.7239
+	     0.2286	       0.57785		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.0.left_bend.s5
+0
+0
+4	      0.2286		0.57785		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.0.left_stem
+0
+0
+7
+	      0.254	       0.52705		   0.7239
+	      0.254	       0.55245		   0.7239
+	    0.00635
+# xform -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+
+brass cylinder drawer.2.handle.1.right_stem
+0
+0
+7
+	      0.508	       0.52705		   0.7239
+	      0.508	       0.55245		   0.7239
+	    0.00635
+# xform -e -n drawer.2 -t 1 20 2.5 -i 2 -t 0 0 10.5
+# xform -e -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+# genworm brass right_bend cos(t*PI/2 + PI/2)+1 sin(t*PI/2 + PI/2)+1 0 .25 5
+
+brass sphere drawer.2.handle.1.right_bend.s0
+0
+0
+4	      0.5334		0.57785		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.right_bend.c1
+0
+0
+7
+	     0.5334	       0.57785		   0.7239
+     0.525550968342	0.576606835514		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.right_bend.s1
+0
+0
+4     0.525550968342	 0.576606835514		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.right_bend.c2
+0
+0
+7
+     0.525550968342	0.576606835514		   0.7239
+     0.518470254592	0.572999031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.right_bend.s2
+0
+0
+4     0.518470254592	 0.572999031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.right_bend.c3
+0
+0
+7
+     0.518470254592	0.572999031658		   0.7239
+     0.512850968342	0.567379745408		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.right_bend.s3
+0
+0
+4     0.512850968342	 0.567379745408		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.right_bend.c4
+0
+0
+7
+     0.512850968342	0.567379745408		   0.7239
+     0.509243164486	0.560299031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.right_bend.s4
+0
+0
+4     0.509243164486	 0.560299031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.right_bend.c5
+0
+0
+7
+     0.509243164486	0.560299031658		   0.7239
+	      0.508	       0.55245		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.right_bend.s5
+0
+0
+4	       0.508		0.55245		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.center
+0
+0
+7
+	     0.5334	       0.57785		   0.7239
+	     0.6096	       0.57785		   0.7239
+	    0.00635
+# xform -e -n drawer.2 -t 1 20 2.5 -i 2 -t 0 0 10.5
+# xform -e -n handle.1 -t 4 .75 5 -i 1 -t 15 0 0
+# genworm brass left_bend cos(t*PI/2)+4 sin(t*PI/2)+1 0 .25 5
+
+brass sphere drawer.2.handle.1.left_bend.s0
+0
+0
+4	       0.635		0.55245		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.left_bend.c1
+0
+0
+7
+	      0.635	       0.55245		   0.7239
+     0.633756835514	0.560299031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.left_bend.s1
+0
+0
+4     0.633756835514	 0.560299031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.left_bend.c2
+0
+0
+7
+     0.633756835514	0.560299031658		   0.7239
+     0.630149031658	0.567379745408		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.left_bend.s2
+0
+0
+4     0.630149031658	 0.567379745408		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.left_bend.c3
+0
+0
+7
+     0.630149031658	0.567379745408		   0.7239
+     0.624529745408	0.572999031658		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.left_bend.s3
+0
+0
+4     0.624529745408	 0.572999031658		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.left_bend.c4
+0
+0
+7
+     0.624529745408	0.572999031658		   0.7239
+     0.617449031658	0.576606835514		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.left_bend.s4
+0
+0
+4     0.617449031658	 0.576606835514		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.left_bend.c5
+0
+0
+7
+     0.617449031658	0.576606835514		   0.7239
+	     0.6096	       0.57785		   0.7239
+	    0.00635
+
+brass sphere drawer.2.handle.1.left_bend.s5
+0
+0
+4	      0.6096		0.57785		    0.7239	      0.00635
+
+brass cylinder drawer.2.handle.1.left_stem
+0
+0
+7
+	      0.635	       0.52705		   0.7239
+	      0.635	       0.55245		   0.7239
+	    0.00635

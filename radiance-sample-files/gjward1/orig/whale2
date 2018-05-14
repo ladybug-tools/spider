@@ -1,0 +1,52 @@
+# xform -rz 180 -t 0 0 -1.1 -s 1.5
+#
+# Humpback whale, flukes 
+#
+
+!gensurf blue_glass body 'x(s,t)' 'y(s,t)' '1.2*z(s,t)' 25 25 \
+	-f patch3w.cal -f body2.cal \
+	| xform -e -rz 180 -t 0 0 -1.1 -s 1.5
+#
+# Additional whale parts
+#
+
+!genrev blue_glass nose '.11*cos(t*PI/2)' '.077*sin(t*PI/2)' 8 \
+	| xform -t .015 .012 .98 -rz 180 -t 0 0 -1.1 -s 1.5
+
+blue_glass cup tail
+0
+0
+8
+             -0.084             -0.225              -3.15
+            -0.0825              -0.42              -3.45
+              0.105                  0
+
+!xform -e -n fluke -rz -90 -rx 25 -t .055 .25 -1.2 -rz 180 -t 0 0 -1.1 -s 1.5 flukes
+
+!xform -e -n rflipper -rz -90 -rz 50 -t .25 .05 .17 -rz 180 -t 0 0 -1.1 -s 1.5 flipper
+
+!xform -e -n lflipper -mx -rz 90 -rz -40 -t -.2 .07 .18 -rz 180 -t 0 0 -1.1 -s 1.5 flipper
+
+blue_glass polygon dfin.r
+0
+0
+9
+  2.97579343979e-17              0.243               -2.4
+             -0.015             0.1875              -2.55
+  3.12274620225e-17              0.255            -2.6025
+
+blue_glass polygon dfin.l
+0
+0
+9
+  2.97579343979e-17              0.243               -2.4
+  3.12274620225e-17              0.255            -2.6025
+              0.015              0.174              -2.55
+
+blue_glass polygon dfin.b
+0
+0
+9
+  3.12274620225e-17              0.255            -2.6025
+             -0.015             0.1875              -2.55
+              0.015              0.174              -2.55

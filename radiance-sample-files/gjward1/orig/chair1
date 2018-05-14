@@ -1,0 +1,76 @@
+#
+# Chrome framed chair with black vinyl seat and back.
+#
+# Units are inches
+#
+# xform -rx -4.43
+#chrome
+
+void metal frame_mat
+0
+0
+5                0.6                0.6                0.6               0.95                  0
+
+void brightfunc ywood_pat
+6 ygrain woodpat.cal -s .3 -rx -4.43
+0
+1                0.8
+
+ywood_pat plastic arm_mat
+0
+0
+5               0.48              0.236              0.121               0.05               0.02
+
+void plastic black_mat
+0
+0
+5               0.05               0.05               0.05               0.01                0.1
+# origin is at this leg
+
+!genbox frame_mat leg1 .75 .75 24.75  | xform -rx -4.43
+
+!genbox frame_mat leg2 .75 .75 24.75 | xform -t 18.3 0 0 -rx -4.43
+
+!genbox frame_mat betwleg1+2 17.75 .5 .5 | xform -t .75 0 13.5 -rx -4.43
+
+!genbox frame_mat left_arm .5 7.75 .5 |xform -rx -5 -t 0 .5 24.5 -rx -4.43
+
+!genbox arm_mat left_arm_wood 1.6 9 .75 -r .2 |xform -rx -5 -t -.6 .01 24.8 -rx -4.43
+
+!genbox frame_mat right_arm .5 7.75 .5 |xform -rx -5 -t 18.3 .5 24.5 -rx -4.43
+
+!genbox arm_mat right_arm_wood 1.6 9 .75 -r .2 |xform -rx -5 -t 17.8 .01 24.8 -rx -4.43
+#back frame of the chair
+
+!genbox frame_mat leg1.back .75 .75 25 | xform -t 0 0 -25 -rx 25 -t 0 7.72 24.074 -rx -4.43
+
+!genbox frame_mat leg2.back .75 .75 25|xform  -t 18.3 0 0  -t 0 0 -25 -rx 25 -t 0 7.72 24.074 -rx -4.43
+
+!genbox frame_mat betwleg1+2.back 17.75 .5 .5 | xform  -t .75 0 13.5  -t 0 0 -25 -rx 25 -t 0 7.72 24.074 -rx -4.43
+# sitting frames
+
+!genbox frame_mat left_horiz .75 14.5 .75 | xform -t .75 -2 18 -rx -4.43
+
+!genbox frame_mat right_horiz .75 14.5 .75 | xform -t 17.5 -2 18 -rx -4.43
+
+!genbox black_mat horiz.left.end .75 .125 .75 | xform -t .75 -2 18 -rx -4.43
+
+!genbox black_mat horiz.right.end .75 .125 .75 | xform -t 17.5 -2 18 -rx -4.43
+
+!genbox frame_mat vert.left .75 .75 12 | xform -t 0 0 -12 -rx -12 -t .75 14.5 31.75 -t 0 2.319 -.03824 -rx -4.43
+
+!genbox frame_mat vert.right .75 .75 12 | xform -t 0 0 -12 -rx -12 -t 17.5 14.5 31.75 -t 0 2.319 -.03824 -rx -4.43
+
+!genbox black_mat vert.top.right .75 .75 .125 | xform -rx -12 -t .75 14.5 31.7501 -t 0 2.319 -.03824 -rx -4.43
+
+!genbox black_mat vert.top.left .75 .75 .125 | xform -rx -12 -t 17.5 14.5 31.7501 -t 0 2.319 -.03824 -rx -4.43
+#!gensurf frame_mat rond_right '(.75*t)' 'cos(40*s*PI/180)' 'sin(40*s*PI/180)' 4 20 | xform -t .75 12.5 18
+
+!genprism frame_mat round_right chair1angles.pts -l 0 0 .75|xform -t -2.7947 0 0 -ry 90 -t .75 12.5 18 -rx -4.43
+
+!genprism frame_mat round_left chair1angles.pts -l 0 0 .75|xform -t -2.7947 0 0 -ry 90 -t 17.5 12.5 18 -rx -4.43
+
+!genprism black_mat back chair1back.pts -l 0 0 12.6|xform -rz 90 -rx -12 -t 1 14.5 19.75 -t 0 .7 0 -rx -4.43
+#!genprism black_mat sit chair1back.pts -l 0 0 12.6|xform -rz 90 -rx -12 -rx -90  -t 1.5 -2 18
+
+!genbox black_mat sit 16 16 1.25 -r .25 | xform -t 1.5 -1.8 18 -rx -4.43

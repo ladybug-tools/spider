@@ -1,0 +1,36 @@
+{
+	wood.cal - functions for woodgrain.
+}
+
+{
+	Pattern:
+
+	A1 = average ring thickness.
+}
+
+xgrain = woodgrain(Ring(Py,Pz));	{ along x axis }
+ygrain = woodgrain(Ring(Px,Pz));	{ along y axis }
+zgrain = woodgrain(Ring(Px,Py));	{ along z axis }
+
+woodgrain(r) = fade(hermite(.2,1.2,2,.5,2*tri(r,.5)),.5,T/100/A1);
+{woodgrain(r) = fade(hermite(.1,1.3,8,1,(1+sin(2*PI*r))/2),.5,T/100/A1);}
+
+Ring(a,b) = sqrt( 25 + sq(mod(a/A1,50)-25) + sq(mod(b/A1,50)-25)) +
+		  7 * fnoise3(Px/40/A1,Py/40/A1,Pz/40/A1) ;
+
+{
+	Texture:
+
+	A1 = grain radius.
+	A2 = roughness (0 < roughness < 1).
+}
+
+ygrain_dx = wtexmag * cos(wtexang);	{ dx along y axis }
+ygrain_dy = 0;				{ dy along y axis }
+ygrain_dz = wtexmag * sin(wtexang);	{ dz along y axis }
+
+wtexmag = A2 * Rdot;
+wtexang = PI * fnoise3(Px/A1, Py/A1/10, Pz/A1);
+{
+wtexrad = fade(A2, 0, T/50/A1);
+}

@@ -1,0 +1,34 @@
+# description of the PODIUM in the conference room
+
+xwood_pat plastic wood_mat
+0
+0
+5 .29 .15 .13 .01 .15
+
+void brightfunc xwood_pat
+4 xgrain woodpat.cal -s .4
+0
+1 .6
+
+xwood_pat alias xwood_mat wood_mat
+
+void brightfunc zwood_pat
+4 zgrain woodpat.cal -s .4
+0
+1 .6
+
+zwood_pat alias zwood_mat wood_mat
+
+!genbox zwood_mat down_piece.right .75 16 4.5 
+!genbox zwood_mat down_piece.left .75 16 4.5 | xform -t 23.25 0 0
+!genbox xwood_mat down_horiz 24 16.75 .75 | xform -t 0 -1.5 4.5
+!genbox zwood_mat long_vert_right .75 17.5 32.5 | xform -t 0 -1.5 5.25
+!genbox zwood_mat long_vert_left .75 17.5 32.5 | xform -t 23.25 -1.5 5.25
+!genbox xwood_mat shelf 22.5 17.5 .75 | xform -t .75 -1.5 31.75
+!genbox xwood_mat desk 24 20 2.5 | xform -t 0 -4 37.75
+!genbox xwood_mat top 24 4.75 .75 | xform -t 0 11.25 46.25 
+!genbox zwood_mat back 24 .75 47 | xform -t 0 16 0
+
+!genprism zwood_mat slopy_left 4  0 0  16 0  16 6  6.75 6.5 -l 0 0 .75 | xform -rx 90 -rz 90 -t 23.25 0 40.25
+
+!genprism zwood_mat slopy_right 4  0 0  16 0  16 6  6.75 6.5 -l 0 0 .75 | xform -rx 90 -rz 90 -t 0 0 40.25

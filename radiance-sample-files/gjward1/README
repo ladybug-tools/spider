@@ -1,0 +1,43 @@
+		Greg Ward's Object Library #1
+
+This directory contains 26 fun and useful objects for you to include
+in your Radiance scenes.  Please repay this kindness by donating your
+own objects to the archive collection.  Trade objects with your friends.
+See if you can be the first to collect the whole set.
+
+All files are fully expanded and have a brief description and list
+of dependencies at the beginning.  The picture files dodads.pic,
+fixtures.pic and furniture.pic show what each object looks like,
+but here is a synopsis:
+
+black_chair.rad		- Black conference room chair
+blue_chair.rad		- Blue office chair
+book.rad		- A closed book
+bookbox.rad		- An enclosed book shelf
+coatrack.rad		- Brass coatrack from cabin model
+conf_table.rad		- Half table from the conference room
+coord.rad		- A coordinate axis
+cornerdesk.rad		- The corner desk set from the office model
+dafvase.rad		- Two daffodils in a vase
+desk.rad		- Basic desk from early office model
+desklamp.rad		- Cheap desk lamp
+door_closer.rad		- Door closing device
+dresser.rad		- Dresser from cabin model
+exit_sign.rad		- Exit sign from conference room
+extinguisher.rad	- Fire extinguisher from conference room
+medcab.rad		- Medicine cabinet from bathroom
+mug.rad			- Coffee mug
+openbook.rad		- Open book
+orange_chair.rad	- Orange chair from office model
+pencil.rad		- A pencil with no eraser
+podium.rad		- Podium from conference room
+red_chair.rad		- Red chair from conference room
+speaker.rad		- Loud speaker from conference room
+toilet.rad		- Toilet from bathroom model
+vanity.rad		- Sink and cabinet from bathroom
+wastebasket.rad		- Waste basket from conference room
+whale2.rad		- Whale #2 from Pod Life sculpture
+
+The directory orig contains the original files in their unexpanded,
+unnormalized form.  If you want to make any significant changes to
+these objects, this is the easiest place to do it.

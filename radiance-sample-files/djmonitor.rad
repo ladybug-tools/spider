@@ -1,0 +1,302 @@
+##################################################################################
+## Monitor developed by Dave Jarvis at Victoria University Wellington.
+## 15" monitor with luminous text displayed with specular and diffuse
+## reflections.
+## Base unit in meters with origin at the bottom left when viewing monitor
+## screen.
+## Model is physically accurate, based on real measurements.
+## The screen is modelled in three stages, comprising the specular and diffuse
+## glass reflections and the luminous display.  Modelled using mixfunc.
+##
+## Contact: djarvis@arch.vuw.ac.nz
+## Visit:   http://www.arch.vuw.ac.nz
+##
+#############
+## original idea to use mixfunc taken from jmonitor.rad customised for a glare
+## index model developed by Jean-Jacques Meyer.  Model part of the "LBNL Virtual
+## Laboratory Equipment" series.  Updates can be found at :
+## 	URL: ftp://hobbes.lbl.gov/pub/????
+#############
+## Values used in model are taken from actual measurements. 
+## Reflectance and luminous measurements were then compared with those taken 
+## within a 'virtual experiment'using Radiance and were found to be correct 
+## within 1 nit.
+## Individual results are given in the modelling desciption for each component.
+## Each value can be altered as desired as can the size of the screen and radius
+## of curvature.
+
+#############
+## 1. Luminous text. Luminance of text and background measured with Hagner
+## photometer as 85/5 nits respectively = 0.475/0.028 radiance.  Change radiance
+## values as required.  Text dipslayed is simply the letter 'A'.  This may be
+## replaced with any other string or text file.
+## Glow multiplied by 4 because mixfunc mixes glow with the plastic 50-50 to 
+## create screen_disp_back.  A further 50-50 mix occurs to create screen_disp.
+
+void colortext writing
+3 helvet.fnt . A
+0
+15
+              0.065              0.005               0.34
+               0.25                  0                  0
+                  0                  0              -0.25
+               0.028               0.028               0.028
+               0.475              0.475              0.475
+
+writing glow crtube
+0
+0
+4 4 4 4 0
+
+#############
+## 2. Diffuse reflection component. Diffuse component, as glow, multiplied by 4.
+## Change diffuse reflection component as required.
+
+void plastic screen_glass_back
+0
+0
+5  .5 .5 .5 0 0
+
+void mixfunc screen_disp_back
+4 crtube screen_glass_back .5 .
+0
+0
+
+##############
+## 3. Specular reflection component. Measured as 0.036.  Mirror arguments 
+## doubled as mixfunc mixes at a 50-50 ratio with screen_disp_back to create 
+## screen_disp.
+## Change specular reflection component as required.
+
+void mirror screen_disp_front
+0
+0
+3 0.072 0.072 0.072
+##############
+## Final mixfunc to create screen material
+
+void mixfunc screen_disp
+4 screen_disp_back screen_disp_front .5 .
+0
+0
+
+##############
+## Expression to generate curved screen.
+## Change values as follows:
+## within curv_x, .36 is the width of the screen.
+## within height, .3 is the height of the screen.
+## within curv_y, 3.4 is the radius of curvature of the screen.
+## within the first xform translation .18 is half the width, .15 is half the 
+## height, 3.4 is the radius of curvature and the second translation relates
+## to the monitor housing geometry.
+## Note: changes to the screen geometry may require different monitor size
+
+! gensurf screen_disp screen_surf 'curv_x( s )' 'curv_y( s )' 'height( t )' 20 1 -s -e 'curv_x( s ) =((s-0.5)*.36)' -e 'curv_y( s )=(sqrt( (sq(3.4))-(sq((s-0.5)*.36)) ))*(0-1)' -e 'sq(a)=a*a' -e 'height( t )=(t-0.5)*.3'|xform -t .18 3.4 .15 -t 0 .005 .07
+
+
+######################################################################
+## VUW logo
+
+void colortext VUW
+3 helvet.fnt . VUW
+0
+15	0.2775	-0.002	0.0975
+	0.015	0	0
+	0	0	-0.02
+	0.1	0.4	0.1
+	0.8	0.8	0.35
+
+VUW plastic VUW_logo
+0
+0
+5 1 1 1 0 0
+
+!genbox VUW_logo logo 0.05 0.002 0.025 | xform -t 0.275 -0.002 0.0775
+
+######################################################################
+
+void plastic case
+0
+0
+5 0.5 0.4 0.15 0 0.1
+
+### Radiance scene-file:  case.rad
+### Created: 1996 Nov.15. 12:40
+### TORAD.LSP  by Georg Mischler
+### polygons for object case
+
+case polygon case.1.1
+0
+0
+12
+                  0               0.06              0.065
+               0.04               0.37              0.125
+               0.33               0.37              0.125
+               0.37               0.06              0.065
+
+case polygon case.2.1
+0
+0
+12
+               0.37               0.06               0.37
+               0.33               0.37               0.34
+               0.04               0.37               0.34
+                  0               0.06               0.37
+
+case polygon case.3.1
+0
+0
+12
+               0.04               0.37              0.125
+               0.33               0.37              0.125
+               0.33               0.37               0.34
+               0.04               0.37               0.34
+
+case polygon case.4.1
+0
+0
+12
+                  0               0.06              0.065
+               0.37               0.06              0.065
+               0.37                  0              0.065
+                  0                  0              0.065
+
+case polygon case.5.1
+0
+0
+12
+               0.37                  0               0.37
+               0.37               0.06               0.37
+                  0               0.06               0.37
+                  0                  0               0.37
+
+case polygon case.6.1
+0
+0
+12
+               0.33              0.015               0.34
+               0.34                  0               0.35
+               0.03                  0               0.35
+               0.04              0.015               0.34
+
+case polygon case.7.1
+0
+0
+12
+               0.04              0.015              0.125
+               0.03                  0              0.115
+               0.34                  0              0.115
+               0.33              0.015              0.125
+
+case polygon case.8.1
+0
+0
+12
+               0.37                  0               0.37
+                  0                  0               0.37
+               0.03                  0               0.35
+               0.34                  0               0.35
+
+case polygon case.9.1
+0
+0
+12
+                  0                  0              0.065
+               0.03                  0              0.115
+               0.34                  0              0.115
+               0.37                  0              0.065
+
+case polygon case.10.1
+0
+0
+12
+                  0               0.06               0.37
+               0.04               0.37               0.34
+               0.04               0.37              0.125
+                  0               0.06              0.065
+
+case polygon case.11.1
+0
+0
+12
+                  0                  0               0.37
+                  0               0.06               0.37
+                  0               0.06              0.065
+                  0                  0              0.065
+
+case polygon case.12.1
+0
+0
+12
+               0.04              0.015               0.34
+               0.03                  0               0.35
+               0.03                  0              0.115
+               0.04              0.015              0.125
+
+case polygon case.13.1
+0
+0
+12
+                  0                  0               0.37
+               0.03                  0               0.35
+               0.03                  0              0.115
+                  0                  0              0.065
+
+case polygon case.14.1
+0
+0
+12
+               0.37               0.06              0.065
+               0.33               0.37              0.115
+               0.33               0.37               0.34
+               0.37               0.06               0.37
+
+case polygon case.15.1
+0
+0
+12
+               0.37                  0              0.065
+               0.37               0.06              0.065
+               0.37               0.06               0.37
+               0.37                  0               0.37
+
+case polygon case.16.1
+0
+0
+12
+               0.34                  0               0.35
+               0.34                  0              0.115
+               0.33              0.015              0.125
+               0.33              0.015               0.34
+
+case polygon case.17.1
+0
+0
+12
+               0.37                  0              0.065
+               0.37                  0               0.37
+               0.34                  0               0.35
+               0.34                  0              0.115
+
+### stand
+
+case cylinder stand
+0
+0
+7
+              0.185              0.185                  0
+              0.185              0.185              0.015
+              0.125
+
+case ring standtop
+0
+0
+8
+              0.185              0.185              0.015
+                  0                  0              0.001
+                  0              0.125
+
+case sphere standconn
+0
+0
+4              0.185              0.185               0.15               0.15

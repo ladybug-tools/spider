@@ -1,0 +1,878 @@
+void plastic brown_formica
+0
+0
+5                0.1               0.05               0.07               0.01                0.1
+
+void metal chrome
+0
+0
+5                0.8                0.8                0.8                0.9                  0
+
+void plastic creme_paint
+0
+0
+5                0.7                0.7                0.7               0.05                0.1
+
+brown_formica polygon desktop.0451
+0
+0
+12
+              48.25                 30                  0
+              48.25                 30              30.25
+              -0.25                 30              30.25
+              -0.25                 30                  0
+
+brown_formica polygon desktop.0264
+0
+0
+12
+              -0.25                 30              30.25
+              -0.25                 31              30.25
+              -0.25                 31                  0
+              -0.25                 30                  0
+
+brown_formica polygon desktop.0132
+0
+0
+12
+              -0.25                 31                  0
+              48.25                 31                  0
+              48.25                 30                  0
+              -0.25                 30                  0
+
+brown_formica polygon desktop.7623
+0
+0
+12
+              48.25                 31                  0
+              -0.25                 31                  0
+              -0.25                 31              30.25
+              48.25                 31              30.25
+
+brown_formica polygon desktop.7315
+0
+0
+12
+              48.25                 30              30.25
+              48.25                 30                  0
+              48.25                 31                  0
+              48.25                 31              30.25
+
+brown_formica polygon desktop.7546
+0
+0
+12
+              -0.25                 31              30.25
+              -0.25                 30              30.25
+              48.25                 30              30.25
+              48.25                 31              30.25
+
+chrome polygon leg0.f.0451
+0
+0
+12
+                  1                  0                  0
+                  1                  0                  1
+                  0                  0                  1
+                  0                  0                  0
+
+chrome polygon leg0.f.0264
+0
+0
+12
+                  0                  0                  1
+                  0                 30                  1
+                  0                 30                  0
+                  0                  0                  0
+
+chrome polygon leg0.f.0132
+0
+0
+12
+                  0                 30                  0
+                  1                 30                  0
+                  1                  0                  0
+                  0                  0                  0
+
+chrome polygon leg0.f.7623
+0
+0
+12
+                  1                 30                  0
+                  0                 30                  0
+                  0                 30                  1
+                  1                 30                  1
+
+chrome polygon leg0.f.7315
+0
+0
+12
+                  1                  0                  1
+                  1                  0                  0
+                  1                 30                  0
+                  1                 30                  1
+
+chrome polygon leg0.f.7546
+0
+0
+12
+                  0                 30                  1
+                  0                  0                  1
+                  1                  0                  1
+                  1                 30                  1
+
+chrome polygon leg1.f.0451
+0
+0
+12
+                 48                  0                  0
+                 48                  0                  1
+                 47                  0                  1
+                 47                  0                  0
+
+chrome polygon leg1.f.0264
+0
+0
+12
+                 47                  0                  1
+                 47                 30                  1
+                 47                 30                  0
+                 47                  0                  0
+
+chrome polygon leg1.f.0132
+0
+0
+12
+                 47                 30                  0
+                 48                 30                  0
+                 48                  0                  0
+                 47                  0                  0
+
+chrome polygon leg1.f.7623
+0
+0
+12
+                 48                 30                  0
+                 47                 30                  0
+                 47                 30                  1
+                 48                 30                  1
+
+chrome polygon leg1.f.7315
+0
+0
+12
+                 48                  0                  1
+                 48                  0                  0
+                 48                 30                  0
+                 48                 30                  1
+
+chrome polygon leg1.f.7546
+0
+0
+12
+                 47                 30                  1
+                 47                  0                  1
+                 48                  0                  1
+                 48                 30                  1
+
+chrome polygon leg2.f.0451
+0
+0
+12
+                 48                  0                 29
+                 48                  0                 30
+                 47                  0                 30
+                 47                  0                 29
+
+chrome polygon leg2.f.0264
+0
+0
+12
+                 47                  0                 30
+                 47                 30                 30
+                 47                 30                 29
+                 47                  0                 29
+
+chrome polygon leg2.f.0132
+0
+0
+12
+                 47                 30                 29
+                 48                 30                 29
+                 48                  0                 29
+                 47                  0                 29
+
+chrome polygon leg2.f.7623
+0
+0
+12
+                 48                 30                 29
+                 47                 30                 29
+                 47                 30                 30
+                 48                 30                 30
+
+chrome polygon leg2.f.7315
+0
+0
+12
+                 48                  0                 30
+                 48                  0                 29
+                 48                 30                 29
+                 48                 30                 30
+
+chrome polygon leg2.f.7546
+0
+0
+12
+                 47                 30                 30
+                 47                  0                 30
+                 48                  0                 30
+                 48                 30                 30
+
+chrome polygon leg3.f.0451
+0
+0
+12
+                  1                  0                 29
+                  1                  0                 30
+                  0                  0                 30
+                  0                  0                 29
+
+chrome polygon leg3.f.0264
+0
+0
+12
+                  0                  0                 30
+                  0                 30                 30
+                  0                 30                 29
+                  0                  0                 29
+
+chrome polygon leg3.f.0132
+0
+0
+12
+                  0                 30                 29
+                  1                 30                 29
+                  1                  0                 29
+                  0                  0                 29
+
+chrome polygon leg3.f.7623
+0
+0
+12
+                  1                 30                 29
+                  0                 30                 29
+                  0                 30                 30
+                  1                 30                 30
+
+chrome polygon leg3.f.7315
+0
+0
+12
+                  1                  0                 30
+                  1                  0                 29
+                  1                 30                 29
+                  1                 30                 30
+
+chrome polygon leg3.f.7546
+0
+0
+12
+                  0                 30                 30
+                  0                  0                 30
+                  1                  0                 30
+                  1                 30                 30
+
+creme_paint polygon back.cubby.0451
+0
+0
+12
+                 47                  9                  0
+                 47                  9                  1
+                  1                  9                  1
+                  1                  9                  0
+
+creme_paint polygon back.cubby.0264
+0
+0
+12
+                  1                  9                  1
+                  1                 30                  1
+                  1                 30                  0
+                  1                  9                  0
+
+creme_paint polygon back.cubby.0132
+0
+0
+12
+                  1                 30                  0
+                 47                 30                  0
+                 47                  9                  0
+                  1                  9                  0
+
+creme_paint polygon back.cubby.7623
+0
+0
+12
+                 47                 30                  0
+                  1                 30                  0
+                  1                 30                  1
+                 47                 30                  1
+
+creme_paint polygon back.cubby.7315
+0
+0
+12
+                 47                  9                  1
+                 47                  9                  0
+                 47                 30                  0
+                 47                 30                  1
+
+creme_paint polygon back.cubby.7546
+0
+0
+12
+                  1                 30                  1
+                  1                  9                  1
+                 47                  9                  1
+                 47                 30                  1
+
+creme_paint polygon left.cubby.0451
+0
+0
+12
+                  1                  9                  1
+                  1                  9                 29
+                  0                  9                 29
+                  0                  9                  1
+
+creme_paint polygon left.cubby.0264
+0
+0
+12
+                  0                  9                 29
+                  0                 30                 29
+                  0                 30                  1
+                  0                  9                  1
+
+creme_paint polygon left.cubby.0132
+0
+0
+12
+                  0                 30                  1
+                  1                 30                  1
+                  1                  9                  1
+                  0                  9                  1
+
+creme_paint polygon left.cubby.7623
+0
+0
+12
+                  1                 30                  1
+                  0                 30                  1
+                  0                 30                 29
+                  1                 30                 29
+
+creme_paint polygon left.cubby.7315
+0
+0
+12
+                  1                  9                 29
+                  1                  9                  1
+                  1                 30                  1
+                  1                 30                 29
+
+creme_paint polygon left.cubby.7546
+0
+0
+12
+                  0                 30                 29
+                  0                  9                 29
+                  1                  9                 29
+                  1                 30                 29
+
+creme_paint polygon right.cubby.0451
+0
+0
+12
+                 48                  9                  1
+                 48                  9                 29
+                 47                  9                 29
+                 47                  9                  1
+
+creme_paint polygon right.cubby.0264
+0
+0
+12
+                 47                  9                 29
+                 47                 30                 29
+                 47                 30                  1
+                 47                  9                  1
+
+creme_paint polygon right.cubby.0132
+0
+0
+12
+                 47                 30                  1
+                 48                 30                  1
+                 48                  9                  1
+                 47                  9                  1
+
+creme_paint polygon right.cubby.7623
+0
+0
+12
+                 48                 30                  1
+                 47                 30                  1
+                 47                 30                 29
+                 48                 30                 29
+
+creme_paint polygon right.cubby.7315
+0
+0
+12
+                 48                  9                 29
+                 48                  9                  1
+                 48                 30                  1
+                 48                 30                 29
+
+creme_paint polygon right.cubby.7546
+0
+0
+12
+                 47                 30                 29
+                 47                  9                 29
+                 48                  9                 29
+                 48                 30                 29
+
+creme_paint polygon top.drawer.0451
+0
+0
+12
+                 47                 24                  1
+                 47                 24                 30
+                 33                 24                 30
+                 33                 24                  1
+
+creme_paint polygon top.drawer.0264
+0
+0
+12
+                 33                 24                 30
+                 33                 30                 30
+                 33                 30                  1
+                 33                 24                  1
+
+creme_paint polygon top.drawer.0132
+0
+0
+12
+                 33                 30                  1
+                 47                 30                  1
+                 47                 24                  1
+                 33                 24                  1
+
+creme_paint polygon top.drawer.7623
+0
+0
+12
+                 47                 30                  1
+                 33                 30                  1
+                 33                 30                 30
+                 47                 30                 30
+
+creme_paint polygon top.drawer.7315
+0
+0
+12
+                 47                 24                 30
+                 47                 24                  1
+                 47                 30                  1
+                 47                 30                 30
+
+creme_paint polygon top.drawer.7546
+0
+0
+12
+                 33                 30                 30
+                 33                 24                 30
+                 47                 24                 30
+                 47                 30                 30
+
+creme_paint polygon bottom.drawer.0451
+0
+0
+12
+                 47                  9                  1
+                 47                  9                 30
+                 33                  9                 30
+                 33                  9                  1
+
+creme_paint polygon bottom.drawer.0264
+0
+0
+12
+                 33                  9                 30
+                 33              23.75                 30
+                 33              23.75                  1
+                 33                  9                  1
+
+creme_paint polygon bottom.drawer.0132
+0
+0
+12
+                 33              23.75                  1
+                 47              23.75                  1
+                 47                  9                  1
+                 33                  9                  1
+
+creme_paint polygon bottom.drawer.7623
+0
+0
+12
+                 47              23.75                  1
+                 33              23.75                  1
+                 33              23.75                 30
+                 47              23.75                 30
+
+creme_paint polygon bottom.drawer.7315
+0
+0
+12
+                 47                  9                 30
+                 47                  9                  1
+                 47              23.75                  1
+                 47              23.75                 30
+
+creme_paint polygon bottom.drawer.7546
+0
+0
+12
+                 33              23.75                 30
+                 33                  9                 30
+                 47                  9                 30
+                 47              23.75                 30
+
+chrome polygon top.handle.0451
+0
+0
+12
+               42.5             26.625                 31
+               42.5             26.625               31.5
+               37.5             26.625               31.5
+               37.5             26.625                 31
+
+chrome polygon top.handle.0264
+0
+0
+12
+               37.5             26.625               31.5
+               37.5             27.375               31.5
+               37.5             27.375                 31
+               37.5             26.625                 31
+
+chrome polygon top.handle.0132
+0
+0
+12
+               37.5             27.375                 31
+               42.5             27.375                 31
+               42.5             26.625                 31
+               37.5             26.625                 31
+
+chrome polygon top.handle.7623
+0
+0
+12
+               42.5             27.375                 31
+               37.5             27.375                 31
+               37.5             27.375               31.5
+               42.5             27.375               31.5
+
+chrome polygon top.handle.7315
+0
+0
+12
+               42.5             26.625               31.5
+               42.5             26.625                 31
+               42.5             27.375                 31
+               42.5             27.375               31.5
+
+chrome polygon top.handle.7546
+0
+0
+12
+               37.5             27.375               31.5
+               37.5             26.625               31.5
+               42.5             26.625               31.5
+               42.5             27.375               31.5
+
+chrome polygon top.handle.left.support.0451
+0
+0
+12
+               38.5             26.625                 30
+               38.5             26.625                 31
+                 38             26.625                 31
+                 38             26.625                 30
+
+chrome polygon top.handle.left.support.0264
+0
+0
+12
+                 38             26.625                 31
+                 38             27.375                 31
+                 38             27.375                 30
+                 38             26.625                 30
+
+chrome polygon top.handle.left.support.0132
+0
+0
+12
+                 38             27.375                 30
+               38.5             27.375                 30
+               38.5             26.625                 30
+                 38             26.625                 30
+
+chrome polygon top.handle.left.support.7623
+0
+0
+12
+               38.5             27.375                 30
+                 38             27.375                 30
+                 38             27.375                 31
+               38.5             27.375                 31
+
+chrome polygon top.handle.left.support.7315
+0
+0
+12
+               38.5             26.625                 31
+               38.5             26.625                 30
+               38.5             27.375                 30
+               38.5             27.375                 31
+
+chrome polygon top.handle.left.support.7546
+0
+0
+12
+                 38             27.375                 31
+                 38             26.625                 31
+               38.5             26.625                 31
+               38.5             27.375                 31
+
+chrome polygon top.handle.right.support.0451
+0
+0
+12
+                 42             26.625                 30
+                 42             26.625                 31
+               41.5             26.625                 31
+               41.5             26.625                 30
+
+chrome polygon top.handle.right.support.0264
+0
+0
+12
+               41.5             26.625                 31
+               41.5             27.375                 31
+               41.5             27.375                 30
+               41.5             26.625                 30
+
+chrome polygon top.handle.right.support.0132
+0
+0
+12
+               41.5             27.375                 30
+                 42             27.375                 30
+                 42             26.625                 30
+               41.5             26.625                 30
+
+chrome polygon top.handle.right.support.7623
+0
+0
+12
+                 42             27.375                 30
+               41.5             27.375                 30
+               41.5             27.375                 31
+                 42             27.375                 31
+
+chrome polygon top.handle.right.support.7315
+0
+0
+12
+                 42             26.625                 31
+                 42             26.625                 30
+                 42             27.375                 30
+                 42             27.375                 31
+
+chrome polygon top.handle.right.support.7546
+0
+0
+12
+               41.5             27.375                 31
+               41.5             26.625                 31
+                 42             26.625                 31
+                 42             27.375                 31
+
+chrome polygon bottom.handle.0451
+0
+0
+12
+               42.5             20.375                 31
+               42.5             20.375               31.5
+               37.5             20.375               31.5
+               37.5             20.375                 31
+
+chrome polygon bottom.handle.0264
+0
+0
+12
+               37.5             20.375               31.5
+               37.5             21.125               31.5
+               37.5             21.125                 31
+               37.5             20.375                 31
+
+chrome polygon bottom.handle.0132
+0
+0
+12
+               37.5             21.125                 31
+               42.5             21.125                 31
+               42.5             20.375                 31
+               37.5             20.375                 31
+
+chrome polygon bottom.handle.7623
+0
+0
+12
+               42.5             21.125                 31
+               37.5             21.125                 31
+               37.5             21.125               31.5
+               42.5             21.125               31.5
+
+chrome polygon bottom.handle.7315
+0
+0
+12
+               42.5             20.375               31.5
+               42.5             20.375                 31
+               42.5             21.125                 31
+               42.5             21.125               31.5
+
+chrome polygon bottom.handle.7546
+0
+0
+12
+               37.5             21.125               31.5
+               37.5             20.375               31.5
+               42.5             20.375               31.5
+               42.5             21.125               31.5
+
+chrome polygon bottom.handle.left.support.0451
+0
+0
+12
+               38.5             20.375                 30
+               38.5             20.375                 31
+                 38             20.375                 31
+                 38             20.375                 30
+
+chrome polygon bottom.handle.left.support.0264
+0
+0
+12
+                 38             20.375                 31
+                 38             21.125                 31
+                 38             21.125                 30
+                 38             20.375                 30
+
+chrome polygon bottom.handle.left.support.0132
+0
+0
+12
+                 38             21.125                 30
+               38.5             21.125                 30
+               38.5             20.375                 30
+                 38             20.375                 30
+
+chrome polygon bottom.handle.left.support.7623
+0
+0
+12
+               38.5             21.125                 30
+                 38             21.125                 30
+                 38             21.125                 31
+               38.5             21.125                 31
+
+chrome polygon bottom.handle.left.support.7315
+0
+0
+12
+               38.5             20.375                 31
+               38.5             20.375                 30
+               38.5             21.125                 30
+               38.5             21.125                 31
+
+chrome polygon bottom.handle.left.support.7546
+0
+0
+12
+                 38             21.125                 31
+                 38             20.375                 31
+               38.5             20.375                 31
+               38.5             21.125                 31
+
+chrome polygon bottom.handle.right.support.0451
+0
+0
+12
+                 42             20.375                 30
+                 42             20.375                 31
+               41.5             20.375                 31
+               41.5             20.375                 30
+
+chrome polygon bottom.handle.right.support.0264
+0
+0
+12
+               41.5             20.375                 31
+               41.5             21.125                 31
+               41.5             21.125                 30
+               41.5             20.375                 30
+
+chrome polygon bottom.handle.right.support.0132
+0
+0
+12
+               41.5             21.125                 30
+                 42             21.125                 30
+                 42             20.375                 30
+               41.5             20.375                 30
+
+chrome polygon bottom.handle.right.support.7623
+0
+0
+12
+                 42             21.125                 30
+               41.5             21.125                 30
+               41.5             21.125                 31
+                 42             21.125                 31
+
+chrome polygon bottom.handle.right.support.7315
+0
+0
+12
+                 42             20.375                 31
+                 42             20.375                 30
+                 42             21.125                 30
+                 42             21.125                 31
+
+chrome polygon bottom.handle.right.support.7546
+0
+0
+12
+               41.5             21.125                 31
+               41.5             20.375                 31
+                 42             20.375                 31
+                 42             21.125                 31

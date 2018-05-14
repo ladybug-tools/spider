@@ -1,0 +1,50 @@
+#
+# A humble throne
+#
+
+!genbox toilet_mat base0 15 9 1 -r .2 | xform -t 7 5.5 0
+
+!genprism toilet_mat base1 7	9 .5	3 9	3 13	10 13 \
+	15 9	21 9	21 .5 	-l 0 0 5 | xform -rx 90 -t 0 12.5 0
+
+!genbox toilet_mat base2 11 8.5 2 -r .2 | xform -t 0 5.75 13
+
+!genprism toilet_mat tank 10	0.25 1	0.25 19.25	1 20	5.5 20 \
+	6.5 19	7.5 15	7.5 5.25	6.5 1.25	5.25 0.25 \
+	1 0.25 -l 0 0 15 | xform -t 0 0 15
+
+!genprism toilet_mat tank_lid 10	0 1	0 19.5	1 20.25	5.5 20.25 \
+	6.5 19.25	7.75 15	7.75 5.25	6.5 1	5.25 0 \
+	1 0 -l 0 0 2 | xform -t 0 0 28.2
+
+!xform -e -n flusher -rx -5 -rz -14.5 -t 7 3.25 27 flushand
+
+!gensurf toilet_mat bowl '18+8*cos(ph(s))*sin(th(t))' \
+	'10+7*sin(ph(s))*sin(th(t))' '14+8*cos(th(t))' 12 7 -s \
+	-e 'ph(s)=2*PI*s;th(t)=PI*(.9-.44*t);'
+
+!cnt 20 | rcalc -e '$1=8*cos(th);$2=7*sin(th);th=(-150+300*$1/19)*PI/180' \
+	| genprism xwood lid_lower - -l 0 0 .875 \
+	| xform -s 1.05 -t 18 10 15.15
+
+!cnt 20 | rcalc -e '$1=8*cos(th);$2=7*sin(th);th=(-150+300*$1/19)*PI/180' \
+	| genprism xwood lid_upper - -l 0 0 .875 \
+	| xform -s .98 -t 18 10 16.25
+
+brass cylinder lid_hinge1
+0
+0
+7
+	10	7	15.5
+	10	13	15.5
+	.15
+
+brass sphere lid_hinge0
+0
+0
+4	10	7	15.5	.15
+
+brass sphere lid_hinge2
+0
+0
+4	10	13	15.5	.15

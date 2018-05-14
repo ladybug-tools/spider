@@ -1,0 +1,134 @@
+void light incandescent60
+0
+0
+3 5.2 5.2 5.2
+
+void plastic tan_paint
+0
+0
+5 .3 .2 .2 .05 .0
+
+void plastic white_paint
+0
+0
+5 .9 .9 .9 .1 .0
+
+tan_paint ring base_bottom
+0
+0
+8 0 0 0 0 -1 0 0 3
+
+tan_paint cylinder base_side
+0
+0
+7 0 0 0 0 .75 0 3
+
+tan_paint cone base_rim
+0
+0
+8 0 .75 0 0 1 0 3 2.75
+
+tan_paint ring base_top
+0
+0
+8 0 1 0 0 1 0 0 2.75
+
+tan_paint sphere base_pivot
+0
+0
+4 2 1 0 .5
+
+tan_paint cylinder lower_arm
+0
+0
+7
+	                 2	                 1	                 0
+	     6.44626186323	     13.2160040702	                 0
+	              0.25
+
+tan_paint sphere arm_pivot
+0
+0
+4      6.44626186323      13.2160040702                  0                0.5
+
+tan_paint cylinder upper_arm
+0
+0
+7
+	             6.446	            13.216	                 0
+	    -2.21425403784	            18.216	                 0
+	              0.25
+
+tan_paint sphere head_pivot
+0
+0
+4     -2.21425403784             18.216                  0                0.5
+
+tan_paint ring head.top
+0
+0
+8
+	    -2.53275569884	     19.2876318418	                 0
+	    0.173648177667	    0.984807753012	                 0
+	                 0	              0.75
+
+tan_paint cone head.out0
+0
+0
+8
+	    -2.53275569884	     19.2876318418	                 0
+	    -3.05370023184	     16.3332085828	                 0
+	              0.75	                 1
+
+white_paint cup head.in0
+0
+0
+8
+	    -2.53275569884	     19.2876318418	                 0
+	    -3.05370023184	     16.3332085828	                 0
+	              0.74	               0.9
+
+tan_paint cone head.out1
+0
+0
+8
+	    -3.05370023184	     16.3332085828	                 0
+	    -3.22734840951	     15.3484008298	                 0
+	                 1	                 2
+
+white_paint cup head.in1
+0
+0
+8
+	    -3.05370023184	     16.3332085828	                 0
+	    -3.22734840951	     15.3484008298	                 0
+	               0.9	               1.9
+
+tan_paint cone head.out2
+0
+0
+8
+	    -3.22734840951	     15.3484008298	                 0
+	    -3.66146885367	     12.8863814473	                 0
+	                 2	                 3
+
+white_paint cup head.in2
+0
+0
+8
+	    -3.22734840951	     15.3484008298	                 0
+	    -3.66146885367	     12.8863814473	                 0
+	               1.9	               2.9
+
+tan_paint ring head.rim
+0
+0
+8
+	    -3.66146885367	     12.8863814473	                 0
+	   -0.173648177667	   -0.984807753012	                 0
+	               2.9	                 3
+
+incandescent60 sphere lightbulb
+0
+0
+4     -3.40099658717      14.3635930768                  0               1.25

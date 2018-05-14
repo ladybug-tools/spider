@@ -1,0 +1,27 @@
+# description of a small table of the conference room
+# mesures are in inches
+
+void brightfunc xwood_pat
+4 xgrain woodpat.cal -s .4
+0
+1                0.6
+
+xwood_pat plastic table_mat
+0
+0
+5 .29 .15 .13 .005 .1
+
+!genprism table_mat table table.pts -l 0 0 1.625 |xform -rz 180 -t 0 0 28 
+
+#
+# The legs of the table
+#
+
+void plastic leg_mat
+0
+0
+5 .06 .06 .06 0 0
+
+!xform -e -n stand.out -t 12.5 24 0 table.stand
+
+!xform -e -n stand.in -t 47.5 24 0 table.stand

@@ -1,0 +1,5 @@
+#
+# A double fluke for a whale
+#
+
+!xform -e -t 0 .478 0 -s .35 -ry -90 -a 2 -mx -a 2 -my fluke.patch

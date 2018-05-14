@@ -1,0 +1,232 @@
+################################
+# Copyright (c) 1991 Greg Ward #
+# Windows and Lighting Program #
+# Lawrence Berkeley Laboratory #
+# Berkeley, CA	94720	       #
+################################
+#
+# A grey cover book for putting on a shelf or something
+#
+#	Units = centimeters
+#	book is lying on its side
+#	(0,0,0) at base of binding
+#	X-axis runs along length of book
+#	Y-axis runs along width of book
+#	Z-axis runs along book thickness
+#
+# Overall dimensions are 24 by 17 by 3.5 centimeters
+#
+################################
+# MATERIALS:
+
+void plastic cover_mat
+0
+0
+5 .5 .4 .4 0 0
+
+################################
+# From book.orig:
+# xform -e -rz 90 -ry 90 -s 2.54
+#
+#  A 9.5" X 6.5" book.
+#  The cover material must be defined as cover_mat
+#
+# genbox cover_mat back_cover 6.5 .125 9.5
+
+cover_mat polygon back_cover.1540
+0
+0
+12
+  6.18984962932e-32		 16.51 -0
+	      24.13		 16.51	0
+	      24.13		     0	0
+		  0		     0			0
+
+cover_mat polygon back_cover.4620
+0
+0
+12
+	      24.13		     0	0
+	      24.13  0		   0.3175
+ -0  0		   0.3175
+		  0		     0			0
+
+cover_mat polygon back_cover.2310
+0
+0
+12
+ -0  0		   0.3175
+ -0		 16.51		   0.3175
+  6.18984962932e-32		 16.51 -0
+		  0		     0			0
+
+cover_mat polygon back_cover.3267
+0
+0
+12
+ -0		 16.51		   0.3175
+ -0  0		   0.3175
+	      24.13  0		   0.3175
+	      24.13		 16.51		   0.3175
+
+cover_mat polygon back_cover.5137
+0
+0
+12
+	      24.13		 16.51	0
+  6.18984962932e-32		 16.51 -0
+ -0		 16.51		   0.3175
+	      24.13		 16.51		   0.3175
+
+cover_mat polygon back_cover.6457
+0
+0
+12
+	      24.13  0		   0.3175
+	      24.13		     0	0
+	      24.13		 16.51	0
+	      24.13		 16.51		   0.3175
+# xform -t 0 1.25 0
+# genbox cover_mat front_cover 6.5 .125 9.5
+
+cover_mat polygon front_cover.1540
+0
+0
+12
+ -0		 16.51		    3.175
+	      24.13		 16.51		    3.175
+	      24.13  0		    3.175
+ -0  0		    3.175
+
+cover_mat polygon front_cover.4620
+0
+0
+12
+	      24.13  0		    3.175
+	      24.13  0		   3.4925
+ -0  0		   3.4925
+ -0  0		    3.175
+
+cover_mat polygon front_cover.2310
+0
+0
+12
+ -0  0		   3.4925
+ -0		 16.51		   3.4925
+ -0		 16.51		    3.175
+ -0  0		    3.175
+
+cover_mat polygon front_cover.3267
+0
+0
+12
+ -0		 16.51		   3.4925
+ -0  0		   3.4925
+	      24.13  0		   3.4925
+	      24.13		 16.51		   3.4925
+
+cover_mat polygon front_cover.5137
+0
+0
+12
+	      24.13		 16.51		    3.175
+ -0		 16.51		    3.175
+ -0		 16.51		   3.4925
+	      24.13		 16.51		   3.4925
+
+cover_mat polygon front_cover.6457
+0
+0
+12
+	      24.13  0		   3.4925
+	      24.13  0		    3.175
+	      24.13		 16.51		    3.175
+	      24.13		 16.51		   3.4925
+# xform -t -.125 .125 0
+# genbox cover_mat bind_cover .125 1.125 9.5
+
+cover_mat polygon bind_cover.1540
+0
+0
+12
+ -0  0		   0.3175
+	      24.13  0		   0.3175
+	      24.13	       -0.3175		   0.3175
+ -0	       -0.3175		   0.3175
+
+cover_mat polygon bind_cover.4620
+0
+0
+12
+	      24.13	       -0.3175		   0.3175
+	      24.13	       -0.3175		    3.175
+ -0	       -0.3175		    3.175
+ -0	       -0.3175		   0.3175
+
+cover_mat polygon bind_cover.2310
+0
+0
+12
+ -0	       -0.3175		    3.175
+ -0  0		    3.175
+ -0  0		   0.3175
+ -0	       -0.3175		   0.3175
+
+cover_mat polygon bind_cover.3267
+0
+0
+12
+ -0  0		    3.175
+ -0	       -0.3175		    3.175
+	      24.13	       -0.3175		    3.175
+	      24.13  0		    3.175
+
+cover_mat polygon bind_cover.5137
+0
+0
+12
+	      24.13  0		   0.3175
+ -0  0		   0.3175
+ -0  0		    3.175
+	      24.13  0		    3.175
+
+cover_mat polygon bind_cover.6457
+0
+0
+12
+	      24.13	       -0.3175		    3.175
+	      24.13	       -0.3175		   0.3175
+	      24.13  0		   0.3175
+	      24.13  0		    3.175
+
+void plastic page_mat
+0
+0
+5		 0.7		    0.7		       0.7		    0		     0.1
+
+page_mat polygon top_pages
+0
+0
+12
+	     0.3175  0		    3.175
+	     0.3175	       16.1925		    3.175
+	     0.3175	       16.1925		   0.3175
+	     0.3175  0		   0.3175
+
+page_mat polygon side_pages
+0
+0
+12
+	     0.3175	       16.1925		    3.175
+	    23.8125	       16.1925		    3.175
+	    23.8125	       16.1925		   0.3175
+	     0.3175	       16.1925		   0.3175
+
+page_mat polygon bot_pages
+0
+0
+12
+	    23.8125	       16.1925		    3.175
+	    23.8125  0		    3.175
+	    23.8125  0		   0.3175
+	    23.8125	       16.1925		   0.3175

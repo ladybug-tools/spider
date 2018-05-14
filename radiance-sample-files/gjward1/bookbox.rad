@@ -1,0 +1,304 @@
+################################
+# Copyright (c) 1991 Greg Ward #
+# Windows and Lighting Program #
+# Lawrence Berkeley Laboratory #
+# Berkeley, CA	94720	       #
+################################
+#
+# The enclosed book shelf from the daylighted office model
+#
+# Depends on:
+#	woodpat.cal
+#
+#	Units = meters
+#	(0,0,0) at back right corner (as seen from front)
+#	X-axis points along length of box
+#	Y-axis points towards front
+#	Z-axis point up
+#
+# Overall dimensions are .9 by .25 by .3 meters
+#
+################################
+# xform -t 2 0 0 -rx 90 -rz 180 -t 36 0 0 -s .0254
+#
+#  An enclosed book shelf.
+#
+
+void brightfunc xgrain
+18 xgrain woodpat.cal -s .6 -t 2 0 0 -rx 90 -rz 180 -t 36 0 0 -s .0254
+0
+1 .8
+
+void brightfunc ygrain
+18 ygrain woodpat.cal -s .6 -t 2 0 0 -rx 90 -rz 180 -t 36 0 0 -s .0254
+0
+1 .8
+
+void brightfunc zgrain
+18 zgrain woodpat.cal -s .6 -t 2 0 0 -rx 90 -rz 180 -t 36 0 0 -s .0254
+0
+1 .8
+
+xgrain plastic xpine
+0
+0
+5		 0.6		   0.25		       0.1		0.005		    0.08
+
+ygrain plastic ypine
+0
+0
+5		 0.6		   0.25		       0.1		0.005		    0.08
+
+zgrain plastic zpine
+0
+0
+5		 0.6		   0.25		       0.1		0.005		    0.08
+
+void plastic orange_plastic
+0
+0
+5		 0.7		    0.2			 0		    0		    0.05
+
+xpine polygon base.0451
+0
+0
+12
+	    -0.0254  0		  -0.0508
+	    -0.0254		0.2286		  -0.0508
+	     0.8382		0.2286		  -0.0508
+	     0.8382  0		  -0.0508
+
+zpine polygon base.0264
+0
+0
+12
+	     0.8382		0.2286		  -0.0508
+	     0.8382		0.2286	0
+	     0.8382  0			0
+	     0.8382  0		  -0.0508
+
+xpine polygon base.0132
+0
+0
+12
+	     0.8382  0			0
+	    -0.0254  0			0
+	    -0.0254  0		  -0.0508
+	     0.8382  0		  -0.0508
+
+zpine polygon base.7315
+0
+0
+12
+	    -0.0254		0.2286		  -0.0508
+	    -0.0254  0		  -0.0508
+	    -0.0254  0			0
+	    -0.0254		0.2286	0
+
+xpine polygon base.7546
+0
+0
+12
+	     0.8382		0.2286	0
+	     0.8382		0.2286		  -0.0508
+	    -0.0254		0.2286		  -0.0508
+	    -0.0254		0.2286	0
+
+ypine polygon side.kmqo
+0
+0
+12
+	     0.8636		0.2286		   0.0254
+	     0.8636		0.2286		   0.2794
+	     0.8636		0.0254		   0.2794
+	     0.8636		0.0254		   0.0254
+
+xpine polygon side.MNPO
+0
+0
+12
+	     0.8382 -0		   0.2794
+	    -0.0254  0		   0.2794
+	    -0.0254  0		   0.0254
+	     0.8382  0		   0.0254
+
+xpine polygon side.jief
+0
+0
+12
+	    -0.0254		0.0254		   0.3048
+	     0.8382		0.0254		   0.3048
+	     0.8382		0.2286		   0.3048
+	    -0.0254		0.2286		   0.3048
+
+ypine polygon side.rnlp
+0
+0
+12
+	    -0.0508		0.2286		   0.0254
+	    -0.0508		0.0254		   0.0254
+	    -0.0508		0.0254		   0.2794
+	    -0.0508		0.2286		   0.2794
+
+orange_plastic polygon front
+0
+0
+12
+	     0.8382		0.2286		   0.2794
+	     0.8382		0.2286		   0.0762
+	    -0.0254		0.2286		   0.0762
+	    -0.0254		0.2286		   0.2794
+
+orange_plastic polygon lip_upper
+0
+0
+12
+	     0.8382		0.2032		   0.0762
+	    -0.0254		0.2032		   0.0762
+	    -0.0254		0.2286		   0.0762
+	     0.8382		0.2286		   0.0762
+
+orange_plastic polygon lip_inner
+0
+0
+12
+	     0.8382		0.2032		   0.0508
+	    -0.0254		0.2032		   0.0508
+	    -0.0254		0.2032		   0.0762
+	     0.8382		0.2032		   0.0762
+
+xpine cylinder side.hi
+0
+0
+7
+	     0.8382		0.0254		   0.0254
+	    -0.0254		0.0254		   0.0254
+	     0.0254
+
+zpine cylinder side.hl
+0
+0
+7
+	     0.8382		0.0254		   0.0254
+	     0.8382		0.2286		   0.0254
+	     0.0254
+
+ypine cylinder side.hj
+0
+0
+7
+	     0.8382		0.0254		   0.0254
+	     0.8382		0.0254		   0.2794
+	     0.0254
+
+ypine cylinder side.ki
+0
+0
+7
+	    -0.0254		0.0254		   0.2794
+	    -0.0254		0.0254		   0.0254
+	     0.0254
+
+xpine cylinder side.kj
+0
+0
+7
+	    -0.0254		0.0254		   0.2794
+	     0.8382		0.0254		   0.2794
+	     0.0254
+
+zpine cylinder side.ko
+0
+0
+7
+	    -0.0254		0.0254		   0.2794
+	    -0.0254		0.2286		   0.2794
+	     0.0254
+
+zpine cylinder side.mi
+0
+0
+7
+	    -0.0254		0.2286		   0.0254
+	    -0.0254		0.0254		   0.0254
+	     0.0254
+
+xpine cylinder side.ml
+0
+0
+7
+	    -0.0254		0.2286		   0.0254
+	     0.8382		0.2286		   0.0254
+	     0.0254
+
+ypine cylinder side.mo
+0
+0
+7
+	    -0.0254		0.2286		   0.0254
+	    -0.0254		0.2286		   0.2794
+	     0.0254
+
+zpine cylinder side.nj
+0
+0
+7
+	     0.8382		0.2286		   0.2794
+	     0.8382		0.0254		   0.2794
+	     0.0254
+
+ypine cylinder side.nl
+0
+0
+7
+	     0.8382		0.2286		   0.2794
+	     0.8382		0.2286		   0.0254
+	     0.0254
+
+xpine cylinder side.no
+0
+0
+7
+	     0.8382		0.2286		   0.2794
+	    -0.0254		0.2286		   0.2794
+	     0.0254
+
+ypine sphere side.h
+0
+0
+4	      0.8382		 0.0254		    0.0254	       0.0254
+
+ypine sphere side.i
+0
+0
+4	     -0.0254		 0.0254		    0.0254	       0.0254
+
+ypine sphere side.j
+0
+0
+4	      0.8382		 0.0254		    0.2794	       0.0254
+
+ypine sphere side.k
+0
+0
+4	     -0.0254		 0.0254		    0.2794	       0.0254
+
+ypine sphere side.l
+0
+0
+4	      0.8382		 0.2286		    0.0254	       0.0254
+
+ypine sphere side.m
+0
+0
+4	     -0.0254		 0.2286		    0.0254	       0.0254
+
+ypine sphere side.n
+0
+0
+4	      0.8382		 0.2286		    0.2794	       0.0254
+
+ypine sphere side.o
+0
+0
+4	     -0.0254		 0.2286		    0.2794	       0.0254

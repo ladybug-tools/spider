@@ -1,0 +1,230 @@
+#
+# A fire extinguisher
+#
+
+void metal stainless_steel
+0
+0
+5 .7 .7 .7 .8 0
+
+void metal steel
+0
+0
+5 .6 .6 .6 .7 0
+
+void plastic rubber
+0
+0
+5 .1 .1 .1 0 0
+
+void glass trans_plastic
+0
+0
+3 .8 .8 .8
+
+stainless_steel ring bottom
+0
+0
+8
+	0	0	0
+	0	0	-1
+	0	3.5
+
+stainless_steel cylinder outer
+0
+0
+7
+	0	0	0
+	0	0	20
+	3.5
+
+stainless_steel sphere top
+0
+0
+4	0	0	20	3.5
+
+steel cylinder neck.1
+0
+0
+7
+	0	0	23
+	0	0	24
+	1.5
+
+steel ring neck.2
+0
+0
+8
+	0	0	24
+	0	0	1
+	1.5	.5
+
+steel cylinder neck.3
+0
+0
+7
+	0	0	24
+	0	0	26
+	.5
+
+steel sphere neck.4
+0
+0
+4                  0                  0                 26               0.75
+
+#!genbox steel trigger 4 1.5 .2 | xform -ry -20 -t 0 -.75 26
+# xform -ry -20 -t 0 -.75 26
+# genbox steel trigger 4 1.5 1 -b .2
+
+steel polygon trigger.SQRT
+0
+0
+12
+    -0.154081619168               0.55      27.0080966495
+    -0.154081619168              -0.55      27.0080966495
+      3.22881181566              -0.55      28.2393691654
+      3.22881181566               0.55      28.2393691654
+
+steel polygon trigger.QSqo
+0
+0
+12
+    -0.154081619168              -0.55      27.0080966495
+    -0.154081619168               0.55      27.0080966495
+    -0.273616114661               0.55      26.7517540966
+    -0.273616114661              -0.55      26.7517540966
+
+steel polygon trigger.TjiS
+0
+0
+12
+      3.22881181566               0.55      28.2393691654
+      3.29721584433               0.75      28.0514306413
+   -0.0856775905034               0.75      26.8201581253
+    -0.154081619168               0.55      27.0080966495
+
+steel polygon trigger.prTR
+0
+0
+12
+      3.48515436848              -0.55      28.1198346699
+      3.48515436848               0.55      28.1198346699
+      3.22881181566               0.55      28.2393691654
+      3.22881181566              -0.55      28.2393691654
+
+steel polygon trigger.QghR
+0
+0
+12
+    -0.154081619168              -0.55      27.0080966495
+   -0.0856775905034              -0.75      26.8201581253
+      3.29721584433              -0.75      28.0514306413
+      3.22881181566              -0.55      28.2393691654
+
+steel polygon trigger.ogQ
+0
+0
+9
+    -0.273616114661              -0.55      26.7517540966
+   -0.0856775905034              -0.75      26.8201581253
+    -0.154081619168              -0.55      27.0080966495
+
+steel polygon trigger.Siq
+0
+0
+9
+    -0.154081619168               0.55      27.0080966495
+   -0.0856775905034               0.75      26.8201581253
+    -0.273616114661               0.55      26.7517540966
+
+steel polygon trigger.pRh
+0
+0
+9
+      3.48515436848              -0.55      28.1198346699
+      3.22881181566              -0.55      28.2393691654
+      3.29721584433              -0.75      28.0514306413
+
+steel polygon trigger.Trj
+0
+0
+9
+      3.22881181566               0.55      28.2393691654
+      3.48515436848               0.55      28.1198346699
+      3.29721584433               0.75      28.0514306413
+
+!genworm steel handle 'hermite(0,5,7,.7,t)' 0 'hermite(26,24.75,.043,-2.7,t)' '.3-.1*t' 10
+
+steel cylinder valve.neck
+0
+0
+7
+                  0                  0                 26
+                  0                 -1                 26
+                0.5
+
+steel ring valve.back
+0
+0
+8
+                  0                 -1                 26
+                  0                  1                  0
+                0.5                  1
+
+steel cylinder valve.outer
+0
+0
+7
+                  0                 -1                 26
+                  0              -1.75                 26
+                  1
+
+trans_plastic ring valve.lens
+0
+0
+8
+                  0              -1.75                 26
+                  0                 -1                  0
+                  1                  0
+
+steel cylinder hose.beg_seal
+0
+0
+7
+                  0                  0                 26
+                 -.75                  0                 26
+              0.375
+
+rubber cylinder hose.begin
+0
+0
+7
+                 -.75                  0                 26
+                 -2.5                  0                 26
+              0.375
+
+!genworm rubber hose 'cos(the(t))*2-2.5' 0 'sin(the(t))*3+23' .375 8 -e 'the(t)=(1+t)*PI/2'
+
+rubber cylinder hose.down
+0
+0
+7
+               -4.5                  0                 23
+               -4.5                  0                  3
+              0.375
+
+steel cylinder hose.end_seal
+0
+0
+7
+               -4.5                  0                  3
+               -4.5                  0                  2.5
+              0.375
+
+trans_plastic cone nozzle
+0
+0
+8
+               -4.5                  0                  2.5
+               -4.5                  0                  .5
+              0.375               0.25

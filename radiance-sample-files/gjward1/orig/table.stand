@@ -1,0 +1,23 @@
+#
+# The stand for a table
+#
+
+!genrev leg_mat lower 'hermite(0,4.3,0,7.6,t)' 'hermite(4,1,-4.4,0,t)' 8
+
+leg_mat cylinder mid
+0
+0
+7
+	0	0	4.3
+	0	0	18.325
+	1
+
+!genrev leg_mat upper 'hermite(18.325,28,17.1,0,t)' 'hermite(1,9,0,9.9,t)' 8
+
+!xform -n leg1 -rz 45 table.leg
+
+!xform -n leg2 -rz 45 -rz 90 table.leg
+
+!xform -n leg3 -rz 45 -rz 180 table.leg
+
+!xform -n leg4 -rz 45 -rz 270 table.leg

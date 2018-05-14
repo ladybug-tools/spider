@@ -1,0 +1,118 @@
+#
+#  A mirrored wooden medicine cabinet.
+#
+
+!genbox zwood cabinet 4 46.5 27.5
+
+!genprism zwood left_frame 4 0 0 -1.75 1.75 -27.5 1.75 -29.25 0 -l 0 0 .875 \
+	| xform -ry 90 -t 4 -1 -.875
+
+zwood cylinder left_frame_inner
+0
+0
+7
+	4.7	.75	.875
+	4.7	.75	26.625
+	.125
+
+!genprism zwood right_frame 4 0 0 -1.75 1.75 -27.5 1.75 -29.25 0 -l 0 0 .875 \
+	| xform -ry 90 -t 4 -1 -.875 -t 0 -23.25 0 -my -t 0 23.25 0
+
+zwood cylinder right_frame_inner
+0
+0
+7
+	4.7	45.75	.875
+	4.7	45.75	26.625
+	.125
+
+!genprism ywood lower_left_frame 4 0 0 0 16.5 -1.75 16.5 -1.75 1.75 -l 0 0 .875 \
+	| xform -ry 90 -t 4 -1 -.875
+
+ywood cylinder lower_left_frame_inner
+0
+0
+7
+	4.7	.75	.875
+	4.7	15.5	.875
+	.125
+
+!genprism ywood upper_left_frame 4 0 0 0 16.5 -1.75 16.5 -1.75 1.75 -l 0 0 .875 \
+	| xform -ry 90 -t 4 -1 -.875 -t 0 0 -13.75 -mz -t 0 0 13.75
+
+ywood cylinder upper_left_frame_inner
+0
+0
+7
+	4.7	.75	26.625
+	4.7	15.5	26.625
+	.125
+
+!genprism ywood lower_right_frame 4 0 0 0 16.5 -1.75 16.5 -1.75 1.75 -l 0 0 .875 \
+	| xform -ry 90 -t 4 -1 -.875 -t 0 -23.25 0 -my -t 0 23.25 0
+
+ywood cylinder lower_right_frame_inner
+0
+0
+7
+	4.7	45.75	.875
+	4.7	31	.875
+	.125
+
+!genprism ywood upper_right_frame 4 0 0 0 16.5 -1.75 16.5 -1.75 1.75 -l 0 0 .875 \
+	| xform -ry 90 -t 4 -1 -.875 -t 0 -23.25 -13.75 -my -mz -t 0 23.25 13.75
+
+ywood cylinder upper_right_frame_inner
+0
+0
+7
+	4.7	45.75	26.625
+	4.7	31	26.625
+	.125
+
+!genbox ywood lower_middle_frame .875 15.25 1.75 | xform -t 4 15.625 -.875
+
+ywood cylinder lower_middle_frame_inner
+0
+0
+7
+	4.7	15.625	.875
+	4.7	30.875	.875
+	.125
+
+!genbox ywood upper_middle_frame .875 15.25 1.75 | xform -t 4 15.625 26.625
+
+ywood cylinder upper_middle_frame_inner
+0
+0
+7
+	4.7	15.625	26.625
+	4.7	30.875	26.625
+	.125
+
+mirror polygon left_mirror
+0
+0
+12
+	4.7	.75	.875
+	4.7	15.5	.875
+	4.7	15.5	26.625
+	4.7	.75	26.625
+
+mirror polygon right_mirror
+0
+0
+12
+	4.7	31	.875
+	4.7	45.75	.875
+	4.7	45.75	26.625
+	4.7	31	26.625
+
+mirror polygon middle_mirror
+0
+0
+12
+	4.7	15.625	.875
+	4.7	30.875	.875
+	4.7	30.875	26.625
+	4.7	15.625	26.625

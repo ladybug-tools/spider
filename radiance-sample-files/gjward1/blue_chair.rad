@@ -1,0 +1,705 @@
+################################
+# Copyright (c) 1991 Greg Ward #
+# Windows and Lighting Program #
+# Lawrence Berkeley Laboratory #
+# Berkeley, CA	94720	       #
+################################
+#
+# The blue chair from the daylighted office space.
+#
+#	Units = meters
+#	The following is described looking from back of object
+#	(0,0,0) located at bottom back left corner
+#	X-axis directed towards right of chair
+#	Y-axis directed towards front of chair
+#	Z-axis directed up
+#
+# Overall dimensions are .63 by .51 by 1.1 meters
+#
+################################
+# MATERIALS:
+
+void plastic arm_material
+0
+0
+5 .4 .3 .2 0 .1
+
+void plastic leg_material
+0
+0
+5 .4 .3 .2 0 .1
+
+void plastic cushion_material
+0
+0
+5 .1 .2 .5 0 .1
+
+###########################
+# From blue_chair.orig:
+# xform -e -rx 90 -rz 180 -t 24.75 0 0 -s .0254
+#
+#  A straight chair
+#
+# genbox leg_material leg.right.rear .75 26 1.5
+
+leg_material polygon leg.right.rear.1540
+0
+0
+12
+	     0.6096  0			0
+	     0.6096		0.0381	0
+	    0.62865		0.0381	0
+	    0.62865		     0			0
+
+leg_material polygon leg.right.rear.4620
+0
+0
+12
+	    0.62865		0.0381	0
+	    0.62865		0.0381		   0.6604
+	    0.62865 -0		   0.6604
+	    0.62865		     0			0
+
+leg_material polygon leg.right.rear.2310
+0
+0
+12
+	    0.62865 -0		   0.6604
+	     0.6096 -0		   0.6604
+	     0.6096  0			0
+	    0.62865		     0			0
+
+leg_material polygon leg.right.rear.3267
+0
+0
+12
+	     0.6096 -0		   0.6604
+	    0.62865 -0		   0.6604
+	    0.62865		0.0381		   0.6604
+	     0.6096		0.0381		   0.6604
+
+leg_material polygon leg.right.rear.5137
+0
+0
+12
+	     0.6096		0.0381	0
+	     0.6096  0			0
+	     0.6096 -0		   0.6604
+	     0.6096		0.0381		   0.6604
+
+leg_material polygon leg.right.rear.6457
+0
+0
+12
+	    0.62865		0.0381		   0.6604
+	    0.62865		0.0381	0
+	     0.6096		0.0381	0
+	     0.6096		0.0381		   0.6604
+# xform -t 24 0 0
+# genbox leg_material leg.left.rear .75 26 1.5
+
+leg_material polygon leg.left.rear.1540
+0
+0
+12
+		  0   0			 0
+		  0		0.0381	0
+	    0.01905		0.0381	0
+	    0.01905   0			 0
+
+leg_material polygon leg.left.rear.4620
+0
+0
+12
+	    0.01905		0.0381	0
+	    0.01905		0.0381		   0.6604
+	    0.01905  0		   0.6604
+	    0.01905   0			 0
+
+leg_material polygon leg.left.rear.2310
+0
+0
+12
+	    0.01905  0		   0.6604
+		  0  0		   0.6604
+		  0   0			 0
+	    0.01905   0			 0
+
+leg_material polygon leg.left.rear.3267
+0
+0
+12
+		  0  0		   0.6604
+	    0.01905  0		   0.6604
+	    0.01905		0.0381		   0.6604
+		  0		0.0381		   0.6604
+
+leg_material polygon leg.left.rear.5137
+0
+0
+12
+		  0		0.0381	0
+		  0   0			 0
+		  0  0		   0.6604
+		  0		0.0381		   0.6604
+
+leg_material polygon leg.left.rear.6457
+0
+0
+12
+	    0.01905		0.0381		   0.6604
+	    0.01905		0.0381	0
+		  0		0.0381	0
+		  0		0.0381		   0.6604
+# xform -t 0 0 20
+# genbox leg_material leg.right.front .75 26 1.5
+
+leg_material polygon leg.right.front.1540
+0
+0
+12
+	     0.6096		 0.508	0
+	     0.6096		0.5461	0
+	    0.62865		0.5461	0
+	    0.62865		 0.508	0
+
+leg_material polygon leg.right.front.4620
+0
+0
+12
+	    0.62865		0.5461	0
+	    0.62865		0.5461		   0.6604
+	    0.62865		 0.508		   0.6604
+	    0.62865		 0.508	0
+
+leg_material polygon leg.right.front.2310
+0
+0
+12
+	    0.62865		 0.508		   0.6604
+	     0.6096		 0.508		   0.6604
+	     0.6096		 0.508	0
+	    0.62865		 0.508	0
+
+leg_material polygon leg.right.front.3267
+0
+0
+12
+	     0.6096		 0.508		   0.6604
+	    0.62865		 0.508		   0.6604
+	    0.62865		0.5461		   0.6604
+	     0.6096		0.5461		   0.6604
+
+leg_material polygon leg.right.front.5137
+0
+0
+12
+	     0.6096		0.5461	0
+	     0.6096		 0.508	0
+	     0.6096		 0.508		   0.6604
+	     0.6096		0.5461		   0.6604
+
+leg_material polygon leg.right.front.6457
+0
+0
+12
+	    0.62865		0.5461		   0.6604
+	    0.62865		0.5461	0
+	     0.6096		0.5461	0
+	     0.6096		0.5461		   0.6604
+# xform -t 24 0 20
+# genbox leg_material leg.left.front .75 26 1.5
+
+leg_material polygon leg.left.front.1540
+0
+0
+12
+		  0		 0.508	0
+		  0		0.5461	0
+	    0.01905		0.5461	0
+	    0.01905		 0.508	0
+
+leg_material polygon leg.left.front.4620
+0
+0
+12
+	    0.01905		0.5461	0
+	    0.01905		0.5461		   0.6604
+	    0.01905		 0.508		   0.6604
+	    0.01905		 0.508	0
+
+leg_material polygon leg.left.front.2310
+0
+0
+12
+	    0.01905		 0.508		   0.6604
+		  0		 0.508		   0.6604
+		  0		 0.508	0
+	    0.01905		 0.508	0
+
+leg_material polygon leg.left.front.3267
+0
+0
+12
+		  0		 0.508		   0.6604
+	    0.01905		 0.508		   0.6604
+	    0.01905		0.5461		   0.6604
+		  0		0.5461		   0.6604
+
+leg_material polygon leg.left.front.5137
+0
+0
+12
+		  0		0.5461	0
+		  0		 0.508	0
+		  0		 0.508		   0.6604
+		  0		0.5461		   0.6604
+
+leg_material polygon leg.left.front.6457
+0
+0
+12
+	    0.01905		0.5461		   0.6604
+	    0.01905		0.5461	0
+		  0		0.5461	0
+		  0		0.5461		   0.6604
+
+leg_material cylinder strut
+0
+0
+7
+	     0.6096	       0.52705		    0.381
+	    0.01905	       0.52705		    0.381
+	   0.009525
+
+arm_material cylinder arm.right
+0
+0
+7
+	    0.62865 -0		   0.6604
+	    0.62865		0.5461		   0.6604
+	    0.01905
+
+arm_material ring arm.cap.right.back
+0
+0
+8
+	    0.62865 -0		   0.6604
+ -0	       -0.0254 -0
+		  0	       0.01905
+
+arm_material ring arm.cap.right.front
+0
+0
+8
+	    0.62865		0.5461		   0.6604
+  0		0.0254	0
+		  0	       0.01905
+
+arm_material cylinder arm.left
+0
+0
+7
+		  0  0		   0.6604
+		  0		0.5461		   0.6604
+	    0.01905
+
+arm_material ring arm.cap.left.front
+0
+0
+8
+		  0  0		   0.6604
+ -0	       -0.0254 -0
+		  0	       0.01905
+
+arm_material ring arm.cap.left.front
+0
+0
+8
+		  0		0.5461		   0.6604
+  0		0.0254	0
+		  0	       0.01905
+# xform -t .75 18 0
+# genbox cushion_material seat 23.25 3 22 -r 1
+
+cushion_material polygon seat.dhgc
+0
+0
+12
+	    0.04445		0.0254		   0.4572
+	    0.04445		0.5334		   0.4572
+	     0.5842		0.5334		   0.4572
+	     0.5842		0.0254		   0.4572
+
+cushion_material polygon seat.oqmk
+0
+0
+12
+	     0.6096		0.5334		   0.4826
+	     0.6096		0.5334		    0.508
+	     0.6096		0.0254		    0.508
+	     0.6096		0.0254		   0.4826
+
+cushion_material polygon seat.OPNM
+0
+0
+12
+	     0.5842 -0		    0.508
+	    0.04445  0		    0.508
+	    0.04445  0		   0.4826
+	     0.5842  -0		    0.4826
+
+cushion_material polygon seat.feij
+0
+0
+12
+	    0.04445		0.0254		   0.5334
+	     0.5842		0.0254		   0.5334
+	     0.5842		0.5334		   0.5334
+	    0.04445		0.5334		   0.5334
+
+cushion_material polygon seat.plnr
+0
+0
+12
+	    0.01905		0.5334		   0.4826
+	    0.01905		0.0254		   0.4826
+	    0.01905		0.0254		    0.508
+	    0.01905		0.5334		    0.508
+
+cushion_material polygon seat.SQRT
+0
+0
+12
+	     0.5842		0.5588		    0.508
+	     0.5842		0.5588		   0.4826
+	    0.04445		0.5588		   0.4826
+	    0.04445		0.5588		    0.508
+
+cushion_material cylinder seat.hi
+0
+0
+7
+	     0.5842		0.0254		   0.4826
+	    0.04445		0.0254		   0.4826
+	     0.0254
+
+cushion_material cylinder seat.hl
+0
+0
+7
+	     0.5842		0.0254		   0.4826
+	     0.5842		0.5334		   0.4826
+	     0.0254
+
+cushion_material cylinder seat.hj
+0
+0
+7
+	     0.5842		0.0254		   0.4826
+	     0.5842		0.0254		    0.508
+	     0.0254
+
+cushion_material cylinder seat.ki
+0
+0
+7
+	    0.04445		0.0254		    0.508
+	    0.04445		0.0254		   0.4826
+	     0.0254
+
+cushion_material cylinder seat.kj
+0
+0
+7
+	    0.04445		0.0254		    0.508
+	     0.5842		0.0254		    0.508
+	     0.0254
+
+cushion_material cylinder seat.ko
+0
+0
+7
+	    0.04445		0.0254		    0.508
+	    0.04445		0.5334		    0.508
+	     0.0254
+
+cushion_material cylinder seat.mi
+0
+0
+7
+	    0.04445		0.5334		   0.4826
+	    0.04445		0.0254		   0.4826
+	     0.0254
+
+cushion_material cylinder seat.ml
+0
+0
+7
+	    0.04445		0.5334		   0.4826
+	     0.5842		0.5334		   0.4826
+	     0.0254
+
+cushion_material cylinder seat.mo
+0
+0
+7
+	    0.04445		0.5334		   0.4826
+	    0.04445		0.5334		    0.508
+	     0.0254
+
+cushion_material cylinder seat.nj
+0
+0
+7
+	     0.5842		0.5334		    0.508
+	     0.5842		0.0254		    0.508
+	     0.0254
+
+cushion_material cylinder seat.nl
+0
+0
+7
+	     0.5842		0.5334		    0.508
+	     0.5842		0.5334		   0.4826
+	     0.0254
+
+cushion_material cylinder seat.no
+0
+0
+7
+	     0.5842		0.5334		    0.508
+	    0.04445		0.5334		    0.508
+	     0.0254
+
+cushion_material sphere seat.h
+0
+0
+4	      0.5842		 0.0254		    0.4826	       0.0254
+
+cushion_material sphere seat.i
+0
+0
+4	     0.04445		 0.0254		    0.4826	       0.0254
+
+cushion_material sphere seat.j
+0
+0
+4	      0.5842		 0.0254		     0.508	       0.0254
+
+cushion_material sphere seat.k
+0
+0
+4	     0.04445		 0.0254		     0.508	       0.0254
+
+cushion_material sphere seat.l
+0
+0
+4	      0.5842		 0.5334		    0.4826	       0.0254
+
+cushion_material sphere seat.m
+0
+0
+4	     0.04445		 0.5334		    0.4826	       0.0254
+
+cushion_material sphere seat.n
+0
+0
+4	      0.5842		 0.5334		     0.508	       0.0254
+
+cushion_material sphere seat.o
+0
+0
+4	     0.04445		 0.5334		     0.508	       0.0254
+# xform -rx 80 -t .75 33 0
+# genbox cushion_material back 23.25 3 10 -r 1
+
+cushion_material polygon back.dhgc
+0
+0
+12
+	    0.04445   0.00441066371274	   0.813185883074
+	    0.04445    0.0396959734146	   0.613072947662
+	     0.5842    0.0396959734146	   0.613072947662
+	     0.5842   0.00441066371274	   0.813185883074
+
+cushion_material polygon back.oqmk
+0
+0
+12
+	     0.6096    0.0647100903411	   0.617483611375
+	     0.6096    0.0897242072678	   0.621894275086
+	     0.6096    0.0544388975657	   0.822007210498
+	     0.6096    0.0294247806393	   0.817596546787
+
+cushion_material polygon back.OPNM
+0
+0
+12
+	     0.5842    0.0500282338529	   0.847021327425
+	    0.04445    0.0500282338529	   0.847021327425
+	    0.04445    0.0250141169265	   0.842610663714
+	     0.5842    0.0250141169265	   0.842610663714
+
+cushion_material polygon back.feij
+0
+0
+12
+	    0.04445    0.0794530144922	   0.826417874212
+	     0.5842    0.0794530144922	   0.826417874212
+	     0.5842	0.114738324194	     0.6263049388
+	    0.04445	0.114738324194	     0.6263049388
+
+cushion_material polygon back.plnr
+0
+0
+12
+	    0.01905    0.0647100903411	   0.617483611375
+	    0.01905    0.0294247806393	   0.817596546787
+	    0.01905    0.0544388975657	   0.822007210498
+	    0.01905    0.0897242072678	   0.621894275086
+
+cushion_material polygon back.SQRT
+0
+0
+12
+	     0.5842    0.0941348709803	    0.59688015816
+	     0.5842    0.0691207540539	   0.592469494446
+	    0.04445    0.0691207540539	   0.592469494446
+	    0.04445    0.0941348709803	    0.59688015816
+
+cushion_material cylinder back.hi
+0
+0
+7
+	     0.5842    0.0294247806393	   0.817596546787
+	    0.04445    0.0294247806393	   0.817596546787
+	     0.0254
+
+cushion_material cylinder back.hl
+0
+0
+7
+	     0.5842    0.0294247806393	   0.817596546787
+	     0.5842    0.0647100903411	   0.617483611375
+	     0.0254
+
+cushion_material cylinder back.hj
+0
+0
+7
+	     0.5842    0.0294247806393	   0.817596546787
+	     0.5842    0.0544388975657	   0.822007210498
+	     0.0254
+
+cushion_material cylinder back.ki
+0
+0
+7
+	    0.04445    0.0544388975657	   0.822007210498
+	    0.04445    0.0294247806393	   0.817596546787
+	     0.0254
+
+cushion_material cylinder back.kj
+0
+0
+7
+	    0.04445    0.0544388975657	   0.822007210498
+	     0.5842    0.0544388975657	   0.822007210498
+	     0.0254
+
+cushion_material cylinder back.ko
+0
+0
+7
+	    0.04445    0.0544388975657	   0.822007210498
+	    0.04445    0.0897242072678	   0.621894275086
+	     0.0254
+
+cushion_material cylinder back.mi
+0
+0
+7
+	    0.04445    0.0647100903411	   0.617483611375
+	    0.04445    0.0294247806393	   0.817596546787
+	     0.0254
+
+cushion_material cylinder back.ml
+0
+0
+7
+	    0.04445    0.0647100903411	   0.617483611375
+	     0.5842    0.0647100903411	   0.617483611375
+	     0.0254
+
+cushion_material cylinder back.mo
+0
+0
+7
+	    0.04445    0.0647100903411	   0.617483611375
+	    0.04445    0.0897242072678	   0.621894275086
+	     0.0254
+
+cushion_material cylinder back.nj
+0
+0
+7
+	     0.5842    0.0897242072678	   0.621894275086
+	     0.5842    0.0544388975657	   0.822007210498
+	     0.0254
+
+cushion_material cylinder back.nl
+0
+0
+7
+	     0.5842    0.0897242072678	   0.621894275086
+	     0.5842    0.0647100903411	   0.617483611375
+	     0.0254
+
+cushion_material cylinder back.no
+0
+0
+7
+	     0.5842    0.0897242072678	   0.621894275086
+	    0.04445    0.0897242072678	   0.621894275086
+	     0.0254
+
+cushion_material sphere back.h
+0
+0
+4	      0.5842	0.0294247806393	    0.817596546787	       0.0254
+
+cushion_material sphere back.i
+0
+0
+4	     0.04445	0.0294247806393	    0.817596546787	       0.0254
+
+cushion_material sphere back.j
+0
+0
+4	      0.5842	0.0544388975657	    0.822007210498	       0.0254
+
+cushion_material sphere back.k
+0
+0
+4	     0.04445	0.0544388975657	    0.822007210498	       0.0254
+
+cushion_material sphere back.l
+0
+0
+4	      0.5842	0.0647100903411	    0.617483611375	       0.0254
+
+cushion_material sphere back.m
+0
+0
+4	     0.04445	0.0647100903411	    0.617483611375	       0.0254
+
+cushion_material sphere back.n
+0
+0
+4	      0.5842	0.0897242072678	    0.621894275086	       0.0254
+
+cushion_material sphere back.o
+0
+0
+4	     0.04445	0.0897242072678	    0.621894275086	       0.0254

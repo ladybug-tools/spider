@@ -1,0 +1,791 @@
+###################################
+# Copyright (c) 1991 Cindy Larson #
+###################################
+#
+# The brass coatrack from the cabin model
+#
+# Depends on:
+#	rev.cal
+#
+#	Units = meters
+#	(0,0,0) at center of base, floor level
+#	Z-axis is up
+#
+# Overall dimensions are .356 by .356 by 1.67 meters
+#
+################################
+# MATERIAL:
+
+void metal brass
+0
+0
+5 .68 .27 .002 .95 0
+
+################################
+# xform -e -s .0254
+#
+# The Coatrack.
+# Height is 65 inches, base radius is 7 inches, and the 
+# hooks at the top protrude six inches on top and four inches
+# on the bottom.
+#
+# Coatrack Base
+# genrev brass base if(t-.7, z2((t-.7)/.3), z1(t/.7)) if(t-.7, r2((t-.7)/.3), r1(t/.7)) 11 -s -e z1(t)=hermite(0,3,5,3,t); r1(t)=hermite(7,2,0,-1,t) -e z2(t)=hermite(3,5,3,0,t); r2(t)=hermite(2,0.4,-1,-5,t)
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	  1.30776482		      0	       -2.96657316	   20.7660121
+
+Phong cone base.1
+0
+0
+8
+		  0		     0			0
+		  0		     0	  0.0148911688714
+	     0.1778	0.172303091766
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	  1.15481971	   -0.330733945	       0.872836231	  -4.98283538
+
+Phong cone base.2
+0
+0
+8
+		  0		     0	  0.0148911688714
+		  0		     0	   0.027022756216
+     0.172303091766	0.157815289144
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	 0.435124351	    0.303775095	       0.368744286	  -1.64907503
+
+Phong cone base.3
+0
+0
+8
+		  0		     0	   0.027022756216
+		  0		     0	   0.037062402888
+     0.157815289144	0.137340975254
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	 0.148127197	    0.681725179	       0.132457121	 -0.275941209
+
+Phong cone base.4
+0
+0
+8
+		  0		     0	   0.037062402888
+		  0		     0	   0.045677749386
+     0.137340975254	0.113884532708
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4      -0.0133431134	    0.962682081	     -0.0119644654	  0.398415813
+
+Phong cone base.5
+0
+0
+8
+		  0		     0	   0.045677749386
+		  0		     0	   0.053536436488
+     0.113884532708	0.090450345134
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	-0.272433003	     1.52232397	      -0.229280306	   1.13442494
+
+Phong cone base.6
+0
+0
+8
+		  0		     0	   0.053536436488
+		  0		     0	   0.061306104972
+     0.090450345134	0.070042795144
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	 -1.47629222	     4.49777589	      -0.949727017	   2.97476797
+
+Phong cone base.7
+0
+0
+8
+		  0		     0	   0.061306104972
+		  0		     0	   0.069654395108
+     0.070042795144	0.055666265858
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	 -1.30645776	     4.44747038	       -1.81219468	   4.47374294
+
+Phong cone base.8
+0
+0
+8
+		  0		     0	   0.069654395108
+		  0		     0	   0.083108189384
+     0.055666265858	 0.04889929387
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	0.0448114277	    0.302719273	       0.135461219	  0.632574483
+
+Phong cone base.9
+0
+0
+8
+		  0		     0	   0.083108189384
+		  0		     0	   0.104665358868
+      0.04889929387	0.045117954214
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	  1.26522248	    -5.04080929		2.12680855	  -2.79288267
+
+Phong cone base.10
+0
+0
+8
+		  0		     0	   0.104665358868
+		  0		     0	   0.120709547252
+     0.045117954214	0.036162893892
+
+brass texfunc Phong
+6 rev_dx rev_dy rev_dz rev.cal -s .0254
+0
+4	 -1.96794638	      9.8397319	       0.852948328	 -0.341179331
+
+Phong cone base.11
+0
+0
+8
+		  0		     0	   0.120709547252
+		  0		     0		    0.127
+     0.036162893892	       0.01016
+
+brass ring base_bottom
+0
+0
+8
+		  0		     0			0
+		  0		     0		  -0.0254
+		  0		0.1778
+# Coatrack Stem
+
+brass cylinder coat_stem
+0
+0
+7
+		  0		     0		   0.0254
+		  0		     0		    1.651
+	     0.0127
+
+brass sphere top_ball
+0
+0
+4		   0		      0		     1.651	      0.01905
+# Coatrack Hooks
+# xform -n hook.0 -i 0 -rz 90
+# xform -e -n hook.0 -i 0 -rz 90
+# genworm brass hook hermite(3.25,4.25,-12,12,t) 0 hermite(58,62.5,-9,6,t) .25 10
+
+brass sphere hook.0.hook.s0
+0
+0
+4	     0.08255		      0		    1.4732	      0.00635
+
+brass cylinder hook.0.hook.c1
+0
+0
+7
+	    0.08255		     0		   1.4732
+	  0.0558292		     0		1.4565122
+	    0.00635
+
+brass sphere hook.0.hook.s1
+0
+0
+4	   0.0558292		      0		 1.4565122	      0.00635
+
+brass cylinder hook.0.hook.c2
+0
+0
+7
+	  0.0558292		     0		1.4565122
+	  0.0364236		     0		1.4509496
+	    0.00635
+
+brass sphere hook.0.hook.s2
+0
+0
+4	   0.0364236		      0		 1.4509496	      0.00635
+
+brass cylinder hook.0.hook.c3
+0
+0
+7
+	  0.0364236		     0		1.4509496
+	  0.0240284		     0		1.4546834
+	    0.00635
+
+brass sphere hook.0.hook.s3
+0
+0
+4	   0.0240284		      0		 1.4546834	      0.00635
+
+brass cylinder hook.0.hook.c4
+0
+0
+7
+	  0.0240284		     0		1.4546834
+	  0.0183388		     0		1.4658848
+	    0.00635
+
+brass sphere hook.0.hook.s4
+0
+0
+4	   0.0183388		      0		 1.4658848	      0.00635
+
+brass cylinder hook.0.hook.c5
+0
+0
+7
+	  0.0183388		     0		1.4658848
+	    0.01905		     0		 1.482725
+	    0.00635
+
+brass sphere hook.0.hook.s5
+0
+0
+4	     0.01905		      0		  1.482725	      0.00635
+
+brass cylinder hook.0.hook.c6
+0
+0
+7
+	    0.01905		     0		 1.482725
+	  0.0258572		     0		1.5033752
+	    0.00635
+
+brass sphere hook.0.hook.s6
+0
+0
+4	   0.0258572		      0		 1.5033752	      0.00635
+
+brass cylinder hook.0.hook.c7
+0
+0
+7
+	  0.0258572		     0		1.5033752
+	  0.0384556		     0		1.5260066
+	    0.00635
+
+brass sphere hook.0.hook.s7
+0
+0
+4	   0.0384556		      0		 1.5260066	      0.00635
+
+brass cylinder hook.0.hook.c8
+0
+0
+7
+	  0.0384556		     0		1.5260066
+	  0.0565404		     0		1.5487904
+	    0.00635
+
+brass sphere hook.0.hook.s8
+0
+0
+4	   0.0565404		      0		 1.5487904	      0.00635
+
+brass cylinder hook.0.hook.c9
+0
+0
+7
+	  0.0565404		     0		1.5487904
+	  0.0798068		     0		1.5698978
+	    0.00635
+
+brass sphere hook.0.hook.s9
+0
+0
+4	   0.0798068		      0		 1.5698978	      0.00635
+
+brass cylinder hook.0.hook.c10
+0
+0
+7
+	  0.0798068		     0		1.5698978
+	    0.10795		     0		   1.5875
+	    0.00635
+
+brass sphere hook.0.hook.s10
+0
+0
+4	     0.10795		      0		    1.5875	      0.00635
+
+brass sphere hook.0.lball
+0
+0
+4	     0.08255		      0		    1.4732	       0.0127
+
+brass sphere hook.0.uball
+0
+0
+4	     0.10795		      0		    1.5875	       0.0127
+# xform -n hook.1 -i 1 -rz 90
+# xform -e -n hook.1 -i 1 -rz 90
+# genworm brass hook hermite(3.25,4.25,-12,12,t) 0 hermite(58,62.5,-9,6,t) .25 10
+
+brass sphere hook.1.hook.s0
+0
+0
+4   0		 0.08255	     1.4732	       0.00635
+
+brass cylinder hook.1.hook.c1
+0
+0
+7
+   0		0.08255		    1.4732
+  0	     0.0558292		1.4565122
+	    0.00635
+
+brass sphere hook.1.hook.s1
+0
+0
+4  0	      0.0558292		 1.4565122	      0.00635
+
+brass cylinder hook.1.hook.c2
+0
+0
+7
+  0	     0.0558292		1.4565122
+  0	     0.0364236		1.4509496
+	    0.00635
+
+brass sphere hook.1.hook.s2
+0
+0
+4  0	      0.0364236		 1.4509496	      0.00635
+
+brass cylinder hook.1.hook.c3
+0
+0
+7
+  0	     0.0364236		1.4509496
+  0	     0.0240284		1.4546834
+	    0.00635
+
+brass sphere hook.1.hook.s3
+0
+0
+4  0	      0.0240284		 1.4546834	      0.00635
+
+brass cylinder hook.1.hook.c4
+0
+0
+7
+  0	     0.0240284		1.4546834
+  0	     0.0183388		1.4658848
+	    0.00635
+
+brass sphere hook.1.hook.s4
+0
+0
+4  0	      0.0183388		 1.4658848	      0.00635
+
+brass cylinder hook.1.hook.c5
+0
+0
+7
+  0	     0.0183388		1.4658848
+  0	       0.01905		 1.482725
+	    0.00635
+
+brass sphere hook.1.hook.s5
+0
+0
+4  0		0.01905		  1.482725	      0.00635
+
+brass cylinder hook.1.hook.c6
+0
+0
+7
+  0	       0.01905		 1.482725
+   0	      0.0258572		 1.5033752
+	    0.00635
+
+brass sphere hook.1.hook.s6
+0
+0
+4   0	       0.0258572	  1.5033752	       0.00635
+
+brass cylinder hook.1.hook.c7
+0
+0
+7
+   0	      0.0258572		 1.5033752
+    0	       0.0384556	  1.5260066
+	    0.00635
+
+brass sphere hook.1.hook.s7
+0
+0
+4    0		0.0384556	   1.5260066		0.00635
+
+brass cylinder hook.1.hook.c8
+0
+0
+7
+    0	       0.0384556	  1.5260066
+  0	     0.0565404		1.5487904
+	    0.00635
+
+brass sphere hook.1.hook.s8
+0
+0
+4  0	      0.0565404		 1.5487904	      0.00635
+
+brass cylinder hook.1.hook.c9
+0
+0
+7
+  0	     0.0565404		1.5487904
+   0	      0.0798068		 1.5698978
+	    0.00635
+
+brass sphere hook.1.hook.s9
+0
+0
+4   0	       0.0798068	  1.5698978	       0.00635
+
+brass cylinder hook.1.hook.c10
+0
+0
+7
+   0	      0.0798068		 1.5698978
+  0	       0.10795		   1.5875
+	    0.00635
+
+brass sphere hook.1.hook.s10
+0
+0
+4  0		0.10795		    1.5875	      0.00635
+
+brass sphere hook.1.lball
+0
+0
+4   0		 0.08255	     1.4732		0.0127
+
+brass sphere hook.1.uball
+0
+0
+4  0		0.10795		    1.5875	       0.0127
+# xform -n hook.2 -i 2 -rz 90
+# xform -e -n hook.2 -i 2 -rz 90
+# genworm brass hook hermite(3.25,4.25,-12,12,t) 0 hermite(58,62.5,-9,6,t) .25 10
+
+brass sphere hook.2.hook.s0
+0
+0
+4	    -0.08255  0		    1.4732	      0.00635
+
+brass cylinder hook.2.hook.c1
+0
+0
+7
+	   -0.08255  0		   1.4732
+	 -0.0558292  0		1.4565122
+	    0.00635
+
+brass sphere hook.2.hook.s1
+0
+0
+4	  -0.0558292  0		 1.4565122	      0.00635
+
+brass cylinder hook.2.hook.c2
+0
+0
+7
+	 -0.0558292  0		1.4565122
+	 -0.0364236  0		1.4509496
+	    0.00635
+
+brass sphere hook.2.hook.s2
+0
+0
+4	  -0.0364236  0		 1.4509496	      0.00635
+
+brass cylinder hook.2.hook.c3
+0
+0
+7
+	 -0.0364236  0		1.4509496
+	 -0.0240284  0		1.4546834
+	    0.00635
+
+brass sphere hook.2.hook.s3
+0
+0
+4	  -0.0240284  0		 1.4546834	      0.00635
+
+brass cylinder hook.2.hook.c4
+0
+0
+7
+	 -0.0240284  0		1.4546834
+	 -0.0183388  0		1.4658848
+	    0.00635
+
+brass sphere hook.2.hook.s4
+0
+0
+4	  -0.0183388  0		 1.4658848	      0.00635
+
+brass cylinder hook.2.hook.c5
+0
+0
+7
+	 -0.0183388  0		1.4658848
+	   -0.01905  0		 1.482725
+	    0.00635
+
+brass sphere hook.2.hook.s5
+0
+0
+4	    -0.01905  0		  1.482725	      0.00635
+
+brass cylinder hook.2.hook.c6
+0
+0
+7
+	   -0.01905  0		 1.482725
+	 -0.0258572   0		 1.5033752
+	    0.00635
+
+brass sphere hook.2.hook.s6
+0
+0
+4	  -0.0258572   0	  1.5033752	       0.00635
+
+brass cylinder hook.2.hook.c7
+0
+0
+7
+	 -0.0258572   0		 1.5033752
+	 -0.0384556  0		1.5260066
+	    0.00635
+
+brass sphere hook.2.hook.s7
+0
+0
+4	  -0.0384556  0		 1.5260066	      0.00635
+
+brass cylinder hook.2.hook.c8
+0
+0
+7
+	 -0.0384556  0		1.5260066
+	 -0.0565404  0		1.5487904
+	    0.00635
+
+brass sphere hook.2.hook.s8
+0
+0
+4	  -0.0565404  0		 1.5487904	      0.00635
+
+brass cylinder hook.2.hook.c9
+0
+0
+7
+	 -0.0565404  0		1.5487904
+	 -0.0798068  0		1.5698978
+	    0.00635
+
+brass sphere hook.2.hook.s9
+0
+0
+4	  -0.0798068  0		 1.5698978	      0.00635
+
+brass cylinder hook.2.hook.c10
+0
+0
+7
+	 -0.0798068  0		1.5698978
+	   -0.10795  0		   1.5875
+	    0.00635
+
+brass sphere hook.2.hook.s10
+0
+0
+4	    -0.10795  0		    1.5875	      0.00635
+
+brass sphere hook.2.lball
+0
+0
+4	    -0.08255  0		    1.4732	       0.0127
+
+brass sphere hook.2.uball
+0
+0
+4	    -0.10795  0		    1.5875	       0.0127
+# xform -n hook.3 -i 3 -rz 90
+# xform -e -n hook.3 -i 3 -rz 90
+# genworm brass hook hermite(3.25,4.25,-12,12,t) 0 hermite(58,62.5,-9,6,t) .25 10
+
+brass sphere hook.3.hook.s0
+0
+0
+4 -0	       -0.08255		    1.4732	      0.00635
+
+brass cylinder hook.3.hook.c1
+0
+0
+7
+ -0	      -0.08255		   1.4732
+ -0	    -0.0558292		1.4565122
+	    0.00635
+
+brass sphere hook.3.hook.s1
+0
+0
+4 -0	     -0.0558292		 1.4565122	      0.00635
+
+brass cylinder hook.3.hook.c2
+0
+0
+7
+ -0	    -0.0558292		1.4565122
+ -0	    -0.0364236		1.4509496
+	    0.00635
+
+brass sphere hook.3.hook.s2
+0
+0
+4 -0	     -0.0364236		 1.4509496	      0.00635
+
+brass cylinder hook.3.hook.c3
+0
+0
+7
+ -0	    -0.0364236		1.4509496
+ -0	    -0.0240284		1.4546834
+	    0.00635
+
+brass sphere hook.3.hook.s3
+0
+0
+4 -0	     -0.0240284		 1.4546834	      0.00635
+
+brass cylinder hook.3.hook.c4
+0
+0
+7
+ -0	    -0.0240284		1.4546834
+ -0	    -0.0183388		1.4658848
+	    0.00635
+
+brass sphere hook.3.hook.s4
+0
+0
+4 -0	     -0.0183388		 1.4658848	      0.00635
+
+brass cylinder hook.3.hook.c5
+0
+0
+7
+ -0	    -0.0183388		1.4658848
+ -0	      -0.01905		 1.482725
+	    0.00635
+
+brass sphere hook.3.hook.s5
+0
+0
+4 -0	       -0.01905		  1.482725	      0.00635
+
+brass cylinder hook.3.hook.c6
+0
+0
+7
+ -0	      -0.01905		 1.482725
+ -0	    -0.0258572		1.5033752
+	    0.00635
+
+brass sphere hook.3.hook.s6
+0
+0
+4 -0	     -0.0258572		 1.5033752	      0.00635
+
+brass cylinder hook.3.hook.c7
+0
+0
+7
+ -0	    -0.0258572		1.5033752
+ -0	    -0.0384556		1.5260066
+	    0.00635
+
+brass sphere hook.3.hook.s7
+0
+0
+4 -0	     -0.0384556		 1.5260066	      0.00635
+
+brass cylinder hook.3.hook.c8
+0
+0
+7
+ -0	    -0.0384556		1.5260066
+ -0	    -0.0565404		1.5487904
+	    0.00635
+
+brass sphere hook.3.hook.s8
+0
+0
+4 -0	     -0.0565404		 1.5487904	      0.00635
+
+brass cylinder hook.3.hook.c9
+0
+0
+7
+ -0	    -0.0565404		1.5487904
+ -0	    -0.0798068		1.5698978
+	    0.00635
+
+brass sphere hook.3.hook.s9
+0
+0
+4 -0	     -0.0798068		 1.5698978	      0.00635
+
+brass cylinder hook.3.hook.c10
+0
+0
+7
+ -0	    -0.0798068		1.5698978
+ -0	      -0.10795		   1.5875
+	    0.00635
+
+brass sphere hook.3.hook.s10
+0
+0
+4 -0	       -0.10795		    1.5875	      0.00635
+
+brass sphere hook.3.lball
+0
+0
+4 -0	       -0.08255		    1.4732	       0.0127
+
+brass sphere hook.3.uball
+0
+0
+4 -0	       -0.10795		    1.5875	       0.0127

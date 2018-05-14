@@ -1,0 +1,285 @@
+################################
+# Copyright (c) 1991 Greg Ward #
+# Windows and Lighting Program #
+# Lawrence Berkeley Laboratory #
+# Berkeley, CA	94720	       #
+################################
+#
+# The intercom speaker from the conference room
+#
+# This is really dumb
+#
+# Depends on:
+#	woodpat.cal
+#
+#	Units = meters
+#	(0,0,0) at back lower right corner
+#	X-axis towards left of speaker
+#	Y-axis towards front of speaker
+#	Z-axis up
+#
+# Overall dimensions are .264 by .102 by .264 meters
+#
+################################
+# xform -e -rz 180 -t 10.375 4 0 -s .0254
+#
+# Intercom speaker
+#
+
+void plastic dark_fabric
+0
+0
+5		0.08		   0.08		      0.08		    0		       0
+
+void plastic wood_mat
+0
+0
+5		0.29		   0.15		      0.13		 0.02		    0.15
+
+void brightfunc xwood_pat
+12 xgrain woodpat.cal -s .5 -rz 180 -t 10.375 4 0 -s .0254
+0
+1		 0.6
+
+xwood_pat alias xwood_mat
+	wood_mat
+
+void brightfunc zwood_pat
+12 zgrain woodpat.cal -s .5 -rz 180 -t 10.375 4 0 -s .0254
+0
+1		 0.6
+
+zwood_pat alias zwood_mat
+	wood_mat
+# genbox xwood_mat speaker.lower 9.625 4 .75
+
+xwood_mat polygon speaker.lower.1540
+0
+0
+12
+	    0.01905		0.1016			0
+	    0.01905		0.1016		  0.01905
+	   0.263525		0.1016		  0.01905
+	   0.263525		0.1016			0
+
+xwood_mat polygon speaker.lower.4620
+0
+0
+12
+	   0.263525		0.1016		  0.01905
+	   0.263525		     0		  0.01905
+	   0.263525		     0			0
+	   0.263525		0.1016			0
+
+xwood_mat polygon speaker.lower.2310
+0
+0
+12
+	   0.263525		     0			0
+	    0.01905  0			0
+	    0.01905		0.1016			0
+	   0.263525		0.1016			0
+
+xwood_mat polygon speaker.lower.3267
+0
+0
+12
+	    0.01905  0			0
+	   0.263525		     0			0
+	   0.263525		     0		  0.01905
+	    0.01905  0		  0.01905
+
+xwood_mat polygon speaker.lower.5137
+0
+0
+12
+	    0.01905		0.1016		  0.01905
+	    0.01905		0.1016			0
+	    0.01905  0			0
+	    0.01905  0		  0.01905
+
+xwood_mat polygon speaker.lower.6457
+0
+0
+12
+	   0.263525		     0		  0.01905
+	   0.263525		0.1016		  0.01905
+	    0.01905		0.1016		  0.01905
+	    0.01905  0		  0.01905
+# xform -t .75 0 9.625
+# genbox xwood_mat speaker.upper 9.625 4 .75
+
+xwood_mat polygon speaker.upper.1540
+0
+0
+12
+		  0		0.1016		 0.244475
+		  0		0.1016		 0.263525
+	   0.244475		0.1016		 0.263525
+	   0.244475		0.1016		 0.244475
+
+xwood_mat polygon speaker.upper.4620
+0
+0
+12
+	   0.244475		0.1016		 0.263525
+	   0.244475		     0		 0.263525
+	   0.244475		     0		 0.244475
+	   0.244475		0.1016		 0.244475
+
+xwood_mat polygon speaker.upper.2310
+0
+0
+12
+	   0.244475		     0		 0.244475
+		  0  0		 0.244475
+		  0		0.1016		 0.244475
+	   0.244475		0.1016		 0.244475
+
+xwood_mat polygon speaker.upper.3267
+0
+0
+12
+		  0  0		 0.244475
+	   0.244475		     0		 0.244475
+	   0.244475		     0		 0.263525
+		  0  0		 0.263525
+
+xwood_mat polygon speaker.upper.5137
+0
+0
+12
+		  0		0.1016		 0.263525
+		  0		0.1016		 0.244475
+		  0  0		 0.244475
+		  0  0		 0.263525
+
+xwood_mat polygon speaker.upper.6457
+0
+0
+12
+	   0.244475		     0		 0.263525
+	   0.244475		0.1016		 0.263525
+		  0		0.1016		 0.263525
+		  0  0		 0.263525
+# xform -t 0 0 .75
+# genbox zwood_mat speaker.left .75 4 9.625
+
+zwood_mat polygon speaker.left.1540
+0
+0
+12
+	   0.244475		0.1016		  0.01905
+	   0.244475		0.1016		 0.263525
+	   0.263525		0.1016		 0.263525
+	   0.263525		0.1016		  0.01905
+
+zwood_mat polygon speaker.left.4620
+0
+0
+12
+	   0.263525		0.1016		 0.263525
+	   0.263525		     0		 0.263525
+	   0.263525		     0		  0.01905
+	   0.263525		0.1016		  0.01905
+
+zwood_mat polygon speaker.left.2310
+0
+0
+12
+	   0.263525		     0		  0.01905
+	   0.244475		     0		  0.01905
+	   0.244475		0.1016		  0.01905
+	   0.263525		0.1016		  0.01905
+
+zwood_mat polygon speaker.left.3267
+0
+0
+12
+	   0.244475		     0		  0.01905
+	   0.263525		     0		  0.01905
+	   0.263525		     0		 0.263525
+	   0.244475		     0		 0.263525
+
+zwood_mat polygon speaker.left.5137
+0
+0
+12
+	   0.244475		0.1016		 0.263525
+	   0.244475		0.1016		  0.01905
+	   0.244475		     0		  0.01905
+	   0.244475		     0		 0.263525
+
+zwood_mat polygon speaker.left.6457
+0
+0
+12
+	   0.263525		     0		 0.263525
+	   0.263525		0.1016		 0.263525
+	   0.244475		0.1016		 0.263525
+	   0.244475		     0		 0.263525
+# xform -t 9.625 0 0
+# genbox zwood_mat speaker.right .75 4 9.625
+
+zwood_mat polygon speaker.right.1540
+0
+0
+12
+		  0		0.1016			0
+		  0		0.1016		 0.244475
+	    0.01905		0.1016		 0.244475
+	    0.01905		0.1016			0
+
+zwood_mat polygon speaker.right.4620
+0
+0
+12
+	    0.01905		0.1016		 0.244475
+	    0.01905  0		 0.244475
+	    0.01905  0			0
+	    0.01905		0.1016			0
+
+zwood_mat polygon speaker.right.2310
+0
+0
+12
+	    0.01905  0			0
+		  0  0			0
+		  0		0.1016			0
+	    0.01905		0.1016			0
+
+zwood_mat polygon speaker.right.3267
+0
+0
+12
+		  0  0			0
+	    0.01905  0			0
+	    0.01905  0		 0.244475
+		  0  0		 0.244475
+
+zwood_mat polygon speaker.right.5137
+0
+0
+12
+		  0		0.1016		 0.244475
+		  0		0.1016			0
+		  0  0			0
+		  0  0		 0.244475
+
+zwood_mat polygon speaker.right.6457
+0
+0
+12
+	    0.01905  0		 0.244475
+	    0.01905		0.1016		 0.244475
+		  0		0.1016		 0.244475
+		  0  0		 0.244475
+
+dark_fabric polygon cover
+0
+0
+12
+	   0.244475	       0.09525		  0.01905
+	    0.01905	       0.09525		  0.01905
+	    0.01905	       0.09525		 0.244475
+	   0.244475	       0.09525		 0.244475

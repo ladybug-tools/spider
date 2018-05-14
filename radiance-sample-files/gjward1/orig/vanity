@@ -1,0 +1,111 @@
+#
+#  A bathroom vanity and basin.
+#
+#	Origin is front left corner, x is right.
+#
+
+#
+# The fixtures
+#
+
+!xform -e -n left_fauc -rz -150 -t 11.5 19 30.75 sinkfauc
+
+!xform -e -n right_fauc -rz -30 -t 19.5 19 30.75 sinkfauc
+
+!genrev brass stopper 'hermite(0,.25,.09,0,t)' \
+	'hermite(1.0625,0,0,-.7,t)' 4 -s | xform -t 15.5 13.3 26.25
+
+!xform -e -n spigot -rz -90 -t 15.5 19.5 30.75 sinkspig
+
+#
+# The sink
+#
+
+!( echo marble polygon sink_top 0 0 63 31 10.5 30.75 31 22 30.75 \
+	0 22 30.75 0 0 30.75 31 0 30.75 31 10.5 30.75 ; \
+	cnt 15 | rcalc -e '$1=15.5+x(theta(0),phi(1-$1/14))' \
+	-e '$2=10.5+y(theta(0),phi(1-$1/14))' -e '$3=30.75' -f basin.cal )
+
+!gensurf marble sink '15.5+x(theta(s),phi(t))' '10.5+y(theta(s),phi(t))' \
+	'30.75+z(theta(s),phi(t))' 4 14 -f basin.cal -s
+
+# edit the following:
+# xform -t 0 0 30
+# genbox marble sink 31 22 .75
+
+marble polygon sink.1540
+0
+0
+12
+                 31                  0                 30
+                 31                  0              30.75
+                  0                  0              30.75
+                  0                  0                 30
+
+marble polygon sink.4620
+0
+0
+12
+                  0                  0              30.75
+                  0                 22              30.75
+                  0                 22                 30
+                  0                  0                 30
+
+marble polygon sink.2310
+0
+0
+30
+                  0                 22                 30
+                 31                 22                 30
+                 31                  0                 30
+                  0                  0                 30
+		  0	2	30
+		  29	2	30
+		  29	20	30
+		  2	20	30
+		  2	2	30
+		  0	2	30
+
+marble polygon sink.3267
+0
+0
+12
+                 31                 22                 30
+                  0                 22                 30
+                  0                 22              30.75
+                 31                 22              30.75
+
+marble polygon sink.5137
+0
+0
+12
+                 31                  0              30.75
+                 31                  0                 30
+                 31                 22                 30
+                 31                 22              30.75
+
+#
+# Changed occurrences of xwood to ywood below since we will be rotated:
+#
+
+!genbox marble sink_back 31 .75 3 | xform -t 0 21.25 30.76
+
+!genprism zwood cab_left 8 0 5 4 5 4 4 24.5 4 24.5 3 30 1.5 30 22 0 22 \
+	-l 0 0 .5 | xform -ry -90 -t 1 0 0
+
+!genprism zwood cab_right 8 0 5 4 5 4 4 24.5 4 24.5 3 30 1.5 30 22 0 22 \
+	-l 0 0 .5 | xform -ry -90 -t 30.5 0 0
+
+!genbox ywood cab_base 30 .5 4 | xform -t .5 4.5 0
+
+!genbox zwood cab_front 30 .5 20.5 -r .1 | xform -t .5 3.5 4
+
+!genbox ywood cab_front_top 30 .5 5.75 -r .1 | xform -t 0 -.5 0 -rx 15.25 -t .5 3 24.5
+
+!genbox zwood cab_door 13.5 .5 18.5 -r .1 | xform -t 2 2.95 5
+
+!genbox ywood cab_drawer_lower 11 .5 5.75 -r .1 | xform -t 18 2.95 5
+
+!genbox ywood cab_drawer_middle 11 .5 5.75 -r .1 | xform -t 18 2.95 11.25
+
+!genbox ywood cab_drawer_top 11 .5 5.75 -r .1 | xform -t 18 2.95 17.75

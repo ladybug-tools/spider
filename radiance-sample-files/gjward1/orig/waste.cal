@@ -1,0 +1,5 @@
+{
+	Function for wastebasket contour
+}
+xf(t)=select(floor(t*4)+1,4.5,-4.5,-4.5,4.5,4.5)+1.5*cos(t*2*PI);
+yf(t)=select(floor(t*4)+1,3.5,3.5,-3.5,-3.5,3.5)+1.5*sin(t*2*PI);

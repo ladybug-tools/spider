@@ -1,0 +1,57 @@
+#
+# Wood chair with red cloth upholstery
+#
+# Units are inches
+#
+
+void plastic wood_mat
+0
+0
+5	.5 .23 .14 .002 .1
+
+void brightfunc xwood_pat
+4 xgrain woodpat.cal -s .2
+0
+1 .6
+
+xwood_pat alias xwood_mat wood_mat
+
+void brightfunc ywood_pat
+4 ygrain woodpat.cal -s .2
+0
+1 .6
+
+ywood_pat alias ywood_mat wood_mat
+
+void brightfunc zwood_pat
+4 zgrain woodpat.cal -s .2
+0
+1 .6
+
+zwood_pat alias zwood_mat wood_mat
+
+void brightfunc cloth1_pat
+6 upholster upholstery.cal -ry -45 -s .125
+0
+0
+
+cloth1_pat plastic cloth1_mat
+0
+0
+5 .98 .183 .165 0 0
+
+!genprism zwood_mat left_leg chair2leg.pts -l 0 0 1.5 | xform -rx 90
+
+!genprism zwood_mat right_leg chair2leg.pts -l 0 0 1.5 | xform -rx 90 -t 0 18 0
+
+!genprism xwood_mat left_arm chair2arm.pts -l 0 0 1.5 | xform -rx 90 -t 0 -1.75 0
+
+!genprism xwood_mat right_arm chair2arm.pts -l 0 0 1.5 | xform -rx 90 -t 0 19.75 0
+
+!genprism cloth1_mat seat chair2seat.pts -l 0 0 18 -c | xform -rx 90 -t 0 17.25 0
+
+!genprism cloth1_mat back chair2back.pts -l 0 0 .38 -c | xform -s .9305 -rz -90 -t 0 0 .69327 -ry -20 -t 20 17.25 30
+
+!genprism ywood_mat back_frame chair2back.pts -l 0 0 .69327 | xform -rz -90 -ry -20 -t 20 18 30
+
+!genbox ywood_mat lower_frame .75 16.5 1.75 | xform -t 0 0 -1.75 -t -.125 0 15

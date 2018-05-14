@@ -1,0 +1,75 @@
+# Creation of the door closer
+# units = feet
+
+void metal door_closer_mat
+0
+0
+5 .45 .45 .45 .5 0
+
+door_closer_mat cylinder closer.cyl.down
+0
+0
+7
+	0	-.042	.082
+	.666	-.042 	.082
+	.083 
+
+door_closer_mat ring ring_left.down
+0
+0
+8
+	0 	-.042	.082
+	-1	0	0
+	0	.083
+
+door_closer_mat ring ring_right.down
+0
+0
+8
+	.666	-.042	.082
+	1	0	0
+	0	.083
+
+door_closer_mat cylinder closer.cyl.top
+0
+0
+7
+	.333	0	.082
+	.333	0	.416
+	.125
+
+door_closer_mat ring ring_top.down
+0
+0
+8
+	.333	0	.082
+	0	0	-1
+	0	.125
+
+door_closer_mat ring ring_top.top
+0
+0
+8
+	.333	0	.416
+	0	0	1
+	0	.125
+
+door_closer_mat sphere closer.sph
+0
+0
+4 .333 0 .4155 .028
+
+!genbox door_closer_mat bracket.1 .125 .416 .031 | xform -t -.048 -.237 .474
+!genbox door_closer_mat bracket.2 .291 .145 .031| xform -t -.134 .034 .474
+
+!genbox door_closer_mat small_arm .916 .052 .020 |xform -t -.026 -.026 0 -rz -15 -t .333 0 .434
+!genbox door_closer_mat upper_arm  1.166 .052 .020 |xform -t 0 -.237 .454
+
+
+# creation of a boulon
+
+!cnt 6 | rcalc -e '$1=cos($1*PI/3);$2=sin($1*PI/3)' | genprism door_closer_mat nut.right - -l 0 0 1 | xform -s .05 -ry 90 -t .66 -.042 .082 
+
+!cnt 6 | rcalc -e '$1=cos($1*PI/3);$2=sin($1*PI/3)' | genprism door_closer_mat nut.left - -l 0 0 1 | xform -s .05 -ry -90 -t .001 -.042 .082
+
+!cnt 6 | rcalc -e '$1=cos($1*PI/3);$2=sin($1*PI/3)' | genprism door_closer_mat nut.down - -l 0 0 1 | xform -s .03 -ry 180 -t .333 -.042 .01

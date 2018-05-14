@@ -1,0 +1,42 @@
+# creation of the EXIT sign above the doors
+
+void plastic sign_mat
+0
+0
+5 .5 .5 .5 .05 .1
+
+void glow alpha_mat
+0
+0
+4 1 .05 .025 0
+
+void plastic sign_mat_inside
+0
+0
+5 .4 .4 .4 .05 .1
+
+void plastic support_mat
+0
+0
+5 .88 .72 .58 .05 .1
+
+!genbox sign_mat exit_frame.1 11.5 1.5 .125|xform -t 0 0 2.875
+!genbox sign_mat exit_frame.2 1.5 7 .125|xform -t 11.5 0 2.875
+!genbox sign_mat exit_frame.3 11.5 1.5 .125|xform -t 1.5 7 2.875
+!genbox sign_mat exit_frame.4 1.5 7 .125 |xform -t 0 1.5 2.875
+
+sign_mat_inside polygon exit_inside
+0
+0
+12
+	1.5	1.5	2.98
+	11.5	1.5	2.98
+	11.5	7	2.98
+	1.5	7	2.98
+
+!xform -s 2.375 -t 1.75 1.625 2.975 E.new
+!xform -s 2.375 -t 4.25 1.625 2.975 X.new
+!xform -s 2.375 -t 6.75  1.625 2.975 I.new
+!xform -s 2.375 -t 9 1.625 2.975 T.new
+
+!genbox support_mat support_frame 1.75 8 2.875|xform -t .625 .25 0

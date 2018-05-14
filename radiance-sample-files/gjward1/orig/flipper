@@ -1,0 +1,5 @@
+#
+# A humpback's flipper
+#
+
+!xform -e -t -.4 .5 0 -s .5 -ry -90 -a 2 -mx flipper.patch

@@ -1,0 +1,113 @@
+#
+#  Bathroom materials
+#
+
+void plastic blue_enamel
+0
+0
+5 .306 .496 .623 0 0
+
+void alias swall_mat blue_enamel
+
+void alias ceiling_mat blue_enamel
+
+void alias ewall_mat blue_enamel
+
+void alias wwall_mat blue_enamel
+
+void alias nwall_mat blue_enamel
+
+void plastic blue_tile
+0
+0
+5 .304 .674 .720 .05 .08
+
+void alias floor_mat blue_tile
+
+void alias ntubwall_mat blue_enamel
+
+void alias wtubwall_mat blue_enamel
+
+void alias etubwall_mat blue_enamel
+
+void alias tubceil_mat blue_enamel
+
+void alias wnwallbdr_mat blue_enamel
+
+void plastic white_porcelain
+0
+0
+5 .7 .7 .7 .05 0
+
+void alias tub_mat white_porcelain
+
+void alias toilet_mat white_porcelain
+
+void metal brass
+0
+0
+5 .68 .27 .002 .95 0
+
+void alias bathfauc_mat brass
+
+void alias window_mat blue_enamel
+
+void plastic white_enamel
+0
+0
+5 .65 .65 .65 0 0
+
+void alias wframe_mat white_enamel
+
+void glass plain_glass
+0
+0
+3 .92 .92 .92
+
+void alias glass_mat plain_glass
+
+void alias dframe_mat blue_enamel
+
+void plastic black_plastic
+0
+0
+5 .1 .1 .1 0 0
+
+void brightfunc marblepat
+4 marble marble.cal -s 6
+0
+1 .35
+
+marblepat plastic marble
+0
+0
+5 .6 .6 .6 .03 .1
+
+void brightfunc zwoodpat
+4 zgrain woodpat.cal -s .3
+0
+1 .5
+
+void brightfunc ywoodpat
+4 ygrain woodpat.cal -s .3
+0
+1 .5
+
+void brightfunc xwoodpat
+4 xgrain woodpat.cal -s .3
+0
+1 .5
+
+zwoodpat plastic zwood
+0
+0
+5 .57 .24 .15 .03 0.08
+
+ywoodpat alias ywood zwood
+
+xwoodpat alias xwood zwood
+
+void metal mirror
+0
+0
+5 .9 .9 .9 1 0

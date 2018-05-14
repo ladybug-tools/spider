@@ -1,0 +1,166 @@
+################################
+# Copyright (c) 1991 Greg Ward #
+# Windows and Lighting Program #
+# Lawrence Berkeley Laboratory #
+# Berkeley, CA	94720	       #
+################################
+#
+# Low budget desk lamp from office model
+#	(Luxo Reject)
+#
+#	Units = centimeters
+#	(0,0,0) at center of base
+#	Y-axis towards front of lamp
+#	Z-axis up
+#
+# Overall dimensions are 15.3 by 34 by 50 centimeters
+#
+################################
+# xform -rx 90 -rz -90 -s 2.54
+
+void light incandescent60
+0
+0
+3   4 4 4
+
+void plastic tan_paint
+0
+0
+5		 0.3		    0.2		       0.2		 0.05		       0
+
+void plastic white_paint
+0
+0
+5		 0.9		    0.9		       0.9		  0.1		       0
+
+tan_paint ring base_bottom
+0
+0
+8
+		  0		     0			0
+ -0 0		    -2.54
+		  0		  7.62
+
+tan_paint cylinder base_side
+0
+0
+7
+		  0		     0			0
+  0  0		    1.905
+	       7.62
+
+tan_paint cone base_rim
+0
+0
+8
+  0  0		    1.905
+  0  0		     2.54
+	       7.62		 6.985
+
+tan_paint ring base_top
+0
+0
+8
+  0  0		     2.54
+  0  0		     2.54
+		  0		 6.985
+
+tan_paint sphere base_pivot
+0
+0
+4  0		  -5.08		      2.54		 1.27
+
+tan_paint cylinder lower_arm
+0
+0
+7
+  0		 -5.08		     2.54
+  0	-16.3735051326	    33.5686503383
+	      0.635
+
+tan_paint sphere arm_pivot
+0
+0
+4  0	 -16.3735051326	     33.5686503383		 1.27
+
+tan_paint cylinder upper_arm
+0
+0
+7
+  0	     -16.37284		 33.56864
+  0	 5.62420525611		 46.26864
+	      0.635
+
+tan_paint sphere head_pivot
+0
+0
+4  0	  5.62420525611		  46.26864		 1.27
+
+tan_paint ring head.top
+0
+0
+8
+  0	 6.43319947505	    48.9905848782
+  0    -0.441066371274	    2.50141169265
+		  0		 1.905
+
+tan_paint cone head.out0
+0
+0
+8
+  0	 6.43319947505	    48.9905848782
+  0	 7.75639858887	    41.4863498003
+	      1.905		  2.54
+
+white_paint cup head.in0
+0
+0
+8
+  0	 6.43319947505	    48.9905848782
+  0	 7.75639858887	    41.4863498003
+	     1.8796		 2.286
+
+tan_paint cone head.out1
+0
+0
+8
+  0	 7.75639858887	    41.4863498003
+  0	 8.19746496016	    38.9849381077
+	       2.54		  5.08
+
+white_paint cup head.in1
+0
+0
+8
+  0	 7.75639858887	    41.4863498003
+  0	 8.19746496016	    38.9849381077
+	      2.286		 4.826
+
+tan_paint cone head.out2
+0
+0
+8
+  0	 8.19746496016	    38.9849381077
+   0	  9.30013088832	     32.7314088761
+	       5.08		  7.62
+
+white_paint cup head.in2
+0
+0
+8
+  0	 8.19746496016	    38.9849381077
+   0	  9.30013088832	     32.7314088761
+	      4.826		 7.366
+
+tan_paint ring head.rim
+0
+0
+8
+   0	  9.30013088832	     32.7314088761
+ -0	0.441066371274	   -2.50141169265
+	      7.366		  7.62
+
+incandescent60 sphere lightbulb
+0
+0
+4  0	  8.63853133141	     36.4835264151		3.175

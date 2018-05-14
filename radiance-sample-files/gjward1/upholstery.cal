@@ -1,0 +1,5 @@
+{
+	this file creates the threads of a chair's upholstery
+}
+upholster=(1-.5*(1+noise3(Py,Pz/8,Px/8)/2)*(2/3+sin(Px*2*PI)/3)) *
+	(1-.5*(1+noise3(Px,Py/8,Pz/8)/2)*(2/3+sin(Py*2*PI)/3));

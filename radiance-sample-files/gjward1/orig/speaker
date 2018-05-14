@@ -1,0 +1,44 @@
+#
+# Intercom speaker
+#
+
+void plastic dark_fabric
+0
+0
+5 .08 .08 .08 0 0
+
+void plastic wood_mat
+0
+0
+5 .29 .15 .13 .02 .15
+
+void brightfunc xwood_pat
+4 xgrain woodpat.cal -s .5
+0
+1 .6
+
+xwood_pat alias xwood_mat wood_mat
+
+void brightfunc zwood_pat
+4 zgrain woodpat.cal -s .5
+0
+1 .6
+
+zwood_pat alias zwood_mat wood_mat
+
+!genbox xwood_mat speaker.lower 9.625 4 .75
+
+!genbox xwood_mat speaker.upper 9.625 4 .75 | xform -t .75 0 9.625
+
+!genbox zwood_mat speaker.left .75 4 9.625 | xform -t 0 0 .75
+
+!genbox zwood_mat speaker.right .75 4 9.625 | xform -t 9.625 0 0
+
+dark_fabric polygon cover
+0
+0
+12
+	.75	.25	.75
+	9.625	.25	.75
+	9.625	.25	9.625
+	.75	.25	9.625

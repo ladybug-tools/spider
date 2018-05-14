@@ -1,0 +1,48 @@
+#
+# Flush handle for toilet
+#
+
+brass cylinder flange0
+0
+0
+7
+	-.05	0	0
+	.05	0	0
+	.625
+
+brass cone flange1
+0
+0
+8
+	.05	0	0
+	.25	0	0
+	.625	0
+
+brass sphere center
+0
+0
+4	.575	0	0	.375
+
+brass cone handle0
+0
+0
+8
+	.575	0	0
+	.575	-.35	0
+	0	.25
+
+white_porcelain cone handle1
+0
+0
+8
+	.575	-.35	0
+	.575	-2.725	0
+	.25	.375
+
+brass cone handle2
+0
+0
+8
+	.575	-2.725	0
+	.575	-2.85	0
+	.375	0

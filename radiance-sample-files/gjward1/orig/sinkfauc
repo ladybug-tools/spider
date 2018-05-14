@@ -1,0 +1,67 @@
+#
+# Sink faucet handle
+#
+
+brass cone base_bot
+0
+0
+8
+	0	0	0
+	0	0	.25
+	1.125	1
+
+!genrev brass base 'hermite(.25,1.75,.857,0,t)' \
+	'hermite(1,0,-1.5,-3,t)' 5
+
+brass cone pivot_bot
+0
+0
+8
+	0	0	1.8
+	0	0	2.4
+	.25	.2
+
+brass sphere pivot
+0
+0
+4                  0                  0             2.8125             0.4375
+
+brass cone handle.1
+0
+0
+8
+             0.3625                  0             2.8125
+             0.6125                  0             2.8125
+              0.125               0.15
+
+brass ring handle.2
+0
+0
+8
+             0.6125                  0             2.8125
+                  1                  0                  0
+               0.15                0.2
+
+brass cone handle.3
+0
+0
+8
+             0.6125                  0             2.8125
+             0.9375                  0             2.8125
+                0.2               0.25
+
+white_porcelain cone handle.4
+0
+0
+8
+             0.9375                  0             2.8125
+             3.0625                  0             2.8125
+               0.25              0.375
+
+brass cone handle.5
+0
+0
+8
+             3.0625                  0             2.8125
+             3.1875                  0             2.8125
+              0.375                  0

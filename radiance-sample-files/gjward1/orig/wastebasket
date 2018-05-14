@@ -1,0 +1,16 @@
+#
+# A rectangular wastebasket with rounded sides
+#
+
+void plastic beige_vinyl
+0
+0
+5 .64 .44 .316 0 0
+
+!gensurf beige_vinyl outer '(1-s*.15)*xf(t)' '(1-s*.15)*yf(t)' '15-14*s' 1 40 -f waste.cal
+
+!gensurf beige_vinyl lip 'r(s)*xf(t)' 'r(s)*yf(t)' 'select(s*2+1,15,15,14.5)' 2 40 -e 'r(s)=select(s*2+1,1,1.075,1.075)' -f waste.cal
+
+!gensurf beige_vinyl outer.base '.85*xf(t)*(.934+.066*cos(s*PI/2))' '.85*yf(t)*(.9+.1*cos(s*PI/2))' '1-.999*sin(s*PI/2)' 4 40 -f waste.cal
+
+!(echo beige_vinyl polygon bottom 0 0 120; cnt 40 | rcalc -e '$1=.7939*xf(t);$2=.765*yf(t);$3=.001;t=$1/40' -f waste.cal)

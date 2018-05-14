@@ -1,0 +1,987 @@
+################################
+# Copyright (c) 1991 Greg Ward #
+# Windows and Lighting Program #
+# Lawrence Berkeley Laboratory #
+# Berkeley, CA	94720	       #
+################################
+#
+# The corner desk ensemble from the daylighted office model
+#
+# Depends on:
+#	rev.cal
+#	woodpat.cal
+#
+#	Units = meters
+#	(0,0,0) at back corner floor level
+#	X-axis directed along midsection
+#	Y-axis point towards round overhang
+#	Z-axis up
+#
+# Overall dimensions are 2.317 by 1.707 by .6868 meters
+#
+################################
+# xform -e -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+#
+#  A corner desk group with round end piece.
+#
+
+void brightfunc xgrain
+14 xgrain woodpat.cal -s .05 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+1 .8
+
+void brightfunc ygrain
+14 ygrain woodpat.cal -s .05 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+1 .8
+
+void brightfunc zgrain
+14 zgrain woodpat.cal -s .05 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+1 .8
+
+xgrain plastic xpine
+0
+0
+5		 0.6		   0.25		       0.1		    0		    0.15
+
+ygrain plastic ypine
+0
+0
+5		 0.6		   0.25		       0.1		    0		    0.15
+
+zgrain plastic zpine
+0
+0
+5		 0.6		   0.25		       0.1		    0		    0.15
+
+void metal polished_brass
+0
+0
+5		 0.6		    0.3		       0.1		 0.95		       0
+
+void plastic grey_plastic
+0
+0
+5		 0.4		    0.4		       0.4		    0		    0.05
+
+zpine polygon desktop_left
+0
+0
+12
+	    2.30124	       0.77724		   0.6858
+	    2.30124	       1.69164		   0.6858
+	    1.84404	       1.69164		   0.6858
+	    1.84404	       0.77724		   0.6858
+
+zpine polygon deskbot_left
+0
+0
+12
+	    1.84404	       1.69164		  0.65532
+	    2.30124	       1.69164		  0.65532
+	    2.30124	       0.77724		  0.65532
+	    1.84404	       0.77724		  0.65532
+
+zpine cylinder deskedge_leftend
+0
+0
+7
+	    2.30124	       1.69164		  0.67056
+	    1.84404	       1.69164		  0.67056
+	    0.01524
+
+zpine cylinder deskedge_leftrear
+0
+0
+7
+	    2.30124	       0.01524		  0.67056
+	    2.30124	       1.69164		  0.67056
+	    0.01524
+
+zpine cylinder deskedge_leftfront
+0
+0
+7
+	    1.84404	       0.77724		  0.67056
+	    1.84404	       1.69164		  0.67056
+	    0.01524
+
+zpine sphere deskcorner_leftrear
+0
+0
+4	     2.30124		1.69164		   0.67056	      0.01524
+
+zpine sphere deskcorner_leftfront
+0
+0
+4	     1.84404		1.69164		   0.67056	      0.01524
+
+xpine polygon desktop_middle
+0
+0
+18
+	    2.30124	       0.77724		   0.6858
+	    1.84404	       0.77724		   0.6858
+	    1.53924	       0.47244		   0.6858
+	    0.62484	       0.47244		   0.6858
+	    0.62484	       0.01524		   0.6858
+	    2.30124	       0.01524		   0.6858
+
+xpine polygon deskbot_middle
+0
+0
+18
+	    0.62484	       0.01524		  0.65532
+	    0.62484	       0.47244		  0.65532
+	    1.53924	       0.47244		  0.65532
+	    1.84404	       0.77724		  0.65532
+	    2.30124	       0.77724		  0.65532
+	    2.30124	       0.01524		  0.65532
+
+xpine cylinder deskedge_midrear
+0
+0
+7
+	    2.30124	       0.01524		  0.67056
+	    0.01524	       0.01524		  0.67056
+	    0.01524
+
+xpine cylinder deskedge_midangle
+0
+0
+7
+	    1.53924	       0.47244		  0.67056
+	    1.84404	       0.77724		  0.67056
+	    0.01524
+
+xpine cylinder deskedge_midfront
+0
+0
+7
+	    1.53924	       0.47244		  0.67056
+	    0.62484	       0.47244		  0.67056
+	    0.01524
+
+xpine sphere deskcorner_midrear
+0
+0
+4	     2.30124		0.01524		   0.67056	      0.01524
+
+zpine polygon desktop_right
+0
+0
+12
+	    0.62484	       1.08204		   0.6858
+	    0.01524	       1.08204		   0.6858
+	    0.01524	       0.01524		   0.6858
+	    0.62484	       0.01524		   0.6858
+
+zpine polygon deskbot_right
+0
+0
+12
+	    0.01524	       0.01524		  0.65532
+	    0.01524	       1.08204		  0.65532
+	    0.62484	       1.08204		  0.65532
+	    0.62484	       0.01524		  0.65532
+
+zpine ring desktop_rightend
+0
+0
+8
+	    0.32004	       1.08204		   0.6858
+ -2.28548294006e-33 -0		   0.3048
+		  0		0.3048
+
+zpine ring deskbot_rightend
+0
+0
+8
+	    0.32004	       1.08204		  0.65532
+  2.28548294006e-33  0		  -0.3048
+		  0		0.3048
+
+zpine cylinder deskedge_rightfront
+0
+0
+7
+	    0.62484	       0.47244		  0.67056
+	    0.62484	       1.08204		  0.67056
+	    0.01524
+
+zpine cylinder deskedge_rightrear
+0
+0
+7
+	    0.01524	       0.01524		  0.67056
+	    0.01524	       1.08204		  0.67056
+	    0.01524
+
+zpine sphere deskcorner_rightrear
+0
+0
+4	     0.01524		0.01524		   0.67056	      0.01524
+# xform -rx -90 -t 6.5 2.2 3.5
+# genrev zpine deskedge_rightend .05*sin(PI*(t-.5)) 1+.05*sin(PI*t) 7 -s
+
+zpine texfunc Phong
+20 rev_dx rev_dy rev_dz rev.cal -rx -90 -t 6.5 2.2 3.5 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+4	 -157.896101	    -7.89480506		28.7399479	  -28.7399479
+
+Phong cone deskedge_rightend.1
+0
+0
+8
+	    0.32004	       1.08204		  0.65532
+	    0.32004	       1.08204	   0.656829234452
+	     0.3048	0.311412389112
+
+zpine texfunc Phong
+20 rev_dx rev_dy rev_dz rev.cal -rx -90 -t 6.5 2.2 3.5 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+4	  38.9971165	    0.781831482		38.9971165	  -39.6206063
+
+Phong cone deskedge_rightend.2
+0
+0
+8
+	    0.32004	       1.08204	   0.656829234452
+	    0.32004	       1.08204	   0.661058015418
+     0.311412389112	0.316715110536
+
+zpine texfunc Phong
+20 rev_dx rev_dy rev_dz rev.cal -rx -90 -t 6.5 2.2 3.5 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+4	  38.9971165	    0.433883739		38.9971165	  -39.8980854
+
+Phong cone deskedge_rightend.3
+0
+0
+8
+	    0.32004	       1.08204	   0.661058015418
+	    0.32004	       1.08204	   0.667168780966
+     0.316715110536	 0.31965790272
+
+zpine texfunc Phong
+20 rev_dx rev_dy rev_dz rev.cal -rx -90 -t 6.5 2.2 3.5 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+4	  38.9971165	  0		     0			1
+
+Phong cylinder deskedge_rightend.4
+0
+0
+7
+	    0.32004	       1.08204	   0.667168780966
+	    0.32004	       1.08204	   0.673951219034
+      0.31965790272
+
+zpine texfunc Phong
+20 rev_dx rev_dy rev_dz rev.cal -rx -90 -t 6.5 2.2 3.5 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+4	  38.9971165	   -0.433883739		38.9971165	  -39.8980854
+
+Phong cone deskedge_rightend.5
+0
+0
+8
+	    0.32004	       1.08204	   0.673951219034
+	    0.32004	       1.08204	   0.680061984582
+      0.31965790272	0.316715110536
+
+zpine texfunc Phong
+20 rev_dx rev_dy rev_dz rev.cal -rx -90 -t 6.5 2.2 3.5 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+4	  38.9971165	   -0.781831482		38.9971165	  -39.6206063
+
+Phong cone deskedge_rightend.6
+0
+0
+8
+	    0.32004	       1.08204	   0.680061984582
+	    0.32004	       1.08204	   0.684290765548
+     0.316715110536	0.311412389112
+
+zpine texfunc Phong
+20 rev_dx rev_dy rev_dz rev.cal -rx -90 -t 6.5 2.2 3.5 -rx 90 -rz 180 -t 7.55 .05 0 -s .3048
+0
+4	 -157.896101	     7.89480506		28.7399479	  -28.7399479
+
+Phong cone deskedge_rightend.7
+0
+0
+8
+	    0.32004	       1.08204	   0.684290765548
+	    0.32004	       1.08204		   0.6858
+     0.311412389112		0.3048
+
+polished_brass cylinder post
+0
+0
+7
+	    0.32004	       1.08204	0
+	    0.32004	       1.08204		  0.65532
+	    0.06096
+
+ypine polygon panelout_leftend
+0
+0
+12
+	    2.30124	       1.70688	0
+	    1.84404	       1.70688	0
+	    1.84404	       1.70688		  0.67056
+	    2.30124	       1.70688		  0.67056
+
+ypine polygon panelin_leftend
+0
+0
+12
+	    1.84404		1.6764		  0.67056
+	    1.84404		1.6764	0
+	    2.30124		1.6764	0
+	    2.30124		1.6764		  0.67056
+
+ypine cylinder paneledge_leftfront
+0
+0
+7
+	    1.84404	       1.69164		  0.67056
+	    1.84404	       1.69164	0
+	    0.01524
+
+ypine cylinder paneledge_leftrear
+0
+0
+7
+	    2.30124	       1.69164		  0.67056
+	    2.30124	       1.69164	0
+	    0.01524
+
+ypine polygon panelout_leftrear
+0
+0
+12
+	    2.31648	       0.01524		  0.67056
+	    2.31648	       0.01524			0
+	    2.31648	       1.69164	0
+	    2.31648	       1.69164		  0.67056
+
+ypine polygon panelin_leftrear
+0
+0
+12
+	      2.286	       1.69164	0
+	      2.286	       0.01524			0
+	      2.286	       0.01524		  0.67056
+	      2.286	       1.69164		  0.67056
+
+ypine cylinder paneledge_midrear
+0
+0
+7
+	    2.30124	       0.01524			0
+	    2.30124	       0.01524		  0.67056
+	    0.01524
+
+ypine polygon panelout_midrear
+0
+0
+12
+	    2.30124 -0		  0.67056
+	    0.01524  0		  0.67056
+	    0.01524  0 -0
+	    2.30124		     0 -0
+
+ypine polygon panelin_midrear
+0
+0
+12
+	    0.01524	       0.03048	0
+	    0.01524	       0.03048		  0.67056
+	    2.30124	       0.03048		  0.67056
+	    2.30124	       0.03048	0
+
+ypine cylinder paneledge_rightrear
+0
+0
+7
+	    0.01524	       0.01524			0
+	    0.01524	       0.01524		  0.67056
+	    0.01524
+# xform -t .1 1.6 4.375
+# genbox grey_plastic top_drawer 1.4 .5 1.1 -r .05
+
+grey_plastic polygon top_drawer.dhgc
+0
+0
+12
+	    1.85928	       1.36398		  0.48768
+	    1.85928	       1.66878		  0.48768
+	    2.25552	       1.66878		  0.48768
+	    2.25552	       1.36398		  0.48768
+
+grey_plastic polygon top_drawer.oqmk
+0
+0
+12
+	    2.27076	       1.66878		  0.50292
+	    2.27076	       1.66878		  0.62484
+	    2.27076	       1.36398		  0.62484
+	    2.27076	       1.36398		  0.50292
+
+grey_plastic polygon top_drawer.OPNM
+0
+0
+12
+	    2.25552	       1.34874		  0.62484
+	    1.85928	       1.34874		  0.62484
+	    1.85928	       1.34874		  0.50292
+	    2.25552	       1.34874		  0.50292
+
+grey_plastic polygon top_drawer.feij
+0
+0
+12
+	    1.85928	       1.36398		  0.64008
+	    2.25552	       1.36398		  0.64008
+	    2.25552	       1.66878		  0.64008
+	    1.85928	       1.66878		  0.64008
+
+grey_plastic polygon top_drawer.plnr
+0
+0
+12
+	    1.84404	       1.66878		  0.50292
+	    1.84404	       1.36398		  0.50292
+	    1.84404	       1.36398		  0.62484
+	    1.84404	       1.66878		  0.62484
+
+grey_plastic polygon top_drawer.SQRT
+0
+0
+12
+	    2.25552	       1.68402		  0.62484
+	    2.25552	       1.68402		  0.50292
+	    1.85928	       1.68402		  0.50292
+	    1.85928	       1.68402		  0.62484
+
+grey_plastic cylinder top_drawer.hi
+0
+0
+7
+	    2.25552	       1.36398		  0.50292
+	    1.85928	       1.36398		  0.50292
+	    0.01524
+
+grey_plastic cylinder top_drawer.hl
+0
+0
+7
+	    2.25552	       1.36398		  0.50292
+	    2.25552	       1.66878		  0.50292
+	    0.01524
+
+grey_plastic cylinder top_drawer.hj
+0
+0
+7
+	    2.25552	       1.36398		  0.50292
+	    2.25552	       1.36398		  0.62484
+	    0.01524
+
+grey_plastic cylinder top_drawer.ki
+0
+0
+7
+	    1.85928	       1.36398		  0.62484
+	    1.85928	       1.36398		  0.50292
+	    0.01524
+
+grey_plastic cylinder top_drawer.kj
+0
+0
+7
+	    1.85928	       1.36398		  0.62484
+	    2.25552	       1.36398		  0.62484
+	    0.01524
+
+grey_plastic cylinder top_drawer.ko
+0
+0
+7
+	    1.85928	       1.36398		  0.62484
+	    1.85928	       1.66878		  0.62484
+	    0.01524
+
+grey_plastic cylinder top_drawer.mi
+0
+0
+7
+	    1.85928	       1.66878		  0.50292
+	    1.85928	       1.36398		  0.50292
+	    0.01524
+
+grey_plastic cylinder top_drawer.ml
+0
+0
+7
+	    1.85928	       1.66878		  0.50292
+	    2.25552	       1.66878		  0.50292
+	    0.01524
+
+grey_plastic cylinder top_drawer.mo
+0
+0
+7
+	    1.85928	       1.66878		  0.50292
+	    1.85928	       1.66878		  0.62484
+	    0.01524
+
+grey_plastic cylinder top_drawer.nj
+0
+0
+7
+	    2.25552	       1.66878		  0.62484
+	    2.25552	       1.36398		  0.62484
+	    0.01524
+
+grey_plastic cylinder top_drawer.nl
+0
+0
+7
+	    2.25552	       1.66878		  0.62484
+	    2.25552	       1.66878		  0.50292
+	    0.01524
+
+grey_plastic cylinder top_drawer.no
+0
+0
+7
+	    2.25552	       1.66878		  0.62484
+	    1.85928	       1.66878		  0.62484
+	    0.01524
+
+grey_plastic sphere top_drawer.h
+0
+0
+4	     2.25552		1.36398		   0.50292	      0.01524
+
+grey_plastic sphere top_drawer.i
+0
+0
+4	     1.85928		1.36398		   0.50292	      0.01524
+
+grey_plastic sphere top_drawer.j
+0
+0
+4	     2.25552		1.36398		   0.62484	      0.01524
+
+grey_plastic sphere top_drawer.k
+0
+0
+4	     1.85928		1.36398		   0.62484	      0.01524
+
+grey_plastic sphere top_drawer.l
+0
+0
+4	     2.25552		1.66878		   0.50292	      0.01524
+
+grey_plastic sphere top_drawer.m
+0
+0
+4	     1.85928		1.66878		   0.50292	      0.01524
+
+grey_plastic sphere top_drawer.n
+0
+0
+4	     2.25552		1.66878		   0.62484	      0.01524
+
+grey_plastic sphere top_drawer.o
+0
+0
+4	     1.85928		1.66878		   0.62484	      0.01524
+# xform -t .1 1.05 4.375
+# genbox grey_plastic middle_drawer 1.4 .5 1.1 -r .05
+
+grey_plastic polygon middle_drawer.dhgc
+0
+0
+12
+	    1.85928	       1.36398		  0.32004
+	    1.85928	       1.66878		  0.32004
+	    2.25552	       1.66878		  0.32004
+	    2.25552	       1.36398		  0.32004
+
+grey_plastic polygon middle_drawer.oqmk
+0
+0
+12
+	    2.27076	       1.66878		  0.33528
+	    2.27076	       1.66878		   0.4572
+	    2.27076	       1.36398		   0.4572
+	    2.27076	       1.36398		  0.33528
+
+grey_plastic polygon middle_drawer.OPNM
+0
+0
+12
+	    2.25552	       1.34874		   0.4572
+	    1.85928	       1.34874		   0.4572
+	    1.85928	       1.34874		  0.33528
+	    2.25552	       1.34874		  0.33528
+
+grey_plastic polygon middle_drawer.feij
+0
+0
+12
+	    1.85928	       1.36398		  0.47244
+	    2.25552	       1.36398		  0.47244
+	    2.25552	       1.66878		  0.47244
+	    1.85928	       1.66878		  0.47244
+
+grey_plastic polygon middle_drawer.plnr
+0
+0
+12
+	    1.84404	       1.66878		  0.33528
+	    1.84404	       1.36398		  0.33528
+	    1.84404	       1.36398		   0.4572
+	    1.84404	       1.66878		   0.4572
+
+grey_plastic polygon middle_drawer.SQRT
+0
+0
+12
+	    2.25552	       1.68402		   0.4572
+	    2.25552	       1.68402		  0.33528
+	    1.85928	       1.68402		  0.33528
+	    1.85928	       1.68402		   0.4572
+
+grey_plastic cylinder middle_drawer.hi
+0
+0
+7
+	    2.25552	       1.36398		  0.33528
+	    1.85928	       1.36398		  0.33528
+	    0.01524
+
+grey_plastic cylinder middle_drawer.hl
+0
+0
+7
+	    2.25552	       1.36398		  0.33528
+	    2.25552	       1.66878		  0.33528
+	    0.01524
+
+grey_plastic cylinder middle_drawer.hj
+0
+0
+7
+	    2.25552	       1.36398		  0.33528
+	    2.25552	       1.36398		   0.4572
+	    0.01524
+
+grey_plastic cylinder middle_drawer.ki
+0
+0
+7
+	    1.85928	       1.36398		   0.4572
+	    1.85928	       1.36398		  0.33528
+	    0.01524
+
+grey_plastic cylinder middle_drawer.kj
+0
+0
+7
+	    1.85928	       1.36398		   0.4572
+	    2.25552	       1.36398		   0.4572
+	    0.01524
+
+grey_plastic cylinder middle_drawer.ko
+0
+0
+7
+	    1.85928	       1.36398		   0.4572
+	    1.85928	       1.66878		   0.4572
+	    0.01524
+
+grey_plastic cylinder middle_drawer.mi
+0
+0
+7
+	    1.85928	       1.66878		  0.33528
+	    1.85928	       1.36398		  0.33528
+	    0.01524
+
+grey_plastic cylinder middle_drawer.ml
+0
+0
+7
+	    1.85928	       1.66878		  0.33528
+	    2.25552	       1.66878		  0.33528
+	    0.01524
+
+grey_plastic cylinder middle_drawer.mo
+0
+0
+7
+	    1.85928	       1.66878		  0.33528
+	    1.85928	       1.66878		   0.4572
+	    0.01524
+
+grey_plastic cylinder middle_drawer.nj
+0
+0
+7
+	    2.25552	       1.66878		   0.4572
+	    2.25552	       1.36398		   0.4572
+	    0.01524
+
+grey_plastic cylinder middle_drawer.nl
+0
+0
+7
+	    2.25552	       1.66878		   0.4572
+	    2.25552	       1.66878		  0.33528
+	    0.01524
+
+grey_plastic cylinder middle_drawer.no
+0
+0
+7
+	    2.25552	       1.66878		   0.4572
+	    1.85928	       1.66878		   0.4572
+	    0.01524
+
+grey_plastic sphere middle_drawer.h
+0
+0
+4	     2.25552		1.36398		   0.33528	      0.01524
+
+grey_plastic sphere middle_drawer.i
+0
+0
+4	     1.85928		1.36398		   0.33528	      0.01524
+
+grey_plastic sphere middle_drawer.j
+0
+0
+4	     2.25552		1.36398		    0.4572	      0.01524
+
+grey_plastic sphere middle_drawer.k
+0
+0
+4	     1.85928		1.36398		    0.4572	      0.01524
+
+grey_plastic sphere middle_drawer.l
+0
+0
+4	     2.25552		1.66878		   0.33528	      0.01524
+
+grey_plastic sphere middle_drawer.m
+0
+0
+4	     1.85928		1.66878		   0.33528	      0.01524
+
+grey_plastic sphere middle_drawer.n
+0
+0
+4	     2.25552		1.66878		    0.4572	      0.01524
+
+grey_plastic sphere middle_drawer.o
+0
+0
+4	     1.85928		1.66878		    0.4572	      0.01524
+# xform -t .1 0 4.375
+# genbox grey_plastic bottom_drawer 1.4 1 1.1 -r .05
+
+grey_plastic polygon bottom_drawer.dhgc
+0
+0
+12
+	    1.85928	       1.36398	0
+	    1.85928	       1.66878	0
+	    2.25552	       1.66878	0
+	    2.25552	       1.36398	0
+
+grey_plastic polygon bottom_drawer.oqmk
+0
+0
+12
+	    2.27076	       1.66878		  0.01524
+	    2.27076	       1.66878		  0.28956
+	    2.27076	       1.36398		  0.28956
+	    2.27076	       1.36398		  0.01524
+
+grey_plastic polygon bottom_drawer.OPNM
+0
+0
+12
+	    2.25552	       1.34874		  0.28956
+	    1.85928	       1.34874		  0.28956
+	    1.85928	       1.34874		  0.01524
+	    2.25552	       1.34874		  0.01524
+
+grey_plastic polygon bottom_drawer.feij
+0
+0
+12
+	    1.85928	       1.36398		   0.3048
+	    2.25552	       1.36398		   0.3048
+	    2.25552	       1.66878		   0.3048
+	    1.85928	       1.66878		   0.3048
+
+grey_plastic polygon bottom_drawer.plnr
+0
+0
+12
+	    1.84404	       1.66878		  0.01524
+	    1.84404	       1.36398		  0.01524
+	    1.84404	       1.36398		  0.28956
+	    1.84404	       1.66878		  0.28956
+
+grey_plastic polygon bottom_drawer.SQRT
+0
+0
+12
+	    2.25552	       1.68402		  0.28956
+	    2.25552	       1.68402		  0.01524
+	    1.85928	       1.68402		  0.01524
+	    1.85928	       1.68402		  0.28956
+
+grey_plastic cylinder bottom_drawer.hi
+0
+0
+7
+	    2.25552	       1.36398		  0.01524
+	    1.85928	       1.36398		  0.01524
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.hl
+0
+0
+7
+	    2.25552	       1.36398		  0.01524
+	    2.25552	       1.66878		  0.01524
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.hj
+0
+0
+7
+	    2.25552	       1.36398		  0.01524
+	    2.25552	       1.36398		  0.28956
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.ki
+0
+0
+7
+	    1.85928	       1.36398		  0.28956
+	    1.85928	       1.36398		  0.01524
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.kj
+0
+0
+7
+	    1.85928	       1.36398		  0.28956
+	    2.25552	       1.36398		  0.28956
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.ko
+0
+0
+7
+	    1.85928	       1.36398		  0.28956
+	    1.85928	       1.66878		  0.28956
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.mi
+0
+0
+7
+	    1.85928	       1.66878		  0.01524
+	    1.85928	       1.36398		  0.01524
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.ml
+0
+0
+7
+	    1.85928	       1.66878		  0.01524
+	    2.25552	       1.66878		  0.01524
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.mo
+0
+0
+7
+	    1.85928	       1.66878		  0.01524
+	    1.85928	       1.66878		  0.28956
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.nj
+0
+0
+7
+	    2.25552	       1.66878		  0.28956
+	    2.25552	       1.36398		  0.28956
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.nl
+0
+0
+7
+	    2.25552	       1.66878		  0.28956
+	    2.25552	       1.66878		  0.01524
+	    0.01524
+
+grey_plastic cylinder bottom_drawer.no
+0
+0
+7
+	    2.25552	       1.66878		  0.28956
+	    1.85928	       1.66878		  0.28956
+	    0.01524
+
+grey_plastic sphere bottom_drawer.h
+0
+0
+4	     2.25552		1.36398		   0.01524	      0.01524
+
+grey_plastic sphere bottom_drawer.i
+0
+0
+4	     1.85928		1.36398		   0.01524	      0.01524
+
+grey_plastic sphere bottom_drawer.j
+0
+0
+4	     2.25552		1.36398		   0.28956	      0.01524
+
+grey_plastic sphere bottom_drawer.k
+0
+0
+4	     1.85928		1.36398		   0.28956	      0.01524
+
+grey_plastic sphere bottom_drawer.l
+0
+0
+4	     2.25552		1.66878		   0.01524	      0.01524
+
+grey_plastic sphere bottom_drawer.m
+0
+0
+4	     1.85928		1.66878		   0.01524	      0.01524
+
+grey_plastic sphere bottom_drawer.n
+0
+0
+4	     2.25552		1.66878		   0.28956	      0.01524
+
+grey_plastic sphere bottom_drawer.o
+0
+0
+4	     1.85928		1.66878		   0.28956	      0.01524
