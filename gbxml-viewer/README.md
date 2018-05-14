@@ -1,20 +1,21 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/README.md'";
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/README.md "View file as a web page." ) </span>
+<input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
 
-# Spider 'Aragog' gbXML Viewer Read Me
+# Ladybug Tools / Spider / 'Aragog' gbXML Viewer Read Me
 
 [Spider 'Aragog' gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. gbXML is an industry supported file format for sharing building information between numerous building design software tools.
 
-<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer  width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-gbp-gbxml-parse/gv-gbp-run.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scripts_
 
 
 
-## Full screen stable release R12: <http://www.ladybug.tools/spider/gbxml-viewer>
+## Latest stable release:<br><http://www.ladybug.tools/spider/gbxml-viewer/>
 
-### Full screen development pre-release R13: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
+### Latest development pre-release: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev/>
 _Both of the above links are shortcuts that link to the appropriate address. You should bookmark these links in order to stay up to date._
 
 
@@ -28,7 +29,9 @@ _Link to invitation:_
 
 > We will be holding a Green Building XML (gbXML) webinar on May 8, 2018 from 1 to 2 pm EDT. This webinar is targeted toward energy modelers, engineers, architects, software vendors, and generally anyone who is interested in viewing the latest in Ladybug Tool workflows with an emphasis on integration with Green Building XML.
 
-### [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-08-gbxml-webinar/README.md )
+## Video: https://www.youtube.com/watch?v=qHFEhD2SsDA
+
+## [Webinar Files]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/2018-05-08-gbxml-webinar/README.md )
 
 
 ***
@@ -42,17 +45,12 @@ _Link to invitation:_
 
 ***
 
-## Previous Releases
 
-* [Spider gbXML Viewer Previous Releases]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
-
-***
-
-## The concept / The desired pattern:
+## Project concept / the desired pattern
 
 #### Knowledge embedded in gbXML files is viewable, analyzable and editable in real-time interactive 3D with free, open-source web apps
 
-### The current issues / The problems to be solved
+### The current issues / the problems to be solved
 
 
 [Green Building XML (gbXML)]( https://en.wikipedia.org/wiki/Green_Building_XML ) as described by its authors:
@@ -80,6 +78,16 @@ Objectives
 
 * Helping students, clients and non-AEC peeps gain access BIM data easily, quickly and freely
 * Facilitating the transfer of data between design programs and analysis programs
+
+
+## Previous Releases
+
+* [Spider gbXML Viewer Previous Releases]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
+
+
+## Project Information
+
+* [Ladybug Tools / Spider / 'Aragog' gbXML Viewer Project Information]( #gbxml-viewer/gbxml-viewer-info.md )
 
 
 ## Things you can do using this script

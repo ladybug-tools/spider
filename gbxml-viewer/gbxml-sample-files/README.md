@@ -1,6 +1,8 @@
 
 # gbXML Viewer Sample Files
 
+## Deprecated. see https://www.ladybug.tools/spider/index.html#gbxml-sample-files/README.md
+
 A work-in-progress
 
 ### Links to files
@@ -16,7 +18,7 @@ A work-in-progress
 * [omha-nb-zneth.xml]( http://www.ladybug.tools/spider/gbxml-viewer#http://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/omha-nb-zneth.xml )
 	* [original source file]( https://github.com/NREL/OpenStudio/blob/develop/openstudiocore/resources/gbxml/ZNETH.xml )
 
-### Supplied by Michal 
+### Supplied by Michal
 
 * [bristol-clifton-down-road.xml]( http://www.ladybug.tools/spider/gbxml-viewer#http://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/bristol-clifton-down-road.xml )
 * [london-office.xml]( http://www.ladybug.tools/spider/gbxml-viewer#http://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/london-office.xml )
