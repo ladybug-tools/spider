@@ -206,7 +206,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			'version': '0.37',
 			'volumeUnit': 'CubicMeters',
 			'xmlns': 'http://www.gbxml.org/schema'
-		}
+		};
 
 		divPopUpContents.innerHTML =
 		`
@@ -214,6 +214,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=divSavHeader ></div>
 			<h3>Missing Attributes</h3>
 			<div id=ISSdivAttributesMissing ></div>
+			<p><button onclick=GBI.surfaceChanges.attributeMissing[attribute].value=this.value;console.log('values',GBI.surfaceChanges.attributeMissing); >Update attributes</button></p>
 			<h3>save changes file for missing attributes</h3>
 			<textArea id=ISStxtAttributesMissing style="height:300px;width:100%;" ></textArea>
 			<button onclick=alert("coming-soon") >Update save changes file</button>
@@ -222,19 +223,18 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
-		txt = '';
+		let txt = '';
 		GBI.surfaceChanges.attributeMissing = {};
 
 		for ( attribute of ISS.attributesMissing ) {
 
-			txt += `<p><input value=${values[attribute]} size=25 > ${attribute} <p>`;
-			GBI.surfaceChanges.attributeMissing[ attribute ] = { attribute: attribute, value: values[attribute] };
+			GBI.surfaceChanges.attributeMissing[ attribute ] = { name: attribute, value: values[attribute] };
+			txt += `<p><input onchange=GBI.surfaceChanges.attributeMissing["${attribute}"].value=this.value;console.log('val',GBI.surfaceChanges.attributeMissing); placeholder=${values[attribute]} size=25 > ${attribute} <p>`;
 
 		}
 
 		ISSdivAttributesMissing.innerHTML = txt;
 		ISStxtAttributesMissing.value = JSON.stringify( GBI.surfaceChanges.attributeMissing, null, ' ' );
-
 
 
 	}
