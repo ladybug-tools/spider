@@ -6,7 +6,7 @@
 <meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library with menu sliding" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-03-08" >
-<title>Rad Viewer 6</title>
+<title>Rad Viewer 7</title>
 <style>
 /* Copyright 2018 pushMe pullYou authors. MIT License */
 
@@ -36,7 +36,7 @@
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
 */
 
-	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 20px;
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; height: 100%;  margin: 20px;
 		overflow-x: hidden; padding: 25px 10px 30px 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
 
 	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
@@ -51,8 +51,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "divMenu" >
 
@@ -76,7 +76,6 @@
 
 			<p><input type=file id=inpFile onchange=openFile(this); ></p>
 
-
 			<p>
 				<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
 
@@ -93,22 +92,43 @@
 				<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >
 			</div>
 
+			<p><button onclick=zoomObjectBoundingSphere(rad.meshes);>zoom all</button></p>
+
+
 			<details open>
 				<summary>Sample files</summary>
 
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/hour-13-0.rad" >Warwick / Hour_13.0.rad</a></p>
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad" >sample-file.rad</a></p>
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/bristol-clifton-downs/bristol-clifton-downs.rad" >bristol-clifton-downs.rad</a></p>
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/london-office/london-office.rad" >london-office.rad</a></p>
+				<p>
+					Mostapha<br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad" >sample-file.rad</a><br>
+				</p>
+				<p>
+					Michal<br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/hour-13-0.rad" >warwick / hour-13-0.rad</a><br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/bristol-clifton-downs/bristol-clifton-downs.rad" >bristol-clifton-downs.rad</a><br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/london-office/london-office.rad" >london-office.rad</a></p>
+				</p><p>
+					gjward1<br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/openbook.rad" >openbook.rad</a><br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/whale2.rad" >whale2.rad</a></p>
 
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/openbook.rad" >openbook.rad</a></p>
+				<p>
+					rad-tutorial-files<br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room3/room.rad" >room3/ room.rad</a><br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room2/room.rad" >room2/ room.rad</a><br>
+					<a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room/room.rad" >room2/ room.rad</a><br>
 
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/whale2.rad" >whale2.rad</a></p>
-
-				<small><p>The following load external files and are having asynchronous file loading issues. Sometimes they load OK and sometimes they don't</p></small>
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room3/room.rad" >rad-tutorial-files/room3/room.rad</a></p>
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room2/room.rad" >rad-tutorial-files/room2/room.rad</a></p>
-				<p><a href="#https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/rad-tutorial-files/room/room.rad" >rad-tutorial-files/room2/room.rad</a></p>
+				<p>
+					rndmStff<br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/TajWithLuminaires/model.rad" >TajWithLuminaires/model.rad</a><br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/classRoom/model.rad" >classRoom/model.rad</a><br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/house01/model.rad" >house01/model.rad</a><br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/houseWithPool/model.rad" >houseWithPool/model.rad</a><br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/islandHouse/model.rad" >islandHouse/model.rad</a><br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/manhattan/model.rad" >manhattan/model.rad</a><br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/manhattanTex/model.rad" >manhattanTex/model.rad</a><br>
+					<a href="#https://rawgit.com/rndmStff/radModels/master/roomJugs/model.rad" >roomJugs/model.rad</a>
+				</p>
 
 
 			</details>
@@ -144,7 +164,7 @@
 	function init() {
 
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
-		renderer.shadowMap.enabled = true;
+		//renderer.shadowMap.enabled = true;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
 		document.body.appendChild( renderer.domElement );
@@ -157,15 +177,15 @@
 
 		scene = new THREE.Scene();
 
-		lightAmbient = new THREE.AmbientLight( 0x444444 );
-		scene.add( lightAmbient );
+		//lightAmbient = new THREE.AmbientLight( 0x444444 );
+		//scene.add( lightAmbient );
 
-		size = 100
-		lightDirectional = new THREE.DirectionalLight( 0xffffff );
-		lightDirectional.position.set( -size, size, size );
+		//size = 100
+		//lightDirectional = new THREE.DirectionalLight( 0xffffff );
+		//lightDirectional.position.set( -size, size, size );
 	//	lightDirectional.shadow.camera.scale.set( 0.1 * size, 0.1 * size, 0.5 );
-		lightDirectional.castShadow = true;
-		scene.add( lightDirectional );
+		//lightDirectional.castShadow = true;
+		//scene.add( lightDirectional );
 
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'orientationchange', onWindowResize, false );
@@ -223,7 +243,7 @@
 			function callback( xhr ) {
 
 				const response = xhr.target.response;
-				console.log( 'response', xhr );
+				//console.log( 'response', xhr );
 
 				parseFile( response );
 
@@ -293,12 +313,11 @@
 
 			if ( line.search( /[abcdfghijklmnopqrstuvwxyz]/ ) >= 0) {
 
-
-				if ( line.match( '!xform' ) ) {
+				if ( line.match( '!xform' ) && !line.match( '-rx' ) && !line.match( '-f' ) ) {
 
 					let url = line.trim().replace( /  /g, ' ' ).split( /\s/)[ 1 ];
 					url = url.slice( 1 );
-					console.log( 'path + url', path + url );
+					//console.log( 'path + url', path + url );
 
 					requestFile( path + url );
 
@@ -321,7 +340,7 @@
 		rad.items = items;
 		rad.data = data;
 
-		console.log( 'rad', rad );
+		//console.log( 'rad', rad );
 
 		setVerts();
 
@@ -348,7 +367,10 @@
 			//console.log( 'item', rad.items[ i ] );
 
 			if ( rad.items[ i ] === '' ) { continue; }
-			if ( rad.items[ i ].includes( 'polygon') === false ) { console.log( 'voided rad.items[ i ]', rad.items[ i ] ); continue; }
+			if ( rad.items[ i ].includes( 'polygon') === false ) {
+				//console.log( 'voided rad.items[ i ]', rad.items[ i ] );
+				 continue;
+			}
 			//console.log( 'line', line );
 
 			line = rad.data[ i ];
@@ -366,7 +388,6 @@
 
 				arr = line[ j ].trim().replace( / {2,}/g, ' ' ).replace( /\t/g, '' ).split( /\s/).map( str => parseFloat( str ) );
 				//console.log( 'arr', arr );
-
 
 				//line[ i ] = line[ i ].replace( /  /g, ' ' ); // use regex??
 				//const arr = line[ i ].split( ' ' ).map( item => parseFloat( item ) );
@@ -391,7 +412,7 @@
 
 			} else {
 
-				const shape = GBP.drawShapeSinglePassObjects( points, material, []);
+				const shape = drawShapeSinglePassObjects( points, material, [] );
 
 				const edgesGeometry = new THREE.EdgesGeometry( shape.geometry );
 				const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x333333 } ) );
@@ -412,9 +433,9 @@
 
 
 
-	GBP.drawShapeSinglePassObjects = function( vertices, material, holes ) {
+	function drawShapeSinglePassObjects ( vertices, material, holes ) {
 
-		const plane = GBP.getPlane( vertices );
+		const plane = getPlane( vertices );
 
 		const obj = new THREE.Object3D();
 		obj.lookAt( plane.normal );  // copy the rotation of the triangle
@@ -438,7 +459,7 @@
 
 		}
 
-		const geometryShape = new THREE.ShapeGeometry( shape );
+		const geometryShape = new THREE.ShapeBufferGeometry( shape );
 
 		// material to here
 		const shapeMesh = new THREE.Mesh( geometryShape, material );
@@ -451,40 +472,57 @@
 	};
 
 
-	GBP.getPlane = function( points, start = 0 ) {
+	function getPlane ( points, start = 0 ) {
 
 		const triangle = new THREE.Triangle();
 		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
 		const pl = new THREE.Plane();
-		GBP.plane = triangle.plane( pl );
+		const plane = triangle.getPlane( pl );
 
-		//if ( triangle.area() != 0 ) {
-
-			/*
-			if ( start > 1 ) {
-				console.log( 'start', start );
-				console.log( 'triangle', triangle );
-				console.log( 'area', triangle.area() );
-				console.log( 'normal', triangle.normal() );
-				pl.normal.y = 0;
-				console.log( 'plane', pl );
-			}
-			*/
-			//return plane;
-
-		//} else
-
-		if ( triangle.area() === 0 ) {
+		if ( triangle.getArea() === 0 ) {
 
 			start++;
-			GBP.getPlane( points, start );
+			getPlane( points, start );
 
 		}
 
-		return GBP.plane;
+		return plane;
 
 	};
 
+
+
+
+	function zoomObjectBoundingSphere ( obj ) {
+
+		const bbox = new THREE.Box3().setFromObject( obj );
+
+		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+		const center = sphere.center;
+		const radius = sphere.radius;
+
+		controls.target.copy( center );
+		controls.maxDistance = 5 * radius;
+
+		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		camera.far = 10 * radius; //2 * camera.position.length();
+		camera.updateProjectionMatrix();
+
+		//lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
+		//lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		//lightDirectional.target = axesHelper;
+
+		axesHelper.scale.set( radius, radius, radius );
+		axesHelper.position.copy( center );
+
+		obj.userData.center = center;
+		obj.userData.radius = radius;
+
+		//		scene.remove( cameraHelper );
+		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		//		scene.add( cameraHelper );
+
+	}
 
 
 

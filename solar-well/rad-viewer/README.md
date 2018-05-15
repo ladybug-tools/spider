@@ -5,9 +5,17 @@ value="You are now in a GitHub web page view - Click this button to view this re
 # [Rad Viewer Read Me]( #solar-well/rad-viewer/README.md )
 
 
-<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-6.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-7.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _Latest project here_
+
+## full screen: [rad viewer 7]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-7.html )
+
+* Now loads files asynchronously with no issues
+* More demo files added from [rndmStff]( https://github.com/rndmStff/radModels )
+* Zoom all button added
+* Various minor tweaks to help with loading added
+
 
 ## full screen: [rad viewer 6]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-6.html )
 
@@ -63,7 +71,8 @@ View RAD produced by [Radiance]( https://radiance-online.org/ ) files in your br
 
 ## Links of Interest
 
-
+* https://github.com/rndmStff/radModels
+* http://radsite.lbl.gov/radiance/pub/objects/
 
 ## Change Log
 
