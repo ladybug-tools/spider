@@ -140,104 +140,42 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPanelMetadataIssues = function( target ) {
 
-		const requirements = [
-			'areaUnit', 'lengthUnit', 'temperatureUnit', 'useSIUnitsForResults', 'version', 'volumeUnit', 'xmlns'
-		];
+		const required = [ 'areaUnit', 'lengthUnit', 'temperatureUnit', 'useSIUnitsForResults', 'version', 'volumeUnit', 'xmlns' ];
 
 		let provided = [];
-		ISS.attributesMissing = [];
+		let missing = [];
 		let count = 0;
 
 		for ( property in GBP.gbjson ) {
 
-			//console.log( 'property', property );
 			//provided.push( property );
 
-			if ( requirements.includes( property) ) {
+			if ( required.includes( property) ) {
 
 				count++
 				provided.push( property );
 
 			} else {
 
+
 			}
 
 		}
 		//console.log( 'provided', provided );
-		//const missing = required.length - count;
-
-		for ( must of requirements ) {
-
-			if ( !GBP.gbjson[ must ] ) {
-
-				//console.log( 'must', must );
-				ISS.attributesMissing.push( must );
-			}
-		}
-		//console.log( 'missing', missing.join( '<br>' ) );
-
-
-		//console.log( 'missing', missing );
 
 		target.innerHTML =
-		`<details open>
+		`<details>
 
-		<summary>Metadata Issues &raquo; ${ISS.attributesMissing.length} attributes missing</summary>
+			<summary>Metadata Issues</summary>
 
-		<p>gbXML attributes provided:<br>${provided.join( '<br>' )}</p>
+			<p>gbXML attributes provided:<br>` + provided.join( ', ' ) + `</p>
 
-		<p>gbXML attributes missing: ${ISS.attributesMissing.join( '<br>' )} </p>
-
-		<p><button onclick=ISS.addMissingGbxmlAttributes(); >Add missing attributes</button></p>
+			<div>Missing: ` + ( required.length - count ) + `</div>
 
 		</details>`;
 
 	};
 
-
-	ISS.addMissingGbxmlAttributes = function() {
-
-		values = {
-
-			'areaUnit': 'SquareMeters',
-			'lengthUnit': 'Meters',
-			'temperatureUnit': 'C',
-			'useSIUnitsForResults': 'true',
-			'version': '0.37',
-			'volumeUnit': 'CubicMeters',
-			'xmlns': 'http://www.gbxml.org/schema'
-		}
-
-		divPopUpContents.innerHTML =
-		`
-			<h3>Add Missing Attributes</h3>
-			<div id=divSavHeader ></div>
-			<h3>Missing Attributes</h3>
-			<div id=ISSdivAttributesMissing ></div>
-			<h3>save changes file for missing attributes</h3>
-			<textArea id=ISStxtAttributesMissing style="height:300px;width:100%;" ></textArea>
-			<button onclick=alert("coming-soon") >Update save changes file</button>
-		`;
-
-		divPopUp.style.display = 'block';
-		window.scrollTo( 0, 0 );
-
-		txt = '';
-		GBI.surfaceChanges.attributeMissing = {};
-
-		for ( attribute of ISS.attributesMissing ) {
-
-			txt += `<p><input value=${values[attribute]} size=25 > ${attribute} <p>`;
-			GBI.surfaceChanges.attributeMissing[ attribute ] = { attribute: attribute, value: values[attribute] };
-
-		}
-
-		ISSdivAttributesMissing.innerHTML = txt;
-		ISStxtAttributesMissing.value = JSON.stringify( GBI.surfaceChanges.attributeMissing, null, ' ' );
-
-
-
-	}
 
 
 	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) {
@@ -310,7 +248,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		GBI.itemDuplicateAdjacent2 = GBI.setElementPanel2( item );
 		console.log( 'GBI.itemDuplicateAdjacent2', GBI.itemDuplicateAdjacent2 );
-
 		ISSselSurfaceAdjacentsDuplicates2.selectedIndex = 0;
 		ISSselSurfaceAdjacentsDuplicates2.click();
 

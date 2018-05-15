@@ -1,8 +1,8 @@
-<gbXML xmlns="http://www.gbxml.org/schema" useSIUnitsForResults="true" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" version="0.37">
+<gbXML temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" >
   <Campus id="aim0002">
     <Location>
       <StationId IDType="WMO">140741_2006</StationId>
-      <ZipcodeOrPostalCode>00000</ZipcodeOrPostalCode>
+      <ZipcodeOrPostalCode></ZipcodeOrPostalCode>
       <Longitude>-2.618841</Longitude>
       <Latitude>51.4554</Latitude>
       <Elevation>10.9728</Elevation>
