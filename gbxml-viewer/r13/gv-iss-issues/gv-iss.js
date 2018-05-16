@@ -146,53 +146,47 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		let provided = [];
 		ISS.attributesMissing = [];
-		let count = 0;
 
-		for ( property in GBP.gbjson ) {
+		for ( attribute in GBP.gbjson ) {
 
-			//console.log( 'property', property );
-			//provided.push( property );
+			//console.log( 'attribute', attribute );
 
-			if ( requirements.includes( property) ) {
+			if ( requirements.includes( attribute) ) {
 
-				count++
-				provided.push( property );
-
-			} else {
+				provided.push( attribute );
 
 			}
 
 		}
 		//console.log( 'provided', provided );
-		//const missing = required.length - count;
 
-		for ( must of requirements ) {
+		for ( attribute of requirements ) {
 
-			if ( !GBP.gbjson[ must ] ) {
+			if ( !GBP.gbjson[ attribute ] ) {
 
-				//console.log( 'must', must );
-				ISS.attributesMissing.push( must );
+				//console.log( 'attribute', must );
+				ISS.attributesMissing.push( attribute );
+
 			}
+
 		}
-		//console.log( 'missing', missing.join( '<br>' ) );
-
-
-		//console.log( 'missing', missing );
+		//console.log( 'ISS.attributesMissing', ISS.attributesMissing.join( '<br>' ) );
 
 		target.innerHTML =
-		`<details open>
+		`<details>
 
-		<summary>Metadata Issues &raquo; ${ISS.attributesMissing.length} attributes missing</summary>
+			<summary>Metadata Issues &raquo; ${ISS.attributesMissing.length} attributes missing</summary>
 
-		<p>gbXML attributes provided:<br>${provided.join( '<br>' )}</p>
+			<p>gbXML attributes provided:<br>${provided.join( '<br>' )}</p>
 
-		<p>gbXML attributes missing: ${ISS.attributesMissing.join( '<br>' )} </p>
+			<p>gbXML attributes missing: ${ISS.attributesMissing.join( '<br>' )} </p>
 
-		<p><button onclick=ISS.addMissingGbxmlAttributes(); >Add missing attributes</button></p>
+			<p><button onclick=ISS.addMissingGbxmlAttributes(); >Add missing attributes</button></p>
 
 		</details>`;
 
 	};
+
 
 
 	ISS.addMissingGbxmlAttributes = function() {
@@ -214,7 +208,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=divSavHeader ></div>
 			<h3>Missing Attributes</h3>
 			<div id=ISSdivAttributesMissing ></div>
-			<p><button onclick=GBI.surfaceChanges.attributeMissing[attribute].value=this.value;console.log('values',GBI.surfaceChanges.attributeMissing); >Update attributes</button></p>
 			<h3>save changes file for missing attributes</h3>
 			<textArea id=ISStxtAttributesMissing style="height:300px;width:100%;" ></textArea>
 			<button onclick=alert("coming-soon") >Update save changes file</button>
@@ -228,16 +221,28 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		for ( attribute of ISS.attributesMissing ) {
 
-			GBI.surfaceChanges.attributeMissing[ attribute ] = { name: attribute, value: values[attribute] };
-			txt += `<p><input onchange=GBI.surfaceChanges.attributeMissing["${attribute}"].value=this.value;console.log('val',GBI.surfaceChanges.attributeMissing); placeholder=${values[attribute]} size=25 > ${attribute} <p>`;
+			GBI.surfaceChanges.attributeMissing[ attribute ] = values[attribute];
+			txt += `<p><input onchange=ISS.setAttributeMissing("${attribute}",this); placeholder=${values[attribute]} size=25 > ${attribute} <p>`;
 
 		}
 
 		ISSdivAttributesMissing.innerHTML = txt;
 		ISStxtAttributesMissing.value = JSON.stringify( GBI.surfaceChanges.attributeMissing, null, ' ' );
 
+	}
+
+
+
+	ISS.setAttributeMissing = function( attribute, that ) {
+
+		console.log( 'that', that );
+
+		GBI.surfaceChanges.attributeMissing[attribute]=that.value;
+
+		ISStxtAttributesMissing.value = JSON.stringify( GBI.surfaceChanges.attributeMissing, null, ' ' );
 
 	}
+
 
 
 	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) {
@@ -309,7 +314,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.selItem = 'ISSselSurfaceAdjacentsDuplicates2';
 
 		GBI.itemDuplicateAdjacent2 = GBI.setElementPanel2( item );
-		console.log( 'GBI.itemDuplicateAdjacent2', GBI.itemDuplicateAdjacent2 );
+		//console.log( 'GBI.itemDuplicateAdjacent2', GBI.itemDuplicateAdjacent2 );
 
 		ISSselSurfaceAdjacentsDuplicates2.selectedIndex = 0;
 		ISSselSurfaceAdjacentsDuplicates2.click();
@@ -403,16 +408,14 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPanelSurfacesDuplicateCoordinates = function( target ) {
 
-
 		const surfacePolyLoops = [];
 		const surfaceIds = [];
 		ISS.surfaceDuplicateCoordinates = [];
 
-		let spaceIdOther1;
-		let spaceIdOther2;
+		//let spaceIdOther1;
+		//let spaceIdOther2;
 
 		const surfaces = GBP.surfaceJson;
-
 
 		let spaceId;
 
@@ -440,19 +443,27 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		`<details>
 
-			<summary id = "ISSsumSurfacesDuplicateCoordinates2" >R13 Duplicate Coordinates &raquo; ` + ISS.surfaceDuplicateCoordinates.length + ` found</summary>
+			<summary id = "ISSsumSurfacesDuplicateCoordinates2" >R13 Duplicate Coordinates &raquo; ` + ISS.surfaceDuplicateCoordinates.length +
+				` found</summary>
 
 			<p><small>
 				Two surfaces with identical coordinates
 			</small></p>
 
 			<p>
-				<button id=butDuplicatesCoordinates2 onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates2,ISS.surfaceDuplicateCoordinates); >toggle all duplicates</button>
+				<button id=butDuplicatesCoordinates2 onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates2,ISS.surfaceDuplicateCoordinates);
+					>toggle all duplicates</button>
 			</p>
 
 			<div id=ISSdivSurfacesDuplicateCoordinates2 ></div>
 
-			<button onclick=GBI.setSurfaceZoom(ISSselSurfacesDuplicateCoordinates2.value); title="zoom into just this surface" >zoom</button>
+			<p>
+
+				<button onclick=GBI.setSurfaceZoom(ISSselSurfacesDuplicateCoordinates2.value); title="zoom into just this surface" >zoom</button>
+
+				<button onclick=ISS.deleteDuplicateSurfaces(); >delete duplicate surfaces</button></p>
+
+			</p>
 
 			<hr>
 
@@ -474,6 +485,58 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSselSurfacesDuplicateCoordinates2.click();
 
 	};
+
+
+
+	ISS.deleteDuplicateSurfaces = function() {
+
+		divPopUpContents.innerHTML =
+		`
+			<h3>Delete Duplicate Surfaces</h3>
+
+			<h3>Duplicate Surfaces</h3>
+			<div id=ISSdivDuplicateSurfaces ></div>
+			<h3>save changes file for duplicate surfaces</h3>
+			<textArea id=ISStxtDuplicateSurfaces style="height:300px;width:100%;" ></textArea>
+			<button onclick=alert("coming-soon") >Update save changes file</button>
+		`;
+
+		divPopUp.style.display = 'block';
+		window.scrollTo( 0, 0 );
+
+		let txt = '';
+		GBI.surfaceChanges.duplicateSurfaces= {};
+
+		for ( attribute of ISS.surfaceDuplicateCoordinates ) {
+
+			//GBI.surfaceChanges.duplicateSurfaces[ attribute ] = attribute.Name;
+			GBI.surfaceChanges.deletes.push( attribute.Name );
+			txt += `<p><input type=checkbox  onchange=ISS.setDeletDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
+
+		}
+
+		ISSdivDuplicateSurfaces.innerHTML = txt;
+		ISStxtDuplicateSurfaces.value = JSON.stringify( GBI.surfaceChanges.deletes, null, ' ' );
+
+	}
+
+
+
+	ISS.setDeletDuplicateSurfaces = function( name, that ) {
+
+
+		console.log( 'that', that );
+
+		if ( that.checked === false ){
+
+			var index = GBI.surfaceChanges.deletes.indexOf( name );
+			if ( index !== -1 ) GBI.surfaceChanges.deletes.splice(index, 1);
+
+		}
+
+		ISStxtDuplicateSurfaces.value = JSON.stringify( GBI.surfaceChanges.deletes, null, ' ' );
+
+	}
 
 
 
@@ -671,7 +734,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		target.innerHTML =
 
-		`<details>
+		`<details open >
 
 			<summary id = "ISSsumSurfacesUndefinedCadId" >Undefined CAD Object IDs &raquo; ` + ISS.surfacesUndefinedId.length + ` found</summary>
 
@@ -679,7 +742,13 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdivSurfacesUndefinedCadId ></div>
 
-			<button onclick=GBI.setSurfaceZoom(ISSselSurfacesUndefinedCadId.value); title="zoom into just this surface" >zoom</button>
+			<p>
+
+				<button onclick=GBI.setSurfaceZoom(ISSselSurfacesUndefinedCadId.value); title="zoom into just this surface" >zoom</button>
+
+				<button onclick=ISS.fixCadObjectIds(); >Fix undefined CAD object IDs</button></p>
+
+			</P>
 
 			<hr>
 
@@ -702,6 +771,42 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	};
 
+
+
+	ISS.fixCadObjectIds = function() {
+
+		divPopUpContents.innerHTML =
+		`
+			<h3>Fix undefined CAD object IDs</h3>
+
+			<h3>Surfaces with undefined CAD object IDs</h3>
+			<div id=ISSdivCADObjectId ></div>
+			<div id=ISSdivCadGroups ></div>
+			<h3>save changes file for surfaces with undefined CAD object IDs</h3>
+			<textArea id=ISStxtSurfacesUndefinedCadId style="height:300px;width:100%;" ></textArea>
+			<button onclick=alert("coming-soon") >Update save changes file</button>
+		`;
+
+		divPopUp.style.display = 'block';
+		window.scrollTo( 0, 0 );
+
+		let txt = '';
+		//GBI.surfaceChanges.duplicateSurfaces= {};
+
+		for ( attribute of ISS.surfacesUndefinedId ) {
+
+			//GBI.surfaceChanges.duplicateSurfaces[ attribute ] = attribute.Name;
+			GBI.surfaceChanges.CADObjectId.push( attribute.Name );
+			txt += `<p><input type=checkbox  onchange=ISS.setDeletDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
+
+		}
+
+		GBI.setMenuPanelCadObjectsByType( ISSdivCadGroups )
+
+		ISSdivCADObjectId.innerHTML = txt;
+		ISStxtSurfacesUndefinedCadId.value = JSON.stringify( GBI.surfaceChanges.CADObjectId, null, ' ' );
+
+	}
 
 
 	ISS.setPanelSurfacesTiny = function( target ) {
@@ -1255,6 +1360,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		GBI.setGbjsonAttributes( item, ISSdivOpeningTypeInvalid, 'opening' );
 
 	};
+
 
 
 	ISS.setPanelAdjacentSpaceAttributes = function( id ) {
