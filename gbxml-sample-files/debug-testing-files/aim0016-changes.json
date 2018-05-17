@@ -1,12 +1,16 @@
 {
- "deletes": [],
- "types": [],
- "oneAdjacent": [],
- "twoAdjacent": [],
+ "addAttributesMissing": {
+  "useSIUnitsForResults": "true",
+  "version": "0.37",
+  "xmlns": "http://www.gbxml.org/schema"
+ },
+ "deletes": [
+  "X-S-523-duplicate"
+ ],
  "CADObjectId": [
   {
-   "name": "T-RF_100-E-R-485",
-   "cadId": "Floor: SIM_INT_AIR"
+   "name": "S-B1_106-U-W-464",
+   "CADObjectId": "Basic Wall: SIM_MASS_SLD"
   }
  ]
 }

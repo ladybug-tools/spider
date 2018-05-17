@@ -192,34 +192,13 @@
 
 	SAV.getUpdates = function() {
 
-		if ( GBI.surfaceChanges.deletes ) {
+		if ( GBI.surfaceChanges.addAttributesMissing ) { SAV.addAttributesMissing(); }
 
-			for ( let name of GBI.surfaceChanges.deletes ) {
 
-				const surfaceXml = SAV.getSurfaceByName( name );
+		if ( GBI.surfaceChanges.deletes ) { SAV.setDeletes(); }
 
-				console.log( 'surfaceXml', surfaceXml);
 
-				if ( !surfaceXml ) {
-
-					//console.log( 'id', id, surfaceXml );
-					divSavContents.innerHTML += 'Deletes - not found surface name: ' + name + '<br>';
-					continue;
-
-				} else {
-
-					surfaceXml.remove();
-
-					const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.Name === name );
-					GBP.surfaceMeshes.remove( surfaceMesh );
-
-					divSavContents.innerHTML += 'Deleted surface name: ' + name + '<br>';
-
-				}
-
-			}
-
-		}
+		if ( GBI.surfaceChanges.deletesDuplicates ) { SAV.setDeletesDuplicates(); }
 
 
 		if ( GBI.surfaceChanges.types ) {
@@ -521,23 +500,103 @@
 		}
 
 
-		if ( GBI.surfaceChanges.backgroundGradient === true ) {
+		if ( GBI.surfaceChanges.backgroundGradient === true ) { SAV.setBackgroundGradient(); }
 
-			var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
-			var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); };
-			var image = document.body.style.backgroundImage;
+		if ( HUD.setHeadsUp ) { HUD.setHeadsUp(); }
 
-			document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
-				pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
-
-		}
+	};
 
 
-		if ( HUD.setHeadsUp ) {
 
-			HUD.setHeadsUp();
+	SAV.setBackgroundGradient = function() {
+
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); };
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+			pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	};
+
+
+	SAV.setDeletes = function() {
+
+		for ( let name of GBI.surfaceChanges.deletes ) {
+
+			const surfaceXml = SAV.getSurfaceByName( name );
+
+			console.log( 'surfaceXml', surfaceXml);
+
+			if ( !surfaceXml ) {
+
+				//console.log( 'id', id, surfaceXml );
+				divSavContents.innerHTML += 'Deletes - not found surface name: ' + name + '<br>';
+				continue;
+
+			} else {
+
+				surfaceXml.remove();
+
+				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.Name === name );
+				GBP.surfaceMeshes.remove( surfaceMesh );
+
+				divSavContents.innerHTML += 'Deleted surface name: ' + name + '<br>';
+
+			}
 
 		}
 
 	};
 
+
+
+	SAV.setDeletesDuplicates = function() {
+
+		for ( let name of GBI.surfaceChanges.deletesDuplicates ) {
+
+			const surfaceXml = SAV.getSurfaceByName( name );
+
+			console.log( 'surfaceXml', surfaceXml);
+
+			if ( !surfaceXml ) {
+
+				//console.log( 'id', id, surfaceXml );
+				divSavContents.innerHTML += 'Deletes - not found surface name: ' + name + '<br>';
+				continue;
+
+			} else {
+
+				surfaceXml.remove();
+
+				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.Name === name );
+				GBP.surfaceMeshes.remove( surfaceMesh );
+
+				divSavContents.innerHTML += 'Deleted surface name: ' + name + '<br>';
+
+			}
+
+		}
+
+
+	};
+
+	SAV.addAttributesMissing = function() {
+
+		attributes = GBI.surfaceChanges.addAttributesMissing;
+		//console.log( 'attributes', attributes );
+
+		for ( attribute in attributes ) {
+
+			//console.log( 'attribute', attribute );
+
+			//console.log( 'value', attributes[ attribute ] );
+
+			GBP.gbxml.setAttribute( attribute, attributes[ attribute ] );
+
+			divSavContents.innerHTML += `Added gbXML attribute ${attribute} with value of: ${attributes[ attribute ]}<br>`;
+		}
+
+		//console.log( 'GBP.gbxml', GBP.gbxml );
+
+	};

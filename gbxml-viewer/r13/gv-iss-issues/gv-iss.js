@@ -499,7 +499,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=ISSdivDuplicateSurfaces ></div>
 			<h3>save changes file for duplicate surfaces</h3>
 			<textArea id=ISStxtDuplicateSurfaces style="height:300px;width:100%;" ></textArea>
-			<button onclick=GBI.surfaceChanges.deletes.push(...ISS.surfaceChanges.deletes) >Update save changes file</button>
+			<button onclick=GBI.surfaceChanges.deletesDuplicates.push(...ISS.surfaceChanges.deletes) >Update save changes file</button>
 		`;
 
 		divPopUp.style.display = 'block';
@@ -508,7 +508,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		let txt = '';
 		ISS.surfaceChanges.duplicateSurfaces= {};
 		if ( !ISS.surfaceChanges.deletes ) { ISS.surfaceChanges.deletes = [] };
-		if ( !GBI.surfaceChanges.deletes ) { GBI.surfaceChanges.deletes = [] };
+		if ( !GBI.surfaceChanges.deletesDuplicates ) { GBI.surfaceChanges.deletesDuplicates = [] };
 
 		for ( attribute of ISS.surfaceDuplicateCoordinates ) {
 
@@ -699,45 +699,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//ISS.surfacesUndefinedId.forEach( surface => surface.CADObjectId = 'undefined' );
 
-		/*
-
-		let options = '';
-		ISS.surfacesUndefinedId.forEach( function( element ) { options += '<option>' + element.id + '</option>'; } );
-		options = options ? options : '<option>none found</option>';
-
-		const details =
-		`<details>
-
-			<summary id = "ISSsumSurfacesUndefinedCadId" >Undefined CAD Object IDs &raquo; ` + ISS.surfacesUndefinedId.length + ` found</summary>
-
-			<div >Surfaces with undefined ID</div>
-
-			<div class=flex-container2 >
-				<div class=flex-div1 >
-					<input oninput=GBI.setSelectedIndex(this,ISSselSurfaceUndefined); size=6 placeholder="surface id" ><br>
-					<select id = "ISSselSurfaceUndefined"
-						onclick=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes();
-						onchange=GBI.setSurfaceVisible(this.value);ISS.updateSurfaceUndefinedCadIdAttributes(); size=10 >` +
-						options + `
-						</select><br>
-					<button onclick=GBI.setSurfaceZoom(ISSselSurfaceUndefined.value); title="zoom into just this surface" >zoom</button>
-					</div>
-				<div id = "ISSdivSurfacesUndefinedAttributes" class=flex-left-div2 ></div>
-			</div>
-
-			<div id=ISSdivSurfacesUndefinedCadId ></div>
-
-			<hr>
-
-		</details>`;
-
-		return details;
-		*/
-
-
 		target.innerHTML =
 
-		`<details open >
+		`<details>
 
 			<summary id = "ISSsumSurfacesUndefinedCadId" >Undefined CAD Object IDs &raquo; ` + ISS.surfacesUndefinedId.length + ` found</summary>
 
