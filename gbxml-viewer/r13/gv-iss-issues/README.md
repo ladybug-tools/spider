@@ -51,6 +51,7 @@ Recent releases of the Viewer are identifying typical errors.
 * Add locate surfaces with openings that overlap
 * 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
 	* Upgrade so identifies any surface within another surface
+
 ## Issues
 
 
@@ -64,8 +65,9 @@ Recent releases of the Viewer are identifying typical errors.
 ### 2018-05-17 ~ Theo
 
 R13.21
-* Metadata Issues: add ability to supply missing attributes
+* Metadata Issues panel: add ability to supply missing attributes
 * Duplicate coordinates panel: add ability to delete all duplicates
+* Undefined CAD Object IDs panel: add ability to add definitions
 
 ### 2018-05-12 ~ Theo
 
