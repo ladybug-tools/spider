@@ -52,9 +52,11 @@
 
 				<small><p>Save to file edits you make with right menu Heads-up Display. Apply your edits to next incoming gbXML source file update.</p></small>
 
-				<p><button onClick=SAV.initChanges() > start a fresh session of save changes</button></p>
+				<p><button onClick=SAV.initChanges() > Start a fresh session of save changes</button></p>
 
-				<p><button onclick=SAV.saveChanges(); > save your changes to a file</button></p>
+				<p><button onClick=SAV.viewChanges() > View current changes</button></p>
+
+				<p><button onclick=SAV.saveChanges(); > Save your changes to a file</button></p>
 
 				<small><p>
 					Open a file of saved changes. Apply the edits to the current model</button>
@@ -76,6 +78,30 @@
 
 	}();
 
+
+	SAV.initChanges = function() {
+
+		GBI.surfaceChanges = {};
+
+	}
+
+
+
+	SAV.viewChanges = function() {
+
+		divPopUpContents.innerHTML =
+		`
+			<h3>Current for save changes file</h3>
+			<h3>save changes file source code</h3>
+			<textArea id=txtSaveSource style="height:300px;width:100%;" ></textArea>
+		`;
+
+		divPopUp.style.display = 'block';
+		window.scrollTo( 0, 0 );
+
+		txtSaveSource.value = JSON.stringify( GBI.surfaceChanges, null, ' ' );
+
+	}
 
 
 	SAV.saveChanges = function() {

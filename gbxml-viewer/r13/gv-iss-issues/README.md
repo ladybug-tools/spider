@@ -61,6 +61,12 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+### 2018-05-17 ~ Theo
+
+R13.21
+* Metadata Issues: add ability to supply missing attributes
+* Duplicate coordinates panel: add ability to delete all duplicates
+
 ### 2018-05-12 ~ Theo
 
 R13.17

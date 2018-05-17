@@ -9,6 +9,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	//GBP.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 
 	var ISS = {};
+	ISS.surfaceChanges = {};
 
 	var spaceId1;
 	var spaceId2;
@@ -210,24 +211,24 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=ISSdivAttributesMissing ></div>
 			<h3>save changes file for missing attributes</h3>
 			<textArea id=ISStxtAttributesMissing style="height:300px;width:100%;" ></textArea>
-			<button onclick=alert("coming-soon") >Update save changes file</button>
+			<button onclick=GBI.surfaceChanges.addAttributesMissing=ISS.surfaceChanges.addAttributesMissing; >Update save changes file</button>
 		`;
 
 		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
 		let txt = '';
-		GBI.surfaceChanges.attributeMissing = {};
+		ISS.surfaceChanges.addAttributesMissing = {};
 
 		for ( attribute of ISS.attributesMissing ) {
 
-			GBI.surfaceChanges.attributeMissing[ attribute ] = values[attribute];
+			ISS.surfaceChanges.addAttributesMissing[ attribute ] = values[attribute];
 			txt += `<p><input onchange=ISS.setAttributeMissing("${attribute}",this); placeholder=${values[attribute]} size=25 > ${attribute} <p>`;
 
 		}
 
 		ISSdivAttributesMissing.innerHTML = txt;
-		ISStxtAttributesMissing.value = JSON.stringify( GBI.surfaceChanges.attributeMissing, null, ' ' );
+		ISStxtAttributesMissing.value = JSON.stringify( ISS.surfaceChanges.addAttributesMissing, null, ' ' );
 
 	}
 
@@ -237,9 +238,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		console.log( 'that', that );
 
-		GBI.surfaceChanges.attributeMissing[attribute]=that.value;
+		ISS.surfaceChanges.addAttributesMissing[attribute]=that.value;
 
-		ISStxtAttributesMissing.value = JSON.stringify( GBI.surfaceChanges.attributeMissing, null, ' ' );
+		ISStxtAttributesMissing.value = JSON.stringify( ISS.surfaceChanges.addAttributesMissing, null, ' ' );
 
 	}
 
@@ -480,7 +481,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfacesDuplicateCoordinates2';
 
-		GBI.itemDuplicateCoordinates = GBI.setElementPanel2( item );
+		ISS.itemDuplicateCoordinates = GBI.setElementPanel2( item );
 		ISSselSurfacesDuplicateCoordinates2.selectedIndex = 0;
 		ISSselSurfacesDuplicateCoordinates2.click();
 
@@ -498,43 +499,45 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=ISSdivDuplicateSurfaces ></div>
 			<h3>save changes file for duplicate surfaces</h3>
 			<textArea id=ISStxtDuplicateSurfaces style="height:300px;width:100%;" ></textArea>
-			<button onclick=alert("coming-soon") >Update save changes file</button>
+			<button onclick=GBI.surfaceChanges.deletes.push(...ISS.surfaceChanges.deletes) >Update save changes file</button>
 		`;
 
 		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
 		let txt = '';
-		GBI.surfaceChanges.duplicateSurfaces= {};
+		ISS.surfaceChanges.duplicateSurfaces= {};
+		if ( !ISS.surfaceChanges.deletes ) { ISS.surfaceChanges.deletes = [] };
+		if ( !GBI.surfaceChanges.deletes ) { GBI.surfaceChanges.deletes = [] };
 
 		for ( attribute of ISS.surfaceDuplicateCoordinates ) {
 
 			//GBI.surfaceChanges.duplicateSurfaces[ attribute ] = attribute.Name;
-			GBI.surfaceChanges.deletes.push( attribute.Name );
-			txt += `<p><input type=checkbox  onchange=ISS.setDeletDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
+			ISS.surfaceChanges.deletes.push( attribute.Name );
+			txt += `<p><input type=checkbox onchange=ISS.setDeleteDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
 
 		}
 
 		ISSdivDuplicateSurfaces.innerHTML = txt;
-		ISStxtDuplicateSurfaces.value = JSON.stringify( GBI.surfaceChanges.deletes, null, ' ' );
+		ISStxtDuplicateSurfaces.value = JSON.stringify( ISS.surfaceChanges.deletes, null, ' ' );
 
 	}
 
 
 
-	ISS.setDeletDuplicateSurfaces = function( name, that ) {
+	ISS.setDeleteDuplicateSurfaces = function( name, that ) {
 
 
 		console.log( 'that', that );
 
 		if ( that.checked === false ){
 
-			var index = GBI.surfaceChanges.deletes.indexOf( name );
-			if ( index !== -1 ) GBI.surfaceChanges.deletes.splice(index, 1);
+			var index = ISS.surfaceChanges.deletes.indexOf( name );
+			if ( index !== -1 ) ISS.surfaceChanges.deletes.splice(index, 1);
 
 		}
 
-		ISStxtDuplicateSurfaces.value = JSON.stringify( GBI.surfaceChanges.deletes, null, ' ' );
+		ISStxtDuplicateSurfaces.value = JSON.stringify( ISS.surfaceChanges.deletes, null, ' ' );
 
 	}
 
@@ -694,7 +697,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		const txt = 'CAD object ID undefined<br>';
 
-		ISS.surfacesUndefinedId.forEach( surface => surface.CADObjectId = 'undefined' );
+		//ISS.surfacesUndefinedId.forEach( surface => surface.CADObjectId = 'undefined' );
 
 		/*
 
@@ -765,7 +768,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		item.placeholder = 'surface id';
 		item.selItem = 'ISSselSurfacesUndefinedCadId';
 
-		GBI.itemSurfacesUndefinedCadId = GBI.setElementPanel2( item );
+		ISS.itemSurfacesUndefinedCadId = GBI.setElementPanel2( item );
 		ISSselSurfacesUndefinedCadId.selectedIndex = 0;
 		ISSselSurfacesUndefinedCadId.click();
 
@@ -782,29 +785,57 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<h3>Surfaces with undefined CAD object IDs</h3>
 			<div id=ISSdivCADObjectId ></div>
 			<div id=ISSdivCadGroups ></div>
+			<p>
+				<button onclick=ISS.updateCadIds() >Update changes</button>
+
+				<button onclick=ISS.surfaceChanges.CADObjectId=[];ISS.updateCadIds(); >Clear changes</button>
+			</p>
 			<h3>save changes file for surfaces with undefined CAD object IDs</h3>
 			<textArea id=ISStxtSurfacesUndefinedCadId style="height:300px;width:100%;" ></textArea>
-			<button onclick=alert("coming-soon") >Update save changes file</button>
+			<button onclick=GBI.surfaceChanges.CADObjectId=ISS.surfaceChanges.CADObjectId >Update save changes file</button>
 		`;
 
 		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
+		GBI.setMenuPanelCadObjectsByType2( ISSdivCadGroups, 'ISSselCadGroups' );
+
 		let txt = '';
-		//GBI.surfaceChanges.duplicateSurfaces= {};
 
-		for ( attribute of ISS.surfacesUndefinedId ) {
+		if ( !ISS.surfaceChanges.CADObjectId ) { ISS.surfaceChanges.CADObjectId = []; }
 
-			//GBI.surfaceChanges.duplicateSurfaces[ attribute ] = attribute.Name;
-			GBI.surfaceChanges.CADObjectId.push( attribute.Name );
-			txt += `<p><input type=checkbox  onchange=ISS.setDeletDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
+		for ( surface of ISS.surfacesUndefinedId ) {
+
+			ISS.surfaceChanges.CADObjectId[ surface.Name ] = surface.Name;
+
+			surface.CADObjectIdChecked = true;
+			txt += `<p><input type=checkbox  onchange=surface.CADObjectIdChecked=this.checked; checked > ${surface.Name} <p>`;
 
 		}
 
-		GBI.setMenuPanelCadObjectsByType( ISSdivCadGroups )
 
 		ISSdivCADObjectId.innerHTML = txt;
-		ISStxtSurfacesUndefinedCadId.value = JSON.stringify( GBI.surfaceChanges.CADObjectId, null, ' ' );
+
+	}
+
+
+	ISS.updateCadIds = function() {
+
+		let txt = '';
+
+		for ( surface of ISS.surfacesUndefinedId ) {
+
+			if ( surface.CADObjectIdChecked ) {
+
+				ISS.surfaceChanges.CADObjectId.push( {name: surface.Name, CADObjectId: ISSselCadGroups.value } );
+				//txt += `<p><input type=checkbox  onchange=ISS.setDeletDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
+
+			}
+
+		}
+
+		ISStxtSurfacesUndefinedCadId.value = JSON.stringify( ISS.surfaceChanges.CADObjectId, null, ' ' );
+
 
 	}
 

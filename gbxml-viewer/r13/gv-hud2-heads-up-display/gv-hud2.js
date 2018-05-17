@@ -268,6 +268,7 @@
 			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			//surfaceXml.appendChild( adjacentNew );
 
+			if ( !GBI.surfaceChanges.oneAdjacent ) { GBI.surfaceChanges.oneAdjacent = []; }
 			GBI.surfaceChanges.oneAdjacent.push( { name: surfaceName, spaceId: spaceId } )
 
 		} else if ( spaceRef === 1 ) {
@@ -287,6 +288,7 @@
 			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			//surfaceXml.appendChild( adjacentNew );
 
+			if ( !GBI.surfaceChanges.twoAdjacent ) { GBI.surfaceChanges.twoAdjacent = []; }
 			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
 		} else if ( spaceRef === 2 ) {
@@ -304,6 +306,7 @@
 			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			//surfaceXml.appendChild( adjacentNew );
 
+			if ( !GBI.surfaceChanges.twoAdjacent ) { GBI.surfaceChanges.twoAdjacent = []; }
 			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
 		}
@@ -335,7 +338,8 @@
 		const typeNew = surface.surfaceType = GBIselSurfaceType.value;
 		//console.log( 'typeNew', typeNew );
 
-		GBI.surfaceChanges.types.push( { name: surface.Name, type: typeNew } );
+		if ( !GBI.surfaceChanges.surfaceTypes ) { GBI.surfaceChanges.surfaceTypes = []; }
+		GBI.surfaceChanges.surfaceTypes.push( { name: surface.Name, surfaceType: typeNew } );
 
 		HUD.surfacesXml = GBP.gbxml.getElementsByTagName("Surface");
 
@@ -488,7 +492,7 @@
 
 		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
 
-		//console.log( 'cadObjId', cadObjId );
+		console.log( 'cadObjId', cadObjId );
 
 		if ( cadObjId ) {
 
@@ -504,6 +508,7 @@
 
 			surfaceMesh.userData.data.CADObjectId = that.value;
 
+			if ( !GBI.surfaceChanges.CADObjectId ) { GBI.surfaceChanges.CADObjectId = []; }
 			GBI.surfaceChanges.CADObjectId.push( { name: surface.Name, cadId: that.value } );
 
 			HUD.setHeadsUp();
@@ -521,6 +526,7 @@
 			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
 			surfaceMesh.userData.data.CADObjectId = that.value;
 
+			if ( !GBI.surfaceChanges.CADObjectId ) { GBI.surfaceChanges.CADObjectId = []; }
 			GBI.surfaceChanges.CADObjectId.push( { name: surface.Name, cadId: that.value } );
 
 		}

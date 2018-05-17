@@ -6,7 +6,7 @@
 	var GBI = {};
 
 	GBI.spaceIndex = 0;
-	GBI.surfaceChanges = { deletes: [], types: [], oneAdjacent: [], twoAdjacent: [], CADObjectId: [] };
+	GBI.surfaceChanges = {};
 
 	////////// Set Menu Panels
 
@@ -1404,6 +1404,8 @@
 		const proceed = confirm( 'OK to delete surface: ' + id + '?' );
 
 		if ( !proceed ){ return; }
+
+		if ( !GBI.surfaceChanges.deletes ) { GBI.surfaceChanges.deletes = []; }
 
 		// remove from gbxml
 		const surfacesResponse = GBP.gbxml.getElementsByTagName( "Surface" );
