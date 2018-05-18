@@ -5,9 +5,17 @@ value="You are now in a GitHub web page view - Click this button to view this re
 # [Rad Viewer Read Me]( #solar-well/rad-viewer/README.md )
 
 
-<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-7.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-8.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _Latest project here_
+
+
+## full screen: [rad viewer 8]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-8.html )
+
+* Adds very basic color rendering - plastic only no specular no lights
+* More demo files added from [rndmStff]( https://github.com/rndmStff/radModels )
+* Improved data parsing
+
 
 ## full screen: [rad viewer 7]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-7.html )
 
