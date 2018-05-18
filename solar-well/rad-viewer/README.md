@@ -73,6 +73,21 @@ View RAD produced by [Radiance]( https://radiance-online.org/ ) files in your br
 
 * https://github.com/rndmStff/radModels
 * http://radsite.lbl.gov/radiance/pub/objects/
+* https://github.com/NREL/Radiance
+* https://radiance-online.org/
+* http://radsite.lbl.gov/radiance/framer.html
+* https://rawgit.com/NREL/Radiance/master/doc/ray.html <<
+* http://radsite.lbl.gov/radiance/refer/refman.pdf
+
+
+http://radsite.lbl.gov/radiance/book/
+
+
+Materials: https://github.com/NREL/Radiance/blob/master/doc/notes/materials
+
+https://nrel.github.io/Radiance/doc/ray.html
+
+
 
 ## Change Log
 
