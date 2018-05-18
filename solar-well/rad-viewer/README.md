@@ -13,7 +13,7 @@ _Latest project here_
 ## full screen: [rad viewer 8]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-8.html )
 
 * Adds very basic color rendering - plastic only no specular no lights
-* More demo files added from [rndmStff]( https://github.com/rndmStff/radModels )
+* More demo files added from gjward1
 * Improved data parsing
 
 

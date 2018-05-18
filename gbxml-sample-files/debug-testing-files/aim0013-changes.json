@@ -1,1 +1,22 @@
-{"deletes":["aim9694"],"types":[],"oneAdjacent":[],"twoAdjacent":[],"cadObjs":[{"id":"aim9155","cadId":"Basic Roof: SIM_EXT_SLD_Roof DA01 [929127]"}]}
+{
+ "deletes": [
+  "T-05_170-E-R-3680-W-1",
+  "T-05_116-E-R-3415",
+  "SE-0M_127-E-W-778"
+ ],
+ "CADObjectId": [
+  {
+   "name": "T-00_138-0M_127-I-F-347",
+   "cadId": "Basic Wall: SIM_INT_AIR"
+  }
+ ],
+ "twoAdjacent": [
+  {
+   "name": "T-00_138-0M_127-I-F-347",
+   "spaceId": [
+    "aim4787",
+    "aim8828"
+   ]
+  }
+ ]
+}

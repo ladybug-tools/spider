@@ -62,6 +62,11 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+### 2018-05-18 ~ Theo
+
+R13.22
+* Add first pass at general checkup
+
 ### 2018-05-17 ~ Theo
 
 R13.21

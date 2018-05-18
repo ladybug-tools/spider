@@ -135,56 +135,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.setPanelAdjacentSpaceInvalid( ISSdetPanelAdjacentSpaceInvalid );
 
-		ISS.setGeneralCheck();
-
-	};
-
-
-	ISS.setGeneralCheck = function() {
-
-		let txt = '';
-		lines = GBP.gbxml.innerHTML.split(/\r\n|\n/);
-
-		for ( i = 0; i< lines.length; i++ ) {
-
-			line = lines[ i ].toLowerCase();
-
-			if( line.includes( '<area>0</area>') ) {
-
-				txt += `line ${i}: ${line}\n`;
-
-			}
-
-			if( line.includes( '<volume>0</volume>') ) {
-
-				txt += `line ${i}: ${line}\n`;
-
-			}
-
-			if ( line.includes( '""') ) {
-
-				txt += `Empty string at line ${i}: ${line}\n`;
-
-			}
-
-
-		}
-		//console.log( 'txt', txt );
-
-		if ( txt !== '' ) {
-
-			divPopUpContents.innerHTML =
-			`
-				<h3>General Check</h3>
-				<div id=ISSdivCheckText ></div>
-			`;
-
-			divPopUp.style.display = 'block';
-			window.scrollTo( 0, 0 );
-
-			ISSdivCheckText.innerText = '****\n' + txt;
-		}
-
 	};
 
 
@@ -472,7 +422,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		for ( let i = 0; i <  surfaces.length; i++ ) {
 
-			surface = surfaces[ i ];
+			surface = surfaces[ i ]
 			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
 			index = surfacePolyLoops.indexOf( points );
 
@@ -484,7 +434,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			} else {
 
 				surfaceOther = surfaces[ surfaceIds[ index ] ];
-				ISS.surfaceDuplicateCoordinates.push( surfaceOther, surface );
+				ISS.surfaceDuplicateCoordinates.push( surface );
 
 			}
 
@@ -502,8 +452,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			</small></p>
 
 			<p>
-				<button id=butDuplicatesCoordinates2
-					onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates2,ISS.surfaceDuplicateCoordinates);
+				<button id=butDuplicatesCoordinates2 onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates2,ISS.surfaceDuplicateCoordinates);
 					>toggle all duplicates</button>
 			</p>
 
@@ -558,7 +507,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		let txt = '';
 		ISS.surfaceChanges.duplicateSurfaces= {};
-
 		if ( !ISS.surfaceChanges.deletes ) { ISS.surfaceChanges.deletes = [] };
 		if ( !GBI.surfaceChanges.deletesDuplicates ) { GBI.surfaceChanges.deletesDuplicates = [] };
 
