@@ -48,6 +48,34 @@
 * Radiance files are often beautiful things to look at. Anf they are always of interest as being the written instructions for objects that appear in 3D.
 * The intent of the scripts here is to help you visualize Radiance files faster, more easily and in 3D.
 
+
+## People
+
+* Welle, Benjamin - organizer
+	* Benjamin.Welle@perkinswill.com
+	* https://github.com/bwelle
+* Theo Armour - creator
+	* t.armour@gmail.com
+	* https://github.com/theo-armour
+* Anton Szilasi
+	* Anton.Szilasi@perkinswill.com
+	* ajszilasi@gmail.com
+	* https://github.com/antonszilasi
+* Zack Rogers
+	* rogers@daylightinginnovations.com
+	* http://www.daylightinginnovations.com/
+	* http://www.daylightinginnovations.com/spot-overview-flow-diagram
+* John Mardaljevic
+	* j.mardaljevic@lboro.ac.uk
+	* http://www.lboro.ac.uk/departments/abce/staff/john-mardaljevic
+	* http://climate-based-daylighting.com/doku.php?id=radiance2018
+* Robert Guglielmetti ~ Mr Rumble strip
+	* Robert.Guglielmetti@nrel.gov
+	* Lighting Designer/Researcher/Software Developer at National Renewable Energy Laboratory
+	* https://www.nrel.gov/research/robert-guglielmetti.html
+	* http://www.rumblestrip.org/about/
+	* rob.guglielmetti@gmail.com
+	* https://github.com/rpg777
 ## Change Log
 
 ### 2018-04-18 ~ Theo
