@@ -1,32 +1,50 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#solar-well/radiance-data-files/README.md "View file as a web page." ) </span>
 
-# [Radiance Data Files Read Me]( #solar-well/radiance-data-files/README.md )
+# [Radiance Sample Data Files Read Me]( #solar-well/radiance-data-files/README.md )
 
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/solar-well/rad-viewer/rad-viewer-8.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 ## Sample Radiance Files
 
 
-[sample-file-rad]( #solar-well/radiance-data-files/sample-file.rad )
+* Mostapha: [sample-file-rad]( #solar-well/radiance-data-files/sample-file.rad )
+* Michal: London, Bristol & Coventry files
+* <http://radsite.lbl.gov/radiance/pub/objects/>
+	* zipped gjward1 files available from this site
+	* Also Paul Burke's beautiful trees ans MIT CSAIL files
+* <https://github.com/sariths/radTutorialFiles>
+	* Exercise files and supporting documents for a Radiance tutorial on matrix-based methods.
+* <https://github.com/rndmStff/radModels>
+	* Radiance models containing rad files and view files.
 
 
 ## Links of Interest
 
-http://radsite.lbl.gov/radiance/pub/objects/
 
-### Radiance
-
-* [Radiance ]( https://www.radiance-online.org/ )
+### [Radiance Online ]( https://www.radiance-online.org/ )
 
 * Radiance is a suite of programs for the analysis and visualization of lighting in design.
+* https://www.radiance-online.org/learning/documentation/manual-pages/pdfs/manpages.pdf
 
 ### The RADIANCE 5.1 Synthetic Imaging System
 
+* <http://radsite.lbl.gov/radiance/refer/refman.pdf>
 * <http://radsite.lbl.gov/radiance/refer/ray.html>
 
 ### Radiance Surface/Geometry types
 
 * <http://radsite.lbl.gov/radiance/refer/ray.html#Surfaces>
 
+### [Ladybug Tools / Spider / Rad Viewer ]( https://www.ladybug.tools/spider/#solar-well/rad-viewer/README.md )
+
+* View RAD produced by Radiance files in your browser
+
+
+### [Ladybug Tools / Spider / Rad Browser ]( https://www.ladybug.tools/spider/#solar-well/rad-browser/README.md)
+
+* Short utilities to help you browse RAD files on GitHub.
+* Radiance files are often beautiful things to look at. Anf they are always of interest as being the written instructions for objects that appear in 3D.
+* The intent of the scripts here is to help you visualize Radiance files faster, more easily and in 3D.
 
 ## Change Log
 
