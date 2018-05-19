@@ -9,6 +9,11 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 _Latest project here_
 
+## Concept
+
+View RAD files produced by [Radiance]( https://radiance-online.org/ ) scripts in interactive 3D in your browser.
+
+This is an ongoing learning and development effort. Please feel free to request to any particular Radiance feature to be added to this viewer as a priority.
 
 ## full screen: [rad viewer 8]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-8.html )
 
@@ -64,18 +69,12 @@ There seems to be small errors here and there with openings. I have not yet iden
 
 
 
-## Concept
-
-View RAD produced by [Radiance]( https://radiance-online.org/ ) files in your browser
-
-
 ## Wish list
 
 
 
 ## Issues
 
-* <https://stackoverflow.com/questions/41706208/how-do-i-create-a-3d-polygon-from-a-series-of-3d-points-in-three-js>
 
 ## Links of Interest
 
@@ -86,18 +85,34 @@ View RAD produced by [Radiance]( https://radiance-online.org/ ) files in your br
 * http://radsite.lbl.gov/radiance/framer.html
 * https://rawgit.com/NREL/Radiance/master/doc/ray.html <<
 * http://radsite.lbl.gov/radiance/refer/refman.pdf
-
-
-http://radsite.lbl.gov/radiance/book/
+* http://radsite.lbl.gov/radiance/book/
+* https://nrel.github.io/Radiance/doc/ray.html
 
 
 Materials: https://github.com/NREL/Radiance/blob/master/doc/notes/materials
 
-https://nrel.github.io/Radiance/doc/ray.html
 
+### [Radiance Online ]( https://www.radiance-online.org/ )
+
+* Radiance is a suite of programs for the analysis and visualization of lighting in design.
+
+### [Rad Viewer]( #solar-well/rad-viewer/README.md )
+
+
+### [Radiance Sample Data Files]( https://www.ladybug.tools/spider/#radiance-sample-files/README.md )
+
+* * A collection of Radiance sample data for for testing and experimenting
+
+* <https://stackoverflow.com/questions/41706208/how-do-i-create-a-3d-polygon-from-a-series-of-3d-points-in-three-js>
 
 
 ## Change Log
+
+
+### 2018-05-18 ~ Theo
+
+R8
+* Adding to read me
 
 ### 2018-05-14 ~ Theo
 

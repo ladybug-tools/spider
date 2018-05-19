@@ -133,7 +133,7 @@
 		mesh = new THREE.Mesh( geometry, material );
 		//scene.add( mesh );
 
-		let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gridBasedSimulation/unnamed_0.pts'
+		let url = '../radiance-data-files/london-office.pts'
 
 		//const urlCORS = 'https://cors-anywhere.herokuapp.com/';
 
@@ -182,7 +182,7 @@
 			//console.log( 'reader.result', reader.result );
 
 			parseFile( reader.result )
-/
+
 		}
 
 		reader.readAsText( files.files[ 0 ] );
@@ -246,7 +246,7 @@
 
 		}
 
-\
+
 		scene.add( pts );
 
 		divLog.innerHTML =

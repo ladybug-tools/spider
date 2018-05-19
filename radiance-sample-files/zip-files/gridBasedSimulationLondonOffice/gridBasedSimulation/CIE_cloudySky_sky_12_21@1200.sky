@@ -1,0 +1,25 @@
+# start of sky definition for daylighting studies
+# location name: New_York_J_F_Kennedy_IntL_Ar_NY_USA LAT: 40.65
+!gensky 12 21 12.0 -c -a 40.65 -o 73.8 -m 75.0 | xform -rz 0.0
+skyfunc glow sky_mat
+0
+0
+4
+1 1 1 0
+sky_mat source sky
+0
+0
+4
+0 0 1 180
+skyfunc glow ground_glow
+0
+0
+4
+1 .8 .5 0
+ground_glow source ground
+0
+0
+4
+0 0 -1 180
+# end of sky definition for daylighting studies
+

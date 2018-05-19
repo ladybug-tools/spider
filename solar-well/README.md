@@ -3,11 +3,11 @@
 # [Solar-Well Read Me]( #solar-well/README.md )
 
 
-<iframe class=iframeReadMe src=http://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
-_First project here. Use the left menu to explore more and better(?) scripts_
+<iframe class=iframeReadMe src=http://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-8.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+_View Radiance files in 3D in your browser_
 
 
-## full screen: [Rad Viewer 1]( http://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-1.html )
+## full screen: [Rad Viewer 8]( http://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-1.html )
 
 
 ## Concept
@@ -16,7 +16,17 @@ Inexperienced designers are bewildered by the complexities of creating Solar vis
 
 Solar visualizations that run in your browser and may be operated by newbs and pushed to the limits by the pros could be enlightening.
 
+***
 
+The scripts in this folder are of a variety of efforts: some request-driven, some learning experiences and some experiments.
+
+The Radiance effort is just because it's high time the Radience effort joined the Internet.
+
+The SunCalc effort is the Spider move from the NRAA Solar calculator over to the Agafonkin calculator
+
+The Sun Range files are an effort to capture the shadows for one day a month for 14 hours per day purely in JavaScript
+
+As time goes on, we hope to connect the various scripts in various fun ways.
 
 ## Wish list
 

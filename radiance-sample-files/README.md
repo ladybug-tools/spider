@@ -1,6 +1,8 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#radiance-data-files/README.md "View file as a web page." ) </span>
 
-# [Radiance Sample Data Files Read Me]( #solar-well/radiance-data-files/README.md )
+# [Radiance Sample Data Files Read Me]( #radiance-data-files/README.md )
+
+* A collection of Radiance sample data for for testing and experimenting
 
 <iframe class=iframeReadMe src=https://www.ladybug.tools/spider/solar-well/rad-viewer/rad-viewer-8.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
@@ -24,12 +26,12 @@
 ### [Radiance Online ]( https://www.radiance-online.org/ )
 
 * Radiance is a suite of programs for the analysis and visualization of lighting in design.
-* https://www.radiance-online.org/learning/documentation/manual-pages/pdfs/manpages.pdf
 
 ### The RADIANCE 5.1 Synthetic Imaging System
 
 * <http://radsite.lbl.gov/radiance/refer/refman.pdf>
 * <http://radsite.lbl.gov/radiance/refer/ray.html>
+* https://www.radiance-online.org/learning/documentation/manual-pages/pdfs/manpages.pdf
 
 ### Radiance Surface/Geometry types
 
