@@ -1,4 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#solar-well/radiance-data-files/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/#radiance-data-files/README.md "View file as a web page." ) </span>
 
 # [Radiance Sample Data Files Read Me]( #solar-well/radiance-data-files/README.md )
 
