@@ -443,6 +443,8 @@
 
 	};
 
+
+
 	GBI.setZoneVisible = function ( zoneIdRef ) {
 		//console.log( 'zoneIdRef', zoneIdRef );
 
@@ -1231,10 +1233,10 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
-				console.log( 'surface', surface );
-				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
+				//console.log( 'surface', surface );
+				//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
 				continue;
 
 			}

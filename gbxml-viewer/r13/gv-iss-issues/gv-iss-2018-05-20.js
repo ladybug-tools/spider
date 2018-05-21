@@ -39,7 +39,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			ISS.getMenuItems();
 
-			ISS.butMenuIssues.style.cssText = COR.buttonToggleCss;
+			ISS.butMenuIssues.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
 
 			const butts = divMenuItems.getElementsByTagName( "button" );
 			//console.log( 'butts', butts );
@@ -83,7 +83,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdetPanelSurfacesDuplicateAdjacentSpaces ></div>
 
-			<div id=ISSdetPanelDuplicateSurfaces ></div>
+			<div id=ISSdetPanelSurfacesDuplicateCoordinates2 ></div>
 
 			<div id=ISSdetPanelSurfacesDuplicateCoordinates ></div>
 
@@ -116,7 +116,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISSdetPanelSurfacesDuplicateAdjacentSpaces.innerHTML = ISS.getPanelSurfacesDuplicateAdjacentSpaces();
 
 
-		ISS.setPanelDuplicateSurfaces( ISSdetPanelDuplicateSurfaces );
+		ISS.setPanelSurfacesDuplicateCoordinates( ISSdetPanelSurfacesDuplicateCoordinates2 );
 
 		ISSdetPanelSurfacesDuplicateCoordinates.innerHTML = ISS.getPanelSurfacesDuplicateCoordinates();
 
@@ -261,16 +261,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=divSavHeader ></div>
 			<h3>Missing Attributes</h3>
 			<div id=ISSdivAttributesMissing ></div>
-			<p>
-				<button onclick=onchange=ISS.setChangesMetadataIssues(this); >Update changes</button>
-
-				<button onclick=ISS.surfaceChanges.addAttributesMissing=[];ISS.setChangesMetadataIssues(this); >Clear changes</button>
-			</p>
-
 			<h3>save changes file for missing attributes</h3>
-
 			<textArea id=ISStxtAttributesMissing style="height:300px;width:100%;" ></textArea>
-
 			<button onclick=GBI.surfaceChanges.addAttributesMissing=ISS.surfaceChanges.addAttributesMissing; >Update save changes file</button>
 		`;
 
@@ -283,7 +275,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		for ( attribute of ISS.attributesMissing ) {
 
 			ISS.surfaceChanges.addAttributesMissing[ attribute ] = values[attribute];
-			txt += `<p><input onclick=this.select(); onchange=ISS.setChangesMetadataIssues(this,"${attribute}"); value=${values[attribute]} size=25 > ${attribute} <p>`;
+			txt += `<p><input onchange=ISS.setChangesMetadataIssues("${attribute}",this); placeholder=${values[attribute]} size=25 > ${attribute} <p>`;
 
 		}
 
@@ -294,29 +286,20 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setChangesMetadataIssues = function( that, attribute ) {
+	ISS.setChangesMetadataIssues = function( attribute, that ) {
 
 		console.log( 'that', that );
 
-		if ( attribute ) {
+		ISS.surfaceChanges.addAttributesMissing[attribute]=that.value;
 
-			ISS.surfaceChanges.addAttributesMissing[attribute]=that.value;
-
-			ISStxtAttributesMissing.value = JSON.stringify( ISS.surfaceChanges.addAttributesMissing, null, ' ' );
-
-		} else {
-
-			ISStxtAttributesMissing.value = ''
-
-		}
+		ISStxtAttributesMissing.value = JSON.stringify( ISS.surfaceChanges.addAttributesMissing, null, ' ' );
 
 	}
 
 
+	//////////
 
-	////////// R13
-
-	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) { // R13
+	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) {
 
 		surfaces = GBP.gbjson.Campus.Surface;
 		let count = 0;
@@ -367,11 +350,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdivSurfacesDuplicateAdjacentSpaces2 ></div>
 
-			<p>
-
-			<button onclick=alert("coming_soon/high_priority") title="Yes, we can. Make CAD fun again." >Fix these issues. Now!</button>
-
-			</p>
+			<button onclick=GBI.setSurfaceZoom(ISSselSurfaceAdjacentsDuplicates2.value); title="zoom into just this surface" >zoom</button>
 
 			<hr>
 
@@ -398,7 +377,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.getPanelSurfacesDuplicateAdjacentSpaces = function() { // R12
+	ISS.getPanelSurfacesDuplicateAdjacentSpaces = function() {
 
 		surfaces = GBP.gbjson.Campus.Surface;
 		let count = 0;
@@ -481,9 +460,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	////////// R13
-
-	ISS.setPanelDuplicateSurfaces = function( target ) { //R13
+	ISS.setPanelSurfacesDuplicateCoordinates = function( target ) {
 
 		const surfacePolyLoops = [];
 		const surfaceIds = [];
@@ -511,10 +488,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				surfaceOther = surfaces[ surfaceIds[ index ] ];
 				ISS.surfaceDuplicateCoordinates.push( surfaceOther, surface );
-				surface.ISSduplicateSurfaceSecond = surfaceOther.Name;
-				surface.ISSdeleteDuplicateSurface = false;
-				surfaceOther.ISSduplicateSurfaceFirst = surface.Name;
-				surfaceOther.ISSdeleteDuplicateSurface = true;
 
 			}
 
@@ -532,8 +505,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			</small></p>
 
 			<p>
-				<button id=butDuplicateSurfaces
-					onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicateSurfaces,ISS.surfaceDuplicateCoordinates);
+				<button id=butDuplicatesCoordinates2
+					onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates2,ISS.surfaceDuplicateCoordinates);
 					>toggle all duplicates</button>
 			</p>
 
@@ -541,7 +514,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<p>
 
-				<button onclick=ISS.setPopupDuplicateSurfaces(); title="Starting to work!" >Delete duplicate surfaces</button></p>
+				<button onclick=GBI.setSurfaceZoom(ISSselSurfacesDuplicateCoordinates2.value); title="zoom into just this surface" >zoom</button>
+
+				<button onclick=ISS.deleteDuplicateSurfaces(); >delete duplicate surfaces</button></p>
 
 			</p>
 
@@ -568,138 +543,62 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setPopupDuplicateSurfaces = function() {
+	ISS.deleteDuplicateSurfaces = function() {
 
 		divPopUpContents.innerHTML =
 		`
 			<h3>Delete Duplicate Surfaces</h3>
+
+			<h3>Duplicate Surfaces</h3>
 			<div id=ISSdivDuplicateSurfaces ></div>
-
-			<p>
-				<button onclick=onchange=ISS.setPopupPanelDuplicateSurfaces(this,"${attribute}"); >Update changes</button>
-
-				<button onclick=ISS.surfaceChanges.deleteDuplicateSurfaces=[];ISS.setChangesDuplicateSurfaces(this); >Clear changes</button>
-
-				<button onclick=ISS.checkNone(); >un-check all</button>
-
-				<button onclick=ISS.checkFirst(); >check all first</button>
-
-				<button onclick=ISS.checkSecond(); >check all second</button>
-
-			</p>
-
 			<h3>save changes file for duplicate surfaces</h3>
 			<textArea id=ISStxtDuplicateSurfaces style="height:300px;width:100%;" ></textArea>
-
-			<p>
-
-				<button onclick=GBI.surfaceChanges.deleteDuplicateSurfaces.push(...ISS.surfaceChanges.deleteDuplicateSurfaces) >Update save changes file</button>
-
-				<button onClick=butSaveChanges.click() > View current changes</button>
-
-				</p>
-
+			<button onclick=GBI.surfaceChanges.deletesDuplicates.push(...ISS.surfaceChanges.deletes) >Update save changes file</button>
 		`;
 
-			//
 		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
-		ISS.setPopupPanelDuplicateSurfaces();
-
-
-	};
-
-
-
-	 ISS.checkNone = function() {
-
-		ISS.surfaceChanges.deleteDuplicateSurfaces=[];
-		ISS.surfaceDuplicateCoordinates.forEach( item => item.ISSdeleteDuplicateSurface = false );
-		ISS.setPopupPanelDuplicateSurfaces();
-
-	};
-
-
-
-	ISS.checkFirst = function() {
-
-		ISS.surfaceChanges.deleteDuplicateSurfaces=[];
-		ISS.surfaceDuplicateCoordinates.forEach(
-			item => item.ISSdeleteDuplicateSurface = item.ISSduplicateSurfaceFirst ? true : ''
-		);
-		ISS.setPopupPanelDuplicateSurfaces();
-
-	};
-
-
-
-	ISS.checkSecond = function() {
-
-		ISS.surfaceChanges.deleteDuplicateSurfaces=[];
-		ISS.surfaceDuplicateCoordinates.forEach(
-			item => item.ISSdeleteDuplicateSurface = item.ISSduplicateSurfaceSecond ? true : ''
-		);
-		ISS.setPopupPanelDuplicateSurfaces();
-
-	};
-
-
-
-	ISS.setPopupPanelDuplicateSurfaces = function(){
-
 		let txt = '';
-		if ( !ISS.surfaceChanges.deleteDuplicateSurfaces ) { ISS.surfaceChanges.deleteDuplicateSurfaces = [] };
-		if ( !GBI.surfaceChanges.deleteDuplicateSurfaces ) { GBI.surfaceChanges.deleteDuplicateSurfaces = [] };
+		ISS.surfaceChanges.duplicateSurfaces= {};
+
+		if ( !ISS.surfaceChanges.deletes ) { ISS.surfaceChanges.deletes = [] };
+		if ( !GBI.surfaceChanges.deletesDuplicates ) { GBI.surfaceChanges.deletesDuplicates = [] };
 
 		for ( attribute of ISS.surfaceDuplicateCoordinates ) {
 
-			const check = attribute.ISSdeleteDuplicateSurface ? 'checked' : '';
-			if ( check ) {
-
-				ISS.surfaceChanges.deleteDuplicateSurfaces.push( attribute.Name );
-
-			}
-			//console.log( 'check', check );
-			txt +=
-			`<div>
-				<input type=checkbox onchange=ISS.setChangesDuplicateSurfaces(this,"${attribute.Name}"); ${check} >
-				<span style=display:inline-block;width:15rem; >name: ${attribute.Name} </span> id: ${attribute.id} - type: ${attribute.surfaceType}
-			</div>`;
+			//GBI.surfaceChanges.duplicateSurfaces[ attribute ] = attribute.Name;
+			ISS.surfaceChanges.deletes.push( attribute.Name );
+			txt += `<p><input type=checkbox onchange=ISS.setDeleteDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
 
 		}
 
 		ISSdivDuplicateSurfaces.innerHTML = txt;
-		ISStxtDuplicateSurfaces.value = JSON.stringify( ISS.surfaceChanges.deleteDuplicateSurfaces, null, ' ' );
+		ISStxtDuplicateSurfaces.value = JSON.stringify( ISS.surfaceChanges.deletes, null, ' ' );
 
-	};
+	}
 
 
 
-	ISS.setChangesDuplicateSurfaces = function( that, name ) {
+	ISS.setDeleteDuplicateSurfaces = function( name, that ) {
 
-		//console.log( 'that', that );
+
+		console.log( 'that', that );
 
 		if ( that.checked === false ){
 
-			var index = ISS.surfaceChanges.deleteDuplicateSurfaces.indexOf( name );
-			if ( index !== -1 ) ISS.surfaceChanges.deleteDuplicateSurfaces.splice(index, 1);
-
-		} else {
-
-			if ( name ) { ISS.surfaceChanges.deleteDuplicateSurfaces.push( name ); }
+			var index = ISS.surfaceChanges.deletes.indexOf( name );
+			if ( index !== -1 ) ISS.surfaceChanges.deletes.splice(index, 1);
 
 		}
 
-		ISStxtDuplicateSurfaces.value = JSON.stringify( ISS.surfaceChanges.deleteDuplicateSurfaces, null, ' ' );
+		ISStxtDuplicateSurfaces.value = JSON.stringify( ISS.surfaceChanges.deletes, null, ' ' );
 
-	};
+	}
 
 
 
-	///// R12
-
-	ISS.getPanelSurfacesDuplicateCoordinates = function() { // R12
+	ISS.getPanelSurfacesDuplicateCoordinates = function() {
 
 		const surfacePolyLoops = [];
 		const surfaceIds = [];
@@ -847,8 +746,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	//////////
-
 	ISS.setPanelSurfacesUndefinedCadId = function( target ) {
 
 		ISS.surfacesUndefinedId = GBP.surfaceJson.filter( element => element.CADObjectId === undefined || element.CADObjectId === '' );
@@ -871,7 +768,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				<button onclick=GBI.setSurfaceZoom(ISSselSurfacesUndefinedCadId.value); title="zoom into just this surface" >zoom</button>
 
-				<button onclick=ISS.setPopupCadObjectIds(); >Fix undefined CAD object IDs</button></p>
+				<button onclick=ISS.fixCadObjectIds(); >Fix undefined CAD object IDs</button></p>
 
 			</P>
 
@@ -898,18 +795,19 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setPopupCadObjectIds = function() {
+	ISS.fixCadObjectIds = function() {
 
 		divPopUpContents.innerHTML =
 		`
-			<h3>Fix Surfaces with undefined CAD object IDs</h3>
+			<h3>Fix undefined CAD object IDs</h3>
 
+			<h3>Surfaces with undefined CAD object IDs</h3>
 			<div id=ISSdivCADObjectId ></div>
 			<div id=ISSdivCadGroups ></div>
 			<p>
-				<button onclick=ISS.setChangesCadObjectIds(); >Update changes</button>
+				<button onclick=ISS.updateCadIds() >Update changes</button>
 
-				<button onclick=ISS.surfaceChanges.CADObjectId=[];ISS.setChangesCadObjectIds(); >Clear changes</button>
+				<button onclick=ISS.surfaceChanges.CADObjectId=[];ISS.updateCadIds(); >Clear changes</button>
 			</p>
 			<h3>save changes file for surfaces with undefined CAD object IDs</h3>
 			<textArea id=ISStxtSurfacesUndefinedCadId style="height:300px;width:100%;" ></textArea>
@@ -930,18 +828,17 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			ISS.surfaceChanges.CADObjectId[ surface.Name ] = surface.Name;
 
 			surface.CADObjectIdChecked = true;
-			txt += `<div><input type=checkbox  onchange=surface.CADObjectIdChecked=this.checked; checked > ${surface.Name} -
-			 id: ${surface.id} - type: ${surface.surfaceType} </div>`;
+			txt += `<p><input type=checkbox  onchange=surface.CADObjectIdChecked=this.checked; checked > ${surface.Name} <p>`;
 
 		}
+
 
 		ISSdivCADObjectId.innerHTML = txt;
 
 	}
 
 
-
-	ISS.setChangesCadObjectIds = function() {
+	ISS.updateCadIds = function() {
 
 		let txt = '';
 
@@ -961,9 +858,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	}
 
-
-
-	//////////
 
 	ISS.setPanelSurfacesTiny = function( target ) {
 
@@ -1353,40 +1247,19 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setSurfaceArrayVisibleToggle = function( button, surfaceArray ) {
 
-		if ( button.style.fontStyle !== 'italic' ) {
+		if ( button.style.backgroundColor !== 'var( --but-bg-color )' ) {
+			count = 0;
+			GBP.surfaceMeshes.children.forEach( element =>
+				{ element.visible = surfaceArray.includes( element.userData.data.Name ) ? true : false; count = element.visible ? count++ : count;} );
+				console.log( '', count );
 
-			console.log( 'surfaceArray', surfaceArray );
-			let count = 0;
-
-			if ( surfaceArray[0 ].Name ) {
-
-				GBP.surfaceOpenings.visible = false;
-				GBP.surfaceMeshes.children.forEach( element => element.visible = false );
-
-				for ( surface of surfaceArray ) {
-
-					GBI.setSurfaceVisibleToggle( surface.id );
-
-				}
-
-			} else {
-
-				GBP.surfaceMeshes.children.forEach( element =>
-					{ element.visible = surfaceArray.includes( element.userData.data.Name ) ? true : false;
-						count = element.visible ? count++ : count;
-				} );
-				console.log( 'visible', count );
-			}
-
-			button.style.cssText = COR.buttonToggleCss;
+			button.style.backgroundColor = 'var( --but-bg-color )';
 
 		} else {
 
 			GBP.setAllVisible();
 
-			button.style.fontStyle = '';
 			button.style.backgroundColor = '';
-			button.style.fontWeight = '';
 
 		}
 

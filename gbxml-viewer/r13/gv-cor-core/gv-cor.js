@@ -12,6 +12,7 @@
 	COR.uriDefaultFile = '../assets/splash-screen.md';
 
 	COR.colorButtonToggle = 'pink';
+	COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
 
 	COR.initCore = function() {
 

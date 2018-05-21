@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-05-18" >
-<title>Aragog gbXML Viewer 13.22</title>
+<meta name = "date" content = "2018-05-20" >
+<title>Aragog gbXML Viewer 13.23</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 </head>
@@ -388,6 +388,7 @@
 
 		} else {
 
+			// drop the following?
 			let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
 			THR.scene.remove( meshGroundHelper );
 
@@ -422,11 +423,12 @@
 		menuButtons = document.querySelectorAll( "button.app-menu" );
 
 		menuButtons.forEach( element => {
-			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight =''; } );
+			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight ='';
+		} );
 
 		menuDetails = document.querySelectorAll( "details.app-menu" );
 
-		menuDetails.forEach(  element => element.remove() );
+		menuDetails.forEach( element => element.remove() );
 
 	};
 

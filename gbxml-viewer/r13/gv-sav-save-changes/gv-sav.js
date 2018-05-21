@@ -91,9 +91,13 @@
 
 		divPopUpContents.innerHTML =
 		`
-			<h3>Current for save changes file</h3>
-			<h3>save changes file source code</h3>
+			<h3>Current for save changes file JSON source code</h3>
 			<textArea id=txtSaveSource style="height:300px;width:100%;" ></textArea>
+
+			<p>
+				<button onclick=SAV.setPopupChanges(); >Um, what the heck, Just do it.</button> << work-in-progress. Three.js surfaces updated but not the gbXML.
+			</p>
+
 		`;
 
 		divPopUp.style.display = 'block';
@@ -122,6 +126,23 @@
 
 	SAV.openChanges = function( files ) {
 
+		const reader = new FileReader();
+		reader.onload = function( event ) {
+
+			GBI.surfaceChanges = JSON.parse( reader.result );
+			SAV.setPopupChanges( files.files[0] );
+
+		}
+
+		reader.readAsText( files.files[0] );
+
+	};
+
+
+
+	SAV.setPopupChanges = function( file ) {
+
+
 		divPopUpContents.innerHTML =
 		`
 			<h3>statistics for save changes file</h3>
@@ -135,34 +156,27 @@
 		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
-		const reader = new FileReader();
-		reader.onload = function( event ) {
 
-			GBI.surfaceChanges = JSON.parse( reader.result );
-			txtSaveSource.value = JSON.stringify( GBI.surfaceChanges, null, ' ' );
+		txtSaveSource.value = JSON.stringify( GBI.surfaceChanges, null, ' ' );
 
-			divSavHeader.innerHTML =
-				'name: <i>' + files.files[0].name + '</i><br>' +
-				'size: <i>' + files.files[0].size.toLocaleString() + ' bytes</i><br>' +
-				( files.files[0].type  ? 'type: <i>' + files.files[0].type + '</i><br>' : '' ) +
-				'modified: <i>' + files.files[0].lastModifiedDate.toLocaleDateString() + '</i><br>' +
-				( GBI.surfaceChanges.deletes ? 'deletes: ' + GBI.surfaceChanges.deletes.length + '<br>' : '' )+
-				( GBI.surfaceChanges.types ? 'type changes: ' + GBI.surfaceChanges.types.length + '<br>' : '' ) +
-				( GBI.surfaceChanges.CADObjectId ? 'cad id changes: ' + GBI.surfaceChanges.CADObjectId.length + '<br>' : '' ) +
-				( GBI.surfaceChanges.oneAdjacent ? 'one adjacent changes: ' + GBI.surfaceChanges.oneAdjacent.length + '<br>' : '' ) +
-				( GBI.surfaceChanges.twoAdjacent ? 'two adjacent changes: ' + GBI.surfaceChanges.twoAdjacent.length + '<br>' : '' ) +
-			'<br>';
+		divSavHeader.innerHTML =
+			( file ?
+			'name: <i>' + file.name + '</i><br>' +
+			'size: <i>' + file.size.toLocaleString() + ' bytes</i><br>' +
+			( file.type  ? 'type: <i>' + file + '</i><br>' : '' ) +
+			'modified: <i>' + file.lastModifiedDate.toLocaleDateString() + '</i><br>'
+			: '' ) +
+			( GBI.surfaceChanges.deletes ? 'deletes: ' + GBI.surfaceChanges.deletes.length + '<br>' : '' )+
+			( GBI.surfaceChanges.types ? 'type changes: ' + GBI.surfaceChanges.types.length + '<br>' : '' ) +
+			( GBI.surfaceChanges.CADObjectId ? 'cad id changes: ' + GBI.surfaceChanges.CADObjectId.length + '<br>' : '' ) +
+			( GBI.surfaceChanges.oneAdjacent ? 'one adjacent changes: ' + GBI.surfaceChanges.oneAdjacent.length + '<br>' : '' ) +
+			( GBI.surfaceChanges.twoAdjacent ? 'two adjacent changes: ' + GBI.surfaceChanges.twoAdjacent.length + '<br>' : '' ) +
+		'<br>';
 
-			SAV.getUpdates();
+		SAV.getUpdates();
 
-			//console.log( '', files );
-
-		}
-
-		reader.readAsText( files.files[0] );
-
-	};
-
+		//console.log( '', files );
+	}
 
 
 	SAV.getSurfaceByName = function( name ) {
@@ -198,7 +212,7 @@
 		if ( GBI.surfaceChanges.deletes ) { SAV.setDeletes(); }
 
 
-		if ( GBI.surfaceChanges.deletesDuplicates ) { SAV.setDeletesDuplicates(); }
+		if ( GBI.surfaceChanges.deleteDuplicateSurfaces ) { SAV.setDeleteSurfaceDuplicates(); }
 
 
 		if ( GBI.surfaceChanges.types ) {
@@ -551,9 +565,10 @@
 
 
 
-	SAV.setDeletesDuplicates = function() {
+	SAV.setDeleteSurfaceDuplicates = function() {
 
-		for ( let name of GBI.surfaceChanges.deletesDuplicates ) {
+
+		for ( let name of GBI.surfaceChanges.deleteDuplicateSurfaces ) {
 
 			const surfaceXml = SAV.getSurfaceByName( name );
 
@@ -578,8 +593,12 @@
 
 		}
 
+		GBI.surfaceChanges.deleteDuplicateSurfaces = [];
+		ISS.surfaceChanges.deleteDuplicateSurfaces = [];
 
 	};
+
+
 
 	SAV.addAttributesMissing = function() {
 
