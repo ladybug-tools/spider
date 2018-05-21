@@ -1222,6 +1222,7 @@
 	};
 
 
+
 	GBI.setMenuPanelCadObjectsByType2 = function( target, selId ) {
 
 		const surfaces = GBP.gbjson.Campus.Surface;

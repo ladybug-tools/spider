@@ -20,10 +20,33 @@
 
 ### Energy and light analysis
 
-* https://radiance-online.org/
+#### About
+
+* http://www.architectmagazine.com/technology/five-digital-tools-for-architects-to-test-building-performance_o
+
+
+#### Energy
+* https://www.autodesk.com/products/insight/overview
+* https://gbs.autodesk.com/GBS/
+* http://sefaira.com/sefaira-architecture/
+* https://www.vabi.nl/
 * https://www.openstudio.net/
+* http://www.iesve.com/software/ve-for-architects
+* http://www.graphisoft.com/archicad/ecodesigner_star/
+* https://energydesignresources.com/
+* http://members.ozemail.com.au/~acadsbsg/index.htm
+
+Old school
 * https://energyplus.net/
+* http://doe2.com/DOE2/index.html
+
+#### Lighting
+
+* https://radiance-online.org/
+
+#### Organizations
 * http://www.ibpsa.org/
+* http://www.buildingenergysoftwaretools.com/
 
 
 ### JavaScript libraries we use
