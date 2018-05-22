@@ -62,6 +62,23 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+
+### 2018-05-22 ~ Theo
+
+R13.5
+* Undefined CAD Object IDs
+	* Delete second 'zoom' button
+	* Add 'toggle all undefined button'
+	* Popup
+		* Add un-check and check all buttons
+		* Add input for user-defined CAD object type
+	* Updating changes and updating surfaces sort of working
+	* Many minor fixes.
+* R13 Duplicate Adjacent Space
+	* First pass at building popup window
+
+Many undocumented updates in the past few days
+
 ### 2018-05-18 ~ Theo
 
 R13.22
