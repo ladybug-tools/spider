@@ -84,7 +84,7 @@ There seems to be small errors here and there with openings. I have not yet iden
 
 * Need to be fully namespaced
 * Needs to be packaged in separate stand-alone JavaScript file
-
+* Wirframe toggle not working
 
 
 ## Links of Interest

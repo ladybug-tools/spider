@@ -60,7 +60,7 @@
 		item.divTarget = item.divTarget || 'GBIdivElements'; // see divElement below
 		item.element = item.element || 'Surface';  // used by GBI.setElementVisible
 		item.name = item.name || 'itemName';
-		item.optionValues = item.optionValues || [ [ item.id, item.Name, item.CADObjectId ], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
+		item.optionValues = item.optionValues || [ [ item.id, item.Name, item.CADObjectId, 'yellow' ], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
 		item.parent = item.parent || GBP.surfaceJson; // used by GBI.setElementIdAttributes
 		item.placeholder = item.placeholder || 'surface id';  // used below
 		item.selItem = item.selItem || 'selItem'; // used below
@@ -68,7 +68,8 @@
 		let options = '';
 
 		item.optionValues.forEach( option =>
-			options += '<option value=' + option[ 0 ] + ' title="id: ' + option[ 0 ] + '" >' + option[ 1 ] + '</option>' );
+			options += '<option value=' + option[ 0 ] + ' title="id: ' + option[ 0 ] + '" style=background-color:"' + option[ 3 ] + '"; >' + option[ 1 ] + '</option>'
+		);
 
 		GBI.item = item;
 		//console.log( 'item', item );
