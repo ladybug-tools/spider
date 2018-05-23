@@ -62,10 +62,17 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+### 2018-05-23 ~ Theo
+
+R13.6
+* Duplicate Coordinates Panel
+	* Popup Window: Add displays multiple duplications as a group of color coded items
+	* Add 'check duplicate adjacent spaces' button << not looking useful
+	* Fix 'save file' button not working
 
 ### 2018-05-22 ~ Theo
 
-R13.5
+R13.25
 * Undefined CAD Object IDs
 	* Delete second 'zoom' button
 	* Add 'toggle all undefined button'

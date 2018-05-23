@@ -332,6 +332,12 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				//ISS.surfaceDuplicateAdjacentSpaces.push( { id: surface.id, cadId: surface.CADObjectId } );
 				ISS.surfaceDuplicateAdjacentSpaces.push( surface );
 
+				surface.ISSDuplicateAdjacentSpace = true;
+
+			} else {
+
+				surface.ISSDuplicateAdjacentSpace = false;
+
 			}
 
 		}
@@ -410,7 +416,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=ISSdivDuplicateAdjacentSpaces ></div>
 
 			<p>
-				<button onclick=onchange=ISS.setPopupPanelDuplicateSurfaces(this,"${attribute}"); >Update changes</button>
+				<button onclick=onchange=ISS.setPopupPanelDuplicateCoordinates(this,"${attribute}"); >Update changes</button>
 
 				<button onclick=ISS.surfaceChanges.deleteDuplicateSurfaces=[];ISS.setChangesDuplicateSurfaces(this); >Clear changes</button>
 
@@ -597,10 +603,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				ISS.duplicateCoordinates.push( surfaceOther, surface );
 
 				surface.ISSduplicateSurfaceSecond = surfaceOther.Name;
-				surface.ISSdeleteDuplicateSurface = false;
+				surface.ISSdeleteDuplicateSurface = true;
 
 				surfaceOther.ISSduplicateSurfaceFirst = surface.Name;
-				surfaceOther.ISSdeleteDuplicateSurface = true;
+				surfaceOther.ISSdeleteDuplicateSurface = false;
 
 				existing = ISS.duplicateCoordinates2.find( item => item[ 0 ] === surfaceOther );
 
@@ -639,7 +645,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdivDuplicateCoordinates2 ></div>
 
-			<p><button onclick=ISS.setPopupDuplicateSurfaces(); title="Starting to work!" >Delete duplicate surfaces</button></p>
+			<p><button onclick=ISS.setPopupDuplicateCoordinates(); title="Starting to work!" >Delete duplicate surfaces</button></p>
 
 			<hr>
 
@@ -664,7 +670,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setPopupDuplicateSurfaces = function() {
+	ISS.setPopupDuplicateCoordinates = function() {
 
 		divPopUpContents.innerHTML =
 		`
@@ -673,22 +679,27 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=ISSdivDuplicateSurfaces ></div>
 
 			<p>
-				<button onclick=onchange=ISS.setPopupPanelDuplicateSurfaces(this,"${attribute}"); >Update changes</button>
+				<button onclick=onchange=ISS.setPopupPanelDuplicateCoordinates(this,"${attribute}"); >Update changes</button>
 
 				<button onclick=ISS.surfaceChanges.deleteDuplicateSurfaces=[];ISS.setChangesDuplicateSurfaces(this); >Clear changes</button>
 
+			</p>
+
+			<p>
 				<button onclick=ISS.checkNone(); >un-check all</button>
 
 				<button onclick=ISS.checkFirst(); >check all first</button>
 
 				<button onclick=ISS.checkOthers(); >check all others</button>
 
+				<button onclick=ISS.checkDuplicateAdjacent(); >check duplicate adjacent spaces</button>
+
 			</p>
 
 			<p>
 				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.deleteDuplicateSurfaces) >delete selected surfaces</button>
 
-				<button onclick >Save changes to file</button>
+				<button onclick=GBI.saveFile() >Save changes to file</button>
 			</p>
 
 			<hr>
@@ -708,7 +719,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		divPopUp.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
-		ISS.setPopupPanelDuplicateSurfaces();
+		ISS.setPopupPanelDuplicateCoordinates();
 
 	};
 
@@ -718,7 +729,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.surfaceChanges.deleteDuplicateSurfaces = [];
 		ISS.duplicateCoordinates.forEach( item => item.ISSdeleteDuplicateSurface = false );
-		ISS.setPopupPanelDuplicateSurfaces();
+		ISS.setPopupPanelDuplicateCoordinates();
 
 	};
 
@@ -728,7 +739,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.surfaceChanges.deleteDuplicateSurfaces = [];
 		ISS.duplicateCoordinates.forEach( item => item.ISSdeleteDuplicateSurface = item.ISSduplicateSurfaceFirst ? true : '' );
-		ISS.setPopupPanelDuplicateSurfaces();
+		ISS.setPopupPanelDuplicateCoordinates();
 
 	};
 
@@ -738,13 +749,22 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.surfaceChanges.deleteDuplicateSurfaces = [];
 		ISS.duplicateCoordinates.forEach( item => item.ISSdeleteDuplicateSurface = item.ISSduplicateSurfaceSecond ? true : '' );
-		ISS.setPopupPanelDuplicateSurfaces();
+		ISS.setPopupPanelDuplicateCoordinates();
+
+	};
+
+
+	ISS.checkDuplicateAdjacent = function() {
+
+		ISS.surfaceChanges.deleteDuplicateSurfaces = [];
+		ISS.duplicateCoordinates.forEach( item => item.ISSdeleteDuplicateSurface = item.ISSDuplicateAdjacentSpace ? true : '' );
+		ISS.setPopupPanelDuplicateCoordinates();
 
 	};
 
 
 
-	ISS.setPopupPanelDuplicateSurfaces = function(){
+	ISS.setPopupPanelDuplicateCoordinates = function(){
 
 		let txt = '';
 		if ( !ISS.surfaceChanges.deleteDuplicateSurfaces ) { ISS.surfaceChanges.deleteDuplicateSurfaces = []; };
@@ -1563,7 +1583,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			console.log( 'surfaceArray', surfaceArray );
 			let count = 0;
 
-			if ( surfaceArray[0 ].Name ) {
+			if ( surfaceArray.length && surfaceArray[ 0 ].Name ) {
 
 				GBP.surfaceOpenings.visible = false;
 				GBP.surfaceMeshes.children.forEach( element => element.visible = false );
