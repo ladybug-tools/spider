@@ -20,7 +20,7 @@ ExteriorWalls polygon f_16_0
 ExteriorWalls polygon f_20_0
 0
 0
-30
+33
 	0.0  0.00  0.0
 	5.0  0.00  0.0
 	5.0  0.00  4.0
@@ -31,7 +31,7 @@ ExteriorWalls polygon f_20_0
 	1.0  0.00  1.0
 	1.0  0.00  3.0
 	0.0  0.00  4.0
-
+	0.0  0.00  0.0
 
 	ExteriorWalls polygon f_19_0
 0

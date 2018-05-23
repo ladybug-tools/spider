@@ -160,13 +160,16 @@
 	<div id = "hamburger" onclick=toggleNav(); > slide &#9776; </div>
 
 <script>
-		//let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad';
-		//let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/bristol-clifton-downs/bristol-clifton-downs.rad';
-		//let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/coord.rad';
-		//let url = '../../radiance-sample-files/rad-tutorial-files/room3/objects/ExteriorWalls.rad';
 
-		//let url = "../../radiance-sample-files/test-wall-with-opening-1.rad";
-		let url = "../../radiance-sample-files/london-office/london-office.rad";
+
+	//let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad';
+	//let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/bristol-clifton-downs/bristol-clifton-downs.rad';
+	//let url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/gjward1/coord.rad';
+	//let url = '../../radiance-sample-files/rad-tutorial-files/room3/objects/ExteriorWalls.rad';
+
+	//let url = "../../radiance-sample-files/test-wall-with-opening-michal.rad";
+	//let url = "../../radiance-sample-files/test-wall-with-opening-sariths.rad";
+	let url = "../../radiance-sample-files/london-office/london-office.rad";
 
 	var GBP = {};
 	var rad = {};
@@ -477,6 +480,7 @@
 
 			if ( rad.items[ i ].includes( 'polygon') === true ) {
 				//console.log( 'voided rad.items[ i ]', rad.items[ i ] );
+
 				drawPolygon( i );
 				continue;
 
@@ -506,17 +510,9 @@
 
 			//console.log( 'line', i, line[ i ]);
 
-			arr = line[ j ].trim().replace( /\t/g, ' ' ).replace( / {2,}/g, ' ' ).split( ' ' ).map( item => parseFloat( item ) );
+			const arr = line[ j ].trim().replace( /\t/g, ' ' ).replace( / {2,}/g, ' ' ).split( ' ' ).map( item => parseFloat( item ) );
 
 			const vertex = new THREE.Vector3().fromArray( arr );
-
-			if ( item.includes( 'f_19_0') ) {
-
-				//console.log( 'arr', arr );
-				//console.log( 'vertex', vertex );
-
-			}
-			//const arr = line[ i ].split( ' ' ).map( item => parseFloat( item ) );
 			//console.log( 'vertex', vertex );
 
 			points.push( vertex );
@@ -524,16 +520,16 @@
 		}
 
 
-		//if ( item.includes( 'f_19_0' ) ) {
 		if ( points.length > 9 ) {
 
 			//console.log( 'item', item );
 			//console.log( 'data', rad.data[ i ] );
 			//console.log( 'points', points );
 
+			/*
 			const dupes = [];
 
-			for ( point of points ) {
+			for ( let point of points ) {
 
 				const pt = '' + point.x + ' ' + point.y + ' ' + point.z;
 
@@ -545,18 +541,44 @@
 
 			}
 
-
 			if ( points.length - dupes.length < 2 ) {
 
 				console.log( 'dupes', points.length - dupes.length );
 
-				return;
+				//return;
+
+			}
+
+			*/
+
+			if ( points.length === 11 ) { // Michal's models
+
+				//console.log( 'points', points );
+				if ( points[ 4 ].z !== points[ 5 ].z ) {
+
+					points = [ points[ 0 ], points[ 1 ], points[ 2 ], points[ 3 ], points[ 4 ],
+						points[ 7 ], points[ 6 ], points[ 5 ], points[ 8 ], points[ 9 ], points[ 10 ] ];
+
+					//console.log( 'points', points );
+
+				}
+
+			} else if ( points.length === 10 ) {
+
+				if ( points[ 1 ].z !== points[ 2 ].z  ) {
+
+					points = [ points[ 7 ], points[ 8 ], points[ 9 ], points[ 6 ], points[ 5 ],
+						points[ 4 ], points[ 3 ], points[ 2 ], points[ 1 ], points[ 0 ] ];
+
+					//console.log( 'points', points );
+
+				}
 
 			}
 
 		} else {
 
-			return;
+			//return;
 
 		}
 
@@ -736,7 +758,8 @@
 
 		return shapeMesh;
 
-	};
+	}
+
 
 
 	function getPlane ( points, start = 0 ) {
@@ -755,8 +778,7 @@
 
 		return plane;
 
-	};
-
+	}
 
 
 
@@ -809,7 +831,7 @@
 		} );
 
 
-	};
+	}
 
 
 
