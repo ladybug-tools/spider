@@ -19,6 +19,8 @@ This is an ongoing learning and development effort. Please feel free to request 
 
 * Draws 'holes' correctly
 	* Uses _ad hoc_ rules to reorder vertices
+	* Appears to display the geometry of all the examples as expected (but may not complete on very large files )
+	* Maintains reasonable speed
 
 ## full screen: [rad viewer 8]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-8.html )
 
@@ -76,9 +78,13 @@ There seems to be small errors here and there with openings. I have not yet iden
 
 ## Wish list
 
-
+* 2018-05-22 ~ Theo ~ Add ways of selecting what to render and what to ignore on very large files
 
 ## Issues
+
+* Need to be fully namespaced
+* Needs to be packaged in separate stand-alone JavaScript file
+
 
 
 ## Links of Interest
