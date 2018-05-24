@@ -108,7 +108,6 @@
 	}
 
 
-
 	SAV.saveChanges = function() {
 
 		console.log( 'GBI.surfaceChanges', GBI.surfaceChanges );
@@ -573,7 +572,7 @@
 
 			const surfaceXml = SAV.getSurfaceByName( name );
 
-			//console.log( 'surfaceXml', surfaceXml);
+			console.log( 'surfaceXml', surfaceXml);
 
 			if ( !surfaceXml ) {
 
@@ -585,15 +584,6 @@
 
 				surfaceXml.remove();
 
-				const item = GBP.surfaceJson.find( element => element.Name === name );
-				const index = GBP.surfaceJson.indexOf( item )
-
-				if ( index >= 0 ) {
-
-					GBP.surfaceJson.splice( index, 1 );
-
-				}
-
 				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.Name === name );
 				GBP.surfaceMeshes.remove( surfaceMesh );
 
@@ -604,7 +594,7 @@
 		}
 
 		GBI.surfaceChanges.deleteDuplicateSurfaces = [];
-		//ISS.surfaceChanges.deleteDuplicateSurfaces = [];
+		ISS.surfaceChanges.deleteDuplicateSurfaces = [];
 
 	};
 

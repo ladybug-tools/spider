@@ -457,6 +457,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
+
 	ISS.setPopupPanelDuplicateAdjacentSpaces = function(){
 
 		let txt = '';
@@ -477,7 +478,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			txt +=
 			`<div>
 				<input type=checkbox onchange=ISS.setChangesDuplicateSurfaces(this,"${surface.Name}"); ${check} >
-				<span style=display:inline-block;width:12rem; >name: ${surface.Name} </span> id: ${surface.id} - type: ${surface.surfaceType}
+				<span style=display:inline-block;width:15rem; >name: ${surface.Name} </span> id: ${surface.id} - type: ${surface.surfaceType}
 			</div>`;
 
 		}
@@ -623,7 +624,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		}
 		//console.log( 'existing', existing );
-		//console.log( 'ISS.duplicateCoordinates2', ISS.duplicateCoordinates2 );
+		console.log( 'ISS.duplicateCoordinates2', ISS.duplicateCoordinates2 );
 
 		target.innerHTML =
 
@@ -698,7 +699,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<p>
 				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.deleteDuplicateSurfaces) >delete selected surfaces</button>
 
-				<button onclick=GBI.saveFile(); >Save changes to file</button>
+				<button onclick=GBI.saveFile() >Save changes to file</button>
 			</p>
 
 			<hr>
@@ -769,7 +770,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		if ( !ISS.surfaceChanges.deleteDuplicateSurfaces ) { ISS.surfaceChanges.deleteDuplicateSurfaces = []; };
 		if ( !GBI.surfaceChanges.deleteDuplicateSurfaces ) { GBI.surfaceChanges.deleteDuplicateSurfaces = []; };
 
-		let color = 'yellow';
+		color = 'yellow';
 
 		for ( surfacesJ of ISS.duplicateCoordinates2 ) {
 
@@ -792,6 +793,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 					<input type=checkbox onchange=ISS.setChangesDuplicateSurfaces(this,"${surface.Name}"); ${check} >
 					<span style=display:inline-block;width:15rem; >name: ${surface.Name} </span> id: ${surface.id} - type: ${surface.surfaceType}
 				</div>`;
+
 
 			}
 
@@ -982,21 +984,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.surfacesUndefinedId = GBP.surfaceJson.filter( surfaceJson => surfaceJson.CADObjectId === undefined || surfaceJson.CADObjectId === '' );
 		ISS.surfacesUndefinedId.forEach( surfaceJson => surfaceJson.addCADObjectId = true );
 
-		for ( surfaceJ of ISS.surfacesUndefinedId ) {
-
-			if ( surfaceJ.surfaceType === 'Air') {
-
-				surfaceJ.CADObjectId = 'Air';
-
-			} else {
-
-				surfaceJ.CADObjectId = '';
-
-			}
-
-		}
-
-
 		const txt = 'CAD object ID undefined<br>';
 
 		//ISS.surfacesUndefinedId.forEach( surface => surface.CADObjectId = 'undefined' );
@@ -1056,16 +1043,13 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				<button onclick=ISS.setPopupUndefinedIdCheck(true); >check all</button>
 			</p>
 
-			<!--
 			<p><small>Select an existing CAD object type or create a new type</p>
 
 			<div id=ISSdivCadGroups ></div>
 
 			<p><input onchange=ISSselCadGroups.value=this.value id=inpCadGroupDefault value="pokemon hiding space" > << not fully working yet</p>
-			-->
 
 			<p>
-
 			<!--
 				<button onclick=ISS.setChangesCadObjectIds(); >Update changes</button>
 			-->
@@ -1073,7 +1057,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				<button onclick=ISS.updateSurfaceCADObjectIds(ISS.surfaceChanges.CADObjectId) >Update selected surfaces</button>
 
-				<button onclick=GBI.saveFile(); >Save changes to file</button>
+				<button onclick >Save changes to file</button>
 
 			</p>
 
@@ -1104,24 +1088,19 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPopupPanelUndefinedId = function(){
 
-		//GBI.setMenuPanelCadObjectsByType2( ISSdivCadGroups, 'ISSselCadGroups' );
+		GBI.setMenuPanelCadObjectsByType2( ISSdivCadGroups, 'ISSselCadGroups' );
 
 		let txt = '';
 
 		if ( !ISS.surfaceChanges.CADObjectId ) { ISS.surfaceChanges.CADObjectId = []; }
 		if ( !GBI.surfaceChanges.CADObjectId ) { GBI.surfaceChanges.CADObjectId = []; };
 
-		let count = 0;
-		let color = 'yellow';
-
-		for ( let surface of ISS.surfacesUndefinedId ) {
+		for ( surface of ISS.surfacesUndefinedId ) {
 
 			ISS.surfaceChanges.CADObjectId[ surface.Name ] = surface.Name;
 
 			const check = surface.addCADObjectId ? 'checked' : '' ;
 
-			color = color === 'yellow' ? 'pink' : 'yellow';
-		/*
 			if ( check ) {
 
 				id = ISSselCadGroups.value;
@@ -1135,25 +1114,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				ISS.surfaceChanges.CADObjectId.push( {name: surface.Name, CADObjectId: id }  );
 
 			}
-			*/
 
-			txt +=
-			`<div style=background-color:${color};padding-bottom:0.5rem >
-				<input type=checkbox onchange=ISS.setCheckCadObjectIds("${surface.Name}",this); ${check} >
-
-				<span style=display:inline-block;width:15rem; >${surface.Name}</span>
-				id: ${surface.id} - type: ${surface.surfaceType}<br>
-				<label for=cadId${count} style=display:inline-block;margin-left:2rem; title="more suitable options coming soon" >CAD id to add:</label>
-				<input list=cadGroups id=cadId${count++} value="${surface.CADObjectId}" title="more suitable options coming soon" >
-				<datalist id="cadGroups">
-					<option value="Chrome">
-					<option value="Firefox">
-					<option value="Internet Explorer">
-					<option value="Opera">
-					<option value="Safari">
-					<option value="Microsoft Edge">
-				</datalist>
-			</div>`;
+			//surface.CADObjectIdChecked = true;
+			txt += `<div><input type=checkbox  onchange=surface.addCADObjectId=this.checked; ${check} > ${surface.Name} -
+			 id: ${surface.id} - type: ${surface.surfaceType} </div>`;
 
 		}
 
@@ -1161,17 +1125,37 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.setChangesCadObjectIds();
 
+		//ISStxtSurfacesUndefinedCadId.value = JSON.stringify( ISS.surfaceChanges.CADObjectId, null, ' ' );
+
+		/*
+		let txt = '';
+		if ( !ISS.surfaceChanges.deleteDuplicateSurfaces ) { ISS.surfaceChanges.deleteDuplicateSurfaces = []; };
+		if ( !GBI.surfaceChanges.deleteDuplicateSurfaces ) { GBI.surfaceChanges.deleteDuplicateSurfaces = []; };
+
+		for ( surface of ISS.duplicateCoordinates ) {
+
+			const check = surface.ISSdeleteDuplicateSurface ? 'checked' : '';
+
+			if ( check ) {
+
+				ISS.surfaceChanges.deleteDuplicateSurfaces.push( surface.Name );
+
+			}
+			//console.log( 'check', check );
+
+			txt +=
+			`<div>
+				<input type=checkbox onchange=ISS.setChangesDuplicateSurfaces(this,"${surface.Name}"); ${check} >
+				<span style=display:inline-block;width:15rem; >name: ${surface.Name} </span> id: ${surface.id} - type: ${surface.surfaceType}
+			</div>`;
+
+		}
+
+		ISSdivDuplicateSurfaces.innerHTML = txt;
+		ISStxtDuplicateSurfaces.value = JSON.stringify( ISS.surfaceChanges.deleteDuplicateSurfaces, null, ' ' );
+		*/
+
 	};
-
-
-
-	ISS.setCheckCadObjectIds = function( name, checkbox ) {
-
-		//console.log( '', name, checkbox );
-		surfaceJ = ISS.surfacesUndefinedId.find( element => element.Name === name )
-		surfaceJ.addCADObjectId = checkbox.checked;
-
-	}
 
 
 
@@ -1183,7 +1167,15 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			if ( surface.addCADObjectId ) {
 
-				ISS.surfaceChanges.CADObjectId.push( {name: surface.Name, CADObjectId: surface.CADObjectId } );
+				id = ISSselCadGroups.value;
+
+				if ( !id ) {
+
+					id = 'pokemon hiding space';
+
+				}
+				ISS.surfaceChanges.CADObjectId.push( {name: surface.Name, CADObjectId: id } );
+				//txt += `<p><input type=checkbox  onchange=ISS.setDeletDuplicateSurfaces("${attribute.Name}",this); checked > ${attribute.Name} <p>`;
 
 			}
 
@@ -1588,10 +1580,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		if ( button.style.fontStyle !== 'italic' ) {
 
-			//console.log( 'surfaceArray', surfaceArray );
-
-			GBP.surfaceOpenings.visible = false;
-
+			console.log( 'surfaceArray', surfaceArray );
 			let count = 0;
 
 			if ( surfaceArray.length && surfaceArray[ 0 ].Name ) {
@@ -1611,7 +1600,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 					{ element.visible = surfaceArray.includes( element.userData.data.Name ) ? true : false;
 						count = element.visible ? count++ : count;
 				} );
-				//console.log( 'visible', count );
+				console.log( 'visible', count );
 			}
 
 			button.style.cssText = COR.buttonToggleCss;
@@ -1652,8 +1641,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	ISS.setDuplicateAdjacentSpaceVisibleToggle = function() {
 
 		if ( ISSbutDuplicateAdjacent.style.backgroundColor !== 'pink' ) {
-
-			GBP.surfaceOpenings.visible = false;
 
 			GBP.surfaceMeshes.children.forEach( child => child.visible = false );
 
@@ -1879,41 +1866,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		console.log( 'idsArray', idsArray );
 
-		//names = idsArray.map( item => item.name ).join( '\n' );
+		names = idsArray.map( item => item.name ).join( '\n' );
 
-		//console.log( 'names', names );
+		console.log( 'names', names );
+		const proceed = alert( 'Coming soon!\nUpdate surfaces: \n ' + names + '?' );
 
-		//const proceed = alert( 'Coming soon!\nUpdate surfaces: \n ' + names + '?' );
-		surfacesGbxml = GBP.gbxml.getElementsByTagName( "Surface" );
-
-		for ( item of idsArray ) {
-
-			surfaceJson = GBP.surfaceJson.find( element => element.Name === item.name );
-
-			//console.log( 'surfaceJson', surfaceJson);
-
-			if ( surfaceJson ) {
-
-				id =surfaceJson.id;
-				//console.log( 'id', id );
-
-				surfaceXml = surfacesGbxml[ id ];
-				surfaceXml.setAttribute( "CADObjectId", item.CADObjectId );
-
-				console.log( 'id', id,'\nsurface to edit', surfaceXml );
-
-
-				// edit gbjson
-				surfaceJson[ "CADObjectId" ] = item.CADObjectId;
-
-				// edit three.js
-				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
-				surfaceMesh.userData.data.CADObjectId = item.CADObjectId;
-
-			}
-
-
-		}
 
 	}
 

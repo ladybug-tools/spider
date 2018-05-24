@@ -14,7 +14,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 ## Concept
 
 * Save your editing changes to a file for reuse with next incoming gbXML source file update
-* Save time with gbXML files that are frequently updated
+* Save time with updating gbXML files that are frequently updated by the CAD program that generates the gbXML
 
 
 ## Wish list
@@ -23,13 +23,19 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Issues
 
-
+* 2018-05-24 ~ Theo ~ code needs a good cleanup
 
 ## Links of Interest
 
 * [gbXML Viewer Save Changes Samples Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-sample-files/save-changes-samples/README.md )
 
 ## Change Log
+
+
+### 2018-05-24 ~ Theo
+
+R13.27
+* Fix issues with deleting surfaces with duplicate coordinates
 
 ### 2018-05-14 ~ Theo
 

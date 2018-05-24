@@ -64,6 +64,14 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+### 2018-05-24 ~ Theo
+
+R13.27
+* Issues Panel
+	* Fixes to visibility toggles
+	* Undefined CAD Object IDs
+		* Mostly working
+
 ### 2018-05-23 ~ Theo
 
 R13.26

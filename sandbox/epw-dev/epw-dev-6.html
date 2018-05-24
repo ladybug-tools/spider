@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-01-19" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js ></script>
+
+	<div id = "divHeader" >
+
+		<h1 id = "divTitle" >
+
+			<a href="" ><script>
+				document.write( location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) );
+				//document.write( document.title );
+			</script></a>
+
+		</h1>
+
+		<div><script> document.write( document.head.querySelector( '[name=description]' ).content )</script></div>
+
+		<div id = "divContents" >
+
+			<p><input id=inpCity oninput=setSelectedIndex(); placeholder="file name" ></p>
+
+			<div><select id=selCity size=18 ></select></div>
+
+			<p>
+
+				<button onclick=setEPWDownload(); >download selected zip file</button>
+
+				<button onclick=setEPWOpenListFetch(); >open selected zip file & list contents</button>
+			</p>
+
+		</div>
+
+		<hr>
+
+		<div id = 'divFileNames'></div>
+
+		<div id = 'divFileContents'></div>
+
+	</div>
+
+<script>
+
+
+	init();
+
+	function init() {
+
+
+		let url = 'https://api.github.com/repos/chiensiTB/EPWRawWeather/contents/Weather Files';
+
+		//const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		requestCityFileList( url );
+
+	}
+
+
+
+	function requestCityFileList( url ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+			function callback( xhr ) {
+
+				let response, json, lines;
+
+				response = xhr.target.response;
+				//console.log( 'response', response );
+
+				json = JSON.parse( response );
+				//console.log( 'json', json );
+
+				cities = json.map ( item => `<option value=${item.download_url} >${item.name}</option>` ).join( '' );
+				//console.log( 'cit', cities );
+
+				selCity.innerHTML = cities;
+
+			}
+
+	}
+
+
+
+	function setSelectedIndex() {
+
+		const str = inpCity.value.toLowerCase();
+
+		for ( let option of selCity.options ) {
+
+			if ( option.innerHTML.toLowerCase().includes( str ) ) {
+
+				selCity.value = option.value;
+
+				return;
+
+			}
+
+		}
+
+	};
+
+
+
+	function setEPWDownload() {
+
+		if ( !selCity.value ){ alert('please select a file to download'); return }
+
+		window.open( selCity.value,'_blank');
+		window.open( selCity.value );
+
+	}
+
+
+
+	function setEPWOpenListFetch( url ) {
+
+		if ( !selCity.value ){ alert('please select a file to download'); return }
+
+		url = selCity.value;
+		names = [];
+		divFileNames.innerHTML = '';
+
+		//url = 'https://raw.githubusercontent.com/chiensiTB/EPWRawWeather/master/Weather%20Files/ACT%20Canberra%20949260%20(IWEC).zip'
+
+		fetch( url )
+
+		.then( function (response ) {
+
+			if ( response.status === 200 || response.status === 0 ) {
+
+				return Promise.resolve( response.blob() );
+
+			} else {
+
+				return Promise.reject( new Error( response.statusText ) );
+
+			}
+		} )
+
+		.then( JSZip.loadAsync )
+
+		.then( function( zip ) {
+
+			zip.forEach( function ( relativePath, zipEntry ) {
+
+				divFileNames.innerHTML += `<p><button onclick=setFile("${zipEntry.name}"); >file name: ${zipEntry.name}</button></p>`;
+
+				console.log( 'file name: ', zipEntry.name);
+				names.push( zipEntry.name );
+			});
+
+			console.log( 'zip', zip.files );
+
+			return zip;
+
+		} )
+
+		.then( function ( zip ) {
+
+			return zip.file( names[ 0 ] ).async( "string" );
+
+		} )
+
+		.then( function success( text ) {
+
+			//console.log( 'text', text );
+
+			divFileContents.innerText = names[ 0 ] + '\n\n' + text;
+
+		} );
+
+	}
+
+
+
+	function setFile( fileName ) {
+
+		console.log( 'fileName', fileName );
+
+		//url = 'https://raw.githubusercontent.com/chiensiTB/EPWRawWeather/master/Weather%20Files/ACT%20Canberra%20949260%20(IWEC).zip'
+
+		url = selCity.value;
+
+		fetch( url )
+
+		.then( function (response ) {
+
+			if ( response.status === 200 || response.status === 0 ) {
+
+				return Promise.resolve( response.blob() );
+
+			} else {
+
+				return Promise.reject( new Error( response.statusText ) );
+
+			}
+		} )
+
+		.then( JSZip.loadAsync )
+
+		.then( function ( zip ) {
+
+			return zip.file( fileName ).async( "string" );
+
+		} )
+
+		.then( function success( text ) {
+			//console.log( 'text', text );
+
+			type = fileName.slice( -3 ).toLowerCase();
+
+			if ( type === 'epw' ) {
+
+				console.log( 'type', type );
+				divFileContents.innerText = fileName + '\n\n' + text;
+
+			} else {
+
+				divFileContents.innerText = 'not epw';
+
+			}
+
+
+		} );
+
+	}
+
+
+
+
+</script>
+</body>
+</html>
