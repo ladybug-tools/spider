@@ -17,8 +17,9 @@ This is an ongoing learning and development effort. Please feel free to request 
 
 ## full screen: [rad viewer 10]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/r10/rad-viewer.html )
 
-* Rendering JavaScript extracted into separate file and namespaced
+* Rendering JavaScript extracted into separate file and namespaced ( made code safer and more reusable)
 * Add ability to load and display PTS files with data displayed as Three.js Sprites
+	* Reduce the opacity in order to view PTS data
 	* Note: loading of RES files not yet supported
 
 
