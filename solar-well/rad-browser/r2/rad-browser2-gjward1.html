@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "This menu script allows you to list, open and view the files in selected pushme-pullyou folders" >
+<meta name = "keywords" content = "JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-02-01" >
+<title>gjward1 radModels</title>
+
+<style>
+/* Copyright 2018 pushMe-pullYou authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	html { --mnu-color: MediumSlateBlue; --mnu-back-color: ivory; --mnu-width:300px; height: 100%; }
+
+	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
+
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #8888; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: #ccc; color: #fff }
+
+	iframe { width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	td { vertical-align: top; }
+
+	#divContainer { height: 100%; margin: 0 0 0 calc( 50px + var( --mnu-width ) ); transition: margin-left .5s;
+		position: absolute; width: 800px;}
+	#divContents { height: 100%; left: 0; margin: 0 auto; right: 0;}
+
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; margin: 0; height: 100%;
+		overflow-x: hidden; padding: 30px 10px 0 10px; position: fixed; top: 0; width: var( --mnu-width ); z-index: 1; transition: 0.5s; }
+
+	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left .5s; z-index: 10; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
+<script src = "../../rad-viewer/r10/rad-viewer.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divBreadcrumbs"></div>
+
+		<div id = "divMenuItems" ></div>
+
+		<hr>
+
+		<p><img src="https://status.github.com/images/invertocat.png" height=18 title='Octocat' > Click icon to view source code on GitHub.
+
+		<p> &#x2750; Click icon to go full screen & get link to individual file.</p>
+
+		<p>Tooltips provide file size.</p>
+
+		<hr>
+
+		<div id= "divFooter" >
+
+			<div><a href="javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+			<div><a href="https://api.github.com/rate_limit" target="_blank" title="Occasionaly this script breaks if you go over the GitHub API rate limit" >github rate limits</a></div>
+
+			<p onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >&#x1f578;</p>
+
+		</div>
+
+	</div>
+
+
+	<div id = "divContainer" >
+
+		<div id = "divContents" ></div>
+
+	</div>
+
+	<div id = "hamburger" onclick=toggleNav(); > slide &#9776; </div>
+
+<script>
+
+
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh, axesHelper;
+
+	/*
+	const user = '';
+	const repo = '/radModels';
+	const pathRepo = '';
+	const branch = '/master/'
+	*/
+
+	const user = 'ladybug-tools';
+	const repo = '/spider';
+	const pathRepo = 'radiance-sample-files/gjward1';
+	const branch = '/master/'
+
+	const uriDefaultFile = 'README.md';
+//	const uriDefaultFile = '../../plugins/view-github-issues.html'
+
+	const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+
+	const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
+
+	let urlGitHubPage;
+
+	const urlGitHubSource = 'https://github.com/' + user + repo;
+
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh, axesHelper;
+
+	init();
+	animate();
+
+	function init() {
+
+		//const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		const title = document.title;
+
+		divTitle.innerHTML =
+			`<h2><a href = "" >${title}</a></h2>
+			<p>${document.head.querySelector( '[name=description]' ).content }</p>`;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+		renderer.shadowMap.enabled = true;
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
+		camera.position.set( 30, 30, 30 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		lightAmbient = new THREE.AmbientLight( 0x444444 );
+		scene.add( lightAmbient );
+
+		size = 100
+		lightDirectional = new THREE.DirectionalLight( 0xffffff );
+		lightDirectional.position.set( -size, size, size );
+	//	lightDirectional.shadow.camera.scale.set( 0.1 * size, 0.1 * size, 0.5 );
+		lightDirectional.castShadow = true;
+		scene.add( lightDirectional );
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+		window.addEventListener( 'keyup', function() { controls.autoRotate = false; }, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+
+		axesHelper = new THREE.AxesHelper( 50 );
+		scene.add( axesHelper );
+
+
+		urlGitHubPage = location.href.includes( '/' + user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + branch;
+		console.log( 'urlGitHubPage', urlGitHubPage );
+
+
+		window.addEventListener ( 'hashchange', onHashChange, false );
+
+		location.hash = '../README.md'
+		//onHashChange();
+
+	}
+
+
+
+	function onHashChange() {
+
+		let url, ulc, pathCurrent;
+
+/*
+		if ( !location.hash ) {
+
+			url = urlGitHubPage + uriDefaultFile;
+			ulc = url.toLowerCase();
+			pathCurrent = '';
+
+		} else {
+*/
+
+			url = location.hash.slice( 1 );
+			ulc = url.toLowerCase();
+			//console.log( 'url', url );
+
+			const crumbs = url.slice( urlGitHubPage.length );
+			pathCurrent = crumbs.lastIndexOf( '/' ) > 0 ? crumbs.slice( 0, crumbs.lastIndexOf( '/' ) ) : '';
+
+			//console.log( 'pathCurrent',  pathCurrent );
+
+//		}
+
+
+		getFolderContents( pathCurrent );
+
+		if ( ulc.endsWith( '.md' ) ) {
+
+			requestFile( url, callbackMarkdown );
+
+		} else if ( ulc.endsWith( '.rad' ) ) {
+
+			scene.remove( rad.meshes, rad.edges );
+			rad.meshes = new THREE.Object3D();
+			rad.edges = new THREE.Object3D();
+			requestFile( url, callbackRad );
+
+		} else if ( ulc.endsWith( '.html' ) ) {
+
+			document.body.style.overflow = 'hidden';
+			divContents.style.maxWidth = '';
+			divContents.innerHTML = '<iframe src=' + url + ' style=border:none;height:100%;width100%; ></iframe>';
+
+		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' ) || ulc.endsWith( '.ico' ) ) {
+
+			divContents.innerHTML = '<img src=' + urlGitHubPage + url + ' style=margin:20px; >';
+
+		} else {
+
+			requestFile( urlGitHubPage + url, callbackToTextarea );
+
+		}
+
+	}
+
+
+
+	function getFolderContents( path = '' ) {
+
+		const url = urlGitHubApiContents + path;
+
+		requestFile( url, callbackGitHubMenu );
+
+		setBreadcrumbs( path );
+
+	}
+
+
+
+	function setBreadcrumbs( path ) {
+		// ( pathRepo ? pathRepo : '<span style=font-size:24px >&#x2302</span>' ) +
+		let txt =
+			'<b>' +
+				'<a href=JavaScript:getFolderContents(); >' +
+
+					'<span style=font-size:24px >&#x2302</span>' +
+
+				//'</a> &raquo; ' +
+				'</a> ' +
+			'</b>';
+
+		//let folders = path ? path.split( '/' ) : [] ;
+		let folders = path ? path.replace( pathRepo, '' ).split( '/' ) : [] ;
+
+		let str = '';
+
+		for ( let folder of folders ) {
+
+			str += folder + '/';
+
+			txt += '<b><a href=JavaScript:getFolderContents("' + str.slice( 0, -1 ) + '"); >' + folder + '</a> &raquo; </b>';
+
+		}
+
+		divBreadcrumbs.innerHTML = txt;
+
+	}
+
+
+
+	function callbackGitHubMenu( xhr ) {
+
+		const response = xhr.target.response;
+		const items = JSON.parse( response );
+		const len = pathRepo.length;
+
+		let txt = '';
+
+		if ( items.message ) { //alert( items.message );
+		return; }
+
+		const ignoreFolders = [ 'data' ]; //, 'plugins'
+
+		for ( let item of items ) {
+
+			if ( item.type === 'dir' ) {
+
+				if ( ignoreFolders.includes( item.name ) ) { continue; }
+
+				txt +=
+					'<div style=margin-bottom:8px; >' +
+						'<a href=JavaScript:getFolderContents("' + item.path.slice( len )  + '"); >&#x1f4c1; ' +
+							item.name  +
+						'</a>' +
+					'</div>' +
+				'';
+
+			}
+
+		}
+
+		const ignoreFiles = [ '.gitattributes', '.gitignore', '404.html', 'ladybug-tools-spider.html' ];
+
+		for ( let item of items ) {
+
+			if ( item.type === 'file' ) {
+
+				if ( ignoreFiles.includes( item.name ) ) { continue; }
+
+				itemPath = encodeURI( item.path.slice( len ) );
+
+				txt +=
+					'<table><tr>' +
+
+						'<td><a href="' + urlGitHubSource + '/blob' + branch + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
+						'<td>' +
+
+							'<a href=#' + urlGitHubPage + pathRepo + itemPath +
+							' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
+							( item.path.endsWith( 'html' ) ? '<a href=' + urlGitHubPage + pathRepo + itemPath + ' >&#x2750;</a>' : '' ) +
+
+						'</td>' +
+
+					'</tr></table>';
+
+// simplify
+				if ( ( !location.hash || location.hash.toLowerCase().endsWith( 'readme.md' ) )
+					//&& item.path !== 'README.md'
+					&& item.name.toLowerCase() === 'readme.md' ) {
+
+					location.hash = urlGitHubPage + pathRepo + itemPath;
+
+				}
+
+			}
+
+		}
+
+		divMenuItems.innerHTML = txt;
+
+	}
+
+
+
+	function callbackMarkdown( xhr ){
+
+		showdown.setFlavor('github');
+		const converter = new showdown.Converter();
+		const response = xhr.target.response;
+		const html = converter.makeHtml( xhr.target.responseText );
+
+		//document.body.style.overflow = '';
+		//divContents.style.maxWidth = '800px';
+		divContainer.style.display = '';
+		divContents.innerHTML = html;
+		window.scrollTo( 0, 0 );
+
+	}
+
+
+
+	function callbackToTextarea( xhr ){
+
+		const response = xhr.target.response;
+
+		divContainer.style.display = '';
+		divContents.innerHTML = '<textarea style=margin-left:50px;height:100%;width:800px; >' + response + '</textarea>';
+
+	}
+
+
+
+
+	function callbackRad( xhr ){
+
+		const response = xhr.target.response;
+		//console.log( 'response', response );
+		//divContents.innerHTML = '<textarea style=margin-left:50px;height:100%;width:100%; >' + response + '</textarea>';
+
+		//parseFile( response );
+		rad.parseRadText( response );
+		divContainer.style.display = 'none';
+
+
+	}
+
+
+
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+//		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+
+	function toggleNav() {
+
+		const left = 'calc( var( --mnu-width ) - 100px )';
+
+		if ( hamburger.style.left === '' || hamburger.style.left === left ) {
+
+			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			hamburger.style.left = '-100px';
+			divContainer.style.marginLeft = '0';
+
+		} else {
+
+			divMenu.style.left = 0;
+			hamburger.style.left = left;
+			divContainer.style.marginLeft = 'var( --mnu-width )';
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+		}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

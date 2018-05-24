@@ -48,6 +48,8 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Wish list
 
+* 2018-05-23 ~ Theo ~ Popup windows > Add buttons to make checked items visible
+* 2018-05-23 ~ Theo ~ add colored options to left menu to indicate membership in a set of surfaces
 * Add locate surfaces with openings that overlap
 * 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
 	* Upgrade so identifies any surface within another surface
@@ -64,7 +66,7 @@ Recent releases of the Viewer are identifying typical errors.
 
 ### 2018-05-23 ~ Theo
 
-R13.6
+R13.26
 * Duplicate Coordinates Panel
 	* Popup Window: Add displays multiple duplications as a group of color coded items
 	* Add 'check duplicate adjacent spaces' button << not looking useful

@@ -5,7 +5,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 # [Rad Viewer Read Me]( #solar-well/rad-viewer/README.md )
 
 
-<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-9.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/r10/rad-viewer.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _Latest project here_
 
@@ -14,6 +14,13 @@ _Latest project here_
 View RAD files produced by [Radiance]( https://radiance-online.org/ ) scripts in interactive 3D in your browser.
 
 This is an ongoing learning and development effort. Please feel free to request to any particular Radiance feature to be added to this viewer as a priority.
+
+## full screen: [rad viewer 10]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/r10/rad-viewer.html )
+
+* Rendering JavaScript extracted into separate file and namespaced
+* Add ability to load and display PTS files with data displayed as Three.js Sprites
+	* Note: loading of RES files not yet supported
+
 
 ## full screen: [rad viewer 9]( https://rawgit.com/ladybug-tools/spider/master/solar-well/rad-viewer/rad-viewer-9.html )
 
