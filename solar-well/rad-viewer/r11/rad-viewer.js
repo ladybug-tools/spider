@@ -5,7 +5,7 @@
 	rad.meshes = null;
 	rad.edges = null;
 	rad.opacity = 0.85;
-
+	var p
 	rad.colors = {
 
 		InteriorWall: 0x008000,

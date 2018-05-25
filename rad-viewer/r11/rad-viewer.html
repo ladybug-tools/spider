@@ -85,6 +85,8 @@
 
 				<summary>London Office</summary>
 
+				<p>Click buttons in descending order. Reload page when finished.</p>
+
 				<p><button onclick=setLondonOffice(); >London Office shell</button></p>
 
 				<p><button onclick=setLondonOffice0(); >London Office points 0</button></p>
@@ -208,7 +210,7 @@
 
 	//let url = "../../radiance-sample-files/test-wall-with-opening-michal.rad";
 	//let url = "../../radiance-sample-files/test-wall-with-opening-sariths.rad";
-	let url = "../../../radiance-sample-files/london-office/london-office.rad";
+	let url = "../../radiance-sample-files/london-office/london-office.rad";
 
 	var pts;
 
@@ -290,7 +292,7 @@
 		//document.title = document.title ? document.title : url;
 		//window.history.back( 1 );
 
-		scene.remove( rad.meshes, rad.edges );
+		scene.remove( rad.meshes, rad.edges, pts );
 		rad.meshes = new THREE.Object3D();
 		rad.edges = new THREE.Object3D();
 
@@ -355,9 +357,9 @@
 		rad.edges = new THREE.Object3D();
 		rad.opacity = 0.15;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/material_unnamed.rad');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/material_unnamed.rad');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/london-office.rad');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/london-office.rad');
 
 	}
 
@@ -366,9 +368,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_0.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_0.res');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_0.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_0.pts');
 
 	}
 
@@ -378,9 +380,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_1.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_1.res');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_1.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_1.pts');
 
 	}
 
@@ -390,9 +392,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_2.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_2.res');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_2.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_2.pts');
 
 	}
 
@@ -401,9 +403,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_3.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_3.res');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_3.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_3.pts');
 
 	}
 
@@ -411,9 +413,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_4.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_4.res');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_4.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_4.pts');
 
 	}
 
@@ -422,9 +424,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_5.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_5.res');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_5.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_5.pts');
 
 	}
 
@@ -433,9 +435,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_6.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_6.res');
 
-		rad.requestFile( '../../../radiance-sample-files/london-office/unnamed_6.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/london-office/unnamed_6.pts');
 
 	}
 
@@ -449,9 +451,9 @@
 		rad.edges = new THREE.Object3D();
 		rad.opacity = 0.15;
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/material_unnamed.rad');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/material_unnamed.rad');
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/bristol-clifton-downs.rad');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/bristol-clifton-downs.rad');
 
 	}
 
@@ -461,9 +463,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_0.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_0.res');
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_0.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_0.pts');
 
 	}
 
@@ -474,9 +476,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_1.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_1.res');
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_1.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_1.pts');
 
 	}
 
@@ -488,9 +490,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_2.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_2.res');
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_2.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_2.pts');
 
 		}
 
@@ -502,9 +504,9 @@
 
 		rad.opacity = 0.85;
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_3.res');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_3.res');
 
-		rad.requestFile( '../../../radiance-sample-files/bristol-clifton-downs/unnamed_3.pts');
+		rad.requestFile( 'https://www.ladybug.tools/spider/radiance-sample-files/bristol-clifton-downs/unnamed_3.pts');
 
 		}
 
