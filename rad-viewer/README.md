@@ -5,7 +5,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 # [Rad Viewer Read Me]( #solar-well/rad-viewer/README.md )
 
 
-<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/maste/rad-viewer/r11/rad-viewer.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/rad-viewer/r11/rad-viewer.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _Latest project here_
 
