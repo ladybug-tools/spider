@@ -48,7 +48,9 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Wish list
 
-* 2018-05-23 ~ Theo ~ Popup windows > Add buttons to make checked items visible
+* 2018-05-25 ~  Theo ~ Undefined CAD Object IDs > Add 'check only Air' button
+* 2018-05-25 ~  Theo ~ Undefined CAD Object IDs > Add line that edits all selected with one input box
+* 2018-05-23 ~ Theo ~ Popup windows > Add buttons to make checked items visible and to zoom in to seleted items
 * 2018-05-23 ~ Theo ~ add colored options to left menu to indicate membership in a set of surfaces
 * Add locate surfaces with openings that overlap
 * 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
@@ -63,6 +65,17 @@ Recent releases of the Viewer are identifying typical errors.
 
 
 ## Change Log
+
+### 2018-05-25 ~ Theo
+
+R13.28
+* Undefined CAD Object IDs
+	* If the CAD Id is undefined sets surface type as a default placeholder CAD Id
+	* Many small fixes
+* Duplicate Adjacent Space
+	* Add color coding
+	* Add two adjacent space select tags
+	* Many small fixes
 
 ### 2018-05-24 ~ Theo
 

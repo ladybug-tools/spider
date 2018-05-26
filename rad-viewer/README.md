@@ -116,6 +116,8 @@ There seems to be small errors here and there with openings. I have not yet iden
 
 Materials: https://github.com/NREL/Radiance/blob/master/doc/notes/materials
 
+Octree format
+* http://radsite.lbl.gov/radiance/refer/filefmts.pdf
 
 ### [Radiance Online ]( https://www.radiance-online.org/ )
 

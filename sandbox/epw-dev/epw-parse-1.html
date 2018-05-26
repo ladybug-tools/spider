@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-01-19" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "divHeader" >
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divContents" >
+
+			<p><button onclick=thing(); >button</button></p>
+
+		</div>
+
+	</div>
+
+	<div id = "divMenu" ></div>
+
+<script>
+
+	let txt;
+
+	let fields = [
+		'Year',
+		'Month',
+		'Day',
+		'Hour',
+		'Minute',
+		'Data Source and Uncertainty Flags',
+		'Dry Bulb Temperature',
+		'Dew Point Temperature',
+		'Relative Humidity',
+		'Atmospheric Station Pressure',
+		'Extraterrestrial Horizontal Radiation',
+		'Extraterrestrial Direct Normal Radiation',
+		'Horizontal Infrared Radiation Intensity',
+		'Global Horizontal Radiation',
+		'Direct Normal Radiation',
+		'Diffuse Horizontal Radiation',
+		'Global Horizontal Illuminance',
+		'Direct Normal Illuminance',
+		'Diffuse Horizontal Illuminance',
+		'Zenith Luminance',
+		'Wind Direction',
+		'Wind Speed',
+		'Total Sky Cover',
+		'Opaque Sky Cover',
+		'Visibility',
+		'Ceiling Height',
+		'Present Weather Observation',
+		'Present Weather Codes',
+		'Precipitable Water',
+		'Aerosol Optical Depth',
+		'Snow Depth',
+		'Days Since Last Snowfall',
+		'Albedo',
+		'Liquid Precipitation Depth',
+		'Liquid Precipitation Quantity'
+	];
+
+	init();
+
+	function init() {
+
+		const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		//const title = document.title;
+
+		divTitle.innerHTML =
+		`
+			<h1><a href="" >${title}</a></h1>
+			<p>${document.head.querySelector( '[name=description]' ).content }</p>
+		`;
+
+		txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+		divContents.innerHTML += txt;
+
+		let url = 'AUS_ACT.Canberra.949260_IWEC.epw';
+
+		const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+		requestFile( url );
+
+	}
+
+
+
+	function requestFile( url ) {
+
+		//		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function callback( xhr ) {
+
+			let response, json, lines;
+
+			response = xhr.target.response;
+			//console.log( 'response', response );
+
+			divContents.innerHTML = response;
+
+			//			json = JSON.parse( response );
+			//console.log( 'json', json );
+			// JSON.stringify( dxf, null, ' ' )
+			// or
+			//			lines = response.split(/\r\n|\n/);
+			lines = response.split( '\n' ).slice(8).map( function( line ) { return line.split( ',' ); } );
+
+			divContents.innerHTML = lines[ 0 ];
+			//			console.log( 'line 8',lines[ 8 ] );
+			//			console.log( 'length', lines.length );
+
+			//			lastMod = xhr.target.getResponseHeader ( "Last-Modified" );
+			//console.log( xhr.target.getResponseHeader ( "Last-Modified" ) );
+
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

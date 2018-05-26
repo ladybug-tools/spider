@@ -116,6 +116,7 @@
 	};
 
 
+
 	GBI.updateSelect = function( that, select, name ){
 		//console.log( 'sel', select );
 		//console.log( 'that', that );
@@ -134,6 +135,7 @@
 
 		}
 	}
+
 
 
 	GBI.setElementVisible = function( id, item ) {
@@ -188,7 +190,6 @@
 
 
 	////////// Show/Hide by Individual Elements
-
 
 	GBI.setCadObjectIdVisible = function( cadId ) {
 
@@ -288,7 +289,6 @@
 
 		const surface = HUD.userDataData;
 		//console.log( 'surface', surface );
-
 
 		const id = surface.id;
 
@@ -824,9 +824,8 @@
 	};
 
 
+
 	////////// Set Menu Panel Attributes
-
-
 
 	GBI.setElementIdAttributes = function ( id, item ) {
 		//console.log( 'item', item, '\nid', id );
@@ -1011,6 +1010,7 @@
 
 		HUD.removeTelltales();
 	}
+
 
 
 	//////////
@@ -1272,6 +1272,54 @@
 
 
 
+	GBI.getCadObjectsTypes = function() {
+		// combine with others
+		const surfaces = GBP.gbjson.Campus.Surface;
+		const cadIds = [];
+
+		for ( let surface of surfaces ) {
+
+
+			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
+
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+
+				continue;
+
+			}
+
+			const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
+
+			if ( !cadIds.includes( id ) ) {
+
+				cadIds.push( id );
+
+			}
+
+		}
+		//console.log( 'cadIds', cadIds );
+
+		cadIds.sort();
+
+		return cadIds;
+
+		/*
+		let options = '';
+
+		for ( let id of cadIds ){
+
+			options += '<option>' + id + '</option>';
+
+		}
+		//console.log( 'options', options );
+		return options;
+
+		*/
+
+	};
+
+
+
 	///////// Show / Hide
 
 	GBI.getPanelShowHide = function() {
@@ -1316,10 +1364,6 @@
 		</details>`;
 
 	};
-
-
-
-
 
 
 
