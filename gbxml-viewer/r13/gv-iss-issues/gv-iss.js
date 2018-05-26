@@ -469,6 +469,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	};
 
+
+
 	ISS.setPopupPanelDuplicateAdjacentSpaces = function(){
 
 		let txt = '';
@@ -1022,7 +1024,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}
 
-			surfaceJson.CADObjectId = surfaceJson.surfaceType;
+			surfaceJson.CADObjectIdCandidate = surfaceJson.surfaceType;
 
 		}
 		//console.log( 'ISS.CadTypes', ISS.CadTypes );
@@ -1192,7 +1194,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	ISS.setSurfaceCadType = function( name, type ) {
 
 		const surfaceJ = ISS.surfacesUndefinedId.find( element => element.Name === name );
-		surfaceJ.CADObjectId = type;
+		surfaceJ.CADObjectIdCandidate = type;
 
 	};
 
@@ -1218,7 +1220,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			if ( surface.addCADObjectId ) {
 
-				ISS.surfaceChanges.CADObjectId.push( {name: surface.Name, CADObjectId: surface.CADObjectId } );
+				ISS.surfaceChanges.CADObjectId.push( {name: surface.Name, CADObjectId: surface.CADObjectIdCandidate } );
 
 			}
 
