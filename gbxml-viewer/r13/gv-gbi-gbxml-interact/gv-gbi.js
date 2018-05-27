@@ -438,7 +438,7 @@
 
 		GBP.surfaceMeshes.visible = true;
 
-		surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id )
+		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id )
 
 		surfaceMesh.visible = !surfaceMesh.visible;
 

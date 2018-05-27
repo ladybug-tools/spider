@@ -412,8 +412,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.spaceNames = GBP.gbjson.Campus.Building.Space.map( item => item.Name );
 		//ISS.spaceIds = GBP.gbjson.Campus.Building.Space.map( item => { id: item.id } );
 
-		ISS.spaces = [];
-
+		ISS.spaces = []
 		for ( let space of GBP.gbjson.Campus.Building.Space ) {
 
 			const surfaces = [];
@@ -421,20 +420,18 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			for ( let surface of GBP.surfaceJson ) {
 
-				if ( surface.AdjacentSpaceId ) {
+				if ( let surface.AdjacentSpaceId ) {
 
 					if ( Array.isArray( surface.AdjacentSpaceId ) ) {
-
-						// to be simplified
 
 						if ( surface.AdjacentSpaceId[ 0 ].spaceIdRef === space.id || surface.AdjacentSpaceId[ 1 ].spaceIdRef  === space.id ) {
 
 							surfaces.push( surface );
 
-							for ( let coordinate of surface.PlanarGeometry.PolyLoop.CartesianPoint ) {
+							for ( coordinate of surface.PlanarGeometry.PolyLoop.CartesianPoint ) {
 
 								//console.log( 'cco', coordinate.Coordinate.join()) ;
-								const cc = coordinate.Coordinate.join();
+								cc = coordinate.Coordinate.join();
 
 								if ( coordinates.indexOf( cc ) < 0 ){
 									//console.log( 'ind', cc )  );
@@ -455,10 +452,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 							surfaces.push( surface );
 
-							for ( let coordinate of surface.PlanarGeometry.PolyLoop.CartesianPoint ) {
+							for ( coordinate of surface.PlanarGeometry.PolyLoop.CartesianPoint ) {
 								//console.log( 'cco', coordinate.Coordinate);
 
-								const cc = coordinate.Coordinate.join();
+								cc = coordinate.Coordinate.join();
 
 								if ( coordinates.indexOf( cc ) < 0 ) {
 
@@ -483,30 +480,32 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			ISS.spaces.push( { id: space.id, coordinates: coordinates.sort(), surfaces: surfaces, space: space } );
 
+
+
+
 		}
 
-		//console.log( 'ISS.spaces', ISS.spaces );
+		for ( surface of ISS.surfaceDuplicateAdjacentSpaces ) {
+		//surfaceX = ISS.surfaceDuplicateAdjacentSpaces[ 0 ];
 
-		for ( let surface of ISS.surfaceDuplicateAdjacentSpaces ) {
+			spacesFound = [];
 
-			surface.spacesFound = [];
+			for ( space of ISS.spaces ) {
 
-			for ( let space of ISS.spaces ) {
+				count = 0;
 
-				let count = 0;
+				for ( coordinate of surface.PlanarGeometry.PolyLoop.CartesianPoint ) {
 
-				for ( let coordinate of surface.PlanarGeometry.PolyLoop.CartesianPoint ) {
-
-					const cc = coordinate.Coordinate.join();
-					const index = space.coordinates.indexOf( cc );
+					cc = coordinate.Coordinate.join();
+					index = space.coordinates.indexOf( cc );
 
 					if ( index >= 0  ) {
 
 						count ++;
 
-						if ( !surface.spacesFound.find ( item => item.id === space.id ) && count > 1 ) { //
+						if ( !spacesFound.find ( item => item.id === space.id ) && count > 1 ) {
 
-							surface.spacesFound.push( space );
+							spacesFound.push( space );
 							//console.log( space.coordinates[ index ], cc );
 
 						}
@@ -517,15 +516,14 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}
 
-			if ( surface.spacesFound.length > 2 ) {
+			if ( spacesFound.length ) {
 
-				//console.log( 'surface', surface.AdjacentSpaceId, 'surface.spacesFound', surface.spacesFound );
-
-			}
+				console.log( 'surface', surface.AdjacentSpaceId, 'spacesFound', spacesFound ); }
 
 		}
 
 
+		console.log( 'ISS.spaces', ISS.spaces );
 
 		ISSdivData.innerHTML = 'ISS.spaces ' + ISS.spaces.length;
 
@@ -548,9 +546,9 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=ISSdivDuplicateAdjacentSpaces ></div>
 
 			<p>
-				<button onclick=onchange=ISS.setPopupPanelDuplicateAdjacentSpaces(this,"${attribute}"); >Update changes</button>
+				<button onclick=onchange=ISS.setPopupPanelDuplicateCoordinates(this,"${attribute}"); >Update changes</button>
 
-				<button onclick=ISS.surfaceChanges.editDuplicateAdjacentSpaces=[];ISS.setPopupPanelDuplicateAdjacentSpaces(this); >Clear changes</button>
+				<button onclick=ISS.surfaceChanges.deleteDuplicateSurfaces=[];ISS.setChangesDuplicateSurfaces(this); >Clear changes</button>
 
 				<button onclick=ISS.setPopupDuplicateAdjacentSpacesCheck(false); >un-check all</button>
 
@@ -559,7 +557,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			</p>
 
 			<p>
-				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.editDuplicateAdjacentSpaces) >edit selected surfaces</button>
+				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.deleteDuplicateSurfaces) >delete selected surfaces</button>
 
 				<button onclick >Save changes to file</button>
 			</p>
@@ -571,7 +569,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<textArea id=ISStxtDuplicateAdjacentSpaces style="height:300px;width:100%;" ></textArea>
 
 			<p>
-				<button onclick=GBI.surfaceChanges.editDuplicateAdjacentSpaces.push(...ISS.surfaceChanges.editDuplicateAdjacentSpaces) >Update save changes file</button>
+				<button onclick=GBI.surfaceChanges.deleteDuplicateSurfaces.push(...ISS.surfaceChanges.deleteDuplicateSurfaces) >Update save changes file</button>
 
 				<button onClick=butSaveChanges.click() > View current changes</button>
 			</p>
@@ -584,7 +582,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.setPopupPanelDuplicateAdjacentSpaces();
 
 	};
-
 
 
 
@@ -617,124 +614,30 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}
 
+
+			//console.log( 'check', check );
 			color = color === 'yellow' ? 'pink' : 'yellow';
 
-			const options1 = ISS.spaces.map( item =>
-				surface.AdjacentSpaceId[0].spaceIdRef === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
+			//surface.AdjacentSpaceId[0].spaceIdRef
+
+			const options = ISS.spaceIds.map( item =>
+				surface.AdjacentSpaceId[0].spaceIdRef === item ? `<option selected >${item}</option>` : `<option>${item}</option>`
 			).join( '' );
 
-			const options2 = ISS.spaces.map( item =>
-				surface.AdjacentSpaceId[1].spaceIdRef === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
-			).join( '' );
-
-			//console.log( 'surface.spacesFound', surface.spacesFound );
-
-			const buttons = surface.spacesFound.map( item =>
-				`<button onclick=ISS.setSpaceAndSurfaceVisible("${item.id}","${surface.id}"); >${item.id}</button>`
-			).join( ' ' );
-
-
-			buts = ISS.getAttributeSurfaceId( surface.id );
+			//console.log( 'surface.AdjacentSpaceId[0].spaceIdRef', surface.AdjacentSpaceId[0].spaceIdRef );
 
 			txt +=
 			`<div style=background-color:${color};padding-bottom:0.5rem; >
-				<input type=checkbox onchange=ISS.setEditDuplicateAdjacentSpaces(this,"${surface.Name}"); ${check}>
-				<span style=display:inline-block;width:15rem; >
-				name: ${surface.Name} </span>
-				id: ${buts} - type: ${surface.surfaceType}
-				<div style=margin-left:2rem;padding-bottom:0.5rem; >space 1 <select >${options1}</select> space 2 <select>${options2}</select></div>
-				<div style=margin-left:2rem; >${buttons}</div>
+				<input type=checkbox onchange=ISS.setChangesDuplicateSurfaces(this,"${surface.Name}"); ${check}>
+				<span style=display:inline-block;width:15rem; >name: ${surface.Name} </span> id: ${surface.id} - type: ${surface.surfaceType}
+				<div style=margin-left:2rem; >space 1 <select >${options}</select> space 2 <select>${options}</select></div>
 			</div>`;
-			}
 
+		}
 
 		ISSdivDuplicateAdjacentSpaces.innerHTML = txt;
 
 		ISStxtDuplicateAdjacentSpaces.value = JSON.stringify( ISS.surfaceChanges.editDuplicateAdjacentSpaces, null, ' ' );
-
-	};
-
-
-
-	ISS.setEditDuplicateAdjacentSpaces = function( checkbox, name ) {
-
-
-		//console.log( 'that', that );
-
-		if ( checkbox.checked === false ){
-
-			var index = ISS.surfaceChanges.editDuplicateAdjacentSpaces.indexOf( name );
-			if ( index !== -1 ) ISS.surfaceChanges.editDuplicateAdjacentSpaces.splice(index, 1);
-
-		} else {
-
-			if ( name ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces.push( { name: name } ); }
-
-		}
-
-		ISStxtDuplicateAdjacentSpaces.value = JSON.stringify( ISS.surfaceChanges.editDuplicateAdjacentSpaces, null, ' ' );
-	}
-
-
-
-	ISS.setSpaceAndSurfaceVisible = function( spaceId, surfaceId ) {
-		//console.log( 'spaceId', spaceId );
-		console.log( 'surfaceId', surfaceId );
-
-		GBP.surfaceEdges.visible = true;
-		GBP.surfaceMeshes.visible = true;
-		GBP.surfaceOpenings.visible = false;
-
-		for ( let child of GBP.surfaceMeshes.children ) {
-
-			child.visible = false;
-
-			const adjacentSpaceId = child.userData.data.AdjacentSpaceId;
-			//console.log( 'adjacentSpaceId', adjacentSpaceId );
-
-			if ( adjacentSpaceId && adjacentSpaceId.spaceIdRef && spaceId === adjacentSpaceId.spaceIdRef ) {
-
-				child.visible = true;
-
-			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
-
-				if ( spaceId === adjacentSpaceId[ 0 ].spaceIdRef || spaceId === adjacentSpaceId[ 1 ].spaceIdRef ) {
-
-					child.visible = true;
-
-				}
-
-			}
-
-
-			if ( child.userData.data.id === surfaceId ) {
-
-				child.visible = true;
-				child.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId;
-
-
-			}
-
-		}
-
-		ISS.setPopupPanelDuplicateAdjacentSpaces();
-
-
-	};
-
-
-
-	ISS.getAttributeSurfaceId = function( id ) {
-
-		const txt =
-		`
-			<span class=attributeTitle >id</span>:
-			<button onclick=GBI.setSurfaceVisible("${id}"); >${id}</button>
-			<button onclick=GBI.setSurfaceZoom("${id}"); >&#8981;</button>
-			<button onclick=GBI.setSurfaceVisibleToggle("${id}"); ><img src="../assets/eye.png" height=12></button>
-		`;
-
-		return txt;
 
 	};
 
@@ -1007,7 +910,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.checkDuplicateCoordinatesAdjacent = function() {
+	ISS.checkDuplicateAdjacent = function() {
 
 		ISS.surfaceChanges.deleteDuplicateSurfaces = [];
 		ISS.duplicateCoordinates.forEach( item => item.ISSdeleteDuplicateSurface = item.ISSDuplicateAdjacentSpace ? true : '' );
