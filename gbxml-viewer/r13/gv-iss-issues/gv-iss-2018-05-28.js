@@ -189,7 +189,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
-	////////// Metadata
+	//////////
 
 	ISS.setPanelMetadataIssues = function( target ) {
 
@@ -314,11 +314,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	////////// Duplicate Adjacent Spaces  R13
+	////////// R13
 
 	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) { // R13
 
-		surfaces = GBP.gbjson.Campus.Surface.slice();
+		surfaces = GBP.gbjson.Campus.Surface;
 		let count = 0;
 		let contents = '';
 		ISS.surfaceDuplicateAdjacentSpaces = [];
@@ -359,7 +359,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		target.innerHTML =
 
-		`<details>
+		`<details open >
 
 			<summary id = "ISSsumSurfacesDuplicateAdjacentSpaces2" >R13 Duplicate Adjacent Space &raquo; ` + ISS.surfaceDuplicateAdjacentSpaces.length + ` found</summary>
 
@@ -377,7 +377,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<p>
 
-			<button onclick=ISS.setPopupSurfacesDuplicateAdjacentSpaces() title="Yes, we can. Make CAD fun again." >Fix duplicate adjacent spaces</button>
+			<button onclick=ISS.setPopupSurfacesDuplicateAdjacentSpaces() title="Yes, we can. Make CAD fun again." >Fix these issues. Now!</button>
 
 			</p>
 
@@ -404,14 +404,13 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 		ISS.setPopupPanelSpaces();
-
 	};
-
 
 
 	ISS.setPopupPanelSpaces = function() {
 
 		ISS.spaceNames = GBP.gbjson.Campus.Building.Space.map( item => item.Name );
+		//ISS.spaceIds = GBP.gbjson.Campus.Building.Space.map( item => { id: item.id } );
 
 		ISS.spaces = [];
 
@@ -505,16 +504,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 						count ++;
 
-						const spaceId = surface.spacesFound.find ( item => item.id === space.id );
+						if ( !surface.spacesFound.find ( item => item.id === space.id ) && count > 1 ) { //
 
-						if ( !spaceId ) { //
-
-							surface.spacesFound.push( { id: space.id, count: 1 } );
-
-						} else {
-
-							spaceId.count++;
-							//console.log( 'spaceId', spaceId );
+							surface.spacesFound.push( space );
+							//console.log( space.coordinates[ index ], cc );
 
 						}
 
@@ -524,35 +517,33 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			}
 
-			const spacesFound = surface.spacesFound.filter ( item => item.count > 2 );
+			if ( surface.spacesFound.length > 2 ) {
 
-			//console.log( 'spacesFound', spacesFound );
-
-			if ( spacesFound.length > 1 ) {
-
-//				surface.AdjacentSpaceId[ 0 ].spaceIdRef = spacesFound[ 0 ].id;
-//				surface.AdjacentSpaceId[ 1 ].spaceIdRef = spacesFound[ 1 ].id;
-				surface.editDuplicateAdjacentSpaces = true;
+				//console.log( 'surface', surface.AdjacentSpaceId, 'surface.spacesFound', surface.spacesFound );
 
 			}
 
 		}
 
-		//ISSdivData.innerHTML = 'ISS.spaces ' + ISS.spaces.length;
+
+
+		ISSdivData.innerHTML = 'ISS.spaces ' + ISS.spaces.length;
 
 	};
 
 
 
+
 	ISS.setPopupSurfacesDuplicateAdjacentSpaces = function() {
+
+		//ISS.spaceNameOptions = ISS.spaceNames.map( item => `<option>${item}</option>` ).join( '' );
+		//console.log( 'ISS.spaceNameOptions', ISS.spaceNameOptions );
 
 		divPopUpContents.innerHTML =
 		`
 			<h3>Edit Duplicate Adjacent Spaces</h3>
 
-			<p><small>
-				Surfaces with two adjacent spaces pointing to identical space ids.
-			</small></p>
+			<p><i>Work-in-progress. Nothing working here yet. We need to establish rules of operation.</i></p>
 
 			<div id=ISSdivDuplicateAdjacentSpaces ></div>
 
@@ -561,22 +552,22 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				<button onclick=ISS.surfaceChanges.editDuplicateAdjacentSpaces=[];ISS.setPopupPanelDuplicateAdjacentSpaces(this); >Clear changes</button>
 
-				<button onclick=ISS.setPopupDuplicateAdjacentSpacesCheck(false); >Un-check all</button>
+				<button onclick=ISS.setPopupDuplicateAdjacentSpacesCheck(false); >un-check all</button>
 
-				<button onclick=ISS.setPopupDuplicateAdjacentSpacesCheck(true); >Check all</button>
+				<button onclick=ISS.setPopupDuplicateAdjacentSpacesCheck(true); >check all</button>
 
 			</p>
 
 			<p>
-				<button onclick=ISS.updateSurfacesDuplicateAdjacentSpaces(ISS.surfaceChanges.editDuplicateAdjacentSpaces) >Edit selected surfaces</button>
+				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.editDuplicateAdjacentSpaces) >edit selected surfaces</button>
 
 				<button onclick >Save changes to file</button>
 			</p>
 
 			<hr>
 
-			<h3>Save changes file for duplicate surfaces</h3>
-			<p><i>values below should start to be correct quite soon<i></p>
+			<h3>save changes file for duplicate surfaces</h3>
+
 			<textArea id=ISStxtDuplicateAdjacentSpaces style="height:300px;width:100%;" ></textArea>
 
 			<p>
@@ -593,6 +584,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.setPopupPanelDuplicateAdjacentSpaces();
 
 	};
+
 
 
 
@@ -621,52 +613,37 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			if ( check ) {
 
 				ISS.surfaceChanges.editDuplicateAdjacentSpaces.push( {
-					name: surface.Name, spaceId1: surface.AdjacentSpaceId[0].spaceIdRef, spaceId2: surface.AdjacentSpaceId[ 1 ].spaceIdRef
-				} );
+					name: surface.Name, spaceId1: surface.AdjacentSpaceId[0].spaceIdRef, spaceId2: surface.AdjacentSpaceId[ 1 ].spaceIdRef } );
 
 			}
 
 			color = color === 'yellow' ? 'pink' : 'yellow';
 
-			const spacesFound = surface.spacesFound.filter ( item => item.count > 2 );
-			//console.log( 'spacesFound', spacesFound[ 0 ].id);
-
 			const options1 = ISS.spaces.map( item =>
-				spacesFound[ 0 ].id === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
+				surface.AdjacentSpaceId[0].spaceIdRef === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
 			).join( '' );
 
-			spacesFound1 = spacesFound.length > 1 ? spacesFound[ 1 ] : spacesFound[ 0 ];
-
 			const options2 = ISS.spaces.map( item =>
-				spacesFound1.id === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
+				surface.AdjacentSpaceId[1].spaceIdRef === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
 			).join( '' );
 
 			//console.log( 'surface.spacesFound', surface.spacesFound );
 
-			const buttsSurface = ISS.getButtonsSurfaceId( surface.id );
+			const buttons = surface.spacesFound.map( item =>
+				`<button onclick=ISS.setSpaceAndSurfaceVisible("${item.id}","${surface.id}"); >${item.id}</button>`
+			).join( ' ' );
 
-			//const buttsSpaces = surface.spacesFound.map( item =>
-			//	`<button onclick=ISS.setSpaceAndSurfaceVisible("${item.id}","${surface.id}"); >${item.id}</button>`
-			//).join( ' ' );
 
-			let buttsSpaces = '';
-
-			for ( space of surface.spacesFound ) {
-
-				const txt = space.count > 2 ? 'style=color:red;font-style:italic;font-weight:bold;' : '';
-
-				buttsSpaces += ` <button onclick=ISS.setSpaceAndSurfaceVisible("${space.id}","${surface.id}"); ${txt} >${space.id}</button>`
-
-			}
+			buts = ISS.getAttributeSurfaceId( surface.id );
 
 			txt +=
 			`<div style=background-color:${color};padding-bottom:0.5rem; >
 				<input type=checkbox onchange=ISS.setEditDuplicateAdjacentSpaces(this,"${surface.Name}"); ${check}>
 				<span style=display:inline-block;width:15rem; >
 				name: ${surface.Name} </span>
-				id: ${buttsSurface} type: ${surface.surfaceType}
+				id: ${buts} - type: ${surface.surfaceType}
 				<div style=margin-left:2rem;padding-bottom:0.5rem; >space 1 <select >${options1}</select> space 2 <select>${options2}</select></div>
-				<div style=margin-left:2rem; >${buttsSpaces}</div>
+				<div style=margin-left:2rem; >${buttons}</div>
 			</div>`;
 			}
 
@@ -681,6 +658,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setEditDuplicateAdjacentSpaces = function( checkbox, name ) {
 
+
 		//console.log( 'that', that );
 
 		if ( checkbox.checked === false ){
@@ -690,14 +668,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
-			if ( name ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces.push( {
-				name: surface.Name, spaceId1: surface.AdjacentSpaceId[0].spaceIdRef, spaceId2: surface.AdjacentSpaceId[ 1 ].spaceIdRef
-			 } ); }
+			if ( name ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces.push( { name: name } ); }
 
 		}
 
 		ISStxtDuplicateAdjacentSpaces.value = JSON.stringify( ISS.surfaceChanges.editDuplicateAdjacentSpaces, null, ' ' );
-
 	}
 
 
@@ -749,11 +724,27 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
+	ISS.getAttributeSurfaceId = function( id ) {
+
+		const txt =
+		`
+			<span class=attributeTitle >id</span>:
+			<button onclick=GBI.setSurfaceVisible("${id}"); >${id}</button>
+			<button onclick=GBI.setSurfaceZoom("${id}"); >&#8981;</button>
+			<button onclick=GBI.setSurfaceVisibleToggle("${id}"); ><img src="../assets/eye.png" height=12></button>
+		`;
+
+		return txt;
+
+	};
+
+
+
 	///////// R12
 
 	ISS.getPanelSurfacesDuplicateAdjacentSpaces = function() { // R12
 
-		const surfaces = GBP.gbjson.Campus.Surface;
+		surfaces = GBP.gbjson.Campus.Surface;
 		let count = 0;
 		let contents = '';
 		ISS.surfaceAdjacentsDuplicates = [];
@@ -834,7 +825,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	////////// Duplicate Coordinates  R13
+	////////// R13
 
 	ISS.setPanelDuplicateCoordinates = function( target ) { //R13
 
@@ -906,7 +897,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdivDuplicateCoordinates2 ></div>
 
-			<p><button onclick=ISS.setPopupDuplicateCoordinates(); title="Starting to work!" >Fix duplicate surfaces</button></p>
+			<p><button onclick=ISS.setPopupDuplicateCoordinates(); title="Starting to work!" >Delete duplicate surfaces</button></p>
 
 			<hr>
 
@@ -937,10 +928,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		`
 			<h3>Delete Surfaces with Duplicate Coordinates</h3>
 
-			<p><small>
-				Two surfaces with the same coordinates
-			</small></p>
-
 			<div id=ISSdivDuplicateSurfaces ></div>
 
 			<p>
@@ -951,16 +938,18 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			</p>
 
 			<p>
-				<button onclick=ISS.checkNone(); >Un-check all</button>
+				<button onclick=ISS.checkNone(); >un-check all</button>
 
-				<button onclick=ISS.checkFirst(); >Check all first</button>
+				<button onclick=ISS.checkFirst(); >check all first</button>
 
-				<button onclick=ISS.checkOthers(); >Check all others</button>
+				<button onclick=ISS.checkOthers(); >check all others</button>
+
+				<button onclick=ISS.checkDuplicateAdjacent(); >check duplicate adjacent spaces</button>
 
 			</p>
 
 			<p>
-				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.deleteDuplicateSurfaces) >Delete selected surfaces</button>
+				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.deleteDuplicateSurfaces) >delete selected surfaces</button>
 
 				<button onclick=GBI.saveFile(); >Save changes to file</button>
 			</p>
@@ -974,7 +963,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<p>
 				<button onclick=GBI.surfaceChanges.deleteDuplicateSurfaces.push(...ISS.surfaceChanges.deleteDuplicateSurfaces) >Update save changes file</button>
 
-				<button onClick=butSaveChanges.click() >View current changes</button>
+				<button onClick=butSaveChanges.click() > View current changes</button>
 			</p>
 
 		`;
@@ -1052,13 +1041,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				}
 				//console.log( 'check', check );
 
-				const butts = ISS.getButtonsSurfaceId( surface.id );
-
 				txt +=
 				`<div style=background-color:${color}; >
 					<input type=checkbox onchange=ISS.setChangesDuplicateSurfaces(this,"${surface.Name}"); ${check} >
-					<span style=display:inline-block;width:15rem; >name: ${surface.Name} </span>
-						id: ${butts} - type: ${surface.surfaceType}
+					<span style=display:inline-block;width:15rem; >name: ${surface.Name} </span> id: ${surface.id} - type: ${surface.surfaceType}
 				</div>`;
 
 			}
@@ -1243,7 +1229,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	////////// Undefined CAD ID
+	//////////
 
 	ISS.setPanelSurfacesUndefinedCadId = function( target ) {
 
@@ -1317,9 +1303,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		`
 			<h3>Fix Surfaces with undefined CAD object IDs</h3>
 
-			<p><small>Surfaces with undefined CAD Object ID. The default fix is to add a CAD Id that is the same as the surface type</small></p>
-
-
 			<div id=ISSdivCADObjectId ></div>
 
 			<p>
@@ -1328,28 +1311,23 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				<button onclick=ISS.setPopupUndefinedIdCheck(true); >check all</button>
 			</p>
 
-			<p>Need good test case: Select all of this type: <select>${ISS.CadTypesOptions}</select></p>
+			<p>Coming soon: Select all of this type: <select>${ISS.CadTypesOptions}</select></p>
 
-			<p>Need good test case: Edit selected items to <select>${ISS.CadTypesOptions}</select></p>
+			<p>Coming soon: Edit selected items to <select>${ISS.CadTypesOptions}</select></p>
 
 			<p>
 
 				<button onclick=ISS.surfaceChanges.CADObjectId=[];ISS.setChangesCadObjectIds(); >Update changes</button>
 
-				<button onclick=ISS.updateSurfaceCADObjectIds(ISS.surfaceChanges.CADObjectId) >Edit selected surfaces</button>
+				<button onclick=ISS.updateSurfaceCADObjectIds(ISS.surfaceChanges.CADObjectId) >Update selected surfaces</button>
 
-				<button onclick=GBI.saveFile(); >Save edits to file</button>
+				<button onclick=GBI.saveFile(); >Save changes to file</button>
 
 			</p>
 
 			<h3>save changes file for surfaces with undefined CAD object IDs</h3>
 			<textArea id=ISStxtSurfacesUndefinedCadId style="height:300px;width:100%;" ></textArea>
-
-			<p>
-				<button onclick=GBI.surfaceChanges.CADObjectId=ISS.surfaceChanges.CADObjectId >Update save changes file</button>
-
-				<button onClick=butSaveChanges.click(); > View current changes</button>
-			</p>
+			<button onclick=GBI.surfaceChanges.CADObjectId=ISS.surfaceChanges.CADObjectId >Update save changes file</button>
 		`;
 
 		divPopUp.style.display = 'block';
@@ -1413,17 +1391,14 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			}
 			*/
 
-			const butts = ISS.getButtonsSurfaceId( surface.id );
-
 			txt +=
 			`<div style=background-color:${color};padding-bottom:0.5rem >
 				<input type=checkbox onchange=ISS.setCheckCadObjectIds("${surface.Name}",this); ${check} >
 
 				<span style=display:inline-block;width:15rem; >${surface.Name}</span>
-				id: ${butts} type: ${surface.surfaceType}<br>
-				<label for=cadId${count} style=display:inline-block;margin-left:2rem; title="Click to select and edit" >CAD Id to add:</label>
-				<input onClick=this.select(); onChange=ISS.setSurfaceCadType("${surface.Name}",this.value);
-					list=cadGroups id=cadId${count++} value="${surface.surfaceType}" title="Click to select and edit" >
+				id: ${surface.id} - type: ${surface.surfaceType}<br>
+				<label for=cadId${count} style=display:inline-block;margin-left:2rem; title="more suitable options coming soon" >CAD id to add:</label>
+				<input onClick=this.select(); onChange=ISS.setSurfaceCadType("${surface.Name}",this.value); list=cadGroups id=cadId${count++} value="${surface.surfaceType}" title="more suitable options coming soon" >
 				<datalist id="cadGroups">${ISS.CadTypesOptions}</datalist>
 			</div>`;
 
@@ -1474,50 +1449,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISStxtSurfacesUndefinedCadId.value = JSON.stringify( ISS.surfaceChanges.CADObjectId, null, ' ' );
 
-
-	};
-
-
-
-	ISS.updateSurfaceCADObjectIds = function( idsArray ){
-
-		console.log( 'idsArray', idsArray );
-
-		//names = idsArray.map( item => item.name ).join( '\n' );
-
-		//console.log( 'names', names );
-
-		//const proceed = alert( 'Coming soon!\nUpdate surfaces: \n ' + names + '?' );
-		surfacesGbxml = GBP.gbxml.getElementsByTagName( "Surface" );
-
-		for ( item of idsArray ) {
-
-			surfaceJson = GBP.surfaceJson.find( element => element.Name === item.name );
-
-			//console.log( 'surfaceJson', surfaceJson);
-
-			if ( surfaceJson ) {
-
-				id =surfaceJson.id;
-				//console.log( 'id', id );
-
-				surfaceXml = surfacesGbxml[ id ];
-				surfaceXml.setAttribute( "CADObjectId", item.CADObjectId );
-
-				console.log( 'id', id,'\nsurface to edit', surfaceXml );
-
-
-				// edit gbjson
-				surfaceJson[ "CADObjectId" ] = item.CADObjectId;
-
-				// edit three.js
-				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
-				surfaceMesh.userData.data.CADObjectId = item.CADObjectId;
-
-			}
-
-
-		}
 
 	};
 
@@ -2202,17 +2133,45 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.getButtonsSurfaceId = function( id ) {
+	ISS.updateSurfaceCADObjectIds = function( idsArray ){
 
-		const txt =
-		`
-			<span class=attributeTitle >id</span>:
-			<button onclick=GBI.setSurfaceVisible("${id}"); >${id}</button>
-			<button onclick=GBI.setSurfaceZoom("${id}"); >&#8981;</button>
-			<button onclick=GBI.setSurfaceVisibleToggle("${id}"); ><img src="../assets/eye.png" height=12></button>
-		`;
+		console.log( 'idsArray', idsArray );
 
-		return txt;
+		//names = idsArray.map( item => item.name ).join( '\n' );
+
+		//console.log( 'names', names );
+
+		//const proceed = alert( 'Coming soon!\nUpdate surfaces: \n ' + names + '?' );
+		surfacesGbxml = GBP.gbxml.getElementsByTagName( "Surface" );
+
+		for ( item of idsArray ) {
+
+			surfaceJson = GBP.surfaceJson.find( element => element.Name === item.name );
+
+			//console.log( 'surfaceJson', surfaceJson);
+
+			if ( surfaceJson ) {
+
+				id =surfaceJson.id;
+				//console.log( 'id', id );
+
+				surfaceXml = surfacesGbxml[ id ];
+				surfaceXml.setAttribute( "CADObjectId", item.CADObjectId );
+
+				console.log( 'id', id,'\nsurface to edit', surfaceXml );
+
+
+				// edit gbjson
+				surfaceJson[ "CADObjectId" ] = item.CADObjectId;
+
+				// edit three.js
+				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
+				surfaceMesh.userData.data.CADObjectId = item.CADObjectId;
+
+			}
+
+
+		}
 
 	};
 

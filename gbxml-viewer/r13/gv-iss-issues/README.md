@@ -66,6 +66,18 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+### 2018-05-28 ~ Thep
+
+R13.29
+* Undefined CAD Object IDs
+	* Add select. zoom and toggle buttons
+	* Several minor adds and fixes
+* Duplicate Adjacent Space
+	* Most suitable fixes selected automatically
+	* Check boxes with suitable fixes selected automatically
+
+
+
 ### 2018-05-25 ~ Theo
 
 R13.28
