@@ -530,8 +530,8 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			if ( spacesFound.length > 1 ) {
 
-//				surface.AdjacentSpaceId[ 0 ].spaceIdRef = spacesFound[ 0 ].id;
-//				surface.AdjacentSpaceId[ 1 ].spaceIdRef = spacesFound[ 1 ].id;
+				//surface.AdjacentSpaceId[ 0 ].spaceIdRef = spacesFound[ 0 ].id;
+				//surface.AdjacentSpaceId[ 1 ].spaceIdRef = spacesFound[ 1 ].id;
 				surface.editDuplicateAdjacentSpaces = true;
 
 			}
