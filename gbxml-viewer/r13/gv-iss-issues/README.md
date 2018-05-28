@@ -75,7 +75,7 @@ R13.28
 * Duplicate Adjacent Space
 	* Add color coding
 	* Add two adjacent space select tags
-	* Add buttuns to elect surface, zoom and toggle
+	* Add buttons to elect surface, zoom and toggle
 	* Add buttons to select and display adjacent spaces
 	* Many small fixes
 
