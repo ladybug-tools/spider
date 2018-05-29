@@ -24,7 +24,7 @@ This is an ongoing learning and development effort. Please feel free to request 
 * Adds capability to read multiple files from a local folder
 	* Files must be set up as or as if exported from Honeybee - see image below
 
-<img src='images/rad-viewer-folder.png' height=300 >
+<img src='https://www.ladybug.tools/spider/images/rad-viewer-folder.png' height=300 >
 
 ## full screen: [rad viewer 11]( https://rawgit.com/ladybug-tools/spider/master/rad-viewer/r11/rad-viewer.html )
 

@@ -101,6 +101,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<div id=ISSdetPanelAdjacentSpaceInvalid ></div>
 
+			<div id=ISSdetPanelInclusions ></div>
+
+			<div id=ISSdetGeneralCheck ></div>
+
 			<hr>
 
 		</details>`;
@@ -135,15 +139,98 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.setPanelAdjacentSpaceInvalid( ISSdetPanelAdjacentSpaceInvalid );
 
-		ISS.setGeneralCheck();
+		ISS.setGeneralCheck( ISSdetGeneralCheck );
+
+
 
 	};
 
 
 
-	ISS.setGeneralCheck = function() {
+	ISS.setGeneralCheck = function( target ) {
 
-		let txt = '';
+		target.innerHTML =
+		`<details>
+
+			<summary>General Check</summary>
+
+			<p>More experiments</p>
+
+			<p><button onclick=ISS.setCheckInclusions(); >Inclusion check</button></p>
+
+			<p id=pInclusions ></p>
+
+			<p><button onclick=ISS.setPopupGeneralCheck(); >General check</button></p>
+
+		</details>`;
+
+	};
+
+
+	ISS.setCheckInclusions = function() {
+
+		//arr =  GBP.surfaceMeshes.children.slice();
+		//console.log( '', arr );
+
+		const inclusions = [];
+
+		for ( let surface of GBP.surfaceMeshes.children ) {
+
+			surface.geometry.computeBoundingBox();
+
+			for ( let surface2 of GBP.surfaceMeshes.children ) {
+
+				surface2.geometry.computeBoundingBox();
+
+				if ( surface.uuid != surface2.uuid &&  surface.geometry.boundingBox.containsBox( surface2.geometry.boundingBox ) ) {
+
+					//console.log( '', surface.geometry.vertices, surface2.geometry.vertices );
+					//console.log( '', surface.userData.data.surfaceType, surface2.userData.data.surfaceType );
+					//console.log( '', surface.userData.data.Name, ' ', surface2.userData.data.Name );
+
+					inclusions.push ( {s1: surface, s2: surface2 } );
+
+				}
+
+			}
+
+		}
+
+		pInclusions.innerHTML = 'inclusions found: ' + inclusions.length;
+
+
+		let inclusionText = '';
+
+		for ( inclusion of inclusions ) {
+
+			const butts1 = ISS.getButtonsSurfaceId( inclusion.s1.userData.data.id);
+			const butts2 = ISS.getButtonsSurfaceId( inclusion.s2.userData.data.id);
+
+			inclusionText +=
+			`
+			${butts1} ${inclusion.s1.userData.data.Name}
+			${butts2} ${inclusion.s1.userData.data.Name}
+			<br>`;
+
+		}
+		console.log( 'inclusion', inclusion );
+
+		divPopUpContents.innerHTML =
+		`
+			<h3>Inclusions</h3>
+			<div>${inclusionText}</div>
+		`;
+
+		divPopUp.style.display = 'block';
+		window.scrollTo( 0, 0 );
+
+	};
+
+
+
+	ISS.setPopupGeneralCheck = function() {
+
+		let txt = 'nothing here';
 		lines = GBP.gbxml.innerHTML.split(/\r\n|\n/);
 
 		for ( i = 0; i< lines.length; i++ ) {
@@ -170,7 +257,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 		}
-		//console.log( 'txt', txt );
+		console.log( 'txt', txt );
 
 		if ( txt !== '' ) {
 
@@ -183,11 +270,11 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			divPopUp.style.display = 'block';
 			window.scrollTo( 0, 0 );
 
-			ISSdivCheckText.innerText = '****\n' + txt;
+			ISSdivCheckText.innerText = '***\n' + txt;
+
 		}
 
-	};
-
+	}
 
 	////////// Metadata
 
@@ -306,7 +393,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
-			ISStxtAttributesMissing.value = ''
+			ISStxtAttributesMissing.value = '';
 
 		}
 
@@ -488,6 +575,15 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		//console.log( 'ISS.spaces', ISS.spaces );
 
+		ISS.setAdjDupSpcFixable();
+
+	};
+
+
+
+	ISS.setAdjDupSpcFixable = function() {
+
+
 		for ( let surface of ISS.surfaceDuplicateAdjacentSpaces ) {
 
 			surface.spacesFound = [];
@@ -526,19 +622,18 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			const spacesFound = surface.spacesFound.filter ( item => item.count > 2 );
 
-			//console.log( 'spacesFound', spacesFound );
 
 			if ( spacesFound.length > 1 ) {
 
-				//surface.AdjacentSpaceId[ 0 ].spaceIdRef = spacesFound[ 0 ].id;
-				//surface.AdjacentSpaceId[ 1 ].spaceIdRef = spacesFound[ 1 ].id;
 				surface.editDuplicateAdjacentSpaces = true;
 
 			}
 
+			surface.spacesAdjFound = spacesFound.filter ( item => item.count > 2 );
+			surface.spacesAdjFound[ 1 ] =  surface.spacesAdjFound.length > 1 ? spacesFound[ 1 ] : spacesFound[ 0 ];
+
 		}
 
-		//ISSdivData.innerHTML = 'ISS.spaces ' + ISS.spaces.length;
 
 	};
 
@@ -557,20 +652,24 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<div id=ISSdivDuplicateAdjacentSpaces ></div>
 
 			<p>
+				<!--
 				<button onclick=onchange=ISS.setPopupPanelDuplicateAdjacentSpaces(this,"${attribute}"); >Update changes</button>
 
 				<button onclick=ISS.surfaceChanges.editDuplicateAdjacentSpaces=[];ISS.setPopupPanelDuplicateAdjacentSpaces(this); >Clear changes</button>
+				-->
 
-				<button onclick=ISS.setPopupDuplicateAdjacentSpacesCheck(false); >Un-check all</button>
+				<button onclick=ISS.setPopupDupAdjSpcCheckbox(false); >Un-check all</button>
 
-				<button onclick=ISS.setPopupDuplicateAdjacentSpacesCheck(true); >Check all</button>
+				<button onclick=ISS.setPopupDupAdjSpcCheckbox(true); >Check all</button>
+
+				<button onclick=ISS.setPopupDupAdjSpcCheckboxFixable(); >Check fixable by rule</button>
 
 			</p>
 
 			<p>
-				<button onclick=ISS.updateSurfacesDuplicateAdjacentSpaces(ISS.surfaceChanges.editDuplicateAdjacentSpaces) >Edit selected surfaces</button>
+				<button onclick=ISS.updateDupAdjSpc(ISS.surfaceChanges.editDuplicateAdjacentSpaces) >Edit selected surfaces</button>
 
-				<button onclick >Save changes to file</button>
+				<button onclick=GBI.saveFile(); >Save changes to file</button>
 			</p>
 
 			<hr>
@@ -596,7 +695,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
-	ISS.setPopupDuplicateAdjacentSpacesCheck = function( bool ) {
+	ISS.setPopupDupAdjSpcCheckbox = function( bool ) {
 
 		ISS.surfaceChanges.editDuplicateAdjacentSpaces= [];
 		ISS.surfaceDuplicateAdjacentSpaces.forEach( item => item.editDuplicateAdjacentSpaces = bool );
@@ -606,48 +705,54 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
+	ISS.setPopupDupAdjSpcCheckboxFixable = function() {
+
+		ISS.surfaceChanges.editDuplicateAdjacentSpaces= [];
+		ISS.surfaceDuplicateAdjacentSpaces.forEach( item => item.editDuplicateAdjacentSpaces = false );
+		ISS.setAdjDupSpcFixable();
+		ISS.setPopupPanelDuplicateAdjacentSpaces();
+
+	};
+
+
+
 	ISS.setPopupPanelDuplicateAdjacentSpaces = function(){
 
-		let txt = '';
 		if ( !ISS.surfaceChanges.editDuplicateAdjacentSpaces ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces = []; };
 		if ( !GBI.surfaceChanges.editDuplicateAdjacentSpaces ) { GBI.surfaceChanges.editDuplicateAdjacentSpaces = []; };
 
+		let txt = '';
 		let color = 'yellow';
 
-		for ( surface of ISS.surfaceDuplicateAdjacentSpaces ) {
+		for ( let surface of ISS.surfaceDuplicateAdjacentSpaces ) {
 
 			const check = surface.editDuplicateAdjacentSpaces ? 'checked' : '';
 
 			if ( check ) {
 
 				ISS.surfaceChanges.editDuplicateAdjacentSpaces.push( {
-					name: surface.Name, spaceId1: surface.AdjacentSpaceId[0].spaceIdRef, spaceId2: surface.AdjacentSpaceId[ 1 ].spaceIdRef
+					name: surface.Name, spaceId1: surface.spacesAdjFound[0].id, spaceId2: surface.spacesAdjFound[ 1 ].id
 				} );
 
 			}
 
 			color = color === 'yellow' ? 'pink' : 'yellow';
 
-			const spacesFound = surface.spacesFound.filter ( item => item.count > 2 );
+			//const spacesFound = surface.spacesFound.filter ( item => item.count > 2 );
+			spacesFound = surface.spacesAdjFound;
 			//console.log( 'spacesFound', spacesFound[ 0 ].id);
 
 			const options1 = ISS.spaces.map( item =>
 				spacesFound[ 0 ].id === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
 			).join( '' );
 
-			spacesFound1 = spacesFound.length > 1 ? spacesFound[ 1 ] : spacesFound[ 0 ];
+			//spacesFound1 = spacesFound.length > 1 ? spacesFound[ 1 ] : spacesFound[ 0 ];
 
 			const options2 = ISS.spaces.map( item =>
-				spacesFound1.id === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
+				spacesFound[ 1 ].id === item.id ? `<option selected >${item.id}</option>` : `<option>${item.id}</option>`
 			).join( '' );
 
-			//console.log( 'surface.spacesFound', surface.spacesFound );
-
 			const buttsSurface = ISS.getButtonsSurfaceId( surface.id );
-
-			//const buttsSpaces = surface.spacesFound.map( item =>
-			//	`<button onclick=ISS.setSpaceAndSurfaceVisible("${item.id}","${surface.id}"); >${item.id}</button>`
-			//).join( ' ' );
 
 			let buttsSpaces = '';
 
@@ -665,7 +770,10 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				<span style=display:inline-block;width:15rem; >
 				name: ${surface.Name} </span>
 				id: ${buttsSurface} type: ${surface.surfaceType}
-				<div style=margin-left:2rem;padding-bottom:0.5rem; >space 1 <select >${options1}</select> space 2 <select>${options2}</select></div>
+				<div style=margin-left:2rem;padding-bottom:0.5rem; >
+					space 1 <select oninput=ISS.setDupAdjSpcInputInput(this,0,"${surface.Name}"); >${options1}</select>
+					space 2 <select oninput=ISS.setDupAdjSpcInputInput(this,1,"${surface.Name}"); >${options2}</select>
+				</div>
 				<div style=margin-left:2rem; >${buttsSpaces}</div>
 			</div>`;
 			}
@@ -679,26 +787,41 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 
+	ISS.setDupAdjSpcInputInput = function( input, index, name ){
+
+		const surface = ISS.surfaceDuplicateAdjacentSpaces.find( item => item.Name === name );
+		surface.spacesAdjFound[ index ].id = input.value;
+		ISS.setPopupPanelDuplicateAdjacentSpaces();
+
+	};
+
+
+
 	ISS.setEditDuplicateAdjacentSpaces = function( checkbox, name ) {
 
-		//console.log( 'that', that );
+		//console.log( 'checkbox', checkbox );
+
+		const surface = ISS.surfaceDuplicateAdjacentSpaces.find( item => item.Name === name );
+		//console.log( 'surface', surface );
 
 		if ( checkbox.checked === false ){
 
-			var index = ISS.surfaceChanges.editDuplicateAdjacentSpaces.indexOf( name );
-			if ( index !== -1 ) ISS.surfaceChanges.editDuplicateAdjacentSpaces.splice(index, 1);
+			let arr = ISS.surfaceChanges.editDuplicateAdjacentSpaces.filter( item => item.name !== name );
+			//console.log( 'arr', arr );
+			ISS.surfaceChanges.editDuplicateAdjacentSpaces = arr;
+			//if ( index !== -1 ) ISS.surfaceChanges.editDuplicateAdjacentSpaces.splice(index, 1);
 
 		} else {
 
 			if ( name ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces.push( {
-				name: surface.Name, spaceId1: surface.AdjacentSpaceId[0].spaceIdRef, spaceId2: surface.AdjacentSpaceId[ 1 ].spaceIdRef
+				name: surface.Name, spaceId1: surface.spacesAdjFound[ 0 ].id, spaceId2: surface.spacesAdjFound[ 1 ].id
 			 } ); }
 
 		}
 
 		ISStxtDuplicateAdjacentSpaces.value = JSON.stringify( ISS.surfaceChanges.editDuplicateAdjacentSpaces, null, ' ' );
 
-	}
+	};
 
 
 
@@ -744,6 +867,54 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		ISS.setPopupPanelDuplicateAdjacentSpaces();
 
+	};
+
+
+
+	ISS.updateDupAdjSpc = function( namesArray ) {
+
+		console.log( 'namesArray', namesArray );
+
+		const proceed = confirm( 'OK to edit surfaces: ' + JSON.stringify( namesArray ) + '?' );
+
+		if ( !proceed ){ return; }
+
+		surfacesGbxml = GBP.gbxml.getElementsByTagName( "Surface" );
+
+		for ( item of namesArray ) {
+
+			surfaceJson = GBP.surfaceJson.find( element => element.Name === item.name );
+
+			//console.log( 'surfaceJson', surfaceJson);
+
+			if ( surfaceJson ) {
+
+				id =surfaceJson.id;
+				//console.log( 'id', id );
+
+				surfaceXml = surfacesGbxml[ id ];
+
+				elements = surfaceXml.getElementsByTagName( "AdjacentSpaceId" );
+
+				//console.log( 'elements[ 0 ]', elements[ 0 ].getAttribute( 'spaceIdRef' ) )
+				elements[ 0 ].setAttribute( 'spaceIdRef', item.spaceId1 );
+				elements[ 1 ].setAttribute( 'spaceIdRef', item.spaceId2 );
+				console.log( 'elements', elements );
+
+
+				// edit gbjson
+				surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = item.spaceId1;
+				surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = item.spaceId2;
+				//console.log( 'surfaceJson.AdjacentSpaceId', surfaceJson.AdjacentSpaceId );
+
+				// edit three.js
+				const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
+				surfaceMesh.userData.data.AdjacentSpaceId[ 0 ].spaceIdRef = item.spaceId1;
+				surfaceMesh.userData.data.AdjacentSpaceId[ 1 ].spaceIdRef = item.spaceId2;
+
+			}
+
+		}
 
 	};
 
@@ -1488,6 +1659,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		//console.log( 'names', names );
 
 		//const proceed = alert( 'Coming soon!\nUpdate surfaces: \n ' + names + '?' );
+
 		surfacesGbxml = GBP.gbxml.getElementsByTagName( "Surface" );
 
 		for ( item of idsArray ) {
@@ -1515,7 +1687,6 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 				surfaceMesh.userData.data.CADObjectId = item.CADObjectId;
 
 			}
-
 
 		}
 
@@ -2108,7 +2279,7 @@ THR, THREE, GBP, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	ISS.setPanelAdjacentSpaceAttributes = function( id ) {
 
 		console.log( 'id', id );
-		surface = ISS.adjacentSpaceInvalid.find( item => item.id === id );
+		const surface = ISS.adjacentSpaceInvalid.find( item => item.id === id );
 		console.log( 'surface', surface );
 
 		ISSdivAdjacentSpaceInvalid.innerHTML = GBI.traverseGbjson( surface ).attributes;

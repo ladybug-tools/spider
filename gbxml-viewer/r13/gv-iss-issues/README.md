@@ -66,7 +66,14 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
-### 2018-05-28 ~ Thep
+
+### 2018-05-29 ~ Theo
+
+* Duplicate Adjacent Space
+	* Mostly seems to be working
+
+
+### 2018-05-28 ~ Theo
 
 R13.29
 * Undefined CAD Object IDs
@@ -75,7 +82,6 @@ R13.29
 * Duplicate Adjacent Space
 	* Most suitable fixes selected automatically
 	* Check boxes with suitable fixes selected automatically
-
 
 
 ### 2018-05-25 ~ Theo
