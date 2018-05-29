@@ -5,7 +5,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 # [Rad Viewer Read Me]( #solar-well/rad-viewer/README.md )
 
 
-<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/rad-viewer/r12/rad-viewer.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/rad-viewer/r12/rad-viewer.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _Latest project here_
 
@@ -15,11 +15,11 @@ View RAD files produced by [Radiance]( https://radiance-online.org/ ) scripts in
 
 This is an ongoing learning and development effort. Please feel free to request to any particular Radiance feature to be added to this viewer as a priority.
 
-## Link you can use for latest stable version: <https://www.ladybug.tools/spider/master/rad-viewer/>
+## Link you can use for latest stable version: <https://www.ladybug.tools/spider/rad-viewer/>
 
 ***
 
-## full screen: [rad viewer 12]( https://www.ladybug.tools/spider/master/rad-viewer/r12/rad-viewer.html )
+## full screen: [rad viewer 12]( https://www.ladybug.tools/spider/rad-viewer/r12/rad-viewer.html )
 
 * Adds capability to read multiple files from a local folder
 	* Files must be set up as or as if exported from Honeybee - see image below
@@ -103,6 +103,7 @@ There seems to be small errors here and there with openings. I have not yet iden
 
 ## Wish list
 
+* 2018-05-28 ~ Theo ~ Project points and shades onto a canvas tag to be used as a texture for the floor slabs in 3D
 * 2018-05-22 ~ Theo ~ Add ways of selecting what to render and what to ignore on very large files
 
 ## Issues
