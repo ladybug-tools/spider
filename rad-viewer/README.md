@@ -107,9 +107,7 @@ There seems to be small errors here and there with openings. I have not yet iden
 
 ## Issues
 
-* Need to be fully namespaced
-* Needs to be packaged in separate stand-alone JavaScript file
-* Wirframe toggle not working
+* 2018-05-28 ~ Theo ~ shadow points not deleted when a new model is loaded
 
 
 ## Links of Interest
@@ -154,6 +152,10 @@ R12
 ### 2018-05-24 ~ Theo
 
 R11
+Fixed
+* Need to be fully namespaced
+* Needs to be packaged in separate stand-alone JavaScript file
+* Wireframe toggle not working
 
 ### 2018-05-18 ~ Theo
 
