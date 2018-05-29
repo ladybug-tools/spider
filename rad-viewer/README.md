@@ -5,7 +5,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 # [Rad Viewer Read Me]( #solar-well/rad-viewer/README.md )
 
 
-<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/rad-viewer/r11/rad-viewer.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://rawgit.com/ladybug-tools/spider/master/rad-viewer/r12/rad-viewer.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 _Latest project here_
 
@@ -14,6 +14,17 @@ _Latest project here_
 View RAD files produced by [Radiance]( https://radiance-online.org/ ) scripts in interactive 3D in your browser.
 
 This is an ongoing learning and development effort. Please feel free to request to any particular Radiance feature to be added to this viewer as a priority.
+
+## Link you can use for latest stable version: <https://www.ladybug.tools/spider/master/rad-viewer/>
+
+***
+
+## full screen: [rad viewer 12]( https://www.ladybug.tools/spider/master/rad-viewer/r12/rad-viewer.html )
+
+* Adds capability to read multiple files from a local folder
+	* Files must be set up as or as if exported from Honeybee - see image below
+
+<img src='images/rad-viewer-folder.png' height=300 >
 
 ## full screen: [rad viewer 11]( https://rawgit.com/ladybug-tools/spider/master/rad-viewer/r11/rad-viewer.html )
 
@@ -135,6 +146,10 @@ Octree format
 
 ## Change Log
 
+
+### 2018-05-28 ~ Theo
+
+R12
 
 ### 2018-05-24 ~ Theo
 
