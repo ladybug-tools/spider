@@ -1,4 +1,6 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
+/* global THR, THREE, GBP, window, document */
+/* jshint esversion: 6 */
 
 	var HUD = {};
 
@@ -9,7 +11,7 @@
 
 			HUD.butMenuHUD = butMenuLoad;
 
-			HUD.title = 'gv-HUD - gbXML Viewer HUD';;
+			HUD.title = 'gv-HUD - gbXML Viewer HUD';
 			document.title = HUD.title;
 			aDocumentTitle.innerHTML = HUD.title;
 			HUD.butMenuHUD.innerHTML = HUD.title;
@@ -194,7 +196,7 @@
 		item.name = 'itemSurface';
 		item.optionValues = GBP.surfaceJson.map ( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = GBP.surfaceJson;
-		item.placeholder = 'surface id'
+		item.placeholder = 'surface id';
 		item.selItem = 'HUDselSurfaceId';
 
 		//HUD.item = item;
@@ -269,7 +271,7 @@
 			//surfaceXml.appendChild( adjacentNew );
 
 			if ( !GBI.surfaceChanges.oneAdjacent ) { GBI.surfaceChanges.oneAdjacent = []; }
-			GBI.surfaceChanges.oneAdjacent.push( { name: surfaceName, spaceId: spaceId } )
+			GBI.surfaceChanges.oneAdjacent.push( { name: surfaceName, spaceId: spaceId } );
 
 		} else if ( spaceRef === 1 ) {
 
@@ -289,7 +291,7 @@
 			//surfaceXml.appendChild( adjacentNew );
 
 			if ( !GBI.surfaceChanges.twoAdjacent ) { GBI.surfaceChanges.twoAdjacent = []; }
-			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
+			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } );
 
 		} else if ( spaceRef === 2 ) {
 
@@ -307,7 +309,7 @@
 			//surfaceXml.appendChild( adjacentNew );
 
 			if ( !GBI.surfaceChanges.twoAdjacent ) { GBI.surfaceChanges.twoAdjacent = []; }
-			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
+			GBI.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } );
 
 		}
 
@@ -472,7 +474,7 @@
 		//console.log( 'type surfaceJson', surfaceJson );
 
 		HUD.setHeadsUp();
-		GBI.setSurfaceVisible( id )
+		GBI.setSurfaceVisible( id );
 
 	};
 
@@ -584,7 +586,7 @@
 
 		for ( let i = 0; i < openings.length; i++ ) {
 
-			const opening = openings[ i ]
+			const opening = openings[ i ];
 			//console.log( 'opening', opening );
 
 			const vertices = opening.PlanarGeometry.PolyLoop.CartesianPoint;
@@ -701,7 +703,7 @@
 		Z = ${vertex.z} <br>
 		<p><button onclick=alert("Coming-soon"); >delete</button></p>`;
 
-	}
+	};
 
 
 	HUD.removeTelltales = function() {
@@ -739,7 +741,7 @@
 
 		function canvasMultilineText( textArray, parameters ) {
 
-			var parameters = parameters || {} ;
+			parameters = parameters || {} ;
 
 			var canvas = document.createElement( 'canvas' );
 			var context = canvas.getContext( '2d' );

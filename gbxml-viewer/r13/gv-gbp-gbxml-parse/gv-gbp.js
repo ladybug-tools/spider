@@ -51,7 +51,7 @@
 			//console.log( 'xhr', xhr );
 
 			GBP.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
-			divLog.innerHTML = GBP.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+			APPdivLog.innerHTML = GBP.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 
@@ -79,7 +79,7 @@
 
 			}
 
-			divLog.innerHTML =
+			APPdivLog.innerHTML =
 				'name: ' + files.files[0].name + '<br>' +
 				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
 				'type: ' + files.files[0].type + '<br>' +
@@ -136,7 +136,7 @@
 
 		function onRequestFileProgress( event ) {
 
-			divLog.innerHTML =
+			APPdivLog.innerHTML =
 				GBP.fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
 				//( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
 			'';
@@ -599,7 +599,7 @@
 		//};
 
 		document.body.style.backgroundImage = '';
-		divLog.innerHTML = '';
+		APPdivLog.innerHTML = '';
 
 	};
 

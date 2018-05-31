@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-05-06" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+		</p>
+
+		<div id = "divContents" ></div>
+
+	</div>
+
+<script>
+
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+	var renderer, camera, controls, scene, axesHelper;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		//const title = document.title;
+
+		divTitle.innerHTML =
+		`<h1>
+			<a href="" >${title}</a>
+		</h1>`;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		//scene.add( mesh );
+
+		let url = '..//london-office/unnamed_0.pts';
+
+		requestFile( url );
+
+		}
+
+	function requestFile( url ) {
+
+		//		let xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+		xhr.onload = callback;
+		xhr.send( null );
+
+	}
+
+
+	function callback( xhr ) {
+
+		const response = xhr.target.response;
+		//console.log( 'response', response );
+
+		//divContents.innerHTML = response;
+
+		const lines = response.split(/\r\n|\n/).slice( 0, -1);
+
+		///			lines = response.split( '\n' ).map( function( line ) { return line.split( ',' ); } );
+
+		let points = lines.map( line =>
+			line.trim().replace( /\t/g, ' ' ).replace( / {2,}/g, ' ' ).split( ' ' ).slice( 0, 3 ).map( item => parseFloat( item ) )
+		);
+
+		//console.log( 'points', points );
+		//console.log( 'length', points.length );
+
+		const groups = getGroups( points )
+
+		//for ( group of groups ) {
+
+			points = groups[ 1 ].map( point => new THREE.Vector3().fromArray( point ) );
+			console.log( 'points', points );
+
+			const box = new THREE.Box3().setFromPoints( points );
+			console.log( 'bb', box );
+
+			const bounds = [ box.min, v( box.max.x, box.min.y, box.min.z ), box.max, v( box.min.x, box.max.y, box.min.z ) ]
+			console.log( '', bounds );
+
+			shape = drawShape( bounds, box, points );
+			shape.position.z = box.min.z;
+
+
+			scene.add( shape );
+
+			console.log( 'center', center );
+		//}
+
+	}
+
+
+
+	function getGroups( points ) {
+
+		const groups = [];
+		const levels = [];
+
+		for ( let point of points ) {
+
+			//console.log( 'point', point );
+
+			if ( levels.indexOf( point[ 2 ] ) < 0 ) {
+
+				levels.push( point[ 2 ] );
+				const group = [];
+				groups.push( group );
+				group.push( point )
+
+			} else {
+
+				const level = ( levels.indexOf( point[ 2 ] ) );
+				groups[ level ].push( point );
+
+			}
+		}
+
+		//console.log( 'levels', levels );
+		//console.log( 'groups', groups );
+
+		return groups;
+
+	}
+
+
+	function drawShape( bounds, box, points ) {
+
+		console.log( 'box', box );
+		bb = box;
+		size  = box.getSize( new THREE.Vector3() );
+		console.log( 'size', size );
+		pp = points;
+
+		const shape = new THREE.Shape( bounds );
+		geometry = new THREE.ShapeGeometry( shape );
+
+		geometry.computeBoundingSphere();
+		//geometry.center();
+		center = geometry.boundingSphere;
+
+		var canvas = document.body.appendChild( document.createElement( 'canvas' ) );
+		canvas.style.cssText = 'position: absolute; right: 0; top: 0;';
+
+		let scl = 20;
+		canvas.width = scl * ( size.x + 2 );
+		canvas.height = scl * ( size.y + 1 );
+
+		var context = canvas.getContext("2d");
+
+		for ( point of points ) {
+
+			context.fillStyle =  '#aaaaaa';
+			context.fillRect( scl * ( 4 + point.x ), scl * ( 16 + point.y ), 0.5 * scl, 0.5 * scl );
+
+
+		}
+
+		context.lineWidth = 0.5;
+		context.strokeStyle =  '#ff00ff';
+		context.strokeRect( 0, 0, canvas.width, canvas.height );
+
+/*
+		var text = 'ABC DEF GHI';
+
+		context.fillStyle =  '#000000';
+		context.font = '20px sans-serif' ;
+
+		context.fillText( text, 100, 100 );
+		width = context.measureText( text );
+
+		context.lineWidth = 2;
+		context.strokeStyle =  '#00ff00';
+		context.strokeRect( 0, 0, width.width + 10, -25 );
+*/
+
+		texture = new THREE.Texture( canvas );
+
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+
+		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+		texture.repeat.set( 0.05, 0.05 );
+		//texture.offset.x = 0.5; // 0.125 * texture.repeat.x;
+		//texture.offset.y = 0.5;
+
+
+		const material = new THREE.MeshBasicMaterial( { map: texture, side: 2 } );
+		texture.needsUpdate = true;
+
+		//const material = new THREE.MeshNormalMaterial( { side: 2 } );
+		const mesh = new THREE.Mesh( geometry, material );
+
+		return mesh;
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

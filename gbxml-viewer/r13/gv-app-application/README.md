@@ -60,6 +60,11 @@ See main read me file
 ## Change Log
 
 
+### 2018-05-31 ~ Theo
+
+R13.30
+* General code cleanup and validation
+
 ### 2018-05-13 ~ Theo
 
 R13.18

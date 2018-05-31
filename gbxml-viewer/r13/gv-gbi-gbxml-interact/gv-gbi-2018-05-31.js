@@ -25,7 +25,7 @@
 
 		item.target = 'GBIdiv' + item.attribute;
 
-		const divElement =
+		divElement =
 
 			`<div class=flex-container2 >
 				<div class=flex-div1 >
@@ -74,7 +74,7 @@
 		GBI.item = item;
 		//console.log( 'item', item );
 
-		const divElement =
+		divElement =
 
 			`<div class=flex-container2 >
 
@@ -97,17 +97,14 @@
 		const selectTarget = item.divTarget.getElementsByTagName( 'select' )[ 0 ];
 		//console.log( 'target', target );
 
-
 		selectTarget.onclick= function() {
-			//console.log( 'selectTarget.value', selectTarget.value );
+
 			//GBI.setSurfaceVisible(selectTarget.value );
 			GBI.setElementIdAttributes( selectTarget.value, item );
 
 		};
 
-
-		//selectTarget.onchange =  function() {
-		selectTarget.oninput = function() {
+		selectTarget.onchange =  function() {
 
 			GBI.setElementVisible( selectTarget.value, item );
 			GBI.setElementIdAttributes( selectTarget.value, item );
@@ -128,17 +125,16 @@
 
 		let i = 0;
 
-		const item = GBI[ name ] ? GBI[ name ] : GBI.item;  // to cover for NUM.setAreasByStorey
+		item = GBI[ name ] ? GBI[ name ] : GBI.item;  // to cover for NUM.setAreasByStorey
 
 		let optionValues = item.optionValues;
 
-		for ( let option of select.options ) {
+		for ( option of select.options ) {
 
 			option.innerText = optionValues[ i++ ][ that.selectedIndex ];
 
 		}
-
-	};
+	}
 
 
 
@@ -248,7 +244,7 @@
 
 				if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-					APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+					divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
 					//console.log( 'surface', surface );
 					//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -357,7 +353,8 @@
 
 
 	GBI.setSpaceVisible = function( spaceId ) {
-		console.log( 'spaceId', spaceId );
+		//console.log( 'spaceId', spaceId );
+		//console.log( 'spaceIndex', spaceIndex );
 
 		GBP.surfaceEdges.visible = true;
 		GBP.surfaceMeshes.visible = true;
@@ -441,7 +438,7 @@
 
 		GBP.surfaceMeshes.visible = true;
 
-		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id );
+		const surfaceMesh = GBP.surfaceMeshes.children.find( element => element.userData.data.id === id )
 
 		surfaceMesh.visible = !surfaceMesh.visible;
 
@@ -458,12 +455,12 @@
 
 		for ( let child of GBP.surfaceMeshes.children ) {
 
-			const adjacentSpaceId = child.userData.data.AdjacentSpaceId;
+			adjacentSpaceId = child.userData.data.AdjacentSpaceId;
 			//console.log( 'adjacentSpaceId', adjacentSpaceId );
 
 			if ( !adjacentSpaceId ) { continue; }
 
-			const spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef;
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
 
 			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.zoneIdRef === zoneIdRef ? true : child.visible );
 
@@ -682,7 +679,6 @@
 
 
 	GBI.setSpaceZoom = function( id, index = 0 ) {
-		console.log( 'setSpaceZoom', id, index );
 
 		GBI.setSpaceVisible( id, index );
 
@@ -844,7 +840,7 @@
 		const obj = arr.find( element => element.id === id );
 		//console.log( 'obj', obj );
 
-		const divAttributes = document.getElementById ( item.divAttributes );
+		divAttributes = document.getElementById ( item.divAttributes );
 		//console.log( 'divAttributes', divAttributes );
 
 		divAttributes.innerHTML = ''; //`<div>id: <b>${id}</b></div>`;
@@ -855,7 +851,7 @@
 
 				if ( property === 'AdjacentSpaceId' ) {
 
-					//console.log( 'property', obj[ property ] );
+					//console.log( 'property', obj[ property ].length );
 
 					if ( Array.isArray( obj[ property ] ) ) {
 
@@ -1013,7 +1009,7 @@
 		<hr>`;
 
 		HUD.removeTelltales();
-	};
+	}
 
 
 
@@ -1062,13 +1058,13 @@
 
 	GBI.getAttributeAdjacentSpace = function( spaceIdRef, spaceIndex = 0 ) {
 		// used by REP
-		console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
-		console.log( 'getAttributeAdjacentSpace spaceIndex', spaceIndex );
+		//console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
+		//console.log( 'getAttributeAdjacentSpace spaceIndex', spaceIndex );
 
 		const txt =
 		`<div>
 			<span class=attributeTitle >adjacent space ` + ( spaceIndex > -2 ? spaceIndex : `` ) + ` id</span>:<br>
-			<button onclick=GBI.setPanelSpaceAttributes(HUDdivAttributes,"${spaceIdRef}",${spaceIndex}); >${spaceIdRef}</button>
+			<button id=GBIbutSpaceVis` + spaceIndex + ` onclick=GBI.setPanelSpaceAttributes(HUDdivAttributes,"${spaceIdRef}",${spaceIndex}); >${spaceIdRef}</button>
 			<button onclick=GBI.setSpaceZoom("${spaceIdRef}",${spaceIndex}); >&#8981;</button>
 		</div>`;
 
@@ -1183,7 +1179,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
 				console.log( 'surface', surface );
 				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1239,7 +1235,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				//console.log( 'surface', surface );
 				//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1286,7 +1282,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				divLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				continue;
 
@@ -1461,10 +1457,10 @@
 
 		// remove from gbxml
 		const surfacesResponse = GBP.gbxml.getElementsByTagName( "Surface" );
-		const surfaceXml = surfacesResponse[ id ];
+		surfaceXml = surfacesResponse[ id ];
 		//console.log( 'id', id,'\nsurface to delete', surfaceXml );
 
-		const name = surfaceXml.getElementsByTagName("Name")[ 0 ].innerHTML;
+		name = surfaceXml.getElementsByTagName("Name")[ 0 ].innerHTML;
 		//console.log( 'name', name );
 
 		GBI.surfaceChanges.deletes.push( name );

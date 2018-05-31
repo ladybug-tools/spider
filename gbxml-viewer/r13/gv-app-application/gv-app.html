@@ -5,10 +5,10 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-05-28" >
-<title>Aragog gbXML Viewer 13.29</title>
+<meta name = "date" content = "2018-05-31" >
+<title>Aragog gbXML Viewer 13.30</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
-<link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
+<link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
@@ -42,13 +42,13 @@
 
 				<div>
 					<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
-					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png  height=18 ></a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png alt="spider web" height=18 ></a> &raquo;
 					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 				</div>
 
 				<h2>
 					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-app-application/gv-app.html" target="_top" >
-						<img src="../assets/github-mark.png" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
+						<img src="../assets/github-mark.png" alt="octocat" height=18 style=opacity:0.4; title="click the 'Octocat' to view the source code on GitHub" ></a>
 					<a href="" title="Reload gbXML Viewer"><script> document.write( document.title ); </script></a>
 				</h2>
 
@@ -150,7 +150,7 @@
 
 				<summary>Things to Try</summary>
 
-				<p><small><i></i>More modules are just waiting to be upgraded</i></small></p>
+				<p><small><i>More modules are just waiting to be upgraded</i></small></p>
 
 
 				<button id=butFirstPersonCamera class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
@@ -211,8 +211,9 @@
 
 			</details>
 
-			<h2 onclick=divMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center;
-				title='go to top and, btw, my web is better than your web' > <img src=../assets/spider-web.png height=24 style=opacity:0.5; > </h2>
+			<h2 onclick=divMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >
+				<img src=../assets/spider-web.png alt="spider web" height=24 style=opacity:0.5; >
+			</h2>
 
 		</div>
 
@@ -228,21 +229,21 @@
 
 			<p>
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=THR.controls.autoRotate=!THR.controls.autoRotate; title="toggle the scene spinning" >rotation</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="THR.controls.autoRotate=!THR.controls.autoRotate;" title="toggle the scene spinning" >rotation</button>
 				|
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBP.surfaceMeshes.visible=!GBP.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; title="toggle the side lines" >edges</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible;" title="toggle the side lines" >edges</button>
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.surfaceOpenings.visible=!GBP.surfaceOpenings.visible; title="toggle the windows" >openings</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBP.surfaceOpenings.visible=!GBP.surfaceOpenings.visible;" title="toggle the windows" >openings</button>
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible(); title="toggle the windows" >all</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBP.setAllVisible();" title="toggle the windows" >all</button>
 				|
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBP.setAllVisible();GBP.zoomObjectBoundingSphere(GBP.surfaceMeshes); title="Go to the home view"  >reset view</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBP.setAllVisible();GBP.zoomObjectBoundingSphere(GBP.surfaceMeshes);" title="Go to the home view"  >reset view</button>
 
 			</p>
 
-		<div id=divLog ></div>
+		<div id=APPdivLog ></div>
 
 	</div>
 
@@ -253,8 +254,10 @@
 
 				pop-up window / click here to move / click outside to close
 
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" ontouchstart=divPopUp.style.display="none"; onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
-
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme"  onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+				<!--
+					ontouchstart=divPopUp.style.display="none";
+				-->
 			</div>
 
 			<div id = "divPopUpContents" ></div>
@@ -268,10 +271,10 @@
 
 		<div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
 			right menu / click here to move
-			<!--
+
 			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
-			-->
-	<!--
+
+
 		</div>
 
 		<div id=divHUDheader class=mnuRightDiv ></div>
@@ -368,7 +371,7 @@
 
 	function onloadThreejs() {
 
-		divLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
+		APPdivLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
 		if ( GBP.gbxmlResponseXML.URL.includes( 'bristol-clifton-down-road' ) ) {
 

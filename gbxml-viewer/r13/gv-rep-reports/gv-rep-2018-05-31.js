@@ -322,7 +322,7 @@
 
 			txt +=
 			`
-				<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this);REP.toggleButtonColor(this);
+				<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this);toggleButtonColor(this);
 					value=` + types[ i ] + `><img src="../assets/eye.png" height=18>
 				</button>
 
@@ -353,11 +353,28 @@
 
 		target.innerHTML = details;
 
-		const butts = REPdetSurfaceTypes.getElementsByClassName( "toggleView" );
+		butts = REPdetSurfaceTypes.getElementsByClassName( "toggleView" );
 
-		for ( let butt of butts ) REP.toggleButtonColor( butt );
+		for ( let butt of butts ) toggleButtonColor( butt );
 
 	};
+
+
+	function toggleButtonColor( that ) {
+
+		const cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
+
+		if ( that.style.backgroundColor !== COR.colorButtonToggle ) {
+
+			that.style.cssText = cssText;
+
+		} else {
+
+			that.style.cssText = '';
+
+		}
+
+	}
 
 
 
@@ -514,25 +531,8 @@
 
 		return '<span title="Use context menu to open a Wolfram Alpha in a new tab" >' + linkToMap + '<span>';
 
-	};
+	}
 
-
-
-	REP.toggleButtonColor = function( that ) {
-
-		const cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-
-		if ( that.style.backgroundColor !== COR.colorButtonToggle ) {
-
-			that.style.cssText = cssText;
-
-		} else {
-
-			that.style.cssText = '';
-
-		}
-
-	};
 
 
 	REP.initRep();

@@ -126,7 +126,7 @@
 			//console.log( 'xhr', xhr );
 
 			COR.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
-			divLog.innerHTML = COR.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+			APPdivLog.innerHTML = COR.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 
@@ -199,7 +199,7 @@
 
 			}
 
-			divLog.innerHTML =
+			APPdivLog.innerHTML =
 				'name: ' + files.files[0].name + '<br>' +
 				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
 				'type: ' + files.files[0].type + '<br>' +

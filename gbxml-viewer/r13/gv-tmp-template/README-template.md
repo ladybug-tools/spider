@@ -9,7 +9,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 Tagline experiments
 
 * [Aragog gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser.
-	* gbXML is an industry supported file format for sharing building information between numerous building design software tools.
+* gbXML is an industry supported file format for sharing building information between numerous building design software tools.
 * Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-tmp-template/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
