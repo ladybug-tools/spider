@@ -11,10 +11,13 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Full screen test script: [gbXML Viewer Template]( http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-tmp-template/gv-tmp.html )
 
+## [Read Me Template]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-tmp-template/README-template.md )
+
+
 
 ## Concept
 
-
+The files in this folder are templates or 'boilerplate' files that may be used to build gbXML viewer modules.
 
 ## Wish list
 
@@ -26,7 +29,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Links of Interest
 
-
+* https://github.com/readmeTips/readmeTips.github.io
 
 ## Change Log
 

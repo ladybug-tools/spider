@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Core read and display geometry in 3D using Three.js" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-03-26" >
+<title>gv-thr gbXML Viewer Three.js</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover, button:focus{ background: #ccc; color: yellow }
+
+	#divMenu {background-color: #fff;  left: 0; margin: auto; position: absolute; opacity: 0.95;  right: 0; text-align: center; width: 50%; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+<!--
+<script src = "../gv-cor-core/gv-cor.js" ></script>
+-->
+<script src = "../gv-thr-threejs/gv-thr.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<div id = "divMenuInWorld" >
+
+			<div id = "divTitle" ></div>
+
+		</div>
+
+		<p id = "divContents" >
+
+			<button onclick=THR.controls.autoRotate=!THR.controls.autoRotate; >rotation</button>
+
+		</p>
+
+		<div id=divLog ></div>
+
+	</div>
+
+	<div id=divContainer ></div>
+
+
+<script>
+
+	THR.initThree();
+	THR.animate();
+
+	init();
+
+	function init() {
+
+		divTitle.innerHTML =
+		`
+			<h2>
+				<a href="https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r14/" >
+					<img src=../assets/github-mark.png alt = "octocat" height = 18 title = "Octocat takes you to GitHub" >
+				</a>
+				<a  href = "" >` + document.title + `</a>
+			</h2>
+			<p>` + document.head.querySelector( '[name=description]' ).content + `</p>
+
+		`;
+
+		THR.controls.autoRotate = false;
+
+		console.log( 'scene', THR.scene );
+
+		THR.camera.position.set( 100, 10, 100 );
+
+		geometry = new THREE.BoxGeometry( 5, 15, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		THR.scene.add( mesh );
+
+	};
+
+</script>
+</body>
+</html>
