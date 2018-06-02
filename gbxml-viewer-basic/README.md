@@ -9,7 +9,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer-basic/r2/gbxml-viewer-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test script: [gbXML Viewer Basic]( http://www.ladybug.tools/spider/gbxml-viewer-basic/gbxml-viewer-basic.html )
+## Latest stable release: [gbXML Viewer Basic]( http://www.ladybug.tools/spider/gbxml-viewer-basic/index.html )
 
 
 ## Concept
