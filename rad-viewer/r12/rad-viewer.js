@@ -450,7 +450,7 @@
 		}
 
 
-		if (points.length === 0 ) {
+		if ( points.length === 0 ) {
 
 			//continue;
 
