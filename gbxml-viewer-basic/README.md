@@ -37,7 +37,8 @@ The gbXML portions are also interesting. The routines end up with three sets of 
 
 ## Issues
 
-2018-06-02 ~ Theo ~ currently surfaces, edges and opening are each their oen group of objects. Could nicer things happen if the edges and opening were children of their parent surface??
+* 2018-06-02 ~ Theo ~ Need a spider name - preferably one without a trademark, perhaps a nice-sounding latin name: https://en.wikipedia.org/wiki/List_of_spider_common_names
+* 2018-06-02 ~ Theo ~ currently surfaces, edges and opening are each their oen group of objects. Could nicer things happen if the edges and opening were children of their parent surface??
 
 
 ## Links of Interest

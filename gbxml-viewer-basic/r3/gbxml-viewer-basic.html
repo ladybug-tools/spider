@@ -36,7 +36,7 @@
 		</p>
 
 		<p>
-			<button onclick = "setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, axesHelper ]);" >setSceneDispose</button>
+			<button onclick = "setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, axesHelper ] );" >setSceneDispose</button>
 			<button onclick = "getRenderInfo();" >getRenderInfo</button>
 		</p>
 
@@ -135,7 +135,7 @@
 
 		timeStart = Date.now();
 
-		setSceneDispose();
+		setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, axesHelper ] );
 
 		const xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
@@ -233,6 +233,7 @@
 			}
 
 		} );
+
 
 		scene.remove( ...objArray );
 
