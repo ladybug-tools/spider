@@ -5,45 +5,8 @@
 </head>
 <body>
 <script>
-	// 2018-05-31. Copyright 2018 PushMe-PullYou authors. MIT License.
-	// goal: drop this anywhere in any folder it will call the top level index.html and add the local read me file path as location hash
-	// works locally and in GitHub Pages
 
-	const protocol = location.protocol;
-	console.log( 'protocol', protocol );
-
-	const pathname = location.pathname;
-	console.log( 'pathname', pathname);
-
-	let path, pathFull;
-
-	const repo = 'spider'; // rename to repo name
-
-	if ( protocol === 'file:' ) {
-
-		const sliceStart = pathname.indexOf( repo ) + repo.length + 1;
-		console.log( 'sliceStart', sliceStart );
-
-		path = pathname.slice( sliceStart, pathname.lastIndexOf( '/' )  );
-		console.log( 'path', path );
-
-		pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ).slice( 0 ) + '/index.html#' + path + '/README.md';
-
-	} else if ( protocol.includes( 'http' ) ) {
-
-		hash = pathname.slice(1, pathname.lastIndexOf( '/' ) );
-		console.log( 'hash', hash );
-		path = hash.replace( /-/g, '' ).replace( /\w+/g, '..' );
-
-		pathFull = path + '/index.html#' + hash + '/README.md';
-
-	}
-
-	console.log( 'pathFull', pathFull );
-
-	window.location.href = pathFull;
-	// comment above line to see how it works
-
+	window.location.href = './r2/gbxml-viewer-basic.html' + location.hash;
 
 </script>
 </body>

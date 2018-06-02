@@ -3,10 +3,10 @@
 <input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer-basic/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
-# [gbXML Viewer Basic Read Me] ( #gbxml-viewer-basic/README.md )
+# [gbXML Viewer Basic Read Me]( #gbxml-viewer-basic/README.md )
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer-basic/gbxml-viewer-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer-basic/r2/gbxml-viewer-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
 ## Full screen test script: [gbXML Viewer Basic]( http://www.ladybug.tools/spider/gbxml-viewer-basic/gbxml-viewer-basic.html )
@@ -16,6 +16,12 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 A very basic gbXML file viewer
 * Use this code if you want a the basic idea of how to read a gbXML file and turn it into a Three.js scene
+
+The intention is that the core gbXML parser here and the core parser in the full-featured gbXML Viewer contain identical or nearly identical code.
+
+The code should be simple, fast and easy to read. If you can read and understand the Three.js examples, then you should feel at home here.
+
+
 
 
 ## Wish list
@@ -27,6 +33,8 @@ A very basic gbXML file viewer
 
 
 ## Links of Interest
+
+* https://www.ladybug.tools/spider/#gbxml-viewer/README.md
 
 
 
