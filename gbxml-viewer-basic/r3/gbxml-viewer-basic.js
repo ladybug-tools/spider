@@ -236,6 +236,8 @@
 
 
 
+	//
+
 	GBX.get3dShape = function( vertices, material, holes = [] ) {
 
 		// 2018-06-02

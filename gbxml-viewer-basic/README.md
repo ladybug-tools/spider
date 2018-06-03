@@ -20,7 +20,7 @@ Therefore we now have gbXML Viewer Basic
 
 This is a very basic gbXML file viewer
 * Use this code if you want a the basic idea of how to read a gbXML file and turn it into a Three.js scene
-* Use this code if you want to learn how to take sets of coplanar points and convert these to Three.js 2D Shapes with holes position and rotated arbitrarily in 3D space.
+* Use this code if you want to learn how to take sets of coplanar points and convert these to Three.js 2D Shapes with holes - all positioned and rotated arbitrarily in 3D space.
 
 The intention is that the core gbXML parser here and the core parser in the full-featured gbXML Viewer and the parser in the RAD Viewer all contain identical or nearly identical code.
 
