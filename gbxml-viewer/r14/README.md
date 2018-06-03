@@ -5,7 +5,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 # [R14 'Aragog' gbXML Viewer Read Me]( #gbxml-viewer/r14/README.md )
 
-## [R14 'Aragog' gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/r14/index.html )
+## [R14 'Aragog' gbXML Viewer]( http://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html )
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r14/index.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
