@@ -21,7 +21,20 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 </details>
 -->
 
+<details open>
 
+<summary>Welcome 2018-06-03 ~ R14.0 ~ Concept for this release</summary>
+
+* Try and get all modules fitting into some kind of cohent whole
+	* See if we can get this to be a big release that lasts several months
+* Variable and functions clear, consistent, understandable names throughout
+* Pass W3C and JSHint validation throughout
+* Two window solution instead of three
+* All load-time error and useful stats reporting easily accessible and visible
+* Issues Panel: big cleanup / add find faulty surface inclusions
+* Heads-up display: Add vertex editing capabilities
+
+</details>
 
 ***
 

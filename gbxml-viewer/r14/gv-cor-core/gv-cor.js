@@ -1,7 +1,8 @@
-// Copyright 2018 Ladybug Tools authors. MIT License
+	let COR = {};
+
+	COR.url = '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
 
 
-	var COR = {};
 
 	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r14/';
 
@@ -39,10 +40,10 @@
 		}
 
 
-		if ( window.divHeadsUpHeader ) {
-			divHeadsUpHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			divHeadsUpHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			divHeadsUpHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+		if ( window.CORdivHeaderRight ) {
+			CORdivHeaderRight.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+			CORdivHeaderRight.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+			CORdivHeaderRight.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
 		window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
@@ -50,7 +51,6 @@
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 		COR.timeStart = Date.now();
-
 
 	}
 
@@ -86,7 +86,7 @@
 
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
-			divPopUpContents.innerHTML = '<img src=' + url + ' >';
+			CORdivItemsRight.innerHTML = '<img src=' + url + ' >';
 
 		} else {
 
@@ -95,6 +95,111 @@
 		}
 
 	}
+
+
+	COR.requestGbxmlFile = function( url ) {
+
+		timeStart = Date.now();
+
+		THR.setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, THR.axesHelper ] );
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callbackGbXML;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+			const fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
+
+			/*
+			divLog.innerHTML =
+			`
+				${fileAttributes.name}<br>
+				bytes loaded: ${xhr.loaded.toLocaleString()} of  ${xhr.total.toLocaleString() }<br>
+			`;
+			*/
+		}
+
+		function callbackGbXML ( xhr ) {
+
+			const gbxmlResponseXML =  xhr.target.responseXML;
+			const gbxml = xhr.target.responseXML.documentElement;
+
+			meshes = GBX.parseFileXML( gbxml );
+
+			THR.scene.add( ...meshes );
+
+			THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
+
+			// divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
+
+		}
+
+	}
+
+
+
+	COR.openGbxmlFile = function( files ) {
+
+		//console.log( 'file', files.files[ 0 ] );
+
+		timeStart = Date.now();
+
+		THR.setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, THR.axesHelper ] );
+
+		COR.fileAttributes = files.files[ 0 ];
+
+		const reader = new FileReader();
+		reader.onprogress = onRequestFileProgress;
+		reader.onload = function( event ) {
+
+			const parser = new DOMParser();
+
+			GBX.gbxmlResponseXML = parser.parseFromString( reader.result, "text/xml" );
+			//console.log( 'gbxmlResponseXML2', gbxmlResponseXML2 );
+
+			GBX.gbxml = GBX.gbxmlResponseXML.children[ 0 ];
+			//console.log( 'GBX.gbxml', GBX.gbxml );
+
+			//GBX.gbjson = GBX.parseFileXML( GBX.gbxml );
+			//GBX.surfaceJson = GBX.gbjson.Campus.Surface;
+
+			meshes = GBX.parseFileXML( GBX.gbxml );
+
+			//if ( files.files[ 0 ] ) { GBX.gbjson.fileName = files.files[ 0 ].name; }
+
+			THR.scene.add( ...meshes );
+
+			THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
+
+		}
+
+		reader.readAsText( files.files[ 0 ] );
+
+		function onRequestFileProgress( event ) {
+
+			APPdivLog.innerHTML =
+				COR.fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
+				//( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+			'';
+
+		}
+
+	};
+
+
+	COR.setMenuStyle = function( color ) {
+
+		stylesheetW3schools.href="https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		localStorage.setItem('GbxmlViewerStyleColor', color );
+
+	}
+
 
 
 
@@ -143,14 +248,14 @@
 		//const response = xhr.target.response;
 		const html = converter.makeHtml( xhr.target.responseText );
 
-		//divPopUp.innerHTML = '<div id=divPopUpContents >' + html + '</div>';
-		divPopUpContents.innerHTML = html;
-		divPopUp.style.display = 'block';
+		//CORdivMenuRight.innerHTML = '<div id=CORdivItemsRight >' + html + '</div>';
+		CORdivItemsRight.innerHTML = html;
+		CORdivMenuRight.style.display = 'block';
 		window.scrollTo( 0, 0 );
-		divPopUp.scrollTop = 0;
-		//divPopUpContents.scrollTop = 0;
-		divPopUp.scrollTo( 0, 0 );
-		//divPopUpContents.scrollTo( 0, 0 );
+		CORdivMenuRight.scrollTop = 0;
+		//CORdivItemsRight.scrollTop = 0;
+		CORdivMenuRight.scrollTo( 0, 0 );
+		//CORdivItemsRight.scrollTo( 0, 0 );
 
 	}
 
@@ -159,8 +264,8 @@
 	function callbackToTextarea( xhr ){
 
 		const response = xhr.target.response;
-		divPopUpContents.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-		divPopUp.style.display = 'block'
+		CORdivItemsRight.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
+		CORdivMenuRight.style.display = 'block'
 
 	}
 
@@ -269,8 +374,8 @@
 		const converter = new showdown.Converter();
 		const html = converter.makeHtml( markdown );
 
-		divPopUpContents.innerHTML = html;
-		divPopUp.style.display = 'block';
+		CORdivItemsRight.innerHTML = html;
+		CORdivMenuRight.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
 	}
@@ -348,7 +453,7 @@
 
 	COR.toggleNavLeft = function() {
 
-		divPopUp.style.display = 'none';
+		CORdivMenuRight.style.display = 'none';
 
 		if ( divHamburgerLeft.style.left === '' || divHamburgerLeft.style.left === '0px' ) {
 
@@ -368,7 +473,7 @@
 
 	COR.toggleNavRight = function() {
 
-		divPopUp.style.display = "none";
+		CORdivMenuRight.style.display = "none";
 
 		if ( divHeadsUp.style.left === '100%' ) {
 

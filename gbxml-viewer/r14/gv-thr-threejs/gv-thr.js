@@ -64,7 +64,7 @@ jshint esversion: 6
 
 
 
-	THR.updateDefaultFilePath = function() { // needed?
+	THR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
 
 		location.hash = parent.inpFilePath.value;
 
@@ -86,6 +86,88 @@ jshint esversion: 6
 
 	};
 
+
+	THR.zoomObjectBoundingSphere = function( obj ) {
+
+		const bbox = new THREE.Box3().setFromObject( obj );
+
+		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+		const center = sphere.center;
+		const radius = sphere.radius;
+
+		THR.controls.target.copy( center );
+		THR.controls.maxDistance = 5 * radius;
+
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		THR.camera.far = 10 * radius; //2 * camera.position.length();
+		THR.camera.updateProjectionMatrix();
+
+		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
+		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		THR.lightDirectional.target = obj;
+
+		if ( !THR.axesHelper ) {
+
+			THR.axesHelper = new THREE.AxesHelper( 1 );
+			THR.axesHelper.name = 'axesHelper';
+			THR.scene.add( THR.axesHelper );
+
+		}
+
+		THR.axesHelper.scale.set( radius, radius, radius );
+		THR.axesHelper.position.copy( center );
+
+		obj.userData.center = center;
+		obj.userData.radius = radius;
+
+		//		THR.scene.remove( cameraHelper );
+		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		//		THR.scene.add( cameraHelper );
+
+	};
+
+
+	THR.setSceneDispose = function( objArray = [] ) {
+
+		//console.log( 'renderer.info.memory.geometries 1', renderer.info.memory.geometries );
+
+		THR.scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh || child instanceof THREE.LineSegments ) {
+
+				child.geometry.dispose();
+				child.material.dispose();
+
+				THR.scene.remove( child );
+			}
+
+		} );
+
+
+		THR.scene.remove( ...objArray );
+
+		THR.axesHelper = undefined;
+
+		//getRenderInfo();
+
+	}
+
+
+
+	THR.getRenderInfo = function() {
+
+		console.log( 'renderer.info.memory.geometries', renderer.info.memory.geometries );
+		console.log( 'renderer.info.render', renderer.info.render );
+
+		/*
+		divLog.innerHTML +=
+		`
+		geometries: ${ renderer.info.memory.geometries.toLocaleString() }<br>
+		triangles: ${ renderer.info.render.triangles.toLocaleString() } <br>
+		lines: ${ renderer.info.render.lines.toLocaleString() } <br>
+		`;
+		*/
+	}
 
 
 	THR.animate = function() {
