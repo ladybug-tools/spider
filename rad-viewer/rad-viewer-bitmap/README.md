@@ -3,7 +3,7 @@
 <div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/tree/master/#rad-viewer/rad-viewer-bitmap/README.md'"
 value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ></div>
 
-# [Rad Viewer Bitmap Read Me]( ##rad-viewer/rad-viewer-bitmap/README.md )
+# [Rad Viewer Bitmap Read Me]( #rad-viewer/rad-viewer-bitmap/README.md )
 
 
 ## Concept
@@ -11,9 +11,9 @@ value="You are now in a GitHub web page view - Click this button to view this re
 View .RAD files with bitmaps provided for every surface
 
 
-## [Rad Viewer Bitmap]( http://www.ladybug.tools/spider/#rad-viewer/rad-viewer-bitmap/r1/rad-viewer-bitmap.html )
+## [Rad Viewer Bitmap]( http://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r1/rad-viewer-bitmap.html )
 
-<div><iframe class=iframeReadMe src=http://www.ladybug.tools/spider/#rad-viewer/rad-viewer-bitmap/r1/rad-viewer-bitmap.html width=100% height=400px >Iframes are not displayed on github.com</iframe></div>
+<div><iframe class=iframeReadMe src=http://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r1/rad-viewer-bitmap.html width=100% height=400px >Iframes are not displayed on github.com</iframe></div>
 
 _Latest project here_
 
