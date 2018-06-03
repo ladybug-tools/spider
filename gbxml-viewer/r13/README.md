@@ -6,6 +6,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 # Aragog gbXML Viewer R13 Read Me
 
 [Aragog gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. gbXML is an industry supported file format for sharing building information between numerous building design software tools.
+
 <!--
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-cor/gv-cor.html width=100% height=400px onload=this.contentWindow.controls.enableZoom=false; >Iframes are not displayed on github.com</iframe>
