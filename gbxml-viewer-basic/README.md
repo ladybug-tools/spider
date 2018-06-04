@@ -49,6 +49,14 @@ The gbXML portions are also interesting. The routines end up with three sets of 
 
 ## Change Log
 
+
+### 2018-06-04 ~ Theo
+
+R4
+* ten lines or so shorter
+* And a few more internal links between Three.js data and gbJSON data
+
+
 ### 2018-06-02 ~ Theo
 
 R3
