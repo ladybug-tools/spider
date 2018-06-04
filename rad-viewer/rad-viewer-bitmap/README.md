@@ -11,12 +11,17 @@ value="You are now in a GitHub web page view - Click this button to view this re
 View .RAD files with bitmaps provided for every surface
 
 
+
+<div><iframe class=iframeReadMe src=http://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r2/rad-viewer-bitmap.html width=100% height=400px >Iframes are not displayed on github.com</iframe></div>
+
+## [Rad Viewer Bitmap R2]( http://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r1/rad-viewer-bitmap.html )
+
+* Video texture applied to all surfaces
+
+
 ## [Rad Viewer Bitmap]( http://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r1/rad-viewer-bitmap.html )
 
-<div><iframe class=iframeReadMe src=http://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r1/rad-viewer-bitmap.html width=100% height=400px >Iframes are not displayed on github.com</iframe></div>
-
-_Latest project here_
-
+* Random bitmaps applied to each rad polygon
 
 ## Wish list
 
