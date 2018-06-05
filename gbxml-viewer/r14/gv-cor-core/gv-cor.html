@@ -6,13 +6,16 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "COR Core" >
-<title>'Aragog' gbXML Viewer R14.0 COR Core</title>
+<title>'Aragog' gbXML Viewer R14.1 COR Core</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<!--
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+-->
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
 <script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
@@ -46,7 +49,7 @@
 				<div id=divRowButtonsStyle ></div>
 
 				<p id=dragArea class=dragDropArea >
-					drag&drop gbXML files here<br>
+					drag & drop gbXML files here<br>
 					or <input type = "file" id = "inpFile" onchange="COR.openGbxmlFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md>?</a>
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
@@ -55,25 +58,25 @@
 					or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
 
 					<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal-gallery/gv-gal-gbxml.js';" >
 						gbXML.org
 					</button>
 
 					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal-gallery/gv-gal-spider-gbxml-sample-files.js';" >
 						Samples1
 					</button>
 
 					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal-gallery/gv-gal-spider-gbxml-sample-files-2.js';" >
 						Samples2
 					</button>
 
 					<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-						"const script = document.head.appendChild( document.createElement( 'script' ) );
+						"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 						script.src = '../gv-gal-gallery/gv-gal-spider-build-well.js';" >
 						Build Well
 					</button>
@@ -213,10 +216,11 @@
 			<div id = "divTitle" ></div>
 
 			<p>
-
+				<!--
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="THR.controls.autoRotate=!THR.controls.autoRotate;" title="toggle the scene spinning" >rotation</button>
 				|
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; title="toggle the flat bits" >surfaces</button>
+				-->
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible;" title="toggle the flat bits" >surfaces</button>
 
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible;" title="toggle the side lines" >edges</button>
 
@@ -224,7 +228,8 @@
 
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.setAllVisible();" title="toggle the windows" >all</button>
 				|
-				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.setAllVisible();GBX.zoomObjectBoundingSphere(GBX.surfaceMeshes);" title="Go to the home view"  >reset view</button>
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick="GBX.setAllVisible();THR.zoomObjectBoundingSphere(GBX.surfaceEdges);APPdivLog.innerHTML='';" title="Go to the home view"  >reset view</button>
 
 			</p>
 
@@ -242,7 +247,7 @@
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme"  onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
 				<!--
 					ontouchstart=divPopUp.style.display="none";
-				-->
+
 			</div>
 
 			<div id = "divPopUpContents" ></div>
@@ -268,6 +273,7 @@
 
 	</div>
 
+	-->
 
 	<div id = "divHeadsUp" class = "w3-theme-l5" >
 
@@ -355,7 +361,7 @@
 
 			const url = location.hash.slice( 1 );
 
-			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
+			COR.requestGbxmlFile( url );
 
 		} else {
 

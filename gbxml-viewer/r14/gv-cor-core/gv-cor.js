@@ -72,7 +72,8 @@
 
 			console.log( 'url', url );
 
-			COR.requestFileAndProgress( url, GBP.callbackGbXML );
+			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
+			COR.requestGbxmlFile( url );
 
 			//} else if ( ulc.endsWith( '.html' ) ) {
 
@@ -337,7 +338,7 @@
 
 		} else {
 
-			GBP.openGbxmlFile( event.dataTransfer );
+			GBX.openGbxmlFile( event.dataTransfer );
 
 		}
 

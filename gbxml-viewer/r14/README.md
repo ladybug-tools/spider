@@ -38,8 +38,15 @@ The goals for the files include:
 
 ## Change Log
 
-###
+### 2018-06-04 ~ Theo
 
+R14.1
+* Switch to Trackball camera control
+* GBX: more cleanup
+	* Add setAllVisible
+### 2018-06-01 ~ Theo
+
+R14
 * First commit
 
 

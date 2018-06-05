@@ -210,37 +210,15 @@
 
 	function getRenderInfo() {
 
-		console.log( 'renderer.info.memory.geometries', renderer.info.memory.geometries );
-		console.log( 'renderer.info.render', renderer.info.render );
+		console.log( 'renderer.info.memory.geometries', THR.renderer.info.memory.geometries );
+		console.log( 'renderer.info.render', THR.renderer.info.render );
 
 		divLog.innerHTML +=
 		`
-		geometries: ${ renderer.info.memory.geometries.toLocaleString() }<br>
-		triangles: ${ renderer.info.render.triangles.toLocaleString() } <br>
-		lines: ${ renderer.info.render.lines.toLocaleString() } <br>
+		geometries: ${ THR.renderer.info.memory.geometries.toLocaleString() }<br>
+		triangles: ${ THR.renderer.info.render.triangles.toLocaleString() } <br>
+		lines: ${ THR.renderer.info.render.lines.toLocaleString() } <br>
 		`;
-
-	}
-
-
-	function onWindowResize() {
-
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
-
-	}
-
-
-
-	function xxxanimate() {
-
-		requestAnimationFrame( animate );
-		renderer.render( THR.scene, THR.camera );
-		controls.update();
 
 	}
 

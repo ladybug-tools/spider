@@ -48,17 +48,11 @@
 
 		GBX.surfacesJson = GBX.gbjson.Campus.Surface;
 
-		GBX.surfaceMeshes = new THREE.Group();
-		GBX.surfaceMeshes.name = 'GBX.surfaceMeshes';
-		GBX.surfaceMeshes.add( ...GBX.getSurfaceMeshes() );
+		GBX.surfaceMeshes = GBX.getSurfaceMeshes();
 
-		GBX.surfaceEdges = new THREE.Group();
-		GBX.surfaceEdges.name = 'GBX.surfaceEdges';
-		GBX.surfaceEdges.add( ...GBX.getSurfaceEdges() );
+		GBX.surfaceEdges = GBX.getSurfaceEdges();
 
-		GBX.surfaceOpenings = new THREE.Group();
-		GBX.surfaceOpenings.name = 'GBX.surfaceOpenings';
-		GBX.surfaceOpenings.add( ...GBX.getOpenings() );
+		GBX.surfaceOpenings  = GBX.getOpenings();
 
 		return [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings ];
 
@@ -128,18 +122,18 @@
 	GBX.getSurfaceMeshes = function() {
 
 		const surfaces = GBX.surfacesJson; // gbjson.Campus.Surface;
-		surfaceMeshes = [];
+		const shapeVertices = []; // every shape will have an array of hole vertices - which may be empty
+		const holesArray = [];
 
 		for ( let surface of surfaces ) {
 
 			const holes = [];
-			let openings = surface.Opening;
 
-			if ( openings ) {
+			if ( surface.Opening ) {
 
-				openings = Array.isArray( openings ) ? openings : [ openings ];
+				surface.Opening = Array.isArray( surface.Opening ) ? surface.Opening : [ surface.Opening ];
 
-				for ( let opening of openings ) {
+				for ( let opening of surface.Opening ) {
 
 					const polyloop = opening.PlanarGeometry.PolyLoop;
 					const vertices = GBX.getVertices( polyloop );
@@ -149,16 +143,27 @@
 
 			}
 
+			holesArray.push( holes );
+
 			const polyloop = surface.PlanarGeometry.PolyLoop;
 			const vertices = GBX.getVertices( polyloop );
+			shapeVertices.push( vertices );
+
+		}
+
+		let surfaceMeshes = new THREE.Object3D();
+		surfaceMeshes.name = 'GBX.surfaceMeshes';
+
+		for ( let i = 0; i < shapeVertices.length; i++ ) {
 
 			const material = new THREE.MeshPhongMaterial( {
-				color: GBX.colors[ surface.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+				color: GBX.colors[ surfaces[ i ].surfaceType ], side: 2, opacity: 0.85, transparent: true } );
 
-			const shape = GBX.get3dShape( vertices, material, holes );
-			shape.userData.data = surface;
+			const shape = GBX.get3dShape( shapeVertices[ i ], material, holesArray[ i ] );
+
+			shape.userData.data = surfaces[ i ];
 			shape.castShadow = shape.receiveShadow = true;
-			surfaceMeshes.push( shape );
+			surfaceMeshes.add( shape );
 
 		}
 
@@ -167,21 +172,18 @@
 	};
 
 
-
 	GBX.getSurfaceEdges = function() {
 
-
-		const surfaceEdges = [];
-		const lineMaterial = new THREE.LineBasicMaterial( { color: 0x888888 } );
+		const surfaceEdges = new THREE.Object3D();
+		surfaceEdges.name = 'GBX.surfaceEdges';
 
 		for ( let mesh of GBX.surfaceMeshes.children ) {
 
-			mesh.userData.edges = mesh;
 			const edgesGeometry = new THREE.EdgesGeometry( mesh.geometry );
-			const surfaceEdge = new THREE.LineSegments( edgesGeometry, lineMaterial );
+			const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x888888 } ) );
 			surfaceEdge.rotation.copy( mesh.rotation );
 			surfaceEdge.position.copy( mesh.position );
-			surfaceEdges.push( surfaceEdge );
+			surfaceEdges.add( surfaceEdge ); // or add to surfaces??
 
 		}
 
@@ -193,22 +195,29 @@
 
 	GBX.getOpenings = function() {
 
-		const surfaceOpenings = [];
+		const surfaceOpenings = new THREE.Object3D();
+		surfaceOpenings.name = 'GBX.surfaceOpenings';
+
+		const surfacesWithOpenings = GBX.surfacesJson.filter( surface => surface.Opening );
+
+		GBX.openingsJson = [];
+
+		for ( let surface of surfacesWithOpenings ) {
+
+			surface.Opening = Array.isArray( surface.Opening ) ? surface.Opening : [ surface.Opening ];
+
+			GBX.openingsJson.push ( ...surface.Opening );
+
+		}
+
 		const material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.5, side: 2, transparent: true } );
 
-		for ( let surfJson of GBX.surfacesJson ) {
+		for ( let opening of GBX.openingsJson ) {
 
-			let openings = surfJson.Opening ? surfJson.Opening : [];
-			openings = Array.isArray( openings ) ? openings : [ openings ];
+			const points = GBX.getVertices( opening.PlanarGeometry.PolyLoop );
 
-			for ( let opening of openings ) {
-
-				const points = GBX.getVertices( opening.PlanarGeometry.PolyLoop );
-				const shapeMesh = GBX.get3dShape( points, material );
-				shapeMesh.userData.opening = opening;
-				surfaceOpenings.push( shapeMesh );
-
-			}
+			const shapeMesh = GBX.get3dShape( points, material );
+			surfaceOpenings.add( shapeMesh );
 
 		}
 
@@ -227,6 +236,8 @@
 
 
 
+	//
+
 	GBX.get3dShape = function( vertices, material, holes = [] ) {
 
 		// 2018-06-02
@@ -244,10 +255,12 @@
 
 		for ( let verticesHoles of holes ) {
 
+			const hole = new THREE.Path();
+
 			verticesHoles.map( vertex => referenceObject.localToWorld( vertex ) );
 
-			const hole = new THREE.Path();
 			hole.setFromPoints( verticesHoles );
+
 			holeVertices.push( hole );
 
 		}
@@ -278,7 +291,7 @@
 				const triangle = new THREE.Triangle();
 				triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
 
-				if ( triangle.getArea() === 0 ) { // looks like points are colinear therefore try next set
+				if ( triangle.getArea() === 0 ) { // points must be colinear therefore not usable
 
 					start++;
 					getPlane( points, start );
@@ -294,47 +307,3 @@
 
 	};
 
-
-
-	GBX.setAllVisible = function() {
-
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = true;
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			if ( !child.material ) { continue; }
-
-			child.material = new THREE.MeshPhongMaterial( {
-				color: GBX.colors[ child.userData.data.surfaceType ], side: 2, opacity: 0.85, transparent: true }
-			);
-			child.material.wireframe = false;
-			child.visible = true;
-
-		};
-
-		GBX.surfaceOpenings.visible = true;
-
-		for ( let child of GBX.surfaceOpenings.children ) {
-
-			if ( !child.material ) { continue; }
-
-			child.material = new THREE.MeshPhongMaterial( {
-				color: 0x000000, side: 2, opacity: 0.5, transparent: true }
-			);
-			child.material.wireframe = false;
-			child.visible = true;
-
-		};
-
-		//for ( let child of GBX.surfaceEdges.children ) {
-
-			//child.material.opacity = 0.85;
-			//child.material.wireframe = false;
-
-		//};
-
-		document.body.style.backgroundImage = '';
-
-	};

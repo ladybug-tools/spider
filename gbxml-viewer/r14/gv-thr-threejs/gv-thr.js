@@ -8,6 +8,7 @@ jshint esversion: 6
 	// Copyright 2018 Ladybug Tools authors. MIT License
 
 	var THR = {};
+	THR.cameraHelper = null;
 
 	THR.initThree = function() {
 
@@ -20,8 +21,15 @@ jshint esversion: 6
 		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 10000 );
 		THR.camera.up.set( 0, 0, 1 );
 
-		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
+		THR.controls = new THREE.TrackballControls( THR.camera, THR.renderer.domElement );
 		THR.controls.autoRotate = true;
+		THR.controls.rotateSpeed = 1.5;
+		THR.controls.zoomSpeed = 1.2;
+		THR.controls.panSpeed = 0.5;
+		THR.controls.noZoom = false;
+		THR.controls.noPan = false;
+		//controls.staticMoving = true;
+		//controls.dynamicDampingFactor = 0.3;
 
 		THR.scene = new THREE.Scene();
 
@@ -104,7 +112,7 @@ jshint esversion: 6
 
 		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
 		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
-		THR.lightDirectional.target = obj;
+
 
 		if ( !THR.axesHelper ) {
 
@@ -115,14 +123,15 @@ jshint esversion: 6
 		}
 
 		THR.axesHelper.scale.set( radius, radius, radius );
-		THR.axesHelper.position.copy( center );
+		THR.axesHelper.position.copy( THR.axesHelper );
 
+		THR.lightDirectional.target = obj;
 		obj.userData.center = center;
 		obj.userData.radius = radius;
 
-		//		THR.scene.remove( cameraHelper );
-		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-		//		THR.scene.add( cameraHelper );
+		//THR.scene.remove( THR.cameraHelper );
+		//THR.cameraHelper = new THREE.CameraHelper( THR.lightDirectional.shadow.camera );
+		//THR.scene.add( THR.cameraHelper );
 
 	};
 
