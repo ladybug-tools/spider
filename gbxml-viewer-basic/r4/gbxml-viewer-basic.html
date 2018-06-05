@@ -48,8 +48,9 @@
 		</p>
 
 		<p>
-			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/bristol-clifton-downs-fixed.xml' );" >Clifton</button>
-			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/coventry-university-of-warwick-small.xml' );" >Warwick</button>
+			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/bristol-clifton-downs-fixed.xml' );" >clifton</button>
+			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/london-office.xml' );" >london office</button>
+			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/coventry-university-of-warwick-small.xml' );" >warwick</button>
 			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/samples-2/17134-M17.xml' );" >17134-M17</button>
 		</p>
 
@@ -59,7 +60,8 @@
 
 <script>
 
-	const url = '../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
+	//const url = '../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
+	const url = '../../gbxml-sample-files/london-office.xml';
 	let timeStart;
 
 	var renderer, camera, controls, scene;

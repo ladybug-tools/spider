@@ -38,6 +38,14 @@ The goals for the files include:
 
 ## Change Log
 
+
+### 2018-06-05 ~ Theo
+
+R14.2
+* Add sample file galleries / complete rewrite of source
+* Updates to core and gbxml loader
+
+
 ### 2018-06-04 ~ Theo
 
 R14.1

@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Open, view gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-06-04" >
-<title>gbXML Viewer Loader R14</title>
+<meta name = "date" content = "2018-06-03" >
+<title>gbXML Loader R14</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -21,11 +21,10 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
-<script src = "gv-gbx.js" ></script>
-
-
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
+<script src = "../gv-thr-threejs/gv-thr.js" ></script>
+<script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
 	<div id = "divMenu" >
 
 		<div id = "divTitle" ></div>
@@ -50,10 +49,9 @@
 		</p>
 
 		<p>
-			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/bristol-clifton-downs-fixed.xml' );" >clifton</button>
-			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/london-office.xml' );" >london office</button>
-			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/coventry-university-of-warwick-small.xml' );" >warwick</button>
-			<button onclick = "requestGbxmlFile( '../../gbxml-sample-files/samples-2/17134-M17.xml' );" >17134-M17</button>
+			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml' );" >Clifton</button>
+			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml' );" >Warwick</button>
+			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/samples-2/17134-M17.xml' );" >17134-M17</button>
 		</p>
 
 		<div id = "divLog" ></div>
@@ -62,18 +60,18 @@
 
 <script>
 
-// source: https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer-basic
-
-	//const url = '../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
-	const url = '../../gbxml-sample-files/london-office.xml';
+	const url = '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
 	let timeStart;
 
 	var renderer, camera, controls, scene;
 	var lightAmbient, lightDirectional, lightPoint, axesHelper;
 	var geometry, material, mesh;
 
+	THR.initThree();
+	THR.animate();
+
 	init();
-	animate();
+
 
 	function init() {
 
@@ -89,38 +87,6 @@
 				${document.head.querySelector( '[name=description]' ).content }
 			</p>`;
 
-
-		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		document.body.appendChild( renderer.domElement );
-
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-		camera.position.set( -100, -100, 100 );
-		camera.up.set( 0, 0, 1 );
-
-		controls = new THREE.OrbitControls( camera, renderer.domElement );
-
-		scene = new THREE.Scene();
-
-		lightAmbient = new THREE.AmbientLight( 0x444444 );
-		scene.add( lightAmbient );
-
-		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
-		lightDirectional.shadow.mapSize.width = 2048;  // default 512
-		lightDirectional.shadow.mapSize.height = 2048;
-		lightDirectional.castShadow = true;
-		scene.add( lightDirectional );
-
-		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
-		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
-
-		camera.add( lightPoint );
-		scene.add( camera );
-
-		window.addEventListener( 'resize', onWindowResize, false );
-
-		window.addEventListener( 'orientationchange', onWindowResize, false );
 
 		requestGbxmlFile( url );
 
@@ -161,7 +127,7 @@
 
 			meshes = GBX.parseFileXML( gbxml );
 
-			scene.add( ...meshes );
+			THR.scene.add( ...meshes );
 
 			zoomObjectBoundingSphere( GBX.surfaceEdges );
 
@@ -182,34 +148,34 @@
 		const center = sphere.center;
 		const radius = sphere.radius;
 
-		controls.target.copy( center );
-		controls.maxDistance = 5 * radius;
+		THR.controls.target.copy( center );
+		THR.controls.maxDistance = 5 * radius;
 
-		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
-		camera.far = 10 * radius; //2 * camera.position.length();
-		camera.updateProjectionMatrix();
+		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		THR.camera.far = 10 * radius; //2 * camera.position.length();
+		THR.camera.updateProjectionMatrix();
 
-		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
-		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
-		lightDirectional.target = obj;
+		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
+		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		THR.lightDirectional.target = obj;
 
 		if ( !axesHelper ) {
 
-			axesHelper = new THREE.AxesHelper( 1 );
-			axesHelper.name = 'axesHelper';
-			scene.add( axesHelper );
+			THR.axesHelper = new THREE.AxesHelper( 1 );
+			THR.axesHelper.name = 'axesHelper';
+			THR.scene.add( THR.axesHelper );
 
 		}
 
-		axesHelper.scale.set( radius, radius, radius );
-		axesHelper.position.copy( center );
+		THR.axesHelper.scale.set( radius, radius, radius );
+		THR.axesHelper.position.copy( center );
 
 		obj.userData.center = center;
 		obj.userData.radius = radius;
 
-		//		scene.remove( cameraHelper );
+		//		THR.scene.remove( cameraHelper );
 		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-		//		scene.add( cameraHelper );
+		//		THR.scene.add( cameraHelper );
 
 	};
 
@@ -219,20 +185,20 @@
 
 		//console.log( 'renderer.info.memory.geometries 1', renderer.info.memory.geometries );
 
-		scene.traverse( function ( child ) {
+		THR.scene.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh || child instanceof THREE.LineSegments ) {
 
 				child.geometry.dispose();
 				child.material.dispose();
 
-				scene.remove( child );
+				THR.scene.remove( child );
 			}
 
 		} );
 
 
-		scene.remove( ...objArray );
+		THR.scene.remove( ...objArray );
 
 		axesHelper = undefined;
 
@@ -244,37 +210,15 @@
 
 	function getRenderInfo() {
 
-		console.log( 'renderer.info.memory.geometries', renderer.info.memory.geometries );
-		console.log( 'renderer.info.render', renderer.info.render );
+		console.log( 'renderer.info.memory.geometries', THR.renderer.info.memory.geometries );
+		console.log( 'renderer.info.render', THR.renderer.info.render );
 
 		divLog.innerHTML +=
 		`
-		geometries: ${ renderer.info.memory.geometries.toLocaleString() }<br>
-		triangles: ${ renderer.info.render.triangles.toLocaleString() } <br>
-		lines: ${ renderer.info.render.lines.toLocaleString() } <br>
+		geometries: ${ THR.renderer.info.memory.geometries.toLocaleString() }<br>
+		triangles: ${ THR.renderer.info.render.triangles.toLocaleString() } <br>
+		lines: ${ THR.renderer.info.render.lines.toLocaleString() } <br>
 		`;
-
-	}
-
-
-	function onWindowResize() {
-
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
-
-	}
-
-
-
-	function animate() {
-
-		requestAnimationFrame( animate );
-		renderer.render( scene, camera );
-		controls.update();
 
 	}
 

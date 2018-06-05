@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-06-05" >
-<title>'Aragog' gbXML Viewer R14.2 COR Core</title>
+<meta name = "date" content = "COR Core" >
+<title>'Aragog' gbXML Viewer R14.1 COR Core</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
 </head>
@@ -57,24 +57,28 @@
 
 					or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
 
-
-					<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
+					<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+						"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal-gallery/gv-gal-gbxml.js';" >
 						gbXML.org
 					</button>
 
-					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
+					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+						"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal-gallery/gv-gal-spider-gbxml-sample-files.js';" >
 						Samples1
 					</button>
 
-					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
+					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+						"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+						script.src = '../gv-gal-gallery/gv-gal-spider-gbxml-sample-files-2.js';" >
 						Samples2
 					</button>
 
-					<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
+					<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+						"APP.resetMenu(); var script = document.body.appendChild( document.createElement( 'script' ) );
+						COR.url = 'cookbook/07-create-exportable-buildings/test-gbxml-files/';
+						script.src = '../gv-gal-gallery/gv-gal-spider-build-well.js';" >
 						Build Well
 					</button>
 					<p>
@@ -88,29 +92,29 @@
 
 				<summary title="the primary viewer tools are here" >Features</summary>
 
-				<button id=butSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= loadScript('../gv-set-settings/gv-set.js')
-					title="Update colors, explode models and adjust viewing viewing parameters" >
+				<!--
+				<button id=butSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-set-settings/gv-set.js'; " title="Update colors, explode models and adjust viewing viewing parameters" >
 				Settings</button>
 
-				<!--
 				<button id=butMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep-reports/gv-rep.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
 				<button id=butMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-num-numbers/gv-num.js'; " title="To be deprecated" >
 				Numbers</button>
 
 				<button id=butIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-iss-issues/gv-iss.js';" title="Highlight duplicate items and areas of concern in a gbXML file" >
 				Issues</button>
 
 				<button id=butSaveChanges class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
+					"APP.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-sav-save-changes/gv-sav.js';" title="Save time with gbXML files that are frequently updated" >
 				Changes</button>
 
@@ -234,6 +238,58 @@
 
 	</div>
 
+	<!--
+	<div id = "divPopUp" >
+
+			<div id = "divPopUpHeader" class="w3-theme-d2 w3-hover-theme" >
+
+				pop-up window / click here to move / click outside to close
+
+				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme"  onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+				<!--
+					ontouchstart=divPopUp.style.display="none";
+
+			</div>
+
+			<div id = "divPopUpContents" ></div>
+
+	</div>
+
+
+	<div id = "divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); > &#9776; </div>
+
+	<div id = "divHeadsUp" class = "w3-theme-l5" >
+
+		<div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
+			right menu / click here to move
+
+			<button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+
+
+		</div>
+
+		<div id=divHUDheader class=mnuRightDiv ></div>
+		<div id=divHUDItems class=mnuRightDiv ></div>
+		<div id=divHUDfooter class=mnuRightDiv ></div>
+
+	</div>
+
+	-->
+
+	<div id = "divHeadsUp" class = "w3-theme-l5" >
+
+		<div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
+			right menu / click here to move
+		</div>
+
+		<div id=HUDdivShowHide class=mnuRightDiv ></div>
+		<div id=HUDdivEditSurface class=mnuRightDiv ></div>
+		<div id=HUDdivItems class=mnuRightDiv ></div>
+		<div id=HUDdivAttributes class=mnuRightDiv ></div>
+		<div id=HUDdivTellTales class=mnuRightDiv ></div>
+
+	</div>
+
 
 	<div id = "CORdivMenuRight" class = "w3-theme-l5" >
 
@@ -246,7 +302,16 @@
 
 	<div id = "divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); > &#9776; </div>
 
+
+
 <script>
+
+	var APP = {};
+
+	//GBX.defaultURL = '../../2018-05-08-gbxml-webinar/gbxml-clifton-downs-broken.xml';
+	//GBX.defaultURL = '../../../gbxml-sample-files/old-factory.xml';
+	//GBX.defaultURL = 'https://www.ladybug.tools/spider/gbxml-sample-files/bristol-clifton-downs-fixed.xml';
+
 
 	COR.initCore();
 	THR.initThree();
@@ -315,40 +380,74 @@
 	}
 
 
-	function loadScript( source ){
-
-		COR.resetMenu();
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = source ;
-
-	}
-
-
-
-	function loadGallery( button ){
-
-		COR.resetMenu();
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = '../gv-gal-gallery/gv-gal.js';
-
-		script.onload = function() { GAL.initGallery( button ); }
-
-	}
-
-
 
 	function onloadThreejs() {
 
 		APPdivLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
-		GBX.colors = GBX.colorsDefault;
-		GBX.setAllVisible();
+		if ( GBX.gbxmlResponseXML.URL.includes( 'bristol-clifton-down-road' ) ) {
+
+			/*
+			const scriptSave = document.head.appendChild( document.createElement( 'script' ) );
+			scriptSave.src = '../gv-sav/gv-sav.js';
+
+			scriptSave.onload = function() {
+
+				url = '../../../gbxml-sample-files/save-changes-samples/changes-bristol-clifton-town-road.json';
+
+				COR.requestFileAndProgress( url, APP.callbackJson );
+				APP.resetMenu();
+
+			}
+			*/
+
+		} else {
+
+			// drop the following?
+			let meshGroundHelper = THR.scene.getObjectByName( 'groundHelper' );
+			THR.scene.remove( meshGroundHelper );
+
+			let openings = THR.scene.getObjectByName( 'surfaceOpenings' );
+			THR.scene.remove( openings );
+
+			GBX.colors = GBX.colorsDefault;
+			GBX.setAllVisible();
+
+		}
 
 		HUD.setMenuOptions(); // gets things really going
 
-		COR.resetMenu();
+		APP.resetMenu();
 
 	}
+
+
+	APP.callbackJson = function( xhr ) {
+
+		const response = xhr.target.response;
+		GBI.surfaceChanges = JSON.parse( response )
+
+		SAV.getUpdates();
+
+	};
+
+
+
+	APP.resetMenu = function () {
+
+		menuButtons = document.querySelectorAll( "button.app-menu" );
+
+		menuButtons.forEach( element => {
+			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight ='';
+		} );
+
+		menuDetails = document.querySelectorAll( "details.app-menu" );
+
+		menuDetails.forEach( element => element.remove() );
+
+	};
+
+
 
 
 </script>

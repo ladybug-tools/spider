@@ -3,6 +3,7 @@
 	var user = 'ladybug-tools'
 	var repo = '/spider';
 	var pathRepo = 'cookbook/07-create-exportable-buildings/test-gbxml-files/';
+	//var pathRepo = COR.url;
 
 	var urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
 

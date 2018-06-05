@@ -55,22 +55,6 @@
 	}
 
 
-	COR.resetMenu = function () {
-
-		menuButtons = document.querySelectorAll( "button.app-menu" );
-
-		menuButtons.forEach( element => {
-			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight ='';
-		} );
-
-		menuDetails = document.querySelectorAll( "details.app-menu" );
-
-		menuDetails.forEach( element => element.remove() );
-
-	};
-
-
-
 	// handle location.hash change events
 
 	COR.onHashChange = function() {

@@ -12,7 +12,36 @@ value='You are now in a GitHub web page view - Click this button to view this re
 ## Full screen test script: [GAL Gallery]( http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-gal-gallery/gv-tmp.html )
 
 
-## Concept
+## Features
+
+* Uses the GitHub API to obtain up to date listings of file names in a directory
+* Display list of file names as links to source
+* Clicking links displays
+	* The source
+	* View the file in this gallery window
+	* View the file full screen in its own window
+		* Link may be use to embed file in other app or HTML pages
+
+
+## Wish list
+
+* Links to more sample files
+	* Where to find more?
+* Credits to sources of files
+
+## Issues
+
+* 2018-05-11 ~ Theo ~ sample files need more and better credits
+* 2018-05-11 ~ Theo ~ All sample files need latitude and longitude
+
+
+## Links of Interest
+
+* <https://github.com/GreenBuildingXML/Sample-gbXML-Files>
+* <https://github.com/ladybug-tools/spider/tree/master/gbxml-sample-files>
+* <https://github.com/ladybug-tools/spider/tree/master/cookbook/07-create-exportable-buildings/test-gbxml-files>
+
+
 
 
 
@@ -29,6 +58,14 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 
 ## Change Log
+
+### 2018-06-05 ~ Theo
+
+R14.2
+* gv-gal.js: complete rewrite
+	* Single script that can access and retrieve file names and paths from any repo on GitHub
+	* Fully namespaced
+
 
 ###  2018-06-04 ~ Theo
 

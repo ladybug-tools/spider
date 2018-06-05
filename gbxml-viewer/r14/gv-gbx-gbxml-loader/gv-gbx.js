@@ -231,7 +231,7 @@
 
 		// 2018-06-02
 
-		const plane = getPlane( vertices );
+		const plane = GBX.getPlane( vertices );
 
 		const referenceObject = new THREE.Object3D();
 		referenceObject.lookAt( plane.normal ); // copy the rotation of the plane
@@ -272,27 +272,26 @@
 
 			}
 
-
-			function getPlane ( points, start = 0 ) {
-
-				const triangle = new THREE.Triangle();
-				triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
-
-				if ( triangle.getArea() === 0 ) { // looks like points are colinear therefore try next set
-
-					start++;
-					getPlane( points, start );
-
-				}
-
-				const pl = new THREE.Plane();
-				const plane = triangle.getPlane( pl );
-
-				return plane;
-
-			}
-
 	};
+
+
+
+	GBX.getPlane = function( points, start = 0 ) {
+
+		const triangle = new THREE.Triangle();
+		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+		GBX.plane = triangle.getPlane( new THREE.Plane() );
+
+		if ( triangle.getArea() === 0 ) { // looks like points are colinear therefore try next set
+
+			start++;
+			GBX.getPlane( points, start );
+
+		}
+
+		return GBX.plane;
+
+	}
 
 
 
@@ -327,13 +326,6 @@
 			child.visible = true;
 
 		};
-
-		//for ( let child of GBX.surfaceEdges.children ) {
-
-			//child.material.opacity = 0.85;
-			//child.material.wireframe = false;
-
-		//};
 
 		document.body.style.backgroundImage = '';
 
