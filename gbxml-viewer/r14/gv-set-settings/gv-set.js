@@ -1,5 +1,8 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
 
+
+/*global THREE, THR, GBX,COR */
+/* jshint esversion: 6 */
 	var SET = {};
 
 	// move into own related functions?
@@ -12,28 +15,14 @@
 	SET.localClipZ1= new THREE.Plane( new THREE.Vector3( -0, 0, -1 ), 0 );
 	SET.localClipZ2= new THREE.Plane( new THREE.Vector3( 0, 0, 1 ), 0 );
 
+	SET.explodeStart = false;
 
-	SET.initSettings = function() {
+	SET.initSettings = function() {  //runs by itself on load
 
-		if ( window.butMenuLoad ) { // in testing iframe
-
-			SET.butSettings = butMenuLoad;
-
-			SET.title = 'gv-set - gbXML Viewer Settings';
-			document.title = SET.title;
-			aDocumentTitle.innerHTML = SET.title;
-			SET.butSettings.innerHTML = SET.title;
-
-		} else {
-
-			CORdivMenuRight.style.display = 'none';
-			SET.butSettings = butSettings;
-
-		}
+		CORdivMenuRight.style.display = 'none';
+		SET.butSettings = butSettings;
 
 		if ( SET.butSettings.style.fontStyle !== 'italic' ) {
-
-			//SET.explodeStart = false;
 
 			divMenuItems.innerHTML =
 			`
@@ -48,13 +37,14 @@
 						 <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
 						 <button onclick=GBX.setAllVisible(); >all</button>
 					</div>
-					-->
+
 					<br>
 
 					<div id=SETdivShowHide ></div>
 
 					<hr>
 
+					-->
 					<div>
 						<b>materials settings</b><br>
 						<button id=butSetRandomMaterial onclick=SET.setRandomMaterial(); >Set random material</button>
@@ -78,37 +68,40 @@
 					<hr>
 
 					<div>
-
 						<b>scene settings</b><br>
+						<!--
 						<button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button>
+						-->
 
-					<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
+						<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
 					</div>
 
-					<p><button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
+					<p>
+						<button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
 
-					<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
-
-					</p>
-
-
-					<p><button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
-
-					<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
+						<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
 
 					</p>
 
-					<div>
+
+					<p>
+						<button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
+
+						<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
+
+					</p>
+
+					<p>
 						<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
 						<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
 						<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
-					</div>
+					</p>
 
-					<div>
+					<p>
 						<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
 						<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
 						<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
-					</div>
+					</p>
 
 					<hr>
 
@@ -181,37 +174,27 @@
 
 
 						<!--
-						<div>
-						rotate section on Z-axis: <output id=outRotate >0</output><br>
-						<input type=range id=inpRotate max=180 min=-180 step=1 value=1
-						oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
+						<div> // To be made to work
+							rotate section on Z-axis: <output id=outRotate >0</output><br>
+							<input type=range id=inpRotate max=180 min=-180 step=1 value=1
+							oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
+							</div>
 						</div>
-
-					</div>
-
 						-->
+
 					<hr>
 
 				</details>`;
 
-			//+ divMenuItems.innerHTML;
+			//SET.butSettings.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 
-			//SET.butSettings.style.backgroundColor = 'var( --but-bg-color )';
+			SET.butSettings.style.cssText =  COR.buttonToggleCss;
 
-			//GBI.setPanelShowHide( SETdivShowHide );
-
-			SET.butSettings.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-
-
-			butts = detSettings.getElementsByTagName( "button" );
+			const butts = detSettings.getElementsByTagName( "button" );
 			//console.log( 'butts', butts );
 
-			for ( butt of butts ) {
+			for ( let butt of butts ) {
 
-				//butt.classList.add( "app-menu" );
-				//butt.classList.add( "w3-theme-d1" );
-				//butt.classList.add( "w3-hover-theme" );
-				//butt.classList.add( "w3-hover-border-theme" );
 				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
 
 			}
@@ -225,10 +208,8 @@
 
 		}
 
-		THR.controls.autoRotate = false;
+		//THR.controls.autoRotate = false;
 		THR.controls.keys = false;
-
-
 
 	}();
 
@@ -336,10 +317,10 @@
 
 		GBX.surfaceMeshes.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh
-					&& ( SET.surfaceAdjacencyDuplicates === undefined || SET.surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) === false )
-					&& ( SET.surfaceAdjacencyInvalids === undefined || SET.surfaceAdjacencyInvalids.includes( child.userData.data.Name ) === false )
-					&& ( SET.surfaceCoordinateDuplicates === undefined || SET.surfaceCoordinateDuplicates.includes( child.userData.data.Name ) === false )
+			if ( child instanceof THREE.Mesh &&
+				( SET.surfaceAdjacencyDuplicates === undefined || SET.surfaceAdjacencyDuplicates.includes( child.userData.data.Name ) === false ) &&
+				( SET.surfaceAdjacencyInvalids === undefined || SET.surfaceAdjacencyInvalids.includes( child.userData.data.Name ) === false ) &&
+				( SET.surfaceCoordinateDuplicates === undefined || SET.surfaceCoordinateDuplicates.includes( child.userData.data.Name ) === false )
 
 			) {
 
@@ -458,6 +439,7 @@
 
 		let meshGridHelper = THR.scene.getObjectByName( 'gridHelper' );
 
+
 		if ( !meshGridHelper) {
 
 			const meshes = GBX.surfaceMeshes.children.filter( attribute => attribute.userData.data.surfaceType === 'ExteriorWall' );
@@ -535,7 +517,7 @@
 			SET.cameraOrtho = new THREE.OrthographicCamera( width / -3, width / 3, height / 3, height / - 3, 1, 1000 );
 			SET.cameraOrtho.up.set( 0, 0, 1 );
 			THR.scene.add( SET.cameraOrtho );
-			SET.controlsOrtho = new THREE.OrbitControls( SET.cameraOrtho, THR.renderer.domElement );
+			SET.controlsOrtho = new THREE.TrackballControls( SET.cameraOrtho, THR.renderer.domElement );
 		}
 
 		if ( butSetOrtho.style.backgroundColor !== 'var( --but-bg-color )' ) {
@@ -545,7 +527,7 @@
 			THR.controls = SET.controlsOrtho;
 
 			GBX.setAllVisible();
-			GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
+			THR.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
 			butSetOrtho.style.backgroundColor = 'var( --but-bg-color )';
 
@@ -558,7 +540,7 @@
 			//THR.scene.remove( SET.cameraOrtho );
 
 			GBX.setAllVisible();
-			GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
+			THR.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
 			butSetOrtho.style.backgroundColor = '';
 
@@ -591,33 +573,11 @@
 
 	//////////
 
-	SET.explodeReset = function() {
-
-		if ( SET.explodeStart === false ) { SET.explodeInit(); }
-
-		THR.scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh ) {
-
-				child.position.copy( child.userData.positionStart1 );
-
-			}
-
-		} );
-
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceOpenings.visible = true;
-		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
-
-	};
-
-
-
 	SET.explodeInit = function() {
 
 		THR.scene.updateMatrixWorld();
 
-		THR.scene.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -635,11 +595,36 @@
 
 
 
+	SET.explodeReset = function() {
+
+		if ( SET.explodeStart === false ) { SET.explodeInit(); }
+
+		GBX.surfaceMeshes.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh && child.userData.positionStart1 ) {
+
+				child.position.copy( child.userData.positionStart1 );
+
+			}
+
+		} );
+
+		GBX.surfaceEdges.visible = true;
+		GBX.surfaceOpenings.visible = true;
+		THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
+
+	};
+
+
+
+
+
+
 	SET.explodePlus = function() {
 
 		if ( SET.explodeStart === false ) { SET.explodeInit(); }
 
-		const s = 1;
+		const size = 1;
 
 		GBX.surfaceEdges.visible = false;
 		GBX.surfaceOpenings.visible = false;
@@ -647,7 +632,7 @@
 		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
 		const center = sphere.center;
-		const radius = sphere.radius;
+		//const radius = sphere.radius;
 
 		THR.scene.updateMatrixWorld();
 
@@ -660,7 +645,7 @@
 				const position = child.geometry.boundingSphere.center.clone();
 				position.applyMatrix4( child.matrixWorld );
 
-				const vec = position.sub( center ).normalize().multiplyScalar( s )
+				const vec = position.sub( center ).normalize().multiplyScalar( size );
 
 				child.position.add( vec );
 
@@ -676,7 +661,7 @@
 
 		if ( SET.explodeStart === false ) { SET.explodeInit(); }
 
-		const s = 1;
+		const size = 1;
 
 		GBX.surfaceEdges.visible = false;
 		GBX.surfaceOpenings.visible = false;
@@ -684,7 +669,7 @@
 		const bbox = new THREE.Box3().setFromObject( GBX.surfaceMeshes );
 		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
 		const center = sphere.center;
-		const radius = sphere.radius;
+		//const radius = sphere.radius;
 
 		THR.scene.updateMatrixWorld();
 
@@ -697,7 +682,7 @@
 				const position = child.geometry.boundingSphere.center.clone();
 				position.applyMatrix4( child.matrixWorld );
 
-				const vec = position.sub( center ).normalize().multiplyScalar( s )
+				const vec = position.sub( center ).normalize().multiplyScalar( size );
 
 				child.position.sub( vec );
 
@@ -713,7 +698,7 @@
 
 		if ( SET.explodeStart === false ) { SET.explodeInit(); }
 
-		const s = 1;
+		//const s = 1;
 
 		GBX.surfaceEdges.visible = false;
 		GBX.surfaceOpenings.visible = false;
@@ -724,7 +709,7 @@
 
 		THR.scene.updateMatrixWorld();
 
-		THR.scene.traverse( function ( child ) {
+		GBX.surfaceMeshes.traverse( function ( child ) {
 
 			if ( child instanceof THREE.Mesh ) {
 
@@ -747,7 +732,7 @@
 
 		} );
 
-		GBX.zoomObjectBoundingSphere( GBX.surfaceMeshes );
+		THR.zoomObjectBoundingSphere( GBX.surfaceMeshes );
 
 	};
 
@@ -781,6 +766,7 @@
 	};
 
 
+
 	SET.updateCLipX = function() {
 
 		const origin = THR.axesHelper.position.x;
@@ -790,7 +776,7 @@
 		SET.localClipX2.constant = - origin + - parseInt( inpClipX2.value, 10 );
 		//console.log( '', SET.localClip2.constant );
 
-	}
+	};
 
 
 
@@ -802,8 +788,8 @@
 
 				if ( child instanceof THREE.Mesh ) {
 
-					child.material.clippingPlanes = [ SET.localClipX1, SET.localClipX2 ],
-					child.material.clipShadows = true,
+					child.material.clippingPlanes = [ SET.localClipX1, SET.localClipX2 ];
+					child.material.clipShadows = true;
 					child.material.needsUpdate = true;
 
 				}
@@ -828,7 +814,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -841,7 +827,7 @@
 		SET.localClipY2.constant = - origin + - parseInt( inpClipY2.value, 10 );
 		//console.log( '', SET.localClip2.constant );
 
-	}
+	};
 
 
 
@@ -853,8 +839,8 @@
 
 				if ( child instanceof THREE.Mesh ) {
 
-					child.material.clippingPlanes = [ SET.localClipY1, SET.localClipY2 ],
-					child.material.clipShadows = true,
+					child.material.clippingPlanes = [ SET.localClipY1, SET.localClipY2 ];
+					child.material.clipShadows = true;
 					child.material.needsUpdate = true;
 
 				}
@@ -879,7 +865,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -892,7 +878,7 @@
 		SET.localClipZ2.constant = - origin + - parseInt( inpClipZ2.value, 10 );
 		//console.log( '', SET.localClip2.constant );
 
-	}
+	};
 
 
 
@@ -906,8 +892,8 @@
 
 				if ( child instanceof THREE.Mesh ) {
 
-					child.material.clippingPlanes = [ SET.localClipZ1, SET.localClipZ2 ],
-					child.material.clipShadows = true,
+					child.material.clippingPlanes = [ SET.localClipZ1, SET.localClipZ2 ];
+					child.material.clipShadows = true;
 					child.material.needsUpdate = true;
 
 				}
@@ -935,4 +921,4 @@
 			//butSectionViewZ.style.fontWeight = '';
 		}
 
-	}
+	};

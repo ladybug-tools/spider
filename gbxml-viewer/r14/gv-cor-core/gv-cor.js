@@ -1,7 +1,11 @@
+	// Copyright 2018 Ladybug Tools authors. MIT License
+	/* globals THREE, THR, GBX */
+	/* jshint esversion: 6 */
+
+
 	let COR = {};
 
 	COR.url = '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
-
 
 
 	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r14/';
@@ -14,6 +18,7 @@
 
 	COR.colorButtonToggle = 'pink';
 	COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
+
 
 	COR.initCore = function() {
 
@@ -52,7 +57,8 @@
 
 		COR.timeStart = Date.now();
 
-	}
+	};
+
 
 
 	COR.resetMenu = function () {
@@ -82,7 +88,7 @@
 
 		if ( ulc.endsWith( '.md' ) ) {
 
-			COR.requestFile( url, callbackMarkdown );
+			COR.requestFile( url, COR.callbackMarkdown );
 
 		} else if ( ulc.endsWith( '.xml' ) ) {
 
@@ -107,11 +113,12 @@
 
 		} else {
 
-			COR.requestFile( urlGitHubPage + url, callbackToTextarea );
+			COR.requestFile( urlGitHubPage + url, COR.callbackToTextarea );
 
 		}
 
-	}
+	};
+
 
 
 	COR.requestGbxmlFile = function( url ) {
@@ -156,7 +163,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -193,7 +200,7 @@
 
 			THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
 
-		}
+		};
 
 		reader.readAsText( files.files[ 0 ] );
 
@@ -215,7 +222,7 @@
 
 		localStorage.setItem('GbxmlViewerStyleColor', color );
 
-	}
+	};
 
 
 
@@ -230,7 +237,7 @@
 		xhr.onload = callback;
 		xhr.send( null );
 
-	}
+	};
 
 
 
@@ -253,12 +260,12 @@
 
 		}
 
-	}
+	};
 
 
 	// handle callbacks with file data events
 
-	function callbackMarkdown( xhr ){
+	COR.callbackMarkdown = function( xhr ){
 
 		showdown.setFlavor('github');
 		const converter = new showdown.Converter();
@@ -274,24 +281,24 @@
 		CORdivMenuRight.scrollTo( 0, 0 );
 		//CORdivItemsRight.scrollTo( 0, 0 );
 
-	}
+	};
 
 
 
-	function callbackToTextarea( xhr ){
+	COR.callbackToTextarea = function( xhr ){
 
 		const response = xhr.target.response;
 		CORdivItemsRight.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
-		CORdivMenuRight.style.display = 'block'
+		CORdivMenuRight.style.display = 'block';
 
-	}
+	};
 
 
 
 	COR.callbackJson = function( xhr ) {
 
 		const response = xhr.target.response;
-		GBI.surfaceChanges = JSON.parse( response )
+		GBI.surfaceChanges = JSON.parse( response );
 		console.log( 'response', response);
 		SAV.getUpdates();
 
@@ -331,11 +338,11 @@
 
 			console.log( '', files );
 
-		}
+		};
 
 		reader.readAsText( files.files[0] );
 
-	}
+	};
 
 
 
@@ -360,27 +367,8 @@
 
 		event.preventDefault();
 
-	}
+	};
 
-
-
-	COR.ZZZdropIframe = event => {
-
-		event.preventDefault();
-
-		var iframeUrl = event.dataTransfer.getData( 'URL' );
-
-		if ( iframeUrl ) {
-
-			ifrThree.contentWindow.location.hash = iframeUrl;
-
-		} else {
-
-			ifrThree.contentWindow.GBX.openGbxmlFile( event.dataTransfer );
-
-		}
-
-	}
 
 
 	// handle drag and drop events
@@ -395,7 +383,7 @@
 		CORdivMenuRight.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
-	}
+	};
 
 
 	// handle menu header dragging with mouse or touch events
@@ -427,7 +415,7 @@
 		window.removeEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
 		event.preventDefault();
 
-	}
+	};
 
 
 
@@ -484,7 +472,7 @@
 
 		}
 
-	}
+	};
 
 
 
@@ -500,7 +488,7 @@
 
 			} else if ( window.innerWidth > 600 ) {
 
-				divHeadsUp.style.left = '70%'
+				divHeadsUp.style.left = '70%';
 
 			} else {
 
@@ -514,5 +502,5 @@
 
 		}
 
-	}
+	};
 

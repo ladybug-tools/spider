@@ -1,9 +1,5 @@
-/*global
-THREE
-*/
-/*
-jshint esversion: 6
-*/
+	/*global THREE, GBX*/
+	/* jshint esversion: 6 */
 
 	// Copyright 2018 Ladybug Tools authors. MIT License
 
@@ -113,7 +109,6 @@ jshint esversion: 6
 		THR.lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
 		THR.lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
 
-
 		if ( !THR.axesHelper ) {
 
 			THR.axesHelper = new THREE.AxesHelper( 1 );
@@ -123,15 +118,15 @@ jshint esversion: 6
 		}
 
 		THR.axesHelper.scale.set( radius, radius, radius );
-		THR.axesHelper.position.copy( THR.axesHelper );
+		THR.axesHelper.position.copy( center);
 
-		THR.lightDirectional.target = obj;
-		obj.userData.center = center;
-		obj.userData.radius = radius;
+		THR.lightDirectional.target = THR.axesHelper;
+		GBX.surfaceMeshes.userData.center = center;
+		GBX.surfaceMeshes.userData.radius = radius;
 
-		//THR.scene.remove( THR.cameraHelper );
-		//THR.cameraHelper = new THREE.CameraHelper( THR.lightDirectional.shadow.camera );
-		//THR.scene.add( THR.cameraHelper );
+		THR.scene.remove( THR.cameraHelper );
+		THR.cameraHelper = new THREE.CameraHelper( THR.lightDirectional.shadow.camera );
+		THR.scene.add( THR.cameraHelper );
 
 	};
 
@@ -159,14 +154,14 @@ jshint esversion: 6
 
 		//getRenderInfo();
 
-	}
+	};
 
 
 
 	THR.getRenderInfo = function() {
 
-		console.log( 'renderer.info.memory.geometries', renderer.info.memory.geometries );
-		console.log( 'renderer.info.render', renderer.info.render );
+		console.log( 'renderer.info.memory.geometries', THR.renderer.info.memory.geometries );
+		console.log( 'renderer.info.render', THR.renderer.info.render );
 
 		/*
 		divLog.innerHTML +=
@@ -176,7 +171,8 @@ jshint esversion: 6
 		lines: ${ renderer.info.render.lines.toLocaleString() } <br>
 		`;
 		*/
-	}
+	};
+
 
 
 	THR.animate = function() {

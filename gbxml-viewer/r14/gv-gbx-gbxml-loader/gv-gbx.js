@@ -6,7 +6,7 @@
 
 	GBX.gbxml = null;
 	GBX.gbjson = null; // xnl converted to json
-	GBX.surfaceJson = null; // useful subset of GBX.gbjson
+	GBX.surfacesJson = null; // useful subset of GBX.gbjson
 
 	GBX.surfaceMeshes= null; // Three.js Shapes as Meshes created from GBX.surfaceJson
 	GBX.surfaceEdges= null; // Three.js edges helper creare from GBX.surfaceMeshes
@@ -128,7 +128,7 @@
 	GBX.getSurfaceMeshes = function() {
 
 		const surfaces = GBX.surfacesJson; // gbjson.Campus.Surface;
-		surfaceMeshes = [];
+		const surfaceMeshes = [];
 
 		for ( let surface of surfaces ) {
 
@@ -205,7 +205,8 @@
 
 				const points = GBX.getVertices( opening.PlanarGeometry.PolyLoop );
 				const shapeMesh = GBX.get3dShape( points, material );
-				shapeMesh.userData.opening = opening;
+				shapeMesh.userData.data = opening;
+
 				surfaceOpenings.push( shapeMesh );
 
 			}
@@ -231,7 +232,7 @@
 
 		// 2018-06-02
 
-		const plane = GBX.getPlane( vertices );
+		const plane = getPlane( vertices );
 
 		const referenceObject = new THREE.Object3D();
 		referenceObject.lookAt( plane.normal ); // copy the rotation of the plane
@@ -272,11 +273,28 @@
 
 			}
 
+
+			function getPlane ( points, start = 0 ) {
+
+				const triangle = new THREE.Triangle();
+				triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+				GBX.plane = triangle.getPlane( new THREE.Plane() );
+
+				if ( triangle.getArea() === 0 ) { // looks like points are colinear therefore try next set
+
+					start++;
+					getPlane( points, start );
+
+				}
+
+				return GBX.plane;
+
+			}
+
 	};
 
 
-
-	GBX.getPlane = function( points, start = 0 ) {
+	GBX.getPlane = function( points, start = 0 ) { // used by numbers
 
 		const triangle = new THREE.Triangle();
 		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
@@ -285,15 +303,13 @@
 		if ( triangle.getArea() === 0 ) { // looks like points are colinear therefore try next set
 
 			start++;
-			GBX.getPlane( points, start );
+			getPlane( points, start );
 
 		}
 
 		return GBX.plane;
 
 	}
-
-
 
 	GBX.setAllVisible = function() {
 
@@ -311,7 +327,7 @@
 			child.material.wireframe = false;
 			child.visible = true;
 
-		};
+		}
 
 		GBX.surfaceOpenings.visible = true;
 
@@ -325,7 +341,7 @@
 			child.material.wireframe = false;
 			child.visible = true;
 
-		};
+		}
 
 		document.body.style.backgroundImage = '';
 

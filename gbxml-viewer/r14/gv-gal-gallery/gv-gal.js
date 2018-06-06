@@ -1,4 +1,6 @@
-// Copyright 2018 Ladybug Tools authors. MIT License
+	// Copyright 2018 Ladybug Tools authors. MIT License
+	/* globals THREE, COR, THR, GBX */
+	/* jshint esversion: 6 */
 
 	let GAL = {};
 
@@ -12,12 +14,12 @@
 			GAL.user = 'GreenBuildingXML';
 			GAL.repo = '/Sample-gbXML-Files';
 			GAL.pathRepo = '';
-			GAL.title = 'gbXML Sample Files on GitHub'
+			GAL.title = 'gbXML Sample Files on GitHub';
 			GAL.button = butGalleryGbxml;
 
 		} else if ( button.id === 'butGallerySampleFiles' ) {
 
-			GAL.user = 'ladybug-tools'
+			GAL.user = 'ladybug-tools';
 			GAL.repo = '/spider';
 			GAL.pathRepo = 'gbxml-sample-files/';
 			GAL.title = 'Ladybug Tools/Spider gbXML Viewer sample files on GitHub';
@@ -25,7 +27,7 @@
 
 		} else if ( button.id === 'butGallerySamples2' ) {
 
-			GAL.user = 'ladybug-tools'
+			GAL.user = 'ladybug-tools';
 			GAL.repo = '/spider';
 			GAL.pathRepo = 'gbxml-sample-files/samples-2/';
 			GAL.title = 'Ladybug Tools/Spider gbXML Viewer sample files #2 on GitHub';
@@ -33,7 +35,7 @@
 
 		} else if ( button.id === 'butGalleryBuildWell' ) {
 
-			GAL.user = 'ladybug-tools'
+			GAL.user = 'ladybug-tools';
 			GAL.repo = '/spider';
 			GAL.pathRepo = 'cookbook/07-create-exportable-buildings/test-gbxml-files/';
 			GAL.title = 'Build Well on GitHub';
@@ -76,14 +78,14 @@
 
 		}
 
-	}
+	};
 
 
 
 	GAL.callbackGitHubMenu = function( xhr ) {
 
 		const iconInfo = `<img src=${COR.iconGitHubMark} height=14 >`;
-		const threeDefaultFile = '../gv-gbx/gv-gbx.html';
+		//const threeDefaultFile = '../gv-gbx/gv-gbx.html';
 		const response = xhr.target.response;
 		const files = JSON.parse( response );
 
@@ -91,7 +93,7 @@
 
 		for ( let i = 0; i < files.length; i++ ) {
 
-			file = files[ i ];
+			const file = files[ i ];
 
 			if ( file.name === 'README.md' || !file.name.endsWith( '.xml' ) ) { continue; }
 
@@ -113,6 +115,6 @@
 
 		divGallery.innerHTML = txt;
 
-	}
+	};
 
 

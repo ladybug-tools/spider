@@ -98,12 +98,14 @@
 					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-rep-reports/gv-rep.js'; " title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
+				-->
 
-				<button id=butMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-num-numbers/gv-num.js'; " title="To be deprecated" >
+				<button id=butMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick= loadScript('../gv-num-numbers/gv-num.js')
+					title="matters of interest" >
 				Numbers</button>
 
+				<!--
 				<button id=butIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-iss-issues/gv-iss.js';" title="Highlight duplicate items and areas of concern in a gbXML file" >
@@ -304,7 +306,7 @@
 			//COR.requestFileAndProgress( COR.defaultURL, GBX.callbackGbXML );
 
 			COR.requestGbxmlFile( COR.url );
-			COR.requestFile( COR.uriDefaultFile, callbackMarkdown );
+			COR.requestFile( COR.uriDefaultFile, COR.callbackMarkdown );
 
 		}
 
@@ -313,6 +315,9 @@
 		THR.controls.enableKeys = false;
 
 	}
+
+
+	// still experimenting...
 
 
 	function loadScript( source ){
