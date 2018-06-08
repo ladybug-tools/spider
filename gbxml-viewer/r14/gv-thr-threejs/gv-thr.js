@@ -2,8 +2,10 @@
 	/* jshint esversion: 6 */
 
 	// Copyright 2018 Ladybug Tools authors. MIT License
+	// to do: add render info button somewhere?
 
 	var THR = {};
+
 	THR.cameraHelper = null;
 
 	THR.initThree = function() {
@@ -133,16 +135,22 @@
 
 	THR.setSceneDispose = function( objArray = [] ) {
 
-		//console.log( 'renderer.info.memory.geometries 1', renderer.info.memory.geometries );
+		//console.log( 'THR.scene', THR.scene );
 
 		THR.scene.traverse( function ( child ) {
 
-			if ( child instanceof THREE.Mesh || child instanceof THREE.LineSegments ) {
+			if ( child instanceof THREE.Mesh ) {
 
 				child.geometry.dispose();
 				child.material.dispose();
 
 				THR.scene.remove( child );
+
+			} else if( child instanceof THREE.LineSegments ) {
+
+				child.geometry.dispose();
+				child.material.dispose();
+
 			}
 
 		} );

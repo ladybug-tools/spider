@@ -20,6 +20,7 @@
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
 <script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
 <script src = "../gv-cor-core/gv-cor.js" ></script>
+<script src = "../gv-sel-select-attributes/gv-sel.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
@@ -48,7 +49,7 @@
 
 				<div id=divRowButtonsStyle ></div>
 
-				<p id=dragArea class=dragDropArea >
+				<p id=CORdragArea class=dragDropArea >
 					drag & drop gbXML files here<br>
 					or <input type = "file" id = "inpFile" onchange="COR.openGbxmlFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md>?</a>
@@ -77,7 +78,7 @@
 						onclick = loadGallery(this) >
 						Build Well
 					</button>
-					<p>
+				<p>
 
 				<hr>
 
@@ -114,14 +115,7 @@
 					script.src = '../gv-sav-save-changes/gv-sav.js';" title="Save time with gbXML files that are frequently updated" >
 				Changes</button>
 
-
-				<button id=butReports0 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-rep/gv-rep.js'; " title="To be deprecated"      style=opacity:0.6; >
-				reports</button>
-
-			-->
-
+				-->
 
 				<hr>
 
@@ -204,7 +198,6 @@
 
 	</div>
 
-
 	<div id = "divHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
 
 
@@ -226,11 +219,11 @@
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.setAllVisible();" title="toggle the windows" >all</button>
 				|
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick="GBX.setAllVisible();THR.zoomObjectBoundingSphere(GBX.surfaceEdges);APPdivLog.innerHTML='';" title="Go to the home view"  >reset view</button>
+					onclick="GBX.setAllVisible();THR.zoomObjectBoundingSphere(GBX.surfaceEdges);CORdivLog.innerHTML='';" title="Go to the home view"  >reset view</button>
 
 			</p>
 
-		<div id=APPdivLog ></div>
+		<div id=CORdivLog ></div>
 
 	</div>
 
@@ -247,6 +240,9 @@
 	<div id = "divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); > &#9776; </div>
 
 <script>
+
+	// ren divMenuItems to CORdiv...
+
 
 	COR.initCore();
 	THR.initThree();
@@ -342,7 +338,7 @@
 
 	function onloadThreejs() {
 
-		APPdivLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
+		CORdivLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
 		GBX.colors = GBX.colorsDefault;
 		GBX.setAllVisible();

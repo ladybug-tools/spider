@@ -34,7 +34,8 @@
 
 			NUMdivOrientationAreas.innerHTML = NUM.getOrientationAreas();
 
-			NUM.butMenuNumbers.style.cssText = 'background-color: pink !important; font-style: italic; font-weight: bold';
+			NUM.butMenuNumbers.style.cssText = COR.buttonToggleCss;
+			//'background-color: pink !important; font-style: italic; font-weight: bold';
 
 			const butts = divMenuItems.getElementsByTagName( "button" );
 			//console.log( 'butts', butts );

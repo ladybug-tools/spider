@@ -1,9 +1,9 @@
 	// Copyright 2018 Ladybug Tools authors. MIT License
-	/* globals THREE, THR, GBX */
+	/* globals THR, GBX, SAV, CORdragArea, showdown  */
 	/* jshint esversion: 6 */
 
 
-	let COR = {};
+	var COR = {};
 
 	COR.url = '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
 
@@ -23,14 +23,14 @@
 	COR.initCore = function() {
 
 		if ( window.dragArea ) {
-			dragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
-			dragArea.addEventListener( 'drop', COR.drop, false );
+			CORdragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+			CORdragArea.addEventListener( 'drop', COR.drop, false );
 		}
 
-		if ( window.dragAreaToIframe ) {
-			dragAreaToIframe.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
-			dragAreaToIframe.addEventListener( 'drop', COR.dropIframe, false );
-		}
+		//if ( window.dragAreaToIframe ) {
+		//	dragAreaToIframe.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+		//	dragAreaToIframe.addEventListener( 'drop', COR.dropIframe, false );
+		//}
 
 		if ( window.pMenuLeftHeader ) {
 			pMenuLeftHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
@@ -38,12 +38,11 @@
 			pMenuLeftHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 
-		if ( window.divPopUpHeader ) {
-			divPopUpHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			divPopUpHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			divPopUpHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
-		}
-
+		//if ( window.divPopUpHeader ) {
+		//	divPopUpHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
+		//	divPopUpHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
+		//	divPopUpHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
+		//}
 
 		if ( window.CORdivHeaderRight ) {
 			CORdivHeaderRight.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
@@ -63,13 +62,13 @@
 
 	COR.resetMenu = function () {
 
-		menuButtons = document.querySelectorAll( "button.app-menu" );
+		const menuButtons = document.querySelectorAll( "button.app-menu" );
 
 		menuButtons.forEach( element => {
 			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight ='';
 		} );
 
-		menuDetails = document.querySelectorAll( "details.app-menu" );
+		const menuDetails = document.querySelectorAll( "details.app-menu" );
 
 		menuDetails.forEach( element => element.remove() );
 
@@ -92,7 +91,7 @@
 
 		} else if ( ulc.endsWith( '.xml' ) ) {
 
-			console.log( 'url', url );
+			//console.log( 'url', url );
 
 			//COR.requestFileAndProgress( url, GBX.callbackGbXML );
 			COR.requestGbxmlFile( url );
@@ -103,7 +102,7 @@
 
 		} else if ( ulc.endsWith( '.json' ) ) {
 
-			console.log( 'json url', url );
+			//console.log( 'json url', url );
 
 			COR.requestFile( url, COR.callbackJson );
 
@@ -123,7 +122,7 @@
 
 	COR.requestGbxmlFile = function( url ) {
 
-		timeStart = Date.now();
+		COR.timeStart = Date.now();
 
 		THR.setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, THR.axesHelper ] );
 
@@ -149,17 +148,23 @@
 		}
 
 		function callbackGbXML ( xhr ) {
+			//console.log( 'xhr', xhr );
 
 			const gbxmlResponseXML =  xhr.target.responseXML;
 			const gbxml = xhr.target.responseXML.documentElement;
 
-			meshes = GBX.parseFileXML( gbxml );
+			const meshes = GBX.parseFileXML( gbxml );
 
 			THR.scene.add( ...meshes );
 
 			THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
 
-			// divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
+			CORdivLog.innerHTML +=
+			`
+			file: ${ xhr.target.responseURL.split( '/').pop() }<br>
+			time: ${ Date.now () - COR.timeStart } ms ~
+			size: ${ xhr.loaded.toLocaleString() }
+			<br>`;
 
 		}
 
@@ -171,7 +176,7 @@
 
 		//console.log( 'file', files.files[ 0 ] );
 
-		timeStart = Date.now();
+		COR.timeStart = Date.now();
 
 		THR.setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, THR.axesHelper ] );
 
@@ -192,7 +197,7 @@
 			//GBX.gbjson = GBX.parseFileXML( GBX.gbxml );
 			//GBX.surfaceJson = GBX.gbjson.Campus.Surface;
 
-			meshes = GBX.parseFileXML( GBX.gbxml );
+			const meshes = GBX.parseFileXML( GBX.gbxml );
 
 			//if ( files.files[ 0 ] ) { GBX.gbjson.fileName = files.files[ 0 ].name; }
 
@@ -206,7 +211,7 @@
 
 		function onRequestFileProgress( event ) {
 
-			APPdivLog.innerHTML =
+			CORdivLog.innerHTML =
 				COR.fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
 				//( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
 			'';
@@ -223,7 +228,6 @@
 		localStorage.setItem('GbxmlViewerStyleColor', color );
 
 	};
-
 
 
 
@@ -256,7 +260,7 @@
 			//console.log( 'xhr', xhr );
 
 			COR.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
-			APPdivLog.innerHTML = COR.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+			CORdivLog.innerHTML = COR.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 
@@ -298,15 +302,15 @@
 	COR.callbackJson = function( xhr ) {
 
 		const response = xhr.target.response;
-		GBI.surfaceChanges = JSON.parse( response );
+		GBX.surfaceChanges = JSON.parse( response );
 		console.log( 'response', response);
 		SAV.getUpdates();
 
 	};
 
+
+
 	// handle fileReader events
-
-
 
 	COR.openFile = function( files ) {
 
@@ -329,7 +333,7 @@
 
 			}
 
-			APPdivLog.innerHTML =
+			CORdivLog.innerHTML =
 				'name: ' + files.files[0].name + '<br>' +
 				'size: ' + files.files[0].size.toLocaleString() + ' bytes<br>' +
 				'type: ' + files.files[0].type + '<br>' +

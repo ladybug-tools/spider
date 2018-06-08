@@ -1,4 +1,4 @@
-/* global THR, THREE, GBX, GBI, window, document,butSettings, detSettings,divMenuItems */
+/* global THR, GBX, SEL, document, butMenuReports, divMenuItems */
 /* jshint esversion: 6 */
 
 // Copyright 2018 Ladybug Tools authors. MIT License
@@ -15,7 +15,8 @@
 
 			REP.setMenuItems( divMenuItems );
 
-			REP.butMenuReports.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
+			REP.butMenuReports.style.cssText = COR.buttonToggleCss;
+			//'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
 
 			const butts = divMenuItems.getElementsByTagName( "button" );
 			//console.log( 'butts', butts );
@@ -77,7 +78,8 @@
 			<div id=REPdivCampusBuilding ></div>
 
 			<p>
-				<small><i>Want reports on more gbXML elements? <br><a href="https://github.com/ladybug-tools/spider/issues" >Just shout</a> and they will appear.</i></small>
+				<small><i>Need reports on more gbXML elements? <br>
+				<a href="https://github.com/ladybug-tools/spider/issues" >Just shout</a> and they will be made to appear.</i></small>
 			</p>
 
 			<hr>
@@ -87,7 +89,7 @@
 
 		REP.reportTypes = [];
 
-		//GBI.setPanelShowHide( REPdivMenuPanelPrelims );
+		//SEL.setPanelShowHide( REPdivMenuPanelPrelims );
 
 		REP.getPanelSelectReport( REPdivMenuPanelSelectReport );
 
@@ -111,17 +113,17 @@
 
 		///
 
-		//GBI.setGbjsonAttributes( GBX.gbjson, REPdivGbxmlAttributes, 'gbXML' );
+		REP.setGbjsonAttributes( GBX.gbjson, REPdivGbxmlAttributes, 'gbXML' );
 
-		//GBI.setGbjsonAttributes( GBX.gbjson.Campus, REPdivCampus, 'Campus' );
+		REP.setGbjsonAttributes( GBX.gbjson.Campus, REPdivCampus, 'Campus' );
 
-		//GBI.setGbjsonAttributes( GBX.gbjson.Campus.Location, REPdivCampusLocation, 'Campus Location' );
+		REP.setGbjsonAttributes( GBX.gbjson.Campus.Location, REPdivCampusLocation, 'Campus Location' );
 
 		const mapLink = REP.getGoogleMap();
 
 		const wolframAlphaLink = REP.getWolframAlpha();
 
-		//GBI.setGbjsonAttributes( GBX.gbjson.Campus.Building, REPdivCampusBuilding, 'Building ' + mapLink + ' ' + wolframAlphaLink );
+		REP.setGbjsonAttributes( GBX.gbjson.Campus.Building, REPdivCampusBuilding, 'Building ' + mapLink + ' ' + wolframAlphaLink );
 
 	};
 
@@ -155,37 +157,9 @@
 
 	REP.setPanelSelectOptions = function( target, parent, element ) {
 
-		const obj = Array.isArray( parent ) ? parent[ 0 ] : parent;
+		//const obj = Array.isArray( parent ) ? parent[ 0 ] : parent;
 
 		let options = '';
-
-		/*
-		for ( let property in obj ) {
-
-			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
-
-				//if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
-			} else {
-
-				const item = {};
-
-				item.attribute = property;
-				item.divAttributes = 'REPdivElementAttributes';
-				item.parent = parent;
-				item.element = element;
-
-				item.placeholder = property;
-				item.selItem = 'REPselReportType';
-
-				REP.reportTypes.push( item );
-
-				options += '<option value=' + property + ' >' + element + ' by ' + property + '</option>';
-
-			}
-
-		}
-		*/
-
 
 		const item = {};
 
@@ -254,7 +228,8 @@
 		item.name = 'itemReportResults';
 		//item.optionValues = arr.map( element => [ element[ item.attribute ], element.id ] );
 
-		item.optionValues = arr.map( item => [ item.id, item.Name, item.CADObjectId ] );
+		item.optionValues = arr.map( item => [ item.id, item.Name, item.CADObjectId, '' ] );
+
 		item.optionValues.sort( ( a, b ) => {
 			if ( a[ 0 ] === b[ 0 ] ) { return 0; } else { return ( a[ 0 ] < b[ 0 ] ) ? -1 : 1; }
 		} );
@@ -263,16 +238,16 @@
 		item.divTarget = document.getElementById( 'REPdivElements' );
 		//console.log( 'item', item );
 
-		GBI.itemReportResults = GBI.setElementPanel2( item );
+		SEL.itemReportResults = SEL.getElementPanel( item );
 
 		REPselReportType.selectedIndex = 0;
-		REPselReportType.click();
+		REPselReportType.oninput();
 
 	};
 
 
 
-	///// Types
+	///// Types -
 
 	REP.setMenuPanelSurfacesByType = function( target ) {
 
@@ -310,17 +285,15 @@
 
 			txt +=
 			`
-				<button class=toggleView onclick=GBI.setSurfaceTypeInvisible(this);REP.toggleButtonColor(this);
-					value=` + types[ i ] + `><img src="../assets/eye.png" height=18>
+				<button class=toggleView onclick=SEL.setSurfaceTypeInvisible(this);REP.toggleButtonColor(this);
+					value=${ types[ i ] } ><img src="../assets/eye.png" height=18>
 				</button>
 
-				<button class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText);
-					style="width:8rem;background-color:#` + color + ` !important;" >` +
-					types[ i ] +
-				`</button> ` +
-
-				typesCount[ i ] + ' - ' + Math.round( 100 * typesCount[ i ] / surfaces.length ) +
-			`'%<br>`;
+				<button class=toggle onclick=SEL.setSurfaceTypeVisible(this.innerText);
+					style="width:8rem;background-color:#${ color } !important;" >
+					${ types[ i ] } </button>
+					 ${ typesCount[ i ] }/${ surfaces.length }
+			<br>`;
 
 		}
 
@@ -332,7 +305,7 @@
 			<summary >Surfaces by Type &raquo; ` + types.length + ` found</summary>
 
 			<div>` + txt +
-				`<p><button class=toggle onclick=GBI.setExposedToSunVisible(); >Exposed to Sun</button> </p>
+				`<p><button class=toggle onclick=SEL.setExposedToSunVisible(); >Exposed to Sun</button> </p>
 				<p><button class=toggle onclick=GBX.setAllVisible(); >all visible</button></p>
 			</div>
 
@@ -384,8 +357,8 @@
 			<summary>Openings by Type &raquo; ` + types.length + `</summary>
 
 			<p>
-				<select id = "REPselOpeningsByType" onclick=GBI.setOpeningTypeVisible(this.value);
-					onchange=GBI.setOpeningTypeVisible(this.value); size=` + types.length + ` >` +
+				<select id = "REPselOpeningsByType" onclick=SEL.setOpeningTypeVisible(this.value);
+					onchange=SEL.setOpeningTypeVisible(this.value); size=` + types.length + ` >` +
 					txt +
 				`</select>
 			</p>
@@ -405,14 +378,10 @@
 
 		for ( let surface of surfaces ) {
 
-			//if ( !surface.CADObjectId ) { continue; }
-
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
-				//console.log( 'surface', surface );
-				//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
 				continue;
 
 			}
@@ -426,8 +395,8 @@
 			}
 
 		}
-
 		//console.log( 'cadIds', cadIds );
+
 		cadIds.sort();
 
 		let txt = '';
@@ -446,8 +415,8 @@
 
 			<p>
 				<select id = "REPselCadIdGroups"
-					onclick=GBI.setCadObjectTypeVisible(this.value);
-					onchange=GBI.setCadObjectTypeVisible(this.value); size=10 >` +
+					onclick=SEL.setCadObjectTypeVisible(this.value);
+					onchange=SEL.setCadObjectTypeVisible(this.value); size=10 >` +
 					txt +
 				`</select>
 			</p>
@@ -455,6 +424,44 @@
 		</details>`;
 
 		target.innerHTML = details;
+
+	};
+
+
+	///////// general gbXML Data
+
+	REP.setGbjsonAttributes = function( obj, target, title ) {
+		//console.log( 'obj', obj );
+		//console.log( 'target', target );
+
+		let attributes = '';
+
+		for ( let property in obj ) {
+
+			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
+
+				//console.log( 'property', obj );
+
+			} else {
+
+				attributes +=
+				`<div>
+					<span class=attributeTitle >${property}:</span>
+					<span class=attributeValue >${obj[ property ]}</span>
+				</div>`;
+
+			}
+
+		}
+		//console.log( 'attributes', attributes );
+
+		target.innerHTML =
+
+		`<details >
+			<summary>${title}</summary>` +
+			attributes +
+			`<hr>
+		</details>`;
 
 	};
 
@@ -492,7 +499,7 @@
 
 			const link = 'http://www.wolframalpha.com/input/?i=' + locate.Latitude + '+degrees,+' + locate.Longitude + '+degrees';
 
-			linkToMap = ' <a href="'+ link + '"  target=_blank > info </a>';
+			linkToMap = ' / <a href="'+ link + '"  target=_blank > Wolfram info </a>';
 
 		} else {
 
@@ -521,6 +528,7 @@
 		}
 
 	};
+
 
 
 	REP.initRep();

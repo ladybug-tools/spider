@@ -1,8 +1,10 @@
 	// Copyright 2018 Ladybug Tools authors. MIT License
-	/* globals THREE, COR, THR, GBX */
+	/* globals COR, butGalleryGbxml, butGallerySampleFiles, butGallerySamples2, butGalleryBuildWell, divMenuItems */
 	/* jshint esversion: 6 */
 
-	let GAL = {};
+	var GAL = {};
+
+	var detGallery, divgallery; // add as GAL...
 
 
 	GAL.initGallery = function( button ) {

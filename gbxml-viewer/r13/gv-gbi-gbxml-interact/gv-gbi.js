@@ -1,5 +1,6 @@
-/* global THR, THREE, GBP, window, document */
+/* global THR, THREE, GBP, window, document, COR, HUD, HUDdivAttributes, CORdivLog */
 /* jshint esversion: 6 */
+/*jshint loopfunc:true */
 
 // Copyright 2018 Ladybug Tools authors. MIT License
 
@@ -248,7 +249,7 @@
 
 				if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-					APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+					CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
 					//console.log( 'surface', surface );
 					//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1183,7 +1184,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
 				console.log( 'surface', surface );
 				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1239,7 +1240,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				//console.log( 'surface', surface );
 				//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1286,7 +1287,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				continue;
 
