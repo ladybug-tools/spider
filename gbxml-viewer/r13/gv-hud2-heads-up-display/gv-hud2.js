@@ -51,7 +51,6 @@
 
 		HUD.setPanelTellTale( HUDdivTellTales );
 
-
 		GBI.setButtonStyleClass( divHeadsUp );
 
 	};

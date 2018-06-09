@@ -7,14 +7,13 @@
 	// functions in most sections are in alphabetical order
 
 	// tomorrow:
-	// add surfaces visibility on function
-	// add zoom group function
+	// Element pannel attributes: move id zoom and toggle to top
 
 	var SEL = {};
 
 
 	SEL.getElementPanel = function( item ){
-		// SEL.setPanelSurface
+		// this all seems very complicated
 
 		item = item || {};
 
@@ -24,6 +23,7 @@
 		item.element = item.element || 'Surface';  // used by SEL.setElementVisible
 		item.name = item.name || 'itemName';
 		item.optionValues = item.optionValues || [ [ item.id, item.Name, item.CADObjectId, 'yellow' ], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
+		// color here is naughty
 		item.parent = item.parent || GBX.surfaceJson; // used by SEL.setElementIdAttributes
 		item.placeholder = item.placeholder || 'surface id';  // used below
 		item.selItem = item.selItem || 'selItem'; // used below
@@ -44,13 +44,13 @@
 
 				<div class=flex-div1 >
 					<input oninput=SEL.setSelectedIndex(this,${item.selItem});
-						placeholder="${item.placeholder}" style=margin-bottom:0.5rem;width:6rem; >
-						<br>
-					<select id =${item.selItem}
+						placeholder="${ item.placeholder }" style=margin-bottom:0.5rem;width:6rem; >
+					<br>
+					<select id =${ item.selItem }
 						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
 						 ` style=margin-bottom:0.5rem;min-width:6rem; >${options}</select>
-						<br>
-					<select onchange=SEL.updateSelect(this,${item.selItem},"${item.name}"); style=width:6rem;>
+					<br>
+					<select onchange=SEL.setElementPanelSelect(this,${item.selItem},"${item.name}"); style=width:6rem;>
 						<option>id</option><option selected >name</option><option>cad id</option>
 					</select>
 				</div>
@@ -64,17 +64,6 @@
 		const selectTarget = item.divTarget.getElementsByTagName( 'select' )[ 0 ];
 		//console.log( 'target', target );
 
-		/*
-		selectTarget.onclick= function() {
-			//console.log( 'selectTarget.value', selectTarget.value );
-			SEL.setSurfaceVisible(selectTarget.value );
-			SEL.setElementIdAttributes( selectTarget.value, item );
-
-		};
-		*/
-
-
-		//selectTarget.onchange =  function() {
 		selectTarget.oninput = function() {
 
 			SEL.setElementVisible( selectTarget.value, item );
@@ -90,11 +79,11 @@
 
 
 
-	////////// Set various Menu Panel Attributes
+	////////// Set various element panel attributes
 
-	SEL.updateSelect = function( that, select, name ){
-		//console.log( 'sel', select );
+	SEL.setElementPanelSelect = function( that, select, name ){
 		//console.log( 'that', that );
+		//console.log( 'select', select );
 		//console.log( 'name', name );
 		//console.log( 'SEL.item', SEL.item );
 
@@ -114,11 +103,9 @@
 
 
 
-	//////////
-
 	SEL.setElementVisible = function( id, item ) {
 		//console.log( 'id', id );
-		//console.log( 'item', item );
+		//console.log( 'item', item ); // use SEL.item??
 
 		if ( item.element === 'Surface') {
 
@@ -145,6 +132,7 @@
 	};
 
 
+
 	SEL.setElementIdAttributes = function ( id, item ) {
 		//console.log( 'item', item, '\nid', id );
 
@@ -161,7 +149,7 @@
 		const divAttributes = document.getElementById ( item.divAttributes );
 		//console.log( 'divAttributes', divAttributes );
 
-		divAttributes.innerHTML = ''; //`<div>id: <b>${id}</b></div>`;
+		divAttributes.innerHTML = `<div>id: <b>${id}</b></div>`;
 
 		for ( let property in obj ) {
 
@@ -245,7 +233,7 @@
 
 
 	////////// get Attributes by individual items / All used by REP
-	// used by REP
+	// all used by REP
 
 	SEL.getAttributeAdjacentSpace = function( spaceIdRef, spaceIndex = 0 ) {
 		//console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
@@ -253,7 +241,7 @@
 
 		const txt =
 		`<div>
-			<span class=attributeTitle >adjacent space ` + ( spaceIndex > -2 ? spaceIndex : `` ) + ` id</span>:<br>
+			<span class=attributeTitle >adjacent space ` + ( spaceIndex > -2 ? spaceIndex : "" ) + ` id</span>:<br>
 			<button onclick=SEL.setSpaceVisible("${spaceIdRef}"); >${spaceIdRef}</button>
 			<button onclick=SEL.setSpaceZoom("${spaceIdRef}",${spaceIndex}); >&#8981;</button>
 		</div>`;
@@ -360,14 +348,13 @@
 
 
 	////////// Show/Hide by Individual Elements
+	// used by REP
 
 	SEL.setCadObjectIdVisible = function( cadId ) {
 
 		cadId = decodeURI( cadId );
 
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
 		GBX.surfaceMeshes.children.forEach( element =>
 			element.visible = element.userData.data.CADObjectId === cadId ? true : false );
@@ -454,11 +441,8 @@
 
 
 	SEL.setOpeningVisible = function( openingId ) {
-		//console.log( 'opening id', openingId );
 
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = false;
-		GBX.surfaceOpenings.visible = true;
+		SEL.setSurfaceGroupsVisible( false, true, true );
 
 		GBX.surfaceOpenings.children.forEach( element => {
 
@@ -478,11 +462,8 @@
 
 
 	SEL.setSpaceVisible = function( spaceId ) {
-		//console.log( 'spaceId', spaceId );
 
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
@@ -511,13 +492,9 @@
 
 
 
-	SEL.setStoreyVisible = function( id ) {
+	SEL.setStoreyVisible = function( storeyId ) {
 
-		//console.log( 'id', id );
-
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
 		const spaces = GBX.gbjson.Campus.Building.Space;
 
@@ -531,30 +508,25 @@
 
 			const spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef;
 
-			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === id ? true : child.visible );
+			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === storeyId ? true : child.visible );
 
 		}
-
-		//const storey = GBX.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
-		//	console.log( 'storey', storey );
 
 	};
 
 
 
-	SEL.setSurfaceVisible = function( id ) {
+	SEL.setSurfaceVisible = function( surfaceId ) {
 
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
-		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
+		THR.scene.remove( SEL.telltale );
 
-		//console.log( 'recGeom', recGeom );
+		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === surfaceId ? true : false );
 
 		if ( window.HUDdivAttributes ) {
 
-			SEL.setPanelSurfaceAttributes( HUDdivAttributes, id );
+			SEL.setPanelSurfaceAttributes( HUDdivAttributes, surfaceId );
 
 		}
 
@@ -563,13 +535,10 @@
 
 
 	SEL.setZoneVisible = function ( zoneIdRef ) {
-		//console.log( 'zoneIdRef', zoneIdRef );
 
 		const spaces = GBX.gbjson.Campus.Building.Space;
 
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
 
@@ -598,20 +567,16 @@
 
 		}
 
-		//console.log( 'zone', zone );
-
 	};
 
 
+
 	///// Toggle Visible Show / Hide by Type of Element
+	// used by REP
 
+	SEL.setExposedToSunVisible = function() {
 
-
-	SEL.setExposedToSunVisible = function(  ) {
-
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.exposedToSun === "true" ? true : false );
 
@@ -619,16 +584,12 @@
 
 
 
-	SEL.setCadObjectTypeVisible = ( CADObjectGroupId ) => {
+	SEL.setCadObjectTypeVisible = function( CADObjectGroupId ) {
 		// used by REP
-
-		//console.log( 'CADObjectGroupId', CADObjectGroupId);
 
 		const cadId = CADObjectGroupId.trim();
 
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
@@ -643,8 +604,7 @@
 			const id = child.userData.data.CADObjectId.replace( /\[(.*?)\]/gi, '' ).trim() ;
 
 			if ( id === cadId ) {
-				//console.log( 'equal id\n', id.length, '\n', CADObjectGroupId.length );
-				//console.log( 'id\n', id, '\n', CADObjectGroupId );
+
 				child.visible = true;
 
 			} else {
@@ -666,11 +626,8 @@
 
 
 	SEL.setOpeningTypeVisible = function( type ) {
-		console.log( 'type', type );
 
-		GBX.surfaceEdges.visible = false;
-		GBX.surfaceMeshes.visible = false;
-		GBX.surfaceOpenings.visible = true;
+		SEL.setSurfaceGroupsVisible( false, false, true );
 
 		if ( type ) {
 
@@ -685,6 +642,8 @@
 	};
 
 
+	////////// various toggles
+	// all used by REP
 
 	SEL.setSurfaceVisibleToggle = function( id ) {
 
@@ -697,11 +656,10 @@
 	};
 
 
+
 	SEL.setSurfaceTypeVisible = function( type ) {
 
-		GBX.surfaceEdges.visible = true;
-		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = false;
+		SEL.setSurfaceGroupsVisible();
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
@@ -747,7 +705,6 @@
 
 		}
 
-
 		for ( let i = 0; i < types.length; i++ ) {
 
 			txt +=
@@ -766,20 +723,17 @@
 
 
 
-	SEL.setSurfaceTypeInvisible = function( that ) {
-
-		//console.log( '', that );
-		//that.style.backgroundColor = that.style.backgroundColor === 'lightblue' ? '' : 'lightblue';
+	SEL.setSurfaceTypeInvisible = function( button ) {
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
 			if ( !child.userData.data ) { continue; }
 
-			if ( child.userData.data.surfaceType === that.value && that.style.backgroundColor === COR.colorButtonToggle ) {
+			if ( child.userData.data.surfaceType === button.value && button.style.backgroundColor === COR.colorButtonToggle ) {
 
 				child.visible = false;
 
-			} else if ( child.userData.data.surfaceType === that.value ) {
+			} else if ( child.userData.data.surfaceType === button.value ) {
 
 				child.visible = true;
 
@@ -793,12 +747,7 @@
 
 	////////// Zoom
 
-	SEL.setCadIdZoom = function( cadId ) {
-
-		cadId = decodeURI( cadId );
-		SEL.setCadObjectIdVisible( cadId );
-
-		let meshes = GBX.surfaceMeshes.children.filter( element => element.userData.data.CADObjectId === cadId );
+	SEL.setCameraControls = function( meshes ) {
 
 		const bbox = new THREE.Box3();
 		meshes.forEach( mesh => bbox.expandByObject ( mesh ) );
@@ -814,36 +763,35 @@
 	};
 
 
+	SEL.setCadIdZoom = function( cadId ) {
+
+		cadId = decodeURI( cadId );
+		SEL.setCadObjectIdVisible( cadId );
+
+		let meshes = GBX.surfaceMeshes.children.filter( element => element.userData.data.CADObjectId === cadId );
+
+		SEL.setCameraControls( meshes );
+
+	};
+
 
 
 	SEL.setOpeningZoom = function( openingId ) {
-		//console.log( 'openingId', openingId );
 
 		SEL.setOpeningVisible( openingId );
-
 
 		let openings = GBX.surfaceOpenings.children.find( element => element.userData.data.id === openingId );
 		//console.log( 'openings', openings );
 
 		openings = Array.isArray( openings) ? openings : [ openings ];
 
-		const bbox = new THREE.Box3();
-		openings.forEach( opening => bbox.expandByObject ( opening ) );
-
-		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
-		const center = sphere.center;
-		const radius = sphere.radius;
-		//console.log( 'center * radius', center, radius );
-
-		THR.controls.target.copy( center );
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
+		SEL.setCameraControls( openings );
 
 	};
 
 
 
 	SEL.setSpaceZoom = function( id, index = 0 ) {
-		//console.log( 'setSpaceZoom', id, index );
 
 		SEL.setSpaceVisible( id, index );
 
@@ -870,16 +818,7 @@
 
 		}
 
-		const bbox = new THREE.Box3();
-		meshes.forEach( mesh => bbox.expandByObject ( mesh ) );
-
-		const sphere = bbox.getBoundingSphere();
-		const center = sphere.center;
-		const radius = sphere.radius;
-		//console.log( 'center * radius', center, radius );
-
-		THR.controls.target.copy( center );
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
+		SEL.setCameraControls( meshes );
 
 	};
 
@@ -891,47 +830,71 @@
 		const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === id );
 		//console.log( '', surfaceMesh );
 
-		const center = surfaceMesh.localToWorld( surfaceMesh.geometry.boundingSphere.center.clone() );
-		const radius = surfaceMesh.geometry.boundingSphere.radius > 1 ? surfaceMesh.geometry.boundingSphere.radius : 1;
+		//const center = surfaceMesh.localToWorld( surfaceMesh.geometry.boundingSphere.center.clone() );
+		//const radius = surfaceMesh.geometry.boundingSphere.radius > 1 ? surfaceMesh.geometry.boundingSphere.radius : 1;
 		//console.log( 'center * radius', center, radius );
+
+		SEL.setCameraControls( [ surfaceMesh ] );
 
 		THR.scene.remove( SEL.telltale );
 		const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
 		const material = new THREE.MeshNormalMaterial( { opacity: 0.7, transparent: true } );
 		SEL.telltale = new THREE.Mesh( geometry, material );
-		SEL.telltale.position.copy( center );
+		SEL.telltale.position.copy( THR.controls.target );
 		THR.scene.add( SEL.telltale );
 
-		THR.controls.target.copy( center );
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
+		//THR.controls.target.copy( center );
+		//THR.camera.position.copy( center.clone().add( new THREE.Vector3( 3.0 * radius, - 3.0 * radius, 3.0 * radius ) ) );
 
 	};
 
 
 
 	SEL.setSurfaceTypeZoom = function( surfaceType ) {
-		//console.log( 'surfaceType', surfaceType );
 
 		SEL.setSurfaceTypeVisible ( surfaceType );
 
 		let meshes = GBX.surfaceMeshes.children.filter( element => element.userData.data.surfaceType === surfaceType );
 
-		const bbox = new THREE.Box3();
-		meshes.forEach( mesh => bbox.expandByObject ( mesh ) );
-
-		const sphere = bbox.getBoundingSphere();
-		const center = sphere.center;
-		const radius = sphere.radius;
-		//console.log( 'center * radius', center, radius );
-
-		THR.controls.target.copy( center );
-		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+		SEL.setCameraControls( meshes );
 
 	};
 
 
 
-	SEL.setZoneZoomxxxx = function( zoneId ) {
+	//////////
+
+	SEL.setSurfaceGroupsVisible = function( meshesVis = true, edgesVis = true, openingsVis = false ) {
+
+		GBX.surfaceMeshes.visible = meshesVis;
+		GBX.surfaceEdges.visible = edgesVis;
+		GBX.surfaceOpenings.visible = openingsVis;
+
+	}
+
+
+
+	////////// Style
+
+	SEL.setButtonStyleClass = function( item ) {
+		// used by REP/SEL
+		const butts = item.getElementsByTagName( "button" );
+		//console.log( 'butts', butts );
+
+		for ( let butt of butts ) {
+
+			butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+
+		}
+
+	};
+
+
+
+	////////// to be deprecated ??
+
+
+	SEL.xxxxxsetZoneZoom = function( zoneId ) {
 
 		SEL.setZoneVisible( zoneId );
 
@@ -979,19 +942,3 @@
 
 	};
 
-
-	////////// Style
-
-
-	SEL.setButtonStyleClass = function( item ) {
-		// used by REP/SEL
-		const butts = item.getElementsByTagName( "button" );
-		//console.log( 'butts', butts );
-
-		for ( let butt of butts ) {
-
-			butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-
-		}
-
-	};

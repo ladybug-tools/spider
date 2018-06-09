@@ -2,13 +2,12 @@
 	/*global THR, THREE, GBX, THR */
 	/* jshint esversion: 6 */
 
-
+	// area by surface type / total floor: display surfaces  is broken
 	// needs a cleanup / streamlining / going from gets to sets
 
 	var NUM = {};
 
 	NUM.initNumbers = function () {
-
 
 		CORdivMenuRight.style.display = 'none';
 		NUM.butMenuNumbers = butMenuNumbers;
@@ -71,8 +70,6 @@
 
 			<summary>Numbers &nbsp; <a href=#../gv-num-numbers/README.md>?</a></summary>
 
-			<p><small>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</small></p>
-
 			<div id = "NUMdivMenuPanelPrelims" ></div>
 
 			<div id = "NUMdivStoreyAreas" ></div>
@@ -84,6 +81,8 @@
 			<div id = "NUMdivExteriorAreas" ></div>
 
 			<div id = "NUMdivOrientationAreas" ></div>
+
+			<p><small>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</small></p>
 
 			<hr>
 
@@ -117,6 +116,8 @@
 	};
 
 
+
+	/////
 
 	NUM.setAreasByStorey = function( target ) {
 
@@ -169,9 +170,9 @@
 		item.placeholder = 'storey name';
 		item.selItem = 'NUMselAreasByStorey';
 
-		//GBI.itemAdjacentSpaceInvalid = GBI.setElementPanel2( item );
-		//NUMselAreasByStorey.selectedIndex = 0;
-		//NUMselAreasByStorey.click();
+		SEL.itemAdjacentSpaceInvalid = SEL.getElementPanel( item );
+		NUMselAreasByStorey.selectedIndex = 0;
+		NUMselAreasByStorey.click();
 
 
 	};
@@ -214,7 +215,7 @@
 
 
 
-	NUM.setStoreyAttributes = function() {
+	NUM.xxxxxsetStoreyAttributes = function() {  // depracate ??
 
 		const id = GBX.gbjson.Campus.Building.BuildingStorey[ NUMselStorey.selectedIndex ];
 
@@ -229,12 +230,14 @@
 			'area: ' + Math.round( area ).toLocaleString();
 
 		// not yet
-		//GBI.setGbjsonAttributes( id, NUMdivStoreys ) + '<br>' +
+		//SEL.setGbjsonAttributes( id, NUMdivStoreys ) + '<br>' +
 		//'area: ' + Math.round( area ).toLocaleString();
 
 	};
 
 
+
+	/////
 
 	NUM.getAreaBySurfaceType = function() {
 
@@ -280,7 +283,7 @@
 
 			txt +=
 			` <button
-				 class=toggle onclick=GBI.setSurfaceTypeVisible(this.innerText);
+				 class=toggle onclick=SEL.setSurfaceTypeVisible(this.innerText);
 				 style="width:8rem;background-color:#` + color + ` !important;" >` + types[ i ] +
 					`</button> area: ` +
 				area +
@@ -294,7 +297,7 @@
 			NUM.surfacesRaisedFloorArea +
 			NUM.surfacesUndergroundSlabArea;
 
-		const surfaceTypes = ["InteriorFloor","RaisedFloor","SlabOnGrade","UndergroundSlab"];
+		var surfaceTypes = ["InteriorFloor","RaisedFloor","SlabOnGrade","UndergroundSlab"];
 
 		const surfaceTypeAreas =
 
@@ -307,7 +310,7 @@
 			txt +
 
 			`<p>
-				<button style=width:8rem; onclick=NUM.showBySurfaceTypeArray(surfaceTypes); >Total floor</button>  area: ` +
+				<button style=width:8rem; onclick=NUM.showBySurfaceTypeArray(${surfaceTypes}); >Total floor</button>  area: ` +
 					Math.round( tfa ).toLocaleString() + `</p>
 
 			<hr>
@@ -315,14 +318,16 @@
 
 		return surfaceTypeAreas;
 
-
 	};
 
 
 
+	/////
+
 	NUM.getAreaByOpeningType = function() {
 
 		// !! numbers differ with GBX.openings !!
+
 
 		NUM.SurfacesWithOpenings = GBX.surfacesJson.filter( element => element.Opening );
 		//console.log( 'NUM.SurfacesWithOpenings', NUM.SurfacesWithOpenings );
@@ -354,11 +359,11 @@
 
 		for ( let opening of GBX.surfaceOpenings.children ) {
 
-			index = types.indexOf( opening.openingType );
+			index = types.indexOf( opening.userData.data.openingType );
 
 			if ( index < 0 ) {
 
-				types.push( opening.openingType );
+				types.push( opening.userData.data.openingType );
 				typesCount[ types.length - 1 ] = 1;
 
 			} else {
@@ -369,6 +374,8 @@
 
 		}
 
+		//console.log( 'types', types );
+
 		let areaTotal = 0;
 		let countTotal = 0;
 
@@ -376,9 +383,9 @@
 
 			const area = NUM.getAreaOpeningTypes( types[ i ] );
 			txt +=
-				` <button style=width:8rem; class=toggle onclick=GBI.setOpeningTypeVisible(this.innerText); >` +
-					types[ i ] +
-					`</button> area: ` + Math.round( area ).toLocaleString() +
+				` <button style=width:8rem; class=toggle onclick=SEL.setOpeningTypeVisible(this.innerText); >
+					${ types[ i ] }
+					</button> area: ` + Math.round( area ).toLocaleString() +
 					` count: ` + typesCount[ i ] +
 				`<br>`;
 
@@ -394,7 +401,7 @@
 			<p>`+
 				txt +
 			`</p>
-			<div><button style=width:8rem; onclick=GBI.setOpeningTypeVisible(); >
+			<div><button style=width:8rem; onclick=SEL.setOpeningTypeVisible(); >
 				Total openings</button> area: ` + Math.round( areaTotal ).toLocaleString() +
 				` count: ` + countTotal +
 				`<br>
@@ -449,6 +456,7 @@
 	};
 
 
+	/////
 
 	NUM.getAreaByExteriorSurfaces = function() {
 
@@ -469,7 +477,7 @@
 			`</p>
 
 			<p>
-				<button class=toggle onclick=GBI.setExposedToSunVisible(); >Exposed to Sun</button>
+				<button class=toggle onclick=SEL.setExposedToSunVisible(); >Exposed to Sun</button>
 			</p>
 
 			<hr>
@@ -573,7 +581,7 @@
 
 		const surfaces = GBX.surfacesJson.filter( element => element.surfaceType === 'ExteriorWall' );
 
-		const oriented = {
+		oriented = { // global
 			North: { items: [], openings: [], color: 'Blue' },
 			NorthEast: { items:[], openings: [], color: 'Magenta' },
 			East: { items:[], openings: [], color: 'DarkOrange' },
@@ -771,7 +779,7 @@
 
 	NUM.showBySurfaceTypeArray = function( types ) {
 
-		//console.log( 'types', types );
+		console.log( 'types', types );
 
 		const spaces = GBX.gbjson.Campus.Building.Space;
 

@@ -21,6 +21,7 @@
 <script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
 <script src = "../gv-cor-core/gv-cor.js" ></script>
 <script src = "../gv-sel-select-attributes/gv-sel.js" ></script>
+<script src = "../gv-ctx-context-menu/gv-ctx.js" ></script>
 
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
@@ -246,6 +247,8 @@
 
 	COR.initCore();
 	THR.initThree();
+
+	CTX.initHeadsUp();
 	THR.animate();
 
 	//COR.onHashChange(); // loads splash screen and gets things rolling
@@ -304,8 +307,8 @@
 
 		}
 
-		THR.renderer.domElement.addEventListener( 'click', function() { CORdivMenuRight.style.display = 'none'; }, false );
-		THR.renderer.domElement.addEventListener( 'touchstart', function() { CORdivMenuRight.style.display = 'none'; }, false );
+		//THR.renderer.domElement.addEventListener( 'click', function() { CORdivMenuRight.style.display = 'none'; }, false );
+		//THR.renderer.domElement.addEventListener( 'touchstart', function() { CORdivMenuRight.style.display = 'none'; }, false );
 		THR.controls.enableKeys = false;
 
 	}

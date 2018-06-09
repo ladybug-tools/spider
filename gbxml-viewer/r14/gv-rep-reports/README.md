@@ -85,7 +85,7 @@ The intent is that you are not having to switch back and forth between left and 
 ## Wish list / To Do
 
 * 2018-03-31 ~ We now do three specialty reports: 'Surfaces by Type + Exposed to Sun', 'Openings by Type' and 'Cad Object Groups'. Should there be others?
-* 2018-02-26 ~ Better telltale size for small surfaces
+
 
 
 ## Issues
@@ -97,6 +97,11 @@ The intent is that you are not having to switch back and forth between left and 
 
 
 ## Change Log
+
+### 2018-06-09 ~ Theo
+
+R14.2
+* Reports panel: mostly good enough for now
 
 ### 2018-06-08 ~ Theo
 

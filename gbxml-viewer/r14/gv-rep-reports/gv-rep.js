@@ -54,7 +54,7 @@
 
 			<summary>Reports &nbsp; <a href=#../gv-rep-reports/README.md>?</a></summary>
 
-			<br>
+			<div><i>Do you want visibility toggle show/hide here?</i></div>
 
 			<div id=REPdivMenuPanelPrelims ></div>
 

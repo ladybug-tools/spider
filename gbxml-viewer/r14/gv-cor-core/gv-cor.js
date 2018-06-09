@@ -279,6 +279,8 @@
 		//CORdivMenuRight.innerHTML = '<div id=CORdivItemsRight >' + html + '</div>';
 		CORdivItemsRight.innerHTML = html;
 		CORdivMenuRight.style.display = 'block';
+		CORdivMenuRight.style.left = '50%';
+		CORdivMenuRight.style.width = '48%';
 		window.scrollTo( 0, 0 );
 		CORdivMenuRight.scrollTop = 0;
 		//CORdivItemsRight.scrollTop = 0;
@@ -384,7 +386,7 @@
 		const html = converter.makeHtml( markdown );
 
 		CORdivItemsRight.innerHTML = html;
-		CORdivMenuRight.style.display = 'block';
+		GBX.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
 	};
@@ -462,7 +464,7 @@
 
 	COR.toggleNavLeft = function() {
 
-		CORdivMenuRight.style.display = 'none';
+		GBX.style.display = 'none';
 
 		if ( divHamburgerLeft.style.left === '' || divHamburgerLeft.style.left === '0px' ) {
 
@@ -482,7 +484,7 @@
 
 	COR.toggleNavRight = function() {
 
-		CORdivMenuRight.style.display = "none";
+		//CORdivMenuRight.style.display = "none";
 
 		if ( divHeadsUp.style.left === '100%' ) {
 
@@ -507,4 +509,5 @@
 		}
 
 	};
+
 
