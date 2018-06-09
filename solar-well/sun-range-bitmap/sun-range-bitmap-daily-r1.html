@@ -306,11 +306,11 @@
 
 			for ( let y = 0; y < pixels; y++ ) {
 
-				const yy = startY + 100 * y / (pixels );
+				const yy = startY + 100 * y / pixels;
 
 				for ( let x = 0; x < pixels; x++ ) {
 
-					const point = v( startX + 100 * x / (pixels ), yy, 0.1 );
+					const point = v( startX + 100 * x / pixels, yy, 0.1 );
 					//console.log( 'point', point );
 
 					//const arrowHelper = new THREE.ArrowHelper( vector, point, 10 );
@@ -326,7 +326,6 @@
 					data[ j ++ ] -= shade;
 					data[ j ++ ] -= shade;
 					data[ j ++ ] -= shade;
-					//data[ j ++ ] = 255;
 
 				}
 
