@@ -58,8 +58,8 @@
 
 		<p>
 			minutes between suns: <select id=inpMin oninput=updateSun(); >
-				<option>60</option>
-				<option selected >30</option>
+				<option selected >60</option>
+				<option>30</option>
 				<option>15</option>
 				<option>10</option>
 				<option>1</option>
@@ -295,7 +295,7 @@
 		const startX = -50;
 
 		delta = 200 / ( 12 * ( 60 / parseInt( inpMin.value ) ) );
-		console.log( 'delta', delta );
+		//console.log( 'delta', delta );
 
 		for ( var i = 0; i < suns.children.length; i++ ) {
 
