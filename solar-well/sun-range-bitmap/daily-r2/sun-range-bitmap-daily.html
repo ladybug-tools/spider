@@ -425,13 +425,9 @@
 
 			} );
 
-			scene.add( ...exposedToSun, meshes[ 2 ] );
+			scene.add( ...exposedToSun, meshes[ 2 ] );  // meshes[ 2 ] = openings
 
-			//drawPlane();
-			//renderer.render( scene, camera );
-			//controls.update();
-
-			zoomObjectBoundingSphere( GBX.surfaceEdges );
+			zoomObjectBoundingSphere( GBX.surfaceEdges ); // let's see something before we calculate
 
 			divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
 
@@ -478,6 +474,7 @@
 		//		scene.remove( cameraHelper );
 		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
 		//		scene.add( cameraHelper );
+
 
 		updateSun();
 
