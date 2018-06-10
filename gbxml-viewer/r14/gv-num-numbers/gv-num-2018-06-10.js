@@ -56,6 +56,93 @@
 
 	};
 
+	NUM.xxxinitNumbers = function () {
+
+		CORdivMenuRight.style.display = 'none';
+		NUM.butMenuNumbers = butMenuNumbers;
+
+		if ( NUM.butMenuNumbers.style.fontStyle !== 'italic' ) {
+
+			NUM.timeStart = Date.now();
+
+			/// better to have a setMenuItems()?? / have all code in one function?
+			CORdivMenuItems.innerHTML = NUM.getMenuItems();
+
+			NUMdivMenuPanelPrelims.innerHTML = NUM.getPanelVisibilityToggle();
+
+			//NUMdivStoreyAreas.innerHTML = NUM.getAreasByStorey();
+
+			NUM.setAreasByStorey( NUMdivStoreyAreas );
+
+			NUMdivSurfaceTypeAreas.innerHTML = NUM.getAreaBySurfaceType();
+
+			NUMdivOpeningAreas.innerHTML = NUM.getAreaByOpeningType();
+
+			NUMdivExteriorAreas.innerHTML = NUM.getAreaByExteriorSurfaces();
+
+			NUMdivOrientationAreas.innerHTML = NUM.getOrientationAreas();
+
+			NUM.butMenuNumbers.style.cssText = COR.buttonToggleCss;
+			//'background-color: pink !important; font-style: italic; font-weight: bold';
+
+			const butts = CORdivMenuItems.getElementsByTagName( "button" );
+			//console.log( 'butts', butts );
+
+			for ( let butt of butts ) {
+
+				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+
+			}
+
+		} else {
+
+			CORdivMenuItems.innerHTML = '';
+
+			NUM.butMenuNumbers.style.fontStyle = '';
+			NUM.butMenuNumbers.style.backgroundColor = '';
+			NUM.butMenuNumbers.style.fontWeight = '';
+
+		}
+
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
+
+	};
+
+
+
+
+
+	NUM.xxxxgetMenuItems = function() {
+
+		const menuItems =
+
+		`<details id = "NUMdetNumbers" open>
+
+			<summary>Numbers &nbsp; <a href=#../gv-num-numbers/README.md>?</a></summary>
+
+			<div id = "NUMdivMenuPanelPrelims" ></div>
+
+			<div id = "NUMdivStoreyAreas" ></div>
+
+			<div id = "NUMdivSurfaceTypeAreas" ></div>
+
+			<div id = "NUMdivOpeningAreas" ></div>
+
+			<div id = "NUMdivExteriorAreas" ></div>
+
+			<div id = "NUMdivOrientationAreas" ></div>
+
+			<p><small>All quantities shown in this panel are calculated on-the-fly from the coordinate data in the gbXML file</small></p>
+
+			<hr>
+
+		</details>`;
+
+		return menuItems;
+
+	};
+
 
 
 	NUM.getPanelVisibilityToggle = function() {
@@ -174,6 +261,28 @@
 		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
 
 		NUMspnArea.innerHTML = 'area: ' + NUM.getSurfacesAreaByArrayOfSurfaces( NUM.floorSlabs ).toLocaleString();
+
+	};
+
+
+
+	NUM.xxxxxsetStoreyAttributes = function() {  // depracate ??
+
+		const id = GBX.gbjson.Campus.Building.BuildingStorey[ NUMselStorey.selectedIndex ];
+
+		GBX.openingMeshes.visible = false;
+
+		NUM.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
+		//console.log( 'NUM.floorSlabs', NUM.floorSlabs );
+
+		const area = NUM.getSurfacesAreaByArrayOfSurfaces( NUM.floorSlabs );
+
+		NUMdivStoreys.innerHTML = NUM.traverseGbjson( id ).attributes + '<br>' +
+			'area: ' + Math.round( area ).toLocaleString();
+
+		// not yet
+		//SEL.setGbjsonAttributes( id, NUMdivStoreys ) + '<br>' +
+		//'area: ' + Math.round( area ).toLocaleString();
 
 	};
 

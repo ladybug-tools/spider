@@ -7,40 +7,9 @@
 
 	REP.initRep = function () { // called from bottom of file
 
-		CORdivMenuRight.style.display = 'none';
-		REP.butMenuReports = butMenuReports;
+		REP.setMenuItems( CORdivMenuItems );
 
-
-		if ( REP.butMenuReports.style.fontStyle !== 'italic' ) {
-
-			REP.setMenuItems( divMenuItems );
-
-			REP.butMenuReports.style.cssText = COR.buttonToggleCss;
-			//'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-
-			const butts = divMenuItems.getElementsByTagName( "button" );
-			//console.log( 'butts', butts );
-
-			for ( let butt of butts ) {
-
-				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-
-			}
-
-		} else {
-
-			//divMenuItems.remove();
-			divMenuItems.innerHTML = '';
-
-			REP.butMenuReports.style.fontStyle = '';
-			REP.butMenuReports.style.backgroundColor = '';
-			REP.butMenuReports.style.fontWeight = '';
-
-		}
-
-
-		THR.controls.autoRotate = false;
-		THR.controls.keys = false;
+		COR.setPanelButtonInit( CORbutMenuReports );
 
 	};
 

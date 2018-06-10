@@ -17,203 +17,184 @@
 
 	SET.explodeStart = false;
 
-	SET.initSettings = function() {  //runs by itself on load
+	SET.initSettings = function() {  //called from bottom of file
 
-		CORdivMenuRight.style.display = 'none';
-		SET.butSettings = butSettings;
+		SET.setMenuItems( CORdivMenuItems );
 
-		if ( SET.butSettings.style.fontStyle !== 'italic' ) {
+		COR.setPanelButtonInit( CORbutSettings );
 
-			divMenuItems.innerHTML =
-			`
-				<details id=detSettings class=app-menu open >
+	}
 
-					<summary>Settings &nbsp; <a href=#../gv-set-settings/README.md>?</a> </summary>
 
+
+	SET.setMenuItems = function( target ) {
+
+
+		target.innerHTML =
+		`
+			<details id=detSettings class=app-menu open >
+
+				<summary>Settings &nbsp; <a href=#../gv-set-settings/README.md>?</a> </summary>
+
+				<!--
+				<div>
+					<b>visibility toggles</b><br>
+					<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
+					 <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+					 <button onclick=GBX.setAllVisible(); >all</button>
+				</div>
+
+				<br>
+
+				<div id=SETdivShowHide ></div>
+
+				<hr>
+
+				-->
+				<div>
+					<b>materials settings</b><br>
+					<button id=butSetRandomMaterial onclick=SET.setRandomMaterial(); >Set random material</button>
+
+					<button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button>
+
+					<button onclick=SET.setNormalMaterial(); >Set normal material</button>
+
+					<button onclick=SET.setDefaultMaterial(); >Set default material</button>
+
+					<button onclick=SET.setExposureMaterial(); >Set exposure type material</button>
+
+					<button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button>
+				</div>
+
+				<div title="building opacity: 0 to 100%" >Opacity
+					<output id=outOpacity class=floatRight >85%</output><br>
+					<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
+				</div>
+
+				<hr>
+
+				<div>
+					<b>scene settings</b><br>
 					<!--
+					<button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button>
+					-->
+
+					<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
+				</div>
+
+				<p>
+					<button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
+
+					<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
+
+				</p>
+
+
+				<p>
+					<button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
+
+					<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
+
+				</p>
+
+				<p>
+					<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
+					<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
+					<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
+				</p>
+
+				<p>
+					<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
+					<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
+					<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
+				</p>
+
+				<hr>
+
+				<p>
+					<div title="building surface separation" >
+
+						<b>explode view</b><br>
+						<p><button onclick=SET.explodeByStoreys(); >explode by storeys</button></p>
+
+						<button onclick=SET.explodeMinus();> minus </button>
+						<button onclick=SET.explodeReset(); >reset</button>
+						<button onclick=SET.explodePlus();> plus </button>
+					</div>
+
+				</p>
+
+				<hr>
+
+				<div>
+
+					<b>section view</b><br>
+
+					<div><small><i>Work-in-progress. Click toggles twice to reset. Multiple sections coming next.</i></small></div>
+					<br>
 					<div>
-						<b>visibility toggles</b><br>
-						<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
-						 <button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
-						 <button onclick=GBX.setAllVisible(); >all</button>
+						<button id=butSectionViewX onclick=SET.toggleSectionViewX() >toggle section view X-axis</button>
+					</div>
+
+					clipping plane front: <output id=outClipX1 >0</output><br>
+					<input type=range id=inpClipX1 max=50 min=-50 step=1 value=0
+					oninput=outClipX1.value=inpClipX1.value;SET.updateCLipX(); title="-50 to 50: OK" >
+
+					<div>
+						clipping plane back: <output id=outClipX2 >-10</output><br>
+						<input type=range id=inpClipX2 max=50 min=-50 step=1 value=-10
+						oninput=outClipX2.value=inpClipX2.value;SET.updateCLipX(); title="-50 to 50: OK" >
 					</div>
 
 					<br>
 
-					<div id=SETdivShowHide ></div>
+					<div>
+					<button id=butSectionViewY onclick=SET.toggleSectionViewY() >toggle section view Y-axis</button>
+					</div>
 
-					<hr>
+					clipping plane front: <output id=outClipY1 >0</output><br>
+					<input type=range id=inpClipY1 max=50 min=-50 step=1 value=0
+					oninput=outClipY1.value=inpClipY1.value;SET.updateCLipY(); title="-50 to 50: OK" >
 
+					<div>
+						clipping plane back: <output id=outClipY2 >-10</output><br>
+						<input type=range id=inpClipY2 max=50 min=-50 step=1 value=-10
+						oninput=outClipY2.value=inpClipY2.value;SET.updateCLipY(); title="-50 to 50: OK" >
+					</div>
+
+					<br>
+
+					<div>
+					<button id=butSectionViewZ onclick=SET.toggleSectionViewZ() >toggle section view Z-axis</button>
+					</div>
+
+					clipping plane front: <output id=outClipZ1 >0</output><br>
+					<input type=range id=inpClipZ1 max=50 min=-50 step=1 value=0
+					oninput=outClipZ1.value=inpClipZ1.value;SET.updateCLipZ(); title="-50 to 50: OK" >
+
+					<div>
+						clipping plane back: <output id=outClipZ2 >-10</output><br>
+						<input type=range id=inpClipZ2 max=50 min=-50 step=1 value=-10
+						oninput=outClipZ2.value=inpClipZ2.value;SET.updateCLipZ(); title="-50 to 50: OK" >
+					</div>
+
+
+					<!--
+					<div> // To be made to work
+						rotate section on Z-axis: <output id=outRotate >0</output><br>
+						<input type=range id=inpRotate max=180 min=-180 step=1 value=1
+						oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
+						</div>
+					</div>
 					-->
-					<div>
-						<b>materials settings</b><br>
-						<button id=butSetRandomMaterial onclick=SET.setRandomMaterial(); >Set random material</button>
 
-						<button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button>
+				<hr>
 
-						<button onclick=SET.setNormalMaterial(); >Set normal material</button>
-
-						<button onclick=SET.setDefaultMaterial(); >Set default material</button>
-
-						<button onclick=SET.setExposureMaterial(); >Set exposure type material</button>
-
-						<button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button>
-					</div>
-
-					<div title="building opacity: 0 to 100%" >Opacity
-						<output id=outOpacity class=floatRight >85%</output><br>
-						<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
-					</div>
-
-					<hr>
-
-					<div>
-						<b>scene settings</b><br>
-						<!--
-						<button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button>
-						-->
-
-						<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
-					</div>
-
-					<p>
-						<button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
-
-						<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
-
-					</p>
+			</details>`;
 
 
-					<p>
-						<button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
 
-						<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
-
-					</p>
-
-					<p>
-						<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
-						<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
-						<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
-					</p>
-
-					<p>
-						<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
-						<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
-						<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
-					</p>
-
-					<hr>
-
-					<p>
-						<div title="building surface separation" >
-
-							<b>explode view</b><br>
-							<p><button onclick=SET.explodeByStoreys(); >explode by storeys</button></p>
-
-							<button onclick=SET.explodeMinus();> minus </button>
-							<button onclick=SET.explodeReset(); >reset</button>
-							<button onclick=SET.explodePlus();> plus </button>
-						</div>
-
-					</p>
-
-					<hr>
-
-					<div>
-
-						<b>section view</b><br>
-
-						<div><small><i>Work-in-progress. Click toggles twice to reset. Multiple sections coming next.</i></small></div>
-						<br>
-						<div>
-							<button id=butSectionViewX onclick=SET.toggleSectionViewX() >toggle section view X-axis</button>
-						</div>
-
-						clipping plane front: <output id=outClipX1 >0</output><br>
-						<input type=range id=inpClipX1 max=50 min=-50 step=1 value=0
-						oninput=outClipX1.value=inpClipX1.value;SET.updateCLipX(); title="-50 to 50: OK" >
-
-						<div>
-							clipping plane back: <output id=outClipX2 >-10</output><br>
-							<input type=range id=inpClipX2 max=50 min=-50 step=1 value=-10
-							oninput=outClipX2.value=inpClipX2.value;SET.updateCLipX(); title="-50 to 50: OK" >
-						</div>
-
-						<br>
-
-						<div>
-						<button id=butSectionViewY onclick=SET.toggleSectionViewY() >toggle section view Y-axis</button>
-						</div>
-
-						clipping plane front: <output id=outClipY1 >0</output><br>
-						<input type=range id=inpClipY1 max=50 min=-50 step=1 value=0
-						oninput=outClipY1.value=inpClipY1.value;SET.updateCLipY(); title="-50 to 50: OK" >
-
-						<div>
-							clipping plane back: <output id=outClipY2 >-10</output><br>
-							<input type=range id=inpClipY2 max=50 min=-50 step=1 value=-10
-							oninput=outClipY2.value=inpClipY2.value;SET.updateCLipY(); title="-50 to 50: OK" >
-						</div>
-
-						<br>
-
-						<div>
-						<button id=butSectionViewZ onclick=SET.toggleSectionViewZ() >toggle section view Z-axis</button>
-						</div>
-
-						clipping plane front: <output id=outClipZ1 >0</output><br>
-						<input type=range id=inpClipZ1 max=50 min=-50 step=1 value=0
-						oninput=outClipZ1.value=inpClipZ1.value;SET.updateCLipZ(); title="-50 to 50: OK" >
-
-						<div>
-							clipping plane back: <output id=outClipZ2 >-10</output><br>
-							<input type=range id=inpClipZ2 max=50 min=-50 step=1 value=-10
-							oninput=outClipZ2.value=inpClipZ2.value;SET.updateCLipZ(); title="-50 to 50: OK" >
-						</div>
-
-
-						<!--
-						<div> // To be made to work
-							rotate section on Z-axis: <output id=outRotate >0</output><br>
-							<input type=range id=inpRotate max=180 min=-180 step=1 value=1
-							oninput=outRotate.value=inpRotate.valueAsNumber;SET.updateClipAngle(); title="-180 to 180: OK" >
-							</div>
-						</div>
-						-->
-
-					<hr>
-
-				</details>`;
-
-			//SET.butSettings.style.cssText = 'background-color: ' + COR.colorButtonToggle + ' !important; font-style: italic; font-weight: bold';
-
-			SET.butSettings.style.cssText =  COR.buttonToggleCss;
-
-			const butts = detSettings.getElementsByTagName( "button" );
-			//console.log( 'butts', butts );
-
-			for ( let butt of butts ) {
-
-				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-
-			}
-
-		} else {
-
-			divMenuItems.innerHTML = '';
-			SET.butSettings.style.fontStyle = '';
-			SET.butSettings.style.backgroundColor = '';
-			SET.butSettings.style.fontWeight = '';
-
-		}
-
-		//THR.controls.autoRotate = false;
-		THR.controls.keys = false;
-
-	}();
-
-
+	}
 
 	SET.setRandomMaterial = function() {
 
@@ -922,3 +903,6 @@
 		}
 
 	};
+
+
+	SET.initSettings();

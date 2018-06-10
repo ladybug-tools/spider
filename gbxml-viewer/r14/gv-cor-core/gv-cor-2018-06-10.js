@@ -7,6 +7,7 @@
 
 	COR.url = '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
 
+
 	COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r14/';
 
 	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
@@ -58,6 +59,20 @@
 	};
 
 
+
+	COR.resetMenu = function () {
+
+		const menuButtons = document.querySelectorAll( "button.app-menu" );
+
+		menuButtons.forEach( element => {
+			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight ='';
+		} );
+
+		const menuDetails = document.querySelectorAll( "details.app-menu" );
+
+		menuDetails.forEach( element => element.remove() );
+
+	};
 
 
 
@@ -206,6 +221,13 @@
 	};
 
 
+	COR.setMenuStyle = function( color ) {
+
+		stylesheetW3schools.href="https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		localStorage.setItem('GbxmlViewerStyleColor', color );
+
+	};
 
 
 
@@ -330,7 +352,7 @@
 
 
 
-	////////// handle drag and drop events
+	// handle drag and drop events
 
 	COR.drop = function( event ) {
 
@@ -438,35 +460,7 @@
 	};
 
 
-	////////// Slide / Hamburger operations
-
-
-	COR.setMenuStyle = function( color ) {
-
-		stylesheetW3schools.href="https://www.w3schools.com/lib/w3-theme-" + color + ".css";
-
-		localStorage.setItem('GbxmlViewerStyleColor', color );
-
-	};
-
-
-
-	COR.resetLeftMenu = function () {
-
-		const menuButtons = document.querySelectorAll( "button.app-menu" );
-
-		menuButtons.forEach( element => {
-			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight ='';
-		} );
-
-		const menuDetails = document.querySelectorAll( "details.app-menu" );
-
-		menuDetails.forEach( element => element.remove() );
-
-	};
-
-
-
+	// move to App
 
 	COR.toggleNavLeft = function() {
 
@@ -517,30 +511,3 @@
 	};
 
 
-
-	COR.setPanelButtonClear = function( button ) {
-
-		CORdivMenuItems.innerHTML = '';
-
-		button.style.fontStyle = '';
-		button.style.backgroundColor = '';
-		button.style.fontWeight = '';
-
-	}
-
-
-	COR.setPanelButtonInit = function( button ) {
-
-		CORdivMenuRight.style.display = 'none';
-
-		button.style.cssText = COR.buttonToggleCss;
-
-		const buttons = CORdivMenuItems.getElementsByTagName( "button" );
-
-		for ( let button of buttons ) {
-
-			button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-
-		}
-
-	};

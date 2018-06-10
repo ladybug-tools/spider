@@ -54,7 +54,7 @@
 						<option>id</option><option selected >name</option><option>cad id</option>
 					</select>
 				</div>
-				<div id = ${item.divAttributes} class=flex-left-div2 >bbb</div>
+				<div id = ${item.divAttributes} class=flex-left-div2 >Select an item to view its attributes</div>
 
 			</div>`;
 

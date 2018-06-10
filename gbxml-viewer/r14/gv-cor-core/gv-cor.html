@@ -90,17 +90,17 @@
 
 				<summary title="the primary viewer tools are here" >Features</summary>
 
-				<button id=butSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=CORbutSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
 					onclick= loadScript('../gv-set-settings/gv-set.js')
 					title="Update colors, explode models and adjust viewing viewing parameters" >
 				Settings</button>
 
-				<button id=butMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=CORbutMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
 					onclick= loadScript('../gv-rep-reports/gv-rep.js')
 					title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
-				<button id=butMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=CORbutMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
 					onclick= loadScript('../gv-num-numbers/gv-num.js')
 					title="matters of interest" >
 				Numbers</button>
@@ -123,7 +123,7 @@
 			</details>
 
 
-			<div id = "divMenuItems" ></div>
+			<div id = "CORdivMenuItems" ></div>
 
 			<details>
 
@@ -242,8 +242,6 @@
 
 <script>
 
-	// ren divMenuItems to CORdiv...
-
 
 	COR.initCore();
 	THR.initThree();
@@ -263,7 +261,7 @@
 
 		CORdivTitle.innerHTML =
 		`<h2>
-			<a href="${COR.releaseSourceURL}" target="_top" ><img src=${COR.iconGitHubMark} height=18 ></a>
+			<a href="${ COR.releaseSourceURL }" target="_top" ><img src=${COR.iconGitHubMark} height=18 ></a>
 			<a href = "" >${title}</a>
 		</h2>`;
 
@@ -319,7 +317,7 @@
 
 	function loadScript( source ){
 
-		COR.resetMenu();
+		COR.resetLeftMenu();
 		const script = document.head.appendChild( document.createElement( 'script' ) );
 		script.src = source ;
 
@@ -329,7 +327,7 @@
 
 	function loadGallery( button ){
 
-		COR.resetMenu();
+		COR.resetLeftMenu();
 		const script = document.head.appendChild( document.createElement( 'script' ) );
 		script.src = '../gv-gal-gallery/gv-gal.js';
 
@@ -341,6 +339,7 @@
 
 	function onloadThreejs() {
 
+		console.log( 'onloadThreejs', 23);
 		CORdivLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
 
 		GBX.colors = GBX.colorsDefault;
@@ -348,7 +347,7 @@
 
 		HUD.setMenuOptions(); // gets things really going
 
-		COR.resetMenu();
+		COR.resetLeftMenu();
 
 	}
 
