@@ -33,19 +33,19 @@ A set of Sun range scripts based entirely on client-side JavaScript
 ## Features
 
 ### Givens
-	* A bunch of random boxes in 3D space and a ground plane
-	* Any latitude and longitude
-	* Any month and day of the year
-	* Number of pixels per side of generated bitmap - from 16 to 512
-	* Number of time slices per hour for twelve hours - from once an hour to once a minute
-	* [Anisotropy ( softness of shadow )]( https://en.wikipedia.org/wiki/Anisotropy ) - from none to 16
+* A bunch of random boxes in 3D space and a ground plane
+* Any latitude and longitude
+* Any month and day of the year
+* Number of pixels per side of generated bitmap - from 16 to 512
+* Number of time slices per hour for twelve hours - from once an hour to once a minute
+* [Anisotropy]( https://en.wikipedia.org/wiki/Anisotropy ) ( softness of shadow ) - from none to 16
 
 ### Generates
-	* Data for shadows cast by the boxes on to the surface
-	* Creates a bitmap to display the calculated data
-	* Applies bitmap as a material texture to a Three.js mesh
-	* Generates spheres to represent position of Sun
-	* Completion time ranges from sub-second to several minutes depending on parameters
+* Data for shadows cast by the boxes on to the surface
+* Creates a bitmap to display the calculated data
+* Applies bitmap as a material texture to a Three.js mesh
+* Generates spheres to represent position of Sun
+* Completion time ranges from sub-second to several minutes depending on parameters
 
 ### Dependencies
 
