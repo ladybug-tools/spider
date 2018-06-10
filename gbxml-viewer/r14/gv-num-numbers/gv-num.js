@@ -471,9 +471,6 @@
 
 		return NUM[ 'surfaces' + type + 'Area' ];
 
-
-
-
 	};
 
 

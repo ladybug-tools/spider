@@ -6,10 +6,10 @@ value='You are now in a GitHub web page view - Click this button to view this re
 # [R14 'Aragog' COR Core Read Me] ( #gbxml-viewer/r14/gv-cor-core/README-template.md )
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-cor-core/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-cor-core/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test script: [COR Core]( http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-cor-core/gv-tmp.html )
+## Full screen test script: [COR Core]( https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-cor-core/gv-tmp.html )
 
 
 ## Concept
@@ -52,6 +52,11 @@ needs combining with this read me
 
 
 ## Change Log
+
+### 2018-06-10 ~ Theo
+
+R14.2
+* Lots of tweaking and cleanup going on
 
 ### 2018-06-03 ~ Theo
 

@@ -6,10 +6,10 @@ value='You are now in a GitHub web page view - Click this button to view this re
 # [R14 'Aragog' gbXML Viewer ~ ZZZZZ Read Me] ( #gbxml-viewer/r14/xxxxx/README-template.md )
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r14/xxxxx/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/r14/xxxxx/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test script: [ZZZZZ]( http://www.ladybug.tools/spider/gbxml-viewer/r14/xxxxx/gv-tmp.html )
+## Full screen test script: [ZZZZZ]( https://www.ladybug.tools/spider/gbxml-viewer/r14/xxxxx/gv-tmp.html )
 
 
 ## Concept
