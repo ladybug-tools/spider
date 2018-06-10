@@ -32,7 +32,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 * Only draws a Sun that is above the horizon
 
 
-## [sun range bitmap daily R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-daily-r1.html )
+## [Sun Range Bitmap Daily R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-daily-r1.html )
 
 * Draw Sun for every 1 to 60 minutes per 12 hour day for any day of the year
 
