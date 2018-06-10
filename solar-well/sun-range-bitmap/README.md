@@ -10,13 +10,35 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 A set of Sun range scripts based entirely on client-side JavaScript
 
+
+
+## [Sun Range Bitmap Yearly R1]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html )
+
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+
+* Draws a Sun for every 1 to 60 minutes per 12 hour day for each of the twelve months
+* Select to draw for quarters or full year
+* Only draws a Sun that is above the horizon
+
+
+## [Sun Range Bitmap Daily R1]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-daily-r1.html )
+
+* Draw Sun for every 1 to 60 minutes per 12 hour day for any day of the year
+
+## [sun range bitmap R1]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-r1.html )
+
+* Single sun position only
+* Contains a number of issues fixed in later release
+
+## Features
+
 ### Givens
 	* A bunch of random boxes in 3D space and a ground plane
 	* Any latitude and longitude
 	* Any month and day of the year
 	* Number of pixels per side of generated bitmap - from 16 to 512
 	* Number of time slices per hour for twelve hours - from once an hour to once a minute
-	* Anisotropy ( softness of shadow ) - from none to 16
+	* [Anisotropy ( softness of shadow )]( https://en.wikipedia.org/wiki/Anisotropy ) - from none to 16
 
 ### Generates
 	* Data for shadows cast by the boxes on to the surface
@@ -54,23 +76,6 @@ A set of Sun range scripts based entirely on client-side JavaScript
 * Coming soon
 
 
-## [Sun Range Bitmap Yearly R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html )
-
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
-
-* Draws a Sun for every 1 to 60 minutes per 12 hour day for each of the twelve months
-* Select to draw for quarters or full year
-* Only draws a Sun that is above the horizon
-
-
-## [Sun Range Bitmap Daily R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-daily-r1.html )
-
-* Draw Sun for every 1 to 60 minutes per 12 hour day for any day of the year
-
-## [sun range bitmap R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-r1.html )
-
-* Single sun position only
-* Contains a number of issues fixed in later release
 
 ## Wish list / To Do
 
