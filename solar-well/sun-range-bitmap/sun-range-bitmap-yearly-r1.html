@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time Sun range calculations in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = ",dc " >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#divMenu { margin: 0 20px; max-width: 19rem; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			Latitude : <output id=outLat ></output><br>
+			<input type = range id=inpLat min= -90 max=90 oninput=updateSun(); >
+		</p>
+		<p>
+			Longitude: <output id=outLon ></output><br>
+			<input type = range id=inpLon min= -180 max=180  oninput=updateSun(); size = 5 >
+		</p>
+
+		<p>
+			Month start: <output id=outMonStart >10</output><br>
+			<input type = range id=inpMonStart min= 1 max=12 oninput=updateSun(); value=10 >
+		</p>
+
+		<p>
+			Month end: <output id=outMonEnd >12</output><br>
+			<input type = range id=inpMonEnd min= 1 max=12 oninput=updateSun(); value=12 >
+		</p>
+
+		<p>
+			Quarter
+			<button onclick=menuSetQuarter(1,3)>1st</button>
+			<button onclick=menuSetQuarter(4)6>2nd</button>
+			<button onclick=menuSetQuarter(7,9)>3rd</button>
+			<button onclick=menuSetQuarter(10,12)>4th</button> /
+			<button onclick=menuSetQuarter(1,12)>Full year</button>
+		</p>
+
+		<p>
+			Date : <output id=outDat >21</output><br>
+			<input type = range id=inpDat min= 1 max=31 oninput=updateSun(); value=21 >
+		</p>
+
+		<p>
+			<button onclick=drawBoxes(); >drawBoxes</button>
+		</p>
+
+		<p>
+			minutes between suns: <select id=inpMin oninput=updateSun(); >
+				<option selected >60</option>
+				<option>30</option>
+				<option>15</option>
+				<option>10</option>
+				<option>1</option>
+			</select>
+		</p>
+
+		<p>
+			pixels per side: <select id=inpPix oninput=drawPlane(100); >
+				<option>16</option>
+				<option>32</option>
+				<option>64</option>
+				<option>128</option>
+				<option selected>256</option>
+				<option>512</option>
+			</select>
+		</p>
+
+		<p>
+			anisotropy: <select id=inpAni oninput=drawPlane(100); >
+				<option>1</option>
+				<option>2</option>
+				<option selected>4</option>
+				<option>8</option>
+				<option>16</option>
+			</select>
+		</p>
+
+		<p><input type=checkbox id=chkColor oninput=drawPlane(); > False color (broken)</p>
+
+		<div id = "divPosition" ></div>
+
+	</div>
+
+<script>
+
+// San Francisco
+	var latitude = 37.796;
+	var longitude = -122.398;
+/*
+
+// Paris
+	var latitude = 48.8566;
+	var longitude = 2.3522;
+
+// Igualada Spain
+	var latitude = 41.5861554761;
+	var longitude = 1.6519343471;
+
+// VNLK
+	var latitude = 27.71110193545;
+	var longitude = 86.71228385040001;
+
+// YGIL Gilgandra
+	var latitude = -31.7276314069;
+	var longitude = 148.63915118805;
+
+// PHOG hawaii
+	var latitude = 20.8968;
+	var longitude = -156.4329;
+*/
+
+
+	let azimuth = 250;
+	let altitude = 60;
+	let suns, boxes, plane;
+	let vector;
+
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+	var renderer, camera, controls, scene, axesHelper;
+	//var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		//const title = document.title;
+
+		divTitle.innerHTML =
+		`<h1>
+			<a href="" >${title}</a>
+		</h1>`;
+
+		outLat.value = inpLat.value = latitude;
+		outLon.value = inpLon.value = longitude;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+		renderer.setPixelRatio( window.devicePixelRatio );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		drawBoxes( 10 );
+
+		updateSun();
+
+	}
+
+
+	function menuSetQuarter( start, end ) {
+
+		outMonStart.value = start;
+		inpMonStart.value = start;
+
+		outMonEnd.value = end;
+		inpMonEnd.value = end;
+
+		inpMin.value = 60
+		inpMin.selectedIndex = 0;
+
+		updateSun();
+
+	}
+
+
+	function drawBoxes( count = 10 ) {
+
+		scene.remove( boxes );
+		boxes = new THREE.Group();
+		const geometry = new THREE.BoxGeometry( 20, 20, 10 );
+		const material = new THREE.MeshNormalMaterial();
+
+		for ( let i = 0; i < count; i++ ) {
+
+			const box = new THREE.Mesh( geometry, material );
+			box.name = 'box' + i;
+			box.position.set( 100 * Math.random() - 50, 100 * Math.random() - 50, 80 * Math.random() - 10);
+			box.rotation.set( 3.15 * Math.random(), 3.15 * Math.random(), 3.15 * Math.random() );
+			boxes.add( box );
+
+		}
+
+		scene.add( boxes );
+
+		setTimeout( drawPlane, 30 );
+
+	}
+
+
+
+	function updateSun(){
+
+		divPosition.innerHTML = '';
+		scene.remove( suns );
+
+		outLat.value = inpLat.value;
+		const latitude = parseFloat( inpLat.value );
+
+		outLon.value = inpLon.value;
+		const longitude = ( parseFloat( inpLon.value ) );
+
+		outDat.value = inpDat.value;
+		const date = parseInt( inpDat.value, 10 );
+
+		suns = new THREE.Group();
+
+		minuteSlices = 12 * ( 60 / parseInt( inpMin.value, 10 ) );
+		//console.log( 'minuteSlices', minuteSlices );
+
+		outMonStart.value = inpMonStart.value;
+		monthSlicesStart = parseInt( inpMonStart.value, 10 );
+
+		outMonEnd.value = inpMonEnd.value;
+		monthSlicesEnd = parseInt( inpMonEnd.value, 10 );
+
+		const geometry = new THREE.SphereBufferGeometry( 2 );
+		const material = new THREE.MeshBasicMaterial( { color: 'yellow', side: 2 } )
+
+		for ( let i = 0; i < minuteSlices; i++ ) {
+
+			//const dateThen = new Date( Date.UTC( 2018, month, date, 8 + i * 0.5 ) );
+
+			for ( let j = monthSlicesStart; j < monthSlicesEnd; j++ ) {
+
+				const dateThen = new Date( 2018, j, date, 8, ( 60 * i * 12 / minuteSlices ) ) ;
+				//console.log( 'dateThen', dateThen );
+
+				sunThen = SunCalc.getPosition( dateThen, latitude, longitude );
+				//console.log( 'sunThen', sunThen );
+
+				/*
+				divPosition.innerHTML += '<p> sunThen' + getJsonToHTML( sunThen ) + '</p>';
+
+				divPosition.innerHTML +=
+				`
+					Date: ${ dateThen }<br>
+					Azimuth : ${ ( sunThen.azimuth * 180 / Math.PI ).toLocaleString() }<br>
+					Altitude: ${ ( sunThen.altitude * 180 / Math.PI).toLocaleString() }<br>
+				`;
+				*/
+
+				const radius = 50;
+				const rc = radius * Math.cos( sunThen.altitude );
+				const vector = v( - rc * Math.cos( sunThen.azimuth ), rc * Math.sin( sunThen.azimuth ), radius * Math.sin( sunThen.altitude ) );
+
+				sun = new THREE.Mesh( geometry, material );
+				sun.position.copy( vector );
+
+				if ( sun.position.z > 0 ) {
+
+					suns.add( sun );
+
+				}
+
+
+			}
+
+		}
+
+		scene.add( suns );
+
+		setTimeout( drawPlane, 30 );
+
+	}
+
+
+
+	function drawPlane(size = 100 ) {
+
+		timeStart = Date.now();
+
+		const pixels = parseInt( inpPix.value, 10 ) || 128;
+		const anisotropy = parseInt( inpAni.value, 10 ) || 4;
+		scene.remove( plane );
+		const geometryPlane = new THREE.PlaneGeometry( size, size );
+		getShadow = chkColor.checked ? buildShadow2 : buildShadow;
+		const material = new THREE.MeshBasicMaterial( { map: getShadow( size, pixels, anisotropy ), side: 2, transparent: true } );
+		plane = new THREE.Mesh( geometryPlane, material );
+		scene.add( plane );
+
+		console.log( 'time ', Date.now() - timeStart );
+
+	}
+
+
+
+	function buildShadow( mesh, pixels = 256, anisotropy = 4 ) {
+
+		var raycaster = new THREE.Raycaster();
+
+		const size = pixels * pixels;
+		data = new Uint8Array( 3 * size );
+
+		for ( var i = 0; i < data.length; i++ ) { data[ i ] = 240; }
+
+		const startY = -50;
+		const startX = -50;
+
+		const deltaMonth = parseInt( inpMonEnd.value, 10 ) - parseInt( inpMonStart.value, 10 );
+
+		const delta = 200 / ( 12 * ( 60 / parseInt( inpMin.value ) ) * deltaMonth );
+		//console.log( 'delta', delta );
+
+		for ( var i = 0; i < suns.children.length; i++ ) {
+
+			let j = 0;
+			sun = suns.children [ i ];
+			vector = sun.position.clone().normalize();
+			//console.log( 'vector', vector );
+
+			for ( let y = 0; y < pixels; y++ ) {
+
+				const yy = startY + 100 * y / pixels;
+
+				for ( let x = 0; x < pixels; x++ ) {
+
+					const point = v( startX + 100 * x / pixels, yy, 0.1 );
+					//console.log( 'point', point );
+
+					//const arrowHelper = new THREE.ArrowHelper( vector, point, 10 );
+					//scene.add( arrowHelper );
+
+					raycaster.set( point, vector );
+					//console.log( 'raycaster', raycaster );
+
+					const intersects = raycaster.intersectObjects( boxes.children );
+
+					const shade = intersects.length > 0 ? delta : 0;
+
+					data[ j ++ ] -= shade;
+					data[ j ++ ] -= shade;
+					data[ j ++ ] -= shade;
+
+				}
+
+			}
+
+		}
+
+		// renderer.capabilities.getMaxAnisotropy()
+		const dt = new THREE.DataTexture( data, pixels, pixels, THREE.RGBFormat );
+		dt.anisotropy = anisotropy;
+		dt.needsUpdate = true;
+
+		return dt;
+
+	}
+
+
+
+	function buildShadow2( mesh, pixels = 256, anisotropy = 4 ) {
+
+		var raycaster = new THREE.Raycaster();
+
+		const size = pixels * pixels;
+		data = new Uint8Array( 3 * size );
+		numbers = new Uint8Array( size );
+
+		for ( var i = 0; i < data.length; i++ ) { data[ i ] = 255; };
+		for ( var i = 0; i < numbers.length; i++ ) { numbers[ i ] = 255; };
+
+		const startY = -50;
+		const startX = -50;
+
+		const deltaMonth = parseInt( inpMonEnd.value, 10 ) - parseInt( inpMonStart.value, 10 );
+
+		const delta = 200 / ( 12 * ( 60 / parseInt( inpMin.value ) ) * deltaMonth );
+		console.log( 'delta', delta );
+
+		for ( var i = 0; i < suns.children.length; i++ ) {
+
+			let j = 0;
+			let k = 0;
+			sun = suns.children [ i ];
+			vector = sun.position.clone().normalize();
+			//console.log( 'vector', vector );
+
+			for ( let y = 0; y < pixels; y++ ) {
+
+				const yy = startY + 100 * y / pixels;
+
+				for ( let x = 0; x < pixels; x++ ) {
+
+					const point = v( startX + 100 * x / pixels, yy, 0.1 );
+					//console.log( 'point', point );
+
+					//const arrowHelper = new THREE.ArrowHelper( vector, point, 10 );
+					//scene.add( arrowHelper );
+
+					raycaster.set( point, vector );
+					//console.log( 'raycaster', raycaster );
+
+					const intersects = raycaster.intersectObjects( boxes.children );
+
+					const shade = intersects.length > 0 ? delta : 0;
+					col = numbers[ k++ ] -= shade;
+
+					const cc = 2;
+					const b = 255 * ( 1 + Math.sin( 6.3 * col ) ) / cc;
+					const g = 255 * ( 1 + Math.cos( 6.3 * col  ) ) / cc;
+					const r = 255 * ( 1 - Math.sin( 6.3 * col ) ) / cc;
+
+					data[ j ++ ] = b;
+					data[ j ++ ] = r;
+					data[ j ++ ] = g;
+
+				}
+
+			}
+
+		}
+
+		// renderer.capabilities.getMaxAnisotropy()
+		const dt = new THREE.DataTexture( data, pixels, pixels, THREE.RGBFormat );
+		dt.anisotropy = anisotropy;
+		dt.needsUpdate = true;
+
+		return dt;
+
+		}
+
+
+
+	function getJsonToHTML( obj ) {
+
+		let txt = '';
+
+		Object.keys( obj ).sort().forEach( item => txt += '<tr><td>' + item  + '</td><td>' + obj[ item ].toLocaleString() + '</td></tr>' );
+
+		return '<table>' + txt + '</table>';
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

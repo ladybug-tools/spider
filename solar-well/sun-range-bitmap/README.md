@@ -23,11 +23,18 @@ value="You are now in a GitHub web page view - Click this button to view this re
 	* Generates spheres to represent position of Sun
 	* Completion time ranges from sub-second to several minutes depending on parameters
 
+## [Sun Range Bitmap Yearly R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html )
+
+<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
+
+* Draws a Sun for every 1 to 60 minutes per 12 hour day for each of the twelve months
+* Select to draw for quarters or full year
+* Only draws a Sun that is above the horizon
+
 
 ## [sun range bitmap daily R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-daily-r1.html )
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-daily-r1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
-
+* Draw Sun for every 1 to 60 minutes per 12 hour day for any day of the year
 
 ## [sun range bitmap R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-r1.html )
 
@@ -36,10 +43,12 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Wish list / To Do
 
+* 2018-06-09 ~ Theo ~ Add link to source code
+* 2018-06-09 ~ Theo ~ Add sliding menu
+* 2018-06-09 ~ Theo ~ Add draw analemma
+* 2018-06-09 ~ Theo ~ Add select location via geocoder
 * 2018-06-08 ~ Theo ~ Obtain further data from EPW files
-* 2018-06-08 ~ Theo ~ Add false colors capability
 * 2018-06-08 ~ Theo ~ Add actual building data from gbXML or Radiance file
-* 2018-06-08 ~ Theo ~ Add add seasonal and annual output capability
 * 2018-06-08 ~ Theo ~ Make even faster
 
 
@@ -52,6 +61,16 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 
 ## Change Log
+
+
+### 2018-06-09 ~ heo
+
+* Add Sun Range Bitmap Yearly R1
+
+Done
+* 2018-06-08 ~ Theo ~ Add add seasonal and annual output capability
+* 2018-06-08 ~ Theo ~ Add false colors capability < started
+
 
 ### 2018-06-08 ~ Theo
 
