@@ -3,25 +3,56 @@
 <div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/tree/master/solar-well/sun-range-bitmap/README.md'"
 value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ><div>
 
-# [sun range bitmap Read Me]( #solar-well/sun-range-bitmap/README.md )
+# [Sun Range Bitmap Read Me]( #solar-well/sun-range-bitmap/README.md )
 
 
 ## Concept
 
-* Givens:
-	* a bunch of random boxes in 3D space and a ground plane
+A set of Sun range scripts based entirely on client-side JavaScript
+
+### Givens
+	* A bunch of random boxes in 3D space and a ground plane
 	* Any latitude and longitude
 	* Any month and day of the year
 	* Number of pixels per side of generated bitmap - from 16 to 512
 	* Number of time slices per hour for twelve hours - from once an hour to once a minute
 	* Anisotropy ( softness of shadow ) - from none to 16
 
-* Generates:
+### Generates
 	* Data for shadows cast by the boxes on to the surface
 	* Creates a bitmap to display the calculated data
 	* Applies bitmap as a material texture to a Three.js mesh
 	* Generates spheres to represent position of Sun
 	* Completion time ranges from sub-second to several minutes depending on parameters
+
+### Dependencies
+
+* [mourner / Suncalc]( https://github.com/mourner/suncalc ) ~ A tiny JavaScript library for calculating sun/moon positions and phases.
+
+> SunCalc is a tiny BSD-licensed JavaScript library for calculating sun position, sunlight phases (times for sunrise, sunset, dusk, etc.), moon position and lunar phase for the given location and time, created by Vladimir Agafonkin (@mourner) as a part of the SunCalc.net project.
+> Most calculations are based on the formulas given in the excellent Astronomy Answers articles about position of the sun and the planets. You can read about different twilight phases calculated by SunCalc in the Twilight article on Wikipedia.
+
+#### Coding Highlights
+
+* All shadow values calculated by the script at hand
+* Makes no use of Three.js lights and shadows
+* Makes extensive ise of Three.js [Ray]( https://threejs.org/docs/#api/math/Ray ) and [Raycaster]( https://threejs.org/docs/#api/core/Raycaster )
+
+#### Ground Plane Shadows
+
+* Given a ground plane of given length and width, divides the rectangle into a grid of points
+* For each point creates a ray directed at the given sun position
+* Determines if there is an intersection between the point and the given Sun position
+* Every point records an intersection being true or false
+* Repeats process for any number of given sun positions
+* Records the number of intersections at each point
+* Uses the count to colorize a pixel or [texel]( https://en.wikipedia.org/wiki/Texel_(graphics) ) for every point in the grid
+
+
+#### Building Model Shadows and Shade
+
+* Coming soon
+
 
 ## [Sun Range Bitmap Yearly R1]( http://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html )
 

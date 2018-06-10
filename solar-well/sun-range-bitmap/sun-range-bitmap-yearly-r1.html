@@ -315,7 +315,7 @@
 		const anisotropy = parseInt( inpAni.value, 10 ) || 4;
 		scene.remove( plane );
 		const geometryPlane = new THREE.PlaneGeometry( size, size );
-		getShadow = chkColor.checked ? buildShadow2 : buildShadow;
+		getShadow = chkColor.checked ? buildShadowColor : buildShadow;
 		const material = new THREE.MeshBasicMaterial( { map: getShadow( size, pixels, anisotropy ), side: 2, transparent: true } );
 		plane = new THREE.Mesh( geometryPlane, material );
 		scene.add( plane );
@@ -390,7 +390,7 @@
 
 
 
-	function buildShadow2( mesh, pixels = 256, anisotropy = 4 ) {
+	function buildShadowColor( mesh, pixels = 256, anisotropy = 4 ) {
 
 		var raycaster = new THREE.Raycaster();
 
@@ -461,17 +461,6 @@
 
 		}
 
-
-
-	function getJsonToHTML( obj ) {
-
-		let txt = '';
-
-		Object.keys( obj ).sort().forEach( item => txt += '<tr><td>' + item  + '</td><td>' + obj[ item ].toLocaleString() + '</td></tr>' );
-
-		return '<table>' + txt + '</table>';
-
-	}
 
 
 
