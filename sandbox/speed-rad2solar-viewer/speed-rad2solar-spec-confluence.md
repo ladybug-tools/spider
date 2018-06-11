@@ -1,6 +1,6 @@
 This is the primary specification for how the sunlight hour and solar radiation will work in SPEED. First, the user selects the desired Solar Studies Control arguments, then clicks either "Run Sunlight Hour Analysis" or "Run Solar Radiation Analysis". Those arguments are passed to the speedbuildinglibrary on Node.js via iframe. The exportrad function is called and a RAD file is generated using a modified version of the exportgbxml function. The user arguments, and some supplementary data, are then passed to a JSON file. The JSON and RAD files are pushed to the main child process RAD2SOLAR. RAD2SOLAR runs the required analysis, and generates a series of bitmaps. It then passes the bitmaps and RAD file back to speedbuildinglibrary where it is visualized within a three.js scene (via iframe) using Theo's code. The user can then interact with the analysis scene.
 
-##exportgbxml Update##
+## exportgbxml Update
 
 First, we need to some updates to the exportgbxml function. These are the critical path items that need to be updated to correctly export the RAD file.
 
@@ -12,7 +12,7 @@ Third, currently all the shading objects (adjacentbuilding, fin, overhang...excl
 
 The correct gbXML file is shown in the same directory as "l-shape-50000 area-2flr-0deg.xml".
 
-##exportrad Requirements##
+## exportrad Requirements
 
 Currently, when the user is in the preferred unit system of IP, the gbXML file is in IP. For now we only focusing on the preferred unit system being IP. Thus, prior to exporting a RAD file using a modified version of the exportgbxml code, all values must be converted to SI.
 
@@ -111,7 +111,7 @@ The correct RAD file for TestCase Box_1_Floor can be found here: C:\Users\Benjam
 
 When generated, the naming convention for each RAD file will simply be to call it "speedsolar.rad".
 
-##RAD2SOLAR Requirements##
+## RAD2SOLAR Requirements
 
 All input files, executables, and scripts will be in a self-contained, location independent folder (like PIDO2RAD). Keep in mind this will be run on Linux machine, without windows. 
 
