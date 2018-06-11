@@ -10,6 +10,16 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 --HTML Layout--
 
+As you do now, there should be one button to import a single .rad file. This is for viewing .rad files for test cases as they are generated.
+
+Also, there should be a button to import "Import RAD2Solar Project", and the import button should load a directory. The directory that is selected will have a .rad file and all the corresponding bitmaps.
+
+Down below, where you have "Sample files", please eliminate all the existing rad files from various sources and just provide shortcuts to the .rad file in each "test-cases/test-case-x/ folders.
+
+Please also make a drop down for "Sample projects". This will provide shortcuts to the folders within "test-cases/".
+
+Please provide two toggle buttons: (1) "Hide .rad" and (2) "Hide .bmps". This will be useful when viewing a project.
+
 <!--
 ## [SPEED Rad2Solar Viewer]( http://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/index.html )
 
