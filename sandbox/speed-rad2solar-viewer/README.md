@@ -22,6 +22,16 @@ Please provide two toggle buttons: (1) "Hide .rad" and (2) "Hide .bmps". This wi
 
 Please remove auto generation and assignment of bitmaps.
 
+--Data Type and Formatting Specification--
+
+1. Theo passed bitmaps, rad file. This is how Theo will read in and view bitmaps in three.js…he will read in string for xyz center point of bitmap and the normal, and place in three.js. He will also read in .rad file with surface object outlines only in black, no fills. The bitmaps will be the fills.
+
+2. Legend always faces user and hovers along side of three.js scene
+
+3. When viewing rad file, preferable to not view lines of polygon for walls that connect windows and walls (i.e. just view essentially the 4 node polyloop surfaces of walls and windows.
+
+Rest of rad file viewed without surface fills, just line geometry in black.
+
 <!--
 ## [SPEED Rad2Solar Viewer]( http://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/index.html )
 
