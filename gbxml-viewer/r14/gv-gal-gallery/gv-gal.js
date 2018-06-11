@@ -51,7 +51,7 @@
 
 		if ( GAL.button.style.fontStyle !== 'italic' ) {
 
-			divMenuItems.innerHTML =
+			CORdivMenuItems.innerHTML =
 
 				`<details id = detGallery class=app-menu open>
 

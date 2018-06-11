@@ -49,11 +49,11 @@
 		//NUMdivSurfaceTypeAreas.innerHTML = NUM.getAreaBySurfaceType();
 		NUM.setAreaBySurfaceType( NUMdivSurfaceTypeAreas );
 
-		NUM.setAreaByOpeningType( NUMdivOpeningAreas );
+		NUMdivOpeningAreas.innerHTML = NUM.getAreaByOpeningType();
 
-		NUM.setAreaByExteriorSurfaces( NUMdivExteriorAreas );
+		NUMdivExteriorAreas.innerHTML = NUM.getAreaByExteriorSurfaces();
 
-		NUM.setOrientationAreas( NUMdivOrientationAreas );
+		NUMdivOrientationAreas.innerHTML = NUM.getOrientationAreas();
 
 	};
 
@@ -182,6 +182,89 @@
 
 	/////
 
+	NUM.getAreaBySurfaceType = function() {
+
+		const surfaces = GBX.gbjson.Campus.Surface;
+
+		let txt = '';
+		const types = [];
+		const typesCount = [];
+
+		for ( let surfaceType of GBX.surfaceTypes ) {
+
+			NUM[ 'surfaces' + surfaceType + 'Area' ] =  0;
+
+		}
+
+		for ( let surface of surfaces ) {
+
+			const index = types.indexOf( surface.surfaceType );
+
+			if ( index < 0 ) {
+
+				types.push( surface.surfaceType );
+				typesCount[ types.length - 1 ] = 1;
+
+
+			} else {
+
+				typesCount[ index ] ++;
+
+			}
+
+		}
+
+
+		for ( let i = 0; i < types.length; i++ ) {
+
+			let color =  GBX.colorsDefault[types[ i ]] ?  GBX.colorsDefault[types[ i ]].toString( 16 ) : '';
+			color = color.length > 4 ? color : '00' + color;
+			//console.log( 'col', color );
+
+			const area = Math.round( NUM.getSurfacesArea( types[ i ] ) ).toLocaleString();
+			//console.log( 'area', area );
+
+			txt +=
+			` <button
+				 class=toggle onclick=SEL.setSurfaceTypeVisible(this.innerText);
+				 style="width:8rem;background-color:#` + color + ` !important;" >` + types[ i ] +
+					`</button> area: ` +
+				area +
+			`<br>`;
+
+		}
+
+		const tfa =
+			NUM.surfacesInteriorFloorArea +
+			NUM.surfacesSlabOnGradeArea +
+			NUM.surfacesRaisedFloorArea +
+			NUM.surfacesUndergroundSlabArea;
+
+		var surfaceTypes = ["InteriorFloor","RaisedFloor","SlabOnGrade","UndergroundSlab"];
+
+		const surfaceTypeAreas =
+
+		`<details>
+
+			<summary >Areas by Surface Type</summary>
+
+			<p>Areas here are surface areas.</p>` +
+
+			txt +
+
+			`<p>
+				<button style=width:8rem; onclick=NUM.showBySurfaceTypeArray(${surfaceTypes}); >Total floor</button>  area: ` +
+					Math.round( tfa ).toLocaleString() + `</p>
+
+			<hr>
+		</details>`;
+
+		return surfaceTypeAreas;
+
+	};
+
+
+
 	NUM.setAreaBySurfaceType = function( target ) {
 
 		const surfaces = GBX.gbjson.Campus.Surface;
@@ -264,7 +347,7 @@
 
 	/////
 
-	NUM.setAreaByOpeningType = function( target ) {
+	NUM.getAreaByOpeningType = function() {
 
 		// !! numbers differ with GBX.openings !!
 
@@ -334,7 +417,7 @@
 
 		}
 
-		target.innerHTML =
+		const openingAreas =
 
 		`<details>
 			<summary >Areas by Opening Type</summary>
@@ -348,6 +431,8 @@
 			<div>
 			<hr>
 		</details>`;
+
+		return openingAreas;
 
 	};
 
@@ -396,15 +481,14 @@
 
 	/////
 
-	NUM.setAreaByExteriorSurfaces = function( target ) {
+	NUM.getAreaByExteriorSurfaces = function() {
 
 		const tesa = NUM.surfacesExteriorWallArea + NUM.surfacesRoofArea +
 			NUM.surfacesExposedFloorArea + NUM.surfacesSlabOnGradeArea + NUM.surfacesUndergroundSlabArea +
 			NUM.surfacesUndergroundWallArea;
 
 		// array of types must be embedded , use double quotes and have no spaces
-
-		target.innerHTML =
+		const exteriorAreas =
 
 		`<details>
 			<summary >Areas by Exterior Surface</summary>
@@ -421,6 +505,8 @@
 
 			<hr>
 		</details>`;
+
+		return exteriorAreas;
 
 	};
 
@@ -511,11 +597,11 @@
 
 
 
-	NUM.setOrientationAreas = function( target ){
+	NUM.getOrientationAreas = function(){
 
 		const surfaces = GBX.surfacesJson.filter( element => element.surfaceType === 'ExteriorWall' );
 
-		NUM.oriented = { // global
+		oriented = { // global
 			North: { items: [], openings: [], color: 'Blue' },
 			NorthEast: { items:[], openings: [], color: 'Magenta' },
 			East: { items:[], openings: [], color: 'DarkOrange' },
@@ -526,12 +612,12 @@
 			NorthWest: { items:[], openings: [], color: 'Gold' }
 		};
 
-		const keys = Object.keys( NUM.oriented );
+		const keys = Object.keys( oriented );
 		//console.log( 'keys', keys );
 
 		for ( let key of keys ) {
 
-			NUM.oriented[ key ].material = new THREE.MeshBasicMaterial( { color: NUM.oriented[ key ].color.toLowerCase(), side: 2 } );
+			oriented[ key ].material = new THREE.MeshBasicMaterial( { color: oriented[ key ].color.toLowerCase(), side: 2 } );
 
 		}
 
@@ -555,43 +641,43 @@
 
 			if ( angle < 22.5 && angle >= 0 || angle > 337.5 && angle < 360 ) {
 
-				wall.material = NUM.oriented.East.material;
-				NUM.oriented.East.items.push( wall );
+				wall.material = oriented.East.material;
+				oriented.East.items.push( wall );
 
 			} else if ( angle >= 22.5 && angle < 67.5) {
 
-				wall.material = NUM.oriented.SouthEast.material;
-				NUM.oriented.SouthEast.items.push( wall );
+				wall.material = oriented.SouthEast.material;
+				oriented.SouthEast.items.push( wall );
 
 			} else if ( angle >= 67.7 && angle < 112.5 ) {
 
-				wall.material = NUM.oriented.South.material;
-				NUM.oriented.South.items.push( wall );
+				wall.material = oriented.South.material;
+				oriented.South.items.push( wall );
 
 			} else if ( angle >= 112.5 && angle < 157.5 ) {
 
-				wall.material = NUM.oriented.SouthWest.material;
-				NUM.oriented.SouthWest.items.push( wall );
+				wall.material = oriented.SouthWest.material;
+				oriented.SouthWest.items.push( wall );
 
 			} else if ( angle >= 157.5 && angle < 202.5 ) {
 
-				wall.material = NUM.oriented.West.material;
-				NUM.oriented.West.items.push( wall );
+				wall.material = oriented.West.material;
+				oriented.West.items.push( wall );
 
 			} else if ( angle >= 202.5 && angle < 247.5 ) {
 
-				wall.material = NUM.oriented.NorthWest.material;
-				NUM.oriented.NorthWest.items.push( wall );
+				wall.material = oriented.NorthWest.material;
+				oriented.NorthWest.items.push( wall );
 
 			}	else if ( angle >= 247.5 && angle < 292.5 ) {
 
-				wall.material = NUM.oriented.North.material;
-				NUM.oriented.North.items.push( wall );
+				wall.material = oriented.North.material;
+				oriented.North.items.push( wall );
 
 			} else {  // > 292 && < 337.5
 
-				wall.material = NUM.oriented.NorthEast.material;
-				NUM.oriented.NorthEast.items.push( wall );
+				wall.material = oriented.NorthEast.material;
+				oriented.NorthEast.items.push( wall );
 
 			}
 
@@ -621,35 +707,35 @@
 
 			if ( angle < 22.5 && angle >= 0 || angle > 337.5 && angle < 360 ) {
 
-				NUM.oriented.East.openings.push( openingMesh );
+				oriented.East.openings.push( openingMesh );
 
 			} else if ( angle >= 22.5 && angle < 67.5) {
 
-				NUM.oriented.SouthEast.openings.push( openingMesh );
+				oriented.SouthEast.openings.push( openingMesh );
 
 			} else if ( angle >= 67.7 && angle < 112.5 ) {
 
-				NUM.oriented.South.openings.push( openingMesh );
+				oriented.South.openings.push( openingMesh );
 
 			} else if ( angle >= 112.5 && angle < 157.5 ) {
 
-				NUM.oriented.SouthWest.openings.push( openingMesh );
+				oriented.SouthWest.openings.push( openingMesh );
 
 			} else if ( angle >= 157.5 && angle < 202.5 ) {
 
-				NUM.oriented.West.openings.push( openingMesh );
+				oriented.West.openings.push( openingMesh );
 
 			} else if ( angle >= 202.5 && angle < 247.5 ) {
 
-				NUM.oriented.NorthWest.openings.push( openingMesh );
+				oriented.NorthWest.openings.push( openingMesh );
 
 			}	else if ( angle >= 247.5 && angle < 292.5 ) {
 
-				NUM.oriented.North.openings.push( openingMesh );
+				oriented.North.openings.push( openingMesh );
 
 			} else if ( angle >= 292 && angle < 337.5 ) {  // > 292 && < 337.5
 
-				NUM.oriented.NorthEast.openings.push( openingMesh );
+				oriented.NorthEast.openings.push( openingMesh );
 
 			} else {
 
@@ -662,15 +748,14 @@
 
 		let txt = '';
 		let num;
-
 		for ( let key of keys ) {
 
-			NUM.oriented[ key ].areaWalls = NUM.getSurfacesAreaByArrayOfSurfaces( NUM.oriented[ key ].items );
-			NUM.oriented[ key ].areaOpenings = NUM.getSurfacesAreaByArrayOfSurfaces( NUM.oriented[ key ].openings );
+			oriented[ key ].areaWalls = NUM.getSurfacesAreaByArrayOfSurfaces( oriented[ key ].items );
+			oriented[ key ].areaOpenings = NUM.getSurfacesAreaByArrayOfSurfaces( oriented[ key ].openings );
 
-			if ( NUM.oriented[ key ].openings.length > 0 ) {
+			if ( oriented[ key ].openings.length > 0 ) {
 
-				num = 'wwr:' + Math.round( 100 * NUM.oriented[ key ].areaOpenings / NUM.oriented[ key ].areaWalls ).toLocaleString() + '%';
+				num = 'wwr:' + Math.round( 100 * oriented[ key ].areaOpenings / oriented[ key ].areaWalls ).toLocaleString() + '%';
 
 			} else {
 
@@ -678,20 +763,22 @@
 
 			}
 
-			txt += '<button onclick=NUM.showSurfacesInArray("' + key + '"); style="width:5rem;background-color:' + NUM.oriented[ key ].color + ' !important;" >' + key +
-			'</button> wall:' + Math.round(NUM.oriented[ key ].areaWalls).toLocaleString() +
-			' open:' + Math.round(NUM.oriented[ key ].areaOpenings).toLocaleString() +
+			txt += '<button onclick=NUM.showSurfacesInArray("' + key + '"); style="width:5rem;background-color:' + oriented[ key ].color + ' !important;" >' + key +
+			'</button> wall:' + Math.round(oriented[ key ].areaWalls).toLocaleString() +
+			' open:' + Math.round(oriented[ key ].areaOpenings).toLocaleString() +
 			' ' + num + '<br>';
 
 		}
 
-		target.innerHTML =
+		const orientationAreas =
 			`<details>
 				<summary >Areas & Ratios by Orientation</summary>
 				<p >` +
 				txt +
 				`</p>
 			</details>`;
+
+		return orientationAreas;
 
 	};
 
@@ -700,7 +787,7 @@
 
 	NUM.showSurfacesInArray = function ( key ) {
 
-		const surfaces = NUM.oriented[ key ].items;
+		const surfaces = oriented[ key ].items;
 		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
 		surfaces.forEach( element => element.visible = true );
 
@@ -773,6 +860,31 @@
 
 		NUM.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
 		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
+
+	};
+
+
+
+	NUM.traverseGbjson = function traverseGbjson( obj ) {
+
+		const elements = [];
+		let attributes = '';
+
+		for ( let property in obj ) {
+
+			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
+
+				if ( elements.indexOf( property ) < 0 ) { elements.push( property ); }
+
+			} else {
+
+				attributes += '<div>' + property + ': <i>' + obj[ property ] + '</i></div>';
+
+			}
+
+		}
+
+		return { elements: elements, attributes: attributes };
 
 	};
 

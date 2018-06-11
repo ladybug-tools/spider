@@ -24,7 +24,7 @@
 		item.name = item.name || 'itemName';
 		item.optionValues = item.optionValues || [ [ item.id, item.Name, item.CADObjectId, 'yellow' ], [ 'bbb', 2 ], [ 'ccc'], 3 ] ;
 		// color here is naughty
-		item.parent = item.parent || GBX.surfaceJson; // used by SEL.setElementIdAttributes
+		item.parent = item.parent || GBX.surfacesJson; // used by SEL.setElementIdAttributes
 		item.placeholder = item.placeholder || 'surface id';  // used below
 		item.selItem = item.selItem || 'selItem'; // used below
 
@@ -50,7 +50,7 @@
 						 size=` + ( item.optionValues.length < 10 ? item.optionValues.length : 10 ) +
 						 ` style=margin-bottom:0.5rem;min-width:6rem; >${options}</select>
 					<br>
-					<select onchange=SEL.setElementPanelSelect(this,${item.selItem},"${item.name}"); style=width:6rem;>
+					<select onchange=SEL.setElementPanelSelect(this,${item.selItem},"${item.name}"); style=width:6rem; >
 						<option>id</option><option selected >name</option><option>cad id</option>
 					</select>
 				</div>
@@ -96,6 +96,28 @@
 		for ( let option of select.options ) {
 
 			option.innerText = optionValues[ i++ ][ that.selectedIndex ];
+
+		}
+
+	};
+
+
+
+
+	SEL.setSelectedIndex = function( input, select ) {
+
+		const str = input.value.toLowerCase();
+
+		// try using find
+		for ( let option of select.options ) {
+
+			if ( option.innerHTML.toLowerCase().includes( str ) ) {
+
+				select.value = option.value;
+
+				return;
+
+			}
 
 		}
 
@@ -524,11 +546,12 @@
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === surfaceId ? true : false );
 
-		if ( window.HUDdivAttributes ) {
+		// testing
 
-			SEL.setPanelSurfaceAttributes( HUDdivAttributes, surfaceId );
+		const surface = GBX.surfaceMeshes.children.find( item => item.userData.data.id === surfaceId )
+		CTX.intersected = surface
 
-		}
+		CTX.setHeadsUp();
 
 	};
 

@@ -1,135 +1,188 @@
 
 
-// Handle events
+	// Handle events
 
-var CTX = {};
+	var CTX = {};
 
-CTX.initHeadsUp = function() { // called from bottom of script
+	CTX.initHeadsUp = function() { // called from bottom of script
 
-	CTX.mouse = new THREE.Vector2();
+		CTX.mouse = new THREE.Vector2();
 
-	THR.renderer.domElement.addEventListener( 'click', CTX.onRendererMouseMoveCTX, false );
+		THR.renderer.domElement.addEventListener( 'click', CTX.onRendererMouseMove, false );
 
-	THR.renderer.domElement.addEventListener( 'touchstart', CTX.onRendererTouchStartCTX, false );
-
-
-}
+		THR.renderer.domElement.addEventListener( 'touchstart', CTX.onRendererTouchStart, false );
 
 
-CTX.onRendererMouseMoveCTX = function( event ) {
+	}
 
-	event.preventDefault();
 
-	if ( event.buttons > 0 ) { return; }
 
-	CTX.mouse.x = ( event.clientX / THR.renderer.domElement.clientWidth ) * 2 - 1;
-	CTX.mouse.y = - ( event.clientY / THR.renderer.domElement.clientHeight ) * 2 + 1;
+	CTX.onRendererMouseMove = function( event ) {
 
-	const raycaster = new THREE.Raycaster();
-	raycaster.setFromCamera( CTX.mouse, THR.camera );
+		event.preventDefault();
 
-	const intersects = raycaster.intersectObjects( GBX.surfaceMeshes.children );
+		if ( event.buttons > 0 ) { return; }
 
-	if ( intersects.length > 0 ) {
+		CTX.mouse.x = ( event.clientX / THR.renderer.domElement.clientWidth ) * 2 - 1;
+		CTX.mouse.y = - ( event.clientY / THR.renderer.domElement.clientHeight ) * 2 + 1;
 
-		if ( CTX.intersected != intersects[ 0 ].object ) {
-			//console.log( 'CTX.intersected', CTX.intersected );
+		const raycaster = new THREE.Raycaster();
+		raycaster.setFromCamera( CTX.mouse, THR.camera );
+
+		const intersects = raycaster.intersectObjects( GBX.surfaceMeshes.children );
+
+		if ( intersects.length > 0 ) {
+
+			if ( CTX.intersected != intersects[ 0 ].object ) {
+				//console.log( 'CTX.intersected', CTX.intersected );
+
+				if ( CTX.intersected && CTX.intersected.material.emissive ) { CTX.intersected.material.emissive.setHex( CTX.intersected.currentHex ); }
+				if ( CTX.intersected ) { CTX.intersected.material.opacity = CTX.intersected.currentOpacity; }
+
+				CTX.intersected = intersects[ 0 ].object;
+
+				console.log( 'CTX.intersected', CTX.intersected );
+
+				CTX.setHeadsUp( event );
+
+				if ( CTX.intersected.material.emissive ) {
+
+					CTX.intersected.currentHex = CTX.intersected.material.emissive.getHex();
+					CTX.intersected.material.emissive.setHex( 0x440000 );
+
+				}
+
+				CTX.intersected.currentOpacity = CTX.intersected.material.opacity;
+				CTX.intersected.material.opacity = 1;
+
+			}
+
+		} else {
 
 			if ( CTX.intersected && CTX.intersected.material.emissive ) { CTX.intersected.material.emissive.setHex( CTX.intersected.currentHex ); }
 			if ( CTX.intersected ) { CTX.intersected.material.opacity = CTX.intersected.currentOpacity; }
 
-			CTX.intersected = intersects[ 0 ].object;
+			CTX.intersected = undefined;
+			CORdivMenuRight.style.display = 'none';
 
-			console.log( 'CTX.intersected', CTX.intersected );
+		}
 
-			CTX.setHeadsUp( event );
+	};
 
-			if ( CTX.intersected.material.emissive ) {
 
-				CTX.intersected.currentHex = CTX.intersected.material.emissive.getHex();
-				CTX.intersected.material.emissive.setHex( 0x440000 );
+
+	CTX.onRendererMouseDownCTXxxxx = function( event ) {
+
+		//divHeadsUp.style.display = 'none';
+
+		THR.renderer.domElement.removeEventListener( 'click', CTX.onRendererMouseMoveCTX, false );
+
+	};
+
+
+
+	CTX.onRendererTouchStart = function( event ) {
+
+		event.preventDefault();
+
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+
+		CTX.onRendererMouseMoveCTX( event );
+
+	};
+
+
+
+	CTX.setHeadsUp = function( event ) {
+
+		//console.log( 'event', event );
+		// needed?? in event handler??
+		/*
+		if ( CTX.intersected === undefined ) {
+
+			if ( event && event.type === 'touchstart' ) {
+
+				//divHeadsUp.style.display = 'none';
 
 			}
 
-			CTX.intersected.currentOpacity = CTX.intersected.material.opacity;
-			CTX.intersected.material.opacity = 1;
+			document.body.style.cursor = 'auto';
+
+			return;
 
 		}
+		*/
 
-	} else {
+		CORdivMenuRight.style.display = 'block';
+		CORdivMenuRight.style.width = '28%';
+		CORdivMenuRight.style.left = '70%';
 
-		if ( CTX.intersected && CTX.intersected.material.emissive ) { CTX.intersected.material.emissive.setHex( CTX.intersected.currentHex ); }
-		if ( CTX.intersected ) { CTX.intersected.material.opacity = CTX.intersected.currentOpacity; }
-
-		CTX.intersected = undefined;
-		CORdivMenuRight.style.display = 'none';
-
-	}
-
-};
+		//CORdivHamburgerRight.style.display = 'block';
 
 
+		CORdivItemsRight.innerHTML =
 
-CTX.onRendererMouseDownCTXxxxx = function( event ) {
+		`<div id=CTXdivShowHide class=mnuRightDiv ></div>
+		<div id=CTXdivEditSurface class=mnuRightDiv ></div>
+		<div id=CTXdivItems class=mnuRightDiv ></div>
+		<div id=CTXdivAttributes class=mnuRightDiv ></div>
+		<div id=CTXdivTellTales class=mnuRightDiv ></div>
+		`;
 
-	//divHeadsUp.style.display = 'none';
+		CTX.setPanelSurface( CTXdivItems );
 
-	THR.renderer.domElement.removeEventListener( 'click', CTX.onRendererMouseMoveCTX, false );
+		//CTX.intersected.userData.data.Name;
 
-};
+		//CTX.removeTelltales();
 
+		const data = CTX.intersected.userData.data;
 
+		CTX.userDataData = data;
+		//console.log( 'data', data );
 
-CTX.onRendererTouchStartCTX = function( event ) {
+		CTXselSurfaceId.value = data.id;
+		//CTXselSurfaceId.click();
 
-	event.preventDefault();
-
-	event.clientX = event.touches[0].clientX;
-	event.clientY = event.touches[0].clientY;
-
-	CTX.onRendererMouseMoveCTX( event );
-
-};
+	};
 
 
+	//////////
 
-CTX.setHeadsUp = function( event ) {
+	CTX.setPanelSurface = function( target ) {
+		// sets top panel
 
-	//console.log( 'event', event );
-	// needed?? in event handler??
-	/*
-	if ( CTX.intersected === undefined ) {
+		THR.controls.keys = false;
 
-		if ( event && event.type === 'touchstart' ) {
+		target.innerHTML =
 
-			//divHeadsUp.style.display = 'none';
+		`<details open >
 
-		}
+			<summary>Surface &nbsp; <a href=#../gv-CTX2-heads-up-display/README.md>?</a></summary>
 
-		document.body.style.cursor = 'auto';
+			<div id = "CTXdivPanelSurface" ></div>
 
-		return;
+			<hr>
 
-	}
-	*/
+		</details>`;
 
-	CORdivMenuRight.style.display = 'block';
-	CORdivMenuRight.style.width = '28%';
-	CORdivMenuRight.style.left = '70%';
+		let item = {};
 
-	divHamburgerRight.style.display = 'block';
+		item.attribute = 'id';
+		item.divAttributes = 'CTXdivCardSurfaceAttributes';
+		item.divTarget = document.getElementById( 'CTXdivPanelSurface' );
+		item.element = 'Surface';
+		item.name = 'itemSurface';
+		item.optionValues = GBX.surfacesJson.map ( item => [ item.id, item.Name, item.CADObjectId ] );
+		item.parent = GBX.surfaceJson;
+		item.placeholder = 'surface id';
+		item.selItem = 'CTXselSurfaceId';
 
-	CORdivItemsRight.innerHTML = CTX.intersected.userData.data.Name;
-	//CTX.removeTelltales();
+		//CTX.item = item;
 
-	const data = CTX.intersected.userData.data;
+		SEL.itemSurface = SEL.getElementPanel( item );
+		//console.log( 'GBI.itemSurface', GBI.itemSurface );
 
-	CTX.userDataData = data;
-	//console.log( 'data', data );
-
-	//CTXselSurfaceId.value = data.id;
-	//CTXselSurfaceId.click();
-
-};
+	};
 
 
