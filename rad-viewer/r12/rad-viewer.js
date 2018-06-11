@@ -124,7 +124,9 @@
 
 		for ( let line of lines ) {
 
-			if ( line[0] === '#') { continue; }
+			line = line.trim();
+			if ( line[0] === '#' ) { continue; }
+			if ( line === '' ) { continue; }
 
 			if ( line.search( /[abcdfghijklmnopqrstuvwxyz]/ ) >= 0 ) {
 

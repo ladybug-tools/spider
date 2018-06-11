@@ -10,15 +10,26 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 A set of Sun range scripts based entirely on client-side JavaScript
 
+## Yearly
 
-
-## [Sun Range Bitmap Yearly R1]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html )
+### [Sun Range Bitmap Yearly R1]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html )
 
 <iframe class=iframeReadMe src=https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-yearly-r1.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 * Draws a Sun for every 1 to 60 minutes per 12 hour day for each of the twelve months
 * Select to draw for quarters or full year
 * Only draws a Sun that is above the horizon
+
+
+## Daily
+
+## [Sun Range Bitmap Daily R2]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/daily-r2-rad/sun-range-bitmap-daily.html )
+
+* First pass at rendering for Radiance files
+
+## [Sun Range Bitmap Daily R2]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/daily-r2/sun-range-bitmap-daily.html )
+
+* Various fixes
 
 
 ## [Sun Range Bitmap Daily R1]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/sun-range-bitmap-daily-r1.html )
