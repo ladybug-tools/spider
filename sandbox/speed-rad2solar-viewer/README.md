@@ -22,7 +22,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 6. Please remove auto generation and assignment of bitmaps.
 
---Data Type and Formatting Specification--
+### Data Type and Formatting Specification
 
 1. Theo passed bitmaps, rad file. This is how Theo will read in and view bitmaps in three.js…he will read in string for xyz center point of bitmap and the normal, and place in three.js. He will also read in .rad file with surface object outlines only in black, no fills. The bitmaps will be the fills.
 
