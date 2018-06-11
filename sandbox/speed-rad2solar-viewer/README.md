@@ -28,6 +28,8 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 2. Legend always faces user and hovers along side of three.js scene
 
+![text](https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/images/LegendThreeJS.PNG)
+
 3. When viewing rad file, preferable to not view lines of polygon for walls that connect windows and walls (i.e. just view essentially the 4 node polyloop surfaces of walls and windows.
 
 4. Rest of rad file viewed without surface fills, just line geometry in black.
