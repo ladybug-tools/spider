@@ -376,9 +376,6 @@
 		let points = [];
 
 
-
-
-
 		for ( let j = 3; j < length; j++ ) {
 
 			//console.log( 'line', i, line[ i ]);
@@ -394,8 +391,8 @@
 
 		if ( i === 7 ) {
 
-			points = [ points[ 0 ], points[ 1 ], points[ 3 ], points[ 2 ] ];
-			console.log( 'i=1 points', points );
+			//points = [ points[ 0 ], points[ 1 ], points[ 3 ], points[ 2 ] ];
+			//console.log( 'i=1 points', points );
 
 		}
 
