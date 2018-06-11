@@ -23,7 +23,7 @@ A set of Sun range scripts based entirely on client-side JavaScript
 
 ## Daily
 
-## [Sun Range Bitmap Daily R2]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/daily-r2-rad/sun-range-bitmap-daily.html )
+## [Sun Range Bitmap Daily R2 Rad]( https://www.ladybug.tools/spider/solar-well/sun-range-bitmap/daily-r2-rad/sun-range-bitmap-daily.html )
 
 * First pass at rendering for Radiance files
 
