@@ -24,15 +24,17 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ### Data Type and Formatting Specification
 
-1. Theo passed bitmaps, rad file. This is how Theo will read in and view bitmaps in three.js…he will read in string for xyz center point of bitmap and the normal, and place in three.js. He will also read in .rad file with surface object outlines only in black, no fills. The bitmaps will be the fills.
+1. Your code will be passed a directory from RAD2SOLAR (or more appropriately, the format of the viewer to pull data for a project will be to reference a directory like we are startingn to set up under test-cases/test-case-1, etc). Within that directory is a single .rad file and a series of bitmaps. 
 
-2. Legend always faces user and hovers along side of three.js scene
+2. The naming convention of each bitmap is xcoordinate_ycoordinate_zcoordinate_xunitvector_yunitvector_zunitvector.bmp. The x,y,z coordinate is the center point of the bitmap, and the unit vector provides the normal. This is how you will place the bitmaps in the three.js scene. 
+
+3. The code will also read in .rad file with surface object outlines only in black, no fills. The bitmaps will be the fills.
+
+4. A single bitmap file is to be generated for the ground, each adjacentbuilding surface except the ground, each fin and overhang (only one in the normal direction, we will ignore the interior side for now to reduce the number of bitmaps), and each facade. In other words, if a building has 3 floors, one south-facing facade, and 10 windows on each floor, only one bitmap will be generated. For the roof, a single bitmap will be generate for a square building, two bitmaps for an L-Shape or T-Shape building (Zack to determine how to divide the L into two rectangles), three bitmaps for a U-Shape and H-Shape building, and 4 bitmaps for a Courtyard-Shape building.
+
+5. There will also be a bitmap for the Legend, named legend.bmp, which should be placed to the side of the scene and rotate to always faces the user as the scene is rotated. This will function similar to how we show the legend in the 3D scatter plot (look familiar;)). The bitmap for the legend will have a transparent background.
 
 ![text](https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/images/LegendThreeJS.PNG)
-
-3. When viewing rad file, preferable to not view lines of polygon for walls that connect windows and walls (i.e. just view essentially the 4 node polyloop surfaces of walls and windows.
-
-4. Rest of rad file viewed without surface fills, just line geometry in black.
 
 <!--
 ## [SPEED Rad2Solar Viewer]( http://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/index.html )
