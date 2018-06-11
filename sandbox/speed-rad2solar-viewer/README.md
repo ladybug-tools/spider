@@ -8,7 +8,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
---HTML Layout--
+# HTML Layout
 
 1. As you do now, there should be one button to import a single .rad file. This is for viewing .rad files for test cases as they are generated.
 
