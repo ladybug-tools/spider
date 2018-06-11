@@ -20,6 +20,8 @@ Please also make a drop down for "Sample projects". This will provide shortcuts 
 
 Please provide two toggle buttons: (1) "Hide .rad" and (2) "Hide .bmps". This will be useful when viewing a project.
 
+Please remove auto generation and assignment of bitmaps.
+
 <!--
 ## [SPEED Rad2Solar Viewer]( http://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/index.html )
 
