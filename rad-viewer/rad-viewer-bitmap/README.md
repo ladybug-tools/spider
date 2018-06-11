@@ -12,7 +12,14 @@ View .RAD files with bitmaps provided for every surface
 
 
 
-<div><iframe class=iframeReadMe src=https://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r2/rad-viewer-bitmap.html width=100% height=400px >Iframes are not displayed on github.com</iframe></div>
+<div><iframe class=iframeReadMe src=https://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r3-speed/rad-viewer-bitmap.html width=100% height=400px >Iframes are not displayed on github.com</iframe></div>
+
+
+## [Rad Viewer Bitmap R3 Speed ]( https://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r3-speed/rad-viewer-bitmap.html )
+
+* Sizes all bitmaps to fit exactly into their associated surfaces
+* Custom build to play nice with a single idiosyncratic file: box-shape-50000-area-1flr-0deg.rad
+
 
 ## [Rad Viewer Bitmap R2]( https://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r2/rad-viewer-bitmap.html )
 
