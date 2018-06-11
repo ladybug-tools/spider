@@ -1,5 +1,7 @@
 This is the primary specification for how the sunlight hour and solar radiation will work in SPEED. First, the user selects the desired Solar Studies Control arguments, then clicks either "Run Sunlight Hour Analysis" or "Run Solar Radiation Analysis". Those arguments are passed to the speedbuildinglibrary on Node.js via iframe. The exportrad function is called and a RAD file is generated using a modified version of the exportgbxml function. The user arguments, and some supplementary data, are then passed to a JSON file. The JSON and RAD files are pushed to the main child process RAD2SOLAR. RAD2SOLAR runs the required analysis, and generates a series of bitmaps. It then passes the bitmaps and RAD file back to speedbuildinglibrary where it is visualized within a three.js scene (via iframe) using Theo's code. The user can then interact with the analysis scene.
 
+![ text ]( http://lorempixel.com/800/600 =400x300 )
+
 ## exportgbxml Update
 
 First, we need to some updates to the exportgbxml function. These are the critical path items that need to be updated to correctly export the RAD file.
