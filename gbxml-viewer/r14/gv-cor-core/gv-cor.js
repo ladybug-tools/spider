@@ -37,10 +37,11 @@
 			CORdivHeaderRight.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
 			CORdivHeaderRight.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
-
 		window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
+
+		// see CTX.initHeadsUp for renderer events
 
 		COR.timeStart = Date.now();
 

@@ -103,7 +103,6 @@
 
 
 
-
 	SEL.setSelectedIndex = function( input, select ) {
 
 		const str = input.value.toLowerCase();
@@ -253,6 +252,97 @@
 	};
 
 
+	/////
+
+
+	SEL.setPanelSurfaceAttributes = function( target, surfaceId ) {
+
+		const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surfaceId );
+		//console.log( 'surfaceMesh', surfaceMesh );
+
+		const recGeom = surfaceMesh.userData.data.RectangularGeometry;
+		const height = parseFloat(recGeom.Height);
+		const width = parseFloat(recGeom.Width);
+		let openings = surfaceMesh.userData.data.Opening ? surfaceMesh.userData.data.Opening.length : 0;
+		openings = openings ? openings : 0;
+
+		target.innerHTML =
+
+		`<details open >
+
+			<summary>Surface ID: ` + surfaceId + `</summary>
+
+			<div>rectangular width: ${width.toLocaleString()}</div>
+			<div>rectangular height: ${height.toLocaleString()}</div>
+			<div>rectangular area: ${(width * height).toLocaleString()}</div>
+			<div>azimiuth: ${parseFloat(recGeom.Azimuth).toLocaleString()}</div>
+			<div>tilt: ${parseFloat(recGeom.Tilt).toLocaleString()}</div>
+			<div>vertices: ${surfaceMesh.geometry.vertices.length}</div>
+			<div>openings: ${openings}</div>
+
+		</details>
+
+		<hr>`;
+
+		//SEL.removeTelltales();
+	};
+
+
+
+
+
+
+	SEL.setPanelSpaceAttributes = function( target, spaceId, spaceIndex ) {
+		//console.log( 'target', target );
+		//console.log( 'spaceIndex', spaceIndex );
+		SEL.spaceIndex = spaceIndex >= 0 ? spaceIndex : SEL.spaceIndex;
+
+		const item = {};
+
+		target.innerHTML =
+		// 	<summary>Adjacent Space ` + ( spaceIndex > 0 ? spaceIndex : '' ) + `</summary>
+		`<details open >
+
+			<summary>Adjacent Space ` + ( SEL.spaceIndex > -2 ? SEL.spaceIndex : '' ) + `</summary>
+
+			<p>
+				<button onclick=HUD.updateSpace(SELselSpace.value,SEL.spaceIndex); >update the space associated with this surface</button>
+			</p>
+
+			<div id=SELdivSpace ></div>
+
+			<div id=SELdivAtts ></div>
+
+
+		</details>
+
+		<hr>`;
+
+		item.attribute = 'space';
+		item.divAttributes = 'SELdivAtts';
+		item.divTarget = document.getElementById( 'SELdivSpace' );
+		item.element = 'Space';
+		item.name = 'itemSpace';
+		//item.optionValues = item.optionValues;
+		item.optionValues = GBX.gbjson.Campus.Building.Space.map( item => [ item.id, item.Name, item.CADObjectId ] );
+		item.parent = GBX.gbjson.Campus.Building.Space;
+		item.placeholder = 'space id';
+		item.selItem = 'SELselSpace';
+
+		//console.log( 'item.optionValues', item.optionValues);
+
+		SEL.itemSpace = SEL.getElementPanel( item );
+
+		const sel = document.getElementById( item.selItem );
+		sel.value = spaceId;
+		sel.click();
+
+		SEL.setSpaceVisible( spaceId );
+
+		//console.log( 'sel', sel );
+
+	};
+
 
 	////////// get Attributes by individual items / All used by REP
 	// all used by REP
@@ -264,7 +354,11 @@
 		const txt =
 		`<div>
 			<span class=attributeTitle >adjacent space ` + ( spaceIndex > -2 ? spaceIndex : "" ) + ` id</span>:<br>
+			<!--
 			<button onclick=SEL.setSpaceVisible("${spaceIdRef}"); >${spaceIdRef}</button>
+			-->
+			<button onclick=SEL.setPanelSpaceAttributes(CTXdivAttributes,"${spaceIdRef}"); >${spaceIdRef}</button>
+
 			<button onclick=SEL.setSpaceZoom("${spaceIdRef}",${spaceIndex}); >&#8981;</button>
 		</div>`;
 
@@ -369,6 +463,7 @@
 	};
 
 
+
 	////////// Show/Hide by Individual Elements
 	// used by REP
 
@@ -382,9 +477,9 @@
 			element.visible = element.userData.data.CADObjectId === cadId ? true : false );
 
 
-		if ( window.HUDdivAttributes ) { // move to hud
+		//if ( window.CTXdivAttributes ) { // move to hud
 
-			HUDdivAttributes.innerHTML =
+			CTXdivAttributes.innerHTML =
 
 			`<details open>
 
@@ -456,7 +551,7 @@
 
 			SELselCadId.value = cadId;
 
-		}
+		//}
 
 	};
 
@@ -553,6 +648,9 @@
 
 		CTX.setHeadsUp();
 
+
+		//SEL.setPanelSurfaceAttributes( CTXdivAttributes, surfaceId );
+
 	};
 
 
@@ -648,6 +746,56 @@
 
 
 
+
+	SEL.setMenuPanelCadObjectsByType2 = function( target, selId ) {
+
+		const surfaces = GBX.gbjson.Campus.Surface;
+		const cadIds = [];
+
+		for ( let surface of surfaces ) {
+
+			//if ( !surface.CADObjectId ) { continue; }
+
+			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
+
+				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+
+				//console.log( 'surface', surface );
+				//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
+				continue;
+
+			}
+
+			const id = surface.CADObjectId.replace( / \[(.*?)\]/gi, '' ).trim();
+
+			if ( !cadIds.includes( id ) ) {
+
+				cadIds.push( id );
+
+			}
+
+		}
+
+		//console.log( 'cadIds', cadIds );
+		cadIds.sort();
+
+		let txt = '';
+
+		for ( let id of cadIds ){
+
+			txt += '<option>' + id + '</option>';
+
+		}
+
+		const details = `<select id = "${selId}" size=10 >${txt}</select>`;
+
+		target.innerHTML = details;
+
+	};
+
+
+
+
 	SEL.setOpeningTypeVisible = function( type ) {
 
 		SEL.setSurfaceGroupsVisible( false, false, true );
@@ -686,9 +834,9 @@
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
-		if ( window.HUDdivAttributes ) {
+		//if ( window.HUDdivAttributes ) {
 
-			HUDdivAttributes.innerHTML =
+			CTXdivAttributes.innerHTML =
 
 			`<details open>
 
@@ -703,7 +851,7 @@
 
 			<hr>`;
 
-		}
+		//}
 
 		const surfaces = GBX.gbjson.Campus.Surface;
 
@@ -735,12 +883,12 @@
 
 		}
 
-		if ( window.HUDdivAttributes ) {
+		//if ( window.HUDdivAttributes ) {
 
 			SELselSurfaceType.innerHTML = txt;
 			SELselSurfaceType.size = types.length;
 
-		}
+		//}
 
 	};
 
@@ -784,6 +932,7 @@
 		THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
 
 	};
+
 
 
 	SEL.setCadIdZoom = function( cadId ) {
@@ -896,6 +1045,13 @@
 	}
 
 
+	SEL.removeTelltales = function() {
+
+		THR.scene.remove( HUD.telltalesPolyloop );
+		THR.scene.remove( HUD.telltalesVertex );
+		CTXdivCoordinates.innerHTML = 'click a button';
+
+	};
 
 	////////// Style
 

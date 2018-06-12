@@ -88,7 +88,7 @@
 		event.clientX = event.touches[0].clientX;
 		event.clientY = event.touches[0].clientY;
 
-		CTX.onRendererMouseMoveCTX( event );
+		CTX.onRendererMouseMove( event );
 
 	};
 
@@ -123,12 +123,13 @@
 
 		CORdivItemsRight.innerHTML =
 
-		`<div id=CTXdivShowHide class=mnuRightDiv ></div>
-		<div id=CTXdivEditSurface class=mnuRightDiv ></div>
-		<div id=CTXdivItems class=mnuRightDiv ></div>
-		<div id=CTXdivAttributes class=mnuRightDiv ></div>
-		<div id=CTXdivTellTales class=mnuRightDiv ></div>
-		`;
+			`<div id=CTXdivShowHide class=mnuRightDiv ></div>
+			<div id=CTXdivEditSurface class=mnuRightDiv ></div>
+			<div id=CTXdivItems class=mnuRightDiv ></div>
+			<div id=CTXdivAttributes class=mnuRightDiv ></div>
+			<div id=CTXdivTellTales class=mnuRightDiv ></div>
+			`;
+
 
 		CTX.setPanelSurface( CTXdivItems );
 
@@ -143,6 +144,8 @@
 
 		CTXselSurfaceId.value = data.id;
 		//CTXselSurfaceId.click();
+		SEL.setPanelSurfaceAttributes( CTXdivAttributes, data.id );
+
 
 	};
 
@@ -178,7 +181,7 @@
 		item.placeholder = 'surface id';
 		item.selItem = 'CTXselSurfaceId';
 
-		//CTX.item = item;
+		CTX.item = item;
 
 		SEL.itemSurface = SEL.getElementPanel( item );
 		//console.log( 'GBI.itemSurface', GBI.itemSurface );

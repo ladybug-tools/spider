@@ -39,6 +39,11 @@ As time goes on, we hope to connect the various scripts in various fun ways.
 
 ## Links of Interest
 
+Face normal
+* https://stackoverflow.com/questions/16268482/three-js-convert-face-normal-from-local-space-to-world-space
+
+Centroid of face
+* https://gist.github.com/AndrewRayCode/c9c41b549d0b1e97da8890a79e3ab8d0#file-computefacecentroids-js
 
 
 ## Change Log

@@ -21,8 +21,9 @@ The goals for the files include:
 
 * Files are no more than a few hundred lines
 * Code is simple, plain-vanilla JavaScript
-* Every JavaScript file has an accompanying standalone HTML file for testing purposes
 * Every JavaScript file has its own name space so you can quickly identify the location of variables and functions
+* Every module has a descriptive read me file
+* Every JavaScript file has an accompanying standalone HTML file for testing purposes
 
 
 ## Wish list
@@ -40,6 +41,14 @@ The goals for the files include:
 
 
 
+### 2018-06-12 ~ Theo
+
+R14.2 bis
+To Do:
+* Right too much duplicates left menu
+* Remove select surface from right menu
+* All selection updates in left menu
+* Only attributes and edits should appear in right menu
 
 ### 2018-06-05 ~ Theo
 
