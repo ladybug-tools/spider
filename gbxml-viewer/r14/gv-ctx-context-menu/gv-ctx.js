@@ -1,6 +1,6 @@
 
 
-	// Handle events
+	// Handles events
 
 	var CTX = {};
 

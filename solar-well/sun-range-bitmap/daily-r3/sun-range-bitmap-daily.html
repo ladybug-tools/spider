@@ -39,6 +39,9 @@
 
 		<p>
 			<button onclick=drawBoxes(3); >drawBoxes</button>
+
+			<button onclick=addShadowsToObjects(); >addShadowsToObjects</button>
+
 		</p>
 
 		<p>
@@ -199,10 +202,11 @@
 		scene.add( axesHelper );
 
 		//requestGbxmlFile( url );
+
+
 		updateSun();
 
-		drawBoxes( 1 );
-
+		drawBoxes( 10 );
 
 	}
 
@@ -214,6 +218,7 @@
 		scene.remove( ...exposedToSun,( GBX.surfaceOpenings ? GBX.surfaceOpenings : null )  );
 
 		objects = new THREE.Group();
+		objects.updateMatrixWorld();
 
 		var normalMatrix = new THREE.Matrix3().getNormalMatrix( scene.matrixWorld );
 		exposedToSun = [];
@@ -222,26 +227,42 @@
 
 		for ( let i = 0; i < count; i++ ) {
 
-			const geometry = new THREE.BoxGeometry( 20, 20, 10 );
-
-			for ( face of geometry.faces ) {
-
-				face.vertexColors[ 0 ] = new THREE.Color( 0xeeeeee * Math.random() );
-				face.vertexColors[ 1 ] = new THREE.Color( 0xeeeeee );
-				face.vertexColors[ 2 ] = new THREE.Color( 0xeeeeee );
-
-			}
+			geometry = new THREE.PlaneGeometry( 60, 50 );
 
 			const material = new THREE.MeshBasicMaterial( { color: 0xffffff, side: 2, vertexColors: THREE.VertexColors } );
 
 			box = new THREE.Mesh( geometry, material );
 			box.name = 'box' + i;
-			box.rotation.set( 3.15 * Math.random(), 3.15 * Math.random(), 3.15 * Math.random() );
+			//box.rotation.set( 3.15 * Math.random(), 3.15 * Math.random(), 3.15 * Math.random() );
 			box.position.set( 100 * Math.random() - 50, 100 * Math.random() - 50, 80 * Math.random() );
+			box.updateMatrixWorld();
+			//axesHelper.updateMatrixWorld();
+			//scene.updateMatrixWorld();
 
-			helper = new THREE.VertexNormalsHelper( box, 2, 0x00ff00, 1 );
-			scene.add( helper );
+			for ( face of geometry.faces ) {
 
+				//var vertex = box.geometry.vertices[ face.a ].clone();
+				//box.localToWorld ( vertex );
+				//console.log( 'v2', vertex );
+				//const shadow = buildBoxShadow( vertex );
+				//console.log( 'shadow', shadow );
+				face.vertexColors[ 0 ] = new THREE.Color( 0xcccccc );
+				face.vertexColors[ 1 ] = new THREE.Color( 0xcccccc );
+				face.vertexColors[ 2 ] = new THREE.Color( 0xcccccc );
+
+				//console.log( 'vv', geometry.vertices[ face.a ] );
+
+				//var vector1 = box.geometry.vertices[ face.a ].clone();
+				//vector1.applyMatrix4( box.matrixWorld );
+				//console.log( 'v1', vector1 );
+
+			}
+
+
+			//helper = new THREE.VertexNormalsHelper( box, 2, 0x00ff00, 1 );
+			//scene.add( helper );
+
+			/*
 			p = helper.geometry.attributes.position.array;
 
 			for ( j = 3; j < p.length; ) {
@@ -256,11 +277,12 @@
 				scene.add( plane );
 
 				const shadow = buildBoxShadow( vertex );
-				console.log( 'shadow', shadow );
+				//console.log( 'shadow', shadow );
 
 				j += 3;  // for every other vertex
 
 			}
+			*/
 
 			/*
 			for ( face of geometry.faces ) {
@@ -284,14 +306,70 @@
 
 		}
 
+		scene.add( objects );
+
 		zoomObjectBoundingSphere ( objects );
 
-		scene.add( objects );
 
 		//setTimeout( drawPlane, 30 );
 
 	}
 
+
+	function addShadowsToObjects() {
+
+		let shadow;
+		for ( obj of objects.children ) {
+		//for ( obj of exposedToSun ) {
+
+
+
+			obj.updateMatrixWorld();
+			//axesHelper.updateMatrixWorld();
+			//scene.updateMatrixWorld();
+
+			for ( face of obj.geometry.faces ) {
+
+				var vertex1 = obj.geometry.vertices[ face.a ].clone();
+				obj.localToWorld ( vertex1 );
+				//console.log( 'v1', vertex1 );
+				shadow1 = 1 / ( 1.05 + buildBoxShadow( vertex1 ) );
+				console.log( 'shadow1', shadow1 );
+
+				//face.vertexColors[ 0 ] = new THREE.Color( 0xffffff );
+				face.vertexColors[ 0 ].setRGB( shadow1, shadow1, shadow1 );
+
+				var vertex2 = obj.geometry.vertices[ face.b ].clone();
+				obj.localToWorld ( vertex2 );
+				//console.log( 'v2', vertex1 );
+				shadow2 =  1 / ( 1.05 + buildBoxShadow( vertex2 ) );
+				//console.log( 'shadow', shadow2 );
+
+				face.vertexColors[ 1 ].setRGB( shadow2, shadow2, shadow2 );
+
+				var vertex3 = obj.geometry.vertices[ face.c ].clone();
+				obj.localToWorld ( vertex3 );
+				//console.log( 'v2', vertex1 );
+				shadow3 = 1 / ( 1.05 + buildBoxShadow( vertex3 ) );
+				//console.log( 'shadow', shadow );
+				face.vertexColors[ 2 ].setRGB( shadow3, shadow3, shadow3 );
+
+				//console.log( 'vv', geometry.vertices[ face.a ] );
+
+				//var vector1 = obj.geometry.vertices[ face.a ].clone();
+				//vector1.applyMatrix4( obj.matrixWorld );
+				//console.log( 'v1', vector1 );
+
+
+			}
+
+			obj.material.needsUpdate = true;
+			obj.geometry.colorsNeedUpdate = true;
+			obj.geometry.elementsNeedUpdate = true;
+
+		}
+
+	}
 
 	function buildBoxShadow( point ) {
 		//console.log( 'point', point );
@@ -309,17 +387,21 @@
 			const vector = sun.position.clone().normalize();
 			//console.log( 'vector', vector );
 
-			raycaster.set( point, vector );
+			raycaster.set( point, vector, 0.5 );
 			//console.log( 'raycaster', raycaster );
 
-			const arrowHelper = new THREE.ArrowHelper( vector, point, 20, 0xff0000 );
-			scene.add( arrowHelper );
 
-			const intersects = raycaster.intersectObjects( exposedToSun, true );
+			intersects = raycaster.intersectObjects( exposedToSun, true );
 			//console.log( 'intersects', intersects );
 
-			shadow += intersects.length > 0 ? 1 : 0;
+			realIntersects = intersects.filter( inter => inter.distance > 0 )
+			//console.log( 'realIntersects', realIntersects );
 
+			color = realIntersects.length > 0 ? 0xff0000 : 0x00ff00;
+			const arrowHelper = new THREE.ArrowHelper( vector, point, 20, color );
+			scene.add( arrowHelper );
+
+			shadow += realIntersects.length > 0 ? 0.7 : 0;
 
 		}
 
@@ -398,6 +480,9 @@
 		}
 
 		scene.add( suns );
+
+
+		//setTimeout( drawBoxes, 30 );
 
 	}
 
@@ -555,6 +640,7 @@
 
 			divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
 
+updateSun();
 		}
 
 	}
@@ -599,7 +685,7 @@
 		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
 		//		scene.add( cameraHelper );
 
-		updateSun();
+		//updateSun();
 
 	};
 
