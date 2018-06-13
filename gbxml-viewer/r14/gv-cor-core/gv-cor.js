@@ -125,7 +125,8 @@
 		function callbackGbXML ( xhr ) {
 			//console.log( 'xhr', xhr );
 
-			const gbxmlResponseXML =  xhr.target.responseXML;
+			GBX.gbxmlResponseXML =  xhr.target.responseXML; // used by CTX.modifiedBy
+
 			const gbxml = xhr.target.responseXML.documentElement;
 
 			const meshes = GBX.parseFileXML( gbxml );

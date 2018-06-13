@@ -1359,7 +1359,7 @@
 
 			<summary>Show || Hide / Zoom</summary>
 
-			<button onclick=GBP.toggleSurfacesVisible(); >surfaces</button>
+				<button onclick=GBP.toggleSurfacesVisible(); >surfaces</button>
 				<button onclick=GBP.surfaceEdges.visible=!GBP.surfaceEdges.visible; >edges</button>
 				<button onclick=GBP.surfaceOpenings.visible=!GBP.surfaceOpenings.visible; title="toggle the windows" >openings</button>
 				<button onclick=GBP.setAllVisible(); >all</button>

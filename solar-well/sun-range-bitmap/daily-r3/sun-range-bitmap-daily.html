@@ -38,7 +38,7 @@
 		<div id=divSamplesGallery ></div>
 
 		<p>
-			<button onclick=drawBoxes(); >drawBoxes</button>
+			<button onclick=drawBoxes(3); >drawBoxes</button>
 		</p>
 
 		<p>
@@ -199,10 +199,10 @@
 		scene.add( axesHelper );
 
 		//requestGbxmlFile( url );
+		updateSun();
 
-		drawBoxes( 10 );
+		drawBoxes( 1 );
 
-		//updateSun();
 
 	}
 
@@ -215,20 +215,54 @@
 
 		objects = new THREE.Group();
 
-
-			var normalMatrix = new THREE.Matrix3().getNormalMatrix( scene.matrixWorld );
+		var normalMatrix = new THREE.Matrix3().getNormalMatrix( scene.matrixWorld );
 		exposedToSun = [];
+
+		//console.log( 'suns', suns );
 
 		for ( let i = 0; i < count; i++ ) {
 
 			const geometry = new THREE.BoxGeometry( 20, 20, 10 );
-			const material = new THREE.MeshBasicMaterial( { color: 0xcccccc, vertexColors: THREE.VertexColors } );
 
-			const box = new THREE.Mesh( geometry, material );
+			for ( face of geometry.faces ) {
+
+				face.vertexColors[ 0 ] = new THREE.Color( 0xeeeeee * Math.random() );
+				face.vertexColors[ 1 ] = new THREE.Color( 0xeeeeee );
+				face.vertexColors[ 2 ] = new THREE.Color( 0xeeeeee );
+
+			}
+
+			const material = new THREE.MeshBasicMaterial( { color: 0xffffff, side: 2, vertexColors: THREE.VertexColors } );
+
+			box = new THREE.Mesh( geometry, material );
 			box.name = 'box' + i;
 			box.rotation.set( 3.15 * Math.random(), 3.15 * Math.random(), 3.15 * Math.random() );
 			box.position.set( 100 * Math.random() - 50, 100 * Math.random() - 50, 80 * Math.random() );
 
+			helper = new THREE.VertexNormalsHelper( box, 2, 0x00ff00, 1 );
+			scene.add( helper );
+
+			p = helper.geometry.attributes.position.array;
+
+			for ( j = 3; j < p.length; ) {
+
+				//console.log( 'vertex', p[ j ] );
+				vertex = v( p[ j++ ], p[ j++ ], p[ j++ ] );
+
+				const geometryP = new THREE.PlaneBufferGeometry( 1, 1, 1 );
+				const materialP = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+				const plane = new THREE.Mesh( geometryP, materialP );
+				plane.position.copy( vertex );
+				scene.add( plane );
+
+				const shadow = buildBoxShadow( vertex );
+				console.log( 'shadow', shadow );
+
+				j += 3;  // for every other vertex
+
+			}
+
+			/*
 			for ( face of geometry.faces ) {
 
 				//face.color.setHex( Math.random() * 0xffffff );
@@ -237,14 +271,16 @@
 				//console.log( 'nor', worldNormal );
 
 			}
+			*/
+
 
 			objects.add( box );
 
-			if ( box.position.z > 0 ) {
+			//if ( box.position.z > 0 ) {
 
 				exposedToSun.push( box );
 
-			}
+			//}
 
 		}
 
@@ -253,6 +289,41 @@
 		scene.add( objects );
 
 		//setTimeout( drawPlane, 30 );
+
+	}
+
+
+	function buildBoxShadow( point ) {
+		//console.log( 'point', point );
+
+		//console.log( 'exposedToSun', exposedToSun );
+
+		var raycaster = new THREE.Raycaster();
+
+		let shadow = 0;
+
+		for ( let i = 0; i < suns.children.length; i++ ) {
+		//for ( var i = 0; i < 1; i++ ) {
+
+			const sun = suns.children [ i ];
+			const vector = sun.position.clone().normalize();
+			//console.log( 'vector', vector );
+
+			raycaster.set( point, vector );
+			//console.log( 'raycaster', raycaster );
+
+			const arrowHelper = new THREE.ArrowHelper( vector, point, 20, 0xff0000 );
+			scene.add( arrowHelper );
+
+			const intersects = raycaster.intersectObjects( exposedToSun, true );
+			//console.log( 'intersects', intersects );
+
+			shadow += intersects.length > 0 ? 1 : 0;
+
+
+		}
+
+		return shadow;
 
 	}
 

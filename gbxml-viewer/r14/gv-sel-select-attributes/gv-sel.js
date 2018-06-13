@@ -1036,6 +1036,36 @@
 
 	//////////
 
+
+	SEL.setPanelShowHide = function( target ) {
+		// used by HUD2/ISS/REP
+
+		target.innerHTML =
+
+		`<details open >
+
+			<summary>Show || Hide / Zoom</summary>
+
+			<button onclick=SEL.toggleSurfacesVisible(); >surfaces</button>
+				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>
+				<button onclick=GBX.surfaceOpenings.visible=!GBX.surfaceOpenings.visible; title="toggle the windows" >openings</button>
+				<button onclick=GBX.setAllVisible(); >all</button>
+				/
+				<button onclick=SEL.setBuildingZoom(); >zoom all</button>
+
+		</details>`;
+
+	};
+
+
+	SEL.toggleSurfacesVisible = function() {
+
+		GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible;
+
+		GBX.surfaceMeshes.children.forEach( child => child.visible = GBX.surfaceMeshes.visible );
+
+	};
+
 	SEL.setSurfaceGroupsVisible = function( meshesVis = true, edgesVis = true, openingsVis = false ) {
 
 		GBX.surfaceMeshes.visible = meshesVis;
@@ -1070,10 +1100,10 @@
 
 
 
-	////////// to be deprecated ??
+	//////////
 
 
-	SEL.xxxxxsetZoneZoom = function( zoneId ) {
+	SEL.setZoneZoom = function( zoneId ) {
 
 		SEL.setZoneVisible( zoneId );
 
@@ -1099,18 +1129,18 @@
 
 
 
-	SEL.xxxxxsetBuildingZoom = function( cadId ) {
+	SEL.setBuildingZoom = function( cadId ) {
 		// Used: SEL.setPanelShowHide
 
-		let meshes = GBX.surfaceMeshes.children.filter( element => element.userData.data.surfaceType === 'ExteriorWall' );
-		meshes = meshes.map( item => item.clone() );
+		//let meshes = GBX.surfaceMeshes.children.filter( element => element.userData.data.surfaceType === 'ExteriorWall' );
+		//meshes = meshes.map( item => item.clone() );
 		//console.log( 'meshes', meshes );
 
-		const surfaceMeshes = new THREE.Object3D();
-		surfaceMeshes.add( ...meshes );
+		//const surfaceMeshes = new THREE.Object3D();
+		//surfaceMeshes.add( ...meshes );
 		//console.log( '', surfaceMesh );
 
-		const bbox = new THREE.Box3().setFromObject( surfaceMeshes );
+		const bbox = new THREE.Box3().setFromObject( GBX.surfaceOpenings );
 		const sphere = bbox.getBoundingSphere();
 		const center = sphere.center;
 		const radius = sphere.radius;
