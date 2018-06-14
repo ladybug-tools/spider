@@ -74,11 +74,11 @@
 
 
 
-	CTX.onRendererMouseDownCTXxxxx = function( event ) {
+	CTX.xxxxonRendererMouseDown = function( event ) {
 
 		//divHeadsUp.style.display = 'none';
 
-		THR.renderer.domElement.removeEventListener( 'click', CTX.onRendererMouseMoveCTX, false );
+		THR.renderer.domElement.removeEventListener( 'click', CTX.onRendererMouseMove, false );
 
 	};
 
@@ -118,14 +118,14 @@
 		*/
 
 		CORdivMenuRight.style.display = 'block';
-		CORdivMenuRight.style.width = '28%';
-		CORdivMenuRight.style.left = '70%';
+		CORdivMenuRight.style.width = '20rem';
+		CORdivMenuRight.style.left = 'calc( 100% - 22rem )';
 
 		//CORdivHamburgerRight.style.display = 'block';
 
 		CORdivItemsRight.innerHTML =
-
-			`<div id=CTXdivShowHide class=mnuRightDiv ></div>
+			`
+			<div id=CTXdivShowHide class=mnuRightDiv ></div>
 			<div id=CTXdivEditSurface class=mnuRightDiv ></div>
 			<div id=CTXdivItems class=mnuRightDiv ></div>
 			<div id=CTXdivAttributes class=mnuRightDiv ></div>
@@ -140,14 +140,12 @@
 
 		CTX.setPanelTellTale( CTXdivTellTales );
 
-
 	};
 
 
-	//////////
+	////////// sets top panel with data for currently selected surface
 
 	CTX.setPanelSurface = function( target ) {
-		// sets top panel
 
 		THR.controls.keys = false;
 
@@ -193,8 +191,7 @@
 
 
 
-
-	/////
+	///// Surface Coordinates
 
 	CTX.setPanelTellTale = function ( target ) {
 
@@ -209,6 +206,24 @@
 			<div id=CTXdivCoordinates ></div>
 
 		</details>`;
+
+	};
+
+
+
+	CTX.setCoordinateData = function() {
+
+		vertex = CTX.telltalesMeshes.children[ CTXselCoordinate.selectedIndex ].position;
+		console.log( 'vertex', vertex );
+
+		x = vertex;
+
+		CTXdivCoordinatesData.innerHTML =
+		`
+		X = ${vertex.x} <br>
+		Y = ${vertex.y} <br>
+		Z = ${vertex.z} <br>
+		<p><button onclick=alert("Coming-soon"); >delete</button></p>`;
 
 	};
 
@@ -244,7 +259,7 @@
 
 			mesh.position.set( parseFloat( vertex[ 0 ] ), parseFloat( vertex[ 1 ] ), parseFloat( vertex[ 2 ] ) );
 
-			placard = CTX.drawPlacard( i.toString(), 0.01, 200, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
+			placard = THR.drawPlacard( i.toString(), 0.01, 200, parseFloat( vertex[ 0 ] ) + 0.5, parseFloat( vertex[ 1 ] ) + 0.5, parseFloat( vertex[ 2 ] ) + 0.5 );
 			// console.log( 'placard', placard );
 			CTX.telltalesPolyloop.add( placard );
 			CTX.telltalesMeshes.add( mesh );
@@ -254,7 +269,6 @@
 		}
 
 		const openings = surfacesJson.Opening ? surfacesJson.Opening : [];
-
 
 		//const openings = surfacesJson.PlanarGeometry.PolyLoop.CartesianPoint;
 
@@ -329,7 +343,7 @@
 			mesh.position.copy( CTX.intersected.position );
 			mesh.quaternion.copy( CTX.intersected.quaternion );
 
-			placard = CTX.drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z + 0.5 );
+			placard = THR.drawPlacard( i.toString(), 0.01, 120, vertex.x, vertex.y, vertex.z + 0.5 );
 			placard.position.copy( CTX.intersected.position );
 			placard.quaternion.copy( CTX.intersected.quaternion );
 
@@ -362,23 +376,6 @@
 
 
 
-	CTX.setCoordinateData = function() {
-
-		vertex = CTX.telltalesMeshes.children[ CTXselCoordinate.selectedIndex ].position;
-		console.log( 'vertex', vertex );
-
-		x = vertex;
-
-		CTXdivCoordinatesData.innerHTML =
-		`
-		X = ${vertex.x} <br>
-		Y = ${vertex.y} <br>
-		Z = ${vertex.z} <br>
-		<p><button onclick=alert("Coming-soon"); >delete</button></p>`;
-
-	};
-
-
 	CTX.removeTelltales = function() {
 
 		THR.scene.remove( CTX.telltalesPolyloop );
@@ -389,102 +386,7 @@
 
 
 
-	CTX.drawPlacard = function( text, scale, color, x, y, z ) {
-
-		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
-
-		var placard = new THREE.Object3D();
-		var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
-
-		var texture = canvasMultilineText( text, { backgroundColor: color }   );
-		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
-		var sprite = new THREE.Sprite( spriteMaterial );
-		sprite.position.set( x, y, z ) ;
-		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
-
-		var geometry = new THREE.Geometry();
-		geometry.vertices = [ v( 0, 0, 0 ),  v( x, y, z ) ];
-		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
-		var line = new THREE.Line( geometry, material );
-
-		//placard.add( sprite, line );
-		placard.add( sprite );
-		return placard;
-
-
-		function canvasMultilineText( textArray, parameters ) {
-
-			parameters = parameters || {} ;
-
-			var canvas = document.createElement( 'canvas' );
-			var context = canvas.getContext( '2d' );
-			var width = parameters.width ? parameters.width : 0;
-			var font = parameters.font ? parameters.font : '48px monospace';
-			var color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
-
-			if ( typeof textArray === 'string' ) textArray = [ textArray ];
-
-			context.font = font;
-
-			for ( var i = 0; i < textArray.length; i++) {
-
-				width = context.measureText( textArray[ i ] ).width > width ? context.measureText( textArray[ i ] ).width : width;
-
-			}
-
-			canvas.width = width + 20;
-			canvas.height =  parameters.height ? parameters.height : textArray.length * 60;
-
-			context.fillStyle = 'hsl( ' + color + ', 80%, 50% )' ;
-			context.fillRect( 0, 0, canvas.width, canvas.height);
-
-			context.lineWidth = 1 ;
-			context.strokeStyle = '#000';
-			context.strokeRect( 0, 0, canvas.width, canvas.height );
-
-			context.fillStyle = '#000' ;
-			context.font = font;
-
-			for ( i = 0; i < textArray.length; i++) {
-
-				context.fillText( textArray[ i ], 10, 48  + i * 60 );
-
-			}
-
-			var texture = new THREE.Texture( canvas );
-			texture.minFilter = texture.magFilter = THREE.NearestFilter;
-			texture.needsUpdate = true;
-
-			return texture;
-
-		}
-
-	};
-
-
-		////////// Editing
-
-
-	CTX.getPanelEditSurface = function() {
-
-		const txt =
-		`<details>
-
-			<summary>Edit the Surface</summary>
-
-			<button class=toggle onclick=CTX.deleteSurface(); >delete surface</button>
-				<button onclick=CTX.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
-				<button onclick=CTX.saveFile(); title="creates a new file with the changes" >save edits</button>
-
-			<hr>
-
-		</details>`;
-
-		return txt;
-
-	};
-
-
+	////////// Editing
 
 	CTX.setPanelEditSurface = function( target ) {
 
@@ -603,6 +505,319 @@
 		a.click();
 		//		delete a;
 		a = null;
+
+	};
+
+
+
+
+	///////// Editing Elements after push update button
+
+	CTX.updateSurface = function( id ) {
+		// not used??
+
+		GBX.surfaceMeshes.children.forEach( function( element ) { element.visible = element.userData.data.id === id ? true : false; } );
+
+		const surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+		console.log( 'surfaceMesh', surfaceMesh );
+
+		CTX.intersected = surfaceMesh;
+
+	};
+
+
+
+	CTX.updateSpace = function( spaceId, spaceRef ) {
+
+		console.log( 'spaceId', spaceId );
+		console.log( 'spaceRef', spaceRef );
+
+		const surfaceJson = CTX.intersected.userData.data;
+		const surfaceName = surfaceJson.Name;
+
+		CTX.surfacesXml = GBX.gbxmlResponseXML.getElementsByTagName("Surface");
+
+		const surfaceXml = CTX.surfacesXml[ surfaceJson.id ];
+
+		if ( spaceRef === 0  ) {
+
+			const spaceId = SELselSpace.value;
+			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
+			SELbutSpaceVis0.innerText = spaceId;
+
+			console.log( 'surfaceXml', surfaceXml );
+
+			space = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
+			space.setAttribute( "spaceIdRef", spaceId );
+
+			console.log( 'space', space );
+
+			//adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			//surfaceXml.appendChild( adjacentNew );
+
+			if ( !SEL.surfaceChanges.oneAdjacent ) { SEL.surfaceChanges.oneAdjacent = []; }
+			SEL.surfaceChanges.oneAdjacent.push( { name: surfaceName, spaceId: spaceId } );
+
+		} else if ( spaceRef === 1 ) {
+
+			const spaceId = SELselSpace.value;
+			console.log( 'spaceId', spaceId );
+
+			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
+			SELbutSpaceVis1.innerText = spaceId;
+
+			console.log( 'surfaceXml', surfaceXml );
+
+			space = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
+			space.setAttribute( "spaceIdRef", spaceId );
+
+			//adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			//surfaceXml.appendChild( adjacentNew );
+
+			if ( !SEL.surfaceChanges.twoAdjacent ) { SEL.surfaceChanges.twoAdjacent = []; }
+			SEL.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } );
+
+		} else if ( spaceRef === 2 ) {
+
+			const spaceId = SELselSpace.value;
+			surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId;
+			SELbutSpaceVis2.innerText = spaceId;
+
+			console.log( 'surfaceXml', surfaceXml );
+
+			space = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 1 ];
+			space.setAttribute( "spaceIdRef", spaceId );
+
+			//adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+			//adjacentNew.setAttribute( "spaceIdRef", spaceId );
+			//surfaceXml.appendChild( adjacentNew );
+
+			if ( !SEL.surfaceChanges.twoAdjacent ) { SEL.surfaceChanges.twoAdjacent = []; }
+			SEL.surfaceChanges.twoAdjacent.push( { name: surfaceName, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } );
+
+		}
+
+		//console.log( 'surfaceXml', surfaceXml);
+		//console.log( 'adjacentNew', adjacentNew );
+
+		console.log( 'surfaceJson', surfaceJson );
+
+		//alert( 'update space almost working: ' + spaceRef )
+
+		CTX.setHeadsUp();
+
+	};
+
+
+
+	CTX.updateSurfaceType = function() {
+
+		// console.log( 'id', CTX.userDataData );
+
+		const surface = CTX.intersected.userData.data;
+		//console.log( 'surface', surface );
+
+		const id = surface.id;
+		const spaceIdPrev = surface.AdjacentSpaceId;
+		//console.log( 'spaceIdPrev', spaceIdPrev );
+
+		const typeNew = surface.surfaceType = SELselSurfaceType.value;
+		//console.log( 'typeNew', typeNew );
+
+		if ( !CTX.surfaceChanges.surfaceTypes ) { CTX.surfaceChanges.surfaceTypes = []; }
+		CTX.surfaceChanges.surfaceTypes.push( { name: surface.Name, surfaceType: typeNew } );
+
+		CTX.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
+
+		surfaceXml = CTX.surfacesXml[ id ];
+		//console.log( 'surfaceXml',  surfaceXml );
+
+		surfaceXml.attributes.getNamedItem( 'surfaceType' ).nodeValue = typeNew;
+
+		surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+		surfaceMesh.material.color.setHex( GBX.colors[ typeNew ] );
+		surfaceMesh.material.needsUpdate = true;
+
+		surfaceJson = surfaceMesh.userData.data;
+
+		const types = ['InteriorWall', 'InteriorFloor', 'Ceiling', 'Air', 'UndergroundCeiling', 'RaisedFloor'];
+
+		if ( typeNew === 'Shade' ) {
+
+			// json
+			delete surfaceJson.AdjacentSpaceId;
+
+			// xml
+			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
+
+				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[1];
+				//console.log( 'adjSpace1',  adjSpace1 );
+
+				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+				const removed1 = surfaceXml.removeChild( adjSpace1 );
+
+				const adjSpace2 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
+				//console.log( 'adjSpace2', adjSpace2 );
+
+				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
+				const removed2 = surfaceXml.removeChild( adjSpace2 );
+
+				//delete( surfaceJson.AdjacentSpaceId );
+
+				console.log( 'old 2 / new 0 / removed id1: ', removedId1, ' id2: ', removedId2, surfaceXml );
+
+			} else { // type prev is single adjacent
+
+				const adjSpace1 = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
+				//console.log( 'spaceId',  spaceId);
+
+				const removedId1 = adjSpace1.getAttribute( 'spaceIdRef' );
+				const removed1 = surfaceXml.removeChild( adjSpace1 );
+
+				console.log( 'old 1 / new 0 / id: ', removedId1, surfaceXml );
+
+			}
+
+		} else if ( types.includes( typeNew ) ) { // type new is two adjacents
+
+			//console.log( 'typeNew', typeNew );
+
+			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
+
+				// leave things untouched
+				//console.log( ' prev 2 / now 2 spaceIdPrev', spaceIdPrev );
+
+			} else if ( spaceIdPrev ) { // type prev is single adjacent
+
+				//surfaceJson.AdjacentSpaceId = spaceIdPrev; //{ spaceIdRef: spaceIdPrev };
+				prevAdj = surfaceXml.getElementsByTagName("AdjacentSpaceId")[ 0 ];
+				const prevId = prevAdj.getAttribute( 'spaceIdRef' );
+
+				surfaceJson.AdjacentSpaceId= [];
+				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+				adjacentSpaceId[ 0 ] = { spaceIdRef: prevId };
+				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+
+				console.log( 'old 1 / new 2 / prevId', prevId, surfaceXml );
+
+			} else { // type prev is shade / no adjacent
+
+				//surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
+
+				surfaceJson.AdjacentSpaceId= [ { "spaceIdRef": "none" }, { "spaceIdRef": "none" }];
+
+				//adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+				//adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
+				//adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+
+				console.log( 'old 0 / new 2 / adjacentSpaceId', surfaceJson.adjacentSpaceId );
+
+			}
+
+		} else { // type new is single adjacent
+
+			if ( Array.isArray( spaceIdPrev ) === true ) { // type prev is two adjacents
+
+				const adjacentXml2 = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 1 ];
+				const removed2 = surfaceXml.removeChild( adjacentXml2 );
+
+				const adjacentXml1 = surfaceXml.getElementsByTagName( "AdjacentSpaceId" )[ 0 ];
+				const removed1 = surfaceXml.removeChild( adjacentXml1 );
+
+				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+				newAdj.setAttribute( "spaceIdRef", spaceIdPrev[ 0 ].spaceIdRef ) ;
+				const newAdjTxt = surfaceXml.appendChild( newAdj );
+
+				surfaceJson.AdjacentSpaceId = { spaceIdRef: spaceIdPrev[ 0 ].spaceIdRef };
+
+				console.log( 'old 2 / new 1', newAdjTxt, surfaceXml );
+
+			} else if ( spaceIdPrev ) { // type prev is single adjacent
+
+				// leave things untouched
+				const spaceId = surfaceXml.getElementsByTagName("AdjacentSpaceId")[0];
+
+				console.log( 'old 1 / new 1 / no changes spaceId',  spaceId, surfaceXml );
+
+			} else { // type prev is no adjacent
+
+				//const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+				//newAdj.setAttribute( "spaceIdRef", "none" ) ;
+				//const newAdjTxt = surfaceXml.appendChild( newAdj );
+
+				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
+
+				//surfaceMesh.userData.data.AdjacentSpaceId = 'none';
+				console.log( 'old 0 / new 1 / no spaceIdPrev', spaceIdPrev, surfaceXml );
+
+			}
+
+		}
+
+		//console.log( 'surfaceXml',  surfaceXml );
+		//console.log( 'type surfaceJson', surfaceJson );
+
+		CTX.setHeadsUp();
+		SEL.setSurfaceVisible( id );
+
+	};
+
+
+
+	CTX.updateCadId = function( that ){
+		//console.log( 'that', that );
+
+		const surface = CTX.intersected.userData.data;
+		//console.log( 'surface', surface );
+
+		const id = surface.id;
+
+		CTX.surfacesXml = GBX.gbxml.getElementsByTagName( "Surface" );
+
+		surfaceXml = CTX.surfacesXml[ id ];
+
+		const cadObjId = surfaceXml.getElementsByTagName( "CADObjectId" )[ 0 ];
+
+		console.log( 'cadObjId', cadObjId );
+
+		if ( cadObjId ) {
+
+			//surfaceXml.attributes.getNamedItem( 'CADObjectId' ).nodeValue = that.value;
+
+			//cadObjId.innerHTML = that.value;
+
+
+			surfaceXml.getElementsByTagName("CADObjectId")[ 0 ].innerHTML = that.value;
+			//console.log( 'surfaceXml',  surfaceXml );
+
+			surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+
+			surfaceMesh.userData.data.CADObjectId = that.value;
+
+			if ( !CTX.surfaceChanges.CADObjectId ) { CTX.surfaceChanges.CADObjectId = []; }
+			CTX.surfaceChanges.CADObjectId.push( { name: surface.Name, cadId: that.value } );
+
+			CTX.setHeadsUp();
+
+		} else {
+
+			//alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
+
+			surfaceXml.setAttribute( "CADObjectId", that.value );
+
+			//console.log( 'surfaceXml', surfaceXml);
+			//const newCadIdTxt = surfaceXml.appendChild( newCadId );
+			//console.log( 'newCadIdTxt', newCadIdTxt);
+
+			surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
+			surfaceMesh.userData.data.CADObjectId = that.value;
+
+			if ( !CTX.surfaceChanges.CADObjectId ) { CTX.surfaceChanges.CADObjectId = []; }
+			CTX.surfaceChanges.CADObjectId.push( { name: surface.Name, cadId: that.value } );
+
+		}
 
 	};
 

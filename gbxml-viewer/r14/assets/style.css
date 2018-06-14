@@ -73,8 +73,8 @@
 
 
 	#CORdivMenuRight {
-		background-color: white; display: ; height: 80%; left: calc( 100% - 47rem );
-		margin: 0; width: 40rem;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px;
+		background-color: white; display: ; height: 80%; left: calc( 100% - 48rem );
+		margin: 0;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px;  width: 30rem;
 	}
 	#CORdivMenuRight {border: 1px solid #aaa; border-radius: 2px;
 		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

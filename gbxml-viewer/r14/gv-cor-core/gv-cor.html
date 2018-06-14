@@ -18,8 +18,8 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
-<script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
 <script src = "../gv-cor-core/gv-cor.js" ></script>
+<script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
 <script src = "../gv-sel-select-attributes/gv-sel.js" ></script>
 <script src = "../gv-ctx-context-menu/gv-ctx.js" ></script>
 
@@ -28,10 +28,8 @@
 
 	<div id = "CORdivMenuLeft" class = "w3-theme-l5" >
 
-		<div id = "CORdivMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!"  style=text-align:right; >
-
+		<div id = "CORdivMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!" style=text-align:right; >
 			left menu / click to move
-
 		</div>
 
 		<div id = "xxxdivMenuContents" >
@@ -105,11 +103,12 @@
 					title="matters of interest" >
 				Numbers</button>
 
-				<!--
-				<button id=butIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-iss-issues/gv-iss.js';" title="Highlight duplicate items and areas of concern in a gbXML file" >
+				<button id=CORbutIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick= loadScript('../gv-iss-issues/gv-iss.js')
+					title="Highlight duplicate items and areas of concern in a gbXML file" >
 				Issues</button>
+
+				<!--
 
 				<button id=butSaveChanges class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
 					"COR.resetMenu();const script = document.head.appendChild( document.createElement( 'script' ) );
@@ -199,7 +198,9 @@
 
 	</div>
 
-	<div id = "CORdivHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>
+	<div id = "CORdivHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu">
+		 slide &#9776;
+	</div>
 
 
 	<div id = "CORdivMenuInWorld" title="This is called the 'in-world menu'" >
@@ -234,11 +235,14 @@
 		<div id="CORdivHeaderRight" class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
 			right menu / click here to move
 		</div>
+
 		<div id=CORdivItemsRight ></div>
 
 	</div>
 
-	<div id = "COdivHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); > &#9776; </div>
+	<div id = "COdivHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); >
+		 &#9776;
+	</div>
 
 <script>
 

@@ -19,6 +19,7 @@
 	COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
 
 
+
 	COR.initCore = function() {
 
 		if ( window.CORdragArea ) {
@@ -46,8 +47,6 @@
 		COR.timeStart = Date.now();
 
 	};
-
-
 
 
 
@@ -234,7 +233,7 @@
 	};
 
 
-	// handle callbacks with file data events
+	// handle callbacks with file data events / gbxml callback in GBX
 
 	COR.callbackMarkdown = function( xhr ){
 
@@ -246,8 +245,8 @@
 		//CORdivMenuRight.innerHTML = '<div id=CORdivItemsRight >' + html + '</div>';
 		CORdivItemsRight.innerHTML = html;
 		CORdivMenuRight.style.display = 'block';
-		CORdivMenuRight.style.left = '50%';
-		CORdivMenuRight.style.width = '48%';
+		CORdivMenuRight.style.left = '55%';
+		CORdivMenuRight.style.width = '40rem';
 		window.scrollTo( 0, 0 );
 		CORdivMenuRight.scrollTop = 0;
 		//CORdivItemsRight.scrollTop = 0;
@@ -358,6 +357,7 @@
 	};
 
 
+
 	// handle menu header dragging with mouse or touch events
 
 	COR.onMouseDownDraggable = function( event ) {
@@ -372,7 +372,7 @@
 
 
 
-	COR.onMouseMoveDraggable = event => {
+	COR.onMouseMoveDraggable = function( event ) {
 
 		event.target.parentNode.style.top = ( event.clientY - COR.draggableTop ) + 'px';
 		event.target.parentNode.style.left = ( event.clientX - COR.draggableLeft ) + 'px';
@@ -515,6 +515,7 @@
 		button.style.fontWeight = '';
 
 	}
+
 
 
 	COR.setPanelButtonInit = function( button ) {

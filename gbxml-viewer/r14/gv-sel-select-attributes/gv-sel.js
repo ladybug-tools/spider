@@ -1,5 +1,5 @@
 
-	/* global THR, THREE, GBX, COR, CORdivLog, HUDdivAttributes, window, document */
+	/* global THR, THREE, GBX, COR, CORdivLog, CTXdivAttributes, window, document */
 	/* jshint esversion: 6 */
 	/*jshint loopfunc:true */
 
@@ -289,9 +289,6 @@
 
 
 
-
-
-
 	SEL.setPanelSpaceAttributes = function( target, spaceId, spaceIndex ) {
 		//console.log( 'target', target );
 		//console.log( 'spaceIndex', spaceIndex );
@@ -306,7 +303,7 @@
 			<summary>Adjacent Space ` + ( SEL.spaceIndex > -2 ? SEL.spaceIndex : '' ) + `</summary>
 
 			<p>
-				<button onclick=HUD.updateSpace(SELselSpace.value,SEL.spaceIndex); >update the space associated with this surface</button>
+				<button onclick=CTX.updateSpace(SELselSpace.value,SEL.spaceIndex); >update the space associated with this surface</button>
 			</p>
 
 			<div id=SELdivSpace ></div>
@@ -477,7 +474,7 @@
 			element.visible = element.userData.data.CADObjectId === cadId ? true : false );
 
 
-		//if ( window.CTXdivAttributes ) { // move to hud
+		//if ( window.CTXdivAttributes ) { // move to CTX
 
 			CTXdivAttributes.innerHTML =
 
@@ -485,7 +482,7 @@
 
 				<summary>CAD Object ID</summary>
 
-				<div><button id=SELbutCadId onclick=SEL.updateCadId(SELselCadId); >Update cad object id of surface</button></div>
+				<div><button id=SELbutCadId onclick=CTX.updateCadId(SELselCadId); >Update cad object id of surface</button></div>
 
 				<p><select id=SELselCadId size=10 ></select></p>
 
@@ -497,7 +494,7 @@
 
 				<summary>CAD Object Group</summary>
 
-				<div><button id=SELbutCadGroup onclick=SEL.updateCadId(SELselCadGroup); >Update cad object group of surface</button></div>
+				<div><button id=SELbutCadGroup onclick=CTX.updateCadId(SELselCadGroup); >Update cad object group of surface</button></div>
 
 				<p id=SELdivCadIdGroup ></p>
 
@@ -648,7 +645,6 @@
 
 		CTX.setHeadsUp();
 
-
 		//SEL.setPanelSurfaceAttributes( CTXdivAttributes, surfaceId );
 
 	};
@@ -736,9 +732,9 @@
 
 		}
 
-		if ( window.HUDdivAttributes ) {
+		if ( window.CTXdivAttributes ) {
 
-			HUDdivAttributes.innerHTML = '';
+			CTXdivAttributes.innerHTML = '';
 
 		}
 
@@ -834,7 +830,7 @@
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
-		//if ( window.HUDdivAttributes ) {
+		//if ( window.CTXdivAttributes ) {
 
 			CTXdivAttributes.innerHTML =
 
@@ -842,7 +838,7 @@
 
 				<summary>Surface Type: ${type}</summary>
 
-				<p><button onclick=SEL.updateSurfaceType() >Update surface type of the surface</button></p>
+				<p><button onclick=CTX.updateSurfaceType() >Update surface type of the surface</button></p>
 
 				<div><select id=SELselSurfaceType ></select></div>
 
@@ -883,7 +879,7 @@
 
 		}
 
-		//if ( window.HUDdivAttributes ) {
+		//if ( window.CTXdivAttributes ) {
 
 			SELselSurfaceType.innerHTML = txt;
 			SELselSurfaceType.size = types.length;
@@ -1066,6 +1062,8 @@
 
 	};
 
+
+
 	SEL.setSurfaceGroupsVisible = function( meshesVis = true, edgesVis = true, openingsVis = false ) {
 
 		GBX.surfaceMeshes.visible = meshesVis;
@@ -1075,10 +1073,11 @@
 	}
 
 
+
 	SEL.removeTelltales = function() {
 
-		THR.scene.remove( HUD.telltalesPolyloop );
-		THR.scene.remove( HUD.telltalesVertex );
+		THR.scene.remove( CTX.telltalesPolyloop );
+		THR.scene.remove( CTX.telltalesVertex );
 		CTXdivCoordinates.innerHTML = 'click a button';
 
 	};
