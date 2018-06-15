@@ -444,12 +444,14 @@
 		const menuButtons = document.querySelectorAll( "button.app-menu" );
 
 		menuButtons.forEach( element => {
-			element.style.backgroundColor =''; element.style.fontStyle =''; element.style.fontWeight ='';
+			element.style.backgroundColor ='';
+			element.style.fontStyle ='';
+			element.style.fontWeight ='';
 		} );
 
-		const menuDetails = document.querySelectorAll( "details.app-menu" );
+		//const menuDetails = document.querySelectorAll( "details.app-menu" );
 
-		menuDetails.forEach( element => element.remove() );
+		//menuDetails.forEach( element => element.remove() );
 
 	};
 
@@ -524,6 +526,7 @@
 
 		button.style.cssText = COR.buttonToggleCss;
 
+		/*
 		const buttons = CORdivMenuItems.getElementsByTagName( "button" );
 
 		for ( let button of buttons ) {
@@ -531,5 +534,19 @@
 			button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
 
 		}
+		*/
 
 	};
+
+
+	COR.setMenuButtonsClass = function( target) {
+
+		const buttons = target.getElementsByTagName( "button" );
+
+		for ( let button of buttons ) {
+
+			button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+
+		}
+
+	}

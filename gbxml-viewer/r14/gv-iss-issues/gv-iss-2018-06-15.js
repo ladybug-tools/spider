@@ -18,17 +18,50 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.initIssues = function () {
 
-		ISS.setMenuItems( CORdivMenuItems );
+		ISS.setMenuItems();
 
 		COR.setPanelButtonInit( CORbutIssues );
+		/*
+
+		ISS.butMenuIssues = butIssues;
+
+		if ( ISS.butMenuIssues.style.fontStyle !== 'italic' ) {
+
+			ISS.getMenuItems();
+
+			ISS.butMenuIssues.style.cssText = COR.buttonToggleCss;
+
+			const butts = divMenuItems.getElementsByTagName( "button" );
+			//console.log( 'butts', butts );
+
+			for ( let butt of butts ) {
+
+				butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+
+			}
+
+		} else {
+
+			divMenuItems.innerHTML = '';
+
+			ISS.butMenuIssues.style.fontStyle = '';
+			ISS.butMenuIssues.style.backgroundColor = '';
+			ISS.butMenuIssues.style.fontWeight = '';
+
+		}
+
+		THR.controls.autoRotate = false;
+		THR.controls.keys = false;
+
+		*/
 
 	};
 
 
 
-	ISS.setMenuItems = function( target) {
+	ISS.setMenuItems = function() {
 
-		target.innerHTML =
+		CORdivMenuItems.innerHTML =
 
 		`<details id = ISSdetIssues open >
 
@@ -97,6 +130,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		ISS.setPanelAdjacentSpaceInvalid( ISSdetPanelAdjacentSpaceInvalid );
 
 		ISS.setGeneralCheck( ISSdetGeneralCheck );
+
 
 	};
 

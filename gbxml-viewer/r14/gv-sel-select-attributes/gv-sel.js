@@ -7,10 +7,11 @@
 	// functions in most sections are in alphabetical order
 
 	// tomorrow:
-	// Element pannel attributes: move id zoom and toggle to top
+	// Element panel attributes: move id zoom and toggle to top
 
 	var SEL = {};
 
+	SEL.spaceIndex = 0;
 
 	SEL.getElementPanel = function( item ){
 		// this all seems very complicated
@@ -338,6 +339,8 @@
 
 		//console.log( 'sel', sel );
 
+		SEL.setButtonStyleClass( CORdivItemsRight );
+
 	};
 
 
@@ -360,6 +363,7 @@
 		</div>`;
 
 		return txt;
+
 
 	};
 
@@ -787,6 +791,8 @@
 
 		target.innerHTML = details;
 
+		SEL.setButtonStyleClass( CORdivItemsRight );
+
 	};
 
 
@@ -885,6 +891,9 @@
 			SELselSurfaceType.size = types.length;
 
 		//}
+
+
+		SEL.setButtonStyleClass( CORdivItemsRight );
 
 	};
 
@@ -1086,6 +1095,7 @@
 
 	SEL.setButtonStyleClass = function( item ) {
 		// used by REP/SEL
+
 		const butts = item.getElementsByTagName( "button" );
 		//console.log( 'butts', butts );
 

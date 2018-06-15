@@ -53,7 +53,7 @@
 					or <input type = "file" id = "inpFile" onchange="COR.openGbxmlFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md>?</a>
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
-					<input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
+					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 
 					or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
 
@@ -82,6 +82,7 @@
 				<hr>
 
 			</details>
+
 
 
 			<details open >
@@ -124,11 +125,12 @@
 
 			<div id = "CORdivMenuItems" ></div>
 
+			<!--
 			<details>
 
 				<summary>Things to Try</summary>
 
-				<!--
+
 				<p><small><i>More modules are just waiting to be upgraded</i></small></p>
 
 
@@ -167,9 +169,10 @@
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
 				screen capture </button>
-				-->
+
 
 			</details>
+			-->
 
 			<details>
 
@@ -290,9 +293,9 @@
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
-		inpFilePath.value = thrFilePath;
+		CORinpFilePath.value = thrFilePath;
 
-		GBX.defaultURL = parent.inpFilePath.value ? parent.inpFilePath.value : GBX.defaultURL; // for testing
+		GBX.defaultURL = CORinpFilePath.value ? CORinpFilePath.value : GBX.defaultURL; // for testing
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
@@ -311,19 +314,32 @@
 
 		//THR.renderer.domElement.addEventListener( 'click', function() { CORdivMenuRight.style.display = 'none'; }, false );
 		//THR.renderer.domElement.addEventListener( 'touchstart', function() { CORdivMenuRight.style.display = 'none'; }, false );
-		THR.controls.enableKeys = false;
+
+THR.controls.enableKeys = false;
 
 	}
 
 
 	// still experimenting...
 
+	COR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
 
-	function loadScript( source ){
+		location.hash = CORinpFilePath.value;
+
+		const thrFilePath = CORinpFilePath.value;
+		localStorage.setItem('thrFilePath', thrFilePath );
+
+	};
+
+
+
+	function loadScript( source ){ // add buttonId?
 
 		COR.resetLeftMenu();
 		const script = document.head.appendChild( document.createElement( 'script' ) );
 		script.src = source ;
+
+		script.onload = function() { COR.setMenuButtonsClass ( CORdivMenuItems ); }
 
 	}
 

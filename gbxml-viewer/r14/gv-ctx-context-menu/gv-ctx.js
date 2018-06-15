@@ -143,6 +143,7 @@
 	};
 
 
+
 	////////// sets top panel with data for currently selected surface
 
 	CTX.setPanelSurface = function( target ) {

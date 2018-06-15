@@ -249,7 +249,7 @@
 
 				if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-					CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+					APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
 					//console.log( 'surface', surface );
 					//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1184,7 +1184,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
 				console.log( 'surface', surface );
 				console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1240,7 +1240,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				//console.log( 'surface', surface );
 				//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
@@ -1287,7 +1287,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				APPdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				continue;
 
