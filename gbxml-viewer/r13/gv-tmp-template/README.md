@@ -1,8 +1,9 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r13/gv-tmp-template/README.md "View file as a web page." ) </span>
-<input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-tmp-template/README.md'";
-value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
-# Aragog gbXML Viewer R13 Template Read Me
+<div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r13/gv-tmp-template/README.md'";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
+
+# [Aragog gbXML Viewer R13 Template Read Me]
 
 
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-tmp-template/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
