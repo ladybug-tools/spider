@@ -1,9 +1,9 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-rep-reports/README.md "View file as a web page." ) </span>
 
-<div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/xxxxx/README-template.md'";
+<div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-rep-reports/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
-# [R14 'Aragog' gbXML Viewer ~ REP Reports Read Me] ( #gbxml-viewer/r14/gv-rep-reports/README-template.md )
+# [R14 'Aragog' gbXML Viewer ~ REP Reports Read Me]( #gbxml-viewer/r14/gv-rep-reports/README-template.md )
 
 <!--
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-rep-reports/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -84,6 +84,10 @@ The intent is that you are not having to switch back and forth between left and 
 
 ## Wish list / To Do
 
+* 2018-03-08 ~ Search for spaces
+* 2018-03-04 ~ Export spaces and storeys as gbJSON or .RAD files etc
+* 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
+* @@@ 2018-02-26 ~ Better telltale size for small surfaces
 * 2018-03-31 ~ We now do three specialty reports: 'Surfaces by Type + Exposed to Sun', 'Openings by Type' and 'Cad Object Groups'. Should there be others?
 
 
