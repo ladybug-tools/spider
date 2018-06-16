@@ -270,8 +270,9 @@
 	COR.callbackJson = function( xhr ) {
 
 		const response = xhr.target.response;
-		GBX.surfaceChanges = JSON.parse( response );
+		CTX.surfaceChanges = JSON.parse( response );
 		console.log( 'response', response);
+
 		SAV.getUpdates();
 
 	};

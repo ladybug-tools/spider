@@ -625,7 +625,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<p>
 				<button onclick=ISS.updateDupAdjSpc(ISS.surfaceChanges.editDuplicateAdjacentSpaces) >Edit selected surfaces</button>
 
-				<button onclick=SEL.saveFile(); >Save changes to file</button>
+				<button onclick=CTX.saveFile(); >Save changes to file</button>
 			</p>
 
 			<hr>
@@ -1088,7 +1088,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<p>
 				<button onclick=ISS.deleteSurfaces(ISS.surfaceChanges.deleteDuplicateSurfaces) >Delete selected surfaces</button>
 
-				<button onclick=SEL.saveFile(); >Save changes to file</button>
+				<button onclick=CTX.saveFile(); >Save changes to file</button>
 			</p>
 
 			<hr>
@@ -1237,7 +1237,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				'<button id=butDuplicatesCoordinates onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
 
-				'<button onclick=ISS.saveFile(); title="creates a new file with the changes" >save edits</button>' +
+				'<button onclick=CTX.saveFile(); title="creates a new file with the changes" >save edits</button>' +
 
 				'</p>' +
 				'<hr>';
@@ -1510,7 +1510,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 				<button onclick=ISS.updateSurfaceCADObjectIds(ISS.surfaceChanges.CADObjectId) >Edit selected surfaces</button>
 
-				<button onclick=SEL.saveFile(); >Save edits to file</button>
+				<button onclick=CTX.saveFile(); >Save edits to file</button>
 
 			</p>
 

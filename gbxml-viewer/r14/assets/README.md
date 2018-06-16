@@ -14,6 +14,11 @@ A directory for style sheets, images, markdown pages and similar project assets
 
 ## Wish list
 
+* 2018-06-16 ~ Theo ~ style viewer script?
+* 2018-06-16 ~ Theo  ~ Bootstrap themes or other more advanced CSS theming?
+* 2018-06-16 ~ Theo ~ more use of vars and calc
+* 2018-06-16 ~ Theo explore using grid indtead of flexbox for menus
+
 
 
 ## Issues
@@ -22,7 +27,11 @@ A directory for style sheets, images, markdown pages and similar project assets
 
 ## Links of Interest
 
+CSS
+* https://codeburst.io/css-grid-vs-flexbox-building-simple-layouts-43e569a66f0a
 
+Themes
+* https://bootswatch.com/
 
 ## Change Log
 

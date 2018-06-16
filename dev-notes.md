@@ -8,8 +8,41 @@
 404 Page with 3D Spider
 * Spider body made by editing a plane geometry - stretching and flattening spheres
 
-Coming soon to gbXML Viewer
 
+
+
+
+## Change Log
+_This particular change log mostly covers info in this read me. Most folders here each have their own equally fascinating read me file._
+
+### 2018-06-16 ~ Theo
+
+As of this writing the app is getting to be to big, too difficult to naintain
+
+Goal:
+* all modules have a life of their own
+* Modules learn how to work independently of each other / dependent but not overly dependent
+
+Split gbXML Viewer into multiple experiments
+
+* gbXML basic: core
+* gbXML Fixer: ease the transef between CAD and analysis apps
+* gbXML Avatar: fly through the model using your cursor keys
+* gbXML Analemma: Show Sun shade and shadows
+* gbXML Shadow Daily: Show the shadows during the day
+* gbXML Shadow seasonal: crate Sun Shadow range
+* gbXML ScreenCap: obtain an animated GIF
+* gbXML Prettify: add text titles. cut sections. explode
+* gbXML Export: save as RAD. OBJ or other file type
+* gbXML ??: WWhat do you need?
+
+
+All of the above with RAD/ OBJ etc
+
+### 2018-05-10 ~ Theo
+
+outdated:
+Coming soon to gbXML Viewer
 R13
 buttons stick to side
 NUM bounding box
@@ -19,14 +52,6 @@ Solar Access going
 CAP Screen Cap
 EXP Explore modules
 gltf?
-
-
-## Change Log
-_This particular change log mostly covers info in this read me. Most folders here each have their own equally fascinating read me file._
-
-
-
-### 2018-05-10 ~ Theo
 
 AGV
 * Should openings have their own opacity slider?
