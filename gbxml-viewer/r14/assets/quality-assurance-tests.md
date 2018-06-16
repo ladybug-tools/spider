@@ -1,5 +1,11 @@
 # gbXML Viewer Quality Arruance Tests
 
+#### Theo 2018-06-16
+
+This is a preliminary effort at creating some guidelines for testing the GB XML viewer. I know nearly nothing about how to test animated 3D applications in your browser. My quality assurance skills are still at a beginner level. I could use a lot of help here.
+
+Every module should have its own set of tests that are independent of the other modules.
+
 
 ## COR module / Menus
 
