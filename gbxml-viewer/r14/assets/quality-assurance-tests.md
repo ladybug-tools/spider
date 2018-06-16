@@ -1,13 +1,12 @@
 # gbXML Viewer Quality Arruance Tests
 
 
-## APP module / Menus
+## COR module / Menus
 
 ### Left menu
+
 * Click left menu 'slide' button twice: menu slides left then right
-
 * Click any surface in model. Wait for HUD to appear. Click right menu 'hamburger' button twice: menu slides right then left
-
 * On first load : press spacebar to toggle rotation
 * On first load click/touch anywhere in-world to stop rotation
 * test 5 menu links
@@ -22,4 +21,6 @@
 
 
 ## SET Module / Settings
+
+* Click each item
 
