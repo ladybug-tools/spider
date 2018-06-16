@@ -36,6 +36,7 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ### Assets folder
 
+* A directory for style sheets, images, markdown pages and similar project assets
 See [Assets Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/README.md ) file
 
 
@@ -47,6 +48,7 @@ See [CTX ~ Context Menu Read Me]( http://www.ladybug.tools/spider/index.html#gbx
 
 ### COR ~ Core
 
+* Basic script that creates the menus, opens Markdown files, converts Markdown files to HTML
 See [COR ~ Core Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-cor-core/README.md )
 
 
