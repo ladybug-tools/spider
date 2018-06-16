@@ -5,11 +5,11 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 # [R14 Aragog gbXML Viewer Template Read Me]( #gbxml-viewer/r14/gv-tmp-template/README-template.md )
 
-
+<!--
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-tmp-template/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
-
 ## Full screen test script: [gbXML Viewer Template]( http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-tmp-template/gv-tmp.html )
+-->
 
 ## [Read Me Template]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-tmp-template/README-template.md )
 
@@ -17,7 +17,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-The files in this folder are templates or 'boilerplate' files that may be used to build gbXML viewer modules.
+* The files in this folder are templates or 'boilerplate' files that may be used to build gbXML viewer modules.
 
 ## Wish list
 
