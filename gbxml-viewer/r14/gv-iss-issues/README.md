@@ -3,7 +3,7 @@
 <div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-iss-issues/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
-# [R14 'Aragog' gbXML Viewer ~ ISS Issyes Read Me] ( #gbxml-viewer/r14/gv-iss-issues/README.md )
+# [R14 'Aragog' gbXML Viewer ~ ISS Issyes Read Me]( #gbxml-viewer/r14/gv-iss-issues/README.md )
 
 <!--
 <iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-iss-issues/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
