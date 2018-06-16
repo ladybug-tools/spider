@@ -8,11 +8,55 @@ value='You are now in a GitHub web page view - Click this button to view this re
 <!--
 <iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-iss-issues/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
-
-## Full screen test script: [ISS Issyes]( https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-iss-issues/gv-tmp.html )
+## Full screen test script: [ISS Issues]( https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-iss-issues/gv-tmp.html )
 -->
 
-## Concept
+## Concept / Features
+
+Being able to view gbXML data in interactive 3D is certainly a step in a good direction. An even better idea is to be able to view the issues that are preventing the export from a CAD file to be loaded by an energy analysis application.
+
+Recent releases of the Viewer are identifying typical errors.
+
+### Features
+
+* Identify and locate issues within gbXML files
+	* Surfaces that have duplicate adjacent spaces
+	* Surfaces that have identical coordinates
+	* Surfaces that have no cad object ids
+		* Select ID by smart search
+		* Reports number found
+		* Displays attribute data
+		* Zoom into selected element
+	* Surfaces that are tiny
+		* Select ID by smart search
+		* Reports number found
+		* Displays attribute data
+		* Displays surface height, width and area
+		* Zoom into selected element
+	* Surfaces that contain other surfaces or overlap
+		* Currently turned off because uses much time and has found none so far
+		* Work-in-progress
+	* Surfaces that have vertices very close together
+		* Select ID by smart search
+		* Reports number found
+		* Displays attribute data
+		* Zoom into selected element
+		* Identifies vertex IDs that are close and displays the distance apart
+	* Identify
+		* Openings with more that four vertices
+		* Surfaces that have an incorrect number of adjacent spaces
+		* Surfaces that are mis-identified as to being interior or exterior surfaces
+
+## Wish list
+
+* 2018-05-25 ~  Theo ~ Undefined CAD Object IDs > Add 'check only Air' button
+* 2018-05-25 ~  Theo ~ Undefined CAD Object IDs > Add line that edits all selected with one input box
+* 2018-05-23 ~ Theo ~ Popup windows > Add buttons to make checked items visible and to zoom in to seleted items
+* 2018-05-23 ~ Theo ~ add colored options to left menu to indicate membership in a set of surfaces
+* Add locate surfaces with openings that overlap
+* 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
+	* Upgrade so identifies any surface within another surface
+
 
 
 
