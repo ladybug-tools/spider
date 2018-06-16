@@ -170,14 +170,13 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 		console.log( 'inclusion', inclusion );
 
-		divPopUpContents.innerHTML =
+		CORdivItemsRight.innerHTML =
 		`
 			<h3>Inclusions</h3>
 			<div>${inclusionText}</div>
 		`;
 
-		divPopUp.style.display = 'block';
-		window.scrollTo( 0, 0 );
+		COR.setRightMenuWide();
 
 	};
 
@@ -212,18 +211,17 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 
 		}
-		console.log( 'txt', txt );
+		//console.log( 'txt', txt );
 
 		if ( txt !== '' ) {
 
-			divPopUpContents.innerHTML =
+			CORdivItemsRight.innerHTML =
 			`
 				<h3>General Check</h3>
 				<div id=ISSdivCheckText ></div>
 			`;
 
-			divPopUp.style.display = 'block';
-			window.scrollTo( 0, 0 );
+			COR.setRightMenuWide();
 
 			ISSdivCheckText.innerText = '***\n' + txt;
 
@@ -272,9 +270,9 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<summary>Metadata Issues &raquo; ${ISS.attributesMissing.length} attributes missing</summary>
 
-			<p>gbXML attributes provided:<br>${provided.join( '<br>' )}</p>
+			<p>gbXML attributes provided:<br>&bull; ${provided.join( '<br>&bull; ' )}</p>
 
-			<p>gbXML attributes missing: ${ISS.attributesMissing.join( '<br>' )} </p>
+			<p>gbXML attributes missing:<br>&bull;  ${ISS.attributesMissing.join( '<br>&bull; ' )} </p>
 
 			<p><button onclick=ISS.setPopupMetadataIssues(); >Add missing attributes</button></p>
 
@@ -297,14 +295,14 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			'xmlns': 'http://www.gbxml.org/schema'
 		};
 
-		divPopUpContents.innerHTML =
+		CORdivItemsRight.innerHTML =
 		`
 			<h3>Add Missing Attributes</h3>
 			<div id=divSavHeader ></div>
 			<h3>Missing Attributes</h3>
 			<div id=ISSdivAttributesMissing ></div>
 			<p>
-				<button onclick=onchange=ISS.setChangesMetadataIssues(this); >Update changes</button>
+				<button onclick=onchange=ISS.setChangesMetadataIssues(this); >Update the changes file</button>
 
 				<button onclick=ISS.surfaceChanges.addAttributesMissing=[];ISS.setChangesMetadataIssues(this); >Clear changes</button>
 			</p>
@@ -316,7 +314,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<button onclick=SEL.surfaceChanges.addAttributesMissing=ISS.surfaceChanges.addAttributesMissing; >Update save changes file</button>
 		`;
 
-		divPopUp.style.display = 'block';
+		CORdivMenuRight.style.display = 'block';
 		window.scrollTo( 0, 0 );
 
 		let txt = '';
@@ -348,7 +346,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		} else {
 
-			ISStxtAttributesMissing.value = '';
+			ISStxtAttributesMissing.value = 'No missing attributes that still need fixing';
 
 		}
 
@@ -599,7 +597,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPopupSurfacesDuplicateAdjacentSpaces = function() {
 
-		divPopUpContents.innerHTML =
+		CORdivItemsRight.innerHTML =
 		`
 			<h3>Edit Duplicate Adjacent Spaces</h3>
 
@@ -644,8 +642,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		`;
 
-		divPopUp.style.display = 'block';
-		window.scrollTo( 0, 0 );
+		COR.setRightMenuWide();
 
 		ISS.setPopupPanelDuplicateAdjacentSpaces();
 
@@ -677,7 +674,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	ISS.setPopupPanelDuplicateAdjacentSpaces = function(){
 
 		if ( !ISS.surfaceChanges.editDuplicateAdjacentSpaces ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces = []; };
-		if ( !SEL.surfaceChanges.editDuplicateAdjacentSpaces ) { SEL.surfaceChanges.editDuplicateAdjacentSpaces = []; };
+		//if ( !SEL.surfaceChanges.editDuplicateAdjacentSpaces ) { SEL.surfaceChanges.editDuplicateAdjacentSpaces = []; };
 
 		let txt = '';
 		let color = 'yellow';
@@ -1020,7 +1017,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		`<details>
 
-			<summary id = "ISSsumSurfacesDuplicateCoordinates2" >R13 Duplicate Coordinates &raquo; ` + ISS.duplicateCoordinates.length +
+			<summary id = "ISSsumSurfacesDuplicateCoordinates2" >R13 Duplicate Coordinates &raquo; ` + ISS.duplicateCoordinates2.length +
 				` found</summary>
 
 			<p><small>
@@ -1062,7 +1059,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPopupDuplicateCoordinates = function() {
 
-		divPopUpContents.innerHTML =
+		CORdivItemsRight.innerHTML =
 		`
 			<h3>Delete Surfaces with Duplicate Coordinates</h3>
 
@@ -1108,8 +1105,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		`;
 
-		divPopUp.style.display = 'block';
-		window.scrollTo( 0, 0 );
+		COR.setRightMenuWide();
 
 		ISS.setPopupPanelDuplicateCoordinates();
 
@@ -1161,7 +1157,6 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		let txt = '';
 		if ( !ISS.surfaceChanges.deleteDuplicateSurfaces ) { ISS.surfaceChanges.deleteDuplicateSurfaces = []; };
-		if ( !SEL.surfaceChanges.deleteDuplicateSurfaces ) { SEL.surfaceChanges.deleteDuplicateSurfaces = []; };
 
 		let color = 'yellow';
 
@@ -1490,7 +1485,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPopupCadObjectIds = function() {
 
-		divPopUpContents.innerHTML =
+		CORdivItemsRight.innerHTML =
 		`
 			<h3>Fix Surfaces with undefined CAD object IDs</h3>
 
@@ -1529,8 +1524,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			</p>
 		`;
 
-		divPopUp.style.display = 'block';
-		window.scrollTo( 0, 0 );
+		COR.setRightMenuWide();
 
 		ISS.setPopupPanelUndefinedId();
 
@@ -1555,7 +1549,6 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		let txt = '';
 
 		if ( !ISS.surfaceChanges.CADObjectId ) { ISS.surfaceChanges.CADObjectId = []; }
-		if ( !SEL.surfaceChanges.CADObjectId ) { SEL.surfaceChanges.CADObjectId = []; };
 
 		let count = 0;
 		let color = 'yellow';
@@ -2155,26 +2148,26 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setDuplicateAdjacentSpaceVisibleToggle = function() {
 
-		if ( ISSbutDuplicateAdjacent.style.backgroundColor !== 'pink' ) {
+		if ( ISSbutDuplicateAdjacent2.style.backgroundColor !== 'pink' ) {
 
 			GBX.surfaceOpenings.visible = false;
 
 			GBX.surfaceMeshes.children.forEach( child => child.visible = false );
 
-			for ( let item of ISS.surfaceAdjacentsDuplicates ) {
+			for ( let item of ISS.surfaceDuplicateAdjacentSpaces ) {
 
 				const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === item.id );
 				surfaceMesh.visible = true;
 
 			}
 
-			ISSbutDuplicateAdjacent.style.backgroundColor = 'pink';
+			ISSbutDuplicateAdjacent2.style.backgroundColor = 'pink';
 
 		} else {
 
 			GBX.setAllVisible();
 
-			ISSbutDuplicateAdjacent.style.backgroundColor = '';
+			ISSbutDuplicateAdjacent2.style.backgroundColor = '';
 
 		}
 

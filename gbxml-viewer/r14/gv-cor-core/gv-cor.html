@@ -295,7 +295,7 @@
 
 		CORinpFilePath.value = thrFilePath;
 
-		GBX.defaultURL = CORinpFilePath.value ? CORinpFilePath.value : GBX.defaultURL; // for testing
+		COR.url = CORinpFilePath.value ? CORinpFilePath.value : COR.url; // for testing
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
@@ -315,7 +315,7 @@
 		//THR.renderer.domElement.addEventListener( 'click', function() { CORdivMenuRight.style.display = 'none'; }, false );
 		//THR.renderer.domElement.addEventListener( 'touchstart', function() { CORdivMenuRight.style.display = 'none'; }, false );
 
-THR.controls.enableKeys = false;
+		THR.controls.enableKeys = false;
 
 	}
 

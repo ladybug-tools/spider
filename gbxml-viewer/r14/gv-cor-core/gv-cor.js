@@ -457,6 +457,20 @@
 
 
 
+	COR.setRightMenuWide = function() {
+
+		CORdivMenuRight.style.display = 'block';
+		CORdivMenuRight.style.left = '55%';
+		CORdivMenuRight.style.width = '40rem';
+		window.scrollTo( 0, 0 );
+		CORdivMenuRight.scrollTop = 0;
+		//CORdivItemsRight.scrollTop = 0;
+		CORdivMenuRight.scrollTo( 0, 0 );
+		//CORdivItemsRight.scrollTo( 0, 0 );
+
+	}
+
+
 
 	COR.toggleNavLeft = function() {
 
