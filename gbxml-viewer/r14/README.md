@@ -40,6 +40,12 @@ The goals for the files include:
 ## Change Log
 
 
+### 2018-06-16 ~ Theo
+
+R14.3 
+* Beginning of a split into multiple experiments
+* All modules for this experiment are in and mostly functioning
+
 
 ### 2018-06-12 ~ Theo
 
