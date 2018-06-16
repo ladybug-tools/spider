@@ -20,7 +20,8 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ## Current Issues with gbXML Viewer
 
-zdv
+2018-06-16 ~ All R14 modules are available and appear to be functioning but only with very preliminary testing having been carried out.
+
 
 ***
 
@@ -61,6 +62,7 @@ See [ISS Issues Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewe
 
 See [ISS Numbers Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-iss-numbers/README.md )
 
+
 ### REP ~ Reports
 
 See [REP ~ Reports Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-rep-reports/README.md )
@@ -71,24 +73,22 @@ See [REP ~ Reports Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-vi
 See [SAV ~ Save Changes Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-sav-save-changes/README.md )
 
 
-### SET ~ Settings
-
-See [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-xxxxx/README.md )
-
-* Add ( random? ) colors by space
-* Better lights and shadows
-
-
 ### SEL ~ Select Attributes
 
-See [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-xxxxx/README.md )
+See [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-sel-select-attributes/README.md )
+
+
+### SET ~ Settings
+
+* Update a number of parameters to control the display and rendering of the gbXML file as a 3D model
+
+See [SET ~ Settings Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-set-settings/README.md )
+
 
 
 ### THR ~ Three.js
 
-See [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-xxxxx/README.md )
-
-* 2018-03-08 ~ Simpler loading flow
+See [THR ~ ThreeRead Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-thr-three/README.md )
 
 
 ### TMP ~ Templates
