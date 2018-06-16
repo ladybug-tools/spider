@@ -20,6 +20,7 @@ For bug reports, problems with the code and wish list requests, please open an i
 
 ## Current Issues with gbXML Viewer
 
+zdv
 
 ***
 
@@ -28,77 +29,75 @@ For bug reports, problems with the code and wish list requests, please open an i
 * Feel free to add new ideas
 * Sections are based on the current set of modules
 * Items are listed in alphabetical order of their three letter folder/ name-space id
-* More links and details available in the [Release Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r11/README.md )
+* More links and details available in the read me files of each module
 * Completed items are documented on the release notes - which are displayd in the 'splash screen' that appears in the pop-up window when you first open the Viewer
+* Feel free to add items below of in the read me of the individual modules
 
-### Dev ~ Items not specific to any module
+### Assets folder
 
-Style Sheet
-
-* 2018-03-04 ~ More CSS vars
-
-view-updates.html
-
-* Shows posts in issues that have been closed
-
-
-
-### ISS ~ Duplicate Adjacents
-
-* 2018-03-08 ~ Michal: sort the adjacent spaces / by size
-* 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
-	* Upgrade so identifies any surface within another surface
+See [Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/README.md ) file
 
 
 ### COR Core
 
-* 2018-03-04 ~ Random model on start-up?
-* 2018-02-18 ~ Menus remember their position from session to session
-* 2018-02-21 ~ Add automatic addition of ground
+See [COR Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-cor-core/README.md )
 
 
 ### GAL ~ Gallery
 
-* Links to more sample files
-	* Where to find more?
-* Credits to sources of files
+See [GAL Gallery Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-gal-gallery/README.md )
 
+
+### GBX ~ gbXML Loader 
+
+See [GBX ~ gbXML Loader Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-gbx-gbxml-loader/README.md )
+
+
+### ISS ~ Issues
+
+See [ISS Issues Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-iss-issues/README.md )
+
+### Numbers ~ Numbers
+
+See [ISS Numbers Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-iss-numbers/README.md )
 
 ### REP ~ Reports
 
-* 2018-03-08 ~ Search for spaces
-* 2018-03-04 ~ Export spaces and storeys as gbJSON or .RAD files etc
-* 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
-* @@@ 2018-02-26 ~ Better telltale size for small surfaces
+See [REP ~ Reports Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-rep-reports/README.md )
 
 
 ### SAV ~ Save Changes
 
-* 2018-03-09 ~ Add save level of a ground plane
-* 2018-03-05 ~ Add pretty print to output file
-* 2018-03-05 ~ Add ability to add/merge changes
-* @@@ 2018-03-04 ~ Add user surface defined colors
-* 2018-03-04 ~ Add user defined inserts
-* 2018-03-04 ~ Add user-defined settings such as view point
-* 2018-03-04 ~ Add default UI parameters
+See [SAV ~ Save Changes Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-sav-save-changes/README.md )
 
 
 ### SET ~ Settings
+
+See [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-xxxxx/README.md )
 
 * Add ( random? ) colors by space
 * Better lights and shadows
 
 
+### SEL ~ Select Attributes
+
+See [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-xxxxx/README.md )
+
+
 ### THR ~ Three.js
+
+See [Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-xxxxx/README.md )
 
 * 2018-03-08 ~ Simpler loading flow
 
 
 ### TMP ~ Templates
 
+See [TMP Tenplate Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-tmp-template/README.md )
+
+
 
 ### Other Wish List Bits and Pieces
-
 
 
 ### Export gbXML files
