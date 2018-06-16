@@ -7,11 +7,11 @@
 
 <span style=color:magenta>Click or touch the 3D model to get started!</span>
 
-Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )  &nbsp; Wishlist: [R14 WishList](http://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/gbxml-viewer-support-issues-wish-list.md)
+Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )  &nbsp; Wishlist: [R14 WishList](https://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/gbxml-viewer-support-issues-wish-list.md)
 
 ### Please watch and thumbs-up our YouTube video:
 
-[![2018-05-08 Webinar: Ladybug Tools and Green Building XML: Open Source Tools for Building Analysis]( ../../../images/2018-05-08-gbxml-webinar-300px.png )]( https://www.youtube.com/watch?v=qHFEhD2SsDA "" )
+[![2018-05-08 Webinar: Ladybug Tools and Green Building XML: Open Source Tools for Building Analysis]( https://www.ladybug.tools/spider/images/2018-05-08-gbxml-webinar-300px.png )]( https://www.youtube.com/watch?v=qHFEhD2SsDA "" )
 
 <!--
 <details open>
@@ -30,9 +30,9 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 * Variable and functions clear, consistent, understandable names throughout
 * Pass W3C and JSHint validation throughout
 * Two window solution instead of three
-* All load-time error and useful stats reporting easily accessible and visible
+* gbXML file load-time errors and useful stats reporting easily accessible and visible
 * Issues Panel: big cleanup / add find faulty surface inclusions
-* Heads-up display: Add vertex editing capabilities
+* Heads-up display: Now named 'CTX Context menu' / Add vertex editing capabilities
 
 </details>
 
