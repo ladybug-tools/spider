@@ -7,7 +7,7 @@
 
 <span style=color:magenta>Click or touch the 3D model to get started!</span>
 
-Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
+Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )  &nbsp; Wishlist [R14 WishList](http://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/gbxml-viewer-support-issues-wish-list.md)
 
 ### Please watch and thumbs-up our YouTube video:
 
@@ -23,7 +23,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-06-03 ~ R14.0 ~ Concept for this release</summary>
+<summary>Welcome 2018-06-16 ~ R14.3 ~ Concept for this release</summary>
 
 * Try and get all modules fitting into some kind of cohent whole
 	* See if we can get this to be a big release that lasts several months
