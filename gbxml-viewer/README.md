@@ -4,7 +4,7 @@
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 
-# Ladybug Tools / Spider / 'Aragog' gbXML Viewer Read Me
+# [Ladybug Tools / Spider / 'Aragog' gbXML Viewer Read Me]( #gbxml-viewer/README.md )
 
 [Spider 'Aragog' gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. gbXML is an industry supported file format for sharing building information between numerous building design software tools.
 
@@ -14,11 +14,13 @@ _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scrip
 
 
 
-## Latest stable release:<br><https://www.ladybug.tools/spider/gbxml-viewer/>
+## Latest stable release R12:<br><https://www.ladybug.tools/spider/gbxml-viewer/>
 
-### Latest development pre-release: <br><https://www.ladybug.tools/spider/gbxml-viewer/dev/>
+### Development pre-release R13: <br><https://www.ladybug.tools/spider/gbxml-viewer/dev/>
+
 _Both of the above links are shortcuts that link to the appropriate address. You should bookmark these links in order to stay up to date._
 
+### Even later Development pre-release R14: <br><https://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html>
 
 ***
 
