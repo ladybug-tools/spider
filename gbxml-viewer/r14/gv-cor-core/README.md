@@ -42,6 +42,10 @@ needs combining with this read me
 ## Wish list
 
 
+* 2018-03-04 ~ Random model on start-up?
+* 2018-02-18 ~ Menus remember their position from session to session
+* 2018-02-21 ~ Add automatic addition of ground
+
 
 ## Issues
 
