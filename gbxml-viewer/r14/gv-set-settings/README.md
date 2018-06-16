@@ -14,9 +14,6 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-
-## Concept
-
 * Update a number of parameters to control the display and rendering of the gbXML file as a 3D model.
 * Viewing gbXML data in 3D gives you a lot more options for displaying gbXML elements using informative methods.
 * Update the materials and colors for surfaces
