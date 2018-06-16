@@ -4,7 +4,7 @@
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 
-# [R14 'Aragog' gbXML Viewer ~ SET ~ Settings Read Me] ( #gbxml-viewer/r14/gv-set-settings/README-template.md )
+# [R14 'Aragog' gbXML Viewer ~ SET ~ Settings Read Me]( #gbxml-viewer/r14/gv-set-settings/README-template.md )
 
 <!--
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-set-settings/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
