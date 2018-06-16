@@ -8,12 +8,14 @@ value='You are now in a GitHub web page view - Click this button to view this re
 <!--
 <iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/r14/xxxxx/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
-
 ## Full screen test script: [ZZZZZ]( https://www.ladybug.tools/spider/gbxml-viewer/r14/xxxxx/gv-tmp.html )
 -->
 
 
 ## Concept
+
+* Save your editing changes to a file for reuse with next incoming gbXML source file update
+* Save time with updating gbXML files that are frequently updated by the CAD program that generates the gbXML
 
 
 
@@ -33,6 +35,8 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 
 ## Links of Interest
+
+* [gbXML Viewer Save Changes Samples Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-sample-files/save-changes-samples/README.md )
 
 
 
