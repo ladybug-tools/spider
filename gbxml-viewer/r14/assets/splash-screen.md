@@ -7,7 +7,7 @@
 
 <span style=color:magenta>Click or touch the 3D model to get started!</span>
 
-Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )  &nbsp; Wishlist [R14 WishList](http://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/gbxml-viewer-support-issues-wish-list.md)
+Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )  &nbsp; Wishlist: [R14 WishList](http://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/gbxml-viewer-support-issues-wish-list.md)
 
 ### Please watch and thumbs-up our YouTube video:
 
