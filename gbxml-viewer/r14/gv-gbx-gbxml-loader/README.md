@@ -14,7 +14,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-* The script the parses gbXML files and translates the data into "gbJSON" and Three.js 3 meshes
+* The script that parses gbXML files and translates the data into "gbJSON" and Three.js 3 meshes
 * Under five hundred lines of code
 * Proving to be quite robust
 * GBP.parseFileXML: Loads any text file - from file reader or location hash or wherever
