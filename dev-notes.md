@@ -17,7 +17,7 @@ _This particular change log mostly covers info in this read me. Most folders her
 
 ### 2018-06-16 ~ Theo
 
-As of this writing the app is getting to be to big, too difficult to naintain
+As of this writing the app is getting to be to big, too difficult to maintain
 
 Goal:
 * all modules have a life of their own

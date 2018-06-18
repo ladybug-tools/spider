@@ -20,6 +20,7 @@
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
+	.highlight { background-color: orange; }
 	#divMenu { margin: 0 20px; max-width: 20rem; position: absolute; }
 
 </style>
@@ -38,9 +39,9 @@
 		<div id=divSamplesGallery ></div>
 
 		<p>
-			<button onclick=drawBoxes(); >draw planes</button>
+			<button onclick=drawItems(); >draw planes</button>
 
-			<button onclick=addShadowsToObjects(); >add shadow calculations to planes</button>
+			<button onclick=addShadowsToObjects(); class=highlight >1. add shadow calculations to planes</button>
 
 		</p>
 
@@ -112,7 +113,7 @@
 		</p>
 
 		<p>
-			<button onclick=drawGroundPlane(100); >Calculate ground plane shadows</button>
+			<button onclick=drawGroundPlane(100); class=highlight >2. Calculate ground plane shadows</button>
 		</p>
 
 		<div id = "divPosition" ></div>
@@ -167,7 +168,11 @@
 	var renderer, camera, controls, scene, axesHelper;
 	//var geometry, material, mesh;
 
-
+	// caption text
+	// fifty randomly position planes with 2x2 vertices per plane
+	// 128x128 pixel ground plane bitmap. 14 hours at 15 minute intervals
+	// Light and darkness on plane/ green and red arrows at vertices:
+	// both indicate the number of shadow events at each vertex
 
 	init();
 	animate();
@@ -214,15 +219,15 @@
 
 		//requestGbxmlFile( url );
 
-
-		drawBoxes();
+		drawItems();
 
 		updateSun();
+
 	}
 
 
 
-	function drawBoxes( count = 50 ) {
+	function drawItems( count = 50 ) {
 
 		scene.remove( objects, arrows );
 		scene.remove( ...exposedToSun,( GBX.surfaceOpenings ? GBX.surfaceOpenings : null )  );
@@ -237,7 +242,7 @@
 
 		for ( let i = 0; i < count; i++ ) {
 
-			geometry = new THREE.PlaneGeometry( 20, 20 );
+			geometry = new THREE.PlaneGeometry( 20, 20 );  // add 2, 2 etc for more vertices
 
 			const material = new THREE.MeshBasicMaterial( { color: 0xffffff, side: 2, vertexColors: THREE.VertexColors } );
 
