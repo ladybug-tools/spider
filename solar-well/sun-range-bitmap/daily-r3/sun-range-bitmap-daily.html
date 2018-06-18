@@ -417,7 +417,7 @@
 			*/
 
 			const radius = objects && objects.userData.radius ? objects.userData.radius : 90;
-			console.log( 'radius', radius );
+			//console.log( 'radius', radius );
 
 			const rc = radius * Math.cos( sunThen.altitude );
 			const vector = v( - rc * Math.cos( sunThen.azimuth ), rc * Math.sin( sunThen.azimuth ), radius * Math.sin( sunThen.altitude ) );
