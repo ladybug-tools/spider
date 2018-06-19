@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D shadow calculations in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-06-18" >
+<title>Sun Range Bitmap Daily R4</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	.highlight { background-color: orange; }
+	#divMenu { margin: 0 20px; max-width: 20rem; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js" ></script>
+<script src = "https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer-basic/r4/gbxml-viewer-basic.js" ></script>
+
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<div id=divSamplesGallery ></div>
+
+		<p>
+			<button onclick=drawItems(); >draw planes</button>
+
+			<button onclick=addShadowsToObjects(); class=highlight >1. add shadow calculations to planes</button>
+
+		</p>
+
+		<p>
+			Latitude : <output id=outLat ></output><br>
+			<input type = range id=inpLat min= -90 max=90 oninput=updateSun(); >
+		</p>
+		<p>
+			Longitude : <output id=outLon ></output><br>
+			<input type = range id=inpLon min= -180 max=180  oninput=updateSun(); size = 5 >
+		</p>
+
+		<p>
+			Month : <output id=outMon >12</output><br>
+			<input type = range id=inpMon min= 1 max=12 oninput=updateSun(); value=12 >
+		</p>
+
+		<p>
+			Date : <output id=outDat >21</output><br>
+			<input type = range id=inpDat min= 1 max=31 oninput=updateSun(); value=21 >
+		</p>
+
+		<p>
+			Hour to start : <output id=outHourStart >8</output><br>
+			<input type = range id=inpHourStart min= 1 max=24 oninput=updateSun(); value=8 >
+		</p>
+
+		<p>
+			Hour to end : <output id=outHourEnd >20</output><br>
+			<input type = range id=inpHourEnd min= 1 max=24 oninput=updateSun(); value=20 >
+		</p>
+
+		<p>
+			minutes between suns: <select id=inpMin oninput=updateSun(); >
+				<option selected >60</option>
+				<option>30</option>
+				<option>15</option>
+				<option>10</option>
+				<option>1</option>
+			</select>
+		</p>
+
+		<!--
+		<p>
+			Size of plane: <output id=outHourEnd >20</output><br>
+			<input type = range id=inpHourEnd min= 1 max=24 oninput=updateSun(); value=20 >
+		</p>
+		-->
+
+		<p>
+			Pixels per side: <select id=inpPix >
+				<option>16</option>
+				<option>32</option>
+				<option selected>64</option>
+				<option>128</option>
+				<option >256</option>
+				<option>512</option>
+			</select>
+		</p>
+
+		<p>
+			Anisotropy: <select id=inpAni >
+				<option>1</option>
+				<option>2</option>
+				<option selected>4</option>
+				<option>8</option>
+				<option>16</option>
+			</select>
+		</p>
+
+		<p>
+			<button onclick=drawGroundPlane(100); class=highlight >2. Calculate ground plane shadows</button>
+		</p>
+
+		<div id = "divPosition" ></div>
+
+		<div id = "divLog" ></div>
+
+	</div>
+
+<script>
+
+	const url = 'https://rawgit.com/ladybug-tools/spider/master/gbxml-sample-files/omha-nb-zneth.xml';
+	//const url = 'https://rawgit.com/ladybug-tools/spider/master/gbxml-sample-files/london-office.xml';
+	//const url = 'https://rawgit.com/ladybug-tools/spider/master/gbxml-sample-files/bristol-clifton-downs-fixed.xml';
+
+
+	let timeStart;
+
+	// San Francisco
+	var latitude = 37.796;
+	var longitude = -122.398;
+
+	/*
+
+	// Paris
+	var latitude = 48.8566;
+	var longitude = 2.3522;
+
+	// Igualada Spain
+	var latitude = 41.5861554761;
+	var longitude = 1.6519343471;
+
+	// VNLK
+	var latitude = 27.71110193545;
+	var longitude = 86.71228385040001;
+
+	// YGIL Gilgandra
+	var latitude = -31.7276314069;
+	var longitude = 148.63915118805;
+
+	// PHOG hawaii
+	var latitude = 20.8968;
+	var longitude = -156.4329;
+
+	*/
+
+
+	//let azimuth = 250;
+	//let altitude = 60;
+	let exposedToSun = [];
+	let suns, objects, plane, arrows;
+	let vector;
+
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+	var renderer, camera, controls, scene, axesHelper;
+	//var geometry, material, mesh;
+
+	// caption text
+	// fifty randomly position planes with 2x2 vertices per plane
+	// 128x128 pixel ground plane bitmap. 14 hours at 15 minute intervals
+	// Light and darkness on plane/ green and red arrows at vertices:
+	// both indicate the number of shadow events at each vertex
+
+	init();
+	animate();
+
+	function init() {
+
+		const source = "https://github.com/ladybug-tools/spider/tree/master/solar-well/sun-range-bitmap";
+
+		//const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		const title = document.title;
+
+		divTitle.innerHTML =
+			`<h2>
+				<a href="${source}" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+				<a href = "" >${title}</a>
+			</h2>
+			<p>
+				${document.head.querySelector( '[name=description]' ).content }
+			</p>`;
+
+
+		outLat.value = inpLat.value = latitude;
+		outLon.value = inpLon.value = longitude;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+		renderer.setPixelRatio( window.devicePixelRatio );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.TrackballControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		requestGbxmlFile( url );
+
+		//drawItems();
+
+		updateSun();
+
+	}
+
+
+
+	function drawItems( count = 50 ) {
+
+		scene.remove( objects, arrows );
+		scene.remove( ...exposedToSun,( GBX.surfaceOpenings ? GBX.surfaceOpenings : null )  );
+
+		objects = new THREE.Group();
+		objects.updateMatrixWorld();
+
+		var normalMatrix = new THREE.Matrix3().getNormalMatrix( scene.matrixWorld );
+		exposedToSun = [];
+
+		//console.log( 'suns', suns );
+
+		for ( let i = 0; i < count; i++ ) {
+
+			geometry = new THREE.PlaneGeometry( 20, 20 );  // add 2, 2 etc for more vertices
+
+			const material = new THREE.MeshBasicMaterial( { color: 0xffffff, side: 2, vertexColors: THREE.VertexColors } );
+
+			box = new THREE.Mesh( geometry, material );
+			box.name = 'box' + i;
+			box.rotation.set( 3.15 * Math.random(), 3.15 * Math.random(), 3.15 * Math.random() );
+			box.position.set( 100 * Math.random() - 50, 100 * Math.random() - 50, 80 * Math.random() );
+
+			for ( face of geometry.faces ) {
+				face.vertexColors[ 0 ] = new THREE.Color( 0xcccccc );
+				face.vertexColors[ 1 ] = new THREE.Color( 0xcccccc );
+				face.vertexColors[ 2 ] = new THREE.Color( 0xcccccc );
+			}
+
+			objects.add( box );
+
+			//if ( box.position.z > 0 ) {
+
+				exposedToSun.push( box );
+
+			//}
+
+		}
+
+		scene.add( objects );
+
+
+		zoomObjectBoundingSphere ( objects );
+
+		//setTimeout( drawPlane, 30 );
+
+	}
+
+
+	function addShadowsToObjects() {
+
+		let shadow;
+
+		scene.remove( arrows );
+		arrows = new THREE.Object3D();
+
+		for ( obj of exposedToSun ) {
+		//for ( obj of exposedToSun ) {
+
+			for ( face of obj.geometry.faces ) {
+				//console.log( 'face', face );
+
+				var vertex1 = obj.geometry.vertices[ face.a ].clone();
+				obj.localToWorld ( vertex1 );
+				//console.log( 'v1', vertex1 );
+
+				shadow1 = 1 / ( 1.05 + buildBoxShadow( vertex1 ) );
+				//console.log( 'shadow1', shadow1 );
+
+				//face.vertexColors[ 0 ] = new THREE.Color( 0xffffff );
+				face.vertexColors[ 0 ].setRGB( shadow1, shadow1, shadow1 );
+
+				var vertex2 = obj.geometry.vertices[ face.b ].clone();
+				obj.localToWorld ( vertex2 );
+				//console.log( 'v2', vertex1 );
+
+				shadow2 =  1 / ( 1.05 + buildBoxShadow( vertex2 ) );
+				//console.log( 'shadow', shadow2 );
+
+				face.vertexColors[ 1 ].setRGB( shadow2, shadow2, shadow2 );
+
+				var vertex3 = obj.geometry.vertices[ face.c ].clone();
+				obj.localToWorld ( vertex3 );
+				//console.log( 'v2', vertex1 );
+
+				shadow3 = 1 / ( 1.05 + buildBoxShadow( vertex3 ) );
+				//console.log( 'shadow', shadow );
+				face.vertexColors[ 2 ].setRGB( shadow3, shadow3, shadow3 );
+
+			}
+
+			obj.geometry.elementsNeedUpdate = true;
+
+		}
+
+		scene.add( arrows );
+
+	}
+
+
+
+	function buildBoxShadow( point ) {
+		//console.log( 'point', point );
+
+		//console.log( 'exposedToSun', exposedToSun );
+
+		var raycaster = new THREE.Raycaster();
+
+		let shadow = 0;
+
+		for ( let i = 0; i < suns.children.length; i++ ) {
+		//for ( var i = 0; i < 1; i++ ) {
+
+			const sun = suns.children [ i ];
+			const vector = sun.position.clone().normalize();
+			//console.log( 'vector', vector );
+
+			raycaster.set( point, vector, 0.5 );
+			//console.log( 'raycaster', raycaster );
+
+			intersects = raycaster.intersectObjects( exposedToSun, true );
+			//console.log( 'intersects', intersects );
+
+			realIntersects = intersects.filter( inter => inter.distance > 0 )
+			//console.log( 'realIntersects', realIntersects );
+
+			//color = realIntersects.length > 0 ? 0xff0000 : 0x00ff00;
+			//const arrowHelper = new THREE.ArrowHelper( vector, point, 5, color );
+			//arrows.add( arrowHelper );
+
+			shadow += realIntersects.length > 0 ? 0.7 : 0;
+
+		};
+
+		return shadow;
+
+	}
+
+
+
+	function updateSun(){
+
+		divPosition.innerHTML = '';
+		scene.remove( suns );
+
+		outLat.value = inpLat.value;
+		const latitude = parseFloat( inpLat.value );
+
+		outLon.value = inpLon.value;
+		const longitude = ( parseFloat( inpLon.value ) );
+
+		outMon.value = inpMon.value;
+		const month = parseInt( inpMon.value, 10 ) - 1;
+
+		outDat.value = inpDat.value;
+		const date = parseInt( inpDat.value, 10 );
+
+		outHourStart.value = inpHourStart.value;
+		const hourStart = parseInt( inpHourStart.value, 10 );
+
+		outHourEnd.value = inpHourEnd.value;
+		const hourEnd = parseInt( inpHourEnd.value, 10 );
+
+		suns = new THREE.Group();
+
+		const hoursDuration = hourEnd - hourStart;
+
+		slices = hoursDuration * ( 60 / parseInt( inpMin.value ) );
+
+		const geometry = new THREE.SphereBufferGeometry( 5 );
+		const material = new THREE.MeshBasicMaterial( { color: 'yellow', side: 2 } );
+
+		for ( var i = 0; i < slices; i++ ) {
+
+			const dateThen = new Date( 2018, month, date, hourStart, ( 60 * i * hoursDuration / slices ) ) ;
+			//console.log( 'dateThen', dateThen );
+
+			sunThen = SunCalc.getPosition( dateThen, latitude, longitude );
+			//console.log( 'sunThen', sunThen );
+
+			/*
+			divPosition.innerHTML += '<p> sunThen' + getJsonToHTML( sunThen ) + '</p>';
+
+			divPosition.innerHTML +=
+			`
+				Date: ${ dateThen }<br>
+				Azimuth : ${ ( sunThen.azimuth * 180 / Math.PI ).toLocaleString() }<br>
+				Altitude: ${ ( sunThen.altitude * 180 / Math.PI).toLocaleString() }<br>
+			`;
+			*/
+
+			const radius = objects && objects.userData.radius ? objects.userData.radius : 90;
+			//console.log( 'radius', radius );
+
+			const rc = radius * Math.cos( sunThen.altitude );
+			const vector = v( - rc * Math.cos( sunThen.azimuth ), rc * Math.sin( sunThen.azimuth ), radius * Math.sin( sunThen.altitude ) );
+
+			sun = new THREE.Mesh( geometry, material );
+			sun.position.copy( axesHelper.position.clone().add (vector ) );
+
+			if ( sun.position.z > 0 ) {
+
+				suns.add( sun );
+
+			}
+
+		}
+
+		scene.add( suns );
+
+		//setTimeout( drawBoxes, 30 );
+
+	}
+
+
+
+	function drawGroundPlane() {
+
+		timeStart = Date.now();
+
+		size = 4 * GBX.surfaceMeshes.userData.radius;
+		//console.log( 'size', size );
+
+		const pixels = parseInt( inpPix.value, 10 ) || 128;
+		const anisotropy = parseInt( inpAni.value, 10 ) || 4;
+		scene.remove( plane );
+
+		const geometryPlane = new THREE.PlaneGeometry( size, size );
+		const material = new THREE.MeshBasicMaterial( { map: buildGroundPlaneShadow( size, pixels, anisotropy ), side: 2, transparent: true } );
+		//const material = new THREE.MeshNormalMaterial( { side: 2 } );
+
+		plane = new THREE.Mesh( geometryPlane, material );
+		plane.position.z = -10
+		plane.updateMatrixWorld();
+
+		scene.add( plane );
+
+		console.log( 'time ', Date.now() - timeStart );
+
+	}
+
+
+
+	function buildGroundPlaneShadow( mesh, pixels = 256, anisotropy = 4 ) {
+
+		var raycaster = new THREE.Raycaster();
+
+		size = 4 * GBX.surfaceMeshes.userData.radius;
+		data = new Uint8Array( 3 * pixels * pixels );
+
+		for ( var i = 0; i < data.length; i++ ) { data[ i ] = 240; }
+
+		const startY = -0.5 * size;
+		const startX = -0.5 * size;
+
+		delta = 200 / ( 12 * ( 60 / parseInt( inpMin.value ) ) );
+		//console.log( 'delta', delta );
+
+		for ( var i = 0; i < suns.children.length; i++ ) {
+		//for ( var i = 0; i < 1; i++ ) {
+
+			let j = 0;
+			sun = suns.children [ i ];
+			vector = sun.position.clone().normalize();
+			//console.log( 'vector', vector );
+
+			for ( let y = 0; y < pixels; y++ ) {
+
+				const yy = startY + size * y / pixels;
+
+				for ( let x = 0; x < pixels; x++ ) {
+
+					const point = v( startX + size * x / pixels, yy, 0.1 );
+					//console.log( 'point', point );
+
+					//const arrowHelper = new THREE.ArrowHelper( vector, point, 10 );
+					//scene.add( arrowHelper );
+
+					raycaster.set( point, vector );
+					//console.log( 'raycaster', raycaster );
+
+					const intersects = raycaster.intersectObjects( exposedToSun );
+
+					const shade = intersects.length > 0 ? delta : 0;
+
+					data[ j ++ ] -= shade;
+					data[ j ++ ] -= shade;
+					data[ j ++ ] -= shade;
+
+				}
+
+			}
+
+		}
+
+		// renderer.capabilities.getMaxAnisotropy()
+		const dt = new THREE.DataTexture( data, pixels, pixels, THREE.RGBFormat );
+		dt.anisotropy = anisotropy;
+		dt.needsUpdate = true;
+
+		return dt;
+
+	}
+
+
+	//////////
+
+	function requestGbxmlFile ( url ) {
+
+		timeStart = Date.now();
+
+		setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings ] );
+		scene.remove( objects, arrows );
+		scene.remove( ...exposedToSun,( GBX.surfaceOpenings ? GBX.surfaceOpenings : null )  );
+
+		const xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+		xhr.onprogress = onRequestFileProgress;
+		xhr.onload = callbackGbXML;
+		xhr.send( null );
+
+		function onRequestFileProgress( xhr ) {
+
+			const fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
+
+			divLog.innerHTML =
+			`
+				${fileAttributes.name}<br>
+				bytes loaded: ${xhr.loaded.toLocaleString()} of  ${xhr.total.toLocaleString() }<br>
+			`;
+
+		}
+
+		function callbackGbXML ( xhr ) {
+
+			const gbxmlResponseXML =  xhr.target.responseXML;
+			const gbxml = xhr.target.responseXML.documentElement;
+
+			exposedToSun = [];
+
+			meshes = GBX.parseFileXML( gbxml );
+
+			meshes[ 0 ].traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh) {
+
+					child.material = new THREE.MeshBasicMaterial( { color: 0xffffff, side: 2, vertexColors: THREE.VertexColors } );
+					child.material.needsUpdate = true;
+
+					for ( face of child.geometry.faces ) {
+						face.vertexColors[ 0 ] = new THREE.Color( 0xeeeeee );
+						face.vertexColors[ 1 ] = new THREE.Color( 0xeeeeee );
+						face.vertexColors[ 2 ] = new THREE.Color( 0xeeeeee );
+					}
+					//if ( child.userData.data.exposedToSun === 'true' ) {
+					//if ( child.userData.data.surfaceType === 'Roof' ) {
+						exposedToSun.push( child );
+
+					//}
+				}
+
+
+			} );
+
+			scene.add( ...exposedToSun );  // meshes[ 2 ] = openings
+
+			//objects = GBX.surfaceMeshes.clone();
+
+			zoomObjectBoundingSphere( GBX.surfaceEdges ); // let's see something before we calculate
+
+			divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
+
+			updateSun();
+
+		}
+
+	}
+
+
+	/////////
+
+	function zoomObjectBoundingSphere ( obj ) {
+
+		const bbox = new THREE.Box3().setFromObject( obj );
+
+		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+		const center = sphere.center;
+		const radius = 1.5 * sphere.radius;
+
+		controls.target.copy( center );
+		controls.maxDistance =5 * radius;
+
+		camera.position.copy( center.clone().add( new THREE.Vector3( radius, -radius, radius ) ) );
+		camera.far = 10 * radius; //2 * camera.position.length();
+		camera.updateProjectionMatrix();
+
+		//lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
+		//lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+		//lightDirectional.target = obj;
+
+		if ( !axesHelper ) {
+
+			axesHelper = new THREE.AxesHelper( 1 );
+			axesHelper.name = 'axesHelper';
+			scene.add( axesHelper );
+
+		}
+
+		axesHelper.scale.set( radius, radius, radius );
+		axesHelper.position.copy( center );
+
+		GBX.surfaceMeshes.userData.center = center;
+		GBX.surfaceMeshes.userData.radius = radius;
+		//console.log( 'radius', radius );
+		//		scene.remove( cameraHelper );
+		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+		//		scene.add( cameraHelper );
+
+		//updateSun();
+
+	};
+
+
+
+	function setSceneDispose( objArray = [] ) {
+
+		//console.log( 'renderer.info.memory.geometries 1', renderer.info.memory.geometries );
+
+		scene.traverse( function ( child ) {
+
+			if ( child instanceof THREE.Mesh || child instanceof THREE.LineSegments ) {
+
+				child.geometry.dispose();
+				child.material.dispose();
+
+				scene.remove( child );
+			}
+
+		} );
+
+
+		scene.remove( ...objArray );
+
+		//axesHelper = undefined;
+
+		//getRenderInfo();
+
+	}
+
+
+
+	function getRenderInfo() {
+
+		console.log( 'renderer.info.memory.geometries', renderer.info.memory.geometries );
+		console.log( 'renderer.info.render', renderer.info.render );
+
+		divLog.innerHTML +=
+		`
+		geometries: ${ renderer.info.memory.geometries.toLocaleString() }<br>
+		triangles: ${ renderer.info.render.triangles.toLocaleString() } <br>
+		lines: ${ renderer.info.render.lines.toLocaleString() } <br>
+		`;
+
+	}
+
+
+
+	//////////
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

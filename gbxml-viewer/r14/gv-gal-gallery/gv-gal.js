@@ -83,6 +83,47 @@
 	};
 
 
+	GAL.xxxloadGallery = function( button ){
+
+		COR.resetLeftMenu();
+		const script = document.head.appendChild( document.createElement( 'script' ) );
+		script.src = '../gv-gal-gallery/gv-gal.js';
+
+		script.onload = function() { GAL.initGallery( button ); }
+
+	}
+
+
+
+	GAL.setCardSampleGalleries = function( target ) {
+
+		target.innerHTML =
+
+		`<div>
+			<button id="butGalleryGbxml" class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				onclick = GAL.initGallery(this) >
+				gbXML.org
+			</button>
+
+			<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				onclick = GAL.initGallery(this) >
+				Samples1
+			</button>
+
+			<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				onclick = GAL.initGallery(this) >
+				Samples2
+			</button>
+
+			<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				onclick = GAL.initGallery(this) >
+				Build Well
+			</button>
+		</div>`;
+
+	}
+
+
 
 	GAL.callbackGitHubMenu = function( xhr ) {
 

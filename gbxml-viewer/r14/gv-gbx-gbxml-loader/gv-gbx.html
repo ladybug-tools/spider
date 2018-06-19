@@ -23,7 +23,9 @@
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
-<script src = "gv-gbx.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
+<script src = "../gv-thr-threejs/gv-thr.js" ></script>
+<script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
 
 
 	<div id = "divMenu" >
@@ -43,20 +45,23 @@
 		</p>
 
 		<p>
-			<button onclick = "GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible;" >surfaces</button>
-			<button onclick = "GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible;" >edges</button>
-			<button onclick = "GBX.surfaceOpenings.visible=!GBX.surfaceOpenings.visible;" title="toggle the windows" >openings</button>
-			<button onclick = "GBX.surfaceMeshes.visible=GBX.surfaceEdges.visible=GBX.surfaceOpenings.visible=true;" >all visible</button>
-		</p>
-
-		<p>
 			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml' );" >clifton</button>
 			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/london-office.xml' );" >london office</button>
 			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml' );" >warwick</button>
 			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/samples-2/17134-M17.xml' );" >17134-M17</button>
 		</p>
 
-		<div id = "divLog" ></div>
+		<hr>
+
+		<div id = "GBXdivMenuInWorld" title="This is called the 'in-world menu'" >
+
+			<p>
+				<span id = "GBXmenuInWorldContents" ></span>
+			</p>
+
+			<div id = "GBXdivLog" ></div>
+
+		</div>
 
 	</div>
 
@@ -72,8 +77,10 @@
 	var lightAmbient, lightDirectional, lightPoint, axesHelper;
 	var geometry, material, mesh;
 
+	THR.initThree();
+	THR.animate();
+
 	init();
-	animate();
 
 	function init() {
 
@@ -89,38 +96,7 @@
 				${document.head.querySelector( '[name=description]' ).content }
 			</p>`;
 
-
-		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		document.body.appendChild( renderer.domElement );
-
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-		camera.position.set( -100, -100, 100 );
-		camera.up.set( 0, 0, 1 );
-
-		controls = new THREE.OrbitControls( camera, renderer.domElement );
-
-		scene = new THREE.Scene();
-
-		lightAmbient = new THREE.AmbientLight( 0x444444 );
-		scene.add( lightAmbient );
-
-		lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
-		lightDirectional.shadow.mapSize.width = 2048;  // default 512
-		lightDirectional.shadow.mapSize.height = 2048;
-		lightDirectional.castShadow = true;
-		scene.add( lightDirectional );
-
-		lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
-		lightPoint.position = new THREE.Vector3( 0, 0, 1 );
-
-		camera.add( lightPoint );
-		scene.add( camera );
-
-		window.addEventListener( 'resize', onWindowResize, false );
-
-		window.addEventListener( 'orientationchange', onWindowResize, false );
+		GBX.setCardToggleVisibility( GBXmenuInWorldContents, GBXdivLog );
 
 		requestGbxmlFile( url );
 
@@ -132,7 +108,7 @@
 
 		timeStart = Date.now();
 
-		setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, axesHelper ] );
+		THR.setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, axesHelper ] );
 
 		const xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
@@ -146,7 +122,7 @@
 
 			const fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
 
-			divLog.innerHTML =
+			GBXdivLog.innerHTML =
 			`
 				${fileAttributes.name}<br>
 				bytes loaded: ${xhr.loaded.toLocaleString()} of  ${xhr.total.toLocaleString() }<br>
@@ -161,122 +137,16 @@
 
 			meshes = GBX.parseFileXML( gbxml );
 
-			scene.add( ...meshes );
+			THR.scene.add( ...meshes );
 
-			zoomObjectBoundingSphere( GBX.surfaceEdges );
+			THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
 
-			divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
-
-		}
-
-	}
-
-
-	/////////
-
-	function zoomObjectBoundingSphere ( obj ) {
-
-		const bbox = new THREE.Box3().setFromObject( obj );
-
-		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
-		const center = sphere.center;
-		const radius = sphere.radius;
-
-		controls.target.copy( center );
-		controls.maxDistance = 5 * radius;
-
-		camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
-		camera.far = 10 * radius; //2 * camera.position.length();
-		camera.updateProjectionMatrix();
-
-		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
-		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
-		lightDirectional.target = obj;
-
-		if ( !axesHelper ) {
-
-			axesHelper = new THREE.AxesHelper( 1 );
-			axesHelper.name = 'axesHelper';
-			scene.add( axesHelper );
+			GBXdivLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
 
 		}
 
-		axesHelper.scale.set( radius, radius, radius );
-		axesHelper.position.copy( center );
-
-		obj.userData.center = center;
-		obj.userData.radius = radius;
-
-		//		scene.remove( cameraHelper );
-		//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
-		//		scene.add( cameraHelper );
-
-	};
-
-
-
-	function setSceneDispose( objArray = [] ) {
-
-		//console.log( 'renderer.info.memory.geometries 1', renderer.info.memory.geometries );
-
-		scene.traverse( function ( child ) {
-
-			if ( child instanceof THREE.Mesh || child instanceof THREE.LineSegments ) {
-
-				child.geometry.dispose();
-				child.material.dispose();
-
-				scene.remove( child );
-			}
-
-		} );
-
-
-		scene.remove( ...objArray );
-
-		axesHelper = undefined;
-
-		//getRenderInfo();
-
 	}
 
-
-
-	function getRenderInfo() {
-
-		console.log( 'renderer.info.memory.geometries', renderer.info.memory.geometries );
-		console.log( 'renderer.info.render', renderer.info.render );
-
-		divLog.innerHTML +=
-		`
-		geometries: ${ renderer.info.memory.geometries.toLocaleString() }<br>
-		triangles: ${ renderer.info.render.triangles.toLocaleString() } <br>
-		lines: ${ renderer.info.render.lines.toLocaleString() } <br>
-		`;
-
-	}
-
-
-	function onWindowResize() {
-
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
-
-	}
-
-
-
-	function animate() {
-
-		requestAnimationFrame( animate );
-		renderer.render( scene, camera );
-		controls.update();
-
-	}
 
 </script>
 </body>

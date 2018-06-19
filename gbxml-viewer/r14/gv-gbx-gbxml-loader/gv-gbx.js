@@ -294,6 +294,7 @@
 	};
 
 
+
 	GBX.getPlane = function( points, start = 0 ) { // used by numbers
 
 		const triangle = new THREE.Triangle();
@@ -310,6 +311,34 @@
 		return GBX.plane;
 
 	}
+
+
+	//////////
+
+	GBX.setCardToggleVisibility = function( target, log ) {
+
+		target.innerHTML =
+
+		`<div>
+
+			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible;"
+				title="toggle the flat bits" >surfaces</button>
+
+			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible;" title="toggle the side lines" >edges</button>
+
+			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceOpenings.visible=!GBX.surfaceOpenings.visible;" title="toggle the windows" >openings</button>
+
+			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.setAllVisible();"
+			title="toggle the windows" >all</button>
+			|
+			<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				onclick="GBX.setAllVisible();THR.zoomObjectBoundingSphere(GBX.surfaceEdges);"
+				title="Go to the home view" >reset view</button>
+		</div>`;
+
+	}
+
+
 
 	GBX.setAllVisible = function() {
 
@@ -346,3 +375,5 @@
 		document.body.style.backgroundImage = '';
 
 	};
+
+

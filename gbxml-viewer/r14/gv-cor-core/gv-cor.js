@@ -541,16 +541,6 @@
 
 		button.style.cssText = COR.buttonToggleCss;
 
-		/*
-		const buttons = CORdivMenuItems.getElementsByTagName( "button" );
-
-		for ( let button of buttons ) {
-
-			button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-
-		}
-		*/
-
 	};
 
 

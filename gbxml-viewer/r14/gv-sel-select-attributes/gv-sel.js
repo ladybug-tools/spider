@@ -746,7 +746,6 @@
 
 
 
-
 	SEL.setMenuPanelCadObjectsByType2 = function( target, selId ) {
 
 		const surfaces = GBX.gbjson.Campus.Surface;
@@ -794,7 +793,6 @@
 		SEL.setButtonStyleClass( CORdivItemsRight );
 
 	};
-
 
 
 
@@ -1063,6 +1061,7 @@
 	};
 
 
+
 	SEL.toggleSurfacesVisible = function() {
 
 		GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible;
@@ -1091,6 +1090,8 @@
 
 	};
 
+
+
 	////////// Style
 
 	SEL.setButtonStyleClass = function( item ) {
@@ -1110,7 +1111,6 @@
 
 
 	//////////
-
 
 	SEL.setZoneZoom = function( zoneId ) {
 
