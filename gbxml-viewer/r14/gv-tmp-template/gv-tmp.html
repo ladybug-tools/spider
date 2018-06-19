@@ -5,16 +5,13 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-06-18" >
-<title>'Aragog' gbXML Viewer R14.3 TMP Template</title>
+<meta name = "date" content = "2018-06-19" >
+<title>'Aragog' gbXML Viewer R14 TMP Template</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
-<!--
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
--->
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
@@ -31,7 +28,7 @@
 			left menu / click to move
 		</div>
 
-		<div id = "xxxdivMenuContents" >
+		<div id = "CORdivMenuContents" >
 
 			<details open >
 
@@ -48,8 +45,8 @@
 				<div id=divRowButtonsStyle ></div>
 
 				<div id=CORdragArea class=dragDropArea >
-					drag & drop gbXML files here<br>
-					or <input type = "file" id = "inpFile" onchange="COR.openGbxmlFile(this);" ><br>
+					drag & drop gbXML or other files here<br>
+					or <input type = "file" id = "inpFile" onchange="COR.openFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md>?</a>
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
 					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
@@ -59,27 +56,18 @@
 					<div id = "CORdivSampleGalleries" ></div>
 				</div>
 
-					<!--
-					<button id="butGalleryGbxml" class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
-						gbXML.org
-					</button>
+			</details>
 
-					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
-						Samples1
-					</button>
+			<details open >
 
-					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
-						Samples2
-					</button>
+				<summary title="the primary viewer tools are here" >Features</summary>
 
-					<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
-						Build Well
-					</button>
-				-->
+				<p>
+					<button id=CORbutTemplate class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+						onclick= COR.loadScript('../gv-tmp-template/gv-tmp.js')
+						title="Demo or boilerplate code you can use to start your own projects" >
+					Template</button>
+				</p>
 
 			</details>
 
@@ -185,7 +173,7 @@
 		divRowButtonsStyle.innerHTML = txt;
 
 
-		// load a defailt file / great for testing
+		// load a default file / great for testing
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
@@ -213,46 +201,6 @@
 		GAL.setCardSampleGalleries( CORdivSampleGalleries );
 
 		THR.controls.enableKeys = false;
-
-	}
-
-
-	// still experimenting...
-
-	COR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
-
-		location.hash = CORinpFilePath.value;
-
-		const thrFilePath = CORinpFilePath.value;
-		localStorage.setItem('thrFilePath', thrFilePath );
-
-	};
-
-
-
-	function loadScript( source ){ // add buttonId?
-
-		COR.resetLeftMenu();
-		const script = document.head.appendChild( document.createElement( 'script' ) );
-		script.src = source ;
-
-		script.onload = function() { COR.setMenuButtonsClass ( CORdivMenuItems ); }
-
-	}
-
-
-
-	function onloadThreejs() {
-
-		console.log( 'onloadThreejs', 23);
-		CORdivLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
-
-		GBX.colors = GBX.colorsDefault;
-		GBX.setAllVisible();
-
-		HUD.setMenuOptions(); // gets things really going
-
-		COR.resetLeftMenu();
 
 	}
 

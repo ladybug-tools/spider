@@ -6,7 +6,7 @@
 
 	SAV.initChanges = function () { // called from bottom of file
 
-		CTX.surfaceChanges = {};
+		//CTX.surfaceChanges = {};
 
 		SAV.initMenuSaveChanges( CORdivMenuItems );
 

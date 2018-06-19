@@ -11,16 +11,23 @@ value='You are now in a GitHub web page view - Click this button to view this re
 ## Full screen test script: [gbXML Viewer Template]( http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-tmp-template/gv-tmp.html )
 -->
 
-## [Read Me Template]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-tmp-template/README-template.md )
-
-
-
 ## Concept
 
-* The files in this folder are templates or 'boilerplate' files that may be used to build gbXML viewer modules.
+* The files in this folder are templates or demos or 'boilerplate' files that may be used to build gbXML viewer modules.
+
+## [Read Me Template]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-tmp-template/README-template.md )
+
+* A template for starting your own read me files
+
+## [gv-tmp.html]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-tmp-template/gv-tmp.html )
+
+* A script with bare-bones left menu for testing and coding new features
 
 ## Wish list
 
+* 2018-06-19 ~ Theo ~ Feature details panel is set to be open on load - to speed up testing and coding
+* 2018-06-19 ~ Theo ~ Have gv-filename.html load gv-filename.js automatically on load
+	* Enable no need to edit source code in order to run correctly
 
 
 ## Issues
@@ -33,7 +40,13 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Change Log
 
-###
+
+### 2018-06-19 ~ heo
+
+* Add gv-tmp.html and gc-tmp.js to help with testing and building new modules
+
+
+### 2018-06-?? ~ Theo
 
 R14
 * First commit

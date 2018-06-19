@@ -49,6 +49,26 @@
 	};
 
 
+	COR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
+
+		location.hash = CORinpFilePath.value;
+
+		const thrFilePath = CORinpFilePath.value;
+		localStorage.setItem('thrFilePath', thrFilePath );
+
+	};
+
+
+
+	COR.loadScript = function( source ){ // add buttonId?
+
+		COR.resetLeftMenu();
+		const script = document.head.appendChild( document.createElement( 'script' ) );
+		script.src = source ;
+
+		script.onload = function() { COR.setMenuButtonsClass ( CORdivMenuItems ); }
+
+	}
 
 	// handle location.hash change events
 
@@ -235,12 +255,14 @@
 
 	// handle callbacks with file data events / gbxml callback in GBX
 
-	COR.callbackMarkdown = function( xhr ){
+	COR.callbackMarkdown = function( obj ){
+
+		markdown = obj.target ? obj.target.responseText : obj;
 
 		showdown.setFlavor('github');
 		const converter = new showdown.Converter();
 		//const response = xhr.target.response;
-		const html = converter.makeHtml( xhr.target.responseText );
+		const html = converter.makeHtml( markdown );
 
 		//CORdivMenuRight.innerHTML = '<div id=CORdivItemsRight >' + html + '</div>';
 		CORdivItemsRight.innerHTML = html;
@@ -293,12 +315,12 @@
 
 			if ( files.files[0].name.toLowerCase().endsWith( '.xml' ) ) {
 
-				GBX.openGbxmlFile( files );
+				COR.openGbxmlFile( files );
 
 			} else {
 
 				//txtArea.innerHTML = reader.result;
-				COR.callbackMarkdownData( reader.result );
+				COR.callbackMarkdown( reader.result );
 
 			}
 
@@ -345,7 +367,7 @@
 
 	// handle drag and drop events
 
-	COR.callbackMarkdownData = function ( markdown ){
+	COR.xxxcallbackMarkdownData = function ( markdown ){
 
 		showdown.setFlavor('github');
 		const converter = new showdown.Converter();

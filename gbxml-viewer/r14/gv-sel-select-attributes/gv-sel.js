@@ -6,8 +6,6 @@
 	// Copyright 2018 Ladybug Tools authors. MIT License
 	// functions in most sections are in alphabetical order
 
-	// tomorrow:
-	// Element panel attributes: move id zoom and toggle to top
 
 	var SEL = {};
 

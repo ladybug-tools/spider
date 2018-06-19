@@ -70,8 +70,11 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Change Log
 
-###
+### 2018-06-19 ~ Theo
 
+* Add gv-set.html - to help with testing and enhancing
+
+### 2018-06-?? ~ Theo
 R14
 * First commit
 

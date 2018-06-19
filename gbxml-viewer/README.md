@@ -70,14 +70,23 @@ The Ladybug Tools/Spider gbXML Viewer scripts are first steps toward making gbXM
 
 gbXML Viewer is a collection of modular experiments for viewing, examining and validating gbXML files in 3D in your browser.
 
-Objectives
+#### General objectives
 
 * Loads almost instantly
 * Non-modal interface
 * Fast effective workflow: get things done faster
 * Full interactive 3D
 
-### Vision
+#### Coding objectives
+
+* Files are no more than a few hundred lines
+* Code is simple, plain-vanilla JavaScript
+* Every JavaScript file has its own name space so you can quickly identify the location of variables and functions
+* Every module has a descriptive read me file
+* Every JavaScript file has an accompanying standalone HTML file for testing purposes
+* All revisions are always available and runnable via GitHub pages with a click of a button
+
+### Vision and engineering objectives
 
 * Helping students, clients and non-AEC peeps gain access BIM data easily, quickly and freely
 * Facilitating the transfer of data between design programs and analysis programs

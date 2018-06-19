@@ -57,6 +57,11 @@ needs combining with this read me
 
 ## Change Log
 
+### 2018-06-19 ~ Theo
+
+* Continue cleanup and moving function to gv-cor.js
+* File dialog now also opens files that are *not* gbXML files and displays these in the right menu
+
 ### 2018-06-10 ~ Theo
 
 R14.2

@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-06-19" >
-<title>'Aragog' gbXML Viewer R14.4</title>
+<title>'Aragog' gbXML Viewer R14 REP Reports</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
 </head>
@@ -30,7 +30,7 @@
 			left menu / click to move
 		</div>
 
-		<div id = "zzCORdivMenuContents" >
+		<div id = "CORdivMenuContents" >
 
 			<details open >
 
@@ -47,7 +47,7 @@
 				<div id=divRowButtonsStyle ></div>
 
 				<div id=CORdragArea class=dragDropArea >
-					drag & drop gbXML and other files here<br>
+					drag & drop gbXML or other files here<br>
 					or <input type = "file" id = "inpFile" onchange="COR.openFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md>?</a>
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
@@ -58,123 +58,26 @@
 					<div id = "CORdivSampleGalleries" ></div>
 				</div>
 
-					<!--
-
-						<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
-						gbXML.org
-					</button>
-
-					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-						onclick = loadGallery(this) >
-						Samples1
-					</button>
-
-					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick = loadGallery(this) >
-					Samples2
-				</button>
-
-				<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-				onclick = loadGallery(this) >
-				Build Well
-			</button>
-		-->
-
-				<hr>
-
 			</details>
-
-
 
 			<details open >
 
 				<summary title="the primary viewer tools are here" >Features</summary>
 
-				<button id=CORbutSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-set-settings/gv-set.js')
-					title="Update colors, explode models and adjust viewing viewing parameters" >
-				Settings</button>
-
-				<button id=CORbutMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
-					title ="Locate, identify and display all the elements and attributes in a gbXML" >
-				Reports</button>
-
-				<button id=CORbutMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-num-numbers/gv-num.js')
-					title="matters of interest" >
-				Numbers</button>
-
-				<button id=CORbutIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-iss-issues/gv-iss.js')
-					title="Highlight duplicate items and areas of concern in a gbXML file" >
-				Issues</button>
-
-				<button id=butSaveChanges class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-sav-save-changes/gv-sav.js')
-					title="Save time with gbXML files that are frequently updated" >
-				Changes</button>
-
-				<hr>
+				<p>
+					<button id=CORbutMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+						onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
+						title="" >
+					Reports</button>
+				</p>
 
 			</details>
 
 
 			<div id = "CORdivMenuItems" ></div>
 
-			<!--
-			<details>
-
-				<summary>Things to Try</summary>
-
-
-				<p><small><i>More modules are just waiting to be upgraded</i></small></p>
-
-
-				<button id=butFirstPersonCamera class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-cam-first-person-camera/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
-				first person camera</button>
-
-
-				<button id=butAnalemma class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
-					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-					const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-ana-sun-path-analemma/gv-ana.js'; " title='Let a little Sunshine into you life' >
-				sun-path / analemma</button>
-
-				<button id=butSunRange class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
-				const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-ran-sun-range/gv-ran.js'; " title='Let many Suns into you life' >
-				sun-range</button>
-
-				<button id=butModuleExplorer class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-exp-module-explorer/gv-exp.js';" >
-				Module Explorer
-				</button>
-
-				<button id=butMenuTemplate class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-tmp-template/gv-tmp.js';" >
-					gbXML Viewer Menu Template
-				</button>
-
-
-				<button id=butScreenCapture class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
-				screen capture </button>
-
-
-			</details>
-			-->
 
 			<details>
-
-				<!--  move to a gv-ftr.js ?? -->
 
 				<summary>Footer</summary>
 
@@ -208,6 +111,8 @@
 
 	<div id = "CORdivMenuInWorld" title="This is called the 'in-world menu'" >
 
+		<div id = "divTitle" ></div>
+
 		<p id = "CORmenuInWorldContents" ></p>
 
 		<div id=CORdivLog ></div>
@@ -234,8 +139,6 @@
 
 	COR.initCore();
 	THR.initThree();
-
-	CTX.initHeadsUp();
 	THR.animate();
 
 	initApp(); // loads default gbXML
@@ -251,8 +154,7 @@
 			<a href = "" >${title}</a>
 		</h2>`;
 
-		// move to a gv-sty.js ??
-
+		// menu theming
 		let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
 		color = color ? color : 'khaki';
 		stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
@@ -272,13 +174,14 @@
 
 		divRowButtonsStyle.innerHTML = txt;
 
+
 		// load a default file / great for testing
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
 		CORinpFilePath.value = thrFilePath;
 
-		COR.url = CORinpFilePath.value ? CORinpFilePath.value : COR.url; // for testing
+		COR.url = CORinpFilePath.value ? CORinpFilePath.value : COR.url;
 
 		if ( location.hash && location.hash.endsWith( '.xml') ) {
 
@@ -301,11 +204,6 @@
 
 		THR.controls.enableKeys = false;
 
-	}
-
-
-
-	function onloadThreejs() { // any need?
 
 	}
 

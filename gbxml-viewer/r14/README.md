@@ -13,21 +13,24 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 [Aragog gbXML Viewer]( https://github.com/ladybug-tools/spider "Source code on GitHub" ) is a collection of [free, open source]( https://opensource.guide/ "Read all about it at OpenSource Guides" ) modular [JavaScript]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript "Callout to Brendan" ) / [WebGL]( https://www.khronos.org/webgl/ "Tip of the hat to Ken Russell" ) / [Three.js]( https://threejs.org/ "Hi Mr.doob" ) experiments hosted on [GitHub]( https://github.com/about "Beep for where the geek peeps keep" ) for viewing, validating and editing [gbXML]( http://gbxml.org "Where's your schema today?" ) files in 3D in your browser. gbXML is an industry supported file format for sharing building information between numerous building design software tools.
 
-### Mission
+For more details, see the [gbXML Viewer Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md )
 
-The Ladybug Tools/Spider GbXML Viewer is a collection of small JavaScript files that work together to enable the viewing of [gbXML]( http://www.gbxml.org/ ) files.
+## Release Wish list
 
-The goals for the files include:
+This release is trying to move the effort from a single large monolithic app into a collection of targeted smaller apps.
 
-* Files are no more than a few hundred lines
-* Code is simple, plain-vanilla JavaScript
-* Every JavaScript file has its own name space so you can quickly identify the location of variables and functions
-* Every module has a descriptive read me file
-* Every JavaScript file has an accompanying standalone HTML file for testing purposes
+Each app targets a specific use case. Each app uses its own mix of core scripts.
 
+Benefits include
+* Simpler testing . no longer need to test every module against every module
+* All modules available all the time instead of being brought on board in a length time sequence
 
-## Wish list
+Complications
+* Revision naming, numbering and access become complex operations
 
+Needed
+
+* Some way of gathering all the text edits from all the read me file updates so that you can see what's new today
 
 ## Issues
 
@@ -39,10 +42,13 @@ The goals for the files include:
 
 ## Change Log
 
+### 2018-06-19 ~ Theo
+
+* Updates to cor, iss, rep, set and tmp
 
 ### 2018-06-16 ~ Theo
 
-R14.3 
+R14.3
 * Beginning of a split into multiple experiments
 * All modules for this experiment are in and mostly functioning
 

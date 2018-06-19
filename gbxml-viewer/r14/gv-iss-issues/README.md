@@ -78,6 +78,11 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+### 2018-06-19 ~ Theo
+
+* Adds  number of fixes
+
+
 ### 2018-06-14 ~ Theo
 
 R14.2

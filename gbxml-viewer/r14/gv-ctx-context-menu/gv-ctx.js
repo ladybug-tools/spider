@@ -511,7 +511,6 @@
 
 
 
-
 	///////// Editing Elements after push update button
 
 	CTX.updateSurface = function( id ) {

@@ -111,15 +111,19 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<p>More experiments</p>
 
+			<p><button onclick=ISS.setPopupGeneralCheck(); >General check</button></p>
+
+			<p>Still at a very preliminary stage. Not much serious checking going on yet</p>
+
 			<p><button onclick=ISS.setCheckInclusions(); >Inclusion check</button></p>
 
-			<p id=pInclusions ></p>
+			<p id=pInclusions >Inclusions is a work in progress. Numbers reported are faulty.</p>
 
-			<p><button onclick=ISS.setPopupGeneralCheck(); >General check</button></p>
 
 		</details>`;
 
 	};
+
 
 
 	ISS.setCheckInclusions = function() {
@@ -184,7 +188,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 	ISS.setPopupGeneralCheck = function() {
 
-		let txt = 'nothing here';
+		let txt = 'All lines checked appear to contain valid XML data.';
 		lines = GBX.gbxml.innerHTML.split(/\r\n|\n/);
 
 		for ( i = 0; i< lines.length; i++ ) {
@@ -218,6 +222,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			CORdivItemsRight.innerHTML =
 			`
 				<h3>General Check</h3>
+				<p>Lines checked: ${lines.length.toLocaleString()}</p>
 				<div id=ISSdivCheckText ></div>
 			`;
 
@@ -228,6 +233,8 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 		}
 
 	}
+
+
 
 	////////// Metadata
 
@@ -311,7 +318,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<textArea id=ISStxtAttributesMissing style="height:300px;width:100%;" ></textArea>
 
-			<button onclick=SEL.surfaceChanges.addAttributesMissing=ISS.surfaceChanges.addAttributesMissing; >Update save changes file</button>
+			<button onclick=CTX.surfaceChanges.addAttributesMissing=ISS.surfaceChanges.addAttributesMissing; >Update save changes file</button>
 		`;
 
 		CORdivMenuRight.style.display = 'block';
@@ -630,12 +637,12 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 			<hr>
 
-			<h3>Save changes file for duplicate surfaces</h3>
+			<h3>Save changes file for duplicate adjacent spaces</h3>
 			<p><i>values below should start to be correct quite soon<i></p>
 			<textArea id=ISStxtDuplicateAdjacentSpaces style="height:300px;width:100%;" ></textArea>
 
 			<p>
-				<button onclick=SEL.surfaceChanges.editDuplicateAdjacentSpaces.push(...ISS.surfaceChanges.editDuplicateAdjacentSpaces) >Update save changes file</button>
+				<button onclick=CTX.surfaceChanges.editDuplicateAdjacentSpaces=[];CTX.surfaceChanges.editDuplicateAdjacentSpaces.push(...ISS.surfaceChanges.editDuplicateAdjacentSpaces) >Update save changes file</button>
 
 				<button onClick=butSaveChanges.click() > View current changes</button>
 			</p>
@@ -674,7 +681,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	ISS.setPopupPanelDuplicateAdjacentSpaces = function(){
 
 		if ( !ISS.surfaceChanges.editDuplicateAdjacentSpaces ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces = []; };
-		//if ( !SEL.surfaceChanges.editDuplicateAdjacentSpaces ) { SEL.surfaceChanges.editDuplicateAdjacentSpaces = []; };
+		//if ( !CTX.surfaceChanges.editDuplicateAdjacentSpaces ) { CTX.surfaceChanges.editDuplicateAdjacentSpaces = []; };
 
 		let txt = '';
 		let color = 'yellow';
@@ -1098,7 +1105,8 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<textArea id=ISStxtDuplicateSurfaces style="height:300px;width:100%;" ></textArea>
 
 			<p>
-				<button onclick=SEL.surfaceChanges.deleteDuplicateSurfaces.push(...ISS.surfaceChanges.deleteDuplicateSurfaces) >Update save changes file</button>
+				<button onclick=CTX.surfaceChanges.deleteDuplicateSurfaces=[];CTX.surfaceChanges.deleteDuplicateSurfaces.push(...ISS.surfaceChanges.deleteDuplicateSurfaces) >
+					Update save changes file</button>
 
 				<button onClick=butSaveChanges.click() >View current changes</button>
 			</p>
@@ -1483,6 +1491,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 	};
 
 
+
 	ISS.setPopupCadObjectIds = function() {
 
 		CORdivItemsRight.innerHTML =
@@ -1518,7 +1527,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 			<textArea id=ISStxtSurfacesUndefinedCadId style="height:300px;width:100%;" ></textArea>
 
 			<p>
-				<button onclick=SEL.surfaceChanges.CADObjectId=ISS.surfaceChanges.CADObjectId >Update save changes file</button>
+				<button onclick=CTX.surfaceChanges.CADObjectId=ISS.surfaceChanges.CADObjectId >Update save changes file</button>
 
 				<button onClick=butSaveChanges.click(); > View current changes</button>
 			</p>
@@ -2336,7 +2345,7 @@ THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rng
 
 		if ( !proceed ){ return; }
 
-		if ( !SEL.surfaceChanges.deletes ) { SEL.surfaceChanges.deletes = []; }
+		if ( !CTX.surfaceChanges.deletes ) { CTX.surfaceChanges.deletes = []; }
 
 		surfacesGbxml = GBX.gbxml.getElementsByTagName( "Surface" );
 

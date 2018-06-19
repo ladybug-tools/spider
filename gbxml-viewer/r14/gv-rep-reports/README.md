@@ -102,6 +102,10 @@ The intent is that you are not having to switch back and forth between left and 
 
 ## Change Log
 
+### 2018-06-19 ~ Theo
+
+* Add gv-rep.html - to help with testing and enhancing
+
 ### 2018-06-09 ~ Theo
 
 R14.2

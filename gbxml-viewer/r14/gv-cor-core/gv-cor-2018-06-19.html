@@ -5,13 +5,16 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-06-19" >
-<title>'Aragog' gbXML Viewer R14.4</title>
+<meta name = "date" content = "2018-06-05" >
+<title>'Aragog' gbXML Viewer R14.3 COR Core</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<!--
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+-->
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
 <script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
@@ -30,7 +33,7 @@
 			left menu / click to move
 		</div>
 
-		<div id = "zzCORdivMenuContents" >
+		<div id = "xxxdivMenuContents" >
 
 			<details open >
 
@@ -47,8 +50,8 @@
 				<div id=divRowButtonsStyle ></div>
 
 				<div id=CORdragArea class=dragDropArea >
-					drag & drop gbXML and other files here<br>
-					or <input type = "file" id = "inpFile" onchange="COR.openFile(this);" ><br>
+					drag & drop gbXML files here<br>
+					or <input type = "file" id = "inpFile" onchange="COR.openGbxmlFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md>?</a>
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
 					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
@@ -92,27 +95,27 @@
 				<summary title="the primary viewer tools are here" >Features</summary>
 
 				<button id=CORbutSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-set-settings/gv-set.js')
+					onclick= loadScript('../gv-set-settings/gv-set.js')
 					title="Update colors, explode models and adjust viewing viewing parameters" >
 				Settings</button>
 
 				<button id=CORbutMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
+					onclick= loadScript('../gv-rep-reports/gv-rep.js')
 					title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
 				<button id=CORbutMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-num-numbers/gv-num.js')
+					onclick= loadScript('../gv-num-numbers/gv-num.js')
 					title="matters of interest" >
 				Numbers</button>
 
 				<button id=CORbutIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-iss-issues/gv-iss.js')
+					onclick= loadScript('../gv-iss-issues/gv-iss.js')
 					title="Highlight duplicate items and areas of concern in a gbXML file" >
 				Issues</button>
 
 				<button id=butSaveChanges class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-sav-save-changes/gv-sav.js')
+					onclick= loadScript('../gv-sav-save-changes/gv-sav.js')
 					title="Save time with gbXML files that are frequently updated" >
 				Changes</button>
 
@@ -173,8 +176,6 @@
 			-->
 
 			<details>
-
-				<!--  move to a gv-ftr.js ?? -->
 
 				<summary>Footer</summary>
 
@@ -251,8 +252,6 @@
 			<a href = "" >${title}</a>
 		</h2>`;
 
-		// move to a gv-sty.js ??
-
 		let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
 		color = color ? color : 'khaki';
 		stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
@@ -271,8 +270,6 @@
 		}
 
 		divRowButtonsStyle.innerHTML = txt;
-
-		// load a default file / great for testing
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 
@@ -304,8 +301,42 @@
 	}
 
 
+	// still experimenting...
 
-	function onloadThreejs() { // any need?
+	COR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
+
+		location.hash = CORinpFilePath.value;
+
+		const thrFilePath = CORinpFilePath.value;
+		localStorage.setItem('thrFilePath', thrFilePath );
+
+	};
+
+
+
+	function loadScript( source ){ // add buttonId?
+
+		COR.resetLeftMenu();
+		const script = document.head.appendChild( document.createElement( 'script' ) );
+		script.src = source ;
+
+		script.onload = function() { COR.setMenuButtonsClass ( CORdivMenuItems ); }
+
+	}
+
+
+
+	function ccconloadThreejs() {
+
+		console.log( 'onloadThreejs', 23);
+		CORdivLog.innerHTML += '<br>time in milliseconds to load: ' + ( Date.now() - COR.timeStart );
+
+		GBX.colors = GBX.colorsDefault;
+		GBX.setAllVisible();
+
+		HUD.setMenuOptions(); // gets things really going
+
+		COR.resetLeftMenu();
 
 	}
 

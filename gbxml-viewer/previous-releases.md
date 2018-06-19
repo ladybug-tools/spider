@@ -6,6 +6,16 @@
 
 Below are links to prior releases. Most releases have code that is running. They are linked here to help you understand how this code has grown and morphed. And to prove to you that code is not magic, but it is the product of human imagination and persistent efforts.
 
+
+### [gbXML Viewer R14]( http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-cor-core/gv-cor.html ) ~ 22018-04-02
+
+
+### [gbXML Viewer R13]( http://www.ladybug.tools/spider/gbxml-viewer/r13/gv-app-application/gv-app.html ) ~ 22018-04-02
+
+
+### [gbXML Viewer R12]( http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html ) ~ 2018-03-14
+
+
 ### [gbXML Viewer R11]( http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-app/gv-app.html ) ~ 2018-03-02
 
 
