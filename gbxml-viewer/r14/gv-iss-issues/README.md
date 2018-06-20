@@ -87,6 +87,7 @@ ISS14.0
 * Add missing CAD Ids to general check
 * Fix Opening Type Invalid issues
 * Fixes to Undefined CAD opbect IDs / but workflow needs more work
+* Passes jsHint
 
 ### 2018-06-19 ~ Theo
 
