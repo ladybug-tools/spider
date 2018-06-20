@@ -57,7 +57,7 @@ _Latest project here_
 
 * https://en.wikipedia.org/wiki/Sunshine_duration
 * https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration
-
+* https://github.com/tudelft3d/Solar3Dcity
 
 ## Change Log
 
