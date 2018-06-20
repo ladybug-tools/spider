@@ -19,7 +19,7 @@ _Latest project here_
 
 -->
 
-### [SPEED Rad2Solar Viewer R2]( spider/sandbox/speed-rad2solar-viewer/r2/speed-rad2solar-viewer.html )
+### [SPEED Rad2Solar Viewer R2]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r2/speed-rad2solar-viewer.html )
 * Obtains the list of bitmaps included in a given folder on GitHub
 * Lists the names of the bitmaps with links of each file in the menu
 * Parses the file name string of the bitmap to obtain center point and and normal as floating point Three.js vectors
@@ -34,7 +34,7 @@ _Latest project here_
 
 * Some planes are rotated incorrectly by 90 degrees
 
-### [SPEED Rad2Solar Viewer R1]( spider/sandbox/speed-rad2solar-viewer/r1/speed-rad2solar-viewer.html )
+### [SPEED Rad2Solar Viewer R1]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r1/speed-rad2solar-viewer.html )
 
 * Forked from [Rad Viewer Bitmap R3.1 Speed]( https://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r3-speed/rad-viewer-bitmap.html )
 
