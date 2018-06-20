@@ -33,6 +33,7 @@ _Latest project here_
 #### Issues
 
 * Some planes are rotated incorrectly by 90 degrees
+* Future bitmaps will have suitable sizing data
 
 ### [SPEED Rad2Solar Viewer R1]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r1/speed-rad2solar-viewer.html )
 
