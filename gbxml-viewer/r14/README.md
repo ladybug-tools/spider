@@ -42,6 +42,17 @@ Needed
 
 ## Change Log
 
+### 2018-06-20 ~ Theo
+
+* Updates to gbx, iss
+
+All the features currently in R14 appear to be working as expected. Can now start thinking about adding more features
+* More fixes in issues
+	* Find surfaces inside surfaces
+* Modularizing settings
+* Editing vertices
+
+
 ### 2018-06-19 ~ Theo
 
 * Updates to cor, iss, rep, set and tmp

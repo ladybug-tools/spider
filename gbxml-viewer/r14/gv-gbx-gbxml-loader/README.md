@@ -30,14 +30,13 @@ value='You are now in a GitHub web page view - Click this button to view this re
 		* Requires creating Three.js Triangle and Plane
 	* Add openings as holes to shapes
 	* Adds Edges
-* Zoom to the extents of the model
 * Make all Thee.js meshes visible
 
 
 
 ## Wish list / To Do
 
-* 2018-03-26 ~ Add openings and gbXML data to the GBP object
+* 2018-06-20 ~ Theo gbXML data to the GBX JSON object??
 
 
 
@@ -54,6 +53,14 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 
 ## Change Log
+
+### 2018-06-20 ~ Theo
+
+GBX14.0
+* Add undefined surface type color and set to 0x888888
+* Assign undefined color to surfaces with incorrect surface types
+* Add release number
+* Fixes to gv-gbx.html / but needs more work
 
 ### 2018-06-03 ~ Theo
 

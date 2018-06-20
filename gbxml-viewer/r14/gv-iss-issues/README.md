@@ -78,10 +78,19 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Change Log
 
+### 2018-06-20 ~ Theo
+
+ISS14.0
+* Metadata issues now report 0 missing after fix is done
+* Add release numbering to ISS
+* Add release number to title for question mark in ISS details summary
+* Add missing CAD Ids to general check
+* Fix Opening Type Invalid issues
+* Fixes to Undefined CAD opbect IDs / but workflow needs more work
+
 ### 2018-06-19 ~ Theo
 
 * Adds  number of fixes
-
 
 ### 2018-06-14 ~ Theo
 

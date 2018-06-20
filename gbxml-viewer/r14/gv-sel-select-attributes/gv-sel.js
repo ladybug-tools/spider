@@ -61,7 +61,7 @@
 		//console.log( 'item.divTarget', item.divTarget);
 
 		const selectTarget = item.divTarget.getElementsByTagName( 'select' )[ 0 ];
-		//console.log( 'target', target );
+		//console.log( 'selectTarget', selectTarget );
 
 		selectTarget.oninput = function() {
 
@@ -924,7 +924,7 @@
 		const bbox = new THREE.Box3();
 		meshes.forEach( mesh => bbox.expandByObject ( mesh ) );
 
-		const sphere = bbox.getBoundingSphere();
+		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
 		const center = sphere.center;
 		const radius = sphere.radius;
 		//console.log( 'center * radius', center, radius );

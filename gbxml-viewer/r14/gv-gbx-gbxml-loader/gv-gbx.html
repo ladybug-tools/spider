@@ -6,7 +6,7 @@
 <meta name=description content="Open, view gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-06-04" >
-<title>gbXML Viewer Loader R14</title>
+<title>gbXML Viewer Loader</title>
 <style>
 
 	body { font: 11pt monospace; margin: 0; overflow: hidden; }
@@ -25,7 +25,9 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r92/examples/js/controls/OrbitControls.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
 <script src = "../gv-thr-threejs/gv-thr.js" ></script>
+<script src = "../gv-cor-core/gv-cor.js" ></script>
 <script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
+<script src = "../gv-gal-gallery/gv-gal.js" ></script>
 
 
 	<div id = "divMenu" >
@@ -33,15 +35,16 @@
 		<div id = "divTitle" ></div>
 
 		<p>
-			<button onclick = "controls.autoRotate=!controls.autoRotate;" >rotation</button>
-
-			<button onclick = "zoomObjectBoundingSphere(GBX.surfaceEdges);" >zoomObjectBoundingSphere</button>
+			<!--
+							<button onclick = "controls.autoRotate=!controls.autoRotate;" >rotation</button>
+			-->
+			<button onclick = "THR.zoomObjectBoundingSphere(GBX.surfaceEdges);" >zoomObjectBoundingSphere</button>
 
 		</p>
 
 		<p>
-			<button onclick = "setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, axesHelper ] );" >setSceneDispose</button>
-			<button onclick = "getRenderInfo();" >getRenderInfo</button>
+			<button onclick = "THR.setSceneDispose( [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings, axesHelper ] );" >setSceneDispose</button>
+			<button onclick = "THR.getRenderInfo();" >getRenderInfo</button>
 		</p>
 
 		<p>
@@ -50,6 +53,10 @@
 			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/coventry-university-of-warwick-small.xml' );" >warwick</button>
 			<button onclick = "requestGbxmlFile( '../../../gbxml-sample-files/samples-2/17134-M17.xml' );" >17134-M17</button>
 		</p>
+
+		<div id = "GBXdivSampleGalleries" ></div>
+
+		<div id = "CORdivMenuItems" ></div>
 
 		<hr>
 
@@ -60,6 +67,7 @@
 			</p>
 
 			<div id = "GBXdivLog" ></div>
+			<div id = "CORdivLog" ></div>
 
 		</div>
 
@@ -90,13 +98,15 @@
 		divTitle.innerHTML =
 			`<h2>
 				<a href="${source}" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
-				<a href = "" >${title}</a>
+				<a href = "" >${title} GBX${GBX.release}</a>
 			</h2>
 			<p>
 				${document.head.querySelector( '[name=description]' ).content }
 			</p>`;
 
 		GBX.setCardToggleVisibility( GBXmenuInWorldContents, GBXdivLog );
+
+		GAL.setCardSampleGalleries( GBXdivSampleGalleries );
 
 		requestGbxmlFile( url );
 

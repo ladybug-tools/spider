@@ -2,7 +2,7 @@
 /* globals THREE */
 /* jshint esversion: 6 */
 
-	var GBX = {};
+	var GBX = { release: "14.0"};
 
 	GBX.gbxml = null;
 	GBX.gbjson = null; // xnl converted to json
@@ -28,7 +28,8 @@
 		RaisedFloor: 0x4B417D,
 		SlabOnGrade: 0x804000,
 		FreestandingColumn: 0x808080,
-		EmbeddedColumn: 0x80806E
+		EmbeddedColumn: 0x80806E,
+		Undefined: 0x88888888
 
 	};
 
@@ -151,9 +152,9 @@
 
 			const polyloop = surface.PlanarGeometry.PolyLoop;
 			const vertices = GBX.getVertices( polyloop );
-
+			const color = GBX.colors[ surface.surfaceType ] ? GBX.colors[ surface.surfaceType ] : GBX.colors.Undefined
 			const material = new THREE.MeshPhongMaterial( {
-				color: GBX.colors[ surface.surfaceType ], side: 2, opacity: 0.85, transparent: true } );
+				color: color, side: 2, opacity: 0.85, transparent: true } );
 
 			const shape = GBX.get3dShape( vertices, material, holes );
 			shape.userData.data = surface;

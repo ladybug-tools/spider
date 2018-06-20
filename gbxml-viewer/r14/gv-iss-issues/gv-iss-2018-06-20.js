@@ -1,19 +1,18 @@
-// Copyright 2018 Ladybug Tools authors. MIT License
+/*global
 
+THR, THREE, GBX, ISS, window, document,butSettings, detSettings,divMenuItems,rngOpacity,rngViewExplodeVertical
 
-/*global THREE, THR, GBX, COR, SEL */
-/* jshint esversion: 6 */
+*/
 
 // Copyright 2018 Ladybug Tools authors. MIT License
 
 	//GBX.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 
-	var ISS = { release: '14.0' };
+	var ISS = {};
 	ISS.surfaceChanges = {};
-	ISS.errorsFound = {};
 
-	//var spaceId1;
-	//var spaceId2;
+	var spaceId1;
+	var spaceId2;
 
 	// call at bottom of file
 
@@ -33,7 +32,7 @@
 
 		`<details id = ISSdetIssues open >
 
-			<summary>Issues &nbsp; <a href=#../gv-iss-issues/README.md title="${ISS.release}" >?</a></summary>
+			<summary>Issues &nbsp; <a href=#../gv-iss-issues/README.md>?</a></summary>
 
 			<div id=ISSdetPanelVisibilityToggle ></div>
 
@@ -118,7 +117,7 @@
 
 			<p><button onclick=ISS.setCheckInclusions(); >Inclusion check</button></p>
 
-			<p id=ISSpInclusions >Inclusions is a work in progress. Numbers reported are faulty.</p>
+			<p id=pInclusions >Inclusions is a work in progress. Numbers reported are faulty.</p>
 
 
 		</details>`;
@@ -156,12 +155,12 @@
 
 		}
 
-		ISSpInclusions.innerHTML = 'inclusions found: ' + inclusions.length;
+		pInclusions.innerHTML = 'inclusions found: ' + inclusions.length;
 
 
 		let inclusionText = '';
 
-		for ( let inclusion of inclusions ) {
+		for ( inclusion of inclusions ) {
 
 			const butts1 = ISS.getButtonsSurfaceId( inclusion.s1.userData.data.id);
 			const butts2 = ISS.getButtonsSurfaceId( inclusion.s2.userData.data.id);
@@ -189,7 +188,7 @@
 
 	ISS.setPopupGeneralCheck = function() {
 
-		let txt = '<p>All lines checked appear to contain valid XML data.</p>';
+		let txt = 'All lines checked appear to contain valid XML data.';
 		lines = GBX.gbxml.innerHTML.split(/\r\n|\n/);
 
 		for ( i = 0; i< lines.length; i++ ) {
@@ -218,12 +217,6 @@
 		}
 		//console.log( 'txt', txt );
 
-		if ( ISS.errorsFound ) {
-
-			txt += JSON.stringify( ISS.errorsFound, null, ' ' );
-
-		}
-
 		if ( txt !== '' ) {
 
 			CORdivItemsRight.innerHTML =
@@ -235,11 +228,11 @@
 
 			COR.setRightMenuWide();
 
-			ISSdivCheckText.innerHTML = '<hr>' + txt;
+			ISSdivCheckText.innerText = '***\n' + txt;
 
 		}
 
-	};
+	}
 
 
 
@@ -254,7 +247,7 @@
 		let provided = [];
 		ISS.attributesMissing = [];
 
-		for ( let attribute in GBX.gbjson ) {
+		for ( attribute in GBX.gbjson ) {
 
 			//console.log( 'attribute', attribute );
 
@@ -267,7 +260,7 @@
 		}
 		//console.log( 'provided', provided );
 
-		for ( let attribute of requirements ) {
+		for ( attribute of requirements ) {
 
 			if ( !GBX.gbjson[ attribute ] ) {
 
@@ -334,11 +327,11 @@
 		let txt = '';
 		ISS.surfaceChanges.addAttributesMissing = {};
 
-		for ( let attribute of ISS.attributesMissing ) {
+		for ( attribute of ISS.attributesMissing ) {
 
-			ISS.surfaceChanges.addAttributesMissing[ attribute ] = values[ attribute ];
-			GBX.gbjson[ attribute ] = values[ attribute ];
+			ISS.surfaceChanges.addAttributesMissing[ attribute ] = values[attribute];
 			txt += `<p><input onclick=this.select(); onchange=ISS.setChangesMetadataIssues(this,"${attribute}"); value=${values[attribute]} size=25 > ${attribute} <p>`;
+
 		}
 
 		ISSdivAttributesMissing.innerHTML = txt;
@@ -350,7 +343,7 @@
 
 	ISS.setChangesMetadataIssues = function( that, attribute ) {
 
-		//console.log( 'that', that );
+		console.log( 'that', that );
 
 		if ( attribute ) {
 
@@ -360,9 +353,7 @@
 
 		} else {
 
-			ISStxtAttributesMissing.value =
-				'There are no missing attributes that still need fixing.\n\n' +
-				'Remember to save your changes to a new file.';
+			ISStxtAttributesMissing.value = 'No missing attributes that still need fixing';
 
 		}
 
@@ -689,7 +680,7 @@
 
 	ISS.setPopupPanelDuplicateAdjacentSpaces = function(){
 
-		if ( !ISS.surfaceChanges.editDuplicateAdjacentSpaces ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces = []; }
+		if ( !ISS.surfaceChanges.editDuplicateAdjacentSpaces ) { ISS.surfaceChanges.editDuplicateAdjacentSpaces = []; };
 		//if ( !CTX.surfaceChanges.editDuplicateAdjacentSpaces ) { CTX.surfaceChanges.editDuplicateAdjacentSpaces = []; };
 
 		let txt = '';
@@ -727,12 +718,11 @@
 
 			let buttsSpaces = '';
 
-			for ( let space of surface.spacesFound ) {
+			for ( space of surface.spacesFound ) {
 
 				const txt = space.count > 2 ? 'style=color:red;font-style:italic;font-weight:bold;' : '';
 
-				buttsSpaces += ` <button onclick=ISS.setSpaceAndSurfaceVisible("${space.id}","${surface.id}"); ${txt} >
-					${space.id}</button>`;
+				buttsSpaces += ` <button onclick=ISS.setSpaceAndSurfaceVisible("${space.id}","${surface.id}"); ${txt} >${space.id}</button>`
 
 			}
 
@@ -748,8 +738,8 @@
 				</div>
 				<div style=margin-left:2rem; >${buttsSpaces}</div>
 			</div>`;
-
 			}
+
 
 		ISSdivDuplicateAdjacentSpaces.innerHTML = txt;
 
@@ -853,7 +843,7 @@
 
 		surfacesGbxml = GBX.gbxml.getElementsByTagName( "Surface" );
 
-		for ( let item of namesArray ) {
+		for ( item of namesArray ) {
 
 			surfaceJson = GBX.surfacesJson.find( element => element.Name === item.name );
 
@@ -892,7 +882,92 @@
 
 
 
-	////////// Duplicate Coordinates
+	///////// R12
+
+	ISS.getPanelSurfacesDuplicateAdjacentSpaces = function() { // R12
+
+		const surfaces = GBX.gbjson.Campus.Surface;
+		let count = 0;
+		let contents = '';
+		ISS.surfaceAdjacentsDuplicates = [];
+
+		for ( let surface of surfaces ) {
+
+			const adjacencies = surface.AdjacentSpaceId;
+
+			if ( Array.isArray( adjacencies ) === true && JSON.stringify( adjacencies[ 0 ] ) === JSON.stringify( adjacencies[ 1 ] ) ) {
+
+				ISS.surfaceAdjacentsDuplicates.push( { id: surface.id, cadId: surface.CADObjectId } );
+
+			}
+
+		}
+
+		ISS.surfaceAdjacentsDuplicates.sort( ( aSurf, bSurf ) => {
+			const a = aSurf.cadId;
+			const b = bSurf.cadId;
+			if ( a < b ) {
+				return -1;
+			}
+			if ( a > b ) {
+				return 1;
+			}
+			// items must be equal
+			return 0;
+		} );
+
+
+		for ( let item of ISS.surfaceAdjacentsDuplicates ) {
+			//console.log( 'item', item );
+
+			const surface = surfaces.find( element => element.CADObjectId === item.cadId && element.id === item.id );
+			//console.log( 'surface', surface );
+
+			const height = parseFloat( surface.RectangularGeometry.Height );
+			const width = parseFloat( surface.RectangularGeometry.Width );
+			const surfaceArea = height * width;
+
+			contents +=
+			`<div style=margin-bottom:15px; >` +
+				( ++ count ) +
+				` <button onclick=SEL.setSurfaceVisible(this.innerText); >` + surface.id + `</button>
+				<button onclick=SEL.setSurfaceZoom("` + surface.id + `"); >zoom</button>
+				<button class=toggle onclick=SEL.setSurfaceTypeVisible(this.innerText); >` + surface.surfaceType + `</button><br>`
+				+ ( surface.Name ? `name <i>` + surface.Name + `</i><br>` : `` )
+				+ ( surface.CADObjectId ? `cad object id <button onclick=ISS.setCadIdVisible(` + ( count - 1 ) + `); >` + surface.CADObjectId + `</button><br>` : `` ) +
+				`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
+				` length <i>` + height.toFixed( 3 ) + `</i> width <i>` + width.toFixed( 3 ) + `</i>
+			</div>`;
+
+			surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === item.id );
+			surfaceMesh.material.color.set( '#c080ff' );
+		}
+
+		const txt =
+		`<details>
+
+			<summary >R12 Duplicate Adjacent Space &raquo; ` + count + ` found</summary>
+
+			<p>
+				Surfaces with two adjacent spaces pointing to identical space id. Use with heads-up display.
+			</p>
+
+			<p>
+				<button id=ISSbutDuplicateAdjacent onclick=ISS.setDuplicateAdjacentSpaceVisibleToggle(); >toggle all duplicate adjacent spaces</button>
+			</p>
+			<hr>
+
+			<div >` + contents + `</div>
+
+		</details>`;
+
+		return txt;
+
+	};
+
+
+
+	////////// Duplicate Coordinates  R13
 
 	ISS.setPanelDuplicateCoordinates = function( target ) { //R13
 
@@ -1089,16 +1164,16 @@
 	ISS.setPopupPanelDuplicateCoordinates = function(){
 
 		let txt = '';
-		if ( !ISS.surfaceChanges.deleteDuplicateSurfaces ) { ISS.surfaceChanges.deleteDuplicateSurfaces = []; }
+		if ( !ISS.surfaceChanges.deleteDuplicateSurfaces ) { ISS.surfaceChanges.deleteDuplicateSurfaces = []; };
 
 		let color = 'yellow';
 
-		for ( let surfacesJ of ISS.duplicateCoordinates2 ) {
+		for ( surfacesJ of ISS.duplicateCoordinates2 ) {
 
 			color = color === 'yellow' ? 'pink' : 'yellow';
 			//console.log( 'color', color );
 
-			for ( let surface of surfacesJ ) {
+			for ( surface of surfacesJ ) {
 
 				const check = surface.ISSdeleteDuplicateSurface ? 'checked' : '';
 
@@ -1150,6 +1225,156 @@
 
 
 
+	///// R12
+
+	ISS.getPanelSurfacesDuplicateCoordinates = function() { // R12
+
+		const surfacePolyLoops = [];
+		const surfaceIds = [];
+		surfaceCoordinateDuplicates = [];
+
+		let spaceIdOther1;
+		let spaceIdOther2;
+
+		const surfaces = GBX.surfacesJson;
+		const b = '<br>';
+
+		let count = 0;
+		let flowContent =
+			'<p>' +
+
+				'<button id=butDuplicatesCoordinates onclick=ISS.setSurfaceArrayVisibleToggle(butDuplicatesCoordinates,surfaceCoordinateDuplicates); >toggle all duplicates</button>' +
+
+				'<button onclick=CTX.saveFile(); title="creates a new file with the changes" >save edits</button>' +
+
+				'</p>' +
+				'<hr>';
+
+		let spaceId;
+
+		for ( let i = 0; i <  surfaces.length; i++ ) {
+
+			surface = surfaces[ i ]
+			points = JSON.stringify( surface.PlanarGeometry.PolyLoop.CartesianPoint );
+			index = surfacePolyLoops.indexOf( points );
+
+			if ( index < 0 ) {
+
+				surfacePolyLoops.push( points );
+				surfaceIds.push( i );
+
+			} else {
+
+				surfaceOther = surfaces[ surfaceIds[ index ] ];
+				surfaceCoordinateDuplicates.push( surface.Name );
+
+				//console.log( 'surface', surface );
+				//console.log( 'surfaceOther', surfaceOther );
+
+				adjacency = surface.AdjacentSpaceId ? surface.AdjacentSpaceId : '';
+
+				if ( adjacency ) {
+
+					if ( Array.isArray( adjacency ) === true ) {
+
+						spaceId1 = surface.AdjacentSpaceId[ 0 ].spaceIdRef;
+						spaceId2 = surface.AdjacentSpaceId[ 1 ].spaceIdRef;
+
+					} else {
+
+						spaceId1 = surface.AdjacentSpaceId.spaceIdRef;
+
+					}
+
+				}
+
+				adjacencyOther = surfaceOther.AdjacentSpaceId ? surfaceOther.AdjacentSpaceId : '';
+
+				if ( adjacencyOther ) {
+
+					if ( Array.isArray( adjacencyOther ) === true ) {
+
+						spaceIdOther1 = surfaceOther.AdjacentSpaceId[ 0 ].spaceIdRef;
+						spaceIdOther2 = surfaceOther.AdjacentSpaceId[ 1 ].spaceIdRef;
+
+
+					} else {
+
+						spaceIdOther1 = surfaceOther.AdjacentSpaceId.spaceIdRef;
+
+					}
+
+				}
+
+				flowContent +=
+					'<div id= "divSurface' + surface.id +'" >' +
+						count + '. id: <button onclick=SEL.setSurfaceVisible(this.innerText); >' + surface.id + '</button>' +
+							'<button onclick=SEL.setSurfaceZoom("' + surface.id + '"); >zoom</button>' + b +
+						'surface type: <button class=toggle onclick=SEL.setSurfaceTypeVisible(this.innerText); >' + surface.surfaceType + '</button>: ' + b +
+						( surface.Name ? 'name: ' + surface.Name + b : '' ) +
+						( surface.constructionIdRef ? 'construction id ref: ' + surface.constructionIdRef + b : '' ) +
+						( spaceId1 ? 'space:  <button onclick=ISS.showSpace(spaceId1); >' + spaceId1 + '</button>' + b : '' ) +
+						( spaceId2 ? 'space:  <button onclick=ISS.showSpace(spaceId2); >' + spaceId2 + '</button>' + b : '' ) +
+						( surface.CADObjectId ?
+							'<button onclick=ISS.setCadIdVisible2("' + encodeURI( surface.CADObjectId ) + '"); >cad object id: ' + surface.CADObjectId + '</button>' + b
+							: ''
+						) +
+						'delete: <button onclick=ISS.deleteSurface(this.innerText) >' + surface.id + '</button>' +
+						'</div>' +
+						'<hr>' +
+						'<div id= "divSurface' + surfaceOther.id +'" >' +
+						'id of duplicate: <button onclick=SEL.setSurfaceVisible(this.innerText); >' + surfaceOther.id + '</button>' +
+							'<button onclick=SEL.setSurfaceZoom("' + surfaceOther.id + '"); >zoom</button>' + b +
+						'surface type: <button class=toggle onclick=SEL.setSurfaceTypeVisible(this.innerText); >' + surfaceOther.surfaceType + '</button>: ' + b +
+						( surfaceOther.Name ? 'name: ' + surfaceOther.Name + b : '' ) +
+						( surfaceOther.constructionIdRef ? 'construction id ref: ' + surfaceOther.constructionIdRef + b : '' ) +
+						( spaceIdOther1 ? 'space:  <button onclick=ISS.showSpace(spaceIdOther1); >' + spaceIdOther1 + '</button>' + b : '' ) +
+						( spaceIdOther2 ? 'space:  <button onclick=ISS.showSpace(spaceIdOther2); >' + spaceIdOther2 + '</button>' + b : '' ) +
+						( surfaceOther.CADObjectId ?
+							'<button onclick=ISS.setCadIdVisible2("' + encodeURI( surfaceOther.CADObjectId ) + '"); >cad object id: ' + surfaceOther.CADObjectId + '</button>' + b
+							: ''
+						) +
+						'delete: <button onclick=ISS.deleteSurface(this.innerText); >' + surfaceOther.id + '</button>' +
+
+					'</div>' +
+					'<hr style="border:none;border-top: medium double #333;" >' + b;
+
+				count ++;
+
+			}
+
+		}
+
+		for ( let child of GBX.surfaceMeshes.children ) {
+
+			if ( !child.userData.data ) { continue; }
+
+			if ( surfaceCoordinateDuplicates.includes( child.userData.data.Name ) && child.material.color ) { child.material.color.set( '#ffff00' ); }
+
+		}
+
+		//ISSsumDuplicateSurfaces.innerHTML= '';
+		//divCRDInfo.innerHTML =
+		//ISSdivDuplicateSurfaces.innerHTML= flowContent;
+
+		const txt =
+
+		`<details>
+
+			<summary id = "ISSsumDuplicateSurfaces" >R12 Duplicate Coordinates &raquo; ` + count + `</summary>
+
+			<div >Two surfaces with identical coordinates</div>
+
+			<divs >` + flowContent + `</div>
+
+		</details>`;
+
+		return txt;
+
+	};
+
+
+
 	////////// Undefined CAD ID
 
 	ISS.setPanelSurfacesUndefinedCadId = function( target ) {
@@ -1158,7 +1383,7 @@
 		ISS.surfacesUndefinedId = GBX.surfacesJson.filter( surfaceJson => surfaceJson.CADObjectId === undefined || surfaceJson.CADObjectId === '' );
 		ISS.surfacesUndefinedId.forEach( surfaceJson => surfaceJson.addCADObjectId = true );
 
-		for ( let surfaceJson of ISS.surfacesUndefinedId) {
+		for ( surfaceJson of ISS.surfacesUndefinedId) {
 
 			if ( ISS.CadTypes.indexOf( surfaceJson.surfaceType ) < 0 ) {
 
@@ -1218,19 +1443,18 @@
 
 
 
+
 	ISS.getCadObjectsTypes = function() {
 		// combine with others
 		const surfaces = GBX.gbjson.Campus.Surface;
 		const cadIds = [];
-		ISS.errorsFound.missingCadIds = [];
 
 		for ( let surface of surfaces ) {
+
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
 				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
-
-				ISS.errorsFound.missingCadIds.push( surface.id );
 
 				continue;
 
@@ -1275,6 +1499,7 @@
 			<h3>Fix Surfaces with undefined CAD object IDs</h3>
 
 			<p><small>Surfaces with undefined CAD Object ID. The default fix is to add a CAD Id that is the same as the surface type</small></p>
+
 
 			<div id=ISSdivCADObjectId ></div>
 
@@ -1416,13 +1641,12 @@
 	ISS.setChangesCadObjectIds = function() {
 		//console.log( 'ISS.surfacesUndefinedId ', ISS.surfacesUndefinedId  );
 
-		for ( let surface of ISS.surfacesUndefinedId ) {
+		for ( surface of ISS.surfacesUndefinedId ) {
 
 			if ( surface.addCADObjectId ) {
 
 				ISS.surfaceChanges.CADObjectId.push( {name: surface.Name, CADObjectId: surface.CADObjectIdCandidate } );
-				surface.CADObjectId = surface.CADObjectIdCandidate;
-				console.log( 'surface', surface );
+
 			}
 
 		}
@@ -1446,7 +1670,7 @@
 
 		surfacesGbxml = GBX.gbxml.getElementsByTagName( "Surface" );
 
-		for ( let item of idsArray ) {
+		for ( item of idsArray ) {
 
 			surfaceJson = GBX.surfacesJson.find( element => element.Name === item.name );
 
@@ -1462,8 +1686,9 @@
 
 				console.log( 'id', id,'\nsurface to edit', surfaceXml );
 
+
 				// edit gbjson
-				surfaceJson.CADObjectId = item.CADObjectId;
+				surfaceJson[ "CADObjectId" ] = item.CADObjectId;
 
 				// edit three.js
 				const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === id );
@@ -1553,7 +1778,7 @@
 
 						if ( ISS.surfacesVertexClose.indexOf( surface ) === -1 ) {
 
-							ISS.surfacesVertexClose.push( surface );
+							ISS.surfacesVertexClose.push( surface )
 							//surface.visible = true;
 							//console.log( 'vertex', vertex );
 						}
@@ -1617,7 +1842,7 @@
 
 		ISS.OpeningVertices4Plus  = items;
 
-		for ( let opening of GBX.surfaceOpenings.children ) {
+		for ( opening of GBX.surfaceOpenings.children ) {
 
 			if ( opening.userData.data.PlanarGeometry.PolyLoop.CartesianPoint.length > 4 ) {
 				opening.Vertices = opening.userData.data.PlanarGeometry.PolyLoop.CartesianPoint.length;
@@ -1663,11 +1888,13 @@
 
 		`<details>
 
-			<summary>Surface Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
+			<summary id = "ISSsumSurfaceTypeInvalid" >Surface Type Invalid &raquo; ` + ISS.surfaceTypeInvalid.length + ` found</summary>
 
 			<p><small>Surfaces with undefined surface type</small></p>
 
 			<div id=ISSdivSurfaceTypeInvalid ></div>
+
+			<button onclick=SEL.setSurfaceZoom(ISSselSurfaceTypeInvalid.value); title="zoom into just this surface" >zoom</button>
 
 			<hr>
 
@@ -1725,6 +1952,8 @@
 
 			<div id=ISSdivOpeningTypeInvalid ></div>
 
+			<button onclick=SEL.setSurfaceZoom(ISSselOpeningTypeInvalid.value); title="zoom into just this surface" >zoom</button>
+
 			<hr>
 
 		</details>`;
@@ -1733,15 +1962,16 @@
 		item.attribute = 'IdOpeningTypeInvalid';
 		item.divAttributes = 'ISSdivOpeningTypeInvalidAttributes';
 		item.divTarget = document.getElementById( 'ISSdivOpeningTypeInvalid' );
-		item.element = 'Opening';
+		item.element = 'Surface';
 		item.name = 'itemOpeningTypeInvalid';
 		item.optionValues = ISS.openingTypeInvalid.map( item => [ item.id, item.Name, item.CADObjectId ] );
 		item.parent = ISS.openingTypeInvalid;
-		item.placeholder = 'opening id';
+		item.placeholder = 'surface id';
 		item.selItem = 'ISSselOpeningTypeInvalid';
 
 		SEL.itemOpeningTypeInvalid = SEL.getElementPanel( item );
 		ISSselOpeningTypeInvalid.selectedIndex = 0;
+		//ISSselOpeningTypeInvalid.click();
 
 	};
 
@@ -1792,6 +2022,8 @@
 
 			<div id=ISSdivAdjacentSpaceInvalid ></div>
 
+			<button onclick=SEL.setSurfaceZoom(ISSselAdjacentSpaceInvalid.value); title="zoom into just this surface" >zoom</button>
+
 			<hr>
 
 		</details>`;
@@ -1834,7 +2066,7 @@
 				if ( surface.userData.data.id !== surface2.userData.data.id && surface.position === surface2.position &&
 					surface.geometry.boundingBox.containsBox( surface2.geometry.boundingBox ) ) {
 
-					ISS.surfacesInside.push( [ surface, surface2 ] );
+					ISS.surfacesInside.push( [ surface, surface2 ])
 					surface2.visible = true;
 				}
 
@@ -1873,7 +2105,7 @@
 				GBX.surfaceOpenings.visible = false;
 				GBX.surfaceMeshes.children.forEach( element => element.visible = false );
 
-				for ( let surface of surfaceArray ) {
+				for ( surface of surfaceArray ) {
 
 					SEL.setSurfaceVisibleToggle( surface.id );
 
@@ -1954,7 +2186,7 @@
 
 	/////////
 
-	ISS.xxxxxupdateSurfaceUndefinedCadIdAttributes = function() {
+	ISS.updateSurfaceUndefinedCadIdAttributes = function() {
 
 		ISSdivSurfacesUndefinedAttributes.innerHTML = ISS.getGbjsonAttributes( ISS.surfacesUndefinedId[ ISSselSurfaceUndefined.selectedIndex ] );
 
@@ -1966,7 +2198,7 @@
 
 
 
-	ISS.xxxxxupdateSurfaceTinyAttributes = function() {
+	ISS.updateSurfaceTinyAttributes = function() {
 
 		const surface = ISS.surfacesTiny[ ISSselSurfaceTiny.selectedIndex ];
 		height = parseFloat( surface.RectangularGeometry.Height );
@@ -1981,7 +2213,7 @@
 			'area: ' + area.toLocaleString() + '<br>' +
 		'';
 
-		if ( window.HUD !== undefined ) {
+		if ( window.HUD != undefined ) {
 
 			HUD.updateSurface( ISSselSurfaceTiny.value );
 			HUD.setHeadsUp();
@@ -1992,7 +2224,7 @@
 
 
 
-	ISS.xxxxxupdateSurfaceVertexCloseAttributes = function() {
+	ISS.updateSurfaceVertexCloseAttributes = function() {
 
 		const surface = ISS.surfacesVertexClose[ ISSselSurfaceVertexClose.selectedIndex ];
 		const vertices = surface.geometry.vertices;
@@ -2028,7 +2260,7 @@
 
 
 
-	ISS.xxxxsetPanelSurfaceTypeAttributes = function( id ) {
+	ISS.setPanelSurfaceTypeAttributes = function( id ) {
 
 		opening = ISS.openingTypeInvalid.find( item => item.id === id );
 
@@ -2060,9 +2292,7 @@
 
 		ISSdivAdjacentSpaceInvalid.innerHTML = SEL.traverseGbjson( surface ).attributes;
 
-	};
-
-
+	}
 
 	//////////
 
@@ -2071,7 +2301,7 @@
 
 		let attributes = '';
 
-		for ( let property in obj ) {
+		for ( property in obj ) {
 
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
@@ -2098,7 +2328,7 @@
 
 			}
 
-		}
+		};
 
 		return attributes;
 
@@ -2119,7 +2349,7 @@
 
 		surfacesGbxml = GBX.gbxml.getElementsByTagName( "Surface" );
 
-		for ( let name of namesArray ) {
+		for ( name of namesArray ) {
 
 			// remove from gbxml
 			surfaceJson = GBX.surfacesJson.find( item => item.Name === name );
