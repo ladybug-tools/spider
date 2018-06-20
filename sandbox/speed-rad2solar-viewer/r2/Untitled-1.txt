@@ -1,0 +1,26 @@
+links = {};
+
+
+links[ "Shade.shade-2.fin" ] = { "polygon": "Shade.shade-2.fin", "bitmap": "-10.159_-15.6972_1.524_-1_0_0.bmp" };
+links[ "Shade.shade-3.fin" ] = { "polygon": "Shade.shade-3.fin", "bitmap": "-15.24_0_1.524_-1_0_0.bmp" };
+
+
+links = {
+"Shade.shade-2.fin": { "polygon": "Shade.shade-2.fin", "bitmap": "-10.159_-15.6972_1.524_-1_0_0.bmp" },
+"Shade.shade-3.fin": { "polygon": "Shade.shade-3.fin", "bitmap": "-15.24_0_1.524_-1_0_0.bmp" }
+"": { "polygon": "", "bitmap": "0_-15.24_1.524_0_-1_0.bmp" },
+"": { "polygon": "", "bitmap": "0_-15.6972_2.667_0_0_1.bmp" },
+"Shade.shade-9.ground": { "polygon": "Shade.shade-9.ground", "bitmap": "0_0_0_0_0_1.bmp" },
+"": { "polygon": "", "bitmap": "0_0_3.048000 _0_0_1.bmp" },
+"": { "polygon": "", "bitmap": "0_15.24_1.524_0_1_0.bmp" },
+"": { "polygon": "", "bitmap": "10.159_-15.6972_1.524_1_0_0.bmp" },
+"": { "polygon": "", "bitmap": "15.24_0_1.524_1_0_0.bmp" },
+"": { "polygon": "", "bitmap": "18.288_24.384_7.62_-1_0_0.bmp" },
+"": { "polygon": "", "bitmap": "24.384_18.288_7.62_0_-1_0.bmp" },
+"": { "polygon": "", "bitmap": "24.384_24.384_15.24_0_0_1.bmp" },
+"": { "polygon": "", "bitmap": "24.384_30.48_7.62_0_1_0.bmp" },
+"": { "polygon": "", "bitmap": "30.48_24.384_7.62_1_0_0.bmp" },
+"": { "polygon": "", "bitmap": "" },
+};
+
+

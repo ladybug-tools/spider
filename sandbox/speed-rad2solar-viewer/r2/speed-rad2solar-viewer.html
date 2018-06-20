@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-05-06" >
+<title>SPEED Rad2Solar Viewer R2</title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(); >fetch test case 1</button>
+		</p>
+
+		<div id = "divLog" ></div>
+
+	</div>
+
+<script>
+
+	var renderer, camera, controls, scene, axesHelper;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		//const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		const title = document.title;
+
+		divTitle.innerHTML =
+		`<h1>
+			<a href="" >${title}</a>
+		</h1>`;
+
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+		renderer.setPixelRatio( window.devicePixelRatio );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( -100, -100, 100 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.autoRotate = true;
+
+		scene = new THREE.Scene();
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		renderer.domElement.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+		window.addEventListener( 'orientationchange', onWindowResize, false );
+
+		axesHelper = new THREE.AxesHelper( 100 );
+		scene.add( axesHelper );
+
+		geometry = new THREE.BoxGeometry( 50, 50, 50 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		//scene.add( mesh );
+
+	}
+
+
+
+	function fetchGitHubFolderContents() {
+
+		url = 'https://api.github.com/repos/ladybug-tools/spider/contents/sandbox/speed-rad2solar-viewer/test-cases/test-case-1';
+
+		//console.log(url );
+
+		divLog.innerHTML =
+
+		`<details id = detGallery  open >
+
+			<summary>Gallery</summary>
+
+			<div id=divGallery ></div>
+
+			<hr>
+
+		</details>`;
+
+		var myRequest = new Request( url );
+
+		fetch( myRequest )
+			.then( response => response.json() )
+			.then( json => callbackGitHubMenu( json ) );
+
+		}
+
+
+
+	function callbackGitHubMenu ( files ) {
+
+		const urlGitHubSource = 'https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/test-cases/test-case-1/';
+		const urlGitHubPage = 'https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-rad2solar-viewer/test-cases/test-case-1/';
+		const iconGitHubMark = '<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>';
+
+		let txt = '';
+
+		let textures = [];
+
+		for ( let file of files) {
+
+			if ( !file.name.endsWith( '.bmp' ) || file.name.endsWith( 'legend.bmp' ) ) { continue; }
+
+			const fileName = encodeURI( file.name );
+
+			txt +=
+
+			`<div style=margin:10px; >
+
+				<a href=${ urlGitHubSource + fileName } title="Edit me" >${ iconGitHubMark }</a>
+
+				<a href=#${ urlGitHubPage + fileName } title="${ file.size.toLocaleString() } bytes" >${ file.name }</a>
+
+				<a href=${ urlGitHubPage + fileName } title="Link to just this file" >&#x2750;</a>
+
+			</div>`;
+
+			textures.push( fileName );
+
+		}
+
+		divGallery.innerHTML = txt;
+
+		const loader = new THREE.TextureLoader();
+
+		for ( let file of textures ) {
+
+			const texture = loader.load( urlGitHubPage + file, addPlane );
+
+			function addPlane( tex ) {
+
+				const items = file.slice( 0, -3 ).split( '_' ).map( item => parseFloat( item ) );
+				//console.log( 'items', items );
+
+				const center = new THREE.Vector3().fromArray( items.slice( 0, 3 ) );
+				//console.log( 'center', center );
+
+				const normal = new THREE.Vector3().fromArray( items.slice( 3 ) );
+				//console.log( 'normal', normal );
+
+				//console.log( 'image', tex.image.width );
+
+				//tex.wrapS = THREE.RepeatWrapping;
+				//tex.wrapT = THREE.RepeatWrapping;
+				//tex.magFilter = THREE.NearestFilter;
+				//tex.repeat.set( 1, 1 );
+				tex.minFilter = THREE.LinearFilter;
+
+				const geometry = new THREE.PlaneGeometry( tex.image.width / 20, tex.image.height / 20 );
+				geometry.lookAt( normal );
+				const material = new THREE.MeshBasicMaterial( { map: tex, side: 2  } );
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.copy( center );
+				scene.add( mesh );
+
+			};
+
+		}
+
+	}
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

@@ -8,33 +8,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-### HTML Layout
-
-1. As you do now, there should be one button to import a single .rad file. This is for viewing .rad files for test cases as they are generated.
-
-2. Also, there should be a button to import "Import RAD2Solar Project", and the import button should load a directory. The directory that is selected will have a .rad file and all the corresponding bitmaps.
-
-3. Down below, where you have "Sample files", please eliminate all the existing rad files from various sources and just provide shortcuts to the .rad file in each "test-cases/test-case-x/ folders.
-
-4. Please also make a drop down for "Sample projects". This will provide shortcuts to the folders within "test-cases/".
-
-5. Please provide two toggle buttons: (1) "Hide .rad" and (2) "Hide .bmps". This will be useful when viewing a project.
-
-6. Please remove auto generation and assignment of bitmaps.
-
-### Data Type and Formatting Specification
-
-1. Your code will be passed a directory from RAD2SOLAR (or more appropriately, the format of the viewer to pull data for a project will be to reference a directory like we are startingn to set up under test-cases/test-case-1, etc). Within that directory is a single .rad file and a series of bitmaps. 
-
-2. The naming convention of each bitmap is xcoordinate_ycoordinate_zcoordinate_xunitvector_yunitvector_zunitvector.bmp. The x,y,z coordinate is the center point of the bitmap, and the unit vector provides the normal. This is how you will place the bitmaps in the three.js scene. 
-
-3. The code will also read in .rad file with surface object outlines only in black, no fills. The bitmaps will be the fills.
-
-4. A single bitmap file is to be generated for the ground, each adjacentbuilding surface except the ground, each fin and overhang (only one in the normal direction, we will ignore the interior side for now to reduce the number of bitmaps), and each facade. In other words, if a building has 3 floors, one south-facing facade, and 10 windows on each floor, only one bitmap will be generated. For the roof, a single bitmap will be generate for a square building, two bitmaps for an L-Shape or T-Shape building (Zack to determine how to divide the L into two rectangles), three bitmaps for a U-Shape and H-Shape building, and 4 bitmaps for a Courtyard-Shape building.
-
-5. There will also be a bitmap for the Legend, named legend.bmp, which should be placed to the side of the scene and rotate to always faces the user as the scene is rotated. This will function similar to how we show the legend in the 3D scatter plot (look familiar;)). The bitmap for the legend will have a transparent background.
-
-![text](https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/images/LegendThreeJS.PNG)
+* Radiance files in real-time 3D in your browser using the Three.js JavaScript library
 
 <!--
 ## [SPEED Rad2Solar Viewer]( http://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/index.html )
@@ -45,7 +19,33 @@ _Latest project here_
 
 -->
 
+### [SPEED Rad2Solar Viewer R2]( spider/sandbox/speed-rad2solar-viewer/r2/speed-rad2solar-viewer.html )
+* Obtains the list of bitmaps included in a given folder on GitHub
+* Lists the names of the bitmaps with links of each file in the menu
+* Parses the file name string of the bitmap to obtain center point and and normal as floating point Three.js vectors
+* Loads each bitmap as a Three.js texture
+* Creates a Three.js plane for each bitmap
+	* Applies texture to the plane
+	* Positions plane at center point
+	* Rotates plane to align to the normal
+	* Sizes plane according to width and height proportions of the bitmap
+
+#### Issues
+
+* Some planes are rotated incorrectly by 90 degrees
+
+### [SPEED Rad2Solar Viewer R1]( spider/sandbox/speed-rad2solar-viewer/r1/speed-rad2solar-viewer.html )
+
+* Forked from [Rad Viewer Bitmap R3.1 Speed]( https://www.ladybug.tools/spider/rad-viewer/rad-viewer-bitmap/r3-speed/rad-viewer-bitmap.html )
+
+
+### [SPEED Rad2Solar Spec Update]( https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/speed-rad2solar-spec-update.md )
+
+### [SPEED Rad2Solar Spec Confluence]( https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/speed-rad2solar-spec-confluence.md )
+
+
 ## Wish list
+
 
 
 ## Issues
@@ -54,9 +54,17 @@ _Latest project here_
 
 ## Links of Interest
 
+* https://en.wikipedia.org/wiki/Sunshine_duration
+* https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration
 
 
 ## Change Log
+
+### 2018-06-19 ~ Theo
+
+* Add SPEED Rad2Solar Viewer R1
+* Move read me and spec text around
+* Add SPEED Rad2Solar Viewer R2
 
 ### 2018-06-10 ~ Theo
 
