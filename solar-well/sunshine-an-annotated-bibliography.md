@@ -1,30 +1,180 @@
+<style>
+summary { font-weight: bold; }
+</style>
+
+# Sunshine: an annotated bibliography
+
+<details open >
+<summary style=font-size:1.5em; >Preface</summary>
+
+I would like to learn more about how the Sun and climate affect the built environment. Given that I know so little, I am trying to start at the beginning. I am finding that finding where it all begins is not any easy place to find.
+
+This annotated bibliography is my way of - fingers crossed - helping me let some sunlight into the process.
+
+Theo Armour ~ 2018-06-21
+
+</details>
 
 
+<details open >
+
+<summary style=font-size:1.5em; >Wikipedia References</summary>
+
+
+### Solar Calculation Details
+
+* https://en.wikipedia.org/wiki/Position_of_the_Sun
+* https://en.wikipedia.org/wiki/Astronomical_Almanac
+* http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html
+
+### Standard Day
+
+* [Standard Day]( https://en.wikipedia.org/wiki/Standard_day )
+	* The term standard day is used throughout meteorology, aviation, and other sciences and disciplines as a way of defining certain properties of the atmosphere in a manner which allows those who use our atmosphere to effectively calculate and communicate its properties at any given time.
+
+### Julian Day
+
+* https://en.wikipedia.org/wiki/Julian_day
+* http://aa.usno.navy.mil/data/docs/JulianDate.php
+* http://www.tondering.dk/claus/cal/julperiod.php
+* http://javascript.about.com/library/bljulday.htm
+* http://stackoverflow.com/questions/11759992/calculating-jdayjulian-day-in-javascript
+	* See also http://javascript.about.com/library/bljulday.htm
+	* looks interesting
+	* Maybe nice use of JavaScript prototype
+* http://www.physics.sfasu.edu/astro/javascript/julianday.html
+	* Why so complicated?
+* http://www.geoastro.de/elevaz/basics/meeus.htm
+	* Has slightly modified version of NOAA Julian Day calculation
+
+
+### Equation of Time
+
+* https://en.wikipedia.org/wiki/Equation_of_time
+* http://aa.usno.navy.mil/faq/docs/eqtime.php
+* http://info.ifpan.edu.pl/firststep/aw-works/fsII/mul/mueller.html
+	* lots of Euler stuff
+* http://www.sundials.co.uk/equation.htm
+* http://www.astronomynotes.com/nakedeye/s9.htm
+
+### More
+
+* https://en.wikipedia.org/wiki/Orbital_elements
+* https://en.wikipedia.org/wiki/Mean_longitude
+* https://en.wikipedia.org/wiki/Equation_of_the_center
+
+
+### Sun Path
+* [Sun path]( https://en.wikipedia.org/wiki/Sun_path )
+* https://en.wikipedia.org/wiki/Sunshine_duration
+* https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration
+
+
+### Solar Access
+
+[Solar Access]( https://en.wikipedia.org/wiki/Solar_access )
+
+> Solar access is the ability of one property to continue to receive sunlight across property lines without obstruction from another’s property (buildings, foliage or other impediment). Solar access is calculated using a sun path diagram. Sun is the source of our vision and energy. Its movements inform our perception of time and space. Access to sun is essential to energy conservation and to the quality of our lives.
+
+> Solar access is differentiated from solar rights or solar easement, which is specifically meant for direct sunlight for solar energy systems, whereas solar access is a right to sunlight upon certain building façades regardless of the presence of active or passive solar energy systems
+
+
+</details>
+
+
+<details open >
+<summary style=font-size:1.5em; >File Formats / Standards</summary>
+
+<details open >
+<summary style=font-size:1.25em; >gbXML</summary>
+
+* http://www.gbxml.org/
+> gbXML is an industry supported schema for sharing building information between disparate building design software tools.
+
+* https://github.com/GreenBuildingXML
+> Repositories for all things gbXML including validator source code, test cases, and more...
+
+* https://en.wikipedia.org/wiki/Green_Building_XML
+> The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools. gbXML is being integrated into a range of software CAD and engineering tools and supported by leading 3D BIM vendors. gbXML is streamlined to transfer building properties to and from engineering analysis tools to reduce the interoperability issues and eliminate plan take-off time.
+
+
+* https://twitter.com/gbXML
+> The gbXML open schema helps facilitate the transfer of building properties stored in 3D building information models (BIM) to engineering analysis tools.
+
+* https://github.com/chiensiTB/gbXMLValidator/wiki/What-is-gbXML
+> What is gbXML?
+
+
+* https://greenspacelive.com/site/building-generator/
+> Use the building generator for rapid production of building geometry models.
+
+
+* https://carmelsoftware.tumblr.com/post/151019045304/a-progress-report-on-gbxml-validation-efforts
+* http://www.grasshopper3d.com/group/ladybug/forum/topics/new-honeybee-component-import-gbxml
+* https://www.linkedin.com/pulse/5-modeling-techniques-gbxml-energy-integration-jean-carriere
+* https://knowledge.autodesk.com/support/revit-products/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F-htm.html
+* http://inside-the-system.typepad.com/my_weblog/2012/08/how-to-export-gbxml-for-only-some-spaces.html
+
+</details>
+
+
+<details open >
+
+<summary style=font-size:1.25em; >EPW Files</summary>
+
+There are a number of interesting things related to EPW files. Here are a few of them.
+
+
+### Google
+
+* [Search EPW Weather Images]( https://www.google.com/search?q=epw+weather&rlz=1C1GCEA_enUS752US752&source=lnms&tbm=isch&sa=X )
+
+
+
+
+
+
+</details>
+
+
+</details>
+
+
+<details open >
+
+<summary style=font-size:1.5em; >Applications</summary>
 
 ### [Radiance Online ]( https://www.radiance-online.org/ )
 
 * Radiance is a suite of programs for the analysis and visualization of lighting in design.
 
-### The RADIANCE 5.1 Synthetic Imaging System
+#### The RADIANCE 5.1 Synthetic Imaging System
 
 * <http://radsite.lbl.gov/radiance/refer/refman.pdf>
 * <http://radsite.lbl.gov/radiance/refer/ray.html>
 * https://www.radiance-online.org/learning/documentation/manual-pages/pdfs/manpages.pdf
 
-### Radiance Surface/Geometry types
+#### Radiance Surface/Geometry types
 
 * <http://radsite.lbl.gov/radiance/refer/ray.html#Surfaces>
 
-### [Ladybug Tools / Spider / Rad Viewer ]( https://www.ladybug.tools/spider/#solar-well/rad-viewer/README.md )
+#### Sample Radiance Files
 
-* View RAD produced by Radiance files in your browser
+* Mostapha: [sample-file-rad]( #solar-well/radiance-data-files/sample-file.rad )
+* Michal: London, Bristol & Coventry files
+* <http://radsite.lbl.gov/radiance/pub/objects/>
+	* zipped gjward1 files available from this site
+	* Also Paul Burke's beautiful trees ans MIT CSAIL files
+* <https://github.com/sariths/radTutorialFiles>
+	* Exercise files and supporting documents for a Radiance tutorial on matrix-based methods.
+* <https://github.com/rndmStff/radModels>
+	* Radiance models containing rad files and view files.
+
+#### Octree format
+* http://radsite.lbl.gov/radiance/refer/filefmts.pdf
 
 
-Rad Models
-* https://github.com/rndmStff/radModels
-* http://radsite.lbl.gov/radiance/pub/objects/
-
-Radiance Software
+#### Radiance Software
 * https://github.com/NREL/Radiance
 * https://radiance-online.org/
 * http://radsite.lbl.gov/radiance/framer.html
@@ -33,43 +183,138 @@ Radiance Software
 * http://radsite.lbl.gov/radiance/book/
 * https://nrel.github.io/Radiance/doc/ray.html
 
-Radiance Materials
+### Radiance Surface/Geometry types
+
+* <http://radsite.lbl.gov/radiance/refer/ray.html#Surfaces>
+
+#### Radiance Materials
 * https://github.com/NREL/Radiance/blob/master/doc/notes/materials
 
-Ladybug Tools / Honeybee
+
+
+### Ladybug Tools / Honeybee
 * https://www.ladybug.tools/honeybee.html
-
-Ladybug Tools / HydraShare
-* https://hydrashare.github.io/hydra/index.html
-
-Hydra is a platform for sharing Grasshopper and Dynamo files. The HydraShare landing page has links to dozens of pages. Each page page displays two or more images, a description and a link to download the source code. The images usually show a screen capture of the Grasshopper visual programing screen and a screen capture of the output. The descriptions are generally brief and provide just a hint as to the purpose and the scope of the project. The only way to attain a clear picture uf the script is to download,install and run it. Running the script require that Rhino and Grasshopper are already installed
 
 Documentation
 * https://legacy.gitbook.com/book/ladybug-tools/honeybee-primer/details
 	* Reference manual for the Honeybee visual programming language
 	* Provides a list of parameters for each available function
 
+###Ladybug Tools / HydraShare
+* https://hydrashare.github.io/hydra/index.html
 
-Sunshine
+Hydra is a platform for sharing Grasshopper and Dynamo files. The HydraShare landing page has links to dozens of pages. Each page page displays two or more images, a description and a link to download the source code. The images usually show a screen capture of the Grasshopper visual programing screen and a screen capture of the output. The descriptions are generally brief and provide just a hint as to the purpose and the scope of the project. The only way to attain a clear picture uf the script is to download,install and run it. Running the script require that Rhino and Grasshopper are already installed
 
-* https://en.wikipedia.org/wiki/Sunshine_duration
-* https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration
+
+
+### [EnergyPlus]( https://energyplus.net/ )
+EnergyPlus™ is a whole building energy simulation program that engineers, architects, and researchers use to model both energy consumption—for heating, cooling, ventilation, lighting and plug and process loads—and water use in buildings
+
+EnergyPlus is funded by the U.S. Department of Energy’s (DOE) Building Technologies Office (BTO), and managed by the National Renewable Energy Laboratory (NREL).
+
+EnergyPlus is developed in collaboration with NREL, various DOE National Laboratories, academic institutions, and private firms.
+
+EnergyPlus created and maintain EnergyPlus Weather (EPW) files.
+
+* [Weather Data]( https://energyplus.net/weather )
+	* Weather data for more than 2100 locations are now available in EnergyPlus weather format — 1042 locations in the USA, 71 locations in Canada, and more than 1000 locations in 100 other countries throughout the world. The weather data are arranged by World Meteorological Organization region and Country.
+* [Weather Data for Simulation]( https://energyplus.net/weather/simulation )
+	* Users of energy simulation programs have a wide variety of weather data from which to choose – from locally recorded weather data to preselected 'typical' years –, often a bewildering range of options. Many locations are available on this site – but users may have special needs for different locations.
+* [Weather Data Sources]( https://energyplus.net/weather/sources )
+	* The weather data provided in EnergyPlus weather format on this website are derived from 20 sources:
+
+
+### [onebuilding.org]( http://onebuilding.org/ )
+
+* [climate.onebuilding.org]( http://climate.onebuilding.org/ )
+	* Respository for free weather data for building performance simulation
+	* [Weather Data Sources]( http://climate.onebuilding.org/sources/default.html )
+
+
+
+
+### [Ladybug Tools]( http://ladybug.tools )
+
+* [EPW Map]( http://www.ladybug.tools/epwmap/ )
+	* The goal of the project is to provide a single interface for all the available free .epw weather files. Currently it shows weather files hosted by EnergyPlus Website and One Building.
+* [epwmap]( https://github.com/ladybug-tools/epwmap )
+	* epwmap is developed as part of Ladybug Tools. The goal of epwmap is to provide a single interface for all the free available .epw weather files.
+* [[FAQ] Where to find .epw weather data?]( http://www.grasshopper3d.com/group/ladybug/forum/topics/faq-where-to-find-epw-weather-data )
+
+
+### [DOE2.com]( http://www.doe2.com/ )
+
+* [Weather Data & Weather Data Processing Utility Programs]( http://doe2.com/index_wth.html )
+
+
+### [White Box Technologies]( http://weather.whiteboxtechnologies.com/home )
+
+* Building energy simulations require weather data as an essential input. White Box Technologies provides useful tools to find "typical year" and historical year weather files created from weather reports of over 10,000 official weather stations around the world.
+
+
+### [WeatherShift]( http://www.weather-shift.com/ )
+
+* Buildings and infrastructure built today will experience significantly different weather patterns over the course of the 21st century due to the impact of climate change.
+* The WeatherShift™ tool uses data from global climate change modeling to produce EPW weather files adjusted for changing climate conditions. (EPW files contain hourly values of key weather variables for a typical year and are intended to be used for simulating building energy requirements.) The projected data can be viewed for three future time periods based on the emission scenario selected to the left.
+
+
+### [Energy Simulation Solutions Limited]( http://cms.ensims.com/ )
+
+* [Compare two EPW files]( http://jess.ensims.com/epw_compare.html )
+
+
+### [epwvis]( https://mdahlhausen.github.io/epwvis/ )
+
+* An online viewer and analysis tool for EnergyPlus Weather (EPW) files
+* Probably the best 2D viewer available today
+* By Matthew Dahlhausen
+
+
+### [andrewmarsh.com]( http://andrewmarsh.com/ )
+
+* Now broken: [Weather Data]( http://andrewmarsh.com/software/weather-data-web/ )
+	* This web app lets you load and display EnergyPlus weather data in a 3D graph with data averaging and animated sectioning. It maps the full range of weather data metrics against day of the year and hour of the day to create an undulating 3D surface plot. You can interactively adjust the displayed metric, the graph size and scale, section planes and data averaging parameters. Simply drag&drop a .EPW file anywhere in the browser windows and you are ready to go.
+	* Dr Marsh is one of the gods of simulating complicated things in 3D
+
+
+
+### Now broken: [eco-envolventes]( http://www.eco-envolventes.net/ )
+
+[eco-envolventes]( http://www.eco-envolventes.net/ ) is a research project at the [Universidad de Piloto]( http://www.unipiloto.edu.co/ ), Bogota, Colombia
+
+The group prepared a submission for Workshop at the Design Modelling Symposium 16 - 17 September 2017 Paris
+
+The submission includes a number of very interesting 2D and 3D visualizations.
+
+Of primary importance is their data set of EPW files converted to JSON.
+
+Pages of great interest include:
+
+* [Prototype Visualisation Tools]( http://www.eco-envolventes.net/tools.html )
+
+	* [3d annual chart]( http://www.eco-envolventes.net/tools/170614a/3dChart1.html )
+		* Data is from the EnergyPlus *.epw files collection which represents 68 Countries and 2240 cities. These have been converted to our climaJSON format for use online. Using this format the data can be visualised in 2d, 3d and on a psychrometric chart. The full set of converted *.epw files is available here.
+	* [climaJSON]( http://www.eco-envolventes.net/climaschema/ )
+		* Schema for a climaJSON object.
+		* This format describes an object containing climate data for a single year in a single location. The object stores an unlimited set of fields for monthly and / or hourly values.
+		* Author: R Hudson. Updated: 21/5/2017
+	* 2D: http://www.eco-envolventes.net/tools/170614/
+	* Psychrometric chart: http://www.eco-envolventes.net/tools/170614b/pChart.html
+	* Folders with all converted files: http://www.eco-envolventes.net/data/json/allEPW/
+	* More visualizations: http://www.eco-envolventes.net/tools/
+
 
 More
 * https://github.com/tudelft3d/Solar3Dcity
 
 
-Octree format
-* http://radsite.lbl.gov/radiance/refer/filefmts.pdf
 
 
+</details>
 
 
-
-
-
-## Analemms / Sun Range
-
+<details open >
+<summary style=font-size:1.5em; >Analemmas / Sun Range</summary>
 
 * https://en.wikipedia.org/wiki/Analemma
 * [Motions of the Sun Simulator]( http://astro.unl.edu/naap/motion3/animations/sunmotions.html )
@@ -85,9 +330,25 @@ Octree format
 * [analemma.space]( http://analemma.space/ )
 
 
+</details>
 
-## Solar Calculators
 
+<details open >
+<summary style=font-size:1.5em; >Solar Calculators</summary>
+
+
+
+* https://github.com/ladybug-analysis-tools/ladybug/blob/master/ladybug/sunpath.py
+	* Ladybug's Python Sun path calculator
+* https://books.google.com/books?id=cfCqBAAAQBAJ
+* https://en.wikipedia.org/wiki/Jean_Meeus
+* http://www.willbell.com/math/mc1.htm
+* https://sourceforge.net/projects/astroalgorithms/
+* http://www.geoastro.de/elevaz/basics/meeus.htm
+* http://www.iau.org/
+* http://www.iausofa.org/
+* Simpler calculation: http://www.geoastro.de/elevaz/basics/meeus.htm
+* Short definitions: http://www.ephemeris.com/space-time.html
 
 ### Solar Calculator Ladybug Web
 
@@ -131,6 +392,7 @@ Octree format
 https://github.com/ladybug-analysis-tools/ladybug-web/issues/1
 
 * [Python Code]( https://github.com/ladybug-analysis-tools/ladybug-core/blob/master/ladybug/sunpath.py#L97-L138 )
+
 
 ## Solar Calculator Links of Interest
 
@@ -187,188 +449,16 @@ http://www.metafilter.com/130877/SunCalc-a-solar-azimuth-calculator
 http://www.analemma.com/Pages/indexPage.html
 * Old and has issues
 
-### Wikipedia
+</details>
 
-* [Position of the Sun]( https://en.wikipedia.org/wiki/Position_of_the_Sun )
-* [Sun path]( https://en.wikipedia.org/wiki/Sun_path )
 
 
 
-* https://github.com/ladybug-analysis-tools/ladybug/blob/master/ladybug/sunpath.py
-	* Ladybug's Python Sun path calculator
-* https://books.google.com/books?id=cfCqBAAAQBAJ
-* https://en.wikipedia.org/wiki/Jean_Meeus
-* http://www.willbell.com/math/mc1.htm
-* https://sourceforge.net/projects/astroalgorithms/
-* http://www.geoastro.de/elevaz/basics/meeus.htm
-* http://www.iau.org/
-* http://www.iausofa.org/
-* Simpler calculation: http://www.geoastro.de/elevaz/basics/meeus.htm
-* Short definitions: http://www.ephemeris.com/space-time.html
 
-## Solar Calculation Details
+<details open >
+<summary style=font-size:1.5em; >Publications</summary>
 
-* https://en.wikipedia.org/wiki/Position_of_the_Sun
-* https://en.wikipedia.org/wiki/Astronomical_Almanac
-* http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html
 
-### Julian Day
-
-* https://en.wikipedia.org/wiki/Julian_day
-* http://aa.usno.navy.mil/data/docs/JulianDate.php
-* http://www.tondering.dk/claus/cal/julperiod.php
-* http://javascript.about.com/library/bljulday.htm
-* http://stackoverflow.com/questions/11759992/calculating-jdayjulian-day-in-javascript
-	* See also http://javascript.about.com/library/bljulday.htm
-	* looks interesting
-	* Maybe nice use of JavaScript prototype
-* http://www.physics.sfasu.edu/astro/javascript/julianday.html
-	* Why so complicated?
-* http://www.geoastro.de/elevaz/basics/meeus.htm
-	* Has slightly modified version of NOAA Julian Day calculation
-
-
-### Equation of Time
-
-* https://en.wikipedia.org/wiki/Equation_of_time
-* http://aa.usno.navy.mil/faq/docs/eqtime.php
-* http://info.ifpan.edu.pl/firststep/aw-works/fsII/mul/mueller.html
-	* lots of Euler stuff
-* http://www.sundials.co.uk/equation.htm
-* http://www.astronomynotes.com/nakedeye/s9.htm
-
-### More
-
-* https://en.wikipedia.org/wiki/Orbital_elements
-* https://en.wikipedia.org/wiki/Mean_longitude
-* https://en.wikipedia.org/wiki/Equation_of_the_center
-
-
-## Solar Access
-
-Wikipedia: [Solar Access]( https://en.wikipedia.org/wiki/Solar_access )
-
-> Solar access is the ability of one property to continue to receive sunlight across property lines without obstruction from another’s property (buildings, foliage or other impediment). Solar access is calculated using a sun path diagram. Sun is the source of our vision and energy. Its movements inform our perception of time and space. Access to sun is essential to energy conservation and to the quality of our lives.
-
-> Solar access is differentiated from solar rights or solar easement, which is specifically meant for direct sunlight for solar energy systems, whereas solar access is a right to sunlight upon certain building façades regardless of the presence of active or passive solar energy systems
-
-
-
-## Links of Interest
-
-There are a number of interesting things related to EPW files. Here are a few of them.
-
-
-### Google
-
-* [Search EPW Weather Images]( https://www.google.com/search?q=epw+weather&rlz=1C1GCEA_enUS752US752&source=lnms&tbm=isch&sa=X )
-
-
-### Wikipedia
-
-* [Standard Day]( https://en.wikipedia.org/wiki/Standard_day )
-	* The term standard day is used throughout meteorology, aviation, and other sciences and disciplines as a way of defining certain properties of the atmosphere in a manner which allows those who use our atmosphere to effectively calculate and communicate its properties at any given time.
-
-
-### [EnergyPlus]( https://energyplus.net/ )
-EnergyPlus™ is a whole building energy simulation program that engineers, architects, and researchers use to model both energy consumption—for heating, cooling, ventilation, lighting and plug and process loads—and water use in buildings
-
-EnergyPlus is funded by the U.S. Department of Energy’s (DOE) Building Technologies Office (BTO), and managed by the National Renewable Energy Laboratory (NREL).
-
-EnergyPlus is developed in collaboration with NREL, various DOE National Laboratories, academic institutions, and private firms.
-
-EnergyPlus created and maintain EnergyPlus Weather (EPW) files.
-
-* [Weather Data]( https://energyplus.net/weather )
-	* Weather data for more than 2100 locations are now available in EnergyPlus weather format — 1042 locations in the USA, 71 locations in Canada, and more than 1000 locations in 100 other countries throughout the world. The weather data are arranged by World Meteorological Organization region and Country.
-* [Weather Data for Simulation]( https://energyplus.net/weather/simulation )
-	* Users of energy simulation programs have a wide variety of weather data from which to choose – from locally recorded weather data to preselected 'typical' years –, often a bewildering range of options. Many locations are available on this site – but users may have special needs for different locations.
-* [Weather Data Sources]( https://energyplus.net/weather/sources )
-	* The weather data provided in EnergyPlus weather format on this website are derived from 20 sources:
-
-
-### [onebuilding.org]( http://onebuilding.org/ )
-
-* [climate.onebuilding.org]( http://climate.onebuilding.org/ )
-	* Respository for free weather data for building performance simulation
-	* [Weather Data Sources]( http://climate.onebuilding.org/sources/default.html )
-
-
-### [Ladybug Tools]( http://ladybug.tools )
-
-* [EPW Map]( http://www.ladybug.tools/epwmap/ )
-	* The goal of the project is to provide a single interface for all the available free .epw weather files. Currently it shows weather files hosted by EnergyPlus Website and One Building.
-* [epwmap]( https://github.com/ladybug-tools/epwmap )
-	* epwmap is developed as part of Ladybug Tools. The goal of epwmap is to provide a single interface for all the free available .epw weather files.
-* [[FAQ] Where to find .epw weather data?]( http://www.grasshopper3d.com/group/ladybug/forum/topics/faq-where-to-find-epw-weather-data )
-
-
-### [DOE2.com]( http://www.doe2.com/ )
-
-* [Weather Data & Weather Data Processing Utility Programs]( http://doe2.com/index_wth.html )
-
-
-### [White Box Technologies]( http://weather.whiteboxtechnologies.com/home )
-
-* Building energy simulations require weather data as an essential input. White Box Technologies provides useful tools to find "typical year" and historical year weather files created from weather reports of over 10,000 official weather stations around the world.
-
-
-### [WeatherShift]( http://www.weather-shift.com/ )
-
-* Buildings and infrastructure built today will experience significantly different weather patterns over the course of the 21st century due to the impact of climate change.
-* The WeatherShift™ tool uses data from global climate change modeling to produce EPW weather files adjusted for changing climate conditions. (EPW files contain hourly values of key weather variables for a typical year and are intended to be used for simulating building energy requirements.) The projected data can be viewed for three future time periods based on the emission scenario selected to the left.
-
-
-### [Energy Simulation Solutions Limited]( http://cms.ensims.com/ )
-
-* [Compare two EPW files]( http://jess.ensims.com/epw_compare.html )
-
-
-### [epwvis]( https://mdahlhausen.github.io/epwvis/ )
-
-* An online viewer and analysis tool for EnergyPlus Weather (EPW) files
-* Probably the best 2D viewer available today
-* By Matthew Dahlhausen
-
-
-### [andrewmarsh.com]( http://andrewmarsh.com/ )
-
-* [Weather Data]( http://andrewmarsh.com/software/weather-data-web/ )
-	* This web app lets you load and display EnergyPlus weather data in a 3D graph with data averaging and animated sectioning. It maps the full range of weather data metrics against day of the year and hour of the day to create an undulating 3D surface plot. You can interactively adjust the displayed metric, the graph size and scale, section planes and data averaging parameters. Simply drag&drop a .EPW file anywhere in the browser windows and you are ready to go.
-	* Dr Marsh is one of the gods of simulating complicated things in 3D
-
-
-
-### [eco-envolventes]( http://www.eco-envolventes.net/ )
-
-[eco-envolventes]( http://www.eco-envolventes.net/ ) is a research project at the [Universidad de Piloto]( http://www.unipiloto.edu.co/ ), Bogota, Colombia
-
-The group prepared a submission for Workshop at the Design Modelling Symposium 16 - 17 September 2017 Paris
-
-The submission includes a number of very interesting 2D and 3D visualizations.
-
-Of primary importance is their data set of EPW files converted to JSON.
-
-Pages of great interest include:
-
-* [Prototype Visualisation Tools]( http://www.eco-envolventes.net/tools.html )
-
-	* [3d annual chart]( http://www.eco-envolventes.net/tools/170614a/3dChart1.html )
-		* Data is from the EnergyPlus *.epw files collection which represents 68 Countries and 2240 cities. These have been converted to our climaJSON format for use online. Using this format the data can be visualised in 2d, 3d and on a psychrometric chart. The full set of converted *.epw files is available here.
-	* [climaJSON]( http://www.eco-envolventes.net/climaschema/ )
-		* Schema for a climaJSON object.
-		* This format describes an object containing climate data for a single year in a single location. The object stores an unlimited set of fields for monthly and / or hourly values.
-		* Author: R Hudson. Updated: 21/5/2017
-	* 2D: http://www.eco-envolventes.net/tools/170614/
-	* Psychrometric chart: http://www.eco-envolventes.net/tools/170614b/pChart.html
-	* Folders with all converted files: http://www.eco-envolventes.net/data/json/allEPW/
-	* More visualizations: http://www.eco-envolventes.net/tools/
-
-
-
-
-
-## Publications
 
 Mackey, Christopher; Galanos, Theodore; Norford, Leslie; Sadeghipour Roudsari, Mostapha, "Wind, Sun, Surface Temperature, and Heat Island: The Critical Variables for High‐Resolution Outdoor Thermal Comfort”, in Proceedings of the 15th International conference of Building Performance Simulation Association, San Francisco, USA, Aug 7-9 2017. [Link].
 
@@ -390,7 +480,11 @@ Mackey, Chris, "Pan Climatic Humans : Shaping Thermal Habits in an Unconditioned
 
 The relationship between people and the thermal environment has a profound impact on lifestyle and culture, influencing what we wear, what spaces we gather around, and how we go about our lives. Yet this relation is often oversimplified in the design of conditioned spaces, assuming occupants have unchanging thermal preferences and no desire to participate in the shaping of a building's microclimates. While we gain a basic satisfaction of thermal need from this simplified view, we lose much by complicating our buildings with HVAC equipment to the point that inhabitants do not understand them, by cellularizing space into bubbles of conditioned air that limit opportunities for continuous communal space, and by having occupants rely on central heating/cooling systems that often require harmful concentrated energy sources, such as fossil fuels. This thesis asks if and how we can design spaces of everyday life that not only satisfy a basic thermal need but also encourage occupant participation in the shaping of microclimates, promote thermally-based social cohesion, and do so using only on passive means. Since the traditional process of evaluating heating/cooling load with an energy model does not hold for unconditioned design, the thesis question requires a new method for exploring design decisions in relation to the thermal environment. Accordingly, research began by developing software to produce high spatial/temporal resolution thermal maps that evaluate design decisions by indicating the parts of a space made warmer or cooler in relation to a seasonal "comfort temperature." With this new means of understanding the thermal environment, several geometric design strategies are tested for two climates - Los Angeles and New York. The tests illustrate that the geometry of a space can have an enormous effect on its thermal habitability once the assumptions of air conditioning and oversimplified occupants are removed. The most powerful of the tested design strategies are used to develop two completely passive urban co-habitation/co-working projects that express and embellish these discovered geometric factors. The designs operate off of a generalizable logic in which the communal, daytime spaces are placed in the areas of a site where they can take advantage of the most powerful and stable thermal strategies while the fringes include less stable, intermittently- occupied, private spaces where occupants can tune the microclimate as they wish. Although this generalizable logic is constant, the two designs illustrate that widely different forms can emerge based on the climate and the tested strategies.
 
-## People
+</details>
+<details open >
+<summary style=font-size:1.5em; >People</summary>
+
+
 
 * Welle, Benjamin - organizer
 	* Benjamin.Welle@perkinswill.com
@@ -411,3 +505,4 @@ The relationship between people and the thermal environment has a profound impac
 	* rob.guglielmetti@gmail.com
 	* https://github.com/rpg777
 
+</details>
