@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-06-20" >
-<title>'Aragog' gbXML Viewer R14.5</title>
+<meta name = "date" content = "2018-06-21" >
+<title>'Aragog' gbXML Viewer R14.6</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
 </head>
@@ -47,15 +47,16 @@
 				<div id=divRowButtonsStyle ></div>
 
 				<div id=CORdragArea class=dragDropArea >
-					drag & drop gbXML and other files here<br>
+					Drag & drop <a href=http://gbxml.org >gbXML</a> and other files here<br>
 					or <input type = "file" id = "inpFile" onchange="COR.openFile(this);" ><br>
-					or enter a default file path &nbsp;<a href=#../assets/file-open.md>?</a>
+					or enter a default file path &nbsp;<a href=#../assets/file-open.md title="Learn how to speed up your testing" >?</a>
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
 					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 
 					or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
 
 					<div id = "CORdivSampleGalleries" ></div>
+
 				</div>
 
 					<!--
@@ -247,8 +248,8 @@
 
 		CORdivTitle.innerHTML =
 		`<h2>
-			<a href="${ COR.releaseSourceURL }" target="_top" ><img src=${COR.iconGitHubMark} height=18 ></a>
-			<a href = "" >${title}</a>
+			<a href="${ COR.releaseSourceURL }" target="_top" title="Go to source code on GitHub" ><img src=${COR.iconGitHubMark} height=18 ></a>
+			<a href = "" title="Relead this page" >${title}</a> &nbsp; <a href=#../READMe.md title="View the read me file" >?</a>
 		</h2>`;
 
 		// move to a gv-sty.js ??

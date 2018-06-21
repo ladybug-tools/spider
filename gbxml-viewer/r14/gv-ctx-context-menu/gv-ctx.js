@@ -2,10 +2,9 @@
 
 	// Handles events
 
-	var CTX = {};
+	var CTX = { release: '14.0' };
 
 	CTX.surfaceChanges = {};
-
 
 
 	CTX.initHeadsUp = function() { // called from bottom of script
@@ -32,7 +31,8 @@
 		const raycaster = new THREE.Raycaster();
 		raycaster.setFromCamera( CTX.mouse, THR.camera );
 
-		const intersects = raycaster.intersectObjects( GBX.surfaceMeshes.children );
+		const objects = GBX.surfaceMeshes.visible === true ? GBX.surfaceMeshes.children : GBX.surfaceOpenings.children;
+		const intersects = raycaster.intersectObjects( objects );
 
 		if ( intersects.length > 0 ) {
 
@@ -150,11 +150,13 @@
 
 		THR.controls.keys = false;
 
+		const title = GBX.surfaceMeshes.visible === true ? 'Surfaces': 'Openings' ;
+
 		target.innerHTML =
 
 		`<details open >
 
-			<summary>Surface &nbsp; <a href=#../gv-CTX2-heads-up-display/README.md>?</a></summary>
+			<summary title="CTX${CTX.release}" >${title} &nbsp; <a href=#../gv-CTX-context-menu/README.md >?</a></summary>
 
 			<div id = "CTXdivPanelSurface" ></div>
 
@@ -162,17 +164,8 @@
 
 		</details>`;
 
-		let item = {};
 
-		item.attribute = 'id';
-		item.divAttributes = 'CTXdivCardSurfaceAttributes';
-		item.divTarget = document.getElementById( 'CTXdivPanelSurface' );
-		item.element = 'Surface';
-		item.name = 'itemSurface';
-		item.optionValues = GBX.surfacesJson.map ( item => [ item.id, item.Name, item.CADObjectId ] );
-		item.parent = GBX.surfacesJson;
-		item.placeholder = 'surface id';
-		item.selItem = 'CTXselSurfaceId';
+		const item = GBX.surfaceMeshes.visible === true ? CTX.getItemSurface() : CTX.getItemOpening() ;
 
 		SEL.itemSurface = SEL.getElementPanel( item );
 
@@ -183,14 +176,49 @@
 
 		//CTX.userDataData = data;
 
-		CTXselSurfaceId.value = data.id;
+		CTXselItemId.value = data.id;
 
-		SEL.setElementIdAttributes( CTXselSurfaceId.value, item );
+		SEL.setElementIdAttributes( CTXselItemId.value, item );
 		SEL.setPanelSurfaceAttributes( CTXdivAttributes, data.id );
 
 	};
 
 
+	CTX.getItemSurface = function(){
+
+		let item = {};
+		item.attribute = 'id';
+		item.divAttributes = 'CTXdivCardSurfaceAttributes';
+		item.divTarget = document.getElementById( 'CTXdivPanelSurface' );
+		item.element = 'Surface';
+		item.name = 'itemSurface';
+		item.optionValues = GBX.surfacesJson.map ( item => [ item.id, item.Name, item.CADObjectId ] );
+		item.parent = GBX.surfacesJson;
+		item.placeholder = 'surface id';
+		item.selItem = 'CTXselItemId';
+
+		return item;
+
+	}
+
+	CTX.getItemOpening = function( ) {
+
+		let item = {};
+		GBX.openingsJSON = GBX.surfaceOpenings.children.map( item => item.userData.data );
+
+		item.attribute = 'id';
+		item.divAttributes = 'CTXdivCardSurfaceAttributes';
+		item.divTarget = document.getElementById( 'CTXdivPanelSurface' );
+		item.element = 'Opening';
+		item.name = 'itemOpening';
+		item.optionValues = GBX.surfaceOpenings.children.map ( item => [ item.userData.data.id, item.userData.data.Name, item.userData.data.CADObjectId ] );
+		item.parent = GBX.openingsJSON;
+		item.placeholder = 'opening id';
+		item.selItem = 'CTXselItemId';
+
+		return item;
+
+	}
 
 	///// Surface Coordinates
 

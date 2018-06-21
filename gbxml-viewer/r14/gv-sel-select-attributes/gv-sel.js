@@ -7,12 +7,13 @@
 	// functions in most sections are in alphabetical order
 
 
-	var SEL = {};
+	var SEL = { release: '14.0' };
 
 	SEL.spaceIndex = 0;
 
 	SEL.getElementPanel = function( item ){
 		// this all seems very complicated
+		//console.log( 'item', item );
 
 		item = item || {};
 
@@ -39,7 +40,7 @@
 
 		const divElement =
 
-			`<div class=flex-container2 >
+			`<div class=flex-container2 title="SEL${SEL.release}" >
 
 				<div class=flex-div1 >
 					<input oninput=SEL.setSelectedIndex(this,${item.selItem});
@@ -256,7 +257,8 @@
 
 	SEL.setPanelSurfaceAttributes = function( target, surfaceId ) {
 
-		const surfaceMesh = GBX.surfaceMeshes.children.find( element => element.userData.data.id === surfaceId );
+		const objects = GBX.surfaceMeshes.visible === true ? GBX.surfaceMeshes.children : GBX.surfaceOpenings.children;
+		const surfaceMesh = objects.find( element => element.userData.data.id === surfaceId );
 		//console.log( 'surfaceMesh', surfaceMesh );
 
 		const recGeom = surfaceMesh.userData.data.RectangularGeometry;

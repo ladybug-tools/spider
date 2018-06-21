@@ -23,7 +23,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2018-06-16 ~ R14.3 ~ Concept for this release</summary>
+<summary>Welcome 2018-06-21 ~ R14.6 ~ Concept for this release</summary>
 
 * Try and get all modules fitting into some kind of cohent whole
 	* See if we can get this to be a big release that lasts several months
@@ -33,6 +33,14 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 * gbXML file load-time errors and useful stats reporting easily accessible and visible
 * Issues Panel: big cleanup / add find faulty surface inclusions
 * Heads-up display: Now named 'CTX Context menu' / Add vertex editing capabilities
+* Doors and windows clickable
+
+All of the above should be dealt with before we have after a release candidate. After we have a release candidate then we can start adding new features. These include
+
+* Editable vertices
+* Fixes for every issue found
+* Ways of automating the update notices process - to let you know what's new every day
+
 
 </details>
 

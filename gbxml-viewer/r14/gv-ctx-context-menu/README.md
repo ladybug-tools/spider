@@ -59,6 +59,15 @@ This feature is now called termed a '[context menu]( https://en.wikipedia.org/wi
 
 ## Change Log
 
+### 2018-06-21 ~ Theo
+
+CTX14.0
+* Add release number
+* If surfaces not visible use openings as the clickable objects
+* Fix read me link
+
+
+
 ### 2018-06-09 ~ Theo
 
 R14.2

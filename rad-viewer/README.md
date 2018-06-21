@@ -113,8 +113,11 @@ There seems to be small errors here and there with openings. I have not yet iden
 
 ## Links of Interest
 
+Rad Models
 * https://github.com/rndmStff/radModels
 * http://radsite.lbl.gov/radiance/pub/objects/
+
+Radiance Software
 * https://github.com/NREL/Radiance
 * https://radiance-online.org/
 * http://radsite.lbl.gov/radiance/framer.html
@@ -123,8 +126,31 @@ There seems to be small errors here and there with openings. I have not yet iden
 * http://radsite.lbl.gov/radiance/book/
 * https://nrel.github.io/Radiance/doc/ray.html
 
+Radiance Materials
+* https://github.com/NREL/Radiance/blob/master/doc/notes/materials
 
-Materials: https://github.com/NREL/Radiance/blob/master/doc/notes/materials
+Ladybug Tools / Honeybee
+* https://www.ladybug.tools/honeybee.html
+
+Ladybug Tools / HydraShare
+* https://hydrashare.github.io/hydra/index.html
+
+Hydra is a platform for sharing Grasshopper and Dynamo files. The HydraShare landing page has links to dozens of pages. Each page page displays two or more images, a description and a link to download the source code. The images usually show a screen capture of the Grasshopper visual programing screen and a screen capture of the output. The descriptions are generally brief and provide just a hint as to the purpose and the scope of the project. The only way to attain a clear picture uf the script is to download,install and run it. Running the script require that Rhino and Grasshopper are already installed
+
+Documentation
+* https://legacy.gitbook.com/book/ladybug-tools/honeybee-primer/details
+	* Reference manual for the Honeybee visual programming language
+	* Provides a list of parameters for each available function
+
+
+Sunshine
+
+* https://en.wikipedia.org/wiki/Sunshine_duration
+* https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration
+
+More
+* https://github.com/tudelft3d/Solar3Dcity
+
 
 Octree format
 * http://radsite.lbl.gov/radiance/refer/filefmts.pdf
