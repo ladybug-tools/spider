@@ -16,6 +16,10 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 * May have fewer caching issues for you
 * Load images  up to 640x640. 2048x208 if you pay
 * See <https://developers.google.com/maps/documentation/maps-static/intro>
+* Extra benefits:
+	* Using lat/lon as center you can position map exactly where needed
+	* You can draw on map
+* The only reason we do not use this service more often is that we want > 640x640 at no cost
 
 
 
