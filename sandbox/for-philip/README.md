@@ -11,7 +11,11 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 ### Google Static Maps API
 
 ## [google maps api fetch static]( https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-api-fetch-static.html )
-* fetch a static Google map via Google APIs
+
+* Fetch a static Google map via Google APIs
+* May have fewer caching issues for you
+* Load images  up to 640x640. 2048x208 if you pay
+* See <https://developers.google.com/maps/documentation/maps-static/intro>
 
 
 
