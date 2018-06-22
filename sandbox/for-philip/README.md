@@ -25,6 +25,8 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 	* You can draw on map
 * The only reason we do not use this service more often is that we want > 640x640 at no cost
 * Update 2018-06-22 ~ Dang! Google Maps API now requires an access key
+	* Latest version allows for input of Maps API  key
+	* Key is remembered between sessions using local storage
 
 
 

@@ -23,7 +23,7 @@
 
 		<div id = "divTitle" ></div>
 
-		<p>API Key <input id=inpApiKey ></p>
+		<p>API Key <input id=inpApiKey onchange=setStorage(); size=50></p>
 		<p><button onclick=fetchMap(); >fetch map</button></p>
 
 	</div>
@@ -45,6 +45,9 @@
 			<p>${document.head.querySelector( '[name=description]' ).content }</p>
 		`;
 
+		const apiKey = localStorage.getItem( 'apiKeyGoogleMaps' );
+		inpApiKey.value = apiKey ? apiKey : '' ;
+
 	}
 
 
@@ -60,6 +63,21 @@
 		fetch( new Request( url ) )
 			.then( function( response ) { return response.blob() })
 			.then( function( blob ) { image.src = URL.createObjectURL( blob ); } );
+
+	}
+
+
+	function setStorage() {
+
+		const key = inpApiKey.value;
+		localStorage.setItem( 'apiKeyGoogleMaps', key );
+
+	}
+
+	function getStorage() {
+
+		const thing = localStorage.getItem( 'apiKeyGoogleMaps' );
+		divContents.innerHTML += thing + b;
 
 	}
 
