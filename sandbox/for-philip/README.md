@@ -10,11 +10,12 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 
 ### Google Static Maps API
 
-## [google maps api fetch static]( http://www.ladybug.tools/spider/sandbox/for-philip/google-maps-api-fetch-static.html )
+## [google maps api fetch static]( https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-api-fetch-static.html )
 * fetch a static Google map via Google APIs
 
-### Entry level ray-casting with Three.js
 
+
+### Entry level ray-casting with Three.js
 
 ## [ground and boxes 1]( http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-1.html )
 
