@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "fetch a static Google map via Google APIs" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-06-22" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p><button onclick=fetchMap(); >fetch map</button></p>
+
+	</div>
+
+	<div id = "divContents" ></div>
+
+<script>
+
+	init();
+
+	function init() {
+
+		const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		//const title = document.title;
+
+		divTitle.innerHTML =
+		`
+			<h1><a href="" >${title}</a></h1>
+			<p>${document.head.querySelector( '[name=description]' ).content }</p>
+		`;
+
+	}
+
+
+
+	function fetchMap(){
+
+		const url="http://maps.googleapis.com/maps/api/staticmap?center=37,-122&maptype=roadmap&zoom=12&size=512x512&sensor=false";
+		// https://developers.google.com/maps/documentation/maps-static/intro
+
+		divContents.innerHTML = '<img id=image >';
+
+		fetch( new Request( url ) )
+			.then( function( response ) { return response.blob() })
+			.then( function( blob ) { image.src = URL.createObjectURL( blob ); } );
+
+	}
+
+</script>
+</body>
+</html>

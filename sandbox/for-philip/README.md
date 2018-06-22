@@ -3,12 +3,17 @@
 # For Philip Read Me
 
 
-Deprecated: Go to: <https://github.com/ladybug-tools/spider/tree/master/solar-well>
+Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tree/master/solar-well>
 
 
-## Concept
+## Files
 
-Entry level ray-casting with Three.js
+### Google Static Maps API
+
+## [google maps api fetch static]( http://www.ladybug.tools/spider/sandbox/for-philip/google-maps-api-fetch-static.html )
+* fetch a static Google map via Google APIs
+
+### Entry level ray-casting with Three.js
 
 
 ## [ground and boxes 1]( http://www.ladybug.tools/spider/sandbox/for-philip/ground-and-boxes-1.html )
