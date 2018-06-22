@@ -10,6 +10,9 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 
 ### Google Static Maps API
 
+## [google maps image](https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-image.html )
+* Get a simple static image
+
 ## [google maps api fetch static]( https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-api-fetch-static.html )
 
 * Fetch a static Google map via Google APIs
@@ -20,6 +23,7 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 	* Using lat/lon as center you can position map exactly where needed
 	* You can draw on map
 * The only reason we do not use this service more often is that we want > 640x640 at no cost
+* Update 2018-06-22 ~ Dang! Google Maps API now requires an access key
 
 
 
