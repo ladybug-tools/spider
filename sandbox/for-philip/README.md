@@ -12,6 +12,7 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 
 ## [google maps image](https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-image.html )
 * Get a simple static image
+* Still seems to be working without an API key
 
 ## [google maps api fetch static]( https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-api-fetch-static.html )
 
