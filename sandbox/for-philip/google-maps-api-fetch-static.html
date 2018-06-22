@@ -23,6 +23,7 @@
 
 		<div id = "divTitle" ></div>
 
+		<p>API Key <input id=inpApiKey ></p>
 		<p><button onclick=fetchMap(); >fetch map</button></p>
 
 	</div>
@@ -50,7 +51,8 @@
 
 	function fetchMap(){
 
-		const url="https://maps.googleapis.com/maps/api/staticmap?center=37,-122&maptype=roadmap&zoom=12&size=512x512&sensor=false";
+		const url=
+		"https://maps.googleapis.com/maps/api/staticmap?center=37,-122&maptype=roadmap&zoom=12&size=512x512&sensor=false&key=" + inpApiKey.value;
 		// https://developers.google.com/maps/documentation/maps-static/intro
 
 		divContents.innerHTML = '<img id=image >';
