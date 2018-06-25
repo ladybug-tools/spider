@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-06-24" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; max-width: 640px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+		</p>
+
+		<div id = "divLog" ></div>
+
+	</div>
+
+<script>
+
+/* globals THREE, divTitle, divMenu, hamburger  */
+// jshint esversion: 6
+
+
+const rows = 4
+const cols = 3;
+
+const pixelsPerTile = 256
+let canvas;
+let sceneRotation = 1;
+
+let renderer, camera, controls, scene;
+
+init();
+animate();
+
+function init() {
+
+	const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+	//const title = document.title;
+
+	divTitle.innerHTML =
+	`<h1>
+		<a href="" >${title}</a>
+	</h1>`;
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+	camera.position.set( -500, -500, 500 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	getMapTiles();
+
+}
+
+
+
+function getMapTiles () {
+
+	canvas = document.createElement( 'canvas' );
+	canvas.width = cols * pixelsPerTile;
+	canvas.height = rows * pixelsPerTile;
+
+	//document.body.appendChild( canvas );
+	//canvas.style.cssText = 'border: 1px solid gray; margin: 10px auto; position: absolute; right: 0; z-index:10;';
+
+	for ( let i = 0; i < cols; i++ ) {
+
+		for ( let j = 0; j < rows; j ++ ) {
+
+			const url = 'https://mt1.google.com/vt/x=' + ( 10486 + i ) + '&y=' + ( 25326 + j ) + '&z=16';
+
+			fetchMap( url, i, j );
+
+		}
+
+	}
+
+}
+
+
+
+function fetchMap( url, col, row ){
+
+	fetch( new Request( url ) )
+	.then( response => response.blob() )
+	.then( blob => setMap( URL.createObjectURL( blob ), col, row ) );
+
+}
+
+
+
+function setMap( src, col, row ) {
+
+	const img = new Image(); //document.createElement( 'img' );
+
+	img.onload = function(){
+
+		//console.log( 'src, col, row', src, col, row );
+		//divLog.appendChild( img );
+
+		const context = canvas.getContext( '2d' );
+		context.drawImage( img, 0, 0, pixelsPerTile, pixelsPerTile, col * pixelsPerTile, row * pixelsPerTile, pixelsPerTile, pixelsPerTile );
+
+		if ( ( col + 1 ) * ( row + 1 ) >= rows * cols ) {
+
+			const texture = new THREE.Texture( canvas );
+			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			texture.needsUpdate = true;
+
+			const geometry = new THREE.PlaneBufferGeometry( cols * pixelsPerTile, rows * pixelsPerTile );
+			const material = new THREE.MeshBasicMaterial( { map: texture, side: 2 });
+			mesh = new THREE.Mesh( geometry, material );
+			scene.add( mesh );
+
+		}
+
+	}
+
+	img.src = src;
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+	//scene.rotation.z += sceneRotation / 1000;
+
+}
+
+</script>
+</body>
+</html>

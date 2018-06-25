@@ -25,7 +25,6 @@
 
 	button, input[ type=button ] { border-width: 1px; border-radius: 2px; margin: 0px; padding: 2px 5px; }
 
-
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
 	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }

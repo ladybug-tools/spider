@@ -334,7 +334,113 @@
 
 		if ( !parameters.mapType ) {
 
-			parameters.mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
+			parameters.mapType = [ 'Google Maps','	function drawMapOverlay() {
+				//console.log( 'drawMapOverlay', 23 );
+
+				const opacity = 1;
+				const zoom =  parameters.zoom + 2;
+				const tilesPerSide = parameters.tilesPerSide;
+				const rasterCanvas = document.createElement( 'canvas' );
+				rasterCanvas.width = rasterCanvas.height = parameters.pixelsPerTile * tilesPerSide;
+		//		document.body.appendChild( rasterCanvas );
+		//		rasterCanvas.style.cssText = 'border: 1px solid gray; left: 0; margin: 10px auto; position: absolute; right: 0; z-index:10;';
+
+				const rasterContext = rasterCanvas.getContext( '2d' );
+
+				if ( !parameters.mapType ) {
+
+					parameters.mapType = [ 'Google Maps','https://mt1.google.com/vt/x=' ];
+					parameters.selectedIndex = 0;
+
+				}
+
+		//		const tileOffset = Math.floor( 0.5 * tilesPerSide );
+				const tileX = lon2tile( parameters.longitude, zoom ) - parameters.titleOffsetX;
+				const tileY = lat2tile( parameters.latitude, zoom ) - parameters.titleOffsetY;
+
+				let count = 0;
+				const baseURL = parameters.mapType[ 1 ];
+
+				for ( let x = 0; x < tilesPerSide; x++ ) {
+
+					for ( let y = 0; y < tilesPerSide; y++ ) {
+
+						if ( parameters.selectedIndex < 4 ) {
+
+							loadImage( baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+							//console.log( 'google', baseURL + ( x + tileX ) + '&y=' + ( y + tileY ) + '&z=' + zoom, x, y );
+
+						} else if ( parameters.selectedIndex === 7 ) {
+
+							loadImage( baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg', x , y );
+							//console.log( 'esri', baseURL + zoom + '/' + ( y + tileY ) + '/' + ( x + tileX ) + '.jpg' );
+
+						} else {
+
+							loadImage( baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png', x , y );
+							//console.log( '', parameters.selectedIndex, baseURL + zoom + '/' + ( x + tileX ) + '/' + ( y + tileY ) + '.png' );
+
+						}
+
+					}
+
+				}
+
+
+				function loadImage( url, x, y ) {
+					//console.log( 'load image', x, y );
+					//scope.info.innerHTML += 'url ' + url + ' x' + x + ' y' + y + b;
+
+					const img = document.createElement( 'img' );
+					img.crossOrigin = 'anonymous';
+					img.src = url;
+
+					const texture = new THREE.Texture( rasterCanvas );
+					texture.minFilter = texture.magFilter = THREE.NearestFilter;
+					texture.needsUpdate = true;
+					const pixelsPerTile = parameters.pixelsPerTile;
+					const tilesPerSideSquared = tilesPerSide * tilesPerSide;
+
+					img.onload = function(){
+
+						//info.innerHTML += + count + ' ';
+						rasterContext.drawImage( img, 0, 0, pixelsPerTile, pixelsPerTile, x * pixelsPerTile, y * pixelsPerTile, pixelsPerTile, pixelsPerTile );
+
+						count++;
+
+						if ( count >= tilesPerSideSquared ) {
+
+							//info.innerHTML += 'ground.material.map' + texture.uuid;
+
+							if ( lightDirectional ) {
+								//console.log( 'lights true', lightDirectional );
+
+								ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+
+
+							} else {
+								//console.log( 'lights false', lights );
+
+								ground.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+
+							}
+
+							//ground.material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2, opacity: opacity , transparent: true } );
+							//ground.geometry.computeFaceNormals();
+							//ground.geometry.computeVertexNormals();
+		//					ground.material.needsUpdate = true;
+
+							setCamera();
+
+						}
+
+					}
+
+				}
+
+
+			}
+		' ];
 			parameters.selectedIndex = 0;
 
 		}

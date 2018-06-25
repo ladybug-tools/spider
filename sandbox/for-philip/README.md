@@ -8,11 +8,26 @@ Ray casting files superceded: Go to: <https://github.com/ladybug-tools/spider/tr
 
 ## Files
 
-### Google Static Maps API
+### Google S
+
+Note: The Maps Static API Usage Limits have changed.
+* Update 2018-06-24: enforcement of the new terms currently appears quite variable. Sometimes you can get in without an API key and sometimes you cannot.
+
+## [fetch-google-maps-tiles]( https://www.ladybug.tools/spider/sandbox/for-philip/fetch-google-maps-tiles.html )
+
+* Fetches Google Map tiles using HTMK 5 Fetch instead of xmlhttprequest
+* Uses promises. Feels faster and more light weight
+* Code could be further somplified but that increases the caching issues
+* Still has issues with canvas element being drawn prior to all image tiles being loaded
+* Maybe should add a settimeout or a loop until image.complete === true for all images
+* Anyway: any help or thoughts appreciated
+
+
 
 ## [google maps image](https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-image.html )
 * Get a simple static image
-* Still seems to be working without an API key << update: then again maybe not - unless image is already in cache
+* Still seems to be working without an API key
+* update 2018-06-23L appears broken- unless image was already in cache
 
 ## [google maps api fetch static]( https://www.ladybug.tools/spider/sandbox/for-philip/google-maps-api-fetch-static.html )
 

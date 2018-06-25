@@ -130,10 +130,6 @@ There are a number of interesting things related to EPW files. Here are a few of
 * [Search EPW Weather Images]( https://www.google.com/search?q=epw+weather&rlz=1C1GCEA_enUS752US752&source=lnms&tbm=isch&sa=X )
 
 
-
-
-
-
 </details>
 
 
@@ -506,3 +502,7 @@ The relationship between people and the thermal environment has a profound impac
 	* https://github.com/rpg777
 
 </details>
+
+### Links
+
+* https://www.schorsch.com/en/kbase/resources/
