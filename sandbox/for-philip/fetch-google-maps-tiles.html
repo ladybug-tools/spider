@@ -47,6 +47,8 @@ const cols = 3;
 
 const pixelsPerTile = 256
 let canvas;
+let tilesLoaded = [];
+
 let sceneRotation = 1;
 
 let renderer, camera, controls, scene;
@@ -135,10 +137,13 @@ function setMap( src, col, row ) {
 		//console.log( 'src, col, row', src, col, row );
 		//divLog.appendChild( img );
 
+
 		const context = canvas.getContext( '2d' );
 		context.drawImage( img, 0, 0, pixelsPerTile, pixelsPerTile, col * pixelsPerTile, row * pixelsPerTile, pixelsPerTile, pixelsPerTile );
 
-		if ( ( col + 1 ) * ( row + 1 ) >= rows * cols ) {
+		tilesLoaded.push( img.src );
+
+		if ( tilesLoaded.length >= rows * cols ) {
 
 			const texture = new THREE.Texture( canvas );
 			texture.minFilter = texture.magFilter = THREE.NearestFilter;
