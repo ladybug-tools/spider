@@ -108,7 +108,7 @@ function getMapTiles () {
 
 			const url = 'https://mt1.google.com/vt/x=' + ( 10486 + i ) + '&y=' + ( 25326 + j ) + '&z=16';
 
-			fetchMap( url, i, j );
+			fetchMapTile( url, i, j );
 
 		}
 
@@ -118,7 +118,7 @@ function getMapTiles () {
 
 
 
-function fetchMap( url, col, row ){
+function fetchMapTile( url, col, row ){
 
 	fetch( new Request( url ) )
 	.then( response => response.blob() )
