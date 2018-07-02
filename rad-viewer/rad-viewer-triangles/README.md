@@ -13,7 +13,7 @@ View .RAD files that are large but are only comprised of triangles
 <div><iframe class=iframeReadMe src=https://www.ladybug.tools/spider/rad-viewer/rad-viewer-triangles/r1/rad-viewer-triangles.html width=100% height=400px >Iframes are not displayed on github.com</iframe></div>
 
 
-## [Rad Viewer Triangle]( https://www.ladybug.tools/spider/rad-viewer/rad-viewer-triangles/r1/rad-viewer-triangles.html )
+## [Rad Viewer Triangles]( https://www.ladybug.tools/spider/rad-viewer/rad-viewer-triangles/r1/rad-viewer-triangles.html )
 
 
 ## Wish list
