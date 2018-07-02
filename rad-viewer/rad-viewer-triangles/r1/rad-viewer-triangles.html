@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-06-24" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+		</p>
+
+		<p>Single .rad file<br><input type=file id=inpFile onchange=openFile(this); ></p>
+
+		<div id = "divLog" ></div>
+
+	</div>
+
+<script>
+
+/* globals THREE, divTitle, divMenu, hamburger  */
+// jshint esversion: 6
+
+
+var rad = {};
+
+rad.meshes = null;
+rad.edges = null;
+rad.pointsField = null;
+rad.pointsGeometry = null;
+rad.opacity = 0.85;
+
+rad.colors = {
+
+	InteriorWall: 0x008000,
+	ExteriorWall: 0xFFB400,
+	Roof: 0x800000,
+	InteriorFloor: 0x80FFFF,
+	ExposedFloor: 0x40B4FF,
+	Shade: 0xFFCE9D,
+	UndergroundWall: 0xA55200,
+	UndergroundSlab: 0x804000,
+	Ceiling: 0xFF8080,
+	Air: 0xFFFF00,
+	UndergroundCeiling: 0x408080,
+	RaisedFloor: 0x4B417D,
+	SlabOnGrade: 0x804000,
+	FreestandingColumn: 0x808080,
+	EmbeddedColumn: 0x80806E,
+
+	generic_wall: 'gray',
+	generic_floor: 'brown',
+	generic_roof: 'maroon',
+
+
+	Exterior_Window: 'black', //Exterior_Window ? Exterior_Window : 'black',
+	Exterior_Wall: 'gray',
+	Exterior_Floor: 'brown',
+	Exterior_Roof: 'maroon',
+
+
+	Ext_wall: 'gray',
+	Floor: 'brown',
+	Ext_glaz: 'black',
+	Int_wall: 'navajowhite',
+	Int_glaz: 'darkgray',
+	Dark_Wood: 'brown',
+	Ceiling: 'azure',
+	Light_Wood: 'burlywood'
+
+};
+
+let sceneRotation = 1;
+let renderer, camera, controls, scene;
+
+init();
+animate();
+
+function init() {
+
+	const title = location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+	//const title = document.title;
+
+	divTitle.innerHTML =
+	`<h1>
+		<a href="" >${title}</a>
+	</h1>`;
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( - 100, - 100, 100 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	//const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	//const material = new THREE.MeshNormalMaterial();
+	//const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+	url = '../facade.rad';
+
+	requestFile ( url );
+
+}
+
+
+	function openFile( inpFile ) {
+
+		//console.log( 'files', inpFile.files );
+		var reader, data;
+
+		reader = new FileReader();
+		reader.onload = function( event ) {
+
+			console.log( 'event', event );
+
+			divLog.innerHTML =
+				'name: ' + inpFile.files[0].name + '<br>' +
+				'size: ' + inpFile.files[0].size.toLocaleString() + ' bytes<br>' +
+				'type: ' + inpFile.files[0].type + '<br>' +
+				'modified: ' + inpFile.files[0].lastModifiedDate.toLocaleDateString() +
+			'';
+
+			//console.log( 'files', files );
+
+			const type = inpFile.files[0].name.slice( -3 ).toLowerCase();
+
+			if ( type === 'rad' ){
+
+				scene.remove( rad.meshes, rad.edges );
+				scene.remove( rad.pointsField );
+
+				rad.meshes = new THREE.Object3D();
+				rad.edges = new THREE.Object3D();
+
+				parseRadText( reader.result );
+
+			} else if ( type === 'pts' ) {
+
+				const response = reader.result;
+				//console.log( 'response', response );
+
+				rad.parsePtsText( response );
+
+			}
+
+		}
+
+		reader.readAsText( inpFile.files[0] );
+
+}
+
+function requestFile ( url ) {
+
+	scene.remove( rad.meshes, rad.edges );
+	rad.meshes = new THREE.Object3D();
+	rad.edges = new THREE.Object3D();
+
+	const xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded ); }; /// or something
+	xhr.onload = function( xhr ) { parseRadText( xhr.target.response); }
+
+	xhr.send( null );
+
+};
+
+
+
+function parseRadText( text ) {
+
+	//console.log( 'xhr', xhr );
+
+	//const response = xhr.target.response;
+	//console.log( 'response', response );
+
+	const lines = text.split(/\r\n|\n/);
+	//console.log( 'lines', lines );
+
+	const items = [ 'header' ];
+	const data = [];
+	let tmp = [];
+
+	for ( let line of lines ) {
+
+		line = line.trim();
+		if ( line[0] === '#' ) { continue; }
+		if ( line === '' ) { continue; }
+
+		if ( line.search( /[abcdfghijklmnopqrstuvwxyz]/ ) >= 0 ) {
+
+			if ( line.match( '!xform' ) && !line.match( '-rx' ) && !line.match( '-f' ) ) {
+
+				let url = line.trim().replace( /  /g, ' ' ).split( /\s/)[ 1 ];
+				url = url.slice( 1 );
+				//console.log( 'path + url', path + url );
+
+				rad.requestFile( path + url );
+
+			} else {
+
+				if ( line.match( 'void' ) ) {
+
+					//console.log( 'void', line );
+
+				}
+
+			}
+
+			items.push( line );
+			data.push( tmp );
+			tmp = [];
+
+		} else {
+
+			tmp.push( line );
+
+		}
+
+	}
+
+	data.push( tmp );
+
+	rad.items = items;
+	rad.data = data;
+
+	console.log( 'rad', rad );
+
+	setVertices();
+
+	divLog.innerHTML =
+	`
+		<p>length: ${text.length.toLocaleString()}</p>
+		<p>lines: ${lines.length.toLocaleString()}</p>
+		<p>faces: ${(items.length - 1).toLocaleString()}</p>
+	`;
+
+}
+
+
+
+function xxxsetVertices () {
+
+	for ( let i = 1; i < rad.items.length; i++ ) {
+
+		//console.log( 'item', rad.items[ i ] );
+
+		if ( rad.items[ i ] === '' ) {
+
+			continue;
+
+		} else if ( rad.items[ i ].includes( 'polygon') === true ) {
+			//console.log( 'voided rad.items[ i ]', rad.items[ i ] );
+
+			drawPolygon( i );
+
+		} else if ( rad.items[ i ].includes( 'void') ) {
+
+			if ( rad.items[ i ].includes( 'brightfunc') || rad.items[ i ].includes( 'brighttext') || rad.items[ i ].includes( 'alias') ) {
+				continue;
+			}
+
+			items = rad.items[ i ].trim().replace( /\t/g, ' ' ).replace( / {2,}/g, ' ' ).split( ' ' );
+			//console.log( 'items', items );
+
+			material = items[ 2 ];
+			//console.log( 'material', material );
+
+			arr = rad.data[ i ][ 2 ].trim().replace( /\t/g, ' ' ).replace( / {2,}/g, ' ' ).split( ' ' ).map( item => parseFloat( item ) );
+			//console.log( 'rad.items', arr );
+
+			color = new THREE.Color( arr[ 1 ], arr[ 2 ], arr[ 3 ]);
+			//console.log( 'color', color );
+
+			rad.colors[ material ] = color;
+
+			continue;
+
+		}
+		//console.log( 'line', line );
+
+	}
+
+	scene.add( rad.meshes ); //, rad.edges );
+	zoomObjectBoundingSphere( rad.meshes );
+
+};
+
+
+
+function setVertices () {
+
+	geometry = new THREE.BufferGeometry();
+
+	let points = [];
+
+	for ( let i = 1; i < rad.items.length; i++ ) {
+
+		//console.log( 'item', rad.items[ i ] );
+
+		if ( rad.items[ i ] === '' ) {
+
+			continue;
+
+		} else if ( rad.items[ i ].includes( 'polygon') === true ) {
+			//console.log( 'voided rad.items[ i ]', rad.items[ i ] );
+
+			const line = rad.data[ i ];
+			const length = parseInt( line[ 2 ], 10 ) / 3 + 3;
+			for ( let j = 3; j < length; j++ ) {
+
+//console.log( 'line', i, line[ i ]);
+
+				const arr = line[ j ].trim().replace( /\t/g, ' ' ).replace( / {2,}/g, ' ' ).split( ' ' ).map( item => parseFloat( item ) );
+
+				points.push( ...arr );
+
+			}
+
+
+			//drawPolygon( i );
+
+		} else if ( rad.items[ i ].includes( 'void') ) {
+
+			continue;
+
+		}
+		//console.log( 'line', line );
+
+	}
+
+	//console.log( 'points', points );
+
+
+	var vertices = new Float32Array( points );
+
+	// itemSize = 3 because there are 3 values (components) per vertex
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+	//console.log( 'geometry', geometry );
+
+	geometry.verticesNeedUpdate = true;
+	geometry.elementsNeedUpdate = true;
+	geometry.morphTargetsNeedUpdate = true;
+	geometry.uvsNeedUpdate = true;
+	geometry.normalsNeedUpdate = true;
+	geometry.colorsNeedUpdate = true;
+	geometry.tangentsNeedUpdate = true;
+	var material = new THREE.MeshBasicMaterial( { color: 0xff0000, side: 2 } );
+	material.needsUpdate = true
+	mesh = new THREE.Mesh( geometry, material );
+
+
+	/*
+		const edgesGeometry = new THREE.EdgesGeometry( mesh.geometry );
+		const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x333333 } ) );
+		//surfaceEdge.rotation.copy( shape.rotation );
+		//surfaceEdge.position.copy( shape.position );
+
+		rad.edges.add( surfaceEdge );
+	*/
+	rad.meshes.add( mesh );
+	scene.add( rad.meshes ); //, rad.edges );
+	zoomObjectBoundingSphere( rad.meshes );
+
+}
+
+
+
+function drawPolygon ( i ) {
+
+	const line = rad.data[ i ];
+	const length = parseInt( line[ 2 ], 10 ) / 3 + 3;
+	//console.log( 'length', length );
+
+	geometry = new THREE.BufferGeometry();
+	let points = [];
+
+	for ( let j = 3; j < length; j++ ) {
+
+		//console.log( 'line', i, line[ i ]);
+
+		const arr = line[ j ].trim().replace( /\t/g, ' ' ).replace( / {2,}/g, ' ' ).split( ' ' ).map( item => parseFloat( item ) );
+
+		points.push( ...arr );
+
+	}
+	//console.log( 'points', points );
+
+	var vertices = new Float32Array( points );
+
+	// itemSize = 3 because there are 3 values (components) per vertex
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+	//console.log( 'geometry', geometry );
+	var material = new THREE.MeshBasicMaterial( { color: 0xff0000, side: 2 } );
+	mesh = new THREE.Mesh( geometry, material );
+	rad.meshes.add( mesh );
+
+}
+
+
+
+
+function zoomObjectBoundingSphere ( obj ) {
+
+	const bbox = new THREE.Box3().setFromObject( obj );
+
+	const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+	const center = sphere.center;
+	const radius = sphere.radius;
+
+	controls.target.copy( center );
+	controls.maxDistance = 5 * radius;
+
+	camera.position.copy( center.clone().add( new THREE.Vector3( 1.0 * radius, - 1.0 * radius, 1.0 * radius ) ) );
+	camera.far = 10 * radius; //2 * camera.position.length();
+	camera.updateProjectionMatrix();
+
+	//lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
+	//lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+	//lightDirectional.target = axesHelper;
+
+	//axesHelper.scale.set( radius, radius, radius );
+	//axesHelper.position.copy( center );
+
+	obj.userData.center = center;
+	obj.userData.radius = radius;
+
+	//		scene.remove( cameraHelper );
+	//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+	//		scene.add( cameraHelper );
+
+};
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+	scene.rotation.z += sceneRotation / 1000;
+
+}
+
+</script>
+</body>
+</html>

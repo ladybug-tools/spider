@@ -108,6 +108,7 @@
 	}
 
 
+
 	rad.parseRadText = function( text ) {
 
 		const arr = location.hash.slice( 1 ).split( '/');

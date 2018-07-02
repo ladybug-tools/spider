@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+</head>
+<body>
+<script>
+	// 2018-05-18
+	// goal: drop this anywhere in any folder it will call the top level index.html and add the local read e path as location hash
+
+	const protocol = location.protocol;
+	console.log( 'protocol', protocol );
+
+	pathname = location.pathname;
+	console.log( 'pathname', pathname);
+
+	let path, path2, pathFull;
+
+	const repo = 'spider'; // rename to repo name
+
+	if ( protocol === 'file:' ) {
+
+		const sliceStart = pathname.indexOf( repo ) + repo.length + 1;
+		console.log( 'sliceStart', sliceStart );
+
+		path = pathname.slice( sliceStart, pathname.lastIndexOf( '/' )  );
+		console.log( 'path', path );
+
+		pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ).slice( 0 ) + '/index.html#' + path + '/README.md';
+
+	} else if ( protocol.includes( 'http' ) ) {
+
+		hash = pathname.slice(1, pathname.lastIndexOf( '/' ) );
+		console.log( 'hash', hash );
+		path = hash.replace( /-/g, '' ).replace( /\w+/g, '..' );
+
+		pathFull = path + '/index.html#' + hash + '/README.md';
+
+	}
+
+
+	console.log( 'pathFull', pathFull );
+
+	window.location.href = pathFull;
+
+
+</script>
+</body>
+</html>
