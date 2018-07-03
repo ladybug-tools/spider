@@ -184,6 +184,7 @@
 	};
 
 
+
 	CTX.getItemSurface = function(){
 
 		let item = {};
@@ -199,7 +200,9 @@
 
 		return item;
 
-	}
+	};
+
+
 
 	CTX.getItemOpening = function( ) {
 
@@ -218,7 +221,9 @@
 
 		return item;
 
-	}
+	};
+
+
 
 	///// Surface Coordinates
 

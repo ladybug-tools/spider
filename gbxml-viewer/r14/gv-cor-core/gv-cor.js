@@ -311,7 +311,7 @@
 
 		reader.onload = function( event ) {
 
-			console.log( 'event', event );
+			//console.log( 'event', event );
 
 			if ( files.files[0].name.toLowerCase().endsWith( '.xml' ) ) {
 
@@ -331,7 +331,7 @@
 				'modified: ' + files.files[0].lastModifiedDate.toLocaleDateString() +
 			'';
 
-			console.log( '', files );
+			//console.log( '', files );
 
 		};
 

@@ -2,7 +2,7 @@
 /* globals THREE */
 /* jshint esversion: 6 */
 
-	var GBX = { release: "14.0"};
+	var GBX = { release: "14.1"};
 
 	GBX.gbxml = null;
 	GBX.gbjson = null; // xnl converted to json

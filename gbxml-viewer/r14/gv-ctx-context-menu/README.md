@@ -37,10 +37,14 @@ This feature is now called termed a '[context menu]( https://en.wikipedia.org/wi
 
 ## Wish list
 
+* 2018-07-02 ~ Enable multiple surfaces to be updated or edited at the same time
+	* Select a number of surfaces using surface type
+	* Enable multiple selected in select list
+	* Show only selected surfaces in select list
 * 2018-03-06 ~ Add what you see upon open depends on current window inner height
 	* 2018-03-05 ~ Goal: surface + two adjacent: all visible at once
 * 2018-03-06 ~ Add 'match parameters of previously selected surface' buttons
-* 2018-03-04 ~ Identify adjacent spaces
+* 2018-03-04 ~ Identify adjacent spaces at same time
 * 2018-01-02 ~ Multiple types of heads-up modules with different agendas
 	* Show space names at cursor locations
 * 2018-01-02 ~ Add in-world placard at cursor location
@@ -58,6 +62,10 @@ This feature is now called termed a '[context menu]( https://en.wikipedia.org/wi
 
 
 ## Change Log
+
+2018-07-03 ~ Theo
+
+* 2018-07-02 ~ Provide context menu details for all openings - just as for surfaces
 
 ### 2018-06-21 ~ Theo
 

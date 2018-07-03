@@ -856,6 +856,9 @@
 		const surfaces = GBX.gbjson.Campus.Surface;
 
 		let txt = '';
+		/*
+		// gethers only types that are in use
+		// could be use to highlight the full list
 		const types = [];
 		const typesCount = [];
 
@@ -875,18 +878,20 @@
 			}
 
 		}
+		*/
 
-		for ( let i = 0; i < types.length; i++ ) {
+		//for ( let i = 0; i < types.length; i++ ) {
+		for ( let i = 0; i < GBX.surfaceTypes.length; i++ ) {
 
 			txt +=
-				`<option>${types[i]}</option>`;
+				`<option>${GBX.surfaceTypes[i]}</option>`;
 
 		}
 
 		//if ( window.CTXdivAttributes ) {
 
 			SELselSurfaceType.innerHTML = txt;
-			SELselSurfaceType.size = types.length;
+			SELselSurfaceType.size = GBX.surfaceTypes.length;
 
 		//}
 
