@@ -1,5 +1,5 @@
 
-Test Case #1 Description: TestCase2_L_2_Floors_Overhangs
+Test Case #2 Description: TestCase2_L_2_Floors_Overhangs
 
 No transparency in TIF images yet.
 
