@@ -329,11 +329,13 @@ function loadTestCase( index ) {
 		loadRGBE( fileName, index );
 
 	}
+	/*
 	loadRGBE( hdrs[ 9 ], index );
 	loadRGBE( hdrs[ 10 ], index );
 	loadRGBE( hdrs[ 11 ], index );
 	loadRGBE( hdrs[ 12 ], index );
 	loadRGBE( hdrs[ 13 ], index );
+	*/
 
 	scene.add( meshes );
 
@@ -343,7 +345,7 @@ function loadTestCase( index ) {
 
 function loadRGBE( fileName, index ) {
 
-		const items = fileName.slice( 0, -8 ).split( '_' ).map( item => parseFloat( item ) );
+		const items = fileName.slice( 0, -4 ).split( '_' ).map( item => parseFloat( item ) );
 		//console.log( 'items', items );
 
 		const center = new THREE.Vector3().fromArray( items.slice( 0, 3 ) );
