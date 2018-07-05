@@ -397,7 +397,7 @@ function loadRGBE( fileName, index ) {
 
 		texture.minFilter = THREE.LinearFilter;
 
-		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.5, side: 0, transparent: true } );
+		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.85, side: 2, transparent: true } );
 		const geometry = new THREE.PlaneBufferGeometry( width, height );
 		//geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
 
