@@ -253,6 +253,8 @@ function callbackGitHubMenu ( files ) {
 
 		if ( !file.name.endsWith( '.png' ) ) { continue; }
 
+		if( file.name.includes( 'sw' ) || file.name.includes( 'label' ) ) { continue; }
+
 		const fileName = encodeURI( file.name );
 
 		txt +=
@@ -354,18 +356,20 @@ function loadRGBE( fileName, index ) {
 		tellTale.position.copy( center );
 		meshes.add( tellTale );
 
-		const normal = new THREE.Vector3().fromArray( items.slice( 3, 6 ) );
+		//const normal = new THREE.Vector3().fromArray( items.slice( 3, 6 ) );
+		const normal = new THREE.Vector3().fromArray( [ items[ 3 ], items[ 4 ], items[ 5 ] ] );
 		//console.log( 'normal', normal );
 
 		const geometry3 = new THREE.Geometry();
-		//geometry3.vertices =  [ new THREE.Vector3( 0, 0, 0), point ];
+		//geometry3.vertices = [ new THREE.Vector3( 0, 0, 0), point ];
 		geometry3.vertices =  [ center, center.clone().add( normal.clone().multiplyScalar( 10 ) ) ];
-		//geometry3.vertices =  [ new THREE.Vector3( 0, 0, 0), normal ];
+		//geometry3.vertices = [ new THREE.Vector3( 0, 0, 0), normal ];
 		const material3 = new THREE.LineBasicMaterial( { color: 0xffff } );
 		const line = new THREE.Line( geometry3, material3 );
 		meshes.add( line );
 
-		const point = new THREE.Vector3().fromArray( items.slice( 6, 9 ) );
+		//const point = new THREE.Vector3().fromArray( items.slice( 6, 9 ) );
+		const point = new THREE.Vector3().fromArray( [ items[ 6 ], items[ 8 ], items[ 7 ] ] );
 		const geometry2 = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
 		const material2 = new THREE.MeshBasicMaterial( { color: "magenta" } );
 		const tellTale2 = new THREE.Mesh( geometry2, material2 );
@@ -385,7 +389,6 @@ function loadRGBE( fileName, index ) {
 
 
 
-
 		const width = items[ 9 ];
 
 		const height = items[ 10 ];
@@ -399,11 +402,14 @@ function loadRGBE( fileName, index ) {
 
 		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.85, side: 2, transparent: true } );
 		const geometry = new THREE.PlaneBufferGeometry( width, height );
-		//geometry.applyMatrix( new THREE.Matrix4().makeRotationX( 0.5 * Math.PI ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI ) );
+		geometry.lookAt( normal );
+		//geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -Math.PI / 2 ) );
 
 		mesh = new THREE.Mesh( geometry, material );
+		//mesh.lookAt( normal );
+		//mesh.quaternion.setFromUnitVectors( normal, point );
 		mesh.position.copy( center );
-			meshes.add( mesh );;
 		meshes.add( mesh );
 
 
