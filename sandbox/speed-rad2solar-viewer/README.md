@@ -17,6 +17,14 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 -->
 
+### [SPEED Rad2Solar Viewer R5]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r5/speed-rad2solar-viewer.html )
+
+* WIP
+
+### [SPEED Rad2Solar Viewer R4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r4/speed-rad2solar-viewer.html )
+
+* Reads PNG files instead of HDR files
+
 ### [SPEED Rad2Solar Viewer R3]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r3/speed-rad2solar-viewer.html )
 
 * Obtains the list of RGBE/HDR files included in a given test case folder on GitHub
