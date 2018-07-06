@@ -384,10 +384,6 @@ function loadRGBE( fileName, index ) {
 		meshes.add( line2 );
 		const angleZ = point.angleTo(new THREE.Vector3( 1, 0, 0 ) );
 
-		//var quaternion = new THREE.Quaternion();
-		//quaternion.setFromAxisAngle( new THREE.Vector3( items[ 6 ], items[ 8 ], items[ 7 ] ).normalize(), Math.PI / 2 )
-
-
 
 		const width = items[ 9 ];
 
@@ -411,55 +407,6 @@ function loadRGBE( fileName, index ) {
 		//mesh.quaternion.setFromUnitVectors( normal, point );
 		mesh.position.copy( center );
 		meshes.add( mesh );
-
-
-		/*
-		rgbeLoader = new THREE.RGBELoader();
-
-		rgbeLoader.load( urlGitHubPage + index + '-7_4_18/' + fileName, function( texture, textureData ) {
-
-			//console.log( textureData );
-			//console.log( 'texture', texture );
-			texture.encoding = THREE.RGBEEncoding;
-			texture.minFilter = THREE.NearestFilter;
-			texture.magFilter = THREE.NearestFilter;
-			texture.flipY = true;
-
-			const material = new THREE.MeshBasicMaterial( { map: texture, side: 2 } );
-			const geometry = new THREE.PlaneBufferGeometry( width, height );
-
-
-			if ( normal.x === 0 && normal.y === 0 && normal.z === 1 ) {
-				//console.log( 'angleZ', angleZ );
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angleZ ) );
-
-			} else {
-
-				geometry.lookAt( normal );
-
-			}
-
-				//geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angleZ ) );
-			mesh = new THREE.Mesh( geometry, material );
-			//mesh.quaternion.copy( quaternion );
-			mesh.position.copy( center );
-			meshes.add( mesh );
-
-			//console.log( 'rgbeLoader',rgbeLoader);
-
-		},
-		function ( xhr ) {
-			//console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-		},
-
-		// onError callback
-		function ( err ) {
-			console.error( 'An error happened' );
-		} );
-
-		//if ( !xx.image.width ){ console.log( 'xx', xx );}
-
-		*/
 
 }
 
