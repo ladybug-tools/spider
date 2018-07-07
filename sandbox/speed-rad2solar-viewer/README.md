@@ -8,7 +8,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-* Radiance HDR files in real-time 3D in your browser using the Three.js JavaScript library
+* Radiance HDR files converted to PNG files in real-time 3D in your browser using the Three.js JavaScript library
 
 <!--
 ## [SPEED Rad2Solar Viewer]( http://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/index.html )
@@ -17,9 +17,35 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 -->
 
+### Features in latest Release
+
+* Obtains the list of PNG files included in a given test case folder on GitHub - uses GitHub API
+* Lists the names of the files with links to each file in the menu
+* Parses the file name string of the bitmap to obtain
+	* Center point, normal, rotation as floating point Three.js vectors
+	* width and height of each texture
+* Loads each bitmap as a Three.js texture
+* Creates a Three.js plane for each bitmap
+	* Applies texture to the plane
+	* Positions plane at center point
+	* Rotates plane to align to the normal
+	* Sizes plane according to the specified width and height
+* Draws the direction vector as cast from the center of the mesh in black
+* Draws the normal as cast from the center of the mesh in cyan
+
+
 ### [SPEED Rad2Solar Viewer R5]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r5/speed-rad2solar-viewer.html )
 
-* WIP
+* WIP but getting there
+
+#### Issues
+
+* If you load a number of files you may run over the GitHub API usage limits. If so wait an hour and you will be good to go again
+	* Confirm this is the issue using JavaScript Console and noting 403 error
+	* A future release may allow you to enter a GitHub API key
+* Test Cases 3,4 and 5 include some bogus/broken/incorrectly converted PNG files.They will be updated
+* Test Case 1: shad building has issues
+
 
 ### [SPEED Rad2Solar Viewer R4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r4/speed-rad2solar-viewer.html )
 
@@ -88,9 +114,16 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Links of Interest
 
+### Sunshine
 * https://en.wikipedia.org/wiki/Sunshine_duration
 * https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration
 * https://github.com/tudelft3d/Solar3Dcity
+
+
+### HDR to PNG
+
+* https://en.wikipedia.org/wiki/IrfanView
+* https://www.irfanview.com/
 
 
 ## Change Log
