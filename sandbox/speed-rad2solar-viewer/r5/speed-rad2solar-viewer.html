@@ -125,22 +125,13 @@
 /* globals THREE, divTitle, divMenu, hamburger  */
 // jshint esversion: 6
 
-//const uriDefaultFile = 'https://cdn.rawgit.com/ladybug-tools/honeybee-resources/master/daylight/images/ad00500_ab1_c1_rm.hdr';
-
-//const urlGitHubSource = 'https://github.com/ladybug-tools/honeybee-resources/blob/master/daylight/images/';
-//const urlGitHubPage = 'https://rawgit.com/ladybug-tools/honeybee-resources/master/daylight/images/';
-//const iconGitHubMark = '<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>';
-
-//const uriDefaultFile = '0.00_-15.24_1.52_0.00_-1.00_0.00_-30.48_0.00_0.00_3.05_30.48_fls.hdr';
-
 const urlGitHubSource = 'https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/test-cases/test-case-2018-07-04-';
 const urlGitHubPage = 'https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-rad2solar-viewer/test-cases/test-case-2018-07-04-';
 const iconGitHubMark = '<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>';
 
-
 let meshes;
-let testCase = 2;
-let hdrs = [];
+let testCase = 1;
+let pngs;
 
 let renderer, camera, controls, scene;
 
@@ -200,12 +191,9 @@ function init() {
 	//const mesh = new THREE.Mesh( geometry, material );
 	//scene.add( mesh );
 
-	fetchGitHubFolderContents(1);
+	fetchGitHubFolderContents( testCase );
 
 	window.addEventListener ( 'hashchange', onHashChange, false );
-
-
-
 
 }
 
@@ -215,11 +203,7 @@ function fetchGitHubFolderContents( index ) {
 
 	testCase = index;
 
-	//url = 'https://api.github.com/repos/ladybug-tools/honeybee-resources/contents/daylight/images';
-
-	//url = 'https://cdn.rawgit.com/ladybug-tools/spider/master/sandbox/speed-rad2solar-viewer/test-cases/test-case-1/';
-
-	url = 'https://api.github.com/repos/ladybug-tools/spider/contents/sandbox/speed-rad2solar-viewer/test-cases/test-case-2018-07-04-' + index + '/';
+	const url = 'https://api.github.com/repos/ladybug-tools/spider/contents/sandbox/speed-rad2solar-viewer/test-cases/test-case-2018-07-04-' + index + '/';
 	//console.log(url );
 
 	divMenuItems.innerHTML =
@@ -247,7 +231,7 @@ function callbackGitHubMenu ( files ) {
 	//console.log( 'files', files );
 
 	let txt = '';
-	hdrs = [];
+	pngs = [];
 
 	for ( let file of files) {
 
@@ -269,14 +253,15 @@ function callbackGitHubMenu ( files ) {
 
 		</div>`;
 
-		hdrs.push( file.name );
+		pngs.push( file.name );
 
 	}
 
 	divGallery.innerHTML =
-	`<div style=margin:10px; >${ hdrs.length} RGBE/HDR files found</div>` + txt;
-	//onHashChange();
+	`<div style=margin:10px; >${ pngs.length} PNG files found</div>` + txt;
+
 	loadTestCase( testCase );
+
 }
 
 
@@ -284,7 +269,7 @@ function callbackGitHubMenu ( files ) {
 
 function onHashChange() {
 
-	uriDefaultFile = hdrs[ 0 ];
+	uriDefaultFile = pngs[ 0 ];
 	if ( !uriDefaultFile ) { alert("no-files-found" ); return; }
 
 	const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
@@ -292,14 +277,14 @@ function onHashChange() {
 
 	if ( ulc.endsWith( '.png' ) ) {
 
-		loadHdrFile( url, testCase );
+		loadSinglePGFile( url, testCase );
 
 	}
 
 }
 
 
-function loadHdrFile( fileName, index ) {
+function loadSinglePGFile( fileName, index ) {
 
 	//console.log( 'fileName', fileName.slice( 0, -8 ) );
 
@@ -320,20 +305,20 @@ function loadTestCase( index ) {
 
 	meshes = new THREE.Group();
 
-	if ( !hdrs.length ) { alert("No RGBE/HDR files found. \n\n ;-(" ); return; }
+	if ( !pngs.length ) { alert("No RGBE/HDR files found. \n\n ;-(" ); return; }
 
-	for ( fileName of hdrs ) {
+	for ( fileName of pngs ) {
 
 		loadPNG( fileName, index );
 
 	}
 
 	/*
-	loadRGBE( hdrs[ 9 ], index );
-	loadRGBE( hdrs[ 10 ], index );
-	loadRGBE( hdrs[ 11 ], index );
-	loadRGBE( hdrs[ 12 ], index );
-	loadRGBE( hdrs[ 13 ], index );
+	loadRGBE( pngs[ 9 ], index );
+	loadRGBE( pngs[ 10 ], index );
+	loadRGBE( pngs[ 11 ], index );
+	loadRGBE( pngs[ 12 ], index );
+	loadRGBE( pngs[ 13 ], index );
 	*/
 
 	scene.add( meshes );
@@ -350,54 +335,33 @@ function loadPNG( fileName, index ) {
 		const center = new THREE.Vector3().fromArray( items.slice( 0, 3 ) );
 		//console.log( 'center', center );
 
-		//const normal = new THREE.Vector3().fromArray( items.slice( 3, 6 ) );
 		const normal = new THREE.Vector3().fromArray( [ items[ 3 ], items[ 4 ], items[ 5 ] ] ).normalize();
-		console.log( 'normal', normal );
 
+		//console.log( 'normal', normal );
 		meshes.add( new THREE.ArrowHelper( normal, center, 10, 0xff00ff , 1, 1 ) );
 
-		//const point = new THREE.Vector3().fromArray( items.slice( 6, 9 ) );
 		const point = new THREE.Vector3().fromArray( [ items[ 6 ], items[ 7 ], items[ 8 ] ] ).normalize();
-		console.log( 'point', point );
 
+		//console.log( 'point', point );
 		meshes.add( new THREE.ArrowHelper( point, center, 10, 0x000000 , 1, 1 ) );
 
-		const angleZ = point.angleTo(new THREE.Vector3( 1, 0, 0 ) );
-
-
 		const width = items[ 9 ];
-
 		const height = items[ 10 ];
-
 		//console.log( 'w',width, 'h', height );
-		loader = new THREE.TextureLoader();
 
-		texture = loader.load ( urlGitHubPage + index + '/' + fileName );
+		const loader = new THREE.TextureLoader();
 
+		const texture = loader.load ( urlGitHubPage + index + '/' + fileName );
 		texture.minFilter = THREE.LinearFilter;
 
 		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.85, side: 2, transparent: true } );
 		const geometry = new THREE.PlaneBufferGeometry( width, height );
-//		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI / 2) );
-		angle = Math.atan2( point.x, point.y )
+
+		const angle = Math.atan2( point.x, point.y )
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
-		//geometry.lookAt( normal );
+		geometry.lookAt( normal );
 
 		mesh = new THREE.Mesh( geometry, material );
-		mesh.lookAt( normal );
-		//mesh.quaternion.setFromUnitVectors( normal, point );
-
-		//const normal = v( 0, 0, 1 ).normalize();
-		//const vector = v( -1, -1, 1 ).normalize();
-
-		//quaternion = new THREE.Quaternion();
-
-		//quaternion.setFromAxisAngle( normal, Math.PI );
-		//quaternion.setFromUnitVectors( normal, point );
-		//quaternion.setFromAxisAngle( vector, Math.PI / 2 );
-
-		//mesh.applyQuaternion( quaternion );
-
 		mesh.position.copy( center );
 		meshes.add( mesh );
 
