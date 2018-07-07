@@ -357,7 +357,7 @@ function loadPNG( fileName, index ) {
 		meshes.add( new THREE.ArrowHelper( normal, center, 10, 0xff00ff , 1, 1 ) );
 
 		//const point = new THREE.Vector3().fromArray( items.slice( 6, 9 ) );
-		const point = new THREE.Vector3().fromArray( [ items[ 6 ], items[ 8 ], items[ 7 ] ] ).normalize();
+		const point = new THREE.Vector3().fromArray( [ items[ 6 ], items[ 7 ], items[ 8 ] ] ).normalize();
 		console.log( 'point', point );
 
 		meshes.add( new THREE.ArrowHelper( point, center, 10, 0x000000 , 1, 1 ) );
@@ -379,20 +379,21 @@ function loadPNG( fileName, index ) {
 		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.85, side: 2, transparent: true } );
 		const geometry = new THREE.PlaneBufferGeometry( width, height );
 //		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( - Math.PI / 2) );
+		angle = Math.atan2( point.x, point.y )
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
 		//geometry.lookAt( normal );
-		//geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -Math.PI / 2 ) );
 
 		mesh = new THREE.Mesh( geometry, material );
-		//mesh.lookAt( normal );
+		mesh.lookAt( normal );
 		//mesh.quaternion.setFromUnitVectors( normal, point );
 
 		//const normal = v( 0, 0, 1 ).normalize();
 		//const vector = v( -1, -1, 1 ).normalize();
 
-		quaternion = new THREE.Quaternion();
+		//quaternion = new THREE.Quaternion();
 
-		//quaternion.setFromAxisAngle( normal, Math.PI / 2 );
-		quaternion.setFromUnitVectors( normal, point );
+		//quaternion.setFromAxisAngle( normal, Math.PI );
+		//quaternion.setFromUnitVectors( normal, point );
 		//quaternion.setFromAxisAngle( vector, Math.PI / 2 );
 
 		//mesh.applyQuaternion( quaternion );
