@@ -6,7 +6,7 @@
 <meta name=description content="List and display Radiance HDR files as textures on a 3D surface for all files in a test case folder" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-07-04" >
-<title>SPEED Rad2Solar R4 PNG </title>
+<title>SPEED Rad2Solar R5 PNG </title>
 <style>
 /* Copyright 2018 pushMe pullYou authors. MIT License */
 
@@ -351,13 +351,13 @@ function loadPNG( fileName, index ) {
 		//console.log( 'center', center );
 
 		//const normal = new THREE.Vector3().fromArray( items.slice( 3, 6 ) );
-		const normal = new THREE.Vector3().fromArray( [ items[ 3 ], items[ 4 ], items[ 5 ] ] );
+		const normal = new THREE.Vector3().fromArray( [ items[ 3 ], items[ 4 ], items[ 5 ] ] ).normalize();
 		console.log( 'normal', normal );
 
 		meshes.add( new THREE.ArrowHelper( normal, center, 10, 0xff00ff , 1, 1 ) );
 
 		//const point = new THREE.Vector3().fromArray( items.slice( 6, 9 ) );
-		const point = new THREE.Vector3().fromArray( [ items[ 6 ], items[ 8 ], items[ 7 ] ] );
+		const point = new THREE.Vector3().fromArray( [ items[ 6 ], items[ 8 ], items[ 7 ] ] ).normalize();
 		console.log( 'point', point );
 
 		meshes.add( new THREE.ArrowHelper( point, center, 10, 0x000000 , 1, 1 ) );
@@ -389,7 +389,7 @@ function loadPNG( fileName, index ) {
 		//const normal = v( 0, 0, 1 ).normalize();
 		//const vector = v( -1, -1, 1 ).normalize();
 
-		//quaternion = new THREE.Quaternion();
+		quaternion = new THREE.Quaternion();
 
 		//quaternion.setFromAxisAngle( normal, Math.PI / 2 );
 		quaternion.setFromUnitVectors( normal, point );
