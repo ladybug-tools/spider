@@ -4,7 +4,7 @@
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 
-# [R14 'Aragog' gbXML Viewer ~ SET ~ Settings Read Me]( #gbxml-viewer/r14/gv-set-settings/README-template.md )
+# [R14 'Aragog' gbXML Viewer ~ SET ~ Settings Read Me]( #gbxml-viewer/r14/gv-set-settings/README.md )
 
 <!--
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/r14/gv-set-settings/gv-tmp.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
@@ -14,8 +14,8 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-* Update a number of parameters to control the display and rendering of the gbXML file as a 3D model.
-* Viewing gbXML data in 3D gives you a lot more options for displaying gbXML elements using informative methods.
+* Update a number of parameters to control the display and rendering of the gbXML file as a 3D model
+* Viewing gbXML data in 3D gives you a lot more options for displaying gbXML elements using informative methods
 * Update the materials and colors for surfaces
 	- Choosing random colors helps you identify how a wall might be composed of multiple gbXML surfaces
 	- Choosing a solid shade helps you see shadows better
@@ -37,14 +37,16 @@ value='You are now in a GitHub web page view - Click this button to view this re
 * Control the behavior of the scene
 	* Toggle scene rotation
 	* Toggle perspective and orthographic views
-	* Set exploded 3D views
-		* As a whole
-		* By the storey
-	* Set section views along Xm Y and Z axes
+* Set exploded 3D views
+	* As a whole
+	* By the storey
+* Set section views along X, Y and Z axes
 
 
-## Wish list
 
+## To Do / Wish list
+
+* 2018-07-08 ~ Theo ~ Split menu items into multple modules as in reports and issues
 * 2018-05-11 ~ Theo ~ Add separate opening opacity slider?
 * 2018-05-11 ~ Theo ~ Add display skybox with patches set appropriate EPW data
 * 2018-05-11 ~ Theo ~ add slider for amount of exploding by storey
@@ -56,7 +58,6 @@ value='You are now in a GitHub web page view - Click this button to view this re
 * 2017 ~ Better lights and shadows settings
 
 
-## Wish list
 
 
 
@@ -76,8 +77,10 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ### 2018-06-?? ~ Theo
 
-R14
-* First commit
+SET2 14.1
+* First commit of a fork
+* Add title to ? link
+* Add details/summaries to menu
 
 ***
 

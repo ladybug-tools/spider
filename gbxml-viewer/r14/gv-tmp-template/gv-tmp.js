@@ -6,6 +6,7 @@
 
 	var TMP = { release: '14.1'};
 
+	// add a description property - for inserting into menus?
 
 	TMP.initTemplate = function() {  //called from bottom of file
 
