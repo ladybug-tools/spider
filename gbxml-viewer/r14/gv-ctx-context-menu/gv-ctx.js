@@ -156,7 +156,7 @@
 
 		`<details open >
 
-			<summary title="CTX${CTX.release}" >${title} &nbsp; <a href=#../gv-CTX-context-menu/README.md >?</a></summary>
+			<summary title="CTX${CTX.release}" >${ title } &nbsp; <a href=#../gv-CTX-context-menu/README.md >?</a></summary>
 
 			<div id = "CTXdivPanelSurface" ></div>
 

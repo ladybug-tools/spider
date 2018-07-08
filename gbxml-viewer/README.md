@@ -92,10 +92,11 @@ gbXML Viewer is a collection of modular experiments for viewing, examining and v
 * Facilitating the transfer of data between design programs and analysis programs
 
 
-## Previous Releases
+## Previous Releases and Special Releases
 
 * [Spider gbXML Viewer Previous Releases]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
-
+	* Load and run every release of the gbXML Viewer since the first commit
+	* Load and Run some of the special editions of the gbX<L viewer
 
 ## Project Information
 

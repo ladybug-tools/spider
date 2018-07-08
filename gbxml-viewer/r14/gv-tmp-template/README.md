@@ -41,7 +41,14 @@ value='You are now in a GitHub web page view - Click this button to view this re
 ## Change Log
 
 
-### 2018-06-19 ~ heo
+### 2018-07-08 ~ Theo
+
+R14.1
+* Three.js to R94
+* Add title with release to ? link
+
+
+### 2018-06-19 ~ Theo
 
 * Add gv-tmp.html and gc-tmp.js to help with testing and building new modules
 

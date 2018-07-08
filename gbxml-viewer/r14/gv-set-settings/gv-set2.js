@@ -4,7 +4,7 @@
 /*global THREE, THR, GBX,COR */
 /* jshint esversion: 6 */
 
-	var SET = {};
+	var SET = { release: '2 14.1' };
 
 	// move into own related functions?
 	SET.localClipX1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
@@ -37,7 +37,7 @@
 		`
 			<details id=detSettings class=app-menu open >
 
-				<summary>Settings &nbsp; <a href=#../gv-set-settings/README.md>?</a> </summary>
+				<summary>Settings &nbsp; <a href=#../gv-set-settings/README.md title="SET${ SET.release }">?</a> </summary>
 
 				<!--
 				<div>
@@ -54,8 +54,9 @@
 				<hr>
 
 				-->
-				<div>
-					<b>materials settings</b><br>
+
+				<details>
+					<summary>materials settings</summary>
 					<button id=butSetRandomMaterial onclick=SET.setRandomMaterial(); >Set random material</button>
 
 					<button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button>
@@ -67,71 +68,73 @@
 					<button onclick=SET.setExposureMaterial(); >Set exposure type material</button>
 
 					<button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button>
-				</div>
 
-				<div title="building opacity: 0 to 100%" >Opacity
+					<div title="building opacity: 0 to 100%" >Opacity
 					<output id=outOpacity class=floatRight >85%</output><br>
 					<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
-				</div>
+					</div>
 
-				<hr>
+					<hr>
+				</details>
 
-				<div>
-					<b>scene settings</b><br>
+				<details>
+					<summary>scene settings</summary>
 					<!--
 					<button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button>
 					-->
 
 					<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
-				</div>
 
-				<p>
-					<button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
+					<p>
+						<button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
 
-					<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
+						<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
 
-				</p>
+					</p>
 
 
-				<p>
-					<button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
+					<p>
+						<button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
 
-					<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
+						<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
 
-				</p>
+					</p>
 
-				<p>
-					<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
-					<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
-					<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
-				</p>
+					<p>
+						<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
+						<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
+						<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
+					</p>
 
-				<p>
-					<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
-					<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
-					<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
-				</p>
+					<p>
+						<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
+						<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
+						<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
+					</p>
 
-				<hr>
+					<hr>
 
-				<p>
-					<div title="building surface separation" >
+				</details>
 
-						<b>explode view</b><br>
-						<p><button onclick=SET.explodeByStoreys(); >explode by storeys</button></p>
+				<details title="building surface separation" >
+					<summary>explode view</summary>
 
-						<button onclick=SET.explodeMinus();> minus </button>
-						<button onclick=SET.explodeReset(); >reset</button>
-						<button onclick=SET.explodePlus();> plus </button>
-					</div>
+					<p>
+						<button onclick=SET.explodeByStoreys(); >explode by storeys</button>
+					</p>
 
-				</p>
 
-				<hr>
+					<button onclick=SET.explodeMinus();> minus </button>
+					<button onclick=SET.explodeReset(); >reset</button>
+					<button onclick=SET.explodePlus();> plus </button>
 
-				<div>
+					<hr>
 
-					<b>section view</b><br>
+				</details>
+
+				<details>
+
+					<summary>section view</summary>
 
 					<div><small><i>Work-in-progress. Click toggles twice to reset. Multiple sections coming next.</i></small></div>
 					<br>
@@ -191,7 +194,9 @@
 					</div>
 					-->
 
-				<hr>
+					<hr>
+
+				</details>
 
 			</details>`;
 

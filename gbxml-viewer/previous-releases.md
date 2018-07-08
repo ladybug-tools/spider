@@ -24,8 +24,30 @@ Below are links to prior releases. Most releases have code that is running. They
 
 ### [gbXML Viewer R9]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-app/gbxml-viewer9.html )
 
+#### [gbXML Viewer R9 Robust]( http://www.ladybug.tools/spider/gbxml-viewer/r9/gbxml-viewer9-app/gbxml-viewer9-robust.html )
+
+* Note that more recent version may well be more robust then this version. The link here is to remind one and all that special version can be built
+* This is a special version of gbXML Viewer for very large files.
+* Click 'choose file' to select a file. Then wait until all the bytes have been loaded - at least a full minute.
+* And then wait a bit more and then click 'parse gbXML'.
+* Also a good idea to refresh the page prior to loading file and to have the JavaScript console open.
+
 
 ### [gbXML Viewer R8]( http://www.ladybug.tools/spider/gbxml-viewer/r8/gbxml-viewer8-app2/gbxml-viewer8-app2.html )
+
+#### Bl.ocks Edition
+
+View as [Bl.ocks]( https://bl.ocks.org/ )
+
+> Bl.ocks (pronounced “Blocks”) is a simple viewer for sharing code examples hosted on GitHub Gist.
+
+* <http://bl.ocks.org/theo-armour/163685de4d1fdacd70b2ffd446e8c874>
+
+View as [Gist]( https://help.github.com/articles/about-gists/ )
+
+Gists are a great way to share your work. You can share single files, parts of files, or full applications. You can access gists at https://gist.github.com.
+
+* <https://gist.github.com/theo-armour/163685de4d1fdacd70b2ffd446e8c874/edit>
 
 
 ### [gbXML Viewer R7]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r7/index.html )
@@ -37,7 +59,7 @@ R6 is mostly broken and may be ignored. Perhaps the only script to consider is [
 ### [gbXML Viewer R5]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/r5/index.html )
 
 
-Prior to R5, release were given code names that related to peeps involved with the project. This confused peeps - especially th peeps whose names were being flaunted.
+Prior to R5, releases were given code names that related to peeps involved with the project. This confused peeps - especially the peeps whose names were being flaunted.
 
 
 ### [gbXML Viewer 2017-09-29-mostapha ]( file:///D:/Dropbox/Public/git-repos/ladybug-tools.github.io/spider/read-gbxml/gbxml-viewer/2017-09-29-mostapha/gbxml-viewer.html )
@@ -48,8 +70,11 @@ Prior to R5, release were given code names that related to peeps involved with t
 
 ### [gbXML Viewer 2017-09-13-carmel]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-13-carmel/plugins/display-gbjson.html )
 
+* [Source Code]( https://github.com/ladybug-tools/spider/tree/master/read-gbxml/gbxml-viewer/2017-09-13-carmel )
 
 ### [gbXML Viewer 017-09-12-harriman]( http://www.ladybug.tools/spider/read-gbxml/gbxml-viewer/2017-09-12-harriman/select-xml/display-gbjson.html )
+
+* [Source code]( https://github.com/ladybug-tools/spider/tree/master/read-gbxml/gbxml-viewer/2017-09-12-harriman )
 
 ***
 

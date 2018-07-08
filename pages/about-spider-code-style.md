@@ -69,7 +69,17 @@ Life here on Earth is quite amazing and enjoyable. We'd like to help make Earth 
 
 * All plain vanilla client-side JavaScript
 * Built over the Three.js WebGL JavaScript library
+	* 90% easy-peasy JavaScript and 10% gnarly, linear algebra JavaScript
 * Uses Showdown to turn Markdown into HTML
 * Runs in your browser on computer, tablet and phone
 * Highly adjustable workspace
 * Movable, sliding resizable menus
+* Many scripts accept URLs of files to view via [location.hash]( https://www.w3schools.com/jsref/prop_loc_hash.asp ) - useful in creating [permalinks]( https://en.wikipedia.org/wiki/Permalink )
+
+
+### Code Style References
+
+* https://github.com/mrdoob/three.js/wiki/Mr.doob%27s-Code-Style%E2%84%A2
+* https://validator.w3.org/#validate_by_input
+* http://jshint.com/
+* https://zz85.github.io/mrdoobapproves/
