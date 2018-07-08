@@ -32,6 +32,11 @@ value="You are now in a GitHub web page view - Click this button to view this re
 	* Sizes plane according to the specified width and height
 * Draws the direction vector as cast from the center of the mesh in black
 * Draws the normal as cast from the center of the mesh in cyan
+* Main menu allows you to select all eight test cases
+* Sub-menu displays list of all files loaded
+	* Octocat icon links to source file on GitHub
+	* Item link displays just the selected surface
+
 
 
 ### [SPEED Rad2Solar Viewer R5]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r5/speed-rad2solar-viewer.html )
@@ -43,7 +48,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 * If you load a number of files you may run over the GitHub API usage limits. If so wait an hour and you will be good to go again
 	* Confirm this is the issue using JavaScript Console and noting 403 error
 	* A future release may allow you to enter a GitHub API key
-* Test Cases 3,4 and 5 include some bogus/broken/incorrectly converted PNG files.They will be updated
+* Test Cases 3 and 4 include some bogus/broken facades. Not sure where error is
 * Test Case 1: shad building has issues
 
 
