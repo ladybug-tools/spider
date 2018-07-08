@@ -49,7 +49,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 	* Confirm this is the issue using JavaScript Console and noting 403 error
 	* A future release may allow you to enter a GitHub API key
 * Test Cases 3 and 4 include some bogus/broken facades. Not sure where error is
-* Test Case 1: shad building has issues
+* Test Case 1: shade building has issues
 
 
 ### [SPEED Rad2Solar Viewer R4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r4/speed-rad2solar-viewer.html )
