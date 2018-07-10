@@ -336,8 +336,9 @@
 
 <script>
 
-const themeName = localStorage.getItem( 'themeName' );
-selTheme.value = themeName ? themeName : 'Cerulean' ;
+let themeName = localStorage.getItem( 'themeName' );
+themeName = themeName ? themeName : 'Cerulean'
+selTheme.value = themeName;
 
 
 COR.initCore();
