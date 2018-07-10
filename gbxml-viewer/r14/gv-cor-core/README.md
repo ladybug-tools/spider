@@ -57,6 +57,11 @@ needs combining with this read me
 
 ## Change Log
 
+### 2018-07-09 ~ Theo
+
+* First pass at adding bootswatch themes
+
+
 ### 2018-06-19 ~ Theo
 
 * Continue cleanup and moving function to gv-cor.js
