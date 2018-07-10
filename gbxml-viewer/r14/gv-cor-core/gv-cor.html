@@ -5,10 +5,84 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-06-21" >
-<title>'Aragog' gbXML Viewer R14.6</title>
+<meta name = "date" content = "2018-07-09" >
+<title>'Aragog' gbXML Viewer R14.7</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
-<link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
+<!--
+	<link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
+-->
+<style>
+/* Copyright 2018 pushMe pullYou authors. MIT License */
+
+	:root {
+		--mnu-width: 24rem;
+	}
+
+	html { height: 100%; margin: 0; }
+
+	body { height: 100%; margin: 0; }
+
+	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #888; }
+
+	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+
+	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 800px; right: 0;}
+
+	#CORdivMenuLeft { max-height: 100%; margin: 20px;
+		overflow-x: hidden; padding: 25px 10px 30px 10px; position: fixed; top: 0;
+		width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#CORdivHamburgerLeft { cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+	.default { background-color: white; color: #007bff; }
+	.cerulean { background-color: white; color: #2FA4E7; }
+	.cosmo { background-color: white; color: #2780E3; }
+	.cyborg { background-color: #060606; color: #2A9FD6; }
+	.darkly { background-color: #222; color: #00bc8c; }
+	.flatly { background-color: white; color: #18BC9C; }
+	.journal { background-color: white; color: #EB6864; }
+	.litera { background-color: white; color: #4582EC; }
+	.lumen { background-color: white; color: #158CBA; }
+	.lux { background-color: white; color: #1a1a1a; }
+	.materia { background-color: white; color: #2196F3; }
+	.minty { background-color: white; color: #78C2AD; }
+	.pulse { background-color: white; color: #593196; }
+	.sandstone { background-color: white; color: #93C54B; }
+	.simplex { background-color: white; color: #D9230F; }
+	.sketchy { background-color: white; color: #333; }
+	.slate { background-color: #272B30; color: #fff; }
+	.solar { background-color: #002B36; color: #839496; }
+	.spacelab { background-color: white; color: #3399F3; }
+	.superhero { background-color: #2B3E50; color: #DF691A; }
+	.united { background-color: white; color: #E95420; }
+	.yeti { background-color: white; color: #008cba; }
+
+
+
+/*
+	html { --mnu-color: crimson; --mnu-back-color: Linen; --mnu-width:250px; height: 100%; }
+
+	body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; margin: 0; }
+
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #888; }
+
+	blockquote, pre { background-color: #eee; padding: 10px; }
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover, input:hover { background-color: #ccc; color: white }
+
+	iframe { /*border: none; * width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	td { vertical-align: top; }
+
+*/
+
+</style>
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
@@ -24,9 +98,9 @@
 <!-- Copyright 2018 Ladybug Tools authors. MIT License -->
 
 
-	<div id = "CORdivMenuLeft" class = "w3-theme-l5" >
+	<div id = "CORdivMenuLeft" class = "jumbotron" >
 
-		<div id = "CORdivMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!" style=text-align:right; >
+		<div id = "CORdivMenuLeftHeader" class="navbar navbar-expand-lg navbar-dark bg-primary" title="There's a lot to move here. Be slow and gentle!" style=text-align:right; >
 			left menu / click to move
 		</div>
 
@@ -44,11 +118,41 @@
 
 				<div id=CORdivTitle ></div>
 
+				<div>
+						<p>
+							<select id=selTheme onchange=updateCss(this.value); class="form-control" >
+								<option class=default >Default</option>
+								<option class=cerulean >Cerulean</option>
+								<option class=cosmo >Cosmo</option>
+								<option class=cyborg >Cyborg</option>
+								<option class=darkly >Darkly</option>
+								<option class=flatly >Flatly</option>
+								<option class=journal >Journal</option>
+								<option class=litera >Litera</option>
+								<option class=lumen >Lumen</option>
+								<option class=lux >Lux</option>
+								<option class=meteria >Materia</option>
+								<option class=minty >Minty</option>
+								<option class=pulse >Pulse</option>
+								<option class=sandstone >Sandstone</option>
+								<option class=simplex >Simplex</option>
+								<option class=sketchy >Sketchy</option>
+								<option class=slate >Slate</option>
+								<option class=solar >Solar</option>
+								<option class=spacelab >Spacelab</option>
+								<option class=superhero >Superhero</option>
+								<option class=united >United</option>
+								<option class=yeti >Yeti</option>
+							</select>
+						</p>
+					</div>
+
+
 				<div id=divRowButtonsStyle ></div>
 
 				<div id=CORdragArea class=dragDropArea >
 					Drag & drop <a href=http://gbxml.org >gbXML</a> and other files here<br>
-					or <input type = "file" id = "inpFile" onchange="COR.openFile(this);" ><br>
+					or <input type = "file" id = "inpFile" class="form-control-file" onchange="COR.openFile(this);" ><br>
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md title="Learn how to speed up your testing" >?</a>
 					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
 					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
@@ -61,22 +165,22 @@
 
 					<!--
 
-						<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+						<button id=butGalleryGbxml class="btn btn-primary btn-sm"
 						onclick = loadGallery(this) >
 						gbXML.org
 					</button>
 
-					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					<button id=butGallerySampleFiles class="btn btn-primary btn-sm"
 						onclick = loadGallery(this) >
 						Samples1
 					</button>
 
-					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					<button id=butGallerySamples2 class="btn btn-primary btn-sm"
 					onclick = loadGallery(this) >
 					Samples2
 				</button>
 
-				<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=butGalleryBuildWell class="btn btn-primary btn-sm"
 				onclick = loadGallery(this) >
 				Build Well
 			</button>
@@ -92,27 +196,27 @@
 
 				<summary title="the primary viewer tools are here" >Features</summary>
 
-				<button id=CORbutSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
-					onclick= COR.loadScript('../gv-set-settings/gv-set.js')
+				<button id=CORbutSettings class="btn btn-primary btn-sm"
+					onclick=COR.loadScript("../gv-set-settings/gv-set.js")
 					title="Update colors, explode models and adjust viewing viewing parameters" >
 				Settings</button>
 
-				<button id=CORbutMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=CORbutMenuReports class="btn btn-primary btn-sm"
 					onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
 					title ="Locate, identify and display all the elements and attributes in a gbXML" >
 				Reports</button>
 
-				<button id=CORbutMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=CORbutMenuNumbers class="btn btn-primary btn-sm"
 					onclick= COR.loadScript('../gv-num-numbers/gv-num.js')
 					title="matters of interest" >
 				Numbers</button>
 
-				<button id=CORbutIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=CORbutIssues class="btn btn-primary btn-sm"
 					onclick= COR.loadScript('../gv-iss-issues/gv-iss.js')
 					title="Highlight duplicate items and areas of concern in a gbXML file" >
 				Issues</button>
 
-				<button id=butSaveChanges class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				<button id=butSaveChanges class="btn btn-primary btn-sm"
 					onclick= COR.loadScript('../gv-sav-save-changes/gv-sav.js')
 					title="Save time with gbXML files that are frequently updated" >
 				Changes</button>
@@ -133,31 +237,31 @@
 				<p><small><i>More modules are just waiting to be upgraded</i></small></p>
 
 
-				<button id=butFirstPersonCamera class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+				<button id=butFirstPersonCamera class="btn btn-primary btn-sm" onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-cam-first-person-camera/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
 				first person camera</button>
 
 
-				<button id=butAnalemma class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
+				<button id=butAnalemma class="btn btn-primary btn-sm" onclick="
 					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 					const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-ana-sun-path-analemma/gv-ana.js'; " title='Let a little Sunshine into you life' >
 				sun-path / analemma</button>
 
-				<button id=butSunRange class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
+				<button id=butSunRange class="btn btn-primary btn-sm" onclick="
 				const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-ran-sun-range/gv-ran.js'; " title='Let many Suns into you life' >
 				sun-range</button>
 
-				<button id=butModuleExplorer class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+				<button id=butModuleExplorer class="btn btn-primary btn-sm" onclick =
 				"const script = document.head.appendChild( document.createElement( 'script' ) );
 				script.src = '../gv-exp-module-explorer/gv-exp.js';" >
 				Module Explorer
 				</button>
 
-				<button id=butMenuTemplate class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+				<button id=butMenuTemplate class="btn btn-primary btn-sm" onclick =
 					"const script = document.head.appendChild( document.createElement( 'script' ) );
 					script.src = '../gv-tmp-template/gv-tmp.js';" >
 					gbXML Viewer Menu Template
@@ -202,9 +306,9 @@
 
 	</div>
 
-	<div id = "CORdivHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu">
+	<button id = "CORdivHamburgerLeft" class="btn button-primary" onclick=COR.toggleNavLeft(); title="click to hide this menu">
 		 slide &#9776;
-	</div>
+	</button>
 
 
 	<div id = "CORdivMenuInWorld" title="This is called the 'in-world menu'" >
@@ -216,9 +320,9 @@
 	</div>
 
 
-	<div id = "CORdivMenuRight" class = "w3-theme-l5" >
+	<div id = "CORdivMenuRight" class = "jumbotron" >
 
-		<div id="CORdivHeaderRight" class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
+		<div id="CORdivHeaderRight" class="navbar  navbar-expand-lg navbar-dark bg-primary" >
 			right menu / click here to move
 		</div>
 
@@ -226,89 +330,114 @@
 
 	</div>
 
-	<div id = "COdivHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); >
+	<button id = "COdivHamburgerRight" class="btn button-primary" onclick=COR.toggleNavRight(); >
 		 &#9776;
-	</div>
+	</button>
 
 <script>
 
+const themeName = localStorage.getItem( 'themeName' );
+selTheme.value = themeName ? themeName : 'Cerulean' ;
 
-	COR.initCore();
-	THR.initThree();
 
-	CTX.initHeadsUp();
-	THR.animate();
+COR.initCore();
+THR.initThree();
 
-	initApp(); // loads default gbXML
+CTX.initHeadsUp();
+THR.animate();
 
-	function initApp() {
+initApp(); // loads default gbXML
 
-		//const source = "https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-cor-core/gv-cor.html";
-		const title = document.title;
+function initApp() {
 
-		CORdivTitle.innerHTML =
-		`<h2>
-			<a href="${ COR.releaseSourceURL }" target="_top" title="Go to source code on GitHub" ><img src=${COR.iconGitHubMark} height=18 ></a>
-			<a href = "" title="Relead this page" >${title}</a> &nbsp; <a href=#../READMe.md title="View the read me file" >?</a>
-		</h2>`;
+	updateCss( themeName );
 
-		// move to a gv-sty.js ??
+	//const source = "https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-cor-core/gv-cor.html";
+	const title = document.title;
 
-		let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
-		color = color ? color : 'khaki';
-		stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+	CORdivTitle.innerHTML =
+	`<h2>
+		<a href="${ COR.releaseSourceURL }" target="_top" title="Go to source code on GitHub" ><img src=${COR.iconGitHubMark} height=18 ></a>
+		<a href = "" title="Relead this page" >${title}</a> &nbsp; <a href=#../READMe.md title="View the read me file" >?</a>
+	</h2>`;
 
-		const colors = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'khaki', 'yellow',
-			'amber', 'orange', 'deep-orange', 'blue-grey', 'brown', 'grey', 'dark-grey', 'black', 'w3schools' ];
 
-		let txt = '';
-		let index = 1;
+	/*
+	// move to a gv-sty.js ??
 
-		for ( let color of colors ){
+	let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
+	color = color ? color : 'khaki';
+	stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
 
-			txt += '<a href=JavaScript: onclick=COR.setMenuStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
-				' title="' + ( index++ ) + ' ' + color + '" >&bull;</a> ';
+	const colors = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'khaki', 'yellow',
+		'amber', 'orange', 'deep-orange', 'blue-grey', 'brown', 'grey', 'dark-grey', 'black', 'w3schools' ];
 
-		}
+	let txt = '';
+	let index = 1;
 
-		divRowButtonsStyle.innerHTML = txt;
+	for ( let color of colors ){
 
-		// load a default file / great for testing
-
-		const thrFilePath = localStorage.getItem( 'thrFilePath' );
-
-		CORinpFilePath.value = thrFilePath;
-
-		COR.url = CORinpFilePath.value ? CORinpFilePath.value : COR.url; // for testing
-
-		if ( location.hash && location.hash.endsWith( '.xml') ) {
-
-			const url = location.hash.slice( 1 );
-
-			COR.requestGbxmlFile( url );
-
-		} else {
-
-			//COR.requestFileAndProgress( COR.defaultURL, GBX.callbackGbXML );
-
-			COR.requestGbxmlFile( COR.url );
-			COR.requestFile( COR.uriDefaultFile, COR.callbackMarkdown );
-
-		}
-
-		GBX.setCardToggleVisibility( CORmenuInWorldContents );
-
-		GAL.setCardSampleGalleries( CORdivSampleGalleries );
-
-		THR.controls.enableKeys = false;
+		txt += '<a href=JavaScript: onclick=COR.setMenuStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
+			' title="' + ( index++ ) + ' ' + color + '" >&bull;</a> ';
 
 	}
 
+	divRowButtonsStyle.innerHTML = txt;
+	*/
 
+	// load a default file / great for testing
 
-	function onloadThreejs() { // any need?
+	const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
+	CORinpFilePath.value = thrFilePath;
+
+	COR.url = CORinpFilePath.value ? CORinpFilePath.value : COR.url; // for testing
+
+	if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+		const url = location.hash.slice( 1 );
+
+		COR.requestGbxmlFile( url );
+
+	} else {
+
+		//COR.requestFileAndProgress( COR.defaultURL, GBX.callbackGbXML );
+
+		COR.requestGbxmlFile( COR.url );
+		COR.requestFile( COR.uriDefaultFile, COR.callbackMarkdown );
 
 	}
+
+	GBX.setCardToggleVisibility( CORmenuInWorldContents );
+
+	GAL.setCardSampleGalleries( CORdivSampleGalleries );
+
+	THR.controls.enableKeys = false;
+
+}
+
+
+function updateCss( value ) {
+
+if ( !window.css ) {
+
+	css = document.head.appendChild( document.createElement( 'link' ) );
+	css.rel = 'stylesheet';
+	css.type = 'text/css';
+
+}
+
+css.href = value === 'Default' ? 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+	`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ value.toLowerCase() }/bootstrap.min.css`;
+
+localStorage.setItem( 'themeName', value );
+
+}
+
+
+function onloadThreejs() { // any need?
+
+}
 
 
 </script>

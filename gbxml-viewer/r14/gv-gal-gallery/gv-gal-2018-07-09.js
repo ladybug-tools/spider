@@ -100,22 +100,22 @@
 		target.innerHTML =
 
 		`<div>
-			<button id="butGalleryGbxml" class="btn btn-primary btn-sm"
+			<button id="butGalleryGbxml" class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
 				onclick = GAL.initGallery(this) >
 				gbXML.org
 			</button>
 
-			<button id=butGallerySampleFiles class="btn btn-primary btn-sm"
+			<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
 				onclick = GAL.initGallery(this) >
 				Samples1
 			</button>
 
-			<button id=butGallerySamples2 class="btn btn-primary btn-sm"
+			<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
 				onclick = GAL.initGallery(this) >
 				Samples2
 			</button>
 
-			<button id=butGalleryBuildWell class="btn btn-primary btn-sm"
+			<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
 				onclick = GAL.initGallery(this) >
 				Build Well
 			</button>

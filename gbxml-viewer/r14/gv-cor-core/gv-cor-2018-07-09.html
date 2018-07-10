@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
+<meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-06-21" >
+<title>'Aragog' gbXML Viewer R14.6</title>
+<link rel="stylesheet" type="text/css" href="../assets/style.css" >
+<link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
+<script src = "../gv-thr-threejs/gv-thr.js" ></script>
+<script src = "../gv-cor-core/gv-cor.js" ></script>
+<script src = "../gv-gbx-gbxml-loader/gv-gbx.js" ></script>
+<script src = "../gv-gal-gallery/gv-gal.js" ></script>
+<script src = "../gv-sel-select-attributes/gv-sel.js" ></script>
+<script src = "../gv-ctx-context-menu/gv-ctx.js" ></script>
+
+<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+
+
+	<div id = "CORdivMenuLeft" class = "w3-theme-l5" >
+
+		<div id = "CORdivMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!" style=text-align:right; >
+			left menu / click to move
+		</div>
+
+		<div id = "zzCORdivMenuContents" >
+
+			<details open >
+
+				<summary>Header</summary>
+
+				<div>
+					<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
+					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png alt="spider web" height=18 ></a> &raquo;
+					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
+				</div>
+
+				<div id=CORdivTitle ></div>
+
+				<div id=divRowButtonsStyle ></div>
+
+				<div id=CORdragArea class=dragDropArea >
+					Drag & drop <a href=http://gbxml.org >gbXML</a> and other files here<br>
+					or <input type = "file" id = "inpFile" onchange="COR.openFile(this);" ><br>
+					or enter a default file path &nbsp;<a href=#../assets/file-open.md title="Learn how to speed up your testing" >?</a>
+					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
+					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
+
+					or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
+
+					<div id = "CORdivSampleGalleries" ></div>
+
+				</div>
+
+					<!--
+
+						<button id=butGalleryGbxml class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+						onclick = loadGallery(this) >
+						gbXML.org
+					</button>
+
+					<button id=butGallerySampleFiles class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+						onclick = loadGallery(this) >
+						Samples1
+					</button>
+
+					<button id=butGallerySamples2 class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick = loadGallery(this) >
+					Samples2
+				</button>
+
+				<button id=butGalleryBuildWell class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+				onclick = loadGallery(this) >
+				Build Well
+			</button>
+		-->
+
+				<hr>
+
+			</details>
+
+
+
+			<details open >
+
+				<summary title="the primary viewer tools are here" >Features</summary>
+
+				<button id=CORbutSettings class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick= COR.loadScript('../gv-set-settings/gv-set.js')
+					title="Update colors, explode models and adjust viewing viewing parameters" >
+				Settings</button>
+
+				<button id=CORbutMenuReports class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
+					title ="Locate, identify and display all the elements and attributes in a gbXML" >
+				Reports</button>
+
+				<button id=CORbutMenuNumbers class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick= COR.loadScript('../gv-num-numbers/gv-num.js')
+					title="matters of interest" >
+				Numbers</button>
+
+				<button id=CORbutIssues class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick= COR.loadScript('../gv-iss-issues/gv-iss.js')
+					title="Highlight duplicate items and areas of concern in a gbXML file" >
+				Issues</button>
+
+				<button id=butSaveChanges class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme"
+					onclick= COR.loadScript('../gv-sav-save-changes/gv-sav.js')
+					title="Save time with gbXML files that are frequently updated" >
+				Changes</button>
+
+				<hr>
+
+			</details>
+
+
+			<div id = "CORdivMenuItems" ></div>
+
+			<!--
+			<details>
+
+				<summary>Things to Try</summary>
+
+
+				<p><small><i>More modules are just waiting to be upgraded</i></small></p>
+
+
+				<button id=butFirstPersonCamera class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-cam-first-person-camera/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
+				first person camera</button>
+
+
+				<button id=butAnalemma class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
+					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
+					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
+					const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-ana-sun-path-analemma/gv-ana.js'; " title='Let a little Sunshine into you life' >
+				sun-path / analemma</button>
+
+				<button id=butSunRange class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="
+				const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-ran-sun-range/gv-ran.js'; " title='Let many Suns into you life' >
+				sun-range</button>
+
+				<button id=butModuleExplorer class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+				"const script = document.head.appendChild( document.createElement( 'script' ) );
+				script.src = '../gv-exp-module-explorer/gv-exp.js';" >
+				Module Explorer
+				</button>
+
+				<button id=butMenuTemplate class="app-menu w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-tmp-template/gv-tmp.js';" >
+					gbXML Viewer Menu Template
+				</button>
+
+
+				<button id=butScreenCapture class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
+				screen capture </button>
+
+
+			</details>
+			-->
+
+			<details>
+
+				<!--  move to a gv-ftr.js ?? -->
+
+				<summary>Footer</summary>
+
+				<div title='' ><a href=#../assets/splash-screen.md >Start-up / Splash screen</a></div>
+				<div title='' ><a href=#../README.md >Release Read Me</a></div>
+				<div title='' ><a href=#../assets/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
+				<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
+				<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
+				<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
+				<div><a href=#../../../pages/contributing.md >Contributing</a></div>
+				<div><a href=#../../../pages/license.md >Copyright & License</a></div>
+				<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
+				<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+				<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
+				<hr>
+
+			</details>
+
+			<h2 onclick=CORdivMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >
+				<img src=../assets/spider-web.png alt="spider web" height=24 style=opacity:0.5; >
+			</h2>
+
+		</div>
+
+	</div>
+
+	<div id = "CORdivHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu">
+		 slide &#9776;
+	</div>
+
+
+	<div id = "CORdivMenuInWorld" title="This is called the 'in-world menu'" >
+
+		<p id = "CORmenuInWorldContents" ></p>
+
+		<div id=CORdivLog ></div>
+
+	</div>
+
+
+	<div id = "CORdivMenuRight" class = "w3-theme-l5" >
+
+		<div id="CORdivHeaderRight" class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data" >
+			right menu / click here to move
+		</div>
+
+		<div id=CORdivItemsRight ></div>
+
+	</div>
+
+	<div id = "COdivHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight(); >
+		 &#9776;
+	</div>
+
+<script>
+
+
+	COR.initCore();
+	THR.initThree();
+
+	CTX.initHeadsUp();
+	THR.animate();
+
+	initApp(); // loads default gbXML
+
+	function initApp() {
+
+		//const source = "https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-cor-core/gv-cor.html";
+		const title = document.title;
+
+		CORdivTitle.innerHTML =
+		`<h2>
+			<a href="${ COR.releaseSourceURL }" target="_top" title="Go to source code on GitHub" ><img src=${COR.iconGitHubMark} height=18 ></a>
+			<a href = "" title="Relead this page" >${title}</a> &nbsp; <a href=#../READMe.md title="View the read me file" >?</a>
+		</h2>`;
+
+		// move to a gv-sty.js ??
+
+		let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
+		color = color ? color : 'khaki';
+		stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+		const colors = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'khaki', 'yellow',
+			'amber', 'orange', 'deep-orange', 'blue-grey', 'brown', 'grey', 'dark-grey', 'black', 'w3schools' ];
+
+		let txt = '';
+		let index = 1;
+
+		for ( let color of colors ){
+
+			txt += '<a href=JavaScript: onclick=COR.setMenuStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
+				' title="' + ( index++ ) + ' ' + color + '" >&bull;</a> ';
+
+		}
+
+		divRowButtonsStyle.innerHTML = txt;
+
+		// load a default file / great for testing
+
+		const thrFilePath = localStorage.getItem( 'thrFilePath' );
+
+		CORinpFilePath.value = thrFilePath;
+
+		COR.url = CORinpFilePath.value ? CORinpFilePath.value : COR.url; // for testing
+
+		if ( location.hash && location.hash.endsWith( '.xml') ) {
+
+			const url = location.hash.slice( 1 );
+
+			COR.requestGbxmlFile( url );
+
+		} else {
+
+			//COR.requestFileAndProgress( COR.defaultURL, GBX.callbackGbXML );
+
+			COR.requestGbxmlFile( COR.url );
+			COR.requestFile( COR.uriDefaultFile, COR.callbackMarkdown );
+
+		}
+
+		GBX.setCardToggleVisibility( CORmenuInWorldContents );
+
+		GAL.setCardSampleGalleries( CORdivSampleGalleries );
+
+		THR.controls.enableKeys = false;
+
+	}
+
+
+
+	function onloadThreejs() { // any need?
+
+	}
+
+
+</script>
+</body>
+</html>

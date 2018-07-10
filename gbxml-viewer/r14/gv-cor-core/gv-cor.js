@@ -385,8 +385,8 @@
 
 	COR.onMouseDownDraggable = function( event ) {
 
-		COR.draggableTop = event.clientY - event.target.parentNode.offsetTop;
-		COR.draggableLeft = event.clientX - event.target.parentNode.offsetLeft;
+		COR.draggableTop = event.clientY - event.target.parentNode.parentNode.offsetTop;
+		COR.draggableLeft = event.clientX - event.target.parentNode.parentNode.offsetLeft;
 
 		window.addEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
 		event.preventDefault();
@@ -566,13 +566,14 @@
 	};
 
 
-	COR.setMenuButtonsClass = function( target) {
+	COR.setMenuButtonsClass = function( target ) {
 
 		const buttons = target.getElementsByTagName( "button" );
 
 		for ( let button of buttons ) {
 
-			button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+			//button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+			button.classList.add( "btn", "button-primary"  );
 
 		}
 
