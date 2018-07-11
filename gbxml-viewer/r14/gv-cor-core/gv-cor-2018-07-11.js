@@ -27,7 +27,6 @@
 			CORdragArea.addEventListener( 'drop', COR.drop, false );
 		}
 
-		/*
 		if ( window.CORdivMenuLeftHeader ) {
 			CORdivMenuLeftHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
 			CORdivMenuLeftHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
@@ -40,7 +39,6 @@
 			CORdivHeaderRight.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
 		}
 		window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
-		*/
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
@@ -269,8 +267,8 @@
 		//CORdivMenuRight.innerHTML = '<div id=CORdivItemsRight >' + html + '</div>';
 		CORdivItemsRight.innerHTML = html;
 		CORdivMenuRight.style.display = 'block';
-		//CORdivMenuRight.style.left = '55%';
-		//CORdivMenuRight.style.width = '40rem';
+		CORdivMenuRight.style.left = '55%';
+		CORdivMenuRight.style.width = '40rem';
 		window.scrollTo( 0, 0 );
 		CORdivMenuRight.scrollTop = 0;
 		//CORdivItemsRight.scrollTop = 0;
@@ -499,20 +497,17 @@
 
 	COR.toggleNavLeft = function() {
 
-		const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
-		//console.log( 'width', width );
+		//GBX.style.display = 'none';
 
-		//console.log( 'CORdivHamburgerLeft.style.left', CORdivHamburgerLeft.style.left );
+		if ( CORdivHamburgerLeft.style.left === '' || CORdivHamburgerLeft.style.left === '0px' ) {
 
-		if ( CORdivHamburgerLeft.style.left === '-5rem' ) {
-
-			CORdivMenuLeft.style.left = '0';
-			CORdivHamburgerLeft.style.left = width;
+			CORdivMenuLeft.style.left = 'calc( -2rem  - var( --mnu-left-width ) )';
+			CORdivHamburgerLeft.style.left = '-5rem';
 
 		} else {
 
-			CORdivMenuLeft.style.left = '-' + width;
-			CORdivHamburgerLeft.style.left = '-5rem';
+			CORdivMenuLeft.style.left = '2rem';
+			CORdivHamburgerLeft.style.left = 0;
 
 		}
 
@@ -524,25 +519,20 @@
 
 		//CORdivMenuRight.style.display = "none";
 
-		width = CORdivMenuRight.getBoundingClientRect().width;
-		console.log( 'width', width );
-
 		if ( CORdivMenuRight.style.left === '100%' ) {
 
 			if ( window.innerWidth > 900 ) {
 
-				CORdivMenuRight.style.left = ( window.innerWidth - 10 - width ) + 'px';
+				CORdivMenuRight.style.left = '70%';
 
-			} else { //} if ( window.innerWidth > 600 ) {
-
-				CORdivMenuRight.style.left = '60%';
-				CORdivMenuRight.style.width = '38%';
-/*
-			} else {
+			} else if ( window.innerWidth > 600 ) {
 
 				CORdivMenuRight.style.left = '70%';
-				CORdivMenuRight.style.width = '28%';
-*/
+
+			} else {
+
+				CORdivMenuRight.style.left = '60%';
+
 			}
 
 		} else {
