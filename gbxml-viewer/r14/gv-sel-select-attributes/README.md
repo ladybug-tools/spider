@@ -17,10 +17,11 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Wish list
 
+* 2018-07-12 ~ Michal/Theo ~ add zoom, hide and change type.etc to context menu for openings
 * 2018-05-07 ~ Theo ~ Select element: sort names & cad ids
 * 2018-06-09 ~ Theo ~ element panel attributes in a set order ??
 * 2018-02-26 ~ Theo ~ Better telltale size for small surfaces
-* 2018-04-21 ~ Openings by Type: what attrbute info to add?
+* 2018-04-21 ~ Openings by Type: what attribute info to add?
 * 2018-04-21 ~ Theo ~ Storey attribute item has a zoom button
 * 2018-04-21 ~ Theo ~ Element attribute card: title could be button that would cause XML text to be displayed in pop-up window
 * 2018-03-31 ~ When searching a selection list by typing, only display the list of relevant possibilities

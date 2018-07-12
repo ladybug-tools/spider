@@ -134,6 +134,14 @@ value="You are now in a GitHub web page view - Click this button to view this re
 ## Change Log
 
 
+### 2018-07-12 ~ Theo
+
+R2S 5.2
+
+* Opacity set to 1
+* Errant file deleted in test case 8
+
+
 ### 2018-07-04 ~ Theo
 
 * Add SPEED Rad2Solar Viewer R3
