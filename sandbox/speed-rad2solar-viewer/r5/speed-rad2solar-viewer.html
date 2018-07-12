@@ -305,7 +305,7 @@ function loadTestCase( index ) {
 
 	meshes = new THREE.Group();
 
-	if ( !pngs.length ) { alert("No RGBE/HDR files found. \n\n ;-(" ); return; }
+	if ( !pngs.length ) { alert("No PNG files found. \n\n ;-(" ); return; }
 
 	for ( fileName of pngs ) {
 
@@ -354,7 +354,7 @@ function loadPNG( fileName, index ) {
 		const texture = loader.load ( urlGitHubPage + index + '/' + fileName );
 		texture.minFilter = THREE.LinearFilter;
 
-		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 0.85, side: 2, transparent: true } );
+		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 1, side: 2, transparent: true } );
 		const geometry = new THREE.PlaneBufferGeometry( width, height );
 
 		const angle = Math.atan2( point.x, point.y )
