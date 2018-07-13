@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="List and display Radiance HDR files as textures on a 3D surface for all files in a test case folder" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-07-12" >
-<title>SPEED Rad2Solar R5.2 PNG </title>
+<meta name = "date" content = "2018-07-13" >
+<title>SPEED Rad2Solar R5.3 PNG </title>
 <style>
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
@@ -359,6 +359,7 @@ function loadPNG( fileName, index ) {
 
 		const angle = Math.atan2( point.x, point.y )
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI ) );
 		geometry.lookAt( normal );
 
 		mesh = new THREE.Mesh( geometry, material );

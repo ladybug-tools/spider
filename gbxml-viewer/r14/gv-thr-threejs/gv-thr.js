@@ -126,9 +126,9 @@
 		GBX.surfaceMeshes.userData.center = center;
 		GBX.surfaceMeshes.userData.radius = radius;
 
-		THR.scene.remove( THR.cameraHelper );
-		THR.cameraHelper = new THREE.CameraHelper( THR.lightDirectional.shadow.camera );
-		THR.scene.add( THR.cameraHelper );
+		//THR.scene.remove( THR.cameraHelper );
+		//THR.cameraHelper = new THREE.CameraHelper( THR.lightDirectional.shadow.camera );
+		//THR.scene.add( THR.cameraHelper );
 
 	};
 
