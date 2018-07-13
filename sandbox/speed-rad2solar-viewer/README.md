@@ -51,6 +51,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 * Test Cases 3 and 4 include some bogus/broken facades. Not sure where error is
 * Test Case 1: shade building has issues
 
+BW-Theo, we are pushing new pngs to folder viewer is pointing at. Make backup of all your original png files. We know what the issue is with all the test cases we thing. You have the u and v vectors off 180 degrees.
 
 ### [SPEED Rad2Solar Viewer R4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r4/speed-rad2solar-viewer.html )
 
