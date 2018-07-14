@@ -1,12 +1,12 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://ladybug-tools.github.io/spider/#cookbook/nurbs-chart/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://ladybug-tools.github.io/spider/#cookbook/nurbs-chart/README.md "View file as a web page." ) </span>
 
 
 [NURBS Chart Read Me]( #README.md )
 ====
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/cookbook/nurbs-chart/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; >It would be nice if this text were not visible here.</iframe>
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/cookbook/nurbs-chart/index.html width=100% height=600px onload=this.contentWindow.controls.enableZoom=false; >It would be nice if this text were not visible here.</iframe>
 
-## Full screen: [NURBS Chart Random Numbers]( http://www.ladybug.tools/spider/cookbook/nurbs-chart/index.html )
+## Full screen: [NURBS Chart Random Numbers]( https://www.ladybug.tools/spider/cookbook/nurbs-chart/index.html )
 
 ## Source code: https://github.com/ladybug-tools/spider/tree/master/cookbook/nurbs-chart
 
