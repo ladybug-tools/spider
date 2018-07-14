@@ -25,11 +25,11 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSCurve.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSSurface.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/curves/NURBSUtils.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/curves/NURBSCurve.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/curves/NURBSSurface.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r90/examples/js/curves/NURBSUtils.js" ></script>
 
 
 		<details id = "menu" open >
@@ -107,8 +107,8 @@
 
 	function init() {
 
-		title.innerHTML = 
-			'<h2><a href="" >' + document.title +'</a> &nbsp; ' + 
+		title.innerHTML =
+			'<h2><a href="" >' + document.title +'</a> &nbsp; ' +
 				('&#x24D8').link( 'https://github.com/ladybug-tools/spider/tree/master/sandbox/nurbs-chart' ) +
 			'</h2>';
 
@@ -126,8 +126,8 @@
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'orientationchange', onWindowResize, false );
 
-		axisHelper = new THREE.AxisHelper( 300 );
-		scene.add( axisHelper );
+		axesHelper = new THREE.AxesHelper( 300 );
+		scene.add( axesHelper );
 
 // something to focus on
 		geometry = new THREE.BoxGeometry( 20, 20, 20 );
@@ -188,7 +188,7 @@
 
 /*
 		material = new THREE.MeshPhongMaterial( {
-			color: 0xffffff * Math.random(), 
+			color: 0xffffff * Math.random(),
 			polygonOffset: true,
 			polygonOffsetFactor: 1, // positive value pushes polygon further away
 			polygonOffsetUnits: 1,
