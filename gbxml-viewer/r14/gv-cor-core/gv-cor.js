@@ -3,7 +3,7 @@
 	/* jshint esversion: 6 */
 
 
-	var COR = {};
+	var COR = { release: "14.1" };
 
 	COR.url = '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
 
@@ -21,6 +21,8 @@
 
 
 	COR.initCore = function() {
+
+		updateCss( themeName );
 
 		if ( window.CORdragArea ) {
 			CORdragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
@@ -49,6 +51,29 @@
 		COR.timeStart = Date.now();
 
 	};
+
+
+
+	function updateCss( value ) {
+
+		/*
+		if ( !window.css ) {
+
+			css = document.head.appendChild( document.createElement( 'link' ) );
+			css.rel = 'stylesheet';
+			css.type = 'text/css';
+
+		}
+		*/
+
+		css.href = value === 'Default' ? 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ value.toLowerCase() }/bootstrap.min.css`;
+
+		localStorage.setItem( 'themeName', value );
+
+	}
+
+
 
 
 	COR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
@@ -146,11 +171,11 @@
 		function callbackGbXML ( xhr ) {
 			//console.log( 'xhr', xhr );
 
-			GBX.gbxmlResponseXML =  xhr.target.responseXML; // used by CTX.modifiedBy
+			//GBX.gbxmlResponseXML =  xhr.target.responseXML; // used by CTX.modifiedBy
 
-			const gbxml = xhr.target.responseXML.documentElement;
+			//const gbxml = xhr.target.responseXML.documentElement;
 
-			const meshes = GBX.parseFileXML( gbxml );
+			const meshes = GBX.parseFileXML( xhr.target.response );
 
 			THR.scene.add( ...meshes );
 
@@ -183,18 +208,18 @@
 		reader.onprogress = onRequestFileProgress;
 		reader.onload = function( event ) {
 
-			const parser = new DOMParser();
+			//const parser = new DOMParser();
 
-			GBX.gbxmlResponseXML = parser.parseFromString( reader.result, "text/xml" );
+			//GBX.gbxmlResponseXML = parser.parseFromString( reader.result, "text/xml" );
 			//console.log( 'gbxmlResponseXML2', gbxmlResponseXML2 );
 
-			GBX.gbxml = GBX.gbxmlResponseXML.children[ 0 ];
+			//GBX.gbxml = GBX.gbxmlResponseXML.children[ 0 ];
 			//console.log( 'GBX.gbxml', GBX.gbxml );
 
 			//GBX.gbjson = GBX.parseFileXML( GBX.gbxml );
 			//GBX.surfaceJson = GBX.gbjson.Campus.Surface;
 
-			const meshes = GBX.parseFileXML( GBX.gbxml );
+			const meshes = GBX.parseFileXML( reader.result );
 
 			//if ( files.files[ 0 ] ) { GBX.gbjson.fileName = files.files[ 0 ].name; }
 

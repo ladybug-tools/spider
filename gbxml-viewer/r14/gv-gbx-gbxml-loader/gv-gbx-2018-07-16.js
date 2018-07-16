@@ -40,17 +40,12 @@
 
 	// loads any xml file - from AJAX, file reader or location hash or wherever
 
-	GBX.parseFileXML = function( text ) {
-		//console.log( 'text', text );
+	GBX.parseFileXML = function( xml ) {
 
-		const parser = new window.DOMParser();
+		GBX.gbxml = xml;
 
-		GBX.gbxml = parser.parseFromString( text, 'text/xml' );
-		//console.log( 'GBX.gbxml', GBX.gbxml );
-
-		GBX.gbjson = GBX.getXML2jsobj( GBX.gbxml.documentElement );
-
-		console.log( 'GBX.gbjson', GBX.gbjson );
+		GBX.gbjson = GBX.getXML2jsobj( GBX.gbxml );
+		//console.log( 'GBX.gbjson', GBX.gbjson );
 
 		GBX.surfacesJson = GBX.gbjson.Campus.Surface;
 
@@ -69,19 +64,6 @@
 		return [ GBX.surfaceMeshes, GBX.surfaceEdges, GBX.surfaceOpenings ];
 
 	};
-
-
-
-	GBX.getStringFromXml = function( xml ){
-		// test in console : GBX.getStringFromXml( GBX.gbxml );
-
-		const string = new XMLSerializer().serializeToString( xml );
-		console.log( 'string', string );
-
-		return string
-
-	}
-
 
 
 	// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
@@ -225,6 +207,7 @@
 				const points = GBX.getVertices( opening.PlanarGeometry.PolyLoop );
 				const shapeMesh = GBX.get3dShape( points, material );
 				shapeMesh.userData.data = opening;
+
 				surfaceOpenings.push( shapeMesh );
 
 			}
@@ -250,7 +233,7 @@
 
 		// 2018-06-02
 
-		const plane = GBX.getPlane( vertices );
+		const plane = getPlane( vertices );
 
 		const referenceObject = new THREE.Object3D();
 		referenceObject.lookAt( plane.normal ); // copy the rotation of the plane
@@ -291,11 +274,29 @@
 
 			}
 
+
+			function getPlane ( points, start = 0 ) {
+
+				const triangle = new THREE.Triangle();
+				triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
+				GBX.plane = triangle.getPlane( new THREE.Plane() );
+
+				if ( triangle.getArea() === 0 ) { // looks like points are colinear therefore try next set
+
+					start++;
+					getPlane( points, start );
+
+				}
+
+				return GBX.plane;
+
+			}
+
 	};
 
 
 
-	GBX.getPlane = function( points, start = 0 ) {
+	GBX.getPlane = function( points, start = 0 ) { // used by numbers
 
 		const triangle = new THREE.Triangle();
 		triangle.set( points[ start ], points[ start + 1 ], points[ start + 2 ] );
@@ -304,7 +305,7 @@
 		if ( triangle.getArea() === 0 ) { // looks like points are colinear therefore try next set
 
 			start++;
-			GBX.getPlane( points, start );
+			getPlane( points, start );
 
 		}
 

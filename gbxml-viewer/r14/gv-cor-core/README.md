@@ -57,6 +57,14 @@ needs combining with this read me
 
 ## Change Log
 
+
+### 2018-07-16 ~ Theo
+
+* Move xml parsing to gbx.js
+* Move update css to cor.js
+* Add release number
+
+
 ### 2018-07-09 ~ Theo
 
 * First pass at adding bootswatch themes

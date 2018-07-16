@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-07-09" >
-<title>'Aragog' gbXML Viewer R14.8</title>
+<title>'Aragog' gbXML Viewer R14.9</title>
 
 <!--
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
@@ -15,7 +15,7 @@
 <style>
 /* Copyright 2018 pushMe pullYou authors. MIT License */
 
-	:root { --mnu-width: 25rem; font-size: 0.9em; }
+	:root { --mnu-width: 25rem; font-size: 0.8em; }
 
 	html { height: 100%; margin: 0; }
 
@@ -23,7 +23,30 @@
 
 	a:hover, a:focus { background-color: yellow; color: #888; }
 	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1em }
+
 	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	summary { font-weight: bold; }
+
+	.attributeTitle {font-size: smaller; font-style: italic }
+	.attributeValue { color: blue }
+	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
+	/*
+	.flex-container { display: flex; flex-wrap: wrap;}
+	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
+
+	.flex-container2 { box-sizing: border-box; display: flex;}
+	.flex-div1 { border: 0px solid #f00; box-sizing: border-box; overflow-x: auto; margin-right: 10px; min-width:7rem; }
+	.flex-left-div2 { border: 0px solid #f00; box-sizing: border-box; overflow-x: auto; max-height: 18rem;
+			max-width: calc( var( --mnu-left-width ) - 150px ); }
+	.flex-div2 { border: 0px red solid; overflow-x: auto; }
+	*/
+
+	.highlight { background-color: var( --highlight-color ) }
 
 	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
 
@@ -123,6 +146,7 @@
 */
 
 </style>
+<link rel="stylesheet" type="text/css" id="css" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
@@ -373,7 +397,7 @@ initApp(); // loads default gbXML
 
 function initApp() {
 
-	updateCss( themeName );
+
 
 	//const source = "https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-cor-core/gv-cor.html";
 	const title = document.title;
@@ -440,7 +464,7 @@ function initApp() {
 }
 
 
-function updateCss( value ) {
+function xxxupdateCss( value ) {
 
 	if ( !window.css ) {
 
