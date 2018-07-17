@@ -514,8 +514,7 @@
 			colorText = rad.items[ i ].split( ' ' )[0];
 			//console.log( 'colorText', colorText );
 
-			color = rad.colors[ colorText ];
-			color = color ? color : 'darkgray';
+			const color = rad.colors[ colorText ] ||  'darkgray';
 
 			material = new THREE.MeshPhongMaterial( { color: color, opacity: rad.opacity, side: 2, transparent: true } );
 
