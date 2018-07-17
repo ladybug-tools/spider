@@ -143,7 +143,7 @@
 		function callbackGbXML ( xhr ) {
 
 			const gbxmlResponseXML =  xhr.target.responseXML;
-			const gbxml = xhr.target.response;
+			const gbxml = xhr.target.responseXML.documentElement;
 
 			meshes = GBX.parseFileXML( gbxml );
 
