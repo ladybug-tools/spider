@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="basic html template with sliding menu, markdown capability and frequently used pages" >
+<meta name=keywords content="JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-07-16" >
+<title>hamburger bootswatch r1.0</title>
+<style>
+/* Copyright 2018 pushMe pullYou authors. MIT License */
+
+	:root { --mnu-width: 20rem; font-size: 1em; }
+
+	html { height: 100%; margin: 0; }
+
+	body { height: 100%; margin: 0; }
+
+	a:hover, a:focus { background-color: yellow; color: #888; }
+	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1em }
+	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+
+	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; right: 0;}
+
+	#divMenu { max-height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
+		width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#hamburger { cursor: pointer; font-size: 2rem; left: calc( var( --mnu-width ) - 4rem );
+		line-height: 2rem; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+	.default { background-color: white; color: #007bff; }
+	.cerulean { background-color: white; color: #2FA4E7; }
+	.cosmo { background-color: white; color: #2780E3; }
+	.cyborg { background-color: #060606; color: #2A9FD6; }
+	.darkly { background-color: #222; color: #00bc8c; }
+	.flatly { background-color: white; color: #18BC9C; }
+	.journal { background-color: white; color: #EB6864; }
+	.litera { background-color: white; color: #4582EC; }
+	.lumen { background-color: white; color: #158CBA; }
+	.lux { background-color: white; color: #1a1a1a; }
+	.materia { background-color: white; color: #2196F3; }
+	.minty { background-color: white; color: #78C2AD; }
+	.pulse { background-color: white; color: #593196; }
+	.sandstone { background-color: white; color: #93C54B; }
+	.simplex { background-color: white; color: #D9230F; }
+	.sketchy { background-color: white; color: #333; }
+	.slate { background-color: #272B30; color: #fff; }
+	.solar { background-color: #002B36; color: #839496; }
+	.spacelab { background-color: white; color: #3399F3; }
+	.superhero { background-color: #2B3E50; color: #DF691A; }
+	.united { background-color: white; color: #E95420; }
+	.yeti { background-color: white; color: #008cba; }
+
+
+/*
+
+	body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; margin: 0; }
+
+	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+
+	iframe { /*border: none; * width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	td { vertical-align: top; }
+
+*/
+
+</style>
+<link id=css rel="stylesheet" type="text/css" >
+</head>
+<body>
+<script src=https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js ></script>
+
+
+	<div id = "divMenu" class="jumbotron" >
+
+		<div id = "divTitle" ></div>
+
+
+
+		<div id = "divMenuItems" >
+
+			<p><a href="#../../pages/markdown-help.md" >markdown-help.md</a></p>
+
+			<p><a href="#../../plugins/iframe-carousel-r1.html" >iframe-carousel-r1.html</a></p>
+
+			<p><a href="#../../plugins/view-github-issues.html" >view-github-issues.html</a></p>
+
+			<p><a href="#../../tootoo-more/plugins/view-stl.html" >view-stl.html</a></p>
+
+			<p><a href="#../../utilities/invertocat.png" >invertocat.png</a></p>
+
+			<p><a href="https://bootswatch.com" target=_blank >bootswatch.com 🗗</a></p>
+
+		</div>
+
+
+		<div id= "divFooter" >
+
+			<hr>
+
+			<div>
+				<p>
+					<select id=selTheme onchange=updateCss(this.value); class="form-control" >
+						<option class=default >Default</option>
+						<option class=cerulean >Cerulean</option>
+						<option class=cosmo >Cosmo</option>
+						<option class=cyborg >Cyborg</option>
+						<option class=darkly >Darkly</option>
+						<option class=flatly >Flatly</option>
+						<option class=journal >Journal</option>
+						<option class=litera >Litera</option>
+						<option class=lumen >Lumen</option>
+						<option class=lux >Lux</option>
+						<option class=meteria >Materia</option>
+						<option class=minty >Minty</option>
+						<option class=pulse >Pulse</option>
+						<option class=sandstone >Sandstone</option>
+						<option class=simplex >Simplex</option>
+						<option class=sketchy >Sketchy</option>
+						<option class=slate >Slate</option>
+						<option class=solar >Solar</option>
+						<option class=spacelab >Spacelab</option>
+						<option class=superhero >Superhero</option>
+						<option class=united >United</option>
+						<option class=yeti >Yeti</option>
+					</select>
+				</p>
+			</div>
+
+			<div title='many thanks!' ><a href=#../../pages/credits.md >Credits</a></div>
+			<div><a href=#../../pages/code-of-conduct.md >Code of Conduct</a></div>
+			<div><a href=#../../pages/contributing.md >Contributing</a></div>
+			<div><a href=#../../pages/license.md >License</a></div>
+			<div><a href=#../../pages/markdown-help.md >Markdown Help</a></div>
+			<div><a href="javascript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+			<div><a href="https://api.github.com/rate_limit" target=_blank title='If menu stops appearing, it is likely due to too many API calls' >View GitHub API Rate Limits</a></div>
+
+			<h1 onclick=divMenu.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top of page' > &#x2766; </h1>
+
+		</div>
+
+	</div>
+
+	<div id = "divContainer" >
+
+		<div id = "divContents" ></div>
+
+	</div>
+
+	<button id = "hamburger" class = "btn btn-primary" onclick=toggleNav(); > slide &#9776;  </button>
+
+<script>
+// https://github.com/showdownjs/showdown << check for latest rev from time to time 1.8.6 2018-07-02
+// jshint esversion: 6
+
+const themeName = localStorage.getItem( 'themeName' );
+selTheme.value = themeName ? themeName : 'Cerulean' ;
+
+let xDown = null;
+let yDown = null;
+
+//	let defaultFile = 'index.html';
+//	location.hash = '../README.md';
+let uriDefaultFile = 'README.md';
+
+const txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+
+init();
+
+
+function init() {
+
+	updateCss( themeName );
+
+	divTitle.innerHTML =
+	`
+		<div class="">
+			<a class="breadcrumb-item" href = "../index.html" target="_top" >repo</a>
+			<a class="breadcrumb-item" href= "./index.html" target="_top" style=font-size:24px; >&#x2302;</a>
+		</div>
+
+		<h2>
+			<a href="https://github.com/pushme-pullyou/pushme-pullyou.github.io/tree/master/tootoo-templates/hamburger-bootswatch" target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+			<a href = "" >${ document.title }</a>
+		</h2>
+
+		<p>${ document.head.querySelector( '[name=description]' ).content }</p>
+	`;
+
+	divMenuItems.innerHTML += '<details>' + txt + '</details><details>' + txt + '</detaila>';
+
+	document.addEventListener( 'touchstart', onTouchStart, false );
+	document.addEventListener( 'touchmove', onTouchMove, false );
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+	onHashChange();
+
+}
+
+
+
+function updateCss( value ) {
+
+	css.href = value === 'Default' ? 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+		`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ value.toLowerCase() }/bootstrap.min.css`;
+
+	localStorage.setItem( 'themeName', value );
+
+}
+
+
+
+function toggleNav() {
+
+	const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
+
+	if ( !divMenu.style.width || divMenu.style.width === width ) {
+
+		divMenu.style.width = '0';
+		divMenu.style.padding = '0';
+		hamburger.style.left = '-75px';
+		divContainer.style.marginLeft = '0';
+
+	} else {
+
+		divMenu.style.width = width;
+		//divMenu.style.padding = '30px 10px 0 10px';
+		divMenu.style.padding = '1rem';
+		hamburger.style.left = 'calc( var( --mnu-width ) - 4rem )';
+		divContainer.style.marginLeft = width;
+
+	}
+
+}
+
+
+
+function onHashChange() {
+
+	const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+	const ulc = url.toLowerCase();
+
+	if ( ulc.endsWith( '.md' ) ) {
+
+		requestFile( url, callbackMarkdown );
+
+	} else if ( ulc.endsWith( '.html' ) ) {
+
+		divContents.style.maxWidth = '100%';
+		document.body.style.overflow = 'hidden';
+
+		divContents.innerHTML = `<iframe src=${ url } height=100% width=100% ></iframe>`;
+
+	} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
+
+		divContents.innerHTML = `<img src=${ url } >`;
+
+	} else {
+
+		requestFile( urlGitHubPage + url, callbackToTextarea );
+
+	}
+
+}
+
+
+
+function callbackMarkdown( xhr ){
+
+	showdown.setFlavor('github');
+	const converter = new showdown.Converter();
+	const response = xhr.target.response;
+	const html = converter.makeHtml( response );
+
+	divContents.style.maxWidth = '800px';
+	document.body.overflow = '';
+	divContents.innerHTML = html;
+	window.scrollTo( 0, 0 );
+
+}
+
+
+
+function callbackToTextarea( xhr ){
+
+	const response = xhr.target.response;
+
+	divContents.innerHTML = `<textarea style=height:100%;width:100%; >${ response }</textarea>`;
+
+}
+
+
+
+function requestFile( url, callback ) {
+
+	const xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+
+
+function onTouchStart( event ) {
+
+	xDown = event.touches[ 0 ].clientX;
+	yDown = event.touches[ 0 ].clientY;
+
+}
+
+
+
+function onTouchMove(event) {
+
+	if ( ! xDown || ! yDown ) {
+
+		return;
+
+	}
+
+	const xUp = event.touches[ 0 ].clientX;
+	const yUp = event.touches[ 0 ].clientY;
+
+	const xDiff = xDown - xUp;
+	const yDiff = yDown - yUp;
+
+	if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {// most significant
+
+		if ( xDiff > 0 ) {
+
+			toggleNav();
+			// left swipe
+			console.log( 'left swipe' );
+
+		} else {
+
+			toggleNav();
+			// right swipe
+			console.log( 'right swipe' );
+
+		}
+
+	} else {
+
+		if ( yDiff > 0 ) {
+
+			//up swipe
+			console.log( 'up swipe' );
+
+		} else {
+
+			// down swipe
+			console.log( 'down swipe' );
+
+		}
+
+	}
+
+	xDown = null;
+	yDown = null;
+
+}
+
+
+
+
+</script>
+</body>
+</html>
