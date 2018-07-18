@@ -39,16 +39,30 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 
 
+### [SPEED Rad2Solar Viewer  R6.2]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer3.html )
+
+
+### [SPEED Rad2Solar Viewer  R6.2]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer2.html )
+
+* Fixes diagonal facades in Test Case 3 & 4
+* Braeks north and south facades
+
 ### [SPEED Rad2Solar Viewer R6]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer.html )
 
 * Flips surfaces 180 degrees where normal vector Z is not &#8723;1  Just because.
+
+
 
 
 ### [SPEED Rad2Solar Viewer R5]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r5/speed-rad2solar-viewer.html )
 
 * WIP but getting there
 
-See also [Feedback]( #sandbox/speed-rad2solar-viewer/r5/feedback.md )
+### [SPEED Rad2Solar Viewer R5.3 ]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r5/speed-rad2solar-viewer.3.html )
+
+* Fixes ground plane but turns south facades to be upside down
+
+See also [Feedback]( http://www.ladybug.tools/spider/index.html#sandbox/speed-rad2solar-viewer/r5/feedback.md )
 
 #### Issues
 
