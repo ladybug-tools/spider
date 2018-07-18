@@ -10,7 +10,11 @@ There are now two revisions
 
 * This version performs no rotations around the X axis
 
-The current situation is that if you rotate the surfaces the south facades are OK, if you do not rotate the surfaces then the ground planes are OK.
+The current situation is that if you rotate the surfaces then the south facades are OK, if you do not rotate the surfaces then the ground planes are OK.
+
+For the time being we can probably write a special case so that normals point up or down along Z axis are not rotated but facades are rotated. This fix may not work in all cases.
+
+
 
 
 ### Test Case 1
@@ -24,7 +28,7 @@ The current situation is that if you rotate the surfaces the south facades are O
 * Ground plane is OK
 * South facade is upside down
 
-there is also the shade building in the NE corner. This the only test case with a shade building, so it is difficult to get a feeling of what the underlying issues are. Do not that the vectors seem to be point every which way
+there is also the shade building in the NE corner. This the only test case with a shade building, so it is difficult to get a feeling of what the underlying issues are. Do note that the vectors on the fives surfaces seem to be pointing every which way.
 
 ### Test Case 2
 
@@ -73,7 +77,7 @@ Ditto for all the facades of all the remaining files
 #### R5.3a
 * Ground plane is OK
 * Roof plane is OK
-* South facade is upside down
+* South facade is upside down - needs rotating 180&deg; along X axis
 
 
 ### Test Case 6
