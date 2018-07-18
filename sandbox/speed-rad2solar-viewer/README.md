@@ -39,9 +39,16 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 
 
+### [SPEED Rad2Solar Viewer R6]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer.html )
+
+* Flips surfaces 180 degrees where normal vector Z is not &#8723;1  Just because.
+
+
 ### [SPEED Rad2Solar Viewer R5]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r5/speed-rad2solar-viewer.html )
 
 * WIP but getting there
+
+See also [Feedback]( #sandbox/speed-rad2solar-viewer/r5/feedback.md )
 
 #### Issues
 
@@ -56,6 +63,10 @@ BW-Theo, we are pushing new pngs to folder viewer is pointing at. Make backup of
 ### [SPEED Rad2Solar Viewer R4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r4/speed-rad2solar-viewer.html )
 
 * Reads PNG files instead of HDR files
+
+***
+
+## _None of the earlier demos work because the data files were erased_
 
 ### [SPEED Rad2Solar Viewer R3]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r3/speed-rad2solar-viewer.html )
 
