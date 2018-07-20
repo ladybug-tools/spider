@@ -16,6 +16,8 @@
 	COR.uriDefaultFile = '../assets/splash-screen.md';
 
 	COR.colorButtonToggle = 'pink';
+
+	// needs fixing
 	COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
 
 
@@ -54,28 +56,6 @@
 
 
 
-	function updateCss( value ) {
-
-		/*
-		if ( !window.css ) {
-
-			css = document.head.appendChild( document.createElement( 'link' ) );
-			css.rel = 'stylesheet';
-			css.type = 'text/css';
-
-		}
-		*/
-
-		css.href = value === 'Default' ? 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
-			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ value.toLowerCase() }/bootstrap.min.css`;
-
-		localStorage.setItem( 'themeName', value );
-
-	}
-
-
-
-
 	COR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
 
 		location.hash = CORinpFilePath.value;
@@ -96,6 +76,8 @@
 		script.onload = function() { COR.setMenuButtonsClass ( CORdivMenuItems ); }
 
 	}
+
+
 
 	// handle location.hash change events
 
@@ -408,7 +390,7 @@
 
 
 
-	// handle menu header dragging with mouse or touch events
+	// handle menu header dragging with mouse or touch events // 2018-07-19 no longer needed?
 
 	COR.onMouseDownDraggable = function( event ) {
 
@@ -479,11 +461,22 @@
 	////////// Slide / Hamburger operations
 
 
-	COR.setMenuStyle = function( color ) {
+	function updateCss( value ) {
 
-		stylesheetW3schools.href="https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+		/*
+		if ( !window.css ) {
 
-		localStorage.setItem('GbxmlViewerStyleColor', color );
+			css = document.head.appendChild( document.createElement( 'link' ) );
+			css.rel = 'stylesheet';
+			css.type = 'text/css';
+
+		}
+		*/
+
+		css.href = value === 'Default' ? 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ value.toLowerCase() }/bootstrap.min.css`;
+
+		localStorage.setItem( 'themeName', value );
 
 	};
 
@@ -518,7 +511,7 @@
 		CORdivMenuRight.scrollTo( 0, 0 );
 		//CORdivItemsRight.scrollTo( 0, 0 );
 
-	}
+	};
 
 
 
@@ -588,7 +581,7 @@
 		button.style.backgroundColor = '';
 		button.style.fontWeight = '';
 
-	}
+	};
 
 
 
@@ -608,7 +601,7 @@
 		for ( let button of buttons ) {
 
 			//button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
-			button.classList.add( "btn", "button-primary"  );
+			button.classList.add( "btn", "btn-secondary", "btn-sm" );
 
 		}
 

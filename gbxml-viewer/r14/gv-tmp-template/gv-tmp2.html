@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-07-18" >
-<title>'Aragog' gbXML Viewer SET R14.0</title>
+<title>'Aragog' gbXML Viewer TMP R14.0</title>
 
 <!--
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
@@ -173,7 +173,7 @@
 
 				<div>
 					<p>
-						<select id=selTheme onchange=updateCss(this.value); class="form-control" style=display:inline-block;width:95% >
+						<select id=selTheme onchange=updateCss(this.value); class="form-control" >
 							<option class=default >Default</option>
 							<option class=cerulean >Cerulean</option>
 							<option class=cosmo >Cosmo</option>
@@ -196,9 +196,12 @@
 							<option class=superhero >Superhero</option>
 							<option class=united >United</option>
 							<option class=yeti >Yeti</option>
-						</select>  <a href=#../gv-cor-core/READMe.md>?</a>
+						</select>
 					</p>
 				</div>
+
+
+				<div id=divRowButtonsStyle ></div>
 
 				<div id=CORdragArea class=dragDropArea >
 
@@ -222,12 +225,12 @@
 
 				<summary title="the primary viewer tools are here" >Features</summary>
 
+				<!--
 				<button id=CORbutSettings class="btn btn-primary btn-sm"
-				onclick=COR.loadScript("../gv-set-settings/gv-set.js")
-				title="Update colors, explode models and adjust viewing viewing parameters" >
+					onclick=COR.loadScript("../gv-set-settings/gv-set.js")
+					title="Update colors, explode models and adjust viewing viewing parameters" >
 				Settings</button>
 
-				<!--
 				<button id=CORbutMenuReports class="btn btn-primary btn-sm"
 					onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
 					title ="Locate, identify and display all the elements and attributes in a gbXML" >
@@ -247,12 +250,12 @@
 					onclick= COR.loadScript('../gv-sav-save-changes/gv-sav.js')
 					title="Save time with gbXML files that are frequently updated" >
 				Changes</button>
+				-->
 
 				<button id=butMenuTemplate class="btn btn-primary btn-sm" onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-tmp-template/gv-tmp.js';" >
-				Template
-			-->
+					"const script = document.head.appendChild( document.createElement( 'script' ) );
+					script.src = '../gv-tmp-template/gv-tmp.js';" >
+					Template
 				</button>
 
 				<hr>
@@ -366,8 +369,8 @@ selTheme.value = themeName;
 
 COR.initCore();
 THR.initThree();
-CTX.initHeadsUp();
 
+CTX.initHeadsUp();
 THR.animate();
 
 
@@ -394,8 +397,6 @@ function initApp() {
 	CORinpFilePath.value = thrFilePath;
 
 	COR.url = CORinpFilePath.value || COR.url; // for testing
-
-	// let's go
 
 	if ( location.hash && location.hash.endsWith( '.xml') ) {
 

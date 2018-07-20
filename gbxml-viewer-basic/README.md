@@ -6,6 +6,9 @@ value='You are now in a GitHub web page view - Click this button to view this re
 # [gbXML Viewer Basic Read Me]( #gbxml-viewer-basic/README.md )
 
 
+## Deprecated - please go to [Spider gbXML Tools]( https://github.com/ladybug-tools/spider-gbxml-tools )
+
+
 <iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer-basic/r3/gbxml-viewer-basic.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 

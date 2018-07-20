@@ -4,7 +4,7 @@
 /*global THREE, THR, GBX,COR */
 /* jshint esversion: 6 */
 
-	var SET = { release: '2 14.1' };
+	var SET = { release: '2 14.2' };
 
 	// move into own related functions?
 	SET.localClipX1= new THREE.Plane( new THREE.Vector3( -1, 0, 0 ), 0 );
@@ -26,12 +26,13 @@
 
 		COR.setPanelButtonInit( CORbutSettings );
 
-	}
+		COR.setMenuButtonsClass( CORdivMenuItems );
+
+	};
 
 
 
 	SET.setMenuItems = function( target ) {
-
 
 		target.innerHTML =
 		`
@@ -40,6 +41,7 @@
 				<summary>Settings &nbsp; <a href=#../gv-set-settings/README.md title="SET${ SET.release }">?</a> </summary>
 
 				<!--
+
 				<div>
 					<b>visibility toggles</b><br>
 					<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; >surfaces</button>
@@ -51,78 +53,26 @@
 
 				<div id=SETdivShowHide ></div>
 
-				<hr>
-
 				-->
 
-				<details>
-					<summary>materials settings</summary>
-					<button id=butSetRandomMaterial onclick=SET.setRandomMaterial(); >Set random material</button>
+				<p>
+					<small>Update a number of parameters to control display and rendering of the gbXML file as a 3D model</small>
+				</p>
 
-					<button onclick=SET.setPhongDefaultMaterial(); >Set default phong material</button>
+				<hr>
 
-					<button onclick=SET.setNormalMaterial(); >Set normal material</button>
+				<div id=SETdetColorSettings ></div>
 
-					<button onclick=SET.setDefaultMaterial(); >Set default material</button>
+				<div id=SETdetSceneSettings ></div>
 
-					<button onclick=SET.setExposureMaterial(); >Set exposure type material</button>
-
-					<button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button>
-
-					<div title="building opacity: 0 to 100%" >Opacity
-					<output id=outOpacity class=floatRight >85%</output><br>
-					<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
-					</div>
-
-					<hr>
-				</details>
-
-				<details>
-					<summary>scene settings</summary>
-					<!--
-					<button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button>
-					-->
-
-					<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
-
-					<p>
-						<button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
-
-						<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
-
-					</p>
-
-
-					<p>
-						<button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
-
-						<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
-
-					</p>
-
-					<p>
-						<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
-						<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
-						<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
-					</p>
-
-					<p>
-						<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
-						<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
-						<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
-					</p>
-
-					<hr>
-
-				</details>
 
 				<details title="building surface separation" >
-					<summary>explode view</summary>
+
+					<summary>exploded views</summary>
 
 					<p>
 						<button onclick=SET.explodeByStoreys(); >explode by storeys</button>
 					</p>
-
 
 					<button onclick=SET.explodeMinus();> minus </button>
 					<button onclick=SET.explodeReset(); >reset</button>
@@ -134,7 +84,7 @@
 
 				<details>
 
-					<summary>section view</summary>
+					<summary>section views</summary>
 
 					<div><small><i>Work-in-progress. Click toggles twice to reset. Multiple sections coming next.</i></small></div>
 					<br>
@@ -184,7 +134,6 @@
 						oninput=outClipZ2.value=inpClipZ2.value;SET.updateCLipZ(); title="-50 to 50: OK" >
 					</div>
 
-
 					<!--
 					<div> // To be made to work
 						rotate section on Z-axis: <output id=outRotate >0</output><br>
@@ -194,15 +143,62 @@
 					</div>
 					-->
 
-					<hr>
-
 				</details>
+
+				<hr>
 
 			</details>`;
 
-	}
+
+		SET.setDetColorSetting( SETdetColorSettings );
+
+		SET.setDetSceneSetting( SETdetSceneSettings );
+
+	};
 
 
+
+	SET.setDetColorSetting = function( target ) {
+
+		target.innerHTML =
+
+		`<details>
+
+			<summary>color settings</summary>
+
+			<p><small>Set a theme for the colors of each surface type</small></p>
+
+			<p>
+				<button onclick=SET.setExposureMaterial(); >exposure type</button>
+
+				<button onclick=SET.setPhongDefaultMaterial(); >shades of gray</button>
+
+				<button onclick=SET.setNormalMaterial(); >normals</button>
+
+			</p>
+
+			<p>
+				<button id=butSetRandomMaterial onclick=SET.setRandomMaterial(); >random</button>
+
+				<button onclick=SET.setDefaultMaterial(); >default material</button>
+			</p>
+
+			<p><small>Adjust visibility settings</small></p>
+
+			<p>
+				<button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button>
+			<p>
+
+			<div title="building opacity: 0 to 100%" >Opacity
+				<output id=outOpacity class=floatRight >85%</output><br>
+				<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
+			</div>
+
+			<hr>
+
+		</details>`;
+
+	};
 
 
 
@@ -325,7 +321,60 @@
 	};
 
 
-/////////////////
+
+	/////
+	SET.setDetSceneSetting = function( target ) {
+
+		target.innerHTML =
+		`<details>
+
+			<summary>scene settings</summary>
+
+			<p><small>Adjust parameters that affect the entire model</small></p>
+
+			<!--
+			<button onclick=SET.toggleSceneAutoRotate() title= "Stop the spinning!" > Toggle scene rotation </button>
+			-->
+
+			<p>
+
+			<button id=butSetOrtho onclick=SET.toggleCameraOrthoPerspective(); title="" > Toggle camera ortho </button>
+
+			</p>
+
+			<p>
+				<button onclick=SET.toggleShadowMap(); >Toggle shadows</button>
+
+				<button onclick=SET.toggleBackgroundGradient(); > Toggle background gradient </button>
+
+			</p>
+
+
+			<p>
+				<button onclick=SET.toggleSurfaceNormals(); title="Every Three.js triangle has a normal. See them here." > Toggle surface normals </button>
+
+				<button onclick=SET.toggleAxesHelper(); >Toggle axes</button>
+
+			</p>
+
+			<p>
+				<button onclick=SET.toggleGridHelper(); >Toggle grid</button>
+				<button onclick=SET.updateMeshLevel("gridHelper",+0.2); >+</button>
+				<button onclick=SET.updateMeshLevel("gridHelper",-0.2); >-</button>
+			</p>
+
+			<p>
+				<button onclick=SET.toggleGroundHelper(); >Toggle ground</button>
+				<button onclick=SET.updateMeshLevel("groundHelper",+0.2); >+</button>
+				<button onclick=SET.updateMeshLevel("groundHelper",-0.2); >-</button>
+			</p>
+
+			<hr>
+
+		</details>`;
+
+	};
+
 
 
 	SET.toggleShadowMap = function() {
@@ -605,9 +654,6 @@
 		THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
 
 	};
-
-
-
 
 
 

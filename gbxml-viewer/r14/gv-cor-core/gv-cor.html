@@ -6,7 +6,7 @@
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-07-16" >
-<title>'Aragog' gbXML Viewer R14.9</title>
+<title>'Aragog' gbXML Viewer R14.10</title>
 
 <!--
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
@@ -16,12 +16,10 @@
 /* Copyright 2018 pushMe pullYou authors. MIT License */
 
 	:root { --mnu-width: 25rem; font-size: 0.8em; }
-
 	html { height: 100%; margin: 0; }
-
 	body { height: 100%; margin: 0; overflow: hidden;}
-
 	a:hover, a:focus { background-color: yellow; color: #888; }
+
 	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1em }
 
 	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
@@ -35,6 +33,7 @@
 	.attributeTitle {font-size: smaller; font-style: italic }
 	.attributeValue { color: blue }
 	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
+
 	/*
 	.flex-container { display: flex; flex-wrap: wrap;}
 	.flex-container > div { border: 1px solid #ddd; margin: 5px; padding: 5px; }
@@ -49,7 +48,6 @@
 	.highlight { background-color: var( --highlight-color ) }
 
 	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
-
 
 	.default { background-color: white; color: #007bff; }
 	.cerulean { background-color: white; color: #2FA4E7; }
@@ -113,7 +111,6 @@
 	}
 
 
-
 	@media screen and ( max-width: 900px) {
 
 		#CORdivMenuLeft { left: calc( 0rem - var( --mnu-width ) );}
@@ -137,16 +134,12 @@
 
 	iframe { /*border: none; * width: 100%; }
 
-	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
-	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
-	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
-
 	td { vertical-align: top; }
 
 */
 
 </style>
-<link rel="stylesheet" type="text/css" id="css" >
+<link rel="stylesheet" href="https://www.gettemplate.com/demo/magister/assets/css/magister.css" type="text/css" id="css" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
@@ -165,7 +158,6 @@
 	<div id = "CORdivMenuLeft" class = "jumbotron" >
 
 		<!--
-
 			<div id = "CORdivMenuLeftHeader" class="navbar navbar-expand-lg navbar-dark bg-primary" title="There's a lot to move here. Be slow and gentle!" style=text-align:right; >
 				left menu / click to move
 			</div>
@@ -187,7 +179,7 @@
 
 				<div>
 						<p>
-							<select id=selTheme onchange=updateCss(this.value); class="form-control" >
+							<select id=selTheme onchange=updateCss(this.value); class="form-control" style="display:inline-block;width:95% !important;" >
 								<option class=default >Default</option>
 								<option class=cerulean >Cerulean</option>
 								<option class=cosmo >Cosmo</option>
@@ -210,18 +202,19 @@
 								<option class=superhero >Superhero</option>
 								<option class=united >United</option>
 								<option class=yeti >Yeti</option>
-							</select>
+							</select> <a href=#../gv-cor-core/READMe.md>?</a>
 						</p>
 					</div>
 
-
+				<!--
 				<div id=divRowButtonsStyle ></div>
+				-->
 
 				<div id=CORdragArea class=dragDropArea >
 					Drag & drop <a href=http://gbxml.org >gbXML</a> and other files here
 					or <input type = "file" id = "inpFile" class="form-control-file" onchange="COR.openFile(this);" >
 					or enter a default file path &nbsp;<a href=#../assets/file-open.md title="Learn how to speed up your testing" >?</a>
-					<!--  try this:		../../../gbxml-sample-files/old-factory.xml		-->
+					<!--  try this:		../../../gbxml-sample-files/london-office.xml		-->
 					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 
 					or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
@@ -382,8 +375,7 @@
 
 <script>
 
-let themeName = localStorage.getItem( 'themeName' );
-themeName = themeName ? themeName : 'Cerulean'
+let themeName = localStorage.getItem( 'themeName' ) || 'Cerulean';
 selTheme.value = themeName;
 
 
@@ -408,29 +400,6 @@ function initApp() {
 		<a href = "" title="Relead this page" >${title}</a> &nbsp; <a href=#../READMe.md title="View the read me file" >?</a>
 	</h2>`;
 
-
-	/*
-	// move to a gv-sty.js ??
-
-	let color = localStorage.getItem( 'GbxmlViewerStyleColor' );
-	color = color ? color : 'khaki';
-	stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
-
-	const colors = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'khaki', 'yellow',
-		'amber', 'orange', 'deep-orange', 'blue-grey', 'brown', 'grey', 'dark-grey', 'black', 'w3schools' ];
-
-	let txt = '';
-	let index = 1;
-
-	for ( let color of colors ){
-
-		txt += '<a href=JavaScript: onclick=COR.setMenuStyle("' + color + '"); style=font-size:2rem;line-height:1rem;color:' + color.replace( '-', '' ) +
-			' title="' + ( index++ ) + ' ' + color + '" >&bull;</a> ';
-
-	}
-
-	divRowButtonsStyle.innerHTML = txt;
-	*/
 
 	// load a default file / great for testing
 
@@ -463,23 +432,6 @@ function initApp() {
 
 }
 
-
-function xxxupdateCss( value ) {
-
-	if ( !window.css ) {
-
-		css = document.head.appendChild( document.createElement( 'link' ) );
-		css.rel = 'stylesheet';
-		css.type = 'text/css';
-
-	}
-
-	css.href = value === 'Default' ? 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
-		`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ value.toLowerCase() }/bootstrap.min.css`;
-
-	localStorage.setItem( 'themeName', value );
-
-}
 
 
 function onloadThreejs() { // any need?

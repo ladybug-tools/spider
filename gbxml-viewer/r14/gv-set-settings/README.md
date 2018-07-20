@@ -1,8 +1,9 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-set-settings/README.md "View file as a web page." ) </span>
 
-<div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-set-settings/README-template.md'";
+<div><input type=button  class="btn btn-secondary btn-sm" onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-set-settings/README-template.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
+<br>
 
 # [R14 'Aragog' gbXML Viewer ~ SET ~ Settings Read Me]( #gbxml-viewer/r14/gv-set-settings/README.md )
 
@@ -46,7 +47,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## To Do / Wish list
 
-* 2018-07-08 ~ Theo ~ Split menu items into multple modules as in reports and issues
+
 * 2018-05-11 ~ Theo ~ Add separate opening opacity slider?
 * 2018-05-11 ~ Theo ~ Add display skybox with patches set appropriate EPW data
 * 2018-05-11 ~ Theo ~ add slider for amount of exploding by storey
@@ -56,9 +57,6 @@ value='You are now in a GitHub web page view - Click this button to view this re
 * 2018-04-02 ~ Theo ~ Select color themes and other parameters such as adding of ground planes from a list of color theme files
 * 2017 ~ Add ( random? ) colors by space
 * 2017 ~ Better lights and shadows settings
-
-
-
 
 
 ## Issues
@@ -71,6 +69,23 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Change Log
 
+R2 14.3
+* Finished adding setDetails menu functions
+	* Done: * 2018-07-08 ~ Theo ~ Split menu items into multiple modules as in reports and issues
+* Update p's and div's
+* Use sentence caps throughout
+* Validate with jsHint and fix 1 error
+
+
+
+### 2018-07-19 ~ Theo
+
+R2 14.2
+* Menu fixes
+	* Add description
+	* making not all details elements opened work
+	* Rejigging text
+
 ### 2018-06-19 ~ Theo
 
 * Add gv-set.html - to help with testing and enhancing
@@ -81,6 +96,7 @@ SET2 14.1
 * First commit of a fork
 * Add title to ? link
 * Add details/summaries to menu
+
 
 ***
 

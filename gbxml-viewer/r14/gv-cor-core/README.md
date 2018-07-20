@@ -1,7 +1,9 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-cor-core/README.md "View file as a web page." ) </span>
 
-<div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-cor-core/README.md'";
+<div><input type=button class="btn btn-secondary btn-sm" onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-cor-core/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
+
+<br>
 
 # [R14 'Aragog' COR Core Read Me]( #gbxml-viewer/r14/gv-cor-core/README.md )
 
@@ -9,21 +11,17 @@ value='You are now in a GitHub web page view - Click this button to view this re
 <iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-cor-core/gv-cor.html width=100% height=400px >Iframes are not displayed on github.com</iframe>
 
 
-## Full screen test script: [COR Core]( https://www.ladybug.tools/spider/gbxml-viewer/r14/gv-cor-core/gv-cor.html )
-
-
 ## Concept
 
 
-This folder contains the basic script that creates the menus, opens Markdown files, converts Markdown files to HTML
+This folder contains the basic script that loads style sheets, creates the menus, opens Markdown files and converts to HTML
+
+Features include
+
 * View gbXML files in 3D in your browser.
 * Open files using HTML5 File Reader or by URL in location.hash
 * Base script used by all the other gbXML Viewer modules
-
-Displaying the data in 3D using the [Three.js]( https://threejs.org ) JavaScript library is in the 'gv-thr' folder.
-
-You may uses this script to verify that menus work as intended
-
+* Displaying the data in 3D using the [Three.js]( https://threejs.org ) JavaScript library is in the 'gv-thr' folder.
 * Sets default URLs
 * Adds event handlers
 * Handles location hash change events
@@ -33,15 +31,22 @@ You may uses this script to verify that menus work as intended
 * Handles moving the menus by monitoring mouse and touch events
 * Responds to calls to slide the left and right menus
 
+### Style Sheet considerations
 
-needs combining with this read me
+For the previous few revisions there has been an ability to update the colors used the menus. While this ability is nice, it does not satisfy a larger need that the the project should be adaptable to the requirements of any popular JavaScript front-end library( React, Angular, Vue etc) and it should also be adaptable to any type of style sheet.
 
-* <http://www.ladybug.tools/spider/#gbxml-viewer/r9/gbxml-viewer9-01-core/README.md>
+This revision add a small toward satisfying the latter need. This release add the ability to load, read and display full featured external style sheets. For the moment this is limited to the demo set of [Bootswatch]( https://bootswatch.com/ ) themes. Bootswatch supplies free and paid-for themes for the [Bootstrap]( https://getbootstrap.com/ ) library.
+
+It is important to note that the gbXML Viewer is **not** turning into a Bootstrap-based app. The goal, as always, is for this library to be able to slip into the demands of any other popular JavaScript library.
+
+What this revision does is merely read a Bootstrap-compatible .CSS file and display the expected results. The goal is to provide you with the confidence that you can use any combination of colors, sizes, fonts and other effects in the app you are building
 
 
 ## Wish list
 
-
+* 2018-07-19 ~ Theo ~ Find more stashes of free styles
+* 2018-07-19 ~ Theo ~ add ability to add and remove classes upon new events
+* 2018-07-19 ~ Theo ~ Michal wants a yellow theme
 * 2018-03-04 ~ Random model on start-up?
 * 2018-02-18 ~ Menus remember their position from session to session
 * 2018-02-21 ~ Add automatic addition of ground
@@ -53,9 +58,29 @@ needs combining with this read me
 
 ## Links of Interest
 
+CSS / Bootstrap
+* https://bootswatch.com/
+* https://bootswatch.com/cerulean/
+* https://www.creativebloq.com/web-design/free-bootstrap-themes-21619376
+* https://www.bootstrap-live-customizer.com/
+* https://speckyboy.com/free-bootstrap-framework-templates/
+* https://pikock.github.io/bootstrap-magic/app/index.html#!/editor
+
+
+Update class
+
+* https://stackoverflow.com/questions/195951/change-an-elements-class-with-javascript
+
+
 
 
 ## Change Log
+
+### 2018-07-19 ~ Theo
+
+R14.10
+* Add link to read me after select style
+* Fixing style issues with buttons in features menu - WIP
 
 
 ### 2018-07-16 ~ Theo
