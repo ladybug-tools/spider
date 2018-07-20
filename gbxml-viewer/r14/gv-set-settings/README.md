@@ -15,19 +15,24 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-* Update a number of parameters to control the display and rendering of the gbXML file as a 3D model
 * Viewing gbXML data in 3D gives you a lot more options for displaying gbXML elements using informative methods
 * Update the materials and colors for surfaces
 	- Choosing random colors helps you identify how a wall might be composed of multiple gbXML surfaces
 	- Choosing a solid shade helps you see shadows better
 	- Exposure type surfaces help you see what surfaces face outdoors
+* Exploded and Section Views
+	* Allow you to inspect internal spaces that normally hard to see
+
+## Mission
+
+* Update a number of parameters to control the display and rendering of the gbXML file as a 3D model
 
 ## Features
 
 * Adjust a wide variety of viewing parameters
 * Control the appearance of the surfaces
 	* Set default, random, Phong default, normal or exposure-type material to all surfaces
-	* Update opacity slider
+	* Update opacity sliders for building surfaces and openings
 * Control the appearance of the scene
 	* Toggle shadows, edges, surface normals
 	* Toggle wireframe
@@ -36,9 +41,9 @@ value='You are now in a GitHub web page view - Click this button to view this re
 	* Toggle display of axes, grid and ground
 	* Grid and ground located a bottom of exterior walls by default / location is adjustable
 * Control the behavior of the scene
-	* Toggle scene rotation
+	* Toggle scene rotation (not in current release)
 	* Toggle perspective and orthographic views
-* Set exploded 3D views
+* Set and reset exploded 3D views
 	* As a whole
 	* By the storey
 * Set section views along X, Y and Z axes
@@ -47,6 +52,8 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## To Do / Wish list
 
+* 2018-07-20 ~ Theo ~ Add the benefits for all the features to the Concept section of this Read Me
+* 2018-07-20 ~ Theo ~ Add toggle beteeen Orbit and Trackball controls
 * 2018-07-20 ~ Theo ~ Remember settings between sessions
 * 2018-05-11 ~ Theo ~ Add display skybox with patches set appropriate EPW data
 * 2018-05-11 ~ Theo ~ add slider for amount of exploding by storey
