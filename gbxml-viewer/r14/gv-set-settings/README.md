@@ -47,8 +47,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## To Do / Wish list
 
-
-* 2018-05-11 ~ Theo ~ Add separate opening opacity slider?
+* 2018-07-20 ~ Theo ~ Remember settings between sessions
 * 2018-05-11 ~ Theo ~ Add display skybox with patches set appropriate EPW data
 * 2018-05-11 ~ Theo ~ add slider for amount of exploding by storey
 * 2018-05-11 ~ Theo ~ Add cut sections along multiple axes at same time
@@ -71,10 +70,11 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 R2 14.3
 * Finished adding setDetails menu functions
-	* Done: * 2018-07-08 ~ Theo ~ Split menu items into multiple modules as in reports and issues
+	* Done:
 * Update p's and div's
 * Use sentence caps throughout
 * Validate with jsHint and fix 1 error
+* Done: * 2018-05-11 ~ Theo ~ Add separate opening opacity slider?
 
 
 

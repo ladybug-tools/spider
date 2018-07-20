@@ -118,10 +118,15 @@ SET.setDetColorSetting = function( target ) {
 			<button onclick=SET.toggleWireframe(); title="View all the triangles created by Three.js to display the geometry." > Toggle wireframe </button>
 		<p>
 
-		<div title="building opacity: 0 to 100%" >Opacity
-			<output id=outOpacity class=floatRight >85%</output><br>
-			<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=SET.updateOpacity(); >
+		<div title="Building opacity: 0 to 100%" >Building pacity
+			<output id=outOpacitySurfaces class=floatRight >85%</output><br>
+			<input type="range" id="rngOpacitySurfaces" min=0 max=100 step=1 value=85 oninput=SET.updateOpacitySurfaces(); >
 		</div>
+
+		<div title="Openings opacity: 0 to 100%" >Openings opacity
+		<output id=outOpacityOpenings class=floatRight >85%</output><br>
+		<input type="range" id="rngOpacityOpenings" min=0 max=100 step=1 value=85 oninput=SET.updateOpacityOpenings(); >
+	</div>
 
 		<hr>
 
@@ -268,13 +273,13 @@ SET.setDefaultMaterial = function() {
 
 
 
-SET.updateOpacity = function() {
+SET.updateOpacitySurfaces = function() {
 
-	const opacity = parseInt( rngOpacity.value, 10 );
+	const opacity = parseInt( rngOpacitySurfaces.value, 10 );
 
-	outOpacity.value = opacity + '%';
+	outOpacitySurfaces.value = opacity + '%';
 
-	THR.scene.traverse( function ( child ) {
+	GBX.surfaceMeshes.traverse( function ( child ) {
 
 		if ( child instanceof THREE.Mesh ) {
 
@@ -288,6 +293,25 @@ SET.updateOpacity = function() {
 };
 
 
+
+SET.updateOpacityOpenings = function() {
+
+	const opacity = parseInt( rngOpacityOpenings.value, 10 );
+
+	outOpacityOpenings.value = opacity + '%';
+
+	GBX.surfaceOpenings.traverse( function ( child ) {
+
+		if ( child instanceof THREE.Mesh ) {
+
+			child.material.opacity = opacity / 100;
+
+		}
+
+	} );
+
+
+};
 
 ///// Scene settings
 
