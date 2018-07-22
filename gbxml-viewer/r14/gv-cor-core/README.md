@@ -76,6 +76,13 @@ Update class
 
 ## Change Log
 
+
+### 2018-07-22 ~ Theo
+
+R14.11
+* Simplifying left menu action / make work on mobile
+* Add 'dark' to style select menu options as appropriate
+
 ### 2018-07-19 ~ Theo
 
 R14.10

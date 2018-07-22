@@ -5,23 +5,18 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-07-16" >
-<title>'Aragog' gbXML Viewer R14.10</title>
-
-<!--
-<link rel="stylesheet" type="text/css" href="../assets/style.css" >
-	<link rel="stylesheet" type="text/css" id="stylesheetW3schools" >
--->
+<meta name = "date" content = "2018-07-22" >
+<title>'Aragog' gbXML Viewer R14.11</title>
 <style>
-/* Copyright 2018 pushMe pullYou authors. MIT License */
+/*  Copyright 2018 Ladybug Tools authors. MIT License */
 
 	:root { --mnu-width: 25rem; font-size: 0.8em; }
 	html { height: 100%; margin: 0; }
 	body { height: 100%; margin: 0; overflow: hidden;}
+
 	a:hover, a:focus { background-color: yellow; color: #888; }
 
 	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1em }
-
 	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
 
 	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
@@ -73,12 +68,12 @@
 	.yeti { background-color: white; color: #008cba; }
 
 
-	#CORdivMenuLeft { max-height: 100%; margin: 1rem; overflow-x: hidden; padding: 1rem; position: fixed;
+	#CORdivMenuLeft { max-height: 100%; margin: 3rem 1rem; overflow-x: hidden; padding: 1rem; position: fixed;
 		resize: both; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
 	#CORdivMenuLeft {
 		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	}
-	#CORdivHamburgerLeft { font-size: 2rem; left: calc( var( --mnu-width ) - 3rem );
+	#CORdivHamburgerLeft { font-size: 2rem; /* left: calc( var( --mnu-width ) - 3rem ); */
 		line-height: 2rem; margin: 0; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
 	#CORdivHamburgerLeft {
 		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -113,7 +108,7 @@
 
 	@media screen and ( max-width: 900px) {
 
-		#CORdivMenuLeft { left: calc( 0rem - var( --mnu-width ) );}
+		#CORdivMenuLeft { left: calc( 0rem - var( --mnu-width ) ); max-width: 80%; }
 		#CORdivHamburgerLeft { left:-5rem; }
 		#CORdivMenuRight { left: 20%; width: 50%; }
 
@@ -139,7 +134,7 @@
 */
 
 </style>
-<link rel="stylesheet" href="https://www.gettemplate.com/demo/magister/assets/css/magister.css" type="text/css" id="css" >
+<link rel="stylesheet" type="text/css" id="css" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
@@ -152,194 +147,134 @@
 <script src = "../gv-sel-select-attributes/gv-sel.js" ></script>
 <script src = "../gv-ctx-context-menu/gv-ctx.js" ></script>
 
-<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
-
 
 	<div id = "CORdivMenuLeft" class = "jumbotron" >
 
-		<!--
-			<div id = "CORdivMenuLeftHeader" class="navbar navbar-expand-lg navbar-dark bg-primary" title="There's a lot to move here. Be slow and gentle!" style=text-align:right; >
-				left menu / click to move
+		<details open >
+
+			<summary>Header</summary>
+
+			<div>
+				<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
+				<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png alt="spider web" height=18 ></a> &raquo;
+				<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
 			</div>
-		-->
 
-		<div id = "zzCORdivMenuContents" >
+			<div id=CORdivTitle ></div>
 
-			<details open >
-
-				<summary>Header</summary>
-
-				<div>
-					<a href="http://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
-					<a href="http://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png alt="spider web" height=18 ></a> &raquo;
-					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
+			<div>
+					<p>
+						<select id=selTheme onchange=updateCss(this.value); class="form-control" style="display:inline-block;width:95% !important;" >
+							<option class=default >Default</option>
+							<option class=cerulean >Cerulean</option>
+							<option class=cosmo >Cosmo</option>
+							<option class=cyborg title="dark" >Cyborg</option>
+							<option class=darkly title="dark" >Darkly</option>
+							<option class=flatly >Flatly</option>
+							<option class=journal >Journal</option>
+							<option class=litera >Litera</option>
+							<option class=lumen >Lumen</option>
+							<option class=lux >Lux</option>
+							<option class=meteria >Materia</option>
+							<option class=minty >Minty</option>
+							<option class=pulse >Pulse</option>
+							<option class=sandstone >Sandstone</option>
+							<option class=simplex >Simplex</option>
+							<option class=sketchy >Sketchy</option>
+							<option class=slate  title="dark" >Slate</option>
+							<option class=solar title="dark" >Solar</option>
+							<option class=spacelab >Spacelab</option>
+							<option class=superhero title="dark" >Superhero</option>
+							<option class=united >United</option>
+							<option class=yeti >Yeti</option>
+						</select> <a href=#../gv-cor-core/READMe.md>?</a>
+					</p>
 				</div>
-
-				<div id=CORdivTitle ></div>
-
-				<div>
-						<p>
-							<select id=selTheme onchange=updateCss(this.value); class="form-control" style="display:inline-block;width:95% !important;" >
-								<option class=default >Default</option>
-								<option class=cerulean >Cerulean</option>
-								<option class=cosmo >Cosmo</option>
-								<option class=cyborg >Cyborg</option>
-								<option class=darkly >Darkly</option>
-								<option class=flatly >Flatly</option>
-								<option class=journal >Journal</option>
-								<option class=litera >Litera</option>
-								<option class=lumen >Lumen</option>
-								<option class=lux >Lux</option>
-								<option class=meteria >Materia</option>
-								<option class=minty >Minty</option>
-								<option class=pulse >Pulse</option>
-								<option class=sandstone >Sandstone</option>
-								<option class=simplex >Simplex</option>
-								<option class=sketchy >Sketchy</option>
-								<option class=slate >Slate</option>
-								<option class=solar >Solar</option>
-								<option class=spacelab >Spacelab</option>
-								<option class=superhero >Superhero</option>
-								<option class=united >United</option>
-								<option class=yeti >Yeti</option>
-							</select> <a href=#../gv-cor-core/READMe.md>?</a>
-						</p>
-					</div>
-
-				<!--
-				<div id=divRowButtonsStyle ></div>
-				-->
-
-				<div id=CORdragArea class=dragDropArea >
-					Drag & drop <a href=http://gbxml.org >gbXML</a> and other files here
-					or <input type = "file" id = "inpFile" class="form-control-file" onchange="COR.openFile(this);" >
-					or enter a default file path &nbsp;<a href=#../assets/file-open.md title="Learn how to speed up your testing" >?</a>
-					<!--  try this:		../../../gbxml-sample-files/london-office.xml		-->
-					<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
-
-					or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
-
-					<div id = "CORdivSampleGalleries" ></div>
-
-				</div>
-
-
-			</details>
-
-
-			<details open >
-
-				<summary title="the primary viewer tools are here" >Features</summary>
-
-				<button id=CORbutSettings class="btn btn-primary btn-sm"
-					onclick=COR.loadScript("../gv-set-settings/gv-set.js")
-					title="Update colors, explode models and adjust viewing viewing parameters" >
-				Settings</button>
-
-				<button id=CORbutMenuReports class="btn btn-primary btn-sm"
-					onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
-					title ="Locate, identify and display all the elements and attributes in a gbXML" >
-				Reports</button>
-
-				<button id=CORbutMenuNumbers class="btn btn-primary btn-sm"
-					onclick= COR.loadScript('../gv-num-numbers/gv-num.js')
-					title="matters of interest" >
-				Numbers</button>
-
-				<button id=CORbutIssues class="btn btn-primary btn-sm"
-					onclick= COR.loadScript('../gv-iss-issues/gv-iss.js')
-					title="Highlight duplicate items and areas of concern in a gbXML file" >
-				Issues</button>
-
-				<button id=butSaveChanges class="btn btn-primary btn-sm"
-					onclick= COR.loadScript('../gv-sav-save-changes/gv-sav.js')
-					title="Save time with gbXML files that are frequently updated" >
-				Changes</button>
-
-				<hr>
-
-			</details>
-
-
-			<div id = "CORdivMenuItems" ></div>
 
 			<!--
-			<details>
-
-				<summary>Things to Try</summary>
-
-
-				<p><small><i>More modules are just waiting to be upgraded</i></small></p>
-
-
-				<button id=butFirstPersonCamera class="btn btn-primary btn-sm" onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-cam-first-person-camera/gv-cam.js';" title='Click ? button for help. Work-in-progress: best to reload page after using' >
-				first person camera</button>
-
-
-				<button id=butAnalemma class="btn btn-primary btn-sm" onclick="
-					const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
-					scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
-					const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-ana-sun-path-analemma/gv-ana.js'; " title='Let a little Sunshine into you life' >
-				sun-path / analemma</button>
-
-				<button id=butSunRange class="btn btn-primary btn-sm" onclick="
-				const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-ran-sun-range/gv-ran.js'; " title='Let many Suns into you life' >
-				sun-range</button>
-
-				<button id=butModuleExplorer class="btn btn-primary btn-sm" onclick =
-				"const script = document.head.appendChild( document.createElement( 'script' ) );
-				script.src = '../gv-exp-module-explorer/gv-exp.js';" >
-				Module Explorer
-				</button>
-
-				<button id=butMenuTemplate class="btn btn-primary btn-sm" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gv-tmp-template/gv-tmp.js';" >
-					gbXML Viewer Menu Template
-				</button>
-
-
-				<button id=butScreenCapture class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick =
-					"const script = document.head.appendChild( document.createElement( 'script' ) );
-					script.src = '../gbxml-viewer9-08-screen-capture/gbxml-viewer9-screen-capture.js';" >
-				screen capture </button>
-
-
-			</details>
+			<div id=divRowButtonsStyle ></div>
 			-->
 
-			<details>
+			<div id=CORdragArea class=dragDropArea >
 
-				<!--  move to a gv-ftr.js ?? -->
+				Drag & drop <a href=http://gbxml.org >gbXML</a> and other files here
+				or <input type = "file" id = "inpFile" class="form-control-file" onchange="COR.openFile(this);" >
+				or enter a default file path &nbsp;<a href=#../assets/file-open.md title="Learn how to speed up your testing" >?</a>
+				<!--  try this:		../../../gbxml-sample-files/london-office.xml		-->
+				<input id=CORinpFilePath onchange=COR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter' >
 
-				<summary>Footer</summary>
+				or explore sample file galleries &nbsp;<a href=#../gv-gal-gallery/READMe.md>?</a><br>
 
-				<div title='' ><a href=#../assets/splash-screen.md >Start-up / Splash screen</a></div>
-				<div title='' ><a href=#../README.md >Release Read Me</a></div>
-				<div title='' ><a href=#../assets/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
-				<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
-				<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
-				<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
-				<div><a href=#../../../pages/contributing.md >Contributing</a></div>
-				<div><a href=#../../../pages/license.md >Copyright & License</a></div>
-				<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
-				<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
-				<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
-				<hr>
+				<div id = "CORdivSampleGalleries" ></div>
 
-			</details>
+			</div>
 
-			<h2 onclick=CORdivMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >
-				<img src=../assets/spider-web.png alt="spider web" height=24 style=opacity:0.5; >
-			</h2>
 
-		</div>
+		</details>
+
+
+		<details open >
+
+			<summary title="the primary viewer tools are here" >Features</summary>
+
+			<button id=CORbutSettings class="btn btn-primary btn-sm"
+				onclick=COR.loadScript("../gv-set-settings/gv-set.js")
+				title="Update colors, explode models and adjust viewing viewing parameters" >
+			Settings</button>
+
+			<button id=CORbutMenuReports class="btn btn-primary btn-sm"
+				onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
+				title ="Locate, identify and display all the elements and attributes in a gbXML" >
+			Reports</button>
+
+			<button id=CORbutMenuNumbers class="btn btn-primary btn-sm"
+				onclick= COR.loadScript('../gv-num-numbers/gv-num.js')
+				title="matters of interest" >
+			Numbers</button>
+
+			<button id=CORbutIssues class="btn btn-primary btn-sm"
+				onclick= COR.loadScript('../gv-iss-issues/gv-iss.js')
+				title="Highlight duplicate items and areas of concern in a gbXML file" >
+			Issues</button>
+
+			<button id=butSaveChanges class="btn btn-primary btn-sm"
+				onclick= COR.loadScript('../gv-sav-save-changes/gv-sav.js')
+				title="Save time with gbXML files that are frequently updated" >
+			Changes</button>
+
+			<hr>
+
+		</details>
+
+
+		<div id = "CORdivMenuItems" ></div>
+
+
+		<details>  <!--  move to a gv-ftr.js ?? -->
+
+			<summary>Footer</summary>
+
+			<div title='' ><a href=#../assets/splash-screen.md >Start-up / Splash screen</a></div>
+			<div title='' ><a href=#../README.md >Release Read Me</a></div>
+			<div title='' ><a href=#../assets/gbxml-viewer-support-issues-wish-list.md > Support, Issues, Wish List & Wanted</a></div>
+			<div title='Every release is visible and usable' ><a href=#../../previous-releases.md >Previous Releases</a></div>
+			<div title='many thanks!' ><a href=#../../../pages/credits.md >Credits</a></div>
+			<div><a href=#../../../pages/code-of-conduct.md >Code of Conduct</a></div>
+			<div><a href=#../../../pages/contributing.md >Contributing</a></div>
+			<div><a href=#../../../pages/license.md >Copyright & License</a></div>
+			<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
+			<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+			<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
+			<hr>
+
+		</details>
+
+		<h2 onclick=CORdivMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >
+			<img src=../assets/spider-web.png alt="spider web" height=24 style=opacity:0.5; >
+		</h2>
 
 	</div>
+
 
 	<button id = "CORdivHamburgerLeft" class="btn btn-primary" onclick=COR.toggleNavLeft(); title="click to hide this menu">
 		 slide &#9776;
@@ -355,15 +290,7 @@
 	</div>
 
 
-
-		<div id = "CORdivMenuRight" class = "jumbotron" >
-		<!--
-
-
-			<div id="CORdivHeaderRight" class="navbar  navbar-expand-lg navbar-dark bg-primary" >
-				right menu / click here to move
-			</div>
-		-->
+	<div id = "CORdivMenuRight" class = "jumbotron" >
 
 		<div id=CORdivItemsRight ></div>
 
@@ -375,39 +302,36 @@
 
 <script>
 
-let themeName = localStorage.getItem( 'themeName' ) || 'Cerulean';
+const themeName = localStorage.getItem( 'themeName' ) || 'Cerulean';
 selTheme.value = themeName;
 
 
 COR.initCore();
 THR.initThree();
-
 CTX.initHeadsUp();
+
 THR.animate();
+
 
 initApp(); // loads default gbXML
 
+
+
 function initApp() {
-
-
-
-	//const source = "https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r14/gv-cor-core/gv-cor.html";
-	const title = document.title;
 
 	CORdivTitle.innerHTML =
 	`<h2>
 		<a href="${ COR.releaseSourceURL }" target="_top" title="Go to source code on GitHub" ><img src=${COR.iconGitHubMark} height=18 ></a>
-		<a href = "" title="Relead this page" >${title}</a> &nbsp; <a href=#../READMe.md title="View the read me file" >?</a>
+		<a href = "" title="Reload this page" >${ document.title }</a> &nbsp; <a href=#../READMe.md title="View the read me file" >?</a>
 	</h2>`;
 
+	// loads a default file / great for testing same file many times
 
-	// load a default file / great for testing
-
-	const thrFilePath = localStorage.getItem( 'thrFilePath' );
+	const thrFilePath = localStorage.getItem( 'thrFilePath' ) || '';
 
 	CORinpFilePath.value = thrFilePath;
 
-	COR.url = CORinpFilePath.value ? CORinpFilePath.value : COR.url; // for testing
+	COR.url = CORinpFilePath.value || COR.url; // for testing
 
 	if ( location.hash && location.hash.endsWith( '.xml') ) {
 

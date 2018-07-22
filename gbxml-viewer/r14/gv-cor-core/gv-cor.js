@@ -24,27 +24,17 @@
 
 	COR.initCore = function() {
 
-		updateCss( themeName );
+		//updateCss( themeName );
+
+		css.href = value === 'Default' ? 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+		`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ value.toLowerCase() }/bootstrap.min.css`;
+
+		localStorage.setItem( 'themeName', value );
 
 		if ( window.CORdragArea ) {
 			CORdragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
 			CORdragArea.addEventListener( 'drop', COR.drop, false );
 		}
-
-		/*
-		if ( window.CORdivMenuLeftHeader ) {
-			CORdivMenuLeftHeader.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			CORdivMenuLeftHeader.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			CORdivMenuLeftHeader.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
-		}
-
-		if ( window.CORdivHeaderRight ) {
-			CORdivHeaderRight.addEventListener( 'mousedown', COR.onMouseDownDraggable, false );
-			CORdivHeaderRight.addEventListener( 'touchstart', COR.onTouchStartDraggable, false );
-			CORdivHeaderRight.addEventListener( 'touchmove', COR.onTouchMoveDraggable, false );
-		}
-		window.addEventListener( 'mouseup', COR.onMouseUpDraggable, false );
-		*/
 
 		window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
@@ -390,74 +380,6 @@
 
 
 
-	// handle menu header dragging with mouse or touch events // 2018-07-19 no longer needed?
-
-	COR.onMouseDownDraggable = function( event ) {
-
-		COR.draggableTop = event.clientY - event.target.parentNode.parentNode.offsetTop;
-		COR.draggableLeft = event.clientX - event.target.parentNode.parentNode.offsetLeft;
-
-		window.addEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
-		event.preventDefault();
-
-	};
-
-
-
-	COR.onMouseMoveDraggable = function( event ) {
-
-		event.target.parentNode.style.top = ( event.clientY - COR.draggableTop ) + 'px';
-		event.target.parentNode.style.left = ( event.clientX - COR.draggableLeft ) + 'px';
-		event.preventDefault();
-
-	};
-
-
-
-	COR.onMouseUpDraggable = () => {
-
-		window.removeEventListener( 'mousemove', COR.onMouseMoveDraggable, true );
-		event.preventDefault();
-
-	};
-
-
-
-	COR.onTouchStartDraggable = event => {
-
-		COR.draggableLeft = event.target.parentNode.offsetLeft;
-		COR.draggableStartX = event.changedTouches[ 0 ].clientX;
-		COR.draggableTop = event.target.parentNode.offsetTop;
-		COR.draggableStartY = event.changedTouches[ 0 ].clientY;
-		//console.log( 'draggableTop', draggableTop, draggableStartY );
-		event.preventDefault();
-
-	};
-
-
-
-	COR.onTouchMoveDraggable = event  => {
-
-		const distX = event.changedTouches[ 0 ].clientX - COR.draggableStartX;
-		let left = COR.draggableLeft + distX > document.body.clientWidth - 100 ?
-			document.body.clientWidth - 100 : COR.draggableLeft + distX;
-		left = COR.draggableLeft + distX < 0 ? 0 : left;
-		//console.log( 'left2', left  );
-		event.target.parentNode.style.left = left + 'px';
-
-		const distY = event.changedTouches[ 0 ].clientY - COR.draggableStartY;
-		// top is a reserved word
-		let ttop = COR.draggableTop + distY > window.innerHeight - 100 ?
-			window.innerHeight - 100 : COR.draggableTop + distY;
-		ttop = COR.draggableTop + distY < 0 ? 0 : ttop;
-		//console.log( 'ttop', ttop  );
-		event.target.parentNode.style.top = ttop + 'px';
-
-		event.preventDefault();
-
-	};
-
-
 	////////// Slide / Hamburger operations
 
 
@@ -517,20 +439,16 @@
 
 	COR.toggleNavLeft = function() {
 
-		const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
-		//console.log( 'width', width );
+		const width = CORdivMenuLeft.getBoundingClientRect().width;
+		//console.log( 'CORdivHamburgerLeft.style.left', CORdivHamburgerLeft.style.left, width );
 
-		//console.log( 'CORdivHamburgerLeft.style.left', CORdivHamburgerLeft.style.left );
+		if ( CORdivMenuLeft.style.left === '' || CORdivMenuLeft.style.left === '0px' ) {
 
-		if ( CORdivHamburgerLeft.style.left === '-5rem' ) {
-
-			CORdivMenuLeft.style.left = '0';
-			CORdivHamburgerLeft.style.left = width;
+			CORdivMenuLeft.style.left = '-' + width + 'px';
 
 		} else {
 
-			CORdivMenuLeft.style.left = '-' + width;
-			CORdivHamburgerLeft.style.left = '-5rem';
+			CORdivMenuLeft.style.left = '0px';
 
 		}
 
@@ -542,8 +460,8 @@
 
 		//CORdivMenuRight.style.display = "none";
 
-		width = CORdivMenuRight.getBoundingClientRect().width;
-		console.log( 'width', width );
+		const width = CORdivMenuRight.getBoundingClientRect().width;
+		//console.log( 'width', width );
 
 		if ( CORdivMenuRight.style.left === '100%' ) {
 
@@ -555,12 +473,7 @@
 
 				CORdivMenuRight.style.left = '60%';
 				CORdivMenuRight.style.width = '38%';
-/*
-			} else {
 
-				CORdivMenuRight.style.left = '70%';
-				CORdivMenuRight.style.width = '28%';
-*/
 			}
 
 		} else {
@@ -573,6 +486,14 @@
 
 
 
+	COR.setPanelButtonInit = function( button ) {
+
+		CORdivMenuRight.style.display = 'none';
+
+		button.style.cssText = COR.buttonToggleCss;
+
+	};
+
 	COR.setPanelButtonClear = function( button ) {
 
 		CORdivMenuItems.innerHTML = '';
@@ -583,15 +504,6 @@
 
 	};
 
-
-
-	COR.setPanelButtonInit = function( button ) {
-
-		CORdivMenuRight.style.display = 'none';
-
-		button.style.cssText = COR.buttonToggleCss;
-
-	};
 
 
 	COR.setMenuButtonsClass = function( target ) {
