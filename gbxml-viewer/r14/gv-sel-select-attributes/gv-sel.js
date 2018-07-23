@@ -247,7 +247,8 @@
 
 		}
 
-		SEL.setButtonStyleClass( divAttributes );
+		//SEL.setButtonStyleClass( divAttributes );
+		COR.setMenuButtonsClass( divAttributes );
 
 	};
 
@@ -339,7 +340,8 @@
 
 		//console.log( 'sel', sel );
 
-		SEL.setButtonStyleClass( CORdivItemsRight );
+		//SEL.setButtonStyleClass( CORdivItemsRight );
+		COR.setMenuButtonsClass( CORdivItemsRight );
 
 	};
 
@@ -790,7 +792,8 @@
 
 		target.innerHTML = details;
 
-		SEL.setButtonStyleClass( CORdivItemsRight );
+		//SEL.setButtonStyleClass( CORdivItemsRight );
+		COR.setMenuButtonsClass( CORdivItemsRight );
 
 	};
 
@@ -896,7 +899,8 @@
 		//}
 
 
-		SEL.setButtonStyleClass( CORdivItemsRight );
+		//SEL.setButtonStyleClass( CORdivItemsRight );
+		COR.setMenuButtonsClass( CORdivItemsRight );
 
 	};
 
@@ -1107,7 +1111,8 @@
 
 		for ( let butt of butts ) {
 
-			butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+			//butt.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
+
 
 		}
 

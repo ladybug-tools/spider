@@ -321,17 +321,17 @@
 
 		`<div>
 
-			<button class="btn" onclick="GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible;"
+			<button class="btn-secondary btn-sm" onclick="GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible;"
 				title="toggle the flat bits" >surfaces</button>
 
-			<button class="btn" onclick="GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible;" title="toggle the side lines" >edges</button>
+			<button class="btn-secondary btn-sm" onclick="GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible;" title="toggle the side lines" >edges</button>
 
-			<button class="btn" onclick="GBX.surfaceOpenings.visible=!GBX.surfaceOpenings.visible;" title="toggle the windows" >openings</button>
+			<button class="btn-secondary btn-sm" onclick="GBX.surfaceOpenings.visible=!GBX.surfaceOpenings.visible;" title="toggle the windows" >openings</button>
 
-			<button class="btn" onclick="GBX.setAllVisible();"
+			<button class="btn-secondary btn-sm" onclick="GBX.setAllVisible();"
 			title="toggle the windows" >all</button>
 			|
-			<button class="btn"
+			<button class="btn-secondary btn-sm"
 				onclick="GBX.setAllVisible();THR.zoomObjectBoundingSphere(GBX.surfaceEdges);"
 				title="Go to the home view" >reset view</button>
 		</div>`;

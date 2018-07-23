@@ -163,6 +163,7 @@
 			<div id=CORdivTitle ></div>
 
 			<div>
+				<!--
 					<p>
 						<select id=selTheme onchange=updateCss(this.value); class="form-control" style="display:inline-block;width:95% !important;" >
 							<option class=default >Default</option>
@@ -190,7 +191,48 @@
 						</select> <a href=#../gv-cor-core/READMe.md>?</a>
 					</p>
 				</div>
+			-->
 
+				<p>
+					<select id=selTheme onchange=COR.updateCss(this.value); class="form-control" >
+						<optgroup label="Bootswatch Themes">
+							<option class=default value="https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css" >Default</option>
+							<option class=cerulean value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/cerulean/bootstrap.min.css" >Cerulean</option>
+							<option class=cosmo value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/cosmo/bootstrap.min.css" >Cosmo</option>
+							<option class=cyborg title="dark" value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/cyborg/bootstrap.min.css" >Cyborg</option>
+							<option class=darkly title="dark" value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/darkly/bootstrap.min.css" >Darkly</option>
+							<option class=flatly value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/flatly/bootstrap.min.css" >Flatly</option>
+							<option class=journal value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/journal/bootstrap.min.css" >Journal</option>
+							<option class=litera value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/litera/bootstrap.min.css" >Litera</option>
+							<option class=lumen value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/lumen/bootstrap.min.css" >Lumen</option>
+							<option class=lux value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/lux/bootstrap.min.css" >Lux</option>
+							<option class=meteria value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/materia/bootstrap.min.css" >Materia</option>
+							<option class=minty value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/minty/bootstrap.min.css" >Minty</option>
+							<option class=pulse value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/pulse/bootstrap.min.css" >Pulse</option>
+							<option class=sandstone value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/sandstone/bootstrap.min.css" >Sandstone</option>
+							<option class=simplex value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/simplex/bootstrap.min.css" >Simplex</option>
+							<option class=sketchy value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/sketchy/bootstrap.min.css" >Sketchy</option>
+							<option class=slate title="dark" value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/slate/bootstrap.min.css"e >Slate</option>
+							<option class=solar title="dark" value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/solar/bootstrap.min.css" >Solar</option>
+							<option class=spacelab value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/spacelab/bootstrap.min.css" >Spacelab</option>
+							<option class=superhero title="dark" value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/superhero/bootstrap.min.css" >Superhero</option>
+							<option class=united value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/united/bootstrap.min.css" >United</option>
+							<option class=yeti value="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/yeti/bootstrap.min.css" >Yeti</option>
+						</optgroup>
+						<optgroup label="Themes from other sources">
+							<option class=material-kit value="https://demos.creative-tim.com/material-kit/assets/css/material-kit.min.css" >Material Kit</option>
+							<option class="initio" value="https://www.gettemplate.com/demo/initio/assets/css/styles.css" >Initio</option>
+							<option class="creative" value="https://blackrockdigital.github.io/startbootstrap-creative/css/creative.min.css" >Creative</option>
+							<option class="cardio" value="https://tympanus.net/Freebies/Cardio/css/cardio.css" >Cardio</option>
+							<option class="magister" value="https://www.gettemplate.com/demo/magister/assets/css/magister.css" >Magister</option>
+
+							<!--
+								<option class="" value="" ></option>
+							-->
+
+						</optgroup>
+					</select>
+				</p>
 			<!--
 			<div id=divRowButtonsStyle ></div>
 			-->
@@ -281,7 +323,7 @@
 	</button>
 
 
-	<div id = "CORdivMenuInWorld" title="This is called the 'in-world menu'" >
+	<div id = "CORdivMenuInWorld" title="This is called the 'in-world menu'" > <!-- See GBX.setCardToggleVisibility -->
 
 		<p id = "CORmenuInWorldContents" ></p>
 
@@ -290,7 +332,7 @@
 	</div>
 
 
-	<div id = "CORdivMenuRight" class = "jumbotron" >
+	<div id = "CORdivMenuRight" class = "jumbotron" >  // See CTX
 
 		<div id=CORdivItemsRight ></div>
 
@@ -302,8 +344,8 @@
 
 <script>
 
-const themeName = localStorage.getItem( 'themeName' ) || 'Cerulean';
-selTheme.value = themeName;
+const themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
+selTheme.value = themeName ;
 
 
 COR.initCore();
