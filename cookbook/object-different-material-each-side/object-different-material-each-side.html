@@ -32,6 +32,14 @@
 			<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
 		</p>
 
+		<p>
+			<button onclick=drawPlaneDoubleSided(); >colors</button>
+		</p>
+
+		<p>
+			<button onclick=drawPlaneDoubleSidedTextures(); >textures</button>
+		</p>
+
 		<div id = "divLog" ></div>
 
 	</div>
@@ -43,6 +51,7 @@
 
 
 let sceneRotation = 1;
+let mesh = new THREE.Group();
 let renderer, camera, controls, scene;
 
 init();
@@ -84,7 +93,7 @@ function init() {
 	//const mesh = new THREE.Mesh( geometry, material );
 	//scene.add( mesh );
 
-	drawPlaneDoubleSided()
+	drawPlaneDoubleSided();
 
 }
 
@@ -92,18 +101,39 @@ function init() {
 
 function drawPlaneDoubleSided() {
 
+	scene.remove( mesh );
+
 	const geometry = new THREE.PlaneGeometry( 50, 50 );
 	const materialRed = new THREE.MeshBasicMaterial( {color: 'red', side: THREE.FrontSide } );
 	const materialBlue = new THREE.MeshBasicMaterial( {color: 'blue', side: THREE.BackSide } );
-	const mesh1 = new THREE.Mesh( geometry, materialRed );
-	scene.add( mesh1 );
+	mesh = new THREE.Mesh( geometry, materialRed );
+	scene.add( mesh );
 
 	mesh2 = new THREE.Mesh( geometry, materialBlue );
-	mesh1.add( mesh2 );
+	mesh.add( mesh2 );
 
 }
 
 
+function drawPlaneDoubleSidedTextures() {
+
+	scene.remove( mesh );
+
+	loader = new THREE.TextureLoader();
+
+	texture1 = loader.load( 'im3.jpg' );
+	texture2 = loader.load( 'im5.jpg' );
+
+	const geometry = new THREE.PlaneGeometry( 50, 50 );
+	const materialRed = new THREE.MeshBasicMaterial( { map: texture1, side: THREE.FrontSide } );
+	const materialBlue = new THREE.MeshBasicMaterial( { map: texture2, side: THREE.BackSide } );
+	mesh = new THREE.Mesh( geometry, materialRed );
+	scene.add( mesh );
+
+	mesh2 = new THREE.Mesh( geometry, materialBlue );
+	mesh.add( mesh2 );
+
+}
 
 
 function onWindowResize() {
@@ -124,7 +154,7 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	controls.update();
-	scene.rotation.y += sceneRotation / 500;
+	scene.rotation.y += sceneRotation / 50;
 
 }
 
