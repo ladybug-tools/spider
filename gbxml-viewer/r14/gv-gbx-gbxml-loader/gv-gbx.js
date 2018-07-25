@@ -43,6 +43,7 @@
 	GBX.parseFileXML = function( text ) {
 		//console.log( 'text', text );
 
+		GBX.text = text;
 		const parser = new window.DOMParser();
 
 		GBX.gbxml = parser.parseFromString( text, 'text/xml' );
@@ -78,7 +79,7 @@
 		const string = new XMLSerializer().serializeToString( xml );
 		console.log( 'string', string );
 
-		return string
+		return string;
 
 	}
 

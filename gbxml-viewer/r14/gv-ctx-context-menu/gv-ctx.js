@@ -140,6 +140,8 @@
 
 		CTX.setPanelTellTale( CTXdivTellTales );
 
+		COR.setMenuButtonsClass( CORdivItemsRight );
+
 	};
 
 

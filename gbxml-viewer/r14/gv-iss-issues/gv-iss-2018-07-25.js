@@ -114,7 +114,7 @@
 
 			<p><button onclick=ISS.setPopupGeneralCheck(); >General check</button></p>
 
-			<p>Still at a very preliminary stage. Not much serious checking going on yet. Need help in deciding what to look for and/or access to files with typical errors.</p>
+			<p>Still at a very preliminary stage. Not much serious checking going on yet</p>
 
 			<p><button onclick=ISS.setCheckInclusions(); >Inclusion check</button></p>
 
@@ -132,7 +132,6 @@
 		//arr =  GBX.surfaceMeshes.children.slice();
 		//console.log( '', arr );
 
-		// looks like computeBoundingBox is local
 		const inclusions = [];
 
 		for ( let surface of GBX.surfaceMeshes.children ) {
@@ -174,7 +173,7 @@
 			<br>`;
 
 		}
-		console.log( 'inclusion', inclusions );
+		console.log( 'inclusion', inclusion );
 
 		CORdivItemsRight.innerHTML =
 		`
@@ -191,7 +190,7 @@
 	ISS.setPopupGeneralCheck = function() {
 
 		let txt = '<p>All lines checked appear to contain valid XML data.</p>';
-		lines = GBX.text.split(/\r\n|\n/);
+		lines = GBX.gbxml.innerHTML.split(/\r\n|\n/);
 
 		for ( i = 0; i< lines.length; i++ ) {
 
@@ -1229,7 +1228,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				//CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				ISS.errorsFound.missingCadIds.push( surface.id );
 

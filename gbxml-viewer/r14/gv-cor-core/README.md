@@ -59,23 +59,17 @@ What this revision does is merely read a Bootstrap-compatible .CSS file and disp
 ## Links of Interest
 
 CSS / Bootstrap
-* https://bootswatch.com/
-* https://bootswatch.com/cerulean/
-* https://www.creativebloq.com/web-design/free-bootstrap-themes-21619376
-* https://www.bootstrap-live-customizer.com/
-* https://speckyboy.com/free-bootstrap-framework-templates/
-* https://pikock.github.io/bootstrap-magic/app/index.html#!/editor
-
-
-Update class
-
-* https://stackoverflow.com/questions/195951/change-an-elements-class-with-javascript
-
-
+* See https://pushme-pullyou.github.io/#tootoo-templates/README.md
 
 
 ## Change Log
 
+
+### 2018-07-25 ~ Theo
+
+* Turn off feature button style changes
+	* Wil try to switch to adding and removing .active class
+* Fixing minor issues all over regarding themes
 
 ### 2018-07-22 ~ Theo
 

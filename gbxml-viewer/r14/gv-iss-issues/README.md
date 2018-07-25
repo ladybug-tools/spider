@@ -56,15 +56,10 @@ Recent releases of the Viewer are identifying typical errors.
 * Add locate surfaces with openings that overlap
 * 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
 	* Upgrade so identifies any surface within another surface
-
-
-
-
-## Wish list
-
 * 2018-03-08 ~ Michal: sort the adjacent spaces / by size
-* 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
-	* Upgrade so identifies any surface within another surface
+
+Inclusions
+* 2018-07-25 ~ Theo ~ Update the inclusions algorithm so it uses world coordinates
 
 
 
@@ -77,6 +72,11 @@ Recent releases of the Viewer are identifying typical errors.
 
 
 ## Change Log
+
+
+### 2018-07-25 ~ Theo
+
+* Fix general check issue
 
 ### 2018-06-20 ~ Theo
 
