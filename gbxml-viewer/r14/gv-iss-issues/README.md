@@ -49,13 +49,12 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Wish list
 
-* 2018-05-25 ~  Theo ~ Undefined CAD Object IDs > Add 'check only Air' button
-* 2018-05-25 ~  Theo ~ Undefined CAD Object IDs > Add line that edits all selected with one input box
+* 2018-07-27 ~ Theo ~ Inclusion check: add progress indicator
+* 2018-05-25 ~ Theo ~ Undefined CAD Object IDs > Add 'check only Air' button
+* 2018-05-25 ~ Theo ~ Undefined CAD Object IDs > Add line that edits all selected with one input box
 * 2018-05-23 ~ Theo ~ Popup windows > Add buttons to make checked items visible and to zoom in to seleted items
 * 2018-05-23 ~ Theo ~ add colored options to left menu to indicate membership in a set of surfaces
 * Add locate surfaces with openings that overlap
-* 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
-	* Upgrade so identifies any surface within another surface
 * 2018-03-08 ~ Michal: sort the adjacent spaces / by size
 
 Inclusions
@@ -73,6 +72,12 @@ Inclusions
 
 ## Change Log
 
+
+### 2018-07-27 ~ Theo
+
+* Inclusion check *beginning* to work as desired
+	* Underway: 2018-03-04 ~ Currently only identifies surfaces with identical coordinates
+		* Upgrade so identifies any surface within another surface
 
 ### 2018-07-25 ~ Theo
 

@@ -13,7 +13,6 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-
 This folder contains the basic script that loads style sheets, creates the menus, opens Markdown files and converts to HTML
 
 Features include
@@ -31,6 +30,7 @@ Features include
 * Handles moving the menus by monitoring mouse and touch events
 * Responds to calls to slide the left and right menus
 
+
 ### Style Sheet considerations
 
 For the previous few revisions there has been an ability to update the colors used the menus. While this ability is nice, it does not satisfy a larger need that the the project should be adaptable to the requirements of any popular JavaScript front-end library( React, Angular, Vue etc) and it should also be adaptable to any type of style sheet.
@@ -45,7 +45,6 @@ What this revision does is merely read a Bootstrap-compatible .CSS file and disp
 ## Wish list
 
 * 2018-07-19 ~ Theo ~ Find more stashes of free styles
-* 2018-07-19 ~ Theo ~ add ability to add and remove classes upon new events
 * 2018-07-19 ~ Theo ~ Michal wants a yellow theme
 * 2018-03-04 ~ Random model on start-up?
 * 2018-02-18 ~ Menus remember their position from session to session
@@ -69,7 +68,8 @@ CSS / Bootstrap
 
 R14.2
 * Many style issue fixes
-* Add feature button classes add and remove 'active' class;
+* Add feature button classes add and remove 'active' class
+	* Done: 2018-07-19 ~ Theo ~ add ability to add and remove classes upon new events
 * Code cleanup
 
 ### 2018-07-25 ~ Theo

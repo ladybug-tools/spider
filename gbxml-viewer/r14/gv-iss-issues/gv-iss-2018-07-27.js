@@ -8,10 +8,9 @@
 
 	//GBX.defaultURL = '../../gbxml-sample-files/columbia-sc-two-story-education-trane.xml';
 
-	var ISS = { release: '14.1' };
+	var ISS = { release: '14.0' };
 	ISS.surfaceChanges = {};
 	ISS.errorsFound = {};
-	ISS.inclusions = [];
 
 	//var spaceId1;
 	//var spaceId2;
@@ -131,61 +130,59 @@
 	ISS.setCheckInclusions = function() {
 
 		//arr =  GBX.surfaceMeshes.children.slice();
+		//console.log( '', arr );
 
-		if ( ISS.inclusions.length === 0 ) {
+		// looks like computeBoundingBox is local
+		const inclusions = [];
 
-			let inclusionCount = 0;
+		for ( let surface of GBX.surfaceMeshes.children ) {
 
-			for ( let surface of GBX.surfaceMeshes.children ) {
+			surface.geometry.computeBoundingBox();
 
-				const surface1 = new THREE.Box3().setFromObject ( surface );
+			for ( let surface2 of GBX.surfaceMeshes.children ) {
 
-				for ( let surfaceTest of GBX.surfaceMeshes.children ) {
+				surface2.geometry.computeBoundingBox();
 
-					const surface2 = new THREE.Box3().setFromObject ( surfaceTest );
+				if ( surface.uuid != surface2.uuid &&  surface.geometry.boundingBox.containsBox( surface2.geometry.boundingBox ) ) {
 
+					//console.log( '', surface.geometry.vertices, surface2.geometry.vertices );
+					//console.log( '', surface.userData.data.surfaceType, surface2.userData.data.surfaceType );
+					//console.log( '', surface.userData.data.Name, ' ', surface2.userData.data.Name );
 
-					if ( surface1.containsBox( surface2 ) && surface.uuid != surfaceTest.uuid ) {
-
-						inclusionCount++;
-
-						ISS.inclusions.push ( {s1: surface, s2: surfaceTest } );
-
-					}
+					inclusions.push ( {s1: surface, s2: surface2 } );
 
 				}
 
 			}
 
-			ISSpInclusions.innerHTML = 'inclusions found: ' + ISS.inclusions.length;
+		}
+
+		ISSpInclusions.innerHTML = 'inclusions found: ' + inclusions.length;
 
 
-			ISS.inclusionsText = '';
+		let inclusionText = '';
 
-			for ( let inclusion of ISS.inclusions ) {
+		for ( let inclusion of inclusions ) {
 
-				const butts1 = ISS.getButtonsSurfaceId( inclusion.s1.userData.data.id );
-				const butts2 = ISS.getButtonsSurfaceId( inclusion.s2.userData.data.id );
+			const butts1 = ISS.getButtonsSurfaceId( inclusion.s1.userData.data.id);
+			const butts2 = ISS.getButtonsSurfaceId( inclusion.s2.userData.data.id);
 
-				ISS.inclusionsText +=
-				`
-				${butts1} ${inclusion.s1.userData.data.Name}<br>
-				${butts2} ${inclusion.s1.userData.data.Name}
-				<hr>`;
-
-			}
+			inclusionText +=
+			`
+			${butts1} ${inclusion.s1.userData.data.Name}
+			${butts2} ${inclusion.s1.userData.data.Name}
+			<br>`;
 
 		}
-		//console.log( 'inclusion', ISS.inclusions );
+		console.log( 'inclusion', inclusions );
 
 		CORdivItemsRight.innerHTML =
 		`
 			<h3>Inclusions</h3>
-			<div>${ISS.inclusionsText}</div>
+			<div>${inclusionText}</div>
 		`;
 
-		//COR.setRightMenuWide();
-		CORdivMenuRight.style.display = 'block';
+		COR.setRightMenuWide();
 
 	};
 
@@ -2160,9 +2157,9 @@
 		const txt =
 		`
 			<span class=attributeTitle >id</span>:
-			<button class="btn btn-secondary btn-sm" onclick=ISS.setSurfaceVisible("${id}");this.classList.toggle("active"); >${id}</button>
-			<button class="btn btn-secondary btn-sm" onclick=SEL.setSurfaceZoom("${id}"); >&#8981;</button>
-			<button class="btn btn-secondary btn-sm" onclick=SEL.setSurfaceVisibleToggle("${id}"); ><img src="../assets/eye.png" height=12></button>
+			<button onclick=SEL.setSurfaceVisible("${id}"); >${id}</button>
+			<button onclick=SEL.setSurfaceZoom("${id}"); >&#8981;</button>
+			<button onclick=SEL.setSurfaceVisibleToggle("${id}"); ><img src="../assets/eye.png" height=12></button>
 		`;
 
 		return txt;
@@ -2170,23 +2167,5 @@
 	};
 
 
-	ISS.setSurfaceVisible = function( surfaceId ) {
-
-		SEL.setSurfaceGroupsVisible();
-
-		THR.scene.remove( SEL.telltale );
-
-		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === surfaceId ? true : false );
-
-		// testing
-
-		const surface = GBX.surfaceMeshes.children.find( item => item.userData.data.id === surfaceId )
-		CTX.intersected = surface
-
-		//CTX.setHeadsUp();
-
-		//SEL.setPanelSurfaceAttributes( CTXdivAttributes, surfaceId );
-
-	};
 
 	ISS.initIssues();
