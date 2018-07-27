@@ -4,6 +4,7 @@
 
 	var GBX = { release: "14.1"};
 
+	GBX.text = null; // raw file data
 	GBX.gbxml = null;
 	GBX.gbjson = null; // xnl converted to json
 	GBX.surfacesJson = null; // useful subset of GBX.gbjson
@@ -50,8 +51,7 @@
 		//console.log( 'GBX.gbxml', GBX.gbxml );
 
 		GBX.gbjson = GBX.getXML2jsobj( GBX.gbxml.documentElement );
-
-		console.log( 'GBX.gbjson', GBX.gbjson );
+		//console.log( 'GBX.gbjson', GBX.gbjson );
 
 		GBX.surfacesJson = GBX.gbjson.Campus.Surface;
 

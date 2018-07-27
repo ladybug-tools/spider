@@ -40,7 +40,34 @@
 	.flex-div2 { border: 0px red solid; overflow-x: auto; }
 	*/
 
-	/* .highlight { background-color: var( --highlight-color ) } */
+	.highlight { background-color: var( --highlight-color ) }
+
+	.dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
+
+	/*
+	.default { background-color: white; color: #007bff; }
+	.cerulean { background-color: white; color: #2FA4E7; }
+	.cosmo { background-color: white; color: #2780E3; }
+	.cyborg { background-color: #060606; color: #2A9FD6; }
+	.darkly { background-color: #222; color: #00bc8c; }
+	.flatly { background-color: white; color: #18BC9C; }
+	.journal { background-color: white; color: #EB6864; }
+	.litera { background-color: white; color: #4582EC; }
+	.lumen { background-color: white; color: #158CBA; }
+	.lux { background-color: white; color: #1a1a1a; }
+	.materia { background-color: white; color: #2196F3; }
+	.minty { background-color: white; color: #78C2AD; }
+	.pulse { background-color: white; color: #593196; }
+	.sandstone { background-color: white; color: #93C54B; }
+	.simplex { background-color: white; color: #D9230F; }
+	.sketchy { background-color: white; color: #333; }
+	.slate { background-color: #272B30; color: #fff; }
+	.solar { background-color: #002B36; color: #839496; }
+	.spacelab { background-color: white; color: #3399F3; }
+	.superhero { background-color: #2B3E50; color: #DF691A; }
+	.united { background-color: white; color: #E95420; }
+	.yeti { background-color: white; color: #008cba; }
+	*/
 
 	#CORdivMenuLeft { max-height: 100%; margin: 3rem 1rem; overflow-x: hidden; padding: 1rem; position: fixed;
 		resize: both; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
@@ -58,14 +85,15 @@
 	#CORdivLog { max-height: 100px }
 
 
-	#CORdivMenuRight { height: 80%; left: calc( 100% - 40rem );
+	#CORdivMenuRight {
+		height: 80%; left: calc( 100% - 40rem );
 		margin: 0;  opacity: 0.97; overflow: auto; padding: 0px; position: fixed; resize: both; right: 50px; top: 60px;  width: 30rem;
 	}
-	#CORdivMenuRight { border: 1px solid #aaa; border-radius: 2px;
+	#CORdivMenuRight {border: 1px solid #aaa; border-radius: 2px;
 		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	}
 
-	/* #CORdivHeaderRight { cursor: move; padding: 10px; z-index: 10;} */
+	#CORdivHeaderRight { cursor: move; padding: 10px; z-index: 10;}
 	#CORdivItemsRight { margin: 10px; }
 	#CORdivItemsRight iframe { display: none; }
 
@@ -107,7 +135,7 @@
 */
 
 </style>
-<link rel="stylesheet" id="CORcss" >
+<link rel="stylesheet" type="text/css" id="css" >
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
@@ -153,22 +181,22 @@
 		</details>
 
 
-		<details id=CORdetFeatures open >
+		<details open >
 
 			<summary title="the primary viewer tools are here" >Features</summary>
 
 			<button id=CORbutSettings class="btn btn-primary btn-sm"
-				onclick='COR.loadScript("../gv-set-settings/gv-set.js");'
+				onclick=COR.loadScript("../gv-set-settings/gv-set.js")
 				title="Update colors, explode models and adjust viewing viewing parameters" >
 			Settings</button>
 
 			<button id=CORbutMenuReports class="btn btn-primary btn-sm"
-				onclick='COR.loadScript( "../gv-rep-reports/gv-rep.js");'
+				onclick= COR.loadScript('../gv-rep-reports/gv-rep.js')
 				title ="Locate, identify and display all the elements and attributes in a gbXML" >
 			Reports</button>
 
 			<button id=CORbutMenuNumbers class="btn btn-primary btn-sm"
-				onclick= 'COR.loadScript( "../gv-num-numbers/gv-num.js" );'
+				onclick= COR.loadScript('../gv-num-numbers/gv-num.js')
 				title="matters of interest" >
 			Numbers</button>
 
@@ -186,15 +214,16 @@
 
 		</details>
 
+
 		<div id = "CORdivMenuItems" ></div>
 
 		<details>
 
 			<summary>Themes</summary>
 
-			<div id=CORdivBootswatch ></div>
+			<div id=divBootswatch ></div>
 
-			<div id=CORdivCssOthers ></div>
+			<div id=divCssOthers ></div>
 
 		</details>
 
@@ -217,8 +246,7 @@
 
 		</details>
 
-		<h2 onclick=CORdivMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center;
-			title='go to top and, btw, my web is better than your web' >
+		<h2 onclick=CORdivMenuLeft.scrollTop=0; style=cursor:pointer;text-align:center; title='go to top and, btw, my web is better than your web' >
 			<img src=../assets/spider-web.png alt="spider web" height=24 style=opacity:0.5; >
 		</h2>
 
@@ -261,7 +289,7 @@ CTX.initHeadsUp();
 THR.animate();
 
 
-initApp();
+initApp(); // loads default gbXML
 
 
 
@@ -274,12 +302,12 @@ function initApp() {
 	</h2>`;
 
 	// loads a default file / great for testing same file many times
+
 	const thrFilePath = localStorage.getItem( 'thrFilePath' ) || '';
 
 	CORinpFilePath.value = thrFilePath;
 
-	COR.url = thrFilePath || COR.url;
-
+	COR.url = CORinpFilePath.value || COR.url; // for testing
 
 	if ( location.hash && location.hash.endsWith( '.xml') ) {
 
@@ -296,11 +324,11 @@ function initApp() {
 
 	}
 
-	GBX.setCardToggleVisibility( CORmenuInWorldContents ); // combine with SEL version??
+	GBX.setCardToggleVisibility( CORmenuInWorldContents );
 
 	GAL.setCardSampleGalleries( CORdivSampleGalleries );
 
-	THR.controls.enableKeys = false; // move to THR??
+	THR.controls.enableKeys = false;
 
 }
 

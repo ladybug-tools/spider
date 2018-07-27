@@ -65,6 +65,13 @@ CSS / Bootstrap
 ## Change Log
 
 
+### 2018-07-27 ~ Theo
+
+R14.2
+* Many style issue fixes
+* Add feature button classes add and remove 'active' class;
+* Code cleanup
+
 ### 2018-07-25 ~ Theo
 
 * Turn off feature button style changes

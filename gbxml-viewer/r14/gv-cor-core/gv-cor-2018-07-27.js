@@ -1,24 +1,25 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
-/* globals THR, GBX, SAV, showdown, CORcss, CORdragArea, CORdetFeatures, CORdivBootswatch, CORdivCssOthers,  CORdivLog */
+/* globals THR, GBX, SAV, CORdragArea, showdown  */
 /* jshint esversion: 6 */
 
 
-var COR = { release: "14.2" };
+var COR = { release: "14.1" };
 
 COR.url = '../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
 
 COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r14/';
 
-COR.threeDefaultFile = '../gv-thr-threejs/gv-thr-run.html';
-COR.uriDefaultFile = '../assets/splash-screen.md';
-
 //COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
 COR.iconGitHubMark = "../assets/github-mark.png";
 
+COR.threeDefaultFile = '../gv-thr-threejs/gv-thr-run.html';
+COR.uriDefaultFile = '../assets/splash-screen.md';
 
-//COR.colorButtonToggle = 'pink';
+
+COR.colorButtonToggle = 'pink';
+
 // needs fixing
-//COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
+COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
 
 
 
@@ -26,18 +27,16 @@ COR.initCore = function() {
 
 	COR.updateCss( themeName );
 
-	//if ( window.CORdragArea ) {
-
+	if ( window.CORdragArea ) {
 		CORdragArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
 		CORdragArea.addEventListener( 'drop', COR.drop, false );
-
-	//}
+	}
 
 	window.addEventListener ( 'hashchange', COR.onHashChange, false );
 
 	// see CTX.initHeadsUp for renderer events
 
-	//COR.timeStart = Date.now();
+	COR.timeStart = Date.now();
 
 };
 
@@ -45,15 +44,15 @@ COR.initCore = function() {
 
 COR.updateCss = function( link ) {
 
-	themeName = CORcss.href = link;
+	themeName = css.href = link;
 	localStorage.setItem( 'themeName', link );
-	COR.setTheme();
+	setTheme();
 
-};
+}
 
 
 
-COR.setTheme = function() {
+function setTheme( target ) {
 
 	const themesBootswatch = [
 		{ 'Default': 'background-color: white; color: #007bff' },
@@ -82,6 +81,7 @@ COR.setTheme = function() {
 
 
 	const themesOthers = [
+
 		{ link: "https://demos.creative-tim.com/material-kit/assets/css/material-kit.min.css", name: "Material Kit" },
 		{ link: "https://www.gettemplate.com/demo/initio/assets/css/styles.css", name: 'Initio' },
 		{ link: "https://blackrockdigital.github.io/startbootstrap-creative/css/creative.min.css", name: 'Creative' },
@@ -92,15 +92,15 @@ COR.setTheme = function() {
 
 	const txt1 = themesBootswatch.map( theme => {
 		const name = Object.keys( theme )[ 0 ];
-		const link = name === 'Default' ?
+		link = name === 'Default' ?
 			'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
 			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ name.toLowerCase() }/bootstrap.min.css`;
-		const bingo =  link === themeName ? '*' : '';
+		bingo =  link === themeName ? '*' : ''
 		return `<button class=theme onclick=COR.updateCss("${ link }"); style="${ theme[name] }" >${ bingo }${ name }${ bingo }</button> `;
 
 	});
 
-	CORdivBootswatch.innerHTML = '<p>Themes from <a href="https://bootswatch.com/" target=_blank>Bootswatch</a><br>' + txt1.join( '' );
+	divBootswatch.innerHTML = '<p>Themes from <a href="https://bootswatch.com/" target=_blank>Bootswatch</a><br>' + txt1.join( '' );
 
 	let txt = '<p>Themes from other sources</p>';
 
@@ -111,16 +111,15 @@ COR.setTheme = function() {
 		//console.log( 'link', theme.link );
 		txt += `<button class="theme btn btn-secondary" onclick=COR.updateCss("${ theme.link }"); style="${ theme.name }" >${ theme.name }</button> `;
 
+		divCssOthers.innerHTML = txt + '<p><small>these buttons are work-in-progress WIP</small></p>';
+
 	}
 
-	CORdivCssOthers.innerHTML = txt + '<p><small>these buttons are work-in-progress WIP</small></p>';
-
-
-};
+}
 
 
 
-COR.updateDefaultFilePath = function() { // Used by COR.html drag and drop
+COR.updateDefaultFilePath = function() { // Used by COR. Should be in COR?
 
 	location.hash = CORinpFilePath.value;
 
@@ -135,13 +134,12 @@ COR.loadScript = function( source ){ // add buttonId?
 
 	COR.resetLeftMenu();
 
-	// change to ad a check for if not already loaded?
 	const script = document.head.appendChild( document.createElement( 'script' ) );
 	script.src = source ;
 
-	script.onload = function() { COR.setMenuButtonsClass ( CORdivMenuItems ); };
+	script.onload = function() { COR.setMenuButtonsClass ( CORdivMenuItems ); }
 
-};
+}
 
 
 
@@ -199,7 +197,7 @@ COR.requestGbxmlFile = function( url ) {
 	xhr.crossOrigin = 'anonymous';
 	xhr.open( 'GET', url, true );
 	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-	//xhr.onprogress = onRequestFileProgress;
+	xhr.onprogress = onRequestFileProgress;
 	xhr.onload = callbackGbXML;
 	xhr.send( null );
 
@@ -207,12 +205,13 @@ COR.requestGbxmlFile = function( url ) {
 
 		const fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
 
-		CORdivLog.innerHTML =
+		/*
+		divLog.innerHTML =
 		`
 			${fileAttributes.name}<br>
 			bytes loaded: ${xhr.loaded.toLocaleString()} of  ${xhr.total.toLocaleString() }<br>
 		`;
-
+		*/
 	}
 
 	function callbackGbXML ( xhr ) {
@@ -327,12 +326,11 @@ COR.requestFileAndProgress = function( url, callback ) {
 };
 
 
-
 // handle callbacks with file data events / gbxml callback in GBX
 
 COR.callbackMarkdown = function( obj ){
 
-	const markdown = obj.target ? obj.target.responseText : obj;
+	markdown = obj.target ? obj.target.responseText : obj;
 
 	showdown.setFlavor('github');
 	const converter = new showdown.Converter();
@@ -364,7 +362,7 @@ COR.callbackToTextarea = function( xhr ){
 
 
 
-COR.callbackJson = function( xhr ) { // should be in CTX??
+COR.callbackJson = function( xhr ) {
 
 	const response = xhr.target.response;
 	CTX.surfaceChanges = JSON.parse( response );
@@ -380,7 +378,9 @@ COR.callbackJson = function( xhr ) { // should be in CTX??
 
 COR.openFile = function( files ) {
 
-	const reader = new FileReader();
+	var fileData, reader, data;
+
+	reader = new FileReader();
 
 	reader.onload = function( event ) {
 
@@ -438,7 +438,46 @@ COR.drop = function( event ) {
 
 
 
+// handle drag and drop events
+
+COR.xxxcallbackMarkdownData = function ( markdown ){
+
+	showdown.setFlavor('github');
+	const converter = new showdown.Converter();
+	const html = converter.makeHtml( markdown );
+
+	CORdivItemsRight.innerHTML = html;
+	GBX.style.display = 'block';
+	window.scrollTo( 0, 0 );
+
+};
+
+
+
 ////////// Slide / Hamburger operations
+
+
+COR.resetLeftMenu = function () {
+
+	// will become remove .active class
+
+	/*
+	const menuButtons = document.querySelectorAll( "button.app-menu" );
+
+	menuButtons.forEach( element => {
+		element.style.backgroundColor ='';
+		element.style.fontStyle ='';
+		element.style.fontWeight ='';
+	} );
+	*/
+
+	//const menuDetails = document.querySelectorAll( "details.app-menu" );
+
+	//menuDetails.forEach( element => element.remove() );
+
+};
+
+
 
 COR.setRightMenuWide = function() {
 
@@ -504,24 +543,25 @@ COR.toggleNavRight = function() {
 
 
 
-////////// Menu style setting
+COR.setPanelButtonInit = function( button ) { // used by each script as it loads
 
-COR.resetLeftMenu = function () {
+	CORdivMenuRight.style.display = 'none';
 
-	const menuButtons = CORdetFeatures.querySelectorAll( "button" );
-	//console.log( 'menuButtons', menuButtons );
+	// update so it add 'active' class??
 
-	menuButtons.forEach( button => button.classList.remove( "active" ) );
+	//button.style.cssText = COR.buttonToggleCss;
 
 };
 
 
 
-COR.setPanelButtonInit = function( button ) { // called by each feature script init as it loads
+COR.setPanelButtonClear = function( button ) { //anybody using this??
 
-	CORdivMenuRight.style.display = 'none';
+	CORdivMenuItems.innerHTML = '';
 
-	button.classList.add( "active" );
+	button.style.fontStyle = '';
+	button.style.backgroundColor = '';
+	button.style.fontWeight = '';
 
 };
 
@@ -534,19 +574,9 @@ COR.setMenuButtonsClass = function( target ) {
 
 	for ( let button of buttons ) {
 
+		//button.classList.add( "w3-theme-d1", "w3-hover-theme", "w3-hover-border-theme" );
 		button.classList.add( "btn", "btn-secondary", "btn-sm" );
 
 	}
 
-};
-
-
-COR.vvvvsetPanelButtonClear = function( button ) { //anybody using this??
-
-	CORdivMenuItems.innerHTML = '';
-
-	button.style.fontStyle = '';
-	button.style.backgroundColor = '';
-	button.style.fontWeight = '';
-
-};
+}
