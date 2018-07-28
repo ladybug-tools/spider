@@ -44,7 +44,7 @@
 
 			<div id=ISSdetPanelSurfacesDuplicateAdjacentSpaces ></div>
 
-			<div id=ISSdetPanelDuplicateCoordinates title="R13" ></div>
+			<div id=ISSdetPanelDuplicateCoordinates title="R14" ></div>
 
 			<div id=ISSdetPanelSurfacesDuplicateCoordinates ></div>
 
@@ -374,9 +374,9 @@
 
 
 
-	////////// Duplicate Adjacent Spaces  R13
+	////////// Duplicate Adjacent Spaces  R14
 
-	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) { // R13
+	ISS.setPanelSurfacesDuplicateAdjacentSpaces = function( target ) { // R14
 
 		surfaces = GBX.gbjson.Campus.Surface.slice();
 		let count = 0;
@@ -421,7 +421,7 @@
 
 		`<details>
 
-			<summary id = "ISSsumSurfacesDuplicateAdjacentSpaces2" >R13 Duplicate Adjacent Space &raquo; ` + ISS.surfaceDuplicateAdjacentSpaces.length + ` found</summary>
+			<summary id = "ISSsumSurfacesDuplicateAdjacentSpaces2" >R14 Duplicate Adjacent Space &raquo; ` + ISS.surfaceDuplicateAdjacentSpaces.length + ` found</summary>
 
 			<div id=ISSdivData ></div>
 
@@ -898,7 +898,7 @@
 
 	////////// Duplicate Coordinates
 
-	ISS.setPanelDuplicateCoordinates = function( target ) { //R13
+	ISS.setPanelDuplicateCoordinates = function( target ) { //R14
 
 		const surfacePolyLoops = [];
 		const surfaceIndexes = [];
@@ -953,7 +953,7 @@
 
 		`<details>
 
-			<summary id = "ISSsumSurfacesDuplicateCoordinates2" >R13 Duplicate Coordinates &raquo; ` + ISS.duplicateCoordinates2.length +
+			<summary id = "ISSsumSurfacesDuplicateCoordinates2" >R14 Duplicate Coordinates &raquo; ` + ISS.duplicateCoordinates2.length +
 				` found</summary>
 
 			<p><small>
