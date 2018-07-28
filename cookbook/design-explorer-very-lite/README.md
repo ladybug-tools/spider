@@ -24,6 +24,26 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
 
+## Script 3: View Design Explorer Data CSV files
+
+<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [View Design Explorer Data CSV files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html )
+
+
+A first pass at reading the CSV files
+* Buttons allow you to load the data from each of the three files. RedBox is loaded as the default
+* Uses a JavaScript fetch to obtain the file as text
+* Parse the text data into an array of lines, each of which is an array of data points
+* Use the data to fetch and display all the PNG files
+* Click the PNG to enlarge and get an alert of the parameters for that file
+
+Comments 2018-07-28 16:21
+* Well, that was easy
+* Issue needs two clicks to shrink the PNG file
+
+
 
 ## Script 2: View Design Explorer Data JSON files
 
