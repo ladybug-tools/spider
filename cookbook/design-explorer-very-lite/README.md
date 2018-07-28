@@ -37,9 +37,10 @@ A first pass at reading the JSON files
 * Using that list downloads and creates buttons with links to the files
 * Buttons allow you to select the file and view its contents as stingigfied JSON
 
-Comments
+Comments 2018-07-28 14:37
 * Of Wow! They are storing 3D data using Three.js JSON. Interesting choice. I wonder why they picked this file format instead of a more lightweight format such as OBJ or STL or an industry standard such as DXF, RAD or gbXML
-* Hm. I thought there would ve various data parameters contained in each JSON file. but no, the data is quite minimal just geometry, material and a bit of layer data
+* Hm. I thought there would ve various data parameters contained in each JSON file. but no, the data is quite minimal just geometry, material and a bit of layer data to indicate construction material.
+* Ah! the 'parameter' data ~~are~~ is in individual CSV files in the parent file. And it includes the file names of both the PNG and JSON files. So now lets hit on that file. ;-)
 
 
 ## Script 1: View Design Explorer Data PNG files
