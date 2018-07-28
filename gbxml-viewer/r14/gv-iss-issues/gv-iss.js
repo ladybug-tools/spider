@@ -16,7 +16,7 @@
 	//var spaceId1;
 	//var spaceId2;
 
-	// call at bottom of file
+	// called from bottom of this file
 
 	ISS.initIssues = function () {
 
