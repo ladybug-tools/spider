@@ -66,16 +66,16 @@ CSS / Bootstrap
 
 ### 2018-07-27 ~ Theo
 
-R14.2
-* Many style issue fixes
-* Add feature button classes add and remove 'active' class
+COR R14.2
+* Many style issue fixed and classes added
+* Add feature button classes and add and remove 'active' class
 	* Done: 2018-07-19 ~ Theo ~ add ability to add and remove classes upon new events
 * Code cleanup
 
 ### 2018-07-25 ~ Theo
 
 * Turn off feature button style changes
-	* Wil try to switch to adding and removing .active class
+	* Will try to switch to adding and removing .active class
 * Fixing minor issues all over regarding themes
 
 ### 2018-07-22 ~ Theo

@@ -35,6 +35,12 @@ Themes
 
 ## Change Log
 
+### 2018-07-28 ~ Theo
+
+Assets
+* Add 'fetch-readme-files.html' to capture and display news on latest updates
+	* First commit / work-inprogress
+* Add some class to splash screen
 
 ### 2018-05-31 ~ Theo
 

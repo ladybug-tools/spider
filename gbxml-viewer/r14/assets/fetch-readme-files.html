@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "This script tracks the changes for the current day in all the read me files of this project and display the selected text" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-07-28" >
+<title>'Aragog' Updates</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+		<!--
+		<p>
+			<button onclick=fetchGitHUPApiTree(1); >changes yesterday</button>
+			<button onclick=fetchGitHUPApiTree(2); >changes day before yesterday</button>
+		</p>
+		-->
+	</div>
+
+	<div id = "divContents" ></div>
+
+<script>
+
+init();
+
+function init() {
+
+	//const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+	const title = document.title;
+
+	divTitle.innerHTML =
+	`
+		<h1 class="text-primary" ><a class="text-primary" href="" >${title}</a></h1>
+		<p>${document.head.querySelector( '[name=description]' ).content }</p>
+	`;
+
+	divContents.innerHTML +=
+	`<p>
+		2018-07-28: This 'Updates' file is a new feature and still needs much tidying up and adding of styles.
+
+	</p>`;
+
+	fetchGitHUPApiTree( 0 );
+
+}
+
+
+function fetchGitHUPApiTree( dayDelta ) {
+
+	url = 'https://api.github.com/repos/ladybug-tools/spider/git/trees/master?recursive=1';
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackGitHubMenu( json, dayDelta ) );
+
+
+}
+
+
+function callbackGitHubMenu ( files, dayDelta = 0 ) {
+
+	readMeFiles = files.tree.filter( file => file.path.includes( 'gbxml-viewer/r14' ) && file.path.endsWith( 'README.md' ) );
+	console.log( 'readMeFiles', readMeFiles);
+	console.log( 'dayDelta', dayDelta );
+	const date = new Date();
+
+	const year = date.getFullYear();
+	const month = (( date.getMonth() + 1 ) + '').padStart( 2, "0" );
+	//const day = ( ( date.getDate() - dayDelta ) + '').padStart( 2, "0" );
+
+	divContents.innerHTML += `<p>files ${ readMeFiles.length }</p>`;
+
+	filesText = [];
+
+	for ( let file of readMeFiles ) {
+
+		const request = new Request( 'https://rawgit.com/ladybug-tools/spider/master/' + file.path );
+
+		fetch( request )
+		.then( response => response.text() )
+		.then( text => {
+
+			filesText.push( text );
+
+		} )
+		.then( () => {
+
+			if ( filesText.length < readMeFiles.length ) { return; }
+
+			//match = text.match( /## Change(.*$[\r\n])*(.*$[\r\n])###/gim );
+			//re = /### ${year}-07-27[\s\S]*?###/gim
+			for ( text of filesText ) {
+
+				day = ( date.getDate() + '').padStart( 2, "0" )
+				pattern = `### ${year}\-${ month}\-${day}[\\s\\S]*?###`;
+				//console.log( 'pattern', pattern );
+
+				parseFile( text, pattern );
+
+			}
+		} )
+		.then( () => {
+
+			if ( filesText.length < readMeFiles.length ) { return; }
+
+			for ( text of filesText ) {
+
+				day = ( ( date.getDate() -1 ) + '' ).padStart( 2, "0" );
+				pattern = `### ${year}\-${month}\-${day}[\\s\\S]*?###`;
+				console.log( 'pattern', pattern );
+				parseFile( text, pattern );
+
+			}
+		} )
+		.then( () => {
+
+			if ( filesText.length < readMeFiles.length ) { return; }
+
+			for ( text of filesText ) {
+
+				day = ( ( date.getDate() - 2 ) + '' ).padStart( 2, "0" )
+				pattern = `### ${year}\-${month}\-${day}[\\s\\S]*?###`;
+				//console.log( 'pattern', pattern );
+				parseFile( text, pattern );
+
+			}
+
+		} )
+		.then( () => {
+
+	if ( filesText.length < readMeFiles.length ) { return; }
+
+	for ( text of filesText ) {
+
+		day = ( ( date.getDate() - 3 ) + '' ).padStart( 2, "0" )
+		pattern = `### ${year}\-${month}\-${day}[\\s\\S]*?###`;
+		//console.log( 'pattern', pattern );
+		parseFile( text, pattern );
+
+	}
+
+	} );
+
+	}
+
+}
+
+
+function parseFile( text, pattern ){
+
+
+		const re = new RegExp( pattern, "gim" );
+		match = re.exec( text );
+		//console.log( 'match', match );
+
+		if ( match && match.length ) {
+
+			//divContents.innerText += match[ 0 ].slice( match[ 0 ].indexOf( '\n'), -3 );
+			divContents.innerText += '\n' + match[ 0 ].slice( 4, -3 );
+
+		}
+
+}
+
+</script>
+</body>
+</html>

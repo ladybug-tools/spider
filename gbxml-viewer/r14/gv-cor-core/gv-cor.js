@@ -165,9 +165,20 @@ COR.onHashChange = function() {
 		//COR.requestFileAndProgress( url, GBX.callbackGbXML );
 		COR.requestGbxmlFile( url );
 
-		//} else if ( ulc.endsWith( '.html' ) ) {
+	} else if ( ulc.endsWith( '.html' ) ) {
 
 		//setIfrThree();
+		height = CORdivItemsRight.getBoundingClientRect().height;
+		CORdivItemsRight.innerHTML = `<iframe src=${ url } style=display:block;height:${height}px;width:100%; ></iframe>`;
+
+		CORdivMenuRight.style.display = 'block';
+		//CORdivMenuRight.style.left = '55%';
+		//CORdivMenuRight.style.width = '40rem';
+		window.scrollTo( 0, 0 );
+		CORdivMenuRight.scrollTop = 0;
+		//CORdivItemsRight.scrollTop = 0;
+		CORdivMenuRight.scrollTo( 0, 0 );
+		//CORdivItemsRight.scrollTo( 0, 0 );
 
 	} else if ( ulc.endsWith( '.json' ) ) {
 
@@ -181,7 +192,7 @@ COR.onHashChange = function() {
 
 	} else {
 
-		COR.requestFile( urlGitHubPage + url, COR.callbackToTextarea );
+		COR.requestFile( url, COR.callbackToTextarea );
 
 	}
 
@@ -390,10 +401,15 @@ COR.openFile = function( files ) {
 
 			COR.openGbxmlFile( files );
 
+		} else if ( files.files[0].name.toLowerCase().endsWith( '.md' ) ) {
+
+			COR.callbackMarkdown( reader.result );
+
 		} else {
 
-			//txtArea.innerHTML = reader.result;
-			COR.callbackMarkdown( reader.result );
+			const response = reader.result;
+			CORdivItemsRight.innerHTML = '<textarea style=height:100%;width:100%; >' + response + '</textarea>';
+			CORdivMenuRight.style.display = 'block';
 
 		}
 
