@@ -1,5 +1,5 @@
 // Copyright 2018 Ladybug Tools authors. MIT License
-/* globals THR, GBX, SAV, showdown, CORcss, CORdragArea, CORdetFeatures, CORdivBootswatch, CORdivCssOthers,  CORdivLog */
+/* globals THR, GBX, SAV, showdown, CORcss, CORdragArea, CORdetFeatures, CORdivBootswatch, CORdivCssOthers, CORdivLog */
 /* jshint esversion: 6 */
 
 
@@ -95,7 +95,7 @@ COR.setTheme = function() {
 		const link = name === 'Default' ?
 			'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
 			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ name.toLowerCase() }/bootstrap.min.css`;
-		const bingo =  link === themeName ? '*' : '';
+		const bingo = link === themeName ? '*' : '';
 		return `<button class=theme onclick=COR.updateCss("${ link }"); style="${ theme[name] }" >${ bingo }${ name }${ bingo }</button> `;
 
 	});
@@ -198,7 +198,7 @@ COR.requestGbxmlFile = function( url ) {
 	const xhr = new XMLHttpRequest();
 	xhr.crossOrigin = 'anonymous';
 	xhr.open( 'GET', url, true );
-	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr ); };
 	//xhr.onprogress = onRequestFileProgress;
 	xhr.onload = callbackGbXML;
 	xhr.send( null );
@@ -210,7 +210,7 @@ COR.requestGbxmlFile = function( url ) {
 		CORdivLog.innerHTML =
 		`
 			${fileAttributes.name}<br>
-			bytes loaded: ${xhr.loaded.toLocaleString()} of  ${xhr.total.toLocaleString() }<br>
+			bytes loaded: ${xhr.loaded.toLocaleString()} of ${xhr.total.toLocaleString() }<br>
 		`;
 
 	}
@@ -218,7 +218,7 @@ COR.requestGbxmlFile = function( url ) {
 	function callbackGbXML ( xhr ) {
 		//console.log( 'xhr', xhr );
 
-		//GBX.gbxmlResponseXML =  xhr.target.responseXML; // used by CTX.modifiedBy
+		//GBX.gbxmlResponseXML = xhr.target.responseXML; // used by CTX.modifiedBy
 
 		//const gbxml = xhr.target.responseXML.documentElement;
 
@@ -296,8 +296,8 @@ COR.requestFile = ( url, callback ) => {
 	const xhr = new XMLHttpRequest();
 	xhr.crossOrigin = 'anonymous';
 	xhr.open( 'GET', url, true );
-	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-	//xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
 	xhr.onload = callback;
 	xhr.send( null );
 
@@ -310,7 +310,7 @@ COR.requestFileAndProgress = function( url, callback ) {
 	const xhr = new XMLHttpRequest();
 	xhr.crossOrigin = 'anonymous';
 	xhr.open( 'GET', url, true );
-	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr ); };
 	xhr.onprogress = onRequestFileProgress;
 	xhr.onload = callback;
 	xhr.send( null );

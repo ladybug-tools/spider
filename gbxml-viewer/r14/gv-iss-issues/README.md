@@ -49,6 +49,7 @@ Recent releases of the Viewer are identifying typical errors.
 
 ## Wish list
 
+* 2018-07-27 ~ Theo ~ Template literals omissions fixed
 * 2018-07-27 ~ Theo ~ Inclusion check: add progress indicator
 * 2018-05-25 ~ Theo ~ Undefined CAD Object IDs > Add 'check only Air' button
 * 2018-05-25 ~ Theo ~ Undefined CAD Object IDs > Add line that edits all selected with one input box
