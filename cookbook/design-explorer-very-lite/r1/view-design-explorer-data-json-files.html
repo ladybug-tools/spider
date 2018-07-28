@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template to view PNG files from https://github.com/tt-acm/DesignExplorer" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-07-28" >
+<title>View Design Explorer Data JSON files</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; margin: 0.2rem; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			Folder:
+			<button onclick=fetchFileNames('RedBox'); >RedBox</button>
+			<button onclick=fetchFileNames('AIAbuilding'); >AIAbuilding</button>
+			<button onclick=fetchFileNames('DefaultData'); >DefaultData</button>
+			<a href="https://github.com/tt-acm/DesignExplorer/tree/gh-pages/design_explorer_data" target="_blank">Source files</a>
+		</p>
+
+		<p>Tool tips display file names. Use context menu to obtain link to individual original file</p>
+
+	</div>
+
+	<div id = "divContents" ></div>
+
+	<div id = "divText" style=width:100; ></dic>
+
+<script>
+
+let url;
+
+init();
+
+function init() {
+
+	//const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+	const title = document.title;
+
+	divTitle.innerHTML =
+	`
+		<h1><a href="" >${title}</a></h1>
+		<p>${document.head.querySelector( '[name=description]' ).content }</p>
+	`;
+
+	fetchFileNames();
+
+}
+
+
+function fetchFileNames( folder = 'RedBox' ) {
+
+	const url = 'https://api.github.com/repos/tt-acm/DesignExplorer/contents/design_explorer_data/' + folder;
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackFileNames( json, folder ) );
+
+}
+
+
+function callbackFileNames ( files, folder ) {
+
+	//console.log( 'files', files );
+
+	txt = `<h3>${ folder }</h3>`;
+
+	for ( let file of files) {
+
+		if ( !file.name.endsWith( '.json' ) ) { continue; }
+
+		//console.log( 'file', file );
+
+		txt += `<button href=https://tt-acm.github.io/DesignExplorer/${ file.path } onclick=fetchJson("${ file.path }","${ folder }");  >
+		${ file.name }</button> `
+
+	}
+
+	divContents.innerHTML = txt;
+
+}
+
+
+
+function fetchJson( path ) {
+
+	const url = 'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/';
+	//console.log( '', path );
+
+	const request = new Request( url + path );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackJson( json ) );
+
+}
+
+
+
+function callbackJson( json ) {
+	//console.log( 'json', json );
+
+	const text = JSON.stringify( json );
+	//console.log( '', text );
+
+	divText.innerText = text;
+
+}
+
+
+</script>
+</body>
+</html>
