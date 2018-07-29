@@ -1,4 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](http://www.ladybug.tools/spider/index.html#cookbook/templates/design-explorer-very-lite/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](https://www.ladybug.tools/spider/index.html#cookbook/templates/design-explorer-very-lite/README.md "View file as a web page." ) </span>
 <div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/cookbook/templates/design-explorer-very-lite/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
@@ -12,7 +12,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 ## Concept
 
 Given these two links
-* http://tt-acm.github.io/DesignExplorer/
+* https://tt-acm.github.io/DesignExplorer/
 * https://github.com/ladybug-tools/design_explorer_lite
 
 Is it possible to replicate much of the functionality of these two sets of scripts in a way that
@@ -28,10 +28,10 @@ The following sections - newest on top - are a show and tell of the adventure in
 
 ## Script 5: View Design Explorer Data Three.js files R2
 
-<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [View Design Explorer Data Three.js files R2]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html )
+### Full Screen: [View Design Explorer Data Three.js files R2]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html )
 
 A second pass at loading the JSON files into Three.js
 
@@ -40,10 +40,10 @@ A second pass at loading the JSON files into Three.js
 
 ## Script 4: View Design Explorer Data Three.js files
 
-<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [View Design Explorer Data Three.js files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-three.js.html )
+### Full Screen: [View Design Explorer Data Three.js files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-three.js.html )
 
 A first pass at loading the JSON files into Three.js
 * Loads RedBox by default
@@ -62,10 +62,10 @@ Comments 2018-07-28 17:33
 
 ## Script 3: View Design Explorer Data CSV files
 
-<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [View Design Explorer Data CSV files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html )
+### Full Screen: [View Design Explorer Data CSV files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html )
 
 
 A first pass at reading the CSV files
@@ -83,10 +83,10 @@ Comments 2018-07-28 16:21
 
 ## Script 2: View Design Explorer Data JSON files
 
-<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [View Design Explorer Data JSON files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html )
+### Full Screen: [View Design Explorer Data JSON files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html )
 
 A first pass at reading the JSON files
 * Uses the GitHub API to ob2ain a list of file names
@@ -101,10 +101,10 @@ Comments 2018-07-28 14:37
 
 ## Script 1: View Design Explorer Data PNG files
 
-<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-png-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-png-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [View Design Explorer Data PNG files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-png-files.html )
+### Full Screen: [View Design Explorer Data PNG files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-png-files.html )
 
 A first pass at reading the PNG files.
 * Uses the GitHub API to obtain a list of file names
@@ -125,8 +125,8 @@ Comments 2018-07-28 13:07
 
 ### Design Explorer
 
-* http://tt-acm.github.io/DesignExplorer/
-* http://tt-acm.github.io/DesignExplorer/
+* https://tt-acm.github.io/DesignExplorer/
+* https://tt-acm.github.io/DesignExplorer/
 * https://github.com/tt-acm/DesignExplorer/wiki
 * https://github.com/tt-acm/DesignExplorer
 
