@@ -21,8 +21,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r74/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r74/examples/js/controls/TrackballControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r80/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r80/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "divMenu" >
 
@@ -54,6 +54,8 @@ let sceneRotation = 1;
 let renderer, camera, controls, scene;
 
 init();
+animate();
+
 
 
 function init() {
@@ -71,21 +73,21 @@ function init() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
 
-	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
 	camera.position.set( - 100, 100, 100 );
 	//camera.up.set( 0, 0, 1 );
 
-	controls = new THREE.TrackballControls( camera, renderer.domElement );
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-	//scene = new THREE.Scene();
+	scene = new THREE.Scene();
 
 	window.addEventListener( 'resize', onWindowResize, false );
 	window.addEventListener( 'orientationchange', onWindowResize, false );
 	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
 	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
 
-	//const axesHelper = new THREE.AxisHelper( 100 );
-	//scene.add( axesHelper );
+	const axesHelper = new THREE.AxisHelper( 100 );
+	scene.add( axesHelper );
 
 	const geometry = new THREE.BoxGeometry( 50, 50, 50 );
 	const material = new THREE.MeshNormalMaterial();
@@ -95,8 +97,6 @@ function init() {
 
 	fetchFileJson();
 
-
-
 }
 
 
@@ -105,39 +105,50 @@ function fetchFileJson( path = 'RedBox/5_5_5.json' ) {
 	const url = 'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/';
 	//console.log( '', path );
 
-	//scene.remove( object );
+	scene.remove( object );
 
-	var loader = new THREE.ObjectLoader();
+	object = new THREE.Group();
 
-	loader.load(
-		// resource URL
-		url + path,
+	scene.add( object );
 
-		// onLoad callback
-		// Here the loaded data is assumed to be an object
-		function ( loadedScene ) {
-			// Add the loaded object to the scene
-			scene = loadedScene;
-			//scene.fog = new THREE.FogExp2( 0xefd1b5, 0.0025 );
-			//scene = new obj
-			object = scene.children;
+	const request = new Request( url + path );
 
-			animate();
-
-		},
-
-		// onProgress callback
-		function ( xhr ) {
-			console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-		},
-
-		// onError callback
-		function ( err ) {
-			console.error( 'An error happened' );
-		}
-	);
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackFileJson( json, path ) );
 
 }
+
+
+function callbackFileJson( json, path ) {
+
+	jj = json;
+	console.log( 'json', json );
+
+	const loader = new THREE.ObjectLoader();
+
+	//sceneLoaded = new THREE.Scene();
+	sceneLoaded = loader.parse( json );
+	console.log( 'sceneLoaded', sceneLoaded );
+
+	geo = loader.parseGeometries( json.geometries )
+	console.log( 'geo', geo );
+
+	//objs = loader.parseObject( json.object )
+	//console.log( 'objs', objs );
+
+	for ( child of sceneLoaded.children ) {
+
+		object.add( child );
+
+	}
+
+	//console.log( 'sceneLoaded', sceneLoaded );
+
+}
+
+
+
 
 function onWindowResize() {
 

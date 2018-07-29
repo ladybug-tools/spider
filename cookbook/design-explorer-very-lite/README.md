@@ -24,6 +24,20 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
 
+
+
+## Script 5: View Design Explorer Data Three.js files R2
+
+<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [View Design Explorer Data Three.js files R2]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html )
+
+A second pass at loading the JSON files into Three.js
+
+* Some of the aspect of loading the Three.js JSON have been cleared up
+
+
 ## Script 4: View Design Explorer Data Three.js files
 
 <iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
@@ -39,6 +53,9 @@ Comments 2018-07-28 17:33
 
 * Files load just fine using Three,js ObjectLoader
 * Oh wow!. These files include scene data. It's like we are back at the AEC Hackathon in 2014. It was a mistake then (__mea culpa__). It's like a joke now.
+* My bad. The files are OK. Scene data is not in the files. It's Object Loader or something creating the scene data.
+* looks like I have some learning to do.
+* 17:52 ~  Lesson learned. things seem to be working OK kind of
 
 
 
@@ -69,12 +86,12 @@ Comments 2018-07-28 16:21
 <iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [View Design Explorer Data PNG files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html )
+### Full Screen: [View Design Explorer Data JSON files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html )
 
 A first pass at reading the JSON files
 * Uses the GitHub API to ob2ain a list of file names
 * Using that list downloads and creates buttons with links to the files
-* Buttons allow you to select the file and view its contents as stingigfied JSON
+* Buttons allow you to select the file and view its contents as stringified JSON
 
 Comments 2018-07-28 14:37
 * Of Wow! They are storing 3D data using Three.js JSON. Interesting choice. I wonder why they picked this file format instead of a more lightweight format such as OBJ or STL or an industry standard such as DXF, RAD or gbXML
