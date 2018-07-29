@@ -24,6 +24,21 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
 
+## Script 5: design-explorer-very-lite-r1
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [design-explorer-very-lite-r1]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html )
+
+First pass at gathering all the data and providing a display of the data
+* Loads a CSV file which then loads all the JSON files and displays these in 3D
+* RedBox is the default. All three data sets available with th click of a button
+* Spacing and position is roughly calibrated on-the-fly for each data set
+
+Comment 2018-07-28 21:44
+* Well, it too a few hours more than I wanted, but at least there's something fun to look at
+* There's nothing serious here yet, but at the least a proof of concept is in operation: we can loadd all th JSON files in a single visualization and manipulate the scene at a reasonable pace
 
 
 ## Script 5: View Design Explorer Data Three.js files R2
@@ -34,7 +49,6 @@ The following sections - newest on top - are a show and tell of the adventure in
 ### Full Screen: [View Design Explorer Data Three.js files R2]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html )
 
 A second pass at loading the JSON files into Three.js
-
 * Some of the aspect of loading the Three.js JSON have been cleared up
 
 
