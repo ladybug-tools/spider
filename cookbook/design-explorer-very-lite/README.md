@@ -24,6 +24,25 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
 
+## Script 4: View Design Explorer Data Three.js files
+
+<iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [View Design Explorer Data Three.js files]( http://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-three.js.html )
+
+A first pass at loading the JSON files into Three.js
+* Loads RedBox by default
+* Buttons enable loading sample files from each of the three folders
+
+Comments 2018-07-28 17:33
+
+* Files load just fine using Three,js ObjectLoader
+* Oh wow!. These files include scene data. It's like we are back at the AEC Hackathon in 2014. It was a mistake then (__mea culpa__). It's like a joke now.
+
+
+
+
 ## Script 3: View Design Explorer Data CSV files
 
 <iframe src=http://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
