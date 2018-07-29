@@ -24,12 +24,12 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
 
-## Script 5: design-explorer-very-lite-r1
+## Script 6: Design Explorer Very Lite R1
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [design-explorer-very-lite-r1]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html )
+### Full Screen: [Design Explorer Very Lite R1]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html )
 
 First pass at gathering all the data and providing a display of the data
 * Loads a CSV file which then loads all the JSON files and displays these in 3D
@@ -38,7 +38,7 @@ First pass at gathering all the data and providing a display of the data
 
 Comment 2018-07-28 21:44
 * Well, it too a few hours more than I wanted, but at least there's something fun to look at
-* There's nothing serious here yet, but at the least a proof of concept is in operation: we can loadd all th JSON files in a single visualization and manipulate the scene at a reasonable pace
+* There's nothing serious here yet, but at the least a proof of concept is in operation: we can load all th JSON files in a single visualization and manipulate the scene at a reasonable pace
 
 
 ## Script 5: View Design Explorer Data Three.js files R2
@@ -131,8 +131,13 @@ Comments 2018-07-28 13:07
 * I though the file names might contain useful data, but each folder uses a different naming convention so no significant data can be extracted or inferred from the names without prior knowledge of its schema
 * So let's look at the JSON files
 
+
 ## To do / wish list
 
+Design Explorer Very Lite R1
+* Sort the JSON objects given X,Y and Z axis, size, color etc
+* Mouse over each JSON object to view its details
+* A Sun, shade and shadows
 
 ## Links of interest
 
