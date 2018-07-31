@@ -20,6 +20,7 @@ COR.iconGitHubMark = "../assets/github-mark.png";
 // needs fixing
 //COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
 
+let themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
 
 
 COR.initCore = function() {

@@ -100,7 +100,7 @@
 
 	button, input[ type=button ] { background-color: #ddd; border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
 
-	iframe { border: none; width: 100%; }
+	iframe { /*border: none; * width: 100%; }
 
 	td { vertical-align: top; }
 
@@ -252,6 +252,7 @@
 
 <script>
 
+let themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
 
 
 COR.initCore();
