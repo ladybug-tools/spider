@@ -24,6 +24,19 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
 
+## Script 6: Design Explorer Very Lite R2
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r2/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [Design Explorer Very Lite R2]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r2/design-explorer-very-lite-r2.html )
+
+
+* Add left side menu menu with sliding capability
+* Automate process of finding JSON file names
+
+
+
 ## Script 6: Design Explorer Very Lite R1
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
@@ -148,6 +161,13 @@ Design Explorer Very Lite R1
 * https://tt-acm.github.io/DesignExplorer/
 * https://github.com/tt-acm/DesignExplorer/wiki
 * https://github.com/tt-acm/DesignExplorer
+
+### Design Explorer Lite
+
+A light version of design explorer meant to display sliders for the inputs and simple images + charts for outputs: http://www.ladybug.tools/design_explorer_lite/
+
+* https://github.com/ladybug-tools/design_explorer_lite
+
 
 ## Change log
 

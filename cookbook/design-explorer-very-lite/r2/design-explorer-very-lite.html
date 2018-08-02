@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" >
+<meta name=description content="View building performance studies from Honeybeein 3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-07-31" >
+<title>Design Explorer Very Lite R2</title>
+<style>
+/* Copyright 2018 Spider authors. MIT License */
+
+	:root { --mnu-width: 20rem; font-size: 1em; }
+
+	html { height: 100%; margin: 0; }
+
+	body { background-color: #ddd; height: 100%; margin: 0; overflow: hidden; }
+
+	a:hover, a:focus { background-color: yellow; color: #888; }
+	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
+	button.theme { border-width: 1px; margin: 0.3rem !important; min-width:3rem; }
+	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+	summary { font-weight: bold; }
+
+	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); /* transition: margin-left .5s; */ position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; padding: 1rem; right: 0; }
+
+	#divMenu { height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
+		width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#hamburger { cursor: pointer; font-size: 2rem; left: calc( var( --mnu-width ) - 4rem );
+		line-height: 2rem; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+	#dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
+
+
+/*
+
+	body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; margin: 0; }
+
+	button, input[ type=button ] { background-color: #ddd; border: none; padding: 3px 20px; }
+
+	iframe { border: none; width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+*/
+
+</style>
+<link id=css rel="stylesheet" href="" type="text/css" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+<script src=https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js ></script>
+
+
+	<div id = "divMenu" class="jumbotron" >
+
+		<div>
+			<a class="breadcrumb-item" href = "../index.html" target="_top" >repo</a>
+			<a class="breadcrumb-item" href= "./index.html" target="_top" style=font-size:24px; >&#x2302;</a>
+		</div>
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			CSV File:<br>
+			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('LittleRedBox.csv'); >LittleRedBox.csv</button>
+			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('AIA%20building.csv'); >AIA building.csv</button>
+		<p>
+
+			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('default_onload.csv'); >default_onload.csv</button>
+		</p>
+
+		<p>
+			<a href="https://github.com/tt-acm/DesignExplorer/tree/gh-pages/design_explorer_data" target="_blank">Source files</a>
+		</p>
+
+		<div id = "divMenuItems" ></div>
+
+		<div id= "divFooter" >
+
+			<details>
+
+				<summary>Themes</summary>
+
+				<div id=divBootswatch ></div>
+
+				<div id=divCssOthers ></div>
+
+			</details>
+
+			<details>
+
+				<summary>Footer</summary>
+
+				<div title='Me want too!' ><a href=#../../pages/about-this-cms.md >About this CMS</a></div>
+				<div title='What is this stuff?' ><a href=#../../pages/coding-style.md >Coding style</a></div>
+				<div title='many thanks!' ><a href=#../../pages/credits.md >Credits</a></div>
+				<div><a href=#../../pages/code-of-conduct.md >Code of conduct</a></div>
+				<div><a href=#../../pages/contributing.md >Contributing</a></div>
+				<div><a href=#../../pages/license.md >License</a></div>
+				<div><a href=#../../pages/markdown-help.md >Markdown help</a></div>
+				<div><a title='Need help' href=https://github.com/pushme-pullyou/pushme-pullyou.github.io/issues target=_blank >🗗 GitHub Issues</a></div>
+				<div><a href="javascript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+				<div><a href="https://api.github.com/rate_limit" title='If menu stops appearing, it is likely due to too many API calls' target=_blank >View GitHub API rate limits</a></div>
+
+			</details>
+
+			<h3 onclick="divMenu.scrollTop=0;" style="cursor:pointer;text-align:center;" title="go to top of page" > &#x2766; </h3>
+
+		</div>
+
+	</div>
+
+	<div id = "divContainer" ></div>
+
+	<button id = "hamburger" class = "btn btn-primary" onclick=toggleNav(); > slide &#9776;  </button>
+
+<script>
+
+// https://github.com/showdownjs/showdown << check for latest rev from time to time 1.8.6 2018-07-02
+// jshint esversion: 6
+
+let object;
+let count = 0;
+let x = 0, y = 0, z = 0;
+
+let sceneRotation = 1;
+
+//	location.hash = '../README.md';
+const uriDefaultFile = 'README.md';
+const urlSourceCode = "https://github.com/pushme-pullyou/pushme-pullyou.github.io/tree/master/tootoo-templates/hamburger-css";
+
+let themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
+
+let xDown = null;
+let yDown = null;
+
+
+init();
+initThree();
+animate();
+
+
+
+function init() {
+
+	updateCss( themeName );
+
+	setTitle( divTitle );
+
+	// Swipe events
+	document.addEventListener( 'touchstart', onTouchStart, false );
+	document.addEventListener( 'touchmove', onTouchMove, false );
+
+
+	fetchFileCsv();
+
+}
+
+
+
+function fetchFileCsv( file = 'LittleRedBox.csv' ) {
+
+	const url = 'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/' + file;
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.text() )
+		.then( text => callbackFileCsv( text, file ) );
+
+}
+
+
+
+function callbackFileCsv( text, file) {
+
+	//console.log( 'text', text );
+
+	lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
+	//console.log( 'lines', lines );
+
+	keys = lines.shift();
+	//console.log( 'keys', keys );
+	index = keys.indexOf( 'threeD' );
+
+	scene.remove( object );
+
+	object = new THREE.Group();
+
+	scene.add( object );
+
+	count = 0;
+	x = 0;
+	y = 0;
+	z = 0;
+
+	for ( let line of lines ) {
+
+		//console.log( 'line', line );
+
+		url = line[ index ];
+		//console.log( 'url', url );
+
+		fetchFileJson( url );
+
+	}
+
+}
+
+
+
+function fetchFileJson( url ) {
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackFileJson( json, url ) );
+
+}
+
+
+function callbackFileJson( json, path ) {
+
+	//console.log( 'json', json );
+
+	const loader = new THREE.ObjectLoader();
+
+	sceneLoaded = loader.parse( json );
+	//console.log( 'sceneLoaded', sceneLoaded );
+
+	obj = new THREE.Group();
+
+	for ( child of sceneLoaded.children ) {
+
+		obj.add( child );
+
+	}
+
+	length = Math.floor( Math.cbrt( lines.length ) )
+
+	if ( count % length === 0 ) {
+
+		x = 0;
+		z++;
+
+	} else {
+
+		x++;
+	}
+
+	if ( count % ( length * length ) === 0 ) {
+
+		x = 0;
+		z = 0;
+		y++;
+
+	}
+
+	//console.log( 'x', x, 'y', z );
+
+	radius = new THREE.Box3().setFromObject ( obj ).getBoundingSphere( new THREE.Sphere() ).radius
+
+	obj.position.set( 2 * radius * x, 2 * radius * y, 2 * radius * z );
+	count++;
+	object.add( obj );
+
+	if ( count >= lines.length ) {
+
+		bbox = new THREE.Box3().setFromObject( object );
+		object.position.set ( -0.5 * bbox.max.x,  -0.5 * bbox.max.y,  -0.5 * bbox.max.z,)
+		//console.log( 'bbox', bbox );
+
+	}
+
+
+}
+
+
+
+
+function updateCss( link ) {
+
+	themeName = css.href = link;
+	localStorage.setItem( 'themeName', link );
+	setTheme();
+
+}
+
+
+
+function setTheme( target ) {
+
+	const themesBootswatch = [
+		{ 'Default': 'background-color: white; color: #007bff' },
+		{ "Cerulean": 'background-color: white; color: #2FA4E7;' },
+		{ 'Cosmo': 'background-color: white; color: #2780E3;' },
+		{ 'Cyborg': 'background-color: #060606; color: #2A9FD6; font-style: italic;' },
+		{ 'Darkly': 'background-color: #222; color: #00bc8c; font-style: italic;' },
+		{ 'Flatly': 'background-color: white; color: #18BC9C;' },
+		{ 'Journal': 'background-color: white; color: #EB6864;' },
+		{ 'Litera': 'background-color: white; color: #4582EC;' },
+		{ 'Lumen': 'background-color: white; color: #158CBA;' },
+		{ 'Lux': 'background-color: white; color: #1a1a1a;' },
+		{ 'Materia': 'background-color: white; color: #2196F3;' },
+		{ 'Minty': 'background-color: white; color: #78C2AD;' },
+		{ 'Pulse': 'background-color: white; color: #593196;' },
+		{ 'Sandstone': 'background-color: white; color: #93C54B;' },
+		{ 'Simplex': 'background-color: white; color: #D9230F;' },
+		{ 'Sketchy': 'background-color: white; color: #333;' },
+		{ 'Slate': 'background-color: #272B30; color: #fff; font-style: italic;' },
+		{ 'Solar': 'background-color: #002B36; color: #839496; font-style: italic;' },
+		{ 'Spacelab': 'background-color: white; color: #3399F3;' },
+		{ 'Superhero': 'background-color: #2B3E50; color: #DF691A; font-style: italic;' },
+		{ 'United': 'background-color: white; color: #E95420;' },
+		{ 'Yeti': 'background-color: white; color: #008cba;' },
+	];
+
+
+	const themesOthers = [
+
+		{ link: "https://demos.creative-tim.com/material-kit/assets/css/material-kit.min.css", name: "Material Kit" },
+		{ link: "https://www.gettemplate.com/demo/initio/assets/css/styles.css", name: 'Initio' },
+		{ link: "https://blackrockdigital.github.io/startbootstrap-creative/css/creative.min.css", name: 'Creative' },
+		{ link: "https://tympanus.net/Freebies/Cardio/css/cardio.css", name: 'Cardio' },
+		{ link: "https://www.gettemplate.com/demo/magister/assets/css/magister.css", name: 'Magister' },
+	];
+
+
+	const txt1 = themesBootswatch.map( theme => {
+		const name = Object.keys( theme )[ 0 ];
+		link = name === 'Default' ?
+			'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ name.toLowerCase() }/bootstrap.min.css`;
+		bingo =  link === themeName ? '*' : ''
+		return `<button class=theme onclick=updateCss("${ link }"); style="${ theme[name] }" >${ bingo }${ name }${ bingo }</button> `;
+
+	});
+
+	divBootswatch.innerHTML = '<p>Themes from <a href="https://bootswatch.com/" target=_blank>Bootswatch</a><br>' + txt1.join( '' );
+
+	let txt = '<p>Themes from other sources</p>';
+
+	for ( let theme of themesOthers ) {
+
+		//name = Object.keys( theme )[ 0 ];
+		//console.log( 'name', name );
+		//console.log( 'link', theme.link );
+		txt += `<button class="theme btn btn-secondary" onclick=updateCss("${ theme.link }"); style="${ theme.name }" >${ theme.name }</button> `;
+
+		divCssOthers.innerHTML = txt + '<p><small>these buttons are work-in-progress WIP</small></p>';
+
+	}
+
+}
+
+
+
+function setTitle( target ) {
+
+	target.innerHTML =
+
+	`<h2>
+		<a href=${ urlSourceCode } target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+		<a href = "" title = "Click to reload this page" >${document.title}</a>
+	</h2>
+
+	<p>
+		${ document.head.querySelector( '[name=description]' ).content }
+	</p>`;
+
+}
+
+
+//////////
+
+function onTouchStart( event ) {
+
+	xDown = event.touches[ 0 ].clientX;
+	yDown = event.touches[ 0 ].clientY;
+
+}
+
+
+
+function onTouchMove(event) {
+
+	if ( ! xDown || ! yDown ) {
+
+		return;
+
+	}
+
+	const xUp = event.touches[ 0 ].clientX;
+	const yUp = event.touches[ 0 ].clientY;
+
+	const xDiff = xDown - xUp;
+	const yDiff = yDown - yUp;
+
+	if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {// most significant
+
+		if ( xDiff > 0 ) {
+
+			toggleNav();
+			// left swipe
+			console.log( 'left swipe' );
+
+		} else {
+
+			toggleNav();
+			// right swipe
+			console.log( 'right swipe' );
+
+		}
+
+	} else {
+
+		if ( yDiff > 0 ) {
+
+			//up swipe
+			console.log( 'up swipe' );
+
+		} else {
+
+			// down swipe
+			console.log( 'down swipe' );
+
+		}
+
+	}
+
+	xDown = null;
+	yDown = null;
+
+}
+
+
+
+function toggleNav() {
+
+	const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
+
+	if ( !divMenu.style.width || divMenu.style.width === width ) {
+
+		divMenu.style.width = '0';
+		divMenu.style.padding = '0';
+		hamburger.style.left = '-75px';
+		divContainer.style.marginLeft = '0';
+
+	} else {
+
+		divMenu.style.width = width;
+		//divMenu.style.padding = '30px 10px 0 10px';
+		divMenu.style.padding = '1rem';
+		hamburger.style.left = 'calc( var( --mnu-width ) - 4rem )';
+		divContainer.style.marginLeft = width;
+
+	}
+
+	//console.log( 'divContainer.clientWidth', divContainer.clientWidth );
+
+	//divContainer.style.width = divContainer.clientWidth + 'px';
+	onWindowResize();
+
+}
+
+
+//////////
+
+function initThree() {
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( divContainer.clientWidth, divContainer.clientHeight );
+	divContainer.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, divContainer.clientWidth/divContainer.clientHeight, 1, 1000 );
+	camera.up.set( 0, 0, 1 );
+	camera.position.set( 100, 100, 100 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+	controls.maxDistance = 800;
+
+	scene = new THREE.Scene();
+
+		const lightAmbient = new THREE.AmbientLight( 0x444444 );
+	scene.add( lightAmbient );
+
+	const lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+	lightDirectional.shadow.mapSize.width = 2048;  // default 512
+	lightDirectional.shadow.mapSize.height = 2048;
+	lightDirectional.castShadow = true;
+	scene.add( lightDirectional );
+
+	const lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+	lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+	camera.add( lightPoint );
+	scene.add( camera );
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+
+	const axesHelper = new THREE.AxesHelper( 50 );
+	scene.add( axesHelper );
+
+	//const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	//const material = new THREE.MeshNormalMaterial();
+	//const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = divContainer.clientWidth / divContainer.clientHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( divContainer.clientWidth, divContainer.clientHeight );
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+requestAnimationFrame( animate );
+renderer.render( scene, camera );
+controls.update();
+
+}
+
+</script>
+</body>
+</html>
