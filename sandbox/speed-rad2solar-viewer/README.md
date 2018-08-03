@@ -38,17 +38,17 @@ value="You are now in a GitHub web page view - Click this button to view this re
 	* Item link displays just the selected surface
 
 
-### [SPEED Rad2Solar Viewer  R6.4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer4.html )
+### [SPEED Rad2Solar Viewer R6.4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer4.html )
 
 * Add edges to planes except roof and ground
 * Fix mesh rotations
 * Set material sides to front side only
 
-### [SPEED Rad2Solar Viewer  R6.3]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer3.html )
+### [SPEED Rad2Solar Viewer R6.3]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer3.html )
 
 * Many things working but not all roofs and overhangs
 
-### [SPEED Rad2Solar Viewer  R6.2]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer2.html )
+### [SPEED Rad2Solar Viewer R6.2]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer2.html )
 
 * Fixes diagonal facades in Test Case 3 & 4
 * Braeks north and south facades

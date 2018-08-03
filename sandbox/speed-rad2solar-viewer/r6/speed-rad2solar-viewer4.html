@@ -355,7 +355,7 @@ function loadPNG( fileName, index ) {
 		const texture = loader.load ( urlGitHubPage + index + '/' + fileName );
 		texture.minFilter = THREE.LinearFilter;
 
-		const material = new THREE.MeshBasicMaterial( { map: texture, opacity: 1, side: 0, transparent: true } );
+		const material = new THREE.MeshBasicMaterial( { alphaTest : 0.01, map: texture, opacity: 1, side: 0, transparent: true } );
 		const geometry = new THREE.PlaneBufferGeometry( width, height );
 
 		/*
