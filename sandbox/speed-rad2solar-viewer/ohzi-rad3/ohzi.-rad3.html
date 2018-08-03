@@ -1,0 +1,791 @@
+
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="List and display Radiance HDR files as textures on a 3D surface for all files in a test case folder" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-07-18" >
+<script src = "text.js" ></script>
+
+<title>SPEED Rad2Solar R6.3 PNG </title>
+
+<script type="x-shader/x-vertex" id="vertexshader">
+
+varying vec2 vUv;
+
+void main()
+{
+  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+  vUv = uv;
+}
+
+	</script>
+
+	<script type="x-shader/x-fragment" id="fragmentshader">
+uniform sampler2D _MainTex;
+uniform vec3 _Color;
+
+varying vec2 vUv;
+
+
+void main()
+{
+	float mask = texture2D( _MainTex, vUv).a;
+	if (mask < 0.01) {
+		discard;
+	}
+	gl_FragColor = vec4(_Color.xyz, mask);
+}
+	</script>
+
+<style>
+/* Copyright 2018 Ladybug Tools authors. MIT License */
+
+	:root {
+		--mnu-color: firebrick;
+		--mnu-back-color: azure;
+		--mnu-width:20rem;
+		--a-back-color-hover: yellow;
+		--but-bg-color: #ddd;
+		--highlight-color: yellow;
+	}
+
+	html { height: 100%; }
+
+	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
+
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #888; }
+
+	button, input[ type=button ] { background-color: var(--but-bg-color ); border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: var( --a-back-color-hover ); color: var( --but-bg-color ) }
+
+	iframe { width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+	#hamburger {
+		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	}
+
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; max-height: 95%; margin: 20px;
+		overflow: auto; padding: 25px 10px 30px 10px; position: fixed; resize: both; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#divMenu {
+		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	}
+
+	/* // anything needed for mobile? Or delete??
+	@media screen and (max-width: 600px) {
+		#divMenu {
+		display: none;
+		}
+	}
+	*/
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div>
+			<a href = "../index.html" target="_top" >repo</a> &raquo;
+			<a href= "./index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
+		</div>
+
+			<p>
+				<button onclick=toggleWireframe(); >toggle wireframe</button><br> <br>
+
+				<button onclick=toggleArrows(); >toggle arrows</button><br> <br>
+
+				<button onclick=togglePNGs(); >toggle pngs</button><br> <br>
+
+				<button onclick=rad.edges.visible=!rad.edges.visible; >toggle edges</button><br> <br>
+			</p>
+
+		<div id=divTitle ></div>
+
+		Multiple .rad, .png * files<br>
+			<input type=file id=inpFiles name="file[]" onchange=openAllFiles(this); accept = '.rad,.png' multiple >
+		</p>
+
+			<p><div id=divData ></div></p>
+
+			<p><div id=divLog ></div></p>
+		<div id = "divContents" >
+
+
+
+			<button title = "Toggle the scene spinning" onclick="controls.autoRotate=!controls.autoRotate;" style=width:100%; >rotation</button>
+			<div id = "divLog" ></div>
+		</div>
+		<div id = "divMenuItems" >
+
+
+		<hr>
+
+		<center title="Hello, world!" onclick="divMenu.scrollTop=0;" style="color:#aaa;cursor:pointer;font-size:1.5rem;" > ❦ </center>
+
+	</div>
+
+	<div id = "hamburger" onclick=toggleNav(); > slide &#9776; </div>
+
+<script src = "rad-viewer.js" ></script>
+
+<script>
+
+/* globals THREE, divTitle, divMenu, hamburger  */
+// jshint esversion: 6
+
+var text = require('text')({
+	font_paths : 'fonts/helvetiker_regular.typeface.json',
+	});
+
+let Arrow;
+let arrow_helper_setup = true;
+
+var materialS = new THREE.MeshStandardMaterial( {
+    color: 0xffffff,
+    emissive: 0xeeeeee,
+  metalness: 1.0,
+  roughness: 0.4,
+} );
+
+var materialF = new THREE.MeshStandardMaterial( {
+    color: 0xff0000,
+    emissive: 0xff0000,
+  metalness: 1.0,
+} );
+
+
+function ArrowHelper(point1, point2, length, color, box) {
+
+	//set up class objects
+	if (arrow_helper_setup) {
+		arrow_helper_setup = false;
+		const _material = new THREE.MeshBasicMaterial ( { color : 0xffffff });
+		const _point = new THREE.Mesh( new THREE.ConeGeometry( 1.618 / 4, 1.618 / 4, 32 ), _material);
+		const _tube = new THREE.Mesh( new THREE.CylinderGeometry( 1.618 / 64, 1.618 / 50, 1.618 , 32 ), _material);
+		const _box = new THREE.Mesh( new THREE.BoxGeometry( 1.618 / 4, 1.618 / 5, 1.618 / 4 ), _material);
+
+		_tube.rotateX(Math.PI * 0.5)
+		_point.rotateX(Math.PI * 0.5)
+		_box.rotateX(Math.PI * 0.5)
+
+		Arrow = new THREE.Object3D();
+		_tube.geometry.translate(0, 1.618 * 0.5,0);
+		_point.geometry.translate(0,1.618 * 1, 0);
+		_box.geometry.translate(0, 1.618 * 1, 0);
+		Arrow.name = 'arrow';
+
+		Arrow.add(_tube);
+		Arrow.add(_point);
+		Arrow.add(_box);
+	}
+
+	let arrow = Arrow.clone();
+	arrow.scale.set(length, length, length);
+
+	const material = arrow.children[0].material.clone();
+	material.color.setHex(color)
+	arrow.children[0].material = material;
+	arrow.children[1].material = material;
+	arrow.children[2].material = material;
+	if ( box ) {
+		arrow.children[1].visible = false;
+		arrow.children[1].visible = false;
+		arrow.children[0].scale.y = 1.618;
+	} else {
+		arrow.children[2].visible = false;
+		arrow.children[2].visible = false;
+	}
+	arrow.lookAt(point1);
+	arrow.position.copy(point2)
+
+	return arrow;
+}
+
+function generate_text ( string, color ) {
+
+	const material_front = materialF.clone();
+	material_front.emissive.set(color);
+
+  	return new text.ExtrudeText({
+	    text : string, size: 0.618, debug : false,
+	    extrude : {bevel : false, steps : 1, amount : .025,
+	    bevelThickness : 0.25,
+	    bevelSize      : .055,
+	    bevelSegments  : 2},
+	    //push_left : 0.1,
+	    //push_up : 0.1,
+
+    	sides : { material : materialS},
+    	front : { material : material_front}
+    })
+}
+
+function AxisHelper(size) {
+	const axis = new THREE.Object3D();
+	axis.scale.set(size, size, size);
+
+	const sphere = new THREE.Mesh(new THREE.SphereGeometry(.0618, 32, 32), new THREE.MeshBasicMaterial({color : 0xffffff}));
+
+
+	const x = new THREE.Vector3(1, 0, 0);
+	const y = new THREE.Vector3(0, 1, 0);
+	const z = new THREE.Vector3(0, 0, 1);
+	const origin = new THREE.Vector3(0, 0, 0);
+
+	axis.add( ArrowHelper( x, origin, 1, 0xff0000 ) );
+	axis.add( ArrowHelper( y, origin, 1, 0x00ff00 ) );
+	axis.add( ArrowHelper( z, origin, 1, 0x0000ff ) );
+
+	const sx = generate_text('X',0xff0000);
+	const sy = generate_text('Y',0x00ff00);
+	const sz = generate_text('Z',0x0000ff);
+
+	sx.position.copy(x);
+	sy.position.copy(y);
+	sz.position.copy(z);
+
+	sx.position.multiplyScalar(2.3);
+	sy.position.multiplyScalar(2.3);
+	sz.position.multiplyScalar(2.3);
+
+	axis.add(sx);
+	axis.add(sy);
+	axis.add(sz);
+
+	axis.add(sphere);
+
+	axis.animate = function(camera) {
+		sx.update(undefined, camera)
+		sy.update(undefined, camera)
+		sz.update(undefined, camera)
+	};
+	animated_objects.push(axis);
+
+	return axis;
+}
+
+
+const urlGitHubSource = '../test-cases/test-case-2018-07-04-';
+const urlGitHubPage = '../test-cases/test-case-2018-07-04-';
+const iconGitHubMark = '<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>';
+
+let meshes;
+let testCase = 2;
+let pngs;
+
+let renderer, camera, controls, scene, animated_objects ,legend, legend_holder;
+var pts;
+
+var geometry, material, mesh, axisHelper;
+
+init();
+animate();
+
+function init() {
+
+	animated_objects = [];
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.sortObjects = true;
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.up.set( 0, 0, 1 );
+	camera.position.set( 100, 100, 100 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+	controls.maxDistance = 800;
+
+	scene = new THREE.Scene();
+	scene.add(camera);
+
+	const spotLight = new THREE.SpotLight()
+	spotLight.position.set(0,0,1);
+
+	scene.add(spotLight);
+
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
+
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+
+	axisHelper = AxisHelper( 7 );
+	scene.add( axisHelper );
+
+	legend_holder = new THREE.Object3D();
+	scene.add(legend_holder);
+
+	fetchGitHubFolderContents( testCase );
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+}
+
+
+function fetchGitHubFolderContents( index ) {
+
+	openFile('../test-cases/test-case-2018-07-04-' + index + '/speedsolar.rad')
+
+	let divMenuItems = document.getElementById('divMenuItems');
+	testCase = index;
+
+	const url = '../test-cases/test-case-2018-07-04-' + index + '.json';
+
+	divMenuItems.innerHTML =
+
+	`<details id = detGallery >
+
+		<summary>Test Case ${ index } - List of Files</summary>
+
+		<div id=divGallery ></div>
+
+	</details>`;
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackGitHubMenu( json ) );
+}
+
+
+
+function callbackGitHubMenu ( files ) {
+
+	let txt = '';
+	pngs = [];
+	for ( let file of files) {
+
+		if ( !file.name.endsWith( '.png' ) ) { continue; }
+
+		if( file.name.includes( 'sw' ) ) { continue; }
+
+		const fileName = encodeURI( file.name );
+
+		txt +=
+
+		`<div style=margin:10px; >
+
+			<a href=${ urlGitHubSource + testCase + '/' + fileName } title="Edit me" >${ iconGitHubMark }</a>
+
+			<a href=#${ fileName } >${ file.name }</a>
+
+			<!-- <a href=${ fileName } title="Link to just this file" >&#x2750;</a> -->
+
+		</div>`;
+
+		pngs.push( file.name );
+	}
+
+	divGallery.innerHTML =
+	`<div style=margin:10px; >${ pngs.length} PNG files found</div>` + txt;
+
+	loadTestCase( testCase );
+
+}
+
+
+function onHashChange() {
+
+	uriDefaultFile = pngs ? pngs[ 0 ] : undefined;
+	if ( !uriDefaultFile ) { alert("no-files-found" ); }
+
+	 url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+	 ulc = url.toLowerCase();
+
+	if ( ulc.endsWith( '.png' ) ) {
+		loadSinglePGFile( url, testCase );
+	}
+
+	url = location.hash.slice( 1 );
+
+	scene.remove( rad.meshes, rad.edges, rad.pointsField );
+	rad.meshes = new THREE.Object3D();
+	rad.edges = new THREE.Object3D();
+
+	rad.requestFile( url )
+}
+
+
+function clear_pngs() {
+	scene.remove( meshes );
+
+	legend_size = new THREE.Vector2();
+
+	if (legend_holder.children.length > 0) {
+		legend_holder.remove(legend_holder.children[0])
+	}
+	console.log(axisHelper)
+	legend_holder.position.set(0,0,5);
+	axisHelper.position.set(0,0,7.5);
+
+	meshes = new THREE.Group();
+	scene.add( meshes );
+
+}
+
+
+function clear_rad() {
+
+	scene.remove( rad.meshes, rad.edges );
+	scene.remove( rad.pointsField );
+
+	rad.meshes = new THREE.Object3D();
+	rad.edges = new THREE.Object3D();
+	rad.opacity = 0.15;
+}
+
+function loadTestCase( index ) {
+
+	clear_pngs();
+
+
+	for ( fileName of pngs ) {
+		if (fileName.includes('legend')) {
+			loadLegend( fileName, index )
+		} else {
+			createTexture( fileName, index );
+		}
+	}
+
+
+}
+
+
+function loadLegend( fileName, index, image ) {
+
+		let texture;
+
+		if ( image ) {
+			var _image = new Image();
+
+			texture = new THREE.Texture(  );
+			texture.image = _image;
+
+			_image.onload = function() {
+				texture.minFilter = THREE.LinearFilter;
+				texture.maxFilter = THREE.LinearFilter;
+				texture.needsUpdate = true;
+			};
+
+			_image.src = image;
+
+		} else {
+			const loader = new THREE.TextureLoader();
+			texture = loader.load ( urlGitHubPage + index + '/' + fileName );
+			texture.minFilter = THREE.LinearFilter;
+			texture.maxFilter = THREE.LinearFilter;
+		}
+
+		const material = new THREE.MeshBasicMaterial( {
+			map: texture,
+			side: THREE.DoubleSide,
+			transparent: true,
+			alphaTest : 0.01
+		} );
+
+		const geometry = new THREE.PlaneBufferGeometry( 10 * 0.8, 25 * 0.8 );
+		//geometry.rotateZ(Math.PI * 0.5);
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.set( 0, 0 , 25 * 0.5 * 0.8  );
+		//meshes.add( mesh );
+		mesh.animate = function(camera) {
+			this.lookAt(camera.position);
+			this.rotation.copy(camera.rotation);
+		};
+		animated_objects.push(mesh);
+		legend = mesh;
+		legend_holder.add(legend)
+}
+
+function createTexture( fileName, index, image ) {
+		//0 xpos
+		//1 ypos
+		//2 zpos
+		//3 xnorm
+		//4 ynorm
+		//5 znorm
+		//6 xVvec
+		//7 yVvec
+		//8 zVvec
+		//9 Usize
+		//10 Vsize
+		let texture;
+
+		if ( image ) {
+			var _image = new Image();
+
+			texture = new THREE.Texture(  );
+			texture.image = _image;
+
+			_image.onload = function() {
+				texture.minFilter = THREE.LinearFilter;
+				texture.maxFilter = THREE.LinearFilter;
+				texture.needsUpdate = true;
+			};
+
+			_image.src = image;
+
+		} else {
+			const loader = new THREE.TextureLoader();
+			texture = loader.load ( urlGitHubPage + index + '/' + fileName );
+			texture.minFilter = THREE.LinearFilter;
+			texture.maxFilter = THREE.LinearFilter;
+		}
+
+
+
+		const items 	= fileName.slice( 0, -4).split( '_' ).map( item => parseFloat( item ) );
+		const center	= new THREE.Vector3().fromArray( items.slice( 0, 3 ) );
+		const normal 	= new THREE.Vector3().fromArray( [ items[ 3 ], items[ 4 ], items[ 5 ] ] ).normalize();
+		const point 	= new THREE.Vector3().fromArray( [ items[ 6 ], items[ 7 ], items[ 8 ] ] ).normalize();
+		const width 	= items[ 9 ];
+		const height 	= items[ 10 ];
+
+
+		legend_holder.position.x = Math.min(legend_holder.position.x, -width * 0.35);
+		legend_holder.position.y = Math.min(legend_holder.position.y, -height * 0.35);
+
+
+		const _scale = Math.min (legend_holder.position.x, legend_holder.position.y);
+
+		axisHelper.position.x = legend_holder.position.x - _scale * 0.1 + 7.5 ;
+		axisHelper.position.y = legend_holder.position.y;
+
+		axisHelper.scale.set(-_scale * 0.1, -_scale * 0.1, -_scale * 0.1);
+
+		meshes.add( ArrowHelper( normal, center, 1, 0x00ff6a ) );
+
+		meshes.add( ArrowHelper( point, center, 1, 0x222222, true ) );
+
+		const material = new THREE.MeshBasicMaterial( { map: texture,
+			side: THREE.FrontSide,
+			transparent: true,
+			alphaTest : 0.01
+		} );
+
+		// custom shader material : all blue, but uses texture alpha value
+	 	const back_material = new THREE.ShaderMaterial({
+			vertexShader:   document.getElementById('vertexshader').textContent,
+			fragmentShader: document.getElementById('fragmentshader').textContent,
+			side: THREE.BackSide,
+			transparent: true,
+			uniforms : {
+				_MainTex: { value: texture },
+				_Color : { value : new THREE.Vector3(0,0,1)}
+			}
+		});
+
+		const geometry = new THREE.PlaneBufferGeometry( width, height );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.name = 'PNG';
+		mesh.position.copy( center );
+
+		normal.add(center)
+		mesh.up = point
+		mesh.lookAt( normal );
+
+		mesh_back = mesh.clone();
+		mesh_back.material = back_material;
+
+		meshes.add( mesh );
+		meshes.add( mesh_back );
+}
+
+	function processFiles( files ){
+
+		clear_pngs();
+		clear_rad();
+
+		let i = files.length;
+
+		while(i--) {
+			if(files[i].type === 'png') {
+				if (files[i].name.includes('legend')) {
+					loadLegend( files[i].name, undefined, files[i].result )
+				} else {
+					createTexture(files[i].name, undefined, files[i].result)
+				}
+			} else {
+				rad.parseRadText( files[i].result );
+			}
+		}
+
+	}
+
+function openAllFiles( inpFile ) {
+		//opens a bunch of files from local folder
+
+		var reader, data;
+		let i = 0;
+
+		const fileObj = inpFile.files;
+		//console.log( 'fileObj', fileObj );
+
+		const len = fileObj.length;
+		const files = [];
+		let j = 0;
+
+		Object.keys( fileObj ).forEach( i => {
+			const file = fileObj[ i ];
+
+			const reader = new FileReader();
+
+			reader.onload = event => {
+
+				files.push( {
+					type : file.name.slice( -4 ) === '.rad' ? 'rad' : 'png',
+					name : file.name,
+					result: event.target.result
+				} )
+
+				if ( ++ j >= len ) {
+					processFiles( files );
+				}
+
+			}
+
+			if (file.name.slice( -4 ) === '.rad') {
+				//RAD
+				reader.readAsText(file);
+			} else {
+				//PNG
+				reader.readAsDataURL(file);
+			}
+			//reader.readAsText(file);
+		});
+
+	}
+
+
+	function openFile( inpFile ) {
+		// loads a .rad file from url
+		var reader, data;
+
+		let request = new Request(inpFile)
+		let onload = function( event ) {
+
+			clear_rad();
+			rad.parseRadText( event );
+		}
+
+		fetch(request)
+			.then(response => response.text())
+			.then(text => {
+				onload(text);
+			});
+	}
+
+
+function toggleNav() {
+
+	const left = 'calc( var( --mnu-width ) - 100px )';
+
+	if ( hamburger.style.left === '' || hamburger.style.left === left ) {
+
+		divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+		hamburger.style.left = '-100px';
+
+	} else {
+
+		divMenu.style.left = 0;
+		hamburger.style.left = left;
+
+	}
+}
+
+	function toggleNav() {
+
+		const left = 'calc( var( --mnu-width ) - 100px )';
+
+		if ( hamburger.style.left === '' || hamburger.style.left === left ) {
+			divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+			hamburger.style.left = '-100px';
+		} else {
+			divMenu.style.left = 0;
+			hamburger.style.left = left;
+		}
+
+	}
+
+	function toggleWireframe() {
+		scene.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.wireframe = !child.material.wireframe;
+			}
+		} );
+	}
+
+	function toggleArrows() {
+		scene.traverse( function ( child ) {
+			if ( child.name == "arrow" ) {
+
+				child.visible = !child.visible;
+
+			}
+		} );
+	}
+
+	function togglePNGs() {
+		scene.traverse( function ( child ) {
+			if ( child.name == "PNG" ) {
+				child.visible = !child.visible;
+			}
+		} );
+	}
+
+	function updateOpacity() {
+		const opacity = parseInt( rngOpacity.value, 10 );
+		outOpacity.value = opacity + '%';
+
+		scene.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.opacity = opacity / 100;
+			}
+		} );
+	}
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
+
+
+function animate() {
+
+	let i = animated_objects.length;
+	while(i--) {
+		animated_objects[i].animate(camera);
+	}
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+
+}
+
+</script>
+</body>
+</html>
