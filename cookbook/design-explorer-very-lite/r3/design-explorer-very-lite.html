@@ -6,7 +6,7 @@
 <meta name=description content="View building performance studies from Honeybeein 3D in your browser" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2018-07-31" >
-<title>Design Explorer Very Lite R2</title>
+<title>Design Explorer Very Lite R3</title>
 <style>
 /* Copyright 2018 Spider authors. MIT License */
 
@@ -34,8 +34,8 @@
 <link id=css rel="stylesheet" href="" type="text/css" >
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r80/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r80/examples/js/controls/OrbitControls.js" ></script>
 <script src=https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js ></script>
 
 
@@ -51,15 +51,23 @@
 		<p>
 			CSV File:<br>
 			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('LittleRedBox.csv',12,1,1,2,3); >LittleRedBox.csv</button>
-			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('AIA%20building.csv',3,0.05,3,4,5); >AIA building.csv</button>
+			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('AIA%20building.csv',10,0.05,3,4,5); >AIA building.csv</button>
 		<p>
-			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('default_onload.csv',1,0.5,3,4,5); >default_onload.csv</button>
+			<button class="btn btn-secondary btn-sm" onclick=fetchFileCsv('default_onload.csv',0.1,0.05,3,4,5); >default_onload.csv</button>
 		</p>
 
 		<p>
+			<a href="http://tt-acm.github.io/DesignExplorer/" target="_blank">Original DesignExplorer</a> -
 			<a href="https://github.com/tt-acm/DesignExplorer/tree/gh-pages/design_explorer_data" target="_blank">Source files</a>
+
 		</p>
 
+		<p>
+
+			<a href="http://www.ladybug.tools/design_explorer_lite/" target="_blank">DesignExplorer Lite</a> -
+
+			<a href="https://github.com/ladybug-tools/design_explorer_lite" target="_blank">Source Files</a>
+		</p>
 		<div id = "divMenuItems" ></div>
 
 		<div id= "divFooter" >
@@ -89,12 +97,12 @@
 // https://github.com/showdownjs/showdown << check for latest rev from time to time 1.8.6 2018-07-02
 // jshint esversion: 6
 
-let object;
+let object3D;
 let count = 0;
 let x = 0, y = 0, z = 0;
 
 let sceneRotation = 1;
-
+let renderer, camera, controls, scene;
 //	location.hash = '../README.md';
 const uriDefaultFile = 'README.md';
 const urlSourceCode = "https://github.com/pushme-pullyou/pushme-pullyou.github.io/tree/master/tootoo-templates/hamburger-css";
@@ -105,8 +113,8 @@ let xDown = null;
 let yDown = null;
 
 
-init();
 initThree();
+init();
 animate();
 
 
@@ -130,7 +138,7 @@ function init() {
 
 function fetchFileCsv( file = 'LittleRedBox.csv', scale = 12, scaleSize = 1, axisX = 1, axisY = 2, axisZ = 3 ) {
 
-	console.log( 'scale', scale );
+	//console.log( 'scale', scale );
 	const url = 'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/' + file;
 
 	const request = new Request( url );
@@ -146,6 +154,7 @@ function fetchFileCsv( file = 'LittleRedBox.csv', scale = 12, scaleSize = 1, axi
 function callbackFileCsv( text, file, scale, scaleSize, axisX, axisY, axisZ ) {
 
 	//console.log( 'text', text );
+	count = 0;
 
 	lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
 	//console.log( 'lines', lines );
@@ -153,28 +162,16 @@ function callbackFileCsv( text, file, scale, scaleSize, axisX, axisY, axisZ ) {
 	keys = lines.shift();
 	//console.log( 'keys', keys );
 
-	txt = '';
-
-	for ( let key of keys ) {
-
-		txt += `${ key } <br>`;
-
-	}
-
-	divMenuItems.innerHTML= txt;
+	divMenuItems.innerHTML= keys.join( '<br>' );
 
 	index = keys.indexOf( 'threeD' );
 
-	scene.remove( object );
 
-	object = new THREE.Group();
+	scene.remove( object3D );
 
-	scene.add( object );
+	object3D = new THREE.Group();
 
-	count = 0;
-	x = 0;
-	y = 0;
-	z = 0;
+	scene.add( object3D );
 
 	for ( let line of lines ) {
 
@@ -202,13 +199,13 @@ function fetchFileJson( url, line, scale, scaleSize, axisX, axisY, axisZ ) {
 }
 
 
+
 function callbackFileJson( json, path, line, scale, scaleSize, axisX, axisY, axisZ ) {
 
-	console.log( 'json', json );
+	//console.log( 'json', json );
 
-	const loader = new THREE.ObjectLoader();
+	loader = new THREE.ObjectLoader();
 
-	//console.log( 'line', line );
 	sceneLoaded = loader.parse( json );
 
 	obj = new THREE.Group();
@@ -225,21 +222,76 @@ function callbackFileJson( json, path, line, scale, scaleSize, axisX, axisY, axi
 	obj.position.set( scale * parseFloat( line[ 1 ] ), scale * parseFloat( line[ 2 ] ), scale * parseFloat( line[ 3 ] ) );
 	count++;
 
-	object.userData = line;
-	object.add( obj );
+	object3D.userData = line;
+	object3D.add( obj );
 
 	if ( count >= lines.length ) {
 
-		bbox = new THREE.Box3().setFromObject( object );
-		object.position.set ( -0.5 * bbox.max.x,  -0.5 * bbox.max.y,  -0.5 * bbox.max.z,)
+		bbox = new THREE.Box3().setFromObject( object3D );
+		object3D.position.set ( -0.5 * bbox.max.x,  -0.5 * bbox.max.y,  -0.5 * bbox.max.z,)
 		//console.log( 'bbox', bbox );
 
 	}
 
+}
+
+
+
+function bbbbbcallbackFileJson( json, path ) {
+
+console.log( 'json', json );
+
+loader = new THREE.ObjectLoader();
+
+sceneLoaded = loader.parse( json );
+//console.log( 'sceneLoaded', sceneLoaded );
+
+const obj = new THREE.Group();
+
+for ( child of sceneLoaded.children ) {
+
+	obj.add( child );
+
+}
+
+length = Math.floor( Math.cbrt( lines.length ) )
+
+if ( count % length === 0 ) {
+
+	x = 0;
+	z++;
+
+} else {
+
+	x++;
+}
+
+if ( count % ( length * length ) === 0 ) {
+
+	x = 0;
+	z = 0;
+	y++;
+
+}
+
+//console.log( 'x', x, 'y', z );
+
+radius = new THREE.Box3().setFromObject ( obj ).getBoundingSphere( new THREE.Sphere() ).radius
+
+obj.position.set( 2 * radius * x, 2 * radius * y, 2 * radius * z );
+count++;
+object3D.add( obj );
+
+if ( count >= lines.length ) {
+
+	bbox = new THREE.Box3().setFromObject( object3D );
+	object3D.position.set ( -0.5 * bbox.max.x,  -0.5 * bbox.max.y,  -0.5 * bbox.max.z,)
+	//console.log( 'bbox', bbox );
 
 }
 
 
+}
 
 
 //////////
@@ -308,7 +360,7 @@ function setTheme( target ) {
 
 	for ( let theme of themesOthers ) {
 
-		//name = Object.keys( theme )[ 0 ];
+		//name = object3D.keys( theme )[ 0 ];
 		//console.log( 'name', name );
 		//console.log( 'link', theme.link );
 		txt += `<button class="theme btn btn-secondary" onclick=updateCss("${ theme.link }"); style="${ theme.name }" >${ theme.name }</button> `;
@@ -449,7 +501,7 @@ function initThree() {
 
 	scene = new THREE.Scene();
 
-		const lightAmbient = new THREE.AmbientLight( 0x444444 );
+	const lightAmbient = new THREE.AmbientLight( 0x444444 );
 	scene.add( lightAmbient );
 
 	const lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
@@ -468,7 +520,7 @@ function initThree() {
 	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
 	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
 
-	const axesHelper = new THREE.AxesHelper( 50 );
+	const axesHelper = new THREE.AxisHelper( 50 );
 	scene.add( axesHelper );
 
 	//const geometry = new THREE.BoxGeometry( 50, 50, 50 );
@@ -495,9 +547,9 @@ function onWindowResize() {
 
 function animate() {
 
-requestAnimationFrame( animate );
-renderer.render( scene, camera );
-controls.update();
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
 
 }
 

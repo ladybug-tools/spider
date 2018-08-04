@@ -24,6 +24,36 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
 
+## Script 8: Design Explorer Very Lite R4
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r4/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [Design Explorer Very Lite R4]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r4/design-explorer-very-lite.html )
+
+* Fetches CSV data from Design Explorer Lite [Sample Project1]( https://github.com/ladybug-tools/design_explorer_lite/tree/master/resources/sample_project_1 )
+* Parse the data into a 3D view
+* All data notmalized into a 100 x 100 x 100 3D space
+* You can select which parameters are displayed on which of the three axes
+* Mouseover any cube to display its parameters and PNG image
+* Select Bootstrap theme
+* Menu slides out of way for operation on a mobile phone
+* Under 700 lines / 18 KB
+
+
+
+## Script 7: Design Explorer Very Lite R3
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r3/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [Design Explorer Very Lite R3]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r3/design-explorer-very-lite.html )
+
+* Mostly broken
+* See 'Issues'regarding default design files
+
+
+
 ## Script 6: Design Explorer Very Lite R2
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r2/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
@@ -54,6 +84,7 @@ Comment 2018-07-28 21:44
 * There's nothing serious here yet, but at the least a proof of concept is in operation: we can load all th JSON files in a single visualization and manipulate the scene at a reasonable pace
 
 
+
 ## Script 5: View Design Explorer Data Three.js files R2
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
@@ -63,6 +94,7 @@ Comment 2018-07-28 21:44
 
 A second pass at loading the JSON files into Three.js
 * Some of the aspect of loading the Three.js JSON have been cleared up
+
 
 
 ## Script 4: View Design Explorer Data Three.js files
@@ -147,10 +179,20 @@ Comments 2018-07-28 13:07
 
 ## To do / wish list
 
-Design Explorer Very Lite R1
-* Sort the JSON objects given X,Y and Z axis, size, color etc
-* Mouse over each JSON object to view its details
-* A Sun, shade and shadows
+* 2018-08-04 ~Theo ~ Add display of colors, sizes, shapes, opacity, shape surrounds
+* 2018-08-04 ~ Theo ~ Add filters
+* 2018-08-04 ~ Theo ~ Add axes labeling and min & max
+* 2018-08-04 ~ Theo ~ Add better heads-up display and mouseover interaction
+* Add Sun, shade and shadows?
+
+
+## Issues
+
+[DefaultData]( https://github.com/tt-acm/DesignExplorer/tree/gh-pages/design_explorer_data/DefaultData )
+* This data set was built with an earlier release of Three.js
+* It does not work with any release after R81
+* The XYZ data is is compressed in one direction and stretched in another, if this file is of interest it will bee a custon script to display nicely
+
 
 ## Links of interest
 
@@ -171,7 +213,16 @@ A light version of design explorer meant to display sliders for the inputs and s
 
 ## Change log
 
+### 2018-08-04 ~ Theo
 
+R4
+* Big update
+
+Done
+
+Design Explorer Very Lite R1
+* Sort the JSON objects given X,Y and Z axis, size, color etc
+* Mouse over each JSON object to view its details
 ### 2018-07-28 ~ Theo
 
 R1

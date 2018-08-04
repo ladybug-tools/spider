@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-06-24" >
+<title></title>
+<style>
+
+
+	:root { --mnu-width: 20rem; font-size: 1em; }
+
+html { height: 100%; margin: 0; }
+
+body { background-color: #ddd; height: 100%; margin: 0; overflow: hidden; }
+
+a:hover, a:focus { background-color: yellow; color: #888; }
+blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
+button.theme { border-width: 1px; margin: 0.3rem !important; min-width:3rem; }
+button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+summary { font-weight: bold; }
+
+#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); /* transition: margin-left .5s; */ position: relative; }
+#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; padding: 1rem; right: 0; }
+
+#divMenu { height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
+	width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+
+#hamburger { cursor: pointer; font-size: 2rem; left: calc( var( --mnu-width ) - 4rem );
+	line-height: 2rem; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			CSV File:
+			<button onclick=fetchFileCsv('LittleRedBox.csv'); >LittleRedBox.csv</button>
+			<button onclick=fetchFileCsv('AIA%20building.csv'); >AIA building.csv</button>
+			<button onclick=fetchFileCsv('default_onload.csv'); >default_onload.csv</button>
+			<a href="https://github.com/tt-acm/DesignExplorer/tree/gh-pages/design_explorer_data" target="_blank">Source files</a>
+		</p>
+
+		<p>
+			<button onclick="controls.autoRotate = !controls.autoRotate" >rotation</button>
+		</p>
+
+		<p id=divMenuItems ></p>
+
+
+		<div id = "divLog" ></div>
+
+	</div>
+
+	<div id = "divContainer" ></div>
+
+<script>
+
+/* globals THREE, divTitle, divMenu, hamburger  */
+// jshint esversion: 6
+
+let object;
+let count = 0;
+let x = 0, y = 0, z = 0;
+
+let sceneRotation = 1;
+let renderer, camera, controls, scene;
+
+//initThree();
+init();
+animate();
+
+
+
+function init() {
+
+	const title = location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+	//const title = document.title;
+
+	divTitle.innerHTML =
+	`<h1>
+		<a href="" >${title}</a>
+	</h1>`;
+
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
+	camera.position.set( - 100, 100, 100 );
+	//camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+
+	scene = new THREE.Scene();
+
+	const lightAmbient = new THREE.AmbientLight( 0x444444 );
+	scene.add( lightAmbient );
+
+	const lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+	lightDirectional.shadow.mapSize.width = 2048;  // default 512
+	lightDirectional.shadow.mapSize.height = 2048;
+	lightDirectional.castShadow = true;
+	scene.add( lightDirectional );
+
+	const lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+	lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+	camera.add( lightPoint );
+	scene.add( camera );
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	const material = new THREE.MeshNormalMaterial();
+	const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+
+
+	fetchFileCsv();
+
+}
+
+
+function fetchFileCsv( file = 'LittleRedBox.csv' ) {
+
+	const url = 'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/' + file;
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.text() )
+		.then( text => callbackFileCsv( text, file ) );
+
+}
+
+
+function callbackFileCsv( text, file) {
+
+	//console.log( 'text', text );
+
+	count = 0;
+
+	lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
+	//console.log( 'lines', lines );
+
+	keys = lines.shift();
+	//console.log( 'keys', keys );
+
+	divMenuItems.innerHTML= keys.join( '<br>' );
+
+	index = keys.indexOf( 'threeD' );
+
+	scene.remove( object );
+
+	object = new THREE.Group();
+
+	scene.add( object );
+
+	for ( let line of lines ) {
+
+		//console.log( 'line', line );
+
+		url = line[ index ];
+		//console.log( 'url', url );
+
+		fetchFileJson( url );
+
+	}
+
+}
+
+
+function fetchFileJson( url ) {
+
+	//const url = 'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/';
+	//console.log( '', path );
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackFileJson( json, url ) );
+
+}
+
+
+function callbackFileJson( json, path ) {
+
+	//console.log( 'json', json );
+
+	const loader = new THREE.ObjectLoader();
+
+	sceneLoaded = loader.parse( json );
+	//console.log( 'sceneLoaded', sceneLoaded );
+
+	obj = new THREE.Group();
+
+	for ( child of sceneLoaded.children ) {
+
+		obj.add( child );
+
+	}
+
+	length = Math.floor( Math.cbrt( lines.length ) )
+
+	if ( count % length === 0 ) {
+
+		x = 0;
+		z++;
+
+	} else {
+
+		x++;
+	}
+
+	if ( count % ( length * length ) === 0 ) {
+
+		x = 0;
+		z = 0;
+		y++;
+
+	}
+
+	//console.log( 'x', x, 'y', z );
+
+	radius = new THREE.Box3().setFromObject ( obj ).getBoundingSphere( new THREE.Sphere() ).radius
+
+	obj.position.set( 2 * radius * x, 2 * radius * y, 2 * radius * z );
+	count++;
+	object.add( obj );
+
+	if ( count >= lines.length ) {
+
+		bbox = new THREE.Box3().setFromObject( object );
+		object.position.set ( -0.5 * bbox.max.x,  -0.5 * bbox.max.y,  -0.5 * bbox.max.z,)
+		//console.log( 'bbox', bbox );
+
+	}
+
+
+}
+
+
+
+//////////
+
+function initThree() {
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( divContainer.clientWidth, divContainer.clientHeight );
+	divContainer.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, divContainer.clientWidth/divContainer.clientHeight, 1, 1000 );
+	camera.up.set( 0, 0, 1 );
+	camera.position.set( 100, 100, 100 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+	controls.maxDistance = 800;
+
+	scene = new THREE.Scene();
+
+	const lightAmbient = new THREE.AmbientLight( 0x444444 );
+	scene.add( lightAmbient );
+
+	const lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+	lightDirectional.shadow.mapSize.width = 2048;  // default 512
+	lightDirectional.shadow.mapSize.height = 2048;
+	lightDirectional.castShadow = true;
+	scene.add( lightDirectional );
+
+	const lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+	lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+	camera.add( lightPoint );
+	scene.add( camera );
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+
+	const axesHelper = new THREE.AxesHelper( 50 );
+	scene.add( axesHelper );
+
+	const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	const material = new THREE.MeshNormalMaterial();
+	const mesh = new THREE.Mesh( geometry, material );
+	scene.add( mesh );
+
+}
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+	scene.rotation.z += sceneRotation / 1000;
+
+}
+
+</script>
+</body>
+</html>
