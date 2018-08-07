@@ -179,6 +179,7 @@ Comments 2018-07-28 13:07
 
 ## To do / wish list
 
+* 2018-08-04 ~ Theo ~ derive axes selection item directly from the'out' items in the CSV file
 * 2018-08-04 ~Theo ~ Add display of colors, sizes, shapes, opacity, shape surrounds
 * 2018-08-04 ~ Theo ~ Add filters
 * 2018-08-04 ~ Theo ~ Add axes labeling and min & max
