@@ -3,7 +3,7 @@
 
 // Copyright 2018 Ladybug Tools authors. MIT License
 
-	var REP = { release: "14.1" };
+	var REP = { '14release: "14.1" };
 
 	REP.initRep = function () { // called from bottom of file
 
@@ -46,9 +46,6 @@
 
 			<div id=REPdivCampusBuilding ></div>
 
-			<div id=REPdivConstruction ></div>
-
-
 			<p>
 				<small><i>Need reports on more gbXML elements? <br>
 				<a href="https://github.com/ladybug-tools/spider/issues" >Just shout</a> and they will be made to appear.</i></small>
@@ -90,8 +87,6 @@
 		REP.setGbjsonAttributes( GBX.gbjson.Campus, REPdivCampus, 'Campus' );
 
 		REP.setGbjsonAttributes( GBX.gbjson.Campus.Location, REPdivCampusLocation, 'Campus Location' );
-
-		REP.setGbjsonAttributes( GBX.gbjson.Construction, REPdivConstruction, 'Construction' );
 
 		const mapLink = REP.getGoogleMap();
 
@@ -414,27 +409,7 @@
 
 			if ( obj[ property ] !== null && typeof( obj[ property ] ) === 'object' ) {
 
-				if ( title === 'Construction') {
-
-					//console.log( 'property', obj[ property ] );
-
-					attributes +=
-					`<div>
-						<p class=attributeTitle >${obj[ property ].Name}:</p>`;
-
-					//console.log( 'name', obj[ property ].Name );
-					//console.log( 'layerId', obj[ property ].LayerId  );
-
-					//arr = Array.isArray( obj[ property ].LayerId ) ? obj[ property ].LayerId  : [ obj[ property ].LayerId ];
-
-					for ( layer of Array.from( obj[ property ].LayerId ) ) {
-
-						//console.log( 'layer', layer );
-						attributes += `${ layer.layerIdRef }<br>`;
-					}
-
-					attributes += '</div><br>';
-				}
+				//console.log( 'property', obj );
 
 			} else {
 

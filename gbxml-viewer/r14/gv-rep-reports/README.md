@@ -102,6 +102,13 @@ The intent is that you are not having to switch back and forth between left and 
 
 ## Change Log
 
+### 2018-08-07 ~ Theo
+
+REP14.1
+* First pass at adding gbXML 'Construction' elements
+
+This will be part of the effort to assist gbXML data to go from CAD to analysis programs issue-free with with three clicks or so.
+
 ### 2018-06-19 ~ Theo
 
 * Add gv-rep.html - to help with testing and enhancing
