@@ -31,17 +31,22 @@ The following sections - newest on top - are a show and tell of the adventure in
 
 ### Full Screen: [Design Explorer Very Lite R5]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r5/design-explorer-very-lite.html )
 
+* Widen select elements
+* Add spider icons
+* Add buttons and support for the three original Design Explorer sample projects
+* Axes select option created on-the-fly after loading the CSV files
+* Color added as an option
+* Lights and shading added
+
+Issues
+* Heads-up not displaying as desired
+* Needs labels and legends
+
+***
 
 ## Script 8: Design Explorer Very Lite R4
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r4/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
-* Widen select elements
-* Add spider icons
-* Add buttons and support for the threee orginal Design Explorer sample prjects
-* Axes select option created on-the-fly after loading the CSV files
-* Color added as an option
-* Lights and shading added
 
 ### Full Screen: [Design Explorer Very Lite R4]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r4/design-explorer-very-lite.html )
 
