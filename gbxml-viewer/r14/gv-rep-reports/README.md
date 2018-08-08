@@ -84,6 +84,7 @@ The intent is that you are not having to switch back and forth between left and 
 
 ## Wish list / To Do
 
+* 2018-08-07 ~ Theo ~ display construction type as part of the surface type listings??
 * 2018-03-08 ~ Search for spaces
 * 2018-03-04 ~ Export spaces and storeys as gbJSON or .RAD files etc
 * 2017-12-08 ~ Michal: Is there any chance to almost replicate in storey view - floor plans with space name and number << Theo: probably good to wait until we can save data
@@ -94,6 +95,7 @@ The intent is that you are not having to switch back and forth between left and 
 
 ## Issues
 
+* 2018-08-07 ~ divLog warnings undeletable
 
 
 ## Links of Interest
