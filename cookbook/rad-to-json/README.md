@@ -1,4 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](https://www.ladybug.tools/spider/index.html#cookbook/rad-to-json/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://www.ladybug.tools/spider/index.html#cookbook/rad-to-json/README.md "View file as a web page." ) </span>
 <div><input type=button class="btn btn-secondary btn-sm" onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/cookbook/rad-to-json/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
@@ -13,7 +13,7 @@ Translate Radiance RAD file types into JSON building on [Mostapha's efforts]( ht
 ***
 <iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-json/r1/rad-to-json.html width=100% height=600px >Iframes are not viewable in GitHub source code view<</iframe>
 
-## Full Screen: [RAD to JSON R1]( https://www.ladybug.tools/spider/#cookbook/rad-to-json/r1/rad-to-json.html )
+## Full Screen: [RAD to JSON R1]( https://www.ladybug.tools/spider/cookbook/rad-to-json/r1/rad-to-json.html )
 
 * A first pass at playing with Mostapha's code
 * Mostly an effort to translate the code into Mr.doob coding style so as to match the style of the other scripts in this cookbook
