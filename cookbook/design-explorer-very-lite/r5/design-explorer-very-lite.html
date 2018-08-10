@@ -177,7 +177,7 @@ function init() {
 
 function fetchFileCsv( project ) {
 
-	console.log( 'project', project );
+	//console.log( 'project', project );
 	urlCSV = project[ 0 ];
 	urlImg = project[ 1 ];
 
@@ -201,7 +201,7 @@ function callbackFileCsv( text ) {
 	//console.log( 'lines', lines );
 
 	keys = lines.shift();
-	console.log( 'keys', keys );
+	//console.log( 'keys', keys );
 
 	indexImg = keys.indexOf( keys.find( key => key.startsWith( 'img' ))) ;
 
