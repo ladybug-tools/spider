@@ -123,16 +123,16 @@ function fetchFileJson( path = 'RedBox/5_5_5.json' ) {
 function callbackFileJson( json, path ) {
 
 	jj = json;
-	console.log( 'json', json );
+	//console.log( 'json', json );
 
 	const loader = new THREE.ObjectLoader();
 
 	//sceneLoaded = new THREE.Scene();
 	sceneLoaded = loader.parse( json );
-	console.log( 'sceneLoaded', sceneLoaded );
+	//console.log( 'sceneLoaded', sceneLoaded );
 
 	geo = loader.parseGeometries( json.geometries )
-	console.log( 'geo', geo );
+	//console.log( 'geo', geo );
 
 	//objs = loader.parseObject( json.object )
 	//console.log( 'objs', objs );
