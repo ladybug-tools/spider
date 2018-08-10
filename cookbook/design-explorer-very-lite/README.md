@@ -27,7 +27,7 @@ The following sections - newest on top - are a show and tell of the adventure in
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r6/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [Design Explorer Very Lite R6]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r6/design-explorer-very-lite.html )
+### Full Screen: [Design Explorer Very Lite R6]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r6/design-explorer-very-lite.html )
 
 * Add edges in black to data points
 * Currently selected data point highlights on mouseover heads-up as expected
@@ -46,12 +46,14 @@ The following sections - newest on top - are a show and tell of the adventure in
 * 2018-08-04 ~ Theo ~ Add better heads-up display and mouseover interaction
 * Add Sun, shade and shadows?
 
+
+
 ## Script 9: Design Explorer Very Lite R5
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r5/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
 
-### Full Screen: [Design Explorer Very Lite R5]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r5/design-explorer-very-lite.html )
+### Full Screen: [Design Explorer Very Lite R5]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r5/design-explorer-very-lite.html )
 
 * Widen select elements
 * Add spider icons
