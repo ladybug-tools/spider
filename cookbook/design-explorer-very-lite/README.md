@@ -8,7 +8,6 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 
 
-
 ## Concept
 
 Given these two links
@@ -35,8 +34,17 @@ The following sections - newest on top - are a show and tell of the adventure in
 * Add basic basic axes labels as billboards
 * Add min and max values to axes labels
 * Add basic grid
-* Image appear in left menu
+* Images appear in left menu when there's a mouseover a data point
+* Add button to toggle screen background
+* Add button to toggle rotation
 
+### Wish list items completed
+
+* 2018-08-04 ~ Theo ~ derive axes selection item directly from the 'out' items in the CSV file
+* 2018-08-04 ~Theo ~ Add display of colors, sizes, shapes, opacity, shape surrounds
+* 2018-08-04 ~ Theo ~ Add axes labeling and min & max
+* 2018-08-04 ~ Theo ~ Add better heads-up display and mouseover interaction
+* Add Sun, shade and shadows?
 
 ## Script 9: Design Explorer Very Lite R5
 
@@ -210,14 +218,11 @@ Comments 2018-07-28 13:07
 * So let's look at the JSON files
 
 
+
 ## To do / wish list
 
-* 2018-08-04 ~ Theo ~ derive axes selection item directly from the'out' items in the CSV file
-* 2018-08-04 ~Theo ~ Add display of colors, sizes, shapes, opacity, shape surrounds
 * 2018-08-04 ~ Theo ~ Add filters
-* 2018-08-04 ~ Theo ~ Add axes labeling and min & max
-* 2018-08-04 ~ Theo ~ Add better heads-up display and mouseover interaction
-* Add Sun, shade and shadows?
+* 2018-08-04 ~Theo ~ Add display of sizes, shapes, opacity, shape surrounds
 
 
 ## Issues

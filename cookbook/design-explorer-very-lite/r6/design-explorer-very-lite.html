@@ -14,7 +14,7 @@
 
 	html { height: 100%; margin: 0; }
 
-	body { background-color: #ddd; height: 100%; margin: 0; overflow: hidden; }
+	body { background-color: #ccc; height: 100%; margin: 0; overflow: hidden; }
 
 	a:hover, a:focus { background-color: yellow; color: #888; }
 	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
@@ -24,7 +24,7 @@
 	select { width: 10rem; }
 	summary { font-weight: bold; }
 
-	#divThreeJs { height: 100%; margin: 0 0 0 var( --mnu-width ); /* transition: margin-left .5s; */ position: relative; }
+	#divThreeJs { background-color: #eee; height: 100%; margin: 0 0 0 var( --mnu-width ); /* transition: margin-left .5s; */ position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; padding: 1rem; right: 0; }
 
 	#divMenu { height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
@@ -97,6 +97,17 @@
 				<div id=divBootswatch ></div>
 
 				<div id=divCssOthers ></div>
+
+			</details>
+
+
+			<details open >
+
+				<summary> Display settings </summary>
+
+				<p><button class="btn btn-sm" onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
+
+				<p><button class="btn btn-sm" onclick=controls.autoRotate=!controls.autoRotate; title= 'Stop the spinning!' > Toggle scene rotation </button></p>
 
 			</details>
 
@@ -726,6 +737,21 @@ function initThree() {
 
 
 
+function toggleBackgroundGradient() {
+
+// 2018-06-23
+
+	const col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+	const pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+	const image = divThreeJs.style.backgroundImage;
+
+	divThreeJs.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+		pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+}
+
+
+
 function drawPlacard( text, scale = 0.05, color = Math.floor( Math.random() * 255 ), x = 0, y = 10, z = 0 ) {
 
 // 2018-08-09 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
@@ -798,7 +824,6 @@ function drawPlacard( text, scale = 0.05, color = Math.floor( Math.random() * 25
 		}
 
 }
-
 
 
 
