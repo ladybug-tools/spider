@@ -23,6 +23,20 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
 
+## Script 10 / 2018-08-09: Design Explorer Very Lite R6
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r6/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+
+### Full Screen: [Design Explorer Very Lite R6]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r6/design-explorer-very-lite.html )
+
+* Add edges in black to data points
+* Currently selected data point highlights on mouseover heads-up as expected
+* Add basic basic axes labels as billboards
+* Add min and max values to axes labels
+* Add basic grid
+* Image appear in left menu
+
 
 ## Script 9: Design Explorer Very Lite R5
 

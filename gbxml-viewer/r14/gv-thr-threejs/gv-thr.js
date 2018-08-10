@@ -185,6 +185,7 @@
 
 	THR.drawPlacard = function( text, scale, color, x, y, z ) {
 
+		// add update
 		// 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
 
 		var placard = new THREE.Object3D();
