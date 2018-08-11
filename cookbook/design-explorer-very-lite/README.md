@@ -1,11 +1,10 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](https://www.ladybug.tools/spider/index.html#cookbook/design-explorer-very-lite/README.md "View file as a web page." ) </span>
-<div><input type=button class=:btn button-secondary btn-sm" onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/cookbook/design-explorer-very-lite/README.md'";
+<div><input type=button class="btn btn-secondary btn-sm" onclick="window.location.href='https://github.com/ladybug-tools/spider/blob/master/cookbook/design-explorer-very-lite/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 <br>
 
 # [Design Explorer Very Lite Read Me]( #/cookbook/design-explorer-very-lite/README.md )
-
 
 
 ## Concept
@@ -16,11 +15,34 @@ Given these two links
 
 Is it possible to replicate much of the functionality of these two sets of scripts in a way that
 * Is built on easy-peasy code with few dependencies?
-* Does 80% or so of what these apps do>
+* Can do 80% or so of what these apps do?
 * Exposes interesting new ways of visualizing the data?
+* All values derived from CSV set by algorithm - no human intervention needed to get going
 
 
-The following sections - newest on top - are a show and tell of the adventure in responding to the above challenge.
+The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
+
+## Script 11 / 2018-08-10: Design Explorer Very Lite R7
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r7/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+
+### Full Screen: [Design Explorer Very Lite R7]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r7/design-explorer-very-lite.html )
+
+* Add more details element to menu
+* Add shapes with cylinders of differing counts of radius segments
+* Add varying sizes
+* Add first pass at setting filters: creates filters based on any text-only fields in the CSV file
+* Add buttons to trigger the filters
+* Add button to set all data points visible
+
+
+### Wish list items completed / underway
+
+* 2018-08-04 ~ Theo ~ Add filters
+* 2018-08-04 ~Theo ~ Add display of sizes, shapes, opacity, shape surrounds
+
+
+***
 
 ## Script 10 / 2018-08-09: Design Explorer Very Lite R6
 
@@ -46,7 +68,7 @@ The following sections - newest on top - are a show and tell of the adventure in
 * 2018-08-04 ~ Theo ~ Add better heads-up display and mouseover interaction
 * Add Sun, shade and shadows?
 
-
+***
 
 ## Script 9: Design Explorer Very Lite R5
 
@@ -132,8 +154,9 @@ Comment 2018-07-28 21:44
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 
-
+<!--
 ### Full Screen: [View Design Explorer Data Three.js files R2]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html )
+-->
 
 A second pass at loading the JSON files into Three.js
 * Some of the aspect of loading the Three.js JSON have been cleared up
@@ -142,8 +165,9 @@ A second pass at loading the JSON files into Three.js
 
 ## Script 4: View Design Explorer Data Three.js files
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [View Design Explorer Data Three.js files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-three.js.html )
 
@@ -185,8 +209,9 @@ Comments 2018-07-28 16:21
 
 ## Script 2: View Design Explorer Data JSON files
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [View Design Explorer Data JSON files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-json-files.html )
 
@@ -223,8 +248,14 @@ Comments 2018-07-28 13:07
 
 ## To do / wish list
 
-* 2018-08-04 ~ Theo ~ Add filters
-* 2018-08-04 ~Theo ~ Add display of sizes, shapes, opacity, shape surrounds
+* 2018-08-10 ~ Theo ~ Add add/remove CSS classes to buttons to indicate states
+* 2018-08-10 ~ Theo ~ Add Pareto filters
+* 2018-08-10 ~ Theo ~ Add numeric filters with min/max sliders
+* 2018-08-10 ~ Theo ~ Add toggle visibility of meshes but not edges
+* 2018-08-10 ~ Theo ~ Add cumulative filters
+* 2018-08-10 ~ Theo ~ Apply Ladybug Tools standard colors
+* 2018-08-10 ~ Theo ~ legends for everything
+
 
 
 ## Issues
@@ -251,6 +282,11 @@ A light version of design explorer meant to display sliders for the inputs and s
 
 * https://github.com/ladybug-tools/design_explorer_lite
 
+
+### Pareto Filters
+
+* https://en.wikipedia.org/wiki/Pareto_chart
+* https://en.wikipedia.org/wiki/Pareto_analysis
 
 ## Change log
 
