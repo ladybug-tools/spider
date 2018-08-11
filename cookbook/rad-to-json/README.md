@@ -32,7 +32,8 @@ Translate Radiance RAD file types into JSON building on [Mostapha's efforts]( ht
 
 ## To do / wish list
 
-
+* 2018-08-11 ~ Add a bit of 3D
+* 2018-08-11 ~ Drag and drop files
 * 2018-08-10 ~ Open files in GitHub repos
 
 
