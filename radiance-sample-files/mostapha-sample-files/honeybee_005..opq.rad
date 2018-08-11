@@ -1,0 +1,243 @@
+# Created by Honeybee[+] at 2018-05-15 00:25:00
+# www.ladybug.tools
+
+generic_roof polygon dacd7ee4-28e6_0_0_0
+0 
+0 
+9 1.0 3.0 5.0 0.0 0.0 5.0 1.0 1.0 5.0
+generic_roof polygon dacd7ee4-28e6_0_0_1
+0 
+0 
+12 11.0 1.0 5.0 1.0 1.0 5.0 0.0 0.0 5.0 13.0 0.0 5.0
+generic_roof polygon dacd7ee4-28e6_0_0_2
+0 
+0 
+12 1.0 3.0 5.0 11.0 3.0 5.0 13.0 9.0 5.0 0.0 9.0 5.0
+generic_roof polygon dacd7ee4-28e6_0_0_3
+0 
+0 
+9 0.0 0.0 5.0 1.0 3.0 5.0 0.0 9.0 5.0
+generic_roof polygon dacd7ee4-28e6_0_0_4
+0 
+0 
+9 11.0 3.0 5.0 11.0 1.0 5.0 13.0 0.0 5.0
+generic_roof polygon dacd7ee4-28e6_0_0_5
+0 
+0 
+9 13.0 0.0 5.0 13.0 9.0 5.0 11.0 3.0 5.0
+generic_wall polygon dacd7ee4-28e6_1_0
+0 
+0 
+12 13.0 0.0 0.0 13.0 0.0 5.0 0.0 0.0 5.0 0.0 0.0 0.0
+generic_wall polygon dacd7ee4-28e6_2_0
+0 
+0 
+12 13.0 0.0 0.0 13.0 9.0 0.0 13.0 9.0 5.0 13.0 0.0 5.0
+generic_wall polygon dacd7ee4-28e6_3_0
+0 
+0 
+12 0.0 0.0 5.0 0.0 9.0 5.0 0.0 9.0 0.0 0.0 0.0 0.0
+generic_floor polygon dacd7ee4-28e6_4_0
+0 
+0 
+12 0.0 0.0 0.0 0.0 9.0 0.0 13.0 9.0 0.0 13.0 0.0 0.0
+generic_wall polygon dacd7ee4-28e6_5_0_0
+0 
+0 
+9 12.0 9.0 3.0 13.0 9.0 0.0 8.0 9.0 3.0
+generic_wall polygon dacd7ee4-28e6_5_0_1
+0 
+0 
+9 4.0 9.0 1.0 8.0 9.0 3.0 13.0 9.0 0.0
+generic_wall polygon dacd7ee4-28e6_5_0_2
+0 
+0 
+9 13.0 9.0 5.0 13.0 9.0 0.0 12.0 9.0 3.0
+generic_wall polygon dacd7ee4-28e6_5_0_3
+0 
+0 
+9 8.0 9.0 4.0 13.0 9.0 5.0 12.0 9.0 4.0
+generic_wall polygon dacd7ee4-28e6_5_0_4
+0 
+0 
+9 12.0 9.0 3.0 12.0 9.0 4.0 13.0 9.0 5.0
+generic_wall polygon dacd7ee4-28e6_5_0_5
+0 
+0 
+12 0.0 9.0 5.0 13.0 9.0 5.0 8.0 9.0 4.0 4.0 9.0 4.0
+generic_wall polygon dacd7ee4-28e6_5_0_6
+0 
+0 
+9 8.0 9.0 4.0 8.0 9.0 3.0 4.0 9.0 4.0
+generic_wall polygon dacd7ee4-28e6_5_0_7
+0 
+0 
+9 1.0 9.0 1.0 4.0 9.0 1.0 0.0 9.0 0.0
+generic_wall polygon dacd7ee4-28e6_5_0_8
+0 
+0 
+9 13.0 9.0 0.0 0.0 9.0 0.0 4.0 9.0 1.0
+generic_wall polygon dacd7ee4-28e6_5_0_9
+0 
+0 
+12 0.0 9.0 0.0 0.0 9.0 5.0 1.0 9.0 4.0 1.0 9.0 1.0
+generic_wall polygon dacd7ee4-28e6_5_0_10
+0 
+0 
+9 0.0 9.0 5.0 4.0 9.0 4.0 1.0 9.0 4.0
+generic_wall polygon dacd7ee4-28e6_5_0_11
+0 
+0 
+9 8.0 9.0 3.0 4.0 9.0 1.0 4.0 9.0 4.0
+generic_roof polygon dacd7ee4-28e6_6_0_0
+0 
+0 
+9 -7.0 1.0 3.0 -8.0 -4.0 3.0 -7.0 -2.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_1
+0 
+0 
+12 -8.0 -4.0 3.0 0.0 -4.0 3.0 -1.0 -2.0 3.0 -7.0 -2.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_2
+0 
+0 
+12 -7.0 1.0 3.0 -1.0 1.0 3.0 -2.0 5.0 3.0 -6.0 5.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_3
+0 
+0 
+9 -8.0 9.0 3.0 -8.0 -4.0 3.0 -7.0 1.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_4
+0 
+0 
+9 -6.0 8.0 3.0 -8.0 9.0 3.0 -6.0 5.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_5
+0 
+0 
+9 -7.0 1.0 3.0 -6.0 5.0 3.0 -8.0 9.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_6
+0 
+0 
+12 -6.0 8.0 3.0 -2.0 8.0 3.0 0.0 9.0 3.0 -8.0 9.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_7
+0 
+0 
+9 -1.0 1.0 3.0 -1.0 -2.0 3.0 0.0 -4.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_8
+0 
+0 
+9 0.0 9.0 3.0 -1.0 1.0 3.0 0.0 -4.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_9
+0 
+0 
+9 -2.0 8.0 3.0 -2.0 5.0 3.0 0.0 9.0 3.0
+generic_roof polygon dacd7ee4-28e6_6_0_10
+0 
+0 
+9 -1.0 1.0 3.0 0.0 9.0 3.0 -2.0 5.0 3.0
+generic_floor polygon dacd7ee4-28e6_7_0
+0 
+0 
+12 -8.0 -4.0 0.0 -8.0 9.0 0.0 0.0 9.0 0.0 0.0 -4.0 0.0
+generic_wall polygon dacd7ee4-28e6_8_0
+0 
+0 
+12 -8.0 -4.0 3.0 -8.0 9.0 3.0 -8.0 9.0 0.0 -8.0 -4.0 0.0
+generic_wall polygon dacd7ee4-28e6_9_0_0
+0 
+0 
+9 -1.0 9.0 2.0 0.0 9.0 0.0 -1.0 9.0 1.0
+generic_wall polygon dacd7ee4-28e6_9_0_1
+0 
+0 
+12 0.0 9.0 0.0 -8.0 9.0 0.0 -7.0 9.0 1.0 -1.0 9.0 1.0
+generic_wall polygon dacd7ee4-28e6_9_0_2
+0 
+0 
+12 -1.0 9.0 2.0 -7.0 9.0 2.0 -8.0 9.0 3.0 0.0 9.0 3.0
+generic_wall polygon dacd7ee4-28e6_9_0_3
+0 
+0 
+9 0.0 9.0 0.0 -1.0 9.0 2.0 0.0 9.0 3.0
+generic_wall polygon dacd7ee4-28e6_9_0_4
+0 
+0 
+9 -7.0 9.0 2.0 -7.0 9.0 1.0 -8.0 9.0 0.0
+generic_wall polygon dacd7ee4-28e6_9_0_5
+0 
+0 
+9 -8.0 9.0 0.0 -8.0 9.0 3.0 -7.0 9.0 2.0
+generic_wall polygon dacd7ee4-28e6_10_0
+0 
+0 
+12 0.0 -4.0 0.0 0.0 9.0 0.0 0.0 9.0 3.0 0.0 -4.0 3.0
+generic_wall polygon dacd7ee4-28e6_11_0_0
+0 
+0 
+9 -7.0 -4.0 2.0 -8.0 -4.0 0.0 -7.0 -4.0 1.0
+generic_wall polygon dacd7ee4-28e6_11_0_1
+0 
+0 
+12 -8.0 -4.0 0.0 0.0 -4.0 0.0 -1.0 -4.0 1.0 -7.0 -4.0 1.0
+generic_wall polygon dacd7ee4-28e6_11_0_2
+0 
+0 
+12 -7.0 -4.0 2.0 -1.0 -4.0 2.0 0.0 -4.0 3.0 -8.0 -4.0 3.0
+generic_wall polygon dacd7ee4-28e6_11_0_3
+0 
+0 
+9 -8.0 -4.0 0.0 -7.0 -4.0 2.0 -8.0 -4.0 3.0
+generic_wall polygon dacd7ee4-28e6_11_0_4
+0 
+0 
+9 -1.0 -4.0 2.0 -1.0 -4.0 1.0 0.0 -4.0 0.0
+generic_wall polygon dacd7ee4-28e6_11_0_5
+0 
+0 
+9 0.0 -4.0 0.0 0.0 -4.0 3.0 -1.0 -4.0 2.0
+generic_wall polygon 4a31c17e-ba99_0_0
+0 
+0 
+12 9.0 -7.0 0.0 9.0 -7.0 15.0 3.0 -7.0 15.0 3.0 -7.0 0.0
+generic_wall polygon 4a31c17e-ba99_1_0
+0 
+0 
+12 9.0 -7.0 0.0 9.0 -1.0 0.0 9.0 -1.0 15.0 9.0 -7.0 15.0
+generic_wall polygon 4a31c17e-ba99_2_0
+0 
+0 
+12 9.0 -1.0 0.0 3.0 -1.0 0.0 3.0 -1.0 15.0 9.0 -1.0 15.0
+generic_wall polygon 4a31c17e-ba99_3_0
+0 
+0 
+12 3.0 -7.0 15.0 3.0 -1.0 15.0 3.0 -1.0 0.0 3.0 -7.0 0.0
+generic_floor polygon 4a31c17e-ba99_4_0
+0 
+0 
+12 3.0 -7.0 0.0 3.0 -1.0 0.0 9.0 -1.0 0.0 9.0 -7.0 0.0
+generic_roof polygon 4a31c17e-ba99_5_0
+0 
+0 
+12 9.0 -7.0 15.0 9.0 -1.0 15.0 3.0 -1.0 15.0 3.0 -7.0 15.0
+generic_wall polygon 4a31c17e-ba99_6_0
+0 
+0 
+12 8.0 13.0 0.0 8.0 13.0 4.0 -8.0 13.0 4.0 -8.0 13.0 0.0
+generic_wall polygon 4a31c17e-ba99_7_0
+0 
+0 
+12 8.0 13.0 0.0 8.0 20.0 0.0 8.0 20.0 4.0 8.0 13.0 4.0
+generic_wall polygon 4a31c17e-ba99_8_0
+0 
+0 
+12 8.0 20.0 0.0 -8.0 20.0 0.0 -8.0 20.0 4.0 8.0 20.0 4.0
+generic_wall polygon 4a31c17e-ba99_9_0
+0 
+0 
+12 -8.0 13.0 4.0 -8.0 20.0 4.0 -8.0 20.0 0.0 -8.0 13.0 0.0
+generic_floor polygon 4a31c17e-ba99_10_0
+0 
+0 
+12 -8.0 13.0 0.0 -8.0 20.0 0.0 8.0 20.0 0.0 8.0 13.0 0.0
+generic_roof polygon 4a31c17e-ba99_11_0
+0 
+0 
+12 8.0 13.0 4.0 8.0 20.0 4.0 -8.0 20.0 4.0 -8.0 13.0 4.0

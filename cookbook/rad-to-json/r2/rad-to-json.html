@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Translate Radiance RAD file types into JSON" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-08-10" >
+<title>RAD to JSON R2</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	#divJSON, #divRadiance { border: 1px solid #aaa; height: 300px; overflow: auto; resize: both; width: 800px; }
+
+</style>
+</head>
+<body>
+	<script src=rad-to-json.js ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>Load JSON: <input type=file id=inpOpenFile onchange=inpOpenFiles(this.files); multiple accept=".rad,.mat" ></p>
+
+
+	</div>
+
+	<div id=divLog ></div>
+
+	<p>JSON</p>
+
+	<div id=divJSON ></div>
+
+	<p>Radiance data</p>
+	<div id =divRadiance ></div>
+
+<script>
+
+init();
+
+function init() {
+
+	//const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+	const title = document.title;
+
+	divTitle.innerHTML =
+	`
+		<h1><a href="" >${title}</a></h1>
+		<p>${document.head.querySelector( '[name=description]' ).content }</p>
+	`;
+
+}
+
+</script>
+</body>
+</html>

@@ -11,7 +11,16 @@ value='You are now in a GitHub web page view - Click this button to view this re
 Translate Radiance RAD file types into JSON building on [Mostapha's efforts]( https://github.com/mostaphaRoudsari/rad-to-json )
 
 ***
-<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-json/r1/rad-to-json.html width=100% height=600px >Iframes are not viewable in GitHub source code view<</iframe>
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-json/r2/rad-to-json.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
+
+## Full Screen: [RAD to JSON 2]( https://www.ladybug.tools/spider/cookbook/rad-to-json/r2/rad-to-json.html )
+
+* Opens multiple files
+
+
+***
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-json/r1/rad-to-json.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
 ## Full Screen: [RAD to JSON R1]( https://www.ladybug.tools/spider/cookbook/rad-to-json/r1/rad-to-json.html )
 
@@ -23,7 +32,7 @@ Translate Radiance RAD file types into JSON building on [Mostapha's efforts]( ht
 
 ## To do / wish list
 
-* 2018-08-10 ~ Handle multiple files
+
 * 2018-08-10 ~ Open files in GitHub repos
 
 
@@ -36,8 +45,8 @@ This repo contains the source code Mostapha wrote to translate Radiance RAD file
 Working link:
 * https://rawgit.com/mostaphaRoudsari/rad-to-json/master/index.html
 
-Non-working link:
-* https://mostaphaRoudsari.github.io/rad-to-json/master/index.html
+Working link:
+* https://mostapha.io/rad-to-json/index.html
 
 
 
