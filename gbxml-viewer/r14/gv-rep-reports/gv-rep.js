@@ -420,20 +420,34 @@
 
 					attributes +=
 					`<div>
-						<p class=attributeTitle >${obj[ property ].Name}:</p>`;
+						<p class=attributeTitle >${obj[ property ].id }:</p>`;
 
-					//console.log( 'name', obj[ property ].Name );
-					//console.log( 'layerId', obj[ property ].LayerId  );
+					const construction = obj[ property ];
 
-					//arr = Array.isArray( obj[ property ].LayerId ) ? obj[ property ].LayerId  : [ obj[ property ].LayerId ];
+					keys = Object.keys( construction );
 
-					for ( layer of Array.from( obj[ property ].LayerId ) ) {
+					for ( key of keys ) {
 
-						//console.log( 'layer', layer );
-						attributes += `${ layer.layerIdRef }<br>`;
+						//console.log( key, construction[ key ] );
+
+						if ( key === "LayerId" ) {
+
+							for ( item of Array.from( construction.LayerId ) ) {
+
+								//console.log( 'item', item );
+								attributes += `LayerId: ${ item.layerIdRef }<br>`;
+							}
+
+						} else {
+
+							attributes += `${ key }: ${ construction[ key ] } <br>`;
+
+						}
+
 					}
 
 					attributes += '</div><br>';
+
 				}
 
 			} else {

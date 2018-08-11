@@ -9,15 +9,17 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-Given these two links
+Given these two links:
+
 * https://tt-acm.github.io/DesignExplorer/
 * https://github.com/ladybug-tools/design_explorer_lite
 
-Is it possible to replicate much of the functionality of these two sets of scripts in a way that
+Is it possible to replicate much of the functionality of these two sets of scripts in a way that:
+
 * Is built on easy-peasy code with few dependencies?
 * Can do 80% or so of what these apps do?
 * Exposes interesting new ways of visualizing the data?
-* All values derived from CSV set by algorithm - no human intervention needed to get going
+* All values derived from CSV aare set by algorithm - no human intervention needed to get going?
 
 
 The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
@@ -243,6 +245,8 @@ A first pass at reading the PNG files.
 Comments 2018-07-28 13:07
 * I though the file names might contain useful data, but each folder uses a different naming convention so no significant data can be extracted or inferred from the names without prior knowledge of its schema
 * So let's look at the JSON files
+
+
 
 
 
