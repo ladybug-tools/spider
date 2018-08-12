@@ -325,7 +325,7 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 		divError.innerHTML = '';
 
 		const surfaces = gbjson.Campus.Surface;
-	console.log( 'surfaces', surfaces );
+//console.log( 'surfaces', surfaces );
 
 	//necessary ?
 		scene.remove( rectangleMeshes, rectangleEdges );
@@ -385,7 +385,7 @@ body { font: 11pt monospace; margin: 0; overflow: hidden; }
 			const width = parseFloat( rectangle.Width );
 			const height = parseFloat( rectangle.Height );
 			let azimuth = ( 0 + parseFloat( rectangle.Azimuth ) ) * Math.PI / 180;
-console.log( surface.surfaceType, 'azimuth', azimuth );
+//console.log( surface.surfaceType, 'azimuth', azimuth );
 
 			let tilt = - parseFloat( rectangle.Tilt ) * Math.PI / 180;
 			tilt = azimuth === Math.PI && tilt === 0 ? 1 * Math.PI : tilt;

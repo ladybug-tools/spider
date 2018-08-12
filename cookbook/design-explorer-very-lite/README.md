@@ -24,6 +24,8 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
 
+***
+
 ## Script 11 / 2018-08-10: Design Explorer Very Lite R7
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r7/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
@@ -110,9 +112,9 @@ Issues
 ***
 
 ## Script 7: Design Explorer Very Lite R3
-
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r3/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [Design Explorer Very Lite R3]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r3/design-explorer-very-lite.html )
 
@@ -122,9 +124,9 @@ Issues
 
 
 ## Script 6: Design Explorer Very Lite R2
-
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r2/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [Design Explorer Very Lite R2]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r2/design-explorer-very-lite-r2.html )
 
