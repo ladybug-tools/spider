@@ -37,6 +37,8 @@ Needed to add an extra replace CRLF with " " on line 100 of rad-to-three.js so a
 
 * 2018-08-11 ~ Theo ~ Handle materials
 * 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
+* 2018-08-11 ~ Theo ~ Cleanup name spacing and code
+
 
 
 ## Links of interest
