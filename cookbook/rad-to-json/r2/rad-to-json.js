@@ -37,15 +37,17 @@ function inpOpenFiles( fileObj ) {
 
 
 function parseRadText( radText ) {
+	//console.log( 'radText', radText );
 
 	/* Input multi-line radiance file and return them as an array of JSON objects. */
 	const parseRadRe = /^\s*([^0-9].*(\s*[\d.-]+.*)*)/gm; // how does this work?
 
 	// separate input radiance objects
 	const rawObjects = radText.match( parseRadRe ).filter( word => word.trim().length > 0 && !word.trim().startsWith( '#' ) );
-	//console.log( 'rawObjects', rawObjects );
+	const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );
+	console.log( 'rawObjects2', rawObjects2 );
 
-	const jsonArray = rawObjects.map( line => radObjectToJson( line ) );
+	const jsonArray = rawObjects2.map( line => radObjectToJson( line ) );
 
 	return jsonArray;
 
