@@ -30,7 +30,11 @@ Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://w
 
 Needed to add an extra replace CRLF with " " on line 100 of rad-to-three.js so as to work with all files.
 
-```const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );```
+
+	const parseRadRe = /^\s*([^0-9].*(\s*[\d.-]+.*)*)/gm; // how does this work?
+	const rawObjects = radText.match( parseRadRe ).filter( word => word.trim().length > 0 && !word.trim().startsWith( '#' ) );
+	const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );
+
 
 
 ## To do / wish list
