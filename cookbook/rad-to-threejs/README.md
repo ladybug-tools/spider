@@ -17,7 +17,7 @@ Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://w
 
 ***
 
-<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-threejs.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
 ## Full Screen: [Radiance RAD to Three.js R1]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-three.html )
 
