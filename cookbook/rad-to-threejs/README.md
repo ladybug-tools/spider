@@ -12,14 +12,16 @@ Translate Radiance RAD file types into Three.js views - all building on [Mostaph
 
 See also: Radiance [RAD to JSON Read Me]( #cookbook/rad-to-json/README.md )
 
+Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://www.ladybug.tools/spider/#rad-viewer/README.md )
+
 
 ***
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-threejs.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
-## Full Screen: [RAD to Three.js R1]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-three.html )
+## Full Screen: [Radiance RAD to Three.js R1]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-three.html )
 
-* A first pass at playing with Mostapha's code wiyh Three.js
+* A first pass at playing with Mostapha's code with Three.js
 * Mostly working with the sample Radiance files
 	* Not yet set up for files, say, over a megabyte is size
 * No materials or colors yet / Uses Three,js 'Normal' material
@@ -32,6 +34,9 @@ Needed to add an extra replace CRLF with " " on line 100 of rad-to-three.js so a
 
 
 ## To do / wish list
+
+* 2018-08-11 ~ Theo ~ Handle materials
+* 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
 
 
 ## Links of interest
