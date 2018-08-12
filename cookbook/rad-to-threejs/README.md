@@ -14,6 +14,23 @@ See also: Radiance [RAD to JSON Read Me]( #cookbook/rad-to-json/README.md )
 
 Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://www.ladybug.tools/spider/#rad-viewer/README.md )
 
+***
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r2/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
+
+## Full Screen: [Radiance RAD to Three.js R2]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r2/rad-to-three.html )
+
+* Display of sample files: sort names and add folder names
+	* Has issues with files in root folder appearing in sub-folders
+* Fix a number of name space issues
+* Add zoom extents on load
+* Add file data details to menu
+* Add Settings details to menu along with associated functions
+* Add first pass at displaying polygon colors
+
+### To do > done
+
+* 2018-08-11 ~ Theo ~ Cleanup name spacing and code
 
 ***
 
@@ -30,7 +47,6 @@ Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://w
 
 Needed to add an extra replace CRLF with " " on line 100 of rad-to-three.js so as to work with all files.
 
-
 	const parseRadRe = /^\s*([^0-9].*(\s*[\d.-]+.*)*)/gm; // how does this work?
 	const rawObjects = radText.match( parseRadRe ).filter( word => word.trim().length > 0 && !word.trim().startsWith( '#' ) );
 	const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );
@@ -41,7 +57,7 @@ Needed to add an extra replace CRLF with " " on line 100 of rad-to-three.js so a
 
 * 2018-08-11 ~ Theo ~ Handle materials
 * 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
-* 2018-08-11 ~ Theo ~ Cleanup name spacing and code
+
 
 
 

@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Radiance RAD files in real-time 3D in your browser using the Three.js JavaScript library" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-08-11" >
-<title>Radiance RAD to Three.js R1</title>
+<meta name = "date" content = "2018-08-12" >
+<title>Radiance RAD to Three.js R2</title>
 <style>
 	/* Copyright 2018 pushMe pullYou authors. MIT License */
 
@@ -17,11 +17,11 @@
 	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
 
-	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 90%; }
 	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
 
-	#divMenu { background-color: #eee; max-height: 95%; margin: 1rem; max-width: 15rem; overflow: auto; padding: 1rem; position: absolute; }
+	#divMenu { background-color: #eee; max-height: 95%; margin: 1rem; max-width: 18rem; overflow: auto; padding: 1rem; position: absolute; }
 
 	#divJSON, #divRadiance { border: 1px solid #aaa; height: 300px; overflow: auto; resize: both; }
 
@@ -44,19 +44,50 @@
 			<div id=divContents ></div>
 
 		</details>
+
 		<p>
 			Load JSON:
-			<input type=file id=inpOpenFile onchange=inpOpenFiles(this.files); multiple accept=".rad,.mat" >
+			<input type=file id=inpOpenFile onchange=rad.inpOpenFiles(this.files); multiple accept=".rad,.mat" >
 		</p>
 
+		<details>
 
-		<div id = "divLog" ></div>
+			<summary>File data</summary>
 
-		<p>JSON</p>
-		<div id=divJSON ></div>
+			<div id = "divLog" ></div>
 
-		<p>Radiance data</p>
-		<div id =divRadiance ></div>
+			<p>JSON</p>
+			<div id=divJSON ></div>
+
+			<p>Radiance data</p>
+			<div id =divRadiance ></div>
+
+		</details>
+
+
+		<details>
+
+			<summary>Settings</summary>
+
+			<p>
+				<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+			</p>
+
+			<p>
+				<button onclick=toggleWireframe(); >wireframe</button>
+
+				<button onclick=rad.edges.visible=!rad.edges.visible; >toggle edges</button>
+
+			</p>
+
+			<div title="building opacity: 0 to 100%" >Opacity
+				<output id=outOpacity class=floatRight >85%</output><br>
+				<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >
+			</div>
+
+			<p><button onclick=rad.zoomObjectBoundingSphere(rad.edges);>zoom all</button></p>
+
+		</details>
 
 	</div>
 
@@ -65,23 +96,25 @@
 /* globals THREE, divTitle, divMenu, hamburger  */
 // jshint esversion: 6
 
+// Remember to update the release number
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/rad-to-threejs/r2/rad-to-three.html";
 
-	//url = 'https://api.github.com/repos/ladybug-tools/spider/git/trees/master?recursive=1';
-	url = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad';
 
-const urlTree = 'https://api.github.com/repos/ladybug-tools/spider/git/trees/master?recursive=1';
-
+const urlGitHubAPITree = 'https://api.github.com/repos/ladybug-tools/spider/git/trees/master?recursive=1';
+const urlDefaultFile = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad';
 const urlGitHubSource = 'https://github.com/ladybug-tools/spider/blob/master/';
 const urlGitHubPage = 'https://rawgit.com/ladybug-tools/spider/master/';
+
 const iconGitHubMark = '<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>';
 
-const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/rad-to-threejs/r1/rad-to-three.html";
 
 let sceneRotation = 1;
-let renderer, camera, controls, scene;
+let axesHelper, renderer, camera, controls, scene;
 
 init();
 animate();
+
+
 
 function init() {
 
@@ -105,7 +138,7 @@ function init() {
 	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
 	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
 
-	const axesHelper = new THREE.AxesHelper( 100 );
+	axesHelper = new THREE.AxesHelper( 100 );
 	scene.add( axesHelper );
 
 	const geometry = new THREE.BoxGeometry( 50, 50, 50 );
@@ -115,41 +148,82 @@ function init() {
 
 	window.addEventListener ( 'hashchange', onHashChange, false );
 
-	if ( !location.hash ) { location.hash = url; } else { onHashChange(); }
+	if ( !location.hash ) { location.hash = urlDefaultFile; } else { onHashChange(); }
 
-	fetchGitHUPApiTree();
+	fetchGitHubApiTree();
 
 }
 
 
 
-function fetchGitHUPApiTree() {
+function fetchGitHubApiTree() {
 
-	const request = new Request( urlTree );
+	// https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-html/examples/fetch/fetch-github-api-tree
+
+	const request = new Request( urlGitHubAPITree );
 
 	fetch( request )
 		.then( response => response.json() )
-		.then( json => callbackGitHubMenu( json ) );
+		.then( json => callbackGitHubApiTree( json ) );
 
 
 }
 
 
 
-function callbackGitHubMenu ( results ) {
+function callbackGitHubApiTree ( results ) {
 
 	//console.log( 'results', results.tree );
 
 	const files = [];
+	const folders = [];
 
 	let txt = '';
 
 	for ( let file of results.tree ) {
 
-		if ( !file.path.endsWith( '.rad' ) || file.path.includes( 'zip-files') || file.path.includes( 'rad-tutorial-files' ) ) { continue; }
+		if ( !file.path.endsWith( '.rad' ) || !file.path.includes( 'radiance-sample-files' ) || file.path.includes( 'zip-files') || file.path.includes( 'rad-tutorial-files' ) ) { continue; }
 
 		files.push( file );
-		const fileName = file.path.split( '/' ).pop();
+
+	}
+
+	files.sort( function(a, b) {
+
+		let nameA = a.path.toUpperCase();
+		let nameB = b.path.toUpperCase();
+
+		if (nameA < nameB) {
+
+			return -1;
+
+		}
+
+		if (nameA > nameB) {
+
+			return 1;
+
+		}
+
+		// names must be equal
+		return 0;
+
+	});
+
+
+	for ( let file of files ) {
+
+		const arrFile = file.path.split( '/' )
+		const fileName = arrFile.pop();
+		const folder = arrFile.pop();
+		//console.log( 'folder', folder );
+
+		if ( folders.indexOf( folder ) === -1 ) {
+
+			folders.push( folder );
+			txt += `<h4 style=margin:0; >${ folder }</h4>`;
+
+		}
 
 		txt +=
 
@@ -157,7 +231,7 @@ function callbackGitHubMenu ( results ) {
 
 			<a href=${ urlGitHubSource + file.path } title="Edit me" >${ iconGitHubMark }</a>
 
-			<a href=#${ urlGitHubPage + file.path } title="${ file.size.toLocaleString() } bytes" >${ fileName}</a>
+			<a href=#${ urlGitHubPage + file.path } onclick=setDivLog(this); title="${ file.size.toLocaleString() } bytes" >${ fileName}</a>
 
 			<a href=${ urlGitHubPage +  file.path  } title="Link to just this file" >&#x2750;</a>
 
@@ -166,7 +240,14 @@ function callbackGitHubMenu ( results ) {
 	}
 
 	//console.log( 'files', files );
-	divContents.innerHTML = txt;
+	divContents.innerHTML = `<p>files: ${ files.length } </p> ${ txt } <hr>`;
+
+
+	setDivLog = function( that ) {
+
+		divLog.innerHTML = `loaded: ${that.innerText} <br> ${that.title}`;
+
+	}
 
 }
 
@@ -188,33 +269,36 @@ function onHashChange() {
 }
 
 
+
 function requestFile( url ) {
 
-	const xhr = new XMLHttpRequest();
+	const xhr = new XMLHttpRequest();  // unlike fetch handles local files
 	xhr.crossOrigin = 'anonymous';
 	xhr.open( 'GET', url, true );
 	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
 	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded ); }; /// or something
-	xhr.onload = callback;
+	xhr.onload = callbackRequestFile;
 	xhr.send( null );
 
 };
 
 
-function callback( xhr ) {
 
-	arrRadJSon = [];
+function callbackRequestFile( xhr ) {
+
+	rad.arrRadJSon = [];
+
 	divRadiance.innerText = '';
 
-	const jsonPart = parseRadText( xhr.target.response );
+	const jsonPart = rad.parseRadText( xhr.target.response );
 
-	arrRadJSon.push( ...jsonPart );
+	rad.arrRadJSon.push( ...jsonPart );
 
-	divJSON.innerText = JSON.stringify( arrRadJSon, undefined, 1 ); // reloads every iteration but does seem to slow things down much ;-)
+	divJSON.innerText = JSON.stringify( rad.arrRadJSon, undefined, 1 ); // reloads every iteration but does seem to slow things down much ;-)
 
 	divRadiance.innerText += xhr.target.response + '\n';
 
-	setThreeJsWindowUpdate();
+	rad.setThreeJsWindowUpdate();
 
 }
 
@@ -236,6 +320,41 @@ function setTitle( target ) {
 	<p>
 		${ document.head.querySelector( '[name=description]' ).content }
 	</p>`;
+
+}
+
+
+
+function toggleWireframe() {
+
+	scene.traverse( function ( child ) {
+
+		if ( child instanceof THREE.Mesh ) {
+
+			child.material.wireframe = !child.material.wireframe;
+
+		}
+
+	} );
+
+}
+
+
+
+function updateOpacity() {
+
+	const opacity = parseInt( rngOpacity.value, 10 );
+	outOpacity.value = opacity + '%';
+
+	scene.traverse( function ( child ) {
+
+		if ( child instanceof THREE.Mesh ) {
+
+			child.material.opacity = opacity / 100;
+
+		}
+
+	} );
 
 }
 
