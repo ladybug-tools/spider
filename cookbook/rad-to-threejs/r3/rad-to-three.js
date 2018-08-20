@@ -256,8 +256,8 @@ rad.drawPolygon = function( polygon ) {
 	}
 
 	rad.meshes.add( mesh );
-/*
-	if ( rad.edges && rad.edges.visible === true ) {
+
+	//if ( rad.edges && rad.edges.visible === true ) {
 
 		const edgesGeometry = new THREE.EdgesGeometry( mesh.geometry );
 		const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x333333 } ) );
@@ -266,8 +266,7 @@ rad.drawPolygon = function( polygon ) {
 
 		rad.edges.add( surfaceEdge );
 
-	}
-	*/
+	//}
 
 };
 
