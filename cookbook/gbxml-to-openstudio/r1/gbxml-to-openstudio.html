@@ -16,7 +16,9 @@
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
 
-	#divSource, #divFixed { border: 1px #888 solid;  height: 300px; overflow: auto;resize: both; }
+	#divSource, #divFixed { border: 1px #888 solid;  height: 300px; overflow: auto; resize: both; }
+	#txtSource, #txtFixed { height: 300px; width: 100%; }
+
 /*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
 
 </style>
@@ -33,25 +35,43 @@
 
 	<div id = "divLog" ></div>
 
-	<div id = "divSource" ></div>
+	<textarea id = "txtSource" ></textarea>
 
-	Fixed:
+	<p>Fixed:</p>
 
-	<div id = "divFixed" ></div>
+	<textarea id = "txtFixed" ></textarea>
+
+	<p><button onclick=saveFile(); >Save File</button></p>
 
 <script>
 
 surfaceTypes = {
 
+	Air: "AIR",
+	Ceiling: "CEILING",
+	InteriorWall: "INTERIOR-WALL",
+	EmbeddedColumn: "",
+	ExposedFloor: "",
 	ExteriorWall: "EXTERIOR-WALL",
+	FreestandingColumn: "",
+	InteriorFloor: "INTERIOR-FLOOR",
+	RaisedFloor: "",
+	Roof: "EXTERIOR-ROOF",
+	Shade: "SHADE",
 	SlabOnGrade: "SLAB-ON-GRADE",
-	Roof: "ROOF"
-
+	UndergroundCeiling: "",
+	UndergroundSlab: "UNDERGROUND-SLAB",
+	UndergroundWall: "",
 }
+
+
+let gbxml;
 
 url ='../revit-one-room.xml';
 
 init();
+
+
 
 function init() {
 
@@ -65,7 +85,6 @@ function init() {
 	`;
 
 	requestGbxmlFile ( url );
-
 
 }
 
@@ -83,6 +102,7 @@ function requestGbxmlFile ( url ) {
 	xhr.onload = callbackGbXML;
 	xhr.send( null );
 
+
 	function onRequestFileProgress( xhr ) {
 
 		const fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
@@ -95,175 +115,198 @@ function requestGbxmlFile ( url ) {
 
 	}
 
+
 	function callbackGbXML ( xhr ) {
 
 		const gbxmlResponseXML =  xhr.target.responseXML;
-		const gbxml = xhr.target.responseXML.documentElement;
+		//console.log( 'gbxmlResponseXML', gbxmlResponseXML );
 
-		//gbJson = getXML2jsobj( gbxml );
-		//console.log( 'gbJson', gbJson);
+		gbxml = xhr.target.responseXML.documentElement;
+		//console.log( 'gbxml', gbxml );
 
-		var parser = new DOMParser();
-		doc = parser.parseFromString(gbxml, "application/xml");
-		console.log( 'doc', doc );
-		//divSource.innerText = JSON.stringify( gbxml, '', 2 )
+		const oSerializer = new XMLSerializer();
+		const sXML = oSerializer.serializeToString( gbxml );
+
+		txtSource.innerText = sXML;
 
 		divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
 
-		//fixGbxml();
+
+		//scanGbxml();
+
+		fixGbxml();
+
 
 	}
 
 }
 
-
-
-// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
-// http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
-// Theo: I have difficulty understanding how this functions
-
-function getXML2jsobj( node ) {
-
-	let data = {};
-
-	function Add( name, value ) {
-
-		if ( data[ name ] ) {
-
-			if ( data[ name ].constructor !== Array ) {
-
-				data[ name ] = [ data[ name ] ];
-
-			}
-
-			data[ name ][ data[ name ].length ] = value;
-
-		} else {
-
-			data[ name ] = value;
-
-		}
-
-	}
-
-	let child, childNode;
-
-	for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
-
-		Add( childNode.name, childNode.value );
-
-	}
-
-	for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
-
-		if ( childNode.nodeType === 1 ) {
-
-			if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
-
-				Add( childNode.nodeName, childNode.firstChild.nodeValue );
-
-			} else { // sub-object
-
-				Add( childNode.nodeName, getXML2jsobj( childNode ) );
-
-			}
-
-		}
-
-	}
-
-	return data;
-
-};
 
 
 function fixGbxml() {
 
+	campus = gbxml.getElementsByTagName( 'Campus' );
 
-	gbJson.Campus.Surface.forEach( item => {
+	surfaces = campus[ 0 ].getElementsByTagName( 'Surface' );
 
-		item.constructionIdRef = surfaceTypes[ item.surfaceType ];
-		console.log( '', item.constructionIdRef );
+	//console.log( 'surfaces', surfaces );
 
-	} );
+	//console.log( 'surfaces.length', surfaces.length );
 
-}
+	txt = '';
 
+	for ( surface of surfaces ) {
 
+		type = surface.getAttribute( 'surfaceType' );
 
+		console.log( 'type', type );
 
-
-function objectToXml( obj ) {
-
-	var xml = '';
-
-	for ( let prop in obj ) {
-
-		if ( !obj.hasOwnProperty( prop ) ) {
-
-			continue;
-
-		}
-
-		if ( obj[ prop ] === undefined ) {
-
-			continue;
-
-		}
-
-		if ( prop === '@attributes' ) { // attributes
-
-	//console.log( obj, 'has attributes', prop );
-
-			for ( var y in obj[ prop ] ) {
-
-	//console.log( 'y', y );
-
-				if ( obj[ prop ].hasOwnProperty( y ) ) {
-	//console.log( 'obj[ prop ]', obj[ prop ] );
-						obj[ prop ].setAttribute( y, obj[ prop ][y]);
-	//console.log( 'attHasProperty', y );
-	//console.log( 'prop', obj[ prop ][ y ] );
-
-				}
-
-			}
-
-			continue;
-
-		}
-
-		xml += '<' + prop + '>';
-
-		if ( typeof obj[ prop ] === 'object' ) {
-
-			xml += '\n' + objectToXml( new Object( obj[ prop ] ) );
-
-		} else {
-
-			xml += obj[prop];
-
-		}
-
-		xml += '<\\' + prop + '>\n';
+		surface.setAttribute( 'constructionIdRef', surfaceTypes[ type ] );
 
 	}
 
-	//console.log( 'xml', xml );
-	divFixed.innerText = xml;
 
-	return xml;
+	const oSerializer = new XMLSerializer();
+	const sXML = oSerializer.serializeToString( gbxml );
+
+	txtFixed.innerText = sXML;
 
 }
 
-/*
 
-s = new XMLSerializer();
-d = document;
-str = s.serializeToString(d);
-console.log( 'str', str );
 
- */
+
+function scanGbxml() {
+
+	campus = gbxml.getElementsByTagName( 'Campus' );
+
+	surfaces = campus[ 0 ].getElementsByTagName( 'Surface' );
+
+	//console.log( 'surfaces', surfaces );
+
+	//console.log( 'surfaces.length', surfaces.length );
+
+	txt = '';
+
+	for ( surface of surfaces ) {
+
+		if ( surface.nodeType == 1) {
+
+			txt += `<br><b> ${ surface.nodeName } </b><br>`;
+
+			//console.log( 'surface', surface );
+
+			//console.log( 'attributes', surface.attributes[ 'surfaceType' ].nodeValue );
+
+			for ( attribute of surface.attributes ) {
+
+				txt += `* ${ attribute.nodeName } : ${ attribute.nodeValue } <br>`;
+
+			}
+
+			txt += `<br>attributes<br>`;
+
+			for ( node of surface.childNodes ) {
+
+				if ( node.nodeType === 1  ) {
+
+					for ( attribute of node.attributes ) {
+
+						//console.log( 'attribute', attribute );
+						txt += `${ node.nodeName } <br>`;
+						if ( attribute.nodeName ) {
+
+							txt += `* ${ attribute.nodeName } = ${ attribute.nodeValue } <br>`;
+
+						}
+
+					}
+
+					txt += `<br>text nodes<br>`;
+
+					for ( textNode of node.childNodes) {
+
+						if ( textNode.nodeType === 3 && textNode.nodeValue.replace(/^\s+|\s+$/g, '' ) ){
+
+							//console.log( 'textNode val', textNode, textNode.nodeValue );
+
+							txt += `${ node.nodeName } <br>`;
+							txt += `* ${ textNode.nodeValue.length } = ${ textNode.nodeValue } <br>`;
+
+						}
+
+					}
+
+					//console.log( 'node', node);
+
+				} else {
+
+					//console.log( 'node.nodeType', node.nodeType );
+					//console.log( 'node', node );
+
+				}
+
+
+
+			}
+
+
+
+		}
+
+	}
+
+	txtFixed.innerHTML = txt;
+}
+
+
+
+
+function saveFile() {
+
+	var blob = new Blob( [ txtFixed.value ] );
+	var a = document.body.appendChild( document.createElement( 'a' ) );
+	a.href = window.URL.createObjectURL( blob );
+	a.download = 'hello-world.xml';
+	a.click();
+	//		delete a;
+	a = null;
+
+}
+
+
+
+////
+
+function scanGbxmlRecursive() {
+
+	test = eachNode( gbxml );
+	console.log( 'test', test );
+
+}
+
+
+function eachNode(rootNode, callback){
+
+	if(!callback){
+		var nodes = [];
+		eachNode(rootNode, function(node){
+			nodes.push(node);
+		});
+		return nodes;
+	}
+
+	if(false === callback(rootNode))
+		return false;
+
+	if(rootNode.hasChildNodes()){
+
+		var nodes = rootNode.childNodes;
+		for(var i = 0, l = nodes.length; i < l; ++i)
+			if(false === eachNode(nodes[i], callback))
+				return;
+	}
+}
 
 </script>
 </body>

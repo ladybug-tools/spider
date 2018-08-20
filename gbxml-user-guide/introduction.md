@@ -105,10 +105,6 @@ and a new gbXML is exported.
 
 ## XML Links
 
-* <https://www.w3schools.com/xml/default.asp>
-> * XML stands for eXtensible Markup Language.
-> * XML was designed to store and transport data.
-> * XML was designed to be both human- and machine-readable.
 
 * <https://en.wikipedia.org/wiki/XML>
 > In computing, Extensible Markup Language (XML) is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable. The W3C's XML 1.0 Specification and several other related specifications—all of them free open standards—define XML
@@ -118,6 +114,16 @@ and a new gbXML is exported.
 
 * <https://www.xml.com/>
 > XML.com contains curated information aimed at professionals in fields where XML is widely used.  These include publishing (for example, technical documentation and technical publishing) and healthcare (for example, HL7 and related work).
+
+
+* <https://www.w3schools.com/xml/default.asp>
+> * XML stands for eXtensible Markup Language.
+> * XML was designed to store and transport data.
+> * XML was designed to be both human- and machine-readable.
+
+* <https://developer.mozilla.org/en-US/docs/XML_introduction>
+
+
 
 ***
 
