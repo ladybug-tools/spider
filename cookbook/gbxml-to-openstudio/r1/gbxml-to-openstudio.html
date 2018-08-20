@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-01-19" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divSource, #divFixed { border: 1px #888 solid;  height: 300px; overflow: auto;resize: both; }
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p><button onclick=objectToXml(gbJson); >objectToXml</button></p>
+
+	</div>
+
+	<div id = "divLog" ></div>
+
+	<div id = "divSource" ></div>
+
+	Fixed:
+
+	<div id = "divFixed" ></div>
+
+<script>
+
+surfaceTypes = {
+
+	ExteriorWall: "EXTERIOR-WALL",
+	SlabOnGrade: "SLAB-ON-GRADE",
+	Roof: "ROOF"
+
+}
+
+url ='../revit-one-room.xml';
+
+init();
+
+function init() {
+
+	const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+	//const title = document.title;
+
+	divTitle.innerHTML =
+	`
+		<h1><a href="" >${title}</a></h1>
+		<p>${document.head.querySelector( '[name=description]' ).content }</p>
+	`;
+
+	requestGbxmlFile ( url );
+
+
+}
+
+
+
+function requestGbxmlFile ( url ) {
+
+	timeStart = Date.now();
+
+	const xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	xhr.onprogress = onRequestFileProgress;
+	xhr.onload = callbackGbXML;
+	xhr.send( null );
+
+	function onRequestFileProgress( xhr ) {
+
+		const fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
+
+		divLog.innerHTML =
+		`
+			${fileAttributes.name}<br>
+			bytes loaded: ${xhr.loaded.toLocaleString()} of  ${xhr.total.toLocaleString() }<br>
+		`;
+
+	}
+
+	function callbackGbXML ( xhr ) {
+
+		const gbxmlResponseXML =  xhr.target.responseXML;
+		const gbxml = xhr.target.responseXML.documentElement;
+
+		//gbJson = getXML2jsobj( gbxml );
+		//console.log( 'gbJson', gbJson);
+
+		var parser = new DOMParser();
+		doc = parser.parseFromString(gbxml, "application/xml");
+		console.log( 'doc', doc );
+		//divSource.innerText = JSON.stringify( gbxml, '', 2 )
+
+		divLog.innerHTML += 'time: ' + ( Date.now () - timeStart ) + ' ms<br>';
+
+		//fixGbxml();
+
+	}
+
+}
+
+
+
+// https://www.sitepoint.com/how-to-convert-xml-to-a-javascript-object/
+// http://blogs.sitepointstatic.com/examples/tech/xml2json/index.html
+// Theo: I have difficulty understanding how this functions
+
+function getXML2jsobj( node ) {
+
+	let data = {};
+
+	function Add( name, value ) {
+
+		if ( data[ name ] ) {
+
+			if ( data[ name ].constructor !== Array ) {
+
+				data[ name ] = [ data[ name ] ];
+
+			}
+
+			data[ name ][ data[ name ].length ] = value;
+
+		} else {
+
+			data[ name ] = value;
+
+		}
+
+	}
+
+	let child, childNode;
+
+	for ( child = 0; childNode = node.attributes[ child ]; child++ ) {
+
+		Add( childNode.name, childNode.value );
+
+	}
+
+	for ( child = 0; childNode = node.childNodes[ child ]; child++ ) {
+
+		if ( childNode.nodeType === 1 ) {
+
+			if ( childNode.childNodes.length === 1 && childNode.firstChild.nodeType === 3 ) { // text value
+
+				Add( childNode.nodeName, childNode.firstChild.nodeValue );
+
+			} else { // sub-object
+
+				Add( childNode.nodeName, getXML2jsobj( childNode ) );
+
+			}
+
+		}
+
+	}
+
+	return data;
+
+};
+
+
+function fixGbxml() {
+
+
+	gbJson.Campus.Surface.forEach( item => {
+
+		item.constructionIdRef = surfaceTypes[ item.surfaceType ];
+		console.log( '', item.constructionIdRef );
+
+	} );
+
+}
+
+
+
+
+
+function objectToXml( obj ) {
+
+	var xml = '';
+
+	for ( let prop in obj ) {
+
+		if ( !obj.hasOwnProperty( prop ) ) {
+
+			continue;
+
+		}
+
+		if ( obj[ prop ] === undefined ) {
+
+			continue;
+
+		}
+
+		if ( prop === '@attributes' ) { // attributes
+
+	//console.log( obj, 'has attributes', prop );
+
+			for ( var y in obj[ prop ] ) {
+
+	//console.log( 'y', y );
+
+				if ( obj[ prop ].hasOwnProperty( y ) ) {
+	//console.log( 'obj[ prop ]', obj[ prop ] );
+						obj[ prop ].setAttribute( y, obj[ prop ][y]);
+	//console.log( 'attHasProperty', y );
+	//console.log( 'prop', obj[ prop ][ y ] );
+
+				}
+
+			}
+
+			continue;
+
+		}
+
+		xml += '<' + prop + '>';
+
+		if ( typeof obj[ prop ] === 'object' ) {
+
+			xml += '\n' + objectToXml( new Object( obj[ prop ] ) );
+
+		} else {
+
+			xml += obj[prop];
+
+		}
+
+		xml += '<\\' + prop + '>\n';
+
+	}
+
+	//console.log( 'xml', xml );
+	divFixed.innerText = xml;
+
+	return xml;
+
+}
+
+/*
+
+s = new XMLSerializer();
+d = document;
+str = s.serializeToString(d);
+console.log( 'str', str );
+
+ */
+
+</script>
+</body>
+</html>

@@ -121,7 +121,7 @@ rad.parseRadText = function( radText ) {
 	//console.log( 'rawObjects2', rawObjects2 );
 
 	const jsonArray = rawObjects2.map( line => rad.radObjectToJson( line ) );
-	//console.log( 'jsonArray', jsonArray );
+	console.log( 'jsonArray', jsonArray );
 
 	return jsonArray;
 
@@ -244,8 +244,8 @@ rad.drawPolygon = function( polygon ) {
 		geometry.vertices = points;
 		geometry.faces = [ new THREE.Face3( 2, 1, 0 ) ];
 
-		geometry.computeFaceNormals();
-		geometry.computeVertexNormals();
+		//geometry.computeFaceNormals();
+		//geometry.computeVertexNormals();
 
 		mesh = new THREE.Mesh( geometry, material );
 
@@ -256,7 +256,7 @@ rad.drawPolygon = function( polygon ) {
 	}
 
 	rad.meshes.add( mesh );
-
+/*
 	if ( rad.edges && rad.edges.visible === true ) {
 
 		const edgesGeometry = new THREE.EdgesGeometry( mesh.geometry );
@@ -267,6 +267,7 @@ rad.drawPolygon = function( polygon ) {
 		rad.edges.add( surfaceEdge );
 
 	}
+	*/
 
 };
 

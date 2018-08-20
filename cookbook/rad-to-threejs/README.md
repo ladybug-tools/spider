@@ -20,8 +20,8 @@ Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://w
 Questions that need answering
 
 * Should this code move into its own repo and become a proper issue-driven development project?
-* RAD files may contain spheres, cones and other types of geometry. The current version of this viewer only suppports poloygons. Should support for these geometries be added or are these types infrequently used and their inclusion be a distraction in an AEC environment?
-* RAD files support a variety of materials but gbXML and Honeybee are only likely to used a small number of coloes. Should the viewer be able to parse all Radiance material types or is it sufficient to have a simple lookup table for 50 or so commonly used materials?
+* RAD files may contain spheres, cones and other types of geometry. The current version of this viewer only supports polygons. Should support for these geometries be added or are these types infrequently used and their inclusion be a distraction in an AEC environment?
+* RAD files support a variety of materials but gbXML and Honeybee are only likely to used a small number of colors. Should the viewer be able to parse all Radiance material types or is it sufficient to have a simple lookup table for 50 or so commonly used materials?
 * The current viewer is setup for files up 1 to 2 MB in size. It can be updated to handle files of much larger size but this would come at cost of greater complexity and more safeguards. Would this effort be worthwhile in the near term of not?
 
 
@@ -31,7 +31,7 @@ Questions that need answering
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r3/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
-## Full Screen: [Radiance RAD to Three.js R3]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r3/rad-to-three.html )
+## 2018-08-19: Full Screen: [Radiance RAD to Three.js R3]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r3/rad-to-three.html )
 
 * Display of sample files: improve file listing
 * Simplify mesh creation when vertices form triangles
@@ -78,6 +78,8 @@ Needed to add an extra replace CRLF with " " on line 100 of rad-to-three.js so a
 
 ## To do / wish list
 
+* 2018-08-19 ~ Theo ~ files in the gward samples folders have a variety of spaces and tabs between data elements. We should be able to handle all the permutations successfully
+* 2018-08-19 ~ Theo ~ Load multiple files via location.hash
 * 2018-08-12 ~ Theo ~ Add drag and drop multiple files
 * 2018-08-11 ~ Theo ~ Handle materials
 * 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
