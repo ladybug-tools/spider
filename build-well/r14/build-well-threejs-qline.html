@@ -27,8 +27,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/examples/js/controls/OrbitControls.js" ></script>
 
 	<div id = "divMenu" >
 
@@ -136,9 +136,9 @@
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 3 * size;
-//		controls.enableDamping = true;
-//		controls.dampingFactor = 0.95;
-//		controls.autoRotate = true;
+		controls.enableDamping = true;
+		controls.dampingFactor = 0.95;
+		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -529,7 +529,7 @@
 
 			if ( i < path.length - 1 ) {
 
-// overhangs 
+// overhangs
 				const hgt = campus.storeyHeight; //pt1.distanceTo( pt3 );
 				const pt1 = vertices[ 0 ][ i ];
 				const pt2 = vertices[ 0 ][ i + 1 ];

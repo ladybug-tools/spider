@@ -121,7 +121,7 @@ rad.parseRadText = function( radText ) {
 	//console.log( 'rawObjects2', rawObjects2 );
 
 	const jsonArray = rawObjects2.map( line => rad.radObjectToJson( line ) );
-	console.log( 'jsonArray', jsonArray );
+	//console.log( 'jsonArray', jsonArray );
 
 	return jsonArray;
 

@@ -340,6 +340,7 @@ function setFilter( that, index ){
 }
 
 
+
 function setFilterAll( filter ) {
 
 	object3D.traverse( function ( child ) {
@@ -369,6 +370,8 @@ function setFilterAll( filter ) {
 
 
 }
+
+
 
 // https://www.w3.org/TR/2018/NOTE-wai-aria-practices-1.1-20180726/
 // https://www.w3.org/TR/wai-aria-practices-1.2/examples/slider/multithumb-slider.html
@@ -728,6 +731,7 @@ function initHeadsUp() {
 }
 
 
+
 function onDocumentMouseMove( event ) {
 
 	var raycaster, intersects;
@@ -841,8 +845,6 @@ function onDocumentTouchStart( event ) {
 
 
 
-
-
 //////////
 
 function initThree() {
@@ -887,18 +889,20 @@ function initThree() {
 	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
 	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
 
-
-	const gridHelperXY = new THREE.GridHelper( 100, 10 );
+//
+//
+//
+	const gridHelperXY = new THREE.GridHelper( 100, 10, 0x0000ff, 0x8888ff  );
 	gridHelperXY.rotation.x = Math.PI / 2;
 	gridHelperXY.position.set( 50, 50, 0 );
 	scene.add( gridHelperXY );
 
-	const gridHelperXZ = new THREE.GridHelper( 100, 10 );
+	const gridHelperXZ = new THREE.GridHelper( 100, 10, 0xff0000, 0xff8888 );
 	//gridHelperXY.rotation.x = Math.PI / 2;
 	gridHelperXZ.position.set( 50, 0, 50 );
 	scene.add( gridHelperXZ );
 
-	const gridHelperYZ = new THREE.GridHelper( 100, 10 );
+	const gridHelperYZ = new THREE.GridHelper( 100, 10, 0x00ff00, 0x88ff88 );
 	gridHelperYZ.rotation.z = Math.PI / 2;
 	gridHelperYZ.position.set( 0, 50, 50 );
 	scene.add( gridHelperYZ );

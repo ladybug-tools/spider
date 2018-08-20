@@ -113,34 +113,35 @@
 
 
 
-	function callbackFilesOnGitHub( xhr ) {
+function callbackFilesOnGitHub( xhr ) {
 
-		const response = xhr.target.response;
+	const response = xhr.target.response;
 //console.log( 'response', response );
 
-		json = JSON.parse( response );
+	json = JSON.parse( response );
 //console.log( 'json', json );
 
-		let count = 0;
-		for ( var i = 0; i < json.length; i++ ) {
+	let count = 0;
+	for ( var i = 0; i < json.length; i++ ) {
 
-			if ( json[ i ].type !== 'dir') { continue; }
+		// EPW JSON Basic
+		if ( json[ i ].type !== 'dir' || json[ i ].name === 'archive' || json[ i ].name === 'cookbook-gallery.html' ) { continue; }
 
-			files.push ( json[ i ].name );
+		files.push ( json[ i ].name );
 
-			container.innerHTML +=
+		container.innerHTML +=
 
-				'<div class=ifr id=' + ( count++ ) + ' ></div>' +
-				'<div class=txt ></div>' +
+			'<div class=ifr id=' + ( count++ ) + ' ></div>' +
+			'<div class=txt ></div>' +
 
-			'';
-
-		}
-
-		iframeContainers = document.getElementsByClassName( 'ifr' );
-		texts = document.getElementsByClassName( 'txt' );
+		'';
 
 	}
+
+	iframeContainers = document.getElementsByClassName( 'ifr' );
+	texts = document.getElementsByClassName( 'txt' );
+
+}
 
 
 
