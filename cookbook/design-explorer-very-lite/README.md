@@ -51,6 +51,8 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 ## To do / wish list
 
+* 2018-08-24 ~ Theo ~ reverse the sort order of an axis
+* 2018-08-24 ~ Theo ~ Buttons that toggle other selections off / as with main gbXML Viewer
 * 2018-08-23 ~ Theo ~ Multiple simultaneous adjacent chart space volumes
 	* With, say, each text field generating its own space
 * 2018-08-23 ~ Theo ~ Add direction, three axes of scale, opacity, color of edges as user-selected displays of output variables
@@ -69,8 +71,7 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 * 2018-08-23 ~ Theo ~ Data export of data points selected by filtering
 * 2018-08-23 ~ Theo ~ Explore sets of meshes or other ways of speeding up the generation and display of meshes
 * 2018-08-10 ~ Theo ~ Add Pareto filters - see also Links of Interest section below
-* 2018-08-10 ~ Theo ~ Apply Ladybug Tools standard colors / More standardized system of colors
-* 2018-08-10 ~ Theo ~ Legends for everything
+
 
 ***
 
@@ -83,12 +84,35 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 ***
 
+
+## Script 15 / 2018-08-25: Design Explorer Very Lite R11
+
+<--
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view</iframe>
+-->
+
+
+### Full Screen: [Design Explorer Very Lite R11]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html )
+
+* Add Ladybug Tools color palette
+* Add interactive color legend - highlight selected data points by clicking on the color in the legend
+
+#### to do items now well underway
+
+* 2018-08-10 ~ Theo ~ Apply Ladybug Tools standard colors / More standardized system of colors
+* 2018-08-10 ~ Theo ~ Legends for everything
+
+
+***
+
 ## Script 14 / 2018-08-23: Design Explorer Very Lite R10
 
+<--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r10/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view</iframe>
+-->
+
 
 ### Full Screen: [Design Explorer Very Lite R10]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r10/design-explorer-very-lite.html )
-
 
 * Add HTML5 range slide for minimum and maximum filters
 * Update numeric filters UI
@@ -99,12 +123,26 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 ### Notes
 
-This release begins to feel as if this little project is becoming feature complete for its current stage of development
+This release begins to feel as if this little project is becoming feature complete for its current stage of development. It's not quite yet ready for testing but certainly worth having a look. It will take another two or three releases to get this script shareable with generating too many issues.
 
 For sure there are many small details to tweak. Numeric filters we are looking at you. Nonetheless, the main thrust of the project - view a multitude of multi-variable data items in interactive 3D environment with a user interface that enables a full system of data filters - is all progressing well.
 
 Even more fun is the feeling that the code here is more than just for the Honeybee data. Design Explorer Very Lite looks feels like it may be readily adapted to display many types of complex data sets.
 
+The significant downer is that the demo file first loaded has over five thousand records and takes about fifteen seconds to load.
+
+Compare and contrast with a Google search on '3D scatter plot':
+
+https://www.google.com/search?q=3d+scatter+plots&rlz=1C1GCEA_enUS752US752&tbm=isch&tbo=u&source=univ&sa=X
+
+You will be hard pressed to find a plot that is
+* Interactive 3D
+* Filterable in real time
+* Axes and other output parameters are run-time user-selected
+* Under 20KB of easy peasy JavaScript
+
+
+Seems to be working in Chrome and Firefox
 
 ***
 

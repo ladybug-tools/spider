@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Basic HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2018-08-25" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+/*	#divMenu { left: 0; margin: 20px; max-width: 300px; position: absolute; top: 0; } */
+
+</style>
+</head>
+<body>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+	</div>
+
+	<div id = "divButtons" ></div>
+
+
+	<div id = "divLegend" ></div>
+<script>
+
+
+// Ladybug Color-range repository.
+// A list of default Ladybug colorsets for color range:
+
+colorNames = [
+
+	'original Ladybug',
+	'nuanced Ladybug',
+	'Multi-colored Ladybug',
+	'View Analysis 1',
+	'View Analysis 2 (Red,Green,Blue)',
+	'Sunlight Hours',
+	'ecotect',
+	'thermal Comfort Percentage',
+	'thermal Comfort Colors',
+	'thermal Comfort Colors (UTCI)',
+	'Hot Hours',
+	'Cold Hours',
+	'Shade Benefit/Harm',
+	'thermal Comfort Colors v2 (UTCI)',
+	'Shade Harm',
+	'Shade Benefit',
+	'Black to White',
+	'CFD Colors 1',
+	'CFD Colors 2',
+	'Energy Balance',
+	'THERM',
+	'Cloud Cover'
+
+];
+
+colorRGBs = [
+
+	['(75, 107, 169)', '(115, 147, 202)', '(170, 200, 247)', '(193, 213, 208)', '(245, 239, 103)', '(252, 230, 74)', '(239, 156, 21)', '(234, 123, 0)', '(234, 74, 0)', '(234, 38, 0)'],
+	['(49, 54, 149)', '(69, 117, 180)', '(116, 173, 209)', '(171, 217, 233)', '(224, 243, 248)', '(255, 255, 191)', '(254, 224, 144)', '(253, 174, 97)', '(244, 109, 67)', '(215, 48, 39)', '(165, 0, 38)'],
+	['(4, 25, 145)', '(7, 48, 224)', '(7, 88, 255)', '(1, 232, 255)', '(97, 246, 156)', '(166, 249, 86)', '(254, 244, 1)', '(255, 121, 0)', '(239, 39, 0)', '(138, 17, 0)'],
+	['(255, 20, 147)', '(240, 47, 145)', '(203, 117, 139)', '(160, 196, 133)', '(132, 248, 129)', '(124, 253, 132)', '(96, 239, 160)', '(53, 217, 203)', '(15, 198, 240)', '(0, 191, 255)'],
+	['(0, 13, 255)', '(0, 41, 234)', '(0, 113, 181)', '(0, 194, 122)', '(0, 248, 82)', '(8, 247, 75)', '(64, 191, 58)', '(150, 105, 32)', '(225, 30, 9)', '(255, 0, 0)'],
+	['(55, 55, 55)', '(235, 235, 235)'],
+	['(0, 0, 255)', '(53, 0, 202)', '(107, 0, 148)', '(160, 0, 95)', '(214, 0, 41)', '(255, 12, 0)', '(255, 66, 0)', '(255, 119, 0)', '(255, 173, 0)', '(255, 226, 0)', '(255, 255, 0)'],
+	['(0, 0, 0)', '(110, 0, 153)', '(255, 0, 0)', '(255, 255, 102)', '(255, 255, 255)'],
+	['(0, 136, 255)', '(200, 225, 255)', '(255, 255, 255)', '(255, 230, 230)', '(255, 0, 0)'],
+	['(0, 136, 255)', '(67, 176, 255)', '(134, 215, 255)', '(174, 228, 255)', '(215, 242, 255)', '(255, 255, 255)', '(255, 243, 243)', '(255, 0, 0)'],
+	['(255, 255, 255)', '(255, 0, 0)'],
+	['(255, 255, 255)', '(0, 136, 255)'],
+	['(5, 48, 97)', '(33, 102, 172)', '(67, 147, 195)', '(146, 197, 222)',  '(209, 229, 240)', '(255, 255, 255)', '(253, 219, 199)', '(244, 165, 130)',  '(214, 96, 77)', '(178, 24, 43)', '(103, 0, 31)'],
+	['(5, 48, 97)', '(33, 102, 172)', '(67, 147, 195)', '(146, 197, 222)',  '(209, 229, 240)', '(255, 255, 255)', '(244, 165, 130)', '(178, 24, 43)'],
+	['(255, 255, 255)', '(253, 219, 199)', '(244, 165, 130)', '(214, 96, 77)',  '(178, 24, 43)', '(103, 0, 31)'],
+	['(255, 255, 255)', '(209, 229, 240)', '(146, 197, 222)', '(67, 147, 195)',  '(33, 102, 172)', '(5, 48, 97)'],
+	['(0, 0, 0)', '(255, 255, 255)'],
+	['(0, 16, 120)', '(38, 70, 160)', '(5, 180, 222)', '(16, 180, 109)',  '(59, 183, 35)', '(143, 209, 19)', '(228, 215, 29)', '(246, 147, 17)',  '(243, 74, 0)', '(255, 0, 0)'],
+	['(69, 92, 166)', '(66, 128, 167)', '(62, 176, 168)', '(78, 181, 137)',  '(120, 188, 59)', '(139, 184, 46)', '(197, 157, 54)', '(220, 144, 57)',  '(228, 100, 59)', '(233, 68, 60)'],
+	['(138, 17, 0)', '(239, 39, 0)', '(255, 121, 0)', '(254, 244, 1)',  '(166, 249, 86)', '(97, 246, 156)', '(1, 232, 255)', '(7, 88, 255)',  '(4, 25, 145)', '(128, 102, 64)'],
+	['(0, 0, 0)', '(137, 0, 139)', '(218, 0, 218)', '(196, 0, 255)', '(0, 92, 255)',  '(0, 198, 252)', '(0, 244, 215)', '(0, 220, 101)', '(7, 193, 0)', '(115, 220, 0)',  '(249, 251, 0)', '(254, 178, 0)', '(253, 77, 0)', '(255, 15, 15)',  '(255, 135, 135)', '(255, 255, 255)'],
+	['(0, 251, 255)', '(255, 255, 255)', '(217, 217, 217)', '(83, 114, 115)']
+
+]
+
+const urlSourceCode = "https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-html/examples/ui-ue/legends/";
+
+init();
+
+function init() {
+
+	const title = location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+	//const title = document.title;
+
+	divTitle.innerHTML =
+	`
+		<h1>
+			<a href=${ urlSourceCode } target="_top" title = "Source code on GitHub" >
+				<img src="https://status.github.com/images/invertocat.png" height=18 >
+			</a>
+			<a href="" title = "Click to reload this page" >${ document.title }</a>
+		</h1>
+
+		<p>${document.head.querySelector( '[name=description]' ).content }</p>
+	`;
+
+	setButtons();
+
+}
+
+
+
+function setButtons( target = divButtons ) {
+
+	const txt = colorNames.map( ( name, index ) => `<button onclick="setLegend(${ index });" style="background-color:rgb${ colorRGBs[ index ][ 0 ] };width:15rem;" >${ index } ${ name }</button><br>` );
+
+	target.innerHTML = `${ txt.join( '' ) }`;
+
+}
+
+
+function setLegend( index = 1, target = divLegend ) {
+
+	const colors = colorRGBs[ index ];
+
+	const txt = colors.map( color => `<button onclick="setColor('${ color }');" style="background-color:rgb${ color };width:15rem;" >rgb${ color }</button><br>` );
+
+	target.innerHTML =
+	`
+		<h3>${ name } </h3>
+		<p>${ txt.join( '' ) }</p>
+	`;
+
+}
+
+</script>
+</body>
+</html>

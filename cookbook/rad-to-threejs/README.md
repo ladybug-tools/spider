@@ -8,7 +8,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-Translate Radiance RAD file types into Three.js views - all building on [Mostapha's efforts]( https://github.com/mostaphaRoudsari/rad-to-threejs )
+Translate Radiance RAD file types into Three.js views - all building on [Mostapha's efforts]( https://github.com/mostaphaRoudsari/rad-to-json )
 
 See also:
 * Radiance [RAD to JSON Read Me]( #cookbook/rad-to-json/README.md )
@@ -20,18 +20,49 @@ Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://w
 Questions that need answering
 
 * Should this code move into its own repo and become a proper issue-driven development project?
-* RAD files may contain spheres, cones and other types of geometry. The current version of this viewer only supports polygons. Should support for these geometries be added or are these types infrequently used and their inclusion be a distraction in an AEC environment?
-* RAD files support a variety of materials but gbXML and Honeybee are only likely to used a small number of colors. Should the viewer be able to parse all Radiance material types or is it sufficient to have a simple lookup table for 50 or so commonly used materials?
+* RAD files may contain spheres, cones and other types of geometry. The current version of this viewer only supports polygons. It would be a good thing to decide the priority for the addition of support for other types of geometry. Should support for these geometries be added ASAP or are these types infrequently used and their inclusion might even be a distraction in a AEC domain-specific environment?
+* RAD files support a variety of materials and colors but gbXML and Honeybee are only likely to used a small number of these. It would be a good thing to decide the priority for the addition of support for other types of materials.  Should the viewer be able to parse all Radiance material types ASAP or is it sufficient for the time being to have a simple lookup table for 50 or so commonly used materials?
 * The current viewer is setup for files up 1 to 2 MB in size. It can be updated to handle files of much larger size but this would come at cost of greater complexity and more safeguards. Would this effort be worthwhile in the near term of not?
+
+
+## Features
+
+* Select, load and display Radiance RAD Files
+* Open file or files via
+	* Operating system dialog box - single or multiple files
+	* URL - remote or local - supplied by a [location.hash]( https://developer.mozilla.org/en-US/docs/Web/API/Window/location ) update - single files only for now
+* Select files from lists of links to available online RAD files
+* Display RAD files in interactive 3D with rotate, zoom and pan
+* View RAD file data
+	* Native format
+	* Translated to JSON
+* Basic look-up table supplies a basic polygon color palette
+* Handles openings in surfaces moderately well
+* Update scene rotation, wireframe mode, edges visibility, surfaces opacity
+
+
+
+## To do / wish list
+
+* 2018-08-19 ~ Theo ~ files in the [gward samples folders]( https://github.com/ladybug-tools/spider/tree/master/radiance-sample-files/gjward1 ) have a variety of spaces and tabs between data elements. We should be able to handle all the permutations successfully
+* 2018-08-19 ~ Theo ~ Load multiple files via location.hash
+* 2018-08-12 ~ Theo ~ Add drag and drop multiple files
+* 2018-08-11 ~ Theo ~ Handle materials
+* 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
+
 
 
 ***
 
+The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
 
+
+***
+
+## 2018-08-19: Full Screen: [Radiance RAD to Three.js R3]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r3/rad-to-three.html )
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r3/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
-## 2018-08-19: Full Screen: [Radiance RAD to Three.js R3]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r3/rad-to-three.html )
 
 * Display of sample files: improve file listing
 * Simplify mesh creation when vertices form triangles
@@ -39,9 +70,10 @@ Questions that need answering
 
 ***
 
+## Full Screen: [Radiance RAD to Three.js R2]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r2/rad-to-three.html )
+
 <iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r2/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
-## Full Screen: [Radiance RAD to Three.js R2]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r2/rad-to-three.html )
 
 * Display of sample files: sort names and add folder names
 	* Has issues with files in root folder appearing in sub-folders
@@ -57,9 +89,9 @@ Questions that need answering
 
 ***
 
-<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
-
 ## Full Screen: [Radiance RAD to Three.js R1]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-three.html )
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r1/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
 * A first pass at playing with Mostapha's code with Three.js
 * Mostly working with the sample Radiance files
@@ -75,15 +107,7 @@ Needed to add an extra replace CRLF with " " on line 100 of rad-to-three.js so a
 	const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );
 
 
-
-## To do / wish list
-
-* 2018-08-19 ~ Theo ~ files in the gward samples folders have a variety of spaces and tabs between data elements. We should be able to handle all the permutations successfully
-* 2018-08-19 ~ Theo ~ Load multiple files via location.hash
-* 2018-08-12 ~ Theo ~ Add drag and drop multiple files
-* 2018-08-11 ~ Theo ~ Handle materials
-* 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
-
+***
 
 
 

@@ -113,14 +113,14 @@ rad.parseRadText = function( radText ) {
 
 	//console.log( 'radText', radText );
 	/* Input multi-line radiance file and return them as an array of JSON objects. */
-	const parseRadRe = /^\s*([^0-9].*(\s*[\d.-]+.*)*)/gm; // how does this work?
+	const parseRadRe = /^\s*([^0-9].*(\s*[\d.-]+.*)*)/gm; // how does this work? ;-)
 
 	// separate input radiance objects
 	const rawObjects = radText.match( parseRadRe ).filter( word => word.trim().length > 0 && !word.trim().startsWith( '#' ) );
 	const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );
 	//console.log( 'rawObjects2', rawObjects2 );
 
-	const jsonArray = rawObjects2.map( line => rad.radObjectToJson( line ) );
+	const jsonArray = rawObjects.map( line => rad.radObjectToJson( line ) );
 	//console.log( 'jsonArray', jsonArray );
 
 	return jsonArray;

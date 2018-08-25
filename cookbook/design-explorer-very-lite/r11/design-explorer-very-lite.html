@@ -1,0 +1,1205 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" >
+<meta name=description content="View building performance studies from Honeybee in 3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-08-25" >
+<title>Design Explorer Very Lite R11</title>
+<style>
+/* Copyright 2018 Spider authors. MIT License */
+
+	:root { --mnu-width: 17rem; font-size: 1em; }
+
+	html { height: 100%; margin: 0; }
+
+	body { background-color: #ccc; height: 100%; margin: 0; overflow: hidden; }
+
+	a:hover, a:focus { background-color: yellow; color: #888; }
+	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
+	button.theme { border-width: 1px; margin: 0.3rem !important; min-width:3rem; }
+	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 16px; width: 10px; }
+
+	select { width: 10rem; }
+	span {display:inline-block; width: 50px; }
+	summary { font-weight: bold; }
+
+	#divThreeJs { background-color: #eee; height: 100%; margin: 0 0 0 var( --mnu-width ); /* transition: margin-left .5s; */ position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; padding: 1rem; right: 0; }
+
+	#divMenu { height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
+		 width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#hamburger { cursor: pointer; font-size: 2rem; left: calc( var( --mnu-width ) - 4rem ); line-height: 1.25rem;
+		max-height: 2.5rem; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+	#headsUp { background-color: #ddd; border-radius: 8px; display: block; max-width: 220px; padding: 0 5px 10px 5px; opacity: 0.95;
+		right: 1rem; position: absolute; top: 1rem; z-index: 10; };
+
+</style>
+<link id=css rel="stylesheet" href="" type="text/css" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/examples/js/controls/TrackballControls.js" ></script>
+
+	<div id = "divMenu" class="jumbotron" >
+
+		<div>
+			<a class="breadcrumb-item" href = "../index.html" target="_top" >Ladybug Tools</a>
+			<a class="breadcrumb-item" href= "./index.html" target="_top" style=font-size:24px; >🕸</a>
+		</div>
+
+		<div id = "divTitle" ></div>
+
+		<p id = "pLog" ></p>
+
+		<details open >
+
+			<summary>Examples</summary>
+
+			<p>
+				<button class="btn btn-sm" onclick=fetchFileCsv(sampleProject1); >sample project 1</button> &nbsp;
+
+				<button class="btn btn-sm" onclick=fetchFileCsv(aiaBuilding); >aia building</button> &nbsp;
+			</p>
+			<p>
+				<button class="btn btn-sm" onclick=fetchFileCsv(littleRedBox); >little red box</button> &nbsp;
+
+				<button class="btn btn-sm" onclick=fetchFileCsv(defaultData); >default data</button>
+
+			</p>
+
+		</details>
+
+		<details open >
+
+			<summary>Axes Selections</summary>
+
+			<p>
+				<span>X-axis</span> <select id=selX onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Y-axis</span> <select id=selY onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Z-axis</span> <select id=selZ onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Color</span> <select id=selColor onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Shape</span> <select id=selShape onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Size</span> <select id=selSize onchange=setObjects(); ></select>
+			</p>
+
+			<hr>
+
+		</details>
+
+		<details open >
+
+			<summary>Filters Text</summary>
+
+			<div id = "divFiltersText" ></div>
+
+		</details>
+
+
+		<details open >
+
+			<summary>Filters Numeric</summary>
+
+			<div id = "divFiltersNumeric" ></div>
+
+		</details>
+
+		<details open >
+
+			<summary>Legend</summary>
+
+			<div id = "divLegend" ></div>
+
+		<details>
+
+			<summary>Data sources</summary>
+
+			<p>CSV data from <a href="https://github.com/ladybug-tools/design_explorer_lite/blob/master/resources/sample_project_1/data.csv" target="_blank">sample_project_1/data.csv</a></p>
+			<p>
+				<a href="http://tt-acm.github.io/DesignExplorer/" target="_blank">Original DesignExplorer</a> -
+				<a href="https://github.com/tt-acm/DesignExplorer/tree/gh-pages/design_explorer_data" target="_blank">Source files</a>
+				<br>
+				<a href="http://www.ladybug.tools/design_explorer_lite/" target="_blank">DesignExplorer Lite</a> -
+				<a href="https://github.com/ladybug-tools/design_explorer_lite" target="_blank">Source Files</a>
+			</p>
+
+		</details>
+
+		<div id= "divFooter" >
+
+			<details>
+
+				<summary>Themes</summary>
+
+				<div id=divBootswatch ></div>
+
+				<div id=divCssOthers ></div>
+
+			</details>
+
+
+			<details>
+
+				<summary> Display settings </summary>
+
+				<p><button class="btn btn-sm" onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
+
+				<p><button class="btn btn-sm" onclick=controls.autoRotate=!controls.autoRotate; title= 'Stop the spinning!' > Toggle scene rotation </button></p>
+
+			</details>
+
+			<h3 onclick="divMenu.scrollTop=0;" style="cursor:pointer;text-align:center;" title="go to top of page" > 🕸 </h3>
+
+		</div>
+
+	</div>
+
+	<button id = "hamburger" class = "btn btn-primary" onclick=toggleNav(); > slide &#9776;  </button>
+
+	<div id = "headsUp" >
+
+		<div id = "divData" >
+
+			<p>
+				Item data appears here when is pointer over a data point
+			</p>
+
+			<p>Axis RGB = XYZ directions</p>
+
+			<p>Spacebar|click to stop spinning</p>
+
+			<p>Use one|two|three fingers to rotate|zoom|pan display in 3D. Or left|scroll|right with your pointing device</p>
+
+			<p>Press Control-Shift-J|Command-Option-J to see if the JavaScript console reports any errors</p>
+
+
+
+		</div>
+		<div id = "divImage" ></div>
+	</div>
+
+	<div id = "divThreeJs" ></div>
+
+
+<script>
+
+// https://github.com/showdownjs/showdown << check for latest rev from time to time 1.8.6 2018-07-02
+// jshint esversion: 6
+
+const sampleProject1 = [
+	'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/data.csv',
+	'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/'
+]
+
+const littleRedBox = [
+	'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/LittleRedBox.csv',
+	''
+];
+
+const aiaBuilding = [
+	'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/AIA building.csv',
+	''
+];
+
+const defaultData = [
+	'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/default_onload.csv',
+	''
+];
+
+
+let lines, object3D, placardX, placardY, placardZ;
+
+let urlCsv, urlImg;
+let shapeUnique;
+
+const colors = ['(49,54,149)','(69,117,180)','(116,173,209)','(171,217,233)','(224,243,248)','(255,255,191)','(254,224,144)','(253,174,97)','(244,109,67)','(215,48,39)','(165,0,38)'];
+
+let col = new THREE.Color();
+const opacityVisible = 0.85;
+const opacityVisibleFalse = 0.05;
+
+let sceneRotation = 1;
+let renderer, camera, controls, scene;
+
+//	location.hash = '../README.md';
+//const uriDefaultFile = 'README.md';
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/design-explorer-very-lite";
+
+let themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
+
+let xDown = null;
+let yDown = null;
+
+
+initThree();
+init();
+
+
+
+function init() {
+
+	updateCss( themeName );
+
+	setTitle( divTitle );
+
+	// Swipe events
+	document.addEventListener( 'touchstart', onTouchStart, false );
+	document.addEventListener( 'touchmove', onTouchMove, false );
+
+	fetchFileCsv( sampleProject1 );
+	//fetchFileCsv( littleRedBox );
+
+	setLegend();
+
+	animate();
+
+}
+
+
+
+function fetchFileCsv( project ) {
+
+	//console.log( 'project', project );
+	urlCSV = project[ 0 ];
+	urlImg = project[ 1 ];
+
+	const request = new Request( urlCSV );
+
+	fetch( request )
+		.then( response => response.text() )
+		.then( text => callbackFileCsv( text ) );
+
+}
+
+
+
+function callbackFileCsv( text ) {
+
+	//console.log( 'text', text );
+	//count = 0;
+
+	lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
+	//console.log( 'lines', lines );
+
+	keys = lines.shift();
+	//console.log( 'keys', keys );
+
+	indexImg = keys.indexOf( keys.find( key => key.startsWith( 'img' ))) ;
+
+	setSelect( keys, [ selX, selY, selZ, selColor, selShape, selSize ] );
+
+	setTextFilters( keys, lines );
+
+	setNumericFilters( keys, lines );
+
+}
+
+
+
+function setTextFilters( keys, lines ) {
+
+	divFiltersText.innerHTML = '';
+
+	const line = lines[ 0 ];
+	//console.log( 'line', line );
+
+	let filters = keys.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === true );
+	//console.log( 'filters', filters );
+
+	let indices = filters.map( item => keys.indexOf( item ) );
+	//console.log( 'indices', indices );
+
+	if ( indices.length === 0 ) { return; }
+
+	for ( let index of indices ) {
+
+		const arr = lines.map( fields => fields[ index ] );
+		const uniques = [...new Set( arr )];
+		//console.log( 'uniques', uniques );
+
+		txt = `<p>text filter <b>${ keys[ index ] }</b><br>`;
+
+		for ( let filter of uniques ){
+
+			txt += `<button class="btn btn-secondary btn-sm active" onclick=setTextFilter(this,${index}); >${ filter }</button> &nbsp;`
+
+		}
+
+		divFiltersText.innerHTML += txt + `</p>`;
+
+	}
+
+	divFiltersText.innerHTML +=
+	`
+		<p>
+
+		<button class="btn btn-secondary btn-sm" onclick=setTextFilterAll(true); >Set all visible</button>
+
+		<button class="btn btn-secondary btn-sm" onclick=setTextFilterAll(false); >Set all invisible</button>
+
+		</p>
+
+	<hr>`;
+
+}
+
+
+
+function setTextFilter( that, index ){
+
+	const txt = that.innerText.toLowerCase();
+
+	that.classList.toggle( "active" );
+
+	const visible = that.classList.contains( 'active' );
+
+	const opacity = visible ? opacityVisible : opacityVisibleFalse;
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial
+			&& child.userData.data[ index ].toLowerCase() === txt ) {
+
+			child.material.opacity = opacity;
+
+			child.children[ 0 ].material.opacity = opacity; // edges
+
+		}
+
+	} );
+
+}
+
+
+
+function setNumericFilters() {
+
+	let line = lines[ 0 ];
+	let filters = keys.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === false );
+
+	divFiltersNumeric.innerHTML = '<small>current value shows as tooltip</small>';
+
+	for ( let filter of filters ){
+
+		index = keys.indexOf( filter );
+
+		const arr = lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+		let max = Math.max( ...arr );
+		let min = Math.min( ...arr );
+		//console.log( 'mm', min, max );
+
+		let scalar = max - min > 10 ? 1 : 10;
+		scalar = max - min > 1 ? scalar : 100;
+
+		min = scalar * min;
+		max = scalar * max;
+
+		const filterMin = 'filterMin' + index;
+		const filterMax = 'filterMax' + index;
+
+		divFiltersNumeric.innerHTML +=
+
+		`<div><b>numeric filter ${ filter }</b></div>
+
+		<div>${ min / scalar } <span style=width:10rem >
+			<input type=range id=${ filterMin } min=${ min } max=${ max } value=${ min }
+				oninput=setFilterDisplay(this,${scalar}); title=${ min } ></span> ${ max / scalar }
+		</div>
+
+		<div>${ min / scalar  } <span style=width:10rem >
+			<input type=range id=${ filterMax } min=${ min } max=${ max } value=${ max }
+				oninput=setFilterDisplay(this,${scalar}); title=${ max } ></span> ${ max / scalar }
+		</div>
+
+		<hr>`;
+
+	}
+
+	divFiltersNumeric.innerHTML +=
+		`
+		<p>
+
+		<button class="btn btn-secondary btn-sm" onclick=setTextFilterAll(true); >Set all visible</button>
+
+		<button class="btn btn-secondary btn-sm" onclick=setTextFilterAll(false); >Set all invisible</button>
+
+		</p>
+
+	<hr>`
+
+}
+
+
+
+function setFilterDisplay( that, scalar ) {
+
+	//console.log( 'that', that );
+
+	const index = that.id.slice( 9 );
+	//console.log( 'index', index );
+
+	const value = parseFloat( that.value ) / scalar;
+	//console.log( 'value', value );
+
+	// catch max smaller than min
+	
+	const min = parseFloat( document.querySelector( '#filterMin' + index ).value );
+	const max = parseFloat( document.querySelector( '#filterMax' + index ).value );
+
+	that.title = value;
+
+	//console.log( 'mm', min, max );
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+
+			const data = parseFloat( child.userData.data[ index ] );
+
+			if ( data >= min && data <= max ) {
+
+				child.material.opacity = opacityVisible;
+
+				child.children[ 0 ].material.opacity = opacityVisibleFalse;
+
+			} else {
+
+				child.material.opacity = opacityVisibleFalse;
+
+				child.children[ 0 ].material.opacity = opacityVisibleFalse;
+			}
+
+		}
+
+	} );
+
+}
+
+
+
+function setTextFilterAll( boolean ) {
+
+	const opacity = boolean ? opacityVisible : opacityVisibleFalse;
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+
+			child.material.opacity = opacity;
+
+			child.children[ 0 ].material.opacity = opacity;
+
+		}
+
+	} );
+
+	const buttons = divFiltersText.getElementsByClassName("btn");
+
+	if ( boolean ) {
+
+		for ( button of buttons ){ button.classList.add( 'active' ) };
+
+	} else {
+
+		for ( button of buttons ){ button.classList.remove( 'active' ) };
+
+	}
+
+	setNumericFilters();
+
+}
+
+
+
+function setLegend( target = divLegend ) {
+
+	const txt = colors.map( color => `<button onclick="setColorVisible('${ color }');" style="background-color:rgb${ color };width:15rem;" >rgb${ color }</button><br>` );
+
+	target.innerHTML =
+	`
+		<h3>${ name } </h3>
+		<p>Click on a color to highlight its members</p>
+		<p>${ txt.join( '' ) }</p>
+	`;
+
+}
+
+
+function setColorVisible( triplet ) {
+
+	colorvv = 'rgb' + triplet;
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+
+			if( child.material.color.getStyle() === colorvv ) {
+
+				child.material.opacity = opacityVisible;
+
+				child.children[ 0 ].material.opacity = opacityVisible;
+
+			} else {
+
+				child.material.opacity = opacityVisibleFalse;
+
+				child.children[ 0 ].material.opacity = opacityVisibleFalse;
+
+			}
+		}
+
+	} );
+
+}
+
+/////////
+
+function setSelect( keys, targets ) {
+
+	let count = keys.indexOf( keys.find( key => key.startsWith( 'out' ))) ;
+	const options = keys.filter( key => key.startsWith( 'out' ) )
+	.map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+
+	targets.map( target => target.innerHTML = options );
+
+	if ( options.length > 4 ) {
+
+		targets[ 0 ].selectedIndex = 2
+		targets[ 1 ].selectedIndex = 5
+		targets[ 2 ].selectedIndex = 6
+		targets[ 3 ].selectedIndex = 8
+
+	} else {
+
+		targets[ 0 ].selectedIndex = 0;
+		targets[ 1 ].selectedIndex = 1;
+		targets[ 2 ].selectedIndex = 2;
+
+	}
+
+	//console.log( '', options );
+
+	setObjects();
+
+}
+
+
+
+
+function setObjects() {
+
+	scene.remove( object3D, placardX, placardY, placardZ );
+
+	object3D = new THREE.Group();
+
+	const axisX = getNormalize( selX.value );
+	const axisY = getNormalize( selY.value );
+	const axisZ = getNormalize( selZ.value );
+
+	colorsNorm = getNormalize( selColor.value, colors.length - 1 )[ 0 ];
+	colorsFloor = colorsNorm.map( col => Math.floor( col ) );
+	//console.log( 'colorsNorm', colorsFloor );
+
+	const size = getNormalize( selSize.value );
+
+	const shapeArr = lines.map( items => items[ selShape.value ] );
+	shapeUnique = [...new Set( shapeArr )];
+
+
+	//for ( let i= 0; i < ( lines.length > 500 ? 500 : lines.length ); i++ ) { // to speed up testing with big files
+	for ( let i= 0; i < lines.length; i++ ) {
+
+		setDataPoint( axisX[ 0 ][ i ], axisY[ 0 ][ i ], axisZ[ 0 ][ i ], colorsFloor[ i ], size[ 0 ][ i ], shapeArr[ i ], lines[ i ] );
+
+	}
+
+	placardX = drawPlacard( [ 'X-axis', keys[ selX.value ], 'min: ' + axisX[ 1 ].toFixed( 1 ), 'max: ' + axisX[ 2 ].toFixed( 1 ) ], 0.08, 1, 100, 0, 10 );
+	scene.add( placardX );
+
+	placardY = drawPlacard( [ 'Y-axis', keys[ selY.value ], 'min: ' + axisY[ 1 ].toFixed( 1 ), 'max: ' + axisY[ 2 ].toFixed( 1 ) ], 0.08, 120, 0, 100, 10 );
+	scene.add( placardY );
+
+	placardZ = drawPlacard( [ 'Z-axis', keys[ selZ.value ], 'min: ' + axisZ[ 1 ].toFixed( 1 ), 'max: ' + axisZ[ 2 ].toFixed( 1 ) ], 0.08, 200, 0, 0, 110 );
+	scene.add( placardZ );
+
+	scene.add( object3D );
+
+	initHeadsUp();
+
+}
+
+
+
+function setDataPoint( x, y, z, color = 0, size, shape, data ) {
+
+	//if ( !colors[ color ] ) { console.log( 'data', data, color  );}
+	col.setStyle( 'rgb' + colors[ color ] );
+	const scale = 0.8 + 0.01 * size;
+
+	let segments = 2 + shapeUnique.indexOf( shape );
+	segments = segments < 9 ? segments : 8;
+
+	// CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded )
+	const geometry = new THREE.CylinderBufferGeometry( scale, scale, scale, segments );
+	const material = new THREE.MeshPhongMaterial({ color: col, opacity: opacityVisible, transparent: true }) ;
+	const mesh = new THREE.Mesh( geometry, material );
+	mesh.userData.data = data;
+	mesh.position.set( x, y, z );
+	// mesh.scale.set( scale, scale, scale );
+
+	const materialLine = new THREE.LineBasicMaterial( { color: 0x000000, opacity: opacityVisible, transparent: true } );
+
+	let edges = new THREE.LineSegments( new THREE.EdgesGeometry( geometry ), materialLine );
+	mesh.add( edges );
+
+	object3D.add( mesh );
+
+}
+
+
+
+function getNormalize( index, range = 100 ) {
+
+	// https://stackoverflow.com/questions/39776819/function-to-normalize-any-number-from-0-1
+
+	const arr = lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+	const max = Math.max( ...arr );
+	const min = Math.min( ...arr );
+
+	const arrNormalized = arr.map( val => range * (val - min) / (max - min) )
+
+	return [arrNormalized, min, max ];
+
+}
+
+
+
+//////////
+
+function updateCss( link ) {
+
+	themeName = css.href = link;
+	localStorage.setItem( 'themeName', link );
+	setTheme();
+
+}
+
+
+
+function setTheme( target ) {
+
+	const themesBootswatch = [
+		{ 'Default': 'background-color: white; color: #007bff' },
+		{ "Cerulean": 'background-color: white; color: #2FA4E7;' },
+		{ 'Cosmo': 'background-color: white; color: #2780E3;' },
+		{ 'Cyborg': 'background-color: #060606; color: #2A9FD6; font-style: italic;' },
+		{ 'Darkly': 'background-color: #222; color: #00bc8c; font-style: italic;' },
+		{ 'Flatly': 'background-color: white; color: #18BC9C;' },
+		{ 'Journal': 'background-color: white; color: #EB6864;' },
+		{ 'Litera': 'background-color: white; color: #4582EC;' },
+		{ 'Lumen': 'background-color: white; color: #158CBA;' },
+		{ 'Lux': 'background-color: white; color: #1a1a1a;' },
+		{ 'Materia': 'background-color: white; color: #2196F3;' },
+		{ 'Minty': 'background-color: white; color: #78C2AD;' },
+		{ 'Pulse': 'background-color: white; color: #593196;' },
+		{ 'Sandstone': 'background-color: white; color: #93C54B;' },
+		{ 'Simplex': 'background-color: white; color: #D9230F;' },
+		{ 'Sketchy': 'background-color: white; color: #333;' },
+		{ 'Slate': 'background-color: #272B30; color: #fff; font-style: italic;' },
+		{ 'Solar': 'background-color: #002B36; color: #839496; font-style: italic;' },
+		{ 'Spacelab': 'background-color: white; color: #3399F3;' },
+		{ 'Superhero': 'background-color: #2B3E50; color: #DF691A; font-style: italic;' },
+		{ 'United': 'background-color: white; color: #E95420;' },
+		{ 'Yeti': 'background-color: white; color: #008cba;' },
+	];
+
+
+	const themesOthers = [
+
+		{ link: "https://demos.creative-tim.com/material-kit/assets/css/material-kit.min.css", name: "Material Kit" },
+		{ link: "https://www.gettemplate.com/demo/initio/assets/css/styles.css", name: 'Initio' },
+		{ link: "https://blackrockdigital.github.io/startbootstrap-creative/css/creative.min.css", name: 'Creative' },
+		{ link: "https://tympanus.net/Freebies/Cardio/css/cardio.css", name: 'Cardio' },
+		{ link: "https://www.gettemplate.com/demo/magister/assets/css/magister.css", name: 'Magister' },
+	];
+
+
+	const txt1 = themesBootswatch.map( theme => {
+		const name = Object.keys( theme )[ 0 ];
+		link = name === 'Default' ?
+			'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ name.toLowerCase() }/bootstrap.min.css`;
+		bingo =  link === themeName ? '*' : ''
+		return `<button class=theme onclick=updateCss("${ link }"); style="${ theme[name] }" >${ bingo }${ name }${ bingo }</button> `;
+
+	});
+
+
+	divBootswatch.innerHTML = '<p>Themes from <a href="https://bootswatch.com/" target=_blank>Bootswatch</a><br>' + txt1.join( '' );
+
+	let txt = '<p>Themes from other sources</p>';
+
+	for ( let theme of themesOthers ) {
+
+		//name = object3D.keys( theme )[ 0 ];
+		//console.log( 'name', name );
+		//console.log( 'link', theme.link );
+		txt += `<button class="theme btn btn-secondary" onclick=updateCss("${ theme.link }"); style="${ theme.name }" >${ theme.name }</button> `;
+
+		divCssOthers.innerHTML = txt + '<p><small>these buttons are work-in-progress WIP</small></p>';
+
+	}
+
+}
+
+
+
+function setTitle( target ) {
+
+	target.innerHTML =
+
+	`<h2>
+		<a href=${ urlSourceCode } target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+		<a href = "" title = "Click to reload this page" >${document.title}</a>
+	</h2>
+
+	<p>
+		${ document.head.querySelector( '[name=description]' ).content }
+	</p>`;
+
+}
+
+
+
+//////////
+
+function onTouchStart( event ) {
+
+	xDown = event.touches[ 0 ].clientX;
+	yDown = event.touches[ 0 ].clientY;
+
+}
+
+
+
+function onTouchMove(event) {
+
+	if ( ! xDown || ! yDown ) {
+
+		return;
+
+	}
+
+	const xUp = event.touches[ 0 ].clientX;
+	const yUp = event.touches[ 0 ].clientY;
+
+	const xDiff = xDown - xUp;
+	const yDiff = yDown - yUp;
+
+	if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {// most significant
+
+		if ( xDiff > 0 ) {
+
+			toggleNav();
+			// left swipe
+			console.log( 'left swipe' );
+
+		} else {
+
+			toggleNav();
+			// right swipe
+			console.log( 'right swipe' );
+
+		}
+
+	} else {
+
+		if ( yDiff > 0 ) {
+
+			//up swipe
+			console.log( 'up swipe' );
+
+		} else {
+
+			// down swipe
+			console.log( 'down swipe' );
+
+		}
+
+	}
+
+	xDown = null;
+	yDown = null;
+
+}
+
+
+
+function toggleNav() {
+
+	const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
+
+	if ( !divMenu.style.width || divMenu.style.width === width ) {
+
+		divMenu.style.width = '0';
+		divMenu.style.padding = '0';
+		hamburger.style.left = '-75px';
+		divThreeJs.style.marginLeft = '0';
+
+	} else {
+
+		divMenu.style.width = width;
+		//divMenu.style.padding = '30px 10px 0 10px';
+		divMenu.style.padding = '1rem';
+		hamburger.style.left = 'calc( var( --mnu-width ) - 4rem )';
+		divThreeJs.style.marginLeft = width;
+
+	}
+
+	//console.log( 'divThreeJs.clientWidth', divThreeJs.clientWidth );
+
+	//divThreeJs.style.width = divThreeJs.clientWidth + 'px';
+	onWindowResize();
+
+}
+
+
+
+/////////////////
+
+
+function initHeadsUp() {
+
+	//window.objects = [];
+	window.mouse3D = new THREE.Vector2(); // try 2D
+
+	// move to init??
+	window.intersected = undefined;
+	renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+	renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+
+}
+
+
+
+function onDocumentMouseMove( event ) {
+
+	var raycaster, intersects;
+
+	event.preventDefault();
+
+	if ( event.buttons > 0 ) { return; }
+
+	mouse3D = new THREE.Vector3( ( event.clientX - divThreeJs.offsetLeft ) / divThreeJs.clientWidth * 2 - 1,
+		-( event.clientY - divThreeJs.offsetTop ) / divThreeJs.clientHeight * 2 + 1,
+		0.5 );
+
+	//mouse.x = ( event.clientX - offsetX ) / viewWidth * 2 - 1,
+	//mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+	raycaster = new THREE.Raycaster();
+	raycaster.setFromCamera( mouse3D, camera );
+
+	intersects = raycaster.intersectObjects( object3D.children );
+
+	if ( intersects.length > 0 ) {
+
+		if ( intersected != intersects[ 0 ].object ) {
+
+			if ( intersected ) {
+
+				intersected.material.emissive.setHex( intersected.currentHex );
+				intersected.material.opacity = intersected.currentOpacity;
+				intersected.scale.copy( intersected.currentScale );
+
+			}
+
+			intersected = intersects[ 0 ].object;
+
+			intersected.currentHex = intersected.material.emissive.getHex();
+			intersected.material.emissive.setHex( 0xff0000 );
+
+			intersected.currentOpacity = intersected.material.opacity;
+			intersected.material.opacity = 1;
+
+			intersected.currentScale = intersected.scale.clone();
+			//console.log( 'intersected.currentScale', intersected.currentScale );
+			intersected.scale.copy( intersected.currentScale.clone().multiplyScalar( 1.5 ) );
+
+		}
+
+	} else {
+
+		if ( intersected ) {
+
+			intersected.material.emissive.setHex( intersected.currentHex );
+			intersected.material.opacity = intersected.currentOpacity;
+			intersected.scale.copy( intersected.currentScale );
+
+		}
+
+		intersected = undefined;
+
+		divData.innerHTML = 'No item selected';
+		divImage.innerHTML = '';
+
+	}
+
+	setHeadsUp( event );
+
+}
+
+
+
+function setHeadsUp( event ) {
+
+	if ( intersected === undefined ){
+
+		if ( event.type === 'touchstart' ) {
+
+			headsUp.style.display = 'none';
+
+		}
+
+		document.body.style.cursor = 'auto';
+		return;
+
+	}
+
+	headsUp.style.display = '';
+
+	const items = `<small>Fields:<br>` + keys.map( ( item, index ) => `${ index } ${ item } <b>` + intersected.userData.data[ index ] ).slice( 0,-4 ).join( '</b><br>' );
+
+	txt = `${ items }</small><br>`;
+
+	divData.innerHTML = txt;
+	divImage.innerHTML = '<img src="' + urlImg + intersected.userData.data[indexImg] + '" width=200 >';
+	document.body.style.cursor = 'pointer';
+
+}
+
+
+
+function onDocumentMouseDown( event ) {
+
+	headsUp.style.display = 'none';
+
+}
+
+
+
+function onDocumentTouchStart( event ) {
+
+	//	event.preventDefault();
+
+	event.clientX = event.touches[0].clientX;
+	event.clientY = event.touches[0].clientY;
+
+	onDocumentMouseMove( event );
+
+}
+
+
+
+//////////
+
+function initThree() {
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( divThreeJs.clientWidth, divThreeJs.clientHeight );
+	//renderer.shadowMap.enabled = true;
+	divThreeJs.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, divThreeJs.clientWidth/divThreeJs.clientHeight, 1, 1000 );
+	camera.up.set( 0, 0, 1 );
+	camera.position.set( 150, 150, 150 );
+
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+	controls.maxDistance = 800;
+	controls.target.set( 50, 50, 70 );
+
+	scene = new THREE.Scene();
+
+	const lightAmbient = new THREE.AmbientLight( 0x888888 );
+	scene.add( lightAmbient );
+
+	size = 100;
+	lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
+	lightDirectional.position.set( size, size, size );
+	//lightDirectional.shadow.camera.scale.set( 0.1 * size, 0.1 * size, size * 0.5 );
+	//lightDirectional.castShadow = true;
+	scene.add( lightDirectional );
+
+	//scene.add( new THREE.CameraHelper( lightDirectional.camera ) );
+
+	const lightPoint = new THREE.PointLight( 0xffffff, 1.5 );
+	lightPoint.position = new THREE.Vector3( 100, 100, 100 );
+	//camera.add( lightPoint );
+	scene.add( lightPoint );
+
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+
+	const gridHelperXY = new THREE.GridHelper( 100, 10, 0x0000ff, 0x8888ff  );
+	gridHelperXY.rotation.x = Math.PI / 2;
+	gridHelperXY.position.set( 50, 50, 0 );
+	scene.add( gridHelperXY );
+
+	const gridHelperXZ = new THREE.GridHelper( 100, 10, 0xff0000, 0xff8888 );
+	//gridHelperXY.rotation.x = Math.PI / 2;
+	gridHelperXZ.position.set( 50, 0, 50 );
+	scene.add( gridHelperXZ );
+
+	const gridHelperYZ = new THREE.GridHelper( 100, 10, 0x00ff00, 0x88ff88 );
+	gridHelperYZ.rotation.z = Math.PI / 2;
+	gridHelperYZ.position.set( 0, 50, 50 );
+	scene.add( gridHelperYZ );
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+}
+
+
+
+function toggleBackgroundGradient() {
+
+	// 2018-06-23
+
+	const col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+	const pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+	const image = divThreeJs.style.backgroundImage;
+
+	divThreeJs.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+		pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+}
+
+
+
+function drawPlacard( text, scale = 0.05, color = Math.floor( Math.random() * 255 ), x = 0, y = 10, z = 0 ) {
+
+	// 2018-08-09 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
+
+	const placard = new THREE.Object3D();
+	const v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+	const texture = canvasMultilineText( text, { backgroundColor: color }   );
+	const spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
+	const sprite = new THREE.Sprite( spriteMaterial );
+	sprite.position.set( x, y, z ) ;
+	sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+
+	// line
+	//const geometry = new THREE.Geometry();
+	//geometry.vertices = [ v( 0, 0, 0 ),  v( x, y, z ) ];
+	//const material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+	//const line = new THREE.Line( geometry, material );
+
+	placard.add( sprite );
+
+	return placard;
+
+
+		function canvasMultilineText( textArray, parameters ) {
+
+			parameters = parameters || {} ;
+
+			const canvas = document.createElement( 'canvas' );
+			const context = canvas.getContext( '2d' );
+			const font = parameters.font ? parameters.font : '48px monospace';
+			const color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+			let width = parameters.width ? parameters.width : 0;
+
+			textArray = typeof textArray === 'string' ? [ textArray ] : textArray;
+
+			context.font = font;
+
+			for ( let i = 0; i < textArray.length; i++) {
+
+				width = context.measureText( textArray[ i ] ).width > width ? context.measureText( textArray[ i ] ).width : width;
+
+			}
+
+			canvas.width = width + 20;
+			canvas.height =  parameters.height ? parameters.height : textArray.length * 60;
+
+			context.fillStyle = 'hsl( ' + color + ', 80%, 50% )' ;
+			context.fillRect( 0, 0, canvas.width, canvas.height);
+
+			context.lineWidth = 1 ;
+			context.strokeStyle = '#000';
+			context.strokeRect( 0, 0, canvas.width, canvas.height );
+
+			context.fillStyle = '#000' ;
+			context.font = font;
+
+			for ( let i = 0; i < textArray.length; i++) {
+
+				context.fillText( textArray[ i ], 10, 48  + i * 60 );
+
+			}
+
+			const texture = new THREE.Texture( canvas );
+			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			texture.needsUpdate = true;
+
+			return texture;
+
+		}
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = divThreeJs.clientWidth / divThreeJs.clientHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( divThreeJs.clientWidth, divThreeJs.clientHeight );
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+
+}
+
+</script>
+</body>
+</html>
