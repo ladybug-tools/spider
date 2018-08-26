@@ -51,6 +51,9 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 ## To do / wish list
 
+* 2018-08-25 ~ Theo ~ Add reset view / zoom all
+* 2018-08-25 ~ Theo ~ Add random data generator
+* 2018-08-25 ~ Theo ~ Add read CSV data from file
 * 2018-08-24 ~ Theo ~ reverse the sort order of an axis
 * 2018-08-24 ~ Theo ~ Buttons that toggle other selections off / as with main gbXML Viewer
 * 2018-08-23 ~ Theo ~ Multiple simultaneous adjacent chart space volumes
@@ -64,8 +67,6 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 	* Handle steps in the data more effectively
 * 2018-08-23 ~ Theo ~ Better display of current values for numeric filters
 	* Currently: only display as a tooltip
-* 2018-08-23 ~ Theo ~ Nice progress indicator for the 15 seconds or so it takes to load the demo data file with 5K data items
-* 2018-08-23 ~ Theo ~ Better light and shade
 * 2018-08-23 ~ Theo ~ Examples based on spreadsheet data
 * 2018-08-23 ~ Theo ~ Permalinks to user-select output data assignments
 * 2018-08-23 ~ Theo ~ Data export of data points selected by filtering
@@ -77,9 +78,9 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
 
-The current versions load a demo file with over five thousand data points. The file takes fifteen seconds or so to load. Because of this slowness the iframes with demo of recent previous releases are mostly turned off. So in order to view these demos you must click the full screen demo links.
+The older versions load a demo file with over five thousand data points. The file takes fifteen seconds or so to load. Because of this slowness the iframes with demo of recent previous releases are mostly turned off. So in order to view these demos you must click the full screen demo links.
 
-The slowness is almost entirely due to each data point being a displayed with a unique 3D mesh. Future releases will explore fixes to this slowdown.
+The slowness is almost entirely due to each data point being a displayed with a unique 3D mesh. Recent releases have fixes to this slowdown.
 
 
 ***
@@ -87,20 +88,30 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 ## Script 15 / 2018-08-25: Design Explorer Very Lite R11
 
-<--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view</iframe>
--->
 
 
 ### Full Screen: [Design Explorer Very Lite R11]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html )
 
 * Add Ladybug Tools color palette
 * Add interactive color legend - highlight selected data points by clicking on the color in the legend
+* Move the directional light to positive X and Y / adjust the parameters
+* Load and draw data points using requestAnimationFrame
+	* Data starts appearing quite quickly
+	* More fun to watch data appearing tan to look at a blank screen
+* Add scene rotation along with rotation speed slider
+* Heads-up displays number of items loaded during the loading process
 
 #### to do items now well underway
 
+* 2018-08-23 ~ Theo ~ Nice progress indicator for the 15 seconds or so it takes to load the demo data file with 5K data items
+* 2018-08-23 ~ Theo ~ Better light and shade
 * 2018-08-10 ~ Theo ~ Apply Ladybug Tools standard colors / More standardized system of colors
 * 2018-08-10 ~ Theo ~ Legends for everything
+
+####  Issues
+
+* Some data points appear to be flat
 
 
 ***

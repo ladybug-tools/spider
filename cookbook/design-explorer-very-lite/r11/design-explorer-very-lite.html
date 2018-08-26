@@ -14,14 +14,14 @@
 
 	html { height: 100%; margin: 0; }
 
-	body { background-color: #ccc; height: 100%; margin: 0; overflow: hidden; }
+	body { background-color: #fff; height: 100%; margin: 0; overflow: hidden; }
 
 	a:hover, a:focus { background-color: yellow; color: #888; }
 	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
 	button.theme { border-width: 1px; margin: 0.3rem !important; min-width:3rem; }
 	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
 
-	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ccc; width: 100%; }
 	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
 	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 16px; width: 10px; }
 
@@ -32,7 +32,7 @@
 	#divThreeJs { background-color: #eee; height: 100%; margin: 0 0 0 var( --mnu-width ); /* transition: margin-left .5s; */ position: relative; }
 	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; padding: 1rem; right: 0; }
 
-	#divMenu { height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
+	#divMenu { background-color: #ddd; height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
 		 width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
 	#hamburger { cursor: pointer; font-size: 2rem; left: calc( var( --mnu-width ) - 4rem ); line-height: 1.25rem;
 		max-height: 2.5rem; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
@@ -165,7 +165,10 @@
 
 				<p><button class="btn btn-sm" onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
 
-				<p><button class="btn btn-sm" onclick=controls.autoRotate=!controls.autoRotate; title= 'Stop the spinning!' > Toggle scene rotation </button></p>
+				<p>
+					<button class="btn btn-sm" onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+					<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
+				</p>
 
 			</details>
 
@@ -193,10 +196,10 @@
 
 			<p>Press Control-Shift-J|Command-Option-J to see if the JavaScript console reports any errors</p>
 
-
-
 		</div>
+
 		<div id = "divImage" ></div>
+
 	</div>
 
 	<div id = "divThreeJs" ></div>
@@ -238,6 +241,8 @@ const colors = ['(49,54,149)','(69,117,180)','(116,173,209)','(171,217,233)','(2
 let col = new THREE.Color();
 const opacityVisible = 0.85;
 const opacityVisibleFalse = 0.05;
+let count = 0;
+let start;
 
 let sceneRotation = 1;
 let renderer, camera, controls, scene;
@@ -266,6 +271,8 @@ function init() {
 	// Swipe events
 	document.addEventListener( 'touchstart', onTouchStart, false );
 	document.addEventListener( 'touchmove', onTouchMove, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
 
 	fetchFileCsv( sampleProject1 );
 	//fetchFileCsv( littleRedBox );
@@ -420,19 +427,19 @@ function setNumericFilters() {
 
 		divFiltersNumeric.innerHTML +=
 
-		`<div><b>numeric filter ${ filter }</b></div>
+		`
+			<p><b>numeric filter ${ filter }</b><br>
 
-		<div>${ min / scalar } <span style=width:10rem >
-			<input type=range id=${ filterMin } min=${ min } max=${ max } value=${ min }
-				oninput=setFilterDisplay(this,${scalar}); title=${ min } ></span> ${ max / scalar }
-		</div>
+			<div>${ min / scalar } <span style=width:10rem >
+				<input type=range id=${ filterMin } min=${ min } max=${ max } value=${ min }
+					oninput=setFilterDisplay(this,${scalar}); title=${ min } ></span> ${ max / scalar }
+			</div>
 
-		<div>${ min / scalar  } <span style=width:10rem >
-			<input type=range id=${ filterMax } min=${ min } max=${ max } value=${ max }
-				oninput=setFilterDisplay(this,${scalar}); title=${ max } ></span> ${ max / scalar }
-		</div>
-
-		<hr>`;
+			<div>${ min / scalar  } <span style=width:10rem >
+				<input type=range id=${ filterMax } min=${ min } max=${ max } value=${ max }
+					oninput=setFilterDisplay(this,${scalar}); title=${ max } ></span> ${ max / scalar }
+			</p>
+		`;
 
 	}
 
@@ -463,7 +470,7 @@ function setFilterDisplay( that, scalar ) {
 	//console.log( 'value', value );
 
 	// catch max smaller than min
-	
+
 	const min = parseFloat( document.querySelector( '#filterMin' + index ).value );
 	const max = parseFloat( document.querySelector( '#filterMax' + index ).value );
 
@@ -573,6 +580,7 @@ function setColorVisible( triplet ) {
 
 }
 
+
 /////////
 
 function setSelect( keys, targets ) {
@@ -612,6 +620,10 @@ function setObjects() {
 	scene.remove( object3D, placardX, placardY, placardZ );
 
 	object3D = new THREE.Group();
+	count = 0;
+	start = performance.now()
+
+	scene.add( object3D );
 
 	const axisX = getNormalize( selX.value );
 	const axisY = getNormalize( selY.value );
@@ -626,13 +638,7 @@ function setObjects() {
 	const shapeArr = lines.map( items => items[ selShape.value ] );
 	shapeUnique = [...new Set( shapeArr )];
 
-
-	//for ( let i= 0; i < ( lines.length > 500 ? 500 : lines.length ); i++ ) { // to speed up testing with big files
-	for ( let i= 0; i < lines.length; i++ ) {
-
-		setDataPoint( axisX[ 0 ][ i ], axisY[ 0 ][ i ], axisZ[ 0 ][ i ], colorsFloor[ i ], size[ 0 ][ i ], shapeArr[ i ], lines[ i ] );
-
-	}
+	drawMeshesStagger();
 
 	placardX = drawPlacard( [ 'X-axis', keys[ selX.value ], 'min: ' + axisX[ 1 ].toFixed( 1 ), 'max: ' + axisX[ 2 ].toFixed( 1 ) ], 0.08, 1, 100, 0, 10 );
 	scene.add( placardX );
@@ -643,9 +649,39 @@ function setObjects() {
 	placardZ = drawPlacard( [ 'Z-axis', keys[ selZ.value ], 'min: ' + axisZ[ 1 ].toFixed( 1 ), 'max: ' + axisZ[ 2 ].toFixed( 1 ) ], 0.08, 200, 0, 0, 110 );
 	scene.add( placardZ );
 
-	scene.add( object3D );
-
 	initHeadsUp();
+
+
+	function drawMeshesStagger( timestamp ) {
+
+		const t = performance.now();
+
+		for ( let i = 0; i < 200; i ++ ) {
+
+			if ( performance.now() - t > 60 || count >= lines.length ) { break; }
+
+			setDataPoint( axisX[ 0 ][ count ], axisY[ 0 ][ count ], axisZ[ 0 ][ count ], colorsFloor[ count ], size[ 0 ][ count ], shapeArr[ count ], lines[ count ] );
+
+			count++;
+
+		}
+
+		if ( count < lines.length ) {
+
+			requestAnimationFrame( drawMeshesStagger );
+
+		} else {
+
+
+
+		}
+
+		divImage.innerHTML =
+		`
+			<p>Items loaded: ${ count.toLocaleString() } of ${ lines.length.toLocaleString() }</p>
+			<p>Items draw time: ${ Math.floor( performance.now() - start ).toLocaleString() } ms</p>
+		`;
+	}
 
 }
 
@@ -1035,12 +1071,11 @@ function initThree() {
 
 	camera = new THREE.PerspectiveCamera( 40, divThreeJs.clientWidth/divThreeJs.clientHeight, 1, 1000 );
 	camera.up.set( 0, 0, 1 );
-	camera.position.set( 150, 150, 150 );
+	camera.position.set( 200, 200, 50 );
 
 	controls = new THREE.TrackballControls( camera, renderer.domElement );
-	controls.autoRotate = true;
 	controls.maxDistance = 800;
-	controls.target.set( 50, 50, 70 );
+	controls.target.set( 50, 50, 50 );
 
 	scene = new THREE.Scene();
 
@@ -1085,6 +1120,15 @@ function initThree() {
 	const axesHelper = new THREE.AxesHelper( 100 );
 	scene.add( axesHelper );
 
+	/*
+	const geometry = new THREE.BoxBufferGeometry( 5, 5, 5 );
+	const material = new THREE.MeshNormalMaterial() ;
+	const mesh = new THREE.Mesh( geometry, material );
+
+	mesh.position.set( 50, 50, 50 );
+
+	scene.add( mesh );
+	*/requestAnimationFrame
 }
 
 
@@ -1197,6 +1241,7 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	controls.update();
+	scene.rotation.z += sceneRotation / 1000;
 
 }
 
