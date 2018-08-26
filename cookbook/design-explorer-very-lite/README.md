@@ -88,7 +88,7 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 ## Script 15 / 2018-08-25: Design Explorer Very Lite R11
 
-<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html width=100% height=600px >Iframes are not viewable in GitHub source code view</iframe>
 
 
 ### Full Screen: [Design Explorer Very Lite R11]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html )
@@ -231,8 +231,9 @@ So the multi-thumb slider ended up having too many issues. Mostly it did seem to
 
 ## Script 10 / 2018-08-09: Design Explorer Very Lite R6
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r6/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view</iframe>
-
+-->
 
 ### Full Screen: [Design Explorer Very Lite R6]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r6/design-explorer-very-lite.html )
 
@@ -257,8 +258,9 @@ So the multi-thumb slider ended up having too many issues. Mostly it did seem to
 
 ## Script 9: Design Explorer Very Lite R5
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r5/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [Design Explorer Very Lite R5]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r5/design-explorer-very-lite.html )
 
@@ -277,7 +279,9 @@ Issues
 
 ## Script 8: Design Explorer Very Lite R4
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r4/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
+-->
 
 ### Full Screen: [Design Explorer Very Lite R4]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r4/design-explorer-very-lite.html )
 
@@ -319,8 +323,9 @@ Issues
 
 ## Script 6: Design Explorer Very Lite R1
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [Design Explorer Very Lite R1]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/design-explorer-very-lite-r1.html )
 
@@ -337,11 +342,11 @@ Comment 2018-07-28 21:44
 
 ## Script 5: View Design Explorer Data Three.js files R2
 
-<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
 <!--
-### Full Screen: [View Design Explorer Data Three.js files R2]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html )
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
 -->
+
+### Full Screen: [View Design Explorer Data Three.js files R2]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-threejs2.html )
 
 A second pass at loading the JSON files into Three.js
 * Some of the aspect of loading the Three.js JSON have been cleared up
@@ -373,8 +378,9 @@ Comments 2018-07-28 17:33
 
 ## Script 3: View Design Explorer Data CSV files
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [View Design Explorer Data CSV files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-csv-files.html )
 
@@ -413,8 +419,9 @@ Comments 2018-07-28 14:37
 
 ## Script 1: View Design Explorer Data PNG files
 
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r1/view-design-explorer-data-png-files.html width=100% height=400px >Iframes are not viewable in GitHub source code view<</iframe>
-
+-->
 
 ### Full Screen: [View Design Explorer Data PNG files]( https://www.ladybug.tools/spider/#cookbook/design-explorer-very-lite/r1/view-design-explorer-data-png-files.html )
 
@@ -453,6 +460,7 @@ Comments 2018-07-28 13:07
 A light version of design explorer meant to display sliders for the inputs and simple images + charts for outputs: http://www.ladybug.tools/design_explorer_lite/
 
 * https://github.com/ladybug-tools/design_explorer_lite
+* https://github.com/ladybug-tools/design_explorer_lite/wiki
 
 
 ### Pareto Filters
@@ -461,7 +469,7 @@ A light version of design explorer meant to display sliders for the inputs and s
 * https://en.wikipedia.org/wiki/Pareto_analysis
 
 
-## Nice plots
+## Nice plots / Inspiration for this project
 
 * https://en.wikipedia.org/wiki/Scatter_plot
 * www.originlab.com/doc/Tutorials/3D-Scatter-ColorMap
