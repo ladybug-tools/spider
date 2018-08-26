@@ -118,7 +118,7 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 ## Script 14 / 2018-08-23: Design Explorer Very Lite R10
 
-<--
+<!--
 <iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r10/design-explorer-very-lite.html width=100% height=400px >Iframes are not viewable in GitHub source code view</iframe>
 -->
 
