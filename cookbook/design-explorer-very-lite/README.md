@@ -6,6 +6,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 # [Design Explorer Very Lite Read Me]( #/cookbook/design-explorer-very-lite/README.md )
 
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html width=100% height=600px >Iframes are not viewable in GitHub source code view</iframe>
 
 ## Concept
 
@@ -88,7 +89,6 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 ## Script 15 / 2018-08-25: Design Explorer Very Lite R11
 
-<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html width=100% height=600px >Iframes are not viewable in GitHub source code view</iframe>
 
 
 ### Full Screen: [Design Explorer Very Lite R11]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html )
