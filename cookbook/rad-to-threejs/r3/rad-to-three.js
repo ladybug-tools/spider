@@ -118,9 +118,9 @@ rad.parseRadText = function( radText ) {
 	// separate input radiance objects
 	const rawObjects = radText.match( parseRadRe ).filter( word => word.trim().length > 0 && !word.trim().startsWith( '#' ) );
 	const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );
-	//console.log( 'rawObjects2', rawObjects2 );
+	console.log( 'rawObjects2', rawObjects2 );
 
-	const jsonArray = rawObjects.map( line => rad.radObjectToJson( line ) );
+	const jsonArray = rawObjects2.map( line => rad.radObjectToJson( line ) );
 	//console.log( 'jsonArray', jsonArray );
 
 	return jsonArray;
@@ -156,7 +156,7 @@ rad.radObjectToJson = function( radText){
 
 rad.parsePolygon = function( data ) {
 
-	//console.log( 'data', data );
+	console.log( 'data', data );
 
 	const ptList = data.slice( 6 ); // .map( vertex => parseFloat( vertex ) );
 	//console.log( 'ptList', ptList );
@@ -257,7 +257,7 @@ rad.drawPolygon = function( polygon ) {
 
 	rad.meshes.add( mesh );
 
-	//if ( rad.edges && rad.edges.visible === true ) {
+	if ( rad.edges && rad.edges.visible === true ) {
 
 		const edgesGeometry = new THREE.EdgesGeometry( mesh.geometry );
 		const surfaceEdge = new THREE.LineSegments( edgesGeometry, new THREE.LineBasicMaterial( { color: 0x333333 } ) );
@@ -266,7 +266,7 @@ rad.drawPolygon = function( polygon ) {
 
 		rad.edges.add( surfaceEdge );
 
-	//}
+	}
 
 };
 
