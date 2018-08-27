@@ -36,7 +36,7 @@ Questions that need answering
 * RAD files support a variety of materials and colors but gbXML and Honeybee are only likely to used a small number of these. It would be a good thing to decide the priority for the addition of support for other types of materials.  Should the viewer be able to parse all Radiance material types ASAP or is it sufficient for the time being to have a simple lookup table for 50 or so commonly used materials?
 * The current viewer is setup for files up 1 to 2 MB in size. It can be updated to handle files of much larger size but this would come at cost of greater complexity and more safeguards. Would this effort be worthwhile in the near term of not?
 
-
+See also GitHub Issue: [Update 2018-08-23 ~ RAD to Three.js R3 #142]( https://github.com/ladybug-tools/spider/issues/142 )
 ## Features
 
 * Select, load and display Radiance RAD Files
