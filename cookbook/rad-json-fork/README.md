@@ -28,9 +28,9 @@ This effort relates to other Spider efforts:
 * https://www.ladybug.tools/spider/#rad-viewer/README.md
 * https://www.ladybug.tools/spider/#radiance-sample-files/README.md
 
-This work is likely to be deprecated in the near future as and when this effort gets its own repo
+This work is likely to be deprecated in the near future as and when this effort gets its own repo.
 
-Latest files at top
+Latest files at top.
 
 
 ***

@@ -8,12 +8,24 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
-Translate Radiance RAD file types into Three.js views - all building on [Mostapha's efforts]( https://github.com/mostaphaRoudsari/rad-to-json )
+Support for [Radiance Online]( https://www.radiance-online.org/ )
+Translate Radiance RAD file types into Three.js views - all building on [Mostapha's efforts]( https://github.com/mostaphaRoudsari/radJSON)
 
 See also:
 * Radiance [RAD to JSON Read Me]( #cookbook/rad-to-json/README.md )
 
-Fingers crossed this will be the start of a new, simpler [Rad Viewer]( https://www.ladybug.tools/spider/#rad-viewer/README.md )
+Fingers crossed this will be the start of a new, simpler
+
+* [Rad Viewer]( https://www.ladybug.tools/spider/#rad-viewer/README.md )
+
+And that it helps Mostapha here:
+
+* http://climate-based-daylighting.com/doku.php?id=radiance2018:programme#workshop_programme
+
+### Mission
+
+* Help make it faster, easier, simpler to do cataloguing and file management on large numbers of Radiance RAD files
+
 
 ### Where do we go from here?
 
@@ -31,7 +43,7 @@ Questions that need answering
 * Open file or files via
 	* Operating system dialog box - single or multiple files
 	* URL - remote or local - supplied by a [location.hash]( https://developer.mozilla.org/en-US/docs/Web/API/Window/location ) update - single files only for now
-* Select files from lists of links to available online RAD files
+* Select files from lists of links to available online [sample RAD files]( file:///D:/Dropbox/Public/git-repos/spider/index.html#radiance-sample-files/README.md )
 * Display RAD files in interactive 3D with rotate, zoom and pan
 * View RAD file data
 	* Native format
@@ -47,14 +59,24 @@ Questions that need answering
 * 2018-08-19 ~ Theo ~ files in the [gward samples folders]( https://github.com/ladybug-tools/spider/tree/master/radiance-sample-files/gjward1 ) have a variety of spaces and tabs between data elements. We should be able to handle all the permutations successfully
 * 2018-08-19 ~ Theo ~ Load multiple files via location.hash
 * 2018-08-12 ~ Theo ~ Add drag and drop multiple files
-* 2018-08-11 ~ Theo ~ Handle materials
+* 2018-08-11 ~ Theo ~ Handle Radiance materials
 * 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
 
+
+The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
 
 
 ***
 
-The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
+## 2018-08-19: Full Screen: [Radiance RAD to Three.js R4]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r4/rad-to-three.html )
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r4/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
+
+* Adds access to Mostaphs's [radconverter.js]( https://github.com/mostaphaRoudsari/radJSON/blob/master/lib/radconverter.js ) script
+	* Simple tools to parse RAD files
+	* Add support for geometry and materials
+* Add support for cones / spheres coming soon
+
 
 
 ***
