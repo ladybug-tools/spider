@@ -393,13 +393,13 @@
 		texture = new THREE.VideoTexture( video );
 		//texture.minFilter = THREE.LinearFilter;
 		//texture.magFilter = THREE.LinearFilter;
-		texture.minFilter = THREE.NearestFilter;
-		texture.magFilter = THREE.NearestFilter;
+		texture.minFilter = THREE.NearestMipMapNearestFilter;
+		texture.magFilter = THREE.NearestMipMapNearestFilter;
 
 		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-		texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
-		texture.repeat.set( 1 / 256, 1 / 256 );
-		texture.offset.x = 0.5;
+		//texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+		texture.repeat.set( 1 / 320, 1 / 256 );
+		texture.offset.x = -0.5;
 		texture.offset.y = 0.5;
 		material = new THREE.MeshBasicMaterial( { map: texture, side: 2 } );
 

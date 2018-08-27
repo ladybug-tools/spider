@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Radiance RAD files in real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-08-25" >
+<title>Radiance RAD to Three.js R4</title>
+<style>
+	/* Copyright 2018 pushMe pullYou authors. MIT License */
+
+	body, html { font: 11pt monospace; height: 100%; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 90%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#divMenu { background-color: #eee; max-height: 95%; margin: 1rem; width: 18rem; overflow: auto; padding: 1rem; position: absolute; resize: both; }
+
+	#txtJson, #divRadiance { border: 1px solid #aaa; height: 300px; overflow: auto; resize: both; width: 100%; }
+
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/examples/js/controls/TrackballControls.js" ></script>
+<script src = "rad-to-three.js" ></script>
+<script src = "radconverter.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<details>
+
+			<summary>Sample files</summary>
+
+			<div id=divContents ></div>
+
+		</details>
+
+		<p>
+			Load JSON:
+			<input type=file id=inpOpenFile onchange=rad.inpOpenFiles(this.files); multiple accept=".rad,.mat" >
+		</p>
+
+		<details>
+
+			<summary>File data</summary>
+
+			<div id = "divLog" ></div>
+
+			<p>JSON</p>
+			<textarea id=txtJson ></textarea>
+
+			<p>Radiance data</p>
+			<div id =divRadiance ></div>
+
+		</details>
+
+
+		<details>
+
+			<summary>Settings</summary>
+
+			<p>
+				<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+			</p>
+
+			<p>
+				<button onclick=toggleWireframe(); >wireframe</button>
+
+				<button onclick=rad.edges.visible=!rad.edges.visible; >toggle edges</button>
+			</p>
+
+			<div title="building opacity: 0 to 100%" >Opacity
+				<output id=outOpacity class=floatRight >85%</output><br>
+				<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >
+			</div>
+
+			<p><button onclick=rad.zoomObjectBoundingSphere(rad.edges);>zoom all</button></p>
+
+		</details>
+
+	</div>
+
+<script>
+
+/* globals THREE, divTitle, divMenu, hamburger  */
+// jshint esversion: 6
+
+// Remember to update the release number
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/rad-to-threejs/r4/rad-to-three.html";
+
+
+const urlGitHubAPITree = 'https://api.github.com/repos/ladybug-tools/spider/git/trees/master?recursive=1';
+const urlDefaultFile = 'https://rawgit.com/ladybug-tools/spider/master/radiance-sample-files/sample-file.rad';
+const urlGitHubSource = 'https://github.com/ladybug-tools/spider/blob/master/';
+const urlGitHubPage = 'https://rawgit.com/ladybug-tools/spider/master/';
+
+const iconGitHubMark = '<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>';
+
+
+let sceneRotation = 1;
+let axesHelper, renderer, camera, controls, scene;
+
+init();
+animate();
+
+
+
+function init() {
+
+	setTitle( divTitle );
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( - 100, - 100, 100 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	const material = new THREE.MeshNormalMaterial();
+	const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+	if ( !location.hash ) { location.hash = urlDefaultFile; } else { onHashChange(); }
+
+	fetchGitHubApiTree();
+
+}
+
+
+
+function fetchGitHubApiTree() {
+
+	// https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-html/examples/fetch/fetch-github-api-tree
+
+	const request = new Request( urlGitHubAPITree );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackGitHubApiTree( json ) );
+
+}
+
+
+
+function callbackGitHubApiTree ( results ) {
+
+	//console.log( 'results', results.tree );
+
+	files = [];
+	const folders = [];
+
+	let txt = '';
+
+	for ( let file of results.tree ) {
+
+		if (  !file.path.includes( 'radiance-sample-files' ) || !file.path.endsWith( '.rad' ) || file.path.includes( 'zip-files') || file.path.includes( 'rad-tutorial-files' ) ) { continue; }
+
+		files.push( file );
+
+	}
+
+
+	for ( let file of files ) {
+
+		const arrFile = file.path.split( '/' )
+		const fileName = arrFile.pop();
+		const folder = arrFile.pop();
+		//console.log( 'folder', folder );
+
+		if ( folder === 'radiance-sample-files' ) { continue; }
+
+		if ( folders.indexOf( folder ) === -1 ) {
+
+			folders.push( folder );
+			txt += `<h4 style=margin:0; >${ folder }</h4>`;
+
+		}
+
+		txt +=
+
+		`<div style=margin:10px; >
+
+			<a href=${ urlGitHubSource + file.path } title="Edit me" >${ iconGitHubMark }</a>
+
+			<a href=#${ urlGitHubPage + file.path } onclick=setDivLog(this); title="${ file.size.toLocaleString() } bytes" >${ fileName}</a>
+
+			<a href=${ urlGitHubPage +  file.path  } title="Link to just this file" >&#x2750;</a>
+
+		</div>`;
+
+	}
+
+	//console.log( 'files', files );
+	divContents.innerHTML = `<p>files: ${ files.length } </p> ${ txt } <hr>`;
+
+	setDivLog = function( that ) {
+
+		divLog.innerHTML = `loaded: ${that.innerText} <br> ${that.title}`;
+
+	}
+
+}
+
+
+
+function onHashChange() {
+
+	url = location.hash.slice( 1 );
+
+	//document.title = document.title ? document.title : url;
+	//window.history.back( 1 );
+
+	scene.remove( rad.meshes, rad.edges, rad.pointsField );
+	rad.meshes = new THREE.Object3D();
+	rad.edges = new THREE.Object3D();
+
+	requestFile( url );
+
+}
+
+
+
+function requestFile( url ) {
+
+	const xhr = new XMLHttpRequest();  // unlike fetch handles local files
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded ); }; /// or something
+	xhr.onload = callbackRequestFile;
+	xhr.send( null );
+
+};
+
+
+
+function callbackRequestFile( xhr ) {
+
+	rad.arrRadJSon = [];
+
+	//divRadiance.innerText = '';
+
+	rad.json = rad.radToJson( xhr.target.response );
+
+	rad.setThreeJsWindowUpdate( );
+
+	setDataLogContents( rad.json, xhr.target.response );
+
+}
+
+
+function setDataLogContents( json, rad ) {
+
+	txtJson.value = JSON.stringify( json, undefined, 2 ); // reloads every iteration but does seem to slow things down much ;-)
+
+	divRadiance.innerText = rad + '\n';
+
+
+}
+
+function setTitle( target ) {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+	target.innerHTML =
+
+	`<h2>
+		<a href=${ urlSourceCode } target="_top" title = "Source code on GitHub" >
+			<img src="https://status.github.com/images/invertocat.png" height=18 >
+		</a>
+		<a href = "" title = "Click to reload this page" >${ document.title }</a>
+	</h2>
+
+	<p>
+		${ document.head.querySelector( '[name=description]' ).content }
+	</p>`;
+
+}
+
+
+//////////
+
+function toggleWireframe() {
+
+	scene.traverse( function ( child ) {
+
+		if ( child instanceof THREE.Mesh ) {
+
+			child.material.wireframe = !child.material.wireframe;
+
+		}
+
+	} );
+
+}
+
+
+
+function updateOpacity() {
+
+	const opacity = parseInt( rngOpacity.value, 10 );
+	outOpacity.value = opacity + '%';
+
+	scene.traverse( function ( child ) {
+
+		if ( child instanceof THREE.Mesh ) {
+
+			child.material.opacity = opacity / 100;
+
+		}
+
+	} );
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+	scene.rotation.z += sceneRotation / 1000;
+
+}
+
+</script>
+</body>
+</html>

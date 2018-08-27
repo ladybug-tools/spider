@@ -46,6 +46,7 @@
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/examples/js/controls/TrackballControls.js" ></script>
+<script src = "open-files.js" ></script>
 
 	<div id = "divMenu" class="jumbotron" >
 
@@ -57,6 +58,8 @@
 		<div id = "divTitle" ></div>
 
 		<p id = "pLog" ></p>
+
+		<div id = "divOpenFiles" ></div>
 
 		<details open >
 
@@ -267,6 +270,8 @@ function init() {
 	updateCss( themeName );
 
 	setTitle( divTitle );
+
+	openFiles.init( divOpenFiles );
 
 	// Swipe events
 	document.addEventListener( 'touchstart', onTouchStart, false );
