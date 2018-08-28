@@ -157,7 +157,7 @@ rad.radObjectToJson = function( radText){
 
 rad.parsePolygon = function( data ) {
 
-	console.log( 'data', data );
+	//console.log( 'data', data );
 
 	const ptList = data.slice( 6 ); // .map( vertex => parseFloat( vertex ) );
 	//console.log( 'ptList', ptList );

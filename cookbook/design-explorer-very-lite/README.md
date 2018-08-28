@@ -54,9 +54,7 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 * 2018-08-25 ~ Theo ~ Add reset view / zoom all
 * 2018-08-25 ~ Theo ~ Add random data generator
-* 2018-08-25 ~ Theo ~ Add read CSV data from file
 * 2018-08-24 ~ Theo ~ reverse the sort order of an axis
-* 2018-08-24 ~ Theo ~ Buttons that toggle other selections off / as with main gbXML Viewer
 * 2018-08-23 ~ Theo ~ Multiple simultaneous adjacent chart space volumes
 	* With, say, each text field generating its own space
 * 2018-08-23 ~ Theo ~ Add direction, three axes of scale, opacity, color of edges as user-selected displays of output variables
@@ -86,10 +84,21 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 ***
 
+## Script 16 / 2018-08-27: Design Explorer Very Lite R12
+
+### Full Screen: [Design Explorer Very Lite R12]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r12/design-explorer-very-lite.html )
+
+* Add lib folder and break up code into lots of little files
+* Add better text filter toggles
+* Add buttons to more CSV files
+
+#### to do items now well underway
+* 2018-08-24 ~ Theo ~ Buttons that toggle other selections off / as with main gbXML Viewer
+
+
+***
 
 ## Script 15 / 2018-08-25: Design Explorer Very Lite R11
-
-
 
 ### Full Screen: [Design Explorer Very Lite R11]( https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html )
 
@@ -104,6 +113,7 @@ The slowness is almost entirely due to each data point being a displayed with a 
 
 #### to do items now well underway
 
+* 2018-08-25 ~ Theo ~ Add read CSV data from file
 * 2018-08-23 ~ Theo ~ Nice progress indicator for the 15 seconds or so it takes to load the demo data file with 5K data items
 * 2018-08-23 ~ Theo ~ Better light and shade
 * 2018-08-10 ~ Theo ~ Apply Ladybug Tools standard colors / More standardized system of colors
