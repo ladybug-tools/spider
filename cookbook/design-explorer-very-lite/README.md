@@ -52,6 +52,9 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 ## To do / wish list
 
+* 2018-08-27 ~ Theo ~ Better stepping on slider when small number of numeric filters
+* 2018-08-27 ~ Theo ~ Indicate details of currently loaded file somewhere
+* 2018-08-27 ~ Theo ~ Items that are toggle 'off' should not be selectable
 * 2018-08-25 ~ Theo ~ Add reset view / zoom all
 * 2018-08-25 ~ Theo ~ Add random data generator
 * 2018-08-24 ~ Theo ~ reverse the sort order of an axis
@@ -61,11 +64,6 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 * 2018-08-23 ~ Theo ~ Add transparent planes to indicate current numeric min and max after filter applied
 * 2018-08-23 ~ Theo ~ Add convex shape bubbles around text filtered data points
 * 2018-08-23 ~ Theo ~ Add 'shadow' projects to each axis plane
-* 2018-08-23 ~ Theo ~ Better interaction when setting multiple filters
-	* Currently the current filter update overrides all other updates
-	* Handle steps in the data more effectively
-* 2018-08-23 ~ Theo ~ Better display of current values for numeric filters
-	* Currently: only display as a tooltip
 * 2018-08-23 ~ Theo ~ Examples based on spreadsheet data
 * 2018-08-23 ~ Theo ~ Permalinks to user-select output data assignments
 * 2018-08-23 ~ Theo ~ Data export of data points selected by filtering
@@ -75,7 +73,11 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 ## Issues
 
 * 2018-08-27 ~ Theo ~ Screen not rotating around the center of the geometry
-
+* 2018-08-23 ~ Theo ~ Better interaction when setting multiple filters
+	* Currently the current filter update overrides all other updates
+	* Handle steps in the data more effectively
+* 2018-08-23 ~ Theo ~ Better display of current values for numeric filters
+	* Currently: only display as a tooltip
 ***
 
 The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.
@@ -94,6 +96,8 @@ The slowness is almost entirely due to each data point being a displayed with a 
 * Add lib folder and break up code into lots of little files
 * Add better text filter toggles
 * Add buttons to more CSV files
+* Improve axis selection when opening a project
+* Load random project on startup
 
 #### to do items now well underway
 * 2018-08-24 ~ Theo ~ Buttons that toggle other selections off / as with main gbXML Viewer

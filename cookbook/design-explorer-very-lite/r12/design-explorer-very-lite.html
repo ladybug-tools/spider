@@ -224,40 +224,45 @@
 // https://github.com/showdownjs/showdown << check for latest rev from time to time 1.8.6 2018-07-02
 // jshint esversion: 6
 
-const sampleProject1 = [
-	'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/data.csv',
-	'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/'
-];
+projects = {
 
-const littleRedBox = [
-	'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/LittleRedBox.csv',
-	''
-];
+	sampleProject1: [
+		'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/data.csv',
+		'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/'
+	],
 
-const aiaBuilding = [
-	'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/AIA building.csv',
-	''
-];
+	littleRedBox: [
+		'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/LittleRedBox.csv',
+		''
+	],
 
-const defaultData = [
-	'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/default_onload.csv',
-	''
-];
+	aiaBuilding: [
+		'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/AIA building.csv',
+		''
+	],
 
-const coastGuard = [
-	'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-coast-guard.csv',
-	''
-];
+	defaultData: [
+		'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/default_onload.csv',
+		''
+	],
 
-const nahant = [
-	'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-nahant.csv',
-	''
-];
+	coastGuard: [
+		'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-coast-guard.csv',
+		''
+	],
 
-const unc = [
-	'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-unc.csv',
-	''
-];
+	nahant: [
+		'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-nahant.csv',
+		''
+	],
+
+	unc: [
+		'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-unc.csv',
+		''
+	]
+};
+
+const projectKeys = Object.keys( projects );
 
 let lines, object3D, placardX, placardY, placardZ;
 
@@ -297,8 +302,10 @@ function init() {
 	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
 	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
 
-	fetchFileCsv( sampleProject1 );
-	//fetchFileCsv( littleRedBox );
+	const item = projects[ projectKeys[ Math.floor( Math.random() * projectKeys.length ) ]  ]
+
+	fetchFileCsv( item );
+	//fetchFileCsv( projects.littleRedBox );
 
 	setLegend();
 
@@ -456,11 +463,10 @@ function setTextFilter( that, index ){
 }
 
 
-function toggleTextFilter( that, index, filter ) {
-	console.log( '44', index, filter );
-	that.classList.toggle( "active" );
 
-	//const filter = that.innerText.toLowerCase();
+function toggleTextFilter( that, index, filter ) {
+
+	that.classList.toggle( "active" );
 
 	const visible = that.classList.contains( 'active' );
 
@@ -480,6 +486,8 @@ function toggleTextFilter( that, index, filter ) {
 
 
 }
+
+
 
 ////////// Numeric Filters
 
@@ -674,23 +682,29 @@ function setColorVisible( triplet ) {
 function setSelect( keys, targets ) {
 
 	let count = keys.indexOf( keys.find( key => key.startsWith( 'out' ))) ;
-	const options = keys.filter( key => key.startsWith( 'out' ) )
-	.map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+	const options = keys.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
 
 	targets.map( target => target.innerHTML = options );
+	//console.log( 'targets', targets );
 
-	if ( options.length > 4 ) {
+	if ( urlCSV.includes( 'sample_project_1' ) ) {
 
 		targets[ 0 ].selectedIndex = 2
 		targets[ 1 ].selectedIndex = 5
 		targets[ 2 ].selectedIndex = 6
 		targets[ 3 ].selectedIndex = 8
+		targets[ 4 ].selectedIndex = 0
+		targets[ 4 ].selectedIndex = 7
 
 	} else {
 
-		targets[ 0 ].selectedIndex = 0;
-		targets[ 1 ].selectedIndex = 1;
-		targets[ 2 ].selectedIndex = 2;
+		let i = 0;
+		for ( target of targets ) {
+
+			target.selectedIndex = i++;
+			i = i >= options.length ? 0 : i;
+
+		}
 
 	}
 
