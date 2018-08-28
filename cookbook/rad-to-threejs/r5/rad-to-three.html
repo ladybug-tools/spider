@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Radiance RAD files in real-time 3D in your browser using the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-08-27" >
+<title>Radiance RAD to Three.js R5</title>
+<style>
+	/* Copyright 2018 Ladybug Tools authors. MIT License */
+
+	body, html { font: 11pt monospace; height: 100%; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 90%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#divMenu { background-color: #eee; max-height: 95%; margin: 1rem; width: 18rem; overflow: auto; padding: 1rem; position: absolute; resize: both; }
+
+	#divJson, #txtJson, #divRadiance { border: 1px solid #aaa; height: 300px; overflow: auto; resize: both; width: 100%; }
+
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/examples/js/controls/TrackballControls.js" ></script>
+<script src = "./lib/init-threejs.js" ></script>
+<script src = "./lib/fetch-ghithub-api-tree.js" ></script>
+<script src = "./lib/rad-to-three.js" ></script>
+<script src = "./lib/radconverter.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<details>
+
+			<summary>Sample files</summary>
+
+			<div id=divContents ></div>
+
+		</details>
+
+		<p>
+			Load JSON:
+			<input type=file id=inpOpenFile onchange=rad.inpOpenFiles(this.files); multiple accept=".rad,.mat" >
+		</p>
+
+		<details>
+
+			<summary>File data</summary>
+
+			<div id = "divLog" ></div>
+
+			<!--
+
+				<p>JSON div </p>
+				<div id=divJson ></div>
+
+			-->
+
+			<p>JSON textarea</p>
+			<textarea id=txtJson ></textarea>
+
+			<p>Radiance data</p>
+			<div id =divRadiance ></div>
+
+		</details>
+
+
+		<details>
+
+			<summary>Settings</summary>
+
+			<p>
+				<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+			</p>
+
+			<p>
+				<button onclick=toggleWireframe(); >wireframe</button>
+
+				<button onclick=rad.edges.visible=!rad.edges.visible; >toggle edges</button>
+			</p>
+
+			<div title="building opacity: 0 to 100%" >Opacity
+				<output id=outOpacity class=floatRight >85%</output><br>
+				<input type="range" id="rngOpacity" min=0 max=100 step=1 value=85 oninput=updateOpacity(); >
+			</div>
+
+			<p><button onclick=rad.zoomObjectBoundingSphere(rad.edges);>zoom all</button></p>
+
+		</details>
+
+	</div>
+
+<script>
+
+
+
+// Remember to update the release number
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/rad-to-threejs/r5/rad-to-three.html";
+
+
+
+init();
+
+
+function init() {
+
+	setTitle( divTitle );
+
+	initThreejs();
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+	if ( !location.hash ) { location.hash = urlDefaultFile; } else { onHashChange(); }
+
+	fetchGitHubApiTree( urlGitHubAPITree, divContents );
+
+}
+
+
+function setTitle( target ) {
+
+	target.innerHTML =
+
+	`
+		<h2>
+			<a href=${ urlSourceCode } target="_top" title = "Source code on GitHub" >
+				<img src="https://status.github.com/images/invertocat.png" height=18 >
+			</a>
+			<a href = "" title = "Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( '[name=description]' ).content }
+		</p>
+	`;
+
+}
+
+
+
+function onHashChange() {
+
+	url = location.hash.slice( 1 );
+
+	//document.title = document.title ? document.title : url;
+	//window.history.back( 1 );
+
+	//scene.remove( rad.meshes, rad.edges, rad.pointsField );
+	//rad.meshes = new THREE.Object3D();
+	//rad.edges = new THREE.Object3D();
+
+	requestFile( url );
+
+}
+
+
+
+function requestFile( url ) {
+
+	const xhr = new XMLHttpRequest();  // unlike fetch handles local files
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded ); }; // or something
+	xhr.onload = callbackRequestFile;
+	xhr.send( null );
+
+};
+
+
+
+function callbackRequestFile( xhr ) {
+
+	rad.json = rad.radToJson( xhr.target.response );
+
+	rad.setThreeJsWindowUpdate( );
+
+	if ( xhr.target.response.length < 500000 ) {
+
+		//divJson.innerText = JSON.stringify( rad.json, undefined, 2 );
+
+		txtJson.value = JSON.stringify( rad.json, undefined, 2 );
+
+		divRadiance.innerText = xhr.target.response + '\n';
+
+	}
+
+}
+
+</script>
+</body>
+</html>

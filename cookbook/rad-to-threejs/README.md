@@ -56,10 +56,9 @@ See also GitHub Issue: [Update 2018-08-23 ~ RAD to Three.js R3 #142]( https://gi
 
 ## To do / wish list
 
-* 2018-08-19 ~ Theo ~ files in the [gward samples folders]( https://github.com/ladybug-tools/spider/tree/master/radiance-sample-files/gjward1 ) have a variety of spaces and tabs between data elements. We should be able to handle all the permutations successfully
+
 * 2018-08-19 ~ Theo ~ Load multiple files via location.hash
 * 2018-08-12 ~ Theo ~ Add drag and drop multiple files
-* 2018-08-11 ~ Theo ~ Handle Radiance materials
 * 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
 
 
@@ -68,7 +67,35 @@ The following sections - newest on top - are a show and tell of the adventures i
 
 ***
 
-## 2018-08-19: Full Screen: [Radiance RAD to Three.js R4]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r4/rad-to-three.html )
+## 2018-08-19: Full Screen: [Radiance RAD to Three.js R5]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r5/rad-to-three.html )
+
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r4/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
+
+* Add lib folder and move JavaScript files
+* Add fetchGitHubApiTree.js
+* Add init-threejs.js
+* Add sphere and cylinder geometries
+* Begin to add materials capabilities
+* Much refactoring and code cleanup
+
+#### Wish list item underway
+
+* 2018-08-11 ~ Theo ~ Handle Radiance materials
+* 2018-08-19 ~ Theo ~ files in the [gward samples folders]( https://github.com/ladybug-tools/spider/tree/master/radiance-sample-files/gjward1 ) have a variety of spaces and tabs between data elements. We should be able to handle all the permutations successfully
+
+#### Notes
+
+This script is beginning to mature. It handles a good starting range of Radiance geometries and materials and displays the data as expected in most instances. There are still issues with files over a megabyte in size as well as odd errors with individual surface - particularly with files exported from OpenStudio.
+
+The step will be to mve the files to a new separate repository.
+
+
+
+
+
+***
+
+## 2018-08-26: Full Screen: [Radiance RAD to Three.js R4]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r4/rad-to-three.html )
 
 <iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r4/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 

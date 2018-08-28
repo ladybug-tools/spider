@@ -117,8 +117,9 @@ rad.parseRadText = function( radText ) {
 
 	// separate input radiance objects
 	const rawObjects = radText.match( parseRadRe ).filter( word => word.trim().length > 0 && !word.trim().startsWith( '#' ) );
+	//console.log( 'rawObjects', rawObjects );
 	const rawObjects2 = rawObjects.map( item => item.replace(/\r\n|\n/g, " " ) );
-	console.log( 'rawObjects2', rawObjects2 );
+	//console.log( 'rawObjects2', rawObjects2 );
 
 	const jsonArray = rawObjects2.map( line => rad.radObjectToJson( line ) );
 	//console.log( 'jsonArray', jsonArray );
