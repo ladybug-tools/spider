@@ -1,7 +1,6 @@
 
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
-
 let sceneRotation = 1;
 let renderer, camera, controls, scene;
 

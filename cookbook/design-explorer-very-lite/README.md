@@ -6,7 +6,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 # [Design Explorer Very Lite Read Me]( #/cookbook/design-explorer-very-lite/README.md )
 
-<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/r11/design-explorer-very-lite.html width=100% height=600px >Iframes are not viewable in GitHub source code view</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/design-explorer-very-lite/index.html width=100% height=600px >Iframes are not viewable in GitHub source code view</iframe>
 
 ## Concept
 
@@ -25,15 +25,21 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 ### Vision
 
-* Exposes interesting new ways of visualizing the data?
+* Will it expose interesting new ways of visualizing Honeybee data?
 
 
 ### Features
 
 * Interactive 3D chart running in your browser
-* Slide in/out menu allows for viewing on mobile devices
+	* Full real-time zoom, pan and rotate
+* Designed so that basic operation are available on mobile devices
+	* Slide in/out menu allows for viewing on snall screens
+	* Finger touch-enabled
+	* Screen adjusts for device rotations
 * A variety of user-elected CSS themes are available
-* Loads several sample charts with data hosted on GitHub
+	* Includes all [Bootswatch]( https://bootswatch.com ) themes
+* Loads a number sample charts with data hosted on GitHub
+* Loads files using the file dialog box
 * Output data fields may be applied to XYZ axes, size, shape and color
 	* Assignments may be user-selected and updated at runtime
 	* Variable names, minimum values and maximums value are displayed 'in-world' for each axis
@@ -46,7 +52,8 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 	* Filters adjust auto-magically to the currently loaded data set
 	* Data fields that are lists of text items are filtered using buttons with names
 	* Data fields that are series of numbers are filtered using minimum and maximum range sliders
-* Code is under 1200 lines and generally fairly easy to read with no dependencies outside of Three.js
+	* Interactive color legend - each color is a button that acts as a filter
+* Code is about 35 KB and generally fairly easy to read with no dependencies outside of Three.js
 
 
 
@@ -72,12 +79,14 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 
 ## Issues
 
+* 2018-08-28 ~ Theo ~ Legend button titles should indicate ranges of values
 * 2018-08-27 ~ Theo ~ Screen not rotating around the center of the geometry
 * 2018-08-23 ~ Theo ~ Better interaction when setting multiple filters
 	* Currently the current filter update overrides all other updates
 	* Handle steps in the data more effectively
 * 2018-08-23 ~ Theo ~ Better display of current values for numeric filters
 	* Currently: only display as a tooltip
+
 ***
 
 The following sections - newest on top - are a show and tell of the adventures in responding to the above challenge.

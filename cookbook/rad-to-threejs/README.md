@@ -9,6 +9,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 ## Concept
 
 Support for [Radiance Online]( https://www.radiance-online.org/ )
+
 Translate Radiance RAD file types into Three.js views - all building on [Mostapha's efforts]( https://github.com/mostaphaRoudsari/radJSON)
 
 See also:
@@ -50,13 +51,13 @@ See also GitHub Issue: [Update 2018-08-23 ~ RAD to Three.js R3 #142]( https://gi
 	* Translated to JSON
 * Basic look-up table supplies a basic polygon color palette
 * Handles openings in surfaces moderately well
-* Update scene rotation, wireframe mode, edges visibility, surfaces opacity
+* Update scene settings: rotation, wireframe mode, edges visibility, surfaces opacity
 
 
 
 ## To do / wish list
 
-
+* 2018-08-28 ~ Theo ~ Add heads-up display for all surfaces
 * 2018-08-19 ~ Theo ~ Load multiple files via location.hash
 * 2018-08-12 ~ Theo ~ Add drag and drop multiple files
 * 2018-08-11 ~ Theo ~ Handle larger files in a timely, non-crashing fashion
@@ -69,7 +70,7 @@ The following sections - newest on top - are a show and tell of the adventures i
 
 ## 2018-08-19: Full Screen: [Radiance RAD to Three.js R5]( https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r5/rad-to-three.html )
 
-<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r4/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
+<iframe src=https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r5/rad-to-three.html width=100% height=500px >Iframes are not viewable in GitHub source code view<</iframe>
 
 * Add lib folder and move JavaScript files
 * Add fetchGitHubApiTree.js
