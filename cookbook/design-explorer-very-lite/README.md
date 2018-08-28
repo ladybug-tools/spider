@@ -72,6 +72,9 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 * 2018-08-23 ~ Theo ~ Explore sets of meshes or other ways of speeding up the generation and display of meshes
 * 2018-08-10 ~ Theo ~ Add Pareto filters - see also Links of Interest section below
 
+## Issues
+
+* 2018-08-27 ~ Theo ~ Screen not rotating around the center of the geometry
 
 ***
 
