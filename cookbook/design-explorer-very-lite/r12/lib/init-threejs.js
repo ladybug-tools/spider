@@ -7,7 +7,7 @@ let renderer, camera, controls, scene;
 
 function initThree() {
 
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( divThreeJs.clientWidth, divThreeJs.clientHeight );
 	//renderer.shadowMap.enabled = true;

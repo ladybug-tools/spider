@@ -1,7 +1,7 @@
 
 # Archive Read Me
 
-The folder contains various files once used in this repo.
+This folder contains various files once used elsewhere in this repo.
 
 Yes, git, does provide an incredible ability to view any file from any time,
 

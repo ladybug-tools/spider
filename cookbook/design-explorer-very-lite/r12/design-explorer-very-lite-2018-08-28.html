@@ -65,7 +65,7 @@
 
 		<div id = "divOpenFiles" ></div>
 
-		<details open >
+		<details >
 
 			<summary>Examples</summary>
 
@@ -90,7 +90,7 @@
 
 		</details>
 
-		<details open >
+		<details >
 
 			<summary>Axes Selections</summary>
 
@@ -129,6 +129,7 @@
 			<div id = "divFiltersText" ></div>
 
 		</details>
+
 
 		<details open >
 
@@ -309,9 +310,9 @@ function init() {
 	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
 
 	const item = projects[ projectKeys[ Math.floor( Math.random() * projectKeys.length ) ]  ]
-	fetchFileCsv( item );
 
-	//fetchFileCsv( projects.littleRedBox );
+	//fetchFileCsv( item );
+	fetchFileCsv( projects.littleRedBox );
 
 	setLegend();
 
@@ -503,14 +504,7 @@ function setNumericFilters() {
 	const line = lines[ 0 ];
 	const filters = keys.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === false );
 
-	divFiltersNumeric.innerHTML =
-	`
-	<small>
-		'Set all visible' first then use filters.
-		Repeat. Better interaction soon.
-		Current slider values shows as tooltips.
-	</small>
-	`;
+	divFiltersNumeric.innerHTML = `<small>current value shows as tooltip</small>`;
 
 	for ( let filter of filters ){
 
@@ -590,17 +584,19 @@ function setNumericFilterDisplay( that, scalar ) {
 
 		if ( child.material instanceof THREE.MeshPhongMaterial ) {
 
+			
+
 			const data = parseFloat( child.userData.data[ index ] );
 
 			if ( data >= min && data <= max ) {
 
-				//child.material.opacity = opacityVisible;
+				child.material.opacity = opacityVisible;
 
-				//child.children[ 0 ].material.opacity = opacityVisible;
+				child.children[ 0 ].material.opacity = opacityVisible;
 
 			} else {
 
-				//console.log( 'data', data, 'min', min, 'max', max );
+				console.log( 'data', data, 'min', min, 'max', max );
 				child.material.opacity = opacityVisibleFalse;
 
 				child.children[ 0 ].material.opacity = opacityVisibleFalse;

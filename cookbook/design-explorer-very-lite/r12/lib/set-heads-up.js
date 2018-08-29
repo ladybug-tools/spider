@@ -110,7 +110,9 @@ function setHeadsUp( event ) {
 	txt = `${ items }</small><br>`;
 
 	divData.innerHTML = txt;
-	divImage.innerHTML = '<img src="' + urlImg + intersected.userData.data[indexImg] + '" width=200 >';
+
+	divImage.innerHTML = getPics ? '<img src="' + urlImg + intersected.userData.data[indexImg] + '" width=200 >' : 'no image yet';
+
 	document.body.style.cursor = 'pointer';
 
 }
