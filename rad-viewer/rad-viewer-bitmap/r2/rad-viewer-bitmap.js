@@ -183,7 +183,8 @@
 
 		video = document.createElement( 'video' );
 		//video.src = "../../../../textures/sintel.ogv";
-		video.src = "../../../images/The-Pull-Heatmap-Follow-the-Pumpkin.webm";
+		//video.src = "../../../images/The-Pull-Heatmap-Follow-the-Pumpkin.webm";
+		video.src = "../../../images/movie.mp4";
 
 		video.load(); // must call after setting/changing source
 		//video.height = video.width = 256;
@@ -393,22 +394,22 @@
 		texture = new THREE.VideoTexture( video );
 		//texture.minFilter = THREE.LinearFilter;
 		//texture.magFilter = THREE.LinearFilter;
-		texture.minFilter = THREE.NearestMipMapNearestFilter;
-		texture.magFilter = THREE.NearestMipMapNearestFilter;
+		texture.minFilter = THREE.NearestFilter;
+		texture.magFilter = THREE.NearestFilter;
 
-		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-		//texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
-		texture.repeat.set( 1 / 320, 1 / 256 );
-		texture.offset.x = -0.5;
-		texture.offset.y = 0.5;
+		//texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+		texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping;
+		//texture.repeat.set( 1 / 320, 1 / 240 );
+		//texture.offset.x = -0.5;
+		//texture.offset.y = 0.5;
 		material = new THREE.MeshBasicMaterial( { map: texture, side: 2 } );
 
 
 		//texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-		//texture.repeat.set(  0.1, 0.1 );
+		texture.repeat.set(  0.02, 0.02 );
 
-		//texture.offset.x = 0.5;
-		//texture.offset.y = 0.5;
+		texture.offset.x = 0.5;
+		texture.offset.y = 0.5;
 
 		for ( let j = 3; j < length; j++ ) {
 
