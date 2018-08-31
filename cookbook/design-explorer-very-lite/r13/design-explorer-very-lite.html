@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" >
+<meta name=description content="View building performance studies from Honeybee in 3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-08-30" >
+<title>Design Explorer Very Lite R13</title>
+<style>
+/* Copyright 2018 Ladybug Tools authors. MIT License */
+
+	:root { --mnu-width: 17rem; font-size: 1em; }
+
+	html { height: 100%; margin: 0; }
+
+	body { height: 100%; margin: 0; overflow: hidden; }
+
+	a:hover, a:focus { background-color: yellow; color: #888; }
+	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
+	button.theme { border-width: 1px; margin: 0.3rem !important; min-width:3rem; }
+	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+
+	input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #bbb; width: 100%; }
+	input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 16px; width: 10px; }
+
+	select { width: 10rem; }
+	span {display:inline-block; width: 50px; }
+	summary { font-weight: bold; }
+
+	#divThreeJs {height: 100%; margin: 0 0 0 var( --mnu-width ); /* transition: margin-left .5s; */ position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; padding: 1rem; right: 0; }
+
+	#divMenu { height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
+		 width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#hamburger { cursor: pointer; font-size: 2rem; left: calc( var( --mnu-width ) - 4rem ); line-height: 1.25rem;
+		max-height: 2.5rem; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+	#headsUp { border-radius: 8px; display: block; max-width: 220px; padding: 0 5px 10px 5px; opacity: 0.95;
+		right: 1rem; position: absolute; top: 1rem; z-index: 10; };
+
+</style>
+<link id=css rel="stylesheet" href="" type="text/css" >
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r95/examples/js/controls/TrackballControls.js" ></script>
+<script src = "./lib/init-threejs.js" ></script>
+<script src = "./lib/set-theme.js" ></script>
+<script src = "./lib/set-navigation.js" ></script>
+<script src = "./lib/open-files.js" ></script>
+<script src = "./lib/set-heads-up.js" ></script>
+
+	<div id = "divMenu" class="jumbotron" >
+
+		<div>
+			<a class="breadcrumb-item" href = "https://www.ladybug.tools" target="_top" >Ladybug Tools</a>
+			<a class="breadcrumb-item" href= "../../../index.html" target="_top" style=font-size:24px; >🕸</a>
+		</div>
+
+		<div id = "divTitle" ></div>
+
+		<p id = "pLog" ></p>
+
+		<div id = "divOpenFiles" ></div>
+
+		<details open >
+
+			<summary>Examples</summary>
+
+			<p>
+				<a class="btn btn-link" href=#sampleProject1 >sample project 1</a> &nbsp;
+
+				<a class="btn btn-link" href="#aiaBuilding" >aia building</a> &nbsp;
+
+				<a class="btn btn-link" href=#littleRedBox >little red box</a> &nbsp;
+
+				<a class="btn btn-link" href=#defaultData >default data</a>
+
+				<a class="btn btn-link" href=#coastGuard >coast guard</a> &nbsp;
+
+				<a class="btn btn-link" href=#nahant >nahant</a> &nbsp;
+
+				<a class="btn btn-link" href=#unc >unc</a>
+			</p>
+
+		</details>
+
+		<details open >
+
+			<summary>Axes Selections</summary>
+
+			<p>
+				<span>X-axis</span> <select id=selX onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Y-axis</span> <select id=selY onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Z-axis</span> <select id=selZ onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Color</span> <select id=selColor onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Shape</span> <select id=selShape onchange=setObjects(); ></select>
+			</p>
+
+			<p>
+				<span>Size</span> <select id=selSize onchange=setObjects(); ></select>
+			</p>
+
+			<hr>
+
+		</details>
+
+		<details open >
+
+			<summary>Filters Text</summary>
+
+			<div id = "divFiltersText" ></div>
+
+		</details>
+
+		<details open >
+
+			<summary>Filters Numeric</summary>
+
+			<div id = "divFiltersNumeric" ></div>
+
+		</details>
+
+		<details open >
+
+			<summary>Legend</summary>
+
+			<div id = "divLegend" ></div>
+
+		<details>
+
+			<summary>Data sources</summary>
+
+			<p>CSV data from <a href="https://github.com/ladybug-tools/design_explorer_lite/blob/master/resources/sample_project_1/data.csv" target="_blank">sample_project_1/data.csv</a></p>
+			<p>
+				<a href="http://tt-acm.github.io/DesignExplorer/" target="_blank">Original DesignExplorer</a> -
+				<a href="https://github.com/tt-acm/DesignExplorer/tree/gh-pages/design_explorer_data" target="_blank">Source files</a>
+				<br>
+				<a href="http://www.ladybug.tools/design_explorer_lite/" target="_blank">DesignExplorer Lite</a> -
+				<a href="https://github.com/ladybug-tools/design_explorer_lite" target="_blank">Source Files</a>
+			</p>
+
+		</details>
+
+		<div id= "divFooter" >
+
+			<details>
+
+				<summary>Themes</summary>
+
+				<div id=divBootswatch ></div>
+
+				<div id=divCssOthers ></div>
+
+			</details>
+
+
+			<details>
+
+				<summary> Display settings </summary>
+
+				<p><button class="btn btn-sm" onclick=toggleBackgroundGradient(); > Toggle background gradient </button></p>
+
+				<p>
+					<button class="btn btn-sm" onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+					<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
+				</p>
+
+			</details>
+
+			<h3 onclick="divMenu.scrollTop=0;" style="cursor:pointer;text-align:center;" title="go to top of page" > 🕸 </h3>
+
+		</div>
+
+	</div>
+
+	<button id = "hamburger" class = "btn btn-primary" onclick=toggleNav(); > slide &#9776;  </button>
+
+	<div id = "headsUp" class="jumbotron" >
+
+		<div id = "divData" >
+
+			<p>
+				Item data appears here when is pointer over a data point
+			</p>
+
+			<p>Axis RGB = XYZ directions</p>
+
+			<p>Spacebar|click to stop spinning</p>
+
+			<p>Use one|two|three fingers to rotate|zoom|pan display in 3D. Or left|scroll|right with your pointing device</p>
+
+			<p>Press Control-Shift-J|Command-Option-J to see if the JavaScript console reports any errors</p>
+
+		</div>
+
+		<div id = "divImage" ></div>
+
+	</div>
+
+	<div id = "divThreeJs" ></div>
+
+
+<script>
+
+// https://github.com/showdownjs/showdown << check for latest rev from time to time 1.8.6 2018-07-02
+// jshint esversion: 6
+
+projects = {
+
+	sampleProject1: [
+		'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/data.csv',
+		'https://rawgit.com/ladybug-tools/design_explorer_lite/master/resources/sample_project_1/',
+		true,
+		'Sample Project 1'
+	],
+
+	littleRedBox: [
+		'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/LittleRedBox.csv',
+		'',
+		true,
+		'Little Red Box'
+	],
+
+	aiaBuilding: [
+		'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/AIA building.csv',
+		'',
+		true,
+		'AIA Building'
+	],
+
+	defaultData: [
+		'https://rawgit.com/tt-acm/DesignExplorer/gh-pages/design_explorer_data/default_onload.csv',
+		'',
+		true,
+		'Default'
+	],
+
+	coastGuard: [
+		'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-coast-guard.csv',
+		'',
+		false,
+		'Coast Gaurd'
+	],
+
+	nahant: [
+		'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-nahant.csv',
+		'',
+		false,
+		'Nahant'
+	],
+
+	unc: [
+		'https://rawgit.com/ladybug-tools/spider/master/cookbook/design-explorer-very-lite/csv-files/data-unc.csv',
+		'',
+		false,
+		'UNC'
+	]
+};
+
+const projectKeys = Object.keys( projects );
+
+let lines, object3D, placardX, placardY, placardZ;
+
+let urlCsv, urlImg, projectName;
+let shapeUnique;
+
+const colors = ['(49,54,149)','(69,117,180)','(116,173,209)','(171,217,233)','(224,243,248)','(255,255,191)','(254,224,144)','(253,174,97)','(244,109,67)','(215,48,39)','(165,0,38)'];
+
+let col = new THREE.Color();
+const opacityVisible = 0.85;
+const opacityVisibleFalse = 0.05;
+let count = 0;
+let start;
+
+;
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/design-explorer-very-lite";
+
+
+initThree();
+init();
+
+
+
+function init() {
+
+	updateCss( themeName );
+
+	setTitle( divTitle );
+
+	openFiles.init( divOpenFiles );
+
+	// Swipe events
+	document.addEventListener( 'touchstart', onTouchStart, false );
+	document.addEventListener( 'touchmove', onTouchMove, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	//item = projects[ projectKeys[ Math.floor( Math.random() * projectKeys.length ) ] ];
+	item = projectKeys[ Math.floor( Math.random() * projectKeys.length ) ];
+	//fetchFileCsv( item );
+
+	//fetchFileCsv( projects.littleRedBox );
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+	if ( !location.hash ) { location.hash = item; } else { onHashChange(); }
+
+	setLegend();
+
+}
+
+
+
+function setTitle( target ) {
+
+	target.innerHTML =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target="_top" >
+				<img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+
+			<a href = "" title = "Click to reload this page" >${document.title}</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( '[name=description]' ).content }
+		</p>
+	`;
+
+}
+
+
+function onHashChange() {
+
+	const projectName = location.hash.slice( 1 );
+
+ 	project = projects[ projectName ]
+	fetchFileCsv( project )
+
+}
+
+//////////
+
+function fetchFileCsv( project ) {
+
+	//console.log( 'project', project );
+	urlCSV = project[ 0 ];
+	urlImg = project[ 1 ];
+	getPics = project[ 2 ];
+	projectName = project[ 3 ];
+
+	const request = new Request( urlCSV );
+
+	fetch( request )
+		.then( response => response.text() )
+		.then( text => callbackFileCsv( text ) );
+
+}
+
+
+
+function callbackFileCsv( text ) {
+
+	//console.log( 'text', text );
+	//count = 0;
+
+	lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
+	//console.log( 'lines', lines );
+
+	keys = lines.shift();
+	//console.log( 'keys', keys );
+
+	indexImg = keys.indexOf( keys.find( key => key.startsWith( 'img' ))) ;
+
+	setSelect( keys, [ selX, selY, selZ, selColor, selShape, selSize ] );
+
+	setTextFilters( keys, lines );
+
+	setNumericFilters( keys, lines );
+
+}
+
+
+
+////////// Text Filters
+
+function setTextFilters( keys, lines ) {
+
+	divFiltersText.innerHTML = '';
+
+	const line = lines[ 0 ];
+	//console.log( 'line', line );
+
+	let filters = keys.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === true );
+	//console.log( 'filters', filters );
+
+	let indices = filters.map( item => keys.indexOf( item ) );
+	//console.log( 'indices', indices );
+
+	if ( indices.length === 0 ) { return; }
+
+	for ( let index of indices ) {
+
+		const arr = lines.map( fields => fields[ index ] );
+		const uniques = [...new Set( arr )];
+		//console.log( 'uniques', uniques );
+
+		txt = `<p>text filter <b>${ keys[ index ] }</b><br>`;
+
+		for ( let filter of uniques ){
+
+			// awkward break here to keep buttons close
+			txt +=
+			`
+				<button class="btn btn-secondary btn-sm active"
+					onclick=toggleTextFilter(this,${index},"${filter}"); title = "Hide or show this type"
+				>&theta;</button><button class="btn btn-secondary btn-sm active"
+				onclick=setTextFilter(this,${index}); title="Show only this type" >${ filter }</button>
+				|
+			`;
+
+		}
+
+		divFiltersText.innerHTML += txt + `</p>`;
+
+	}
+
+	divFiltersText.innerHTML +=
+	`
+		<p>
+
+		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(true); >Set all visible</button>
+
+		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(false); >Set all invisible</button>
+
+		</p>
+
+	<hr>`;
+
+}
+
+
+
+function setTextFilter( that, index ){
+
+	that.classList.toggle( "active" );
+
+	const filter = that.innerText.toLowerCase();
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+
+			if ( child.userData.data[ index ].toLowerCase() === filter ) {
+
+				child.material.opacity = opacityVisible;
+
+				child.children[ 0 ].material.opacity = opacityVisible; // edges
+
+			} else {
+
+				child.material.opacity = opacityVisibleFalse;
+
+				child.children[ 0 ].material.opacity = opacityVisibleFalse; // edges
+
+			}
+		}
+
+	} );
+
+}
+
+
+
+function toggleTextFilter( that, index, filter ) {
+
+	that.classList.toggle( "active" );
+
+	const visible = that.classList.contains( 'active' );
+
+	const opacity = visible ? opacityVisible : opacityVisibleFalse;
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial
+			&& child.userData.data[ index ] === filter ) {
+
+			child.material.opacity = opacity;
+
+			child.children[ 0 ].material.opacity = opacity; // edges
+		}
+
+	} );
+
+
+}
+
+
+
+////////// Numeric Filters
+
+function setNumericFilters() {
+
+	const line = lines[ 0 ];
+	const filters = keys.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === false );
+
+	divFiltersNumeric.innerHTML =
+	`
+	<small>
+		'Set all visible' first then use filters.
+		Repeat. Better interaction soon.
+		Current slider values shows as tooltips.
+	</small>
+	`;
+
+	for ( let filter of filters ){
+
+		index = keys.indexOf( filter );
+
+		const arr = lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+		let max = Math.max( ...arr );
+		let min = Math.min( ...arr );
+		let step = ( max - min ) / 10;
+
+		//console.log( 'mm', min, max );
+
+		let scalar = max - min > 10 ? 1 : 10;
+		scalar = max - min > 1 ? scalar : 100;
+
+		min = scalar * min;
+		max = scalar * max;
+		step = scalar * step;
+
+		const filterMin = 'filterMin' + index;
+		const filterMax = 'filterMax' + index;
+
+		divFiltersNumeric.innerHTML +=
+		`
+			<p><b>numeric filter ${ filter }</b><br>
+
+			<div>${ min / scalar } <span style=width:10rem >
+				<input type=range id=${ filterMin } min=${ min } max=${ max } step=${ step } value=${ min }
+					oninput=setNumericFilterDisplay(this,${scalar}); title=${ min / scalar } ></span> ${ max / scalar }
+			</div>
+
+			<div>${ min / scalar  } <span style=width:10rem >
+				<input type=range id=${ filterMax } min=${ min } max=${ max } step=${ step } value=${ max }
+					oninput=setNumericFilterDisplay(this,${scalar}); title=${ max / scalar } ></span> ${ max / scalar }
+			</p>
+		`;
+
+	}
+
+	divFiltersNumeric.innerHTML +=
+	`
+		<p>
+
+		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(true); >Set all visible</button>
+
+		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(false); >Set all invisible</button>
+
+		</p>
+
+		<hr>
+	`;
+
+}
+
+
+
+function setNumericFilterDisplay( that, scalar ) {
+
+	//console.log( 'that', that );
+
+	const index = that.id.slice( 9 );
+	//console.log( 'index', index );
+
+	const value = parseFloat( that.value ) / scalar;
+	console.log( 'value', value );
+
+	// catch max smaller than min
+
+	const min = parseFloat( document.querySelector( '#filterMin' + index ).value ) / scalar;
+	const max = parseFloat( document.querySelector( '#filterMax' + index ).value ) / scalar;
+
+	that.title = value;
+
+	//console.log( 'mm', min, max );
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+
+			const data = parseFloat( child.userData.data[ index ] );
+
+			if ( data >= min && data <= max ) {
+
+				//child.material.opacity = opacityVisible;
+
+				//child.children[ 0 ].material.opacity = opacityVisible;
+
+			} else {
+
+				//console.log( 'data', data, 'min', min, 'max', max );
+				child.material.opacity = opacityVisibleFalse;
+
+				child.children[ 0 ].material.opacity = opacityVisibleFalse;
+			}
+
+		}
+
+	} );
+
+}
+
+
+
+//////////
+
+function setFilterAll( boolean ) {
+
+	const opacity = boolean ? opacityVisible : opacityVisibleFalse;
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+
+			child.material.opacity = opacity;
+
+			child.children[ 0 ].material.opacity = opacity;
+
+		}
+
+	} );
+
+	const buttons = divFiltersText.getElementsByClassName( "btn" );
+
+	if ( boolean ) {
+
+		for ( button of buttons ){ button.classList.add( 'active' ) };
+
+	} else {
+
+		for ( button of buttons ){ button.classList.remove( 'active' ) };
+
+	}
+
+	setNumericFilters();
+
+}
+
+
+
+////////// Legend
+
+function setLegend( target = divLegend ) {
+
+	const txt = colors.map( ( color, index )=> `<button class="legend" onclick="setColorVisible('${ color }');" style="background-color:rgb${ color };width:15rem;" >button ${ index + 1 }</button><br>` );
+
+	target.innerHTML =
+	`
+		<h3 id=legendTitle ></h3>
+		<p>Click on a color to highlight its members</p>
+		<p>${ txt.join( '' ) }</p>
+	`;
+
+}
+
+
+
+function setColorVisible( triplet ) {
+
+	const color = 'rgb' + triplet;
+
+	object3D.traverse( function ( child ) {
+
+		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+
+			if ( child.material.color.getStyle() === color ) {
+
+				child.material.opacity = opacityVisible;
+
+				child.children[ 0 ].material.opacity = opacityVisible;
+
+			} else {
+
+				child.material.opacity = opacityVisibleFalse;
+
+				child.children[ 0 ].material.opacity = opacityVisibleFalse;
+
+			}
+		}
+
+	} );
+
+}
+
+
+/////////
+
+function setSelect( keys, targets ) {
+
+	let count = keys.indexOf( keys.find( key => key.startsWith( 'out' ))) ;
+	const options = keys.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+
+	targets.map( target => target.innerHTML = options );
+	//console.log( 'targets', targets );
+
+	if ( urlCSV.includes( 'sample_project_1' ) ) {
+
+		targets[ 0 ].selectedIndex = 2
+		targets[ 1 ].selectedIndex = 5
+		targets[ 2 ].selectedIndex = 6
+		targets[ 3 ].selectedIndex = 8
+		targets[ 4 ].selectedIndex = 0
+		targets[ 4 ].selectedIndex = 7
+
+	} else {
+
+		let i = 0;
+		for ( target of targets ) {
+
+			target.selectedIndex = i++;
+			i = i >= options.length ? 0 : i;
+
+		}
+
+	}
+
+	//console.log( '', options );
+
+	setObjects();
+
+}
+
+
+
+
+function setObjects() {
+
+	scene.remove( object3D, placardX, placardY, placardZ );
+
+	object3D = new THREE.Group();
+	object3D.position.set( -50, -50, 0 );
+	count = 0;
+	start = performance.now()
+
+	scene.add( object3D );
+
+	const axisX = getNormalize( selX.value );
+	const axisY = getNormalize( selY.value );
+	const axisZ = getNormalize( selZ.value );
+
+	legendTitle.innerHTML = keys[ selColor.value ].slice( 4 );
+
+	const colorsData = getNormalize( selColor.value, colors.length - 1 );
+	const colorsFloor = colorsData[ 0 ].map( col => Math.floor( col ) );
+
+	const buttons = document.getElementsByClassName( 'legend' );
+
+	const min = colorsData[ 1 ]
+	const delta = ( colorsData[ 2 ] - min ) / colors.length;
+	const field = keys[ selColor.value ];
+	Array.from( buttons ).forEach( ( button, index ) => button.innerHTML =
+		`${ Number( ( min + index * delta ).toFixed( 1 ) ).toLocaleString()}
+		- ${ Number( ( min + ( index + 1 ) * delta ).toFixed( 1 ) ).toLocaleString() }` );
+
+	//console.log( 'colorsNorm', colorsFloor );
+
+	const size = getNormalize( selSize.value );
+
+	const shapeArr = lines.map( items => items[ selShape.value ] );
+	shapeUnique = [...new Set( shapeArr )];
+
+	drawMeshesStagger();
+
+	placardX = drawPlacard( [ 'X-axis', keys[ selX.value ], 'min: ' + axisX[ 1 ].toFixed( 1 ), 'max: ' + axisX[ 2 ].toFixed( 1 ) ], 0.08, 1, 50, -50, 10 );
+	scene.add( placardX );
+
+	placardY = drawPlacard( [ 'Y-axis', keys[ selY.value ], 'min: ' + axisY[ 1 ].toFixed( 1 ), 'max: ' + axisY[ 2 ].toFixed( 1 ) ], 0.08, 120, -50, 50, 10 );
+	scene.add( placardY );
+
+	placardZ = drawPlacard( [ 'Z-axis', keys[ selZ.value ], 'min: ' + axisZ[ 1 ].toFixed( 1 ), 'max: ' + axisZ[ 2 ].toFixed( 1 ) ], 0.08, 200, -50, -50, 110 );
+	scene.add( placardZ );
+
+	initHeadsUp();
+
+
+	function drawMeshesStagger( timestamp ) {
+
+		const t = performance.now();
+
+		for ( let i = 0; i < 200; i ++ ) {
+
+			if ( performance.now() - t > 60 || count >= lines.length ) { break; }
+
+			setDataPoint( axisX[ 0 ][ count ], axisY[ 0 ][ count ], axisZ[ 0 ][ count ], colorsFloor[ count ], size[ 0 ][ count ], shapeArr[ count ], lines[ count ] );
+
+			count++;
+
+		}
+
+		if ( count < lines.length ) {
+
+			requestAnimationFrame( drawMeshesStagger );
+
+		} else {
+
+		}
+
+		divImage.innerHTML =
+		`
+			<p>Items loaded: ${ count.toLocaleString() } of ${ lines.length.toLocaleString() }</p>
+			<p>Items draw time: ${ Math.floor( performance.now() - start ).toLocaleString() } ms</p>
+		`;
+	}
+
+}
+
+
+
+function setDataPoint( x, y, z, color = 0, size, shape, data ) {
+
+	//if ( !colors[ color ] ) { console.log( 'data', data, color  );}
+	col.setStyle( 'rgb' + colors[ color ] );
+	const scale = 0.8 + 0.01 * size;
+
+	let segments = 2 + shapeUnique.indexOf( shape );
+	segments = segments < 9 ? segments : 8;
+
+	// CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded )
+	const geometry = new THREE.CylinderBufferGeometry( scale, scale, scale, segments );
+	const material = new THREE.MeshPhongMaterial({ color: col, opacity: opacityVisible, transparent: true }) ;
+	const mesh = new THREE.Mesh( geometry, material );
+	mesh.userData.data = data;
+	mesh.position.set( x, y, z );
+	// mesh.scale.set( scale, scale, scale );
+
+	const materialLine = new THREE.LineBasicMaterial( { color: 0x000000, opacity: opacityVisible, transparent: true } );
+
+	let edges = new THREE.LineSegments( new THREE.EdgesGeometry( geometry ), materialLine );
+	mesh.add( edges );
+
+	object3D.add( mesh );
+
+}
+
+
+
+function getNormalize( index, range = 100 ) {
+
+	// https://stackoverflow.com/questions/39776819/function-to-normalize-any-number-from-0-1
+
+	const arr = lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+	const max = Math.max( ...arr );
+	const min = Math.min( ...arr );
+
+	const arrNormalized = arr.map( val => range * (val - min) / (max - min) )
+
+	return [arrNormalized, min, max ];
+
+}
+
+</script>
+</body>
+</html>
