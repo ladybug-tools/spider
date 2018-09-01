@@ -505,6 +505,10 @@ A light version of design explorer meant to display sliders for the inputs and s
 * https://github.com/ladybug-tools/design_explorer_lite
 * https://github.com/ladybug-tools/design_explorer_lite/wiki
 
+CSV files
+* https://github.com/ladybug-tools/design_explorer_lite/tree/master/resources
+* https://github.com/ladybug-tools/design_explorer_lite/blob/master/resources/sample_project_1/data.csv
+
 
 ### Pareto Filters
 

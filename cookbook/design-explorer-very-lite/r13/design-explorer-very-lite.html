@@ -75,9 +75,11 @@
 
 				<a class="btn btn-link" href="#aiaBuilding" >aia building</a> &nbsp;
 
-				<a class="btn btn-link" href=#littleRedBox >little red box</a> &nbsp;
+				<a class="btn btn-link" href=#littleRedBox >little red box</a>
+					<a class="btn btn-link" href=#littleRedBox&210210 >#2</a>
 
 				<a class="btn btn-link" href=#defaultData >default data</a>
+				<a class="btn btn-link" href=#defaultData&456712 >#2</a>
 
 				<a class="btn btn-link" href=#coastGuard >coast guard</a> &nbsp;
 
@@ -274,6 +276,7 @@ projects = {
 };
 
 let csv = {};
+csv.projectKey = undefined
 
 const projectKeys = Object.keys( projects );
 let urlCsv, urlImg, projectName;
@@ -344,19 +347,34 @@ function setTitle( target ) {
 
 function onHashChange() {
 
-	hash = location.hash.slice( 1 ).split( '&' )
-	csv.projectKey = hash[ 0 ];
+	hash = location.hash.slice( 1 ).split( '&' );
 	csv.selectIndices = hash[ 1 ] ? hash[ 1 ].split( '' ) : undefined;
 	console.log( 'csv.selectIndices', csv.selectIndices );
 
-	csv.project = projects[ csv.projectKey ];
-		//console.log( 'csv.project', csv.project );
-	csv.urlCSV = csv.project[ 0 ];
-	csv.urlImg = csv.project[ 1 ];
-	csv.getPics = csv.project[ 2 ];
-	csv.projectTitle = csv.project[ 3 ];
+	project = hash[ 0 ];
 
-	fetchFileCsv( csv )
+	if ( project !== csv.projectKey ) {
+
+		csv.projectKey = hash[ 0 ];
+		csv.project = projects[ csv.projectKey ];
+			//console.log( 'csv.project', csv.project );
+		csv.urlCSV = csv.project[ 0 ];
+		csv.urlImg = csv.project[ 1 ];
+		csv.getPics = csv.project[ 2 ];
+		csv.projectTitle = csv.project[ 3 ];
+
+		fetchFileCsv( csv );
+
+	} else {
+
+		setSelect();
+
+		setTextFilters();
+
+		setNumericFilters();
+
+	}
+
 
 }
 
@@ -713,29 +731,18 @@ function setSelect() {
 	const inpSelects = [ selX, selY, selZ, selColor, selShape, selSize ];
 	let count = csv.fields.indexOf( csv.fields.find( key => key.startsWith( 'out' ) ) );
 	const options = csv.fields.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
-	inpSelects.map( target => target.innerHTML = options );
+	inpSelects.map( select => select.innerHTML = options );
 	//console.log( 'inpSelects', inpSelects );
 
-	if ( csv.urlCSV.includes( 'bbbbsample_project_1' ) ) {
+	let i = 0;
+	for ( select of inpSelects ) {
 
-		inpSelects[ 0 ].selectedIndex = 2 // 2, 5, 6, 8, 0, 7
-		inpSelects[ 1 ].selectedIndex = 5
-		inpSelects[ 2 ].selectedIndex = 6
-		inpSelects[ 3 ].selectedIndex = 8
-		inpSelects[ 4 ].selectedIndex = 0
-		inpSelects[ 5 ].selectedIndex = 7
-
-	} else {
-
-		let i = 0;
-		for ( target of inpSelects ) {
-
-			target.selectedIndex = indices[ i++ ];
-			i = i >= options.length ? 0 : i;
-
-		}
+		select.selectedIndex = indices[ i++ ];
+		console.log( 'sel', select, select.selectedIndex );
+		i = i >= options.length ? 0 : i;
 
 	}
+
 	//console.log( '', options );
 
 	setObjects();
@@ -852,7 +859,6 @@ function setDataPoint( x, y, z, color = 0, size, shape, data ) {
 	const mesh = new THREE.Mesh( geometry, material );
 	mesh.userData.data = data;
 	mesh.position.set( x, y, z );
-
 
 	const edges = new THREE.LineSegments( new THREE.EdgesGeometry( geometry ), materialLine );
 	mesh.add( edges );
