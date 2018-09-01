@@ -80,7 +80,7 @@ function onDocumentMouseMove( event ) {
 		divData.innerHTML =
 		`
 			${ projectName }<br>
-			Items: ${ lines.length.toLocaleString() }<br>
+			Items: ${ csv.lines.length.toLocaleString() }<br>
 			No item selected
 		`;
 		divImage.innerHTML = '';
@@ -110,13 +110,13 @@ function setHeadsUp( event ) {
 
 	headsUp.style.display = '';
 
-	const items = `<small>Fields:<br>` + keys.map( ( item, index ) => `${ index } ${ item } <b>` + intersected.userData.data[ index ] ).slice( 0, indexImg ).join( '</b><br>' );
+	const items = `<small>Fields:<br>` + csv.fields.map( ( item, index ) => `${ index } ${ item } <b>` + intersected.userData.data[ index ] ).slice( 0, csv.indexImg ).join( '</b><br>' );
 
 	txt = `${ items }</small><br>`;
 
 	divData.innerHTML = txt;
 
-	divImage.innerHTML = getPics ? '<img src="' + urlImg + intersected.userData.data[indexImg] + '" width=200 >' : 'no image yet';
+	divImage.innerHTML = csv.getPics ? '<img src="' + csv.urlImg + intersected.userData.data[csv.indexImg] + '" width=200 >' : 'no image yet';
 
 	document.body.style.cursor = 'pointer';
 

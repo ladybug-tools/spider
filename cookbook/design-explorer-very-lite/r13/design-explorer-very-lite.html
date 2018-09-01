@@ -70,7 +70,8 @@
 			<summary>Examples</summary>
 
 			<p>
-				<a class="btn btn-link" href=#sampleProject1 >sample project 1</a> &nbsp;
+				<a class="btn btn-link" href=#sampleProject1&256807 >sample project 1</a>
+					<a class="btn btn-link" href=#sampleProject1&012345 >#2</a>
 
 				<a class="btn btn-link" href="#aiaBuilding" >aia building</a> &nbsp;
 
@@ -272,22 +273,21 @@ projects = {
 	]
 };
 
+let csv = {};
+
 const projectKeys = Object.keys( projects );
-
-let lines, object3D, placardX, placardY, placardZ;
-
 let urlCsv, urlImg, projectName;
-let shapeUnique;
+
+let object3D, placardX, placardY, placardZ;
+
+let count = 0;
 
 const colors = ['(49,54,149)','(69,117,180)','(116,173,209)','(171,217,233)','(224,243,248)','(255,255,191)','(254,224,144)','(253,174,97)','(244,109,67)','(215,48,39)','(165,0,38)'];
-
-let col = new THREE.Color();
+const threeColor = new THREE.Color();
 const opacityVisible = 0.85;
 const opacityVisibleFalse = 0.05;
-let count = 0;
-let start;
+const materialLine = new THREE.LineBasicMaterial( { color: 0x000000, opacity: opacityVisible, transparent: true } );
 
-;
 const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/design-explorer-very-lite";
 
 
@@ -310,15 +310,12 @@ function init() {
 	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
 	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
 
-	//item = projects[ projectKeys[ Math.floor( Math.random() * projectKeys.length ) ] ];
-	item = projectKeys[ Math.floor( Math.random() * projectKeys.length ) ];
-	//fetchFileCsv( item );
-
-	//fetchFileCsv( projects.littleRedBox );
+	//projectDefault = projectKeys[ Math.floor( Math.random() * projectKeys.length ) ];
+	projectDefault = 'littleRedBox';
 
 	window.addEventListener ( 'hashchange', onHashChange, false );
 
-	if ( !location.hash ) { location.hash = item; } else { onHashChange(); }
+	if ( !location.hash ) { location.hash = projectDefault; } else { onHashChange(); }
 
 	setLegend();
 
@@ -347,10 +344,19 @@ function setTitle( target ) {
 
 function onHashChange() {
 
-	const projectName = location.hash.slice( 1 );
+	hash = location.hash.slice( 1 ).split( '&' )
+	csv.projectKey = hash[ 0 ];
+	csv.selectIndices = hash[ 1 ] ? hash[ 1 ].split( '' ) : undefined;
+	console.log( 'csv.selectIndices', csv.selectIndices );
 
- 	project = projects[ projectName ]
-	fetchFileCsv( project )
+	csv.project = projects[ csv.projectKey ];
+		//console.log( 'csv.project', csv.project );
+	csv.urlCSV = csv.project[ 0 ];
+	csv.urlImg = csv.project[ 1 ];
+	csv.getPics = csv.project[ 2 ];
+	csv.projectTitle = csv.project[ 3 ];
+
+	fetchFileCsv( csv )
 
 }
 
@@ -358,13 +364,7 @@ function onHashChange() {
 
 function fetchFileCsv( project ) {
 
-	//console.log( 'project', project );
-	urlCSV = project[ 0 ];
-	urlImg = project[ 1 ];
-	getPics = project[ 2 ];
-	projectName = project[ 3 ];
-
-	const request = new Request( urlCSV );
+	const request = new Request( project.urlCSV );
 
 	fetch( request )
 		.then( response => response.text() )
@@ -379,19 +379,19 @@ function callbackFileCsv( text ) {
 	//console.log( 'text', text );
 	//count = 0;
 
-	lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
-	//console.log( 'lines', lines );
+	csv.lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
+	//console.log( 'csv.lines', csv.lines );
 
-	keys = lines.shift();
-	//console.log( 'keys', keys );
+	csv.fields = csv.lines.shift();
+	//console.log( 'csv.fields', csv.fields );
 
-	indexImg = keys.indexOf( keys.find( key => key.startsWith( 'img' ))) ;
+	csv.indexImg = csv.fields.indexOf( csv.fields.find( key => key.startsWith( 'img' ))) ;
 
-	setSelect( keys, [ selX, selY, selZ, selColor, selShape, selSize ] );
+	setSelect();
 
-	setTextFilters( keys, lines );
+	setTextFilters();
 
-	setNumericFilters( keys, lines );
+	setNumericFilters();
 
 }
 
@@ -399,28 +399,28 @@ function callbackFileCsv( text ) {
 
 ////////// Text Filters
 
-function setTextFilters( keys, lines ) {
+function setTextFilters() {
 
 	divFiltersText.innerHTML = '';
 
-	const line = lines[ 0 ];
+	const line = csv.lines[ 0 ];
 	//console.log( 'line', line );
 
-	let filters = keys.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === true );
+	let filters = csv.fields.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === true );
 	//console.log( 'filters', filters );
 
-	let indices = filters.map( item => keys.indexOf( item ) );
+	let indices = filters.map( item => csv.fields.indexOf( item ) );
 	//console.log( 'indices', indices );
 
 	if ( indices.length === 0 ) { return; }
 
 	for ( let index of indices ) {
 
-		const arr = lines.map( fields => fields[ index ] );
+		const arr = csv.lines.map( fields => fields[ index ] );
 		const uniques = [...new Set( arr )];
 		//console.log( 'uniques', uniques );
 
-		txt = `<p>text filter <b>${ keys[ index ] }</b><br>`;
+		txt = `<p>text filter <b>${ csv.fields[ index ] }</b><br>`;
 
 		for ( let filter of uniques ){
 
@@ -516,8 +516,8 @@ function toggleTextFilter( that, index, filter ) {
 
 function setNumericFilters() {
 
-	const line = lines[ 0 ];
-	const filters = keys.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === false );
+	const line = csv.lines[ 0 ];
+	const filters = csv.fields.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === false );
 
 	divFiltersNumeric.innerHTML =
 	`
@@ -530,9 +530,9 @@ function setNumericFilters() {
 
 	for ( let filter of filters ){
 
-		index = keys.indexOf( filter );
+		index = csv.fields.indexOf( filter );
 
-		const arr = lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+		const arr = csv.lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
 		let max = Math.max( ...arr );
 		let min = Math.min( ...arr );
 		let step = ( max - min ) / 10;
@@ -636,17 +636,13 @@ function setFilterAll( boolean ) {
 
 	const opacity = boolean ? opacityVisible : opacityVisibleFalse;
 
-	object3D.traverse( function ( child ) {
+	for ( let child of object3D.children ) {
 
-		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+		child.material.opacity = opacity;
 
-			child.material.opacity = opacity;
+		child.children[ 0 ].material.opacity = opacity;
 
-			child.children[ 0 ].material.opacity = opacity;
-
-		}
-
-	} );
+	}
 
 	const buttons = divFiltersText.getElementsByClassName( "btn" );
 
@@ -684,64 +680,62 @@ function setLegend( target = divLegend ) {
 
 
 function setColorVisible( triplet ) {
+	// edges having issues toggling as expected
 
 	const color = 'rgb' + triplet;
 
-	object3D.traverse( function ( child ) {
+	for ( let child of object3D.children ) {
 
-		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+		if ( child.material.color.getStyle() === color ) {
 
-			if ( child.material.color.getStyle() === color ) {
+			child.material.opacity = opacityVisible;
+			child.children[ 0 ].material.opacity = opacityVisible;
 
-				child.material.opacity = opacityVisible;
+		} else {
 
-				child.children[ 0 ].material.opacity = opacityVisible;
+			child.material.opacity = opacityVisibleFalse;
 
-			} else {
+			child.children[ 0 ].material.opacity = opacityVisibleFalse;
+			//console.log( 'child', child.children[ 0 ] );
 
-				child.material.opacity = opacityVisibleFalse;
-
-				child.children[ 0 ].material.opacity = opacityVisibleFalse;
-
-			}
 		}
-
-	} );
+	}
 
 }
 
 
 /////////
 
-function setSelect( keys, targets ) {
+function setSelect() {
 
-	let count = keys.indexOf( keys.find( key => key.startsWith( 'out' ))) ;
-	const options = keys.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+	const indices = csv.selectIndices ||  [ 0, 1, 2, 3, 4, 5 ];
+	console.log( 'indices', indices );
+	const inpSelects = [ selX, selY, selZ, selColor, selShape, selSize ];
+	let count = csv.fields.indexOf( csv.fields.find( key => key.startsWith( 'out' ) ) );
+	const options = csv.fields.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+	inpSelects.map( target => target.innerHTML = options );
+	//console.log( 'inpSelects', inpSelects );
 
-	targets.map( target => target.innerHTML = options );
-	//console.log( 'targets', targets );
+	if ( csv.urlCSV.includes( 'bbbbsample_project_1' ) ) {
 
-	if ( urlCSV.includes( 'sample_project_1' ) ) {
-
-		targets[ 0 ].selectedIndex = 2
-		targets[ 1 ].selectedIndex = 5
-		targets[ 2 ].selectedIndex = 6
-		targets[ 3 ].selectedIndex = 8
-		targets[ 4 ].selectedIndex = 0
-		targets[ 4 ].selectedIndex = 7
+		inpSelects[ 0 ].selectedIndex = 2 // 2, 5, 6, 8, 0, 7
+		inpSelects[ 1 ].selectedIndex = 5
+		inpSelects[ 2 ].selectedIndex = 6
+		inpSelects[ 3 ].selectedIndex = 8
+		inpSelects[ 4 ].selectedIndex = 0
+		inpSelects[ 5 ].selectedIndex = 7
 
 	} else {
 
 		let i = 0;
-		for ( target of targets ) {
+		for ( target of inpSelects ) {
 
-			target.selectedIndex = i++;
+			target.selectedIndex = indices[ i++ ];
 			i = i >= options.length ? 0 : i;
 
 		}
 
 	}
-
 	//console.log( '', options );
 
 	setObjects();
@@ -757,77 +751,83 @@ function setObjects() {
 
 	object3D = new THREE.Group();
 	object3D.position.set( -50, -50, 0 );
-	count = 0;
-	start = performance.now()
 
 	scene.add( object3D );
 
+	count = 0;
+	const start = performance.now()
 	const axisX = getNormalize( selX.value );
 	const axisY = getNormalize( selY.value );
 	const axisZ = getNormalize( selZ.value );
 
-	legendTitle.innerHTML = keys[ selColor.value ].slice( 4 );
-
 	const colorsData = getNormalize( selColor.value, colors.length - 1 );
 	const colorsFloor = colorsData[ 0 ].map( col => Math.floor( col ) );
 
-	const buttons = document.getElementsByClassName( 'legend' );
-
-	const min = colorsData[ 1 ]
+	const min = colorsData[ 1 ];
 	const delta = ( colorsData[ 2 ] - min ) / colors.length;
-	const field = keys[ selColor.value ];
-	Array.from( buttons ).forEach( ( button, index ) => button.innerHTML =
-		`${ Number( ( min + index * delta ).toFixed( 1 ) ).toLocaleString()}
-		- ${ Number( ( min + ( index + 1 ) * delta ).toFixed( 1 ) ).toLocaleString() }` );
+	const field = csv.fields[ selColor.value ];
 
+	const buttons = document.getElementsByClassName( 'legend' );
+	Array.from( buttons ).forEach( ( button, index ) =>
+		button.innerHTML =
+		`${ Number( ( min + index * delta ).toFixed( 1 ) ).toLocaleString()}
+		- ${ Number( ( min + ( index + 1 ) * delta ).toFixed( 1 ) ).toLocaleString()
+		}`
+	);
 	//console.log( 'colorsNorm', colorsFloor );
 
 	const size = getNormalize( selSize.value );
 
-	const shapeArr = lines.map( items => items[ selShape.value ] );
-	shapeUnique = [...new Set( shapeArr )];
+	const shapeArr = csv.lines.map( items => items[ selShape.value ] );
+	csv.shapeUnique = [...new Set( shapeArr )];  // set: store uniques values
 
 	drawMeshesStagger();
 
-	placardX = drawPlacard( [ 'X-axis', keys[ selX.value ], 'min: ' + axisX[ 1 ].toFixed( 1 ), 'max: ' + axisX[ 2 ].toFixed( 1 ) ], 0.08, 1, 50, -50, 10 );
+	legendTitle.innerHTML = csv.fields[ selColor.value ].slice( 4 );
+
+	placardX = drawPlacard( [ 'X-axis', csv.fields[ selX.value ], 'min: ' + axisX[ 1 ].toFixed( 1 ), 'max: ' + axisX[ 2 ].toFixed( 1 ) ], 0.08, 1, 50, -50, 10 );
 	scene.add( placardX );
 
-	placardY = drawPlacard( [ 'Y-axis', keys[ selY.value ], 'min: ' + axisY[ 1 ].toFixed( 1 ), 'max: ' + axisY[ 2 ].toFixed( 1 ) ], 0.08, 120, -50, 50, 10 );
+	placardY = drawPlacard( [ 'Y-axis', csv.fields[ selY.value ], 'min: ' + axisY[ 1 ].toFixed( 1 ), 'max: ' + axisY[ 2 ].toFixed( 1 ) ], 0.08, 120, -50, 50, 10 );
 	scene.add( placardY );
 
-	placardZ = drawPlacard( [ 'Z-axis', keys[ selZ.value ], 'min: ' + axisZ[ 1 ].toFixed( 1 ), 'max: ' + axisZ[ 2 ].toFixed( 1 ) ], 0.08, 200, -50, -50, 110 );
+	placardZ = drawPlacard( [ 'Z-axis', csv.fields[ selZ.value ], 'min: ' + axisZ[ 1 ].toFixed( 1 ), 'max: ' + axisZ[ 2 ].toFixed( 1 ) ], 0.08, 200, -50, -50, 110 );
 	scene.add( placardZ );
+
+	//dataItems = ( ...object3D.children );
 
 	initHeadsUp();
 
 
 	function drawMeshesStagger( timestamp ) {
+		// set a reasonable number of data points each frame until done // WIP - needs more science
 
 		const t = performance.now();
 
 		for ( let i = 0; i < 200; i ++ ) {
 
-			if ( performance.now() - t > 60 || count >= lines.length ) { break; }
+			if ( performance.now() - t > 60 || count >= csv.lines.length ) { break; }
 
-			setDataPoint( axisX[ 0 ][ count ], axisY[ 0 ][ count ], axisZ[ 0 ][ count ], colorsFloor[ count ], size[ 0 ][ count ], shapeArr[ count ], lines[ count ] );
+			setDataPoint( axisX[ 0 ][ count ], axisY[ 0 ][ count ], axisZ[ 0 ][ count ], colorsFloor[ count ], size[ 0 ][ count ], shapeArr[ count ], csv.lines[ count ] );
 
 			count++;
 
 		}
 
-		if ( count < lines.length ) {
+		if ( count < csv.lines.length ) {
 
 			requestAnimationFrame( drawMeshesStagger );
 
 		} else {
 
+			divImage.innerHTML =
+			`
+				<p>Items loaded: ${ count.toLocaleString() } of ${ csv.lines.length.toLocaleString() }</p>
+				<p>Items draw time: ${ Math.floor( performance.now() - start ).toLocaleString() } ms</p>
+			`;
+
 		}
 
-		divImage.innerHTML =
-		`
-			<p>Items loaded: ${ count.toLocaleString() } of ${ lines.length.toLocaleString() }</p>
-			<p>Items draw time: ${ Math.floor( performance.now() - start ).toLocaleString() } ms</p>
-		`;
 	}
 
 }
@@ -837,23 +837,24 @@ function setObjects() {
 function setDataPoint( x, y, z, color = 0, size, shape, data ) {
 
 	//if ( !colors[ color ] ) { console.log( 'data', data, color  );}
-	col.setStyle( 'rgb' + colors[ color ] );
+	threeColor.setStyle( 'rgb' + colors[ color ] );
 	const scale = 0.8 + 0.01 * size;
 
-	let segments = 2 + shapeUnique.indexOf( shape );
+	//console.log( 'shape', shape );
+	let segments = 3 + csv.shapeUnique.indexOf( shape );
+	//console.log( 'segments', segments );
 	segments = segments < 9 ? segments : 8;
+	//if ( segments < 3 || segments > 9 ) { console.log( 'oops', segments, shape, data );}
 
-	// CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded )
 	const geometry = new THREE.CylinderBufferGeometry( scale, scale, scale, segments );
-	const material = new THREE.MeshPhongMaterial({ color: col, opacity: opacityVisible, transparent: true }) ;
+	const material = new THREE.MeshPhongMaterial({ color: threeColor, opacity: opacityVisible, transparent: true }) ;
+
 	const mesh = new THREE.Mesh( geometry, material );
 	mesh.userData.data = data;
 	mesh.position.set( x, y, z );
-	// mesh.scale.set( scale, scale, scale );
 
-	const materialLine = new THREE.LineBasicMaterial( { color: 0x000000, opacity: opacityVisible, transparent: true } );
 
-	let edges = new THREE.LineSegments( new THREE.EdgesGeometry( geometry ), materialLine );
+	const edges = new THREE.LineSegments( new THREE.EdgesGeometry( geometry ), materialLine );
 	mesh.add( edges );
 
 	object3D.add( mesh );
@@ -866,7 +867,7 @@ function getNormalize( index, range = 100 ) {
 
 	// https://stackoverflow.com/questions/39776819/function-to-normalize-any-number-from-0-1
 
-	const arr = lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+	const arr = csv.lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
 	const max = Math.max( ...arr );
 	const min = Math.min( ...arr );
 
