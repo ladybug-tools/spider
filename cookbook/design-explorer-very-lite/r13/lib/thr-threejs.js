@@ -1,71 +1,92 @@
 
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
-let sceneRotation = 1;
-let renderer, camera, controls, scene;
+
+var THR = {};
+
+THR.sceneRotation = 1;
 
 
-function initThree() {
+THR.initThreejs = function() {
 
-	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
-	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( divThreeJs.clientWidth, divThreeJs.clientHeight );
-	//renderer.shadowMap.enabled = true;
-	divThreeJs.appendChild( renderer.domElement );
+	THR.renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	THR.renderer.setPixelRatio( window.devicePixelRatio );
+	THR.renderer.setSize( divThreeJs.clientWidth, divThreeJs.clientHeight );
+	divThreeJs.appendChild( THR.renderer.domElement );
 
-	camera = new THREE.PerspectiveCamera( 40, divThreeJs.clientWidth/divThreeJs.clientHeight, 1, 1000 );
-	camera.up.set( 0, 0, 1 );
-	camera.position.set( 160, 160, 50 );
+	THR.camera = new THREE.PerspectiveCamera( 40, divThreeJs.clientWidth/divThreeJs.clientHeight, 1, 1000 );
+	THR.camera.up.set( 0, 0, 1 );
+	THR.camera.position.set( 160, 160, 50 );
 
-	controls = new THREE.TrackballControls( camera, renderer.domElement );
-	controls.maxDistance = 800;
-	controls.target.set( 50, 50, 50 );
+	THR.controls = new THREE.TrackballControls( THR.camera, THR.renderer.domElement );
+	THR.controls.maxDistance = 800;
+	THR.controls.target.set( 50, 50, 50 );
 
-	scene = new THREE.Scene();
+	THR.scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', THR.onWindowResize, false );
+	window.addEventListener( 'orientationchange', THR.onWindowResize, false );
+
+	window.addEventListener( 'keyup', () => THR.sceneRotation = 0, false );
+	THR.renderer.domElement.addEventListener( 'click', () => THR.sceneRotation = 0, false );
+
+	THR.setLights();
+
+	THR.setHelpers();
+
+	THR.animate();
+}
+
+
+
+THR.setLights = function() {
 
 	const lightAmbient = new THREE.AmbientLight( 0x888888 );
-	scene.add( lightAmbient );
+	THR.scene.add( lightAmbient );
 
 	size = 100;
-	lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
+	const lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
 	lightDirectional.position.set( size, size, size );
 	//lightDirectional.shadow.camera.scale.set( 0.1 * size, 0.1 * size, size * 0.5 );
 	//lightDirectional.castShadow = true;
-	scene.add( lightDirectional );
+	THR.scene.add( lightDirectional );
 
 	//scene.add( new THREE.CameraHelper( lightDirectional.camera ) );
 
 	const lightPoint = new THREE.PointLight( 0xffffff, 1.5 );
 	lightPoint.position = new THREE.Vector3( 100, 100, 100 );
 	//camera.add( lightPoint );
-	scene.add( lightPoint );
+	THR.scene.add( lightPoint );
+
+};
 
 
-	window.addEventListener( 'resize', onWindowResize, false );
-	window.addEventListener( 'orientationchange', onWindowResize, false );
-	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
-	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+
+THR.setHelpers = function() {
 
 	const gridHelperXY = new THREE.GridHelper( 100, 10, 0x0000ff, 0x8888ff  );
 	gridHelperXY.rotation.x = Math.PI / 2;
 	//gridHelperXY.position.set( -50, -50, 0 );
-	scene.add( gridHelperXY );
+	THR.scene.add( gridHelperXY );
 
 	const gridHelperXZ = new THREE.GridHelper( 100, 10, 0xff0000, 0xff8888 );
 	//gridHelperXY.rotation.x = Math.PI / 2;
 	gridHelperXZ.position.set( 0, -50, 50 );
-	scene.add( gridHelperXZ );
+	THR.scene.add( gridHelperXZ );
 
 	const gridHelperYZ = new THREE.GridHelper( 100, 10, 0x00ff00, 0x88ff88 );
 	gridHelperYZ.rotation.z = Math.PI / 2;
 	gridHelperYZ.position.set( -50, 0, 50 );
-	scene.add( gridHelperYZ );
+	THR.scene.add( gridHelperYZ );
 
-	const axesHelper = new THREE.AxesHelper( 100 );
-	//axesHelper.position.set( -50,-50, 0 );
+	//const axesHelper = new THREE.AxesHelper( 100 );
 	//scene.add( axesHelper );
 
-	animate();
+	// useful debug snippet
+	//const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	//const material = new THREE.MeshNormalMaterial();
+	//const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
 
 }
 
@@ -157,28 +178,67 @@ function drawPlacard( text, scale = 0.05, color = Math.floor( Math.random() * 25
 
 		}
 
-}
+};
 
 
 
-function onWindowResize() {
+THR.onWindowResize = function() {
 
-	camera.aspect = divThreeJs.clientWidth / divThreeJs.clientHeight;
-	camera.updateProjectionMatrix();
+	THR.camera.aspect = divThreeJs.clientWidth / divThreeJs.clientHeight;
+	THR.camera.updateProjectionMatrix();
 
-	renderer.setSize( divThreeJs.clientWidth, divThreeJs.clientHeight );
+	THR.renderer.setSize( divThreeJs.clientWidth, divThreeJs.clientHeight );
 
 	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
-}
+};
 
 
 
-function animate() {
+THR.zoomObjectBoundingSphere = function( obj ) {
+	//console.log( 'obj', obj );
 
-	requestAnimationFrame( animate );
-	renderer.render( scene, camera );
-	controls.update();
-	scene.rotation.z += sceneRotation / 1000;
+	const bbox = new THREE.Box3().setFromObject( obj );
+	//console.log( 'bbox', bbox );
 
-}
+	if ( isNaN( bbox.max.x - bbox.min.x ) ) { console.log( 'zoom fail', {obj},{bbox} ); return; } // is there a better way of seeing if we have a good bbox?
+
+	const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+	const center = sphere.center;
+	const radius = sphere.radius;
+
+	THR.controls.target.copy( center );
+	THR.controls.maxDistance = 5 * radius;
+
+	THR.camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, - 1.5 * radius, 1.5 * radius ) ) );
+	THR.camera.near = 0.1 * radius; //2 * camera.position.length();
+	THR.camera.far = 10 * radius; //2 * camera.position.length();
+	THR.camera.updateProjectionMatrix();
+
+	//lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, -1.5 * radius, 1.5 * radius ) ) );
+	//lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
+	//lightDirectional.target = axesHelper;
+
+	THR.axesHelper.scale.set( radius, radius, radius );
+	THR.axesHelper.position.copy( center );
+	//scene.position.copy( center );
+
+	obj.userData.center = center;
+	obj.userData.radius = radius;
+
+	//		scene.remove( cameraHelper );
+	//		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
+	//		scene.add( cameraHelper );
+
+};
+
+
+
+THR.animate = function() {
+
+	requestAnimationFrame( THR.animate );
+	THR.renderer.render( THR.scene, THR.camera );
+	THR.controls.update();
+	THR.scene.rotation.z += THR.sceneRotation / 1000;
+
+};

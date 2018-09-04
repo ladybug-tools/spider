@@ -1,6 +1,18 @@
 
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
+let NAV = {};
+
+NAV.initNav = function() {
+
+	// Swipe events
+	document.addEventListener( 'touchstart', onTouchStart, false );
+	document.addEventListener( 'touchmove', onTouchMove, false );
+
+
+}
+
+
 
 function onTouchStart( event ) {
 
