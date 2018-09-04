@@ -1,7 +1,8 @@
-
 /* Copyright 2018 Ladybug Tools authors. MIT License */
+/* globals THREE, CSV, FLT, SEL, THR, divFiltersText, divFiltersNumeric, divMenu, hamburger  */
+// jshint esversion: 6
 
-const POP = {}
+const POP = {};
 
 
 POP.initPopUp = function( target = divPopUp ) {
@@ -36,20 +37,19 @@ POP.initPopUp = function( target = divPopUp ) {
 		<div id = "divPopUpImage" ></div>
 
 	`;
-}
+};
 
 
 
 POP.onDocumentMouseMove = function( event ) {
-
 	event.preventDefault();
 
-	if ( event.buttons > 0 ) { return; }
+	if ( event.buttons > 0 || !CSV.meshes ) { return; }
 
-	POP.meshesArray = object3D.children;
+	POP.meshesArray = CSV.selected;
 
-	POP.mouse.x = ( event.clientX / THR.renderer.domElement.clientWidth ) * 2 - 1;
-	POP.mouse.y = - ( event.clientY / THR.renderer.domElement.clientHeight ) * 2 + 1;
+	POP.mouse.x = ( event.clientX - divThreeJs.offsetLeft ) / divThreeJs.clientWidth * 2 - 1;
+	POP.mouse.y = - ( event.clientY - divThreeJs.offsetTop ) / divThreeJs.clientHeight * 2 + 1;
 
 	const raycaster = new THREE.Raycaster();
 	raycaster.setFromCamera( POP.mouse, THR.camera );
@@ -62,26 +62,26 @@ POP.onDocumentMouseMove = function( event ) {
 
 			if ( POP.intersected ) {
 
-				//POP.intersected.material.emissive.setHex( POP.emissive.currentHex );
-				POP.intersected.material.color.setHex( POP.intersected.currentHex );
+				POP.intersected.material.emissive.setHex( POP.intersected.currentHex );
+				//POP.intersected.material.color.setHex( POP.intersected.currentHex );
 				POP.intersected.material.opacity = POP.intersected.currentOpacity;
-				//POP.intersected.scale.copy( POP.intersected.currentScale );
+				POP.intersected.scale.copy( POP.intersected.currentScale );
 
 			}
 
 			POP.intersected = intersects[ 0 ].object;
 
-			//POP.intersected.currentHex = POP.intersected.material.emissive.getHex();
-			//POP.intersected.material.emissive.setHex( 0xff0000 );
+			POP.intersected.currentHex = POP.intersected.material.emissive.getHex();
+			POP.intersected.material.emissive.setHex( 0xff0000 );
 
-			POP.intersected.currentHex = POP.intersected.material.color.getHex();
-			POP.intersected.material.color.setHex( 0xff00ff );
+			//POP.intersected.currentHex = POP.intersected.material.color.getHex();
+			//POP.intersected.material.color.setHex( 0xff00ff );
 
 			POP.intersected.currentOpacity = POP.intersected.material.opacity;
 			POP.intersected.material.opacity = 1;
 
-			//POP.intersected.currentScale = POP.intersected.scale.clone();
-			//POP.intersected.scale.copy( POP.intersected.currentScale.clone().multiplyScalar( 1.2 ) );
+			POP.intersected.currentScale = POP.intersected.scale.clone();
+			POP.intersected.scale.copy( POP.intersected.currentScale.clone().multiplyScalar( 1.3 ) );
 
 		}
 
@@ -89,25 +89,24 @@ POP.onDocumentMouseMove = function( event ) {
 
 		if ( POP.intersected ) {
 
-			//POP.intersected.material.emissive.setHex( POP.intersected.currentHex );
-			POP.intersected.material.color.setHex( POP.intersected.currentHex );
+			POP.intersected.material.emissive.setHex( POP.intersected.currentHex );
+			//POP.intersected.material.color.setHex( POP.intersected.currentHex );
 			POP.intersected.material.opacity = POP.intersected.currentOpacity;
-			//POP.intersected.scale.copy( POP.intersected.currentScale );
+			POP.intersected.scale.copy( POP.intersected.currentScale );
 
 		}
 
 		POP.intersected = undefined;
 
 		divPopUpData.innerHTML = `No item selected`;
-		
-		divPopUpImage.innerHTML = '';
 
+		divPopUpImage.innerHTML = '';
 
 	}
 
 	POP.setPopUp( event );
 
-}
+};
 
 
 
@@ -133,47 +132,28 @@ POP.setPopUp = function( event ) {
 
 	document.body.style.cursor = 'pointer';
 
-}
+};
+
 
 
 POP.getPopUpText = function() {
 
-	//console.log( 'POP.intersected.userData', POP.intersected.userData );
+	const items = `<small>Fields:<br>` + CSV.fields.map( ( item, index ) => `${ index } ${ item }: <b>` + ( POP.intersected.userData.data[ index ] ).toLocaleString() ).slice( 0,CSV.indexImg ).join( '</b><br>' );
 
-	const geometry = JSON.stringify( POP.intersected.userData, null, 2 ).slice( 2, -2 ).replace( /"/g, '' ).replace( /(\D),/g, '$1<br>' );
+	const txt = `${ items }</small><br>`;
 
-	const materialName = POP.intersected.userData.modifier;
-	let materialText;
-
-	if ( rad.json.materials.length > 0 ) {
-
-		const materialJson = rad.json.materials.find( item => item.name === materialName );
-		materialText = JSON.stringify( materialJson, null, 2 ).slice( 2, -2 ).replace( /"/g, '' ).replace( /(\D),/g, '$1<br>' );
-
-	} else {
-
-		materialText = 'color #' + POP.intersected.currentHex;
-
-	}
-
-	const txt =
-	`
-		<h3>Geometry</h3>
-		${ geometry }
-		<h3>Material</h3>
-		${ materialText}
-	`;
+	divPopUpImage.innerHTML = CSV.getPics ? '<img src="' + CSV.urlImg + POP.intersected.userData.data[ CSV.indexImg ] + '" width=200 >' : 'no image yet';
 
 	return txt;
 
-}
+};
 
 
 POP.onDocumentMouseDown = function( event ) {
 
 	divPopUp.style.display = 'none';
 
-}
+};
 
 
 
@@ -184,6 +164,6 @@ POP.onDocumentTouchStart = function( event ) {
 	event.clientX = event.touches[0].clientX;
 	event.clientY = event.touches[0].clientY;
 
-	onDocumentMouseMove( event );
+	POP.onDocumentMouseMove( event );
 
-}
+};

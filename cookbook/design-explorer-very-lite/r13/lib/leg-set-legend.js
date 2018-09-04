@@ -2,15 +2,15 @@
 /* Copyright 2018 Ladybug Tools authors. MIT License */
 
 
-const LEG = function(){};
+const LEG = {};
 
 LEG.setLegend = function( target = divLegend ) {
 
-	const txt = colors.map( ( color, index ) =>
+	const txt = SEL.colors.map( ( color, index ) =>
 
 		`<p>
 			<button class="legend" onclick="LEG.setColorVisible('${ color }');"
-			style="background-color: rgb${ color };width: 15rem;" >button ${ index + 1 }</button>
+			style="background-color: rgb${ color }; width: 15rem;" >button ${ index + 1 }</button>
 		</p>`
 
 	);
@@ -22,7 +22,7 @@ LEG.setLegend = function( target = divLegend ) {
 		<p>${ txt.join( '' ) }</p>
 	`;
 
-}
+};
 
 
 
@@ -34,16 +34,16 @@ LEG.setColorVisible = function( triplet ) {
 
 		if ( child.material.color.getStyle() === color ) {
 
-			child.material.opacity = opacityVisible;
-			child.children[ 0 ].material.opacity = opacityVisible;
+			child.material.opacity = SEL.opacityVisible;
+			child.children[ 0 ].material.opacity = SEL.opacityVisible;
 
 		} else {
 
-			child.material.opacity = opacityVisibleFalse;
-			child.children[ 0 ].material.opacity = opacityVisibleFalse;
+			child.material.opacity = 0; //opacityVisibleFalse;
+			child.children[ 0 ].material.opacity = SEL.opacityVisibleFalse;
 
 		}
 
 	}
 
-}
+};

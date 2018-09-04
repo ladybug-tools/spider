@@ -60,8 +60,6 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 ## To do / wish list
 
 * 2018-08-27 ~ Theo ~ Better stepping on slider when small number of numeric filters
-
-* 2018-08-27 ~ Theo ~ Items that are toggle 'off' should not be selectable
 * 2018-08-25 ~ Theo ~ Add reset view / zoom all
 * 2018-08-25 ~ Theo ~ Add random data generator
 * 2018-08-24 ~ Theo ~ reverse the sort order of an axis
@@ -80,9 +78,6 @@ Is it possible to replicate much of the functionality of these two sets of scrip
 ## Issues
 
 
-* 2018-08-23 ~ Theo ~ Better interaction when setting multiple filters
-	* Currently the current filter update overrides all other updates
-	* Handle steps in the data more effectively
 * 2018-08-23 ~ Theo ~ Better display of current values for numeric filters
 	* Currently: only display as a tooltip
 
@@ -105,9 +100,18 @@ The slowness is almost entirely due to each data point being a displayed with a 
 * Add name to projects fields
 * Add project name and number of items to pop-up
 * Always show all fields up to image url in pop-up
+* Add each edge is its own material to be able to update opacity individually
+* Numeric filter sliders work collectively
+* Mostly name-spaced
+* Data items are only selected if fully visible
+
 
 #### Wish list item well underway
 
+* 2018-08-27 ~ Theo ~ Items that are toggle 'off' should not be selectable
+* 2018-08-23 ~ Theo ~ Better interaction when setting multiple filters
+	* Currently the current filter update overrides all other updates
+	* Handle steps in the data more effectively
 * 2018-08-28 ~ Theo ~ Legend button titles should indicate ranges of values
 * 2018-08-27 ~ Theo ~ Screen not rotating around the center of the geometry
 * 2018-08-27 ~ Theo ~ Indicate details of currently loaded file somewhere

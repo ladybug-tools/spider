@@ -6,24 +6,24 @@ let NAV = {};
 NAV.initNav = function() {
 
 	// Swipe events
-	document.addEventListener( 'touchstart', onTouchStart, false );
-	document.addEventListener( 'touchmove', onTouchMove, false );
+	document.addEventListener( 'touchstart', NAV.onTouchStart, false );
+	document.addEventListener( 'touchmove', NAV.onTouchMove, false );
 
 
 }
 
 
 
-function onTouchStart( event ) {
+NAV.onTouchStart = function( event ) {
 
-	xDown = event.touches[ 0 ].clientX;
-	yDown = event.touches[ 0 ].clientY;
+	NAV.xDown = event.touches[ 0 ].clientX;
+	NAV.yDown = event.touches[ 0 ].clientY;
 
 }
 
 
 
-function onTouchMove(event) {
+NAV.onTouchMove = function(event) {
 
 	if ( ! xDown || ! yDown ) {
 
@@ -69,14 +69,14 @@ function onTouchMove(event) {
 
 	}
 
-	xDown = null;
-	yDown = null;
+	NAV.xDown = null;
+	NAV.yDown = null;
 
 }
 
 
 
-function toggleNav() {
+NAV.toggleNav = function() {
 
 	const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
 
@@ -100,6 +100,6 @@ function toggleNav() {
 	//console.log( 'divThreeJs.clientWidth', divThreeJs.clientWidth );
 
 	//divThreeJs.style.width = divThreeJs.clientWidth + 'px';
-	onWindowResize();
+	THR.onWindowResize();
 
 }

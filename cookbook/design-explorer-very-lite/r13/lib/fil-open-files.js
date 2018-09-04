@@ -1,109 +1,112 @@
-
 /* Copyright 2018 Ladybug Tools authors. MIT License */
+/* globals projects, THREE, CSV, FLT, SEL, THR, divLog, divFiltersText, divFiltersNumeric, divMenu, hamburger  */
+// jshint esversion: 6
 
 
-OpenFiles = function(){};
+let FIL = {};
 
 
 
-function onHashChange() {
+FIL.onHashChange = function() {
 
 	const hash = location.hash.slice( 1 ).split( '&' );
-	csv.selectIndices = hash[ 1 ] ? hash[ 1 ].split( '' ) : undefined;
-	//console.log( 'csv.selectIndices', csv.selectIndices );
+	CSV.selectIndices = hash[ 1 ] ? hash[ 1 ].split( '' ) : undefined;
+	//console.log( 'CSV.selectIndices', CSV.selectIndices );
 
-	project = hash[ 0 ];
+	const project = hash[ 0 ];
 
-	if ( project !== csv.projectKey ) {
+	if ( project !== CSV.projectKey ) {
 
-		csv.projectKey = hash[ 0 ];
-		csv.project = projects[ csv.projectKey ];
-		//console.log( 'csv.project', csv.project );
-		csv.urlCSV = csv.project[ 0 ];
-		csv.urlImg = csv.project[ 1 ];
-		csv.getPics = csv.project[ 2 ];
-		csv.projectTitle = csv.project[ 3 ];
+		CSV.projectKey = hash[ 0 ];
+		CSV.project = projects[ CSV.projectKey ];
+		CSV.urlCSV = CSV.project[ 0 ];
+		CSV.urlImg = CSV.project[ 1 ];
+		CSV.getPics = CSV.project[ 2 ];
+		CSV.projectTitle = CSV.project[ 3 ];
 
-		fetchFileCsv( csv );
+		FIL.fetchFileCsv( CSV );
 
 	} else {
 
-		setSelect();
+		SEL.setSelect();
 
 		FLT.setTextFilters( divFiltersText );
 
-		setNumericFilters();
+		FLT.setNumericFilters( divFiltersNumeric );
 
 	}
-
-
-}
-
-//////////
-
-function fetchFileCsv( project ) {
-
-	const request = new Request( project.urlCSV );
-
-	fetch( request )
-		.then( response => response.text() )
-		.then( text => callbackFileCsv( text ) );
-
-}
-
-
-
-function callbackFileCsv( text ) {
-
-	//console.log( 'text', text );
-	//count = 0;
-
-	csv.lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
-	//console.log( 'csv.lines', csv.lines );
-
-	csv.fields = csv.lines.shift();
-	//console.log( 'csv.fields', csv.fields );
-
-	csv.indexImg = csv.fields.indexOf( csv.fields.find( key => key.startsWith( 'img' ))) ;
-
-	setSelect();
-
-	FLT.setTextFilters( divFiltersText );
-
-	setNumericFilters();
-
-}
-
-
-
-
-OpenFiles.init = function( target ) {
-
-	target.innerHTML =
-	`
-		<p><input type=file id=inpFile onchange=openFiles.load(this); ></p>
-		<textarea id=textArea style=height:50px;overflow:auto;width:100%; ></textarea>
-		<div id=divLog ></div>
-
-	`;
 
 };
 
 
 
-OpenFiles.load = function( files ) {
+FIL.fetchFileCsv = function( project ) {
+
+	const request = new Request( project.urlCSV );
+
+	fetch( request )
+		.then( response => response.text() )
+		.then( text => FIL.callbackFileCsv( text ) );
+
+};
+
+
+
+////////// Used by all file open methods
+
+FIL.callbackFileCsv = function( text ) {
+
+	//console.log( 'text', text );
+
+	CSV.lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
+	//console.log( 'CSV.lines', CSV.lines );
+
+	CSV.fields = CSV.lines.shift();
+	//console.log( 'CSV.fields', CSV.fields );
+
+	CSV.indexImg = CSV.fields.indexOf( CSV.fields.find( key => key.startsWith( 'img' ))) ;
+
+	SEL.setSelect();
+
+	FLT.setTextFilters( divFiltersText );
+
+	FLT.setNumericFilters();
+
+};
+
+
+
+////////// Open file with OS file dialog bo
+
+FIL.initOpenFiles = function( target ) {
+
+	target.innerHTML =
+	`
+		<p><input type=file id=inpFile onchange=FIL.loadFiles(this); ></p>
+		<textarea id=textArea style=height:50px;overflow:auto;width:100%; ></textarea>
+		<div id=divLog ></div>
+
+	`;
+
+	window.addEventListener ( 'hashchange', FIL.onHashChange, false );
+
+};
+
+
+
+FIL.loadFiles = function( files ) {
 
 	const reader = new FileReader();
-	reader.onload = OpenFiles.callback;
+	reader.onload = FIL.callbackOpenFiles;
 	reader.readAsText( files.files[0] );
 
 };
 
 
 
-OpenFiles.callback = function( file ) {
+FIL.callbackOpenFiles = function( file ) {
 
-	callbackFileCsv( file.target.result );
+	FIL.callbackFileCsv( file.target.result );
 
 	textArea.innerHTML = file.target.result;
 

@@ -107,7 +107,7 @@ function toggleBackgroundGradient() {
 
 
 
-function drawPlacard( text, scale = 0.05, color = Math.floor( Math.random() * 255 ), x = 0, y = 10, z = 0 ) {
+THR.drawPlacard = function( text, scale = 0.05, color = Math.floor( Math.random() * 255 ), x = 0, y = 10, z = 0 ) {
 
 	// 2018-08-09 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
 

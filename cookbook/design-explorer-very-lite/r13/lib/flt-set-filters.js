@@ -1,129 +1,135 @@
-
 /* Copyright 2018 Ladybug Tools authors. MIT License */
+/* globals THREE, CSV, FLT, SEL, THR, divFiltersText, divFiltersNumeric, divMenu, hamburger  */
+// jshint esversion: 6
 
-FLT = {};
+let FLT = {};
+
+FLT.setVisibilityButtons =
+`
+	<p>
+
+	<button class="btn btn-secondary btn-sm" onclick=FLT.setFilterAll(true); >Set all visible</button>
+
+	<button class="btn btn-secondary btn-sm" onclick=FLT.setFilterAll(false); >Set all invisible</button>
+
+	</p>
+
+	<hr>
+`;
 
 
 ////////// Text Filters
 
-FLT.setTextFilters = function( target ) {
+FLT.setTextFilters = function( target = divFiltersText ) {
 
-	target.innerHTML = '';
-
-	const line = csv.lines[ 0 ];
+	const line = CSV.lines[ 0 ];
 	//console.log( 'line', line );
 
-	let filters = csv.fields.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === true );
+	const filters = CSV.fields.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === true );
 	//console.log( 'filters', filters );
 
-	let indices = filters.map( item => csv.fields.indexOf( item ) );
+	const indices = filters.map( item => CSV.fields.indexOf( item ) );
 	//console.log( 'indices', indices );
 
 	if ( indices.length === 0 ) { return; }
 
+	let panel = '';
+
 	for ( let index of indices ) {
 
-		const arr = csv.lines.map( fields => fields[ index ] );
+		const arr = CSV.lines.map( fields => fields[ index ] );
 		const uniques = [...new Set( arr )];
 		//console.log( 'uniques', uniques );
 
-		txt = `<p>text filter <b>${ csv.fields[ index ] }</b><br>`;
+		let buttons = `<p>text filter <b>${ CSV.fields[ index ] }</b><br>`;
 
 		for ( let filter of uniques ){
 
 			// awkward break here to keep buttons close
-			txt +=
+			buttons +=
 			`
 				<button class="btn btn-secondary btn-sm active"
-					onclick=toggleTextFilter(this,${index},"${filter}"); title = "Hide or show this type"
+					onclick=FLT.toggleTextFilter(this,${index},"${filter}"); title = "Hide or show this type"
 				>&theta;</button><button class="btn btn-secondary btn-sm active"
-				onclick=setTextFilter(this,${index}); title="Show only this type" >${ filter }</button>
+				onclick=FLT.setTextFilter(this,${index},"${filter}"); title="Show only this type" >${ filter }</button>
 				|
 			`;
 
 		}
 
-		target.innerHTML += txt + `</p>`;
+		panel +=  `${ buttons }</p>`;
 
 	}
 
-	target.innerHTML +=
+	target.innerHTML =
 	`
-		<p>
-
-		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(true); >Set all visible</button>
-
-		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(false); >Set all invisible</button>
-
-		</p>
+		${ panel }
+		${ FLT.setVisibilityButtons }
 
 	<hr>`;
 
-}
+};
 
 
 
-function setTextFilter( that, index ){
+FLT.setTextFilter = function( that, index, filter ){
 
 	that.classList.toggle( "active" );
 
-	const filter = that.innerText.toLowerCase();
+	CSV.selected = [];
 
-	object3D.traverse( function ( child ) {
+	for ( let child of CSV.meshes.children ) {
 
-		if ( child.material instanceof THREE.MeshPhongMaterial ) {
+		if ( child.userData.data[ index ] === filter ) {
 
-			if ( child.userData.data[ index ].toLowerCase() === filter ) {
+			child.material.opacity = SEL.opacityVisible;
+			child.children[ 0 ].material.opacity = SEL.opacityVisible; // edges
+			CSV.selected.push( child );
 
-				child.material.opacity = opacityVisible;
+		} else {
 
-				child.children[ 0 ].material.opacity = opacityVisible; // edges
+			child.material.opacity = 0; // SEL.opacityVisibleFalse;
+			child.children[ 0 ].material.opacity = SEL.opacityVisibleFalse; // edges
 
-			} else {
-
-				child.material.opacity = opacityVisibleFalse;
-
-				child.children[ 0 ].material.opacity = opacityVisibleFalse; // edges
-
-			}
 		}
 
-	} );
+	}
 
-}
+};
 
 
 
-function toggleTextFilter( that, index, filter ) {
+FLT.toggleTextFilter = function( that, index, filter ) {
 
 	that.classList.toggle( "active" );
 
 	const visible = that.classList.contains( 'active' );
 
-	const opacity = visible ? opacityVisible : opacityVisibleFalse;
+	CSV.selected = [];
 
-	object3D.traverse( function ( child ) {
+	for ( let child of CSV.meshes.children ) {
 
-		if ( child.material instanceof THREE.MeshPhongMaterial
-			&& child.userData.data[ index ] === filter ) {
+		if ( child.userData.data[ index ] === filter ) {
 
-			child.material.opacity = opacity;
-			child.children[ 0 ].material.opacity = opacity; // edges
+			child.material.opacity = visible ? SEL.opacityVisible : 0;
+			child.children[ 0 ].material.opacity = visible ?  SEL.opacityVisible : SEL.opacityVisibleFalse; // edges
 
 		}
 
-	} );
+		if ( child.material.opacity === SEL.opacityVisible ) { CSV.selected.push( child ); }
 
-}
+	}
+
+};
 
 
 
 ////////// Numeric Filters
 
-function setNumericFilters( target = divFiltersNumeric ) {
+FLT.setNumericFilters = function( target = divFiltersNumeric ) {
 
-	const line = csv.lines[ 0 ];
-	const filters = csv.fields.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === false );
+	const line = CSV.lines[ 0 ];
+	const filters = CSV.fields.filter( ( key, i ) => key.startsWith( 'in:' ) && isNaN( line[ i ] ) === false );
 	FLT.filters = [];
 
 	target.innerHTML =
@@ -135,15 +141,16 @@ function setNumericFilters( target = divFiltersNumeric ) {
 	</small>
 	`;
 
+	let html = "";
 
 	for ( let filter of filters ){
 
-		index = csv.fields.indexOf( filter );
+		const index = CSV.fields.indexOf( filter );
 
-		const arr = csv.lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+		const arr = CSV.lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
 		let max = Math.max( ...arr );
 		let min = Math.min( ...arr );
-		let step = ( max - min ) / 10;
+		let step = ( max - min ) / 10; // can we do better than this?
 
 		//console.log( 'mm', min, max );
 
@@ -157,39 +164,27 @@ function setNumericFilters( target = divFiltersNumeric ) {
 		const filterMin = 'filterMin' + index;
 		const filterMax = 'filterMax' + index;
 
-		target.innerHTML +=
+		html +=
 		`
 			<p><b>numeric filter ${ filter }</b><br>
 
 			<div>${ min / scalar } <span style=width:10rem >
 				<input type=range id=${ filterMin } min=${ min } max=${ max } step=${ step } value=${ min }
-					oninput=FLT.setNumericFilterDisplay(this,${scalar}); title=${ min / scalar } ></span> ${ max / scalar }
+					oninput=FLT.setNumericFilterDisplay(this,${ scalar }); title=${ min / scalar } ></span> ${ max / scalar }
 			</div>
 
 			<div>${ min / scalar  } <span style=width:10rem >
 				<input type=range id=${ filterMax } min=${ min } max=${ max } step=${ step } value=${ max }
-					oninput=FLT.setNumericFilterDisplay(this,${scalar}); title=${ max / scalar } ></span> ${ max / scalar }
+					oninput=FLT.setNumericFilterDisplay(this,${ scalar }); title=${ max / scalar } ></span> ${ max / scalar }
 			</p>
 		`;
 
-		FLT.filters.push( { filter, index, filterMin, filterMax, scalar })
+		FLT.filters.push( { filter, index, filterMin, filterMax, scalar } );
 	}
 
-	console.log( 'FLT.filters', FLT.filters );
-	target.innerHTML +=
-	`
-		<p>
+	target.innerHTML = html + FLT.setVisibilityButtons;
 
-		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(true); >Set all visible</button>
-
-		<button class="btn btn-secondary btn-sm" onclick=setFilterAll(false); >Set all invisible</button>
-
-		</p>
-
-		<hr>
-	`;
-
-}
+};
 
 
 
@@ -197,7 +192,7 @@ FLT.setNumericFilterDisplay = function( that, scalar ) {
 
 	//console.log( 'that', that );
 
-	const index = that.id.slice( 9 ); // filterMin or Max
+	//const index = that.id.slice( 9 ); // filterMin or Max
 	//console.log( 'index', index );
 
 	const value = parseFloat( that.value ) / scalar;
@@ -205,72 +200,72 @@ FLT.setNumericFilterDisplay = function( that, scalar ) {
 
 	// catch max smaller than min
 
-	const min = parseFloat( document.querySelector( '#filterMin' + index ).value ) / scalar;
-	const max = parseFloat( document.querySelector( '#filterMax' + index ).value ) / scalar;
+	//const min = parseFloat( document.querySelector( '#filterMin' + index ).value ) / scalar;
+	//const max = parseFloat( document.querySelector( '#filterMax' + index ).value ) / scalar;
+	//console.log( 'mm', min, max );
 
 	that.title = value;
 
-	//console.log( 'mm', min, max );
+	CSV.selected = [];
 
-	for ( let child of object3D.children ) {
+	for ( let child of CSV.meshes.children ) {
 
-		cnt = 0;
+		let cnt = 0;
 
-		for ( filter of FLT.filters ) {
+		for ( let filter of FLT.filters ) {
 
-			data = parseFloat( child.userData.data[ filter.index ] );
+			const data = parseFloat( child.userData.data[ filter.index ] );
 
-			cnt += data >= parseFloat( document.querySelector( "#" + filter.filterMin ).value ) / filter.scalar
-				&& data <= parseFloat( document.querySelector( "#" + filter.filterMax ).value ) / filter.scalar ? 1 : 0;
+			cnt += data >= parseFloat( document.querySelector( "#" + filter.filterMin ).value ) / filter.scalar && data <= parseFloat( document.querySelector( "#" + filter.filterMax ).value ) / filter.scalar ? 1 : 0;
 
 		}
 
 		if ( cnt === FLT.filters.length ) {
-//console.log( 'filter', filter );
-			child.material.opacity = opacityVisible;
 
-			child.children[ 0 ].material.opacity = opacityVisible;
+			child.material.opacity = SEL.opacityVisible;
+			child.children[ 0 ].material.opacity = SEL.opacityVisible;
+
+			CSV.selected.push( child );
 
 		} else {
 
 			//console.log( 'data', data, 'min', min, 'max', max );
-			child.material.opacity = opacityVisibleFalse;
-			child.children[ 0 ].material.opacity = opacityVisibleFalse;
+			child.material.opacity = 0; //SEL.opacityVisibleFalse;
+			child.children[ 0 ].material.opacity = SEL.opacityVisibleFalse;
 
 		}
 
-
 	}
 
-}
+};
 
 
 
 //////////
 
-function setFilterAll( boolean ) {
+FLT.setFilterAll = function( boolean ) {
 
-	const opacity = boolean ? opacityVisible : opacityVisibleFalse;
+	const opacity = boolean ? SEL.opacityVisible : SEL.opacityVisibleFalse;
 
-	for ( let child of object3D.children ) {
+	for ( let child of CSV.meshes.children ) {
 
-		child.material.opacity = opacity;
+		child.material.opacity = boolean ? SEL.opacityVisible : 0;
 		child.children[ 0 ].material.opacity = opacity;
 
 	}
 
-	const buttons = divFiltersText.getElementsByClassName( "btn" );
+	const buttons = divFiltersText.getElementsByClassName( "btn" ); // hits wrong buttons
 
 	if ( boolean ) {
 
-		for ( button of buttons ){ button.classList.add( 'active' ) };
+		for ( let button of buttons ){ button.classList.add( 'active' ); }
 
 	} else {
 
-		for ( button of buttons ){ button.classList.remove( 'active' ) };
+		for ( let button of buttons ){ button.classList.remove( 'active' ); }
 
 	}
 
-	setNumericFilters();
+	FLT.setNumericFilters();
 
-}
+};

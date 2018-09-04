@@ -1,20 +1,23 @@
-
 /* Copyright 2018 Ladybug Tools authors. MIT License */
+// Objective: demonstrate that you can adapt the user experience of this app to comply with your specific needs - whatever they ma be
+// needs work / identify colors by magic / roll your own theme
 
+let THM = {};
 
-let themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
+THM.themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
 
-function updateCss( link ) {
+THM.updateCss = function( link ) {
 
-	themeName = css.href = link;
+	THM.themeName = css.href = link;
 	localStorage.setItem( 'themeName', link );
-	setTheme();
+	THM.setTheme();
 
 }
 
 
 
-function setTheme( target ) {
+THM.setTheme = function( target ) {
+	// set the colors for the buttons
 
 	const themesBootswatch = [
 		{ 'Default': 'background-color: white; color: #007bff' },
@@ -57,8 +60,8 @@ function setTheme( target ) {
 		link = name === 'Default' ?
 			'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
 			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ name.toLowerCase() }/bootstrap.min.css`;
-		bingo =  link === themeName ? '*' : ''
-		return `<button class=theme onclick=updateCss("${ link }"); style="${ theme[name] }" >${ bingo }${ name }${ bingo }</button> `;
+		bingo =  link === THM.themeName ? '*' : ''
+		return `<button class=theme onclick=THM.updateCss("${ link }"); style="${ theme[name] }" >${ bingo }${ name }${ bingo }</button> `;
 
 	});
 
@@ -72,11 +75,11 @@ function setTheme( target ) {
 		//name = object3D.keys( theme )[ 0 ];
 		//console.log( 'name', name );
 		//console.log( 'link', theme.link );
-		txt += `<button class="theme btn btn-secondary" onclick=updateCss("${ theme.link }"); style="${ theme.name }" >${ theme.name }</button> `;
+		txt += `<button class="theme btn btn-secondary" onclick=THM.updateCss("${ theme.link }"); style="${ theme.name }" >${ theme.name }</button> `;
 
 		divCssOthers.innerHTML = txt + '<p><small>these buttons are work-in-progress WIP</small></p>';
 
 	}
 
-}
+};
 

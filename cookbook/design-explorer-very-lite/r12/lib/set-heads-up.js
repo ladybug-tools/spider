@@ -105,7 +105,7 @@ function setHeadsUp( event ) {
 
 	headsUp.style.display = '';
 
-	const items = `<small>Fields:<br>` + keys.map( ( item, index ) => `${ index } ${ item } <b>` + intersected.userData.data[ index ] ).slice( 0,-4 ).join( '</b><br>' );
+	const items = `<small>Fields:<br>` + keys.map( ( item, index ) => `${ index } ${ item } <b>` + intersected.userData.data[ index ] ).join( '</b><br>' );
 
 	txt = `${ items }</small><br>`;
 

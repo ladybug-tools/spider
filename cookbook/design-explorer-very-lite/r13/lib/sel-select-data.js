@@ -1,21 +1,29 @@
-
 /* Copyright 2018 Ladybug Tools authors. MIT License */
+/* Copyright 2018 Ladybug Tools authors. MIT License */
+/* globals projects, THREE, CSV, FLT, THR, divLog, divFiltersText, divFiltersNumeric, divMenu, hamburger  */
+// jshint esversion: 6
+
+let SEL = {};
+
+SEL.colors = ['(49,54,149)','(69,117,180)','(116,173,209)','(171,217,233)','(224,243,248)','(255,255,191)','(254,224,144)','(253,174,97)','(244,109,67)','(215,48,39)','(165,0,38)'];
+SEL.threeColor = new THREE.Color();
+SEL.opacityVisible = 0.85;
+SEL.opacityVisibleFalse = 0.05;
 
 
+SEL.setSelect = function() {
 
-function setSelect() {
-
-	const indices = csv.selectIndices ||  [ 0, 1, 2, 3, 4, 5 ];
+	const indices = CSV.selectIndices ||  [ 0, 1, 2, 3, 4, 5 ];
 	//console.log( 'indices', indices );
 
 	const inpSelects = [ selX, selY, selZ, selColor, selShape, selSize ];
-	let count = csv.fields.indexOf( csv.fields.find( key => key.startsWith( 'out' ) ) );
-	const options = csv.fields.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+	let count = CSV.fields.indexOf( CSV.fields.find( key => key.startsWith( 'out' ) ) );
+	const options = CSV.fields.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
 	inpSelects.map( select => select.innerHTML = options );
 	//console.log( 'inpSelects', inpSelects );
 
 	let i = 0;
-	for ( select of inpSelects ) {
+	for ( let select of inpSelects ) {
 
 		select.selectedIndex = indices[ i++ ];
 		//console.log( 'sel', select, select.selectedIndex );
@@ -25,33 +33,33 @@ function setSelect() {
 
 	//console.log( '', options );
 
-	setObjects();
+	SEL.setObjects();
 
-}
+};
 
 
 
-function setObjects() {
+SEL.setObjects = function() {
 
-	THR.scene.remove( object3D, placardX, placardY, placardZ );
+	THR.scene.remove( CSV.meshes, CSV.placardX, CSV.placardY, CSV.placardZ );
 
-	object3D = new THREE.Group();
-	object3D.position.set( -50, -50, 0 );
+	CSV.meshes = new THREE.Group();
+	CSV.meshes.position.set( -50, -50, 0 );
 
-	THR.scene.add( object3D );
+	THR.scene.add( CSV.meshes );
 
-	count = 0;
-	const start = performance.now()
-	const axisX = getNormalize( selX.value );
-	const axisY = getNormalize( selY.value );
-	const axisZ = getNormalize( selZ.value );
+	SEL.count = 0;
+	const start = performance.now();
+	const axisX = SEL.getNormalize( selX.value );
+	const axisY = SEL.getNormalize( selY.value );
+	const axisZ = SEL.getNormalize( selZ.value );
 
-	const colorsData = getNormalize( selColor.value, colors.length - 1 );
+	const colorsData = SEL.getNormalize( selColor.value, SEL.colors.length - 1 );
 	const colorsFloor = colorsData[ 0 ].map( col => Math.floor( col ) );
 
 	const min = colorsData[ 1 ];
-	const delta = ( colorsData[ 2 ] - min ) / colors.length;
-	const field = csv.fields[ selColor.value ];
+	const delta = ( colorsData[ 2 ] - min ) / SEL.colors.length;
+	const field = CSV.fields[ selColor.value ];
 
 	const buttons = document.getElementsByClassName( 'legend' );
 	Array.from( buttons ).forEach( ( button, index ) =>
@@ -62,102 +70,104 @@ function setObjects() {
 	);
 	//console.log( 'colorsNorm', colorsFloor );
 
-	const size = getNormalize( selSize.value );
+	const size = SEL.getNormalize( selSize.value );
 
-	const shapeArr = csv.lines.map( items => items[ selShape.value ] );
-	csv.shapeUnique = [...new Set( shapeArr )];  // set: store uniques values
+	const shapeArr = CSV.lines.map( items => items[ selShape.value ] );
+	CSV.shapeUnique = [...new Set( shapeArr )];  // set: store uniques values
 
 	drawMeshesStagger();
 
-	legendTitle.innerHTML = csv.fields[ selColor.value ].slice( 4 );
+	legendTitle.innerHTML = CSV.fields[ selColor.value ].slice( 4 );
 
-	placardX = drawPlacard( [ 'X-axis', csv.fields[ selX.value ], 'min: ' + axisX[ 1 ].toFixed( 1 ), 'max: ' + axisX[ 2 ].toFixed( 1 ) ], 0.08, 1, 50, -50, 10 );
+	CSV.placardX = THR.drawPlacard( [ 'X-axis', CSV.fields[ selX.value ], 'min: ' + axisX[ 1 ].toFixed( 1 ), 'max: ' + axisX[ 2 ].toFixed( 1 ) ], 0.08, 1, 50, -50, 10 );
 
-	placardY = drawPlacard( [ 'Y-axis', csv.fields[ selY.value ], 'min: ' + axisY[ 1 ].toFixed( 1 ), 'max: ' + axisY[ 2 ].toFixed( 1 ) ], 0.08, 120, -50, 50, 10 );
+	CSV.placardY = THR.drawPlacard( [ 'Y-axis', CSV.fields[ selY.value ], 'min: ' + axisY[ 1 ].toFixed( 1 ), 'max: ' + axisY[ 2 ].toFixed( 1 ) ], 0.08, 120, -50, 50, 10 );
 
-	placardZ = drawPlacard( [ 'Z-axis', csv.fields[ selZ.value ], 'min: ' + axisZ[ 1 ].toFixed( 1 ), 'max: ' + axisZ[ 2 ].toFixed( 1 ) ], 0.08, 200, -50, -50, 110 );
-	THR.scene.add( placardX, placardY, placardZ );
+	CSV.placardZ = THR.drawPlacard( [ 'Z-axis', CSV.fields[ selZ.value ], 'min: ' + axisZ[ 1 ].toFixed( 1 ), 'max: ' + axisZ[ 2 ].toFixed( 1 ) ], 0.08, 200, -50, -50, 110 );
 
-	//dataItems = ( ...object3D.children );
+	THR.scene.add( CSV.placardX, CSV.placardY, CSV.placardZ );
+
+	CSV.selected = CSV.meshes.children;
 
 
 
+		function drawMeshesStagger( timestamp ) {
+			// set a reasonable number of data points each frame until done // WIP - needs more science
 
-	function drawMeshesStagger( timestamp ) {
-		// set a reasonable number of data points each frame until done // WIP - needs more science
+			const t = performance.now();
 
-		const t = performance.now();
+			for ( let i = 0; i < 200; i ++ ) {
 
-		for ( let i = 0; i < 200; i ++ ) {
+				if ( performance.now() - t > 60 || SEL.count >= CSV.lines.length ) { break; }
 
-			if ( performance.now() - t > 60 || count >= csv.lines.length ) { break; }
+				SEL.setDataPoint( axisX[ 0 ][ SEL.count ], axisY[ 0 ][ SEL.count ], axisZ[ 0 ][ SEL.count ], colorsFloor[ SEL.count ], size[ 0 ][ SEL.count ], shapeArr[ SEL.count ], CSV.lines[ SEL.count ] );
 
-			setDataPoint( axisX[ 0 ][ count ], axisY[ 0 ][ count ], axisZ[ 0 ][ count ], colorsFloor[ count ], size[ 0 ][ count ], shapeArr[ count ], csv.lines[ count ] );
+				SEL.count++;
 
-			count++;
+			}
+
+			if ( SEL.count < CSV.lines.length ) {
+
+				requestAnimationFrame( drawMeshesStagger );
+
+			} else {
+
+				divPopUpImage.innerHTML =
+				`
+					<p>Items loaded: ${ SEL.count.toLocaleString() } of ${ CSV.lines.length.toLocaleString() }</p>
+					<p>Items draw time: ${ Math.floor( performance.now() - start ).toLocaleString() } ms</p>
+				`;
+
+			}
 
 		}
 
-		if ( count < csv.lines.length ) {
-
-			requestAnimationFrame( drawMeshesStagger );
-
-		} else {
-
-			divImage.innerHTML =
-			`
-				<p>Items loaded: ${ count.toLocaleString() } of ${ csv.lines.length.toLocaleString() }</p>
-				<p>Items draw time: ${ Math.floor( performance.now() - start ).toLocaleString() } ms</p>
-			`;
-
-		}
-
-	}
-
-}
+};
 
 
 
-function getNormalize( index, range = 100 ) {
+SEL.getNormalize = function( index, range = 100 ) {
 
 	// https://stackoverflow.com/questions/39776819/function-to-normalize-any-number-from-0-1
 
-	const arr = csv.lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
+	const arr = CSV.lines.map( items => items[ index ] ).map( item => parseFloat( item ) );
 	const max = Math.max( ...arr );
 	const min = Math.min( ...arr );
 
-	const arrNormalized = arr.map( val => range * (val - min) / (max - min) )
+	const arrNormalized = arr.map( val => range * ( val - min ) / ( max - min ) );
 
-	return [arrNormalized, min, max ];
+	return [ arrNormalized, min, max ];
 
-}
+};
 
 
 
-function setDataPoint( x, y, z, color = 0, size, shape, data ) {
+SEL.setDataPoint = function( x, y, z, color, size, shape, data ) {
 
-	//if ( !colors[ color ] ) { console.log( 'data', data, color  );}
-	threeColor.setStyle( 'rgb' + colors[ color ] );
+	//if ( !SEL.colors[ color ] ) { console.log( 'data', data, color  );}
+	SEL.threeColor.setStyle( 'rgb' + SEL.colors[ color ] );
 	const scale = 0.8 + 0.01 * size;
 
 	//console.log( 'shape', shape );
 
-	let segments = 3 + csv.shapeUnique.indexOf( shape );
+	let segments = 3 + CSV.shapeUnique.indexOf( shape );
 	//console.log( 'segments', segments );
 
 	segments = segments < 9 ? segments : 8;
 	//if ( segments < 3 || segments > 9 ) { console.log( 'oops', segments, shape, data );}
 
 	const geometry = new THREE.CylinderBufferGeometry( scale, scale, scale, segments );
-	const material = new THREE.MeshPhongMaterial({ color: threeColor, opacity: opacityVisible, transparent: true }) ;
+	const material = new THREE.MeshPhongMaterial({ color: SEL.threeColor, opacity: SEL.opacityVisible, transparent: true }) ;
 
 	const mesh = new THREE.Mesh( geometry, material );
 	mesh.userData.data = data;
 	mesh.position.set( x, y, z );
 
+	const materialLine = new THREE.LineBasicMaterial( { color: 0x000000, opacity: SEL.opacityVisible, transparent: true } );
+
 	const edges = new THREE.LineSegments( new THREE.EdgesGeometry( geometry ), materialLine );
 	mesh.add( edges );
 
-	object3D.add( mesh );
+	CSV.meshes.add( mesh );
 
-}
+};

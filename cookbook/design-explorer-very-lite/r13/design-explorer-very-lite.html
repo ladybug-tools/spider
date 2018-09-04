@@ -14,7 +14,7 @@
 
 	html { height: 100%; margin: 0; }
 
-	body { height: 100%; margin: 0; }
+	body { height: 100%; margin: 0; overflow: hidden; }
 
 	a:hover, a:focus { background-color: yellow; color: #888; }
 	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
@@ -47,7 +47,7 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r96/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r96/examples/js/controls/TrackballControls.js" ></script>
 <script src = "./lib/thr-threejs.js" ></script>
-<script src = "./lib/set-theme.js" ></script>
+<script src = "./lib/thm-theme.js" ></script>
 <script src = "./lib/nav-navigate.js" ></script>
 <script src = "./lib/fil-open-files.js" ></script>
 <script src = "./lib/sel-select-data.js" ></script>
@@ -98,27 +98,27 @@
 			<summary>Axes Selections</summary>
 
 			<p>
-				<span>X-axis</span> <select id=selX onchange=setObjects(); ></select>
+				<span>X-axis</span> <select id=selX onchange=SEL.setObjects(); ></select>
 			</p>
 
 			<p>
-				<span>Y-axis</span> <select id=selY onchange=setObjects(); ></select>
+				<span>Y-axis</span> <select id=selY onchange=SEL.setObjects(); ></select>
 			</p>
 
 			<p>
-				<span>Z-axis</span> <select id=selZ onchange=setObjects(); ></select>
+				<span>Z-axis</span> <select id=selZ onchange=SEL.setObjects(); ></select>
 			</p>
 
 			<p>
-				<span>Color</span> <select id=selColor onchange=setObjects(); ></select>
+				<span>Color</span> <select id=selColor onchange=SEL.setObjects(); ></select>
 			</p>
 
 			<p>
-				<span>Shape</span> <select id=selShape onchange=setObjects(); ></select>
+				<span>Shape</span> <select id=selShape onchange=SEL.setObjects(); ></select>
 			</p>
 
 			<p>
-				<span>Size</span> <select id=selSize onchange=setObjects(); ></select>
+				<span>Size</span> <select id=selSize onchange=SEL.setObjects(); ></select>
 			</p>
 
 			<hr>
@@ -194,7 +194,7 @@
 
 	</div>
 
-	<button id = "hamburger" class = "btn btn-primary" onclick=toggleNav(); > slide &#9776;  </button>
+	<button id = "hamburger" class = "btn btn-primary" onclick=NAV.toggleNav(); > slide &#9776;  </button>
 
 	<div id = "divPopUp" class="jumbotron" ></div>
 
@@ -258,46 +258,33 @@ projects = {
 	]
 };
 
-let csv = {};
-csv.projectKey = undefined
+let CSV = {};
 
-//const projectKeys = Object.keys( projects );
-// let urlCsv, urlImg, projectName;
-let projectName;
 
-let object3D, placardX, placardY, placardZ;
-
-let count = 0;
-
-const colors = ['(49,54,149)','(69,117,180)','(116,173,209)','(171,217,233)','(224,243,248)','(255,255,191)','(254,224,144)','(253,174,97)','(244,109,67)','(215,48,39)','(165,0,38)'];
-const threeColor = new THREE.Color();
-const opacityVisible = 0.85;
-const opacityVisibleFalse = 0.05;
-const materialLine = new THREE.LineBasicMaterial( { color: 0x000000, opacity: opacityVisible, transparent: true } );
 
 const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/design-explorer-very-lite";
 
 
 THR.initThreejs();
+
 init();
 
 
 
 function init() {
 
-	updateCss( themeName );
+	THM.updateCss( THM.themeName );
 
 	setTitle( divTitle );
 
-	OpenFiles.init( divOpenFiles );
+	FIL.initOpenFiles( divOpenFiles );
 
 	NAV.initNav();
 
-	window.addEventListener ( 'hashchange', onHashChange, false );
-
 	//projectDefault = projectKeys[ Math.floor( Math.random() * projectKeys.length ) ];
 	projectDefault = 'littleRedBox';
-	if ( !location.hash ) { location.hash = projectDefault; } else { onHashChange(); }
+
+	if ( !location.hash ) { location.hash = projectDefault; } else { FIL.onHashChange(); }
 
 	LEG.setLegend();
 
