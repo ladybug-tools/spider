@@ -52,8 +52,9 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 ## To Do / Wish list
 
+* 2018-09-05 ~ @ari-hanif/Michal ~ Add space name labels
 * 2018-07-20 ~ Theo ~ Add the benefits for all the features to the Concept section of this Read Me
-* 2018-07-20 ~ Theo ~ Add toggle beteeen Orbit and Trackball controls
+* 2018-07-20 ~ Theo ~ Add toggle between Orbit and Trackball controls
 * 2018-07-20 ~ Theo ~ Remember settings between sessions
 * 2018-05-11 ~ Theo ~ Add display skybox with patches set appropriate EPW data
 * 2018-05-11 ~ Theo ~ add slider for amount of exploding by storey

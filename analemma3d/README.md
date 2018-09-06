@@ -1,4 +1,4 @@
-<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://rawgit.com/ladybug-tools/spider/master/analemma3d/ 'View file as a web page.' ) </span>
+<span style="display: none" > [You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://rawgit.com/ladybug-tools/spider/master/analemma3d/ 'View file as a web page.' ) </span>
 
 # Analemma 3D Read Me
 
@@ -37,8 +37,8 @@ The 3D views below enable you to rotate and pan using one three fingers or left 
 
 ## Concept
 
-There are numerous outstanding mapping applications available these days. Many have sophisticated APIs. 
-The range of features is phenomenal. The level of the quality and complexity of the code is extremely high 
+There are numerous outstanding mapping applications available these days. Many have sophisticated APIs.
+The range of features is phenomenal. The level of the quality and complexity of the code is extremely high
 
 One result of all this success is that entry level barriers are quite high. You have to accept what is available with the API or set of a sophisticated development environment in order to customize a complex system.
 
@@ -61,7 +61,7 @@ We are here to provide you with mapping code you can tinker with and learn to ha
 	* Mapbox for the data tiles
 * Basic code is under 900 lines / 23KB
 * User interface and technical code well separated
-* Carry out simple Sun-related coding exercises 
+* Carry out simple Sun-related coding exercises
 
 
 
@@ -113,13 +113,13 @@ We are here to provide you with mapping code you can tinker with and learn to ha
 ### Source code
 
 * <https://glitch.com/edit/#!/jaanga-terrain4>
-* <http://jaanga.github.io/terrain4/terrain-tiles-structures/>
+* <https://jaanga.github.io/terrain4/terrain-tiles-structures/>
 * <https://github.com/jaanga/jaanga.github.io/tree/master/terrain4/terrain-tiles-structures>
 
 
-## Ladybug Web Solar Calculator 
+## Ladybug Web Solar Calculator
 
-* http://www.ladybug.tools/ladybug-web/solar-calculator-ladybug-web/#readme.md
+* https://www.ladybug.tools/ladybug-web/solar-calculator-ladybug-web/#readme.md
 
 
 
@@ -146,7 +146,7 @@ Dealt with
 Dealt with
 
 * 2017-07-26 ~ Not removing geometry and lights properly
-* 2017-07-26 ~ some raster tiles incorrectly offset 
+* 2017-07-26 ~ some raster tiles incorrectly offset
 * 2017-07-24 ~ heights of buildings are frequently incorrectly calculated
 
 

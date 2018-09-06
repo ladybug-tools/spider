@@ -58,7 +58,7 @@ See [COR ~ Core Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewe
 See [GAL Gallery Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-gal-gallery/README.md )
 
 
-### GBX ~ gbXML Loader 
+### GBX ~ gbXML Loader
 
 * The script that parses gbXML files and translates the data into "gbJSON" and Three.js 3 meshes
 See [GBX ~ gbXML Loader Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-gbx-gbxml-loader/README.md )
@@ -67,6 +67,7 @@ See [GBX ~ gbXML Loader Read Me]( http://www.ladybug.tools/spider/index.html#gbx
 ### ISS ~ Issues
 
 See [ISS Issues Read Me]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r14/gv-iss-issues/README.md )
+
 
 ### Numbers ~ Numbers
 * Calculations that summarize aspects of the data
