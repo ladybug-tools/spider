@@ -4,7 +4,7 @@
 	// Copyright 2018 Ladybug Tools authors. MIT License
 	// to do: add render info button somewhere?
 
-	var THR = {};
+	var THR = { release: ' THR 14.1'};
 
 	THR.cameraHelper = null;
 
@@ -101,6 +101,7 @@
 		const center = sphere.center;
 		const radius = sphere.radius;
 
+		THR.controls.reset();
 		THR.controls.target.copy( center );
 		THR.controls.maxDistance = 5 * radius;
 

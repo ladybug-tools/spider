@@ -27,6 +27,11 @@
 
 ## Change Log
 
+### 2018-09-05 ~ Theo
+
+* Add THR.controls.reset() to THR.zoomObjectBoundingSphere
+	* Resets the scene axes so Z points straight up
+
 ### 2018-05-31 ~ Theo
 
 R14

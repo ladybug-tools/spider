@@ -56,10 +56,11 @@ FIL.fetchFileCsv = function( project ) {
 
 FIL.callbackFileCsv = function( text ) {
 
-	//console.log( 'text', text );
+	console.log( 'text', text );
+	txt = text;
 
 	CSV.lines = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } ).slice( 0, -1 );
-	//console.log( 'CSV.lines', CSV.lines );
+	console.log( 'CSV.lines', CSV.lines );
 
 	CSV.fields = CSV.lines.shift();
 	//console.log( 'CSV.fields', CSV.fields );
