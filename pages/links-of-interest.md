@@ -54,7 +54,12 @@ Old school
 * https://threejs.org/
 
 
+### Spiders
 
+* https://en.wikipedia.org/wiki/Spider
+* https://en.wikipedia.org/wiki/Spider_taxonomy
+* https://en.wikipedia.org/wiki/List_of_spider_common_names
+* https://wsc.nmbe.ch/
 
 
 ### Related to Opentecture
@@ -63,7 +68,7 @@ Old school
 * https://github.com/opentecture
 
 
-Related to FOSS
+### Related to FOSS
 
 * https://opensource.guide/
 * https://readmetips.github.io/

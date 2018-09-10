@@ -7,7 +7,15 @@
 _View Radiance files in 3D in your browser_
 
 
-## full screen: [Rad Viewer 8]( https://www.ladybug.tools/spider/solar-well/rad-viewer/rad-viewer-8.html )
+### Deprecated files
+
+For most anything relating to viewing Radiance RAD files, please refer to:
+
+[Spider RAD Viewer]( https://www.ladybug.tools/spider-rad-viewer/ )
+
+For most anything relating to viewing Radiance RAD files, please refer to:
+
+Radiance Data Files]( http://www.ladybug.tools/spider/#radiance-data-files/README.md )
 
 
 ## Concept

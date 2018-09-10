@@ -10,12 +10,13 @@ let FIL = {};
 FIL.onHashChange = function() {
 
 	const hash = location.hash.slice( 1 ).split( '&' );
-	CSV.selectIndices = hash[ 1 ] ? hash[ 1 ].split( '' ) : undefined;
-	//console.log( 'CSV.selectIndices', CSV.selectIndices );
+	//CSV.selectIndices = hash[ 1 ] ? hash[ 1 ].split( '' ).map( item => parseInt( item, 10 ) ) : undefined;
+	CSV.selectIndices = hash[ 1 ] ? hash[ 1 ].split( '' ).map( item => parseInt( item, 10 ) ) : undefined
 
-	const project = hash[ 0 ];
+	project = hash[ 0 ];
 
 	if ( project !== CSV.projectKey ) { // we are loading a new project need to reset some parameters and load file
+		//console.log( 'project', CSV.projectKey );
 
 		CSV.projectKey = hash[ 0 ];
 		CSV.project = projects[ CSV.projectKey ];
@@ -35,6 +36,8 @@ FIL.onHashChange = function() {
 		FLT.setNumericFilters( divFiltersNumeric );
 
 	}
+
+
 
 };
 
@@ -66,6 +69,12 @@ FIL.callbackFileCsv = function( text ) {
 	//console.log( 'CSV.fields', CSV.fields );
 
 	CSV.indexImg = CSV.fields.indexOf( CSV.fields.find( key => key.startsWith( 'img' ))) ;
+
+	let count = CSV.fields.indexOf( CSV.fields.find( key => key.startsWith( 'out' ) ) );
+	const options = CSV.fields.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+	//console.log( 'options', options );
+
+	//
 
 	SEL.setSelect();
 

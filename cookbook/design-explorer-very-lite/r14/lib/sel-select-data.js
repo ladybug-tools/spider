@@ -14,15 +14,16 @@ SEL.opacityVisibleFalse = 0.05;
 SEL.setSelect = function() {
 
 	// if there were indices in location.has use then else use defaults
-	const indices = CSV.selectIndices ||  [ 0, 1, 2, 3, 4, 5 ];
+	const indices = CSV.selectIndices || [ 0, 1, 2, 3, 4, 5];
 	//console.log( 'indices', indices );
 
-	// build list parameters from fiels ib CSV
+	// build list parameters from fields in CSV
 	const inpSelects = [ selX, selY, selZ, selColor, selShape, selSize ];
 	let count = CSV.fields.indexOf( CSV.fields.find( key => key.startsWith( 'out' ) ) );
 
-	// use parameters to create list of options for thr selects
+	// use parameters to create list of options for the selects
 	const options = CSV.fields.filter( key => key.startsWith( 'out' ) ).map( key => `<option value=${ count++ } >${ key.slice( 4 ) }</option>`);
+
 	inpSelects.map( select => select.innerHTML = options );
 	//console.log( 'inpSelects', inpSelects );
 
@@ -31,16 +32,28 @@ SEL.setSelect = function() {
 	for ( let select of inpSelects ) {
 
 		select.selectedIndex = indices[ i++ ];
-		//console.log( 'sel', select, select.selectedIndex );
 		i = i >= options.length ? 0 : i;
+		//console.log( 'sel', select, select.selectedIndex );
 
 	}
-
 	//console.log( '', options );
 
 	SEL.setObjects();
 
 };
+
+
+SEL.updateHash = function() {
+
+	const inpSelects = [ selX, selY, selZ, selColor, selShape, selSize ];
+	hash = '&';
+	inpSelects.forEach( sel => hash += sel.selectedIndex );
+
+	//console.log( 'hash', hash );
+
+
+	location.hash = CSV.projectKey + hash
+}
 
 
 
