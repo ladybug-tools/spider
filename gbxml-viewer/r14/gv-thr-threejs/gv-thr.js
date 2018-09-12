@@ -261,7 +261,7 @@ THR.onWindowResize = function() {
 
 	THR.renderer.setSize( window.innerWidth, window.innerHeight );
 
-	controls.handleResize();
+	THR.controls.handleResize();
 
 	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
