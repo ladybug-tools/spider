@@ -310,6 +310,7 @@ More
 
 
 <details open >
+
 <summary style=font-size:1.5em; >Analemmas / Sun Range</summary>
 
 * https://en.wikipedia.org/wiki/Analemma
@@ -503,6 +504,6 @@ The relationship between people and the thermal environment has a profound impac
 
 </details>
 
-### Links
+### Portals
 
 * https://www.schorsch.com/en/kbase/resources/
