@@ -381,7 +381,7 @@ SET.toggleCameraOrthoPerspective = function() {
 		SET.cameraOrtho = new THREE.OrthographicCamera( width / -3, width / 3, height / 3, height / - 3, 1, 1000 );
 		SET.cameraOrtho.up.set( 0, 0, 1 );
 		THR.scene.add( SET.cameraOrtho );
-		SET.controlsOrtho = new THREE.OrbitControls( SET.cameraOrtho, THR.renderer.domElement );
+		SET.controlsOrtho = new THREE.TrackballControls( SET.cameraOrtho, THR.renderer.domElement );
 	}
 
 	if ( butSetOrtho.style.backgroundColor !== 'var( --but-bg-color )' ) {
@@ -570,7 +570,7 @@ SET.updateMeshLevel = function( meshName, delta ) {
 };
 
 
-SET.toggleSceneAutoRotate = function() {
+SET.xxxtoggleSceneAutoRotate = function() {
 
 	THR.controls.autoRotate = !THR.controls.autoRotate;
 
