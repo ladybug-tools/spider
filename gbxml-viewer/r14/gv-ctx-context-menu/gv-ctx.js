@@ -173,6 +173,8 @@
 
 		//CTX.removeTelltales();
 
+		console.log( 'CTX.intersected 222', CTX.intersected);
+
 		const data = CTX.intersected.userData.data;
 		//console.log( 'data', data );
 
@@ -570,7 +572,8 @@
 		const surfaceJson = CTX.intersected.userData.data;
 		const surfaceName = surfaceJson.Name;
 
-		CTX.surfacesXml = GBX.gbxmlResponseXML.getElementsByTagName("Surface");
+		//CTX.surfacesXml = GBX.gbxmlResponseXML.getElementsByTagName("Surface");
+		CTX.surfacesXml = GBX.gbxml.getElementsByTagName("Surface");
 
 		const surfaceXml = CTX.surfacesXml[ surfaceJson.id ];
 
@@ -578,7 +581,7 @@
 
 			const spaceId = SELselSpace.value;
 			surfaceJson.AdjacentSpaceId.spaceIdRef = spaceId;
-			SELbutSpaceVis0.innerText = spaceId;
+			//SELbutSpaceVis0.innerText = spaceId;
 
 			console.log( 'surfaceXml', surfaceXml );
 
@@ -600,7 +603,7 @@
 			console.log( 'spaceId', spaceId );
 
 			surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef = spaceId;
-			SELbutSpaceVis1.innerText = spaceId;
+			//SELbutSpaceVis1.innerText = spaceId;
 
 			console.log( 'surfaceXml', surfaceXml );
 
@@ -618,7 +621,7 @@
 
 			const spaceId = SELselSpace.value;
 			surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId;
-			SELbutSpaceVis2.innerText = spaceId;
+			//SELbutSpaceVis2.innerText = spaceId;
 
 			console.log( 'surfaceXml', surfaceXml );
 

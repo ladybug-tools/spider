@@ -354,7 +354,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
+				//CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + '<br>';
 
 				continue;
 

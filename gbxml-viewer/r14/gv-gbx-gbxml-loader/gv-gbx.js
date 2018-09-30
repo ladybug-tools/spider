@@ -345,7 +345,7 @@
 
 		GBX.surfaceEdges.visible = true;
 		GBX.surfaceMeshes.visible = true;
-		GBX.surfaceOpenings.visible = true;
+		//GBX.surfaceOpenings.visible = true;
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 
@@ -374,6 +374,8 @@
 		}
 
 		document.body.style.backgroundImage = '';
+
+		CORdivLog.innerHTML = "";
 
 	};
 

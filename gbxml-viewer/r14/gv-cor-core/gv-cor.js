@@ -240,7 +240,7 @@ COR.requestGbxmlFile = function( url ) {
 
 		THR.zoomObjectBoundingSphere( GBX.surfaceEdges );
 
-		CORdivLog.innerHTML +=
+		CORdivLog.innerHTML =
 		`
 		file: ${ xhr.target.responseURL.split( '/').pop() }<br>
 		time: ${ Date.now () - COR.timeStart } ms ~

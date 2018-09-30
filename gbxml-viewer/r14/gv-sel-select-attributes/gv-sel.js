@@ -28,6 +28,12 @@
 		item.placeholder = item.placeholder || 'surface id';  // used below
 		item.selItem = item.selItem || 'selItem'; // used below
 
+		item.options = ( item.element === "Surface" || item.element === "Openings" ) ?
+			`<option selected >id</option><option >name</option>`
+			:
+			`<option>id</option><option selected >name</option>`;
+
+
 		//console.log( 'item', item );
 		let options = '';
 
@@ -51,7 +57,8 @@
 						 ` style=margin-bottom:0.5rem;min-width:6rem; >${options}</select>
 					<br>
 					<select onchange=SEL.setElementPanelSelect(this,${item.selItem},"${item.name}"); style=width:6rem; >
-						<option>id</option><option selected >name</option><option>cad id</option>
+						${ item.options }
+						<option>cad id</option>
 					</select>
 				</div>
 				<div id = ${item.divAttributes} class=flex-left-div2 >Select an item to view its attributes</div>
@@ -351,7 +358,7 @@
 
 	SEL.getAttributeAdjacentSpace = function( spaceIdRef, spaceIndex = 0 ) {
 		//console.log( 'getAttributeAdjacentSpace spaceIdRef', spaceIdRef );
-		//console.log( 'getAttributeAdjacentSpace spaceIndex', spaceIndex );
+		console.log( 'getAttributeAdjacentSpace spaceIndex', spaceIndex );
 
 		const txt =
 		`<div>
@@ -359,7 +366,7 @@
 			<!--
 			<button onclick=SEL.setSpaceVisible("${spaceIdRef}"); >${spaceIdRef}</button>
 			-->
-			<button onclick=SEL.setPanelSpaceAttributes(CTXdivAttributes,"${spaceIdRef}"); >${spaceIdRef}</button>
+			<button onclick=SEL.setPanelSpaceAttributes(CTXdivAttributes,"${spaceIdRef}",${ spaceIndex }); >${spaceIdRef}</button>
 
 			<button onclick=SEL.setSpaceZoom("${spaceIdRef}",${spaceIndex}); >&#8981;</button>
 		</div>`;
@@ -646,10 +653,11 @@
 
 		// testing
 
-		const surface = GBX.surfaceMeshes.children.find( item => item.userData.data.id === surfaceId )
-		CTX.intersected = surface
+		const surface = GBX.surfaceMeshes.children.find( item => item.userData.data.id === surfaceId );
 
-		CTX.setHeadsUp();
+		//CTX.intersected = surface
+
+		//CTX.setHeadsUp();
 
 		//SEL.setPanelSurfaceAttributes( CTXdivAttributes, surfaceId );
 
@@ -1049,14 +1057,14 @@
 	//////////
 
 
-	SEL.setPanelShowHide = function( target ) {
-		// used by HUD2/ISS/REP
+	SEL.setPanelShowHide = function( target ) { // move to GBX
+		// used by CTX/ISS/REP
 
 		target.innerHTML =
 
 		`<details open >
 
-			<summary>Show || Hide / Zoom</summary>
+			<summary>Show || Hide / Zoom &nbsp; <a href="#../gv-sel-select-attributes/README.md" >?</a></summary>
 
 			<button onclick=SEL.toggleSurfacesVisible(); >surfaces</button>
 				<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; >edges</button>

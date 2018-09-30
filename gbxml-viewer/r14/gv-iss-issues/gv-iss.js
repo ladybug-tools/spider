@@ -629,7 +629,7 @@
 
 			<p>
 				<!--
-				<button onclick=onchange=ISS.setPopupPanelDuplicateAdjacentSpaces(this,"${attribute}"); >Update changes</button>
+				<button onclick=onchange=ISS.setPopupPanelDuplicateAdjacentSpaces(this,"attribute"); >Update changes</button>
 
 				<button onclick=ISS.surfaceChanges.editDuplicateAdjacentSpaces=[];ISS.setPopupPanelDuplicateAdjacentSpaces(this); >Clear changes</button>
 				-->
@@ -1006,7 +1006,7 @@
 			<div id=ISSdivDuplicateSurfaces ></div>
 
 			<p>
-				<button onclick=onchange=ISS.setPopupPanelDuplicateCoordinates(this,"${attribute}"); >Update changes</button>
+				<button onclick=onchange=ISS.setPopupPanelDuplicateCoordinates(); >Update changes</button>
 
 				<button onclick=ISS.surfaceChanges.deleteDuplicateSurfaces=[];ISS.setChangesDuplicateSurfaces(this); >Clear changes</button>
 
