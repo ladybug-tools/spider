@@ -845,7 +845,7 @@
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
-		//if ( window.CTXdivAttributes ) {
+		if ( window.CTXdivAttributes ) {
 
 			CTXdivAttributes.innerHTML =
 
@@ -862,7 +862,7 @@
 
 			<hr>`;
 
-		//}
+		}
 
 		const surfaces = GBX.gbjson.Campus.Surface;
 
@@ -915,6 +915,7 @@
 
 
 	SEL.setSurfaceTypeInvisible = function( button ) {
+
 
 		for ( let child of GBX.surfaceMeshes.children ) {
 

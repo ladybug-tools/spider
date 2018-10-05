@@ -252,7 +252,6 @@
 
 		for ( let i = 0; i < types.length; i++ ) {
 
-
 			let color =  GBX.colorsDefault[types[ i ]] ? GBX.colorsDefault[types[ i ]].toString( 16 ) : '';
 			color = color.length > 4 ? color : '00' + color;
 			//console.log( 'col', color );

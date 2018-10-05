@@ -16,7 +16,7 @@ COR.uriDefaultFile = '../assets/splash-screen.md';
 COR.iconGitHubMark = "../assets/github-mark.png";
 
 
-//COR.colorButtonToggle = 'pink';
+COR.colorButtonToggle = 'pink'; // used by rep - surfaces by type
 // needs fixing
 //COR.buttonToggleCss = 'background-color: var( --but-bg-color ) !important; font-style: italic; font-weight: bold';
 
