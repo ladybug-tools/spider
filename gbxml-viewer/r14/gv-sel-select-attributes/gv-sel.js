@@ -868,7 +868,7 @@
 
 		let txt = '';
 		/*
-		// gethers only types that are in use
+		// gathers only types that are in use
 		// could be use to highlight the full list
 		const types = [];
 		const typesCount = [];
