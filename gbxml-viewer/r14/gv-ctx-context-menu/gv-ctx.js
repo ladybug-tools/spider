@@ -447,7 +447,8 @@
 
 	CTX.deleteSurface = function() {
 
-		const id = CTXselSurfaceId.value;
+		//const id = SEL.selSurfaceId.value;
+		const id = CTXselItemId.value;
 
 		const proceed = confirm( 'OK to delete surface: ' + id + '?' );
 
