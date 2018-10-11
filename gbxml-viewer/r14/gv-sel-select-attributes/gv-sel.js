@@ -767,7 +767,7 @@
 
 			if ( !surface.CADObjectId || typeof surface.CADObjectId !== 'string' ) {
 
-				CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
+				//CORdivLog.innerHTML += 'CADObjectId error: ' + surface.id + ' - ' + surface.Name + '<br>';
 
 				//console.log( 'surface', surface );
 				//console.log( 'surface.CADObjectId', surface.CADObjectId, typeof surface.CADObjectId );
