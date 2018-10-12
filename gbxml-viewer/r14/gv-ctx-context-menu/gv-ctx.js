@@ -534,7 +534,9 @@
 	CTX.saveFile = function() {
 
 		//xmlText = prettifyXml( gbxmlResponseXML ); // not
-		const xmlText = new XMLSerializer().serializeToString( GBX.gbxml );
+		let xmlText = new XMLSerializer().serializeToString( GBX.gbxml );
+
+		xmlText = xmlText.replace( /encoding\=\"utf\-16\"/gi, '' );
 		//console.log( 'xmlText', xmlText );
 
 		var blob = new Blob( [ xmlText ] );
