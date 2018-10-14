@@ -284,6 +284,7 @@
 		//console.log( 'ISS.attributesMissing', ISS.attributesMissing.join( '<br>' ) );
 
 		target.innerHTML =
+		
 		`<details>
 
 			<summary>Metadata Issues &raquo; ${ISS.attributesMissing.length} attributes missing</summary>
