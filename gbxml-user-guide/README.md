@@ -4,7 +4,7 @@
 # [gbXML User Guide Read Me]( #README.md )
 
 
-## Full screen: [gbXML User Guide]( gbxml-user-guide/gbxml-user-guide.html )
+## Full screen: [gbXML User Guide]( https://www.ladybug.tools/spider/gbxml-user-guide/gbxml-user-guide.html )
 
 
 ## Concept

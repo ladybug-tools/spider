@@ -296,13 +296,13 @@
 
 		THR.scene.traverse( function ( child ) {
 
-				//			if ( child.material ) {
+			if ( child.material ) {
 
 				child.castShadow = !child.castShadow;
 				child.receiveShadow = !child.receiveShadow;
 				child.material.needsUpdate = true;
 
-				//			}
+			}
 
 		} );
 
