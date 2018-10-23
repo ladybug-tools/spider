@@ -1,7 +1,7 @@
 
 	/* global THR, THREE, GBX, COR, CORdivLog, CTXdivAttributes, window, document */
 	/* jshint esversion: 6 */
-	/*jshint loopfunc:true */
+	/* jshint loopfunc:true */
 
 	// Copyright 2018 Ladybug Tools authors. MIT License
 	// functions in most sections are in alphabetical order
