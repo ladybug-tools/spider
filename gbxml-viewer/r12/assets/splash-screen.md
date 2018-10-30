@@ -7,7 +7,19 @@
 
 Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
 
-### Please watch and thumbs-up our YouTube video:
+***
+
+### 2018-10-30: Many things happening
+
+Spider gbXML Viewer is embedded in latest release of [OpenStudio]( https://www.openstudio.net/). See the [Ladybug Tools forum]( https://discourse.ladybug.tools/t/spider-gbxml-viewer-embedded-in-openstudio/4129 ) for details.
+
+The code for the OpenStudio edition is maintained in a new repository: [Spider gbXML Tools]( https://www.ladybug.tools/spider-gbxml-tools/ ). This code is simpler, faster and better than the current releases.
+
+So have a look at [Spider gbXML Viewer Basic]( https://www.ladybug.tools/spider-gbxml-tools/gbxml-viewer-basic ) and all the modules in the [Cookbook]( https://www.ladybug.tools/spider-gbxml-tools/#./cookbook/README.md ). These scripts will be the basis for future release of the Viewer.
+
+***
+
+**Please watch and thumbs-up our YouTube video:**
 
 [![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY "With music and voiceover by the multi-talented Michalina" )
 

@@ -10,7 +10,17 @@
 Whats's New! / Latest News: [Updates]( #../assets/fetch-readme-files.html )
 Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )  &nbsp; Wishlist: [R14 WishList](https://www.ladybug.tools/spider/#gbxml-viewer/r14/assets/gbxml-viewer-support-issues-wish-list.md)
 
-### Please watch and thumbs-up our YouTube video:
+### 2018-10-30: Many things happening
+
+Spider gbXML Viewer is embedded in latest release of [OpenStudio]( https://www.openstudio.net/). See the [Ladybug Tools forum]( https://discourse.ladybug.tools/t/spider-gbxml-viewer-embedded-in-openstudio/4129 ) for details.
+
+The code for the OpenStudio edition is maintained in a new repository: [Spider gbXML Tools]( https://www.ladybug.tools/spider-gbxml-tools/ ). This code is simpler, faster and better than the current releases.
+
+So have a look at [Spider gbXML Viewer Basic]( https://www.ladybug.tools/spider-gbxml-tools/gbxml-viewer-basic ) and all the modules in the [Cookbook]( https://www.ladybug.tools/spider-gbxml-tools/#./cookbook/README.md ). These scripts will be the basis for future release of the Viewer.
+
+
+
+**Please watch and thumbs-up our YouTube video:**
 
 [![2018-05-08 Webinar: Ladybug Tools and Green Building XML: Open Source Tools for Building Analysis]( https://www.ladybug.tools/spider/images/2018-05-08-gbxml-webinar-300px.png )]( https://www.youtube.com/watch?v=qHFEhD2SsDA "" )
 

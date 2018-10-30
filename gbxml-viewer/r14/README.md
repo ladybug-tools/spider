@@ -15,6 +15,15 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 For more details, see the [gbXML Viewer Read Me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md )
 
+### 2018-10-30: Many things happening
+
+Spider gbXML Viewer is embedded in latest release of [OpenStudio]( https://www.openstudio.net/). See the [Ladybug Tools forum]( https://discourse.ladybug.tools/t/spider-gbxml-viewer-embedded-in-openstudio/4129 ) for details.
+
+The code for the OpenStudio edition is maintained in a new repository: [Spider gbXML Tools]( https://www.ladybug.tools/spider-gbxml-tools/ ). This code is simpler, faster and better than the current releases.
+
+So have a look at [Spider gbXML Viewer Basic]( https://www.ladybug.tools/spider-gbxml-tools/gbxml-viewer-basic ) and all the modules in the [Cookbook]( https://www.ladybug.tools/spider-gbxml-tools/#./cookbook/README.md ). These scripts will be the basis for future release of the Viewer.
+
+
 ## Release Wish list
 
 This release is trying to move the effort from a single large monolithic app into a collection of targeted smaller apps.

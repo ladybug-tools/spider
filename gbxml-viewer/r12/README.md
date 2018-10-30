@@ -25,6 +25,16 @@ The [read me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md ) file wi
 
 ***
 
+### 2018-10-30: Many things happening
+
+Spider gbXML Viewer is embedded in latest release of [OpenStudio]( https://www.openstudio.net/). See the [Ladybug Tools forum]( https://discourse.ladybug.tools/t/spider-gbxml-viewer-embedded-in-openstudio/4129 ) for details.
+
+The code for the OpenStudio edition is maintained in a new repository: [Spider gbXML Tools]( https://www.ladybug.tools/spider-gbxml-tools/ ). This code is simpler, faster and better than the current releases.
+
+So have a look at [Spider gbXML Viewer Basic]( https://www.ladybug.tools/spider-gbxml-tools/gbxml-viewer-basic ) and all the modules in the [Cookbook]( https://www.ladybug.tools/spider-gbxml-tools/#./cookbook/README.md ). These scripts will be the basis for future release of the Viewer.
+
+***
+
 ## Modules
 
 The Ladybug Tools/Spider GbXML Viewer is a collection of small JavaScript files that work together to enable the viewing of [gbXML]( http://www.gbxml.org/ ) files.
