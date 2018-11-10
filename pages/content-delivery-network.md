@@ -31,6 +31,10 @@ Here we will be examining recommended CDNs. No need to comment yet. Notes still 
 
 [jsDelivr]( https://www.jsdelivr.com/ )
 * https://cdn.jsdelivr.net/npm/jquery/
+* https://cdn.jsdelivr.net/npm/three/
+* https://cdn.jsdelivr.net/npm/three@0.98.0/build/three.min.js
+* Back to r78?
+* https://cdn.jsdelivr.net/npm/three@0.98.0/examples/js/controls/OrbitControls.js
 * https://cdn.jsdelivr.net/gh/threejs &laquo; not
 * https://cdn.jsdelivr.net/gh/mrdoob &laquo; not
 
@@ -39,8 +43,8 @@ GitHub Pages
 * https://raw.githubusercontent.com/mrdoob/three.js/dev/build/three.min.js
 
 
-
 [CodeSandbox]( https://codesandbox.io )
+
 * has vscode!
 
 
@@ -59,8 +63,24 @@ GitHub Pages
 
 * https://www.cloudflare.com
 
+* https://cdnjs.com
+* https://cdnjs.cloudflare.com/ajax/libs/three.js/98/three.js
+* https://cdnjs.cloudflare.com/ajax/libs/three.js/98/three.min.js
+* https://cdnjs.cloudflare.com/ajax/libs/three.js/98/three.module.js
 
+Goes back to r2
+But does not do controllers, examples etc.
+
+
+https://developers.google.com/speed/libraries/#threejs
+
+https://docs.microsoft.com/en-us/aspnet/ajax/cdn/overview
 ## Change Log
+
+### 2018-11-10 ~ Theo
+
+* Add more links and tests
+* jsdeliver looking better
 
 ### 2018-10-26 ~ Theo
 
