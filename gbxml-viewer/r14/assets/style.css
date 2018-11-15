@@ -93,7 +93,7 @@
 
 
 
-	@media screen and (max-width: 900px) {
+	@media screen and  max-width: 900px ) {
 
 		#CORdivMenuLeft { left: -23em }
 		#CORdivMenuRight { left: 40%; width: 50%; }
