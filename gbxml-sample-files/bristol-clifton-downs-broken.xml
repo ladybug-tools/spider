@@ -55937,7 +55937,7 @@
     </Surface>
 
 
-    <Surface surfaceType="InteriorFloor" id="aim8255">
+    <Surface surfaceType="Ceiling" id="aim8255duplicate">
       <AdjacentSpaceId spaceIdRef="aim1973"/>
       <AdjacentSpaceId spaceIdRef="aim2973"/>
       <RectangularGeometry id="aim8256">
@@ -72930,7 +72930,7 @@
       <Name>T-RF_100-E-R-485</Name>
     </Surface>
 
-    <Surface surfaceType="Roof" exposedToSun="true" id="aim13016">
+    <Surface surfaceType="Ceiling" exposedToSun="true" id="aim13016duplicate">
       <AdjacentSpaceId spaceIdRef="aim5184"/>
       <RectangularGeometry id="aim13017">
         <Azimuth>180</Azimuth>
@@ -74688,7 +74688,7 @@
       <Name>X-S-523</Name>
     </Surface>
 
-    <Surface surfaceType="Shade" exposedToSun="true" id="aim93466">
+    <Surface surfaceType="Air" exposedToSun="true" id="aim13466duplicate">
       <RectangularGeometry id="aim93467">
         <Azimuth>93.4364318847656</Azimuth>
         <CartesianPoint>
