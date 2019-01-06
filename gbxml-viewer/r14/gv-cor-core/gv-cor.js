@@ -136,7 +136,7 @@ COR.loadScript = function( source ){ // add buttonId?
 
 	COR.resetLeftMenu();
 
-	// change to ad a check for if not already loaded?
+	// change to add a check for if not already loaded?
 	const script = document.head.appendChild( document.createElement( 'script' ) );
 	script.src = source ;
 
