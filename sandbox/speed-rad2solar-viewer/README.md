@@ -38,6 +38,9 @@ value="You are now in a GitHub web page view - Click this button to view this re
 	* Item link displays just the selected surface
 
 
+### [SPEED Rad2Solar Viewer Latest]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/ )
+
+
 ### [SPEED Rad2Solar Viewer R6.4]( https://www.ladybug.tools/spider/sandbox/speed-rad2solar-viewer/r6/speed-rad2solar-viewer4.html )
 
 * Add edges to planes except roof and ground
