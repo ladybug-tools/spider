@@ -131,8 +131,8 @@
 			if ( line[0] === '#' ) { continue; }
 			if ( line === '' ) { continue; }
 
-			if ( line.search( /[abcdfghijklmnopqrstuvwxyz]/ ) >= 0 ) {
-
+			if ( line.search( /[a-z]/ ) >= 0 ) { // there is a word
+			//if ( line.test( /[a-z]/ ) ) { // there is a word
 				if ( line.match( '!xform' ) && !line.match( '-rx' ) && !line.match( '-f' ) ) {
 
 					let url = line.trim().replace( /  /g, ' ' ).split( /\s/)[ 1 ];
@@ -143,7 +143,7 @@
 
 				} else {
 
-					if ( line.match( 'void' ) ) {
+					if ( line.match( 'void' ) ) { //material
 
 						//console.log( 'void', line );
 
@@ -168,7 +168,7 @@
 		rad.items = items;
 		rad.data = data;
 
-		//console.log( 'rad', rad );
+		console.log( 'rad', rad );
 
 		rad.setVertices();
 

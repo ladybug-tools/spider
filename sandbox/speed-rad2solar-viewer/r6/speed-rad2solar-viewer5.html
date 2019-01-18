@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="List and display Radiance HDR files as textures on a 3D surface for all files in a test case folder" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2019-01-17" >
+<title>SPEED Rad2Solar R654 PNG </title>
+<style>
+/* Copyright 2019 Ladybug Tools authors. MIT License */
+
+/* https://www.w3schools.com/colors/colors_names.asp // use colors and borders to help identify the scope of particular elements */
+
+	:root {
+		--mnu-color: firebrick; /* brown  darkmagenta  firebrick  indigo  MediumSlateBlue  navy  teal */
+		--mnu-back-color: azure; /* azure  beige  cornsilk  Gainsboro  LavenderBlush  linen  snow */
+		--mnu-width:20rem;
+		--a-back-color-hover: yellow;
+		--but-bg-color: #ddd;
+		--highlight-color: yellow;
+	}
+
+	html { height: 100%; }
+
+	body, html { font: 12pt monospace; height: 100%; margin: 0; overflow: hidden; }
+
+	a { color: var( --mnu-color ); text-decoration: none; }
+	a:hover, a:focus, #hamburger:hover { background-color: yellow; color: #888; }
+
+	button, input[ type=button ] { background-color: var(--but-bg-color ); border: none; color: var( --mnu-color ); cursor: pointer; padding: 3px 20px; }
+	button:hover { background-color: var( --a-back-color-hover ); color: var( --but-bg-color ) }
+
+	iframe { width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#hamburger { background-color: pink; box-sizing: border-box; cursor: pointer; font-size: 30px; left: calc( var( --mnu-width ) - 100px );
+		line-height: 30px; margin: 0; padding: 5px 15px 8px 10px; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+	#hamburger {
+		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	}
+
+	#divMenu { background-color: var( --mnu-back-color ); box-sizing: border-box; max-height: 95%; margin: 20px;
+		overflow: auto; padding: 25px 10px 30px 10px; position: fixed; resize: both; top: 0; width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#divMenu {
+		box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	}
+
+	/* // anything needed for mobile? Or delete??
+	@media screen and (max-width: 600px) {
+		#divMenu {
+		display: none;
+		}
+	}
+	*/
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/OrbitControls.js" ></script>
+
+	<div id = "divMenu" >
+
+		<div>
+			<a href = "../index.html" target="_top" >repo</a> &raquo;
+			<a href= "./index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
+		</div>
+
+		<div id=divTitle ></div>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(1); >test case 1</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(2); >test case 2</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(3); >test case 3</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(4); >test case 4</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(5); >test case 5</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(6); >test case 6</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(7); >test case 7</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(8); >test case 8</button>
+		</p>
+
+		<p>
+			<button onclick=fetchGitHubFolderContents(9); >test case 8</button>
+		</p>
+
+		<div id = "divMenuItems" >
+
+
+			<button title = "Toggle the scene spinning" onclick="controls.autoRotate=!controls.autoRotate;" style=width:100%; >rotation</button>
+			<div id = "divLog" ></div>
+		</div>
+
+
+		<hr>
+
+		<center title="Hello, world!" onclick="divMenu.scrollTop=0;" style="color:#aaa;cursor:pointer;font-size:1.5rem;" > ❦ </center>
+
+	</div>
+
+	<div id = "hamburger" onclick=toggleNav(); > slide &#9776; </div>
+
+<script>
+
+/* globals THREE, divTitle, divMenu, hamburger  */
+// jshint esversion: 6
+
+const urlGitHubSource = 'https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-rad2solar-viewer/test-cases/test-case-2018-07-04-';
+const urlGitHubPage = 'https://rawgit.com/ladybug-tools/spider/master/sandbox/speed-rad2solar-viewer/test-cases/test-case-2018-07-04-';
+const iconGitHubMark = '<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>';
+
+let meshes;
+let testCase = 2;
+let pngs;
+
+let renderer, camera, controls, scene;
+
+init();
+animate();
+
+function init() {
+
+	const source = "https://github.com/ladybug-tools/spider/tree/master/sandbox/speed-rad2solar-viewer/";
+	//const title = location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+	//document.title = title;
+	const title = document.title;
+
+	//const txt = 'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?';
+
+	divTitle.innerHTML =
+	`
+		<h2>
+			<a href="${source}" title = "View source code on GitHub" target="_top" >
+				<img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+			<a href = "" title = "Click to reload this page" >${title}</a>
+		</h2>
+		<p>
+			${document.head.querySelector( '[name=description]' ).content }
+		</p>
+	`;
+
+	//divMenuItems.innerHTML += `<p>${txt}</p><p>${txt}</p><p>${txt}</p>`; // for testing menu
+
+	//document.documentElement.style.setProperty('--mnu-color', 'pink');
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.up.set( 0, 0, 1 );
+	camera.position.set( 100, 100, 100 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+	controls.maxDistance = 800;
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => controls.autoRotate = false, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+
+	const axesHelper = new THREE.AxesHelper( 50 );
+	scene.add( axesHelper );
+
+	//const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	//const material = new THREE.MeshNormalMaterial();
+	//const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+	fetchGitHubFolderContents( testCase );
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+}
+
+
+
+function fetchGitHubFolderContents( index ) {
+
+	testCase = index;
+
+	const url = 'https://api.github.com/repos/ladybug-tools/spider/contents/sandbox/speed-rad2solar-viewer/test-cases/test-case-2018-07-04-' + index + '/';
+	//console.log(url );
+
+	divMenuItems.innerHTML =
+
+	`<details id = detGallery >
+
+		<summary>Test Case ${ index } - List of Files</summary>
+
+		<div id=divGallery ></div>
+
+	</details>`;
+
+	const request = new Request( url );
+
+	fetch( request )
+		.then( response => response.json() )
+		.then( json => callbackGitHubMenu( json ) );
+
+}
+
+
+
+function callbackGitHubMenu ( files ) {
+
+	//console.log( 'files', files );
+
+	let txt = '';
+	pngs = [];
+
+	for ( let file of files) {
+
+		if ( !file.name.endsWith( '.png' ) ) { continue; }
+
+		if( file.name.includes( 'sw' ) || file.name.includes( 'legend' ) ) { continue; }
+
+		const fileName = encodeURI( file.name );
+
+		txt +=
+
+		`<div style=margin:10px; >
+
+			<a href=${ urlGitHubSource + testCase + '/' + fileName } title="Edit me" >${ iconGitHubMark }</a>
+
+			<a href=#${ fileName } title="${ file.size.toLocaleString() } bytes" >${ file.name }</a>
+
+			<!-- <a href=${ fileName } title="Link to just this file" >&#x2750;</a> -->
+
+		</div>`;
+
+		pngs.push( file.name );
+
+	}
+
+	divGallery.innerHTML =
+	`<div style=margin:10px; >${ pngs.length} PNG files found</div>` + txt;
+
+	loadTestCase( testCase );
+
+}
+
+
+
+function onHashChange() {
+
+	uriDefaultFile = pngs[ 0 ];
+	if ( !uriDefaultFile ) { alert("no-files-found" ); return; }
+
+	const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+	const ulc = url.toLowerCase();
+
+	if ( ulc.endsWith( '.png' ) ) {
+
+		loadSinglePGFile( url, testCase );
+
+	}
+
+}
+
+
+
+function loadSinglePGFile( fileName, index ) {
+
+	//console.log( 'fileName', fileName.slice( 0, -8 ) );
+
+	scene.remove( meshes );
+
+	meshes = new THREE.Group();
+
+	loadPNG( fileName, index );
+
+	scene.add( meshes );
+
+}
+
+
+
+function loadTestCase( index ) {
+
+	scene.remove( meshes );
+
+	meshes = new THREE.Group();
+
+	if ( !pngs.length ) { alert("No PNG files found. \n\n ;-(" ); return; }
+
+	for ( fileName of pngs ) {
+
+		loadPNG( fileName, index );
+
+	}
+
+	/*
+	loadPNG( pngs[ 0 ], index );
+	loadPNG( pngs[ 1 ], index );
+	loadPNG( pngs[ 2 ], index );
+	loadPNG( pngs[ 3 ], index );
+	loadPNG( pngs[ 4 ], index );
+	*/
+
+	scene.add( meshes );
+
+}
+
+
+
+function loadPNG( fileName, index ) {
+
+		const items = fileName.slice( 0, -4).split( '_' ).map( item => parseFloat( item ) );
+		//console.log( 'items', items );
+
+		const center = new THREE.Vector3().fromArray( items.slice( 0, 3 ) );
+		//console.log( 'center', center );
+
+		const normal = new THREE.Vector3().fromArray( [ items[ 3 ], items[ 4 ], items[ 5 ] ] ).normalize();
+
+		//console.log( 'normal', normal );
+		meshes.add( new THREE.ArrowHelper( normal, center, 3, 0xff00ff , 1, 1 ) );
+
+		const point = new THREE.Vector3().fromArray( [ items[ 6 ], items[ 7 ], items[ 8 ] ] ).normalize();
+
+		//console.log( 'point', point );
+		meshes.add( new THREE.ArrowHelper( point, center, 3, 0x000000 , 1, 1 ) );
+
+		const width = items[ 9 ];
+		const height = items[ 10 ];
+		//console.log( 'w',width, 'h', height );
+
+		const loader = new THREE.TextureLoader();
+
+		const texture = loader.load ( urlGitHubPage + index + '/' + fileName );
+		texture.minFilter = THREE.LinearFilter;
+
+		const material = new THREE.MeshBasicMaterial( { alphaTest : 0.01, map: texture, opacity: 1, side: 0, transparent: true } );
+		const geometry = new THREE.PlaneBufferGeometry( width, height );
+
+		/*
+		if ( Math.abs( items[ 6 ] ) === 1 ) {
+
+			const angle = Math.atan2( point.x, point.y )
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( angle ) );
+
+		}
+
+		if ( Math.abs( items[ 5 ] ) !== 1 ) {
+		//if ( items[ 5 ] !== -1 ) {
+
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI ) );
+
+		} else {
+
+			//console.log( 'items[ 5 ]', index, items );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( Math.PI ) );
+
+		}
+		*/
+
+		//geometry.lookAt( normal );
+
+		mesh = new THREE.Mesh( geometry, material );
+
+		mesh.position.copy( center );
+
+		normal.add( center )
+		mesh.up = point;
+		mesh.lookAt( normal );
+
+		if ( items[ 0 ] === 0 && items[ 1 ] === 0 ) {
+
+			//console.log( 'items', items );
+
+		} else {
+
+			edgesGeometry = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
+			edgesMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } );
+			edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
+			mesh.add( edges );
+
+		}
+
+		meshes.add( mesh );
+
+
+
+}
+
+
+
+function toggleNav() {
+
+	const left = 'calc( var( --mnu-width ) - 100px )';
+
+	if ( hamburger.style.left === '' || hamburger.style.left === left ) {
+
+		divMenu.style.left = 'calc( -1 * var( --mnu-width ) - 20px )';
+		hamburger.style.left = '-100px';
+
+	} else {
+
+		divMenu.style.left = 0;
+		hamburger.style.left = left;
+
+	}
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+
+}
+
+</script>
+</body>
+</html>
