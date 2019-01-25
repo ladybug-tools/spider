@@ -26,13 +26,20 @@ First attempts a creating some kind of a CAD 'diff' engine
 
 * A manifesto for the need for this effort
 
+
+### [Firm, Commodious and Delightful]( #sandbox/gbxml-to-json-lines/firm-commodious-and-delightful.md )
+
+* Another manifesto
+
+
 ### [gbxml to json lines]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/gbxml-to-json-lines/r1/gbxml-to-json-lines.html )
 
-Runnable HTML / JavaScript file that opens gbXML files, parses and saves data to JSON Lines file
+* Runnable HTML / JavaScript file that opens gbXML files, parses and saves data to JSON Lines file
+
 
 ### [jsonl reader]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/jsonl-reader/r1/jsonl-reader.html)
 
-Runnable HTML / JavaScript file that read a gbXML to JSONL file created by the the first script. Parses and displays surface data as lines only. Filled polygons coming soon.
+* Runnable HTML / JavaScript file that read a file created by the the 'gbXML to JSON lines' script, then parses and displays and surface data as lines only. Filled polygons coming soon.
 
 
 
