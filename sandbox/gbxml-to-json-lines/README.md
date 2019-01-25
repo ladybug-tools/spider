@@ -1,7 +1,7 @@
 
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://www.ladybug.tools/spider/#sandbox/gbxml-to-json-lines/README.md "View file as a web page." ) </span>
 
-<div><input type=button class = "btn btn-secondary btn-sm" onclick=window.location.href="https://github.com/ladybug.tools/spider/blob/master/sandbox/gbxml-to-json-lines/README.md"
+<div><input type=button class = "btn btn-secondary btn-sm" onclick=window.location.href="https://github.com/ladybug-tools/spider/tree/master/sandbox/gbxml-to-json-lines/"
 value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ></div>
 
 <br>
@@ -22,16 +22,18 @@ First attempts a creating some kind of a CAD 'diff' engine
 
 ## Files
 
-### [Toward a new architecture of building design]( #toward-a-new-architecture-of-building-design.md )
+### [Toward a new architecture of building design]( #sandbox/gbxml-to-json-lines/toward-a-new-architecture-of-building-design.md )
 
+* A manifesto for the need for this effort
 
 ### [gbxml to json lines]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/gbxml-to-json-lines/r1/gbxml-to-json-lines.html )
 
-Open gbXML file, parse and save to JSON Lines file
+Runnable HTML / JavaScript file that opens gbXML files, parses and saves data to JSON Lines file
 
 ### [jsonl reader]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/jsonl-reader/r1/jsonl-reader.html)
 
-Read gbXML to JSONL file. Parse and display surface data as lines only. Filled polygons coming soon.
+Runnable HTML / JavaScript file that read a gbXML to JSONL file created by the the first script. Parses and displays surface data as lines only. Filled polygons coming soon.
+
 
 
 ## To Do / Wish List
