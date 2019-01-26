@@ -32,7 +32,7 @@ First attempts a creating some kind of a CAD 'diff' engine
 * Another manifesto
 
 
-### [gbxml to json lines]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/gbxml-to-json-lines/r1/gbxml-to-json-lines.html )
+### [gbxml to json lines]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/gbxml-to-json-lines/index.html )
 
 * Runnable HTML / JavaScript file that opens gbXML files, parses and saves data to JSON Lines file
 
@@ -62,6 +62,15 @@ First attempts a creating some kind of a CAD 'diff' engine
 
 
 ## Change Log
+
+
+### 2019-01-25 ~ Theo
+
+* Add schemaAOD.md
+
+gbxml-to-json-lines R1
+* first commit
+
 
 ### 2019-01-24 ~ Theo
 
