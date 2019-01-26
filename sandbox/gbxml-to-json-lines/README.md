@@ -22,19 +22,25 @@ First attempts a creating some kind of a CAD 'diff' engine
 
 ## Files
 
-### [Toward a new architecture of building design]( #sandbox/gbxml-to-json-lines/toward-a-new-architecture-of-building-design.md )
+### [Toward a new architecture of building design]( https://www.ladybug.tools/spider/#sandbox/gbxml-to-json-lines/posts/toward-a-new-architecture-of-building-design.md )
 
 * A manifesto for the need for this effort
 
 
-### [Firm, Commodious and Delightful]( #sandbox/gbxml-to-json-lines/firm-commodious-and-delightful.md )
+### [Firm, Commodious and Delightful]( https://www.ladybug.tools/spider/#sandbox/gbxml-to-json-lines/posts/firm-commodious-and-delightful.md )
 
 * Another manifesto
+
+
+### [Schema: Architecture of Design]( #sandbox/gbxml-to-json-lines/posts/schema-architecture-of-design.md )
+
+* Yet another manifesto
 
 
 ### [gbxml to json lines]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/gbxml-to-json-lines/index.html )
 
 * Runnable HTML / JavaScript file that opens gbXML files, parses and saves data to JSON Lines file
+* R2 is a fork of Spider gbXML Viewer "Maevia"
 
 
 ### [jsonl reader]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/jsonl-reader/r1/jsonl-reader.html)
@@ -66,9 +72,10 @@ First attempts a creating some kind of a CAD 'diff' engine
 
 ### 2019-01-25 ~ Theo
 
-* Add schemaAOD.md
+* move papers to new posts folder
+* Add schema-architecture-of-design.md
 
-gbxml-to-json-lines R1
+gbxml-to-json-lines R2
 * first commit
 
 

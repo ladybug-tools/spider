@@ -138,7 +138,6 @@ function parseGbxml( txt ) {
 	text = txt.replace( /\r\n|\n/g, '' );
 	//divContents.innerText = text;
 
-
 	const reSurface = /<Surface(.*?)<\/surface>/gi;
 	surfaces = text.match( reSurface );
 	//console.log( 'GBX.surfaces', GBX.surfaces );

@@ -35,7 +35,7 @@
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/gbx-gbxml-text-parser.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/gbxu-gbxml-utilities.js" ></script>
 
-<!-- Edit menu -->
+<!-- Edit menu
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/iscor-issues-core.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/isfic-issues-file-check.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/ismet-issues-metadata.js" ></script>
@@ -46,12 +46,16 @@
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/isasd-issues-adjacent-space-duplicate.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/iscod-issues-cad-object-id.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/istmp-issues-template.js" ></script>
+-->
 
-<!-- View menu -->
+<!-- View menu
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/vwsrf-view-surface-types.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/repl-view-by-level.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/set-settings.js" ></script>
 <script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/cut-section-cut.js"></script>
+-->
+
+<script src=ejl-export-json-lines.js ></script>
 
 <script>
 
@@ -128,6 +132,11 @@ OHC.urlGitHubPage = `https://${ OHC.repo }/`;
 //OHC.urlGitHubPage = "";
 */
 
+SET = {};
+
+SET.toggleOpenings = function(){};
+
+
 </script>
 
 
@@ -147,8 +156,6 @@ OHC.urlGitHubPage = `https://${ OHC.repo }/`;
 
 				<section id=FILdivFileOpen ></section>
 
-
-
 				<section id=FILdivCurrentStatus ></section>
 
 				<!--
@@ -166,9 +173,25 @@ OHC.urlGitHubPage = `https://${ OHC.repo }/`;
 
 				<summary class=divMenuTitle >JSON Lines</summary>
 
-				<section id=FILdivFileSave ></section>
+				<section id=EJLsecMenuExportJsonLines ></section>
+
+				<section id=FILdivFileSave >
+
+					<div>
+
+						<p>
+
+							<button id=but onclick=saveFile(); accessKey= 'z' title='access key: z '>save data to JSON lines file</button>
+
+						</p>
+
+					</div>
+
+				</section>
 
 			</details>
+
+
 			<details id=detMenuHelp open >
 
 				<summary class=divMenuTitle >Help Menu </summary>
@@ -214,6 +237,9 @@ OHC.urlGitHubPage = `https://${ OHC.repo }/`;
 
 <script>
 
+let peeps = [ "pamela", "patty", "paul", "peter" ];
+
+let index = 17;
 
 
 init();
@@ -241,7 +267,10 @@ function init() {
 
 	GBXdivStatsGbx.innerHTML=GBX.getDivMenuGbx();
 
-	FILdivFileSave.innerHTML=FIL.getMenuFileSave();
+	EJLsecMenuExportJsonLines.innerHTML = EJL.getMenuExportJsonLines();
+
+
+	//FILdivFileSave.innerHTML=FIL.getMenuFileSave();
 
 	//OHCsecMenuRepoFilesFolders.innerHTML = OHC.getMenuRepoFilesFolders();
 
@@ -274,6 +303,9 @@ function init() {
 	document.removeEventListener( 'touchmove', MNU.onTouchMove, false );
 
 }
+
+
+
 
 
 MNU.toggleNavLeft = function() {
