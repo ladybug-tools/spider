@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "This menu is a component of a basic html content management script with sliding menu, css theme selection, Markdown to HTML, drag and drop file reading capability, access to frequently used pages and more" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
-<meta name = "date" content = "2019-01-25" >
-<meta name = "release" content = "2.0" >
+<meta name = "date" content = "2019-01-27" >
+<meta name = "release" content = "2.1" >
 <title>Spider gbXMLto JSON Lines</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -175,19 +175,7 @@ SET.toggleOpenings = function(){};
 
 				<section id=EJLsecMenuExportJsonLines ></section>
 
-				<section id=FILdivFileSave >
-
-					<div>
-
-						<p>
-
-							<button id=but onclick=saveFile(); accessKey= 'z' title='access key: z '>save data to JSON lines file</button>
-
-						</p>
-
-					</div>
-
-				</section>
+				<section id=divFileSave ></section>
 
 			</details>
 
@@ -237,10 +225,6 @@ SET.toggleOpenings = function(){};
 
 <script>
 
-let peeps = [ "pamela", "patty", "paul", "peter" ];
-
-let index = 17;
-
 
 init();
 
@@ -268,13 +252,6 @@ function init() {
 	GBXdivStatsGbx.innerHTML=GBX.getDivMenuGbx();
 
 	EJLsecMenuExportJsonLines.innerHTML = EJL.getMenuExportJsonLines();
-
-
-	//FILdivFileSave.innerHTML=FIL.getMenuFileSave();
-
-	//OHCsecMenuRepoFilesFolders.innerHTML = OHC.getMenuRepoFilesFolders();
-
-	//FOBsecFileOpenBasic.innerHTML = FOB.getMenuFileOpenBasic( divContents, divPopUpData );
 
 	THMsecMenuThemeSelect.innerHTML = THM.getMenuThemeSelect();
 

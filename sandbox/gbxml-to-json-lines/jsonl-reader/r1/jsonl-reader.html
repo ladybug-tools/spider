@@ -27,7 +27,7 @@
 </head>
 <body>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r97/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r97/examples/js/controls/TrackballControls.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r97/examples/js/controls/OrbitControls.js" ></script>
 
 	<nav id = "navMenu" >
 
@@ -39,15 +39,11 @@
 
 		go back to:<br>
 
-		<a href="https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/gbxml-to-json-lines/r1/gbxml-to-json-lines.html" >gbxml to json lines</a>
+		<a href="https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/gbxml-to-json-lines/index.html" >gbxml to json lines</a>
 		<hr>
 
 		<p>
-			<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
-		</p>
-
-		<p>
-			<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
+			<button onclick=controls.autoRotate=!controls.autoRotate >rotation</button>
 		</p>
 
 		<div id = "divLog" ></div>
@@ -56,8 +52,10 @@
 
 <script>
 
-const url = "../../sample-json-lines-files/london-office.xml.jsonl";
+const url = "../../sample-json-lines-files/london-office2.xml.jsonl";
+
 let building;
+let axesHelper;
 
 
 const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/gbxml-to-json-lines/";
@@ -81,7 +79,7 @@ function init() {
 	camera.position.set( - 100, - 100, 100 );
 	camera.up.set( 0, 0, 1 );
 
-	controls = new THREE.TrackballControls( camera, renderer.domElement );
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
 
 	scene = new THREE.Scene();
 
@@ -90,7 +88,7 @@ function init() {
 	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
 	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
 
-	const axesHelper = new THREE.AxesHelper( 100 );
+	axesHelper = new THREE.AxesHelper( 100 );
 	scene.add( axesHelper );
 
 	const geometry = new THREE.BoxGeometry( 50, 50, 50 );
@@ -142,19 +140,63 @@ function parseText( text ) {
 	const lines = text.split(/\r\n|\n/).slice( 0, -1 );
 
 	for ( line of lines ) {
+		//console.log( 'line', line );
 
-		jsonl = JSON.parse( line );
+		const jsonl = JSON.parse( line );
+		//console.log( 'jsonl', jsonl.coordinates );
 
-		line = drawLine( jsonl.coordinates );
+		if ( jsonl.coordinates ) {
 
-		building.add( line );
+			surface = drawLine( jsonl.coordinates );
+			//console.log( '', surface );
+			building.add( surface );
+
+		}
+
 
 	}
 
 	scene.add( building );
 	//console.log( 'jsonl', jsonl );
 
+	zoomObjectBoundingSphere( building );
+
 }
+
+
+
+function zoomObjectBoundingSphere( obj = scene ) {
+	//console.log( 'obj', obj );
+
+	const bbox = new THREE.Box3().setFromObject( obj );
+	//console.log( 'bbox', bbox );
+
+	if ( bbox.isEmpty() === true ) { return; }
+
+	//if ( isNaN( bbox.max.x - bbox.min.x ) ) { console.log( 'zoom fail', {obj},{bbox} ); return; } // is there a better way of seeing if we have a good bbox?
+
+	const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+	const center = sphere.center;
+	const radius = sphere.radius;
+
+	//controls.reset();
+	controls.target.copy( center ); // needed because model may be far from origin
+	controls.maxDistance = 5 * radius;
+
+	camera.position.copy( center.clone().add( new THREE.Vector3( 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+	camera.near = 0.1 * radius; //2 * camera.position.length();
+	camera.far = 10 * radius; //2 * camera.position.length();
+	camera.updateProjectionMatrix();
+
+
+	if ( axesHelper ) {
+
+		axesHelper.scale.set( radius, radius, radius );
+		axesHelper.position.copy( center);
+
+	}
+
+};
 
 
 
@@ -230,7 +272,7 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	controls.update();
-	scene.rotation.z += sceneRotation / 1000;
+	//scene.rotation.z += sceneRotation / 1000;
 
 }
 

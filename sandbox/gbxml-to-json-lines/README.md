@@ -70,6 +70,14 @@ First attempts a creating some kind of a CAD 'diff' engine
 ## Change Log
 
 
+### 2019-01-27 ~ Theo
+
+gbxml-to-json-lines R2
+* Includes most significant gbXML attributes
+* Peeps have assigned surface types
+* Save data to peeps files
+
+
 ### 2019-01-25 ~ Theo
 
 * move papers to new posts folder
