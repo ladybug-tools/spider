@@ -109,6 +109,9 @@ EJL.getMenuExportJsonLines = function() {
 
 			<div id=EJLdivSaveActorFiles >${ peepsButtons }</div>
 
+			<div>
+			<a href="../../jsonl-reader/index.html" >JSON Lines Reader</a><div>
+
 		</details>
 	`;
 

@@ -76,6 +76,7 @@ gbxml-to-json-lines R2
 * Includes most significant gbXML attributes
 * Peeps have assigned surface types
 * Save data to peeps files
+* Add link to reader
 
 
 ### 2019-01-25 ~ Theo
