@@ -49,10 +49,13 @@ First attempts a creating some kind of a CAD 'diff' engine
 * Includes most significant gbXML attributes
 * Includes link to JSON Lines Reader
 
-### [jsonl reader]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/jsonl-reader/r1/jsonl-reader.html)
+
+### [jsonl reader]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/jsonl-reader/index.html)
 
 * Runnable HTML / JavaScript file that read a file created by the the 'gbXML to JSON lines' script, then parses and displays and surface data as lines only. Filled polygons coming soon.
-
+* Links to sample files
+	* Includes links to files with individual contributions
+* Checkbox giving ability to add file data instead of replacing data
 
 
 ## To Do / Wish List
@@ -84,6 +87,14 @@ gbxml-to-json-lines R2
 * Save data to peeps files
 * Add link to reader
 
+
+jsonl-reader.html
+* Add links to sample files
+	* Includes links to files with individual contributions
+* Add checkbox giving ability to add file data instead of replacing data
+
+Sample files
+* Many updates
 
 ### 2019-01-25 ~ Theo
 

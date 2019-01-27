@@ -4,7 +4,7 @@
 
 
 
-const EJL = { "release": "R15.1", "date": "2019-01-26" };
+const EJL = { "release": "R2.1", "date": "2019-01-27" };
 
 
 let peeps = [ "pamela", "patty", "paul", "peter" ];
@@ -31,15 +31,14 @@ let peepsSurfaceTypes = {
 };
 
 
-EJL.index = 1;
-
-
 
 EJL.description =
 	`
 		Export Json Lines (EJL) provides HTML and JavaScript 'boilerplate' to create a typical TooToo menu.
 
 	`;
+
+
 
 EJL.currentStatus =
 	`

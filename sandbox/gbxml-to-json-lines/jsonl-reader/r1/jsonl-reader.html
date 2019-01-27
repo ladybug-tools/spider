@@ -5,8 +5,8 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Read gbXML to JSONL file. Parse and display surface data as lines only. Filled polygons coming soon." >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2019-01-24" >
-<title></title>
+<meta name = "date" content = "2019-01-27" >
+<title>JSON Lines Reader 1.1</title>
 <style>
 	/* Copyright 2018 pushMe pullYou authors. MIT License */
 
@@ -29,9 +29,37 @@
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r97/build/three.min.js" ></script>
 <script src = "https://cdn.rawgit.com/mrdoob/three.js/r97/examples/js/controls/OrbitControls.js" ></script>
 
+
 	<nav id = "navMenu" >
 
 		<div id = "divTitle" ></div>
+
+		<p>Sample files</p>
+
+		<button onclick=requestFile(url1) >London Office</button><br>
+
+		<button onclick=requestFile(url2) >Omaha House</button><br>
+
+		<button onclick=requestFile(url3) >Bristol Commercial</button>
+
+		<button onclick=requestFile(url4) >Woolwich Arsenal</button>
+
+		<button onclick=requestFile(url5) >Coventry University</button><br>
+
+		<br>
+
+		load files for individual contributions
+		<button onclick=requestFile(url6) >Pamela's work on Bristol Commercial</button>
+
+		<button onclick=requestFile(url7); >Patty's work Bristol Commercial</button>
+
+		<button onclick=requestFile(url8) >Paul's work on Bristol Commercial</button>
+
+		<button onclick=requestFile(url9) >Peter's work on Bristol Commercial</button>
+
+		<p>
+			<input type=checkbox id=chkAddData > add fresh data to current project
+		</p>
 
 		<p>
 			<input type=file id=inpOpenFile onchange=openFile(this); >
@@ -40,6 +68,7 @@
 		go back to:<br>
 
 		<a href="../../gbxml-to-json-lines/index.html" >gbxml to json lines</a>
+
 		<hr>
 
 		<p>
@@ -52,15 +81,30 @@
 
 <script>
 
-const url = "../../sample-json-lines-files/london-office2.xml.jsonl";
+const url1 = "../../sample-json-lines-files/london-office.xml.jsonl";
 
-let building;
+const url2 = "../../sample-json-lines-files/omha-nb-zneth.xml.jsonl";
+
+const url3 = "../../sample-json-lines-files/bristol-clifton-downs-fixed.xml.jsonl";
+
+const url4 = "../../sample-json-lines-files/london-royal-arsenal-woolwich.xml.jsonl";
+
+const url5 = "../../sample-json-lines-files/coventry-university-of-warwick-small.xml.jsonl";
+
+
+const url6 = "../../sample-json-lines-files/pamela-bristol-clifton-downs-fixed.xml.jsonl";
+
+const url7 = "../../sample-json-lines-files/patty-bristol-clifton-downs-fixed.xml.jsonl";
+
+const url8 = "../../sample-json-lines-files/paul-bristol-clifton-downs-fixed.xml.jsonl";
+
+const url9 = "../../sample-json-lines-files/peter-bristol-clifton-downs-fixed.xml.jsonl";
+
+let project, building;
 let axesHelper;
-
 
 const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/gbxml-to-json-lines/";
 
-let sceneRotation = 1;
 let renderer, camera, controls, scene;
 
 init();
@@ -96,7 +140,7 @@ function init() {
 	const mesh = new THREE.Mesh( geometry, material );
 	//scene.add( mesh );
 
-	requestFile( url );
+	requestFile( url1 );
 
 }
 
@@ -133,9 +177,19 @@ function openFile ( files ) {
 
 function parseText( text ) {
 
-	scene.remove( building );
+	if ( text.length === 0) { alert( "no work here!"); return; }
 
-	building = new THREE.Group();
+	if ( chkAddData.checked === false ) {
+
+		scene.remove( project );
+
+		project = new THREE.Group();
+
+		scene.add( project );
+
+	}
+
+	const building = new THREE.Group();
 
 	const lines = text.split(/\r\n|\n/).slice( 0, -1 );
 
@@ -156,10 +210,11 @@ function parseText( text ) {
 
 	}
 
-	scene.add( building );
+	project.add( building )
+
 	//console.log( 'jsonl', jsonl );
 
-	zoomObjectBoundingSphere( building );
+	zoomObjectBoundingSphere( project );
 
 }
 
@@ -259,7 +314,7 @@ function onWindowResize() {
 
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
-	controls.handleResize();
+	//controls.handleResize();
 
 	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
 
