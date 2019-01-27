@@ -41,7 +41,13 @@ First attempts a creating some kind of a CAD 'diff' engine
 
 * Runnable HTML / JavaScript file that opens gbXML files, parses and saves data to JSON Lines file
 * R2 is a fork of Spider gbXML Viewer "Maevia"
-
+* Provides easy access to dozens of gbXML files to uses as test source data
+* Displays generated JSON Lines data in scrollable ```<div>```
+* Exports JSON Lines data
+	* Single file of data
+	* Individual author/actor files with assigned surface types
+* Includes most significant gbXML attributes
+* Includes link to JSON Lines Reader
 
 ### [jsonl reader]( https://www.ladybug.tools/spider/sandbox/gbxml-to-json-lines/jsonl-reader/r1/jsonl-reader.html)
 
