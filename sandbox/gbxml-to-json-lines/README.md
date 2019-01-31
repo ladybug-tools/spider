@@ -78,6 +78,16 @@ First attempts a creating some kind of a CAD 'diff' engine
 
 ## Change Log
 
+### 2019-01-30 ~ Theo
+
+gbxml-to-json-lines R2.1
+* CADDObjectID text is encoded
+
+jsonl-reader.html
+* R2
+* Displays surfaces as filled 3D polygons with with colors according to surface type
+* Code needs cleanup
+
 
 ### 2019-01-27 ~ Theo
 

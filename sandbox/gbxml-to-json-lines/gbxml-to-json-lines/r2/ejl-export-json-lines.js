@@ -172,7 +172,7 @@ EJL.parseGbxml = function( txt ) {
 
 		const recaddOjectId = /<CADObjectId>(.*?)<\/CADObjectId>/i;
 		let caddOjectId = surface.match( recaddOjectId );
-		caddOjectId = caddOjectId ? `"caddOjectId": "${ caddOjectId[ 1 ] }", ` : "";
+		caddOjectId = caddOjectId ? `"caddOjectId": "${ encodeURI( caddOjectId[ 1 ] ) }", ` : "";
 		//console.log( 'caddOjectId', caddOjectId );
 
 		let exposedToSun = surface.match( 'exposedToSun="(.*?)"' );

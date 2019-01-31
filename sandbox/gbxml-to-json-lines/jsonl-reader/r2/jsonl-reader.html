@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Read gbXML to JSONL file. Parse and display surface data as lines only. Filled polygons coming soon." >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2019-01-30" >
+<title>JSON Lines Reader 2.0</title>
+<style>
+	/* Copyright 2018 pushMe pullYou authors. MIT License */
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#navMenu { margin: 0 20px; max-width: 15rem; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r100/build/three.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r100/examples/js/controls/OrbitControls.js" ></script>
+<script src="jsonl-reader.js" ></script>
+
+
+	<nav id = "navMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>Sample files</p>
+
+		<button onclick=requestFile(url1) >London Office</button><br>
+
+		<button onclick=requestFile(url2) >Omaha House</button><br>
+
+		<button onclick=requestFile(url3) >Bristol Commercial</button>
+
+		<button onclick=requestFile(url4) >Woolwich Arsenal</button>
+
+		<button onclick=requestFile(url5) >Coventry University</button><br>
+
+		<button onclick=requestFile(url10) >Aspen Resort</button><br>
+
+		<br>
+
+		load files for individual contributions
+		<button onclick=requestFile(url6) >Pamela's work on Bristol Commercial</button>
+
+		<button onclick=requestFile(url7); >Patty's work Bristol Commercial</button>
+
+		<button onclick=requestFile(url8) >Paul's work on Bristol Commercial</button>
+
+		<button onclick=requestFile(url9) >Peter's work on Bristol Commercial</button>
+
+		<p>
+			<input type=checkbox id=chkAddData > add fresh data to current project
+		</p>
+
+		<p>
+			<input type=file id=inpOpenFile onchange=openFile(this); >
+		</p>
+
+		go back to:<br>
+
+		<a href="../../gbxml-to-json-lines/index.html" >gbxml to json lines</a>
+
+		<hr>
+
+		<p>
+			<button onclick=controls.autoRotate=!controls.autoRotate >rotation</button>
+		</p>
+
+		<div id = "divLog" ></div>
+
+	</nav>
+
+<script>
+
+const url1 = "../../sample-json-lines-files/london-office.xml.jsonl";
+
+const url2 = "../../sample-json-lines-files/omha-nb-zneth.xml.jsonl";
+
+const url3 = "../../sample-json-lines-files/bristol-clifton-downs-fixed.xml.jsonl";
+
+const url4 = "../../sample-json-lines-files/london-royal-arsenal-woolwich.xml.jsonl";
+
+const url5 = "../../sample-json-lines-files/coventry-university-of-warwick-small.xml.jsonl";
+
+const url6 = "../../sample-json-lines-files/pamela-bristol-clifton-downs-fixed.xml.jsonl";
+
+const url7 = "../../sample-json-lines-files/patty-bristol-clifton-downs-fixed.xml.jsonl";
+
+const url8 = "../../sample-json-lines-files/paul-bristol-clifton-downs-fixed.xml.jsonl";
+
+const url9 = "../../sample-json-lines-files/peter-bristol-clifton-downs-fixed.xml.jsonl";
+
+const url10 = "../../sample-json-lines-files/aspen-co-resort-retail.xml.jsonl";
+
+let project, building;
+let axesHelper;
+
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/gbxml-to-json-lines/";
+
+let renderer, camera, controls, scene;
+
+init();
+animate();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( - 100, - 100, 100 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	const material = new THREE.MeshNormalMaterial();
+	const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+	requestFile( url1 );
+
+}
+
+
+
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+	const htm =
+
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=https://status.github.com/images/invertocat.png height=18 >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//controls.handleResize();
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+	//scene.rotation.z += sceneRotation / 1000;
+
+}
+
+</script>
+</body>
+</html>
