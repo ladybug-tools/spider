@@ -1,0 +1,90 @@
+/* Copyright 2019 Ladybug Tools authors. MIT License */
+/* 2019-01-12 ! 13.2 */
+
+* {box-sizing: border-box; }
+
+:root { --mnu-width: 20rem; --screen-width: calc( 100vw ); }
+
+/* body, html { font: 11pt monospace; height: 100%; margin: 0; overflow: hidden; } */
+body { font: 12pt monospace; height: 100%; margin: 0; }
+
+a { color: maroon; font-weight: bold; text-decoration: none; }
+a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+aside { border: 1px solid lightgray; margin-top:15px; padding: 2px; }
+
+blockquote, pre { background-color: #eee; padding: 10px; }
+
+button, input[ type=button ] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+button:hover, input[ type=button ]:hover{ background: #ccc; color: #888 }
+
+div { padding: 0 1rem; }
+
+input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 90%; }
+input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+summary { cursor: pointer; font-weight: bold; }
+
+.attributeTitle { font-style: italic; }
+.attributeValue { color: blue; }
+.divMenuTitle { background-color: #ccc; color: #888; margin: 10px 0; text-align: center; }
+.dragDropArea { border: 1px dashed gray; box-sizing: border-box; margin: 10px; padding: 0 10px; }
+.helpItem { float: right; clear: both; }
+.highlight {background-color: lightgreen }
+
+/*
+#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
+#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 60rem; padding: 1rem; right: 0; }
+*/
+
+#divContainer { height: 100%; margin: 0; padding: 0; position: relative; }
+
+#divContents { border: 0px solid #444; margin: 0; height: calc( 100vh );
+	margin: 0; max-width: calc( 100vw ); overflow: hidden; padding: 0; width: 100%; }
+
+ 
+#navMenu { /* background-color: #eee; background: rgba( 250, 250, 250, 0.8 ); */ border: 1px solid #888; box-sizing: border-box;
+	left: 0; margin: 0; max-height: 100%; overflow: auto;
+	position: fixed; resize: both; top: 0; transition: left 0.5s; width: var( --mnu-width ); z-index: 10; }
+
+#navMenu button, #navMenu input[type=button] { background-color: #ddd; border: 2px solid white; color: white; cursor: pointer;
+	padding: 2px 5px; min-width: 13.5rem; }
+
+#navMenu button:hover { background: #ccc; color: #888 }
+
+#navMenu button.active { border-color: black; font-style: italic; font-weight: bold; margin-left: 1rem;
+	box-shadow: 2px 2px re#888; }
+
+
+#butHamburger { box-sizing: border-box;
+	font-size: 2rem; left: calc( var( --mnu-width ) + 0rem ); position: fixed; top: 5px; transition: left 0.5s;
+	z-index: 20;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); }
+
+
+#navPopUp { /* background-color: #eee; */ border-radius: 8px; display: block; max-height: 95%; max-width: 25%;
+	padding: 0 5px 10px 5px; opacity: 0.95;  overflow: auto; position: fixed; resize: both; right: 1rem;
+	top: 1rem; z-index: 10; };
+
+
+
+@media only screen and (max-width: 600px) {
+
+/* needs two to work !?! */
+
+}
+
+
+@media only screen and (max-width: 600px) {
+
+	#navMenu { width: 0px; }
+	#butHamburger { left: 1rem; }
+	#divContainer { width: 80rem; }
+	#divContainer { margin: 0; padding: 0;}
+
+	#divContents { max-width: cal( 100vw ); width: calc( 100vw ); }
+	#divContents { margin: 0; padding: 0 1rem; }
+
+  }
+

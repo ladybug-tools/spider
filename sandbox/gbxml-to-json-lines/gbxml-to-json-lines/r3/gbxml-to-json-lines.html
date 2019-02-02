@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "This menu is a component of a basic html content management script with sliding menu, css theme selection, Markdown to HTML, drag and drop file reading capability, access to frequently used pages and more" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2019-01-27" >
+<meta name = "release" content = "2.1" >
+<title>Spider gbXMLto JSON Lines</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r100/build/three.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r100/examples/js/controls/OrbitControls.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" ></script>
+
+<!--
+	<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13/fob-file-open-basic.js" ></script>
+	<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13/ohc-on-hash-change.js" ></script>
+	<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13/tmp-template.js" ></script>
+-->
+
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13/mnu-menu.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13/thm-theme-select.js" ></script>
+
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/thr-threejs.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/thru-threejs-utilities.js"></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/pop-up-text-parser.js" ></script>
+
+<!-- File menu -->
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/gal-sample-files-gallery-gbxml.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/fil-file-open-xml-zip.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/gbx-gbxml-text-parser.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/gbxu-gbxml-utilities.js" ></script>
+
+<!-- Edit menu
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/iscor-issues-core.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/isfic-issues-file-check.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/ismet-issues-metadata.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/issti-issues-surface-type-invalid.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/isduc-issues-duplicate-coordinates.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/isasi-issues-adjacent-space-invalid.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/isase-issues-adjacent-space-extra.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/isasd-issues-adjacent-space-duplicate.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/iscod-issues-cad-object-id.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/istmp-issues-template.js" ></script>
+-->
+
+<!-- View menu
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/vwsrf-view-surface-types.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/repl-view-by-level.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/set-settings.js" ></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/spider-gbxml-viewer/r15/js-gbxml/cut-section-cut.js"></script>
+-->
+
+<script src=ejl-export-json-lines.js ></script>
+<script src=ins-insert-nasa-stl.js ></script>
+<script>
+
+//Copyright 2019 pushMe-pullYou authors. MIT License
+
+MNU.currentStatusCore =
+	`
+		<h3>
+			Spider gbXMLto JSON Lines R${ document.head.querySelector( '[ name=release ]' ).content }
+			~ ${ document.head.querySelector( '[ name=date ]' ).content }
+		</h3>
+
+
+		<p>
+			Change log
+			<ul>
+				<li>2019-01-25 ~ First commit</li>
+
+				<!-- <li></li> -->
+			</ul>
+		</p>
+
+		This web page is built with:
+		${ MNU.descriptionTooToo }
+	`;
+
+
+MNU.description =
+	`
+		Open, examine and edit very large <a href="http://gbxml.org" target="_blank"  title="Thank you, Stephen">gbXML</a> files in 3D.
+		Parse and save data to experimental JSON Lines format file
+	`;
+
+
+//const uriDefaultFile = '#README.md';
+const urlDefaultFile='https://www.ladybug.tools/spider/gbxml-sample-files/bristol-clifton-downs-fixed.xml';
+
+THM.cssBasic = "style.css";
+
+// For main menu header
+MNU.urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/gbxml-to-json-lines/";
+
+
+MNU.homeText="<img src='https://ladybug.tools/artwork/icons_bugs/ico/ladybug.ico' height=24 >";
+MNU.homeTitle="Ladybug Tools: free computer applications that support environmental design and education";
+MNU.homeUrl="https://www.ladybug.tools";
+
+MNU.repoText="<img src='https://ladybug.tools/artwork/icons_bugs/ico/spider.ico' height=24 >";
+MNU.repoTitle="Spider: 3D interactive analysis in your browser mostly written around the Three.js JavaScript library";
+MNU.repoUrl="https://www.ladybug.tools/spider/";
+
+MNU.appText= "gbXML Tools";
+MNU.appTitle = "Tools to help you find, load, examine and edit gbXML files - in large numbers and sizes";
+MNU.appUrl = "https://www.ladybug.tools/spider-gbxml-tools/";
+
+MNU.urlSourceCodeImage="https://status.github.com/images/invertocat.png";
+MNU.urlSourceCodeIcon=`<img src="${ MNU.urlSourceCodeImage }" height=18 >`;
+
+MNU.footerUrl = "https://pushme-pullyou.github.io/tootoo13/#";
+MNU.footerTarget = "target=_blank";
+MNU.footerIssues = "https://github.com/ladybug-tools/spider-gbxml-tools/issues";
+
+/*
+// for parsing
+OHC.user = 'ladybug-tools';
+OHC.repo = 'spider-gbxml-tools';
+OHC.pathRepo = '';
+OHC.branch = '/master/';
+
+// When running in dev folder
+// = location.href.includes( OHC.repo ) ? '../' : 'https://' + OHC.repo + "/";
+OHC.urlGitHubPage = `https://${ OHC.repo }/`;
+// When running in build repo
+//OHC.urlGitHubPage = "";
+*/
+
+SET = {};
+
+SET.toggleOpenings = function(){};
+
+
+</script>
+
+
+	<nav id="navMenu" >
+
+		<header>
+
+			<div id="MNUdivHeader" ></div>
+
+		</header>
+
+		<details open >
+
+				<summary class=divMenuTitle >File Menu</summary>
+
+				<section id=GALdivSampleFilesGallery ></section>
+
+				<section id=FILdivFileOpen ></section>
+
+				<section id=INSsecInsertNasaStl ></section>
+
+				<section id=FILdivCurrentStatus ></section>
+
+
+
+				<!--
+
+				<section id="OHCsecMenuRepoFilesFolders" ></section>
+
+				<section id=FOBsecFileOpenBasic ></section>
+
+				-->
+
+			</details>
+
+
+			<details open >
+
+				<summary class=divMenuTitle >JSON Lines</summary>
+
+				<section id=EJLsecMenuExportJsonLines ></section>
+
+				<section id=divFileSave ></section>
+
+			</details>
+
+
+			<details id=detMenuHelp open >
+
+				<summary class=divMenuTitle >Help Menu </summary>
+
+				<section id=THMsecMenuThemeSelect ></section>
+
+				<section id=TMPsecMenuTemplate ></section>
+
+				<footer>
+
+					<section id = "MNUdivFooter" ></section>
+
+				</footer>
+
+		</details>
+
+		<h1 onclick=navMenu.scrollTop=0; style=cursor:pointer;text-align:center; title="go to top of menu" > ❦ </h1>
+
+	</nav>
+
+
+	<div>
+
+		<button id="butHamburger" onclick=MNU.toggleNavLeft(); title="click here to hide this menu"> slide &#9776; </button>
+
+	</div>
+
+
+	<nav id="navPopUp" >
+
+		<div id="divPopUpData" ></div>
+
+		<div id="divMessage" ></div>
+
+	</nav>
+
+
+	<div id="divContainer" >
+
+		<div id="divContents" ></div>
+
+	</div>
+
+<script>
+
+
+init();
+
+THR.animate();
+
+
+
+function init() {
+
+	MNUdivHeader.innerHTML = MNU.getNavHeader();
+
+	THR.getThreejs();
+
+	THRU.setHelpers();
+
+	THRU.addSomeLights2();
+
+	//mesh = THRU.getGeometry();
+	//THR.scene.add( mesh );
+
+	GALdivSampleFilesGallery.innerHTML=GAL.getMenuSampleFilesGallery();
+
+	FILdivFileOpen.innerHTML=FIL.getMenuFileOpen();
+
+	GBXdivStatsGbx.innerHTML=GBX.getDivMenuGbx();
+
+	INSsecInsertNasaStl.innerHTML = INS.getMenuInsertNasaStl();
+
+	EJLsecMenuExportJsonLines.innerHTML = EJL.getMenuExportJsonLines();
+
+	THMsecMenuThemeSelect.innerHTML = THM.getMenuThemeSelect();
+
+	//TMPsecMenuTemplate.innerHTML = TMP.getMenuTemplate();
+
+	MNUdivFooter.innerHTML = MNU.getNavFooter(); // not essential
+
+	navPopUp.innerHTML=POP.getMenuHtmlPopUp();
+
+	// loads a default file / great for testing same file many times
+	const thrFilePath=localStorage.getItem( 'thrFilePath' ) || '';
+
+	FILinpFilePath.value=thrFilePath;
+
+	FIL.urlDefaultFile=thrFilePath || urlDefaultFile;
+
+	if ( !location.hash ) { location.hash=FIL.urlDefaultFile; } else { FIL.onHashChange(); }
+
+	//location.hash=urlDefaultFile;
+
+	THM.init();
+
+	//OHC.onHashChange();
+
+	document.removeEventListener( 'touchstart', MNU.onTouchStart, false );
+	document.removeEventListener( 'touchmove', MNU.onTouchMove, false );
+
+}
+
+
+
+
+
+MNU.toggleNavLeft = function() {
+
+	width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
+
+	//console.log( 'width', width );
+	//console.log( 'navMenu.style.width', navMenu.style.width );
+
+	if ( navMenu.style.width === "0px" ) { // invisible
+
+		navMenu.style.width = width;
+		navMenu.style.padding = '1rem';
+		butHamburger.style.left = 'var( --mnu-width )';
+		//divContainer.style.marginLeft = width;
+
+	} else {
+
+		navMenu.style.width = "0px";
+		navMenu.style.padding = '0';
+		butHamburger.style.left = '-3rem';
+		//divContainer.style.marginLeft = "0px";
+
+	}
+
+}
+
+</script>
+</body>
+</html>
