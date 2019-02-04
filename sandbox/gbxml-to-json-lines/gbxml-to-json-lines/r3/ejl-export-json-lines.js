@@ -361,7 +361,8 @@ EJL.saveActorFile = function ( peep ){
 
 	EJL.saveFile( peepJsonl, peep + "-" );
 
-}
+};
+
 
 
 EJL.saveFile = function( jsonl, peep = "" ) {

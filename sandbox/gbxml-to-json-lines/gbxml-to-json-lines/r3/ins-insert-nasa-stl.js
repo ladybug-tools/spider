@@ -62,6 +62,8 @@ INS.getMenuInsertNasaStl = function() {
 
 			</div>
 
+			<div id=log ></div>
+
 		</details>
 	`;
 
@@ -79,6 +81,8 @@ INS.insertCassini = function() {
 	script.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r100/examples/js/loaders/STLLoader.js";
 
 };
+
+
 
 INS.callbackScript = function() {
 
@@ -102,9 +106,39 @@ function loadSTLFileByURL( fileName ) {
 
 		log.innerHTML = 'File name: ' + fileName.split('/').pop() + '<br>' + '';
 
+
+		//INS.addStlToJsonl()
+
 	} );
 
-}
+};
+
+
+
+INS.addStlToJsonl = function() {
+
+
+	const txt =
+
+		`{ "id": "${ EJL.index++ }", "time": "${ new Date().toJSON() }", "project": "${ EJL.name }",` +
+		`"sourceType": "STL", "action": "add", ` +
+		`"element": "instance", ` +
+		`"attributes": { $"id": "${ id }",${ name }` +
+		`"url": [ ${ coordinates } ], ` +
+		`"position": [ ${ coordinates } ], ` +
+		`"rotation": [ ${ coordinates } ], ` +
+		`"scale": [ ${ coordinates } ], ` +
+		`"actor": "${ actor }", ` +
+		`"message": "surface" }\n`;
+
+	}
+
+	console.log( 'txt', txt );
+
+	//EJL.jsonl += txt
+
+};
+
 
 
 function addMesh( geometry ) {
@@ -118,12 +152,10 @@ function addMesh( geometry ) {
 	let material = new THREE.MeshNormalMaterial();
 
 	//THR.scene.remove( mesh );
-	mesh = new THREE.Mesh( geometry, material );
+	const mesh = new THREE.Mesh( geometry, material );
 	mesh.castShadow = true;
 	mesh.position.copy( THRU.axesHelper.position );
 	THR.scene.add( mesh );
-
-	//zoomExtents( mesh );
 
 }
 
