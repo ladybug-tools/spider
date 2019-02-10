@@ -131,8 +131,6 @@ INS.addStlToJsonl = function() {
 		`"actor": "${ actor }", ` +
 		`"message": "surface" }\n`;
 
-	}
-
 	console.log( 'txt', txt );
 
 	//EJL.jsonl += txt
