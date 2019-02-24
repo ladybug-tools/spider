@@ -49,6 +49,13 @@ Here is a screen shot of the Properties dialog for a Chrome shortcut on Windows 
 
 ![]( pages/file-open-chrome-screenshot.png )
 
+Note the added '--allow-file-access-from-files' option.
+
+And do remember, that whenever this option does not work, it is because another instance of Chrome is already running. This method only works when this special instance of Chrome is the first instance.
+
+Theo says: I have used this method for years and have never experienced a security issue arising from the use of this method.
+
+
 
 ***
 
