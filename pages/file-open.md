@@ -64,7 +64,7 @@ Theo says: I have used this method for years and have never experienced a securi
 ### Do you want your colleague or client to see the file?
 
 * Save the file to GitHub, DropBox or somewhere on the web with a public URL
-* Prepare a link using the 'Use a link' option and send the link to your client or cplleagu
+* Prepare a link using the 'Use a link' option and send the link to your client or colleague
 
 
 ### Are you loading the same file over and over again?
@@ -75,6 +75,40 @@ Theo says: I have used this method for years and have never experienced a securi
 ### Do you need to inspect a lot of files quickly?
 
 * Drag and and drop files into the Viewer
+
+### Why can't I use a regular operating system path to a file?
+
+Example:
+
+![]( pages/file-open-dialog-os-path.png )
+
+For a variety of good security reasons, when your browser wants to 'talk' to another computer it must use a [URL]( https://en.wikipedia.org/wiki/URL ).
+
+The URL for the above file would be: file:///C:/Temp/zz.xml
+
+### How can I tell if the browser is still preventing opening a file on my local drive?
+
+Open the JavaScript Developer console - using function key 12 or control-shift-J or command-??.
+
+If you see something like the following message in red character, there is a problem.
+
+![]( pages/file-open-console-error-message.png )
+
+
+### How can I tell if the '--allow-file-access-from-files' command line flag has been set?
+
+Enter the following into the address box
+
+	chrome://version/
+
+If you see something like the following you are probably good
+
+![]( pages/file-open-command-line-flags.png )
+
+
+Also, before you start your custom version of Chrome: open the Windows Task Manager and check if there are no Chrome app listed as still running in the Apps section:
+
+<img src=pages/file-open-windows-task-manager.png width=600 >
 
 
 ***
