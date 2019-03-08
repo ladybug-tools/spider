@@ -69399,7 +69399,7 @@
       <CADObjectId>Basic Wall: SIM_EXT_SLD [922257]</CADObjectId>
       <Name>S-02_116-E-W-418</Name>
     </Surface>
-    <Surface surfaceType="Roof" exposedToSun="true" id="aim12048">
+    <Surface surfaceType="Ceiling" exposedToSun="true" id="aim12048">
       <AdjacentSpaceId spaceIdRef="aim4241"/>
       <RectangularGeometry id="aim12049">
         <Azimuth>180</Azimuth>
@@ -72768,7 +72768,7 @@
       <CADObjectId>Floor: SIM_EXT_GRD_FLR FLR01 [912214]</CADObjectId>
       <Name>B-B1_109-U-F-481</Name>
     </Surface>
-    <Surface surfaceType="ExteriorWall" exposedToSun="true" id="aim12983">
+    <Surface surfaceType="InteriorWall" exposedToSun="true" id="aim12983">
       <AdjacentSpaceId spaceIdRef="aim5184"/>
       <RectangularGeometry id="aim12984">
         <Azimuth>93.4364318847656</Azimuth>
