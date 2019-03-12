@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" >
+<meta name=description content="View all the files on Ladybug Tools / Spider with this basic html content management script with sliding menu, css theme selection, Markdown to HTML, drag and drop fule reading capability, access to frequently used pages and more." >
+<meta name=keywords content="JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2018-07-24" >
+<title>Spider</title>
+<style>
+/* Copyright 2018 pushMe pullYou authors. MIT License */
+
+	:root { --mnu-width: 20rem; font-size: 1em; }
+
+	html { height: 100%; margin: 0; }
+
+	body { height: 100%; margin: 0; }
+
+	a:hover, a:focus { background-color: yellow; color: #888; }
+	blockquote, pre { background-color:rgba(240, 240, 240, 0.25 ); padding: 1rem }
+	button.theme { border-width: 1px; margin: 0.3rem !important; min-width:3rem; }
+	button:hover, input[ type=button ]:hover { background-color: #ccc; color: white }
+	summary { font-weight: bold; }
+
+	#divContainer { height: 100%; margin: 0 0 0 var( --mnu-width ); transition: margin-left .5s; position: relative; }
+	#divContents { height: 100%; left: 0; margin: 0 auto; max-width: 50rem; padding: 1rem; right: 0; }
+
+	#divMenu { max-height: 100%; overflow-x: hidden; padding: 1rem; position: fixed; resize: both; top: 0;
+		width: var( --mnu-width ); z-index: 1; transition: left 0.5s; }
+	#hamburger { cursor: pointer; font-size: 2rem; left: calc( var( --mnu-width ) - 4rem );
+		line-height: 2rem; position: fixed; top: 0; transition: left 0.5s; z-index: 10; }
+
+	#dragDropArea { border: 1px dashed gray; box-sizing: border-box; padding: 10px; }
+
+
+/*
+
+	body, html { font: 12pt "Trebuchet MS", helvetica, sans-serif; height: 100%; margin: 0; }
+
+	button, input[ type=button ] { background-color: #ddd; border: none; }
+	iframe { border: none; width: 100%; }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	td { vertical-align: top; }
+
+*/
+
+</style>
+<link id=css rel="stylesheet" href="" type="text/css" >
+</head>
+<body>
+<script src=https://rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js ></script>
+
+
+	<div id = "divMenu" class="jumbotron" >
+
+		<div>
+			<a class="breadcrumb-item" href = "../index.html" target="_top" >Ladybug Tools</a>
+		</div>
+
+		<div id = "divTitle" ></div>
+
+		<div id = "divBreadcrumbs" ></div>
+
+		<div id = "divMenuItems" ></div>
+
+		<hr>
+
+		<p>Click any <a href="" >
+			<img src="https://rawgit.com/ladybug-tools/spider/master/images/github-mark.png" height=14 style=vertical-align:middle>
+		</a> icon to view source code on GitHub.
+
+		<p>Click any &#x2750; icon to go full screen & get link to individual file.</p>
+
+		<p>Tooltips provide file size.</p>
+
+		<div id = "divExtras" ></div>
+
+		<div id= "divFooter" >
+
+			<p id=dragDropArea class=dragDropArea >
+
+				Drag & drop files or URLs into this box
+				or <input type = "file" id = "inpFile" class="form-control-file" onchange="openFile(this);" >
+
+			</p>
+
+			<details>
+
+				<summary>Themes</summary>
+
+				<div id=divBootswatch ></div>
+
+				<div id=divCssOthers ></div>
+
+			</details>
+
+			<details>
+
+				<summary>Footer</summary>
+
+				<div title='Me want too!' ><a href=#./pages/about-this-cms.md >About this CMS</a></div>
+				<div title='What is this stuff?' ><a href=#./pages/about-spider-code-style.md >Coding style</a></div>
+				<div title='many thanks!' ><a href=#./pages/credits.md >Credits</a></div>
+				<div><a href=#./pages/code-of-conduct.md >Code of conduct</a></div>
+				<div><a href=#./pages/contributing.md >Contributing</a></div>
+				<div><a href=#./pages/license.md >License</a></div>
+				<div><a href=#./pages/markdown-help.md >Markdown help</a></div>
+				<div><a title='Need help' href=https://github.com/ladybug-tools/spider/issues target=_blank >🗗 GitHub Issues</a></div>
+				<div><a href="javascript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+				<div><a href="https://api.github.com/rate_limit" title='If menu stops appearing, it is likely due to too many API calls' target=_blank >View GitHub API rate limits</a></div>
+
+			</details>
+
+			<h3 onclick="divMenu.scrollTop=0;" style="cursor:pointer;text-align:center;" title="go to top of page" > &#x2766; </h3>
+
+		</div>
+
+	</div>
+
+	<div id = "divContainer" >
+
+		<div id = "divContents" ></div>
+
+	</div>
+
+	<button id = "hamburger" class = "btn btn-primary" onclick=toggleNav(); > slide &#9776; </button>
+
+<script>
+
+// https://github.com/showdownjs/showdown << check for latest rev from time to time 1.8.6 2018-07-02
+// jshint esversion: 6
+
+
+const user = 'ladybug-tools';
+const repo = '/spider';
+const pathRepo = '';
+const branch = '/master/'
+
+const iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=18 >';
+const urlGitHubSource = 'https://github.com/' + user + repo;
+const urlGitHubApiContents = 'https://api.github.com/repos/' + user + repo + '/contents/' + pathRepo;
+
+//const urlGitHubPage = location.href.includes( '/' + user + '.github.io' ) ? '' : 'https://rawgit.com/' + user + repo + branch;
+//const urlGitHubPage  = 'https://rawgit.com/' + user + repo + branch;
+const urlGitHubPage = '';
+//console.log( 'urlGitHubPage', urlGitHubPage );
+
+
+//	location.hash = '../README.md';
+const uriDefaultFile = 'README.md';
+const urlSourceCode = "https://github.com/ladybug-tools/spider/";
+
+let themeName = localStorage.getItem( 'themeName' ) || 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css';
+
+let xDown = null;
+let yDown = null;
+
+
+init();
+
+
+
+function init() {
+
+	updateCss( themeName );
+
+	setTitle( divTitle );
+
+	//setTestingExtras( divExtras );
+
+	dragDropArea.addEventListener( "dragover", function( event ){ event.preventDefault(); }, true );
+	dragDropArea.addEventListener( 'drop', onDrop, false );
+
+	// Swipe events
+	document.addEventListener( 'touchstart', onTouchStart, false );
+	document.addEventListener( 'touchmove', onTouchMove, false );
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+	onHashChange();
+
+}
+
+
+
+function updateCss( link ) {
+
+	themeName = css.href = link;
+	localStorage.setItem( 'themeName', link );
+	setTheme();
+
+}
+
+
+
+function setTheme( target ) {
+
+	const themesBootswatch = [
+		{ 'Default': 'background-color: white; color: #007bff' },
+		{ "Cerulean": 'background-color: white; color: #2FA4E7;' },
+		{ 'Cosmo': 'background-color: white; color: #2780E3;' },
+		{ 'Cyborg': 'background-color: #060606; color: #2A9FD6; font-style: italic;' },
+		{ 'Darkly': 'background-color: #222; color: #00bc8c; font-style: italic;' },
+		{ 'Flatly': 'background-color: white; color: #18BC9C;' },
+		{ 'Journal': 'background-color: white; color: #EB6864;' },
+		{ 'Litera': 'background-color: white; color: #4582EC;' },
+		{ 'Lumen': 'background-color: white; color: #158CBA;' },
+		{ 'Lux': 'background-color: white; color: #1a1a1a;' },
+		{ 'Materia': 'background-color: white; color: #2196F3;' },
+		{ 'Minty': 'background-color: white; color: #78C2AD;' },
+		{ 'Pulse': 'background-color: white; color: #593196;' },
+		{ 'Sandstone': 'background-color: white; color: #93C54B;' },
+		{ 'Simplex': 'background-color: white; color: #D9230F;' },
+		{ 'Sketchy': 'background-color: white; color: #333;' },
+		{ 'Slate': 'background-color: #272B30; color: #fff; font-style: italic;' },
+		{ 'Solar': 'background-color: #002B36; color: #839496; font-style: italic;' },
+		{ 'Spacelab': 'background-color: white; color: #3399F3;' },
+		{ 'Superhero': 'background-color: #2B3E50; color: #DF691A; font-style: italic;' },
+		{ 'United': 'background-color: white; color: #E95420;' },
+		{ 'Yeti': 'background-color: white; color: #008cba;' },
+	];
+
+
+	const themesOthers = [
+
+		{ link: "https://demos.creative-tim.com/material-kit/assets/css/material-kit.min.css", name: "Material Kit" },
+		{ link: "https://www.gettemplate.com/demo/initio/assets/css/styles.css", name: 'Initio' },
+		{ link: "https://blackrockdigital.github.io/startbootstrap-creative/css/creative.min.css", name: 'Creative' },
+		{ link: "https://tympanus.net/Freebies/Cardio/css/cardio.css", name: 'Cardio' },
+		{ link: "https://www.gettemplate.com/demo/magister/assets/css/magister.css", name: 'Magister' },
+	];
+
+
+	const txt1 = themesBootswatch.map( theme => {
+		const name = Object.keys( theme )[ 0 ];
+		link = name === 'Default' ?
+			'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css' :
+			`https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/${ name.toLowerCase() }/bootstrap.min.css`;
+		bingo =  link === themeName ? '*' : ''
+		return `<button class=theme onclick=updateCss("${ link }"); style="${ theme[name] }" >${ bingo }${ name }${ bingo }</button> `;
+
+	});
+
+	divBootswatch.innerHTML = '<p>Themes from <a href="https://bootswatch.com/" target=_blank>Bootswatch</a><br>' + txt1.join( '' );
+
+	let txt = '<p>Themes from other sources</p>';
+
+	for ( let theme of themesOthers ) {
+
+		//name = Object.keys( theme )[ 0 ];
+		//console.log( 'name', name );
+		//console.log( 'link', theme.link );
+		txt += `<button class="theme btn btn-secondary" onclick=updateCss("${ theme.link }"); style="${ theme.name }" >${ theme.name }</button> `;
+
+		divCssOthers.innerHTML = txt + '<p><small>these buttons are work-in-progress WIP</small></p>';
+
+	}
+
+}
+
+
+
+function setTitle( target ) {
+
+	target.innerHTML =
+
+	`<h2>
+		<a href=${ urlSourceCode } target="_top" ><img src="https://status.github.com/images/invertocat.png" height=18 ></a>
+		<a href = "" title = "Click to reload this page" >${document.title}</a>
+	</h2>
+
+	<p>
+		${ document.head.querySelector( '[name=description]' ).content }
+	</p>`;
+
+}
+
+
+
+function setTestingExtras( target ) {
+
+	const txt = '<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?<p>';
+
+	target.innerHTML =
+
+	`<details open >
+
+		<summary>Extras</summary>
+
+		<p><a href="#https://pushme-pullyou.github.io/pages/markdown-help.md" >markdown-help.md</a></p>
+
+		<p><a href="#https://pushme-pullyou.github.io/plugins/iframe-carousel-r1.html" >iframe-carousel-r1.html</a></p>
+
+		<p><a href="#https://pushme-pullyou.github.io/plugins/view-github-issues.html" >view-github-issues.html</a></p>
+
+		<p><a href="#https://pushme-pullyou.github.io/plugins/view-stl.html" >view-stl.html</a></p>
+
+		<p><a href="#https://pushme-pullyou.github.io//utilities/invertocat.png" >invertocat.png</a></p>
+
+		<p><a href="https://bootswatch.com" target=_blank >&#x2750; bootswatch.com</a></p>
+
+	</details>
+
+	<details>
+
+		<summary>Text</summary>
+
+		${ txt }
+
+		<hr>
+
+	</details>
+	<br>`;
+
+}
+
+
+
+function onHashChange() {
+
+	const url = !location.hash ? uriDefaultFile : location.hash.slice( 1 );
+	const ulc = url.toLowerCase();
+
+	const crumbs = url.slice( urlGitHubPage.length );
+	const pathCurrent = crumbs.lastIndexOf( '/' ) > 0 ? crumbs.slice( 0, crumbs.lastIndexOf( '/' ) ) : '';
+	//console.log( 'pathCurrent',  pathCurrent );
+
+	setMenuGitHubPathFileNames( pathCurrent );
+
+	if ( ulc.endsWith( '.md' ) ) {
+
+		requestFile( url, callbackMarkdown );
+
+	} else if ( ulc.endsWith( '.html' ) ) {
+
+		divContents.style.maxWidth = '100%';
+		document.body.style.overflow = 'hidden';
+
+		divContents.innerHTML = `<iframe src=${ url } height=100% width=100% ></iframe>`;
+
+	} else if ( /\.(jpe?g|png|ico|svg|gif)$/i.test( ulc )  ) {
+	//} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.ico' ) || ulc.endsWith( '.svg' ) ) {
+
+		divContents.innerHTML = `<img src=${ url } >`;
+
+	} else {
+
+		requestFile( url, callbackToTextarea );
+
+	}
+
+}
+
+
+
+function requestFile( url, callback ) {
+
+	const xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+
+
+function callbackMarkdown( xhr ){
+
+	showdown.setFlavor('github');
+	const converter = new showdown.Converter();
+	const response = xhr.target.response;
+	const html = converter.makeHtml( response );
+
+	divContents.style.maxWidth = '800px';
+	document.body.overflow = '';
+	divContents.innerHTML = html;
+	window.scrollTo( 0, 0 );
+
+}
+
+
+
+function callbackToTextarea( xhr ){
+
+	const response = xhr.target.response;
+
+	divContents.innerHTML = `<textarea style=height:100%;width:100%; >${ response }</textarea>`;
+
+}
+
+
+
+function onDrop( event ) {
+
+	//console.log( 'event', event );
+
+	const iframeUrl = event.dataTransfer.getData( 'URL' );
+
+	if ( iframeUrl ) {
+
+		location.hash = iframeUrl;
+
+	} else {
+
+		//var file = event.dataTransfer.files[0];
+		//console.log(file.name);
+
+		openFile( event.dataTransfer );
+		//console.log( 'ed', event.dataTransfer );
+
+	}
+
+	event.preventDefault();
+
+};
+
+
+
+function openFile( files ) {
+
+	file = files.files[ 0 ];
+
+	//reader.onprogress = onRequestFileProgress;
+	const reader = new FileReader();
+
+	reader.onload = function( event ) {
+
+		//console.log( 'reader', reader );
+
+		if ( file.name.endsWith('.md' ) ) {
+
+			showdown.setFlavor('github');
+			const converter = new showdown.Converter();
+			const html = converter.makeHtml( reader.result );
+
+			divContents.style.maxWidth = '800px';
+			document.body.overflow = '';
+			divContents.innerHTML = html;
+			window.scrollTo( 0, 0 );
+
+		} else if ( /\.(jpe?g|png|ico|svg|gif)$/i.test( file.name)  ) {
+
+			divContents.innerHTML = `<img src=${ reader.result } >`;
+
+		} else {
+
+			divContents.innerHTML = `<textarea style=height:100%;width:100%; >${ reader.result }</textarea>`;
+
+		}
+
+
+	};
+
+	if ( /\.(jpe?g|png|ico|svg|gif)$/i.test(file.name) ) {
+
+		reader.readAsDataURL(file);
+
+	} else {
+
+		reader.readAsText( file );
+
+	}
+
+
+		function onRequestFileProgress( event ) {
+
+			divLog.innerHTML =
+				fileAttributes.name + ' bytes loaded: ' + event.loaded.toLocaleString() +
+				//( event.lengthComputable ? ' of ' + event.total.toLocaleString() : '' ) +
+			'';
+
+		}
+
+};
+
+
+
+//////////
+
+function onTouchStart( event ) {
+
+	xDown = event.touches[ 0 ].clientX;
+	yDown = event.touches[ 0 ].clientY;
+
+}
+
+
+
+function onTouchMove(event) {
+
+	if ( ! xDown || ! yDown ) {
+
+		return;
+
+	}
+
+	const xUp = event.touches[ 0 ].clientX;
+	const yUp = event.touches[ 0 ].clientY;
+
+	const xDiff = xDown - xUp;
+	const yDiff = yDown - yUp;
+
+	if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {// most significant
+
+		if ( xDiff > 0 ) {
+
+			toggleNav();
+			// left swipe
+			console.log( 'left swipe' );
+
+		} else {
+
+			toggleNav();
+			// right swipe
+			console.log( 'right swipe' );
+
+		}
+
+	} else {
+
+		if ( yDiff > 0 ) {
+
+			//up swipe
+			console.log( 'up swipe' );
+
+		} else {
+
+			// down swipe
+			console.log( 'down swipe' );
+
+		}
+
+	}
+
+	xDown = null;
+	yDown = null;
+
+}
+
+
+
+function toggleNav() {
+
+	const width = getComputedStyle(document.documentElement).getPropertyValue( '--mnu-width' ).trim();
+
+	if ( !divMenu.style.width || divMenu.style.width === width ) {
+
+		divMenu.style.width = '0';
+		divMenu.style.padding = '0';
+		hamburger.style.left = '-75px';
+		divContainer.style.marginLeft = '0';
+
+	} else {
+
+		divMenu.style.width = width;
+		//divMenu.style.padding = '30px 10px 0 10px';
+		divMenu.style.padding = '1rem';
+		hamburger.style.left = 'calc( var( --mnu-width ) - 4rem )';
+		divContainer.style.marginLeft = width;
+
+	}
+
+}
+
+
+
+//////////
+
+function setMenuGitHubPathFileNames( path = '' ) {
+
+	const url = urlGitHubApiContents + path;
+
+	requestFile( url, callbackGitHubPathFileNames );
+
+	setBreadcrumbs( path );
+
+}
+
+
+
+function callbackGitHubPathFileNames( xhr ) {
+
+	const response = xhr.target.response;
+	const items = JSON.parse( response );
+	const len = pathRepo.length;
+
+	let txt = '';
+
+	if ( items.message ) { console.log( items.message ); return; }
+
+	const ignoreFolders = [ 'data' ]; //, 'plugins'
+
+	for ( let item of items ) {
+
+		if ( item.type === 'dir' ) {
+
+			if ( ignoreFolders.includes( item.name ) ) { continue; }
+
+			txt +=
+				'<div style=margin-bottom:8px; >' +
+					'<a href=JavaScript:setMenuGitHubPathFileNames("' + item.path.slice( len )  + '"); >&#x1f4c1; ' +
+						item.name  +
+					'</a>' +
+				'</div>' +
+			'';
+
+		}
+
+	}
+
+	const ignoreFiles = [ '.gitattributes', '.gitignore', '404.html' ];
+
+	for ( let item of items ) {
+
+		if ( item.type === 'file' ) {
+
+			if ( ignoreFiles.includes( item.name ) ) { continue; }
+
+			itemPath = encodeURI( item.path.slice( len ) );
+
+			txt += // try grid or flexbox??
+				'<table><tr>' +
+
+					'<td><a href="' + urlGitHubSource + '/blob' + branch + itemPath + '" target=_top >' + iconInfo + '</a></td>' +
+					'<td>' +
+
+						'<a href=#' + urlGitHubPage + pathRepo + itemPath +
+						' title="' + item.size.toLocaleString() + ' bytes" > ' + item.name + '</a> ' +
+						( item.path.endsWith( 'html' ) ? '<a href=' + urlGitHubPage + pathRepo + itemPath + ' >&#x2750;</a>' : '' ) +
+
+					'</td>' +
+
+				'</tr></table>';
+
+			// simplify
+			if ( ( !location.hash || location.hash.toLowerCase().endsWith( 'readme.md' ) )
+				//&& item.path !== 'README.md'
+				&& item.name.toLowerCase() === 'readme.md' ) {
+
+				location.hash = urlGitHubPage + pathRepo + itemPath;
+
+			}
+
+		}
+
+	}
+
+	divMenuItems.innerHTML = txt;
+
+}
+
+
+
+function setBreadcrumbs( path ) {
+
+	let txt =
+		'<b>' +
+			'<a href=JavaScript:setMenuGitHubPathFileNames(); >' +
+
+				( pathRepo ? pathRepo : '<span style=font-size:24px >&#x2302</span>' ) +
+
+			'</a> &raquo; ' +
+		'</b>';
+
+	const folders = path ? path.split( '/' ) : [] ;
+
+	let str = '';
+
+	for ( let folder of folders ) {
+
+		str += folder + '/';
+
+		txt += '<b><a href=JavaScript:setMenuGitHubPathFileNames("' + str.slice( 0, -1 ) + '"); >' + folder + '</a> &raquo; </b>';
+
+	}
+
+	divBreadcrumbs.innerHTML = txt;
+
+}
+
+
+
+function setGPATStorage() {
+
+	const GitHubPersonalAccessToken = inpGitHubPersonalAccessToken.value;
+	localStorage.setItem('GitHubPersonalAccessToken', GitHubPersonalAccessToken );
+
+}
+
+</script>
+</body>
+</html>
