@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "This menu is a component of a basic html content management script with sliding menu, css theme selection, Markdown to HTML, drag and drop file reading capability, access to frequently used pages and more" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2019-03-20" >
+<meta name = "release" content = "1.0.0" >
+<title>Honeybee Wiki</title>
+<link rel="stylesheet" href="style.css" >
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" ></script>
+
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/fob-file-open-basic.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/mnu-menu.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/ohc-on-hash-change.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/sfm-selected-files-markdown.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/thm-theme-select.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/tmp-template.js" ></script>
+<!--
+<script src="../../js-tootoo13-2/fob-file-open-basic.js" ></script>
+<script src="../../js-tootoo13-2/mnu-menu.js" ></script>
+<script src="../../js-tootoo13-2/ohc-on-hash-change.js" ></script>
+<script src="../../js-tootoo13-2/sfm-selected-files-markdown.js" ></script>
+<script src="../../js-tootoo13-2/thm-theme-select.js" ></script>
+<script src="../../js-tootoo13-2/tmp-template.js" ></script>
+-->
+<script>
+
+//Copyright 2019 Ladybug Tools authors. MIT License
+
+MNU.description =
+	`
+		Wiki pages for Honeybee legacy - remixed by the Spider team
+	`;
+
+MNU.currentStatusCore =
+	`
+		<h3>
+			template
+			R${ document.head.querySelector( '[ name=release ]' ).content }
+			~
+			${ document.head.querySelector( '[ name=date ]' ).content }
+		</h3>
+
+		<p>${ MNU.description }</p>
+
+		<details>
+
+			<summary>Change log</summary>
+
+			<ul>
+				<li>2019-03-20 ~ R1.0.0 ~ First commit</li>
+			</ul>
+
+		</details>
+
+		<details>
+
+			<summary>TooToo Content Manager</summary>
+
+			<p>This web page is built with:</p>
+
+			${ MNU.descriptionTooToo }
+
+		</details>
+	`;
+
+
+
+
+const uriDefaultFile = 'README.md';
+OHC.uriDefaultFile = "README.md";
+
+THM.themeUrlStorage = 'honeybee-wiki-themeurl';
+THM.cssBasic = "style.css";
+
+// For main menu header
+MNU.urlSourceCode = "https://github.com/ladybug-tools/spider-gbxml-tools/tree/master/sandbox/honeybee-wiki-spider-remix/";
+
+MNU.homeText = "<img src='https://ladybug.tools/artwork/icons_bugs/ico/ladybug.ico' height=24 >";
+MNU.homeTitle="Ladybug Tools: free computer applications that support environmental design and education";
+MNU.homeUrl = "https://www.ladybug.tools";
+
+MNU.repoText = ""; // "TooToo13";
+MNU.repoTitle= ""; // "Basic html templates with sliding menu, css selection, markdown capability and frequently used pages";
+MNU.repoUrl  = ""; // "https://pushme-pullyou.github.io/tootoo13";
+
+MNU.appText  = ""; // "CMS";
+MNU.appTitle = ""; //"Basic html content management script with sliding menu, css theme selection, Markdown to HTML, drag and drop file reading capability, access to frequently used pages and more";
+MNU.appUrl   = ""; //"https://pushme-pullyou.github.io/#tootoo-templates/hamburger-theme-cms/README.md";
+
+//MNU.urlSourceCodeImage="https://pushme-pullyou.github.io/github-mark-64.png";
+//MNU.urlSourceCodeIcon=`<img src="${ MNU.urlSourceCodeImage }" height=18 >`;
+
+MNU.footerUrl    = "#../../";
+MNU.footerTarget = ""; //"target=_blank";
+MNU.footerIssues = "https://github.com/ladybug-tools/spider/issues";
+
+// for GitHub API parsing
+OHC.user = 'ladybug-tools';
+OHC.repo = 'spider';
+OHC.pathRepo = '';
+OHC.branch = '/master/';
+
+// When running in dev folder
+// OHC.urlGitHubPage= location.href.includes( OHC.repo ) ? '../' : 'https://' + OHC.repo + "/";
+// OHC.urlGitHubPage = `https://${ OHC.repo }/`;
+// When running in build repo
+OHC.urlGitHubPage = "";
+
+</script>
+
+
+	<nav id="navMenu" >
+
+		<header>
+
+			<div id="MNUdivHeader" ></div>
+
+		</header>
+
+		<details class=navSubMenu open >
+
+			<summary class=sumMenuTitle >R1.0.0</summary>
+
+			<section id=SFMsecLinks ></section>
+
+			<section id="OHCsecMenuRepoFilesFolders" ></section>
+
+			<section id=FOBsecFileOpenBasic ></section>
+
+			<section id=FILdivFileSave ></section>
+
+		</details>
+
+
+		<details class=navSubMenu open >
+
+			<summary class=sumMenuTitle >Settings</summary>
+
+			<section id=THMsecMenuThemeSelect ></section>
+
+			<section id=TMPsecMenuTemplate ></section>
+
+		</details>
+
+
+		<footer class=navSubMenu >
+
+			<section id="MNUdivFooter" ></section>
+
+		</footer>
+
+
+		<h1 onclick=navMenu.scrollTop=0; style=cursor:pointer;text-align:center; title="go to top of menu" >
+			<img src="https://ladybug.tools/artwork/icons_bugs/ico/honeybee.ico" height=18 >
+		</h1>
+
+	</nav>
+
+
+	<div>
+
+		<button id="butHamburger" onclick=MNU.toggleNavLeft(); title="click here to hide this menu"> slide &#9776; </button>
+
+	</div>
+
+
+	<nav id="navPopUp" >
+
+		<div id="divPopUpData" ></div>
+
+		<div id="divMessage" ></div>
+
+	</nav>
+
+
+	<div id="divContainer" >
+
+		<div id="divContents" ></div>
+
+	</div>
+
+<script>
+
+
+
+init();
+
+
+function init() {
+
+	window.addEventListener ( 'hashchange', OHC.onHashChange, false );
+
+	OHC.divContents = divContents;
+
+	MNUdivHeader.innerHTML = MNU.getNavHeader();
+
+	SFM.getMarkdownFileContents("sfrm-selected-files-markdown.md",SFMsecLinks);
+
+	//OHCsecMenuRepoFilesFolders.innerHTML = OHC.getMenuRepoFilesFolders();
+
+	//FOBsecFileOpenBasic.innerHTML = FOB.getMenuFileOpenBasic( divContents, divPopUpData );
+
+	THMsecMenuThemeSelect.innerHTML = THM.getMenuThemeSelect();
+
+	//TMPsecMenuTemplate.innerHTML = TMP.getMenuTemplate();
+
+	MNUdivFooter.innerHTML = MNU.getNavFooter(); // not essential
+
+	THM.init();
+
+	OHC.onHashChange();
+
+}
+
+
+</script>
+</body>
+</html>
