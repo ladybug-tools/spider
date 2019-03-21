@@ -73607,7 +73607,7 @@
       <CADObjectId>Basic Roof: SIM_EXT_SLD_Roof DA01 [929391]</CADObjectId>
       <Name>T-RF_103-E-R-498</Name>
     </Surface>
-    <Surface surfaceType="Shade" exposedToSun="true" id="aim13205">
+    <Surface surfaceType="Shad" exposedToSun="true" id="aim13205">
       <RectangularGeometry id="aim13206">
         <Azimuth>183.436431884766</Azimuth>
         <CartesianPoint>
