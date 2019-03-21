@@ -45,7 +45,10 @@ The apps we use here are the mostly the same as the scripts used throughout the 
 * 2019-03-20 ~ Add zoom image
 * 2019-03-20 ~ Add search capabilities
 * 2019-03-20 ~ Add more-pleasing style choices
-
+* 2019-03-20 ~ Add footer at bottom of each page with links etc
+* 2019-03-20 ~ Add Spanish version
+* 2019-03-21 ~ Check all internal links OK
+* 2019-03-21 ~ Check contributor links OK
 
 
 
