@@ -55,6 +55,7 @@ The apps we use here are the mostly the same as the scripts used throughout the 
 ## Things you can do using this script
 
 Using the Script
+* Click any link in left menu to view contents of Markdown file on GitHub
 * Click 'Select Theme' and use the buttons to update the style sheet applied to the app
 * Click 'Footer/Help' to obtain access to more resources
 * Click the '?' icon to display a pop-up window that tells about wha you are looking at
@@ -69,12 +70,15 @@ Enhancing the Script
 * Try adding a new menu module
 * Translate into another language
 
-## Links of Interest
 
+## Links of Interest
 
 
 ## Change Log
 
+### 2019-03-21 ~ Theo
+
+* Update readme
 
 ### 2019-03-20 ~ Theo
 
