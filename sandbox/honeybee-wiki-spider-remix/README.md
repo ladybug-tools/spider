@@ -6,11 +6,14 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 <br>
 
-# [Honeybee Wiki / The Spider Remix Read Me]( #README.md )
+# [Honeybee Wiki / Spider Remix Read Me]( #README.md )
 
 ## Original document: [Honeybee Wiki]( https://docs.ladybug.tools/honeybee-wiki/ )
 
 ## Source code: [github.com/ladybug-tools/honeybee-wiki]( https://github.com/ladybug-tools/honeybee-wiki)
+
+## [Honeybee Wiki / Spider Remix]( https://www.ladybug.tools/spider/sandbox/honeybee-wiki-spider-remix/ )
+
 
 ## Concept
 
