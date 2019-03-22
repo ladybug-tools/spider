@@ -50,7 +50,7 @@
 let meshes = new THREE.Group();
 const url = "https://raw.githubusercontent.com/mostaphaRoudsari/api/simulation/spec/components/schemas/model/example/model_facebyface.json";
 
-const urlSourceCode = "https://github.com/ladybug-tools/spider-gbxml-tools/tree/master/sandbox/pollination-viewers/";
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/pollination-viewers/";
 
 let sceneRotation = 1;
 let renderer, camera, controls, scene;
@@ -114,7 +114,7 @@ function callback( xhr ) {
 	//console.log( 'response', response );
 
 	const json = JSON.parse( response );
-	console.log( 'json', json );
+	//console.log( 'json', json );
 
 	scene.remove( meshes );
 
