@@ -34,11 +34,7 @@
 		<div id = "divTitle" ></div>
 
 		<p>
-			<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
-		</p>
-
-		<p>
-			<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
+			<button onclick="controls.autoRotate=!controls.autoRotate" >rotation</button>
 		</p>
 
 		<div id = "divLog" ></div>
@@ -72,13 +68,14 @@ function init() {
 	camera.up.set( 0, 0, 1 );
 
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
 
 	scene = new THREE.Scene();
 
 	window.addEventListener( 'resize', onWindowResize, false );
 	window.addEventListener( 'orientationchange', onWindowResize, false );
 	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
-	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate=false, false );
 
 	const axesHelper = new THREE.AxesHelper( 100 );
 	scene.add( axesHelper );
@@ -198,7 +195,6 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	controls.update();
-	scene.rotation.z += sceneRotation / 1000;
 
 }
 
