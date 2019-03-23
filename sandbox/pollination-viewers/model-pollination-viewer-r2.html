@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="View schema model pollination" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2019-03-21" >
+<title></title>
+<style>
+	/* Copyright 2019 Ladybug Tools authors. MIT License */
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#navMenu { margin: 0 20px; max-width: 15rem; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r102/build/three.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r102/examples/js/controls/OrbitControls.js" ></script>
+
+	<nav id = "navMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			<button onclick="controls.autoRotate=!controls.autoRotate" >rotation</button>
+		</p>
+
+		<div id = "divLog" ></div>
+
+	</nav>
+
+<script>
+
+
+const url = "https://raw.githubusercontent.com/mostaphaRoudsari/api/simulation/spec/components/schemas/model/example/model_pollination.json";
+let meshes = new THREE.Group();
+const colors = {
+
+	Wall: 0xFFB400,
+	RoofCeiling: 0x800000,
+	Floor: 0x80FFFF
+
+};
+
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/pollination-viewers/";
+
+let sceneRotation = 1;
+let renderer, camera, controls, scene;
+
+init();
+animate();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( 20, 20, 20 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate=false, false );
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	//const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	//const material = new THREE.MeshNormalMaterial();
+	//const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+	requestFile( url );
+
+}
+
+
+
+function requestFile( url ) {
+
+	const xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+
+
+function callback( xhr ) {
+
+	const response = xhr.target.response;
+	//console.log( 'response', response );
+
+	const json = JSON.parse( response );
+	//console.log( 'json', json );
+
+	scene.remove( meshes );
+
+	meshes = new THREE.Group();
+
+	const material = new THREE.MeshNormalMaterial( { side: 2 });
+
+	const vertices = json.vertices.map( item => new THREE.Vector3().fromArray( item ) );
+	//console.log( 'vertices', vertices );
+
+	for ( let face of json.faces ) {
+
+		// assume four vertices per face - just for now
+
+		const fv = face.vertices;
+		const geometryVertices = [
+
+			vertices[ fv[ 0 ] ] , vertices[ fv[ 1 ] ], vertices[ fv[ 2 ] ],
+
+			vertices[ fv[ 3 ] ] , vertices[ fv[ 2 ] ], vertices[ fv[ 0 ] ]
+
+		];
+
+
+		const geometry = getQuadGeometry1( geometryVertices )
+		geometry.computeVertexNormals();
+
+		color = colors[ face.face_type ]
+		const material = new THREE.MeshBasicMaterial( { color: color, side: 2 });
+		const mesh = new THREE.Mesh( geometry, material );
+
+		const edgesGeometry = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry
+		const edgesMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } );
+		edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
+		mesh.add( edges );
+
+		meshes.add( mesh );
+
+	}
+
+	for ( let aperture of json.apertures ) {
+
+		const av = aperture.vertices;
+		const geometryVertices = [
+
+			vertices[ av[ 0 ] ] , vertices[ av[ 1 ] ], vertices[ av[ 2 ] ],
+			vertices[ av[ 3 ] ] , vertices[ av[ 2 ] ], vertices[ av[ 0 ] ]
+
+		];
+		const geometry = getQuadGeometry1( geometryVertices );
+		const material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
+		const mesh = new THREE.Mesh( geometry, material );
+		meshes.add( mesh );
+
+	}
+
+	scene.add( meshes );
+
+}
+
+
+
+function getQuadGeometry1( verticesV3 ) {
+
+	//console.log( 'verticesv3', verticesV3 );
+
+	points = [
+
+		verticesV3[ 0 ] , verticesV3[ 1 ], verticesV3[ 2 ],
+		verticesV3[ 0 ] , verticesV3[ 2 ], verticesV3[ 3 ]
+
+	];
+
+	const geometry = new THREE.BufferGeometry();
+	geometry.setFromPoints( points );
+	geometry.computeVertexNormals();
+
+	return geometry;
+
+}
+
+
+
+function getQuadGeometry2( vertices ) {
+	// the grown-up way of doing it
+
+	const verticesArray = [
+
+		...vertices[ 0 ], ...vertices[ 1 ], ...vertices[ 2 ],
+		...vertices[ 0 ], ...vertices[ 2 ], ...vertices[ 3 ]
+
+	]
+	//console.log( 'verticesArray', verticesArray );
+
+	const positionsArray = new Float32Array( verticesArray.length );
+
+	const geometry = new THREE.BufferGeometry();
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( positionsArray, 3 ) );
+	geometry.attributes.position.copyArray( verticesArray );
+	//console.log( 'geometry.attributes.position.array', geometry.attributes.position.array );
+
+	return geometry;
+
+}
+
+
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+	const htm =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=https://github.com/fluidicon.png height=18 >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//controls.handleResize();
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+
+}
+
+</script>
+</body>
+</html>

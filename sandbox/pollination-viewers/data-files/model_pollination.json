@@ -1,0 +1,233 @@
+{
+    "convert_to_meters": 1,
+    "type": "Model",
+    "vertices": [
+        [
+            0,
+            0,
+            3.2
+        ],
+        [
+            -4.242640687119285,
+            4.242640687119286,
+            3.2
+        ],
+        [
+            -1.2727922061357848,
+            7.212489168102785,
+            3.2
+        ],
+        [
+            2.9698484809835,
+            2.9698484809834995,
+            3.2
+        ],
+        [
+            0,
+            0,
+            7.4
+        ],
+        [
+            2.9698484809835,
+            2.9698484809834995,
+            7.4
+        ],
+        [
+            -1.2727922061357848,
+            7.212489168102785,
+            7.4
+        ],
+        [
+            -4.242640687119285,
+            4.242640687119286,
+            7.4
+        ],
+        [
+            0.7778174593052024,
+            0.7778174593052023,
+            3.9000000000000004
+        ],
+        [
+            2.1920310216782974,
+            2.192031021678297,
+            3.9000000000000004
+        ],
+        [
+            2.1920310216782974,
+            2.192031021678297,
+            5.9
+        ],
+        [
+            0.7778174593052024,
+            0.7778174593052023,
+            5.9
+        ]
+    ],
+    "rad_materials": [
+        {
+            "type": "opaque",
+            "name": "black",
+            "reflectance": 0
+        },
+        {
+            "modifier": "void",
+            "type": "plastic",
+            "name": "generic_floor",
+            "r_reflectance": 0.2,
+            "g_reflectance": 0.2,
+            "b_reflectance": 0.2,
+            "specularity": 0,
+            "roughness": 0
+        },
+        {
+            "modifier": "void",
+            "type": "plastic",
+            "name": "generic_roof",
+            "r_reflectance": 0.8,
+            "g_reflectance": 0.8,
+            "b_reflectance": 0.8,
+            "specularity": 0,
+            "roughness": 0
+        },
+        {
+            "modifier": "void",
+            "type": "plastic",
+            "name": "generic_wall",
+            "r_reflectance": 0.5,
+            "g_reflectance": 0.5,
+            "b_reflectance": 0.5,
+            "specularity": 0,
+            "roughness": 0
+        },
+        {
+            "modifier": "void",
+            "type": "glass",
+            "name": "generic_glass",
+            "r_transmittance": 0.6,
+            "g_transmittance": 0.6,
+            "b_transmittance": 0.6,
+            "refraction_index": 1.52
+        }
+    ],
+    "faces": [
+        {
+            "name": "floor",
+            "face_type": "Floor",
+            "type": "Face",
+            "is_aperture": false,
+            "parent": "south_room",
+            "rad_modifier": 1,
+            "rad_modifier_dir": 0,
+            "vertices": [
+                0,
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "name": "ceiling",
+            "face_type": "RoofCeiling",
+            "type": "Face",
+            "is_aperture": false,
+            "parent": "south_room",
+            "rad_modifier": 2,
+            "rad_modifier_dir": 0,
+            "vertices": [
+                4,
+                5,
+                6,
+                7
+            ]
+        },
+        {
+            "name": "back_wall",
+            "type": "Face",
+            "is_aperture": false,
+            "parent": "south_room",
+            "face_type": "Wall",
+            "rad_modifier": 3,
+            "rad_modifier_dir": 0,
+            "vertices": [
+                0,
+                3,
+                5,
+                4
+            ],
+            "vertices_ext": [
+                0,
+                3,
+                5,
+                4,
+                0,
+                8,
+                9,
+                10,
+                11,
+                8,
+                0
+            ]
+        },
+        {
+            "name": "right_wall",
+            "type": "Face",
+            "is_aperture": false,
+            "parent": "south_room",
+            "face_type": "Wall",
+            "rad_modifier": 3,
+            "rad_modifier_dir": 0,
+            "vertices": [
+                3,
+                2,
+                6,
+                5
+            ]
+        },
+        {
+            "name": "front_wall",
+            "type": "Face",
+            "is_aperture": false,
+            "parent": "south_room",
+            "face_type": "Wall",
+            "rad_modifier": 3,
+            "rad_modifier_dir": 0,
+            "vertices": [
+                2,
+                1,
+                7,
+                6
+            ]
+        },
+        {
+            "name": "left_wall",
+            "type": "Face",
+            "is_aperture": false,
+            "parent": "south_room",
+            "face_type": "Wall",
+            "rad_modifier": 3,
+            "rad_modifier_dir": 0,
+            "vertices": [
+                0,
+                4,
+                7,
+                1
+            ]
+        }
+    ],
+    "apertures": [
+        {
+            "name": "back_glazing_0",
+            "face_type": "Window",
+            "is_aperture": true,
+            "type": "Aperture",
+            "parent": "back_wall",
+            "rad_modifier": 4,
+            "vertices": [
+                8,
+                9,
+                10,
+                11
+            ]
+        }
+    ]
+}
