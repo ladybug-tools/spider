@@ -76,6 +76,12 @@ Enhancing the Script
 
 ## Change Log
 
+### 2019-04-03 ~ Theo
+
+Honeybee Wiki R1.1.0
+* Bootswatch 'United' set as default style
+* Begin to add edit this page link
+
 ### 2019-03-21 ~ Theo
 
 * Update readme

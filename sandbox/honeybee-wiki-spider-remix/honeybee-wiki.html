@@ -69,9 +69,6 @@ MNU.currentStatusCore =
 	`;
 
 
-
-
-const uriDefaultFile = 'README.md';
 OHC.uriDefaultFile = "README.md";
 
 THM.themeUrlStorage = 'honeybee-wiki-themeurl';
@@ -199,7 +196,7 @@ function init() {
 
 	MNUdivHeader.innerHTML = MNU.getNavHeader();
 
-	SFM.getMarkdownFileContents("sfrm-selected-files-markdown.md",SFMsecLinks);
+	SFM.getMarkdownFileContents( "sfrm-selected-files-markdown.md", SFMsecLinks );
 
 	//OHCsecMenuRepoFilesFolders.innerHTML = OHC.getMenuRepoFilesFolders();
 
@@ -211,12 +208,33 @@ function init() {
 
 	MNUdivFooter.innerHTML = MNU.getNavFooter(); // not essential
 
+	localStorage.setItem( THM.themeUrlStorage, "https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/united/bootstrap.min.css" );
+
 	THM.init();
 
 	OHC.onHashChange();
 
+	//change to custom event with data passing via event details
+	OHC.xhr.addEventListener( 'load', test, false );
+	FOB.reader.addEventListener( 'load', test, false );
+	document.body.addEventListener( 'onZipFileParse', test, false );
+
 }
 
+
+function test(){
+
+	const a = document.createElement( 'a' );
+
+	a.href = OHC.xhr.responseURL
+	const pathname = a.pathname;
+
+	const name = decodeURI( pathname.split( '/').pop() )
+	url  = 'https://github.com' + pathname.replace( /master/, 'blob/master')
+
+	divPopUpData.innerHTML = name.link( url );
+
+}
 
 </script>
 </body>
