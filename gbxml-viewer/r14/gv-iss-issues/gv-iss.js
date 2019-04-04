@@ -1758,15 +1758,16 @@
 		oneSpace = [ 'ExteriorWall', 'Roof', 'ExposedFloor', 'UndergroundCeiling', 'UndergroundWall', 'UndergroundSlab',
 			'RaisedFloor', 'SlabOnGrade', 'FreestandingColumn', 'EmbeddedColumn' ];
 
-		for ( let i = 0; i < GBX.surfacesJson.length; i++ ) {
+			for ( let i = 0; i < GBX.surfacesJson.length; i++ ) {
 
-			surface = GBX.surfacesJson[ i ];
+				const surface = GBX.surfacesJson[ i ];
+				//console.log( 'surface.AdjacentSpaceId', surface.AdjacentSpaceId );
 
 			if ( surface.surfaceType === 'Shade' && surface.AdjacentSpaceId !== undefined ) {
 				//console.log( 'shade surface', surface );
 				ISS.adjacentSpaceInvalid.push( surface );
 
-			} else if ( twoSpaces.includes( surface.surfaceType ) && surface.AdjacentSpaceId.length !== 2 ) {
+			} else if ( twoSpaces.includes( surface.surfaceType ) && surface.AdjacentSpaceId && surface.AdjacentSpaceId.length !== 2 ) {
 
 				//console.log( 'two space', surface );
 				ISS.adjacentSpaceInvalid.push( surface );
