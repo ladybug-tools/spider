@@ -6,19 +6,19 @@
 <meta name = "description" content = "Scripts to help you view and manage gbXML files" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
 <meta name = "date" content = "2019-03-11" >
-<meta name = "release" content = "2.1" >
+<meta name = "release" content = "2.0" >
 <title>Spider</title>
-<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/style.css">
+<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/style.css">
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" ></script>
 
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/fob-file-open-basic.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/mnu-menu.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/sfm-selected-files-markdown.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/ohc-on-hash-change.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/thm-theme-select.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/tmp-template.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/mnu-menu.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/fob-file-open-basic.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/sfm-selected-files-markdown.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/ohc-on-hash-change.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/thm-theme-select.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/tmp-template.js" ></script>
 
 <script>
 
@@ -45,7 +45,7 @@ MNU.currentStatusCore =
 			<summary>Change log</summary>
 
 			<ul>
-				<li>2019-04-03 ~ First commit ~ Fork of TooToo R13.3</li>>
+				<li>2019-03-11 ~ First commit ~ Fork of TooToo R13.1</li>>
 			</ul>
 
 		</details>
@@ -67,7 +67,7 @@ MNU.currentStatusCore =
 const uriDefaultFile = 'README.md';
 
 THM.themeUrlStorage = 'spider-theme-url';
-THM.cssBasic = "https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/style.css";
+THM.cssBasic = "https://pushme-pullyou.github.io/tootoo13/js-tootoo13-1/style.css";
 
 // For main menu header
 MNU.urlSourceCode ="https://github.com/ladybug-tools/spider/";
@@ -84,8 +84,8 @@ MNU.appText= ""; //"gbXML Tools";
 MNU.appTitle= ""; //"Tools to help you find, load, examine and edit gbXML files - in large numbers and sizes";
 MNU.appUrl  = ""; //"https://www.ladybug.tools/spider-gbxml-tools/";
 
-//MNU.urlSourceCodeImage = "https://pushme-pullyou.github.io/github-mark-64.png";
-//MNU.urlSourceCodeIcon = `<img src="${ MNU.urlSourceCodeImage }" height=18 style=opacity:0.5 >`;
+//MNU.urlSourceCodeImage="https://status.github.com/images/invertocat.png";
+//MNU.urlSourceCodeIcon=`<img src="${ MNU.urlSourceCodeImage }" height=18 >`;
 
 MNU.footerUrl = "#https://www.ladybug.tools/spider/";
 MNU.footerTarget = ""; //"target=_blank";
@@ -183,9 +183,8 @@ init();
 
 function init() {
 
-	OHC.divContents = divContents;
-
 	MNUdivHeader.innerHTML = MNU.getNavHeader();
+
 
 	SFM.getMarkdownFileContents("selected.md",SFMsecPrototypes);
 
