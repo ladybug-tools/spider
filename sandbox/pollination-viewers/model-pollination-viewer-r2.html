@@ -44,7 +44,8 @@
 <script>
 
 
-const url = "https://raw.githubusercontent.com/mostaphaRoudsari/api/simulation/spec/components/schemas/model/example/model_pollination.json";
+//const url = "https://raw.githubusercontent.com/mostaphaRoudsari/api/simulation/spec/components/schemas/model/example/model_pollination.json";
+const url = "https://raw.githubusercontent.com/mostaphaRoudsari/api/master/spec/schema_samples/model_pollination.json"
 let meshes = new THREE.Group();
 const colors = {
 
@@ -147,7 +148,7 @@ function callback( xhr ) {
 		const geometry = getQuadGeometry1( geometryVertices )
 		geometry.computeVertexNormals();
 
-		color = colors[ face.face_type ]
+		color = colors[ face.face_type ] || 0x000000;
 		const material = new THREE.MeshBasicMaterial( { color: color, side: 2 });
 		const mesh = new THREE.Mesh( geometry, material );
 
@@ -160,21 +161,26 @@ function callback( xhr ) {
 
 	}
 
-	for ( let aperture of json.apertures ) {
+	if ( json.apertures ) {
 
-		const av = aperture.vertices;
-		const geometryVertices = [
+		for ( let aperture of json.apertures ) {
 
-			vertices[ av[ 0 ] ] , vertices[ av[ 1 ] ], vertices[ av[ 2 ] ],
-			vertices[ av[ 3 ] ] , vertices[ av[ 2 ] ], vertices[ av[ 0 ] ]
+			const av = aperture.vertices;
+			const geometryVertices = [
 
-		];
-		const geometry = getQuadGeometry1( geometryVertices );
-		const material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
-		const mesh = new THREE.Mesh( geometry, material );
-		meshes.add( mesh );
+				vertices[ av[ 0 ] ] , vertices[ av[ 1 ] ], vertices[ av[ 2 ] ],
+				vertices[ av[ 3 ] ] , vertices[ av[ 2 ] ], vertices[ av[ 0 ] ]
+
+			];
+			const geometry = getQuadGeometry1( geometryVertices );
+			const material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
+			const mesh = new THREE.Mesh( geometry, material );
+			meshes.add( mesh );
+
+		}
 
 	}
+
 
 	scene.add( meshes );
 
