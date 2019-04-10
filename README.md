@@ -9,23 +9,26 @@
 _All of the above are embedded interactive scripts available here_
 
 
-## Ladybug Tools / Spider: [Latest Issues and Updates]( #plugins/view-github-issues.html )
+## Ladybug Tools / Spider: [Latest Issues]( #plugins/view-github-issues.html )
 
-## Examples
+## Ladybug Tools / Spider gbXML Tools: [Latest Issues]( #plugins/view-github-issues-spider-gbxml-tools.html )
+
+## Ladybug Tools / Spider gbXML Fixer: [Latest Issues]( #plugins/view-github-issues-spider-gbxml-fixer.html )
+
+
+## Examples of interest in this repo
 
 * [gbXML Viewer R12]( https://www.ladybug.tools/spider/gbxml-viewer/ )
 * [gbXML Viewer  Dev R13]( https://www.ladybug.tools/spider/gbxml-viewer/dev/ )
 * [gbXML Viewer  Dev R14]( https://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html )
-* ~~[gbXML Viewer Basic]( http://www.ladybug.tools/spider/#gbxml-viewer-basic/)~~ forked to [Spider gbXML Tools]( https://www.ladybug.tools/spider-gbxml-tools/ ) &laquo; where the action is
 * [Analemma 3D]( https://www.ladybug.tools/spider/analemma3d/index.html )
-* ~~[Radiance RAD Viewer]( https://www.ladybug.tools/spider/rad-viewer/ )~~ forked to [Spider RAD Viewer]( https://www.ladybug.tools/spider-rad-viewer/ )
 * [Burning mAnalemma 2017]( https://www.ladybug.tools/spider/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
 
 
 
 ***
 
-### 2018-10-30: Many things happening
+### NREL's OpenStudio Includes Spider gbXML Viewer
 
 Spider gbXML Viewer is embedded in latest release of [OpenStudio]( https://www.openstudio.net/). See the [Ladybug Tools forum]( https://discourse.ladybug.tools/t/spider-gbxml-viewer-embedded-in-openstudio/4129 ) for details.
 

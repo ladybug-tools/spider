@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = description content = "GitHub issues to blog posts" >
+<meta name = keywords content = "JavaScript,GitHub,FOSS,STEM" >
+<meta name = date content = "2019-04-09" >
+<title>View GitHub Issues</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	hr { margin-bottom: 80px; }
+	img { border: 2px red solid; max-width: 800px; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js" ></script>
+
+	<div id = "menu" >
+
+		<div>
+			<h1><a id = "title" href = "" ></a></h1>
+		</div>
+
+		<div id = "header" >
+			<h1>Issues for Spider gbXML Tools</h1>
+
+			<p>
+					Spider gbXML Tools is a collection of free, open source modular JavaScript / Three.js files
+					 for viewing, validating and editing gbXML files in 3D in your browser.
+					 gbXML is an industry supported file format for sharing building information between numerous building design software tools.
+			</p>
+
+		</div>
+
+		<hr>
+
+		<div id = "contents" ></div>
+
+	</div>
+
+<script>
+// Add issues content to your site
+
+const user = 'ladybug-tools';
+const repo = '/spider-gbxml-tools';
+
+
+init();
+
+function init() {
+
+	showdown.setFlavor( 'github' );
+
+	const urlIssues = 'https://api.github.com/repos/' + user + repo + '/issues';
+
+	requestFile( urlIssues, callbackPost );
+
+	window.addEventListener( 'resize', onWindowResize, false );
+
+}
+
+
+
+function callbackPost( xhr ) {
+
+	const converter = new showdown.Converter();
+	const issues = JSON.parse( xhr.target.response );
+
+	for ( let issue of issues ) {
+
+		let html = converter.makeHtml( issue.body );
+		html = html.replace( /\<a href\=/gi, '<a target=_top href=' );
+
+		contents.innerHTML +=
+		`<h1>Issue<br><a href="${ issue.html_url }" target=_top >${ issue.title }</a></h1>
+
+			<div>
+				<i>Created on ${ issue.created_at }
+				by <a target+=top href="${issue.user.html_url }" >${ issue.user.login }</a></i>
+			</div>
+
+			${ html }
+
+			<hr>
+		`;
+
+	}
+
+}
+
+
+
+function onWindowResize(){
+
+	if ( window.innerWidth < 1000 ) {
+
+		ifrReadMe.style.display = 'none';
+
+	} else {
+
+		ifrReadMe.style.display = '';
+
+	}
+
+}
+
+
+function requestFile( url, callback ) {
+
+	const xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+</script>
+</body>
+</html>
