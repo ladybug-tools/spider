@@ -3,25 +3,35 @@
 <div><input type=button onclick="window.location.href='https://github.com/ladybug-tools/spider/tree/master/sandbox/pollination-viewers/README.md'"
 value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ><div>
 
-# [Pollination Viewers Read Me]( #sandbox/pollination-viewers/README.md )
+# [Pollination API Viewers Read Me]( #sandbox/pollination-viewers/README.md )
 
 
 ## Concept
 
+## R3
+
+* Adds: Click any face to view its attributes
+
+### Demo: [model pollination viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-pollination-viewer.html )
+[Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/r3/model-pollination-viewer.html )
+
+### Demo: [model face-by-face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-face-by-face-viewer.html )
+[Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/r3/model-face-by-face-viewer.html )
+
+* Updated to newer aperture schema
+
 ## R2
 
-### Demo: [model pollination viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/model-pollination-viewer-r2.html )
+Demo: [model pollination viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/model-pollination-viewer-r2.html )
+[Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/model-pollination-viewer-r2.html )
 
-#### [Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/model-pollination-viewer-r2.html )
 
-
-### Demo: [model face-by-face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/model-face-by-face-viewer-r2.html )
-#### [Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/model-face-by-face-viewer-r2.html )
+Demo: [model face-by-face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/model-face-by-face-viewer-r2.html )
+[Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/model-face-by-face-viewer-r2.html )
 
 ## R1
 
 Demo: [model pollination viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/model-pollination-viewer.html )
-
 [Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/model-pollination-viewer.html )
 
 Demo: [model face by face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/model-face-by-face-viewer.html )
