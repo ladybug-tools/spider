@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" >
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
-<meta name=description content="View schema model face-by-face. Click any face to view its attributes." >
+<meta name=description content="View schema model pollination. Click any face to view its attributes." >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name = "date" content = "2019-03-21" >
 <title></title>
@@ -29,12 +29,13 @@
 <script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r102/build/three.min.js" ></script>
 <script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r102/examples/js/controls/OrbitControls.js" ></script>
 
-	<nav id = "navMenu" >
+
+<nav id = "navMenu" >
 
 		<div id = "divTitle" ></div>
 
 		<p>
-			<button onclick="controls.autoRotate=!controls.autoRotate;" >rotation</button>
+			<button onclick="controls.autoRotate=!controls.autoRotate" >rotation</button>
 		</p>
 
 		<div id = "divLog" ></div>
@@ -44,7 +45,13 @@
 <script>
 
 
-const url = "https://raw.githubusercontent.com/pollination/api/master/spec/schema_samples/model_facebyface.json";
+//const url = "https://raw.githubusercontent.com/mostaphaRoudsari/api/simulation/spec/components/schemas/model/example/model_pollination.json";
+//const url = "https://raw.githubusercontent.com/pollination/api/master/spec/schema_samples/model_pollination.json"
+
+
+const url = "../data-files/pollination-api/model.json";
+
+
 
 let meshes = new THREE.Group();
 const colors = {
@@ -54,12 +61,12 @@ const colors = {
 	Floor: 0x80FFFF
 
 };
+
 const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/pollination-viewers/";
 
 let sceneRotation = 1;
 let renderer, camera, controls, scene;
 
-let objects = [];
 let mouse = new THREE.Vector2();
 let raycaster = new THREE.Raycaster();
 let intersection;
@@ -88,7 +95,7 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize, false );
 	window.addEventListener( 'orientationchange', onWindowResize, false );
 	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
-	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate=false, false );
 
 	const axesHelper = new THREE.AxesHelper( 100 );
 	scene.add( axesHelper );
@@ -102,7 +109,6 @@ function init() {
 
 	document.addEventListener( 'mousedown', onDocumentMouseMove, false );
 	document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-
 
 }
 
@@ -127,43 +133,69 @@ function callback( xhr ) {
 	const response = xhr.target.response;
 	//console.log( 'response', response );
 
-	json = JSON.parse( response );
+	const json = JSON.parse( response );
 	console.log( 'json', json );
 
 	scene.remove( meshes );
 
 	meshes = new THREE.Group();
 
+	const material = new THREE.MeshNormalMaterial( { side: 2 });
+
+	const vertices = json.vertices.map( item => new THREE.Vector3().fromArray( item ) );
+	//console.log( 'vertices', vertices );
+
 	for ( let face of json.faces ) {
 
 		// assume four vertices per face - just for now
 
-		const geometry = getQuadGeometry1( face.vertices );
+		const fv = face.vertices;
+		const geometryVertices = [
+
+			vertices[ fv[ 0 ] ] , vertices[ fv[ 1 ] ], vertices[ fv[ 2 ] ],
+
+			vertices[ fv[ 3 ] ] , vertices[ fv[ 2 ] ], vertices[ fv[ 0 ] ]
+
+		];
+
+
+		const geometry = getQuadGeometry1( geometryVertices )
 		geometry.computeVertexNormals();
 
-		color = colors[ face.face_type ]
+		color = colors[ face.face_type ] || 0x000000;
 		const material = new THREE.MeshBasicMaterial( { color: color, side: 2 });
 		const mesh = new THREE.Mesh( geometry, material );
 		mesh.userData.face = face;
 
-		if ( face.aperture ) {
-
-			const geometry = getQuadGeometry2( face.aperture.vertices );
-			const material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
-			const aperture = new THREE.Mesh( geometry, material );
-			//console.log( 'aperture', aperture );
-			meshes.add( aperture );
-
-		}
-
 		const edgesGeometry = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry
 		const edgesMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } );
-		const edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
+		edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
 		mesh.add( edges );
 
 		meshes.add( mesh );
 
 	}
+
+	if ( json.apertures ) {
+
+		for ( let aperture of json.apertures ) {
+
+			const av = aperture.vertices;
+			const geometryVertices = [
+
+				vertices[ av[ 0 ] ] , vertices[ av[ 1 ] ], vertices[ av[ 2 ] ],
+				vertices[ av[ 3 ] ] , vertices[ av[ 2 ] ], vertices[ av[ 0 ] ]
+
+			];
+			const geometry = getQuadGeometry1( geometryVertices );
+			const material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
+			const mesh = new THREE.Mesh( geometry, material );
+			meshes.add( mesh );
+
+		}
+
+	}
+
 
 	scene.add( meshes );
 
@@ -171,18 +203,16 @@ function callback( xhr ) {
 
 
 
-function getQuadGeometry1( vertices ) {
-	console.log( 'vertices', vertices );
+function getQuadGeometry1( verticesV3 ) {
 
-	const verticesV3 = vertices.map( item => new THREE.Vector3().fromArray( item ) );
+	//console.log( 'verticesv3', verticesV3 );
 
-	const points = [
+	points = [
 
 		verticesV3[ 0 ] , verticesV3[ 1 ], verticesV3[ 2 ],
 		verticesV3[ 0 ] , verticesV3[ 2 ], verticesV3[ 3 ]
 
 	];
-	//console.log( 'points', points );
 
 	const geometry = new THREE.BufferGeometry();
 	geometry.setFromPoints( points );
@@ -233,34 +263,32 @@ function onDocumentTouchStart( event ) {
 
 function onDocumentMouseMove( event ) {
 
-	event.preventDefault();
+event.preventDefault();
 
-	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
 
-	raycaster.setFromCamera( mouse, camera );
+raycaster.setFromCamera( mouse, camera );
 
-	let intersects = raycaster.intersectObjects( meshes.children );
+let intersects = raycaster.intersectObjects( meshes.children );
 
-	if ( intersects.length > 0 ) {
+if ( intersects.length > 0 ) {
 
-		//intersects[ 0 ].object.rotation.y +=0.1;
+	//intersects[ 0 ].object.rotation.y +=0.1;
 
-		face = intersects[ 0 ].object.userData.face;
+	face = intersects[ 0 ].object.userData.face;
 
-		jsonString = JSON.stringify ( face, null, '  ');
+	jsonString = JSON.stringify ( face, null, '  ');
 
-		divLog.innerHTML = `<textarea style=height:45rem;width:100%; >${ jsonString }</textarea>`;
+	divLog.innerHTML = `<textarea style=height:45rem;width:100%; >${ jsonString }</textarea>`;
 
-	} else {
+} else {
 
-		divLog.innerHTML = 'No face selected';
-
-	}
+	divLog.innerHTML = 'No face selected';
 
 }
 
-
+}
 
 
 

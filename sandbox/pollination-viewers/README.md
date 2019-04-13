@@ -8,14 +8,24 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
+## R3.1.0
+
+### Demo: [model face-by-face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-face-by-face-viewer-3-1-0.html )
+[Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/r3/model-face-by-face-viewer-3-1-0.html )
+
+* Opens local, modified copy of: https://github.com/pollination/model-service/blob/master/app/models/samples/model.py
+* Translates JSON XYZ object to numeric array then to Three.jd Vector3 object
+* Displays the JSON attributes of apertures
+
+
 ## R3
 
 * Adds: Click any face to view its attributes
 
-### Demo: [model pollination viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-pollination-viewer.html )
+Demo: [model pollination viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-pollination-viewer.html )
 [Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/r3/model-pollination-viewer.html )
 
-### Demo: [model face-by-face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-face-by-face-viewer.html )
+Demo: [model face-by-face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-face-by-face-viewer.html )
 [Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/r3/model-face-by-face-viewer.html )
 
 * Updated to newer aperture schema

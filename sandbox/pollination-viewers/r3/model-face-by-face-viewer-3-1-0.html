@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en" >
 <head>
@@ -44,7 +45,10 @@
 <script>
 
 
-const url = "https://raw.githubusercontent.com/pollination/api/master/spec/schema_samples/model_facebyface.json";
+//const url = "https://raw.githubusercontent.com/pollination/api/master/spec/schema_samples/model_facebyface.json";
+
+const url = "../data-files/pollination-api/model.json";
+
 
 let meshes = new THREE.Group();
 const colors = {
@@ -103,7 +107,6 @@ function init() {
 	document.addEventListener( 'mousedown', onDocumentMouseMove, false );
 	document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 
-
 }
 
 
@@ -127,8 +130,8 @@ function callback( xhr ) {
 	const response = xhr.target.response;
 	//console.log( 'response', response );
 
-	json = JSON.parse( response );
-	console.log( 'json', json );
+	const json = JSON.parse( response );
+	//console.log( 'json', json );
 
 	scene.remove( meshes );
 
@@ -141,18 +144,24 @@ function callback( xhr ) {
 		const geometry = getQuadGeometry1( face.vertices );
 		geometry.computeVertexNormals();
 
-		color = colors[ face.face_type ]
+		const color = colors[ face.face_type ]
 		const material = new THREE.MeshBasicMaterial( { color: color, side: 2 });
 		const mesh = new THREE.Mesh( geometry, material );
 		mesh.userData.face = face;
 
-		if ( face.aperture ) {
+		if ( face.apertures ) {
 
-			const geometry = getQuadGeometry2( face.aperture.vertices );
-			const material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
-			const aperture = new THREE.Mesh( geometry, material );
-			//console.log( 'aperture', aperture );
-			meshes.add( aperture );
+			for ( let aperture of face.apertures ) {
+
+				const geometry = getQuadGeometry2( aperture.vertices );
+				const material = new THREE.MeshBasicMaterial( { color: 0x000000, side: 2 } );
+				const apertureMesh = new THREE.Mesh( geometry, material );
+				apertureMesh.userData.face = aperture;
+				//console.log( 'aperture', aperture );
+
+				meshes.add( apertureMesh );
+
+			}
 
 		}
 
@@ -171,18 +180,20 @@ function callback( xhr ) {
 
 
 
-function getQuadGeometry1( vertices ) {
-	console.log( 'vertices', vertices );
+function getQuadGeometry1( verticesObj ) {
+	//console.log( 'verticesObj', verticesObj );
+
+	//const vertices = verticesObj.map( vertex => [ vertex.x, vertex.y, vertex.z ] );
+	const vertices = verticesObj.map( vertex => Object.values( vertex ) );
 
 	const verticesV3 = vertices.map( item => new THREE.Vector3().fromArray( item ) );
 
 	const points = [
 
-		verticesV3[ 0 ] , verticesV3[ 1 ], verticesV3[ 2 ],
+		verticesV3[ 0 ], verticesV3[ 1 ], verticesV3[ 2 ],
 		verticesV3[ 0 ] , verticesV3[ 2 ], verticesV3[ 3 ]
 
 	];
-	//console.log( 'points', points );
 
 	const geometry = new THREE.BufferGeometry();
 	geometry.setFromPoints( points );
@@ -194,8 +205,11 @@ function getQuadGeometry1( vertices ) {
 
 
 
-function getQuadGeometry2( vertices ) {
+function getQuadGeometry2( verticesObj ) {
 	// the grown-up way of doing it
+
+	//const vertices = verticesObj.map( vertex => [ vertex.x, vertex.y, vertex.z ] );
+	const vertices = verticesObj.map( vertex => Object.values( vertex ) );
 
 	const verticesArray = [
 
