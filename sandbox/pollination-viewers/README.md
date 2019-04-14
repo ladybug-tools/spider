@@ -8,6 +8,18 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
+## R4.0.0
+
+### Demo: [pollination model viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r4/pollination-model-viewer-4-0-0.html )
+[Source]( https://github.com/ladybug-tools/spider/blob/master/sandbox/pollination-viewers/r4/pollination-model-viewer-0-0-0.html )
+
+* Opens files directly from Pollination GitHub page
+* Adds wireframe display show/hide button
+* Displays quad meshes with a single quad aperture with an opening for the aperture
+* Displays apertures with the opacity indicated by rad_modifier.r_transmittance
+
+
+
 ## R3.1.0
 
 ### Demo: [model face-by-face viewer]( http://www.ladybug.tools/spider/sandbox/pollination-viewers/r3/model-face-by-face-viewer-3-1-0.html )

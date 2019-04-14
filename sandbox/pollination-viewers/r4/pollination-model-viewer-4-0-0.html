@@ -1,0 +1,377 @@
+
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="View schema model face-by-face. Click any face to view its attributes." >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2019-03-21" >
+<title></title>
+<style>
+	/* Copyright 2019 Ladybug Tools authors. MIT License */
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#navMenu { margin: 0 20px; max-width: 15rem; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r102/build/three.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r102/examples/js/controls/OrbitControls.js" ></script>
+
+	<nav id = "navMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			<button onclick="meshes.children.map( mesh => mesh.material.wireframe=!mesh.material.wireframe )" >wireframe</button>
+		</p>
+		
+		<p>
+			<button onclick="controls.autoRotate=!controls.autoRotate;" >rotation</button>
+		</p>
+
+		<div id = "divLog" ></div>
+
+	</nav>
+
+<script>
+
+
+//const url = "https://raw.githubusercontent.com/pollination/api/master/spec/schema_samples/model_facebyface.json";
+
+//const url = "../data-files/pollination-api/model.json";
+
+const url = "https://raw.githubusercontent.com/pollination/model-service/master/app/models/samples/model.py";
+
+let meshes = new THREE.Group();
+const colors = {
+
+	Wall: 0xFFB400,
+	RoofCeiling: 0x800000,
+	Floor: 0x80FFFF
+
+};
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/pollination-viewers/";
+
+let sceneRotation = 1;
+let renderer, camera, controls, scene;
+
+let objects = [];
+let mouse = new THREE.Vector2();
+let raycaster = new THREE.Raycaster();
+let intersection;
+
+init();
+animate();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( 20, 20, 20 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.autoRotate = true;
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => controls.autoRotate = false, false );
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	//const geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	//const material = new THREE.MeshNormalMaterial();
+	//const mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+	requestFile( url );
+
+	document.addEventListener( 'mousedown', onDocumentMouseMove, false );
+	document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+
+}
+
+
+
+function requestFile( url ) {
+
+	const xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+
+
+function callback( xhr ) {
+
+	const response = xhr.target.response.slice( 15 );
+	//console.log( 'response', response );
+
+	const json = JSON.parse( response );
+	console.log( 'json', json );
+
+	scene.remove( meshes );
+
+	meshes = new THREE.Group();
+
+	for ( let face of json.faces ) {
+
+		// assume four vertices per face - just for now
+
+		if ( face.apertures ) {
+
+			for ( let aperture of face.apertures ) {
+
+				let geometryMesh = getQuadFaceAperture( face.vertices, aperture.vertices );
+				geometryMesh.computeVertexNormals();
+
+				const color = colors[ face.face_type ]
+				const materialMesh = new THREE.MeshBasicMaterial( { color: color, side: 2 } );
+				const mesh = new THREE.Mesh( geometryMesh, materialMesh );
+				mesh.userData.face = face;
+				//console.log( 'aperture', aperture );
+
+				meshes.add( mesh );
+
+				const opacity = aperture.rad_modifier.r_transmittance;
+				//console.log( '', aperture.rad_modifier.r_transmittance );
+
+				const geometry = getQuadGeometry2( aperture.vertices );
+				const material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: opacity, side: 2, transparent: true } );
+				const apertureMesh = new THREE.Mesh( geometry, material );
+				apertureMesh.userData.face = aperture;
+				//console.log( 'aperture', aperture );
+
+				meshes.add( apertureMesh );
+
+			}
+
+		} else {
+
+			const geometry = getQuadGeometry1( face.vertices );
+			geometry.computeVertexNormals();
+
+			const color = colors[ face.face_type ]
+			const material = new THREE.MeshBasicMaterial( { color: color, side: 2 });
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.userData.face = face;
+
+			const edgesGeometry = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry
+			const edgesMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } );
+			const edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
+			mesh.add( edges );
+
+			meshes.add( mesh );
+
+		}
+
+	}
+
+	scene.add( meshes );
+
+}
+
+
+function getQuadFaceAperture( verticesFace, verticesAperture ) {
+
+	const coordinatesFace = verticesFace.map( vertex => Object.values( vertex ) );
+	coordinatesFace.push( coordinatesFace[ 0 ] );
+	const faceV3 = coordinatesFace.map( item => new THREE.Vector3().fromArray( item ) );
+
+	const coordinatesAperture = verticesAperture.map( vertex => Object.values( vertex ) );
+	coordinatesAperture.push( coordinatesAperture[ 0 ] );
+	const apertureV3 = coordinatesAperture.map( item => new THREE.Vector3().fromArray( item ) );
+
+	const geometry = new THREE.PlaneGeometry( 10, 5, 4, 1 );
+
+ 	for ( let i = 0; i < 5; i++ ){
+
+		geometry.vertices[ i ] = faceV3[ i ];
+		geometry.vertices[ i + 5 ] = apertureV3[ i ];
+
+	}
+
+	return geometry;
+
+}
+
+
+
+function getQuadGeometry1( verticesObj ) {
+	//console.log( 'verticesObj', verticesObj );
+
+	//const vertices = verticesObj.map( vertex => [ vertex.x, vertex.y, vertex.z ] );
+	const vertices = verticesObj.map( vertex => Object.values( vertex ) );
+
+	const verticesV3 = vertices.map( item => new THREE.Vector3().fromArray( item ) );
+
+	const points = [
+
+		verticesV3[ 0 ], verticesV3[ 1 ], verticesV3[ 2 ],
+		verticesV3[ 0 ] , verticesV3[ 2 ], verticesV3[ 3 ]
+
+	];
+
+	const geometry = new THREE.BufferGeometry();
+	geometry.setFromPoints( points );
+	geometry.computeVertexNormals();
+
+	return geometry;
+
+}
+
+
+
+function getQuadGeometry2( verticesObj ) {
+	// the grown-up way of doing it
+
+	//const vertices = verticesObj.map( vertex => [ vertex.x, vertex.y, vertex.z ] );
+	const vertices = verticesObj.map( vertex => Object.values( vertex ) );
+
+	const verticesArray = [
+
+		...vertices[ 0 ], ...vertices[ 1 ], ...vertices[ 2 ],
+		...vertices[ 0 ], ...vertices[ 2 ], ...vertices[ 3 ]
+
+	]
+	//console.log( 'verticesArray', verticesArray );
+
+	const positionsArray = new Float32Array( verticesArray.length );
+
+	const geometry = new THREE.BufferGeometry();
+	geometry.addAttribute( 'position', new THREE.BufferAttribute( positionsArray, 3 ) );
+	geometry.attributes.position.copyArray( verticesArray );
+	//console.log( 'geometry.attributes.position.array', geometry.attributes.position.array );
+
+	return geometry;
+
+}
+
+
+
+function onDocumentTouchStart( event ) {
+
+	event.preventDefault();
+
+	event.clientX = event.touches[0].clientX;
+	event.clientY = event.touches[0].clientY;
+
+	onDocumentMouseMove( event );
+
+}
+
+
+
+function onDocumentMouseMove( event ) {
+
+	event.preventDefault();
+
+	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+	raycaster.setFromCamera( mouse, camera );
+
+	let intersects = raycaster.intersectObjects( meshes.children );
+
+	if ( intersects.length > 0 ) {
+
+		//intersects[ 0 ].object.rotation.y +=0.1;
+
+		face = intersects[ 0 ].object.userData.face;
+
+		jsonString = JSON.stringify ( face, null, '  ');
+
+		divLog.innerHTML = `<textarea style=height:45rem;width:100%; >${ jsonString }</textarea>`;
+
+	} else {
+
+		divLog.innerHTML = 'No face selected';
+
+	}
+
+}
+
+
+
+
+
+//////////
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+	const htm =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=https://github.com/fluidicon.png height=18 >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	//controls.handleResize();
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+
+}
+
+</script>
+</body>
+</html>
