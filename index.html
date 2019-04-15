@@ -5,20 +5,20 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Scripts to help you view and manage gbXML files" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
-<meta name = "date" content = "2019-03-11" >
-<meta name = "release" content = "2.1" >
+<meta name = "date" content = "2019-04-14" >
+<meta name = "release" content = "13-3-0" >
 <title>Spider</title>
-<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/style.css">
+<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/style.css">
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js" ></script>
-
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/fob-file-open-basic.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/mnu-menu.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/sfm-selected-files-markdown.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/ohc-on-hash-change.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/thm-theme-select.js" ></script>
-<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/tmp-template.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/mnu-menu.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/sfm-selected-files-markdown.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/fga-files-github-api/fga-files-github-api.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/gat-github-access-token.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/fob-file-open-basic/fob-file-open-basic.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/thm-theme-select.js" ></script>
+<script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/tmp-template.js" ></script>
 
 <script>
 
@@ -45,7 +45,7 @@ MNU.currentStatusCore =
 			<summary>Change log</summary>
 
 			<ul>
-				<li>2019-04-03 ~ First commit ~ Fork of TooToo R13.3</li>>
+				<li>2019-04-14 ~ F - R13.0.0 - first commit</li>
 			</ul>
 
 		</details>
@@ -62,44 +62,43 @@ MNU.currentStatusCore =
 	`;
 
 
+FOB.urlDefaultFile = 'README.md';
 
-
-const uriDefaultFile = 'README.md';
-
-THM.themeUrlStorage = 'spider-theme-url';
-THM.cssBasic = "https://pushme-pullyou.github.io/tootoo13/js-tootoo13-2/style.css";
+THM.themeUrlStorage = 'tootoo13-3-0-theme-url';
+THM.cssBasic = "https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/style.css";
 
 // For main menu header
 MNU.urlSourceCode ="https://github.com/ladybug-tools/spider/";
 
 MNU.homeText = "<img src='https://ladybug.tools/artwork/icons_bugs/ico/ladybug.ico' height=24 >";
 MNU.homeTitle="Ladybug Tools: free computer applications that support environmental design and education";
-MNU.homeUrl = "https://www.ladybug.tools";
+MNU.homeUrl  = "https://www.ladybug.tools";
 
-MNU.repoText= ""; //"<img src='https://ladybug.tools/artwork/icons_bugs/ico/spider.ico' height=24 >";
+MNU.repoText = ""; //"<img src='https://ladybug.tools/artwork/icons_bugs/ico/spider.ico' height=24 >";
 MNU.repoTitle=""; //"Spider: 3D interactive analysis in your browser mostly written around the Three.js JavaScript library";
 MNU.repoUrl = ""; // "https://www.ladybug.tools/spider/";
 
-MNU.appText= ""; //"gbXML Tools";
+MNU.appText = ""; //"gbXML Tools";
 MNU.appTitle= ""; //"Tools to help you find, load, examine and edit gbXML files - in large numbers and sizes";
 MNU.appUrl  = ""; //"https://www.ladybug.tools/spider-gbxml-tools/";
 
 //MNU.urlSourceCodeImage = "https://pushme-pullyou.github.io/github-mark-64.png";
 //MNU.urlSourceCodeIcon = `<img src="${ MNU.urlSourceCodeImage }" height=18 style=opacity:0.5 >`;
 
-MNU.footerUrl = "#https://www.ladybug.tools/spider/";
+MNU.footerUrl   = "#https://www.ladybug.tools/spider/";
 MNU.footerTarget = ""; //"target=_blank";
 MNU.footerIssues = "https://github.com/ladybug-tools/spider/issues";
 
 // for parsing
-OHC.user = 'ladybug-tools';
-OHC.repo = 'spider';
-OHC.pathRepo = '';
-OHC.branch = '/master/';
+FGA.user = 'ladybug-tools';
+FGA.repo = 'spider';
+FGA.pathRepo = '';
+FGA.branch = '/master/';
 
-//OHC.urlGitHubPage  = "https://www.ladybug.tools/" + OHC.repo + "/";
-OHC.urlGitHubPage = "";
-
+// When running in dev folder
+// FGA.urlGitHubPage = location.href.includes( FGA.repo ) ? '../' : 'https://' + FGA.repo + "/";
+// When running in build repo
+FGA.urlGitHubPage = "";
 
 </script>
 
@@ -118,7 +117,9 @@ OHC.urlGitHubPage = "";
 
 			<section id=SFMsecPrototypes ></section>
 
-			<section id="OHCsecMenuRepoFilesFolders" ></section>
+			<section id="FGAsecMenuRepoFilesFolders" ></section>
+
+			<section id="GATsecGithubAccessToken" ></section>
 
 			<section id=FOBsecFileOpenBasic ></section>
 
@@ -167,6 +168,11 @@ OHC.urlGitHubPage = "";
 
 	</nav>
 
+	<nav id="viewSrcButton" >
+
+		<a id=aViewSource target=_blank >View source</a>
+
+	</nav>
 
 	<div id="divContainer" >
 
@@ -183,13 +189,15 @@ init();
 
 function init() {
 
-	OHC.divContents = divContents;
+	FGA.divContents = divContents;
 
 	MNUdivHeader.innerHTML = MNU.getNavHeader();
 
 	SFM.getMarkdownFileContents("selected.md",SFMsecPrototypes);
 
-	OHCsecMenuRepoFilesFolders.innerHTML = OHC.getMenuRepoFilesFolders();
+	FGAsecMenuRepoFilesFolders.innerHTML = FGA.getMenuFilesGithubApi();
+
+	GATsecGithubAccessToken.innerHTML = GAT.getMenuGitHubAccessToken();
 
 	FOBsecFileOpenBasic.innerHTML = FOB.getMenuFileOpenBasic( divContents, divPopUpData );
 
@@ -203,8 +211,9 @@ function init() {
 
 	THM.init();
 
-	OHC.onHashChange();
+	FGA.getFiles();
 
+	FOB.onHashChange();
 
 }
 
