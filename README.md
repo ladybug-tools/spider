@@ -11,9 +11,9 @@ _All of the above are embedded interactive scripts available here_
 
 ## Ladybug Tools / Spider: [Latest Issues]( #plugins/view-github-issues.html )
 
-## Ladybug Tools / Spider gbXML Tools: [Latest Issues]( #plugins/view-github-issues-spider-gbxml-tools.html )
+## Ladybug Tools / [Spider gbXML Tools]( https://www.ladybug.tools/spider-gbxml-tools/ ): [Latest Issues]( #plugins/view-github-issues-spider-gbxml-tools.html )
 
-## Ladybug Tools / Spider gbXML Fixer: [Latest Issues]( #plugins/view-github-issues-spider-gbxml-fixer.html )
+## Ladybug Tools / [Spider gbXML Fixer]( https://www.ladybug.tools/spider-gbxml-fixer/ ): [Latest Issues]( #plugins/view-github-issues-spider-gbxml-fixer.html )
 
 
 ## Examples of interest in this repo
