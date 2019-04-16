@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Basic TooToo HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2019-03-02" >
+<title></title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus, a:active { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	/*
+	#navMenu { background-color: #eee; left: 0; margin: 20px; max-width: 300px; padding: 0 10px; position: absolute; top: 0; }
+	*/
+
+</style>
+</head>
+<body>
+<script src=rad-to-three.js ></script>
+<script src=rad-converter.js ></script>
+
+	<nav id="navMenu" >
+
+		<div id="divTitle" ></div>
+
+		<p>
+			<button id=but onclick=setIt(); accessKey= 'z' title='access key: z '>button button</button>
+		</p>
+
+	</nav>
+
+	<main>
+
+		<div id="divContents" >
+
+			<textarea id=txt style=height:50rem;width:100%  ></textarea>
+		</div>
+
+	</main>
+
+
+<script>
+
+const POL = {};
+
+const urlSourceCode = "https://github.com/zzzzz/xxxxx.html";
+const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
+
+init();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+	//divContents.innerHTML += `${ ( new Date ) }<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>`;
+
+	let url = "../test-data/sample-file.rad"
+
+
+	requestFile( url );
+
+}
+
+function requestFile( url ) {
+
+	xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+
+}
+
+function callback( xhr ) {
+
+	let response, json, lines;
+
+	text = xhr.target.response;
+
+	POL.jsonRad = RAD.addDataFile( text );
+
+	POL.getRad2pol();
+
+	console.log( 'json', json );
+
+}
+
+
+
+POL.getRad2pol = function() {
+
+	faces = [];
+
+	for ( surface of POL.jsonRad ) {
+
+		verticesSurface = surface[ 1 ].vertices;
+
+		verticesFace = verticesSurface.map( vertex => {
+
+			ff = `{ "x": ${ vertex[ 0 ] }, "y": ${ vertex[ 1 ] }, "z": ${ vertex[ 2 ] } }`;
+
+			return ff;
+		} );
+
+		item =
+`
+{
+	"name": "${ surface[ 1 ].modifier }",
+	"face_type": "${ surface[ 1 ].modifier }",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ ${ verticesFace } ]
+}
+`;
+
+		faces.push( item );
+
+	}
+
+	model =
+`{
+    "convert_to_meters": 1,
+    "type": "Model",
+    "name": "face_by_face_model",
+	"faces": [
+		${ faces }
+	]
+}
+`;
+
+	console.log( 'verticesFace', verticesFace );
+	console.log( 'faces', faces );
+	txt.value = model;
+
+}
+
+
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+	const htm =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=${ urlSourceCodeIcon } height=18 style=opacity:0.5; >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,666 @@
+{ "convert_to_meters": 1,
+    "type": "Model",
+    "name": "face_by_face_model",
+	"faces": [
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 1, "y": 3, "z": 5 },{ "x": 0, "y": 0, "z": 5 },{ "x": 1, "y": 1, "z": 5 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 11, "y": 1, "z": 5 },{ "x": 1, "y": 1, "z": 5 },{ "x": 0, "y": 0, "z": 5 },{ "x": 13, "y": 0, "z": 5 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 1, "y": 3, "z": 5 },{ "x": 11, "y": 3, "z": 5 },{ "x": 13, "y": 9, "z": 5 },{ "x": 0, "y": 9, "z": 5 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 0, "z": 5 },{ "x": 1, "y": 3, "z": 5 },{ "x": 0, "y": 9, "z": 5 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 11, "y": 3, "z": 5 },{ "x": 11, "y": 1, "z": 5 },{ "x": 13, "y": 0, "z": 5 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 13, "y": 0, "z": 5 },{ "x": 13, "y": 9, "z": 5 },{ "x": 11, "y": 3, "z": 5 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 13, "y": 0, "z": 0 },{ "x": 13, "y": 0, "z": 5 },{ "x": 0, "y": 0, "z": 5 },{ "x": 0, "y": 0, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 13, "y": 0, "z": 0 },{ "x": 13, "y": 9, "z": 0 },{ "x": 13, "y": 9, "z": 5 },{ "x": 13, "y": 0, "z": 5 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 0, "z": 5 },{ "x": 0, "y": 9, "z": 5 },{ "x": 0, "y": 9, "z": 0 },{ "x": 0, "y": 0, "z": 0 } ]
+}
+,
+{
+	"name": "generic_floor",
+	"face_type": "generic_floor",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 0, "z": 0 },{ "x": 0, "y": 9, "z": 0 },{ "x": 13, "y": 9, "z": 0 },{ "x": 13, "y": 0, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 12, "y": 9, "z": 3 },{ "x": 13, "y": 9, "z": 0 },{ "x": 8, "y": 9, "z": 3 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 4, "y": 9, "z": 1 },{ "x": 8, "y": 9, "z": 3 },{ "x": 13, "y": 9, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 13, "y": 9, "z": 5 },{ "x": 13, "y": 9, "z": 0 },{ "x": 12, "y": 9, "z": 3 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 8, "y": 9, "z": 4 },{ "x": 13, "y": 9, "z": 5 },{ "x": 12, "y": 9, "z": 4 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 12, "y": 9, "z": 3 },{ "x": 12, "y": 9, "z": 4 },{ "x": 13, "y": 9, "z": 5 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 9, "z": 5 },{ "x": 13, "y": 9, "z": 5 },{ "x": 8, "y": 9, "z": 4 },{ "x": 4, "y": 9, "z": 4 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 8, "y": 9, "z": 4 },{ "x": 8, "y": 9, "z": 3 },{ "x": 4, "y": 9, "z": 4 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 1, "y": 9, "z": 1 },{ "x": 4, "y": 9, "z": 1 },{ "x": 0, "y": 9, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 13, "y": 9, "z": 0 },{ "x": 0, "y": 9, "z": 0 },{ "x": 4, "y": 9, "z": 1 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 9, "z": 0 },{ "x": 0, "y": 9, "z": 5 },{ "x": 1, "y": 9, "z": 4 },{ "x": 1, "y": 9, "z": 1 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 9, "z": 5 },{ "x": 4, "y": 9, "z": 4 },{ "x": 1, "y": 9, "z": 4 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 8, "y": 9, "z": 3 },{ "x": 4, "y": 9, "z": 1 },{ "x": 4, "y": 9, "z": 4 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -7, "y": 1, "z": 3 },{ "x": -8, "y": -4, "z": 3 },{ "x": -7, "y": -2, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": -4, "z": 3 },{ "x": 0, "y": -4, "z": 3 },{ "x": -1, "y": -2, "z": 3 },{ "x": -7, "y": -2, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -7, "y": 1, "z": 3 },{ "x": -1, "y": 1, "z": 3 },{ "x": -2, "y": 5, "z": 3 },{ "x": -6, "y": 5, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": 9, "z": 3 },{ "x": -8, "y": -4, "z": 3 },{ "x": -7, "y": 1, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -6, "y": 8, "z": 3 },{ "x": -8, "y": 9, "z": 3 },{ "x": -6, "y": 5, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -7, "y": 1, "z": 3 },{ "x": -6, "y": 5, "z": 3 },{ "x": -8, "y": 9, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -6, "y": 8, "z": 3 },{ "x": -2, "y": 8, "z": 3 },{ "x": 0, "y": 9, "z": 3 },{ "x": -8, "y": 9, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -1, "y": 1, "z": 3 },{ "x": -1, "y": -2, "z": 3 },{ "x": 0, "y": -4, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 9, "z": 3 },{ "x": -1, "y": 1, "z": 3 },{ "x": 0, "y": -4, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -2, "y": 8, "z": 3 },{ "x": -2, "y": 5, "z": 3 },{ "x": 0, "y": 9, "z": 3 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -1, "y": 1, "z": 3 },{ "x": 0, "y": 9, "z": 3 },{ "x": -2, "y": 5, "z": 3 } ]
+}
+,
+{
+	"name": "generic_floor",
+	"face_type": "generic_floor",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": -4, "z": 0 },{ "x": -8, "y": 9, "z": 0 },{ "x": 0, "y": 9, "z": 0 },{ "x": 0, "y": -4, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": -4, "z": 3 },{ "x": -8, "y": 9, "z": 3 },{ "x": -8, "y": 9, "z": 0 },{ "x": -8, "y": -4, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -1, "y": 9, "z": 2 },{ "x": 0, "y": 9, "z": 0 },{ "x": -1, "y": 9, "z": 1 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 9, "z": 0 },{ "x": -8, "y": 9, "z": 0 },{ "x": -7, "y": 9, "z": 1 },{ "x": -1, "y": 9, "z": 1 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -1, "y": 9, "z": 2 },{ "x": -7, "y": 9, "z": 2 },{ "x": -8, "y": 9, "z": 3 },{ "x": 0, "y": 9, "z": 3 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": 9, "z": 0 },{ "x": -1, "y": 9, "z": 2 },{ "x": 0, "y": 9, "z": 3 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -7, "y": 9, "z": 2 },{ "x": -7, "y": 9, "z": 1 },{ "x": -8, "y": 9, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": 9, "z": 0 },{ "x": -8, "y": 9, "z": 3 },{ "x": -7, "y": 9, "z": 2 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": -4, "z": 0 },{ "x": 0, "y": 9, "z": 0 },{ "x": 0, "y": 9, "z": 3 },{ "x": 0, "y": -4, "z": 3 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -7, "y": -4, "z": 2 },{ "x": -8, "y": -4, "z": 0 },{ "x": -7, "y": -4, "z": 1 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": -4, "z": 0 },{ "x": 0, "y": -4, "z": 0 },{ "x": -1, "y": -4, "z": 1 },{ "x": -7, "y": -4, "z": 1 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -7, "y": -4, "z": 2 },{ "x": -1, "y": -4, "z": 2 },{ "x": 0, "y": -4, "z": 3 },{ "x": -8, "y": -4, "z": 3 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": -4, "z": 0 },{ "x": -7, "y": -4, "z": 2 },{ "x": -8, "y": -4, "z": 3 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -1, "y": -4, "z": 2 },{ "x": -1, "y": -4, "z": 1 },{ "x": 0, "y": -4, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 0, "y": -4, "z": 0 },{ "x": 0, "y": -4, "z": 3 },{ "x": -1, "y": -4, "z": 2 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 9, "y": -7, "z": 0 },{ "x": 9, "y": -7, "z": 15 },{ "x": 3, "y": -7, "z": 15 },{ "x": 3, "y": -7, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 9, "y": -7, "z": 0 },{ "x": 9, "y": -1, "z": 0 },{ "x": 9, "y": -1, "z": 15 },{ "x": 9, "y": -7, "z": 15 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 9, "y": -1, "z": 0 },{ "x": 3, "y": -1, "z": 0 },{ "x": 3, "y": -1, "z": 15 },{ "x": 9, "y": -1, "z": 15 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 3, "y": -7, "z": 15 },{ "x": 3, "y": -1, "z": 15 },{ "x": 3, "y": -1, "z": 0 },{ "x": 3, "y": -7, "z": 0 } ]
+}
+,
+{
+	"name": "generic_floor",
+	"face_type": "generic_floor",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 3, "y": -7, "z": 0 },{ "x": 3, "y": -1, "z": 0 },{ "x": 9, "y": -1, "z": 0 },{ "x": 9, "y": -7, "z": 0 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 9, "y": -7, "z": 15 },{ "x": 9, "y": -1, "z": 15 },{ "x": 3, "y": -1, "z": 15 },{ "x": 3, "y": -7, "z": 15 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 8, "y": 13, "z": 0 },{ "x": 8, "y": 13, "z": 4 },{ "x": -8, "y": 13, "z": 4 },{ "x": -8, "y": 13, "z": 0 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 8, "y": 13, "z": 0 },{ "x": 8, "y": 20, "z": 0 },{ "x": 8, "y": 20, "z": 4 },{ "x": 8, "y": 13, "z": 4 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 8, "y": 20, "z": 0 },{ "x": -8, "y": 20, "z": 0 },{ "x": -8, "y": 20, "z": 4 },{ "x": 8, "y": 20, "z": 4 } ]
+}
+,
+{
+	"name": "generic_wall",
+	"face_type": "generic_wall",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": 13, "z": 4 },{ "x": -8, "y": 20, "z": 4 },{ "x": -8, "y": 20, "z": 0 },{ "x": -8, "y": 13, "z": 0 } ]
+}
+,
+{
+	"name": "generic_floor",
+	"face_type": "generic_floor",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": -8, "y": 13, "z": 0 },{ "x": -8, "y": 20, "z": 0 },{ "x": 8, "y": 20, "z": 0 },{ "x": 8, "y": 13, "z": 0 } ]
+}
+,
+{
+	"name": "generic_roof",
+	"face_type": "generic_roof",
+	"type": "Face",
+	"parent": {
+		"name": "room",
+		"type": "zone"
+	},
+	"vertices": [ { "x": 8, "y": 13, "z": 4 },{ "x": 8, "y": 20, "z": 4 },{ "x": -8, "y": 20, "z": 4 },{ "x": -8, "y": 13, "z": 4 } ]
+}
+
+	]
+}

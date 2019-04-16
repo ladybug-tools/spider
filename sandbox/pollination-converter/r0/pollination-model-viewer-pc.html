@@ -53,7 +53,8 @@
 
 //const url = "../data-files/pollination-api/model.json";
 
-const url = "https://raw.githubusercontent.com/pollination/model-service/master/app/models/samples/model.py";
+//const url = "https://raw.githubusercontent.com/pollination/model-service/master/app/models/samples/model.py";
+const url = "../test-data/pc-test1.json";
 
 let meshes = new THREE.Group();
 const colors = {
@@ -132,7 +133,7 @@ function requestFile( url ) {
 
 function callback( xhr ) {
 
-	const response = xhr.target.response.slice( 15 );
+	const response = xhr.target.response;
 	//console.log( 'response', response );
 
 	const json = JSON.parse( response );
@@ -146,41 +147,21 @@ function callback( xhr ) {
 
 		// assume four vertices per face - just for now
 
-		if ( face.apertures ) {
+		let geometry;
 
-			for ( let aperture of face.apertures ) {
+		if ( face.vertices.length === 4 ) {
 
-				let geometryMesh = getQuadFaceAperture( face.vertices, aperture.vertices );
-				geometryMesh.computeVertexNormals();
+			geometry = getQuadGeometry1( face.vertices );
 
-				const color = colors[ face.face_type ]
-				const materialMesh = new THREE.MeshBasicMaterial( { color: color, side: 2 } );
-				const mesh = new THREE.Mesh( geometryMesh, materialMesh );
-				mesh.userData.face = face;
-				//console.log( 'aperture', aperture );
+		} if ( face.vertices.length === 3 ) {
 
-				meshes.add( mesh );
+			geometry = getTriGeometry1( face.vertices );
+		}
 
-				const opacity = aperture.rad_modifier.r_transmittance;
-				//console.log( '', aperture.rad_modifier.r_transmittance );
-
-				const geometry = getQuadGeometry2( aperture.vertices );
-				const material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: opacity, side: 2, transparent: true } );
-				const apertureMesh = new THREE.Mesh( geometry, material );
-				apertureMesh.userData.face = aperture;
-				//console.log( 'aperture', aperture );
-
-				meshes.add( apertureMesh );
-
-			}
-
-		} else {
-
-			const geometry = getQuadGeometry1( face.vertices );
 			geometry.computeVertexNormals();
 
 			const color = colors[ face.face_type ]
-			const material = new THREE.MeshBasicMaterial( { color: color, side: 2 });
+			const material = new THREE.MeshNormalMaterial( { color: color, side: 2 });
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.userData.face = face;
 
@@ -191,7 +172,7 @@ function callback( xhr ) {
 
 			meshes.add( mesh );
 
-		}
+
 
 	}
 
@@ -223,6 +204,29 @@ function getQuadFaceAperture( verticesFace, verticesAperture ) {
 
 }
 
+
+
+function getTriGeometry1( verticesObj ) {
+	//console.log( 'verticesObj', verticesObj );
+
+	//const vertices = verticesObj.map( vertex => [ vertex.x, vertex.y, vertex.z ] );
+	const vertices = verticesObj.map( vertex => Object.values( vertex ) );
+
+	const verticesV3 = vertices.map( item => new THREE.Vector3().fromArray( item ) );
+
+	const points = [
+
+		verticesV3[ 0 ], verticesV3[ 1 ], verticesV3[ 2 ]
+
+	];
+
+	const geometry = new THREE.BufferGeometry();
+	geometry.setFromPoints( points );
+	geometry.computeVertexNormals();
+
+	return geometry;
+
+}
 
 
 function getQuadGeometry1( verticesObj ) {
