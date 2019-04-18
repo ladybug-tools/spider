@@ -31,7 +31,7 @@
 		<div id="divTitle" ></div>
 
 		<p>
-			<button id=but onclick=setIt(); accessKey= 'z' title='access key: z '>button button</button>
+			<button id=but onclick=saveFile(); >save file</button>
 		</p>
 
 	</nav>
@@ -61,7 +61,8 @@ function init() {
 
 	//divContents.innerHTML += `${ ( new Date ) }<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>`;
 
-	let url = "../test-data/sample-file.rad"
+	//let url = "../test-data/sample-file.rad";
+	let url = "../test-data/whale2.rad"
 
 
 	requestFile( url );
@@ -91,7 +92,7 @@ function callback( xhr ) {
 
 	POL.getRad2pol();
 
-	console.log( 'json', json );
+	//console.log( 'json', json );
 
 }
 
@@ -101,9 +102,13 @@ POL.getRad2pol = function() {
 
 	faces = [];
 
-	for ( surface of POL.jsonRad ) {
+	for ( surface of RAD.json.surfaces ) {
 
-		verticesSurface = surface[ 1 ].vertices;
+		console.log( '', surface );
+
+		if ( !surface.vertices ) { continue; }
+		verticesSurface = surface.vertices;
+		console.log( 'verticesSurface', verticesSurface );
 
 		verticesFace = verticesSurface.map( vertex => {
 
@@ -115,8 +120,8 @@ POL.getRad2pol = function() {
 		item =
 `
 {
-	"name": "${ surface[ 1 ].modifier }",
-	"face_type": "${ surface[ 1 ].modifier }",
+	"name": "${ surface.modifier }",
+	"face_type": "${ surface.modifier }",
 	"type": "Face",
 	"parent": {
 		"name": "room",
@@ -141,13 +146,25 @@ POL.getRad2pol = function() {
 }
 `;
 
-	console.log( 'verticesFace', verticesFace );
-	console.log( 'faces', faces );
+	//console.log( 'verticesFace', verticesFace );
+	//console.log( 'faces', faces );
 	txt.value = model;
 
 }
 
 
+
+function saveFile() {
+
+	let blob = new Blob( [ txt.value ] );
+	let a = document.body.appendChild( document.createElement( 'a' ) );
+	a.href = window.URL.createObjectURL( blob );
+	a.download = 'pollination.json';
+	a.click();
+	//		delete a;
+	a = null;
+
+}
 
 function getTitle() {
 

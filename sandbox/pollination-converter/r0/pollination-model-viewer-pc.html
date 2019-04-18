@@ -50,18 +50,17 @@
 
 
 //const url = "https://raw.githubusercontent.com/pollination/api/master/spec/schema_samples/model_facebyface.json";
-
 //const url = "../data-files/pollination-api/model.json";
-
 //const url = "https://raw.githubusercontent.com/pollination/model-service/master/app/models/samples/model.py";
-const url = "../test-data/pc-test1.json";
+const url = "../test-data/pollination.json";
 
 let meshes = new THREE.Group();
 const colors = {
 
 	Wall: 0xFFB400,
 	RoofCeiling: 0x800000,
-	Floor: 0x80FFFF
+	Floor: 0x80FFFF,
+	whale_mat: 0x020204
 
 };
 const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/sandbox/pollination-viewers/";
@@ -156,23 +155,26 @@ function callback( xhr ) {
 		} if ( face.vertices.length === 3 ) {
 
 			geometry = getTriGeometry1( face.vertices );
+
+		} else {
+
+			continue;
+
 		}
 
-			geometry.computeVertexNormals();
+		geometry.computeVertexNormals();
 
-			const color = colors[ face.face_type ]
-			const material = new THREE.MeshNormalMaterial( { color: color, side: 2 });
-			mesh = new THREE.Mesh( geometry, material );
-			mesh.userData.face = face;
+		const color = colors[ face.face_type ];
+		const material = new THREE.MeshNormalMaterial( { color: color, side: 2 });
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.userData.face = face;
 
-			const edgesGeometry = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry
-			const edgesMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } );
-			const edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
-			mesh.add( edges );
+		const edgesGeometry = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry
+		const edgesMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } );
+		const edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
+		mesh.add( edges );
 
-			meshes.add( mesh );
-
-
+		meshes.add( mesh );
 
 	}
 
@@ -227,6 +229,7 @@ function getTriGeometry1( verticesObj ) {
 	return geometry;
 
 }
+
 
 
 function getQuadGeometry1( verticesObj ) {

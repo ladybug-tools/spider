@@ -59,6 +59,11 @@ RAD.colors = {
 
 RAD.addDataFile = function( text ) {
 
+	//RAD.url = url;
+	RAD.jsonData = [];
+
+	RAD.json = { 'surfaces': [], 'materials': [], 'other': [] };
+
 /* 	RAD.materialType = THR.scene.getObjectByName( 'lightAmbient') ?
 		THREE.MeshPhongMaterial
 		:
@@ -67,9 +72,11 @@ RAD.addDataFile = function( text ) {
 
 	RAD.divPopUpData = document.getElementById( 'divPopUpData' );
 
-	const json = RAD.radToJson( text );
 
-	//json.forEach( result => RAD.json[ result[ 0 ] ].push( result[ 1 ] ) ); // not easy to understand
+	const json = RAD.radToJson( text );
+	console.log( 'json', json );
+
+	json.forEach( result => RAD.json[ result[ 0 ] ].push( result[ 1 ] ) ); // not easy to understand
 
 	//RAD.setThreeJsWindowUpdate( RAD.json );
 

@@ -8,6 +8,11 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 ## Concept
 
+R0.1.0
+## [Pollination Converter]( http://www.ladybug.tools/spider/sandbox/pollination-converter/r0/pollination-converter-0-0-0.html )
+
+* F ~ Adds 'save file button'
+* B ~ More forgiving of data not understood
 
 ## [Pollination Converter]( http://www.ladybug.tools/spider/sandbox/pollination-converter/r0/pollination-converter-0-0-0.html )
 
@@ -19,6 +24,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 _Pollination Converter Viewer_
 
 First pass at creating a script that converts Radiance RAD files to Pollination JSON files
+* Handles 3 and 4 vertices faces only / no apertures / no colors
 
 ## Wish list
 
