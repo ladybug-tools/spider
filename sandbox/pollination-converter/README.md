@@ -42,6 +42,11 @@ First pass at creating a script that converts Radiance RAD files to Pollination 
 
 ## Change Log
 
+
+### 2019-04-18 ~ Theo
+
+Pollination Converter R0.1.0
+
 ### 2019-04-16 ~ Theo
 
 Pollination Converter R0.0.0

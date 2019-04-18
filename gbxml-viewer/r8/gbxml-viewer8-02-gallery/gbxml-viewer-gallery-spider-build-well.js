@@ -9,7 +9,7 @@
 	gal.repo = '/spider';
 	gal.pathRepo = 'cookbook/07-create-exportable-buildings/test-gbxml-files/';
 
-	gal.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	gal.iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 
 	gal.threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html';
 
@@ -34,7 +34,7 @@
 
 			const fileName = encodeURI( file.name );
 
-			txt += 
+			txt +=
 
 			'<div style=margin-bottom:8px; >' +
 

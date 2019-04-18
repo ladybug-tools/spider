@@ -10,7 +10,7 @@
 	var urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/' + pathRepo;
 	var urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
-	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	var iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 	var threeDefaultFile = '../gbxml-viewer10-01-core/gbxml-viewer10-core.html';
 
 
