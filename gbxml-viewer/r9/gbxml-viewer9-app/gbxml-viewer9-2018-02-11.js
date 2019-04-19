@@ -3,7 +3,7 @@
 
 //	location.hash = 'threejs-basic.html';
 
-	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	var iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 	var threeDefaultFile = '../gbxml-viewer9-01-core/gbxml-viewer9-core.html';
 
 

@@ -8,7 +8,7 @@
 	var urlGitHubPage = 'https://rawgit.com/' + user + repo + '/master/';
 	var urlGitHubSource = 'https://github.com/' + user + repo + '/blob/master/' + pathRepo;
 
-	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	var iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 	var threeDefaultFile = '../gv-gbx/gv-gbx.html';
 
 	init();

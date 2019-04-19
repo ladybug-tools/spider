@@ -45,7 +45,7 @@
 		<h1 id = "title" >
 			<a href="./index.html" target=_top >&#x2302;</a> &raquo;
 			<a href="" >Site Content</a>
-			<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/shape-geometry.html target="_top"><img src="https://status.github.com/images/invertocat.png" height=25 ></a>
+			<a href=https://github.com/ladybug-tools/spider/blob/master/sandbox/speed-specification/shape-geometry.html target="_top"><img src="https://pushme-pullyou.github.io/github-mark-64.png" height=25 ></a>
 
 		</h1>
 
@@ -112,7 +112,7 @@
 
 	<canvas id="canvasOrtho"  height=300 width=300 ></canvas>
 
-	
+
 
 <script>
 
@@ -316,7 +316,7 @@
 		let wid = theBuilding.width;
 		let flr = theBuilding.storeys ;
 
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 //console.log( 'area', area  );
 
 			const areaNew = parseInt( inpArea.value, 10 )
@@ -359,11 +359,11 @@
 
 			inpLength.value = len;
 
-		} 
+		}
 
 		const pathBox = [ v2( len, 0 ), v2( 0, 0 ), v2( 0, wid ), v2( len, wid ), v2( len, 0 ) ];
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Validations</p>' +
 			'<p>Calculated Area: ' + flr * ( len * wid ) + '<p>' +
 			'<p>[flr * ( len * wid )]</p>' +
@@ -395,7 +395,7 @@
 
 		}
 
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 
 			const areaNew = parseInt( inpArea.value, 10 )
 			const flrNew = parseInt( inpFloors.value, 10 );
@@ -445,7 +445,7 @@
 		];
 
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Validations</p>' +
 			'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
 			'<p>[ flr * ( thk * len + thk * ( wid - thk ) ) ]</p>' +
@@ -474,7 +474,7 @@
 
 		}
 
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 
 			const areaNew = parseInt( inpArea.value, 10 )
 			const flrNew = parseInt( inpFloors.value, 10 );
@@ -526,7 +526,7 @@
 			v2( len, 0 )
 		];
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Validations T Shape</p>' +
 			'<p>Calculated Area: ' + flr * ( thk * len + thk * ( wid - thk ) ) + '<p>' +
 			'<p>[ flr * ( thk * len + thk * ( wid - thk ) ) ]</p>' +
@@ -556,7 +556,7 @@
 
 		}
 
-		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) { 
+		if ( area !== parseInt( inpArea.value, 10 ) || flr !== parseInt( inpFloors.value, 10 ) ) {
 
 			const areaNew = parseInt( inpArea.value, 10 );
 			const areaTemp = area * flrNew / flr;
@@ -610,7 +610,7 @@
 			v2( len - thk, 0.5 * ( wid - thk ) )
 		];
 
-		divValidation.innerHTML = 
+		divValidation.innerHTML =
 			'<p>Valibations - H Shape</p>' +
 			'<p>Calculated Area: ' + ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) + '</p>' +
 			'<p>[ ( flr * ( 2 * thk * wid ) + thk * ( len - 2 * thk ) ) ]</p>' +

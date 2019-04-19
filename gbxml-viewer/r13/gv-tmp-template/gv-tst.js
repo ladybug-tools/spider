@@ -4,7 +4,7 @@
 	TST.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxml-viewer/r13/';
 
 
-	//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	//COR.iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 	TST.iconGitHubMark = "../assets/github-mark.png";
 
 

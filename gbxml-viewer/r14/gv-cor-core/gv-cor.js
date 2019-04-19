@@ -12,7 +12,7 @@ COR.releaseSourceURL = 'https://github.com/ladybug-tools/spider/tree/master/gbxm
 COR.threeDefaultFile = '../gv-thr-threejs/gv-thr-run.html';
 COR.uriDefaultFile = '../assets/splash-screen.md';
 
-//COR.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+//COR.iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 COR.iconGitHubMark = "../assets/github-mark.png";
 
 

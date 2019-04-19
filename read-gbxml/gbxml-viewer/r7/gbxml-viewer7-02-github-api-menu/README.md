@@ -18,7 +18,7 @@ Click on any link to a gbXML file in the left menu to view the data in 3D here i
 
 The menu items each have three links:
 
-* The <img src="https://status.github.com/images/invertocat.png" height=18 > icon takes you to the XML source code on GitHb
+* The <img src="https://pushme-pullyou.github.io/github-mark-64.png" height=18 > icon takes you to the XML source code on GitHb
 * The middle or text link cause the XML file to be displayed in this window
 * The external link or box-like icon on the right opens the file full-screen. The link may be copied to any document or email that accepts links.
 

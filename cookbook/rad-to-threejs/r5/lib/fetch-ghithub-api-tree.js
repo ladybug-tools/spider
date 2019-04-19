@@ -8,7 +8,7 @@ const urlDefaultFile = 'https://rawgit.com/ladybug-tools/spider/master/radiance-
 const urlGitHubSource = 'https://github.com/ladybug-tools/spider/blob/master/';
 const urlGitHubPage = 'https://rawgit.com/ladybug-tools/spider/master/';
 
-const iconGitHubMark = '<img src = "https://status.github.com/images/invertocat.png" height=14 style=vertical-align:middle>';
+const iconGitHubMark = '<img src = "https://pushme-pullyou.github.io/github-mark-64.png" height=14 style=vertical-align:middle>';
 
 
 

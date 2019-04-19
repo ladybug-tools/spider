@@ -3,7 +3,7 @@
 
 //	location.hash = 'threejs-basic.html';
 
-	var iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	var iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 	var threeDefaultFile = '../gbxml-viewer9-01-core/gbxml-viewer9-core.html';
 
 	let css, script, divMenu, divContainer, hamburger;
@@ -17,8 +17,8 @@
 
 		<div>
 			<a href="http://www.ladybug.tools/" target="_top" >Ladybug Tools</a> &raquo; <br>
-			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo; 
-			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo; 
+			<a href="http://www.ladybug.tools/spider/" target="_top" >&#x1f578;</a> &raquo;
+			<a href="../index.html" target="_top" style=font-size:24px; >&#x2302;</a> &raquo;
 		</div>
 
 		<h2>
@@ -158,7 +158,7 @@
 
 	function drop( event ) {
 
-		event.preventDefault(); 
+		event.preventDefault();
 		setIfrThree();
 
 		var iframeUrl = event.dataTransfer.getData( 'URL' );

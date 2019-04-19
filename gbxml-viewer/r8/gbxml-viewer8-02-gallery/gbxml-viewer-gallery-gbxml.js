@@ -6,7 +6,7 @@
 	gal.repo = '/Sample-gbXML-Files';
 	gal.pathRepo = '';
 
-	gal.iconInfo = '<img src="https://status.github.com/images/invertocat.png" height=14 >';
+	gal.iconInfo = '<img src="https://pushme-pullyou.github.io/github-mark-64.png" height=14 >';
 
 	gal.threeDefaultFile = '../gbxml-viewer8-01-core/gbxml-viewer8-core-r3.html';
 
@@ -31,7 +31,7 @@
 
 			const fileName = encodeURI( file.name );
 
-			txt += 
+			txt +=
 
 			'<div style=margin-bottom:8px; >' +
 
@@ -72,7 +72,7 @@
 		if ( !divAppMenu ) {
 
 			divAppMenu= document.body.appendChild( document.createElement( 'div' ) );
-			divAppMenu.style.cssText = 
+			divAppMenu.style.cssText =
 				'background-color: white; border: 1px solid red; max-height: 95%; max-width: 350px; opacity: 0.85; overflow: auto; ' +
 				' padding: 10px; position: fixed; right: 30px; top: 20px; z-index:100000; ';
 
