@@ -1,4 +1,4 @@
-<gbXML temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" >
+<gbXML xmlns="http://www.gbxml.org/schema" temperatureUnit="C" lengthUnit="Meters" areaUnit="SquareMeters" volumeUnit="CubicMeters" >
   <Campus id="aim0002">
     <Location>
       <StationId IDType="WMO">140741_2006</StationId>
