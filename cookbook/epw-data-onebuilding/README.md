@@ -10,7 +10,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 <iframe src=https://www.ladybug.tools/spider/cookbook/epw-data-onebuilding/index.html width=100% height=600px >Iframes are not viewable in GitHub source code view</iframe>
 
 
-## Full Screen: [EPW OneBuilding Data ]( https://www.ladybug.tools/spider/cookbook/epw-data-onebuildingindex.html )
+## Full Screen: [EPW OneBuilding Data ]( https://www.ladybug.tools/spider/cookbook/epw-data-onebuilding/index.html )
 
 
 ## Concept
@@ -31,7 +31,7 @@ Charting EPW data from http://climate.onebuilding.org
 
 epw-onebuilding-data-0-04.01
 
-* F - eod: add searh to select elements
+* F - eod: add seacrh to select elements
 * F - eod: enable selecting any of the 35 fields
 
 ### 2019-07-08 ~ Theo
