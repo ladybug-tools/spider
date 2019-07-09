@@ -62,8 +62,6 @@
 			<select id=selFile onchange=setZipFile(); size=12  ></select>
 		</p>
 
-		<p><button onclick=investigateFile(); >investigate file</button></p>
-
 		<div id=divCalculations ></div>
 
 		<div id=divFields ></div>
@@ -378,11 +376,6 @@ function parseEpw(){
 	 EPW.days = EPW.lines.slice( 8, -1 ).map( line => line.split( ',' ).map( item => Number( item ) ) );
 	//console.log( 'EPW.days', EPW.days );
 
-
-	//console.log( 'data', data );
-
-	getCalculations( 6 );
-
 	updateByField( 6 );
 
 	investigateFile();
@@ -414,7 +407,8 @@ function getCalculations( index ) {
 
 	divCalculations.innerHTML =
 	`
-		Units: ${ EPW.fields[ 6 ] }<br>
+		<h4>Calculations</h4>
+		Field: ${ EPW.fields[ index ] }<br>
 		Min: ${ EPW.min }<br>
 		Max: ${ EPW.max }<br>
 		Average: ${ avg.toFixed( 2 ) }<br>
@@ -447,7 +441,12 @@ function investigateFile() {
 
 	divFields.innerHTML =
 	`
-		<h4>Unique values found for each field</h4>
+		<h4>Fields in EPW file</h4>
+		<p>
+			Numbers indicate the unique values found for each field<.
+			Click buttons to view hourly data.
+			Click on mesh to view data points.
+		</p>
 	 	${ arr.join( "<br>" ) }
 	 `;
 
@@ -460,6 +459,8 @@ function updateByField( index ) {
 	const data = EPW.days.map( record => record[ index ] );
 
 	updateScene( data );
+
+	getCalculations( index );
 
 }
 

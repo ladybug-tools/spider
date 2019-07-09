@@ -10,7 +10,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 <iframe src=https://www.ladybug.tools/spider/cookbook/epw-data-onebuilding/index.html width=100% height=600px >Iframes are not viewable in GitHub source code view</iframe>
 
 
-## Full Screen: [EPW OneBuilding Data ]( https://www.ladybug.tools/spider/cookbook/epw-data-onebuilding/index.html )
+## Full Screen: [EPW OneBuilding Data ]( https://ladybug-tools.github.io/spider/cookbook/epw-data-onebuilding/index.html )
 
 
 ## Concept
