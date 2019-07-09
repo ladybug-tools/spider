@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Basic TooToo HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2019-05-25" >
+<meta name = "version" content = "0.0.0" >
+<title>basic-html</title>
+<style>
+
+	* { box-sizing: border-box; }
+
+	:root { --mnu-width: 22rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
+
+	html { height: 100%; }
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 0.5rem; }
+
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus, a:active { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	/*
+	main { border: 0px; height: 100%; left: var( --mnu-width ); margin: 0;
+		padding: 0 1rem; position: absolute; width: calc( 100% - var( --mnu-width ) );  }
+
+	#navMenu { background-color: #eee; left: 0; margin: 0; padding: 0 1rem;
+		position: absolute; top: 0; width: var( --mnu-width ); }
+	*/
+
+</style>
+</head>
+<body>
+
+	<nav id="navMenu" >
+
+		<div id="divTitle" ></div>
+
+		<p>
+			<button id=but onclick=setIt(); accessKey= 'z' title='access key: z '>buttonbutton</button>
+		</p>
+
+	</nav>
+
+	<main>
+
+		<div id="divContents" ></div>
+
+	</main>
+
+
+<script>
+
+const urlSourceCode = "https://github.com/zzzzz/xxxxx.html";
+const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
+const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+const epwRegions = [
+	"WMO_Region_1_Africa",
+	"WMO_Region_2_Asia",
+	"WMO_Region_3_South_America",
+	"WMO_Region_4_North_and_Central_America",
+	"WMO_Region_5_Southwest_Pacific",
+	"WMO_Region_6_Europe/default.html",
+	"WMO_Region_7_Antarctica"
+];
+
+count = 0;
+
+epwCountries = [];
+epwZipFiles = [];
+
+
+
+
+init();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+	url = urlCORS + "http://climate.onebuilding.org/" + epwRegions[ count ];
+
+	requestFile( url, callbackCountry );
+
+}
+
+function requestFile( url, callback ) {
+
+	xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET',  url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+function callbackCountry( xhr ) {
+
+	response = xhr.target.response;
+	//console.log( 'response', response );
+
+	const countriesRaw = response.match( /href="(.*?)\/index\.html"/gi ).map( item => item.slice( 6, -1 ))
+
+	const countries = countriesRaw.filter( country => country.startsWith( ".." ) === false );
+
+	const epwCountries.push( ...countries );
+
+	count++;
+
+	if ( count < epwRegions.length ) {
+
+		const url = urlCORS + "http://climate.onebuilding.org/" + epwRegions[ count ];
+
+		requestFile( url, callbackCountry );
+
+	 } else {
+
+		divContents.innerHTML = epwCountries.join( "<br>" );
+
+		
+
+	 }
+
+
+}
+
+
+function callbackFile( xhr ) {
+
+	response = xhr.target.response;
+	//console.log( 'response', response );
+
+	if ( !response ) { console.log( 'xhr', xhr );}
+
+	const files = response.match( /href="(.*?)\.zip"/gi ).map( item => item.slice( 6, -1 ) );
+
+	epwZipFiles.push( ...files );
+
+	divContents.innerHTML = files.join( "<br>" );
+
+}
+
+
+
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+	const version = document.head.querySelector( "[ name=version ]" ).content;
+
+	const htm =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=${ urlSourceCodeIcon } height=18 style=opacity:0.5; >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title } ${ version }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Basic TooToo HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2019-05-25" >
+<meta name = "version" content = "0.0.0" >
+<title></title>
+<style>
+
+	* { box-sizing: border-box; }
+
+	:root { --mnu-width: 25rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
+
+	html { height: 100%; }
+
+	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 0.5rem; }
+
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus, a:active { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	select { width: 100%; }
+	main { border: 0px; height: 100%; left: var( --mnu-width ); margin: 0;
+		padding: 0 1rem; position: absolute; width: calc( 100% - var( --mnu-width ) );  }
+
+	#navMenu { background-color: #eee; left: 0; margin: 0; padding: 0 1rem;
+		position: absolute; top: 0; width: var( --mnu-width ); }
+
+
+</style>
+</head>
+<body>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js ></script>
+
+	<nav id="navMenu" >
+
+		<div id="divTitle" ></div>
+
+		<p>
+			Region:
+			<select id=selRegion onchange=setCountry(); size=7  ></select>
+		</p>
+
+		<p>
+			Country:
+			<select id=selCountry onchange=setFile(); size=12  ></select>
+		</p>
+
+		<p>
+			EPW file:
+			<select id=selFile onchange=fetchFile(); size=12  ></select>
+		</p>
+
+		<div id=divFileNames ></div>
+	</nav>
+
+	<main>
+
+		<div id="divContents" ></div>
+
+	</main>
+
+
+<script>
+
+const urlSourceCode = "https://github.com/zzzzz/xxxxx.html";
+const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
+const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+const epwRegions = [
+	"WMO_Region_1_Africa",
+	"WMO_Region_2_Asia",
+	"WMO_Region_3_South_America",
+	"WMO_Region_4_North_and_Central_America",
+	"WMO_Region_5_Southwest_Pacific",
+	"WMO_Region_6_Europe",
+	"WMO_Region_7_Antarctica"
+];
+
+
+
+
+init();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+	selRegion.innerHTML = epwRegions.map( region => `<option>${ region }<\/option>` );
+
+	selRegion.selectedIndex = 5;
+
+	setCountry();
+
+}
+
+
+function setCountry(){
+
+	region = selRegion.value;
+
+	url = urlCORS + "http://climate.onebuilding.org/" + region;
+
+	requestFile( url, callbackCountry );
+
+}
+
+
+function requestFile( url, callback ) {
+
+	xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET',  url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+
+function callbackCountry( xhr ) {
+
+	response = xhr.target.response;
+	//console.log( 'response', response );
+
+	const countriesRaw = response.match( /href="(.*?)\/index\.html"/gi ).map( item => item.slice( 6, -1 ))
+
+	const countries = countriesRaw.filter( country => country.startsWith( ".." ) === false ).sort();
+
+	selCountry.innerHTML = countries.map( country => `<option>${ country.slice( 0, -11 ) }<\/option>` );
+
+	//selCountry.selectedIndex = 42;
+
+	//setFile();
+
+}
+
+
+function setFile() {
+
+	url = urlCORS + "http://climate.onebuilding.org/" + selRegion.value + "/" + selCountry.value;
+
+	requestFile( url, callbackFile );
+
+}
+
+
+function callbackFile( xhr ) {
+
+	response = xhr.target.response;
+	//console.log( 'response', response );
+
+	const files = response.match( /href="(.*?)\.zip"/gi ).map( item => item.slice( 6, -1 ) );
+
+	//epwZipFiles.push( ...files );
+
+	selFile.innerHTML = files.map( file => `<option>${ file.slice( 0, -4 ) }<\/option>` );
+
+	//selFile.selectedIndex = 200;
+
+	//fetchFile();
+
+}
+
+
+
+
+function fetchFile() {
+
+	url = urlCORS + "http://climate.onebuilding.org/" + selRegion.value + "/" + selCountry.value + "/" +
+		selFile.value + ".zip";
+
+	//console.log( 'url', url );
+
+	divFileNames.innerHTML = "";
+
+	//url = 'https://raw.githubusercontent.com/chiensiTB/EPWRawWeather/master/Weather%20Files/ACT%20Canberra%20949260%20(IWEC).zip'
+	names = [];
+
+	fetch( url )
+
+	.then( function (response ) {
+
+		if ( response.status === 200 || response.status === 0 ) {
+
+			return Promise.resolve( response.blob() );
+
+		} else {
+
+			return Promise.reject( new Error( response.statusText ) );
+
+		}
+	} )
+
+	.then( JSZip.loadAsync )
+
+	.then( function( zip ) {
+
+		zip.forEach( function ( relativePath, zipEntry ) {
+
+			divFileNames.innerHTML += `<p><button onclick=setZipFile("${zipEntry.name}"); >file name: ${zipEntry.name}</button></p>`;
+			//console.log( 'file name: ', zipEntry.name);
+			names.push( zipEntry.name );
+		});
+
+		console.log( 'zip', zip.files );
+
+		files = zip;
+
+		return zip;
+
+	} )
+
+	.then( function ( zip ) {
+
+		//return zip.file("AUS_ACT.Canberra.949260_IWEC.epw" ).async( "string" );
+		return zip.file( names[ 3 ] ).async( "string" );
+		//return zip.file[ 2 ].async( "string" );
+	} )
+
+	.then( function success( text ) {
+
+		//console.log( 'text', text );
+
+		divContents.innerText = text;
+
+	} );
+
+}
+
+
+function setZipFile( fileName ) {
+
+	//url = 'https://raw.githubusercontent.com/chiensiTB/EPWRawWeather/master/Weather%20Files/ACT%20Canberra%20949260%20(IWEC).zip'
+
+	fetch( url )
+
+	.then( function (response ) {
+
+		if ( response.status === 200 || response.status === 0 ) {
+
+			return Promise.resolve( response.blob() );
+
+		} else {
+
+			return Promise.reject( new Error( response.statusText ) );
+
+		}
+	} )
+
+	.then( JSZip.loadAsync )
+
+	.then( function ( zip ) {
+
+		return zip.file( fileName ).async( "string" );
+
+	} )
+
+	.then( function success( text ) {
+		//console.log( 'text', text );
+
+		divContents.innerText = text;
+
+	} );
+
+}
+
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+	const version = document.head.querySelector( "[ name=version ]" ).content;
+
+	const htm =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=${ urlSourceCodeIcon } height=18 style=opacity:0.5; >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+</script>
+</body>
+</html>
