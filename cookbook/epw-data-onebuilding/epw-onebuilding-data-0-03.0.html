@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
-<meta name = "description" content = "Basic TooToo HTML template" >
+<meta name = "description" content = "Carting EPW data from http://climate.onebuilding.org" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
 <meta name = "date" content = "2019-05-25" >
 <meta name = "version" content = "0.0.0" >
@@ -48,15 +48,17 @@
 
 		<p>
 			Country:
-			<select id=selCountry onchange=setFile(); size=12  ></select>
+			<select id=selCountry onchange=setPlace(); size=12  ></select>
 		</p>
 
 		<p>
 			EPW file:
-			<select id=selFile onchange=fetchFile(); size=12  ></select>
+			<select id=selFile onchange=setZipFile(); size=12  ></select>
 		</p>
 
-		<div id=divFileNames ></div>
+
+		<div id=divCalculations ></div>
+
 	</nav>
 
 	<main>
@@ -83,6 +85,51 @@ const epwRegions = [
 ];
 
 
+const EPW = {};
+
+// https://bigladdersoftware.com/epx/docs/8-3/auxiliary-programs/energyplus-weather-file-epw-data-dictionary.html#field-albedo
+
+EPW.fields = [
+	"Year",
+	"Month",
+	"Day",
+	"Hour",
+	"Minute",
+	"Data Source and Uncertainty Flags",
+	"Dry Bulb Temperature",
+	"Dew Point Temperature",
+	"Relative Humidity",
+	"Atmospheric Station Pressure",
+	"Extraterrestrial Horizontal Radiation",
+	"Extraterrestrial Direct Normal Radiation **",
+	"Horizontal Infrared Radiation Intensity",
+	"Global Horizontal Radiation **",
+	"Direct Normal Radiation",
+	"Diffuse Horizontal Radiation",
+	"Global Horizontal Illuminance **",
+	"Direct Normal Illuminance **",
+	"Diffuse Horizontal Illuminance **",
+	"Zenith Luminance **",
+	"Wind Direction",
+	"Wind Speed",
+	"Total Sky Cover",
+	"Opaque Sky Cover",
+	"Visibility **",
+	"Ceiling Height **",
+	"Present Weather Observation",
+	"Present Weather Codes",
+	"Precipitable Water **",
+	"Aerosol Optical Depth **",
+	"Snow Depth",
+	"Days Since Last Snowfall",
+	"Albedo **",
+	"Liquid Precipitation Depth",
+	"Liquid Precipitation Quantity **"
+
+];
+
+
+EPW.start = true;
 
 
 init();
@@ -104,7 +151,7 @@ function setCountry(){
 
 	region = selRegion.value;
 
-	url = urlCORS + "http://climate.onebuilding.org/" + region;
+	const url = urlCORS + "http://climate.onebuilding.org/" + region;
 
 	requestFile( url, callbackCountry );
 
@@ -125,6 +172,7 @@ function requestFile( url, callback ) {
 
 
 function callbackCountry( xhr ) {
+	//console.log( 'xhr', xhr );
 
 	response = xhr.target.response;
 	//console.log( 'response', response );
@@ -135,14 +183,19 @@ function callbackCountry( xhr ) {
 
 	selCountry.innerHTML = countries.map( country => `<option>${ country.slice( 0, -11 ) }<\/option>` );
 
-	//selCountry.selectedIndex = 42;
+	if ( EPW.start === true ) {
 
-	//setFile();
+		selCountry.selectedIndex = 42;
+
+		setPlace();
+
+	}
 
 }
 
 
-function setFile() {
+
+function setPlace() {
 
 	url = urlCORS + "http://climate.onebuilding.org/" + selRegion.value + "/" + selCountry.value;
 
@@ -151,93 +204,41 @@ function setFile() {
 }
 
 
-function callbackFile( xhr ) {
 
-	response = xhr.target.response;
+function callbackFile( xhr ) {
+	//console.log( 'xhr', xhr );
+
+	if ( xhr.target.status === 404 ) { alert( "File not found. 404 error."); return; }
+
+	const response = xhr.target.response;
 	//console.log( 'response', response );
 
 	const files = response.match( /href="(.*?)\.zip"/gi ).map( item => item.slice( 6, -1 ) );
 
-	//epwZipFiles.push( ...files );
-
 	selFile.innerHTML = files.map( file => `<option>${ file.slice( 0, -4 ) }<\/option>` );
 
-	//selFile.selectedIndex = 200;
+	if ( EPW.start === true ) {
 
-	//fetchFile();
+		selFile.selectedIndex = 200;
+
+		setZipFile();
+
+		EPW.start = false;
+
+	}
 
 }
 
 
 
+function setZipFile() {
 
-function fetchFile() {
+	const fileName = selFile.value.slice( selFile.value.indexOf( "/" ) + 1 ) + ".epw";
+	//console.log( '', fileName );
 
-	url = urlCORS + "http://climate.onebuilding.org/" + selRegion.value + "/" + selCountry.value + "/" +
+	const url = urlCORS + "http://climate.onebuilding.org/" + selRegion.value + "/" + selCountry.value + "/" +
 		selFile.value + ".zip";
-
 	//console.log( 'url', url );
-
-	divFileNames.innerHTML = "";
-
-	//url = 'https://raw.githubusercontent.com/chiensiTB/EPWRawWeather/master/Weather%20Files/ACT%20Canberra%20949260%20(IWEC).zip'
-	names = [];
-
-	fetch( url )
-
-	.then( function (response ) {
-
-		if ( response.status === 200 || response.status === 0 ) {
-
-			return Promise.resolve( response.blob() );
-
-		} else {
-
-			return Promise.reject( new Error( response.statusText ) );
-
-		}
-	} )
-
-	.then( JSZip.loadAsync )
-
-	.then( function( zip ) {
-
-		zip.forEach( function ( relativePath, zipEntry ) {
-
-			divFileNames.innerHTML += `<p><button onclick=setZipFile("${zipEntry.name}"); >file name: ${zipEntry.name}</button></p>`;
-			//console.log( 'file name: ', zipEntry.name);
-			names.push( zipEntry.name );
-		});
-
-		console.log( 'zip', zip.files );
-
-		files = zip;
-
-		return zip;
-
-	} )
-
-	.then( function ( zip ) {
-
-		//return zip.file("AUS_ACT.Canberra.949260_IWEC.epw" ).async( "string" );
-		return zip.file( names[ 3 ] ).async( "string" );
-		//return zip.file[ 2 ].async( "string" );
-	} )
-
-	.then( function success( text ) {
-
-		//console.log( 'text', text );
-
-		divContents.innerText = text;
-
-	} );
-
-}
-
-
-function setZipFile( fileName ) {
-
-	//url = 'https://raw.githubusercontent.com/chiensiTB/EPWRawWeather/master/Weather%20Files/ACT%20Canberra%20949260%20(IWEC).zip'
 
 	fetch( url )
 
@@ -265,9 +266,69 @@ function setZipFile( fileName ) {
 	.then( function success( text ) {
 		//console.log( 'text', text );
 
-		divContents.innerText = text;
+		EPW.text = text;
+
+		parseEpw();
 
 	} );
+
+}
+
+
+
+
+function parseEpw(){
+
+
+	EPW.lines = EPW.text.split( '\n' );
+
+	EPW.metaData = EPW.lines.slice( 0, 8 );
+
+	 EPW.days = EPW.lines.slice( 8, -1 ).map( line => line.split( ',' ).map( item => Number( item ) ) );
+	//console.log( 'EPW.days', EPW.days );
+
+	data = EPW.days.map( record => record[ 6 ] );
+	console.log( 'data', data );
+
+	getCalculations( data )
+}
+
+
+
+
+function getCalculations( arr ) {
+
+	console.log( 'EPW.metaData', EPW.metaData );
+
+	line0 = EPW.metaData[ 0 ].split( ",")
+
+	let min = Math.min( ... arr );
+	let max = Math.max( ... arr );
+
+	// http://www.jstips.co/en/javascript/array-average-and-median/
+
+	let sum = arr.slice().reduce( ( previous, current ) => current += previous );
+	let avg = sum / arr.length;
+
+	let values = arr.slice().sort( (a, b ) => a - b );
+
+	let lowMiddle = Math.floor( ( values.length - 1 ) / 2 );
+	let highMiddle = Math.ceil( ( values.length - 1 ) / 2 );
+	let median = ( values[ lowMiddle ] + values[ highMiddle ] ) / 2;
+
+	divCalculations.innerHTML =
+	`
+		Units: ${ EPW.fields[ 6 ] }<br>
+		Min: ${ min }<br>
+		Max: ${ max }<br>
+		Average: ${ avg.toFixed( 2 ) }<br>
+		Median: ${ median.toFixed( 2 ) }<br>
+		<hr>
+		Latitude: ${ line0[ 6 ] }<br>
+		Longitude: ${ line0[ 7 ] }<br>
+		Altitude: ${ line0[ 9 ] }<br>
+	`;
+
 
 }
 
