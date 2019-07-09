@@ -420,10 +420,7 @@ function getCalculations( index ) {
 		<br>
 	`;
 
-
-
 }
-
 
 
 
@@ -504,7 +501,6 @@ function updateScene( heights ) {
 		index += 3;
 
 	}
-
 	//console.log( 'colors ', colors );
 
 	geometryBuffer.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( colors ), 3 ) );
@@ -526,7 +522,6 @@ function updateScene( heights ) {
 
 function addBasicLighting() {
 
-
 	const light1 = new THREE.DirectionalLight( 0xffffff );
 	light1.position.set( 1, 1, 1 );
 	scene.add( light1 );
@@ -539,8 +534,6 @@ function addBasicLighting() {
 	scene.add( light3 );
 
 }
-
-
 
 
 
@@ -595,12 +588,11 @@ function setHeadsUp( event ) {
 
 	}
 
-
 	headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
 	headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
 	headsUp.style.display = 'block';
 
-	vertex = geometry.vertices[ intersected.face.a ];
+	const vertex = geometry.vertices[ intersected.face.a ];
 	//console.log( 'vertex', vertex );
 
 	X = Math.floor( 365 * ( vertex.x + 100 ) / 199 );
@@ -639,6 +631,7 @@ function onDocumentTouchStart( event ) {
 	onDocumentMouseMove( event );
 
 }
+
 
 
 function getTitle() {

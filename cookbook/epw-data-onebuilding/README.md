@@ -19,6 +19,17 @@ Charting EPW data from http://climate.onebuilding.org
 
 ## To do / wish list
 
+* 2019-07-09 ~ Theo ~ Display legend. In Popup?
+* 2019-07-09 ~ Theo ~ Colors are unist sensitive
+* 2019-07-09 ~ Theo ~ Save ZIP to drive
+* 2019-07-09 ~ Theo ~ Display data from non-EPW files
+* 2019-07-09 ~ Theo ~ Save latest file to cache?
+	* https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage
+* 2019-07-09 ~ Theo ~ compare data from multiple places
+* 2019-07-09 ~ Theo ~ combine multiple views in single view
+* 2019-07-09 ~ Theo ~ Add compass rose
+
+
 
 ## Links of interest
 
@@ -31,7 +42,7 @@ Charting EPW data from http://climate.onebuilding.org
 
 epw-onebuilding-data-0-04.01
 
-* F - eod: add seacrh to select elements
+* F - eod: add search to select elements
 * F - eod: enable selecting any of the 35 fields
 
 ### 2019-07-08 ~ Theo
