@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Charting EPW data from http://climate.onebuilding.org" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name = "date" content = "2019-07-08" >
+<meta name = "version" content = "0.0.0" >
+<title></title>
+<style>
+
+	* { box-sizing: border-box; }
+
+	:root { --mnu-width: 25rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
+
+	html { height: 100%; }
+
+	body { font: 12pt monospace; margin: 0; overflow: hidden }
+
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus, a:active { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	select { width: 100%; }
+	main { border: 0px; height: 100%; left: var( --mnu-width ); margin: 0;
+		padding: 0 1rem; position: absolute; width: calc( 100% - var( --mnu-width ) );  }
+
+	#navMenu { background-color: #eee; height: 100%; left: 0; margin: 0; padding: 0 1rem;
+		position: absolute; top: 0; width: var( --mnu-width ); overflow: auto; }
+
+	#headsUp { background-color: #ddd; border-radius: 8px; padding: 0 5px 10px 5px; opacity: 0.85;
+		position: absolute; right: 1rem; top: 1rem; z-index: 10; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r105/build/three.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r105/examples/js/controls/TrackballControls.js" ></script>
+
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js ></script>
+<script src=legend.js ></script>
+
+	<nav id="navMenu" >
+
+		<div id="divTitle" ></div>
+
+		<p>
+			Region:
+			<select id=selRegion onchange=setCountry(); size=7  ></select>
+		</p>
+
+		<p>
+			Country <span id=spnCountry></span><br>
+			<input oninput=searchSelect(this,selCountry); placeholder="Enter a country" >
+			<select id=selCountry onchange=setPlace(); size=12  ></select>
+		</p>
+
+		<p>
+			EPW file <span id=spnFile></span><br>
+			<input oninput=searchSelect(this,selFile); placeholder="Enter a place" >
+			<select id=selFile onchange=setZipFile(); size=12  ></select>
+		</p>
+
+		<div id=divMatchOrFetch ></div>
+
+		<div id=divCalculations ></div>
+
+		<div id=divFields ></div>
+
+	</nav>
+
+
+	<div id = "headsUp" >bb</div>
+
+
+<script>
+
+
+const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/epw-data-onebuilding";
+const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
+const urlCORS = 'https://cors-anywhere.herokuapp.com/';
+
+const epwRegions = [
+	"WMO_Region_1_Africa",
+	"WMO_Region_2_Asia",
+	"WMO_Region_3_South_America",
+	"WMO_Region_4_North_and_Central_America",
+	"WMO_Region_5_Southwest_Pacific",
+	"WMO_Region_6_Europe",
+	"WMO_Region_7_Antarctica"
+];
+
+
+const EPW = {};
+
+// https://bigladdersoftware.com/epx/docs/8-3/auxiliary-programs/energyplus-weather-file-epw-data-dictionary.html#field-albedo
+
+EPW.fields = [
+	"Year",
+	"Month",
+	"Day",
+	"Hour",
+	"Minute",
+	"Data Source and Uncertainty Flags",
+	"Dry Bulb Temperature",
+	"Dew Point Temperature",
+	"Relative Humidity",
+	"Atmospheric Station Pressure",
+	"Extraterrestrial Horizontal Radiation",
+	"Extraterrestrial Direct Normal Radiation ",
+	"Horizontal Infrared Radiation Intensity",
+	"Global Horizontal Radiation ",
+	"Direct Normal Radiation",
+	"Diffuse Horizontal Radiation",
+	"Global Horizontal Illuminance ",
+	"Direct Normal Illuminance ",
+	"Diffuse Horizontal Illuminance ",
+	"Zenith Luminance ",
+	"Wind Direction",
+	"Wind Speed",
+	"Total Sky Cover",
+	"Opaque Sky Cover",
+	"Visibility ",
+	"Ceiling Height ",
+	"Present Weather Observation",
+	"Present Weather Codes",
+	"Precipitable Water ",
+	"Aerosol Optical Depth ",
+	"Snow Depth",
+	"Days Since Last Snowfall",
+	"Albedo ",
+	"Liquid Precipitation Depth",
+	"Liquid Precipitation Quantity "
+
+];
+
+
+EPW.legendColors = [
+
+[ 94, 79, 162 ],
+[ 74, 108, 174 ],
+[ 66, 136, 181 ],
+[ 78, 164, 176 ],
+[ 105, 189, 169 ],
+[ 137, 207, 165 ],
+[ 169, 221, 162 ],
+[ 200, 233, 159 ],
+[ 224, 243, 161 ],
+[ 241, 249, 171 ],
+[ 251, 248, 176 ],
+[ 254, 238, 163 ],
+[ 254, 221, 141 ],
+[ 253, 198, 118 ],
+[ 252, 172, 99 ],
+[ 248, 142, 83 ],
+[ 240, 112, 74 ],
+[ 228, 86, 73 ],
+[ 209, 60, 75 ],
+[ 185, 31, 72 ],
+[ 158, 1, 66 ]
+
+];
+
+EPW.legendColorsHex = [
+
+	0x5e4fa2,
+	0x4a6cae,
+	0x4288b5,
+	0x4ea4b0,
+	0x69bda9,
+	0x89cfa5,
+	0xa9dda2,
+	0xc8e99f,
+	0xe0f3a1,
+	0xf1f9ab,
+	0xfbf8b0,
+	0xfeeea3,
+	0xfedd8d,
+	0xfdc676,
+	0xfcac63,
+	0xf88e53,
+	0xf0704a,
+	0xe45649,
+	0xd13c4b,
+	0xb91f48,
+	0x9e0142,
+
+];
+
+EPW.start = true;
+
+let raycaster, mouse;
+let intersected;
+
+let sceneRotation = 1;
+let renderer, camera, controls, scene, mesh;
+
+init();
+animate();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 3000 );
+	camera.position.set( 40, - 200, 200 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+	controls.rotateSpeed = 4;
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	//renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	//renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+	//renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+
+	raycaster = new THREE.Raycaster();
+	mouse = new THREE.Vector2();
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	//addBasicLighting();
+
+	/////
+
+	selRegion.innerHTML = epwRegions.map( region => `<option>${ region }<\/option>` );
+
+	selRegion.selectedIndex = 5;
+
+	setCountry();
+
+	setLegendPlacard();
+
+}
+
+
+
+function searchSelect( input, select ) {
+
+	const str = input.value.toLowerCase();
+
+	const option = Array.from( select.options ).find( option => option.innerHTML.toLowerCase().includes( str ) );
+
+	select.selectedIndex =  str && option ? option.index : -1;
+
+}
+
+
+
+function setCountry(){
+
+	region = selRegion.value;
+
+	const url = urlCORS + "http://climate.onebuilding.org/" + region;
+
+	requestFile( url, callbackCountry );
+
+}
+
+
+
+function requestFile( url, callback ) {
+
+	xhr = new XMLHttpRequest();
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET',  url, true );
+	xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded  ); }; /// or something
+	xhr.onload = callback;
+	xhr.send( null );
+
+}
+
+
+
+function callbackCountry( xhr ) {
+	//console.log( 'xhr', xhr );
+
+	response = xhr.target.response;
+	//console.log( 'response', response );
+
+	const countriesRaw = response.match( /href="(.*?)\/index\.html"/gi ).map( item => item.slice( 6, -1 ))
+
+	const countries = countriesRaw.filter( country => country.startsWith( ".." ) === false ).sort();
+
+	selCountry.innerHTML = countries.map( country => `<option>${ country.slice( 0, -11 ) }<\/option>` );
+
+	spnCountry.innerHTML = ` - ${ countries.length } found`;
+
+	if ( EPW.start === true ) {
+
+		selCountry.selectedIndex = 42;
+
+		setPlace();
+
+	}
+
+}
+
+
+
+function setPlace() {
+
+	url = urlCORS + "http://climate.onebuilding.org/" + selRegion.value + "/" + selCountry.value;
+
+	requestFile( url, callbackFile );
+
+}
+
+
+
+function callbackFile( xhr ) {
+	//console.log( 'xhr', xhr );
+
+	if ( xhr.target.status === 404 ) { alert( "File not found. 404 error."); return; }
+
+	const response = xhr.target.response;
+	//console.log( 'response', response );
+
+	const files = response.match( /href="(.*?)\.zip"/gi ).map( item => item.slice( 6, -1 ) );
+
+	selFile.innerHTML = files.map( file => `<option>${ file.slice( 0, -4 ) }<\/option>` );
+
+	spnFile.innerHTML = ` - ${ files.length } found`;
+
+	if ( EPW.start === true ) {
+
+		selFile.selectedIndex = 200;
+
+		setZipFile();
+
+		EPW.start = false;
+
+	}
+
+}
+
+
+
+function setZipFile() {
+
+	cacheName = "cacheEpw";
+
+	const fileName = selFile.value.slice( selFile.value.indexOf( "/" ) + 1 ) + ".epw";
+	//console.log( '', fileName );
+
+	const url =  "http://climate.onebuilding.org/" + selRegion.value + "/" + selCountry.value + "/" +
+		selFile.value + ".zip";
+	//console.log( 'url', url );
+
+	timeStart = performance.now();
+
+	let source;
+
+	caches.match( url ).then( response => {
+
+		if ( response ) {
+
+			source = cacheName;
+			return response;
+
+		} else {
+
+			return fetch( urlCORS + url ).then( res => {
+
+				source = "server";
+
+				return caches.open( cacheName ).then( cache => {
+
+					cache.put( url, res.clone() );
+					//console.log(res.clone());
+
+					return res;
+
+				} );
+
+			} );
+
+		}
+
+	} )
+
+	.then( response => { return response.blob(); } )
+
+	.then( JSZip.loadAsync )
+
+	.then( function ( zip ) { return zip.file( fileName ).async( "string" ); } )
+
+	.then( function success( text ) {
+		//console.log( 'text', text );
+
+		const tim = performance.now() - timeStart;
+
+		divMatchOrFetch.innerHTML =
+		`
+			<h4>EPW File</h4>
+			<p><a href=${ url } title="Download ZIP file" >${ fileName }</a> opened from "${ source }" in ${ tim.toLocaleString() }ms</p>
+		`;
+
+		EPW.text = text;
+
+		parseEpw();
+
+	} )
+
+}
+
+
+
+function parseEpw(){
+
+	EPW.lines = EPW.text.split( '\n' );
+
+	EPW.metaData = EPW.lines.slice( 0, 8 );
+
+	 EPW.days = EPW.lines.slice( 8, -1 ).map( line => line.split( ',' ).map( item => Number( item ) ) );
+	//console.log( 'EPW.days', EPW.days );
+
+	updateByField( 6 );
+
+	investigateFile();
+
+}
+
+
+
+function updateByField( index ) {
+
+	const data = EPW.days.map( record => record[ index ] );
+
+	updateScene( data );
+
+	getCalculations( index );
+
+}
+
+
+
+function getCalculations( index ) {
+	//console.log( 'EPW.metaData', EPW.metaData );
+
+	const arr = EPW.days.map( record => record[ index ] );
+
+	const line0 = EPW.metaData[ 0 ].split( ",")
+
+	EPW.min = Math.min( ... arr );
+	EPW.max = Math.max( ... arr );
+
+	// http://www.jstips.co/en/javascript/array-average-and-median/
+
+	const sum = arr.slice().reduce( ( previous, current ) => current += previous );
+	const avg = sum / arr.length;
+
+	const values = arr.slice().sort( (a, b ) => a - b );
+
+	const lowMiddle = Math.floor( ( values.length - 1 ) / 2 );
+	const highMiddle = Math.ceil( ( values.length - 1 ) / 2 );
+	const median = ( values[ lowMiddle ] + values[ highMiddle ] ) / 2;
+
+	divCalculations.innerHTML =
+	`
+		<h4>Calculations</h4>
+		Field: ${ EPW.fields[ index ] }<br>
+		Min: ${ EPW.min }<br>
+		Max: ${ EPW.max }<br>
+		Average: ${ avg.toFixed( 2 ) }<br>
+		Median: ${ median.toFixed( 2 ) }<br>
+		<hr>
+		Latitude: ${ line0[ 6 ] }<br>
+		Longitude: ${ line0[ 7 ] }<br>
+		Altitude: ${ line0[ 9 ] }<br>
+		<br>
+	`;
+
+}
+
+
+
+function investigateFile() {
+
+	const arr = EPW.fields.map( ( field, index ) => {
+
+		const data = EPW.days.map( record => record[ index ] );
+
+		const uniques = [ ... new Set( data )].length;
+
+		return `${ index + 1 } <button onclick=updateByField(${ index })>${ field }</button> ${ uniques }`;
+
+	} );
+
+	divFields.innerHTML =
+	`
+		<h4>Fields in EPW file</h4>
+		<p>
+			Numbers indicate the unique values found for each field<.
+			Click buttons to view hourly data.
+			Click on mesh to view data points.
+		</p>
+	 	${ arr.join( "<br>" ) }
+	 `;
+
+}
+
+
+
+function updateScene( heights ) {
+
+	EPW.min = Math.min( ... heights );
+	EPW.max = Math.max( ... heights );
+
+	const difference = EPW.max - EPW.min;
+	const offset = EPW.min < 0 ? -EPW.min : 0;
+
+	const geometryBuffer = new THREE.PlaneBufferGeometry( 100, 300, 23, 728 );
+	//geometryBuffer.applyMatrix( new THREE.Matrix4().makeRotationZ( -0.5 * Math.PI ) );
+
+	const material = new THREE.MeshNormalMaterial( { wireframe: false, flatShading: true, vertexColors: THREE.FaceColors, side: 2 } );
+
+	let index = 0;
+
+	let colors = [];
+	const arr = geometryBuffer.attributes.position.array;
+
+	for ( let i = 0; i < heights.length; i++ ) {
+
+		height = heights[ i ]
+
+		arr[ index + 2 ] = 1 * height;
+
+		arr[ index + 5 ] = 1 * height;
+
+		//console.log( 'height', Math.floor( 20 * height ) );
+
+		colorIndex = Math.floor( 20 * ( heights[ i ] + offset ) / difference  );
+		colorIndex = colorIndex < 0 ? 0 : colorIndex;
+		colorIndex = colorIndex > 19 ? 19 : colorIndex
+		color = EPW.legendColors[ colorIndex ];
+		//console.log( 'color', color );
+
+		colors[ index ] = color[ 0 ] / 255;
+		colors[ index + 1 ] = color[ 1 ] / 255;
+		colors[ index + 2 ] = color[ 2 ] / 255;
+
+		index += 6;
+
+	}
+	//console.log( 'colors ', colors );
+
+	//geometryBuffer.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( colors ), 3 ) );
+
+	geometryBuffer.computeFaceNormals();
+	geometryBuffer.computeVertexNormals();
+	geometryBuffer.center();
+
+	geometry = new THREE.Geometry().fromBufferGeometry( geometryBuffer );
+	geometryHeights = heights;
+
+	scene.remove( mesh )
+	mesh = new THREE.Mesh( geometryBuffer, material );
+	scene.add( mesh );
+
+}
+
+
+
+
+function addBasicLighting() {
+
+	const light1 = new THREE.DirectionalLight( 0xffffff );
+	light1.position.set( 1, 1, 1 );
+	scene.add( light1 );
+
+	const light2 = new THREE.DirectionalLight( 0xffffff );
+	light2.position.set( -1, -1, 1 );
+	scene.add( light2 );
+
+	const light3 = new THREE.AmbientLight( 0x222222 );
+	scene.add( light3 );
+
+}
+
+
+
+function onDocumentMouseMove( event ) {
+
+	var raycaster, intersects;
+
+	if ( !EPW.group.children ) { return; }
+
+	event.preventDefault();
+
+	mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+	raycaster = new THREE.Raycaster();
+	raycaster.setFromCamera( mouse, camera );
+
+	intersects = raycaster.intersectObjects( EPW.group.children );
+
+	if ( intersects.length > 0 ) {
+
+		intersected = intersects[ 0 ];
+		//console.log( '', intersected );
+
+		//index = EPW.group.children.indexOf( intersected.object )
+
+		//console.log( 'index', index );
+
+
+	} else {
+
+		intersected = undefined;
+
+	}
+
+	setHeadsUp( event );
+
+}
+
+
+
+function setHeadsUp( event ) {
+
+	if ( intersected === undefined ){
+
+		if ( event.type === 'touchstart' ) {
+
+			//headsUp.style.display = 'none';
+
+		}
+
+		document.body.style.cursor = 'auto';
+
+		return;
+
+	}
+
+	//headsUp.style.left = 50 + 0.5 * window.innerWidth + mouse.x * 0.5 * window.innerWidth + 'px';
+	//headsUp.style.top = -50 + 0.5 * window.innerHeight - mouse.y * 0.5 * window.innerHeight + 'px';
+	//headsUp.style.display = 'block';
+
+	//console.log( '', intersected );
+
+	index = EPW.group.children.indexOf( intersected.object )
+
+	hour = EPW.days[ index ] || [];
+	// //console.log( '', hour );
+
+	const txt = hour.reduce( ( acc, item, index ) => acc +`<div>${ EPW.fields[ index ] }: ${ item }</div>` );
+
+	headsUp.innerHTML = txt;
+	document.body.style.cursor = 'pointer';
+
+}
+
+
+
+function onDocumentMouseDown( event ) {
+
+	//headsUp.style.display = 'none';
+
+}
+
+
+
+function onDocumentTouchStart( event ) {
+
+	event.preventDefault();
+
+	event.clientX = event.touches[0].clientX;
+	event.clientY = event.touches[0].clientY;
+
+	onDocumentMouseMove( event );
+
+}
+
+
+
+
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+	const version = document.head.querySelector( "[ name=version ]" ).content;
+
+	const htm =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=${ urlSourceCodeIcon } height=18 style=opacity:0.5; >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	controls.handleResize();
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+	scene.rotation.z += sceneRotation / 1000;
+
+}
+
+
+</script>
+</body>
+</html>
