@@ -6,6 +6,7 @@
 
 ## Standards
 
+* http://www.professionalqa.com/comparison-quality-models
 * https://pm.stackexchange.com/questions/20950/what-is-the-best-industry-standard-report-for-code-quality-control-and-measureme
 * ISO or IEEE?? https://pdfs.semanticscholar.org/de1c/f09a52540b0cc500d712fa44fed3c13dcf3d.pdf
 * http://profs.etsmtl.ca/claporte/english/enseignement/cmu_sqa/Notes/Normes/Software_Engineering_Standards_Int.pdf
