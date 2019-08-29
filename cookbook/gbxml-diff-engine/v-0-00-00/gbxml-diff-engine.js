@@ -128,11 +128,11 @@ GDE.findDiffs = function() {
 		<p><b>Number of surfaces do have identical ID in other file</b><br>file 1 ${ idDiffs1.length.toLocaleString() }<br>
 			file 2 ${ idDiffs2.length.toLocaleString()  }</p>
 
-			<p><b><i>Identifying the remaining differences is a work-in progress</i></b></p>
+		<p><b><i>Identifying the remaining differences is a work-in progress</i></b></p>
 
-			${ txt }
+		${ txt }
 
-			`;
+	`;
 
 	divContents.innerHTML = htm;
 
