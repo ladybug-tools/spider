@@ -5,6 +5,7 @@
 
 <summary>Concept</summary>
 
+Find differences between two gbXML files. First pass. Looks at surfaces only. 3D visual highlighting of differences coming soon to a browser near you.
 
 </details>
 
