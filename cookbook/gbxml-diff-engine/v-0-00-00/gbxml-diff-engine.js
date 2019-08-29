@@ -1,4 +1,3 @@
-console.log( '', 23 );
 
 let GDE = {};
 
@@ -64,8 +63,8 @@ GDE.findDiffs = function() {
 	const f1 = GDE.files[ 0 ];
 	const f2 = GDE.files[ 1 ];
 
-	const surfaces1 = f1.match( /<Surface.(.*?)<\/Surface/gis );
-	const surfaces2 = f2.match( /<Surface.(.*?)<\/Surface/gis );
+	const surfaces1 = f1.match( /<Surface(.*?)<\/Surface/gis );
+	const surfaces2 = f2.match( /<Surface(.*?)<\/Surface/gis );
 
 	const surfDiff1 = surfaces1.filter( s1 => surfaces2.includes( s1 ) === false );
 	const surfDiff2 = surfaces2.filter( s2 => surfaces1.includes( s2 ) === false );
@@ -86,25 +85,24 @@ GDE.findDiffs = function() {
 	//console.log( '', idDiffs1 );
 	const idDiffs2 =  ids2.filter( id2 => ids1.includes( id2 ) === true );
 
-	//const idIndexes1 =  surfaces.filter( s1 => s1.includes( id1 ) );
-	//const idIndexes2 =  idDiffs2.filter( id2 => surfaces2.indexOf( id2 ) );
 
-	txt = "";
+	let txt = "";
 
 	idDiffs1.forEach( ( id1, index ) => {
 
-		surface1 = surfaces1.find( s => s.includes( id1 ) );
-		data1 = surface1.match( /<Surface (.*?)>/i )[ 1 ];
-		cadId1 = surface1.match( /<CADObjectId>(.*?)<\/CADObjectId>/i );
+		const surface1 = surfaces1.find( s => s.includes( id1 ) );
+		const data1 = surface1.match( /<Surface (.*?)>/i )[ 1 ];
+		let cadId1 = surface1.match( /<CADObjectId>(.*?)<\/CADObjectId>/i );
 		cadId1 = cadId1 ? cadId1[ 1 ] : "no value";
 
-		surface2 = surfaces2.find( s => s.includes( idDiffs2[ index ] ) );
-		data2 = surface2.match( /<Surface (.*?)>/i )[ 1 ];
-		cadId2 = surface2.match( /<CADObjectId>(.*?)<\/CADObjectId>/i );
+		const surface2 = surfaces2.find( s => s.includes( idDiffs2[ index ] ) );
+		const data2 = surface2.match( /<Surface (.*?)>/i )[ 1 ];
+		let cadId2 = surface2.match( /<CADObjectId>(.*?)<\/CADObjectId>/i );
 		cadId2 = cadId2 ? cadId2[ 1 ] : "no value";
 
-		mark1 = data1 === data2 ? "" : "<mark>";
-		mark2 = cadId1 === cadId2 ? "" : "<mark>"
+		const mark1 = data1 === data2 ? "" : "<mark>";
+		const mark2 = cadId1 === cadId2 ? "" : "<mark>";
+
 		txt +=
 		`<p>
 			file1: ${ mark1 }${ data1 }</mark> ${ mark2 }${ cadId1 }</mark><br>
@@ -136,8 +134,6 @@ GDE.findDiffs = function() {
 
 			`;
 
-//			<p><b>IDs of non-identical surfaces but with identical ID in other file</b><br>file 1 ${ idIndexes1 }<br> file 2 ${ idIndexes2  }</p>
-
 	divContents.innerHTML = htm;
 
-}
+};
