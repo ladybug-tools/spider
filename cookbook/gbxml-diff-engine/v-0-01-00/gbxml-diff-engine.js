@@ -60,6 +60,7 @@ GDE.callback = function( xhr ) {
 
 GDE.findDiffs = function() {
 
+
 	const f1 = iframe1.contentWindow.GBX.text
 	const f2 = iframe2.contentWindow.GBX.text
 
@@ -147,6 +148,8 @@ GDE.findDiffs = function() {
 GDE.highlightDiffs = function() {
 
 	GBX1 = iframe1.contentWindow.GBX;
+
+
 
 	GBX1.meshGroup.children.forEach( child => child.visible = false )
 

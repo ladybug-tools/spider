@@ -65,8 +65,9 @@
 		</div>
 
 		<p>
-			<button id=but onclick=GDE.findDiffs();>find differences</button>
+			Click once in each window, then: <button id=but onclick=GDE.findDiffs();>find differences</button>
 		</p>
+
 		<div id="divContents" ></div>
 
 	</main>
@@ -93,6 +94,7 @@ function init() {
 
 	p1.innerHTML = src1.split( "/" ).pop();
 	p2.innerHTML = src2.split( "/" ).pop();
+
 
 }
 
