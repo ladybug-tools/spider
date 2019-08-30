@@ -136,6 +136,9 @@ GDE.findDiffs = function() {
 
 	divContents.innerHTML = htm;
 
+	GDE.surfacesDiffIndexes1 = indexes1;
+	GDE.surfacesDiffIndexes2 = indexes2;
+
 	GDE.highlightDiffs();
 
 };
@@ -144,5 +147,10 @@ GDE.findDiffs = function() {
 GDE.highlightDiffs = function() {
 
 
-	
+	GBX1 = iframe1.contentWindow.GBX;
+
+	GBX1.meshGroup.children.forEach( child => child.visible = false )
+
+	GDE.surfacesDiffIndexes1.forEach( index => GBX1.meshGroup.children[ index ].visible = true );
+
 };
