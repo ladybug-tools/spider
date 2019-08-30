@@ -146,11 +146,16 @@ GDE.findDiffs = function() {
 
 GDE.highlightDiffs = function() {
 
-
 	GBX1 = iframe1.contentWindow.GBX;
 
 	GBX1.meshGroup.children.forEach( child => child.visible = false )
 
 	GDE.surfacesDiffIndexes1.forEach( index => GBX1.meshGroup.children[ index ].visible = true );
+
+	GBX2 = iframe2.contentWindow.GBX;
+
+	GBX2.meshGroup.children.forEach( child => child.visible = false )
+
+	GDE.surfacesDiffIndexes2.forEach( index => GBX2.meshGroup.children[ index ].visible = true );
 
 };
