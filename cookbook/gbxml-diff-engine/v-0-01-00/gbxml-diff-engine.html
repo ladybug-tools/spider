@@ -37,14 +37,12 @@
 </style>
 </head>
 <body>
+<script src=gbxml-diff-engine.js ></script>
 
 	<nav id="navMenu" >
 
 		<div id="divTitle" ></div>
 
-		<p>
-			<button id=but onclick=setIt();>buttonbutton</button>
-		</p>
 
 	</nav>
 
@@ -66,6 +64,9 @@
 
 		</div>
 
+		<p>
+			<button id=but onclick=GDE.findDiffs();>find differences</button>
+		</p>
 		<div id="divContents" ></div>
 
 	</main>
@@ -100,10 +101,6 @@ function init() {
 function setIt() {
 
 	divContents.innerHTML += `<p>${ ( performance.now() ) } - Howdy! </p>`;
-
-
-
-
 
 }
 
