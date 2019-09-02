@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time interactive 3D graphics in your browser using the WebGL and the Three.js JavaScript library" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2019-09-01" >
+<title></title>
+<style>
+	/* Copyright 2019 pushMe pullYou authors. MIT License */
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	input[ type = range ] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 100%; }
+	input[ type = range ]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }
+	input[ type = range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }
+
+	#navMenu { margin: 0 20px; max-width: 15rem; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/build/three.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/examples/js/controls/TrackballControls.js" ></script>
+
+	<nav id = "navMenu" >
+
+		<div id = "divTitle" ></div>
+
+		<p>
+			<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;" >rotation</button>
+		</p>
+
+		<p>
+			<button onclick=drawSquare(); >draw square</button>
+		</p>
+
+		<p>
+			<button onclick=squareToHemisphere(); >squareToHemisphere</button>
+		</p>
+
+		<p>
+			<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
+		</p>
+
+		<div id = "divLog" ></div>
+
+	</nav>
+
+<script>
+
+
+const urlSourceCode = "https://github.com/zzzzz/zzzzz.github.io/tree/master/xxxxx/";
+
+let sceneRotation = 1;
+let renderer, camera, controls, scene;
+
+init();
+animate();
+
+function init() {
+
+	divTitle.innerHTML = getTitle();
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( - 100, - 100, 100 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+	controls.rotateSpeed = 4;
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+	window.addEventListener( 'keyup', () => sceneRotation = 0, false );
+	renderer.domElement.addEventListener( 'click', () => sceneRotation = 0, false );
+
+	const axesHelper = new THREE.AxesHelper( 100 );
+	scene.add( axesHelper );
+
+	// const geometry = new THREE.BoxGeometry( 100, 100, 50 );
+	// const material = new THREE.MeshNormalMaterial();
+	// const mesh = new THREE.Mesh( geometry, material );
+	// scene.add( mesh );
+
+}
+
+
+function drawSquare() {
+
+	const geometry = new THREE.PlaneGeometry( 100, 100, 49, 49 );
+	const material = new THREE.MeshNormalMaterial( { wireframe: true });
+	square = new THREE.Mesh( geometry, material );
+	scene.add( square );
+
+
+}
+
+
+function squareToHemisphere() {
+
+	vertices = square.geometry.vertices;
+
+	sectors = Math.sqrt( vertices.length ) - 1;
+
+	radius = 50
+
+	index = 0;
+
+	theta = 0;
+	thetaDelta = 2 * Math.PI / sectors;
+
+	phi = 0;
+	phiDelta = Math.PI / sectors ;
+
+
+for ( let i = 0; i < radius; i ++ ) {
+
+	let theta = i * thetaDelta;
+
+	for ( let j = 0; j < radius; j ++ ) {
+
+		const vertex = vertices[ index ++  ];
+
+		//const x = radius * Math.sin( theta) * Math.cos( phi )
+		//const y = radius * Math.sin( theta) * Math.sin( phi )
+		//const z = radius * Math.cos( phi  );
+
+		theta = thetaDelta * j
+		phi = i * Math.PI * 2 / sectors
+		x = radius * Math.sin( theta ) * Math.cos( phi )
+		y = radius * Math.sin( theta ) * Math.sin( phi )
+		z = radius * Math.cos( theta )
+
+		vertex.fromArray( [ x, y, z ] )
+
+		//phi += phiDelta;
+
+	}
+
+
+
+}
+
+square.geometry.verticesNeedUpdate = true;
+square.geometry.elementsNeedUpdate = true;
+	square.geometry.morphTargetsNeedUpdate = true;
+	square.geometry.uvsNeedUpdate = true;
+	square.geometry.normalsNeedUpdate = true;
+	square.geometry.colorsNeedUpdate = true;
+	square.geometry.tangentsNeedUpdate = true;
+}
+
+
+
+
+function ZZZsquareToHemisphere() {
+
+	vertices = square.geometry.vertices;
+
+	sectors = Math.sqrt( vertices.length ) - 1;
+
+	radius = 50
+
+	index = 0;
+
+	sectorAngleDelta = 2 * Math.PI / sectors
+
+	for ( let i = 0; i < radius; i ++ ) {
+
+		let sectorAngle = 0;
+
+		for ( let j = 0; j < radius; j ++ ) {
+
+			const vertex = vertices[ index ++  ];
+
+			const x = i * Math.cos( sectorAngle );
+			const y = i * Math.sin( sectorAngle );
+			const z = radius - i * Math.cos( sectorAngle ) * Math.sin( sectorAngle );
+
+			vertex.fromArray( [ x, y, z ] )
+
+			sectorAngle += sectorAngleDelta;
+
+		}
+
+	}
+
+	square.geometry.verticesNeedUpdate = true;
+
+
+
+}
+
+
+function getTitle() {
+
+	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+	const htm =
+	`
+		<h2>
+			<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
+				<img src=https://github.com/fluidicon.png height=18 >
+			</a>
+			<a href="" title="Click to reload this page" >${ document.title }</a>
+		</h2>
+
+		<p>
+			${ document.head.querySelector( "[ name=description ]" ).content }
+		</p>
+	`;
+
+	return htm;
+
+}
+
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	controls.handleResize();
+
+	//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+}
+
+
+
+function animate() {
+
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+	scene.rotation.z += sceneRotation / 1000;
+
+}
+
+</script>
+</body>
+</html>
