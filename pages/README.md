@@ -11,3 +11,4 @@
 Pages folder
 
 * Move images to new folder
+* Add links to markdown-help.md
