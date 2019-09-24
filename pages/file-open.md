@@ -30,7 +30,7 @@ The goal is to have Spider gbXML Viewer open files in whatever way is best and f
 
 ### Set a default file path
 
-![]( pages/file-open-default-file-screenshot.png )
+![]( pages/fimages/ile-open-default-file-screenshot.png )
 
 * Similar to using a link. All three methods should work
 * Copy and paste a link - no the hash mark needed - into the default path text input box
@@ -47,7 +47,7 @@ The easiest method, as described in the above Wiki file, is to change local file
 
 Here is a screen shot of the Properties dialog for a Chrome shortcut on Windows 10:
 
-![]( pages/file-open-chrome-screenshot.png )
+![]( pages/images/file-open-chrome-screenshot.png )
 
 Note the added '--allow-file-access-from-files' option.
 
@@ -80,7 +80,7 @@ Theo says: I have used this method for years and have never experienced a securi
 
 Example:
 
-![]( pages/file-open-dialog-os-path.png )
+![]( pages/images/file-open-dialog-os-path.png )
 
 For a variety of good security reasons, when your browser wants to 'talk' to another computer it must use a [URL]( https://en.wikipedia.org/wiki/URL ).
 
@@ -92,7 +92,7 @@ Open the JavaScript Developer console - using function key 12 or control-shift-J
 
 If you see something like the following message in red character, there is a problem.
 
-![]( pages/file-open-console-error-message.png )
+![]( pages/images/file-open-console-error-message.png )
 
 
 ### How can I tell if the '--allow-file-access-from-files' command line flag has been set?
@@ -103,12 +103,12 @@ Enter the following into the address box
 
 If you see something like the following you are probably good
 
-![]( pages/file-open-command-line-flags.png )
+![]( pages/images/file-open-command-line-flags.png )
 
 
 Also, before you start your custom version of Chrome: open the Windows Task Manager and check if there are no Chrome app listed as still running in the Apps section:
 
-<img src=pages/file-open-windows-task-manager.png width=600 >
+<img src=pages/images/file-open-windows-task-manager.png width=600 >
 
 
 ***
