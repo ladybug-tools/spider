@@ -8,8 +8,41 @@
 Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
 
 ***
+<details open>
 
-### 2018-10-30: Many things happening
+<summary>Welcome 2019-09-26</summary>
+
+Because of your ongoing daily usage, the Spider team is pleased to designate R12 'Aragog' as a "[long term support]( https://en.wikipedia.org/wiki/Long-term_support )" release of the Spider gbXML Viewer collection. We will endeavor to update the source files so that they run with the latest releases of Three,js and Showdown. We will will deal with bugs [reported as issues]( https://github.com/ladybug-tools/spider/issues ).
+
+Other Spider gbXML Viewers worth looking at include:
+
+* [Spider gbXML Viewer 'Aragog' R14]( https://www.ladybug.tools/spider/gbxml-viewer/r14 )
+* [Spider gbXML Viewer 'Maevia' v0.17]( https://www.ladybug.tools/spider-gbxml-tools/spider-gbxml-viewer/ ) - note numbering system changed to comply with [smver.org]( https://senver.org )
+
+Recent fixes included in development release [Aragog r12.35]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-35.html )
+
+* Three.js files downloaded from better Content Delivery Network ( CDN )
+* Three.js source updated from r90 to current release r108
+	* Minor code fixes were applied in order to run on new release
+
+If no significant bugs are reported, R12.35 will be designated the latest stable release by the middle of October 2019.
+
+
+Current issues include
+
+* 'Sun Path / Analemma' and 'Sun Range' are broken due to changes made by Google in Google Maps. Further investigation is needed to determine if these features can be fixed and retained or dropped.
+
+<!--
+<details open>
+
+<summary>Welcome 2019-09-26 ~ R12.35</summary>
+
+</details>
+-->
+
+</details><details>
+
+<summary>2018-10-30: Many things happening</summary>
 
 Spider gbXML Viewer is embedded in latest release of [OpenStudio]( https://www.openstudio.net/). See the [Ladybug Tools forum]( https://discourse.ladybug.tools/t/spider-gbxml-viewer-embedded-in-openstudio/4129 ) for details.
 
@@ -21,17 +54,10 @@ So have a look at [Spider gbXML Viewer Basic]( https://www.ladybug.tools/spider-
 
 **Please watch and thumbs-up our YouTube video:**
 
-[![gbXML Viewer User Guide]( ../../../images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY "With music and voiceover by the multi-talented Michalina" )
+[![gbXML Viewer User Guide]( https://www.ladybug.tools/spider/images/gbxml-viewer-user-guide-300px.png )]( https://youtu.be/2QHrbuKIkdY "With music and voiceover by the multi-talented Michalina" )
 
-<!--
-<details open>
 
-<summary>Welcome  ~ R.</summary>
-
-</details>
--->
-
-<details open >
+</details><details>
 
 <summary>New stable release. Yay! New Features include:</summary>
 
@@ -45,7 +71,7 @@ So have a look at [Spider gbXML Viewer Basic]( https://www.ladybug.tools/spider-
 * Operation on mobile devices improved
 * Second pass at adding edit, save and reload changes capability
 
-</details><details open>
+</details><details>
 
 <summary>Welcome 2018-05-03 ~ R12.30/31</summary>
 

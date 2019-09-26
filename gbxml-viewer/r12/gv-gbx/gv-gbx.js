@@ -514,7 +514,7 @@
 		} else {
 
 			const bbox = new THREE.Box3().setFromObject( obj );
-			const sphere = bbox.getBoundingSphere();
+			const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
 			//GBX.boundingBox = bbox;
 			center = sphere.center;
 			radius = sphere.radius;
