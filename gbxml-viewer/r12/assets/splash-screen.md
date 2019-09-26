@@ -10,13 +10,13 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 ***
 <details open>
 
-<summary>Welcome 2019-09-26</summary>
+<summary>Welcome 2019-09-26 ~ [Aragog r12.35]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-35.html ) ready to test</summary>
 
 Because of your ongoing daily usage, the Spider team is pleased to designate R12 'Aragog' as a "[long term support]( https://en.wikipedia.org/wiki/Long-term_support )" release of the Spider gbXML Viewer collection. We will endeavor to update the source files so that they run with the latest releases of Three,js and Showdown. We will will deal with bugs [reported as issues]( https://github.com/ladybug-tools/spider/issues ).
 
 Other Spider gbXML Viewers worth looking at include:
 
-* [Spider gbXML Viewer 'Aragog' R14]( https://www.ladybug.tools/spider/gbxml-viewer/r14 )
+* [Spider gbXML Viewer 'Aragog' R14]( https://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html )
 * [Spider gbXML Viewer 'Maevia' v0.17]( https://www.ladybug.tools/spider-gbxml-tools/spider-gbxml-viewer/ ) - note numbering system changed to comply with [smver.org]( https://senver.org )
 
 Recent fixes included in development release [Aragog r12.35]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-35.html )
