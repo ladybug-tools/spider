@@ -1,11 +1,11 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( http://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-app/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/r12/gv-app/README.md "View file as a web page." ) </span>
 
 # R12 gv-App / gbXML Viewer / Application Module Read Me
 
 
-<iframe class=iframeReadMe src=http://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px>Iframes are not displayed on github.com</iframe>
+<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/gbxml-viewer/ width=100% height=400px>Iframes are not displayed on github.com</iframe>
 
-## Full screen: [gbXML Viewer Application Module]( http://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html )
+## Full screen: [gbXML Viewer Application Module]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html )
 
 
 
@@ -61,6 +61,7 @@ See main read me file
 
 R12.9
 CSS
+
 * Widths to rems
 * Most all colors by css vars
 APP
@@ -70,12 +71,14 @@ APP
 ### 2018-03-23
 
 R12.8
+
 * Fix reports menu not deleting itself
 * Make sample file more visible
 
 ### 2018-03-23
 
 R12.6
+
 * Style: update pop-up width and position
 	* Trying to make more of the 3D model viewable on startup
 * APP: SAV/Changes are only applied if no location hash and default file
@@ -83,6 +86,7 @@ R12.6
 ### 2018-03-14 ~ Theo
 
 R12.1
+
 * Big menu clean-up
 * Add links and tooltips from lates R11
 * Add back HTML instead of using vars
@@ -96,6 +100,7 @@ R12.1
 R11.4
 
 APP / Style.css
+
 * Add .highlight class with new var --highlight-color
 * Set highlight background-color to Spring Green as per Michalina new palette
 * Add css vars to HUD mnu
@@ -117,15 +122,18 @@ R10.11
 R10.3
 
 App
+
 * 2018-02-18 ~ Drag and drop broken << many fixes
 
 Fixed mostly
+
 * 2018-02-18 ~ Menu items not updating when loading new files
 * 2018-02-18 ~ Drag and drop broken
 
 ### 2018-02-18 ~ Theo
 
 R10.2
+
 * divContainer
 	* resizes more nicely
 	* styles enhanced
