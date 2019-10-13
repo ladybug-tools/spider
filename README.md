@@ -55,7 +55,7 @@ Invitation: https://conta.cc/2H7ex7f
 ## YouTube Video: [gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
 
 * Michal's and Michalina's must watch video on Spider gbXML Viewer
-	* Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
+	* Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lazy person.  It sparkles!'
 
 
 ***
@@ -80,7 +80,7 @@ Enable just-in-time custom solutions. Every building is both unique and standard
 
 > Each pattern describes a problem which occurs over and over again in our environment, and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, without ever doing it the same way twice.
 
->Patterns are descriptions of common problems and proposal for the solutions that can be used repeatedly every time the problem is encountered and producing an different outcome.
+>Patterns are descriptions of common problems and proposal for the solutions that can be used repeatedly every time the problem is encountered and producing a different outcome.
 
  -->
 
