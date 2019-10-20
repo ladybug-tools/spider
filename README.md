@@ -70,9 +70,9 @@ The main issue is that much of the currently available software for carrying out
 
 Solutions to these issues might include:
 
-Provide free, simple, easy-to access tools to enable analysis of building outcomes earlier in the design process - or even as a stimulator of the design process
+Provide free, simple, easy-to-access tools to enable an analysis of building outcomes earlier in the design process - or even as a stimulator of the design process
 
-Offer easy-to-read code written so that designers and engineers may monitor, verify and enhance the efforts - and, yes, full stack developers are welcome too.
+Offer easy-to-read code written so that designers and engineers may monitor, verify and enhance the efforts - and, yes, full-stack developers are welcome too.
 
 Enable just-in-time custom solutions. Every building is both unique and standards-adherent. The visualization and analysis tools should be the same.
 
