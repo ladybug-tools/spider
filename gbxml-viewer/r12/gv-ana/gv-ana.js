@@ -62,7 +62,7 @@
 
 		}
 
-		console.log( 'ANA.butAnalemma.style.backgroundColor', ANA.butAnalemma.style.backgroundColor );
+		//console.log( 'ANA.butAnalemma.style.backgroundColor', ANA.butAnalemma.style.backgroundColor );
 
 		//if ( ANA.butAnalemma.style.backgroundColor === '' ) {
 		if ( ANA.butAnalemma.style.fontStyle !== 'italic' ) {
@@ -579,7 +579,7 @@
 		.then( response => response.json() )
 		.then( json => {
 
-			console.log( 'js', json.rawOffset );
+			//console.log( 'js', json.rawOffset );
 			divContents.innerHTML = JSON.stringify( json )
 
 			parameters.offsetUTC = json.gmtOffset;
