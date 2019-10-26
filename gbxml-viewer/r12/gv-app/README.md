@@ -57,6 +57,12 @@ See main read me file
 
 ## Change Log
 
+### 2019-10-25 ~ Theo
+
+R12.37
+
+* B: Fix UTC offset not showing and preventing analemma from being draw
+
 ### 2018-03-24 ~ Theo
 
 R12.9
