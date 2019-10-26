@@ -62,15 +62,19 @@ See main read me file
 R12.37
 
 * B: Fix UTC offset not showing and preventing analemma from being draw
+* Thank you http://api.geonames.org/timezoneJSON
 
 ### 2018-03-24 ~ Theo
 
 R12.9
+
 CSS
 
 * Widths to rems
 * Most all colors by css vars
+
 APP
+
 * Rejigged menu / item positions
 
 

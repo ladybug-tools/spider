@@ -11,7 +11,16 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
-<summary>Welcome 2019-10-23 ~ [Aragog r12.36]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-36.html ) ready to test</summary>
+<summary>Welcome 2019-10-23 ~ [Aragog r12.37]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-37.html ) ready to test</summary>
+
+'Things to try' > 'Sun path' / analemma': working again. Uses [geoNames]( https://geonames.org ) API instead of Google Maps API
+
+
+</details>
+
+<details open>
+
+<summary>Welcome 2019-10-23 ~ [Aragog r12.36]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-36.html ) stable release</summary>
 
 See new left menu with select the app of your choice
 
