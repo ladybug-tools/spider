@@ -115,7 +115,7 @@
 
 			//requestFile( url, callbackUtcOffset );
 
-			setUtcOffset()
+			//setUtcOffset()
 
 			object3D = new THREE.Object3D();
 
