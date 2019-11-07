@@ -20,9 +20,9 @@ The [read me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md ) file wi
 -->
 
 
-## Full screen stable release (fingers-crossed) R11.12.5: <http://www.ladybug.tools/spider/gbxml-viewer>
+## Full screen stable release (fingers-crossed) R11.12.6.1: <http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-app/gv-app.html>
 
-### Full screen stable release R11.12.4: <br><http://www.ladybug.tools/spider/gbxml-viewer/r11-12-4/gv-app/gv-app.html>
+### Full screen stable release R11.12.4.1: <br><http://www.ladybug.tools/spider/gbxml-viewer/r11-12-4/gv-app/gv-app.html>
 
 #### Full screen development very pre-release R12: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
