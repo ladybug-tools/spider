@@ -20,7 +20,11 @@ _gbXML Viewer Core ~ the basic HTML, CSS and JavaScript used by all add-on scrip
 
 _Both of the above links are shortcuts that link to the appropriate address. You should bookmark these links in order to stay up to date._
 
-### Even later Development pre-release R14: <br><https://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html>
+### Development pre-release R14: <br><https://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html>
+
+### [Spider gbXML Viewer Previous Releases]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
+
+* Load and run every release of the gbXML Viewer since the first commit
 
 ***
 
@@ -96,7 +100,7 @@ gbXML Viewer is a collection of modular experiments for viewing, examining and v
 
 * [Spider gbXML Viewer Previous Releases]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
 	* Load and run every release of the gbXML Viewer since the first commit
-	* Load and Run some of the special editions of the gbX<L viewer
+	* Load and run some of the special editions of the gbXML viewer
 
 ## Project Information
 
