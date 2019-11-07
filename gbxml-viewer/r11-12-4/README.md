@@ -281,6 +281,12 @@ Gists are a great way to share your work. You can share single files, parts of f
 * <https://gist.github.com/theo-armour/163685de4d1fdacd70b2ffd446e8c874/edit>
 
 
+## Change log
+
+### 2019-11-07 ~ Theo
+
+* Update default drawing link to a file that works
+
 ***
 
 # <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > &#x1f578; </a></center>
