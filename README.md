@@ -22,6 +22,7 @@ _All of the above are embedded interactive scripts available here_
 * [gbXML Viewer  Dev R14]( https://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html )
 * [Analemma 3D]( https://www.ladybug.tools/spider/analemma3d/index.html )
 * [Burning mAnalemma 2017]( https://www.ladybug.tools/spider/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
+* [Spider gbXML Viewer Previous Releases]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
 
 
 
