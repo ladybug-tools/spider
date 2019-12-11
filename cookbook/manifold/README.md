@@ -17,6 +17,10 @@ _basic-html.html_
 <details open >
 <summary>Concept</summary>
 
+Given: arbitrary geometry object in 3D space composed of triangles
+
+Task 1: Poke a hole in the geometry by moving a single vertex at ant arbitrary location in the geometry
+Task 2: By algorithm only, identify the moved vertex - the errant one making the hole - and display its location
 
 ### Define "Manifold"
 
