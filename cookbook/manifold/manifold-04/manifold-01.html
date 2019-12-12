@@ -140,7 +140,6 @@ function init() {
 
 	eventResetAll = new Event( "onresetall" );
 
-
 }
 
 
@@ -168,135 +167,90 @@ function addHole( index ) { // z- coordinate in first vertex
 
 	HolesMessage.innerHTML +=`<div>hole: vertex ${ Math.floor( index / 3 )  }</div>`;
 
+	// scene.children[ 1 ].geometry.vertices
 
 }
 
 
 function checkEdges() {
 
-	lines = [];
+	edges = [];
+
+	mesh.updateWorldMatrix();
 
 	mesh.geometry = mesh.geometry.type.includes( "BufferGeometry" ) ?
 		new THREE.Geometry().fromBufferGeometry(mesh.geometry) : mesh.geometry;
 
 	mesh.geometry.faces.forEach(function (face, idx) {
 
-		const edges = getEdges( face, idx );
+		const lines = getEdges( face, idx );
 
-		lines.push( ...edges );
+		edges.push( ...lines );
 
 	} );
-	//console.log( 'lines', lines );
+	//console.log( 'edges', edges );
 
-	pairs = [];
+	edgePairs = [];
 
-	for ( let i = 0; i < lines.length; i++ ) {
+	for ( let i = 0; i < edges.length; i++ ) {
 
-		const line1 = lines[ i ];
+		const edge1 = edges[ i ];
 
-		const line1start = line1.start;
+		const edge1start = edge1.start;
 
-		const line1end = line1.end;
+		const edge1end = edge1.end;
 
-		for ( let j = 0; j < lines.length; j++ ) {
+		for ( let j = 0; j < edges.length; j++ ) {
 
-			const line2 = lines[ j ];
+			const edge2 = edges[ j ];
 
-			if ( line1start.equals( line2.end, tolerance) && line1end.equals( line2.start, tolerance ) ) {
+			if ( edge1start.equals( edge2.end, tolerance) && edge1end.equals( edge2.start, tolerance ) ) {
 
-				pairs.push( i );
+				edgePairs.push( i );
 
 			}
 
 		}
 	}
+	//console.log( 'edgePairs', edgePairs );
 
-	//console.log( 'pairs', pairs );
+	edgeIndexNoPairs = [];
 
-	holes = [];
+	for ( let i = 0; i < edges.length; i++ ) {
 
-	for ( let i = 0; i < lines.length; i++ ) {
+		if ( !edgePairs.includes( i ) ) {
+			//console.log( 'edgeNoPairs', i, edges[  i ], edges[  i ].faceIndex );
 
-		if ( !pairs.includes( i ) ) {
-			//console.log( 'pair', i, lines[  i ], lines[  i ].faceIndex );
-
-			holes.push( i );
-			const face = mesh.geometry.faces[ lines[ i ].faceIndex ];
-			//console.log( 'face', face  );
-
-			vs = mesh.geometry.vertices;
-			addLine( [ vs[ face.a ], vs[ face.b ], vs[ face.c ], vs[ face.a ] ] )
+			edgeIndexNoPairs.push( i );
 
 		}
 
 	}
-
-	vertices = [];
-	vv = [];
-	index = 0;
-
-	holes.forEach( hole => {
-
-		line = lines[ hole ]
-		start = line.start;
-		end = line.end;
-		vertices.push( start, end );
-		vv.push( index++, index++ );
-
-		console.log( 'line', start, end );
-
-	});
-
-	console.log( 'vertices', vertices );
-
-	duplicates = [];
-	dd = []
-
-	vertices.forEach( ( vertex, index ) => {
-
-		if ( duplicates.indexOf( vertex ) === -1 ) {
-			duplicates.push( vertex ); dd.push( index ); }
-
-	} )
-
-	console.log( 'duplicates', duplicates );
-
-	vertexIndex = vv.find( vertex => dd.indexOf( vertex ) === -1 );
-
-	vertexErrant = vertices[ vertexIndex ];
-
-	// for ( let i = 0; i < vertices.length; i++ ) {
-
-	// 	if ( duplicates.indexOf( vertices[ i ] ) === -1 ) {
-
-	// 		console.log( 'vvvvvvvv',vertices[ i ]  );
-	// 	}
-	// }
-
-	console.log( 'vertexErrant', vertexErrant );
+	console.log( 'edgeIndexNoPairs', edgeIndexNoPairs );
 
 
-	//try tell tales on all
-	
-	const geometry = new THREE.BoxBufferGeometry( 2, 2, 2 );
-	const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
-	const telltale = new THREE.Mesh( geometry, material );
-	telltale.position.copy( vertexErrant );
+	edgeIndexNoPairs.forEach( hole => {
 
-	mesh.add( telltale );
+		const face = mesh.geometry.faces[ edges[ hole ].faceIndex ];
+
+		const vs = mesh.geometry.vertices;
+		addLine( [ vs[ face.a ], vs[ face.b ], vs[ face.c ], vs[ face.a ] ] );
+
+	} );
 
 
-	if ( holes.length === 0 ) {
+	identifyVertices( edgeIndexNoPairs );
+
+
+	if ( edgeIndexNoPairs.length === 0 ) {
 
 		divMessage.innerHTML = `<p>Looks like this mesh is 'watertight'</p>`;
 
 	} else {
 
-		divMessage.innerHTML = `<p>Faces with issues have a red border. ${ holes.length } faces with issues</p>`;
+		divMessage.innerHTML = `<p>Faces with issues have a red border. ${ edgeIndexNoPairs.length } faces with issues</p>`;
 
-		console.log( 'holes', holes );
 	}
-
 
 }
 
@@ -308,9 +262,13 @@ function getEdges( face, idx = 0 ) {
 	let b = new THREE.Vector3();
 	let c = new THREE.Vector3();
 
-	mesh.localToWorld( a.copy( mesh.geometry.vertices[face.a] ));
-	mesh.localToWorld( b.copy( mesh.geometry.vertices[face.b] ));
-	mesh.localToWorld( c.copy( mesh.geometry.vertices[face.c] ));
+	// mesh.localToWorld( a.copy( mesh.geometry.vertices[face.a] ));
+	// mesh.localToWorld( b.copy( mesh.geometry.vertices[face.b] ));
+	// mesh.localToWorld( c.copy( mesh.geometry.vertices[face.c] ));
+
+	a.copy( mesh.geometry.vertices[face.a] )
+	b.copy( mesh.geometry.vertices[face.b] )
+	c.copy( mesh.geometry.vertices[face.c] );
 
 	const lineAB = new THREE.Line3(a, b);
 	const lineBC = new THREE.Line3(b, c);
@@ -323,6 +281,63 @@ function getEdges( face, idx = 0 ) {
 }
 
 
+function identifyVertices( edgeIndexNoPairs ) {
+
+	vertices = [];
+	verticesIndex= [];
+	index = 0;
+
+	edgeIndexNoPairs.forEach( index => {
+
+		line = edges[ index ]
+		start = line.start;
+		end = line.end;
+		vertices.push( start, end );
+		verticesIndex.push( index++, index++ );
+
+	});
+	console.log( 'vertices', vertices );
+	console.log( 'verticesIndex', verticesIndex );
+
+//what to do when all duplicates? Look for triads?
+
+	duplicates = [];
+	duplicatesIndex = [];
+
+	vertices.forEach( ( vertex, index ) => {
+
+		if ( duplicates.indexOf( vertex ) === -1 ) {
+			duplicates.push( vertex );
+			duplicatesIndex.push( verticesIndex[ index ] ); }
+
+	} )
+	console.log( 'duplicates', duplicates );
+	console.log( 'duplicatesIndex', duplicatesIndex );
+
+	verticesErrantIndex = verticesIndex.filter( index => duplicatesIndex.indexOf( index ) === -1 );
+	console.log( 'verticesErrantIndex', verticesErrantIndex );
+
+	verticesErrant = verticesErrantIndex.map( index => vertices[ index ] );
+
+
+	//try tell tales on all
+
+	verticesErrant.forEach( vertex => {
+
+
+		const geometry = new THREE.BoxGeometry( 2, 2, 2 );
+		const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
+		telltale = new THREE.Mesh( geometry, material );
+		telltale.position.copy( vertex );
+		//telltale.position.set( 0, 0, 58 );
+		mesh.add( telltale );
+
+		console.log( '', telltale );
+
+
+	} )
+
+}
 
 
 function addLine( vertices ) {
@@ -424,6 +439,7 @@ function animate() {
 	scene.rotation.z += sceneRotation / 1000;
 
 }
+
 
 </script>
 </body>

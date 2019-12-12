@@ -17,10 +17,12 @@ _basic-html.html_
 <details open >
 <summary>Concept</summary>
 
-Given: arbitrary geometry object in 3D space composed of triangles
+Given: arbitrary geometry object in 3D space composed of triangles - in other words any Three.js Mesh object)
 
-Task 1: Poke a hole in the geometry by moving a single vertex at ant arbitrary location in the geometry
-Task 2: By algorithm only, identify the moved vertex - the errant one making the hole - and display its location
+Task 1: Poke a hole or any number of holesin the geometry by moving any vertex at any arbitrary location in the geometry to any distance away from its given position
+Task 2: By algorithm only, identify the moved vertices - the errant ones making the holes - and display the positions of the errant vertices
+Task 3: Repair the geometry
+
 
 ### Define "Manifold"
 
@@ -43,17 +45,7 @@ Three.js meshes are composed of triangular faces. This script checks the edges o
 <details open >
 <summary>To do and wish list </summary>
 
-
-</details>
-
-<details open >
-<summary> Things you can do using this script</summary>
-
-* Click the three bars( 'hamburger menu icon' ) to slide the menu in and out
-* Click the GitHub Octocat icon to view or edit the source code on GitHub
-* Click on title to reload te page
-* Press Control-U/Command-Option-U to view the source code
-* Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
+* 2019-12-12 ~ Theo ~ Support any imported object - such as STL files
 
 </details>
 
@@ -70,6 +62,18 @@ Three.js meshes are composed of triangular faces. This script checks the edges o
 
 <details open >
 <summary>Change log </summary>
+
+### 2019-12-12 ~ Theo
+
+Manifold v.0.04.01
+
+* Making progress
+
+* Task 2 looks like could be accomplished with next version
+
+Lesson learned
+
+* Comparing index numbers is better than comparing Three.js vertices
 
 ### 2019-12-06
 
