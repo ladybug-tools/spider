@@ -6,10 +6,10 @@
 <meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
 <meta name=description content="Identify non-watertight surfaces. Highlight errant faces with red borders" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
-<meta name="date" content = "2019-12-06" >
+<meta name="date" content = "2019-12-11" >
 <meta name = "version" content = "0.00.00" >
 
-<title>Manifold 0.04.00</title>
+<title>Manifold 0.04.01</title>
 
 <link href="src/style.css" rel="stylesheet" >
 
@@ -37,8 +37,13 @@
 		<div id=GTOdivMenuGenerateThreejsObjects ></div>
 
 		<p>
-			<button onclick=addHole() >add hole</button>
+			<button onclick=addHole(2) >add hole with first vertex in mesh</button>
 		</p>
+		<p>
+			<button onclick=addHole() >add hole with random vertex</button>
+		</p>
+
+		<div id=HolesMessage ></div>
 
 		<p>
 			<button onclick=checkEdges(mesh) >check edges </button>
@@ -139,7 +144,10 @@ function init() {
 }
 
 
-function addHole() {
+window.addEventListener( "onresetall", () => divMessage.innerHTML = HolesMessage.innerHTML="", false );
+
+
+function addHole( index ) { // z- coordinate in first vertex
 
 	const geometry = mesh.geometry
 
@@ -151,41 +159,50 @@ function addHole() {
 	}
 
 	const pos = geometry.attributes.position.array;
-	//pos[ Math.floor( pos.length * Math.random() ) ] = -50;
-	pos[ 2 ] = -50;
+
+	index = index === 2 ? index : Math.floor( pos.length * Math.random() );
+
+	pos[ index ] = -88;
 
 	geometry.attributes.position.needsUpdate = true;
+
+	HolesMessage.innerHTML +=`<div>hole: vertex ${ Math.floor( index / 3 )  }</div>`;
+
 
 }
 
 
 function checkEdges() {
 
-	const lines = [];
+	lines = [];
 
 	mesh.geometry = mesh.geometry.type.includes( "BufferGeometry" ) ?
 		new THREE.Geometry().fromBufferGeometry(mesh.geometry) : mesh.geometry;
 
 	mesh.geometry.faces.forEach(function (face, idx) {
 
-		const edges = getEdges( face, idx )
+		const edges = getEdges( face, idx );
 
 		lines.push( ...edges );
 
 	} );
-
 	//console.log( 'lines', lines );
 
-	const pairs = [];
+	pairs = [];
 
 	for ( let i = 0; i < lines.length; i++ ) {
 
+		const line1 = lines[ i ];
+
+		const line1start = line1.start;
+
+		const line1end = line1.end;
+
 		for ( let j = 0; j < lines.length; j++ ) {
 
-			const line1 = lines[ i ];
 			const line2 = lines[ j ];
 
-			if ( line1.start.equals( line2.end, tolerance) && line1.end.equals( line2.start, tolerance ) ) {
+			if ( line1start.equals( line2.end, tolerance) && line1end.equals( line2.start, tolerance ) ) {
 
 				pairs.push( i );
 
@@ -214,7 +231,59 @@ function checkEdges() {
 
 	}
 
-	if( holes.length === 0 ) {
+	vertices = [];
+	vv = [];
+	index = 0;
+
+	holes.forEach( hole => {
+
+		line = lines[ hole ]
+		start = line.start;
+		end = line.end;
+		vertices.push( start, end );
+		vv.push( index++, index++ );
+
+		console.log( 'line', start, end );
+
+	});
+
+	console.log( 'vertices', vertices );
+
+	duplicates = [];
+	dd = []
+
+	vertices.forEach( ( vertex, index ) => {
+
+		if ( duplicates.indexOf( vertex ) === -1 ) {
+			duplicates.push( vertex ); dd.push( index ); }
+
+	} )
+
+	console.log( 'duplicates', duplicates );
+
+	vertexIndex = vv.find( vertex => dd.indexOf( vertex ) === -1 );
+
+	vertexErrant = vertices[ vertexIndex ];
+	
+	// for ( let i = 0; i < vertices.length; i++ ) {
+
+	// 	if ( duplicates.indexOf( vertices[ i ] ) === -1 ) {
+
+	// 		console.log( 'vvvvvvvv',vertices[ i ]  );
+	// 	}
+	// }
+
+	console.log( 'vertexErrant', vertexErrant );
+
+	const geometry = new THREE.BoxBufferGeometry( 2, 2, 2 );
+	const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
+	const telltale = new THREE.Mesh( geometry, material );
+	telltale.position.copy( vertexErrant );
+
+	mesh.add( telltale );
+
+
+	if ( holes.length === 0 ) {
 
 		divMessage.innerHTML = `<p>Looks like this mesh is 'watertight'</p>`;
 
@@ -222,7 +291,9 @@ function checkEdges() {
 
 		divMessage.innerHTML = `<p>Faces with issues have a red border. ${ holes.length } faces with issues</p>`;
 
+		console.log( 'holes', holes );
 	}
+
 
 }
 
