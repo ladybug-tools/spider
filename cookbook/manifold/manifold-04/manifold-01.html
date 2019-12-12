@@ -264,7 +264,7 @@ function checkEdges() {
 	vertexIndex = vv.find( vertex => dd.indexOf( vertex ) === -1 );
 
 	vertexErrant = vertices[ vertexIndex ];
-	
+
 	// for ( let i = 0; i < vertices.length; i++ ) {
 
 	// 	if ( duplicates.indexOf( vertices[ i ] ) === -1 ) {
@@ -275,6 +275,9 @@ function checkEdges() {
 
 	console.log( 'vertexErrant', vertexErrant );
 
+
+	//try tell tales on all
+	
 	const geometry = new THREE.BoxBufferGeometry( 2, 2, 2 );
 	const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
 	const telltale = new THREE.Mesh( geometry, material );
