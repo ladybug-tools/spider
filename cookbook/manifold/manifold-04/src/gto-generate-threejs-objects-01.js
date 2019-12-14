@@ -1,11 +1,14 @@
 // copyright 2019 Theo Armour. MIT license.
-// 2019-12-06
+// See pushme-pullyou/templates-01/threejs-hamburger/v-0-01/src/gto-generate-threejs-objects-00.js
+// 2019-12-13 v0.01
 // jshint esversion: 6
 // jshint loopfunc: true
 
 
 
 const GTO = {}
+
+GTO.eventGenerateObject = undefined;
 
 GTO.geometries = [
 
@@ -34,10 +37,10 @@ GTO.getMenu = function () {
 
 	<summary>Generate Three.js objects</summary>
 
-	<p>Create new geometries by algorithm</p>
+	<p>Create new objects by algorithm</p>
 
 	<p>
-		<select onchange=GTO.drawGeometry(this.selectedIndex) size=10 >${ gto }</select>
+		<select onchange=GTO.generateObject(this.selectedIndex) size=10 >${ gto }</select>
 	</p>
 
 </details>
@@ -48,25 +51,37 @@ GTO.getMenu = function () {
 }
 
 
-GTO.drawGeometry = function ( index ) {
+GTO.generateObject = function (index) {
 
-	window.dispatchEvent(eventResetAll);
 
-	scene.remove( mesh );
+
+	scene.remove(mesh);
 
 	const items = GTO.geometries[index];
-	const name = items[ 0 ];
-	const geometry = new THREE[ name + "BufferGeometry" ]( ...items.slice( 1 ) );
-	const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
+	const name = items[0];
+	const geometry = new THREE[name + "BufferGeometry"](...items.slice(1));
+	const material = new THREE.MeshNormalMaterial({ opacity: 0.85, side: 2, transparent: true });
 
 	mesh = new THREE.Mesh(geometry, material);
 	mesh.name = name.toLowerCase();
 
-	const pos = mesh.geometry.attributes.position.array;
-	//pos[ Math.floor( pos.length * Math.random() ) ] = -50;
-	//pos[ 2 ] = -50;
 	scene.add(mesh);
 
-	zoomObjectBoundingSphere( mesh )
+	window.addEventListener("onresetall", GTO.onGenerateObject );
+
+	window.dispatchEvent(eventResetAll);
+
+};
+
+
+GTO.onGenerateObject = function () {
+
+	zoomObjectBoundingSphere(mesh);
+
+	//const pos = mesh.geometry.attributes.position.array;
+	//pos[ Math.floor( pos.length * Math.random() ) ] = -50;
+	//pos[ 2 ] = -50;
+
+	console.log('GTO.onGenerateObject');
 
 }

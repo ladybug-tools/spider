@@ -1,18 +1,18 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://jaanga.github.io/cookbook-threejs/examples/0-templates/ "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page](  "View file as a web page." ) </span>
 
 
-<div><input type=button onclick="window.location.href='https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/0-templates/README.md'";
+<div><input type=button onclick="window.location.href='http://www.ladybug.tools/spider/#cookbook/manifold/README.md'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 
-# [Manifold Read Me]( #cookbook-threejs/examples/editing/manifold/README.md )
+# [Manifold Read Me]( #cookbook/manifold/README.md )
 
 <!--
 <iframe src=https://jaanga.github.io/cookbook/examples/xxxxxx/xxxxxx.html width=100% height=500px >Iframes are not viewable in GitHub source code view</iframe>
 _basic-html.html_
 -->
 
-### Full Screen: [Manifold]( https://jaanga.github.io/cookbook-threejs/examples/editing/manifold/ )
+### Full Screen: [Manifold]( http://www.ladybug.tools/spider/cookbook/manifold/ )
 
 <details open >
 <summary>Concept</summary>
@@ -62,6 +62,18 @@ Three.js meshes are composed of triangular faces. This script checks the edges o
 
 <details open >
 <summary>Change log </summary>
+
+### 2019-12-13 ~ Theo
+
+Manifold v.0.04.02
+
+* C: Update read me links
+* R: Better handling 'reset all' events
+* F: Add some performance statistics
+* R: Capturing many - but not all - errant vertices
+
+
+
 
 ### 2019-12-12 ~ Theo
 
