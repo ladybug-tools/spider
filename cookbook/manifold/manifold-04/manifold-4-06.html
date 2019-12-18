@@ -7,9 +7,9 @@
 <meta name=description content="Identify non-watertight surfaces. Highlight errant faces with red borders" >
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
 <meta name="date" content = "2019-12-18" >
-<meta name = "version" content = "0.04.00" >
+<meta name = "version" content = "0.00.00" >
 
-<title>Manifold 0.04.04</title>
+<title>Manifold 0.04.05</title>
 
 <link href="src/style.css" rel="stylesheet" >
 
@@ -21,8 +21,9 @@
 	<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/controls/TrackballControls.js" ></script>
 
 	<script src="src/gto-generate-threejs-objects-02.js" ></script>
+	<script src="src/ofr-obj-file-reader-00.js"></script>
 	<script src="src/ovg-obj-viewer-gallery-00.js"></script>
-	<script src="src/mmc-manifold-mesh-check-00.js"></script>
+	<script src="src/mmc-manifold-mesh-check-01.js"></script>
 
 	<script src="src/mms-mesh-material-settings-01.js" ></script>
 	<script src="src/dss-display-scene-settings-01.js" ></script>
@@ -40,6 +41,8 @@
 		</p>
 
 		<div id=GTOdivMenuGenerateThreejsObjects ></div>
+
+		<div id=OFRdivMenuObjFileReader ></div>
 
 		<div id=OVGdivObjectViewerGallery ></div>
 
@@ -98,6 +101,8 @@ function init() {
 	hdrTitle.innerHTML = getTitle();
 
 	GTOdivMenuGenerateThreejsObjects.innerHTML = GTO.getMenu();
+
+	OFRdivMenuObjFileReader.innerHTML = OFR.getMenu();
 
 	OVGdivObjectViewerGallery.innerHTML = OVG.getMenu();
 
