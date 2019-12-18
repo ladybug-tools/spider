@@ -63,6 +63,16 @@ Three.js meshes are composed of triangular faces. This script checks the edges o
 <details open >
 <summary>Change log </summary>
 
+### 2019-12-18 ~ Theo
+
+Manifold v.0.04.04
+
+* Appears to be doing a very good job at finding vertexes with issues
+* Highlights errant vertices with a little box
+* Highlights vase with issues by adding a red border
+* Add ability to test on OBJ files
+
+
 ### 2019-12-13 ~ Theo
 
 Manifold v.0.04.02

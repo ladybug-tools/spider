@@ -1,6 +1,6 @@
 // copyright 2019 Theo Armour. MIT license.
 // See pushme-pullyou/templates-01/threejs-hamburger/v-0-01/src/gto-generate-threejs-objects-00.js
-// 2019-12-13 v0.01
+// 2019-12-17 v0.02
 // jshint esversion: 6
 // jshint loopfunc: true
 
@@ -37,12 +37,14 @@ GTO.getMenu = function () {
 
 	<summary>Generate Three.js objects</summary>
 
-	<p>Create new objects by algorithm</p>
+	<p title="source: gto-generate-threejs-objects-xx.js" >Create new meshes by algorithm</p>
 
 	<p>
 		<select onchange=GTO.generateObject(this.selectedIndex) size=10 >${ gto }</select>
 	</p>
 
+	<hr>
+	
 </details>
 	`;
 
@@ -52,8 +54,6 @@ GTO.getMenu = function () {
 
 
 GTO.generateObject = function (index) {
-
-
 
 	scene.remove(mesh);
 
