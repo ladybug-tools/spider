@@ -134,8 +134,8 @@ function init() {
 	axesHelper = new THREE.AxesHelper( 100 );
 	scene.add( axesHelper );
 
-	//geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
-	geometry = new THREE.SphereBufferGeometry( 50, 20, 10 );
+	geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
+	//geometry = new THREE.SphereBufferGeometry( 50, 20, 10 );
 	material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
