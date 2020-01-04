@@ -103,7 +103,7 @@ MMC.checkEdges = function() {
 
 	} );
 
-	console.log( 'MMC.vertexCount', MMC.vertexCount );
+	//console.log( 'MMC.vertexCount', MMC.vertexCount );
 
 	MMC.vertexCount.forEach( ( count, idx ) => {
 
@@ -133,7 +133,7 @@ MMC.checkEdges = function() {
 
 	MMCdivStatsEdges.innerHTML = `<div>time edges: ${ ( performance.now() - timeStart ).toLocaleString() }</div>`;
 
-	console.log( 'edges', MMC.edges );
+	//console.log( 'edges', MMC.edges );
 
 	edgePairs = [];
 
@@ -161,7 +161,7 @@ MMC.checkEdges = function() {
 	}
 	MMCdivStatsEdges.innerHTML += `<div>time pairs: ${ ( performance.now() - timeStart ).toLocaleString() }</div>`;
 
-	console.log( 'edgePairs', edgePairs );
+	//console.log( 'edgePairs', edgePairs );
 
 	edgeIndexNoPairs = [];
 	edgeIndexPairsCount = [];
@@ -177,7 +177,7 @@ MMC.checkEdges = function() {
 		}
 
 	}
-	console.log( 'edgeIndexNoPairs', edgeIndexNoPairs );
+	//console.log( 'edgeIndexNoPairs', edgeIndexNoPairs );
 
 
 	edgeIndexNoPairs.forEach( hole => {
@@ -247,8 +247,8 @@ MMC.identifyVertices = function( edgeIndexNoPairs ) {
 		verticesIndex.push( index++, index++ );
 
 	});
-	console.log( 'verticesNoP', verticesNoP );
-	console.log( 'verticesIndex', verticesIndex );
+	//console.log( 'verticesNoP', verticesNoP );
+	//console.log( 'verticesIndex', verticesIndex );
 
 //what to do when all duplicates? Look for triads?
 
@@ -270,7 +270,7 @@ MMC.identifyVertices = function( edgeIndexNoPairs ) {
 			if ( vertex.equals( vertexNoP ) ) { hits++; }
 		}
 
-		console.log( 'hits', hits );
+		//console.log( 'hits', hits );
 
 		if ( hits === 1 ) {
 

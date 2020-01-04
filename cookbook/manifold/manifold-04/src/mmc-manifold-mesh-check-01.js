@@ -87,6 +87,9 @@ MMC.checkEdges = function() {
 	mesh.geometry = mesh.geometry.type.includes( "BufferGeometry" ) ?
 		new THREE.Geometry().fromBufferGeometry(mesh.geometry) : mesh.geometry;
 
+	// box geom has 24 vertices
+	// need the 6 unique vertices
+
 	MMC.vertexCount = new Array( mesh.geometry.vertices.length ).fill( 0 );
 
 	mesh.geometry.faces.forEach( (face, idx)=> {
@@ -103,11 +106,11 @@ MMC.checkEdges = function() {
 
 	} );
 
-	console.log( 'MMC.vertexCount', MMC.vertexCount );
+	//console.log( 'MMC.vertexCount', MMC.vertexCount );
 
 	MMC.vertexCount.forEach( ( count, idx ) => {
 
-		if( count === 0) {
+		if( count === 1 ) {
 
 			vertex = mesh.geometry.vertices[ idx ];
 			const geometry = new THREE.BoxGeometry( 2, 2, 2 );
@@ -161,7 +164,7 @@ MMC.checkEdges = function() {
 	}
 	MMCdivStatsEdges.innerHTML += `<div>time pairs: ${ ( performance.now() - timeStart ).toLocaleString() }</div>`;
 
-	console.log( 'edgePairs', edgePairs );
+	//console.log( 'edgePairs', edgePairs );
 
 	edgeIndexNoPairs = [];
 	edgeIndexPairsCount = [];
@@ -177,7 +180,7 @@ MMC.checkEdges = function() {
 		}
 
 	}
-	console.log( 'edgeIndexNoPairs', edgeIndexNoPairs );
+	//console.log( 'edgeIndexNoPairs', edgeIndexNoPairs );
 
 
 	edgeIndexNoPairs.forEach( hole => {
@@ -247,8 +250,8 @@ MMC.identifyVertices = function( edgeIndexNoPairs ) {
 		verticesIndex.push( index++, index++ );
 
 	});
-	console.log( 'verticesNoP', verticesNoP );
-	console.log( 'verticesIndex', verticesIndex );
+	//console.log( 'verticesNoP', verticesNoP );
+	//console.log( 'verticesIndex', verticesIndex );
 
 //what to do when all duplicates? Look for triads?
 
@@ -267,15 +270,16 @@ MMC.identifyVertices = function( edgeIndexNoPairs ) {
 
 			vertex = verticesMesh[ j ];
 
-			if ( vertex.equals( vertexNoP ) ) { hits++; }
+			if (vertex.equals(vertexNoP)) { hits++; }
+
 		}
 
-		console.log( 'hits', hits );
+		//console.log( 'hits', hits );
 
 		if ( hits === 1 ) {
 
 			const geometry = new THREE.BoxGeometry( 2, 2, 2 );
-			const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
+			const material = new THREE.MeshBasicMaterial( { color: "red" });
 			const telltale = new THREE.Mesh( geometry, material );
 			telltale.position.copy( vertexNoP );
 			//telltale.position.set( 0, 0, 58 );
@@ -283,6 +287,16 @@ MMC.identifyVertices = function( edgeIndexNoPairs ) {
 
 		}
 
+		if ( hits === 2 ) {
+
+			const geometry = new THREE.BoxGeometry( 2, 2, 2 );
+			const material = new THREE.MeshBasicMaterial( { color: "blue" });
+			const telltale = new THREE.Mesh( geometry, material );
+			telltale.position.copy( vertexNoP );
+			//telltale.position.set( 0, 0, 58 );
+			mesh.add( telltale );
+
+		}
 	}
 
 

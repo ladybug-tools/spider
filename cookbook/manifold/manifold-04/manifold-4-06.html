@@ -9,7 +9,7 @@
 <meta name="date" content = "2019-12-18" >
 <meta name = "version" content = "0.00.00" >
 
-<title>Manifold 0.04.05</title>
+<title>Manifold 0.04.06</title>
 
 <link href="src/style.css" rel="stylesheet" >
 
@@ -134,8 +134,8 @@ function init() {
 	axesHelper = new THREE.AxesHelper( 100 );
 	scene.add( axesHelper );
 
-	//geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
-	geometry = new THREE.SphereBufferGeometry( 50, 20, 10 );
+	geometry = new THREE.BoxBufferGeometry( 50, 50, 50 );
+	//geometry = new THREE.SphereBufferGeometry( 50, 20, 10 );
 	material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
