@@ -30,9 +30,9 @@ GLF.getMenu = function() {
 	<select id=GLFselFiles onchange=GLF.getFile(this.value) size=20 ></select>
 
 	<p>
-		<button id=but onclic=kGLF.getFile(); >get file</button>
+		<button id=but onclick=GLF.getFile(GLFselFiles.value); >get file</button>
 
-		<button id=but onclick=GLF.getFileJson(); >get file json</button>
+		<button id=but onclick=GLF.getFileJson(GLFselFiles.value); >get file json</button>
 
 		<button onclick=GLF.listFiles() >list files</button>
 	</p>
@@ -100,23 +100,33 @@ GLF.getFileJson = function ( index ) {
 
 	const url = GLF.prefix + GLF.filesData[ index ].path;
 	//const url = GLF.urls[ index ];
-	console.log( '', url );
-
+	console.log( 'url', url );
+	let json
 	xhr = new XMLHttpRequest();
 	xhr.open( 'GET', url, true );
 	xhr.onerror = ( xhr ) => console.log( 'error:', xhr  );
 	xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
-	xhr.onload = ( xhr ) => console.log( 'response', xhr.target.response );
+	xhr.onload = ( xhr ) => {
+
+		json = JSON.parse( xhr.target.response );
+		console.log( 'response', json );
+
+			GLFdivFiles.innerHTML = `
+			<div style=resize:both;overflow:hidden;}>
+				${ json }
+			</p>
+			`;
+	};
 	xhr.send( null );
 
 
+	function callback () {
 
-	GLFdivFiles.innerHTML =
-		`
-<div style=resize:both;overflow:hidden;}>
-	<iframe src=${ url } ><iframe>
-</p>
-`;
+		json = JS
+
+	}
+
+
 
 }
 
