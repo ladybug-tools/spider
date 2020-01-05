@@ -32,13 +32,13 @@ GLF.getMenu = function() {
 
 	<p>
 
-
+<!--
 		<button onclick=GLF.listFiles() >list all files</button>
 
 		<button id=but onclick=GLF.getFileJson(GLFselFiles.selectedIndex); >get file json</button>
 
 		<button id=butGetFile onclick=GLF.getFileJson(24) >get file 24 as json</button>
-
+-->
 	</p>
 
 
@@ -136,11 +136,10 @@ GLF.getFileJson = function ( index ) {
 }
 
 
-GLF.getTree() {
+GLF.getTree = function() {
 
 
 
-	
 }
 
 
