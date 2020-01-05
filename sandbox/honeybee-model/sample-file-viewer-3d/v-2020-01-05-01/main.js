@@ -1,5 +1,5 @@
 
-const urlSourceCode = `https://github.com/`;
+const urlSourceCode = `https://github.com/ladybug-tools/spider/tree/master/sandbox/honeybee-model`;
 const urlSourceCodeIcon = "assets/github-mark-32.png";
 
 let mesh, material, geometry, edges, boxHelper;
@@ -84,7 +84,7 @@ function zoomObjectBoundingSphere( obj = PHJ.group ) {
 
 
 	GLFselFiles.selectedIndex = 23;
-	
+
 };
 
 
