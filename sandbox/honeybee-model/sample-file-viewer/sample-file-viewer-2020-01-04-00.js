@@ -30,7 +30,7 @@ GLF.getMenu = function() {
 	<select id=GLFselFiles onchange=GLF.getFile(this.value) size=20 ></select>
 
 	<p>
-		<button id=but onclickGLF.getFile(); >get file</button>
+		<button id=but onclick=GLF.getFile(); >get file</button>
 		<button onclick=GLF.listFiles() >list files</button>
 	</p>
 

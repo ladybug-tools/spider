@@ -30,7 +30,10 @@ GLF.getMenu = function() {
 	<select id=GLFselFiles onchange=GLF.getFile(this.value) size=20 ></select>
 
 	<p>
-		<button id=but onclickGLF.getFile(); >get file</button>
+		<button id=but onclic=kGLF.getFile(); >get file</button>
+
+		<button id=but onclick=GLF.getFileJson(); >get file json</button>
+
 		<button onclick=GLF.listFiles() >list files</button>
 	</p>
 
@@ -82,6 +85,31 @@ GLF.getFile = function ( index ) {
 	const url = GLF.prefix + GLF.filesData[ index ].path;
 	//const url = GLF.urls[ index ];
 	console.log( '', url );
+
+	GLFdivFiles.innerHTML =
+		`
+<div style=resize:both;overflow:hidden;}>
+	<iframe src=${ url } ><iframe>
+</p>
+`;
+
+}
+
+
+GLF.getFileJson = function ( index ) {
+
+	const url = GLF.prefix + GLF.filesData[ index ].path;
+	//const url = GLF.urls[ index ];
+	console.log( '', url );
+
+	xhr = new XMLHttpRequest();
+	xhr.open( 'GET', url, true );
+	xhr.onerror = ( xhr ) => console.log( 'error:', xhr  );
+	xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	xhr.onload = ( xhr ) => console.log( 'response', xhr.target.response );
+	xhr.send( null );
+
+
 
 	GLFdivFiles.innerHTML =
 		`
