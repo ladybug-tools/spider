@@ -9,5 +9,6 @@ Honeybee Data-Model Objects
 
 Viewer
 
+* [sample-file-viewer-2020-01-04-01.html]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer/sample-file-viewer-2020-01-04-01.html )
 * [sample-file-viewer-2020-01-04-00.html]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer/sample-file-viewer-2020-01-04-00.html )
 
