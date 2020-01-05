@@ -126,8 +126,8 @@ GLF.getFileJson = function ( index ) {
 
 		if ( GLF.json.rooms ) { PHJ.processJson(); }
 
-		GLFdivFiles.innerHTML = `
-	<textarea style=height:400px;width:100%;>${ xhr.target.response }</textarea>`;
+		GLFdivFiles.innerHTML =
+			`<textarea style=height:400px;width:100%;>${ xhr.target.response }</textarea>`;
 
 	};
 
@@ -136,6 +136,12 @@ GLF.getFileJson = function ( index ) {
 }
 
 
+GLF.getTree() {
+
+
+
+	
+}
 
 
 
