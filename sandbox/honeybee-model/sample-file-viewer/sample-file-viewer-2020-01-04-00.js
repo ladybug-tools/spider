@@ -55,7 +55,7 @@ GLF.getFileNames = function () {
 		.then( response => response.json() )
 		.then( json => {
 
-			GLF.filesData = json.tree.filter( item => item.path.includes( "samples" ) ).filter( item => item.path.endsWith( ".json" ) ).map( item => item.path );
+			GLF.filesData = json.tree.filter( item => item.path.includes( "samples" ) ).filter( item => item.path.endsWith( ".json" ) ).map( item => item );
 			//GLF.filesData = json.tree.filter( item => item.path.includes( "textures" ) ).filter( item => item.path.endsWith( ".jpg" ) ).map( item => item.path );
 
 			GLFselFiles.innerHTML = GLF.getOptions();
@@ -68,7 +68,7 @@ GLF.getFileNames = function () {
 
 GLF.getOptions = function () {
 
-	const options = GLF.filesData.map( ( item, index ) => `<option value=${ index }>${ item.split( "/" ).pop() }</option>` );
+	const options = GLF.filesData.map( ( item, index ) => `<option value=${ index } title="${ item.size.toLocaleString() } bytes" >${ item.path.split( "/" ).pop() }</option>` );
 	//const options = GLF.urls.map( ( item, index ) => `<option value=${ index }>${ item.split( "/" ).pop() }</option>` );
 
 	GLFdivOnLoad.innerHTML = `<p>files found: ${ options.length }</p>`;
