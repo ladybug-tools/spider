@@ -79,7 +79,7 @@ GLF.getOptions = function () {
 
 GLF.getFile = function ( index ) {
 
-	const url = GLF.prefix + GLF.filesData[ index ].path;
+	const url = GLF.prefix + GLF.filesData[ index ];
 	//const url = GLF.urls[ index ];
 	console.log( '', url );
 
@@ -92,13 +92,13 @@ GLF.getFile = function ( index ) {
 
 }
 
-GLF.listFiles = function () {
+GLF.listImages = function ( index ) {
 
-	//const url = GLF.prefix + GLF.filesData[ index ];
-	//console.log( '', url );
+	const url = GLF.prefix + GLF.filesData[ index ];
+	console.log( '', url );
 
-	files = GLF.filesData.map( url => `"${GLF.prefix }${ url.path }"`).join( ",<br>");
-	GLFdivFiles.innerHTML = files;
+	files = GLF.filesData.map( url => `"${GLF.prefix }${ url }"`).join( ",<br>");
+	GLFdivImages.innerHTML = files;
 		`
 
 `;
