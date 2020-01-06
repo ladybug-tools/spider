@@ -27,8 +27,7 @@ PHJ.processJson = function () {
 
 
 			const vertices = boundary.map( point => new THREE.Vector3().fromArray( point ) );
-
-			console.log( 'vertices', vertices );
+			//console.log( 'vertices', vertices );
 
 			shape = PHJ.addShape3d( vertices );
 

@@ -3,6 +3,8 @@
 
 Sample File Viewer 3D
 
+* [sample file viewer 3d 2020-01-05-02]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-05-02/sample-file-viewer-3d.html )
+	* Begins to add a tree view of the JSON
 * [sample file viewer 3d 2020-01-05-01]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-05-01/sample-file-viewer-3d.html )
 <img src="https://www.ladybug.tools/spider/sandbox/honeybee-model/images/sample-file-viewer-3d-2020-01-05-01.png" width=240>
 * [sample file viewer 3d 2020-01-05-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-05-00/sample-file-viewer-3d.html )

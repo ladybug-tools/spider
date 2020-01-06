@@ -32,8 +32,8 @@ GLF.getMenu = function() {
 
 	<p>
 
+	<button onclick=GLF.getTree() >get tree</button>
 <!--
-		<button onclick=GLF.listFiles() >list all files</button>
 
 		<button id=but onclick=GLF.getFileJson(GLFselFiles.selectedIndex); >get file json</button>
 
@@ -44,9 +44,19 @@ GLF.getMenu = function() {
 
 	<div id=GLFdivOnLoad ></div>
 
+
+	<div id=GLFdivStrings ></div>
+
+	<p>Properties: TBD</p>
+
+	<div id=GLFdivRooms ></div>
+
+	<div id=GLFdivObjects ></div>
+
+	<br>
+
+	raw json<br>
 	<div id=GLFdivFiles ></div>
-
-
 
 </details>
 `;
@@ -71,6 +81,7 @@ GLF.getFileNames = function () {
 
 			GLFselFiles.selectedIndex = 23;
 
+
 		} );
 
 };
@@ -84,7 +95,6 @@ GLF.getOptions = function () {
 	//const options = GLF.urls.map( ( item, index ) => `<option value=${ index }>${ item.split( "/" ).pop() }</option>` );
 
 	GLFdivOnLoad.innerHTML = `<p>files found: ${ options.length }</p>`;
-
 
 
 	return options;
@@ -118,16 +128,20 @@ GLF.getFileJson = function ( index ) {
 	xhr = new XMLHttpRequest();
 	xhr.open( 'GET', url, true );
 	xhr.onerror = ( xhr ) => console.log( 'error:', xhr  );
-	xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
 	xhr.onload = ( xhr ) => {
 
 		GLF.json = JSON.parse( xhr.target.response );
 		console.log( 'json', GLF.json );
 
+		jj = GLF.json;
+
 		if ( GLF.json.rooms ) { PHJ.processJson(); }
 
 		GLFdivFiles.innerHTML =
-			`<textarea style=height:400px;width:100%;>${ xhr.target.response }</textarea>`;
+			`<textarea style=height:200px;width:100%;>${ xhr.target.response }</textarea>`;
+
+		GLF.getTree();
 
 	};
 
@@ -138,11 +152,106 @@ GLF.getFileJson = function ( index ) {
 
 GLF.getTree = function() {
 
+	GLFdivStrings.innerHTML = "";
+	GLFdivRooms.innerHTML = ""
+
+	for ( item in GLF.json ) {
+
+		//console.log( 'item', GLF.json[ item ] );
+
+		const type = typeof GLF.json[ item ];
+
+		//console.log( 'type', typeof GLF.json[ item ] );
+
+		if ( type === "string" ) {
+
+			GLFdivStrings.innerHTML += `${ item }: ${ GLF.json[ item ] }<br>`;
+
+		} else if ( type === 'object' ) {
+
+			if ( item === "rooms" ) { GLF.parseRooms ( rooms ); }
+
+			if ( Array.isArray( GLF.json[ item ] ) ) {
+
+				arr = GLF.json[ item ];
+
+				//GLFdivArrays.innerHTML +=
+
+				console.log( 'array', GLF.json[ item ] );
+
+			} else {
+
+				console.log( 'object', item, GLF.json[ item ] );
+
+			}
+
+		}
 
 
+	}
 }
 
 
+GLF.parseRooms = function ( rooms ) {
+
+	const htm = rooms.map( ( room, index ) => {
+
+		console.log( 'ff', room.faces );
+
+		facesHtm = GLF.parseFaces( room.faces );
+
+		txt = `
+		<details>
+			<summary >Room ${ index + 1 }</summary>
+
+			type: ${ room.type }<br>
+			name: ${ room.name }<br>
+			display_name: ${ room.display_name }<br>
+			properties: <br>
+			type: ${ room.properties.program_type }<br>
+			program type: ${ room.properties.type }<br>
+			energy type: ${ room.properties.energy.type }<br>
+			construction set: ${ room.properties.energy.construction_set }<br>
+
+			${ facesHtm }
+
+		</details>
+		`;
+
+		console.log( 'room', room );
+		return txt;
+
+	} ).join( "");
+
+	GLFdivRooms.innerHTML = htm;
+
+};
+
+
+
+GLF.parseFaces = function ( faces ) {
+
+	htm = faces.map( ( face, index ) => {
+
+		txt = `
+<details>
+<summary>Face ${ index + 1 }</summary>
+
+type: ${ face.type }<br>
+name: ${ face.name }<br>
+display_name: ${ face.display_name }<br>
+face type: ${ face.face_type }<br>
+etc...
+</details>
+`;
+
+		return txt;
+	} ).join( "" );
+
+	return htm;
+
+
+};
 
 GLF.listFiles = function () {
 
