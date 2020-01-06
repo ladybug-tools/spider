@@ -22,3 +22,8 @@ Honeybee Data-Model Objects
 * https://ladybug-tools-in2.github.io/
 * https://github.com/ladybug-tools-in2/ladybug-tools-in2.github.io
 * https://github.com/ladybug-tools-in2/honeybee-model-schema/tree/master/honeybee_model_schema/samples
+
+
+Notes
+
+Experimenting with https://chronver.org/
