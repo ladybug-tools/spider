@@ -13,7 +13,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 _<small>Sample File Viewer 3D</small>_
 -->
 
-## Full Screen: [Sample File Viewer 3D]( https://www.ladybug.tools/spider/#sandbox/honeybee-model/sample-file-viewer-3d/index.html )
+## Full Screen: [Sample File Viewer 3D]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/index.html )
 
 
 ## Concept
