@@ -42,6 +42,11 @@ View Honeybee models in 3D in your browser using the WebGL and the Three.js Java
 
 ### 2020-01-07 ~ Theo
 
+Sample File Viewer 3D 2020-01-07
+
+* Add JSON tree view to menu
+* Add Setting menu panel with toggles card and functions
+* General refactor and cleanup
 * First commit read me
 
 
