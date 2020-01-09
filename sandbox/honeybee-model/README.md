@@ -20,9 +20,9 @@ View with the Three.js renderer
 
 ## Sample File Viewer
 
-View JSON as text only
+View Honeybee JSON as a text only tree view
 
-See [Read Me ]( #sandbox/honeybee-model/sample-file-viewer/README.md)
+For links and change log, see [Sample File Viewer Read Me ]( #sandbox/honeybee-model/sample-file-viewer/README.md)
 
 <!--
 * [sample-file-viewer-2020-01-06-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer/v-2020-01-06/sample-file-viewer.html )
