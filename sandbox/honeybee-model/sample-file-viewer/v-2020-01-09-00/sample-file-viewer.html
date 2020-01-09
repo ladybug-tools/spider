@@ -5,7 +5,7 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "View Honeybee Model-Schema sample JSON file data in a tree-view" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
-<meta name=version content="2020-01-08-00">
+<meta name=version content="2020-01-09-00">
 
 <title></title>
 
@@ -73,7 +73,7 @@
 
 	<main>
 
-		<div id=divGetFiles></div>
+		<div id=GFLdivGetFiles></div>
 
 		<div id=JTVdivJsonTreeView > </div>
 
@@ -91,31 +91,26 @@
 
 <script>
 
-aSource.href = "https://github.com/ladybug-tools/spider/blob/master/sandbox/honeybee-model/sample-file-viewer/";
 imgIcon.src = "assets/github-mark-32.png";
+aSource.href = "https://github.com/ladybug-tools/spider/blob/master/sandbox/honeybee-model/sample-file-viewer/";
 aTitle.innerHTML= document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 const version = document.head.querySelector( "[ name=version ]" );
 sVersion.innerHTML = version ? version.content : "";
 divDescription.innerHTML = `<p>${ document.head.querySelector( "[ name=description ]" ).content }</p>`;
 
 
-init();
+// init();
 
-function init() {
+// function init() {
 
-	//divContents.innerHTML += `${ ( new Date ) }<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>`;
+// 	divContents.innerHTML += `${ ( new Date ) }<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>`;
 
-}
+// }
 
 
-function setIt() {
-
-	divContents.innerHTML += `<p>${ ( performance.now() ) } - Howdy! </p>`;
-
-}
 
 </script>
 <script src="jtv-json-tree-view.js"></script>
-<script src="gfl-github-file-list.js"></script>
+<script src="gfl-github-file-list-2020-01-09-00.js"></script>
 </body>
 </html>
