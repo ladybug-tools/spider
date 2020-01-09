@@ -29,7 +29,7 @@ JTV.getMenu = function() {
 
 		<summary>JSON tree view <span class=help onmouseover=divDetails.hidden=false >?</span></summary>
 
-		<div id=divDetails onmouseout=divDetails.hidden=true hidden >How can I help you?</div>
+		<p id=divDetails onmouseout=divDetails.hidden=true hidden >JSON rendered to a tree view using Theo's parser script</p>
 
 		<p>
 			<button id=but onclick=JTV.toggleAll(); >close all</button>
@@ -96,7 +96,7 @@ JTV.getArray = function( key, array, index ) { //console.log( 'Array', key, arra
 
 JTV.getObject = function( key, item , index ) {
 
-	if ( !item ) { console.log( 'err item', key, item, index ); return; }
+	if ( !item ) { console.log( 'error:', key, item, index ); return; }
 
 	const keys = Object.keys( item );
 	const htm = keys.map( key => JTV.parseJson( key, item[ key ]  ) ).join("");

@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
-<meta name = "description" content = "Basic TooToo HTML template" >
+<meta name = "description" content = "View Honeybee Model-Schema sample JSON file data in a tree-view" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
 <meta name=version content="2020-01-08-00">
 
@@ -79,6 +79,8 @@
 
 		<div id="divContents" ></div>
 
+		<br>
+		
 		<hr>
 
 		<center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > <img src="https://ladybug.tools/artwork/icons_bugs/ico/spider.ico" height=24 ></a></center>
@@ -94,7 +96,7 @@ imgIcon.src = "assets/github-mark-32.png";
 aTitle.innerHTML= document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 const version = document.head.querySelector( "[ name=version ]" );
 sVersion.innerHTML = version ? version.content : "";
-divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
+divDescription.innerHTML = `<p>${ document.head.querySelector( "[ name=description ]" ).content }</p>`;
 
 
 init();

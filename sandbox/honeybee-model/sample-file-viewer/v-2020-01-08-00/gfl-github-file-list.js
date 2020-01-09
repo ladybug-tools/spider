@@ -20,7 +20,7 @@ GFL.getMenu = function() {
 		<summary>Honeybee Model-Schema Samples</summary>
 
 		<p>A list of files from <a href="https://github.com/ladybug-tools-in2/honeybee-model-schema/tree/master/honeybee_model_schema/samples" target="_blank">ladybug-tools-in2
-		</a> on GitHub. Click file title to view its contents.</p>
+		</a> on GitHub. Tooltips indicate file size in bytes. Click file title to view its contents.</p>
 
 		<select id=GFLselFiles onchange=GFL.getFileJson(this.value) size=10 ></select>
 
@@ -36,7 +36,7 @@ GFL.getMenu = function() {
 		<summary>Raw JSON file <span class=help onmouseover=GFLpRawJsonHelp.hidden=false >?</span></summary>
 
 		<p id=GFLpRawJsonHelp onmouseout=GFLpRawJsonHelp.hidden=true hidden >
-			The plain text JSON source code as read from the GitHub repository</p>
+			The plain text JSON source code as read directly from the GitHub repository. The text is editable.</p>
 
 		<textarea id=GFLtxtRawJson style=height:400px;width:100%;></textarea>
 
@@ -78,7 +78,7 @@ GFL.getOptions = function () {
 		`<option value=${ index } title="${ item.size.toLocaleString() } bytes" >${ index + 1 } ${ item.path.split( "/" ).pop() }</option>` );
 	//const options = GFL.urls.map( ( item, index ) => `<option value=${ index }>${ item.split( "/" ).pop() }</option>` );
 
-	GFLdivOnLoad.innerHTML = `<p>Files found: ${ options.length }</p>`;
+	GFLdivOnLoad.innerHTML = `<p>Files found on GitHub: ${ options.length }</p>`;
 
 	GFL.getFileJson( 28 ); // load a default file
 
@@ -108,11 +108,11 @@ GFL.getFileJson = function ( index ) {
 
 		const title = GFL.filesData[ index ].path.split( "/" ).pop()
 		GFLdivFileLoaded.innerHTML =
-			`<p>File loaded: <a href="${ GFL.source + title }" target="_blank">${ GFL.filesData[ index ].path }</a></p>`;
+			`<p>Link to file loaded. Click to edit.<br> <a href="${ GFL.source + title }" target="_blank" >${ GFL.filesData[ index ].path }</a></p>`;
 
 		GFLtxtRawJson.value = xhr.target.response;
 
-		name
+
 		//window.addEventListener( 'xhr.onload', console.log( '', 23 ), false )
 
 		JTVdivJsonView.innerHTML = JTV.parseJson( title, GFL.json, 0 );
