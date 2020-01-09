@@ -22,6 +22,9 @@ View with the Three.js renderer
 
 View JSON as text only
 
+See [Read Me ]( #sandbox/honeybee-model/sample-file-viewer/README.md)
+
+<!--
 * [sample-file-viewer-2020-01-06-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer/v-2020-01-06/sample-file-viewer.html )
 	* F: Add JSON Tree View
 	* C: Help text added
@@ -29,6 +32,7 @@ View JSON as text only
 * [sample-file-viewer-2020-01-04-01.html]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer/sample-file-viewer-2020-01-04-01.html )
 * [sample-file-viewer-2020-01-04-00.html]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer/sample-file-viewer-2020-01-04-00.html )
 
+-->
 
 ## Honeybee Data-Model Objects
 
