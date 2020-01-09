@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+	<meta name=description
+		content="View Honeybee models in 3D in your browser using the WebGL and the Three.js JavaScript library">
+	<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
+	<meta name=version content="2020-01-09-00">
+
+	<title></title>
+
+	<link href="assets/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/OrbitControls.js"></script>
+
+
+	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
+
+	<nav id="navMenu">
+
+		<header id="hdrTitle">
+
+			<h2>
+				<a id=aSource target=_top title="Source code on GitHub" >
+					<img id=imgIcon height=18 style=opacity:0.5; >
+				</a>
+
+				<a id=aTitle href="" title="Click to reload this page" ></a>
+				<span id=sVersion ></span>
+				<span class=help onmouseover=divDescription.hidden=false >?</span>
+
+			</h2>
+
+			<div id=divDescription onmouseout=divDescription.hidden=true hidden ></div>
+
+		</header>
+
+		<p>
+			<button onclick=THR.controls.reset(); title="Return to default view">reset view</button>
+
+			<button onclick=THR.zoomObjectBoundingSphere(PHJ.group); title="zoom without shifting camera angle">zoom all</button>
+
+		</p>
+
+		<p>
+			<button onclick="THR.controls.autoRotate=!THR.controls.autoRotate">rotation</button>
+		</p>
+
+		<p>
+			<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
+		</p>
+
+		<details open>
+
+			<summary class=sumMenuTitle>Browse files</summary>
+
+			<div id=GFLdivGetFiles></div>
+
+			<div id=JTVdivJsonTreeView ></div>
+			
+		</details>
+
+		<details open>
+
+			<summary class=sumMenuTitle>Settings</summary>
+
+			<div id=divSettings ></div>
+
+
+		</details>
+
+		<div id="divLog"></div>
+
+		<footer>
+
+			<hr>
+
+			<center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >
+			<img src="assets/spider.ico" height=24 ></a>
+			</center>
+
+		</footer>
+
+	</nav>
+
+	<main id=main>
+
+		<div id="divContent"></div>
+
+	</main>
+
+<script src="three/thr-three-2020-01-07-00.js"></script>
+<script src="three/thra-three-add-2020-01-07-00.js"></script>
+<script src="three/thrt-three-toggles-2020-01-07-00.js"></script>
+
+
+<script src="parse/phj-parse-honeybee-json-2020-01-07.js"></script>
+<script src="browse-files/gfl-github-file-list-2020-01-09-00.js"></script>
+<script src="parse/jtv-json-tree-view-2020-01-09-00.js"></script>
+<script>
+
+	aSource.href = "https://github.com/ladybug-tools/spider/tree/master/sandbox/honeybee-model/sample-file-viewer-3d";
+	imgIcon.src = "assets/github-mark-32.png";
+	aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+	const version = document.head.querySelector( "[ name=version ]" );
+	sVersion.innerHTML = version ? version.content : "";
+	divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
+
+	THR.init();
+	THR.animate();
+
+</script>
+</body>
+</html>
