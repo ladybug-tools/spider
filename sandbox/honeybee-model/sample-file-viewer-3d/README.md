@@ -20,6 +20,28 @@ _<small>Sample File Viewer 3D</small>_
 
 View Honeybee models in 3D in your browser using the WebGL and the Three.js JavaScript library
 
+
+## Sample File Viewer 3D
+
+* [sample file viewer 3d 2020-01-09-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-09-00/sample-file-viewer-3d.html )
+	* R: now built around GFL anf JTV modules
+	* phj-parse-honeybee-json-2020-01-07
+		* Now passes jsHint
+		* Listens for and responds to GFL onLoad event dispatch
+* [sample file viewer 3d 2020-01-08-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-08-00/sample-file-viewer-3d.html )
+* [sample file viewer 3d 2020-01-07-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-07-00/sample-file-viewer-3d.html )
+	* Add JSON tree view to menu
+	* Add faces have color
+	* Add lights, shade and shadow
+	* Add Setting menu panel with toggles card and functions
+		* Axes, ground plane, edges bounding box
+	* General refactor and cleanup
+* [sample file viewer 3d 2020-01-05-02]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-05-02/sample-file-viewer-3d.html )
+	* Begins to add a tree view of the JSON
+* [sample file viewer 3d 2020-01-05-01]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-05-01/sample-file-viewer-3d.html ) <br><img src="https://www.ladybug.tools/spider/sandbox/honeybee-model/images/sample-file-viewer-3d-2020-01-05-01.png" width=240>
+* [sample file viewer 3d 2020-01-05-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-05-00/sample-file-viewer-3d.html )
+
+
 ## To Do / Wish List
 
 
@@ -44,13 +66,8 @@ View Honeybee models in 3D in your browser using the WebGL and the Three.js Java
 
 Sample File Viewer 3D 2020-01-07
 
-* Add JSON tree view to menu
-* Add faces have color
-* Add lights, shade and shadow
-* Add Setting menu panel with toggles card and functions
-	* Axes, ground plane, edges bounding box
-* General refactor and cleanup
 * First commit read me
+
 
 
 ***

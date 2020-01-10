@@ -43,7 +43,7 @@ JTV.getMenu = function () {
 
 		<p id=divDetails onmouseout=divDetails.hidden=true hidden >JSON rendered to a tree view using Theo's parser script</p>
 
-		<p>
+		<p id=JTVpButtons >
 			<button id=but onclick=JTV.toggleAll(); >close all</button>
 			<button id=but onclick=JTV.toggleAll(true); >open all</button>
 			<!-- <button id=but onclick=JTV.addUrls(); >clickable links</button> -->
@@ -84,7 +84,7 @@ JTV.getString = function ( key, item, index ) { //console.log( 'string', key, it
 
 	// https://stackoverflow.com/questions/8299742/is-there-a-way-to-convert-html-into-normal-text-without-actually-write-it-to-a-s
 
-	if ( typeof item === "string" ) { item = item.replace( /<[^>]*>/g, '' ); }
+	//if ( typeof item === "string" ) { item = item.replace( /<[^>]*>/g, '' ); }
 	//if ( typeof item === "number" ) { item = item.toLocaleString() };
 
 	return `<div>${ key }: <span style=color:blue >${ item }<span></div>`;

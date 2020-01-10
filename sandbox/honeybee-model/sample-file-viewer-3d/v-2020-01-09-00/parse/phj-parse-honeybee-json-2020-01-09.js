@@ -1,3 +1,7 @@
+// copyright 2020 Theo Armour. MIT license.
+/* global THREE, THR, GFL */
+// jshint esversion: 6
+// jshint loopfunc: true
 
 
 var PHJ = {};
@@ -7,7 +11,6 @@ PHJ.group = undefined;
 
 PHJ.init = function () {
 
-
 	window.addEventListener( "onloadglf", PHJ.processJson, false );
 
 };
@@ -15,54 +18,52 @@ PHJ.init = function () {
 
 PHJ.processJson = function () {
 
-	colors = {
+	const colors = {
 
-	Wall: "beige",
-	Floor: "brown",
-	RoofCeiling: "red"
-}
+		Wall: "beige",
+		Floor: "brown",
+		RoofCeiling: "red"
+
+	};
 
 
-	THR.scene.remove( PHJ.group )
+	THR.scene.remove( PHJ.group );
 
 	PHJ.group = new THREE.Group();
 
-	rooms = GFL.json.rooms || [];
+	const rooms = GFL.json.rooms || [];
 
-	for ( room of rooms ) {
+	id = 0;
 
-		faces = room.faces;
+	for ( let room of rooms ) {
 
-		for ( face of faces ) {
+		const faces = room.faces;
+
+		for ( let face of faces ) {
 
 			//console.log( '', face.face_type );
-			boundary = face.geometry.boundary;
-
-			// for ( point of boundary ) {
-
-			// 	console.log( 'point', point );
-			// }
-
+			const boundary = face.geometry.boundary;
 
 			const vertices = boundary.map( point => new THREE.Vector3().fromArray( point ) );
 			//console.log( 'vertices', vertices );
 
 			const shape = PHJ.addShape3d( vertices );
 
-			const color = colors[ face.face_type ]
+			const color = colors[ face.face_type ];
 			//console.log( 'col', face.face_type, color );
 
-			shape.material.color = new THREE.Color( color )
+			shape.material.color = new THREE.Color( color );
 			shape.material.needsUpdate = true;
+			shape.userData.id = id++;
 
-			const geometry = shape.geometry;
-			geometry.verticesNeedUpdate = true;
-			geometry.elementsNeedUpdate = true;
-			geometry.morphTargetsNeedUpdate = true;
-			geometry.uvsNeedUpdate = true;
-			geometry.normalsNeedUpdate = true;
-			geometry.colorsNeedUpdate = true;
-			geometry.tangentsNeedUpdate = true;
+			// const geometry = shape.geometry;
+			// geometry.verticesNeedUpdate = true;
+			// geometry.elementsNeedUpdate = true;
+			// geometry.morphTargetsNeedUpdate = true;
+			// geometry.uvsNeedUpdate = true;
+			// geometry.normalsNeedUpdate = true;
+			// geometry.colorsNeedUpdate = true;
+			// geometry.tangentsNeedUpdate = true;
 
 			PHJ.group.add( shape );
 
@@ -74,7 +75,6 @@ PHJ.processJson = function () {
 	THR.zoomObjectBoundingSphere( PHJ.group );
 
 };
-
 
 
 
@@ -101,5 +101,6 @@ PHJ.addShape3d = function ( vertices ) {
 	return mesh;
 
 };
+
 
 PHJ.init();
