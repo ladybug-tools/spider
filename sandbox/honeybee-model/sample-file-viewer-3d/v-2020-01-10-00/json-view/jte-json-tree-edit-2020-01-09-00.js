@@ -51,7 +51,7 @@ JTE.addFaceIds = function () {
 		}
 	}
 
-	JTVdivJsonTree.innerHTML = JTV.parseJson( "root", GFL.json, 0 );
+	JTVdivJsonTree.innerHTML = JTV.parseJson( JTV.root, GFL.json, 0 );
 
 	//htm = `<button onclick=console.log(this.value); value=23 >faces</button>`;
 

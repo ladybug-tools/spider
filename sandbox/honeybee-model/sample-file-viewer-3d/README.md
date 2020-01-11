@@ -38,6 +38,8 @@ View Honeybee models in 3D in your browser using the WebGL and the Three.js Java
 	* thrt-three-toggles-2020-01-07-00.js
 		* F: Add fog toggle;
 		* F: Set Axes, ground and fog on by default
+* jte-json-tree-edit-2020-01-09-00.js
+	* Face buttons turned on at load time
 * [sample file viewer 3d 2020-01-09-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-09-00/sample-file-viewer-3d.html )
 	* R: now built around GFL anf JTV modules
 	* phj-parse-honeybee-json-2020-01-07
