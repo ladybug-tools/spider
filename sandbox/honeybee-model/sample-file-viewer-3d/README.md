@@ -23,7 +23,7 @@ View Honeybee models in 3D in your browser using the WebGL and the Three.js Java
 
 ## Sample File Viewer 3D
 
-* [sample file viewer 3d 2020-01-10-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-010-00/sample-file-viewer-3d.html )
+* [sample file viewer 3d 2020-01-10-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-10-00/sample-file-viewer-3d.html )
 	* style-2020-01-10.js
 		* B: Views better on very very small devices
 		* B: Handles OS darkmode
