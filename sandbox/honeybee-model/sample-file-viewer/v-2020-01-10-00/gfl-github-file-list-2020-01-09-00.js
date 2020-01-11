@@ -34,7 +34,7 @@ GFL.getMenu = function() {
 			More details available in JavaScript developer console.
 		</p>
 
-		<select id=GFLselFiles onchange=GFL.getFileJson(this.value) size=10 style=overflow:auto;width:100% ></select>
+		<select id=GFLselFiles onchange=GFL.getFileJson(this.value) size=10 ></select>
 
 		<div id=GFLdivOnLoad ></div>
 

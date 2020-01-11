@@ -6,9 +6,9 @@
 
 const GFL = {};
 
-GFL.url = "https://api.github.com/repos/ladybug-tools-in2/honeybee-model-schema/git/trees/master?recursive=1";
-GFL.prefix = "https://rawcdn.githack.com/ladybug-tools-in2/honeybee-model-schema/master/";
-GFL.source = "https://github.com/ladybug-tools-in2/honeybee_model_schema/blob/master/honeybee_model_schema/samples/";
+GFL.url = "https://api.github.com/repos/ladybug-tools-in2/honeybee-schema/git/trees/master?recursive=1";
+GFL.prefix = "https://rawcdn.githack.com/ladybug-tools-in2/honeybee-schema/master/";
+GFL.source = "https://github.com/ladybug-tools-in2/honeybee_model_schema/blob/master/honeybee_schema/samples/";
 
 // GFL.init() is at end of file
 
@@ -29,7 +29,7 @@ GFL.getMenu = function() {
 		<summary>Honeybee Model-Schema Samples</summary>
 
 		<p>
-			A list of files from <a href="https://github.com/ladybug-tools-in2/honeybee-model-schema/tree/master/honeybee_model_schema/samples" target="_blank">ladybug-tools-in2
+			A list of files from <a href="https://github.com/ladybug-tools-in2/honeybee-schema/tree/master/honeybee_schema/samples" target="_blank">ladybug-tools-in2
 			</a> on GitHub. Tooltips indicate file size in bytes. Click file title to view its contents.
 			More details available in JavaScript developer console.
 		</p>
@@ -88,8 +88,6 @@ GFL.getOptions = function () {
 		`<option value=${ index } title="${ item.size.toLocaleString() } bytes" >${ index + 1 } ${ item.path.split( "/" ).pop() }</option>` );
 
 	GFLdivOnLoad.innerHTML = `<p>Files found on GitHub: ${ options.length }</p>`;
-
-
 
 	return options;
 

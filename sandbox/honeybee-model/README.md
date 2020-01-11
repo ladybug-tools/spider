@@ -39,7 +39,7 @@ For links and change log, see [Sample File Viewer Read Me ]( #sandbox/honeybee-m
 
 * https://ladybug-tools-in2.github.io/
 * https://github.com/ladybug-tools-in2/ladybug-tools-in2.github.io
-* https://github.com/ladybug-tools-in2/honeybee-model-schema/tree/master/honeybee_model_schema/samples
+* https://github.com/ladybug-tools-in2/honeybee-model-schema/tree/master/honeybee_schema/samples
 
 
 ## Links of Interest

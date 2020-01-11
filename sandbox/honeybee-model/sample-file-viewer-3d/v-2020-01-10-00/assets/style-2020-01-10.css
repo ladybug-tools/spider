@@ -1,0 +1,195 @@
+/* copyright 2020 Theo Armour. MIT license. */
+
+
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	font: 100% monospace;
+	--mnu-width: calc(22rem - 0ch);
+	/* leave space for small devices */
+	--screen-width: calc(100vw);
+	--headerHeight: 6rem;
+}
+
+body {
+	margin: 0;
+	overflow: hidden;
+}
+
+a {
+	color: crimson;
+	text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+	background-color: yellow;
+	color: #aaa;
+	text-decoration: underline;
+}
+
+button,
+input[type="button"] {
+	background-color: #ddd;
+	border: none;
+	color: #322;
+	cursor: pointer;
+	padding: 3px 5px;
+}
+
+button:hover {
+	background: #ccc;
+	color: #fff;
+}
+
+button:active {
+	background: blue;
+	color: #fff
+}
+
+input[type="range"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: #ddd;
+	height: 2ch;
+	width: 100%;
+}
+
+input[type="range"]::-moz-range-thumb {
+	background-color: #888;
+	border-radius: 0;
+	height: 3ch;
+	width: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background-color: #888;
+	height: 3ch;
+	width: 10px;
+}
+
+center {
+	font-size: 3ch;
+	font-weight: bold;
+}
+
+summary {
+	font-size: 2ch;
+	font-weight: bold;
+}
+
+.help {
+	float: right;
+	font-weight: 800;
+}
+
+.sumMenuTitle {
+	background-color: #ccc;
+	color: #888;
+	margin: 10px 0;
+	text-align: center;
+}
+
+#expandButton {
+	height: 32px;
+	position: fixed;
+	left: calc( var(--mnu-width) + 1ch);
+	top: 2ch;
+	transition: left 0.5s;
+	width: 32px;
+	z-index: 1;
+}
+
+#expandButton.collapsed {
+	left: 0;
+}
+
+#navMenu {
+	background-color: #eee;
+	border-radius: 0.5ch;
+	max-height: calc(100vh - 2ch);
+	left: 0;
+	margin: 1ch;
+	opacity: 0.95;
+	overflow: auto;
+	padding: 0 1rem;
+	position: fixed;
+	transition: left 0.5s;
+	top: 0;
+	width: var(--mnu-width);
+	z-index: 1;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#navMenu.collapsed {
+	left: calc(var(--mnu-width) * -1 - 2rem);
+	padding: 0;
+}
+
+#divMain {
+	border: 0px solid red;
+	left: var(--mnu-width);
+	margin: 0;
+	padding: 0 1rem;
+	position: absolute;
+	width: calc(100% - var(--mnu-width));
+}
+
+#divMain.collapsed {
+	left: 0;
+	width: 100%;
+}
+
+#secMainContent {
+	border: 0px solid red;
+	margin: 0 auto;
+	max-width: 40rem;
+}
+
+
+@media all and (max-width: 640px) {
+
+	#divMain {
+		left: 0;
+		padding: 0 1rem; /* not for Three.js */
+		width: 100%;
+	}
+
+	#expandButton {
+		top: unset;
+		bottom: 1rem;
+	}
+
+}
+
+@media all and (max-height: 640px) {
+
+	#divMain {
+		left: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	#expandButton {
+		top: unset;
+		bottom: 1rem;
+	}
+
+}
+
+@media (prefers-color-scheme: dark) {
+
+	:root {
+		background-color: #1e1f23;
+		color: #aaa;
+	}
+
+	#navMenu {
+		background-color: #555;
+	}
+
+}

@@ -23,6 +23,21 @@ View Honeybee models in 3D in your browser using the WebGL and the Three.js Java
 
 ## Sample File Viewer 3D
 
+* [sample file viewer 3d 2020-01-10-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-010-00/sample-file-viewer-3d.html )
+	* style-2020-01-10.js
+		* B: Views better on very very small devices
+		* B: Handles OS darkmode
+	* gfl-github-file-list-2020-01-10-00.js
+		* B: GFLselFiles resizes more nicely in menu
+		* R: Update Honeybee schema repo name
+	* jtv-json-tree-view-2020-01-10-00.js
+		* R: Rename top from "root" to "model"
+	* phj-parse-honeybee-json-2020-01-10
+		* F: Add ability to parse and show apertures
+		* F: Identify doors and shades in console but no parsing yet
+	* thrt-three-toggles-2020-01-07-00.js
+		* F: Add fog toggle;
+		* F: Set Axes, ground and fog on by default
 * [sample file viewer 3d 2020-01-09-00]( https://www.ladybug.tools/spider/sandbox/honeybee-model/sample-file-viewer-3d/v-2020-01-09-00/sample-file-viewer-3d.html )
 	* R: now built around GFL anf JTV modules
 	* phj-parse-honeybee-json-2020-01-07
