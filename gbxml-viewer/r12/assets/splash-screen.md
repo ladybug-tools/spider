@@ -13,7 +13,7 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <summary>Welcome 2020-01-22 ~ [Aragog r12.38]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html )</summary>
 
-Fixes issues with 'reset view" button in r12.37
+Fixes issues with 'reset view' button in r12.37
 
 New issues with "Sun Range" feature noted and will be dealt with.
 
