@@ -66,6 +66,7 @@ See main read me file
 R12.38
 
 * B: fix 'reset view' issues - add target sphere object
+* B: Hide close button of startup screen
 
 ### 2019-10-25 ~ Theo
 
