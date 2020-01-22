@@ -61,6 +61,12 @@ See main read me file
 
 ## Change Log
 
+### 2020-01-22 ~ Theo
+
+R12.38
+
+* B: fix 'reset view' issues - add target sphere object
+
 ### 2019-10-25 ~ Theo
 
 R12.37
