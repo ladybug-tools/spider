@@ -51,6 +51,12 @@ Needed
 
 ## Change Log
 
+### 2020-01-22 ~ Theo
+
+R14.23
+
+* F:Add switching menu
+
 ### 2018-09-18 ~ Theo
 
 R14.16
