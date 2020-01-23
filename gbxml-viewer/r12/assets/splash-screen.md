@@ -33,7 +33,7 @@ Please do feel free to report issues. R12 is a long term support release.
 
 <details open>
 
-<summary>Welcome 2019-10-23 ~ [Aragog r12.36]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-36.html ) stable rele</summary>
+<summary>Welcome 2019-10-23 ~ [Aragog r12.36]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-36.html ) stable release</summary>
 
 See new left menu with select the app of your choice
 
