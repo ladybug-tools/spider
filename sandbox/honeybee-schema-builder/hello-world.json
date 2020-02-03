@@ -1,0 +1,139 @@
+
+
+{ "rooms": [
+{
+"type": "Room",
+"name": "SimpleShoeBoxZone",
+"display_name": "Simple Shoe Box Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Shoe Box Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "SimpleZone_Bottom",
+"display_name": "Simple Zone_Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+0,
+0
+],
+[
+0,
+20,
+0
+],
+[
+20,
+20,
+0
+],
+[
+20,
+0,
+0
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "SimpleShoeBoxZone_Top",
+"display_name": "Simple Shoe Box Zone_Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+0,
+20
+],
+[
+0,
+20,
+20
+],
+[
+20,
+20,
+20
+],
+[
+20,
+0,
+20
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "SimpleShoeBoxZone_1",
+"display_name": "Simple Shoe Box Zone_1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+0,
+0
+],
+[
+0,
+0,
+20
+],
+[
+20,
+0,
+0
+],
+[
+20,
+0,
+0
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+}
+]
+}
