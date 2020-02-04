@@ -1,0 +1,7565 @@
+{ "rooms": [
+
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+7,
+19
+],
+[
+11,
+7,
+19
+],
+[
+11,
+15,
+19
+],
+[
+18,
+15,
+19
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+7,
+22
+],
+[
+11,
+7,
+22
+],
+[
+11,
+15,
+22
+],
+[
+18,
+15,
+22
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+7,
+19
+],
+[
+11,
+7,
+19
+],
+[
+11,
+7,
+22
+],
+[
+18,
+7,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+11,
+7,
+19
+],
+[
+11,
+15,
+19
+],
+[
+11,
+15,
+22
+],
+[
+11,
+7,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+11,
+15,
+19
+],
+[
+18,
+15,
+19
+],
+[
+18,
+15,
+22
+],
+[
+11,
+15,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+15,
+19
+],
+[
+18,
+7,
+19
+],
+[
+18,
+7,
+22
+],
+[
+18,
+15,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+1,
+2
+],
+[
+16,
+1,
+2
+],
+[
+16,
+6,
+2
+],
+[
+17,
+6,
+2
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+1,
+10
+],
+[
+16,
+1,
+10
+],
+[
+16,
+6,
+10
+],
+[
+17,
+6,
+10
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+1,
+2
+],
+[
+16,
+1,
+2
+],
+[
+16,
+1,
+10
+],
+[
+17,
+1,
+10
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+16,
+1,
+2
+],
+[
+16,
+6,
+2
+],
+[
+16,
+6,
+10
+],
+[
+16,
+1,
+10
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+16,
+6,
+2
+],
+[
+17,
+6,
+2
+],
+[
+17,
+6,
+10
+],
+[
+16,
+6,
+10
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+6,
+2
+],
+[
+17,
+1,
+2
+],
+[
+17,
+1,
+10
+],
+[
+17,
+6,
+10
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+4,
+9
+],
+[
+2,
+4,
+9
+],
+[
+2,
+11,
+9
+],
+[
+9,
+11,
+9
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+4,
+11
+],
+[
+2,
+4,
+11
+],
+[
+2,
+11,
+11
+],
+[
+9,
+11,
+11
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+4,
+9
+],
+[
+2,
+4,
+9
+],
+[
+2,
+4,
+11
+],
+[
+9,
+4,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+2,
+4,
+9
+],
+[
+2,
+11,
+9
+],
+[
+2,
+11,
+11
+],
+[
+2,
+4,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+2,
+11,
+9
+],
+[
+9,
+11,
+9
+],
+[
+9,
+11,
+11
+],
+[
+2,
+11,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+11,
+9
+],
+[
+9,
+4,
+9
+],
+[
+9,
+4,
+11
+],
+[
+9,
+11,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+19,
+0
+],
+[
+17,
+19,
+0
+],
+[
+17,
+26,
+0
+],
+[
+19,
+26,
+0
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+19,
+8
+],
+[
+17,
+19,
+8
+],
+[
+17,
+26,
+8
+],
+[
+19,
+26,
+8
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+19,
+0
+],
+[
+17,
+19,
+0
+],
+[
+17,
+19,
+8
+],
+[
+19,
+19,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+19,
+0
+],
+[
+17,
+26,
+0
+],
+[
+17,
+26,
+8
+],
+[
+17,
+19,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+26,
+0
+],
+[
+19,
+26,
+0
+],
+[
+19,
+26,
+8
+],
+[
+17,
+26,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+26,
+0
+],
+[
+19,
+19,
+0
+],
+[
+19,
+19,
+8
+],
+[
+19,
+26,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+10,
+7
+],
+[
+18,
+10,
+7
+],
+[
+18,
+18,
+7
+],
+[
+23,
+18,
+7
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+10,
+12
+],
+[
+18,
+10,
+12
+],
+[
+18,
+18,
+12
+],
+[
+23,
+18,
+12
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+10,
+7
+],
+[
+18,
+10,
+7
+],
+[
+18,
+10,
+12
+],
+[
+23,
+10,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+10,
+7
+],
+[
+18,
+18,
+7
+],
+[
+18,
+18,
+12
+],
+[
+18,
+10,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+18,
+7
+],
+[
+23,
+18,
+7
+],
+[
+23,
+18,
+12
+],
+[
+18,
+18,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+18,
+7
+],
+[
+23,
+10,
+7
+],
+[
+23,
+10,
+12
+],
+[
+23,
+18,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+12,
+11,
+10
+],
+[
+11,
+11,
+10
+],
+[
+11,
+20,
+10
+],
+[
+12,
+20,
+10
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+12,
+11,
+11
+],
+[
+11,
+11,
+11
+],
+[
+11,
+20,
+11
+],
+[
+12,
+20,
+11
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+12,
+11,
+10
+],
+[
+11,
+11,
+10
+],
+[
+11,
+11,
+11
+],
+[
+12,
+11,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+11,
+11,
+10
+],
+[
+11,
+20,
+10
+],
+[
+11,
+20,
+11
+],
+[
+11,
+11,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+11,
+20,
+10
+],
+[
+12,
+20,
+10
+],
+[
+12,
+20,
+11
+],
+[
+11,
+20,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+12,
+20,
+10
+],
+[
+12,
+11,
+10
+],
+[
+12,
+11,
+11
+],
+[
+12,
+20,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+8,
+12
+],
+[
+1,
+8,
+12
+],
+[
+1,
+16,
+12
+],
+[
+4,
+16,
+12
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+8,
+14
+],
+[
+1,
+8,
+14
+],
+[
+1,
+16,
+14
+],
+[
+4,
+16,
+14
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+8,
+12
+],
+[
+1,
+8,
+12
+],
+[
+1,
+8,
+14
+],
+[
+4,
+8,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+8,
+12
+],
+[
+1,
+16,
+12
+],
+[
+1,
+16,
+14
+],
+[
+1,
+8,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+16,
+12
+],
+[
+4,
+16,
+12
+],
+[
+4,
+16,
+14
+],
+[
+1,
+16,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+16,
+12
+],
+[
+4,
+8,
+12
+],
+[
+4,
+8,
+14
+],
+[
+4,
+16,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+13,
+16
+],
+[
+18,
+13,
+16
+],
+[
+18,
+19,
+16
+],
+[
+23,
+19,
+16
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+13,
+17
+],
+[
+18,
+13,
+17
+],
+[
+18,
+19,
+17
+],
+[
+23,
+19,
+17
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+13,
+16
+],
+[
+18,
+13,
+16
+],
+[
+18,
+13,
+17
+],
+[
+23,
+13,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+13,
+16
+],
+[
+18,
+19,
+16
+],
+[
+18,
+19,
+17
+],
+[
+18,
+13,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+19,
+16
+],
+[
+23,
+19,
+16
+],
+[
+23,
+19,
+17
+],
+[
+18,
+19,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+23,
+19,
+16
+],
+[
+23,
+13,
+16
+],
+[
+23,
+13,
+17
+],
+[
+23,
+19,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+19,
+10
+],
+[
+8,
+19,
+10
+],
+[
+8,
+21,
+10
+],
+[
+14,
+21,
+10
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+19,
+18
+],
+[
+8,
+19,
+18
+],
+[
+8,
+21,
+18
+],
+[
+14,
+21,
+18
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+19,
+10
+],
+[
+8,
+19,
+10
+],
+[
+8,
+19,
+18
+],
+[
+14,
+19,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+8,
+19,
+10
+],
+[
+8,
+21,
+10
+],
+[
+8,
+21,
+18
+],
+[
+8,
+19,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+8,
+21,
+10
+],
+[
+14,
+21,
+10
+],
+[
+14,
+21,
+18
+],
+[
+8,
+21,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+21,
+10
+],
+[
+14,
+19,
+10
+],
+[
+14,
+19,
+18
+],
+[
+14,
+21,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+11,
+11
+],
+[
+18,
+11,
+11
+],
+[
+18,
+20,
+11
+],
+[
+21,
+20,
+11
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+11,
+20
+],
+[
+18,
+11,
+20
+],
+[
+18,
+20,
+20
+],
+[
+21,
+20,
+20
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+11,
+11
+],
+[
+18,
+11,
+11
+],
+[
+18,
+11,
+20
+],
+[
+21,
+11,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+11,
+11
+],
+[
+18,
+20,
+11
+],
+[
+18,
+20,
+20
+],
+[
+18,
+11,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+20,
+11
+],
+[
+21,
+20,
+11
+],
+[
+21,
+20,
+20
+],
+[
+18,
+20,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+20,
+11
+],
+[
+21,
+11,
+11
+],
+[
+21,
+11,
+20
+],
+[
+21,
+20,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+16,
+7,
+4
+],
+[
+7,
+7,
+4
+],
+[
+7,
+14,
+4
+],
+[
+16,
+14,
+4
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+16,
+7,
+12
+],
+[
+7,
+7,
+12
+],
+[
+7,
+14,
+12
+],
+[
+16,
+14,
+12
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+16,
+7,
+4
+],
+[
+7,
+7,
+4
+],
+[
+7,
+7,
+12
+],
+[
+16,
+7,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+7,
+4
+],
+[
+7,
+14,
+4
+],
+[
+7,
+14,
+12
+],
+[
+7,
+7,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+14,
+4
+],
+[
+16,
+14,
+4
+],
+[
+16,
+14,
+12
+],
+[
+7,
+14,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+16,
+14,
+4
+],
+[
+16,
+7,
+4
+],
+[
+16,
+7,
+12
+],
+[
+16,
+14,
+12
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+18,
+16
+],
+[
+2,
+18,
+16
+],
+[
+2,
+23,
+16
+],
+[
+7,
+23,
+16
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+18,
+22
+],
+[
+2,
+18,
+22
+],
+[
+2,
+23,
+22
+],
+[
+7,
+23,
+22
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+18,
+16
+],
+[
+2,
+18,
+16
+],
+[
+2,
+18,
+22
+],
+[
+7,
+18,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+2,
+18,
+16
+],
+[
+2,
+23,
+16
+],
+[
+2,
+23,
+22
+],
+[
+2,
+18,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+2,
+23,
+16
+],
+[
+7,
+23,
+16
+],
+[
+7,
+23,
+22
+],
+[
+2,
+23,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+23,
+16
+],
+[
+7,
+18,
+16
+],
+[
+7,
+18,
+22
+],
+[
+7,
+23,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+13,
+6
+],
+[
+1,
+13,
+6
+],
+[
+1,
+16,
+6
+],
+[
+4,
+16,
+6
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+13,
+9
+],
+[
+1,
+13,
+9
+],
+[
+1,
+16,
+9
+],
+[
+4,
+16,
+9
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+13,
+6
+],
+[
+1,
+13,
+6
+],
+[
+1,
+13,
+9
+],
+[
+4,
+13,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+13,
+6
+],
+[
+1,
+16,
+6
+],
+[
+1,
+16,
+9
+],
+[
+1,
+13,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+16,
+6
+],
+[
+4,
+16,
+6
+],
+[
+4,
+16,
+9
+],
+[
+1,
+16,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+16,
+6
+],
+[
+4,
+13,
+6
+],
+[
+4,
+13,
+9
+],
+[
+4,
+16,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+4,
+16
+],
+[
+0,
+4,
+16
+],
+[
+0,
+11,
+16
+],
+[
+9,
+11,
+16
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+4,
+17
+],
+[
+0,
+4,
+17
+],
+[
+0,
+11,
+17
+],
+[
+9,
+11,
+17
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+4,
+16
+],
+[
+0,
+4,
+16
+],
+[
+0,
+4,
+17
+],
+[
+9,
+4,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+4,
+16
+],
+[
+0,
+11,
+16
+],
+[
+0,
+11,
+17
+],
+[
+0,
+4,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+11,
+16
+],
+[
+9,
+11,
+16
+],
+[
+9,
+11,
+17
+],
+[
+0,
+11,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+9,
+11,
+16
+],
+[
+9,
+4,
+16
+],
+[
+9,
+4,
+17
+],
+[
+9,
+11,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+10,
+14
+],
+[
+6,
+10,
+14
+],
+[
+6,
+17,
+14
+],
+[
+10,
+17,
+14
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+10,
+16
+],
+[
+6,
+10,
+16
+],
+[
+6,
+17,
+16
+],
+[
+10,
+17,
+16
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+10,
+14
+],
+[
+6,
+10,
+14
+],
+[
+6,
+10,
+16
+],
+[
+10,
+10,
+16
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+6,
+10,
+14
+],
+[
+6,
+17,
+14
+],
+[
+6,
+17,
+16
+],
+[
+6,
+10,
+16
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+6,
+17,
+14
+],
+[
+10,
+17,
+14
+],
+[
+10,
+17,
+16
+],
+[
+6,
+17,
+16
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+17,
+14
+],
+[
+10,
+10,
+14
+],
+[
+10,
+10,
+16
+],
+[
+10,
+17,
+16
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+19,
+7
+],
+[
+1,
+19,
+7
+],
+[
+1,
+20,
+7
+],
+[
+7,
+20,
+7
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+19,
+14
+],
+[
+1,
+19,
+14
+],
+[
+1,
+20,
+14
+],
+[
+7,
+20,
+14
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+19,
+7
+],
+[
+1,
+19,
+7
+],
+[
+1,
+19,
+14
+],
+[
+7,
+19,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+19,
+7
+],
+[
+1,
+20,
+7
+],
+[
+1,
+20,
+14
+],
+[
+1,
+19,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+20,
+7
+],
+[
+7,
+20,
+7
+],
+[
+7,
+20,
+14
+],
+[
+1,
+20,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+7,
+20,
+7
+],
+[
+7,
+19,
+7
+],
+[
+7,
+19,
+14
+],
+[
+7,
+20,
+14
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+13,
+13
+],
+[
+3,
+13,
+13
+],
+[
+3,
+17,
+13
+],
+[
+10,
+17,
+13
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+13,
+22
+],
+[
+3,
+13,
+22
+],
+[
+3,
+17,
+22
+],
+[
+10,
+17,
+22
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+13,
+13
+],
+[
+3,
+13,
+13
+],
+[
+3,
+13,
+22
+],
+[
+10,
+13,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+13,
+13
+],
+[
+3,
+17,
+13
+],
+[
+3,
+17,
+22
+],
+[
+3,
+13,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+17,
+13
+],
+[
+10,
+17,
+13
+],
+[
+10,
+17,
+22
+],
+[
+3,
+17,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+17,
+13
+],
+[
+10,
+13,
+13
+],
+[
+10,
+13,
+22
+],
+[
+10,
+17,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+27,
+19,
+9
+],
+[
+19,
+19,
+9
+],
+[
+19,
+24,
+9
+],
+[
+27,
+24,
+9
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+27,
+19,
+18
+],
+[
+19,
+19,
+18
+],
+[
+19,
+24,
+18
+],
+[
+27,
+24,
+18
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+27,
+19,
+9
+],
+[
+19,
+19,
+9
+],
+[
+19,
+19,
+18
+],
+[
+27,
+19,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+19,
+9
+],
+[
+19,
+24,
+9
+],
+[
+19,
+24,
+18
+],
+[
+19,
+19,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+24,
+9
+],
+[
+27,
+24,
+9
+],
+[
+27,
+24,
+18
+],
+[
+19,
+24,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+27,
+24,
+9
+],
+[
+27,
+19,
+9
+],
+[
+27,
+19,
+18
+],
+[
+27,
+24,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+11,
+4
+],
+[
+10,
+11,
+4
+],
+[
+10,
+13,
+4
+],
+[
+14,
+13,
+4
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+11,
+7
+],
+[
+10,
+11,
+7
+],
+[
+10,
+13,
+7
+],
+[
+14,
+13,
+7
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+11,
+4
+],
+[
+10,
+11,
+4
+],
+[
+10,
+11,
+7
+],
+[
+14,
+11,
+7
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+11,
+4
+],
+[
+10,
+13,
+4
+],
+[
+10,
+13,
+7
+],
+[
+10,
+11,
+7
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+13,
+4
+],
+[
+14,
+13,
+4
+],
+[
+14,
+13,
+7
+],
+[
+10,
+13,
+7
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+14,
+13,
+4
+],
+[
+14,
+11,
+4
+],
+[
+14,
+11,
+7
+],
+[
+14,
+13,
+7
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+6,
+15
+],
+[
+18,
+6,
+15
+],
+[
+18,
+13,
+15
+],
+[
+24,
+13,
+15
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+6,
+20
+],
+[
+18,
+6,
+20
+],
+[
+18,
+13,
+20
+],
+[
+24,
+13,
+20
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+6,
+15
+],
+[
+18,
+6,
+15
+],
+[
+18,
+6,
+20
+],
+[
+24,
+6,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+6,
+15
+],
+[
+18,
+13,
+15
+],
+[
+18,
+13,
+20
+],
+[
+18,
+6,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+13,
+15
+],
+[
+24,
+13,
+15
+],
+[
+24,
+13,
+20
+],
+[
+18,
+13,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+13,
+15
+],
+[
+24,
+6,
+15
+],
+[
+24,
+6,
+20
+],
+[
+24,
+13,
+20
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+8,
+14,
+15
+],
+[
+1,
+14,
+15
+],
+[
+1,
+17,
+15
+],
+[
+8,
+17,
+15
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+8,
+14,
+23
+],
+[
+1,
+14,
+23
+],
+[
+1,
+17,
+23
+],
+[
+8,
+17,
+23
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+8,
+14,
+15
+],
+[
+1,
+14,
+15
+],
+[
+1,
+14,
+23
+],
+[
+8,
+14,
+23
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+14,
+15
+],
+[
+1,
+17,
+15
+],
+[
+1,
+17,
+23
+],
+[
+1,
+14,
+23
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+17,
+15
+],
+[
+8,
+17,
+15
+],
+[
+8,
+17,
+23
+],
+[
+1,
+17,
+23
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+8,
+17,
+15
+],
+[
+8,
+14,
+15
+],
+[
+8,
+14,
+23
+],
+[
+8,
+17,
+23
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+19,
+3
+],
+[
+0,
+19,
+3
+],
+[
+0,
+27,
+3
+],
+[
+4,
+27,
+3
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+19,
+11
+],
+[
+0,
+19,
+11
+],
+[
+0,
+27,
+11
+],
+[
+4,
+27,
+11
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+19,
+3
+],
+[
+0,
+19,
+3
+],
+[
+0,
+19,
+11
+],
+[
+4,
+19,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+19,
+3
+],
+[
+0,
+27,
+3
+],
+[
+0,
+27,
+11
+],
+[
+0,
+19,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+27,
+3
+],
+[
+4,
+27,
+3
+],
+[
+4,
+27,
+11
+],
+[
+0,
+27,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+4,
+27,
+3
+],
+[
+4,
+19,
+3
+],
+[
+4,
+19,
+11
+],
+[
+4,
+27,
+11
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+18,
+9
+],
+[
+17,
+18,
+9
+],
+[
+17,
+19,
+9
+],
+[
+24,
+19,
+9
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+18,
+17
+],
+[
+17,
+18,
+17
+],
+[
+17,
+19,
+17
+],
+[
+24,
+19,
+17
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+18,
+9
+],
+[
+17,
+18,
+9
+],
+[
+17,
+18,
+17
+],
+[
+24,
+18,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+18,
+9
+],
+[
+17,
+19,
+9
+],
+[
+17,
+19,
+17
+],
+[
+17,
+18,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+19,
+9
+],
+[
+24,
+19,
+9
+],
+[
+24,
+19,
+17
+],
+[
+17,
+19,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+19,
+9
+],
+[
+24,
+18,
+9
+],
+[
+24,
+18,
+17
+],
+[
+24,
+19,
+17
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+20,
+0,
+11
+],
+[
+18,
+0,
+11
+],
+[
+18,
+3,
+11
+],
+[
+20,
+3,
+11
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+20,
+0,
+18
+],
+[
+18,
+0,
+18
+],
+[
+18,
+3,
+18
+],
+[
+20,
+3,
+18
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+20,
+0,
+11
+],
+[
+18,
+0,
+11
+],
+[
+18,
+0,
+18
+],
+[
+20,
+0,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+0,
+11
+],
+[
+18,
+3,
+11
+],
+[
+18,
+3,
+18
+],
+[
+18,
+0,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+18,
+3,
+11
+],
+[
+20,
+3,
+11
+],
+[
+20,
+3,
+18
+],
+[
+18,
+3,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+20,
+3,
+11
+],
+[
+20,
+0,
+11
+],
+[
+20,
+0,
+18
+],
+[
+20,
+3,
+18
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+4,
+1
+],
+[
+19,
+4,
+1
+],
+[
+19,
+5,
+1
+],
+[
+24,
+5,
+1
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+4,
+3
+],
+[
+19,
+4,
+3
+],
+[
+19,
+5,
+3
+],
+[
+24,
+5,
+3
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+4,
+1
+],
+[
+19,
+4,
+1
+],
+[
+19,
+4,
+3
+],
+[
+24,
+4,
+3
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+4,
+1
+],
+[
+19,
+5,
+1
+],
+[
+19,
+5,
+3
+],
+[
+19,
+4,
+3
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+5,
+1
+],
+[
+24,
+5,
+1
+],
+[
+24,
+5,
+3
+],
+[
+19,
+5,
+3
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+24,
+5,
+1
+],
+[
+24,
+4,
+1
+],
+[
+24,
+4,
+3
+],
+[
+24,
+5,
+3
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+18,
+1
+],
+[
+15,
+18,
+1
+],
+[
+15,
+26,
+1
+],
+[
+21,
+26,
+1
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+18,
+8
+],
+[
+15,
+18,
+8
+],
+[
+15,
+26,
+8
+],
+[
+21,
+26,
+8
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+18,
+1
+],
+[
+15,
+18,
+1
+],
+[
+15,
+18,
+8
+],
+[
+21,
+18,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+15,
+18,
+1
+],
+[
+15,
+26,
+1
+],
+[
+15,
+26,
+8
+],
+[
+15,
+18,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+15,
+26,
+1
+],
+[
+21,
+26,
+1
+],
+[
+21,
+26,
+8
+],
+[
+15,
+26,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+21,
+26,
+1
+],
+[
+21,
+18,
+1
+],
+[
+21,
+18,
+8
+],
+[
+21,
+26,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+6,
+16,
+14
+],
+[
+0,
+16,
+14
+],
+[
+0,
+18,
+14
+],
+[
+6,
+18,
+14
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+6,
+16,
+22
+],
+[
+0,
+16,
+22
+],
+[
+0,
+18,
+22
+],
+[
+6,
+18,
+22
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+6,
+16,
+14
+],
+[
+0,
+16,
+14
+],
+[
+0,
+16,
+22
+],
+[
+6,
+16,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+16,
+14
+],
+[
+0,
+18,
+14
+],
+[
+0,
+18,
+22
+],
+[
+0,
+16,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+18,
+14
+],
+[
+6,
+18,
+14
+],
+[
+6,
+18,
+22
+],
+[
+0,
+18,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+6,
+18,
+14
+],
+[
+6,
+16,
+14
+],
+[
+6,
+16,
+22
+],
+[
+6,
+18,
+22
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+11,
+4
+],
+[
+17,
+11,
+4
+],
+[
+17,
+20,
+4
+],
+[
+19,
+20,
+4
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+11,
+9
+],
+[
+17,
+11,
+9
+],
+[
+17,
+20,
+9
+],
+[
+19,
+20,
+9
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+11,
+4
+],
+[
+17,
+11,
+4
+],
+[
+17,
+11,
+9
+],
+[
+19,
+11,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+11,
+4
+],
+[
+17,
+20,
+4
+],
+[
+17,
+20,
+9
+],
+[
+17,
+11,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+17,
+20,
+4
+],
+[
+19,
+20,
+4
+],
+[
+19,
+20,
+9
+],
+[
+17,
+20,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+19,
+20,
+4
+],
+[
+19,
+11,
+4
+],
+[
+19,
+11,
+9
+],
+[
+19,
+20,
+9
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+3,
+2
+],
+[
+3,
+3,
+2
+],
+[
+3,
+9,
+2
+],
+[
+10,
+9,
+2
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+3,
+5
+],
+[
+3,
+3,
+5
+],
+[
+3,
+9,
+5
+],
+[
+10,
+9,
+5
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+3,
+2
+],
+[
+3,
+3,
+2
+],
+[
+3,
+3,
+5
+],
+[
+10,
+3,
+5
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+3,
+2
+],
+[
+3,
+9,
+2
+],
+[
+3,
+9,
+5
+],
+[
+3,
+3,
+5
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+9,
+2
+],
+[
+10,
+9,
+2
+],
+[
+10,
+9,
+5
+],
+[
+3,
+9,
+5
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+9,
+2
+],
+[
+10,
+3,
+2
+],
+[
+10,
+3,
+5
+],
+[
+10,
+9,
+5
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+},
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+15,
+2
+],
+[
+1,
+15,
+2
+],
+[
+1,
+16,
+2
+],
+[
+10,
+16,
+2
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+15,
+8
+],
+[
+1,
+15,
+8
+],
+[
+1,
+16,
+8
+],
+[
+10,
+16,
+8
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+15,
+2
+],
+[
+1,
+15,
+2
+],
+[
+1,
+15,
+8
+],
+[
+10,
+15,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+15,
+2
+],
+[
+1,
+16,
+2
+],
+[
+1,
+16,
+8
+],
+[
+1,
+15,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+1,
+16,
+2
+],
+[
+10,
+16,
+2
+],
+[
+10,
+16,
+8
+],
+[
+1,
+16,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+10,
+16,
+2
+],
+[
+10,
+15,
+2
+],
+[
+10,
+15,
+8
+],
+[
+10,
+16,
+8
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+}
+
+]
+}
