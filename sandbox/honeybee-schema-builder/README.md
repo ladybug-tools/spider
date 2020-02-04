@@ -1,7 +1,7 @@
 
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://www.ladybug.tools/spider/#xxxxx/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( /https://www.ladybug.tools/spider/sandbox/honeybee-schema-builder/#README.md "View file as a web page." ) </span>
 
-<div><input type=button class = "btn btn-secondary btn-sm" onclick=window.location.href="https://github.com/ladybug.tools/spider/blob/master/xxxxx/README.md"
+<div><input type=button class = "btn btn-secondary btn-sm" onclick=window.location.href="https://github.com/ladybug-tools/spider/tree/master/sandbox/honeybee-schema-builder"
 value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ></div>
 
 <br>
@@ -11,8 +11,8 @@ value="You are now in a GitHub web page view - Click this button to view this re
 <!--
 <iframe src=https://www.ladybug.tools/spider/xxxxx/xxxxx.html width=100% height=500px >Iframes are not viewable in GitHub source code views</iframe>
 _<small>ZZZZZ</small>_
-
 -->
+
 ## Full Screen: [Honeybee JSON Schema Builder]( https://www.ladybug.tools/spider/sandbox/honeybee-schema-builder/index.html )
 
 
@@ -48,6 +48,7 @@ _<small>ZZZZZ</small>_
 ### 2020-02-03
 
 * F: Add multiple rooms with six faces each
+	* Rooms placed randomly in 3D space
 * First commit readme
 
 
