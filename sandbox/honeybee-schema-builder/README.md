@@ -18,6 +18,14 @@ _<small>ZZZZZ</small>_
 
 ## Concept
 
+### [honeybee schema builder 2020-02-03]( https://www.ladybug.tools/spider/sandbox/honeybee-schema-builder/v-2020-02-03/honeybee-schema-builder.html)
+
+* F: Add multiple rooms with six faces each
+	* Rooms placed randomly in 3D space
+
+### [honeybee schema builder 2020-02-02]( https://www.ladybug.tools/spider/sandbox/honeybee-schema-builder/v-2020-02-03/honeybee-schema-builder.html)
+
+* First commit
 
 ## To Do / Wish List
 
