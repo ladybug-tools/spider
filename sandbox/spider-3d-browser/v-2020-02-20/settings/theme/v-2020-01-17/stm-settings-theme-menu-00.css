@@ -1,0 +1,344 @@
+/* copyright pushMe-pullYou authors. MIT license.
+
+See: https://github.com/pushme-pullyou/
+
+*/
+
+:root {
+	--background-color: #fff;
+	--red-hue: 360;
+	--blue-hue: 240;
+	--green-hue: 120;
+	--main-hue: var(--red-hue);
+	--saturation: 50%;
+
+	font: 1rem monospace;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	background-color: var(--background-color);
+	color: hsl(var(--main-hue), var(--saturation), var(--lightness1));
+	/*
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	*/
+
+}
+
+a {
+	color: hsl(var(--main-hue), var(--saturation), var(--lightness2));
+	font-weight: 800;
+	text-decoration: underline;
+}
+
+a:hover,
+a:focus,
+a:active {
+	background-color: yellow;
+	color: hsl(var(--main-hue), var(--saturation), var(--lightness2));
+	text-decoration: underline;
+}
+
+h1 a {
+	color: hsl(var(--main-hue), var(--saturation), var(--lightness2));
+}
+
+
+option:nth-child(odd) {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness5));
+}
+
+aside {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness5));
+	margin: 1rem;
+	padding: 0.5rem 1rem;
+}
+
+blockquote,
+pre {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness5));
+	margin: 1rem;
+	padding: 0.5rem 1rem;
+}
+
+code {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness5));
+	margin: 1rem;
+	padding: 0.5rem 1rem;
+}
+
+dialog {
+	margin: auto;
+	top: 40vh;
+}
+
+button {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	color: hsl(var(--main-hue), var(--saturation), var(--lightness1));
+	font-size: 1rem;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+}
+
+button:hover {
+	background: #ccc;
+	color: #fff;
+}
+
+input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+	border-color: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+	border-style: solid;
+	border-width: 1px;
+	height: 3ch;
+	padding: 0.5ch, 1ch;
+	width: 100%;
+}
+
+input[type="range"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+	border-bottom: 1px solid #ccc;
+	height: 2ch;
+	width: 100%;
+}
+
+#inpLightness1 {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: hsl(var(--main-hue), var(--saturation), var(--lightness1));
+	height: 2ch;
+	width: 100%;
+}
+
+#inpLightness2 {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: hsl(var(--main-hue), var(--saturation), var(--lightness2));
+	height: 2ch;
+	width: 100%;
+}
+
+#inpLightness3 {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+	height: 2ch;
+	width: 100%;
+}
+
+#inpLightness4 {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+	height: 2ch;
+	width: 100%;
+}
+
+#inpLightness5 {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: hsl(var(--main-hue), var(--saturation), var(--lightness5));
+	height: 2ch;
+	width: 100%;
+}
+
+input[type="range"]::-moz-range-thumb {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+	height: 3ch;
+	width: 1.7chx;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+	height: 3ch;
+	width: 1.7ch;
+}
+
+/*
+main {
+	border: 0px;
+	height: 100%;
+	margin-left: var(--mnu-width);
+	overflow: auto;
+	padding: 0 1rem;
+}
+main h1,
+main h2,
+main h3,
+main h4,
+main h5 {
+	padding: 0.5ch 1ch;
+}
+main p {
+	margin: 1rem;
+}
+main section {
+	margin: 0 auto;
+	max-width: 40rem;
+}
+#main.collapsed {
+	margin-left: 0;
+	width: 100%;
+}
+*/
+
+.main::-webkit-scrollbar {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+}
+
+.main::-webkit-scrollbar-thumb {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+}
+
+.nav-menu {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness5));
+	/*
+	height: 100vh;
+	left: 0;
+	margin: 0;
+	overflow: auto;
+	position: absolute;
+	transition: left 0.5s;
+	width: var(--mnu-width);
+*/
+}
+
+
+/*
+.nav-menu p {
+	margin: 1rem;
+}
+nav h1,
+nav h2,
+nav h3 {
+	padding: 0.5ch 1ch;
+}
+
+.nav-menu::-webkit-scrollbar {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+}
+.nav-menu::-webkit-scrollbar-thumb {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+}
+#navMenu.collapsed {
+	left: calc(var(--mnu-width) * -1);
+}
+*/
+
+
+.details__primary {
+	border-bottom: 1px solid hsl(var(--main-hue), var(--saturation), var(--lightness3));
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.primary,
+.summary__primary {
+	color: hsl(var(--main-hue), var(--saturation), var(--lightness1));
+	background: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+	padding: 0.5rem 1rem;
+}
+
+.secondary,
+.summary__secondary {
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+	padding: 0.5rem 1rem;
+}
+
+.dingbat {
+	cursor: pointer;
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+/*
+#navExpand {
+	top: 2rem;
+	height: 32px;
+	position: absolute;
+	left: var(--mnu-width);
+
+	transition: left 0.5s;
+	width: 32px;
+	z-index: 1;
+}
+#navExpand.collapsed {
+	left: 0;
+}
+
+/* lower right */
+
+/*
+#navSource {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	color: #fff;
+	opacity: 0.7;
+
+}
+
+.nav-source__button:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+*/
+
+/* media */
+
+@media all and (max-width: 640px) {
+	#main {
+		left: 0;
+		padding: 0 1rem;
+		width: 100%;
+	}
+
+	#navExpand {
+		top: 90vh
+	}
+}
+
+@media all and (max-height: 640px) {
+	#main {
+		left: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	#navExpand {
+		top: 90vh;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-color: #1e1f23;
+		--text-dark: #efefef;
+		--text: #c4c5c9;
+		--text-light: #6c6d71;
+		--text-lighter: #8e8f93;
+	}
+
+	* {
+
+		--lightness5: 10%;
+	}
+}
