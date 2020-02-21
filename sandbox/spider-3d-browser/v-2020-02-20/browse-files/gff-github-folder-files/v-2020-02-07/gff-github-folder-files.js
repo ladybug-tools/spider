@@ -71,7 +71,7 @@ GFF.items = [
 	{
 		"user": "ladybug-tools",
 		"repo": "/honeybee-schema",
-		"pathRepo": "samples/",
+		"pathRepo": "samples/model/",
 		"type": ".json",
 		"title": "Honeybee Schema JSON",
 		"subTitle":
