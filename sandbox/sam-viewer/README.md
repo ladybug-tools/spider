@@ -18,6 +18,9 @@ _<small>SAM Viewer</small>_
 
 ## Concept
 
+* https://bhom.xyz/
+* https://github.com/BHoM
+
 
 ## To Do / Wish List
 
@@ -42,9 +45,26 @@ _<small>SAM Viewer</small>_
 
 
 * First commit
+* Reading SAM JSON file with no issues encountered so far 
+* Current release howing only 'faces' in 'normal' color
+* Apertures will appear in upcoming release
+* There is an issue with the rotation of certain faces
+    * Have tried two methods: lookAt and matrixCompose and both are failing
+    * Work-in-progress
+    * Is there a 'rule' I am missing?
+    * Tomorrow I will go throuh the faces one-by-on to see if I can spot a parameter I am missing
+
+Items for discussion
+
+* What repo should this readme link to?
+* Where should this project be hosted?
+    * If this is to be in the SAM organization, then I will need a neew repo ewith full admin rights
+
+
+
 
 
 ***
 
-# <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a></center>
+<center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=font-size:2rem;text-decoration:none; > ❦ </a></center>
 
