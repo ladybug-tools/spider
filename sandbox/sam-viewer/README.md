@@ -46,19 +46,19 @@ _<small>SAM Viewer</small>_
 
 * First commit
 * Reading SAM JSON file with no issues encountered so far 
-* Current release howing only 'faces' in 'normal' color
+* Current release showing only 'faces' in 'normal' color
 * Apertures will appear in upcoming release
 * There is an issue with the rotation of certain faces
     * Have tried two methods: lookAt and matrixCompose and both are failing
     * Work-in-progress
     * Is there a 'rule' I am missing?
-    * Tomorrow I will go throuh the faces one-by-on to see if I can spot a parameter I am missing
+    * Tomorrow I will go through the faces one-by-on to see if I can spot a parameter I am missing
 
 Items for discussion
 
 * What repo should this readme link to?
 * Where should this project be hosted?
-    * If this is to be in the SAM organization, then I will need a neew repo ewith full admin rights
+    * If this is to be in the SAM organization, then I will need a new repo with full admin rights
 
 
 
