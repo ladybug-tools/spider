@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- https://discourse.threejs.org/t/how-to-find-wall-thickness-of-3d-models-stl-files/5719/27 -->
+<!-- https://jsfiddle.net/prisoner849/L0ecxuk4/ -->
+<head>
+  <title> ThicknessModel3D </title>
+  <meta charset="utf-8" />
+  <style>
+	body {
+	overflow: hidden;
+	margin: 0;
+	}
+  </style>
+</head>
+
+<body> </body>
+<!-- <script src="../js/three.min.101.js"></script>
+<script src="../js/OrbitControls.js"></script>
+<script src="../js/STLLoader.js"></script> -->
+
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/build/three.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/controls/OrbitControls.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/STLLoader.js"></script>
+<script>
+
+// @author prisoner849
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.setScalar(5);
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+var loader = new THREE.STLLoader();
+// https://threejs.org/examples/models/stl/ascii/slotted_disk.stl
+loader.load('https://threejs.org/examples/models/stl/ascii/slotted_disk.stl', function(geometry) {
+  var material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+  var mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+  console.log(isModelPrintable(mesh));
+});
+
+function isModelPrintable(mesh) {
+
+	var minDist = 0.6;
+
+	var raycaster = new THREE.Raycaster();
+	var intersects = [];
+
+	var pos = mesh.geometry.attributes.position;
+
+	var ori = new THREE.Vector3();
+	var dir = new THREE.Vector3();
+	var trc = new THREE.Vector3();
+
+	var a = new THREE.Vector3(),
+	b = new THREE.Vector3(),
+	c = new THREE.Vector3(),
+
+	midPoint = new THREE.Vector3(),
+	tri = new THREE.Triangle();
+	var closest = new THREE.Vector3();
+
+	var faces = pos.count / 3;
+
+	for (let i = 0; i < faces; i++) {
+		a.fromBufferAttribute(pos, i * 3 + 0);
+		b.fromBufferAttribute(pos, i * 3 + 1);
+		c.fromBufferAttribute(pos, i * 3 + 2);
+		tri.set(a, b, c);
+		tri.getMidpoint(ori);
+		tri.getNormal(dir)
+		raycaster.set(ori, dir.negate());
+		intersects = raycaster.intersectObject(mesh);
+
+		minDist = Math.min(minDist, intersects[intersects.length > 1 ? 1 : 0].distance);
+
+	}
+
+  return minDist >= 0.6;
+}
+
+renderer.setAnimationLoop(() => {
+
+  renderer.render(scene, camera)
+
+});
+
+</script>
+
+</html>

@@ -62,7 +62,7 @@
 
 		}
 
-		console.log( 'ANA.butAnalemma.style.backgroundColor', ANA.butAnalemma.style.backgroundColor );
+		//console.log( 'ANA.butAnalemma.style.backgroundColor', ANA.butAnalemma.style.backgroundColor );
 
 		//if ( ANA.butAnalemma.style.backgroundColor === '' ) {
 		if ( ANA.butAnalemma.style.fontStyle !== 'italic' ) {
@@ -74,10 +74,6 @@
 			const scriptSolCalc = document.head.appendChild( document.createElement( 'script' ) );
 			scriptSolCalc.src = 'https://rawgit.com/ladybug-tools/ladybug-web/gh-pages/solar-calculator-ladybug-web/solar-calculator-ladybug-web-r1.js';
 
-			const now = Math.floor( Date.now() / 1000 );
-
-			url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' +
-				parameters.latitude + ',' + parameters.longitude + '&timestamp=' + now;
 
 			divMenuItems.innerHTML = `
 
@@ -112,7 +108,14 @@
 
 			` + divMenuItems.innerHTML;
 
-			requestFile( url, callbackUtcOffset );
+			// const now = Math.floor( Date.now() / 1000 );
+
+			// url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' +
+			// 	parameters.latitude + ',' + parameters.longitude + '&timestamp=' + now;
+
+			//requestFile( url, callbackUtcOffset );
+
+			//setUtcOffset()
 
 			object3D = new THREE.Object3D();
 
@@ -567,6 +570,34 @@
 
 
 
+	function setUtcOffset () {
+
+		url= `http://api.geonames.org/timezoneJSON?lat=${ parameters.latitude }&lng=${ parameters.longitude }&username=raf`;
+		//divUrl.innerHTML = url;
+
+		fetch( url )
+		.then( response => response.json() )
+		.then( json => {
+
+			//console.log( 'js', json.rawOffset );
+			divContents.innerHTML = JSON.stringify( json )
+
+			parameters.offsetUTC = json.gmtOffset;
+
+			logLocation.innerHTML =
+
+				'<p>Latitude: ' + parameters.latitude + '</p>' +
+
+				'<p>Longitude: ' + parameters.longitude + '</p>' +
+
+				'<p>UTC offset: ' + parameters.offsetUTC + '</p>' +
+
+			'';
+
+		});
+
+
+	}
 	function requestFile( url, callback ) {
 
 		const xhr = new XMLHttpRequest();
@@ -603,7 +634,7 @@
 				divContents.innerHTML += '<p>UTC offset: ' + ( json.rawOffset / 60 ) +  '</p>';
 		*/
 
-		parameters.offsetUTC = json.rawOffset / 60;
+		parameters.offsetUTC = json.gmtOffset;
 
 		logLocation.innerHTML =
 

@@ -20,9 +20,9 @@ The [read me]( http://www.ladybug.tools/spider/#gbxml-viewer/README.md ) file wi
 -->
 
 
-## Full screen stable release (fingers-crossed) R11.12.5: <http://www.ladybug.tools/spider/gbxml-viewer>
+## Full screen stable release (fingers-crossed) R11.12.6.1: <http://www.ladybug.tools/spider/gbxml-viewer/r11/gv-app/gv-app.html>
 
-### Full screen stable release R11.12.4: <br><http://www.ladybug.tools/spider/gbxml-viewer/r11-12-4/gv-app/gv-app.html>
+### Full screen stable release R11.12.4.1: <br><http://www.ladybug.tools/spider/gbxml-viewer/r11-12-4/gv-app/gv-app.html>
 
 #### Full screen development very pre-release R12: <br><http://www.ladybug.tools/spider/gbxml-viewer/dev>
 
@@ -284,6 +284,12 @@ View as [Gist]( https://help.github.com/articles/about-gists/ )
 Gists are a great way to share your work. You can share single files, parts of files, or full applications. You can access gists at https://gist.github.com.
 
 * <https://gist.github.com/theo-armour/163685de4d1fdacd70b2ffd446e8c874/edit>
+
+## Change Log
+
+### 2019-11-07 ~ Theo
+
+* Update default drawing link to a working file
 
 
 ***

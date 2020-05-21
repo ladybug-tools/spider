@@ -54,17 +54,38 @@ See main read me file
 ## Issues
 
 
+## Links of interest
+
+* https://stackoverflow.com/questions/16086962/how-to-get-a-time-zone-from-a-location-using-latitude-and-longitude-coordinates
+
 
 ## Change Log
+
+### 2020-01-22 ~ Theo
+
+R12.38
+
+* B: fix 'reset view' issues - add target sphere object
+* B: Hide close button of startup screen
+
+### 2019-10-25 ~ Theo
+
+R12.37
+
+* B: Fix UTC offset not showing and preventing analemma from being draw
+* Thank you http://api.geonames.org/timezoneJSON >> but havibg trouble with https
 
 ### 2018-03-24 ~ Theo
 
 R12.9
+
 CSS
 
 * Widths to rems
 * Most all colors by css vars
+
 APP
+
 * Rejigged menu / item positions
 
 

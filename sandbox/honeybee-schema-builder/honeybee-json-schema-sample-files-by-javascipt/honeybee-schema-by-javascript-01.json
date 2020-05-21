@@ -1,0 +1,257 @@
+{ "rooms": [
+
+
+{
+"type": "Room",
+"name": "SimpleZone",
+"display_name": "Simple Zone",
+"properties": {
+"type": "RoomPropertiesAbridged",
+"energy": {
+"type": "RoomEnergyPropertiesAbridged",
+"construction_set": "Simple Zone Construction Set"
+}
+},
+"faces": [
+{
+"type": "Face",
+"name": "Simple_Zone_Bottom",
+"display_name": "Simple Zone Bottom",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+0,
+0
+],
+[
+0,
+0,
+0
+],
+[
+0,
+5,
+0
+],
+[
+3,
+5,
+0
+]
+]
+},
+"face_type": "Floor",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Top",
+"display_name": "Simple Zone Top",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+0,
+1
+],
+[
+0,
+0,
+1
+],
+[
+0,
+5,
+1
+],
+[
+3,
+5,
+1
+]
+]
+},
+"face_type": "RoofCeiling",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+},
+{
+"type": "Face",
+"name": "Simple_Zone_Wall_1",
+"display_name": "Simple Zone Wall 1",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+0,
+0
+],
+[
+0,
+0,
+0
+],
+[
+0,
+0,
+1
+],
+[
+3,
+0,
+1
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_2",
+"display_name": "Simple Zone Wall 2",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+0,
+0
+],
+[
+0,
+5,
+0
+],
+[
+0,
+5,
+1
+],
+[
+0,
+0,
+1
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_3",
+"display_name": "Simple Zone Wall 3",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+0,
+5,
+0
+],
+[
+3,
+5,
+0
+],
+[
+3,
+5,
+1
+],
+[
+0,
+5,
+1
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}, {
+"type": "Face",
+"name": "Simple_Zone_Wall_4",
+"display_name": "Simple Zone Wall 4",
+"properties": {
+"type": "FacePropertiesAbridged",
+"energy": {
+"type": "FaceEnergyPropertiesAbridged"
+}
+},
+"geometry": {
+"type": "Face3D",
+"boundary": [
+[
+3,
+5,
+0
+],
+[
+3,
+0,
+0
+],
+[
+3,
+0,
+1
+],
+[
+3,
+5,
+1
+]
+]
+},
+"face_type": "Wall",
+"boundary_condition": {
+"type": "Adiabatic"
+}
+}
+]
+}
+
+]
+}

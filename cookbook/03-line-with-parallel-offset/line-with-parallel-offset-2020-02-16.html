@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content = "width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" >
+<meta name=description content="Real-time 3D in your browser" >
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2017-11-13" >
+<title></title>
+<style>
+
+	body { font: 11pt monospace; margin: 0; overflow: hidden; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	button { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	#divMenu { margin: 0 20px; position: absolute; }
+
+</style>
+</head>
+<body>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/build/three.min.js" ></script>
+<script src = "https://cdn.rawgit.com/mrdoob/three.js/r88/examples/js/controls/OrbitControls.js" ></script>
+
+<div id = "divMenu" >
+
+	<div id = "divTitle" ></div>
+
+	<div id = "divContents" >
+		<button onclick=controls.autoRotate=!controls.autoRotate; >rotation</button>
+
+		<p><button onclick=drawMalteseCross() >drawMalteseCross</button></p>
+
+		<p><button onclick=drawRandomPolygon() >drawRandomPolygon()</button></p>
+
+
+
+		<p>
+			<button onclick=drawOffset(); >drawOffset</button>
+			<button onclick=drawOffset(5); >drawOffset 5</button>
+			<button onclick=drawOffset(-8); >drawOffset -8</button>
+
+		</p>
+
+	</div>
+
+</div>
+
+<script>
+
+	const v = ( x, y, z ) => new THREE.Vector3( x, y, z );
+
+	let line;
+
+	var renderer, camera, controls, scene;
+	var geometry, material, mesh;
+
+	init();
+	animate();
+
+function init() {
+
+	divTitle.innerHTML = '<h1><a href="" >' + location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' ) +'</a></h1>';
+
+	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	document.body.appendChild( renderer.domElement );
+
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.set( 100, 100, 100 );
+	camera.up.set( 0, 0, 1 );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+	scene = new THREE.Scene();
+
+	window.addEventListener( 'resize', onWindowResize, false );
+
+	window.addEventListener( 'orientationchange', onWindowResize, false );
+
+	const axesHelper = new THREE.AxesHelper( 50 );
+	scene.add( axesHelper );
+
+	// geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	// material = new THREE.MeshNormalMaterial();
+	// mesh = new THREE.Mesh( geometry, material );
+	//scene.add( mesh );
+
+	//drawRandomPolygon();
+
+	drawMalteseCross()
+}
+
+
+
+function drawRandomPolygon() {
+
+	scene.remove( line )
+	const items = 20;
+
+	const radius = 50;
+	let delta = 15;
+	const theta = Math.PI / 2;
+
+	vertices = [];
+
+	for ( var i = 0; i < items ; i++ ) {
+
+		delta = i % 2 ? - delta : delta;
+
+		vertex = new THREE.Spherical( radius + delta, 2 * i * Math.PI / items, theta );
+		vertices.push( new THREE.Vector3().setFromSpherical ( vertex ) );
+
+	}
+
+	vertices.push( vertices[ 0 ] );
+
+	geometry = new THREE.Geometry();
+	geometry.vertices = vertices;
+	material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+	line = new THREE.Line( geometry, material );
+
+//		linePolygon.position.set( 50 * Math.random() - 25, 50 * Math.random() - 25, 50 * Math.random() - 25 );
+//		linePolygon.rotation.z = 6.2 * Math.random();
+	scene.add( line );
+
+
+	// verticesOffset = offsetPoints( linePolygon, vertices, 10, 0 );
+
+	// const geometryOffset = new THREE.Geometry();
+	// geometryOffset.vertices = verticesOffset;
+	// const materialOffset = new THREE.LineBasicMaterial( { color: 'red' } );
+	// const lineOffset = new THREE.Line( geometryOffset, materialOffset );
+
+	// linePolygon.add( lineOffset );
+
+//console.log( '', verticesOffset );
+
+}
+
+
+
+function drawMalteseCross() {
+
+	vertices = [
+		v( 10, 10, 0),
+		v( 40, 30, 0),
+		v( 40, -30, 0),
+		v( 10, -10, 0),
+		v( 30, -40, 0),
+		v( -30, -40, 0),
+		v( -10, -10, 0 ),
+		v( -40, -30, 0 ),
+		v( -40, 30, 0 ),
+		v( -10, 10, 0 ),
+		v( -30, 40, 0 ),
+		v( 30, 40, 0 ),
+		v( 10, 10, 0 )
+	];
+
+	scene.remove( line )
+
+	geometry = new THREE.Geometry();
+	geometry.vertices = vertices;
+	material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+	line = new THREE.Line( geometry, material );
+	scene.add( line );
+
+}
+
+
+
+function drawOffset( offset = -6 ){
+
+
+	verticesOffset = offsetPoints( line, vertices, offset, 0 );
+
+	const geometryOffset = new THREE.Geometry();
+	geometryOffset.vertices = verticesOffset;
+	const materialOffset = new THREE.LineBasicMaterial( { color: 'red' } );
+	const lineOffset = new THREE.Line( geometryOffset, materialOffset );
+
+	line.add( lineOffset );
+
+}
+
+
+
+// points or vertices??
+// Mr.doob uses points. https://threejs.org/docs/#api/extras/core/Path
+
+	function offsetPoints( obj, points, offsetX, offsetY  = 0 ) {
+
+// 2017-11-17
+
+		const v = ( x, y, z ) => new THREE.Vector3( x, y, z );
+
+		let lines = [];
+
+		for ( let i = 0; i < points.length - 1; i++ ) {
+
+			let pt1 = points[ i ];
+			let pt2 = points[ i + 1 ];
+
+			const angleVector = pt2.clone().sub( pt1 );
+			const angle = Math.atan2( angleVector.y, angleVector.x );
+
+// redo with THREE.Spherical?
+// https://stackoverflow.com/questions/11039841/how-to-draw-parallel-line-using-three-js
+// https://stackoverflow.com/questions/43229743/offset-mesh-in-three-js
+
+			const offsetPt1 = v( pt1.x - offsetX * Math.cos( angle - Math.PI / 2 ), pt1.y + offsetX * Math.sin( angle + Math.PI / 2 ), 0 );
+			const offsetPt2 = v( pt2.x - offsetX * Math.cos( angle - Math.PI / 2 ), pt2.y + offsetX * Math.sin( angle + Math.PI / 2 ), 0 );
+
+			const line = new THREE.Line3( offsetPt1, offsetPt2 );
+			lines.push( line );
+
+		}
+
+// if first and last point close, deal with it
+
+		if ( points[ 0 ].distanceTo( points[ points.length - 1 ] ) < 0.01 ) {
+
+			pt1 = intersectionTwoLines( lines[ 0 ], lines [ lines.length - 1 ] );
+			pt2 = pt1;
+
+		} else {
+
+			pt1 = lines[ 0 ].start;
+			pt2 = lines[ lines.length - 1 ].end;
+
+		}
+
+		const pointsOffset = [ v( pt1.x, pt1.y, offsetY ) ];
+
+		for ( let i = 0; i < lines.length - 1; i++ ) {
+
+			const pt = intersectionTwoLines( lines[ i ], lines [ i + 1 ] );
+
+			pointsOffset.push( v( pt.x, pt.y, offsetY ) );
+
+		}
+
+		pointsOffset.push( pt2 );
+
+		return pointsOffset;
+
+	}
+
+
+
+	function intersectionTwoLines( line1, line2 ) {
+
+// Use Three.js Ray?
+// 2016-02-10
+// Thanks to http://jsfiddle.net/justin_c_rounds/Gd2S2/ && http://jsfiddle.net/user/justin_c_rounds/fiddles/
+// http://jsfiddle.net/justin_c_rounds/Gd2S2/light/
+
+		const line1start = line1.start;
+		const line1end = line1.end;
+		const line2start = line2.start;
+		const line2end = line2.end;
+
+		const denominator =
+			( line2end.y - line2start.y ) * ( line1end.x - line1start.x )
+			- ( line2end.x - line2start.x ) * ( line1end.y - line1start.y );
+
+		if ( denominator == 0 ) { return; }
+
+		const a =
+			( ( line2end.x - line2start.x ) * ( line1start.y - line2start.y )
+			- ( line2end.y - line2start.y ) * ( line1start.x - line2start.x ) ) / denominator;
+
+		const x = line1start.x + ( a * ( line1end.x - line1start.x ) );
+		const y = line1start.y + ( a * ( line1end.y - line1start.y ) );
+
+		return new THREE.Vector3( x, y, 0 );
+
+	}
+
+
+
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+	}
+
+
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		renderer.render( scene, camera );
+		controls.update();
+
+	}
+
+</script>
+</body>
+</html>

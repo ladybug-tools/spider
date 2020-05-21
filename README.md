@@ -3,8 +3,7 @@
 
 # [Spider Read Me]( #README.md )
 
-
-<iframe class=iframeReadMe src=https://www.ladybug.tools/spider/plugins/iframe-carousel-r1.html width=100% height=480 ></iframe>
+<iframe class="iframeReadMe" src="https://www.ladybug.tools/spider/plugins/iframe-carousel-r1.html" width="100%" height="480px" ></iframe>
 
 _All of the above are embedded interactive scripts available here_
 
@@ -23,6 +22,7 @@ _All of the above are embedded interactive scripts available here_
 * [gbXML Viewer  Dev R14]( https://www.ladybug.tools/spider/gbxml-viewer/r14/aragog-shortcut.html )
 * [Analemma 3D]( https://www.ladybug.tools/spider/analemma3d/index.html )
 * [Burning mAnalemma 2017]( https://www.ladybug.tools/spider/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420 )
+* [Spider gbXML Viewer Previous Releases]( https://www.ladybug.tools/spider/index.html#gbxml-viewer/previous-releases.md )
 
 
 
@@ -55,7 +55,7 @@ Invitation: https://conta.cc/2H7ex7f
 ## YouTube Video: [gbXML Viewer ~ User Guide]( https://youtu.be/2QHrbuKIkdY )
 
 * Michal's and Michalina's must watch video on Spider gbXML Viewer
-	* Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lay person.  It sparkles!'
+	* Tania Becker: 'Fascinating video. It's well explained and easy to understand even for a lazy person.  It sparkles!'
 
 
 ***
@@ -70,9 +70,9 @@ The main issue is that much of the currently available software for carrying out
 
 Solutions to these issues might include:
 
-Provide free, simple, easy-to access tools to enable analysis of building outcomes earlier in the design process - or even as a stimulator of the design process
+Provide free, simple, easy-to-access tools to enable an analysis of building outcomes earlier in the design process - or even as a stimulator of the design process
 
-Offer easy-to-read code written so that designers and engineers may monitor, verify and enhance the efforts - and, yes, full stack developers are welcome too.
+Offer easy-to-read code written so that designers and engineers may monitor, verify and enhance the efforts - and, yes, full-stack developers are welcome too.
 
 Enable just-in-time custom solutions. Every building is both unique and standards-adherent. The visualization and analysis tools should be the same.
 
@@ -80,7 +80,7 @@ Enable just-in-time custom solutions. Every building is both unique and standard
 
 > Each pattern describes a problem which occurs over and over again in our environment, and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, without ever doing it the same way twice.
 
->Patterns are descriptions of common problems and proposal for the solutions that can be used repeatedly every time the problem is encountered and producing an different outcome.
+>Patterns are descriptions of common problems and proposal for the solutions that can be used repeatedly every time the problem is encountered and producing a different outcome.
 
  -->
 

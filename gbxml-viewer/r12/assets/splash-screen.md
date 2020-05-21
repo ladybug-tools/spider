@@ -8,6 +8,37 @@
 Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mostapha" ) &nbsp; Bugs: [GitHub issues]( https://github.com/ladybug-tools/spider/issues "Say hello to Michal & Theo!" )
 
 ***
+
+<details open>
+
+<summary>Welcome 2020-01-22 ~ [Aragog r12.38]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html )</summary>
+
+Fixes issues with 'reset view' button in r12.37
+
+New issues with "Sun Range" feature noted and will be dealt with.
+
+Please do feel free to report issues. R12 is a long term support release.
+
+
+</details>
+
+<details>
+
+<summary>Welcome 2019-10-23 ~ [Aragog r12.37]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-37.html )</summary>
+
+'Things to try' > 'Sun path' / analemma': working again. Uses [geoNames]( https://geonames.org ) API instead of Google Maps API
+
+
+</details>
+
+<details open>
+
+<summary>Welcome 2019-10-23 ~ [Aragog r12.36]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-36.html ) stable release</summary>
+
+See new left menu with select the app of your choice
+
+</details>
+
 <details open>
 
 <summary>Welcome 2019-09-26 ~ [Aragog r12.35]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app-dev-12-35.html ) ready to test</summary>

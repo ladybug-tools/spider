@@ -21,8 +21,8 @@
 </style>
 </head>
 <body>
-<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r100/build/three.min.js" ></script>
-<script src = "https://cdn.rawgit.com/mrdoob/three.js/r93/examples/js/controls/TrackballControls.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r109/build/three.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r109/examples/js/controls/TrackballControls.js" ></script>
 
 	<div id = "divMenu" >
 
@@ -42,8 +42,8 @@
 // jshint esversion: 6
 
 
-const rows = 4
-const cols = 3;
+const rows = 8
+const cols = 8;
 
 const pixelsPerTile = 256
 let canvas;
@@ -136,7 +136,6 @@ function setMap( src, col, row ) {
 
 		//console.log( 'src, col, row', src, col, row );
 		//divLog.appendChild( img );
-
 
 		const context = canvas.getContext( '2d' );
 		context.drawImage( img, 0, 0, pixelsPerTile, pixelsPerTile, col * pixelsPerTile, row * pixelsPerTile, pixelsPerTile, pixelsPerTile );

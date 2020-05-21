@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+
+</head>
+
+<body>
+	<div id="divJsonView"></div>
+
+	<script>
+
+		let json;
+
+		//url = "example.json";
+		url = "https://rawcdn.githack.com/ladybug-tools-in2/honeybee-model-schema/master/honeybee_model_schema/samples/model_complete_single_zone_office_detailed_loads.json";
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', url, true );
+		xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+		//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+		xhr.onload = ( xhr ) => {
+
+			response = xhr.target.response;
+			json = JSON.parse( response );
+			//console.log( 'json', json );
+
+			divJsonView.innerHTML = parseJson( "root", json );
+
+		};
+
+		xhr.send( null );
+
+
+
+		function parseJson( key = "", item = {}, index = 0 ) {
+
+			return getType( key, item, index );
+
+		}
+
+
+		function getType( key, item, index ) {
+
+			const type = typeof item;
+
+			if ( ["string", "number", "boolean", "bigint", "null" ].includes( type ) ) {
+
+				return getString( key + " " + index, item );
+
+			} else if ( type === 'object' ) {
+
+				//console.log( 'item', item );
+
+				return Array.isArray( item ) ? getArray( key, item, index ) : getObject( key, item, index );
+
+			}
+
+		}
+
+
+
+		function getString( key, string = "") {
+
+			//console.log( 'string', key, string  );
+
+			// https://stackoverflow.com/questions/8299742/is-there-a-way-to-convert-html-into-normal-text-without-actually-write-it-to-a-s
+
+			if ( typeof string === "string" ) { string = string.replace(/<[^>]*>/g, '') }
+
+			return `<div>${ key }: ${ string }</div>`;
+
+		}
+
+
+
+		function getArray( key, array, index ) {
+
+			//console.log( 'Array', key, array );
+
+			const htm = array.map( ( item, index ) => getType( key, item, index ) ).join( "" );
+
+			return `<details><summary>${ key } [ ${ array.length } ]</summary>${ htm }</details>`;
+
+		}
+
+
+
+		function getObject( key, item , index ) {
+
+			if ( !item ) { console.log( 'err item', key, item, index ); return; }
+
+			const keys = Object.keys( item );
+
+			const htm = keys.map( key => parseJson( key, item[ key ]  ) ).join("");
+
+			return `<details><summary>${ key } ${ index }: { ${ keys.length } }</summary>${ htm }</details>`;
+
+		}
+
+	</script>
+</body>
+</html>

@@ -2,9 +2,9 @@
 	var uriGbxmlDefault = location.protocol === 'file:' ? // for testing
 	//		'https://rawgit.com/ladybug-tools/spider/master/gbxml-viewer/gbxml-sample-files/open-studio-seb.xml'
 	//		'https://rawgit.com/GreenBuildingXML/Sample-gbXML-Files/master/ARCH_ASHRAE%20Headquarters%20r16_detached.xml'
-	'../../../gbxml-sample-files/bristol-clifton-down-road-small.xml'
+	'../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml'
 	:
-	'../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+	'../../../gbxml-sample-files/bristol-clifton-downs-fixed.xml';
 
 	//   ../../../gbxml-sample-files/golden-co-open-studio-seb.xml
 	//   ../../../gbxml-sample-files/omha-nb-zneth.xml

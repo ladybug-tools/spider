@@ -5,8 +5,8 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript" >
 <meta name = "keywords" content = "gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM" >
-<meta name = "date" content = "2018-10-17" >
-<title>Aragog gbXML Viewer 12.34</title>
+<meta name = "date" content = "2020-01-22" >
+<title>Aragog gbXML Viewer 12.38</title>
 <link rel="stylesheet" type="text/css" href="../assets/style.css" >
 <link rel="stylesheet" id="stylesheetW3schools" type="text/css" >
 
@@ -22,16 +22,18 @@
 
 </head>
 <body>
-<script src = "https://rawgit.com/mrdoob/three.js/r90/build/three.min.js" ></script>
-<script src = "https://rawgit.com/mrdoob/three.js/r90/examples/js/controls/OrbitControls.js" ></script>
-<script src = "https://rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/build/three.min.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/examples/js/controls/OrbitControls.js" ></script>
+<script src = "https://cdn.jsdelivr.net/gh/showdownjs/showdown@1.9.0/dist/showdown.min.js" ></script>
+<script src = "https://ladybug-tools.github.io/spider-gbxml-tools/lib/mas-menu-app-switch/mas-menu-app-switch-0-00.js"></script>
+
 <script src = "../gv-cor/gv-cor.js" ></script>
 <script src = "../gv-gbx/gv-gbx.js" ></script>
 <script src = "../gv-thr/gv-thr.js" ></script>
 <script src = "../gv-gbv/gv-gbv.js" ></script>
 <script src = "../gv-hud/gv-hud.js" ></script>
 
-<!-- Copyright 2018 Ladybug Tools authors. MIT License -->
+<!-- Copyright 2019 Ladybug Tools authors. MIT License -->
 
 	<div id = "divMenuLeft" class=w3-theme-l5 >
 
@@ -47,11 +49,14 @@
 
 				<summary>Header</summary>
 
-				<div>
+				<!-- <div>
 					<a href="https://www.ladybug.tools/" target="_top" title="Hi Mostapha!" >Ladybug Tools</a> &raquo;
 					<a href="https://www.ladybug.tools/spider/" target="_top" title="Good Web made here!" ><img src=../assets/spider-web.png  height=18 ></a> &raquo;
 					<a href="../../../index.html#gbxml-viewer/README.md" target="_top" style=font-size:24px; title="gbXML Viewer Read Me" >&#x2302;</a> &raquo;
-				</div>
+				</div> -->
+
+				<h3 id="MNUdivAppSwitch"></h3>
+
 
 				<h2>
 					<a href="https://github.com/ladybug-tools/spider/blob/master/gbxml-viewer/r12/gv-app/gv-app.html" target="_top" >
@@ -196,7 +201,7 @@
 				<div><a href=#../../../pages/contributing.md >Contributing</a></div>
 				<div><a href=#../../../pages/license.md >Copyright & License</a></div>
 				<div><a href=#../../../pages/markdown-help.md >Markdown Help</a></div>
-				<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
+				<div><a href="JavaScript:( function(){ var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='https://cdn.jsdelivr.net/gh/mrdoob/stats.js@r17/build/stats.min.js';document.head.appendChild(script);})()" title="Mr.doob's Stats.js appear in top left corner" >Show frames/second statistics</a></div>
 				<div><a href="https://api.github.com/rate_limit" target="_blank">github rate limits</a></div>
 
 				<hr>
@@ -238,7 +243,9 @@
 
 			<div id = "divContainerHeader" class="w3-theme-d2 w3-hover-theme" >
 				pop-up window / click here to move / click outside to close
+				<!--
 				<button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" ontouchstart=divPopUp.style.display="none"; onclick=divPopUp.style.display="none"; style=float:right;z-index:200; >&#x2716;</button>
+				-->
 			</div>
 
 			<div id = "divContents" ></div>
@@ -310,6 +317,8 @@
 			APP.backgroundColor = getComputedStyle(classElement).backgroundColor;
 
 		}
+
+		MNUdivAppSwitch.innerHTML = MAS.getAppSwitch();
 
 		const thrFilePath = localStorage.getItem( 'thrFilePath' );
 

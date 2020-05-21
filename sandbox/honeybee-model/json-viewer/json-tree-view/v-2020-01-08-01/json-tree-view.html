@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1" >
+<meta name = "description" content = "Basic TooToo HTML template" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+<meta name=version content="2020-01-08-01">
+
+
+<title></title>
+
+<style>
+
+	* { box-sizing: border-box; }
+
+	:root { font: 100% monospace; --mnu-width: 22rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
+
+	html { height: 100%; }
+
+	body { margin: 0 auto; max-width: 80ch; padding: 0 0.5rem; }
+
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus, a:active { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	aside { border: 1px solid lightgray; margin-top: 15px; padding: 2px; }
+
+	blockquote { background-color: #ddd; padding: 1ch; }
+
+	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
+	button:hover { background: #ccc; color: #fff }
+
+	code { background-color: #eee; }
+	pre { background-color: #eee; padding: 5px; }
+
+	summary { cursor: pointer; font-size: 2.5ch; font-weight: bold; }
+
+	.help { float: right; }
+
+	/*
+	main { border: 0px; height: 100%; left: var( --mnu-width ); margin: 0;
+		padding: 0 1rem; position: absolute; width: calc( 100% - var( --mnu-width ) );  }
+
+	#navMenu { background-color: #eee; left: 0; margin: 0; padding: 0 1rem;
+		position: absolute; top: 0; width: var( --mnu-width ); }
+	*/
+
+</style>
+</head>
+<body>
+
+	<nav id="navMenu" >
+
+		<span id="divTitle" >
+
+			<h2>
+				<a id=aSource target=_top title="Source code on GitHub" >
+					<img id=imgIcon height=18 style=opacity:0.5; >
+				</a>
+
+				<a id=aTitle href="" title="Click to reload this page" ></a>
+				<span id=sVersion ></span>
+				<span class=help onmouseover=divDescription.hidden=false >?</span>
+
+			</h2>
+
+			<div id=divDescription onmouseout=divDescription.hidden=true hidden ></div>
+
+		</div>
+
+
+	</nav>
+
+	<main>
+
+		<details open >
+
+			<summary>JSON tree view <span class=help onmouseover=divDetails.hidden=false >?</span></summary>
+
+			<div id=divDetails onmouseout=divDetails.hidden=true hidden >How can I help you?</div>
+
+			<p><select id=selOptionUrls oninput=getFile(urls[selOptionUrls.selectedIndex])></select></p>
+
+			<p>UrlsGitHubRepos<br><select id=selOptionUrlsGitHubRepos
+				oninput=getFileUrlsGitHubRepos(this.selectedIndex)></select></p>
+		<p>
+			<button id=but onclick=toggleAll(); >close all</button>
+			<button id=but onclick=toggleAll(true); >open all</button>
+
+			<button id=but onclick=addUrls(); >clickable links</button>
+		</p>
+
+			<div id="divJsonView"></div>
+
+		</details>
+
+		<br>
+
+		<div id="divContents" ></div>
+
+	</main>
+
+
+<script>
+
+aSource = "https://github.com/zzzzz/xxxxx.html";
+imgIcon.src = "https://pushme-pullyou.github.io/github-mark-32.png";
+aTitle.innerHTML= document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+const version = document.head.querySelector( "[ name=version ]" );
+sVersion.innerHTML = version ? version.content : "";
+divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
+
+let json;
+
+let urls = [
+	"../example.json",
+	"https://rawcdn.githack.com/ladybug-tools-in2/honeybee-model-schema/master/honeybee_model_schema/samples/model_complete_single_zone_office_detailed_loads.json",
+
+	// https://www.sitepoint.com/10-example-json-files/
+	"https://raw.githubusercontent.com/corysimmons/colors.json/master/colors.json",
+	"http://ip-api.com/json/",
+	"https://support.oneskyapp.com/hc/en-us/article_attachments/202761727/example_2.json",
+	"https://opensource.adobe.com/Spry/data/json/object-02.js",
+	"https://opensource.adobe.com/Spry/data/json/object-03.js",
+	"https://opensource.adobe.com/Spry/data/json/donuts.js",
+	"https://data.hawaii.gov/api/views/usep-nua7/rows.json",
+	"https://data.cityofchicago.org/api/views/y6yq-dbs2/rows.json"
+];
+
+let UrlsGitHubRepos = [
+
+	"nasa/NASA-3D-Resources",
+	"jaanga/jaanga.github.io",
+	"ladybug-tools/spider"
+
+];
+
+
+
+init()
+
+
+function init() {
+
+	selOptionUrls.innerHTML = urls.map( url => `<option>${url.split( "/").pop() }</option>` );
+	selOptionUrls.selectedIndex = 0;
+
+	selOptionUrlsGitHubRepos.innerHTML = UrlsGitHubRepos.map( url => `<option>${url.split( "/").pop() }</option>` );
+	selOptionUrlsGitHubRepos.selectedIndex = 0;
+
+	getFile( urls[ selOptionUrls.selectedIndex ] )
+
+}
+
+
+
+
+function getFileUrlsGitHubRepos( index ){
+
+	url = `https://api.github.com/repos/${ UrlsGitHubRepos[ index ] }/git/trees/master?recursive=1`
+
+	getFile( url );
+
+}
+
+
+function getFile( url ) {
+
+	xhr = new XMLHttpRequest();
+	xhr.open( 'GET', url, true );
+	xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	xhr.onload = onLoad;
+	xhr.send( null );
+
+}
+
+function onLoad( xhr ) {
+
+		response = xhr.target.response;
+		json = JSON.parse( response );
+		//console.log( 'json', json );
+
+		divJsonView.innerHTML = parseJson( "root", json );
+
+		details = divJsonView.querySelectorAll( "details" );
+
+		details[ 0 ].open = true;
+
+}
+
+
+
+function toggleAll( boole = false ) {
+
+	details = divJsonView.querySelectorAll( "details" ).forEach( detail => detail.open=boole );
+
+}
+
+
+function addUrls() {
+
+	divJsonView.innerHTML = divJsonView.innerHTML.replace(
+		/((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, '<a href="$1">$1</a> ');
+
+	//}
+
+
+
+	//links.forEach( link =>
+	console.log( 'links', divJsonView.innerHTML );
+
+	urls = divJsonView.innerHTML.match( /(http|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/gi );
+
+	//console.log( 'urls', urls );
+
+	//links = Array.from( divJsonView.querySelectorAll( "div" ) ).filter( div => div.innerText.includes( "link" ) );
+
+	//urls.forEach( url => url.replace(/((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, '<a href="$1">$1</a> ') );
+
+
+}
+
+
+function parseJson( key = "", item = {}, index = 0 ) {
+
+	const type = typeof item;
+
+	if ( ["string", "number", "boolean", "bigint", "null" ].includes( type ) ) {
+
+		return getString( key, item, index );
+
+	} else if ( type === 'object' ) {
+
+		return Array.isArray( item ) ? getArray( key, item, index ) : getObject( key, item, index );
+
+	}
+
+}
+
+
+
+function getString( key, item, index ) { //console.log( 'string', key, item, index  );
+
+	// https://stackoverflow.com/questions/8299742/is-there-a-way-to-convert-html-into-normal-text-without-actually-write-it-to-a-s
+
+	if ( typeof item === "string" ) { item = item.replace(/<[^>]*>/g, '') };
+	//if ( typeof item === "number" ) { item = item.toLocaleString() };
+
+	return `<div>${ key }: <span style=color:blue >${ item }<span></div>`;
+
+}
+
+
+
+function getArray( key, array, index ) { //console.log( 'Array', key, array );
+
+	const htm = array.map( ( item, index ) => parseJson( key, item, index ) ).join( "" );
+
+	return `<details style=margin:3ch; >
+		<summary>${ key } [ ${ array.length } ]</summary>${ htm }
+	</details>`;
+
+}
+
+
+
+function getObject( key, item , index ) {
+
+	if ( !item ) { console.log( 'err item', key, item, index ); return; }
+
+	const keys = Object.keys( item );
+	const htm = keys.map( key => parseJson( key, item[ key ]  ) ).join("");
+
+	return `<details style=margin:3ch; >
+		<summary>${ key } ${ index }: { ${ keys.length } }</summary>${ htm }
+	</details>`;
+
+}
+
+
+</script>
+</body>
+</html>

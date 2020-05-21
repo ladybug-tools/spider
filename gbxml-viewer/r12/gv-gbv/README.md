@@ -27,10 +27,16 @@
 
 ## Change Log
 
+### 2020-01-22 ~ Theo
+
+R12.38
+
+* B: fix 'reset view' issues - add target sphere object
 
 ### 2018-03-23 ~ Theo
 
 R12.8
+
 * Add showZone
 
 ### 2018-02-24 ~ Theo
