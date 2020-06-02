@@ -3,6 +3,8 @@
 
 # Viewers
 
+Viewers to look at include:
+
 ## https://viewer.autodesk.com/designviews
 
 
@@ -42,3 +44,14 @@
 * https://www.ptc.com/en/products/all
 * https://www.varicad.com/
 * https://greenspacelive.com/site/building-generator/
+
+
+
+## Web Trends
+
+* https://vanschneider.com/the-kawaiization-of-product-design
+    * https://news.ycombinator.com/item?id=23243646
+
+***
+
+<center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=font-size:2ch;text-decoration:none; > ❦ </a></center>
