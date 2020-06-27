@@ -479,7 +479,6 @@
 
 		} else {
 
-
 			THR.camera = SET.cameraPerspective;
 			THR.camera.updateProjectionMatrix();
 			THR.controls = SET.controlsPerspective;
