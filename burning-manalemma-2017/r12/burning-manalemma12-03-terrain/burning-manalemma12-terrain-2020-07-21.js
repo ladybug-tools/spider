@@ -2,7 +2,7 @@
 
 	let sydney = 'latitude:-33.8675,longitude:151.207,zoom:16,offsetUTC:-600';
 	let sfHyatt = 'latitude:37.796,longitude:-122.398,zoom:16,offsetUTC:-420';
-	let alcatraz = 'latitude:37.8270,longitude:-122.423,zoom:16,offsetUTC:-420';
+	let alcatraz = 'latitude:37.8270,longitude:-122.423,zoom:9,offsetUTC:-420';
 	let coit = 'latitude:37.8024,longitude:-122.4058,zoom:16,offsetUTC:-420';
 	let santaBarbara = 'latitude:34.4208305,longitude:-119.69819,zoom:16,offsetUTC:-420';
 	let blackRock = 'latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420';
@@ -11,7 +11,7 @@
 //	const defaultLongitude = -122.398;
 //	const defaultOffsetUTC = -420;
 
-	const defaultZoom = 18;
+	const defaultZoom = 9;
 	const defaultLatitude = 40.786944;
 	const defaultLongitude = -119.204444;
 	const defaultHeightScale = 3;
@@ -95,7 +95,7 @@
 
 		//console.log( 'mnu-contents: no hash' );
 
-			location.hash = sfHyatt; //
+			location.hash = alcatraz; //
 			//location.hash = blackRock;
 
 			return;
@@ -238,6 +238,7 @@
 //		let imageLoader, str;
 
 		const zoom = parameters.zoom;
+		console.log("zoom", zoom);
 		const x = parameters.x = lon2tile( parameters.longitude, zoom );
 		const y = parameters.y = lat2tile( parameters.latitude, zoom );
 

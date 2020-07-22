@@ -43,7 +43,7 @@
 
 
 const rows = 8
-const cols = 8;
+const cols = 16;
 
 const pixelsPerTile = 256
 let canvas;
@@ -98,6 +98,7 @@ function getMapTiles () {
 	canvas = document.createElement( 'canvas' );
 	canvas.width = cols * pixelsPerTile;
 	canvas.height = rows * pixelsPerTile;
+	context = canvas.getContext( '2d' );
 
 	//document.body.appendChild( canvas );
 	//canvas.style.cssText = 'border: 1px solid gray; margin: 10px auto; position: absolute; right: 0; z-index:10;';
@@ -133,22 +134,19 @@ function setMap( src, col, row ) {
 	const img = new Image(); //document.createElement( 'img' );
 
 	img.onload = function(){
-
-		//console.log( 'src, col, row', src, col, row );
-		//divLog.appendChild( img );
-
-		const context = canvas.getContext( '2d' );
-		context.drawImage( img, 0, 0, pixelsPerTile, pixelsPerTile, col * pixelsPerTile, row * pixelsPerTile, pixelsPerTile, pixelsPerTile );
+		
+		context.drawImage( img, 0, 0, pixelsPerTile, pixelsPerTile, col * pixelsPerTile , row * pixelsPerTile, pixelsPerTile, pixelsPerTile );
 
 		tilesLoaded.push( img.src );
 
 		if ( tilesLoaded.length >= rows * cols ) {
 
+			const geometry = new THREE.PlaneBufferGeometry( cols * 50, rows * 50 );
+			
 			const texture = new THREE.Texture( canvas );
-			texture.minFilter = texture.magFilter = THREE.NearestFilter;
+			//texture.minFilter = texture.magFilter = THREE.NearestFilter;
 			texture.needsUpdate = true;
 
-			const geometry = new THREE.PlaneBufferGeometry( cols * pixelsPerTile, rows * pixelsPerTile );
 			const material = new THREE.MeshBasicMaterial( { map: texture, side: 2 });
 			mesh = new THREE.Mesh( geometry, material );
 			scene.add( mesh );
