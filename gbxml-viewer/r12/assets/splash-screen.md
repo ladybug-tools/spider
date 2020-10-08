@@ -11,6 +11,17 @@ Questions: [Ladybug Tools forum]( http://discourse.ladybug.tools/c/spider "Hi Mo
 
 <details open>
 
+<summary>Welcome 2020-10-07 ~ [Aragog r12.39]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html )</summary>
+
+Update the application switch menu. Add link to v-2020 pre-release
+
+Please do feel free to report issues. R12 is a long term support release.
+
+
+</details>
+
+<details>
+
 <summary>Welcome 2020-01-22 ~ [Aragog r12.38]( https://www.ladybug.tools/spider/gbxml-viewer/r12/gv-app/gv-app.html )</summary>
 
 Fixes issues with 'reset view' button in r12.37
