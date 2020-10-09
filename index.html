@@ -20,6 +20,8 @@
 <script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/thm-theme-select.js" ></script>
 <script src="https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/tmp-template.js" ></script>
 
+<script src="https://ladybug.tools/spider-2020/lib/gbxml/mas-menu-app-switch-2020-10-09.js"></script>
+
 <script>
 
 //Copyright 2019 Ladybug-tools authors. MIT License
@@ -31,6 +33,8 @@ MNU.description =
 
 MNU.currentStatusCore =
 	`
+		<div id="MASdivMenuAppSwitch"></div>
+
 		<h3>
 			Spider
 			R${ document.head.querySelector( '[ name=release ]' ).content }
@@ -70,9 +74,9 @@ THM.cssBasic = "https://pushme-pullyou.github.io/tootoo13/js-tootoo13-3-0/style.
 // For main menu header
 MNU.urlSourceCode ="https://github.com/ladybug-tools/spider/";
 
-MNU.homeText = "<img src='https://ladybug.tools/artwork/icons_bugs/ico/ladybug.ico' height=24 >";
-MNU.homeTitle="Ladybug Tools: free computer applications that support environmental design and education";
-MNU.homeUrl  = "https://www.ladybug.tools";
+MNU.homeText = ""; //"<img src='https://ladybug.tools/artwork/icons_bugs/ico/ladybug.ico' height=24 >";
+MNU.homeTitle= "";  //"Ladybug Tools: free computer applications that support environmental design and education";
+MNU.homeUrl  = ""; // "https://www.ladybug.tools";
 
 MNU.repoText = ""; //"<img src='https://ladybug.tools/artwork/icons_bugs/ico/spider.ico' height=24 >";
 MNU.repoTitle=""; //"Spider: 3D interactive analysis in your browser mostly written around the Three.js JavaScript library";
@@ -191,6 +195,8 @@ function init() {
 
 	FGA.divContents = divContents;
 
+	MASdivMenuAppSwitch.innerHTML = MAS.getAppSwitch();
+	
 	MNUdivHeader.innerHTML = MNU.getNavHeader();
 
 	SFM.getMarkdownFileContents("selected.md",SFMsecPrototypes);
