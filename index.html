@@ -33,7 +33,6 @@ MNU.description =
 
 MNU.currentStatusCore =
 	`
-		<div id="MASdivMenuAppSwitch"></div>
 
 		<h3>
 			Spider
@@ -110,6 +109,9 @@ FGA.urlGitHubPage = "";
 	<nav id="navMenu" >
 
 		<header>
+
+
+			<div id="MASdivMenuAppSwitch" style=margin:1rem; ></div>
 
 			<div id="MNUdivHeader" ></div>
 
@@ -196,7 +198,7 @@ function init() {
 	FGA.divContents = divContents;
 
 	MASdivMenuAppSwitch.innerHTML = MAS.getAppSwitch();
-	
+
 	MNUdivHeader.innerHTML = MNU.getNavHeader();
 
 	SFM.getMarkdownFileContents("selected.md",SFMsecPrototypes);
