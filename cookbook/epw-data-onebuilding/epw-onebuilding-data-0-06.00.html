@@ -81,7 +81,7 @@
 const urlSourceCode = "https://github.com/ladybug-tools/spider/tree/master/cookbook/epw-data-onebuilding";
 const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
 const urlCORS = 'https://cors-anywhere.herokuapp.com/';
-
+//http://climate.onebuilding.org/WMO_Region_1_Africa/BDI_Burundi/BDI_BM_Bujumbura.Intl.AP.643900_TMYx.2004-2018.zip
 const epwRegions = [
 	"WMO_Region_1_Africa",
 	"WMO_Region_2_Asia",
@@ -232,8 +232,8 @@ function searchSelect( input, select ) {
 
 }
 
-
-
+//http://climate.onebuilding.org/WMO_Region_6_Europe/ALB_Albania/ALB_BE_Kucove.136240_TMYx.2004-2018.zip
+// file:///C:/Users/theo/Dropbox/Public/git-repos/spider/cookbook/epw-data-onebuilding/epw-onebuilding-data-0-06.00.html
 function setCountry(){
 
 	region = selRegion.value;
@@ -244,7 +244,7 @@ function setCountry(){
 
 }
 
-
+// http://climate.onebuilding.org/WMO_Region_1_Africa/BDI_Burundi/BDI_BM_Bujumbura.Intl.AP.643900_TMYx.2004-2018.zip
 
 function requestFile( url, callback ) {
 
@@ -261,10 +261,10 @@ function requestFile( url, callback ) {
 
 
 function callbackCountry( xhr ) {
-	//console.log( 'xhr', xhr );
+	console.log( 'xhr', xhr );
 
 	response = xhr.target.response;
-	//console.log( 'response', response );
+	console.log( 'response', response );
 
 	const countriesRaw = response.match( /href="(.*?)\/index\.html"/gi ).map( item => item.slice( 6, -1 ))
 
